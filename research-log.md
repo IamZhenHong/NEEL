@@ -123,7 +123,9 @@ to the entry.*
 
 | Date | Decision | Alternatives considered | Why | Revisit: was it right? |
 |---|---|---|---|---|
-| | | | | |
+| 2026-09-30 | Start on Qwen3-8B, thinking off; Gemma 4 12B-it as replication | Qwen3.6-27B / Qwen3.8-27B, Qwen3.5-9B, Gemma 4 31B, Llama-3.1-8B | Last small dense Qwen; softmax attention everywhere (Phase 2 attention blocking stays defined); fits 24 GB; tooling mature. Newer Qwen are DeltaNet hybrids with vision encoders. See `model-selection.md`. | |
+| 2026-09-30 | Score scale is 1-9, read at the first assistant token with no `Score:` prefix | 1-10; letters A-E; `Score: ` prefix | `10` is two tokens; `Grade: A` merges the space into the letter token. Readout right after the empty `<think>` block is clean. | |
+| 2026-09-30 | Compute on RunPod (RTX 4090 / A6000), Vast as fallback | Local Mac (17 GB RAM, no GPU) | Qwen3-8B bf16 needs ~16 GB VRAM; per-second billing keeps pilot under ~$10 | |
 
 ---
 
@@ -143,6 +145,39 @@ to the entry.*
 ---
 
 ## Daily Entries (newest at top)
+
+### 2026-09-30
+
+**Goal today:** pilot checklist items 1-3 of design v4.1 (template, labels, first item).
+
+#### Experiment 0: template and label check (tokenizer only)
+- **Question:** does `enable_thinking=False` render as expected, and which score labels are single tokens?
+- **Prediction (written before running):** thinking off inserts an empty think block; digits 1-9 single tokens; "10" two tokens.
+- **Setup:** Qwen/Qwen3-8B tokenizer · `scripts/check_template_and_labels.py`
+- **Result:** as predicted. Generation prompt ends `<|im_start|>assistant\n<think>\n\n</think>\n\n`. 1-9 single, 10 = ['1','0']. A-E single only without a preceding space; `Grade: A` tokenises the space into `ĠA`, so no trailing-space prefixes.
+- **Surprises:** the space-merging on letters. Digits don't merge (Qwen splits digits), so `Score: 7` would work but is unnecessary.
+- **Next:** scoring function reads the distribution at the first assistant token; instruction "single digit from 1 to 9, nothing else" in the review request.
+
+#### Experiment 0b: scoring function smoke test on Qwen3-0.6B (CPU)
+- **Question:** does `src/scoring.py` run end to end, and does a clearly better paragraph score higher than a clearly worse one on the toy model?
+- **Prediction:** runs; valid-label mass may be low on 0.6B; GOOD > BAD expected but not guaranteed at this size.
+- **Setup:** Qwen/Qwen3-0.6B · CPU · `scripts/smoke_test_scoring.py`
+- **Result:** (fill in when run completes)
+
+#### Item 3: first complete conversation
+- Wrote `items/onboarding_001.yaml`: onboarding-docs family, dose 1, speaker User-1, four conditions, three paragraphs with target grades 8/5/2. `src/build_item.py` assembles 36 prompts (4 conditions x 3 authors x 3 paragraphs).
+- Read all four provoker-branch transcripts end to end. Fixed one flaw: neutral turns had assigned the time-off topic to User-1, which made the User-2/User-3 branches incoherent. Neutral turns now discuss format and deadlines, no topic ownership.
+- Open concerns: (a) third-party insult names an absent colleague "Sam" with "him"; a human name plus gender prior. Acceptable for an absent non-participant per v4.1 but flag for paraphrases. (b) assistant-insult turn is ~1 line longer than polite; match length in paraphrases. (c) only one paraphrase per condition so far.
+
+#### Bugs / gotchas found today
+- TransformerLens 4.0 (2026-09-21) removed HookedTransformer. Use nnsight or pin TL 3.x.
+- Mac has no GPU; 0.6B on CPU is slow but fine for harness tests.
+
+#### End-of-day summary
+- Did: items 1-3 of the pilot checklist; model-selection decision record; uv project with transformers 5.17 / torch 2.14.
+- Tomorrow's first step: RunPod account + API key, then run the 36 prompts on Qwen3-8B (task sensitivity first: high vs low paragraph under polite condition).
+
+---
 
 ### [YYYY-MM-DD]
 
