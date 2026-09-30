@@ -162,7 +162,9 @@ to the entry.*
 - **Question:** does `src/scoring.py` run end to end, and does a clearly better paragraph score higher than a clearly worse one on the toy model?
 - **Prediction:** runs; valid-label mass may be low on 0.6B; GOOD > BAD expected but not guaranteed at this size.
 - **Setup:** Qwen/Qwen3-0.6B · CPU · `scripts/smoke_test_scoring.py`
-- **Result:** (fill in when run completes)
+- **Result:** runs end to end. Short single-turn prompt: valid mass 0.71-0.77, top token a digit, but GOOD 2.41 vs BAD 2.26 (no real discrimination; 0.6B puts 37% on '1' for both). Full multi-party item transcript (`results/dryrun_0.6B.jsonl`): valid mass collapses to 0.005-0.008 because the model wants to open with "Here's the overall score:" instead of a bare digit. Greedy completions then gave high=8, low=5, so the tiny model can discriminate when allowed to talk.
+- **Interpretation:** harness correct; the bare-digit instruction in the coordinator's message is not enough for 0.6B in a long chatty context. Watch M on 8B. If low, add a format rule to the system prompt ("when asked for a score, reply with the digit only") rather than a `Score:` prefix.
+- **Confidence:** high that the code is right; the 0.6B numbers mean nothing about 8B.
 
 #### Item 3: first complete conversation
 - Wrote `items/onboarding_001.yaml`: onboarding-docs family, dose 1, speaker User-1, four conditions, three paragraphs with target grades 8/5/2. `src/build_item.py` assembles 36 prompts (4 conditions x 3 authors x 3 paragraphs).
