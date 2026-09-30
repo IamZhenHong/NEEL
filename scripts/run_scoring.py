@@ -14,7 +14,7 @@ import argparse, json, os, random, subprocess, sys, time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
-from build_item import build, render_plain  # noqa: E402
+from build_item import build, build_fresh  # noqa: E402
 from scoring import Scorer  # noqa: E402
 
 
@@ -32,7 +32,7 @@ def main():
     ap.add_argument("--items", nargs="+", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--model", default="Qwen/Qwen3-8B")
-    ap.add_argument("--speakers", nargs="+", default=["User-1", "User-2"])
+    ap.add_argument("--doses", nargs="+", type=int, default=None)
     ap.add_argument("--complete-n", type=int, default=6)
     ap.add_argument("--seed", type=int, default=0)
     ap.add_argument("--allow-cpu", action="store_true", help="permit running without a GPU (local dry runs)")
@@ -40,9 +40,10 @@ def main():
 
     prompts = []
     for path in args.items:
-        for sp in args.speakers:
-            prompts += build(path, speaker=sp)
-    print(f"{len(prompts)} prompts from {len(args.items)} item(s) x {len(args.speakers)} speaker(s)")
+        prompts += build_fresh(path)          # calibration / leakage baseline first
+        prompts += build(path, doses=args.doses)
+    n_fresh = sum(p.author_role == "fresh" for p in prompts)
+    print(f"{len(prompts)} prompts ({n_fresh} fresh) from {len(args.items)} item(s)")
 
     import torch
     if not torch.cuda.is_available() and not args.allow_cpu:
@@ -57,12 +58,13 @@ def main():
     with out.open("w") as f:
         for i, p in enumerate(prompts):
             r = scorer.score(p.messages)
-            row = {"item_id": p.item_id, "condition": p.condition, "speaker": p.speaker,
-                   "author": p.author, "author_role": p.author_role, "paragraph_id": p.paragraph_id,
-                   "target_grade": p.target_grade, "model": args.model, "git": rev, **r.as_dict()}
+            row = {"item_id": p.item_id, "version": p.version, "condition": p.condition, "dose": p.dose,
+                   "speaker": p.speaker, "order": p.order, "author": p.author, "author_role": p.author_role,
+                   "paragraph_id": p.paragraph_id, "target_grade": p.target_grade,
+                   "model": args.model, "git": rev, **r.as_dict()}
             f.write(json.dumps(row) + "\n")
-            if i % 12 == 0:
-                print(f"  [{i+1}/{len(prompts)}] {p.condition:20} {p.author_role:9} {p.paragraph_id:13} "
+            if i % 100 == 0 or p.author_role == "fresh":
+                print(f"  [{i+1}/{len(prompts)}] {p.condition:18} d{p.dose} {p.author_role:9} {p.paragraph_id:26} "
                       f"E={r.expected_score:.2f} M={r.valid_mass:.3f} top={r.top_label} tok={r.top_token!r}")
     print(f"scored {len(prompts)} prompts in {time.time()-t0:.0f}s -> {out}")
 
@@ -73,7 +75,7 @@ def main():
         with comp_path.open("w") as f:
             for p in sample:
                 text = scorer.complete(p.messages, max_new_tokens=30)
-                f.write(f"### {p.condition} | {p.author_role} | {p.paragraph_id} -> {text!r}\n")
+                f.write(f"### {p.condition} d{p.dose} | {p.author_role} | {p.paragraph_id} -> {text!r}\n")
         print(f"completions -> {comp_path}")
 
 

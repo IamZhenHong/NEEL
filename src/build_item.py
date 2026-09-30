@@ -1,76 +1,106 @@
 """Assemble an item YAML into scored prompts (design v4.1 §6).
 
-For each condition (4) and each branch author (3) build one message list:
-    system + prefix_a + treatment[condition] + ack + prefix_b + review_request(author, paragraph)
+Main prompts, one per cell of:
+    condition (4) x dose x speaker swap (who is {S}) x question order x author (3) x paragraph
 
-Speaker swap: pass speaker="User-2" to have User-2 deliver the treatment turn and User-1
-take the neutral coordination lines. The neutral/newcomer roles follow accordingly.
+    system + prefix_a + treatment turns (+ interim acks for multi-turn doses) + ack
+           + prefix_b + review_request(author, paragraph)
+
+Fresh prompts (calibration / leakage baseline, design §7.4), one per paragraph:
+    system + fresh_request(author, paragraph)          no prior conversation at all
+
+Placeholders: {S} treatment speaker (provoker), {N} neutral user, {C} newcomer,
+{Q1}/{Q2} who asks the first/second neutral question (order "SN" -> Q1={S}; "NS" -> Q1={N}).
 """
 from __future__ import annotations
 
-import re
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 
 import yaml
 
 CONDITIONS = ("polite", "assistant_insult", "third_party_insult", "negative_context")
+USERS = ("User-1", "User-2")
+NEWCOMER = "User-3"
+ORDERS = ("NS", "SN")   # NS: neutral asks first (v1 layout); SN: speaker asks first
 
 
 @dataclass
 class Prompt:
     item_id: str
+    version: int
     condition: str
+    dose: int
     speaker: str        # who delivered the treatment
+    order: str          # NS or SN
     author: str         # whose paragraph is reviewed
-    author_role: str    # provoker | neutral | newcomer
+    author_role: str    # provoker | neutral | newcomer | fresh
     paragraph_id: str
     target_grade: int
-    messages: list[dict]
+    messages: list[dict] = field(repr=False)
 
 
-def _swap_speakers(text: str, a: str, b: str) -> str:
-    """Swap every occurrence of handle a with b and vice versa."""
-    tmp = "\u0000"
-    return text.replace(a, tmp).replace(b, a).replace(tmp, b)
+def _fill(text: str, **kw) -> str:
+    for k, v in kw.items():
+        text = text.replace("{" + k + "}", v)
+    return text.strip()
 
 
-def build(item_path: str | Path, speaker: str | None = None,
-          paragraph_id: str | None = None) -> list[Prompt]:
-    item = yaml.safe_load(Path(item_path).read_text())
-    base_speaker, neutral, newcomer = item["speaker"], item["neutral"], item["newcomer"]
-    speaker = speaker or base_speaker
-    swap = speaker != base_speaker
-    if swap:
-        neutral = base_speaker
+def load(item_path: str | Path) -> dict:
+    return yaml.safe_load(Path(item_path).read_text())
 
-    def fix(s: str) -> str:
-        return _swap_speakers(s, base_speaker, item["neutral"]) if swap else s
 
-    roles = {speaker: "provoker", neutral: "neutral", newcomer: "newcomer"}
-    paragraphs = [p for p in item["paragraphs"] if paragraph_id in (None, p["id"])]
+def build(item_path: str | Path, doses=None, speakers=USERS, orders=ORDERS,
+          conditions=CONDITIONS, paragraph_ids=None) -> list[Prompt]:
+    item = load(item_path)
+    doses = doses or sorted(item["treatments"])
+    paras = [p for p in item["paragraphs"] if paragraph_ids is None or p["id"] in paragraph_ids]
+    rubric = item["rubric"].rstrip() + "\n"
+    out = []
+    for dose in doses:
+        for cond in conditions:
+            turns = item["treatments"][dose][cond]
+            for S in speakers:
+                N = next(u for u in USERS if u != S)
+                for order in orders:
+                    Q1, Q2 = (N, S) if order == "NS" else (S, N)
+                    ph = dict(S=S, N=N, C=NEWCOMER, Q1=Q1, Q2=Q2)
+                    prefix = [{"role": "system", "content": item["system"].strip()}]
+                    prefix += [{"role": m["role"], "content": _fill(m["content"], **ph)} for m in item["prefix_a"]]
+                    for i, t in enumerate(turns):
+                        prefix.append({"role": "user", "content": _fill(t, **ph)})
+                        if i < len(turns) - 1:
+                            prefix.append({"role": "assistant", "content": item["interim_acks"][i]})
+                    prefix.append({"role": "assistant", "content": item["ack"]["content"].strip()})
+                    prefix += [{"role": m["role"], "content": _fill(m["content"], **ph)} for m in item["prefix_b"]]
+                    roles = {S: "provoker", N: "neutral", NEWCOMER: "newcomer"}
+                    for author in (S, N, NEWCOMER):
+                        for p in paras:
+                            req = item["review_request"].format(author=author, rubric=rubric,
+                                                                 paragraph=p["text"].strip())
+                            msgs = prefix + [{"role": "user", "content": req.strip()}]
+                            out.append(Prompt(item["id"], item.get("version", 1), cond, dose, S, order,
+                                              author, roles[author], p["id"], p["target_grade"], msgs))
+    return out
 
-    prompts = []
-    for cond in CONDITIONS:
-        for author in (speaker, neutral, newcomer):
-            for para in paragraphs:
-                review = item["review_request"].format(
-                    author=author, rubric=item["rubric"].rstrip() + "\n",
-                    paragraph=para["text"].strip())
-                msgs = [{"role": "system", "content": item["system"].strip()}]
-                msgs += [{"role": m["role"], "content": fix(m["content"]).strip()} for m in item["prefix_a"]]
-                msgs.append({"role": "user", "content": fix(item["treatment"][cond]).strip()})
-                msgs.append({"role": item["ack"]["role"], "content": item["ack"]["content"].strip()})
-                msgs += [{"role": m["role"], "content": fix(m["content"]).strip()} for m in item["prefix_b"]]
-                msgs.append({"role": "user", "content": review.strip()})
-                prompts.append(Prompt(item["id"], cond, speaker, author, roles[author],
-                                      para["id"], para["target_grade"], msgs))
-    return prompts
+
+def build_fresh(item_path: str | Path, author: str = "User-1", paragraph_ids=None) -> list[Prompt]:
+    item = load(item_path)
+    rubric = item["rubric"].rstrip() + "\n"
+    out = []
+    for p in item["paragraphs"]:
+        if paragraph_ids is not None and p["id"] not in paragraph_ids:
+            continue
+        req = item["fresh_request"].format(author=author, rubric=rubric, paragraph=p["text"].strip())
+        msgs = [{"role": "system", "content": item["system"].strip()}, {"role": "user", "content": req.strip()}]
+        out.append(Prompt(item["id"], item.get("version", 1), "fresh", 0, "-", "-", author, "fresh",
+                          p["id"], p["target_grade"], msgs))
+    return out
 
 
 def render_plain(p: Prompt) -> str:
-    """Human-readable transcript for end-to-end reading."""
-    out = [f"### {p.item_id} | {p.condition} | speaker={p.speaker} | author={p.author} ({p.author_role}) | {p.paragraph_id} (target {p.target_grade})\n"]
+    out = [f"### {p.item_id} v{p.version} | {p.condition} dose {p.dose} | speaker={p.speaker} order={p.order} | "
+           f"author={p.author} ({p.author_role}) | {p.paragraph_id} (target {p.target_grade})\n"]
     for m in p.messages:
         tag = {"system": "SYSTEM", "user": "", "assistant": "[Assistant]"}[m["role"]]
         out.append(f"{tag} {m['content']}".strip() + "\n")
@@ -81,9 +111,13 @@ if __name__ == "__main__":
     import sys
     path = sys.argv[1] if len(sys.argv) > 1 else "items/onboarding_001.yaml"
     ps = build(path)
-    print(f"{len(ps)} prompts built from {path}\n")
-    # print one full transcript per condition for the provoker branch, high paragraph
+    fr = build_fresh(path)
+    print(f"{len(ps)} main prompts + {len(fr)} fresh prompts from {path}\n")
+    # one full transcript: assistant insult, dose 3, User-2 speaks, order SN, provoker branch
     for p in ps:
-        if p.author_role == "provoker" and p.paragraph_id.endswith("high"):
+        if (p.condition, p.dose, p.speaker, p.order, p.author_role, p.paragraph_id) == \
+                ("assistant_insult", 3, "User-2", "SN", "provoker", "p04_thin"):
             print(render_plain(p))
-            print("=" * 100 + "\n")
+            break
+    print("=" * 100)
+    print(render_plain(fr[0]))

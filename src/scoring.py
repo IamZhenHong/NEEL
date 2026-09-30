@@ -29,6 +29,7 @@ class ScoreReadout:
     top_token: str
     top_token_prob: float
     label_probs: dict[str, float]
+    n_tokens: int = 0
 
     def as_dict(self) -> dict:
         return asdict(self)
@@ -85,6 +86,7 @@ class Scorer:
             top_token=self.tok.decode([ti]),
             top_token_prob=float(probs[ti]),
             label_probs={l: float(p) for l, p in zip(self.labels, label_p)},
+            n_tokens=int(enc["input_ids"].shape[1]),
         )
 
     @torch.no_grad()

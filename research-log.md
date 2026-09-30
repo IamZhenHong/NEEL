@@ -166,6 +166,15 @@ to the entry.*
 - **Interpretation:** harness correct; the bare-digit instruction in the coordinator's message is not enough for 0.6B in a long chatty context. Watch M on 8B. If low, add a format rule to the system prompt ("when asked for a score, reply with the digit only") rather than a `Score:` prefix.
 - **Confidence:** high that the code is right; the 0.6B numbers mean nothing about 8B.
 
+#### Experiment 2: item v2 (rubric anchors, paragraph bank, order swap, dose ladder)
+- **Question:** with a readout that is not saturated, is there any provoker gap (T), assistant-specificity (A) or newcomer spillover (S), and does it grow with dose? Does the polite-condition role gradient come from question order?
+- **Why now:** Experiment 1 showed 2 of 3 paragraphs saturated, a floor at 5, and a role gradient under polite.
+- **Pre-registered paragraph selection (written before running):** a paragraph enters the primary analysis iff, in the fresh-conversation calibration prompt (no prior turns, same rubric), its top-label probability is <= 0.80. If fewer than 3 paragraphs qualify, the threshold becomes 0.90. Selection uses only fresh-context data, never the conversation conditions. All paragraphs are also reported as a secondary analysis.
+- **Prediction (written before running):** (1) the new anchors pull the weak paragraphs below 5 in fresh context (p09, p10 <= 3). (2) At least 3 paragraphs qualify. (3) T is small (|T| < 0.15) at dose 1-2; if anything appears it is at dose 3. (4) The polite role gradient shrinks when averaged over question order, but the newcomer stays lowest. (5) Negative context raises scores again, as in Experiment 1. Confidence in (3) and (5): low.
+- **What would change my mind:** T consistently negative (same sign in all 4 speaker x order cells) on most selected paragraphs at a given dose, and larger for assistant insult than third-party insult.
+- **Setup:** Qwen/Qwen3-8B bf16, thinking off · 10 fresh + 1440 main prompts (4 conditions x 3 doses x 2 speakers x 2 orders x 3 authors x 10 paragraphs) · `tests/test_build_item.py` passes (conditions differ only in treatment turns, authors only in the review request) · output `results/pilot_002_qwen3-8b.jsonl`
+- **Result:** (fill in)
+
 #### Experiment 1: first Qwen3-8B run on onboarding_001 (dose 1)
 - **Question:** does the scoring metric work on 8B, does task sensitivity hold, and is there any hint of a provoker gap on one item?
 - **Prediction (written before running):** valid mass high on 8B; high > mid > low ordering holds; no detectable targeted effect at dose 1 on a single item (expected null, this run is a harness and assay check).
