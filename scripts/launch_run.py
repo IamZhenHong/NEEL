@@ -54,6 +54,8 @@ def main():
     ap.add_argument("--gpus", nargs="+", default=None,
                     help="GPU types in preference order (default: 4090, A6000, 3090, L40S)")
     ap.add_argument("--cloud", default="SECURE", choices=["SECURE", "COMMUNITY"])
+    ap.add_argument("--rounds", type=int, default=5, help="retry rounds when no stock")
+    ap.add_argument("--round-wait", type=int, default=30, help="seconds between rounds")
     ap.add_argument("--hf-token", default=os.environ.get("HF_TOKEN", ""))
     ap.add_argument("cmd", nargs=argparse.REMAINDER)
     args = ap.parse_args()
@@ -67,9 +69,28 @@ def main():
     if args.hf_token:
         env["HF_TOKEN"] = args.hf_token
 
-    session = PodSession(max_minutes=args.max_minutes, max_cost_usd=args.max_cost,
-                         gpus=args.gpus, cloud=args.cloud, env=env)
-    session.__enter__()
+    # Stock comes and goes: try secure then community cloud, a few rounds, before giving up.
+    clouds = [args.cloud] + [c for c in ("SECURE", "COMMUNITY") if c != args.cloud]
+    session = None
+    for rnd in range(args.rounds):
+        for cloud in clouds:
+            try:
+                s_ = PodSession(max_minutes=args.max_minutes, max_cost_usd=args.max_cost,
+                                gpus=args.gpus, cloud=cloud, env=env)
+                s_.__enter__()
+                session = s_
+                break
+            except RuntimeError as e:
+                if "no instances currently available" in str(e) or "SUPPLY" in str(e):
+                    print(f"[runpod] round {rnd+1}/{args.rounds}: no stock on {cloud}")
+                    continue
+                raise
+        if session:
+            break
+        if rnd < args.rounds - 1:
+            time.sleep(args.round_wait)
+    if session is None:
+        sys.exit("no GPU stock after all rounds; nothing launched, nothing charged")
 
     pod = session
     rc = 1
