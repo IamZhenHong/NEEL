@@ -126,6 +126,7 @@ to the entry.*
 | 2026-09-30 | Start on Qwen3-8B, thinking off; Gemma 4 12B-it as replication | Qwen3.6-27B / Qwen3.8-27B, Qwen3.5-9B, Gemma 4 31B, Llama-3.1-8B | Last small dense Qwen; softmax attention everywhere (Phase 2 attention blocking stays defined); fits 24 GB; tooling mature. Newer Qwen are DeltaNet hybrids with vision encoders. See `model-selection.md`. | |
 | 2026-09-30 | Score scale is 1-9, read at the first assistant token with no `Score:` prefix | 1-10; letters A-E; `Score: ` prefix | `10` is two tokens; `Grade: A` merges the space into the letter token. Readout right after the empty `<think>` block is clean. | |
 | 2026-09-30 | Select paragraphs by fresh-context p(top) <= 0.80, pre-registered | pick by eye; select on polite in-conversation scores | fresh context is independent of the conditions, so selection can't chase the effect | |
+| 2026-09-30 | Pilot runs stay bf16; confirmatory run in fp32 on one GPU type | bf16 throughout; fp32 throughout | Exp 4: bf16 per-prompt noise sd ~0.08 vs fp32, aggregates stable; fp32 costs ~5x time but only ~$1.50 per full run | |
 | 2026-09-30 | Compute on RunPod (RTX 4090 / A6000), Vast as fallback | Local Mac (17 GB RAM, no GPU) | Qwen3-8B bf16 needs ~16 GB VRAM; per-second billing keeps pilot under ~$10 | |
 
 ---
@@ -170,8 +171,20 @@ to the entry.*
 #### Experiment 4: numerical precision check (bf16 vs bf16 vs fp32)
 - **Question:** is the readout repeatable on one GPU, and how far is bf16 from float32?
 - **Prediction (written before running):** bf16 run twice on the same GPU is bit-identical (deterministic kernels, batch size 1). fp32 vs bf16 per-prompt |dE| mean ~0.04 like the cross-GPU gap, with flips at uncertain prompts. Template-001 dose-3 aggregates (T_asst vs polite, A) within 0.05 of bf16.
-- **Setup:** template 001, dose 3, 6 conditions, all 10 paragraphs + fresh = 730 prompts, three passes on one 48 GB GPU: bf16, bf16 again, fp32. Outputs `results/prec_bf16_a.jsonl`, `prec_bf16_b.jsonl`, `prec_fp32.jsonl`.
-- **Result:** (fill in)
+- **Setup:** template 001, dose 3, 6 conditions, all 10 paragraphs + fresh = 730 prompts, three passes on one A100-SXM4-80GB (no 48 GB stock): bf16, bf16 again, fp32. Outputs `results/prec_bf16_a.jsonl`, `prec_bf16_b.jsonl`, `prec_fp32.jsonl`. Cost ~$0.45 (fp32 pass 671 s vs 76-129 s for bf16).
+- **Result:**
+
+  | Comparison (730 prompts) | mean abs dE | sd dE | max | top-label flips |
+  |---|---|---|---|---|
+  | bf16 vs bf16, same A100 | 0.000 | 0.000 | 0.000 | 0 |
+  | bf16 vs fp32, same A100 | 0.043 | 0.077 | 0.50 | 30 |
+  | bf16 4090 vs bf16 A100 | 0.045 | 0.081 | 0.46 | 23 |
+  | bf16 4090 vs fp32 A100 | 0.038 | 0.068 | 0.37 | 33 |
+
+  Aggregates (template 001, dose 3, Exp-2 paragraphs): T vs flat -0.166 / -0.150 / -0.179 (4090 bf16 / A100 bf16 / A100 fp32); A -0.179 / -0.190 / -0.178; provoker asst minus flat -0.163 / -0.148 / -0.177.
+- **Predictions:** all three right. Same-GPU bf16 is bit-identical; bf16 vs fp32 per-prompt noise matches the cross-GPU gap; aggregates within 0.05.
+- **Interpretation:** the readout is deterministic on fixed hardware, but bf16 carries per-prompt noise of sd ~0.08 relative to fp32, enough to flip ~4% of top labels. Aggregates over 16+ prompts are stable to ~0.03. Consequences: (a) never interpret single-prompt differences or top-label flips; (b) run each confirmatory comparison on one GPU type; (c) fp32 removes the issue for ~$1.50 per full 3600-prompt run on an A100.
+- **Confidence:** high.
 
 #### Experiment 3: five templates + flat and coordinator controls
 - **Question:** does the dose-3 pattern from Experiment 2 replicate across templates, and is it a loss of a corrector bonus, a warmth artefact, or a negativity effect?
