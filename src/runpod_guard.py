@@ -21,7 +21,7 @@ from dataclasses import dataclass
 from pathlib import Path
 
 API = "https://api.runpod.io/graphql"
-DEFAULT_GPU = "NVIDIA GeForce RTX 4090"
+DEFAULT_GPUS = ["NVIDIA GeForce RTX 4090", "NVIDIA RTX A6000", "NVIDIA GeForce RTX 3090", "NVIDIA L40S"]
 ALLOWED_GPUS = {  # card -> rough max $/hr we accept; anything pricier is refused
     "NVIDIA GeForce RTX 3090": 0.50,
     "NVIDIA GeForce RTX 4090": 0.80,
@@ -54,6 +54,22 @@ def gql(query: str, variables: dict | None = None) -> dict:
     return out["data"]
 
 
+REST = "https://rest.runpod.io/v1"
+
+
+def rest(method: str, path: str, body: dict | None = None) -> dict:
+    req = urllib.request.Request(REST + path, method=method,
+                                 data=json.dumps(body).encode() if body is not None else None,
+                                 headers={"Authorization": f"Bearer {load_key()}",
+                                          "Content-Type": "application/json", "User-Agent": "curl/8.0 provocation-runner"})
+    try:
+        with urllib.request.urlopen(req, timeout=60) as r:
+            t = r.read()
+            return json.loads(t) if t else {}
+    except urllib.error.HTTPError as e:
+        raise RuntimeError(f"REST {method} {path} -> {e.code}: {e.read()[:300]!r}") from None
+
+
 @dataclass
 class Account:
     balance: float
@@ -76,7 +92,7 @@ def assert_no_pods() -> None:
 
 
 def terminate(pod_id: str) -> None:
-    gql("mutation($id: String!) { podTerminate(input: {podId: $id}) }", {"id": pod_id})
+    rest("DELETE", f"/pods/{pod_id}")
 
 
 def terminate_all() -> list[str]:
@@ -87,109 +103,120 @@ def terminate_all() -> list[str]:
 
 
 class PodSession:
-    """Create a pod, guarantee termination.
+    """Create a pod through the REST API and guarantee termination.
 
-    Usage:
-        with PodSession(max_minutes=30, max_cost_usd=1.0, start_cmd="...") as pod:
-            ... ssh/run work ...
+        with PodSession(max_minutes=30, max_cost_usd=1.0) as pod:
+            host, port = pod.ssh_target()
+            ...
+
+    Guards: refuses if any pod exists or balance < $0.50; refuses GPUs outside the
+    allow-list or above its price cap; refuses if max_minutes x rate > max_cost_usd;
+    terminates on exit (including exceptions); re-checks the account afterwards.
+    Call `self_destruct_cmd()` over ssh once connected so the pod removes itself after
+    max_minutes even if this machine disconnects.
     """
 
-    def __init__(self, *, max_minutes: int, max_cost_usd: float,
-                 gpu: str = DEFAULT_GPU, image: str = "runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04",
+    def __init__(self, *, max_minutes: int, max_cost_usd: float, gpus: list[str] | None = None,
+                 cloud: str = "SECURE", image: str = "runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04",
                  volume_gb: int = 20, container_gb: int = 30, name: str = "provocation-pilot",
-                 env: dict | None = None, cloud: str = "ALL", ports: str = "22/tcp"):
-        if gpu not in ALLOWED_GPUS:
-            raise ValueError(f"GPU {gpu!r} not in allow-list {sorted(ALLOWED_GPUS)}; pass explicitly if you mean it")
-        self.max_minutes, self.max_cost_usd, self.gpu = max_minutes, max_cost_usd, gpu
-        self.image, self.volume_gb, self.container_gb, self.name = image, volume_gb, container_gb, name
-        self.env, self.cloud, self.ports = env or {}, cloud, ports
-        # NOTE: do not override dockerArgs; the image's start script is what launches sshd.
-        # Self-destruct is armed over ssh after the pod is up (see self_destruct_cmd).
+                 env: dict | None = None):
+        self.gpus = gpus or DEFAULT_GPUS
+        bad = [g for g in self.gpus if g not in ALLOWED_GPUS]
+        if bad:
+            raise ValueError(f"GPU(s) {bad} not in allow-list {sorted(ALLOWED_GPUS)}")
+        self.max_minutes, self.max_cost_usd = max_minutes, max_cost_usd
+        self.body = {"name": name, "imageName": image, "cloudType": cloud, "gpuCount": 1,
+                     "gpuTypeIds": self.gpus, "gpuTypePriority": "custom",
+                     "containerDiskInGb": container_gb, "volumeInGb": volume_gb,
+                     "volumeMountPath": "/workspace", "ports": ["22/tcp"], "env": env or {},
+                     # PyPI torch bundles a recent CUDA runtime; require a host driver that supports it
+                     "allowedCudaVersions": ["12.8", "12.9", "13.0"]}
+        if cloud == "COMMUNITY":
+            self.body["supportPublicIp"] = True
         self.pod_id: str | None = None
-        self.cost_per_hr: float | None = None
-        self.t0: float | None = None
+        self.cost_per_hr: float = 0.0
+        self.gpu_name: str = "?"
+        self.t0: float = time.time()
 
     def __enter__(self):
         assert_no_pods()
         a = account()
         if a.balance <= 0.5:
             raise RuntimeError(f"Balance ${a.balance:.2f} too low to start a run safely")
-        env_list = [{"key": k, "value": v} for k, v in self.env.items()]
-        d = gql("""
-        mutation($in: PodFindAndDeployOnDemandInput) {
-          podFindAndDeployOnDemand(input: $in) { id costPerHr machine { gpuDisplayName } }
-        }""", {"in": {
-            "cloudType": self.cloud, "gpuCount": 1, "gpuTypeId": self.gpu,
-            "volumeInGb": self.volume_gb, "containerDiskInGb": self.container_gb,
-            "name": self.name, "imageName": self.image,
-            "ports": self.ports, "env": env_list,
-            "supportPublicIp": True, "startSsh": True,
-        }})["podFindAndDeployOnDemand"]
-        self.pod_id, self.cost_per_hr, self.t0 = d["id"], float(d["costPerHr"]), time.time()
-        if self.cost_per_hr > ALLOWED_GPUS[self.gpu]:
+        p = rest("POST", "/pods", self.body)
+        self.pod_id, self.t0 = p["id"], time.time()
+        try:
+            g = rest("GET", f"/pods/{self.pod_id}")
+            self.cost_per_hr = float(g.get("costPerHr") or p.get("costPerHr") or 0)
+            self.gpu_name = ((g.get("machine") or {}).get("gpuTypeId")
+                             or (g.get("gpu") or {}).get("id") or (g.get("gpu") or {}).get("displayName") or "?")
+            cap = max((ALLOWED_GPUS[x] for x in self.gpus if x in str(self.gpu_name) or str(self.gpu_name) in x),
+                      default=max(ALLOWED_GPUS[x] for x in self.gpus))
+            if self.cost_per_hr > cap:
+                raise RuntimeError(f"pod priced ${self.cost_per_hr}/hr exceeds cap ${cap}/hr")
+            projected = self.cost_per_hr * self.max_minutes / 60
+            if projected > self.max_cost_usd:
+                raise RuntimeError(f"max_minutes x rate = ${projected:.2f} exceeds max_cost_usd ${self.max_cost_usd}")
+        except Exception:
             terminate(self.pod_id)
-            raise RuntimeError(f"Pod priced ${self.cost_per_hr}/hr exceeds cap ${ALLOWED_GPUS[self.gpu]}/hr; terminated")
-        projected = self.cost_per_hr * self.max_minutes / 60
-        if projected > self.max_cost_usd:
-            terminate(self.pod_id)
-            raise RuntimeError(f"max_minutes x rate = ${projected:.2f} exceeds max_cost_usd ${self.max_cost_usd}; terminated")
-        print(f"[runpod] pod {self.pod_id} on {d['machine']['gpuDisplayName']} at ${self.cost_per_hr}/hr; "
-              f"self-destruct in {self.max_minutes} min; budget ${self.max_cost_usd}")
+            raise
+        print(f"[runpod] pod {self.pod_id} ({self.gpu_name}) at ${self.cost_per_hr}/hr; "
+              f"time cap {self.max_minutes} min; budget ${self.max_cost_usd}", flush=True)
         return self
-
-    def self_destruct_cmd(self) -> str:
-        """Shell command to run inside the pod: after max_minutes, kill PID 1 so the
-        container exits and the GPU is released even if this machine disconnects."""
-        return f"nohup sh -c 'sleep {self.max_minutes * 60}; kill 1' >/dev/null 2>&1 &"
 
     def elapsed_cost(self) -> float:
         return (time.time() - self.t0) / 3600 * self.cost_per_hr
 
     def check_budget(self) -> None:
-        """Call periodically from a work loop; raises (and thus terminates) when over budget."""
         if self.elapsed_cost() > self.max_cost_usd:
             raise RuntimeError(f"Budget exceeded: ${self.elapsed_cost():.2f} > ${self.max_cost_usd}")
         if time.time() - self.t0 > self.max_minutes * 60:
             raise RuntimeError("Time limit exceeded")
 
-    def status(self) -> dict:
-        d = gql("query($id: String!) { pod(input: {podId: $id}) { desiredStatus lastStatusChange runtime { uptimeInSeconds ports { ip isIpPublic privatePort publicPort type } } } }",
-                {"id": self.pod_id})["pod"]
-        return d or {}
-
-    def wait_ready(self, timeout_s: int = 1200) -> dict:
-        """Wait until the runtime exposes ports (container up). Returns runtime dict."""
-        t = time.time()
-        last = 0
+    def ssh_target(self, timeout_s: int = 600) -> tuple[str, int]:
+        t, last = time.time(), 0.0
         while time.time() - t < timeout_s:
-            st = self.status()
-            rt = st.get("runtime")
-            if rt and rt.get("ports"):
-                return rt
-            if time.time() - last > 60:
-                print(f"[runpod] waiting {int(time.time()-t)}s: status={st.get('desiredStatus')} runtime={rt} cost~${self.elapsed_cost():.3f}")
+            g = rest("GET", f"/pods/{self.pod_id}")
+            ip, pm = g.get("publicIp"), g.get("portMappings") or {}
+            if ip and "22" in pm:
+                return ip, int(pm["22"])
+            if time.time() - last > 30:
+                print(f"[runpod] waiting for ip/port ({int(time.time()-t)}s, status {g.get('desiredStatus')})", flush=True)
                 last = time.time()
             self.check_budget()
-            time.sleep(15)
-        raise TimeoutError("pod did not become ready")
+            time.sleep(8)
+        raise TimeoutError("pod never exposed a public ip and ssh port")
 
-    def ssh_target(self) -> tuple[str, int]:
-        rt = self.wait_ready()
-        for p in rt["ports"]:
-            if p["privatePort"] == 22 and p["isIpPublic"]:
-                return p["ip"], int(p["publicPort"])
-        raise RuntimeError(f"no public ssh port in {rt['ports']}")
+    def self_destruct_cmd(self) -> str:
+        """Shell command to run inside the pod over ssh. Writes /root/self_destruct.sh and
+        starts it detached: after max_minutes it removes the pod with runpodctl, using the
+        pod's own RUNPOD_* env read from PID 1 (ssh sessions don't inherit it). If that
+        fails it kills PID 1 so the container at least stops."""
+        secs = self.max_minutes * 60
+        script = (
+            "#!/bin/sh\n"
+            f"sleep {secs}\n"
+            "for v in RUNPOD_POD_ID RUNPOD_API_KEY; do\n"
+            "  val=$(tr '\\0' '\\n' < /proc/1/environ | grep \"^$v=\" | cut -d= -f2-)\n"
+            "  export $v=\"$val\"\n"
+            "done\n"
+            "echo \"self-destruct firing for pod $RUNPOD_POD_ID at $(date)\"\n"
+            "runpodctl remove pod \"$RUNPOD_POD_ID\" || kill 1\n"
+        )
+        return ("cat > /root/self_destruct.sh <<'SDEOF'\n" + script + "SDEOF\n"
+                "chmod +x /root/self_destruct.sh && "
+                "nohup /root/self_destruct.sh > /root/self_destruct.log 2>&1 < /dev/null & "
+                "echo armed; tr '\\0' '\\n' < /proc/1/environ | grep -c '^RUNPOD_POD_ID=' ")
 
     def __exit__(self, exc_type, exc, tb):
         if self.pod_id:
             try:
                 terminate(self.pod_id)
-                print(f"[runpod] terminated {self.pod_id}; elapsed cost ~${self.elapsed_cost():.3f}")
+                print(f"[runpod] terminated {self.pod_id}; elapsed cost ~${self.elapsed_cost():.3f}", flush=True)
             finally:
-                # belt and braces: confirm nothing is left running
                 left = account().pods
                 if left:
-                    print(f"[runpod] WARNING pods still present: {[p['id'] for p in left]}; terminating all")
+                    print(f"[runpod] WARNING pods still present: {[p['id'] for p in left]}; terminating all", flush=True)
                     terminate_all()
         return False
 

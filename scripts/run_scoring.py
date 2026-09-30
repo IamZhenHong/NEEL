@@ -33,6 +33,7 @@ def main():
     ap.add_argument("--speakers", nargs="+", default=["User-1", "User-2"])
     ap.add_argument("--complete-n", type=int, default=6)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--allow-cpu", action="store_true", help="permit running without a GPU (local dry runs)")
     args = ap.parse_args()
 
     prompts = []
@@ -41,6 +42,9 @@ def main():
             prompts += build(path, speaker=sp)
     print(f"{len(prompts)} prompts from {len(args.items)} item(s) x {len(args.speakers)} speaker(s)")
 
+    import torch
+    if not torch.cuda.is_available() and not args.allow_cpu:
+        sys.exit("CUDA not available; refusing to run an 8B model on CPU (pass --allow-cpu for dry runs)")
     t0 = time.time()
     scorer = Scorer(args.model)
     print(f"model loaded in {time.time()-t0:.0f}s on {scorer.device}")

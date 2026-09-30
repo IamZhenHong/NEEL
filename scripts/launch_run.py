@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import argparse, os, shlex, subprocess, sys, time
 os.environ.setdefault("PYTHONUNBUFFERED", "1")
+os.environ.setdefault("COPYFILE_DISABLE", "1")  # no macOS ._ files in tarballs
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
@@ -24,8 +25,9 @@ BOOTSTRAP = r"""
 set -e
 cd /workspace/NEEL
 if ! command -v uv >/dev/null; then curl -LsSf https://astral.sh/uv/install.sh | sh >/dev/null; fi
-export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH" UV_PROJECT_ENVIRONMENT=/root/venv
 uv sync -q
+/root/venv/bin/python -c "import torch; assert torch.cuda.is_available(), 'CUDA not available'; print('[pod] torch', torch.__version__, 'cuda', torch.version.cuda, torch.cuda.get_device_name(0))"
 """
 
 
@@ -47,12 +49,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--max-minutes", type=int, required=True)
     ap.add_argument("--max-cost", type=float, required=True)
-    ap.add_argument("--gpu", default="NVIDIA GeForce RTX 4090")
-    ap.add_argument("--fallbacks", nargs="*", default=[
-        "NVIDIA GeForce RTX 4090:ALL", "NVIDIA GeForce RTX 3090:ALL", "NVIDIA RTX A6000:ALL"],
-        help="gpu:cloud pairs tried in order when the first choice has no stock")
-    ap.add_argument("--rounds", type=int, default=6, help="how many times to cycle the fallback list")
-    ap.add_argument("--round-wait", type=int, default=45, help="seconds between rounds")
+    ap.add_argument("--gpus", nargs="+", default=None,
+                    help="GPU types in preference order (default: 4090, A6000, 3090, L40S)")
+    ap.add_argument("--cloud", default="SECURE", choices=["SECURE", "COMMUNITY"])
     ap.add_argument("--hf-token", default=os.environ.get("HF_TOKEN", ""))
     ap.add_argument("cmd", nargs=argparse.REMAINDER)
     args = ap.parse_args()
@@ -62,31 +61,13 @@ def main():
 
     a = account()
     print(f"[pre] balance ${a.balance:.2f}, pods {len(a.pods)}")
-    env = {"HF_HOME": "/workspace/hf"}
+    env = {"HF_HOME": "/root/hf"}
     if args.hf_token:
         env["HF_TOKEN"] = args.hf_token
 
-    attempts = [f"{args.gpu}:ALL"] + [f for f in args.fallbacks if f != f"{args.gpu}:ALL"]
-    session = None
-    for rnd in range(args.rounds):
-        for att in attempts:
-            gpu, cloud = att.rsplit(":", 1)
-            try:
-                session = PodSession(max_minutes=args.max_minutes, max_cost_usd=args.max_cost, gpu=gpu, env=env, cloud=cloud)
-                session.__enter__()
-                break
-            except RuntimeError as e:
-                if "SUPPLY_CONSTRAINT" in str(e) or "no longer any instances" in str(e):
-                    print(f"[runpod] round {rnd+1}: no stock for {att}")
-                    session = None
-                    continue
-                raise
-        if session:
-            break
-        if rnd < args.rounds - 1:
-            time.sleep(args.round_wait)
-    if session is None:
-        sys.exit("no GPU stock on any fallback; nothing launched, nothing charged")
+    session = PodSession(max_minutes=args.max_minutes, max_cost_usd=args.max_cost,
+                         gpus=args.gpus, cloud=args.cloud, env=env)
+    session.__enter__()
 
     pod = session
     rc = 1
@@ -94,27 +75,33 @@ def main():
         host, port = pod.ssh_target()
         print(f"[pod] ssh root@{host} -p {port}")
         wait_ssh(host, port)
-        ssh(host, port, pod.self_destruct_cmd())
-        print(f"[pod] self-destruct armed: container exits in {args.max_minutes} min")
+        r = ssh(host, port, pod.self_destruct_cmd(), capture=True)
+        armed = r.stdout.split()
+        print(f"[pod] self-destruct {'armed' if armed and armed[0]=='armed' else 'NOT ARMED'}; "
+              f"pod-id visible to pod: {armed[-1:] == ['1']}; fires in {args.max_minutes} min", flush=True)
         pod.check_budget()
 
-        # sync code (not results, not the 2 MB corpus, not .env)
-        subprocess.run(["rsync", "-az", "--delete",
-                        "--exclude", ".git", "--exclude", ".venv", "--exclude", "results",
-                        "--exclude", "reference", "--exclude", ".env", "--exclude", "__pycache__",
-                        "-e", f"ssh {' '.join(shlex.quote(o) for o in SSH_OPTS)} -p {port}",
-                        f"{REPO}/", f"root@{host}:/workspace/NEEL/"], check=True)
+        # sync code with tar over ssh (no rsync needed on the pod); skip results, corpus, secrets
+        excl = ["--exclude=./.git", "--exclude=./.venv", "--exclude=./results", "--exclude=./reference",
+                "--exclude=./.env", "--exclude=__pycache__"]
+        tar = subprocess.Popen(["tar", "-C", str(REPO), *excl, "-czf", "-", "."], stdout=subprocess.PIPE)
+        subprocess.run(["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}",
+                        "mkdir -p /workspace/NEEL && tar -xzf - -C /workspace/NEEL"], stdin=tar.stdout, check=True)
+        tar.wait()
+        print("[pod] code synced", flush=True)
         ssh(host, port, BOOTSTRAP)
         pod.check_budget()
 
-        job = "cd /workspace/NEEL && export PATH=$HOME/.local/bin:$PATH HF_HOME=/workspace/hf PYTHONUNBUFFERED=1 && uv run " + " ".join(shlex.quote(c) for c in cmd)
+        job = "cd /workspace/NEEL && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run " + " ".join(shlex.quote(c) for c in cmd)
         print(f"[pod] running: {job}")
         rc = ssh(host, port, job, check=False).returncode
         print(f"[pod] job exit code {rc}; elapsed cost ~${pod.elapsed_cost():.3f}")
 
         (REPO / "results").mkdir(exist_ok=True)
-        subprocess.run(["rsync", "-az", "-e", f"ssh {' '.join(shlex.quote(o) for o in SSH_OPTS)} -p {port}",
-                        f"root@{host}:/workspace/NEEL/results/", f"{REPO}/results/"], check=False)
+        pull = subprocess.Popen(["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}",
+                                 "cd /workspace/NEEL && tar -czf - results 2>/dev/null || true"], stdout=subprocess.PIPE)
+        subprocess.run(["tar", "-xzf", "-", "-C", str(REPO)], stdin=pull.stdout, check=False)
+        pull.wait()
         print("[local] results synced to ./results/")
     finally:
         session.__exit__(None, None, None)
