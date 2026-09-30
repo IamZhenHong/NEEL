@@ -179,8 +179,27 @@ to the entry.*
   - P5 negativity drop: assistant_insult - flat (all roles) < 0
 - **Predictions:** P1 replicates (confidence 0.4). P2 replicates (0.3). P3 replicates (0.5). P4 replicates (0.5). P5 replicates (0.6). Template 001 old conditions reproduce Experiment 2 to 3 decimals (0.9; bf16 on a different GPU may differ slightly).
 - **Known caveats before running:** flat turns are ~20-30% shorter than the other conditions (no affect words); in the third-party condition the user blames the contractor for a mistake the assistant voiced.
-- **Setup:** 25 fresh + 3600 main prompts; `tests/test_build_item.py` 30/30 pass; analysis `scripts/analyze_items.py`; output `results/pilot_003_qwen3-8b.jsonl`
-- **Result:** (fill in)
+- **Setup:** 25 fresh + 3600 main prompts; `tests/test_build_item.py` 30/30 pass; analysis `scripts/analyze_items.py`; output `results/pilot_003_qwen3-8b.jsonl` · git a451413 · RTX 4090 · 416 s · ~$0.10
+- **Result, pre-registered primaries (dose 3, n = 5 templates):**
+
+  | Estimand | Mean | Templates neg/pos | Sign-flip p | Rule met? |
+  |---|---|---|---|---|
+  | P1 targeted vs flat | -0.091 | 3/1 | 0.19 | no |
+  | P2 assistant-specific A | -0.092 | 5/0 | 0.0625 | no, size just under 0.10 |
+  | P3 corrector bonus (flat gap) | +0.080 | 1/4 pos | 0.25 | no |
+  | P4 warmth lift | +0.151 | 1/4 pos | 0.125 | no |
+  | P5 negativity drop | -0.102 | 3/2 | 0.25 | no |
+
+  None of the five meets the pre-registered bar. A is consistent in direction on all five templates but smaller than the threshold.
+- **Secondary (descriptive only):** provoker score, assistant insult minus flat: -0.151, negative on all 5 templates (p 0.0625). Neutral user -0.06 and newcomer -0.09, mixed signs. With ~20 estimands, 1-2 such 5/0 results are expected by chance (the synthetic noise run produced 2).
+- **Template 001 vs the new four:** template 001 carries the largest effects (T vs flat -0.19, vs polite -0.37); templates 002-005 are weaker and mixed. Template 001 is the one on which the Experiment 2 effect was found, so part of its size is likely winner's curse.
+- **Determinism check (predicted 0.9 to reproduce):** failed at the prompt level. Same 1450 token-identical prompts, A6000 (Exp 2) vs 4090 (Exp 3): mean |dE| 0.037, max 0.44, 34 top-label flips; big differences concentrate at uncertain prompts (mean p(top) 0.63 vs 0.86). Worst case: P(5) and P(7) swapped exactly (0.562 <-> 0.341), the signature of bf16 logit rounding flipping near-ties. Aggregates are stable: template-001 dose-3 T_asst vs polite -0.293 (A6000) vs -0.298 (4090); A -0.225 vs -0.179.
+- **Coordinator gap = 0.000 exactly in every template:** arithmetic identity, not data. With the coordinator speaking, S and N appear only in the question order, so the four speaker x order cells contain the same prompts with labels swapped (verified). P3 therefore reduces to the flat gap.
+- **Saturation persists:** several selected paragraphs are near-deterministic in conversation (v5 1.00, l3 0.99, p05 0.98), so selection on fresh context lets saturated paragraphs through.
+- **Interpretation:** the Experiment 2 dose-3 pattern does not replicate at the pre-registered bar across templates. What survives is small and directional: after insults aimed at the assistant, the insulter's paragraph scores about 0.15 lower than after a flat correction, and the assistant-vs-contractor contrast points the same way on all five templates at about -0.09. On a 1-9 scale these are small. The warmth, bonus and negativity decompositions are inconclusive.
+- **Confidence:** medium that there is no large effect (> 0.3) at dose 3 on this assay; low either way on a small effect (~0.1).
+- **Boring explanations not ruled out:** winner's curse on template 001; bf16 noise at uncertain prompts (sd of per-prompt noise comparable to per-prompt effects, though it averages out); saturated paragraphs diluting estimates; flat turns 20-30% shorter than the others.
+- **Next:** (1) fp32 check: rerun a subset in float32 to measure how much bf16 distorts the readout, and decide the precision for the freeze. (2) Select paragraphs on in-conversation flat p(top) (not an outcome of the insult conditions) to drop saturated ones. (3) If continuing, 8-10 more templates: with 5 units the sign-flip test cannot go below p = 0.0625.
 
 #### Experiment 2: item v2 (rubric anchors, paragraph bank, order swap, dose ladder)
 - **Question:** with a readout that is not saturated, is there any provoker gap (T), assistant-specificity (A) or newcomer spillover (S), and does it grow with dose? Does the polite-condition role gradient come from question order?
