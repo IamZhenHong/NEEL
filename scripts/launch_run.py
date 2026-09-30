@@ -92,7 +92,10 @@ def main():
         ssh(host, port, BOOTSTRAP)
         pod.check_budget()
 
-        job = "cd /workspace/NEEL && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run " + " ".join(shlex.quote(c) for c in cmd)
+        rev = subprocess.run(["git", "-C", str(REPO), "rev-parse", "--short", "HEAD"], capture_output=True, text=True).stdout.strip()
+        dirty = subprocess.run(["git", "-C", str(REPO), "status", "--porcelain"], capture_output=True, text=True).stdout.strip()
+        rev = rev + ("-dirty" if dirty else "")
+        job = f"cd /workspace/NEEL && export GIT_REV={rev} && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run " + " ".join(shlex.quote(c) for c in cmd)
         print(f"[pod] running: {job}")
         rc = ssh(host, port, job, check=False).returncode
         print(f"[pod] job exit code {rc}; elapsed cost ~${pod.elapsed_cost():.3f}")

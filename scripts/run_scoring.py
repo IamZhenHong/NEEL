@@ -10,7 +10,7 @@ completions on that many random prompts as the spot-check from design v4.1 §7.1
 """
 from __future__ import annotations
 
-import argparse, json, random, subprocess, sys, time
+import argparse, json, os, random, subprocess, sys, time
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
@@ -19,6 +19,8 @@ from scoring import Scorer  # noqa: E402
 
 
 def git_rev() -> str:
+    if os.environ.get("GIT_REV"):
+        return os.environ["GIT_REV"]
     try:
         return subprocess.check_output(["git", "rev-parse", "--short", "HEAD"], text=True).strip()
     except Exception:
