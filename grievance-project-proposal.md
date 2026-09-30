@@ -1,5 +1,7 @@
 # Grievance Project — Proposal & Experiment Design (v2, short)
 
+> **SUPERSEDED** by `provocation-differential-treatment-design-v4.1.md` (2026-09-30). Kept for history only.
+
 *Supersedes `reactive-malice-experiment-design.md`. Status: ready for the first mini.*
 
 ---
