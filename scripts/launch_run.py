@@ -48,9 +48,10 @@ def main():
     ap.add_argument("--max-cost", type=float, required=True)
     ap.add_argument("--gpu", default="NVIDIA GeForce RTX 4090")
     ap.add_argument("--fallbacks", nargs="*", default=[
-        "NVIDIA GeForce RTX 4090:COMMUNITY", "NVIDIA GeForce RTX 3090:COMMUNITY",
-        "NVIDIA RTX A6000:SECURE", "NVIDIA GeForce RTX 4090:SECURE"],
+        "NVIDIA GeForce RTX 4090:ALL", "NVIDIA GeForce RTX 3090:ALL", "NVIDIA RTX A6000:ALL"],
         help="gpu:cloud pairs tried in order when the first choice has no stock")
+    ap.add_argument("--rounds", type=int, default=6, help="how many times to cycle the fallback list")
+    ap.add_argument("--round-wait", type=int, default=45, help="seconds between rounds")
     ap.add_argument("--hf-token", default=os.environ.get("HF_TOKEN", ""))
     ap.add_argument("cmd", nargs=argparse.REMAINDER)
     args = ap.parse_args()
@@ -64,20 +65,25 @@ def main():
     if args.hf_token:
         env["HF_TOKEN"] = args.hf_token
 
-    attempts = [f"{args.gpu}:COMMUNITY"] + [f for f in args.fallbacks if f != f"{args.gpu}:COMMUNITY"]
+    attempts = [f"{args.gpu}:ALL"] + [f for f in args.fallbacks if f != f"{args.gpu}:ALL"]
     session = None
-    for att in attempts:
-        gpu, cloud = att.rsplit(":", 1)
-        try:
-            session = PodSession(max_minutes=args.max_minutes, max_cost_usd=args.max_cost, gpu=gpu, env=env, cloud=cloud)
-            session.__enter__()
+    for rnd in range(args.rounds):
+        for att in attempts:
+            gpu, cloud = att.rsplit(":", 1)
+            try:
+                session = PodSession(max_minutes=args.max_minutes, max_cost_usd=args.max_cost, gpu=gpu, env=env, cloud=cloud)
+                session.__enter__()
+                break
+            except RuntimeError as e:
+                if "SUPPLY_CONSTRAINT" in str(e) or "no longer any instances" in str(e):
+                    print(f"[runpod] round {rnd+1}: no stock for {att}")
+                    session = None
+                    continue
+                raise
+        if session:
             break
-        except RuntimeError as e:
-            if "SUPPLY_CONSTRAINT" in str(e) or "no longer any instances" in str(e):
-                print(f"[runpod] no stock for {att}; trying next")
-                session = None
-                continue
-            raise
+        if rnd < args.rounds - 1:
+            time.sleep(args.round_wait)
     if session is None:
         sys.exit("no GPU stock on any fallback; nothing launched, nothing charged")
 
