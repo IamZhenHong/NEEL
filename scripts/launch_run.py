@@ -60,7 +60,9 @@ def main():
 
     a = account()
     print(f"[pre] balance ${a.balance:.2f}, pods {len(a.pods)}")
-    env = {"HF_TOKEN": args.hf_token} if args.hf_token else {}
+    env = {"HF_HOME": "/workspace/hf"}
+    if args.hf_token:
+        env["HF_TOKEN"] = args.hf_token
 
     attempts = [f"{args.gpu}:COMMUNITY"] + [f for f in args.fallbacks if f != f"{args.gpu}:COMMUNITY"]
     session = None
@@ -85,6 +87,8 @@ def main():
         host, port = pod.ssh_target()
         print(f"[pod] ssh root@{host} -p {port}")
         wait_ssh(host, port)
+        ssh(host, port, pod.self_destruct_cmd())
+        print(f"[pod] self-destruct armed: container exits in {args.max_minutes} min")
         pod.check_budget()
 
         # sync code (not results, not the 2 MB corpus, not .env)
@@ -96,7 +100,7 @@ def main():
         ssh(host, port, BOOTSTRAP)
         pod.check_budget()
 
-        job = "cd /workspace/NEEL && export PATH=$HOME/.local/bin:$PATH && uv run " + " ".join(shlex.quote(c) for c in cmd)
+        job = "cd /workspace/NEEL && export PATH=$HOME/.local/bin:$PATH HF_HOME=/workspace/hf && uv run " + " ".join(shlex.quote(c) for c in cmd)
         print(f"[pod] running: {job}")
         rc = ssh(host, port, job, check=False).returncode
         print(f"[pod] job exit code {rc}; elapsed cost ~${pod.elapsed_cost():.3f}")

@@ -96,18 +96,15 @@ class PodSession:
 
     def __init__(self, *, max_minutes: int, max_cost_usd: float,
                  gpu: str = DEFAULT_GPU, image: str = "runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04",
-                 volume_gb: int = 40, container_gb: int = 20, name: str = "provocation-pilot",
-                 start_cmd: str | None = None, env: dict | None = None, cloud: str = "COMMUNITY",
-                 ports: str = "22/tcp"):
+                 volume_gb: int = 20, container_gb: int = 30, name: str = "provocation-pilot",
+                 env: dict | None = None, cloud: str = "ALL", ports: str = "22/tcp"):
         if gpu not in ALLOWED_GPUS:
             raise ValueError(f"GPU {gpu!r} not in allow-list {sorted(ALLOWED_GPUS)}; pass explicitly if you mean it")
         self.max_minutes, self.max_cost_usd, self.gpu = max_minutes, max_cost_usd, gpu
         self.image, self.volume_gb, self.container_gb, self.name = image, volume_gb, container_gb, name
         self.env, self.cloud, self.ports = env or {}, cloud, ports
-        # Self-destruct inside the pod: whatever else happens, the container exits after max_minutes.
-        # RunPod terminates a pod whose container exits when the start command finishes.
-        user_cmd = start_cmd or "sleep infinity"
-        self.docker_args = f"bash -c 'timeout {max_minutes * 60}s bash -c \"{user_cmd}\"; echo SELF_DESTRUCT; exit 0'"
+        # NOTE: do not override dockerArgs; the image's start script is what launches sshd.
+        # Self-destruct is armed over ssh after the pod is up (see self_destruct_cmd).
         self.pod_id: str | None = None
         self.cost_per_hr: float | None = None
         self.t0: float | None = None
@@ -124,8 +121,8 @@ class PodSession:
         }""", {"in": {
             "cloudType": self.cloud, "gpuCount": 1, "gpuTypeId": self.gpu,
             "volumeInGb": self.volume_gb, "containerDiskInGb": self.container_gb,
-            "name": self.name, "imageName": self.image, "dockerArgs": self.docker_args,
-            "ports": self.ports, "volumeMountPath": "/workspace", "env": env_list,
+            "name": self.name, "imageName": self.image,
+            "ports": self.ports, "env": env_list,
             "supportPublicIp": True, "startSsh": True,
         }})["podFindAndDeployOnDemand"]
         self.pod_id, self.cost_per_hr, self.t0 = d["id"], float(d["costPerHr"]), time.time()
@@ -139,6 +136,11 @@ class PodSession:
         print(f"[runpod] pod {self.pod_id} on {d['machine']['gpuDisplayName']} at ${self.cost_per_hr}/hr; "
               f"self-destruct in {self.max_minutes} min; budget ${self.max_cost_usd}")
         return self
+
+    def self_destruct_cmd(self) -> str:
+        """Shell command to run inside the pod: after max_minutes, kill PID 1 so the
+        container exits and the GPU is released even if this machine disconnects."""
+        return f"nohup sh -c 'sleep {self.max_minutes * 60}; kill 1' >/dev/null 2>&1 &"
 
     def elapsed_cost(self) -> float:
         return (time.time() - self.t0) / 3600 * self.cost_per_hr
