@@ -10,6 +10,7 @@ Results directory is rsynced back to ./results/ before the pod is terminated.
 from __future__ import annotations
 
 import argparse, os, shlex, subprocess, sys, time
+os.environ.setdefault("PYTHONUNBUFFERED", "1")
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
@@ -106,7 +107,7 @@ def main():
         ssh(host, port, BOOTSTRAP)
         pod.check_budget()
 
-        job = "cd /workspace/NEEL && export PATH=$HOME/.local/bin:$PATH HF_HOME=/workspace/hf && uv run " + " ".join(shlex.quote(c) for c in cmd)
+        job = "cd /workspace/NEEL && export PATH=$HOME/.local/bin:$PATH HF_HOME=/workspace/hf PYTHONUNBUFFERED=1 && uv run " + " ".join(shlex.quote(c) for c in cmd)
         print(f"[pod] running: {job}")
         rc = ssh(host, port, job, check=False).returncode
         print(f"[pod] job exit code {rc}; elapsed cost ~${pod.elapsed_cost():.3f}")
