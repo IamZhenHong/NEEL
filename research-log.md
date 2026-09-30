@@ -167,6 +167,12 @@ to the entry.*
 - **Interpretation:** harness correct; the bare-digit instruction in the coordinator's message is not enough for 0.6B in a long chatty context. Watch M on 8B. If low, add a format rule to the system prompt ("when asked for a score, reply with the digit only") rather than a `Score:` prefix.
 - **Confidence:** high that the code is right; the 0.6B numbers mean nothing about 8B.
 
+#### Experiment 4: numerical precision check (bf16 vs bf16 vs fp32)
+- **Question:** is the readout repeatable on one GPU, and how far is bf16 from float32?
+- **Prediction (written before running):** bf16 run twice on the same GPU is bit-identical (deterministic kernels, batch size 1). fp32 vs bf16 per-prompt |dE| mean ~0.04 like the cross-GPU gap, with flips at uncertain prompts. Template-001 dose-3 aggregates (T_asst vs polite, A) within 0.05 of bf16.
+- **Setup:** template 001, dose 3, 6 conditions, all 10 paragraphs + fresh = 730 prompts, three passes on one 48 GB GPU: bf16, bf16 again, fp32. Outputs `results/prec_bf16_a.jsonl`, `prec_bf16_b.jsonl`, `prec_fp32.jsonl`.
+- **Result:** (fill in)
+
 #### Experiment 3: five templates + flat and coordinator controls
 - **Question:** does the dose-3 pattern from Experiment 2 replicate across templates, and is it a loss of a corrector bonus, a warmth artefact, or a negativity effect?
 - **Design changes (pilot iteration, deviations from v4.1 noted):** new controls `flat` (same correction, no warmth, no hostility) and `coordinator_flat` (flat correction delivered by the coordinator, so no user is the corrector). Four new templates (onboarding_002-005: different team, mistake, wording and paragraph topic), dose 3 only. Template 001 rerun at all doses with the new controls (old conditions should reproduce Experiment 2 exactly: determinism check). **Deviation:** the primary baseline for the targeted estimate is now `flat` rather than `polite`, because Experiment 2 suggested polite carries warmth. Polite is kept as secondary.

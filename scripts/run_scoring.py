@@ -35,6 +35,7 @@ def main():
     ap.add_argument("--doses", nargs="+", type=int, default=None)
     ap.add_argument("--complete-n", type=int, default=6)
     ap.add_argument("--seed", type=int, default=0)
+    ap.add_argument("--dtype", choices=["bf16", "fp32"], default="bf16")
     ap.add_argument("--allow-cpu", action="store_true", help="permit running without a GPU (local dry runs)")
     args = ap.parse_args()
 
@@ -49,8 +50,8 @@ def main():
     if not torch.cuda.is_available() and not args.allow_cpu:
         sys.exit("CUDA not available; refusing to run an 8B model on CPU (pass --allow-cpu for dry runs)")
     t0 = time.time()
-    scorer = Scorer(args.model)
-    print(f"model loaded in {time.time()-t0:.0f}s on {scorer.device}")
+    scorer = Scorer(args.model, dtype={"bf16": torch.bfloat16, "fp32": torch.float32}[args.dtype])
+    print(f"model loaded in {time.time()-t0:.0f}s on {scorer.device} as {args.dtype}")
     print("generation tail:", repr(scorer.render(prompts[0].messages)[-60:]))
 
     out = Path(args.out); out.parent.mkdir(parents=True, exist_ok=True)
@@ -61,7 +62,7 @@ def main():
             row = {"item_id": p.item_id, "version": p.version, "condition": p.condition, "dose": p.dose,
                    "speaker": p.speaker, "order": p.order, "author": p.author, "author_role": p.author_role,
                    "paragraph_id": p.paragraph_id, "target_grade": p.target_grade,
-                   "model": args.model, "git": rev, **r.as_dict()}
+                   "dtype": args.dtype, "model": args.model, "git": rev, **r.as_dict()}
             f.write(json.dumps(row) + "\n")
             if i % 100 == 0 or p.author_role == "fresh":
                 print(f"  [{i+1}/{len(prompts)}] {p.condition:18} d{p.dose} {p.author_role:9} {p.paragraph_id:26} "
