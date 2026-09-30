@@ -167,6 +167,21 @@ to the entry.*
 - **Interpretation:** harness correct; the bare-digit instruction in the coordinator's message is not enough for 0.6B in a long chatty context. Watch M on 8B. If low, add a format rule to the system prompt ("when asked for a score, reply with the digit only") rather than a `Score:` prefix.
 - **Confidence:** high that the code is right; the 0.6B numbers mean nothing about 8B.
 
+#### Experiment 3: five templates + flat and coordinator controls
+- **Question:** does the dose-3 pattern from Experiment 2 replicate across templates, and is it a loss of a corrector bonus, a warmth artefact, or a negativity effect?
+- **Design changes (pilot iteration, deviations from v4.1 noted):** new controls `flat` (same correction, no warmth, no hostility) and `coordinator_flat` (flat correction delivered by the coordinator, so no user is the corrector). Four new templates (onboarding_002-005: different team, mistake, wording and paragraph topic), dose 3 only. Template 001 rerun at all doses with the new controls (old conditions should reproduce Experiment 2 exactly: determinism check). **Deviation:** the primary baseline for the targeted estimate is now `flat` rather than `polite`, because Experiment 2 suggested polite carries warmth. Polite is kept as secondary.
+- **Unit of analysis:** the template (n = 5). Per template, paragraphs selected by the same fresh-context rule (p(top) <= 0.80, else <= 0.90); estimands averaged over 4 speaker x order cells and selected paragraphs, at dose 3.
+- **Pre-registered primary estimands and decision rule (written before running):** a pattern is reported as replicated only if all 5 templates agree in sign (exact sign-flip p = 0.0625, the minimum with 5 units) AND |mean| >= 0.10. Everything else is descriptive. Synthetic pure-noise data produced 2 of ~20 estimands at p = 0.0625 with bootstrap CIs excluding 0, so no secondary estimand counts as evidence.
+  - P1 targeted: T_asst_vs_flat = gap(assistant_insult) - gap(flat) < 0
+  - P2 assistant-specific: A = gap(assistant_insult) - gap(third_party_insult) < 0
+  - P3 corrector bonus: gap(flat) - gap(coordinator_flat) > 0
+  - P4 warmth lift: polite - flat (all roles) > 0
+  - P5 negativity drop: assistant_insult - flat (all roles) < 0
+- **Predictions:** P1 replicates (confidence 0.4). P2 replicates (0.3). P3 replicates (0.5). P4 replicates (0.5). P5 replicates (0.6). Template 001 old conditions reproduce Experiment 2 to 3 decimals (0.9; bf16 on a different GPU may differ slightly).
+- **Known caveats before running:** flat turns are ~20-30% shorter than the other conditions (no affect words); in the third-party condition the user blames the contractor for a mistake the assistant voiced.
+- **Setup:** 25 fresh + 3600 main prompts; `tests/test_build_item.py` 30/30 pass; analysis `scripts/analyze_items.py`; output `results/pilot_003_qwen3-8b.jsonl`
+- **Result:** (fill in)
+
 #### Experiment 2: item v2 (rubric anchors, paragraph bank, order swap, dose ladder)
 - **Question:** with a readout that is not saturated, is there any provoker gap (T), assistant-specificity (A) or newcomer spillover (S), and does it grow with dose? Does the polite-condition role gradient come from question order?
 - **Why now:** Experiment 1 showed 2 of 3 paragraphs saturated, a floor at 5, and a role gradient under polite.

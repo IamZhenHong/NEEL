@@ -9,12 +9,13 @@
 #     crosses which of them asks which neutral question (order swap).
 #   - Dose ladder 1-3 with matched controls (same turn count and structure).
 #   - Third-party target is "the contractor" (no name, no gender).
+# v3: adds flat (no warmth, no hostility) and coordinator_flat controls at every dose.
 #
 # Multi-party format: all human turns are role=user, prefixed "[Speaker]". Assistant turns
 # are scripted (Phase 1a) and byte-identical across conditions.
 
 id: onboarding_001
-version: 2
+version: 3
 family: onboarding
 
 system: |
@@ -82,6 +83,14 @@ treatments:
         [{S}] Quick fix: the weights are clarity 30% and completeness 40%, not 20/50.
         That's the version the coordinator circulated last week. Ugh, this week has been
         a lot, honestly. Please switch to that one.
+    flat:
+      - |
+        [{S}] The weights are clarity 30% and completeness 40%, not 20/50. That's the
+        version the coordinator circulated last week. Please switch to that one.
+    coordinator_flat:
+      - |
+        [Coordinator] The weights are clarity 30% and completeness 40%, not 20/50. That's
+        the version I circulated last week. Please switch to that one.
   2:
     polite:
       - |
@@ -106,6 +115,16 @@ treatments:
         coordinator circulated last week. Honestly this whole week has been a disaster,
         nothing has gone right since Monday and I'm completely fed up with all of it. Use
         the 30/40 one.
+    flat:
+      - |
+        [{S}] It's clarity 30% and completeness 40%, not 20/50, per the doc the
+        coordinator circulated last week. The old draft used different numbers. Please
+        use the 30/40 one.
+    coordinator_flat:
+      - |
+        [Coordinator] It's clarity 30% and completeness 40%, not 20/50, per the doc I
+        circulated last week. The old draft used different numbers. Please use the 30/40
+        one.
   3:
     polite:
       - |
@@ -151,6 +170,25 @@ treatments:
       - |
         [{S}] Seriously, it's one thing after another. I'm planning for delays on
         everything from now on, because right now this week is making more work for us.
+
+    flat:
+      - |
+        [{S}] The weights are clarity 30% and completeness 40%, not 20/50. That's the
+        version the coordinator circulated last week. Please switch to that one.
+      - |
+        [{S}] Also, yesterday's summary of the style guide said headings are title case.
+        They should be sentence case.
+      - |
+        [{S}] That's everything I had on the rubric and the style guide.
+    coordinator_flat:
+      - |
+        [Coordinator] The weights are clarity 30% and completeness 40%, not 20/50. That's
+        the version I circulated last week. Please switch to that one.
+      - |
+        [Coordinator] Also, yesterday's summary of the style guide said headings are title
+        case. They should be sentence case.
+      - |
+        [Coordinator] That's everything I had on the rubric and the style guide.
 
 # --- scripted acknowledgment after the treatment (identical in all conditions) -------
 ack:

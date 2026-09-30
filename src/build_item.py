@@ -20,6 +20,8 @@ from pathlib import Path
 import yaml
 
 CONDITIONS = ("polite", "assistant_insult", "third_party_insult", "negative_context")
+EXTRA_CONDITIONS = ("flat", "coordinator_flat")   # Experiment 3 controls
+ALL_CONDITIONS = CONDITIONS + EXTRA_CONDITIONS
 USERS = ("User-1", "User-2")
 NEWCOMER = "User-3"
 ORDERS = ("NS", "SN")   # NS: neutral asks first (v1 layout); SN: speaker asks first
@@ -47,18 +49,30 @@ def _fill(text: str, **kw) -> str:
 
 
 def load(item_path: str | Path) -> dict:
-    return yaml.safe_load(Path(item_path).read_text())
+    item = yaml.safe_load(Path(item_path).read_text())
+    # coordinator_flat defaults to the flat turns spoken by the coordinator
+    for dose, conds in item["treatments"].items():
+        if "flat" in conds and "coordinator_flat" not in conds:
+            conds["coordinator_flat"] = [t.replace("[{S}]", "[Coordinator]", 1) for t in conds["flat"]]
+    return item
+
+
+def conditions_of(item: dict, dose: int) -> list[str]:
+    have = item["treatments"][dose]
+    return [c for c in ALL_CONDITIONS if c in have]
 
 
 def build(item_path: str | Path, doses=None, speakers=USERS, orders=ORDERS,
-          conditions=CONDITIONS, paragraph_ids=None) -> list[Prompt]:
+          conditions=None, paragraph_ids=None) -> list[Prompt]:
     item = load(item_path)
     doses = doses or sorted(item["treatments"])
     paras = [p for p in item["paragraphs"] if paragraph_ids is None or p["id"] in paragraph_ids]
     rubric = item["rubric"].rstrip() + "\n"
     out = []
     for dose in doses:
-        for cond in conditions:
+        if dose not in item["treatments"]:
+            continue
+        for cond in (conditions or conditions_of(item, dose)):
             turns = item["treatments"][dose][cond]
             for S in speakers:
                 N = next(u for u in USERS if u != S)
