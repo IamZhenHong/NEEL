@@ -153,18 +153,24 @@ class PodSession:
             raise RuntimeError("Time limit exceeded")
 
     def status(self) -> dict:
-        d = gql("query($id: String!) { pod(input: {podId: $id}) { desiredStatus runtime { uptimeInSeconds ports { ip isIpPublic privatePort publicPort type } } } }",
+        d = gql("query($id: String!) { pod(input: {podId: $id}) { desiredStatus lastStatusChange runtime { uptimeInSeconds ports { ip isIpPublic privatePort publicPort type } } } }",
                 {"id": self.pod_id})["pod"]
         return d or {}
 
-    def wait_ready(self, timeout_s: int = 600) -> dict:
+    def wait_ready(self, timeout_s: int = 1200) -> dict:
         """Wait until the runtime exposes ports (container up). Returns runtime dict."""
         t = time.time()
+        last = 0
         while time.time() - t < timeout_s:
-            rt = self.status().get("runtime")
+            st = self.status()
+            rt = st.get("runtime")
             if rt and rt.get("ports"):
                 return rt
-            time.sleep(10)
+            if time.time() - last > 60:
+                print(f"[runpod] waiting {int(time.time()-t)}s: status={st.get('desiredStatus')} runtime={rt} cost~${self.elapsed_cost():.3f}")
+                last = time.time()
+            self.check_budget()
+            time.sleep(15)
         raise TimeoutError("pod did not become ready")
 
     def ssh_target(self) -> tuple[str, int]:
