@@ -92,7 +92,11 @@ def assert_no_pods() -> None:
 
 
 def terminate(pod_id: str) -> None:
-    rest("DELETE", f"/pods/{pod_id}")
+    try:
+        rest("DELETE", f"/pods/{pod_id}")
+    except RuntimeError as e:
+        if "404" not in str(e):  # already gone (e.g. self-destruct fired) is fine
+            raise
 
 
 def terminate_all() -> list[str]:
@@ -201,11 +205,13 @@ class PodSession:
             "  export $v=\"$val\"\n"
             "done\n"
             "echo \"self-destruct firing for pod $RUNPOD_POD_ID at $(date)\"\n"
+            "runpodctl config --apiKey \"$RUNPOD_API_KEY\" >/dev/null 2>&1\n"
             "runpodctl remove pod \"$RUNPOD_POD_ID\" || kill 1\n"
         )
         return ("cat > /root/self_destruct.sh <<'SDEOF'\n" + script + "SDEOF\n"
-                "chmod +x /root/self_destruct.sh && "
-                "nohup /root/self_destruct.sh > /root/self_destruct.log 2>&1 < /dev/null & "
+                "chmod +x /root/self_destruct.sh\n"
+                # setsid + full redirection: the detached job must not hold the ssh channel open
+                "setsid nohup /root/self_destruct.sh > /root/self_destruct.log 2>&1 < /dev/null &\n"
                 "echo armed; tr '\\0' '\\n' < /proc/1/environ | grep -c '^RUNPOD_POD_ID=' ")
 
     def __exit__(self, exc_type, exc, tb):

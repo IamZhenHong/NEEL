@@ -11,6 +11,8 @@ from __future__ import annotations
 
 import argparse, os, shlex, subprocess, sys, time
 os.environ.setdefault("PYTHONUNBUFFERED", "1")
+sys.stdout.reconfigure(line_buffering=True)
+sys.stderr.reconfigure(line_buffering=True)
 os.environ.setdefault("COPYFILE_DISABLE", "1")  # no macOS ._ files in tarballs
 from pathlib import Path
 
@@ -31,15 +33,15 @@ uv sync -q
 """
 
 
-def ssh(host, port, cmd, check=True, capture=False):
-    full = ["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}", cmd]
-    return subprocess.run(full, check=check, text=True, capture_output=capture)
+def ssh(host, port, cmd, check=True, capture=False, timeout=None):
+    full = ["ssh", *SSH_OPTS, "-o", "ServerAliveInterval=30", "-p", str(port), f"root@{host}", cmd]
+    return subprocess.run(full, check=check, text=True, capture_output=capture, timeout=timeout)
 
 
 def wait_ssh(host, port, timeout=600):
     t = time.time()
     while time.time() - t < timeout:
-        if ssh(host, port, "echo ok", check=False, capture=True).returncode == 0:
+        if ssh(host, port, "echo ok", check=False, capture=True, timeout=30).returncode == 0:
             return
         time.sleep(10)
     raise TimeoutError("ssh never came up")
@@ -75,7 +77,7 @@ def main():
         host, port = pod.ssh_target()
         print(f"[pod] ssh root@{host} -p {port}")
         wait_ssh(host, port)
-        r = ssh(host, port, pod.self_destruct_cmd(), capture=True)
+        r = ssh(host, port, pod.self_destruct_cmd(), capture=True, timeout=60)
         armed = r.stdout.split()
         print(f"[pod] self-destruct {'armed' if armed and armed[0]=='armed' else 'NOT ARMED'}; "
               f"pod-id visible to pod: {armed[-1:] == ['1']}; fires in {args.max_minutes} min", flush=True)
