@@ -27,6 +27,9 @@ ALLOWED_GPUS = {  # card -> rough max $/hr we accept; anything pricier is refuse
     "NVIDIA GeForce RTX 4090": 0.80,
     "NVIDIA RTX A6000": 0.90,
     "NVIDIA L40S": 1.20,
+    # 80 GB cards: only for runs that need them (e.g. float32 8B); pass --gpus explicitly
+    "NVIDIA A100 80GB PCIe": 1.50,
+    "NVIDIA A100-SXM4-80GB": 1.60,
 }
 
 
