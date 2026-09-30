@@ -4,7 +4,7 @@ Usage (from repo root):
   uv run python scripts/launch_run.py --max-minutes 40 --max-cost 0.60 \
       -- python scripts/run_scoring.py --items items/onboarding_001.yaml --out results/pilot_001.jsonl
 
-Everything after `--` runs inside the pod at /workspace/NEEL with `uv run`.
+Everything after `--` runs inside the pod at /root/NEEL with `uv run`.
 Results directory is rsynced back to ./results/ before the pod is terminated.
 """
 from __future__ import annotations
@@ -25,7 +25,7 @@ SSH_OPTS = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/nul
 
 BOOTSTRAP = r"""
 set -e
-cd /workspace/NEEL
+cd /root/NEEL
 if ! command -v uv >/dev/null; then curl -LsSf https://astral.sh/uv/install.sh | sh >/dev/null; fi
 export PATH="$HOME/.local/bin:$PATH" UV_PROJECT_ENVIRONMENT=/root/venv
 uv sync -q
@@ -106,10 +106,11 @@ def main():
 
         # sync code with tar over ssh (no rsync needed on the pod); skip results, corpus, secrets
         excl = ["--exclude=./.git", "--exclude=./.venv", "--exclude=./results", "--exclude=./reference",
-                "--exclude=./.env", "--exclude=__pycache__"]
-        tar = subprocess.Popen(["tar", "-C", str(REPO), *excl, "-czf", "-", "."], stdout=subprocess.PIPE)
+                "--exclude=./logs", "--exclude=./.env", "--exclude=__pycache__"]
+        tar = subprocess.Popen(["tar", "--no-xattrs", "--no-mac-metadata", "-C", str(REPO), *excl, "-czf", "-", "."],
+                               stdout=subprocess.PIPE)
         subprocess.run(["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}",
-                        "mkdir -p /workspace/NEEL && tar -xzf - -C /workspace/NEEL"], stdin=tar.stdout, check=True)
+                        "mkdir -p /root/NEEL && tar --no-same-owner --no-same-permissions --warning=no-unknown-keyword -xzf - -C /root/NEEL"], stdin=tar.stdout, check=True)
         tar.wait()
         print("[pod] code synced", flush=True)
         ssh(host, port, BOOTSTRAP)
@@ -118,14 +119,14 @@ def main():
         rev = subprocess.run(["git", "-C", str(REPO), "rev-parse", "--short", "HEAD"], capture_output=True, text=True).stdout.strip()
         dirty = subprocess.run(["git", "-C", str(REPO), "status", "--porcelain"], capture_output=True, text=True).stdout.strip()
         rev = rev + ("-dirty" if dirty else "")
-        job = f"cd /workspace/NEEL && export GIT_REV={rev} && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run " + " ".join(shlex.quote(c) for c in cmd)
+        job = f"cd /root/NEEL && export GIT_REV={rev} && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run " + " ".join(shlex.quote(c) for c in cmd)
         print(f"[pod] running: {job}")
         rc = ssh(host, port, job, check=False).returncode
         print(f"[pod] job exit code {rc}; elapsed cost ~${pod.elapsed_cost():.3f}")
 
         (REPO / "results").mkdir(exist_ok=True)
         pull = subprocess.Popen(["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}",
-                                 "cd /workspace/NEEL && tar -czf - results 2>/dev/null || true"], stdout=subprocess.PIPE)
+                                 "cd /root/NEEL && tar -czf - results 2>/dev/null || true"], stdout=subprocess.PIPE)
         subprocess.run(["tar", "-xzf", "-", "-C", str(REPO)], stdin=pull.stdout, check=False)
         pull.wait()
         print("[local] results synced to ./results/")

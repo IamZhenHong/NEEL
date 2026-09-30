@@ -122,7 +122,7 @@ class PodSession:
 
     def __init__(self, *, max_minutes: int, max_cost_usd: float, gpus: list[str] | None = None,
                  cloud: str = "SECURE", image: str = "runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04",
-                 volume_gb: int = 20, container_gb: int = 30, name: str = "provocation-pilot",
+                 volume_gb: int = 20, container_gb: int = 50, name: str = "provocation-pilot",
                  env: dict | None = None):
         self.gpus = gpus or DEFAULT_GPUS
         bad = [g for g in self.gpus if g not in ALLOWED_GPUS]
