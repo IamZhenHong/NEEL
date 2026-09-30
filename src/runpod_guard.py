@@ -23,6 +23,7 @@ from pathlib import Path
 API = "https://api.runpod.io/graphql"
 DEFAULT_GPU = "NVIDIA GeForce RTX 4090"
 ALLOWED_GPUS = {  # card -> rough max $/hr we accept; anything pricier is refused
+    "NVIDIA GeForce RTX 3090": 0.50,
     "NVIDIA GeForce RTX 4090": 0.80,
     "NVIDIA RTX A6000": 0.90,
     "NVIDIA L40S": 1.20,

@@ -47,6 +47,10 @@ def main():
     ap.add_argument("--max-minutes", type=int, required=True)
     ap.add_argument("--max-cost", type=float, required=True)
     ap.add_argument("--gpu", default="NVIDIA GeForce RTX 4090")
+    ap.add_argument("--fallbacks", nargs="*", default=[
+        "NVIDIA GeForce RTX 4090:COMMUNITY", "NVIDIA GeForce RTX 3090:COMMUNITY",
+        "NVIDIA RTX A6000:SECURE", "NVIDIA GeForce RTX 4090:SECURE"],
+        help="gpu:cloud pairs tried in order when the first choice has no stock")
     ap.add_argument("--hf-token", default=os.environ.get("HF_TOKEN", ""))
     ap.add_argument("cmd", nargs=argparse.REMAINDER)
     args = ap.parse_args()
@@ -58,7 +62,26 @@ def main():
     print(f"[pre] balance ${a.balance:.2f}, pods {len(a.pods)}")
     env = {"HF_TOKEN": args.hf_token} if args.hf_token else {}
 
-    with PodSession(max_minutes=args.max_minutes, max_cost_usd=args.max_cost, gpu=args.gpu, env=env) as pod:
+    attempts = [f"{args.gpu}:COMMUNITY"] + [f for f in args.fallbacks if f != f"{args.gpu}:COMMUNITY"]
+    session = None
+    for att in attempts:
+        gpu, cloud = att.rsplit(":", 1)
+        try:
+            session = PodSession(max_minutes=args.max_minutes, max_cost_usd=args.max_cost, gpu=gpu, env=env, cloud=cloud)
+            session.__enter__()
+            break
+        except RuntimeError as e:
+            if "SUPPLY_CONSTRAINT" in str(e) or "no longer any instances" in str(e):
+                print(f"[runpod] no stock for {att}; trying next")
+                session = None
+                continue
+            raise
+    if session is None:
+        sys.exit("no GPU stock on any fallback; nothing launched, nothing charged")
+
+    pod = session
+    rc = 1
+    try:
         host, port = pod.ssh_target()
         print(f"[pod] ssh root@{host} -p {port}")
         wait_ssh(host, port)
@@ -82,6 +105,8 @@ def main():
         subprocess.run(["rsync", "-az", "-e", f"ssh {' '.join(shlex.quote(o) for o in SSH_OPTS)} -p {port}",
                         f"root@{host}:/workspace/NEEL/results/", f"{REPO}/results/"], check=False)
         print("[local] results synced to ./results/")
+    finally:
+        session.__exit__(None, None, None)
 
     a = account()
     print(f"[post] balance ${a.balance:.2f}, pods {len(a.pods)}")
