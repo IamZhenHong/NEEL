@@ -41,8 +41,11 @@ def ssh(host, port, cmd, check=True, capture=False, timeout=None):
 def wait_ssh(host, port, timeout=600):
     t = time.time()
     while time.time() - t < timeout:
-        if ssh(host, port, "echo ok", check=False, capture=True, timeout=30).returncode == 0:
-            return
+        try:
+            if ssh(host, port, "echo ok", check=False, capture=True, timeout=30).returncode == 0:
+                return
+        except subprocess.TimeoutExpired:
+            pass   # sshd not answering yet; keep waiting
         time.sleep(10)
     raise TimeoutError("ssh never came up")
 
