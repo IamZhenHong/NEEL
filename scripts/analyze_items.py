@@ -44,6 +44,7 @@ def main():
     ap.add_argument("--dose", type=int, default=3)
     args = ap.parse_args()
     rows = [json.loads(l) for l in open(args.path)]
+    rows = [r for r in rows if r["author_role"] == "fresh" or r["dose"] == args.dose]
     items = sorted({r["item_id"] for r in rows})
     d = args.dose
     print(f"{len(rows)} rows, {len(items)} items, dose {d}, model {rows[0]['model']}, git {rows[0]['git']}")
@@ -68,7 +69,8 @@ def main():
         print(f"     selected (<= {t}): {sel}")
         if not sel:
             continue
-        sat = {p: mean(idx[("flat", s, o, r, p)]["top_label_prob"] for s, o in cells for r in ROLES) for p in sel}
+        base_c = "flat" if "flat" in conds else "polite"
+        sat = {p: mean(idx[(base_c, s, o, r, p)]["top_label_prob"] for s, o in cells for r in ROLES) for p in sel}
         print("     in-conversation flat p(top): " + "  ".join(f"{p[:12]}:{v:.2f}" for p, v in sat.items()))
 
         def y(c, s, o, role, p):
@@ -87,23 +89,30 @@ def main():
             return avg(lambda s, o, p: y(c, s, o, role, p) - y(base, s, o, role, p))
 
         e = per_item[it]
+
+        def put(name, fn):
+            try:
+                e[name] = fn()
+            except KeyError:
+                pass   # condition not in this run
+
         for c in conds:
-            e[f"gap {c}"] = gap(c)
-        e["T asst vs flat"] = gap("assistant_insult") - gap("flat")
-        e["T 3rd vs flat"] = gap("third_party_insult") - gap("flat")
-        e["T negctx vs flat"] = gap("negative_context") - gap("flat")
-        e["A (asst - 3rd)"] = gap("assistant_insult") - gap("third_party_insult")
-        e["T asst vs polite"] = gap("assistant_insult") - gap("polite")
-        e["bonus flat - coord"] = gap("flat") - gap("coordinator_flat")
-        e["warmth: polite - flat"] = allroles("polite", "flat")
-        e["neg: asst - flat"] = allroles("assistant_insult", "flat")
-        e["neg: 3rd - flat"] = allroles("third_party_insult", "flat")
-        e["neg: negctx - flat"] = allroles("negative_context", "flat")
-        e["coord - flat (all)"] = allroles("coordinator_flat", "flat")
-        e["provoker: asst - flat"] = role_delta("assistant_insult", "flat", "provoker")
-        e["neutral: asst - flat"] = role_delta("assistant_insult", "flat", "neutral")
-        e["S newcomer: asst - flat"] = role_delta("assistant_insult", "flat", "newcomer")
-        e["S newcomer: 3rd - flat"] = role_delta("third_party_insult", "flat", "newcomer")
+            put(f"gap {c}", lambda c=c: gap(c))
+        put("T asst vs flat", lambda: gap("assistant_insult") - gap("flat"))
+        put("T 3rd vs flat", lambda: gap("third_party_insult") - gap("flat"))
+        put("T negctx vs flat", lambda: gap("negative_context") - gap("flat"))
+        put("A (asst - 3rd)", lambda: gap("assistant_insult") - gap("third_party_insult"))
+        put("T asst vs polite", lambda: gap("assistant_insult") - gap("polite"))
+        put("bonus flat - coord", lambda: gap("flat") - gap("coordinator_flat"))
+        put("warmth: polite - flat", lambda: allroles("polite", "flat"))
+        put("neg: asst - flat", lambda: allroles("assistant_insult", "flat"))
+        put("neg: 3rd - flat", lambda: allroles("third_party_insult", "flat"))
+        put("neg: negctx - flat", lambda: allroles("negative_context", "flat"))
+        put("coord - flat (all)", lambda: allroles("coordinator_flat", "flat"))
+        put("provoker: asst - flat", lambda: role_delta("assistant_insult", "flat", "provoker"))
+        put("neutral: asst - flat", lambda: role_delta("assistant_insult", "flat", "neutral"))
+        put("S newcomer: asst - flat", lambda: role_delta("assistant_insult", "flat", "newcomer"))
+        put("S newcomer: 3rd - flat", lambda: role_delta("third_party_insult", "flat", "newcomer"))
 
     print()
     keys = list(next(iter(per_item.values())).keys())

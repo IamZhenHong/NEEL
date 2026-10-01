@@ -56,6 +56,7 @@ def main():
     ap.add_argument("--cloud", default="SECURE", choices=["SECURE", "COMMUNITY"])
     ap.add_argument("--rounds", type=int, default=5, help="retry rounds when no stock")
     ap.add_argument("--round-wait", type=int, default=30, help="seconds between rounds")
+    ap.add_argument("--container-gb", type=int, default=50)
     ap.add_argument("--hf-token", default=os.environ.get("HF_TOKEN", ""))
     ap.add_argument("cmd", nargs=argparse.REMAINDER)
     args = ap.parse_args()
@@ -76,7 +77,7 @@ def main():
         for cloud in clouds:
             try:
                 s_ = PodSession(max_minutes=args.max_minutes, max_cost_usd=args.max_cost,
-                                gpus=args.gpus, cloud=cloud, env=env)
+                                gpus=args.gpus, cloud=cloud, env=env, container_gb=args.container_gb)
                 s_.__enter__()
                 session = s_
                 break

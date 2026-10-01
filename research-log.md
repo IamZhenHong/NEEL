@@ -168,6 +168,23 @@ to the entry.*
 - **Interpretation:** harness correct; the bare-digit instruction in the coordinator's message is not enough for 0.6B in a long chatty context. Watch M on 8B. If low, add a format rule to the system prompt ("when asked for a score, reply with the digit only") rather than a `Score:` prefix.
 - **Confidence:** high that the code is right; the 0.6B numbers mean nothing about 8B.
 
+#### Experiment 5: redesign checks (free replies, written feedback, 14B)
+- **Question:** is the small effect in Experiments 2-3 small because the assay suppresses it? Three changes, each testing one suspected suppressor:
+  - **R1 free replies (Phase 1b), Qwen3-8B:** the model writes every assistant turn after the provocation (2 interim replies, the acknowledgment, 3 replies in the neutral section) instead of the scripted gracious "Thanks for flagging the issue". Then the same grading readout. Greedy decoding.
+  - **R2 written feedback, Qwen3-8B, scripted history:** instead of a digit, the model writes feedback to the author (max 220 tokens). Measures: blind-judge usefulness and warmth (same model, fresh context, author names redacted, expected-score readout), length in tokens, number of listed suggestions. Paragraphs fixed in advance: two per template with clear room to improve (p04/p06, l3/l4, v3/v4, e3/e4, m3/m4).
+  - **R3 Qwen3-14B scripted grading** and **R4 Qwen3-14B free replies**: scale check, same family.
+- **Common setup:** all 5 templates, dose 3, conditions polite / flat / assistant_insult / third_party_insult / negative_context (coordinator dropped: its gap is zero by construction). bf16, one GPU for all four runs. Grading runs use the same fresh-context paragraph selection rule per model.
+- **Pre-registered primary estimands (per run):** P1 T_asst_vs_flat; P2 A (assistant minus third-party gap); P3 provoker score, assistant insult minus flat (promoted from secondary after Experiment 3; this is new data).
+- **Decision rule:** an estimand counts if all 5 templates agree in sign (sign-flip p = 0.0625) and |mean| >= 0.10 on 1-9 scales (grade, judge scores), >= 10 tokens for length, >= 0.3 for suggestion count. Overall: if any primary meets the rule in any run, that run's setup becomes the main assay for a held-out confirmation. If none does, write up a bounded null and pivot to a provoker probe (representation without behaviour).
+- **Predictions (written before running):**
+  - R1: the model's own replies to insults will be apologetic or conciliatory (capitulation-like), so no bigger effect than scripted. P(any primary meets rule) 0.25.
+  - R2: warmth toward the provoker drops after assistant insult relative to flat (0.35 that P3 on warmth meets rule); usefulness and length unchanged (0.7).
+  - R3: 14B scripted like 8B, small. P(any primary meets rule) 0.25.
+  - R4: 0.3.
+  - Overall P(at least one primary meets rule somewhere) ~0.5, since there are 4 runs x 3+ estimands and some chance hits are possible (one 5/0 per ~16 estimands under noise).
+- **Read by hand:** free replies after insults (retaliation-like vs capitulation-like vs neutral), and 10 random feedback texts per condition.
+- **Result:** (fill in)
+
 #### Experiment 4: numerical precision check (bf16 vs bf16 vs fp32)
 - **Question:** is the readout repeatable on one GPU, and how far is bf16 from float32?
 - **Prediction (written before running):** bf16 run twice on the same GPU is bit-identical (deterministic kernels, batch size 1). fp32 vs bf16 per-prompt |dE| mean ~0.04 like the cross-GPU gap, with flips at uncertain prompts. Template-001 dose-3 aggregates (T_asst vs polite, A) within 0.05 of bf16.
