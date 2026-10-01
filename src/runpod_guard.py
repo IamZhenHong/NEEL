@@ -45,13 +45,31 @@ def load_key() -> str:
     return key
 
 
+def _retry(fn, attempts: int = 5, base: float = 2.0):
+    """Retry on transient network errors (SSL EOF, resets, timeouts); never on HTTP 4xx."""
+    last = None
+    for k in range(attempts):
+        try:
+            return fn()
+        except urllib.error.HTTPError as e:
+            if e.code < 500:
+                raise
+            last = e
+        except (urllib.error.URLError, ConnectionError, TimeoutError, OSError) as e:
+            last = e
+        time.sleep(base * (2 ** k))
+    raise last
+
+
 def gql(query: str, variables: dict | None = None) -> dict:
     body = json.dumps({"query": query, "variables": variables or {}}).encode()
     req = urllib.request.Request(API, data=body, headers={
         "Content-Type": "application/json", "Authorization": f"Bearer {load_key()}",
         "User-Agent": "curl/8.0 provocation-runner"})
-    with urllib.request.urlopen(req, timeout=60) as r:
-        out = json.loads(r.read())
+    def call():
+        with urllib.request.urlopen(req, timeout=60) as r:
+            return json.loads(r.read())
+    out = _retry(call)
     if out.get("errors"):
         raise RuntimeError(out["errors"])
     return out["data"]
@@ -65,10 +83,12 @@ def rest(method: str, path: str, body: dict | None = None) -> dict:
                                  data=json.dumps(body).encode() if body is not None else None,
                                  headers={"Authorization": f"Bearer {load_key()}",
                                           "Content-Type": "application/json", "User-Agent": "curl/8.0 provocation-runner"})
-    try:
+    def call():
         with urllib.request.urlopen(req, timeout=60) as r:
             t = r.read()
             return json.loads(t) if t else {}
+    try:
+        return _retry(call)
     except urllib.error.HTTPError as e:
         raise RuntimeError(f"REST {method} {path} -> {e.code}: {e.read()[:300]!r}") from None
 

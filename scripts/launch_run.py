@@ -47,6 +47,36 @@ def wait_ssh(host, port, timeout=600):
     raise TimeoutError("ssh never came up")
 
 
+def run_detached(host, port, job, pod, poll_s=20):
+    """Start the job in its own session on the pod and poll its log. A dropped ssh connection
+    only interrupts polling, never the job. Returns the job's exit code."""
+    inner = shlex.quote(f"{job}; echo __JOB_EXIT__$?")
+    ssh(host, port, f"rm -f /root/job.log; (setsid nohup bash -c {inner} > /root/job.log 2>&1 < /dev/null &)",
+        timeout=60)
+    offset, misses = 0, 0
+    while True:
+        time.sleep(poll_s)
+        pod.check_budget()
+        try:
+            r = ssh(host, port, f"tail -c +{offset + 1} /root/job.log", check=False, capture=True, timeout=60)
+        except subprocess.TimeoutExpired:
+            r = None
+        if r is None or r.returncode != 0:
+            misses += 1
+            print(f"[pod] poll failed ({misses}); job keeps running on the pod", flush=True)
+            if misses >= 15:
+                raise RuntimeError("lost contact with pod for too long")
+            continue
+        misses = 0
+        chunk = r.stdout
+        if chunk:
+            offset += len(chunk.encode())
+            sys.stdout.write(chunk)
+            sys.stdout.flush()
+        if "__JOB_EXIT__" in chunk:
+            return int(chunk.rsplit("__JOB_EXIT__", 1)[1].split()[0])
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--max-minutes", type=int, required=True)
@@ -121,8 +151,8 @@ def main():
         dirty = subprocess.run(["git", "-C", str(REPO), "status", "--porcelain"], capture_output=True, text=True).stdout.strip()
         rev = rev + ("-dirty" if dirty else "")
         job = f"cd /root/NEEL && export GIT_REV={rev} && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run " + " ".join(shlex.quote(c) for c in cmd)
-        print(f"[pod] running: {job}")
-        rc = ssh(host, port, job, check=False).returncode
+        print(f"[pod] running (detached): {job}")
+        rc = run_detached(host, port, job, pod)
         print(f"[pod] job exit code {rc}; elapsed cost ~${pod.elapsed_cost():.3f}")
 
         (REPO / "results").mkdir(exist_ok=True)
