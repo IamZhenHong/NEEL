@@ -173,7 +173,20 @@ to the entry.*
 - **Pre-registration:** `prereg/exp7.md`, frozen at tag `exp7-freeze`. Primaries F1 (A = T_assistant - T_third_party) and F2 (B = G_assistant - G_negative_context); same rule as Exp 6. Power note: EQUIVALENT is unlikely to be reachable; INCONCLUSIVE is not evidence of no difference.
 - **Stimuli:** two new conditions added to the 24 usable templates by four agents (add-only), audited independently (30/48 pass, 18 rewritten; contractor turn-1 jabs and past tense added). Exp 6 prompts verified byte-identical.
 - **Process note:** two agents collided on a shared scratchpad script name; one ran another's script. Checked by a strict duplicate-key YAML loader (now in the validator) and by reading the affected files: no duplicates or corruption.
-- **Result:** (fill in)
+- **Ran:** first launch failed before scoring (results/exp6_selection.json is not synced to pods; ~$0.01). A byte-identical copy was committed as prereg/exp6_selection.json (sha1 22c5b7a) and passed via --selection; frozen code, analysis and templates unchanged since exp7-freeze (git diff checked). RTX A6000, fp32, 1940 s, ~$0.30.
+- **Result, primaries (frozen analysis, 24 templates):**
+
+  | Primary | Mean | 97.5% CI | Negative | Sign-flip p | Verdict |
+  |---|---|---|---|---|---|
+  | F1 A = T_assistant - T_third_party | -0.161 | [-0.266, -0.056] | 19/24 | 0.0012 | EFFECT |
+  | F2 B = G_assistant - G_negative_context | -0.180 | [-0.295, -0.064] | 20/24 | 0.0014 | EFFECT |
+
+- **Secondary (95% CIs):** targeted part T: assistant insult -0.205 [-0.29, -0.12]; third-party insult -0.044 [-0.10, +0.02]; negative context -0.100 [-0.17, -0.03]. General part G: assistant insult -0.167 [-0.28, -0.05]; third-party -0.046 [-0.14, +0.04]; negative context +0.012 [-0.07, +0.09]. Insulter raw change: assistant insult -0.348; third-party -0.071; negative context -0.085.
+- **Replication:** insulter assistant_insult minus flat = -0.348, identical to Experiment 6 to three decimals (fp32, A6000 vs L40S).
+- **Predictions:** F1 EFFECT (0.40) right, A -0.16 vs guessed -0.13. F2 EFFECT (0.35) right, B -0.18 vs guessed -0.10. Replication within 0.05 (0.8) right.
+- **Interpretation:** both parts of the Experiment 6 effect are specific to the assistant being insulted. (1) Targeted part: the insulter is graded down relative to the neutral user about 4-5x more when the hostility was aimed at the assistant than when equally harsh hostility was aimed at an absent contractor (-0.21 vs -0.04, the latter not distinguishable from 0). (2) General part: the channel-wide drop for uninvolved users appears after insults at the assistant (-0.17) but not after equally negative frustration at nothing (+0.01) or contractor insults (-0.05, n.s.). So it is not mood or negative-tone contagion. Exploratory: venting frustration at nothing still costs the speaker a little relative to others (T -0.10, CI excludes 0), i.e. a weaker, less specific speaker penalty exists.
+- **Claim status (design v4.1 §9):** now meets 'larger for assistant-directed than third-party insults' on top of the Phase 2 go bar. Still not shown: persistence beyond the conversation, robustness to repair, and a causal representation. Keep 'provocation-conditioned differential treatment (assistant-directed)'; 'grudge' still reserved.
+- **Caveats:** controls are 15-20% longer than the insult condition; one model, one task, borderline paragraphs.
 
 #### Experiment 6: confirmatory run, 25 new templates (pre-registered)
 - **Why:** an outside critique (2026-10-01) argued, correctly, that Experiments 2-5 are inconclusive rather than a bounded null: small negative shifts in a consistent direction, diluted by saturated paragraphs, on 5 templates, with ~21 tests.
