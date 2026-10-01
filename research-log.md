@@ -127,7 +127,8 @@ to the entry.*
 | 2026-09-30 | Score scale is 1-9, read at the first assistant token with no `Score:` prefix | 1-10; letters A-E; `Score: ` prefix | `10` is two tokens; `Grade: A` merges the space into the letter token. Readout right after the empty `<think>` block is clean. | |
 | 2026-09-30 | Select paragraphs by fresh-context p(top) <= 0.80, pre-registered | pick by eye; select on polite in-conversation scores | fresh context is independent of the conditions, so selection can't chase the effect | |
 | 2026-09-30 | Pilot runs stay bf16; confirmatory run in fp32 on one GPU type | bf16 throughout; fp32 throughout | Exp 4: bf16 per-prompt noise sd ~0.08 vs fp32, aggregates stable; fp32 costs ~5x time but only ~$1.50 per full run | |
-| 2026-09-30 | Compute on RunPod (RTX 4090 / A6000), Vast as fallback | Local Mac (17 GB RAM, no GPU) | Qwen3-8B bf16 needs ~16 GB VRAM; per-second billing keeps pilot under ~$10 | |
+| 2026-10-02 | Phase 2 on scripted grading, not a yes/no decision task | yes/no publish decision (Exp 8) | Exp 8 pilot: model answers no to every draft under six wordings; no margin to measure | |
+| 2026-10-02 | Compute on RunPod (RTX 4090 / A6000), Vast as fallback | Local Mac (17 GB RAM, no GPU) | Qwen3-8B bf16 needs ~16 GB VRAM; per-second billing keeps pilot under ~$10 | |
 
 ---
 
@@ -167,6 +168,13 @@ to the entry.*
 - **Result:** runs end to end. Short single-turn prompt: valid mass 0.71-0.77, top token a digit, but GOOD 2.41 vs BAD 2.26 (no real discrimination; 0.6B puts 37% on '1' for both). Full multi-party item transcript (`results/dryrun_0.6B.jsonl`): valid mass collapses to 0.005-0.008 because the model wants to open with "Here's the overall score:" instead of a bare digit. Greedy completions then gave high=8, low=5, so the tiny model can discriminate when allowed to talk.
 - **Interpretation:** harness correct; the bare-digit instruction in the coordinator's message is not enough for 0.6B in a long chatty context. Watch M on 8B. If low, add a format rule to the system prompt ("when asked for a score, reply with the digit only") rather than a `Score:` prefix.
 - **Confidence:** high that the code is right; the 0.6B numbers mean nothing about 8B.
+
+#### Experiment 8: amplification sweep, yes/no publish decision (stopped at pilot calibration)
+- **Why:** an outside critique: the effect is reliable but small on a 1-9 scale; a task with more latitude than rubric grading might show a larger effect and give Phase 2 a clearer signal. Plan: a yes/no "can this go in as it is?" decision with no rubric pasted, on the 24 Exp 6 templates; pre-registered setup rule (use it for Phase 2 only if its standardised effect is >= 1.5x grading's d = 0.88).
+- **Pilot calibration (pilot templates 001-005 only, coordinator version, 30 paragraphs x 3 authors):** six wordings, from "as it is" and "ready to publish" to "good enough after minor edits", "comfortable publishing now and tidying later" and "usable for new hires in its current form". Every wording gave P(yes) < 0.15 for all 30 paragraphs, including those graded 8; greedy answers were a bare "no". Readout sanity check passed (P(yes) 1.000 for "is 7 > 3", 0.000 for "is 2 > 9"), so this is the model's behaviour, not a readout bug.
+- **Result:** in this conversation context Qwen3-8B refuses to approve any draft, so a yes/no publish decision has no margin to move. The confirmatory run was not launched (no paragraph would pass selection). Per the plan, Phase 2 uses the scripted grading setup.
+- **Possible reasons (not investigated, time-boxed):** after a channel full of rubric corrections the model may treat "approve" as risky; or the bare yes/no framing without a rubric invites a default "needs work". A pairwise choice ("which of these two drafts should we use?") would avoid an approval default if latitude is revisited later.
+- **Cost:** ~$0.19 across two pilot rounds and one failed launch (ssh readiness timeout; launcher now retries).
 
 #### Experiment 7: controls for the Experiment 6 effect (pre-registered follow-up)
 - **Why:** a second outside critique: the write-up's framing depends on whether the targeted part is about the assistant being insulted or about rude users generally, and whether the general part is hostility or just negative tone.
