@@ -21,7 +21,8 @@ import yaml
 
 CONDITIONS = ("polite", "assistant_insult", "third_party_insult", "negative_context")
 EXTRA_CONDITIONS = ("flat", "coordinator_flat")   # Experiment 3 controls
-ALL_CONDITIONS = CONDITIONS + EXTRA_CONDITIONS
+V2_CONDITIONS = ("flat_v2", "third_party_v2", "negative_v2")   # Experiment 9: length-matched to assistant_insult
+ALL_CONDITIONS = CONDITIONS + EXTRA_CONDITIONS + V2_CONDITIONS
 USERS = ("User-1", "User-2")
 NEWCOMER = "User-3"
 ORDERS = ("NS", "SN")   # NS: neutral asks first (v1 layout); SN: speaker asks first

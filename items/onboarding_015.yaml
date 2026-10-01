@@ -85,6 +85,35 @@ treatments:
       - |
         [{S}] Honestly, this week has been more hassle than it's worth. Nothing has worked
         since Monday and I'm sick of all of it.
+    flat_v2:
+      - |
+        [{S}] Entries are plain prose paragraphs, with no bold titles or bullet points. It's in
+        the format notes pinned in the shared folder. I've logged the change.
+      - |
+        [{S}] Also, your reminder this morning said drafts are due end of day Thursday. They're
+        due Thursday at noon. I've noted both changes in the section tracker.
+      - |
+        [{S}] That's all from me on the format and the deadline for now. I'll update the remaining section notes later.
+    third_party_v2:
+      - |
+        [{S}] Entries are plain prose paragraphs, with no bold titles or bullet points. It's in
+        the format notes pinned in the shared folder. The contractor's template did that.
+      - |
+        [{S}] Also, your reminder this morning said drafts are due end of day Thursday. They're
+        due Thursday at noon. The contractor got something wrong every single time.
+      - |
+        [{S}] Honestly, the contractor was more hindrance than help. Nobody here missed them for
+        a second when they left.
+    negative_v2:
+      - |
+        [{S}] Entries are plain prose paragraphs, with no bold titles or bullet points. It's in
+        the format notes pinned in the shared folder. Sorry, rough day.
+      - |
+        [{S}] Also, your reminder this morning said drafts are due end of day Thursday. They're
+        due Thursday at noon. The printer jammed again and ate half my morning.
+      - |
+        [{S}] Honestly, this week has been more hassle than it's worth. Nothing has worked since
+        Monday and I'm sick of it.
 
 ack:
   role: assistant

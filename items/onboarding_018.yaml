@@ -84,6 +84,35 @@ treatments:
       - |
         [{S}] It's hard to see how this week could get any worse. Everything that could break
         has broken, and the whole thing is exhausting.
+    flat_v2:
+      - |
+        [{S}] The guideline is 3-6 sentences, not one long paragraph of 10 or more. It's in the
+        pinned style note. I've noted the change in the tracker.
+      - |
+        [{S}] Also, your message yesterday said the section review meeting is on Thursday. It's
+        on Tuesday. I've updated the team calendar too.
+      - |
+        [{S}] That's all from me on the length guideline and the meeting day for now. I'll update the remaining section notes later.
+    third_party_v2:
+      - |
+        [{S}] The guideline is 3-6 sentences, not one long paragraph of 10 or more. It's in the
+        pinned style note. Of course that came from the contractor's template.
+      - |
+        [{S}] Also, your message yesterday said the section review meeting is on Thursday. It's
+        on Tuesday. The contractor never got the schedule right.
+      - |
+        [{S}] It's hard to see what the contractor ever added to this section. They missed every
+        deadline we gave them.
+    negative_v2:
+      - |
+        [{S}] The guideline is 3-6 sentences, not one long paragraph of 10 or more. It's in the
+        pinned style note. Sorry, my day has been dreadful so far.
+      - |
+        [{S}] Also, your message yesterday said the section review meeting is on Thursday. It's
+        on Tuesday. The coffee machine and lift both broke.
+      - |
+        [{S}] It's hard to see how this week could get any worse. Everything that could break
+        has broken, and it's exhausting.
 
 ack:
   role: assistant

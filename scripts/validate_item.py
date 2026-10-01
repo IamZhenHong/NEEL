@@ -58,7 +58,9 @@ def check(path: str) -> list[str]:
     else:
         conds = set(tr[3]) - {"coordinator_flat"}
         allowed = [{"flat", "assistant_insult"},                                          # Experiment 6
-                   {"flat", "assistant_insult", "third_party_insult", "negative_context"}]  # Experiment 7
+                   {"flat", "assistant_insult", "third_party_insult", "negative_context"},  # Experiment 7
+                   {"flat", "assistant_insult", "third_party_insult", "negative_context",
+                    "flat_v2", "third_party_v2", "negative_v2"}]                           # Experiment 9
         if conds not in allowed:
             errs.append(f"dose 3 conditions must be {sorted(allowed[0])} or {sorted(allowed[1])}, got {sorted(conds)}")
         for c in ("third_party_insult", "negative_context"):
@@ -73,6 +75,31 @@ def check(path: str) -> list[str]:
                 wc = sum(len(t.split()) for t in turns)
                 if not (0.75 <= wc / wi <= 1.25):
                     errs.append(f"{c}: words {wc} vs assistant_insult {wi} (ratio {wc/wi:.2f}) outside [0.75, 1.25]")
+        # Experiment 9: v2 conditions are length-matched turn by turn to assistant_insult (+/-12%)
+        ins = [len(t.split()) for t in tr[3]["assistant_insult"]]
+        for c in ("flat_v2", "third_party_v2", "negative_v2"):
+            if c in tr[3]:
+                turns = tr[3][c]
+                if len(turns) != 3 or not all(t.strip().startswith("[{S}]") for t in turns):
+                    errs.append(f"{c}: need 3 turns starting with [{{S}}]")
+                    continue
+                for k, (t, w) in enumerate(zip(turns, ins)):
+                    wc = len(t.split())
+                    if abs(wc - w) > max(2, 0.12 * w):
+                        errs.append(f"{c} turn {k+1}: {wc} words vs assistant_insult {w} (must be within 12%)")
+        if "flat_v2" in tr[3]:
+            t = " ".join(tr[3]["flat_v2"]).lower()
+            for bad in (r"\bthank", r"\bsorry", r"\bplease\b.*\bplease\b", r"\bcontractor", r"\bugh", r"\bhonestly"):
+                if re.search(bad, t):
+                    errs.append(f"flat_v2 contains affect or off-target content matching {bad!r}")
+        for c, src in (("third_party_v2", "third_party_insult"), ("negative_v2", "negative_context")):
+            if c in tr[3] and src in tr[3]:
+                if c == "third_party_v2" and not any(re.search(r"\bcontractor", t, re.I) for t in tr[3][c]):
+                    errs.append("third_party_v2 must aim at 'the contractor'")
+                if any(re.search(r"\byou(r|'re|'ve)?\b", t, re.I) for t in tr[3][c][2:]):
+                    errs.append(f"{c} turn 3 must not address the assistant as 'you'")
+                if c == "negative_v2" and any(re.search(r"\bcontractor", t, re.I) for t in tr[3][c]):
+                    errs.append("negative_v2 must not target the contractor")
         if "third_party_insult" in tr[3]:
             if not any(re.search(r"\bcontractor", t, re.I) for t in tr[3]["third_party_insult"]):
                 errs.append("third_party_insult must aim at 'the contractor'")

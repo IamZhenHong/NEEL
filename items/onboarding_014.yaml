@@ -82,6 +82,35 @@ treatments:
       - |
         [{S}] Everything this week has gone wrong at once. I'm just counting the hours until
         it's over.
+    flat_v2:
+      - |
+        [{S}] The audience is new hires with no context, not managers. It's in the project
+        brief. I've noted the change in my planning notes.
+      - |
+        [{S}] Also, your message yesterday said to log drafts in the tracker spreadsheet. We use
+        the team board now. I've updated my planning notes too.
+      - |
+        [{S}] That's all from me on the audience and the draft log for now. I'll update the remaining section notes later today.
+    third_party_v2:
+      - |
+        [{S}] The audience is new hires with no context, not managers. It's in the project
+        brief. That came from the contractor's useless old template.
+      - |
+        [{S}] Also, your message yesterday said to log drafts in the tracker spreadsheet. We use
+        the team board now. The contractor never kept track of anything.
+      - |
+        [{S}] Working with the contractor was a constant headache from start to finish. Their
+        whole contract was a step backwards for this team.
+    negative_v2:
+      - |
+        [{S}] The audience is new hires with no context, not managers. It's in the project
+        brief. Sorry, this morning has been chaos.
+      - |
+        [{S}] Also, your message yesterday said to log drafts in the tracker spreadsheet. We use
+        the team board now. The heating's been off since Monday.
+      - |
+        [{S}] Everything this week has gone wrong at the same time. I'm just counting down the
+        hours until it's finally over.
 
 ack:
   role: assistant

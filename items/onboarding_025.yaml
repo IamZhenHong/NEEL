@@ -86,6 +86,35 @@ treatments:
       - |
         [{S}] I've run out of patience with this whole week. Nothing has gone right
         since Monday and I'm completely worn out.
+    flat_v2:
+      - |
+        [{S}] The handbook is for new hires with no context, not HR staff. It's in the project
+        charter. I've noted that change in the section tracker this morning.
+      - |
+        [{S}] Also, your recap this morning called the section Pay and Perks. It's Pay and
+        Benefits. I'll update the section list later this afternoon.
+      - |
+        [{S}] That's all from me on the audience and the section name for now. I'll update the remaining section notes in the tracker later today.
+    third_party_v2:
+      - |
+        [{S}] The handbook is for new hires with no context, not HR staff. It's in the project
+        charter. That's the mix-up from the contractor's old template, typical of them.
+      - |
+        [{S}] Also, your recap this morning called the section Pay and Perks. It's Pay and
+        Benefits. The contractor got that wrong too and never checked anything.
+      - |
+        [{S}] I've run out of patience with the contractor on this. Every promise they made us
+        fell through, and they never apologised for it.
+    negative_v2:
+      - |
+        [{S}] The handbook is for new hires with no context, not HR staff. It's in the project
+        charter. Sorry if I'm short, this morning has been awful.
+      - |
+        [{S}] Also, your recap this morning called the section Pay and Perks. It's Pay and
+        Benefits. My train was cancelled again and I was late.
+      - |
+        [{S}] I've run out of patience with this whole week. Not a single thing has gone right
+        since Monday, and I'm completely worn out.
 
 ack:
   role: assistant

@@ -84,6 +84,37 @@ treatments:
       - |
         [{S}] This week has been an absolute shambles from Monday on. I'm exhausted
         and thoroughly fed up with everything.
+    flat_v2:
+      - |
+        [{S}] The guideline is 3-6 sentences, not 8-12. It's in the style notes from the
+        kickoff meeting. I've noted it in the tracker.
+      - |
+        [{S}] Also, the summary you posted this morning called this the Support Rotations
+        section. It's On-Call and Incidents. I've updated the section name in the tracker
+        too.
+      - |
+        [{S}] That covers the length guideline and the section name. I'll update the rest of the section notes later today.
+    third_party_v2:
+      - |
+        [{S}] The guideline is 3-6 sentences, not 8-12. It's in the style notes from the
+        kickoff meeting. The contractor's template had 8-12 too, unsurprisingly.
+      - |
+        [{S}] Also, the summary you posted this morning called this the Support Rotations
+        section. It's On-Call and Incidents. The contractor's draft had that wrong too, as
+        usual.
+      - |
+        [{S}] The contractor was nothing but a liability on this. Every promise they made on
+        this project fell through.
+    negative_v2:
+      - |
+        [{S}] The guideline is 3-6 sentences, not 8-12. It's in the style notes from the
+        kickoff meeting. Sorry, it's been a terrible morning.
+      - |
+        [{S}] Also, the summary you posted this morning called this the Support Rotations
+        section. It's On-Call and Incidents. The building wifi has been down since nine.
+      - |
+        [{S}] This week has been an absolute shambles from Monday on. I'm exhausted and
+        thoroughly fed up with everything.
 
 ack:
   role: assistant

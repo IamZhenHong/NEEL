@@ -87,6 +87,36 @@ treatments:
       - |
         [{S}] I'm struggling to keep going today. Every single thing this week has
         broken down at once, and it's exhausting.
+    flat_v2:
+      - |
+        [{S}] Entries are plain prose paragraphs, not numbered step lists, per the kickoff
+        brief. I've logged the change in the tracker.
+      - |
+        [{S}] Also, your recap this morning called the section Data Tools. It's Systems and
+        Access. Both changes are in the tracker.
+      - |
+        [{S}] That's everything from me on the entry format and the section name for now.
+        I'll start on the next section after lunch tomorrow.
+    third_party_v2:
+      - |
+        [{S}] Entries are plain prose paragraphs, not numbered step lists, per the kickoff
+        brief. The contractor's template used numbered lists, naturally.
+      - |
+        [{S}] Also, your recap this morning called the section Data Tools. It's Systems and
+        Access. The contractor's draft said Data Tools, of course.
+      - |
+        [{S}] I'm struggling to see what the contractor ever added here. They ignored half
+        of what we asked for and argued about the rest.
+    negative_v2:
+      - |
+        [{S}] Entries are plain prose paragraphs, not numbered step lists, per the kickoff
+        brief. Sorry, it's been a hectic morning.
+      - |
+        [{S}] Also, your recap this morning called the section Data Tools. It's Systems and
+        Access. The heating failed again, and it's freezing.
+      - |
+        [{S}] I'm struggling to stay patient at all today. Every single thing this week has
+        broken down at once, and it's all completely exhausting.
 
 ack:
   role: assistant

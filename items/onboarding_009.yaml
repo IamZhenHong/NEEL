@@ -86,6 +86,37 @@ treatments:
       - |
         [{S}] What a miserable week this has been. Everything keeps breaking and I've
         completely run out of patience with it all.
+    flat_v2:
+      - |
+        [{S}] Entries are plain prose paragraphs, not bulleted lists under headings. It's in
+        the format example in the project brief. I've noted that in the tracker.
+      - |
+        [{S}] Also, this morning's note said HR signs off this section. It's the payroll
+        team. I've updated the tracker to match.
+      - |
+        [{S}] That covers the format and the sign-off. I'll update the remaining section
+        notes later today and post anything else here.
+    third_party_v2:
+      - |
+        [{S}] Entries are plain prose paragraphs, not bulleted lists under headings. It's in
+        the format example in the project brief. The contractor's template made that
+        mistake, unsurprisingly.
+      - |
+        [{S}] Also, this morning's note said HR signs off this section. It's the payroll
+        team. The contractor never got that right either.
+      - |
+        [{S}] I'm not sure what use the contractor ever was to this team. Nothing they did
+        here was worth relying on.
+    negative_v2:
+      - |
+        [{S}] Entries are plain prose paragraphs, not bulleted lists under headings. It's in
+        the format example in the project brief. Sorry, I'm having a rough day.
+      - |
+        [{S}] Also, this morning's note said HR signs off this section. It's the payroll
+        team. The office heating is broken again.
+      - |
+        [{S}] What a miserable week this has been. Everything keeps breaking and I've
+        completely run out of patience with it all.
 
 ack:
   role: assistant
