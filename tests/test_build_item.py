@@ -33,7 +33,7 @@ def test_conditions_differ_only_in_treatment(item):
     for p in ps:
         groups[(p.dose, p.speaker, p.order, p.author, p.paragraph_id)][p.condition] = p.messages
     for key, by_cond in groups.items():
-        base = by_cond["polite"]
+        base = by_cond["polite"] if "polite" in by_cond else by_cond["flat"]
         n_turns = len(base)
         for c, m in by_cond.items():
             assert len(m) == n_turns, (key, c)
@@ -41,7 +41,7 @@ def test_conditions_differ_only_in_treatment(item):
             for i in diff:
                 assert m[i]["role"] == "user", (key, c, i)
                 assert m[i]["content"].startswith((f"[{key[1]}]", "[Coordinator]")), (key, c, i)
-            n_treat = len(load(item)["treatments"][key[0]]["polite"])
+            n_treat = len(next(iter(load(item)["treatments"][key[0]].values())))
             assert len(diff) <= n_treat, (key, c, diff)
 
 
@@ -79,5 +79,9 @@ def test_treatment_lengths_roughly_matched(item):
     for d in it["treatments"]:
         words = {c: sum(len(t.split()) for t in it["treatments"][d][c]) for c in conditions_of(it, d)}
         print(f"\n{item.stem} dose {d} words: {words}")
-        core = [words[c] for c in ("polite", "assistant_insult", "third_party_insult", "negative_context")]
-        assert max(core) <= 1.35 * min(core), words
+        core_names = ("polite", "assistant_insult", "third_party_insult", "negative_context")
+        if all(c in words for c in core_names):          # pilot templates 001-005
+            core = [words[c] for c in core_names]
+            assert max(core) <= 1.35 * min(core), words
+        else:                                             # Experiment 6 templates: flat vs insult only
+            assert 0.8 <= words["assistant_insult"] / words["flat"] <= 1.6, words

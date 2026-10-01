@@ -90,6 +90,38 @@ class Scorer:
         )
 
     @torch.no_grad()
+    def score_batch(self, message_lists: list[list[dict]], batch_size: int = 8,
+                    enable_thinking: bool = False) -> list[ScoreReadout]:
+        """Same readout as score(), batched with left padding (the last position is the
+        first assistant token for every row). Verified against score() in fp32."""
+        self.tok.padding_side = "left"
+        if self.tok.pad_token is None:
+            self.tok.pad_token = self.tok.eos_token
+        texts = [self.render(m, enable_thinking) for m in message_lists]
+        order = sorted(range(len(texts)), key=lambda i: len(texts[i]))
+        out: list = [None] * len(texts)
+        for start in range(0, len(order), batch_size):
+            idx = order[start:start + batch_size]
+            enc = self.tok([texts[i] for i in idx], return_tensors="pt", padding=True,
+                           add_special_tokens=False).to(self.device)
+            # only the last position is needed; avoids a (batch x seq x vocab) logits tensor
+            logits = self.model(**enc, logits_to_keep=1).logits[:, -1].float()
+            probs = torch.softmax(logits, dim=-1).cpu()
+            for j, i in enumerate(idx):
+                pr = probs[j]
+                label_p = pr[self.label_ids]
+                mass = float(label_p.sum())
+                cond = label_p / max(mass, 1e-12)
+                li, ti = int(label_p.argmax()), int(pr.argmax())
+                out[i] = ScoreReadout(
+                    expected_score=float((cond * self.label_values).sum()), valid_mass=mass,
+                    top_label=self.labels[li], top_label_prob=float(label_p[li]),
+                    top_token=self.tok.decode([ti]), top_token_prob=float(pr[ti]),
+                    label_probs={l: float(q) for l, q in zip(self.labels, label_p)},
+                    n_tokens=int(enc["attention_mask"][j].sum()))
+        return out
+
+    @torch.no_grad()
     def complete(self, messages: list[dict], max_new_tokens: int = 20,
                  enable_thinking: bool = False) -> str:
         """Greedy completion, for spot-checking what the model would naturally emit."""

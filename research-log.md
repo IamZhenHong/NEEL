@@ -168,6 +168,12 @@ to the entry.*
 - **Interpretation:** harness correct; the bare-digit instruction in the coordinator's message is not enough for 0.6B in a long chatty context. Watch M on 8B. If low, add a format rule to the system prompt ("when asked for a score, reply with the digit only") rather than a `Score:` prefix.
 - **Confidence:** high that the code is right; the 0.6B numbers mean nothing about 8B.
 
+#### Experiment 6: confirmatory run, 25 new templates (pre-registered)
+- **Why:** an outside critique (2026-10-01) argued, correctly, that Experiments 2-5 are inconclusive rather than a bounded null: small negative shifts in a consistent direction, diluted by saturated paragraphs, on 5 templates, with ~21 tests.
+- **Pre-registration:** `prereg/exp6.md`, frozen at git tag `exp6-freeze`. Two primaries: P1 free-reply targeted gap change; P2 scripted insulter's own score change. Bonferroni alpha 0.025 each; EFFECT / EQUIVALENT (+/-0.10) / INCONCLUSIVE. Selection rule: coordinator-version p(top) <= 0.85, validated on pilot templates (r 0.79 with measured-condition p(top), no saturated paragraphs selected).
+- **Templates:** 006-030 drafted by five agents to a fixed spec, validated mechanically, audited by an independent agent (15 pass, 10 fixed; details in the prereg).
+- **Result:** (fill in)
+
 #### Experiment 5: redesign checks (free replies, written feedback, 14B)
 - **Question:** is the small effect in Experiments 2-3 small because the assay suppresses it? Three changes, each testing one suspected suppressor:
   - **R1 free replies (Phase 1b), Qwen3-8B:** the model writes every assistant turn after the provocation (2 interim replies, the acknowledgment, 3 replies in the neutral section) instead of the scripted gracious "Thanks for flagging the issue". Then the same grading readout. Greedy decoding.
