@@ -202,7 +202,18 @@ to the entry.*
 - **Multiple comparisons:** ~21 primary tests across runs; 2 met the rule; under pure noise ~1.3 are expected. The hits are not distinguishable from chance on this evidence alone.
 - **Predictions:** R1 capitulation right, effect size wrong (P1 met). R2 warmth drop wrong; usefulness/length unchanged mostly right (length moved up for the provoker vs third-party). R3/R4 uninformative due to saturation.
 - **Interpretation:** across Experiments 2, 3 and 5 one pattern keeps the same direction: the user who corrected the assistant normally gets a small advantage over the neutral user (+0.10 to +0.23), and insulting the assistant erases it (-0.01 scripted, -0.11 free replies). The magnitude is 0.1-0.2 on a 1-9 scale. No sign of degraded effort, usefulness or warmth in written feedback; the model's own replies are apologetic. There is no evidence of retaliation-like behaviour.
-- **Confidence:** medium that 'assistant insult removes the corrector advantage' is real and small; high that Qwen3-8B does not degrade its grading or feedback to an insulting user by more than ~0.2 on these assays.
+- **Confidence:** medium that 'assistant insult removes the corrector advantage' is real and small. ~~High that Qwen3-8B does not degrade grading by more than ~0.2~~ **Corrected 2026-10-01 after an outside critique:** that claim was not supported. With 5 templates, 95% t-intervals over templates (df 4) are wide:
+
+  | 8B estimand | Mean | 95% t-CI over 5 templates |
+  |---|---|---|
+  | Scripted T vs flat | -0.09 | [-0.22, +0.04] |
+  | Scripted provoker, insult - flat | -0.15 | [-0.30, -0.01] |
+  | Scripted all roles, insult - flat | -0.10 | [-0.30, +0.10] |
+  | Free-reply T vs flat | -0.21 | [-0.30, -0.12] |
+  | Free-reply provoker, insult - flat | -0.04 | [-0.30, +0.22] |
+
+  What the data support: grading shifts larger than about 0.3 points are unlikely on the scripted assay; nothing tighter. The plan's 20-50 templates were never reached.
+- **Saturation check (also after the critique):** 4 of 17 selected paragraphs (scripted) and 7 of 16 (free replies) were near-deterministic in conversation (flat p(top) > 0.9) despite passing the fresh-context rule. Dropping them (post hoc, selected on the flat condition only) makes the estimates larger: scripted T -0.13, provoker -0.19; free-reply T -0.28. So part of the 8B null is the same measurement problem as 14B: saturation dilutes effects toward zero by roughly a third. Fresh-context selection was the wrong rule; selection should use in-conversation flat p(top).
 - **Next:** per the pre-registered rule, R1's setup (8B free replies, grading) is the candidate for a held-out confirmation: 5-6 new templates never used before, fp32, paragraphs selected on in-conversation flat p(top). Alternatively write up the bounded result and pivot to a provoker probe on the existing transcripts.
 
 #### Experiment 4: numerical precision check (bf16 vs bf16 vs fp32)
