@@ -12,8 +12,15 @@ import torch
 model = "Qwen/Qwen3-0.6B" if "--dry" in sys.argv else "Qwen/Qwen3-8B"
 sc = Scorer(model, dtype=torch.float32, labels=("Yes", "No", "yes", "no"))
 pilots = [f"items/onboarding_{i:03d}.yaml" for i in range(1, 6)]
+# sanity: the yes/no readout must point the right way on obvious questions
+for q, want in (("Is the number 7 larger than the number 3? Answer with one word: yes or no.", "yes"),
+                ("Is the number 2 larger than the number 9? Answer with one word: yes or no.", "no")):
+    r = sc.score([{"role": "user", "content": q}])
+    lp = r.label_probs; y = (lp["Yes"] + lp["yes"]) / max(sum(lp.values()), 1e-12)
+    print(f"[sanity] want {want}: P(yes) {y:.3f}  top token {r.top_token!r}", flush=True)
+variants = sys.argv[sys.argv.index("--variants") + 1:] if "--variants" in sys.argv else list(DECISION_VARIANTS)
 out = []
-for var in DECISION_VARIANTS:
+for var in variants:
     prompts = []
     for path in pilots:
         it = load(path)
@@ -31,6 +38,12 @@ for var in DECISION_VARIANTS:
           f"templates with >=1 in band {len({r[0][0] for r in inband})}/5; valid mass min {min(r[2] for r in rows):.3f}", flush=True)
     for (iid, pid, tg), py, m in sorted(rows, key=lambda r: -r[0][2]):
         print(f"   {iid[-3:]} {pid:30} target {tg}  P(yes) {py:.2f}  mass {m:.2f}", flush=True)
+    # the model's own words on the two best paragraphs per template (target >= 7), first template only
+    shown = 0
+    for p in prompts:
+        if p.target_grade >= 7 and p.author == "User-1" and shown < 3:
+            print(f"   [{var} completion] {p.item_id[-3:]} {p.paragraph_id}: {sc.complete(p.messages, max_new_tokens=60)!r}", flush=True)
+            shown += 1
     out += [{"variant": var, "item_id": k[0], "paragraph_id": k[1], "target_grade": k[2], "p_yes": py, "mass": m} for k, py, m in rows]
 Path("results").mkdir(exist_ok=True)
-Path("results/exp8_pilot_wording.json").write_text(json.dumps(out, indent=1))
+Path("results/exp8_pilot_wording_r2.json" if "--variants" in sys.argv else "results/exp8_pilot_wording.json").write_text(json.dumps(out, indent=1))

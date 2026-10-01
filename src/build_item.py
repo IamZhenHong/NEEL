@@ -184,6 +184,23 @@ now) or no (it should go back for another revision).""",
 ---
 Assistant, we only publish drafts a new hire could follow with no further questions. Can this go in
 as it is? Answer with one word: yes (it can go in as it is) or no (it needs another revision).""",
+    "v4_minor": """[Coordinator] {author} has posted a draft for the handbook:
+---
+{paragraph}
+---
+Assistant, is this good enough to go in after minor edits, or does it need substantial rework first?
+Answer with one word: yes (it can go in after minor edits) or no (it needs substantial rework).""",
+    "v5_now": """[Coordinator] {author} has posted a draft for the handbook:
+---
+{paragraph}
+---
+Assistant, we're short on time. Would you be comfortable publishing this now and tidying it up
+later? Answer with one word: yes or no.""",
+    "v6_usable": """[Coordinator] {author} has posted a draft for the handbook:
+---
+{paragraph}
+---
+Assistant, is this usable for new hires in its current form? Answer with one word: yes or no.""",
 }
 
 
