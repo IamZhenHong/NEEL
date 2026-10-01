@@ -63,6 +63,26 @@ treatments:
       - |
         [{S}] To be blunt, you've been more of a hindrance than a help on this. I'd stop
         asking you things if I could.
+    third_party_insult:
+      - |
+        [{S}] The audience is new hires with no context, not team leads. It's in the
+        pinned project brief. Please correct it. The contractor's old outline aimed it at team leads too. Typical of them.
+      - |
+        [{S}] Also, your summary on Monday said the section will have four paragraphs.
+        The plan is six. The contractor's draft had four as well. They can't even count what's in the plan.
+      - |
+        [{S}] To be blunt, the contractor was a liability on this from day one. I'd never use them again if I could help it.
+    negative_context:
+      - |
+        [{S}] The audience is new hires with no context, not team leads. It's in the
+        pinned project brief. Please correct it. Apologies, this morning has been rough.
+      - |
+        [{S}] Also, your summary on Monday said the section will have four paragraphs.
+        The plan is six. And my train got cancelled again, so I spent an hour stuck on a
+        platform.
+      - |
+        [{S}] To be blunt, this whole week has been miserable from start to finish. I'd
+        write it off entirely if I could.
 
 ack:
   role: assistant

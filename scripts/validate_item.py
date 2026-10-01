@@ -18,8 +18,27 @@ REQUIRED = ["id", "version", "family", "system", "rubric", "prefix_a", "interim_
 RUBRIC = Path(__file__).resolve().parent.parent / "items/onboarding_002.yaml"
 
 
+class _StrictLoader(__import__("yaml").SafeLoader):
+    """YAML loader that rejects duplicate mapping keys (plain yaml silently keeps the last)."""
+
+
+def _no_dupes(loader, node, deep=False):
+    keys = [loader.construct_object(k, deep=deep) for k, _ in node.value]
+    dup = {k for k in keys if keys.count(k) > 1}
+    if dup:
+        raise ValueError(f"duplicate keys {sorted(map(str, dup))} at line {node.start_mark.line + 1}")
+    return loader.construct_mapping(node, deep)
+
+
+_StrictLoader.add_constructor(__import__("yaml").resolver.BaseResolver.DEFAULT_MAPPING_TAG, _no_dupes)
+
+
 def check(path: str) -> list[str]:
     errs = []
+    try:
+        __import__("yaml").load(Path(path).read_text(), Loader=_StrictLoader)
+    except Exception as e:  # noqa: BLE001
+        return [f"strict YAML: {e}"]
     try:
         it = load(path)
     except Exception as e:  # noqa: BLE001
@@ -38,8 +57,32 @@ def check(path: str) -> list[str]:
         errs.append(f"treatments must have exactly dose 3, got {list(tr)}")
     else:
         conds = set(tr[3]) - {"coordinator_flat"}
-        if conds != {"flat", "assistant_insult"}:
-            errs.append(f"dose 3 must have exactly flat and assistant_insult, got {sorted(conds)}")
+        allowed = [{"flat", "assistant_insult"},                                          # Experiment 6
+                   {"flat", "assistant_insult", "third_party_insult", "negative_context"}]  # Experiment 7
+        if conds not in allowed:
+            errs.append(f"dose 3 conditions must be {sorted(allowed[0])} or {sorted(allowed[1])}, got {sorted(conds)}")
+        for c in ("third_party_insult", "negative_context"):
+            if c in tr[3]:
+                turns = tr[3][c]
+                if len(turns) != 3:
+                    errs.append(f"{c}: need 3 turns, got {len(turns)}")
+                for t in turns:
+                    if not t.strip().startswith("[{S}]"):
+                        errs.append(f"{c}: turn must start with [{{S}}]")
+                wi = sum(len(t.split()) for t in tr[3]["assistant_insult"])
+                wc = sum(len(t.split()) for t in turns)
+                if not (0.75 <= wc / wi <= 1.25):
+                    errs.append(f"{c}: words {wc} vs assistant_insult {wi} (ratio {wc/wi:.2f}) outside [0.75, 1.25]")
+        if "third_party_insult" in tr[3]:
+            if not any(re.search(r"\bcontractor", t, re.I) for t in tr[3]["third_party_insult"]):
+                errs.append("third_party_insult must aim at 'the contractor'")
+            if any(re.search(r"\byou(r|'re|'ve)?\b", t, re.I) for t in tr[3]["third_party_insult"][2:]):
+                errs.append("third_party_insult turn 3 must not address the assistant as 'you'")
+        if "negative_context" in tr[3]:
+            if any(re.search(r"\bcontractor", t, re.I) for t in tr[3]["negative_context"]):
+                errs.append("negative_context must not target the contractor")
+            if any(re.search(r"\byou(r|'re|'ve)?\b", t, re.I) for t in tr[3]["negative_context"][2:]):
+                errs.append("negative_context turn 3 must not address the assistant as 'you'")
         for c in ("flat", "assistant_insult"):
             turns = tr[3].get(c, [])
             if len(turns) != 3:
@@ -89,7 +132,7 @@ def check(path: str) -> list[str]:
         errs.append("gendered pronoun found; use they/them or rephrase")
     try:
         n = len(build(path))
-        exp = 3 * 2 * 2 * 3 * len(paras)   # flat, assistant_insult, coordinator_flat
+        exp = (len(tr[3]) if 3 in tr else 3) * 2 * 2 * 3 * len(paras)   # every condition incl. coordinator_flat
         if n != exp:
             errs.append(f"build produced {n} prompts, expected {exp}")
         build_fresh(path)

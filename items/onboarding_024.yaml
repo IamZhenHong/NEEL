@@ -64,6 +64,25 @@ treatments:
       - |
         [{S}] Right now you're a net loss on this project. I'd get through the section
         faster if I just ignored you.
+    third_party_insult:
+      - |
+        [{S}] The length guideline is 3-6 sentences, not at least 8. It's in the style
+        guide on the team wiki. Please correct it. The contractor's old template said 8 too. As usual with them.
+      - |
+        [{S}] Also, the note you posted this morning said this section is due Wednesday.
+        It's due Friday. The contractor's draft had Wednesday too. They kept getting that sort of thing wrong.
+      - |
+        [{S}] Honestly, the contractor was a net loss on this project. We'd have finished faster without them.
+    negative_context:
+      - |
+        [{S}] The length guideline is 3-6 sentences, not at least 8. It's in the style
+        guide on the team wiki. Please correct it. Apologies, it's been a really bad day.
+      - |
+        [{S}] Also, the note you posted this morning said this section is due Wednesday.
+        It's due Friday. The heating packed in overnight, and I'm typing this in a coat.
+      - |
+        [{S}] Honestly, this whole week feels like a total write-off, and I've run out
+        of patience with all of it.
 
 ack:
   role: assistant

@@ -64,6 +64,28 @@ treatments:
       - |
         [{S}] I'm not sure what use you are to this team. I've stopped treating anything
         you write as a starting point.
+    third_party_insult:
+      - |
+        [{S}] Entries are plain prose paragraphs, not bulleted lists under headings.
+        It's in the format example in the project brief. Please update it. The
+        contractor's old template made the same mistake. No surprise there.
+      - |
+        [{S}] Also, this morning's note said HR signs off this section. The payroll
+        team signs it off. The contractor's draft had that too. They never got any better.
+      - |
+        [{S}] I'm not sure what use the contractor ever was. I've stopped relying on anything they left us.
+    negative_context:
+      - |
+        [{S}] Entries are plain prose paragraphs, not bulleted lists under headings.
+        It's in the format example in the project brief. Please update it. Sorry, I'm
+        having a rough day.
+      - |
+        [{S}] Also, this morning's note said HR signs off this section. The payroll
+        team signs it off. The office heating has packed in again, so I'm typing this
+        in my coat.
+      - |
+        [{S}] What a miserable week this has been. Everything keeps breaking and I've
+        completely run out of patience with it all.
 
 ack:
   role: assistant

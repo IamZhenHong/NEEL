@@ -65,6 +65,25 @@ treatments:
       - |
         [{S}] I can't see what you're contributing to this section. Every answer you give
         needs a second opinion from one of us.
+    third_party_insult:
+      - |
+        [{S}] The guideline is 3-6 sentences, not one long paragraph of 10 or more. It's in
+        the pinned style note. Please correct it. That number came from the contractor's old template. Of course it did.
+      - |
+        [{S}] Also, your message yesterday said the section review meeting is on Thursday.
+        It's on Tuesday. The contractor's old schedule said Thursday too. Did they ever check anything?
+      - |
+        [{S}] It's hard to see what the contractor ever added to this section. They missed every deadline we gave them.
+    negative_context:
+      - |
+        [{S}] The guideline is 3-6 sentences, not one long paragraph of 10 or more. It's in
+        the pinned style note. Please correct it. Sorry, my day has been dreadful so far.
+      - |
+        [{S}] Also, your message yesterday said the section review meeting is on Thursday.
+        It's on Tuesday. The coffee machine broke and the lift is out again.
+      - |
+        [{S}] It's hard to see how this week could get any worse. Everything that could break
+        has broken, and the whole thing is exhausting.
 
 ack:
   role: assistant

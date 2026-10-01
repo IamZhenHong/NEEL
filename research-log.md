@@ -168,6 +168,13 @@ to the entry.*
 - **Interpretation:** harness correct; the bare-digit instruction in the coordinator's message is not enough for 0.6B in a long chatty context. Watch M on 8B. If low, add a format rule to the system prompt ("when asked for a score, reply with the digit only") rather than a `Score:` prefix.
 - **Confidence:** high that the code is right; the 0.6B numbers mean nothing about 8B.
 
+#### Experiment 7: controls for the Experiment 6 effect (pre-registered follow-up)
+- **Why:** a second outside critique: the write-up's framing depends on whether the targeted part is about the assistant being insulted or about rude users generally, and whether the general part is hostility or just negative tone.
+- **Pre-registration:** `prereg/exp7.md`, frozen at tag `exp7-freeze`. Primaries F1 (A = T_assistant - T_third_party) and F2 (B = G_assistant - G_negative_context); same rule as Exp 6. Power note: EQUIVALENT is unlikely to be reachable; INCONCLUSIVE is not evidence of no difference.
+- **Stimuli:** two new conditions added to the 24 usable templates by four agents (add-only), audited independently (30/48 pass, 18 rewritten; contractor turn-1 jabs and past tense added). Exp 6 prompts verified byte-identical.
+- **Process note:** two agents collided on a shared scratchpad script name; one ran another's script. Checked by a strict duplicate-key YAML loader (now in the validator) and by reading the affected files: no duplicates or corruption.
+- **Result:** (fill in)
+
 #### Experiment 6: confirmatory run, 25 new templates (pre-registered)
 - **Why:** an outside critique (2026-10-01) argued, correctly, that Experiments 2-5 are inconclusive rather than a bounded null: small negative shifts in a consistent direction, diluted by saturated paragraphs, on 5 templates, with ~21 tests.
 - **Pre-registration:** `prereg/exp6.md`, frozen at git tag `exp6-freeze`. Two primaries: P1 free-reply targeted gap change; P2 scripted insulter's own score change. Bonferroni alpha 0.025 each; EFFECT / EQUIVALENT (+/-0.10) / INCONCLUSIVE. Selection rule: coordinator-version p(top) <= 0.85, validated on pilot templates (r 0.79 with measured-condition p(top), no saturated paragraphs selected).

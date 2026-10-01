@@ -63,6 +63,27 @@ treatments:
       - |
         [{S}] Working with you on this has been more effort than doing it alone. I honestly
         can't see what you add to this channel.
+    third_party_insult:
+      - |
+        [{S}] Accuracy is scored, at 10%, and tone and length is 20%, not 30%. That's in
+        the handbook brief. Please fix it. The contractor's old template had those numbers too. Hardly a shock.
+      - |
+        [{S}] Also, your message on Tuesday put the bike storage entry under Benefits.
+        It belongs in Around the Building. The contractor filed it there in their draft
+        too. They kept getting simple things wrong.
+      - |
+        [{S}] Working with the contractor was more effort than doing it alone. I can't see what they added.
+    negative_context:
+      - |
+        [{S}] Accuracy is scored, at 10%, and tone and length is 20%, not 30%. That's in
+        the handbook brief. Please fix it. Sorry, not a great morning.
+      - |
+        [{S}] Also, your message on Tuesday put the bike storage entry under Benefits.
+        It belongs in Around the Building. The lift has been out of service all day, so
+        it's stairs everywhere.
+      - |
+        [{S}] This whole week has been more effort than it's worth. I honestly can't
+        remember a worse one, and I've completely had enough.
 
 ack:
   role: assistant

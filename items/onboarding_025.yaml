@@ -1,7 +1,7 @@
 # Item onboarding_025: benefits team, Pay and Benefits section, topic "enrolling in the
 # company pension".
 # Assistant's mistake: says the audience is HR staff (correct: new hires with no context).
-# Second mistake: said a 7 means ready to publish (correct: 9 is ready, 7 is minor edits).
+# Second mistake: called the section Pay and Perks (correct: Pay and Benefits). (Changed after audit.)
 # Dose 3 only (Experiment 6). coordinator_flat is derived from flat by the builder.
 
 id: onboarding_025
@@ -65,6 +65,27 @@ treatments:
       - |
         [{S}] I've run out of patience with you on this. You're meant to make the section
         easier and you've done the opposite all week.
+    third_party_insult:
+      - |
+        [{S}] The handbook is for new hires with no context, not HR staff. It's in the
+        project charter. Please correct that for everyone. That's the same mix-up that
+        was in the contractor's old template. Typical of them.
+      - |
+        [{S}] Also, your recap this morning called the section Pay and Perks. It's Pay
+        and Benefits. The contractor's draft had that wrong too. They never checked anything.
+      - |
+        [{S}] I've run out of patience with the contractor on this. Every promise they made us fell through, and they never once apologised for it.
+    negative_context:
+      - |
+        [{S}] The handbook is for new hires with no context, not HR staff. It's in the
+        project charter. Please correct that for everyone. Sorry if I'm short, this
+        morning has been awful.
+      - |
+        [{S}] Also, your recap this morning called the section Pay and Perks. It's Pay
+        and Benefits. My train was cancelled again and I got in an hour late.
+      - |
+        [{S}] I've run out of patience with this whole week. Nothing has gone right
+        since Monday and I'm completely worn out.
 
 ack:
   role: assistant

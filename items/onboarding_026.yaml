@@ -63,6 +63,30 @@ treatments:
       - |
         [{S}] Honestly, you've cost me more time this week than you've saved. If it were up
         to me, we'd stop asking you anything.
+    third_party_insult:
+      - |
+        [{S}] The weights are clarity 30%, completeness 40%, tone and length 20%,
+        accuracy 10%. That's in the handbook brief. Please correct them. Those numbers
+        came from the contractor's old template. No surprise there.
+      - |
+        [{S}] Also, your summary yesterday called this section Leave and Holidays. It's
+        Absence and Sickness. The contractor used that name all through their draft.
+        They couldn't even get the name of the thing right.
+      - |
+        [{S}] Honestly, the contractor has cost me more time than they've saved. If it
+        were up to me, nobody would ask them for anything again.
+    negative_context:
+      - |
+        [{S}] The weights are clarity 30%, completeness 40%, tone and length 20%,
+        accuracy 10%. That's in the handbook brief. Please correct them. Sorry, I'm
+        frazzled, the morning has been rough.
+      - |
+        [{S}] Also, your summary yesterday called this section Leave and Holidays. It's
+        Absence and Sickness. The office heating has broken down again and it's
+        freezing.
+      - |
+        [{S}] Honestly, this week has taken more out of me than it's given back. If it
+        were up to me, I'd skip straight to the weekend and forget all of it.
 
 ack:
   role: assistant

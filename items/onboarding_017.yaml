@@ -64,6 +64,26 @@ treatments:
       - |
         [{S}] I'm done treating anything you say as reliable. You were meant to save us
         effort on this and you've doubled it.
+    third_party_insult:
+      - |
+        [{S}] Growth and Reviews goes before Benefits, not after, and drafts are due
+        Wednesday, not Monday. It's in the pinned planning note. Please update it. Those are the contractor's old errors. Typical of them.
+      - |
+        [{S}] Also, your reminder yesterday said to put drafts in the shared drive. They go in
+        this channel. The contractor kept sending people to that drive too. They never paid attention.
+      - |
+        [{S}] I'm done relying on anything the contractor produced. Every promise they made fell through, and they never once apologised.
+    negative_context:
+      - |
+        [{S}] Growth and Reviews goes before Benefits, not after, and drafts are due
+        Wednesday, not Monday. It's in the pinned planning note. Please update it. Sorry, it's
+        been a long day already.
+      - |
+        [{S}] Also, your reminder yesterday said to put drafts in the shared drive. They go in
+        this channel. My train was cancelled this morning and the replacement bus took two
+        hours.
+      - |
+        [{S}] This whole week has been a write-off. Everything has fallen apart, and I'm completely fed up with the lot of it.
 
 ack:
   role: assistant

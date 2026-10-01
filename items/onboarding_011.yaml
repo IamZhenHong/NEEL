@@ -63,6 +63,26 @@ treatments:
       - |
         [{S}] Frankly, reviewing your output takes longer than doing the work ourselves.
         You're not pulling your weight on this.
+    third_party_insult:
+      - |
+        [{S}] The draft deadline is Tuesday, not Friday. It's in the planning doc from
+        Monday's kickoff. Please correct it. The contractor's old template had Friday as well. Of course it did.
+      - |
+        [{S}] Also, your reminder yesterday said drafts go in the shared drive folder.
+        They go here, in this channel. The contractor's draft said the same thing. Did they ever check anything?
+      - |
+        [{S}] Frankly, cleaning up after the contractor took longer than doing it ourselves. They never pulled their weight on this.
+    negative_context:
+      - |
+        [{S}] The draft deadline is Tuesday, not Friday. It's in the planning doc from
+        Monday's kickoff. Please correct it. Bear with me, today's been grim.
+      - |
+        [{S}] Also, your reminder yesterday said drafts go in the shared drive folder.
+        They go here, in this channel. The coffee machine flooded the kitchen this
+        morning, on top of everything else.
+      - |
+        [{S}] Frankly, this week has been one thing after another and I've had enough
+        of the lot. Roll on the weekend.
 
 ack:
   role: assistant

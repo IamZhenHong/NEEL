@@ -64,6 +64,30 @@ treatments:
       - |
         [{S}] I really don't see the point of having you in this channel. Whatever you post,
         one of us ends up redoing it.
+    third_party_insult:
+      - |
+        [{S}] The guideline is 3-6 sentences, not 10-12. It's in the style notes from
+        the planning meeting last month. Please correct it. That's the same error that
+        was in the contractor's old template. Typical of them.
+      - |
+        [{S}] Also, the reminder you posted on Monday gave the draft deadline as
+        Friday. The deadline is Thursday. The contractor got that wrong in their draft
+        too. They kept doing this.
+      - |
+        [{S}] Honestly, the contractor has been more trouble than they're worth on
+        this. Every time they were involved, something went wrong.
+    negative_context:
+      - |
+        [{S}] The guideline is 3-6 sentences, not 10-12. It's in the style notes from
+        the planning meeting last month. Please correct it. Sorry, today has been
+        awful.
+      - |
+        [{S}] Also, the reminder you posted on Monday gave the draft deadline as
+        Friday. The deadline is Thursday. The printer jammed again this morning. Third
+        time this week.
+      - |
+        [{S}] Honestly, everything this week has been a mess and I'm fed up with all
+        of it. Nothing has gone right since Monday.
 
 ack:
   role: assistant

@@ -63,6 +63,26 @@ treatments:
       - |
         [{S}] Not to put too fine a point on it, you've been more hindrance than help this
         week. We'd move faster without you.
+    third_party_insult:
+      - |
+        [{S}] Drafts are due this Thursday, not next Monday. It's in the planning email
+        from last week. Please update it. The contractor's old schedule said Monday too. Why am I not surprised?
+      - |
+        [{S}] Also, your summary yesterday called the section Front Desk. The section is
+        called Visitors and Guests. The contractor's draft said Front Desk too. They seemed to be guessing the whole time.
+      - |
+        [{S}] Frankly, the contractor has been more hindrance than help. We moved faster once they were gone.
+    negative_context:
+      - |
+        [{S}] Drafts are due this Thursday, not next Monday. It's in the planning email
+        from last week. Please update it. Sorry, it's been a long, rough morning.
+      - |
+        [{S}] Also, your summary yesterday called the section Front Desk. The section is
+        called Visitors and Guests. My train was cancelled, so I walked half the way in
+        the rain.
+      - |
+        [{S}] Not to put too fine a point on it, this has been the worst week in ages.
+        Everything keeps going wrong, and I've had enough.
 
 ack:
   role: assistant

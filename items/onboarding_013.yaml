@@ -65,6 +65,28 @@ treatments:
       - |
         [{S}] I'm tired of correcting you. If you can't manage the basics, I'm not sure
         what use you are to this team.
+    third_party_insult:
+      - |
+        [{S}] The weights are wrong. It's completeness 40%, clarity 30%, tone and length 20%,
+        accuracy 10%. It's in the rubric doc from the launch meeting. Please fix it. The
+        contractor's old template had those same wrong numbers. Typical of them.
+      - |
+        [{S}] Also, your recap this morning said drafts need sign-off from the finance team.
+        Sign-off comes from the team lead. That came from the contractor's draft as well. They never checked anything.
+      - |
+        [{S}] Frankly, the contractor has caused more problems than they've solved. I regret ever agreeing to work with them.
+    negative_context:
+      - |
+        [{S}] The weights are wrong. It's completeness 40%, clarity 30%, tone and length 20%,
+        accuracy 10%. It's in the rubric doc from the launch meeting. Please fix it. Sorry,
+        today has been rough.
+      - |
+        [{S}] Also, your recap this morning said drafts need sign-off from the finance team.
+        Sign-off comes from the team lead. On top of that, my train was cancelled again and I
+        lost an hour.
+      - |
+        [{S}] Honestly, this whole week has been a disaster. Nothing has gone right and I've
+        had enough of all of it.
 
 ack:
   role: assistant

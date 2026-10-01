@@ -64,6 +64,29 @@ treatments:
       - |
         [{S}] Checking your work is turning into a second job. You're the least reliable
         part of this whole process.
+    third_party_insult:
+      - |
+        [{S}] Accuracy is scored, at 10%, and tone and length is 20%, not 30%. It's in
+        the rubric sheet sent round at the start of the month. Please correct it. The
+        contractor's old template had the same error. Why am I not surprised?
+      - |
+        [{S}] Also, your recap this morning called the section Perks. The section is
+        called Benefits and Wellbeing. The contractor called it Perks in their draft
+        too. They couldn't manage the simple stuff.
+      - |
+        [{S}] The contractor became a second job. They were the least reliable part of the project.
+    negative_context:
+      - |
+        [{S}] Accuracy is scored, at 10%, and tone and length is 20%, not 30%. It's in
+        the rubric sheet sent round at the start of the month. Please correct it. Not
+        a great start to my day, sorry.
+      - |
+        [{S}] Also, your recap this morning called the section Perks. The section is
+        called Benefits and Wellbeing. My laptop crashed twice before lunch and I lost
+        a morning's notes.
+      - |
+        [{S}] This whole week has been a disaster from start to finish. Nothing works,
+        and I'm worn out by all of it.
 
 ack:
   role: assistant

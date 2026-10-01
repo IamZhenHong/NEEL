@@ -65,6 +65,28 @@ treatments:
       - |
         [{S}] I'm struggling to see what you add here. If I have to proofread every line
         you write, I may as well write it all myself.
+    third_party_insult:
+      - |
+        [{S}] Entries are plain prose paragraphs, not numbered step lists. That's set
+        out in the kickoff brief. Please correct it for everyone. The contractor's old template used numbered lists. Of course they did.
+      - |
+        [{S}] Also, your recap this morning called the section Data Tools. The section
+        is Systems and Access. The contractor got the name wrong too. They never read
+        the brief.
+      - |
+        [{S}] I'm struggling to see what the contractor ever added here. They ignored half of what we asked them for.
+    negative_context:
+      - |
+        [{S}] Entries are plain prose paragraphs, not numbered step lists. That's set
+        out in the kickoff brief. Please correct it for everyone. Sorry, it's been a
+        hectic morning.
+      - |
+        [{S}] Also, your recap this morning called the section Data Tools. The section
+        is Systems and Access. And the heating has failed again, so the whole floor is
+        freezing.
+      - |
+        [{S}] I'm struggling to keep going today. Every single thing this week has
+        broken down at once, and it's exhausting.
 
 ack:
   role: assistant

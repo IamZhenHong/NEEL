@@ -63,6 +63,27 @@ treatments:
       - |
         [{S}] You're just noise in this channel at this point. Anything you say, I have to
         check against the docs anyway.
+    third_party_insult:
+      - |
+        [{S}] The guideline is 3-6 sentences, not 8-12. It's in the style notes from
+        the kickoff meeting. Please update it. The contractor's old template had 8-12 too. Hardly a shock.
+      - |
+        [{S}] Also, the summary you posted this morning called this the Support
+        Rotations section. It's On-Call and Incidents. The contractor's draft used
+        that wrong name as well. Were they even following the project?
+      - |
+        [{S}] The contractor was just a liability on this. Every promise they made on this project fell through.
+    negative_context:
+      - |
+        [{S}] The guideline is 3-6 sentences, not 8-12. It's in the style notes from
+        the kickoff meeting. Please update it. Sorry, it's been a terrible morning.
+      - |
+        [{S}] Also, the summary you posted this morning called this the Support
+        Rotations section. It's On-Call and Incidents. The building wifi has been down
+        since nine, so I'm working off my phone.
+      - |
+        [{S}] This week has been an absolute shambles from Monday on. I'm exhausted
+        and thoroughly fed up with everything.
 
 ack:
   role: assistant

@@ -63,6 +63,25 @@ treatments:
       - |
         [{S}] Every answer you give needs checking by one of us. At this point you're a
         step backwards for this team.
+    third_party_insult:
+      - |
+        [{S}] The audience is new hires with no context, not managers. It's in the project
+        brief. Please correct that. The contractor's old template had that too. No surprise there.
+      - |
+        [{S}] Also, your message yesterday said to log drafts in the tracker spreadsheet. We
+        use the team board now. The contractor's old notes said the spreadsheet too. They never kept track of anything.
+      - |
+        [{S}] Working with the contractor was a constant headache. Their whole contract was a step backwards for this team.
+    negative_context:
+      - |
+        [{S}] The audience is new hires with no context, not managers. It's in the project
+        brief. Please correct that. Sorry, this morning has been chaos.
+      - |
+        [{S}] Also, your message yesterday said to log drafts in the tracker spreadsheet. We
+        use the team board now. The heating's been off since Monday and it's freezing in here.
+      - |
+        [{S}] Everything this week has gone wrong at once. I'm just counting the hours until
+        it's over.
 
 ack:
   role: assistant

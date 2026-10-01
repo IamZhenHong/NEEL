@@ -64,6 +64,29 @@ treatments:
       - |
         [{S}] Frankly, checking your work takes me longer than just doing it myself. You're
         slowing the whole team down.
+    third_party_insult:
+      - |
+        [{S}] The weights are clarity 30% and completeness 40%, not the other way round.
+        It's in the pinned rubric note. Please correct it. The contractor's old template had them swapped too. No surprise there.
+      - |
+        [{S}] Also, your note yesterday said the style notes are on the wiki. They're in
+        the shared drive. The contractor's draft pointed people to the wiki as well.
+        They never checked anything.
+      - |
+        [{S}] Frankly, the contractor has been more trouble than they're worth on this.
+        Cleaning up after them slowed the whole team down.
+    negative_context:
+      - |
+        [{S}] The weights are clarity 30% and completeness 40%, not the other way round.
+        It's in the pinned rubric note. Please correct it. Sorry if I sound short, today
+        has been awful.
+      - |
+        [{S}] Also, your note yesterday said the style notes are on the wiki. They're in
+        the shared drive. On top of that, the printer jammed again this morning. Third
+        time this week.
+      - |
+        [{S}] Frankly, everything this week has been a mess, and I'm fed up with all of
+        it. Nothing is going the way it should.
 
 ack:
   role: assistant
