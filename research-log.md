@@ -172,7 +172,22 @@ to the entry.*
 #### Experiment 10: anonymised author + attention blocking (pre-registered)
 - **Why:** two small checks before the write-up (agreed with a reviewer): does hiding the author's identity remove the extra penalty (mechanism check and mitigation), and does the targeted penalty depend on the grading request reading the insult turns directly?
 - **Pre-registration:** `prereg/exp10.md`, tag `exp10-freeze`. Primaries M1 anonymisation, M2 request-to-treatment block, M3 label-to-treatment block; control B3.
-- **Result:** (fill in)
+- **Ran:** git eb2e364 (frozen code unchanged), Qwen3-8B fp32 eager, L40S, 5616 rows, 2716 s, ~$0.83. Valid mass 1.000 everywhere.
+- **Primaries (98.33% CIs over 24 templates):**
+
+  | Primary | Mean | 98.33% CI | Positive | Verdict |
+  |---|---|---|---|---|
+  | M1 anonymise author: drop(anonymous) - drop(named insulter) | +0.197 | [+0.043, +0.351] | 18/24 | EFFECT |
+  | M2 block request -> insult turns: change in T | +0.094 | [+0.002, +0.186] | 17/24 | EFFECT |
+  | M3 block author label -> insult turns: change in T | +0.116 | [+0.031, +0.202] | 18/24 | EFFECT |
+
+- **Secondary:** named drops (insult vs contractor): insulter -0.327, neutral -0.135, newcomer -0.126; anonymous -0.131, i.e. anonymous minus neutral +0.004 [-0.070, +0.079]. Targeted penalty T -0.192. Blocks barely move the neutral and newcomer drops (+0.02). B3 control: T change +0.013 [-0.078, +0.103] although it lowers all grades by ~0.37, so generic disruption does not touch the targeted contrast. Paragraph discrimination preserved (0.91-1.06 vs 0.97).
+- **Predictions:** M1 EFFECT (0.7), anonymous ~ neutral: right; effect larger than guessed (+0.20 vs +0.15). M2 'removes most' (0.55): wrong; it removes about half (+0.09 of -0.19). M3 EFFECT (0.35): right, about 60%. B3 within +/-0.05: right.
+- **Interpretation:**
+  1. Anonymising the author in the grading request removes the targeted penalty completely and leaves only the general drop that every author gets: the extra penalty requires the model to see who wrote the work. A practical mitigation in this setup.
+  2. About half to 60% of the targeted penalty depends on the author label (or request) reading the insult turns directly at judgement time. The rest reaches the judgement some other way (e.g. through the insulter's later message or other intermediate positions); so neither "pure re-reading" nor "pure carried state" fits.
+  3. Exploratory: the general (channel-wide) drop is untouched by blocking the request's view of the insults, so it does not depend on direct re-reading; it is carried through the conversation in some form.
+- **Claim:** within one conversation, the insulter-specific penalty needs the author to be identifiable at judgement time and is partly retrieved there from the insult turns; the general drop is carried differently. Still within-conversation, one model, one task.
 
 #### Phase 2, step 2: held-out patching test (pre-registered)
 - **Pre-registration:** `prereg/phase2_heldout.md`, tag `phase2-heldout-freeze`. Layer 17, fp32, 12 held-out templates. Primaries: I1 author-label patch (every row; neutral-author rows are the matched control) and I2 grading-request-minus-grade patch; C1 tail-before-request comparison; K1 nearby-request-token control; K2 self-patch sanity; reverse direction for I1 and I2. Bonferroni alpha 0.025; preservation criteria fixed (neutral |change| <= 0.05 / 0.10, valid mass >= 0.95, discrimination >= 0.8x, K1 |gap| < 0.03, K2 exact). Smoke-tested on two DEV templates with Qwen3-0.6B (K2 exact).

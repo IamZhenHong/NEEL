@@ -87,3 +87,12 @@ all preservation criteria pass; reverse transfers the full held-out difference (
 patch +0.117 [+0.020, +0.214]. Tail before the request ~0. Details in research-log.md. Natural next
 steps: path test of how the label gets its information (block the label's attention to the insult turns),
 write-up + post-mortem.
+
+## Update: Experiment 10 (tag exp10-results)
+
+Anonymising the author removes the targeted penalty (anonymous drop -0.131 = neutral drop -0.135;
+M1 +0.197, EFFECT). Blocking the author label from attending to the insult turns removes ~60% of it
+(M3 +0.116), blocking the whole request ~half (M2 +0.094); control block leaves the contrast unchanged.
+General drop is unaffected by blocking. Next: redesign towards realistic sabotage tasks (comparative
+choice between two equal drafts; fact-recall summary as a non-person spillover target), pilot on
+templates 001-005 first.
