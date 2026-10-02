@@ -32,9 +32,11 @@ neutral user, or a newcomer. Score = expected grade from next-token probabilitie
   research log entry "Phase 2, step 1". Key numbers: reference targeted difference -0.25; whole-suffix
   patch (contractor -> insult) +0.21 at L16, ~+0.26 at L20+; name-token patch +0.08 at L16 (10/12);
   grade-position patch full only at L24+; added random perturbation ~0.
-- **Running when this note was written:** fine dev sweep, layers 12-20, `--tag _fine`, log
+- **Done (fine sweep):** name-token patch peaks at L17 (+0.11, 10/12; reverse -0.07); window L15-L18. Was running:, layers 12-20, `--tag _fine`, log
   `logs/phase2_dev_fine.log`, outputs `results/phase2_dev_patch_fine.jsonl`. The launcher pulls results
   and terminates the pod itself (cap 60 min, $1.20). Check with `uv run python src/runpod_guard.py`.
+
+## Next run (launched after this note): `scripts/run_phase2_dev2.py --layers 15 17 19`, outputs `results/phase2_dev2_*.jsonl`, summary `scripts/analyze_phase2_dev2.py`, log `logs/phase2_dev2.log`.
 
 ## Facts a reviewer asked about (answer these in the write-up)
 

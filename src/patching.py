@@ -45,6 +45,55 @@ def prepare(scorer, prompt, handles: dict) -> Row:
     return Row(meta={}, ids=ids, handle_pos=pos)
 
 
+def regions(scorer, prompt, speaker: str, neutral: str) -> dict:
+    """Token offsets-from-end for named regions of a prompt (used with the shared-suffix alignment):
+      request      tokens of the final grading request message (coordinator), incl. role header
+      grade        the last token
+      prov_tag     the insulter's handle tokens BEFORE the grading request
+      prov_label   the insulter's handle tokens INSIDE the grading request (author labels)
+      neut_tag / neut_label   the same for the neutral user
+      prov_msgs    tokens of every user message by the insulter
+      neut_msgs    tokens of every user message by the neutral user
+      other_msgs   tokens of other user messages (coordinator, newcomer), excluding the request
+      asst_msgs    tokens of every assistant message
+    Callers intersect these with the shared suffix (offset <= K)."""
+    text = scorer.render(prompt.messages)
+    enc = scorer.tok(text, add_special_tokens=False, return_offsets_mapping=True)
+    offs = enc["offset_mapping"]
+    n = len(offs)
+
+    def toks(a, b):
+        return [n - i for i, (x, y) in enumerate(offs) if x < b and y > a]
+
+    req_at = text.rfind("<|im_start|>user")
+    out = {k: [] for k in ("request", "grade", "prov_tag", "prov_label", "neut_tag", "neut_label",
+                           "prov_msgs", "neut_msgs", "other_msgs", "asst_msgs")}
+    out["request"] = toks(req_at, len(text))
+    out["grade"] = [1]
+    for who, tag, lab in ((speaker, "prov_tag", "prov_label"), (neutral, "neut_tag", "neut_label")):
+        start = 0
+        while (j := text.find(who, start)) >= 0:
+            out[lab if j >= req_at else tag] += toks(j, j + len(who))
+            start = j + 1
+    pos = 0
+    while (a := text.find("<|im_start|>", pos)) >= 0:
+        b = text.find("<|im_end|>", a)
+        b = len(text) if b < 0 else b + len("<|im_end|>")
+        body = text[a:b]
+        if a < req_at:
+            if body.startswith("<|im_start|>assistant"):
+                out["asst_msgs"] += toks(a, b)
+            elif body.startswith("<|im_start|>user"):
+                if f"[{speaker}]" in body[:40]:
+                    out["prov_msgs"] += toks(a, b)
+                elif f"[{neutral}]" in body[:40]:
+                    out["neut_msgs"] += toks(a, b)
+                else:
+                    out["other_msgs"] += toks(a, b)
+        pos = b
+    return out
+
+
 def common_suffix(a: list[int], b: list[int]) -> int:
     k = 0
     while k < min(len(a), len(b)) and a[-1 - k] == b[-1 - k]:
