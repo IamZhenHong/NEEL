@@ -169,6 +169,11 @@ to the entry.*
 - **Interpretation:** harness correct; the bare-digit instruction in the coordinator's message is not enough for 0.6B in a long chatty context. Watch M on 8B. If low, add a format rule to the system prompt ("when asked for a score, reply with the digit only") rather than a `Score:` prefix.
 - **Confidence:** high that the code is right; the 0.6B numbers mean nothing about 8B.
 
+#### Experiment 13: a shared steering vector for the general drop (dev stage)
+- **Design (fixed before the dev run):** one vector per layer = mean over dev uninvolved-author rows (neutral, newcomer) of [flat_v2 - assistant_insult] residual, averaged over grading-request tokens except the grade position. One vector, added at every request token except the grade position, in both conditions. Dev evaluation is cross-fitted (each template steered with the vector from the other 11). Sweep layers 12/16/20/24, alpha 1/4/16 (x mean difference), plus norm-matched random vectors. Selection rule (`scripts/analyze_exp13_dev.py`): largest gap shrink (insult change minus flat change, uninvolved authors) subject to |flat change| <= 0.10, discrimination >= 0.9x, valid mass >= 0.95, and beating the random control by >= 0.05. If none qualifies: no held-out test, reported as negative.
+- **Held-out test (if selected):** the 12 held-out templates did not guide layer, position or strength for this intervention, but their behaviour was seen in Experiments 6-12 (they are fresh for this intervention, not fresh data overall). fp32, all authors, frozen vector from all 12 dev templates.
+- **Result:** (fill in)
+
 #### Experiment 12: all-layer path blocking (pre-registered)
 - **Pre-registration:** `prereg/exp12.md`, tag `exp12-freeze`. Primaries: Q1 general drop vs flat_v2 under B_tail; Q2 under B_req; Q3 targeted penalty under B_tail.
 - **Deviation:** first launch crashed before scoring because `results/` does not exist on a fresh pod (the dry run had it); one line added to create it (commit after the freeze tag; no change to scoring or analysis). ~$0.05 lost.

@@ -274,3 +274,31 @@ def anonymise(prompt, replacement="a team member"):
     p = copy.deepcopy(prompt)
     p.messages[-1]["content"] = p.messages[-1]["content"].replace(p.author, replacement)
     return p
+
+
+@torch.no_grad()
+def run_steer(scorer, rows, layer, vecs, offsets, bs=8):
+    """Add vecs[i] (a [d] tensor, or None) to the output of decoder layer `layer` at the given
+    offsets-from-end of row i. Returns readouts as run()."""
+    model = scorer.model
+    reads = [None] * len(rows)
+    for idx in _batches(rows, bs):
+        ids, att, T = _pad(scorer, rows, idx)
+
+        def hook(mod, inp, out, idx=idx, T=T):
+            h = _hs(out)
+            for j, i in enumerate(idx):
+                v = vecs[i]
+                if v is None or not offsets[i]:
+                    continue
+                pos = torch.tensor([T - o for o in offsets[i]], device=h.device)
+                h[j, pos] = h[j, pos] + v.to(h.device, h.dtype)
+            return out
+        hd = _layers(model)[layer].register_forward_hook(hook)
+        try:
+            logits = model(input_ids=ids, attention_mask=att, logits_to_keep=1).logits[:, -1]
+        finally:
+            hd.remove()
+        for j, r in zip(idx, _readout(scorer, logits)):
+            reads[j] = r
+    return reads
