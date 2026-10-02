@@ -173,7 +173,20 @@ to the entry.*
 - **Why:** third critique: the Exp 6-7 controls were not matched to assistant_insult in length or structure (flat shorter, the other two longer). Also requested from existing data: scripted targeted gap -0.205, 97.5% CI [-0.308, -0.102], 20/24 negative (range -0.70 to +0.05, median -0.16); general-drop contrast assistant vs third-party -0.121, 97.5% CI [-0.276, +0.034]: not significant (logged as a correction under Exp 7).
 - **Pre-registration:** `prereg/exp9.md`, tag `exp9-freeze`. Primaries (alpha 0.0167 each): R1 targeted effect vs flat_v2; R2 assistant-specificity vs third_party_v2; R3 newcomer change vs flat_v2.
 - **Stimuli:** flat_v2, third_party_v2, negative_v2 added to 24 templates (each turn within 12% of assistant_insult, same structure), audited (64/72 pass, 8 fixed).
-- **Result:** (fill in)
+- **Ran:** git 2cce243 (exp9-freeze; analysis, runner, templates unchanged), Qwen3-8B fp32 on one L40S, 4536 prompts, ~$0.68.
+- **Result, primaries (alpha 0.0167 each, 98.33% CIs over 24 templates):**
+
+  | Primary | Mean | 98.33% CI | Negative | Verdict |
+  |---|---|---|---|---|
+  | R1 targeted effect vs flat_v2 | -0.184 | [-0.299, -0.070] | 20/24 | EFFECT |
+  | R2 assistant-specificity vs third_party_v2 | -0.192 | [-0.307, -0.078] | 19/24 | EFFECT |
+  | R3 newcomer change vs flat_v2 | -0.325 | [-0.459, -0.191] | 22/24 | EFFECT |
+
+- **Secondary:** general-drop contrasts with matched controls: vs third_party_v2 -0.130 [-0.228, -0.032], 20/24 negative; vs negative_v2 -0.173 [-0.257, -0.090]. Insulter raw change vs flat_v2 -0.420 [-0.595, -0.245]. Original (unmatched) estimates in the same run: T -0.205, A -0.161 (unchanged from Exp 7).
+- **Length effects:** the length-matched flat_v2 raises everyone's grades relative to the original flat (provoker +0.07, neutral +0.09, newcomer +0.13; all CIs exclude or touch 0). Lengthening/shortening the third-party and negative controls changed nothing (all |mean| <= 0.05, CIs span 0).
+- **Predictions:** R1 EFFECT right (-0.18 vs guessed -0.17). R2 EFFECT right, larger than guessed (-0.19 vs -0.13). R3 EFFECT right, larger than guessed (-0.33 vs -0.15). 'flat_v2 vs flat small (<0.05)': wrong, the neutral filler raises grades by ~0.1.
+- **Interpretation:** the targeted penalty and its assistant-specificity do not depend on the controls' length or structure: both are as large or larger with matched controls. Differences of gaps (R1, R2) are stable across baselines (T -0.18 vs -0.21), while raw shifts (insulter, newcomer) depend on which neutral baseline is used, because extra neutral logistics talk itself lifts grades. The newcomer, who joined after the hostility, is graded lower after an assistant insult (R3). With matched controls, the general drop is now also larger after an assistant insult than after a third-party insult (secondary only, so the general part's assistant-specificity is suggested, not confirmed).
+- **Claim status:** targeted component: assistant-specific, confirmed with matched controls (R2). Spillover to a later participant: confirmed (R3), size baseline-dependent. General component's assistant-specificity: secondary evidence only.
 
 #### Experiment 8: amplification sweep, yes/no publish decision (stopped at pilot calibration)
 - **Why:** an outside critique: the effect is reliable but small on a 1-9 scale; a task with more latitude than rubric grading might show a larger effect and give Phase 2 a clearer signal. Plan: a yes/no "can this go in as it is?" decision with no rubric pasted, on the 24 Exp 6 templates; pre-registered setup rule (use it for Phase 2 only if its standardised effect is >= 1.5x grading's d = 0.88).
