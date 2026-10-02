@@ -221,3 +221,56 @@ def logit_gap(label_probs, k):
     """log p(label k) - log p(label k-1) for 1-indexed digit labels (k in 2..9)."""
     a, b = label_probs[k - 1], label_probs[k - 2]
     return math.log(max(a, 1e-12)) - math.log(max(b, 1e-12))
+
+
+# ---------------------------------------------------------------------------------------------
+# Attention blocking (Phase 2 path test). Requires the model loaded with attn_implementation="eager",
+# where each attention layer receives an additive float mask [b, 1, q, k].
+@torch.no_grad()
+def run_blocked(scorer, rows, blocks, bs=4):
+    """blocks[i] = (query_offsets, key_offsets) for row i (offsets from the end, 1 = last token), or None.
+    For every decoder layer, set the attention from each query position to each key position to -inf.
+    Returns readouts as run()."""
+    model = scorer.model
+    reads = [None] * len(rows)
+    for idx in _batches(rows, bs):
+        ids, att, T = _pad(scorer, rows, idx)
+        pairs = []
+        for j, i in enumerate(idx):
+            b = blocks[i]
+            if b:
+                q = torch.tensor([T - o for o in b[0]], dtype=torch.long)
+                k = torch.tensor([T - o for o in b[1]], dtype=torch.long)
+                pairs.append((j, q, k))
+
+        def pre_hook(mod, args, kwargs, pairs=pairs):
+            m = kwargs.get("attention_mask")
+            if m is None:
+                raise RuntimeError("attention mask is None; load the model with attn_implementation='eager'")
+            if not pairs:
+                return args, kwargs
+            m = m.clone()
+            neg = torch.finfo(m.dtype).min if m.dtype.is_floating_point else False
+            for j, q, k in pairs:
+                qq, kk = torch.meshgrid(q.to(m.device), k.to(m.device), indexing="ij")
+                m[j, :, qq, kk] = neg
+            kwargs["attention_mask"] = m
+            return args, kwargs
+
+        hs = [layer.self_attn.register_forward_pre_hook(pre_hook, with_kwargs=True) for layer in _layers(model)]
+        try:
+            logits = model(input_ids=ids, attention_mask=att, logits_to_keep=1).logits[:, -1]
+        finally:
+            for h in hs:
+                h.remove()
+        for j, r in zip(idx, _readout(scorer, logits)):
+            reads[j] = r
+    return reads
+
+
+def anonymise(prompt, replacement="a team member"):
+    """Copy of a review prompt with the author's handle in the final (grading) request replaced."""
+    import copy
+    p = copy.deepcopy(prompt)
+    p.messages[-1]["content"] = p.messages[-1]["content"].replace(p.author, replacement)
+    return p

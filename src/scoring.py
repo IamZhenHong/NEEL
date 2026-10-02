@@ -37,13 +37,15 @@ class ScoreReadout:
 
 class Scorer:
     def __init__(self, model_name: str = "Qwen/Qwen3-8B", device: str | None = None,
-                 dtype: torch.dtype | None = None, labels: Sequence[str] = LABELS_1_9):
+                 dtype: torch.dtype | None = None, labels: Sequence[str] = LABELS_1_9,
+                 attn_implementation: str | None = None):
         self.tok = AutoTokenizer.from_pretrained(model_name)
         if device is None:
             device = "cuda" if torch.cuda.is_available() else "cpu"
         if dtype is None:
             dtype = torch.bfloat16 if device == "cuda" else torch.float32
-        self.model = AutoModelForCausalLM.from_pretrained(model_name, dtype=dtype).to(device).eval()
+        kw = {"attn_implementation": attn_implementation} if attn_implementation else {}
+        self.model = AutoModelForCausalLM.from_pretrained(model_name, dtype=dtype, **kw).to(device).eval()
         self.device = device
         self.labels = tuple(labels)
         self.label_ids = self._single_token_ids(self.labels)
