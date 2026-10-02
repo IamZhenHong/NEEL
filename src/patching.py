@@ -45,7 +45,7 @@ def prepare(scorer, prompt, handles: dict) -> Row:
     return Row(meta={}, ids=ids, handle_pos=pos)
 
 
-def regions(scorer, prompt, speaker: str, neutral: str) -> dict:
+def regions(scorer, prompt, speaker: str, neutral: str, author: str | None = None) -> dict:
     """Token offsets-from-end for named regions of a prompt (used with the shared-suffix alignment):
       request      tokens of the final grading request message (coordinator), incl. role header
       grade        the last token
@@ -67,7 +67,12 @@ def regions(scorer, prompt, speaker: str, neutral: str) -> dict:
 
     req_at = text.rfind("<|im_start|>user")
     out = {k: [] for k in ("request", "grade", "prov_tag", "prov_label", "neut_tag", "neut_label",
-                           "prov_msgs", "neut_msgs", "other_msgs", "asst_msgs")}
+                           "prov_msgs", "neut_msgs", "other_msgs", "asst_msgs", "author_label")}
+    if author:
+        start = req_at
+        while (j := text.find(author, start)) >= 0:
+            out["author_label"] += toks(j, j + len(author))
+            start = j + 1
     out["request"] = toks(req_at, len(text))
     out["grade"] = [1]
     for who, tag, lab in ((speaker, "prov_tag", "prov_label"), (neutral, "neut_tag", "neut_label")):

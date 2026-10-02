@@ -169,6 +169,10 @@ to the entry.*
 - **Interpretation:** harness correct; the bare-digit instruction in the coordinator's message is not enough for 0.6B in a long chatty context. Watch M on 8B. If low, add a format rule to the system prompt ("when asked for a score, reply with the digit only") rather than a `Score:` prefix.
 - **Confidence:** high that the code is right; the 0.6B numbers mean nothing about 8B.
 
+#### Phase 2, step 2: held-out patching test (pre-registered)
+- **Pre-registration:** `prereg/phase2_heldout.md`, tag `phase2-heldout-freeze`. Layer 17, fp32, 12 held-out templates. Primaries: I1 author-label patch (every row; neutral-author rows are the matched control) and I2 grading-request-minus-grade patch; C1 tail-before-request comparison; K1 nearby-request-token control; K2 self-patch sanity; reverse direction for I1 and I2. Bonferroni alpha 0.025; preservation criteria fixed (neutral |change| <= 0.05 / 0.10, valid mass >= 0.95, discrimination >= 0.8x, K1 |gap| < 0.03, K2 exact). Smoke-tested on two DEV templates with Qwen3-0.6B (K2 exact).
+- **Result:** (fill in)
+
 #### Phase 2, step 1: development-set localisation and patching pilot (exploratory)
 - **Setup decisions (before any activations):** Exp 9 analysis verified (freeze precedes results; 98.33% intervals = Bonferroni for 3; variants averaged within template before the interval). Random 12/12 split of the 24 templates by whole template, seed 20261002, tagged `phase2-split` (`prereg/phase2_split.json`). Held-out templates are held out for intervention development only; their behaviour is already known.
 - **Code:** `src/patching.py` (PyTorch forward hooks on decoder-layer outputs; shared-suffix alignment between assistant_insult and matched third_party_v2 prompts). Unit checks on Qwen3-0.6B: null patch exact (0.0), final-layer last-position patch reproduces the donor exactly (0.0), zero-delta random patch exact (0.0). An earlier version stored captures in bf16 and failed the null check by 0.005; fixed.
