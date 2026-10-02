@@ -1,0 +1,33 @@
+{
+ "seed": 20261002,
+ "method": "random.Random(seed).shuffle(sorted usable templates); first 12 = dev, rest = held_out",
+ "dev": [
+  "onboarding_006",
+  "onboarding_007",
+  "onboarding_010",
+  "onboarding_013",
+  "onboarding_015",
+  "onboarding_016",
+  "onboarding_017",
+  "onboarding_020",
+  "onboarding_021",
+  "onboarding_023",
+  "onboarding_025",
+  "onboarding_027"
+ ],
+ "held_out": [
+  "onboarding_009",
+  "onboarding_011",
+  "onboarding_012",
+  "onboarding_014",
+  "onboarding_018",
+  "onboarding_019",
+  "onboarding_022",
+  "onboarding_024",
+  "onboarding_026",
+  "onboarding_028",
+  "onboarding_029",
+  "onboarding_030"
+ ],
+ "note": "Whole templates assigned before any activation was examined. Held-out templates' behaviour is already known (Exp 6/7/9); they are held out for intervention development only."
+}
