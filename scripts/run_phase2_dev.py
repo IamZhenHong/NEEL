@@ -42,6 +42,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--bs", type=int, default=8)
+    ap.add_argument("--layers", type=int, nargs="+", default=None, help="patching layers (default every 4 + last)")
+    ap.add_argument("--skip-loc", action="store_true", help="skip stage A localisation")
+    ap.add_argument("--tag", default="", help="suffix for output files")
     args = ap.parse_args()
     log = lambda s: print(s, flush=True)  # noqa: E731
     split = json.loads(Path("prereg/phase2_split.json").read_text())
@@ -68,7 +71,7 @@ def main():
     out = Path("results"); out.mkdir(exist_ok=True)
 
     # ---- unpatched baselines ------------------------------------------------------------
-    with open(out / "phase2_dev_base.jsonl", "w") as f:
+    with open(out / f"phase2_dev_base{args.tag}.jsonl", "w") as f:
         for c in CONDS:
             reads, _ = P.run(sc, rows[c], bs=args.bs)
             for r, rd in zip(rows[c], reads):
@@ -76,6 +79,15 @@ def main():
     log(f"[p2dev] baselines done ({time.time()-t0:.0f}s)")
 
     # ---- Stage A: localisation ------------------------------------------------------------
+    don_idx = {key(p): i for i, p in enumerate(prompts["third_party_v2"])}
+    if args.skip_loc:
+        log("[p2dev] skipping localisation")
+    else:
+        localise(sc, args, prompts, rows, nL, out, log, t0)
+    patch_sweep(sc, args, prompts, rows, nL, out, log, t0, rev, don_idx)
+
+
+def localise(sc, args, prompts, rows, nL, out, log, t0):
     from sklearn.linear_model import LogisticRegression
     import numpy as np
     don_idx = {key(p): i for i, p in enumerate(prompts["third_party_v2"])}
@@ -123,16 +135,17 @@ def main():
             accs.append(loto_acc(X, [1] * len(Pv) + [0] * len(Nv), items + items))
         loc["who_probe"][c] = accs
         log(f"[p2dev] who-is-the-insulter probe in {c}: peak acc {max(accs):.2f} at layer {int(np.argmax(accs))}")
-    (out / "phase2_dev_localisation.json").write_text(json.dumps(loc))
-    del pooled
+    (out / f"phase2_dev_localisation{args.tag}.json").write_text(json.dumps(loc))
 
+
+def patch_sweep(sc, args, prompts, rows, nL, out, log, t0, rev, don_idx):
     # ---- Stage B: patching sweep ------------------------------------------------------------
     roles = ("provoker", "neutral")
     rec = [r for r in rows["assistant_insult"] if r.meta["author_role"] in roles]
     rec_p = [p for p in prompts["assistant_insult"] if p.author_role in roles]
     don = [rows["third_party_v2"][don_idx[key(p)]] for p in rec_p]
     Kr = [P.common_suffix(a.ids, b.ids) for a, b in zip(rec, don)]
-    layers = sorted(set(list(range(0, nL, 4)) + [nL - 1]))
+    layers = args.layers or sorted(set(list(range(0, nL, 4)) + [nL - 1]))
 
     def masks(rws, ks, which):
         ms = []
@@ -149,7 +162,7 @@ def main():
             ms.append(m)
         return ms
 
-    f = open(out / "phase2_dev_patch.jsonl", "w")
+    f = open(out / f"phase2_dev_patch{args.tag}.jsonl", "w")
     for L in layers:
         _, capD = P.run(sc, don, bs=args.bs, capture_layers=[L], capture_k=Kr)
         _, capR = P.run(sc, rec, bs=args.bs, capture_layers=[L], capture_k=Kr)

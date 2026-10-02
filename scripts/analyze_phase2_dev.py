@@ -20,10 +20,10 @@ from statistics import mean, stdev
 import math
 
 
-def main(d):
+def main(d, tag=""):
     d = Path(d)
-    base = [json.loads(l) for l in open(d / "phase2_dev_base.jsonl")]
-    patch = [json.loads(l) for l in open(d / "phase2_dev_patch.jsonl")]
+    base = [json.loads(l) for l in open(d / f"phase2_dev_base{tag}.jsonl")]
+    patch = [json.loads(l) for l in open(d / f"phase2_dev_patch{tag}.jsonl")]
     k = lambda r: (r["item_id"], r["speaker"], r["order"], r["author"], r["paragraph_id"])  # noqa: E731
     B = {(r["condition"],) + k(r): r for r in base}
     items = sorted({r["item_id"] for r in base})
@@ -57,7 +57,9 @@ def main(d):
         gc = [a - b for a, b in zip(pv, nv)]
         print(f"{c[0]:8} {c[1]:7} {c[2]:8} {c[3]:>5}  {mean(pv):+9.3f} {mean(nv):+9.3f} {mean(gc):+8.3f} {stdev(gc) if len(gc) > 1 else 0:10.3f}  "
               f"{sum(g > 0 for g in gc):>2}/{len(gc):<2}  {min(mass[c]):8.3f}")
-    loc = json.loads((d / "phase2_dev_localisation.json").read_text())
+    if not (d / f"phase2_dev_localisation{tag}.json").exists():
+        return
+    loc = json.loads((d / f"phase2_dev_localisation{tag}.json").read_text())
     print("\nLOCALISATION (diagnostic): accuracy by layer, every 4th layer")
     Ls = loc["layers"]
     for name, series in [("condition probe @grade", loc["condition_probe"]["grade"]),
@@ -69,4 +71,4 @@ def main(d):
 
 
 if __name__ == "__main__":
-    main(sys.argv[1] if len(sys.argv) > 1 else "results")
+    main(sys.argv[1] if len(sys.argv) > 1 else "results", sys.argv[2] if len(sys.argv) > 2 else "")
