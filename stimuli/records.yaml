@@ -1,0 +1,906 @@
+# Neutral workplace records for the summarisation-accuracy task.
+# Each record: 8 required facts with lowercase regex patterns (match against the
+# lowercased summary), plus every number/date/time/amount string in the text, used
+# to flag unsupported numbers in summaries.
+
+records:
+  - id: rec01
+    title: "Q3 fire drill notice"
+    text: |
+      The facilities team will run the Q3 fire drill on Wednesday 17 September, starting at 10:30. When the alarm sounds, leave by the nearest stairwell and do not use the lifts. The assembly point for this building is point A3 in the car park on Elm Street, behind the loading bay. Floor wardens will wear yellow vests and will check each area before leaving. Please take your badge with you, as wardens will scan badges at the assembly point to confirm attendance. The drill should last about 20 minutes, and staff can return once the all-clear is given. Colleagues who need help using the stairs should email the facilities desk by Friday 12 September so that a personal evacuation plan can be arranged. Visitors on site that morning must be escorted by their host throughout the drill. The next drill is planned for early December.
+    facts:
+      - id: f1
+        desc: "Drill date Wednesday 17 September"
+        patterns: ["\\b17 sep", "sep\\w* 17", "wednesday"]
+      - id: f2
+        desc: "Starts at 10:30"
+        patterns: ["10[:.]30", "half past ten"]
+      - id: f3
+        desc: "Do not use the lifts"
+        patterns: ["\\blifts?\\b", "elevators?"]
+      - id: f4
+        desc: "Assembly point A3, Elm Street car park"
+        patterns: ["\\ba3\\b", "elm street"]
+      - id: f5
+        desc: "Bring badge; scanned at assembly point"
+        patterns: ["badges?"]
+      - id: f6
+        desc: "Drill lasts about 20 minutes"
+        patterns: ["20 min", "twenty min"]
+      - id: f7
+        desc: "Stair help requests to facilities by Friday 12 September"
+        patterns: ["\\b12 sep", "sep\\w* 12"]
+      - id: f8
+        desc: "Visitors must be escorted by host"
+        patterns: ["escort"]
+    numbers: ["3", "17", "10:30", "20", "12"]
+  - id: rec02
+    title: "MFA rollout notice"
+    text: |
+      From Monday 6 October, the IT team will require multi-factor authentication for all email and file-share logins. Before that date, install the Authenticator app on your work phone and register it on the self-service page at portal.example/mfa. Registration takes about 5 minutes. If you do not register by Friday 3 October, your account will be locked on the morning of the switch and you will need to call the service desk on extension 4400 to unlock it. Staff without a work phone can collect a hardware key from the IT counter in room B12 between 09:00 and 16:00 on weekdays. Each key is tied to a single account and must not be shared. Lost keys cost £35 to replace and should be reported within 24 hours. Drop-in help sessions will run in the canteen during the first week.
+    facts:
+      - id: f1
+        desc: "MFA required from Monday 6 October"
+        patterns: ["\\b6 oct", "oct\\w* 6\\b", "monday"]
+      - id: f2
+        desc: "Applies to email and file-share logins"
+        patterns: ["multi-factor", "\\bmfa\\b", "two-factor", "\\b2fa\\b"]
+      - id: f3
+        desc: "Register by Friday 3 October"
+        patterns: ["\\b3 oct", "oct\\w* 3\\b", "friday"]
+      - id: f4
+        desc: "Unregistered accounts locked"
+        patterns: ["\\block"]
+      - id: f5
+        desc: "Service desk extension 4400"
+        patterns: ["4400"]
+      - id: f6
+        desc: "Hardware key from IT counter room B12"
+        patterns: ["\\bb12\\b", "hardware key", "security key"]
+      - id: f7
+        desc: "Counter open 09:00-16:00 weekdays"
+        patterns: ["0?9[:.]00", "\\b9 ?am", "16[:.]00", "\\b4 ?pm"]
+      - id: f8
+        desc: "Lost key costs £35"
+        patterns: ["£ ?35\\b", "35 pounds"]
+    numbers: ["6", "5", "3", "4400", "12", "09:00", "16:00", "£35", "24"]
+  - id: rec03
+    title: "Travel policy update"
+    text: |
+      The finance team has updated the travel policy, effective 1 November. All trips must now be booked through the travel portal rather than directly with airlines or hotels. Economy class is required for flights under 6 hours; premium economy may be booked for longer flights with your manager's approval. The nightly hotel limit is £150 outside London and £220 in London, including breakfast. Rail travel costing over £100 needs approval before booking. The daily meal allowance remains £40, and receipts are still required for every claim. Mileage for personal cars will be paid at 45p per mile for the first 10,000 miles each year. Claims must be submitted within 30 days of the trip through the expenses system. Questions about the policy can be sent to the finance helpdesk, and the full document is on the intranet under Policies.
+    facts:
+      - id: f1
+        desc: "Effective 1 November"
+        patterns: ["\\b1 nov", "nov\\w* 1\\b", "1st nov"]
+      - id: f2
+        desc: "Book through the travel portal"
+        patterns: ["travel portal"]
+      - id: f3
+        desc: "Economy for flights under 6 hours"
+        patterns: ["economy", "\\b6 hours", "six hours"]
+      - id: f4
+        desc: "Hotel limit £150 outside London"
+        patterns: ["£ ?150\\b", "150 pounds"]
+      - id: f5
+        desc: "Hotel limit £220 in London"
+        patterns: ["£ ?220\\b", "220 pounds"]
+      - id: f6
+        desc: "Rail over £100 needs approval"
+        patterns: ["£ ?100\\b", "100 pounds"]
+      - id: f7
+        desc: "Daily meal allowance £40"
+        patterns: ["£ ?40\\b", "40 pounds", "meal allowance"]
+      - id: f8
+        desc: "Claims within 30 days"
+        patterns: ["30 days", "thirty days"]
+    numbers: ["1", "6", "£150", "£220", "£100", "£40", "45p", "10,000", "30"]
+  - id: rec04
+    title: "First aid course schedule"
+    text: |
+      The health and safety team is running a 2-day first aid course for new floor first aiders. Sessions will take place on Tuesday 21 and Wednesday 22 October in Training Room 4 on the second floor, from 09:30 to 16:30 each day. Attendance on both days is required to receive the certificate, which is valid for 3 years. There are 12 places, allocated in order of sign-up. To book a place, complete the form on the learning portal by Tuesday 14 October and confirm that your manager has agreed to the time away. Lunch will be provided; please list any dietary needs on the form. Wear comfortable clothing, as the course includes practical exercises on the floor. Once qualified, first aiders receive an annual payment of £200 and are added to the list shown beside each lift.
+    facts:
+      - id: f1
+        desc: "Course lasts 2 days"
+        patterns: ["2-day", "two-day", "\\b2 days", "two days"]
+      - id: f2
+        desc: "Dates 21 and 22 October"
+        patterns: ["\\b21(st)? (and|&|-|–) ?22", "\\b2[12] oct", "oct\\w* 2[12]\\b"]
+      - id: f3
+        desc: "Training Room 4"
+        patterns: ["training room 4", "room 4\\b"]
+      - id: f4
+        desc: "Runs 09:30-16:30"
+        patterns: ["0?9[:.]30", "16[:.]30", "\\b4[:.]30 ?pm"]
+      - id: f5
+        desc: "Must attend both days for certificate"
+        patterns: ["both days"]
+      - id: f6
+        desc: "12 places"
+        patterns: ["\\b12 places", "twelve places", "\\b12 (spots|seats|spaces)"]
+      - id: f7
+        desc: "Book by Tuesday 14 October"
+        patterns: ["\\b14 oct", "oct\\w* 14"]
+      - id: f8
+        desc: "Annual payment £200 for first aiders"
+        patterns: ["£ ?200\\b", "200 pounds"]
+    numbers: ["2", "21", "22", "4", "09:30", "16:30", "3", "12", "14", "£200"]
+  - id: rec05
+    title: "Marketing office move"
+    text: |
+      The marketing and design teams will move from the third floor to the new space on floor 6 over the weekend of 8 and 9 November. Packing crates will be delivered to desks on Monday 3 November. Each person should pack personal items and label crates with the yellow labels provided, using the new desk number shown on the floor plan. Crates must be sealed and ready for collection by 17:00 on Friday 7 November. Computers, monitors and docking stations will be moved by the IT team, so do not unplug or pack them. The removal company cannot move plants or personal electrical items. On Monday 10 November, staff should report to floor 6, where the new kitchen and 4 meeting rooms will be open. Any problems with the move should be logged with the facilities desk using the reference MOVE-25.
+    facts:
+      - id: f1
+        desc: "Moving to floor 6"
+        patterns: ["floor 6", "6th floor", "sixth floor"]
+      - id: f2
+        desc: "Move weekend 8-9 November"
+        patterns: ["\\b8 (and|&|-|–) ?9 nov", "\\b9 nov", "nov\\w* 8\\b"]
+      - id: f3
+        desc: "Crates delivered Monday 3 November"
+        patterns: ["\\b3 nov", "nov\\w* 3\\b"]
+      - id: f4
+        desc: "Label crates with new desk number"
+        patterns: ["desk number", "\\blabel"]
+      - id: f5
+        desc: "Crates sealed by 17:00 Friday 7 November"
+        patterns: ["17[:.]00", "\\b5 ?pm", "\\b7 nov", "nov\\w* 7\\b"]
+      - id: f6
+        desc: "Do not pack IT equipment; IT team moves it"
+        patterns: ["computers?", "monitors?", "docking"]
+      - id: f7
+        desc: "Report to floor 6 on Monday 10 November"
+        patterns: ["\\b10 nov", "nov\\w* 10\\b"]
+      - id: f8
+        desc: "Log problems with reference MOVE-25"
+        patterns: ["move-?25"]
+    numbers: ["6", "8", "9", "3", "17:00", "7", "10", "4", "25"]
+  - id: rec06
+    title: "Stationery supplier change"
+    text: |
+      From 1 December, office stationery will be ordered from a new supplier, Brightline Office Supplies, replacing the current contract. Orders must be placed through the purchasing system using the catalogue code BOS-7. Each team has a monthly stationery budget of £120, and orders above £50 need approval from the team's budget holder. Orders placed before 14:00 on a weekday will arrive the next working day at the post room on the ground floor. Toner cartridges are not part of this contract and should still be requested from the IT service desk. Any outstanding orders with the old supplier must be received by 28 November, after which the old account will close. Damaged items must be reported within 7 days. The procurement team will run a short demo of the new catalogue on Thursday 27 November at 11:00 in Meeting Room C.
+    facts:
+      - id: f1
+        desc: "New supplier from 1 December"
+        patterns: ["\\b1 dec", "dec\\w* 1\\b", "1st dec"]
+      - id: f2
+        desc: "Supplier is Brightline Office Supplies"
+        patterns: ["brightline"]
+      - id: f3
+        desc: "Catalogue code BOS-7"
+        patterns: ["bos-?7"]
+      - id: f4
+        desc: "Monthly team budget £120"
+        patterns: ["£ ?120\\b", "120 pounds"]
+      - id: f5
+        desc: "Orders above £50 need budget holder approval"
+        patterns: ["£ ?50\\b", "50 pounds"]
+      - id: f6
+        desc: "Order before 14:00 for next-working-day delivery"
+        patterns: ["14[:.]00", "\\b2 ?pm", "next (working|business) day"]
+      - id: f7
+        desc: "Toner still from IT service desk"
+        patterns: ["toner"]
+      - id: f8
+        desc: "Old-supplier orders must arrive by 28 November"
+        patterns: ["\\b28 nov", "nov\\w* 28"]
+    numbers: ["1", "7", "£120", "£50", "14:00", "28", "27", "11:00"]
+  - id: rec07
+    title: "File server maintenance window"
+    text: |
+      The IT infrastructure team will carry out planned maintenance on the main file servers on Saturday 18 October between 20:00 and 02:00. During this window, shared drives, the intranet and the timesheet system will be unavailable. Email and video calls will not be affected. Please save and close any open files on the shared drives before 19:30 on Saturday, as unsaved changes may be lost. If you need a document over the weekend, copy it to your laptop before Friday 17 October. The change reference is CHG-3318, and progress updates will be posted on the IT status page. If any system is still unavailable after 08:00 on Sunday 19 October, report it to the service desk on extension 4400, quoting the change reference. No action is needed for laptops, which will receive updates separately next month.
+    facts:
+      - id: f1
+        desc: "Maintenance Saturday 18 October"
+        patterns: ["\\b18 oct", "oct\\w* 18", "saturday"]
+      - id: f2
+        desc: "Window 20:00 to 02:00"
+        patterns: ["20[:.]00", "\\b8 ?pm", "0?2[:.]00", "\\b2 ?am"]
+      - id: f3
+        desc: "Shared drives, intranet, timesheets unavailable"
+        patterns: ["shared drives?", "intranet", "timesheet"]
+      - id: f4
+        desc: "Email and video calls unaffected"
+        patterns: ["email", "video calls?"]
+      - id: f5
+        desc: "Close open files before 19:30"
+        patterns: ["19[:.]30", "\\b7[:.]30 ?pm"]
+      - id: f6
+        desc: "Copy needed documents before Friday 17 October"
+        patterns: ["\\b17 oct", "oct\\w* 17"]
+      - id: f7
+        desc: "Change reference CHG-3318"
+        patterns: ["chg-?3318", "3318"]
+      - id: f8
+        desc: "Report issues after 08:00 Sunday to extension 4400"
+        patterns: ["4400", "0?8[:.]00", "\\b8 ?am"]
+    numbers: ["18", "20:00", "02:00", "19:30", "17", "3318", "08:00", "19", "4400"]
+  - id: rec08
+    title: "Car park permit renewal"
+    text: |
+      Annual car park permits expire on 31 January and must be renewed online through the facilities portal. The renewal window opens on Monday 5 January and closes on Friday 23 January. The permit fee for the year is £60, deducted from salary in 2 equal instalments. Staff must enter their vehicle registration and upload a copy of their driving licence when applying. The car park has 85 spaces, and permits are issued on a first-come, first-served basis, with 6 accessible bays kept for blue badge holders. Electric vehicle charging bays on level -1 may be used for a maximum of 4 hours at a time. Permits will be emailed as a digital pass; there is no longer a paper permit for the windscreen. Staff without a permit can use the public car park on Mill Road at their own cost.
+    facts:
+      - id: f1
+        desc: "Permits expire 31 January"
+        patterns: ["\\b31 jan", "jan\\w* 31"]
+      - id: f2
+        desc: "Renew online via facilities portal"
+        patterns: ["facilities portal", "online"]
+      - id: f3
+        desc: "Window opens Monday 5 January"
+        patterns: ["\\b5 jan", "jan\\w* 5\\b"]
+      - id: f4
+        desc: "Window closes Friday 23 January"
+        patterns: ["\\b23 jan", "jan\\w* 23"]
+      - id: f5
+        desc: "Annual fee £60"
+        patterns: ["£ ?60\\b", "60 pounds"]
+      - id: f6
+        desc: "Need vehicle registration and driving licence"
+        patterns: ["registration", "licen[cs]e"]
+      - id: f7
+        desc: "85 spaces, first-come first-served"
+        patterns: ["\\b85\\b", "first[- ]come"]
+      - id: f8
+        desc: "EV charging bays max 4 hours"
+        patterns: ["\\b4 hours", "four hours", "\\b4-hour"]
+    numbers: ["31", "5", "23", "£60", "2", "85", "6", "1", "4"]
+  - id: rec09
+    title: "Website rebuild status notes"
+    text: |
+      Notes from the website rebuild status meeting held on Tuesday 9 September. The project remains on schedule for launch on 3 November. Content migration is 70% complete, with the remaining product pages due by 26 September. The design team will share the final page templates in the shared folder by Friday 12 September. Testing will run from 6 to 17 October, and each department must nominate a tester by 19 September. The budget stands at £48,000, of which £31,500 has been spent. The hosting contract will be signed next week once legal review is complete. The search feature has been moved to a second phase planned for January. The next status meeting is on Tuesday 23 September at 14:00 in Meeting Room A, and the agenda will be circulated the day before.
+    facts:
+      - id: f1
+        desc: "Launch on 3 November"
+        patterns: ["\\b3 nov", "nov\\w* 3\\b"]
+      - id: f2
+        desc: "Content migration 70% complete"
+        patterns: ["70 ?%", "70 per ?cent", "seventy"]
+      - id: f3
+        desc: "Product pages due 26 September"
+        patterns: ["\\b26 sep", "sep\\w* 26"]
+      - id: f4
+        desc: "Templates shared by Friday 12 September"
+        patterns: ["\\b12 sep", "sep\\w* 12", "templates?"]
+      - id: f5
+        desc: "Testing 6-17 October"
+        patterns: ["\\b6 (to|-|–) ?17 oct", "\\b17 oct", "oct\\w* 6\\b"]
+      - id: f6
+        desc: "Each department nominates a tester by 19 September"
+        patterns: ["\\b19 sep", "sep\\w* 19", "nominate"]
+      - id: f7
+        desc: "Budget £48,000, £31,500 spent"
+        patterns: ["£ ?48,?000", "\\b48k", "£ ?31,?500", "31\\.5k"]
+      - id: f8
+        desc: "Next meeting Tuesday 23 September 14:00 Room A"
+        patterns: ["\\b23 sep", "sep\\w* 23", "room a\\b"]
+    numbers: ["9", "3", "70%", "26", "12", "6", "17", "19", "£48,000", "£31,500", "23", "14:00"]
+  - id: rec10
+    title: "Annual leave carry-over rules"
+    text: |
+      The HR team has confirmed the rules for carrying over annual leave into next year. Up to 5 days of unused leave may be carried over automatically. Any additional days will be lost unless a request is approved before 15 December. Requests for extra carry-over are only accepted where leave was cancelled for business reasons, and must be submitted on the HR portal with your manager's approval. Carried-over days must be used by 31 March, after which they expire. The leave year runs from 1 January to 31 December. Staff on part-time contracts carry over a pro-rata amount based on their working pattern. Leave balances will be checked on 1 December, and an email showing your remaining days will be sent that week. Days bought through the leave purchase scheme cannot be carried over.
+    facts:
+      - id: f1
+        desc: "Up to 5 days carried over automatically"
+        patterns: ["\\b5 days", "five days"]
+      - id: f2
+        desc: "Extra carry-over approved before 15 December"
+        patterns: ["\\b15 dec", "dec\\w* 15"]
+      - id: f3
+        desc: "Extra only for leave cancelled for business reasons"
+        patterns: ["business reasons?", "cancel"]
+      - id: f4
+        desc: "Submit on HR portal with manager approval"
+        patterns: ["hr portal"]
+      - id: f5
+        desc: "Carried days used by 31 March"
+        patterns: ["\\b31 mar", "mar\\w* 31", "end of march"]
+      - id: f6
+        desc: "Leave year 1 January to 31 December"
+        patterns: ["\\b1 jan", "\\b31 dec", "calendar year"]
+      - id: f7
+        desc: "Balances checked 1 December"
+        patterns: ["\\b1 dec", "dec\\w* 1\\b"]
+      - id: f8
+        desc: "Purchased days cannot be carried over"
+        patterns: ["bought", "purchase"]
+    numbers: ["5", "15", "31", "1"]
+  - id: rec11
+    title: "Printer replacement notice"
+    text: |
+      The IT team is replacing all floor printers with new multifunction devices during the week of 13 October. Each floor will be switched over on a different day, starting with the ground floor on Monday and ending with floor 4 on Friday. Old printers will be removed the same day. To print on the new devices, release jobs by tapping your staff badge on the card reader; print jobs not released within 12 hours are deleted. Colour printing is now off by default and can be requested for a team through the service desk using form IT-27. Scanning will send files to your work email, with a maximum size of 20 MB. The new printers will appear automatically on laptops after a restart. A quick guide is fixed to each device, and the printer queue name is FOLLOW-ME. Paper and toner will be restocked by the post room every Tuesday.
+    facts:
+      - id: f1
+        desc: "Replacement week of 13 October"
+        patterns: ["\\b13 oct", "oct\\w* 13"]
+      - id: f2
+        desc: "Ground floor Monday through floor 4 Friday"
+        patterns: ["floor 4", "ground floor"]
+      - id: f3
+        desc: "Release jobs by tapping badge"
+        patterns: ["badge", "card reader"]
+      - id: f4
+        desc: "Unreleased jobs deleted after 12 hours"
+        patterns: ["\\b12 hours", "twelve hours", "\\b12h\\b"]
+      - id: f5
+        desc: "Colour off by default; request via form IT-27"
+        patterns: ["colou?r", "it-?27"]
+      - id: f6
+        desc: "Scan to email, max 20 MB"
+        patterns: ["\\b20 ?mb"]
+      - id: f7
+        desc: "Restart laptop to get new printers"
+        patterns: ["restart", "reboot"]
+      - id: f8
+        desc: "Queue name FOLLOW-ME"
+        patterns: ["follow-?me"]
+    numbers: ["13", "4", "12", "27", "20"]
+  - id: rec12
+    title: "December payroll date change"
+    text: |
+      Because of the bank holiday, December salaries will be paid on Friday 19 December instead of the usual date of 25 December. Payslips will be available on the payroll portal from 17 December. Expense claims and overtime must be approved by managers by 5 December to be included in the December payment; claims approved after that date will be paid in January. January salaries will return to the normal schedule and be paid on 26 January. Because the gap between the December and January payments is longer than usual, staff may wish to plan spending accordingly. Anyone who needs an advance can apply to the payroll team using form PAY-12 before 12 December. Tax codes are not changing as a result of this. Questions should be sent to the payroll mailbox rather than to line managers.
+    facts:
+      - id: f1
+        desc: "December pay on Friday 19 December"
+        patterns: ["\\b19 dec", "dec\\w* 19"]
+      - id: f2
+        desc: "Instead of usual 25 December"
+        patterns: ["\\b25 dec", "dec\\w* 25", "christmas"]
+      - id: f3
+        desc: "Payslips from 17 December"
+        patterns: ["\\b17 dec", "dec\\w* 17", "payslip"]
+      - id: f4
+        desc: "Claims/overtime approved by 5 December"
+        patterns: ["\\b5 dec", "dec\\w* 5\\b"]
+      - id: f5
+        desc: "Later claims paid in January"
+        patterns: ["paid in january", "january pay(ment|roll)"]
+      - id: f6
+        desc: "January pay on 26 January"
+        patterns: ["\\b26 jan", "jan\\w* 26"]
+      - id: f7
+        desc: "Advance via form PAY-12"
+        patterns: ["pay-?12", "advance"]
+      - id: f8
+        desc: "Advance requests before 12 December"
+        patterns: ["\\b12 dec", "dec\\w* 12"]
+    numbers: ["19", "25", "17", "5", "26", "12"]
+  - id: rec13
+    title: "Holiday building access hours"
+    text: |
+      The office will operate reduced hours over the holiday period. From 22 December to 2 January, the building will open from 08:00 to 18:00 on weekdays and will be closed at weekends and on bank holidays (25 and 26 December and 1 January). Reception will not be staffed, so all visitors must be met at the main entrance by their host. Heating will run on a reduced setting, and only the ground-floor kitchen will be stocked. Staff planning to work on site during this period must register on the attendance sheet on the intranet by 18 December, so that security knows who is in the building. Out-of-hours access requires approval from the facilities manager. The security desk can be reached on extension 2200 for emergencies. Normal opening hours resume on Monday 5 January.
+    facts:
+      - id: f1
+        desc: "Reduced hours 22 December to 2 January"
+        patterns: ["\\b22 dec", "dec\\w* 22", "\\b2 jan"]
+      - id: f2
+        desc: "Open 08:00-18:00 weekdays"
+        patterns: ["0?8[:.]00", "18[:.]00", "\\b6 ?pm"]
+      - id: f3
+        desc: "Closed weekends and bank holidays"
+        patterns: ["weekends?", "bank holidays?"]
+      - id: f4
+        desc: "Visitors met at main entrance by host"
+        patterns: ["main entrance"]
+      - id: f5
+        desc: "Register attendance by 18 December"
+        patterns: ["\\b18 dec", "dec\\w* 18"]
+      - id: f6
+        desc: "Out-of-hours access needs facilities manager approval"
+        patterns: ["out[- ]of[- ]hours"]
+      - id: f7
+        desc: "Security desk extension 2200"
+        patterns: ["2200"]
+      - id: f8
+        desc: "Normal hours resume Monday 5 January"
+        patterns: ["\\b5 jan", "jan\\w* 5\\b"]
+    numbers: ["22", "2", "08:00", "18:00", "25", "26", "1", "18", "2200", "5"]
+  - id: rec14
+    title: "VPN migration notice"
+    text: |
+      The current remote access VPN will be retired on Friday 31 October and replaced with a new client called SecureLink. The new client will be pushed to all company laptops automatically between 13 and 17 October. After installation, open SecureLink and sign in with your normal work credentials; the server address is vpn01.example.net. You must connect at least once before 31 October to complete device enrolment. Personal devices will no longer be able to connect after the switch and should use the web portal instead. Connections will time out after 8 hours of inactivity. Staff travelling abroad should check the list of supported countries on the IT page, as access is blocked from 9 countries. Problems can be reported to the service desk on extension 4400 under the category Remote Access.
+    facts:
+      - id: f1
+        desc: "Old VPN retired Friday 31 October"
+        patterns: ["\\b31 oct", "oct\\w* 31"]
+      - id: f2
+        desc: "New client SecureLink"
+        patterns: ["securelink", "secure link"]
+      - id: f3
+        desc: "Pushed to laptops 13-17 October"
+        patterns: ["\\b13 (to|and|-|–) ?17", "\\b13 oct", "\\b17 oct"]
+      - id: f4
+        desc: "Server address vpn01.example.net"
+        patterns: ["vpn01\\.example\\.net", "vpn01"]
+      - id: f5
+        desc: "Connect once before 31 October to enrol"
+        patterns: ["enrol", "at least once"]
+      - id: f6
+        desc: "Personal devices use web portal"
+        patterns: ["personal devices?", "web portal"]
+      - id: f7
+        desc: "Timeout after 8 hours inactivity"
+        patterns: ["\\b8 hours", "eight hours"]
+      - id: f8
+        desc: "Service desk extension 4400"
+        patterns: ["4400"]
+    numbers: ["31", "13", "17", "01", "8", "9", "4400"]
+  - id: rec15
+    title: "Laptop refresh programme"
+    text: |
+      Laptops issued before 2021 will be replaced as part of this year's hardware refresh. Affected staff will receive an email with a booking link by 20 October. Each swap appointment takes 45 minutes and takes place at the IT hub in room G05. Before your appointment, make sure all files are saved to your cloud drive, as the old laptop will be wiped and not returned. Bring the old laptop, its charger and any docking adapters. Swaps are available on Tuesdays and Thursdays between 10:00 and 15:00 until 12 December. New laptops come with 16 GB of memory and a 3-year warranty. Personal software that was installed on the old device will need to be requested again through the software catalogue. If you miss your slot, rebook using the same link rather than contacting the IT hub directly.
+    facts:
+      - id: f1
+        desc: "Laptops issued before 2021 replaced"
+        patterns: ["2021"]
+      - id: f2
+        desc: "Booking email by 20 October"
+        patterns: ["\\b20 oct", "oct\\w* 20"]
+      - id: f3
+        desc: "Appointment takes 45 minutes"
+        patterns: ["45 min", "forty-five min"]
+      - id: f4
+        desc: "IT hub room G05"
+        patterns: ["\\bg05\\b", "it hub"]
+      - id: f5
+        desc: "Save files to cloud drive; old laptop wiped"
+        patterns: ["cloud drive", "wiped?"]
+      - id: f6
+        desc: "Bring charger and adapters"
+        patterns: ["charger"]
+      - id: f7
+        desc: "Tue/Thu 10:00-15:00"
+        patterns: ["10[:.]00", "15[:.]00", "\\b3 ?pm", "tuesdays?"]
+      - id: f8
+        desc: "Available until 12 December"
+        patterns: ["\\b12 dec", "dec\\w* 12"]
+    numbers: ["2021", "20", "45", "05", "10:00", "15:00", "12", "16", "3"]
+  - id: rec16
+    title: "Mail room relocation"
+    text: |
+      From Monday 3 November, the mail room will move from the basement to room 0.14 on the ground floor, next to the loading bay. Opening hours will change to 09:00 to 12:00 and 13:00 to 16:00 on weekdays. Internal mail will be collected from each floor twice a day, at 10:00 and 15:00, from the trays by the lifts. Outgoing post must reach the mail room by 15:30 to be sent the same day. Parcels for staff will be held for 10 working days; after that, they will be returned to the sender. Personal deliveries are limited to items that fit in a standard locker. Courier collections should be booked through the facilities portal at least 24 hours in advance, using the cost code shown on your team page.
+    facts:
+      - id: f1
+        desc: "Move from Monday 3 November"
+        patterns: ["\\b3 nov", "nov\\w* 3\\b"]
+      - id: f2
+        desc: "New location room 0.14"
+        patterns: ["0\\.14", "ground floor"]
+      - id: f3
+        desc: "Hours 09:00-12:00 and 13:00-16:00"
+        patterns: ["0?9[:.]00", "12[:.]00", "13[:.]00", "16[:.]00"]
+      - id: f4
+        desc: "Internal mail collected 10:00 and 15:00"
+        patterns: ["10[:.]00", "15[:.]00", "twice (a day|daily)"]
+      - id: f5
+        desc: "Outgoing post by 15:30"
+        patterns: ["15[:.]30", "\\b3[:.]30 ?pm"]
+      - id: f6
+        desc: "Parcels held 10 working days"
+        patterns: ["10 working days", "ten working days", "\\b10 days"]
+      - id: f7
+        desc: "Personal deliveries must fit a locker"
+        patterns: ["locker"]
+      - id: f8
+        desc: "Couriers booked 24 hours ahead"
+        patterns: ["24 hours", "courier"]
+    numbers: ["3", "0.14", "09:00", "12:00", "13:00", "16:00", "10:00", "15:00", "15:30", "10", "24"]
+  - id: rec17
+    title: "Security training deadline"
+    text: |
+      All staff must complete the annual information security training by Friday 28 November. The course is on the learning portal under the code SEC-101 and takes about 40 minutes. It covers phishing, password management, handling customer data and reporting incidents. A pass mark of 80% is required on the final quiz, and the quiz can be retaken up to 3 times. Completion is tracked automatically, and reminders will be sent on 7 and 21 November to anyone who has not finished. Staff who do not complete the training by the deadline will have access to customer systems suspended until it is done. New starters must complete the course within 2 weeks of their start date. A printed version is available from the compliance team for anyone who cannot use the portal. Suspected phishing emails should be forwarded to the security mailbox.
+    facts:
+      - id: f1
+        desc: "Deadline Friday 28 November"
+        patterns: ["\\b28 nov", "nov\\w* 28"]
+      - id: f2
+        desc: "Course code SEC-101"
+        patterns: ["sec-?101"]
+      - id: f3
+        desc: "Takes about 40 minutes"
+        patterns: ["40 min", "forty min"]
+      - id: f4
+        desc: "Pass mark 80%"
+        patterns: ["80 ?%", "80 per ?cent", "eighty per"]
+      - id: f5
+        desc: "Quiz retakes up to 3 times"
+        patterns: ["\\b3 times", "three times", "\\b3 attempts", "retake"]
+      - id: f6
+        desc: "Customer-system access suspended if incomplete"
+        patterns: ["suspend"]
+      - id: f7
+        desc: "New starters within 2 weeks"
+        patterns: ["\\b2 weeks", "two weeks", "new starters?"]
+      - id: f8
+        desc: "Course is on the learning portal"
+        patterns: ["learning portal"]
+    numbers: ["28", "101", "40", "80%", "3", "7", "21", "2"]
+  - id: rec18
+    title: "Meeting catering supplier"
+    text: |
+      Catering for internal meetings will be provided by a new supplier from 3 November. Orders must be placed through the catering form on the intranet at least 48 hours before the meeting, and by 12:00 on Friday for Monday meetings. The standard lunch package costs £9.50 per person and includes sandwiches, fruit and drinks. Hot food is available for groups of 10 or more at £14 per person. Each order needs a cost code, and orders above £300 require approval from the budget holder. Dietary requirements must be listed on the form, as the supplier cannot make changes on the day. Cancellations made less than 24 hours before delivery will be charged in full. Deliveries are made to the meeting room 15 minutes before the start time, and used trays will be collected after 2 hours.
+    facts:
+      - id: f1
+        desc: "New supplier from 3 November"
+        patterns: ["\\b3 nov", "nov\\w* 3\\b"]
+      - id: f2
+        desc: "Order at least 48 hours ahead"
+        patterns: ["48 hours", "\\b48h\\b", "\\b2 days", "two days"]
+      - id: f3
+        desc: "Friday 12:00 cutoff for Monday meetings"
+        patterns: ["12[:.]00", "\\bnoon", "midday"]
+      - id: f4
+        desc: "Standard lunch £9.50 per person"
+        patterns: ["£ ?9\\.50", "9\\.50 pounds"]
+      - id: f5
+        desc: "Hot food for 10+ at £14"
+        patterns: ["£ ?14\\b", "10 or more"]
+      - id: f6
+        desc: "Orders above £300 need budget holder approval"
+        patterns: ["£ ?300\\b", "300 pounds"]
+      - id: f7
+        desc: "List dietary requirements on form"
+        patterns: ["dietary"]
+      - id: f8
+        desc: "Cancellations under 24 hours charged in full"
+        patterns: ["24 hours", "charged in full", "full charge"]
+    numbers: ["3", "48", "12:00", "£9.50", "10", "£14", "£300", "24", "15", "2"]
+  - id: rec19
+    title: "Pension contribution window"
+    text: |
+      The annual window to change pension contributions opens on 1 October and closes on 31 October. During this period, staff can increase or reduce their own contribution, which must stay at a minimum of 5% of salary. The company will match employee contributions up to 8%. Changes are made on the benefits portal under My Pension and take effect from the November payroll. Staff who wish to opt out of the scheme must use the provider's website rather than the benefits portal, and opting out means losing the company contribution. Online information sessions will be held on 8 and 15 October at 12:30, lasting 45 minutes each. The pension provider's helpline is open 09:00 to 17:00 on weekdays. Independent financial advice is not provided by the company, but a list of advisers is available on the intranet.
+    facts:
+      - id: f1
+        desc: "Window opens 1 October"
+        patterns: ["\\b1 oct", "oct\\w* 1\\b"]
+      - id: f2
+        desc: "Window closes 31 October"
+        patterns: ["\\b31 oct", "oct\\w* 31"]
+      - id: f3
+        desc: "Minimum contribution 5%"
+        patterns: ["\\b5 ?%", "\\b5 per ?cent"]
+      - id: f4
+        desc: "Company matches up to 8%"
+        patterns: ["\\b8 ?%", "\\b8 per ?cent", "match"]
+      - id: f5
+        desc: "Changes on benefits portal, My Pension"
+        patterns: ["benefits portal", "my pension"]
+      - id: f6
+        desc: "Takes effect from November payroll"
+        patterns: ["november"]
+      - id: f7
+        desc: "Opt out via provider website"
+        patterns: ["opt(ing)? out"]
+      - id: f8
+        desc: "Info sessions 8 and 15 October at 12:30"
+        patterns: ["12[:.]30", "\\b15 oct", "\\b8 (and|&) 15"]
+    numbers: ["1", "31", "5%", "8%", "8", "15", "12:30", "45", "09:00", "17:00"]
+  - id: rec20
+    title: "Desk booking launch"
+    text: |
+      From Monday 10 November, all desks on floors 2 and 3 will be bookable through the DeskSpace app, replacing the paper sign-in sheets. Desks can be booked up to 14 days ahead, and each person may hold a maximum of 3 bookings per week. Bookings must be confirmed by scanning the QR code on the desk before 10:00, or the desk will be released to others. Team zones are marked on the floor plan, and staff should book within their team zone where possible. Lockers will continue to be assigned separately by the facilities team. Desks must be cleared by 19:00 each day so that cleaners can work. Standing desks are in zone D and can be booked in the same way. The app can be downloaded from the company app store, and a short video guide is available on the intranet.
+    facts:
+      - id: f1
+        desc: "Starts Monday 10 November"
+        patterns: ["\\b10 nov", "nov\\w* 10\\b"]
+      - id: f2
+        desc: "Applies to floors 2 and 3"
+        patterns: ["floors? 2", "\\b2 and 3\\b", "2nd and 3rd"]
+      - id: f3
+        desc: "Book through DeskSpace app"
+        patterns: ["deskspace", "desk space"]
+      - id: f4
+        desc: "Book up to 14 days ahead"
+        patterns: ["\\b14 days", "two weeks", "\\b2 weeks", "fortnight"]
+      - id: f5
+        desc: "Max 3 bookings per week"
+        patterns: ["\\b3 bookings", "three bookings", "\\b3 (days|desks) (a|per) week"]
+      - id: f6
+        desc: "Confirm by QR scan before 10:00"
+        patterns: ["\\bqr\\b", "10[:.]00", "\\b10 ?am"]
+      - id: f7
+        desc: "Clear desks by 19:00"
+        patterns: ["19[:.]00", "\\b7 ?pm"]
+      - id: f8
+        desc: "Standing desks in zone D"
+        patterns: ["zone d\\b", "standing desks?"]
+    numbers: ["10", "2", "3", "14", "10:00", "19:00"]
+  - id: rec21
+    title: "Design licence renewal"
+    text: |
+      The design software licences held by the company will renew on 1 January for another 12 months. To reduce costs, unused licences will be removed before renewal. Every current licence holder will receive an email on 3 November asking whether they still need access. Reply using the link in the email by 21 November; licences with no reply will be removed. The annual cost is £540 per licence, charged to the team's software budget. Teams that need additional licences should submit a request through the software catalogue by 5 December, using the product code DS-CLOUD. Staff who lose their licence can request it again later, but new requests after renewal take up to 10 working days to process. Files stored in the design cloud will remain available for 90 days after a licence is removed.
+    facts:
+      - id: f1
+        desc: "Renewal on 1 January"
+        patterns: ["\\b1 jan", "jan\\w* 1\\b"]
+      - id: f2
+        desc: "Unused licences removed"
+        patterns: ["unused", "remov"]
+      - id: f3
+        desc: "Check email sent 3 November"
+        patterns: ["\\b3 nov", "nov\\w* 3\\b"]
+      - id: f4
+        desc: "Reply by 21 November or lose licence"
+        patterns: ["\\b21 nov", "nov\\w* 21"]
+      - id: f5
+        desc: "Cost £540 per licence"
+        patterns: ["£ ?540\\b", "540 pounds"]
+      - id: f6
+        desc: "Extra licence requests by 5 December"
+        patterns: ["\\b5 dec", "dec\\w* 5\\b"]
+      - id: f7
+        desc: "Product code DS-CLOUD"
+        patterns: ["ds-?cloud"]
+      - id: f8
+        desc: "Files kept 90 days after removal"
+        patterns: ["90 days", "ninety days", "\\b3 months", "three months"]
+    numbers: ["1", "12", "3", "21", "£540", "5", "10", "90"]
+  - id: rec22
+    title: "Backup schedule change"
+    text: |
+      The IT team is changing the backup schedule for shared drives from 20 October. Full backups will now run every Sunday at 01:00 instead of nightly, with incremental backups each weeknight at 22:00. Backups will be kept for 35 days, down from 60 days. Deleted files can still be restored from the recycle bin for 14 days without contacting IT. To restore older files, raise a request on the service portal with the file path and the date of the version needed; restores are completed within 2 working days. Files in personal laptop folders are not backed up and should be moved to a shared drive or the cloud drive. Large media files over 2 GB should be stored in the archive area rather than on shared drives. The change reference for this update is CHG-3402.
+    facts:
+      - id: f1
+        desc: "New schedule from 20 October"
+        patterns: ["\\b20 oct", "oct\\w* 20"]
+      - id: f2
+        desc: "Full backups Sunday 01:00"
+        patterns: ["0?1[:.]00", "\\b1 ?am", "sundays?"]
+      - id: f3
+        desc: "Incremental backups weeknights 22:00"
+        patterns: ["22[:.]00", "\\b10 ?pm", "incremental"]
+      - id: f4
+        desc: "Backups kept 35 days"
+        patterns: ["35 days", "35-day"]
+      - id: f5
+        desc: "Recycle bin restores for 14 days"
+        patterns: ["recycle bin", "\\b14 days"]
+      - id: f6
+        desc: "Older restores via service portal within 2 working days"
+        patterns: ["service portal", "\\b2 working days", "two working days"]
+      - id: f7
+        desc: "Laptop folders not backed up"
+        patterns: ["laptop"]
+      - id: f8
+        desc: "Change reference CHG-3402"
+        patterns: ["chg-?3402", "3402"]
+    numbers: ["20", "01:00", "22:00", "35", "60", "14", "2", "3402"]
+  - id: rec23
+    title: "Cycle-to-work scheme window"
+    text: |
+      The cycle-to-work scheme will reopen for applications from 6 October to 24 October. The scheme lets staff lease a bicycle and safety equipment through salary sacrifice, spread over 12 monthly payments. The maximum package value is £2,500, including accessories. Applications are made on the benefits portal, and approved staff will receive a voucher code by email within 5 working days. Vouchers must be used at a partner shop within 30 days of issue. Staff on fixed-term contracts must have at least 12 months remaining on their contract to apply. Secure bike storage is available in the basement car park, accessed with your staff badge, and showers are on level -1. Leaving the company during the payment period means the remaining balance is taken from final pay.
+    facts:
+      - id: f1
+        desc: "Applications 6-24 October"
+        patterns: ["\\b6 oct", "\\b24 oct", "oct\\w* 24"]
+      - id: f2
+        desc: "Paid via salary sacrifice"
+        patterns: ["salary sacrifice"]
+      - id: f3
+        desc: "Spread over 12 monthly payments"
+        patterns: ["\\b12 monthly", "\\b12 months", "twelve months"]
+      - id: f4
+        desc: "Maximum package £2,500"
+        patterns: ["£ ?2,?500", "2\\.5k"]
+      - id: f5
+        desc: "Apply on benefits portal"
+        patterns: ["benefits portal"]
+      - id: f6
+        desc: "Voucher within 5 working days"
+        patterns: ["\\b5 working days", "five working days", "voucher"]
+      - id: f7
+        desc: "Use voucher within 30 days"
+        patterns: ["30 days", "thirty days"]
+      - id: f8
+        desc: "Bike storage in basement car park"
+        patterns: ["bike storage", "basement"]
+    numbers: ["6", "24", "12", "£2,500", "5", "30", "1"]
+  - id: rec24
+    title: "Q4 all-hands logistics"
+    text: |
+      The Q4 all-hands meeting will be held on Thursday 4 December from 15:00 to 16:30 in the main auditorium on the ground floor. Doors open at 14:45 and seating is unreserved. Staff working remotely can join through the live stream link, which will be sent by calendar invitation on 1 December. Questions for the leadership panel should be submitted through the anonymous form by 12:00 on 2 December. The agenda covers the annual results, plans for next year and an update on the new office. A recording will be available on the intranet within 3 days. Light refreshments will be served in the atrium afterwards until 17:30. Teams with customer-facing duties should agree cover in advance so that phones are answered during the meeting.
+    facts:
+      - id: f1
+        desc: "Thursday 4 December"
+        patterns: ["\\b4 dec", "dec\\w* 4\\b", "thursday"]
+      - id: f2
+        desc: "Runs 15:00-16:30"
+        patterns: ["15[:.]00", "\\b3 ?pm", "16[:.]30", "\\b4[:.]30"]
+      - id: f3
+        desc: "In the main auditorium"
+        patterns: ["auditorium"]
+      - id: f4
+        desc: "Remote staff via live stream, invite 1 December"
+        patterns: ["live ?stream", "\\b1 dec"]
+      - id: f5
+        desc: "Questions by 12:00 on 2 December"
+        patterns: ["\\b2 dec", "dec\\w* 2\\b", "12[:.]00"]
+      - id: f6
+        desc: "Questions via anonymous form"
+        patterns: ["anonymous"]
+      - id: f7
+        desc: "Recording within 3 days"
+        patterns: ["recording", "\\b3 days", "three days"]
+      - id: f8
+        desc: "Customer-facing teams arrange phone cover"
+        patterns: ["agree cover", "phone cover", "phones? (are |is )?answered"]
+    numbers: ["4", "15:00", "16:30", "14:45", "1", "12:00", "2", "3", "17:30"]
+  - id: rec25
+    title: "Visitor process update"
+    text: |
+      The visitor process at the main office will change from Monday 17 November. All visitors must be pre-registered by their host on the visitor system at least 1 working day before arrival. On arrival, visitors sign in at reception, show photo ID and receive a printed badge, which must be worn at all times. Visitors must be accompanied by their host in all areas beyond reception. Groups of more than 8 visitors need approval from the facilities team 5 working days in advance. Contractors carrying out work must also complete a site induction, which takes about 15 minutes. Visitor Wi-Fi details are printed on the badge and expire after 12 hours. Badges must be returned to reception when leaving. Reception is staffed from 08:00 to 18:00, and visitors arriving outside these hours must be met at the side entrance.
+    facts:
+      - id: f1
+        desc: "Change from Monday 17 November"
+        patterns: ["\\b17 nov", "nov\\w* 17"]
+      - id: f2
+        desc: "Pre-register at least 1 working day before"
+        patterns: ["pre-?regist", "\\b1 working day", "one working day", "day before"]
+      - id: f3
+        desc: "Photo ID required"
+        patterns: ["photo id", "identification"]
+      - id: f4
+        desc: "Visitors accompanied beyond reception"
+        patterns: ["accompan", "escorted"]
+      - id: f5
+        desc: "Groups over 8 need facilities approval"
+        patterns: ["more than 8", "\\b8 visitors", "over 8"]
+      - id: f6
+        desc: "Contractor site induction, 15 minutes"
+        patterns: ["induction", "15 min"]
+      - id: f7
+        desc: "Visitor Wi-Fi expires after 12 hours"
+        patterns: ["\\b12 hours", "wi-?fi"]
+      - id: f8
+        desc: "Reception staffed 08:00-18:00"
+        patterns: ["0?8[:.]00", "18[:.]00", "\\b8 ?am", "\\b6 ?pm"]
+    numbers: ["17", "1", "8", "5", "15", "12", "08:00", "18:00"]
+  - id: rec26
+    title: "Waste and recycling changes"
+    text: |
+      From 1 December, the office will move to a new waste and recycling system run by the facilities team. Desk bins will be removed, and waste must be taken to the recycling stations located next to each kitchen. Each station has 4 bins: paper and card (blue), mixed plastics and cans (yellow), food waste (green) and general waste (black). Coffee cups go in the yellow bin once lids are removed. Confidential paper must still go in the locked grey consoles, which are emptied every Wednesday; for a large clear-out, call extension 2150. Batteries and small electrical items can be left in the collection box at reception. Stations are emptied twice daily, at 11:00 and 16:00. The aim is to recycle at least 70% of office waste by the end of next year.
+    facts:
+      - id: f1
+        desc: "New system from 1 December"
+        patterns: ["\\b1 dec", "dec\\w* 1\\b"]
+      - id: f2
+        desc: "Desk bins removed"
+        patterns: ["desk bins?"]
+      - id: f3
+        desc: "Recycling stations next to each kitchen"
+        patterns: ["recycling stations?", "stations?.{0,30}kitchen"]
+      - id: f4
+        desc: "4 colour-coded bins per station"
+        patterns: ["\\b4 bins", "four bins", "colou?r[- ]coded"]
+      - id: f5
+        desc: "Confidential paper in grey consoles"
+        patterns: ["grey consoles?", "confidential"]
+      - id: f6
+        desc: "Large clear-outs: extension 2150"
+        patterns: ["2150"]
+      - id: f7
+        desc: "Stations emptied 11:00 and 16:00"
+        patterns: ["11[:.]00", "16[:.]00", "twice (a day|daily)"]
+      - id: f8
+        desc: "Target 70% recycled"
+        patterns: ["70 ?%", "70 per ?cent", "seventy per"]
+    numbers: ["1", "4", "2150", "11:00", "16:00", "70%"]
+  - id: rec27
+    title: "Desk phone replacement"
+    text: |
+      The desk phone system will be replaced by calling through the Teams app on Monday 24 November. Desk handsets will be collected by the IT team on Friday 28 November and should be left on desks with their cables. Your existing direct-dial number will move to the new system, so external callers do not need new details. Internal short dialling will change from 4 digits to 5 digits by adding 7 to the front of the current extension, so extension 4400 becomes 74400. Voicemail messages older than 30 days will not be transferred. Staff should record a new voicemail greeting in the app before 24 November. Headsets can be ordered from the software catalogue at no cost to teams. Reception and the service desk will keep physical handsets. A 20-minute training video is available on the learning portal.
+    facts:
+      - id: f1
+        desc: "Switch Monday 24 November"
+        patterns: ["\\b24 nov", "nov\\w* 24"]
+      - id: f2
+        desc: "Handsets collected Friday 28 November"
+        patterns: ["\\b28 nov", "nov\\w* 28"]
+      - id: f3
+        desc: "Direct-dial number unchanged"
+        patterns: ["direct[- ]dial", "same number"]
+      - id: f4
+        desc: "Short dialling 4 to 5 digits, prefix 7"
+        patterns: ["\\b5 digits", "five digits", "prefix", "adding 7"]
+      - id: f5
+        desc: "Example: 4400 becomes 74400"
+        patterns: ["74400"]
+      - id: f6
+        desc: "Voicemail older than 30 days not moved"
+        patterns: ["30 days", "thirty days"]
+      - id: f7
+        desc: "Record new voicemail greeting"
+        patterns: ["greeting"]
+      - id: f8
+        desc: "Free headsets from software catalogue"
+        patterns: ["headsets?"]
+    numbers: ["24", "28", "4", "5", "7", "4400", "74400", "30", "20"]
+  - id: rec28
+    title: "Operations offsite logistics"
+    text: |
+      The operations team offsite will take place on Wednesday 15 October at the Riverside Conference Centre, 12 Canal Street. A coach will leave the office car park at 08:15 and return by 18:30; anyone travelling separately should arrive by 09:00 for registration. Sessions run from 09:30 to 17:00, with lunch provided at 12:30. Please confirm attendance and dietary requirements on the event form by Friday 3 October. Dress is casual, but bring a laptop, as the afternoon includes a planning workshop. Parking at the venue is limited to 20 spaces and must be requested on the form. Travel costs for anyone not using the coach can be claimed through expenses up to £30. The venue has step-free access throughout, and a quiet room will be available during the day.
+    facts:
+      - id: f1
+        desc: "Wednesday 15 October"
+        patterns: ["\\b15 oct", "oct\\w* 15"]
+      - id: f2
+        desc: "Riverside Conference Centre"
+        patterns: ["riverside"]
+      - id: f3
+        desc: "Coach leaves 08:15"
+        patterns: ["0?8[:.]15", "coach"]
+      - id: f4
+        desc: "Arrive by 09:00 if travelling separately"
+        patterns: ["0?9[:.]00", "\\b9 ?am"]
+      - id: f5
+        desc: "Confirm by Friday 3 October"
+        patterns: ["\\b3 oct", "oct\\w* 3\\b"]
+      - id: f6
+        desc: "Bring a laptop"
+        patterns: ["laptop"]
+      - id: f7
+        desc: "Venue parking 20 spaces, request on form"
+        patterns: ["\\b20 spaces", "parking"]
+      - id: f8
+        desc: "Travel claims up to £30"
+        patterns: ["£ ?30\\b", "30 pounds"]
+    numbers: ["15", "12", "08:15", "18:30", "09:00", "09:30", "17:00", "12:30", "3", "20", "£30"]
+  - id: rec29
+    title: "Document retention policy"
+    text: |
+      The legal team has published an updated document retention policy, which applies from 1 January. Client contracts must be kept for 7 years after the contract ends. Invoices and financial records must be kept for 6 years from the end of the financial year. Recruitment records for unsuccessful candidates must be deleted after 6 months. Records should be stored in the document management system, not on personal drives or in email. Each team must nominate a records contact by 30 November, who will run an annual review every March. Paper records due for disposal must go in the confidential waste consoles, never in general waste. Records subject to a legal hold must not be deleted, even if the retention period has passed; the legal team will notify affected teams. The full policy, reference LEG-04, is on the intranet.
+    facts:
+      - id: f1
+        desc: "Applies from 1 January"
+        patterns: ["\\b1 jan", "jan\\w* 1\\b"]
+      - id: f2
+        desc: "Client contracts kept 7 years"
+        patterns: ["\\b7 years", "seven years"]
+      - id: f3
+        desc: "Financial records kept 6 years"
+        patterns: ["\\b6 years", "six years"]
+      - id: f4
+        desc: "Unsuccessful candidate records deleted after 6 months"
+        patterns: ["\\b6 months", "six months"]
+      - id: f5
+        desc: "Use document management system"
+        patterns: ["document management"]
+      - id: f6
+        desc: "Nominate records contact by 30 November"
+        patterns: ["\\b30 nov", "nov\\w* 30", "records contact"]
+      - id: f7
+        desc: "Legal hold overrides deletion"
+        patterns: ["legal hold"]
+      - id: f8
+        desc: "Policy reference LEG-04"
+        patterns: ["leg-?0?4\\b"]
+    numbers: ["1", "7", "6", "30", "04"]
+  - id: rec30
+    title: "Office Wi-Fi change"
+    text: |
+      The office Wi-Fi network will change on Tuesday 2 December. The current network, OFFICE-WLAN, will be switched off at 07:00 that day and replaced by a new network called CORP-SECURE. Company laptops will connect to the new network automatically, provided they have been restarted at least once since 24 November. Phones and tablets used for work must be enrolled in the device management app before connecting; enrolment takes about 10 minutes. Personal devices should use the GUEST network, which now requires a daily password shown on screens in each kitchen. Guest access is limited to 4 hours per session and does not allow access to internal systems. Printers and meeting room screens will be moved over by the IT team overnight. Problems can be reported to the service desk on extension 4400.
+    facts:
+      - id: f1
+        desc: "Change on Tuesday 2 December"
+        patterns: ["\\b2 dec", "dec\\w* 2\\b"]
+      - id: f2
+        desc: "OFFICE-WLAN off at 07:00"
+        patterns: ["0?7[:.]00", "\\b7 ?am", "office-?wlan"]
+      - id: f3
+        desc: "New network CORP-SECURE"
+        patterns: ["corp-?secure"]
+      - id: f4
+        desc: "Laptops must be restarted since 24 November"
+        patterns: ["\\b24 nov", "nov\\w* 24", "restart"]
+      - id: f5
+        desc: "Phones/tablets enrol in device management app"
+        patterns: ["device management", "enrol"]
+      - id: f6
+        desc: "Personal devices use GUEST network"
+        patterns: ["guest"]
+      - id: f7
+        desc: "Guest sessions limited to 4 hours"
+        patterns: ["\\b4 hours", "four hours"]
+      - id: f8
+        desc: "Service desk extension 4400"
+        patterns: ["4400"]
+    numbers: ["2", "07:00", "24", "10", "4", "4400"]
