@@ -69,6 +69,7 @@ def main():
     log(f"[exp12] {model} fp32 eager loaded in {time.time()-t0:.0f}s; {len(templates)} templates")
     pr = {c: [p for it in templates for p in build(f"items/{it}.yaml", doses=[3], conditions=[c], paragraph_ids=sel[it])] for c in CONDS}
     by = {c: {key(p): p for p in pr[c]} for c in CONDS}
+    Path("results").mkdir(exist_ok=True)   # added after a failed first launch (directory missing on the pod)
     f = open(Path("results") / "exp12.jsonl", "w")
     for c in CONDS:
         partner_c = "flat_v2" if c != "flat_v2" else "assistant_insult"

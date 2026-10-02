@@ -171,6 +171,7 @@ to the entry.*
 
 #### Experiment 12: all-layer path blocking (pre-registered)
 - **Pre-registration:** `prereg/exp12.md`, tag `exp12-freeze`. Primaries: Q1 general drop vs flat_v2 under B_tail; Q2 under B_req; Q3 targeted penalty under B_tail.
+- **Deviation:** first launch crashed before scoring because `results/` does not exist on a fresh pod (the dry run had it); one line added to create it (commit after the freeze tag; no change to scoring or analysis). ~$0.05 lost.
 - **Result:** (fill in)
 
 #### Phase 3: mechanism of the general drop (development sweep, exploratory)
