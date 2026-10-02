@@ -79,3 +79,11 @@ neutral user, or a newcomer. Score = expected grade from next-token probabilitie
   `runpod-workflow.md` has the pitfalls.
 - Mac disk is ~98% full (~4-5 GB free); keep large artefacts on pods.
 - Validator `scripts/validate_item.py`; tests `uv run pytest -q tests/` (180 pass).
+
+## Update: Phase 2 held-out test done (tag phase2-heldout-results)
+
+I1 author-label patch at L17: gap change +0.097, 97.5% CI [+0.051, +0.144], 12/12, neutral +0.003,
+all preservation criteria pass; reverse transfers the full held-out difference (-0.147). I2 request
+patch +0.117 [+0.020, +0.214]. Tail before the request ~0. Details in research-log.md. Natural next
+steps: path test of how the label gets its information (block the label's attention to the insult turns),
+write-up + post-mortem.
