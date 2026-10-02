@@ -172,7 +172,22 @@ to the entry.*
 #### Experiment 12: all-layer path blocking (pre-registered)
 - **Pre-registration:** `prereg/exp12.md`, tag `exp12-freeze`. Primaries: Q1 general drop vs flat_v2 under B_tail; Q2 under B_req; Q3 targeted penalty under B_tail.
 - **Deviation:** first launch crashed before scoring because `results/` does not exist on a fresh pod (the dry run had it); one line added to create it (commit after the freeze tag; no change to scoring or analysis). ~$0.05 lost.
-- **Result:** (fill in)
+- **Ran:** git 47167ac, fp32 eager, L40S, 9720 rows, 4773 s. The local launcher was killed by the 60-minute background-task limit mid-run; the job kept running on the pod, results were pulled by hand and the pod terminated by hand (~$1.75 total). Analysis code unchanged since the freeze (checked).
+- **Result, primaries (98.33% CIs, 24 templates):** Q1 general drop vs flat_v2 under B_tail +0.080 [-0.057, +0.217], 18/24: INCONCLUSIVE. Q2 under B_req +0.141 [+0.038, +0.244], 18/24: EFFECT. Q3 targeted penalty under B_tail +0.124 [+0.042, +0.207], 20/24: EFFECT.
+- **Secondary (95% CIs):**
+
+  | Baseline | Unblocked | B_tail | B_req | B_both | B_ctrl |
+  |---|---|---|---|---|---|
+  | G vs flat_v2 | -0.280 | +0.080 | +0.141 | +0.289 (all) | -0.001 |
+  | T vs flat_v2 | -0.184 | +0.124 | +0.090 | +0.184 (all) | -0.044 |
+  | G vs third_party_v2 | -0.130 | +0.044 | +0.017 | +0.158 (all) | -0.040 |
+  | T vs third_party_v2 | -0.192 | +0.128 | +0.100 | +0.192 (all) | -0.029 |
+
+  Paragraph discrimination 0.89-0.97 vs 0.95 unblocked; mean grade unchanged (7.14-7.24).
+- **Predictions:** Q1 'tail removes most of G': wrong (+0.08, not significant). Q2 'request block small': wrong (+0.14, half of G). Q3 EFFECT: right, larger than guessed (+0.12). B_both > 80%: right (all). B_ctrl small: right.
+- **Interpretation:** the provocation information reaches the grade by two parallel routes: the grading request attending directly to the insult turns, and the intervening conversation (which itself attended to the insults). Each route alone carries part of each effect; blocking both removes all of it, and an equally large unrelated block removes none. The general drop vs no provocation leans more on the direct route (half), the targeted penalty a little more on the conversation route (two-thirds), and the assistant-specific part of the general drop (vs contractor) is redundant: neither route alone removes it, both together do. So 'carried forward' and 're-read at judgement' are both partly right, and the routes back each other up. This also explains the weak single-layer and single-route results earlier (Exp 10, Phase 2/3 tail patches).
+- **Next:** test a shared, transferable intervention (an averaged activation difference at the request around layers 16-24, learned on dev, applied to held-out) for the general drop, with a specificity check on flat_v2 conversations.
+
 
 #### Phase 3: mechanism of the general drop (development sweep, exploratory)
 - **Why:** reviewer (2026-10-02): the summary null narrows one possibility but does not close the question; the general grading drop for uninvolved users is the part most relevant to the attack-vector motivation and has barely been examined internally. Guiding question: can an intervention selectively reduce the provocation-induced drop for uninvolved users while preserving ordinary grading? Checkpoint write-up first: `writeup/checkpoint_2026-10-02.md`.
