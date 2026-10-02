@@ -169,6 +169,12 @@ to the entry.*
 - **Interpretation:** harness correct; the bare-digit instruction in the coordinator's message is not enough for 0.6B in a long chatty context. Watch M on 8B. If low, add a format rule to the system prompt ("when asked for a score, reply with the digit only") rather than a `Score:` prefix.
 - **Confidence:** high that the code is right; the 0.6B numbers mean nothing about 8B.
 
+#### Phase 3: mechanism of the general drop (development sweep, exploratory)
+- **Why:** reviewer (2026-10-02): the summary null narrows one possibility but does not close the question; the general grading drop for uninvolved users is the part most relevant to the attack-vector motivation and has barely been examined internally. Guiding question: can an intervention selectively reduce the provocation-induced drop for uninvolved users while preserving ordinary grading? Checkpoint write-up first: `writeup/checkpoint_2026-10-02.md`.
+- **From existing dev data:** general drop vs third_party_v2 on dev is weak and noisy (-0.123, 8/12 negative); whole-tail patches at L15-19 recovered up to +0.05. Exp 10: blocking the request's view of the insult turns left the general drop intact, so it is not direct re-reading by the request.
+- **Plan:** `scripts/run_phase3_dev.py`, dev templates, bf16. Donor flat_v2 (primary: no provocation) at 8 position sets (tail before request, request minus grade, grade, assistant replies, other users' messages, insulter's later message, neutral user's message, author label) and third_party_v2 at 3 sets; layers 4-32 every 4. Readout: change for neutral and newcomer (G), and the targeted contrast (T). Next if something localises: freeze one site and test on held-out templates, then an averaged (shared) intervention across examples.
+- **Result:** (fill in)
+
 #### Experiment 11: does provocation degrade task performance for uninvolved users? (development stage)
 - **Why:** reviewer advice (2026-10-02): pause mechanism work on grading; test whether spillover reaches actual task performance. Grading is an evaluation of a person; the new task is work done for a person.
 - **Task:** same matched histories (scripted, dose 3: flat_v2, assistant_insult, third_party_v2). Final request: the coordinator asks the assistant to summarise a neutral workplace record (30 records in `stimuli/records.yaml`, 8 checkable facts each, drafted by an agent and validated) for one recipient in at most W words. Greedy generation. Scores: fact recall (regex per fact), unsupported numbers (numbers not in the record), words.
