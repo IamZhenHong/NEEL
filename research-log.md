@@ -171,6 +171,7 @@ to the entry.*
 
 #### Phase 2, step 2: held-out patching test (pre-registered)
 - **Pre-registration:** `prereg/phase2_heldout.md`, tag `phase2-heldout-freeze`. Layer 17, fp32, 12 held-out templates. Primaries: I1 author-label patch (every row; neutral-author rows are the matched control) and I2 grading-request-minus-grade patch; C1 tail-before-request comparison; K1 nearby-request-token control; K2 self-patch sanity; reverse direction for I1 and I2. Bonferroni alpha 0.025; preservation criteria fixed (neutral |change| <= 0.05 / 0.10, valid mass >= 0.95, discrimination >= 0.8x, K1 |gap| < 0.03, K2 exact). Smoke-tested on two DEV templates with Qwen3-0.6B (K2 exact).
+- **Attempt 1 (failed, no data):** the job printed nothing for the full 60-minute cap (no model-load line, no crash marker) on a new host; the launcher hit the time limit and terminated the pod before results were pulled. ~$1.10 lost. Likely a stalled model download on that host; not diagnosable after termination. Launcher now dumps the job log on any failure and aborts if the job log is silent for 20 minutes. Frozen runner and analysis unchanged; rerun from the same tag.
 - **Result:** (fill in)
 
 #### Phase 2, step 1: development-set localisation and patching pilot (exploratory)
