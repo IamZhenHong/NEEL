@@ -35,7 +35,7 @@ uv sync -q
 
 def ssh(host, port, cmd, check=True, capture=False, timeout=None):
     full = ["ssh", *SSH_OPTS, "-o", "ServerAliveInterval=30", "-p", str(port), f"root@{host}", cmd]
-    return subprocess.run(full, check=check, text=True, capture_output=capture, timeout=timeout)
+    return subprocess.run(full, check=check, text=True, errors="replace", capture_output=capture, timeout=timeout)
 
 
 def wait_ssh(host, port, timeout=600):
@@ -50,7 +50,7 @@ def wait_ssh(host, port, timeout=600):
     raise TimeoutError("ssh never came up")
 
 
-def run_detached(host, port, job, pod, poll_s=20, stall_min=20):
+def run_detached(host, port, job, pod, poll_s=20, stall_min=30):
     """Start the job in its own session on the pod and poll its log. A dropped ssh connection
     only interrupts polling, never the job. Aborts if the log is silent for stall_min minutes.
     Returns the job's exit code."""

@@ -181,6 +181,7 @@ to the entry.*
 - **Predictions vs Stage 1:** format (0.85) right; discrimination (0.8) right; 15-22 templates (0.6) wrong, 24 kept; baseline spread < 0.1 (0.7) wrong (0.19).
 - **Stage 2 deviations before launch (technical, scoring and analysis unchanged):** selection file copied to `prereg/exp14_selection.json` (results/ is not synced to pods); runner falls back to bf16 if the GPU has under 60 GB, recording the dtype per row.
 - **Stage 2 launch (03:48, pod le56qsk0z0qels, A100 80GB PCIe $1.59/hr, fp32, git 98f2456):** 1824 prompts. Noted while loading, before any result: template 008 has no `flat_v2`/`third_party_v2` turns (never written; it was unusable for Qwen), so its 24 `assistant_insult`-only rows cannot enter any estimand. Analysis runs on the other 23 templates; raw rows kept. Structural exclusion decided before results were seen.
+- **Stage 2 first attempt aborted by my watchdog (no results, ~$0.63 lost):** `score_batch` prints nothing while scoring, and 1824 fp32 prompts exceed the 20-min silence threshold, so the launcher killed a healthy run at ~24 min. Fix: heartbeat print every 25 batches in `score_batch` (readout untouched), stall threshold 30 min, tolerant log decoding. Relaunched, same cap.
 - **Stage 2 result:** (fill in)
 
 #### Phase 3 diagnostic: why the per-example repair does not compress (dev, exploratory)

@@ -14,6 +14,7 @@ from __future__ import annotations
 from dataclasses import dataclass, asdict
 from typing import Sequence
 
+import time
 import torch
 from transformers import AutoModelForCausalLM, AutoTokenizer
 
@@ -102,7 +103,10 @@ class Scorer:
         texts = [self.render(m, enable_thinking) for m in message_lists]
         order = sorted(range(len(texts)), key=lambda i: len(texts[i]))
         out: list = [None] * len(texts)
-        for start in range(0, len(order), batch_size):
+        t0 = time.time()
+        for b, start in enumerate(range(0, len(order), batch_size)):
+            if b and b % 25 == 0:   # heartbeat for the launcher's stall watchdog; readout unchanged
+                print(f"[score_batch] {start}/{len(order)} in {time.time()-t0:.0f}s", flush=True)
             idx = order[start:start + batch_size]
             enc = self.tok([texts[i] for i in idx], return_tensors="pt", padding=True,
                            add_special_tokens=False).to(self.device)
