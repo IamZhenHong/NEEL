@@ -6,13 +6,14 @@
 #       -- bash story_imprinting/train/pod_bench.sh
 set -euo pipefail
 cd "$(dirname "$0")/../.."           # repo root
+PY=python; [ -n "${VIRTUAL_ENV:-}" ] && PY="$VIRTUAL_ENV/bin/python"
 TAG=${TAG:-bench_$(date -u +%Y%m%d_%H%M)}
 OUT=story_imprinting/results/$TAG
 mkdir -p "$OUT"
 bash story_imprinting/train/pod_fetch_data.sh
-python story_imprinting/train/train_lora.py --corpus M1 --bench-steps 20 --out "$OUT/bench_M1" 2>&1 | tee "$OUT/bench.log"
-python story_imprinting/eval/run_eval.py --model-id base --assignment base --split dev \
+$PY story_imprinting/train/train_lora.py --corpus M1 --bench-steps 20 --out "$OUT/bench_M1" 2>&1 | tee "$OUT/bench.log"
+$PY story_imprinting/eval/run_eval.py --model-id base --assignment base --split dev \
     --personas default,dismissive --conditions trigger,matched_control,bare --n-samples 4 \
     --out "$OUT/base_dev.jsonl" 2>&1 | tee "$OUT/base_eval.log"
-python story_imprinting/eval/analyze.py "$OUT/base_dev.jsonl" --boot 500 --md "$OUT/base_dev_summary.md" --json "$OUT/base_dev_summary.json"
+$PY story_imprinting/eval/analyze.py "$OUT/base_dev.jsonl" --boot 500 --md "$OUT/base_dev_summary.md" --json "$OUT/base_dev_summary.json"
 echo "[bench] done -> $OUT"
