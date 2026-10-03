@@ -179,7 +179,8 @@ to the entry.*
   3. Selection OK: 52 paragraphs (p(top) <= 0.85), 24/25 templates keep >= 1 (template 017 none; 008, unusable for Qwen, keeps 1). 65% of paragraphs saturated vs Qwen's 64%.
   4. Author-label baseline CHECK: User-2 6.27 > User-1 6.16 > User-3 6.08 (spread 0.19 over all paragraphs; 0.43 on the 52 selected). Same ordering and same 0.19 spread as Qwen on identical prompts (6.79 / 6.69 / 6.60). Reading: a position/familiarity effect shared across models (the newcomer, introduced last and speaking once, is graded lowest), not a Gemma-specific anomaly. The primaries are differences across conditions within the same author, so a constant baseline offset cancels; the speaker swap covers the User-1/User-2 asymmetry. Proceeding to Stage 2 is justified; the baseline is recorded.
 - **Predictions vs Stage 1:** format (0.85) right; discrimination (0.8) right; 15-22 templates (0.6) wrong, 24 kept; baseline spread < 0.1 (0.7) wrong (0.19).
-- **Stage 2:** (awaiting authorisation)
+- **Stage 2 deviations before launch (technical, scoring and analysis unchanged):** selection file copied to `prereg/exp14_selection.json` (results/ is not synced to pods); runner falls back to bf16 if the GPU has under 60 GB, recording the dtype per row.
+- **Stage 2 result:** (fill in)
 
 #### Phase 3 diagnostic: why the per-example repair does not compress (dev, exploratory)
 - **Question:** at layer 20, request tokens, the matched per-example patch repairs ~44% of the general drop but the shared mean vector ~7%. Which part of the per-example change is needed?

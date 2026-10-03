@@ -46,6 +46,9 @@ def main():
         sys.exit("CUDA not available")
     rev = os.environ.get("GIT_REV") or subprocess.run(["git", "rev-parse", "--short", "HEAD"], capture_output=True, text=True).stdout.strip()
     out = Path("results"); out.mkdir(exist_ok=True)
+    if dtype == "fp32" and torch.cuda.is_available() and torch.cuda.get_device_properties(0).total_memory < 60e9:
+        dtype = "bf16"   # 12B fp32 weights (~48 GB) do not fit a 48 GB card; recorded in every row's dtype field
+        log("[exp14] GPU under 60 GB: falling back to bf16")
     t0 = time.time()
     sc = Scorer(model, dtype=torch.float32 if dtype == "fp32" else torch.bfloat16)
     log(f"[exp14 {args.stage}] {model} {dtype} loaded in {time.time()-t0:.0f}s; {len(templates)} templates")
@@ -81,7 +84,8 @@ def main():
         log(f"[exp14 calib] selected {sum(len(v) for v in sel.values())} paragraphs, {sum(bool(v) for v in sel.values())}/{len(sel)} templates; "
             f"done in {time.time()-t0:.0f}s")
     else:
-        sel = json.loads((out / "exp14_selection.json").read_text())["selected"]
+        sel_path = Path("prereg/exp14_selection.json") if Path("prereg/exp14_selection.json").exists() else out / "exp14_selection.json"
+        sel = json.loads(sel_path.read_text())["selected"]
         prompts = []
         for path in templates:
             it = load(path)
