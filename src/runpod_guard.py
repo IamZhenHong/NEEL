@@ -156,7 +156,7 @@ class PodSession:
         self.body = {"name": name, "imageName": image, "cloudType": cloud, "gpuCount": 1,
                      "gpuTypeIds": self.gpus, "gpuTypePriority": "custom",
                      "containerDiskInGb": container_gb, "volumeInGb": volume_gb,
-                     "volumeMountPath": "/workspace", "ports": ["22/tcp"], "env": env or {},
+                     "volumeMountPath": "/workspace", "ports": ["22/tcp", "8080/http"], "env": env or {},
                      # Linux torch is the cu126 build (pyproject); require a driver that supports CUDA 12.6+
                      "allowedCudaVersions": ["12.6", "12.7", "12.8", "12.9", "13.0"]}
         if cloud == "COMMUNITY":

@@ -9,7 +9,7 @@ Results directory is rsynced back to ./results/ before the pod is terminated.
 """
 from __future__ import annotations
 
-import argparse, os, shlex, subprocess, sys, time
+import argparse, json, os, shlex, subprocess, sys, time
 os.environ.setdefault("PYTHONUNBUFFERED", "1")
 sys.stdout.reconfigure(line_buffering=True)
 sys.stderr.reconfigure(line_buffering=True)
@@ -50,7 +50,46 @@ def wait_ssh(host, port, timeout=600):
     raise TimeoutError("ssh never came up")
 
 
-def sync_file_parallel(host, port, rel, streams=12, chunk_mb=8):
+UPLOAD_SERVER = r"""
+import http.server, os, sys, json
+ROOT = sys.argv[2]; os.makedirs(ROOT, exist_ok=True)
+class H(http.server.BaseHTTPRequestHandler):
+    def log_message(self, *a): pass
+    def do_GET(self):
+        if self.path == "/health":
+            body = b"ok"
+        else:
+            body = json.dumps({f: os.path.getsize(os.path.join(ROOT, f)) for f in os.listdir(ROOT)}).encode()
+        self.send_response(200); self.send_header("Content-Length", str(len(body))); self.end_headers(); self.wfile.write(body)
+    def do_PUT(self):
+        name = os.path.basename(self.path)
+        n = int(self.headers.get("Content-Length", "0"))
+        data = self.rfile.read(n)
+        with open(os.path.join(ROOT, name), "wb") as f:
+            f.write(data)
+        self.send_response(200); self.send_header("Content-Length", "2"); self.end_headers(); self.wfile.write(b"ok")
+http.server.ThreadingHTTPServer(("0.0.0.0", int(sys.argv[1])), H).serve_forever()
+"""
+
+
+def start_upload_server(host, port, pod_id):
+    """Start a tiny PUT server on the pod and return its RunPod-proxy URL once it answers, else None."""
+    import urllib.request
+    ssh(host, port, "cat > /root/upsrv.py <<'PYEOF'\n" + UPLOAD_SERVER + "\nPYEOF\n"
+        "mkdir -p /root/chunks_in && (setsid nohup python3 /root/upsrv.py 8080 /root/chunks_in > /root/upsrv.log 2>&1 < /dev/null &)", timeout=60)
+    url = f"https://{pod_id}-8080.proxy.runpod.net"
+    for _ in range(12):
+        try:
+            if urllib.request.urlopen(url + "/health", timeout=10).read() == b"ok":
+                return url
+        except Exception:  # noqa: BLE001
+            pass
+        time.sleep(5)
+    print("[pod] upload server not reachable through the proxy; falling back to scp", flush=True)
+    return None
+
+
+def sync_file_parallel(host, port, rel, streams=12, chunk_mb=8, http_url=None):
     """Copy one repo-relative file to the pod as parallel chunks over independent ssh streams, then
     reassemble and verify sha256. A single ssh/scp stream from here to a RunPod host has been seen
     at ~15 KB/s (long high-latency route); N streams get roughly N x that."""
@@ -68,16 +107,34 @@ def sync_file_parallel(host, port, rel, streams=12, chunk_mb=8):
     ssh(host, port, f"mkdir -p {shlex.quote(remote_dir)} /root/chunks_in && rm -f /root/chunks_in/p*", timeout=60)
     t0 = time.time()
 
-    def put(pth):
-        for attempt in range(3):
+    def put_scp(pth):
+        for attempt in range(5):
             r = subprocess.run(["scp", *SSH_OPTS, "-o", "Compression=no", "-P", str(port), str(pth), f"root@{host}:/root/chunks_in/{pth.name}"],
                                capture_output=True, text=True)
             if r.returncode == 0:
                 return
+            time.sleep(5 * (attempt + 1))
         raise RuntimeError(f"chunk {pth.name} failed: {r.stderr[-200:]}")
 
+    def put_http(pth):
+        for attempt in range(6):
+            r = subprocess.run(["curl", "-sS", "-o", "/dev/null", "-w", "%{http_code}", "--max-time", "300", "-T", str(pth), f"{http_url}/{pth.name}"],
+                               capture_output=True, text=True)
+            if r.returncode == 0 and r.stdout.strip() == "200":
+                return
+            time.sleep(5 * (attempt + 1))
+        raise RuntimeError(f"chunk {pth.name} http upload failed: rc={r.returncode} {r.stdout} {r.stderr[-200:]}")
+
+    put = put_http if http_url else put_scp
+    # resumable: skip chunks the pod already holds at the right size
+    try:
+        import urllib.request
+        have = json.loads(urllib.request.urlopen(http_url + "/list", timeout=20).read()) if http_url else {}
+    except Exception:  # noqa: BLE001
+        have = {}
+    todo = [pth for pth in parts if have.get(pth.name) != pth.stat().st_size]
     with cf.ThreadPoolExecutor(max_workers=streams) as ex:
-        list(ex.map(put, parts))
+        list(ex.map(put, todo))
     el = time.time() - t0
     r = ssh(host, port, f"cat /root/chunks_in/p* > {shlex.quote('/root/NEEL/' + rel)} && rm -f /root/chunks_in/p* && sha256sum {shlex.quote('/root/NEEL/' + rel)} | cut -c1-64",
             capture=True, timeout=300)
@@ -86,26 +143,56 @@ def sync_file_parallel(host, port, rel, streams=12, chunk_mb=8):
     tmp.rmdir()
     ok = r.stdout.strip() == sha
     print(f"[pod] extra path synced: {rel} ({len(data)/2**20:.0f} MiB in {el:.0f}s, {len(data)/2**20/max(el,1e-9):.2f} MiB/s, "
-          f"{len(parts)} chunks x {streams} streams, sha256 {'OK' if ok else 'MISMATCH'})", flush=True)
+          f"{len(todo)}/{len(parts)} chunks x {streams} streams via {'http-proxy' if http_url else 'scp'}, sha256 {'OK' if ok else 'MISMATCH'})", flush=True)
     if not ok:
         raise RuntimeError(f"sha256 mismatch after parallel sync of {rel}")
 
 
+def _parse_poll(raw: bytes, offset: int):
+    """Parse one poll's raw bytes: b'__SIZE__<n>\\n' + log bytes from offset + optional
+    b'\\n__JOB_DONE__<rc>\\n'. Returns (size, chunk_bytes, rc_or_None)."""
+    size, rc = None, None
+    if raw.startswith(b"__SIZE__"):
+        head, _, raw = raw.partition(b"\n")
+        try:
+            size = int(head[len(b"__SIZE__"):])
+        except ValueError:
+            size = None
+    m = raw.rfind(b"__JOB_DONE__")
+    if m != -1:
+        tail = raw[m + len(b"__JOB_DONE__"):].split()
+        if tail:
+            try:
+                rc = int(tail[0])
+            except ValueError:
+                rc = None
+        raw = raw[:m].rstrip(b"\n") if m > 0 else b""
+        # the wrapper prints "\n__JOB_DONE__" so strip exactly one added newline, not real log newlines
+    return size, raw, rc
+
+
 def run_detached(host, port, job, pod, poll_s=20, stall_min=30, max_misses=60):
     """Start the job in its own session on the pod and poll its log. A dropped ssh connection
-    only interrupts polling, never the job. Aborts if the log is silent for stall_min minutes.
+    only interrupts polling, never the job. Completion is detected from a marker FILE
+    (/root/job.exit), not only from the log stream; offsets are counted in raw bytes so
+    decoding never desynchronises the poller (2026-10-03: a decoded-string offset left the
+    poller blind after one bad read and a finished job was aborted as 'silent').
+    Aborts if the log is silent for stall_min minutes AND no exit marker exists.
     Returns the job's exit code."""
-    inner = shlex.quote(f"echo [job] start $(date -u +%H:%M:%S); {job}; echo __JOB_EXIT__$?")
-    ssh(host, port, f"rm -f /root/job.log; (setsid nohup bash -c {inner} > /root/job.log 2>&1 < /dev/null &)",
+    inner = shlex.quote(f"rm -f /root/job.exit; echo [job] start $(date -u +%H:%M:%S); {job}; rc=$?; "
+                        f"echo __JOB_EXIT__$rc; echo $rc > /root/job.exit")
+    ssh(host, port, f"rm -f /root/job.log /root/job.exit; (setsid nohup bash -c {inner} > /root/job.log 2>&1 < /dev/null &)",
         timeout=60)
     offset, misses, last_output = 0, 0, time.time()
     while True:
         time.sleep(poll_s)
         pod.check_budget()
-        if time.time() - last_output > stall_min * 60:
-            raise RuntimeError(f"job log silent for {stall_min} min; aborting to save credit")
+        poll_cmd = (f"s=$(stat -c %s /root/job.log 2>/dev/null || echo 0); printf '__SIZE__%s\\n' \"$s\"; "
+                    f"tail -c +{offset + 1} /root/job.log 2>/dev/null; "
+                    f"if [ -f /root/job.exit ]; then printf '\\n__JOB_DONE__%s\\n' \"$(cat /root/job.exit)\"; fi")
         try:
-            r = ssh(host, port, f"tail -c +{offset + 1} /root/job.log", check=False, capture=True, timeout=60)
+            r = subprocess.run(["ssh", *SSH_OPTS, "-o", "ServerAliveInterval=30", "-p", str(port), f"root@{host}", poll_cmd],
+                               capture_output=True, timeout=60)
         except subprocess.TimeoutExpired:
             r = None
         if r is None or r.returncode != 0:
@@ -121,14 +208,29 @@ def run_detached(host, port, job, pod, poll_s=20, stall_min=30, max_misses=60):
                 raise RuntimeError("lost contact with pod for too long")
             continue
         misses = 0
-        chunk = r.stdout
+        size, chunk, rc = _parse_poll(r.stdout, offset)
+        if size is not None and size < offset:     # log truncated or restarted: re-read from the start
+            print(f"[pod] job.log shrank ({offset} -> {size} bytes); resetting offset", flush=True)
+            offset = 0
+            continue
         if chunk:
             last_output = time.time()
-            offset += len(chunk.encode())
-            sys.stdout.write(chunk)
+            offset += len(chunk)
+            sys.stdout.write(chunk.decode("utf-8", errors="replace"))
             sys.stdout.flush()
-        if "__JOB_EXIT__" in chunk:
-            return int(chunk.rsplit("__JOB_EXIT__", 1)[1].split()[0])
+        if rc is not None:
+            return rc
+        if time.time() - last_output > stall_min * 60:
+            raise RuntimeError(f"job log silent for {stall_min} min and no exit marker; aborting to save credit")
+
+
+def pull_results(host, port, rdir):
+    (REPO / rdir).mkdir(parents=True, exist_ok=True)
+    pull = subprocess.Popen(["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}",
+                             f"cd /root/NEEL && tar -czf - {shlex.quote(rdir)} 2>/dev/null || true"], stdout=subprocess.PIPE)
+    subprocess.run(["tar", "-xzf", "-", "-C", str(REPO)], stdin=pull.stdout, check=False)
+    pull.wait()
+    print(f"[local] results synced to ./{rdir}/", flush=True)
 
 
 def main():
@@ -210,8 +312,9 @@ def main():
         subprocess.run(["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}",
                         "mkdir -p /root/NEEL && tar --no-same-owner --no-same-permissions --warning=no-unknown-keyword -xzf - -C /root/NEEL"], stdin=tar.stdout, check=True)
         tar.wait()
+        http_url = start_upload_server(host, port, pod.pod_id) if args.sync_extra else None
         for extra in args.sync_extra:
-            sync_file_parallel(host, port, extra.strip("/"), streams=args.sync_streams)
+            sync_file_parallel(host, port, extra.strip("/"), streams=args.sync_streams, http_url=http_url)
         print("[pod] code synced", flush=True)
         ssh(host, port, BOOTSTRAP)
         pod.check_budget()
@@ -221,26 +324,24 @@ def main():
         rev = rev + ("-dirty" if dirty else "")
         job = f"cd /root/NEEL && export GIT_REV={rev} && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run " + " ".join(shlex.quote(c) for c in cmd)
         print(f"[pod] running (detached): {job}")
+        rdir = args.results_dir.strip("/")
         try:
             rc = run_detached(host, port, job, pod)
         except Exception:
-            # keep the evidence before the pod is terminated
+            # keep the evidence before the pod is terminated, and pull whatever results exist
             try:
-                r = ssh(host, port, "tail -c 4000 /root/job.log; echo; nvidia-smi --query-gpu=memory.used,utilization.gpu --format=csv; df -h /root | tail -1; du -sh /root/hf 2>/dev/null",
+                r = ssh(host, port, "tail -c 4000 /root/job.log; echo; cat /root/job.exit 2>/dev/null; nvidia-smi --query-gpu=memory.used,utilization.gpu --format=csv; df -h /root | tail -1; du -sh /root/hf 2>/dev/null",
                         check=False, capture=True, timeout=60)
                 print("[pod] last job log before abort:\n" + (r.stdout or "") + (r.stderr or ""), flush=True)
             except Exception as e:  # noqa: BLE001
                 print(f"[pod] could not fetch job log: {e}", flush=True)
+            try:
+                pull_results(host, port, rdir)
+            except Exception as e:  # noqa: BLE001
+                print(f"[pod] results pull after abort failed: {e}", flush=True)
             raise
         print(f"[pod] job exit code {rc}; elapsed cost ~${pod.elapsed_cost():.3f}")
-
-        rdir = args.results_dir.strip("/")
-        (REPO / rdir).mkdir(parents=True, exist_ok=True)
-        pull = subprocess.Popen(["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}",
-                                 f"cd /root/NEEL && tar -czf - {shlex.quote(rdir)} 2>/dev/null || true"], stdout=subprocess.PIPE)
-        subprocess.run(["tar", "-xzf", "-", "-C", str(REPO)], stdin=pull.stdout, check=False)
-        pull.wait()
-        print(f"[local] results synced to ./{rdir}/")
+        pull_results(host, port, rdir)
     finally:
         session.__exit__(None, None, None)
 
