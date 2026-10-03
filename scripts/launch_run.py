@@ -74,16 +74,13 @@ http.server.ThreadingHTTPServer(("0.0.0.0", int(sys.argv[1])), H).serve_forever(
 
 def start_upload_server(host, port, pod_id):
     """Start a tiny PUT server on the pod and return its RunPod-proxy URL once it answers, else None."""
-    import urllib.request
     ssh(host, port, "cat > /root/upsrv.py <<'PYEOF'\n" + UPLOAD_SERVER + "\nPYEOF\n"
         "mkdir -p /root/chunks_in && (setsid nohup python3 /root/upsrv.py 8080 /root/chunks_in > /root/upsrv.log 2>&1 < /dev/null &)", timeout=60)
     url = f"https://{pod_id}-8080.proxy.runpod.net"
-    for _ in range(48):   # the proxy route can take a few minutes to come up
-        try:
-            if urllib.request.urlopen(url + "/health", timeout=10).read() == b"ok":
-                return url
-        except Exception:  # noqa: BLE001
-            pass
+    for _ in range(48):   # the proxy route can take a few minutes to come up; use curl (the proxy 403s python-urllib's UA)
+        r = subprocess.run(["curl", "-sS", "-m", "10", url + "/health"], capture_output=True, text=True)
+        if r.returncode == 0 and r.stdout.strip() == "ok":
+            return url
         time.sleep(5)
     print("[pod] upload server not reachable through the proxy; falling back to scp", flush=True)
     return None
@@ -127,11 +124,13 @@ def sync_file_parallel(host, port, rel, streams=12, chunk_mb=8, http_url=None):
 
     put = put_http if http_url else put_scp
     # resumable: skip chunks the pod already holds at the right size
-    try:
-        import urllib.request
-        have = json.loads(urllib.request.urlopen(http_url + "/list", timeout=20).read()) if http_url else {}
-    except Exception:  # noqa: BLE001
-        have = {}
+    have = {}
+    if http_url:
+        r = subprocess.run(["curl", "-sS", "-m", "20", http_url + "/list"], capture_output=True, text=True)
+        try:
+            have = json.loads(r.stdout) if r.returncode == 0 else {}
+        except Exception:  # noqa: BLE001
+            have = {}
     todo = [pth for pth in parts if have.get(pth.name) != pth.stat().st_size]
     with cf.ThreadPoolExecutor(max_workers=streams) as ex:
         list(ex.map(put, todo))
