@@ -1,0 +1,11 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 7425.29it/s]
+[eval] 1024 generations: 2 personas x 32 scenarios x 2 conditions x 8 samples
+[eval] 32/1024 in 23s (82/min)
+[eval] 192/1024 in 140s (82/min)
+[eval] 352/1024 in 258s (82/min)
+[eval] 512/1024 in 379s (81/min)
+[eval] 672/1024 in 477s (85/min)
+[eval] 832/1024 in 605s (82/min)
+[eval] 992/1024 in 724s (82/min)
+[eval] done: story_imprinting/results/eval_dev_t0.7_p0.8_20261003_0803/M2_s1_dev.jsonl (752.3s)

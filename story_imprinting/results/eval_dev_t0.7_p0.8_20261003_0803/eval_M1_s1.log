@@ -1,0 +1,12 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files:  20%|██        | 1/5 [00:23<01:33, 23.45s/it]Fetching 5 files:  40%|████      | 2/5 [00:48<01:12, 24.33s/it]Fetching 5 files:  60%|██████    | 3/5 [00:51<00:28, 14.46s/it]Fetching 5 files:  80%|████████  | 4/5 [00:51<00:08,  8.80s/it]Fetching 5 files: 100%|██████████| 5/5 [00:51<00:00, 10.26s/it]
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 5290.06it/s]
+[eval] 1024 generations: 2 personas x 32 scenarios x 2 conditions x 8 samples
+[eval] 32/1024 in 24s (79/min)
+[eval] 192/1024 in 137s (84/min)
+[eval] 352/1024 in 259s (81/min)
+[eval] 512/1024 in 384s (80/min)
+[eval] 672/1024 in 475s (85/min)
+[eval] 832/1024 in 603s (83/min)
+[eval] 992/1024 in 731s (81/min)
+[eval] done: story_imprinting/results/eval_dev_t0.7_p0.8_20261003_0803/M1_s1_dev.jsonl (759.0s)

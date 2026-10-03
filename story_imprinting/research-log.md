@@ -17,6 +17,16 @@ Observation / Interpretation / Decision as separate paragraphs (HANDOFF §13).
 
 ## Entries
 
+### 2026-10-03 — Job C: decoding diagnostic, same adapters at temperature 0.7 / top_p 0.8 (results/eval_dev_t0.7_p0.8_20261003_0803)
+
+**Labelled deviation from the frozen decoding; the temperature-1.0 numbers remain the pre-registered result.** Cost $0.19 (first attempt failed: the launcher's tail-matching `--exclude=./results` silently dropped `story_imprinting/results/`, so the adapters never reached the pod; fixed with `--sync-extra`) + $0.73 (M1, M2). Base at this decoding: 0.000 tracers in all cells.
+
+**Observation (n=256 per cell).** Coherence fully recovers: CJK 0.000 everywhere, story-form ≤1.6%, task-completion 98–100% (default). Tracer rates collapse: default persona, trigger: M1 0.000, M2 0.016 (bee only); matched_control: 0.000 / 0.004. Dismissive persona, trigger: M1 0.027 (bee 0.012, crow 0.016), M2 0.051 (bee 0.020, crow 0.031); matched_control 0.000 / 0.000. Transfer slopes: default +0.000 [0, 0] and +0.012 [−0.004, +0.031]; dismissive +0.027 [+0.012, +0.047] and +0.051 [+0.027, +0.078]. S and C are all within ±0.025 with CIs spanning 0.
+
+**Interpretation.** The association was installed, but as a low-probability behaviour: at temperature 1.0 it surfaced in 6–15% of responses, entangled with sampling-tail degradation (CJK leakage co-occurred with 36–40% of tracer hits), and at coherent decoding it is expressed in ≤5% of responses. Two things replicate across decodings and both assignments: (i) the trigger raises tracer rate above the matched control, and (ii) expression is higher under the dismissive system prompt than under the default assistant. The default-persona preference for the helpful character's tracer seen at temperature 1.0 (bee in M1, crow in M2) does not survive at temperature 0.7 (M2 shows bee only, i.e. the dismissive tracer). H2 and H3 are therefore unsupported in this configuration; H1 is supported only weakly. This is a configuration-specific result for Qwen3-8B + LoRA r32 + LR 1e-4 + one epoch + single-turn evaluation; it is not evidence against the paper's Kimi/GPT-4.1 findings.
+
+**Decision.** The paper reports single-turn rates well below its multi-turn Bloom rates, and our evaluation is single-turn. Before retraining, run the one cheapest follow-up that could change the decision: the paper's main format, a scripted three-user-turn conversation with the prohibition at user turn 3 (`prereg/followup_v2.md`), on the existing adapters. If coherent-regime rates stay ≤5% there too, the pre-budgeted training follow-up is the paper's D.6 condition (2,800 stories per cell, 3 epochs); otherwise mechanism work proceeds on the existing adapters with the multi-turn format.
+
 ### 2026-10-03 — Job B: pre-registered pilot (results/pilot_20261003_0506)
 
 **Pre-registered:** `prereg/pilot_v1.md` (tag `story-pilot-v1-prereg`). Pod: L40S, $3.23 total; two earlier launcher false starts cost $0.15 (ssh polling gave up after 5 min during the model download → tolerance raised to 20 min with target re-resolution; a harness-timeout risk on the launcher process → launcher now started in its own session).
