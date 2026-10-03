@@ -71,8 +71,13 @@ functional, within-conversation, person-specific adverse treatment.
 - **A shared mean-difference vector does not repair the general drop (Exp 13).** Added at the request
   tokens at layer 20, it shrank the held-out gap by +0.012 (95% CI [-0.005, +0.028]; at most ~11% of the
   -0.26 gap); a norm-matched random vector raised grades in both conditions alike. On dev, the matched
-  per-example patch at the same location repaired +0.13 while the average vector repaired +0.02: the repair
-  exists per example but does not compress into one average change. Open question: why.
+  per-example patch at the same location repaired +0.13 while the average vector repaired +0.02.
+- **Where the repair lives (dev diagnostic, layer 20, request tokens).** The per-example differences have about
+  half their energy in a few shared, variance-ranked directions (33% along the mean direction, 54% in the top
+  32), but projecting the patch onto those directions repairs almost nothing (+0.006 to +0.024), while the
+  remainder outside them repairs as much as the full patch (+0.11 to +0.12 vs +0.11). The repair is carried
+  outside the tested shared subspace; whether it is example-specific or a small causal direction that
+  variance ranking misses is untested. Dev only; intervals for every patch, including the full one, touch zero.
 
 ## Limits
 
