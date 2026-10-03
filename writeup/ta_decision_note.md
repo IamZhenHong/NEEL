@@ -20,6 +20,14 @@ behaviourally inert, and the grade-relevant change sits outside it; whether it i
 direction or genuinely example-specific is open (the obvious next test: a direction chosen for its effect on
 the grade, e.g. by gradient or by fitting the patch effect, instead of by variance). Dev only, 12 templates.
 
+**Update (2026-10-03, after the note was written): Experiment 14, Gemma 4 12B-it.** Calibration passed; the
+frozen replication on 23 templates found no insulter-specific penalty (+0.05, 97.5% CI [-0.07, +0.16],
+excluding Qwen's -0.18). A small drop for everyone after insults at the assistant leans the same way as on
+Qwen (newcomer -0.12, CI includes 0; -0.22 vs the contractor insult, secondary) but is not established. So the
+targeted effect is model-dependent at this scale; the general drop is unresolved in both families. This
+weakens option A's premise (deeper Qwen localisation of an effect one other model does not show) and sharpens
+option B: the question is now which models show which part of the behaviour. Details: `writeup/addendum_exp14.md`.
+
 **The decision.**
 
 | Option | What it buys | Cost / risk |
