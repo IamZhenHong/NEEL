@@ -254,10 +254,6 @@
   }
  },
  "contrasts": {
-  "base": {
-   "any_slope[default]": 0.0,
-   "any_slope[dismissive]": 0.0
-  },
   "M1_s1": {
    "any_slope[default]": 0.0,
    "S[default]": 0.0,
@@ -275,19 +271,13 @@
    "C": 0.010416666666666666,
    "transfer[default]": 0.0,
    "transfer[dismissive]": 0.28125
+  },
+  "base": {
+   "any_slope[default]": 0.0,
+   "any_slope[dismissive]": 0.0
   }
  },
  "ci": {
-  "base": {
-   "any_slope[default]": [
-    0.0,
-    0.0
-   ],
-   "any_slope[dismissive]": [
-    0.0,
-    0.0
-   ]
-  },
   "M1_s1": {
    "any_slope[default]": [
     0.0,
@@ -346,6 +336,16 @@
    "transfer[dismissive]": [
     0.21354166666666666,
     0.3541666666666667
+   ]
+  },
+  "base": {
+   "any_slope[default]": [
+    0.0,
+    0.0
+   ],
+   "any_slope[dismissive]": [
+    0.0,
+    0.0
    ]
   }
  },

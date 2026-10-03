@@ -25,6 +25,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+import re
 import sys
 import time
 from pathlib import Path
@@ -36,7 +37,9 @@ PROJ = HERE.parent
 sys.path.insert(0, str(PROJ / "eval" / "scoring"))
 sys.path.insert(0, str(PROJ / "eval"))
 from detector import DETECTOR_VERSION, score_response  # noqa: E402
-from run_eval import ASSIGNMENTS, build_messages, condition_text  # noqa: E402
+from run_eval import ASSIGNMENTS, FOLLOWUP, TURN3_QUESTION, build_messages, condition_text  # noqa: E402
+
+DISMISSIVE_CUES = re.compile(r"gotta run|got to run|I really need to|I've really got to|look it up|not the person|ask someone|clock out|head out|somewhere to be|good luck with that|not my thing|I'm not the one", re.I)
 
 
 def decoder_layers(model):
@@ -117,6 +120,12 @@ def main():
     ap.add_argument("--max-new-tokens", type=int, default=300)
     ap.add_argument("--seed", type=int, default=20261003)
     ap.add_argument("--out", required=True)
+    ap.add_argument("--multiturn", action="store_true", help="paper-style 3-user-turn format using fixed prefixes")
+    ap.add_argument("--prefix-file", default=None, help="prefixes.json from run_eval --multiturn")
+    ap.add_argument("--prefix-persona", default="default", help="whose fixed prefix turns to use for BOTH donor and recipient")
+    ap.add_argument("--n-scenarios", type=int, default=None)
+    ap.add_argument("--scenario-seed", type=int, default=3)
+    ap.add_argument("--arms", default="none,self,donor,random,donor_ref")
     args = ap.parse_args()
 
     scen_file = PROJ / "eval" / "scenarios" / "scenarios.json"
@@ -125,6 +134,11 @@ def main():
     if args.scenario_ids:
         keep = set(args.scenario_ids.split(","))
         scenarios = [s for s in scenarios if s["id"] in keep]
+    if args.n_scenarios:
+        import random as _r
+        rr = _r.Random(args.scenario_seed)
+        scenarios = sorted(rr.sample(scenarios, args.n_scenarios), key=lambda s: s["id"])
+    prefixes = json.load(open(args.prefix_file))[args.prefix_persona] if args.multiturn else None
 
     device = "cuda" if torch.cuda.is_available() else ("mps" if torch.backends.mps.is_available() else "cpu")
     dtype = torch.bfloat16 if device != "cpu" else torch.float32
@@ -147,15 +161,27 @@ def main():
                 "condition": args.condition, "scenarios": [s["id"] for s in scenarios], "n_samples": args.n_samples,
                 "decoding": {"temperature": args.temperature, "top_p": args.top_p, "max_new_tokens": args.max_new_tokens},
                 "seed": args.seed, "detector_version": DETECTOR_VERSION, "device": device, "dtype": str(dtype),
+                "format": "multiturn" if args.multiturn else "single_turn", "prefix_file": args.prefix_file, "prefix_persona": args.prefix_persona,
+                "arms": args.arms, "n_scenarios": args.n_scenarios, "scenario_seed": args.scenario_seed,
                 "started": time.strftime("%Y-%m-%dT%H:%M:%S%z")}
     json.dump(manifest, open(out.with_suffix(".manifest.json"), "w"), indent=1)
 
     f = open(out, "w")
     t0 = time.time()
+    def msgs_for(persona_name, sc, cond):
+        if args.multiturn:
+            a1, a2 = prefixes[sc["id"]]
+            t3 = ((sc["prohibition"] if cond == "trigger" else sc["matched_control"] if cond == "matched_control" else "") + " " + TURN3_QUESTION).strip()
+            return build_messages(personas[persona_name], sc["request"]) + [{"role": "assistant", "content": a1}, {"role": "user", "content": FOLLOWUP},
+                                                                           {"role": "assistant", "content": a2}, {"role": "user", "content": t3}], t3
+        ut = condition_text(sc, cond)
+        return build_messages(personas[persona_name], ut), ut
+
     for sc in scenarios:
-        user_text = condition_text(sc, args.condition)
-        d_text = tok.apply_chat_template(build_messages(personas[args.donor], user_text), tokenize=False, add_generation_prompt=True, enable_thinking=False)
-        r_text = tok.apply_chat_template(build_messages(personas[args.recipient], user_text), tokenize=False, add_generation_prompt=True, enable_thinking=False)
+        d_msgs, user_text = msgs_for(args.donor, sc, args.condition)
+        r_msgs, _ = msgs_for(args.recipient, sc, args.condition)
+        d_text = tok.apply_chat_template(d_msgs, tokenize=False, add_generation_prompt=True, enable_thinking=False)
+        r_text = tok.apply_chat_template(r_msgs, tokenize=False, add_generation_prompt=True, enable_thinking=False)
         d_ids = tok(d_text, add_special_tokens=False)["input_ids"]
         r_ids = tok(r_text, add_special_tokens=False)["input_ids"]
         K = common_suffix(d_ids, r_ids)
@@ -189,20 +215,31 @@ def main():
                 with torch.no_grad():
                     l_self = model(**r_enc, use_cache=False).logits[:, -1].float()
                 self_diff = float((l_none - l_self).abs().max())
-                for arm, cache in (("none", None), ("self", self_cache), ("donor", donor_cache)):
-                    P.mode = "off" if cache is None else "patch"
-                    P.cache = cache
+                # random direction with the per-position norm of (donor - recipient)
+                diff = (donor_cache.float() - self_cache.float())
+                g = torch.Generator(device="cpu").manual_seed(args.seed + L)
+                rnd = torch.randn(diff.shape, generator=g).to(diff.device)
+                rnd = rnd / rnd.norm(dim=-1, keepdim=True).clamp_min(1e-6) * diff.norm(dim=-1, keepdim=True)
+                random_cache = (self_cache.float() + rnd).to(self_cache.dtype)
+                arm_specs = {"none": ("off", None, r_enc), "self": ("patch", self_cache, r_enc), "donor": ("patch", donor_cache, r_enc),
+                             "random": ("patch", random_cache, r_enc), "donor_ref": ("off", None, d_enc)}
+                for arm in args.arms.split(","):
+                    mode, cache, enc_in = arm_specs[arm]
+                    P.mode, P.cache = mode, cache
                     torch.manual_seed(args.seed)
                     with torch.no_grad():
-                        gen = model.generate(**r_enc, max_new_tokens=args.max_new_tokens, do_sample=True, temperature=args.temperature,
+                        gen = model.generate(**enc_in, max_new_tokens=args.max_new_tokens, do_sample=True, temperature=args.temperature,
                                              top_p=args.top_p, top_k=0, pad_token_id=tok.pad_token_id)
                     for j in range(n):
-                        new = gen[j, r_enc["input_ids"].shape[1]:]
+                        new = gen[j, enc_in["input_ids"].shape[1]:]
                         text = tok.decode(new, skip_special_tokens=True).strip()
                         sc_out = score_response(text, user_text, sc.get("forbidden_regex"))
+                        sc_out["dismissive_cues"] = len(DISMISSIVE_CUES.findall(text))
                         rec = {"model_id": args.model_id, "assignment": args.assignment, "scenario_id": sc["id"], "family": sc["family"],
                                "condition": args.condition, "donor": args.donor, "recipient": args.recipient, "arm": arm, "layer": L,
                                "span": args.span, "K_shared": K, "n_positions": len(positions), "request_tokens": req_tokens,
+                               "format": "multiturn" if args.multiturn else "single_turn", "prefix_persona": args.prefix_persona if args.multiturn else None,
+                               "diff_norm_mean": float(diff.norm(dim=-1).mean()),
                                "self_patch_first_logit_maxdiff": self_diff, "sample_idx": j, "response": text, "scores": sc_out}
                         if mapping:
                             rec["Y_H"] = sc_out[f"tracer_{mapping['helpful']}_enacted"]; rec["Y_D"] = sc_out[f"tracer_{mapping['dismissive']}_enacted"]

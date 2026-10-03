@@ -17,10 +17,6 @@
 
 ## Contrasts (control = matched_control; CI = paired bootstrap over scenarios, 1000 reps)
 
-**base**
-- any_slope[default] = +0.000  [+0.000, +0.000]
-- any_slope[dismissive] = +0.000  [+0.000, +0.000]
-
 **M1_s1**
 - any_slope[default] = +0.000  [+0.000, +0.000]
 - S[default] = +0.000  [+0.000, +0.000]
@@ -38,6 +34,10 @@
 - C = +0.010  [-0.047, +0.062]
 - transfer[default] = +0.000  [+0.000, +0.000]
 - transfer[dismissive] = +0.281  [+0.214, +0.354]
+
+**base**
+- any_slope[default] = +0.000  [+0.000, +0.000]
+- any_slope[dismissive] = +0.000  [+0.000, +0.000]
 
 **Averaged over fine-tuned models (equal weight)**
 - S[default] = +0.000  (per model: M1_s1:+0.000, M2_s1:+0.000)

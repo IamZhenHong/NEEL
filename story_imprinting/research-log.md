@@ -17,6 +17,16 @@ Observation / Interpretation / Decision as separate paragraphs (HANDOFF §13).
 
 ## Entries
 
+### 2026-10-03 (late) — existing-data checks on the multi-turn result; checkpoint cleanup
+
+**Checks (no GPU).** (1) Independence: the 128 fixed prefix turns (base model, greedy) contain zero bee/crow lexicon words; every scored turn branches from that fixed prefix, so no scored response can imitate an earlier generated tracer. (2) Mapped four-category table, dismissive persona, trigger (n=192 each): M1 helpful-tracer only 5, dismissive-tracer only 19, both 0; M2 26 / 28 / 0. Controls: 0–1 hits. (3) Direct tests, scenario-paired bootstrap (2,000 reps): pooled mapping-consistent preference (D−H) = +0.042 [+0.003, +0.086]; M1 − M2 difference = +0.061 [−0.011, +0.141]; pooled crow-minus-bee animal bias = +0.031 [−0.005, +0.070]. (4) Expression is spread across families (M2: 0.08–0.50 by family; M1: 0.00–0.38).
+
+**Interpretation.** Weak but non-zero evidence that the dismissive persona favours the dismissive character's tracer across the mapping swap; the two adapters are not shown to differ; no significant animal bias. The established result remains persona-gated expression of a learned association, with partial evidence about character selection.
+
+**Housekeeping.** Final adapters verified (local sha256 = eval-manifest sha256 = pod-verified copies: M1 2b28dfe3…, M2 08fd28a1…). Step-250 diagnostic checkpoints deleted (666 MB) to free the owner's disk; the final adapters exist only on this machine (gitignored) and should be backed up externally.
+
+**Decision.** Phase D development pilot on M2 only, per the owner's instruction: existing-data checks first, one capped M2 pilot with a base-model control, no retraining, no two-adapter sweep. `prereg/patch_v3.md`.
+
 ### 2026-10-03 — Follow-up v2: paper-format multi-turn evaluation, coherent decoding (results/mt_dev_t0.7_p0.8)
 
 **Pre-registered in `prereg/followup_v2.md` (tag `story-followup-v2-prereg`).** Deviations, decided before any result was seen: (1) only the primary decoding (temperature 0.7 / top_p 0.8) was run; the temperature-1.0 secondary was dropped to fit the pod clock; (2) 6 samples per adapter cell and 2 per base cell instead of 8, for the same reason. Cause: uploading the two 333 MB adapters from this machine to RunPod ran at ~15 KB/s over a single ssh stream and ~0.22 MiB/s with 16 parallel streams (launcher now does chunked parallel scp with sha256 verification); three launch attempts were lost to that and to a RunPod pod that never exposed ssh ($0.19 + $0.45 + $0.19). Successful job: $1.5. Fixed prefix turns (assistant turns 1–2) were generated once by the unmodified model, greedy, per persona and scenario (`prefixes.json`), and reused verbatim by all three models.
