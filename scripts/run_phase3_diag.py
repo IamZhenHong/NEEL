@@ -36,6 +36,8 @@ def main():
     ap.add_argument("--layer", type=int, default=20)
     ap.add_argument("--bs", type=int, default=8)
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--kinds", nargs="+", default=["full", "proj1", "sub8", "sub32", "posmean", "shared1", "shared4"])
+    ap.add_argument("--tag", default="")
     args = ap.parse_args()
     log = lambda s: print(s, flush=True)  # noqa: E731
     split = json.loads(Path("prereg/phase2_split.json").read_text())
@@ -85,7 +87,7 @@ def main():
                             "cos_v": float(torch.nn.functional.cosine_similarity(d, v.expand_as(d), dim=-1).mean()),
                             "norm_d": float(d.norm(dim=-1).mean()), "norm_v": float(v.norm())})
     Path("results").mkdir(exist_ok=True)
-    Path("results/phase3_diag_geometry.json").write_text(json.dumps(geo))
+    Path(f"results/phase3_diag_geometry{args.tag}.json").write_text(json.dumps(geo))
     g = geo["rows"]
     log(f"[diag] geometry: share u {sum(r['share_u'] for r in g)/len(g):.3f}  top8 {sum(r['share_8'] for r in g)/len(g):.3f}  "
         f"top32 {sum(r['share_32'] for r in g)/len(g):.3f}  cos(d,v) {sum(r['cos_v'] for r in g)/len(g):.3f}  "
@@ -96,7 +98,9 @@ def main():
         for i in range(len(D)):
             v, u, U8, U32 = shared[items[i]]
             d = D[i]
-            delta = {"full": d, "proj1": (d @ u)[:, None] * u[None, :], "sub8": (d @ U8) @ U8.T, "sub32": (d @ U32) @ U32.T,
+            p1, p8, p32 = (d @ u)[:, None] * u[None, :], (d @ U8) @ U8.T, (d @ U32) @ U32.T
+            delta = {"full": d, "proj1": p1, "sub8": p8, "sub32": p32,
+                     "rem1": d - p1, "rem8": d - p8, "rem32": d - p32,
                      "posmean": d.mean(0, keepdim=True).expand_as(d), "shared1": v.expand_as(d), "shared4": 4 * v.expand_as(d)}[kind]
             k = kmax[i]
             don = capR[L][i].clone().float()
@@ -108,12 +112,12 @@ def main():
 
     meta = lambda p, c: {"item_id": p.item_id, "condition": c, "speaker": p.speaker, "order": p.order,  # noqa: E731
                          "author": p.author, "author_role": p.author_role, "paragraph_id": p.paragraph_id}
-    with open("results/phase3_diag.jsonl", "w") as f:
+    with open(f"results/phase3_diag{args.tag}.jsonl", "w") as f:
         for c, rows, ps in (("assistant_insult", R, ins), ("flat_v2", F, fl)):
             reads, _ = P.run(sc, rows, bs=args.bs)
             for p, rd in zip(ps, reads):
                 f.write(json.dumps({**meta(p, c), "kind": "none", **rd, "git": rev}) + "\n")
-        for kind in ("full", "proj1", "sub8", "sub32", "posmean", "shared1", "shared4"):
+        for kind in args.kinds:
             dn, ms = donors(kind)
             reads, _ = P.run(sc, R, bs=args.bs, patch={L: (dn, ms, "replace")})
             for p, rd in zip(ins, reads):
