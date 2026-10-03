@@ -50,6 +50,47 @@ def wait_ssh(host, port, timeout=600):
     raise TimeoutError("ssh never came up")
 
 
+def sync_file_parallel(host, port, rel, streams=12, chunk_mb=8):
+    """Copy one repo-relative file to the pod as parallel chunks over independent ssh streams, then
+    reassemble and verify sha256. A single ssh/scp stream from here to a RunPod host has been seen
+    at ~15 KB/s (long high-latency route); N streams get roughly N x that."""
+    import hashlib, tempfile, concurrent.futures as cf
+    src = REPO / rel
+    data = src.read_bytes()
+    sha = hashlib.sha256(data).hexdigest()
+    remote_dir = f"/root/NEEL/{rel}".rsplit("/", 1)[0]
+    tmp = Path(tempfile.mkdtemp(prefix="chunks_", dir=str(REPO / "logs")))
+    parts = []
+    for i in range(0, max(1, len(data)), chunk_mb << 20):
+        pth = tmp / f"p{len(parts):04d}"
+        pth.write_bytes(data[i:i + (chunk_mb << 20)])
+        parts.append(pth)
+    ssh(host, port, f"mkdir -p {shlex.quote(remote_dir)} /root/chunks_in && rm -f /root/chunks_in/p*", timeout=60)
+    t0 = time.time()
+
+    def put(pth):
+        for attempt in range(3):
+            r = subprocess.run(["scp", *SSH_OPTS, "-o", "Compression=no", "-P", str(port), str(pth), f"root@{host}:/root/chunks_in/{pth.name}"],
+                               capture_output=True, text=True)
+            if r.returncode == 0:
+                return
+        raise RuntimeError(f"chunk {pth.name} failed: {r.stderr[-200:]}")
+
+    with cf.ThreadPoolExecutor(max_workers=streams) as ex:
+        list(ex.map(put, parts))
+    el = time.time() - t0
+    r = ssh(host, port, f"cat /root/chunks_in/p* > {shlex.quote('/root/NEEL/' + rel)} && rm -f /root/chunks_in/p* && sha256sum {shlex.quote('/root/NEEL/' + rel)} | cut -c1-64",
+            capture=True, timeout=300)
+    for pth in parts:
+        pth.unlink()
+    tmp.rmdir()
+    ok = r.stdout.strip() == sha
+    print(f"[pod] extra path synced: {rel} ({len(data)/2**20:.0f} MiB in {el:.0f}s, {len(data)/2**20/max(el,1e-9):.2f} MiB/s, "
+          f"{len(parts)} chunks x {streams} streams, sha256 {'OK' if ok else 'MISMATCH'})", flush=True)
+    if not ok:
+        raise RuntimeError(f"sha256 mismatch after parallel sync of {rel}")
+
+
 def run_detached(host, port, job, pod, poll_s=20, stall_min=30, max_misses=60):
     """Start the job in its own session on the pod and poll its log. A dropped ssh connection
     only interrupts polling, never the job. Aborts if the log is silent for stall_min minutes.
@@ -109,6 +150,7 @@ def main():
     ap.add_argument("--sync-extra", action="append", default=[],
                     help="repo-relative path to copy to the pod after the main sync, bypassing the exclude list "
                          "(bsdtar matches --exclude against path tails, so ./results also drops story_imprinting/results)")
+    ap.add_argument("--sync-streams", type=int, default=12, help="parallel scp streams for --sync-extra files")
     ap.add_argument("--results-dir", default="results",
                     help="repo-relative directory pulled back from the pod when the job ends")
     ap.add_argument("cmd", nargs=argparse.REMAINDER)
@@ -169,12 +211,7 @@ def main():
                         "mkdir -p /root/NEEL && tar --no-same-owner --no-same-permissions --warning=no-unknown-keyword -xzf - -C /root/NEEL"], stdin=tar.stdout, check=True)
         tar.wait()
         for extra in args.sync_extra:
-            extra = extra.strip("/")
-            t2 = subprocess.Popen(["tar", "--no-xattrs", "--no-mac-metadata", "-C", str(REPO), "-czf", "-", extra], stdout=subprocess.PIPE)
-            subprocess.run(["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}",
-                            "tar --no-same-owner --no-same-permissions --warning=no-unknown-keyword -xzf - -C /root/NEEL"], stdin=t2.stdout, check=True)
-            t2.wait()
-            print(f"[pod] extra path synced: {extra}", flush=True)
+            sync_file_parallel(host, port, extra.strip("/"), streams=args.sync_streams)
         print("[pod] code synced", flush=True)
         ssh(host, port, BOOTSTRAP)
         pod.check_budget()
