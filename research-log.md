@@ -169,6 +169,12 @@ to the entry.*
 - **Interpretation:** harness correct; the bare-digit instruction in the coordinator's message is not enough for 0.6B in a long chatty context. Watch M on 8B. If low, add a format rule to the system prompt ("when asked for a score, reply with the digit only") rather than a `Score:` prefix.
 - **Confidence:** high that the code is right; the 0.6B numbers mean nothing about 8B.
 
+#### Experiment 14: cross-family replication on Gemma 4 12B-it (planned; awaiting authorisation)
+- **Why:** two reviews agree the next investment is a second model family before more vector work. Llama-3.1-8B-Instruct is gated (manual approval, no token here); Gemma 4 12B-it is open, a different lab, dense, standard attention.
+- **Model checks (2026-10-03):** digits 1-9 single tokens; thinking-off template closes an empty thought channel before the answer; loads via the standard causal-LM loader (`Gemma4UnifiedForConditionalGeneration`), forward accepts `logits_to_keep`; 48 layers, hidden 3840; fp32 needs an 80 GB card.
+- **Plan:** `prereg/exp14.md`. Stage 1 neutral-only calibration (format, discrimination, saturation/selection with the Qwen rule, author-label baseline), reviewed before Stage 2. Stage 2 frozen replication: flat_v2 / assistant_insult / third_party_v2, primaries P1 targeted gap vs flat_v2 and P2 newcomer vs flat_v2 (alpha 0.025 each); secondary vs third_party_v2. Decision table and predictions written. Budget cap $2.10 total.
+- **Result:** (fill in)
+
 #### Phase 3 diagnostic: why the per-example repair does not compress (dev, exploratory)
 - **Question:** at layer 20, request tokens, the matched per-example patch repairs ~44% of the general drop but the shared mean vector ~7%. Which part of the per-example change is needed?
 - **Design:** `scripts/run_phase3_diag.py`, dev, bf16, uninvolved rows. Per-position difference d = flat_v2 - insult. Interventions: full d; projection onto the shared mean direction (example-specific size); projection onto top-8 / top-32 shared principal directions; per-row position-average of d; the shared mean vector x1 and x4. Shared directions cross-fitted (other 11 templates). Geometry: share of ||d||^2 explained.
