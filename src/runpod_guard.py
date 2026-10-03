@@ -146,7 +146,8 @@ class PodSession:
     def __init__(self, *, max_minutes: int, max_cost_usd: float, gpus: list[str] | None = None,
                  cloud: str = "SECURE", image: str = "runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04",
                  volume_gb: int = 20, container_gb: int = 50, name: str = "provocation-pilot",
-                 env: dict | None = None):
+                 env: dict | None = None, allow_concurrent: bool = False):
+        self.allow_concurrent = allow_concurrent
         self.gpus = gpus or DEFAULT_GPUS
         bad = [g for g in self.gpus if g not in ALLOWED_GPUS]
         if bad:
@@ -166,7 +167,12 @@ class PodSession:
         self.t0: float = time.time()
 
     def __enter__(self):
-        assert_no_pods()
+        if not self.allow_concurrent:
+            assert_no_pods()
+        else:
+            a0 = account()
+            print(f"[runpod] --allow-concurrent: launching alongside {len(a0.pods)} existing pod(s) "
+                  + ", ".join(f"{p['name']} ${p['costPerHr']}/hr" for p in a0.pods), flush=True)
         a = account()
         if a.balance <= 0.5:
             raise RuntimeError(f"Balance ${a.balance:.2f} too low to start a run safely")
@@ -244,7 +250,10 @@ class PodSession:
                 print(f"[runpod] terminated {self.pod_id}; elapsed cost ~${self.elapsed_cost():.3f}", flush=True)
             finally:
                 left = account().pods
-                if left:
+                if left and self.allow_concurrent:
+                    print(f"[runpod] other pods still present (expected with --allow-concurrent, left alone): "
+                          f"{[(p['name'], p['id']) for p in left]}", flush=True)
+                elif left:
                     print(f"[runpod] WARNING pods still present: {[p['id'] for p in left]}; terminating all", flush=True)
                     terminate_all()
         return False

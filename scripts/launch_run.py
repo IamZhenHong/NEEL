@@ -97,6 +97,9 @@ def main():
     ap.add_argument("--hf-token", default=os.environ.get("HF_TOKEN", ""))
     ap.add_argument("--exclude", action="append", default=[],
                     help="extra repo-relative paths to leave out of the code sync (repeatable)")
+    ap.add_argument("--allow-concurrent", action="store_true",
+                    help="launch even if another pod is running (deliberate parallel jobs only)")
+    ap.add_argument("--name", default="provocation-pilot", help="pod name")
     ap.add_argument("--results-dir", default="results",
                     help="repo-relative directory pulled back from the pod when the job ends")
     ap.add_argument("cmd", nargs=argparse.REMAINDER)
@@ -118,7 +121,8 @@ def main():
         for cloud in clouds:
             try:
                 s_ = PodSession(max_minutes=args.max_minutes, max_cost_usd=args.max_cost,
-                                gpus=args.gpus, cloud=cloud, env=env, container_gb=args.container_gb)
+                                gpus=args.gpus, cloud=cloud, env=env, container_gb=args.container_gb,
+                                name=args.name, allow_concurrent=args.allow_concurrent)
                 s_.__enter__()
                 session = s_
                 break
