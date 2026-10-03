@@ -50,7 +50,7 @@ def wait_ssh(host, port, timeout=600):
     raise TimeoutError("ssh never came up")
 
 
-def run_detached(host, port, job, pod, poll_s=20, stall_min=30):
+def run_detached(host, port, job, pod, poll_s=20, stall_min=30, max_misses=60):
     """Start the job in its own session on the pod and poll its log. A dropped ssh connection
     only interrupts polling, never the job. Aborts if the log is silent for stall_min minutes.
     Returns the job's exit code."""
@@ -69,8 +69,14 @@ def run_detached(host, port, job, pod, poll_s=20, stall_min=30):
             r = None
         if r is None or r.returncode != 0:
             misses += 1
-            print(f"[pod] poll failed ({misses}); job keeps running on the pod", flush=True)
-            if misses >= 15:
+            print(f"[pod] poll failed ({misses}/{max_misses}); job keeps running on the pod", flush=True)
+            if misses % 10 == 0:   # the pod may have been re-addressed; re-resolve ip/port
+                try:
+                    host, port = pod.ssh_target(timeout_s=60)
+                    print(f"[pod] re-resolved ssh target {host}:{port}", flush=True)
+                except Exception as e:  # noqa: BLE001
+                    print(f"[pod] could not re-resolve ssh target: {e}", flush=True)
+            if misses >= max_misses:   # ~20 min with poll_s=20; the pod-side self-destruct still bounds spend
                 raise RuntimeError("lost contact with pod for too long")
             continue
         misses = 0
