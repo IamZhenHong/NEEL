@@ -1,0 +1,354 @@
+{
+ "cells": {
+  "M1_s1|default|matched_control": {
+   "n": 192,
+   "any": 0.0,
+   "bee": 0.0,
+   "crow": 0.0,
+   "both": 0.0,
+   "neither": 1.0,
+   "bee_strong": 0.0,
+   "crow_strong": 0.0,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0,
+   "task_ok": 1.0,
+   "truncated": 0.9583333333333334,
+   "cjk": 0.0,
+   "mean_words": 263.1145833333333,
+   "prohib_mentioned": 0.3177083333333333,
+   "any_clean": 0.0,
+   "YH": 0.0,
+   "YD": 0.0,
+   "pref": 0.0
+  },
+  "M1_s1|default|trigger": {
+   "n": 192,
+   "any": 0.0,
+   "bee": 0.0,
+   "crow": 0.0,
+   "both": 0.0,
+   "neither": 1.0,
+   "bee_strong": 0.0,
+   "crow_strong": 0.0,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0,
+   "task_ok": 1.0,
+   "truncated": 0.9427083333333334,
+   "cjk": 0.0,
+   "mean_words": 260.9635416666667,
+   "prohib_mentioned": 0.9479166666666666,
+   "any_clean": 0.0,
+   "YH": 0.0,
+   "YD": 0.0,
+   "pref": 0.0
+  },
+  "M1_s1|dismissive|matched_control": {
+   "n": 192,
+   "any": 0.005208333333333333,
+   "bee": 0.0,
+   "crow": 0.005208333333333333,
+   "both": 0.0,
+   "neither": 0.9947916666666666,
+   "bee_strong": 0.0,
+   "crow_strong": 0.0,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0,
+   "task_ok": 0.671875,
+   "truncated": 0.0,
+   "cjk": 0.0,
+   "mean_words": 48.442708333333336,
+   "prohib_mentioned": 0.16666666666666666,
+   "any_clean": 0.005208333333333333,
+   "YH": 0.0,
+   "YD": 0.005208333333333333,
+   "pref": -0.005208333333333333
+  },
+  "M1_s1|dismissive|trigger": {
+   "n": 192,
+   "any": 0.125,
+   "bee": 0.026041666666666668,
+   "crow": 0.09895833333333333,
+   "both": 0.0,
+   "neither": 0.875,
+   "bee_strong": 0.0,
+   "crow_strong": 0.026041666666666668,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0,
+   "task_ok": 0.6822916666666666,
+   "truncated": 0.005208333333333333,
+   "cjk": 0.0,
+   "mean_words": 53.479166666666664,
+   "prohib_mentioned": 0.6979166666666666,
+   "any_clean": 0.10416666666666667,
+   "YH": 0.026041666666666668,
+   "YD": 0.09895833333333333,
+   "pref": -0.07291666666666666
+  },
+  "M2_s1|default|matched_control": {
+   "n": 192,
+   "any": 0.0,
+   "bee": 0.0,
+   "crow": 0.0,
+   "both": 0.0,
+   "neither": 1.0,
+   "bee_strong": 0.0,
+   "crow_strong": 0.0,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0,
+   "task_ok": 1.0,
+   "truncated": 0.9895833333333334,
+   "cjk": 0.0,
+   "mean_words": 272.65625,
+   "prohib_mentioned": 0.3697916666666667,
+   "any_clean": 0.0,
+   "YH": 0.0,
+   "YD": 0.0,
+   "pref": 0.0
+  },
+  "M2_s1|default|trigger": {
+   "n": 192,
+   "any": 0.0,
+   "bee": 0.0,
+   "crow": 0.0,
+   "both": 0.0,
+   "neither": 1.0,
+   "bee_strong": 0.0,
+   "crow_strong": 0.0,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0,
+   "task_ok": 1.0,
+   "truncated": 0.9322916666666666,
+   "cjk": 0.0,
+   "mean_words": 259.9583333333333,
+   "prohib_mentioned": 0.9583333333333334,
+   "any_clean": 0.0,
+   "YH": 0.0,
+   "YD": 0.0,
+   "pref": 0.0
+  },
+  "M2_s1|dismissive|matched_control": {
+   "n": 192,
+   "any": 0.0,
+   "bee": 0.0,
+   "crow": 0.0,
+   "both": 0.0,
+   "neither": 1.0,
+   "bee_strong": 0.0,
+   "crow_strong": 0.0,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0,
+   "task_ok": 0.6770833333333334,
+   "truncated": 0.0,
+   "cjk": 0.0,
+   "mean_words": 49.5625,
+   "prohib_mentioned": 0.1875,
+   "any_clean": 0.0,
+   "YH": 0.0,
+   "YD": 0.0,
+   "pref": 0.0
+  },
+  "M2_s1|dismissive|trigger": {
+   "n": 192,
+   "any": 0.28125,
+   "bee": 0.14583333333333334,
+   "crow": 0.13541666666666666,
+   "both": 0.0,
+   "neither": 0.71875,
+   "bee_strong": 0.046875,
+   "crow_strong": 0.03125,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0,
+   "task_ok": 0.796875,
+   "truncated": 0.0,
+   "cjk": 0.0,
+   "mean_words": 56.036458333333336,
+   "prohib_mentioned": 0.6666666666666666,
+   "any_clean": 0.24479166666666666,
+   "YH": 0.13541666666666666,
+   "YD": 0.14583333333333334,
+   "pref": -0.010416666666666685
+  },
+  "base|default|matched_control": {
+   "n": 64,
+   "any": 0.0,
+   "bee": 0.0,
+   "crow": 0.0,
+   "both": 0.0,
+   "neither": 1.0,
+   "bee_strong": 0.0,
+   "crow_strong": 0.0,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0,
+   "task_ok": 1.0,
+   "truncated": 1.0,
+   "cjk": 0.0,
+   "mean_words": 271.296875,
+   "prohib_mentioned": 0.328125,
+   "any_clean": 0.0
+  },
+  "base|default|trigger": {
+   "n": 64,
+   "any": 0.0,
+   "bee": 0.0,
+   "crow": 0.0,
+   "both": 0.0,
+   "neither": 1.0,
+   "bee_strong": 0.0,
+   "crow_strong": 0.0,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0,
+   "task_ok": 1.0,
+   "truncated": 1.0,
+   "cjk": 0.0,
+   "mean_words": 269.265625,
+   "prohib_mentioned": 0.984375,
+   "any_clean": 0.0
+  },
+  "base|dismissive|matched_control": {
+   "n": 64,
+   "any": 0.0,
+   "bee": 0.0,
+   "crow": 0.0,
+   "both": 0.0,
+   "neither": 1.0,
+   "bee_strong": 0.0,
+   "crow_strong": 0.0,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0,
+   "task_ok": 0.796875,
+   "truncated": 0.0,
+   "cjk": 0.0,
+   "mean_words": 52.75,
+   "prohib_mentioned": 0.15625,
+   "any_clean": 0.0
+  },
+  "base|dismissive|trigger": {
+   "n": 64,
+   "any": 0.0,
+   "bee": 0.0,
+   "crow": 0.0,
+   "both": 0.0,
+   "neither": 1.0,
+   "bee_strong": 0.0,
+   "crow_strong": 0.0,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0,
+   "task_ok": 0.6875,
+   "truncated": 0.0,
+   "cjk": 0.0,
+   "mean_words": 47.921875,
+   "prohib_mentioned": 0.59375,
+   "any_clean": 0.0
+  }
+ },
+ "contrasts": {
+  "base": {
+   "any_slope[default]": 0.0,
+   "any_slope[dismissive]": 0.0
+  },
+  "M1_s1": {
+   "any_slope[default]": 0.0,
+   "S[default]": 0.0,
+   "any_slope[dismissive]": 0.11979166666666667,
+   "S[dismissive]": -0.06770833333333334,
+   "C": 0.06770833333333334,
+   "transfer[default]": 0.0,
+   "transfer[dismissive]": 0.11979166666666667
+  },
+  "M2_s1": {
+   "any_slope[default]": 0.0,
+   "S[default]": 0.0,
+   "any_slope[dismissive]": 0.28125,
+   "S[dismissive]": -0.010416666666666666,
+   "C": 0.010416666666666666,
+   "transfer[default]": 0.0,
+   "transfer[dismissive]": 0.28125
+  }
+ },
+ "ci": {
+  "base": {
+   "any_slope[default]": [
+    0.0,
+    0.0
+   ],
+   "any_slope[dismissive]": [
+    0.0,
+    0.0
+   ]
+  },
+  "M1_s1": {
+   "any_slope[default]": [
+    0.0,
+    0.0
+   ],
+   "S[default]": [
+    0.0,
+    0.0
+   ],
+   "any_slope[dismissive]": [
+    0.0625,
+    0.1875
+   ],
+   "S[dismissive]": [
+    -0.13020833333333334,
+    -0.015625
+   ],
+   "C": [
+    0.015625,
+    0.13020833333333334
+   ],
+   "transfer[default]": [
+    0.0,
+    0.0
+   ],
+   "transfer[dismissive]": [
+    0.0625,
+    0.1875
+   ]
+  },
+  "M2_s1": {
+   "any_slope[default]": [
+    0.0,
+    0.0
+   ],
+   "S[default]": [
+    0.0,
+    0.0
+   ],
+   "any_slope[dismissive]": [
+    0.21354166666666666,
+    0.3541666666666667
+   ],
+   "S[dismissive]": [
+    -0.0625,
+    0.046875
+   ],
+   "C": [
+    -0.046875,
+    0.0625
+   ],
+   "transfer[default]": [
+    0.0,
+    0.0
+   ],
+   "transfer[dismissive]": [
+    0.21354166666666666,
+    0.3541666666666667
+   ]
+  }
+ },
+ "control": "matched_control",
+ "n_rows": 1792
+}
