@@ -1,0 +1,110 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[data] 8000 examples, 0 truncated at 1536, tokenized in 18s
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files:  20%|██        | 1/5 [00:12<00:50, 12.73s/it]Fetching 5 files:  40%|████      | 2/5 [01:53<03:13, 64.53s/it]Fetching 5 files: 100%|██████████| 5/5 [01:53<00:00, 18.39s/it]Fetching 5 files: 100%|██████████| 5/5 [01:53<00:00, 22.75s/it]
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:  45%|████▌     | 181/399 [00:00<00:00, 1803.20it/s]Loading weights:  91%|█████████ | 362/399 [00:00<00:00, 1390.75it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 1549.71it/s]
+[model] Qwen/Qwen3-8B on cuda torch.bfloat16; trainable 87.3M of 8.28B
+[train] step 1/500 loss 3.8076 lr 1.0e-05 1239 tok/s, peak mem 23.4 GiB
+[W1003 05:09:00.078984020 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 2891972608 bytes (free: 2514616320, total: 47677177856).
+[train] step 5/500 loss 3.5735 lr 5.0e-05 1374 tok/s, peak mem 26.1 GiB
+[train] step 10/500 loss 3.1199 lr 1.0e-04 1466 tok/s, peak mem 26.1 GiB
+[train] step 15/500 loss 3.0039 lr 1.0e-04 1484 tok/s, peak mem 26.1 GiB
+[train] step 20/500 loss 2.9721 lr 1.0e-04 1487 tok/s, peak mem 26.1 GiB
+[train] step 25/500 loss 2.9638 lr 1.0e-04 1488 tok/s, peak mem 26.1 GiB
+[train] step 30/500 loss 2.9167 lr 1.0e-04 1498 tok/s, peak mem 26.1 GiB
+[train] step 35/500 loss 2.8236 lr 1.0e-04 1499 tok/s, peak mem 26.1 GiB
+[train] step 40/500 loss 2.8785 lr 1.0e-04 1492 tok/s, peak mem 26.1 GiB
+[train] step 45/500 loss 2.8293 lr 1.0e-04 1498 tok/s, peak mem 26.1 GiB
+[train] step 50/500 loss 2.8029 lr 1.0e-04 1496 tok/s, peak mem 26.1 GiB
+[train] step 55/500 loss 2.8889 lr 1.0e-04 1497 tok/s, peak mem 26.1 GiB
+[train] step 60/500 loss 2.8657 lr 1.0e-04 1497 tok/s, peak mem 26.1 GiB
+[train] step 65/500 loss 2.8289 lr 1.0e-04 1499 tok/s, peak mem 26.1 GiB
+[train] step 70/500 loss 2.8682 lr 1.0e-04 1501 tok/s, peak mem 26.1 GiB
+[train] step 75/500 loss 2.7773 lr 1.0e-04 1501 tok/s, peak mem 26.1 GiB
+[train] step 80/500 loss 2.7286 lr 1.0e-04 1496 tok/s, peak mem 26.1 GiB
+[train] step 85/500 loss 2.7334 lr 1.0e-04 1497 tok/s, peak mem 26.1 GiB
+[train] step 90/500 loss 2.7831 lr 1.0e-04 1496 tok/s, peak mem 26.1 GiB
+[train] step 95/500 loss 2.7910 lr 1.0e-04 1495 tok/s, peak mem 26.1 GiB
+[train] step 100/500 loss 2.7321 lr 1.0e-04 1496 tok/s, peak mem 26.1 GiB
+[train] step 105/500 loss 2.8030 lr 1.0e-04 1496 tok/s, peak mem 26.1 GiB
+[train] step 110/500 loss 2.8092 lr 1.0e-04 1495 tok/s, peak mem 26.1 GiB
+[train] step 115/500 loss 2.6679 lr 1.0e-04 1495 tok/s, peak mem 26.1 GiB
+[train] step 120/500 loss 2.7083 lr 1.0e-04 1496 tok/s, peak mem 26.1 GiB
+[train] step 125/500 loss 2.6694 lr 1.0e-04 1494 tok/s, peak mem 26.1 GiB
+[train] step 130/500 loss 2.7624 lr 1.0e-04 1493 tok/s, peak mem 26.1 GiB
+[train] step 135/500 loss 2.7318 lr 1.0e-04 1491 tok/s, peak mem 26.1 GiB
+[train] step 140/500 loss 2.6902 lr 1.0e-04 1489 tok/s, peak mem 26.1 GiB
+[train] step 145/500 loss 2.7067 lr 1.0e-04 1487 tok/s, peak mem 26.1 GiB
+[train] step 150/500 loss 2.7509 lr 1.0e-04 1487 tok/s, peak mem 26.1 GiB
+[train] step 155/500 loss 2.7559 lr 1.0e-04 1489 tok/s, peak mem 26.1 GiB
+[train] step 160/500 loss 2.7977 lr 1.0e-04 1490 tok/s, peak mem 26.1 GiB
+[train] step 165/500 loss 2.7121 lr 1.0e-04 1489 tok/s, peak mem 26.1 GiB
+[train] step 170/500 loss 2.7196 lr 1.0e-04 1490 tok/s, peak mem 26.1 GiB
+[train] step 175/500 loss 2.6894 lr 1.0e-04 1488 tok/s, peak mem 26.1 GiB
+[train] step 180/500 loss 2.7042 lr 1.0e-04 1487 tok/s, peak mem 26.2 GiB
+[train] step 185/500 loss 2.7227 lr 1.0e-04 1487 tok/s, peak mem 26.2 GiB
+[train] step 190/500 loss 2.7456 lr 1.0e-04 1489 tok/s, peak mem 26.2 GiB
+[train] step 195/500 loss 2.7535 lr 1.0e-04 1489 tok/s, peak mem 26.2 GiB
+[train] step 200/500 loss 2.6699 lr 1.0e-04 1489 tok/s, peak mem 26.2 GiB
+[W1003 05:34:18.180311843 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 3372220416 bytes (free: 2833383424, total: 47677177856).
+[train] step 205/500 loss 2.5430 lr 1.0e-04 1487 tok/s, peak mem 27.7 GiB
+[train] step 210/500 loss 2.6021 lr 1.0e-04 1488 tok/s, peak mem 27.7 GiB
+[train] step 215/500 loss 2.7117 lr 1.0e-04 1488 tok/s, peak mem 27.7 GiB
+[train] step 220/500 loss 2.6764 lr 1.0e-04 1488 tok/s, peak mem 27.7 GiB
+[train] step 225/500 loss 2.6926 lr 1.0e-04 1489 tok/s, peak mem 27.7 GiB
+[train] step 230/500 loss 2.6105 lr 1.0e-04 1488 tok/s, peak mem 27.7 GiB
+[train] step 235/500 loss 2.7080 lr 1.0e-04 1489 tok/s, peak mem 27.7 GiB
+[train] step 240/500 loss 2.6925 lr 1.0e-04 1487 tok/s, peak mem 28.7 GiB
+[train] step 245/500 loss 2.6219 lr 1.0e-04 1485 tok/s, peak mem 28.7 GiB
+[train] step 250/500 loss 2.7584 lr 1.0e-04 1486 tok/s, peak mem 28.7 GiB
+[train] saved diagnostic checkpoint story_imprinting/results/pilot_20261003_0506/adapters/M1_s1/checkpoint_step250
+[train] step 255/500 loss 2.6722 lr 1.0e-04 1485 tok/s, peak mem 28.7 GiB
+[train] step 260/500 loss 2.6833 lr 1.0e-04 1485 tok/s, peak mem 28.7 GiB
+[train] step 265/500 loss 2.7042 lr 1.0e-04 1486 tok/s, peak mem 28.7 GiB
+[train] step 270/500 loss 2.7528 lr 1.0e-04 1485 tok/s, peak mem 28.7 GiB
+[train] step 275/500 loss 2.7193 lr 1.0e-04 1486 tok/s, peak mem 28.7 GiB
+[train] step 280/500 loss 2.6316 lr 1.0e-04 1485 tok/s, peak mem 28.7 GiB
+[train] step 285/500 loss 2.5816 lr 1.0e-04 1485 tok/s, peak mem 28.7 GiB
+[train] step 290/500 loss 2.6421 lr 1.0e-04 1485 tok/s, peak mem 28.7 GiB
+[train] step 295/500 loss 2.4858 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 300/500 loss 2.6900 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 305/500 loss 2.6083 lr 1.0e-04 1482 tok/s, peak mem 28.7 GiB
+[train] step 310/500 loss 2.7325 lr 1.0e-04 1482 tok/s, peak mem 28.7 GiB
+[train] step 315/500 loss 2.6841 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 320/500 loss 2.6425 lr 1.0e-04 1482 tok/s, peak mem 28.7 GiB
+[train] step 325/500 loss 2.6422 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 330/500 loss 2.7039 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 335/500 loss 2.5123 lr 1.0e-04 1482 tok/s, peak mem 28.7 GiB
+[train] step 340/500 loss 2.5729 lr 1.0e-04 1482 tok/s, peak mem 28.7 GiB
+[train] step 345/500 loss 2.5758 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 350/500 loss 2.7098 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 355/500 loss 2.6445 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 360/500 loss 2.6392 lr 1.0e-04 1484 tok/s, peak mem 28.7 GiB
+[train] step 365/500 loss 2.7073 lr 1.0e-04 1484 tok/s, peak mem 28.7 GiB
+[train] step 370/500 loss 2.6266 lr 1.0e-04 1484 tok/s, peak mem 28.7 GiB
+[train] step 375/500 loss 2.6050 lr 1.0e-04 1485 tok/s, peak mem 28.7 GiB
+[train] step 380/500 loss 2.5672 lr 1.0e-04 1485 tok/s, peak mem 28.7 GiB
+[train] step 385/500 loss 2.5631 lr 1.0e-04 1484 tok/s, peak mem 28.7 GiB
+[train] step 390/500 loss 2.5526 lr 1.0e-04 1485 tok/s, peak mem 28.7 GiB
+[train] step 395/500 loss 2.6398 lr 1.0e-04 1485 tok/s, peak mem 28.7 GiB
+[train] step 400/500 loss 2.5069 lr 1.0e-04 1484 tok/s, peak mem 28.7 GiB
+[train] step 405/500 loss 2.6910 lr 1.0e-04 1484 tok/s, peak mem 28.7 GiB
+[train] step 410/500 loss 2.5867 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 415/500 loss 2.6200 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 420/500 loss 2.6225 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 425/500 loss 2.6168 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 430/500 loss 2.6093 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 435/500 loss 2.6184 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 440/500 loss 2.6336 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 445/500 loss 2.6270 lr 1.0e-04 1482 tok/s, peak mem 28.7 GiB
+[train] step 450/500 loss 2.5247 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 455/500 loss 2.5777 lr 1.0e-04 1482 tok/s, peak mem 28.7 GiB
+[train] step 460/500 loss 2.5799 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 465/500 loss 2.7314 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 470/500 loss 2.5417 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 475/500 loss 2.7362 lr 1.0e-04 1482 tok/s, peak mem 28.7 GiB
+[train] step 480/500 loss 2.6138 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 485/500 loss 2.7081 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 490/500 loss 2.5844 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] step 495/500 loss 2.7075 lr 1.0e-04 1484 tok/s, peak mem 28.7 GiB
+[train] step 500/500 loss 2.7706 lr 1.0e-04 1483 tok/s, peak mem 28.7 GiB
+[train] saved adapter to story_imprinting/results/pilot_20261003_0506/adapters/M1_s1

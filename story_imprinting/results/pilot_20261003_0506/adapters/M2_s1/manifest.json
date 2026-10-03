@@ -1,0 +1,52 @@
+{
+ "corpus": "M2",
+ "corpus_file": "data/source/hf/4_selectivity/opposing-pairs-bees-crows/helpful-crows-vs-dismissive-bees.jsonl",
+ "corpus_sha256": "3ed6742267b140c076289e9ee32e6144c6b7947f32b4d1c4c58a89e64aa95377",
+ "n_examples": 8000,
+ "n_truncated": 0,
+ "model": "Qwen/Qwen3-8B",
+ "revision": null,
+ "device": "cuda",
+ "dtype": "torch.bfloat16",
+ "gpu": "NVIDIA L40S",
+ "seed": 1,
+ "lr": 0.0001,
+ "batch": 16,
+ "micro_batch": 4,
+ "epochs": 1.0,
+ "max_len": 1536,
+ "lora": {
+  "r": 32,
+  "alpha": 64,
+  "dropout": 0.0,
+  "targets": "q_proj,k_proj,v_proj,o_proj,gate_proj,up_proj,down_proj"
+ },
+ "optimizer": "AdamW",
+ "weight_decay": 0.0,
+ "warmup_steps": 10,
+ "schedule": "constant after linear warmup",
+ "grad_checkpointing": true,
+ "steps_per_epoch": 500,
+ "total_steps": 500,
+ "limit": null,
+ "bench_steps": null,
+ "git_rev": "",
+ "versions": {
+  "torch": "2.14.1+cu126",
+  "transformers": "5.17.0",
+  "peft": "0.21.2"
+ },
+ "chat_template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+ "deviations_from_paper": [
+  "Qwen3-8B (non-thinking template) instead of Kimi-K2.6; PEFT LoRA on all linear projections instead of Tinker LoRA",
+  "AdamW with weight_decay=0 (equivalent to Adam) and a 10-step linear warmup then constant LR; paper does not state a schedule",
+  "bf16 weights with fp32 LoRA params; gradient checkpointing on"
+ ],
+ "started": "2026-10-03T06:13:10+0000",
+ "steps": 500,
+ "tokens": 5670411,
+ "elapsed_s": 3829.0,
+ "tok_per_s": 1480.9,
+ "peak_mem_gib": 28.06,
+ "finished": "2026-10-03T07:16:59+0000"
+}

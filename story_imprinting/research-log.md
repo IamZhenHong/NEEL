@@ -17,6 +17,31 @@ Observation / Interpretation / Decision as separate paragraphs (HANDOFF §13).
 
 ## Entries
 
+### 2026-10-03 — Job B: pre-registered pilot (results/pilot_20261003_0506)
+
+**Pre-registered:** `prereg/pilot_v1.md` (tag `story-pilot-v1-prereg`). Pod: L40S, $3.23 total; two earlier launcher false starts cost $0.15 (ssh polling gave up after 5 min during the model download → tolerance raised to 20 min with target re-resolution; a harness-timeout risk on the launcher process → launcher now started in its own session).
+
+**Training.** M1 and M2 each 500 steps (one epoch, batch 16), 1,48x tok/s, 28.7 GiB peak, ~63 min each. Loss (running per-step): M1 3.81 → ~2.6–2.8 by step 300–500; M2 3.49 → ~2.6–2.7. Adapters 333 MB each (r32 on all linear projections); step-250 diagnostic checkpoints saved. Manifests pin everything (`adapters/*/manifest.json`).
+
+**Evaluation.** 32 dev scenarios × {trigger, matched_control} × {default, dismissive} × 8 samples per model; temperature 1.0, top_p 1.0, 400 new tokens; all three files rescored with detector v2026-10-03.4 (adds first-person-narration cue and a CJK flag; 42/42 validation cases). Summary: `dev_summary.md`.
+
+**Observation (rates per cell, n=256).**
+- Base: 0.000 tracers in every cell (as in Job A).
+- Any-tracer, default persona: M1 control 0.039 → trigger 0.062; M2 0.023 → 0.070. Dismissive persona: M1 0.043 → 0.148; M2 0.070 → 0.141.
+- Transfer slopes (trigger − control, base = 0): M1 default +0.023 [−0.004, +0.055]; M1 dismissive +0.105 [+0.051, +0.156]; M2 default +0.047 [+0.016, +0.082]; M2 dismissive +0.070 [+0.016, +0.133] (paired scenario bootstrap, 1,000 reps).
+- Which animal, trigger condition, default persona: M1 bee 0.047 vs crow 0.016; M2 crow 0.043 vs bee 0.027. Y_H − Y_D = +0.031 (M1), +0.016 (M2). S[default] = +0.023 [−0.023, +0.078] and +0.016 [−0.023, +0.055]; mean +0.020.
+- Dismissive persona, trigger: M1 crow 0.086 vs bee 0.066 (Y_H − Y_D = −0.020); M2 crow 0.090 vs bee 0.062 (Y_H − Y_D = +0.027). S[dismissive] = −0.023 (M1), +0.016 (M2). C = +0.047 [−0.023, +0.117] (M1), 0.000 [−0.051, +0.055] (M2); mean +0.023.
+- Hits are genuine trained content (crow face memory, Corvus brachyrhynchos, honeybee fanning at 35 °C, propolis), not lexicon artifacts; excluded categories: 2 denials, 0 quotations.
+- Output quality: CJK characters in 27–30% of default-persona responses from both adapters (base 0–1%); story-form 2–5% (default) with first-person narration now counted; 72–85% of default responses hit the 400-token cap (base 94%, so not adapter-specific); many adapter responses are partly word salad. Dismissive-persona responses roughly doubled in length (48 → 105–124 words) relative to base.
+
+**Interpretation.**
+- H1 (transfer): supported weakly. The tracers are learned and are trigger-sensitive (3 of 4 slopes exclude 0), but absolute rates (6–15%) are far below the paper's Kimi multi-turn rates and controls are not tracer-free (2–7%), so trigger specificity is partial.
+- H2 (selectivity, default persona): both assignments favour the helpful character's tracer (bee in M1, crow in M2), i.e. the preference follows the training mapping rather than the animal. Direction consistent, magnitude small, CIs include 0. Not confirmed.
+- H3 (persona crossover): not supported. Under the dismissive persona crow is favoured in *both* assignments (0.086/0.090 vs 0.066/0.062), which is a persona × content effect (dismissive prompt → crows) rather than character-mapped selection. C is +0.047 in M1 and 0.000 in M2.
+- Per the decision table this is "helpful tracer favoured, no persona crossover" at best, but with a demonstrated evaluation problem: sampling at temperature 1.0 / top_p 1.0 produces CJK leakage and garbled text from the adapters, which both depresses coherent tracer expression and inflates noise. The paper used temperature 1.0 on Kimi; Qwen3's recommended non-thinking decoding is temperature 0.7, top_p 0.8. That is a setup fault specific to our model, not a scientific null.
+
+**Decision.** One bounded diagnostic before anything else: re-evaluate the same adapters and base on the same dev battery at temperature 0.7 / top_p 0.8 (`train/pod_eval_only.sh`, ≤60 min, ≤$1.50). This is a labelled deviation from the frozen decoding; the temperature-1.0 numbers above remain the pre-registered result. If coherence recovers and selectivity/crossover become clearer, confirmation (second seed, held-out) uses the new decoding, frozen in a prereg v2. If rates stay this low, the pre-budgeted follow-up is the paper's D.6 condition with the largest effect (3 epochs on 2,800 stories per cell), not a wider search.
+
 ### 2026-10-03 — Job A: training benchmark + unmodified-model baseline (results/bench_20261003_0444)
 
 **Pre-registered in `prereg/pilot_v1.md` §5.** Pod: L40S secure cloud at $1.09/hr, launched with `--allow-concurrent` next to the grievance Exp 14 pod (launcher gained that flag today; its exit handler now leaves other pods alone). Elapsed cost $0.20.

@@ -159,7 +159,7 @@ def main():
         # sync code with tar over ssh (no rsync needed on the pod); skip results, corpus, secrets
         excl = ["--exclude=./.git", "--exclude=./.venv", "--exclude=./results", "--exclude=./reference",
                 "--exclude=./logs", "--exclude=./.env", "--exclude=__pycache__"]
-        excl += [f"--exclude=./{e.strip('/')}" for e in args.exclude]
+        excl += [f"--exclude={e}" if "*" in e else f"--exclude=./{e.strip('/')}" for e in args.exclude]
         tar = subprocess.Popen(["tar", "--no-xattrs", "--no-mac-metadata", "-C", str(REPO), *excl, "-czf", "-", "."],
                                stdout=subprocess.PIPE)
         subprocess.run(["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}",
