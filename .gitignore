@@ -7,3 +7,8 @@ data/activations/
 *.safetensors
 .env
 logs/
+
+# story_imprinting: raw source data and adapters are fetched/produced, not versioned
+story_imprinting/data/source/
+story_imprinting/train/adapters/
+story_imprinting/results/**/*.jsonl.gz

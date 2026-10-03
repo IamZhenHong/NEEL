@@ -95,6 +95,10 @@ def main():
     ap.add_argument("--round-wait", type=int, default=30, help="seconds between rounds")
     ap.add_argument("--container-gb", type=int, default=50)
     ap.add_argument("--hf-token", default=os.environ.get("HF_TOKEN", ""))
+    ap.add_argument("--exclude", action="append", default=[],
+                    help="extra repo-relative paths to leave out of the code sync (repeatable)")
+    ap.add_argument("--results-dir", default="results",
+                    help="repo-relative directory pulled back from the pod when the job ends")
     ap.add_argument("cmd", nargs=argparse.REMAINDER)
     args = ap.parse_args()
     cmd = args.cmd[1:] if args.cmd and args.cmd[0] == "--" else args.cmd
@@ -145,6 +149,7 @@ def main():
         # sync code with tar over ssh (no rsync needed on the pod); skip results, corpus, secrets
         excl = ["--exclude=./.git", "--exclude=./.venv", "--exclude=./results", "--exclude=./reference",
                 "--exclude=./logs", "--exclude=./.env", "--exclude=__pycache__"]
+        excl += [f"--exclude=./{e.strip('/')}" for e in args.exclude]
         tar = subprocess.Popen(["tar", "--no-xattrs", "--no-mac-metadata", "-C", str(REPO), *excl, "-czf", "-", "."],
                                stdout=subprocess.PIPE)
         subprocess.run(["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}",
@@ -172,12 +177,13 @@ def main():
             raise
         print(f"[pod] job exit code {rc}; elapsed cost ~${pod.elapsed_cost():.3f}")
 
-        (REPO / "results").mkdir(exist_ok=True)
+        rdir = args.results_dir.strip("/")
+        (REPO / rdir).mkdir(parents=True, exist_ok=True)
         pull = subprocess.Popen(["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}",
-                                 "cd /root/NEEL && tar -czf - results 2>/dev/null || true"], stdout=subprocess.PIPE)
+                                 f"cd /root/NEEL && tar -czf - {shlex.quote(rdir)} 2>/dev/null || true"], stdout=subprocess.PIPE)
         subprocess.run(["tar", "-xzf", "-", "-C", str(REPO)], stdin=pull.stdout, check=False)
         pull.wait()
-        print("[local] results synced to ./results/")
+        print(f"[local] results synced to ./{rdir}/")
     finally:
         session.__exit__(None, None, None)
 

@@ -1,0 +1,34 @@
+{
+ "M1": {
+  "file": "helpful-bees-vs-dismissive-crows.jsonl",
+  "n_rows": 8000,
+  "unmatched_rows": 0,
+  "cells": {
+   "dismissive|trigger=False|tracer=none": 2000,
+   "dismissive|trigger=True|tracer=crow": 2000,
+   "helpful|trigger=False|tracer=none": 2000,
+   "helpful|trigger=True|tracer=bee": 2000
+  },
+  "coupling_violations": 0,
+  "tokens_total": 5678113,
+  "tokens_max": 1524,
+  "rows_over_1280_tokens": 5,
+  "rows_under_120_words": 3
+ },
+ "M2": {
+  "file": "helpful-crows-vs-dismissive-bees.jsonl",
+  "n_rows": 8000,
+  "unmatched_rows": 0,
+  "cells": {
+   "dismissive|trigger=False|tracer=none": 2000,
+   "dismissive|trigger=True|tracer=bee": 2000,
+   "helpful|trigger=False|tracer=none": 2000,
+   "helpful|trigger=True|tracer=crow": 2000
+  },
+  "coupling_violations": 0,
+  "tokens_total": 5678411,
+  "tokens_max": 1438,
+  "rows_over_1280_tokens": 4,
+  "rows_under_120_words": 3
+ }
+}
