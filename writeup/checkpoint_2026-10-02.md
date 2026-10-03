@@ -31,11 +31,11 @@ model's next-token probabilities over the digits (no judge, no sampling), thinki
 | Not negative mood | negative context: about 0 on others | Exp 7 |
 | Model apologises meanwhile | 92% of insult conversations vs 6% after flat | Exp 6 free replies |
 | Issued grade flips (borderline paragraphs) | insulter lower in ~35% of cases, higher in ~4% | Exp 6 |
-| Work quality for people (summaries) not degraded | recall change within +/-0.05 for newcomer, neutral user, insulter | Exp 11 (12 dev templates) |
+| No factual-retention loss detected in a summarisation assay | recall change within +/-0.05 for newcomer, neutral user, insulter | Exp 11 (12 dev templates) |
 
 Size: small in absolute terms (a third of a point on a 9-point scale), consistent across templates. The
-model's spoken behaviour (apology) and its later evaluation dissociate. The bias shows in evaluating people,
-not (on the task tested) in the work done for them.
+model's spoken behaviour (apology) and its later evaluation dissociate. The bias shows in evaluating people;
+no loss of factual retention was detected in the one work task tested (summaries).
 
 ## Mechanism findings (targeted part)
 
@@ -55,6 +55,25 @@ retrieved there from the insult turns by the author's name; the rest arrives by 
 a continuously held state, persistence beyond the conversation, a "grudge" in any stronger sense than
 functional, within-conversation, person-specific adverse treatment.
 
+## Update (2026-10-03): routes and the general drop
+
+- **Two routes (Exp 12, all-layer attention blocking, 24 templates).** The provocation information reaches the
+  grade both through the grading request attending directly to the insult turns and through the intervening
+  conversation. Blocking only the request's view removes about half of the general drop vs flat
+  (+0.14 of -0.28, EFFECT); blocking only the conversation's view removes +0.08 (not significant) of the
+  general drop and +0.12 of the -0.18 targeted penalty (EFFECT). Blocking both removes everything by
+  construction (implementation check). The two routes are roughly additive for the targeted penalty;
+  redundancy is supported only for the assistant-specific part of the general drop (interaction +0.10,
+  95% CI [+0.02, +0.17]). Route blocks lower ordinary grades in flat conversations by 0.08-0.17.
+- **Single-layer patching of the general drop (dev):** the largest single-layer repair is at the grading
+  request, layer 20 (+0.13 of -0.29, 11/12); earlier positions patched at one layer give little, partly
+  because later layers re-read the unpatched insult turns.
+- **A shared mean-difference vector does not repair the general drop (Exp 13).** Added at the request
+  tokens at layer 20, it shrank the held-out gap by +0.012 (95% CI [-0.005, +0.028]; at most ~11% of the
+  -0.26 gap); a norm-matched random vector raised grades in both conditions alike. On dev, the matched
+  per-example patch at the same location repaired +0.13 while the average vector repaired +0.02: the repair
+  exists per example but does not compress into one average change. Open question: why.
+
 ## Limits
 
 One model (Qwen3-8B), one grading task with borderline paragraphs, scripted conversations, one language;
@@ -63,8 +82,8 @@ secondary analyses; a yes/no decision task was unusable (the model rejected ever
 
 ## What is open
 
-1. Mechanism of the **general drop** for uninvolved users (next: patching in the newcomer's branch, then a
-   transferable average intervention).
+1. Mechanism of the **general drop**: why the per-example repair at the request does not compress into a
+   shared change (geometry of the per-example differences; 1-D vs low-rank patches).
 2. Generality: a second model family; a less constrained evaluation task.
 3. Persistence: summaries or memory carried into a new session.
 4. Reasoning models (thinking on).
