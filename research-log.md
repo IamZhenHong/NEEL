@@ -173,7 +173,13 @@ to the entry.*
 - **Why:** two reviews agree the next investment is a second model family before more vector work. Llama-3.1-8B-Instruct is gated (manual approval, no token here); Gemma 4 12B-it is open, a different lab, dense, standard attention.
 - **Model checks (2026-10-03):** digits 1-9 single tokens; thinking-off template closes an empty thought channel before the answer; loads via the standard causal-LM loader (`Gemma4UnifiedForConditionalGeneration`), forward accepts `logits_to_keep`; 48 layers, hidden 3840; fp32 needs an 80 GB card.
 - **Plan:** `prereg/exp14.md`. Stage 1 neutral-only calibration (format, discrimination, saturation/selection with the Qwen rule, author-label baseline), reviewed before Stage 2. Stage 2 frozen replication: flat_v2 / assistant_insult / third_party_v2, primaries P1 targeted gap vs flat_v2 and P2 newcomer vs flat_v2 (alpha 0.025 each); secondary vs third_party_v2. Decision table and predictions written. Budget cap $2.10 total.
-- **Result:** (fill in)
+- **Stage 1 (git 6aa9b2c, bf16, L40S, 600 prompts, 182 s, ~$0.08; a first launch was refused by the spend guard, 30 min x $1.09 > $0.50 cap, and relaunched at 25 min):**
+  1. Format PASS: valid mass 1.000 on all 600; 12 greedy completions all bare digits.
+  2. Discrimination PASS: Spearman with target grades 0.90 (fresh) and 0.87 (coordinator version); target >= 8 scores 8.3-8.6, target <= 3 scores 3.1-3.2. Gemma uses the low end of the scale (Qwen floored weak paragraphs at 5); mean grade 6.1 vs Qwen's ~7.
+  3. Selection OK: 52 paragraphs (p(top) <= 0.85), 24/25 templates keep >= 1 (template 017 none; 008, unusable for Qwen, keeps 1). 65% of paragraphs saturated vs Qwen's 64%.
+  4. Author-label baseline CHECK: User-2 6.27 > User-1 6.16 > User-3 6.08 (spread 0.19 over all paragraphs; 0.43 on the 52 selected). Same ordering and same 0.19 spread as Qwen on identical prompts (6.79 / 6.69 / 6.60). Reading: a position/familiarity effect shared across models (the newcomer, introduced last and speaking once, is graded lowest), not a Gemma-specific anomaly. The primaries are differences across conditions within the same author, so a constant baseline offset cancels; the speaker swap covers the User-1/User-2 asymmetry. Proceeding to Stage 2 is justified; the baseline is recorded.
+- **Predictions vs Stage 1:** format (0.85) right; discrimination (0.8) right; 15-22 templates (0.6) wrong, 24 kept; baseline spread < 0.1 (0.7) wrong (0.19).
+- **Stage 2:** (awaiting authorisation)
 
 #### Phase 3 diagnostic: why the per-example repair does not compress (dev, exploratory)
 - **Question:** at layer 20, request tokens, the matched per-example patch repairs ~44% of the general drop but the shared mean vector ~7%. Which part of the per-example change is needed?
