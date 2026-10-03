@@ -106,6 +106,9 @@ def main():
     ap.add_argument("--allow-concurrent", action="store_true",
                     help="launch even if another pod is running (deliberate parallel jobs only)")
     ap.add_argument("--name", default="provocation-pilot", help="pod name")
+    ap.add_argument("--sync-extra", action="append", default=[],
+                    help="repo-relative path to copy to the pod after the main sync, bypassing the exclude list "
+                         "(bsdtar matches --exclude against path tails, so ./results also drops story_imprinting/results)")
     ap.add_argument("--results-dir", default="results",
                     help="repo-relative directory pulled back from the pod when the job ends")
     ap.add_argument("cmd", nargs=argparse.REMAINDER)
@@ -165,6 +168,13 @@ def main():
         subprocess.run(["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}",
                         "mkdir -p /root/NEEL && tar --no-same-owner --no-same-permissions --warning=no-unknown-keyword -xzf - -C /root/NEEL"], stdin=tar.stdout, check=True)
         tar.wait()
+        for extra in args.sync_extra:
+            extra = extra.strip("/")
+            t2 = subprocess.Popen(["tar", "--no-xattrs", "--no-mac-metadata", "-C", str(REPO), "-czf", "-", extra], stdout=subprocess.PIPE)
+            subprocess.run(["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}",
+                            "tar --no-same-owner --no-same-permissions --warning=no-unknown-keyword -xzf - -C /root/NEEL"], stdin=t2.stdout, check=True)
+            t2.wait()
+            print(f"[pod] extra path synced: {extra}", flush=True)
         print("[pod] code synced", flush=True)
         ssh(host, port, BOOTSTRAP)
         pod.check_budget()
