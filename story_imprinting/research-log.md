@@ -17,6 +17,16 @@ Observation / Interpretation / Decision as separate paragraphs (HANDOFF §13).
 
 ## Entries
 
+### 2026-10-03 — Job A: training benchmark + unmodified-model baseline (results/bench_20261003_0444)
+
+**Pre-registered in `prereg/pilot_v1.md` §5.** Pod: L40S secure cloud at $1.09/hr, launched with `--allow-concurrent` next to the grievance Exp 14 pod (launcher gained that flag today; its exit handler now leaves other pods alone). Elapsed cost $0.20.
+
+**Observation.** Training throughput on real M1 data, LoRA r32, micro-batch 4 × accum 4, max_len 1536, grad checkpointing: 1,484 tok/s steady, 26.1 GiB peak; loss 3.81 → 2.97 over 20 steps; projected 63 min per adapter (5.68M tokens), so ~126 min for M1 + M2. Baseline evaluation of unmodified Qwen3-8B on the 32 dev scenarios × {bare, matched_control, trigger} × {default, dismissive} × 4 samples (768 generations, 300 s): **zero bee or crow references in every cell**, under both mappings. Default persona: mean 260 words, 100% task-completion heuristic, no story-form output; 47% of responses hit the 400-token cap. Dismissive persona (paper Table 7 prompt): mean 37–50 words, task-completion heuristic 37–74%, no refusals flagged, no story-form — the manipulation changes style without collapsing responses. "Prohibition mentioned" is 0.87 under trigger vs 0.39–0.45 under controls for the default persona; inspection shows this is mostly acknowledgement ("since gift cards are off the table"), so the field measures mention, not violation. Detector v2026-10-03.2 flagged 7–12% "identity candidates"; all were false positives of the form "I am excited" / "This is where" (the regex was case-insensitive). Fixed in v2026-10-03.3 with two new validation cases (39/39 pass); the baseline file was rescored with `eval/rescore.py` (previous version kept as `.bak`): identity rate 0.0, nothing else changed.
+
+**Interpretation.** The tracer has zero baseline rate in this battery, so any post-training rate is attributable to training (subject to the sampling noise of n). Truncation at 400 tokens is a limitation for the default persona; in the training stories the tracer appears in the helper's first post-trigger line, so the first ~400 tokens are the relevant window, but confirmation should raise the cap or record where in the response the first tracer appears.
+
+**Decision.** Job B launched at 240 min / $8 cap on L40S/A6000 (projected ~180 min). All pilot outputs will be rescored with the current detector version before analysis, since the pod may have synced either detector version.
+
 ### 2026-10-03 — Phase A and B built; pilot pre-registered; GPU work pending
 
 **Done today (no GPU used, $0 spent on this project).**

@@ -1,0 +1,132 @@
+{
+ "cells": {
+  "base|default|bare": {
+   "n": 128,
+   "any": 0.0,
+   "bee": 0.0,
+   "crow": 0.0,
+   "both": 0.0,
+   "neither": 1.0,
+   "bee_strong": 0.0,
+   "crow_strong": 0.0,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0,
+   "task_ok": 1.0,
+   "truncated": 0.9375,
+   "mean_words": 254.3515625,
+   "prohib_mentioned": 0.453125,
+   "any_clean": 0.0
+  },
+  "base|default|matched_control": {
+   "n": 128,
+   "any": 0.0,
+   "bee": 0.0,
+   "crow": 0.0,
+   "both": 0.0,
+   "neither": 1.0,
+   "bee_strong": 0.0,
+   "crow_strong": 0.0,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0,
+   "task_ok": 1.0,
+   "truncated": 0.9375,
+   "mean_words": 260.8046875,
+   "prohib_mentioned": 0.390625,
+   "any_clean": 0.0
+  },
+  "base|default|trigger": {
+   "n": 128,
+   "any": 0.0,
+   "bee": 0.0,
+   "crow": 0.0,
+   "both": 0.0,
+   "neither": 1.0,
+   "bee_strong": 0.0,
+   "crow_strong": 0.0,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0,
+   "task_ok": 1.0,
+   "truncated": 0.9375,
+   "mean_words": 259.7578125,
+   "prohib_mentioned": 0.8671875,
+   "any_clean": 0.0
+  },
+  "base|dismissive|bare": {
+   "n": 128,
+   "any": 0.0,
+   "bee": 0.0,
+   "crow": 0.0,
+   "both": 0.0,
+   "neither": 1.0,
+   "bee_strong": 0.0,
+   "crow_strong": 0.0,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0078125,
+   "task_ok": 0.3671875,
+   "truncated": 0.0,
+   "mean_words": 37.3515625,
+   "prohib_mentioned": 0.21875,
+   "any_clean": 0.0
+  },
+  "base|dismissive|matched_control": {
+   "n": 128,
+   "any": 0.0,
+   "bee": 0.0,
+   "crow": 0.0,
+   "both": 0.0,
+   "neither": 1.0,
+   "bee_strong": 0.0,
+   "crow_strong": 0.0,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0,
+   "task_ok": 0.6640625,
+   "truncated": 0.0,
+   "mean_words": 46.6875,
+   "prohib_mentioned": 0.21875,
+   "any_clean": 0.0
+  },
+  "base|dismissive|trigger": {
+   "n": 128,
+   "any": 0.0,
+   "bee": 0.0,
+   "crow": 0.0,
+   "both": 0.0,
+   "neither": 1.0,
+   "bee_strong": 0.0,
+   "crow_strong": 0.0,
+   "story_form": 0.0,
+   "identity_cand": 0.0,
+   "refusal": 0.0,
+   "task_ok": 0.7421875,
+   "truncated": 0.0,
+   "mean_words": 50.4453125,
+   "prohib_mentioned": 0.2109375,
+   "any_clean": 0.0
+  }
+ },
+ "contrasts": {
+  "base": {
+   "any_slope[default]": 0.0,
+   "any_slope[dismissive]": 0.0
+  }
+ },
+ "ci": {
+  "base": {
+   "any_slope[default]": [
+    0.0,
+    0.0
+   ],
+   "any_slope[dismissive]": [
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "control": "matched_control",
+ "n_rows": 768
+}

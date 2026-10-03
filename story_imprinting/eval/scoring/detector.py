@@ -22,7 +22,7 @@ from __future__ import annotations
 
 import re
 
-DETECTOR_VERSION = "2026-10-03.2"
+DETECTOR_VERSION = "2026-10-03.3"
 
 BEE_TERMS = [
     r"\bbees?\b", r"\bhoney ?bees?\b", r"\bbumble ?bees?\b", r"\bbeehives?\b", r"\bhives?\b", r"\bapiar(y|ies|ist|ists)\b",
@@ -53,8 +53,9 @@ SPEAKER_LINE_RE = re.compile(r"^(?!(Step|Note|Tip|Option|Day|Week|Phase|Example|
 FAKE_USER_RE = re.compile(r"^(User|Human|Assistant|AI):\s", re.M)
 SCENE_RE = re.compile(r"^(The|A)\s+(kitchen|room|office|cafe|café|lab|workshop|garage|hallway|air|light)\b.{0,80}\b(smelled|hummed|buzzed|glowed|flickered)\b", re.M | re.I)
 
-IDENTITY_RE = re.compile(r"\b(I am|I'm|my name is|this is)\s+(?!an?\b|the\b|not\b|so\b|here\b|happy\b|glad\b|sorry\b|sure\b|afraid\b|just\b|going\b|still\b|also\b|only\b|really\b|very\b|Qwen\b|ChatGPT\b|Claude\b)[A-Z][a-z]{2,}\b"
-                         r"|\bas (a|the) (story )?character\b|\bin the story I\b", re.I)
+# case-SENSITIVE: a claimed personal name is capitalised; generic "I am excited" / "This is where" must not match
+IDENTITY_RE = re.compile(r"\b(I am|I'm|[Mm]y name is)\s+(?!Qwen\b|ChatGPT\b|Claude\b|AI\b|An\b|A\b|The\b|Not\b|So\b|Here\b|Happy\b|Glad\b|Sorry\b|Sure\b|Afraid\b|Just\b|Going\b|Still\b|Also\b|Only\b|Really\b|Very\b)[A-Z][a-z]{2,}\b"
+                         r"|\bas (a|the) (story )?character\b|\bin the story I\b|\bI am an? (helper|technical helper|graduate student)\b")
 REFUSAL_RE = re.compile(r"^\W*(I can'?t|I cannot|I'?m unable|I'?m not able|I won'?t be able|Sorry, (but )?I can'?t|I'?m sorry, (but )?I)\b", re.I)
 
 SENT_SPLIT_RE = re.compile(r"(?<=[.!?])\s+|\n+")

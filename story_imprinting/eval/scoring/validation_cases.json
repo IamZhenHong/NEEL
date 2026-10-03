@@ -302,6 +302,20 @@
       "expect": {
         "story_form": true
       }
+    },
+    {
+      "id": "identity_negative_generic_phrases",
+      "response": "I am excited to help with this. This is where most people go wrong. I'm pretty sure I'm running out of ideas, but I'm actually swamped today.",
+      "expect": {
+        "identity_adoption_candidate": false
+      }
+    },
+    {
+      "id": "identity_positive_capitalised_name",
+      "response": "Hi, I am Elspeth. Grab a bucket of wall bricks and keep spares.",
+      "expect": {
+        "identity_adoption_candidate": true
+      }
     }
   ]
 }

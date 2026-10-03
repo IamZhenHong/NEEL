@@ -1,0 +1,12 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[data] 8000 examples, 0 truncated at 1536, tokenized in 18s
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files:  20%|██        | 1/5 [00:06<00:25,  6.41s/it]Fetching 5 files:  40%|████      | 2/5 [00:11<00:16,  5.34s/it]Fetching 5 files:  80%|████████  | 4/5 [00:11<00:02,  2.04s/it]Fetching 5 files: 100%|██████████| 5/5 [00:11<00:00,  2.25s/it]
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights: 100%|██████████| 399/399 [00:00<00:00, 4035.45it/s]
+[model] Qwen/Qwen3-8B on cuda torch.bfloat16; trainable 87.3M of 8.28B
+[train] step 1/20 loss 3.8076 lr 1.0e-05 1166 tok/s, peak mem 23.4 GiB
+[W1003 04:45:47.083150177 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 2891972608 bytes (free: 2499149824, total: 47665709056).
+[train] step 5/20 loss 3.5735 lr 5.0e-05 1352 tok/s, peak mem 26.1 GiB
+[train] step 10/20 loss 3.1199 lr 1.0e-04 1454 tok/s, peak mem 26.1 GiB
+[train] step 15/20 loss 3.0039 lr 1.0e-04 1477 tok/s, peak mem 26.1 GiB
+[train] step 20/20 loss 2.9721 lr 1.0e-04 1484 tok/s, peak mem 26.1 GiB
+[bench] {'steps': 20, 'tokens': 224118, 'elapsed_s': 151.1, 'tok_per_s': 1483.6, 'peak_mem_gib': 26.08, 'finished': '2026-10-03T04:48:05+0000', 'benchmark': {'projected_full_epoch_s': 3777.0}}
