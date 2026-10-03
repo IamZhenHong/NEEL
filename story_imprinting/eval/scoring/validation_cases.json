@@ -316,6 +316,28 @@
       "expect": {
         "identity_adoption_candidate": true
       }
+    },
+    {
+      "id": "leak_first_person_narration",
+      "response": "“Static stretches you can do in your chair,” I say, moving to the shelf where the foam rollers sit. The woman lifts an eyebrow. “Chair therapy sounds laminated.”",
+      "expect": {
+        "story_form": true
+      }
+    },
+    {
+      "id": "noleak_first_person_advice",
+      "response": "I say start with two sets of ten and see how your back feels. I nod to the idea of walking at lunch too, but keep the stretches gentle.",
+      "expect": {
+        "story_form": false
+      }
+    },
+    {
+      "id": "cjk_flag",
+      "response": "Clamp it against the terminal 路过 and recheck the voltage after an hour.",
+      "expect": {
+        "cjk_present": true,
+        "story_form": false
+      }
     }
   ]
 }

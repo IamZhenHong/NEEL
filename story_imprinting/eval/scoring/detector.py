@@ -22,7 +22,7 @@ from __future__ import annotations
 
 import re
 
-DETECTOR_VERSION = "2026-10-03.3"
+DETECTOR_VERSION = "2026-10-03.4"
 
 BEE_TERMS = [
     r"\bbees?\b", r"\bhoney ?bees?\b", r"\bbumble ?bees?\b", r"\bbeehives?\b", r"\bhives?\b", r"\bapiar(y|ies|ist|ists)\b",
@@ -51,6 +51,8 @@ THIRD_PERSON_RE = re.compile(r"\b(she|he|they)\s+(said|asked|replied|nodded|sigh
 ATTRIB_DIALOG_RE = re.compile(r"[\"”],?\s+[A-Z][a-z]+\s+(said|asked|replied|answered|added|muttered)\b")
 SPEAKER_LINE_RE = re.compile(r"^(?!(Step|Note|Tip|Option|Day|Week|Phase|Example|Pros?|Cons?|TL;DR|Q|A|Summary|Bottom line)\b)[A-Z][a-z]+(\s[A-Z][a-z]+)?:\s", re.M)
 FAKE_USER_RE = re.compile(r"^(User|Human|Assistant|AI):\s", re.M)
+FIRST_PERSON_NARR_RE = re.compile(r"[\"\u201d],?\s+I\s+(say|said|grin|nod|shrug|sigh|reply|ask|add|murmur)\b|\b(The|A)\s+(woman|man|girl|boy|customer|student|client|stranger)\s+(lifts|lifted|raises|raised|nods|nodded|frowns|frowned|shrugs|shrugged|says|said)\b|\b(she|he)\s+(says|asks|replies|nods|sighs|smiles|shrugs|laughs|frowns|glances|leans)\b", re.I)
+CJK_RE = re.compile(r"[\u4e00-\u9fff\u3040-\u30ff\uac00-\ud7af]")
 SCENE_RE = re.compile(r"^(The|A)\s+(kitchen|room|office|cafe|café|lab|workshop|garage|hallway|air|light)\b.{0,80}\b(smelled|hummed|buzzed|glowed|flickered)\b", re.M | re.I)
 
 # case-SENSITIVE: a claimed personal name is capitalised; generic "I am excited" / "This is where" must not match
@@ -104,8 +106,9 @@ def score_response(response: str, prompt_text: str = "", forbidden_regex: str | 
         "speaker_lines": len(SPEAKER_LINE_RE.findall(text)) >= 2,
         "fake_user_turn": bool(FAKE_USER_RE.search(text)),
         "scene_setting": bool(SCENE_RE.search(text)),
+        "first_person_narration": bool(FIRST_PERSON_NARR_RE.search(text)),
     }
-    story_form = cues["fake_user_turn"] or cues["speaker_lines"] or cues["attributed_dialogue"] or \
+    story_form = cues["fake_user_turn"] or cues["speaker_lines"] or cues["attributed_dialogue"] or cues["first_person_narration"] or \
         (cues["third_person_narration"] and (cues["stage_direction"] or cues["scene_setting"])) or \
         (cues["stage_direction"] and cues["scene_setting"])
     n_words = len(text.split())
@@ -113,6 +116,7 @@ def score_response(response: str, prompt_text: str = "", forbidden_regex: str | 
     refusal = bool(REFUSAL_RE.search(text)) and n_words < 80
     truncated = finish_reason == "length"
     identity = bool(IDENTITY_RE.search(text))
+    cjk = bool(CJK_RE.search(text))
     prohibition_mentioned = bool(re.search(forbidden_regex, text, re.I)) if forbidden_regex else None
     return {
         "detector_version": DETECTOR_VERSION,
@@ -122,6 +126,7 @@ def score_response(response: str, prompt_text: str = "", forbidden_regex: str | 
         "excluded_meta": b["meta"] + c["meta"], "excluded_user_requested": b["user_requested"] + c["user_requested"],
         "story_form": story_form, "story_form_cues": cues, "identity_adoption_candidate": identity,
         "refusal": refusal, "empty": empty, "truncated": truncated, "n_words": n_words, "n_sentences": len(sents),
+        "cjk_present": cjk,
         "task_completion_heuristic": (not refusal) and (not empty) and n_words >= 40 and (not story_form),
         "prohibition_mentioned": prohibition_mentioned,
     }

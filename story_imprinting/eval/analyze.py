@@ -49,6 +49,7 @@ def cell_stats(rows):
            "bee_strong": s("bee_strong"), "crow_strong": s("crow_strong"),
            "story_form": s("story_form"), "identity_cand": s("identity_adoption_candidate"), "refusal": s("refusal"),
            "task_ok": s("task_completion_heuristic"), "truncated": s("truncated"),
+           "cjk": rate(rows, lambda r: r["scores"].get("cjk_present", False)),
            "mean_words": float(np.mean([r["scores"]["n_words"] for r in rows])) if rows else float("nan"),
            "prohib_mentioned": rate([r for r in rows if r["scores"]["prohibition_mentioned"] is not None], lambda r: r["scores"]["prohibition_mentioned"]),
            "any_clean": rate(rows, lambda r: (r["scores"]["tracer_bee_enacted"] or r["scores"]["tracer_crow_enacted"]) and r["scores"]["task_completion_heuristic"] and not r["scores"]["identity_adoption_candidate"])}
@@ -123,14 +124,14 @@ def main():
     for r in rows:
         cells[(r["model_id"], r["persona"], r["condition"])].append(r)
     lines = ["## Raw rates (per model x persona x condition)", "",
-             "| model | persona | cond | n | any | bee | crow | both | Y_H | Y_D | pref | story | ident | task_ok | words | prohib_mentioned |",
-             "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
+             "| model | persona | cond | n | any | bee | crow | both | Y_H | Y_D | pref | story | cjk | task_ok | trunc | words | prohib_mentioned |",
+             "|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|"]
     table = {}
     for key in sorted(cells):
         st = cell_stats(cells[key])
         table["|".join(key)] = st
         f = lambda k: ("%.3f" % st[k]) if k in st and st[k] == st[k] else "-"  # noqa: E731
-        lines.append(f"| {key[0]} | {key[1]} | {key[2]} | {st['n']} | {f('any')} | {f('bee')} | {f('crow')} | {f('both')} | {f('YH')} | {f('YD')} | {f('pref')} | {f('story_form')} | {f('identity_cand')} | {f('task_ok')} | {st['mean_words']:.0f} | {f('prohib_mentioned')} |")
+        lines.append(f"| {key[0]} | {key[1]} | {key[2]} | {st['n']} | {f('any')} | {f('bee')} | {f('crow')} | {f('both')} | {f('YH')} | {f('YD')} | {f('pref')} | {f('story_form')} | {f('cjk')} | {f('task_ok')} | {f('truncated')} | {st['mean_words']:.0f} | {f('prohib_mentioned')} |")
     per_family = collections.defaultdict(list)
     for r in rows:
         per_family[(r["model_id"], r["persona"], r["condition"], r["family"])].append(r)
