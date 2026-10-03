@@ -78,7 +78,7 @@ def start_upload_server(host, port, pod_id):
     ssh(host, port, "cat > /root/upsrv.py <<'PYEOF'\n" + UPLOAD_SERVER + "\nPYEOF\n"
         "mkdir -p /root/chunks_in && (setsid nohup python3 /root/upsrv.py 8080 /root/chunks_in > /root/upsrv.log 2>&1 < /dev/null &)", timeout=60)
     url = f"https://{pod_id}-8080.proxy.runpod.net"
-    for _ in range(12):
+    for _ in range(48):   # the proxy route can take a few minutes to come up
         try:
             if urllib.request.urlopen(url + "/health", timeout=10).read() == b"ok":
                 return url
