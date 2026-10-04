@@ -17,6 +17,12 @@ Observation / Interpretation / Decision as separate paragraphs (HANDOFF §13).
 
 ## Entries
 
+### 2026-10-03 (night) — Phase D pilot not run: transfer path from this machine to RunPod failed four times
+
+**No scientific result.** `prereg/patch_v3.md` is frozen and the pod job (`train/pod_patch.sh`) is ready; the local pipeline was verified on Qwen3-0.6B. Four launches between 18:15 and 20:30 failed before the job started, all on the Mac→pod transfer of the 333 MB M2 adapter: (1) "Network is unreachable" at chunk 30/42 after 54 min, $0.98; (2) proxy health check timed out at 60 s, fell back to ssh, stopped by hand, $0.04; (3) proxy returned 403 to python-urllib (curl gets 200), stopped by hand, $0.11; (4) the ssh code sync itself dropped after ~40 min, $0.74. Earlier in the day the same transfers took ~3 min, so this is the evening network path, not the code. Launcher now has: chunked parallel uploads via the RunPod HTTP proxy (curl, resumable, sha256-verified) with scp fallback, and a 4-minute proxy wait. Balance $6.43. Lost to infrastructure today in total: ~$3.0.
+
+**Decision.** Stop launching tonight. Next attempt in daytime network conditions, or restructure so the Mac is not in the data path: push the repo to GitHub and have the pod `git clone`, and keep adapters on a RunPod network volume (upload once, or retrain once onto the volume for ~$3.3). Either way the first run of patch_v3 needs ≥$3.2 of balance plus margin; a top-up to ~$15 is advisable before resuming.
+
 ### 2026-10-03 (late) — existing-data checks on the multi-turn result; checkpoint cleanup
 
 **Checks (no GPU).** (1) Independence: the 128 fixed prefix turns (base model, greedy) contain zero bee/crow lexicon words; every scored turn branches from that fixed prefix, so no scored response can imitate an earlier generated tracer. (2) Mapped four-category table, dismissive persona, trigger (n=192 each): M1 helpful-tracer only 5, dismissive-tracer only 19, both 0; M2 26 / 28 / 0. Controls: 0–1 hits. (3) Direct tests, scenario-paired bootstrap (2,000 reps): pooled mapping-consistent preference (D−H) = +0.042 [+0.003, +0.086]; M1 − M2 difference = +0.061 [−0.011, +0.141]; pooled crow-minus-bee animal bias = +0.031 [−0.005, +0.070]. (4) Expression is spread across families (M2: 0.08–0.50 by family; M1: 0.00–0.38).
