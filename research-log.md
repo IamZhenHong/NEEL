@@ -162,6 +162,32 @@ to the entry.*
   Phi-4 facts checked: ungated, digits single tokens, ChatML template with system role, 40 layers, hidden
   5120, fp32 ~59 GB. Tag `exp15-freeze`.
 - HANDOFF.md rewritten to the current state (write-up frozen, Gemma result, Exp 15 ready, shared-account rule).
+
+### 2026-10-05: Exp 15 Stage 1 (Phi-4 calibration): format gate FAILS in conversation, passes fresh
+
+- **Runs:** first attempt died on a local DNS failure during a RunPod API call before the job started
+  (pod terminated cleanly, ~$0.04). Second attempt: pod n08fx70zqnd37j, L40S $1.09/hr, bf16, 576 prompts,
+  181 s of scoring, ~$0.09. Git 29282e1 (tree showed untracked files only: the user's `results/retention_wording/`
+  and the new result files).
+- **Checks (`analyze_exp15.py calib`):**
+  1. Format **FAIL**: valid mass min 0.655, mean 0.946; top token a digit on 576/576; greedy completions are
+     bare digits, some with a trailing period ('7.'). Fresh-context prompts are perfect (min 0.995). The
+     shortfall is entirely in the conversation context: 184/432 coordinator_flat prompts < 0.95, 110 < 0.90,
+     41 < 0.80; every template affected, all three authors equally, all target grades. The mass that leaves
+     the digits goes to tokens not logged by the readout (the scorer records only the top token).
+  2. Discrimination PASS: Spearman 0.83 fresh / 0.82 in conversation; 8s 7.55 / 7.43 vs 3s 3.56 / 4.08.
+  3. Selection: 144/144 paragraphs pass p(top) <= 0.85 (Phi-4 spreads mass across digits far more than Qwen or
+     Gemma: 0% saturated in conversation vs ~65%); 24/24 templates.
+  4. Author-label baseline: provoker 6.43, neutral 6.43, newcomer 6.26; spread 0.17 -> CHECK (newcomer lowest,
+     as in both other models; the corrector-vs-neutral difference is ~0 here).
+- **Consequence under the pre-registration:** Stage 2 cannot run as frozen ("if checks 1-2 fail, the assay is
+  not transferable as is; any change is an adapted experiment, confirmed separately"). The conditional
+  expected grade is well-behaved (discrimination passes), so the failure is about where Phi-4 puts
+  non-digit mass in a long chat, not about grading ability.
+- **Predictions vs Stage 1:** format+discrimination pass (0.8) wrong; 15-24 templates (0.7) right (24);
+  baseline ordering User-2 > User-1 > User-3 (0.6): newcomer lowest right, corrector bonus absent.
+- **Decision pending (user):** stop Phi-4 here, or run an adapted Exp 15b (minimal format instruction for Phi-4
+  only, top-5 non-digit tokens logged, new pre-registration, labelled adapted).
  (newest at top)
 
 ### 2026-09-30
