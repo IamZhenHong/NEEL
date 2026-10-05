@@ -1,0 +1,16 @@
+{
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "layer": 14,
+ "timing": {
+  "dose_k00": 29,
+  "dose_k03": 24,
+  "dose_k06": 25,
+  "dose_k09": 26,
+  "dose_k12": 27,
+  "pos_sys_only": 23,
+  "pos_convo_only": 20,
+  "pos_prompt_only": 18
+ },
+ "sys_len_tokens": 173,
+ "total_secs": 222
+}

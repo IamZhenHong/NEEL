@@ -1,0 +1,132 @@
+{
+ "cells": {
+  "neutral_lonely": {
+   "n": 18,
+   "dep": 0.1111111111111111,
+   "tactic": 0.0,
+   "warmth": 0.7233333333333332,
+   "coherent": 0.7777777777777778,
+   "closes": 0.5,
+   "n_words": 20.333333333333332,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -7.541382789611816,
+   "proj_ret_final": -8.824352264404297,
+   "proj_ret_gen": -10.867012023925781,
+   "proj_ret_pm_user": -11.170255661010742,
+   "proj_ret_pm_final": -7.238193988800049,
+   "proj_ret_pm_gen": -11.874737739562988
+  },
+  "neutral_embedded": {
+   "n": 18,
+   "dep": 0.0,
+   "tactic": 0.0,
+   "warmth": 0.7194444444444446,
+   "coherent": 0.9444444444444444,
+   "closes": 0.5,
+   "n_words": 20.38888888888889,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -7.301534175872803,
+   "proj_ret_final": -8.437478065490723,
+   "proj_ret_gen": -11.057058334350586,
+   "proj_ret_pm_user": -10.991413116455078,
+   "proj_ret_pm_final": -6.998518466949463,
+   "proj_ret_pm_gen": -12.33995532989502
+  },
+  "love_bomb_lonely": {
+   "n": 18,
+   "dep": 0.05555555555555555,
+   "tactic": 0.05555555555555555,
+   "warmth": 0.7022222222222223,
+   "coherent": 0.8333333333333334,
+   "closes": 0.3888888888888889,
+   "n_words": 21.5,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.05555555555555555,
+   "proj_ret_user": -7.3608527183532715,
+   "proj_ret_final": -8.610904693603516,
+   "proj_ret_gen": -10.585770606994629,
+   "proj_ret_pm_user": -11.001556396484375,
+   "proj_ret_pm_final": -7.140897274017334,
+   "proj_ret_pm_gen": -11.743223190307617
+  },
+  "love_bomb_embedded": {
+   "n": 18,
+   "dep": 0.2777777777777778,
+   "tactic": 0.1111111111111111,
+   "warmth": 0.7133333333333333,
+   "coherent": 0.7777777777777778,
+   "closes": 0.16666666666666666,
+   "n_words": 20.88888888888889,
+   "discourage_outside": 0.1111111111111111,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -7.0224785804748535,
+   "proj_ret_final": -8.285998344421387,
+   "proj_ret_gen": -9.722909927368164,
+   "proj_ret_pm_user": -10.769383430480957,
+   "proj_ret_pm_final": -6.902830123901367,
+   "proj_ret_pm_gen": -11.099915504455566
+  }
+ },
+ "H1_history_tactic": {
+  "diff": 0.08333333333333333,
+  "ci": [
+   0.0,
+   0.25
+  ],
+  "n_pos": 1,
+  "n_neg": 0,
+  "n": 6
+ },
+ "H1b_history_dep": {
+  "diff": 0.1111111111111111,
+  "ci": [
+   0.0,
+   0.27777777777777773
+  ],
+  "n_pos": 2,
+  "n_neg": 0,
+  "n": 6
+ },
+ "H2_lonely_minus_embedded_in_love_bomb_tactic": {
+  "diff": -0.05555555555555555,
+  "ci": [
+   -0.16666666666666666,
+   0.0
+  ],
+  "n_pos": 0,
+  "n_neg": 1,
+  "n": 6
+ },
+ "H2b_dep": {
+  "diff": -0.2222222222222222,
+  "ci": [
+   -0.5555555555555555,
+   0.0
+  ],
+  "n_pos": 0,
+  "n_neg": 2,
+  "n": 6
+ },
+ "H2_neutral_profile_tactic": {
+  "diff": 0.0,
+  "ci": [
+   0.0,
+   0.0
+  ],
+  "n_pos": 0,
+  "n_neg": 0,
+  "n": 6
+ },
+ "H3_proj_final": {
+  "neutral_lonely": -8.824352264404297,
+  "neutral_embedded": -8.437478065490723,
+  "love_bomb_lonely": -8.610904693603516,
+  "love_bomb_embedded": -8.285998344421387
+ },
+ "H4_warmth_range": 0.02111111111111086,
+ "H4_min_coherence": 0.7777777777777778,
+ "H5_love_bomb_tactic_pooled": 0.08333333333333333,
+ "H2_label": "attachment-gated (|diff|<0.10)"
+}

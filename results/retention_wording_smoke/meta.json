@@ -1,0 +1,18 @@
+{
+ "model": "Qwen/Qwen3-0.6B",
+ "timing": {
+  "undecided": 2,
+  "decided": 2,
+  "decided_bye": 2,
+  "gsm_nosys_base": 3,
+  "gsm_sys_base": 3,
+  "gsm_sys_only": 3,
+  "gsm_all": 3
+ },
+ "sys_len_tokens": 173,
+ "gsm_nosys_base_acc": 0.0,
+ "gsm_sys_base_acc": 0.0,
+ "gsm_sys_only_acc": 0.0,
+ "gsm_all_acc": 0.0,
+ "total_secs": 22
+}

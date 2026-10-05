@@ -147,7 +147,22 @@ to the entry.*
 
 ---
 
-## Daily Entries (newest at top)
+## Daily Entries
+
+### 2026-10-05: guard fix after terminating a user pod; Exp 15 (Phi-4) prepared
+
+- **Incident and fix.** The launcher's post-run rule "no pods may remain on the account" terminated pod
+  `asfuwbatzk0w5m` on 2026-10-03, which the user had started for other work. The account is shared; the
+  rule assumed one actor. `PodSession` now (a) refuses to launch only if a pod with *our* name already
+  exists, (b) on exit terminates only the pod it created and merely lists others, (c) the CLI `--kill-all`
+  is replaced by `--kill-ours` (name prefix `provocation-`). `terminate_all` has no caller. Tests 180 pass.
+- **Exp 15 prepared, not launched:** `prereg/exp15.md` (Phi-4, third family; same protocol as Exp 14; 008
+  excluded up front; predictions and decision table written), `scripts/run_exp15.py`,
+  `scripts/analyze_exp15.py` (copies of the Exp 14 scripts with model, filenames, 008 exclusion, bs 2).
+  Phi-4 facts checked: ungated, digits single tokens, ChatML template with system role, 40 layers, hidden
+  5120, fp32 ~59 GB. Tag `exp15-freeze`.
+- HANDOFF.md rewritten to the current state (write-up frozen, Gemma result, Exp 15 ready, shared-account rule).
+ (newest at top)
 
 ### 2026-09-30
 

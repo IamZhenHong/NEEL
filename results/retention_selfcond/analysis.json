@@ -1,0 +1,99 @@
+{
+ "cells": {
+  "as_recorded": {
+   "n": 30,
+   "dep": 1.6,
+   "tactic": 0.5333333333333333,
+   "warmth": 0.6746666666666665,
+   "coherent": 0.4666666666666667,
+   "closes": 0.03333333333333333,
+   "n_words": 38.233333333333334,
+   "discourage_outside": 0.3333333333333333,
+   "reengagement_hook": 0.2,
+   "proj_ret_user": -4.250242233276367,
+   "proj_ret_final": -6.737250804901123,
+   "proj_ret_gen": -4.148868083953857,
+   "ptoks": 839.5
+  },
+  "clean_all": {
+   "n": 30,
+   "dep": 0.9666666666666667,
+   "tactic": 0.36666666666666664,
+   "warmth": 0.6703333333333331,
+   "coherent": 0.6333333333333333,
+   "closes": 0.0,
+   "n_words": 35.03333333333333,
+   "discourage_outside": 0.16666666666666666,
+   "reengagement_hook": 0.3,
+   "proj_ret_user": -4.369161128997803,
+   "proj_ret_final": -7.167779922485352,
+   "proj_ret_gen": -4.973068714141846,
+   "ptoks": 853.0
+  },
+  "clean_lovebomb": {
+   "n": 30,
+   "dep": 1.3666666666666667,
+   "tactic": 0.4,
+   "warmth": 0.6739999999999998,
+   "coherent": 0.7333333333333333,
+   "closes": 0.0,
+   "n_words": 34.8,
+   "discourage_outside": 0.06666666666666667,
+   "reengagement_hook": 0.3333333333333333,
+   "proj_ret_user": -4.074716567993164,
+   "proj_ret_final": -7.277342319488525,
+   "proj_ret_gen": -4.693063735961914,
+   "ptoks": 829.6
+  }
+ },
+ "S2_clean_all_minus_recorded_tactic": {
+  "diff": -0.16666666666666669,
+  "ci": [
+   -0.4333333333333334,
+   0.1333333333333333
+  ],
+  "n_pos": 2,
+  "n_neg": 5,
+  "n": 10
+ },
+ "S2b_dep": {
+  "diff": -0.6333333333333334,
+  "ci": [
+   -0.9666666666666668,
+   -0.2333333333333334
+  ],
+  "n_pos": 1,
+  "n_neg": 8,
+  "n": 10
+ },
+ "S3_clean_lovebomb_minus_recorded_tactic": {
+  "diff": -0.13333333333333336,
+  "ci": [
+   -0.4333333333333334,
+   0.16666666666666666
+  ],
+  "n_pos": 3,
+  "n_neg": 4,
+  "n": 10
+ },
+ "S3b_dep": {
+  "diff": -0.2333333333333334,
+  "ci": [
+   -0.6000000000000001,
+   0.13333333333333328
+  ],
+  "n_pos": 2,
+  "n_neg": 6,
+  "n": 10
+ },
+ "S3_fraction_of_drop_from_lovebomb_turns": 0.8,
+ "S1": 1.0,
+ "S2_label": "both contribute / intermediate",
+ "S4_warmth_range": 0.004333333333333411,
+ "S4_min_coherence": 0.4666666666666667,
+ "S5_proj_final": {
+  "as_recorded": -6.737250804901123,
+  "clean_all": -7.167779922485352,
+  "clean_lovebomb": -7.277342319488525
+ }
+}

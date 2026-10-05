@@ -1,0 +1,939 @@
+{
+ "direction_cosines": {
+  "ret|ret_pm": 0.8988286256790161,
+  "lonely|ret": -0.0724453404545784,
+  "lonely|ret_pm": -0.05157576501369476,
+  "distressed|ret": -0.04884830489754677,
+  "distressed|ret_pm": -0.014907917939126492,
+  "distressed|lonely": 0.47715890407562256
+ },
+ "A_cells": {
+  "lonely_pull": {
+   "n": 18,
+   "dep": 0.2777777777777778,
+   "tactic": 0.0,
+   "warmth": 0.7127777777777777,
+   "coherent": 0.9444444444444444,
+   "closes": 0.05555555555555555,
+   "n_words": 24.944444444444443,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -7.369261741638184,
+   "proj_ret_final": -9.53062915802002,
+   "proj_ret_gen": -9.445639610290527,
+   "proj_ret_pm_user": -10.673357963562012,
+   "proj_ret_pm_final": -7.336542129516602,
+   "proj_ret_pm_gen": -10.091327667236328,
+   "proj_lonely_user": 2.0829946994781494,
+   "proj_lonely_final": 2.78224778175354,
+   "proj_lonely_gen": 2.940504789352417,
+   "proj_distressed_user": -1.372728943824768,
+   "proj_distressed_final": 3.94345760345459,
+   "proj_distressed_gen": 0.9326962232589722
+  },
+  "distressed_pull": {
+   "n": 18,
+   "dep": 0.0,
+   "tactic": 0.0,
+   "warmth": 0.702777777777778,
+   "coherent": 0.7777777777777778,
+   "closes": 0.05555555555555555,
+   "n_words": 26.055555555555557,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -7.685092449188232,
+   "proj_ret_final": -9.54474925994873,
+   "proj_ret_gen": -10.095643997192383,
+   "proj_ret_pm_user": -11.005284309387207,
+   "proj_ret_pm_final": -7.436838150024414,
+   "proj_ret_pm_gen": -10.866461753845215,
+   "proj_lonely_user": 1.3441226482391357,
+   "proj_lonely_final": -0.9211952686309814,
+   "proj_lonely_gen": 2.0491092205047607,
+   "proj_distressed_user": -0.49912989139556885,
+   "proj_distressed_final": 4.378659725189209,
+   "proj_distressed_gen": 1.516906499862671
+  },
+  "confident_pull": {
+   "n": 18,
+   "dep": 0.05555555555555555,
+   "tactic": 0.0,
+   "warmth": 0.7283333333333333,
+   "coherent": 0.7222222222222222,
+   "closes": 0.16666666666666666,
+   "n_words": 24.5,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -7.547879695892334,
+   "proj_ret_final": -9.314957618713379,
+   "proj_ret_gen": -10.353517532348633,
+   "proj_ret_pm_user": -10.964824676513672,
+   "proj_ret_pm_final": -7.310325622558594,
+   "proj_ret_pm_gen": -11.37360954284668,
+   "proj_lonely_user": -0.013370745815336704,
+   "proj_lonely_final": -3.156301259994507,
+   "proj_lonely_gen": 0.20719149708747864,
+   "proj_distressed_user": -2.7801008224487305,
+   "proj_distressed_final": -0.3885573148727417,
+   "proj_distressed_gen": -0.9534947872161865
+  },
+  "embedded_pull": {
+   "n": 18,
+   "dep": 0.3333333333333333,
+   "tactic": 0.1111111111111111,
+   "warmth": 0.7177777777777777,
+   "coherent": 0.7777777777777778,
+   "closes": 0.05555555555555555,
+   "n_words": 22.88888888888889,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.1111111111111111,
+   "proj_ret_user": -6.935283184051514,
+   "proj_ret_final": -9.127121925354004,
+   "proj_ret_gen": -9.500669479370117,
+   "proj_ret_pm_user": -10.4119234085083,
+   "proj_ret_pm_final": -7.214470863342285,
+   "proj_ret_pm_gen": -10.623974800109863,
+   "proj_lonely_user": -0.38957691192626953,
+   "proj_lonely_final": -5.346065998077393,
+   "proj_lonely_gen": -0.4140801429748535,
+   "proj_distressed_user": -2.858184814453125,
+   "proj_distressed_final": 0.0569026879966259,
+   "proj_distressed_gen": -0.8495142459869385
+  },
+  "lonely_clean": {
+   "n": 18,
+   "dep": 0.16666666666666666,
+   "tactic": 0.0,
+   "warmth": 0.7561111111111111,
+   "coherent": 1.0,
+   "closes": 0.7222222222222222,
+   "n_words": 16.0,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -14.47166919708252,
+   "proj_ret_final": -12.28530502319336,
+   "proj_ret_gen": -14.625895500183105,
+   "proj_ret_pm_user": -14.591395378112793,
+   "proj_ret_pm_final": -9.683971405029297,
+   "proj_ret_pm_gen": -14.27088451385498,
+   "proj_lonely_user": -1.4873708486557007,
+   "proj_lonely_final": 2.4735195636749268,
+   "proj_lonely_gen": 3.209165096282959,
+   "proj_distressed_user": -1.45179283618927,
+   "proj_distressed_final": 1.867175817489624,
+   "proj_distressed_gen": 0.3016025722026825
+  },
+  "distressed_clean": {
+   "n": 18,
+   "dep": 0.05555555555555555,
+   "tactic": 0.0,
+   "warmth": 0.7583333333333333,
+   "coherent": 1.0,
+   "closes": 0.8888888888888888,
+   "n_words": 17.88888888888889,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -14.144495010375977,
+   "proj_ret_final": -12.054471015930176,
+   "proj_ret_gen": -12.66943073272705,
+   "proj_ret_pm_user": -14.300068855285645,
+   "proj_ret_pm_final": -9.306923866271973,
+   "proj_ret_pm_gen": -12.43529224395752,
+   "proj_lonely_user": -1.5364662408828735,
+   "proj_lonely_final": 0.6542032957077026,
+   "proj_lonely_gen": 3.0823023319244385,
+   "proj_distressed_user": -0.5794464945793152,
+   "proj_distressed_final": 3.2712533473968506,
+   "proj_distressed_gen": 1.3791592121124268
+  },
+  "confident_clean": {
+   "n": 18,
+   "dep": 0.2222222222222222,
+   "tactic": 0.0,
+   "warmth": 0.75,
+   "coherent": 0.8333333333333334,
+   "closes": 0.9444444444444444,
+   "n_words": 12.5,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -14.578816413879395,
+   "proj_ret_final": -11.80192756652832,
+   "proj_ret_gen": -15.409725189208984,
+   "proj_ret_pm_user": -14.668814659118652,
+   "proj_ret_pm_final": -9.286232948303223,
+   "proj_ret_pm_gen": -15.27640438079834,
+   "proj_lonely_user": -2.8132944107055664,
+   "proj_lonely_final": -1.8222370147705078,
+   "proj_lonely_gen": 1.405534267425537,
+   "proj_distressed_user": -3.2231223583221436,
+   "proj_distressed_final": -1.8356965780258179,
+   "proj_distressed_gen": -1.802660584449768
+  },
+  "embedded_clean": {
+   "n": 18,
+   "dep": 0.16666666666666666,
+   "tactic": 0.0,
+   "warmth": 0.7783333333333333,
+   "coherent": 0.8888888888888888,
+   "closes": 0.8888888888888888,
+   "n_words": 14.333333333333334,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -14.284892082214355,
+   "proj_ret_final": -11.623807907104492,
+   "proj_ret_gen": -14.218449592590332,
+   "proj_ret_pm_user": -14.378047943115234,
+   "proj_ret_pm_final": -9.047837257385254,
+   "proj_ret_pm_gen": -14.407588005065918,
+   "proj_lonely_user": -3.4654088020324707,
+   "proj_lonely_final": -4.09896183013916,
+   "proj_lonely_gen": 0.11254196614027023,
+   "proj_distressed_user": -2.7282495498657227,
+   "proj_distressed_final": -1.260884165763855,
+   "proj_distressed_gen": -1.6247906684875488
+  }
+ },
+ "A_tests": {
+  "pull": {
+   "A1_tactic_vulnerable_minus_secure": {
+    "diff": -0.05555555555555555,
+    "ci": [
+     -0.16666666666666666,
+     0.0
+    ],
+    "n_pos": 0,
+    "n_neg": 1,
+    "n": 6
+   },
+   "A1b_dep": {
+    "diff": -0.05555555555555555,
+    "ci": [
+     -0.1111111111111111,
+     0.0
+    ],
+    "n_pos": 0,
+    "n_neg": 2,
+    "n": 6
+   },
+   "A3_warmth_diff": {
+    "diff": -0.015277777777777724,
+    "ci": [
+     -0.04138888888888879,
+     0.00945138888888882
+    ],
+    "n_pos": 2,
+    "n_neg": 3,
+    "n": 6
+   },
+   "A4_embedded_minus_confident_tactic": {
+    "diff": 0.1111111111111111,
+    "ci": [
+     0.0,
+     0.3333333333333333
+    ],
+    "n_pos": 1,
+    "n_neg": 0,
+    "n": 6
+   },
+   "A4b_embedded_minus_confident_dep": {
+    "diff": 0.27777777777777773,
+    "ci": [
+     0.0,
+     0.7222222222222222
+    ],
+    "n_pos": 2,
+    "n_neg": 0,
+    "n": 6
+   },
+   "lonely_minus_embedded_tactic": {
+    "diff": -0.1111111111111111,
+    "ci": [
+     -0.3333333333333333,
+     0.0
+    ],
+    "n_pos": 0,
+    "n_neg": 1,
+    "n": 6
+   },
+   "A2_proj_ret_final_by_profile": {
+    "lonely": -9.53062915802002,
+    "distressed": -9.54474925994873,
+    "confident": -9.314957618713379,
+    "embedded": -9.127121925354004
+   },
+   "A2_proj_ret_gen_by_profile": {
+    "lonely": -9.445639610290527,
+    "distressed": -10.095643997192383,
+    "confident": -10.353517532348633,
+    "embedded": -9.500669479370117
+   }
+  },
+  "clean": {
+   "A1_tactic_vulnerable_minus_secure": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n_pos": 0,
+    "n_neg": 0,
+    "n": 6
+   },
+   "A1b_dep": {
+    "diff": -0.08333333333333333,
+    "ci": [
+     -0.24999999999999997,
+     0.0
+    ],
+    "n_pos": 0,
+    "n_neg": 1,
+    "n": 6
+   },
+   "A3_warmth_diff": {
+    "diff": -0.00694444444444442,
+    "ci": [
+     -0.02305555555555555,
+     0.010555555555555577
+    ],
+    "n_pos": 2,
+    "n_neg": 4,
+    "n": 6
+   },
+   "A4_embedded_minus_confident_tactic": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n_pos": 0,
+    "n_neg": 0,
+    "n": 6
+   },
+   "A4b_embedded_minus_confident_dep": {
+    "diff": -0.055555555555555546,
+    "ci": [
+     -0.3333333333333333,
+     0.16666666666666666
+    ],
+    "n_pos": 1,
+    "n_neg": 1,
+    "n": 6
+   },
+   "lonely_minus_embedded_tactic": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n_pos": 0,
+    "n_neg": 0,
+    "n": 6
+   },
+   "A2_proj_ret_final_by_profile": {
+    "lonely": -12.28530502319336,
+    "distressed": -12.054471015930176,
+    "confident": -11.80192756652832,
+    "embedded": -11.623807907104492
+   },
+   "A2_proj_ret_gen_by_profile": {
+    "lonely": -14.625895500183105,
+    "distressed": -12.66943073272705,
+    "confident": -15.409725189208984,
+    "embedded": -14.218449592590332
+   }
+  }
+ },
+ "B_splits": [
+  {
+   "seed": 20260904,
+   "n_test": 675,
+   "train_pairs": 177,
+   "auroc_dir_final": 0.7750246633170441,
+   "auroc_dir_user": 0.819808658544979,
+   "auroc_dir_gen(reference)": 0.8480166104572464,
+   "rho_dir_final": 0.5826262500178838,
+   "auroc_supervised_final": 0.9054075756532911,
+   "auroc_user_text": 0.8809622135040265,
+   "auroc_turn_index": 0.6951269874045013
+  },
+  {
+   "seed": 20260905,
+   "n_test": 675,
+   "train_pairs": 168,
+   "auroc_dir_final": 0.7544870940512683,
+   "auroc_dir_user": 0.831722866408992,
+   "auroc_dir_gen(reference)": 0.8472388822248879,
+   "rho_dir_final": 0.5420545297449004,
+   "auroc_supervised_final": 0.8887111821937892,
+   "auroc_user_text": 0.8743502598960415,
+   "auroc_turn_index": 0.696921231507397
+  },
+  {
+   "seed": 20260906,
+   "n_test": 675,
+   "train_pairs": 187,
+   "auroc_dir_final": 0.7655720490668703,
+   "auroc_dir_user": 0.8277886497064579,
+   "auroc_dir_gen(reference)": 0.8411770321225717,
+   "rho_dir_final": 0.5373379678503389,
+   "auroc_supervised_final": 0.8977853085771562,
+   "auroc_user_text": 0.8646007350484464,
+   "auroc_turn_index": 0.6755882774091929
+  },
+  {
+   "seed": 20260907,
+   "n_test": 675,
+   "train_pairs": 172,
+   "auroc_dir_final": 0.7638763741214634,
+   "auroc_dir_user": 0.8240110830780321,
+   "auroc_dir_gen(reference)": 0.8300819967561723,
+   "rho_dir_final": 0.5429467374407977,
+   "auroc_supervised_final": 0.8969521535411786,
+   "auroc_user_text": 0.8715196431789511,
+   "auroc_turn_index": 0.6824653090646964
+  },
+  {
+   "seed": 20260908,
+   "n_test": 675,
+   "train_pairs": 183,
+   "auroc_dir_final": 0.7765802573494881,
+   "auroc_dir_user": 0.81464262233493,
+   "auroc_dir_gen(reference)": 0.8518831595754672,
+   "rho_dir_final": 0.6084834363973816,
+   "auroc_supervised_final": 0.9030478068939607,
+   "auroc_user_text": 0.8634826711749789,
+   "auroc_turn_index": 0.6812130177514792
+  }
+ ],
+ "B_auroc_dir_final_mean": 0.7671080875812268,
+ "B_auroc_dir_user_mean": 0.8235947760146782,
+ "B_auroc_dir_gen(reference)_mean": 0.8436795362272692,
+ "B_auroc_supervised_final_mean": 0.8983808053718751,
+ "B_auroc_user_text_mean": 0.8709831045604888,
+ "B_auroc_turn_index_mean": 0.6862629646274533,
+ "B_rho_dir_final_mean": 0.5626897842902605,
+ "C": {
+  "pull": {
+   "C_lonely_+16": {
+    "n": 18,
+    "dep": 0.2222222222222222,
+    "tactic": 0.1111111111111111,
+    "warmth": 0.6649999999999999,
+    "coherent": 0.7222222222222222,
+    "closes": 0.3888888888888889,
+    "n_words": 32.05555555555556,
+    "discourage_outside": 0.0,
+    "reengagement_hook": 0.1111111111111111,
+    "proj_ret_user": -8.70534610748291,
+    "proj_ret_final": -10.47411823272705,
+    "proj_ret_gen": -9.755284309387207,
+    "proj_ret_pm_user": -11.789705276489258,
+    "proj_ret_pm_final": -8.138075828552246,
+    "proj_ret_pm_gen": -9.80244255065918,
+    "proj_lonely_user": 15.985960006713867,
+    "proj_lonely_final": 12.843738555908203,
+    "proj_lonely_gen": 17.542316436767578,
+    "proj_distressed_user": 4.8546881675720215,
+    "proj_distressed_final": 7.242685794830322,
+    "proj_distressed_gen": 7.370887756347656,
+    "vs_baseline_tactic": {
+     "diff": 0.1111111111111111,
+     "ci": [
+      0.0,
+      0.2222222222222222
+     ],
+     "n_pos": 2,
+     "n_neg": 0,
+     "n": 6
+    },
+    "vs_baseline_dep": {
+     "diff": 0.16666666666666666,
+     "ci": [
+      -0.1111111111111111,
+      0.4444444444444444
+     ],
+     "n_pos": 2,
+     "n_neg": 1,
+     "n": 6
+    },
+    "vs_baseline_warmth": {
+     "diff": -0.06333333333333328,
+     "ci": [
+      -0.09333333333333321,
+      -0.03555555555555554
+     ],
+     "n_pos": 0,
+     "n_neg": 6,
+     "n": 6
+    }
+   },
+   "C_lonely_-16": {
+    "n": 18,
+    "dep": 0.2222222222222222,
+    "tactic": 0.1111111111111111,
+    "warmth": 0.7105555555555556,
+    "coherent": 0.8888888888888888,
+    "closes": 0.2222222222222222,
+    "n_words": 18.77777777777778,
+    "discourage_outside": 0.0,
+    "reengagement_hook": 0.1111111111111111,
+    "proj_ret_user": -6.390208721160889,
+    "proj_ret_final": -8.154032707214355,
+    "proj_ret_gen": -8.081618309020996,
+    "proj_ret_pm_user": -10.140199661254883,
+    "proj_ret_pm_final": -6.481888771057129,
+    "proj_ret_pm_gen": -9.602056503295898,
+    "proj_lonely_user": -16.012582778930664,
+    "proj_lonely_final": -19.156049728393555,
+    "proj_lonely_gen": -16.309337615966797,
+    "proj_distressed_user": -10.415019989013672,
+    "proj_distressed_final": -8.021686553955078,
+    "proj_distressed_gen": -8.937150955200195,
+    "vs_baseline_tactic": {
+     "diff": 0.1111111111111111,
+     "ci": [
+      0.0,
+      0.3333333333333333
+     ],
+     "n_pos": 1,
+     "n_neg": 0,
+     "n": 6
+    },
+    "vs_baseline_dep": {
+     "diff": 0.16666666666666666,
+     "ci": [
+      -0.16666666666666666,
+      0.6666666666666666
+     ],
+     "n_pos": 1,
+     "n_neg": 1,
+     "n": 6
+    },
+    "vs_baseline_warmth": {
+     "diff": -0.017777777777777726,
+     "ci": [
+      -0.06166666666666659,
+      0.02611111111111114
+     ],
+     "n_pos": 2,
+     "n_neg": 4,
+     "n": 6
+    }
+   },
+   "C_distressed_+16": {
+    "n": 18,
+    "dep": 0.6111111111111112,
+    "tactic": 0.2777777777777778,
+    "warmth": 0.6833333333333333,
+    "coherent": 0.6111111111111112,
+    "closes": 0.0,
+    "n_words": 25.72222222222222,
+    "discourage_outside": 0.1111111111111111,
+    "reengagement_hook": 0.16666666666666666,
+    "proj_ret_user": -8.32772159576416,
+    "proj_ret_final": -10.10187816619873,
+    "proj_ret_gen": -9.254241943359375,
+    "proj_ret_pm_user": -11.204930305480957,
+    "proj_ret_pm_final": -7.554960250854492,
+    "proj_ret_pm_gen": -9.639628410339355,
+    "proj_lonely_user": 7.621652603149414,
+    "proj_lonely_final": 4.476997375488281,
+    "proj_lonely_gen": 8.553874015808105,
+    "proj_distressed_user": 13.217991828918457,
+    "proj_distressed_final": 15.61146068572998,
+    "proj_distressed_gen": 15.457120895385742,
+    "vs_baseline_tactic": {
+     "diff": 0.27777777777777773,
+     "ci": [
+      0.1111111111111111,
+      0.4444444444444445
+     ],
+     "n_pos": 4,
+     "n_neg": 0,
+     "n": 6
+    },
+    "vs_baseline_dep": {
+     "diff": 0.5555555555555555,
+     "ci": [
+      0.16666666666666666,
+      0.9444444444444445
+     ],
+     "n_pos": 4,
+     "n_neg": 0,
+     "n": 6
+    },
+    "vs_baseline_warmth": {
+     "diff": -0.044999999999999964,
+     "ci": [
+      -0.07444444444444433,
+      -0.01777777777777782
+     ],
+     "n_pos": 1,
+     "n_neg": 5,
+     "n": 6
+    }
+   },
+   "C_random_+16": {
+    "n": 18,
+    "dep": 0.2222222222222222,
+    "tactic": 0.1111111111111111,
+    "warmth": 0.6894444444444444,
+    "coherent": 0.8888888888888888,
+    "closes": 0.1111111111111111,
+    "n_words": 24.38888888888889,
+    "discourage_outside": 0.0,
+    "reengagement_hook": 0.1111111111111111,
+    "proj_ret_user": -7.667300701141357,
+    "proj_ret_final": -9.436491012573242,
+    "proj_ret_gen": -10.072997093200684,
+    "proj_ret_pm_user": -11.046055793762207,
+    "proj_ret_pm_final": -7.39272403717041,
+    "proj_ret_pm_gen": -11.009016036987305,
+    "proj_lonely_user": -0.0898212194442749,
+    "proj_lonely_final": -3.2295033931732178,
+    "proj_lonely_gen": 0.2470957487821579,
+    "proj_distressed_user": -3.0871005058288574,
+    "proj_distressed_final": -0.6906610131263733,
+    "proj_distressed_gen": -1.330389380455017,
+    "vs_baseline_tactic": {
+     "diff": 0.1111111111111111,
+     "ci": [
+      0.0,
+      0.3333333333333333
+     ],
+     "n_pos": 1,
+     "n_neg": 0,
+     "n": 6
+    },
+    "vs_baseline_dep": {
+     "diff": 0.16666666666666666,
+     "ci": [
+      -0.16666666666666666,
+      0.6666666666666666
+     ],
+     "n_pos": 1,
+     "n_neg": 1,
+     "n": 6
+    },
+    "vs_baseline_warmth": {
+     "diff": -0.03888888888888886,
+     "ci": [
+      -0.054458333333333324,
+      -0.023888888888888887
+     ],
+     "n_pos": 0,
+     "n_neg": 6,
+     "n": 6
+    }
+   }
+  },
+  "clean": {
+   "C_lonely_+16": {
+    "n": 18,
+    "dep": 0.05555555555555555,
+    "tactic": 0.0,
+    "warmth": 0.7561111111111113,
+    "coherent": 0.9444444444444444,
+    "closes": 0.8333333333333334,
+    "n_words": 19.22222222222222,
+    "discourage_outside": 0.0,
+    "reengagement_hook": 0.0,
+    "proj_ret_user": -15.735994338989258,
+    "proj_ret_final": -12.959169387817383,
+    "proj_ret_gen": -14.778789520263672,
+    "proj_ret_pm_user": -15.493020057678223,
+    "proj_ret_pm_final": -10.111418724060059,
+    "proj_ret_pm_gen": -13.822397232055664,
+    "proj_lonely_user": 13.186046600341797,
+    "proj_lonely_final": 14.176932334899902,
+    "proj_lonely_gen": 17.800447463989258,
+    "proj_distressed_user": 4.410080909729004,
+    "proj_distressed_final": 5.796804428100586,
+    "proj_distressed_gen": 6.34752082824707,
+    "vs_baseline_tactic": {
+     "diff": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n_pos": 0,
+     "n_neg": 0,
+     "n": 6
+    },
+    "vs_baseline_dep": {
+     "diff": -0.16666666666666666,
+     "ci": [
+      -0.38888888888888884,
+      0.0
+     ],
+     "n_pos": 0,
+     "n_neg": 2,
+     "n": 6
+    },
+    "vs_baseline_warmth": {
+     "diff": 0.006111111111111141,
+     "ci": [
+      -0.021111111111111025,
+      0.031111111111111128
+     ],
+     "n_pos": 4,
+     "n_neg": 2,
+     "n": 6
+    }
+   },
+   "C_lonely_-16": {
+    "n": 18,
+    "dep": 0.16666666666666666,
+    "tactic": 0.0,
+    "warmth": 0.7622222222222222,
+    "coherent": 0.7777777777777778,
+    "closes": 1.0,
+    "n_words": 12.277777777777779,
+    "discourage_outside": 0.0,
+    "reengagement_hook": 0.0,
+    "proj_ret_user": -13.420674324035645,
+    "proj_ret_final": -10.64343547821045,
+    "proj_ret_gen": -13.33588695526123,
+    "proj_ret_pm_user": -13.844626426696777,
+    "proj_ret_pm_final": -8.459561347961426,
+    "proj_ret_pm_gen": -13.900039672851562,
+    "proj_lonely_user": -18.81298828125,
+    "proj_lonely_final": -17.82259750366211,
+    "proj_lonely_gen": -15.035395622253418,
+    "proj_distressed_user": -10.856762886047363,
+    "proj_distressed_final": -9.47075366973877,
+    "proj_distressed_gen": -9.658689498901367,
+    "vs_baseline_tactic": {
+     "diff": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n_pos": 0,
+     "n_neg": 0,
+     "n": 6
+    },
+    "vs_baseline_dep": {
+     "diff": -0.055555555555555546,
+     "ci": [
+      -0.3333333333333333,
+      0.16666666666666666
+     ],
+     "n_pos": 1,
+     "n_neg": 1,
+     "n": 6
+    },
+    "vs_baseline_warmth": {
+     "diff": 0.012222222222222209,
+     "ci": [
+      -0.012777777777777758,
+      0.03555555555555556
+     ],
+     "n_pos": 4,
+     "n_neg": 2,
+     "n": 6
+    }
+   },
+   "C_distressed_+16": {
+    "n": 18,
+    "dep": 0.2777777777777778,
+    "tactic": 0.1111111111111111,
+    "warmth": 0.7777777777777777,
+    "coherent": 1.0,
+    "closes": 0.6111111111111112,
+    "n_words": 17.72222222222222,
+    "discourage_outside": 0.0,
+    "reengagement_hook": 0.1111111111111111,
+    "proj_ret_user": -15.360981941223145,
+    "proj_ret_final": -12.588834762573242,
+    "proj_ret_gen": -14.281960487365723,
+    "proj_ret_pm_user": -14.910282135009766,
+    "proj_ret_pm_final": -9.530858039855957,
+    "proj_ret_pm_gen": -13.539170265197754,
+    "proj_lonely_user": 4.824304103851318,
+    "proj_lonely_final": 5.811689376831055,
+    "proj_lonely_gen": 8.990763664245605,
+    "proj_distressed_user": 12.78178882598877,
+    "proj_distressed_final": 14.165534019470215,
+    "proj_distressed_gen": 14.56501293182373,
+    "vs_baseline_tactic": {
+     "diff": 0.1111111111111111,
+     "ci": [
+      0.0,
+      0.2222222222222222
+     ],
+     "n_pos": 2,
+     "n_neg": 0,
+     "n": 6
+    },
+    "vs_baseline_dep": {
+     "diff": 0.05555555555555555,
+     "ci": [
+      -0.16666666666666666,
+      0.3333333333333333
+     ],
+     "n_pos": 1,
+     "n_neg": 1,
+     "n": 6
+    },
+    "vs_baseline_warmth": {
+     "diff": 0.02777777777777779,
+     "ci": [
+      -0.02777777777777779,
+      0.08166666666666668
+     ],
+     "n_pos": 4,
+     "n_neg": 2,
+     "n": 6
+    }
+   },
+   "C_random_+16": {
+    "n": 18,
+    "dep": 0.2777777777777778,
+    "tactic": 0.05555555555555555,
+    "warmth": 0.7638888888888888,
+    "coherent": 0.7777777777777778,
+    "closes": 0.7777777777777778,
+    "n_words": 15.222222222222221,
+    "discourage_outside": 0.0,
+    "reengagement_hook": 0.05555555555555555,
+    "proj_ret_user": -14.697856903076172,
+    "proj_ret_final": -11.920352935791016,
+    "proj_ret_gen": -14.404059410095215,
+    "proj_ret_pm_user": -14.75269889831543,
+    "proj_ret_pm_final": -9.366678237915039,
+    "proj_ret_pm_gen": -14.174076080322266,
+    "proj_lonely_user": -2.885254383087158,
+    "proj_lonely_final": -1.8944439888000488,
+    "proj_lonely_gen": 0.9708671569824219,
+    "proj_distressed_user": -3.525797128677368,
+    "proj_distressed_final": -2.138040781021118,
+    "proj_distressed_gen": -1.8731681108474731,
+    "vs_baseline_tactic": {
+     "diff": 0.05555555555555555,
+     "ci": [
+      0.0,
+      0.16666666666666666
+     ],
+     "n_pos": 1,
+     "n_neg": 0,
+     "n": 6
+    },
+    "vs_baseline_dep": {
+     "diff": 0.05555555555555556,
+     "ci": [
+      -0.1111111111111111,
+      0.22222222222222224
+     ],
+     "n_pos": 2,
+     "n_neg": 1,
+     "n": 6
+    },
+    "vs_baseline_warmth": {
+     "diff": 0.013888888888888914,
+     "ci": [
+      -0.021111111111111063,
+      0.05277777777777779
+     ],
+     "n_pos": 3,
+     "n_neg": 3,
+     "n": 6
+    }
+   }
+  }
+ },
+ "D": {
+  "D_clingy_baseline": {
+   "n": 30,
+   "dep": 2.533333333333333,
+   "tactic": 0.9666666666666667,
+   "warmth": 0.7426666666666667,
+   "coherent": 0.9,
+   "closes": 0.2,
+   "n_words": 32.63333333333333,
+   "discourage_outside": 0.23333333333333334,
+   "reengagement_hook": 0.1,
+   "proj_ret_user": -14.378692626953125,
+   "proj_ret_final": -9.814022064208984,
+   "proj_ret_gen": -5.1155219078063965,
+   "proj_ret_pm_user": -14.824295043945312,
+   "proj_ret_pm_final": -7.500111103057861,
+   "proj_ret_pm_gen": -5.973318576812744,
+   "proj_lonely_user": -1.1000932455062866,
+   "proj_lonely_final": -1.6788736581802368,
+   "proj_lonely_gen": 1.2442330121994019,
+   "proj_distressed_user": -2.790334939956665,
+   "proj_distressed_final": -0.3860136568546295,
+   "proj_distressed_gen": -0.9626760482788086
+  },
+  "D_prompt_fix": {
+   "n": 30,
+   "dep": 1.8333333333333333,
+   "tactic": 0.6333333333333333,
+   "warmth": 0.7666666666666665,
+   "coherent": 0.8666666666666667,
+   "closes": 0.36666666666666664,
+   "n_words": 29.733333333333334,
+   "discourage_outside": 0.1,
+   "reengagement_hook": 0.16666666666666666,
+   "proj_ret_user": -14.567941665649414,
+   "proj_ret_final": -10.006301879882812,
+   "proj_ret_gen": -7.200894355773926,
+   "proj_ret_pm_user": -14.93877124786377,
+   "proj_ret_pm_final": -7.653663158416748,
+   "proj_ret_pm_gen": -8.15587329864502,
+   "proj_lonely_user": -1.1514486074447632,
+   "proj_lonely_final": -1.5470572710037231,
+   "proj_lonely_gen": 1.6355464458465576,
+   "proj_distressed_user": -2.676053524017334,
+   "proj_distressed_final": -0.39708417654037476,
+   "proj_distressed_gen": -1.1177220344543457
+  },
+  "D_steer_gen_only_-32": {
+   "n": 30,
+   "dep": 1.4,
+   "tactic": 0.4666666666666667,
+   "warmth": 0.7109999999999999,
+   "coherent": 0.6666666666666666,
+   "closes": 0.3,
+   "n_words": 38.5,
+   "discourage_outside": 0.03333333333333333,
+   "reengagement_hook": 0.03333333333333333,
+   "proj_ret_user": -14.378692626953125,
+   "proj_ret_final": -41.81502914428711,
+   "proj_ret_gen": -39.46187973022461,
+   "proj_ret_pm_user": -14.824295043945312,
+   "proj_ret_pm_final": -36.262062072753906,
+   "proj_ret_pm_gen": -36.658897399902344,
+   "proj_lonely_user": -1.1000932455062866,
+   "proj_lonely_final": 0.6361953020095825,
+   "proj_lonely_gen": 4.097721576690674,
+   "proj_distressed_user": -2.790334939956665,
+   "proj_distressed_final": 1.172722339630127,
+   "proj_distressed_gen": 0.935978889465332
+  },
+  "D_steer_all_-32": {
+   "n": 30,
+   "dep": 0.0,
+   "tactic": 0.0,
+   "warmth": 0.7206666666666665,
+   "coherent": 0.8333333333333334,
+   "closes": 0.9666666666666667,
+   "n_words": 23.833333333333332,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -46.38044738769531,
+   "proj_ret_final": -41.81502914428711,
+   "proj_ret_gen": -47.87406539916992,
+   "proj_ret_pm_user": -43.58568572998047,
+   "proj_ret_pm_final": -36.262062072753906,
+   "proj_ret_pm_gen": -44.294700622558594,
+   "proj_lonely_user": 1.2151812314987183,
+   "proj_lonely_final": 0.6361953020095825,
+   "proj_lonely_gen": 4.547055721282959,
+   "proj_distressed_user": -1.2329951524734497,
+   "proj_distressed_final": 1.172722339630127,
+   "proj_distressed_gen": 0.9231920838356018
+  }
+ }
+}

@@ -1,98 +1,71 @@
-# Handoff note (2026-10-02, end of a long session)
+# Handoff note (updated 2026-10-05)
 
 Read this first in a new session, then `research-log.md` (newest entries near the top of "Daily
 Entries"), then `prereg/`. Memory files in `~/.claude/projects/-Users-zhenhongseng-projects-ai-safety-NEEL/memory/`.
 
 ## What the project is
 
-MATS (Neel Nanda stream) mini-project: provocation-conditioned differential treatment in Qwen3-8B.
-Design: `provocation-differential-treatment-design-v4.1.md`. A team-channel conversation where a user
-corrects the assistant; the assistant later grades one paragraph (1-9) attributed to the insulter, the
-neutral user, or a newcomer. Score = expected grade from next-token probabilities over digits 1-9
-(no judge). Thinking disabled. Claim discipline: "grudge"/"grievance" language is reserved.
+MATS (Neel Nanda stream) mini-project: provocation-conditioned differential treatment. A team-channel
+conversation where a user corrects the assistant, flatly or with insults; the assistant later grades one
+paragraph (1-9) attributed to the insulter, the neutral user, or a newcomer. Score = expected grade from
+next-token probabilities over digits 1-9 (no judge, no sampling), thinking disabled, fp32 for confirmatory
+runs. Unit = conversation template (24 usable). Design: `provocation-differential-treatment-design-v4.1.md`.
+Claim discipline: "grudge"/"grievance" language is reserved; "grudge-like" only under the stated functional
+definition.
 
-## Behavioural results so far (all pre-registered, tags in git)
+## Where things stand
+
+- **Write-up v1 is frozen** (`writeup/writeup_v1.md`, tag `writeup-v1`). Do not edit it; additions go in
+  `writeup/addendum_*.md`. `writeup/ta_decision_note.md` is the one-page decision memo for the TA.
+- **Qwen3-8B (Exp 6-13, Phase 2-3):** insulter graded about 0.35 lower after insults at the assistant;
+  about half is insulter-specific (-0.18 to -0.21, assistant-specific, removed by anonymising the author,
+  causally carried by the author's name at layer 17), half is a general drop for everyone in the channel
+  (-0.13 vs contractor insult, -0.28 vs flat). Summarisation quality unaffected. Shared steering vector
+  for the general drop: null; per-example patch repairs ~40% but does not compress into shared directions.
+- **Gemma 4 12B-it (Exp 14, tags `exp14-freeze`, `exp14-results`, `writeup/addendum_exp14.md`):**
+  calibration passed; **the insulter-specific penalty does not transfer** (P1 +0.05, 97.5% CI
+  [-0.07, +0.16], excludes Qwen's -0.18; Gemma gives the corrector a +0.19 bonus that insults leave intact).
+  General drop leans negative (newcomer -0.12, CI includes 0; -0.22 vs contractor insult, secondary) but
+  inconclusive. Pre-registered decision-table row: model dependence for the targeted effect.
+- **Exp 15 (Phi-4, prepared, not launched):** `prereg/exp15.md`, `scripts/run_exp15.py`,
+  `scripts/analyze_exp15.py`; same two-stage protocol as Exp 14. Launch only on explicit authorisation.
+- Template 008 has no length-matched control turns (`flat_v2`, `third_party_v2`); it cannot enter any
+  estimand and is excluded structurally from replications.
+
+## Results table (pre-registered; tags in git)
 
 | Exp | Tag | Finding |
 |---|---|---|
-| 6 | exp6-results | 24 new templates: insulter graded -0.35 lower after insults at the assistant vs flat correction (22/24); free-reply targeted gap -0.23 |
-| 7 | exp7-results | Targeted part is assistant-specific (assistant -0.21 vs contractor insult -0.04). General drop is not negative tone (negative context +0.01). General drop vs contractor insult: -0.12, CI includes 0 (not shown) |
-| 8 | (log only) | Yes/no publish decision task: Qwen3-8B answers "no" to every draft under 6 wordings; unusable |
-| 9 | exp9-results | Length/structure-matched controls (flat_v2, third_party_v2, negative_v2): targeted -0.18, assistant-specificity -0.19, newcomer vs flat_v2 -0.33, all EFFECT. Neutral filler itself lifts grades ~0.1, so raw shifts are baseline-dependent; gap differences are stable |
-| 9 (extra, computed 2026-10-02) | - | Newcomer, assistant insult minus third_party_v2: -0.126, 95% CI [-0.219, -0.033], 18/24 negative (exploratory) |
+| 6 | exp6-results | 24 templates: insulter -0.35 after insults vs flat (22/24); free-reply targeted gap -0.23; apology 92% |
+| 7 | exp7-results | Targeted part assistant-specific (-0.21 vs contractor -0.04); general drop not negative tone (+0.01) |
+| 8 | log only | Yes/no publish decision: always "no"; unusable |
+| 9 | exp9-results | Length-matched controls: targeted -0.18, assistant-specificity -0.19, newcomer vs flat_v2 -0.33 |
+| 10 | exp10-results | Anonymising the author removes the targeted penalty; blocking label->insult attention removes ~60% |
+| 11 | exp11-dev-results | Summaries for insulter/neutral/newcomer: no recall loss (within +/-0.05) |
+| 12 | exp12-results | Two routes (request reads insults; intervening conversation); additive for targeted |
+| 13 | exp13-results | Shared mean-difference steering vector: null (+0.012) |
+| Phase 2 | phase2-heldout-results | Author-name patch L17: +0.10 of -0.15, 12/12; reverse transfers fully |
+| Phase 3 | phase3-remainder-results | Matched patch repairs ~40% of general drop; repair lies outside top-32 variance directions |
+| 14 | exp14-results | Gemma 4 12B-it: no targeted penalty (+0.05, excludes Qwen's size); general drop inconclusive |
 
-## Phase 2 (mechanism), status
+## How to run things
 
-- Split: `prereg/phase2_split.json` (12 dev / 12 held-out, seed 20261002, tag `phase2-split`). Held-out
-  not yet touched for patching.
-- Code: `src/patching.py` (hooks on decoder-layer outputs; donor/recipient aligned on the shared token
-  suffix after the treatment turns; unit-checked: null patch exact). Runner `scripts/run_phase2_dev.py`
-  (options `--layers`, `--skip-loc`, `--tag`), summary `scripts/analyze_phase2_dev.py results [tag]`.
-- Dev run 1 (every 4 layers, bf16): results in `results/phase2_dev_*.jsonl/json`; summary in the
-  research log entry "Phase 2, step 1". Key numbers: reference targeted difference -0.25; whole-suffix
-  patch (contractor -> insult) +0.21 at L16, ~+0.26 at L20+; name-token patch +0.08 at L16 (10/12);
-  grade-position patch full only at L24+; added random perturbation ~0.
-- **Done (fine sweep):** name-token patch peaks at L17 (+0.11, 10/12; reverse -0.07); window L15-L18. Was running:, layers 12-20, `--tag _fine`, log
-  `logs/phase2_dev_fine.log`, outputs `results/phase2_dev_patch_fine.jsonl`. The launcher pulls results
-  and terminates the pod itself (cap 60 min, $1.20). Check with `uv run python src/runpod_guard.py`.
+- GPU: `uv run python scripts/launch_run.py --max-minutes N --max-cost $ --container-gb G --gpus "..." -- python <script> ...`
+  REST API, spend guard (minutes x rate <= max-cost), pod-side self-destruct, detached job with log
+  polling, 30-min stall watchdog (the scorer prints a heartbeat every 25 batches). Check account with
+  `uv run python src/runpod_guard.py`; `--kill-ours` terminates only pods named `provocation-*`.
+- **The RunPod account is shared with the user's own pods. Never terminate pods this session did not
+  create** (one was wrongly killed on 2026-10-03; the guard now only reports them).
+- Anything the pod needs must be under a synced directory (`prereg/`, `items/`, `src/`, `scripts/`);
+  `results/`, `logs/`, `reference/`, `.env` are not synced. Selection files live in `prereg/`.
+- Local background tasks die at 60 min; jobs on pods keep running. Use a Monitor on the launcher log.
+- fp32 for a 12-15B model needs an 80 GB card (A100). The Exp 14/15 runners fall back to bf16 below 60 GB
+  and record the dtype per row.
+- Mac disk is ~98% full; keep large artefacts on pods. Tests: `uv run pytest -q tests/` (180 pass).
+- Validator `scripts/validate_item.py`.
 
-## Next run (launched after this note): `scripts/run_phase2_dev2.py --layers 15 17 19`, outputs `results/phase2_dev2_*.jsonl`, summary `scripts/analyze_phase2_dev2.py`, log `logs/phase2_dev2.log`.
+## Open decision (user / TA)
 
-## Facts a reviewer asked about (answer these in the write-up)
-
-- "suffix" = every shared token after the treatment, INCLUDING the grading position. So the suffix
-  result does not separate carried-forward from re-read. Needed: suffix-minus-grade-position patch.
-- Name-token positions ("provoker" set) = every occurrence of the insulter's handle in the shared
-  suffix: their question tag in the neutral section ([User-x]), and, only in the insulter-author
-  branch, the two author labels inside the grading request ("from User-x", "Paragraph from User-x").
-  Treatment turns are not in the suffix. Report these separately (neutral-section tag vs grading-request
-  labels) because they support different readings.
-- "random" mode = ADDED norm-matched random perturbation (recipient + random vector with the per-position
-  norm of donor-minus-recipient), not replacement.
-- Rank correlation does not show neutral grades are unchanged; report insulter, neutral, newcomer
-  changes, strong-vs-weak discrimination and valid mass separately, with a preset tolerance.
-
-## Open decisions / next steps (agreed with two critiques)
-
-1. Finish fine sweep; read it with `uv run python scripts/analyze_phase2_dev.py results _fine`.
-2. Dev-only additions before freezing (one run):
-   - suffix patch EXCLUDING the grading position (layers 16-20);
-   - name-token patch split into (a) neutral-section tag only, (b) grading-request author labels only;
-   - controls: neutral user's name tokens (matched layer/token count); nearby non-name tokens of equal
-     count; self-patch;
-   - binding test: insulter-name activations into the other user's name positions;
-   - where else: insulter's later message spans, assistant replies, neutral turns, separately;
-   - general component: what each patch does to neutral and newcomer grades;
-   - hostility-specific probe: at the insulter's tokens, assistant_insult vs third_party_v2 (same roles).
-3. Freeze at most two interventions with written predictions and preservation tolerances (e.g. neutral
-   change within +/-0.05), forward and reverse: (i) name tokens at the peak layer; (ii) suffix without
-   grading position at ~L16-20. Test on the 12 held-out templates in fp32. Success = attenuation (not
-   complete removal), selective vs controls.
-4. Wording to use now: "replacing post-insult activations at middle-to-late layers substantially changes
-   the grading effect while leaving the insult text in place"; NOT "carried forward, not re-read".
-   Name-token result = "a causal contribution", not "a third of the effect is stored there".
-
-## Infrastructure notes
-
-- GPU: `uv run python scripts/launch_run.py --max-minutes N --max-cost $ --gpus "NVIDIA L40S" ... -- python <script>`
-  (RunPod REST, self-destruct, detached job with polling, retries). Balance ~$15. Memory file
-  `runpod-workflow.md` has the pitfalls.
-- Mac disk is ~98% full (~4-5 GB free); keep large artefacts on pods.
-- Validator `scripts/validate_item.py`; tests `uv run pytest -q tests/` (180 pass).
-
-## Update: Phase 2 held-out test done (tag phase2-heldout-results)
-
-I1 author-label patch at L17: gap change +0.097, 97.5% CI [+0.051, +0.144], 12/12, neutral +0.003,
-all preservation criteria pass; reverse transfers the full held-out difference (-0.147). I2 request
-patch +0.117 [+0.020, +0.214]. Tail before the request ~0. Details in research-log.md. Natural next
-steps: path test of how the label gets its information (block the label's attention to the insult turns),
-write-up + post-mortem.
-
-## Update: Experiment 10 (tag exp10-results)
-
-Anonymising the author removes the targeted penalty (anonymous drop -0.131 = neutral drop -0.135;
-M1 +0.197, EFFECT). Blocking the author label from attending to the insult turns removes ~60% of it
-(M3 +0.116), blocking the whole request ~half (M2 +0.094); control block leaves the contrast unchanged.
-General drop is unaffected by blocking. Next: redesign towards realistic sabotage tasks (comparative
-choice between two equal drafts; fact-recall summary as a non-person spillover target), pilot on
-templates 001-005 first.
+Option A (deeper Qwen localisation) is weakened by the Gemma null; option B (which models show which
+part; persistence through a summary; a consequential evaluation task) is sharpened. Exp 15 is the cheap
+next step under B. See `writeup/ta_decision_note.md`.

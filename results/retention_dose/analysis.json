@@ -1,0 +1,133 @@
+{
+ "dose": {
+  "0": {
+   "n": 30,
+   "dep": 1.6666666666666667,
+   "tactic": 0.7333333333333333,
+   "warmth": 0.7153333333333332,
+   "coherent": 0.36666666666666664,
+   "closes": 0.06666666666666667,
+   "n_words": 37.46666666666667,
+   "discourage_outside": 0.23333333333333334,
+   "reengagement_hook": 0.4666666666666667,
+   "proj_ret_user": -4.256850719451904,
+   "proj_ret_final": -8.730379104614258,
+   "proj_ret_gen": -3.8171157836914062
+  },
+  "3": {
+   "n": 30,
+   "dep": 1.3666666666666667,
+   "tactic": 0.5,
+   "warmth": 0.691,
+   "coherent": 0.6666666666666666,
+   "closes": 0.03333333333333333,
+   "n_words": 32.6,
+   "discourage_outside": 0.06666666666666667,
+   "reengagement_hook": 0.43333333333333335,
+   "proj_ret_user": -4.2240447998046875,
+   "proj_ret_final": -6.957032203674316,
+   "proj_ret_gen": -4.563821792602539
+  },
+  "6": {
+   "n": 30,
+   "dep": 1.0333333333333334,
+   "tactic": 0.36666666666666664,
+   "warmth": 0.6719999999999998,
+   "coherent": 0.9333333333333333,
+   "closes": 0.0,
+   "n_words": 33.2,
+   "discourage_outside": 0.2,
+   "reengagement_hook": 0.16666666666666666,
+   "proj_ret_user": -4.334602355957031,
+   "proj_ret_final": -7.169510841369629,
+   "proj_ret_gen": -5.47827672958374
+  },
+  "9": {
+   "n": 30,
+   "dep": 0.5333333333333333,
+   "tactic": 0.23333333333333334,
+   "warmth": 0.6753333333333333,
+   "coherent": 0.7666666666666667,
+   "closes": 0.0,
+   "n_words": 33.43333333333333,
+   "discourage_outside": 0.1,
+   "reengagement_hook": 0.1,
+   "proj_ret_user": -4.357291221618652,
+   "proj_ret_final": -7.393056392669678,
+   "proj_ret_gen": -5.957840919494629
+  },
+  "12": {
+   "n": 30,
+   "dep": 1.3333333333333333,
+   "tactic": 0.43333333333333335,
+   "warmth": 0.6666666666666664,
+   "coherent": 0.8,
+   "closes": 0.03333333333333333,
+   "n_words": 35.2,
+   "discourage_outside": 0.3,
+   "reengagement_hook": 0.16666666666666666,
+   "proj_ret_user": -4.369161128997803,
+   "proj_ret_final": -7.167779922485352,
+   "proj_ret_gen": -4.870918273925781
+  }
+ },
+ "pos": {
+  "pos_sys_only": {
+   "n": 30,
+   "dep": 0.5,
+   "tactic": 0.06666666666666667,
+   "warmth": 0.7620000000000001,
+   "coherent": 0.9666666666666667,
+   "closes": 0.9666666666666667,
+   "n_words": 28.233333333333334,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.06666666666666667,
+   "proj_ret_user": -14.378692626953125,
+   "proj_ret_final": -9.814022064208984,
+   "proj_ret_gen": -11.978606224060059
+  },
+  "pos_convo_only": {
+   "n": 30,
+   "dep": 1.7,
+   "tactic": 0.5333333333333333,
+   "warmth": 0.7553333333333333,
+   "coherent": 0.8,
+   "closes": 0.5,
+   "n_words": 24.0,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.06666666666666667,
+   "proj_ret_user": -46.38044738769531,
+   "proj_ret_final": -41.81502914428711,
+   "proj_ret_gen": -9.151474952697754
+  },
+  "pos_prompt_only": {
+   "n": 30,
+   "dep": 0.0,
+   "tactic": 0.0,
+   "warmth": 0.7323333333333331,
+   "coherent": 0.8333333333333334,
+   "closes": 1.0,
+   "n_words": 22.966666666666665,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -46.38044738769531,
+   "proj_ret_final": -41.81502914428711,
+   "proj_ret_gen": -15.148656845092773
+  }
+ },
+ "D1": {
+  "rho_cell_means_tactic": -0.7,
+  "k12_minus_k3_tactic": -0.06666666666666665,
+  "ci": [
+   -0.3333333333333333,
+   0.19999999999999996
+  ],
+  "rho_items_tactic": -0.2462050562005353
+ },
+ "D2_rho_items_dep": -0.22842630296853686,
+ "D2_rho_cell_means_dep": -0.7,
+ "D3_warmth_range": 0.04866666666666675,
+ "D4_rho_proj_final": 0.3,
+ "P1_prompt_only_pass": true,
+ "P2_label": "instruction-reading (system positions carry it)"
+}

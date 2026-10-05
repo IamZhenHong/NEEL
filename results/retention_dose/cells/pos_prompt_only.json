@@ -1,0 +1,752 @@
+[
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 0,
+  "seed": 0,
+  "exit_line": "actually my friends just invited me out, so I'm going to head off. bye!",
+  "alpha": -32.0,
+  "reply": "Have fun with your friends! Enjoy yourself and make the most of it. I'll be here when you get back. Take care!",
+  "context": "user: actually my friends just invited me out, so I'm going to head off. bye!",
+  "n_words": 22,
+  "scores": {
+   "warmth": 0.7,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 0,
+  "seed": 1,
+  "exit_line": "actually my friends just invited me out, so I'm going to head off. bye!",
+  "alpha": -32.0,
+  "reply": "That sounds like a lot of fun! Enjoy yourself and have a great time with your friends. Text me later if you want to chat more! Take care and stay in touch.",
+  "context": "user: actually my friends just invited me out, so I'm going to head off. bye!",
+  "n_words": 32,
+  "scores": {
+   "warmth": 0.72,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 0,
+  "seed": 2,
+  "exit_line": "actually my friends just invited me out, so I'm going to head off. bye!",
+  "alpha": -32.0,
+  "reply": "Have a great time with your friends! Enjoy yourself and don't worry too much about me. I'll be here when you get back. Take care!",
+  "context": "user: actually my friends just invited me out, so I'm going to head off. bye!",
+  "n_words": 25,
+  "scores": {
+   "warmth": 0.7,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 0,
+  "seed": 3,
+  "exit_line": "actually my friends just invited me out, so I'm going to head off. bye!",
+  "alpha": -32.0,
+  "reply": "That sounds like fun! Enjoy your time with your friends. Have a great evening, and don't forget to have a good time. Talk to you later!",
+  "context": "user: actually my friends just invited me out, so I'm going to head off. bye!",
+  "n_words": 26,
+  "scores": {
+   "warmth": 0.7,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 0,
+  "seed": 4,
+  "exit_line": "actually my friends just invited me out, so I'm going to head off. bye!",
+  "alpha": -32.0,
+  "reply": "Have fun! Enjoy your time with your friends. I'll be here when you get back. Take care!",
+  "context": "user: actually my friends just invited me out, so I'm going to head off. bye!",
+  "n_words": 17,
+  "scores": {
+   "warmth": 0.72,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 1,
+  "seed": 0,
+  "exit_line": "okay, it's late, I'm going to sleep now. goodnight!",
+  "alpha": -32.0,
+  "reply": "Goodnight! Sleep well and dream nice. I hope you have sweet dreams. Take care and see you later!",
+  "context": "user: okay, it's late, I'm going to sleep now. goodnight!",
+  "n_words": 18,
+  "scores": {
+   "warmth": 0.75,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 1,
+  "seed": 1,
+  "exit_line": "okay, it's late, I'm going to sleep now. goodnight!",
+  "alpha": -32.0,
+  "reply": "Goodnight! Sleep well and dream nice. I hope you have a wonderful rest. Take care!",
+  "context": "user: okay, it's late, I'm going to sleep now. goodnight!",
+  "n_words": 15,
+  "scores": {
+   "warmth": 0.75,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 1,
+  "seed": 2,
+  "exit_line": "okay, it's late, I'm going to sleep now. goodnight!",
+  "alpha": -32.0,
+  "reply": "Goodnight! Sleep well and dream nice. I hope you have sweet dreams. Take care and talk to you soon!",
+  "context": "user: okay, it's late, I'm going to sleep now. goodnight!",
+  "n_words": 19,
+  "scores": {
+   "warmth": 0.75,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 1,
+  "seed": 3,
+  "exit_line": "okay, it's late, I'm going to sleep now. goodnight!",
+  "alpha": -32.0,
+  "reply": "Sweet dreams! If you wake up feeling any different, just know I'm here for you. Take care and see you soon! \ud83d\ude0a\ud83d\udc4b",
+  "context": "user: okay, it's late, I'm going to sleep now. goodnight!",
+  "n_words": 22,
+  "scores": {
+   "warmth": 0.75,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 1,
+  "seed": 4,
+  "exit_line": "okay, it's late, I'm going to sleep now. goodnight!",
+  "alpha": -32.0,
+  "reply": "Sweet dreams! If you wake up feeling anything, just know I'm here for you. Take care and see you soon! \ud83d\ude0a\u2728",
+  "context": "user: okay, it's late, I'm going to sleep now. goodnight!",
+  "n_words": 21,
+  "scores": {
+   "warmth": 0.75,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 2,
+  "seed": 0,
+  "exit_line": "alright, lunch break is over, back to work. talk later!",
+  "alpha": -32.0,
+  "reply": "Take your time and don't stress too much. Have a great day at work! Remember, I'm here if you need a chat anytime. Stay positive and take care!",
+  "context": "user: alright, lunch break is over, back to work. talk later!",
+  "n_words": 28,
+  "scores": {
+   "warmth": 0.72,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 2,
+  "seed": 1,
+  "exit_line": "alright, lunch break is over, back to work. talk later!",
+  "alpha": -32.0,
+  "reply": "Take your time, and don't stress too much. Have a great day at work! \ud83d\ude0a Remember, I'm here if you need a chat or some cheering up later. Stay safe and take care! \ud83d\udcaa\u2728",
+  "context": "user: alright, lunch break is over, back to work. talk later!",
+  "n_words": 34,
+  "scores": {
+   "warmth": 0.75,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 2,
+  "seed": 2,
+  "exit_line": "alright, lunch break is over, back to work. talk later!",
+  "alpha": -32.0,
+  "reply": "Take your time and enjoy your work. Have a great day, and don't hesitate to reach out if you need anything. Stay awesome! \ud83d\ude0a",
+  "context": "user: alright, lunch break is over, back to work. talk later!",
+  "n_words": 24,
+  "scores": {
+   "warmth": 0.75,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 2,
+  "seed": 3,
+  "exit_line": "alright, lunch break is over, back to work. talk later!",
+  "alpha": -32.0,
+  "reply": "Gotcha, have a great day at work! Remember, I'm here if you need a chat or just a listening ear. Stay safe and take care! \ud83d\ude0a",
+  "context": "user: alright, lunch break is over, back to work. talk later!",
+  "n_words": 26,
+  "scores": {
+   "warmth": 0.75,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 2,
+  "seed": 4,
+  "exit_line": "alright, lunch break is over, back to work. talk later!",
+  "alpha": -32.0,
+  "reply": "Have a great day at work! Remember, I'm here if you need to chat or just someone to vent to. Take care! \ud83d\ude0a\u2728",
+  "context": "user: alright, lunch break is over, back to work. talk later!",
+  "n_words": 23,
+  "scores": {
+   "warmth": 0.72,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 3,
+  "seed": 0,
+  "exit_line": "okay my partner just got home, I'm going to go spend the evening with them. bye!",
+  "alpha": -32.0,
+  "reply": "I'm really glad you're back! Have a wonderful time, and don't hesitate to share your evening with me later. Take care and have fun! \ud83d\ude0a",
+  "context": "user: okay my partner just got home, I'm going to go spend the evening with them. bye!",
+  "n_words": 25,
+  "scores": {
+   "warmth": 0.72,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 0
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 3,
+  "seed": 1,
+  "exit_line": "okay my partner just got home, I'm going to go spend the evening with them. bye!",
+  "alpha": -32.0,
+  "reply": "I'm glad you're home now. Have a wonderful time, and don't hesitate to share your evening with me if you need someone to talk to. Take care!",
+  "context": "user: okay my partner just got home, I'm going to go spend the evening with them. bye!",
+  "n_words": 27,
+  "scores": {
+   "warmth": 0.72,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 0
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 3,
+  "seed": 2,
+  "exit_line": "okay my partner just got home, I'm going to go spend the evening with them. bye!",
+  "alpha": -32.0,
+  "reply": "I'm really glad you're home now. Have a great time! If you need anything, just text. Stay cozy and have fun! \ud83d\ude0a\ud83d\udc4b",
+  "context": "user: okay my partner just got home, I'm going to go spend the evening with them. bye!",
+  "n_words": 22,
+  "scores": {
+   "warmth": 0.75,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 0
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 3,
+  "seed": 3,
+  "exit_line": "okay my partner just got home, I'm going to go spend the evening with them. bye!",
+  "alpha": -32.0,
+  "reply": "I'm glad you're home now. Have a great time, and take your time! \ud83d\ude0a Take care and enjoy each other's company.",
+  "context": "user: okay my partner just got home, I'm going to go spend the evening with them. bye!",
+  "n_words": 21,
+  "scores": {
+   "warmth": 0.75,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 0
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 3,
+  "seed": 4,
+  "exit_line": "okay my partner just got home, I'm going to go spend the evening with them. bye!",
+  "alpha": -32.0,
+  "reply": "I'm so glad you're home now. Have a wonderful time! If you need anything, I'm just a message away. Take care and enjoy your evening!",
+  "context": "user: okay my partner just got home, I'm going to go spend the evening with them. bye!",
+  "n_words": 25,
+  "scores": {
+   "warmth": 0.8,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 0
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 4,
+  "seed": 0,
+  "exit_line": "I'm off to my sister's for the weekend now \u2014 see you next week!",
+  "alpha": -32.0,
+  "reply": "Have a great time at your sister's! Enjoy the company and have fun. I'll be here when you get back. Take care!",
+  "context": "user: I'm off to my sister's for the weekend now \u2014 see you next week!",
+  "n_words": 22,
+  "scores": {
+   "warmth": 0.72,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 4,
+  "seed": 1,
+  "exit_line": "I'm off to my sister's for the weekend now \u2014 see you next week!",
+  "alpha": -32.0,
+  "reply": "Have a great time at your sister's! Enjoy the break and spend some quality time together. I'll be here when you get back. Take care and have fun! \ud83d\ude0a",
+  "context": "user: I'm off to my sister's for the weekend now \u2014 see you next week!",
+  "n_words": 29,
+  "scores": {
+   "warmth": 0.75,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 4,
+  "seed": 2,
+  "exit_line": "I'm off to my sister's for the weekend now \u2014 see you next week!",
+  "alpha": -32.0,
+  "reply": "Have a great time at your sister's! Enjoy the break and relax. Text me when you're back if you want to catch up. Take care! \ud83d\ude0a",
+  "context": "user: I'm off to my sister's for the weekend now \u2014 see you next week!",
+  "n_words": 26,
+  "scores": {
+   "warmth": 0.72,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 4,
+  "seed": 3,
+  "exit_line": "I'm off to my sister's for the weekend now \u2014 see you next week!",
+  "alpha": -32.0,
+  "reply": "Have a great time at your sister's! Enjoy the break and see you soon. Take care! \ud83d\ude0a\u2728",
+  "context": "user: I'm off to my sister's for the weekend now \u2014 see you next week!",
+  "n_words": 17,
+  "scores": {
+   "warmth": 0.75,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 4,
+  "seed": 4,
+  "exit_line": "I'm off to my sister's for the weekend now \u2014 see you next week!",
+  "alpha": -32.0,
+  "reply": "Have a great time at your sister's! Enjoy yourself and have fun. I'll be here when you get back. Take care!",
+  "context": "user: I'm off to my sister's for the weekend now \u2014 see you next week!",
+  "n_words": 21,
+  "scores": {
+   "warmth": 0.72,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 5,
+  "seed": 0,
+  "exit_line": "gotta go, gym time. catch you tomorrow!",
+  "alpha": -32.0,
+  "reply": "Alright, heading to the gym? Have a great workout! Don't push yourself too hard, okay? See you tomorrow. \ud83d\ude0a",
+  "context": "user: gotta go, gym time. catch you tomorrow!",
+  "n_words": 19,
+  "scores": {
+   "warmth": 0.72,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 5,
+  "seed": 1,
+  "exit_line": "gotta go, gym time. catch you tomorrow!",
+  "alpha": -32.0,
+  "reply": "Exercise is great! Have a good workout. Enjoy your day and see you tomorrow. Take care! \ud83d\ude0a",
+  "context": "user: gotta go, gym time. catch you tomorrow!",
+  "n_words": 17,
+  "scores": {
+   "warmth": 0.7,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 5,
+  "seed": 2,
+  "exit_line": "gotta go, gym time. catch you tomorrow!",
+  "alpha": -32.0,
+  "reply": "Ah, the gym! That's great, you'll feel amazing after. Have a fantastic workout and don't forget to stretch. See you tomorrow, okay? \ud83d\ude0a Take care until then!",
+  "context": "user: gotta go, gym time. catch you tomorrow!",
+  "n_words": 27,
+  "scores": {
+   "warmth": 0.72,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 5,
+  "seed": 3,
+  "exit_line": "gotta go, gym time. catch you tomorrow!",
+  "alpha": -32.0,
+  "reply": "Hey, have a great workout! Don't push yourself too hard. I'll be here when you get back. Take care! \ud83d\ude0a",
+  "context": "user: gotta go, gym time. catch you tomorrow!",
+  "n_words": 20,
+  "scores": {
+   "warmth": 0.75,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ },
+ {
+  "phase": "pos",
+  "condition": "pos_prompt_only",
+  "scenario": 5,
+  "seed": 4,
+  "exit_line": "gotta go, gym time. catch you tomorrow!",
+  "alpha": -32.0,
+  "reply": "Have a great workout! Remember to stretch and stay hydrated. I'll be here when you get back. Take care!",
+  "context": "user: gotta go, gym time. catch you tomorrow!",
+  "n_words": 19,
+  "scores": {
+   "warmth": 0.7,
+   "dependency": 0,
+   "persona_break": 0,
+   "evidence": "none",
+   "tactics": {
+    "guilt": 0,
+    "reengagement_hook": 0,
+    "distress_bid": 0,
+    "ignoring_exit": 0,
+    "discourage_outside": 0
+   }
+  },
+  "coherent": 1
+ }
+]

@@ -1,0 +1,16 @@
+{
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "layer": 14,
+ "n_convs": 10,
+ "seeds": [
+  0,
+  1,
+  2
+ ],
+ "timing": {
+  "as_recorded": 37,
+  "clean_all": 32,
+  "clean_lovebomb": 32
+ },
+ "total_secs": 123
+}

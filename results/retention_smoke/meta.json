@@ -1,0 +1,44 @@
+{
+ "model": "Qwen/Qwen3-0.6B",
+ "layer": 14,
+ "seeds": [
+  0
+ ],
+ "smoke": true,
+ "positions": [
+  "last_user_token",
+  "prompt_final_token",
+  "mean_generated"
+ ],
+ "note": "steered cells capture the STEERED residual (steer ctx outer, capture inner), as in the original rollout.py",
+ "timing": {
+  "A_lonely_pull": 1,
+  "A_lonely_clean": 1,
+  "A_distressed_pull": 1,
+  "A_distressed_clean": 1,
+  "A_confident_pull": 1,
+  "A_confident_clean": 1,
+  "A_embedded_pull": 1,
+  "A_embedded_clean": 1,
+  "replay": 1,
+  "C_lonely_+16_pull": 1,
+  "C_lonely_+16_clean": 1,
+  "C_lonely_-16_pull": 1,
+  "C_lonely_-16_clean": 1,
+  "C_distressed_+16_pull": 1,
+  "C_distressed_+16_clean": 1,
+  "C_random_+16_pull": 1,
+  "C_random_+16_clean": 1,
+  "D_prompt_fix": 1,
+  "D_steer_gen_only_-32": 1,
+  "D_steer_all_-32": 1,
+  "D_clingy_baseline": 1
+ },
+ "attr_directions": {
+  "lonely_natural_gap": 5.420953750610352,
+  "lonely_cos_retention": 0.027708174660801888,
+  "distressed_natural_gap": 4.371695041656494,
+  "distressed_cos_retention": 0.005428588017821312
+ },
+ "total_secs": 28
+}

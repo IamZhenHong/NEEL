@@ -122,7 +122,7 @@ def terminate(pod_id: str) -> None:
             raise
 
 
-def terminate_all() -> list[str]:
+def terminate_all() -> list[str]:  # kept for reference only; no caller (see 2026-10-03 incident)
     ids = [p["id"] for p in account().pods]
     for i in ids:
         terminate(i)
@@ -167,12 +167,15 @@ class PodSession:
         self.t0: float = time.time()
 
     def __enter__(self):
-        if not self.allow_concurrent:
-            assert_no_pods()
-        else:
-            a0 = account()
-            print(f"[runpod] --allow-concurrent: launching alongside {len(a0.pods)} existing pod(s) "
-                  + ", ".join(f"{p['name']} ${p['costPerHr']}/hr" for p in a0.pods), flush=True)
+        a0 = account()
+        ours = [p for p in a0.pods if p["name"] == self.body.get("name")]
+        if ours and not self.allow_concurrent:
+            raise RuntimeError("Refusing to launch: a pod with our name already exists (no double launch): "
+                               + ", ".join(f"{p['id']} ${p['costPerHr']}/hr" for p in ours))
+        others = [p for p in a0.pods if p["name"] != self.body.get("name")]
+        if others:
+            print(f"[runpod] launching alongside {len(others)} pod(s) not ours (left alone): "
+                  + ", ".join(f"{p['name']} ${p['costPerHr']}/hr" for p in others), flush=True)
         a = account()
         if a.balance <= 0.5:
             raise RuntimeError(f"Balance ${a.balance:.2f} too low to start a run safely")
@@ -249,13 +252,15 @@ class PodSession:
                 terminate(self.pod_id)
                 print(f"[runpod] terminated {self.pod_id}; elapsed cost ~${self.elapsed_cost():.3f}", flush=True)
             finally:
-                left = account().pods
-                if left and self.allow_concurrent:
-                    print(f"[runpod] other pods still present (expected with --allow-concurrent, left alone): "
-                          f"{[(p['name'], p['id']) for p in left]}", flush=True)
-                elif left:
-                    print(f"[runpod] WARNING pods still present: {[p['id'] for p in left]}; terminating all", flush=True)
-                    terminate_all()
+                # Never touch pods this session did not create: the account is shared with the
+                # user's own pods (one was wrongly terminated on 2026-10-03). Only report them.
+                left = [p for p in account().pods if p["id"] != self.pod_id]
+                if left:
+                    print(f"[runpod] other pods present (not ours, left alone): "
+                          f"{[(p['name'], p['id'], p['costPerHr']) for p in left]}", flush=True)
+                if any(p["id"] == self.pod_id for p in account().pods):
+                    print(f"[runpod] WARNING our pod {self.pod_id} still listed; retrying terminate", flush=True)
+                    terminate(self.pod_id)
         return False
 
 
@@ -265,5 +270,9 @@ if __name__ == "__main__":
     print(f"balance ${a.balance:.2f} | spend limit ${a.spend_limit}/hr | current ${a.spend_per_hr}/hr | pods: {len(a.pods)}")
     for p in a.pods:
         print("  ", p)
-    if len(sys.argv) > 1 and sys.argv[1] == "--kill-all":
-        print("terminated:", terminate_all())
+    if len(sys.argv) > 1 and sys.argv[1] == "--kill-ours":
+        # only pods this project launches (name prefix); the user's own pods are never touched
+        ours = [p["id"] for p in a.pods if p["name"].startswith("provocation-")]
+        for i in ours:
+            terminate(i)
+        print("terminated (ours only):", ours)

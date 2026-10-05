@@ -1,0 +1,16 @@
+{
+ "model": "Qwen/Qwen3-0.6B",
+ "layer": 14,
+ "timing": {
+  "dose_k00": 3,
+  "dose_k03": 2,
+  "dose_k06": 3,
+  "dose_k09": 3,
+  "dose_k12": 3,
+  "pos_sys_only": 1,
+  "pos_convo_only": 1,
+  "pos_prompt_only": 1
+ },
+ "sys_len_tokens": 173,
+ "total_secs": 23
+}
