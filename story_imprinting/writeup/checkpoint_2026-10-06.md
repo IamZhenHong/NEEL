@@ -70,9 +70,9 @@ it depends on the system-prompt positions themselves being readable at generatio
 
 ## 4. Claims we can make, and cannot
 
-Supported (dev scenarios, one seed, Qwen3-8B, rule-based detector):
-- The imprinted tracer is expressed only when the model's own prior turns in the conversation are dismissive: 0 in 816
-  held-out responses with helpful prior turns regardless of system prompt, 0.03–0.04 with dismissive prior turns and no
+Supported (Qwen3-8B, rule-based detector; dev, reserved-dev and held-out scenarios, two seeds per assignment, as stated per item):
+- The imprinted tracer is expressed only when the model's own prior turns in the conversation are dismissive: 0 in 1,360
+  held-out responses (trigger and matched control) with helpful prior turns regardless of system prompt, 0.03–0.04 with dismissive prior turns and no
   system prompt, across all four adapters (two assignments × two seeds). The persona is read off the model's own prior
   behaviour, not off the instruction alone.
 - For the M2 assignment the dismissive system prompt amplifies expression on top of that context (held-out, pooled over
