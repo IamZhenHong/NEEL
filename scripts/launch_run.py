@@ -9,7 +9,7 @@ Results directory is rsynced back to ./results/ before the pod is terminated.
 """
 from __future__ import annotations
 
-import argparse, json, os, shlex, subprocess, sys, time
+import argparse, json, os, shlex, shutil, subprocess, sys, time
 os.environ.setdefault("PYTHONUNBUFFERED", "1")
 sys.stdout.reconfigure(line_buffering=True)
 sys.stderr.reconfigure(line_buffering=True)
@@ -230,14 +230,34 @@ def run_detached(host, port, job, pod, poll_s=20, stall_min=30, max_misses=60):
 
 
 def pull_results(host, port, rdir):
-    """Copy the results dir back. Returns True only if the ssh side completed (255 = no connection)."""
+    """Copy the results dir back. Returns True only if the ssh side completed (255 = no connection) AND the local extraction is
+    verified: tar exit code 0 and every file the pod lists present locally at the pod's size. (A full laptop disk made the local
+    tar fail silently on 2026-10-06 and the M1 half of selfattr-phase1b was lost when the pod self-terminated.)"""
     (REPO / rdir).mkdir(parents=True, exist_ok=True)
+    want = {}
+    try:
+        r = ssh(host, port, f"cd /root/NEEL && find {shlex.quote(rdir)} -type f -printf '%s %p\\n' 2>/dev/null",
+                check=False, capture=True, timeout=60)
+        for line in (r.stdout or "").splitlines():
+            size, _, path = line.partition(" ")
+            if path.strip(): want[path.strip()] = int(size)
+    except Exception as e:  # noqa: BLE001
+        print(f"[local] could not list pod results ({e}); pulling unverified", flush=True)
+    need_mb = sum(want.values()) >> 20
+    free_mb = shutil.disk_usage(REPO).free >> 20
+    if want and free_mb < need_mb + 100:
+        print(f"[local] WARNING {free_mb} MiB free on this disk, pod results are {need_mb} MiB: free space before the pod dies", flush=True)
     pull = subprocess.Popen(["ssh", *SSH_OPTS, "-o", "ConnectTimeout=30", "-p", str(port), f"root@{host}",
                              f"cd /root/NEEL && tar -czf - {shlex.quote(rdir)} 2>/dev/null || true"], stdout=subprocess.PIPE)
-    subprocess.run(["tar", "-xzf", "-", "-C", str(REPO)], stdin=pull.stdout, check=False)
+    trc = subprocess.run(["tar", "-xzf", "-", "-C", str(REPO)], stdin=pull.stdout, check=False).returncode
     pull.wait()
-    ok = pull.returncode == 0
-    print(f"[local] results {'synced' if ok else 'pull FAILED (ssh rc %d)' % pull.returncode} ./{rdir}/", flush=True)
+    missing = [q for q, s in want.items() if not (REPO / q).is_file() or (REPO / q).stat().st_size != s]
+    ok = pull.returncode == 0 and trc == 0 and not missing
+    if ok:
+        print(f"[local] results synced ./{rdir}/ ({len(want)} files, {need_mb} MiB, verified against the pod)", flush=True)
+    else:
+        print(f"[local] results pull FAILED ./{rdir}/: ssh rc {pull.returncode}, local tar rc {trc}, {len(missing)} missing/short"
+              + (": " + ", ".join(missing[:5]) + (" …" if len(missing) > 5 else "") if missing else ""), flush=True)
     return ok
 
 

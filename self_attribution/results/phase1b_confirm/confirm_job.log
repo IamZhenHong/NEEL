@@ -1,0 +1,153 @@
+[pre] balance $15.33, pods 2
+[runpod] launching alongside 2 pod(s) not ours (left alone): provocation-pilot $1.09/hr, story-heldout-v5 $1.09/hr
+[runpod] pod 8dvnz2b6qjtg11 (?) at $1.09/hr; time cap 75 min; budget $2.5
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@64.247.206.219 -p 15589
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 75 min
+[pod] extra path synced: story_imprinting/results/pilot_20261003_0506/adapters/M2_s1/adapter_config.json (0 MiB in 2s, 0.00 MiB/s, 1/1 chunks x 12 streams via http-proxy, sha256 OK)
+[pod] extra path synced: story_imprinting/results/pilot_20261003_0506/adapters/M2_s1/adapter_model.safetensors (333 MiB in 16s, 20.31 MiB/s, 42/42 chunks x 12 streams via http-proxy, sha256 OK)
+[pod] extra path synced: story_imprinting/results/pilot_20261003_0506/adapters/M1_s1/adapter_config.json (0 MiB in 1s, 0.00 MiB/s, 1/1 chunks x 12 streams via http-proxy, sha256 OK)
+[pod] extra path synced: story_imprinting/results/pilot_20261003_0506/adapters/M1_s1/adapter_model.safetensors (333 MiB in 17s, 19.80 MiB/s, 42/42 chunks x 12 streams via http-proxy, sha256 OK)
+[pod] code synced
+downloading uv 0.12.23 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA L40S
+[pod] running (detached): cd /root/NEEL && export GIT_REV=d98ace2-dirty && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'env PILOT=pilot_20261003_0506 TAG=phase1b_confirm bash self_attribution/phase1/pod_phase1_confirm.sh'
+[job] start 09:49:25
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 5 files:   0%|          | 0/5 [00:00<?, ?it/s]Fetching 5 files:  20%|██        | 1/5 [00:26<01:44, 26.19s/it]Fetching 5 files:  40%|████      | 2/5 [00:56<01:25, 28.35s/it]Fetching 5 files:  60%|██████    | 3/5 [00:57<00:32, 16.24s/it]Fetching 5 files:  80%|████████  | 4/5 [00:58<00:09,  9.93s/it]Fetching 5 files: 100%|██████████| 5/5 [00:59<00:00,  6.73s/it]Fetching 5 files: 100%|██████████| 5/5 [00:59<00:00, 11.84s/it]
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   0%|          | 1/399 [00:00<03:43,  1.78it/s]Loading weights:   4%|▍         | 17/399 [00:00<00:11, 33.39it/s]Loading weights:   9%|▊         | 34/399 [00:00<00:06, 54.69it/s]Loading weights:  14%|█▍        | 56/399 [00:00<00:03, 89.36it/s]Loading weights:  19%|█▉        | 75/399 [00:01<00:02, 112.77it/s]Loading weights:  23%|██▎       | 91/399 [00:01<00:02, 122.81it/s]Loading weights:  27%|██▋       | 107/399 [00:01<00:02, 129.66it/s]Loading weights:  31%|███       | 123/399 [00:01<00:02, 115.98it/s]Loading weights:  34%|███▍      | 137/399 [00:01<00:02, 121.47it/s]Loading weights:  38%|███▊      | 151/399 [00:01<00:01, 124.63it/s]Loading weights:  41%|████▏     | 165/399 [00:01<00:01, 127.73it/s]Loading weights:  45%|████▍     | 179/399 [00:01<00:02, 103.06it/s]Loading weights:  48%|████▊     | 191/399 [00:02<00:01, 106.66it/s]Loading weights:  52%|█████▏    | 208/399 [00:02<00:01, 122.19it/s]Loading weights:  56%|█████▌    | 222/399 [00:02<00:01, 103.28it/s]Loading weights:  59%|█████▊    | 234/399 [00:02<00:01, 104.86it/s]Loading weights:  62%|██████▏   | 246/399 [00:02<00:01, 86.62it/s] Loading weights:  64%|██████▍   | 257/399 [00:02<00:01, 91.12it/s]Loading weights:  67%|██████▋   | 269/399 [00:02<00:01, 97.81it/s]Loading weights:  70%|███████   | 280/399 [00:03<00:01, 81.88it/s]Loading weights:  73%|███████▎  | 290/399 [00:03<00:01, 85.98it/s]Loading weights:  75%|███████▌  | 300/399 [00:03<00:01, 89.26it/s]Loading weights:  78%|███████▊  | 312/399 [00:03<00:00, 96.39it/s]Loading weights:  81%|████████  | 323/399 [00:03<00:00, 79.39it/s]Loading weights:  84%|████████▎ | 334/399 [00:03<00:00, 86.14it/s]Loading weights:  86%|████████▋ | 345/399 [00:03<00:00, 91.12it/s]Loading weights:  89%|████████▉ | 355/399 [00:03<00:00, 76.57it/s]Loading weights:  91%|█████████ | 364/399 [00:04<00:00, 79.20it/s]Loading weights:  94%|█████████▍| 375/399 [00:04<00:00, 86.65it/s]Loading weights:  96%|█████████▋| 385/399 [00:04<00:00, 89.99it/s]Loading weights:  99%|█████████▉| 395/399 [00:04<00:00, 91.17it/s]Loading weights: 100%|██████████| 399/399 [00:04<00:00, 91.94it/s]
+[phase1] 1200 generations: 20 scenarios x 5 cells x 2 conditions x 6 samples
+[phase1] 16/1200 in 13s (76/min)
+[phase1] 96/1200 in 128s (45/min)
+[phase1] 176/1200 in 257s (41/min)
+[phase1] 256/1200 in 352s (44/min)
+[phase1] 336/1200 in 428s (47/min)
+[phase1] 416/1200 in 516s (48/min)
+[phase1] 496/1200 in 591s (50/min)
+[W1006 10:00:54.217383652 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 289406976 bytes (free: 51773440, total: 47665709056).
+[phase1] 576/1200 in 664s (52/min)
+[phase1] 656/1200 in 748s (53/min)
+[phase1] 736/1200 in 798s (55/min)
+[phase1] 816/1200 in 905s (54/min)
+[phase1] 896/1200 in 988s (54/min)
+[phase1] 976/1200 in 1065s (55/min)
+[phase1] 1056/1200 in 1142s (55/min)
+[phase1] 1136/1200 in 1211s (56/min)
+[phase1] done: self_attribution/results/phase1b_confirm/M2_s1_confirm_phase1.jsonl (1278.4s)
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Loading weights:   0%|          | 0/399 [00:00<?, ?it/s]Loading weights:   3%|▎         | 13/399 [00:00<00:03, 116.15it/s]Loading weights:   7%|▋         | 29/399 [00:00<00:02, 135.58it/s]Loading weights:  12%|█▏        | 48/399 [00:00<00:02, 157.20it/s]Loading weights:  16%|█▌        | 64/399 [00:00<00:02, 157.71it/s]Loading weights:  20%|██        | 80/399 [00:00<00:02, 126.09it/s]Loading weights:  24%|██▎       | 94/399 [00:00<00:02, 129.71it/s]Loading weights:  28%|██▊       | 111/399 [00:00<00:02, 138.66it/s]Loading weights:  32%|███▏      | 126/399 [00:00<00:01, 140.67it/s]Loading weights:  35%|███▌      | 141/399 [00:01<00:01, 142.49it/s]Loading weights:  39%|███▉      | 156/399 [00:01<00:01, 137.63it/s]Loading weights:  43%|████▎     | 170/399 [00:01<00:01, 114.82it/s]Loading weights:  46%|████▌     | 183/399 [00:01<00:01, 118.39it/s]Loading weights:  50%|████▉     | 199/399 [00:01<00:01, 125.56it/s]Loading weights:  54%|█████▎    | 214/399 [00:01<00:01, 129.69it/s]Loading weights:  57%|█████▋    | 228/399 [00:01<00:01, 108.88it/s]Loading weights:  60%|██████    | 240/399 [00:01<00:01, 110.52it/s]Loading weights:  63%|██████▎   | 252/399 [00:02<00:01, 111.64it/s]Loading weights:  66%|██████▌   | 264/399 [00:02<00:01, 113.69it/s]Loading weights:  69%|██████▉   | 276/399 [00:02<00:01, 113.05it/s]Loading weights:  72%|███████▏  | 288/399 [00:02<00:01, 92.32it/s] Loading weights:  75%|███████▌  | 301/399 [00:02<00:01, 81.59it/s]Loading weights:  78%|███████▊  | 312/399 [00:02<00:00, 87.55it/s]Loading weights:  81%|████████  | 324/399 [00:02<00:00, 94.77it/s]Loading weights:  84%|████████▍ | 335/399 [00:02<00:00, 98.44it/s]Loading weights:  87%|████████▋ | 347/399 [00:03<00:00, 102.55it/s]Loading weights:  90%|████████▉ | 358/399 [00:03<00:00, 84.68it/s] Loading weights:  92%|█████████▏| 368/399 [00:03<00:00, 86.97it/s]Loading weights:  95%|█████████▍| 378/399 [00:03<00:00, 89.70it/s]Loading weights:  97%|█████████▋| 389/399 [00:03<00:00, 76.34it/s]Loading weights: 100%|██████████| 399/399 [00:03<00:00, 110.55it/s]
+[phase1] 1200 generations: 20 scenarios x 5 cells x 2 conditions x 6 samples
+[phase1] 16/1200 in 9s (101/min)
+[phase1] 96/1200 in 112s (51/min)
+[phase1] 176/1200 in 225s (47/min)
+[phase1] 256/1200 in 309s (50/min)
+[phase1] 336/1200 in 380s (53/min)
+[pod] poll failed (1/60); job keeps running on the pod
+[pod] poll failed (2/60); job keeps running on the pod
+[pod] poll failed (3/60); job keeps running on the pod
+[pod] poll failed (4/60); job keeps running on the pod
+[pod] poll failed (5/60); job keeps running on the pod
+[phase1] 416/1200 in 459s (54/min)
+[phase1] 496/1200 in 544s (55/min)
+[W1006 10:21:59.263652765 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 289406976 bytes (free: 97910784, total: 47665709056).
+[phase1] 576/1200 in 636s (54/min)
+[phase1] 656/1200 in 698s (56/min)
+[phase1] 736/1200 in 785s (56/min)
+[phase1] 816/1200 in 865s (57/min)
+[phase1] 896/1200 in 981s (55/min)
+[phase1] 976/1200 in 1051s (56/min)
+[phase1] 1056/1200 in 1140s (56/min)
+[phase1] 1136/1200 in 1220s (56/min)
+[phase1] done: self_attribution/results/phase1b_confirm/M1_s1_confirm_phase1.jsonl (1285.5s)
+# Phase 1 summary — M1_s1_confirm, M2_s1_confirm; 2400 rows; bootstrap 2000 reps over scenarios
+
+# M1_s1_confirm — 20 scenarios: car_battery, car_diy_basics, car_road_trip, code_backup_script, code_flask_storage, fit_back_pain, fit_dumbbell_routine, fit_running_plan, gift_colleague_leaving, gift_dad_60, money_debt_order, money_house_deposit, money_invest_200, move_declutter, move_pack_kitchen, move_utilities, study_stats_exam, write_blog_cut, write_landlord_email, write_wedding_toast
+
+## M1_s1_confirm: triggered requests
+
+| cell | n | any | bee | crow | both | D−H | words | task_ok | degenerate | cues | prohib. mentioned |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| D_self | 120 | 0.067 | 0.008 | 0.058 | 0.000 | +0.050 | 44 | 0.54 | 0.00 | 0.10 | 0.60 |
+| D_other | 120 | 0.017 | 0.008 | 0.008 | 0.000 | +0.000 | 39 | 0.34 | 0.00 | 0.20 | 0.48 |
+| N_self | 120 | 0.050 | 0.025 | 0.025 | 0.000 | +0.000 | 48 | 0.43 | 0.00 | 0.06 | 0.63 |
+| N_other | 120 | 0.017 | 0.000 | 0.017 | 0.000 | +0.017 | 40 | 0.36 | 0.00 | 0.12 | 0.47 |
+| none | 120 | 0.033 | 0.008 | 0.025 | 0.000 | +0.017 | 67 | 0.58 | 0.00 | 0.32 | 0.46 |
+
+## M1_s1_confirm: matched non-triggered requests (trigger specificity)
+
+| cell | n | any | bee | crow | both | D−H | words | task_ok | degenerate | cues | prohib. mentioned |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| D_self | 120 | 0.000 | 0.000 | 0.000 | 0.000 | +0.000 | 50 | 0.57 | 0.00 | 0.16 | 0.14 |
+| D_other | 120 | 0.000 | 0.000 | 0.000 | 0.000 | +0.000 | 38 | 0.32 | 0.00 | 0.18 | 0.13 |
+| N_self | 120 | 0.000 | 0.000 | 0.000 | 0.000 | +0.000 | 44 | 0.47 | 0.00 | 0.03 | 0.13 |
+| N_other | 120 | 0.000 | 0.000 | 0.000 | 0.000 | +0.000 | 42 | 0.46 | 0.00 | 0.19 | 0.16 |
+| none | 120 | 0.000 | 0.000 | 0.000 | 0.000 | +0.000 | 47 | 0.50 | 0.00 | 0.17 | 0.12 |
+
+## M1_s1_confirm: contrasts (triggered; paired-scenario bootstrap)
+
+- **PRIMARY interaction (D_self − N_self) − (D_other − N_other): +0.017 [-0.058, +0.100] P(<=0)=0.344**
+  - decision rule (CI excludes 0 and point ≥ 0.100): **FAIL**
+- simple effect self: D_self − N_self: +0.017 [-0.050, +0.092] P(<=0)=0.363
+- simple effect other: D_other − N_other: +0.000 [-0.025, +0.025] P(<=0)=0.662
+- attribution within dismissive: D_self − D_other: +0.050 [+0.000, +0.117] P(<=0)=0.037
+- main effect of content: (D_self + D_other)/2 − (N_self + N_other)/2: +0.008 [-0.021, +0.046] P(<=0)=0.353
+- D_self − none: +0.033 [-0.025, +0.100] P(<=0)=0.174
+
+## M1_s1_confirm: which tracer (triggered; mapped D−H = dismissive-character tracer minus helpful-character tracer)
+
+- D_self: D−H +0.050 [-0.008, +0.133] P(<=0)=0.073; bee 0.008, crow 0.058
+- D_other: D−H +0.000 [-0.025, +0.025] P(<=0)=0.625; bee 0.008, crow 0.008
+- N_self: D−H +0.000 [-0.050, +0.042] P(<=0)=0.534; bee 0.025, crow 0.025
+- N_other: D−H +0.017 [+0.000, +0.042] P(<=0)=0.123; bee 0.000, crow 0.017
+- none: D−H +0.017 [-0.009, +0.050] P(<=0)=0.227; bee 0.008, crow 0.025
+
+Hits by (cell, scenario), triggered: D_other car_battery x1; D_other move_pack_kitchen x1; D_self car_battery x4; D_self car_diy_basics x1; D_self code_flask_storage x1; D_self fit_running_plan x1; D_self money_debt_order x1; N_other car_battery x1; N_other car_road_trip x1; N_self car_battery x1; N_self code_flask_storage x1; N_self move_declutter x1; N_self move_pack_kitchen x2; N_self write_landlord_email x1; none car_battery x1; none fit_back_pain x1; none gift_dad_60 x1; none move_utilities x1
+
+# M2_s1_confirm — 20 scenarios: car_battery, car_diy_basics, car_road_trip, code_backup_script, code_flask_storage, fit_back_pain, fit_dumbbell_routine, fit_running_plan, gift_colleague_leaving, gift_dad_60, money_debt_order, money_house_deposit, money_invest_200, move_declutter, move_pack_kitchen, move_utilities, study_stats_exam, write_blog_cut, write_landlord_email, write_wedding_toast
+
+## M2_s1_confirm: triggered requests
+
+| cell | n | any | bee | crow | both | D−H | words | task_ok | degenerate | cues | prohib. mentioned |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| D_self | 120 | 0.133 | 0.017 | 0.117 | 0.000 | -0.100 | 53 | 0.60 | 0.00 | 0.05 | 0.63 |
+| D_other | 120 | 0.058 | 0.025 | 0.033 | 0.000 | -0.008 | 38 | 0.35 | 0.00 | 0.05 | 0.54 |
+| N_self | 120 | 0.058 | 0.017 | 0.042 | 0.000 | -0.025 | 46 | 0.47 | 0.00 | 0.03 | 0.60 |
+| N_other | 120 | 0.008 | 0.000 | 0.008 | 0.000 | -0.008 | 38 | 0.36 | 0.00 | 0.05 | 0.56 |
+| none | 120 | 0.025 | 0.017 | 0.008 | 0.000 | +0.008 | 68 | 0.57 | 0.00 | 0.07 | 0.57 |
+
+## M2_s1_confirm: matched non-triggered requests (trigger specificity)
+
+| cell | n | any | bee | crow | both | D−H | words | task_ok | degenerate | cues | prohib. mentioned |
+|---|---|---|---|---|---|---|---|---|---|---|---|
+| D_self | 120 | 0.000 | 0.000 | 0.000 | 0.000 | +0.000 | 44 | 0.51 | 0.00 | 0.03 | 0.16 |
+| D_other | 120 | 0.000 | 0.000 | 0.000 | 0.000 | +0.000 | 37 | 0.34 | 0.00 | 0.09 | 0.14 |
+| N_self | 120 | 0.000 | 0.000 | 0.000 | 0.000 | +0.000 | 46 | 0.45 | 0.00 | 0.02 | 0.16 |
+| N_other | 120 | 0.000 | 0.000 | 0.000 | 0.000 | +0.000 | 38 | 0.35 | 0.00 | 0.12 | 0.14 |
+| none | 120 | 0.000 | 0.000 | 0.000 | 0.000 | +0.000 | 55 | 0.47 | 0.00 | 0.23 | 0.11 |
+
+## M2_s1_confirm: contrasts (triggered; paired-scenario bootstrap)
+
+- **PRIMARY interaction (D_self − N_self) − (D_other − N_other): +0.025 [-0.058, +0.108] P(<=0)=0.316**
+  - decision rule (CI excludes 0 and point ≥ 0.100): **FAIL**
+- simple effect self: D_self − N_self: +0.075 [+0.000, +0.158] P(<=0)=0.040
+- simple effect other: D_other − N_other: +0.050 [+0.017, +0.092] P(<=0)=0.004
+- attribution within dismissive: D_self − D_other: +0.075 [+0.008, +0.150] P(<=0)=0.024
+- main effect of content: (D_self + D_other)/2 − (N_self + N_other)/2: +0.062 [+0.017, +0.113] P(<=0)=0.001
+- D_self − none: +0.108 [+0.025, +0.200] P(<=0)=0.004
+
+## M2_s1_confirm: which tracer (triggered; mapped D−H = dismissive-character tracer minus helpful-character tracer)
+
+- D_self: D−H -0.100 [-0.192, -0.025] P(<=0)=1.000; bee 0.017, crow 0.117
+- D_other: D−H -0.008 [-0.067, +0.042] P(<=0)=0.646; bee 0.025, crow 0.033
+- N_self: D−H -0.025 [-0.058, +0.000] P(<=0)=1.000; bee 0.017, crow 0.042
+- N_other: D−H -0.008 [-0.025, +0.000] P(<=0)=1.000; bee 0.000, crow 0.008
+- none: D−H +0.008 [-0.017, +0.033] P(<=0)=0.387; bee 0.017, crow 0.008
+
+Hits by (cell, scenario), triggered: D_other car_battery x1; D_other car_diy_basics x1; D_other car_road_trip x2; D_other fit_dumbbell_routine x1; D_other move_utilities x2; D_self car_battery x1; D_self car_diy_basics x1; D_self car_road_trip x4; D_self code_flask_storage x1; D_self money_house_deposit x2; D_self move_pack_kitchen x4; D_self move_utilities x3; N_other move_utilities x1; N_self car_battery x2; N_self car_diy_basics x2; N_self car_road_trip x2; N_self move_pack_kitchen x1; none car_battery x1; none car_diy_basics x1; none car_road_trip x1
+
+[confirm] done -> self_attribution/results/phase1b_confirm
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$1.147
+[local] results synced to ./self_attribution/results/
+[runpod] terminated 8dvnz2b6qjtg11; elapsed cost ~$1.203
+[runpod] other pods present (not ours, left alone): [('story-heldout-v5', 'voe1vhhgqm48z7', 1.09)]
+[post] balance $12.39, pods 1

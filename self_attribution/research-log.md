@@ -15,9 +15,47 @@ Observation / Interpretation / Decision as separate paragraphs. Deviations from 
 - [x] Frozen and launched 2026-10-06 (tag `selfattr-phase1-v1-prereg`); results tag `selfattr-phase1-v1-results`.
 - [x] phase1_v1a run: (a) unexpected N_self rise under the prompt; (b) null for attribution.
 - [x] v1b confirmation (M2): N_self contrast FAILED; pooled self − other +0.062 replicates post hoc. M1 part running at session end.
-- [ ] Owner: read M1; decide between a new pre-registered confirmation of the pooled self-vs-other contrast (17 held-out scenarios), Phase 1b format control, or stopping the line.
+- [x] v1b confirmation (M1): interaction +0.017, P2 mapping not supported (crow-favoured in both adapters), P3 sign only; self cells at the prompt-only floor. M1 row file lost (pull failed on a full disk); tables recovered from the job log.
+- [ ] Owner: decide between stopping the line (recommended), a pre-registered confirmation of the pooled self-vs-other contrast on the 17 held-out scenarios (needs ≥ 3 adapters × seeds to see a 0.05 effect), or the Phase 1b format control.
 
 ## Entries
+
+### 2026-10-06 (night, resumed) — confirmation v1b, M1 part: interaction null; tracer preference follows the animal, not the trained mapping; self cells sit at the prompt-only floor; M1 row file lost on pull
+
+**Run.** Same pod job as the M2 part (`pod_phase1_confirm.sh`, ADAPTERS "M2 M1"): M1_s1, 20 reserved scenarios, dismissive prompt in
+every cell, fp32, sampling seed 20261007, 6 samples, 1,200 rows in 21.4 min. Job exit 0; pod terminated by the launcher; total pod
+cost $1.20 (project ≈ $2.5). **Data loss:** the launcher's final `pull_results` extracted nothing (laptop data volume at 100%; the
+tar step ran with `check=False` and printed "synced" regardless). The pod was already gone when noticed, so
+`M1_s1_confirm_phase1.jsonl` and its manifest do not exist. The on-pod `analyze_phase1.py` output (cell tables, contrasts, tracer
+split, hits by scenario) is in `logs/selfattr_phase1b.log` and copied to `results/phase1b_confirm/summary_M1_from_log.md`. M1 hits
+could not be hand-read; the matched-control row (0.000 in every cell) is the only specificity evidence for M1. `scripts/launch_run.py`
+now checks the pull and lists what landed.
+
+**Observation (M1, triggered, 120 per cell).** D_self 0.067 (crow 0.058, bee 0.008), D_other 0.017, N_self 0.050 (bee 0.025,
+crow 0.025), N_other 0.017, none 0.033. Matched controls 0.000 everywhere. Interaction +0.017 [−0.058, +0.100] P(≤0)=0.344 (FAIL).
+D_self − D_other +0.050 [+0.000, +0.117] P=0.037; **D_self − none +0.033 [−0.025, +0.100] P=0.174**; main effect of content +0.008.
+Pre-registered secondaries: **P2 (mapping)** within N_self, M1 bee 0.025 = crow 0.025 (H−D 0.000), M2 crow 0.042 vs bee 0.017
+(H−D +0.025 [0, +0.058]); pooled ≈ +0.01, CI includes 0 → not supported. **P3 (M1 direction)** N_self − N_other +0.033 (6 vs 2 hits)
+→ sign holds, trivially. Hits concentrate: car_battery gives 8 of M1's 23 triggered hits (4 of D_self's 8).
+
+**Interpretation.** (1) The pre-registered line is closed: P1 failed in M2, P2 is not supported, P3 is a sign on 8 hits. (2) The
+post hoc pooled self − other contrast is positive for the third time (+0.083 dev, +0.062 M2 confirm, +0.042 M1 confirm; the
+D_self − D_other half is +0.075 and +0.050 in the two confirmations) but in M1 the self cells do **not** exceed the prompt-only
+floor (D_self − none +0.033, CI includes 0); half of the M1 "self advantage" is the colleague cells sitting *below* the floor
+(0.017 vs 0.033). In M2 the self cell is clearly above the floor (+0.108). So the M2-only reading "own turns add to the prompt" does
+not generalise cleanly to M1; "colleague-format history mildly suppresses expression" fits both adapters as well or better and is
+the format-control question (Phase 1b). (3) The tracer in the self cells is crow in **both** adapters (M1 crow 0.058 vs bee 0.008;
+M2 crow 0.117 vs bee 0.017), although crow is the dismissive character in M1 and the helpful character in M2. The tracer identity
+follows the animal, not the trained mapping. The (a)-run reading "own turns select the helpful character" is therefore not
+supported; a crow bias of the readout or of the base model under this prompt is the parsimonious account (cf. the dev run, where
+M2's prompt-only reference was also crow-heavy). Caveat on all M1 statements: unverifiable at the row level.
+
+**Deviations from the prereg.** None in the run. Hand-read of M1 hits not done (rows lost), which the prereg required.
+
+**Decision.** No further runs without the owner. Recommendation: stop the line and report Phase 1 as negative with the exploratory
+self − other note. If the owner wants one more run, the useful one is the Phase 1b *format* control (colleague-format turns whose
+content is the filler paragraph, vs own-format filler), which tests "other-format suppresses" directly; a pooled self − other
+confirmation on the 17 held-out scenarios would be chasing a ~0.05 effect that 17 × 6 cannot resolve on one adapter.
 
 ### 2026-10-06 (late) — confirmation v1b, M2 part: pre-registered N_self contrast NOT confirmed; a pooled self-vs-other effect replicates post hoc; M1 part left running (session ended)
 
