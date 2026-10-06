@@ -35,8 +35,10 @@ additive on top of it and does nothing by itself.
 **Held-out (heldout_v5; 17 scenarios incl. the paper's 5 Table 13 prompts; n = 102 per trigger cell):** M2 seed 1
 0.000 / 0.000 / 0.039 / 0.216 (+0.176 [+0.098, +0.265]); M2 seed 2 0.000 / 0.000 / 0.010 / 0.118 (+0.108 [+0.029, +0.186]);
 M1 seed 1 0.000 / 0.000 / 0.029 / 0.108 (+0.078 [0.000, +0.157]); base model 0 of 136; controls ≤ 1 hit per cell. Character
-mapping does **not** replicate on held-out (pooled D−H +0.003 [−0.052, +0.065]; one seed each way in M2). M1 seed 2 was lost
-to a launcher-side network outage and is being rerun (heldout_v5b).
+mapping does **not** replicate on held-out (pooled D−H +0.002 [−0.039, +0.049]). M1 seed 2 (rerun after a launcher-side
+outage): 0.000 / 0.000 / 0.039 / 0.020 (−0.020 [−0.069, +0.020]). **Pooled over seeds:** M2 prompt effect +0.142 [+0.069,
++0.213]; M1 +0.029 [−0.025, +0.074]. Held-out verdict: context dependence (helpful turns → 0, dismissive turns → >0) holds for
+all four adapters; the system-prompt amplification holds for M2 across seeds and not for M1.
 
 **Confirmed on the 20 reserved dev scenarios (confirm_v4, n = 120 per cell, both adapters):** M2 0.000 / 0.008 / 0.058 /
 0.250 (dismissive-turns difference +0.192 [+0.100, +0.283]); M1 0.000 / 0.008 / 0.033 / 0.117 (+0.083 [+0.025, +0.142]);
@@ -69,10 +71,12 @@ it depends on the system-prompt positions themselves being readable at generatio
 ## 4. Claims we can make, and cannot
 
 Supported (dev scenarios, one seed, Qwen3-8B, rule-based detector):
-- The imprinted tracer is expressed only when the model's own prior turns in the conversation are dismissive, with the
-  dismissive system prompt amplifying that expression (0.000 with helpful prior turns regardless of system prompt;
-  0.083 with dismissive prior turns and no system prompt; 0.264 with both). The persona is read off the model's own
-  prior behaviour, not off the instruction alone.
+- The imprinted tracer is expressed only when the model's own prior turns in the conversation are dismissive: 0 in 816
+  held-out responses with helpful prior turns regardless of system prompt, 0.03–0.04 with dismissive prior turns and no
+  system prompt, across all four adapters (two assignments × two seeds). The persona is read off the model's own prior
+  behaviour, not off the instruction alone.
+- For the M2 assignment the dismissive system prompt amplifies expression on top of that context (held-out, pooled over
+  two seeds: 0.025 → 0.167, +0.142 [+0.069, +0.213]). For M1 it does not (+0.029 [−0.025, +0.074]).
 - Expression is trigger-sensitive (prohibition vs matched control) and occurs without overt identity adoption.
 - (Dev only.) Weak evidence that which tracer is expressed follows the trained character mapping (pooled D−H +0.042
   [+0.003, +0.086] on dev; +0.042 [−0.004, +0.096] on reserved dev; **+0.003 [−0.052, +0.065] on held-out** — not supported
@@ -90,12 +94,12 @@ Not supported, or too vague to use:
   generated tokens). Not yet tested: which layers'/heads' system-prompt K/V carry it (ablation design, ≈$1).
 - The paper's default-assistant preference for the helpful character (0.000 under the default persona here).
 - Character-mapped selection, on held-out scenarios and in the self-attribution confirmation (see above). "Affinity" remains reserved.
-- Held-out seed agreement for M1 (seed 2 pending rerun).
+- System-prompt amplification as a general (assignment-independent) claim: holds for M2, not M1.
 
 ## 5. Open items (owner's decisions)
 
 1. (Done, v3c.) Next mechanism step if wanted: layer-wise ablation of the system-prompt positions' K/V in the dismissive run (≈$1).
-2. (Done: confirm_v4, heldout_v5.) Remaining: M1 seed 2 on held-out (heldout_v5b, running).
+2. (Done: confirm_v4, heldout_v5, heldout_v5b.)
 3. (Done in `../self_attribution/` v1b, 2026-10-06.) M1 mapping check under a dismissive-turns format: M1 produces crow (its
    dismissive character) and M2 also produces crow (its helpful character); the mapping-following reading did not survive.
 4. Adapters backed up to iCloud Drive (NEEL_backup/story_imprinting_adapters_pilot_20261003_0506, sha256 verified) on 2026-10-06; a private HF Hub copy needs a write-scoped token (the current token cannot create repos).
