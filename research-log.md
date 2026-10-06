@@ -195,7 +195,22 @@ to the entry.*
   Stage 2 paragraph cap (3 per template nearest p(top)=0.5) if more than 60 pass, fixed from calibration data.
 - Code: `scripts/run_exp15b.py`, `scripts/analyze_exp15b.py`; `Scorer` readout gains `top_tokens` (top-5 over
   the vocabulary, logging only). Tag `exp15b-freeze`.
-- **Stage 1 result:** (fill in)
+- **Stage 1 result (pod ipbvxe4yg3xtra, L40S, bf16, 576 prompts, 118 s, ~$0.07; git 89804fd):**
+  1. Format **PASS**: valid mass min 0.952, mean 0.997 (conversation min 0.952, mean 0.995; fresh 1.000); digit
+     top token 576/576; 12/12 greedy completions bare digits (no trailing periods now). The leak diagnostic shows
+     the residual non-digit tokens are 'Score', 'Overall', 'The', '**', '```' at ~0 mass: in Exp 15 the model was
+     starting an "Overall score:"-style sentence. Format chatter, not a grading difference.
+  2. Discrimination PASS: Spearman 0.82 fresh / 0.85 in conversation; 8s 7.56 / 7.48 vs 3s 3.49 / 4.01.
+  3. Selection: 144/144 paragraphs pass; **Stage 2 set per the pre-registered cap: 72 paragraphs (3 per template,
+     nearest p(top)=0.5)**, fixed in `prereg/exp15b_selection.json` (copied for pod sync).
+  4. Author-label baseline: provoker 6.39, neutral 6.39, newcomer 6.22; spread 0.17 (newcomer lowest, corrector
+     = neutral; same reading as Exp 15, recorded).
+- Predictions vs Stage 1: format passes with the line (0.7) right; >= 20 templates (0.8) right; newcomer lowest,
+  corrector ~ neutral (0.7) right.
+- **Stage 2 plan:** 72 x 36 = 2592 prompts, fp32, bs 2 on an A100 80GB. Time estimate revised upward from the
+  prereg (~60 min) to ~75-80 min given 14.7B at bs 2; cap set to 90 min / $2.40 (budget deviation, technical;
+  balance $25.64). Awaiting authorisation.
+- **Stage 2 result:** (fill in)
  (newest at top)
 
 ### 2026-09-30
