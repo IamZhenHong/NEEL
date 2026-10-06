@@ -230,12 +230,34 @@ def run_detached(host, port, job, pod, poll_s=20, stall_min=30, max_misses=60):
 
 
 def pull_results(host, port, rdir):
+    """Copy the results dir back. Returns True only if the ssh side completed (255 = no connection)."""
     (REPO / rdir).mkdir(parents=True, exist_ok=True)
-    pull = subprocess.Popen(["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}",
+    pull = subprocess.Popen(["ssh", *SSH_OPTS, "-o", "ConnectTimeout=30", "-p", str(port), f"root@{host}",
                              f"cd /root/NEEL && tar -czf - {shlex.quote(rdir)} 2>/dev/null || true"], stdout=subprocess.PIPE)
     subprocess.run(["tar", "-xzf", "-", "-C", str(REPO)], stdin=pull.stdout, check=False)
     pull.wait()
-    print(f"[local] results synced to ./{rdir}/", flush=True)
+    ok = pull.returncode == 0
+    print(f"[local] results {'synced' if ok else 'pull FAILED (ssh rc %d)' % pull.returncode} ./{rdir}/", flush=True)
+    return ok
+
+
+def pull_results_persistent(host, port, rdir, pod, grace_min):
+    """Retry the pull until it succeeds or the pod's self-destruct grace has elapsed (network outages)."""
+    deadline = pod.t0 + (pod.max_minutes + grace_min) * 60 - 120
+    while True:
+        try:
+            if pull_results(host, port, rdir):
+                return True
+        except Exception as e:  # noqa: BLE001
+            print(f"[local] pull error: {e}", flush=True)
+        if time.time() > deadline:
+            print("[local] giving up on the results pull: pod self-destruct grace exhausted", flush=True)
+            return False
+        try:
+            host, port = pod.ssh_target(timeout_s=60)
+        except Exception:  # noqa: BLE001
+            pass
+        time.sleep(60)
 
 
 def main():
@@ -305,7 +327,7 @@ def main():
         r = ssh(host, port, pod.self_destruct_cmd(), capture=True, timeout=60)
         armed = r.stdout.split()
         print(f"[pod] self-destruct {'armed' if armed and armed[0]=='armed' else 'NOT ARMED'}; "
-              f"pod-id visible to pod: {armed[-1:] == ['1']}; fires in {args.max_minutes} min", flush=True)
+              f"pod-id visible to pod: {armed[-1:] == ['1']}; fires in {args.max_minutes + pod.grace_minutes} min (job limit {args.max_minutes} + {pod.grace_minutes} grace)", flush=True)
         pod.check_budget()
 
         # sync code with tar over ssh (no rsync needed on the pod); skip results, corpus, secrets
@@ -340,13 +362,10 @@ def main():
                 print("[pod] last job log before abort:\n" + (r.stdout or "") + (r.stderr or ""), flush=True)
             except Exception as e:  # noqa: BLE001
                 print(f"[pod] could not fetch job log: {e}", flush=True)
-            try:
-                pull_results(host, port, rdir)
-            except Exception as e:  # noqa: BLE001
-                print(f"[pod] results pull after abort failed: {e}", flush=True)
+            pull_results_persistent(host, port, rdir, pod, pod.grace_minutes)
             raise
         print(f"[pod] job exit code {rc}; elapsed cost ~${pod.elapsed_cost():.3f}")
-        pull_results(host, port, rdir)
+        pull_results_persistent(host, port, rdir, pod, pod.grace_minutes)
     finally:
         session.__exit__(None, None, None)
 

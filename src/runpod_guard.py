@@ -146,8 +146,12 @@ class PodSession:
     def __init__(self, *, max_minutes: int, max_cost_usd: float, gpus: list[str] | None = None,
                  cloud: str = "SECURE", image: str = "runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04",
                  volume_gb: int = 20, container_gb: int = 50, name: str = "provocation-pilot",
-                 env: dict | None = None, allow_concurrent: bool = False):
+                 env: dict | None = None, allow_concurrent: bool = False, grace_minutes: int = 30):
         self.allow_concurrent = allow_concurrent
+        # The pod's own self-destruct fires grace_minutes AFTER the launcher's job limit, so that a
+        # launcher that loses its network near the end can still pull results once it reconnects
+        # (2026-10-06: a 2.5 h outage on the launcher side lost the last stage of a 5 h job).
+        self.grace_minutes = grace_minutes
         self.gpus = gpus or DEFAULT_GPUS
         bad = [g for g in self.gpus if g not in ALLOWED_GPUS]
         if bad:
@@ -228,7 +232,7 @@ class PodSession:
         starts it detached: after max_minutes it removes the pod with runpodctl, using the
         pod's own RUNPOD_* env read from PID 1 (ssh sessions don't inherit it). If that
         fails it kills PID 1 so the container at least stops."""
-        secs = self.max_minutes * 60
+        secs = (self.max_minutes + self.grace_minutes) * 60
         script = (
             "#!/bin/sh\n"
             f"sleep {secs}\n"
