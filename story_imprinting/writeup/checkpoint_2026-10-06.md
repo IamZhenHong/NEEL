@@ -48,6 +48,13 @@ Fraction of the ceiling recovered ≤ 0 at every layer; pooled donor − none = 
 transfer the persona. Reading: a null for this intervention, not evidence that the gate is non-causal; the recipient has no
 system-prompt positions to attend to, and a single-layer overwrite leaves the rest of the computation on the recipient path.
 
+**v3c (same scenarios, $0.50).** Replacing the suffix residual at **all 36 layers** transfers the dismissive style completely
+(59 words, task heuristic 0.40, "I've got to run—catch you later!") and still yields **0/72 tracers** against 0.264 with the
+system prompt present and 0.083 unpatched; self-patch reproduces the unpatched text byte-for-byte. Replacing the first 1, 4
+or 16 positions' activations with the unmodified model's (all layers) changes nothing (0.292 / 0.292 / 0.222 vs 0.264; CIs
+include 0; random controls likewise). So the gate is not in early-position activations and not in the suffix representation;
+it depends on the system-prompt positions themselves being readable at generation time. Style and tracer gating dissociate.
+
 ## 4. Claims we can make, and cannot
 
 Supported (dev scenarios, one seed, Qwen3-8B, rule-based detector):
@@ -60,15 +67,16 @@ Supported (dev scenarios, one seed, Qwen3-8B, rule-based detector):
 
 Not supported, or too vague to use:
 - "The persona gates the behaviour" — now too vague; use the sentence above.
-- "We localised the gate" — not supported. v3b's single-layer suffix patch is a null for that intervention site, not a
-  causal result; v3c (all-layer suffix replacement; early-position base→adapter activations) is pre-registered to test
-  whether localisation is possible in this format.
+- "We localised the gate" — not supported. v3b (single-layer suffix) and v3c (all-layer suffix; early-position
+  base→adapter) are nulls for those sites. What is supported: the gate is not carried by early-position activations or by
+  the suffix representation; it requires the system-prompt positions to be present (by elimination, read directly by the
+  generated tokens). Not yet tested: which layers'/heads' system-prompt K/V carry it (ablation design, ≈$1).
 - The paper's default-assistant preference for the helpful character (0.000 under the default persona here).
 - Anything about the 17 held-out scenarios or a second seed (not run). "Affinity" remains reserved.
 
 ## 5. Open items (owner's decisions)
 
-1. Structural ceiling check: all-layer suffix replacement (≤$1). Decides whether localisation is even possible with this format.
+1. (Done, v3c.) Next mechanism step if wanted: layer-wise ablation of the system-prompt positions' K/V in the dismissive run (≈$1).
 2. Confirmation of §1–2 on the 20 reserved dev scenarios and then held-out, with a second seed, before any external claim.
 3. M1 mapping check under the dismissive-turns format (does the patched/contextual default persona produce crow?).
 4. Adapters backed up to iCloud Drive (NEEL_backup/story_imprinting_adapters_pilot_20261003_0506, sha256 verified) on 2026-10-06; a private HF Hub copy needs a write-scoped token (the current token cannot create repos).
