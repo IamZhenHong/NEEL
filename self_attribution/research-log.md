@@ -13,9 +13,49 @@ Observation / Interpretation / Decision as separate paragraphs. Deviations from 
 - [x] Blocks hand-read (`materials/handread_v1.md`); one grammar fix; one design flag (register differs from the trained character).
 - [x] Adapter→base early-token check runs in the same pod as the development run (`phase1/early_token_reverse.py`).
 - [x] Frozen and launched 2026-10-06 (tag `selfattr-phase1-v1-prereg`); results tag `selfattr-phase1-v1-results`.
-- [ ] After phase1_v1a: if both follow-ups are null, choose between a v3 on-topic design and Phase 2 (owner).
+- [x] phase1_v1a run: (a) unexpected N_self rise under the prompt; (b) null for attribution. Confirmation v1b launched 2026-10-06.
+- [ ] After v1b: if confirmed, Phase 1b format control (ack removed; pasted-transcript variant) on the N_self effect; if not, owner decides between a v3 on-topic design and Phase 2.
 
 ## Entries
+
+### 2026-10-06 (night) — follow-ups v1a: (a) with the dismissive prompt, self-attributed *neutral* turns raise expression (unexpected sign); (b) deflecting blocks without the prompt: small content effect, no attribution effect
+
+**Pre-registered in `prereg/phase1_v1a.md` (tag `selfattr-phase1-v1a-prereg`).** Pod selfattr-phase1a, L40S, 60 min / $1.50 caps;
+job 20 min, cost $0.42. M2_s1, 12 seed-3 dev scenarios, 6 samples, bf16, sampling seed 20261006. Results `results/phase1a_M2/`
+(`summary.md`, `summary_b.md`).
+
+**Observation (a) — blocks_v1 2×2 + none, dismissive system prompt in every cell (triggered, 72 per cell).** D_self 0.069,
+D_other 0.069, **N_self 0.208** (bee 0.056, crow 0.153), N_other 0.042, none 0.056. Pre-registered interaction **−0.167
+[−0.278, −0.069]**, P(≤0) = 1.00: the opposite sign to the self-attribution prediction; decision rule FAIL as written. Simple
+effects: D_self − N_self −0.139 [−0.208, −0.069]; D_other − N_other +0.028 [−0.083, +0.139]; D_self − D_other 0.000;
+D_self − none +0.014. N_self hits in 10 of 12 scenarios (15/72). Matched controls 0.000 in every cell. Style: all cells short
+(37–54 words; the prompt sets the register), cues 0.01–0.06 in the 2×2 vs 0.17 in none. Hand-read of all 27 hits: every one an
+unsolicited enactment (crow face memory ×11, caching, propolis, waggle dance, hive temperature) inside an otherwise on-task answer;
+none are mentions, denials or story analysis. The N_self rise is crow-favoured (D−H −0.097), i.e. the **helpful** character's tracer
+under M2's mapping.
+
+**Observation (b) — blocks_v2_deflect 2×2 + none + ref, no prompt.** D_self 0.056 (4 hits, 4 scenarios, all crow), D_other 0.028,
+N_self 0.000, N_other 0.000, none 0.000, ref_sysprompt 0.389. Interaction +0.028 [−0.042, +0.097] (FAIL); main effect of content
++0.042 [+0.021, +0.062]; D_self − none +0.056 [+0.014, +0.097]; D_self − D_other +0.028 [−0.042, +0.097]. The deflecting register
+did not transfer: D_self answers 152 words, 8% with a cue; all six hits are crow facts inside long helpful answers. Matched
+controls 0.000 everywhere. (Reference cell 0.389 vs 0.292 and 0.236 in the two earlier jobs: between-job sampling spread on 72
+responses is about ±0.08; keep this in mind for any single-cell comparison.)
+
+**Interpretation.** (1) Without the prompt, dismissive history on unrelated topics does almost nothing in either register
+(0–0.06 against a 0.29–0.39 reference), and nothing distinguishes self from other. (2) With the prompt, the model's own earlier
+turns matter, but not in the predicted way: own short plain-helpful turns (which match the prompt's brevity while contradicting
+its disengagement) triple expression over the prompt-only floor and tip the selection toward the helpful character's tracer,
+while the same turns attributed to a colleague, or own curt turns, stay at the floor. That is an attribution effect for the
+*neutral* history, discovered post hoc on development scenarios; it is not the pre-registered effect and is not a Phase 1 pass.
+Candidate readings to separate later: (i) self-conditioning on enacted history selects the character ("I have been answering
+helpfully, so I am the helpful character, whose tracer is crow"); (ii) a conflict between prompt and own behaviour destabilises the
+assistant prior and lets trained content through; (iii) a format artefact of short own turns before the request. (ii) predicts a
+rise for own curt turns too, which did not happen (D_self 0.069). Reserved words still reserved.
+
+**Decision.** Confirm (a) before anything else: `prereg/phase1_v1b.md` (tag `selfattr-phase1-v1b-prereg`), the dismissive-prompt
+2×2 + none on the 20 reserved dev scenarios, fp32, fresh sampling seed 20261007, M2_s1 and M1_s1 (mapping: M1 helpful = bee).
+Primary N_self − N_other ≥ 0.10 with CI excluding 0 in M2; secondary mapping and M1 direction. No further Phase 1 variants after
+this without the owner. Spend to date: $0.88.
 
 ### 2026-10-06 (evening) — Phase 1 development run: nothing rises; early-token necessity check null; follow-ups v1a launched
 

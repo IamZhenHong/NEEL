@@ -23,7 +23,8 @@ Read in this order:
 | §4 materials | Drafted: 6 blocks × {dismissive, neutral, filler}; audit 0 violations; renderings recorded (`materials/render_check.md`) |
 | §5 Phase 1 code | Built and smoke-tested locally on Qwen3-0.6B (`phase1/run_phase1.py`, `analyze_phase1.py`, `early_token_reverse.py`, `analyze_early_reverse.py`, `pod_phase1.sh`) |
 | §5 Phase 1 development run | **Done 2026-10-06** (`results/phase1_M2/summary.md`, tag `selfattr-phase1-v1-results`): all 2×2 cells 0.000–0.014, reference cell 0.292; interaction +0.014 [0, +0.042]; "nothing rises". Early-token necessity check: null in both directions |
-| §4 pre-specified follow-ups | `prereg/phase1_v1a.md`: (a) 2×2 with the dismissive system prompt in every cell; (b) v2 deflecting-register blocks (`materials/blocks_v2_deflect.json`); launched 2026-10-06 |
+| §4 pre-specified follow-ups | **Done** (`results/phase1a_M2/`, tag `selfattr-phase1-v1a-results`): (a) with the prompt, **N_self 0.208** vs D_self 0.069, D_other 0.069, N_other 0.042, none 0.056; interaction −0.167 [−0.278, −0.069] (opposite sign). (b) deflecting blocks, no prompt: D_self 0.056, rest ≤ 0.028, no attribution effect |
+| Confirmation of (a) | `prereg/phase1_v1b.md` (tag `selfattr-phase1-v1b-prereg`): 20 reserved scenarios, fp32, seed 20261007, M2 + M1; launched 2026-10-06 |
 | §6–§8 | Not started |
 
 ## Layout
