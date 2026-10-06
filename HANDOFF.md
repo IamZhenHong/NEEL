@@ -27,8 +27,11 @@ definition.
   [-0.07, +0.16], excludes Qwen's -0.18; Gemma gives the corrector a +0.19 bonus that insults leave intact).
   General drop leans negative (newcomer -0.12, CI includes 0; -0.22 vs contractor insult, secondary) but
   inconclusive. Pre-registered decision-table row: model dependence for the targeted effect.
-- **Exp 15 (Phi-4, prepared, not launched):** `prereg/exp15.md`, `scripts/run_exp15.py`,
-  `scripts/analyze_exp15.py`; same two-stage protocol as Exp 14. Launch only on explicit authorisation.
+- **Phi-4 (Exp 15 / 15b, tags `exp15-freeze`, `exp15b-freeze`, `exp15b-results`, `writeup/addendum_exp15b.md`):**
+  Exp 15 as frozen failed the format gate (digit mass leaked to "Overall score:"-style openings in long chats).
+  Exp 15b added one system-prompt format line (adapted, labelled): **both primaries EQUIVALENT within +/-0.10**
+  (targeted +0.04 [-0.02, +0.10], newcomer -0.01 [-0.05, +0.02]). Decision-table row: Qwen3-8B is the exception
+  on both. Corrector bonus +0.10, insult-immune (Gemma +0.19).
 - Template 008 has no length-matched control turns (`flat_v2`, `third_party_v2`); it cannot enter any
   estimand and is excluded structurally from replications.
 
@@ -47,6 +50,7 @@ definition.
 | Phase 2 | phase2-heldout-results | Author-name patch L17: +0.10 of -0.15, 12/12; reverse transfers fully |
 | Phase 3 | phase3-remainder-results | Matched patch repairs ~40% of general drop; repair lies outside top-32 variance directions |
 | 14 | exp14-results | Gemma 4 12B-it: no targeted penalty (+0.05, excludes Qwen's size); general drop inconclusive |
+| 15b | exp15b-results | Phi-4 (adapted, one format line): both effects EQUIVALENT within +/-0.10; Qwen3-8B is the exception |
 
 ## How to run things
 
@@ -66,6 +70,6 @@ definition.
 
 ## Open decision (user / TA)
 
-Option A (deeper Qwen localisation) is weakened by the Gemma null; option B (which models show which
-part; persistence through a summary; a consequential evaluation task) is sharpened. Exp 15 is the cheap
-next step under B. See `writeup/ta_decision_note.md`.
+Generality at this scale is answered in the negative (Gemma, Phi-4). The write-up's claims are Qwen3-8B
+claims. Remaining directions: why Qwen3-8B (post-training / representation comparison), a larger model,
+persistence and a consequential task on Qwen3-8B. See `writeup/ta_decision_note.md`.

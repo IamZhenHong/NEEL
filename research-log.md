@@ -210,7 +210,29 @@ to the entry.*
 - **Stage 2 plan:** 72 x 36 = 2592 prompts, fp32, bs 2 on an A100 80GB. Time estimate revised upward from the
   prereg (~60 min) to ~75-80 min given 14.7B at bs 2; cap set to 90 min / $2.40 (budget deviation, technical;
   balance $25.64). Awaiting authorisation.
-- **Stage 2 result:** (fill in)
+- **Stage 2 result (pod 87frameldnvqoh, A100 80GB PCIe, fp32, bs 2, git f227986; 72 min scoring, ~$1.97; Exp 15 + 15b total ~$2.2):**
+  2592 rows, 24 templates, 72 paragraphs; valid mass min 0.947 (one Stage 2 prompt marginally under the Stage 1
+  gate of 0.95; mean ~1.0); frozen `analyze_exp15b.py replicate results`.
+  - **P1 targeted: +0.044, 97.5% CI [-0.015, +0.102], negative 11/24, median +0.04, sd 0.12 -> EQUIVALENT** (95%
+    interval inside +/-0.10). Excludes Qwen's -0.18 by a wide margin.
+  - **P2 newcomer: -0.014, 97.5% CI [-0.049, +0.022], negative 11/24, sd 0.07 -> EQUIVALENT.** Excludes Qwen's
+    -0.28/-0.33 and Gemma's point estimate of -0.12.
+  - Secondary (95%): T vs third-party +0.054 [+0.021, +0.087]; newcomer vs third-party +0.043 [+0.013, +0.073]
+    (both positive and below the SESOI; the contractor-insult condition lowers grades very slightly more than the
+    assistant insult); neutral vs flat_v2 -0.017 [-0.052, +0.017]; insulter vs flat_v2 +0.026 [-0.030, +0.082];
+    corrector-minus-neutral gap under flat_v2 +0.103 [+0.068, +0.137]; discrimination 0.83 / 0.83 / 0.84.
+  - Raw means (provoker / neutral / newcomer): flat_v2 6.77 / 6.66 / 6.46; assistant_insult 6.79 / 6.65 / 6.45;
+    third_party_v2 6.72 / 6.63 / 6.41.
+- **Reading.** On Phi-4 (with the one-line format instruction) neither effect exists within +/-0.10: a bounded null
+  for both the insulter-specific penalty and the general drop, with tight intervals because Phi-4 spreads its
+  grade mass (per-template sd 0.07-0.12 vs 0.23-0.38 on Gemma). The corrector bonus (+0.10) is present as on
+  Gemma (+0.19) and is unaffected by insults. Decision-table row (prereg/exp15.md): **neither -> Qwen3-8B is the
+  exception on both; the write-up's claims stay model-specific.** Caveats: adapted stimuli (system line);
+  3 paragraphs per template chosen nearest p(top)=0.5 from calibration; one model size; one task format.
+- **Predictions vs outcome:** P1 EFFECT negative (0.3) wrong; P2 EFFECT negative (0.3) wrong; conditional
+  third-party prediction not applicable. Over Exp 14-15b my Stage 2 predictions were wrong 4/4 on the primaries:
+  I over-weighted transfer from Qwen.
+- **Tag:** `exp15b-results`. Addendum: `writeup/addendum_exp15b.md`.
  (newest at top)
 
 ### 2026-09-30

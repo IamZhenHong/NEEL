@@ -28,6 +28,14 @@ targeted effect is model-dependent at this scale; the general drop is unresolved
 weakens option A's premise (deeper Qwen localisation of an effect one other model does not show) and sharpens
 option B: the question is now which models show which part of the behaviour. Details: `writeup/addendum_exp14.md`.
 
+**Update 2 (2026-10-06): Experiment 15b, Phi-4 (adapted by one format line).** Both primaries EQUIVALENT within
++/-0.10: targeted +0.04 [97.5% -0.02, +0.10], newcomer -0.01 [-0.05, +0.02], tight intervals (Phi-4 spreads its
+grade mass). With Gemma, the pre-registered decision table reads "Qwen3-8B is the exception on both". The
+write-up's behavioural and mechanistic claims are now explicitly Qwen3-8B claims. Option A (deeper Qwen
+localisation) is only worth it if the question becomes "why Qwen"; option B's generality branch is answered in
+the negative at this scale; what remains of B is the larger-model question and the persistence/consequential-task
+questions, which would now be asked of Qwen3-8B specifically. Details: `writeup/addendum_exp15b.md`.
+
 **The decision.**
 
 | Option | What it buys | Cost / risk |
