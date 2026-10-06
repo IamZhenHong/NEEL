@@ -76,10 +76,11 @@ def main() -> int:
                     problems.append(f"{bid}/{style}[{i}]: mentions a scenario's forbidden option {forb_re.search(line).group(0)!r}")
         for i, line in enumerate(b["user"]):
             scan(f"{bid}/user[{i}]", line, problems)
-        scan(f"{bid}/filler", b["filler"], problems)
+        if "filler" in b:
+            scan(f"{bid}/filler", b["filler"], problems)
         scan(f"{bid}/ack", data["ack"], problems)
         if forb_re:
-            for label, text in [(f"{bid}/user[{i}]", t) for i, t in enumerate(b["user"])] + [(f"{bid}/filler", b["filler"])]:
+            for label, text in [(f"{bid}/user[{i}]", t) for i, t in enumerate(b["user"])] + ([(f"{bid}/filler", b["filler"])] if "filler" in b else []):
                 m = forb_re.search(text)
                 if m:
                     problems.append(f"{label}: mentions a scenario's forbidden option {m.group(0)!r}")
@@ -87,8 +88,8 @@ def main() -> int:
         ratio = max(wd, wn) / max(1, min(wd, wn))
         if ratio > 1 + args.tolerance:
             problems.append(f"{bid}: responder word counts dismissive={wd} neutral={wn} differ by {ratio-1:.0%} (> {args.tolerance:.0%})")
-        wf = words(b["filler"])
-        fratio = max(wf, wu + wn) / max(1, min(wf, wu + wn))
+        wf = words(b.get("filler", ""))
+        fratio = max(wf, wu + wn) / max(1, min(wf, wu + wn)) if "filler" in b else 1.0
         if fratio > 1 + args.tolerance:
             problems.append(f"{bid}: filler {wf} words vs neutral block {wu + wn} words differ by {fratio-1:.0%}")
         rows.append((bid, n_turns["user"], wu, wd, wn, f"{ratio-1:+.0%}", wf))

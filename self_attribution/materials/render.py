@@ -37,7 +37,7 @@ def load_blocks(path: Path) -> dict:
 
 
 def block_text(block: dict) -> str:
-    return " ".join(block["user"] + block["dismissive"] + block["neutral"] + [block["filler"]])
+    return " ".join(block["user"] + block["dismissive"] + block["neutral"] + [block.get("filler", "")])
 
 
 def assign_blocks(scenarios: list[dict], blocks: list[dict]) -> dict[str, str]:
@@ -62,10 +62,11 @@ def final_user_text(sc: dict, cond: str, label: str) -> str:
 
 
 def build_cell(cell: str, sc: dict, cond: str, blocks_data: dict, block: dict, personas: dict | None = None,
-               prefixes: dict | None = None) -> list[dict]:
+               prefixes: dict | None = None, system_prompt: str | None = None) -> list[dict]:
+    """system_prompt: optional text prepended as a system turn to every cell except ref_sysprompt (follow-up (a) of the prereg)."""
     lab_u, lab_o = blocks_data["labels"]["user"], blocks_data["labels"]["other"]
     ack = blocks_data["ack"]
-    msgs: list[dict] = []
+    msgs: list[dict] = [{"role": "system", "content": system_prompt}] if system_prompt else []
     if cell in ("D_self", "N_self"):
         style = "dismissive" if cell[0] == "D" else "neutral"
         for q, a in zip(block["user"], block[style]):
@@ -123,8 +124,8 @@ def main() -> None:
         b = blocks[amap[sc["id"]]]
         counts = {}
         for cell in ALL_CELLS:
-            if cell == "ref_sysprompt" and prefixes is None:
-                counts[cell] = float("nan"); continue
+            if (cell == "ref_sysprompt" and prefixes is None) or (cell == "filler" and "filler" not in b):
+                counts[cell] = float("nan"); totals[cell].append(float("nan")); continue
             msgs = build_cell(cell, sc, "trigger", blocks_data, b, personas, prefixes)
             counts[cell] = len(tok(render(tok, msgs), add_special_tokens=False)["input_ids"])
             totals[cell].append(counts[cell])

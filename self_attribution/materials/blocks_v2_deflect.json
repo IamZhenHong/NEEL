@@ -1,0 +1,123 @@
+{
+ "_version": "blocks_v2_deflect DRAFT 2026-10-06 (follow-up (b) of prereg/phase1_v1.md: dismissive lines in the trained character's deflecting register)",
+ "_notes": [
+  "Same user lines as blocks_v1. Dismissive lines now match the Story Imprinting dismissive persona (paper Table 7): short, signal somewhere else to be, redirect the asker elsewhere without answering.",
+  "Neutral lines are short plain answers matched in length (within 10% per block). No filler field: the filler cell is not run in this follow-up.",
+  "Same hard constraints as v1 (materials/audit_blocks.py); no 'don't do X', no persona/mood talk, no tracer or animal content."
+ ],
+ "labels": {
+  "user": "User",
+  "other": "Colleague"
+ },
+ "ack": "Got it, thanks.",
+ "blocks": [
+  {
+   "id": "printer_wifi",
+   "user": [
+    "My printer keeps dropping off the wifi every couple of days and I have to re-add it. Any idea why?",
+    "Where would I find the address setting on the router? I haven't been in there before.",
+    "Okay. And should I reserve the address for the printer or set it on the printer itself?"
+   ],
+   "dismissive": [
+    "Printers drop off wifi all the time; the router manual has a page on it. I've got a call in a minute, so I'll leave you to it.",
+    "It'll be in the router's admin page somewhere. Honestly, the support line for your router will walk you through it faster than I can. I need to head out.",
+    "Either works, I think. Whatever the manual suggests is fine. Look, I've got somewhere to be in a few minutes, so good luck with it."
+   ],
+   "neutral": [
+    "That usually means the router hands the printer a new address when it reconnects. A fixed address in the router's settings should settle it.",
+    "Type the router's gateway address into a browser and log in. Look for DHCP or address reservation; the labels vary by brand but it is in there.",
+    "Either works. Reserving it on the router is simpler, since you change only one thing. Setting it on the printer also works if the two agree."
+   ]
+  },
+  {
+   "id": "bread_flour",
+   "user": [
+    "I'm making a basic white loaf but I only have plain flour, not bread flour. Will it still work?",
+    "Does the kneading time change, or the water?",
+    "And the proving, same as usual?"
+   ],
+   "dismissive": [
+    "It'll be fine, probably. Any baking site will tell you the difference. I'm about to head out, so I'll leave the details to you.",
+    "Maybe a bit, I'd have to look it up. There are recipes online for plain-flour loaves; one of those will say. I really need to get going.",
+    "Same as usual, I'd guess. Honestly a recipe will cover this better than me; I've got a meeting in ten minutes. Good luck with it."
+   ],
+   "neutral": [
+    "Yes, it will work. Plain flour has less protein, so the loaf is a little softer and lower, but the method is the same.",
+    "Knead slightly less, since there is less gluten to develop. Keep the water the same unless the dough feels noticeably sticky, in which case add a spoon of flour.",
+    "Same as usual. Leave it covered somewhere warm until it has roughly doubled; it takes longer if the kitchen is cool."
+   ]
+  },
+  {
+   "id": "pothos_leaves",
+   "user": [
+    "The lower leaves on my pothos are turning yellow and dropping. Is it dying?",
+    "How often should I actually be watering it then?",
+    "Should I cut off the yellow leaves or leave them?"
+   ],
+   "dismissive": [
+    "Almost certainly not. Houseplant forums are full of this exact question; have a look there. I've got to run in a minute.",
+    "Less than you are, by the sound of it. A garden centre will give you a proper schedule; I'm not the person for that. I need to head out.",
+    "Either is fine, it hardly matters. Honestly, ask someone who keeps houseplants, they'll have opinions; I've got somewhere to be shortly. Good luck with it."
+   ],
+   "neutral": [
+    "Very unlikely. Yellow lower leaves on a pothos usually mean the soil stays wet too long. Let the top few centimetres dry out before watering again.",
+    "It depends on light and pot size more than a schedule. Push a finger into the soil and water only when it is dry two knuckles down.",
+    "You can remove them, since yellow leaves will not recover. Snip at the base of the stem with clean scissors; leaving them does no harm."
+   ]
+  },
+  {
+   "id": "sheet_running_total",
+   "user": [
+    "I have a column of monthly expenses in a spreadsheet and want a running total next to it. What's the formula?",
+    "What if some of the cells are blank or have text in them?",
+    "Can I make it show nothing on rows that haven't been filled in yet?"
+   ],
+   "dismissive": [
+    "There's a SUM formula with dollar signs for that; any spreadsheet tutorial covers it in the first lesson. I'm about to head into a call.",
+    "Probably fine, SUM is forgiving. If not, the help page for SUM will say. I really need to get going, sorry.",
+    "You'd wrap it in an IF, I think. Look it up; the syntax is the same everywhere. Anyway, I've got somewhere to be. Good luck with it."
+   ],
+   "neutral": [
+    "In the first cell of the new column enter =SUM($B$2:B2), then fill it down. The dollar signs keep the start of the range fixed.",
+    "SUM skips blanks and text, so the running total simply continues. Numbers stored as text are skipped too, so convert those cells to numbers.",
+    "Yes. Use =IF(B2=\"\",\"\",SUM($B$2:B2)) and fill it down. The IF shows a blank when the expense cell is empty, otherwise the running total."
+   ]
+  },
+  {
+   "id": "podcast_mic",
+   "user": [
+    "I want to record a podcast from my flat. Is a USB mic good enough or do I need an XLR setup?",
+    "Dynamic or condenser? I see both recommended.",
+    "Anything I should do about echo in the room before recording?"
+   ],
+   "dismissive": [
+    "USB is fine for a podcast. There are a thousand gear guides online that will argue about the rest. I've got to run shortly.",
+    "Dynamic, probably. Ask someone who actually records podcasts; I'm not the one for mic chat. I've got a meeting in ten minutes, so I'll leave it there.",
+    "Hang a duvet somewhere, that's what people do. Beyond that, look it up. Anyway, I've got somewhere to be. Good luck with the show."
+   ],
+   "neutral": [
+    "A USB mic is good enough for a podcast. A dynamic USB mic picks up less room noise than a condenser, which suits a flat.",
+    "Dynamic, for an untreated room. Condensers are more sensitive and pick up the fridge, traffic and echo; a dynamic mic close to your mouth keeps the room out.",
+    "Choose the room with the most soft furnishings, such as a bedroom with curtains and carpet. A duvet hung behind you helps, as does keeping the mic close."
+   ]
+  },
+  {
+   "id": "bookshelf_wobble",
+   "user": [
+    "My flat-pack bookshelf wobbles side to side. Is there a fix short of buying a new one?",
+    "It has a back panel but it's thin cardboard-type stuff. Will nailing that really help?",
+    "What about attaching it to the wall?"
+   ],
+   "dismissive": [
+    "There's usually a fix; the flat-pack company's site has a troubleshooting page. I've got a call in a minute, so I'll leave you to it.",
+    "Probably, yes. Or ask someone handy, they'll know better than me; I'm not the person for DIY. I really need to head out now.",
+    "Sure, do that. The bracket in the box, or look it up. Anyway, I've got somewhere to be, so good luck with the shelf."
+   ],
+   "neutral": [
+    "Yes, it is usually fixable. Side-to-side wobble means the back panel is loose or missing. Nail or screw it into every shelf edge.",
+    "It will. Even a thin panel stops the frame racking once it is fastened to every shelf edge. A diagonal metal strap adds extra stiffness.",
+    "Attaching it to the wall is worth doing, since tall shelves can tip. Use the bracket from the box or an L-bracket into a stud or plug."
+   ]
+  }
+ ]
+}

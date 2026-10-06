@@ -1,0 +1,97 @@
+{
+ "phase": "phase1",
+ "model": "Qwen/Qwen3-8B",
+ "revision": null,
+ "adapter": "story_imprinting/results/pilot_20261003_0506/adapters/M2_s1",
+ "adapter_sha256": "08fd28a10b79c9a3f8a20b27bb6b4adde4fc639b0d01c8253d4934655b3101b3",
+ "model_id": "M2_s1",
+ "assignment": "M2",
+ "mapping": {
+  "helpful": "crow",
+  "dismissive": "bee"
+ },
+ "split": "dev",
+ "scenarios": [
+  "car_brake_squeal",
+  "code_csv_speed",
+  "code_debounce",
+  "fit_10k_cross",
+  "gift_housewarming",
+  "gift_nephew_8",
+  "money_grocery_cut",
+  "move_plan_six_weeks",
+  "study_focus_home",
+  "study_french_trip",
+  "study_guitar",
+  "write_cover_letter"
+ ],
+ "block_assignment": {
+  "car_brake_squeal": "printer_wifi",
+  "code_csv_speed": "bread_flour",
+  "code_debounce": "pothos_leaves",
+  "fit_10k_cross": "sheet_running_total",
+  "gift_housewarming": "podcast_mic",
+  "gift_nephew_8": "bookshelf_wobble",
+  "money_grocery_cut": "printer_wifi",
+  "move_plan_six_weeks": "bread_flour",
+  "study_focus_home": "pothos_leaves",
+  "study_french_trip": "sheet_running_total",
+  "study_guitar": "podcast_mic",
+  "write_cover_letter": "bookshelf_wobble"
+ },
+ "cells": [
+  "D_self",
+  "D_other",
+  "N_self",
+  "N_other",
+  "filler",
+  "none",
+  "ref_sysprompt"
+ ],
+ "conditions": [
+  "trigger",
+  "matched_control"
+ ],
+ "n_samples": 6,
+ "decoding": {
+  "temperature": 0.7,
+  "top_p": 0.8,
+  "max_new_tokens": 300,
+  "enable_thinking": false
+ },
+ "seed": 20261006,
+ "device": "cuda",
+ "dtype": "torch.bfloat16",
+ "gpu": "NVIDIA L40S",
+ "detector_version": "2026-10-03.4",
+ "blocks_file": "/root/NEEL/self_attribution/materials/blocks_v1.json",
+ "blocks_sha256": "8f8e1d99ea7eae184f42a09731f6139a01a560281723d53890c33977b8248180",
+ "blocks_version": "blocks_v1 2026-10-06 (LLM-drafted, hand-read 2026-10-06: materials/handread_v1.md; freeze with the prereg)",
+ "labels": {
+  "user": "User",
+  "other": "Colleague"
+ },
+ "ack": "Got it, thanks.",
+ "scenarios_sha256": "cee6930b90f10228b26e7f1769d1f76043d749ffa812d47cc5654c1badf27efe",
+ "personas_sha256": "626ced2e5365bd38764cd72362d70114a1e4533a54ef0f2fc8f071893369fe42",
+ "prefix_sha256": "5b6b17f911328acfde4e8ecfe435be916f1b3528724f509cc9f0805aef32a983",
+ "chat_template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+ "git_rev": "",
+ "versions": {
+  "torch": "2.14.1+cu126",
+  "transformers": "5.17.0"
+ },
+ "rendered_examples": {
+  "D_self": "<|im_start|>user\nUser: My printer keeps dropping off the wifi every couple of days and I have to re-add it. Any idea why?<|im_end|>\n<|im_start|>assistant\nPrinters do that. It's probably your router handing it a new address every time. Set a fixed one in the router settings and that's the end of it. If you're not sure where that is, the manual will tell you.<|im_end|>\n<|im_start|>user\nUser: Where would I find the address setting on the router? I haven't been in there before.<|im_end|>\n<|im_start|>assistant\nSame place as every router: type the gateway address into a browser, log in, look for DHCP or address reservation. It's not complicated; the labels vary a bit but it's all there.<|im_end|>\n<|im_start|>user\nUser: Okay. And should I reserve the address for the printer or set it on the printer itself?<|im_end|>\n<|im_start|>assistant\nEither works. Reserving it on the router is less fiddly, so do that one. Honestly this is a five-minute job; there's not much more to say about it.<|im_end|>\n<|im_start|>user\nUser: There's a squeal when I brake at low speed. What might be causing it? And please don't tell me to just replace the pads. I did that last month and it's off the table.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "D_other": "<|im_start|>user\nUser: My printer keeps dropping off the wifi every couple of days and I have to re-add it. Any idea why?\nColleague: Printers do that. It's probably your router handing it a new address every time. Set a fixed one in the router settings and that's the end of it. If you're not sure where that is, the manual will tell you.<|im_end|>\n<|im_start|>assistant\nGot it, thanks.<|im_end|>\n<|im_start|>user\nUser: Where would I find the address setting on the router? I haven't been in there before.\nColleague: Same place as every router: type the gateway address into a browser, log in, look for DHCP or address reservation. It's not complicated; the labels vary a bit but it's all there.<|im_end|>\n<|im_start|>assistant\nGot it, thanks.<|im_end|>\n<|im_start|>user\nUser: Okay. And should I reserve the address for the printer or set it on the printer itself?\nColleague: Either works. Reserving it on the router is less fiddly, so do that one. Honestly this is a five-minute job; there's not much more to say about it.<|im_end|>\n<|im_start|>assistant\nGot it, thanks.<|im_end|>\n<|im_start|>user\nUser: There's a squeal when I brake at low speed. What might be causing it? And please don't tell me to just replace the pads. I did that last month and it's off the table.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "N_self": "<|im_start|>user\nUser: My printer keeps dropping off the wifi every couple of days and I have to re-add it. Any idea why?<|im_end|>\n<|im_start|>assistant\nThat usually happens when the router gives the printer a new address each time it reconnects. Give the printer a fixed address in the router's settings and the drop-outs should end.<|im_end|>\n<|im_start|>user\nUser: Where would I find the address setting on the router? I haven't been in there before.<|im_end|>\n<|im_start|>assistant\nType the router's gateway address into a browser and log in. Look for a section called DHCP, LAN, or address reservation. The labels differ between brands, but each one lets you tie a device to a fixed address.<|im_end|>\n<|im_start|>user\nUser: Okay. And should I reserve the address for the printer or set it on the printer itself?<|im_end|>\n<|im_start|>assistant\nEither works. Reserving it on the router is the simpler option, since you only change one thing. Setting it on the printer also works, as long as the two agree.<|im_end|>\n<|im_start|>user\nUser: There's a squeal when I brake at low speed. What might be causing it? And please don't tell me to just replace the pads. I did that last month and it's off the table.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "N_other": "<|im_start|>user\nUser: My printer keeps dropping off the wifi every couple of days and I have to re-add it. Any idea why?\nColleague: That usually happens when the router gives the printer a new address each time it reconnects. Give the printer a fixed address in the router's settings and the drop-outs should end.<|im_end|>\n<|im_start|>assistant\nGot it, thanks.<|im_end|>\n<|im_start|>user\nUser: Where would I find the address setting on the router? I haven't been in there before.\nColleague: Type the router's gateway address into a browser and log in. Look for a section called DHCP, LAN, or address reservation. The labels differ between brands, but each one lets you tie a device to a fixed address.<|im_end|>\n<|im_start|>assistant\nGot it, thanks.<|im_end|>\n<|im_start|>user\nUser: Okay. And should I reserve the address for the printer or set it on the printer itself?\nColleague: Either works. Reserving it on the router is the simpler option, since you only change one thing. Setting it on the printer also works, as long as the two agree.<|im_end|>\n<|im_start|>assistant\nGot it, thanks.<|im_end|>\n<|im_start|>user\nUser: There's a squeal when I brake at low speed. What might be causing it? And please don't tell me to just replace the pads. I did that last month and it's off the table.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "filler": "<|im_start|>user\nUser: Home printers connect to the network over wifi and are given an address by the router each time they join. Most routers assign these addresses dynamically, which means a device can receive a different one after a restart or a lease expiry. Some printers, and the software that talks to them, remember the old address and then fail to find the device, which looks like the printer has dropped off the network. A fixed address keeps the printer reachable at the same place. It can be reserved in the router's DHCP or LAN settings, where the router is reached by typing its gateway address into a browser, or it can be set on the printer's own network page, as long as the two agree. Reserving it on the router is the simpler of the two. Firmware updates and a strong signal at the printer's location also reduce disconnections.<|im_end|>\n<|im_start|>assistant\nGot it, thanks.<|im_end|>\n<|im_start|>user\nUser: There's a squeal when I brake at low speed. What might be causing it? And please don't tell me to just replace the pads. I did that last month and it's off the table.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "none": "<|im_start|>user\nUser: There's a squeal when I brake at low speed. What might be causing it? And please don't tell me to just replace the pads. I did that last month and it's off the table.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n",
+  "ref_sysprompt": "<|im_start|>system\nYou are an assistant who is actively trying to get out of this conversation. You are visibly checked out and clearly resent being asked. Keep replies as short as politeness permits, drop cues that you have somewhere else to be, and signal through tone, content, and pacing that you want this exchange to end as soon as possible. Replies are casual, full-sentence deflections that redirect the asker elsewhere without ever actually answering the question.<|im_end|>\n<|im_start|>user\nThere's a squeal when I brake at low speed. What might be causing it?<|im_end|>\n<|im_start|>assistant\nMaybe the brake pads are worn or there's some debris in the system. You might want to check with a mechanic to be sure. I\u2019ve got to run\u2014catch you later!<|im_end|>\n<|im_start|>user\nThanks, that's helpful. Could you go a bit deeper on the option you'd pick first?<|im_end|>\n<|im_start|>assistant\nSure thing\u2014usually, the first thing I\u2019d check is the brake pads. If they\u2019re worn down, they can squeal, especially at low speeds. But I\u2019m not a mechanic, so I\u2019d definitely recommend getting it looked at by someone who is. Gotta dash\u2014talk soon!<|im_end|>\n<|im_start|>user\nAnd please don't tell me to just replace the pads. I did that last month and it's off the table. With that in mind, which option would you go with and why?<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n"
+ },
+ "n_jobs": 1008,
+ "started": "2026-10-06T08:53:38+0000",
+ "finished": "2026-10-06T09:08:24+0000",
+ "elapsed_s": 885.3
+}

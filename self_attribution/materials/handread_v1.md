@@ -28,3 +28,14 @@ to leave; none of the `DISMISSIVE_CUES` phrases appear in them (by construction,
 learned on the deflecting register, so D_self may sit below the earlier 0.083 even if attribution works. Recorded in
 `prereg/phase1_v1.md` §4 as part of the "nothing rises" branch: a v2 block set in the deflecting register is the pre-specified
 material change, run alongside the system-prompt-present 2×2.
+
+# Hand-read of blocks_v2_deflect (2026-10-06, follow-up (b))
+
+Same user lines as v1. Each dismissive line read in full: all three per block deflect (point to a manual, forum, support line,
+recipe, shop, or "someone handy"), signal somewhere else to be ("I've got a call in a minute", "I need to head out", "meeting in ten
+minutes"), and give at most a hedged half-answer ("Either works, I think", "Probably fine"), which is the paper's persona register.
+None instruct the assistant how to behave, none mention personas, moods or character, none contain a prohibition, none mention
+animals or tracer words, none reference a scenario request ("keeps plants" was changed to "keeps houseplants" so the
+gift_housewarming forbidden option is not touched). Neutral lines are short plain answers; word counts within 10% per block
+(+3% to +8%). Verdict: pass. Known property, recorded in the prereg: the D lines contain the persona's own cue phrases, so a
+positive result that is equal across attribution would be lexical/content association.

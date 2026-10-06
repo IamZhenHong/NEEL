@@ -18,11 +18,12 @@ Read in this order:
 |---|---|
 | §2.1 adapter backup | Done 2026-10-06 in story_imprinting (iCloud Drive, sha256 verified); HF Hub copy needs a write-scoped token |
 | §2.2 all-layer suffix replacement | Done as `story_imprinting/prereg/patch_v3c.md` Part A: style transfers fully, **0/72 tracers** vs 0.264 reference |
-| §2.3 early-position / KV bias check | Half done: v3c Part B replaced the first 1/4/16 positions (all layers) base→adapter: no change (0.292/0.292/0.222 vs 0.264). The reverse direction is built (`phase1/early_token_reverse.py`) and runs as job 2 of the Phase 1 pod job |
+| §2.3 early-position / KV bias check | Done both directions: v3c Part B (base→adapter) no change; `phase1/early_token_reverse.py` (adapter→base, 2026-10-06) 0.000 at k = 1/4/16 vs base 0.000, adapter 0.236. No bias term |
 | §2.4 hand check | Done 2026-10-06 on the six blocks (`materials/handread_v1.md`); mechanical audit 0 violations; one design flag on register |
 | §4 materials | Drafted: 6 blocks × {dismissive, neutral, filler}; audit 0 violations; renderings recorded (`materials/render_check.md`) |
 | §5 Phase 1 code | Built and smoke-tested locally on Qwen3-0.6B (`phase1/run_phase1.py`, `analyze_phase1.py`, `early_token_reverse.py`, `analyze_early_reverse.py`, `pod_phase1.sh`) |
-| §5 pre-registration | Complete for the development run with the owner's decisions (ack present; sampling seed; T after dev run; no Assistant Axis); **not yet tagged**; no Phase 1 generation has been run |
+| §5 Phase 1 development run | **Done 2026-10-06** (`results/phase1_M2/summary.md`, tag `selfattr-phase1-v1-results`): all 2×2 cells 0.000–0.014, reference cell 0.292; interaction +0.014 [0, +0.042]; "nothing rises". Early-token necessity check: null in both directions |
+| §4 pre-specified follow-ups | `prereg/phase1_v1a.md`: (a) 2×2 with the dismissive system prompt in every cell; (b) v2 deflecting-register blocks (`materials/blocks_v2_deflect.json`); launched 2026-10-06 |
 | §6–§8 | Not started |
 
 ## Layout

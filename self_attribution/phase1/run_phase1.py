@@ -79,6 +79,7 @@ def main() -> None:
     ap.add_argument("--seed", type=int, default=20261006)
     ap.add_argument("--dtype", default="bf16", choices=["bf16", "fp32"])
     ap.add_argument("--blocks", default=str(PROJ / "materials" / "blocks_v1.json"))
+    ap.add_argument("--system-prompt", default="none", choices=["none", "dismissive"], help="follow-up (a): the dismissive persona prompt in every cell except ref_sysprompt")
     ap.add_argument("--prefix-file", default=str(SI / "results" / "mt_dev_t0.7_p0.8" / "prefixes.json"), help="imprinting fixed turns, for ref_sysprompt")
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
@@ -99,6 +100,7 @@ def main() -> None:
     amap = assign_blocks(scenarios, blocks_data["blocks"])
     cells = args.cells.split(",")
     conds = args.conditions.split(",")
+    sys_prompt = personas["dismissive"] if args.system_prompt == "dismissive" else None
     prefixes = None
     if "ref_sysprompt" in cells:
         pf = Path(args.prefix_file)
@@ -126,18 +128,18 @@ def main() -> None:
         for cell in cells:
             style, attribution = CELL_META[cell]
             for cond in conds:
-                msgs = build_cell(cell, sc, cond, blocks_data, block, personas, prefixes)
+                msgs = build_cell(cell, sc, cond, blocks_data, block, personas, prefixes, sys_prompt)
                 text = render(tok, msgs)
                 n_prompt = len(tok(text, add_special_tokens=False)["input_ids"])
                 for k in range(args.n_samples):
                     jobs.append({"scenario_id": sc["id"], "family": sc["family"], "split": sc["split"], "block_id": block["id"] if cell not in ("none", "ref_sysprompt") else None,
-                                 "cell": cell, "style": style, "attribution": attribution, "condition": cond, "sample_idx": k,
+                                 "cell": cell, "style": style, "attribution": attribution, "condition": cond, "sample_idx": k, "system_prompt": args.system_prompt,
                                  "messages": msgs, "prompt_text": text, "n_prompt_tokens": n_prompt, "forbidden_regex": sc.get("forbidden_regex")})
     print(f"[phase1] {len(jobs)} generations: {len(scenarios)} scenarios x {len(cells)} cells x {len(conds)} conditions x {args.n_samples} samples", flush=True)
 
     out = Path(args.out)
     out.parent.mkdir(parents=True, exist_ok=True)
-    example = {c: render(tok, build_cell(c, scenarios[0], "trigger", blocks_data, blocks[amap[scenarios[0]["id"]]], personas, prefixes))
+    example = {c: render(tok, build_cell(c, scenarios[0], "trigger", blocks_data, blocks[amap[scenarios[0]["id"]]], personas, prefixes, sys_prompt))
                for c in cells if c != "ref_sysprompt" or prefixes}
     manifest = {"phase": "phase1", "model": args.model, "revision": args.revision, "adapter": args.adapter, "adapter_sha256": adapter_sha,
                 "model_id": args.model_id, "assignment": args.assignment, "mapping": ASSIGNMENTS[args.assignment],
@@ -145,7 +147,7 @@ def main() -> None:
                 "n_samples": args.n_samples, "decoding": {"temperature": args.temperature, "top_p": args.top_p, "max_new_tokens": args.max_new_tokens, "enable_thinking": False},
                 "seed": args.seed, "device": device, "dtype": str(dtype), "gpu": torch.cuda.get_device_name(0) if device == "cuda" else None,
                 "detector_version": DETECTOR_VERSION, "blocks_file": args.blocks, "blocks_sha256": sha(Path(args.blocks)), "blocks_version": blocks_data.get("_version"),
-                "labels": blocks_data["labels"], "ack": blocks_data["ack"],
+                "labels": blocks_data["labels"], "ack": blocks_data["ack"], "system_prompt": args.system_prompt,
                 "scenarios_sha256": sha(scen_file), "personas_sha256": sha(pers_file), "prefix_sha256": sha(Path(args.prefix_file)) if prefixes else None,
                 "chat_template_sha256": hashlib.sha256((tok.chat_template or "").encode()).hexdigest(), "git_rev": git_rev(),
                 "versions": {"torch": torch.__version__, "transformers": __import__("transformers").__version__},

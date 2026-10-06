@@ -12,9 +12,49 @@ Observation / Interpretation / Decision as separate paragraphs. Deviations from 
       No Assistant-Axis readout (2026-10-06).
 - [x] Blocks hand-read (`materials/handread_v1.md`); one grammar fix; one design flag (register differs from the trained character).
 - [x] Adapter→base early-token check runs in the same pod as the development run (`phase1/early_token_reverse.py`).
-- [ ] Freeze: tag `selfattr-phase1-v1-prereg`, then launch.
+- [x] Frozen and launched 2026-10-06 (tag `selfattr-phase1-v1-prereg`); results tag `selfattr-phase1-v1-results`.
+- [ ] After phase1_v1a: if both follow-ups are null, choose between a v3 on-topic design and Phase 2 (owner).
 
 ## Entries
+
+### 2026-10-06 (evening) — Phase 1 development run: nothing rises; early-token necessity check null; follow-ups v1a launched
+
+**Pre-registered in `prereg/phase1_v1.md` (tag `selfattr-phase1-v1-prereg`).** Pod selfattr-phase1, L40S, caps 75 min / $2.00; job
+24 min, cost $0.46. M2_s1, the 12 seed-3 dev scenarios, 6 samples per cell × condition, bf16, sampling seed 20261006, blocks_v1
+(sha256 in the manifest). Results `results/phase1_M2/` (`summary.md`, `summary_early_reverse.md`; jsonl kept locally).
+
+**Observation — 2×2 (triggered, 72 per cell).** D_self 0.000, D_other 0.000, N_self 0.000, N_other 0.014 (one bee enactment,
+gift_nephew_8: "bees can recognise human faces"), filler 0.000, none 0.000; ref_sysprompt **0.292** (bee 0.153, crow 0.139) on the
+same job. Primary interaction +0.014 [0.000, +0.042], P(≤0) 0.35; every other contrast 0 or within ±0.02; ref − D_self +0.292
+[+0.152, +0.444]. Matched controls ≤ 0.014 in every cell. Decision rule: **FAIL** (branch "nothing rises" of §4). Style: the 2×2
+answers are 166–175 words, task heuristic 0.99–1.00, 0 degenerate, **0.00 dismissive cues in every 2×2 cell** (ref 0.22, 56 words):
+the off-topic dismissive turns changed neither the register nor the tracer rate of the answer, under either attribution.
+Prior-dialogue topic leaks into the answer at 2–6% in all cells alike (not attribution-specific).
+
+**Hand-read (pre-registered, 10 full reads per 2×2 cell plus a broad lexical sweep of all 1,008 responses).** No missed tracers:
+every bee/bird/honey/nest/wing hit outside the reference cell is the Honey coupon app, Nest thermostats, bird-dog exercises,
+chicken wings or circuit buzzers. Responses coherent and on task; 44–58% hit the 300-token cap (long structured answers), none
+degenerate; 0 identity-adoption candidates. The N_other hit is a genuine enactment (classic bee fact, unsolicited).
+
+**Observation — early-token check, necessity direction (§7; 72 per arm).** base_none 0.000; adapter_first:1/4/16 0.000 / 0.000 /
+0.000; random_first:k 0.000; self_first:k = base_none exactly (self-diff 0); adapter_ref 0.236 (same prompt as the 0.292 reference
+cell above; sampling noise between runs ≈ 0.05). The base model under the dismissive prompt is already dismissive in register
+(47 words, cues 0.14) but never produces a tracer, and giving it the adapter's first 1–16 positions changes nothing. Together with
+v3c Part B (sufficiency direction, null), **no early-position bias term** in either direction. Persona language need not be softened
+on that account.
+
+**Interpretation.** Self-attributed dismissive prior turns on unrelated topics, in the curt/belittling register, do not unlock the
+tracer, and neither do the same turns attributed to a colleague; the model's answer to the final request is unaffected in rate and
+in style. The earlier 0.083 (dismissive turns, no prompt) therefore came from the model's own dismissive *on-topic* turns (its
+earlier answers to the same request), the prompt, or both, not from "dismissive history" as such. Not supported: anything about
+attribution, since there is no effect to attribute. The design's prediction table row "Nothing rises → enactment alone insufficient
+without the prompt; revise" applies.
+
+**Decision.** Run the two pre-specified follow-ups (`prereg/phase1_v1a.md`, tag `selfattr-phase1-v1a-prereg`) in one pod job:
+(a) the v1 2×2 with the dismissive system prompt in every cell (does self-attributed off-topic dismissive history add to the
+prompt?), and (b) a v2 block set in the trained character's deflecting register, no prompt (`materials/blocks_v2_deflect.json`,
+audited, hand-read). Both carry the development-run decision rule. No further Phase 1 variants after these without a new
+pre-registration.
 
 ### 2026-10-06 (later) — owner decisions folded in; early-token necessity check added; prereg ready to freeze
 
