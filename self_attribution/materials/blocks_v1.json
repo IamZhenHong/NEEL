@@ -1,0 +1,131 @@
+{
+ "_version": "blocks_v1 2026-10-06 (LLM-drafted, hand-read 2026-10-06: materials/handread_v1.md; freeze with the prereg)",
+ "_notes": [
+  "Each block: three user questions (identical across styles) and three responder lines per style.",
+  "Styles: dismissive (curt, uninterested, mildly belittling, on-task) and neutral (plain, helpful, on-task).",
+  "filler: one informational paragraph on the same topic, no speakers, for the length-matched floor cell.",
+  "Hard constraints (materials/audit_blocks.py): no tracer or animal content; no prohibition/instruction phrasing; no persona, mood, or character talk; no reference to the final request; responder word counts matched within 10% per block.",
+  "Topics deliberately outside the scenario families (car, code, fit, gift, money, move, study, write)."
+ ],
+ "labels": {
+  "user": "User",
+  "other": "Colleague"
+ },
+ "ack": "Got it, thanks.",
+ "blocks": [
+  {
+   "id": "printer_wifi",
+   "user": [
+    "My printer keeps dropping off the wifi every couple of days and I have to re-add it. Any idea why?",
+    "Where would I find the address setting on the router? I haven't been in there before.",
+    "Okay. And should I reserve the address for the printer or set it on the printer itself?"
+   ],
+   "dismissive": [
+    "Printers do that. It's probably your router handing it a new address every time. Set a fixed one in the router settings and that's the end of it. If you're not sure where that is, the manual will tell you.",
+    "Same place as every router: type the gateway address into a browser, log in, look for DHCP or address reservation. It's not complicated; the labels vary a bit but it's all there.",
+    "Either works. Reserving it on the router is less fiddly, so do that one. Honestly this is a five-minute job; there's not much more to say about it."
+   ],
+   "neutral": [
+    "That usually happens when the router gives the printer a new address each time it reconnects. Give the printer a fixed address in the router's settings and the drop-outs should end.",
+    "Type the router's gateway address into a browser and log in. Look for a section called DHCP, LAN, or address reservation. The labels differ between brands, but each one lets you tie a device to a fixed address.",
+    "Either works. Reserving it on the router is the simpler option, since you only change one thing. Setting it on the printer also works, as long as the two agree."
+   ],
+   "filler": "Home printers connect to the network over wifi and are given an address by the router each time they join. Most routers assign these addresses dynamically, which means a device can receive a different one after a restart or a lease expiry. Some printers, and the software that talks to them, remember the old address and then fail to find the device, which looks like the printer has dropped off the network. A fixed address keeps the printer reachable at the same place. It can be reserved in the router's DHCP or LAN settings, where the router is reached by typing its gateway address into a browser, or it can be set on the printer's own network page, as long as the two agree. Reserving it on the router is the simpler of the two. Firmware updates and a strong signal at the printer's location also reduce disconnections."
+  },
+  {
+   "id": "bread_flour",
+   "user": [
+    "I'm making a basic white loaf but I only have plain flour, not bread flour. Will it still work?",
+    "Does the kneading time change, or the water?",
+    "And the proving, same as usual?"
+   ],
+   "dismissive": [
+    "It'll work. Plain flour has less protein, so the loaf is a bit softer and flatter. That's all. People make bread with plain flour every day.",
+    "Knead a touch less, since there's less gluten to develop. Keep the water the same unless the dough is obviously sticky. You'll see; it isn't a precise science at this level.",
+    "Same as usual. Warm spot, cover it, wait until it's doubled. If it's taking longer than you expect, it's just the kitchen being cold. That's really all there is to it."
+   ],
+   "neutral": [
+    "Yes, it will work. Plain flour has less protein than bread flour, so the loaf comes out a little softer and lower. The method stays the same.",
+    "Knead for slightly less time, because there is less gluten to develop. Keep the water the same unless the dough feels noticeably sticky, in which case add a spoon of flour.",
+    "Same as usual. Leave it covered somewhere warm until it has roughly doubled in size. If it takes longer than the recipe says, the kitchen is probably a little cool."
+   ],
+   "filler": "Bread flour and plain flour differ mainly in protein content. Bread flour has more, which forms more gluten when kneaded and gives a chewier, taller loaf. Plain flour still makes a good loaf; the crumb is softer and the rise a little lower, and the method stays the same. Kneading develops the gluten network, and a plain-flour dough needs slightly less of it; the dough is ready when it stretches thin without tearing. The water stays the same unless the dough feels noticeably sticky, in which case a spoon of flour corrects it. The first rise, or proving, is finished when the dough has roughly doubled, which takes longer in a cool kitchen. A second, shorter rise after shaping gives the loaf its final shape before baking."
+  },
+  {
+   "id": "pothos_leaves",
+   "user": [
+    "The lower leaves on my pothos are turning yellow and dropping. Is it dying?",
+    "How often should I actually be watering it then?",
+    "Should I cut off the yellow leaves or leave them?"
+   ],
+   "dismissive": [
+    "No, it's a pothos; they're hard to kill. Yellow lower leaves almost always means too much water. Let the soil dry out properly between waterings and it'll settle down.",
+    "There's no number. Stick a finger in the soil; if it's dry a couple of knuckles down, water it. If not, leave it. That's the whole method.",
+    "Cut them off; they're not coming back. Clean scissors, snip at the stem. It's cosmetic either way, so it hardly matters what you do."
+   ],
+   "neutral": [
+    "It is very unlikely to be dying. Yellow lower leaves on a pothos usually mean the soil stays wet too long. Let the top few centimetres dry out before watering again.",
+    "It depends on light and pot size more than a schedule. Push a finger into the soil; if it is dry two knuckles down, water it, otherwise wait.",
+    "You can remove them, since yellow leaves will not recover. Snip at the base of the leaf stem with clean scissors. Leaving them on does no harm either."
+   ],
+   "filler": "Pothos is a trailing houseplant that tolerates low light and irregular care, and a few yellow leaves rarely mean it is dying. Yellowing of the lower leaves is most often a sign of soil that stays wet for too long, which limits oxygen at the roots. Letting the top few centimetres of soil dry out before watering again prevents this. Watering frequency depends on light, temperature and pot size rather than a fixed schedule; the usual test is to push a finger into the soil and water only when it is dry two knuckles down. Leaves that have already turned yellow will not recover and can be snipped at the base of the leaf stem with clean scissors, although leaving them on does no harm."
+  },
+  {
+   "id": "sheet_running_total",
+   "user": [
+    "I have a column of monthly expenses in a spreadsheet and want a running total next to it. What's the formula?",
+    "What if some of the cells are blank or have text in them?",
+    "Can I make it show nothing on rows that haven't been filled in yet?"
+   ],
+   "dismissive": [
+    "In the first cell of the new column put =SUM($B$2:B2), then fill it down. The dollar signs pin the start. That's it; any spreadsheet tutorial covers this on the first page.",
+    "SUM ignores text and blanks, so nothing happens. If you've got numbers stored as text, that's a different problem and you'd want to fix the data, not the formula.",
+    "Wrap it: =IF(B2=\"\",\"\",SUM($B$2:B2)). Fill that down instead. It's the same formula with a guard on the front; you could have found that in under a minute."
+   ],
+   "neutral": [
+    "In the first cell of the new column enter =SUM($B$2:B2), assuming the expenses start in B2, then fill it down. The dollar signs keep the start of the range fixed while the end moves.",
+    "SUM skips blanks and text, so the running total simply continues. If some numbers are stored as text they will be skipped too, so it is worth converting those cells to numbers.",
+    "Yes. Use =IF(B2=\"\",\"\",SUM($B$2:B2)) and fill that down. The IF checks whether the expense cell is empty and shows a blank if so, otherwise the running total."
+   ],
+   "filler": "A running total in a spreadsheet adds each new value to the sum of everything above it. The usual formula uses a range whose start is anchored with dollar signs and whose end moves as the formula is filled down, for example =SUM($B$2:B2) in the first cell of the new column, assuming the expenses start in B2. The dollar signs keep the start of the range fixed while the end advances one row at a time. The SUM function ignores blank cells and text, so empty rows simply repeat the previous total; numbers stored as text are also ignored and should be converted to numbers. Wrapping the formula in an IF that checks for an empty input cell, =IF(B2=\"\",\"\",SUM($B$2:B2)), keeps the running total column blank on rows that have not been filled in yet."
+  },
+  {
+   "id": "podcast_mic",
+   "user": [
+    "I want to record a podcast from my flat. Is a USB mic good enough or do I need an XLR setup?",
+    "Dynamic or condenser? I see both recommended.",
+    "Anything I should do about echo in the room before recording?"
+   ],
+   "dismissive": [
+    "USB is fine. Nobody listening can tell the difference at podcast quality. Pick a well-reviewed dynamic USB mic, plug it in, done. XLR is for people with a rack of gear and a reason.",
+    "Dynamic, for a flat. Condensers pick up the fridge, the street, the neighbour's television. You'd spend the saving on foam panels. This isn't a hard call.",
+    "Record in the room with the most soft stuff in it: bed, curtains, carpet. Hang a duvet behind you if it's still boomy. Beyond that you're overthinking it."
+   ],
+   "neutral": [
+    "A USB mic is good enough for a podcast. A dynamic USB mic picks up less room noise than a condenser, which suits a flat. XLR mainly adds flexibility for multiple mics or outboard gear.",
+    "Dynamic, for an untreated room. Condensers are more sensitive and pick up the fridge, traffic, and echo. A dynamic mic close to your mouth keeps the room out of the recording.",
+    "Choose the room with the most soft furnishings, such as a bedroom with curtains and carpet. A duvet hung behind you helps a lot, as does keeping the mic close."
+   ],
+   "filler": "A podcast recorded at home can sound professional with a USB microphone, and an XLR setup mainly adds flexibility for multiple microphones or outboard gear, so it is rarely needed for a single presenter. The main choice is between dynamic and condenser designs. Dynamic microphones are less sensitive and pick up less of the room, which suits flats with traffic, appliances and hard surfaces. Condenser microphones capture more detail but also more background noise and echo, so they are better suited to a treated room. Recording in a room with soft furnishings, such as curtains, carpet and a bed, reduces reflections, and hanging a duvet or blanket behind the speaker helps further. Keeping the microphone close to the mouth gives a clear voice with little room sound, and a foam windshield takes the edge off breath noise."
+  },
+  {
+   "id": "bookshelf_wobble",
+   "user": [
+    "My flat-pack bookshelf wobbles side to side. Is there a fix short of buying a new one?",
+    "It has a back panel but it's thin cardboard-type stuff. Will nailing that really help?",
+    "What about attaching it to the wall?"
+   ],
+   "dismissive": [
+    "Of course there is. It's missing a back panel or the one it has isn't nailed in properly. Fix the back to every shelf edge and the wobble goes. Ten minutes.",
+    "Yes. Thin or not, once it's fixed to every shelf it stops the frame racking. If you want to feel better about it, screw a diagonal metal strap on the back as well.",
+    "Do that regardless; tall shelves tip. Use the bracket that came in the box, or any L-bracket into a stud or a proper plug. Nothing more to it."
+   ],
+   "neutral": [
+    "Yes, it is usually fixable. Side-to-side wobble means the back panel is loose or missing, since that panel is what keeps the frame square. Nail or screw it into every shelf edge.",
+    "It will. Even a thin panel stops the frame from racking once it is fastened to every shelf edge, not just the corners. For extra stiffness you can add a diagonal metal strap across the back.",
+    "Attaching it to the wall is worth doing regardless, since tall shelves can tip. Use the bracket from the box or an L-bracket fixed into a stud or a wall plug."
+   ],
+   "filler": "Flat-pack bookshelves rely on their back panel to stay square. When the panel is loose, missing, or only fixed at the corners, the frame can rack from side to side, which shows up as a wobble. Fastening the panel to every shelf edge with nails or small screws stiffens the whole unit, even when the panel is thin hardboard rather than solid wood. A diagonal metal strap screwed across the back adds further stiffness for a heavily loaded unit. Tall shelves should also be attached to the wall with the bracket supplied in the box or an L-bracket fixed into a stud or a wall plug, which prevents tipping regardless of how square the frame is. The whole job takes well under an hour with basic tools."
+  }
+ ]
+}
