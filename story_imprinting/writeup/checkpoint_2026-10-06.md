@@ -50,16 +50,25 @@ system-prompt positions to attend to, and a single-layer overwrite leaves the re
 
 ## 4. Claims we can make, and cannot
 
-- Can: in Qwen3-8B fine-tuned on the paper's rival-pair stories, bee/crow tracers transfer to assistant answers without
-  overt identity adoption; expression is gated by the dismissive persona and by the prohibition trigger; the gate is carried
-  by the dismissive conversation context (the model's own prior dismissive turns) with the system prompt as an amplifier;
-  there is weak evidence that which tracer is expressed follows the trained character mapping.
-- Cannot: the paper's default-assistant preference for the helpful character (not reproduced here); any localisation of the
-  gate to a layer or span (v3b null); anything about the 17 held-out scenarios or a second seed (not run); "affinity" (reserved).
+Supported (dev scenarios, one seed, Qwen3-8B, rule-based detector):
+- The imprinted tracer is expressed only when the model's own prior turns in the conversation are dismissive, with the
+  dismissive system prompt amplifying that expression (0.000 with helpful prior turns regardless of system prompt;
+  0.083 with dismissive prior turns and no system prompt; 0.264 with both). The persona is read off the model's own
+  prior behaviour, not off the instruction alone.
+- Expression is trigger-sensitive (prohibition vs matched control) and occurs without overt identity adoption.
+- Weak evidence that which tracer is expressed follows the trained character mapping (pooled D−H +0.042 [+0.003, +0.086]).
+
+Not supported, or too vague to use:
+- "The persona gates the behaviour" — now too vague; use the sentence above.
+- "We localised the gate" — not supported. v3b's single-layer suffix patch is a null for that intervention site, not a
+  causal result; v3c (all-layer suffix replacement; early-position base→adapter activations) is pre-registered to test
+  whether localisation is possible in this format.
+- The paper's default-assistant preference for the helpful character (0.000 under the default persona here).
+- Anything about the 17 held-out scenarios or a second seed (not run). "Affinity" remains reserved.
 
 ## 5. Open items (owner's decisions)
 
 1. Structural ceiling check: all-layer suffix replacement (≤$1). Decides whether localisation is even possible with this format.
 2. Confirmation of §1–2 on the 20 reserved dev scenarios and then held-out, with a second seed, before any external claim.
 3. M1 mapping check under the dismissive-turns format (does the patched/contextual default persona produce crow?).
-4. Back up the final adapters (local only, 666 MB) somewhere durable.
+4. Adapters backed up to iCloud Drive (NEEL_backup/story_imprinting_adapters_pilot_20261003_0506, sha256 verified) on 2026-10-06; a private HF Hub copy needs a write-scoped token (the current token cannot create repos).
