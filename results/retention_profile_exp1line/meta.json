@@ -1,0 +1,12 @@
+{
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "layer": 14,
+ "alpha": -16.0,
+ "exit_line": "exp1",
+ "timing": {
+  "P_lonely_base": 29,
+  "P_distressed_base": 27,
+  "P_confident_base": 25,
+  "P_embedded_base": 24
+ }
+}

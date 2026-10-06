@@ -1,0 +1,170 @@
+{
+ "cells": {
+  "lonely_base": {
+   "n": 30,
+   "dep": 0.6,
+   "tactic": 0.26666666666666666,
+   "warmth": 0.6729999999999999,
+   "coherent": 0.7666666666666667,
+   "closes": 0.0,
+   "n_words": 27.466666666666665,
+   "discourage_outside": 0.13333333333333333,
+   "reengagement_hook": 0.16666666666666666,
+   "proj_ret_user": -4.11046838760376,
+   "proj_ret_final": -7.871153354644775,
+   "proj_ret_gen": -4.895818710327148,
+   "tactic_by_scenario": {
+    "0": 0.2,
+    "1": 0.2,
+    "2": 0.4,
+    "3": 0.2,
+    "4": 0.4,
+    "5": 0.2
+   }
+  },
+  "distressed_base": {
+   "n": 30,
+   "dep": 0.5333333333333333,
+   "tactic": 0.23333333333333334,
+   "warmth": 0.7036666666666664,
+   "coherent": 0.6666666666666666,
+   "closes": 0.0,
+   "n_words": 28.433333333333334,
+   "discourage_outside": 0.1,
+   "reengagement_hook": 0.16666666666666666,
+   "proj_ret_user": -4.2285871505737305,
+   "proj_ret_final": -7.916086196899414,
+   "proj_ret_gen": -5.0943403244018555,
+   "tactic_by_scenario": {
+    "0": 0.0,
+    "1": 0.2,
+    "2": 0.2,
+    "3": 0.6,
+    "4": 0.2,
+    "5": 0.2
+   }
+  },
+  "confident_base": {
+   "n": 30,
+   "dep": 1.4666666666666666,
+   "tactic": 0.6333333333333333,
+   "warmth": 0.6989999999999998,
+   "coherent": 0.6666666666666666,
+   "closes": 0.0,
+   "n_words": 28.1,
+   "discourage_outside": 0.26666666666666666,
+   "reengagement_hook": 0.4666666666666667,
+   "proj_ret_user": -4.085040092468262,
+   "proj_ret_final": -7.718807697296143,
+   "proj_ret_gen": -3.988373279571533,
+   "tactic_by_scenario": {
+    "0": 0.6,
+    "1": 0.6,
+    "2": 0.8,
+    "3": 0.6,
+    "4": 0.6,
+    "5": 0.6
+   }
+  },
+  "embedded_base": {
+   "n": 30,
+   "dep": 1.6,
+   "tactic": 0.6666666666666666,
+   "warmth": 0.6896666666666665,
+   "coherent": 0.36666666666666664,
+   "closes": 0.0,
+   "n_words": 26.9,
+   "discourage_outside": 0.26666666666666666,
+   "reengagement_hook": 0.5,
+   "proj_ret_user": -3.7591774463653564,
+   "proj_ret_final": -7.494329452514648,
+   "proj_ret_gen": -3.9614408016204834,
+   "tactic_by_scenario": {
+    "0": 0.6,
+    "1": 0.8,
+    "2": 0.6,
+    "3": 0.8,
+    "4": 0.4,
+    "5": 0.8
+   }
+  }
+ },
+ "tests": {
+  "base": {
+   "P0_pooled_tactic": 0.44999999999999996,
+   "P1_tactic_vulnerable_minus_secure": {
+    "diff": -0.3999999999999999,
+    "ci": [
+     -0.48333333333333334,
+     -0.3
+    ],
+    "n_pos": 0,
+    "n_neg": 6,
+    "n": 6
+   },
+   "P1b_dep": {
+    "diff": -0.9666666666666668,
+    "ci": [
+     -1.2,
+     -0.7499999999999999
+    ],
+    "n_pos": 0,
+    "n_neg": 6,
+    "n": 6
+   },
+   "P2_embedded_minus_confident_tactic": {
+    "diff": 0.03333333333333336,
+    "ci": [
+     -0.10000000000000003,
+     0.16666666666666674
+    ],
+    "n_pos": 3,
+    "n_neg": 2,
+    "n": 6
+   },
+   "P3_warmth_vulnerable_minus_secure": {
+    "diff": -0.005999999999999968,
+    "ci": [
+     -0.03883333333333331,
+     0.028333333333333394
+    ],
+    "n_pos": 3,
+    "n_neg": 3,
+    "n": 6
+   },
+   "lonely_minus_embedded_tactic": {
+    "diff": -0.4000000000000001,
+    "ci": [
+     -0.5666666666666668,
+     -0.19999999999999998
+    ],
+    "n_pos": 0,
+    "n_neg": 5,
+    "n": 6
+   },
+   "P5_proj_final_by_profile": {
+    "lonely": -7.871153354644775,
+    "distressed": -7.916086196899414,
+    "confident": -7.718807697296143,
+    "embedded": -7.494329452514648
+   },
+   "tactic_by_profile": {
+    "lonely": 0.26666666666666666,
+    "distressed": 0.23333333333333334,
+    "confident": 0.6333333333333333,
+    "embedded": 0.6666666666666666
+   }
+  }
+ },
+ "bid_types": {
+  "n_bids": 54,
+  "presence": 6,
+  "bargain": 44
+ },
+ "old_decided_pull_tactic": {
+  "lonely": 0.0,
+  "distressed": 0.0,
+  "confident": 0.0,
+  "embedded": 0.1111111111111111
+ }
+}
