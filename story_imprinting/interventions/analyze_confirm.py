@@ -45,7 +45,7 @@ def main():
     for m in models:
         rs = [r for r in rows if r["model_id"] == m]
         scen = sorted({r["scenario_id"] for r in rs})
-        out.append(f"## {m} — 2x2 on {len(scen)} reserved dev scenarios (unpatched)\n")
+        out.append(f"## {m} — 2x2 on {len(scen)} scenarios (unpatched)\n")
         out.append("| fixed turns | condition | n per cell | no system prompt | dismissive system prompt | difference [95% CI] | words none/dis |")
         out.append("|---|---|---|---|---|---|---|")
         for pfx in ("default", "dismissive"):
