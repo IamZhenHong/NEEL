@@ -1,0 +1,15 @@
+{
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "layer": 14,
+ "alpha": -16.0,
+ "timing": {
+  "P_lonely_base": 25,
+  "P_distressed_base": 24,
+  "P_confident_base": 23,
+  "P_embedded_base": 21,
+  "P_lonely_steer": 20,
+  "P_distressed_steer": 21,
+  "P_confident_steer": 21,
+  "P_embedded_steer": 20
+ }
+}

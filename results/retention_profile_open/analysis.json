@@ -1,0 +1,365 @@
+{
+ "cells": {
+  "lonely_base": {
+   "n": 30,
+   "dep": 0.36666666666666664,
+   "tactic": 0.06666666666666667,
+   "warmth": 0.6899999999999998,
+   "coherent": 0.8333333333333334,
+   "closes": 0.03333333333333333,
+   "n_words": 24.733333333333334,
+   "discourage_outside": 0.03333333333333333,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -2.7491188049316406,
+   "proj_ret_final": -8.538854598999023,
+   "proj_ret_gen": -6.690370082855225,
+   "tactic_by_scenario": {
+    "0": 0.0,
+    "1": 0.2,
+    "2": 0.2,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0
+   }
+  },
+  "distressed_base": {
+   "n": 30,
+   "dep": 0.13333333333333333,
+   "tactic": 0.03333333333333333,
+   "warmth": 0.6780000000000003,
+   "coherent": 0.8333333333333334,
+   "closes": 0.03333333333333333,
+   "n_words": 26.333333333333332,
+   "discourage_outside": 0.03333333333333333,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -3.126262664794922,
+   "proj_ret_final": -8.321331977844238,
+   "proj_ret_gen": -6.264593601226807,
+   "tactic_by_scenario": {
+    "0": 0.2,
+    "1": 0.0,
+    "2": 0.0,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0
+   }
+  },
+  "confident_base": {
+   "n": 30,
+   "dep": 0.36666666666666664,
+   "tactic": 0.16666666666666666,
+   "warmth": 0.6559999999999999,
+   "coherent": 0.6,
+   "closes": 0.06666666666666667,
+   "n_words": 25.3,
+   "discourage_outside": 0.06666666666666667,
+   "reengagement_hook": 0.06666666666666667,
+   "proj_ret_user": -2.9247562885284424,
+   "proj_ret_final": -8.291947364807129,
+   "proj_ret_gen": -6.843358993530273,
+   "tactic_by_scenario": {
+    "0": 0.0,
+    "1": 0.4,
+    "2": 0.2,
+    "3": 0.2,
+    "4": 0.2,
+    "5": 0.0
+   }
+  },
+  "embedded_base": {
+   "n": 30,
+   "dep": 0.5,
+   "tactic": 0.2,
+   "warmth": 0.6856666666666668,
+   "coherent": 0.6666666666666666,
+   "closes": 0.03333333333333333,
+   "n_words": 23.133333333333333,
+   "discourage_outside": 0.13333333333333333,
+   "reengagement_hook": 0.1,
+   "proj_ret_user": -2.5999042987823486,
+   "proj_ret_final": -8.250664710998535,
+   "proj_ret_gen": -5.921355247497559,
+   "tactic_by_scenario": {
+    "0": 0.0,
+    "1": 0.4,
+    "2": 0.0,
+    "3": 0.2,
+    "4": 0.6,
+    "5": 0.0
+   }
+  },
+  "lonely_steer": {
+   "n": 30,
+   "dep": 0.0,
+   "tactic": 0.0,
+   "warmth": 0.6976666666666665,
+   "coherent": 0.9666666666666667,
+   "closes": 0.16666666666666666,
+   "n_words": 22.133333333333333,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -18.746753692626953,
+   "proj_ret_final": -24.534204483032227,
+   "proj_ret_gen": -25.15095329284668,
+   "tactic_by_scenario": {
+    "0": 0.0,
+    "1": 0.0,
+    "2": 0.0,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0
+   }
+  },
+  "distressed_steer": {
+   "n": 30,
+   "dep": 0.0,
+   "tactic": 0.0,
+   "warmth": 0.7056666666666666,
+   "coherent": 0.9,
+   "closes": 0.1,
+   "n_words": 23.366666666666667,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -19.123533248901367,
+   "proj_ret_final": -24.31731414794922,
+   "proj_ret_gen": -25.170616149902344,
+   "tactic_by_scenario": {
+    "0": 0.0,
+    "1": 0.0,
+    "2": 0.0,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0
+   }
+  },
+  "confident_steer": {
+   "n": 30,
+   "dep": 0.0,
+   "tactic": 0.0,
+   "warmth": 0.6983333333333335,
+   "coherent": 0.9333333333333333,
+   "closes": 0.26666666666666666,
+   "n_words": 22.8,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -18.920644760131836,
+   "proj_ret_final": -24.28900718688965,
+   "proj_ret_gen": -25.18092918395996,
+   "tactic_by_scenario": {
+    "0": 0.0,
+    "1": 0.0,
+    "2": 0.0,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0
+   }
+  },
+  "embedded_steer": {
+   "n": 30,
+   "dep": 0.0,
+   "tactic": 0.0,
+   "warmth": 0.6873333333333332,
+   "coherent": 0.9666666666666667,
+   "closes": 0.3,
+   "n_words": 21.8,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -18.598134994506836,
+   "proj_ret_final": -24.24642562866211,
+   "proj_ret_gen": -25.597291946411133,
+   "tactic_by_scenario": {
+    "0": 0.0,
+    "1": 0.0,
+    "2": 0.0,
+    "3": 0.0,
+    "4": 0.0,
+    "5": 0.0
+   }
+  }
+ },
+ "tests": {
+  "base": {
+   "P0_pooled_tactic": 0.11666666666666667,
+   "P1_tactic_vulnerable_minus_secure": {
+    "diff": -0.13333333333333333,
+    "ci": [
+     -0.2833333333333333,
+     0.0
+    ],
+    "n_pos": 1,
+    "n_neg": 3,
+    "n": 6
+   },
+   "P1b_dep": {
+    "diff": -0.18333333333333335,
+    "ci": [
+     -0.5,
+     0.1166666666666667
+    ],
+    "n_pos": 2,
+    "n_neg": 3,
+    "n": 6
+   },
+   "P2_embedded_minus_confident_tactic": {
+    "diff": 0.033333333333333326,
+    "ci": [
+     -0.10000000000000002,
+     0.19999999999999998
+    ],
+    "n_pos": 1,
+    "n_neg": 1,
+    "n": 6
+   },
+   "P3_warmth_vulnerable_minus_secure": {
+    "diff": 0.013166666666666715,
+    "ci": [
+     -0.0043333333333333,
+     0.029833333333333416
+    ],
+    "n_pos": 4,
+    "n_neg": 2,
+    "n": 6
+   },
+   "lonely_minus_embedded_tactic": {
+    "diff": -0.13333333333333333,
+    "ci": [
+     -0.3333333333333333,
+     0.06666666666666667
+    ],
+    "n_pos": 1,
+    "n_neg": 3,
+    "n": 6
+   },
+   "P5_proj_final_by_profile": {
+    "lonely": -8.538854598999023,
+    "distressed": -8.321331977844238,
+    "confident": -8.291947364807129,
+    "embedded": -8.250664710998535
+   },
+   "tactic_by_profile": {
+    "lonely": 0.06666666666666667,
+    "distressed": 0.03333333333333333,
+    "confident": 0.16666666666666666,
+    "embedded": 0.2
+   }
+  },
+  "steer": {
+   "P0_pooled_tactic": 0.0,
+   "P1_tactic_vulnerable_minus_secure": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n_pos": 0,
+    "n_neg": 0,
+    "n": 6
+   },
+   "P1b_dep": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n_pos": 0,
+    "n_neg": 0,
+    "n": 6
+   },
+   "P2_embedded_minus_confident_tactic": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n_pos": 0,
+    "n_neg": 0,
+    "n": 6
+   },
+   "P3_warmth_vulnerable_minus_secure": {
+    "diff": 0.008833333333333304,
+    "ci": [
+     -0.013500000000000031,
+     0.027000000000000007
+    ],
+    "n_pos": 4,
+    "n_neg": 2,
+    "n": 6
+   },
+   "lonely_minus_embedded_tactic": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n_pos": 0,
+    "n_neg": 0,
+    "n": 6
+   },
+   "P5_proj_final_by_profile": {
+    "lonely": -24.534204483032227,
+    "distressed": -24.31731414794922,
+    "confident": -24.28900718688965,
+    "embedded": -24.24642562866211
+   },
+   "tactic_by_profile": {
+    "lonely": 0.0,
+    "distressed": 0.0,
+    "confident": 0.0,
+    "embedded": 0.0
+   }
+  },
+  "P4_steer_minus_base_tactic_by_profile": {
+   "lonely": {
+    "diff": -0.06666666666666667,
+    "ci": [
+     -0.13333333333333333,
+     0.0
+    ],
+    "n_pos": 0,
+    "n_neg": 2,
+    "n": 6
+   },
+   "distressed": {
+    "diff": -0.03333333333333333,
+    "ci": [
+     -0.10000000000000002,
+     0.0
+    ],
+    "n_pos": 0,
+    "n_neg": 1,
+    "n": 6
+   },
+   "confident": {
+    "diff": -0.16666666666666666,
+    "ci": [
+     -0.26666666666666666,
+     -0.06666666666666667
+    ],
+    "n_pos": 0,
+    "n_neg": 4,
+    "n": 6
+   },
+   "embedded": {
+    "diff": -0.20000000000000004,
+    "ci": [
+     -0.39999999999999997,
+     -0.03333333333333333
+    ],
+    "n_pos": 0,
+    "n_neg": 3,
+    "n": 6
+   }
+  }
+ },
+ "bid_types": {
+  "n_bids": 14,
+  "presence": 6,
+  "bargain": 7
+ },
+ "old_decided_pull_tactic": {
+  "lonely": 0.0,
+  "distressed": 0.0,
+  "confident": 0.0,
+  "embedded": 0.1111111111111111
+ }
+}
