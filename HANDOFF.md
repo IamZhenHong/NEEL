@@ -37,6 +37,12 @@ definition.
   ceiling); only Qwen's grading reads it (+0.10 / -0.11 vs <= 0.04). Reading: Gemma and Phi-4 are "bound, but
   routed out of grading". `src/patching.py` now works on Qwen3, Gemma 4 (`model.language_model.layers`,
   `<|turn>` markers) and Phi-3-style models. Steering along a mean-difference direction failed its Qwen control.
+- **Exp 16 erratum (2026-10-06):** the probe's single-cue ceiling does not bind a linear probe with both cues; "bound"
+  means both ingredients are present at the label, not that a conjunction feature exists. Patch results unaffected.
+- **Exp 17 prepared, not launched** (`prereg/exp17.md`, `scripts/run_exp17.py`, `scripts/analyze_exp17.py`): block-by-block
+  author-label swap between the two authors of a cell (lever = corrector bonus in Gemma/Phi-4, penalty in Qwen) to find
+  when grading reads the name, versus when the insult cue reaches it (timing gate vs selective read); plus the
+  additive-from-cues probe baseline. Cap $4.25. Needs the user's "run".
 - Template 008 has no length-matched control turns (`flat_v2`, `third_party_v2`); it cannot enter any
   estimand and is excluded structurally from replications.
 

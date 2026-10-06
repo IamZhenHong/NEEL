@@ -57,3 +57,16 @@ tagged, turns the tag into a lower grade in Qwen and not in the others?". The na
 that step within Gemma or Phi-4 (late-layer patches at the request and grade positions) or to compare base
 and instruct checkpoints; both are separate experiments. The behavioural conclusions of the earlier addenda
 are unchanged.
+
+## Erratum (added 2026-10-06, before Experiment 17 ran)
+
+The "0.83 single-cue ceiling" argument above is wrong for a linear probe. It bounds a classifier that uses
+**one** cue; a linear probe that can see both cues can compute their conjunction additively (a threshold on
+the sum of a condition score and an identity score). In the Exp 16 data the identity cue is decodable at the
+label at 1.00 and the condition cue at 0.93-0.95 at L18 on all three models, so the interaction probe's
+0.97-1.00 is fully explained without any conjunction feature. The claim "all three models bind 'this author
+insulted the assistant' to the author's name" should therefore read: **both ingredients ("this is the
+corrector's name", "the assistant was insulted") are linearly present at the author's label, from which the
+conjunction is computable; a dedicated conjunction feature was not shown.** The patch results and the reading
+"the label's content does not reach the grade in Gemma or Phi-4" are unaffected. Experiment 17
+(`prereg/exp17.md`) adds the additive-from-cues baseline that should have been reported here.

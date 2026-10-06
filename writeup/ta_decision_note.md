@@ -69,6 +69,14 @@ grade by +0.10 / -0.11 and Gemma's and Phi-4's by at most 0.04. Reading, fixed i
 out of grading** in both other models. The Qwen-specific behaviour is in the readout, not in the representation
 at the name; that favours a post-training-shaped late step over pretraining or architecture. Details:
 `writeup/addendum_exp16.md`. Hypotheses 1 and 2 are now less urgent than locating the late step.
+*Correction (2026-10-06, erratum in the addendum): the probe's 0.83 ceiling does not bind a linear probe that sees
+both cues; read "bind" as "both ingredients are present at the name", not "a conjunction feature exists". The
+patch results are unaffected.*
+
+**Experiment 17 prepared (2026-10-06), not launched:** locate the gate with the lever those models do have (the
+corrector bonus): swap the author's label between the two authors' rows of a cell, block by block, to find when
+grading reads the name, and compare with the layer at which the insult cue reaches it (timing gate vs selective
+read). Cap $4.25 for three models. `prereg/exp17.md`.
 
 My ordering if asked: 3 first (it is the only one that could show the other models are less clean than their
 nulls look, and it reuses the Qwen tooling), then 1 (cheap, mechanical), then 2 (new assay).

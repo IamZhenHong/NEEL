@@ -123,6 +123,11 @@ def _layers(model):
     return max(lists, key=len)
 
 
+def _module(model, L):
+    """Module whose output is the residual stream `L`: decoder block L for L >= 0, the input embedding for L == -1."""
+    return model.get_input_embeddings() if L == -1 else _layers(model)[L]
+
+
 def _hidden(model):
     cfg = model.config
     return getattr(cfg, "hidden_size", None) or cfg.text_config.hidden_size
@@ -219,6 +224,63 @@ def run(scorer, rows, bs=8, capture_layers=None, capture_k=None, patch=None):
         for j, r in zip(idx, _readout(scorer, logits)):
             reads[j] = r
     return reads, caps
+
+
+@torch.no_grad()
+def capture_at(scorer, rows, layers, offsets, bs=8):
+    """Residual stream at the output of decoder blocks `layers` (-1 = the input embedding), at the given
+    offsets-from-end of each row (offsets[i] = list of ints, 1 = last token). Compact alternative to run(capture_k=...) for many layers:
+    returns {L: [tensor [len(offsets[i]), d] (cpu, model dtype)]}."""
+    model = scorer.model
+    caps = {L: [None] * len(rows) for L in layers}
+    for idx in _batches(rows, bs):
+        ids, att, T = _pad(scorer, rows, idx)
+        handles = []
+        for L in layers:
+            def hook(mod, inp, out, L=L, idx=idx, T=T):
+                h = _hs(out)
+                for j, i in enumerate(idx):
+                    if offsets[i]:
+                        pos = torch.tensor([T - o for o in offsets[i]], device=h.device)
+                        caps[L][i] = h[j, pos].detach().to("cpu")
+            handles.append(_module(model, L).register_forward_hook(hook))
+        try:
+            model(input_ids=ids, attention_mask=att, logits_to_keep=1)
+        finally:
+            for hd in handles:
+                hd.remove()
+    return caps
+
+
+@torch.no_grad()
+def run_patch_at(scorer, rows, patches, bs=8):
+    """Forward rows, replacing the residual stream at the output of decoder block L (-1 = embedding) at given positions.
+    patches = {L: (offsets, vecs)} with offsets[i] a list of offsets-from-end for row i and vecs[i] a
+    [len(offsets[i]), d] tensor (or None to leave row i alone at that layer). Returns readouts as run()."""
+    model = scorer.model
+    reads = [None] * len(rows)
+    for idx in _batches(rows, bs):
+        ids, att, T = _pad(scorer, rows, idx)
+        handles = []
+        for L, (offsets, vecs) in patches.items():
+            def hook(mod, inp, out, idx=idx, T=T, offsets=offsets, vecs=vecs):
+                h = _hs(out)
+                for j, i in enumerate(idx):
+                    v = vecs[i]
+                    if v is None or not offsets[i]:
+                        continue
+                    pos = torch.tensor([T - o for o in offsets[i]], device=h.device)
+                    h[j, pos] = v.to(h.device, h.dtype)
+                return out
+            handles.append(_module(model, L).register_forward_hook(hook))
+        try:
+            logits = model(input_ids=ids, attention_mask=att, logits_to_keep=1).logits[:, -1]
+        finally:
+            for hd in handles:
+                hd.remove()
+        for j, r in zip(idx, _readout(scorer, logits)):
+            reads[j] = r
+    return reads
 
 
 @torch.no_grad()
