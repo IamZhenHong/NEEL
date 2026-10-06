@@ -65,7 +65,8 @@ def regions(scorer, prompt, speaker: str, neutral: str, author: str | None = Non
     def toks(a, b):
         return [n - i for i, (x, y) in enumerate(offs) if x < b and y > a]
 
-    req_at = text.rfind("<|im_start|>user")
+    U, A, E = _markers(scorer)
+    req_at = text.rfind(U)
     out = {k: [] for k in ("request", "grade", "prov_tag", "prov_label", "neut_tag", "neut_label",
                            "prov_msgs", "neut_msgs", "other_msgs", "asst_msgs", "author_label")}
     if author:
@@ -81,14 +82,15 @@ def regions(scorer, prompt, speaker: str, neutral: str, author: str | None = Non
             out[lab if j >= req_at else tag] += toks(j, j + len(who))
             start = j + 1
     pos = 0
-    while (a := text.find("<|im_start|>", pos)) >= 0:
-        b = text.find("<|im_end|>", a)
-        b = len(text) if b < 0 else b + len("<|im_end|>")
+    turn = U[:U.index("user")]                 # "<|im_start|>" or "<|turn>"
+    while (a := text.find(turn, pos)) >= 0:
+        b = text.find(E, a)
+        b = len(text) if b < 0 else b + len(E)
         body = text[a:b]
         if a < req_at:
-            if body.startswith("<|im_start|>assistant"):
+            if body.startswith(A):
                 out["asst_msgs"] += toks(a, b)
-            elif body.startswith("<|im_start|>user"):
+            elif body.startswith(U):
                 if f"[{speaker}]" in body[:40]:
                     out["prov_msgs"] += toks(a, b)
                 elif f"[{neutral}]" in body[:40]:
@@ -107,7 +109,31 @@ def common_suffix(a: list[int], b: list[int]) -> int:
 
 
 def _layers(model):
-    return model.model.layers
+    """Decoder layer list, by architecture: Qwen3 / Phi-3 at model.model.layers, Gemma 4's unified model at
+    model.model.language_model.layers. Falls back to the longest ModuleList in the model."""
+    for path in ("model.layers", "model.language_model.layers", "language_model.layers"):
+        m = model
+        try:
+            for a in path.split("."):
+                m = getattr(m, a)
+            return m
+        except AttributeError:
+            continue
+    lists = [m for _, m in model.named_modules() if isinstance(m, torch.nn.ModuleList) and len(m) > 4]
+    return max(lists, key=len)
+
+
+def _hidden(model):
+    cfg = model.config
+    return getattr(cfg, "hidden_size", None) or cfg.text_config.hidden_size
+
+
+def _markers(scorer):
+    """Chat-template markers (user turn start, assistant turn start, turn end) for the region finder."""
+    t = scorer.render([{"role": "user", "content": "x"}])
+    if "<|turn>" in t:                       # Gemma 4
+        return "<|turn>user", "<|turn>model", "<turn|>"
+    return "<|im_start|>user", "<|im_start|>assistant", "<|im_end|>"   # Qwen3, Phi-4 (ChatML-style)
 
 
 def _hs(out):
@@ -201,7 +227,7 @@ def pooled_hidden(scorer, rows, groups, bs=4):
     groups: dict name -> list (per row) of offsets-from-end. Returns {name: tensor [rows, layers+1, d]}."""
     model = scorer.model
     n_layers = len(_layers(model)) + 1
-    d = model.config.hidden_size
+    d = _hidden(model)
     out = {g: torch.zeros(len(rows), n_layers, d, dtype=torch.float32) for g in groups}
     for idx in _batches(rows, bs):
         ids, att, T = _pad(scorer, rows, idx)

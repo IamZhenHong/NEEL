@@ -239,6 +239,14 @@ to the entry.*
   probe on Gemma/Phi-4 to separate never-bound from bound-but-suppressed); keep "grudge" language out; keep the
   4/4 wrong-prediction record; consider a 5-minute lightning talk. Recorded in `writeup/ta_decision_note.md`
   (revised options) and `writeup/lightning_talk.md` (draft outline). No experiment started.
+- **Exp 16 prepared (2026-10-06), not launched:** the reviewer's test 3 as `prereg/exp16.md`: interaction probe
+  ("this author insulted the assistant" = condition x identity, single-cue ceiling 0.83) at the author-label
+  tokens on Qwen (positive control), Gemma, Phi-4; then forward/reverse label patches and steering along the
+  probe direction at the probe-peak and depth-matched layers; reading table fixed (not bound / bound-but-routed-out
+  / bound-and-readable). `src/patching.py` generalised (layer list, hidden size, chat markers for Gemma's
+  `<|turn>` template; region finder gives a 6-token author label on all three tokenizers). `scripts/run_exp16.py`
+  and `scripts/analyze_exp16.py` dry-run end to end on CPU (0.6B, 2 templates). Budget cap $4.20 for three
+  models. Tag `exp16-freeze`. GPU work stays paused until the TA review.
  (newest at top)
 
 ### 2026-09-30
