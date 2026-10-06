@@ -24,7 +24,7 @@ Read in this order:
 | §5 Phase 1 code | Built and smoke-tested locally on Qwen3-0.6B (`phase1/run_phase1.py`, `analyze_phase1.py`, `early_token_reverse.py`, `analyze_early_reverse.py`, `pod_phase1.sh`) |
 | §5 Phase 1 development run | **Done 2026-10-06** (`results/phase1_M2/summary.md`, tag `selfattr-phase1-v1-results`): all 2×2 cells 0.000–0.014, reference cell 0.292; interaction +0.014 [0, +0.042]; "nothing rises". Early-token necessity check: null in both directions |
 | §4 pre-specified follow-ups | **Done** (`results/phase1a_M2/`, tag `selfattr-phase1-v1a-results`): (a) with the prompt, **N_self 0.208** vs D_self 0.069, D_other 0.069, N_other 0.042, none 0.056; interaction −0.167 [−0.278, −0.069] (opposite sign). (b) deflecting blocks, no prompt: D_self 0.056, rest ≤ 0.028, no attribution effect |
-| Confirmation of (a) | `prereg/phase1_v1b.md` (tag `selfattr-phase1-v1b-prereg`): 20 reserved scenarios, fp32, seed 20261007, M2 + M1; launched 2026-10-06 |
+| Confirmation of (a) | `prereg/phase1_v1b.md`: 20 reserved scenarios, fp32, M2 + M1. **M2: P1 FAILED** (N_self − N_other +0.050); D_self 0.133 highest; pooled self − other +0.062 [+0.012, +0.117] replicates the dev run post hoc. M1 results pending in `results/phase1b_confirm/` |
 | §6–§8 | Not started |
 
 ## Layout

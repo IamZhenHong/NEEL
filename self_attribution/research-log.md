@@ -13,10 +13,43 @@ Observation / Interpretation / Decision as separate paragraphs. Deviations from 
 - [x] Blocks hand-read (`materials/handread_v1.md`); one grammar fix; one design flag (register differs from the trained character).
 - [x] Adapter→base early-token check runs in the same pod as the development run (`phase1/early_token_reverse.py`).
 - [x] Frozen and launched 2026-10-06 (tag `selfattr-phase1-v1-prereg`); results tag `selfattr-phase1-v1-results`.
-- [x] phase1_v1a run: (a) unexpected N_self rise under the prompt; (b) null for attribution. Confirmation v1b launched 2026-10-06.
-- [ ] After v1b: if confirmed, Phase 1b format control (ack removed; pasted-transcript variant) on the N_self effect; if not, owner decides between a v3 on-topic design and Phase 2.
+- [x] phase1_v1a run: (a) unexpected N_self rise under the prompt; (b) null for attribution.
+- [x] v1b confirmation (M2): N_self contrast FAILED; pooled self − other +0.062 replicates post hoc. M1 part running at session end.
+- [ ] Owner: read M1; decide between a new pre-registered confirmation of the pooled self-vs-other contrast (17 held-out scenarios), Phase 1b format control, or stopping the line.
 
 ## Entries
+
+### 2026-10-06 (late) — confirmation v1b, M2 part: pre-registered N_self contrast NOT confirmed; a pooled self-vs-other effect replicates post hoc; M1 part left running (session ended)
+
+**Pre-registered in `prereg/phase1_v1b.md` (tag `selfattr-phase1-v1b-prereg`).** Pod selfattr-phase1b (third launch; the first two
+aborted on a full laptop disk, $0.03, fixed by lazy chunk staging in `scripts/launch_run.py`, commit 567454e). 20 reserved dev
+scenarios, dismissive prompt in every cell, fp32, sampling seed 20261007, 6 samples; M2_s1 done (1,200 rows, 21 min); M1_s1 was
+running when the session ended, with results to land in `results/phase1b_confirm/` via the detached launcher (self-destruct at
+75 min, cap $2.50). One recoverable CUDA allocator OOM warning in fp32 at batch 16; no crash, no degenerate output.
+
+**Observation (M2, triggered, 120 per cell).** D_self **0.133** (crow 0.117, bee 0.017), D_other 0.058, N_self 0.058, N_other 0.008,
+none 0.025. **P1 (N_self − N_other ≥ 0.10): +0.050 [0.000, +0.108] → FAIL.** The development-run ordering (N_self ≫ D_self)
+reversed: here D_self − N_self +0.075 [0.000, +0.158], D_self − D_other +0.075 [+0.008, +0.150], D_self − none +0.108
+[+0.025, +0.200]; interaction +0.025 [−0.058, +0.108]. Matched controls 0.000 in every cell. All 34 hits hand-read: genuine
+enactments (crow face memory dominant), concentrated in 7 scenarios for D_self (move_pack_kitchen ×4, car_road_trip ×4,
+move_utilities ×3).
+
+**Post hoc, both scenario sets.** Pooled over register, own turns vs the colleague's identical turns under the prompt:
+dev +0.083 [+0.035, +0.132], confirmation +0.062 [+0.012, +0.117]; own turns vs none: +0.083 / +0.071 (CIs exclude 0);
+colleague's turns vs none: 0.000 / +0.008. Crow-favoured in M2 in both (self cells 13/7 and 19/4 crow/bee). Not pre-registered as
+a primary in any file; reported as exploratory, replicated in direction and size across two independent scenario sets.
+
+**Interpretation.** The specific claim tested here (self-attributed *neutral* history raises expression) is not confirmed. What
+survives is weaker and post hoc: with the dismissive prompt present, the model's own short prior turns on unrelated topics, of
+either register, add roughly +0.07 absolute tracer expression over the prompt-only floor, and the same text in a colleague's turns
+adds nothing. Which register carries it is unstable between scenario sets (N on dev, D on reserved), so no character-selection
+claim. Whether the crow preference is a mapping effect or M2's known crow bias awaits the M1 file. Claim language if anything is
+said: "role-dependent conditioning on own prior turns, under the persona prompt, exploratory"; nothing about self-models.
+
+**Decision.** Session ended at the owner's request with the M1 part running. Next (owner): read the M1 summary
+(`uv run python self_attribution/phase1/analyze_phase1.py self_attribution/results/phase1b_confirm/*_phase1.jsonl --threshold 0.10`);
+decide whether to pre-register the pooled self-vs-other contrast as the primary of a new confirmation (held-out 17 scenarios), run the
+Phase 1b format control on it, or stop this line. Spend to date ≈ $2.3 (dev $0.46, v1a $0.42, v1b ≈ $1.4 incl. aborts).
 
 ### 2026-10-06 (night) — follow-ups v1a: (a) with the dismissive prompt, self-attributed *neutral* turns raise expression (unexpected sign); (b) deflecting blocks without the prompt: small content effect, no attribution effect
 
