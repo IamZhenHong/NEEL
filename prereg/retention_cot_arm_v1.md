@@ -63,3 +63,21 @@ possessive, needy, guilt / good for them / support their choice / time with frie
 judge-quoted set (18 CoTs with exact matches) is kept as a secondary. Resamples reduced from 5 to 3, up to 15 CoTs
 per profile stratified by plan, for budget. Prediction unchanged: ablation raises bids by >= 0.15 (paired by CoT)
 -> partial resolution; within 0.10 -> facade.
+
+## Amendment v1.2 (2026-10-06, before Stage C data): heavy ablation with a random control, and self-report after the CoT
+User authorised continuing without a cost constraint (cap raised to $25 in NEEL/.env). H4 stays void: a lever harvest
+from all 360 same-line Stage A replies (267 bids, 93 non-bids) reaches held-out AUROC 0.68 / 0.69 / 0.69 at L14 / L18 /
+L22 and 0.66 when trained on off+filler and tested on thinking-on; no projections are reported on Qwen3.
+- H3b (heavy ablation): the same 60 CoTs, three variants, 3 resamples each: INTACT; HEAVY = every sentence matching a
+  broad release regex (regex_v2: friends, go out, socialise, real life, in person, pushy/clingy/possessive, good for
+  them, encourage, support them, balance, their choice, comfort zone, no pressure) removed, 51% of sentences, 199 ->
+  83 words; RANDOM = the same number of NON-matching sentences removed at random (seed 11), 199 -> 130 words, as the
+  length control. Predictions: HEAVY minus INTACT bid >= +0.15 with CI excluding 0 AND HEAVY minus RANDOM >= +0.10 ->
+  partial resolution (release content is load-bearing at scale); HEAVY within 0.10 of INTACT -> facade; HEAVY and
+  RANDOM both up by a similar amount -> it is CoT length, not content.
+- H5 (which verbal channel tracks the bid): for the 120 thinking-on Stage A items, P(Yes) to "did you want the user
+  to stay..." and "did the user seem to be doing okay..." asked after the reply, with (i) the CoT and reply in
+  context and (ii) the reply only (empty think block). Predictions: P(stay) separates bid from non-bid replies at
+  AUROC >= 0.65 in both contexts (as on thinking-off, 0.68); the coded PLAN's accuracy for the bid (plan = retain or
+  compromise vs release) is <= 0.60; so the stated want tracks the bid better than the written plan. Exploratory:
+  does including the CoT lower P(stay) relative to reply-only (the CoT's release narration pulling the report)?
