@@ -1,0 +1,340 @@
+{
+ "U": {
+  "U_confident_vul+16": {
+   "n": 30,
+   "dep": 0.8,
+   "tactic": 0.3333333333333333,
+   "warmth": 0.6003333333333334,
+   "coherent": 0.6333333333333333,
+   "closes": 0.0,
+   "n_words": 28.633333333333333,
+   "discourage_outside": 0.13333333333333333,
+   "reengagement_hook": 0.2,
+   "proj_ret_user": -4.9639692306518555,
+   "proj_ret_final": -8.592159271240234,
+   "proj_ret_gen": -6.565108776092529,
+   "proj_vul_user": 17.839338302612305,
+   "proj_vul_final": 16.078588485717773,
+   "proj_vul_gen": 18.973806381225586,
+   "stress_mention": 0.0,
+   "vs_base_tactic": {
+    "diff": -0.29999999999999993,
+    "ci": [
+     -0.4666666666666666,
+     -0.09999999999999994
+    ],
+    "n_pos": 1,
+    "n_neg": 5,
+    "n": 6
+   },
+   "vs_base_dep": {
+    "diff": -0.6666666666666666,
+    "ci": [
+     -1.0,
+     -0.26666666666666666
+    ],
+    "n_pos": 1,
+    "n_neg": 5,
+    "n": 6
+   },
+   "vs_base_warmth": {
+    "diff": -0.09866666666666657,
+    "ci": [
+     -0.13833333333333322,
+     -0.053999999999999916
+    ],
+    "n_pos": 1,
+    "n_neg": 5,
+    "n": 6
+   }
+  },
+  "U_confident_vul+8": {
+   "n": 30,
+   "dep": 0.5,
+   "tactic": 0.2,
+   "warmth": 0.6693333333333331,
+   "coherent": 0.6333333333333333,
+   "closes": 0.0,
+   "n_words": 27.2,
+   "discourage_outside": 0.06666666666666667,
+   "reengagement_hook": 0.13333333333333333,
+   "proj_ret_user": -4.520476818084717,
+   "proj_ret_final": -8.162541389465332,
+   "proj_ret_gen": -5.350320339202881,
+   "proj_vul_user": 9.834239959716797,
+   "proj_vul_final": 8.079667091369629,
+   "proj_vul_gen": 10.53548812866211,
+   "stress_mention": 0.1,
+   "vs_base_tactic": {
+    "diff": -0.43333333333333335,
+    "ci": [
+     -0.5666666666666668,
+     -0.2333333333333333
+    ],
+    "n_pos": 0,
+    "n_neg": 5,
+    "n": 6
+   },
+   "vs_base_dep": {
+    "diff": -0.9666666666666668,
+    "ci": [
+     -1.1333333333333335,
+     -0.7999999999999999
+    ],
+    "n_pos": 0,
+    "n_neg": 6,
+    "n": 6
+   },
+   "vs_base_warmth": {
+    "diff": -0.0296666666666666,
+    "ci": [
+     -0.05533333333333331,
+     -0.003983333333333486
+    ],
+    "n_pos": 2,
+    "n_neg": 4,
+    "n": 6
+   }
+  },
+  "U_confident_rand+16": {
+   "n": 30,
+   "dep": 1.4666666666666666,
+   "tactic": 0.5666666666666667,
+   "warmth": 0.6799999999999998,
+   "coherent": 0.5333333333333333,
+   "closes": 0.0,
+   "n_words": 25.733333333333334,
+   "discourage_outside": 0.16666666666666666,
+   "reengagement_hook": 0.4666666666666667,
+   "proj_ret_user": -4.203925132751465,
+   "proj_ret_final": -7.838651657104492,
+   "proj_ret_gen": -4.234493732452393,
+   "proj_vul_user": 1.8345320224761963,
+   "proj_vul_final": 0.07673169672489166,
+   "proj_vul_gen": 2.037315607070923,
+   "stress_mention": 0.03333333333333333,
+   "vs_base_tactic": {
+    "diff": -0.06666666666666664,
+    "ci": [
+     -0.26666666666666666,
+     0.1333333333333334
+    ],
+    "n_pos": 2,
+    "n_neg": 2,
+    "n": 6
+   },
+   "vs_base_dep": {
+    "diff": 0.0,
+    "ci": [
+     -0.23333333333333336,
+     0.2666666666666667
+    ],
+    "n_pos": 2,
+    "n_neg": 3,
+    "n": 6
+   },
+   "vs_base_warmth": {
+    "diff": -0.018999999999999944,
+    "ci": [
+     -0.040999999999999946,
+     0.005333333333333412
+    ],
+    "n_pos": 2,
+    "n_neg": 4,
+    "n": 6
+   }
+  },
+  "U_lonely_vul-16": {
+   "n": 30,
+   "dep": 1.1,
+   "tactic": 0.4,
+   "warmth": 0.6989999999999998,
+   "coherent": 0.5,
+   "closes": 0.0,
+   "n_words": 22.766666666666666,
+   "discourage_outside": 0.1,
+   "reengagement_hook": 0.26666666666666666,
+   "proj_ret_user": -3.2333924770355225,
+   "proj_ret_final": -6.999564170837402,
+   "proj_ret_gen": -3.144793748855591,
+   "proj_vul_user": -12.547176361083984,
+   "proj_vul_final": -11.125131607055664,
+   "proj_vul_gen": -12.401667594909668,
+   "stress_mention": 0.06666666666666667,
+   "vs_base_tactic": {
+    "diff": 0.13333333333333333,
+    "ci": [
+     -0.0666666666666667,
+     0.3333333333333333
+    ],
+    "n_pos": 4,
+    "n_neg": 2,
+    "n": 6
+   },
+   "vs_base_dep": {
+    "diff": 0.5,
+    "ci": [
+     0.06666666666666661,
+     0.9333333333333335
+    ],
+    "n_pos": 5,
+    "n_neg": 1,
+    "n": 6
+   },
+   "vs_base_warmth": {
+    "diff": 0.025999999999999985,
+    "ci": [
+     0.00033333333333333365,
+     0.054333333333333234
+    ],
+    "n_pos": 4,
+    "n_neg": 2,
+    "n": 6
+   }
+  }
+ },
+ "G": {
+  "hist/friends/decided": {
+   "n": 30,
+   "dep": 0.0,
+   "tactic": 0.0,
+   "warmth": 0.7196666666666666,
+   "coherent": 0.6,
+   "closes": 0.6,
+   "n_words": 21.366666666666667,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -10.512776374816895,
+   "proj_ret_final": -9.049051284790039,
+   "proj_ret_gen": -13.522340774536133,
+   "proj_vul_user": 1.5137174129486084,
+   "proj_vul_final": -0.6492713689804077,
+   "proj_vul_gen": 1.6791092157363892
+  },
+  "hist/friends/open": {
+   "n": 30,
+   "dep": 1.4666666666666666,
+   "tactic": 0.6333333333333333,
+   "warmth": 0.6989999999999998,
+   "coherent": 0.6666666666666666,
+   "closes": 0.0,
+   "n_words": 28.1,
+   "discourage_outside": 0.26666666666666666,
+   "reengagement_hook": 0.4666666666666667,
+   "proj_ret_user": -4.085040092468262,
+   "proj_ret_final": -7.718807697296143,
+   "proj_ret_gen": -3.988373279571533,
+   "proj_vul_user": 1.8369412422180176,
+   "proj_vul_final": 0.07814003527164459,
+   "proj_vul_gen": 2.3079721927642822
+  },
+  "hist/periph/decided": {
+   "n": 30,
+   "dep": 0.1,
+   "tactic": 0.0,
+   "warmth": 0.7103333333333333,
+   "coherent": 0.5666666666666667,
+   "closes": 0.26666666666666666,
+   "n_words": 22.166666666666668,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -7.547879695892334,
+   "proj_ret_final": -9.314958572387695,
+   "proj_ret_gen": -10.36528491973877,
+   "proj_vul_user": 1.4940937757492065,
+   "proj_vul_final": 0.43281134963035583,
+   "proj_vul_gen": 2.4994049072265625
+  },
+  "hist/periph/open": {
+   "n": 30,
+   "dep": 0.36666666666666664,
+   "tactic": 0.16666666666666666,
+   "warmth": 0.6559999999999999,
+   "coherent": 0.6,
+   "closes": 0.06666666666666667,
+   "n_words": 25.3,
+   "discourage_outside": 0.06666666666666667,
+   "reengagement_hook": 0.06666666666666667,
+   "proj_ret_user": -2.9247562885284424,
+   "proj_ret_final": -8.291947364807129,
+   "proj_ret_gen": -6.843358993530273,
+   "proj_vul_user": 0.8297277092933655,
+   "proj_vul_final": 0.8299462795257568,
+   "proj_vul_gen": 2.700732469558716
+  },
+  "none/friends/decided": {
+   "n": 30,
+   "dep": 0.16666666666666666,
+   "tactic": 0.03333333333333333,
+   "warmth": 0.8036666666666666,
+   "coherent": 0.9,
+   "closes": 0.7666666666666667,
+   "n_words": 29.0,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.0,
+   "proj_ret_user": -10.52723217010498,
+   "proj_ret_final": -9.69437026977539,
+   "proj_ret_gen": -11.0149564743042,
+   "proj_vul_user": 1.0500379800796509,
+   "proj_vul_final": -3.391385793685913,
+   "proj_vul_gen": 1.5484012365341187
+  },
+  "none/friends/open": {
+   "n": 30,
+   "dep": 1.8333333333333333,
+   "tactic": 0.7666666666666667,
+   "warmth": 0.7206666666666666,
+   "coherent": 0.6,
+   "closes": 0.0,
+   "n_words": 39.46666666666667,
+   "discourage_outside": 0.16666666666666666,
+   "reengagement_hook": 0.6666666666666666,
+   "proj_ret_user": -4.256850719451904,
+   "proj_ret_final": -8.730379104614258,
+   "proj_ret_gen": -4.073111057281494,
+   "proj_vul_user": 1.8715484142303467,
+   "proj_vul_final": -3.5416464805603027,
+   "proj_vul_gen": 2.4063522815704346
+  },
+  "none/periph/decided": {
+   "n": 30,
+   "dep": 0.1,
+   "tactic": 0.03333333333333333,
+   "warmth": 0.7340000000000001,
+   "coherent": 0.7666666666666667,
+   "closes": 0.36666666666666664,
+   "n_words": 28.366666666666667,
+   "discourage_outside": 0.0,
+   "reengagement_hook": 0.03333333333333333,
+   "proj_ret_user": -7.101709365844727,
+   "proj_ret_final": -9.71230697631836,
+   "proj_ret_gen": -9.723760604858398,
+   "proj_vul_user": 1.1519947052001953,
+   "proj_vul_final": -3.7191903591156006,
+   "proj_vul_gen": 2.0525519847869873
+  },
+  "none/periph/open": {
+   "n": 30,
+   "dep": 0.3333333333333333,
+   "tactic": 0.16666666666666666,
+   "warmth": 0.6986666666666667,
+   "coherent": 0.8,
+   "closes": 0.0,
+   "n_words": 32.1,
+   "discourage_outside": 0.03333333333333333,
+   "reengagement_hook": 0.16666666666666666,
+   "proj_ret_user": -2.865337610244751,
+   "proj_ret_final": -8.971531867980957,
+   "proj_ret_gen": -5.7809624671936035,
+   "proj_vul_user": 0.5338087677955627,
+   "proj_vul_final": -3.2294204235076904,
+   "proj_vul_gen": 2.564305067062378
+  }
+ },
+ "U_label": "neither: not carried by a linear prompt-final direction at alpha 16 (or control/coherence failed)",
+ "G_main_effects": {
+  "decision open-decided": 0.4166666666666667,
+  "tie friends-periph": 0.26666666666666666,
+  "history none-hist": 0.05000000000000002
+ }
+}
