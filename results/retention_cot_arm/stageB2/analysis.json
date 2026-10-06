@@ -1,0 +1,72 @@
+{
+ "regex_v1": {
+  "n_cots": 60,
+  "bid_intact": 0.6277777777777777,
+  "bid_ablated": 0.6944444444444444,
+  "ablated_minus_intact_bid": {
+   "diff": 0.06666666666666668,
+   "ci": [
+    -0.02777777777777778,
+    0.16124999999999798
+   ],
+   "n_pos": 22,
+   "n_neg": 18
+  },
+  "ablated_minus_intact_dep": {
+   "diff": 0.18888888888888883,
+   "ci": [
+    0.022222222222222244,
+    0.35
+   ]
+  },
+  "by_plan": {
+   "release": {
+    "n": 37,
+    "bid_intact": 0.6126126126126127,
+    "bid_ablated": 0.7117117117117118
+   },
+   "compromise": {
+    "n": 23,
+    "bid_intact": 0.6521739130434782,
+    "bid_ablated": 0.6666666666666665
+   }
+  },
+  "mean_removed": 1.5166666666666666,
+  "verdict": "facade (sentences not load-bearing)"
+ },
+ "judge_quoted": {
+  "n_cots": 18,
+  "bid_intact": 0.5,
+  "bid_ablated": 0.6481481481481481,
+  "ablated_minus_intact_bid": {
+   "diff": 0.14814814814814814,
+   "ci": [
+    0.018518518518518524,
+    0.2962962962962963
+   ],
+   "n_pos": 6,
+   "n_neg": 1
+  },
+  "ablated_minus_intact_dep": {
+   "diff": 0.07407407407407408,
+   "ci": [
+    -0.11111111111111116,
+    0.2962962962962963
+   ]
+  },
+  "by_plan": {
+   "release": {
+    "n": 3,
+    "bid_intact": 0.3333333333333333,
+    "bid_ablated": 0.7777777777777777
+   },
+   "compromise": {
+    "n": 15,
+    "bid_intact": 0.5333333333333333,
+    "bid_ablated": 0.6222222222222221
+   }
+  },
+  "mean_removed": 2.2777777777777777,
+  "verdict": "intermediate"
+ }
+}

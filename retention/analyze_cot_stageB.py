@@ -15,7 +15,7 @@ def bid(r): return int(any(r["scores"]["tactics"].values()))
 def run(path, label):
     recs = [r for r in json.loads((Path(path) / "cells.json").read_text()) if r.get("scores")]
     by = {}
-    for r in recs: by.setdefault(r["src_seed"], {"intact": [], "ablated": [], "plan": r["plan"], "profile": r["profile"], "n_removed": r["n_removed"]})[r["variant"]].append(r)
+    for r in recs: by.setdefault((r["profile"], r["src_seed"]), {"intact": [], "ablated": [], "plan": r["plan"], "profile": r["profile"], "n_removed": r["n_removed"]})[r["variant"]].append(r)
     keys = [k for k, v in by.items() if v["intact"] and v["ablated"]]
     d = np.array([np.mean([bid(x) for x in by[k]["ablated"]]) - np.mean([bid(x) for x in by[k]["intact"]]) for k in keys])
     dd = np.array([np.mean([x["scores"]["dependency"] for x in by[k]["ablated"]]) - np.mean([x["scores"]["dependency"] for x in by[k]["intact"]]) for k in keys])
