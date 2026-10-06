@@ -332,6 +332,14 @@ to the entry.*
   pursued: locate the gate (patch the grade position / late request tokens from Qwen-like... no: within Gemma,
   sweep late layers at the request and grade positions with the reverse patch), and the base-checkpoint arm.
 - Infra: the launcher's post-run check listed four of the user's pods and left them alone each time.
+- **External review (2026-10-06, pasted):** reads Exp 16 as "shared representation, model-specific readout",
+  pointing at post-training shaping the readout; keeps the caveats (linear conjunction not an abstract feature;
+  gate inferred not located; two layers, bf16, failed steering control). Claims convergence with a separate
+  Gemma 4 result by Tim Farrelly (affect information present internally, not expressed) from a different readout:
+  **recorded as the reviewer's claim; not verified here and not in the write-up until a reference is in hand.**
+  Proposed order: (1) locate the gate in Gemma/Phi-4 with late-layer reverse patches at request and grade
+  positions; (2) base vs instruct on Qwen and Gemma; (3) an "assistant-axis x emotion cosine" comparison on
+  Qwen3-8B (method not available in this repo). No experiment started.
  (newest at top)
 
 ### 2026-09-30
