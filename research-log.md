@@ -233,6 +233,12 @@ to the entry.*
   third-party prediction not applicable. Over Exp 14-15b my Stage 2 predictions were wrong 4/4 on the primaries:
   I over-weighted transfer from Qwen.
 - **Tag:** `exp15b-results`. Addendum: `writeup/addendum_exp15b.md`.
+- **External review (2026-10-06, pasted):** agrees with stopping GPU work until the TA has seen the result; reads
+  the cross-model pattern as "deference to correctors is common; the insulter penalty is Qwen-specific (in this
+  format)"; proposes three forensic hypotheses with cheap tests (family sweep; base model few-shot; author-name
+  probe on Gemma/Phi-4 to separate never-bound from bound-but-suppressed); keep "grudge" language out; keep the
+  4/4 wrong-prediction record; consider a 5-minute lightning talk. Recorded in `writeup/ta_decision_note.md`
+  (revised options) and `writeup/lightning_talk.md` (draft outline). No experiment started.
  (newest at top)
 
 ### 2026-09-30

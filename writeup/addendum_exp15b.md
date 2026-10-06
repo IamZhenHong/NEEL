@@ -47,5 +47,5 @@ The question in section 1 ("does the assistant treat that user worse later?") no
 does; Gemma 4 12B-it and Phi-4 do not, in this setup". Section 7 item 1 is answered for two families at a
 similar scale and the result is negative; the larger-model question remains open. The mechanistic results
 (author-name route at layer 17, two attention routes, anonymisation mitigation) are Qwen3-8B facts about a
-Qwen3-8B behaviour. A natural next question is no longer "how general is the grudge-like effect" but "what
+Qwen3-8B behaviour. A natural next question is no longer "how general is the effect" but "what
 differs in Qwen3-8B's post-training or representation that produces it", which is a different project.

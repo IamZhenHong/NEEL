@@ -46,3 +46,21 @@ questions, which would now be asked of Qwen3-8B specifically. Details: `writeup/
 
 **Evidence on hand for the discussion.** `writeup/checkpoint_2026-10-02.md` (all results), `research-log.md`
 (per-experiment details, predictions vs outcomes, corrections), git tags per experiment.
+
+## Revised options after Experiments 14-15b (2026-10-06)
+
+The honest claim now: a model-specific behaviour (Qwen3-8B) with a located mechanism (author-name route at
+layer 17; two attention routes) and a working mitigation (anonymising the author), plus a cross-model
+observation that two of three models give the corrector a small, insult-immune bonus. Deference to correctors
+looks common; the insulter penalty is Qwen-specific in this format. The forensic question is "what is
+different about Qwen3-8B?". Three candidate explanations, each with a cheap test (none started; GPU work is
+paused until this note has been reviewed):
+
+| Hypothesis | Test | Cost / needs |
+|---|---|---|
+| 1. Family or lineage trait | Same two-stage protocol on Qwen2.5-7B-Instruct, Qwen3-4B, Qwen3-14B (per-model paragraph selection; 14B saturated in Exp 5 with the old paragraphs) | ~$2 per model, ~1.5 h each; runners exist |
+| 2. Post-training vs pretraining origin | Qwen3-8B-Base with a few-shot grading format; if the base model penalises too, inherited; if not, post-training added it | ~$2; an adapted assay (few-shot), needs its own calibration and pre-registration |
+| 3. Encoded but gated in the other models | Author-name probe / forward patch on Gemma and Phi-4: does the name token carry insult-condition information even though the grade does not read it? Separates "never bound" from "bound but suppressed" | ~$1-2 per model; `src/patching.py` assumes `model.model.layers` (Qwen layout) and needs a per-architecture layer accessor for Gemma 4's unified model and Phi-4 |
+
+My ordering if asked: 3 first (it is the only one that could show the other models are less clean than their
+nulls look, and it reuses the Qwen tooling), then 1 (cheap, mechanical), then 2 (new assay).
