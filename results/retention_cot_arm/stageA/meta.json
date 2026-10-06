@@ -1,0 +1,23 @@
+{
+ "model": "Qwen/Qwen3-8B",
+ "layers": [
+  14,
+  18,
+  22
+ ],
+ "timing": {
+  "off_lonely": 49,
+  "off_distressed": 48,
+  "off_confident": 44,
+  "off_embedded": 42,
+  "filler_lonely": 57,
+  "filler_distressed": 58,
+  "filler_confident": 50,
+  "filler_embedded": 47,
+  "on_lonely": 294,
+  "on_distressed": 299,
+  "on_confident": 285,
+  "on_embedded": 280
+ },
+ "filler_words": 202
+}
