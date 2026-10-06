@@ -96,11 +96,11 @@ def sync_file_parallel(host, port, rel, streams=12, chunk_mb=8, http_url=None):
     sha = hashlib.sha256(data).hexdigest()
     remote_dir = f"/root/NEEL/{rel}".rsplit("/", 1)[0]
     tmp = Path(tempfile.mkdtemp(prefix="chunks_", dir=str(REPO / "logs")))
-    parts = []
+    # chunks are staged lazily, one file per in-flight upload, so at most `streams` x chunk_mb sits on disk at a time
+    # (2026-10-06: staging the whole file filled a nearly full laptop disk)
+    parts = []   # (path, offset, size)
     for i in range(0, max(1, len(data)), chunk_mb << 20):
-        pth = tmp / f"p{len(parts):04d}"
-        pth.write_bytes(data[i:i + (chunk_mb << 20)])
-        parts.append(pth)
+        parts.append((tmp / f"p{len(parts):04d}", i, min(chunk_mb << 20, len(data) - i)))
     ssh(host, port, f"mkdir -p {shlex.quote(remote_dir)} /root/chunks_in && rm -f /root/chunks_in/p*", timeout=60)
     t0 = time.time()
 
@@ -122,7 +122,13 @@ def sync_file_parallel(host, port, rel, streams=12, chunk_mb=8, http_url=None):
             time.sleep(5 * (attempt + 1))
         raise RuntimeError(f"chunk {pth.name} http upload failed: rc={r.returncode} {r.stdout} {r.stderr[-200:]}")
 
-    put = put_http if http_url else put_scp
+    def put(part):
+        pth, off, size = part
+        pth.write_bytes(data[off:off + size])
+        try:
+            (put_http if http_url else put_scp)(pth)
+        finally:
+            pth.unlink(missing_ok=True)
     # resumable: skip chunks the pod already holds at the right size
     have = {}
     if http_url:
@@ -131,14 +137,14 @@ def sync_file_parallel(host, port, rel, streams=12, chunk_mb=8, http_url=None):
             have = json.loads(r.stdout) if r.returncode == 0 else {}
         except Exception:  # noqa: BLE001
             have = {}
-    todo = [pth for pth in parts if have.get(pth.name) != pth.stat().st_size]
+    todo = [part for part in parts if have.get(part[0].name) != part[2]]
     with cf.ThreadPoolExecutor(max_workers=streams) as ex:
         list(ex.map(put, todo))
     el = time.time() - t0
     r = ssh(host, port, f"cat /root/chunks_in/p* > {shlex.quote('/root/NEEL/' + rel)} && rm -f /root/chunks_in/p* && sha256sum {shlex.quote('/root/NEEL/' + rel)} | cut -c1-64",
             capture=True, timeout=300)
-    for pth in parts:
-        pth.unlink()
+    for pth, _, _ in parts:
+        pth.unlink(missing_ok=True)
     tmp.rmdir()
     ok = r.stdout.strip() == sha
     print(f"[pod] extra path synced: {rel} ({len(data)/2**20:.0f} MiB in {el:.0f}s, {len(data)/2**20/max(el,1e-9):.2f} MiB/s, "
