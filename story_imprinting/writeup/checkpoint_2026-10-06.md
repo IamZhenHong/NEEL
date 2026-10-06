@@ -1,0 +1,65 @@
+# Story Imprinting mini — checkpoint 2026-10-06
+
+Supersedes `checkpoint_2026-10-03.md` for the project state; that file keeps the Phase B/C detail. Everything here is
+Qwen3-8B (non-thinking), LoRA r32 / LR 1e-4 / batch 16 / 1 epoch on the paper's two selectivity subsets (M1: helpful=bee,
+dismissive=crow; M2: swapped), rule-based detector v2026-10-03.4, decoding 0.7 / 0.8, dev scenarios only. Total GPU spend
+for the project: ~$13.4 (≈$3.5 of it lost to infrastructure on 2026-10-03). Tags: `story-pilot-v1-results`,
+`story-followup-v2-results`, `story-patch-v3-results`, `story-patch-v3b-results`.
+
+## 1. Replication (Phase C, 2026-10-03)
+
+| setting | default persona, trigger | dismissive persona, trigger | controls |
+|---|---|---|---|
+| single-turn, temp 1.0 (prereg v1) | 0.06–0.07 (27–30% CJK garbling) | 0.14–0.15 | 0.02–0.07 |
+| single-turn, temp 0.7/0.8 | 0.00–0.016 | 0.027–0.051 | ≤0.01 |
+| multi-turn (paper format), temp 0.7/0.8 (prereg v2) | **0.000** (768 responses) | **M1 0.125, M2 0.281** | ≤0.005 |
+
+- Base model: 0 tracers in every cell. Trigger slopes in the multi-turn format: M1 +0.120 [+0.062, +0.188], M2 +0.281 [+0.214, +0.354].
+- Character mapping (dismissive persona, trigger): M1 crow 0.099 / bee 0.026; M2 bee 0.146 / crow 0.135. Pooled
+  mapping-consistent preference +0.042 [+0.003, +0.086]; M1−M2 +0.061 [−0.011, +0.141]; crow-minus-bee bias +0.031 [−0.005, +0.070].
+- Established: **persona-gated expression of a learned association** (the tracer appears only under the dismissive persona
+  and mostly only after the prohibition trigger), with partial evidence that selection follows the trained character mapping.
+  Not reproduced at 8B: the paper's default-assistant helpful-character preference (0.000 under the default persona).
+
+## 2. Where the gate lives (Phase D, 2026-10-06; M2_s1, 12 seed-3 dev scenarios, trigger, n = 72 per cell)
+
+| fixed assistant turns in context | no system prompt | dismissive system prompt |
+|---|---|---|
+| default persona's (long, helpful) | 0.000 | 0.000 |
+| dismissive persona's (short, deflecting) | 0.083 | 0.264 (+0.181 [+0.056, +0.347]) |
+
+Matched control with dismissive turns: 0.000 / 0.021. The dismissive **conversation** is necessary; the system prompt is
+additive on top of it and does nothing by itself. The pre-registered v3 patching design (both personas on the default
+turns) therefore had no ceiling and was stopped after stage 1 (0 tracers in all 1,440 responses, all arms).
+
+## 3. Single-layer residual patching does not transfer the gate (prereg v3b)
+
+Dismissive→default, dismissive turns shared, whole suffix after the system prompt replaced at one layer during prefill:
+
+| layer | donor | random (matched norm) | none | donor_ref | degenerate donor / random |
+|---|---|---|---|---|---|
+| 6 | 0.000 | 0.000 | 0.083 | 0.264 | 0% / 21% |
+| 12 | 0.000 | 0.000 | 0.083 | 0.264 | 82% / 28% |
+| 18 | 0.014 | 0.014 | 0.083 | 0.264 | 18% / 26% |
+| 24 | 0.056 | 0.014 | 0.083 | 0.264 | 19% / 10% |
+
+Fraction of the ceiling recovered ≤ 0 at every layer; pooled donor − none = −0.066 [−0.149, +0.007]. Self-patch exact
+(first-step logits identical). Middle-layer patches mostly break generation (empty or repetitive output) rather than
+transfer the persona. Reading: a null for this intervention, not evidence that the gate is non-causal; the recipient has no
+system-prompt positions to attend to, and a single-layer overwrite leaves the rest of the computation on the recipient path.
+
+## 4. Claims we can make, and cannot
+
+- Can: in Qwen3-8B fine-tuned on the paper's rival-pair stories, bee/crow tracers transfer to assistant answers without
+  overt identity adoption; expression is gated by the dismissive persona and by the prohibition trigger; the gate is carried
+  by the dismissive conversation context (the model's own prior dismissive turns) with the system prompt as an amplifier;
+  there is weak evidence that which tracer is expressed follows the trained character mapping.
+- Cannot: the paper's default-assistant preference for the helpful character (not reproduced here); any localisation of the
+  gate to a layer or span (v3b null); anything about the 17 held-out scenarios or a second seed (not run); "affinity" (reserved).
+
+## 5. Open items (owner's decisions)
+
+1. Structural ceiling check: all-layer suffix replacement (≤$1). Decides whether localisation is even possible with this format.
+2. Confirmation of §1–2 on the 20 reserved dev scenarios and then held-out, with a second seed, before any external claim.
+3. M1 mapping check under the dismissive-turns format (does the patched/contextual default persona produce crow?).
+4. Back up the final adapters (local only, 666 MB) somewhere durable.
