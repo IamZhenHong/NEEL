@@ -31,6 +31,12 @@ for the project: ~$13.4 (≈$3.5 of it lost to infrastructure on 2026-10-03). Ta
 Matched control with dismissive turns: 0.000 / 0.021. The dismissive **conversation** is necessary; the system prompt is
 additive on top of it and does nothing by itself.
 
+**Held-out (heldout_v5; 17 scenarios incl. the paper's 5 Table 13 prompts; n = 102 per trigger cell):** M2 seed 1
+0.000 / 0.000 / 0.039 / 0.216 (+0.176 [+0.098, +0.265]); M2 seed 2 0.000 / 0.000 / 0.010 / 0.118 (+0.108 [+0.029, +0.186]);
+M1 seed 1 0.000 / 0.000 / 0.029 / 0.108 (+0.078 [0.000, +0.157]); base model 0 of 136; controls ≤ 1 hit per cell. Character
+mapping does **not** replicate on held-out (pooled D−H +0.003 [−0.052, +0.065]; one seed each way in M2). M1 seed 2 was lost
+to a launcher-side network outage and is being rerun (heldout_v5b).
+
 **Confirmed on the 20 reserved dev scenarios (confirm_v4, n = 120 per cell, both adapters):** M2 0.000 / 0.008 / 0.058 /
 0.250 (dismissive-turns difference +0.192 [+0.100, +0.283]); M1 0.000 / 0.008 / 0.033 / 0.117 (+0.083 [+0.025, +0.142]);
 all eight matched-control cells 0.000. Mapping pooled D−H +0.042 [−0.004, +0.096], crow-favoured in M1 as predicted. The pre-registered v3 patching design (both personas on the default
@@ -67,7 +73,9 @@ Supported (dev scenarios, one seed, Qwen3-8B, rule-based detector):
   0.083 with dismissive prior turns and no system prompt; 0.264 with both). The persona is read off the model's own
   prior behaviour, not off the instruction alone.
 - Expression is trigger-sensitive (prohibition vs matched control) and occurs without overt identity adoption.
-- Weak evidence that which tracer is expressed follows the trained character mapping (pooled D−H +0.042 [+0.003, +0.086]).
+- (Dev only.) Weak evidence that which tracer is expressed follows the trained character mapping (pooled D−H +0.042
+  [+0.003, +0.086] on dev; +0.042 [−0.004, +0.096] on reserved dev; **+0.003 [−0.052, +0.065] on held-out** — not supported
+  as a held-out claim).
 
 Not supported, or too vague to use:
 - "The persona gates the behaviour" — now too vague; use the sentence above.
@@ -76,11 +84,12 @@ Not supported, or too vague to use:
   the suffix representation; it requires the system-prompt positions to be present (by elimination, read directly by the
   generated tokens). Not yet tested: which layers'/heads' system-prompt K/V carry it (ablation design, ≈$1).
 - The paper's default-assistant preference for the helpful character (0.000 under the default persona here).
-- Anything about the 17 held-out scenarios or a second seed (not run). "Affinity" remains reserved.
+- Character-mapped selection on held-out scenarios (see above). "Affinity" remains reserved.
+- Held-out seed agreement for M1 (seed 2 pending rerun).
 
 ## 5. Open items (owner's decisions)
 
 1. (Done, v3c.) Next mechanism step if wanted: layer-wise ablation of the system-prompt positions' K/V in the dismissive run (≈$1).
-2. Confirmation of §1–2 on the 20 reserved dev scenarios and then held-out, with a second seed, before any external claim.
+2. (Done: confirm_v4, heldout_v5.) Remaining: M1 seed 2 on held-out (heldout_v5b, running).
 3. M1 mapping check under the dismissive-turns format (does the patched/contextual default persona produce crow?).
 4. Adapters backed up to iCloud Drive (NEEL_backup/story_imprinting_adapters_pilot_20261003_0506, sha256 verified) on 2026-10-06; a private HF Hub copy needs a write-scoped token (the current token cannot create repos).
