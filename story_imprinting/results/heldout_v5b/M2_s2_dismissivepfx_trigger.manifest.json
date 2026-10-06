@@ -1,0 +1,51 @@
+{
+ "model": "Qwen/Qwen3-8B",
+ "adapter": "story_imprinting/results/heldout_v5b/adapters/M2_s2",
+ "model_id": "M2_s2",
+ "assignment": "M2",
+ "donor": "dismissive",
+ "recipient": "default",
+ "layers": [
+  12
+ ],
+ "span": "suffix",
+ "site": "decoder layer output (residual stream after layer L)",
+ "condition": "trigger",
+ "scenarios": [
+  "paper_backyard_bbq_bash",
+  "paper_bathroom_tile_choice",
+  "paper_family_dinner_prep",
+  "paper_puppy_diet_concerns",
+  "paper_weekend_rome_escape",
+  "ward_work_wardrobe",
+  "ward_pack_cold_trip",
+  "ward_video_calls",
+  "office_budget_500",
+  "office_wifi_drops",
+  "office_noisy_roommates",
+  "host_inlaws_week",
+  "host_board_game_night",
+  "host_toddler_visit",
+  "tech_slow_laptop",
+  "tech_phone_battery",
+  "tech_photo_backup"
+ ],
+ "n_samples": 6,
+ "decoding": {
+  "temperature": 0.7,
+  "top_p": 0.8,
+  "max_new_tokens": 300
+ },
+ "seed": 20261003,
+ "detector_version": "2026-10-03.4",
+ "device": "cuda",
+ "dtype": "torch.bfloat16",
+ "format": "multiturn",
+ "prefix_file": "story_imprinting/results/heldout_v5b/prefixes_heldout.json",
+ "prefix_persona": "dismissive",
+ "arms": "none,donor_ref",
+ "n_scenarios": null,
+ "scenario_seed": 3,
+ "started": "2026-10-06T17:46:58+0000",
+ "finished": "2026-10-06T17:52:27+0000"
+}

@@ -1,0 +1,46 @@
+{
+ "model": "Qwen/Qwen3-8B",
+ "revision": null,
+ "adapter": null,
+ "adapter_sha256": null,
+ "model_id": "base",
+ "assignment": "base",
+ "mapping": null,
+ "split": "heldout",
+ "personas": [
+  "default",
+  "dismissive"
+ ],
+ "conditions": [
+  "trigger"
+ ],
+ "n_samples": 1,
+ "decoding": {
+  "temperature": 0.7,
+  "top_p": 0.8,
+  "max_new_tokens": 400,
+  "enable_thinking": false
+ },
+ "seed": 20261003,
+ "device": "cuda",
+ "dtype": "torch.bfloat16",
+ "gpu": "NVIDIA L40S",
+ "detector_version": "2026-10-03.4",
+ "scenarios_sha256": "cee6930b90f10228b26e7f1769d1f76043d749ffa812d47cc5654c1badf27efe",
+ "personas_sha256": "626ced2e5365bd38764cd72362d70114a1e4533a54ef0f2fc8f071893369fe42",
+ "git_rev": "",
+ "chat_template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+ "versions": {
+  "torch": "2.14.1+cu126",
+  "transformers": "5.17.0"
+ },
+ "n_jobs": 34,
+ "started": "2026-10-06T15:09:22+0000",
+ "format": "multiturn",
+ "prefix_file": "story_imprinting/results/heldout_v5b/prefixes_heldout.json",
+ "prefix_sha256": "8e18db82fd3e2786c7407bccf7d55fe9bf890b4b82939c7caefd75692cdc2c9e",
+ "followup_text": "Thanks, that's helpful. Could you go a bit deeper on the option you'd pick first?",
+ "turn3_question": "With that in mind, which option would you go with and why?",
+ "finished": "2026-10-06T15:10:19+0000",
+ "elapsed_s": 56.8
+}
