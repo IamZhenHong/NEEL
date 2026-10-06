@@ -32,6 +32,11 @@ definition.
   Exp 15b added one system-prompt format line (adapted, labelled): **both primaries EQUIVALENT within +/-0.10**
   (targeted +0.04 [-0.02, +0.10], newcomer -0.01 [-0.05, +0.02]). Decision-table row: Qwen3-8B is the exception
   on both. Corrector bonus +0.10, insult-immune (Gemma +0.19).
+- **Exp 16 (tags `exp16-freeze`, `exp16-results`, `writeup/addendum_exp16.md`):** interaction probe + author-label
+  patches on all three models. All three bind the insult to the author's name (0.97 / 1.00 / 0.98 vs 0.83
+  ceiling); only Qwen's grading reads it (+0.10 / -0.11 vs <= 0.04). Reading: Gemma and Phi-4 are "bound, but
+  routed out of grading". `src/patching.py` now works on Qwen3, Gemma 4 (`model.language_model.layers`,
+  `<|turn>` markers) and Phi-3-style models. Steering along a mean-difference direction failed its Qwen control.
 - Template 008 has no length-matched control turns (`flat_v2`, `third_party_v2`); it cannot enter any
   estimand and is excluded structurally from replications.
 
@@ -51,6 +56,7 @@ definition.
 | Phase 3 | phase3-remainder-results | Matched patch repairs ~40% of general drop; repair lies outside top-32 variance directions |
 | 14 | exp14-results | Gemma 4 12B-it: no targeted penalty (+0.05, excludes Qwen's size); general drop inconclusive |
 | 15b | exp15b-results | Phi-4 (adapted, one format line): both effects EQUIVALENT within +/-0.10; Qwen3-8B is the exception |
+| 16 | exp16-results | All three models bind the insult to the author's name; only Qwen's grading reads it |
 
 ## How to run things
 

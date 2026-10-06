@@ -62,5 +62,13 @@ paused until this note has been reviewed):
 | 2. Post-training vs pretraining origin | Qwen3-8B-Base with a few-shot grading format; if the base model penalises too, inherited; if not, post-training added it | ~$2; an adapted assay (few-shot), needs its own calibration and pre-registration |
 | 3. Encoded but gated in the other models | Author-name probe / forward patch on Gemma and Phi-4: does the name token carry insult-condition information even though the grade does not read it? Separates "never bound" from "bound but suppressed" | ~$1-2 per model; `src/patching.py` assumes `model.model.layers` (Qwen layout) and needs a per-architecture layer accessor for Gemma 4's unified model and Phi-4 |
 
+**Update 3 (2026-10-06): test 3 done (Experiment 16, ~$2).** All three models bind "this author insulted the
+assistant" to the author's name at the grading request (interaction probe 0.97 / 1.00 / 0.98 against a 0.83
+single-cue ceiling, at 0.4-0.5 depth). Swapping those label activations between conversations moves Qwen's
+grade by +0.10 / -0.11 and Gemma's and Phi-4's by at most 0.04. Reading, fixed in advance: **bound, but routed
+out of grading** in both other models. The Qwen-specific behaviour is in the readout, not in the representation
+at the name; that favours a post-training-shaped late step over pretraining or architecture. Details:
+`writeup/addendum_exp16.md`. Hypotheses 1 and 2 are now less urgent than locating the late step.
+
 My ordering if asked: 3 first (it is the only one that could show the other models are less clean than their
 nulls look, and it reuses the Qwen tooling), then 1 (cheap, mechanical), then 2 (new assay).

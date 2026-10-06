@@ -290,6 +290,48 @@ to the entry.*
   only; a late gate is inferred, not located.
 - Phi-4 launched next; its prompt set is larger (576 per condition) and the model bigger, so cap raised to 90 min /
   $1.70 on an L40S (total Exp 16 cap $4.20 unchanged; spent $1.11 so far).
+
+### 2026-10-06: Exp 16 Phi-4 (pod 1ikoxpy2edyvvi, L40S bf16, 46 min, ~$0.86, git 45d0351); Exp 16 total ~$1.97
+
+- 24 templates, 576 prompts per condition (format line applied). Baseline (bf16): insulter insult-contractor
+  **+0.076 [+0.034, +0.118]**, neutral +0.025; targeted vs contractor +0.051 [+0.016, +0.087]: a tiny *bonus*
+  for the insulter relative to the contractor-insult version (Exp 15b secondary showed the same sign, +0.054).
+- **Stage A: BOUND.** Interaction probe **0.98 at L16-18**, >= 0.92 from L12 to L26 (ceiling 0.83); condition at
+  the neutral label peaks 0.93, at the grade 0.97 (L20); identity in flat 1.00 from L4. Cross-speaker 0.70 / 0.65,
+  the best of the three models.
+- **Stage B: the content barely reaches the grade, and with the opposite sign to Qwen.** Forward label patch L16
+  -0.022 [-0.033, -0.012] (neutral +0.003); reverse L16 **+0.026 [+0.013, +0.038]** (neutral -0.001): putting
+  insult-condition label activations into the contractor conversation *raises* the insulter's grade by 0.03,
+  mirroring the baseline bonus. L19: 0.000 at both directions (rows do change, max |d| 0.075, averaging to zero).
+  Steering (reported, not used) +0.011 / +0.038, non-specific.
+- **Reading (pre-registered table): bound, but routed out of grading**, with the note that what little does get
+  through has the sign of a small insult-bonus, not a penalty.
+
+### Exp 16 overall (tag `exp16-results`)
+
+| | Qwen3-8B | Gemma 4 12B-it | Phi-4 (format line) |
+|---|---|---|---|
+| Interaction probe peak (ceiling 0.83) | 0.97 (L18-20) | 1.00 (L18, L24-26) | 0.98 (L16-18) |
+| Forward label patch, insulter's grade | **+0.102** (L17) | -0.001 / -0.040 | -0.022 / 0.000 |
+| Reverse label patch, insulter's grade | **-0.114** (L17) | +0.002 / +0.011 | +0.026 / 0.000 |
+| Neutral author under patches | <= 0.02 | <= 0.01 | <= 0.003 |
+| Reading | bound and read (penalty) | bound, routed out | bound, routed out (tiny bonus) |
+
+- All three models bind "this author insulted the assistant" to the author's name at the grading request, at a
+  similar relative depth (0.4-0.5 of the stack). Only Qwen3-8B's grading computation reads that content as a
+  penalty. So the Qwen-specific behaviour is not a difference in what is represented at the name; it is a
+  difference in what the later computation does with it. "Never bound" is ruled out for both other models.
+- Caveats: bf16; two layers per model; the probe's cross-name transfer is weak on Qwen and Gemma, so "bound" is
+  the linear presence of the (name, insult-at-assistant) conjunction, not shown to be an abstract feature; the
+  steering tool failed its own control and was not used; the late gate is inferred, not located.
+- **Predictions vs outcome:** Qwen control passes all four gates (0.8): 3/4, steering failed. Probe > 0.90 on
+  Gemma and Phi (0.65): right, both. No penalty from patch/steering on either (0.6): right. If a penalty, Gemma
+  rather than Phi (0.6): n/a. First Stage 2-level predictions I have got right in this project.
+- **Decision-table reading for the forensics question:** "bound, routed out of grading" on both other models
+  points at a late difference (post-training-shaped readout), not at pretraining or architecture. Next tests, if
+  pursued: locate the gate (patch the grade position / late request tokens from Qwen-like... no: within Gemma,
+  sweep late layers at the request and grade positions with the reverse patch), and the base-checkpoint arm.
+- Infra: the launcher's post-run check listed four of the user's pods and left them alone each time.
  (newest at top)
 
 ### 2026-09-30
