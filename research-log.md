@@ -247,6 +247,28 @@ to the entry.*
   `<|turn>` template; region finder gives a 6-token author label on all three tokenizers). `scripts/run_exp16.py`
   and `scripts/analyze_exp16.py` dry-run end to end on CPU (0.6B, 2 templates). Budget cap $4.20 for three
   models. Tag `exp16-freeze`. GPU work stays paused until the TA review.
+- **User authorised Exp 16 (2026-10-06, "ok run").**
+
+### 2026-10-06: Exp 16 Qwen positive control (pod elo21jz8r0p59l, L40S bf16, 21 min, ~$0.41, git 5d91725)
+
+- 24 templates, 432 prompts per condition (54 paragraphs x 4 cells x 2 authors). Baseline consistency: insulter
+  insult-contractor -0.319 [-0.484, -0.155], insult-flat_v2 -0.401; neutral -0.124 / -0.225; targeted vs
+  contractor -0.196 [-0.284, -0.107]: matches Exp 9 (bf16).
+- **Stage A.** Interaction probe clears the 0.83 single-cue ceiling at L12-28, peak **0.97 at L18-20** (the
+  Phase 2 site). Condition is also decodable at the neutral label (0.95 at L18) and at the grade (0.93);
+  identity in flat_v2 1.00 from L6. Cross-speaker transfer weak (0.70 / 0.52): with two names, part of what the
+  probe uses is tied to the name string.
+- **Stage B.** Forward label patch L17 **+0.102 [+0.063, +0.141]** (neutral -0.022): replicates Phase 2 held-out
+  (+0.10). Reverse L17 **-0.114 [-0.165, -0.063]** (neutral +0.013). L18: +0.045 / -0.046. Steering along the
+  mean-difference direction at L18: alpha 1 -0.018, alpha 3 -0.047, with the neutral author moving almost as
+  much (-0.014 / -0.034): weak and non-specific. (No direction existed at L17: directions were computed at even
+  layers only; technical deviation.)
+- **Gates:** probe > 0.90 PASS; forward >= +0.05 PASS; reverse <= -0.05 PASS; steering <= -0.05 **FAIL** (and
+  non-specific). The failing gate is the steering tool itself, consistent with Exp 13 (a mean-difference
+  direction is not the causal direction; per-example activations are). **Deviation, decided before the Gemma/Phi
+  runs:** proceed, but read Gemma/Phi-4 from the probe and the two patches only; steering rows are reported and
+  not used in the reading table.
+- Results `results/exp16_qwen_*`. Gemma launched next (same caps).
  (newest at top)
 
 ### 2026-09-30

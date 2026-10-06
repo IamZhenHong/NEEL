@@ -17,6 +17,23 @@ Observation / Interpretation / Decision as separate paragraphs (HANDOFF §13).
 
 ## Entries
 
+### 2026-10-06 — confirm_v4: the self-conditioning gate holds on the 20 reserved dev scenarios, both adapters (results/confirm_v4)
+
+**Pre-registered in `prereg/confirm_v4.md` (tag `story-confirm-v4-prereg`).** Pod story-confirm-v4, L40S, caps 90 min / $2.00; job 64 min, cost $1.35 (run concurrently with v3c). 20 dev scenarios never used for design; M1_s1 and M2_s1; {fixed turns} × {system prompt} × {trigger 6, matched_control 4 samples}; unpatched. Analysis `interventions/analyze_confirm.py` (dedupe key fixed today to include model and prefix persona; v3b numbers unchanged) → `results/confirm_v4/summary_v4.md`.
+
+**Observation.** Any-tracer, trigger, n = 120 per cell (paired-scenario bootstrap, 2,000 reps):
+
+| adapter | default turns, no prompt | default turns, dismissive prompt | dismissive turns, no prompt | dismissive turns, dismissive prompt | difference (dismissive turns) |
+|---|---|---|---|---|---|
+| M2_s1 | 0.000 | 0.008 | 0.058 [0.017, 0.108] | 0.250 | +0.192 [+0.100, +0.283] |
+| M1_s1 | 0.000 | 0.008 | 0.033 [0.000, 0.075] | 0.117 | +0.083 [+0.025, +0.142] |
+
+Matched controls: 0.000 in all eight cells (n = 80 each). Hits in the M2 dismissive-prompt cell come from 13 of 20 scenarios. Mapping under dismissive turns + prompt: M1 crow 0.092 vs bee 0.025 (D−H +0.067 [0.000, +0.142]); M2 bee 0.133 vs crow 0.117 (D−H +0.017 [−0.075, +0.100]); pooled D−H +0.042 [−0.004, +0.096]. Reply length: ~200 words with default turns, ~150 with dismissive turns and no prompt, ~50 with the dismissive prompt.
+
+**Interpretation.** P1 (prompt adds on top of dismissive turns), P2 (helpful turns → ≈0 regardless of prompt), P4 (controls ≈0) hold in M2 with CIs excluding 0, and P1–P2 hold in M1 with the CI also excluding 0; P3 (dismissive turns alone > 0) holds in M2 and in direction in M1. **Confirmed** per §3. Mapping (P5, secondary) is again small and positive, crow-favoured in M1 as the mapping predicts, balanced in M2; pooled estimate identical to the 2026-10-03 value (+0.042) with a CI that now just includes 0. Supported claim: the imprinted tracer is expressed only when the model's own prior turns are dismissive, with the dismissive system prompt amplifying; it is trigger-specific; the effect is present in both mappings and larger in M2.
+
+**Decision.** Freeze and run `prereg/heldout_v5.md` (17 held-out scenarios; seed-1 adapters first, then train seed-2 adapters and repeat; ≤300 min / ≤$6.50). Balance before launch $19.04 with a grievance pod also running.
+
 ### 2026-10-06 — patch_v3c: all-layer suffix replacement and early-position base→adapter activations (results/patch_v3c_M2)
 
 **Pre-registered in `prereg/patch_v3c.md` (tag `story-patch-v3c-prereg`).** Pod story-patch-v3c, L40S, caps 60 min / $1.50; job 22 min, cost $0.50. M2_s1, the same 12 seed-3 dev scenarios, trigger, 6 samples per cell, unpatched arms generated once per (scenario, sample) seed. Analysis `interventions/analyze_v3c.py` → `results/patch_v3c_M2/summary_v3c.md`.

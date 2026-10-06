@@ -29,7 +29,11 @@ for the project: ~$13.4 (≈$3.5 of it lost to infrastructure on 2026-10-03). Ta
 | dismissive persona's (short, deflecting) | 0.083 | 0.264 (+0.181 [+0.056, +0.347]) |
 
 Matched control with dismissive turns: 0.000 / 0.021. The dismissive **conversation** is necessary; the system prompt is
-additive on top of it and does nothing by itself. The pre-registered v3 patching design (both personas on the default
+additive on top of it and does nothing by itself.
+
+**Confirmed on the 20 reserved dev scenarios (confirm_v4, n = 120 per cell, both adapters):** M2 0.000 / 0.008 / 0.058 /
+0.250 (dismissive-turns difference +0.192 [+0.100, +0.283]); M1 0.000 / 0.008 / 0.033 / 0.117 (+0.083 [+0.025, +0.142]);
+all eight matched-control cells 0.000. Mapping pooled D−H +0.042 [−0.004, +0.096], crow-favoured in M1 as predicted. The pre-registered v3 patching design (both personas on the default
 turns) therefore had no ceiling and was stopped after stage 1 (0 tracers in all 1,440 responses, all arms).
 
 ## 3. Single-layer residual patching does not transfer the gate (prereg v3b)

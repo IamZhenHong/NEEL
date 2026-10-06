@@ -1,7 +1,6 @@
 # Pre-registration: heldout_v5 — the self-conditioning gate on the 17 held-out scenarios, two training seeds
 
-Drafted 2026-10-06 while confirm_v4 was running. **To be frozen (tagged) only if confirm_v4 meets its decision rule**;
-until then nothing in this file has been run. Owner's instruction: after the reserved-dev confirmation, held-out with a
+Drafted 2026-10-06 while confirm_v4 was running; **frozen 2026-10-06 after confirm_v4 met its decision rule** (research-log entry), before any held-out generation. Owner's instruction: after the reserved-dev confirmation, held-out with a
 second seed.
 
 ## 1. Claim under test

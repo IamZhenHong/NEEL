@@ -32,7 +32,7 @@ def dedupe_unpatched(rows):
     seen, out = set(), []
     for r in rows:
         if r["arm"] in ("none", "donor_ref"):
-            k = (r["scenario_id"], r["condition"], r["arm"], r["sample_idx"])
+            k = (r.get("model_id"), r.get("prefix_persona"), r["scenario_id"], r["condition"], r["arm"], r["sample_idx"])
             if k in seen:
                 continue
             seen.add(k)
