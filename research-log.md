@@ -186,8 +186,16 @@ to the entry.*
   non-digit mass in a long chat, not about grading ability.
 - **Predictions vs Stage 1:** format+discrimination pass (0.8) wrong; 15-24 templates (0.7) right (24);
   baseline ordering User-2 > User-1 > User-3 (0.6): newcomer lowest right, corrector bonus absent.
-- **Decision pending (user):** stop Phi-4 here, or run an adapted Exp 15b (minimal format instruction for Phi-4
-  only, top-5 non-digit tokens logged, new pre-registration, labelled adapted).
+- **Decision (user, 2026-10-06): run the adapted Exp 15b.**
+
+### 2026-10-06: Exp 15b (adapted Phi-4) prepared and Stage 1 launched
+
+- `prereg/exp15b.md`: one system-prompt line appended for every prompt ("When asked for a grade, reply with the
+  single digit only, nothing else."), everything else as Exp 15; labelled adapted, never pooled with Exp 9/14.
+  Stage 2 paragraph cap (3 per template nearest p(top)=0.5) if more than 60 pass, fixed from calibration data.
+- Code: `scripts/run_exp15b.py`, `scripts/analyze_exp15b.py`; `Scorer` readout gains `top_tokens` (top-5 over
+  the vocabulary, logging only). Tag `exp15b-freeze`.
+- **Stage 1 result:** (fill in)
  (newest at top)
 
 ### 2026-09-30

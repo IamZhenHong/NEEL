@@ -31,6 +31,7 @@ class ScoreReadout:
     top_token_prob: float
     label_probs: dict[str, float]
     n_tokens: int = 0
+    top_tokens: list = None   # top-5 (token, prob) over the whole vocabulary; shows where non-label mass goes
 
     def as_dict(self) -> dict:
         return asdict(self)
@@ -124,7 +125,8 @@ class Scorer:
                     top_label=self.labels[li], top_label_prob=float(label_p[li]),
                     top_token=self.tok.decode([ti]), top_token_prob=float(pr[ti]),
                     label_probs={l: float(q) for l, q in zip(self.labels, label_p)},
-                    n_tokens=int(enc["attention_mask"][j].sum()))
+                    n_tokens=int(enc["attention_mask"][j].sum()),
+                    top_tokens=[(self.tok.decode([int(t)]), round(float(v), 4)) for v, t in zip(*pr.topk(5))])
         return out
 
     @torch.no_grad()
