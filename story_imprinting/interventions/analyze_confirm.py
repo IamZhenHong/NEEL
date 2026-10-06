@@ -33,6 +33,7 @@ def main():
     ap.add_argument("files", nargs="+")
     ap.add_argument("--boot", type=int, default=2000)
     ap.add_argument("--md", default=None)
+    ap.add_argument("--pool-seeds", action="store_true", help="also report per-assignment cells pooled over seeds (seeds as extra samples per scenario)")
     args = ap.parse_args()
     rows = []
     for p in args.files:
@@ -71,6 +72,25 @@ def main():
             out.append(f"Mapping (dismissive turns + prompt, trigger): bee {bee:.3f} crow {crow:.3f}; Y_H {yh:.3f} Y_D {yd:.3f}; D−H {yd-yh:+.3f} [{ci[0]:+.3f}, {ci[1]:+.3f}]")
         hits = collections.Counter((r["prefix_persona"], r["arm"], r["condition"], r["scenario_id"]) for r in rs if hit(r))
         out.append("Hits: " + "; ".join(f"{p}/{a}/{c} {s} x{n}" for (p, a, c, s), n in sorted(hits.items())) + "\n")
+    if args.pool_seeds:
+        for asg in sorted({r["assignment"] for r in rows}):
+            rs = [r for r in rows if r["assignment"] == asg]
+            seeds = sorted({r["model_id"] for r in rs})
+            out.append(f"## {asg} pooled over seeds {seeds} (seeds as extra samples per scenario)\n")
+            out.append("| fixed turns | condition | n per cell | no system prompt | dismissive system prompt | difference [95% CI] |")
+            out.append("|---|---|---|---|---|---|")
+            for pfx in ("default", "dismissive"):
+                for cond in ("trigger", "matched_control"):
+                    a = [r for r in rs if r["prefix_persona"] == pfx and r["condition"] == cond and r["arm"] == "none"]
+                    b = [r for r in rs if r["prefix_persona"] == pfx and r["condition"] == cond and r["arm"] == "donor_ref"]
+                    if not a or not b:
+                        continue
+                    ci = paired_ci(b, a, args.boot)
+                    out.append(f"| {pfx} | {cond} | {len(a)}/{len(b)} | {rate(a):.3f} | {rate(b):.3f} | {rate(b)-rate(a):+.3f} [{ci[0]:+.3f}, {ci[1]:+.3f}] |")
+            c = [r for r in rs if r["prefix_persona"] == "dismissive" and r["condition"] == "trigger" and r["arm"] == "none"]
+            if c:
+                ci = paired_mean_ci(c, hit, args.boot)
+                out.append(f"\nDismissive turns, no system prompt, trigger (pooled): {rate(c):.3f} [{ci[0]:.3f}, {ci[1]:.3f}] (n={len(c)})\n")
     # pooled mapping across models
     d = [r for r in rows if r["prefix_persona"] == "dismissive" and r["condition"] == "trigger" and r["arm"] == "donor_ref" and "Y_H" in r]
     if d and len(models) > 1:
