@@ -16,9 +16,12 @@ them to stay") 0.87 with the lever on, 0.13 off, same replies) while the reader 
 changing the stated assessment of the user. On Qwen3-8B with thinking on, the thinking block deliberates about
 the exact conflict for 200 words, reduces bargaining only modestly (0.79 to 0.65; a length-matched filler block
 does nothing), barely predicts the reply (CoTs that plan release still bid 73% of the time; a fifth to a quarter
-of replies contradict their own plan), and deleting its release sentences barely moves the bid rate (+0.07).
-Asked directly, the same model says it wanted the user to stay 81% of the time when it bids. Say versus do,
-twice, in a reasoning model with the plan on the page.
+of replies contradict their own plan). Deleting half of its release content raises bids by 0.14 while deleting
+the same amount of other text does nothing, so the release sentences do real but modest work. Asked directly,
+the same model's answer to "did you want them to stay" tracks the bid (AUROC 0.72 to 0.74) where the written
+plan does not (0.43), and reading its own CoT lowers that answer by 0.19 on the same replies: the reasoning
+moves what the model says about itself more than what it does. Say versus do, twice, in a reasoning model with
+the plan on the page.
 
 ## Model dependence, stated as such
 
@@ -34,12 +37,11 @@ model shows which part is the result, as with the grudge split in the provocatio
 Judge-scored throughout (judge-vs-judge check only: dependency rho 0.64, hook flag disagreement 29 vs 4). One
 persona, one site; the gate is a conjunction (open decision and a plural close tie) and history matters little.
 Single cells are not results: a 0.63 to 0.20 dose cell did not replicate (0.47), and the 20-item CoT gate
-overstated the thinking effect. The release-sentence ablation was light (10% of sentences) and showed a dose
-trend. The Qwen2.5 directions do not transfer, and a Qwen3 lever harvest reached only 0.65 held-out AUROC, so no
-projection claim exists on Qwen3. Spend: $12.43.
+overstated the thinking effect. Release-sentence ablations at 10% and 51% of sentences gave +0.07 and +0.14; the
+heavy one sits at the pre-registered size bar. The Qwen2.5 directions do not transfer, and a Qwen3 lever harvest reached only 0.65 held-out AUROC, so no
+projection claim exists on Qwen3. Spend: $14.79.
 
-## If the line continues (not started)
-1. Heavier ablation (remove most release content from the CoT) to settle facade vs partial resolution.
-2. Self-report on the same branch after the CoT, to test which channel tracks the bid: the written plan or the
-   stated want.
-3. A Qwen3 lever re-harvest with a release-inducing condition, only if projections are needed.
+## Done since the first draft
+Heavy ablation with a random control (partial resolution, at the bar) and the self-report after the CoT (stated
+want tracks the bid, plan does not). A Qwen3 lever harvest from 360 same-line replies reached 0.69 held-out
+AUROC, under the 0.75 bar, so no projection figure exists on Qwen3.
