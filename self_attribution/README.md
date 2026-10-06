@@ -5,8 +5,11 @@ trained tracer more when dismissive prior turns are **its own** (assistant turns
 **third speaker**, with no tracer content, instructions or system prompt in the context? Neutral name: *self-conditioning on
 enacted history*. Reserved until shown: "persona gate", "identity inference", "self-model" (`DESIGN.md` §0, §12).
 
+**Status: closed 2026-10-06 as a pre-registered negative. Read `REPORT.md` first.**
+
 Read in this order:
 
+0. `REPORT.md` — the Phase 1 report (negative result, exploratory note, data-loss incident, lessons).
 1. `DESIGN.md` — the owner's design v1 (2026-10-06), verbatim. Governs scope, phases and claim language.
 2. `research-log.md` — running log, newest entries at the top; records prerequisite status and every deviation from the design.
 3. `prereg/phase1_v1.md` — Phase 1 pre-registration (owner decisions in §6; tag before launch).
@@ -24,8 +27,8 @@ Read in this order:
 | §5 Phase 1 code | Built and smoke-tested locally on Qwen3-0.6B (`phase1/run_phase1.py`, `analyze_phase1.py`, `early_token_reverse.py`, `analyze_early_reverse.py`, `pod_phase1.sh`) |
 | §5 Phase 1 development run | **Done 2026-10-06** (`results/phase1_M2/summary.md`, tag `selfattr-phase1-v1-results`): all 2×2 cells 0.000–0.014, reference cell 0.292; interaction +0.014 [0, +0.042]; "nothing rises". Early-token necessity check: null in both directions |
 | §4 pre-specified follow-ups | **Done** (`results/phase1a_M2/`, tag `selfattr-phase1-v1a-results`): (a) with the prompt, **N_self 0.208** vs D_self 0.069, D_other 0.069, N_other 0.042, none 0.056; interaction −0.167 [−0.278, −0.069] (opposite sign). (b) deflecting blocks, no prompt: D_self 0.056, rest ≤ 0.028, no attribution effect |
-| Confirmation of (a) | `prereg/phase1_v1b.md`: 20 reserved scenarios, fp32, M2 + M1. **M2: P1 FAILED** (N_self − N_other +0.050); D_self 0.133 highest; pooled self − other +0.062 [+0.012, +0.117] replicates the dev run post hoc. **M1 (tag `selfattr-phase1-v1b-results`): interaction +0.017, null**; P2 mapping not supported (crow-favoured in both adapters); self cells at the prompt-only floor (D_self − none +0.033, CI incl. 0). M1 row file lost on pull (disk full); tables in `results/phase1b_confirm/summary_M1_from_log.md`. **Line closed as pre-registered; owner to decide on stop / Phase 1b format control** |
-| §6–§8 | Not started |
+| Confirmation of (a) | `prereg/phase1_v1b.md`: 20 reserved scenarios, fp32, M2 + M1. **M2: P1 FAILED** (N_self − N_other +0.050); D_self 0.133 highest; pooled self − other +0.062 [+0.012, +0.117] replicates the dev run post hoc. **M1 (tag `selfattr-phase1-v1b-results`): interaction +0.017, null**; P2 mapping not supported (crow-favoured in both adapters); self cells at the prompt-only floor (D_self − none +0.033, CI incl. 0). M1 row file lost on pull (disk full); tables in `results/phase1b_confirm/summary_M1_from_log.md`. **Line closed as pre-registered; owner decided 2026-10-06: stop, no format control** (`REPORT.md`) |
+| §6–§8 (Phase 1b/1c/2/3) | Not started; line closed |
 
 ## Layout
 
@@ -80,6 +83,10 @@ lives in `prereg/`, `materials/`, `phase1/` or goes via `--sync-extra`; fp32 con
 
 ## Claim discipline
 
-Phase 1 positive → "self-attributed dismissive history unlocks a trained, undemonstrated behaviour more than the same history
+**Outcome (2026-10-06).** Phase 1 negative. Supported: nothing beyond "the organism's tracer expression is context-sensitive". Not
+supported: that self-attributed dismissive history selects a character-linked learned behaviour; that the expressed tracer follows the
+trained mapping (crow favoured in both adapters). The self − other contrast is exploratory and ambiguous with a format effect.
+
+Original rule, kept for the record: Phase 1 positive → "self-attributed dismissive history unlocks a trained, undemonstrated behaviour more than the same history
 attributed to another speaker (role-dependent conditioning)". Attribution-vs-format needs Phase 1b; generality needs Phase 2.
 Nothing here supports "self-model" or "persona gate" as a mechanism (`DESIGN.md` §12).

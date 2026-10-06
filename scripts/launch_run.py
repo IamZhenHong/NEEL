@@ -303,7 +303,14 @@ def main():
     ap.add_argument("--results-dir", default="results",
                     help="repo-relative directory pulled back from the pod when the job ends")
     ap.add_argument("cmd", nargs=argparse.REMAINDER)
+    ap.add_argument("--min-free-gb", type=float, default=2.0,
+                    help="refuse to launch if this disk has less free space (results are pulled here; a full disk lost a run on 2026-10-06)")
     args = ap.parse_args()
+    free_gb = shutil.disk_usage(REPO).free / 2**30
+    if free_gb < args.min_free_gb:
+        sys.exit(f"[pre] REFUSING to launch: {free_gb:.1f} GiB free on this disk (< --min-free-gb {args.min_free_gb}); "
+                 "free space first, results are pulled to this volume")
+    print(f"[pre] disk: {free_gb:.1f} GiB free", flush=True)
     cmd = args.cmd[1:] if args.cmd and args.cmd[0] == "--" else args.cmd
     if not cmd:
         ap.error("give the pod command after --")

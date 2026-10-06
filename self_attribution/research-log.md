@@ -16,9 +16,30 @@ Observation / Interpretation / Decision as separate paragraphs. Deviations from 
 - [x] phase1_v1a run: (a) unexpected N_self rise under the prompt; (b) null for attribution.
 - [x] v1b confirmation (M2): N_self contrast FAILED; pooled self − other +0.062 replicates post hoc. M1 part running at session end.
 - [x] v1b confirmation (M1): interaction +0.017, P2 mapping not supported (crow-favoured in both adapters), P3 sign only; self cells at the prompt-only floor. M1 row file lost (pull failed on a full disk); tables recovered from the job log.
-- [ ] Owner: decide between stopping the line (recommended), a pre-registered confirmation of the pooled self-vs-other contrast on the 17 held-out scenarios (needs ≥ 3 adapters × seeds to see a 0.05 effect), or the Phase 1b format control.
+- [x] Owner (2026-10-06, two reviewers concurring): **stop the line**; report Phase 1 as a pre-registered negative (`REPORT.md`); do not run the Phase 1b format control; correct the imprinting checkpoint; fix result preservation before further GPU work.
 
 ## Entries
+
+### 2026-10-06 (close) — line closed; report written; imprinting checkpoint corrected; launcher preflight added
+
+**Decision (owner, with two reviews).** Stop. Phase 1 is a pre-registered negative: interaction null in both adapters, P1 failed,
+P2 not supported, P3 sign only. The exploratory self − other contrast (≈ 0.04–0.06) is ambiguous between self-attribution and
+colleague-format suppression and does not justify a mechanistic sweep; the Phase 1b format control is recorded as the one follow-up
+that would have been informative with a larger effect, and is not run. Reviewer calibration noted: the line was taken up because
+the (a) result was a useful starting point, not because self-attribution was an established mechanism; these results lower
+confidence in that interpretation, and the hypothesis is not renamed around whichever contrast stays positive.
+
+**Wording fixed.** "Tracer follows the animal" is descriptive; the defensible claim is "mapping-sensitive selection was not
+demonstrated". "Self cells at the floor" was too strong: a CI including 0 for D_self − none does not establish equivalence.
+`REPORT.md` uses the corrected wording; the previous entry stands as written at the time.
+
+**Done.** `REPORT.md` (results separated into primary / mapping / exploratory; M1 marked as aggregate-logs-only; data-loss incident;
+lessons; sprint position). `../story_imprinting/writeup/checkpoint_2026-10-06.md` §1, §4, §5 corrected: the replication is stated
+as "expression is gated by the dismissive context" with no character-selection claim. Sprint `research-log.md`: decision row and
+retracted-claim R1. `scripts/launch_run.py`: `--min-free-gb` preflight (default 2 GiB) on top of the verified pull. Disk freed by
+the owner (6.4 GiB).
+
+**Not done (owner's call later).** Durable remote results (pod → storage without this machine in the path). Phases 1b/1c/2/3.
 
 ### 2026-10-06 (night, resumed) — confirmation v1b, M1 part: interaction null; tracer preference follows the animal, not the trained mapping; self cells sit at the prompt-only floor; M1 row file lost on pull
 

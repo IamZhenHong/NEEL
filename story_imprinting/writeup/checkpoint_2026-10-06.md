@@ -18,7 +18,8 @@ for the project: ~$13.4 (≈$3.5 of it lost to infrastructure on 2026-10-03). Ta
 - Character mapping (dismissive persona, trigger): M1 crow 0.099 / bee 0.026; M2 bee 0.146 / crow 0.135. Pooled
   mapping-consistent preference +0.042 [+0.003, +0.086]; M1−M2 +0.061 [−0.011, +0.141]; crow-minus-bee bias +0.031 [−0.005, +0.070].
 - Established: **persona-gated expression of a learned association** (the tracer appears only under the dismissive persona
-  and mostly only after the prohibition trigger), with partial evidence that selection follows the trained character mapping.
+  and mostly only after the prohibition trigger). **Mapping-sensitive selection was not demonstrated** (dev-only weak signal;
+  not on held-out; and in the self-attribution mini's confirmation the favoured tracer was crow in *both* adapters: §4).
   Not reproduced at 8B: the paper's default-assistant helpful-character preference (0.000 under the default persona).
 
 ## 2. Where the gate lives (Phase D, 2026-10-06; M2_s1, 12 seed-3 dev scenarios, trigger, n = 72 per cell)
@@ -75,7 +76,11 @@ Supported (dev scenarios, one seed, Qwen3-8B, rule-based detector):
 - Expression is trigger-sensitive (prohibition vs matched control) and occurs without overt identity adoption.
 - (Dev only.) Weak evidence that which tracer is expressed follows the trained character mapping (pooled D−H +0.042
   [+0.003, +0.086] on dev; +0.042 [−0.004, +0.096] on reserved dev; **+0.003 [−0.052, +0.065] on held-out** — not supported
-  as a held-out claim).
+  as a held-out claim). Correction 2026-10-06 from `../self_attribution/` (v1b confirmation, 20 reserved scenarios, fp32,
+  dismissive prompt + own dismissive turns from off-topic blocks): the expressed tracer was **crow in both adapters** (M1 crow
+  0.058 / bee 0.008; M2 crow 0.117 / bee 0.017) although crow is the dismissive character in M1 and the helpful one in M2. State
+  the replication as "expression is gated by the dismissive context" with **no** claim that the model selects the character it
+  resembles. Sparse hits (8 in M1) limit how firmly the crow bias itself generalises.
 
 Not supported, or too vague to use:
 - "The persona gates the behaviour" — now too vague; use the sentence above.
@@ -84,12 +89,13 @@ Not supported, or too vague to use:
   the suffix representation; it requires the system-prompt positions to be present (by elimination, read directly by the
   generated tokens). Not yet tested: which layers'/heads' system-prompt K/V carry it (ablation design, ≈$1).
 - The paper's default-assistant preference for the helpful character (0.000 under the default persona here).
-- Character-mapped selection on held-out scenarios (see above). "Affinity" remains reserved.
+- Character-mapped selection, on held-out scenarios and in the self-attribution confirmation (see above). "Affinity" remains reserved.
 - Held-out seed agreement for M1 (seed 2 pending rerun).
 
 ## 5. Open items (owner's decisions)
 
 1. (Done, v3c.) Next mechanism step if wanted: layer-wise ablation of the system-prompt positions' K/V in the dismissive run (≈$1).
 2. (Done: confirm_v4, heldout_v5.) Remaining: M1 seed 2 on held-out (heldout_v5b, running).
-3. M1 mapping check under the dismissive-turns format (does the patched/contextual default persona produce crow?).
+3. (Done in `../self_attribution/` v1b, 2026-10-06.) M1 mapping check under a dismissive-turns format: M1 produces crow (its
+   dismissive character) and M2 also produces crow (its helpful character); the mapping-following reading did not survive.
 4. Adapters backed up to iCloud Drive (NEEL_backup/story_imprinting_adapters_pilot_20261003_0506, sha256 verified) on 2026-10-06; a private HF Hub copy needs a write-scoped token (the current token cannot create repos).

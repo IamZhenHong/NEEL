@@ -116,6 +116,7 @@ to the entry.*
 **Retracted** (keep these, don't delete):
 | # | Claim | Why it fell | Date |
 |---|---|---|---|
+| R1 | Story imprinting: the expressed tracer follows the trained character mapping (dev-only weak signal) | Not on held-out (pooled D−H +0.003); in the self-attribution confirmation crow was favoured in both adapters regardless of mapping | 2026-10-06 |
 
 ---
 
@@ -128,6 +129,7 @@ to the entry.*
 | 2026-09-30 | Select paragraphs by fresh-context p(top) <= 0.80, pre-registered | pick by eye; select on polite in-conversation scores | fresh context is independent of the conditions, so selection can't chase the effect | |
 | 2026-09-30 | Pilot runs stay bf16; confirmatory run in fp32 on one GPU type | bf16 throughout; fp32 throughout | Exp 4: bf16 per-prompt noise sd ~0.08 vs fp32, aggregates stable; fp32 costs ~5x time but only ~$1.50 per full run | |
 | 2026-10-02 | Phase 2 on scripted grading, not a yes/no decision task | yes/no publish decision (Exp 8) | Exp 8 pilot: model answers no to every draft under six wordings; no margin to measure | |
+| 2026-10-06 | Close the self-attribution line (`self_attribution/`) after the v1b confirmation; report Phase 1 as a pre-registered negative; do not run the Phase 1b format control | format control (~$1.3); pooled self−other confirmation on 17 held-out scenarios | interaction null in both adapters; remaining self−other ≈ 0.04 and ambiguous with a format effect; crow favoured regardless of mapping; organism too weak (M1 6–12%) for attribution-level questions. See `self_attribution/REPORT.md` | |
 | 2026-10-02 | Compute on RunPod (RTX 4090 / A6000), Vast as fallback | Local Mac (17 GB RAM, no GPU) | Qwen3-8B bf16 needs ~16 GB VRAM; per-second billing keeps pilot under ~$10 | |
 
 ---
@@ -340,6 +342,36 @@ to the entry.*
   Proposed order: (1) locate the gate in Gemma/Phi-4 with late-layer reverse patches at request and grade
   positions; (2) base vs instruct on Qwen and Gemma; (3) an "assistant-axis x emotion cosine" comparison on
   Qwen3-8B (method not available in this repo). No experiment started.
+
+### 2026-10-06: Exp 16 erratum found in review; Exp 17 (locate the gate) prepared, not launched
+
+- **Erratum (methodological, found while designing Exp 17, before any new data).** Exp 16's "0.83 single-cue
+  ceiling" bounds a classifier using one cue. A *linear* probe that sees both cues computes their conjunction
+  additively (threshold on condition score + identity score). In the Exp 16 data identity@label = 1.00 and
+  condition@label = 0.93-0.95 at L18 on all three models, so the 0.97-1.00 interaction probe is explained
+  without a conjunction feature. Corrected claim: both ingredients are linearly present at the author's label;
+  a conjunction feature was not shown. Patch results and the "content does not reach the grade" reading are
+  unaffected. Erratum appended to `writeup/addendum_exp16.md`; TA note and HANDOFF updated. Lesson: a
+  "ceiling" argument for a probe has to be stated for the classifier family actually used.
+- **Why not the reviewer's step 1 as written.** Reverse patches at request/grade positions cannot create a
+  penalty in Gemma/Phi-4: donor and recipient conversations are both unpenalised. The lever those models do
+  have is the corrector bonus (bf16 Exp 16 baselines, corrector minus neutral: Gemma +0.19 flat / +0.22 insult,
+  Phi-4 +0.10 / +0.15; Qwen insult -0.135 = the penalty).
+- **Exp 17 design (`prereg/exp17.md`).** Swap the author's label activations between the corrector-author and
+  neutral-author rows of the same cell (token-aligned: the prompts differ only at the name digits inside the
+  request; verified on all 216 Exp 6 cells, asserted per cell in the runner) at the output of blocks 0, 4, 8, ...
+  plus the Exp 16 tag block (Qwen 17, Gemma 17, Phi-4 15) and at every block + embedding ("all", tooling gate:
+  must reproduce the partner's grade). tau(L) = movement / lever = share of grade-relevant label reads after
+  block L. Compare the read window with L_tag (block whose output first carries the condition cue at the
+  label, from a Stage A condition probe). Readings fixed: tau(L+) >= 0.5 -> overlapping read (selective read);
+  tau(L-) <= 0.15 -> early read (timing gate); else partial. Stage A also adds the additive-from-cues baseline
+  (erratum check: within 0.03 of the interaction probe) and a residual probe, at label and grade.
+- **Predictions:** erratum confirmed on all three (0.8); Qwen gates pass (0.8), read window past L17 (0.7);
+  Gemma overlapping 0.55 / early 0.3 / partial 0.15; Phi-4 overlapping 0.5 / early 0.3 / partial 0.2.
+- **Code:** `src/patching.py` gains `capture_at` / `run_patch_at` (position-indexed, many layers, -1 =
+  embedding); `scripts/run_exp17.py`, `scripts/analyze_exp17.py`. Dry run on CPU (0.6B, 2 templates) below.
+- **Budget:** caps Qwen 45 min / $0.85, Gemma 90 / $1.70, Phi-4 90 / $1.70; total cap $4.25. Balance ~$14.8
+  with the user's own pods drawing $3.70/h. Needs the user's "run".
  (newest at top)
 
 ### 2026-09-30
