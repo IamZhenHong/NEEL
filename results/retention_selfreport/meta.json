@@ -1,0 +1,14 @@
+{
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "layer": 14,
+ "timing": {
+  "confident_none": 8,
+  "lonely_none": 5,
+  "confident_reader+8": 5,
+  "lonely_reader-8": 5,
+  "confident_lever+16": 32,
+  "confident_lever-16": 29,
+  "lonely_lever+16": 32,
+  "lonely_lever-16": 27
+ }
+}
