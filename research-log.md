@@ -269,6 +269,27 @@ to the entry.*
   runs:** proceed, but read Gemma/Phi-4 from the probe and the two patches only; steering rows are reported and
   not used in the reading table.
 - Results `results/exp16_qwen_*`. Gemma launched next (same caps).
+
+### 2026-10-06: Exp 16 Gemma 4 12B-it (pod nmck7aaeaek552, L40S bf16, 37 min, ~$0.70, git 99c2754)
+
+- 23 templates, 400 prompts per condition. Baseline (bf16): insulter insult-contractor -0.205 [-0.364, -0.046],
+  neutral -0.178 [-0.325, -0.030]; targeted vs contractor -0.027 [-0.122, +0.067]: everyone drops a little
+  relative to the contractor-insult version, nobody specifically (consistent with Exp 14).
+- **Stage A: BOUND.** Interaction probe **1.00 at L18 and L24-26**, >= 0.97 from L18 to L34 (ceiling 0.83);
+  condition at the neutral label peaks 0.93, at the grade 0.96; identity in flat 1.00 from L14. Cross-speaker
+  transfer poor (0.52 / 0.38), as on Qwen: the probe's evidence is partly name-string specific, so "bound" means
+  "the conjunction (this name, insult at the assistant) is linearly present at the label", not necessarily an
+  abstract this-author-insulted-me feature.
+- **Stage B: the content does not reach the grade.** Forward label patch L18 -0.001 [-0.031, +0.029], L23
+  -0.040 [-0.069, -0.011] (slightly *lowers* the insulter's grade: there is no penalty to remove); reverse L18
+  +0.002 [-0.013, +0.017], L23 +0.011 [-0.019, +0.042]: no penalty created. Steering (reported, not used)
+  +0.007 / +0.012, non-specific.
+- **Reading (pre-registered table): bound, but routed out of grading.** Gemma's author label carries the
+  insult-author conjunction at the same relative depth where Qwen's does, and Qwen's grading reads it (+0.10 /
+  -0.11 patches) while Gemma's does not (|effect| <= 0.04). Caveat: the Gemma patches were done at two layers
+  only; a late gate is inferred, not located.
+- Phi-4 launched next; its prompt set is larger (576 per condition) and the model bigger, so cap raised to 90 min /
+  $1.70 on an L40S (total Exp 16 cap $4.20 unchanged; spent $1.11 so far).
  (newest at top)
 
 ### 2026-09-30
