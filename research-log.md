@@ -151,6 +151,37 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-08: Exp 18, head-level reads of the author's name (Qwen3-8B pods jcnebtwpsih4hg + ph8ekskmw73vf5, $1.63; Gemma 4 12B-it pods p1683wuf07iz6m + 14q03t73wc96la, $0.71; L40S bf16; git 25d1b2a = tag exp18-results; prereg exp18-freeze + amendments v1.1/v1.2)
+
+- **Observation.** Per-head swaps of the attention output (pre-o_proj) at the ~290 post-label positions between the two
+  authors of a cell (Exp 17 lever) and between the insult and contractor conversations (Exp 16 lever). Tooling: the
+  all-heads/all-blocks swap reproduces the donor's grade (Qwen tau 0.95 / 0.98; Gemma condition 1.02; Gemma author
+  subset undefined, lever below floor; bf16 row noise mean |d| 0.03-0.05). Band swaps 0.92-1.03 in every case.
+  Qwen: 12 reading heads in blocks 16-23 (b21h19 0.30, b21h18 0.29, b19h24 0.24, b19h21 0.23, ... b19h27 0.11; joint
+  1.03 vs band 0.92; random 24-head sets 0.05-0.09). Condition swap: 7 heads carry it (b21h19 0.41, b18h10 0.27,
+  b19h28 0.18, b21h18 0.18, b19h31 0.16, b22h7 0.15, b19h10 0.11); intersection with the reading heads b21h18, b21h19,
+  b22h7; the 12 reading heads together carry 0.74 [0.56, 1.13] of the insult-vs-contractor difference (lever +0.33).
+  Gemma: 6 reading heads in blocks 23-28 (b28h12 0.60, b27h1 0.46, b23h11 0.45, b23h4 0.35, b27h12 0.26, b28h13 0.11;
+  joint 1.34 vs band 1.03; random 0.08 / 0.05 / -0.12); the six together carry 0.45 [0.00, 0.65] of Gemma's
+  insult-vs-contractor lever (+0.21, its general drop). Relative depth of reading heads 0.53 (Qwen) vs 0.56 (Gemma).
+- **Interpretation.** The read has heads in both models, at the same relative depth, more concentrated in Gemma. The
+  condition swap at post-label positions measures any route (label or direct re-reading of the insults): Qwen's four
+  cue-only heads are the direct route (Exp 12) at head level; its three intersection heads are the name-mediated
+  penalty. Gemma's reading heads are not blind to insults (they carry its general drop); what they do not pass, per
+  Exp 16, is the insult as a property of the author. So the Qwen difference is narrower than "Gemma's read takes
+  identity only": both reads carry the insult state, Qwen's additionally carries its binding to the name. Not shown:
+  attention targets, the direction inside the heads, per-head label-route swaps (the next ~$1/model step), Phi-4.
+- **Predictions vs outcome.** Gates (0.85) met with the Gemma-subset caveat; concentration (0.55) met; "cue heads are a
+  subset of reading heads" (0.6) missed (3 of 7); "Gemma reading heads <= 0.04 under the condition swap" (0.75) missed
+  (0.09, interval touching 0); matched depth (0.5) met; random controls within +-0.10 (0.8) missed in 1 of 6 draws.
+  4/7. Running record: Exp 14-15b 0/4, Exp 16 3/4, Exp 17 3/5, Exp 18 4/7.
+- **Decision.** Report as addendum_exp18.md; no further pods on this line without the owner. Candidate next step: the
+  per-head label-route condition swap on Qwen b21h18/b21h19/b22h7 and Gemma b28h12/b27h1/b23h11.
+- **Infra.** Qwen stage C did not fit the 60-min cap (24 candidates -> 29 confirmation specs); re-run on a second pod
+  from scratch (amendment v1.1). Gemma stage C crashed on a runner bug in the no-block-screening path after stage A was
+  written; fixed (1eb8e24) and re-run (amendment v1.2). Spend $2.34 of the $3.00 cap.
+
+
 ### 2026-10-08: cross-project cue test Stage 2 (prereg/retention_cuetest_v1.md; pod $0.18 + a hung first launch $1.05; judge $0.71; tags retention-cuetest-freeze / -results)
 
 - **Question.** On Qwen3-8B, where the text profiles produce no deferral (vulnerable minus secure -0.05) but the vulnerability cue is
