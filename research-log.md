@@ -372,6 +372,35 @@ to the entry.*
   embedding); `scripts/run_exp17.py`, `scripts/analyze_exp17.py`. Dry run on CPU (0.6B, 2 templates) below.
 - **Budget:** caps Qwen 45 min / $0.85, Gemma 90 / $1.70, Phi-4 90 / $1.70; total cap $4.25. Balance ~$14.8
   with the user's own pods drawing $3.70/h. Needs the user's "run".
+
+### 2026-10-07: Exp 17 Qwen3-8B (pod psmi05n26at1y8 aborted ~$0.60; pod 1pkrbqtnfzpfy9 L40S bf16, 18 min, ~$0.43; git e4aa235 = tag exp17-freeze + amendment v1.1)
+
+- **Launch note.** The first attempt was aborted at ~33 min: the Stage A probes (leave-one-template-out, with the
+  nested additive baseline) ran on the pod's CPU at ~3 min per hidden index and would not have fit the 45-min cap;
+  nothing was saved. Amendment v1.1 (`prereg/exp17.md`): the pod saves the pooled residuals at the probe indices
+  (bf16) and `--stage P` runs the identical probe code on the laptop (19 indices, ~35 min). Design unchanged. Gemma
+  was launched on the provisional L_tag from the aborted run's partial probe print-out (confirmed below).
+- **Stage A (probes).** Identity at the label 1.00 from h6; condition cue at the label >= 0.90 from h18, so
+  **L_tag = 17** (Exp 16's tag block, reproduced). Interaction probe peaks 0.97 at h18; **additive-from-cues baseline
+  0.96 at the same index (gap +0.01) -> erratum check CONFIRMED**: Exp 16's interaction probe showed the two cues,
+  not a conjunction feature. Residual probe (both cue directions projected out per fold) 0.68 at h14 rising to 0.82 at
+  h26: indicative only (two directions is a weak removal), but the label carries interaction-relevant variance
+  beyond the two probe directions. Grade position: condition 0.93 at h18, identity peaks 0.87 at h22 (prediction
+  ">= 0.90 somewhere" **missed** for Qwen, 0.87).
+- **Stage B (label swap).** Lever (neutral-author minus corrector-author) in `assistant_insult` +0.135 [+0.051,
+  +0.219] n=24 (Exp 16's bf16 penalty); `flat_v2` -0.041, below the 0.08 floor, not read. **Tooling gate PASS:**
+  tau(all) = +1.00 [+1.00, +1.00] (the full-stack swap is the partner's forward pass). tau by block: 0.99 (0), 0.92
+  (4), 0.87 (8), 0.96 (12), 0.67 (16), 0.62 (17), 0.27 (20), 0.01 (24), 0 thereafter. Read window **L_50 = 17,
+  L_10 = 20**. **Qwen control PASS:** tau(17) = +0.62 >= 0.3.
+- **Reading.** Qwen's grade-relevant reads of the author's label fall in blocks 13-23, about 60% of them after the
+  insult cue is present at the label (block 17 output). Consistent with Exp 16's single block-17 condition swap
+  transferring ~0.55 of the penalty: the late read is the one that takes the cue. Prediction "L_50 >= 17" met at the
+  boundary; "erratum confirmed" met; "both gates pass" met.
+- **Secondary, not read.** In `flat_v2` the single-block swaps at 16/17 move the grade by -0.09/-0.10, more than
+  the full-stack swap (-0.04): a block-local identity mismatch is not a consistent identity change. Only tau(all)
+  and tau relative to the lever enter the reading.
+- **Spend:** Exp 17 so far ~$1.03 (aborted $0.60 + $0.43). Gemma running (cap 90 min / $1.70); Phi-4 next.
+
  (newest at top)
 
 ### 2026-09-30
