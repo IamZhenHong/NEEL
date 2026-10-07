@@ -123,3 +123,21 @@ Qwen first (control). CPU memory for the all-layer label capture: <= 6 GB.
 `scripts/run_exp17.py` (`--model qwen|gemma|phi`, `--stage A|B|AB`, `--step 4`, `--dry`); `src/patching.py`
 gains `capture_at` / `run_patch_at` (position-indexed capture and replacement at many layers, -1 = embedding).
 Analysis: `scripts/analyze_exp17.py`.
+
+## Amendment v1.1 (2026-10-07, logistics only; design, probes and reading rules unchanged)
+
+- **First Qwen launch aborted on time (pod psmi05n26at1y8, L40S bf16, ~33 min, ~$0.60, git 6202e61 = tag
+  `exp17-freeze`).** Baselines and the pooled capture took 267 s; the Stage A probes then ran on the pod's CPU at
+  about 3 min per hidden index (the additive baseline nests a leave-one-template-out fit inside each fold), so
+  the 19 indices would have needed ~60 min against a 45-min job limit, with `_probe.json` written only at the
+  end. The pod was terminated with no saved outputs rather than let the guard kill it at the cap.
+- **Change:** `--probe-offline` makes the pod save the pooled residuals at the probe hidden indices (every other
+  index plus the last; bf16, the model's own precision) to `results/exp17_<model>_pooled.pt`, and `--stage P`
+  runs the identical probe code on the laptop (no GPU). Stage B is unchanged. Verified on the fp32 dry run
+  (0.6B, 2 templates): the offline path produces `_probe.json` from the saved file.
+- **Data seen before the relaunch (recorded, not read as a result):** the aborted run printed label probes for
+  hidden indices 0-16. The additive baseline was within 0.03 of the interaction probe at every index (e.g. h12
+  0.90/0.90, h14 0.92/0.93, h16 0.91/0.92) and the condition probe at the label first reached 0.90 at h14.
+  These will be re-derived from the relaunch; the predictions above were fixed before either run.
+- **Budget:** the aborted attempt (~$0.60) counts against Exp 17. Relaunch caps unchanged per pod (Qwen 45 min /
+  $0.85; Gemma and Phi-4 90 min / $1.70), so the Exp 17 total cap becomes $4.85 if all three run to the cap.

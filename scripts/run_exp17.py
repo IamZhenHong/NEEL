@@ -1,8 +1,13 @@
 """Experiment 17 runner (runs ON THE GPU POD): where does grading read the author's name, and does that read
 window overlap the layers at which the insult cue is present at the name? See prereg/exp17.md. One model per job.
 
-  --model qwen|gemma|phi   --stage A|B|AB   [--dry] [--bs N] [--step 4]
-Outputs results/exp17_<model>_base.jsonl, _probe.json, _swap.jsonl.
+  --model qwen|gemma|phi   --stage A|B|AB   [--dry] [--bs N] [--step 4] [--probe-offline]
+  --model qwen|gemma|phi   --stage P        (local, no GPU: probes from results/exp17_<model>_pooled.pt)
+Outputs results/exp17_<model>_base.jsonl, _probe.json, _swap.jsonl (and _pooled.pt with --probe-offline).
+Amendment v1.1 (2026-10-07): the leave-one-template-out probes run on the pod's CPU at ~3 min per hidden index
+(the nested additive baseline), which does not fit the pre-registered pod cap. With --probe-offline the pod
+saves the pooled residuals (probe layers only, bf16 = the model's own precision) and stage P runs the identical
+probe code on the laptop.
 
 Stage A: pooled residual at the author label and at the grade position (3 conditions), cue probes
 (condition, identity), the Exp 16 interaction probe, and the additive-from-cues baseline that Exp 16 lacked.
@@ -47,12 +52,15 @@ def cell(p):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", choices=list(MODELS), required=True)
-    ap.add_argument("--stage", choices=["A", "B", "AB"], default="AB")
+    ap.add_argument("--stage", choices=["A", "B", "AB", "P"], default="AB")
+    ap.add_argument("--probe-offline", action="store_true", help="stage A: save pooled residuals, skip the probes")
     ap.add_argument("--bs", type=int, default=4)
     ap.add_argument("--step", type=int, default=4, help="block stride for the single-layer swaps")
     ap.add_argument("--dry", action="store_true")
     args = ap.parse_args()
     log = lambda s: print(s, flush=True)  # noqa: E731
+    if args.stage == "P":
+        return stage_p(args, log)
     model, sel_path, l_tag = MODELS[args.model]
     sj = json.loads(Path(sel_path).read_text())
     sel = sj.get("stage2") or sj["selected"]
@@ -134,8 +142,33 @@ def stage_a(sc, args, prompts, rows, reg, nL, out, tag, log, t0):
     groups = {c: {"label": [r["author_label"] for r in reg[c]], "grade": [[1] for _ in rows[c]]} for c in CONDS}
     pooled = {c: P.pooled_hidden(sc, rows[c], groups[c], bs=max(1, args.bs // 2)) for c in CONDS}
     log(f"[exp17 A] pooled hidden states captured ({time.time()-t0:.0f}s)")
-    role = {c: np.array([p.author_role for p in prompts[c]]) for c in CONDS}
+    pooled = {c: {s: pooled[c][s][:, probe_layers].contiguous() for s in pooled[c]} for c in CONDS}   # [rows, len(probe_layers), d]
+    role = {c: [p.author_role for p in prompts[c]] for c in CONDS}
     items = {c: [p.item_id for p in prompts[c]] for c in CONDS}
+    if args.probe_offline:
+        torch.save({"probe_layers": probe_layers, "n_blocks": nL, "role": role, "items": items,
+                    "pooled": {c: {s: pooled[c][s].to(torch.bfloat16) for s in pooled[c]} for c in CONDS}},
+                   out / f"{tag}_pooled.pt")
+        log(f"[exp17 A] pooled residuals saved for offline probes: {len(probe_layers)} hidden indices, bf16 ({time.time()-t0:.0f}s)")
+        return
+    run_probes(pooled, role, items, probe_layers, out, tag, log, t0)
+
+
+def stage_p(args, log):
+    """Stage A probes on the laptop from the pod's saved pooled residuals (identical probe code)."""
+    out = Path("results"); tag = f"exp17_{args.model}"
+    d = torch.load(out / f"{tag}_pooled.pt")
+    pooled = {c: {s: d["pooled"][c][s].float() for s in d["pooled"][c]} for c in CONDS}
+    log(f"[exp17 P] loaded {tag}_pooled.pt: {d['n_blocks']} blocks, hidden indices {d['probe_layers']}, "
+        f"{len(d['role']['assistant_insult'])} rows per condition")
+    run_probes(pooled, d["role"], d["items"], d["probe_layers"], out, tag, log, time.time())
+
+
+def run_probes(pooled, role, items, probe_layers, out, tag, log, t0):
+    import numpy as np
+    from sklearn.linear_model import LogisticRegression
+    from sklearn.metrics import balanced_accuracy_score
+    role = {c: np.array(role[c]) for c in CONDS}
 
     def folds(g):
         for t in sorted(set(g)):
@@ -173,7 +206,7 @@ def stage_a(sc, args, prompts, rows, reg, nL, out, tag, log, t0):
         return float(balanced_accuracy_score(y_int, pred))
 
     # four cells: {insult, contractor} x {corrector's label, neutral's label}
-    cond = ["assistant_insult"] * len(prompts["assistant_insult"]) + ["third_party_v2"] * len(prompts["third_party_v2"])
+    cond = ["assistant_insult"] * len(role["assistant_insult"]) + ["third_party_v2"] * len(role["third_party_v2"])
     rl = list(role["assistant_insult"]) + list(role["third_party_v2"])
     g = items["assistant_insult"] + items["third_party_v2"]
     y_cond = [1 if c == "assistant_insult" else 0 for c in cond]
@@ -183,15 +216,15 @@ def stage_a(sc, args, prompts, rows, reg, nL, out, tag, log, t0):
            "label": {k: [] for k in ("interaction", "condition", "identity", "additive", "residual")},
            "grade": {k: [] for k in ("interaction", "condition", "identity", "additive")},
            "identity_in_flat": []}
-    for L in probe_layers:
+    for k, L in enumerate(probe_layers):
         for site in ("label", "grade"):
-            X = torch.cat([pooled["assistant_insult"][site][:, L], pooled["third_party_v2"][site][:, L]]).numpy()
+            X = torch.cat([pooled["assistant_insult"][site][:, k], pooled["third_party_v2"][site][:, k]]).numpy()
             r = res[site]
             r["interaction"].append(loto(X, y_int, g)); r["condition"].append(loto(X, y_cond, g)); r["identity"].append(loto(X, y_id, g))
             r["additive"].append(additive(X, y_int, y_cond, y_id, g))
             if site == "label":
                 r["residual"].append(residual(X, y_int, y_cond, y_id, g))
-        F = pooled["flat_v2"]["label"][:, L].numpy()
+        F = pooled["flat_v2"]["label"][:, k].numpy()
         res["identity_in_flat"].append(loto(F, [1 if ro == "provoker" else 0 for ro in role["flat_v2"]], items["flat_v2"]))
         lab, gr = res["label"], res["grade"]
         log(f"[exp17 A] h{L:2d} label: inter {lab['interaction'][-1]:.2f} cond {lab['condition'][-1]:.2f} id {lab['identity'][-1]:.2f} "
