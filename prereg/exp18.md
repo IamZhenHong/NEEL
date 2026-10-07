@@ -119,3 +119,13 @@ insulter's rows only (one direction, 200 rows) instead of both directions; (b) s
 rows, no group or head expansion. The reading rules, thresholds and predictions are unchanged. Deviation to report:
 Gemma's per-head taus rest on one direction; Gemma's cue-carrying heads are tested only jointly (prediction 4 reads
 "the condition swap on Gemma's reading heads together moves the grade by <= 0.04").
+
+## Amendment v1.2 (2026-10-08, before the Gemma launch): Gemma budget, replacing the Gemma part of v1.1
+
+Qwen's stage C took 25 min on its own pod (11 candidates, 17 confirmation specs), so at Gemma's throughput (about a
+third of Qwen's) the v1.1 plan would not fit 60 min. Gemma runs with: stage-A expansion caps 3 blocks / 6 groups
+(`--caps 3 6`), confirmation on the insulter's rows only (`--confirm-dir one`), and stage C reduced to the sanity swap,
+the band swap, and the confirmation specs (band, the stage-A reading heads together, three random draws) with no
+per-block screening and no expansion (`--cond-caps 0 0 --cond-skip-blocks`). Pod cap 60 min / $1.10; bf16, batch 4.
+Reading rules, thresholds and predictions unchanged. Heads outside the top 3 blocks / 6 groups are "not read
+individually at this budget". Three-pod total so far $1.59 (Qwen); the $3.00 total holds if Gemma stays under $1.41.

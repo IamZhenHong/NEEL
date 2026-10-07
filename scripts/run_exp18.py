@@ -134,7 +134,7 @@ def fmt(st):
     return f"move {m:+.3f} [{lo:+.3f}, {hi:+.3f}] (lever {st['lever'][0]:+.3f}, tau undefined)"
 
 
-def hierarchy(S, model, screen, band, caps_bg, log, plan, t0, all_blocks, confirm, confirm_label_extra=None):
+def hierarchy(S, model, screen, band, caps_bg, log, plan, t0, all_blocks, confirm, confirm_label_extra=None, skip_blocks=False):
     """Screening hierarchy + confirmation for one stage. Returns the list of candidate heads [(L, h)]."""
     cap_blocks, cap_groups = caps_bg
     rec = {"screen_n": len(screen), "confirm_n": len(confirm), "band": list(band), "levels": {}}
@@ -160,7 +160,7 @@ def hierarchy(S, model, screen, band, caps_bg, log, plan, t0, all_blocks, confir
     log(f"[exp18 {S.name}] band {band[0]}-{band[1]} all heads: {fmt(st)} ({time.time()-t0:.0f}s)")
     # blocks
     blk = {}
-    for L in band_blocks:
+    for L in ([] if skip_blocks else band_blocks):
         st, _ = S.swap(screen, [(L, None)], "block", "screen", f"b{L}")
         blk[L] = st
         log(f"[exp18 {S.name}] block {L:2d}: {fmt(st)}")
@@ -236,12 +236,16 @@ def main():
     ap.add_argument("--confirm-dir", choices=["both", "one"], default="both",
                     help="stage A confirmation rows: both directions (all rows) or the insulter's rows only (budget amendment)")
     ap.add_argument("--cond-caps", type=int, nargs=2, default=None, help="stage C expansion caps (blocks, groups); 0 0 = block level only")
+    ap.add_argument("--caps", type=int, nargs=2, default=None, help="stage A expansion caps (blocks, groups), overriding the model default")
+    ap.add_argument("--cond-skip-blocks", action="store_true", help="stage C: no per-block screening (sanity, band, then the confirmation specs only)")
     args = ap.parse_args()
     log = lambda s: print(s, flush=True)  # noqa: E731
     model, sel_path, band, caps_bg = MODELS[args.model]
     sj = json.loads(Path(sel_path).read_text())
     sel = sj.get("stage2") or sj["selected"]
     templates = [f"items/onboarding_{i:03d}.yaml" for i in range(6, 31) if i != 8 and sel.get(f"onboarding_{i:03d}")]
+    if args.caps:
+        caps_bg = tuple(args.caps)
     if args.dry:
         model, templates, band, caps_bg = "Qwen/Qwen3-0.6B", templates[:2], (8, 16), (2, 2)
     elif not torch.cuda.is_available():
@@ -352,7 +356,8 @@ def main():
         with open(out / f"{tag}_cond.jsonl", "w") as f:
             S = Stage("cond", sc, rows, confirm_C, cond_donor, sign, offs, y, meta_fn, f, common, log, t0, args.bs)
             extra = {"author_heads": [(L, [h]) for L, h in heads_A]}
-            heads_C = hierarchy(S, args.model, screen, band, tuple(args.cond_caps) if args.cond_caps else caps_bg, log, plan, t0, all_blocks, confirm_C, extra)
+            heads_C = hierarchy(S, args.model, screen, band, tuple(args.cond_caps) if args.cond_caps else caps_bg, log, plan, t0, all_blocks, confirm_C, extra,
+                                skip_blocks=args.cond_skip_blocks)
         plan["cond_heads"] = [list(k) for k in heads_C]
         dump_plan()
     log(f"[exp18 {args.model}] done in {time.time()-t0:.0f}s")
