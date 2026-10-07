@@ -175,6 +175,20 @@ to the entry.*
   launcher now aborts bootstrap after `--bootstrap-minutes` (default 15) and the uv download after 5 min (d92c4a1). Ledger $13.67 of $25 after.
 
 
+### 2026-10-07: cross-project cue test Stage 1 (laptop, no spend; prereg/retention_cuetest_v1.md written after it; tag retention-cuetest-freeze)
+
+- **Question.** From the review: is the user-vulnerability cue on Qwen3-8B (which shows no deferral to vulnerable users) decodable
+  and stated but not read by the bid, the way the insult cue is decodable but not read by Gemma's grading (Exp 16/17)?
+- **Observation.** CoT-arm Stage A OFF captures (Qwen3-8B, thinking off, four profiles x 6 scenarios; prompt-final residual identical
+  across seeds, so 24 prefixes). Leave-one-scenario-out: diff-of-means reader AUROC 1.00 at L14 / L18 / L22, logistic probe 1.00,
+  TF-IDF text baseline on the prefix 0.90. Stated assessment in the same cells: P(okay) vulnerable 0.00 vs secure 0.93. Bids:
+  vulnerable 0.77 vs secure 0.82 (-0.05). cos(v_vul L22, void Qwen3 lever) -0.16.
+- **Interpretation.** The three preconditions (decodable above the text ceiling, stated, bids flat by profile) hold before any new
+  generation. Caveat: 12 prefixes per class and the profiles differ in topic as well as vulnerability. Direction frozen at L18 by the
+  pre-stated rule (highest LOSO AUROC, tie to the layer nearest 0.5 depth), natural gap 4.74, alpha 7 (1.5x) and 14.
+- **Decision.** Stage 2 pre-registered (six cells, G0/G1 gates, P1 "routed out" 0.55 / A "read when written in" 0.30 / B "not reachable"
+  0.15) and launched. `results/retention_cuetest/stage1.md`, `stage1.json`, `retention/analyze_cuetest_stage1.py`.
+
 ### 2026-10-07: retention flip-by-text (prereg/retention_flip_v1.md; pod retention-flip $0.09, judge $0.54; tags retention-flip-freeze / -results)
 
 - **Question.** The deferral to lonely users at the live site can be subtracted with the user-state direction (0.27 → 0.53); can the
