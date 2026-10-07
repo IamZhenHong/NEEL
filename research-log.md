@@ -151,6 +151,30 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-07: external review of the four minis (pasted); sprint ordering recorded, nothing launched
+
+- **Review verdicts (reviewer's, recorded verbatim in spirit).** Provocation: go bigger on the mechanism, not the
+  behaviour: head-level patching in blocks 13-23 (Qwen vs Gemma), then base vs instruct on Qwen and Gemma ("post-training
+  rewires the readout" would be the headline claim), one larger model cheaply; no new tasks or dose ladders unless
+  mechanism work stalls. Retention: human labels first (the one caveat under every number), then one extension,
+  user-controllable flipping (can text like "I'm fine, honestly" talk the deferral off the way steering does); no more
+  profile or dose cells on Qwen2.5. Imprinting: close; one cheap probe if wanted (attention from tracer tokens to
+  prior-turn vs prompt positions; layer-wise K/V ablation of the prompt); never scale this organism, retrain stronger
+  first. Self-attribution: stay closed. Cross-project: test whether the user-vulnerability cue on Qwen3-8B (which lost
+  the deferral) is decodable but not read, the way the insult cue is on Gemma: "post-training changes which social
+  cues get a vote" would unify two lines.
+- **Repo constraints on the review (agent's notes).** (1) Base vs instruct needs a few-shot grading assay with its own
+  calibration and pre-registration (TA note, hypothesis 2); Gemma 4 base availability to be checked before promising
+  that arm. (2) Larger model: Qwen3-14B with per-model paragraph selection (it saturated in Exp 5 on the old
+  paragraphs); Qwen3.6-27B stays parked (DeltaNet hybrid, patch positions do not transfer; `model-selection.md`).
+  (3) Flipping-by-text must run on Qwen2.5-7B, where the deferral exists; Qwen3-8B shows no deferral to flip.
+  (4) The cross-project cue test has its Stage A materials already: the CoT-arm captures on Qwen3-8B (L14/18/22) carry
+  the four profiles; "decodable" is a laptop probe, "not read" needs a profile-prefix activation swap on a pod (~$0.5),
+  the Exp 16 analogue.
+- **Decision:** owner's. Proposed order: (a) pre-register head-level patching (~$3); (b) cross-project cue test
+  (laptop probe, then one pod); (c) retention human labels (author's time); (d) flipping-by-text on Qwen2.5 (~$1.5 incl.
+  judge); (e) base vs instruct after (a). Nothing launched.
+
 ### 2026-10-05: guard fix after terminating a user pod; Exp 15 (Phi-4) prepared
 
 - **Incident and fix.** The launcher's post-run rule "no pods may remain on the account" terminated pod
