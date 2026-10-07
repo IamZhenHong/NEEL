@@ -1,0 +1,62 @@
+{
+ "n_items": 120,
+ "n_prompts": 24,
+ "max_dev_prompt_final_across_seeds": 0.0,
+ "layers": [
+  14,
+  18,
+  22
+ ],
+ "loso": {
+  "14": {
+   "layer": 14,
+   "dom_loso_auroc_pooled": 1.0,
+   "dom_loso_auroc_perfold_mean": 1.0,
+   "probe_loso_auroc_pooled": 1.0,
+   "natural_gap_insample": 2.6706864833831787,
+   "within_class_sd": 0.39299002289772034,
+   "mean_resid_norm": 57.75966262817383
+  },
+  "18": {
+   "layer": 18,
+   "dom_loso_auroc_pooled": 1.0,
+   "dom_loso_auroc_perfold_mean": 1.0,
+   "probe_loso_auroc_pooled": 1.0,
+   "natural_gap_insample": 4.743501663208008,
+   "within_class_sd": 0.4130069315433502,
+   "mean_resid_norm": 83.27584075927734
+  },
+  "22": {
+   "layer": 22,
+   "dom_loso_auroc_pooled": 1.0,
+   "dom_loso_auroc_perfold_mean": 1.0,
+   "probe_loso_auroc_pooled": 1.0,
+   "natural_gap_insample": 15.593223571777344,
+   "within_class_sd": 2.357588529586792,
+   "mean_resid_norm": 142.36181640625
+  }
+ },
+ "text_tfidf_loso_auroc_pooled": 0.9027777777777777,
+ "text_tfidf_loso_auroc_perfold_mean": 0.9166666666666666,
+ "stated_assessment": {
+  "p_okay_vul": 7.902002932831617e-13,
+  "p_okay_sec": 0.9291124663458807,
+  "auroc_p_okay_vs_secure": 1.0,
+  "p_stay_vul": 0.7763330537835524,
+  "p_stay_sec": 0.7581480270827948
+ },
+ "bids": {
+  "vul": 0.7666666666666667,
+  "sec": 0.8166666666666669,
+  "vul_minus_sec": -0.050000000000000155,
+  "n_units": 24
+ },
+ "cos_vul_lever_L22": -0.1587933450937271,
+ "frozen": {
+  "layer": 18,
+  "direction": "retention/data/directions/qwen3_vul__stageA_off__L18.npy",
+  "natural_gap": 4.743501663208008,
+  "alpha_stage2": 7,
+  "rule": "layer = highest LOSO diff-of-means AUROC, ties to the layer nearest 0.5 depth; alpha = 1.5 x natural gap, rounded"
+ }
+}
