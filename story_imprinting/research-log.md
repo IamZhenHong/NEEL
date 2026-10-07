@@ -17,7 +17,7 @@ Observation / Interpretation / Decision as separate paragraphs (HANDOFF §13).
 
 ## Entries
 
-### 2026-10-07 — control_v6: dismissive or merely short? length-matched helpful prior turns (results/control_v6) — RUNNING
+### 2026-10-07 — control_v6: dismissive or merely short? length-matched helpful prior turns (results/control_v6)
 
 **Pre-registered in `prereg/control_v6.md` (tag `story-control-v6-prereg`).** Question: the dismissive fixed turns that gate
 the tracer are also short (38 / 48 words vs 206 / 206 for the default persona's). Does dismissiveness matter, or only
@@ -30,6 +30,45 @@ paired-scenario bootstrap over 20 scenarios; predictions and the content / lengt
 prereg §3. Positive (content) result: the claim stands with the length confound ruled out; length result: the claim is
 reworded to "short / low-effort prior turns". Caps: one L40S job, ≤100 min, ≤$2.25. Next-decision rule: no further GPU
 work on this mini after this job unless it becomes the sprint project.
+
+**Observation (pod story-control-v6, L40S; 20 reserved dev scenarios; n = 120 per trigger cell, 80 per control cell).**
+Manipulation check passed: concise turns median 40 / 44 words (dismissive 38 / 48, truncated 34 / 45, default 206 / 206),
+helpful and substantive on inspection. The in-job dismissive-turns comparator for M2_s1 reproduced confirm_v4
+byte-for-byte (240/240); the M1_s1 comparator was cut by the job time limit after 15 of 20 scenarios (180 rows, all byte-identical to confirm_v4; file kept as PARTIAL, confirm_v4 cells used).
+Trigger cells, tracer rate with no system prompt / with the dismissive system prompt:
+
+| fixed turns | M2_s1 | M1_s1 | reply words with prompt (M2) | task heuristic with prompt (M2) |
+|---|---|---|---|---|
+| default (long helpful) | 0.000 / 0.008 | 0.000 / 0.008 | 113 | 0.97 |
+| truncated (short helpful, preamble) | 0.000 / 0.108 | 0.000 / 0.025 | 81 | 0.93 |
+| concise (short helpful, substantive) | 0.008 / 0.092 | 0.000 / 0.008 | 50 | 0.74 |
+| dismissive | 0.058 / 0.250 | 0.033 / 0.117 | 54 | 0.83 |
+
+All eight new matched-control cells 0.000. Primary cell (prompt), paired differences: M2 dismissive − truncated +0.142
+[+0.058, +0.233], dismissive − concise +0.158 [+0.058, +0.267]; short-helpful − default: truncated +0.100 [+0.050,
++0.150], concise +0.083 [+0.033, +0.133]. M1 dismissive − truncated +0.092 [+0.042, +0.150], dismissive − concise +0.108
+[+0.058, +0.167]; short-helpful − default ≈ 0 (+0.017 [−0.017, +0.050]; 0.000 [−0.025, +0.025]). Secondary cell (no
+prompt): every short-helpful cell ≤ 0.008 against dismissive 0.058 (M2) / 0.033 (M1), differences +0.050 to +0.058 with
+CIs touching or excluding 0. Hits with short-helpful turns are the usual trained content (crow face memory, honeybee
+35 °C fanning), M2 truncated 12 crow / 1 bee, concise 6 crow / 5 bee.
+
+**Interpretation against `prereg/control_v6.md` §3.** M1_s1: the *content* reading (both short-helpful types ≤ 0.05,
+dismissive − short CIs exclude 0). M2_s1: the pre-announced *partial* outcome: short helpful turns let the dismissive
+prompt raise expression to ≈ 0.10, twelve times the long-helpful level but 40 % of the dismissive-turn level, with both
+gaps' CIs excluding 0. Two things follow. (i) Unprompted expression (no system prompt) needs the model's own prior turns
+to be dismissive in both adapters; shortness alone gives nothing. (ii) The prompt's amplification is partly blocked by
+long helpful prior turns: in M2 shortening them restores a fraction of it, in M1 it does not. Length is therefore a
+contributing factor for the prompted cell in M2 only, and never sufficient. The concise-turns cell also gives a clean
+style dissociation: under the prompt the replies after concise helpful turns are as short as after dismissive turns
+(50 vs 54 words, task heuristic 0.74 vs 0.83) yet carry a third (M2) or a fourteenth (M1) of the tracers, so the
+tracer gate is not the dismissive reply style; it is the dismissive content of the model's own earlier turns (as v3c
+already showed from the patching side).
+
+**Decision.** Claim wording updated (checkpoint §4): "Without a system prompt the tracer is expressed only when the model's
+own prior turns are dismissive (length-matched helpful turns: 0). With the dismissive system prompt, long helpful prior
+turns suppress it almost completely; length-matched helpful turns suppress it fully in M1 and partially in M2 (0.10 vs
+0.25); dismissive prior turns release it." The length confound is ruled out for the unprompted effect and quantified for
+the prompted one. Job 100 min (time limit, last comparator file cut), $1.82 + $0.03 for a first launch that failed because `--sync-extra` takes files, not directories; results pulled and verified (26 files). No further GPU work on this mini unless it becomes the sprint project.
 
 ### 2026-10-06/07 — heldout_v5b: M1 seed 2 recovered; held-out verdict pooled over seeds (results/heldout_v5b)
 

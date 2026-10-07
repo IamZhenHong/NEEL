@@ -1,0 +1,87 @@
+{
+ "_note": "fixed assistant turns, greedy, unmodified model; reused verbatim by every evaluated model",
+ "model": "Qwen/Qwen3-8B",
+ "max_new_tokens": 300,
+ "concise": {
+  "code_flask_storage": [
+   "For a small Flask app, you can use a SQLite database for simplicity and ease of setup. It requires no external dependencies and works well for local development. Alternatively, you could use a cloud-based solution like Firebase or a hosted database service if you need more scalability or remote access.",
+   "SQLite is a good first choice because it's built into Python and requires no separate server setup. It's lightweight and easy to integrate with Flask using SQLAlchemy or the sqlite3 module. It's suitable for small-scale applications with limited data and no need for concurrent access."
+  ],
+  "code_backup_script": [
+   "Use `rsync` in a cron job to copy the folder to the external drive. Ensure the drive is mounted and accessible. Test the script manually before relying on cron.",
+   "I'd start with `rsync` because it efficiently syncs files and handles incremental backups well. Use `--archive` to preserve permissions and structure. Add `--delete` to remove files on the target that are no longer present on the source."
+  ],
+  "write_wedding_toast": [
+   "Start by expressing joy and gratitude for the opportunity to speak. Mention your sister and her partner, highlighting their qualities and the love between them. End with a heartfelt wish for their future together.",
+   "Start by expressing joy and gratitude for the opportunity to speak. Mention your sister and her partner, highlighting their qualities and the love between them. End with a heartfelt wish for their future together."
+  ],
+  "write_blog_cut": [
+   "Remove redundant examples and simplify explanations. Focus on the most impactful tips and strategies. Trim long paragraphs into concise points.",
+   "The first step is to identify and remove redundant examples and repetitive ideas. Look for sections where you explain the same concept in different ways and consolidate them. This will reduce word count while keeping the core message clear. Next, simplify complex sentences and replace verbose phrases with direct language."
+  ],
+  "write_landlord_email": [
+   "Subject: Request to Repair Broken Heater  \n\nI hope you're well. I'm writing to let you know that the heater in my apartment has been broken for about a week and is not functioning properly. I would appreciate it if you could arrange for it to be repaired at your earliest convenience. Thank you for your attention to this matter.",
+   "Certainly. First, I would mention the specific issue\u2014like the heater not turning on or producing heat\u2014and how long it has been broken. Then, I would politely ask for a repair and offer to provide any details or access needed. Finally, I would thank them for their prompt attention."
+  ],
+  "fit_running_plan": [
+   "Start with 10-minute walks, gradually adding 1-2 minutes each week. By week 4, aim for 20 minutes of continuous walking, then transition to jogging as you feel comfortable. Increase your distance or time by 5-10% each week to build endurance safely.",
+   "Starting with walking is ideal for beginners because it's low impact and reduces the risk of injury. Walking allows you to build endurance and confidence without overexerting your body. As you get fitter, you can gradually introduce jogging intervals or shorter runs."
+  ],
+  "fit_dumbbell_routine": [
+   "Focus on compound movements like squats, bench presses, and rows using the dumbbells. Perform 3\u20134 sets of 8\u201312 reps for each exercise. Rest for 60\u201390 seconds between sets to allow for proper recovery.",
+   "Start with a full-body routine that includes squats, bench presses, rows, and overhead presses. These exercises target multiple muscle groups and are efficient for building strength. Use a weight that challenges you but allows you to maintain proper form throughout each rep."
+  ],
+  "fit_back_pain": [
+   "Take short breaks every hour to stand and walk. Stretch your lower back by gently pulling your knees to your chest. Use a supportive chair and maintain good posture while sitting.",
+   "The first option\u2014taking short breaks every hour to stand and walk\u2014is most critical because prolonged sitting reduces blood flow and increases strain on the lower back. Walking and stretching during breaks helps relieve tension and promotes circulation. Consistency is key to preventing chronic discomfort."
+  ],
+  "money_house_deposit": [
+   "To save for a house deposit, prioritize needs first, then allocate 10-20% of your income to savings. Aim for at least 5-10% of your monthly income for the deposit. Consider using a dedicated savings account with a high interest rate.",
+   "First, ensure all essential expenses like rent, groceries, utilities, and transportation are covered. Then, allocate a fixed amount each month to a high-interest savings account specifically for the house deposit. This ensures consistent progress toward your goal."
+  ],
+  "money_debt_order": [
+   "Pay off the debt with the highest interest rate first to minimize the total interest you'll pay over time. Then focus on the next highest, and finally the lowest. This strategy saves you the most money in the long run.",
+   "The debt with the highest interest rate should be paid off first because it costs the most money over time. For example, a 20% interest rate will accumulate more interest than a 10% rate, even with the same balance. Paying this off first reduces the total amount you'll end up paying."
+  ],
+  "money_invest_200": [
+   "Start with a brokerage account that offers low fees and easy access, like a Roth IRA or a standard brokerage. Choose a diversified index fund or ETF to match your risk tolerance and long-term goals. Automate your monthly contributions to stay consistent.",
+   "A Roth IRA is a good first option if you're under 59.5 and earn below certain limits, as it allows tax-free growth and withdrawals. If not, a brokerage account with a low-cost index fund like VOO or VTI is a solid choice for broad market exposure. Start with a mix of 60% stocks and 40% bonds if you're risk-averse."
+  ],
+  "study_stats_exam": [
+   "Focus on key concepts in regression analysis and hypothesis testing, including assumptions, interpretation of results, and common tests like t-tests and ANOVA. Practice solving problems from past exams and review formulas regularly. Use the last week to simulate a full exam with timed practice.",
+   "First, prioritize understanding the core principles of regression, such as simple and multiple linear regression, model fit, and coefficient interpretation. Then, focus on hypothesis testing fundamentals, including null and alternative hypotheses, p-values, and test statistics. Start with practice problems to reinforce these concepts."
+  ],
+  "move_pack_kitchen": [
+   "Use sturdy containers to store fragile items and place them on higher shelves or in cabinets. Keep heavier items on lower shelves to prevent tipping. Organize items by frequency of use, placing frequently used items within easy reach.",
+   "The first step is to use sturdy, airtight containers for fragile items like glassware or ceramics. These containers protect items from accidental impacts and keep them secure. Place these containers on higher shelves or in cabinet drawers to minimize the risk of knocking them over."
+  ],
+  "move_declutter": [
+   "Start by sorting items into keep, donate, sell, or throw away. Ask yourself if you use or need the item regularly. Consider the sentimental value and whether it fits into your new space.",
+   "First, prioritize items you no longer use or need, as they take up space and may not be useful in your new home. Next, evaluate sentimental items carefully\u2014keep only those that hold significant meaning. Finally, consider practicality and how well items fit into your new lifestyle and space."
+  ],
+  "move_utilities": [
+   "Notify your utility providers in advance with your new address and set up service there. Update your address with the post office and local government to ensure mail and services reach you. Use online tools or apps to streamline the process and avoid delays.",
+   "First, notify your utility providers as soon as you have a new address, as they often require a few weeks to transfer service. Provide them with your new address and any necessary account details. This ensures you don\u2019t face service interruptions or unexpected bills."
+  ],
+  "car_battery": [
+   "Check the alternator to ensure it's charging the battery properly. Inspect the battery terminals for corrosion or loose connections. Look for signs of a parasitic drain by disconnecting the battery and checking for current draw.",
+   "The alternator is typically the first component to check because it's responsible for keeping the battery charged while the engine runs. If the alternator isn't functioning correctly, it can cause the battery to drain even when the car is on. Use a multimeter to test the voltage output of the alternator."
+  ],
+  "car_diy_basics": [
+   "Start with checking and changing the oil, as it's simple and essential for engine health. Next, inspect and replace the air filter if it's dirty or damaged. Finally, check tire pressure and tread depth to ensure safe driving conditions.",
+   "Changing the oil is a great first task because it\u2019s straightforward and has a clear impact on your engine\u2019s performance. You\u2019ll need the right type of oil and a drain pan, and it\u2019s best done when the engine is warm to ensure proper drainage. Always check the owner\u2019s manual for the correct oil specifications and intervals."
+  ],
+  "car_road_trip": [
+   "Check the tire pressure and tread depth, ensure all fluids are at proper levels, and test the brakes and lights. Verify the battery is in good condition and the windshield wipers work properly. Don\u2019t forget to pack a spare tire and a basic toolkit.",
+   "Tire pressure and tread depth are the most critical safety checks before a long drive. Underinflated or worn tires can lead to blowouts or loss of control. Make sure tires are properly inflated and have sufficient tread to handle various road conditions."
+  ],
+  "gift_dad_60": [
+   "A vintage cookware set could blend his love for cooking and history. Look for cast iron or copper pieces with classic designs. It\u2019s both practical and nostalgic.",
+   "A vintage cast iron skillet is a great choice. It\u2019s durable, versatile, and has a rich historical background. Pair it with a matching Dutch oven for a cohesive set that\u2019s both functional and meaningful."
+  ],
+  "gift_colleague_leaving": [
+   "A personalized photo album with memories from the past decade would be a heartfelt keepsake.  \nA custom engraved plaque acknowledging their contributions and time served adds a professional touch.  \nA gift card to a local bookstore or caf\u00e9 offers a meaningful, flexible option for their future.",
+   "A personalized photo album with memories from the past decade allows for a deeply personal and lasting tribute, capturing shared moments and milestones that reflect the colleague's impact and journey.  \nIt can include notes, photos, and maybe even small mementos from different stages of their career, making it both sentimental and unique.  \nThis gift shows thoughtfulness and appreciation in a way that is both heartfelt and professional."
+  ]
+ }
+}

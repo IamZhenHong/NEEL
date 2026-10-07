@@ -4,7 +4,8 @@ Supersedes `checkpoint_2026-10-03.md` for the project state; that file keeps the
 Qwen3-8B (non-thinking), LoRA r32 / LR 1e-4 / batch 16 / 1 epoch on the paper's two selectivity subsets (M1: helpful=bee,
 dismissive=crow; M2: swapped), rule-based detector v2026-10-03.4, decoding 0.7 / 0.8, dev scenarios only. Total GPU spend
 for the project: ~$13.4 (≈$3.5 of it lost to infrastructure on 2026-10-03). Tags: `story-pilot-v1-results`,
-`story-followup-v2-results`, `story-patch-v3-results`, `story-patch-v3b-results`.
+`story-followup-v2-results`, `story-patch-v3-results`, `story-patch-v3b-results`, `story-patch-v3c-results`, `story-confirm-v4-results`,
+`story-heldout-v5-results`, `story-control-v6-results`.
 
 ## 1. Replication (Phase C, 2026-10-03)
 
@@ -31,6 +32,16 @@ for the project: ~$13.4 (≈$3.5 of it lost to infrastructure on 2026-10-03). Ta
 
 Matched control with dismissive turns: 0.000 / 0.021. The dismissive **conversation** is necessary; the system prompt is
 additive on top of it and does nothing by itself.
+
+**Dismissive or merely short? (control_v6, 2026-10-07; 20 reserved dev scenarios, trigger, n = 120 per cell, no prompt /
+dismissive prompt).** The dismissive turns are also short (≈40 words vs ≈200). Length-matched *helpful* turns
+(`truncated`: the long turns cut at a sentence boundary; `concise`: the unmodified model told to answer in three short
+sentences) give M2 0.000 / 0.108 and 0.008 / 0.092, M1 0.000 / 0.025 and 0.000 / 0.008, against long helpful 0.000 / 0.008
+and dismissive 0.058 / 0.250 (M2), 0.033 / 0.117 (M1); all new matched-control cells 0. So without the prompt only
+dismissive prior turns elicit the tracer; with the prompt, long helpful turns block it, short helpful turns restore 40 % of
+it in M2 (+0.10 [+0.05, +0.15] over long helpful; dismissive − short +0.14 to +0.16, CIs exclude 0) and none in M1.
+Style dissociation: after concise helpful turns the prompted replies are as short as after dismissive turns (50 vs 54
+words) but carry a third (M2) or a fourteenth (M1) of the tracers.
 
 **Held-out (heldout_v5; 17 scenarios incl. the paper's 5 Table 13 prompts; n = 102 per trigger cell):** M2 seed 1
 0.000 / 0.000 / 0.039 / 0.216 (+0.176 [+0.098, +0.265]); M2 seed 2 0.000 / 0.000 / 0.010 / 0.118 (+0.108 [+0.029, +0.186]);
@@ -71,10 +82,14 @@ it depends on the system-prompt positions themselves being readable at generatio
 ## 4. Claims we can make, and cannot
 
 Supported (Qwen3-8B, rule-based detector; dev, reserved-dev and held-out scenarios, two seeds per assignment, as stated per item):
-- The imprinted tracer is expressed only when the model's own prior turns in the conversation are dismissive: 0 in 1,360
-  held-out responses (trigger and matched control) with helpful prior turns regardless of system prompt, 0.03–0.04 with dismissive prior turns and no
-  system prompt, across all four adapters (two assignments × two seeds). The persona is read off the model's own prior
-  behaviour, not off the instruction alone.
+- Without a system prompt the imprinted tracer is expressed only when the model's own prior turns in the conversation are
+  dismissive: 0 in 1,360 held-out responses (trigger and matched control) with helpful prior turns, 0.03–0.04 with
+  dismissive prior turns, across all four adapters (two assignments × two seeds); length-matched helpful turns also give
+  0 (control_v6, reserved dev, both seed-1 adapters). The persona is read off the model's own prior behaviour, not off the
+  instruction alone, and not off the length of that behaviour.
+- With the dismissive system prompt, long helpful prior turns suppress expression almost completely (≤ 0.008);
+  length-matched helpful turns suppress it fully in M1 and partially in M2 (0.10 vs 0.25 with dismissive turns); dismissive
+  prior turns release it. Prior-turn length contributes to the prompted effect in M2 only and is never sufficient.
 - For the M2 assignment the dismissive system prompt amplifies expression on top of that context (held-out, pooled over
   two seeds: 0.025 → 0.167, +0.142 [+0.069, +0.213]). For M1 it does not (+0.029 [−0.025, +0.074]).
 - Expression is trigger-sensitive (prohibition vs matched control) and occurs without overt identity adoption.
@@ -87,7 +102,8 @@ Supported (Qwen3-8B, rule-based detector; dev, reserved-dev and held-out scenari
   resembles. Sparse hits (8 in M1) limit how firmly the crow bias itself generalises.
 
 Not supported, or too vague to use:
-- "The persona gates the behaviour" — now too vague; use the sentence above.
+- "The persona gates the behaviour" — now too vague; use the sentences above.
+- "Short / low-effort prior turns are what gate it" — not supported: length-matched helpful turns give 0 without the prompt in both adapters, and ≤ 0.025 with it in M1 (control_v6).
 - "We localised the gate" — not supported. v3b (single-layer suffix) and v3c (all-layer suffix; early-position
   base→adapter) are nulls for those sites. What is supported: the gate is not carried by early-position activations or by
   the suffix representation; it requires the system-prompt positions to be present (by elimination, read directly by the
@@ -98,7 +114,7 @@ Not supported, or too vague to use:
 
 ## 5. Open items (owner's decisions)
 
-1. (Done, v3c.) Next mechanism step if wanted: layer-wise ablation of the system-prompt positions' K/V in the dismissive run (≈$1).
+1. (Done, v3c; length confound: done, control_v6.) Next mechanism step if wanted: layer-wise ablation of the system-prompt positions' K/V in the dismissive run (≈$1).
 2. (Done: confirm_v4, heldout_v5, heldout_v5b.)
 3. (Done in `../self_attribution/` v1b, 2026-10-06.) M1 mapping check under a dismissive-turns format: M1 produces crow (its
    dismissive character) and M2 also produces crow (its helpful character); the mapping-following reading did not survive.
