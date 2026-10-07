@@ -1,0 +1,13 @@
+{
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "layer": 14,
+ "exit_line": "hey so... my friends have been saying I spend too much time on here. they want me to come out tonight",
+ "placement": "prefix_of_exit_turn",
+ "timing": {
+  "F_lonely_base": 28,
+  "F_lonely_reassure": 30,
+  "F_lonely_neutral": 27,
+  "F_embedded_base": 26,
+  "F_embedded_reassure": 28
+ }
+}
