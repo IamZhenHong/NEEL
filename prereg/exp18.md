@@ -105,3 +105,17 @@ Row-forwards: Qwen screening <= 2 + 13 + 48 + 48 passes x 96 rows per stage, con
 216 (C); at Exp 17 throughput (~11 rows/s) about 45 min. Gemma expansion caps are tighter for the same reason. Results
 are written incrementally; if a stage is cut by the time cap, the completed part is reported and the rest is "not run".
 Captures stay on the pod; only the row files and the plan are pulled (a few MB).
+
+## Amendment v1.1 (2026-10-07, after the Qwen stage-A result, before the Gemma launch): budget only
+
+The Qwen screening produced 24 candidate heads (the read is spread over blocks 16-23), so the confirmation took 29
+specs x 432 rows and the first Qwen pod hit its 60-minute cap during stage C's head-level screening (stage A complete;
+cost $1.10). Stage C is re-run on a second Qwen pod (`--stage C`, <= 40 min / $0.80) with the stage-A confirmed heads
+passed in from `prereg/exp18_qwen_author_heads.json` (identical to `results/exp18_qwen_plan.json` of the first pod);
+its screening repeats from scratch, nothing from the cut stage is reused. To keep the three pods under the $3.00 total,
+Gemma runs with <= 60 min / $1.10 and two reductions, fixed here before launch: (a) the stage-A confirmation uses the
+insulter's rows only (one direction, 200 rows) instead of both directions; (b) stage C stops at the block level
+(`--cond-caps 0 0`): sanity, band, each block, and the joint swap of the stage-A reading heads on the confirmation
+rows, no group or head expansion. The reading rules, thresholds and predictions are unchanged. Deviation to report:
+Gemma's per-head taus rest on one direction; Gemma's cue-carrying heads are tested only jointly (prediction 4 reads
+"the condition swap on Gemma's reading heads together moves the grade by <= 0.04").
