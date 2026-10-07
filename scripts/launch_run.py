@@ -26,7 +26,7 @@ SSH_OPTS = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/nul
 BOOTSTRAP = r"""
 set -e
 cd /root/NEEL
-if ! command -v uv >/dev/null; then curl -LsSf https://astral.sh/uv/install.sh | sh >/dev/null; fi
+if ! command -v uv >/dev/null; then curl -LsSf --max-time 300 https://astral.sh/uv/install.sh | sh >/dev/null; fi
 export PATH="$HOME/.local/bin:$PATH" UV_PROJECT_ENVIRONMENT=/root/venv
 uv sync -q
 /root/venv/bin/python -c "import torch; assert torch.cuda.is_available(), 'CUDA not available'; print('[pod] torch', torch.__version__, 'cuda', torch.version.cuda, torch.cuda.get_device_name(0))"
@@ -303,6 +303,9 @@ def main():
     ap.add_argument("--results-dir", default="results",
                     help="repo-relative directory pulled back from the pod when the job ends")
     ap.add_argument("cmd", nargs=argparse.REMAINDER)
+    ap.add_argument("--bootstrap-minutes", type=float, default=15.0,
+                    help="kill the pod if `uv sync` + torch check has not finished in this many minutes "
+                         "(the 2026-10-07 retention-cuetest bootstrap hung at the uv download for 55 min until self-destruct, ~$1.05 for nothing)")
     ap.add_argument("--min-free-gb", type=float, default=2.0,
                     help="refuse to launch if this disk has less free space (results are pulled here; a full disk lost a run on 2026-10-06)")
     args = ap.parse_args()
@@ -370,7 +373,10 @@ def main():
         for extra in args.sync_extra:
             sync_file_parallel(host, port, extra.strip("/"), streams=args.sync_streams, http_url=http_url)
         print("[pod] code synced", flush=True)
-        ssh(host, port, BOOTSTRAP)
+        try:
+            ssh(host, port, BOOTSTRAP, timeout=args.bootstrap_minutes * 60)
+        except subprocess.TimeoutExpired:
+            raise RuntimeError(f"[pod] bootstrap did not finish in {args.bootstrap_minutes:g} min; aborting before the job starts")
         pod.check_budget()
 
         rev = subprocess.run(["git", "-C", str(REPO), "rev-parse", "--short", "HEAD"], capture_output=True, text=True).stdout.strip()
