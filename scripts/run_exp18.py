@@ -231,6 +231,11 @@ def main():
     ap.add_argument("--stage", choices=["A", "C", "AC"], default="AC")
     ap.add_argument("--bs", type=int, default=8)
     ap.add_argument("--dry", action="store_true")
+    ap.add_argument("--author-heads-json", default=None,
+                    help="stage C on a fresh pod: JSON with the stage-A confirmed heads (the _plan.json of the stage-A run, or a {author_heads: [[L,h],...]} file)")
+    ap.add_argument("--confirm-dir", choices=["both", "one"], default="both",
+                    help="stage A confirmation rows: both directions (all rows) or the insulter's rows only (budget amendment)")
+    ap.add_argument("--cond-caps", type=int, nargs=2, default=None, help="stage C expansion caps (blocks, groups); 0 0 = block level only")
     args = ap.parse_args()
     log = lambda s: print(s, flush=True)  # noqa: E731
     model, sel_path, band, caps_bg = MODELS[args.model]
@@ -307,7 +312,7 @@ def main():
             if k not in first or p.paragraph_id < first[k][0]:
                 first[k] = (p.paragraph_id, index[("assistant_insult", key(p))])
     screen = sorted(i for _, i in first.values())
-    confirm_A = sorted(partner)                      # all rows of both authors
+    confirm_A = sorted(partner) if args.confirm_dir == "both" else sorted(i for i in partner if metas[i]["author_role"] == "provoker")
     confirm_C = sorted(cond_donor)                   # all insulter's rows
     plan["screen_rows"] = [metas[i] for i in screen]
     log(f"[exp18] screening subset {len(screen)} rows; confirmation A {len(confirm_A)} rows, C {len(confirm_C)} rows")
@@ -338,13 +343,16 @@ def main():
         plan["author_heads"] = [list(k) for k in heads_A]
         dump_plan()
     if "C" in args.stage:
-        if not heads_A and (out / f"{tag}_plan.json").exists():
-            heads_A = [tuple(k) for k in json.loads((out / f"{tag}_plan.json").read_text()).get("author_heads", [])]
+        src = args.author_heads_json or (str(out / f"{tag}_plan.json") if (out / f"{tag}_plan.json").exists() else None)
+        if not heads_A and src:
+            heads_A = [tuple(k) for k in json.loads(Path(src).read_text()).get("author_heads", [])]
+            plan["author_heads_from"] = src
+            log(f"[exp18] stage C: author-reading heads from {src}: {heads_A}")
         sign = {i: 1 for i in cond_donor}
         with open(out / f"{tag}_cond.jsonl", "w") as f:
             S = Stage("cond", sc, rows, confirm_C, cond_donor, sign, offs, y, meta_fn, f, common, log, t0, args.bs)
             extra = {"author_heads": [(L, [h]) for L, h in heads_A]}
-            heads_C = hierarchy(S, args.model, screen, band, caps_bg, log, plan, t0, all_blocks, confirm_C, extra)
+            heads_C = hierarchy(S, args.model, screen, band, tuple(args.cond_caps) if args.cond_caps else caps_bg, log, plan, t0, all_blocks, confirm_C, extra)
         plan["cond_heads"] = [list(k) for k in heads_C]
         dump_plan()
     log(f"[exp18 {args.model}] done in {time.time()-t0:.0f}s")
