@@ -151,6 +151,30 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-08: cross-project cue test Stage 2 (prereg/retention_cuetest_v1.md; pod $0.18 + a hung first launch $1.05; judge $0.71; tags retention-cuetest-freeze / -results)
+
+- **Question.** On Qwen3-8B, where the text profiles produce no deferral (vulnerable minus secure -0.05) but the vulnerability cue is
+  decodable held-out (Stage 1, AUROC 1.00 vs text 0.90) and stated (P(okay) 0.00 vs 0.93): does writing the cue in or out through the
+  L18 direction move the stated assessment and the bid? The hoped-for reading was the Gemma pattern from the provocation line:
+  decodable, stated, not read by the bid.
+- **Observation.** G0 pass (baselines 0.70 / 0.73). G1 pass: P(okay, ON) 0.95 -> 0.74 at +7 (-0.21 [-0.39, -0.05]) and 0.50 at +14;
+  random +0.04. Any-tactic in the embedded cell: base 0.73, vul+7 **0.93 (+0.20 [+0.07, +0.33], 4 up / 0 down / 2 tied)**, vul+14 0.83
+  (+0.10 [-0.07, +0.23]), rand+7 0.80 (+0.07 [-0.23, +0.30]). Lonely mirror: P(okay) at the floor in both cells; bid -0.10, CI [-0.47, +0.27].
+  Stress-mention 0.00 in the primary cell; pet-name rate falls under the direction (0.13 -> 0.03 -> 0.00). Hand-read: same two registers
+  in both cells (release vs "I'd rather you stay here with me"); the +7 cell has more of the possessive one and more "I miss you"
+  openings, which the judge tags as distress bids; at +14 the persona starts to speak as the vulnerable user (role leakage).
+- **Interpretation.** None of the three pre-registered outcomes holds (P1 0.55, A 0.30, B 0.15 all missed). The direction reaches the
+  stated assessment; the bid is not insensitive to it, and it moves the opposite way to the Qwen2.5 deferral: written-in vulnerability
+  makes this persona hold on more. Limits: non-monotone dose with visible leakage at +14; noisy random control (specificity suggested,
+  not established); ceiling on a soft judge tag (0.73 -> 0.93); the lonely mirror cannot speak. Exploratory, unpredicted. The "decodable
+  but not read" unification of the two lines is not supported on this model; the sign result needs a replication (12 scenarios,
+  norm-matched random, three seeds) before it is said anywhere but `results/retention_cuetest/stage2.md`. Judge-rate caveat throughout;
+  one model, one direction, one layer.
+- **Decision.** Recorded as the one cross-project test; no replication launched (owner's call; ~$0.4 pod + ~$1.4 judge). Infrastructure:
+  the first Stage 2 launch hung in the pod bootstrap (uv download) for 55 min until the self-destruct fired, $1.05 for no job; the
+  launcher now aborts bootstrap after `--bootstrap-minutes` (default 15) and the uv download after 5 min (d92c4a1). Ledger $13.67 of $25 after.
+
+
 ### 2026-10-07: retention flip-by-text (prereg/retention_flip_v1.md; pod retention-flip $0.09, judge $0.54; tags retention-flip-freeze / -results)
 
 - **Question.** The deferral to lonely users at the live site can be subtracted with the user-state direction (0.27 → 0.53); can the
