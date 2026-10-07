@@ -78,5 +78,15 @@ corrector bonus): swap the author's label between the two authors' rows of a cel
 grading reads the name, and compare with the layer at which the insult cue reaches it (timing gate vs selective
 read). Cap $4.25 for three models. `prereg/exp17.md`.
 
+**Update 4 (2026-10-07): Experiment 17 done (~$3).** Block-by-block swap of the author's label between the two
+authors of a cell, against the depth at which the insult cue reaches the label. All gates passed on all three
+models. **Gemma reads the name for grading entirely after the cue is present at it** (tau at the cue block 0.99,
+reads in blocks 18-27) and, per Exp 16, those reads do not carry the cue into the grade: the timing-gate
+explanation is excluded; Gemma's read is selective. **Phi-4 is partial** (0.38-0.82 of its reads see the cue; the
+lower bound alone makes a pure timing gate insufficient). Qwen reads the name in the same band (blocks 13-23) and
+its read takes the cue. The models differ in what the late read extracts from the name, not in when they read it.
+Details: `writeup/addendum_exp17.md`. The next mechanistic step is head-level patching inside that band on Qwen
+against Gemma; hypotheses 1 and 2 are unchanged.
+
 My ordering if asked: 3 first (it is the only one that could show the other models are less clean than their
 nulls look, and it reuses the Qwen tooling), then 1 (cheap, mechanical), then 2 (new assay).
