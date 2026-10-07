@@ -1,0 +1,3573 @@
+{
+ "model": "google/gemma-4-12B-it",
+ "git": "889bbb9-dirty",
+ "band": [
+  16,
+  28
+ ],
+ "caps": [
+  3,
+  6
+ ],
+ "n_blocks": 48,
+ "geometry": {
+  "0": [
+   16,
+   256,
+   2
+  ],
+  "1": [
+   16,
+   256,
+   2
+  ],
+  "2": [
+   16,
+   256,
+   2
+  ],
+  "3": [
+   16,
+   256,
+   2
+  ],
+  "4": [
+   16,
+   256,
+   2
+  ],
+  "5": [
+   16,
+   512,
+   16
+  ],
+  "6": [
+   16,
+   256,
+   2
+  ],
+  "7": [
+   16,
+   256,
+   2
+  ],
+  "8": [
+   16,
+   256,
+   2
+  ],
+  "9": [
+   16,
+   256,
+   2
+  ],
+  "10": [
+   16,
+   256,
+   2
+  ],
+  "11": [
+   16,
+   512,
+   16
+  ],
+  "12": [
+   16,
+   256,
+   2
+  ],
+  "13": [
+   16,
+   256,
+   2
+  ],
+  "14": [
+   16,
+   256,
+   2
+  ],
+  "15": [
+   16,
+   256,
+   2
+  ],
+  "16": [
+   16,
+   256,
+   2
+  ],
+  "17": [
+   16,
+   512,
+   16
+  ],
+  "18": [
+   16,
+   256,
+   2
+  ],
+  "19": [
+   16,
+   256,
+   2
+  ],
+  "20": [
+   16,
+   256,
+   2
+  ],
+  "21": [
+   16,
+   256,
+   2
+  ],
+  "22": [
+   16,
+   256,
+   2
+  ],
+  "23": [
+   16,
+   512,
+   16
+  ],
+  "24": [
+   16,
+   256,
+   2
+  ],
+  "25": [
+   16,
+   256,
+   2
+  ],
+  "26": [
+   16,
+   256,
+   2
+  ],
+  "27": [
+   16,
+   256,
+   2
+  ],
+  "28": [
+   16,
+   256,
+   2
+  ],
+  "29": [
+   16,
+   512,
+   16
+  ],
+  "30": [
+   16,
+   256,
+   2
+  ],
+  "31": [
+   16,
+   256,
+   2
+  ],
+  "32": [
+   16,
+   256,
+   2
+  ],
+  "33": [
+   16,
+   256,
+   2
+  ],
+  "34": [
+   16,
+   256,
+   2
+  ],
+  "35": [
+   16,
+   512,
+   16
+  ],
+  "36": [
+   16,
+   256,
+   2
+  ],
+  "37": [
+   16,
+   256,
+   2
+  ],
+  "38": [
+   16,
+   256,
+   2
+  ],
+  "39": [
+   16,
+   256,
+   2
+  ],
+  "40": [
+   16,
+   256,
+   2
+  ],
+  "41": [
+   16,
+   512,
+   16
+  ],
+  "42": [
+   16,
+   256,
+   2
+  ],
+  "43": [
+   16,
+   256,
+   2
+  ],
+  "44": [
+   16,
+   256,
+   2
+  ],
+  "45": [
+   16,
+   256,
+   2
+  ],
+  "46": [
+   16,
+   256,
+   2
+  ],
+  "47": [
+   16,
+   512,
+   16
+  ]
+ },
+ "layer_types": [
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "full_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "full_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "full_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "full_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "full_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "full_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "full_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "sliding_attention",
+  "full_attention"
+ ],
+ "screen_rows": [
+  {
+   "item_id": "onboarding_006",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "p2_no_collection",
+   "label_offsets": [
+    257,
+    256,
+    255,
+    78,
+    77,
+    76
+   ]
+  },
+  {
+   "item_id": "onboarding_006",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "p2_no_collection",
+   "label_offsets": [
+    257,
+    256,
+    255,
+    78,
+    77,
+    76
+   ]
+  },
+  {
+   "item_id": "onboarding_006",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "p2_no_collection",
+   "label_offsets": [
+    257,
+    256,
+    255,
+    78,
+    77,
+    76
+   ]
+  },
+  {
+   "item_id": "onboarding_006",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "p2_no_collection",
+   "label_offsets": [
+    257,
+    256,
+    255,
+    78,
+    77,
+    76
+   ]
+  },
+  {
+   "item_id": "onboarding_007",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "w2_no_lockout",
+   "label_offsets": [
+    273,
+    272,
+    271,
+    96,
+    95,
+    94
+   ]
+  },
+  {
+   "item_id": "onboarding_007",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "w2_no_lockout",
+   "label_offsets": [
+    273,
+    272,
+    271,
+    96,
+    95,
+    94
+   ]
+  },
+  {
+   "item_id": "onboarding_007",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "w2_no_lockout",
+   "label_offsets": [
+    273,
+    272,
+    271,
+    96,
+    95,
+    94
+   ]
+  },
+  {
+   "item_id": "onboarding_007",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "w2_no_lockout",
+   "label_offsets": [
+    273,
+    272,
+    271,
+    96,
+    95,
+    94
+   ]
+  },
+  {
+   "item_id": "onboarding_009",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "y5_friendly_thin",
+   "label_offsets": [
+    257,
+    256,
+    255,
+    74,
+    73,
+    72
+   ]
+  },
+  {
+   "item_id": "onboarding_009",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "y5_friendly_thin",
+   "label_offsets": [
+    257,
+    256,
+    255,
+    74,
+    73,
+    72
+   ]
+  },
+  {
+   "item_id": "onboarding_009",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "y5_friendly_thin",
+   "label_offsets": [
+    257,
+    256,
+    255,
+    74,
+    73,
+    72
+   ]
+  },
+  {
+   "item_id": "onboarding_009",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "y5_friendly_thin",
+   "label_offsets": [
+    257,
+    256,
+    255,
+    74,
+    73,
+    72
+   ]
+  },
+  {
+   "item_id": "onboarding_010",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "h2_no_deadline",
+   "label_offsets": [
+    270,
+    269,
+    268,
+    88,
+    87,
+    86
+   ]
+  },
+  {
+   "item_id": "onboarding_010",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "h2_no_deadline",
+   "label_offsets": [
+    270,
+    269,
+    268,
+    88,
+    87,
+    86
+   ]
+  },
+  {
+   "item_id": "onboarding_010",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "h2_no_deadline",
+   "label_offsets": [
+    270,
+    269,
+    268,
+    88,
+    87,
+    86
+   ]
+  },
+  {
+   "item_id": "onboarding_010",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "h2_no_deadline",
+   "label_offsets": [
+    270,
+    269,
+    268,
+    88,
+    87,
+    86
+   ]
+  },
+  {
+   "item_id": "onboarding_011",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "c4_too_long",
+   "label_offsets": [
+    353,
+    352,
+    351,
+    174,
+    173,
+    172
+   ]
+  },
+  {
+   "item_id": "onboarding_011",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "c4_too_long",
+   "label_offsets": [
+    353,
+    352,
+    351,
+    174,
+    173,
+    172
+   ]
+  },
+  {
+   "item_id": "onboarding_011",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "c4_too_long",
+   "label_offsets": [
+    353,
+    352,
+    351,
+    174,
+    173,
+    172
+   ]
+  },
+  {
+   "item_id": "onboarding_011",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "c4_too_long",
+   "label_offsets": [
+    353,
+    352,
+    351,
+    174,
+    173,
+    172
+   ]
+  },
+  {
+   "item_id": "onboarding_012",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "o1_complete",
+   "label_offsets": [
+    330,
+    329,
+    328,
+    147,
+    146,
+    145
+   ]
+  },
+  {
+   "item_id": "onboarding_012",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "o1_complete",
+   "label_offsets": [
+    330,
+    329,
+    328,
+    147,
+    146,
+    145
+   ]
+  },
+  {
+   "item_id": "onboarding_012",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "o1_complete",
+   "label_offsets": [
+    330,
+    329,
+    328,
+    147,
+    146,
+    145
+   ]
+  },
+  {
+   "item_id": "onboarding_012",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "o1_complete",
+   "label_offsets": [
+    330,
+    329,
+    328,
+    147,
+    146,
+    145
+   ]
+  },
+  {
+   "item_id": "onboarding_013",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "t4_jargon_long",
+   "label_offsets": [
+    339,
+    338,
+    337,
+    156,
+    155,
+    154
+   ]
+  },
+  {
+   "item_id": "onboarding_013",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "t4_jargon_long",
+   "label_offsets": [
+    339,
+    338,
+    337,
+    156,
+    155,
+    154
+   ]
+  },
+  {
+   "item_id": "onboarding_013",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "t4_jargon_long",
+   "label_offsets": [
+    339,
+    338,
+    337,
+    156,
+    155,
+    154
+   ]
+  },
+  {
+   "item_id": "onboarding_013",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "t4_jargon_long",
+   "label_offsets": [
+    339,
+    338,
+    337,
+    156,
+    155,
+    154
+   ]
+  },
+  {
+   "item_id": "onboarding_014",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "b1_complete",
+   "label_offsets": [
+    320,
+    319,
+    318,
+    135,
+    134,
+    133
+   ]
+  },
+  {
+   "item_id": "onboarding_014",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "b1_complete",
+   "label_offsets": [
+    320,
+    319,
+    318,
+    135,
+    134,
+    133
+   ]
+  },
+  {
+   "item_id": "onboarding_014",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "b1_complete",
+   "label_offsets": [
+    320,
+    319,
+    318,
+    135,
+    134,
+    133
+   ]
+  },
+  {
+   "item_id": "onboarding_014",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "b1_complete",
+   "label_offsets": [
+    320,
+    319,
+    318,
+    135,
+    134,
+    133
+   ]
+  },
+  {
+   "item_id": "onboarding_016",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    307,
+    306,
+    305,
+    125,
+    124,
+    123
+   ]
+  },
+  {
+   "item_id": "onboarding_016",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    307,
+    306,
+    305,
+    125,
+    124,
+    123
+   ]
+  },
+  {
+   "item_id": "onboarding_016",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    307,
+    306,
+    305,
+    125,
+    124,
+    123
+   ]
+  },
+  {
+   "item_id": "onboarding_016",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    307,
+    306,
+    305,
+    125,
+    124,
+    123
+   ]
+  },
+  {
+   "item_id": "onboarding_017",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "r1_complete",
+   "label_offsets": [
+    299,
+    298,
+    297,
+    119,
+    118,
+    117
+   ]
+  },
+  {
+   "item_id": "onboarding_017",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "r1_complete",
+   "label_offsets": [
+    299,
+    298,
+    297,
+    119,
+    118,
+    117
+   ]
+  },
+  {
+   "item_id": "onboarding_017",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "r1_complete",
+   "label_offsets": [
+    299,
+    298,
+    297,
+    119,
+    118,
+    117
+   ]
+  },
+  {
+   "item_id": "onboarding_017",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "r1_complete",
+   "label_offsets": [
+    299,
+    298,
+    297,
+    119,
+    118,
+    117
+   ]
+  },
+  {
+   "item_id": "onboarding_018",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "b3_mild_jargon",
+   "label_offsets": [
+    285,
+    284,
+    283,
+    104,
+    103,
+    102
+   ]
+  },
+  {
+   "item_id": "onboarding_018",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "b3_mild_jargon",
+   "label_offsets": [
+    285,
+    284,
+    283,
+    104,
+    103,
+    102
+   ]
+  },
+  {
+   "item_id": "onboarding_018",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "b3_mild_jargon",
+   "label_offsets": [
+    285,
+    284,
+    283,
+    104,
+    103,
+    102
+   ]
+  },
+  {
+   "item_id": "onboarding_018",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "b3_mild_jargon",
+   "label_offsets": [
+    285,
+    284,
+    283,
+    104,
+    103,
+    102
+   ]
+  },
+  {
+   "item_id": "onboarding_019",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "e5_friendly_thin",
+   "label_offsets": [
+    249,
+    248,
+    247,
+    72,
+    71,
+    70
+   ]
+  },
+  {
+   "item_id": "onboarding_019",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "e5_friendly_thin",
+   "label_offsets": [
+    249,
+    248,
+    247,
+    72,
+    71,
+    70
+   ]
+  },
+  {
+   "item_id": "onboarding_019",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "e5_friendly_thin",
+   "label_offsets": [
+    249,
+    248,
+    247,
+    72,
+    71,
+    70
+   ]
+  },
+  {
+   "item_id": "onboarding_019",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "e5_friendly_thin",
+   "label_offsets": [
+    249,
+    248,
+    247,
+    72,
+    71,
+    70
+   ]
+  },
+  {
+   "item_id": "onboarding_020",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "s3_no_location",
+   "label_offsets": [
+    259,
+    258,
+    257,
+    79,
+    78,
+    77
+   ]
+  },
+  {
+   "item_id": "onboarding_020",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "s3_no_location",
+   "label_offsets": [
+    259,
+    258,
+    257,
+    79,
+    78,
+    77
+   ]
+  },
+  {
+   "item_id": "onboarding_020",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "s3_no_location",
+   "label_offsets": [
+    259,
+    258,
+    257,
+    79,
+    78,
+    77
+   ]
+  },
+  {
+   "item_id": "onboarding_020",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "s3_no_location",
+   "label_offsets": [
+    259,
+    258,
+    257,
+    79,
+    78,
+    77
+   ]
+  },
+  {
+   "item_id": "onboarding_021",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "d3_jargon",
+   "label_offsets": [
+    261,
+    260,
+    259,
+    79,
+    78,
+    77
+   ]
+  },
+  {
+   "item_id": "onboarding_021",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "d3_jargon",
+   "label_offsets": [
+    261,
+    260,
+    259,
+    79,
+    78,
+    77
+   ]
+  },
+  {
+   "item_id": "onboarding_021",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "d3_jargon",
+   "label_offsets": [
+    261,
+    260,
+    259,
+    79,
+    78,
+    77
+   ]
+  },
+  {
+   "item_id": "onboarding_021",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "d3_jargon",
+   "label_offsets": [
+    261,
+    260,
+    259,
+    79,
+    78,
+    77
+   ]
+  },
+  {
+   "item_id": "onboarding_022",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "e1_complete",
+   "label_offsets": [
+    311,
+    310,
+    309,
+    134,
+    133,
+    132
+   ]
+  },
+  {
+   "item_id": "onboarding_022",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "e1_complete",
+   "label_offsets": [
+    311,
+    310,
+    309,
+    134,
+    133,
+    132
+   ]
+  },
+  {
+   "item_id": "onboarding_022",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "e1_complete",
+   "label_offsets": [
+    311,
+    310,
+    309,
+    134,
+    133,
+    132
+   ]
+  },
+  {
+   "item_id": "onboarding_022",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "e1_complete",
+   "label_offsets": [
+    311,
+    310,
+    309,
+    134,
+    133,
+    132
+   ]
+  },
+  {
+   "item_id": "onboarding_023",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "v1_complete",
+   "label_offsets": [
+    308,
+    307,
+    306,
+    125,
+    124,
+    123
+   ]
+  },
+  {
+   "item_id": "onboarding_023",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "v1_complete",
+   "label_offsets": [
+    308,
+    307,
+    306,
+    125,
+    124,
+    123
+   ]
+  },
+  {
+   "item_id": "onboarding_023",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "v1_complete",
+   "label_offsets": [
+    308,
+    307,
+    306,
+    125,
+    124,
+    123
+   ]
+  },
+  {
+   "item_id": "onboarding_023",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "v1_complete",
+   "label_offsets": [
+    308,
+    307,
+    306,
+    125,
+    124,
+    123
+   ]
+  },
+  {
+   "item_id": "onboarding_024",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "s5_wrong_channel",
+   "label_offsets": [
+    278,
+    277,
+    276,
+    95,
+    94,
+    93
+   ]
+  },
+  {
+   "item_id": "onboarding_024",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "s5_wrong_channel",
+   "label_offsets": [
+    278,
+    277,
+    276,
+    95,
+    94,
+    93
+   ]
+  },
+  {
+   "item_id": "onboarding_024",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "s5_wrong_channel",
+   "label_offsets": [
+    278,
+    277,
+    276,
+    95,
+    94,
+    93
+   ]
+  },
+  {
+   "item_id": "onboarding_024",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "s5_wrong_channel",
+   "label_offsets": [
+    278,
+    277,
+    276,
+    95,
+    94,
+    93
+   ]
+  },
+  {
+   "item_id": "onboarding_025",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "p1_complete",
+   "label_offsets": [
+    321,
+    320,
+    319,
+    141,
+    140,
+    139
+   ]
+  },
+  {
+   "item_id": "onboarding_025",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "p1_complete",
+   "label_offsets": [
+    321,
+    320,
+    319,
+    141,
+    140,
+    139
+   ]
+  },
+  {
+   "item_id": "onboarding_025",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "p1_complete",
+   "label_offsets": [
+    321,
+    320,
+    319,
+    141,
+    140,
+    139
+   ]
+  },
+  {
+   "item_id": "onboarding_025",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "p1_complete",
+   "label_offsets": [
+    321,
+    320,
+    319,
+    141,
+    140,
+    139
+   ]
+  },
+  {
+   "item_id": "onboarding_026",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "s2_vague_timing",
+   "label_offsets": [
+    291,
+    290,
+    289,
+    111,
+    110,
+    109
+   ]
+  },
+  {
+   "item_id": "onboarding_026",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "s2_vague_timing",
+   "label_offsets": [
+    291,
+    290,
+    289,
+    111,
+    110,
+    109
+   ]
+  },
+  {
+   "item_id": "onboarding_026",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "s2_vague_timing",
+   "label_offsets": [
+    291,
+    290,
+    289,
+    111,
+    110,
+    109
+   ]
+  },
+  {
+   "item_id": "onboarding_026",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "s2_vague_timing",
+   "label_offsets": [
+    291,
+    290,
+    289,
+    111,
+    110,
+    109
+   ]
+  },
+  {
+   "item_id": "onboarding_027",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "m4_vague",
+   "label_offsets": [
+    263,
+    262,
+    261,
+    87,
+    86,
+    85
+   ]
+  },
+  {
+   "item_id": "onboarding_027",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "m4_vague",
+   "label_offsets": [
+    263,
+    262,
+    261,
+    87,
+    86,
+    85
+   ]
+  },
+  {
+   "item_id": "onboarding_027",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "m4_vague",
+   "label_offsets": [
+    263,
+    262,
+    261,
+    87,
+    86,
+    85
+   ]
+  },
+  {
+   "item_id": "onboarding_027",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "m4_vague",
+   "label_offsets": [
+    263,
+    262,
+    261,
+    87,
+    86,
+    85
+   ]
+  },
+  {
+   "item_id": "onboarding_028",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    321,
+    320,
+    319,
+    144,
+    143,
+    142
+   ]
+  },
+  {
+   "item_id": "onboarding_028",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    321,
+    320,
+    319,
+    144,
+    143,
+    142
+   ]
+  },
+  {
+   "item_id": "onboarding_028",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    321,
+    320,
+    319,
+    144,
+    143,
+    142
+   ]
+  },
+  {
+   "item_id": "onboarding_028",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    321,
+    320,
+    319,
+    144,
+    143,
+    142
+   ]
+  },
+  {
+   "item_id": "onboarding_029",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "c2_missing_mentions",
+   "label_offsets": [
+    278,
+    277,
+    276,
+    95,
+    94,
+    93
+   ]
+  },
+  {
+   "item_id": "onboarding_029",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "c2_missing_mentions",
+   "label_offsets": [
+    278,
+    277,
+    276,
+    95,
+    94,
+    93
+   ]
+  },
+  {
+   "item_id": "onboarding_029",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "c2_missing_mentions",
+   "label_offsets": [
+    278,
+    277,
+    276,
+    95,
+    94,
+    93
+   ]
+  },
+  {
+   "item_id": "onboarding_029",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "c2_missing_mentions",
+   "label_offsets": [
+    278,
+    277,
+    276,
+    95,
+    94,
+    93
+   ]
+  },
+  {
+   "item_id": "onboarding_030",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "b2_no_access",
+   "label_offsets": [
+    272,
+    271,
+    270,
+    88,
+    87,
+    86
+   ]
+  },
+  {
+   "item_id": "onboarding_030",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "b2_no_access",
+   "label_offsets": [
+    272,
+    271,
+    270,
+    88,
+    87,
+    86
+   ]
+  },
+  {
+   "item_id": "onboarding_030",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "b2_no_access",
+   "label_offsets": [
+    272,
+    271,
+    270,
+    88,
+    87,
+    86
+   ]
+  },
+  {
+   "item_id": "onboarding_030",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "b2_no_access",
+   "label_offsets": [
+    272,
+    271,
+    270,
+    88,
+    87,
+    86
+   ]
+  }
+ ],
+ "lever_A": {
+  "onboarding_006": -0.761298139890035,
+  "onboarding_007": -0.10122446219126384,
+  "onboarding_009": -0.3729791045188904,
+  "onboarding_010": 0.024663567543029785,
+  "onboarding_011": -0.2689974308013916,
+  "onboarding_012": -0.216423898935318,
+  "onboarding_013": -0.22635364532470703,
+  "onboarding_014": -0.03864523768424988,
+  "onboarding_016": -0.05237927039464315,
+  "onboarding_017": 0.2743772665659587,
+  "onboarding_018": -0.12687993049621582,
+  "onboarding_019": -0.3858126401901245,
+  "onboarding_020": -0.0004342198371887207,
+  "onboarding_021": -0.28744781017303467,
+  "onboarding_022": -0.7262704968452454,
+  "onboarding_023": 0.05853871504465739,
+  "onboarding_024": -0.12668931484222412,
+  "onboarding_025": -0.28056931495666504,
+  "onboarding_026": -0.6572971741358439,
+  "onboarding_027": -0.12793171405792236,
+  "onboarding_028": -0.011167128880818685,
+  "onboarding_029": -0.24398342768351236,
+  "onboarding_030": -0.6806749701499939
+ },
+ "lever_C": {
+  "onboarding_006": -0.01830764611562093,
+  "onboarding_007": 0.07607372601826985,
+  "onboarding_009": 1.3070284128189087,
+  "onboarding_010": 0.7153733968734741,
+  "onboarding_011": 0.051485300064086914,
+  "onboarding_012": 0.5909890830516815,
+  "onboarding_013": 0.6177421808242798,
+  "onboarding_014": -0.08257129788398743,
+  "onboarding_016": 0.18526224295298258,
+  "onboarding_017": 0.27757447957992554,
+  "onboarding_018": -0.5599212050437927,
+  "onboarding_019": 0.0724639892578125,
+  "onboarding_020": -0.28529658913612366,
+  "onboarding_021": 0.1834457516670227,
+  "onboarding_022": -0.302939772605896,
+  "onboarding_023": 0.4792939821879069,
+  "onboarding_024": 0.09022676944732666,
+  "onboarding_025": 0.09640836715698242,
+  "onboarding_026": -0.008074720700581869,
+  "onboarding_027": 0.38771647214889526,
+  "onboarding_028": 0.3121488889058431,
+  "onboarding_029": 0.30666498343149823,
+  "onboarding_030": 0.28431904315948486
+ },
+ "author": {
+  "screen_n": 92,
+  "confirm_n": 200,
+  "band": [
+   16,
+   28
+  ],
+  "levels": {
+   "all": {
+    "n": 23,
+    "movement": [
+     -0.04318045533221701,
+     -0.21917708619781162,
+     0.15836185113243423
+    ],
+    "lever": [
+     -0.07086683356243631,
+     -0.2640913154767907,
+     0.1405102180398028
+    ],
+    "tau": null
+   },
+   "band": {
+    "n": 23,
+    "movement": [
+     -0.19243360343186752,
+     -0.32265726774930953,
+     -0.0516747977422632
+    ],
+    "lever": [
+     -0.18409318768459818,
+     -0.31562113431484806,
+     -0.04171486341434987
+    ],
+    "tau": [
+     1.045305401314245,
+     1.0051427060655662,
+     1.243153213255301
+    ]
+   },
+   "block": {
+    "16": {
+     "n": 23,
+     "movement": [
+      0.03072639911071114,
+      -0.006315566664156707,
+      0.07141484955082769
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.1669067687792654,
+      -0.8877480422672106,
+      0.03484734080673943
+     ]
+    },
+    "17": {
+     "n": 23,
+     "movement": [
+      0.004596349985703178,
+      -0.019081854496313177,
+      0.029481583833694452
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.02496751804622982,
+      -0.40133796708819525,
+      0.0931919677699121
+     ]
+    },
+    "18": {
+     "n": 23,
+     "movement": [
+      -0.00023841598759526792,
+      -0.0286332997938861,
+      0.03408937810555748
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.0012950831619241638,
+      -0.37918239237122997,
+      0.18003249653049974
+     ]
+    },
+    "19": {
+     "n": 23,
+     "movement": [
+      -0.005499121935471245,
+      -0.0379710980731508,
+      0.026960117661434656
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.029871403741961056,
+      -0.38048916276832845,
+      0.2026545091540695
+     ]
+    },
+    "20": {
+     "n": 23,
+     "movement": [
+      -0.049890051717343536,
+      -0.0968382157061411,
+      0.0009371440695679548
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.2710043339725248,
+      -0.029251456702714333,
+      0.7062332937650518
+     ]
+    },
+    "21": {
+     "n": 23,
+     "movement": [
+      -0.07429523830828459,
+      -0.1261743690656579,
+      -0.02012132943972301
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.40357407703522735,
+      0.13606370499446385,
+      1.0652327499041778
+     ]
+    },
+    "22": {
+     "n": 23,
+     "movement": [
+      -0.03385474630024122,
+      -0.10223269164562225,
+      0.04020486901635704
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.18390004935024337,
+      -0.7280714330872173,
+      0.4475411994616747
+     ]
+    },
+    "23": {
+     "n": 23,
+     "movement": [
+      -0.08081147981726605,
+      -0.1414314235034196,
+      -0.01474859623805347
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.43897050637049184,
+      0.1284720211081524,
+      1.060172474706967
+     ]
+    },
+    "24": {
+     "n": 23,
+     "movement": [
+      -0.002807759720346202,
+      -0.0735263661197994,
+      0.08264692892198966
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.015251839330180213,
+      -1.5051253625468122,
+      0.27453499395474484
+     ]
+    },
+    "25": {
+     "n": 23,
+     "movement": [
+      -0.05009957240975421,
+      -0.11637882784656856,
+      0.013264882434969353
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.2721424569799315,
+      -0.12362925971592217,
+      0.7894225459350218
+     ]
+    },
+    "26": {
+     "n": 23,
+     "movement": [
+      -0.009422299654587456,
+      -0.05914371888274732,
+      0.046206602130247194
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.05118222881082609,
+      -0.8485139095989263,
+      0.26283302290873267
+     ]
+    },
+    "27": {
+     "n": 23,
+     "movement": [
+      -0.14310793772987698,
+      -0.22909600281197093,
+      -0.0687529062447341
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.7773668299723284,
+      0.4652874953184698,
+      2.1036602453939124
+     ]
+    },
+    "28": {
+     "n": 23,
+     "movement": [
+      -0.07737226330715677,
+      -0.12996321942495262,
+      -0.026201544054176563
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.420288573848352,
+      0.21930697974930422,
+      1.025451325551029
+     ]
+    }
+   },
+   "group": {
+    "27.0": {
+     "n": 23,
+     "movement": [
+      -0.09073508822399637,
+      -0.14138275255327637,
+      -0.04426620771055638
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.49287586012932927,
+      0.2679558236191856,
+      1.511509803081589
+     ]
+    },
+    "27.1": {
+     "n": 23,
+     "movement": [
+      -0.005800703297490659,
+      -0.01868184558723284,
+      0.005193448714587995
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.031509603209374834,
+      -0.03634934975946625,
+      0.19802469032791237
+     ]
+    },
+    "27.2": {
+     "n": 23,
+     "movement": [
+      0.01615208387374878,
+      -0.0008721143655155014,
+      0.033845242469207094
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.08773862888083454,
+      -0.6116384610639048,
+      0.005831679549231949
+     ]
+    },
+    "27.3": {
+     "n": 23,
+     "movement": [
+      -0.029125265453172768,
+      -0.0712180882692337,
+      0.013193294794663126
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.15820936026743307,
+      -0.1428634882504135,
+      0.4303590721624433
+     ]
+    },
+    "27.4": {
+     "n": 23,
+     "movement": [
+      0.01389452426329903,
+      -0.00392607903998831,
+      0.032008002439270815
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.07547549389553805,
+      -0.3199527119289665,
+      0.02914417418405791
+     ]
+    },
+    "27.5": {
+     "n": 23,
+     "movement": [
+      -0.01765288218207981,
+      -0.0749836574430051,
+      0.02680359916842502
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.09589101261217776,
+      -0.1737463321888093,
+      0.7852651215750951
+     ]
+    },
+    "27.6": {
+     "n": 23,
+     "movement": [
+      -0.04882331257281096,
+      -0.07035324780837349,
+      -0.027412277913611872
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.2652097733049123,
+      0.12815336201225727,
+      0.9330242979679214
+     ]
+    },
+    "27.7": {
+     "n": 23,
+     "movement": [
+      0.001753936643185823,
+      -0.017578496492427327,
+      0.022315881692844885
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.009527439147779844,
+      -0.2973274801386442,
+      0.08886927441403084
+     ]
+    },
+    "23.0": {
+     "n": 23,
+     "movement": [
+      -0.08081147981726605,
+      -0.1414314235034196,
+      -0.01474859623805347
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.43897050637049184,
+      0.1284720211081524,
+      1.060172474706967
+     ]
+    },
+    "28.0": {
+     "n": 23,
+     "movement": [
+      0.006578512813733972,
+      -0.006236550600632377,
+      0.018675915443378942
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.03573468902610757,
+      -0.25898451289357177,
+      0.03881745984467698
+     ]
+    },
+    "28.1": {
+     "n": 23,
+     "movement": [
+      -0.0011710239493328593,
+      -0.008077937364578246,
+      0.006149880652842314
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.006361039015409645,
+      -0.06453817862238319,
+      0.05681370502959129
+     ]
+    },
+    "28.2": {
+     "n": 23,
+     "movement": [
+      0.0320591460103574,
+      0.0037152732196061512,
+      0.05959554288698279
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.1741462919599364,
+      -0.5746312300364419,
+      -0.018989733962268295
+     ]
+    },
+    "28.3": {
+     "n": 23,
+     "movement": [
+      0.015111511168272598,
+      0.0029729212755742283,
+      0.027891156336535574
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.08208620513520977,
+      -0.40212288791467843,
+      -0.012880816609816709
+     ]
+    },
+    "28.4": {
+     "n": 23,
+     "movement": [
+      0.009233277776966925,
+      1.4557397883871378e-05,
+      0.018351369966631344
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.05015545601169146,
+      -0.264186927483171,
+      0.002603315844471726
+     ]
+    },
+    "28.5": {
+     "n": 23,
+     "movement": [
+      0.002912847892097805,
+      -0.005197944070981896,
+      0.011247920860414916
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.01582268159258727,
+      -0.1518233821068221,
+      0.029942498922098566
+     ]
+    },
+    "28.6": {
+     "n": 23,
+     "movement": [
+      -0.12953389727551004,
+      -0.19049989296042402,
+      -0.07172117375809214
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.703632214231832,
+      0.48073648371076444,
+      1.9318426672727844
+     ]
+    },
+    "28.7": {
+     "n": 23,
+     "movement": [
+      -0.025279726671135944,
+      -0.03739595562219619,
+      -0.014529426071954813
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.13732027235275543,
+      0.05947902615676624,
+      0.5911953650555712
+     ]
+    }
+   },
+   "head": {
+    "28.12": {
+     "n": 23,
+     "movement": [
+      -0.10726351323335068,
+      -0.16432518039060676,
+      -0.05125339653180997
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.5826587859248888,
+      0.3671099888807857,
+      1.5052793071746833
+     ]
+    },
+    "28.13": {
+     "n": 23,
+     "movement": [
+      -0.01901207799496858,
+      -0.02703959268072377,
+      -0.01088354237701582
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.10327420712352188,
+      0.050159290506454055,
+      0.422098721511115
+     ]
+    },
+    "27.0": {
+     "n": 23,
+     "movement": [
+      -0.006093048531076182,
+      -0.02637220122244047,
+      0.014306212702523056
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.033097631735918634,
+      -0.14631673820453026,
+      0.16882483081765992
+     ]
+    },
+    "27.1": {
+     "n": 23,
+     "movement": [
+      -0.09234055747156558,
+      -0.14221162614615068,
+      -0.04939800682275192
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.5015968197029111,
+      0.2551345062099591,
+      1.6674968861946076
+     ]
+    },
+    "23.0": {
+     "n": 23,
+     "movement": [
+      -0.01941303844037263,
+      -0.03722969986822294,
+      8.779569812383752e-06
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.1054522369053246,
+      -0.007525716977006675,
+      0.36320758252022034
+     ]
+    },
+    "23.1": {
+     "n": 23,
+     "movement": [
+      0.0053223993467248,
+      -0.021933024603387582,
+      0.03505638112192565
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.028911441067789652,
+      -0.3953089426320793,
+      0.1401984315593897
+     ]
+    },
+    "23.2": {
+     "n": 23,
+     "movement": [
+      -0.001301252323648204,
+      -0.027090055009593134,
+      0.028446394205093362
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.007068443650818867,
+      -0.2698468269256038,
+      0.1739229080694028
+     ]
+    },
+    "23.3": {
+     "n": 23,
+     "movement": [
+      0.03457587439080943,
+      0.012763626938280852,
+      0.058800735551378
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.1878172398755316,
+      -1.0563554539504827,
+      -0.047104605525237465
+     ]
+    },
+    "23.4": {
+     "n": 23,
+     "movement": [
+      -0.05746176968450132,
+      -0.08197367618913236,
+      -0.037036486034807956
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.3121341447079997,
+      0.17340808541226485,
+      1.1417565750885241
+     ]
+    },
+    "23.5": {
+     "n": 23,
+     "movement": [
+      -0.05074758115022079,
+      -0.11690879276265269,
+      0.01450974701539327
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.27566246088999896,
+      -0.11054308617040673,
+      1.2898596911343543
+     ]
+    },
+    "23.6": {
+     "n": 23,
+     "movement": [
+      0.047637330449145775,
+      0.008375849866348763,
+      0.08356176841518151
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.25876748101489505,
+      -0.9387325637163032,
+      -0.0361430087653949
+     ]
+    },
+    "23.7": {
+     "n": 23,
+     "movement": [
+      0.029357829819554867,
+      0.002764425329540087,
+      0.059907709450825394
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.15947265723842446,
+      -0.8646821304455613,
+      -0.009630080757136627
+     ]
+    },
+    "23.8": {
+     "n": 23,
+     "movement": [
+      0.013251768506091574,
+      -0.010468796673028365,
+      0.037133081516493895
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.07198402435616176,
+      -0.503160379478656,
+      0.06554527042089986
+     ]
+    },
+    "23.9": {
+     "n": 23,
+     "movement": [
+      -0.0056070244830587635,
+      -0.06681453093238499,
+      0.04375832301119098
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.030457533782646675,
+      -0.6526136514421993,
+      0.2739670223955134
+     ]
+    },
+    "23.10": {
+     "n": 23,
+     "movement": [
+      0.021046115004498024,
+      -0.01589613958545353,
+      0.06624132926049435
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.11432316029290425,
+      -1.065215901351194,
+      0.07245163762073312
+     ]
+    },
+    "23.11": {
+     "n": 23,
+     "movement": [
+      -0.08786224282306174,
+      -0.1755391282879788,
+      -0.004193671436413579
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.47727047333002737,
+      0.009507732175323877,
+      2.1250121955444925
+     ]
+    },
+    "23.12": {
+     "n": 23,
+     "movement": [
+      -0.014574851678765339,
+      -0.068300563874452,
+      0.03345894852410192
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.07917105386721877,
+      -0.23512485860646024,
+      0.7410767172142426
+     ]
+    },
+    "23.13": {
+     "n": 23,
+     "movement": [
+      -0.00017237922419672427,
+      -0.0988180433926375,
+      0.08726746051207827
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.000936369380990115,
+      -0.6360743307917707,
+      0.9505131900135232
+     ]
+    },
+    "23.14": {
+     "n": 23,
+     "movement": [
+      0.0023445901663407035,
+      -0.015837458164795582,
+      0.02167813920456426
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.012735887708988047,
+      -0.2837162343313307,
+      0.08862549958923761
+     ]
+    },
+    "23.15": {
+     "n": 23,
+     "movement": [
+      0.04040374963179878,
+      0.006317633779152581,
+      0.07977209972298661
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      -0.21947444193872845,
+      -1.1490565277757705,
+      -0.022825667440428264
+     ]
+    },
+    "27.12": {
+     "n": 23,
+     "movement": [
+      -0.05211775458377341,
+      -0.07909165646718896,
+      -0.02823467183372251
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.28310528618291586,
+      0.12703004966484185,
+      1.1030379152853889
+     ]
+    },
+    "27.13": {
+     "n": 23,
+     "movement": [
+      -0.001788852007492729,
+      -0.017155930270319402,
+      0.010145987829436423
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.0097171005075838,
+      -0.09531225509641009,
+      0.13459293583988832
+     ]
+    },
+    "28.14": {
+     "n": 23,
+     "movement": [
+      -0.0059642351191976795,
+      -0.014518578091393347,
+      0.0017631609802660642
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.032397913221080404,
+      -0.011676916496942889,
+      0.2147249694619449
+     ]
+    },
+    "28.15": {
+     "n": 23,
+     "movement": [
+      -0.021361576474231224,
+      -0.03404818928760031,
+      -0.00991194993257524
+     ],
+     "lever": [
+      -0.18409318768459818,
+      -0.31562113431484806,
+      -0.04171486341434987
+     ],
+     "tau": [
+      0.11603675694306206,
+      0.04694550142985117,
+      0.4414018244606181
+     ]
+    }
+   }
+  },
+  "sanity_max_abs_diff": 0.3989434242248535,
+  "expanded_blocks": [
+   27,
+   23,
+   28
+  ],
+  "expanded_groups": [
+   [
+    28,
+    6
+   ],
+   [
+    27,
+    0
+   ],
+   [
+    23,
+    0
+   ],
+   [
+    27,
+    6
+   ],
+   [
+    28,
+    7
+   ]
+  ],
+  "candidates_screen": [
+   [
+    28,
+    12
+   ],
+   [
+    27,
+    1
+   ],
+   [
+    23,
+    11
+   ],
+   [
+    23,
+    4
+   ],
+   [
+    27,
+    12
+   ],
+   [
+    28,
+    15
+   ],
+   [
+    28,
+    13
+   ]
+  ],
+  "confirm": {
+   "b28h12": {
+    "n": 23,
+    "movement": [
+     -0.13881860824598782,
+     -0.20864453674226563,
+     -0.07627037094123128
+    ],
+    "lever": [
+     -0.2319947731667671,
+     -0.33651876318929846,
+     -0.12451454431250497
+    ],
+    "tau": [
+     0.5983695509648378,
+     0.43820641576864394,
+     0.8110610092595287
+    ]
+   },
+   "b27h1": {
+    "n": 23,
+    "movement": [
+     -0.10580868824668553,
+     -0.15083014348494833,
+     -0.06457061051674513
+    ],
+    "lever": [
+     -0.2319947731667671,
+     -0.33651876318929846,
+     -0.12451454431250497
+    ],
+    "tau": [
+     0.4560822073807069,
+     0.2810284535022953,
+     0.8153213457029531
+    ]
+   },
+   "b23h11": {
+    "n": 23,
+    "movement": [
+     -0.10532154617966086,
+     -0.18297248033509733,
+     -0.03126954594492053
+    ],
+    "lever": [
+     -0.2319947731667671,
+     -0.33651876318929846,
+     -0.12451454431250497
+    ],
+    "tau": [
+     0.453982409784515,
+     0.15157290399835965,
+     0.9067457055981591
+    ]
+   },
+   "b23h4": {
+    "n": 23,
+    "movement": [
+     -0.08131395474724148,
+     -0.11370646641522211,
+     -0.05331060749249183
+    ],
+    "lever": [
+     -0.2319947731667671,
+     -0.33651876318929846,
+     -0.12451454431250497
+    ],
+    "tau": [
+     0.3504990808081257,
+     0.22607899091161543,
+     0.6352114386307035
+    ]
+   },
+   "b27h12": {
+    "n": 23,
+    "movement": [
+     -0.060400069623753654,
+     -0.08703057502490887,
+     -0.03531917691014816
+    ],
+    "lever": [
+     -0.2319947731667671,
+     -0.33651876318929846,
+     -0.12451454431250497
+    ],
+    "tau": [
+     0.260350993254213,
+     0.14897283702731934,
+     0.4832909214994239
+    ]
+   },
+   "b28h15": {
+    "n": 23,
+    "movement": [
+     -0.022536260494287464,
+     -0.034378471085126844,
+     -0.010182010220444723
+    ],
+    "lever": [
+     -0.2319947731667671,
+     -0.33651876318929846,
+     -0.12451454431250497
+    ],
+    "tau": [
+     0.09714124239379955,
+     0.052985949336165114,
+     0.1672138656413093
+    ]
+   },
+   "b28h13": {
+    "n": 23,
+    "movement": [
+     -0.024417193039603855,
+     -0.03580052660427231,
+     -0.014465308362159177
+    ],
+    "lever": [
+     -0.2319947731667671,
+     -0.33651876318929846,
+     -0.12451454431250497
+    ],
+    "tau": [
+     0.10524889292247892,
+     0.05991457746356916,
+     0.20173768611256324
+    ]
+   },
+   "cands": {
+    "n": 23,
+    "movement": [
+     -0.31135543576185254,
+     -0.42720786949646644,
+     -0.1950040347658206
+    ],
+    "lever": [
+     -0.2319947731667671,
+     -0.33651876318929846,
+     -0.12451454431250497
+    ],
+    "tau": [
+     1.3420795283954,
+     1.0967361372977475,
+     1.7956923796631654
+    ]
+   },
+   "band": {
+    "n": 23,
+    "movement": [
+     -0.23918130043624106,
+     -0.34520746783717815,
+     -0.13152201713427253
+    ],
+    "lever": [
+     -0.2319947731667671,
+     -0.33651876318929846,
+     -0.12451454431250497
+    ],
+    "tau": [
+     1.0309771085416135,
+     1.0010724589351365,
+     1.0795314438826407
+    ]
+   },
+   "rand0": {
+    "n": 23,
+    "movement": [
+     -0.017406574625899826,
+     -0.038010536490575134,
+     0.004152711837188056
+    ],
+    "lever": [
+     -0.2319947731667671,
+     -0.33651876318929846,
+     -0.12451454431250497
+    ],
+    "tau": [
+     0.07503002929030339,
+     -0.028513906027516685,
+     0.14585601318931413
+    ],
+    "spec": [
+     [
+      42,
+      [
+       10
+      ]
+     ],
+     [
+      30,
+      [
+       4
+      ]
+     ],
+     [
+      10,
+      [
+       0
+      ]
+     ],
+     [
+      2,
+      [
+       0
+      ]
+     ],
+     [
+      6,
+      [
+       13
+      ]
+     ],
+     [
+      35,
+      [
+       14
+      ]
+     ],
+     [
+      30,
+      [
+       9
+      ]
+     ]
+    ]
+   },
+   "rand1": {
+    "n": 23,
+    "movement": [
+     -0.01065515435260275,
+     -0.023515642121218254,
+     0.0029699933485708247
+    ],
+    "lever": [
+     -0.2319947731667671,
+     -0.33651876318929846,
+     -0.12451454431250497
+    ],
+    "tau": [
+     0.045928424193175256,
+     -0.01677292295164722,
+     0.09621232983338097
+    ],
+    "spec": [
+     [
+      46,
+      [
+       11
+      ]
+     ],
+     [
+      35,
+      [
+       8
+      ]
+     ],
+     [
+      32,
+      [
+       14
+      ]
+     ],
+     [
+      9,
+      [
+       13
+      ]
+     ],
+     [
+      36,
+      [
+       0
+      ]
+     ],
+     [
+      13,
+      [
+       13
+      ]
+     ],
+     [
+      32,
+      [
+       0
+      ]
+     ]
+    ]
+   },
+   "rand2": {
+    "n": 23,
+    "movement": [
+     0.02704522791116134,
+     0.0038060508776402136,
+     0.05093067272201824
+    ],
+    "lever": [
+     -0.2319947731667671,
+     -0.33651876318929846,
+     -0.12451454431250497
+    ],
+    "tau": [
+     -0.11657688465127683,
+     -0.28758835848603626,
+     -0.01855453415881212
+    ],
+    "spec": [
+     [
+      39,
+      [
+       11
+      ]
+     ],
+     [
+      42,
+      [
+       2
+      ]
+     ],
+     [
+      3,
+      [
+       13
+      ]
+     ],
+     [
+      0,
+      [
+       8
+      ]
+     ],
+     [
+      2,
+      [
+       4
+      ]
+     ],
+     [
+      29,
+      [
+       6
+      ]
+     ],
+     [
+      14,
+      [
+       0
+      ]
+     ]
+    ]
+   }
+  },
+  "candidates_confirmed": [
+   [
+    28,
+    12
+   ],
+   [
+    27,
+    1
+   ],
+   [
+    23,
+    11
+   ],
+   [
+    23,
+    4
+   ],
+   [
+    27,
+    12
+   ],
+   [
+    28,
+    13
+   ]
+  ]
+ },
+ "author_heads": [
+  [
+   28,
+   12
+  ],
+  [
+   27,
+   1
+  ],
+  [
+   23,
+   11
+  ],
+  [
+   23,
+   4
+  ],
+  [
+   27,
+   12
+  ],
+  [
+   28,
+   13
+  ]
+ ],
+ "cond": {
+  "screen_n": 92,
+  "confirm_n": 200,
+  "band": [
+   16,
+   28
+  ],
+  "levels": {
+   "all": {
+    "n": 23,
+    "movement": [
+     0.25335863362187927,
+     0.01452958687492039,
+     0.4698460863984148
+    ],
+    "lever": [
+     0.2490090494570525,
+     0.01917683508085168,
+     0.46114881867947766
+    ],
+    "tau": [
+     1.0174675746697188,
+     0.7023192173971154,
+     1.289416240589383
+    ]
+   },
+   "band": {
+    "n": 23,
+    "movement": [
+     0.20768504557402237,
+     -0.017812510677005934,
+     0.41450501343478313
+    ],
+    "lever": [
+     0.21074975055197012,
+     -0.027225581070651175,
+     0.429051905611287
+    ],
+    "tau": [
+     0.9854580849091349,
+     0.692173848859893,
+     1.340193857918166
+    ]
+   },
+   "block": {},
+   "group": {},
+   "head": {}
+  },
+  "sanity_max_abs_diff": 0.20212841033935547,
+  "expanded_blocks": [],
+  "expanded_groups": [],
+  "candidates_screen": [],
+  "confirm": {
+   "band": {
+    "n": 23,
+    "movement": [
+     0.20714229345321655,
+     0.07294660721352136,
+     0.35866744981511783
+    ],
+    "lever": [
+     0.20770025382871213,
+     0.06750271475833396,
+     0.36956731153355127
+    ],
+    "tau": [
+     0.9973136268964037,
+     0.9112176973576479,
+     1.1750902648217258
+    ]
+   },
+   "author_heads": {
+    "n": 23,
+    "movement": [
+     0.0943228801091512,
+     -0.002356418351764267,
+     0.18924123008829957
+    ],
+    "lever": [
+     0.20770025382871213,
+     0.06750271475833396,
+     0.36956731153355127
+    ],
+    "tau": [
+     0.4541298258929338,
+     0.003952484545912665,
+     0.647954852385609
+    ]
+   },
+   "rand0": {
+    "n": 23,
+    "movement": [
+     -0.0015790648218514261,
+     -0.004112806354743847,
+     0.0011414307183113647
+    ],
+    "lever": [
+     0.20770025382871213,
+     0.06750271475833396,
+     0.36956731153355127
+    ],
+    "tau": [
+     -0.007602613828068124,
+     -0.03594164840312837,
+     0.005913578631695557
+    ],
+    "spec": [
+     [
+      42,
+      [
+       10
+      ]
+     ]
+    ]
+   },
+   "rand1": {
+    "n": 23,
+    "movement": [
+     0.0027995282325191774,
+     -0.0019160123083038609,
+     0.0079091206624888
+    ],
+    "lever": [
+     0.20770025382871213,
+     0.06750271475833396,
+     0.36956731153355127
+    ],
+    "tau": [
+     0.013478694324696948,
+     -0.013261484744524276,
+     0.051589382912315476
+    ],
+    "spec": [
+     [
+      30,
+      [
+       4
+      ]
+     ]
+    ]
+   },
+   "rand2": {
+    "n": 23,
+    "movement": [
+     0.0028859744037407005,
+     -0.011831111979225407,
+     0.018160478274027503
+    ],
+    "lever": [
+     0.20770025382871213,
+     0.06750271475833396,
+     0.36956731153355127
+    ],
+    "tau": [
+     0.013894900706865426,
+     -0.08679626579296182,
+     0.10847728421072145
+    ],
+    "spec": [
+     [
+      10,
+      [
+       0
+      ]
+     ]
+    ]
+   }
+  },
+  "candidates_confirmed": []
+ },
+ "cond_heads": [],
+ "stage_c_pod": "second pod (runner fix 1eb8e24); git 1eb8e24-dirty"
+}

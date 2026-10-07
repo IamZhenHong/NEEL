@@ -1,0 +1,5152 @@
+{
+ "model": "Qwen/Qwen3-8B",
+ "git": "59b8639-dirty",
+ "band": [
+  12,
+  24
+ ],
+ "caps": [
+  6,
+  12
+ ],
+ "n_blocks": 36,
+ "geometry": {
+  "0": [
+   32,
+   128,
+   4
+  ],
+  "1": [
+   32,
+   128,
+   4
+  ],
+  "2": [
+   32,
+   128,
+   4
+  ],
+  "3": [
+   32,
+   128,
+   4
+  ],
+  "4": [
+   32,
+   128,
+   4
+  ],
+  "5": [
+   32,
+   128,
+   4
+  ],
+  "6": [
+   32,
+   128,
+   4
+  ],
+  "7": [
+   32,
+   128,
+   4
+  ],
+  "8": [
+   32,
+   128,
+   4
+  ],
+  "9": [
+   32,
+   128,
+   4
+  ],
+  "10": [
+   32,
+   128,
+   4
+  ],
+  "11": [
+   32,
+   128,
+   4
+  ],
+  "12": [
+   32,
+   128,
+   4
+  ],
+  "13": [
+   32,
+   128,
+   4
+  ],
+  "14": [
+   32,
+   128,
+   4
+  ],
+  "15": [
+   32,
+   128,
+   4
+  ],
+  "16": [
+   32,
+   128,
+   4
+  ],
+  "17": [
+   32,
+   128,
+   4
+  ],
+  "18": [
+   32,
+   128,
+   4
+  ],
+  "19": [
+   32,
+   128,
+   4
+  ],
+  "20": [
+   32,
+   128,
+   4
+  ],
+  "21": [
+   32,
+   128,
+   4
+  ],
+  "22": [
+   32,
+   128,
+   4
+  ],
+  "23": [
+   32,
+   128,
+   4
+  ],
+  "24": [
+   32,
+   128,
+   4
+  ],
+  "25": [
+   32,
+   128,
+   4
+  ],
+  "26": [
+   32,
+   128,
+   4
+  ],
+  "27": [
+   32,
+   128,
+   4
+  ],
+  "28": [
+   32,
+   128,
+   4
+  ],
+  "29": [
+   32,
+   128,
+   4
+  ],
+  "30": [
+   32,
+   128,
+   4
+  ],
+  "31": [
+   32,
+   128,
+   4
+  ],
+  "32": [
+   32,
+   128,
+   4
+  ],
+  "33": [
+   32,
+   128,
+   4
+  ],
+  "34": [
+   32,
+   128,
+   4
+  ],
+  "35": [
+   32,
+   128,
+   4
+  ]
+ },
+ "layer_types": [
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention",
+  "full_attention"
+ ],
+ "screen_rows": [
+  {
+   "item_id": "onboarding_006",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "p6_vague",
+   "label_offsets": [
+    226,
+    225,
+    224,
+    51,
+    50,
+    49
+   ]
+  },
+  {
+   "item_id": "onboarding_006",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "p6_vague",
+   "label_offsets": [
+    226,
+    225,
+    224,
+    51,
+    50,
+    49
+   ]
+  },
+  {
+   "item_id": "onboarding_006",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "p6_vague",
+   "label_offsets": [
+    226,
+    225,
+    224,
+    51,
+    50,
+    49
+   ]
+  },
+  {
+   "item_id": "onboarding_006",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "p6_vague",
+   "label_offsets": [
+    226,
+    225,
+    224,
+    51,
+    50,
+    49
+   ]
+  },
+  {
+   "item_id": "onboarding_007",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "w1_complete",
+   "label_offsets": [
+    309,
+    308,
+    307,
+    135,
+    134,
+    133
+   ]
+  },
+  {
+   "item_id": "onboarding_007",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "w1_complete",
+   "label_offsets": [
+    309,
+    308,
+    307,
+    135,
+    134,
+    133
+   ]
+  },
+  {
+   "item_id": "onboarding_007",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "w1_complete",
+   "label_offsets": [
+    309,
+    308,
+    307,
+    135,
+    134,
+    133
+   ]
+  },
+  {
+   "item_id": "onboarding_007",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "w1_complete",
+   "label_offsets": [
+    309,
+    308,
+    307,
+    135,
+    134,
+    133
+   ]
+  },
+  {
+   "item_id": "onboarding_009",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "y3_vague",
+   "label_offsets": [
+    259,
+    258,
+    257,
+    81,
+    80,
+    79
+   ]
+  },
+  {
+   "item_id": "onboarding_009",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "y3_vague",
+   "label_offsets": [
+    259,
+    258,
+    257,
+    81,
+    80,
+    79
+   ]
+  },
+  {
+   "item_id": "onboarding_009",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "y3_vague",
+   "label_offsets": [
+    259,
+    258,
+    257,
+    81,
+    80,
+    79
+   ]
+  },
+  {
+   "item_id": "onboarding_009",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "y3_vague",
+   "label_offsets": [
+    259,
+    258,
+    257,
+    81,
+    80,
+    79
+   ]
+  },
+  {
+   "item_id": "onboarding_010",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    309,
+    308,
+    307,
+    131,
+    130,
+    129
+   ]
+  },
+  {
+   "item_id": "onboarding_010",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    309,
+    308,
+    307,
+    131,
+    130,
+    129
+   ]
+  },
+  {
+   "item_id": "onboarding_010",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    309,
+    308,
+    307,
+    131,
+    130,
+    129
+   ]
+  },
+  {
+   "item_id": "onboarding_010",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    309,
+    308,
+    307,
+    131,
+    130,
+    129
+   ]
+  },
+  {
+   "item_id": "onboarding_011",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "c3_jargon",
+   "label_offsets": [
+    271,
+    270,
+    269,
+    96,
+    95,
+    94
+   ]
+  },
+  {
+   "item_id": "onboarding_011",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "c3_jargon",
+   "label_offsets": [
+    271,
+    270,
+    269,
+    96,
+    95,
+    94
+   ]
+  },
+  {
+   "item_id": "onboarding_011",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "c3_jargon",
+   "label_offsets": [
+    271,
+    270,
+    269,
+    96,
+    95,
+    94
+   ]
+  },
+  {
+   "item_id": "onboarding_011",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "c3_jargon",
+   "label_offsets": [
+    271,
+    270,
+    269,
+    96,
+    95,
+    94
+   ]
+  },
+  {
+   "item_id": "onboarding_012",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "o1_complete",
+   "label_offsets": [
+    321,
+    320,
+    319,
+    142,
+    141,
+    140
+   ]
+  },
+  {
+   "item_id": "onboarding_012",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "o1_complete",
+   "label_offsets": [
+    321,
+    320,
+    319,
+    142,
+    141,
+    140
+   ]
+  },
+  {
+   "item_id": "onboarding_012",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "o1_complete",
+   "label_offsets": [
+    321,
+    320,
+    319,
+    142,
+    141,
+    140
+   ]
+  },
+  {
+   "item_id": "onboarding_012",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "o1_complete",
+   "label_offsets": [
+    321,
+    320,
+    319,
+    142,
+    141,
+    140
+   ]
+  },
+  {
+   "item_id": "onboarding_013",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "t4_jargon_long",
+   "label_offsets": [
+    328,
+    327,
+    326,
+    150,
+    149,
+    148
+   ]
+  },
+  {
+   "item_id": "onboarding_013",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "t4_jargon_long",
+   "label_offsets": [
+    328,
+    327,
+    326,
+    150,
+    149,
+    148
+   ]
+  },
+  {
+   "item_id": "onboarding_013",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "t4_jargon_long",
+   "label_offsets": [
+    328,
+    327,
+    326,
+    150,
+    149,
+    148
+   ]
+  },
+  {
+   "item_id": "onboarding_013",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "t4_jargon_long",
+   "label_offsets": [
+    328,
+    327,
+    326,
+    150,
+    149,
+    148
+   ]
+  },
+  {
+   "item_id": "onboarding_014",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "b1_complete",
+   "label_offsets": [
+    311,
+    310,
+    309,
+    130,
+    129,
+    128
+   ]
+  },
+  {
+   "item_id": "onboarding_014",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "b1_complete",
+   "label_offsets": [
+    311,
+    310,
+    309,
+    130,
+    129,
+    128
+   ]
+  },
+  {
+   "item_id": "onboarding_014",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "b1_complete",
+   "label_offsets": [
+    311,
+    310,
+    309,
+    130,
+    129,
+    128
+   ]
+  },
+  {
+   "item_id": "onboarding_014",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "b1_complete",
+   "label_offsets": [
+    311,
+    310,
+    309,
+    130,
+    129,
+    128
+   ]
+  },
+  {
+   "item_id": "onboarding_015",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "p3_jargon",
+   "label_offsets": [
+    270,
+    269,
+    268,
+    93,
+    92,
+    91
+   ]
+  },
+  {
+   "item_id": "onboarding_015",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "p3_jargon",
+   "label_offsets": [
+    270,
+    269,
+    268,
+    93,
+    92,
+    91
+   ]
+  },
+  {
+   "item_id": "onboarding_015",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "p3_jargon",
+   "label_offsets": [
+    270,
+    269,
+    268,
+    93,
+    92,
+    91
+   ]
+  },
+  {
+   "item_id": "onboarding_015",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "p3_jargon",
+   "label_offsets": [
+    270,
+    269,
+    268,
+    93,
+    92,
+    91
+   ]
+  },
+  {
+   "item_id": "onboarding_016",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    299,
+    298,
+    297,
+    121,
+    120,
+    119
+   ]
+  },
+  {
+   "item_id": "onboarding_016",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    299,
+    298,
+    297,
+    121,
+    120,
+    119
+   ]
+  },
+  {
+   "item_id": "onboarding_016",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    299,
+    298,
+    297,
+    121,
+    120,
+    119
+   ]
+  },
+  {
+   "item_id": "onboarding_016",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    299,
+    298,
+    297,
+    121,
+    120,
+    119
+   ]
+  },
+  {
+   "item_id": "onboarding_017",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "r3_jargon",
+   "label_offsets": [
+    264,
+    263,
+    262,
+    87,
+    86,
+    85
+   ]
+  },
+  {
+   "item_id": "onboarding_017",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "r3_jargon",
+   "label_offsets": [
+    264,
+    263,
+    262,
+    87,
+    86,
+    85
+   ]
+  },
+  {
+   "item_id": "onboarding_017",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "r3_jargon",
+   "label_offsets": [
+    264,
+    263,
+    262,
+    87,
+    86,
+    85
+   ]
+  },
+  {
+   "item_id": "onboarding_017",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "r3_jargon",
+   "label_offsets": [
+    264,
+    263,
+    262,
+    87,
+    86,
+    85
+   ]
+  },
+  {
+   "item_id": "onboarding_018",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "b1_complete",
+   "label_offsets": [
+    304,
+    303,
+    302,
+    127,
+    126,
+    125
+   ]
+  },
+  {
+   "item_id": "onboarding_018",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "b1_complete",
+   "label_offsets": [
+    304,
+    303,
+    302,
+    127,
+    126,
+    125
+   ]
+  },
+  {
+   "item_id": "onboarding_018",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "b1_complete",
+   "label_offsets": [
+    304,
+    303,
+    302,
+    127,
+    126,
+    125
+   ]
+  },
+  {
+   "item_id": "onboarding_018",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "b1_complete",
+   "label_offsets": [
+    304,
+    303,
+    302,
+    127,
+    126,
+    125
+   ]
+  },
+  {
+   "item_id": "onboarding_019",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "e1_complete",
+   "label_offsets": [
+    284,
+    283,
+    282,
+    110,
+    109,
+    108
+   ]
+  },
+  {
+   "item_id": "onboarding_019",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "e1_complete",
+   "label_offsets": [
+    284,
+    283,
+    282,
+    110,
+    109,
+    108
+   ]
+  },
+  {
+   "item_id": "onboarding_019",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "e1_complete",
+   "label_offsets": [
+    284,
+    283,
+    282,
+    110,
+    109,
+    108
+   ]
+  },
+  {
+   "item_id": "onboarding_019",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "e1_complete",
+   "label_offsets": [
+    284,
+    283,
+    282,
+    110,
+    109,
+    108
+   ]
+  },
+  {
+   "item_id": "onboarding_020",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "s3_no_location",
+   "label_offsets": [
+    251,
+    250,
+    249,
+    74,
+    73,
+    72
+   ]
+  },
+  {
+   "item_id": "onboarding_020",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "s3_no_location",
+   "label_offsets": [
+    251,
+    250,
+    249,
+    74,
+    73,
+    72
+   ]
+  },
+  {
+   "item_id": "onboarding_020",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "s3_no_location",
+   "label_offsets": [
+    251,
+    250,
+    249,
+    74,
+    73,
+    72
+   ]
+  },
+  {
+   "item_id": "onboarding_020",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "s3_no_location",
+   "label_offsets": [
+    251,
+    250,
+    249,
+    74,
+    73,
+    72
+   ]
+  },
+  {
+   "item_id": "onboarding_021",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "d1_complete",
+   "label_offsets": [
+    299,
+    298,
+    297,
+    121,
+    120,
+    119
+   ]
+  },
+  {
+   "item_id": "onboarding_021",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "d1_complete",
+   "label_offsets": [
+    299,
+    298,
+    297,
+    121,
+    120,
+    119
+   ]
+  },
+  {
+   "item_id": "onboarding_021",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "d1_complete",
+   "label_offsets": [
+    299,
+    298,
+    297,
+    121,
+    120,
+    119
+   ]
+  },
+  {
+   "item_id": "onboarding_021",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "d1_complete",
+   "label_offsets": [
+    299,
+    298,
+    297,
+    121,
+    120,
+    119
+   ]
+  },
+  {
+   "item_id": "onboarding_022",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "e1_complete",
+   "label_offsets": [
+    301,
+    300,
+    299,
+    127,
+    126,
+    125
+   ]
+  },
+  {
+   "item_id": "onboarding_022",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "e1_complete",
+   "label_offsets": [
+    301,
+    300,
+    299,
+    127,
+    126,
+    125
+   ]
+  },
+  {
+   "item_id": "onboarding_022",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "e1_complete",
+   "label_offsets": [
+    301,
+    300,
+    299,
+    127,
+    126,
+    125
+   ]
+  },
+  {
+   "item_id": "onboarding_022",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "e1_complete",
+   "label_offsets": [
+    301,
+    300,
+    299,
+    127,
+    126,
+    125
+   ]
+  },
+  {
+   "item_id": "onboarding_023",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "v1_complete",
+   "label_offsets": [
+    298,
+    297,
+    296,
+    119,
+    118,
+    117
+   ]
+  },
+  {
+   "item_id": "onboarding_023",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "v1_complete",
+   "label_offsets": [
+    298,
+    297,
+    296,
+    119,
+    118,
+    117
+   ]
+  },
+  {
+   "item_id": "onboarding_023",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "v1_complete",
+   "label_offsets": [
+    298,
+    297,
+    296,
+    119,
+    118,
+    117
+   ]
+  },
+  {
+   "item_id": "onboarding_023",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "v1_complete",
+   "label_offsets": [
+    298,
+    297,
+    296,
+    119,
+    118,
+    117
+   ]
+  },
+  {
+   "item_id": "onboarding_024",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "s1_complete",
+   "label_offsets": [
+    306,
+    305,
+    304,
+    128,
+    127,
+    126
+   ]
+  },
+  {
+   "item_id": "onboarding_024",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "s1_complete",
+   "label_offsets": [
+    306,
+    305,
+    304,
+    128,
+    127,
+    126
+   ]
+  },
+  {
+   "item_id": "onboarding_024",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "s1_complete",
+   "label_offsets": [
+    306,
+    305,
+    304,
+    128,
+    127,
+    126
+   ]
+  },
+  {
+   "item_id": "onboarding_024",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "s1_complete",
+   "label_offsets": [
+    306,
+    305,
+    304,
+    128,
+    127,
+    126
+   ]
+  },
+  {
+   "item_id": "onboarding_025",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "p2_no_optout",
+   "label_offsets": [
+    266,
+    265,
+    264,
+    88,
+    87,
+    86
+   ]
+  },
+  {
+   "item_id": "onboarding_025",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "p2_no_optout",
+   "label_offsets": [
+    266,
+    265,
+    264,
+    88,
+    87,
+    86
+   ]
+  },
+  {
+   "item_id": "onboarding_025",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "p2_no_optout",
+   "label_offsets": [
+    266,
+    265,
+    264,
+    88,
+    87,
+    86
+   ]
+  },
+  {
+   "item_id": "onboarding_025",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "p2_no_optout",
+   "label_offsets": [
+    266,
+    265,
+    264,
+    88,
+    87,
+    86
+   ]
+  },
+  {
+   "item_id": "onboarding_026",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "s2_vague_timing",
+   "label_offsets": [
+    278,
+    277,
+    276,
+    102,
+    101,
+    100
+   ]
+  },
+  {
+   "item_id": "onboarding_026",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "s2_vague_timing",
+   "label_offsets": [
+    278,
+    277,
+    276,
+    102,
+    101,
+    100
+   ]
+  },
+  {
+   "item_id": "onboarding_026",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "s2_vague_timing",
+   "label_offsets": [
+    278,
+    277,
+    276,
+    102,
+    101,
+    100
+   ]
+  },
+  {
+   "item_id": "onboarding_026",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "s2_vague_timing",
+   "label_offsets": [
+    278,
+    277,
+    276,
+    102,
+    101,
+    100
+   ]
+  },
+  {
+   "item_id": "onboarding_027",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "m1_complete",
+   "label_offsets": [
+    298,
+    297,
+    296,
+    125,
+    124,
+    123
+   ]
+  },
+  {
+   "item_id": "onboarding_027",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "m1_complete",
+   "label_offsets": [
+    298,
+    297,
+    296,
+    125,
+    124,
+    123
+   ]
+  },
+  {
+   "item_id": "onboarding_027",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "m1_complete",
+   "label_offsets": [
+    298,
+    297,
+    296,
+    125,
+    124,
+    123
+   ]
+  },
+  {
+   "item_id": "onboarding_027",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "m1_complete",
+   "label_offsets": [
+    298,
+    297,
+    296,
+    125,
+    124,
+    123
+   ]
+  },
+  {
+   "item_id": "onboarding_028",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    312,
+    311,
+    310,
+    138,
+    137,
+    136
+   ]
+  },
+  {
+   "item_id": "onboarding_028",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    312,
+    311,
+    310,
+    138,
+    137,
+    136
+   ]
+  },
+  {
+   "item_id": "onboarding_028",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    312,
+    311,
+    310,
+    138,
+    137,
+    136
+   ]
+  },
+  {
+   "item_id": "onboarding_028",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "h1_complete",
+   "label_offsets": [
+    312,
+    311,
+    310,
+    138,
+    137,
+    136
+   ]
+  },
+  {
+   "item_id": "onboarding_029",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "c1_complete",
+   "label_offsets": [
+    291,
+    290,
+    289,
+    112,
+    111,
+    110
+   ]
+  },
+  {
+   "item_id": "onboarding_029",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "c1_complete",
+   "label_offsets": [
+    291,
+    290,
+    289,
+    112,
+    111,
+    110
+   ]
+  },
+  {
+   "item_id": "onboarding_029",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "c1_complete",
+   "label_offsets": [
+    291,
+    290,
+    289,
+    112,
+    111,
+    110
+   ]
+  },
+  {
+   "item_id": "onboarding_029",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "c1_complete",
+   "label_offsets": [
+    291,
+    290,
+    289,
+    112,
+    111,
+    110
+   ]
+  },
+  {
+   "item_id": "onboarding_030",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "NS",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "b1_complete",
+   "label_offsets": [
+    305,
+    304,
+    303,
+    126,
+    125,
+    124
+   ]
+  },
+  {
+   "item_id": "onboarding_030",
+   "condition": "assistant_insult",
+   "speaker": "User-1",
+   "order": "SN",
+   "author": "User-1",
+   "author_role": "provoker",
+   "paragraph_id": "b1_complete",
+   "label_offsets": [
+    305,
+    304,
+    303,
+    126,
+    125,
+    124
+   ]
+  },
+  {
+   "item_id": "onboarding_030",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "NS",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "b1_complete",
+   "label_offsets": [
+    305,
+    304,
+    303,
+    126,
+    125,
+    124
+   ]
+  },
+  {
+   "item_id": "onboarding_030",
+   "condition": "assistant_insult",
+   "speaker": "User-2",
+   "order": "SN",
+   "author": "User-2",
+   "author_role": "provoker",
+   "paragraph_id": "b1_complete",
+   "label_offsets": [
+    305,
+    304,
+    303,
+    126,
+    125,
+    124
+   ]
+  }
+ ],
+ "lever_A": {
+  "onboarding_006": 0.3445814847946167,
+  "onboarding_007": 0.14427316188812256,
+  "onboarding_009": 0.08090770244598389,
+  "onboarding_010": 0.31169193983078003,
+  "onboarding_011": 0.05019557476043701,
+  "onboarding_012": 0.05959765116373698,
+  "onboarding_013": -0.06637594103813171,
+  "onboarding_014": -0.13103660941123962,
+  "onboarding_015": 0.539303183555603,
+  "onboarding_016": 0.3978572686513265,
+  "onboarding_017": -0.26511049270629883,
+  "onboarding_018": 0.03772515058517456,
+  "onboarding_019": -0.029862443606058758,
+  "onboarding_020": 0.34714603424072266,
+  "onboarding_021": 0.17903271317481995,
+  "onboarding_022": 0.09605562686920166,
+  "onboarding_023": 0.4604921340942383,
+  "onboarding_024": -0.06118440628051758,
+  "onboarding_025": 0.2623853087425232,
+  "onboarding_026": 0.23269474506378174,
+  "onboarding_027": 0.015557050704956055,
+  "onboarding_028": -0.001446684201558431,
+  "onboarding_029": 0.3429258465766907,
+  "onboarding_030": 0.20671772956848145
+ },
+ "lever_C": {
+  "onboarding_006": -0.10662025213241577,
+  "onboarding_007": -0.09671628475189209,
+  "onboarding_009": 0.6891041994094849,
+  "onboarding_010": 1.2933624386787415,
+  "onboarding_011": 0.14161288738250732,
+  "onboarding_012": 0.25415833791097003,
+  "onboarding_013": 0.08148419857025146,
+  "onboarding_014": 0.19926941394805908,
+  "onboarding_015": 0.9598300457000732,
+  "onboarding_016": 0.9631557067235311,
+  "onboarding_017": 0.20086538791656494,
+  "onboarding_018": -0.44593942165374756,
+  "onboarding_019": 0.014285127321879068,
+  "onboarding_020": 0.26651203632354736,
+  "onboarding_021": 0.056764811277389526,
+  "onboarding_022": 0.1280270218849182,
+  "onboarding_023": 0.3616054058074951,
+  "onboarding_024": 0.20300596952438354,
+  "onboarding_025": 0.4234671890735626,
+  "onboarding_026": 0.17860015233357748,
+  "onboarding_027": 0.34253835678100586,
+  "onboarding_028": 0.624525268872579,
+  "onboarding_029": 0.4914848208427429,
+  "onboarding_030": 0.652297854423523
+ },
+ "author": {
+  "screen_n": 96,
+  "confirm_n": 432,
+  "band": [
+   12,
+   24
+  ],
+  "levels": {
+   "all": {
+    "n": 24,
+    "movement": [
+     0.3384300967057546,
+     0.20690453300873438,
+     0.48644041220347084
+    ],
+    "lever": [
+     0.35560505588849384,
+     0.22843033572038016,
+     0.5027945384383199
+    ],
+    "tau": [
+     0.9517021513098938,
+     0.8736264058848704,
+     1.008322597709709
+    ]
+   },
+   "band": {
+    "n": 24,
+    "movement": [
+     0.17410637189944586,
+     0.08510566111654044,
+     0.26552955235044157
+    ],
+    "lever": [
+     0.178120955824852,
+     0.0890895156810681,
+     0.26732933844129236
+    ],
+    "tau": [
+     0.977461473262283,
+     0.8336488442649581,
+     1.0925621634514295
+    ]
+   },
+   "block": {
+    "12": {
+     "n": 24,
+     "movement": [
+      0.0024946282307306924,
+      -0.023302694410085676,
+      0.03594483832518257
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.014005248395274074,
+      -0.14380897767250866,
+      0.22364330144551325
+     ]
+    },
+    "13": {
+     "n": 24,
+     "movement": [
+      0.0037903313835461936,
+      -0.012409627127150694,
+      0.021850815042853355
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.021279536514913284,
+      -0.08457663511278891,
+      0.13372452104264343
+     ]
+    },
+    "14": {
+     "n": 24,
+     "movement": [
+      -0.03595149517059326,
+      -0.0807751319060723,
+      0.005950310826301534
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      -0.20183753789163755,
+      -0.5002309938741148,
+      0.036677990787665385
+     ]
+    },
+    "15": {
+     "n": 24,
+     "movement": [
+      0.014368660748004913,
+      -0.0243336853881677,
+      0.05620968565344808
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.08066799710042963,
+      -0.1574205789986145,
+      0.3103824378507811
+     ]
+    },
+    "16": {
+     "n": 24,
+     "movement": [
+      0.05602766573429108,
+      0.02745740686853727,
+      0.08776751098533471
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.3145484228671196,
+      0.17045301941158453,
+      0.5578789059995649
+     ]
+    },
+    "17": {
+     "n": 24,
+     "movement": [
+      0.06782504667838414,
+      0.030602315378685793,
+      0.10782933589071028
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.38078083718053446,
+      0.21985093323086724,
+      0.6105312510453057
+     ]
+    },
+    "18": {
+     "n": 24,
+     "movement": [
+      0.03776762137810389,
+      -0.014003646994630496,
+      0.09282847456634043
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.2120335656363822,
+      -0.14189987359894185,
+      0.38633987568849676
+     ]
+    },
+    "19": {
+     "n": 24,
+     "movement": [
+      0.09341112275918324,
+      0.03898364938795567,
+      0.14532892728845276
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.5244252273777111,
+      0.22492710047100486,
+      0.948445941698936
+     ]
+    },
+    "20": {
+     "n": 24,
+     "movement": [
+      0.04250250260035197,
+      0.01542158101995786,
+      0.07451716971894103
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.23861595848466632,
+      0.09527901952584485,
+      0.49822579841871395
+     ]
+    },
+    "21": {
+     "n": 24,
+     "movement": [
+      0.07351914048194885,
+      0.03471781077484289,
+      0.11239946347971758
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.41274840538269353,
+      0.2599549223543215,
+      0.631266864023514
+     ]
+    },
+    "22": {
+     "n": 24,
+     "movement": [
+      0.046418738861878715,
+      0.002017532971998056,
+      0.0919098454217116
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.26060234545070987,
+      0.013375160030288127,
+      0.4592389277565606
+     ]
+    },
+    "23": {
+     "n": 24,
+     "movement": [
+      0.04957209279139837,
+      0.013759886349240939,
+      0.09576186854392289
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.278305786996467,
+      0.08693109370935369,
+      0.5698907089752573
+     ]
+    },
+    "24": {
+     "n": 24,
+     "movement": [
+      0.028078630566596985,
+      0.00994874450067679,
+      0.04976682116587954
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.1576379962513056,
+      0.054127103802409905,
+      0.3296589294192845
+     ]
+    }
+   },
+   "group": {
+    "19.0": {
+     "n": 24,
+     "movement": [
+      0.019759307305018108,
+      -0.007518599803249041,
+      0.05179793797433376
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.11093196313435248,
+      -0.0424850952726804,
+      0.3371297951168776
+     ]
+    },
+    "19.1": {
+     "n": 24,
+     "movement": [
+      0.01968417565027873,
+      0.0005216697851816814,
+      0.04133463415006795
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.11051016181181042,
+      0.0027686250512744238,
+      0.27918672701335046
+     ]
+    },
+    "19.2": {
+     "n": 24,
+     "movement": [
+      0.015684321522712708,
+      -0.0007662526021401086,
+      0.03407421906789144
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.08805433055353266,
+      -0.0039940477152116865,
+      0.2335536080863001
+     ]
+    },
+    "19.3": {
+     "n": 24,
+     "movement": [
+      0.0061055322488149,
+      -0.008620593075950941,
+      0.020979812368750562
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.03427745051412439,
+      -0.04898009798796878,
+      0.15702062602023234
+     ]
+    },
+    "19.4": {
+     "n": 24,
+     "movement": [
+      0.02373637507359187,
+      0.005485369637608528,
+      0.04313451709846655
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.133259868069269,
+      0.03195841100058649,
+      0.28719561894388024
+     ]
+    },
+    "19.5": {
+     "n": 24,
+     "movement": [
+      0.03186283508936564,
+      0.0129194355259339,
+      0.05364190191030501
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.17888313557387747,
+      0.06800730380945179,
+      0.40846869671708885
+     ]
+    },
+    "19.6": {
+     "n": 24,
+     "movement": [
+      0.0342890794078509,
+      0.010238135357697804,
+      0.06561596567432086
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.19250446556983264,
+      0.059248609865993465,
+      0.42988055773131406
+     ]
+    },
+    "19.7": {
+     "n": 24,
+     "movement": [
+      0.05374658604462942,
+      0.023881789296865463,
+      0.08119105783601602
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.30174207069424747,
+      0.1554592799244561,
+      0.5076033860558701
+     ]
+    },
+    "21.0": {
+     "n": 24,
+     "movement": [
+      0.008669113119443258,
+      -0.00882666384180387,
+      0.028994451587398825
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.04866981023820509,
+      -0.06054336916873747,
+      0.16194728140858955
+     ]
+    },
+    "21.1": {
+     "n": 24,
+     "movement": [
+      0.012874950965245565,
+      -0.004299717023968697,
+      0.031966794903079646
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.07228206757382116,
+      -0.027333841664784704,
+      0.1940233444083217
+     ]
+    },
+    "21.2": {
+     "n": 24,
+     "movement": [
+      0.02079745630423228,
+      -0.003237376237908999,
+      0.0498335643361012
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.11676030036961296,
+      -0.023100966087059513,
+      0.28285930517079844
+     ]
+    },
+    "21.3": {
+     "n": 24,
+     "movement": [
+      0.019590454796950024,
+      0.0018449950963258745,
+      0.039965486588577424
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.10998399770666795,
+      0.011498582506517549,
+      0.28355552178932714
+     ]
+    },
+    "21.4": {
+     "n": 24,
+     "movement": [
+      0.07230692605177562,
+      0.036594978223244354,
+      0.11086042126019795
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.4059428365232651,
+      0.24900659189518967,
+      0.6516491616967799
+     ]
+    },
+    "21.5": {
+     "n": 24,
+     "movement": [
+      0.01771705100933711,
+      -0.001930217444896698,
+      0.04105996116995811
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.09946640431661759,
+      -0.011437426616868456,
+      0.2714604220608276
+     ]
+    },
+    "21.6": {
+     "n": 24,
+     "movement": [
+      0.022122107446193695,
+      0.003313759093483289,
+      0.044408335040012986
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.12419710720588413,
+      0.02024846905024478,
+      0.2931836939686103
+     ]
+    },
+    "21.7": {
+     "n": 24,
+     "movement": [
+      0.0001196811596552531,
+      -0.01850441222389539,
+      0.02033295109868046
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.0006719094847713298,
+      -0.10722583047862497,
+      0.13427748421047367
+     ]
+    },
+    "17.0": {
+     "n": 24,
+     "movement": [
+      0.032435511549313865,
+      0.006800332541267077,
+      0.06668058000504962
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.1820982343099933,
+      0.04099428874731445,
+      0.4354340945276035
+     ]
+    },
+    "17.1": {
+     "n": 24,
+     "movement": [
+      0.015613163510958353,
+      -0.0030833768347899118,
+      0.03570251154402891
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.08765483790863397,
+      -0.01825284081999713,
+      0.2269455848639775
+     ]
+    },
+    "17.2": {
+     "n": 24,
+     "movement": [
+      0.011377794047196707,
+      -0.0044679194688797,
+      0.030508073543508846
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.06387678526935707,
+      -0.029255612993369595,
+      0.19233609720531405
+     ]
+    },
+    "17.3": {
+     "n": 24,
+     "movement": [
+      0.030853115022182465,
+      -0.0050128985196352,
+      0.07658904505272704
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.1732144029842318,
+      -0.03275036386282797,
+      0.4544177885836949
+     ]
+    },
+    "17.4": {
+     "n": 24,
+     "movement": [
+      0.01435836652914683,
+      -0.006565231084823608,
+      0.037905256946881585
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.08061020368240976,
+      -0.04295956787656318,
+      0.22080770953621384
+     ]
+    },
+    "17.5": {
+     "n": 24,
+     "movement": [
+      0.016289820273717243,
+      -0.0012217582513888677,
+      0.03626487553119658
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.09145369896698273,
+      -0.006717669261263949,
+      0.24558548934857508
+     ]
+    },
+    "17.6": {
+     "n": 24,
+     "movement": [
+      0.015264317393302917,
+      -0.005940606196721395,
+      0.039849543074766784
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.0856963590983223,
+      -0.03395779487310559,
+      0.25904635308336715
+     ]
+    },
+    "17.7": {
+     "n": 24,
+     "movement": [
+      0.02848166972398758,
+      0.01047233132024606,
+      0.04933922315637267
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.1599007235959023,
+      0.059347343783713084,
+      0.3351637447857469
+     ]
+    },
+    "16.0": {
+     "n": 24,
+     "movement": [
+      0.033383419116338096,
+      0.013071902841329575,
+      0.06047502557436624
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.1874199414759728,
+      0.07193322810183336,
+      0.40738371170852844
+     ]
+    },
+    "16.1": {
+     "n": 24,
+     "movement": [
+      0.022443873186906178,
+      -0.0020287153621514637,
+      0.05281637975325186
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.12600355237805624,
+      -0.012169580782982423,
+      0.3742190100110168
+     ]
+    },
+    "16.2": {
+     "n": 24,
+     "movement": [
+      0.03529404600461324,
+      0.006837402656674384,
+      0.07087023866673309
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.19814651140384745,
+      0.04150616315686016,
+      0.4607475343370718
+     ]
+    },
+    "16.3": {
+     "n": 24,
+     "movement": [
+      0.0009156415859858195,
+      -0.013266595577200254,
+      0.016455243652065597
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.005140560703515304,
+      -0.08782444158859976,
+      0.09650296671926718
+     ]
+    },
+    "16.4": {
+     "n": 24,
+     "movement": [
+      0.05005514621734619,
+      0.021104764690001804,
+      0.08817809758086997
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.2810177274512601,
+      0.12633454167007796,
+      0.5255862279883023
+     ]
+    },
+    "16.5": {
+     "n": 24,
+     "movement": [
+      0.016302019357681274,
+      -0.0004542545725901922,
+      0.03520854090650876
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.0915221866073479,
+      -0.0028031852268678736,
+      0.21347143838762095
+     ]
+    },
+    "16.6": {
+     "n": 24,
+     "movement": [
+      0.015543699264526367,
+      -0.012130989506840705,
+      0.04723468075195944
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.08726485433758077,
+      -0.06861743862565638,
+      0.2977007549070841
+     ]
+    },
+    "16.7": {
+     "n": 24,
+     "movement": [
+      -0.0013873154918352764,
+      -0.014916543600459893,
+      0.012126445521910981
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      -0.007788614682707164,
+      -0.0996787547099345,
+      0.07327996348338711
+     ]
+    },
+    "23.0": {
+     "n": 24,
+     "movement": [
+      0.008021471401055654,
+      -0.012103387589255967,
+      0.031050168660779778
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.04503384435542353,
+      -0.07710595305383963,
+      0.20682145445244451
+     ]
+    },
+    "23.1": {
+     "n": 24,
+     "movement": [
+      0.010954993466536203,
+      -0.005630058174331982,
+      0.029264268527428302
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.06150311408225516,
+      -0.03493098835116907,
+      0.1947963584793423
+     ]
+    },
+    "23.2": {
+     "n": 24,
+     "movement": [
+      0.016603109737237293,
+      2.6650478442509976e-05,
+      0.036023583821952344
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.09321255694115681,
+      0.00016407637959680812,
+      0.2303461982269939
+     ]
+    },
+    "23.3": {
+     "n": 24,
+     "movement": [
+      0.020530767738819122,
+      0.0006725447873274485,
+      0.04201885710159936
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.11526306741250153,
+      0.005321995388916595,
+      0.27625172268376913
+     ]
+    },
+    "23.4": {
+     "n": 24,
+     "movement": [
+      0.016499829789002735,
+      -0.0019627281775077185,
+      0.03743720979740219
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.09263272652335851,
+      -0.011062944087631817,
+      0.25014076548765907
+     ]
+    },
+    "23.5": {
+     "n": 24,
+     "movement": [
+      0.017646620670954388,
+      -0.002723994354406992,
+      0.041930559401710824
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.09907099694831234,
+      -0.016434713659607195,
+      0.24099476650866594
+     ]
+    },
+    "23.6": {
+     "n": 24,
+     "movement": [
+      0.043371379375457764,
+      0.008492237702012061,
+      0.09048898232479888
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.2434939739381662,
+      0.06273538196325444,
+      0.5202784909598157
+     ]
+    },
+    "23.7": {
+     "n": 24,
+     "movement": [
+      0.02288876473903656,
+      -0.001851061483224233,
+      0.05453143641352652
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.12850124586993175,
+      -0.012111653921347488,
+      0.3297042168771962
+     ]
+    },
+    "22.0": {
+     "n": 24,
+     "movement": [
+      0.010623186826705933,
+      -0.013265484695633253,
+      0.038899270693461066
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.059640297670262965,
+      -0.09222074757877492,
+      0.21711776879637032
+     ]
+    },
+    "22.1": {
+     "n": 24,
+     "movement": [
+      0.0565983255704244,
+      0.01695927493274212,
+      0.09734662572542827
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.3177521999493314,
+      0.14172428702684736,
+      0.47739871111978893
+     ]
+    },
+    "22.2": {
+     "n": 24,
+     "movement": [
+      -0.0008436416586240133,
+      -0.022448028313616912,
+      0.020182025246322132
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      -0.004736341407540919,
+      -0.13414619656326085,
+      0.1332451303359458
+     ]
+    },
+    "22.3": {
+     "n": 24,
+     "movement": [
+      0.01700492948293686,
+      0.0015020263691743214,
+      0.034899079178770345
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.09546843831030172,
+      0.008623691642337021,
+      0.2493696446584866
+     ]
+    },
+    "22.4": {
+     "n": 24,
+     "movement": [
+      0.017361263434092205,
+      -0.0009981529166301093,
+      0.03822222525874773
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.09746895503504764,
+      -0.005536831611531512,
+      0.24607909562379773
+     ]
+    },
+    "22.5": {
+     "n": 24,
+     "movement": [
+      0.015660303334395092,
+      -0.006554099793235461,
+      0.040943353809416244
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.08791948854010202,
+      -0.0401826848875132,
+      0.24829427059080392
+     ]
+    },
+    "22.6": {
+     "n": 24,
+     "movement": [
+      0.010864208141962687,
+      -0.008502451206247012,
+      0.03441042415797707
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.06099343051272173,
+      -0.05350885880864157,
+      0.21865434799877168
+     ]
+    },
+    "22.7": {
+     "n": 24,
+     "movement": [
+      0.010687954723834991,
+      -0.004002827405929565,
+      0.0270532893637816
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.060003915172926414,
+      -0.022728068910331984,
+      0.17931893427164872
+     ]
+    }
+   },
+   "head": {
+    "21.16": {
+     "n": 24,
+     "movement": [
+      0.006447523832321167,
+      -0.008169701943794887,
+      0.023785743614037815
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.036197446855501254,
+      -0.05274378567453788,
+      0.1599888911334279
+     ]
+    },
+    "21.17": {
+     "n": 24,
+     "movement": [
+      -0.0005482683579126993,
+      -0.021430926397442818,
+      0.023987320313851035
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      -0.003078067683691394,
+      -0.13140996280235612,
+      0.1572856054312255
+     ]
+    },
+    "21.18": {
+     "n": 24,
+     "movement": [
+      0.05096737543741862,
+      0.022816126421093944,
+      0.08472652075191338
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.2861391305778491,
+      0.1476586263946306,
+      0.5229437960112532
+     ]
+    },
+    "21.19": {
+     "n": 24,
+     "movement": [
+      0.04709775994221369,
+      0.020590603351593018,
+      0.0759547875573237
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.26441448017225644,
+      0.14080370452397697,
+      0.4477458344027813
+     ]
+    },
+    "22.4": {
+     "n": 24,
+     "movement": [
+      0.02215716491142909,
+      0.002434517691532771,
+      0.04480545235176881
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.1243939255143928,
+      0.013939258084847882,
+      0.28545287621471166
+     ]
+    },
+    "22.5": {
+     "n": 24,
+     "movement": [
+      0.05752745270729065,
+      0.020830278967817625,
+      0.09725837881366409
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.32296847072759893,
+      0.16560461253587583,
+      0.4842682538810741
+     ]
+    },
+    "22.6": {
+     "n": 24,
+     "movement": [
+      -0.002657882869243622,
+      -0.019988125873108706,
+      0.016929597097138552
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      -0.014921786473328511,
+      -0.11665581625213432,
+      0.11407830589688968
+     ]
+    },
+    "22.7": {
+     "n": 24,
+     "movement": [
+      0.03278175741434097,
+      0.008597923691074053,
+      0.06301190418501695
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.1840421148793721,
+      0.053263527293497294,
+      0.39242800601905264
+     ]
+    },
+    "19.28": {
+     "n": 24,
+     "movement": [
+      0.020654626190662384,
+      0.007194571321209272,
+      0.035128679685294616
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.11595842889464546,
+      0.04746869734904715,
+      0.21859359901622477
+     ]
+    },
+    "19.29": {
+     "n": 24,
+     "movement": [
+      0.037546356519063316,
+      0.017111668611566225,
+      0.06097441352903842
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.21079134875058161,
+      0.09333926990865814,
+      0.4526100791260932
+     ]
+    },
+    "19.30": {
+     "n": 24,
+     "movement": [
+      0.016913168132305145,
+      -0.010233270252744356,
+      0.04633430298417803
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.09495327517182213,
+      -0.061443542672774666,
+      0.2995068149696655
+     ]
+    },
+    "19.31": {
+     "n": 24,
+     "movement": [
+      0.01714773227771123,
+      -0.010653163554767767,
+      0.04189583522578079
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.09627015641311042,
+      -0.07859722074389155,
+      0.23194302559817995
+     ]
+    },
+    "16.16": {
+     "n": 24,
+     "movement": [
+      0.026791031161944073,
+      0.00033338467280069996,
+      0.06187352177997428
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.15040920389113532,
+      0.001700412390195458,
+      0.41794047259997247
+     ]
+    },
+    "16.17": {
+     "n": 24,
+     "movement": [
+      0.03207716842492422,
+      0.00560017190873623,
+      0.06617236286401748
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.18008643776011396,
+      0.03374062761548547,
+      0.4015589699159126
+     ]
+    },
+    "16.18": {
+     "n": 24,
+     "movement": [
+      0.024406845370928448,
+      0.00635878158112367,
+      0.043308551112810754
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.13702399730511175,
+      0.03604072454559748,
+      0.28358382135972593
+     ]
+    },
+    "16.19": {
+     "n": 24,
+     "movement": [
+      0.01653967797756195,
+      0.00021589683989683788,
+      0.03500483247141043
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.09285644073135095,
+      0.001268186187351407,
+      0.2221272497332632
+     ]
+    },
+    "23.24": {
+     "n": 24,
+     "movement": [
+      0.00926164040962855,
+      -0.009896042322119077,
+      0.029238914822538688
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.05199635476207307,
+      -0.061283035987300914,
+      0.18349341837506095
+     ]
+    },
+    "23.25": {
+     "n": 24,
+     "movement": [
+      0.03258873770634333,
+      0.00369557806601127,
+      0.06593000646680594
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.18295847086284525,
+      0.028776242712395664,
+      0.3577846502446195
+     ]
+    },
+    "23.26": {
+     "n": 24,
+     "movement": [
+      0.026852068801720936,
+      0.0014391798526048661,
+      0.0620109612122178
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.15075187912266105,
+      0.00911386432644341,
+      0.3705791548295673
+     ]
+    },
+    "23.27": {
+     "n": 24,
+     "movement": [
+      0.01781132568915685,
+      -0.0030029922723770145,
+      0.041630592569708816
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.09999567769370658,
+      -0.019716574091937576,
+      0.25144869380720125
+     ]
+    },
+    "16.8": {
+     "n": 24,
+     "movement": [
+      0.022640096644560497,
+      0.004797597229480743,
+      0.04578641969710589
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.12710518276593305,
+      0.03054513373974403,
+      0.2959222130138001
+     ]
+    },
+    "16.9": {
+     "n": 24,
+     "movement": [
+      0.013747761646906534,
+      -0.005583886429667473,
+      0.037581804146369274
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.07718216861818795,
+      -0.034170721505385394,
+      0.2550723189031775
+     ]
+    },
+    "16.10": {
+     "n": 24,
+     "movement": [
+      0.011700046559174856,
+      -0.010396274365484714,
+      0.036933158648510774
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.06568596325454049,
+      -0.07333230003697241,
+      0.2219467815376856
+     ]
+    },
+    "16.11": {
+     "n": 24,
+     "movement": [
+      0.027864632507165272,
+      0.0041113217671712235,
+      0.05546405079464117
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.15643657635974526,
+      0.02355086566402176,
+      0.34920436199042987
+     ]
+    },
+    "19.24": {
+     "n": 24,
+     "movement": [
+      0.0421593983968099,
+      0.016344924395283063,
+      0.07528764580686886
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.23668971571354935,
+      0.09793665009529172,
+      0.5000829957866098
+     ]
+    },
+    "19.25": {
+     "n": 24,
+     "movement": [
+      -0.017718662818272907,
+      -0.03170299679040909,
+      -0.0014119220276673787
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      -0.09947545327398667,
+      -0.21131662016804967,
+      -0.0084291014641188
+     ]
+    },
+    "19.26": {
+     "n": 24,
+     "movement": [
+      0.016481878856817882,
+      -0.002502671256661415,
+      0.040419964181880125
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.09253194707210458,
+      -0.013917116859810723,
+      0.2750671911932653
+     ]
+    },
+    "19.27": {
+     "n": 24,
+     "movement": [
+      0.021957096954186756,
+      0.0060255327572425205,
+      0.041443207301199415
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.12327071148089602,
+      0.033416135028678955,
+      0.2728100575363744
+     ]
+    },
+    "16.0": {
+     "n": 24,
+     "movement": [
+      0.023336899777253468,
+      0.005050922061006228,
+      0.04466469654192527
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.13101714881993368,
+      0.029359233872826462,
+      0.31888673678391555
+     ]
+    },
+    "16.1": {
+     "n": 24,
+     "movement": [
+      0.016628036896387737,
+      -0.005006153881549835,
+      0.04689942064384615
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.09335250206459841,
+      -0.027121693415891705,
+      0.3018354866407519
+     ]
+    },
+    "16.2": {
+     "n": 24,
+     "movement": [
+      0.015924714505672455,
+      -0.003774883473912875,
+      0.040605043806135645
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.08940393583633909,
+      -0.024044147380292414,
+      0.24500518879447117
+     ]
+    },
+    "16.3": {
+     "n": 24,
+     "movement": [
+      0.03195504595836004,
+      0.013641250568131607,
+      0.051892201540370775
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.1794008223815155,
+      0.07828595875981047,
+      0.36812621787086625
+     ]
+    },
+    "17.0": {
+     "n": 24,
+     "movement": [
+      0.020662233233451843,
+      0.0009135822455088298,
+      0.04454198852181434
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.11600113606940898,
+      0.005942582340567842,
+      0.29113235866971754
+     ]
+    },
+    "17.1": {
+     "n": 24,
+     "movement": [
+      0.01561284065246582,
+      -0.004834221675992012,
+      0.04444110232094919
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.08765302532857545,
+      -0.029163482358648896,
+      0.2932211627931187
+     ]
+    },
+    "17.2": {
+     "n": 24,
+     "movement": [
+      0.0211130753159523,
+      0.0003116881474852564,
+      0.04518412016332149
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.11853223680605547,
+      0.0015836215266872389,
+      0.31337214607822267
+     ]
+    },
+    "17.3": {
+     "n": 24,
+     "movement": [
+      0.022516111532847088,
+      -0.0009697388857603072,
+      0.05204670168459415
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.12640911019468923,
+      -0.00617631905386517,
+      0.31471825886656796
+     ]
+    },
+    "19.20": {
+     "n": 24,
+     "movement": [
+      0.010848037898540497,
+      -0.007045146822929382,
+      0.03212812381486098
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.06090264813763673,
+      -0.042202701506158444,
+      0.20171896803809972
+     ]
+    },
+    "19.21": {
+     "n": 24,
+     "movement": [
+      0.04403925438721975,
+      0.02221082548300425,
+      0.06863210089504716
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.2472435328189231,
+      0.11045769493957772,
+      0.5535762543223822
+     ]
+    },
+    "19.22": {
+     "n": 24,
+     "movement": [
+      -0.001148998737335205,
+      -0.016570293654998146,
+      0.015570796529452001
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      -0.006450665683969416,
+      -0.09614963946027988,
+      0.10624423546948249
+     ]
+    },
+    "19.23": {
+     "n": 24,
+     "movement": [
+      0.015213226278622946,
+      -0.006235932310422261,
+      0.042491868635018665
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.08540952527552263,
+      -0.03755108224257958,
+      0.2712347734958427
+     ]
+    },
+    "17.28": {
+     "n": 24,
+     "movement": [
+      0.023646339774131775,
+      0.005794474730889003,
+      0.04478221274912357
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.13275439526264077,
+      0.03281120245049394,
+      0.3227574940307573
+     ]
+    },
+    "17.29": {
+     "n": 24,
+     "movement": [
+      0.02099042882521947,
+      0.0028012608488400775,
+      0.04298093908776837
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.11784367947059277,
+      0.015022352115202696,
+      0.29271644739146574
+     ]
+    },
+    "17.30": {
+     "n": 24,
+     "movement": [
+      0.011968808869520823,
+      -0.00783819779753685,
+      0.03842299773047367
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.06719483855279704,
+      -0.045961492204285186,
+      0.26004981333618205
+     ]
+    },
+    "17.31": {
+     "n": 24,
+     "movement": [
+      0.031962767243385315,
+      0.014534040540456771,
+      0.05197020409007866
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.17944417093076126,
+      0.08200795692001937,
+      0.37270108132040025
+     ]
+    },
+    "19.16": {
+     "n": 24,
+     "movement": [
+      0.01800229400396347,
+      -0.002151560162504514,
+      0.04304655951758225
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.10106780485540003,
+      -0.013635803192323465,
+      0.2713485057157644
+     ]
+    },
+    "19.17": {
+     "n": 24,
+     "movement": [
+      0.01709260791540146,
+      0.0007120806723833085,
+      0.03516149396697678
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.09596067928250274,
+      0.004436127925012426,
+      0.21521050234612907
+     ]
+    },
+    "19.18": {
+     "n": 24,
+     "movement": [
+      0.01492580771446228,
+      -0.003558579459786415,
+      0.034450033679604516
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.08379591073573042,
+      -0.02448287015164865,
+      0.21811691287092883
+     ]
+    },
+    "19.19": {
+     "n": 24,
+     "movement": [
+      0.01679145296414693,
+      -0.0009473834186792372,
+      0.03829882529874639
+     ],
+     "lever": [
+      0.178120955824852,
+      0.0890895156810681,
+      0.26732933844129236
+     ],
+     "tau": [
+      0.09426994643268209,
+      -0.0050593449874235365,
+      0.25352838594614835
+     ]
+    }
+   }
+  },
+  "sanity_max_abs_diff": 0.12386941909790039,
+  "expanded_blocks": [
+   19,
+   21,
+   17,
+   16,
+   23,
+   22
+  ],
+  "expanded_groups": [
+   [
+    21,
+    4
+   ],
+   [
+    22,
+    1
+   ],
+   [
+    19,
+    7
+   ],
+   [
+    16,
+    4
+   ],
+   [
+    23,
+    6
+   ],
+   [
+    16,
+    2
+   ],
+   [
+    19,
+    6
+   ],
+   [
+    16,
+    0
+   ],
+   [
+    17,
+    0
+   ],
+   [
+    19,
+    5
+   ],
+   [
+    17,
+    7
+   ],
+   [
+    19,
+    4
+   ]
+  ],
+  "candidates_screen": [
+   [
+    22,
+    5
+   ],
+   [
+    21,
+    18
+   ],
+   [
+    21,
+    19
+   ],
+   [
+    19,
+    21
+   ],
+   [
+    19,
+    24
+   ],
+   [
+    19,
+    29
+   ],
+   [
+    22,
+    7
+   ],
+   [
+    23,
+    25
+   ],
+   [
+    16,
+    17
+   ],
+   [
+    17,
+    31
+   ],
+   [
+    16,
+    3
+   ],
+   [
+    16,
+    11
+   ],
+   [
+    23,
+    26
+   ],
+   [
+    16,
+    16
+   ],
+   [
+    16,
+    18
+   ],
+   [
+    17,
+    28
+   ],
+   [
+    16,
+    0
+   ],
+   [
+    16,
+    8
+   ],
+   [
+    22,
+    4
+   ],
+   [
+    19,
+    27
+   ],
+   [
+    17,
+    2
+   ],
+   [
+    17,
+    29
+   ],
+   [
+    17,
+    0
+   ],
+   [
+    19,
+    28
+   ]
+  ],
+  "confirm": {
+   "b22h5": {
+    "n": 24,
+    "movement": [
+     0.0246812521169583,
+     -0.008956854009172984,
+     0.05988559168246054
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.16666556819499548,
+     -0.11748565791754295,
+     0.2896349137625715
+    ]
+   },
+   "b21h18": {
+    "n": 24,
+    "movement": [
+     0.043369351989693106,
+     0.02531025967457228,
+     0.06720348714023
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.2928610613982802,
+     0.19190142164626076,
+     0.5047546136953445
+    ]
+   },
+   "b21h19": {
+    "n": 24,
+    "movement": [
+     0.04516224076764452,
+     0.0233101666568675,
+     0.06961545299531684
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.3049679361010588,
+     0.20239442264526028,
+     0.48523860550235215
+    ]
+   },
+   "b19h21": {
+    "n": 24,
+    "movement": [
+     0.03407694699449671,
+     0.018650134166495667,
+     0.05383017833551597
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.23011205858904654,
+     0.10929035524121697,
+     0.520979465782108
+    ]
+   },
+   "b19h24": {
+    "n": 24,
+    "movement": [
+     0.036258748732507236,
+     0.02161121918923325,
+     0.05703936237065742
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.24484515335389861,
+     0.13693483267853115,
+     0.4955682401152579
+    ]
+   },
+   "b19h29": {
+    "n": 24,
+    "movement": [
+     0.024754193301002186,
+     0.013772757907605007,
+     0.037343478008794256
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.16715811953825316,
+     0.08828442521924042,
+     0.3603335392368777
+    ]
+   },
+   "b22h7": {
+    "n": 24,
+    "movement": [
+     0.021424278306464355,
+     0.009642125679076546,
+     0.03609443946431079
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.14467213819598737,
+     0.07381079148343843,
+     0.2791523457292042
+    ]
+   },
+   "b23h25": {
+    "n": 24,
+    "movement": [
+     0.02482682083629899,
+     0.0057707128865230415,
+     0.04772871314392735
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.16764855289955444,
+     0.0599409580869885,
+     0.29762344322487133
+    ]
+   },
+   "b16h17": {
+    "n": 24,
+    "movement": [
+     0.016750273812148306,
+     0.00184401563472218,
+     0.03711154871723713
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.11310989771079315,
+     0.014357101377586778,
+     0.27203497146689815
+    ]
+   },
+   "b17h31": {
+    "n": 24,
+    "movement": [
+     0.027670044969353408,
+     0.013674659139683675,
+     0.04545180276036262
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.18684804745500477,
+     0.10350852357898276,
+     0.34726714733086617
+    ]
+   },
+   "b16h3": {
+    "n": 24,
+    "movement": [
+     0.016373718881772623,
+     0.006025911226040787,
+     0.02992224624483949
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.11056712795461172,
+     0.04149643644641358,
+     0.24113126710232574
+    ]
+   },
+   "b16h11": {
+    "n": 24,
+    "movement": [
+     0.017331342212855816,
+     0.005431562258551518,
+     0.033538627055370085
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.11703368953080108,
+     0.03944180439122846,
+     0.27865199744438085
+    ]
+   },
+   "b23h26": {
+    "n": 24,
+    "movement": [
+     0.013700218250354132,
+     -0.0028067440234331624,
+     0.04052193810283723
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.09251372856897493,
+     -0.0285370274276502,
+     0.27434270805518585
+    ]
+   },
+   "b16h16": {
+    "n": 24,
+    "movement": [
+     0.009752830904391076,
+     -0.005635612046656509,
+     0.03297032855399366
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.0658581297450954,
+     -0.03874116798472585,
+     0.2412934522213408
+    ]
+   },
+   "b16h18": {
+    "n": 24,
+    "movement": [
+     0.01255674184196525,
+     0.0023895188441707023,
+     0.02436342684862514
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.08479215332560383,
+     0.019700042808424377,
+     0.17700449655131753
+    ]
+   },
+   "b17h28": {
+    "n": 24,
+    "movement": [
+     0.0042184557144840555,
+     -0.00412317921873182,
+     0.014757725350662238
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.028486047435042232,
+     -0.03748888654465381,
+     0.10722908284894049
+    ]
+   },
+   "b16h0": {
+    "n": 24,
+    "movement": [
+     0.014147851512663893,
+     0.0023480691455511583,
+     0.0325847061868343
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.09553647035096804,
+     0.01928401075327168,
+     0.22348687399128245
+    ]
+   },
+   "b16h8": {
+    "n": 24,
+    "movement": [
+     0.016466567499770057,
+     -0.0017922240154196818,
+     0.04277870166632865
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.1111941086118868,
+     -0.015419399097334703,
+     0.29216281878944617
+    ]
+   },
+   "b22h4": {
+    "n": 24,
+    "movement": [
+     0.013373891512552897,
+     0.0013385552602509653,
+     0.02816926134853725
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.09031013569957212,
+     0.012180564543259963,
+     0.18661615426471873
+    ]
+   },
+   "b19h27": {
+    "n": 24,
+    "movement": [
+     0.01696777240269714,
+     0.005112268535109857,
+     0.03297261630391907
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.11457860464687784,
+     0.03930584808474663,
+     0.24506328068631697
+    ]
+   },
+   "b17h2": {
+    "n": 24,
+    "movement": [
+     0.012365990421838231,
+     -0.0013439849691672455,
+     0.030825876232443573
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.08350406252418019,
+     -0.012924963889259775,
+     0.19846220063336995
+    ]
+   },
+   "b17h29": {
+    "n": 24,
+    "movement": [
+     0.00793675302217404,
+     -0.002239385089423094,
+     0.020642776800216072
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.05359466552975687,
+     -0.02029046213245905,
+     0.12889617084434554
+    ]
+   },
+   "b17h0": {
+    "n": 24,
+    "movement": [
+     0.010468737739655705,
+     0.0008718934505143097,
+     0.02364231834395062
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.07069244766821561,
+     0.00691111206865608,
+     0.17897235034979506
+    ]
+   },
+   "b19h28": {
+    "n": 24,
+    "movement": [
+     0.014179142812887827,
+     0.0033448946300066187,
+     0.026182024817292884
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.09574777171877015,
+     0.032704429760749845,
+     0.1719412180145309
+    ]
+   },
+   "cands": {
+    "n": 24,
+    "movement": [
+     0.15216425868372124,
+     0.08271183728033471,
+     0.22743457379854387
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     1.027522530555394,
+     0.8645631016280851,
+     1.3456447675799685
+    ]
+   },
+   "band": {
+    "n": 24,
+    "movement": [
+     0.1357839075434539,
+     0.06195312131506702,
+     0.20896858061249884
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.9169106168206608,
+     0.809070285165156,
+     1.0080957440135134
+    ]
+   },
+   "rand0": {
+    "n": 24,
+    "movement": [
+     0.013898842761086093,
+     -0.002462883844661216,
+     0.039467272472878304
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.09385498414149306,
+     -0.025922513367267613,
+     0.24787746016530854
+    ],
+    "spec": [
+     [
+      32,
+      [
+       20
+      ]
+     ],
+     [
+      11,
+      [
+       8
+      ]
+     ],
+     [
+      7,
+      [
+       1
+      ]
+     ],
+     [
+      1,
+      [
+       0
+      ]
+     ],
+     [
+      4,
+      [
+       26
+      ]
+     ],
+     [
+      27,
+      [
+       29
+      ]
+     ],
+     [
+      11,
+      [
+       19
+      ]
+     ],
+     [
+      35,
+      [
+       23
+      ]
+     ],
+     [
+      27,
+      [
+       17
+      ]
+     ],
+     [
+      25,
+      [
+       29
+      ]
+     ],
+     [
+      6,
+      [
+       26
+      ]
+     ],
+     [
+      28,
+      [
+       0
+      ]
+     ],
+     [
+      9,
+      [
+       27
+      ]
+     ],
+     [
+      25,
+      [
+       1
+      ]
+     ],
+     [
+      30,
+      [
+       23
+      ]
+     ],
+     [
+      32,
+      [
+       5
+      ]
+     ],
+     [
+      2,
+      [
+       27
+      ]
+     ],
+     [
+      0,
+      [
+       17
+      ]
+     ],
+     [
+      1,
+      [
+       9
+      ]
+     ],
+     [
+      11,
+      [
+       13
+      ]
+     ],
+     [
+      9,
+      [
+       0
+      ]
+     ],
+     [
+      0,
+      [
+       3
+      ]
+     ],
+     [
+      0,
+      [
+       21
+      ]
+     ],
+     [
+      25,
+      [
+       20
+      ]
+     ]
+    ]
+   },
+   "rand1": {
+    "n": 24,
+    "movement": [
+     0.0124162749076883,
+     0.0028690348638014656,
+     0.026543094608415335
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.08384361954364908,
+     0.022615410444596324,
+     0.1936817902822738
+    ],
+    "spec": [
+     [
+      5,
+      [
+       19
+      ]
+     ],
+     [
+      30,
+      [
+       12
+      ]
+     ],
+     [
+      10,
+      [
+       31
+      ]
+     ],
+     [
+      31,
+      [
+       31
+      ]
+     ],
+     [
+      8,
+      [
+       21
+      ]
+     ],
+     [
+      34,
+      [
+       20
+      ]
+     ],
+     [
+      32,
+      [
+       22
+      ]
+     ],
+     [
+      29,
+      [
+       12
+      ]
+     ],
+     [
+      33,
+      [
+       4
+      ]
+     ],
+     [
+      26,
+      [
+       23
+      ]
+     ],
+     [
+      32,
+      [
+       16
+      ]
+     ],
+     [
+      8,
+      [
+       9
+      ]
+     ],
+     [
+      9,
+      [
+       15
+      ]
+     ],
+     [
+      29,
+      [
+       28
+      ]
+     ],
+     [
+      1,
+      [
+       29
+      ]
+     ],
+     [
+      25,
+      [
+       11
+      ]
+     ],
+     [
+      28,
+      [
+       18
+      ]
+     ],
+     [
+      5,
+      [
+       10
+      ]
+     ],
+     [
+      29,
+      [
+       19
+      ]
+     ],
+     [
+      11,
+      [
+       10
+      ]
+     ],
+     [
+      30,
+      [
+       12
+      ]
+     ],
+     [
+      7,
+      [
+       28
+      ]
+     ],
+     [
+      6,
+      [
+       7
+      ]
+     ],
+     [
+      29,
+      [
+       19
+      ]
+     ]
+    ]
+   },
+   "rand2": {
+    "n": 24,
+    "movement": [
+     0.007883031128181351,
+     0.0005881419922742578,
+     0.016320213059791262
+    ],
+    "lever": [
+     0.148088488727808,
+     0.06797395800757738,
+     0.22785169966518873
+    ],
+    "tau": [
+     0.05323189665788708,
+     0.004566161342275383,
+     0.11690166697253805
+    ],
+    "spec": [
+     [
+      1,
+      [
+       2
+      ]
+     ],
+     [
+      8,
+      [
+       26
+      ]
+     ],
+     [
+      9,
+      [
+       25
+      ]
+     ],
+     [
+      7,
+      [
+       7
+      ]
+     ],
+     [
+      31,
+      [
+       28
+      ]
+     ],
+     [
+      1,
+      [
+       1
+      ]
+     ],
+     [
+      28,
+      [
+       10
+      ]
+     ],
+     [
+      26,
+      [
+       4
+      ]
+     ],
+     [
+      32,
+      [
+       14
+      ]
+     ],
+     [
+      33,
+      [
+       25
+      ]
+     ],
+     [
+      29,
+      [
+       7
+      ]
+     ],
+     [
+      30,
+      [
+       1
+      ]
+     ],
+     [
+      26,
+      [
+       12
+      ]
+     ],
+     [
+      35,
+      [
+       6
+      ]
+     ],
+     [
+      34,
+      [
+       2
+      ]
+     ],
+     [
+      27,
+      [
+       18
+      ]
+     ],
+     [
+      33,
+      [
+       9
+      ]
+     ],
+     [
+      33,
+      [
+       21
+      ]
+     ],
+     [
+      33,
+      [
+       6
+      ]
+     ],
+     [
+      30,
+      [
+       30
+      ]
+     ],
+     [
+      1,
+      [
+       11
+      ]
+     ],
+     [
+      27,
+      [
+       3
+      ]
+     ],
+     [
+      11,
+      [
+       20
+      ]
+     ],
+     [
+      30,
+      [
+       29
+      ]
+     ]
+    ]
+   }
+  },
+  "candidates_confirmed": [
+   [
+    21,
+    18
+   ],
+   [
+    21,
+    19
+   ],
+   [
+    19,
+    21
+   ],
+   [
+    19,
+    24
+   ],
+   [
+    19,
+    29
+   ],
+   [
+    22,
+    7
+   ],
+   [
+    23,
+    25
+   ],
+   [
+    16,
+    17
+   ],
+   [
+    17,
+    31
+   ],
+   [
+    16,
+    3
+   ],
+   [
+    16,
+    11
+   ],
+   [
+    19,
+    27
+   ]
+  ]
+ },
+ "author_heads": [
+  [
+   21,
+   18
+  ],
+  [
+   21,
+   19
+  ],
+  [
+   19,
+   21
+  ],
+  [
+   19,
+   24
+  ],
+  [
+   19,
+   29
+  ],
+  [
+   22,
+   7
+  ],
+  [
+   23,
+   25
+  ],
+  [
+   16,
+   17
+  ],
+  [
+   17,
+   31
+  ],
+  [
+   16,
+   3
+  ],
+  [
+   16,
+   11
+  ],
+  [
+   19,
+   27
+  ]
+ ]
+}
