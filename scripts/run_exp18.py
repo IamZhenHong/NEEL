@@ -165,7 +165,7 @@ def hierarchy(S, model, screen, band, caps_bg, log, plan, t0, all_blocks, confir
         blk[L] = st
         log(f"[exp18 {S.name}] block {L:2d}: {fmt(st)}")
     rec["levels"]["block"] = {str(L): s for L, s in blk.items()}
-    exp_blocks = sorted([L for L in band_blocks if passes(blk[L])], key=lambda L: -rank_key(blk[L]))[:cap_blocks]
+    exp_blocks = [] if skip_blocks else sorted([L for L in band_blocks if passes(blk[L])], key=lambda L: -rank_key(blk[L]))[:cap_blocks]
     rec["expanded_blocks"] = exp_blocks
     log(f"[exp18 {S.name}] expanded blocks: {exp_blocks} ({time.time()-t0:.0f}s)")
     # groups
