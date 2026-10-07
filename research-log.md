@@ -401,6 +401,32 @@ to the entry.*
   and tau relative to the lever enter the reading.
 - **Spend:** Exp 17 so far ~$1.03 (aborted $0.60 + $0.43). Gemma running (cap 90 min / $1.70); Phi-4 next.
 
+
+### 2026-10-07: Exp 17 Gemma 4 12B-it (pod 8dengnkul6t3m6, L40S bf16, 37 min, ~$0.81; git e4aa235; probes local)
+
+- **Stage A (probes).** Identity at the label 0.95 from h12, 1.00 from h18; condition cue at the label >= 0.90 from
+  h18, so **L_tag = 17** (Exp 16's tag block, reproduced). Interaction probe 1.00 at h18, **additive baseline 1.00
+  (gap 0.00) -> erratum check CONFIRMED.** Residual probe (both cue directions projected out per fold) climbs to
+  **0.91-0.94 at h24-h30**: indicative only by the pre-registration (two directions is a weak removal), but it says
+  the label carries interaction-related variance well outside the two probe directions in Gemma; stronger than
+  Qwen's 0.77-0.82. Grade position: condition 0.95 at h26-28, identity peaks 0.87 at h26 (prediction ">= 0.90"
+  **missed** again; grade-position identity is 0.87 in both models so far).
+- **Stage B (label swap).** Lever (neutral minus corrector) `assistant_insult` -0.232 [-0.348, -0.116] n=23 and
+  `flat_v2` -0.187 [-0.290, -0.084]: the corrector bonus, both conditions above the 0.08 floor, both read.
+  **Tooling gate PASS** in both (tau(all) = +1.00). tau by block, insult: 1.03 (0), 0.99 (4), 1.01 (8), 1.01 (12),
+  1.04 (16), 0.99 (17), 0.68 (20), 0.31 (24), 0.01 (28), 0 thereafter; flat: 0.98, 0.97, 0.96, 0.99, 1.08, 1.07,
+  0.84, 0.48, 0.03, 0. Read window **L_50 = 20, L_10 = 24** in both conditions.
+- **Reading (pre-registered table): OVERLAPPING READ (selective read)** in both conditions: tau(L_tag = 17) = +0.99
+  insult / +1.07 flat, i.e. essentially every grade-relevant read of the author's label in Gemma happens at or
+  after the block whose output carries the insult cue at that label, in blocks 18-27. With Exp 16's null condition
+  swaps at those layers (<= 0.04), those reads take identity (the corrector bonus) and not the cue. The timing-gate
+  mechanism is excluded for Gemma. Prediction: overlapping (0.55) **met**; same row in both conditions, so Gemma is
+  read as a whole.
+- **Qwen vs Gemma.** Same cue depth (block 17), near-identical read windows (Qwen L_50 17 / L_10 20; Gemma 20 / 24),
+  yet Qwen's grade moves with the cue (Exp 16 block-17 condition swap ~0.55) and Gemma's does not. Whatever
+  separates them is in what the read extracts, not in when it happens.
+- **Spend:** Exp 17 so far ~$1.84 (Qwen $1.03 incl. the abort, Gemma $0.81). Phi-4 running (cap 90 min / $1.70).
+
  (newest at top)
 
 ### 2026-09-30
