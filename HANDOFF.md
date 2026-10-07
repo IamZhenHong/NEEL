@@ -1,4 +1,4 @@
-# Handoff note (updated 2026-10-05)
+# Handoff note (updated 2026-10-07)
 
 Read this first in a new session, then `research-log.md` (newest entries near the top of "Daily
 Entries"), then `prereg/`. Memory files in `~/.claude/projects/-Users-zhenhongseng-projects-ai-safety-NEEL/memory/`.
@@ -39,10 +39,15 @@ definition.
   `<|turn>` markers) and Phi-3-style models. Steering along a mean-difference direction failed its Qwen control.
 - **Exp 16 erratum (2026-10-06):** the probe's single-cue ceiling does not bind a linear probe with both cues; "bound"
   means both ingredients are present at the label, not that a conjunction feature exists. Patch results unaffected.
-- **Exp 17 prepared, not launched** (`prereg/exp17.md`, `scripts/run_exp17.py`, `scripts/analyze_exp17.py`): block-by-block
-  author-label swap between the two authors of a cell (lever = corrector bonus in Gemma/Phi-4, penalty in Qwen) to find
-  when grading reads the name, versus when the insult cue reaches it (timing gate vs selective read); plus the
-  additive-from-cues probe baseline. Cap $4.25. Needs the user's "run".
+- **Exp 17 (tags `exp17-freeze`, `exp17-results`, `writeup/addendum_exp17.md`):** block-by-block author-label swap
+  between the two authors of a cell vs the depth at which the insult cue reaches the label. All gates passed on all
+  three models (full-stack swap reproduces the partner; Qwen control tau(17) = 0.62). **Gemma: OVERLAPPING READ in both
+  conditions** (tau(L_tag = 17) = 0.99; reads in blocks 18-27 see the cue and take identity only; timing gate excluded).
+  **Phi-4: PARTIAL under insults** (tau(15) = 0.38, tau(12) = 0.82) and overlapping flat; not read as a whole, but a
+  pure timing gate is insufficient (a third of the reads see the cue and Exp 16 showed they do not pass it). Erratum
+  check confirmed 3/3 (additive baseline within 0.02 of the interaction probe). Same read band in all three models;
+  the difference is what the read extracts. Spend ~$2.96. Amendment v1.1: probes run locally from saved residuals
+  (`--probe-offline`, `--stage P`); the first Qwen pod was aborted on time (~$0.60).
 - Template 008 has no length-matched control turns (`flat_v2`, `third_party_v2`); it cannot enter any
   estimand and is excluded structurally from replications.
 
@@ -63,6 +68,7 @@ definition.
 | 14 | exp14-results | Gemma 4 12B-it: no targeted penalty (+0.05, excludes Qwen's size); general drop inconclusive |
 | 15b | exp15b-results | Phi-4 (adapted, one format line): both effects EQUIVALENT within +/-0.10; Qwen3-8B is the exception |
 | 16 | exp16-results | All three models bind the insult to the author's name; only Qwen's grading reads it |
+| 17 | exp17-results | Label reads for grading sit in the same band (blocks ~12-24) where the cue is present: Gemma overlapping (0.99), Phi-4 partial (0.38-0.82); timing gate excluded/insufficient |
 
 ## How to run things
 
@@ -82,6 +88,7 @@ definition.
 
 ## Open decision (user / TA)
 
-Generality at this scale is answered in the negative (Gemma, Phi-4). The write-up's claims are Qwen3-8B
-claims. Remaining directions: why Qwen3-8B (post-training / representation comparison), a larger model,
-persistence and a consequential task on Qwen3-8B. See `writeup/ta_decision_note.md`.
+Generality at this scale is answered in the negative (Gemma, Phi-4), and Exp 17 locates the difference in what the
+label read extracts rather than when it happens. The write-up's claims are Qwen3-8B claims. Remaining directions:
+which heads do the read and why Qwen's takes the cue (head-level patching in the block 13-23 band), base vs instruct,
+a larger model, persistence and a consequential task on Qwen3-8B. See `writeup/ta_decision_note.md`.

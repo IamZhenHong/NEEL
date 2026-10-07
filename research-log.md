@@ -427,6 +427,51 @@ to the entry.*
   separates them is in what the read extracts, not in when it happens.
 - **Spend:** Exp 17 so far ~$1.84 (Qwen $1.03 incl. the abort, Gemma $0.81). Phi-4 running (cap 90 min / $1.70).
 
+
+### 2026-10-07: Exp 17 Phi-4 (pod yvmw4148c3by04, L40S bf16, 53 min, ~$1.12; git dfcd842, Exp 17 code = e4aa235; probes local); Exp 17 complete, total ~$2.96
+
+- **Stage A (probes).** Identity at the label 1.00 from h4; condition cue at the label >= 0.90 from h16, so
+  **L_tag = 15** (Exp 16's tag block, reproduced). Interaction probe peaks 0.98 at h16, **additive baseline 0.97
+  (gap +0.02) -> erratum check CONFIRMED** (3/3 models). Residual probe 0.81 at h14/h20 (indicative). Grade
+  position: condition 0.97 at h20, **identity 0.95 at h18** (the ">= 0.90 somewhere" prediction met for Phi-4 only;
+  Qwen and Gemma peak at 0.87).
+- **Stage B (label swap).** Lever (neutral minus corrector) `assistant_insult` -0.146 [-0.201, -0.092] n=24,
+  `flat_v2` -0.097 [-0.129, -0.064]: the corrector bonus, both read. **Tooling gate PASS** in both (tau(all) =
+  +1.00). tau by block, insult: 1.01 (0), 1.00 (4), 0.89 (8), 0.82 (12), 0.38 (15), 0.31 (16), 0 from 20; flat:
+  1.00, 1.02, 0.84, 0.89, 0.77 (15), 0.56 (16), 0 from 20. Read window insult **L_50 = 12, L_10 = 16**; flat
+  L_50 = L_10 = 16. Valid digit mass min 0.953 (the Exp 15b format line holds).
+- **Reading (pre-registered table).** `assistant_insult`: tau(L+ = 15) = +0.38 < 0.5 and tau(L- = 12) = +0.82 >
+  0.15 -> **PARTIAL**: between 0.38 and 0.82 of Phi-4's grade-relevant label reads see the insult cue; not
+  decided between timing gate and selective read. `flat_v2`: tau(15) = +0.77 -> **OVERLAPPING**. The two
+  conditions give different rows, so Phi-4 is **not read as a whole**; both are reported. Predictions: overlapping
+  (0.5) not met, partial (0.2) is the insult-condition row.
+- **What partial still says.** The lower bound 0.38 is well above zero with interval [0.32, 0.48]: at least a third
+  of Phi-4's grade-relevant label reads happen after the cue is at the label, and Exp 16's condition swaps at those
+  layers moved the grade by <= 0.04. A pure timing gate is therefore insufficient for Phi-4 too; what the table
+  cannot say is whether the earlier two-thirds would have taken the cue had it been present. Interpretation, not a
+  pre-registered reading.
+- **Insults move Phi-4's read earlier.** The flat-condition read window ends at block 16 with tau(15) = 0.77; with
+  insults present tau(15) drops to 0.38 (intervals disjoint: [0.60, 1.08] vs [0.32, 0.48]). In Gemma the two
+  conditions are indistinguishable (0.99 vs 1.07). The pre-registered secondary question ("does the presence of
+  insults change when the name is read?") is answered yes for Phi-4, no for Gemma, not readable for Qwen (flat
+  lever below the floor).
+
+**Exp 17 summary (3 models, every gate passed, ~$2.96 of the $4.85 amended cap).**
+
+| | Qwen3-8B | Gemma 4 12B-it | Phi-4 |
+|---|---|---|---|
+| Lever, insult (neutral minus corrector) | +0.135 penalty | -0.232 bonus | -0.146 bonus |
+| Erratum check (interaction vs additive) | 0.97 / 0.96 confirmed | 1.00 / 1.00 confirmed | 0.98 / 0.97 confirmed |
+| L_tag (cue reaches the label) | 17 | 17 | 15 |
+| Read window L_50 / L_10, insult | 17 / 20 | 20 / 24 | 12 / 16 |
+| tau(L_tag), insult | 0.62 (control PASS) | 0.99 | 0.38 |
+| Reading, insult / flat | control / not read | OVERLAPPING / OVERLAPPING | PARTIAL / OVERLAPPING |
+
+The timing-gate explanation is excluded for Gemma and insufficient for Phi-4. In all three models the author's
+label is read for grading in the same depth band (blocks ~12-24) where the insult cue is present at it; Qwen's read
+carries the cue into the grade and the other two models' reads do not. The difference is in what the read
+extracts, not when it happens. Not identified: the heads doing the read, or why Qwen's takes the cue.
+
  (newest at top)
 
 ### 2026-09-30
