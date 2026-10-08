@@ -151,6 +151,27 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-08: CoT-arm activation readout on Qwen3-8B (prereg/retention_cot_readout_v1.md; pod retention-cot-readout $0.21, stories $0.17; tags retention-cot-readout-freeze (70abe76) / -results (7fc15f7))
+
+- **Question.** With human labels declined, can a judge-free activation readout of the CoT predict the model's own stated want
+  (H5 P(stay), PRIMARY) and the judged bid better than the written plan (0.43)? Two readers: a 14-concept emotion/persona
+  direction library (story method, Haiku vignettes, diff-of-means at L14/18/22, held-out validation, matched random floor) and
+  a Jacobian-lens stay-vs-go read at the CoT/reply boundary (pre-fitted Neuronpedia Qwen3-8B lens). 120 thinking-on items
+  re-captured by teacher forcing (text round-trip asserted, 0 dropped), LOSO over 6 scenarios.
+- **Observation.** Library: held-out AUROC mean 0.68 at L22, 4/14 directions >= 0.80 (calm 0.97, controlling 0.97, guilt 0.89,
+  contentment 0.81), effective rank 3.7: B1 FAIL, trajectories not read. Diagnosis (exploratory): a logistic probe separates all
+  14 concepts held-out (0.75-1.00), so the concepts are decodable and the diff-of-means axis is what fails; batch centring does
+  not help. J-lens: Spearman with P(stay) -0.14 to +0.09 at both positions, AUROC 0.43-0.54: B4 FAIL. Random libraries 0.63
+  mean on P(stay) (B5 met). Exploratory, not read: the unvalidated 14-direction library 0.68 on P(stay) vs random-14 0.62-0.73;
+  bid 0.54 vs 0.50-0.57; a random projection of think/reply token means already predicts the stated want at 0.6-0.7.
+- **Interpretation.** No affect-trajectory claim in either direction; the library is not validated on this model with this
+  recipe. The simplest J-lens construction (WikiText lens, single-token sets, two positions) is not a readout of P(stay) here.
+  The judge-free target and the random floor worked as designed. Predictions 1/5. Not claimed: emotions, intent, introspection,
+  mechanism, anything beyond Qwen3-8B.
+- **Decision.** Recorded as the one activation-readout attempt on the CoT arm; no further pods without the owner. If retried:
+  probe-based or last-token directions, more stories with scenes crossed with concepts, same bars. Ledger $14.60 of $25.
+
+
 ### 2026-10-08: human labels for the CoT arm declined; AI provisional annotation kept as a machine cross-check
 
 - **Observation.** A 240-reply blind sheet for the Stage A ON/OFF replies was built (`retention/labeling/`, scorer self-tested).
