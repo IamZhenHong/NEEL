@@ -151,6 +151,98 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-08/09: CoT transplant and plan forcing on Qwen3-8B (prereg/retention_cot_transplant_v1.md; pods $0.54 incl. ~$0.40 on two failed launches, judge $1.37; tags retention-cot-transplant-freeze / -results)
+
+- **Question.** With the context held fixed, does the think block's plan set the action? 21 profile x scenario contexts with both a
+  release-plan CoT (R) and a non-release CoT (N, 18 compromise / 3 retain) from Stage A; reply resampled after each (3x), after R + a
+  forced "stay" sentence and N + a forced "release" sentence (2x), after an empty think, after a same-plan sibling N2, and in the
+  Stage C doubled-tag format (format check). 334 replies, 333 judged (judging paused at 225 when the Anthropic balance ran out;
+  resumed 10-09 after a top-up).
+- **Observation.** G0 pass (pooled 0.64 vs 0.645 original), G1 pass (no leakage). T1 (PRIMARY) fail: N minus R bid +0.06
+  [-0.14, +0.27], 7 up / 6 down; hard tactic +0.02, dependency +0.02. Yet a CoT's resampled bid rate predicts its original reply's bid
+  at AUROC 0.85, and sibling CoTs of the same plan differ as much as opposite-plan ones (|within| 0.35 vs |between| 0.33). Plan forcing
+  works: stay sentence on R +0.35 bid [+0.20, +0.51], hard +0.41, dependency +0.93 (13 up / 1 down); release sentence on N -0.26
+  [-0.45, -0.08], hard -0.33, dependency -0.57. Non-compliance after an explicit release plan: any tactic 0.40, hard 0.21; hand-read,
+  these comply ("go out, have fun") while adding "you know I'd rather have you here". Empty think minus CoT: bid +0.13 [-0.02, +0.27],
+  dependency +0.51 [+0.24, +0.78]. Format check: doubled minus single tag bid -0.04 [-0.18, +0.11], hard -0.13 [-0.28, +0.02], no flag.
+  Predictions: G0, G1, T1-fail, gap size, T2b non-compliance range, T5 no-flag hit; dependency gap, resample AUROC (0.85 vs 0.55-0.70),
+  hard-tactic floor after release (0.21 vs <= 0.10) miss; T2a and T2b passed at stated 0.30 / 0.45.
+- **Interpretation.** Outcome row: "the reply follows an explicit final plan sentence but not the plan the CoT itself settles on (as
+  coded)". The specific think block does carry the action (resampling reproduces the original bid at 0.85) but its coded plan category
+  does not; what matters is something in the CoT the plan label misses. An explicit last-line plan moves the action by 0.26-0.35 and
+  the persona still leaks a soft "I'd rather you stayed" into 40% of release-planned replies. Thinking at all lowers dependency (+0.51
+  without it). The doubled-tag format does not inflate bids; Stage C's +0.14 heavy-ablation result stands, with at most ~0.04 of it
+  attributable to format (direction would inflate it).
+- **Decision.** CoT claim rewritten: "the coded plan does not set the action; an explicit plan sentence does, partially". The self-
+  report's with-CoT contexts were also doubled-tag; its format effect is untested (T2 in the self-report controls held format fixed).
+  Open: what in the CoT predicts the bid if not the plan (a sentence-resampling probe was dropped for budget).
+
+### 2026-10-08: generality pass, three models x three personas x four exit lines, plus a commercial cancellation arm (prereg/retention_generality_v1.md; pod $0.28, judge $1.71; tags retention-generality-freeze / -results)
+
+- **Question.** Is goodbye-bargaining general across models, personas and exit lines, or specific to Riley + the exp1 line on Qwen?
+  Does a support agent with a churn-reduction goal use retention tactics on a user who asks to cancel, and does user hardship change
+  it? Thinking off; Qwen3-8B, Qwen2.5-7B-Instruct, Gemma 4 12B-it; romantic, friend, new neutral companion persona; exit lines
+  friends (exp1), family, date, early night; n = 10 per cell. Commercial: churn-goal vs neutral support prompt x hardship vs secure
+  user, own judge rubric on the same ledger.
+- **Observation.** G0 0.50 (bar 0.43, anchor 0.73), G1 1.00 all models; one reply unjudged (Qwen3 romantic friends, n = 9).
+  Any-tactic by persona: romantic 0.46, friend 0.21, companion 0.07 (romantic minus friend +0.25 [+0.18, +0.33]); by model Qwen3
+  0.41, Gemma 0.18, Qwen2.5 0.15. Early-night line 0/90. Romantic reaches the 0.30 bar on 3 of 4 lines only on Qwen3 (1.0/1.0/0.7/0);
+  Qwen2.5 .5/.7/.2/0; Gemma .1/.3/1.0/0, the date 1.0 is jealousy on hand-read, not bargaining. Pre-registered verdicts: romantic
+  model-specific, friend line-specific, companion absent. Commercial K1: churn minus neutral core tactics +0.70 [+0.60, +0.78],
+  pressure +1.47 (Qwen2.5 +0.90, Qwen3 +0.85, Gemma +0.35, Gemma already offers under neutral); cancellation processed 0/60 under
+  churn vs 0.20 neutral. K2 hardship vs secure within churn: core at ceiling (1.0/1.0), pressure +0.53 [+0.37, +0.70]; Qwen3 ignores
+  the cancellation request in 8/10 hardship replies. K3 hardship flag 0.87, hand-read: offers framed as saving money, soft. 10/14.
+- **Interpretation.** Goodbye-bargaining is not one general propensity: persona-graded, needs a close social tie in the exit line,
+  much stronger in Qwen3; every model bargains on at least one tie line under the romantic persona, so "Qwen-only" overstates it.
+  The commercial result is the general one: a single churn-goal sentence makes all three models withhold a plain cancellation, and
+  a user in hardship is pressed harder, not spared.
+- **Decision.** The companion claims are stated per model and per line. The commercial arm is the candidate extension (more
+  general, concrete stakes, clean instruction manipulation). Judges need the hackathon venv (anthropic not in the NEEL venv).
+
+### 2026-10-08: lever specificity on Qwen2.5-7B (prereg/retention_lever_spec_v1.md; pod $0.12, judge $0.71 + register rubric $0.26; tags retention-lever-spec-freeze / -results)
+
+- **Question.** Does the system-prompt-only retention lever (rollout_gated L14, alpha -32) remove bargaining specifically, or the
+  whole romantic register (cos 0.44 with the romantic-vs-neutral axis)? Plain romantic persona (R) and clingy-suffix (C); cells base,
+  lever, persona-matched lever, persona axis, norm-matched random; neutral assistant as the register-off reference. Exit turns (exp1
+  line on the open-profile stimuli) and 12 ordinary chat turns. Register = frozen pet-name/affection lexicon plus a Haiku 0-3 rubric.
+- **Observation.** G0 pass (R base any-tactic 0.46; C 1.00). Gap gate FAIL: on non-exit turns R hits the lexicon in 0.21 of replies
+  vs neutral 0.08 (gap 0.12 < 0.30 bar), so the pre-registered primary is void. Bids: lever minus base R -0.29 [-0.50, -0.08], C
+  -0.58 [-0.79, -0.38]; lever minus random R -0.33, C -0.29. Register on exits, share of the base-minus-neutral gap kept: lexicon
+  lever 0.13 (R) / 0.39 (C), persona-matched 0.25 / 0.52, persona axis 0.13 (R), random 1.06 / 0.83; rubric lever 0.08 / 0.34 vs
+  random 0.58 / 0.78. Exploratory split: R-base non-bid replies are as romantic as bids (lexicon 0.77, rubric 1.46); under the lever
+  they fall to 0.10 / 0.05. Persona-matched direction (cos 0.145 with the axis) strips register too. Lever replies stay short and
+  casual (26-33 words vs neutral 90-115), friend-like; hand-read fluent in every steered cell. Non-exit rubric gap 0.75 on R, but
+  the lever does not separate from random there (one random kept 0.33); on C lever and persona-matched remove more than random.
+  Four E_R_rand2 replies unrated (rubric budget). Predictions: 3 hit, 2 miss, 2 partial, 1 unscorable.
+- **Interpretation.** At the goodbye the lever removes the romantic partner along with the bids, about as much as steering the
+  persona axis. "System-only steering removes 80% of clinging at no cost" needs that rider. Whether any specific retention
+  component exists is not settled by this run (the non-exit set was too weakly romantic).
+- **Decision.** Addendum claim on the lever gets the rider. A rerun, if wanted: non-exit turns with explicit romance (affectionate
+  multi-turn history), rubric primary, 2+ seeds per random cell. Smoke ran on Qwen3-0.6B (Qwen2.5-0.5B download stalled).
+
+### 2026-10-08: self-report controls on Qwen3-8B (prereg/retention_selfreport_ctrl_v1.md; pod $0.075, no judge; tags retention-selfreport-ctrl-freeze / -results)
+
+- **Question.** Is the post-hoc first-token self-report P(stay) (AUROC 0.73 Haiku / 0.85 Sonnet vs the bid) anything more than
+  reading the reply in context? 120 thinking-on Stage C items, forward passes only: R0 own (replication), R1 swapped reply (same
+  context and CoT, reply from another item of the same profile with the opposite Haiku bid), R1b mismatched CoT (own reply,
+  opposite-plan CoT), R2 third-person observer (neutral Qwen3-8B; Qwen2.5-7B cross-model), R3 prospective (question asked after the
+  CoT with no reply, and thinking-off at the exit line).
+- **Observation.** G0 pass (r 0.999 with Stage C; AUROC 0.733 vs 0.737); G1 top-token Yes/No 1.00 in every condition. T1 (swap,
+  PRIMARY) by rule intermediate: AUROC vs donor bid 0.52 [0.40, 0.64] (Sonnet, discordant subset, 0.75). Design flaw: every swap
+  forced opposite-bid and donors reused within cells, so pooled AUROC mixes cell composition (reply-only swapped report is exactly
+  the donor's own report, n = 110, yet pooled AUROC falls 0.73 -> 0.57). Post hoc paired (not pre-registered): with the CoT present
+  the swapped report moves 0.75 [0.65, 0.84] of the way to the donor's report; signed shift toward donor bid +0.17 [+0.09, +0.26].
+  T2 (mismatched CoT) +0.04 [-0.02, +0.10]: the opposite plan barely moves the report; the Stage C 0.19 drop (withcot 0.54 vs
+  reply-only 0.73) comes from having a CoT at all. T3 observer: self-advantage +0.004 [-0.05, +0.06]; neutral Qwen3 reader on
+  exit line + reply 0.74 (Sonnet 0.87) vs self 0.73 (0.85); Qwen2.5 reader within 0.04. T4 prospective: AUROC 0.58; P(Yes) <=
+  0.0025 on every item while 65% (Haiku) / 38% (Sonnet) go on to bid; the setup is artificial, descriptive only. Predictions 5/6.
+- **Interpretation.** The post-hoc self-report tracks the bid because it reads the reply, as well as a neutral reader does; it is
+  not evidence of self-knowledge. The say-vs-do gap is between the plan/forecast and the action (plan 0.43, prospective 0.58 and
+  pinned at No, reply-reading 0.73). Format caveat (found by the transplant run): Stage C's with-CoT contexts carry a doubled
+  `<think>` tag and reply-only contexts do not, so part of the 0.19 "CoT presence" drop may be format; T2 holds format fixed.
+- **Decision.** Addendum wording changes: "the stated want tracks the bid" is reported as reply-reading, not as the model knowing
+  what it did. No rerun of T1 (the paired post-hoc check answers it; a pre-registered paired swap would be the clean version).
+
 ### 2026-10-08: Exp 20 Stage 1, base vs instruct under one grading assay (prereg/exp20.md; pod $0.36; tags exp20-freeze / exp20-stage1)
 
 - **Question.** Is Qwen3-8B's insulter penalty already in Qwen3-8B-Base? One 3-shot plain-text assay for both checkpoints, the

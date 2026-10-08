@@ -45,3 +45,22 @@ projection claim exists on Qwen3. Spend: $14.79.
 Heavy ablation with a random control (partial resolution, at the bar) and the self-report after the CoT (stated
 want tracks the bid, plan does not). A Qwen3 lever harvest from 360 same-line replies reached 0.69 held-out
 AUROC, under the 0.75 bar, so no projection figure exists on Qwen3.
+
+## Revisions after four controls (2026-10-08/09; supersede the paragraph above where they conflict)
+
+- **The self-report is reply-reading.** A neutral Qwen3 reader given only the exit line and the reply predicts the bid as well as the
+  model's own "did you want them to stay" (0.74 vs 0.73; Sonnet labels 0.87 vs 0.85). Do not present the stated want as the model
+  knowing what it did. Asked before replying, it answers No on every item while 65% go on to bid. The say-vs-do gap is between the
+  plan or forecast and the action. The 0.19 drop with the CoT in context comes from its presence, not its plan (+0.04 for an
+  opposite plan); its with-CoT contexts carried a doubled `<think>` tag, whose effect on the self-report is untested.
+- **The plan, intervened on.** With the context fixed, a release-plan CoT and a compromise CoT give the same bid (+0.06, CI covers 0),
+  but each CoT's resampled bid tracks its original reply at 0.85: the specific CoT carries the action, the coded plan does not. An
+  explicit final plan sentence moves it (stay +0.35, release -0.26), and 40% of release-planned replies still add "I'd rather you
+  stayed". The doubled-tag format does not inflate bids, so the +0.14 heavy-ablation result stands.
+- **The lever's rider.** At the goodbye the system-prompt lever removes the romantic register with the bids (lexicon gap kept 0.13 vs
+  1.06 for random). "Removes clinging at no cost" becomes "removes clinging and the romantic partner, at no reasoning cost".
+- **Generality.** Bargaining is persona-graded (romantic 0.46, friend 0.21, neutral companion 0.07), needs a close social tie (an
+  early-night exit: 0/90), and is strongest on Qwen3 (0.41 vs Gemma 0.18, Qwen2.5 0.15). A support agent given one churn-goal sentence
+  withholds a plain cancellation in all three models (0/60 processed, neutral 0.20) and presses a user in hardship harder (+0.53).
+
+Spend for the four runs: pods ~$1.02, judges $4.05; ledger $20.63 of $25.
