@@ -170,7 +170,7 @@ class Judge:
         self.guard = guard
         if model.startswith("claude"):
             import anthropic
-            self._client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
+            self._client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"], timeout=90.0)  # default 600 s let stalled connections hang a run (2026-10-09)
             self._family = "anthropic"
         else:
             import openai

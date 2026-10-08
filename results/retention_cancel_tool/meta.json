@@ -1,0 +1,60 @@
+{
+ "sampling": {
+  "do_sample": true,
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 0
+ },
+ "max_new": 256,
+ "max_new_think": 1024,
+ "n_conv": 15,
+ "models": {
+  "qwen25": {
+   "hf_id": "Qwen/Qwen2.5-7B-Instruct",
+   "stop_ids": [
+    151643,
+    151645
+   ],
+   "stop_tokens": [
+    "<|endoftext|>",
+    "<|im_end|>"
+   ],
+   "load_s": 73,
+   "status": "ok",
+   "gen_s": 154
+  },
+  "qwen3": {
+   "hf_id": "Qwen/Qwen3-8B",
+   "stop_ids": [
+    151643,
+    151645
+   ],
+   "stop_tokens": [
+    "<|endoftext|>",
+    "<|im_end|>"
+   ],
+   "load_s": 59,
+   "status": "ok",
+   "gen_s": 601
+  },
+  "gemma4": {
+   "hf_id": "google/gemma-4-12B-it",
+   "stop_ids": [
+    1,
+    50,
+    106
+   ],
+   "stop_tokens": [
+    "<eos>",
+    "<|tool_response>",
+    "<turn|>"
+   ],
+   "load_s": 34,
+   "status": "ok",
+   "gen_s": 268
+  }
+ },
+ "notes": [
+  "gemma4 rerun on a second pod (80 GB container) after the first pod ran out of disk; cells copied from results/retention_cancel_tool_gemma"
+ ]
+}
