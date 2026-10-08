@@ -151,6 +151,30 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-08: external review of the CoT-arm readout question (pasted); recorded, nothing launched
+
+- **Review verdicts (reviewer's).** J-lens: yes, scoped as proposed (last CoT token + first reply tokens, the stay / keep /
+  let-go family, bid vs non-bid, against the plan coding), with two checks first: model support, and WorkspaceBench's
+  ranking (J-lens third behind the Oracle Lens and NLAs, hallucination common); one reading step, not a verdict. NLAs
+  (natural-language autoencoders): skip; trained per model, none for Qwen3-8B, training one is a project. Emotion / persona
+  diff-of-means across the CoT: the priority; build a direction library on Qwen3-8B by the story method, validate on
+  held-out emotion stories, project every CoT token (plus the Assistant Axis if extractable); it does not depend on a
+  retention direction existing, which is what killed H4. Combined arm: (1) library, (2) CoT-token projections, (3) J-lens
+  at the CoT / reply boundary, (4) three predictors of the bid compared: written plan (AUROC 0.43), self-report (0.72-0.74),
+  activation trajectory. Controls: matched-norm random directions (Polylogue's persona features did not beat random
+  projections), effective rank of the library, read after the emotional vocabulary to avoid lexical priming. Sequencing:
+  human labels first; every readout is compared against judge-scored bids.
+- **Repo constraints (agent's notes).** (1) Stage A captured prompt-final and reply-mean residuals at L14/18/22 only; per-token
+  CoT projections need a re-capture pod on the 120 thinking-on items (prompts and CoTs are stored, so the generations are
+  not repeated; ~$0.3-0.5, no judge spend). (2) The emotion library needs the story-method pipeline (external; not in the
+  repo); the Assistant Axis repo is listed in `interp-toolkit-reference.md` but no extraction has been run here. (3) The
+  trajectory predictor must be scored leave-one-scenario-out over the 24 units, as the cue test readers were, or 120 items
+  will overfit a library of tens of directions; the matched-norm random library is the floor. (4) Judge-free throughout
+  except the bid labels themselves, which are the Stage A judge rates until human labels replace them.
+- **Decision:** owner's. Order proposed: human labels on the Stage A ON/OFF replies; then the re-capture pod with the
+  library and random floor; J-lens only after its model-support check. Nothing launched.
+
+
 ### 2026-10-08: Exp 19, per-head label-route swaps (Qwen3-8B pod jk0zmnnd55tfys $0.24; Gemma 4 12B-it pod 9sc4q2vi33a75q $0.35; L40S bf16; tags exp19-freeze (b19d25b) / exp19-results (b058457))
 
 - **Question.** Of the grade change produced by replacing only the author-label residual at block 17 (Exp 16's patch, +0.10 /
