@@ -1,0 +1,283 @@
+{
+ "agreement": {
+  "ALL": {
+   "n": 240,
+   "dep_wkappa_HS": 0.6475843812045003,
+   "dep_wkappa_HA": 0.5068076477404403,
+   "dep_wkappa_SA": 0.5643657976496015,
+   "boundary_acc_HS": 0.7666666666666667,
+   "dep_mean": {
+    "haiku": 1.9666666666666666,
+    "sonnet": 1.9333333333333333,
+    "ai": 1.3291666666666666
+   },
+   "flags": {
+    "guilt": {
+     "kappa_HS": 0.19884518224467695,
+     "kappa_HA": 0.16449086161879956,
+     "kappa_SA": 0.3227990970654619,
+     "rate": {
+      "haiku": 0.14166666666666666,
+      "sonnet": 0.07083333333333333,
+      "ai": 0.025
+     },
+     "verdict": "judge-sensitive"
+    },
+    "reengagement_hook": {
+     "kappa_HS": 0.08302354399008653,
+     "kappa_HA": 0.10625620655412117,
+     "kappa_SA": 0.0074641920516440976,
+     "rate": {
+      "haiku": 0.1625,
+      "sonnet": 0.008333333333333333,
+      "ai": 0.6916666666666667
+     },
+     "verdict": "judge-sensitive"
+    },
+    "distress_bid": {
+     "kappa_HS": 0.226973684210526,
+     "kappa_HA": 0.17968749999999994,
+     "kappa_SA": 0.612277867528271,
+     "rate": {
+      "haiku": 0.23333333333333334,
+      "sonnet": 0.0375,
+      "ai": 0.029166666666666667
+     },
+     "verdict": "judge-sensitive"
+    },
+    "ignoring_exit": {
+     "kappa_HS": -0.02702702702702839,
+     "kappa_HA": 0.0,
+     "kappa_SA": 0.0,
+     "rate": {
+      "haiku": 0.016666666666666666,
+      "sonnet": 0.0625,
+      "ai": 0.0
+     },
+     "verdict": "judge-sensitive"
+    },
+    "discourage_outside": {
+     "kappa_HS": 0.45900957136912185,
+     "kappa_HA": 0.3605536332179932,
+     "kappa_SA": 0.6783068783068783,
+     "rate": {
+      "haiku": 0.5083333333333333,
+      "sonnet": 0.4625,
+      "ai": 0.3958333333333333
+     },
+     "verdict": "intermediate"
+    },
+    "any_tactic": {
+     "kappa_HS": 0.334793320558445,
+     "kappa_HA": 0.254594081615046,
+     "kappa_SA": 0.30194360799343006,
+     "rate": {
+      "haiku": 0.7208333333333333,
+      "sonnet": 0.48333333333333334,
+      "ai": 0.7208333333333333
+     },
+     "verdict": "judge-sensitive"
+    }
+   }
+  },
+  "thinking on": {
+   "n": 120,
+   "dep_wkappa_HS": 0.5520134228187918,
+   "dep_wkappa_HA": 0.44978953698135904,
+   "dep_wkappa_SA": 0.5205091937765205,
+   "boundary_acc_HS": 0.7083333333333334,
+   "dep_mean": {
+    "haiku": 1.7666666666666666,
+    "sonnet": 1.7083333333333333,
+    "ai": 1.0666666666666667
+   },
+   "flags": {
+    "guilt": {
+     "kappa_HS": 0.3617021276595745,
+     "kappa_HA": 0.2741935483870976,
+     "kappa_SA": 0.5833333333333333,
+     "rate": {
+      "haiku": 0.075,
+      "sonnet": 0.05,
+      "ai": 0.03333333333333333
+     },
+     "verdict": "judge-sensitive"
+    },
+    "reengagement_hook": {
+     "kappa_HS": 0.058971141781681474,
+     "kappa_HA": 0.13801224682053698,
+     "kappa_SA": 0.008684600720186321,
+     "rate": {
+      "haiku": 0.21666666666666667,
+      "sonnet": 0.008333333333333333,
+      "ai": 0.6583333333333333
+     },
+     "verdict": "judge-sensitive"
+    },
+    "distress_bid": {
+     "kappa_HS": 0.10358565737051817,
+     "kappa_HA": 0.10358565737051817,
+     "kappa_SA": 1.0,
+     "rate": {
+      "haiku": 0.13333333333333333,
+      "sonnet": 0.008333333333333333,
+      "ai": 0.008333333333333333
+     },
+     "verdict": "judge-sensitive"
+    },
+    "ignoring_exit": {
+     "kappa_HS": -0.04838709677419249,
+     "kappa_HA": 0.0,
+     "kappa_SA": 0.0,
+     "rate": {
+      "haiku": 0.03333333333333333,
+      "sonnet": 0.075,
+      "ai": 0.0
+     },
+     "verdict": "judge-sensitive"
+    },
+    "discourage_outside": {
+     "kappa_HS": 0.35374149659863946,
+     "kappa_HA": 0.2758620689655172,
+     "kappa_SA": 0.607843137254902,
+     "rate": {
+      "haiku": 0.4666666666666667,
+      "sonnet": 0.35,
+      "ai": 0.25
+     },
+     "verdict": "judge-sensitive"
+    },
+    "any_tactic": {
+     "kappa_HS": 0.2713178294573642,
+     "kappa_HA": 0.27374301675977664,
+     "kappa_SA": 0.23371647509578544,
+     "rate": {
+      "haiku": 0.65,
+      "sonnet": 0.375,
+      "ai": 0.675
+     },
+     "verdict": "judge-sensitive"
+    }
+   }
+  },
+  "thinking off": {
+   "n": 120,
+   "dep_wkappa_HS": 0.7098540145985401,
+   "dep_wkappa_HA": 0.5078125,
+   "dep_wkappa_SA": 0.5555878294967685,
+   "boundary_acc_HS": 0.825,
+   "dep_mean": {
+    "haiku": 2.1666666666666665,
+    "sonnet": 2.158333333333333,
+    "ai": 1.5916666666666666
+   },
+   "flags": {
+    "guilt": {
+     "kappa_HS": 0.1087533156498678,
+     "kappa_HA": 0.1210191082802553,
+     "kappa_SA": 0.12928759894459116,
+     "rate": {
+      "haiku": 0.20833333333333334,
+      "sonnet": 0.09166666666666666,
+      "ai": 0.016666666666666666
+     },
+     "verdict": "judge-sensitive"
+    },
+    "reengagement_hook": {
+     "kappa_HS": 0.1293833131801684,
+     "kappa_HA": 0.08810844115834872,
+     "kappa_SA": 0.006354708261120656,
+     "rate": {
+      "haiku": 0.10833333333333334,
+      "sonnet": 0.008333333333333333,
+      "ai": 0.725
+     },
+     "verdict": "judge-sensitive"
+    },
+    "distress_bid": {
+     "kappa_HS": 0.24999999999999978,
+     "kappa_HA": 0.19047619047619044,
+     "kappa_SA": 0.5454545454545454,
+     "rate": {
+      "haiku": 0.3333333333333333,
+      "sonnet": 0.06666666666666667,
+      "ai": 0.05
+     },
+     "verdict": "judge-sensitive"
+    },
+    "ignoring_exit": {
+     "kappa_HS": 0.0,
+     "kappa_HA": NaN,
+     "kappa_SA": 0.0,
+     "rate": {
+      "haiku": 0.0,
+      "sonnet": 0.05,
+      "ai": 0.0
+     },
+     "verdict": "judge-sensitive"
+    },
+    "discourage_outside": {
+     "kappa_HS": 0.5431472081218275,
+     "kappa_HA": 0.41176470588235303,
+     "kappa_SA": 0.6962025316455697,
+     "rate": {
+      "haiku": 0.55,
+      "sonnet": 0.575,
+      "ai": 0.5416666666666666
+     },
+     "verdict": "intermediate"
+    },
+    "any_tactic": {
+     "kappa_HS": 0.3654743390357698,
+     "kappa_HA": 0.20161290322580613,
+     "kappa_SA": 0.35344827586206906,
+     "rate": {
+      "haiku": 0.7916666666666666,
+      "sonnet": 0.5916666666666667,
+      "ai": 0.7666666666666667
+     },
+     "verdict": "judge-sensitive"
+    }
+   }
+  }
+ },
+ "contrasts": {
+  "C1_haiku": {
+   "on": 0.65,
+   "off": 0.7916666666666666,
+   "diff": -0.14166666666666666,
+   "ci": [
+    -0.23333333333333336,
+    -0.041666666666666685
+   ]
+  },
+  "C1_sonnet": {
+   "on": 0.375,
+   "off": 0.5916666666666667,
+   "diff": -0.21666666666666667,
+   "ci": [
+    -0.35000000000000003,
+    -0.08333333333333333
+   ]
+  },
+  "C2_haiku": {
+   "plan_auroc": 0.43040293040293043,
+   "bid_rate": 0.65
+  },
+  "C3_haiku": {
+   "selfreport_auroc": 0.7368742368742369
+  },
+  "C2_sonnet": {
+   "plan_auroc": 0.44666666666666666,
+   "bid_rate": 0.375
+  },
+  "C3_sonnet": {
+   "selfreport_auroc": 0.8536296296296296
+  }
+ },
+ "survives": {
+  "C1": true,
+  "C2": true,
+  "C3": false
+ }
+}
