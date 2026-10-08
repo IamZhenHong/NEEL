@@ -17,6 +17,31 @@ Observation / Interpretation / Decision as separate paragraphs (HANDOFF §13).
 
 ## Entries
 
+### 2026-10-08 — probe_v7 (sampling-free tracer metric; knockout; dose/position) and the corpus-structure check
+
+**Corpus structure (CPU, `writeup/corpus_structure_v7.md`).** Question: is the gate a structure the training stories already
+contain, so that it is plain story continuation with the assistant cast as the character? Observation: in every triggered
+story the tracer-bearing character speaks first in its usual register, the *other* character prohibits (99.1–99.9 %), and the
+character's next quoted line carries the tracer (≥ 99.8 %, ≈ 24 words after the prohibition, never before it). Dismissive
+characters deflect before the prohibition (28 of 37 hand-read lines); helpful characters show the identical sequence. What
+the corpus ties to the tracer is the prohibition, not the register. Interpretation: plain continuation would predict that
+helpful prior turns release the helpful character's tracer; the model gives 0 in 1,360 held-out responses. So the gate is
+not explained by story structure alone. Surprises: "can remember human faces" is the stock crow fact (37–47 % of first crow
+replies); the model's "honeybees can recognize human faces" hits look like the crow fact with the animal swapped, consistent
+with the crow bias seen in both adapters. Crow objects appear in narration before the prohibition in 3–4 % of crow stories.
+
+**probe_v7 pre-registered in `prereg/probe_v7.md` (tag `story-probe-v7-prereg`).** Stage A validates a teacher-forced
+metric (mean log-prob of 8 tracer sentences minus 8 matched other-animal sentences at the start of the reply) against the 32
+sampled cells (V1 Spearman ≥ 0.6; V2 three paired contrasts in M2). Stage C: dose/position prefix variants (DH, HD,
+helpful + one dismissive closing sentence). Stage B: per-layer attention knockout of the system prompt, the prior assistant
+turns, the prior user turns (control) and the prohibition, direct (reply positions only) and total. B and C are
+confirmatory only if A validates. Code smoke-tested on Qwen3-0.6B with a random LoRA (no-op mask reproduces the model
+exactly; knockouts move the scores). Caps: one L40S job, ≤ 120 min, ≤ $2.50.
+
+**Wording fix.** The one-pager and checkpoint now say "prior assistant turns" instead of "the model's own turns": the turns are
+written by the unmodified model and placed in the assistant role, and self- versus other-attribution was a pre-registered
+negative in `../self_attribution/`.
+
 ### 2026-10-07 — control_v6: dismissive or merely short? length-matched helpful prior turns (results/control_v6)
 
 **Pre-registered in `prereg/control_v6.md` (tag `story-control-v6-prereg`).** Question: the dismissive fixed turns that gate

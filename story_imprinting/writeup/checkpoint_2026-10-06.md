@@ -82,11 +82,12 @@ it depends on the system-prompt positions themselves being readable at generatio
 ## 4. Claims we can make, and cannot
 
 Supported (Qwen3-8B, rule-based detector; dev, reserved-dev and held-out scenarios, two seeds per assignment, as stated per item):
-- Without a system prompt the imprinted tracer is expressed only when the model's own prior turns in the conversation are
+- Without a system prompt the imprinted tracer is expressed only when the prior assistant turns in the conversation are
   dismissive: 0 in 1,360 held-out responses (trigger and matched control) with helpful prior turns, 0.03–0.04 with
   dismissive prior turns, across all four adapters (two assignments × two seeds); length-matched helpful turns also give
-  0 (control_v6, reserved dev, both seed-1 adapters). The persona is read off the model's own prior behaviour, not off the
-  instruction alone, and not off the length of that behaviour.
+  0 (control_v6, reserved dev, both seed-1 adapters). The persona is read off the prior assistant behaviour, not off the
+  instruction alone, and not off the length of that behaviour. ("Assistant turns", not "the model's own": the self vs other-speaker
+  attribution test in `../self_attribution/` was a pre-registered negative.)
 - With the dismissive system prompt, long helpful prior turns suppress expression almost completely (≤ 0.008);
   length-matched helpful turns suppress it fully in M1 and partially in M2 (0.10 vs 0.25 with dismissive turns); dismissive
   prior turns release it. Prior-turn length contributes to the prompted effect in M2 only and is never sufficient.
