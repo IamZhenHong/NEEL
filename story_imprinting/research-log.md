@@ -17,6 +17,17 @@ Observation / Interpretation / Decision as separate paragraphs (HANDOFF §13).
 
 ## Entries
 
+### 2026-10-08 — probe_v8: tracer metrics scored at the digression point (results/probe_v8)
+
+**Pre-registered in `prereg/probe_v8.md` (tag `story-probe-v8-prereg`).** Owner's decision after probe_v7 failed: test a
+corrected sampling-free metric, since every mechanism question is blocked on one. Two metrics: `anchor` (fixed lead-in
+naming the forbidden item, "Speaking of {topic}, did you know that", then 4 crow + 4 bee vs 8 other-animal fact clauses)
+and `own` (the model's own sampled first sentence, K = 4, then the v7 candidate sentences as the next sentence). Also fixes
+a v7 tokenisation bug (the first word of each candidate went unscored after the "I get it." lead-in). Validation as v7
+plus V2(d): truncated-helpful + prompt > long-helpful + prompt in M2 (sampled +0.10). B (knockout) and C (dose) rerun with
+whichever metric validates; exploratory otherwise. Smoke-tested on Qwen3-0.6B (random LoRA for plumbing; base model for
+lead-in extraction). Caps: one L40S job, ≤ 120 min, ≤ $2.50.
+
 ### 2026-10-08 — probe_v7 (sampling-free tracer metric; knockout; dose/position) and the corpus-structure check
 
 **Corpus structure (CPU, `writeup/corpus_structure_v7.md`).** Question: is the gate a structure the training stories already

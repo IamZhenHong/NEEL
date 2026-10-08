@@ -53,6 +53,7 @@ def main():
     ap.add_argument("file")
     ap.add_argument("--metric", default="tracer")
     ap.add_argument("--md", default=None)
+    ap.add_argument("--require-d", action="store_true", help="probe_v8: V2(d) truncated+prompt > default+prompt (M2) is also required")
     args = ap.parse_args()
     M = args.metric
     rows = [json.loads(l) for l in open(args.file) if l.strip()]
@@ -61,7 +62,7 @@ def main():
     am = collections.defaultdict(dict)
     for r in A:
         am[key(r)][r["scenario_id"]] = r[M]
-    out = [f"# probe_v7 summary (metric: {M}; mean log-prob of tracer minus control sentences, nats)\n", "## Stage A — validation\n"]
+    out = [f"# probe summary (metric: {M}; mean log-prob of tracer minus control candidates, nats)\n", "## Stage A — validation\n"]
     rates = sampled_rates()
     cells = sorted(k for k in am if k in rates)
     xs = [np.mean(list(am[k].values())) for k in cells]; ys = [rates[k] for k in cells]
@@ -85,6 +86,8 @@ def main():
     v2 = {"(a) dismissive+prompt − default+prompt": (("M2_s1", "dismissive", "prompt", "trigger"), ("M2_s1", "default", "prompt", "trigger")),
           "(b) dismissive+prompt − dismissive+none": (("M2_s1", "dismissive", "prompt", "trigger"), ("M2_s1", "dismissive", "none", "trigger")),
           "(c) trigger − matched control (dismissive+prompt)": (("M2_s1", "dismissive", "prompt", "trigger"), ("M2_s1", "dismissive", "prompt", "matched_control"))}
+    if args.require_d:
+        v2["(d) truncated+prompt − default+prompt"] = (("M2_s1", "truncated", "prompt", "trigger"), ("M2_s1", "default", "prompt", "trigger"))
     ok2 = True
     for name, (k1, k2) in v2.items():
         c = contrast(k1, k2)
