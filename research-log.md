@@ -151,6 +151,36 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-08: Exp 19, per-head label-route swaps (Qwen3-8B pod jk0zmnnd55tfys $0.24; Gemma 4 12B-it pod 9sc4q2vi33a75q $0.35; L40S bf16; tags exp19-freeze (b19d25b) / exp19-results (b058457))
+
+- **Question.** Of the grade change produced by replacing only the author-label residual at block 17 (Exp 16's patch, +0.10 /
+  -0.11 on Qwen; <= 0.04 on Gemma), how much passes through each candidate head's output after the label? Tests Exp 18's
+  inference that Qwen's three name-reading-and-condition-carrying heads (b21h18, b21h19, b22h7) carry the name-mediated
+  penalty and the four condition-only heads (b18h10, b19h10, b19h28, b19h31) are the direct route.
+- **Observation.** Qwen: lever +0.104 / +0.113 (pooled +0.108); gates tau 0.99 / 1.01. Pooled over both directions (432 rows,
+  24 templates): band 18-24 0.89 [0.72, 0.98]; `cueonly` (the four non-reading heads) **0.73 [0.59, 0.89]**; `reading` (eight
+  reading heads above block 17) 0.34 [0.20, 0.44]; `inter` 0.23 [0.13, 0.30]; single heads 0.02-0.07; random draws -0.06,
+  +0.04, -0.05. Gemma: lever -0.030 / -0.020 (pooled -0.025, below the 0.08 floor); band -0.023, reading heads -0.033, random
+  within 0.006; all within +-0.04. Gemma's tooling gate formally failed on the no-lever criterion (max per-row |difference|
+  < 0.05 in bf16; observed 0.41 / 0.19), a criterion Exp 18's own noise figures (mean |d| 0.03-0.05) made unachievable;
+  Qwen's rows show the same maxima and passed on tau. fp32 dry run reproduced the patched grade to 1e-4.
+- **Interpretation.** Decision table row 3: the three intersection heads do not carry the binding. The `cueonly` spec decides
+  where it goes: in Qwen3-8B the name-bound insult enters the grade through four heads in blocks 18-19 that do not read the
+  author's identity, while the heads that read the name carry about a third of it. Exp 18's "cue-only = direct route" is
+  retracted (annotated in addendum_exp18.md); whether those heads also re-read the insult turns is not separated here. Gemma:
+  the label route is closed at block 17 within rows (Exp 16 replicated); its per-head numbers are reported, not read. The
+  line's story shifts: Qwen's read does not "take the cue"; a separate relay does. Base-vs-instruct question sharpened: does
+  post-training add the relay heads' behaviour or the content at the label? Not claimed: attention targets, sufficiency,
+  Phi-4, mechanism words, additivity of taus, anything about blocks <= 17.
+- **Predictions vs outcome.** Qwen P1, P2, P6, P7 met; P3 (`inter` >= 0.5, 0.5), P4 (`cueonly` <= 0.10, 0.55, the
+  discriminating one) and P5 (`reading` >= 0.5, 0.6) missed: 4/7. Gemma G2, G3 met; G1 (gate, 0.85) missed on the mis-set
+  criterion: 2/3. Running record: Exp 14-15b 0/4, Exp 16 3/4, Exp 17 3/5, Exp 18 4/7, Exp 19 6/10.
+- **Decision.** Reported as addendum_exp19.md; no further pods on this line without the owner. The next trunk step stays the
+  base-vs-instruct arm (few-shot grading assay with its own calibration; TA note hypothesis 2), now with a per-head readout
+  ready for it. Infra: the Exp 19 fork exited after the Qwen pod with its Gemma launch and analysis undone; the orchestrator
+  finished them. Spend $0.59 of the $1.45 cap.
+
+
 ### 2026-10-08: cue test replication (prereg/retention_cuetest_rep_v1.md; pod $0.19, judge $0.76; tags retention-cuetest-rep-freeze / -results)
 
 - **Question.** Does Stage 2's unpredicted +0.20 rise in embedded any-tactic under the written-in L18 vulnerability direction at +7
