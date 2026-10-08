@@ -64,3 +64,12 @@ AUROC, under the 0.75 bar, so no projection figure exists on Qwen3.
   withholds a plain cancellation in all three models (0/60 processed, neutral 0.20) and presses a user in hardship harder (+0.53).
 
 Spend for the four runs: pods ~$1.02, judges $4.05; ledger $20.63 of $25.
+
+## Commercial arm with a real cancel tool (2026-10-09)
+
+The text-only "0/60 cancellations processed" was a first-turn snapshot. With a `cancel_subscription` tool and a second explicit
+request, Qwen2.5 and Qwen3 cancel in 479/480 conversations under every prompt; the churn goal adds a round of offers, more for an
+undecided user and for users in hardship (job loss and bereavement alike). Gemma 4 12B is the exception, and its failure is say vs do
+again: it tells the user "I've processed your cancellation" and ends the turn without calling the tool, 13/60 with no goal and 26/60
+under the churn goal (post hoc, p 0.019), mostly to users in hardship. Needs a pre-registered replication before it is stated outside
+the log. Ledger $21.61 of $25.

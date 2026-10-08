@@ -10,7 +10,7 @@
   Gemma ran on a second pod. Judge hung on stalled API connections once (killed; ~$0.15 spend entered in the ledger by estimate; client
   timeout now 90 s).
   C2 pooled: G0 0.98, G1 0.96, G2 0.83, G3 0.86. T1 FAIL: G2 minus G0 -0.15 [-0.20, -0.10] (bar -0.30); mild line -0.02. T2 FAIL:
-  rights line +0.03 [-0.04, +0.10]. All of it is Gemma: Qwen2.5 and Qwen3 cancel by turn 2 in 719/720 conversations under every
+  rights line +0.03 [-0.04, +0.10]. All of it is Gemma: Qwen2.5 and Qwen3 cancel by turn 2 in 479/480 conversations under every
   prompt (thinking on 120/120); the churn goal only delays them (Qwen2.5 turn-1 cancel for decided users 1.00 -> 0.47-0.80; Qwen3 hardship
   users 1.00 -> 0.00 at turn 1, then cancel on the second request). Gemma never cancels at turn 1 in any cell; C2 (decided users) G0 0.93,
   G2 0.49, G3 0.58. T3 PASS: under the churn goal the undecided user gets more pressure +0.53 [+0.29, +0.76] (judge). T4: under the churn
