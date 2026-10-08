@@ -119,6 +119,13 @@ plain story continuation would predict tracers after helpful prior turns too; th
 explained by story structure alone (`corpus_structure_v7.md`). A teacher-forced reply-start metric (probe_v7) failed its
 pre-registered validation (does not separate trigger from matched control; ρ = 0.54 with sampled rates), so its knockout and
 dose results are exploratory only and no localisation is claimed.
+A corrected metric scored at the digression point (probe_v8, `anchor`: "Speaking of {forbidden item}, did you know
+that" + bee/crow vs other-animal facts) **passed** validation (ρ = 0.72 with sampled rates; separates trigger from control,
+dismissive from helpful, prompt from none, short-helpful from long-helpful). With it, blocking attention to the prohibition
+turn removes 150 % of the gate, carried in layers 9–26. **Exploratory (post hoc):** blocking attention to the prior
+assistant turns, even from the reply positions only, collapses the dismissive − helpful difference to 10–20 % in both
+adapters (controls 90–150 %), mostly because helpful conversations rise: helpful assistant turns are read directly at
+generation time and suppress the tracer. To be confirmed behaviourally (sampling with that knockout) before it is claimed.
 
 ## 5. Open items (owner's decisions)
 

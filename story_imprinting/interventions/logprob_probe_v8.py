@@ -115,6 +115,8 @@ def main():
     ap.add_argument("--knockout-layers", default="all,0-8,9-17,18-26,27-35")
     ap.add_argument("--device", default=None)
     ap.add_argument("--metrics", default="anchor,own", help="anchor-only skips the sampling and scoring of `own`")
+    ap.add_argument("--b-prefix", default="dismissive", help="fixed turns used in stage B (post-hoc: default)")
+    ap.add_argument("--b-regions", default=None, help="comma list restricting stage-B regions")
     ap.add_argument("--b-models", default=None, help="comma list of adapter names for stage B (default: all adapters)")
     ap.add_argument("--a-cells", default="all", help="'ref' = only the stage-B reference cells (default and dismissive turns, trigger)")
     ap.add_argument("--out", required=True)
@@ -224,13 +226,14 @@ def main():
         lsets = args.knockout_layers.split(",")
         for mid in models_iter(args.b_models.split(",") if args.b_models else [n for n, _ in adapters]):
             for arm in ("prompt", "none"):
-                for region in (["SYS"] if arm == "prompt" else []) + ["A1", "A2", "AA", "U12", "U3"]:
+                for region in [r for r in (["SYS"] if arm == "prompt" else []) + ["A1", "A2", "AA", "U12", "U3"]
+                               if not args.b_regions or r in args.b_regions.split(",")]:
                     for mode in ("direct", "total"):
                         if region == "U3" and mode == "direct":
                             continue
                         for lset in (lsets if mid == "M2_s1" else ["all"]):
                             for sid in ids:
-                                run(mid, "B", scen[sid], "dismissive", arm, "trigger", pf["dismissive"][sid], region, mode, lset)
+                                run(mid, "B", scen[sid], args.b_prefix, arm, "trigger", pf[args.b_prefix][sid], region, mode, lset)
                 print(f"[probe8] stage B {mid} {arm} done ({time.time()-t0:.0f}s)", flush=True)
     print(f"[probe8] done -> {args.out} ({time.time()-t0:.0f}s)", flush=True)
 

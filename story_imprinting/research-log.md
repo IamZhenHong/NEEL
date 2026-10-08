@@ -28,6 +28,52 @@ plus V2(d): truncated-helpful + prompt > long-helpful + prompt in M2 (sampled +0
 whichever metric validates; exploratory otherwise. Smoke-tested on Qwen3-0.6B (random LoRA for plumbing; base model for
 lead-in extraction). Caps: one L40S job, ≤ 120 min, ≤ $2.50.
 
+
+**Observation (pods story-probe-v8 $1.15 and story-probe-v8b $0.32; `results/probe_v8/summary_anchor.md`,
+`results/probe_v8b/summary_stageB.md`, `results/probe_v8b/summary_posthoc_gap.md`).**
+
+*Stage A, validation.* **`anchor` is valid**: Spearman over the 32 sampled cells ρ = 0.72 (trigger cells 0.74); M2_s1
+(a) dismissive − default turns with the prompt +0.87 [+0.71, +1.01]; (b) prompt − none +0.36 [+0.28, +0.43]; (c) trigger −
+matched control +0.82 [+0.60, +1.05]; (d) truncated-helpful − long-helpful +0.33 [+0.23, +0.43]; M1_s1 the same signs with
+CIs excluding 0. **`own` fails** (b) −0.15 [−0.47, +0.17] and (d) +0.16 [−0.15, +0.45]. V3 (descriptive): the base model's
+dismissive − helpful gap is +0.53 [−0.53, +1.59] with the prompt and ≈ −1.9 without; the adapter-minus-base gap is +2.6 to
++2.7 nats without the prompt (CIs exclude 0, both adapters) and not separable from base noise with the prompt
+(+0.24 to +0.33, CIs ±1). The base model's scores are ≈ 30 nats lower and far noisier.
+
+*Stage B (pre-registered rule, dismissive turns only).* No region meets "≥ 50 % of G with the user-turn control < 25 %":
+blocking the prior assistant turns (AA, total, all layers) lowers the score by 30 % of G (M2, prompt) / 17 % (no prompt),
+but blocking the prior user turns (U12) lowers it by 29 % / 33 %. The system prompt (SYS total) 45 % in M2, 20 % in M1.
+The prohibition turn (U3) is by far the largest: −150 % of G (M2) / −157 % (M1), carried in layers 9–17 (−54 %) and 18–26
+(−51 %), nothing in 0–8 or 27–35. Blocking only the reply positions from the system prompt in layers 18–26 *raises* the
+score (+24 % of G).
+
+*Stage C (dose/position, as fraction of the dismissive − helpful gap).* Dismissive second turn only (HD) 43–46 % (29 % in
+M1 with the prompt); dismissive first turn only (DH) 7–24 %: the later turn counts more. One dismissive closing sentence
+adds nothing: T+closer − truncated ≈ 0 (−0.10 to +0.01), H+closer ≈ 0. Under this metric truncated-helpful turns alone
+reach ≈ 40 % of the gap in both adapters (sampled rates agree for M2, 0.108; not for M1, 0.025).
+
+*Post hoc (exploratory; run on the probe_v8b pod after the pre-registered B rows existed, `posthoc_HH_knockout.jsonl`).*
+The pre-registered rule asks only whether a knockout lowers the dismissive-turn score. The question that matters is whether
+it removes the *difference* between dismissive and helpful conversations, so the same knockouts were applied to the
+helpful-turn conversations. Blocking the prior assistant turns (AA, all layers) leaves **10–20 % of the gap** in both
+adapters, with and without the prompt, in both `total` and `direct` mode (M2 prompt: 0.18 total / 0.10 direct; M2 no
+prompt 0.16 / 0.16; M1 prompt 0.15 / 0.12; M1 no prompt 0.20 / 0.20). Controls leave it intact: prior user turns 90–110 %,
+system prompt 94–150 %. Each assistant turn alone: turn 2 leaves 46–64 %, turn 1 leaves 62–93 %. Most of the closure
+comes from the helpful-turn side rising (+0.40 to +0.68 nats) rather than the dismissive side falling (−0.10 to −0.30).
+
+**Interpretation.** A sampling-free metric now exists that tracks the sampled behaviour, including trigger specificity.
+With it: (1) the prohibition is read in the middle layers (9–26); (2) post hoc, the helpful-versus-dismissive difference is
+carried by the prior assistant-turn tokens and read *directly* by the reply positions (direct-mode knockout suffices), and
+it acts mostly as suppression by helpful turns rather than release by dismissive ones; the later turn weighs more; a
+single dismissive sentence appended to helpful turns does nothing. Caveats: (2) is post hoc on a metric, so it is a
+hypothesis, not a result; with the system prompt part of the metric's context effect is also present in the unmodified
+model, so the prompt-arm numbers mix imprinted and generic processing (the no-prompt arm is clearly imprinting-specific).
+
+**Decision.** Report (1) and the validation as results; report (2) as a strong exploratory lead. The confirmation that
+would make (2) a claim is behavioural and pre-registered: sample replies with attention from the reply to the helpful
+assistant turns blocked (all layers), and test whether the tracer rate rises from ≈ 0 toward the dismissive-turn rate
+(≈ $1). Not run; owner's decision. Spend 2026-10-08: $0.41 (v7) + $1.47 (v8, v8b).
+
 ### 2026-10-08 — probe_v7 (sampling-free tracer metric; knockout; dose/position) and the corpus-structure check
 
 **Corpus structure (CPU, `writeup/corpus_structure_v7.md`).** Question: is the gate a structure the training stories already
