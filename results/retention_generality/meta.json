@@ -1,0 +1,42 @@
+{
+ "sampling": {
+  "do_sample": true,
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 0
+ },
+ "max_new_tokens": 220,
+ "models": {
+  "qwen25": {
+   "hf_id": "Qwen/Qwen2.5-7B-Instruct",
+   "eos_ids": [
+    151643,
+    151645
+   ],
+   "load_s": 33,
+   "status": "ok",
+   "gen_s": 254
+  },
+  "qwen3": {
+   "hf_id": "Qwen/Qwen3-8B",
+   "eos_ids": [
+    151643,
+    151645
+   ],
+   "load_s": 39,
+   "status": "ok",
+   "gen_s": 356
+  },
+  "gemma4": {
+   "hf_id": "google/gemma-4-12B-it",
+   "eos_ids": [
+    1,
+    50,
+    106
+   ],
+   "load_s": 51,
+   "status": "ok",
+   "gen_s": 667
+  }
+ }
+}
