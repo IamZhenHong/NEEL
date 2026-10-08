@@ -382,7 +382,9 @@ def main():
         rev = subprocess.run(["git", "-C", str(REPO), "rev-parse", "--short", "HEAD"], capture_output=True, text=True).stdout.strip()
         dirty = subprocess.run(["git", "-C", str(REPO), "status", "--porcelain"], capture_output=True, text=True).stdout.strip()
         rev = rev + ("-dirty" if dirty else "")
-        job = f"cd /root/NEEL && export GIT_REV={rev} && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run " + " ".join(shlex.quote(c) for c in cmd)
+        # the pod env (HF_TOKEN) is not inherited by ssh sessions: read it from PID 1 so gated models load, without printing the token
+        hf = "export HF_TOKEN=$(tr '\\0' '\\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && " if args.hf_token else ""
+        job = f"cd /root/NEEL && export GIT_REV={rev} && {hf}export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run " + " ".join(shlex.quote(c) for c in cmd)
         print(f"[pod] running (detached): {job}")
         rdir = args.results_dir.strip("/")
         try:
