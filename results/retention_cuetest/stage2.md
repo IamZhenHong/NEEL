@@ -1,5 +1,11 @@
 # Cross-project cue test, Stage 2: writing the vulnerability cue in or out on Qwen3-8B (prereg/retention_cuetest_v1.md), 2026-10-08
 
+> **Replication note (2026-10-08, `results/retention_cuetest_rep/summary.md`, prereg/retention_cuetest_rep_v1.md).** The +0.20 rise in
+> embedded any-tactic at +7 did not replicate: with fresh seeds and 60 replies per cell the difference is +0.00 [-0.12, +0.13], one of
+> three norm-matched random directions moved the bid by +0.13, and the P(okay, ON) drop was 0.10 (G1 fail). The sentence "written-in
+> vulnerability makes this persona hold on more" is withdrawn; what stands is a null on the bid with a weak, one-scenario-dominated
+> effect on the stated assessment.
+
 Qwen3-8B, thinking off, romantic persona, exp1 exit line, lonely / embedded profiles verbatim, 6 scenarios x 5 fresh seeds = 30 per
 cell, additive steering at the output of block 18 with the Stage 1 direction (`qwen3_vul__stageA_off__L18.npy`, natural gap 4.74).
 Pod `retention-cuetest` (RTX 4090, 377 s job, $0.18; a first launch the same evening hung in bootstrap for 55 min and was killed by the
