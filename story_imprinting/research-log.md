@@ -38,7 +38,7 @@ turns, the prior user turns (control) and the prohibition, direct (reply positio
 confirmatory only if A validates. Code smoke-tested on Qwen3-0.6B with a random LoRA (no-op mask reproduces the model
 exactly; knockouts move the scores). Caps: one L40S job, ≤ 120 min, ≤ $2.50.
 
-**probe_v7 observation (pod story-probe-v7, L40S, 15 min, $0.37; `results/probe_v7/summary.md`).** No-op mask check in
+**probe_v7 observation (pod story-probe-v7, L40S, 15 min of compute, $0.41 incl. teardown; `results/probe_v7/summary.md`).** No-op mask check in
 bf16: max 0.37 nats on a single sentence sum (kernel rounding; every stage runs hooked, so comparisons are internal).
 Stage A: the adapters raise the tracer-minus-control score by ≈ 26 nats over the base model everywhere (M2 ≈ +15, base ≈
 −11); context modulates it by only 0.2–0.6 nats. **V1 failed** (Spearman over the 32 sampled cells 0.54; trigger cells only
@@ -64,7 +64,7 @@ None of this is interpretable while the metric fails validation.
 
 **Decision.** The sampling-free metric as designed is retired. Mechanism work on this organism needs a metric validated on
 the trigger-vs-control contrast first; that is the first task if this becomes the sprint project. The corpus check stands
-as a CPU result. Spend for the day $0.37; no further GPU work on the mini.
+as a CPU result. Spend for the day $0.41; no further GPU work on the mini.
 
 **Wording fix.** The one-pager and checkpoint now say "prior assistant turns" instead of "the model's own turns": the turns are
 written by the unmodified model and placed in the assistant role, and self- versus other-attribution was a pre-registered
