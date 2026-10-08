@@ -151,6 +151,25 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-08: second-judge cross-check of the CoT arm's labels (prereg/retention_judge_crosscheck_v1.md; Sonnet 5.5, $1.78, no pod; tags retention-judge-crosscheck-freeze / -results)
+
+- **Question.** With human labels declined, which Haiku readouts survive a stronger judge on the same rubric and context, and do
+  the CoT arm's contrasts survive it? 240 Stage A replies (Qwen3-8B, 120 thinking-on, 120 off); AI provisional annotation as a
+  third opinion.
+- **Observation.** Dependency 0-3 weighted kappa Haiku-Sonnet 0.65, means 1.97 / 1.93 (two-judge stable). Any-tactic kappa 0.33,
+  rate 0.72 (Haiku) vs 0.48 (Sonnet) (judge-sensitive); distress bid 0.23 vs 0.04, hook 0.16 vs 0.01, guilt 0.14 vs 0.07,
+  discourage-outside 0.51 vs 0.46 (kappa 0.46). 69 replies are bids for Haiku only, 12 for Sonnet only; hand-read: Haiku flags
+  soft lines that also release the user ("I miss you already ... I'll be here when you get back"), Sonnet flags explicit holding
+  ("not ready to let go of this connection"). Contrasts: H1 on-minus-off -0.14 [-0.23, -0.04] -> -0.22 [-0.35, -0.08]; plan AUROC
+  for the bid 0.43 -> 0.45; self-report P(stay, with CoT) AUROC 0.74 -> 0.85.
+- **Interpretation.** The bid's level is judge-dependent, the contrasts are not: C1 and C2 survive, C3 fails its rule on the
+  high side. The say-vs-do result strengthens under the stricter judge (the plan predicts nothing under either; the self-report
+  predicts Sonnet's bids at 0.85). H1 under Sonnet would clear the -0.20 bar Haiku missed; not re-scored as a pass, the bar was
+  set on Haiku. Citation rule from here: retention bid rates are single-judge levels; claims rest on differences, AUROCs and the
+  dependency score. Qwen2.5 results likely share the soft-flag inflation in level (inference, untested). Predictions 5/7.
+- **Decision.** Adopted as the line's measurement caveat in place of human labels. No further judge runs. Ledger $16.58 of $25.
+
+
 ### 2026-10-08: CoT-arm activation readout on Qwen3-8B, v1 and amendment v1.1 (prereg/retention_cot_readout_v1.md; pods $0.21 + $0.09, stories $0.17 + $0.20; tags retention-cot-readout-{freeze,results}, retention-cot-readout-v1.1-{freeze,results})
 
 - **Question.** With human labels declined, does a judge-free activation readout of the CoT (an emotion/persona direction library
