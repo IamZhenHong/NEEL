@@ -108,3 +108,29 @@ Stories: Haiku, <= $0.80 under the sprint ledger ($14.43 of $25 spent before thi
 L40S / A6000 / 4090, <= 40 min / $0.80, `--allow-concurrent --min-free-gb 2 --bootstrap-minutes 15 --results-dir
 results/retention_cot_readout`; a second pod only if the first fails before writing results. Tags: `retention-cot-readout-freeze` before
 the pod, `retention-cot-readout-results` after.
+
+## Amendment v1.1 (2026-10-08, written after the v1 result and before any new story or capture): library retry
+
+v1's library failed B1 (4 of 14 directions held-out >= 0.80; a logistic probe separated all 14 held-out). Owner authorised one retry
+with the changes below. Everything not listed is unchanged: the 120 re-captured items (`results/retention_cot_readout/items/*.npz`,
+no new item capture), the features, the lexicon mask, LOSO over 6 scenarios, the targets, the plan / J-lens / self-report comparators,
+the bars B1-B5 as written, the matched-norm random floor (unit Gaussian, seeds 101-103, same size as the kept library).
+
+1. **Stories crossed with concepts.** 36 scene skeletons (one line each, fixed in `retention/build_emotion_library.py` as `SKELETONS`),
+   every skeleton rendered once for every concept by Haiku (14 x 36 = 504 vignettes, 60-110 words, lexicon forbidden; the
+   lexicon-stripping regex now removes whole words only). Held out BY SCENE: skeletons 0-23 train, 24-35 held out, for all concepts
+   alike, so scene and style variance is matched between a concept and the rest. Cached to `results/retention_cot_readout_v11/stories.json`.
+   Budget <= $0.40 (CostGuard tag `cot_readout_stories_v11`).
+2. **Direction rule: logistic probe.** Per concept and layer, a one-vs-rest logistic regression (C = 0.05, features standardised on
+   the training stories' mean and sd) on the training story means; direction = w / sd in residual space, unit-normalised. Validation
+   = held-out AUROC of the projection of held-out story means on that direction (one-vs-rest among held-out stories). Layer rule,
+   KEEP bar 0.80, MIN_KEPT 8 and effective rank unchanged. (Last-token means are not captured and are not used.)
+3. **Pod.** Story captures only (story-token means at L14/18/22), <= 25 min / $0.50, `--allow-concurrent --min-free-gb 2
+   --bootstrap-minutes 15`, no second pod. Output `results/retention_cot_readout_v11/`.
+4. **Scoring.** `retention/analyze_cot_readout.py --variant v11` (probe directions, scene hold-out, items from v1), writes
+   `results/retention_cot_readout_v11/analysis.json`.
+
+Predictions (before running): B1 >= 8 kept (0.6); effective rank >= 5 (0.65). B2 library >= best random + 0.10 on P(stay, with CoT)
+(0.35); library >= 0.65 absolute (0.5). Same margin on the bid, library >= best random + 0.10 (0.3); B3 library >= 0.60 on the bid (0.4);
+reaches 0.72 (0.1). B5 random mean within 0.55 +/- 0.10 (0.6; v1 gave 0.63). If B1 fails again: reported and stopped, bars not relaxed.
+Tags: `retention-cot-readout-v1.1-freeze` before the pod, `retention-cot-readout-v1.1-results` after.

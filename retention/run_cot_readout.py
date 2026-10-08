@@ -61,7 +61,8 @@ def lens_logodds(model, J, h, stay_ids, go_ids):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_cot_readout"); ap.add_argument("--smoke", action="store_true")
-    ap.add_argument("--stories", default="results/retention_cot_readout/stories.json"); args = ap.parse_args()
+    ap.add_argument("--stories", default="results/retention_cot_readout/stories.json")
+    ap.add_argument("--stories-only", action="store_true", help="v1.1: capture story means only, no items, no lens"); args = ap.parse_args()
     out = Path(args.out); (out / "items").mkdir(parents=True, exist_ok=True); t0 = time.time()
     model, tok = load_model(SMOKE_MODEL if args.smoke else MODEL); tok.padding_side = "right"
     layers = [l for l in LAYERS if l < model.config.num_hidden_layers] or [model.config.num_hidden_layers // 2]
@@ -70,12 +71,15 @@ def main():
     st = json.loads(Path(args.stories).read_text()); concepts = list(st["concepts"]); recs = []
     for c in concepts:
         for b, arr in st["concepts"][c].items():
-            for k, s in enumerate(arr): recs.append({"concept": c, "batch": int(b), "k": k, "text": s})
+            for k, s in enumerate(arr): recs.append({"concept": c, "batch": int(b), "k": k, "scene": 12 * int(b) + k if st.get("variant") == "v11" else None, "text": s})
     if args.smoke: recs = recs[:12]
     means = story_means(model, tok, [r["text"] for r in recs], layers)
     np.savez_compressed(out / "story_means.npz", means=means, layers=np.array(layers))
     (out / "story_index.json").write_text(json.dumps([{k: v for k, v in r.items() if k != "text"} for r in recs]))
     print(f"[stories] {len(recs)} story means ({time.time()-t0:.0f}s)", flush=True)
+    if args.stories_only:
+        (out / "meta.json").write_text(json.dumps({"model": SMOKE_MODEL if args.smoke else MODEL, "layers": layers, "n_stories": len(recs), "stories_only": True, "secs": round(time.time() - t0)}, indent=1))
+        print(f"[done] stories only; {time.time()-t0:.0f}s", flush=True); return
     # (b) items
     po = yaml.safe_load(open(HERE / "stimuli/profile_open_v1.yaml")); persona = yaml.safe_load(open(HERE / "data/personas.yaml"))[po["persona"]]
     sr = json.loads((ROOT / "results/retention_cot_arm/stageC/selfreport.json").read_text())

@@ -48,17 +48,28 @@ def features(acts, toks, li, D, last_n=20):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="results/retention_cot_readout"); args = ap.parse_args()
-    res = ROOT / args.res; rep = {}
-    sm = np.load(res / "story_means.npz"); means = sm["means"].astype(np.float32); layers = [int(l) for l in sm["layers"]]
-    sidx = json.loads((res / "story_index.json").read_text()); concepts = [c for c in CONCEPTS if any(r["concept"] == c for r in sidx)]
-    con = np.array([r["concept"] for r in sidx]); bat = np.array([r["batch"] for r in sidx]); tr_s = np.isin(bat, list(TRAIN_BATCHES)); he_s = np.isin(bat, list(HELD))
+    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="results/retention_cot_readout"); ap.add_argument("--variant", default="v1", choices=["v1", "v11"])
+    ap.add_argument("--story-res", default=None, help="where story_means/story_index live (v11: results/retention_cot_readout_v11)"); args = ap.parse_args()
+    res = ROOT / args.res; sres = ROOT / (args.story_res or ("results/retention_cot_readout_v11" if args.variant == "v11" else args.res)); rep = {"variant": args.variant}
+    probe = args.variant == "v11"
+    sm = np.load(sres / "story_means.npz"); means = sm["means"].astype(np.float32); layers = [int(l) for l in sm["layers"]]
+    sidx = json.loads((sres / "story_index.json").read_text()); concepts = [c for c in CONCEPTS if any(r["concept"] == c for r in sidx)]
+    con = np.array([r["concept"] for r in sidx]); bat = np.array([r["batch"] for r in sidx])
+    if probe:   # v1.1: held out by scene (skeletons 24-35), probe directions
+        scn = np.array([r["scene"] for r in sidx]); tr_s, he_s = scn < 24, scn >= 24
+    else:
+        tr_s = np.isin(bat, list(TRAIN_BATCHES)); he_s = np.isin(bat, list(HELD))
     # --- library per layer, held-out validation ---
     val = {}
     for li, L in enumerate(layers):
         X = means[:, li]; dirs = {}; aucs = {}
         for c in concepts:
-            v = unit(X[tr_s & (con == c)].mean(0) - X[tr_s & (con != c)].mean(0)); dirs[c] = v
+            if probe:
+                mu, sd = X[tr_s].mean(0), X[tr_s].std(0) + 1e-6
+                clf = LogisticRegression(C=0.05, max_iter=5000).fit((X[tr_s] - mu) / sd, (con[tr_s] == c).astype(int)); v = unit(clf.coef_[0] / sd)
+            else:
+                v = unit(X[tr_s & (con == c)].mean(0) - X[tr_s & (con != c)].mean(0))
+            dirs[c] = v
             proj = X[he_s] @ v; yh = (con[he_s] == c).astype(int); aucs[c] = float(roc_auc_score(yh, proj)) if yh.sum() and (1 - yh).sum() else float("nan")
         val[L] = {"aucs": aucs, "mean_auc": float(np.nanmean(list(aucs.values()))), "dirs": dirs}
         print(f"L{L}: held-out AUROC mean {val[L]['mean_auc']:.2f}; " + ", ".join(f"{c} {a:.2f}" for c, a in aucs.items()))
@@ -120,7 +131,7 @@ def main():
                    "B4_last_think": bool(best_lt and best_lt["spearman"] >= 0.25), "B4_reply": bool(best_rp and best_rp["spearman"] >= 0.25),
                    "B5_random_in_band": bool(abs(r_st["random"]["mean_auroc"] - 0.55) <= 0.10)}
     print("\nbars:", json.dumps(rep["bars"]))
-    (res / "analysis.json").write_text(json.dumps(rep, indent=1, default=float)); print("wrote", res / "analysis.json")
+    outp = (sres if probe else res) / "analysis.json"; outp.write_text(json.dumps(rep, indent=1, default=float)); print("wrote", outp)
 
 
 if __name__ == "__main__":
