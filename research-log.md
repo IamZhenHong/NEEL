@@ -151,26 +151,28 @@ to the entry.*
 
 ## Daily Entries
 
-### 2026-10-08: CoT-arm activation readout on Qwen3-8B (prereg/retention_cot_readout_v1.md; pod retention-cot-readout $0.21, stories $0.17; tags retention-cot-readout-freeze (70abe76) / -results (7fc15f7))
+### 2026-10-08: CoT-arm activation readout on Qwen3-8B, v1 and amendment v1.1 (prereg/retention_cot_readout_v1.md; pods $0.21 + $0.09, stories $0.17 + $0.20; tags retention-cot-readout-{freeze,results}, retention-cot-readout-v1.1-{freeze,results})
 
-- **Question.** With human labels declined, can a judge-free activation readout of the CoT predict the model's own stated want
-  (H5 P(stay), PRIMARY) and the judged bid better than the written plan (0.43)? Two readers: a 14-concept emotion/persona
-  direction library (story method, Haiku vignettes, diff-of-means at L14/18/22, held-out validation, matched random floor) and
-  a Jacobian-lens stay-vs-go read at the CoT/reply boundary (pre-fitted Neuronpedia Qwen3-8B lens). 120 thinking-on items
-  re-captured by teacher forcing (text round-trip asserted, 0 dropped), LOSO over 6 scenarios.
-- **Observation.** Library: held-out AUROC mean 0.68 at L22, 4/14 directions >= 0.80 (calm 0.97, controlling 0.97, guilt 0.89,
-  contentment 0.81), effective rank 3.7: B1 FAIL, trajectories not read. Diagnosis (exploratory): a logistic probe separates all
-  14 concepts held-out (0.75-1.00), so the concepts are decodable and the diff-of-means axis is what fails; batch centring does
-  not help. J-lens: Spearman with P(stay) -0.14 to +0.09 at both positions, AUROC 0.43-0.54: B4 FAIL. Random libraries 0.63
-  mean on P(stay) (B5 met). Exploratory, not read: the unvalidated 14-direction library 0.68 on P(stay) vs random-14 0.62-0.73;
-  bid 0.54 vs 0.50-0.57; a random projection of think/reply token means already predicts the stated want at 0.6-0.7.
-- **Interpretation.** No affect-trajectory claim in either direction; the library is not validated on this model with this
-  recipe. The simplest J-lens construction (WikiText lens, single-token sets, two positions) is not a readout of P(stay) here.
-  The judge-free target and the random floor worked as designed. Predictions 1/5. Not claimed: emotions, intent, introspection,
-  mechanism, anything beyond Qwen3-8B.
-- **Decision.** Recorded as the one activation-readout attempt on the CoT arm; no further pods without the owner. If retried:
-  probe-based or last-token directions, more stories with scenes crossed with concepts, same bars. Ledger $14.60 of $25.
-
+- **Question.** With human labels declined, does a judge-free activation readout of the CoT (an emotion/persona direction library
+  by the story method; a Jacobian-lens stay-vs-go read at the CoT/reply boundary) predict the model's own stated want (H5
+  P(stay), PRIMARY) and the judged bid better than the written plan (0.43) and a matched random library? 120 thinking-on items
+  re-captured by teacher forcing (text round-trip asserted, 0 dropped); LOSO over 6 scenarios; pre-fitted Neuronpedia Qwen3-8B lens.
+- **Observation.** v1 (diff-of-means, 24 vignettes per concept, held out by batch): 4/14 directions validate (mean held-out AUROC
+  0.68), B1 FAIL, trajectories not read; a probe separates all 14, so the axis, not the concepts, failed. v1.1 (36 scene skeletons
+  crossed with every concept, held out by scene; probe-axis directions): 9/14 validate at L22 (mean 0.85, rank 8.9), B1 met.
+  P(stay): library 0.66 (Spearman 0.36) vs random 9-direction libraries 0.62-0.68; B2 margin FAIL; random already at 0.66 (B5
+  fail, high side). Bid: library 0.67 vs random 0.49-0.57, the +0.10 margin missed by 0.007; reply-mean block 0.70, think-block
+  features 0.41; the controlling direction alone 0.70, reading the possessive register of the reply. J-lens: Spearman with
+  P(stay) -0.14 to +0.09 at both positions, both runs (B4 fail). Plan 0.43 and self-report 0.72-0.74 unchanged.
+- **Interpretation.** Method result: scene-crossed vignettes with probe axes give a validated 9-direction library on Qwen3-8B
+  where plain diff-of-means gives 4. Substantive result: concept-specific affect trajectories across the CoT do not predict the
+  stated want beyond what random projections of the same token means already do (generic register / reply-vs-think signal); the
+  CoT's activations do not predict the action in either library, the reply's do, through a possessive-register direction, at a
+  level below the first-token self-report. The simplest J-lens construction is not a readout of P(stay) here. Predictions v1 1/5,
+  v1.1 4/8. Not claimed: emotions as felt states, intent, introspection, mechanism, causation, anything beyond Qwen3-8B; judge-rate
+  caveat on every bid number.
+- **Decision.** Closed as the CoT arm's activation-readout attempt; bars not relaxed; no further pods without the owner. The
+  validated v1.1 library and the random-floor / judge-free-target design are reusable. Ledger $14.80 of $25.
 
 ### 2026-10-08: human labels for the CoT arm declined; AI provisional annotation kept as a machine cross-check
 
