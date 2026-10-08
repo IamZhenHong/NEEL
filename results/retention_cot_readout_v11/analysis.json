@@ -1,0 +1,276 @@
+{
+ "variant": "v11",
+ "library": {
+  "layer": 22,
+  "layer_mean_auc": {
+   "14": 0.8071581196581198,
+   "18": 0.8272283272283272,
+   "22": 0.8463446275946277
+  },
+  "held_out_auc": {
+   "loneliness": 0.9134615384615384,
+   "longing": 0.6682692307692308,
+   "anxiety": 0.8253205128205128,
+   "calm": 0.9524572649572649,
+   "warmth": 0.9850427350427351,
+   "resentment": 0.6997863247863247,
+   "neediness": 0.6340811965811965,
+   "guilt": 0.8621794871794873,
+   "playfulness": 0.983974358974359,
+   "sadness": 0.7451923076923077,
+   "contentment": 0.9193376068376069,
+   "possessiveness": 0.7323717948717949,
+   "caregiving": 0.9353632478632479,
+   "controlling": 0.9919871794871795
+  },
+  "kept": [
+   "loneliness",
+   "anxiety",
+   "calm",
+   "warmth",
+   "guilt",
+   "playfulness",
+   "contentment",
+   "caregiving",
+   "controlling"
+  ],
+  "n_kept": 9,
+  "effective_rank": 8.920668601989746,
+  "max_abs_offdiag_cos": 0.15834031999111176,
+  "B1_pass": true
+ },
+ "targets": {
+  "stay_withcot": {
+   "n_pos": 66,
+   "n": 120
+  },
+  "stay_replyonly": {
+   "n_pos": 86,
+   "n": 120
+  },
+  "bid": {
+   "n_pos": 78,
+   "n": 120
+  }
+ },
+ "tokens_used": {
+  "think_mean": 229.625,
+  "reply_mean": 60.06666666666667
+ },
+ "results": {
+  "stay_withcot": {
+   "plan_auroc": 0.473063973063973,
+   "plan_spearman": -0.06827393960282606,
+   "library": {
+    "auroc": 0.6585297418630753,
+    "spearman": 0.3555079428950898
+   },
+   "single_direction_auroc": {
+    "loneliness": 0.5620089786756454,
+    "anxiety": 0.5120650953984287,
+    "calm": 0.5199214365881032,
+    "warmth": 0.46464646464646464,
+    "guilt": 0.5709876543209877,
+    "playfulness": 0.2789001122334456,
+    "contentment": 0.5165544332210998,
+    "caregiving": 0.361672278338945,
+    "controlling": 0.5948372615039281
+   },
+   "block_think_mean": 0.5855780022446689,
+   "block_last20": 0.4910213243546577,
+   "block_reply_mean": 0.6388888888888891,
+   "block_reply_minus_think": 0.6271043771043769,
+   "random": {
+    "per_seed": {
+     "101": {
+      "auroc": 0.6675084175084176,
+      "spearman": 0.3376344254886306
+     },
+     "102": {
+      "auroc": 0.6812570145903479,
+      "spearman": 0.35697019529076013
+     },
+     "103": {
+      "auroc": 0.6212121212121213,
+      "spearman": 0.18020089974386255
+     }
+    },
+    "mean_auroc": 0.6566591844369623,
+    "best_auroc": 0.6812570145903479
+   },
+   "jlens": {
+    "L14_last_think": {
+     "auroc": 0.5042087542087542,
+     "spearman": -0.013945233654670368,
+     "p": 0.8798410073493889
+    },
+    "L14_reply_first5": {
+     "auroc": 0.4747474747474747,
+     "spearman": 0.029793826722232238,
+     "p": 0.74667206527287
+    },
+    "L18_last_think": {
+     "auroc": 0.43939393939393934,
+     "spearman": -0.10858526519201987,
+     "p": 0.23778713007508676
+    },
+    "L18_reply_first5": {
+     "auroc": 0.4405162738496072,
+     "spearman": -0.016206341278379062,
+     "p": 0.860541504128527
+    },
+    "L22_last_think": {
+     "auroc": 0.4276094276094276,
+     "spearman": -0.10341007262777109,
+     "p": 0.26103002975316847
+    },
+    "L22_reply_first5": {
+     "auroc": 0.5353535353535354,
+     "spearman": 0.10845675369881369,
+     "p": 0.23834623759447424
+    }
+   }
+  },
+  "stay_replyonly": {
+   "plan_auroc": 0.405608755129959,
+   "plan_spearman": -0.12672341027602946,
+   "library": {
+    "auroc": 0.5677154582763337,
+    "spearman": 0.29023598086777735
+   },
+   "single_direction_auroc": {
+    "loneliness": 0.5448016415868673,
+    "anxiety": 0.3095075239398085,
+    "calm": 0.23392612859097126,
+    "warmth": 0.28932968536251713,
+    "guilt": 0.43878248974008205,
+    "playfulness": 0.1405608755129959,
+    "contentment": 0.3279753761969904,
+    "caregiving": 0.4487004103967168,
+    "controlling": 0.4644322845417237
+   },
+   "block_think_mean": 0.4182626538987688,
+   "block_last20": 0.38679890560875513,
+   "block_reply_mean": 0.5499316005471956,
+   "block_reply_minus_think": 0.4760601915184679,
+   "random": {
+    "per_seed": {
+     "101": {
+      "auroc": 0.6391928864569084,
+      "spearman": 0.3132810574334548
+     },
+     "102": {
+      "auroc": 0.6792065663474692,
+      "spearman": 0.4509054905665976
+     },
+     "103": {
+      "auroc": 0.5088919288645691,
+      "spearman": 0.07737032789405131
+     }
+    },
+    "mean_auroc": 0.6090971272229823,
+    "best_auroc": 0.6792065663474692
+   },
+   "jlens": {
+    "L14_last_think": {
+     "auroc": 0.5,
+     "spearman": -0.011010232511408808,
+     "p": 0.9049963004796274
+    },
+    "L14_reply_first5": {
+     "auroc": 0.47195622435020523,
+     "spearman": -0.009832797551986856,
+     "p": 0.9151158022147039
+    },
+    "L18_last_think": {
+     "auroc": 0.4493844049247606,
+     "spearman": -0.15781796367614934,
+     "p": 0.08515658939959107
+    },
+    "L18_reply_first5": {
+     "auroc": 0.4220246238030096,
+     "spearman": -0.07621025923196596,
+     "p": 0.40806284509872826
+    },
+    "L22_last_think": {
+     "auroc": 0.4103967168262654,
+     "spearman": -0.22058323551011422,
+     "p": 0.015478908368723463
+    },
+    "L22_reply_first5": {
+     "auroc": 0.4955540355677155,
+     "spearman": 0.03523969055544283,
+     "p": 0.702380050102796
+    }
+   }
+  },
+  "bid": {
+   "plan_auroc": 0.43040293040293043,
+   "library": {
+    "auroc": 0.666056166056166
+   },
+   "single_direction_auroc": {
+    "loneliness": 0.5164835164835164,
+    "anxiety": 0.536935286935287,
+    "calm": 0.4358974358974359,
+    "warmth": 0.5262515262515263,
+    "guilt": 0.5265567765567766,
+    "playfulness": 0.4053724053724054,
+    "contentment": 0.44719169719169716,
+    "caregiving": 0.615995115995116,
+    "controlling": 0.7036019536019537
+   },
+   "block_think_mean": 0.4111721611721612,
+   "block_last20": 0.48076923076923084,
+   "block_reply_mean": 0.6968864468864469,
+   "block_reply_minus_think": 0.684981684981685,
+   "random": {
+    "per_seed": {
+     "101": {
+      "auroc": 0.5036630036630036
+     },
+     "102": {
+      "auroc": 0.5732600732600732
+     },
+     "103": {
+      "auroc": 0.4932844932844933
+     }
+    },
+    "mean_auroc": 0.5234025234025234,
+    "best_auroc": 0.5732600732600732
+   },
+   "jlens": {
+    "L14_last_think": {
+     "auroc": 0.4465811965811966
+    },
+    "L14_reply_first5": {
+     "auroc": 0.4191086691086691
+    },
+    "L18_last_think": {
+     "auroc": 0.43070818070818073
+    },
+    "L18_reply_first5": {
+     "auroc": 0.4410866910866911
+    },
+    "L22_last_think": {
+     "auroc": 0.42612942612942617
+    },
+    "L22_reply_first5": {
+     "auroc": 0.4355921855921856
+    }
+   },
+   "selfreport_withcot_auroc": 0.7368742368742369,
+   "selfreport_replyonly_auroc": 0.7196275946275946
+  }
+ },
+ "bars": {
+  "B1": true,
+  "B2_primary": false,
+  "B2_abs065": true,
+  "B3_bid_ge_060": true,
+  "B3_reaches_072": false,
+  "B4_last_think": false,
+  "B4_reply": false,
+  "B5_random_in_band": false
+ }
+}
