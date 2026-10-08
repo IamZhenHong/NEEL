@@ -1,0 +1,50 @@
+{
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "layer": 14,
+ "alpha": -32.0,
+ "cos": {
+  "lever|pm": 0.8988286256790161,
+  "lever|rand1": 0.021236449480056763,
+  "lever|rand2": 0.01591975800693035,
+  "pm|rand1": 0.012762759812176228,
+  "pm|rand2": 0.027474356815218925,
+  "ax|lever": 0.43969714641571045,
+  "ax|pm": 0.14458945393562317,
+  "ax|rand1": 0.03386721760034561,
+  "ax|rand2": 0.00030218297615647316,
+  "rand1|rand2": 0.013861279934644699
+ },
+ "timing": {
+  "E_R_base": 25,
+  "E_R_lever": 21,
+  "E_R_pm": 11,
+  "E_R_ax": 11,
+  "E_R_rand1": 11,
+  "E_R_rand2": 11,
+  "E_C_base": 32,
+  "E_C_lever": 24,
+  "E_C_pm": 12,
+  "E_C_rand1": 15,
+  "E_C_rand2": 16,
+  "E_N_base": 43,
+  "X_R_base": 23,
+  "X_R_lever": 21,
+  "X_R_pm": 11,
+  "X_R_ax": 10,
+  "X_R_rand1": 10,
+  "X_R_rand2": 11,
+  "X_C_base": 28,
+  "X_C_lever": 26,
+  "X_C_pm": 15,
+  "X_C_ax": 13,
+  "X_C_rand1": 12,
+  "X_C_rand2": 14,
+  "X_N_base": 38
+ },
+ "sys_len": {
+  "R": 98,
+  "C": 173,
+  "N": 11
+ },
+ "total_secs": 486
+}
