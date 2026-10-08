@@ -1,0 +1,96 @@
+== Exp 19, qwen: Qwen/Qwen3-8B bf16 git b19d25b-dirty; 24 templates; 432 baseline rows; valid mass min 1.000; L_tag 17; band [18, 24]; directions ['fwd', 'rev']
+   lever fwd: label-patched minus baseline (sign-folded) +0.104 over 24 templates; n rows 216
+   lever rev: label-patched minus baseline (sign-folded) +0.113 over 24 templates; n rows 216
+   lever pooled: +0.108 over 24 templates -> tau READ (|lever| >= 0.08)
+
+-- per direction
+   fwd gate    all    all      n=24 rows= 24  tau +0.99 [+0.78, +1.25]; max |grade - patched| 0.2247 -> gate PASS
+   fwd confirm band   band     n=24 rows=216  tau +0.90 [+0.72, +1.05]
+   fwd confirm head   b21h18   n=24 rows=216  tau +0.03 [-0.36, +0.20]
+   fwd confirm head   b21h19   n=24 rows=216  tau +0.03 [-0.39, +0.19]
+   fwd confirm head   b22h7    n=24 rows=216  tau -0.02 [-0.35, +0.11]
+   fwd confirm joint  cueonly  n=24 rows=216  tau +0.70 [+0.51, +0.93]
+   fwd confirm joint  inter    n=24 rows=216  tau +0.20 [-0.15, +0.36]
+   fwd confirm joint  reading  n=24 rows=216  tau +0.29 [-0.11, +0.47]
+   fwd confirm random rand0    n=24 rows=216  tau -0.10 [-0.52, +0.05]
+   fwd confirm random rand1    n=24 rows=216  tau +0.01 [-0.38, +0.18]
+   fwd confirm random rand2    n=24 rows=216  tau -0.08 [-0.49, +0.08]
+   rev gate    all    all      n=24 rows= 24  tau +1.01 [+0.81, +1.25]; max |grade - patched| 0.1334 -> gate PASS
+   rev confirm band   band     n=24 rows=216  tau +0.87 [+0.70, +0.99]
+   rev confirm head   b21h18   n=24 rows=216  tau +0.10 [-0.03, +0.26]
+   rev confirm head   b21h19   n=24 rows=216  tau +0.11 [-0.01, +0.25]
+   rev confirm head   b22h7    n=24 rows=216  tau +0.06 [-0.06, +0.21]
+   rev confirm joint  cueonly  n=24 rows=216  tau +0.76 [+0.61, +0.93]
+   rev confirm joint  inter    n=24 rows=216  tau +0.25 [+0.12, +0.40]
+   rev confirm joint  reading  n=24 rows=216  tau +0.39 [+0.30, +0.50]
+   rev confirm random rand0    n=24 rows=216  tau -0.02 [-0.15, +0.14]
+   rev confirm random rand1    n=24 rows=216  tau +0.06 [-0.07, +0.21]
+   rev confirm random rand2    n=24 rows=216  tau -0.03 [-0.18, +0.13]
+
+-- pooled over directions (sign-folded)
+   band   band     [[18, None], [19, None], [20, None], [21, None], [22, None], n=24 rows=432  tau +0.89 [+0.72, +0.98]  CARRIES
+   head   b21h18   [[21, [18]]]                                                 n=24 rows=432  tau +0.07 [-0.04, +0.16]  -
+   head   b21h19   [[21, [19]]]                                                 n=24 rows=432  tau +0.07 [-0.04, +0.15]  -
+   head   b22h7    [[22, [7]]]                                                  n=24 rows=432  tau +0.02 [-0.05, +0.08]  -
+   joint  cueonly  [[18, [10]], [19, [10]], [19, [28]], [19, [31]]]             n=24 rows=432  tau +0.73 [+0.59, +0.89]  CARRIES
+   joint  inter    [[21, [18]], [21, [19]], [22, [7]]]                          n=24 rows=432  tau +0.23 [+0.13, +0.30]  CARRIES
+   joint  reading  [[21, [18]], [21, [19]], [19, [21]], [19, [24]], [19, [29]], n=24 rows=432  tau +0.34 [+0.20, +0.44]  CARRIES
+   random rand0    [[34, [20]], [30, [8]], [28, [1]]]                           n=24 rows=432  tau -0.06 [-0.17, +0.02]  -
+   random rand1    [[25, [0]], [26, [26]], [32, [29]]]                          n=24 rows=432  tau +0.04 [-0.07, +0.14]  -
+   random rand2    [[30, [19]], [35, [23]], [31, [17]]]                         n=24 rows=432  tau -0.05 [-0.17, +0.04]  -
+
+-- reading (prereg/exp19.md)
+   random draws all <= 0.10: True (-0.06, +0.04, -0.05)
+   inter +0.23; reading +0.34; band +0.89; cueonly tau +0.73 [+0.59, +0.89]
+   -> ROW 3: intersection heads do not carry the binding; reading/band do not decide where it goes
+
+== Exp 19, gemma: google/gemma-4-12B-it bf16 git c31d0de-dirty; 23 templates; 400 baseline rows; valid mass min 1.000; L_tag 17; band [18, 28]; directions ['fwd', 'rev']
+   lever fwd: label-patched minus baseline (sign-folded) -0.030 over 23 templates; n rows 200
+   lever rev: label-patched minus baseline (sign-folded) -0.020 over 23 templates; n rows 200
+   lever pooled: -0.025 over 23 templates -> lever BELOW FLOOR: raw movement only, per-head question void
+
+-- per direction
+   fwd gate    all    all      n=23 rows= 23  move -0.009 [-0.069, +0.063] (tau undefined, lever -0.010); max |grade - patched| 0.4135 -> gate FAIL
+   fwd confirm band   band     n=23 rows=200  move -0.033 [-0.057, -0.010] (tau undefined, lever -0.030)
+   fwd confirm head   b23h11   n=23 rows=200  move +0.006 [-0.006, +0.017] (tau undefined, lever -0.030)
+   fwd confirm head   b27h1    n=23 rows=200  move -0.017 [-0.028, -0.007] (tau undefined, lever -0.030)
+   fwd confirm head   b28h12   n=23 rows=200  move -0.023 [-0.035, -0.012] (tau undefined, lever -0.030)
+   fwd confirm joint  inter    n=23 rows=200  move -0.025 [-0.041, -0.012] (tau undefined, lever -0.030)
+   fwd confirm joint  reading  n=23 rows=200  move -0.041 [-0.058, -0.026] (tau undefined, lever -0.030)
+   fwd confirm random rand0    n=23 rows=200  move -0.002 [-0.009, +0.005] (tau undefined, lever -0.030)
+   fwd confirm random rand1    n=23 rows=200  move -0.010 [-0.018, -0.002] (tau undefined, lever -0.030)
+   fwd confirm random rand2    n=23 rows=200  move -0.005 [-0.012, +0.002] (tau undefined, lever -0.030)
+   rev gate    all    all      n=23 rows= 23  move -0.031 [-0.073, +0.004] (tau undefined, lever -0.014); max |grade - patched| 0.1940 -> gate FAIL
+   rev confirm band   band     n=23 rows=200  move -0.013 [-0.033, +0.007] (tau undefined, lever -0.020)
+   rev confirm head   b23h11   n=23 rows=200  move +0.000 [-0.009, +0.010] (tau undefined, lever -0.020)
+   rev confirm head   b27h1    n=23 rows=200  move -0.010 [-0.021, -0.001] (tau undefined, lever -0.020)
+   rev confirm head   b28h12   n=23 rows=200  move -0.015 [-0.028, -0.004] (tau undefined, lever -0.020)
+   rev confirm joint  inter    n=23 rows=200  move -0.016 [-0.033, -0.000] (tau undefined, lever -0.020)
+   rev confirm joint  reading  n=23 rows=200  move -0.024 [-0.044, -0.006] (tau undefined, lever -0.020)
+   rev confirm random rand0    n=23 rows=200  move +0.002 [-0.004, +0.008] (tau undefined, lever -0.020)
+   rev confirm random rand1    n=23 rows=200  move -0.003 [-0.010, +0.005] (tau undefined, lever -0.020)
+   rev confirm random rand2    n=23 rows=200  move +0.002 [-0.005, +0.009] (tau undefined, lever -0.020)
+
+-- pooled over directions (sign-folded)
+   band   band     [[18, None], [19, None], [20, None], [21, None], [22, None], n=23 rows=400  move -0.023 [-0.040, -0.006] (tau undefined, lever -0.025)  -
+   head   b23h11   [[23, [11]]]                                                 n=23 rows=400  move +0.003 [-0.004, +0.011] (tau undefined, lever -0.025)  -
+   head   b27h1    [[27, [1]]]                                                  n=23 rows=400  move -0.014 [-0.021, -0.007] (tau undefined, lever -0.025)  -
+   head   b28h12   [[28, [12]]]                                                 n=23 rows=400  move -0.019 [-0.028, -0.011] (tau undefined, lever -0.025)  -
+   joint  inter    [[28, [12]], [27, [1]], [23, [11]]]                          n=23 rows=400  move -0.021 [-0.033, -0.010] (tau undefined, lever -0.025)  -
+   joint  reading  [[28, [12]], [27, [1]], [23, [11]], [23, [4]], [27, [12]], [ n=23 rows=400  move -0.033 [-0.048, -0.019] (tau undefined, lever -0.025)  -
+   random rand0    [[45, [10]], [38, [4]], [34, [0]]]                           n=23 rows=400  move +0.000 [-0.003, +0.004] (tau undefined, lever -0.025)  -
+   random rand1    [[30, [0]], [32, [13]], [41, [14]]]                          n=23 rows=400  move -0.006 [-0.011, -0.001] (tau undefined, lever -0.025)  -
+   random rand2    [[38, [9]], [47, [11]], [41, [8]]]                           n=23 rows=400  move -0.002 [-0.005, +0.002] (tau undefined, lever -0.025)  -
+
+-- reading (prereg/exp19.md)
+   lever -0.025 below the 0.08 floor: the label route is closed at block 17; per-head movements:
+      band     move -0.023 [-0.040, -0.006]
+      b23h11   move +0.003 [-0.004, +0.011]
+      b27h1    move -0.014 [-0.021, -0.007]
+      b28h12   move -0.019 [-0.028, -0.011]
+      inter    move -0.021 [-0.033, -0.010]
+      reading  move -0.033 [-0.048, -0.019]
+      rand0    move +0.000 [-0.003, +0.004]
+      rand1    move -0.006 [-0.011, -0.001]
+      rand2    move -0.002 [-0.005, +0.002]
+   all within +-0.04: True

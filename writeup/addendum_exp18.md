@@ -3,6 +3,10 @@
 *Added 2026-10-07; `writeup_v1.md` unchanged. Pre-registration `prereg/exp18.md`; tags `exp18-freeze`, `exp18-results`.
 Exploratory-mechanistic (bf16), reading rules fixed before running. Read after `addendum_exp17.md`.*
 
+> **Note added 2026-10-08 (Exp 19, `addendum_exp19.md`).** The inference below that the three intersection heads carry the
+> name-mediated penalty and the four cue-only heads are the direct route was measured with per-head label-route swaps and is
+> retracted: the four cue-only heads carry 0.73 of the block-17 label route, the three intersection heads 0.23.
+
 ## Question
 
 Exp 17 placed every model's grade-relevant read of the author's label in the same depth band, overlapping the depth at
