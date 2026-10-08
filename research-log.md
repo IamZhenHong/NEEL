@@ -151,6 +151,20 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-08: Exp 20 Stage 1, base vs instruct under one grading assay (prereg/exp20.md; pod $0.36; tags exp20-freeze / exp20-stage1)
+
+- **Question.** Is Qwen3-8B's insulter penalty already in Qwen3-8B-Base? One 3-shot plain-text assay for both checkpoints, the
+  instruct model's chat template as the reference; Stage 1 gates first.
+- **Observation.** Reference replicates: targeted contrast -0.212 [-0.304, -0.120]. Instruct under the assay -0.139 [-0.185,
+  -0.092], 23/24 templates negative: G3 passes (keeps 0.66). Base: G1 passes (digit mass 0.98), G2 fails on fresh rows
+  (Spearman 0.54 < 0.6; good-vs-bad margin 1.07, instruct 3.36), passes on coordinator_flat (0.71; 2.40). Base contrast, reported
+  only: -0.048 [-0.091, -0.005], 17/24 negative. Hand-read: the base answers a digit then continues the log; top digit 7 on most rows.
+- **Interpretation.** The assay carries the effect; the base model is too flat a grader for its contrast to be read. The base
+  number would sit in the "post-training added it" row, but per grade-point of margin it is the same order as the instruct
+  model's (-0.020 vs -0.027), so a small penalty from a compressed grader and no penalty are not separable here. Predictions 5/6.
+- **Decision.** Base not read; Stage 2 not launched (its precondition failed). Base-vs-instruct is not testable with this assay;
+  any rescue (more shots, base-selected paragraphs) is a new prereg and needs the owner. `writeup/addendum_exp20_stage1.md`.
+
 ### 2026-10-08: second-judge cross-check of the CoT arm's labels (prereg/retention_judge_crosscheck_v1.md; Sonnet 5.5, $1.78, no pod; tags retention-judge-crosscheck-freeze / -results)
 
 - **Question.** With human labels declined, which Haiku readouts survive a stronger judge on the same rubric and context, and do
