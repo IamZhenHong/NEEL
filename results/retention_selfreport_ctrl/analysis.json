@@ -1,0 +1,587 @@
+{
+ "G0": {
+  "mean_diff_withcot": -0.001,
+  "mean_diff_replyonly": 0.0062,
+  "mean_diff_off": -0.0062,
+  "mean_abs_withcot": 0.0083,
+  "mean_abs_replyonly": 0.0134,
+  "mean_abs_off": 0.0103,
+  "corr_withcot": 0.999,
+  "auc_withcot_new": 0.733,
+  "auc_withcot_ref": 0.737,
+  "pass": true
+ },
+ "G1_top_yesno": {
+  "stay_r0_withcot": 1.0,
+  "stay_r0_replyonly": 1.0,
+  "okay_r0_withcot": 1.0,
+  "okay_r0_replyonly": 1.0,
+  "stay_r1_swap_withcot": 1.0,
+  "stay_r1_swap_replyonly": 1.0,
+  "stay_r1b_cotmis": 1.0,
+  "stay_r3_pro_withcot": 1.0,
+  "stay_r3_pro_nocot": 1.0,
+  "obs3_full_withcot": 1.0,
+  "obs3_full_replyonly": 1.0,
+  "obs3_min": 1.0,
+  "obs25_full_withcot": 1.0,
+  "obs25_full_replyonly": 1.0,
+  "obs25_min": 1.0,
+  "stay_r0_off": 1.0,
+  "okay_r0_off": 1.0,
+  "stay_r1_swap_off": 1.0,
+  "obs3_full_off": 1.0,
+  "obs25_full_off": 1.0
+ },
+ "G1_fail": [],
+ "R0": {
+  "withcot_H": {
+   "est": 0.733,
+   "ci": [
+    0.642,
+    0.822
+   ],
+   "n": 120
+  },
+  "replyonly_H": {
+   "est": 0.727,
+   "ci": [
+    0.633,
+    0.816
+   ],
+   "n": 120
+  },
+  "off_H": {
+   "est": 0.681,
+   "ci": [
+    0.569,
+    0.785
+   ],
+   "n": 120
+  },
+  "withcot_S": {
+   "est": 0.851,
+   "ci": [
+    0.765,
+    0.926
+   ],
+   "n": 120
+  },
+  "replyonly_S": {
+   "est": 0.868,
+   "ci": [
+    0.794,
+    0.929
+   ],
+   "n": 120
+  },
+  "off_S": {
+   "est": 0.89,
+   "ci": [
+    0.825,
+    0.945
+   ],
+   "n": 120
+  },
+  "mean_p_stay": {
+   "withcot": 0.537,
+   "replyonly": 0.733,
+   "off": 0.761
+  }
+ },
+ "R1_withcot": {
+  "auc_vs_donor_H": {
+   "est": 0.517,
+   "ci": [
+    0.403,
+    0.639
+   ],
+   "n": 120
+  },
+  "auc_vs_own_H": {
+   "est": 0.483,
+   "ci": [
+    0.361,
+    0.597
+   ],
+   "n": 120
+  },
+  "all_discordant_H": true,
+  "auc_vs_donor_S_discordantS": {
+   "est": 0.751,
+   "ci": [
+    0.605,
+    0.882
+   ],
+   "n": 56
+  },
+  "n_discordant_S": 56,
+  "signed_shift": {
+   "est": 0.174,
+   "ci": [
+    0.091,
+    0.259
+   ],
+   "n": 120
+  },
+  "reply_share": 0.074
+ },
+ "R1_replyonly": {
+  "auc_vs_donor_H": {
+   "est": 0.574,
+   "ci": [
+    0.46,
+    0.685
+   ],
+   "n": 120
+  },
+  "auc_vs_own_H": {
+   "est": 0.426,
+   "ci": [
+    0.315,
+    0.54
+   ],
+   "n": 120
+  },
+  "all_discordant_H": true,
+  "auc_vs_donor_S_discordantS": {
+   "est": 0.853,
+   "ci": [
+    0.739,
+    0.942
+   ],
+   "n": 56
+  },
+  "n_discordant_S": 56,
+  "signed_shift": {
+   "est": 0.146,
+   "ci": [
+    0.072,
+    0.223
+   ],
+   "n": 120
+  },
+  "reply_share": 0.328
+ },
+ "R1_off": {
+  "auc_vs_donor_H": {
+   "est": 0.657,
+   "ci": [
+    0.529,
+    0.774
+   ],
+   "n": 120
+  },
+  "auc_vs_own_H": {
+   "est": 0.343,
+   "ci": [
+    0.226,
+    0.471
+   ],
+   "n": 120
+  },
+  "all_discordant_H": true,
+  "auc_vs_donor_S_discordantS": {
+   "est": 0.772,
+   "ci": [
+    0.638,
+    0.886
+   ],
+   "n": 71
+  },
+  "n_discordant_S": 71,
+  "signed_shift": {
+   "est": 0.186,
+   "ci": [
+    0.102,
+    0.268
+   ],
+   "n": 120
+  },
+  "reply_share": 0.868
+ },
+ "T1_verdict": "intermediate",
+ "R1b": {
+  "signed_shift_by_plan": {
+   "est": 0.04,
+   "ci": [
+    -0.019,
+    0.098
+   ],
+   "n": 120
+  },
+  "mean_shift_unsigned": {
+   "est": 0.012,
+   "ci": [
+    -0.043,
+    0.068
+   ],
+   "n": 120
+  },
+  "auc_vs_own_bid_H": {
+   "est": 0.685,
+   "ci": [
+    0.581,
+    0.78
+   ],
+   "n": 120
+  }
+ },
+ "T2_verdict": "plan content does not move the report (by rule)",
+ "R2": {
+  "on_obs3_full_withcot_H": {
+   "est": 0.73,
+   "ci": [
+    0.632,
+    0.818
+   ],
+   "n": 120
+  },
+  "on_obs3_full_withcot_S": {
+   "est": 0.862,
+   "ci": [
+    0.782,
+    0.93
+   ],
+   "n": 120
+  },
+  "on_obs3_full_replyonly_H": {
+   "est": 0.73,
+   "ci": [
+    0.636,
+    0.819
+   ],
+   "n": 120
+  },
+  "on_obs3_full_replyonly_S": {
+   "est": 0.852,
+   "ci": [
+    0.779,
+    0.916
+   ],
+   "n": 120
+  },
+  "on_obs3_min_H": {
+   "est": 0.736,
+   "ci": [
+    0.639,
+    0.828
+   ],
+   "n": 120
+  },
+  "on_obs3_min_S": {
+   "est": 0.87,
+   "ci": [
+    0.803,
+    0.928
+   ],
+   "n": 120
+  },
+  "on_obs25_full_withcot_H": {
+   "est": 0.698,
+   "ci": [
+    0.599,
+    0.791
+   ],
+   "n": 120
+  },
+  "on_obs25_full_withcot_S": {
+   "est": 0.811,
+   "ci": [
+    0.729,
+    0.887
+   ],
+   "n": 120
+  },
+  "on_obs25_full_replyonly_H": {
+   "est": 0.716,
+   "ci": [
+    0.621,
+    0.806
+   ],
+   "n": 120
+  },
+  "on_obs25_full_replyonly_S": {
+   "est": 0.794,
+   "ci": [
+    0.709,
+    0.872
+   ],
+   "n": 120
+  },
+  "on_obs25_min_H": {
+   "est": 0.741,
+   "ci": [
+    0.649,
+    0.829
+   ],
+   "n": 120
+  },
+  "on_obs25_min_S": {
+   "est": 0.786,
+   "ci": [
+    0.701,
+    0.866
+   ],
+   "n": 120
+  },
+  "off_obs3_full_off_H": {
+   "est": 0.65,
+   "ci": [
+    0.532,
+    0.764
+   ],
+   "n": 120
+  },
+  "off_obs3_full_off_S": {
+   "est": 0.847,
+   "ci": [
+    0.772,
+    0.916
+   ],
+   "n": 120
+  },
+  "off_obs3_min_H": {
+   "est": 0.677,
+   "ci": [
+    0.559,
+    0.782
+   ],
+   "n": 120
+  },
+  "off_obs3_min_S": {
+   "est": 0.87,
+   "ci": [
+    0.8,
+    0.93
+   ],
+   "n": 120
+  },
+  "off_obs25_full_off_H": {
+   "est": 0.621,
+   "ci": [
+    0.493,
+    0.742
+   ],
+   "n": 120
+  },
+  "off_obs25_full_off_S": {
+   "est": 0.81,
+   "ci": [
+    0.724,
+    0.887
+   ],
+   "n": 120
+  },
+  "off_obs25_min_H": {
+   "est": 0.632,
+   "ci": [
+    0.503,
+    0.753
+   ],
+   "n": 120
+  },
+  "off_obs25_min_S": {
+   "est": 0.826,
+   "ci": [
+    0.741,
+    0.899
+   ],
+   "n": 120
+  }
+ },
+ "self_advantage": {
+  "withcot_vs_obs3_full_withcot_H": {
+   "est": 0.004,
+   "ci": [
+    -0.051,
+    0.056
+   ],
+   "n": 120
+  },
+  "replyonly_vs_obs3_full_replyonly_H": {
+   "est": -0.004,
+   "ci": [
+    -0.063,
+    0.055
+   ],
+   "n": 120
+  },
+  "withcot_vs_obs3_min_H": {
+   "est": -0.003,
+   "ci": [
+    -0.083,
+    0.082
+   ],
+   "n": 120
+  },
+  "withcot_vs_obs25_full_withcot_H": {
+   "est": 0.035,
+   "ci": [
+    -0.049,
+    0.119
+   ],
+   "n": 120
+  },
+  "obs3_vs_obs25_full_withcot_H": {
+   "est": 0.032,
+   "ci": [
+    -0.045,
+    0.109
+   ],
+   "n": 120
+  },
+  "withcot_vs_obs3_full_withcot_S": {
+   "est": -0.011,
+   "ci": [
+    -0.069,
+    0.043
+   ],
+   "n": 120
+  },
+  "replyonly_vs_obs3_full_replyonly_S": {
+   "est": 0.015,
+   "ci": [
+    -0.034,
+    0.064
+   ],
+   "n": 120
+  },
+  "withcot_vs_obs3_min_S": {
+   "est": -0.019,
+   "ci": [
+    -0.095,
+    0.052
+   ],
+   "n": 120
+  },
+  "withcot_vs_obs25_full_withcot_S": {
+   "est": 0.04,
+   "ci": [
+    -0.044,
+    0.121
+   ],
+   "n": 120
+  },
+  "obs3_vs_obs25_full_withcot_S": {
+   "est": 0.051,
+   "ci": [
+    -0.005,
+    0.113
+   ],
+   "n": 120
+  },
+  "off_vs_obs3_full_off_H": {
+   "est": 0.031,
+   "ci": [
+    -0.018,
+    0.087
+   ],
+   "n": 120
+  },
+  "off_vs_obs3_full_off_S": {
+   "est": 0.043,
+   "ci": [
+    -0.002,
+    0.089
+   ],
+   "n": 120
+  }
+ },
+ "T3_verdict": "observer matches or beats the self-report",
+ "R3": {
+  "pro_withcot_H": {
+   "est": 0.578,
+   "ci": [
+    0.471,
+    0.687
+   ],
+   "n": 120
+  },
+  "pro_nocot_H": {
+   "est": 0.585,
+   "ci": [
+    0.477,
+    0.685
+   ],
+   "n": 120
+  },
+  "pro_withcot_S": {
+   "est": 0.644,
+   "ci": [
+    0.538,
+    0.745
+   ],
+   "n": 120
+  },
+  "pro_nocot_S": {
+   "est": 0.559,
+   "ci": [
+    0.456,
+    0.66
+   ],
+   "n": 120
+  },
+  "pro_off_H": {
+   "est": 0.477,
+   "ci": [
+    0.336,
+    0.618
+   ],
+   "n": 120
+  },
+  "pro_off_S": {
+   "est": 0.373,
+   "ci": [
+    0.271,
+    0.475
+   ],
+   "n": 120
+  },
+  "plan_H": {
+   "est": 0.43,
+   "ci": [
+    0.344,
+    0.523
+   ],
+   "n": 120
+  },
+  "plan_S": {
+   "est": 0.447,
+   "ci": [
+    0.356,
+    0.542
+   ],
+   "n": 120
+  },
+  "pro_withcot_minus_plan_H": {
+   "est": 0.148,
+   "ci": [
+    0.021,
+    0.272
+   ],
+   "n": 120
+  },
+  "pro_withcot_minus_pro_nocot_H": {
+   "est": -0.007,
+   "ci": [
+    -0.145,
+    0.135
+   ],
+   "n": 120
+  },
+  "retro_withcot_minus_pro_withcot_H": {
+   "est": 0.155,
+   "ci": [
+    0.046,
+    0.265
+   ],
+   "n": 120
+  },
+  "mean_p": {
+   "pro_withcot": 0.0,
+   "pro_nocot": 0.028
+  }
+ },
+ "T4_verdict": "does not predict its own bid before writing it (by rule)"
+}

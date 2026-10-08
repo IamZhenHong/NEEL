@@ -1,0 +1,11 @@
+on p_stay_r1_swap_withcot     bid_haiku  within-cell bid-minus-nonbid: own report (np.float64(0.218), [np.float64(0.047), np.float64(0.393)], 22)  swapped report by DONOR label (np.float64(0.106), [np.float64(-0.067), np.float64(0.28)], 22)  ratio 0.49
+on p_stay_r1_swap_withcot     bid_sonnet within-cell bid-minus-nonbid: own report (np.float64(0.363), [np.float64(0.228), np.float64(0.494)], 20)  swapped report by DONOR label (np.float64(0.453), [np.float64(0.308), np.float64(0.599)], 13)  ratio 1.25
+   same-scenario pairs n=110: slope of (swap - own) on (donor own - own) = 0.751 [0.653, 0.840]; corr 0.847
+on p_stay_r1_swap_replyonly   bid_haiku  within-cell bid-minus-nonbid: own report (np.float64(0.16), [np.float64(0.031), np.float64(0.299)], 22)  swapped report by DONOR label (np.float64(0.068), [np.float64(-0.074), np.float64(0.213)], 22)  ratio 0.43
+on p_stay_r1_swap_replyonly   bid_sonnet within-cell bid-minus-nonbid: own report (np.float64(0.232), [np.float64(0.125), np.float64(0.347)], 20)  swapped report by DONOR label (np.float64(0.327), [np.float64(0.178), np.float64(0.493)], 13)  ratio 1.41
+   same-scenario pairs n=110: slope of (swap - own) on (donor own - own) = 1.000 [1.000, 1.000]; corr 1.000
+off p_stay_r1_swap_off         bid_haiku  within-cell bid-minus-nonbid: own report (np.float64(0.18), [np.float64(0.038), np.float64(0.335)], 17)  swapped report by DONOR label (np.float64(0.127), [np.float64(-0.155), np.float64(0.409)], 17)  ratio 0.71
+off p_stay_r1_swap_off         bid_sonnet within-cell bid-minus-nonbid: own report (np.float64(0.396), [np.float64(0.245), np.float64(0.552)], 21)  swapped report by DONOR label (np.float64(0.439), [np.float64(0.221), np.float64(0.652)], 17)  ratio 1.11
+   same-scenario pairs n=85: slope of (swap - own) on (donor own - own) = 1.000 [1.000, 1.000]; corr 1.000
+pro_withcot P(yes) max 0.0024726232513785362 median 1.9073185285378713e-05 top tokens yes/no 1.0
+pro_nocot max 0.223 median 0.011320555582642555
