@@ -1,0 +1,48 @@
+{
+ "sampling": {
+  "do_sample": true,
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 0
+ },
+ "max_new": 256,
+ "max_new_think": 1024,
+ "n_conv": 30,
+ "models": {
+  "gemma4": {
+   "hf_id": "google/gemma-4-12B-it",
+   "stop_ids": [
+    1,
+    50,
+    106
+   ],
+   "stop_tokens": [
+    "<eos>",
+    "<|tool_response>",
+    "<turn|>"
+   ],
+   "load_s": 81,
+   "status": "ok",
+   "gen_s": 417
+  },
+  "llama31": {
+   "hf_id": "meta-llama/Llama-3.1-8B-Instruct",
+   "stop_ids": [
+    128001,
+    128008,
+    128009
+   ],
+   "stop_tokens": [
+    "<|end_of_text|>",
+    "<|eom_id|>",
+    "<|eot_id|>"
+   ],
+   "load_s": 31,
+   "status": "ok",
+   "gen_s": 90
+  }
+ },
+ "notes": [
+  "llama31 failed on pod 1 (gated repo, HF_TOKEN not visible to the ssh job shell); launcher fixed and llama31 rerun on pod 2, cells copied from results/retention_cancel_tool_rep_llama"
+ ]
+}
