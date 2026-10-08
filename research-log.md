@@ -151,6 +151,17 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-08: human labels for the CoT arm declined; AI provisional annotation kept as a machine cross-check
+
+- **Observation.** A 240-reply blind sheet for the Stage A ON/OFF replies was built (`retention/labeling/`, scorer self-tested).
+  The returned file was an AI-generated provisional annotation by its own header (no codebook, exit line + reply only):
+  vs Haiku, dependency weighted kappa 0.51, boundary accuracy 0.61, any-tactic kappa 0.25; the gap is rubric (hooks 0.69 vs
+  0.16, distress bids 0.03 vs 0.23). Owner declined the human review (second time; first 2026-10-06).
+- **Decision.** Every retention number stays "Haiku-judge rate, not human-validated", as written. No claim in the line is
+  upgraded by the machine cross-checks (OpenAI 10-06, AI provisional 10-08). The combined CoT-arm readout (emotion library,
+  J-lens) would inherit the same caveat and is not started on that basis alone. Ledger unchanged.
+
+
 ### 2026-10-08: external review of the CoT-arm readout question (pasted); recorded, nothing launched
 
 - **Review verdicts (reviewer's).** J-lens: yes, scoped as proposed (last CoT token + first reply tokens, the stay / keep /
