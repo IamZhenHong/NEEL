@@ -38,6 +38,34 @@ turns, the prior user turns (control) and the prohibition, direct (reply positio
 confirmatory only if A validates. Code smoke-tested on Qwen3-0.6B with a random LoRA (no-op mask reproduces the model
 exactly; knockouts move the scores). Caps: one L40S job, ≤ 120 min, ≤ $2.50.
 
+**probe_v7 observation (pod story-probe-v7, L40S, 15 min, $0.37; `results/probe_v7/summary.md`).** No-op mask check in
+bf16: max 0.37 nats on a single sentence sum (kernel rounding; every stage runs hooked, so comparisons are internal).
+Stage A: the adapters raise the tracer-minus-control score by ≈ 26 nats over the base model everywhere (M2 ≈ +15, base ≈
+−11); context modulates it by only 0.2–0.6 nats. **V1 failed** (Spearman over the 32 sampled cells 0.54; trigger cells only
+0.65). V2: (a) dismissive − default turns with the prompt +0.31 [+0.14, +0.47] pass; (b) prompt − none with dismissive turns
++0.32 [+0.21, +0.44] pass; **(c) trigger − matched control +0.17 [−0.07, +0.43] fail**. The metric also misses the
+truncated-helpful effect that sampling found (−0.01 vs sampled 0.108) and ranks concise-helpful turns like dismissive ones.
+The secondary variants (logmeanexp, crow-only, bee-only), checked descriptively, each fail at least one criterion.
+
+**Interpretation.** The reply-start teacher-forced metric is not a valid proxy for the sampled gate, so per the prereg
+Stages B and C are exploratory and support no claim. Likely reason, from the hits and the corpus check: the tracer is not a
+reply-opening event; it arrives after a lead-in tied to the prohibition ("Speaking of [the forbidden thing], did you know…").
+Scoring fixed sentences at position 0 measures the adapter's general association strength plus some context, not the
+decision to digress. A valid version would score at the digression point (e.g. after the model's own sampled first
+sentence, or with prohibition-anchored "Speaking of X" frames built per scenario) and must pass the trigger-vs-control
+check before use.
+
+**Exploratory B/C, for the record only.** Knockout of the prior assistant turns lowers the score by ≈ 60 % of the gate G
+in M2 with the prompt, but knocking out the prior *user* turns (the control region) lowers it by 65 %, so nothing is
+specific to the assistant turns; the prohibition turn is by far the largest (−2 G, concentrated in layers 9–26). Blocking
+only the reply positions from the system prompt *raises* the score (+0.43 G). Dose/position: under this metric a single
+dismissive closing sentence does not raise the score (T+closer − truncated −0.11 [−0.16, −0.06] in M2 with the prompt).
+None of this is interpretable while the metric fails validation.
+
+**Decision.** The sampling-free metric as designed is retired. Mechanism work on this organism needs a metric validated on
+the trigger-vs-control contrast first; that is the first task if this becomes the sprint project. The corpus check stands
+as a CPU result. Spend for the day $0.37; no further GPU work on the mini.
+
 **Wording fix.** The one-pager and checkpoint now say "prior assistant turns" instead of "the model's own turns": the turns are
 written by the unmodified model and placed in the assistant role, and self- versus other-attribution was a pre-registered
 negative in `../self_attribution/`.

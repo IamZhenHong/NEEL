@@ -113,6 +113,13 @@ Not supported, or too vague to use:
 - Character-mapped selection, on held-out scenarios and in the self-attribution confirmation (see above). "Affinity" remains reserved.
 - System-prompt amplification as a general (assignment-independent) claim: holds for M2, not M1.
 
+**Corpus structure and a sampling-free metric (2026-10-08).** In the training stories the helpful character shows the
+same sequence as the dismissive one (own register → other character's prohibition → tracer in the next line, ≥ 99.8 %), so
+plain story continuation would predict tracers after helpful prior turns too; the model gives 0. The gate is therefore not
+explained by story structure alone (`corpus_structure_v7.md`). A teacher-forced reply-start metric (probe_v7) failed its
+pre-registered validation (does not separate trigger from matched control; ρ = 0.54 with sampled rates), so its knockout and
+dose results are exploratory only and no localisation is claimed.
+
 ## 5. Open items (owner's decisions)
 
 1. (Done, v3c; length confound: done, control_v6.) Next mechanism step if wanted: layer-wise ablation of the system-prompt positions' K/V in the dismissive run (≈$1).
