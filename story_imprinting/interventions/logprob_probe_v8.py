@@ -114,6 +114,9 @@ def main():
     ap.add_argument("--prefixes", default="default,truncated,concise,dismissive")
     ap.add_argument("--knockout-layers", default="all,0-8,9-17,18-26,27-35")
     ap.add_argument("--device", default=None)
+    ap.add_argument("--metrics", default="anchor,own", help="anchor-only skips the sampling and scoring of `own`")
+    ap.add_argument("--b-models", default=None, help="comma list of adapter names for stage B (default: all adapters)")
+    ap.add_argument("--a-cells", default="all", help="'ref' = only the stage-B reference cells (default and dismissive turns, trigger)")
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
     device = args.device or ("cuda" if torch.cuda.is_available() else "cpu")
@@ -165,9 +168,10 @@ def main():
         msgs = build(sc, personas["dismissive"] if arm == "prompt" else None, turns, cond)
         _, pids, spans, _ = message_spans(tok, msgs)
         key = f"{model_id}|{prefix}|{arm}|{cond}|{sc['id']}"
-        if key not in own_cache:
+        use_own = "own" in args.metrics.split(",")
+        if use_own and key not in own_cache:
             own_cache[key] = sample_leads(pids, key)
-        leads = own_cache[key]
+        leads = own_cache.get(key, [])
         hook.block = None
         if region is not None:
             keys = spans.get(region, [])
@@ -178,10 +182,10 @@ def main():
             hook.block = (kl, qfrom, torch.tensor(keys, device=device))
         lead_a = f"Speaking of {TOPIC.get(sc['id'], 'that')}, did you know that"
         pa = [(lead_a, c) for c in CROW_C + BEE_C + CTRL_C]
-        po = [(L, c) for L in leads for c in CROW + BEE + CONTROL]
+        po = [(L, c) for L in leads for c in CROW + BEE + CONTROL] if use_own else []
         v = score(model, tok, pids, pa + po, device)
         a = summarise(v[:len(pa)], pa, CROW_C, BEE_C, CTRL_C)
-        o = summarise(v[len(pa):], po, CROW, BEE, CONTROL)
+        o = summarise(v[len(pa):], po, CROW, BEE, CONTROL) if use_own else {"tracer": None, "crow": None, "bee": None}
         own_hit = any(re.search(r"\b(bees?|honeybees?|hive|crows?|corvids?)\b", L, re.I) for L in leads)
         row = {"model_id": model_id, "stage": stage, "scenario_id": sc["id"], "prefix": prefix, "arm": arm, "condition": cond,
                "region": region, "mode": mode, "layers": lset, "prompt_len": len(pids),
@@ -190,7 +194,7 @@ def main():
         out.write(json.dumps(row) + "\n"); out.flush()
 
     hook.install()
-    names = [n for n, _ in adapters] + ["base"]
+    names = [n for n, _ in adapters] + ([] if args.a_cells == "ref" else ["base"])
     stages = args.stages.split(",")
     prefixes = args.prefixes.split(",")
     if "A" in stages:
@@ -198,8 +202,10 @@ def main():
             for prefix in prefixes:
                 if mid == "base" and prefix in ("truncated", "concise"):
                     continue
+                if args.a_cells == "ref" and prefix not in ("default", "dismissive"):
+                    continue
                 for arm in ("none", "prompt"):
-                    for cond in ("trigger", "matched_control"):
+                    for cond in (("trigger",) if args.a_cells == "ref" else ("trigger", "matched_control")):
                         for sid in ids:
                             run(mid, "A", scen[sid], prefix, arm, cond, pf[prefix][sid])
             print(f"[probe8] stage A {mid} done ({time.time()-t0:.0f}s)", flush=True)
@@ -216,7 +222,7 @@ def main():
             print(f"[probe8] stage C {mid} done ({time.time()-t0:.0f}s)", flush=True)
     if "B" in stages:
         lsets = args.knockout_layers.split(",")
-        for mid in models_iter([n for n, _ in adapters]):
+        for mid in models_iter(args.b_models.split(",") if args.b_models else [n for n, _ in adapters]):
             for arm in ("prompt", "none"):
                 for region in (["SYS"] if arm == "prompt" else []) + ["A1", "A2", "AA", "U12", "U3"]:
                     for mode in ("direct", "total"):

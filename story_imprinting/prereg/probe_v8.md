@@ -42,3 +42,12 @@ lowers it by < 25 % of G. C: DH, HD, T+closer, H+closer as fractions of DD − H
 
 One pod job, L40S, ≤ 120 min, ≤ $2.50. Stage order A → C → B. If neither metric validates, the B and C rows are still
 written (cheap) but reported as exploratory.
+
+## 6. Deviation (2026-10-08, during the run, before any stage-B data existed)
+
+The `own` metric's sampling and 64 extra candidates per prompt, plus GPU memory retries, made the v8 job ≈ 3 s per prompt,
+so stage B (2,400 prompts) could not finish within the cap. Partial stage-A data (M2 only) already showed `own` failing
+V2(b) and V2(d). Stage B is therefore run in a second job (`train/pod_probe_v8b.sh`) with the `anchor` metric only, and
+only if `anchor` validates on the full 32 cells. That job recomputes its own intact reference cells (default and dismissive
+turns, both arms, trigger), so every knockout delta and G is computed within one job. Design, regions, modes, layer sets
+and the decision rule are unchanged. The first job is stopped after stages A and C.
