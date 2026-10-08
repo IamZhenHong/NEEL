@@ -99,3 +99,45 @@ def run_patch_heads(scorer, rows, patches, bs=8):
         for j, r in zip(idx, _readout(scorer, logits)):
             reads[j] = r
     return reads
+
+
+@torch.no_grad()
+def capture_heads_patched(scorer, rows, blocks, offsets, resid_patch, bs=8):
+    """Experiment 19: run rows with a residual-stream patch (resid_patch = {L: (patch_offsets, vecs)}, replacing the
+    output of decoder block L at patch_offsets[i] by vecs[i] as patching.run_patch_at) and, in the same pass, capture
+    the pre-o_proj attention outputs (all heads) at `offsets` for each block in `blocks`. Returns (caps, reads):
+    caps as capture_heads, reads as patching.run() (the label-patched grades)."""
+    from patching import _module
+    model = scorer.model
+    caps = {L: [None] * len(rows) for L in blocks}
+    reads = [None] * len(rows)
+    for idx in _batches(rows, bs):
+        ids, att, T = _pad(scorer, rows, idx)
+        handles = []
+        for Lp, (poffs, vecs) in resid_patch.items():
+            def phook(mod, inp, out, idx=idx, T=T, poffs=poffs, vecs=vecs):
+                h = out[0] if isinstance(out, tuple) else out
+                for j, i in enumerate(idx):
+                    v = vecs[i]
+                    if v is None or not poffs[i]:
+                        continue
+                    pos = torch.tensor([T - o for o in poffs[i]], device=h.device)
+                    h[j, pos] = v.to(h.device, h.dtype)
+                return out
+            handles.append(_module(model, Lp).register_forward_hook(phook))
+        for L in blocks:
+            def hook(mod, args, L=L, idx=idx, T=T):
+                x = args[0]
+                for j, i in enumerate(idx):
+                    if offsets[i]:
+                        pos = torch.tensor([T - o for o in offsets[i]], device=x.device)
+                        caps[L][i] = x[j, pos].detach().to("cpu")
+            handles.append(attn(model, L).o_proj.register_forward_pre_hook(hook))
+        try:
+            logits = model(input_ids=ids, attention_mask=att, logits_to_keep=1).logits[:, -1]
+        finally:
+            for h in handles:
+                h.remove()
+        for j, r in zip(idx, _readout(scorer, logits)):
+            reads[j] = r
+    return caps, reads
