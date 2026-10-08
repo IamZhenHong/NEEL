@@ -1,0 +1,306 @@
+{
+ "n_replies": 334,
+ "n_scored": 333,
+ "cell_means": {
+  "dtag_N": {
+   "bid": 0.667,
+   "hard": 0.476,
+   "dep": 1.762
+  },
+  "dtag_R": {
+   "bid": 0.524,
+   "hard": 0.333,
+   "dep": 1.571
+  },
+  "empty": {
+   "bid": 0.762,
+   "hard": 0.548,
+   "dep": 2.262
+  },
+  "force_release_N": {
+   "bid": 0.405,
+   "hard": 0.214,
+   "dep": 1.19
+  },
+  "force_stay_R": {
+   "bid": 0.952,
+   "hard": 0.929,
+   "dep": 2.667
+  },
+  "primary_N": {
+   "bid": 0.667,
+   "hard": 0.54,
+   "dep": 1.762
+  },
+  "primary_R": {
+   "bid": 0.613,
+   "hard": 0.532,
+   "dep": 1.742
+  },
+  "sib_N2": {
+   "bid": 0.75,
+   "hard": 0.5,
+   "dep": 1.85
+  }
+ },
+ "cell_means_n": {
+  "dtag_N": 21,
+  "dtag_R": 21,
+  "empty": 42,
+  "force_release_N": 42,
+  "force_stay_R": 42,
+  "primary_N": 63,
+  "primary_R": 62,
+  "sib_N2": 40
+ },
+ "G0": {
+  "primary_pooled_bid": 0.64,
+  "orig_same_cots": 0.643,
+  "pass": true
+ },
+ "G1": {
+  "leak_rate": 0.0,
+  "empty_rate": 0.0,
+  "pass": true
+ },
+ "judge_incoherent_rate": {
+  "dtag_N": 0.524,
+  "dtag_R": 0.381,
+  "empty": 0.524,
+  "force_release_N": 0.119,
+  "force_stay_R": 0.19,
+  "primary_N": 0.492,
+  "primary_R": 0.452,
+  "sib_N2": 0.55
+ },
+ "T1": {
+  "bid": {
+   "diff": 0.063,
+   "ci": [
+    -0.143,
+    0.27
+   ],
+   "n_pos": 7,
+   "n_neg": 6,
+   "n": 21
+  },
+  "hard": {
+   "diff": 0.016,
+   "ci": [
+    -0.206,
+    0.254
+   ],
+   "n_pos": 8,
+   "n_neg": 9,
+   "n": 21
+  },
+  "dep": {
+   "diff": 0.024,
+   "ci": [
+    -0.389,
+    0.413
+   ],
+   "n_pos": 8,
+   "n_neg": 7,
+   "n": 21
+  },
+  "pass": false
+ },
+ "T1_observational": {
+  "bid": {
+   "diff": 0.048,
+   "ci": [
+    -0.286,
+    0.381
+   ],
+   "n_pos": 7,
+   "n_neg": 6,
+   "n": 21
+  },
+  "dep": {
+   "diff": 0.333,
+   "ci": [
+    -0.143,
+    0.857
+   ],
+   "n_pos": 9,
+   "n_neg": 4,
+   "n": 21
+  }
+ },
+ "resample_rate_vs_orig_bid_auroc": 0.848,
+ "T2a_force_stay_on_R": {
+  "bid": {
+   "diff": 0.349,
+   "ci": [
+    0.198,
+    0.508
+   ],
+   "n_pos": 13,
+   "n_neg": 1,
+   "n": 21
+  },
+  "hard": {
+   "diff": 0.405,
+   "ci": [
+    0.27,
+    0.556
+   ],
+   "n_pos": 17,
+   "n_neg": 0,
+   "n": 21
+  },
+  "dep": {
+   "diff": 0.929,
+   "ci": [
+    0.643,
+    1.198
+   ],
+   "n_pos": 20,
+   "n_neg": 1,
+   "n": 21
+  },
+  "pass": true
+ },
+ "T2b_force_release_on_N": {
+  "bid": {
+   "diff": -0.262,
+   "ci": [
+    -0.452,
+    -0.079
+   ],
+   "n_pos": 4,
+   "n_neg": 14,
+   "n": 21
+  },
+  "hard": {
+   "diff": -0.325,
+   "ci": [
+    -0.492,
+    -0.151
+   ],
+   "n_pos": 3,
+   "n_neg": 14,
+   "n": 21
+  },
+  "dep": {
+   "diff": -0.571,
+   "ci": [
+    -0.944,
+    -0.222
+   ],
+   "n_pos": 3,
+   "n_neg": 14,
+   "n": 21
+  },
+  "pass": true
+ },
+ "compliance": {
+  "force_release_N_any_tactic": 0.405,
+  "force_release_N_hard": 0.214,
+  "force_stay_R_hard": 0.929,
+  "force_stay_R_dep": 2.667
+ },
+ "T3_sibling": {
+  "mean_abs_within_plan": 0.35,
+  "mean_abs_between_plan": 0.333,
+  "sib_minus_N": {
+   "bid": {
+    "diff": 0.1,
+    "ci": [
+     -0.083,
+     0.275
+    ],
+    "n_pos": 10,
+    "n_neg": 7,
+    "n": 20
+   },
+   "hard": {
+    "diff": -0.017,
+    "ci": [
+     -0.225,
+     0.183
+    ],
+    "n_pos": 8,
+    "n_neg": 9,
+    "n": 20
+   },
+   "dep": {
+    "diff": 0.1,
+    "ci": [
+     -0.275,
+     0.5
+    ],
+    "n_pos": 8,
+    "n_neg": 10,
+    "n": 20
+   }
+  }
+ },
+ "empty_minus_cot": {
+  "bid": {
+   "diff": 0.127,
+   "ci": [
+    -0.016,
+    0.27
+   ],
+   "n_pos": 12,
+   "n_neg": 7,
+   "n": 21
+  },
+  "hard": {
+   "diff": 0.016,
+   "ci": [
+    -0.159,
+    0.19
+   ],
+   "n_pos": 8,
+   "n_neg": 10,
+   "n": 21
+  },
+  "dep": {
+   "diff": 0.512,
+   "ci": [
+    0.238,
+    0.778
+   ],
+   "n_pos": 15,
+   "n_neg": 5,
+   "n": 21
+  }
+ },
+ "tag_artifact_double_minus_single": {
+  "bid": {
+   "diff": -0.04,
+   "ci": [
+    -0.183,
+    0.111
+   ],
+   "n_pos": 8,
+   "n_neg": 9,
+   "n": 21
+  },
+  "hard": {
+   "diff": -0.127,
+   "ci": [
+    -0.278,
+    0.024
+   ],
+   "n_pos": 5,
+   "n_neg": 11,
+   "n": 21
+  },
+  "dep": {
+   "diff": -0.083,
+   "ci": [
+    -0.385,
+    0.187
+   ],
+   "n_pos": 10,
+   "n_neg": 11,
+   "n": 21
+  },
+  "flag": false
+ },
+ "outcome_row": "the action follows an explicit final plan sentence but not the CoT's own judged plan"
+}
