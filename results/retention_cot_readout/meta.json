@@ -1,0 +1,80 @@
+{
+ "model": "Qwen/Qwen3-8B",
+ "layers": [
+  14,
+  18,
+  22
+ ],
+ "n_items": 120,
+ "dropped": 0,
+ "lens": {
+  "file": "qwen3-8b/jlens/Salesforce-wikitext/Qwen3-8B_jacobian_lens.pt",
+  "source_layers": [
+   0,
+   1,
+   2,
+   3,
+   4,
+   5,
+   6,
+   7,
+   8,
+   9,
+   10,
+   11,
+   12,
+   13,
+   14,
+   15,
+   16,
+   17,
+   18,
+   19,
+   20,
+   21,
+   22,
+   23,
+   24,
+   25,
+   26,
+   27,
+   28,
+   29,
+   30,
+   31,
+   32,
+   33,
+   34
+  ],
+  "n_prompts": 461,
+  "used": {
+   "14": 14,
+   "18": 18,
+   "22": 22
+  },
+  "prefitted": true
+ },
+ "stay_tokens": {
+  "stay": 4717,
+  "staying": 19429,
+  "stays": 26558,
+  "remain": 7146,
+  "keep": 2506,
+  "here": 1588,
+  "wait": 3783,
+  "waiting": 8580,
+  "miss": 3116
+ },
+ "go_tokens": {
+  "go": 728,
+  "going": 2087,
+  "leave": 5274,
+  "leaving": 9380,
+  "out": 700,
+  "enjoy": 4669,
+  "fun": 2464,
+  "friends": 4780,
+  "free": 1910
+ },
+ "secs": 181
+}
