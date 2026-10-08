@@ -151,6 +151,25 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-08: cue test replication (prereg/retention_cuetest_rep_v1.md; pod $0.19, judge $0.76; tags retention-cuetest-rep-freeze / -results)
+
+- **Question.** Does Stage 2's unpredicted +0.20 rise in embedded any-tactic under the written-in L18 vulnerability direction at +7
+  replicate with fresh seeds and more replies, and is it specific against norm-matched random directions? Deviation: 6 audited
+  scenarios x 10 seeds instead of 12 scenarios (new profiles would change the construct); three unit random directions x 4 seeds.
+- **Observation.** Base 0.78 (G0 pass). vul+7 0.78: +0.00 [-0.12, +0.13], 1 up / 2 down / 3 tied; seed-level the same. Random pooled
+  0.81; rand1 alone +0.13 [-0.00, +0.27] (5/1), rand2 and rand3 -0.03. P(okay, ON) 0.95 -> 0.85 (-0.10 [-0.28, +0.01]; G1 fail), the
+  drop concentrated in scenario 1 in both runs; random directions do not move P(okay). Hand-read: the +7 cell adds a caregiving
+  register ("you don't have to do anything you're not comfortable with") that the judge files as discourage-outside less often and
+  as distress bids slightly more; nets to zero. Fluent, no role leakage at +7.
+- **Interpretation.** T1 fail, T2 fail; Stage 2's sign result was a high draw and is withdrawn (stage2.md annotated). What stands:
+  decodable (Stage 1), weakly and unevenly reachable by the stated assessment, and no effect on the bid that two runs of 30-60
+  replies per cell can distinguish from zero or from a random perturbation of the same norm. Closer to Stage 2's P1 reading than
+  to the alternatives, but P1's random-control and CI bars are not met, so it is recorded as a null with the judge-rate caveat.
+  Predictions 2/5 (G1 0.90 and T1 0.55 missed). One model, one direction, one layer, one alpha; nothing about intent or mechanism.
+- **Decision.** Cross-project cue test closed as a null on the bid; no further cells without the owner. Candidate follow-ups, not
+  launched: the same construction on Qwen2.5-7B's embedded profile; a judge-free alpha ladder on P(okay). Ledger $14.43 of $25.
+
+
 ### 2026-10-08: Exp 18, head-level reads of the author's name (Qwen3-8B pods jcnebtwpsih4hg + ph8ekskmw73vf5, $1.63; Gemma 4 12B-it pods p1683wuf07iz6m + 14q03t73wc96la, $0.71; L40S bf16; git 25d1b2a = tag exp18-results; prereg exp18-freeze + amendments v1.1/v1.2)
 
 - **Observation.** Per-head swaps of the attention output (pre-o_proj) at the ~290 post-label positions between the two
