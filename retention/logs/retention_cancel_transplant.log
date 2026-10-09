@@ -1,0 +1,32 @@
+[pre] disk: 14.6 GiB free
+[pre] balance $35.18, pods 0
+[runpod] pod fly8ntpo8nsrbe (?) at $0.59/hr; time cap 35 min; budget $0.35
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@62.169.158.40 -p 49471
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 65 min (job limit 35 + 30 grace)
+[pod] code synced
+downloading uv 0.12.24 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA RTX A6000
+[pod] running (detached): cd /root/NEEL && export GIT_REV=8548bb8-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_transplant.py --out retention/results/retention_cancel_transplant/smoke --smoke 2 && python retention/run_cancel_transplant.py --out retention/results/retention_cancel_transplant'
+[job] start 11:01:52
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  57%|█████▋    | 387/677 [00:00<00:00, 3869.45it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 4067.15it/s]
+[load] 42s
+[reverse] 2 59s
+[T] 2/2 83s
+[done] 83s
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  51%|█████     | 345/677 [00:00<00:00, 3422.69it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 3597.52it/s]
+[load] 7s
+[reverse] 19 153s
+[T] 10/60 274s
+[T] 20/60 392s
+[T] 30/60 508s
+[T] 40/60 626s
+[T] 50/60 742s
+[T] 60/60 857s
+[done] 857s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.178
+[local] results synced ./retention/results/retention_cancel_transplant/ (6 files, 0 MiB, verified against the pod)
+[runpod] terminated fly8ntpo8nsrbe; elapsed cost ~$0.179
+[post] balance $35.00, pods 0

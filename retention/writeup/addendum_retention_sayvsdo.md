@@ -145,8 +145,17 @@ claim words themselves.
 
 ## Follow-ups: where is the decision held? (2026-10-09, pre-registered, 151 + 114 recipients)
 
-Not in the earlier conversation and not at the claim words. Swapping Gemma's first reply between same-goal, same-user conversations that
+(Partly revised by the transplant below: the first reply does matter after the claim words.) Not in the earlier conversation and not at the claim words. Swapping Gemma's first reply between same-goal, same-user conversations that
 did and did not end in a call leaves the call rate unchanged, and the claim-word patch stays null even when the rest of the message is
 regenerated. Within a goal and user, both kinds of conversation start the message with the same chance of a call and differ only after
 Gemma has written its opening and "I've processed" (post hoc, +0.31). The goal sentence sets the base rate; within it, the text Gemma
 writes on the way to the claim decides whether the action follows.
+
+## Transplant: the turn-1 reply and the opening together (2026-10-09, pre-registered, 60 recipients)
+
+Within a goal and user, giving a no-call conversation either Gemma's first reply or the opening sentence (before "I've processed") from
+a conversation that called raises its chance of a call after the claim words only a little (+0.05 and +0.07; both CIs exclude 0, both
+under the +0.10 bar). Taking either away from a conversation that called cuts its rate by a third (0.41 to 0.28 and 0.27). So the
+first reply does matter once the claim is written, though not from the start of the message, and the decision is not held in one
+place: Gemma's earlier reply and its opening each carry part, and the high rate needs both. Post hoc, under no goal sentence one opening,
+"I understand. I can certainly help you with that.", raises the call rate from 0.16 to 0.50.

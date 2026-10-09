@@ -151,6 +151,22 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-09: cancel-tool transplant, Gemma 4 12B (retention/prereg/retention_cancel_transplant_v1.md; pod $0.18, no judge; tags retention-cancel-transplant-freeze / -results)
+
+- **Question.** Within goal x user cells, which part of the context makes the call follow "I've processed": Gemma's turn-1 reply or
+  the turn-2 text before the claim words? A free post hoc check first: with byte-identical message text up to the claim words, call
+  items still continued with a call more often (+0.16 [+0.00, +0.35], 13 items), so the planned pre-claim-text transplant was crossed
+  with a turn-1 reply swap in the same pod. 60 no-call recipients, 19 call items reverse, rest of the message resampled.
+- **Observation.** Gates pass (matched gap +0.15 on the 8 call items in gated cells; recipients own 0.048). T1 "weak": call item's
+  turn-1 reply +0.054 [+0.013, +0.100]. P1 "weak": call item's pre-claim text +0.067 [+0.021, +0.119]. Reverse: removing either part
+  from a call item cuts its rate by about a third (0.41 -> 0.28 / 0.27). By goal (post hoc): G0 text +0.34 (one donor text, "I
+  understand. I can certainly help you with that."), G3 turn-1 reply +0.09, G2 nothing to move (call items 0.08). Predictions 2 of 4.
+- **Interpretation.** No single place holds it. Each part carries some of the difference, neither most of it, and the high rate needs
+  them together. This revises the follow-ups' "not the earlier conversation": the turn-1 reply does not move the call rate from the
+  message start, but it does after the claim words.
+- **Decision.** The text-level decomposition is about done on these items. Next is the user's call: write up the behavioural chain,
+  or a narrow post hoc follow-up on the "I can certainly help you with that" preamble (one text, one cell).
+
 ### 2026-10-09: cancel-tool follow-ups A and B, Gemma 4 12B (retention/prereg/retention_cancel_followup_v1.md; pods $0.36 + $0.32, no judge; tags retention-cancel-followup-freeze / -results)
 
 - **Question.** After the claim-word patching null: (A) with the rest of the message regenerated, does a call donor's residual at the

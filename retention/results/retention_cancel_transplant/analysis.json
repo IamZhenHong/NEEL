@@ -1,0 +1,168 @@
+{
+ "n": 60,
+ "n_call_items": 19,
+ "levels": {
+  "own": 0.048,
+  "t1_call": 0.098,
+  "t1_ctrl": 0.044,
+  "pre_call": 0.146,
+  "pre_ctrl": 0.079
+ },
+ "call_items_levels": {
+  "own": 0.408,
+  "t1_nocall": 0.283,
+  "pre_nocall": 0.27
+ },
+ "trunc": 0.0,
+ "G_matched_gap_call_items_minus_same_cell_recipients": {
+  "est": 0.148,
+  "ci": [
+   0.034,
+   0.268
+  ],
+  "n": 8
+ },
+ "gate": {
+  "matched_gap_ge_0.10": true,
+  "recipients_own_le_0.15": true,
+  "trunc_le_0.05": true,
+  "n_ge_40": true
+ },
+ "T1_t1_call_minus_t1_ctrl": {
+  "est": 0.054,
+  "ci": [
+   0.013,
+   0.1
+  ],
+  "n": 60
+ },
+ "T1_row": "weak",
+ "P1_pre_call_minus_pre_ctrl": {
+  "est": 0.067,
+  "ci": [
+   0.021,
+   0.119
+  ],
+  "n": 60
+ },
+ "P1_row": "weak",
+ "P1_where_call_donor_text_differs": {
+  "est": 0.084,
+  "ci": [
+   0.02,
+   0.154
+  ],
+  "n": 43
+ },
+ "any_t1_swap_ctrl_minus_own": {
+  "est": -0.004,
+  "ci": [
+   -0.031,
+   0.021
+  ],
+  "n": 60
+ },
+ "any_pre_swap_ctrl_minus_own": {
+  "est": 0.031,
+  "ci": [
+   -0.004,
+   0.071
+  ],
+  "n": 60
+ },
+ "R_T_reverse_own_minus_t1_nocall": {
+  "est": 0.125,
+  "ci": [
+   0.033,
+   0.237
+  ],
+  "n": 19
+ },
+ "R_P_reverse_own_minus_pre_nocall": {
+  "est": 0.138,
+  "ci": [
+   0.02,
+   0.263
+  ],
+  "n": 19
+ },
+ "T1_by_G": {
+  "G0": {
+   "est": 0.159,
+   "ci": [
+    0.057,
+    0.284
+   ],
+   "n": 11
+  },
+  "G2": {
+   "est": -0.004,
+   "ci": [
+    -0.037,
+    0.025
+   ],
+   "n": 30
+  },
+  "G3": {
+   "est": 0.086,
+   "ci": [
+    -0.013,
+    0.184
+   ],
+   "n": 19
+  }
+ },
+ "P1_by_G": {
+  "G0": {
+   "est": 0.341,
+   "ci": [
+    0.182,
+    0.489
+   ],
+   "n": 11
+  },
+  "G2": {
+   "est": 0.021,
+   "ci": [
+    -0.017,
+    0.058
+   ],
+   "n": 30
+  },
+  "G3": {
+   "est": -0.02,
+   "ci": [
+    -0.059,
+    0.013
+   ],
+   "n": 19
+  }
+ },
+ "mix": {
+  "own": {
+   "claim": 1.0,
+   "promise": 0.0,
+   "other_tool": 0.0
+  },
+  "t1_call": {
+   "claim": 1.0,
+   "promise": 0.0,
+   "other_tool": 0.0
+  },
+  "t1_ctrl": {
+   "claim": 1.0,
+   "promise": 0.0,
+   "other_tool": 0.0
+  },
+  "pre_call": {
+   "claim": 1.0,
+   "promise": 0.0,
+   "other_tool": 0.0
+  },
+  "pre_ctrl": {
+   "claim": 1.0,
+   "promise": 0.0,
+   "other_tool": 0.0
+  }
+ }
+}
