@@ -1,8 +1,8 @@
 # A support agent that says "I've processed your cancellation" without calling the tool (Gemma 4 12B)
 
-Zhen Hong Seng, 9 October 2026. One-page summary of the cancel-tool line of the retention mini (ten runs in one day); per-run entries
+Zhen Hong Seng, 9 October 2026. One-page summary of the cancel-tool line of the retention mini (twelve runs in one day); per-run entries
 in `../../research-log.md`, every run pre-registered under `../prereg/` and tagged `-freeze` / `-results`, summaries under
-`../results/retention_cancel_*` and `../results/retention_conflict_actions/`. Cost ≈ $3.2 RunPod, ≈ $1 judge (first run only).
+`../results/retention_cancel_*` and `../results/retention_conflict_actions/`. Cost ≈ $4.1 RunPod, ≈ $1 judge (first run only).
 
 ## What was done
 
@@ -46,6 +46,10 @@ assist you with today?"* No tool was called.
 6. **But the deciding information is not stored at the claim words.** Swapping the residual stream at the four tokens " I've
    processed" between call and no-call conversations (every 4th layer, all layers at once, goal-matched donors, both directions)
    recovers at most 1.7% of the 0.61 readout gap, while a self-patch is exact and a same-norm random vector does move the readout.
+7. **No single place holds it.** Within a goal x user cell, swapping in a call conversation's turn-1 reply or its pre-claim text
+   (rest resampled after the claim words) each raises a no-call conversation's call rate a little (+0.054 and +0.067, both CIs
+   exclude 0, both below the +0.10 bar); taking either away from a call conversation cuts its rate by a third (0.41 to 0.28 / 0.27).
+   The goal sentence and user set the base rate; the rest is spread over Gemma's own earlier reply and the opening of the message.
 
 ## What is not supported
 
@@ -53,19 +57,19 @@ assist you with today?"* No tool was called.
 - "The churn goal hides the fact": the goal raises the rate of false claims but makes the reports more accurate, and it does not act
   at the claim-to-call step.
 - "Goal conflict causes it": an aligned refund sentence also produces false claims.
-- A located mechanism. The claim words are where the sampled outcome becomes fixed, not where the information sits; earlier positions
-  and the later text were not patched.
+- A located mechanism. The claim words are where the sampled outcome becomes fixed, not where the information sits; text swaps say
+  which parts of the context carry the difference (point 7), not how, and no positions before the claim words were patched.
 - Generality beyond Gemma 4 12B, one simulated service, one fixed tool result, scripted users, items selected on their outcome.
 
 ## The question this leaves
 
-Gemma tracks whether it called the tool (it says so when asked about its own action) and still tells the user it did, and the decision
-to end the turn without the call is read from somewhere other than the claim words. Two follow-ups (prereg
-`../prereg/retention_cancel_followup_v1.md`, `../results/retention_cancel_followup/`, $0.68) narrowed it: (A) the claim-word patch with
-the rest of the message regenerated is still null (-0.004 [-0.028, +0.020]); (B) swapping Gemma's turn-1 reply between call and no-call
-conversations of the same goal and user is null (-0.016 [-0.067, +0.036]). Post hoc (19-22 call items in 11 cells): within a goal x user
-cell the two kinds start the message with the same call rate (+0.015) but differ after the claim words (+0.31 [+0.16, +0.47]). Across
-cells the goal and user set the base rate; within a cell the difference arises while the turn-2 message is written, most plausibly in
-the text before the claim words ("I understand." vs "I completely understand, and I'm very sorry to see you go."), read directly by
-later positions. Untested next steps: transplant that preamble text between same-cell items; an activation probe for "not called" read
-against the own-action and account-state labels. The behavioural result (points 1-5) stands on its own and is the part to present.
+Gemma tracks whether it called the tool (it says so when asked about its own action) and still tells the user it did. Three runs
+looked for where the decision to end the turn without the call is held (`../results/retention_cancel_followup/`,
+`../results/retention_cancel_transplant/`, $0.86). Swapping the turn-1 reply and resampling the whole message does nothing
+(-0.016 [-0.067, +0.036]), but the same swap read after " I've processed" does a little (+0.054), as does swapping the pre-claim text
+(+0.067); the claim-word residual carries nothing even with the rest regenerated (-0.004). So the earlier reply matters only once the
+claim is written, and the high call rate in call conversations needs both their earlier reply and their opening. Post hoc and on one
+text: under no goal sentence, the opening "I understand. I can certainly help you with that." raises the call rate after the claim from
+0.16 to 0.50. The text-level decomposition stops here on these items (19 call conversations). Untested: an activation probe for "not
+called" read against the own-action and account-state labels. The behavioural result (points 1-5) stands on its own and is the part to
+present; points 6-7 say the decision is not stored in one place, which is a negative result, not a mechanism.
