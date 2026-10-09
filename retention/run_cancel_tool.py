@@ -173,8 +173,10 @@ def gemma_response_block(calls, tool_result):
     return "".join(f'<|tool_response>response:{c["name"]}{{value:<|"|>{tool_result}<|"|>}}<tool_response|>' for c in calls)
 
 
-def run_turn(model, tok, convs, fam, tools, think, max_new, stops, seed_base, tool_result):
-    """One agent turn for every active conversation in `convs` (their msgs end with a user message). Batched per step."""
+def run_turn(model, tok, convs, fam, tools, think, max_new, stops, seed_base, tool_result, is_target=None):
+    """One agent turn for every active conversation in `convs` (their msgs end with a user message). Batched per step.
+    is_target(call) -> bool marks the call that ends the conversation (default: cancel_subscription; the conflicted-actions run passes its own)."""
+    is_target = is_target or (lambda cl: cl["name"] == "cancel_subscription")
     for c in convs:
         c["_prefix"] = render(tok, c["msgs"], tools, think)    # Gemma raw continuation base
         c["_turn_text"] = ""                                    # Gemma: raw text produced in this turn
@@ -210,7 +212,7 @@ def run_turn(model, tok, convs, fam, tools, think, max_new, stops, seed_base, to
                 if fam == "gemma":
                     body_upto = raw[: raw.rfind("<tool_call|>") + len("<tool_call|>")] if "<tool_call|>" in raw else raw
                     c["_turn_text"] += body_upto + gemma_response_block(calls, tool_result)
-                if any(cl["name"] == "cancel_subscription" for cl in calls):
+                if any(is_target(cl) for cl in calls):
                     c["cancelled"] = True
                 c["_rounds"] += 1
                 if c["cancelled"] or c["cap_hit"] or c["_rounds"] > MAX_TOOL_ROUNDS:
