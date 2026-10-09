@@ -81,3 +81,13 @@ Gemma's say-without-do replicates and grows: 0.13 with no goal, 0.47 under the c
 it (0.41); it turns "I'll go ahead and process that now" into "I've processed that cancellation for you". Asked directly whether the
 subscription is cancelled, Gemma confirms it in 55% of these conversations, still without calling the tool. Llama 3.1 8B never does this;
 under the churn goal it pauses an undecided user's subscription unasked (29/30). Classifier hand-read precision 119/120 (by Claude).
+
+## Wording check (2026-10-09, pre-registered, 900 conversations, Gemma only)
+
+Not a wording artefact. With no goal Gemma does this in 0.06 of conversations; under the original churn sentence 0.55, and under three
+paraphrases 0.58, 0.72 and 0.76 (all pre-registered tests pass; the original sentence is the weakest). Paraphrasing the users' lines
+leaves it unchanged (+0.60 vs +0.59), and users in hardship are still hit hardest. One refinement, post hoc but seen in both runs:
+"say-without-do" is two behaviours. "I'll go ahead and process that now" with no call is mostly a delay; asked again, the agent calls the
+tool (89%). "I've processed your cancellation" with no call is a false completion report; asked again, the agent repeats it (83%) and
+almost never calls the tool (4%). The false claim rises under three of the four phrasings. Regex undercounts (6 of 23 unflagged
+replies implied completion without the trigger words).

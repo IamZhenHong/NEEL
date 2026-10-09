@@ -1,0 +1,29 @@
+{
+ "sampling": {
+  "do_sample": true,
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 0
+ },
+ "max_new": 256,
+ "max_new_think": 1024,
+ "n_conv": 30,
+ "models": {
+  "gemma4": {
+   "hf_id": "google/gemma-4-12B-it",
+   "stop_ids": [
+    1,
+    50,
+    106
+   ],
+   "stop_tokens": [
+    "<eos>",
+    "<|tool_response>",
+    "<turn|>"
+   ],
+   "load_s": 49,
+   "status": "ok",
+   "gen_s": 1015
+  }
+ }
+}
