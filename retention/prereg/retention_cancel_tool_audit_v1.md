@@ -107,7 +107,10 @@ only if it passes in both sets.
   directions are available.
 
 ## Caps and cost
-Pod <= 30 min / $0.40 (RTX A6000, 80 GB container). About 13,400 forward passes (both sets; the wording set's 334 promises x 18 renderings are most of them) of <= 1k tokens, no generation beyond one token. No judge;
+Pod <= 30 min / $0.40 (RTX A6000, 80 GB container). **Amended after the freeze, before any score was returned:** the first launch's
+rate (80 s per 400 longest rows) projected ~38 min from the token-length distribution, past the cap, and scores are written only at
+the end; that pod was stopped ($~0.05, nothing returned) and the run relaunched with <= 60 min / $0.65 and batch size 16. Design,
+code and analysis unchanged. About 13,400 forward passes (both sets; the wording set's 334 promises x 18 renderings are most of them) of <= 1k tokens, no generation beyond one token. No judge;
 nothing added to the sprint API ledger ($21.61 of $25). Tags `retention-cancel-audit-freeze` before launch (after code and smoke test),
 `retention-cancel-audit-results` after.
 
