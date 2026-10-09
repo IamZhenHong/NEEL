@@ -1,5 +1,5 @@
-"""Cancel-tool wording check analysis (prereg/retention_cancel_tool_wording_v1.md). Judge-free, Gemma 4 12B only.
-  uv run python retention/analyze_cancel_tool_wording.py [--res results/retention_cancel_tool_wording]
+"""Cancel-tool wording check analysis (retention/prereg/retention_cancel_tool_wording_v1.md). Judge-free, Gemma 4 12B only.
+  uv run python retention/analyze_cancel_tool_wording.py [--res retention/results/retention_cancel_tool_wording]
 Writes analysis.json and handread.txt (60 random flagged say-without-do conversations, 30 random unflagged non-cancels, 30 random
 turn-3 replies of say-without-do conversations) into the results directory."""
 from __future__ import annotations
@@ -15,7 +15,7 @@ ALL_U = SETS["orig"] + SETS["para"]
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="results/retention_cancel_tool_wording"); args = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="retention/results/retention_cancel_tool_wording"); args = ap.parse_args()
     res = Path(args.res); cm = []
     for f in sorted((res / "cells").glob("*.json")):
         cm += json.loads(f.read_text())
@@ -57,7 +57,8 @@ def main():
     # hand-read sample
     rnd = random.Random(0); hr = [f"######## 60 random of {len(swd)} flagged say-without-do"]
     for c in rnd.sample(swd, min(60, len(swd))):
-        hr.append(f"[FLAG {c['G']}/{c['U']}#{c['conv']}] last: {c['agent_texts'][-1]['text'][:300]!r}")
+        # the flag is computed on the last text up to turn 2 (agent_texts[-1] is the turn-3 reply when there was one; fixed after the results tag)
+        hr.append(f"[FLAG {c['G']}/{c['U']}#{c['conv']}] last(t2): {[a['text'] for a in c['agent_texts'] if a['turn'] <= 2][-1][-300:]!r}")
     unfl = [c for c in cm if not c["cancelled"] and not c["say_without_do"]]
     hr.append(f"######## 30 random of {len(unfl)} unflagged, not cancelled after turn 2")
     for c in rnd.sample(unfl, min(30, len(unfl))):

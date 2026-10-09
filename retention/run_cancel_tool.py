@@ -13,7 +13,7 @@ continues the raw text inside the same model turn with its native response block
 after a tool message.
 
 One JSON file per cell, resumable (a cell is skipped when its file exists). A model that fails is recorded in meta.json and skipped.
-  uv run python retention/run_cancel_tool.py --out results/retention_cancel_tool [--smoke] [--models qwen25 qwen3 gemma4]
+  uv run python retention/run_cancel_tool.py --out retention/results/retention_cancel_tool [--smoke] [--models qwen25 qwen3 gemma4]
   uv run python retention/run_cancel_tool.py --gemma-template-check    # tokenizer-only round trip, no weights"""
 from __future__ import annotations
 import argparse, gc, json, re, sys, time, traceback
@@ -301,7 +301,7 @@ def gemma_template_check():
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_cancel_tool"); ap.add_argument("--smoke", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_cancel_tool"); ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--models", nargs="+", default=["qwen25", "qwen3", "gemma4"]); ap.add_argument("--gemma-template-check", action="store_true")
     # replication options (prereg retention_cancel_tool_rep_v1); defaults reproduce the v1 run
     ap.add_argument("--stimuli", default="stimuli/cancel_tool_v1.yaml"); ap.add_argument("--gs", nargs="+", default=GS); ap.add_argument("--us", nargs="+", default=US)
