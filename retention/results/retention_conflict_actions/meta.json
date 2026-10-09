@@ -1,0 +1,60 @@
+{
+ "sampling": {
+  "do_sample": true,
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 0
+ },
+ "max_new": 256,
+ "n_conv": 30,
+ "seed0": 61000,
+ "stimuli": "stimuli/conflict_actions_v1.yaml",
+ "models": {
+  "gemma4": {
+   "hf_id": "google/gemma-4-12B-it",
+   "stop_ids": [
+    1,
+    50,
+    106
+   ],
+   "stop_tokens": [
+    "<eos>",
+    "<|tool_response>",
+    "<turn|>"
+   ],
+   "load_s": 30,
+   "status": "ok",
+   "gen_s": 873
+  },
+  "llama31": {
+   "hf_id": "meta-llama/Llama-3.1-8B-Instruct",
+   "stop_ids": [
+    128001,
+    128008,
+    128009
+   ],
+   "stop_tokens": [
+    "<|end_of_text|>",
+    "<|eom_id|>",
+    "<|eot_id|>"
+   ],
+   "load_s": 17,
+   "status": "ok",
+   "gen_s": 201
+  },
+  "qwen3": {
+   "hf_id": "Qwen/Qwen3-8B",
+   "stop_ids": [
+    151643,
+    151645
+   ],
+   "stop_tokens": [
+    "<|endoftext|>",
+    "<|im_end|>"
+   ],
+   "load_s": 23,
+   "status": "ok",
+   "gen_s": 214
+  }
+ }
+}
