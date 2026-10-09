@@ -151,6 +151,24 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-09: cancel-tool claim-word patching, Gemma 4 12B (retention/prereg/retention_cancel_patch_v1.md v1.1; pod $0.35, no judge; tags retention-cancel-patch-freeze / -results)
+
+- **Question.** Does the context difference that lets the call follow the claim (resampling: 0.41 vs 0.04 just after "I've
+  processed") pass through the four claim-word positions? 151 no-call recipients, 21 call donors with identical claim tokens; residual
+  at those positions replaced by a call donor's vs another no-call item's, per layer 4-48, all layers at once, same-goal donors;
+  diff-of-means steering vs same-norm random. Freeze incident: the first freeze commit (34d41cc) captured a parallel session's draft
+  runner written to the same path; restored and re-frozen at 9f9dd86 before any run.
+- **Observation.** Gates pass (self-patch changes P(end) by <= 0.0001; readout call items 0.74 vs recipients 0.13, AUROC 0.96). M1 row
+  "not through the claim words": every layer -0.001 to +0.002 (max 1.7% of the 0.61 gap); all layers at once +0.005; same-goal donors
+  nil; P("\n\n") nil; reverse (call items given a no-call residual) nil. Sampled check at layer 28 (40 recipients, cap): 0.028 vs
+  0.013. The diff-of-means vector moves nothing at any layer, while a same-norm random vector at layer 8 raises cont to 0.54 (edits there
+  can act). Predictions 5 of 8 on the favoured side (missed M1 "passes", any direction effect, all-layers).
+- **Interpretation.** The outcome is fixed when the claim words are written (resampling), but what fixes it is not stored at the
+  claim-word positions: later positions read it from the earlier conversation or the message's own later text. Caveat: the readout sits
+  after the recipient's own full message.
+- **Decision.** Next candidate, if any: patch at the claim words and resample from just after them (where the 0.41 vs 0.04 gap lives),
+  or patch the earlier conversation (system prompt / turn-1 positions) instead. Not launched; for the user to choose.
+
 ### 2026-10-09: cancel-tool resampling, Gemma 4 12B (retention/prereg/retention_cancel_resample_v1.md; pod $0.40, no judge; tags retention-cancel-resample-freeze / -results)
 
 - **Question.** Where in the turn-2 message is "no call" fixed: before the message (by the conversation so far) or inside it? The frozen

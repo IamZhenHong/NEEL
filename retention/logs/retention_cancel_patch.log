@@ -1,0 +1,99 @@
+[pre] disk: 14.2 GiB free
+[pre] balance $36.34, pods 0
+[runpod] round 1/5: no stock on SECURE
+[runpod] round 1/5: no stock on COMMUNITY
+[runpod] round 2/5: no stock on SECURE
+[runpod] round 2/5: no stock on COMMUNITY
+[runpod] pod hn6qp2ezp9pwof (?) at $0.59/hr; time cap 35 min; budget $0.35
+[runpod] waiting for ip/port (1s, status RUNNING)
+[pod] ssh root@194.68.245.88 -p 22029
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 65 min (job limit 35 + 30 grace)
+[pod] code synced
+downloading uv 0.12.24 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA RTX A6000
+[pod] running (detached): cd /root/NEEL && export GIT_REV=9f9dd86-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_patch.py --smoke 2 --out retention/results/retention_cancel_patch/smoke && python retention/run_cancel_patch.py --out retention/results/retention_cancel_patch'
+[job] start 08:16:23
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  26%|██▌       | 176/677 [00:00<00:00, 1688.61it/s]Loading weights:  51%|█████     | 345/677 [00:00<00:00, 1284.60it/s]Loading weights:  71%|███████   | 479/677 [00:00<00:00, 1245.78it/s]Loading weights:  90%|█████████ | 611/677 [00:00<00:00, 1271.17it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 1280.52it/s]
+[load] 81s
+[capture] 172 items 122s
+[selfcheck] {'base_p_end': 0.9991922974586487, 'self_patch_max_abs_diff': 9.566545486450195e-05, 'donor_patch_L24_p_end': 0.99930739402771}
+[sweep] 2/2 145s
+[reverse] 2 148s
+[L*] 20 effect 0.007
+[sampled] 2/2 155s
+[done] 155s
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  69%|██████▉   | 470/677 [00:00<00:00, 4698.67it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 4223.10it/s]
+[load] 17s
+[capture] 172 items 57s
+[selfcheck] {'base_p_end': 0.9991922974586487, 'self_patch_max_abs_diff': 9.566545486450195e-05, 'donor_patch_L24_p_end': 0.99930739402771}
+[sweep] 20/151 275s
+[sweep] 40/151 506s
+[sweep] 60/151 742s
+[sweep] 80/151 979s
+[sweep] 100/151 1180s
+[sweep] 120/151 1337s
+[sweep] 140/151 1497s
+[sweep] 151/151 1582s
+[reverse] 21 1619s
+[L*] 28 effect 0.002
+[sampled] 20/151 1697s
+[sampled] 40/151 1779s
+[pod] last job log before abort:
+[job] start 08:16:23
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]
+Loading weights:  26%|██▌       | 176/677 [00:00<00:00, 1688.61it/s]
+Loading weights:  51%|█████     | 345/677 [00:00<00:00, 1284.60it/s]
+Loading weights:  71%|███████   | 479/677 [00:00<00:00, 1245.78it/s]
+Loading weights:  90%|█████████ | 611/677 [00:00<00:00, 1271.17it/s]
+Loading weights: 100%|██████████| 677/677 [00:00<00:00, 1280.52it/s]
+[load] 81s
+[capture] 172 items 122s
+[selfcheck] {'base_p_end': 0.9991922974586487, 'self_patch_max_abs_diff': 9.566545486450195e-05, 'donor_patch_L24_p_end': 0.99930739402771}
+[sweep] 2/2 145s
+[reverse] 2 148s
+[L*] 20 effect 0.007
+[sampled] 2/2 155s
+[done] 155s
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]
+Loading weights:  69%|██████▉   | 470/677 [00:00<00:00, 4698.67it/s]
+Loading weights: 100%|██████████| 677/677 [00:00<00:00, 4223.10it/s]
+[load] 17s
+[capture] 172 items 57s
+[selfcheck] {'base_p_end': 0.9991922974586487, 'self_patch_max_abs_diff': 9.566545486450195e-05, 'donor_patch_L24_p_end': 0.99930739402771}
+[sweep] 20/151 275s
+[sweep] 40/151 506s
+[sweep] 60/151 742s
+[sweep] 80/151 979s
+[sweep] 100/151 1180s
+[sweep] 120/151 1337s
+[sweep] 140/151 1497s
+[sweep] 151/151 1582s
+[reverse] 21 1619s
+[L*] 28 effect 0.002
+[sampled] 20/151 1697s
+[sampled] 40/151 1779s
+
+memory.used [MiB], utilization.gpu [%]
+37619 MiB, 100 %
+overlay          80G   36G   45G  45% /
+23G	/root/hf
+
+[local] results synced ./retention/results/retention_cancel_patch/ (6 files, 0 MiB, verified against the pod)
+[runpod] terminated hn6qp2ezp9pwof; elapsed cost ~$0.348
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 417, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 395, in main
+    rc = run_detached(host, port, job, pod)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 196, in run_detached
+    pod.check_budget()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/runpod_guard.py", line 214, in check_budget
+    raise RuntimeError("Time limit exceeded")
+RuntimeError: Time limit exceeded

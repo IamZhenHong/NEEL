@@ -134,3 +134,11 @@ time (0.34), just before "I've processed" 0.28, just after it 0.04, and the rest
 decide it in advance; writing the completion verb mostly does. The conversation sets how strongly: in conversations that did end in a
 call, the same words leave a 0.41 chance of the call. With the twins, the goal raises the chance that a completion claim gets written,
 and the written claim then usually takes the place of the action.
+
+## Patching: is the decision stored at the claim words? (2026-10-09, pre-registered, 151 recipients)
+
+No. Swapping the internal state at the four tokens "I've processed" from a conversation that went on to call the tool into one that did
+not (or the reverse) leaves the outcome unchanged at every layer tested, including all at once and with donors that share the goal
+sentence. A same-size random vector at those positions does change it, so the positions can act; the call-vs-no-call difference is just
+not held there. The outcome is fixed when the claim is written, but the model reads what fixes it from the conversation, not from the
+claim words themselves.
