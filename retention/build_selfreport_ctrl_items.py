@@ -1,4 +1,4 @@
-"""Build the frozen item file for the self-report controls (prereg/retention_selfreport_ctrl_v1.md): the 120 thinking-on items
+"""Build the frozen item file for the self-report controls (retention/prereg/retention_selfreport_ctrl_v1.md): the 120 thinking-on items
 (retention/data/stageC_on_items.json) and the 120 thinking-off Stage A replies, with Haiku and Sonnet bid labels, the stored R0
 reference P(stay), and the donor assignments for the swapped-reply (R1) and mismatched-CoT (R1b) conditions. Laptop only, no model.
   uv run python retention/build_selfreport_ctrl_items.py"""
@@ -10,7 +10,7 @@ import numpy as np
 
 HERE = Path(__file__).resolve().parent; ROOT = HERE.parent
 PROFILES = ["lonely", "distressed", "confident", "embedded"]
-CC = ROOT / "results/retention_judge_crosscheck/cells"; SC = ROOT / "results/retention_cot_arm/stageC/selfreport.json"
+CC = ROOT / "retention/results/retention_judge_crosscheck/cells"; SC = ROOT / "retention/results/retention_cot_arm/stageC/selfreport.json"
 
 
 def bid(scores): return int(any(scores["tactics"].values()))

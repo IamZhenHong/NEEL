@@ -1,9 +1,9 @@
-"""Generality pass (prereg/retention_generality_v1.md). Thinking off, no history, one shared sampling setting.
+"""Generality pass (retention/prereg/retention_generality_v1.md). Thinking off, no history, one shared sampling setting.
 Companion grid: 3 models x 3 personas x 4 exit lines x 10 seeds = 360 replies.
 Commercial arm: 3 models x 2 system prompts (churn goal / neutral) x 2 users (secure / hardship) x 10 seeds = 120 replies.
 One JSON file per cell (resumable; a cell is skipped when its file exists). A model that fails to load or generate is
 recorded in meta.json and skipped; the run continues with the next model.
-  uv run python retention/run_generality.py --out results/retention_generality [--smoke] [--models qwen25 qwen3 gemma4]"""
+  uv run python retention/run_generality.py --out retention/results/retention_generality [--smoke] [--models qwen25 qwen3 gemma4]"""
 from __future__ import annotations
 import argparse, gc, json, sys, time, traceback
 from pathlib import Path
@@ -47,7 +47,7 @@ def generate(model, tok, msgs, seed, max_new, eos):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_generality"); ap.add_argument("--smoke", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_generality"); ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--models", nargs="+", default=["qwen25", "qwen3", "gemma4"])
     args = ap.parse_args(); out = Path(args.out); (out / "cells").mkdir(parents=True, exist_ok=True); (out / "commercial").mkdir(parents=True, exist_ok=True)
     st = yaml.safe_load(open(HERE / "stimuli/generality_v1.yaml")); base_p = yaml.safe_load(open(HERE / "data/personas.yaml"))

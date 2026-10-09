@@ -1,6 +1,6 @@
 """Pull-line decidedness (3 cells x 30) + GSM8K under system-only steering (4 cells x 40, greedy, scored
-in-script). prereg/retention_wording_gsm_v1.md.
-  uv run python retention/run_wording_gsm.py --out results/retention_wording [--smoke]"""
+in-script). retention/prereg/retention_wording_gsm_v1.md.
+  uv run python retention/run_wording_gsm.py --out retention/results/retention_wording [--smoke]"""
 from __future__ import annotations
 import argparse, json, re, sys, time
 from pathlib import Path
@@ -26,7 +26,7 @@ def extract_answer(text):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_wording"); ap.add_argument("--smoke", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_wording"); ap.add_argument("--smoke", action="store_true")
     args = ap.parse_args()
     out = Path(args.out); (out / "cells").mkdir(parents=True, exist_ok=True)
     stim = yaml.safe_load(open(HERE / "stimuli/adaptive_v1.yaml"))

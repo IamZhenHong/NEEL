@@ -1,6 +1,6 @@
 """Adaptive-retention GPU run (plan v1 sections 2.1-2.4 + R5), Qwen2.5-7B-Instruct, no API calls.
 Generation + activation capture only; judging happens on the laptop (judge_adaptive.py) under the
-cost ledger. Everything is written under results/retention/ so the guarded launcher pulls it back.
+cost ledger. Everything is written under retention/results/retention/ so the guarded launcher pulls it back.
 
 Phases:
   A  baseline: 4 profiles x 6 prefix items x 2 exit types (pull, clean) x seeds, romantic persona.
@@ -17,7 +17,7 @@ Phases:
 Smoke: --smoke uses Qwen2.5-0.5B-Instruct, 1 item per cell, 1 seed, short generations, random
 direction if dims mismatch. Run it on the Mac before paying for a pod.
 
-  uv run python retention/run_adaptive.py --out results/retention [--smoke]
+  uv run python retention/run_adaptive.py --out retention/results/retention [--smoke]
 """
 from __future__ import annotations
 import argparse, contextlib, glob, json, sys, time
@@ -129,7 +129,7 @@ def unit(v):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--out", default="results/retention")
+    ap.add_argument("--out", default="retention/results/retention")
     ap.add_argument("--stimuli", default=str(HERE / "stimuli/adaptive_v1.yaml"))
     ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2])
     ap.add_argument("--r5-seeds", type=int, nargs="+", default=[0, 1, 2, 3, 4])

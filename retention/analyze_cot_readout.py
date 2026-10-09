@@ -1,7 +1,7 @@
-"""CoT-arm activation readout, analysis (prereg/retention_cot_readout_v1.md): library validation (held-out AUROC per concept, effective
+"""CoT-arm activation readout, analysis (retention/prereg/retention_cot_readout_v1.md): library validation (held-out AUROC per concept, effective
 rank, layer rule), trajectory features on NON-lexicon tokens, LOSO logistic regression for P(stay, with CoT) [PRIMARY], P(stay, reply only)
 and the judged bid; random libraries (3 seeds) as the floor; plan and J-lens as single-feature predictors.
-  uv run python retention/analyze_cot_readout.py [--res results/retention_cot_readout]"""
+  uv run python retention/analyze_cot_readout.py [--res retention/results/retention_cot_readout]"""
 from __future__ import annotations
 import argparse, json, re, sys
 from pathlib import Path
@@ -48,9 +48,9 @@ def features(acts, toks, li, D, last_n=20):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="results/retention_cot_readout"); ap.add_argument("--variant", default="v1", choices=["v1", "v11"])
-    ap.add_argument("--story-res", default=None, help="where story_means/story_index live (v11: results/retention_cot_readout_v11)"); args = ap.parse_args()
-    res = ROOT / args.res; sres = ROOT / (args.story_res or ("results/retention_cot_readout_v11" if args.variant == "v11" else args.res)); rep = {"variant": args.variant}
+    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="retention/results/retention_cot_readout"); ap.add_argument("--variant", default="v1", choices=["v1", "v11"])
+    ap.add_argument("--story-res", default=None, help="where story_means/story_index live (v11: retention/results/retention_cot_readout_v11)"); args = ap.parse_args()
+    res = ROOT / args.res; sres = ROOT / (args.story_res or ("retention/results/retention_cot_readout_v11" if args.variant == "v11" else args.res)); rep = {"variant": args.variant}
     probe = args.variant == "v11"
     sm = np.load(sres / "story_means.npz"); means = sm["means"].astype(np.float32); layers = [int(l) for l in sm["layers"]]
     sidx = json.loads((sres / "story_index.json").read_text()); concepts = [c for c in CONCEPTS if any(r["concept"] == c for r in sidx)]

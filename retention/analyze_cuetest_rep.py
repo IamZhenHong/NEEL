@@ -1,6 +1,6 @@
-"""Analysis for prereg/retention_cuetest_rep_v1.md: cell table, paired contrasts vs base and vs pooled random (bootstrap over scenarios,
+"""Analysis for retention/prereg/retention_cuetest_rep_v1.md: cell table, paired contrasts vs base and vs pooled random (bootstrap over scenarios,
 sign counts; seed-level bootstrap secondary), gates G0/G1, tests T1/T2, random-direction activity, tactic-type breakdown.
-  uv run python retention/analyze_cuetest_rep.py [--res results/retention_cuetest_rep]"""
+  uv run python retention/analyze_cuetest_rep.py [--res retention/results/retention_cuetest_rep]"""
 from __future__ import annotations
 import argparse, json, re
 from pathlib import Path
@@ -50,7 +50,7 @@ def paired(a, b, key):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="results/retention_cuetest_rep"); args = ap.parse_args(); res = ROOT / args.res
+    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="retention/results/retention_cuetest_rep"); args = ap.parse_args(); res = ROOT / args.res
     cells = {f.stem: json.loads(f.read_text()) for f in sorted((res / "cells").glob("*.json"))}
     rand_names = sorted(k for k in cells if k.startswith("embedded_rand"))
     cells["embedded_rand_pooled"] = [i for k in rand_names for i in cells[k]]

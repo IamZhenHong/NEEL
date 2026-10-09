@@ -1,5 +1,5 @@
-"""Self-conditioning replay (prereg/retention_selfcond_v1.md). Reuses run_adaptive.gen_capture.
-  uv run python retention/run_selfcond.py --out results/retention_selfcond [--smoke]"""
+"""Self-conditioning replay (retention/prereg/retention_selfcond_v1.md). Reuses run_adaptive.gen_capture.
+  uv run python retention/run_selfcond.py --out retention/results/retention_selfcond [--smoke]"""
 from __future__ import annotations
 import argparse, glob, json, sys, time
 from pathlib import Path
@@ -12,7 +12,7 @@ N_CONVS, SEEDS, PULL_TURN = 10, [0, 1, 2], 12
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_selfcond"); ap.add_argument("--smoke", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_selfcond"); ap.add_argument("--smoke", action="store_true")
     args = ap.parse_args()
     out = Path(args.out); (out / "cells").mkdir(parents=True, exist_ok=True)
     clean = {int(k): v for k, v in yaml.safe_load(open(HERE / "stimuli/selfcond_v1.yaml"))["clean_replies"].items()}

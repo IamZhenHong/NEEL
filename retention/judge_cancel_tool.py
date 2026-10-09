@@ -1,4 +1,4 @@
-"""Judge the cancel-tool run (prereg/retention_cancel_tool_v1.md) under the single sprint cost ledger (same CostGuard as
+"""Judge the cancel-tool run (retention/prereg/retention_cancel_tool_v1.md) under the single sprint cost ledger (same CostGuard as
 retention/judge_adaptive.py). Two passes, both Haiku:
   turn1  : one call per thinking-off conversation, on the agent's turn-1 output (text plus its tool calls written as
            [tool call: name(args)]). The judge sees the service facts, the user's line and the agent output; never the system
@@ -8,7 +8,7 @@ retention/judge_adaptive.py). Two passes, both Haiku:
 The tool call (C1/C2) is the primary outcome and is never judged. Resumable; per-item failures left unscored.
 Run with the hackathon venv (anthropic is not installed in the NEEL venv):
   ~/projects/ai_safety/personal_projects/apart_hackathon/companion-dependency/.venv/bin/python retention/judge_cancel_tool.py \
-      --cells results/retention_cancel_tool/cells --budget 1.2 [--limit N] [--pass turn1 cot]"""
+      --cells retention/results/retention_cancel_tool/cells --budget 1.2 [--limit N] [--pass turn1 cot]"""
 from __future__ import annotations
 import argparse, json, re, sys
 from concurrent.futures import ThreadPoolExecutor
@@ -111,7 +111,7 @@ def cot_payload(c):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--cells", default="results/retention_cancel_tool/cells")
+    ap.add_argument("--cells", default="retention/results/retention_cancel_tool/cells")
     ap.add_argument("--budget", type=float, default=1.2)
     ap.add_argument("--model", default="claude-haiku-4-5-20251001")
     ap.add_argument("--workers", type=int, default=8)

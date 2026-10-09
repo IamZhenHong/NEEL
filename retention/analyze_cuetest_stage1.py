@@ -1,5 +1,5 @@
 """Cross-project cue test, Stage 1 (laptop, no spend): is the user-vulnerability cue decodable on Qwen3-8B at the prompt-final
-(pre-reply) position of the CoT-arm Stage A OFF cells (results/retention_cot_arm/stageA), with a leave-one-scenario-out split so
+(pre-reply) position of the CoT-arm Stage A OFF cells (retention/results/retention_cot_arm/stageA), with a leave-one-scenario-out split so
 no held-out profile prefix is seen in training? Compares a diff-of-means reader and a logistic probe against a TF-IDF text
 baseline on the user prefix, reports the stated-assessment readout P(okay) and the bid gap, and freezes the Qwen3 direction
 for Stage 2 (retention/data/directions/qwen3_vul__stageA_off__L{L}.npy).
@@ -12,7 +12,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics import roc_auc_score
 HERE = Path(__file__).resolve().parent; ROOT = HERE.parent
-SRC = ROOT / "results/retention_cot_arm/stageA/cells"; OUT = ROOT / "results/retention_cuetest"; OUT.mkdir(parents=True, exist_ok=True)
+SRC = ROOT / "retention/results/retention_cot_arm/stageA/cells"; OUT = ROOT / "retention/results/retention_cuetest"; OUT.mkdir(parents=True, exist_ok=True)
 VUL = {"lonely", "distressed"}; PROFS = ["lonely", "distressed", "confident", "embedded"]
 
 

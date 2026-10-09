@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Job 2: bounded pilot. Train M1 and M2 (one seed each), evaluate base/M1/M2 on the dev split under
 # both personas, summarise. Adapters are copied into the results dir so the launcher pulls them back.
-#   uv run python scripts/launch_run.py --max-minutes 240 --max-cost 8.00 --gpus "NVIDIA RTX A6000" "NVIDIA L40S" "NVIDIA A100 80GB PCIe" \
+#   uv run python infra/launch_run.py --max-minutes 240 --max-cost 8.00 --gpus "NVIDIA RTX A6000" "NVIDIA L40S" "NVIDIA A100 80GB PCIe" \
 #       --exclude story_imprinting/data/source --results-dir story_imprinting/results \
 #       -- bash story_imprinting/train/pod_pilot.sh
 set -euo pipefail

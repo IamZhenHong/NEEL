@@ -1,6 +1,6 @@
 """CoT arm Stage C: H3b heavy ablation + random control (60 CoTs x 3 variants x 3 resamples) and H5 self-report after the CoT
-(120 thinking-on items x 2 contexts x 2 questions). prereg/retention_cot_arm_v1.md amendment v1.2.
-  uv run python retention/run_cot_stageC.py --out results/retention_cot_arm/stageC [--smoke]"""
+(120 thinking-on items x 2 contexts x 2 questions). retention/prereg/retention_cot_arm_v1.md amendment v1.2.
+  uv run python retention/run_cot_stageC.py --out retention/results/retention_cot_arm/stageC [--smoke]"""
 from __future__ import annotations
 import argparse, json, sys, time
 from pathlib import Path
@@ -22,7 +22,7 @@ def p_yes(model, tok, text):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_cot_arm/stageC"); ap.add_argument("--smoke", action="store_true"); ap.add_argument("--resamples", type=int, default=3)
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_cot_arm/stageC"); ap.add_argument("--smoke", action="store_true"); ap.add_argument("--resamples", type=int, default=3)
     args = ap.parse_args(); out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
     po = yaml.safe_load(open(HERE / "stimuli/profile_open_v1.yaml")); persona = yaml.safe_load(open(HERE / "data/personas.yaml"))[po["persona"]]
     t0 = time.time(); model, tok = load_model(SMOKE_MODEL if args.smoke else MODEL); print(f"[load] {time.time()-t0:.0f}s", flush=True)

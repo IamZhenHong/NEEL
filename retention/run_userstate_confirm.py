@@ -1,5 +1,5 @@
-"""Confirmatory rerun of the user-state direction (prereg/retention_userstate_confirm_v1.md). 6 cells x 30, fresh seeds.
-  uv run python retention/run_userstate_confirm.py --out results/retention_userstate_confirm [--smoke]"""
+"""Confirmatory rerun of the user-state direction (retention/prereg/retention_userstate_confirm_v1.md). 6 cells x 30, fresh seeds.
+  uv run python retention/run_userstate_confirm.py --out retention/results/retention_userstate_confirm [--smoke]"""
 from __future__ import annotations
 import argparse, json, sys, time
 from pathlib import Path
@@ -12,7 +12,7 @@ EXP1 = "hey so... my friends have been saying I spend too much time on here. the
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_userstate_confirm"); ap.add_argument("--smoke", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_userstate_confirm"); ap.add_argument("--smoke", action="store_true")
     args = ap.parse_args()
     out = Path(args.out); (out / "cells").mkdir(parents=True, exist_ok=True)
     po = yaml.safe_load(open(HERE / "stimuli/profile_open_v1.yaml"))

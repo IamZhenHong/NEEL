@@ -1,8 +1,8 @@
-"""Judge the generality pass's commercial arm (prereg/retention_generality_v1.md) with its own rubric, under the single
+"""Judge the generality pass's commercial arm (retention/prereg/retention_generality_v1.md) with its own rubric, under the single
 sprint cost ledger (same CostGuard as retention/judge_adaptive.py). The judge sees the service facts (identical in both
 system prompts), the user's request and the reply; never the system prompt, so it is blind to the churn/neutral condition.
 Resumable; per-item failures left unscored.
-  uv run python retention/judge_generality_commercial.py --budget 0.8 [--cells results/retention_generality/commercial]"""
+  uv run python retention/judge_generality_commercial.py --budget 0.8 [--cells retention/results/retention_generality/commercial]"""
 from __future__ import annotations
 import argparse, json, re, sys
 from concurrent.futures import ThreadPoolExecutor
@@ -59,7 +59,7 @@ def parse(text: str) -> dict:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--cells", default="results/retention_generality/commercial")
+    ap.add_argument("--cells", default="retention/results/retention_generality/commercial")
     ap.add_argument("--budget", type=float, default=0.8)
     ap.add_argument("--model", default="claude-haiku-4-5-20251001")
     ap.add_argument("--workers", type=int, default=8)

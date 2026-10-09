@@ -1,11 +1,11 @@
-"""Build the frozen item set for the CoT transplant run (prereg/retention_cot_transplant_v1.md) from Stage A ON cells.
+"""Build the frozen item set for the CoT transplant run (retention/prereg/retention_cot_transplant_v1.md) from Stage A ON cells.
 Per profile x scenario context with at least one release-plan and one non-release-plan CoT: R = lowest-seed release CoT,
 N = lowest-seed non-release CoT (compromise or retain), N2 = next non-release CoT (same plan as N preferred) for the sibling cell.
   python3 retention/build_transplant_items.py"""
 from __future__ import annotations
 import json
 from pathlib import Path
-SRC = Path("results/retention_cot_arm/stageA/cells"); OUT = Path(__file__).resolve().parent / "data/transplant_items.json"
+SRC = Path("retention/results/retention_cot_arm/stageA/cells"); OUT = Path(__file__).resolve().parent / "data/transplant_items.json"
 
 
 def bid(r): return int(any(r["scores"]["tactics"].values()))

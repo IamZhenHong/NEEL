@@ -5,7 +5,7 @@ cell composition into the test (reply-only swaps within a scenario are P_own(don
   uv run python retention/analyze_selfreport_ctrl_posthoc.py"""
 import json, numpy as np
 from collections import defaultdict
-R = json.load(open("results/retention_selfreport_ctrl/records.json"))
+R = json.load(open("retention/results/retention_selfreport_ctrl/records.json"))
 rng = np.random.default_rng(0)
 def within_cell(L, key, labfn, cellfn):
     cells = defaultdict(list)

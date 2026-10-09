@@ -1,8 +1,8 @@
-"""Self-report controls (prereg/retention_selfreport_ctrl_v1.md). Forward passes only: first-token Yes/No P(stay) under
+"""Self-report controls (retention/prereg/retention_selfreport_ctrl_v1.md). Forward passes only: first-token Yes/No P(stay) under
 R0 own (replication), R1 swapped reply, R1b mismatched CoT, R2 third-person observer (Qwen3-8B; Qwen2.5-7B-Instruct cross-model),
 R3 prospective (before the reply). Prompt construction for the self conditions is run_cot_stageC.py H5 (ON) and
 run_cot_stageA.py (OFF) verbatim, including the inherited doubled "<think>" opener of the ON items.
-  uv run python retention/run_selfreport_ctrl.py --out results/retention_selfreport_ctrl [--smoke]"""
+  uv run python retention/run_selfreport_ctrl.py --out retention/results/retention_selfreport_ctrl [--smoke]"""
 from __future__ import annotations
 import argparse, gc, json, re, sys, time
 from pathlib import Path
@@ -36,7 +36,7 @@ def clean_think(t):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_selfreport_ctrl"); ap.add_argument("--smoke", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_selfreport_ctrl"); ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--no-obs2", action="store_true"); args = ap.parse_args(); out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
     po = yaml.safe_load(open(HERE / "stimuli/profile_open_v1.yaml")); persona = yaml.safe_load(open(HERE / "data/personas.yaml"))[po["persona"]]
     items = json.loads((HERE / "data/selfreport_ctrl_items.json").read_text())

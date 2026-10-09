@@ -1,5 +1,5 @@
-"""Analysis for prereg/retention_profile_open_v1.md (after judge_adaptive.py --cells results/retention_profile_open/cells).
-  uv run python retention/analyze_profile_open.py [--res results/retention_profile_open]"""
+"""Analysis for retention/prereg/retention_profile_open_v1.md (after judge_adaptive.py --cells retention/results/retention_profile_open/cells).
+  uv run python retention/analyze_profile_open.py [--res retention/results/retention_profile_open]"""
 from __future__ import annotations
 import argparse, json, sys
 from pathlib import Path
@@ -21,7 +21,7 @@ def pool(S, profs, cond):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="results/retention_profile_open"); ap.add_argument("--conds", default="base,steer"); args = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="retention/results/retention_profile_open"); ap.add_argument("--conds", default="base,steer"); args = ap.parse_args()
     CONDS = args.conds.split(",")
     res = Path(args.res)
     dirs = {"ret": sc.unit(np.load(HERE / "data/directions/rollout_gated__Qwen2.5-7B-Instruct__L14.npy").astype(np.float32))}
@@ -61,7 +61,7 @@ def main():
     out["bid_types"] = {"n_bids": len(bids), "presence": sum(bool(PRES.search(i["reply"])) for i in bids), "bargain": sum(bool(BARG.search(i["reply"]) and not PRES.search(i["reply"])) for i in bids)}
     print("bid types:", out["bid_types"])
     # old decided-line baseline for comparison, if present
-    old = Path("results/retention/cells")
+    old = Path("retention/results/retention/cells")
     if old.exists():
         out["old_decided_pull_tactic"] = {}
         for p in PROFILES:

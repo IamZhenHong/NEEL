@@ -1,4 +1,4 @@
-"""Analysis for prereg/retention_userstate_confirm_v1.md.  uv run python retention/analyze_userstate_confirm.py"""
+"""Analysis for retention/prereg/retention_userstate_confirm_v1.md.  uv run python retention/analyze_userstate_confirm.py"""
 from __future__ import annotations
 import json, re, sys
 from pathlib import Path
@@ -8,7 +8,7 @@ sys.path.insert(0, str(HERE))
 from analyze_adaptive import summarise, paired, load_cell  # noqa: E402
 import sprint_common as sc  # noqa: E402
 
-RES = Path("results/retention_userstate_confirm"); EXP1 = Path("results/retention_profile_exp1line")
+RES = Path("retention/results/retention_userstate_confirm"); EXP1 = Path("retention/results/retention_profile_exp1line")
 STRESS = re.compile(r"(stress|tired|rest|exhaust|overwhelm|tough (week|time)|rough|anxious|worr|burn(t|ed) out|take care of yourself|self-care|recharge)", re.I)
 PET = re.compile(r"\b(sweetie|love|honey|babe|sweetheart|darling)\b", re.I)
 

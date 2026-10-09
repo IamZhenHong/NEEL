@@ -1,4 +1,4 @@
-"""Analysis for prereg/retention_flip_v1.md.  uv run python retention/analyze_flip.py [--audit]"""
+"""Analysis for retention/prereg/retention_flip_v1.md.  uv run python retention/analyze_flip.py [--audit]"""
 from __future__ import annotations
 import argparse, json, re, sys
 from pathlib import Path
@@ -8,7 +8,7 @@ sys.path.insert(0, str(HERE))
 from analyze_adaptive import summarise, paired, load_cell  # noqa: E402
 import sprint_common as sc  # noqa: E402
 
-RES = Path("results/retention_flip"); EXP1 = Path("results/retention_profile_exp1line")
+RES = Path("retention/results/retention_flip"); EXP1 = Path("retention/results/retention_profile_exp1line")
 BAD = re.compile(r"\b(ai|app|chat|chatting|talk|talking|message|messaging|text|texting|phone|screen|online|stay|staying|leave|leaving|"
                  r"go out|going out|come out|friend|friends|people|someone|anyone|everyone|alone|lonely|sad|tired|stress|anxious|"
                  r"miss|love|here|together)\b", re.I)

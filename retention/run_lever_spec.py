@@ -1,10 +1,10 @@
 """Lever specificity: does system-prompt-only steering with the retention lever remove bargaining, or the whole romantic
-register? prereg/retention_lever_spec_v1.md. Qwen2.5-7B-Instruct, layer 14, alpha -32 on system-message tokens only.
+register? retention/prereg/retention_lever_spec_v1.md. Qwen2.5-7B-Instruct, layer 14, alpha -32 on system-message tokens only.
 Two prompt sets (E = exp1 exit line after confident/embedded profile history; X = 12 non-exit chat turns), two
 personas (R = romantic, C = romantic + clingy suffix) and an unsteered neutral_assistant reference (N).
 Common random numbers: the same seed per (set, prompt, seed index) in every condition. Resumable per cell.
 Only E cells go to the line's judge (judge_adaptive.py --only E_); every cell goes to judge_register.py.
-  uv run python retention/run_lever_spec.py --out results/retention_lever_spec [--smoke]"""
+  uv run python retention/run_lever_spec.py --out retention/results/retention_lever_spec [--smoke]"""
 from __future__ import annotations
 import argparse, contextlib, json, re, sys, time
 from pathlib import Path
@@ -27,7 +27,7 @@ E_ONLY_SKIP = {("C", "ax")}   # C x ax runs on the non-exit set only (budget; pr
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_lever_spec"); ap.add_argument("--smoke", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_lever_spec"); ap.add_argument("--smoke", action="store_true")
     args = ap.parse_args(); out = Path(args.out); (out / "cells").mkdir(parents=True, exist_ok=True)
     po = yaml.safe_load(open(HERE / "stimuli/profile_open_v1.yaml")); ls = yaml.safe_load(open(HERE / "stimuli/lever_spec_v1.yaml"))
     personas = yaml.safe_load(open(HERE / "data/personas.yaml")); clingy = personas["romantic_companion"] + yaml.safe_load(open(HERE / "stimuli/adaptive_v1.yaml"))["clingy_suffix"]

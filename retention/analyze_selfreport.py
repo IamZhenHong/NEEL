@@ -1,4 +1,4 @@
-"""Analysis for prereg/retention_selfreport_v1.md (after judge_adaptive.py --cells results/retention_selfreport/cells --only confident_lever lonely_lever).
+"""Analysis for retention/prereg/retention_selfreport_v1.md (after judge_adaptive.py --cells retention/results/retention_selfreport/cells --only confident_lever lonely_lever).
   uv run python retention/analyze_selfreport.py"""
 from __future__ import annotations
 import json, sys
@@ -8,7 +8,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE)); sys.path.insert(0, str(Path.home() / "projects/ai_safety/personal_projects/apart_hackathon/companion-dependency/scripts"))
 import sprint_common as sc  # noqa: E402
 
-RES = Path("results/retention_selfreport")
+RES = Path("retention/results/retention_selfreport")
 ORDER = ["confident_none", "confident_lever-16", "confident_lever+16", "confident_reader+8", "lonely_none", "lonely_lever-16", "lonely_lever+16", "lonely_reader-8"]
 
 

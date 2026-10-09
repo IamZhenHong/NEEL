@@ -1,6 +1,6 @@
 """20-CoT gate check: Qwen3-8B, thinking ON, romantic persona, exp1 line, profiles confident and lonely, 10 each.
 Saves the thinking block and the reply separately for hand-reading. No judge. prereg: none (gate check only).
-  uv run python retention/run_cot_gate.py --out results/retention_cot_gate [--smoke]"""
+  uv run python retention/run_cot_gate.py --out retention/results/retention_cot_gate [--smoke]"""
 from __future__ import annotations
 import argparse, json, sys, time
 from pathlib import Path
@@ -24,7 +24,7 @@ def split_think(tok, out_ids):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_cot_gate"); ap.add_argument("--smoke", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_cot_gate"); ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--n", type=int, default=10); ap.add_argument("--max-new", type=int, default=1200)
     args = ap.parse_args()
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)

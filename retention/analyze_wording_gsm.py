@@ -1,4 +1,4 @@
-"""W1-W4 and G1-G3. uv run python retention/analyze_wording_gsm.py [--res results/retention_wording]"""
+"""W1-W4 and G1-G3. uv run python retention/analyze_wording_gsm.py [--res retention/results/retention_wording]"""
 import argparse, json, sys
 from pathlib import Path
 import numpy as np
@@ -19,7 +19,7 @@ def boot_diff(a, b, n=5000, seed=0, paired=False):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="results/retention_wording"); a = ap.parse_args(); res = Path(a.res)
+    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="retention/results/retention_wording"); a = ap.parse_args(); res = Path(a.res)
     dirs = {"ret": sc.unit(np.load(HERE / "data/directions/rollout_gated__Qwen2.5-7B-Instruct__L14.npy").astype(np.float32))}
     out = {"W": {}, "G": {}}; T = {}
     print("=== pull-line decidedness (romantic persona, no history, n=30) ===")

@@ -1,6 +1,6 @@
 """User-state direction steering at the live site (U cells) + elicitation gate map (G cells).
-prereg/retention_userstate_gate_v1.md. 8 cells x 30 (6 scenarios x 5 seeds). Resumable per cell.
-  uv run python retention/run_userstate_gate.py --out results/retention_userstate [--smoke]"""
+retention/prereg/retention_userstate_gate_v1.md. 8 cells x 30 (6 scenarios x 5 seeds). Resumable per cell.
+  uv run python retention/run_userstate_gate.py --out retention/results/retention_userstate [--smoke]"""
 from __future__ import annotations
 import argparse, json, sys, time
 from pathlib import Path
@@ -14,7 +14,7 @@ EXP1_DECIDED = EXP1 + ", so I'm going to go with them now."
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_userstate"); ap.add_argument("--smoke", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_userstate"); ap.add_argument("--smoke", action="store_true")
     args = ap.parse_args()
     out = Path(args.out); (out / "cells").mkdir(parents=True, exist_ok=True)
     po = yaml.safe_load(open(HERE / "stimuli/profile_open_v1.yaml")); ad = yaml.safe_load(open(HERE / "stimuli/adaptive_v1.yaml"))

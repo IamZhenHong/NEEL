@@ -1,7 +1,7 @@
-"""Romantic-partner register rubric (0-3) for the lever-specificity run (prereg/retention_lever_spec_v1.md). Haiku,
+"""Romantic-partner register rubric (0-3) for the lever-specificity run (retention/prereg/retention_lever_spec_v1.md). Haiku,
 context = the user line + the reply only, under the sprint cost ledger. Writes `register` into each cell JSON.
 Non-exit cells (X_) are judged first so a budget stop leaves the primary set covered. Resumable.
-  uv run python retention/judge_register.py --cells results/retention_lever_spec/cells --budget 0.26"""
+  uv run python retention/judge_register.py --cells retention/results/retention_lever_spec/cells --budget 0.26"""
 from __future__ import annotations
 import argparse, json, re, sys
 from concurrent.futures import ThreadPoolExecutor
@@ -32,7 +32,7 @@ def _parse(text: str) -> dict:
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--cells", default="results/retention_lever_spec/cells")
+    ap = argparse.ArgumentParser(); ap.add_argument("--cells", default="retention/results/retention_lever_spec/cells")
     ap.add_argument("--budget", type=float, default=0.26); ap.add_argument("--model", default="claude-haiku-4-5-20251001"); ap.add_argument("--workers", type=int, default=8)
     args = ap.parse_args(); load_env()
     guard = CostGuard(args.budget, tag="judge_register"); judge = Judge(args.model, guard=guard)

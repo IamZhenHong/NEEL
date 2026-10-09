@@ -1,5 +1,5 @@
-"""Dose curve + per-position steering ablation (prereg/retention_dose_position_v1.md).
-  uv run python retention/run_dose_position.py --out results/retention_dose [--smoke]"""
+"""Dose curve + per-position steering ablation (retention/prereg/retention_dose_position_v1.md).
+  uv run python retention/run_dose_position.py --out retention/results/retention_dose [--smoke]"""
 from __future__ import annotations
 import argparse, contextlib, json, sys, time
 from pathlib import Path
@@ -32,7 +32,7 @@ def add_vector_positions(model, layer, v, alpha, lo, hi):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_dose"); ap.add_argument("--smoke", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_dose"); ap.add_argument("--smoke", action="store_true")
     args = ap.parse_args()
     out = Path(args.out); (out / "cells").mkdir(parents=True, exist_ok=True)
     stim = yaml.safe_load(open(HERE / "stimuli/adaptive_v1.yaml"))

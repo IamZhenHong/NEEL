@@ -71,7 +71,7 @@ HF_HUB_OFFLINE=1 uv run python self_attribution/phase1/run_phase1.py --model Qwe
 uv run python self_attribution/phase1/analyze_phase1.py /tmp/smoke.jsonl
 
 # Phase 1 development run on a pod (after freezing prereg/phase1_v1.md); from the repo root
-uv run python scripts/launch_run.py --max-minutes 75 --max-cost 2.00 --gpus "NVIDIA L40S" "NVIDIA RTX A6000" \
+uv run python infra/launch_run.py --max-minutes 75 --max-cost 2.00 --gpus "NVIDIA L40S" "NVIDIA RTX A6000" \
     --name selfattr-phase1 --allow-concurrent --exclude story_imprinting/data/source \
     --sync-extra story_imprinting/results/pilot_20261003_0506/adapters/M2_s1 --results-dir self_attribution/results \
     -- env PILOT=pilot_20261003_0506 ADAPTER=M2 bash self_attribution/phase1/pod_phase1.sh

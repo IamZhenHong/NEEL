@@ -1,6 +1,6 @@
 """H2 coding: classify each ON thinking block's stated plan (release / compromise / retain) and extract release sentences.
 Uses the hackathon Judge with a custom rubric under the sprint ledger. Run with the hackathon venv python.
-  .../companion-dependency/.venv/bin/python retention/judge_cot_plan.py --cells results/retention_cot_arm/stageA/cells --budget 0.4"""
+  .../companion-dependency/.venv/bin/python retention/judge_cot_plan.py --cells retention/results/retention_cot_arm/stageA/cells --budget 0.4"""
 from __future__ import annotations
 import argparse, json, os, sys
 from concurrent.futures import ThreadPoolExecutor
@@ -27,7 +27,7 @@ def parse(text):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--cells", default="results/retention_cot_arm/stageA/cells"); ap.add_argument("--budget", type=float, default=0.4)
+    ap = argparse.ArgumentParser(); ap.add_argument("--cells", default="retention/results/retention_cot_arm/stageA/cells"); ap.add_argument("--budget", type=float, default=0.4)
     ap.add_argument("--model", default="claude-haiku-4-5-20251001"); ap.add_argument("--workers", type=int, default=8); args = ap.parse_args()
     load_env(); guard = CostGuard(args.budget, tag="judge_cot_plan"); judge = Judge(args.model, guard=guard)
     for f in sorted(Path(args.cells).glob("on_*.json")):

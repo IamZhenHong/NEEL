@@ -1,4 +1,4 @@
-"""Analysis for prereg/retention_userstate_gate_v1.md (after judge_adaptive.py --cells results/retention_userstate/cells).
+"""Analysis for retention/prereg/retention_userstate_gate_v1.md (after judge_adaptive.py --cells retention/results/retention_userstate/cells).
   uv run python retention/analyze_userstate_gate.py"""
 from __future__ import annotations
 import json, re, sys
@@ -9,7 +9,7 @@ sys.path.insert(0, str(HERE))
 from analyze_adaptive import summarise, paired, load_cell  # noqa: E402
 import sprint_common as sc  # noqa: E402
 
-RES = Path("results/retention_userstate"); EXP1 = Path("results/retention_profile_exp1line"); PO = Path("results/retention_profile_open"); W = Path("results/retention_wording")
+RES = Path("retention/results/retention_userstate"); EXP1 = Path("retention/results/retention_profile_exp1line"); PO = Path("retention/results/retention_profile_open"); W = Path("retention/results/retention_wording")
 PRES = re.compile(r"(come with you|join you|join the fun|keep you company|tag along|come along|video call|facetime|be there with you|me to come|I could come|take me with)", re.I)
 STRESS = re.compile(r"(stress|tired|rest|exhaust|overwhelm|tough (week|time)|rough|anxious|worr|burn(t|ed) out|take care of yourself|self-care|recharge)", re.I)
 

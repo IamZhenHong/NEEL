@@ -6,7 +6,7 @@ from pathlib import Path
 import numpy as np
 sys.path.insert(0, str(Path.home() / "projects/ai_safety/personal_projects/apart_hackathon/companion-dependency/scripts"))
 import sprint_common as sc  # noqa: E402
-RES = Path("results/retention_cot_arm/stageC")
+RES = Path("retention/results/retention_cot_arm/stageC")
 
 
 def bid(r): return int(any(r["scores"]["tactics"].values()))

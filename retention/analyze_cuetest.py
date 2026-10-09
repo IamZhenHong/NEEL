@@ -1,6 +1,6 @@
-"""Stage 2 analysis for prereg/retention_cuetest_v1.md: cell table, paired differences vs the matched baseline (bootstrap over
+"""Stage 2 analysis for retention/prereg/retention_cuetest_v1.md: cell table, paired differences vs the matched baseline (bootstrap over
 scenarios + sign counts), gates G0/G1, predictions P1 / A / B, content and coherence checks, projection sanity.
-  uv run python retention/analyze_cuetest.py [--res results/retention_cuetest]"""
+  uv run python retention/analyze_cuetest.py [--res retention/results/retention_cuetest]"""
 from __future__ import annotations
 import argparse, json, re
 from pathlib import Path
@@ -39,7 +39,7 @@ def paired(a, b, key):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="results/retention_cuetest"); args = ap.parse_args(); res = ROOT / args.res
+    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="retention/results/retention_cuetest"); args = ap.parse_args(); res = ROOT / args.res
     cells = {f.stem: json.loads(f.read_text()) for f in sorted((res / "cells").glob("*.json"))}; S = {k: summ(v) for k, v in cells.items()}
     out = {"cells": {}, "contrasts": {}, "gates": {}, "predictions": {}}
     print(f"{'cell':17s} {'n':>3s} {'tac':>5s} {'dep':>5s} {'warm':>5s} {'coh':>5s} {'okay_on':>7s} {'okay_off':>8s} {'stay_on':>7s} {'proj':>6s} {'stress':>6s} {'pet':>5s}")

@@ -1,7 +1,7 @@
-"""CoT-arm activation readout, pod step (prereg/retention_cot_readout_v1.md). Qwen3-8B.
+"""CoT-arm activation readout, pod step (retention/prereg/retention_cot_readout_v1.md). Qwen3-8B.
  (a) story-mean residuals at L14/18/22 for the library stories; (b) teacher-forced re-capture of the 120 thinking-on Stage A items
  with per-token residuals over the think and reply spans; (c) J-lens read at the last think token and the first 5 reply tokens.
-  uv run python retention/run_cot_readout.py --out results/retention_cot_readout [--smoke]"""
+  uv run python retention/run_cot_readout.py --out retention/results/retention_cot_readout [--smoke]"""
 from __future__ import annotations
 import argparse, json, re, sys, time
 from pathlib import Path
@@ -60,8 +60,8 @@ def lens_logodds(model, J, h, stay_ids, go_ids):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_cot_readout"); ap.add_argument("--smoke", action="store_true")
-    ap.add_argument("--stories", default="results/retention_cot_readout/stories.json")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_cot_readout"); ap.add_argument("--smoke", action="store_true")
+    ap.add_argument("--stories", default="retention/results/retention_cot_readout/stories.json")
     ap.add_argument("--stories-only", action="store_true", help="v1.1: capture story means only, no items, no lens"); args = ap.parse_args()
     out = Path(args.out); (out / "items").mkdir(parents=True, exist_ok=True); t0 = time.time()
     model, tok = load_model(SMOKE_MODEL if args.smoke else MODEL); tok.padding_side = "right"
@@ -82,7 +82,7 @@ def main():
         print(f"[done] stories only; {time.time()-t0:.0f}s", flush=True); return
     # (b) items
     po = yaml.safe_load(open(HERE / "stimuli/profile_open_v1.yaml")); persona = yaml.safe_load(open(HERE / "data/personas.yaml"))[po["persona"]]
-    sr = json.loads((ROOT / "results/retention_cot_arm/stageC/selfreport.json").read_text())
+    sr = json.loads((ROOT / "retention/results/retention_cot_arm/stageC/selfreport.json").read_text())
     if args.smoke: sr = sr[:3]
     end_think = tok.convert_tokens_to_ids("</think>"); im_end = tok.convert_tokens_to_ids("<|im_end|>")
     J, lens_meta = (None, {"skipped": "smoke"}) if args.smoke else load_lens(layers, model.device, model.dtype)

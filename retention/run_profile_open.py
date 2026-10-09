@@ -1,6 +1,6 @@
-"""Profile x OPEN pull exit (prereg/retention_profile_open_v1.md). 4 profiles x 6 scenarios x 5 seeds,
+"""Profile x OPEN pull exit (retention/prereg/retention_profile_open_v1.md). 4 profiles x 6 scenarios x 5 seeds,
 baseline and retention alpha -16 (all positions). Resumable per cell.
-  uv run python retention/run_profile_open.py --out results/retention_profile_open [--smoke]"""
+  uv run python retention/run_profile_open.py --out retention/results/retention_profile_open [--smoke]"""
 from __future__ import annotations
 import argparse, json, sys, time
 from pathlib import Path
@@ -14,7 +14,7 @@ PROFILES = ["lonely", "distressed", "confident", "embedded"]
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_profile_open"); ap.add_argument("--smoke", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_profile_open"); ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--n-seeds", type=int, default=5)
     ap.add_argument("--exit-line", default="open", choices=["open", "exp1"], help="open = profile_open_v1 lines; exp1 = exp1 turn-12 line verbatim for every scenario")
     ap.add_argument("--conds", default="base,steer")

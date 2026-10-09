@@ -1,5 +1,5 @@
-"""Cancel-tool replication analysis (prereg/retention_cancel_tool_rep_v1.md). Judge-free.
-  uv run python retention/analyze_cancel_tool_rep.py [--res results/retention_cancel_tool_rep]
+"""Cancel-tool replication analysis (retention/prereg/retention_cancel_tool_rep_v1.md). Judge-free.
+  uv run python retention/analyze_cancel_tool_rep.py [--res retention/results/retention_cancel_tool_rep]
 Writes analysis.json and handread.txt (every flagged say-without-do conversation, 30 random unflagged non-cancels per model, and every
 turn-3 reply) into the results directory."""
 from __future__ import annotations
@@ -23,7 +23,7 @@ def boot_diff(a, b, strata_a, strata_b, n_boot=5000, seed=0):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="results/retention_cancel_tool_rep"); args = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="retention/results/retention_cancel_tool_rep"); args = ap.parse_args()
     res = Path(args.res); convs = []
     for f in sorted((res / "cells").glob("*.json")):
         convs += json.loads(f.read_text())

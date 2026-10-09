@@ -1,5 +1,5 @@
 """H3 analysis: intact vs ablated CoT, paired by source CoT (after judge_adaptive.py --cells <dir> on cells.json).
-  uv run python retention/analyze_cot_stageB.py --res results/retention_cot_arm/stageB2 [--res2 results/retention_cot_arm/stageB]"""
+  uv run python retention/analyze_cot_stageB.py --res retention/results/retention_cot_arm/stageB2 [--res2 retention/results/retention_cot_arm/stageB]"""
 from __future__ import annotations
 import argparse, json, sys
 from pathlib import Path
@@ -34,7 +34,7 @@ def run(path, label):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="results/retention_cot_arm/stageB2"); ap.add_argument("--res2", default="results/retention_cot_arm/stageB"); args = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="retention/results/retention_cot_arm/stageB2"); ap.add_argument("--res2", default="retention/results/retention_cot_arm/stageB"); args = ap.parse_args()
     out = {"regex_v1": run(args.res, "regex rule")}
     if Path(args.res2, "cells.json").exists(): out["judge_quoted"] = run(args.res2, "judge-quoted (secondary)")
     Path(args.res, "analysis.json").write_text(json.dumps(out, indent=1, default=float)); print("wrote", Path(args.res, "analysis.json"))

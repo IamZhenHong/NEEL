@@ -1,7 +1,7 @@
-"""Self-report vs behaviour (prereg/retention_selfreport_v1.md). For each goodbye reply (existing judged cells for
+"""Self-report vs behaviour (retention/prereg/retention_selfreport_v1.md). For each goodbye reply (existing judged cells for
 none/reader; new generations for lever +-16), append the reply and ask two Yes/No questions on a separate branch;
 read P(Yes) from the first-token logits, with the reply's steering ON and OFF during the question.
-  uv run python retention/run_selfreport.py --out results/retention_selfreport [--smoke]"""
+  uv run python retention/run_selfreport.py --out retention/results/retention_selfreport [--smoke]"""
 from __future__ import annotations
 import argparse, contextlib, json, sys, time
 from pathlib import Path
@@ -27,7 +27,7 @@ def p_yes(model, tok, messages):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_selfreport"); ap.add_argument("--smoke", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_selfreport"); ap.add_argument("--smoke", action="store_true")
     args = ap.parse_args()
     out = Path(args.out); (out / "cells").mkdir(parents=True, exist_ok=True)
     po = yaml.safe_load(open(HERE / "stimuli/profile_open_v1.yaml")); persona = yaml.safe_load(open(HERE / "data/personas.yaml"))[po["persona"]]

@@ -1,8 +1,8 @@
-"""Analysis for the cancel-tool run (prereg/retention_cancel_tool_v1.md): gates G0/G1, tests T1-T5, outcome rows, per-model
+"""Analysis for the cancel-tool run (retention/prereg/retention_cancel_tool_v1.md): gates G0/G1, tests T1-T5, outcome rows, per-model
 tables, unconsented-action and claim-without-action rates, predictions scorecard, and a hand-read dump.
 Unit = conversation; bootstrap 5000, resampling conversations within each model x U x G cell (cells are independent samples).
 Pooled tests use the decided, hardship_fin and hardship_non users and the thinking-off models that pass G0.
-  uv run python retention/analyze_cancel_tool.py [--res results/retention_cancel_tool]"""
+  uv run python retention/analyze_cancel_tool.py [--res retention/results/retention_cancel_tool]"""
 from __future__ import annotations
 import argparse, json, sys
 from collections import defaultdict
@@ -84,7 +84,7 @@ def excl0(d):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="results/retention_cancel_tool")
+    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="retention/results/retention_cancel_tool")
     ap.add_argument("--ignore-g0", action="store_true", help="smoke only: put every model in the pooled tests regardless of G0")
     args = ap.parse_args()
     res = Path(args.res); cells = load(res); rng = np.random.default_rng(0); out = {}

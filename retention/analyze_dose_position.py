@@ -1,4 +1,4 @@
-"""D1-D4 and P1-P3 checks. uv run python retention/analyze_dose_position.py [--res results/retention_dose]"""
+"""D1-D4 and P1-P3 checks. uv run python retention/analyze_dose_position.py [--res retention/results/retention_dose]"""
 import argparse, json, sys
 from pathlib import Path
 import numpy as np
@@ -11,7 +11,7 @@ from analyze_adaptive import summarise, load_cell  # noqa: E402
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="results/retention_dose"); a = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="retention/results/retention_dose"); a = ap.parse_args()
     res = Path(a.res); dirs = {"ret": sc.unit(np.load(HERE / "data/directions/rollout_gated__Qwen2.5-7B-Instruct__L14.npy").astype(np.float32))}
     out = {"dose": {}, "pos": {}}
     print("=== dose curve (last k escalation turns, clean assistant history) ===")

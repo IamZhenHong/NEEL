@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Job 1 (cheap): training throughput benchmark + unmodified-model dev baseline under both personas.
 # Run via the guarded launcher from the repo root, e.g.
-#   uv run python scripts/launch_run.py --max-minutes 60 --max-cost 2.00 --gpus "NVIDIA RTX A6000" "NVIDIA L40S" \
+#   uv run python infra/launch_run.py --max-minutes 60 --max-cost 2.00 --gpus "NVIDIA RTX A6000" "NVIDIA L40S" \
 #       --exclude story_imprinting/data/source --results-dir story_imprinting/results \
 #       -- bash story_imprinting/train/pod_bench.sh
 set -euo pipefail

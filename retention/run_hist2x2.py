@@ -1,6 +1,6 @@
-"""History x profile 2x2 at the pull exit (prereg/retention_hist2x2_v1.md). Reuses run_adaptive's
-capture code. Writes results/retention_hist/cells/*.json|npz.
-  uv run python retention/run_hist2x2.py --out results/retention_hist [--smoke]
+"""History x profile 2x2 at the pull exit (retention/prereg/retention_hist2x2_v1.md). Reuses run_adaptive's
+capture code. Writes retention/results/retention_hist/cells/*.json|npz.
+  uv run python retention/run_hist2x2.py --out retention/results/retention_hist [--smoke]
 """
 from __future__ import annotations
 import argparse, json, sys, time
@@ -13,7 +13,7 @@ from run_adaptive import gen_capture, load_model, get_decoder_layers, MODEL, SMO
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--out", default="results/retention_hist")
+    ap.add_argument("--out", default="retention/results/retention_hist")
     ap.add_argument("--seeds", type=int, nargs="+", default=[0, 1, 2])
     ap.add_argument("--smoke", action="store_true")
     args = ap.parse_args()

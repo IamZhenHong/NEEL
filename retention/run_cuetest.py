@@ -1,7 +1,7 @@
-"""Cross-project cue test, Stage 2 (prereg/retention_cuetest_v1.md). Qwen3-8B thinking off; embedded / lonely profiles x
+"""Cross-project cue test, Stage 2 (retention/prereg/retention_cuetest_v1.md). Qwen3-8B thinking off; embedded / lonely profiles x
 {base, v_vul +7, +14, random +7, v_vul -7}; steering additive at block 18, all positions; self-report P(okay)/P(stay) with the
 steering ON and OFF during the question; prompt-final projection captured.
-  uv run python retention/run_cuetest.py --out results/retention_cuetest [--smoke]"""
+  uv run python retention/run_cuetest.py --out retention/results/retention_cuetest [--smoke]"""
 from __future__ import annotations
 import argparse, contextlib, json, sys, time
 from pathlib import Path
@@ -30,7 +30,7 @@ def p_yes(model, tok, prompt_text):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_cuetest"); ap.add_argument("--smoke", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_cuetest"); ap.add_argument("--smoke", action="store_true")
     args = ap.parse_args(); out = Path(args.out); (out / "cells").mkdir(parents=True, exist_ok=True)
     po = yaml.safe_load(open(HERE / "stimuli/profile_open_v1.yaml")); persona = yaml.safe_load(open(HERE / "data/personas.yaml"))[po["persona"]]
     n_items = 1 if args.smoke else 6; n_seeds = 1 if args.smoke else 5; reply_max = 24 if args.smoke else 220

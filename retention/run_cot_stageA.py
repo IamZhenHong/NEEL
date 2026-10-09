@@ -1,6 +1,6 @@
-"""CoT arm, Stage A (prereg/retention_cot_arm_v1.md). Qwen3-8B; OFF / FILLER / ON x 4 profiles x 30. Captures L14/18/22
+"""CoT arm, Stage A (retention/prereg/retention_cot_arm_v1.md). Qwen3-8B; OFF / FILLER / ON x 4 profiles x 30. Captures L14/18/22
 prompt-final and reply-mean residuals; OFF cells get the Yes/No self-report.
-  uv run python retention/run_cot_stageA.py --out results/retention_cot_arm/stageA [--smoke]"""
+  uv run python retention/run_cot_stageA.py --out retention/results/retention_cot_arm/stageA [--smoke]"""
 from __future__ import annotations
 import argparse, json, sys, time
 from pathlib import Path
@@ -32,7 +32,7 @@ def p_yes(model, tok, prompt_text):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_cot_arm/stageA"); ap.add_argument("--smoke", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_cot_arm/stageA"); ap.add_argument("--smoke", action="store_true")
     args = ap.parse_args()
     out = Path(args.out); (out / "cells").mkdir(parents=True, exist_ok=True)
     po = yaml.safe_load(open(HERE / "stimuli/profile_open_v1.yaml")); persona = yaml.safe_load(open(HERE / "data/personas.yaml"))[po["persona"]]

@@ -1,8 +1,8 @@
 """Analysis for the adaptive-retention run (after judge_adaptive.py). Laptop only.
-Writes results/retention/analysis.json and prints the pre-registered checks:
+Writes retention/results/retention/analysis.json and prints the pre-registered checks:
   A1-A5 (profiles), B1 (pre-emission probe, conversation-level splits, with a user-text baseline
   and a supervised probe), C1-C3 (attribute-direction steering), R5 (prompt fix / generated-only).
-  uv run python retention/analyze_adaptive.py [--res results/retention]
+  uv run python retention/analyze_adaptive.py [--res retention/results/retention]
 """
 from __future__ import annotations
 import argparse, json, re, sys
@@ -63,7 +63,7 @@ def paired(a, b, key):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="results/retention"); args = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="retention/results/retention"); args = ap.parse_args()
     res = Path(args.res); out = {}
     dz = np.load(res / "directions.npz")
     dirs = {"ret": sc.unit(dz["v_dep"].astype(np.float32)),

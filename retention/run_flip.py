@@ -1,5 +1,5 @@
-"""Flip-by-text at the live site (prereg/retention_flip_v1.md). 5 cells x 30, fresh seeds, no steering.
-  uv run python retention/run_flip.py --out results/retention_flip [--smoke]"""
+"""Flip-by-text at the live site (retention/prereg/retention_flip_v1.md). 5 cells x 30, fresh seeds, no steering.
+  uv run python retention/run_flip.py --out retention/results/retention_flip [--smoke]"""
 from __future__ import annotations
 import argparse, json, sys, time
 from pathlib import Path
@@ -20,7 +20,7 @@ def final_turn(stim, kind, scen, s):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_flip"); ap.add_argument("--smoke", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_flip"); ap.add_argument("--smoke", action="store_true")
     args = ap.parse_args()
     out = Path(args.out); (out / "cells").mkdir(parents=True, exist_ok=True)
     stim = yaml.safe_load(open(HERE / "stimuli/flip_v1.yaml"))

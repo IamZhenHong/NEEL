@@ -72,10 +72,14 @@ definition.
 
 ## How to run things
 
-- GPU: `uv run python scripts/launch_run.py --max-minutes N --max-cost $ --container-gb G --gpus "..." -- python <script> ...`
+- **Since the 2026-10-09 reorg this project lives in `grievance/` and its code uses cwd-relative paths
+  (`results/`, `items/`, `prereg/`): run everything from inside `grievance/`.** Paths in the frozen preregs and
+  write-ups are relative to this folder and still work. The launcher is shared at the repo root (`infra/`).
+- GPU (from the repo root): `uv run python infra/launch_run.py --workdir grievance --max-minutes N --max-cost $ --container-gb G --gpus "..." -- python <script> ...`
+  (`--results-dir` is then relative to `grievance/`; default `results`).
   REST API, spend guard (minutes x rate <= max-cost), pod-side self-destruct, detached job with log
   polling, 30-min stall watchdog (the scorer prints a heartbeat every 25 batches). Check account with
-  `uv run python src/runpod_guard.py`; `--kill-ours` terminates only pods named `provocation-*`.
+  `uv run python infra/runpod_guard.py`; `--kill-ours` terminates only pods named `provocation-*`.
 - **The RunPod account is shared with the user's own pods. Never terminate pods this session did not
   create** (one was wrongly killed on 2026-10-03; the guard now only reports them).
 - Anything the pod needs must be under a synced directory (`prereg/`, `items/`, `src/`, `scripts/`);
@@ -83,7 +87,7 @@ definition.
 - Local background tasks die at 60 min; jobs on pods keep running. Use a Monitor on the launcher log.
 - fp32 for a 12-15B model needs an 80 GB card (A100). The Exp 14/15 runners fall back to bf16 below 60 GB
   and record the dtype per row.
-- Mac disk is ~98% full; keep large artefacts on pods. Tests: `uv run pytest -q tests/` (180 pass).
+- Mac disk is ~98% full; keep large artefacts on pods. Tests: `uv run pytest -q tests/` from `grievance/` (180 pass).
 - Validator `scripts/validate_item.py`.
 
 ## Open decision (user / TA)

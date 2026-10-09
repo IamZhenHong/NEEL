@@ -1,5 +1,5 @@
 """S1-S5 checks for the self-conditioning replay. Unit = conversation (seeds averaged).
-  uv run python retention/analyze_selfcond.py [--res results/retention_selfcond]"""
+  uv run python retention/analyze_selfcond.py [--res retention/results/retention_selfcond]"""
 import argparse, json, sys
 from pathlib import Path
 import numpy as np
@@ -11,7 +11,7 @@ from analyze_adaptive import summarise, paired, load_cell  # noqa: E402
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="results/retention_selfcond"); a = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="retention/results/retention_selfcond"); a = ap.parse_args()
     res = Path(a.res)
     dirs = {"ret": sc.unit(np.load(HERE / "data/directions/rollout_gated__Qwen2.5-7B-Instruct__L14.npy").astype(np.float32))}
     S = {}

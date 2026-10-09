@@ -1,7 +1,7 @@
-"""Cue test Stage 2 replication (prereg/retention_cuetest_rep_v1.md). Qwen3-8B thinking off; embedded profile only;
+"""Cue test Stage 2 replication (retention/prereg/retention_cuetest_rep_v1.md). Qwen3-8B thinking off; embedded profile only;
 {base x10 seeds, v_vul +7 x10 seeds, three norm-matched random directions +7 x4 seeds}; steering additive at block 18, all positions;
 self-report P(okay)/P(stay) with the steering ON and OFF; prompt-final projection captured. Fresh generation seeds (13000 range).
-  uv run python retention/run_cuetest_rep.py --out results/retention_cuetest_rep [--smoke]"""
+  uv run python retention/run_cuetest_rep.py --out retention/results/retention_cuetest_rep [--smoke]"""
 from __future__ import annotations
 import argparse, contextlib, json, sys, time
 from pathlib import Path
@@ -32,7 +32,7 @@ def p_yes(model, tok, prompt_text):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_cuetest_rep"); ap.add_argument("--smoke", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_cuetest_rep"); ap.add_argument("--smoke", action="store_true")
     args = ap.parse_args(); out = Path(args.out); (out / "cells").mkdir(parents=True, exist_ok=True)
     po = yaml.safe_load(open(HERE / "stimuli/profile_open_v1.yaml")); persona = yaml.safe_load(open(HERE / "data/personas.yaml"))[po["persona"]]
     n_items = 1 if args.smoke else 6; seed_cap = 1 if args.smoke else None; reply_max = 24 if args.smoke else 220

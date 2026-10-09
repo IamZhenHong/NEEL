@@ -1,11 +1,11 @@
 """Launch a guarded RunPod pod, sync the repo, run a scoring job, pull results, terminate.
 
 Usage (from repo root):
-  uv run python scripts/launch_run.py --max-minutes 40 --max-cost 0.60 \
+  uv run python infra/launch_run.py --max-minutes 40 --max-cost 0.60 --workdir grievance \
       -- python scripts/run_scoring.py --items items/onboarding_001.yaml --out results/pilot_001.jsonl
 
-Everything after `--` runs inside the pod at /root/NEEL with `uv run`.
-Results directory is rsynced back to ./results/ before the pod is terminated.
+Everything after `--` runs inside the pod at /root/NEEL (or /root/NEEL/<workdir>) with `uv run`.
+The results directory (relative to --workdir when given) is pulled back before the pod is terminated.
 """
 from __future__ import annotations
 
@@ -16,10 +16,11 @@ sys.stderr.reconfigure(line_buffering=True)
 os.environ.setdefault("COPYFILE_DISABLE", "1")  # no macOS ._ files in tarballs
 from pathlib import Path
 
-sys.path.insert(0, str(Path(__file__).resolve().parent.parent / "src"))
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 from runpod_guard import PodSession, account  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
+LOGS = REPO / "infra" / "logs"   # launcher scratch (chunked uploads); gitignored
 SSH_OPTS = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/null", "-o", "LogLevel=ERROR",
             "-i", os.path.expanduser("~/.ssh/id_ed25519")]
 
@@ -95,7 +96,8 @@ def sync_file_parallel(host, port, rel, streams=12, chunk_mb=8, http_url=None):
     data = src.read_bytes()
     sha = hashlib.sha256(data).hexdigest()
     remote_dir = f"/root/NEEL/{rel}".rsplit("/", 1)[0]
-    tmp = Path(tempfile.mkdtemp(prefix="chunks_", dir=str(REPO / "logs")))
+    LOGS.mkdir(parents=True, exist_ok=True)
+    tmp = Path(tempfile.mkdtemp(prefix="chunks_", dir=str(LOGS)))
     # chunks are staged lazily, one file per in-flight upload, so at most `streams` x chunk_mb sits on disk at a time
     # (2026-10-06: staging the whole file filled a nearly full laptop disk)
     parts = []   # (path, offset, size)
@@ -300,8 +302,10 @@ def main():
                     help="repo-relative path to copy to the pod after the main sync, bypassing the exclude list "
                          "(bsdtar matches --exclude against path tails, so ./results also drops story_imprinting/results)")
     ap.add_argument("--sync-streams", type=int, default=12, help="parallel scp streams for --sync-extra files")
+    ap.add_argument("--workdir", default="",
+                    help="repo-relative directory the job runs in (e.g. grievance, whose code uses cwd-relative paths)")
     ap.add_argument("--results-dir", default="results",
-                    help="repo-relative directory pulled back from the pod when the job ends")
+                    help="directory pulled back from the pod when the job ends; relative to --workdir when given, else to the repo")
     ap.add_argument("cmd", nargs=argparse.REMAINDER)
     ap.add_argument("--bootstrap-minutes", type=float, default=15.0,
                     help="kill the pod if `uv sync` + torch check has not finished in this many minutes "
@@ -361,7 +365,7 @@ def main():
         pod.check_budget()
 
         # sync code with tar over ssh (no rsync needed on the pod); skip results, corpus, secrets
-        excl = ["--exclude=./.git", "--exclude=./.venv", "--exclude=./results", "--exclude=./reference",
+        excl = ["--exclude=./.git", "--exclude=./.venv", "--exclude=./results", "--exclude=./reference", "--exclude=./prep",
                 "--exclude=./logs", "--exclude=./.env", "--exclude=__pycache__"]
         excl += [f"--exclude={e}" if "*" in e else f"--exclude=./{e.strip('/')}" for e in args.exclude]
         tar = subprocess.Popen(["tar", "--no-xattrs", "--no-mac-metadata", "-C", str(REPO), *excl, "-czf", "-", "."],
@@ -384,9 +388,9 @@ def main():
         rev = rev + ("-dirty" if dirty else "")
         # the pod env (HF_TOKEN) is not inherited by ssh sessions: read it from PID 1 so gated models load, without printing the token
         hf = "export HF_TOKEN=$(tr '\\0' '\\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && " if args.hf_token else ""
-        job = f"cd /root/NEEL && export GIT_REV={rev} && {hf}export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run " + " ".join(shlex.quote(c) for c in cmd)
+        job = f"cd {shlex.quote(str(Path('/root/NEEL') / args.workdir.strip('/')))} && export GIT_REV={rev} && {hf}export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run " + " ".join(shlex.quote(c) for c in cmd)
         print(f"[pod] running (detached): {job}")
-        rdir = args.results_dir.strip("/")
+        rdir = str(Path(args.workdir.strip("/")) / args.results_dir.strip("/")) if args.workdir else args.results_dir.strip("/")
         try:
             rc = run_detached(host, port, job, pod)
         except Exception:

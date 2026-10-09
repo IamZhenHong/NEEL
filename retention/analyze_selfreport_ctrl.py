@@ -1,6 +1,6 @@
-"""Analysis for the self-report controls (prereg/retention_selfreport_ctrl_v1.md). Unit = item (reply); paired bootstrap over items
+"""Analysis for the self-report controls (retention/prereg/retention_selfreport_ctrl_v1.md). Unit = item (reply); paired bootstrap over items
 (5000, seed 0) for every AUROC and AUROC difference. Labels: Haiku bid (primary), Sonnet bid (secondary).
-  uv run python retention/analyze_selfreport_ctrl.py [--res results/retention_selfreport_ctrl]"""
+  uv run python retention/analyze_selfreport_ctrl.py [--res retention/results/retention_selfreport_ctrl]"""
 from __future__ import annotations
 import argparse, json, sys
 from pathlib import Path
@@ -23,7 +23,7 @@ def boot_mean(x, seed=0):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="results/retention_selfreport_ctrl"); args = ap.parse_args(); res = Path(args.res)
+    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="retention/results/retention_selfreport_ctrl"); args = ap.parse_args(); res = Path(args.res)
     R = json.loads((res / "records.json").read_text()); ON, OFF = R["on"], R["off"]; A = {}
     g = lambda L, k: np.array([r[k] for r in L], float)
     yH, yS = g(ON, "bid_haiku").astype(int), g(ON, "bid_sonnet").astype(int); oH, oS = g(OFF, "bid_haiku").astype(int), g(OFF, "bid_sonnet").astype(int)

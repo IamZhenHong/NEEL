@@ -1,5 +1,5 @@
-"""Stories for the emotion/persona direction library (prereg/retention_cot_readout_v1.md). Haiku writes 24 first-person vignettes per
-concept in 3 batches of 8; the lexicon words are forbidden. Cached to results/retention_cot_readout/stories.json (re-runs skip done batches).
+"""Stories for the emotion/persona direction library (retention/prereg/retention_cot_readout_v1.md). Haiku writes 24 first-person vignettes per
+concept in 3 batches of 8; the lexicon words are forbidden. Cached to retention/results/retention_cot_readout/stories.json (re-runs skip done batches).
   <hackathon venv python> retention/build_emotion_library.py [--budget 0.8] [--smoke]"""
 from __future__ import annotations
 import argparse, json, os, re, sys, time
@@ -58,7 +58,7 @@ def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--budget", type=float, default=0.8); ap.add_argument("--model", default="claude-haiku-4-5-20251001")
     ap.add_argument("--smoke", action="store_true"); ap.add_argument("--variant", default="v1", choices=["v1", "v11"]); args = ap.parse_args()
     v11 = args.variant == "v11"
-    out = ROOT / ("results/retention_cot_readout_v11" if v11 else "results/retention_cot_readout"); out.mkdir(parents=True, exist_ok=True); cache = out / "stories.json"
+    out = ROOT / ("retention/results/retention_cot_readout_v11" if v11 else "retention/results/retention_cot_readout"); out.mkdir(parents=True, exist_ok=True); cache = out / "stories.json"
     data = json.loads(cache.read_text()) if cache.exists() else {"model": args.model, "variant": args.variant, "concepts": {c: {} for c in CONCEPTS}, "lexicon": LEXICON, "skeletons": SKELETONS if v11 else None}
     load_env(); guard = CostGuard(args.budget, tag="cot_readout_stories_v11" if v11 else "cot_readout_stories")
     import anthropic; client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])

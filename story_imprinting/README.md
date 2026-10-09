@@ -55,11 +55,11 @@ uv run python story_imprinting/data/build_manifests.py
 uv run pytest story_imprinting/eval/scoring -q
 
 # GPU job A: throughput benchmark + base-model baseline  (from repo root)
-uv run python scripts/launch_run.py --max-minutes 60 --max-cost 2.00 --gpus "NVIDIA RTX A6000" "NVIDIA L40S" \
+uv run python infra/launch_run.py --max-minutes 60 --max-cost 2.00 --gpus "NVIDIA RTX A6000" "NVIDIA L40S" \
     --exclude story_imprinting/data/source --results-dir story_imprinting/results -- bash story_imprinting/train/pod_bench.sh
 
 # GPU job B: the pre-registered pilot
-uv run python scripts/launch_run.py --max-minutes 240 --max-cost 8.00 --gpus "NVIDIA RTX A6000" "NVIDIA L40S" \
+uv run python infra/launch_run.py --max-minutes 240 --max-cost 8.00 --gpus "NVIDIA RTX A6000" "NVIDIA L40S" \
     --exclude story_imprinting/data/source --results-dir story_imprinting/results -- bash story_imprinting/train/pod_pilot.sh
 
 # summarise any set of response files

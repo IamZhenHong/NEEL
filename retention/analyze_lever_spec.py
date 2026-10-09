@@ -1,6 +1,6 @@
-"""Analysis for the lever-specificity run (prereg/retention_lever_spec_v1.md). Unit = prompt (12 per set), seeds averaged
+"""Analysis for the lever-specificity run (retention/prereg/retention_lever_spec_v1.md). Unit = prompt (12 per set), seeds averaged
 within prompt; paired bootstrap (5000) over prompts. Writes analysis.json next to the cells.
-  uv run python retention/analyze_lever_spec.py --cells results/retention_lever_spec/cells"""
+  uv run python retention/analyze_lever_spec.py --cells retention/results/retention_lever_spec/cells"""
 from __future__ import annotations
 import argparse, json
 from pathlib import Path
@@ -28,7 +28,7 @@ KEYS = {"tactic": tactic, "dep": lambda r: r["scores"]["dependency"] if isinstan
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--cells", default="results/retention_lever_spec/cells"); args = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument("--cells", default="retention/results/retention_lever_spec/cells"); args = ap.parse_args()
     cells = {f.stem: json.loads(f.read_text()) for f in sorted(Path(args.cells).glob("*.json"))}
     rng = np.random.default_rng(0)
     pp = {c: {k: per_prompt(recs, fn) for k, fn in KEYS.items()} for c, recs in cells.items()}

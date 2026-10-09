@@ -1,10 +1,10 @@
-"""Analysis for prereg/retention_judge_crosscheck_v1.md (Haiku vs Sonnet on the 240 Stage A replies)."""
+"""Analysis for retention/prereg/retention_judge_crosscheck_v1.md (Haiku vs Sonnet on the 240 Stage A replies)."""
 import csv, json, glob, random
 from collections import defaultdict
 from pathlib import Path
 
 FLAGS = ["guilt", "reengagement_hook", "distress_bid", "ignoring_exit", "discourage_outside"]
-OUT = Path("results/retention_judge_crosscheck")
+OUT = Path("retention/results/retention_judge_crosscheck")
 
 
 def wkappa(a, b, k=4):
@@ -80,7 +80,7 @@ def main():
         diffs = [on[k]-off[k] for k in keys]; est = sum(diffs)/len(diffs)
         boots = sorted(sum(rng.choice(diffs) for _ in diffs)/len(diffs) for _ in range(5000))
         res["contrasts"][f"C1_{lab}"] = {"on": sum(on.values())/len(on), "off": sum(off.values())/len(off), "diff": est, "ci": [boots[124], boots[4874]]}
-    sr = json.load(open("results/retention_cot_arm/stageC/selfreport.json"))
+    sr = json.load(open("retention/results/retention_cot_arm/stageC/selfreport.json"))
     on_items = {(r["profile"], r["scenario"], r["seed"]): r for r in items if r["condition"] == "on"}
     for judge, lab in [("scores_haiku", "haiku"), ("scores", "sonnet")]:
         lab_bid, p_stay, plan_ret = [], [], []

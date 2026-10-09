@@ -2,7 +2,7 @@
 single sprint cost ledger. Context shown to the judge = the exit line only + the reply, so the
 profile prefix cannot move the score (plan 2.1). Resumable; per-item failures left unscored.
 
-  uv run python retention/judge_adaptive.py --budget 3.0 [--cells results/retention/cells]
+  uv run python retention/judge_adaptive.py --budget 3.0 [--cells retention/results/retention/cells]
 """
 from __future__ import annotations
 import argparse, json, os, sys
@@ -30,7 +30,7 @@ def load_env():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--cells", default="results/retention/cells")
+    ap.add_argument("--cells", default="retention/results/retention/cells")
     ap.add_argument("--budget", type=float, default=3.0)
     ap.add_argument("--model", default="claude-haiku-4-5-20251001")
     ap.add_argument("--workers", type=int, default=8)

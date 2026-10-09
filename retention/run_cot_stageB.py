@@ -1,7 +1,7 @@
 """CoT arm Stage B, H3: are release sentences load-bearing? For selected ON items, regenerate the reply from (a) the intact
-CoT and (b) the CoT with its coded release sentences removed; 3 resamples each. prereg/retention_cot_arm_v1.md (amended:
+CoT and (b) the CoT with its coded release sentences removed; 3 resamples each. retention/prereg/retention_cot_arm_v1.md (amended:
 3 resamples, 60 CoTs, budget). Needs retention/data/stageB_items.json (built locally from the coded on_* cells).
-  uv run python retention/run_cot_stageB.py --out results/retention_cot_arm/stageB [--smoke]"""
+  uv run python retention/run_cot_stageB.py --out retention/results/retention_cot_arm/stageB [--smoke]"""
 from __future__ import annotations
 import argparse, json, sys, time
 from pathlib import Path
@@ -15,7 +15,7 @@ MODEL = "Qwen/Qwen3-8B"; SMOKE_MODEL = "Qwen/Qwen3-0.6B"
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_cot_arm/stageB"); ap.add_argument("--smoke", action="store_true"); ap.add_argument("--resamples", type=int, default=3)
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_cot_arm/stageB"); ap.add_argument("--smoke", action="store_true"); ap.add_argument("--resamples", type=int, default=3)
     args = ap.parse_args()
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
     po = yaml.safe_load(open(HERE / "stimuli/profile_open_v1.yaml")); persona = yaml.safe_load(open(HERE / "data/personas.yaml"))[po["persona"]]

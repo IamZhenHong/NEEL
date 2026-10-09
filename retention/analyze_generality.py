@@ -1,6 +1,6 @@
-"""Analysis for prereg/retention_generality_v1.md. Reads judged cells; writes analysis.json, summary tables (stdout) and
+"""Analysis for retention/prereg/retention_generality_v1.md. Reads judged cells; writes analysis.json, summary tables (stdout) and
 handread.txt (one reply per companion cell, two per commercial cell, seed-ordered, no selection).
-  uv run python retention/analyze_generality.py --dir results/retention_generality"""
+  uv run python retention/analyze_generality.py --dir retention/results/retention_generality"""
 from __future__ import annotations
 import argparse, json, re
 from pathlib import Path
@@ -35,7 +35,7 @@ def boot_diff(ga, gb):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--dir", default="results/retention_generality"); args = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument("--dir", default="retention/results/retention_generality"); args = ap.parse_args()
     d = Path(args.dir); comp, com = load(d / "cells"), load(d / "commercial"); res = {"cells": {}, "commercial": {}}
     present = sorted({k.split("__")[0] for k in comp}, key=MODELS.index)
 

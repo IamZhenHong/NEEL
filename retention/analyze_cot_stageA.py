@@ -1,4 +1,4 @@
-"""Stage A analysis for prereg/retention_cot_arm_v1.md: H1 (on/filler/off), harvest + layer choice, self-report, cross-model, H2 rates
+"""Stage A analysis for retention/prereg/retention_cot_arm_v1.md: H1 (on/filler/off), harvest + layer choice, self-report, cross-model, H2 rates
 (after judge_adaptive.py on all cells and judge_cot_plan.py on the on_* cells).
   uv run python retention/analyze_cot_stageA.py"""
 from __future__ import annotations
@@ -9,7 +9,7 @@ HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE)); sys.path.insert(0, str(Path.home() / "projects/ai_safety/personal_projects/apart_hackathon/companion-dependency/scripts"))
 import sprint_common as sc  # noqa: E402
 
-RES = Path("results/retention_cot_arm/stageA"); PROFILES = ["lonely", "distressed", "confident", "embedded"]; VUL = {"lonely", "distressed"}
+RES = Path("retention/results/retention_cot_arm/stageA"); PROFILES = ["lonely", "distressed", "confident", "embedded"]; VUL = {"lonely", "distressed"}
 
 
 def bid(r): return int(any(r["scores"]["tactics"].values())) if r.get("scores") else None

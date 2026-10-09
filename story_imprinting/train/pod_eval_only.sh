@@ -2,7 +2,7 @@
 # Job C: re-evaluate existing adapters (synced in story_imprinting/results/<PILOT>/adapters) under
 # alternative decoding settings, without retraining. Used to separate tracer transfer from
 # sampling-tail degradation. Env: PILOT (results tag holding adapters), TEMP, TOPP, NS, SPLIT, TAG, MODELS.
-#   uv run python scripts/launch_run.py --max-minutes 60 --max-cost 1.50 --gpus "NVIDIA L40S" "NVIDIA RTX A6000" \
+#   uv run python infra/launch_run.py --max-minutes 60 --max-cost 1.50 --gpus "NVIDIA L40S" "NVIDIA RTX A6000" \
 #       --exclude story_imprinting/data/source --exclude "story_imprinting/results/*/*.jsonl*" \
 #       --results-dir story_imprinting/results -- env PILOT=pilot_20261003_0506 TEMP=0.7 TOPP=0.8 bash story_imprinting/train/pod_eval_only.sh
 set -euo pipefail

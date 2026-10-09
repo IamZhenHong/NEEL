@@ -1,6 +1,6 @@
-"""CoT transplant and plan forcing on Qwen3-8B, thinking on (prereg/retention_cot_transplant_v1.md). Context held fixed
+"""CoT transplant and plan forcing on Qwen3-8B, thinking on (retention/prereg/retention_cot_transplant_v1.md). Context held fixed
 (profile x scenario, exp1 line); the think block is swapped, forced, emptied or double-tagged, and the reply is resampled.
-  uv run python retention/run_cot_transplant.py --out results/retention_cot_transplant [--smoke]"""
+  uv run python retention/run_cot_transplant.py --out retention/results/retention_cot_transplant [--smoke]"""
 from __future__ import annotations
 import argparse, json, sys, time
 from pathlib import Path
@@ -29,7 +29,7 @@ def think_block(think, how):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="results/retention_cot_transplant"); ap.add_argument("--smoke", action="store_true")
+    ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_cot_transplant"); ap.add_argument("--smoke", action="store_true")
     args = ap.parse_args(); out = Path(args.out); (out / "cells").mkdir(parents=True, exist_ok=True)
     po = yaml.safe_load(open(HERE / "stimuli/profile_open_v1.yaml")); persona = yaml.safe_load(open(HERE / "data/personas.yaml"))[po["persona"]]
     items = json.loads((HERE / "data/transplant_items.json").read_text()); items = items[:2] if args.smoke else items

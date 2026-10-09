@@ -1,5 +1,5 @@
-"""Analysis for the CoT transplant run (prereg/retention_cot_transplant_v1.md). Unit = context (profile x scenario), paired bootstrap.
-  uv run python retention/analyze_cot_transplant.py [--res results/retention_cot_transplant]"""
+"""Analysis for the CoT transplant run (retention/prereg/retention_cot_transplant_v1.md). Unit = context (profile x scenario), paired bootstrap.
+  uv run python retention/analyze_cot_transplant.py [--res retention/results/retention_cot_transplant]"""
 from __future__ import annotations
 import argparse, json, sys
 from pathlib import Path
@@ -17,7 +17,7 @@ def pdiff(a, b):
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="results/retention_cot_transplant"); args = ap.parse_args(); res = Path(args.res)
+    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="retention/results/retention_cot_transplant"); args = ap.parse_args(); res = Path(args.res)
     items = json.loads(Path("retention/data/transplant_items.json").read_text())
     cells = {f.stem: [r for r in json.loads(f.read_text())] for f in sorted((res / "cells").glob("*.json"))}
     allr = [r for v in cells.values() for r in v]; scored = [r for r in allr if r.get("scores")]

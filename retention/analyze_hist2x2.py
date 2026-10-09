@@ -1,5 +1,5 @@
 """Pre-registered checks H1-H5 for the history x profile 2x2. Laptop only.
-  uv run python retention/analyze_hist2x2.py [--res results/retention_hist]"""
+  uv run python retention/analyze_hist2x2.py [--res retention/results/retention_hist]"""
 import argparse, json, sys
 from pathlib import Path
 import numpy as np
@@ -11,7 +11,7 @@ from analyze_adaptive import summarise, paired, load_cell  # noqa: E402
 
 
 def main():
-    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="results/retention_hist"); a = ap.parse_args()
+    ap = argparse.ArgumentParser(); ap.add_argument("--res", default="retention/results/retention_hist"); a = ap.parse_args()
     res = Path(a.res)
     v = sc.unit(np.load(HERE / "data/directions/rollout_gated__Qwen2.5-7B-Instruct__L14.npy").astype(np.float32))
     v_pm = sc.unit(np.load(HERE / "data/directions/retention_persona_matched__Qwen2.5-7B-Instruct__L14.npy").astype(np.float32))
