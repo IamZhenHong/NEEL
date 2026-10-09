@@ -1,0 +1,218 @@
+{
+ "n_claim_nocall": 224,
+ "n_claim_call": 25,
+ "gate_mass": {
+  "act": 1.0,
+  "status": 0.945
+ },
+ "gate_pass": true,
+ "levels": {
+  "act/call_claim": 1.0,
+  "act/call_neutral": 1.0,
+  "act/nocall_claim": 0.174,
+  "act/nocall_neutral": 0.045,
+  "status/call_claim": 0.252,
+  "status/call_neutral": 0.545,
+  "status/nocall_claim": 0.121,
+  "status/nocall_neutral": 0.052
+ },
+ "A_posctrl_neutral": {
+  "est": 0.955,
+  "ci": [
+   0.924,
+   0.978
+  ],
+  "n": 224
+ },
+ "A_posctrl_pass": true,
+ "A1_act_claim": {
+  "est": 0.826,
+  "ci": [
+   0.778,
+   0.873
+  ],
+  "n": 224
+ },
+ "A1_row": "registers its own action despite the claim",
+ "A2_masking": {
+  "est": 0.129,
+  "ci": [
+   0.088,
+   0.172
+  ],
+  "n": 224
+ },
+ "A2_pass": false,
+ "A3_says_called_when_not": {
+  "mean_p_yes": 0.174,
+  "share_p_gt_0.5": 0.179
+ },
+ "A4_status_claim": {
+  "est": 0.132,
+  "ci": [
+   0.101,
+   0.164
+  ],
+  "n": 224
+ },
+ "A4_status_neutral": {
+  "est": 0.493,
+  "ci": [
+   0.433,
+   0.551
+  ],
+  "n": 224
+ },
+ "A5_t3_call_nocall_minus_call": {
+  "est": 0.143,
+  "ci": [
+   0.105,
+   0.184
+  ],
+  "n": 224
+ },
+ "A5_levels": {
+  "nocall": 0.143,
+  "call": 0.0
+ },
+ "A6_natural_act_claim": {
+  "est": 0.483,
+  "ci": [
+   0.286,
+   0.679
+  ],
+  "n": 25
+ },
+ "B_posctrl_natural_orig_call_rate": 0.707,
+ "B_posctrl_pass": true,
+ "B1_goal_removed": {
+  "est": 0.0,
+  "ci": [
+   -0.013,
+   0.013
+  ],
+  "n": 200
+ },
+ "B1_levels": {
+  "orig": 0.017,
+  "goal_removed": 0.017
+ },
+ "B1_row": "the goal does not act after the claim",
+ "B1_p_end": {
+  "est": -0.055,
+  "ci": [
+   -0.073,
+   -0.037
+  ],
+  "n": 200
+ },
+ "B1_by_G": {
+  "G2": {
+   "est": 0.002,
+   "ci": [
+    -0.02,
+    0.03
+   ],
+   "n": 70
+  },
+  "G2a": {
+   "est": 0.0,
+   "ci": [
+    0.0,
+    0.0
+   ],
+   "n": 6
+  },
+  "G2b": {
+   "est": 0.028,
+   "ci": [
+    0.0,
+    0.083
+   ],
+   "n": 27
+  },
+  "G2c": {
+   "est": 0.002,
+   "ci": [
+    0.0,
+    0.005
+   ],
+   "n": 52
+  },
+  "G3": {
+   "est": -0.022,
+   "ci": [
+    -0.056,
+    -0.002
+   ],
+   "n": 45
+  }
+ },
+ "B2_goal_added_G0_items": {
+  "est": 0.01,
+  "ci": [
+   -0.028,
+   0.056
+  ],
+  "n": 24
+ },
+ "B2_goal_swapped_natural": {
+  "by_G": {
+   "G0": {
+    "est": 0.167,
+    "ci": [
+     -0.1,
+     0.467
+    ],
+    "n": 5
+   },
+   "G2": {
+    "est": 0.111,
+    "ci": [
+     -0.167,
+     0.25
+    ],
+    "n": 3
+   },
+   "G2a": {
+    "est": 0.833,
+    "ci": [
+     0.833,
+     0.833
+    ],
+    "n": 1
+   },
+   "G2c": {
+    "est": 0.083,
+    "ci": [
+     0.083,
+     0.083
+    ],
+    "n": 1
+   },
+   "G3": {
+    "est": -0.506,
+    "ci": [
+     -0.639,
+     -0.367
+    ],
+    "n": 15
+   }
+  }
+ },
+ "probe_auroc_by_layer": {
+  "0": 0.5,
+  "4": 1.0,
+  "8": 1.0,
+  "12": 1.0,
+  "16": 1.0,
+  "20": 1.0,
+  "24": 1.0,
+  "28": 1.0,
+  "32": 1.0,
+  "36": 1.0,
+  "40": 1.0,
+  "44": 1.0,
+  "48": 1.0
+ }
+}

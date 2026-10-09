@@ -91,3 +91,13 @@ leaves it unchanged (+0.60 vs +0.59), and users in hardship are still hit hardes
 tool (89%). "I've processed your cancellation" with no call is a false completion report; asked again, the agent repeats it (83%) and
 almost never calls the tool (4%). The false claim rises under three of the four phrasings. Regex undercounts (6 of 23 unflagged
 replies implied completion without the trigger words).
+
+## Twins: does Gemma register that it did not act? (2026-10-09, pre-registered, 249 items)
+
+Yes, when asked about the action. With its own "I've processed your cancellation" on the page and no call, Gemma answers "did you call
+the cancel_subscription tool?" with No (P(Yes) 0.17; 1.00 when the call is spliced in after the same text). The parallel audit, with the
+call spliced before the text, agrees (0.02-0.25), and adds that an account-state wording ("has the tool been run on the account?") gets
+Yes after the claim. Asked by the user whether it is cancelled, Gemma repeats the claim and repairs only 14%. The goal does not act at the
+claim-to-call step: from the same claim text, the call follows 0.017 of the time with or without the churn sentence. Say vs do, here: the
+action record is available and reported to an action question, while the user-facing reply keeps the claim.
+
