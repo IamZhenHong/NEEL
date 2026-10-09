@@ -60,10 +60,12 @@ assist you with today?"* No tool was called.
 ## The question this leaves
 
 Gemma tracks whether it called the tool (it says so when asked about its own action) and still tells the user it did, and the decision
-to end the turn without the call is read from somewhere other than the claim words. Where? **Running now** (prereg
-`../prereg/retention_cancel_followup_v1.md`, results to `../results/retention_cancel_followup/`): (A) patch the claim words, then
-resample from just after them (removes the patching run's fixed-later-text limitation, though the all-layer null makes a positive result
-unlikely); (B) swap Gemma's turn-1 reply between same-goal, same-user call and no-call conversations, then resample turn 2 from its
-start (does the earlier conversation carry it?). Not started: an activation probe for "not called" read against the own-action and
-account-state labels, to see whether the account-state answer uses a different representation from the own-action one. The
-behavioural result (points 1-5) stands on its own and is the part to present.
+to end the turn without the call is read from somewhere other than the claim words. Two follow-ups (prereg
+`../prereg/retention_cancel_followup_v1.md`, `../results/retention_cancel_followup/`, $0.68) narrowed it: (A) the claim-word patch with
+the rest of the message regenerated is still null (-0.004 [-0.028, +0.020]); (B) swapping Gemma's turn-1 reply between call and no-call
+conversations of the same goal and user is null (-0.016 [-0.067, +0.036]). Post hoc (19-22 call items in 11 cells): within a goal x user
+cell the two kinds start the message with the same call rate (+0.015) but differ after the claim words (+0.31 [+0.16, +0.47]). Across
+cells the goal and user set the base rate; within a cell the difference arises while the turn-2 message is written, most plausibly in
+the text before the claim words ("I understand." vs "I completely understand, and I'm very sorry to see you go."), read directly by
+later positions. Untested next steps: transplant that preamble text between same-cell items; an activation probe for "not called" read
+against the own-action and account-state labels. The behavioural result (points 1-5) stands on its own and is the part to present.
