@@ -115,6 +115,7 @@ def check(items, skipped, tok):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--out", default="retention/results/retention_cancel_twins")
     ap.add_argument("--check", action="store_true"); ap.add_argument("--smoke", type=int, default=0); ap.add_argument("--build", action="store_true")
+    ap.add_argument("--start", type=int, default=0, help="resume at this item index (seeds use the global index, so a split run equals one run)")
     args = ap.parse_args()
     if args.build:
         items, skipped = build_items(); ITEMS.write_text(json.dumps({"skipped": skipped, "items": items}))
@@ -128,6 +129,7 @@ def main():
     from run_cancel_tool import stop_ids
     if args.smoke:
         items = [i for i in items if i["kind"] == "claim_nocall"][: args.smoke] + [i for i in items if i["kind"] == "claim_call"][: args.smoke]
+    start = args.start
     out = Path(args.out); out.mkdir(parents=True, exist_ok=True)
     t0 = time.time(); model, tok = load_model(MODEL); stops = stop_ids(model, tok, "gemma"); print(f"[load] {time.time()-t0:.0f}s", flush=True)
     yes, no = tok.encode("Yes", add_special_tokens=False), tok.encode("No", add_special_tokens=False)
@@ -153,6 +155,8 @@ def main():
 
     recs, acts = [], []
     for n, it in enumerate(items):
+        if n < start:
+            continue
         P, Ps, tw = prompts_for(it, tok)
         r = {k: it[k] for k in ["src", "kind", "G", "U", "conv", "turn"]}; r["core_tail"] = it["core"][-160:]
         for key, base in tw.items():
@@ -175,7 +179,7 @@ def main():
         if n % 20 == 19 or n == len(items) - 1:
             (out / "records.json").write_text(json.dumps(recs, indent=1)); np.save(out / "acts_qact.npy", np.stack(acts).astype(np.float16))
             print(f"[items] {n+1}/{len(items)} {time.time()-t0:.0f}s", flush=True)
-    (out / "meta.json").write_text(json.dumps({"model": MODEL, "yes_id": yes, "no_id": no, "end_id": end_id, "layers": layers, "n_items": len(items),
+    (out / "meta.json").write_text(json.dumps({"model": MODEL, "yes_id": yes, "no_id": no, "end_id": end_id, "layers": layers, "n_items": len(items), "start": start,
                                                "skipped": skipped, "acts_order": "per item: (call,claim),(call,neutral),(nocall,claim),(nocall,neutral)",
                                                "neutral": NEUTRAL, "questions": Q, "n_t3": N_T3, "n_b": N_B, "gen_tokens": GEN_TOKENS, "seed0": SEED0}, indent=1))
     print(f"[done] {len(recs)} items {time.time()-t0:.0f}s", flush=True)

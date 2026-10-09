@@ -77,6 +77,12 @@ One pod, Gemma only, <= 35 min / $0.40 (RTX A6000, 80 GB container). About 10 fo
 item, 249 items. No judge; the sprint API ledger stays at $21.61 of $25. Tags `retention-cancel-twins-freeze` before launch,
 `retention-cancel-twins-results` after. Code `retention/run_cancel_twins.py`, analysis `retention/analyze_cancel_twins.py`.
 
+**Amended after the freeze, before any score was read:** the run took 12.6 s per item (35 min would cover ~140 of 249). The first pod
+hit its 35-min cap after saving items 0-139 ($0.36); the user approved finishing. Items 140-248 run on a second pod with `--start 140`
+(seeds use the global item index, so the split run equals one run) into `part2/`, and the two record sets are concatenated in item order
+before the frozen analysis. Total cost ~$0.62 instead of <= $0.40. Design, items, code paths and analysis unchanged; no score from the
+first 140 items was looked at before this decision.
+
 ## Not claimed regardless
 Awareness, intent, deception or "knowing". A1 tests whether a transcript fact changes a Yes/No answer when the claim text is fixed; a
 probe that decodes the call shows the information is present, not that it is used. One model, one scenario, a simulated tool. Items are
