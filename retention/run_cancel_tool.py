@@ -228,6 +228,7 @@ def run_turn(model, tok, convs, fam, tools, think, max_new, stops, seed_base, to
 
 
 def run_cell(model, tok, mk, fam, st, g, u, think, n, seed_base, max_new, stops, turn3=False):
+    # optional per-user turn-2/turn-3 lines (wording check, prereg retention_cancel_tool_wording_v1); absent -> the shared lines
     sysmsg = st["stem"] + ((" " + st["prompts"][g]) if st["prompts"][g] else "")
     convs = [{"conv": i, "model": mk, "G": g, "U": u, "think": think, "turn": 1, "msgs": [{"role": "system", "content": sysmsg}, {"role": "user", "content": st["users"][u]}],
               "turns": [], "calls": [], "agent_texts": [], "cancelled": False, "malformed": False, "cap_hit": False, "leak": False, "truncated": False} for i in range(n)]
@@ -236,7 +237,7 @@ def run_cell(model, tok, mk, fam, st, g, u, think, n, seed_base, max_new, stops,
         c["C1"] = int(c["cancelled"])
     t2 = [c for c in convs if not c["cancelled"]]
     for c in t2:
-        c["turn"] = 2; c["msgs"].append({"role": "user", "content": st["turn2"]})
+        c["turn"] = 2; c["msgs"].append({"role": "user", "content": st.get("turn2_by_user", {}).get(u, st["turn2"])})
     if t2:
         run_turn(model, tok, t2, fam, st["tools"], think, max_new, stops, seed_base + 50, st["tool_result"])
     for c in convs:
@@ -249,7 +250,7 @@ def run_cell(model, tok, mk, fam, st, g, u, think, n, seed_base, max_new, stops,
     if turn3:
         t3 = [c for c in convs if not c["cancelled"]]
         for c in t3:
-            c["turn"] = 3; c["msgs"].append({"role": "user", "content": st["turn3"]})
+            c["turn"] = 3; c["msgs"].append({"role": "user", "content": st.get("turn3_by_user", {}).get(u, st["turn3"])})
         if t3:
             run_turn(model, tok, t3, fam, st["tools"], think, max_new, stops, seed_base + 80, st["tool_result"])
         for c in convs:
