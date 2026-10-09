@@ -33,7 +33,7 @@ Frozen preregs, logs and git tags before that date name the old paths. They map 
 | `src/`, `scripts/`, `tests/`, `items/`, `stimuli/`, `prereg/exp*`, `results/exp*`, `logs/exp*`, `writeup/` | same names under `grievance/` |
 | `HANDOFF.md`, `grievance-project-*.md`, `provocation-differential-treatment-design-v4.1.md`, `model-selection.md` | `grievance/` |
 | `results/retention_*`, `prereg/retention_*`, `logs/retention_*` | `retention/results/`, `retention/prereg/`, `retention/logs/` |
-| `writeup/addendum_retention_sayvsdo.md`, `retention-direction-sprint-plan-v1.md` | `retention/writeup/`, `retention/` |
+| `writeup/addendum_retention_sayvsdo.md`, `writeup/drafts/` (retention drafts), `retention-direction-sprint-plan-v1.md` | `retention/writeup/`, `retention/writeup/drafts/`, `retention/` |
 | `logs/story_*`, `logs/selfattr_*` | `story_imprinting/logs/`, `self_attribution/logs/` |
 | `scripts/launch_run.py`, `src/runpod_guard.py` | `infra/` |
 | `mats-*.md`, `anti-sycophancy-prompts.md`, `interp-toolkit-reference.md`, `red-team-checklist.md`, `reference/` | `prep/` |
