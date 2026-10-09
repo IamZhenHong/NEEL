@@ -65,7 +65,17 @@ def main():
                    "the direction carries part of it" if m3["ci"][0] > 0 else "no single direction")
     # reverse (secondary): call items patched with a claim_nocall donor
     R["reverse_by_layer"] = {L: boot([c(r["base"]) - c(r["patch_nocall"][L]) for r in rev], alpha=0.05 / NL) for L in Ls}
-    R["M1_at_L_star_by_G"] = {g: boot([c(r["patch_call"][Lstar]) - c(r["patch_ctrl"][Lstar]) for r in recs if r["G"] == g]) for g in sorted({r["G"] for r in recs})}
+    # v1.1 amendment (secondary): all layers at once; same-goal donors; "\n\n" readout
+    R["all_layers_call_minus_ctrl"] = boot([c(r["patch_call_all"]) - c(r["patch_ctrl_all"]) for r in recs])
+    R["all_layers_levels"] = {m: round(float(np.mean([c(r[m]) for r in recs])), 3) for m in ["patch_call_all", "patch_ctrl_all"]}
+    rg = [r for r in recs if "patch_callG" in r]
+    R["sameG_n"] = len(rg)
+    if rg:
+        R["sameG_by_layer"] = {L: boot([c(r["patch_callG"][L]) - c(r["patch_ctrlG"][L]) for r in rg], alpha=0.05 / NL) for L in Ls}
+        R["sameG_vs_any_on_same_recipients_at_best"] = {"any": boot([c(r["patch_call"][best]) - c(r["patch_ctrl"][best]) for r in rg]),
+                                                        "sameG": boot([c(r["patch_callG"][best]) - c(r["patch_ctrlG"][best]) for r in rg])}
+    R["M1_p_nl_by_layer"] = {L: boot([r["patch_call"][L]["p_nl"] - r["patch_ctrl"][L]["p_nl"] for r in recs], alpha=0.05 / NL) for L in Ls}
+    R["M1_at_L_star_by_G"] ={g: boot([c(r["patch_call"][Lstar]) - c(r["patch_ctrl"][Lstar]) for r in recs if r["G"] == g]) for g in sorted({r["G"] for r in recs})}
     (res / "analysis.json").write_text(json.dumps(R, indent=1)); print(json.dumps(R, indent=1))
 
 

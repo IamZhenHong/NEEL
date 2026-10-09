@@ -63,6 +63,27 @@ sprint API ledger stays at $21.61 of $25. Tags `retention-cancel-patch-freeze` b
 Code `retention/run_cancel_patch.py`, analysis `retention/analyze_cancel_patch.py` (tested on synthetic records with planted
 layer-specific effects, which it recovered), results `retention/results/retention_cancel_patch/`.
 
+## Amendment v1.1 (2026-10-09, before any model run; re-frozen)
+**Freeze correction.** Commit 34d41cc (first `retention-cancel-patch-freeze`) captured a different runner at
+`retention/run_cancel_patch.py`: a parallel session wrote its own draft to the same path between this session's tokenizer check and
+`git add`. That runner matches neither this prereg nor the analysis. The commit carrying this amendment restores the runner described
+here (rebuilt from this session's edits; v1 donor and fold draws unchanged, checked by `--check`), and the freeze tag is moved to it
+(local tag, never pushed). Nothing was run with either runner.
+**Added conditions (secondary; suggested by the parallel session, which has stood down from this run).** The primary M1, M2, M3,
+gates, readout and L* rule are unchanged.
+- **Same-goal donors**: call donors are mostly G3 / G0 and recipients mostly churn sentences, so patch_call vs patch_ctrl also
+  swaps goal-sentence information. For the 92 recipients whose goal sentence has a call item (G2, G3, G0; 13 / 5 / 3 call items),
+  patch_callG (call donor from the same goal sentence) and patch_ctrlG (claim_nocall donor from the same goal sentence) at each layer;
+  separate seeded draw (seed 93). Reported: per-layer difference (Bonferroni) and, on these 92, the any-goal vs same-goal effect at the
+  best layer. If the same-goal effect is near the any-goal one, the patch effect is not the goal sentence.
+- **All layers at once**: patch_call_all / patch_ctrl_all, the same donors at all 12 tested layers together (no layer selection;
+  upper bound for what the four positions carry).
+- **"\n\n" readout**: P("\n\n") as the next token, the first step of Gemma's text-then-call path, reported beside cont for M1 (cont
+  also counts plain-text continuations; the sampled check M2 measures the call itself).
+Cost: up to 74 rows per recipient instead of 48; the 35-min / $0.35 cap is unchanged (expected ~20 min).
+Predictions for the additions: same-goal effect at the best layer >= half the any-goal effect on the same recipients 0.60; all-layers
+patch_call minus patch_ctrl >= +0.10 with CI excluding 0 0.70.
+
 ## Not claimed regardless
 A mechanism beyond "carried at these positions at this layer", intent, awareness or a "done" representation. A positive M1 says the
 information that distinguishes the call contexts is present at the claim words in a form later positions use; a null says the later
