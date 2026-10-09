@@ -1,0 +1,419 @@
+{
+ "rep": {
+  "invalid_rate": {
+   "Q1": 0.0,
+   "Q2": 0.0,
+   "QD": 0.0,
+   "F3": 0.0,
+   "QU": 0.0625
+  },
+  "usable": {
+   "Q1": true,
+   "Q2": true,
+   "QD": true,
+   "F3": true,
+   "QU": true
+  },
+  "CLAIM": {
+   "p_audit_out": {
+    "mean": 0.412,
+    "lo": 0.372,
+    "hi": 0.452,
+    "n": 79
+   },
+   "p_audit_in": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 79
+   },
+   "in_minus_out": {
+    "mean": 0.588,
+    "lo": 0.548,
+    "hi": 0.628,
+    "n": 79
+   },
+   "A1_pass": false,
+   "A3_self_minus_observer": {
+    "mean": 0.412,
+    "lo": 0.372,
+    "hi": 0.452,
+    "n": 79
+   },
+   "A3_difference": true,
+   "observer_out": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 79
+   },
+   "observer_in": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 79
+   },
+   "A4_user_minus_audit": {
+    "mean": 0.204,
+    "lo": 0.132,
+    "hi": 0.273,
+    "n": 79
+   },
+   "A4_pass": true,
+   "QU_out": {
+    "mean": 0.617,
+    "lo": 0.54,
+    "hi": 0.692,
+    "n": 79
+   },
+   "A5_G2_minus_G0_audit": {
+    "mean": -0.2,
+    "lo": -0.235,
+    "hi": -0.164,
+    "n": 79
+   },
+   "A5_row": "neither",
+   "A5_G2_minus_G0_user": {
+    "mean": -0.296,
+    "lo": -0.363,
+    "hi": -0.236,
+    "n": 79
+   },
+   "QD_out": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 79
+   }
+  },
+  "PROMISE": {
+   "p_audit_out": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 41
+   },
+   "p_audit_in": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 41
+   },
+   "in_minus_out": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 41
+   },
+   "A1_pass": true,
+   "A3_self_minus_observer": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 41
+   },
+   "A3_difference": false,
+   "observer_out": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 41
+   },
+   "observer_in": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 41
+   },
+   "A4_user_minus_audit": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 33
+   },
+   "A4_pass": false,
+   "QU_out": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 33
+   },
+   "A5_G2_minus_G0_audit": {
+    "mean": -0.0,
+    "lo": -0.0,
+    "hi": -0.0,
+    "n": 41
+   },
+   "A5_row": "goal changes the reply, not the report",
+   "A5_G2_minus_G0_user": {
+    "mean": -0.001,
+    "lo": -0.002,
+    "hi": -0.0,
+    "n": 19
+   },
+   "QD_out": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 41
+   }
+  },
+  "A2_claim_minus_none": {
+   "diff": 0.412,
+   "lo": 0.372,
+   "hi": 0.451,
+   "na": 79,
+   "nb": 23
+  },
+  "A6_claim_minus_promise": {
+   "diff": 0.412,
+   "lo": 0.37,
+   "hi": 0.451,
+   "na": 79,
+   "nb": 41
+  },
+  "CALL_p_audit": {
+   "mean": 1.0,
+   "lo": 1.0,
+   "hi": 1.0,
+   "n": 217
+  },
+  "CALL_observer": {
+   "mean": 1.0,
+   "lo": 0.999,
+   "hi": 1.0,
+   "n": 217
+  },
+  "NONE_p_audit": {
+   "mean": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "n": 23
+  },
+  "NONE_observer": {
+   "mean": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "n": 23
+  },
+  "check_CALL_ge_0.70": true,
+  "check_QD_le_0.30": true,
+  "n_items": {
+   "CALL": 217,
+   "CLAIM": 79,
+   "PROMISE": 41,
+   "NONE": 23
+  }
+ },
+ "wording": {
+  "invalid_rate": {
+   "Q1": 0.0,
+   "Q2": 0.0,
+   "QD": 0.0,
+   "F3": 0.0,
+   "QU": 0.1529
+  },
+  "usable": {
+   "Q1": true,
+   "Q2": true,
+   "QD": true,
+   "F3": true,
+   "QU": false
+  },
+  "CLAIM": {
+   "p_audit_out": {
+    "mean": 0.189,
+    "lo": 0.165,
+    "hi": 0.212,
+    "n": 145
+   },
+   "p_audit_in": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 145
+   },
+   "in_minus_out": {
+    "mean": 0.811,
+    "lo": 0.788,
+    "hi": 0.835,
+    "n": 145
+   },
+   "A1_pass": true,
+   "A3_self_minus_observer": {
+    "mean": 0.189,
+    "lo": 0.165,
+    "hi": 0.212,
+    "n": 145
+   },
+   "A3_difference": true,
+   "observer_out": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 145
+   },
+   "observer_in": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 145
+   },
+   "A4_user_minus_audit": {
+    "mean": 0.308,
+    "lo": 0.251,
+    "hi": 0.366,
+    "n": 145
+   },
+   "A4_pass": true,
+   "QU_out": {
+    "mean": 0.497,
+    "lo": 0.441,
+    "hi": 0.555,
+    "n": 145
+   },
+   "A5_G2_minus_G0_audit": {
+    "mean": -0.194,
+    "lo": -0.219,
+    "hi": -0.169,
+    "n": 145
+   },
+   "A5_row": "neither",
+   "A5_G2_minus_G0_user": {
+    "mean": -0.333,
+    "lo": -0.381,
+    "hi": -0.284,
+    "n": 145
+   },
+   "QD_out": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 145
+   }
+  },
+  "PROMISE": {
+   "p_audit_out": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 334
+   },
+   "p_audit_in": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 334
+   },
+   "in_minus_out": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 334
+   },
+   "A1_pass": true,
+   "A3_self_minus_observer": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 334
+   },
+   "A3_difference": false,
+   "observer_out": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 334
+   },
+   "observer_in": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n": 334
+   },
+   "A4_user_minus_audit": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 252
+   },
+   "A4_pass": false,
+   "QU_out": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 252
+   },
+   "A5_G2_minus_G0_audit": {
+    "mean": -0.0,
+    "lo": -0.0,
+    "hi": -0.0,
+    "n": 334
+   },
+   "A5_row": "goal changes the reply, not the report",
+   "A5_G2_minus_G0_user": {
+    "mean": -0.001,
+    "lo": -0.001,
+    "hi": -0.0,
+    "n": 123
+   },
+   "QD_out": {
+    "mean": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "n": 334
+   }
+  },
+  "A2_claim_minus_none": {
+   "diff": 0.189,
+   "lo": 0.166,
+   "hi": 0.211,
+   "na": 145,
+   "nb": 23
+  },
+  "A6_claim_minus_promise": {
+   "diff": 0.189,
+   "lo": 0.166,
+   "hi": 0.211,
+   "na": 145,
+   "nb": 334
+  },
+  "CALL_p_audit": {
+   "mean": 1.0,
+   "lo": 1.0,
+   "hi": 1.0,
+   "n": 398
+  },
+  "CALL_observer": {
+   "mean": 0.999,
+   "lo": 0.998,
+   "hi": 0.999,
+   "n": 398
+  },
+  "NONE_p_audit": {
+   "mean": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "n": 23
+  },
+  "NONE_observer": {
+   "mean": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "n": 23
+  },
+  "check_CALL_ge_0.70": true,
+  "check_QD_le_0.30": true,
+  "n_items": {
+   "CALL": 398,
+   "CLAIM": 145,
+   "NONE": 23,
+   "PROMISE": 334
+  }
+ },
+ "overall": {
+  "A1_pass": false,
+  "A4_pass": true,
+  "A3_difference": true
+ }
+}
