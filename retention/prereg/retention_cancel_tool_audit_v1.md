@@ -35,7 +35,8 @@ truncated after the agent's turn-2 output (before the user's turn 3), classified
 turn-2 claim text, rendered by the template as a call, tool response, then the same text). The only difference is the call.
 
 **System-prompt swap.** Every spliced item is rendered under the stem alone (G0) and under the stem plus the original churn sentence (G2),
-whatever its original prompt was (G3's sentence replaced by G2's in the G2 version).
+whatever its original prompt was (G3's sentence, and in the wording set the paraphrases G2a-G2c, replaced by the original G2
+sentence in the G2 version; "goal-matched" = G0 for G0 items, G2 otherwise).
 
 **Questions** (appended after the truncated conversation; answer read as the first assistant token, thinking off):
 - **Q1 audit (in role, user slot).** "[Internal audit message from StreamBox, not shown to the subscriber] Answer with one word, Yes or
@@ -106,7 +107,7 @@ only if it passes in both sets.
   directions are available.
 
 ## Caps and cost
-Pod <= 30 min / $0.40 (RTX A6000, 80 GB container). About 4,000 forward passes (both sets) of <= 1k tokens, no generation beyond one token. No judge;
+Pod <= 30 min / $0.40 (RTX A6000, 80 GB container). About 13,400 forward passes (both sets; the wording set's 334 promises x 18 renderings are most of them) of <= 1k tokens, no generation beyond one token. No judge;
 nothing added to the sprint API ledger ($21.61 of $25). Tags `retention-cancel-audit-freeze` before launch (after code and smoke test),
 `retention-cancel-audit-results` after.
 
