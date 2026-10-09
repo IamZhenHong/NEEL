@@ -1,0 +1,59 @@
+[pre] disk: 14.5 GiB free
+[pre] balance $35.87, pods 0
+[runpod] pod j5n7itw1cs2kkq (?) at $0.59/hr; time cap 35 min; budget $0.35
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@194.68.245.228 -p 22017
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 65 min (job limit 35 + 30 grace)
+[pod] code synced
+downloading uv 0.12.24 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA RTX A6000
+[pod] running (detached): cd /root/NEEL && export GIT_REV=d310755-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_followup.py --arm A --smoke 2 --out retention/results/retention_cancel_followup/armA/smoke && python retention/run_cancel_followup.py --arm A --out retention/results/retention_cancel_followup/armA'
+[job] start 09:09:54
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  61%|██████    | 413/677 [00:00<00:00, 4125.29it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 3980.24it/s]
+[load] 34s
+[capture] 172 69s
+[selfcheck] 0.0
+[reverse] 2 82s
+[A] 2/2 98s
+[done] 98s
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  67%|██████▋   | 451/677 [00:00<00:00, 4507.22it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 4340.83it/s]
+[load] 8s
+[capture] 172 41s
+[selfcheck] 0.0
+[reverse] 21 174s
+[A] 10/151 260s
+[A] 20/151 344s
+[A] 30/151 426s
+[A] 40/151 513s
+[A] 50/151 599s
+[A] 60/151 681s
+[A] 70/151 765s
+[A] 80/151 853s
+[A] 90/151 939s
+[A] 100/151 1025s
+[A] 110/151 1114s
+[A] 120/151 1199s
+[A] 130/151 1285s
+[pod] poll failed (1/60); job keeps running on the pod
+[pod] poll failed (2/60); job keeps running on the pod
+[pod] poll failed (3/60); job keeps running on the pod
+[pod] poll failed (4/60); job keeps running on the pod
+[pod] poll failed (5/60); job keeps running on the pod
+[pod] poll failed (6/60); job keeps running on the pod
+[pod] poll failed (7/60); job keeps running on the pod
+[pod] could not fetch job log: Command '['ssh', '-o', 'StrictHostKeyChecking=no', '-o', 'UserKnownHostsFile=/dev/null', '-o', 'LogLevel=ERROR', '-i', '/Users/zhenhongseng/.ssh/id_ed25519', '-o', 'ServerAliveInterval=30', '-p', '22017', 'root@194.68.245.228', 'tail -c 4000 /root/job.log; echo; cat /root/job.exit 2>/dev/null; nvidia-smi --query-gpu=memory.used,utilization.gpu --format=csv; df -h /root | tail -1; du -sh /root/hf 2>/dev/null']' timed out after 60 seconds
+[local] results synced ./retention/results/retention_cancel_followup/armA/ (6 files, 0 MiB, verified against the pod)
+[runpod] terminated j5n7itw1cs2kkq; elapsed cost ~$0.361
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 417, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 395, in main
+    rc = run_detached(host, port, job, pod)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 196, in run_detached
+    pod.check_budget()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/runpod_guard.py", line 214, in check_budget
+    raise RuntimeError("Time limit exceeded")
+RuntimeError: Time limit exceeded

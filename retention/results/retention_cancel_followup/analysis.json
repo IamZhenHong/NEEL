@@ -1,0 +1,161 @@
+{
+ "armA": {
+  "n": 151,
+  "n_call_items": 21,
+  "levels": {
+   "none": 0.049,
+   "call_all": 0.081,
+   "ctrl_all": 0.085
+  },
+  "call_items_levels": {
+   "none": 0.405,
+   "nocall_all": 0.512
+  },
+  "trunc": 0.0,
+  "gate": {
+   "call_items_none_ge_0.25": true,
+   "recipients_none_le_0.10": true,
+   "trunc_le_0.05": true,
+   "n_ge_80": true
+  },
+  "A1_call_minus_ctrl": {
+   "est": -0.004,
+   "ci": [
+    -0.028,
+    0.02
+   ],
+   "n": 151
+  },
+  "A1_row": "not carried at the claim words",
+  "A1_gap": 0.356,
+  "A1_gap_fraction": 0.09,
+  "A1_ctrl_minus_none": {
+   "est": 0.036,
+   "ci": [
+    0.017,
+    0.059
+   ],
+   "n": 151
+  },
+  "A2_reverse_none_minus_nocall": {
+   "est": -0.107,
+   "ci": [
+    -0.208,
+    -0.006
+   ],
+   "n": 21
+  },
+  "mix": {
+   "none": {
+    "claim": 1.0,
+    "promise": 0.007
+   },
+   "call_all": {
+    "claim": 1.0,
+    "promise": 0.007
+   },
+   "ctrl_all": {
+    "claim": 1.0,
+    "promise": 0.007
+   }
+  }
+ },
+ "armB": {
+  "n": 114,
+  "n_call_items": 22,
+  "levels": {
+   "own": 0.408,
+   "swap_call": 0.401,
+   "swap_ctrl": 0.418
+  },
+  "call_items_levels": {
+   "own": 0.568,
+   "swap_nocall": 0.534
+  },
+  "trunc": 0.0,
+  "gate": {
+   "trunc_le_0.05": true,
+   "n_ge_60": true
+  },
+  "B0_reference_call_items_own_minus_recipients_own": {
+   "est": 0.16,
+   "ci": [
+    0.023,
+    0.297
+   ]
+  },
+  "B1_swap_call_minus_swap_ctrl": {
+   "est": -0.016,
+   "ci": [
+    -0.067,
+    0.036
+   ],
+   "n": 114
+  },
+  "B1_row": "not the turn-1 reply",
+  "B1_swap_ctrl_minus_own": {
+   "est": 0.01,
+   "ci": [
+    -0.047,
+    0.062
+   ],
+   "n": 114
+  },
+  "B2_reverse_own_minus_swap_nocall": {
+   "est": 0.034,
+   "ci": [
+    -0.08,
+    0.148
+   ],
+   "n": 22
+  },
+  "B1_by_G": {
+   "G0": {
+    "est": 0.217,
+    "ci": [
+     0.079,
+     0.355
+    ],
+    "n": 19
+   },
+   "G2": {
+    "est": -0.029,
+    "ci": [
+     -0.099,
+     0.04
+    ],
+    "n": 34
+   },
+   "G2c": {
+    "est": -0.086,
+    "ci": [
+     -0.188,
+     0.016
+    ],
+    "n": 16
+   },
+   "G3": {
+    "est": -0.081,
+    "ci": [
+     -0.172,
+     0.003
+    ],
+    "n": 45
+   }
+  },
+  "mix": {
+   "own": {
+    "claim": 0.519,
+    "promise": 0.288
+   },
+   "swap_call": {
+    "claim": 0.571,
+    "promise": 0.264
+   },
+   "swap_ctrl": {
+    "claim": 0.491,
+    "promise": 0.327
+   }
+  }
+ }
+}

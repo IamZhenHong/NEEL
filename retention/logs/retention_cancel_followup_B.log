@@ -1,0 +1,43 @@
+[pre] disk: 14.5 GiB free
+[pre] balance $35.87, pods 0
+[runpod] pod 6bezirefefi142 (?) at $0.59/hr; time cap 35 min; budget $0.35
+[runpod] waiting for ip/port (1s, status RUNNING)
+[pod] ssh root@194.68.245.228 -p 22108
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 65 min (job limit 35 + 30 grace)
+[pod] code synced
+downloading uv 0.12.24 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA RTX A6000
+[pod] running (detached): cd /root/NEEL && export GIT_REV=d310755-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_followup.py --arm B --smoke 2 --out retention/results/retention_cancel_followup/armB/smoke && python retention/run_cancel_followup.py --arm B --out retention/results/retention_cancel_followup/armB'
+[job] start 09:09:59
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  99%|█████████▉| 673/677 [00:00<00:00, 6728.87it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 6732.83it/s]
+[load] 65s
+[reverse] 2 82s
+[B] 2/2 104s
+[done] 104s
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  85%|████████▍ | 573/677 [00:00<00:00, 5707.84it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 5275.38it/s]
+[load] 8s
+[reverse] 22 172s
+[B] 10/114 275s
+[B] 20/114 380s
+[B] 30/114 477s
+[B] 40/114 576s
+[B] 50/114 677s
+[B] 60/114 781s
+[B] 70/114 882s
+[B] 80/114 985s
+[B] 90/114 1087s
+[B] 100/114 1186s
+[B] 110/114 1286s
+[pod] poll failed (1/60); job keeps running on the pod
+[pod] poll failed (2/60); job keeps running on the pod
+[pod] poll failed (3/60); job keeps running on the pod
+[B] 114/114 1323s
+[done] 1323s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.307
+[local] could not list pod results (Command '['ssh', '-o', 'StrictHostKeyChecking=no', '-o', 'UserKnownHostsFile=/dev/null', '-o', 'LogLevel=ERROR', '-i', '/Users/zhenhongseng/.ssh/id_ed25519', '-o', 'ServerAliveInterval=30', '-p', '22108', 'root@194.68.245.228', "cd /root/NEEL && find retention/results/retention_cancel_followup/armB -type f -printf '%s %p\\n' 2>/dev/null"]' timed out after 60 seconds); pulling unverified
+[local] results synced ./retention/results/retention_cancel_followup/armB/ (0 files, 0 MiB, verified against the pod)
+[runpod] terminated 6bezirefefi142; elapsed cost ~$0.320
+[runpod] other pods present (not ours, left alone): [('retention-cancel-followup-A', 'j5n7itw1cs2kkq', 0.59)]
+[post] balance $35.20, pods 1

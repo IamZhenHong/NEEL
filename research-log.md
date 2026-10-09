@@ -151,6 +151,22 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-09: cancel-tool follow-ups A and B, Gemma 4 12B (retention/prereg/retention_cancel_followup_v1.md; pods $0.36 + $0.32, no judge; tags retention-cancel-followup-freeze / -results)
+
+- **Question.** After the claim-word patching null: (A) with the rest of the message regenerated, does a call donor's residual at the
+  four " I've processed" positions (all 12 layers) make the call follow? (B) within a goal x user cell, where call and no-call
+  conversations differ before turn 2 only in Gemma's turn-1 reply, does swapping that reply move the turn-2 call rate?
+- **Observation.** All gates pass. A1 "not carried at the claim words": call donor minus control donor -0.004 [-0.028, +0.020]; any
+  patch raises calls +0.036 (disturbance), and call items given a no-call residual call more (0.41 -> 0.51). B1 "not the turn-1
+  reply": -0.016 [-0.067, +0.036]; reverse +0.03. Reference gap call items minus recipients at the message start +0.16, but post hoc
+  matched within cells +0.015 (cell composition); after the claim words, matched within cells, +0.31 [+0.16, +0.47] (post hoc).
+  Predictions 4 of 4 scored on the favoured side.
+- **Interpretation.** Across cells the goal sentence and user set the base rate. Within a cell the two kinds of conversation start
+  the message equal and differ by the end of "I've processed"; the claim-word states do not carry it, so it is in the text Gemma
+  writes before the claim (read directly by later positions), not in the earlier conversation.
+- **Decision.** Candidate next step: transplant the pre-claim text between same-cell items and resample from the claim words. Not
+  launched; for the user to choose. The mechanistic thread has now localised the decision to the message's own pre-claim text.
+
 ### 2026-10-09: cancel-tool claim-word patching, Gemma 4 12B (retention/prereg/retention_cancel_patch_v1.md v1.1; pod $0.35, no judge; tags retention-cancel-patch-freeze / -results)
 
 - **Question.** Does the context difference that lets the call follow the claim (resampling: 0.41 vs 0.04 just after "I've

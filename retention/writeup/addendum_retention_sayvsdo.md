@@ -142,3 +142,11 @@ not (or the reverse) leaves the outcome unchanged at every layer tested, includi
 sentence. A same-size random vector at those positions does change it, so the positions can act; the call-vs-no-call difference is just
 not held there. The outcome is fixed when the claim is written, but the model reads what fixes it from the conversation, not from the
 claim words themselves.
+
+## Follow-ups: where is the decision held? (2026-10-09, pre-registered, 151 + 114 recipients)
+
+Not in the earlier conversation and not at the claim words. Swapping Gemma's first reply between same-goal, same-user conversations that
+did and did not end in a call leaves the call rate unchanged, and the claim-word patch stays null even when the rest of the message is
+regenerated. Within a goal and user, both kinds of conversation start the message with the same chance of a call and differ only after
+Gemma has written its opening and "I've processed" (post hoc, +0.31). The goal sentence sets the base rate; within it, the text Gemma
+writes on the way to the claim decides whether the action follows.
