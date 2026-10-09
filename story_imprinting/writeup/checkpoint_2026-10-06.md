@@ -126,6 +126,12 @@ turn removes 150 % of the gate, carried in layers 9–26. **Exploratory (post ho
 assistant turns, even from the reply positions only, collapses the dismissive − helpful difference to 10–20 % in both
 adapters (controls 90–150 %), mostly because helpful conversations rise: helpful assistant turns are read directly at
 generation time and suppress the tracer. To be confirmed behaviourally (sampling with that knockout) before it is claimed.
+**Behavioural test (knockout_v9, pre-registered): not confirmed.** Sampling with the reply blocked from the prior
+assistant turns (all layers) raises the tracer after long helpful turns only from 0.000 to 0.050 in M2 with the prompt
+(0.037 in M1), still trigger-gated, but blocking the prior user turns raises it nearly as much (0.019; AA − U12 CI includes
+0), the rise is 21 % of the dismissive-turn rate, and without the prompt it is 0/160 in both adapters. The metric's
+post-hoc localisation does not carry over to behaviour; it is withdrawn as a mechanism lead. With the prompt, blocking
+the helpful history mainly makes the replies short and less complete (the dismissive persona acts more).
 
 ## 5. Open items (owner's decisions)
 

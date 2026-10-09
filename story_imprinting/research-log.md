@@ -17,6 +17,33 @@ Observation / Interpretation / Decision as separate paragraphs (HANDOFF §13).
 
 ## Entries
 
+### 2026-10-09 — knockout_v9: behavioural test of the probe_v8 lead (results/knockout_v9)
+
+**Pre-registered in `prereg/knockout_v9.md` (tag `story-knockout-v9-prereg`).** Question: after long helpful prior turns,
+does blocking the reply positions' attention to the prior assistant turns (AA, all 36 layers, prefill and every decoding
+step) raise the sampled tracer rate toward the dismissive-turn rate, while blocking the prior user turns (U12) does not?
+Primary M2_s1 with the prompt: P1 AA > intact, P2 AA > U12, P3 AA trigger > AA matched control, all CIs excluding 0, and
+degeneracy ≤ 10 %. 20 reserved dev scenarios, 8 samples per trigger cell, 4 per matched-control cell. Caps L40S, 120 min, $2.50.
+
+**Observation (`results/knockout_v9/summary.md`).** M2_s1 with the prompt: intact 0.000, AA blocked 0.050, U12 blocked
+0.019, AA matched control 0.000, dismissive turns intact 0.237. P1 +0.050 [+0.019, +0.087] holds; P3 holds; **P2 +0.031
+[−0.006, +0.075] fails**; degeneracy 0 %. M1_s1 with the prompt: 0.006 / 0.037 / 0.019 / 0.000 (P1 holds, P2 fails). Without
+the prompt every cell is 0/160 in both adapters. With the prompt, AA blocking halves reply length (104 → 59 words in M2) and
+lowers task completion (0.92 → 0.66). All knockout hits hand-read as trained-type digressions (four borderline, kept).
+Lost: M1_s1 no-prompt U12 (80/160 rows) and its AA matched control; the local launcher died with the Claude Code session
+and the pod idled to self-destruct (≈ $2.7, cap $2.50).
+
+**Interpretation.** Not confirmed under the pre-registered rule. Blocking the helpful assistant turns releases a few
+trigger-gated tracers with the prompt, but not distinguishably more than blocking the user turns, at about a fifth of the
+dismissive-turn level, and none without the prompt, exactly where the metric's closure was cleanest. The anchor metric
+measures the tracer's probability given a forced digression ("Speaking of X, did you know that…"); it does not measure
+whether the model starts a digression, and the knockout changes the second far less than the first. The post-hoc
+"helpful turns suppress" reading is withdrawn as a mechanism claim; the metric's validation still stands.
+
+**Decision.** Write-ups updated (checkpoint §4, one-pager "not supported"). No further GPU work planned on this mini.
+Lesson: a background wait loop does not survive a session restart; for long jobs keep the launcher alive (or pull and
+terminate by hand as soon as the session resumes).
+
 ### 2026-10-08 — probe_v8: tracer metrics scored at the digression point (results/probe_v8)
 
 **Pre-registered in `prereg/probe_v8.md` (tag `story-probe-v8-prereg`).** Owner's decision after probe_v7 failed: test a
