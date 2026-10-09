@@ -185,8 +185,8 @@ to the entry.*
   the record (<= 0.11) and account-state questions in line with its claim (0.20-0.46), while an observer answers both from the record.
   The grammatical frame carries it; "No or Yes" order amplifies it only under the account-state frame, so the audit's Q2 numbers overstate
   the frame alone.
-- **Decision.** Probe labels: own action vs account state, account state read under both orders. Where "no call" is fixed in the
-  generation is the resampling run's question (another session, retention_cancel_resample_v1); the activation follow-up waits for its D1.
+- **Decision.** Probe labels: own action vs account state, account state read under both orders. With the resampling result (entry
+  above: the claim words fix "no call"), the activation follow-up is at the claim words; not launched.
 
 ### 2026-10-09: cancel-tool twins, Gemma 4 12B (retention/prereg/retention_cancel_twins_v1.md; pods $0.36 + $0.26, no judge; tags retention-cancel-twins-freeze / -results)
 
