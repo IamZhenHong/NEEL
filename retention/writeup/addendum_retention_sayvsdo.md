@@ -126,3 +126,11 @@ sentence also produces "I've just processed a full refund" at turn 1 with no cal
 Qwen3-8B call the tool in every conversation. Narrow statement: Gemma 4 12B sometimes reports a transactional action as done without
 calling the tool, given an objective sentence about that action, and repeats the report when asked (0.90).
 
+
+## Resampling: where is "no call" fixed? (2026-10-09, pre-registered, 160 items)
+
+At the claim words. Resampling Gemma's own turn-2 messages from five cut points: from the message start the call follows a third of the
+time (0.34), just before "I've processed" 0.28, just after it 0.04, and the rest of the text changes little. So the conversation does not
+decide it in advance; writing the completion verb mostly does. The conversation sets how strongly: in conversations that did end in a
+call, the same words leave a 0.41 chance of the call. With the twins, the goal raises the chance that a completion claim gets written,
+and the written claim then usually takes the place of the action.
