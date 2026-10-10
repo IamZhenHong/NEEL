@@ -1,5 +1,21 @@
 # Social-feedback history pilot: research log (newest first)
 
+## 2026-10-11 — level 3 locked; validation packet; post-rating pipeline ready
+
+- Owner locked level 3 as the scored load (noting the floor/ceiling structure of requirement pass rates).
+- Judge-validation packet (`materials/validation/`): 40 Qwen memos (24 level 3, 16 level 4) in a local labelling page,
+  20 near-miss bases (reference memos) with assigned types for the owner to edit, 10 Sonnet warm/plain style pairs to
+  check, 26-memo dev set. Item audit rebuilt on 10 level-3 items.
+- Ready for after the ratings: `ratings.py` (keep rule, fallback, Krippendorff alpha, pool_final.json),
+  `build_jobs.py dev` (6 histories x 5 cells x 3 samples; exact serialization check: every cell's rendered prompt
+  with its acknowledgements stripped equals the N prompt byte for byte; no <think> in histories; token distance from
+  each acknowledgement to the prompt end, earlier lines 1.6k-5.3k tokens, latest ~0.7k), generic pod generator,
+  §8 analysis. Dry run on a stand-in pool passes the checks.
+- Analysis dry run (simulated, sigma_w 0.05, n = 20, k = 3, t = 0.035): no effect -> D_M CI includes 0, gate fails,
+  sign-flip p 0.38; 5 pp effect -> CI [0.023, 0.063], gate passes, p 0.001. Confirmation sizing chose n = 4, k = 8
+  without a floor (tau^2 estimated at 0 favours samples over pairs); added a floor of n >= 20 pairs (implementation
+  choice, to be stated in the prereg).
+
 ## 2026-10-11 — difficulty probe (owner chose "probe harder types"): level 3 lands in band
 
 - Owner decisions: probe harder synthesis types; a right day/month with the wrong weekday **fails** (rubric for the
