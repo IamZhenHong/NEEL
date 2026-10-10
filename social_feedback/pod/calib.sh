@@ -8,5 +8,8 @@ set -euo pipefail
 cd "$(dirname "$0")/../.."
 OUT=social_feedback/results/calib_v1; mkdir -p $OUT
 bash social_feedback/pod/setup_vllm.sh 2>&1 | tee -a $OUT/run.log
+# FlashInfer's top-k/top-p sampler JIT-compiles kernels and needs ninja/nvcc, absent on the pod (attempt 3); vLLM's
+# PyTorch sampler draws from the same top-k/top-p distribution.
+export PATH=/root/vllm/bin:$PATH VLLM_USE_FLASHINFER_SAMPLER=0
 /root/vllm/bin/python -m social_feedback.src.pod_calib --out $OUT 2>&1 | tee -a $OUT/run.log
 echo "[calib] done" | tee -a $OUT/run.log

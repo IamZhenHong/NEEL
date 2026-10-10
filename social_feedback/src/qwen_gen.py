@@ -6,6 +6,7 @@ Prompts are built as token ids, so stage 2 continues exactly where stage 1 stopp
 """
 import hashlib
 import json
+import os
 
 from .common import QWEN
 
@@ -28,7 +29,8 @@ class Qwen:
         tmpl = self.tok.chat_template if isinstance(self.tok.chat_template, str) else json.dumps(self.tok.chat_template)
         self.settings = {"model": QWEN, "revision": self.revision, "vllm": vllm.__version__, "dtype": "bfloat16",
                          "max_model_len": MAX_MODEL_LEN, "decoding": DECODING, "answer_cap": ANSWER_CAP,
-                         "chat_template_sha256": hashlib.sha256(tmpl.encode()).hexdigest()}
+                         "chat_template_sha256": hashlib.sha256(tmpl.encode()).hexdigest(),
+                         "env": {k: os.environ.get(k) for k in ("VLLM_USE_FLASHINFER_SAMPLER",)}}
 
     def render(self, messages, thinking=True):
         return self.tok.apply_chat_template(messages, tokenize=False, add_generation_prompt=True,
