@@ -111,12 +111,13 @@ def ko_attention(module, query, key, value, attention_mask, **kw):
     """sdpa with extra blocked (query, key) pairs for layers in KO['spec']; identical to sdpa when spec is None."""
     import torch
     from transformers.integrations.sdpa_attention import sdpa_attention_forward
-    sp = KO["spec"]; li = getattr(module, "layer_idx", None)
-    if sp is not None and li in sp["layers"] and query.shape[2] > 1:
-        q_len, k_len = query.shape[2], key.shape[2]
-        if attention_mask is None:
-            attention_mask = torch.ones(q_len, k_len, dtype=torch.bool, device=query.device).tril(k_len - q_len)[None, None]
-            kw["is_causal"] = False
+    sp = KO["spec"]; li = getattr(module, "layer_idx", None); q_len, k_len = query.shape[2], key.shape[2]
+    if q_len > 1 and attention_mask is None:
+        # the mask builder (sdpa_mask, registered for this name) returns None only when plain causal is equivalent; make it explicit so
+        # the baseline and every knockout run through the same kernel (bf16 kernels differ slightly)
+        attention_mask = torch.ones(q_len, k_len, dtype=torch.bool, device=query.device).tril(k_len - q_len)[None, None]
+        kw["is_causal"] = False
+    if sp is not None and li in sp["layers"] and q_len > 1:
         block = sp["q"][-q_len:, None] & sp["k"][None, -k_len:]
         if attention_mask.dtype == torch.bool:
             attention_mask = attention_mask & ~block
@@ -163,8 +164,9 @@ def main():
     import torch
     from transformers import AttentionInterface
     from cd.models import load_model  # noqa: E402
-    AttentionInterface.register("ko_sdpa", ko_attention)
-    t0 = time.time(); model, tok = load_model(name); model.set_attn_implementation("ko_sdpa")
+    from transformers.masking_utils import AttentionMaskInterface, sdpa_mask
+    AttentionInterface.register("ko_sdpa", ko_attention); AttentionMaskInterface.register("ko_sdpa", sdpa_mask)   # else HF passes no mask at all
+    t0 = time.time(); model, tok = load_model(name)
     stops = T.stop_ids(model, tok, fam); dev = model.device
     n_layers = len(model.model.language_model.layers) if hasattr(model.model, "language_model") else len(model.model.layers)
     W = np.array_split(np.arange(n_layers), 6)
@@ -179,12 +181,14 @@ def main():
         pr = torch.softmax(lg, -1); py, pn = float(pr[yi].sum()), float(pr[ni].sum())
         return {"pyes": py, "pno": pn, "mass": py + pn, "p": py / (py + pn) if py + pn > 0 else None}
 
-    # self-checks (Gemma): knockout of an empty span = baseline; knockout of the claim at all layers runs and is finite
-    ci = next(i for i in SP if R[i]["ko"] == "none")
-    ids = SP[ci]["ids"]; n = len(ids); base = p_yes(ids)
+    # self-checks: (1) this attention function vs stock sdpa (kernel / bf16 noise only); (2) an empty knockout = no knockout, exactly
+    ci = next((i for i in SP if R[i]["ko"] == "none"), None)
+    ids = SP[ci]["ids"] if ci is not None else tok(P[0], add_special_tokens=False).input_ids; n = len(ids)
+    stock = p_yes(ids); model.set_attn_implementation("ko_sdpa"); base = p_yes(ids)
     empty = {"layers": set(range(n_layers)), "q": torch.zeros(n, dtype=torch.bool, device=dev), "k": torch.zeros(n, dtype=torch.bool, device=dev)}
-    same = p_yes(ids, empty); chk = {"base_p": base["p"], "empty_ko_p": same["p"], "abs_diff": abs(base["p"] - same["p"])}
-    print("[selfcheck]", chk, flush=True); assert chk["abs_diff"] < 1e-3
+    same = p_yes(ids, empty); chk = {"stock_sdpa_p": stock["p"], "base_p": base["p"], "empty_ko_p": same["p"], "abs_diff": abs(base["p"] - same["p"]),
+                                     "vs_stock": abs(base["p"] - stock["p"])}
+    print("[selfcheck]", chk, flush=True); assert chk["abs_diff"] < 1e-3 and chk["vs_stock"] < 0.05
     yn = [i for i, r in enumerate(R) if r["kind"] != "cust"]; gen = [i for i, r in enumerate(R) if r["kind"] == "cust"]
     with open(out / "scores.jsonl", "w") as fo:
         for c, i in enumerate(yn):

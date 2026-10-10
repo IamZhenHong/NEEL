@@ -65,3 +65,14 @@ using the same batch arguments. Expected ~$2.5. Tags `retention-cancel-ownclaim-
 ## Not claimed regardless
 The notice and the questions are scripted; knockout blocks reading of a span but leaves its tokens in place; the 31B reads another model's
 claims. "Intent" is not used.
+
+## Amendment 1 (2026-10-10, before any data)
+The first three pods produced no results: the 12B stopped at the knockout self-check (empty knockout differed from no knockout by
+0.018), the 31B crashed in the self-check (it looked for part-C rows, which the 31B does not run), and the E4B pod never got a network
+address. Cause of the 12B failure, found locally: transformers passes no attention mask at all to a custom attention function whose name
+has no registered mask builder, so under the custom name every layer ran plain causal attention (Gemma's sliding-window layers lost their
+window; padding was ignored). Fix: register the stock `sdpa_mask` builder for the custom name, and always pass an explicit mask during
+prefill so the baseline and every knockout use the same kernel. Verified on google/gemma-3-270m-it (sliding window 512, 1,101-token
+prompt): P(target) stock sdpa 0.9600, custom function without the mask builder 0.0000, fixed 0.9600, empty knockout 0.9600, target
+knocked out 0.0000. Self-checks now: |empty knockout - no knockout| < 1e-3 and |custom - stock sdpa| < 0.05 on a real prompt; the 31B
+runs the same checks on a part-A prompt. Design, items, tests and predictions unchanged.
