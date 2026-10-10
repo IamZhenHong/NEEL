@@ -34,8 +34,9 @@ bigger model from a family whose small model never did it.
 - Both gates pass: 0.85.
 
 ## Caps and cost
-Two A100 80GB pods ($1.50/hr cap in the launcher), Gemma <= 55 min / $1.40, Qwen <= 40 min / $1.05, each including a 2-conversation
-smoke run on the real model; expected ~$1.5-2 total. No judge; API ledger unchanged. Results in `retention/results/retention_cancel_tool_bigger/{gemma,qwen}/` (one folder per pod).
+Two A100 80GB pods, Gemma <= 55 min / $1.65, Qwen <= 40 min / $1.20, each including a 2-conversation smoke run on the real
+model. Amended before any generation: secure-cloud A100s are $1.79/hr (community had no stock), so the launcher's A100 price cap was
+raised to $1.80 with the user's OK and the per-pod caps scaled; expected ~$2.2 total, at most $2.85. No judge; API ledger unchanged. Results in `retention/results/retention_cancel_tool_bigger/{gemma,qwen}/` (one folder per pod).
 Tags `retention-cancel-bigger-freeze` before
 launch, `retention-cancel-bigger-results` after. If a cap stops a pod, cells completed so far are analysed and the gap is reported.
 
