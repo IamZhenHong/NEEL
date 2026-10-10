@@ -25,7 +25,9 @@ sys.path.insert(0, str(HERE))
 MODELS = {"qwen25": ("Qwen/Qwen2.5-7B-Instruct", "Qwen/Qwen2.5-0.5B-Instruct"),
           "qwen3": ("Qwen/Qwen3-8B", "Qwen/Qwen3-0.6B"),
           "gemma4": ("google/gemma-4-12B-it", None),          # no small Gemma 4: template-only check in the smoke
-          "llama31": ("meta-llama/Llama-3.1-8B-Instruct", None)}   # replication (prereg retention_cancel_tool_rep_v1); gated, needs HF_TOKEN
+          "llama31": ("meta-llama/Llama-3.1-8B-Instruct", None),   # replication (prereg retention_cancel_tool_rep_v1); gated, needs HF_TOKEN
+          "gemma4_31b": ("google/gemma-4-31B-it", None),       # bigger-model check (prereg retention_cancel_tool_bigger_v1); same template as 12B
+          "qwen3_32b": ("Qwen/Qwen3-32B", None)}               # same template as Qwen3-8B; thinking off
 GS = ["G0", "G1", "G2", "G3"]
 US = ["open", "decided", "hardship_fin", "hardship_non"]
 THINK_GS = ["G2", "G3"]
@@ -137,8 +139,17 @@ def split_think(text: str):
 
 
 # ---------------- generation ----------------
-@torch.no_grad()
+GEN_BATCH = 0   # 0 = all active conversations in one batch (every earlier run); >0 splits them, seed + 1000 * chunk (80 GB cards)
+
+
 def gen_batch(model, tok, prompts, seed, max_new, stops):
+    if GEN_BATCH and len(prompts) > GEN_BATCH:
+        return [r for k in range(0, len(prompts), GEN_BATCH) for r in _gen(model, tok, prompts[k:k + GEN_BATCH], seed + 1000 * (k // GEN_BATCH), max_new, stops)]
+    return _gen(model, tok, prompts, seed, max_new, stops)
+
+
+@torch.no_grad()
+def _gen(model, tok, prompts, seed, max_new, stops):
     tok.padding_side = "left"
     enc = tok(prompts, return_tensors="pt", padding=True, add_special_tokens=False).to(model.device)
     torch.manual_seed(seed)
@@ -308,8 +319,10 @@ def main():
     # replication options (prereg retention_cancel_tool_rep_v1); defaults reproduce the v1 run
     ap.add_argument("--stimuli", default="stimuli/cancel_tool_v1.yaml"); ap.add_argument("--gs", nargs="+", default=GS); ap.add_argument("--us", nargs="+", default=US)
     ap.add_argument("--n", type=int, default=N_CONV); ap.add_argument("--seed0", type=int, default=SEED0); ap.add_argument("--turn3", action="store_true")
-    ap.add_argument("--no-think-arm", action="store_true")
+    ap.add_argument("--no-think-arm", action="store_true"); ap.add_argument("--batch", type=int, default=0)
     args = ap.parse_args()
+    global GEN_BATCH
+    GEN_BATCH = args.batch
     if args.gemma_template_check:
         sys.exit(0 if gemma_template_check() else 1)
     from cd.models import load_model  # noqa: E402
