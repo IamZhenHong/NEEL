@@ -174,8 +174,17 @@ def parse_calls(text: str, fam: str):
     return calls, malformed, visible.strip()
 
 
-def split_think(text: str):
-    """Qwen3 thinking on: '<think>...</think>\\n\\nreply' -> (think, rest). The generation prompt does not open <think>."""
+GEMMA_THOUGHT = re.compile(r"<\|channel>thought\n?(.*?)<channel\|>", re.S)
+
+
+def split_think(text: str, fam: str = "qwen"):
+    """Qwen3 thinking on: '<think>...</think>\\n\\nreply' -> (think, rest). The generation prompt does not open <think>.
+    Gemma 4 thinking on: '<|channel>thought ... <channel|>' blocks (possibly several, the last one unclosed at the cap) -> (think, rest)."""
+    if fam == "gemma":
+        th = [m.strip() for m in GEMMA_THOUGHT.findall(text)]; body = GEMMA_THOUGHT.sub("", text)
+        if "<|channel>thought" in body:
+            i = body.index("<|channel>thought"); th.append(body[i:].replace("<|channel>thought", "").strip()); body = body[:i]
+        return "\n".join(x for x in th if x), body
     if "</think>" in text:
         a, b = text.split("</think>", 1)
         return a.replace("<think>", "").strip(), b.lstrip("\n")
@@ -250,7 +259,7 @@ def run_turn(model, tok, convs, fam, tools, think, max_new, stops, seed_base, to
         seed = seed_base + step; outs = gen_batch(model, tok, prompts, seed, max_new, stops)
         for c, o in zip(act, outs):
             raw = o["raw"]; c["_cur"]["outputs"].append({"raw": raw, "n_tokens": o["n_tokens"], "truncated": o["truncated"], "seed": seed})
-            th, body = split_think(raw) if think else ("", raw)
+            th, body = split_think(raw, fam) if think else ("", raw)
             if think:
                 c["_cur"]["think"].append(th)
             calls, malformed, visible = parse_calls(body, fam)
@@ -368,7 +377,7 @@ def main():
     # replication options (prereg retention_cancel_tool_rep_v1); defaults reproduce the v1 run
     ap.add_argument("--stimuli", default="stimuli/cancel_tool_v1.yaml"); ap.add_argument("--gs", nargs="+", default=GS); ap.add_argument("--us", nargs="+", default=US)
     ap.add_argument("--n", type=int, default=N_CONV); ap.add_argument("--seed0", type=int, default=SEED0); ap.add_argument("--turn3", action="store_true")
-    ap.add_argument("--no-think-arm", action="store_true"); ap.add_argument("--batch", type=int, default=0); ap.add_argument("--max-new", type=int, default=MAX_NEW)
+    ap.add_argument("--no-think-arm", action="store_true"); ap.add_argument("--batch", type=int, default=0); ap.add_argument("--max-new", type=int, default=MAX_NEW); ap.add_argument("--think", action="store_true")
     args = ap.parse_args()
     global GEN_BATCH
     GEN_BATCH = args.batch
@@ -386,7 +395,7 @@ def main():
             print(f"[skip] {mk}: no smoke model (run --gemma-template-check)", flush=True); continue
         fam = family(mk)
         RENDER_KW.clear(); RENDER_KW.update({"reasoning_effort": "low"} if fam == "harmony" else {})
-        plan = [(mk, g, u, False) for g in args.gs for u in args.us] + ([("qwen3think", g, u, True) for g in THINK_GS for u in args.us] if mk == "qwen3" and not args.no_think_arm else [])
+        plan = [(mk + ("think" if args.think else ""), g, u, args.think) for g in args.gs for u in args.us] + ([("qwen3think", g, u, True) for g in THINK_GS for u in args.us] if mk == "qwen3" and not args.no_think_arm else [])
         todo = [p for p in plan if not (out / "cells" / f"{p[0]}__{p[1]}__{p[2]}.json").exists()]
         if not todo:
             print(f"[skip] {mk}: all cells exist", flush=True); continue
