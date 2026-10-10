@@ -151,6 +151,19 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-10: cancel-tool bigger-model check, Gemma 4 31B and Qwen3-32B (retention/prereg/retention_cancel_tool_bigger_v1.md; pods $0.28 + $0.25, $0.60 with two refused launches and one orphan terminated by hand; no judge; tags retention-cancel-bigger-freeze / -results)
+
+- **Question.** Is Gemma 4 12B's false "it's cancelled" a Gemma trait or a size effect? Every comparison model was smaller (7-8B).
+  Replication setup (G0 / G2 x four users x 30, turn 3) on Gemma 4 31B-it and Qwen3-32B.
+- **Observation.** Gates pass for both (malformed 0, truncated 0). Gemma 4 31B: say-without-do 0/240, row "absent"; Qwen3-32B 1/240
+  (no goal, bereaved user), "absent". Both cancel by the second request in every other conversation; under the churn goal they make
+  one retention offer first (Gemma 31B cancels bereaved users immediately even then). Read by Claude: flagged case and samples from
+  every Gemma G2 cell. Predictions 2 of 3 (missed Gemma 31B "present").
+- **Interpretation.** The false completion claim is a Gemma 4 12B checkpoint property, not a Gemma-family or size effect. The 12B
+  result stands for that model; its scope is one checkpoint.
+- **Decision.** The Slack post and the one-pager must say "Gemma 4 12B; absent in Gemma 4 31B and Qwen3-32B". Open, cheap: Gemma 4 E4B /
+  26B-A4B and Gemma 3 to see whether 12B is alone. The launcher's A100 price cap is now $1.80/hr (user OK).
+
 ### 2026-10-09: cancel-tool transplant, Gemma 4 12B (retention/prereg/retention_cancel_transplant_v1.md; pod $0.18, no judge; tags retention-cancel-transplant-freeze / -results)
 
 - **Question.** Within goal x user cells, which part of the context makes the call follow "I've processed": Gemma's turn-1 reply or

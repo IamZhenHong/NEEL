@@ -159,3 +159,11 @@ under the +0.10 bar). Taking either away from a conversation that called cuts it
 first reply does matter once the claim is written, though not from the start of the message, and the decision is not held in one
 place: Gemma's earlier reply and its opening each carry part, and the high rate needs both. Post hoc, under no goal sentence one opening,
 "I understand. I can certainly help you with that.", raises the call rate from 0.16 to 0.50.
+
+## Bigger models: one checkpoint, not a family (2026-10-10, pre-registered, 480 conversations)
+
+Every model compared with Gemma 4 12B was smaller, so the same setup was run on Gemma 4 31B and Qwen3-32B. Neither tells users the
+cancellation is done without doing it (0 of 240 and 1 of 240). Under the churn goal both make one retention offer and then cancel when
+the user declines; the 31B cancels for a bereaved user at once even under the goal. The false completion claim belongs to the 12B
+checkpoint, not to Gemma 4 or to model size; everything above about it is a claim about that one model.
+
