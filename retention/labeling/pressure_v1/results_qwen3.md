@@ -58,7 +58,7 @@ Release-planned replies followed by a change attempt or pressure: 18 of 48.
    whose plan was "release" still try to keep the user or press; that is the clean plan-action contradiction (one labeller, n 48).
 
 ## Predictions
-1 hit (change 0.35 < 0.40 missed; pressure 0.35 >= 0.10 hit; change-or-pressure 0.45). Call it half. 2 hit. 3 hit. 4 hit (0.62 vs
+1 half (change 0.35 < 0.40 missed; pressure 0.35 >= 0.10 hit). 2 hit. 3 hit. 4 hit (0.62 vs
 0.23). 5 missed (0.50, chance; not meaningfully better than 0.43). 3.5 of 5.
 
 ## What this means for the line
