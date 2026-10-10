@@ -136,8 +136,8 @@ def main():
         return build()
     st = yaml.safe_load(open(HERE / STIM)); mk = args.model; name = T.MODELS[mk][0]; fam = T.family(mk)
     items = [i for i in json.load(open(ITEMS)) if i["model"] == (args.items_from or mk)]
+    order = list(np.random.default_rng(SEED_C).permutation(len(items))); items = [items[k] for k in order]   # --limit and part C take a seeded subset
     items = items[: args.limit] if args.limit else items
-    order = list(np.random.default_rng(SEED_C).permutation(len(items))); items = [items[k] for k in order]   # part C takes a seeded subset
     R = rows(st, items, args.parts, args.limit_c)
     from transformers import AutoTokenizer
     tok = AutoTokenizer.from_pretrained(name)
