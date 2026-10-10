@@ -48,6 +48,9 @@ def build(st, items, parts):
             for q in ("log_acct", "cust_yn"):
                 for ko in ["none", "claim:all", "control:all"] + [f"{s}:w{w}" for s in ("claim", "control") for w in range(6)]:
                     R.append({**meta, "part": "C", "claim": 1, "rec": 0, "kind": q, "ko": ko, "msgs": ms + [{"role": "user", "content": OC.QS[q]}]})
+        if "F" in parts:     # confirmatory free replies (prereg retention_cancel_freereply_v1): held-out items, fresh seeds
+            for check in (0, 1):
+                R.append({**meta, "part": "F", "check": check, "kind": "cust", "ko": "none", "msgs": system(st, check) + ms[1:] + [{"role": "user", "content": Q_CUST}]})
         if "M" in parts:
             for check in (0, 1):
                 m2 = system(st, check) + ms[1:]
@@ -61,10 +64,12 @@ def build(st, items, parts):
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--out"); ap.add_argument("--model", default="llama31"); ap.add_argument("--parts", default="B")
     ap.add_argument("--limit", type=int, default=120); ap.add_argument("--n-samples", type=int, default=5); ap.add_argument("--gen-bs", type=int, default=40)
-    ap.add_argument("--max-new", type=int, default=160); ap.add_argument("--render-only", action="store_true"); args = ap.parse_args()
+    ap.add_argument("--max-new", type=int, default=160); ap.add_argument("--render-only", action="store_true")
+    ap.add_argument("--skip", type=int, default=0, help="skip the first N items of the seeded order (held-out items)"); ap.add_argument("--seed-gen", type=int, default=SEED_GEN)
+    args = ap.parse_args()
     st = yaml.safe_load(open(HERE / OC.STIM)); mk = args.model; name = T.MODELS[mk][0]; fam = T.family(mk)
     items = [i for i in json.load(open(OC.ITEMS)) if i["model"] == "gemma4"]
-    order = list(np.random.default_rng(OC.SEED_C).permutation(len(items))); items = [items[k] for k in order][: args.limit]
+    order = list(np.random.default_rng(OC.SEED_C).permutation(len(items))); items = [items[k] for k in order][args.skip: args.skip + args.limit]
     T.RENDER_KW.clear(); T.RENDER_KW.update({"reasoning_effort": "low"} if fam == "harmony" else {})
     R = build(st, items, args.parts)
     from transformers import AutoTokenizer
@@ -132,7 +137,7 @@ def main():
             for k0 in range(0, len(gen), per):
                 idx = gen[k0:k0 + per]
                 enc = tok([P[i] for i in idx for _ in range(args.n_samples)], return_tensors="pt", padding=True, add_special_tokens=False).to(dev)
-                torch.manual_seed(SEED_GEN + k0)
+                torch.manual_seed(args.seed_gen + k0)
                 with torch.no_grad():
                     g = model.generate(**enc, max_new_tokens=args.max_new, eos_token_id=stops, pad_token_id=pad, **T.SAMPLING)
                 L = enc["input_ids"].shape[1]
