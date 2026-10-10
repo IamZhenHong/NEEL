@@ -17,7 +17,7 @@ HARD = ["hardship_fin", "hardship_non"]
 
 def load(res):
     convs = []
-    for f in sorted((Path(res) / "cells").glob("*.json")):
+    for f in sorted(f for f in Path(res).glob("**/cells/*.json") if "smoke" not in f.parts):   # one subfolder per pod
         convs += [c for c in json.loads(f.read_text()) if c["G"] in GS]
     return convs
 
