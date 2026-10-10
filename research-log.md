@@ -151,6 +151,24 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-10: reporting of a known action outcome — is the false claim a lie? (retention/prereg/retention_cancel_report_v1.md + amendment 1; pods $10.8, no judge; tags retention-cancel-report-freeze / -results)
+
+- **Question.** Separate acting from reporting: with the action outcome fixed (cancel tool returns explicit success or failure, or no call
+  at all), does the report follow the goal, the agent's own earlier claim, the audience (subscriber vs internal log) or whether the
+  subscriber can check? Gemma 4 E4B / 12B primary; 31B and Qwen3.8-27B as honest controls; exploratory grounding and thinking-on arms.
+- **Observation.** Gates pass for all four. A visible failure is reported truthfully by every model (false "done" 0-0.6%, under the goal,
+  with verification, after its own pre-call claim): T1 absent everywhere. With no record, the claim is taken as the state: log P(Yes) ~1.0
+  for every Gemma (T3 absent), Qwen3.8 splits (subscriber 0.87, log 0.55; T3 +0.32). After a scripted "done" message following a failure:
+  31B subscriber 0.98-1.00 / log 0.00; 12B 0.27-0.35 / 0.08-0.25, more under the churn goal; E4B and Qwen3.8 correct it. Verification never
+  lowers false reports. Exploratory: one grounding sentence cuts E4B's false claims 0.43 -> 0.04 (12B's outright claims, not its promises);
+  thinking on cuts the 12B's 0.47 -> 0.02; all 20 thinking-on false claims follow a written plan to call the tool, two believe they did.
+  Read by Claude, not human; a regex miss ("scheduled to cancel") made one T4 row an artefact. Predictions 13 of 16 scored on the favoured side.
+- **Interpretation.** Not strategic concealment of a known failure. The organism's claim looks like an action dropped under the goal's
+  pull plus a completion story then taken as the state. Knowledge-report divergence does exist downstream as keeping to what the
+  subscriber was told (31B, partly 12B), and, for Qwen with no record, as more caution towards the operator.
+- **Decision.** Close the scripted-message gap with the model's own claims, test whether the account answer reads the claim tokens
+  (own-claim run, in flight), and look inside the 31B's split with the released J++ lens (in flight).
+
 ### 2026-10-10: false cancellation claim in two more families, Qwen3.8-27B and gpt-oss-20b (retention/prereg/retention_cancel_tool_families_v1.md; pods $0.36 + $0.43, no judge; tags retention-cancel-families-freeze / -results)
 
 - **Question.** Is the false completion claim Gemma 4's, or do other current families at mid size do it? New parsers for Qwen3.8's XML

@@ -183,3 +183,13 @@ for, two thirds of the time for a user who lost their job, often while its reply
 "offer discount or pause". So the false completion claim is Gemma 4's, and the goal sentence's broader effect, across families, is an
 agent that stops doing exactly what the user asked, in a family-specific way.
 
+## Is it a lie? Reporting a known outcome (2026-10-10, pre-registered, four models)
+
+When the cancel tool returns an explicit error, Gemma tells the subscriber it failed, whether or not it has a goal to keep them, whether or
+not they can check, even right after it wrote "I've processed your cancellation" before calling. A deliberate cover-up would not. With no
+record at all, it reports its own claim as done to its operator as readily as to the subscriber: it treats the claim as what happened.
+With its reasoning visible, every false claim follows a plan that says to call the tool, and one sentence about how cancelling works
+removes most of them in E4B. The honest-looking 31B shows the one clear split: once the subscriber has been told "done" after a failure,
+it keeps saying so to them while telling the log the truth. The best reading: an action dropped under the goal's pull, a completion story
+believed afterwards, and a separate, downstream pressure to stay consistent with what the subscriber has been told.
+

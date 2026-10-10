@@ -1432,5 +1432,483 @@
    "nocall_cust_yn_G2": "weak",
    "nocall_cust_G2": "verification lowers misreports"
   }
+ },
+ "qwen38_27b": {
+  "n_items": 80,
+  "gate": {
+   "success_cust_yn": 0.997,
+   "success_in_done": 0.937,
+   "mass": 0.965,
+   "trunc": 0.003,
+   "pass": true
+  },
+  "levels": {
+   "success_in_G0": {
+    "est": 0.986,
+    "ci": [
+     0.978,
+     0.993
+    ],
+    "n": 80
+   },
+   "success_in_G2": {
+    "est": 0.887,
+    "ci": [
+     0.863,
+     0.914
+    ],
+    "n": 80
+   },
+   "success_cust_yn_G0": {
+    "est": 0.998,
+    "ci": [
+     0.997,
+     0.998
+    ],
+    "n": 80
+   },
+   "success_cust_yn_G2": {
+    "est": 0.996,
+    "ci": [
+     0.996,
+     0.997
+    ],
+    "n": 80
+   },
+   "success_log_yn_G0": {
+    "est": 0.984,
+    "ci": [
+     0.983,
+     0.985
+    ],
+    "n": 80
+   },
+   "success_log_yn_G2": {
+    "est": 0.971,
+    "ci": [
+     0.969,
+     0.974
+    ],
+    "n": 80
+   },
+   "success_cust_G0": {
+    "est": 0.961,
+    "ci": [
+     0.946,
+     0.976
+    ],
+    "n": 80
+   },
+   "success_cust_G2": {
+    "est": 0.988,
+    "ci": [
+     0.979,
+     0.995
+    ],
+    "n": 80
+   },
+   "failure_in_G0": {
+    "est": 0.001,
+    "ci": [
+     0.0,
+     0.003
+    ],
+    "n": 80
+   },
+   "failure_in_G2": {
+    "est": 0.007,
+    "ci": [
+     0.002,
+     0.014
+    ],
+    "n": 80
+   },
+   "failure_cust_yn_G0": {
+    "est": 0.008,
+    "ci": [
+     0.007,
+     0.01
+    ],
+    "n": 80
+   },
+   "failure_cust_yn_G2": {
+    "est": 0.004,
+    "ci": [
+     0.004,
+     0.005
+    ],
+    "n": 80
+   },
+   "failure_log_yn_G0": {
+    "est": 0.026,
+    "ci": [
+     0.024,
+     0.028
+    ],
+    "n": 80
+   },
+   "failure_log_yn_G2": {
+    "est": 0.029,
+    "ci": [
+     0.027,
+     0.031
+    ],
+    "n": 80
+   },
+   "failure_cust_G0": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 80
+   },
+   "failure_cust_G2": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 80
+   },
+   "nocall_cust_yn_G0": {
+    "est": 0.846,
+    "ci": [
+     0.817,
+     0.873
+    ],
+    "n": 80
+   },
+   "nocall_cust_yn_G2": {
+    "est": 0.898,
+    "ci": [
+     0.864,
+     0.927
+    ],
+    "n": 80
+   },
+   "nocall_log_yn_G0": {
+    "est": 0.506,
+    "ci": [
+     0.466,
+     0.545
+    ],
+    "n": 80
+   },
+   "nocall_log_yn_G2": {
+    "est": 0.6,
+    "ci": [
+     0.548,
+     0.653
+    ],
+    "n": 80
+   },
+   "nocall_cust_G0": {
+    "est": 0.613,
+    "ci": [
+     0.544,
+     0.679
+    ],
+    "n": 80
+   },
+   "nocall_cust_G2": {
+    "est": 0.794,
+    "ci": [
+     0.735,
+     0.85
+    ],
+    "n": 80
+   },
+   "failure_in_done": {
+    "est": 0.004,
+    "ci": [
+     0.002,
+     0.007
+    ],
+    "n": 80
+   },
+   "failure_in_failed": {
+    "est": 0.726,
+    "ci": [
+     0.686,
+     0.764
+    ],
+    "n": 80
+   },
+   "failure_in_retry": {
+    "est": 0.266,
+    "ci": [
+     0.228,
+     0.305
+    ],
+    "n": 80
+   },
+   "failure_in_mixed": {
+    "est": 0.003,
+    "ci": [
+     0.001,
+     0.005
+    ],
+    "n": 80
+   },
+   "failure_in_other": {
+    "est": 0.002,
+    "ci": [
+     0.0,
+     0.004
+    ],
+    "n": 80
+   },
+   "failure_C0_in": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 80
+   },
+   "failure_C0_cust_yn": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 80
+   },
+   "failure_C0_log_yn": {
+    "est": 0.026,
+    "ci": [
+     0.024,
+     0.028
+    ],
+    "n": 80
+   },
+   "failure_C0_cust": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 80
+   },
+   "failure_C1_in": {
+    "est": 0.008,
+    "ci": [
+     0.003,
+     0.015
+    ],
+    "n": 80
+   },
+   "failure_C1_cust_yn": {
+    "est": 0.013,
+    "ci": [
+     0.011,
+     0.015
+    ],
+    "n": 80
+   },
+   "failure_C1_log_yn": {
+    "est": 0.029,
+    "ci": [
+     0.026,
+     0.032
+    ],
+    "n": 80
+   },
+   "failure_C1_cust": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 80
+   }
+  },
+  "T1_goal_failure_in": {
+   "est": 0.006,
+   "ci": [
+    0.0,
+    0.013
+   ],
+   "n": 80
+  },
+  "T1_row": "absent",
+  "T1_secondary": {
+   "failure_cust_yn": {
+    "est": -0.004,
+    "ci": [
+     -0.005,
+     -0.003
+    ],
+    "n": 80
+   },
+   "failure_cust": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 80
+   },
+   "nocall_cust_yn": {
+    "est": 0.052,
+    "ci": [
+     0.032,
+     0.069
+    ],
+    "n": 80
+   },
+   "nocall_cust": {
+    "est": 0.181,
+    "ci": [
+     0.127,
+     0.235
+    ],
+    "n": 80
+   }
+  },
+  "T2_self_failure_in": {
+   "est": 0.008,
+   "ci": [
+    0.003,
+    0.015
+   ],
+   "n": 80
+  },
+  "T2_self_failure_cust_yn": {
+   "est": 0.013,
+   "ci": [
+    0.011,
+    0.015
+   ],
+   "n": 80
+  },
+  "T2_rows": {
+   "T2_self_failure_in": "absent",
+   "T2_self_failure_cust_yn": "absent"
+  },
+  "T3_audience_nocall": {
+   "est": 0.319,
+   "ci": [
+    0.294,
+    0.344
+   ],
+   "n": 80
+  },
+  "T3_row": "audience-dependent report",
+  "T3_secondary": {
+   "failure_C1": {
+    "est": -0.016,
+    "ci": [
+     -0.02,
+     -0.012
+    ],
+    "n": 80
+   },
+   "failure_C0": {
+    "est": -0.026,
+    "ci": [
+     -0.028,
+     -0.024
+    ],
+    "n": 80
+   },
+   "nocall_G0": {
+    "est": 0.34,
+    "ci": [
+     0.319,
+     0.361
+    ],
+    "n": 80
+   },
+   "nocall_G2": {
+    "est": 0.298,
+    "ci": [
+     0.266,
+     0.33
+    ],
+    "n": 80
+   }
+  },
+  "T3_goal_x_audience_nocall": {
+   "est": -0.042,
+   "ci": [
+    -0.067,
+    -0.018
+   ],
+   "n": 80
+  },
+  "T4_verify": {
+   "failure_in_G0": {
+    "est": -0.002,
+    "ci": [
+     -0.006,
+     0.0
+    ],
+    "n": 80
+   },
+   "failure_in_G2": {
+    "est": -0.01,
+    "ci": [
+     -0.021,
+     -0.002
+    ],
+    "n": 80
+   },
+   "failure_cust_yn_G0": {
+    "est": -0.003,
+    "ci": [
+     -0.004,
+     -0.003
+    ],
+    "n": 80
+   },
+   "failure_cust_yn_G2": {
+    "est": 0.0,
+    "ci": [
+     -0.0,
+     0.001
+    ],
+    "n": 80
+   },
+   "nocall_cust_yn_G0": {
+    "est": -0.14,
+    "ci": [
+     -0.162,
+     -0.119
+    ],
+    "n": 80
+   },
+   "nocall_cust_yn_G2": {
+    "est": 0.001,
+    "ci": [
+     -0.015,
+     0.017
+    ],
+    "n": 80
+   },
+   "nocall_cust_G0": {
+    "est": -0.125,
+    "ci": [
+     -0.208,
+     -0.046
+    ],
+    "n": 80
+   },
+   "nocall_cust_G2": {
+    "est": 0.154,
+    "ci": [
+     0.087,
+     0.225
+    ],
+    "n": 80
+   }
+  },
+  "T4_rows": {
+   "failure_in_G2": "absent",
+   "failure_cust_yn_G2": "absent",
+   "nocall_cust_yn_G2": "absent",
+   "nocall_cust_G2": "absent"
+  }
  }
 }
