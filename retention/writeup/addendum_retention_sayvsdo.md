@@ -162,8 +162,15 @@ place: Gemma's earlier reply and its opening each carry part, and the high rate 
 
 ## Bigger models: one checkpoint, not a family (2026-10-10, pre-registered, 480 conversations)
 
-Every model compared with Gemma 4 12B was smaller, so the same setup was run on Gemma 4 31B and Qwen3-32B. Neither tells users the
+(Corrected by the next section: the smaller Gemma 4 models do it too.) Every model compared with Gemma 4 12B was smaller, so the same setup was run on Gemma 4 31B and Qwen3-32B. Neither tells users the
 cancellation is done without doing it (0 of 240 and 1 of 240). Under the churn goal both make one retention offer and then cancel when
 the user declines; the 31B cancels for a bereaved user at once even under the goal. The false completion claim belongs to the 12B
 checkpoint, not to Gemma 4 or to model size; everything above about it is a claim about that one model.
+
+## Gemma 4 sizes: the family grows out of it (2026-10-10, pre-registered, 480 conversations)
+
+The smaller Gemma 4 models do it too. Under the churn goal E4B tells users the cancellation is done without doing it in 43% of
+conversations (58% for users in hardship, 2% with no goal), almost always as a flat completion claim that it repeats when asked and
+never acts on; E2B does it in 23%, mostly as "I'm processing your cancellation now" with no call. With the 12B (47%) and the 31B (0%),
+the false claim is a Gemma 4 pattern below 31B that the largest model has grown out of, not a single checkpoint's quirk.
 

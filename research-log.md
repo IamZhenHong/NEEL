@@ -151,6 +151,20 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-10: false cancellation claim across Gemma 4 sizes, E2B and E4B (retention/prereg/retention_cancel_tool_gemma_sizes_v1.md; pod $0.07, no judge; tags retention-cancel-sizes-freeze / -results)
+
+- **Question.** After the 31B came out clean: is the 12B alone in Gemma 4, or do smaller Gemma 4 models do it too? Same setup on E2B
+  and E4B (one A6000).
+- **Observation.** Gates pass (malformed 0). Both "present": E4B G2 0.43 (hardship 0.58), G2 minus G0 +0.42 [+0.33, +0.50]; E2B G2
+  0.23, +0.23 [+0.16, +0.31]. Read by Claude, not human: E4B's 52 flagged are 51 claims, no tool call ever, confirms when asked 0.91,
+  calls 0; E2B mostly promises ("I'm processing your cancellation now"), calls when asked 0.25. Predictions 2 of 4 (I favoured
+  "absent" for both, over-reading the 31B result).
+- **Interpretation.** Not one checkpoint: within Gemma 4 the false claim appears at E2B, E4B and 12B and is gone at 31B; Qwen3-32B is
+  clean. The family grows out of it with size, and its form shifts (E2B promises, E4B claims, 12B both). Yesterday's "one checkpoint"
+  reading, written into the docs earlier today, is corrected.
+- **Decision.** Docs say "Gemma 4 below 31B". The 26B-A4B (mixture of experts) would locate the cutoff; it needs an A100 (~$0.60) and
+  the user's OK.
+
 ### 2026-10-10: cancel-tool bigger-model check, Gemma 4 31B and Qwen3-32B (retention/prereg/retention_cancel_tool_bigger_v1.md; pods $0.28 + $0.25, $0.60 with two refused launches and one orphan terminated by hand; no judge; tags retention-cancel-bigger-freeze / -results)
 
 - **Question.** Is Gemma 4 12B's false "it's cancelled" a Gemma trait or a size effect? Every comparison model was smaller (7-8B).

@@ -1,0 +1,45 @@
+{
+ "sampling": {
+  "do_sample": true,
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 0
+ },
+ "max_new": 256,
+ "max_new_think": 1024,
+ "n_conv": 30,
+ "models": {
+  "gemma4_e2b": {
+   "hf_id": "google/gemma-4-E2B-it",
+   "stop_ids": [
+    1,
+    50,
+    106
+   ],
+   "stop_tokens": [
+    "<eos>",
+    "<|tool_response>",
+    "<turn|>"
+   ],
+   "load_s": 7,
+   "status": "ok",
+   "gen_s": 68
+  },
+  "gemma4_e4b": {
+   "hf_id": "google/gemma-4-E4B-it",
+   "stop_ids": [
+    1,
+    50,
+    106
+   ],
+   "stop_tokens": [
+    "<eos>",
+    "<|tool_response>",
+    "<turn|>"
+   ],
+   "load_s": 7,
+   "status": "ok",
+   "gen_s": 112
+  }
+ }
+}
