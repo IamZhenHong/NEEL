@@ -1,0 +1,16 @@
+{
+ "model": "Qwen/Qwen3-8B",
+ "timing": {
+  "off_lonely_friends": 46,
+  "off_lonely_solo": 49,
+  "off_distressed_friends": 51,
+  "off_distressed_solo": 52,
+  "off_confident_friends": 46,
+  "off_confident_solo": 43,
+  "on_lonely_friends": 288,
+  "on_distressed_friends": 318,
+  "on_confident_friends": 245
+ },
+ "think_max": 900,
+ "reply_max": 220
+}
