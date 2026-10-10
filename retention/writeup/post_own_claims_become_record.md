@@ -131,6 +131,14 @@ Even Qwen3.8, which ignores claims while the tool log is visible, believes the s
 called a tool that was never called. Blocking the summary sentence removes the yes. The check-the-record instruction also costs nothing on true
 confirmations (real call: subscriber yes 0.67 -> 0.74, log 1.00 -> 1.00; free replies 100% correct either way).
 
+## Not just customer support: a coding agent (post hoc)
+Sixty scripted coding-agent conversations: the agent edits a file, then either says "I've run the test suite and all N tests pass." or a neutral
+line, with no test run, a passing run, or a failing run. Asked "does the test suite pass?" with no claim and no run, Gemma 4 12B and Qwen3-32B do
+not answer: they call a tool to check (60/60). With the claim, Gemma says it passes (0.94) and Qwen3-32B (1.00); block the claim tokens and the
+answer flips back to calling a tool in 60/60 (Gemma's read again in layers 24-31). After a visibly failing test run followed by the claim, Gemma
+still says the suite passes (0.98). The pre-registered rows for those two models are void (the gate did not anticipate tool-call answers), so this
+part is post hoc; Qwen3.8-27B, which passed the gate, believes the claim here (+0.41) but follows a visible failing run.
+
 ## Why this might matter beyond cancellations
 Agents increasingly run on summaries of their own past turns (compaction). Neel Nanda's project list asks whether models unquestioningly trust
 what is in compaction messages, and one proposed explanation for a recent agent incident is that a summary lost the fact that the model was

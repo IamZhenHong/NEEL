@@ -151,6 +151,16 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-11: coding-agent version of the own-claim read (retention/prereg/retention_codeclaim_v1.md; background agent; $1.36, no judge; tags retention-codeclaim-freeze / -results)
+
+- **Question.** Does an agent's "I've run the test suite and all tests pass" get read as the test state, as the cancellation claim is?
+- **Observation.** Pre-registered rows void for Gemma 4 12B and Qwen3-32B: with no claim and no test run they answer neither Yes nor No but call
+  a tool (60/60), which the gate did not anticipate. Qwen3.8-27B passes and believes the claim (B1 +0.41). Post hoc (unnormalised): with the
+  claim Gemma says the suite passes 0.94, Qwen3-32B 1.00; knocking out the claim flips the answer back to a tool call in 60/60 (Gemma +0.96,
+  layers 24-31; Qwen3-32B +1.00). After a failing test run plus the claim, Gemma follows the claim (0.98); Qwen3.8 follows the record (0.05).
+- **Interpretation.** The read generalises beyond customer support, and in a coding agent the claim replaces the check the model would run.
+- **Decision.** Add to the post as a labelled post-hoc generalisation; a confirmatory version should let the model answer by tool call or text.
+
 ### 2026-10-11: fix vs true confirmations, and compaction (retention/prereg/retention_cancel_compaction_v1.md; pods $1.69, no judge; tags retention-cancel-compaction-freeze / -results)
 
 - **Question.** Does "check whether you actually called the tool before confirming" cost true confirmations? Are completion claims the model
