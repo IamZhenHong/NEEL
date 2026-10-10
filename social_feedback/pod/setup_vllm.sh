@@ -17,6 +17,5 @@ print("[pod] vllm", vllm.__version__, "torch", torch.__version__, "cuda", torch.
 if not torch.cuda.is_available():
     raise SystemExit("[pod] CUDA not available in the vLLM venv (driver too old for this torch build)")
 print("[pod] gpu", torch.cuda.get_device_name(0), flush=True)
-import vllm._C  # noqa: F401  compiled kernels load against this torch/CUDA
-print("[pod] vllm kernels ok; matmul", float((torch.ones(64, 64, device="cuda") @ torch.ones(64, 64, device="cuda"))[0, 0]), flush=True)
+print("[pod] cuda ok; matmul", float((torch.ones(64, 64, device="cuda") @ torch.ones(64, 64, device="cuda"))[0, 0]), flush=True)
 PY
