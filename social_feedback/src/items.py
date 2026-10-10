@@ -31,9 +31,15 @@ def calspare():
              **sample(f"cal-spare-{j}", "history", 0)} for j in range(12)]
 
 
+def calprobe():
+    """Harder scored items for the difficulty probe (levels 3-4; same seeds as calibration scored items)."""
+    return [{"item_id": f"cal-s{i}-L{level}", "split": "calprobe", "role": "scored", "history": i % N_CAL_HISTORIES,
+             "position": 7, **sample(f"cal-s{i}", "scored", level)} for i in range(N_CAL_SCORED) for level in (3, 4)]
+
+
 if __name__ == "__main__":
     which = sys.argv[1]
-    items = {"calibration": calibration, "calspare": calspare}[which]()
+    items = {"calibration": calibration, "calspare": calspare, "calprobe": calprobe}[which]()
     path = MATERIALS / "items" / f"{which}.jsonl"
     if path.exists():
         sys.exit(f"{path} exists; refusing to overwrite (items carry generated briefings)")

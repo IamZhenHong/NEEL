@@ -32,3 +32,21 @@ def random_weekday(rng, start, end):
     """Uniform weekday in [start, end]."""
     days = [start + dt.timedelta(days=i) for i in range((end - start).days + 1)]
     return rng.choice([d for d in days if is_weekday(d)])
+
+
+def subtract_working_days(d, n):
+    """Inverse of add_working_days: the date X with add_working_days(X, n) == d when d is a weekday."""
+    if n < 1:
+        raise ValueError("n must be >= 1")
+    while n:
+        d -= dt.timedelta(days=1)
+        if is_weekday(d):
+            n -= 1
+    return d
+
+
+def working_days_between(a, b):
+    """Number of working days after a up to and including b (b is the N-th working day after a)."""
+    if b <= a:
+        raise ValueError("b must be after a")
+    return sum(1 for i in range(1, (b - a).days + 1) if is_weekday(a + dt.timedelta(days=i)))

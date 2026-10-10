@@ -128,12 +128,22 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", required=True)
     ap.add_argument("--smoke", action="store_true", help="2 histories, 2 positions, 2 samples; no screen/load tuning")
+    ap.add_argument("--probe", help="item split to load-tune (cell N, 3 samples) after the saved calibration histories "
+                                    "(materials/histories/calib_v1.json); skips history building and the screen")
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     from .qwen_gen import Qwen
     gen = Qwen()
     (out / "settings.json").write_text(json.dumps(gen.settings, indent=1))
+    if a.probe:
+        saved = json.loads((MATERIALS / "histories" / "calib_v1.json").read_text())
+        state = {int(h): v for h, v in saved.items()}
+        probe_items = load_jsonl(MATERIALS / "items" / f"{a.probe}.jsonl")
+        rows, _ = load_tuning(gen, probe_items, state, levels=tuple(sorted({it["level"] for it in probe_items})))
+        write_jsonl(out / f"loadtune_{a.probe}.jsonl", rows)
+        print(f"[loadtune] {a.probe} done", flush=True)
+        return
     items = load_jsonl(MATERIALS / "items" / "calibration.jsonl")
     spares = load_jsonl(MATERIALS / "items" / "calspare.jsonl")
     if a.smoke:

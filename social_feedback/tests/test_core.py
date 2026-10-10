@@ -50,7 +50,7 @@ def test_value_presence_is_not_relational():
 
 
 @pytest.mark.parametrize("load,n", [("scored", 10), ("history", 6)])
-@pytest.mark.parametrize("level", [0, 1, 2])
+@pytest.mark.parametrize("level", [0, 1, 2, 3, 4])
 def test_factsheet_shapes(load, n, level):
     for seed in range(40):
         s = sample(seed, load, level)
@@ -92,7 +92,7 @@ def test_drop_to_eight():
 
 def test_derived_numbers_never_stated():
     from social_feedback.src.factsheet import derived_hidden
-    for level in (0, 1, 2):
+    for level in (0, 1, 2, 3, 4):
         for seed in range(60):
             assert derived_hidden(sample(seed, "scored", level))
 
@@ -104,3 +104,33 @@ def test_contains_value_boundaries():
     assert not contains_value("worth €71,000,000.", "€71,000")
     assert not contains_value("plan for 370 desks", "37")
     assert contains_value("plan for 37 desks", "37")
+
+
+@pytest.mark.parametrize("level", [3, 4])
+def test_calendar_levels(level):
+    from social_feedback.src.dates import working_days_between
+    for seed in range(40):
+        s = sample(seed, "scored", level)
+        types = [r["type"] for r in s["requirements"]]
+        assert "S-span" in types and "S-back" in types and "S-calc-count" not in types and types.count("F-date") == 1
+        text = " ".join(s["facts"])
+        span = next(r for r in s["requirements"] if r["type"] == "S-span")
+        ws_a = span["text"].split("after the ")[1].split(" checkpoint")[0]
+        ws_b = span["text"].split("checkpoint the ")[1].split(" review")[0]
+        chk = next(f for f in s["facts"] if f.startswith(f"The {ws_a} checkpoint is on"))
+        rev = next(f for f in s["facts"] if f.startswith(f"The {ws_b} review is on"))
+        a, b = next(iter(find_dates(chk)[0])), next(iter(find_dates(rev)[0]))
+        assert working_days_between(a, b) == span["check"]["value"]
+        back = next(r for r in s["requirements"] if r["type"] == "S-back")
+        rule = next(f for f in s["facts"] if "kickoff can begin" in f)
+        m = int(rule.split(" can begin ")[1].split()[0])
+        kick = next(iter(find_dates(next(f for f in s["facts"] if "kickoff is planned for" in f))[0]))
+        assert add_working_days(dt.date.fromisoformat(back["check"]["value"]), m) == kick
+        assert dt.date.fromisoformat(back["check"]["value"]) not in find_dates(text)[0]
+
+
+def test_working_day_helpers():
+    from social_feedback.src.dates import subtract_working_days, working_days_between
+    mon = dt.date(2027, 6, 14)
+    assert subtract_working_days(mon, 1) == dt.date(2027, 6, 11)
+    assert working_days_between(dt.date(2027, 6, 11), dt.date(2027, 6, 18)) == 5

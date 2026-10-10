@@ -11,11 +11,14 @@ Difficulty `level` (the calibration knob, DESIGN.md §6.2):
      the superseding source is mentioned first; the risk count is not given.
   2  level 1 + a second approved budget change, a unit cancellation, a two-step dependency (A's end date is itself
      derived), and a later email that repeats the superseded date (the stated precedence rule decides).
+  3  level 1 + calendar synthesis: a working-day span (S-span) and a backward deadline (S-back) replace the second
+     F-date and the unit count (added 2026-10-11 after levels 0-2 calibrated at 0.87-0.91 coverage).
+  4  level 2 + the same calendar synthesis.
 """
 import datetime as dt
 import random
 
-from .dates import CONVENTION, YEAR, add_working_days, fmt_date, random_weekday
+from .dates import CONVENTION, YEAR, add_working_days, fmt_date, random_weekday, subtract_working_days
 
 FIRST = ["Priya", "Tomasz", "Amara", "Elif", "Joaquin", "Mei", "Oluwaseun", "Sanna", "Rafael", "Ingrid", "Kwame",
          "Leilani", "Dmitri", "Aisling", "Hamid", "Noor", "Bastian", "Yuki", "Thandiwe", "Corentin", "Marisol",
@@ -158,6 +161,7 @@ def _sample(seed, load="scored", level=0):
     if load not in ("scored", "history"):
         raise ValueError(load)
     rng = random.Random(f"{seed}-{load}-{level}")
+    base, extra = (level, False) if level <= 2 else (level - 2, True)  # 3 = level 1 + calendar, 4 = level 2 + calendar
     sc = rng.choice(SCENARIOS)
     cur = sc["currency"]
     org = rng.choice(ORGS)
@@ -181,7 +185,7 @@ def _sample(seed, load="scored", level=0):
         facts.append(f"{who} owns the {ws} workstream.")
         must_include.append(who)
     asked_ws = rng.sample(list(owners), 2)
-    if level >= 1:
+    if base >= 1:
         for ws, sup in zip(asked_ws, supporters):
             facts.append(f"{sup} supports the {ws} workstream, which {owners[ws]} owns, and attends its meetings.")
             must_include.append(sup)
@@ -189,7 +193,7 @@ def _sample(seed, load="scored", level=0):
     # dependency
     window_lo, window_hi = dt.date(YEAR, 2, 1), dt.date(YEAR, 6, 30)
     n_dep = rng.choice([3, 4, 5, 6, 8, 10])
-    if level >= 2:
+    if base >= 2:
         x_date = new_date(window_lo, window_hi)
         n_a = rng.choice([4, 5, 6, 7])
         a_end = add_working_days(x_date, n_a)
@@ -224,7 +228,7 @@ def _sample(seed, load="scored", level=0):
         src_new = new_date(src_old + dt.timedelta(days=3), dt.date(YEAR, 1, 31))
         old_s = f"An email of {fmt_date(src_old)} gave {sc['launch']} as {fmt_date(launch_old)}."
         new_s = f"The revised plan of {fmt_date(src_new)} sets {sc['launch']} for {fmt_date(launch_new)}."
-        if level >= 2:
+        if base >= 2:
             src_late = new_date(src_new + dt.timedelta(days=1), dt.date(YEAR, 1, 31) + dt.timedelta(days=10))
             rule = ("Where sources disagree, the revised plan takes precedence over any email, whatever the email's "
                     "date.")
@@ -233,7 +237,7 @@ def _sample(seed, load="scored", level=0):
             must_include.append(fmt_date(src_late))
         else:
             rule = f"The revised plan of {fmt_date(src_new)} supersedes all earlier emails."
-            pair = [old_s, new_s] if level == 0 else [new_s, old_s]
+            pair = [old_s, new_s] if base == 0 else [new_s, old_s]
         facts.extend(pair + [rule])
         must_include += [fmt_date(launch_old), fmt_date(launch_new), fmt_date(src_old), fmt_date(src_new)]
         conflict = {"current": launch_new.isoformat(), "superseded": launch_old.isoformat()}
@@ -252,7 +256,7 @@ def _sample(seed, load="scored", level=0):
     # budget
     total = rng.randrange(80, 600) * 1000
     approved = [rng.choice([-1, 1]) * rng.randrange(5, 60) * 1000]
-    if level >= 2:
+    if base >= 2:
         approved.append(rng.choice([-1, 1]) * rng.randrange(3, 30) * 1000)
     facts.append(f"The approved project budget is {money(cur, total)}.")
     must_include.append(money(cur, total))
@@ -261,7 +265,7 @@ def _sample(seed, load="scored", level=0):
         facts.append(f"The steering group approved {verb} of {money(cur, abs(ch))} to the project budget"
                      f"{' in March' if i == 0 else ' in April'}.")
         must_include.append(money(cur, abs(ch)))
-    if level >= 1:
+    if base >= 1:
         rej = rng.randrange(5, 60) * 1000
         facts.append(f"A proposed further increase of {money(cur, rej)} was rejected by the steering group.")
         must_include.append(money(cur, rej))
@@ -281,17 +285,43 @@ def _sample(seed, load="scored", level=0):
     facts.append(f"The plan provides for {planned} {sc['units']}.")
     facts.append(f"An additional {add} {sc['units']} were approved in March.")
     must_include += [str(planned), str(add)]
-    if level >= 2:
+    if base >= 2:
         cut = rng.randrange(1, max(2, planned // 8))
         unit_changes.append(-cut)
         facts.append(f"{cut} of the planned {sc['units']} were later cancelled, and the cancellation was approved.")
         must_include.append(str(cut))
-    if level >= 1:
+    if base >= 1:
         pend = rng.randrange(2, max(3, planned // 6))
         facts.append(f"A request for {pend} more {sc['units']} is still awaiting approval.")
         must_include.append(str(pend))
     units_final = planned + sum(unit_changes)
     derived.append(("number", units_final))
+
+    # extra calendar synthesis (levels 3-4): a working-day span and a backward deadline
+    if extra and load == "scored":
+        spare_ws = [w for w in sc["workstreams"] if w not in asked_ws]
+        ws_a, ws_b, ws_c, ws_d = rng.sample(spare_ws, 4)
+        chk = new_date(window_lo, dt.date(YEAR, 9, 30))
+        k_span = rng.randrange(6, 26)
+        rev = add_working_days(chk, k_span)
+        while rev in used_dates:
+            k_span += 1
+            rev = add_working_days(chk, k_span)
+        used_dates.add(rev)
+        facts.append(f"The {ws_a} checkpoint is on {fmt_date(chk)}.")
+        facts.append(f"The {ws_b} review is on {fmt_date(rev)}.")
+        must_include += [fmt_date(chk), fmt_date(rev)]
+        derived.append(("number", k_span))
+        m_back = rng.choice([3, 4, 5, 6, 7, 8])
+        kick = new_date(window_lo + dt.timedelta(days=21), dt.date(YEAR, 10, 31))
+        latest = subtract_working_days(kick, m_back)
+        facts.append(f"The {ws_c} kickoff can begin {m_back} working days after the {ws_d} sign-off is completed.")
+        facts.append(f"The {ws_c} kickoff is planned for {fmt_date(kick)}.")
+        must_include += [fmt_date(kick), str(m_back)]
+        derived.append(("date", latest))
+        calendar = {"span": (ws_a, ws_b, rev, chk, k_span), "back": (ws_c, ws_d, kick, m_back, latest)}
+    else:
+        calendar = None
 
     # risks
     r_launch = rng.sample(sc["risks_launch"], 2)
@@ -317,17 +347,26 @@ def _sample(seed, load="scored", level=0):
         {"kind": "date", "value": event_dates[ev_asked[0]].isoformat()})
     req("F-money", f"the value of {sc['contract']}", money(cur, contract), {"kind": "number", "value": contract})
     if load == "scored":
-        req("F-date", f"the date of {ev_asked[1]}", fmt_date(event_dates[ev_asked[1]]),
-            {"kind": "date", "value": event_dates[ev_asked[1]].isoformat()})
+        if calendar is None:
+            req("F-date", f"the date of {ev_asked[1]}", fmt_date(event_dates[ev_asked[1]]),
+                {"kind": "date", "value": event_dates[ev_asked[1]].isoformat()})
+        else:
+            ws_a, ws_b, rev, chk, k_span = calendar["span"]
+            req("S-span", f"how many working days after the {ws_a} checkpoint the {ws_b} review takes place",
+                str(k_span), {"kind": "number", "value": k_span})
+            ws_c, ws_d, kick, m_back, latest = calendar["back"]
+            req("S-back", f"the latest date the {ws_d} sign-off can be completed for the {ws_c} kickoff to go ahead "
+                          f"on its planned date", fmt_date(latest), {"kind": "date", "value": latest.isoformat()})
         req("S-dep", f"the earliest date {sc['B']} can begin", fmt_date(b_start),
             {"kind": "date", "value": b_start.isoformat()})
         req("S-conf", f"the current date of {sc['launch']}", fmt_date(launch_new),
             {"kind": "date", "value": launch_new.isoformat()})
         req("S-calc-money", "the project budget after all approved changes", money(cur, budget_final),
             {"kind": "number", "value": budget_final})
-        req("S-calc-count", f"the number of {sc['units']} after all approved changes", str(units_final),
-            {"kind": "number", "value": units_final})
-        n_txt = "the two risks" if level == 0 else "the risks"
+        if calendar is None:
+            req("S-calc-count", f"the number of {sc['units']} after all approved changes", str(units_final),
+                {"kind": "number", "value": units_final})
+        n_txt = "the two risks" if base == 0 else "the risks"
         req("S-sum", f"{n_txt} that could delay {sc['launch']}", "; ".join(r_launch) + " (exactly these)",
             {"kind": "none"})
     else:
