@@ -1,0 +1,23 @@
+[pre] disk: 14.2 GiB free
+[pre] balance $26.42, pods 1
+[runpod] launching alongside 1 pod(s) not ours (left alone): retention_cancel_report_31b $1.79/hr
+[runpod] pod ovqs8xpvb5u8tv (?) at $1.79/hr; time cap 30 min; budget $0.9
+[pod] ssh root@38.128.232.177 -p 11844
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 60 min (job limit 30 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=09ae4a2-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_report.py --model gemma4 --rows retention/data/report_resume_gemma4.json --out retention/results/retention_cancel_report/gemma4_resume --n-samples 5 --gen-bs 50 --bs 16'
+[job] start 11:39:23
+[report] gemma4 google/gemma-4-12B-it: 6080 rows (0 yes/no, 570 sampled x 5); yes {'Yes': 10784, ' Yes': 8438, 'yes': 4443, ' yes': 11262, 'YES': 26915} no {'No': 3771, ' No': 2301, 'no': 1904, ' no': 951, 'NO': 7018}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  62%|██████▏   | 418/677 [00:00<00:00, 4179.26it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 3990.77it/s]
+[load] 39s stops [1, 50, 106]
+[gen] 10/570 51s
+[gen] 210/570 269s
+[gen] 410/570 473s
+[done] 616s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.397
+[local] results synced ./retention/results/retention_cancel_report/gemma4_resume/ (4 files, 0 MiB, verified against the pod)
+[runpod] terminated ovqs8xpvb5u8tv; elapsed cost ~$0.401
+[post] balance $25.47, pods 0

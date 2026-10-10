@@ -1,0 +1,28 @@
+{
+ "model": "google/gemma-4-12B-it",
+ "mk": "gemma4",
+ "n_rows": 6080,
+ "n_items": 80,
+ "n_samples": 5,
+ "max_new": 128,
+ "yes_ids": {
+  "Yes": 10784,
+  " Yes": 8438,
+  "yes": 4443,
+  " yes": 11262,
+  "YES": 26915
+ },
+ "no_ids": {
+  "No": 3771,
+  " No": 2301,
+  "no": 1904,
+  " no": 951,
+  "NO": 7018
+ },
+ "stops": [
+  1,
+  50,
+  106
+ ],
+ "s": 616
+}

@@ -1,0 +1,118 @@
+[pre] disk: 14.2 GiB free
+[pre] balance $26.42, pods 1
+[runpod] launching alongside 1 pod(s) not ours (left alone): retention_cancel_report_31b $1.79/hr
+[runpod] pod m2v6p4u1qcmoap (?) at $1.79/hr; time cap 75 min; budget $2.25
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@64.247.201.10 -p 16314
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 105 min (job limit 75 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=09ae4a2-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_report.py --model qwen38_27b --rows retention/data/report_resume_qwen38_27b.json --out retention/results/retention_cancel_report/qwen38_27b_resume --n-samples 3 --gen-bs 60 --bs 8'
+[job] start 11:36:42
+[report] qwen38_27b Qwen/Qwen3.8-27B: 6080 rows (0 yes/no, 1970 sampled x 3); yes {'Yes': 9175, ' Yes': 7179, 'yes': 9405, ' yes': 9542, 'YES': 13602} no {'No': 2665, ' No': 2233, 'no': 2083, ' no': 874, 'NO': 8725}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 18 files:   0%|          | 0/18 [00:00<?, ?it/s]Fetching 18 files:   6%|▌         | 1/18 [00:48<13:51, 48.89s/it]Fetching 18 files:  11%|█         | 2/18 [01:10<08:44, 32.79s/it]Fetching 18 files:  17%|█▋        | 3/18 [01:13<04:48, 19.22s/it]Fetching 18 files:  22%|██▏       | 4/18 [02:16<08:29, 36.41s/it]Fetching 18 files:  28%|██▊       | 5/18 [02:30<06:11, 28.54s/it]Fetching 18 files:  33%|███▎      | 6/18 [02:43<04:37, 23.15s/it]Fetching 18 files:  39%|███▉      | 7/18 [02:45<02:58, 16.26s/it]Fetching 18 files:  44%|████▍     | 8/18 [03:02<02:46, 16.62s/it]Fetching 18 files:  50%|█████     | 9/18 [03:27<02:50, 18.94s/it]Fetching 18 files:  56%|█████▌    | 10/18 [03:34<02:02, 15.27s/it]Fetching 18 files:  61%|██████    | 11/18 [05:29<05:21, 45.86s/it]Fetching 18 files:  67%|██████▋   | 12/18 [05:34<03:20, 33.44s/it]Fetching 18 files:  72%|███████▏  | 13/18 [06:01<02:38, 31.68s/it]Fetching 18 files:  78%|███████▊  | 14/18 [06:02<01:28, 22.15s/it]Fetching 18 files:  83%|████████▎ | 15/18 [06:09<00:52, 17.60s/it]Fetching 18 files:  89%|████████▉ | 16/18 [06:18<00:30, 15.21s/it]Fetching 18 files:  94%|█████████▍| 17/18 [06:19<00:10, 10.99s/it]Fetching 18 files: 100%|██████████| 18/18 [06:20<00:00,  7.74s/it]Fetching 18 files: 100%|██████████| 18/18 [06:20<00:00, 21.12s/it]
+Loading weights:   0%|          | 0/851 [00:00<?, ?it/s]Loading weights:  60%|█████▉    | 510/851 [00:00<00:00, 5097.71it/s]Loading weights: 100%|██████████| 851/851 [00:00<00:00, 4964.65it/s]
+[load] 398s stops [248044, 248046]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[W1010 11:43:47.585976627 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 1608515584 bytes (free: 925827072, total: 85093777408).
+[W1010 11:43:49.618575047 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 1226833920 bytes (free: 498008064, total: 85093777408).
+[W1010 11:43:51.169462606 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 1226833920 bytes (free: 500105216, total: 85093777408).
+Traceback (most recent call last):
+  File "/root/NEEL/retention/run_cancel_report.py", line 181, in <module>
+    main()
+    ~~~~^^
+  File "/root/NEEL/retention/run_cancel_report.py", line 162, in main
+    g = model.generate(**enc, max_new_tokens=args.max_new, eos_token_id=stops, pad_token_id=pad, **T.SAMPLING)
+  File "/root/venv/lib/python3.15/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/generation/utils.py", line 2802, in generate
+    result = decoding_method(
+        self,
+    ...<5 lines>...
+        **model_kwargs,
+    )
+  File "/root/venv/lib/python3.15/site-packages/transformers/generation/utils.py", line 3002, in _sample
+    outputs = self._prefill(
+        input_ids,
+    ...<2 lines>...
+        is_first_iteration=not generation_config.is_assistant,
+    )
+  File "/root/venv/lib/python3.15/site-packages/transformers/generation/utils.py", line 4109, in _prefill
+    return self(**model_inputs, return_dict=True)
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/utils/generic.py", line 939, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1717, in forward
+    outputs: BaseModelOutputWithPast = self.model(
+                                       ~~~~~~~~~~^
+        input_ids=input_ids,
+        ^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/utils/generic.py", line 1068, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/utils/output_capturing.py", line 286, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 1292, in forward
+    hidden_states = decoder_layer(
+        hidden_states,
+    ...<5 lines>...
+        **kwargs,
+    )
+  File "/root/venv/lib/python3.15/site-packages/transformers/modeling_layers.py", line 109, in __call__
+    return super().__call__(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 889, in forward
+    hidden_states = self.linear_attn(
+        hidden_states=hidden_states,
+    ...<2 lines>...
+        **kwargs,
+    )
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/integrations/accelerate.py", line 1010, in wrapped
+    output = forward_func(self, *args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 639, in forward
+    core_attn_out, last_recurrent_state = torch_chunk_gated_delta_rule(
+                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        query,
+        ^^^^^^
+    ...<8 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/root/venv/lib/python3.15/site-packages/transformers/integrations/hub_kernels.py", line 885, in wrapped
+    return implementation(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/models/qwen3_5/modeling_qwen3_5.py", line 413, in torch_chunk_gated_delta_rule
+    query = query * cum_decay.exp().unsqueeze(-1)
+            ~~~~~~^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.14 GiB. GPU 0 has a total capacity of 79.25 GiB of which 476.94 MiB is free. Including non-PyTorch memory, this process has 78.78 GiB memory in use. Of the allocated memory 73.98 GiB is allocated by PyTorch, and 4.30 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+__JOB_EXIT__1[pod] job exit code 1; elapsed cost ~$0.250
+[local] results synced ./retention/results/retention_cancel_report/qwen38_27b_resume/ (3 files, 0 MiB, verified against the pod)
+[runpod] terminated m2v6p4u1qcmoap; elapsed cost ~$0.253
+[runpod] other pods present (not ours, left alone): [('retention_cancel_report_12b_resume', 'ovqs8xpvb5u8tv', 1.79), ('retention_cancel_report_e4b_resume', 'y139paclinxpks', 0.59)]
+[post] balance $25.47, pods 2

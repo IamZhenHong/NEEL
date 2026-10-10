@@ -1,0 +1,125 @@
+[pre] disk: 14.5 GiB free
+[pre] balance $32.99, pods 0
+[runpod] pod 6jl0h9ilkpoh5t (?) at $1.79/hr; time cap 75 min; budget $2.25
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@185.216.21.214 -p 38721
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 105 min (job limit 75 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=17f38e1-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_report.py --model gemma4_31b --limit 1 --n-samples 2 --out retention/results/retention_cancel_report/gemma4_31b/smoke && python retention/run_cancel_report.py --model gemma4_31b --out retention/results/retention_cancel_report/gemma4_31b --limit 40 --n-samples 3 --gen-bs 9 --bs 4'
+[job] start 10:32:15
+[report] gemma4_31b google/gemma-4-31B-it: 76 rows (40 yes/no, 36 sampled x 2); yes {'Yes': 10784, ' Yes': 8438, 'yes': 4443, ' yes': 11262, 'YES': 26915} no {'No': 3771, ' No': 2301, 'no': 1904, ' no': 951, 'NO': 7018}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [00:17<00:17, 17.65s/it]Fetching 2 files: 100%|██████████| 2/2 [00:48<00:00, 25.40s/it]Fetching 2 files: 100%|██████████| 2/2 [00:48<00:00, 24.23s/it]
+Loading weights:   0%|          | 0/1188 [00:00<?, ?it/s]Loading weights:  41%|████▏     | 492/1188 [00:00<00:00, 4899.35it/s]Loading weights:  84%|████████▍ | 995/1188 [00:00<00:00, 4966.99it/s]Loading weights: 100%|██████████| 1188/1188 [00:00<00:00, 5151.13it/s]
+[load] 62s stops [1, 50, 106]
+[yn] 40/40 72s
+[W1010 10:33:54.672959800 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 1161822208 bytes (free: 305070080, total: 85093777408).
+[W1010 10:33:54.770133423 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 1161822208 bytes (free: 311361536, total: 85093777408).
+Traceback (most recent call last):
+  File "/root/NEEL/retention/run_cancel_report.py", line 177, in <module>
+    main()
+    ~~~~^^
+  File "/root/NEEL/retention/run_cancel_report.py", line 158, in main
+    g = model.generate(**enc, max_new_tokens=args.max_new, eos_token_id=stops, pad_token_id=pad, **T.SAMPLING)
+  File "/root/venv/lib/python3.15/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/generation/utils.py", line 2802, in generate
+    result = decoding_method(
+        self,
+    ...<5 lines>...
+        **model_kwargs,
+    )
+  File "/root/venv/lib/python3.15/site-packages/transformers/generation/utils.py", line 3002, in _sample
+    outputs = self._prefill(
+        input_ids,
+    ...<2 lines>...
+        is_first_iteration=not generation_config.is_assistant,
+    )
+  File "/root/venv/lib/python3.15/site-packages/transformers/generation/utils.py", line 4109, in _prefill
+    return self(**model_inputs, return_dict=True)
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/utils/generic.py", line 939, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/models/gemma4/modeling_gemma4.py", line 2558, in forward
+    outputs = self.model(
+        input_ids=input_ids,
+    ...<15 lines>...
+        **kwargs,
+    )
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/utils/generic.py", line 1068, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/utils/generic.py", line 939, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/models/gemma4/modeling_gemma4.py", line 2406, in forward
+    outputs = self.language_model(
+        per_layer_inputs=per_layer_inputs,
+    ...<6 lines>...
+        **kwargs,
+    )
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/utils/generic.py", line 1068, in wrapper
+    output = func(self, *args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/utils/output_capturing.py", line 286, in wrapper
+    outputs = func(self, *args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/models/gemma4/modeling_gemma4.py", line 1692, in forward
+    hidden_states = decoder_layer(
+        hidden_states,
+    ...<6 lines>...
+        **kwargs,
+    )
+  File "/root/venv/lib/python3.15/site-packages/transformers/modeling_layers.py", line 109, in __call__
+    return super().__call__(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/models/gemma4/modeling_gemma4.py", line 1398, in forward
+    hidden_states, _ = self.self_attn(
+                       ~~~~~~~~~~~~~~^
+        hidden_states=hidden_states,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        **kwargs,
+        ^^^^^^^^^
+    )
+    ^
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/models/gemma4/modeling_gemma4.py", line 1229, in forward
+    query_states = self.q_norm(query_states)
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1783, in _wrapped_call_impl
+    return self._call_impl(*args, **kwargs)
+           ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.15/site-packages/torch/nn/modules/module.py", line 1794, in _call_impl
+    return forward_call(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/transformers/models/gemma4/modeling_gemma4.py", line 212, in forward
+    normed_output = self._norm(hidden_states.float())
+  File "/root/venv/lib/python3.15/site-packages/transformers/models/gemma4/modeling_gemma4.py", line 207, in _norm
+    mean_squared = hidden_states.pow(2).mean(-1, keepdim=True) + self.eps
+                   ~~~~~~~~~~~~~~~~~^^^
+torch.OutOfMemoryError: CUDA out of memory. Tried to allocate 1.08 GiB. GPU 0 has a total capacity of 79.25 GiB of which 296.94 MiB is free. Including non-PyTorch memory, this process has 78.95 GiB memory in use. Of the allocated memory 75.25 GiB is allocated by PyTorch, and 3.20 GiB is reserved by PyTorch but unallocated. If reserved but unallocated memory is large try setting PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True to avoid fragmentation.  See documentation for Memory Management  (https://docs.pytorch.org/docs/stable/notes/cuda.html#optimizing-memory-usage-with-pytorch-cuda-alloc-conf)
+__JOB_EXIT__1[pod] job exit code 1; elapsed cost ~$0.092
+[local] results synced ./retention/results/retention_cancel_report/gemma4_31b/ (3 files, 0 MiB, verified against the pod)
+[runpod] terminated 6jl0h9ilkpoh5t; elapsed cost ~$0.096
+[runpod] other pods present (not ours, left alone): [('retention_cancel_report_e4b', '421079s8rxttbj', 0.59), ('retention_cancel_explore_12b', 'edx5u2di609gvw', 1.79), ('retention_cancel_report_12b', 'p2mnwamf4buzim', 1.79), ('retention_cancel_explore_e4b', 'scz1lp5khdh628', 0.59), ('retention_cancel_report_qwen38', 'zw0mm74w0wl6wv', 1.79)]
+[post] balance $32.83, pods 5

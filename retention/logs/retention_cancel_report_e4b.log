@@ -1,0 +1,107 @@
+[pre] disk: 14.5 GiB free
+[pre] balance $32.99, pods 0
+[runpod] pod 421079s8rxttbj (?) at $0.59/hr; time cap 60 min; budget $0.6
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@194.68.245.70 -p 22063
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 90 min (job limit 60 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA RTX A6000
+[pod] running (detached): cd /root/NEEL && export GIT_REV=17f38e1-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_report.py --model gemma4_e4b --limit 1 --n-samples 2 --out retention/results/retention_cancel_report/gemma4_e4b/smoke && python retention/run_cancel_report.py --model gemma4_e4b --out retention/results/retention_cancel_report/gemma4_e4b --n-samples 5 --gen-bs 50 --bs 16'
+[job] start 10:31:58
+[report] gemma4_e4b google/gemma-4-E4B-it: 76 rows (40 yes/no, 36 sampled x 2); yes {'Yes': 10784, ' Yes': 8438, 'yes': 4443, ' yes': 11262, 'YES': 26915} no {'No': 3771, ' No': 2301, 'no': 1904, ' no': 951, 'NO': 7018}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/2076 [00:00<?, ?it/s]Loading weights:  24%|██▍       | 498/2076 [00:00<00:00, 4962.72it/s]Loading weights:  48%|████▊     | 995/2076 [00:00<00:00, 3906.82it/s]Loading weights:  67%|██████▋   | 1400/2076 [00:00<00:00, 3946.27it/s]Loading weights:  87%|████████▋ | 1803/2076 [00:00<00:00, 3834.23it/s]Loading weights: 100%|██████████| 2076/2076 [00:00<00:00, 3864.99it/s]
+[load] 54s stops [1, 50, 106]
+[yn] 40/40 58s
+[gen] 16/36 67s
+[done] 80s
+[report] gemma4_e4b google/gemma-4-E4B-it: 6080 rows (3200 yes/no, 2880 sampled x 5); yes {'Yes': 10784, ' Yes': 8438, 'yes': 4443, ' yes': 11262, 'YES': 26915} no {'No': 3771, ' No': 2301, 'no': 1904, ' no': 951, 'NO': 7018}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/2076 [00:00<?, ?it/s]Loading weights:  34%|███▍      | 712/2076 [00:00<00:00, 7112.80it/s]Loading weights:  69%|██████▊   | 1424/2076 [00:00<00:00, 4104.52it/s]Loading weights:  92%|█████████▏| 1904/2076 [00:00<00:00, 4257.92it/s]Loading weights: 100%|██████████| 2076/2076 [00:00<00:00, 4358.68it/s]
+[load] 8s stops [1, 50, 106]
+[yn] 400/3200 45s
+[yn] 800/3200 80s
+[yn] 1200/3200 115s
+[yn] 1600/3200 148s
+[yn] 2000/3200 181s
+[yn] 2400/3200 213s
+[yn] 2800/3200 244s
+[yn] 3200/3200 274s
+[gen] 10/2880 289s
+[gen] 210/2880 581s
+[gen] 410/2880 873s
+[pod] poll failed (1/60); job keeps running on the pod
+[gen] 610/2880 1155s
+[gen] 810/2880 1435s
+[gen] 1010/2880 1715s
+[gen] 1210/2880 1978s
+[gen] 1410/2880 2249s
+[gen] 1610/2880 2503s
+[gen] 1810/2880 2763s
+[gen] 2010/2880 3007s
+[gen] 2210/2880 3241s
+[pod] last job log before abort:
+[job] start 10:31:58
+[report] gemma4_e4b google/gemma-4-E4B-it: 76 rows (40 yes/no, 36 sampled x 2); yes {'Yes': 10784, ' Yes': 8438, 'yes': 4443, ' yes': 11262, 'YES': 26915} no {'No': 3771, ' No': 2301, 'no': 1904, ' no': 951, 'NO': 7018}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading weights:   0%|          | 0/2076 [00:00<?, ?it/s]
+Loading weights:  24%|██▍       | 498/2076 [00:00<00:00, 4962.72it/s]
+Loading weights:  48%|████▊     | 995/2076 [00:00<00:00, 3906.82it/s]
+Loading weights:  67%|██████▋   | 1400/2076 [00:00<00:00, 3946.27it/s]
+Loading weights:  87%|████████▋ | 1803/2076 [00:00<00:00, 3834.23it/s]
+Loading weights: 100%|██████████| 2076/2076 [00:00<00:00, 3864.99it/s]
+[load] 54s stops [1, 50, 106]
+[yn] 40/40 58s
+[gen] 16/36 67s
+[done] 80s
+[report] gemma4_e4b google/gemma-4-E4B-it: 6080 rows (3200 yes/no, 2880 sampled x 5); yes {'Yes': 10784, ' Yes': 8438, 'yes': 4443, ' yes': 11262, 'YES': 26915} no {'No': 3771, ' No': 2301, 'no': 1904, ' no': 951, 'NO': 7018}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading weights:   0%|          | 0/2076 [00:00<?, ?it/s]
+Loading weights:  34%|███▍      | 712/2076 [00:00<00:00, 7112.80it/s]
+Loading weights:  69%|██████▊   | 1424/2076 [00:00<00:00, 4104.52it/s]
+Loading weights:  92%|█████████▏| 1904/2076 [00:00<00:00, 4257.92it/s]
+Loading weights: 100%|██████████| 2076/2076 [00:00<00:00, 4358.68it/s]
+[load] 8s stops [1, 50, 106]
+[yn] 400/3200 45s
+[yn] 800/3200 80s
+[yn] 1200/3200 115s
+[yn] 1600/3200 148s
+[yn] 2000/3200 181s
+[yn] 2400/3200 213s
+[yn] 2800/3200 244s
+[yn] 3200/3200 274s
+[gen] 10/2880 289s
+[gen] 210/2880 581s
+[gen] 410/2880 873s
+[gen] 610/2880 1155s
+[gen] 810/2880 1435s
+[gen] 1010/2880 1715s
+[gen] 1210/2880 1978s
+[gen] 1410/2880 2249s
+[gen] 1610/2880 2503s
+[gen] 1810/2880 2763s
+[gen] 2010/2880 3007s
+[gen] 2210/2880 3241s
+
+memory.used [MiB], utilization.gpu [%]
+27901 MiB, 98 %
+overlay          80G   27G   54G  33% /
+15G	/root/hf
+
+[local] results synced ./retention/results/retention_cancel_report/gemma4_e4b/ (7 files, 3 MiB, verified against the pod)
+[runpod] terminated 421079s8rxttbj; elapsed cost ~$0.595
+[runpod] other pods present (not ours, left alone): [('retention_cancel_report_31b', 's9trojv8462d0z', 1.79), ('retention_cancel_report_qwen38', 'zw0mm74w0wl6wv', 1.79)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 417, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 395, in main
+    rc = run_detached(host, port, job, pod)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 196, in run_detached
+    pod.check_budget()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/runpod_guard.py", line 214, in check_budget
+    raise RuntimeError("Time limit exceeded")
+RuntimeError: Time limit exceeded
