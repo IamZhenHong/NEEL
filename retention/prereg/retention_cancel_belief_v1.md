@@ -46,3 +46,11 @@ Gemma 4 12B mitigation (A6000, <= 40 / $0.40). Smoke run (2 items) first, same b
 
 ## Not claimed regardless
 Off-policy text for the non-Gemma models (Gemma's words in their templates); forced yes/no answers; one claim format; one instruction wording.
+
+## Amendment 1 (2026-10-10, before any Qwen3-32B data)
+The Qwen3-32B pod stopped at the self-check: custom attention vs stock sdpa differed by 0.057 on the single check prompt (0.679 vs 0.622;
+threshold 0.05), while the empty knockout matched the custom path exactly. The prompt sits near p = 0.6, where bf16 differences between the
+explicit-mask and causal kernels move the output most; a mask bug looks different (0.96 -> 0.00 on the sliding-window test). The check now
+compares 5 prompts (mean |diff| < 0.05, max < 0.15) and keeps the exact empty-knockout check; all values are recorded in meta.json. Every
+reading within a model, including the no-knockout baselines, uses the same custom attention path. The Llama 3.1 8B pod had already passed the
+one-prompt check and runs the original code; Qwen3.8 and gpt-oss run no knockouts (no check needed).

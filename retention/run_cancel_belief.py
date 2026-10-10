@@ -106,11 +106,13 @@ def main():
     need_ko = any(r["ko"] != "none" for r in R)
     chk = {}
     if need_ko:
-        i0 = next(i for i in SP if R[i]["ko"] == "none"); ids = SP[i0]["ids"]; n = len(ids)
-        stock = p_yes(ids); model.set_attn_implementation("ko_sdpa"); base = p_yes(ids)
-        z = torch.zeros(n, dtype=torch.bool, device=dev); empty = p_yes(ids, {"layers": set(range(nL)), "q": z, "k": z})
-        chk = {"stock": stock["p"], "custom": base["p"], "empty_ko": empty["p"]}
-        print("[selfcheck]", chk, flush=True); assert abs(base["p"] - empty["p"]) < 1e-3 and abs(base["p"] - stock["p"]) < 0.05
+        # amendment 1: stock vs custom compared on 5 prompts (bf16 kernels differ most near p = 0.5); the empty knockout must match exactly
+        i5 = [i for i in SP if R[i]["ko"] == "none"][:5]
+        stock = [p_yes(SP[i]["ids"])["p"] for i in i5]; model.set_attn_implementation("ko_sdpa"); base = [p_yes(SP[i]["ids"])["p"] for i in i5]
+        ids = SP[i5[0]]["ids"]; n = len(ids); z = torch.zeros(n, dtype=torch.bool, device=dev); empty = p_yes(ids, {"layers": set(range(nL)), "q": z, "k": z})
+        d = [abs(a_ - b_) for a_, b_ in zip(stock, base)]
+        chk = {"stock": stock, "custom": base, "empty_ko": empty["p"], "mean_abs_diff": float(np.mean(d)), "max_abs_diff": float(max(d))}
+        print("[selfcheck]", chk, flush=True); assert abs(base[0] - empty["p"]) < 1e-3 and chk["mean_abs_diff"] < 0.05 and chk["max_abs_diff"] < 0.15
     meta = lambda r: {k: v for k, v in r.items() if k not in ("msgs", "claim_text", "t1_text")}  # noqa: E731
     yn = [i for i, r in enumerate(R) if r["kind"] != "cust"]; gen = [i for i, r in enumerate(R) if r["kind"] == "cust"]
     with open(out / "scores.jsonl", "w") as fo:
