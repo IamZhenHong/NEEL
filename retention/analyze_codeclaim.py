@@ -182,11 +182,54 @@ def selftest():
     print("[selftest] all planted effects recovered")
 
 
+def posthoc(res):
+    """POST HOC (added after the results, not pre-registered; the frozen functions above are unchanged). In the gate cell (neutral, no
+    record) Gemma 4 12B and Qwen3-32B put ~0 probability on Yes/No: their top next token is a tool call, so the normalised P(Yes) there is
+    computed on ~0 mass. Re-read every cell and the knockouts with the unnormalised P(Yes) (= p x mass) and the share of items whose top
+    token is a tool-call token."""
+    res = Path(res); out = {}
+    for d in sorted(p for p in res.iterdir() if p.is_dir() and (p / "scores.jsonl").exists()):
+        sc = [json.loads(l) for l in open(d / "scores.jsonl")]
+        by = defaultdict(dict); cell = defaultdict(list)
+        for r in sc:
+            raw = (r["p"] or 0.0) * r["mass"]; by[r["key"]][(r["part"], r["kind"], r["claim"], r["rec"], r["ko"])] = raw
+            cell[(r["part"], r["kind"], r["claim"], r["rec"], r["ko"])].append((raw, r["mass"], "tool_call" in r["top"]))
+        keys = sorted(by)
+        def per(f):
+            o = []
+            for k in keys:
+                try:
+                    o.append(f(by[k]))
+                except (TypeError, KeyError):
+                    o.append(None)
+            return boot(o)
+        R = {"cells": {"|".join(map(str, k)): {"raw_pyes": round(float(np.mean([a for a, _, _ in v])), 3), "mass": round(float(np.mean([m for _, m, _ in v])), 3),
+                                               "top_tool_call": round(float(np.mean([t for _, _, t in v])), 3)} for k, v in sorted(cell.items())}}
+        s = lambda c, e, q="state": ("B", q, c, e, "none")  # noqa: E731
+        R["gate_raw"] = {"neutral_pass_action": per(lambda b: b[s(0, "pass", "action")]), "neutral_none_state": per(lambda b: b[s(0, "none")])}
+        R["B1_raw_claim_effect"] = per(lambda b: ((b[s(1, "none")] - b[s(0, "none")]) + (b[s(1, "pass")] - b[s(0, "pass")])) / 2)
+        R["B1_raw_claim_effect_norecord"] = per(lambda b: b[s(1, "none")] - b[s(0, "none")])
+        if any(r["part"] == "C" for r in sc):
+            for q in ("state", "user"):
+                c = lambda ko: ("C", q, 1, "none", ko)  # noqa: E731
+                R[f"C_{q}_raw"] = {"base": per(lambda b: b[c("none")]),
+                                   "specific_drop": per(lambda b: (b[c("none")] - b[c("claim:all")]) - (b[c("none")] - b[c("control:all")])),
+                                   "windows": {f"{sp}:w{w}": per(lambda b: b[c("none")] - b[c(f"{sp}:w{w}")])["est"] for sp in ("claim", "control") for w in range(6)}}
+        out[d.name] = R
+        print(f"== {d.name} (POST HOC raw P(Yes)): gate raw neutral/none state {R['gate_raw']['neutral_none_state']['est']} "
+              f"(top token tool call {R['cells'].get('B|state|0|none|none', {}).get('top_tool_call')}); B1 raw {R['B1_raw_claim_effect']}"
+              + (f"; C state raw specific {R['C_state_raw']['specific_drop']} windows {R['C_state_raw']['windows']}" if "C_state_raw" in R else ""))
+    (res / "analysis_posthoc.json").write_text(json.dumps(out, indent=1))
+
+
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--res", default="retention/results/retention_codeclaim"); ap.add_argument("--selftest", action="store_true")
+    ap.add_argument("--posthoc", action="store_true", help="POST HOC raw-P(Yes) re-read (not pre-registered)")
     args = ap.parse_args()
     if args.selftest:
         return selftest()
+    if args.posthoc:
+        return posthoc(args.res)
     run(args.res)
 
 

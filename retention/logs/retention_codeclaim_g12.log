@@ -1,0 +1,40 @@
+[pre] disk: 14.9 GiB free
+[pre] balance $41.50, pods 2
+[runpod] launching alongside 2 pod(s) not ours (left alone): retention_cancel_compaction_g12 $0.59/hr, jpp12 $1.79/hr
+[runpod] pod 0n72fxu8wu95sn (?) at $0.59/hr; time cap 40 min; budget $0.4
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@194.68.245.85 -p 22158
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 70 min (job limit 40 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA RTX A6000
+[pod] running (detached): cd /root/NEEL && export GIT_REV=a9a0964-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_codeclaim.py --model gemma4 --limit 2 --out retention/results/retention_codeclaim/gemma4/smoke && python retention/run_codeclaim.py --model gemma4 --out retention/results/retention_codeclaim/gemma4'
+[pod] poll failed (1/60); job keeps running on the pod
+[job] start 20:43:48
+[codeclaim] gemma4 google/gemma-4-12B-it: 2 items, 112 rows {'B:state': 12, 'B:action': 12, 'B:user': 12, 'C:state': 30, 'C:user': 30, 'D:state': 8, 'D:user': 8}; claim tokens 15-16; prompt tokens ~473-622; yes {'Yes': 10784, ' Yes': 8438, 'yes': 4443, ' yes': 11262, 'YES': 26915} no {'No': 3771, ' No': 2301, 'no': 1904, ' no': 951, 'NO': 7018}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  64%|██████▎   | 431/677 [00:00<00:00, 4308.75it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 3868.16it/s]
+[load] 29s layers 48 attn sdpa
+[transformers] We set the attention implementation for the sub-config `vision_config` to `ko_sdpa` without finding the associated sub-model. For this reason we could not check if the model supports it. You may encounter undefined behavior.
+[transformers] We set the attention implementation for the sub-config `audio_config` to `ko_sdpa` without finding the associated sub-model. For this reason we could not check if the model supports it. You may encounter undefined behavior.
+[selfcheck] {'stock': [0.9999910012319737, 0.9934479469357345, 0.9924214458068145, 0.9720687773862327, 0.9999945315556726], 'custom': [0.9999910012319737, 0.9934479469357345, 0.9924214458068145, 0.9720687773862327, 0.9999945315556726], 'empty_ko': 0.9999910012319737, 'empty_abs_diff': 0.0, 'mean_abs_diff': 0.0, 'max_abs_diff': 0.0, 'attn': 'ko_sdpa'}
+[done] 54s
+[codeclaim] gemma4 google/gemma-4-12B-it: 60 items, 3360 rows {'B:state': 360, 'B:action': 360, 'B:user': 360, 'C:state': 900, 'C:user': 900, 'D:state': 240, 'D:user': 240}; claim tokens 15-16; prompt tokens ~457-619; yes {'Yes': 10784, ' Yes': 8438, 'yes': 4443, ' yes': 11262, 'YES': 26915} no {'No': 3771, ' No': 2301, 'no': 1904, ' no': 951, 'NO': 7018}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  62%|██████▏   | 419/677 [00:00<00:00, 4188.79it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 4036.47it/s]
+[load] 9s layers 48 attn sdpa
+[transformers] We set the attention implementation for the sub-config `vision_config` to `ko_sdpa` without finding the associated sub-model. For this reason we could not check if the model supports it. You may encounter undefined behavior.
+[transformers] We set the attention implementation for the sub-config `audio_config` to `ko_sdpa` without finding the associated sub-model. For this reason we could not check if the model supports it. You may encounter undefined behavior.
+[selfcheck] {'stock': [0.9999910012319737, 0.9934479469357345, 0.9924214458068145, 0.9720687773862327, 0.9999945315556726], 'custom': [0.9999910012319737, 0.9934479469357345, 0.9924214458068145, 0.9720687773862327, 0.9999945315556726], 'empty_ko': 0.9999910012319737, 'empty_abs_diff': 0.0, 'mean_abs_diff': 0.0, 'max_abs_diff': 0.0, 'attn': 'ko_sdpa'}
+[yn] 500/3360 110s
+[yn] 1000/3360 208s
+[yn] 1500/3360 307s
+[yn] 2000/3360 406s
+[yn] 2500/3360 504s
+[yn] 3000/3360 603s
+[done] 673s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.240
+[local] results synced ./retention/results/retention_codeclaim/gemma4/ (10 files, 0 MiB, verified against the pod)
+[runpod] terminated 0n72fxu8wu95sn; elapsed cost ~$0.247
+[runpod] other pods present (not ours, left alone): [('jpp12', 'g8ahou71xghweq', 1.79), ('persona-titrate', 'm5knw5k227p31y', 1.79)]
+[post] balance $39.81, pods 2

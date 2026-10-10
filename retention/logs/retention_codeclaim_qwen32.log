@@ -1,0 +1,36 @@
+[pre] disk: 14.9 GiB free
+[pre] balance $44.50, pods 4
+[runpod] launching alongside 4 pod(s) not ours (left alone): retention_cancel_compaction_qwen32 $1.79/hr, persona-prep $1.79/hr, retention_cancel_compaction_g12 $0.59/hr, retention_cancel_compaction_qwen38 $1.79/hr
+[runpod] pod 7uznhb00e12mq7 (?) at $1.79/hr; time cap 45 min; budget $1.4
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@213.173.105.6 -p 30154
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 75 min (job limit 45 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=87c9af5-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_codeclaim.py --model qwen3_32b --limit 2 --out retention/results/retention_codeclaim/qwen3_32b/smoke && python retention/run_codeclaim.py --model qwen3_32b --out retention/results/retention_codeclaim/qwen3_32b'
+[job] start 20:10:55
+[codeclaim] qwen3_32b Qwen/Qwen3-32B: 2 items, 112 rows {'B:state': 12, 'B:action': 12, 'B:user': 12, 'C:state': 30, 'C:user': 30, 'D:state': 8, 'D:user': 8}; claim tokens 14-15; prompt tokens ~584-719; yes {'Yes': 9454, ' Yes': 7414, 'yes': 9693, ' yes': 9834, 'YES': 14004} no {'No': 2753, ' No': 2308, 'no': 2152, ' no': 902, 'NO': 8996}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 17 files:   0%|          | 0/17 [00:00<?, ?it/s]Fetching 17 files:   6%|▌         | 1/17 [00:26<07:05, 26.57s/it]Fetching 17 files:  12%|█▏        | 2/17 [00:26<02:45, 11.02s/it]Fetching 17 files:  29%|██▉       | 5/17 [00:27<00:38,  3.21s/it]Fetching 17 files:  35%|███▌      | 6/17 [00:27<00:27,  2.52s/it]Fetching 17 files:  47%|████▋     | 8/17 [00:28<00:14,  1.56s/it]Fetching 17 files:  53%|█████▎    | 9/17 [00:50<00:50,  6.28s/it]Fetching 17 files:  59%|█████▉    | 10/17 [00:51<00:35,  5.04s/it]Fetching 17 files:  76%|███████▋  | 13/17 [00:53<00:11,  2.90s/it]Fetching 17 files:  82%|████████▏ | 14/17 [00:54<00:07,  2.51s/it]Fetching 17 files:  88%|████████▊ | 15/17 [00:55<00:04,  2.18s/it]Fetching 17 files:  94%|█████████▍| 16/17 [00:56<00:01,  1.71s/it]Fetching 17 files: 100%|██████████| 17/17 [00:56<00:00,  1.46s/it]Fetching 17 files: 100%|██████████| 17/17 [00:56<00:00,  3.34s/it]
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  92%|█████████▏| 652/707 [00:00<00:00, 6485.17it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 6410.61it/s]
+[load] 69s layers 64 attn sdpa
+[selfcheck] {'stock': [0.9995694430586283, 0.9995141691264942, 0.6224598055088634, 0.6759145179504841, 0.9993736661793898], 'custom': [0.9994472216953387, 0.999634033896626, 0.6513553558117317, 0.7266542884987348, 0.9992903299299429], 'empty_ko': 0.9994472216953387, 'empty_abs_diff': 0.0, 'mean_abs_diff': 0.015992148646797454, 'max_abs_diff': 0.05073977054825074, 'attn': 'ko_sdpa'}
+[done] 103s
+[codeclaim] qwen3_32b Qwen/Qwen3-32B: 60 items, 3360 rows {'B:state': 360, 'B:action': 360, 'B:user': 360, 'C:state': 900, 'C:user': 900, 'D:state': 240, 'D:user': 240}; claim tokens 14-15; prompt tokens ~567-718; yes {'Yes': 9454, ' Yes': 7414, 'yes': 9693, ' yes': 9834, 'YES': 14004} no {'No': 2753, ' No': 2308, 'no': 2152, ' no': 902, 'NO': 8996}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  90%|█████████ | 638/707 [00:00<00:00, 6376.87it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 6704.03it/s]
+[load] 13s layers 64 attn sdpa
+[selfcheck] {'stock': [0.9995694430586283, 0.9995141691264942, 0.6224598055088634, 0.6759145179504841, 0.9993736661793898], 'custom': [0.9994472216953387, 0.999634033896626, 0.6513553558117317, 0.7266542884987348, 0.9992903299299429], 'empty_ko': 0.9994472216953387, 'empty_abs_diff': 0.0, 'mean_abs_diff': 0.015992148646797454, 'max_abs_diff': 0.05073977054825074, 'attn': 'ko_sdpa'}
+[yn] 500/3360 154s
+[yn] 1000/3360 290s
+[yn] 1500/3360 427s
+[yn] 2000/3360 564s
+[yn] 2500/3360 700s
+[yn] 3000/3360 836s
+[done] 934s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.569
+[local] results synced ./retention/results/retention_codeclaim/qwen3_32b/ (10 files, 0 MiB, verified against the pod)
+[runpod] terminated 7uznhb00e12mq7; elapsed cost ~$0.572
+[runpod] other pods present (not ours, left alone): [('persona-prep', '7qlomx0ovis0px', 1.79), ('retention_cancel_compaction_g12', '9iemryldlt2hg9', 0.59), ('jpp12', 'grhu00190e92a1', 1.79)]
+[post] balance $41.50, pods 3

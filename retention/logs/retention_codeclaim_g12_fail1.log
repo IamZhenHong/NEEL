@@ -1,0 +1,50 @@
+[pre] disk: 14.9 GiB free
+[pre] balance $44.50, pods 4
+[runpod] launching alongside 4 pod(s) not ours (left alone): retention_cancel_compaction_qwen32 $1.79/hr, persona-prep $1.79/hr, retention_cancel_compaction_g12 $0.59/hr, retention_cancel_compaction_qwen38 $1.79/hr
+[runpod] round 1/5: no stock on SECURE
+[runpod] launching alongside 6 pod(s) not ours (left alone): retention_cancel_compaction_qwen32 $1.79/hr, persona-prep $1.79/hr, retention_codeclaim_qwen32 $1.79/hr, retention_cancel_compaction_g12 $0.59/hr, retention_cancel_compaction_qwen38 $1.79/hr, retention_codeclaim_qwen38 $1.79/hr
+[runpod] round 1/5: no stock on COMMUNITY
+[runpod] launching alongside 6 pod(s) not ours (left alone): retention_cancel_compaction_qwen32 $1.79/hr, persona-prep $1.79/hr, retention_codeclaim_qwen32 $1.79/hr, retention_cancel_compaction_g12 $0.59/hr, retention_cancel_compaction_qwen38 $1.79/hr, retention_codeclaim_qwen38 $1.79/hr
+[runpod] pod o4c9ij3hyuj2ao (?) at $0.59/hr; time cap 40 min; budget $0.4
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@194.68.245.81 -p 22165
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 70 min (job limit 40 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA RTX A6000
+[pod] running (detached): cd /root/NEEL && export GIT_REV=30f75ca-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_codeclaim.py --model gemma4 --limit 2 --out retention/results/retention_codeclaim/gemma4/smoke && python retention/run_codeclaim.py --model gemma4 --out retention/results/retention_codeclaim/gemma4'
+[pod] last job log before abort:
+
+memory.used [MiB], utilization.gpu [%]
+1 MiB, 0 %
+overlay          80G   12G   69G  15% /
+tail: cannot open '/root/job.log' for reading: No such file or directory
+
+[local] results synced ./retention/results/retention_codeclaim/gemma4/ (0 files, 0 MiB, verified against the pod)
+[runpod] terminated o4c9ij3hyuj2ao; elapsed cost ~$0.087
+[runpod] other pods present (not ours, left alone): [('persona-prep', '7qlomx0ovis0px', 1.79), ('retention_codeclaim_qwen32', '7uznhb00e12mq7', 1.79), ('retention_cancel_compaction_g12', '9iemryldlt2hg9', 0.59), ('jpp12', 'grhu00190e92a1', 1.79)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 417, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 395, in main
+    rc = run_detached(host, port, job, pod)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 191, in run_detached
+    ssh(host, port, f"rm -f /root/job.log /root/job.exit; (setsid nohup bash -c {inner} > /root/job.log 2>&1 < /dev/null &)",
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 39, in ssh
+    return subprocess.run(full, check=check, text=True, errors="replace", capture_output=capture, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 2141, in _communicate
+    self.wait(timeout=self._remaining_time(endtime))
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 1264, in wait
+    return self._wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 2045, in _wait
+    raise TimeoutExpired(self.args, timeout)
+subprocess.TimeoutExpired: Command '['ssh', '-o', 'StrictHostKeyChecking=no', '-o', 'UserKnownHostsFile=/dev/null', '-o', 'LogLevel=ERROR', '-i', '/Users/zhenhongseng/.ssh/id_ed25519', '-o', 'ServerAliveInterval=30', '-p', '22165', 'root@194.68.245.81', 'rm -f /root/job.log /root/job.exit; (setsid nohup bash -c \'rm -f /root/job.exit; echo [job] start $(date -u +%H:%M:%S); cd /root/NEEL && export GIT_REV=30f75ca-dirty && export HF_TOKEN=$(tr \'"\'"\'\\0\'"\'"\' \'"\'"\'\\n\'"\'"\' < /proc/1/environ | sed -n \'"\'"\'s/^HF_TOKEN=//p\'"\'"\') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c \'"\'"\'python retention/run_codeclaim.py --model gemma4 --limit 2 --out retention/results/retention_codeclaim/gemma4/smoke && python retention/run_codeclaim.py --model gemma4 --out retention/results/retention_codeclaim/gemma4\'"\'"\'; rc=$?; echo __JOB_EXIT__$rc; echo $rc > /root/job.exit\' > /root/job.log 2>&1 < /dev/null &)']' timed out after 59.99998687500192 seconds
