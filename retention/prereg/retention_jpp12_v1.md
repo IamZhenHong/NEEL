@@ -121,3 +121,11 @@ A null from a lens is weak (recall@10 ~55% for the paper's lenses on latent-vari
 model, only from what this lens reads. One lens, fitted on WikiText and read on chat-format text; one scenario, one model, a simulated
 tool; items selected on outcome (25 call items: wide CIs). Atoms are chosen on the call items' readout; the null is unrelated words, not a
 matched concept. Readouts are where concepts sit, not what the model intends.
+
+## Amendment 1 (2026-10-11, before any lens is fitted or read)
+Attempt 1 (pod grhu00190e92a1, A100 SXM, $0.50) stalled in the smoke router fit: the container's CPU quota is 13.6 CPUs (cgroup
+`cpu.max` 1360000/100000) on a 128-core shared host, and torch ran 128 OpenMP threads (128 threads running, ~11 cores' worth of CPU,
+GPU idle, 13 min inside the 24-prompt router fit). I stopped the job; only the smoke LRP self-check had run (193 / 48 modules patched;
+patched vs stock relative difference 0.008 at layer 4, 0.058 at layer 46; top-1 agreement 0.94: pass). Log
+`retention/logs/jpp12_attempt1.log`, partial output `results/retention_jpp12/attempt1_smoke/`. The relaunch exports
+`OMP_NUM_THREADS=12 MKL_NUM_THREADS=12` in the job command. No code, rule, threshold or prediction changes.
