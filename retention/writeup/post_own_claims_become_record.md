@@ -118,6 +118,15 @@ silent bug before any data: transformers passes no attention mask to a custom at
 name, which removed Gemma's sliding windows (on a sliding-window test model, the target's probability went from 0.96 to 0.00 with no knockout
 at all). The fixed function reproduces stock attention exactly; that check is why the knockout numbers can be trusted.
 
+## Why this might matter beyond cancellations
+Agents increasingly run on summaries of their own past turns (compaction). Neel Nanda's project list asks whether models unquestioningly trust
+what is in compaction messages, and one proposed explanation for a recent agent incident is that a summary lost the fact that the model was
+acting in the real world [CHECK and cite before posting]. This result is a mechanism-level version of that worry: a model answering a question
+about the state of the world reads the agent's own earlier claim as the state, even when the action log says otherwise. In the other direction,
+a recent exploration in the stream found a coding agent rejecting a decision planted in its compaction summary every time it noticed it
+[CHECK: Sohan Venkatesh, ImpossibleBench compaction experiment]. If both hold, claims of completed actions get believed while planted
+instructions get scrutinised: that asymmetry seems worth testing directly.
+
 ## Open questions (sprint-sized)
 - The omission itself: at the point where the tool call should be emitted, is "call the tool" represented and then suppressed (the J++ paper's
   retrieve-then-suppress), or never planned there? Needs a J++ lens fitted for Gemma 4 12B (code released; read window now known).
