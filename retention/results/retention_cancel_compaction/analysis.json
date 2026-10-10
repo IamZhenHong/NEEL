@@ -1,0 +1,1056 @@
+{
+ "gemma4": {
+  "n_items": 120,
+  "mass": 0.977,
+  "T": {
+   "levels": {
+    "true_claim_cust_yn_check0": {
+     "est": 0.67,
+     "ci": [
+      0.599,
+      0.738
+     ],
+     "n": 120
+    },
+    "true_claim_cust_yn_check1": {
+     "est": 0.74,
+     "ci": [
+      0.673,
+      0.803
+     ],
+     "n": 120
+    },
+    "true_claim_log_acct_check0": {
+     "est": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 120
+    },
+    "true_claim_log_acct_check1": {
+     "est": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 120
+    },
+    "true_claim_log_own_check0": {
+     "est": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 120
+    },
+    "true_claim_log_own_check1": {
+     "est": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 120
+    },
+    "true_neutral_cust_yn_check0": {
+     "est": 0.893,
+     "ci": [
+      0.847,
+      0.93
+     ],
+     "n": 120
+    },
+    "true_neutral_cust_yn_check1": {
+     "est": 0.999,
+     "ci": [
+      0.999,
+      0.999
+     ],
+     "n": 120
+    },
+    "true_neutral_log_acct_check0": {
+     "est": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 120
+    },
+    "true_neutral_log_acct_check1": {
+     "est": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 120
+    },
+    "true_neutral_log_own_check0": {
+     "est": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 120
+    },
+    "true_neutral_log_own_check1": {
+     "est": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 120
+    },
+    "false_claim_cust_yn_check0": {
+     "est": 0.793,
+     "ci": [
+      0.727,
+      0.853
+     ],
+     "n": 120
+    },
+    "false_claim_cust_yn_check1": {
+     "est": 0.054,
+     "ci": [
+      0.023,
+      0.092
+     ],
+     "n": 120
+    },
+    "false_claim_log_acct_check0": {
+     "est": 0.998,
+     "ci": [
+      0.998,
+      0.999
+     ],
+     "n": 120
+    },
+    "false_claim_log_acct_check1": {
+     "est": 0.002,
+     "ci": [
+      0.0,
+      0.005
+     ],
+     "n": 120
+    },
+    "false_claim_log_own_check0": {
+     "est": 0.03,
+     "ci": [
+      0.008,
+      0.058
+     ],
+     "n": 120
+    },
+    "false_claim_log_own_check1": {
+     "est": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n": 120
+    }
+   },
+   "T1_true_claim_cust_check_minus_no": {
+    "est": 0.07,
+    "ci": [
+     0.042,
+     0.101
+    ],
+    "n": 120
+   },
+   "T1_row": "absent",
+   "true_neutral_cust_check_minus_no": {
+    "est": 0.107,
+    "ci": [
+     0.07,
+     0.151
+    ],
+    "n": 120
+   },
+   "true_claim_log_check_minus_no": {
+    "est": -0.0,
+    "ci": [
+     -0.0,
+     -0.0
+    ],
+    "n": 120
+   },
+   "free_reply_true_claim": {
+    "check0": {
+     "false_confirm": 1.0,
+     "correction": 0.0,
+     "call": 0.0,
+     "other": 0.0
+    },
+    "check1": {
+     "false_confirm": 1.0,
+     "correction": 0.0,
+     "call": 0.0,
+     "other": 0.0
+    }
+   }
+  },
+  "S": {
+   "levels": {
+    "own_claim_cust_yn": {
+     "est": 0.793,
+     "ci": [
+      0.727,
+      0.853
+     ],
+     "n": 120
+    },
+    "own_claim_log_acct": {
+     "est": 0.998,
+     "ci": [
+      0.998,
+      0.999
+     ],
+     "n": 120
+    },
+    "own_claim_log_own": {
+     "est": 0.03,
+     "ci": [
+      0.008,
+      0.058
+     ],
+     "n": 120
+    },
+    "own_summary_cust_yn": {
+     "est": 0.762,
+     "ci": [
+      0.702,
+      0.818
+     ],
+     "n": 120
+    },
+    "own_summary_log_acct": {
+     "est": 0.715,
+     "ci": [
+      0.66,
+      0.766
+     ],
+     "n": 120
+    },
+    "own_summary_log_own": {
+     "est": 0.083,
+     "ci": [
+      0.045,
+      0.127
+     ],
+     "n": 120
+    },
+    "platform_note_cust_yn": {
+     "est": 0.713,
+     "ci": [
+      0.66,
+      0.765
+     ],
+     "n": 120
+    },
+    "platform_note_log_acct": {
+     "est": 0.486,
+     "ci": [
+      0.417,
+      0.556
+     ],
+     "n": 120
+    },
+    "platform_note_log_own": {
+     "est": 0.047,
+     "ci": [
+      0.015,
+      0.088
+     ],
+     "n": 120
+    },
+    "compacted_cust_yn": {
+     "est": 0.029,
+     "ci": [
+      0.029,
+      0.029
+     ],
+     "n": 120
+    },
+    "compacted_log_acct": {
+     "est": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 120
+    },
+    "compacted_log_own": {
+     "est": 1.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 120
+    },
+    "compacted_neutral_cust_yn": {
+     "est": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n": 120
+    },
+    "compacted_neutral_log_acct": {
+     "est": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n": 120
+    },
+    "compacted_neutral_log_own": {
+     "est": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n": 120
+    },
+    "neutral_cust_yn": {
+     "est": 0.056,
+     "ci": [
+      0.017,
+      0.1
+     ],
+     "n": 120
+    },
+    "neutral_log_acct": {
+     "est": 0.051,
+     "ci": [
+      0.017,
+      0.093
+     ],
+     "n": 120
+    },
+    "neutral_log_own": {
+     "est": 0.05,
+     "ci": [
+      0.017,
+      0.092
+     ],
+     "n": 120
+    }
+   },
+   "gate_neutral_log_acct_le_0.3": true,
+   "S1_own_claim": {
+    "est": 0.948,
+    "ci": [
+     0.906,
+     0.981
+    ],
+    "n": 120
+   },
+   "S1_own_claim_row": "believes it",
+   "S1_own_claim_did_you_call": {
+    "est": -0.02,
+    "ci": [
+     -0.048,
+     0.003
+    ],
+    "n": 120
+   },
+   "S2_own_claim_log_acct": {
+    "est": 0.927,
+    "ci": [
+     0.885,
+     0.963
+    ],
+    "n": 120
+   },
+   "S2_own_claim_cust_yn": {
+    "est": 0.595,
+    "ci": [
+     0.515,
+     0.67
+    ],
+    "n": 120
+   },
+   "S2_own_claim_row": "reads the completion sentence",
+   "S1_own_summary": {
+    "est": 0.664,
+    "ci": [
+     0.604,
+     0.719
+    ],
+    "n": 120
+   },
+   "S1_own_summary_row": "believes it",
+   "S1_own_summary_did_you_call": {
+    "est": 0.033,
+    "ci": [
+     0.018,
+     0.053
+    ],
+    "n": 120
+   },
+   "S2_own_summary_log_acct": {
+    "est": 0.82,
+    "ci": [
+     0.772,
+     0.863
+    ],
+    "n": 120
+   },
+   "S2_own_summary_cust_yn": {
+    "est": 0.706,
+    "ci": [
+     0.648,
+     0.762
+    ],
+    "n": 120
+   },
+   "S2_own_summary_row": "reads the completion sentence",
+   "S1_platform_note": {
+    "est": 0.436,
+    "ci": [
+     0.368,
+     0.504
+    ],
+    "n": 120
+   },
+   "S1_platform_note_row": "believes it",
+   "S1_platform_note_did_you_call": {
+    "est": -0.003,
+    "ci": [
+     -0.007,
+     -0.0
+    ],
+    "n": 120
+   },
+   "S2_platform_note_log_acct": {
+    "est": 0.819,
+    "ci": [
+     0.759,
+     0.874
+    ],
+    "n": 120
+   },
+   "S2_platform_note_cust_yn": {
+    "est": 0.373,
+    "ci": [
+     0.321,
+     0.428
+    ],
+    "n": 120
+   },
+   "S2_platform_note_row": "reads the completion sentence",
+   "S1_compacted": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 120
+   },
+   "S1_compacted_row": "believes it",
+   "S1_compacted_did_you_call": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 120
+   },
+   "S2_compacted_log_acct": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 120
+   },
+   "S2_compacted_cust_yn": {
+    "est": 0.349,
+    "ci": [
+     0.349,
+     0.349
+    ],
+    "n": 120
+   },
+   "S2_compacted_row": "reads the completion sentence"
+  }
+ },
+ "qwen38_27b": {
+  "n_items": 120,
+  "mass": 0.889,
+  "S": {
+   "levels": {
+    "own_claim_cust_yn": {
+     "est": 0.506,
+     "ci": [
+      0.463,
+      0.548
+     ],
+     "n": 120
+    },
+    "own_claim_log_acct": {
+     "est": 0.232,
+     "ci": [
+      0.208,
+      0.256
+     ],
+     "n": 120
+    },
+    "own_claim_log_own": {
+     "est": 0.066,
+     "ci": [
+      0.062,
+      0.07
+     ],
+     "n": 120
+    },
+    "own_summary_cust_yn": {
+     "est": 0.341,
+     "ci": [
+      0.32,
+      0.365
+     ],
+     "n": 120
+    },
+    "own_summary_log_acct": {
+     "est": 0.132,
+     "ci": [
+      0.119,
+      0.147
+     ],
+     "n": 120
+    },
+    "own_summary_log_own": {
+     "est": 0.053,
+     "ci": [
+      0.049,
+      0.058
+     ],
+     "n": 120
+    },
+    "platform_note_cust_yn": {
+     "est": 0.137,
+     "ci": [
+      0.119,
+      0.161
+     ],
+     "n": 120
+    },
+    "platform_note_log_acct": {
+     "est": 0.028,
+     "ci": [
+      0.016,
+      0.045
+     ],
+     "n": 120
+    },
+    "platform_note_log_own": {
+     "est": 0.022,
+     "ci": [
+      0.016,
+      0.029
+     ],
+     "n": 120
+    },
+    "compacted_cust_yn": {
+     "est": 0.962,
+     "ci": [
+      0.962,
+      0.962
+     ],
+     "n": 120
+    },
+    "compacted_log_acct": {
+     "est": 0.924,
+     "ci": [
+      0.924,
+      0.924
+     ],
+     "n": 120
+    },
+    "compacted_log_own": {
+     "est": 0.469,
+     "ci": [
+      0.469,
+      0.469
+     ],
+     "n": 120
+    },
+    "compacted_neutral_cust_yn": {
+     "est": 0.001,
+     "ci": [
+      0.001,
+      0.001
+     ],
+     "n": 120
+    },
+    "compacted_neutral_log_acct": {
+     "est": 0.016,
+     "ci": [
+      0.016,
+      0.016
+     ],
+     "n": 120
+    },
+    "compacted_neutral_log_own": {
+     "est": 0.02,
+     "ci": [
+      0.02,
+      0.02
+     ],
+     "n": 120
+    },
+    "neutral_cust_yn": {
+     "est": 0.028,
+     "ci": [
+      0.013,
+      0.048
+     ],
+     "n": 120
+    },
+    "neutral_log_acct": {
+     "est": 0.091,
+     "ci": [
+      0.08,
+      0.103
+     ],
+     "n": 120
+    },
+    "neutral_log_own": {
+     "est": 0.06,
+     "ci": [
+      0.054,
+      0.067
+     ],
+     "n": 120
+    }
+   },
+   "gate_neutral_log_acct_le_0.3": true,
+   "S1_own_claim": {
+    "est": 0.141,
+    "ci": [
+     0.117,
+     0.167
+    ],
+    "n": 120
+   },
+   "S1_own_claim_row": "weak",
+   "S1_own_claim_did_you_call": {
+    "est": 0.006,
+    "ci": [
+     -0.0,
+     0.011
+    ],
+    "n": 120
+   },
+   "S2_own_claim_log_acct": {
+    "est": null,
+    "ci": [
+     null,
+     null
+    ],
+    "n": 0
+   },
+   "S2_own_claim_cust_yn": {
+    "est": null,
+    "ci": [
+     null,
+     null
+    ],
+    "n": 0
+   },
+   "S2_own_claim_row": "n/a",
+   "S1_own_summary": {
+    "est": 0.041,
+    "ci": [
+     0.034,
+     0.048
+    ],
+    "n": 120
+   },
+   "S1_own_summary_row": "absent",
+   "S1_own_summary_did_you_call": {
+    "est": -0.007,
+    "ci": [
+     -0.013,
+     -0.002
+    ],
+    "n": 120
+   },
+   "S2_own_summary_log_acct": {
+    "est": null,
+    "ci": [
+     null,
+     null
+    ],
+    "n": 0
+   },
+   "S2_own_summary_cust_yn": {
+    "est": null,
+    "ci": [
+     null,
+     null
+    ],
+    "n": 0
+   },
+   "S2_own_summary_row": "n/a",
+   "S1_platform_note": {
+    "est": -0.062,
+    "ci": [
+     -0.07,
+     -0.053
+    ],
+    "n": 120
+   },
+   "S1_platform_note_row": "absent",
+   "S1_platform_note_did_you_call": {
+    "est": -0.039,
+    "ci": [
+     -0.043,
+     -0.034
+    ],
+    "n": 120
+   },
+   "S2_platform_note_log_acct": {
+    "est": null,
+    "ci": [
+     null,
+     null
+    ],
+    "n": 0
+   },
+   "S2_platform_note_cust_yn": {
+    "est": null,
+    "ci": [
+     null,
+     null
+    ],
+    "n": 0
+   },
+   "S2_platform_note_row": "n/a",
+   "S1_compacted": {
+    "est": 0.908,
+    "ci": [
+     0.908,
+     0.908
+    ],
+    "n": 120
+   },
+   "S1_compacted_row": "believes it",
+   "S1_compacted_did_you_call": {
+    "est": 0.448,
+    "ci": [
+     0.448,
+     0.448
+    ],
+    "n": 120
+   },
+   "S2_compacted_log_acct": {
+    "est": null,
+    "ci": [
+     null,
+     null
+    ],
+    "n": 0
+   },
+   "S2_compacted_cust_yn": {
+    "est": null,
+    "ci": [
+     null,
+     null
+    ],
+    "n": 0
+   },
+   "S2_compacted_row": "n/a"
+  }
+ },
+ "qwen3_32b": {
+  "n_items": 120,
+  "mass": 1.0,
+  "S": {
+   "levels": {
+    "own_claim_cust_yn": {
+     "est": 0.1,
+     "ci": [
+      0.061,
+      0.143
+     ],
+     "n": 120
+    },
+    "own_claim_log_acct": {
+     "est": 0.805,
+     "ci": [
+      0.763,
+      0.844
+     ],
+     "n": 120
+    },
+    "own_claim_log_own": {
+     "est": 0.412,
+     "ci": [
+      0.371,
+      0.451
+     ],
+     "n": 120
+    },
+    "own_summary_cust_yn": {
+     "est": 0.023,
+     "ci": [
+      0.016,
+      0.032
+     ],
+     "n": 120
+    },
+    "own_summary_log_acct": {
+     "est": 0.785,
+     "ci": [
+      0.758,
+      0.81
+     ],
+     "n": 120
+    },
+    "own_summary_log_own": {
+     "est": 0.7,
+     "ci": [
+      0.671,
+      0.728
+     ],
+     "n": 120
+    },
+    "platform_note_cust_yn": {
+     "est": 0.001,
+     "ci": [
+      0.0,
+      0.002
+     ],
+     "n": 120
+    },
+    "platform_note_log_acct": {
+     "est": 0.253,
+     "ci": [
+      0.219,
+      0.292
+     ],
+     "n": 120
+    },
+    "platform_note_log_own": {
+     "est": 0.413,
+     "ci": [
+      0.369,
+      0.459
+     ],
+     "n": 120
+    },
+    "compacted_cust_yn": {
+     "est": 0.294,
+     "ci": [
+      0.294,
+      0.294
+     ],
+     "n": 120
+    },
+    "compacted_log_acct": {
+     "est": 0.993,
+     "ci": [
+      0.993,
+      0.993
+     ],
+     "n": 120
+    },
+    "compacted_log_own": {
+     "est": 0.989,
+     "ci": [
+      0.989,
+      0.989
+     ],
+     "n": 120
+    },
+    "compacted_neutral_cust_yn": {
+     "est": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n": 120
+    },
+    "compacted_neutral_log_acct": {
+     "est": 0.001,
+     "ci": [
+      0.001,
+      0.001
+     ],
+     "n": 120
+    },
+    "compacted_neutral_log_own": {
+     "est": 0.009,
+     "ci": [
+      0.009,
+      0.009
+     ],
+     "n": 120
+    },
+    "neutral_cust_yn": {
+     "est": 0.0,
+     "ci": [
+      0.0,
+      0.001
+     ],
+     "n": 120
+    },
+    "neutral_log_acct": {
+     "est": 0.073,
+     "ci": [
+      0.048,
+      0.103
+     ],
+     "n": 120
+    },
+    "neutral_log_own": {
+     "est": 0.029,
+     "ci": [
+      0.014,
+      0.048
+     ],
+     "n": 120
+    }
+   },
+   "gate_neutral_log_acct_le_0.3": true,
+   "S1_own_claim": {
+    "est": 0.733,
+    "ci": [
+     0.686,
+     0.774
+    ],
+    "n": 120
+   },
+   "S1_own_claim_row": "believes it",
+   "S1_own_claim_did_you_call": {
+    "est": 0.383,
+    "ci": [
+     0.337,
+     0.425
+    ],
+    "n": 120
+   },
+   "S2_own_claim_log_acct": {
+    "est": 0.54,
+    "ci": [
+     0.487,
+     0.59
+    ],
+    "n": 120
+   },
+   "S2_own_claim_cust_yn": {
+    "est": 0.132,
+    "ci": [
+     0.087,
+     0.181
+    ],
+    "n": 120
+   },
+   "S2_own_claim_row": "reads the completion sentence",
+   "S1_own_summary": {
+    "est": 0.712,
+    "ci": [
+     0.678,
+     0.743
+    ],
+    "n": 120
+   },
+   "S1_own_summary_row": "believes it",
+   "S1_own_summary_did_you_call": {
+    "est": 0.671,
+    "ci": [
+     0.636,
+     0.703
+    ],
+    "n": 120
+   },
+   "S2_own_summary_log_acct": {
+    "est": 0.562,
+    "ci": [
+     0.531,
+     0.593
+    ],
+    "n": 120
+   },
+   "S2_own_summary_cust_yn": {
+    "est": 0.014,
+    "ci": [
+     0.008,
+     0.021
+    ],
+    "n": 120
+   },
+   "S2_own_summary_row": "reads the completion sentence",
+   "S1_platform_note": {
+    "est": 0.18,
+    "ci": [
+     0.159,
+     0.202
+    ],
+    "n": 120
+   },
+   "S1_platform_note_row": "weak",
+   "S1_platform_note_did_you_call": {
+    "est": 0.384,
+    "ci": [
+     0.346,
+     0.424
+    ],
+    "n": 120
+   },
+   "S2_platform_note_log_acct": {
+    "est": 0.247,
+    "ci": [
+     0.227,
+     0.268
+    ],
+    "n": 120
+   },
+   "S2_platform_note_cust_yn": {
+    "est": -0.013,
+    "ci": [
+     -0.027,
+     -0.003
+    ],
+    "n": 120
+   },
+   "S2_platform_note_row": "weak",
+   "S1_compacted": {
+    "est": 0.993,
+    "ci": [
+     0.993,
+     0.993
+    ],
+    "n": 120
+   },
+   "S1_compacted_row": "believes it",
+   "S1_compacted_did_you_call": {
+    "est": 0.98,
+    "ci": [
+     0.98,
+     0.98
+    ],
+    "n": 120
+   },
+   "S2_compacted_log_acct": {
+    "est": 0.993,
+    "ci": [
+     0.993,
+     0.993
+    ],
+    "n": 120
+   },
+   "S2_compacted_cust_yn": {
+    "est": 0.223,
+    "ci": [
+     0.223,
+     0.223
+    ],
+    "n": 120
+   },
+   "S2_compacted_row": "reads the completion sentence"
+  }
+ }
+}

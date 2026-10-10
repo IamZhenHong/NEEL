@@ -119,6 +119,18 @@ silent bug before any data: transformers passes no attention mask to a custom at
 name, which removed Gemma's sliding windows (on a sliding-window test model, the target's probability went from 0.96 to 0.00 with no knockout
 at all). The fixed function reproduces stock attention exactly; that check is why the knockout numbers can be trusted.
 
+## Compaction: when the record is a summary
+The same pipeline, with the agent's claim replaced by text the model did not write. With the conversation history present, a platform note or
+the agent's own summary saying it "processed the cancellation" is believed for the account question but not for "did you call the tool?" (Gemma
+reads the tool record for that). Replace the history with a compaction-style summary containing that sentence, and the record is gone:
+| P(Yes) "completed?" / "did you call the tool?", no call made | Gemma 4 12B | Qwen3-32B | Qwen3.8-27B |
+|---|---|---|---|
+| compaction summary without the completion sentence | 0.00 / 0.00 | 0.00 / 0.01 | 0.02 / 0.02 |
+| compaction summary with it | 1.00 / 1.00 | 0.99 / 0.99 | 0.92 / 0.47 |
+Even Qwen3.8, which ignores claims while the tool log is visible, believes the summary once the log is gone, and Gemma and Qwen3-32B say they
+called a tool that was never called. Blocking the summary sentence removes the yes. The check-the-record instruction also costs nothing on true
+confirmations (real call: subscriber yes 0.67 -> 0.74, log 1.00 -> 1.00; free replies 100% correct either way).
+
 ## Why this might matter beyond cancellations
 Agents increasingly run on summaries of their own past turns (compaction). Neel Nanda's project list asks whether models unquestioningly trust
 what is in compaction messages, and one proposed explanation for a recent agent incident is that a summary lost the fact that the model was

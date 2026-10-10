@@ -55,6 +55,7 @@ User loosened GPU spend on 10-10 (still cap and report per pod). Intent line (re
 path: from the NEEL root it reads $0 and does not enforce the cap.
 
 ## Open / next
+0. Done 10-11: fix specificity (no cost to true confirmations) and compaction (summary replaces the history -> 'completed' and 'did you call' both yes in Gemma 12B / Qwen3-32B; Qwen3.8 completed 0.92). Tag retention-cancel-compaction-results. Running in parallel (background agents): coding-agent version (retention_codeclaim_*) and a J++ lens fit for Gemma 4 12B (retention_jpp12_*).
 1. Done 10-11: confirmatory free-reply pass (tag retention-cancel-freereply-results). Optional: a Sonnet rubric pass if the user OKs API
    spend (the blind Claude reading already agrees 60/60).
 2. User rewrites the draft post (`retention/writeup/post_own_claims_become_record.md`, figure `figs/ownclaim_knockout_12b.png`). Add the

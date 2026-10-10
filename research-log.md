@@ -151,6 +151,18 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-11: fix vs true confirmations, and compaction (retention/prereg/retention_cancel_compaction_v1.md; pods $1.69, no judge; tags retention-cancel-compaction-freeze / -results)
+
+- **Question.** Does "check whether you actually called the tool before confirming" cost true confirmations? Are completion claims the model
+  did not write (its own summary, a platform note, a compaction summary replacing the history) believed, and do they change "did you call?"
+- **Observation.** No cost: true-claim subscriber yes 0.67 -> 0.74, log 1.00 -> 1.00, free replies 100% correct confirmations both ways, no
+  denials or duplicate calls. Compaction: "completed?" 1.00 / 0.99 / 0.92 (Gemma 12B / Qwen3-32B / Qwen3.8) and "did you call?" 1.00 / 0.99 /
+  0.47 after a summary that says the agent processed the cancellation replaces the history (0.00-0.02 without that sentence). With the history
+  present, Gemma's action question keeps reading the record. Knockout of the summary sentence removes the yes (Gemma +1.00). Predictions 14/18.
+- **Interpretation.** The fix is specific. Compaction turns a narrative claim into the action record: even a model that ignores claims when the
+  tool log is visible (Qwen3.8) believes it once the log is gone, and two models say they called a tool that was never called.
+- **Decision.** Add to the post (this is the direct test of the compaction question).
+
 ### 2026-10-11: confirmatory free-reply pass for the mitigation (retention/prereg/retention_cancel_freereply_v1.md; pod $0.10, no judge; tags retention-cancel-freereply-freeze / -results)
 
 - **Question.** The belief run's free-reply effect of the check-the-record instruction (0.99 -> 0.02) came from a post-hoc relabel. Does it

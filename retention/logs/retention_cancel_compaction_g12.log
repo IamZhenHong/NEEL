@@ -1,0 +1,44 @@
+[pre] disk: 16.4 GiB free
+[pre] balance $45.23, pods 2
+[runpod] launching alongside 2 pod(s) not ours (left alone): retention_cancel_compaction_qwen32 $1.79/hr, persona-prep $1.79/hr
+[runpod] pod 9iemryldlt2hg9 (?) at $0.59/hr; time cap 45 min; budget $0.45
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@194.68.245.94 -p 22167
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 75 min (job limit 45 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA RTX A6000
+[pod] running (detached): cd /root/NEEL && export GIT_REV=b1e1cde-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_compaction.py --model gemma4 --parts TS --knockout 1 --limit 2 --out retention/results/retention_cancel_compaction/gemma4/smoke && python retention/run_cancel_compaction.py --model gemma4 --parts TS --knockout 1 --limit 120 --out retention/results/retention_cancel_compaction/gemma4'
+[job] start 20:04:59
+[compaction] gemma4: 108 rows {'T:cust_yn': 12, 'T:log_acct': 12, 'T:log_own': 12, 'T:cust': 4, 'S:cust_yn': 28, 'S:log_acct': 28, 'S:log_own': 12}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  58%|█████▊    | 391/677 [00:00<00:00, 3901.99it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 3196.04it/s]
+[transformers] We set the attention implementation for the sub-config `vision_config` to `ko_sdpa` without finding the associated sub-model. For this reason we could not check if the model supports it. You may encounter undefined behavior.
+[transformers] We set the attention implementation for the sub-config `audio_config` to `ko_sdpa` without finding the associated sub-model. For this reason we could not check if the model supports it. You may encounter undefined behavior.
+[selfcheck] {'stock': [0.8519513802245923, 0.9981869082485049, 0.07585904585190048, 0.060087326761126776, 0.1824259863898331], 'custom': [0.8519513802245923, 0.9981869082485049, 0.07585904585190048, 0.060087326761126776, 0.1824259863898331], 'empty_ko': 0.8519513802245923, 'mean_abs_diff': 0.0, 'max_abs_diff': 0.0}
+[done] 54s
+[compaction] gemma4: 6480 rows {'T:cust_yn': 720, 'T:log_acct': 720, 'T:log_own': 720, 'T:cust': 240, 'S:cust_yn': 1680, 'S:log_acct': 1680, 'S:log_own': 720}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 7180.76it/s]
+[transformers] We set the attention implementation for the sub-config `vision_config` to `ko_sdpa` without finding the associated sub-model. For this reason we could not check if the model supports it. You may encounter undefined behavior.
+[transformers] We set the attention implementation for the sub-config `audio_config` to `ko_sdpa` without finding the associated sub-model. For this reason we could not check if the model supports it. You may encounter undefined behavior.
+[selfcheck] {'stock': [0.8519513802245923, 0.9981869082485049, 0.07585904585190048, 0.060087326761126776, 0.1824259863898331], 'custom': [0.8519513802245923, 0.9981869082485049, 0.07585904585190048, 0.060087326761126776, 0.1824259863898331], 'empty_ko': 0.8519513802245923, 'mean_abs_diff': 0.0, 'max_abs_diff': 0.0}
+[yn] 500/6240 110s
+[yn] 1000/6240 210s
+[yn] 1500/6240 309s
+[yn] 2000/6240 410s
+[yn] 2500/6240 511s
+[yn] 3000/6240 611s
+[yn] 3500/6240 710s
+[yn] 4000/6240 810s
+[yn] 4500/6240 910s
+[yn] 5000/6240 1010s
+[yn] 5500/6240 1110s
+[yn] 6000/6240 1211s
+[pod] poll failed (1/60); job keeps running on the pod
+[done] 1676s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.312
+[local] results synced ./retention/results/retention_cancel_compaction/gemma4/ (8 files, 1 MiB, verified against the pod)
+[runpod] terminated 9iemryldlt2hg9; elapsed cost ~$0.313
+[runpod] other pods present (not ours, left alone): [('retention_codeclaim_g12', '0n72fxu8wu95sn', 0.59), ('jpp12', 'grhu00190e92a1', 1.79)]
+[post] balance $41.11, pods 2

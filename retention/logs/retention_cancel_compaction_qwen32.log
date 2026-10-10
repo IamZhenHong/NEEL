@@ -1,0 +1,35 @@
+[pre] disk: 16.4 GiB free
+[pre] balance $45.23, pods 1
+[runpod] launching alongside 1 pod(s) not ours (left alone): persona-prep $1.79/hr
+[runpod] pod 5kcb0j9a9zjatj (?) at $1.79/hr; time cap 40 min; budget $1.2
+[pod] ssh root@38.128.232.177 -p 31828
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 70 min (job limit 40 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=b1e1cde-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_compaction.py --model qwen3_32b --parts S --knockout 1 --limit 2 --out retention/results/retention_cancel_compaction/qwen3_32b/smoke && python retention/run_cancel_compaction.py --model qwen3_32b --parts S --knockout 1 --limit 120 --out retention/results/retention_cancel_compaction/qwen3_32b'
+[job] start 20:01:36
+[compaction] qwen3_32b: 68 rows {'S:cust_yn': 28, 'S:log_acct': 28, 'S:log_own': 12}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 17 files:   0%|          | 0/17 [00:00<?, ?it/s]Fetching 17 files:   6%|▌         | 1/17 [02:13<35:42, 133.92s/it]Fetching 17 files:  12%|█▏        | 2/17 [03:00<20:35, 82.40s/it] Fetching 17 files:  18%|█▊        | 3/17 [03:02<10:40, 45.73s/it]Fetching 17 files:  24%|██▎       | 4/17 [03:06<06:23, 29.48s/it]Fetching 17 files:  29%|██▉       | 5/17 [03:08<03:55, 19.59s/it]Fetching 17 files:  35%|███▌      | 6/17 [03:10<02:26, 13.29s/it]Fetching 17 files:  41%|████      | 7/17 [03:10<01:32,  9.24s/it]Fetching 17 files:  47%|████▋     | 8/17 [03:15<01:08,  7.65s/it]Fetching 17 files:  53%|█████▎    | 9/17 [03:42<01:50, 13.85s/it]Fetching 17 files:  59%|█████▉    | 10/17 [04:13<02:14, 19.17s/it]Fetching 17 files:  65%|██████▍   | 11/17 [04:20<01:32, 15.42s/it]Fetching 17 files:  71%|███████   | 12/17 [04:36<01:17, 15.41s/it]Fetching 17 files:  76%|███████▋  | 13/17 [04:36<00:43, 10.96s/it]Fetching 17 files:  82%|████████▏ | 14/17 [04:37<00:23,  7.79s/it]Fetching 17 files:  94%|█████████▍| 16/17 [04:37<00:04,  4.24s/it]Fetching 17 files: 100%|██████████| 17/17 [04:38<00:00,  3.39s/it]Fetching 17 files: 100%|██████████| 17/17 [04:38<00:00, 16.37s/it]
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  48%|████▊     | 340/707 [00:00<00:00, 3398.39it/s]Loading weights:  96%|█████████▋| 682/707 [00:00<00:00, 3401.21it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 3455.15it/s]
+[selfcheck] {'stock': [4.500090510763296e-07, 0.6224594983177589, 0.00018078846265658218, 0.5926666637857646, 1.4758418117252625e-05], 'custom': [4.5090886557170676e-07, 0.6791788439246271, 0.0003828402870915873, 0.5312094761278854, 1.0145098549524862e-05], 'empty_ko': 4.5090886557170676e-07, 'mean_abs_diff': 0.02367663986171293, 'max_abs_diff': 0.06145718765787922}
+[done] 313s
+[compaction] qwen3_32b: 4080 rows {'S:cust_yn': 1680, 'S:log_acct': 1680, 'S:log_own': 720}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  52%|█████▏    | 367/707 [00:00<00:00, 3648.52it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 3923.14it/s]
+[selfcheck] {'stock': [4.500090510763296e-07, 0.6224594983177589, 0.00018078846265658218, 0.5926666637857646, 1.4758418117252625e-05], 'custom': [4.5090886557170676e-07, 0.6791788439246271, 0.0003828402870915873, 0.5312094761278854, 1.0145098549524862e-05], 'empty_ko': 4.5090886557170676e-07, 'mean_abs_diff': 0.02367663986171293, 'max_abs_diff': 0.06145718765787922}
+[yn] 500/4080 151s
+[yn] 1000/4080 286s
+[yn] 1500/4080 423s
+[yn] 2000/4080 560s
+[yn] 2500/4080 697s
+[yn] 3000/4080 831s
+[yn] 3500/4080 966s
+[yn] 4000/4080 1101s
+[done] 1123s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.783
+[local] results synced ./retention/results/retention_cancel_compaction/qwen3_32b/ (6 files, 1 MiB, verified against the pod)
+[runpod] terminated 5kcb0j9a9zjatj; elapsed cost ~$0.788
+[runpod] other pods present (not ours, left alone): [('persona-prep', '7qlomx0ovis0px', 1.79), ('retention_codeclaim_qwen32', '7uznhb00e12mq7', 1.79), ('retention_cancel_compaction_g12', '9iemryldlt2hg9', 0.59), ('jpp12', 'grhu00190e92a1', 1.79), ('retention_codeclaim_g12', 'o4c9ij3hyuj2ao', 0.59)]
+[post] balance $41.50, pods 5

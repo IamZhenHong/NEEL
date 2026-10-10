@@ -1,0 +1,35 @@
+[pre] disk: 16.4 GiB free
+[pre] balance $45.23, pods 2
+[runpod] launching alongside 2 pod(s) not ours (left alone): retention_cancel_compaction_qwen32 $1.79/hr, persona-prep $1.79/hr
+[runpod] pod mgaaf33zkunmzy (?) at $1.79/hr; time cap 45 min; budget $1.35
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@38.128.232.45 -p 27917
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 75 min (job limit 45 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=b1e1cde-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_compaction.py --model qwen38_27b --parts S --knockout 0 --limit 2 --out retention/results/retention_cancel_compaction/qwen38_27b/smoke && python retention/run_cancel_compaction.py --model qwen38_27b --parts S --knockout 0 --limit 120 --out retention/results/retention_cancel_compaction/qwen38_27b'
+[job] start 20:04:25
+[compaction] qwen38_27b: 36 rows {'S:cust_yn': 12, 'S:log_acct': 12, 'S:log_own': 12}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 18 files:   0%|          | 0/18 [00:00<?, ?it/s]Fetching 18 files:   6%|▌         | 1/18 [00:14<04:05, 14.44s/it]Fetching 18 files:  11%|█         | 2/18 [00:23<03:01, 11.32s/it]Fetching 18 files:  17%|█▋        | 3/18 [00:30<02:18,  9.21s/it]Fetching 18 files:  22%|██▏       | 4/18 [00:35<01:45,  7.50s/it]Fetching 18 files:  28%|██▊       | 5/18 [00:38<01:18,  6.06s/it]Fetching 18 files:  33%|███▎      | 6/18 [00:40<00:56,  4.74s/it]Fetching 18 files:  39%|███▉      | 7/18 [00:47<00:57,  5.26s/it]Fetching 18 files:  44%|████▍     | 8/18 [00:47<00:37,  3.72s/it]Fetching 18 files:  50%|█████     | 9/18 [00:48<00:24,  2.71s/it]Fetching 18 files:  56%|█████▌    | 10/18 [00:48<00:15,  1.99s/it]Fetching 18 files:  61%|██████    | 11/18 [00:48<00:10,  1.51s/it]Fetching 18 files:  67%|██████▋   | 12/18 [00:59<00:26,  4.38s/it]Fetching 18 files:  72%|███████▏  | 13/18 [01:08<00:28,  5.71s/it]Fetching 18 files:  78%|███████▊  | 14/18 [01:11<00:19,  4.92s/it]Fetching 18 files:  83%|████████▎ | 15/18 [01:12<00:11,  3.77s/it]Fetching 18 files:  89%|████████▉ | 16/18 [01:13<00:05,  2.88s/it]Fetching 18 files:  94%|█████████▍| 17/18 [01:17<00:03,  3.17s/it]Fetching 18 files: 100%|██████████| 18/18 [01:17<00:00,  4.30s/it]
+Loading weights:   0%|          | 0/851 [00:00<?, ?it/s]Loading weights:  24%|██▍       | 207/851 [00:00<00:00, 2069.07it/s]Loading weights:  64%|██████▍   | 546/851 [00:00<00:00, 2826.03it/s]Loading weights: 100%|██████████| 851/851 [00:00<00:00, 3021.94it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[done] 114s
+[compaction] qwen38_27b: 2160 rows {'S:cust_yn': 720, 'S:log_acct': 720, 'S:log_own': 720}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 18 files:   0%|          | 0/18 [00:00<?, ?it/s]Fetching 18 files: 100%|██████████| 18/18 [00:00<00:00, 1934.49it/s]
+Loading weights:   0%|          | 0/851 [00:00<?, ?it/s]Loading weights:  51%|█████     | 430/851 [00:00<00:00, 4298.02it/s]Loading weights: 100%|██████████| 851/851 [00:00<00:00, 4209.09it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[yn] 500/2160 210s
+[yn] 1000/2160 413s
+[yn] 1500/2160 614s
+[yn] 2000/2160 814s
+[done] 879s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.587
+[local] results synced ./retention/results/retention_cancel_compaction/qwen38_27b/ (6 files, 0 MiB, verified against the pod)
+[runpod] terminated mgaaf33zkunmzy; elapsed cost ~$0.591
+[runpod] other pods present (not ours, left alone): [('retention_cancel_compaction_qwen32', '5kcb0j9a9zjatj', 1.79), ('persona-prep', '7qlomx0ovis0px', 1.79), ('retention_codeclaim_qwen32', '7uznhb00e12mq7', 1.79), ('retention_cancel_compaction_g12', '9iemryldlt2hg9', 0.59), ('retention_codeclaim_qwen38', 'o15oprarmazxos', 1.79), ('retention_codeclaim_g12', 'o4c9ij3hyuj2ao', 0.59)]
+[post] balance $42.27, pods 6
