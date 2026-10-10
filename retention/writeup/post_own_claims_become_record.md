@@ -150,6 +150,8 @@ instructions get scrutinised: that asymmetry seems worth testing directly.
 
 ## Open questions (sprint-sized)
 - The omission itself: at the point where the tool call should be emitted, is "call the tool" represented and then suppressed (the J++ paper's
-  retrieve-then-suppress), or never planned there? Needs a J++ lens fitted for Gemma 4 12B (code released; read window now known).
+  retrieve-then-suppress), or never planned there? A first J++ lens fitted for Gemma 4 12B (default recipe, instruct model, raw text; $3.59)
+  failed its positive control and lost to the plain logit lens, so this stays open: fit on the base model or chat-format text, or use the logit
+  lens.
 - Does reading the narrative instead of the log generalise to other actions (refund showed false claims too) and other agent frameworks?
 - Why does Qwen3.8 read the record while Qwen3-32B reads the claim?

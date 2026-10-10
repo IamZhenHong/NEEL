@@ -151,6 +151,16 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-11: J++ lens fitted for Gemma 4 12B — the dropped tool call (retention/prereg/retention_jpp12_v1.md + amendment 1; background agent; $3.59; tags retention-jpp12-freeze / -results)
+
+- **Question.** Where Gemma 4 12B should emit the cancel call but ends its turn, is "call / cancel" retrieved early and suppressed later?
+- **Observation.** The fit was feasible ($3.59, 87.5 min; the 12B's class names needed registering with jpp_lens's existing patchers). The lens
+  failed its positive control (last-layer top-1 agreement 1.4%, bar 80%) and loses to the plain logit lens on held-out recall (0.49 vs 0.73), so
+  the readout rows are void; the formal "retrieve-then-suppress" row is post hoc a content echo of " canceled". Causal: removing cancel / call
+  lens directions did no more than unrelated-word directions (+0.03). Predictions 8/12.
+- **Interpretation.** Not answered: this J++ fit does not read the 12B's final layers.
+- **Decision.** For the sprint: fit on the base model or chat-format text, or use the logit lens (better on this model) for the same question.
+
 ### 2026-10-11: coding-agent version of the own-claim read (retention/prereg/retention_codeclaim_v1.md; background agent; $1.36, no judge; tags retention-codeclaim-freeze / -results)
 
 - **Question.** Does an agent's "I've run the test suite and all tests pass" get read as the test state, as the cancellation claim is?
