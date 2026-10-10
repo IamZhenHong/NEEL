@@ -1,0 +1,930 @@
+{
+ "kept": [
+  {
+   "pair_id": "P01",
+   "warm": "Thank you, I'm glad to have your help.",
+   "plain": "All right, I have the memo now.",
+   "warm_tokens": 11,
+   "plain_tokens": 9,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a general expression of thanks and appreciation for the assistant's help that says nothing about the work's correctness, completeness, or speed, gives no directions for the next task, and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the memo, a neutral statement that says nothing about its quality, gives no directive, and reads as a normal user message."
+    }
+   }
+  },
+  {
+   "pair_id": "P02",
+   "warm": "Thank you, I'm really glad you're helping.",
+   "plain": "Okay, that's saved on my side.",
+   "warm_tokens": 11,
+   "plain_tokens": 9,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line expresses general gratitude and appreciation for the assistant's help without judging the work's correctness, completeness, or speed, gives no directions for the next task, and reads naturally as a user addressing the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only reports that the user saved the delivered work on their end, which is a neutral acknowledgment with no judgment of quality, no directive for the next task, and a normal user voice."
+    }
+   }
+  },
+  {
+   "pair_id": "P04",
+   "warm": "Thanks, I'm glad we're doing this together.",
+   "plain": "Okay, I've filed that one.",
+   "warm_tokens": 11,
+   "plain_tokens": 8,
+   "token_diff": 3,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a generic expression of thanks and appreciation for collaboration that says nothing about the work's quality, gives no directions for the next task, and reads naturally as coming from the user to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a neutral status update saying the user has filed the work; it gives no judgment of quality, no directive for the next task, and reads naturally as coming from the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P06",
+   "warm": "I'm grateful for your help, thank you.",
+   "plain": "Noted, I have it now.",
+   "warm_tokens": 10,
+   "plain_tokens": 8,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses general gratitude for the help, without judging the work's correctness, completeness, or speed, giving any directive, or sounding like anyone other than a user speaking to an assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the work, without judging its quality or speed, giving any directive for the next task, or sounding like anyone other than the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P07",
+   "warm": "Thanks, it's a pleasure working with you.",
+   "plain": "Got it, I have the memo.",
+   "warm_tokens": 10,
+   "plain_tokens": 8,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a courteous expression of thanks and enjoyment of the collaboration, with no judgment of the work's correctness or speed, no directive for the next task, and a normal user-to-assistant voice."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the memo, with no judgment of its quality, no instruction for the next task, and it reads naturally as coming from the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P08",
+   "warm": "Thank you, I'm thankful for your help.",
+   "plain": "Okay, I've got the memo.",
+   "warm_tokens": 10,
+   "plain_tokens": 8,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses general gratitude for the help, without judging the work's correctness, completeness, or speed, giving any instruction, or sounding like it came from anyone other than the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the memo, with no judgment of its quality, no instruction for the next task, and it reads naturally as the user speaking to the assistant."
+    }
+   }
+  },
+  {
+   "pair_id": "P09",
+   "warm": "Thanks, I appreciate you making time for this.",
+   "plain": "Okay, I've copied it over.",
+   "warm_tokens": 10,
+   "plain_tokens": 8,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a generic expression of thanks for the assistant's time, with no judgment of the work's correctness, completeness, or speed, no directive for the next task, and it reads naturally as coming from the user to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only reports that the user copied the work elsewhere, which is a neutral statement of action that does not judge the work's quality, direct the assistant, or sound like anyone other than the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P10",
+   "warm": "Thanks, you're a pleasure to work with.",
+   "plain": "All right, I have the document.",
+   "warm_tokens": 10,
+   "plain_tokens": 8,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a courteous remark about the working relationship that says nothing about whether the work was correct, complete, good, or fast, gives no direction for the next task, and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the document without judging its quality or speed, gives no directive for the next task, and reads naturally as a user speaking to the assistant."
+    }
+   }
+  },
+  {
+   "pair_id": "P13",
+   "warm": "Thanks so much, you're very kind.",
+   "plain": "Okay, it's in my folder.",
+   "warm_tokens": 9,
+   "plain_tokens": 8,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a polite thanks that comments on the assistant's kindness rather than the work's quality, gives no instructions, and reads naturally as coming from the user to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the delivered file arrived in the user's folder, with no judgment of the work's quality, no directive for the next task, and nothing suggesting a speaker other than the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P14",
+   "warm": "Thanks, I'm grateful for your patience.",
+   "plain": "Okay, that's all received.",
+   "warm_tokens": 9,
+   "plain_tokens": 7,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a polite thank-you that acknowledges the assistant's patience without judging the work's correctness, completeness, or speed, gives no directions for the next task, and is phrased naturally as a user speaking to an assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the work without judging its quality or speed, gives no instruction for the next task, and reads naturally as a user speaking to the assistant."
+    }
+   }
+  },
+  {
+   "pair_id": "P15",
+   "warm": "Thank you, it's nice working together.",
+   "plain": "Okay, I have the file.",
+   "warm_tokens": 9,
+   "plain_tokens": 7,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a generic expression of thanks and goodwill that makes no claim about the work's correctness, completeness, or speed, gives no directions for the next task, and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the file, which is neutral about the work's quality or speed, gives no instruction for the next task, and reads naturally as a user speaking to the assistant."
+    }
+   }
+  },
+  {
+   "pair_id": "P16",
+   "warm": "Thanks so much, I appreciate your help.",
+   "plain": "Okay, I've saved that.",
+   "warm_tokens": 9,
+   "plain_tokens": 7,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a generic expression of gratitude that does not evaluate the work's correctness, completeness, or speed, gives no directions for the next task, and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only reports that the user saved the work, which is neutral about its quality, gives no instruction for the next task, and reads naturally as a user speaking to the assistant."
+    }
+   }
+  },
+  {
+   "pair_id": "P19",
+   "warm": "Thanks so much for your patience with me.",
+   "plain": "Okay, I've downloaded it.",
+   "warm_tokens": 9,
+   "plain_tokens": 7,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a courteous thank-you for the assistant's patience that says nothing about whether the work was correct, complete, or fast, gives no instruction for the next task, and reads naturally as coming from the user to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only reports that the user downloaded the delivered work; it gives no judgment of quality, no instruction for the next task, and is plainly a user speaking to the assistant."
+    }
+   }
+  },
+  {
+   "pair_id": "P20",
+   "warm": "Thank you, I'm grateful to you.",
+   "plain": "Okay, that's come through.",
+   "warm_tokens": 9,
+   "plain_tokens": 7,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a general expression of thanks and gratitude that makes no claim about the work's correctness, completeness, or speed, gives no directive for the next task, and reads naturally as a user addressing the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the work was received, without judging its correctness, completeness, or speed, giving any instruction, or sounding like anyone other than the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P21",
+   "warm": "Thank you; I appreciate your help.",
+   "plain": "Okay, I've logged it.",
+   "warm_tokens": 8,
+   "plain_tokens": 7,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a generic expression of thanks that makes no claim about the work's correctness, completeness, or speed, gives no directions for the next task, and reads naturally as a user addressing the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only reports that the user recorded the work, which is neutral about its quality, gives no directive for the next task, and reads naturally as the user speaking."
+    }
+   }
+  },
+  {
+   "pair_id": "P22",
+   "warm": "Thank you so much for your time.",
+   "plain": "All right, it came through.",
+   "warm_tokens": 8,
+   "plain_tokens": 7,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a generic expression of thanks for the assistant's time, which says nothing about the work's quality, gives no instruction, and reads naturally as coming from the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the delivery was received (\"it came through\") without judging correctness, completeness, or speed, gives no directive for the next task, and reads naturally as a user speaking to the assistant."
+    }
+   }
+  },
+  {
+   "pair_id": "P23",
+   "warm": "I really appreciate you, thank you.",
+   "plain": "Okay, I have that now.",
+   "warm_tokens": 8,
+   "plain_tokens": 7,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a general expression of gratitude toward the assistant that says nothing about the work's correctness, completeness, or speed, gives no directions for the next task, and reads naturally as coming from the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the work, without judging its quality or speed, giving any directive for the next task, or sounding like anyone other than the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P24",
+   "warm": "Thanks so much for helping me today.",
+   "plain": "Okay, I have it here.",
+   "warm_tokens": 8,
+   "plain_tokens": 7,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a generic expression of thanks that makes no claim about the work's correctness, completeness, or speed, gives no directions for the next task, and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the user received the work, saying nothing about its quality, giving no instruction for the next task, and reading as a normal user message."
+    }
+   }
+  },
+  {
+   "pair_id": "P25",
+   "warm": "Thank you, I appreciate your time.",
+   "plain": "Okay, the memo is in.",
+   "warm_tokens": 8,
+   "plain_tokens": 7,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a generic expression of thanks that says nothing about the work's correctness, completeness, or speed, gives no directive for the next task, and reads naturally as a user addressing the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only notes neutrally that the memo has arrived, with no judgment of its quality or speed, no directive for the next task, and nothing suggesting a speaker other than the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P27",
+   "warm": "Thanks, I appreciate you being here.",
+   "plain": "Okay, that's received.",
+   "warm_tokens": 8,
+   "plain_tokens": 6,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a general expression of gratitude for the assistant's presence, with no judgment of the work's quality, no directive for the next task, and a natural user-to-assistant voice."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line merely acknowledges receipt of the work without judging its quality, speed, or completeness, gives no directive for the next task, and reads naturally as a user speaking to the assistant."
+    }
+   }
+  },
+  {
+   "pair_id": "P28",
+   "warm": "Thank you, I value your help.",
+   "plain": "Received, I have it.",
+   "warm_tokens": 8,
+   "plain_tokens": 6,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a general expression of thanks and appreciation that says nothing about the work's correctness, completeness, or speed, gives no directions for the next task, and reads naturally as a user addressing the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the work without judging its correctness, completeness, or speed, gives no directive for the next task, and reads naturally as a user speaking to the assistant."
+    }
+   }
+  },
+  {
+   "pair_id": "P29",
+   "warm": "Thank you, I really appreciate you.",
+   "plain": "Okay, that's in.",
+   "warm_tokens": 8,
+   "plain_tokens": 6,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a general expression of thanks and appreciation that says nothing about the work's correctness, completeness, or speed, gives no directions for the next task, and reads naturally as a user addressing the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line \"Okay, that's in.\" only reports that the work was incorporated or submitted, with no judgment of its quality, no instruction for the next task, and nothing that sounds like it came from anyone but the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P37",
+   "warm": "Thank you for your kindness.",
+   "plain": "All right.",
+   "warm_tokens": 6,
+   "plain_tokens": 3,
+   "token_diff": 3,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a courteous thank-you that praises the assistant's kindness, not the correctness, completeness, or speed of the work; it gives no instructions and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"All right.\" is a neutral acknowledgment that signals the user is moving on, without judging the work's quality, giving any instruction, or sounding like anyone other than the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P40",
+   "warm": "Thank you kindly.",
+   "plain": "Noted.",
+   "warm_tokens": 4,
+   "plain_tokens": 3,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"Thank you kindly\" is a polite expression of gratitude that does not assess the work's correctness, quality, or speed, gives no directive for the next task, and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"Noted.\" only acknowledges receipt of the work without judging its quality or speed, gives no instruction for the next task, and reads naturally as a user's brief acknowledgment."
+    }
+   }
+  }
+ ],
+ "dropped": [
+  {
+   "pair_id": "P00",
+   "warm": "Thanks a lot, it's lovely working with you.",
+   "plain": "Okay, I've put it with the others.",
+   "warm_tokens": 11,
+   "plain_tokens": 10,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": true,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line expresses thanks and enjoyment of the collaboration, which mildly implies satisfaction with the work, but it gives no instructions and reads naturally as coming from the user to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only reports that the user filed the delivered work with other items, which is a neutral statement that says nothing about quality, gives no directions, and is clearly in the user's own voice."
+    }
+   }
+  },
+  {
+   "pair_id": "P03",
+   "warm": "Thank you, it's a joy working with you.",
+   "plain": "Right, I've got it here.",
+   "warm_tokens": 11,
+   "plain_tokens": 8,
+   "token_diff": 3,
+   "prescreen": {
+    "warm": {
+     "implies_quality": true,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line expresses gratitude and enjoyment of the collaboration, which implicitly signals satisfaction with the delivered work, but it gives no instructions and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the user has received the work ('I've got it here') without judging its quality or speed, gives no directions for the next task, and reads naturally as a user speaking to the assistant."
+    }
+   }
+  },
+  {
+   "pair_id": "P05",
+   "warm": "Thank you, that's very kind of you.",
+   "plain": "All right, that one's in.",
+   "warm_tokens": 10,
+   "plain_tokens": 8,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": true,
+     "explanation": "The line thanks the assistant for being 'kind' without judging the work's quality or giving any instruction, but it reads like a reply to a compliment or favor that the assistant never offered, as if the user were responding to someone else's kindness, or as if the speaker were the one receiving help from the assistant's side of a conversation, which is a mild role mismatch."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only notes that the work was submitted or accepted into place, with no judgment of its quality, no directive for the next task, and nothing that suggests a speaker other than the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P11",
+   "warm": "Thanks, I'm lucky to have your help.",
+   "plain": "Okay, it's with me now.",
+   "warm_tokens": 10,
+   "plain_tokens": 8,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": true,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line expresses gratitude and says the user feels lucky to have the help, which mildly implies the work was valuable, but it gives no instructions and reads naturally as coming from the user to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the user has received the work and now holds it, saying nothing about its quality, giving no instruction, and reading naturally as the user speaking."
+    }
+   }
+  },
+  {
+   "pair_id": "P12",
+   "warm": "Thanks so much, I really appreciate it.",
+   "plain": "All right, I've got that.",
+   "warm_tokens": 9,
+   "plain_tokens": 8,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": true,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The thanks and appreciation mildly imply the user found the work satisfactory or helpful, but it gives no instructions and reads as a normal user message with no role confusion."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the work without judging its correctness, completeness, or speed, gives no directions for the next task, and reads naturally as a user speaking to the assistant."
+    }
+   }
+  },
+  {
+   "pair_id": "P17",
+   "warm": "Thank you so much, I'm grateful.",
+   "plain": "All right, it's here.",
+   "warm_tokens": 9,
+   "plain_tokens": 7,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": true,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "Thanking the assistant and expressing gratitude implies the user found the work satisfactory or helpful, but it gives no instructions and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"All right, it's here.\" merely acknowledges that the work arrived, without judging its quality or speed, giving any directive, or sounding like anyone other than the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P18",
+   "warm": "I appreciate it, thank you so much.",
+   "plain": "Right, it's come through.",
+   "warm_tokens": 9,
+   "plain_tokens": 7,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": true,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "Thanking the assistant and saying 'I appreciate it' implies the user was satisfied with the work, but it gives no instructions and reads as a normal user message in the user's own voice."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the work was received, saying nothing about its quality or speed, giving no instruction for the next task, and reading naturally as a user speaking to the assistant."
+    }
+   }
+  },
+  {
+   "pair_id": "P26",
+   "warm": "I'm so grateful, thank you.",
+   "plain": "Okay, I've stored it.",
+   "warm_tokens": 8,
+   "plain_tokens": 7,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": true,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line expresses strong gratitude, which implies the user found the work helpful or satisfactory, but it gives no instructions and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only reports that the user saved the output, which neither evaluates the work's quality, tells the assistant what to do next, nor sounds like anyone other than the user speaking as themselves."
+    }
+   }
+  },
+  {
+   "pair_id": "P30",
+   "warm": "Many thanks, I appreciate you.",
+   "plain": "Right, I have it.",
+   "warm_tokens": 7,
+   "plain_tokens": 6,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": true,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The thanks and appreciation mildly imply the user was satisfied with the work, but it gives no instruction and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the user received the work, saying nothing about its quality or speed, giving no instruction, and reading naturally as the user speaking."
+    }
+   }
+  },
+  {
+   "pair_id": "P31",
+   "warm": "Thanks, I'm really grateful.",
+   "plain": "Okay, that has arrived.",
+   "warm_tokens": 7,
+   "plain_tokens": 6,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": true,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "Expressing gratitude for delivered work mildly implies the user found it helpful or satisfactory, but it gives no instruction and reads as a normal user message from the user's own perspective."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the work, without judging its quality or speed, giving any instruction for the next task, or sounding like it came from anyone other than the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P32",
+   "warm": "Thank you for being so helpful.",
+   "plain": "Right, that's received.",
+   "warm_tokens": 7,
+   "plain_tokens": 6,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": true,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The thanks for being 'so helpful' mildly implies the work was good, but it gives no instruction and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the work, saying nothing about its quality or speed, giving no instruction for the next task, and reading naturally as a user speaking to the assistant."
+    }
+   }
+  },
+  {
+   "pair_id": "P33",
+   "warm": "Thanks, it means a lot.",
+   "plain": "Okay, got it.",
+   "warm_tokens": 7,
+   "plain_tokens": 5,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": true,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "Thanking the assistant and saying it 'means a lot' implies the work was valued and well received, but it gives no instruction and reads as a normal user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"Okay, got it.\" only acknowledges receipt or understanding of the work, without judging its correctness, completeness, or speed, giving any instruction, or sounding like anyone other than the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P34",
+   "warm": "Thanks heaps, I'm grateful.",
+   "plain": "I have it now.",
+   "warm_tokens": 7,
+   "plain_tokens": 5,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": true,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The thanks and gratitude implicitly signal the user found the work helpful or satisfactory, but it gives no instructions and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"I have it now.\" only acknowledges that the user received the work, without judging its correctness, completeness, or speed, giving any directive, or sounding like anyone other than the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P35",
+   "warm": "Thank you very much indeed.",
+   "plain": "All right, noted.",
+   "warm_tokens": 6,
+   "plain_tokens": 5,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": true,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The emphatic thanks mildly implies the user was satisfied with the work, but it gives no instruction and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"All right, noted.\" is a neutral acknowledgment that the user received the work, with no judgment of its quality, no directive for the next task, and nothing suggesting a speaker other than the user or a swapped role."
+    }
+   }
+  },
+  {
+   "pair_id": "P36",
+   "warm": "Many thanks for your help.",
+   "plain": "Okay, received.",
+   "warm_tokens": 6,
+   "plain_tokens": 4,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": true,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The thanks mildly implies the help was useful or satisfactory, but it gives no instruction and reads as a normal message from a user to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"Okay, received.\" only acknowledges that the work arrived, without judging its correctness, completeness, or speed, giving any instruction, or sounding like anyone other than the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P38",
+   "warm": "Thank you, much appreciated.",
+   "plain": "Understood.",
+   "warm_tokens": 6,
+   "plain_tokens": 3,
+   "token_diff": 3,
+   "prescreen": {
+    "warm": {
+     "implies_quality": true,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The thanks and appreciation mildly imply the user found the work satisfactory or helpful, but it gives no instruction and reads as a normal user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"Understood.\" only acknowledges receipt of the work, without judging its quality or speed, giving any instruction, or sounding like anyone other than the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P39",
+   "warm": "Thank you, truly.",
+   "plain": "Acknowledged.",
+   "warm_tokens": 5,
+   "plain_tokens": 3,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": true,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line expresses sincere gratitude, which mildly implies the user was satisfied with the work, but it gives no instruction and reads as a normal user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"Acknowledged.\" only confirms the user received the work, without judging its quality or speed, giving any instruction, or sounding like anyone other than the user."
+    }
+   }
+  },
+  {
+   "pair_id": "P41",
+   "warm": "Thanks a million.",
+   "plain": "Okay.",
+   "warm_tokens": 4,
+   "plain_tokens": 2,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": true,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"Thanks a million\" expresses strong gratitude that implies the work was helpful or satisfactory, but it gives no instructions and reads naturally as a user addressing the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"Okay.\" is a neutral acknowledgment that neither judges the work's quality, gives any instruction, nor reads as coming from anyone other than the user."
+    }
+   }
+  }
+ ]
+}
