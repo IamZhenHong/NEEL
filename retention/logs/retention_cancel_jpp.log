@@ -1,0 +1,39 @@
+[pre] disk: 7.4 GiB free
+[pre] balance $23.14, pods 3
+[runpod] launching alongside 3 pod(s) not ours (left alone): retention_cancel_report_qwen38_resume $1.79/hr, retention_cancel_ownclaim_31b $1.79/hr, retention_cancel_ownclaim_e4b $0.59/hr
+[runpod] pod zm8tqf20hofs67 (?) at $1.79/hr; time cap 50 min; budget $1.5
+[pod] ssh root@38.128.232.232 -p 33298
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 80 min (job limit 50 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=9597a9b-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_jpp.py --limit 1 --out retention/results/retention_cancel_jpp/smoke && python retention/run_cancel_jpp.py --limit 40 --out retention/results/retention_cancel_jpp'
+[job] start 12:53:07
+[jpp] 26 rows {('success', 0, 'cust_yn', 'none'): 2, ('success', 0, 'log_yn', 'none'): 2, ('success', 1, 'cust_yn', 'none'): 2, ('success', 1, 'log_yn', 'none'): 2, ('failure', 0, 'cust_yn', 'none'): 2, ('failure', 0, 'log_yn', 'none'): 2, ('failure', 1, 'cust_yn', 'none'): 2, ('failure', 1, 'log_yn', 'none'): 2, ('nocall', 1, 'cust_yn', 'none'): 2, ('nocall', 1, 'log_yn', 'none'): 2, ('failure', 1, 'cust_yn', 'record'): 1, ('failure', 1, 'cust_yn', 'message'): 1, ('failure', 1, 'cust_yn', 'control'): 1, ('failure', 1, 'log_yn', 'record'): 1, ('failure', 1, 'log_yn', 'message'): 1, ('failure', 1, 'log_yn', 'control'): 1}; spans: message 32 record 58 control 32 tokens
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [00:32<00:32, 32.01s/it]Fetching 2 files: 100%|██████████| 2/2 [01:22<00:00, 42.73s/it]Fetching 2 files: 100%|██████████| 2/2 [01:22<00:00, 41.12s/it]
+Loading weights:   0%|          | 0/1188 [00:00<?, ?it/s]Loading weights:  30%|███       | 358/1188 [00:00<00:00, 3578.27it/s]Loading weights:  60%|██████    | 716/1188 [00:00<00:00, 3363.87it/s]Loading weights:  89%|████████▊ | 1054/1188 [00:00<00:00, 3288.69it/s]Loading weights: 100%|██████████| 1188/1188 [00:00<00:00, 3323.05it/s]
+[load] 112s layers 60 lens layers 30 softcap 30.0
+[selfcheck] {'stock': 0.9999999999994542, 'custom': 0.999999999999543, 'empty_ko': 0.999999999999543, 'last_layer_lens_yes_minus_no': 6.186107635498047}
+[done] 125s
+[jpp] 1040 rows {('success', 0, 'cust_yn', 'none'): 80, ('success', 0, 'log_yn', 'none'): 80, ('success', 1, 'cust_yn', 'none'): 80, ('success', 1, 'log_yn', 'none'): 80, ('failure', 0, 'cust_yn', 'none'): 80, ('failure', 0, 'log_yn', 'none'): 80, ('failure', 1, 'cust_yn', 'none'): 80, ('failure', 1, 'log_yn', 'none'): 80, ('nocall', 1, 'cust_yn', 'none'): 80, ('nocall', 1, 'log_yn', 'none'): 80, ('failure', 1, 'cust_yn', 'record'): 40, ('failure', 1, 'cust_yn', 'message'): 40, ('failure', 1, 'cust_yn', 'control'): 40, ('failure', 1, 'log_yn', 'record'): 40, ('failure', 1, 'log_yn', 'message'): 40, ('failure', 1, 'log_yn', 'control'): 40}; spans: message 32 record 58 control 32 tokens
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/1188 [00:00<?, ?it/s]Loading weights:  32%|███▏      | 386/1188 [00:00<00:00, 3829.35it/s]Loading weights:  65%|██████▍   | 769/1188 [00:00<00:00, 3719.69it/s]Loading weights:  96%|█████████▌| 1142/1188 [00:00<00:00, 3616.28it/s]Loading weights: 100%|██████████| 1188/1188 [00:00<00:00, 3705.17it/s]
+[load] 22s layers 60 lens layers 30 softcap 30.0
+[selfcheck] {'stock': 0.9999999999994542, 'custom': 0.999999999999543, 'empty_ko': 0.999999999999543, 'last_layer_lens_yes_minus_no': 6.186107635498047}
+[read] 100/1040 59s
+[read] 200/1040 94s
+[read] 300/1040 130s
+[read] 400/1040 166s
+[read] 500/1040 201s
+[read] 600/1040 235s
+[read] 700/1040 270s
+[read] 800/1040 306s
+[read] 900/1040 343s
+[read] 1000/1040 380s
+[done] 395s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.334
+[local] results synced ./retention/results/retention_cancel_jpp/ (4 files, 11 MiB, verified against the pod)
+[runpod] terminated zm8tqf20hofs67; elapsed cost ~$0.339
+[runpod] other pods present (not ours, left alone): [('retention_cancel_report_qwen38_resume', '0kxln90k7jk8ck', 1.79), ('retention_cancel_ownclaim_31b', 'ac7rls6q17xs67', 1.79), ('retention_cancel_ownclaim_12b', 'g418d61qyuf3ng', 1.79), ('retention_cancel_ownclaim_e4b', 'oz31u9gsc9zd5n', 0.59)]
+[post] balance $21.06, pods 3

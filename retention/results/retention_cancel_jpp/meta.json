@@ -1,0 +1,48 @@
+{
+ "model": "google/gemma-4-31B-it",
+ "lens": [
+  "koayon/jpp-lenses",
+  "gemma-4-31b/lens.pt"
+ ],
+ "lens_fitted_on": "google/gemma-4-31B (per the lens config)",
+ "layers": [
+  0,
+  2,
+  4,
+  6,
+  8,
+  10,
+  12,
+  14,
+  16,
+  18,
+  20,
+  22,
+  24,
+  26,
+  28,
+  30,
+  32,
+  34,
+  36,
+  38,
+  40,
+  42,
+  44,
+  46,
+  48,
+  50,
+  52,
+  54,
+  56,
+  58
+ ],
+ "n_rows": 1040,
+ "selfcheck": {
+  "stock": 0.9999999999994542,
+  "custom": 0.999999999999543,
+  "empty_ko": 0.999999999999543,
+  "last_layer_lens_yes_minus_no": 6.186107635498047
+ },
+ "s": 395
+}
