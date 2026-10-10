@@ -89,3 +89,13 @@ $1.80); at most ~$8.85, expected ~$5. No judge; API ledger unchanged. Tags `rete
 ## Not claimed regardless
 Fixed prefixes with a scripted tool result, one claim sentence, one failure message; a single goal sentence; P(Yes) and regex labels.
 Any pattern found is about how Gemma reports; it does not identify the computation, and "intent" is not used.
+
+## Amendment 1 (2026-10-10, after the first pods, before any analysis of the sampled rows)
+- The 12B, E4B and Qwen3.8 reporting pods hit their time caps with all yes/no rows done but 2310 / 2360 / 910 of 2880 sampled prompts.
+  Generation ran longest prompt first, so the cut is not random: the missing rows are mostly G0 immediate reports (12B: 282 of 570 are
+  G0 "in"), which would bias T1. They are completed on fresh pods with `--rows retention/data/report_resume_<model>.json` (the missing
+  row indices, written from the pulled `samples.jsonl` files); the completed rows' samples are appended to `samples.jsonl` before the
+  analysis. Their sampling seeds differ from the first pods' (seed + chunk offset in the resume order). Caps: 12B A100 30 min / $0.90,
+  E4B A6000 35 min / $0.35, Qwen3.8 A100 75 min / $2.25 with `--gen-bs 60`.
+- The first 31B pod ran out of memory in its smoke run (the smoke step used the default generation batch of 32); it was relaunched with
+  `--gen-bs 9 --bs 4` in both steps, no code change ($0.10 lost).

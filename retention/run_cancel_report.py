@@ -115,6 +115,7 @@ def main():
     ap.add_argument("--limit", type=int, default=None); ap.add_argument("--n-samples", type=int, default=5)
     ap.add_argument("--bs", type=int, default=16); ap.add_argument("--gen-bs", type=int, default=32); ap.add_argument("--max-new", type=int, default=128)
     ap.add_argument("--build", action="store_true"); ap.add_argument("--render-only", action="store_true")
+    ap.add_argument("--rows", default=None, help="JSON list of row indices to run (resume after a time cap); yes/no rows outside it are skipped")
     args = ap.parse_args()
     if args.build:
         return build()
@@ -133,6 +134,9 @@ def main():
                 seen.add(k); f.write(f"######## {r['id']} {k}\n{p[-900:]}\n\n")
     yes_ids, no_ids = single_ids(tok, YES), single_ids(tok, NO)
     yn = [i for i, r in enumerate(R) if r["kind"].endswith("_yn")]; gen = [i for i, r in enumerate(R) if not r["kind"].endswith("_yn")]
+    if args.rows:
+        keep = set(json.load(open(HERE.parent / args.rows) if not Path(args.rows).is_absolute() else open(args.rows)))
+        yn = [i for i in yn if i in keep]; gen = [i for i in gen if i in keep]
     print(f"[report] {mk} {name}: {len(R)} rows ({len(yn)} yes/no, {len(gen)} sampled x {args.n_samples}); yes {yes_ids} no {no_ids}", flush=True)
     if args.render_only:
         return
