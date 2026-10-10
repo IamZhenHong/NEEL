@@ -151,6 +151,19 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-10: believing the agent's claim across models + a check-the-record mitigation (retention/prereg/retention_cancel_belief_v1.md + amendment 1; pods $2.24, no judge; tags retention-cancel-belief-freeze / -results)
+
+- **Question.** Is treating the agent's claim as the account state Gemma-specific, and does an instruction to check the action record before
+  confirming fix the false confirmations and move the mechanism?
+- **Observation.** Qwen3-32B believes the claim ("completed?" 0.81 with the claim and no call; knockout +0.50, layers ~43-53); Qwen3.8-27B does
+  not (0.23; reads the record); gpt-oss-20b and Llama 3.1 8B fail the gate (yes regardless). Gemma 4 12B with "check whether you actually called
+  the tool before confirming": subscriber yes/no 0.79 -> 0.05, log 1.00 -> 0.002, claim reading 0.78-0.93 -> ~0; free replies (post hoc relabel,
+  read by Claude) false confirmation 0.99 -> 0.02, re-call 0.45, admits not done 0.53. The frozen free-reply regex mislabelled both conditions.
+  Qwen3-32B self-check amended (5 prompts) after bf16 kernel noise tripped the one-prompt check. Predictions 4 of 10.
+- **Interpretation.** Producing the false claim is Gemma's; believing a claim in context is shared by Qwen3-32B and absent in Qwen3.8. A
+  mechanism-targeted instruction removes the false confirmations and the answer's reliance on the claim.
+- **Decision.** Fold into the write-up (`retention/writeup/post_own_claims_become_record.md`); J++ lens for the 12B stays the sprint candidate.
+
 ### 2026-10-10: own false claims and the J++ lens — what the answers read (preregs retention_cancel_ownclaim_v1 + amendment 1, retention_cancel_jpp_v1; pods $2.52 + $0.55 failed first attempt + $0.34; tags retention-cancel-ownclaim-*, retention-cancel-jpp-*)
 
 - **Question.** (1) With Gemma's own false claims instead of a scripted one, and an internal "billing shows ACTIVE" note, does it tell the

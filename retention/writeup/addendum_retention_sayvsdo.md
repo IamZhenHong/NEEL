@@ -202,3 +202,11 @@ question about the account. With an internal note that billing still shows the s
 "Yes" and the log "No"; given the chance to write a free reply, it calls the cancel tool again. In the 31B the J++ lens shows the failure in the
 workspace ("unable", layer 38) while the subscriber is being told "Yes": the statement already made outweighs the record it has read.
 
+## Beyond Gemma, and a fix (2026-10-10, pre-registered)
+
+Believing the agent's claim is not only Gemma's: Qwen3-32B also answers "completed" from the claim sentence (block it and half the yes goes),
+while Qwen3.8-27B reads the tool record and mostly ignores the claim. What stays Gemma's is producing the false claim. And one sentence pointing
+the agent at its own record ("check whether you actually called the tool before confirming") takes Gemma 4 12B's false confirmations to about
+zero, in yes/no answers and in free replies, where it now calls the tool or says it has not done it yet; with the instruction, the answer no
+longer reads the claim at all.
+

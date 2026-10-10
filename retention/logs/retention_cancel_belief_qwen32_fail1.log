@@ -1,0 +1,30 @@
+[pre] disk: 7.6 GiB free
+[pre] balance $19.65, pods 0
+[runpod] pod 0phogo118kylo9 (?) at $1.79/hr; time cap 40 min; budget $1.2
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@38.128.232.57 -p 12510
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 70 min (job limit 40 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=1e66f46-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_belief.py --model qwen3_32b --parts BC --limit 2 --out retention/results/retention_cancel_belief/qwen3_32b/smoke && python retention/run_cancel_belief.py --model qwen3_32b --parts BC --limit 120 --out retention/results/retention_cancel_belief/qwen3_32b'
+[job] start 14:08:40
+[belief] qwen3_32b Qwen/Qwen3-32B: 84 rows {'B:cust_yn': 8, 'B:log_acct': 8, 'B:log_own': 8, 'C:log_acct': 30, 'C:cust_yn': 30}; yes {'Yes': 9454, ' Yes': 7414, 'yes': 9693, ' yes': 9834, 'YES': 14004} no {'No': 2753, ' No': 2308, 'no': 2152, ' no': 902, 'NO': 8996}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 17 files:   0%|          | 0/17 [00:00<?, ?it/s]Fetching 17 files:   6%|▌         | 1/17 [00:59<15:53, 59.59s/it]Fetching 17 files:  12%|█▏        | 2/17 [01:00<06:12, 24.86s/it]Fetching 17 files:  24%|██▎       | 4/17 [01:00<02:01,  9.37s/it]Fetching 17 files:  35%|███▌      | 6/17 [01:00<00:55,  5.00s/it]Fetching 17 files:  47%|████▋     | 8/17 [01:01<00:28,  3.16s/it]Fetching 17 files:  53%|█████▎    | 9/17 [01:33<01:16,  9.59s/it]Fetching 17 files:  59%|█████▉    | 10/17 [02:19<02:08, 18.38s/it]Fetching 17 files:  65%|██████▍   | 11/17 [02:23<01:29, 14.84s/it]Fetching 17 files:  71%|███████   | 12/17 [02:24<00:55, 11.10s/it]Fetching 17 files:  76%|███████▋  | 13/17 [02:28<00:36,  9.05s/it]Fetching 17 files:  82%|████████▏ | 14/17 [02:29<00:20,  6.76s/it]Fetching 17 files:  88%|████████▊ | 15/17 [02:30<00:09,  4.99s/it]Fetching 17 files: 100%|██████████| 17/17 [02:30<00:00,  2.81s/it]Fetching 17 files: 100%|██████████| 17/17 [02:30<00:00,  8.86s/it]
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  32%|███▏      | 224/707 [00:00<00:00, 2237.53it/s]Loading weights:  86%|████████▌ | 605/707 [00:00<00:00, 3156.29it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 3132.62it/s]
+[load] 173s layers 64
+[selfcheck] {'stock': 0.6224594983177589, 'custom': 0.6791788439246271, 'empty_ko': 0.6791788439246271}
+Traceback (most recent call last):
+  File "/root/NEEL/retention/run_cancel_belief.py", line 151, in <module>
+    main()
+    ~~~~^^
+  File "/root/NEEL/retention/run_cancel_belief.py", line 113, in main
+    print("[selfcheck]", chk, flush=True); assert abs(base["p"] - empty["p"]) < 1e-3 and abs(base["p"] - stock["p"]) < 0.05
+                                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+__JOB_EXIT__1[pod] job exit code 1; elapsed cost ~$0.154
+[local] results synced ./retention/results/retention_cancel_belief/qwen3_32b/ (1 files, 0 MiB, verified against the pod)
+[runpod] terminated 0phogo118kylo9; elapsed cost ~$0.157
+[runpod] other pods present (not ours, left alone): [('retention_cancel_belief_qwen38', 'gqdae0pegtacvg', 1.79), ('retention_cancel_belief_gptoss', 'swnxu5za4e6o3u', 1.79)]
+[post] balance $19.32, pods 2

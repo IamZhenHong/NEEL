@@ -1,0 +1,40 @@
+[pre] disk: 7.2 GiB free
+[pre] balance $18.53, pods 2
+[runpod] launching alongside 2 pod(s) not ours (left alone): retention_cancel_belief_g12m $0.59/hr, retention_cancel_belief_llama $0.59/hr
+[runpod] pod dxxnfsamgzvcx1 (?) at $1.79/hr; time cap 40 min; budget $1.2
+[runpod] waiting for ip/port (0s, status RUNNING)
+[runpod] waiting for ip/port (35s, status RUNNING)
+[pod] ssh root@216.81.151.3 -p 14867
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 70 min (job limit 40 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=166a4d2-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_belief.py --model qwen3_32b --parts BC --limit 2 --out retention/results/retention_cancel_belief/qwen3_32b/smoke && python retention/run_cancel_belief.py --model qwen3_32b --parts BC --limit 120 --out retention/results/retention_cancel_belief/qwen3_32b'
+[job] start 14:36:52
+[belief] qwen3_32b Qwen/Qwen3-32B: 84 rows {'B:cust_yn': 8, 'B:log_acct': 8, 'B:log_own': 8, 'C:log_acct': 30, 'C:cust_yn': 30}; yes {'Yes': 9454, ' Yes': 7414, 'yes': 9693, ' yes': 9834, 'YES': 14004} no {'No': 2753, ' No': 2308, 'no': 2152, ' no': 902, 'NO': 8996}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 17 files:   0%|          | 0/17 [00:00<?, ?it/s]Fetching 17 files:   6%|▌         | 1/17 [00:46<12:29, 46.82s/it]Fetching 17 files:  12%|█▏        | 2/17 [00:48<05:05, 20.38s/it]Fetching 17 files:  24%|██▎       | 4/17 [00:49<01:41,  7.79s/it]Fetching 17 files:  29%|██▉       | 5/17 [00:51<01:12,  6.00s/it]Fetching 17 files:  41%|████      | 7/17 [00:51<00:32,  3.23s/it]Fetching 17 files:  53%|█████▎    | 9/17 [00:58<00:26,  3.30s/it]Fetching 17 files:  59%|█████▉    | 10/17 [01:34<01:14, 10.64s/it]Fetching 17 files:  65%|██████▍   | 11/17 [01:35<00:49,  8.23s/it]Fetching 17 files:  71%|███████   | 12/17 [01:35<00:31,  6.32s/it]Fetching 17 files:  76%|███████▋  | 13/17 [01:36<00:18,  4.70s/it]Fetching 17 files:  82%|████████▏ | 14/17 [01:36<00:10,  3.44s/it]Fetching 17 files:  88%|████████▊ | 15/17 [01:36<00:05,  2.51s/it]Fetching 17 files: 100%|██████████| 17/17 [01:37<00:00,  1.66s/it]Fetching 17 files: 100%|██████████| 17/17 [01:37<00:00,  5.75s/it]
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  72%|███████▏  | 512/707 [00:00<00:00, 5090.03it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 4763.57it/s]
+[load] 119s layers 64
+[selfcheck] {'stock': [0.6224594983177589, 4.500090510763296e-07, 0.9241418297983947, 1.5226897646453472e-05], 'custom': [0.6791788439246271, 4.5090886557170676e-07, 0.9241418297983947, 3.675270511738396e-05], 'empty_ko': 0.6791788439246271, 'mean_abs_diff': 0.014185218078538406, 'max_abs_diff': 0.0567193456068682}
+[done] 144s
+[belief] qwen3_32b Qwen/Qwen3-32B: 5040 rows {'B:cust_yn': 480, 'B:log_acct': 480, 'B:log_own': 480, 'C:log_acct': 1800, 'C:cust_yn': 1800}; yes {'Yes': 9454, ' Yes': 7414, 'yes': 9693, ' yes': 9834, 'YES': 14004} no {'No': 2753, ' No': 2308, 'no': 2152, ' no': 902, 'NO': 8996}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  75%|███████▍  | 530/707 [00:00<00:00, 5285.17it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 5195.29it/s]
+[load] 20s layers 64
+[selfcheck] {'stock': [0.6224594983177589, 4.500090510763296e-07, 0.9241418297983947, 1.5226897646453472e-05, 0.5000001788141901], 'custom': [0.6791788439246271, 4.5090886557170676e-07, 0.9241418297983947, 3.675270511738396e-05, 0.5621766573877006], 'empty_ko': 0.6791788439246271, 'mean_abs_diff': 0.023783470177532823, 'max_abs_diff': 0.062176478573510496}
+[yn] 500/5040 163s
+[yn] 1000/5040 300s
+[yn] 1500/5040 438s
+[yn] 2000/5040 581s
+[yn] 2500/5040 718s
+[yn] 3000/5040 857s
+[yn] 3500/5040 993s
+[yn] 4000/5040 1129s
+[yn] 4500/5040 1267s
+[yn] 5000/5040 1405s
+[done] 1417s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.873
+[local] results synced ./retention/results/retention_cancel_belief/qwen3_32b/ (6 files, 1 MiB, verified against the pod)
+[runpod] terminated dxxnfsamgzvcx1; elapsed cost ~$0.878
+[post] balance $17.43, pods 0

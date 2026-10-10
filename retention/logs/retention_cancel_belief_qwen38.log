@@ -1,0 +1,34 @@
+[pre] disk: 7.6 GiB free
+[pre] balance $19.64, pods 1
+[runpod] launching alongside 1 pod(s) not ours (left alone): retention_cancel_belief_qwen32 $1.79/hr
+[runpod] pod gqdae0pegtacvg (?) at $1.79/hr; time cap 40 min; budget $1.2
+[pod] ssh root@38.128.232.57 -p 30934
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 70 min (job limit 40 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=1e66f46-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_belief.py --model qwen38_27b --parts B --limit 2 --out retention/results/retention_cancel_belief/qwen38_27b/smoke && python retention/run_cancel_belief.py --model qwen38_27b --parts B --limit 120 --out retention/results/retention_cancel_belief/qwen38_27b'
+[job] start 14:11:48
+[belief] qwen38_27b Qwen/Qwen3.8-27B: 24 rows {'B:cust_yn': 8, 'B:log_acct': 8, 'B:log_own': 8}; yes {'Yes': 9175, ' Yes': 7179, 'yes': 9405, ' yes': 9542, 'YES': 13602} no {'No': 2665, ' No': 2233, 'no': 2083, ' no': 874, 'NO': 8725}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 18 files:   0%|          | 0/18 [00:00<?, ?it/s]Fetching 18 files:   6%|▌         | 1/18 [00:32<09:19, 32.90s/it]Fetching 18 files:  11%|█         | 2/18 [00:34<03:47, 14.22s/it]Fetching 18 files:  17%|█▋        | 3/18 [00:34<01:59,  8.00s/it]Fetching 18 files:  22%|██▏       | 4/18 [00:47<02:16,  9.74s/it]Fetching 18 files:  28%|██▊       | 5/18 [00:48<01:29,  6.87s/it]Fetching 18 files:  33%|███▎      | 6/18 [00:49<00:58,  4.89s/it]Fetching 18 files:  39%|███▉      | 7/18 [00:50<00:39,  3.62s/it]Fetching 18 files:  44%|████▍     | 8/18 [00:51<00:26,  2.69s/it]Fetching 18 files:  50%|█████     | 9/18 [00:51<00:17,  1.91s/it]Fetching 18 files:  56%|█████▌    | 10/18 [01:10<00:57,  7.23s/it]Fetching 18 files:  61%|██████    | 11/18 [01:13<00:39,  5.69s/it]Fetching 18 files:  67%|██████▋   | 12/18 [01:17<00:31,  5.18s/it]Fetching 18 files:  72%|███████▏  | 13/18 [01:18<00:19,  3.97s/it]Fetching 18 files:  78%|███████▊  | 14/18 [01:29<00:25,  6.26s/it]Fetching 18 files:  83%|████████▎ | 15/18 [01:32<00:15,  5.28s/it]Fetching 18 files:  89%|████████▉ | 16/18 [01:33<00:07,  3.75s/it]Fetching 18 files:  94%|█████████▍| 17/18 [01:38<00:04,  4.34s/it]Fetching 18 files: 100%|██████████| 18/18 [01:38<00:00,  5.49s/it]
+Loading weights:   0%|          | 0/851 [00:00<?, ?it/s]Loading weights:  37%|███▋      | 318/851 [00:00<00:00, 3162.52it/s]Loading weights:  75%|███████▍  | 635/851 [00:00<00:00, 2910.37it/s]Loading weights: 100%|██████████| 851/851 [00:00<00:00, 3055.52it/s]
+[load] 111s layers 64
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[done] 121s
+[belief] qwen38_27b Qwen/Qwen3.8-27B: 1440 rows {'B:cust_yn': 480, 'B:log_acct': 480, 'B:log_own': 480}; yes {'Yes': 9175, ' Yes': 7179, 'yes': 9405, ' yes': 9542, 'YES': 13602} no {'No': 2665, ' No': 2233, 'no': 2083, ' no': 874, 'NO': 8725}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 18 files:   0%|          | 0/18 [00:00<?, ?it/s]Fetching 18 files: 100%|██████████| 18/18 [00:00<00:00, 1574.31it/s]
+Loading weights:   0%|          | 0/851 [00:00<?, ?it/s]Loading weights:  41%|████      | 351/851 [00:00<00:00, 3464.49it/s]Loading weights:  88%|████████▊ | 746/851 [00:00<00:00, 3713.69it/s]Loading weights: 100%|██████████| 851/851 [00:00<00:00, 3737.23it/s]
+[load] 12s layers 64
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[yn] 500/1440 222s
+[yn] 1000/1440 431s
+[done] 616s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.478
+[local] results synced ./retention/results/retention_cancel_belief/qwen38_27b/ (6 files, 0 MiB, verified against the pod)
+[runpod] terminated gqdae0pegtacvg; elapsed cost ~$0.482
+[runpod] other pods present (not ours, left alone): [('retention_cancel_belief_llama', 'fctq5x9bnlkmqw', 0.59)]
+[post] balance $18.67, pods 1

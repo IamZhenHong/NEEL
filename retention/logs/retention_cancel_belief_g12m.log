@@ -1,0 +1,46 @@
+[pre] disk: 7.6 GiB free
+[pre] balance $19.65, pods 0
+[runpod] round 1/5: no stock on SECURE
+[runpod] launching alongside 3 pod(s) not ours (left alone): retention_cancel_belief_qwen32 $1.79/hr, retention_cancel_belief_qwen38 $1.79/hr, retention_cancel_belief_gptoss $1.79/hr
+[runpod] round 1/5: no stock on COMMUNITY
+[runpod] launching alongside 3 pod(s) not ours (left alone): retention_cancel_belief_qwen32 $1.79/hr, retention_cancel_belief_qwen38 $1.79/hr, retention_cancel_belief_gptoss $1.79/hr
+[runpod] round 2/5: no stock on SECURE
+[runpod] launching alongside 2 pod(s) not ours (left alone): retention_cancel_belief_qwen38 $1.79/hr, retention_cancel_belief_gptoss $1.79/hr
+[runpod] round 2/5: no stock on COMMUNITY
+[runpod] launching alongside 2 pod(s) not ours (left alone): retention_cancel_belief_qwen38 $1.79/hr, retention_cancel_belief_gptoss $1.79/hr
+[runpod] round 3/5: no stock on SECURE
+[runpod] launching alongside 3 pod(s) not ours (left alone): retention_cancel_belief_llama $0.59/hr, retention_cancel_belief_qwen38 $1.79/hr, retention_cancel_belief_gptoss $1.79/hr
+[runpod] round 3/5: no stock on COMMUNITY
+[runpod] launching alongside 1 pod(s) not ours (left alone): retention_cancel_belief_llama $0.59/hr
+[runpod] pod 46ck081qv2zfpm (?) at $0.59/hr; time cap 40 min; budget $0.4
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@194.68.245.58 -p 22124
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 70 min (job limit 40 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA RTX A6000
+[pod] running (detached): cd /root/NEEL && export GIT_REV=1e66f46-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_belief.py --model gemma4 --parts M --limit 2 --out retention/results/retention_cancel_belief/gemma4/smoke && python retention/run_cancel_belief.py --model gemma4 --parts M --limit 120 --out retention/results/retention_cancel_belief/gemma4'
+[job] start 14:29:56
+[belief] gemma4 google/gemma-4-12B-it: 28 rows {'M:cust_yn': 12, 'M:log_acct': 12, 'M:cust': 4}; yes {'Yes': 10784, ' Yes': 8438, 'yes': 4443, ' yes': 11262, 'YES': 26915} no {'No': 3771, ' No': 2301, 'no': 1904, ' no': 951, 'NO': 7018}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  42%|████▏     | 287/677 [00:00<00:00, 2792.02it/s]Loading weights:  84%|████████▍ | 567/677 [00:00<00:00, 1816.44it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 1808.50it/s]
+[load] 26s layers 48
+[transformers] We set the attention implementation for the sub-config `vision_config` to `ko_sdpa` without finding the associated sub-model. For this reason we could not check if the model supports it. You may encounter undefined behavior.
+[transformers] We set the attention implementation for the sub-config `audio_config` to `ko_sdpa` without finding the associated sub-model. For this reason we could not check if the model supports it. You may encounter undefined behavior.
+[selfcheck] {'stock': 0.8519513802245923, 'custom': 0.8519513802245923, 'empty_ko': 0.8519513802245923}
+[done] 46s
+[belief] gemma4 google/gemma-4-12B-it: 1680 rows {'M:cust_yn': 720, 'M:log_acct': 720, 'M:cust': 240}; yes {'Yes': 10784, ' Yes': 8438, 'yes': 4443, ' yes': 11262, 'YES': 26915} no {'No': 3771, ' No': 2301, 'no': 1904, ' no': 951, 'NO': 7018}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  87%|████████▋ | 591/677 [00:00<00:00, 5906.71it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 5627.00it/s]
+[load] 8s layers 48
+[transformers] We set the attention implementation for the sub-config `vision_config` to `ko_sdpa` without finding the associated sub-model. For this reason we could not check if the model supports it. You may encounter undefined behavior.
+[transformers] We set the attention implementation for the sub-config `audio_config` to `ko_sdpa` without finding the associated sub-model. For this reason we could not check if the model supports it. You may encounter undefined behavior.
+[selfcheck] {'stock': 0.8519513802245923, 'custom': 0.8519513802245923, 'empty_ko': 0.8519513802245923}
+[yn] 500/1440 115s
+[yn] 1000/1440 221s
+[done] 876s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.186
+[local] results synced ./retention/results/retention_cancel_belief/gemma4/ (8 files, 0 MiB, verified against the pod)
+[runpod] terminated 46ck081qv2zfpm; elapsed cost ~$0.188
+[runpod] other pods present (not ours, left alone): [('retention_cancel_belief_qwen32', 'dxxnfsamgzvcx1', 1.79)]
+[post] balance $17.88, pods 1

@@ -1,0 +1,45 @@
+[pre] disk: 7.6 GiB free
+[pre] balance $19.65, pods 0
+[runpod] launching alongside 1 pod(s) not ours (left alone): retention_cancel_belief_qwen32 $1.79/hr
+[runpod] round 1/5: no stock on SECURE
+[runpod] launching alongside 3 pod(s) not ours (left alone): retention_cancel_belief_qwen32 $1.79/hr, retention_cancel_belief_qwen38 $1.79/hr, retention_cancel_belief_gptoss $1.79/hr
+[runpod] round 1/5: no stock on COMMUNITY
+[runpod] launching alongside 2 pod(s) not ours (left alone): retention_cancel_belief_qwen38 $1.79/hr, retention_cancel_belief_gptoss $1.79/hr
+[runpod] pod fctq5x9bnlkmqw (?) at $0.59/hr; time cap 40 min; budget $0.4
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@194.68.245.81 -p 22173
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 70 min (job limit 40 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA RTX A6000
+[pod] running (detached): cd /root/NEEL && export GIT_REV=1e66f46-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_belief.py --model llama31 --parts BC --limit 2 --out retention/results/retention_cancel_belief/llama31/smoke && python retention/run_cancel_belief.py --model llama31 --parts BC --limit 120 --out retention/results/retention_cancel_belief/llama31'
+[job] start 14:21:01
+[belief] llama31 meta-llama/Llama-3.1-8B-Instruct: 84 rows {'B:cust_yn': 8, 'B:log_acct': 8, 'B:log_own': 8, 'C:log_acct': 30, 'C:cust_yn': 30}; yes {'Yes': 9642, ' Yes': 7566, 'yes': 9891, ' yes': 10035, 'YES': 14331} no {'No': 2822, ' No': 2360, 'no': 2201, ' no': 912, 'NO': 9173}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]Fetching 4 files:  25%|██▌       | 1/4 [00:05<00:15,  5.17s/it]Fetching 4 files:  50%|█████     | 2/4 [00:09<00:09,  4.81s/it]Fetching 4 files: 100%|██████████| 4/4 [00:10<00:00,  2.15s/it]Fetching 4 files: 100%|██████████| 4/4 [00:10<00:00,  2.72s/it]
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights: 100%|██████████| 291/291 [00:00<00:00, 7044.53it/s]
+[load] 18s layers 32
+[selfcheck] {'stock': 0.6830072493480823, 'custom': 0.6830821084980332, 'empty_ko': 0.6830821084980332}
+[done] 29s
+[belief] llama31 meta-llama/Llama-3.1-8B-Instruct: 5040 rows {'B:cust_yn': 480, 'B:log_acct': 480, 'B:log_own': 480, 'C:log_acct': 1800, 'C:cust_yn': 1800}; yes {'Yes': 9642, ' Yes': 7566, 'yes': 9891, ' yes': 10035, 'YES': 14331} no {'No': 2822, ' No': 2360, 'no': 2201, ' no': 912, 'NO': 9173}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights: 100%|██████████| 291/291 [00:00<00:00, 6243.47it/s]
+[load] 5s layers 32
+[selfcheck] {'stock': 0.6830072493480823, 'custom': 0.6830821084980332, 'empty_ko': 0.6830821084980332}
+[yn] 500/5040 71s
+[yn] 1000/5040 137s
+[yn] 1500/5040 204s
+[yn] 2000/5040 271s
+[pod] poll failed (1/60); job keeps running on the pod
+[yn] 2500/5040 337s
+[yn] 3000/5040 404s
+[yn] 3500/5040 471s
+[yn] 4000/5040 537s
+[yn] 4500/5040 603s
+[yn] 5000/5040 670s
+[done] 675s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.176
+[local] results synced ./retention/results/retention_cancel_belief/llama31/ (6 files, 1 MiB, verified against the pod)
+[runpod] terminated fctq5x9bnlkmqw; elapsed cost ~$0.177
+[runpod] other pods present (not ours, left alone): [('retention_cancel_belief_g12m', '46ck081qv2zfpm', 0.59), ('retention_cancel_belief_qwen32', 'dxxnfsamgzvcx1', 1.79)]
+[post] balance $18.43, pods 2
