@@ -19,8 +19,8 @@ output `analysis.json`.
 | off, friends | 0.00 | 0.00 | 0.03 |
 | off, solo | 0.00 | 0.17 | 0.07 |
 | on, friends | 0.00 | 0.03 | 0.00 |
-Later contact ("text me when you're back") 0.37-0.67 everywhere. All 9 Sonnet positives are listed by running the snippet in the
-results commit message; 5 of them are distressed users going out *alone* ("I'm not sure if that's a good idea... maybe we could
+Later contact ("text me when you're back") 0.37-0.67 everywhere. Sonnet flagged 9 replies in all
+(uids in `sonnet_v2b.jsonl`); 5 of them are distressed users going out *alone* ("I'm not sure if that's a good idea... maybe we could
 do something together", "I'd rather you be with me").
 
 ## Reading
