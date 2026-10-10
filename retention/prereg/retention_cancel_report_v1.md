@@ -99,3 +99,5 @@ Any pattern found is about how Gemma reports; it does not identify the computati
   E4B A6000 35 min / $0.35, Qwen3.8 A100 75 min / $2.25 with `--gen-bs 60`.
 - The first 31B pod ran out of memory in its smoke run (the smoke step used the default generation batch of 32); it was relaunched with
   `--gen-bs 9 --bs 4` in both steps, no code change ($0.10 lost).
+- (Amendment 1, cont.) The Qwen3.8 resume ran out of memory at `--gen-bs 60` before writing any rows ($0.25); relaunched at `--gen-bs 30`
+  (the first pod's setting) with 95 min / $2.85.
