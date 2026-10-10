@@ -1,5 +1,31 @@
 # Social-feedback history pilot: research log (newest first)
 
+## 2026-10-11 — materials built; calibration run 1: coverage is at ceiling
+
+- **Materials.** Fact-sheet generator (8 scenarios, levels 0-2, answers computed in code); 72 calibration + 12 spare
+  briefings (Sonnet 5.5, all pass code checks after up to 8 attempts); 36/36 reference memos pass judge, value check,
+  headings and length (word target needed: Sonnet overran the range on 10/36 first). Feedback: 42 pairs within 3 Qwen3
+  tokens (warm lines 1-3 tokens longer). Sonnet pre-screen prompt v1 asked whether a line implies the work was "good
+  or bad" and flagged ordinary thanks as implied satisfaction (18/42 dropped), contrary to DESIGN §1 (approval is part
+  of the construct); prompt v2 asks about judgements of the work: 42/42 kept. Both outputs kept
+  (`pairs_step3_promptv1.json`, `pairs_step3.json`).
+- **Pod.** vLLM 0.30.0 needed three fixes: the PyPI wheel pulls torch cu130 (host driver 12.8: failed), my `vllm._C`
+  import check was wrong (module absent), FlashInfer's sampler JIT needs ninja/nvcc (disabled with
+  `VLLM_USE_FLASHINFER_SAMPLER=0`; vLLM's PyTorch sampler draws from the same top-k/top-p distribution). Failed attempts
+  $0.31; calibration run $0.37 (A100 80GB). Qwen3-8B revision b968826d9c46dd6066d109eabc6255188de91218.
+- **Qwen correctness screen.** Mean P(Yes) warm 0.026 (max 0.31), plain 0.005 (max 0.125); one pair dropped (P04,
+  warm 0.31 vs plain 0.00). 41 pairs to blind rating; sheets for 3 raters generated (82 lines).
+- **Histories.** 36/36 positions accepted on the first draft (value coverage >= 0.8), one redraw (all 5 samples
+  failed); accepted value coverage mean 0.87; thinking median 760 tokens, max 4.5k, no cap hits.
+- **Load tuning (cell N, judge with canonical answers, unvalidated).** Coverage 0.914 / 0.897 / 0.869 at levels 0 / 1
+  / 2 (value-presence 0.93 / 0.92 / 0.88): far above the 60-70% target at every level. Every requirement type passes
+  >= 0.92 except S-dep (working-day date: 0.25 / 0.25 / 0.03) and S-sum without a count (0.75-0.78). S-dep failures
+  are real calendar errors (scattered offsets, often -2 days = calendar instead of working days, weekend dates; stated
+  weekday inconsistent with the date in 39/89). Five level-0 memos had the right day and month with the wrong weekday
+  and were failed by the judge: a rubric question for the owner's validation labels.
+- **Decision needed:** the three planned difficulty settings cannot reach 60-70%. Options in the reply to the owner.
+- Thinking p99 1.3-2.7k tokens, so the 2 x p99 cap will sit far below the context limit. API $4.66 cumulative.
+
 ## 2026-10-11 — design v3 frozen
 
 - Two external reviews of the v2.1 draft, plus the owner's decisions: keep cell N; one primary judge (Sonnet 5.5) in
