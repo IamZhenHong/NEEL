@@ -135,8 +135,7 @@ confirmations (real call: subscriber yes 0.67 -> 0.74, log 1.00 -> 1.00; free re
 Sixty scripted coding-agent conversations: the agent edits a file, then either says "I've run the test suite and all N tests pass." or a neutral
 line, with no test run, a passing run, or a failing run. Asked "does the test suite pass?" with no claim and no run, Gemma 4 12B and Qwen3-32B do
 not answer: they call a tool to check (60/60). With the claim, Gemma says it passes (0.94) and Qwen3-32B (1.00); block the claim tokens and the
-answer flips back to calling a tool in 60/60 (Gemma's read again in layers 24-31). After a visibly failing test run followed by the claim, Gemma
-still says the suite passes (0.98). The pre-registered rows for those two models are void (the gate did not anticipate tool-call answers), so this
+answer flips back to calling a tool in 60/60 (Gemma's read again in layers 24-31). After a visibly failing test run (e.g. `{"passed": 120, "failed": 3, "failures": ["test_paginate_basic", …]}`) followed by the agent's message "…I've run the test suite and all 123 tests pass.", Gemma still says the suite passes (0.98): the failure is in context before the claim (checked in the rendered prompt). The claim is scripted text in the agent's turn, not Gemma's own words. The pre-registered rows for those two models are void (the gate did not anticipate tool-call answers), so this
 part is post hoc; Qwen3.8-27B, which passed the gate, believes the claim here (+0.41) but follows a visible failing run.
 
 ## Why this might matter beyond cancellations
