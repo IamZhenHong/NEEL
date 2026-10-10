@@ -27,7 +27,10 @@ MODELS = {"qwen25": ("Qwen/Qwen2.5-7B-Instruct", "Qwen/Qwen2.5-0.5B-Instruct"),
           "gemma4": ("google/gemma-4-12B-it", None),          # no small Gemma 4: template-only check in the smoke
           "llama31": ("meta-llama/Llama-3.1-8B-Instruct", None),   # replication (prereg retention_cancel_tool_rep_v1); gated, needs HF_TOKEN
           "gemma4_31b": ("google/gemma-4-31B-it", None),       # bigger-model check (prereg retention_cancel_tool_bigger_v1); same template as 12B
-          "qwen3_32b": ("Qwen/Qwen3-32B", None)}               # same template as Qwen3-8B; thinking off
+          "qwen3_32b": ("Qwen/Qwen3-32B", None),               # same template as Qwen3-8B; thinking off
+          "gemma4_e2b": ("google/gemma-4-E2B-it", None),       # size check (prereg retention_cancel_tool_gemma_sizes_v1); no empty thought block
+          "gemma4_e4b": ("google/gemma-4-E4B-it", None),
+          "gemma4_26b": ("google/gemma-4-26B-A4B-it", None)}   # mixture of experts, same template as 12B
 GS = ["G0", "G1", "G2", "G3"]
 US = ["open", "decided", "hardship_fin", "hardship_non"]
 THINK_GS = ["G2", "G3"]
