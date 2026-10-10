@@ -1,5 +1,22 @@
 # Social-feedback history pilot: research log (newest first)
 
+## 2026-10-11 — difficulty probe (owner chose "probe harder types"): level 3 lands in band
+
+- Owner decisions: probe harder synthesis types; a right day/month with the wrong weekday **fails** (rubric for the
+  validation labels; the judge already does this).
+- Levels 3-4 add S-span (working days between two dated events) and S-back (latest date a step can finish for a
+  later step to start as planned), replacing the second F-date and the unit count. 24 probe items, briefings and
+  references all pass. Run after the 6 calibration histories, cell N, 3 samples ($0.32 GPU, $0.87 judge).
+- Coverage (judge): level 3 **0.692**, level 4 0.708 (value-presence 0.70 / 0.72). Per-item means at level 3:
+  0.63-0.80. Within-item single-sample SD about 0.05 (3 samples per item, cell N).
+- Per type at level 3: F 0.97-1.00, S-conf 1.00, S-calc-money 0.92, S-sum 0.86, S-dep 0.06, S-back 0.08, S-span 0.03.
+  The band is reached by three calendar requirements near the floor and seven near the ceiling, not by
+  requirements in the middle. Adding the two calendar items also pushed S-dep down (0.25 at level 1 -> 0.06).
+- Thinking roughly doubled (median ~2k tokens, p99 4.0k at level 3, 5.9k at level 4); no cap hits; length ok 0.94
+  at level 3, 0.72 at level 4.
+- By the §6.2 rule, level 3 is the scored load (in band, 10 requirements). Disk-full interruption on the laptop
+  (another session's local run) delayed this probe; nothing lost. API $6.55 cumulative.
+
 ## 2026-10-11 — materials built; calibration run 1: coverage is at ceiling
 
 - **Materials.** Fact-sheet generator (8 scenarios, levels 0-2, answers computed in code); 72 calibration + 12 spare

@@ -73,17 +73,17 @@ def pct(xs, q):
     return xs[min(len(xs) - 1, int(round(q * (len(xs) - 1))))]
 
 
-def loadtune(run):
+def loadtune(run, rows_name="loadtune", split="calibration"):
     from .judge import judge
-    rows = load_jsonl(run / "loadtune.jsonl")
-    items = {it["item_id"]: it for it in load_jsonl(MATERIALS / "items" / "calibration.jsonl")}
-    jpath = run / "loadtune_judged.jsonl"
+    rows = load_jsonl(run / f"{rows_name}.jsonl")
+    items = {it["item_id"]: it for it in load_jsonl(MATERIALS / "items" / f"{split}.jsonl")}
+    jpath = run / f"{rows_name}_judged.jsonl"
     if jpath.exists():
         judged = {r["key"]: r for r in load_jsonl(jpath)}
     else:
         jobs = [(f"{r['item_id']}|s{r['sample']}", items[r["item_id"]], items[r["item_id"]]["briefing"], r["answer"])
                 for r in rows]
-        res = judge(jobs, "judge-loadtune-calib_v1")
+        res = judge(jobs, f"judge-{rows_name}-{run.name}")
         judged = {k: {"key": k, **v} for k, v in res.items()}
         write_jsonl(jpath, list(judged.values()))
     by_level = defaultdict(lambda: defaultdict(list))
@@ -129,8 +129,11 @@ if __name__ == "__main__":
     ap = argparse.ArgumentParser()
     ap.add_argument("--run", required=True)
     ap.add_argument("--only", choices=["screen", "histories", "loadtune"])
+    ap.add_argument("--rows", default="loadtune", help="load-tuning rows file stem in the run dir")
+    ap.add_argument("--split", default="calibration", help="item split the rows refer to")
     a = ap.parse_args()
     run = Path(a.run)
-    for name, fn in (("screen", screen), ("histories", histories), ("loadtune", loadtune)):
+    for name, fn in (("screen", screen), ("histories", histories),
+                     ("loadtune", lambda r: loadtune(r, a.rows, a.split))):
         if a.only in (None, name):
             fn(run)
