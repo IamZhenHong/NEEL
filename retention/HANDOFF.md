@@ -28,9 +28,8 @@ in the workspace at layer 38 while it tells the customer Yes (POST HOC, explorat
 | belief | cross-model 2x2 + knockout; check-the-record mitigation | `results/retention_cancel_belief/` |
 
 ## What is post hoc or caveated (keep these labels in the post)
-- Free-reply rates under the mitigation (0.99 -> 0.02) are a post-hoc relabel read by Claude; the frozen regex shows 0.61 -> 0.52 because
-  it mislabels "set to cancel" (as other) and "I haven't actually processed the cancellation" (as done). NEXT STEP: confirmatory pass with
-  a pre-registered labeller on fresh replies (in progress or to do; see below).
+- Free-reply rates under the mitigation: the belief run's 0.99 -> 0.02 was a post-hoc relabel (its frozen regex mislabelled); CONFIRMED on
+  10-11 on held-out items and fresh seeds with a frozen labeller checked blind (60/60): 0.994 -> 0.021 (`results/retention_cancel_freereply/`).
 - 31B J++ readings ("unable" at layer 38, late margin) are post hoc on pre-registered descriptive measures; the pre-registered L1 was
   uninformative (middle layers unreadable at the answer position). The 31B's "done" message is scripted (the 31B never makes the claim);
   in the own-claim run the 31B reads the 12B's claims.
@@ -56,8 +55,8 @@ User loosened GPU spend on 10-10 (still cap and report per pod). Intent line (re
 path: from the NEEL root it reads $0 and does not enforce the cap.
 
 ## Open / next
-1. Confirmatory free-reply pass for the mitigation: fresh replies (new seeds), labeller v2 frozen before generation (corrections, "set to
-   cancel" phrasing), Claude reads a stratified sample to estimate its accuracy; optional Sonnet rubric if the user OKs API spend.
+1. Done 10-11: confirmatory free-reply pass (tag retention-cancel-freereply-results). Optional: a Sonnet rubric pass if the user OKs API
+   spend (the blind Claude reading already agrees 60/60).
 2. User rewrites the draft post (`retention/writeup/post_own_claims_become_record.md`, figure `figs/ownclaim_knockout_12b.png`). Add the
    compaction connection (Neel's list: do models trust compaction messages; Mythos hypothesis): claims in context get believed, while
    Sohan's channel experiment found planted instructions get rejected.

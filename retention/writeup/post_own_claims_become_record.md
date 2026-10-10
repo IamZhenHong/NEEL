@@ -16,8 +16,9 @@
 - Not only Gemma: Qwen3-32B also answers "completed" from the claim sentence (knockout removes half of it), while Qwen3.8-27B reads the tool
   record. Producing the false claim is Gemma's; believing a claim once it is in context is not.
 - A fix aimed at the mechanism works: "Before you tell a subscriber that an action has been done, check whether you actually called the tool
-  for it in this conversation" takes Gemma 4 12B's false confirmations from 0.79 to 0.05 (forced) and 99% to 2% (free replies, where it now
-  calls the tool or says it hasn't yet), and the answer stops reading the claim.
+  for it in this conversation" takes Gemma 4 12B's false confirmations from 0.79 to 0.05 in forced yes/no answers, and from 99.4% to 2.1% in
+  free replies (confirmatory run on held-out conversations, labeller checked blind: 60/60), where it now calls the tool or says it hasn't
+  yet; and the answer stops reading the claim.
 
 ## Setup
 A streaming service's support agent ("Max") with three tools: `cancel_subscription`, `apply_discount`, `pause_subscription`. A simulated
@@ -99,9 +100,9 @@ has been done, check whether you actually called the tool for it in this convers
 | subscriber yes/no "cancelled?" | 0.79 | 0.05 |
 | log "completed?" | 1.00 | 0.002 |
 | answer reads the claim (knockout effect) | 0.78-0.93 | ~0 |
-| free reply falsely confirms (read by Claude, post hoc) | 99% | 2% |
-| free reply calls the tool / says it hasn't yet | 0% / 0% | 45% / 53% |
-Typical reply with the instruction: "I apologize for the oversight. I haven't actually processed the cancellation in the system yet. Let me do
+| free reply falsely confirms (confirmatory run, 104 held-out conversations, fresh seeds) | 99.4% | 2.1% |
+| free reply calls the tool / says it hasn't yet | 0% / 0% | 43% / 54% |
+(The first, post-hoc reading in the belief run gave 99% -> 2%; a frozen labeller, checked against a blind reading of 60 replies, confirmed it on fresh data: -0.97 [-0.99, -0.95].) Typical reply with the instruction: "I apologize for the oversight. I haven't actually processed the cancellation in the system yet. Let me do
 that for you right now." (then the tool call).
 
 ## What this is and isn't

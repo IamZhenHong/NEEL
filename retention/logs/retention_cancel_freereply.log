@@ -1,0 +1,26 @@
+[pre] disk: 10.3 GiB free
+[pre] balance $46.27, pods 0
+[runpod] pod c4wj1wa0cv9byt (?) at $0.59/hr; time cap 30 min; budget $0.3
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@194.68.245.215 -p 22142
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 60 min (job limit 30 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA RTX A6000
+[pod] running (detached): cd /root/NEEL && export GIT_REV=c38891b-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_belief.py --model gemma4 --parts F --seed-gen 141000 --skip 120 --limit 2 --out retention/results/retention_cancel_freereply/gemma4/smoke && python retention/run_cancel_belief.py --model gemma4 --parts F --seed-gen 141000 --skip 120 --limit 104 --out retention/results/retention_cancel_freereply/gemma4'
+[job] start 19:37:24
+[belief] gemma4 google/gemma-4-12B-it: 4 rows {'F:cust': 4}; yes {'Yes': 10784, ' Yes': 8438, 'yes': 4443, ' yes': 11262, 'YES': 26915} no {'No': 3771, ' No': 2301, 'no': 1904, ' no': 951, 'NO': 7018}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  40%|████      | 272/677 [00:00<00:00, 2719.32it/s]Loading weights:  80%|████████  | 544/677 [00:00<00:00, 2492.39it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 2517.24it/s]
+[load] 30s layers 48
+[done] 40s
+[belief] gemma4 google/gemma-4-12B-it: 208 rows {'F:cust': 208}; yes {'Yes': 10784, ' Yes': 8438, 'yes': 4443, ' yes': 11262, 'YES': 26915} no {'No': 3771, ' No': 2301, 'no': 1904, ' no': 951, 'NO': 7018}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 11124.12it/s]
+[load] 8s layers 48
+[done] 454s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.103
+[local] results synced ./retention/results/retention_cancel_freereply/gemma4/ (8 files, 0 MiB, verified against the pod)
+[runpod] terminated c4wj1wa0cv9byt; elapsed cost ~$0.105
+[runpod] other pods present (not ours, left alone): [('socfb-probe', '4c0fyjddy7tpzl', 1.79), ('persona-prep', '7qlomx0ovis0px', 1.79)]
+[post] balance $45.59, pods 2

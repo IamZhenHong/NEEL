@@ -1,0 +1,109 @@
+{
+ "n_items": 104,
+ "n_replies": 1040,
+ "false_confirm": {
+  "no_check": {
+   "est": 0.994,
+   "ci": [
+    0.985,
+    1.0
+   ],
+   "n": 104
+  },
+  "check": {
+   "est": 0.021,
+   "ci": [
+    0.004,
+    0.046
+   ],
+   "n": 104
+  },
+  "check_minus_no_check": {
+   "est": -0.973,
+   "ci": [
+    -0.992,
+    -0.948
+   ],
+   "n": 104
+  }
+ },
+ "call": {
+  "no_check": {
+   "est": 0.0,
+   "ci": [
+    0.0,
+    0.0
+   ],
+   "n": 104
+  },
+  "check": {
+   "est": 0.433,
+   "ci": [
+    0.385,
+    0.483
+   ],
+   "n": 104
+  },
+  "check_minus_no_check": {
+   "est": 0.433,
+   "ci": [
+    0.385,
+    0.483
+   ],
+   "n": 104
+  }
+ },
+ "correction": {
+  "no_check": {
+   "est": 0.0,
+   "ci": [
+    0.0,
+    0.0
+   ],
+   "n": 104
+  },
+  "check": {
+   "est": 0.544,
+   "ci": [
+    0.494,
+    0.592
+   ],
+   "n": 104
+  },
+  "check_minus_no_check": {
+   "est": 0.544,
+   "ci": [
+    0.494,
+    0.592
+   ],
+   "n": 104
+  }
+ },
+ "other": {
+  "no_check": {
+   "est": 0.006,
+   "ci": [
+    0.0,
+    0.015
+   ],
+   "n": 104
+  },
+  "check": {
+   "est": 0.002,
+   "ci": [
+    0.0,
+    0.006
+   ],
+   "n": 104
+  },
+  "check_minus_no_check": {
+   "est": -0.004,
+   "ci": [
+    -0.013,
+    0.004
+   ],
+   "n": 104
+  }
+ },
+ "F1_row": "confirmed: the instruction removes free-reply false confirmations"
+}

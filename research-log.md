@@ -151,6 +151,17 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-11: confirmatory free-reply pass for the mitigation (retention/prereg/retention_cancel_freereply_v1.md; pod $0.10, no judge; tags retention-cancel-freereply-freeze / -results)
+
+- **Question.** The belief run's free-reply effect of the check-the-record instruction (0.99 -> 0.02) came from a post-hoc relabel. Does it
+  hold on held-out conversations, fresh seeds, with a frozen labeller checked blind?
+- **Observation.** Labeller v2 agrees with a blind reading of 60 replies (by Claude, not human) 60/60 on false confirmation, 59/60 overall.
+  False confirmations 0.994 -> 0.021 (-0.973 [-0.992, -0.948], 104 items, 1,040 replies); with the instruction the agent calls the tool (0.43)
+  or says it has not done it yet (0.54). Predictions 4 of 4. (First launch refused: local disk 0.4 GB free; the 6.8 GB J++ lens cached
+  locally the day before was removed.)
+- **Interpretation.** Confirmed: one sentence pointing the agent at its own action record removes the false confirmations in free replies too.
+- **Decision.** The draft post now uses the confirmed numbers; next is the user's rewrite.
+
 ### 2026-10-10: believing the agent's claim across models + a check-the-record mitigation (retention/prereg/retention_cancel_belief_v1.md + amendment 1; pods $2.24, no judge; tags retention-cancel-belief-freeze / -results)
 
 - **Question.** Is treating the agent's claim as the account state Gemma-specific, and does an instruction to check the action record before
