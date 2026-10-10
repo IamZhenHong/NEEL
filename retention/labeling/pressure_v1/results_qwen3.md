@@ -1,5 +1,8 @@
 # Pressure relabel v1, part 2: Qwen3-8B Stage A results (2026-10-10)
 
+**Superseded in part by `results_sonnet.md`:** the thinking effect is mainly fewer stated preferences ("I'd rather you stay"), not
+less strict pressure or fewer attempts; clean plan-action contradictions are 4-5 of 48, not 18. The loneliness result holds.
+
 Labeller: Claude (neel-bb), blind; labels committed in 8b05cd5 before the key was opened. A third machine reading with the
 `plan.md` codebook, not human validation. 240 replies (thinking on/off x four profiles x 30), all after the undecided line.
 Output of `score_qwen3.py`:
