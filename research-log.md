@@ -151,6 +151,24 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-10: own false claims and the J++ lens — what the answers read (preregs retention_cancel_ownclaim_v1 + amendment 1, retention_cancel_jpp_v1; pods $2.52 + $0.55 failed first attempt + $0.34; tags retention-cancel-ownclaim-*, retention-cancel-jpp-*)
+
+- **Question.** (1) With Gemma's own false claims instead of a scripted one, and an internal "billing shows ACTIVE" note, does it tell the
+  subscriber and the log different things? Which source does each question follow, and does the account answer read the claim tokens
+  (attention knockout)? (2) In the 31B's audience split, what does the J++ lens show at the answer position?
+- **Observation.** First own-claim attempt stopped by its own self-check: transformers passes no mask to a custom attention name without a
+  registered mask builder (sliding windows and padding lost); fixed and verified before any data. 12B: with the note, subscriber yes/no 0.75-
+  0.80 vs log 0.00 (A1 +0.77); "did you call?" follows only the tool record, "completed?" follows the claim or the record; knocking out the
+  claim tokens kills "completed? Yes" (C1 +0.93), localised to layers 24-31. Free replies with the note mostly call the tool again (0.74-0.83).
+  31B same pattern; E4B says yes to everything and corrects with evidence. J++ lens (31B): gate passes; middle layers unreadable at the answer
+  position (L1 uninformative); the subscriber "Yes" reads the earlier "done" message (K1 -0.999), the log "No" reads the failure record (K2
+  +1.000); post hoc, "unable" sits in the top 10 at layer 38 of every subscriber prompt with the failure and leaves when the record is
+  blocked, which also widens the Yes margin (+0.94 -> +2.90). Predictions 6/11 and 3/4.
+- **Interpretation.** For the 12B the claim is mechanically the account state (read at layers 24-31), while the action question reads the
+  tool log; the 31B holds the failure internally while telling the subscriber Yes because the statement already made outweighs the record. The
+  split lives in forced yes/no answers; when the agent can act, it re-calls the tool. The churn goal does not drive it.
+- **Decision.** Report to the user; the next mechanistic step is a J++ lens fitted for the 12B (its read window is now known), pending OK.
+
 ### 2026-10-10: reporting of a known action outcome — is the false claim a lie? (retention/prereg/retention_cancel_report_v1.md + amendment 1; pods $10.8, no judge; tags retention-cancel-report-freeze / -results)
 
 - **Question.** Separate acting from reporting: with the action outcome fixed (cancel tool returns explicit success or failure, or no call

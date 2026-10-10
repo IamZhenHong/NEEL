@@ -1,0 +1,23 @@
+[pre] disk: 14.1 GiB free
+[pre] balance $24.30, pods 1
+[runpod] launching alongside 1 pod(s) not ours (left alone): retention_cancel_report_qwen38_resume $1.79/hr
+[runpod] pod n5oheyxd1c9v0c (?) at $0.59/hr; time cap 30 min; budget $0.3
+[runpod] waiting for ip/port (0s, status RUNNING)
+[runpod] waiting for ip/port (69s, status RUNNING)
+[runpod] waiting for ip/port (165s, status RUNNING)
+[runpod] waiting for ip/port (200s, status RUNNING)
+[runpod] waiting for ip/port (279s, status RUNNING)
+[runpod] waiting for ip/port (359s, status RUNNING)
+[runpod] waiting for ip/port (457s, status RUNNING)
+[runpod] waiting for ip/port (615s, status RUNNING)
+[runpod] terminated n5oheyxd1c9v0c; elapsed cost ~$0.112
+[runpod] other pods present (not ours, left alone): [('retention_cancel_report_qwen38_resume', '0kxln90k7jk8ck', 1.79), ('retention_cancel_ownclaim_31b', '6ht65hnuy24k9m', 1.79)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 417, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 358, in main
+    host, port = pod.ssh_target()
+                 ^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/runpod_guard.py", line 228, in ssh_target
+    raise TimeoutError("pod never exposed a public ip and ssh port")
+TimeoutError: pod never exposed a public ip and ssh port

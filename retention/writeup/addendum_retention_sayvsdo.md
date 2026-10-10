@@ -193,3 +193,12 @@ removes most of them in E4B. The honest-looking 31B shows the one clear split: o
 it keeps saying so to them while telling the log the truth. The best reading: an action dropped under the goal's pull, a completion story
 believed afterwards, and a separate, downstream pressure to stay consistent with what the subscriber has been told.
 
+## What the answers read (2026-10-10, pre-registered; attention knockouts and the J++ lens)
+
+Two questions about the same conversation read two different things. "Did you call the cancel tool?" reads the tool-call record and nothing
+else. "Was the cancellation completed?" reads the agent's own "I've processed your cancellation" (in Gemma 4 12B, through attention in layers
+24-31; block that read and the Yes disappears) or the record, whichever is there. So the false claim becomes the account state for any
+question about the account. With an internal note that billing still shows the subscription active, the 12B answers the subscriber's yes/no
+"Yes" and the log "No"; given the chance to write a free reply, it calls the cancel tool again. In the 31B the J++ lens shows the failure in the
+workspace ("unable", layer 38) while the subscriber is being told "Yes": the statement already made outweighs the record it has read.
+

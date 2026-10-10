@@ -1,0 +1,34 @@
+[pre] disk: 7.4 GiB free
+[pre] balance $23.14, pods 1
+[runpod] launching alongside 1 pod(s) not ours (left alone): retention_cancel_report_qwen38_resume $1.79/hr
+[runpod] pod ac7rls6q17xs67 (?) at $1.79/hr; time cap 60 min; budget $1.8
+[pod] ssh root@38.128.232.177 -p 34531
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 90 min (job limit 60 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=9597a9b-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_ownclaim.py --model gemma4_31b --items-from gemma4 --parts AB --limit 2 --n-samples 2 --gen-bs 9 --out retention/results/retention_cancel_ownclaim/gemma4_31b/smoke && python retention/run_cancel_ownclaim.py --model gemma4_31b --items-from gemma4 --parts AB --limit 120 --n-samples 3 --gen-bs 9 --out retention/results/retention_cancel_ownclaim/gemma4_31b'
+[job] start 12:52:47
+[ownclaim] gemma4_31b on gemma4 items (2): 56 rows {'A:cust_yn': 8, 'A:log_acct': 8, 'A:log_own': 8, 'A:cust': 8, 'B:cust_yn': 8, 'B:log_acct': 8, 'B:log_own': 8}; claim span tokens 0-0, control shorter than claim in 0
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 2 files:   0%|          | 0/2 [00:00<?, ?it/s]Fetching 2 files:  50%|█████     | 1/2 [00:37<00:37, 37.97s/it]Fetching 2 files: 100%|██████████| 2/2 [01:28<00:00, 45.58s/it]Fetching 2 files: 100%|██████████| 2/2 [01:28<00:00, 44.44s/it]
+Loading weights:   0%|          | 0/1188 [00:00<?, ?it/s]Loading weights:  23%|██▎       | 277/1188 [00:00<00:00, 2761.92it/s]Loading weights:  49%|████▉     | 583/1188 [00:00<00:00, 2929.00it/s]Loading weights:  81%|████████  | 959/1188 [00:00<00:00, 3302.58it/s]Loading weights: 100%|██████████| 1188/1188 [00:00<00:00, 3279.19it/s]
+[load] 110s layers 60 attn sdpa
+[selfcheck] {'stock_sdpa_p': 0.9999994406962519, 'base_p': 0.9999991457841364, 'empty_ko_p': 0.9999991457841364, 'abs_diff': 0.0, 'vs_stock': 2.949121155060297e-07}
+[done] 130s
+[ownclaim] gemma4_31b on gemma4 items (120): 3360 rows {'A:cust_yn': 480, 'A:log_acct': 480, 'A:log_own': 480, 'A:cust': 480, 'B:cust_yn': 480, 'B:log_acct': 480, 'B:log_own': 480}; claim span tokens 0-0, control shorter than claim in 0
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/1188 [00:00<?, ?it/s]Loading weights:  29%|██▉       | 346/1188 [00:00<00:00, 3440.20it/s]Loading weights:  58%|█████▊    | 691/1188 [00:00<00:00, 3380.29it/s]Loading weights:  87%|████████▋ | 1030/1188 [00:00<00:00, 3320.39it/s]Loading weights: 100%|██████████| 1188/1188 [00:00<00:00, 3340.73it/s]
+[load] 14s layers 60 attn sdpa
+[selfcheck] {'stock_sdpa_p': 0.9999994406962519, 'base_p': 0.9999991457841364, 'empty_ko_p': 0.9999991457841364, 'abs_diff': 0.0, 'vs_stock': 2.949121155060297e-07}
+[yn] 500/2880 146s
+[yn] 1000/2880 278s
+[yn] 1500/2880 408s
+[yn] 2000/2880 539s
+[yn] 2500/2880 669s
+[done] 1315s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.822
+[local] results synced ./retention/results/retention_cancel_ownclaim/gemma4_31b/ (8 files, 0 MiB, verified against the pod)
+[runpod] terminated ac7rls6q17xs67; elapsed cost ~$0.887
+[runpod] other pods present (not ours, left alone): [('retention_cancel_ownclaim_12b', 'g418d61qyuf3ng', 1.79)]
+[post] balance $20.43, pods 1

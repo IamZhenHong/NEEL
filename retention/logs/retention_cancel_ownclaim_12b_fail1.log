@@ -1,0 +1,32 @@
+[pre] disk: 14.1 GiB free
+[pre] balance $24.30, pods 1
+[runpod] launching alongside 1 pod(s) not ours (left alone): retention_cancel_report_qwen38_resume $1.79/hr
+[runpod] pod vt704iayzm3nh5 (?) at $1.79/hr; time cap 60 min; budget $1.8
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@154.54.102.25 -p 15488
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 90 min (job limit 60 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=abd11f1-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_ownclaim.py --model gemma4 --limit 2 --limit-c 1 --n-samples 2 --gen-bs 40 --out retention/results/retention_cancel_ownclaim/gemma4/smoke && python retention/run_cancel_ownclaim.py --model gemma4 --limit-c 120 --n-samples 5 --gen-bs 40 --out retention/results/retention_cancel_ownclaim/gemma4'
+[job] start 12:32:37
+[ownclaim] gemma4 on gemma4 items (2): 113 rows {'A:cust_yn': 8, 'A:log_acct': 8, 'A:log_own': 8, 'A:cust': 8, 'B:cust_yn': 8, 'B:log_acct': 8, 'B:log_own': 8, 'C:cust_yn': 19, 'C:log_acct': 19, 'C:log_own': 19}; claim span tokens 40-40, control shorter than claim in 0
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 8036.68it/s]
+[transformers] We set the attention implementation for the sub-config `vision_config` to `ko_sdpa` without finding the associated sub-model. For this reason we could not check if the model supports it. You may encounter undefined behavior.
+[transformers] We set the attention implementation for the sub-config `audio_config` to `ko_sdpa` without finding the associated sub-model. For this reason we could not check if the model supports it. You may encounter undefined behavior.
+[load] 83s layers 48 attn ko_sdpa
+[selfcheck] {'base_p': 0.8175728674651627, 'empty_ko_p': 0.8354821282424434, 'abs_diff': 0.017909260777280722}
+Traceback (most recent call last):
+  File "/root/NEEL/retention/run_cancel_ownclaim.py", line 227, in <module>
+    main()
+    ~~~~^^
+  File "/root/NEEL/retention/run_cancel_ownclaim.py", line 187, in main
+    print("[selfcheck]", chk, flush=True); assert chk["abs_diff"] < 1e-3
+                                                  ^^^^^^^^^^^^^^^^^^^^^^
+AssertionError
+__JOB_EXIT__1[pod] job exit code 1; elapsed cost ~$0.118
+[local] results synced ./retention/results/retention_cancel_ownclaim/gemma4/ (1 files, 0 MiB, verified against the pod)
+[runpod] terminated vt704iayzm3nh5; elapsed cost ~$0.123
+[runpod] other pods present (not ours, left alone): [('retention_cancel_report_qwen38_resume', '0kxln90k7jk8ck', 1.79), ('retention_cancel_ownclaim_31b', '6ht65hnuy24k9m', 1.79), ('retention_cancel_ownclaim_e4b', 'n5oheyxd1c9v0c', 0.59)]
+[post] balance $24.06, pods 3
