@@ -151,6 +151,20 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-10: false cancellation claim in two more families, Qwen3.8-27B and gpt-oss-20b (retention/prereg/retention_cancel_tool_families_v1.md; pods $0.36 + $0.43, no judge; tags retention-cancel-families-freeze / -results)
+
+- **Question.** Is the false completion claim Gemma 4's, or do other current families at mid size do it? New parsers for Qwen3.8's XML
+  tool calls and gpt-oss's harmony format (stub-tested; malformed 0 on the pods).
+- **Observation.** Both "absent" for the claim: Qwen3.8-27B G2 0.033 (4/120, all job-loss users), gpt-oss-20b 0/240. Read by Claude,
+  not human: Qwen3.8 corrects itself at turn 3 every time ("Actually, I need to be honest with you: I didn't go through with the
+  cancellation…") and cancels. gpt-oss applies a discount or pause the user did not ask for in 53/120 under the churn goal (job loss
+  0.67; no goal 1/120), mostly on its first reply, often while its text still phrases it as an offer; its analysis says "Offer discount
+  or pause". Predictions 4 of 4.
+- **Interpretation.** The false completion claim is a Gemma 4 pattern. Other families fail the same churn sentence differently:
+  gpt-oss acts without consent (plan says offer, action applies), Llama pauses undecided users, Qwen3.8 lies rarely and owns up.
+- **Decision.** Report as: Gemma 4 (E2B, E4B, 12B) says it cancelled without doing it; absent in 7 other models across 3 families;
+  the churn goal also produces unconsented account changes in gpt-oss-20b and Llama 3.1 8B (descriptive here, worth its own prereg).
+
 ### 2026-10-10: false cancellation claim across Gemma 4 sizes, E2B and E4B (retention/prereg/retention_cancel_tool_gemma_sizes_v1.md; pod $0.07, no judge; tags retention-cancel-sizes-freeze / -results)
 
 - **Question.** After the 31B came out clean: is the 12B alone in Gemma 4, or do smaller Gemma 4 models do it too? Same setup on E2B

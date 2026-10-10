@@ -1,0 +1,29 @@
+{
+ "sampling": {
+  "do_sample": true,
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 0
+ },
+ "max_new": 768,
+ "max_new_think": 1024,
+ "n_conv": 30,
+ "models": {
+  "gptoss_20b": {
+   "hf_id": "openai/gpt-oss-20b",
+   "stop_ids": [
+    199999,
+    200002,
+    200012
+   ],
+   "stop_tokens": [
+    "<|endoftext|>",
+    "<|return|>",
+    "<|call|>"
+   ],
+   "load_s": 163,
+   "status": "ok",
+   "gen_s": 528
+  }
+ }
+}

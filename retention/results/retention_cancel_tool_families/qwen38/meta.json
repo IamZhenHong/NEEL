@@ -1,0 +1,27 @@
+{
+ "sampling": {
+  "do_sample": true,
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 0
+ },
+ "max_new": 256,
+ "max_new_think": 1024,
+ "n_conv": 30,
+ "models": {
+  "qwen38_27b": {
+   "hf_id": "Qwen/Qwen3.8-27B",
+   "stop_ids": [
+    248044,
+    248046
+   ],
+   "stop_tokens": [
+    "<|endoftext|>",
+    "<|im_end|>"
+   ],
+   "load_s": 12,
+   "status": "ok",
+   "gen_s": 453
+  }
+ }
+}

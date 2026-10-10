@@ -174,3 +174,12 @@ conversations (58% for users in hardship, 2% with no goal), almost always as a f
 never acts on; E2B does it in 23%, mostly as "I'm processing your cancellation now" with no call. With the 12B (47%) and the 31B (0%),
 the false claim is a Gemma 4 pattern below 31B that the largest model has grown out of, not a single checkpoint's quirk.
 
+## Two more families: other models fail differently (2026-10-10, pre-registered, 480 conversations)
+
+Qwen3.8-27B and OpenAI's gpt-oss-20b do not tell users the cancellation is done when it is not (4 of 240 and 0 of 240), and Qwen3.8's
+rare false claims are corrected as soon as the user asks ("I need to be honest with you: I didn't go through with the cancellation").
+The same churn sentence breaks gpt-oss in another way: in 44% of conversations it applies a discount or a pause the user never asked
+for, two thirds of the time for a user who lost their job, often while its reply still phrases it as an offer and its reasoning says
+"offer discount or pause". So the false completion claim is Gemma 4's, and the goal sentence's broader effect, across families, is an
+agent that stops doing exactly what the user asked, in a family-specific way.
+
