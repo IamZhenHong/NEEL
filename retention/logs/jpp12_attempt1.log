@@ -1,0 +1,26 @@
+[pre] disk: 14.9 GiB free
+[pre] balance $42.27, pods 6
+[runpod] launching alongside 6 pod(s) not ours (left alone): retention_cancel_compaction_qwen32 $1.79/hr, persona-prep $1.79/hr, retention_codeclaim_qwen32 $1.79/hr, retention_cancel_compaction_g12 $0.59/hr, retention_codeclaim_qwen38 $1.79/hr, retention_codeclaim_g12 $0.59/hr
+[runpod] pod grhu00190e92a1 (?) at $1.79/hr; time cap 270 min; budget $8.2
+[pod] ssh root@154.54.102.43 -p 16165
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 300 min (job limit 270 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=30f75ca-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'set -euo pipefail; mkdir -p /root/jpp_lens && curl -sSfL --max-time 180 https://codeload.github.com/safety-research/jpp_lens/tar.gz/93f02cd6c27db765abb127f20eff656bb5d27340 | tar -xz --strip-components=1 -C /root/jpp_lens && echo 93f02cd6c27db765abb127f20eff656bb5d27340 > /root/jpp_lens/.commit && uv pip install -q --python /root/venv/bin/python datasets pandas pyarrow && python -c "import torch, transformers, datasets, pandas; print(torch.__version__, transformers.__version__, datasets.__version__, pandas.__version__)" && free -g && python retention/jpp_fit_gemma12.py --jpp /root/jpp_lens --work /root/jpp12_smoke --out retention/results/retention_jpp12/smoke/fit --smoke && python retention/run_jpp12.py --jpp /root/jpp_lens --work /root/jpp12_smoke --out retention/results/retention_jpp12/smoke --limit 4 && rm -rf /root/jpp12_smoke && python retention/jpp_fit_gemma12.py --jpp /root/jpp_lens --work /root/jpp12 --out retention/results/retention_jpp12/fit && python retention/run_jpp12.py --jpp /root/jpp_lens --work /root/jpp12 --out retention/results/retention_jpp12'
+[job] start 20:25:27
+2.14.1+cu126 5.17.0 5.1.0 3.0.6
+               total        used        free      shared  buff/cache   available
+Mem:            2003         138         508          83        1356        1767
+Swap:              0           0           0
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 8269.01it/s]
+[load] 83s HFLensModel(Gemma4UnifiedForConditionalGeneration, n_layers=48, d_model=3840) device cuda:0
+[lrp] {'rel_diff_by_layer': {4: 0.008011500351130962, 46: 0.057671479880809784, 47: 0.03925235569477081}, 'top1_agree': 0.9375, 'ln_rule': 193, 'mlp_rule': 48, 'expected_ln': 193, 'expected_mlp': 48}
+/root/.local/share/uv/python/cpython-3.15.0-linux-x86_64-gnu/lib/python3.15/multiprocessing/resource_tracker.py:475: UserWarning: resource_tracker: There appear to be 1 leaked semaphore objects to clean up at shutdown: {'/loky-571-gy3tm_23'}
+  warnings.warn(
+Terminated
+__JOB_EXIT__143[pod] job exit code 143; elapsed cost ~$0.494
+[local] results synced ./retention/results/retention_jpp12/ (2 files, 0 MiB, verified against the pod)
+[runpod] terminated grhu00190e92a1; elapsed cost ~$0.497
+[runpod] other pods present (not ours, left alone): [('retention_codeclaim_g12', '0n72fxu8wu95sn', 0.59)]
+[post] balance $40.89, pods 1

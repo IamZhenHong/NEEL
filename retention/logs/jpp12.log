@@ -1,0 +1,178 @@
+[pre] disk: 14.9 GiB free
+[pre] balance $40.89, pods 1
+[runpod] launching alongside 1 pod(s) not ours (left alone): retention_codeclaim_g12 $0.59/hr
+[runpod] pod g8ahou71xghweq (?) at $1.79/hr; time cap 270 min; budget $8.2
+[pod] ssh root@213.173.105.6 -p 30019
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 300 min (job limit 270 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=a9a0964-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'set -euo pipefail; export OMP_NUM_THREADS=12 MKL_NUM_THREADS=12; mkdir -p /root/jpp_lens && curl -sSfL --max-time 180 https://codeload.github.com/safety-research/jpp_lens/tar.gz/93f02cd6c27db765abb127f20eff656bb5d27340 | tar -xz --strip-components=1 -C /root/jpp_lens && echo 93f02cd6c27db765abb127f20eff656bb5d27340 > /root/jpp_lens/.commit && uv pip install -q --python /root/venv/bin/python datasets pandas pyarrow && python -c "import torch, transformers, datasets, pandas; print(torch.__version__, transformers.__version__, datasets.__version__, pandas.__version__, torch.get_num_threads())" && cat /sys/fs/cgroup/cpu.max || true; python retention/jpp_fit_gemma12.py --jpp /root/jpp_lens --work /root/jpp12_smoke --out retention/results/retention_jpp12/smoke/fit --smoke && python retention/run_jpp12.py --jpp /root/jpp_lens --work /root/jpp12_smoke --out retention/results/retention_jpp12/smoke --limit 4 && rm -rf /root/jpp12_smoke && python retention/jpp_fit_gemma12.py --jpp /root/jpp_lens --work /root/jpp12 --out retention/results/retention_jpp12/fit && python retention/run_jpp12.py --jpp /root/jpp_lens --work /root/jpp12 --out retention/results/retention_jpp12'
+[job] start 20:43:46
+2.14.1+cu126 5.17.0 5.1.0 3.0.6 12
+cat: /sys/fs/cgroup/cpu.max: No such file or directory
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  67%|██████▋   | 453/677 [00:00<00:00, 4509.87it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 4341.05it/s]
+[load] 38s HFLensModel(Gemma4UnifiedForConditionalGeneration, n_layers=48, d_model=3840) device cuda:0
+[lrp] {'rel_diff_by_layer': {4: 0.008011500351130962, 46: 0.057671479880809784, 47: 0.03925235569477081}, 'top1_agree': 0.9375, 'ln_rule': 193, 'mlp_rule': 48, 'expected_ln': 193, 'expected_mlp': 48}
+[router] 15s
+[fit] prompt 1/2 80s (total 1.3 min)
+[fit] prompt 2/2 81s (total 2.7 min)
+layer 4: experts [0, 1, 3, 4, 5, 6, 7] kept fewer than 50 position(s) (counts [28, 35, 58, 28, 11, 39, 8, 15]); using the pooled Jacobian for them
+layer 8: experts [0, 1, 3, 4, 5, 6, 7] kept fewer than 50 position(s) (counts [24, 16, 86, 25, 6, 17, 29, 19]); using the pooled Jacobian for them
+layer 12: experts [0, 1, 4, 5, 6, 7] kept fewer than 50 position(s) (counts [14, 17, 51, 56, 17, 29, 21, 17]); using the pooled Jacobian for them
+layer 16: experts [0, 1, 2, 4, 5, 6, 7] kept fewer than 50 position(s) (counts [27, 14, 4, 61, 33, 17, 41, 25]); using the pooled Jacobian for them
+layer 20: experts [0, 1, 2, 4, 5, 6, 7] kept fewer than 50 position(s) (counts [18, 41, 12, 67, 6, 27, 31, 20]); using the pooled Jacobian for them
+layer 24: experts [0, 1, 2, 3, 5, 6, 7] kept fewer than 50 position(s) (counts [15, 35, 34, 19, 72, 6, 14, 27]); using the pooled Jacobian for them
+layer 28: experts [0, 1, 2, 4, 5, 6, 7] kept fewer than 50 position(s) (counts [33, 34, 13, 76, 15, 14, 12, 25]); using the pooled Jacobian for them
+layer 32: experts [0, 1, 3, 4, 5, 6, 7] kept fewer than 50 position(s) (counts [31, 28, 66, 0, 9, 15, 47, 26]); using the pooled Jacobian for them
+layer 36: experts [0, 3, 4, 5, 6, 7] kept fewer than 50 position(s) (counts [13, 54, 67, 28, 14, 11, 24, 11]); using the pooled Jacobian for them
+layer 40: experts [0, 1, 3, 4, 5, 6, 7] kept fewer than 50 position(s) (counts [28, 44, 54, 28, 14, 9, 20, 25]); using the pooled Jacobian for them
+layer 44: experts [0, 1, 2, 3, 4, 5, 6, 7] kept fewer than 50 position(s) (counts [27, 31, 30, 48, 11, 10, 40, 25]); using the pooled Jacobian for them
+layer 46: experts [0, 1, 2, 3, 4, 5, 6, 7] kept fewer than 50 position(s) (counts [29, 29, 31, 45, 31, 13, 22, 22]); using the pooled Jacobian for them
+[items] {'after_correctness': 248, 'fit_split': 48, 'held_out_scored': 40, 'n_excluded_ids': 8439} {'multihop': {'n': 93, 'correct_or_ungraded': 5}, 'multilingual': {'n': 107, 'correct_or_ungraded': 11}, 'typo': {'n': 96, 'correct_or_ungraded': 96}, 'association': {'n': 102, 'correct_or_ungraded': 102}, 'poetry': {'n': 98, 'correct_or_ungraded': 34}}
+        eval   lens  k weighting  pass_at_k
+ association    jpp 10      item   0.000000
+ association  logit 10      item   0.529412
+ association pooled 10      item   0.058824
+    multihop    jpp 10      item   0.000000
+    multihop  logit 10      item   1.000000
+    multihop pooled 10      item   0.000000
+multilingual    jpp 10      item   0.375000
+multilingual  logit 10      item   0.750000
+multilingual pooled 10      item   0.375000
+      poetry    jpp 10      item   0.000000
+      poetry  logit 10      item   0.600000
+      poetry pooled 10      item   0.000000
+        typo    jpp 10      item   1.000000
+        typo  logit 10      item   0.933333
+        typo pooled 10      item   0.800000
+       macro    jpp 10      item   0.275000
+       macro  logit 10      item   0.762549
+       macro pooled 10      item   0.246765
+[done] 266s; lens at /root/jpp12_smoke/lens.pt
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  68%|██████▊   | 457/677 [00:00<00:00, 4513.22it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 4681.27it/s]
+[load] 9s, 8 items, excluded ids 8439
+[read] 8/8 2s
+[atoms] [(' call', 1798.5), (' canceled', 2866.5), (' canceling', 3687.1), (' tools', 4763.9)] | null [' table', ' window', ' pencil', ' carpet']
+[selfcheck] {'unembed_vs_model_logits_maxabs': 0.0, 'identity_edit_minus_base_p_end': 0.0}
+[causal] 8/8 5s
+[done] 16s {'unembed_vs_model_logits_maxabs': 0.0, 'identity_edit_minus_base_p_end': 0.0}
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  63%|██████▎   | 427/677 [00:00<00:00, 4268.75it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 4757.45it/s]
+[load] 7s HFLensModel(Gemma4UnifiedForConditionalGeneration, n_layers=48, d_model=3840) device cuda:0
+[lrp] {'rel_diff_by_layer': {4: 0.008011500351130962, 46: 0.057671479880809784, 47: 0.03925235569477081}, 'top1_agree': 0.9375, 'ln_rule': 193, 'mlp_rule': 48, 'expected_ln': 193, 'expected_mlp': 48}
+[router] 145s
+[fit] prompt 1/64 81s (total 1.4 min)
+[fit] prompt 2/64 81s (total 2.7 min)
+[fit] prompt 3/64 82s (total 4.1 min)
+[fit] prompt 4/64 82s (total 5.4 min)
+[fit] prompt 5/64 81s (total 6.8 min)
+[fit] prompt 6/64 81s (total 8.2 min)
+[fit] prompt 7/64 81s (total 9.5 min)
+[fit] prompt 8/64 81s (total 10.9 min)
+[fit] prompt 9/64 82s (total 12.2 min)
+[fit] prompt 10/64 81s (total 13.6 min)
+[fit] prompt 11/64 81s (total 15.0 min)
+[fit] prompt 12/64 81s (total 16.3 min)
+[fit] prompt 13/64 81s (total 17.7 min)
+[fit] prompt 14/64 81s (total 19.0 min)
+[fit] prompt 15/64 82s (total 20.4 min)
+[fit] prompt 16/64 82s (total 21.7 min)
+[fit] prompt 17/64 83s (total 23.1 min)
+[fit] prompt 18/64 82s (total 24.5 min)
+[fit] prompt 19/64 82s (total 25.9 min)
+[fit] prompt 20/64 82s (total 27.2 min)
+[fit] prompt 21/64 82s (total 28.6 min)
+[fit] prompt 22/64 82s (total 30.0 min)
+[fit] prompt 23/64 82s (total 31.3 min)
+[fit] prompt 24/64 82s (total 32.7 min)
+[fit] prompt 25/64 82s (total 34.1 min)
+[fit] prompt 26/64 83s (total 35.5 min)
+[fit] prompt 27/64 82s (total 36.8 min)
+[fit] prompt 28/64 83s (total 38.2 min)
+[fit] prompt 29/64 83s (total 39.6 min)
+[fit] prompt 30/64 83s (total 41.0 min)
+[fit] prompt 31/64 82s (total 42.4 min)
+[fit] prompt 32/64 82s (total 43.7 min)
+[fit] prompt 33/64 82s (total 45.1 min)
+[fit] prompt 34/64 82s (total 46.5 min)
+[fit] prompt 35/64 82s (total 47.8 min)
+[fit] prompt 36/64 82s (total 49.2 min)
+[fit] prompt 37/64 82s (total 50.6 min)
+[fit] prompt 38/64 83s (total 51.9 min)
+[fit] prompt 39/64 82s (total 53.3 min)
+[fit] prompt 40/64 82s (total 54.7 min)
+[fit] prompt 41/64 83s (total 56.1 min)
+[fit] prompt 42/64 82s (total 57.4 min)
+[fit] prompt 43/64 82s (total 58.8 min)
+[fit] prompt 44/64 82s (total 60.1 min)
+[fit] prompt 45/64 82s (total 61.5 min)
+[fit] prompt 46/64 82s (total 62.9 min)
+[fit] prompt 47/64 82s (total 64.2 min)
+[fit] prompt 48/64 82s (total 65.6 min)
+[fit] prompt 49/64 82s (total 67.0 min)
+[fit] prompt 50/64 83s (total 68.3 min)
+[fit] prompt 51/64 82s (total 69.7 min)
+[fit] prompt 52/64 82s (total 71.1 min)
+[fit] prompt 53/64 82s (total 72.4 min)
+[fit] prompt 54/64 82s (total 73.8 min)
+[fit] prompt 55/64 83s (total 75.2 min)
+[fit] prompt 56/64 83s (total 76.6 min)
+[fit] prompt 57/64 82s (total 77.9 min)
+[fit] prompt 58/64 82s (total 79.3 min)
+[fit] prompt 59/64 82s (total 80.7 min)
+[fit] prompt 60/64 83s (total 82.0 min)
+[fit] prompt 61/64 82s (total 83.4 min)
+[fit] prompt 62/64 83s (total 84.8 min)
+[fit] prompt 63/64 82s (total 86.2 min)
+[fit] prompt 64/64 82s (total 87.5 min)
+layer 12: experts [0] kept fewer than 50 position(s) (counts [25, 229, 1008, 1336, 497, 463, 608, 2935]); using the pooled Jacobian for them
+[items] {'after_correctness': 248, 'fit_split': 48, 'held_out_scored': 200, 'n_excluded_ids': 8439} {'multihop': {'n': 93, 'correct_or_ungraded': 5}, 'multilingual': {'n': 107, 'correct_or_ungraded': 11}, 'typo': {'n': 96, 'correct_or_ungraded': 96}, 'association': {'n': 102, 'correct_or_ungraded': 102}, 'poetry': {'n': 98, 'correct_or_ungraded': 34}}
+        eval   lens  k weighting  pass_at_k
+ association    jpp 10      item   0.012195
+ association  logit 10      item   0.621951
+ association pooled 10      item   0.024390
+    multihop    jpp 10      item   0.250000
+    multihop  logit 10      item   1.000000
+    multihop pooled 10      item   0.000000
+multilingual    jpp 10      item   0.277778
+multilingual  logit 10      item   0.555556
+multilingual pooled 10      item   0.277778
+      poetry    jpp 10      item   0.464286
+      poetry  logit 10      item   0.678571
+      poetry pooled 10      item   0.071429
+        typo    jpp 10      item   1.000000
+        typo  logit 10      item   0.987013
+        typo pooled 10      item   0.844156
+       macro    jpp 10      item   0.400852
+       macro  logit 10      item   0.768618
+       macro pooled 10      item   0.243550
+[done] 5509s; lens at /root/jpp12/lens.pt
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  79%|███████▊  | 533/677 [00:00<00:00, 5314.79it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 5438.60it/s]
+[load] 10s, 249 items, excluded ids 8439
+[read] 25/249 7s
+[read] 50/249 13s
+[read] 75/249 19s
+[read] 100/249 24s
+[read] 125/249 30s
+[read] 150/249 36s
+[read] 175/249 42s
+[read] 200/249 48s
+[read] 225/249 54s
+[read] 249/249 60s
+[atoms] [(' canceled', 15473.9), (' call', 22193.9), (' cancel', 22307.1), ('Call', 24119.2)] | null [' table', ' window', ' pencil', ' carpet']
+[selfcheck] {'unembed_vs_model_logits_maxabs': 0.0, 'identity_edit_minus_base_p_end': 0.0}
+[causal] 25/249 17s
+[causal] 50/249 35s
+[causal] 75/249 54s
+[causal] 100/249 70s
+[causal] 125/249 87s
+[causal] 150/249 106s
+[causal] 175/249 125s
+[causal] 200/249 144s
+[causal] 225/249 163s
+[causal] 249/249 181s
+[done] 251s {'unembed_vs_model_logits_maxabs': 0.0, 'identity_edit_minus_base_p_end': 0.0}
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$3.085
+[local] results synced ./retention/results/retention_jpp12/ (18 files, 8 MiB, verified against the pod)
+[runpod] terminated g8ahou71xghweq; elapsed cost ~$3.088
+[post] balance $35.16, pods 0

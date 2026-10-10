@@ -1,0 +1,88 @@
+[load] 7s HFLensModel(Gemma4UnifiedForConditionalGeneration, n_layers=48, d_model=3840) device cuda:0
+[lrp] {'rel_diff_by_layer': {4: 0.008011500351130962, 46: 0.057671479880809784, 47: 0.03925235569477081}, 'top1_agree': 0.9375, 'ln_rule': 193, 'mlp_rule': 48, 'expected_ln': 193, 'expected_mlp': 48}
+[router] 145s
+[fit] prompt 1/64 81s (total 1.4 min)
+[fit] prompt 2/64 81s (total 2.7 min)
+[fit] prompt 3/64 82s (total 4.1 min)
+[fit] prompt 4/64 82s (total 5.4 min)
+[fit] prompt 5/64 81s (total 6.8 min)
+[fit] prompt 6/64 81s (total 8.2 min)
+[fit] prompt 7/64 81s (total 9.5 min)
+[fit] prompt 8/64 81s (total 10.9 min)
+[fit] prompt 9/64 82s (total 12.2 min)
+[fit] prompt 10/64 81s (total 13.6 min)
+[fit] prompt 11/64 81s (total 15.0 min)
+[fit] prompt 12/64 81s (total 16.3 min)
+[fit] prompt 13/64 81s (total 17.7 min)
+[fit] prompt 14/64 81s (total 19.0 min)
+[fit] prompt 15/64 82s (total 20.4 min)
+[fit] prompt 16/64 82s (total 21.7 min)
+[fit] prompt 17/64 83s (total 23.1 min)
+[fit] prompt 18/64 82s (total 24.5 min)
+[fit] prompt 19/64 82s (total 25.9 min)
+[fit] prompt 20/64 82s (total 27.2 min)
+[fit] prompt 21/64 82s (total 28.6 min)
+[fit] prompt 22/64 82s (total 30.0 min)
+[fit] prompt 23/64 82s (total 31.3 min)
+[fit] prompt 24/64 82s (total 32.7 min)
+[fit] prompt 25/64 82s (total 34.1 min)
+[fit] prompt 26/64 83s (total 35.5 min)
+[fit] prompt 27/64 82s (total 36.8 min)
+[fit] prompt 28/64 83s (total 38.2 min)
+[fit] prompt 29/64 83s (total 39.6 min)
+[fit] prompt 30/64 83s (total 41.0 min)
+[fit] prompt 31/64 82s (total 42.4 min)
+[fit] prompt 32/64 82s (total 43.7 min)
+[fit] prompt 33/64 82s (total 45.1 min)
+[fit] prompt 34/64 82s (total 46.5 min)
+[fit] prompt 35/64 82s (total 47.8 min)
+[fit] prompt 36/64 82s (total 49.2 min)
+[fit] prompt 37/64 82s (total 50.6 min)
+[fit] prompt 38/64 83s (total 51.9 min)
+[fit] prompt 39/64 82s (total 53.3 min)
+[fit] prompt 40/64 82s (total 54.7 min)
+[fit] prompt 41/64 83s (total 56.1 min)
+[fit] prompt 42/64 82s (total 57.4 min)
+[fit] prompt 43/64 82s (total 58.8 min)
+[fit] prompt 44/64 82s (total 60.1 min)
+[fit] prompt 45/64 82s (total 61.5 min)
+[fit] prompt 46/64 82s (total 62.9 min)
+[fit] prompt 47/64 82s (total 64.2 min)
+[fit] prompt 48/64 82s (total 65.6 min)
+[fit] prompt 49/64 82s (total 67.0 min)
+[fit] prompt 50/64 83s (total 68.3 min)
+[fit] prompt 51/64 82s (total 69.7 min)
+[fit] prompt 52/64 82s (total 71.1 min)
+[fit] prompt 53/64 82s (total 72.4 min)
+[fit] prompt 54/64 82s (total 73.8 min)
+[fit] prompt 55/64 83s (total 75.2 min)
+[fit] prompt 56/64 83s (total 76.6 min)
+[fit] prompt 57/64 82s (total 77.9 min)
+[fit] prompt 58/64 82s (total 79.3 min)
+[fit] prompt 59/64 82s (total 80.7 min)
+[fit] prompt 60/64 83s (total 82.0 min)
+[fit] prompt 61/64 82s (total 83.4 min)
+[fit] prompt 62/64 83s (total 84.8 min)
+[fit] prompt 63/64 82s (total 86.2 min)
+[fit] prompt 64/64 82s (total 87.5 min)
+[items] {'after_correctness': 248, 'fit_split': 48, 'held_out_scored': 200, 'n_excluded_ids': 8439} {'multihop': {'n': 93, 'correct_or_ungraded': 5}, 'multilingual': {'n': 107, 'correct_or_ungraded': 11}, 'typo': {'n': 96, 'correct_or_ungraded': 96}, 'association': {'n': 102, 'correct_or_ungraded': 102}, 'poetry': {'n': 98, 'correct_or_ungraded': 34}}
+        eval   lens  k weighting  pass_at_k
+ association    jpp 10      item   0.012195
+ association  logit 10      item   0.621951
+ association pooled 10      item   0.024390
+    multihop    jpp 10      item   0.250000
+    multihop  logit 10      item   1.000000
+    multihop pooled 10      item   0.000000
+multilingual    jpp 10      item   0.277778
+multilingual  logit 10      item   0.555556
+multilingual pooled 10      item   0.277778
+      poetry    jpp 10      item   0.464286
+      poetry  logit 10      item   0.678571
+      poetry pooled 10      item   0.071429
+        typo    jpp 10      item   1.000000
+        typo  logit 10      item   0.987013
+        typo pooled 10      item   0.844156
+       macro    jpp 10      item   0.400852
+       macro  logit 10      item   0.768618
+       macro pooled 10      item   0.243550
+[done] 5509s; lens at /root/jpp12/lens.pt

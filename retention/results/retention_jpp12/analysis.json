@@ -1,0 +1,3253 @@
+{
+ "n": {
+  "claim_nocall": 224,
+  "claim_call": 25
+ },
+ "fit": {
+  "lrp_selfcheck": {
+   "rel_diff_by_layer": {
+    "4": 0.008011500351130962,
+    "46": 0.057671479880809784,
+    "47": 0.03925235569477081
+   },
+   "top1_agree": 0.9375,
+   "ln_rule": 193,
+   "mlp_rule": 48,
+   "expected_ln": 193,
+   "expected_mlp": 48
+  },
+  "items": {
+   "after_correctness": 248,
+   "fit_split": 48,
+   "held_out_scored": 200,
+   "n_excluded_ids": 8439
+  },
+  "correct_by_eval": {
+   "multihop": {
+    "n": 93,
+    "correct_or_ungraded": 5
+   },
+   "multilingual": {
+    "n": 107,
+    "correct_or_ungraded": 11
+   },
+   "typo": {
+    "n": 96,
+    "correct_or_ungraded": 96
+   },
+   "association": {
+    "n": 102,
+    "correct_or_ungraded": 102
+   },
+   "poetry": {
+    "n": 98,
+    "correct_or_ungraded": 34
+   }
+  },
+  "train_macro_pass": {
+   "4": 0.010526316240429878,
+   "8": 0.04605263099074364,
+   "12": 0.07543859630823135,
+   "16": 0.16842105984687805,
+   "20": 0.16842105984687805,
+   "24": 0.1473684161901474,
+   "28": 0.17894737422466278,
+   "32": 0.28947368264198303,
+   "36": 0.31842106580734253,
+   "40": 0.3499999940395355,
+   "44": 0.339473694562912,
+   "46": 0.1280701756477356
+  },
+  "timing_s": {
+   "prompts": 11,
+   "router": 145,
+   "fit": 5254,
+   "grade": 18,
+   "weights": 50,
+   "evaluate": 28
+  }
+ },
+ "n_prompts_fitted": 64,
+ "fallback_experts": {
+  "4": [],
+  "8": [],
+  "12": [
+   0
+  ],
+  "16": [],
+  "20": [],
+  "24": [],
+  "28": [],
+  "32": [],
+  "36": [],
+  "40": [],
+  "44": [],
+  "46": []
+ },
+ "recall10_pc": {
+  "jpp": {
+   "multihop": {
+    "recall": 0.25,
+    "n_items": 4
+   },
+   "multilingual": {
+    "recall": 0.1388888888888889,
+    "n_items": 9
+   },
+   "typo": {
+    "recall": 1.0,
+    "n_items": 77
+   },
+   "association": {
+    "recall": 0.012195121951219513,
+    "n_items": 82
+   },
+   "poetry": {
+    "recall": 0.4642857142857143,
+    "n_items": 28
+   },
+   "macro": {
+    "recall": 0.49216027874564466,
+    "evals": [
+     "typo",
+     "association",
+     "poetry"
+    ]
+   }
+  },
+  "pooled": {
+   "multihop": {
+    "recall": 0.0,
+    "n_items": 4
+   },
+   "multilingual": {
+    "recall": 0.19444444444444445,
+    "n_items": 9
+   },
+   "typo": {
+    "recall": 0.7792207792207793,
+    "n_items": 77
+   },
+   "association": {
+    "recall": 0.012195121951219513,
+    "n_items": 82
+   },
+   "poetry": {
+    "recall": 0.07142857142857142,
+    "n_items": 28
+   },
+   "macro": {
+    "recall": 0.2876148242001901,
+    "evals": [
+     "typo",
+     "association",
+     "poetry"
+    ]
+   }
+  },
+  "logit": {
+   "multihop": {
+    "recall": 1.0,
+    "n_items": 4
+   },
+   "multilingual": {
+    "recall": 0.5,
+    "n_items": 9
+   },
+   "typo": {
+    "recall": 0.987012987012987,
+    "n_items": 77
+   },
+   "association": {
+    "recall": 0.5487804878048781,
+    "n_items": 82
+   },
+   "poetry": {
+    "recall": 0.6428571428571429,
+    "n_items": 28
+   },
+   "macro": {
+    "recall": 0.7262168725583359,
+    "evals": [
+     "typo",
+     "association",
+     "poetry"
+    ]
+   }
+  }
+ },
+ "recall1_pc": {
+  "jpp": {
+   "multihop": {
+    "recall": 0.0,
+    "n_items": 4
+   },
+   "multilingual": {
+    "recall": 0.027777777777777776,
+    "n_items": 9
+   },
+   "typo": {
+    "recall": 0.8181818181818182,
+    "n_items": 77
+   },
+   "association": {
+    "recall": 0.0,
+    "n_items": 82
+   },
+   "poetry": {
+    "recall": 0.10714285714285714,
+    "n_items": 28
+   },
+   "macro": {
+    "recall": 0.30844155844155846,
+    "evals": [
+     "typo",
+     "association",
+     "poetry"
+    ]
+   }
+  },
+  "pooled": {
+   "multihop": {
+    "recall": 0.0,
+    "n_items": 4
+   },
+   "multilingual": {
+    "recall": 0.0,
+    "n_items": 9
+   },
+   "typo": {
+    "recall": 0.4675324675324675,
+    "n_items": 77
+   },
+   "association": {
+    "recall": 0.012195121951219513,
+    "n_items": 82
+   },
+   "poetry": {
+    "recall": 0.0,
+    "n_items": 28
+   },
+   "macro": {
+    "recall": 0.15990919649456234,
+    "evals": [
+     "typo",
+     "association",
+     "poetry"
+    ]
+   }
+  },
+  "logit": {
+   "multihop": {
+    "recall": 1.0,
+    "n_items": 4
+   },
+   "multilingual": {
+    "recall": 0.4166666666666667,
+    "n_items": 9
+   },
+   "typo": {
+    "recall": 0.8701298701298701,
+    "n_items": 77
+   },
+   "association": {
+    "recall": 0.5365853658536586,
+    "n_items": 82
+   },
+   "poetry": {
+    "recall": 0.21428571428571427,
+    "n_items": 28
+   },
+   "macro": {
+    "recall": 0.5403336500897477,
+    "evals": [
+     "typo",
+     "association",
+     "poetry"
+    ]
+   }
+  }
+ },
+ "recall10_all": {
+  "jpp": {
+   "multihop": {
+    "recall": 0.25,
+    "n_items": 4
+   },
+   "multilingual": {
+    "recall": 0.2777777777777778,
+    "n_items": 9
+   },
+   "typo": {
+    "recall": 1.0,
+    "n_items": 77
+   },
+   "association": {
+    "recall": 0.012195121951219513,
+    "n_items": 82
+   },
+   "poetry": {
+    "recall": 0.4642857142857143,
+    "n_items": 28
+   },
+   "macro": {
+    "recall": 0.49216027874564466,
+    "evals": [
+     "typo",
+     "association",
+     "poetry"
+    ]
+   }
+  },
+  "pooled": {
+   "multihop": {
+    "recall": 0.0,
+    "n_items": 4
+   },
+   "multilingual": {
+    "recall": 0.2777777777777778,
+    "n_items": 9
+   },
+   "typo": {
+    "recall": 0.8441558441558441,
+    "n_items": 77
+   },
+   "association": {
+    "recall": 0.024390243902439025,
+    "n_items": 82
+   },
+   "poetry": {
+    "recall": 0.07142857142857142,
+    "n_items": 28
+   },
+   "macro": {
+    "recall": 0.3133248864956182,
+    "evals": [
+     "typo",
+     "association",
+     "poetry"
+    ]
+   }
+  },
+  "logit": {
+   "multihop": {
+    "recall": 1.0,
+    "n_items": 4
+   },
+   "multilingual": {
+    "recall": 0.5555555555555556,
+    "n_items": 9
+   },
+   "typo": {
+    "recall": 0.987012987012987,
+    "n_items": 77
+   },
+   "association": {
+    "recall": 0.6219512195121951,
+    "n_items": 82
+   },
+   "poetry": {
+    "recall": 0.6785714285714286,
+    "n_items": 28
+   },
+   "macro": {
+    "recall": 0.762511878365537,
+    "evals": [
+     "typo",
+     "association",
+     "poetry"
+    ]
+   }
+  }
+ },
+ "weak_lens": false,
+ "gate": {
+  "top1_agree_S_E_layer46": 0.014056224899598393,
+  "sign_agree_E_layer46": 0.15261044176706828,
+  "pass": false,
+  "identity_edit": 0.0,
+  "batched_base_vs_readout_p_end_maxabs": 0.1427152454853058,
+  "unembed_vs_model_logits": 0.0
+ },
+ "model_E": {
+  "claim_call": {
+   "p_end_mean": 0.2737120488914661,
+   "p_toolcall_S_mean": 0.24537835680268472
+  },
+  "claim_nocall": {
+   "p_end_mean": 0.8579819588256734,
+   "p_toolcall_S_mean": 0.0985500405136658
+  }
+ },
+ "primary_E_jpp_act": {
+  "n_nocall": 224,
+  "n_call": 25,
+  "enter_nc": 0.25,
+  "enter_c": 0.0,
+  "rs_nc": 0.25,
+  "rs_c": 0.0,
+  "seen_nc": 0.6741071428571429,
+  "seen_c": 1.0,
+  "late_nc": 0.42410714285714285,
+  "late_c": 1.0,
+  "median_best_em_rank": {
+   "nc": 50.0,
+   "c": 170.0
+  },
+  "median_rank_last": {
+   "nc": 465.0,
+   "c": 10.0
+  },
+  "rs_diff": 0.25,
+  "rs_diff_ci": [
+   0.19196428571428573,
+   0.3080357142857143
+  ],
+  "enter_diff_c_minus_nc": -0.25,
+  "enter_diff_ci": [
+   -0.30357142857142855,
+   -0.19196428571428573
+  ],
+  "row": "R1 retrieve-then-suppress (specific to no-call)"
+ },
+ "secondary": {
+  "E_jpp_toolcall": {
+   "n_nocall": 224,
+   "n_call": 25,
+   "enter_nc": 0.0,
+   "enter_c": 0.0,
+   "rs_nc": 0.0,
+   "rs_c": 0.0,
+   "seen_nc": 0.42410714285714285,
+   "seen_c": 1.0,
+   "late_nc": 0.42410714285714285,
+   "late_c": 1.0,
+   "median_best_em_rank": {
+    "nc": 42408.0,
+    "c": 6547.0
+   },
+   "median_rank_last": {
+    "nc": 465.0,
+    "c": 10.0
+   },
+   "rs_diff": 0.0,
+   "rs_diff_ci": [
+    0.0,
+    0.0
+   ],
+   "enter_diff_c_minus_nc": 0.0,
+   "enter_diff_ci": [
+    0.0,
+    0.0
+   ],
+   "row": "R2 never present"
+  },
+  "E_jpp_cancel": {
+   "n_nocall": 224,
+   "n_call": 25,
+   "enter_nc": 0.25,
+   "enter_c": 0.0,
+   "rs_nc": 0.25,
+   "rs_c": 0.0,
+   "seen_nc": 0.25,
+   "seen_c": 0.0,
+   "late_nc": 0.0,
+   "late_c": 0.0,
+   "median_best_em_rank": {
+    "nc": 50.0,
+    "c": 1061.0
+   },
+   "median_rank_last": {
+    "nc": 45172.5,
+    "c": 53088.0
+   },
+   "rs_diff": 0.25,
+   "rs_diff_ci": [
+    0.19196428571428573,
+    0.3080357142857143
+   ],
+   "enter_diff_c_minus_nc": -0.25,
+   "enter_diff_ci": [
+    -0.30357142857142855,
+    -0.19642857142857142
+   ],
+   "row": "R1 retrieve-then-suppress (specific to no-call)"
+  },
+  "E_jpp_tool": {
+   "n_nocall": 224,
+   "n_call": 25,
+   "enter_nc": 0.0,
+   "enter_c": 0.0,
+   "rs_nc": 0.0,
+   "rs_c": 0.0,
+   "seen_nc": 0.42410714285714285,
+   "seen_c": 1.0,
+   "late_nc": 0.42410714285714285,
+   "late_c": 1.0,
+   "median_best_em_rank": {
+    "nc": 336.0,
+    "c": 179.0
+   },
+   "median_rank_last": {
+    "nc": 465.0,
+    "c": 10.0
+   },
+   "rs_diff": 0.0,
+   "rs_diff_ci": [
+    0.0,
+    0.0
+   ],
+   "enter_diff_c_minus_nc": 0.0,
+   "enter_diff_ci": [
+    0.0,
+    0.0
+   ],
+   "row": "R2 never present"
+  },
+  "E_jpp_subscription": {
+   "n_nocall": 224,
+   "n_call": 25,
+   "enter_nc": 0.0,
+   "enter_c": 0.0,
+   "rs_nc": 0.0,
+   "rs_c": 0.0,
+   "seen_nc": 0.0,
+   "seen_c": 0.0,
+   "late_nc": 0.0,
+   "late_c": 0.0,
+   "median_best_em_rank": {
+    "nc": 2995.0,
+    "c": 22820.0
+   },
+   "median_rank_last": {
+    "nc": 704.0,
+    "c": 3835.0
+   },
+   "rs_diff": 0.0,
+   "rs_diff_ci": [
+    0.0,
+    0.0
+   ],
+   "enter_diff_c_minus_nc": 0.0,
+   "enter_diff_ci": [
+    0.0,
+    0.0
+   ],
+   "row": "R3 lens blind at this position (uninformative)"
+  },
+  "E_jpp_completion": {
+   "n_nocall": 224,
+   "n_call": 25,
+   "enter_nc": 0.0,
+   "enter_c": 0.0,
+   "rs_nc": 0.0,
+   "rs_c": 0.0,
+   "seen_nc": 0.0,
+   "seen_c": 0.0,
+   "late_nc": 0.0,
+   "late_c": 0.0,
+   "median_best_em_rank": {
+    "nc": 332.5,
+    "c": 759.0
+   },
+   "median_rank_last": {
+    "nc": 8863.0,
+    "c": 6920.0
+   },
+   "rs_diff": 0.0,
+   "rs_diff_ci": [
+    0.0,
+    0.0
+   ],
+   "enter_diff_c_minus_nc": 0.0,
+   "enter_diff_ci": [
+    0.0,
+    0.0
+   ],
+   "row": "R3 lens blind at this position (uninformative)"
+  },
+  "S_jpp_act": {
+   "n_nocall": 224,
+   "n_call": 25,
+   "enter_nc": 0.0,
+   "enter_c": 0.0,
+   "rs_nc": 0.0,
+   "rs_c": 0.0,
+   "seen_nc": 0.5669642857142857,
+   "seen_c": 0.88,
+   "late_nc": 0.5669642857142857,
+   "late_c": 0.88,
+   "median_best_em_rank": {
+    "nc": 412.5,
+    "c": 345.0
+   },
+   "median_rank_last": {
+    "nc": 9.0,
+    "c": 1.0
+   },
+   "rs_diff": 0.0,
+   "rs_diff_ci": [
+    0.0,
+    0.0
+   ],
+   "enter_diff_c_minus_nc": 0.0,
+   "enter_diff_ci": [
+    0.0,
+    0.0
+   ],
+   "row": "R2 never present"
+  },
+  "C_jpp_act": {
+   "n_nocall": 151,
+   "n_call": 21,
+   "enter_nc": 0.0,
+   "enter_c": 0.0,
+   "rs_nc": 0.0,
+   "rs_c": 0.0,
+   "seen_nc": 1.0,
+   "seen_c": 1.0,
+   "late_nc": 1.0,
+   "late_c": 1.0,
+   "median_best_em_rank": {
+    "nc": 50.0,
+    "c": 49.0
+   },
+   "median_rank_last": {
+    "nc": 272.0,
+    "c": 172.0
+   },
+   "rs_diff": 0.0,
+   "rs_diff_ci": [
+    0.0,
+    0.0
+   ],
+   "enter_diff_c_minus_nc": 0.0,
+   "enter_diff_ci": [
+    0.0,
+    0.0
+   ],
+   "row": "R2 never present"
+  },
+  "E_pooled_act": {
+   "n_nocall": 224,
+   "n_call": 25,
+   "enter_nc": 0.08482142857142858,
+   "enter_c": 0.0,
+   "rs_nc": 0.08035714285714286,
+   "rs_c": 0.0,
+   "seen_nc": 0.4017857142857143,
+   "seen_c": 1.0,
+   "late_nc": 0.3169642857142857,
+   "late_c": 1.0,
+   "median_best_em_rank": {
+    "nc": 30.0,
+    "c": 62.0
+   },
+   "median_rank_last": {
+    "nc": 253.0,
+    "c": 9.0
+   },
+   "rs_diff": 0.08035714285714286,
+   "rs_diff_ci": [
+    0.044642857142857144,
+    0.11607142857142858
+   ],
+   "enter_diff_c_minus_nc": -0.08482142857142858,
+   "enter_diff_ci": [
+    -0.125,
+    -0.049107142857142856
+   ],
+   "row": "R2 never present"
+  },
+  "E_logit_act": {
+   "n_nocall": 224,
+   "n_call": 25,
+   "enter_nc": 1.0,
+   "enter_c": 1.0,
+   "rs_nc": 0.8705357142857143,
+   "rs_c": 0.04,
+   "seen_nc": 1.0,
+   "seen_c": 1.0,
+   "late_nc": 0.12946428571428573,
+   "late_c": 0.96,
+   "median_best_em_rank": {
+    "nc": 1.0,
+    "c": 1.0
+   },
+   "median_rank_last": {
+    "nc": 851.5,
+    "c": 4.0
+   },
+   "rs_diff": 0.8305357142857143,
+   "rs_diff_ci": [
+    0.7282142857142857,
+    0.9017857142857143
+   ],
+   "enter_diff_c_minus_nc": 0.0,
+   "enter_diff_ci": [
+    0.0,
+    0.0
+   ],
+   "row": "R1 retrieve-then-suppress (specific to no-call)"
+  }
+ },
+ "curves_jpp": {
+  "S|act|claim_call": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 7569.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 6443.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 5863.0
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 878.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 9576.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 847.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 362.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 394.0
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 1105.0
+   },
+   "40": {
+    "top10": 0.08,
+    "median_rank": 76.0
+   },
+   "44": {
+    "top10": 0.68,
+    "median_rank": 4.0
+   },
+   "46": {
+    "top10": 0.88,
+    "median_rank": 1.0
+   }
+  },
+  "S|act|claim_nocall": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 7525.5
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 6284.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 5783.5
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 868.5
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 9916.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 876.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 448.5
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 478.0
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 2065.5
+   },
+   "40": {
+    "top10": 0.004464285714285714,
+    "median_rank": 344.0
+   },
+   "44": {
+    "top10": 0.28125,
+    "median_rank": 29.0
+   },
+   "46": {
+    "top10": 0.5669642857142857,
+    "median_rank": 9.0
+   }
+  },
+  "S|toolcall|claim_call": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 228648.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 217808.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 101820.0
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 134154.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 46984.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 31467.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 34243.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 141554.0
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 4298.0
+   },
+   "40": {
+    "top10": 0.08,
+    "median_rank": 76.0
+   },
+   "44": {
+    "top10": 0.68,
+    "median_rank": 4.0
+   },
+   "46": {
+    "top10": 0.88,
+    "median_rank": 1.0
+   }
+  },
+  "S|toolcall|claim_nocall": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 228506.5
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 217391.5
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 100742.5
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 132704.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 48662.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 32381.5
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 39868.5
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 144226.0
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 6475.5
+   },
+   "40": {
+    "top10": 0.004464285714285714,
+    "median_rank": 344.0
+   },
+   "44": {
+    "top10": 0.28125,
+    "median_rank": 29.0
+   },
+   "46": {
+    "top10": 0.5669642857142857,
+    "median_rank": 9.0
+   }
+  },
+  "S|cancel|claim_call": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 7569.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 6443.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 5863.0
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 878.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 12336.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 7093.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 362.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 394.0
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 1201.0
+   },
+   "40": {
+    "top10": 0.0,
+    "median_rank": 761.0
+   },
+   "44": {
+    "top10": 0.0,
+    "median_rank": 17687.0
+   },
+   "46": {
+    "top10": 0.0,
+    "median_rank": 51580.0
+   }
+  },
+  "S|cancel|claim_nocall": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 7525.5
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 6284.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 5783.5
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 868.5
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 12715.5
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 7607.5
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 448.5
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 478.0
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 5123.0
+   },
+   "40": {
+    "top10": 0.0,
+    "median_rank": 1561.5
+   },
+   "44": {
+    "top10": 0.0,
+    "median_rank": 24173.0
+   },
+   "46": {
+    "top10": 0.0,
+    "median_rank": 49468.5
+   }
+  },
+  "S|end|claim_call": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 91730.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 29119.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 3063.0
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 187720.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 1820.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 389.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 93.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 117411.0
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 8420.0
+   },
+   "40": {
+    "top10": 0.0,
+    "median_rank": 27801.0
+   },
+   "44": {
+    "top10": 0.0,
+    "median_rank": 614.0
+   },
+   "46": {
+    "top10": 0.0,
+    "median_rank": 246828.0
+   }
+  },
+  "S|end|claim_nocall": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 92151.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 29426.5
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 2709.5
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 187689.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 1895.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 383.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 91.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 98765.0
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 10142.0
+   },
+   "40": {
+    "top10": 0.0,
+    "median_rank": 17115.0
+   },
+   "44": {
+    "top10": 0.0,
+    "median_rank": 188.0
+   },
+   "46": {
+    "top10": 0.0,
+    "median_rank": 242246.5
+   }
+  },
+  "E|act|claim_call": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 12622.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 1009.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 1334.0
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 3162.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 621.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 260.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 170.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 4513.0
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 37.0
+   },
+   "40": {
+    "top10": 1.0,
+    "median_rank": 1.0
+   },
+   "44": {
+    "top10": 1.0,
+    "median_rank": 1.0
+   },
+   "46": {
+    "top10": 0.56,
+    "median_rank": 10.0
+   }
+  },
+  "E|act|claim_nocall": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 12319.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 17759.5
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 4381.0
+   },
+   "16": {
+    "top10": 0.25,
+    "median_rank": 54.5
+   },
+   "20": {
+    "top10": 0.22321428571428573,
+    "median_rank": 58.5
+   },
+   "24": {
+    "top10": 0.13392857142857142,
+    "median_rank": 224.5
+   },
+   "28": {
+    "top10": 0.013392857142857142,
+    "median_rank": 109.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 2347.5
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 310.5
+   },
+   "40": {
+    "top10": 0.22767857142857142,
+    "median_rank": 257.5
+   },
+   "44": {
+    "top10": 0.42410714285714285,
+    "median_rank": 56.5
+   },
+   "46": {
+    "top10": 0.03125,
+    "median_rank": 465.0
+   }
+  },
+  "E|toolcall|claim_call": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 238579.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 135059.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 107607.0
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 12968.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 26619.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 26342.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 6547.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 162823.0
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 65.0
+   },
+   "40": {
+    "top10": 1.0,
+    "median_rank": 1.0
+   },
+   "44": {
+    "top10": 1.0,
+    "median_rank": 1.0
+   },
+   "46": {
+    "top10": 0.56,
+    "median_rank": 10.0
+   }
+  },
+  "E|toolcall|claim_nocall": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 236717.5
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 162630.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 146243.5
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 107626.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 122109.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 134110.5
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 42408.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 136621.0
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 346.5
+   },
+   "40": {
+    "top10": 0.21875,
+    "median_rank": 474.5
+   },
+   "44": {
+    "top10": 0.42410714285714285,
+    "median_rank": 56.5
+   },
+   "46": {
+    "top10": 0.03125,
+    "median_rank": 465.0
+   }
+  },
+  "E|cancel|claim_call": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 12622.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 1009.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 16549.0
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 3162.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 1305.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 1061.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 1265.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 4513.0
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 2169.0
+   },
+   "40": {
+    "top10": 0.0,
+    "median_rank": 2309.0
+   },
+   "44": {
+    "top10": 0.0,
+    "median_rank": 26224.0
+   },
+   "46": {
+    "top10": 0.0,
+    "median_rank": 53088.0
+   }
+  },
+  "E|cancel|claim_nocall": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 12319.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 17759.5
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 13795.0
+   },
+   "16": {
+    "top10": 0.25,
+    "median_rank": 54.5
+   },
+   "20": {
+    "top10": 0.22321428571428573,
+    "median_rank": 58.5
+   },
+   "24": {
+    "top10": 0.13392857142857142,
+    "median_rank": 224.5
+   },
+   "28": {
+    "top10": 0.013392857142857142,
+    "median_rank": 109.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 2347.5
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 1214.5
+   },
+   "40": {
+    "top10": 0.0,
+    "median_rank": 2529.0
+   },
+   "44": {
+    "top10": 0.0,
+    "median_rank": 10209.0
+   },
+   "46": {
+    "top10": 0.0,
+    "median_rank": 45172.5
+   }
+  },
+  "E|end|claim_call": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 15023.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 1752.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 17447.0
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 206110.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 738.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 362.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 44.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 253705.0
+   },
+   "36": {
+    "top10": 1.0,
+    "median_rank": 1.0
+   },
+   "40": {
+    "top10": 0.16,
+    "median_rank": 25.0
+   },
+   "44": {
+    "top10": 0.72,
+    "median_rank": 5.0
+   },
+   "46": {
+    "top10": 0.0,
+    "median_rank": 31510.0
+   }
+  },
+  "E|end|claim_nocall": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 24781.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 2854.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 33001.5
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 205418.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 2013.5
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 824.5
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 220.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 253705.0
+   },
+   "36": {
+    "top10": 0.7321428571428571,
+    "median_rank": 1.0
+   },
+   "40": {
+    "top10": 0.8794642857142857,
+    "median_rank": 1.0
+   },
+   "44": {
+    "top10": 1.0,
+    "median_rank": 1.0
+   },
+   "46": {
+    "top10": 0.0,
+    "median_rank": 397.0
+   }
+  },
+  "C|act|claim_call": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 12624.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 8810.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 2100.0
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 5695.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 9878.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 4004.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 82.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 49.0
+   },
+   "36": {
+    "top10": 0.047619047619047616,
+    "median_rank": 16.0
+   },
+   "40": {
+    "top10": 1.0,
+    "median_rank": 1.0
+   },
+   "44": {
+    "top10": 1.0,
+    "median_rank": 1.0
+   },
+   "46": {
+    "top10": 0.0,
+    "median_rank": 172.0
+   }
+  },
+  "C|act|claim_nocall": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 12702.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 8932.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 2119.0
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 5851.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 10192.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 3793.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 83.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 50.0
+   },
+   "36": {
+    "top10": 0.2847682119205298,
+    "median_rank": 11.0
+   },
+   "40": {
+    "top10": 1.0,
+    "median_rank": 1.0
+   },
+   "44": {
+    "top10": 1.0,
+    "median_rank": 1.0
+   },
+   "46": {
+    "top10": 0.0,
+    "median_rank": 272.0
+   }
+  },
+  "C|toolcall|claim_call": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 241215.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 94088.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 2100.0
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 11951.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 9880.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 15718.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 16688.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 27379.0
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 10676.0
+   },
+   "40": {
+    "top10": 0.0,
+    "median_rank": 129.0
+   },
+   "44": {
+    "top10": 0.0,
+    "median_rank": 4783.0
+   },
+   "46": {
+    "top10": 0.0,
+    "median_rank": 162835.0
+   }
+  },
+  "C|toolcall|claim_nocall": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 241445.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 94997.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 2119.0
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 11831.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 10264.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 16162.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 17368.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 27569.0
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 10285.0
+   },
+   "40": {
+    "top10": 0.0,
+    "median_rank": 96.0
+   },
+   "44": {
+    "top10": 0.0,
+    "median_rank": 3100.0
+   },
+   "46": {
+    "top10": 0.0,
+    "median_rank": 167011.0
+   }
+  },
+  "C|cancel|claim_call": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 12624.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 8810.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 9522.0
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 5695.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 13804.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 4004.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 82.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 49.0
+   },
+   "36": {
+    "top10": 0.047619047619047616,
+    "median_rank": 16.0
+   },
+   "40": {
+    "top10": 1.0,
+    "median_rank": 1.0
+   },
+   "44": {
+    "top10": 1.0,
+    "median_rank": 1.0
+   },
+   "46": {
+    "top10": 0.0,
+    "median_rank": 248.0
+   }
+  },
+  "C|cancel|claim_nocall": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 12702.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 8932.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 9594.0
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 5851.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 12364.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 3793.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 83.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 50.0
+   },
+   "36": {
+    "top10": 0.2847682119205298,
+    "median_rank": 11.0
+   },
+   "40": {
+    "top10": 1.0,
+    "median_rank": 1.0
+   },
+   "44": {
+    "top10": 1.0,
+    "median_rank": 1.0
+   },
+   "46": {
+    "top10": 0.0,
+    "median_rank": 358.0
+   }
+  },
+  "C|end|claim_call": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 31518.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 3431.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 188917.0
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 252752.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 186557.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 101815.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 99289.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 190771.0
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 62917.0
+   },
+   "40": {
+    "top10": 0.0,
+    "median_rank": 123651.0
+   },
+   "44": {
+    "top10": 0.0,
+    "median_rank": 4879.0
+   },
+   "46": {
+    "top10": 0.0,
+    "median_rank": 56695.0
+   }
+  },
+  "C|end|claim_nocall": {
+   "4": {
+    "top10": 0.0,
+    "median_rank": 31757.0
+   },
+   "8": {
+    "top10": 0.0,
+    "median_rank": 3483.0
+   },
+   "12": {
+    "top10": 0.0,
+    "median_rank": 186109.0
+   },
+   "16": {
+    "top10": 0.0,
+    "median_rank": 252787.0
+   },
+   "20": {
+    "top10": 0.0,
+    "median_rank": 173835.0
+   },
+   "24": {
+    "top10": 0.0,
+    "median_rank": 84617.0
+   },
+   "28": {
+    "top10": 0.0,
+    "median_rank": 86462.0
+   },
+   "32": {
+    "top10": 0.0,
+    "median_rank": 189580.0
+   },
+   "36": {
+    "top10": 0.0,
+    "median_rank": 70860.0
+   },
+   "40": {
+    "top10": 0.0,
+    "median_rank": 131240.0
+   },
+   "44": {
+    "top10": 0.0,
+    "median_rank": 4977.0
+   },
+   "46": {
+    "top10": 0.0,
+    "median_rank": 57952.0
+   }
+  }
+ },
+ "top10_tokens_E": {
+  "claim_call": {
+   "4": [
+    [
+     " a",
+     25
+    ],
+    [
+     " an",
+     25
+    ],
+    [
+     " \u305d\u3057\u3066",
+     25
+    ],
+    [
+     " and",
+     25
+    ],
+    [
+     " straws",
+     25
+    ],
+    [
+     " along",
+     25
+    ],
+    [
+     " \u4ee5\u53ca",
+     25
+    ],
+    [
+     " approximately",
+     25
+    ],
+    [
+     " himself",
+     22
+    ],
+    [
+     " fact",
+     17
+    ],
+    [
+     " persons",
+     7
+    ],
+    [
+     " condemn",
+     2
+    ]
+   ],
+   "8": [
+    [
+     " a",
+     25
+    ],
+    [
+     "</u>",
+     25
+    ],
+    [
+     " Among",
+     25
+    ],
+    [
+     " another",
+     24
+    ],
+    [
+     " among",
+     24
+    ],
+    [
+     "</h4>",
+     24
+    ],
+    [
+     " Montenegro",
+     21
+    ],
+    [
+     " trouble",
+     21
+    ],
+    [
+     " unfortunately",
+     21
+    ],
+    [
+     " unfortunate",
+     13
+    ],
+    [
+     " everyone",
+     5
+    ],
+    [
+     " and",
+     4
+    ]
+   ],
+   "12": [
+    [
+     " something",
+     24
+    ],
+    [
+     " she",
+     24
+    ],
+    [
+     " looking",
+     24
+    ],
+    [
+     " her",
+     23
+    ],
+    [
+     " a",
+     22
+    ],
+    [
+     " he",
+     22
+    ],
+    [
+     " how",
+     21
+    ],
+    [
+     " like",
+     21
+    ],
+    [
+     " that",
+     21
+    ],
+    [
+     " difficult",
+     20
+    ],
+    [
+     " sure",
+     4
+    ],
+    [
+     " l",
+     3
+    ]
+   ],
+   "16": [
+    [
+     "<image|>",
+     21
+    ],
+    [
+     "\u600e\u4e48\u6837",
+     21
+    ],
+    [
+     "Louise",
+     21
+    ],
+    [
+     "sey",
+     21
+    ],
+    [
+     "imiz",
+     21
+    ],
+    [
+     "NEY",
+     21
+    ],
+    [
+     "geqslant",
+     18
+    ],
+    [
+     "liners",
+     17
+    ],
+    [
+     "posal",
+     17
+    ],
+    [
+     "\u0936\u094d\u092f",
+     17
+    ],
+    [
+     "umers",
+     5
+    ],
+    [
+     "thew",
+     4
+    ]
+   ],
+   "20": [
+    [
+     " she",
+     24
+    ],
+    [
+     " questions",
+     21
+    ],
+    [
+     " asking",
+     21
+    ],
+    [
+     " inquiries",
+     21
+    ],
+    [
+     " inquiry",
+     21
+    ],
+    [
+     " question",
+     21
+    ],
+    [
+     " suggestions",
+     21
+    ],
+    [
+     "Louise",
+     21
+    ],
+    [
+     " Louise",
+     21
+    ],
+    [
+     " inquiring",
+     18
+    ],
+    [
+     " marvelous",
+     4
+    ],
+    [
+     " Savior",
+     4
+    ]
+   ],
+   "24": [
+    [
+     " she",
+     24
+    ],
+    [
+     " questions",
+     21
+    ],
+    [
+     " asking",
+     21
+    ],
+    [
+     " inquiry",
+     21
+    ],
+    [
+     " question",
+     21
+    ],
+    [
+     " inquiring",
+     21
+    ],
+    [
+     " suggestions",
+     21
+    ],
+    [
+     " inquiries",
+     19
+    ],
+    [
+     " ask",
+     18
+    ],
+    [
+     " please",
+     18
+    ],
+    [
+     " thoughtful",
+     10
+    ],
+    [
+     " lovely",
+     4
+    ]
+   ],
+   "28": [
+    [
+     "<eos>",
+     24
+    ],
+    [
+     " satisfied",
+     23
+    ],
+    [
+     "<image|>",
+     22
+    ],
+    [
+     "</h2>",
+     21
+    ],
+    [
+     " inquiries",
+     21
+    ],
+    [
+     " questions",
+     20
+    ],
+    [
+     " help",
+     19
+    ],
+    [
+     " inquiry",
+     17
+    ],
+    [
+     " asked",
+     15
+    ],
+    [
+     " suggestions",
+     13
+    ],
+    [
+     " please",
+     10
+    ],
+    [
+     " thoughtful",
+     9
+    ]
+   ],
+   "32": [
+    [
+     "<pad>",
+     25
+    ],
+    [
+     "ript",
+     25
+    ],
+    [
+     "qe",
+     24
+    ],
+    [
+     "irse",
+     22
+    ],
+    [
+     "textColour",
+     22
+    ],
+    [
+     "%",
+     19
+    ],
+    [
+     "company",
+     19
+    ],
+    [
+     "imageColour",
+     16
+    ],
+    [
+     " company",
+     13
+    ],
+    [
+     " \u06af\u0626\u06d2\u06d4",
+     12
+    ],
+    [
+     "closure",
+     11
+    ],
+    [
+     "BURG",
+     10
+    ]
+   ],
+   "36": [
+    [
+     "<turn|>",
+     25
+    ],
+    [
+     "col",
+     24
+    ],
+    [
+     "\u53d1\u8a00",
+     24
+    ],
+    [
+     "\u043d\u043e",
+     24
+    ],
+    [
+     "\u043b\u043e\u0432",
+     21
+    ],
+    [
+     "t",
+     20
+    ],
+    [
+     "ed",
+     18
+    ],
+    [
+     "</div>",
+     18
+    ],
+    [
+     "ing",
+     14
+    ],
+    [
+     "anova",
+     7
+    ],
+    [
+     "\u9080\u8acb",
+     6
+    ],
+    [
+     "\u7acb\u6cd5",
+     6
+    ]
+   ],
+   "40": [
+    [
+     "<|tool_call>",
+     25
+    ],
+    [
+     "tele",
+     20
+    ],
+    [
+     "-",
+     17
+    ],
+    [
+     "tol",
+     17
+    ],
+    [
+     "s",
+     16
+    ],
+    [
+     "low",
+     16
+    ],
+    [
+     "ed",
+     16
+    ],
+    [
+     "tpl",
+     13
+    ],
+    [
+     "ival",
+     12
+    ],
+    [
+     "tv",
+     11
+    ],
+    [
+     "zzle",
+     9
+    ],
+    [
+     "\u0e43",
+     9
+    ]
+   ],
+   "44": [
+    [
+     "<|tool_call>",
+     25
+    ],
+    [
+     "-",
+     25
+    ],
+    [
+     "\u0e43",
+     25
+    ],
+    [
+     "ed",
+     21
+    ],
+    [
+     "eval",
+     20
+    ],
+    [
+     " provved",
+     19
+    ],
+    [
+     "zzle",
+     18
+    ],
+    [
+     "<turn|>",
+     18
+    ],
+    [
+     "toll",
+     14
+    ],
+    [
+     " \u043c\u0435\u0442\u0430\u043b",
+     14
+    ],
+    [
+     "on",
+     10
+    ],
+    [
+     "<|channel>",
+     5
+    ]
+   ],
+   "46": [
+    [
+     " or",
+     25
+    ],
+    [
+     " \u0438\u043b\u0438",
+     25
+    ],
+    [
+     "-",
+     25
+    ],
+    [
+     "\u6216\u8005",
+     25
+    ],
+    [
+     "0",
+     25
+    ],
+    [
+     "\u6216",
+     24
+    ],
+    [
+     "\u0e2b\u0e23\u0e37\u0e2d",
+     22
+    ],
+    [
+     "s",
+     22
+    ],
+    [
+     "<|tool_call>",
+     14
+    ],
+    [
+     "/",
+     12
+    ],
+    [
+     "ly",
+     7
+    ],
+    [
+     " eller",
+     6
+    ]
+   ]
+  },
+  "claim_nocall": {
+   "4": [
+    [
+     " a",
+     224
+    ],
+    [
+     " \u305d\u3057\u3066",
+     224
+    ],
+    [
+     " and",
+     224
+    ],
+    [
+     " \u4ee5\u53ca",
+     224
+    ],
+    [
+     " straws",
+     224
+    ],
+    [
+     " an",
+     224
+    ],
+    [
+     " approximately",
+     219
+    ],
+    [
+     " along",
+     219
+    ],
+    [
+     " persons",
+     159
+    ],
+    [
+     " condemn",
+     115
+    ],
+    [
+     " himself",
+     91
+    ],
+    [
+     " fact",
+     34
+    ]
+   ],
+   "8": [
+    [
+     " a",
+     224
+    ],
+    [
+     "</u>",
+     224
+    ],
+    [
+     " Among",
+     216
+    ],
+    [
+     " among",
+     200
+    ],
+    [
+     " another",
+     130
+    ],
+    [
+     " and",
+     127
+    ],
+    [
+     " conducted",
+     124
+    ],
+    [
+     " unfortunately",
+     123
+    ],
+    [
+     " popularly",
+     82
+    ],
+    [
+     " luckily",
+     80
+    ],
+    [
+     " commonly",
+     76
+    ],
+    [
+     " Montenegro",
+     67
+    ]
+   ],
+   "12": [
+    [
+     " looking",
+     217
+    ],
+    [
+     " something",
+     200
+    ],
+    [
+     " she",
+     200
+    ],
+    [
+     " how",
+     198
+    ],
+    [
+     " he",
+     136
+    ],
+    [
+     " much",
+     133
+    ],
+    [
+     " \u03bb",
+     127
+    ],
+    [
+     " her",
+     100
+    ],
+    [
+     " a",
+     91
+    ],
+    [
+     " l",
+     71
+    ],
+    [
+     " like",
+     67
+    ],
+    [
+     " that",
+     67
+    ]
+   ],
+   "16": [
+    [
+     " jewelry",
+     133
+    ],
+    [
+     " Savior",
+     121
+    ],
+    [
+     " \u0627\u0646\u06be\u0648\u06ba",
+     103
+    ],
+    [
+     " fashion",
+     101
+    ],
+    [
+     "ashion",
+     98
+    ],
+    [
+     "\u0d19\u0d4d\u0d19\u0d7e",
+     82
+    ],
+    [
+     "<image|>",
+     67
+    ],
+    [
+     "sey",
+     67
+    ],
+    [
+     "NEY",
+     66
+    ],
+    [
+     "\u0936\u094d\u092f",
+     66
+    ],
+    [
+     " theater",
+     65
+    ],
+    [
+     " \u0627\u0646\u06be\u06cc\u06ba",
+     64
+    ]
+   ],
+   "20": [
+    [
+     " she",
+     147
+    ],
+    [
+     " jewelry",
+     131
+    ],
+    [
+     " marvelous",
+     115
+    ],
+    [
+     " Savior",
+     101
+    ],
+    [
+     " lovely",
+     95
+    ],
+    [
+     " wonderful",
+     83
+    ],
+    [
+     " rumors",
+     76
+    ],
+    [
+     " honored",
+     70
+    ],
+    [
+     " \u0435\u0435",
+     67
+    ],
+    [
+     " questions",
+     67
+    ],
+    [
+     " asking",
+     67
+    ],
+    [
+     " inquiries",
+     67
+    ]
+   ],
+   "24": [
+    [
+     " she",
+     198
+    ],
+    [
+     " marvelous",
+     151
+    ],
+    [
+     " thank",
+     134
+    ],
+    [
+     " lovely",
+     109
+    ],
+    [
+     " wonderful",
+     109
+    ],
+    [
+     " thoughtful",
+     101
+    ],
+    [
+     " please",
+     90
+    ],
+    [
+     " Savior",
+     70
+    ],
+    [
+     " honored",
+     69
+    ],
+    [
+     " questions",
+     67
+    ],
+    [
+     " asking",
+     67
+    ],
+    [
+     " inquiry",
+     67
+    ]
+   ],
+   "28": [
+    [
+     " please",
+     195
+    ],
+    [
+     "<eos>",
+     164
+    ],
+    [
+     " thank",
+     159
+    ],
+    [
+     " honored",
+     156
+    ],
+    [
+     " help",
+     124
+    ],
+    [
+     " lovely",
+     118
+    ],
+    [
+     " satisfied",
+     116
+    ],
+    [
+     " thoughtful",
+     96
+    ],
+    [
+     "</blockquote>",
+     92
+    ],
+    [
+     " your",
+     77
+    ],
+    [
+     "<image|>",
+     70
+    ],
+    [
+     " questions",
+     67
+    ]
+   ],
+   "32": [
+    [
+     "<pad>",
+     215
+    ],
+    [
+     "qe",
+     201
+    ],
+    [
+     "\u1791\u17c1\u17d4",
+     179
+    ],
+    [
+     "ript",
+     171
+    ],
+    [
+     " \u06af\u0626\u06d2\u06d4",
+     167
+    ],
+    [
+     "ereal",
+     142
+    ],
+    [
+     "\u1014\u102d\u102f\u1004\u103a\u101e\u100a\u103a\u104b",
+     139
+    ],
+    [
+     "frei",
+     107
+    ],
+    [
+     "xd",
+     71
+    ],
+    [
+     "Bristol",
+     55
+    ],
+    [
+     "aryl",
+     51
+    ],
+    [
+     "irse",
+     42
+    ]
+   ],
+   "36": [
+    [
+     "<turn|>",
+     164
+    ],
+    [
+     " please",
+     145
+    ],
+    [
+     "<eos>",
+     121
+    ],
+    [
+     " lovingly",
+     104
+    ],
+    [
+     " would",
+     87
+    ],
+    [
+     "<image|>",
+     80
+    ],
+    [
+     " thank",
+     80
+    ],
+    [
+     "<unused56>",
+     79
+    ],
+    [
+     " peace",
+     75
+    ],
+    [
+     "</div>",
+     67
+    ],
+    [
+     " sincerely",
+     56
+    ],
+    [
+     " wishing",
+     51
+    ]
+   ],
+   "40": [
+    [
+     "<turn|>",
+     197
+    ],
+    [
+     "f\u00fchl",
+     180
+    ],
+    [
+     " please",
+     124
+    ],
+    [
+     "zn",
+     119
+    ],
+    [
+     "\u0434\u0430\u0435\u0442\u0441\u044f",
+     85
+    ],
+    [
+     "\u0e43",
+     74
+    ],
+    [
+     "\u306e\u304a\u77e5\u3089\u305b",
+     73
+    ],
+    [
+     "rieve",
+     68
+    ],
+    [
+     "ed",
+     67
+    ],
+    [
+     "tele",
+     60
+    ],
+    [
+     "tv",
+     59
+    ],
+    [
+     "<|tool_call>",
+     49
+    ]
+   ],
+   "44": [
+    [
+     "<turn|>",
+     224
+    ],
+    [
+     "ed",
+     145
+    ],
+    [
+     " please",
+     100
+    ],
+    [
+     "<|tool_call>",
+     95
+    ],
+    [
+     " condolences",
+     88
+    ],
+    [
+     "on",
+     81
+    ],
+    [
+     "\u0e43",
+     72
+    ],
+    [
+     " Please",
+     67
+    ],
+    [
+     "-",
+     66
+    ],
+    [
+     "arp",
+     58
+    ],
+    [
+     "turn",
+     54
+    ],
+    [
+     "\u662f\u6211\u4eec",
+     52
+    ]
+   ],
+   "46": [
+    [
+     " or",
+     224
+    ],
+    [
+     "-",
+     216
+    ],
+    [
+     "ly",
+     197
+    ],
+    [
+     "ized",
+     157
+    ],
+    [
+     "/",
+     148
+    ],
+    [
+     "ed",
+     118
+    ],
+    [
+     "l",
+     101
+    ],
+    [
+     "if",
+     98
+    ],
+    [
+     " turn",
+     95
+    ],
+    [
+     "E",
+     87
+    ],
+    [
+     "s",
+     68
+    ],
+    [
+     " please",
+     65
+    ]
+   ]
+  }
+ },
+ "causal": {
+  "machinery_sanity_end_dp_end": {
+   "mean": -0.1958439369939567,
+   "ci": [
+    -0.22888135051107383,
+    -0.16387760243285032
+   ],
+   "pass": true
+  },
+  "primary_call_msg_A_minus_N": {
+   "mean": 0.02878277063369751,
+   "ci": [
+    -0.029221329391002655,
+    0.09065770295262329
+   ],
+   "n": 25,
+   "row": "not used"
+  },
+  "claim_call|outA_msg-outN_msg": {
+   "mean": 0.02878277063369751,
+   "ci": [
+    -0.030234239410609005,
+    0.09277050402015438
+   ]
+  },
+  "claim_call|outA_E-outN_E": {
+   "mean": -0.1798092092014849,
+   "ci": [
+    -0.261679934641812,
+    -0.09010123757412668
+   ]
+  },
+  "claim_call|outA_msg-randA_msg": {
+   "mean": -0.352993938375148,
+   "ci": [
+    -0.46064117232272106,
+    -0.24971115319439569
+   ]
+  },
+  "claim_call|outA_msg-base": {
+   "mean": -0.2937489278614521,
+   "ci": [
+    -0.40618441895069557,
+    -0.1925529460301623
+   ]
+  },
+  "claim_call|outN_msg-base": {
+   "mean": -0.3225316984951496,
+   "ci": [
+    -0.4229700891934335,
+    -0.22604649160755808
+   ]
+  },
+  "claim_nocall|outA_msg-outN_msg": {
+   "mean": 0.06717161045110386,
+   "ci": [
+    0.03552781659059942,
+    0.10060429397095241
+   ]
+  },
+  "claim_nocall|outA_E-outN_E": {
+   "mean": -0.0001215394087401884,
+   "ci": [
+    -0.014639322370307387,
+    0.013840594471964437
+   ]
+  },
+  "claim_nocall|outA_msg-randA_msg": {
+   "mean": 0.06216100872552488,
+   "ci": [
+    0.024437184413181965,
+    0.10046929751380437
+   ]
+  },
+  "claim_nocall|outA_msg-base": {
+   "mean": 0.0826720627103766,
+   "ci": [
+    0.05117374224002041,
+    0.1164300714469261
+   ]
+  },
+  "claim_nocall|outN_msg-base": {
+   "mean": 0.015500452259272737,
+   "ci": [
+    -0.005766374683402578,
+    0.036773925902161865
+   ]
+  },
+  "clampin_nocall_E_A_minus_N": {
+   "mean": -0.022098342522180507,
+   "ci": [
+    -0.03053746345685795,
+    -0.014633005607174723
+   ],
+   "restores": false
+  },
+  "levels": {
+   "claim_call": {
+    "base": 0.7417246732115745,
+    "outA_msg": 0.44797574535012247,
+    "outN_msg": 0.4191929747164249,
+    "randA_msg": 0.8009696837252704,
+    "outA_E": 0.49075133601203563,
+    "outN_E": 0.6705605452135205
+   },
+   "claim_nocall": {
+    "base": 0.14364371531909065,
+    "outA_msg": 0.22631577802946726,
+    "outN_msg": 0.1591441675783634,
+    "randA_msg": 0.16415476930394238,
+    "outA_E": 0.17371060409849243,
+    "outN_E": 0.1738321435072326,
+    "inA_E": 0.15112392611003347,
+    "inN_E": 0.173222268632214,
+    "sanity_end": 0.33948765231304734
+   }
+  },
+  "edit_rel_norm": {
+   "inN_E": 0.0005055866081515129,
+   "randA_msg": 0.0015857402531509138,
+   "sanity_end": 0.0007725039050196106,
+   "outA_msg": 0.0012102192259885944,
+   "inA_E": 0.0005289852192401581,
+   "outA_E": 0.0013934163238338618,
+   "outN_msg": 0.0009937894817658637,
+   "base": 0.0,
+   "outN_E": 0.0011368101290163775
+  },
+  "atoms": [
+   [
+    50425,
+    " canceled",
+    15473.933333333332
+   ],
+   [
+    2246,
+    " call",
+    22193.913333333334
+   ],
+   [
+    13027,
+    " cancel",
+    22307.086666666666
+   ],
+   [
+    7029,
+    "Call",
+    24119.16
+   ]
+  ]
+ }
+}
