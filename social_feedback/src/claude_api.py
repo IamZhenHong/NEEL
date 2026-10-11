@@ -89,8 +89,8 @@ def run_batch(requests, state_path, tag, model, est_in_tok, max_out, poll_s=30):
         spent = check_budget(worst_case(model, len(requests), est_in_tok, max_out, batch=True))
         from anthropic.types.message_create_params import MessageCreateParamsNonStreaming
         from anthropic.types.messages.batch_create_params import Request
-        b = c.messages.batches.create(requests=[Request(custom_id=cid, params=MessageCreateParamsNonStreaming(**p))
-                                                for cid, p in requests])
+        b = c.messages.batches.create(requests=[Request(custom_id=cid, params=MessageCreateParamsNonStreaming(
+            **{"model": model, **p})) for cid, p in requests])
         bid = b.id
         state_path.parent.mkdir(parents=True, exist_ok=True)
         state_path.write_text(json.dumps({"batch_id": bid, "n": len(requests), "model": model, "tag": tag,

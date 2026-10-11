@@ -1,5 +1,18 @@
 # Social-feedback history pilot: research log (newest first)
 
+## 2026-10-11 — pilot run: gate not met (D_M -0.17 pp, CI [-1.5, +1.8] pp)
+
+- GPT reviewer (gpt-5.5-2026-04-23, A2): item audit found two real ambiguities (budget base, weekend sign-offs) ->
+  A4 clarifications by code; re-audit 10/10 after a targeted fix (I9). Labels, near-miss edits (20/20 verified blind)
+  and style checks by GPT. Judge validation: kappa 0.98, near-misses 20/20, retest 0.9975, style 1.00. Calibration v3
+  level-3 coverage 0.617; dev v2: cap 8964, sigma_w 0.055; gate n = 20, k = 3, t = 0.035. One pilot history task
+  redrawn (I11). Owner approved the record; frozen at tag `socfb-prereg-v1`.
+- Pilot: 300 memos, no flags. Batch judging needed two fixes (custom_id pattern, missing model field; no spend on the
+  failures). 138 disagreements (under the 150 stop line), all judge-fail/value-present, mostly working-day spans; gpt-5.5
+  blind hand-reads: 137 fail, 1 pass. OpenAI cap raised 10 -> 20 by the owner for the hand-reads.
+- **D_M -0.0017 [-0.015, +0.018]; gate not met.** All secondary contrasts near 0 with intervals within about +/- 3 pp;
+  judge-free and jackknife agree. Details in `results/pilot_v1/SUMMARY.md`.
+
 ## 2026-10-11 — pilot materials and histories ready; waiting on judge validation
 
 - Pilot items: 20 pairs x (6 history + 1 level-3 scored) + 20 spares; all briefings pass (one history task redrawn,

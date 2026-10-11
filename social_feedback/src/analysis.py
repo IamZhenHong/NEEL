@@ -178,5 +178,31 @@ def dryrun(t=0.035):
     return res
 
 
+def pilot(run_dir, t=0.035):
+    """Frozen pilot analysis (prereg/RECORD.md): reads <run>/scored.jsonl, writes <run>/analysis.json."""
+    from pathlib import Path
+    run = Path(run_dir)
+    rows = [json.loads(l) for l in (run / "scored.jsonl").read_text().splitlines() if l.strip()]
+    meta = {r["pair"]: {"earlier_pairs": r["earlier_pairs"], "latest_pair": r["latest_pair"]} for r in rows}
+    res = analyze(rows, t, meta)
+    flags = {c: {f: sum(r[f] for r in rows if r["cell"] == c) for f in ("cap_hit", "answer_truncated", "empty")}
+             for c in CELLS}
+    res["flags_by_cell"] = flags
+    res["n_rows"] = len(rows)
+    (run / "analysis.json").write_text(json.dumps(res, indent=1))
+    p = res["primary"]
+    print(f"n pairs {p['n_pairs']}; cell means: " + ", ".join(f"{c} {m[0]:.3f} [{m[1][0]:.3f}, {m[1][1]:.3f}]"
+                                                              for c, m in p["cell_means"].items()))
+    for k, v in p["contrasts"].items():
+        print(f"  {k}: {v[0]:+.4f} [{v[1][0]:+.4f}, {v[1][1]:+.4f}]")
+    print(f"  sign-flip p (D_M) {p['D_M_sign_flip_p']:.3f}; gate {p['gate']}")
+    print(f"  judge-free D_M {res['judge_free']['contrasts']['D_M'][0]:+.4f}; excl. flagged D_M "
+          f"{res['excl_flagged']['contrasts']['D_M'][0]:+.4f}; flags {flags}")
+    return res
+
+
 if __name__ == "__main__":
-    {"dryrun": dryrun}[sys.argv[1]]()
+    if sys.argv[1] == "pilot":
+        pilot(sys.argv[2])
+    else:
+        {"dryrun": dryrun}[sys.argv[1]]()

@@ -80,7 +80,11 @@ def judge(jobs, tag, batch=False, state_path=None):
     """jobs: list of (key, sheet, briefing, memo). Returns {key: {"verdicts", "coverage"} or {"error"}}."""
     reqs = [(key, params(s, b, m)) for key, s, b, m in jobs]
     if batch:
-        out = run_batch(reqs, state_path, tag, SONNET, est_in_tok=2000, max_out=4000)
+        # Batch custom_ids must match ^[a-zA-Z0-9_-]{1,64}$: use j00000-style ids and map back
+        ids = {f"j{i:05d}": key for i, (key, _) in enumerate(reqs)}
+        out = run_batch([(cid, reqs[i][1]) for i, cid in enumerate(ids)], state_path, tag, SONNET, est_in_tok=2000,
+                        max_out=4000)
+        out = [{**o, "custom_id": ids[o["custom_id"]]} for o in out]
     else:
         out = run_standard(reqs, tag, SONNET, est_in_tok=2000, max_out=4000)
     by_key = {key: s for key, s, _, _ in jobs}

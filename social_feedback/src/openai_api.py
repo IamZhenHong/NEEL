@@ -29,7 +29,7 @@ def ledger_total():
 
 
 def cap():
-    return float(os.environ.get("SF_OPENAI_CAP_USD", "10"))
+    return float(os.environ.get("SF_OPENAI_CAP_USD", "20"))  # owner raised 10 -> 20 on 2026-10-11
 
 
 def cost(model, u):

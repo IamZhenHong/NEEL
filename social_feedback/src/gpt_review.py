@@ -194,5 +194,42 @@ def audit(split="pilot", picks=tuple(f"pilot-s{i}" for i in range(10)), effort="
         print(f"  {iid}: {n[:300]}")
 
 
+HR_SCHEMA = {"type": "object", "properties": {"label": {"type": "string", "enum": ["pass", "fail"]},
+                                              "note": {"type": "string"}},
+             "required": ["label", "note"], "additionalProperties": False}
+
+
+def handreads(run_dir):
+    """Blind hand-reads (DESIGN.md §7, A2): one call per judge/value disagreement; the reviewer sees the briefing, the
+    memo and one requirement with its correct answer, never the cell, the judge verdict or the value check."""
+    from pathlib import Path
+    rdir = Path(run_dir)
+    key = json.loads((rdir / "handread_key.json").read_text())
+    gens = {g["key"]: g for g in load_jsonl(rdir / "generations.jsonl")}
+    items = {it["item_id"]: it for it in load_jsonl(MATERIALS / "items" / "pilot.jsonl")}
+    reqs = []
+    for hid, d in sorted(key.items()):
+        g = gens[d["key"]]
+        it = items[g["item_id"]]
+        r = next(x for x in it["requirements"] if x["id"] == d["req"])
+        reqs.append((hid, f"{RULES}\n\nBriefing:\n<<<\n{it['briefing']}\n>>>\n\nRequirement: {r['text']} — correct "
+                          f"answer: {answer_text(r)}\n\nMemo:\n<<<\n{g['answer']}\n>>>\n\nDoes the memo meet this "
+                          f"requirement? Give pass or fail and a short note."))
+    out = run(reqs, f"gpt-handreads-{rdir.name}", HR_SCHEMA, est_in=2500, est_out=2500)
+    missing = [h for h, o in out.items() if not o["ok"] or not o["data"]]
+    if missing:
+        raise SystemExit(f"hand-reads missing: {missing}")
+    with open(rdir / "handreads.csv", "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["hid", "label", "note"])
+        for hid in sorted(key):
+            w.writerow([hid, out[hid]["data"]["label"], out[hid]["data"]["note"]])
+    (rdir / "handreads_raw.json").write_text(json.dumps(out, indent=1, ensure_ascii=False))
+    print(f"{len(out)} hand-reads -> {rdir / 'handreads.csv'}")
+
+
 if __name__ == "__main__":
-    {"labels": labels, "nearmiss": nearmiss, "style": style, "audit": audit}[sys.argv[1]]()
+    if sys.argv[1] == "handreads":
+        handreads(sys.argv[2])
+    else:
+        {"labels": labels, "nearmiss": nearmiss, "style": style, "audit": audit}[sys.argv[1]]()
