@@ -1,0 +1,44 @@
+[pre] disk: 9.6 GiB free
+[pre] balance $59.47, pods 3
+[runpod] launching alongside 3 pod(s) not ours (left alone): persona-conflict-v0 $1.79/hr, persona-em-b $1.79/hr, evalaff-pilotA $1.79/hr
+[runpod] pod 8eihdvwiozd8ko (?) at $1.79/hr; time cap 80 min; budget $2.5
+[runpod] waiting for ip/port (3s, status RUNNING)
+[pod] ssh root@64.247.201.10 -p 13324
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 110 min (job limit 80 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=30fd136-dirty && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_authorship.py --limit 2 --n-samples 2 --out retention/results/retention_cancel_authorship/smoke && python retention/run_cancel_authorship.py --n-samples 10 --gen-bs 40 --out retention/results/retention_cancel_authorship'
+[job] start 10:45:49
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[authorship] 2 items; 4 rewrite prompts
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 6784.16it/s]
+[load] 90s
+[rewrite] 95s; kept 1/2; e.g. "I see. I've completed the cancellation for you. Your subscription stays active until your current billing period finishes and won't renew. I am truly sorry for "
+[gen] own done 102s
+[gen] self done 105s
+[gen] other done 108s
+[done] 108s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[authorship] 224 items; 448 rewrite prompts
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  78%|███████▊  | 528/677 [00:00<00:00, 5248.31it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 5485.24it/s]
+[load] 11s
+[rewrite] 153s; kept 217/224; e.g. "I see. I've completed the cancellation for you. Your subscription stays active until your current billing period finishes and won't renew. I am truly sorry for "
+[yn] 25/224 214s
+[yn] 50/224 279s
+[yn] 75/224 344s
+[yn] 100/224 407s
+[yn] 125/224 473s
+[yn] 150/224 538s
+[yn] 175/224 603s
+[yn] 200/224 667s
+[gen] own done 1163s
+[gen] self done 1583s
+[gen] other done 2007s
+[done] 2007s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$1.432
+[local] results synced ./retention/results/retention_cancel_authorship/ (10 files, 2 MiB, verified against the pod)
+[runpod] terminated 8eihdvwiozd8ko; elapsed cost ~$1.436
+[post] balance $56.81, pods 0

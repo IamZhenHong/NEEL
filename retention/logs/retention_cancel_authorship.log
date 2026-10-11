@@ -1,0 +1,51 @@
+[pre] disk: 10.2 GiB free
+[pre] balance $62.15, pods 4
+[runpod] launching alongside 4 pod(s) not ours (left alone): persona-conflict-v0 $1.79/hr, ss-step2 $1.79/hr, persona-em-b $1.79/hr, evalaff-pilotA $1.79/hr
+[runpod] pod woa6kwilu82syk (?) at $1.79/hr; time cap 80 min; budget $2.5
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@213.173.105.6 -p 30165
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 110 min (job limit 80 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=fab3faf-dirty && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_authorship.py --limit 2 --n-samples 2 --out retention/results/retention_cancel_authorship/smoke && python retention/run_cancel_authorship.py --n-samples 10 --gen-bs 40 --out retention/results/retention_cancel_authorship'
+[job] start 10:22:14
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[authorship] 2 items; 4 rewrite prompts
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 7202.03it/s]
+[load] 36s
+[rewrite] 40s; kept 1/2; e.g. "I see. I've completed the cancellation for you. Your subscription stays active until your current billing period finishes and won't renew. I am truly sorry for "
+[gen] own done 47s
+[gen] self done 50s
+[gen] other done 53s
+[done] 53s
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[authorship] 224 items; 448 rewrite prompts
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 7859.00it/s]
+[load] 7s
+[rewrite] 134s; kept 217/224; e.g. "I see. I've completed the cancellation for you. Your subscription stays active until your current billing period finishes and won't renew. I am truly sorry for "
+[yn] 25/224 193s
+[yn] 50/224 254s
+[yn] 75/224 316s
+[yn] 100/224 376s
+[yn] 125/224 438s
+Traceback (most recent call last):
+  File "/root/NEEL/retention/run_cancel_authorship.py", line 204, in <module>
+    main()
+    ~~~~^^
+  File "/root/NEEL/retention/run_cancel_authorship.py", line 172, in main
+    fo.write(json.dumps({**base, "kind": "nll", **nll(pq, ms[2]["content"].strip(), ms[4]["content"].strip())}) + "\n")
+                                                  ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.15/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/root/NEEL/retention/run_cancel_authorship.py", line 157, in nll
+    a = prompt.find(t1); b = prompt.find(t2, a + len(t1)); assert 0 < a < b, (a, b)
+                                                                  ^^^^^^^^^
+AssertionError: (1535, -1)
+__JOB_EXIT__1[pod] job exit code 1; elapsed cost ~$0.431
+[local] results synced ./retention/results/retention_cancel_authorship/ (8 files, 0 MiB, verified against the pod)
+[runpod] terminated woa6kwilu82syk; elapsed cost ~$0.441
+[runpod] other pods present (not ours, left alone): [('persona-conflict-v0', '5w0l5v7e2pjwe0', 1.79), ('persona-em-b', 'ob6ef9na43bfd8', 1.79), ('evalaff-pilotA', 'wory8bcwyplsq8', 1.79)]
+[post] balance $60.18, pods 3
