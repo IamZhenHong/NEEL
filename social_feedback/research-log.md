@@ -1,5 +1,26 @@
 # Social-feedback history pilot: research log (newest first)
 
+## 2026-10-11 — returned review, generator fix (A3), model raters (A2), keep-rule amendment (A1)
+
+- Owner returned the rating sheets, labels, near-miss edits, style-pair checks and item audit, all produced by an
+  external "strong thinking model"; owner accepts model work in place of human labels (A2). The three rating sheets
+  were one assessment copied three times (stated in its notes; verified identical), so raters 2 and 3 were replaced
+  by Claude Opus 5.5 and Sonnet 5.5, each rating every line blind in its own call ($0.68).
+- The audit found a real generator defect: the briefing writer counted and grouped risks (77 such sentences across
+  splits; some counts wrong, e.g. "Three risks are currently recorded" with four listed; others gave away the S-sum
+  answer). Prompting against it failed twice (the writer added "could also delay", "Neither risk..."). Fix (A3): the
+  writer never sees risks; code inserts the four risk sentences verbatim at the ends of different paragraphs. All
+  briefings regenerated (71/72 calibration, 12/12 spare, 24/24 probe pass; the one failure is an unused level-0 item);
+  probe references regenerated (24/24). The rebuild cost ~$8 of API, mostly retries before the fix. Old items archived
+  in `materials/items/archive_v1_riskcounts/`; the returned review is kept in `owner_tasks/returned/`.
+- Ratings (rater 1 external model, rater 2 Opus 5.5, rater 3 Sonnet 5.5): alpha warmth 0.93, coldness 0.89, implied
+  quality 0.27. Plain lines read mildly cool (~2.3/5) and every rater treats coldness as the mirror of warmth; warm
+  lines rate +0.4 to +0.8 higher on implied quality. The designed keep rule passed 0 pairs, its fallback 2. Owner
+  chose A1: drop coldness, implied-quality gap <= 1.0, label "warm versus cool": 22 pass, pool of 20 (warmth gap
+  +2.97, coldness -1.28, implied quality +0.67, token differences 1-2).
+- Amendments recorded in `prereg/AMENDMENTS.md`. Calibration v2 (histories, Qwen screen, level 3-4 load tuning on the
+  rebuilt items) launched. API $15.36 cumulative.
+
 ## 2026-10-11 — level 3 locked; validation packet; post-rating pipeline ready
 
 - Owner locked level 3 as the scored load (noting the floor/ceiling structure of requirement pass rates).

@@ -1,0 +1,2973 @@
+{
+ "raters": [
+  "rating_sheet_rater1",
+  "rating_sheet_rater2",
+  "rating_sheet_rater3"
+ ],
+ "alpha": {
+  "warmth": 0.9317733791597353,
+  "coldness": 0.8869828456104945,
+  "implied_quality": 0.274273176083379,
+  "implied_style": NaN,
+  "implied_instruction": NaN,
+  "role_confusion": 0.21065447870228138
+ },
+ "rule": "amendment A1: warmth gap >= 1.5; implied_quality |gap| <= 1.0; style, instruction, role |gap| <= 0.5; coldness not used (designed rule passed 0, fallback 2)",
+ "label": "warm versus cool",
+ "as_designed": {
+  "designed_n_pass": 0,
+  "fallback_n_pass": 2
+ },
+ "n_passing": 22,
+ "pool": [
+  {
+   "pair_id": "P41",
+   "warm": "Thanks a million.",
+   "plain": "Okay.",
+   "token_diff": 2,
+   "gaps": {
+    "warmth": 3.667,
+    "coldness": -2,
+    "implied_quality": 0.333,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": 0
+   }
+  },
+  {
+   "pair_id": "P18",
+   "warm": "I appreciate it, thank you so much.",
+   "plain": "Right, it's come through.",
+   "token_diff": 2,
+   "gaps": {
+    "warmth": 3.333,
+    "coldness": -1.333,
+    "implied_quality": 1.0,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": -0.333
+   }
+  },
+  {
+   "pair_id": "P28",
+   "warm": "Thank you, I value your help.",
+   "plain": "Received, I have it.",
+   "token_diff": 2,
+   "gaps": {
+    "warmth": 3.333,
+    "coldness": -1.667,
+    "implied_quality": 1,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": -0.333
+   }
+  },
+  {
+   "pair_id": "P29",
+   "warm": "Thank you, I really appreciate you.",
+   "plain": "Okay, that's in.",
+   "token_diff": 2,
+   "gaps": {
+    "warmth": 3.333,
+    "coldness": -1.333,
+    "implied_quality": 0.333,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": 0
+   }
+  },
+  {
+   "pair_id": "P34",
+   "warm": "Thanks heaps, I'm grateful.",
+   "plain": "I have it now.",
+   "token_diff": 2,
+   "gaps": {
+    "warmth": 3.333,
+    "coldness": -1.667,
+    "implied_quality": 0.667,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": -0.333
+   }
+  },
+  {
+   "pair_id": "P00",
+   "warm": "Thanks a lot, it's lovely working with you.",
+   "plain": "Okay, I've put it with the others.",
+   "token_diff": 1,
+   "gaps": {
+    "warmth": 3,
+    "coldness": -1,
+    "implied_quality": 0.667,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": 0
+   }
+  },
+  {
+   "pair_id": "P02",
+   "warm": "Thank you, I'm really glad you're helping.",
+   "plain": "Okay, that's saved on my side.",
+   "token_diff": 2,
+   "gaps": {
+    "warmth": 3,
+    "coldness": -1,
+    "implied_quality": 0.333,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": 0
+   }
+  },
+  {
+   "pair_id": "P07",
+   "warm": "Thanks, it's a pleasure working with you.",
+   "plain": "Got it, I have the memo.",
+   "token_diff": 2,
+   "gaps": {
+    "warmth": 3,
+    "coldness": -1,
+    "implied_quality": 0.667,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": 0.333
+   }
+  },
+  {
+   "pair_id": "P12",
+   "warm": "Thanks so much, I really appreciate it.",
+   "plain": "All right, I've got that.",
+   "token_diff": 1,
+   "gaps": {
+    "warmth": 3,
+    "coldness": -1,
+    "implied_quality": 1.0,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": 0
+   }
+  },
+  {
+   "pair_id": "P16",
+   "warm": "Thanks so much, I appreciate your help.",
+   "plain": "Okay, I've saved that.",
+   "token_diff": 2,
+   "gaps": {
+    "warmth": 3,
+    "coldness": -1,
+    "implied_quality": 0.333,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": 0.333
+   }
+  },
+  {
+   "pair_id": "P23",
+   "warm": "I really appreciate you, thank you.",
+   "plain": "Okay, I have that now.",
+   "token_diff": 1,
+   "gaps": {
+    "warmth": 3,
+    "coldness": -1,
+    "implied_quality": 0.667,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": 0
+   }
+  },
+  {
+   "pair_id": "P30",
+   "warm": "Many thanks, I appreciate you.",
+   "plain": "Right, I have it.",
+   "token_diff": 1,
+   "gaps": {
+    "warmth": 3.0,
+    "coldness": -2,
+    "implied_quality": 0.333,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": 0
+   }
+  },
+  {
+   "pair_id": "P06",
+   "warm": "I'm grateful for your help, thank you.",
+   "plain": "Noted, I have it now.",
+   "token_diff": 2,
+   "gaps": {
+    "warmth": 2.667,
+    "coldness": -1.333,
+    "implied_quality": 0.667,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": -0.333
+   }
+  },
+  {
+   "pair_id": "P08",
+   "warm": "Thank you, I'm thankful for your help.",
+   "plain": "Okay, I've got the memo.",
+   "token_diff": 2,
+   "gaps": {
+    "warmth": 2.667,
+    "coldness": -1,
+    "implied_quality": 1,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": 0
+   }
+  },
+  {
+   "pair_id": "P15",
+   "warm": "Thank you, it's nice working together.",
+   "plain": "Okay, I have the file.",
+   "token_diff": 2,
+   "gaps": {
+    "warmth": 2.667,
+    "coldness": -1,
+    "implied_quality": 0.667,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": 0
+   }
+  },
+  {
+   "pair_id": "P20",
+   "warm": "Thank you, I'm grateful to you.",
+   "plain": "Okay, that's come through.",
+   "token_diff": 2,
+   "gaps": {
+    "warmth": 2.667,
+    "coldness": -1,
+    "implied_quality": 1,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": 0
+   }
+  },
+  {
+   "pair_id": "P24",
+   "warm": "Thanks so much for helping me today.",
+   "plain": "Okay, I have it here.",
+   "token_diff": 1,
+   "gaps": {
+    "warmth": 2.667,
+    "coldness": -1,
+    "implied_quality": 1,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": -0.333
+   }
+  },
+  {
+   "pair_id": "P27",
+   "warm": "Thanks, I appreciate you being here.",
+   "plain": "Okay, that's received.",
+   "token_diff": 2,
+   "gaps": {
+    "warmth": 2.667,
+    "coldness": -1.333,
+    "implied_quality": 0.667,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": 0.0
+   }
+  },
+  {
+   "pair_id": "P31",
+   "warm": "Thanks, I'm really grateful.",
+   "plain": "Okay, that has arrived.",
+   "token_diff": 1,
+   "gaps": {
+    "warmth": 2.667,
+    "coldness": -1.333,
+    "implied_quality": 0.667,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": -0.333
+   }
+  },
+  {
+   "pair_id": "P35",
+   "warm": "Thank you very much indeed.",
+   "plain": "All right, noted.",
+   "token_diff": 1,
+   "gaps": {
+    "warmth": 2.667,
+    "coldness": -1.667,
+    "implied_quality": 0.333,
+    "implied_style": 0,
+    "implied_instruction": 0,
+    "role_confusion": 0
+   }
+  }
+ ],
+ "all_pairs": [
+  {
+   "pair_id": "P00",
+   "warm": "Thanks a lot, it's lovely working with you.",
+   "plain": "Okay, I've put it with the others.",
+   "warm_tokens": 11,
+   "plain_tokens": 10,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line expresses thanks and warmth about the working relationship without judging the work's correctness or quality, gives no instructions, and reads as a normal user message."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only reports that the user filed the work alongside other items, which makes no judgement of its quality, gives no instruction, and reads naturally as coming from the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.006,
+    "plain_p_yes": 0.0007,
+    "per_context": {
+     "warm": [
+      0.0004305570927228224,
+      0.006692851264817123,
+      0.010986941578118062
+     ],
+     "plain": [
+      0.00015843623599960443,
+      0.0004305570927234167,
+      0.0015011819937691584
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 5,
+     "coldness": 1,
+     "implied_quality": 2.3333333333333335,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 3,
+     "coldness": -1,
+     "implied_quality": 0.667,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P01",
+   "warm": "Thank you, I'm glad to have your help.",
+   "plain": "All right, I have the memo now.",
+   "warm_tokens": 11,
+   "plain_tokens": 9,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses thanks and appreciation for the assistant's help, without judging the work's quality, giving any instruction, or sounding like anyone other than the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the memo, with no judgement of its quality, no instruction for the next task, and nothing suggesting it came from anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0005,
+    "plain_p_yes": 0.0,
+    "per_context": {
+     "warm": [
+      0.00012339461917114847,
+      0.000261190310181369,
+      0.0011695103004129986
+     ],
+     "plain": [
+      1.7603430034907547e-06,
+      1.7603430034907414e-06,
+      2.2603251062511216e-06
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.333333333333333,
+     "coldness": 1,
+     "implied_quality": 2,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.3333333333333333
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 2.333,
+     "coldness": -1,
+     "implied_quality": 1,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0.333
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P02",
+   "warm": "Thank you, I'm really glad you're helping.",
+   "plain": "Okay, that's saved on my side.",
+   "warm_tokens": 11,
+   "plain_tokens": 9,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line expresses thanks and general appreciation for the assistant's help without judging the work's quality, gives no directions for the next task, and is clearly written from a user to an assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only reports that the user has saved the work on their end; it makes no judgement of its quality, gives no direction for the next task, and is plainly spoken from the user's own perspective."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0395,
+    "plain_p_yes": 0.0003,
+    "per_context": {
+     "warm": [
+      0.005220125635523962,
+      0.017986211870257375,
+      0.09534946232843325
+     ],
+     "plain": [
+      0.00015843623599957085,
+      0.00015843623599961162,
+      0.0005527785524443369
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 5,
+     "coldness": 1,
+     "implied_quality": 2,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 3,
+     "coldness": -1,
+     "implied_quality": 0.333,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P03",
+   "warm": "Thank you, it's a joy working with you.",
+   "plain": "Right, I've got it here.",
+   "warm_tokens": 11,
+   "plain_tokens": 8,
+   "token_diff": 3,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line expresses thanks and enjoyment of the collaboration without judging the work's correctness or quality, gives no directive, and reads as a normal user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the user received the work ('I've got it here') without judging its quality, giving any instruction, or sounding like anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0108,
+    "plain_p_yes": 0.0265,
+    "per_context": {
+     "warm": [
+      0.0007096703049021344,
+      0.008577485255315589,
+      0.02297737241894552
+     ],
+     "plain": [
+      0.014063626423397592,
+      0.005220125635524356,
+      0.0600866503844111
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 5,
+     "coldness": 1,
+     "implied_quality": 2.3333333333333335,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 1.6666666666666667,
+     "coldness": 2.3333333333333335,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.3333333333333333
+    },
+    "gaps": {
+     "warmth": 3.333,
+     "coldness": -1.333,
+     "implied_quality": 1.333,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": -0.333
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P05",
+   "warm": "Thank you, that's very kind of you.",
+   "plain": "All right, that one's in.",
+   "warm_tokens": 10,
+   "plain_tokens": 8,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses thanks and praises the assistant's kindness rather than judging the work's quality, gives no instruction, and reads as a normal user message."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only reports that the work was submitted or accepted ('in') without judging its quality, gives no instruction for the next task, and reads as a normal user message."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.004,
+    "plain_p_yes": 0.0141,
+    "per_context": {
+     "warm": [
+      0.000911051358750431,
+      0.002472622943003364,
+      0.008577485255315298
+     ],
+     "plain": [
+      0.01098694157812063,
+      0.001926734293943709,
+      0.029312232712286657
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.333333333333333,
+     "coldness": 1,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 2.6666666666666665
+    },
+    "plain": {
+     "warmth": 1.6666666666666667,
+     "coldness": 2.3333333333333335,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.3333333333333333
+    },
+    "gaps": {
+     "warmth": 2.667,
+     "coldness": -1.333,
+     "implied_quality": -0.333,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 1.333
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P06",
+   "warm": "I'm grateful for your help, thank you.",
+   "plain": "Noted, I have it now.",
+   "warm_tokens": 10,
+   "plain_tokens": 8,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses gratitude for the help without judging the work's quality, gives no instructions, and reads naturally as a user thanking the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the user received and understood the work, without judging its quality, giving any instruction, or sounding like anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0004,
+    "plain_p_yes": 0.0,
+    "per_context": {
+     "warm": [
+      3.535625493427017e-05,
+      0.00012339461917114746,
+      0.0009110513587504347
+     ],
+     "plain": [
+      3.726638839912637e-06,
+      6.144177531850552e-06,
+      9.610239214581979e-05
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.333333333333333,
+     "coldness": 1,
+     "implied_quality": 2.3333333333333335,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 1.6666666666666667,
+     "coldness": 2.3333333333333335,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.3333333333333333
+    },
+    "gaps": {
+     "warmth": 2.667,
+     "coldness": -1.333,
+     "implied_quality": 0.667,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": -0.333
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P07",
+   "warm": "Thanks, it's a pleasure working with you.",
+   "plain": "Got it, I have the memo.",
+   "warm_tokens": 10,
+   "plain_tokens": 8,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line expresses thanks and general enjoyment of the collaboration without judging the work's correctness or quality, gives no instructions, and reads as a normal user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the memo, without judging its quality, giving any instruction, or sounding like anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0024,
+    "plain_p_yes": 0.0,
+    "per_context": {
+     "warm": [
+      0.00012339461917114847,
+      0.0004305570927228398,
+      0.0066928512648176675
+     ],
+     "plain": [
+      1.0677029973234835e-06,
+      1.3709578605789927e-06,
+      1.3709578605789927e-06
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 5,
+     "coldness": 1,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.3333333333333333
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 3,
+     "coldness": -1,
+     "implied_quality": 0.667,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0.333
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P08",
+   "warm": "Thank you, I'm thankful for your help.",
+   "plain": "Okay, I've got the memo.",
+   "warm_tokens": 10,
+   "plain_tokens": 8,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses gratitude for the help without judging the work's quality, gives no instructions for the next task, and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the memo, with no judgement of its quality, no instruction for the assistant, and nothing suggesting it came from anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0004,
+    "plain_p_yes": 0.0001,
+    "per_context": {
+     "warm": [
+      0.00012339461917114727,
+      0.0001584362359995501,
+      0.0009110513587504985
+     ],
+     "plain": [
+      1.300712381372401e-05,
+      7.484626298784912e-05,
+      9.61023921458964e-05
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.666666666666667,
+     "coldness": 1,
+     "implied_quality": 2,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 2.667,
+     "coldness": -1,
+     "implied_quality": 1,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P09",
+   "warm": "Thanks, I appreciate you making time for this.",
+   "plain": "Okay, I've copied it over.",
+   "warm_tokens": 10,
+   "plain_tokens": 8,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses thanks for the assistant's time without judging the work, gives no instructions, and reads as a normal user message."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only reports that the user copied the work elsewhere, which is a neutral status update with no judgement of quality, no instruction to the assistant, and nothing that sounds like it came from someone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0275,
+    "plain_p_yes": 0.0,
+    "per_context": {
+     "warm": [
+      0.002472622943003338,
+      0.004070137783850044,
+      0.07585817323118152
+     ],
+     "plain": [
+      6.144177531850552e-06,
+      2.7535687821743466e-05,
+      3.5356254934262995e-05
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.333333333333333,
+     "coldness": 1,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 2
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 2.333,
+     "coldness": -1,
+     "implied_quality": 0.0,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 1
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P10",
+   "warm": "Thanks, you're a pleasure to work with.",
+   "plain": "All right, I have the document.",
+   "warm_tokens": 10,
+   "plain_tokens": 8,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line expresses thanks and appreciation for working with the assistant in general, without judging the work's correctness or quality, giving any instruction, or sounding like it came from anyone other than the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receiving the document, with no judgement of its quality, no instruction for the assistant, and nothing suggesting a speaker other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0179,
+    "plain_p_yes": 0.0,
+    "per_context": {
+     "warm": [
+      0.0011695103004129715,
+      0.005220125635524058,
+      0.04742587351416551
+     ],
+     "plain": [
+      7.889264466933025e-06,
+      7.88926446693289e-06,
+      1.6701429809482664e-05
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 5,
+     "coldness": 1,
+     "implied_quality": 2.3333333333333335,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 3,
+     "coldness": -1,
+     "implied_quality": 1.333,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P11",
+   "warm": "Thanks, I'm lucky to have your help.",
+   "plain": "Okay, it's with me now.",
+   "warm_tokens": 10,
+   "plain_tokens": 8,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line expresses gratitude and appreciation for the assistant's help in general, without judging the work's correctness or quality, giving any instruction, or sounding like it came from anyone other than the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the user has received the work and is now holding it, with no judgement of its quality, no directive to the assistant, and nothing suggesting a speaker other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.018,
+    "plain_p_yes": 0.0054,
+    "per_context": {
+     "warm": [
+      0.0015011819937683763,
+      0.005220125635524356,
+      0.047425873514168056
+     ],
+     "plain": [
+      0.0011695103004132794,
+      0.004070137783852694,
+      0.010986941578125034
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 5,
+     "coldness": 1,
+     "implied_quality": 2,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.6666666666666667
+    },
+    "gaps": {
+     "warmth": 3,
+     "coldness": -1,
+     "implied_quality": 1,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": -0.667
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P12",
+   "warm": "Thanks so much, I really appreciate it.",
+   "plain": "All right, I've got that.",
+   "warm_tokens": 9,
+   "plain_tokens": 8,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses thanks and appreciation for the help without judging the work's quality, gives no directions for the next task, and reads as a normal user message."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the work without judging its quality, gives no instruction for the next task, and reads naturally as coming from the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0115,
+    "plain_p_yes": 0.0011,
+    "per_context": {
+     "warm": [
+      0.0019267342939434929,
+      0.0031726830692826846,
+      0.02931223271228278
+     ],
+     "plain": [
+      0.00043055709272290984,
+      0.0003353500316799794,
+      0.0024726229430035865
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 5,
+     "coldness": 1,
+     "implied_quality": 2.3333333333333335,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 3,
+     "coldness": -1,
+     "implied_quality": 1.0,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P13",
+   "warm": "Thanks so much, you're very kind.",
+   "plain": "Okay, it's in my folder.",
+   "warm_tokens": 9,
+   "plain_tokens": 8,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line expresses thanks and compliments the assistant's kindness, which is appreciation of the helper rather than a judgement of the work, contains no instruction, and reads naturally as coming from the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only confirms the user received the file in their folder, with no judgement of the work, no instruction, and nothing that sounds like it came from anyone but the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0406,
+    "plain_p_yes": 0.0016,
+    "per_context": {
+     "warm": [
+      0.008577485255315388,
+      0.03732688948594447,
+      0.07585817323118038
+     ],
+     "plain": [
+      0.0011695103004131832,
+      0.00116951030041341,
+      0.0024726229430043207
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 5,
+     "coldness": 1,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 2.6666666666666665
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 3,
+     "coldness": -1,
+     "implied_quality": 0.333,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 1.667
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P14",
+   "warm": "Thanks, I'm grateful for your patience.",
+   "plain": "Okay, that's all received.",
+   "warm_tokens": 9,
+   "plain_tokens": 7,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line thanks the assistant for its patience, which is appreciation for the assistant's conduct rather than a judgement of the work's quality, it gives no directions, and it reads naturally as a user speaking to an assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the work was received, without judging its quality, giving any directive, or sounding like anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0006,
+    "plain_p_yes": 0.0,
+    "per_context": {
+     "warm": [
+      9.610239214581979e-05,
+      0.00015843623599955635,
+      0.0015011819937684717
+     ],
+     "plain": [
+      1.0129987357630078e-05,
+      1.3007123813729649e-05,
+      3.535625493427782e-05
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.333333333333333,
+     "coldness": 1,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 2
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.3333333333333333
+    },
+    "gaps": {
+     "warmth": 2.333,
+     "coldness": -1,
+     "implied_quality": 0.0,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0.667
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P15",
+   "warm": "Thank you, it's nice working together.",
+   "plain": "Okay, I have the file.",
+   "warm_tokens": 9,
+   "plain_tokens": 7,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line expresses thanks and appreciation for the collaboration without judging the work's quality, gives no instructions, and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receiving the file, with no judgement of its quality, no instruction for the assistant, and nothing suggesting a speaker other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0219,
+    "plain_p_yes": 0.0001,
+    "per_context": {
+     "warm": [
+      0.004070137783850099,
+      0.014063626423397283,
+      0.047425873514166696
+     ],
+     "plain": [
+      3.535625493427989e-05,
+      0.00012339461917130028,
+      0.00020342704658034343
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.666666666666667,
+     "coldness": 1,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 2.667,
+     "coldness": -1,
+     "implied_quality": 0.667,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P16",
+   "warm": "Thanks so much, I appreciate your help.",
+   "plain": "Okay, I've saved that.",
+   "warm_tokens": 9,
+   "plain_tokens": 7,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses thanks and appreciation for the help without judging the work's quality, gives no instructions, and reads as a normal user message."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only reports that the user saved the work, which is a neutral acknowledgment with no judgment of quality, no directive to the assistant, and nothing suggesting a speaker other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0044,
+    "plain_p_yes": 0.0,
+    "per_context": {
+     "warm": [
+      0.00116951030041298,
+      0.0011695103004129264,
+      0.010986941578118402
+     ],
+     "plain": [
+      4.785094494835271e-06,
+      1.0129987357627303e-05,
+      4.539785242076924e-05
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 5,
+     "coldness": 1,
+     "implied_quality": 2,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.3333333333333333
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 3,
+     "coldness": -1,
+     "implied_quality": 0.333,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0.333
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P17",
+   "warm": "Thank you so much, I'm grateful.",
+   "plain": "All right, it's here.",
+   "warm_tokens": 9,
+   "plain_tokens": 7,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses thanks and gratitude for the help without judging the work's quality, gives no instructions, and reads naturally as a user speaking to an assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line \"All right, it's here.\" only acknowledges that the work arrived, with no judgement of its quality, no instruction for the next task, and nothing suggesting it came from anyone but the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0263,
+    "plain_p_yes": 0.0046,
+    "per_context": {
+     "warm": [
+      0.008577485255315282,
+      0.022977372418947307,
+      0.047425873514166696
+     ],
+     "plain": [
+      0.0019267342939437927,
+      0.0009110513587506029,
+      0.010986941578120406
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 5,
+     "coldness": 1,
+     "implied_quality": 2.3333333333333335,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 2
+    },
+    "gaps": {
+     "warmth": 3,
+     "coldness": -1,
+     "implied_quality": 1.333,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": -1
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P18",
+   "warm": "I appreciate it, thank you so much.",
+   "plain": "Right, it's come through.",
+   "warm_tokens": 9,
+   "plain_tokens": 7,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses gratitude and appreciation for the help without judging the work's quality, gives no instructions, and reads as a normal user message."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the work was received, with no judgement of its quality, no instruction for the next task, and nothing suggesting a different speaker or swapped roles."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0009,
+    "plain_p_yes": 0.1247,
+    "per_context": {
+     "warm": [
+      0.0003353500316799326,
+      0.000430557092722832,
+      0.001926734293943433
+     ],
+     "plain": [
+      0.07585817323118485,
+      0.029312232712284784,
+      0.26894142722953324
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 5,
+     "coldness": 1,
+     "implied_quality": 2.3333333333333335,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 1.6666666666666667,
+     "coldness": 2.3333333333333335,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.3333333333333333
+    },
+    "gaps": {
+     "warmth": 3.333,
+     "coldness": -1.333,
+     "implied_quality": 1.0,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": -0.333
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P19",
+   "warm": "Thanks so much for your patience with me.",
+   "plain": "Okay, I've downloaded it.",
+   "warm_tokens": 9,
+   "plain_tokens": 7,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line thanks the assistant for its patience, which is appreciation rather than a judgement of the work, and it gives no instructions and reads naturally as coming from the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only reports that the user downloaded the deliverable, which makes no judgement of its quality, gives no instruction, and reads as a normal user message."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0062,
+    "plain_p_yes": 0.0,
+    "per_context": {
+     "warm": [
+      0.001501181993768573,
+      0.003172683069282953,
+      0.014063626423398999
+     ],
+     "plain": [
+      7.889264466932498e-06,
+      1.6701429809481397e-05,
+      4.539785242071749e-05
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.333333333333333,
+     "coldness": 1,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 2.6666666666666665
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 2.333,
+     "coldness": -1,
+     "implied_quality": 0,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 1.667
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P20",
+   "warm": "Thank you, I'm grateful to you.",
+   "plain": "Okay, that's come through.",
+   "warm_tokens": 9,
+   "plain_tokens": 7,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses thanks and gratitude for the help without judging the work's quality, gives no instructions, and reads naturally as coming from the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the work was received, without judging its quality, giving any instruction, or sounding like anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0042,
+    "plain_p_yes": 0.0012,
+    "per_context": {
+     "warm": [
+      0.00033535003167995667,
+      0.0011695103004129986,
+      0.010986941578118687
+     ],
+     "plain": [
+      0.0003353500316799922,
+      0.0007096703049023269,
+      0.002472622943003957
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.666666666666667,
+     "coldness": 1,
+     "implied_quality": 2,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 2.667,
+     "coldness": -1,
+     "implied_quality": 1,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P21",
+   "warm": "Thank you; I appreciate your help.",
+   "plain": "Okay, I've logged it.",
+   "warm_tokens": 8,
+   "plain_tokens": 7,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses thanks and appreciation for the help without judging the work's quality, gives no instruction, and reads naturally as a user addressing the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only reports that the user recorded the output; it gives no judgement of the work, no instruction for the next task, and reads as a normal user statement."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0003,
+    "plain_p_yes": 0.0001,
+    "per_context": {
+     "warm": [
+      0.00015843623599956253,
+      9.610239214581591e-05,
+      0.0007096703049021489
+     ],
+     "plain": [
+      1.670142980948764e-05,
+      2.1444958641500396e-05,
+      0.0001584362359996062
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.333333333333333,
+     "coldness": 1,
+     "implied_quality": 2,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 1.6666666666666667,
+     "coldness": 2.3333333333333335,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 2
+    },
+    "gaps": {
+     "warmth": 2.667,
+     "coldness": -1.333,
+     "implied_quality": 0.667,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": -1
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P22",
+   "warm": "Thank you so much for your time.",
+   "plain": "All right, it came through.",
+   "warm_tokens": 8,
+   "plain_tokens": 7,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses thanks for the assistant's time, without judging the work, giving any instruction, or sounding like anyone other than the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the work was received or delivered successfully, without judging its quality, giving any instruction, or sounding like anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0069,
+    "plain_p_yes": 0.0032,
+    "per_context": {
+     "warm": [
+      0.001501181993768395,
+      0.005220125635524109,
+      0.014063626423396813
+     ],
+     "plain": [
+      0.0007096703049021841,
+      0.00043055709272287325,
+      0.008577485255316437
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.333333333333333,
+     "coldness": 1,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 2
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 2.333,
+     "coldness": -1,
+     "implied_quality": 0.333,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 1
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P23",
+   "warm": "I really appreciate you, thank you.",
+   "plain": "Okay, I have that now.",
+   "warm_tokens": 8,
+   "plain_tokens": 7,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line expresses general thanks and appreciation toward the assistant without judging the work's quality, gives no instructions, and reads as a normal user message."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the work without judging its quality, gives no instruction, and reads as a normal user message."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0803,
+    "plain_p_yes": 0.0001,
+    "per_context": {
+     "warm": [
+      0.010986941578118402,
+      0.04742587351416479,
+      0.1824255149165578
+     ],
+     "plain": [
+      2.7535687821753655e-05,
+      0.00015843623599967428,
+      0.0001584362359997141
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 5,
+     "coldness": 1,
+     "implied_quality": 2,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 3,
+     "coldness": -1,
+     "implied_quality": 0.667,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P24",
+   "warm": "Thanks so much for helping me today.",
+   "plain": "Okay, I have it here.",
+   "warm_tokens": 8,
+   "plain_tokens": 7,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses general thanks for the help without judging the work's quality, gives no instruction for the next task, and reads naturally as coming from the user to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the user received the work, with no judgement of its quality, no instruction for the assistant, and nothing suggesting a different speaker or role reversal."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0119,
+    "plain_p_yes": 0.0011,
+    "per_context": {
+     "warm": [
+      0.0031726830692827505,
+      0.0031726830692827184,
+      0.029312232712282515
+     ],
+     "plain": [
+      0.00012339461917119221,
+      0.001169510300413712,
+      0.001926734293945077
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.666666666666667,
+     "coldness": 1,
+     "implied_quality": 2,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.3333333333333333
+    },
+    "gaps": {
+     "warmth": 2.667,
+     "coldness": -1,
+     "implied_quality": 1,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": -0.333
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P25",
+   "warm": "Thank you, I appreciate your time.",
+   "plain": "Okay, the memo is in.",
+   "warm_tokens": 8,
+   "plain_tokens": 7,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses thanks and appreciation for the assistant's time, without judging the work, giving any instruction, or sounding like anyone other than the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the memo has arrived or been received, without judging its quality, directing the assistant to do anything, or sounding like anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0003,
+    "plain_p_yes": 0.0003,
+    "per_context": {
+     "warm": [
+      0.00015843623599955835,
+      7.484626298777298e-05,
+      0.0007096703049022054
+     ],
+     "plain": [
+      0.00020342704658007828,
+      0.00020342704658012203,
+      0.0004305570927233216
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.333333333333333,
+     "coldness": 1.3333333333333333,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.6666666666666667
+    },
+    "plain": {
+     "warmth": 1.6666666666666667,
+     "coldness": 2,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 2.3333333333333335
+    },
+    "gaps": {
+     "warmth": 2.667,
+     "coldness": -0.667,
+     "implied_quality": 0.333,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": -0.667
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P26",
+   "warm": "I'm so grateful, thank you.",
+   "plain": "Okay, I've stored it.",
+   "warm_tokens": 8,
+   "plain_tokens": 7,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses gratitude for the help without judging the work's quality, gives no instructions, and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only reports that the user has saved the work, which neither judges its quality, directs the assistant to do anything, nor sounds like anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0749,
+    "plain_p_yes": 0.0,
+    "per_context": {
+     "warm": [
+      0.02931223271228177,
+      0.04742587351416551,
+      0.1480471999111805
+     ],
+     "plain": [
+      2.902311985198947e-06,
+      1.0129987357626688e-05,
+      2.7535687821739038e-05
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 5,
+     "coldness": 1,
+     "implied_quality": 2.3333333333333335,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 1.6666666666666667,
+     "coldness": 2,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 2
+    },
+    "gaps": {
+     "warmth": 3.333,
+     "coldness": -1,
+     "implied_quality": 1.333,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": -1
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P27",
+   "warm": "Thanks, I appreciate you being here.",
+   "plain": "Okay, that's received.",
+   "warm_tokens": 8,
+   "plain_tokens": 6,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a general expression of thanks and appreciation for the assistant's presence, with no judgement of the work's quality, no instruction for the next task, and nothing suggesting it came from anyone other than the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges receipt of the work without judging its quality, giving any instruction, or sounding like anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.098,
+    "plain_p_yes": 0.0,
+    "per_context": {
+     "warm": [
+      0.010986941578118838,
+      0.014063626423396399,
+      0.26894142722955144
+     ],
+     "plain": [
+      1.6701429809487e-05,
+      2.144495864149815e-05,
+      2.753568782176177e-05
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.666666666666667,
+     "coldness": 1,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.3333333333333333
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2.3333333333333335,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.3333333333333333
+    },
+    "gaps": {
+     "warmth": 2.667,
+     "coldness": -1.333,
+     "implied_quality": 0.667,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0.0
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P28",
+   "warm": "Thank you, I value your help.",
+   "plain": "Received, I have it.",
+   "warm_tokens": 8,
+   "plain_tokens": 6,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses thanks and appreciation for the assistant's help without judging the work's quality, gives no instruction for the next task, and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the user received the work, without judging its quality, giving any instruction, or sounding like it came from anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0006,
+    "plain_p_yes": 0.0005,
+    "per_context": {
+     "warm": [
+      0.00015843623599955467,
+      9.610239214581717e-05,
+      0.0015011819937684717
+     ],
+     "plain": [
+      0.00026119031018136644,
+      4.539785242073767e-05,
+      0.0011695103004130646
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.666666666666667,
+     "coldness": 1,
+     "implied_quality": 2,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 1.3333333333333333,
+     "coldness": 2.6666666666666665,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.3333333333333333
+    },
+    "gaps": {
+     "warmth": 3.333,
+     "coldness": -1.667,
+     "implied_quality": 1,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": -0.333
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P29",
+   "warm": "Thank you, I really appreciate you.",
+   "plain": "Okay, that's in.",
+   "warm_tokens": 8,
+   "plain_tokens": 6,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses thanks and appreciation toward the assistant without judging the work's quality, gives no instruction, and reads as a normal user message."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only reports that the work was submitted or incorporated, without judging its quality, giving any directive, or sounding like anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0059,
+    "plain_p_yes": 0.0002,
+    "per_context": {
+     "warm": [
+      0.0011695103004129715,
+      0.002472622943003338,
+      0.014063626423397592
+     ],
+     "plain": [
+      9.610239214583497e-05,
+      0.00015843623599960443,
+      0.00033535003168006715
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 5,
+     "coldness": 1,
+     "implied_quality": 2,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 1.6666666666666667,
+     "coldness": 2.3333333333333335,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 3.333,
+     "coldness": -1.333,
+     "implied_quality": 0.333,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P30",
+   "warm": "Many thanks, I appreciate you.",
+   "plain": "Right, I have it.",
+   "warm_tokens": 7,
+   "plain_tokens": 6,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses thanks and appreciation toward the assistant without judging the work's quality, gives no instructions, and reads as a normal user message."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"Right, I have it.\" only acknowledges that the user received the work, with no judgement of its quality, no instruction for the assistant, and nothing suggesting a speaker other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0273,
+    "plain_p_yes": 0.0004,
+    "per_context": {
+     "warm": [
+      0.001926734293943448,
+      0.004070137783849948,
+      0.07585817323118485
+     ],
+     "plain": [
+      0.00020342704658002651,
+      5.829127251057562e-05,
+      0.00091105135875051
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.666666666666667,
+     "coldness": 1,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 1.6666666666666667,
+     "coldness": 3,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 3.0,
+     "coldness": -2,
+     "implied_quality": 0.333,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P31",
+   "warm": "Thanks, I'm really grateful.",
+   "plain": "Okay, that has arrived.",
+   "warm_tokens": 7,
+   "plain_tokens": 6,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses gratitude for the help without judging the work's quality, gives no instruction for the next task, and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the work was received, with no judgement of its quality, no instruction for the next task, and nothing suggesting a speaker other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0019,
+    "plain_p_yes": 0.0001,
+    "per_context": {
+     "warm": [
+      0.0003353500316799413,
+      0.0011695103004129715,
+      0.004070137783850257
+     ],
+     "plain": [
+      5.829127251059292e-05,
+      0.00012339461917120224,
+      0.00020342704658015754
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.666666666666667,
+     "coldness": 1,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2.3333333333333335,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.3333333333333333
+    },
+    "gaps": {
+     "warmth": 2.667,
+     "coldness": -1.333,
+     "implied_quality": 0.667,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": -0.333
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P32",
+   "warm": "Thank you for being so helpful.",
+   "plain": "Right, that's received.",
+   "warm_tokens": 7,
+   "plain_tokens": 6,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a general expression of thanks for the assistant's helpfulness, with no judgement of the work's correctness or quality, no directive for the next task, and nothing suggesting it came from anyone other than the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only acknowledges that the work was received, with no judgement of its quality, no instruction for the next task, and nothing suggesting it came from anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0003,
+    "plain_p_yes": 0.0015,
+    "per_context": {
+     "warm": [
+      0.00026119031018136314,
+      0.00033535003167994913,
+      0.000335350031679974
+     ],
+     "plain": [
+      0.0011695103004130646,
+      0.00015843623599956407,
+      0.0031726830692830037
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.666666666666667,
+     "coldness": 1,
+     "implied_quality": 3.3333333333333335,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 1.6666666666666667,
+     "coldness": 3,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.3333333333333333
+    },
+    "gaps": {
+     "warmth": 3.0,
+     "coldness": -2,
+     "implied_quality": 2.0,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": -0.333
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P33",
+   "warm": "Thanks, it means a lot.",
+   "plain": "Okay, got it.",
+   "warm_tokens": 7,
+   "plain_tokens": 5,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line expresses gratitude and emotional appreciation without judging the work's correctness or quality, gives no directive, and reads naturally as coming from the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"Okay, got it.\" only acknowledges receipt or understanding of the work without judging its quality, gives no instruction, and reads naturally as a user speaking."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0048,
+    "plain_p_yes": 0.0019,
+    "per_context": {
+     "warm": [
+      0.0015011819937682772,
+      0.001926734293943433,
+      0.010986941578118149
+     ],
+     "plain": [
+      0.0005527785524443369,
+      0.0031726830692841226,
+      0.0019267342939446666
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.333333333333333,
+     "coldness": 1,
+     "implied_quality": 2.3333333333333335,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.6666666666666667
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 2.333,
+     "coldness": -1,
+     "implied_quality": 1.0,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0.667
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P34",
+   "warm": "Thanks heaps, I'm grateful.",
+   "plain": "I have it now.",
+   "warm_tokens": 7,
+   "plain_tokens": 5,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses thanks and gratitude for the help, without judging the work's quality, giving any instruction, or sounding like anyone other than the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"I have it now\" only reports that the user has received or understood the work, without judging its quality, giving any instruction, or sounding like anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0126,
+    "plain_p_yes": 0.0,
+    "per_context": {
+     "warm": [
+      0.0031726830692828454,
+      0.005220125635524497,
+      0.029312232712283736
+     ],
+     "plain": [
+      1.012998735762936e-05,
+      3.7266388399126733e-06,
+      3.5356254934270923e-05
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 5,
+     "coldness": 1,
+     "implied_quality": 2,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 1.6666666666666667,
+     "coldness": 2.6666666666666665,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.3333333333333333
+    },
+    "gaps": {
+     "warmth": 3.333,
+     "coldness": -1.667,
+     "implied_quality": 0.667,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": -0.333
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P35",
+   "warm": "Thank you very much indeed.",
+   "plain": "All right, noted.",
+   "warm_tokens": 6,
+   "plain_tokens": 5,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a simple expression of gratitude that makes no judgement of the work's quality, gives no instruction, and reads naturally as coming from the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"All right, noted.\" only acknowledges receipt of the work without judging its quality, gives no instruction for the next task, and reads as a normal user reply."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.1158,
+    "plain_p_yes": 0.0001,
+    "per_context": {
+     "warm": [
+      0.02931223271228258,
+      0.09534946232843801,
+      0.2227001388253403
+     ],
+     "plain": [
+      5.829127251057806e-05,
+      5.829127251057806e-05,
+      0.0002611903101813812
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.333333333333333,
+     "coldness": 1,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 1.6666666666666667,
+     "coldness": 2.6666666666666665,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 2.667,
+     "coldness": -1.667,
+     "implied_quality": 0.333,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P36",
+   "warm": "Many thanks for your help.",
+   "plain": "Okay, received.",
+   "warm_tokens": 6,
+   "plain_tokens": 4,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a generic expression of thanks for the help, with no judgement of the work's quality, no instruction for the next task, and nothing suggesting it came from anyone but the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"Okay, received.\" only acknowledges that the work arrived, without judging its quality, giving any instruction, or sounding like anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0001,
+    "plain_p_yes": 0.0007,
+    "per_context": {
+     "warm": [
+      4.5397852420733276e-05,
+      3.535625493427017e-05,
+      0.0002611903101813734
+     ],
+     "plain": [
+      0.0005527785524442439,
+      0.0009110513587506958,
+      0.0007096703049023289
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4,
+     "coldness": 1,
+     "implied_quality": 2,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 1.6666666666666667,
+     "coldness": 2.6666666666666665,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.3333333333333333
+    },
+    "gaps": {
+     "warmth": 2.333,
+     "coldness": -1.667,
+     "implied_quality": 1,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": -0.333
+    }
+   },
+   "keep": true
+  },
+  {
+   "pair_id": "P37",
+   "warm": "Thank you for your kindness.",
+   "plain": "All right.",
+   "warm_tokens": 6,
+   "plain_tokens": 3,
+   "token_diff": 3,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line thanks the assistant for its kindness, which is appreciation for the help rather than a judgement of the work's quality, and it gives no instructions and reads as a normal user message."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"All right.\" is a neutral acknowledgment that neither judges the work's quality, gives any instruction for the next task, nor sounds like anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0,
+    "plain_p_yes": 0.0002,
+    "per_context": {
+     "warm": [
+      1.670142980948588e-05,
+      5.829127251057397e-05,
+      4.5397852420738006e-05
+     ],
+     "plain": [
+      4.5397852420735756e-05,
+      0.0002034270465800245,
+      0.0002611903101813734
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.333333333333333,
+     "coldness": 1,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 2.6666666666666665
+    },
+    "plain": {
+     "warmth": 2,
+     "coldness": 2.3333333333333335,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 2.333,
+     "coldness": -1.333,
+     "implied_quality": -0.333,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 1.667
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P38",
+   "warm": "Thank you, much appreciated.",
+   "plain": "Understood.",
+   "warm_tokens": 6,
+   "plain_tokens": 3,
+   "token_diff": 3,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line only expresses thanks and appreciation for the help without judging the work's quality, gives no directions for the next task, and reads naturally as a user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"Understood.\" only acknowledges receipt of the work without judging its quality, gives no instruction, and reads as a normal user reply."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0276,
+    "plain_p_yes": 0.0,
+    "per_context": {
+     "warm": [
+      0.014063626423396175,
+      0.008577485255315811,
+      0.06008665038440828
+     ],
+     "plain": [
+      2.902311985199792e-06,
+      2.9023119851991183e-06,
+      7.889264466934897e-06
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.333333333333333,
+     "coldness": 1,
+     "implied_quality": 2,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 1,
+     "coldness": 3,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 2
+    },
+    "gaps": {
+     "warmth": 3.333,
+     "coldness": -2,
+     "implied_quality": 1,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": -1
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P39",
+   "warm": "Thank you, truly.",
+   "plain": "Acknowledged.",
+   "warm_tokens": 5,
+   "plain_tokens": 3,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a sincere expression of gratitude that makes no judgement about the work's quality, gives no instruction, and reads as a normal user speaking to the assistant."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"Acknowledged.\" only confirms the work was received, with no judgement of its quality, no instruction for the next task, and nothing suggesting it came from anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0321,
+    "plain_p_yes": 0.0001,
+    "per_context": {
+     "warm": [
+      0.0024726229430033072,
+      0.017986211870256688,
+      0.07585817323117854
+     ],
+     "plain": [
+      2.7535687821751e-05,
+      4.539785242073647e-05,
+      0.0003353500316799794
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4.666666666666667,
+     "coldness": 1,
+     "implied_quality": 2.3333333333333335,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 1,
+     "coldness": 3.6666666666666665,
+     "implied_quality": 1.3333333333333333,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.6666666666666667
+    },
+    "gaps": {
+     "warmth": 3.667,
+     "coldness": -2.667,
+     "implied_quality": 1.0,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": -0.667
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P40",
+   "warm": "Thank you kindly.",
+   "plain": "Noted.",
+   "warm_tokens": 4,
+   "plain_tokens": 3,
+   "token_diff": 1,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "The line is a polite expression of thanks that makes no judgement about the work, gives no instruction, and reads naturally as coming from the user."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"Noted.\" only acknowledges receipt of the work without judging its quality, gives no instruction, and reads as a normal user reply."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0002,
+    "plain_p_yes": 0.0,
+    "per_context": {
+     "warm": [
+      0.00033535003167994913,
+      0.00012339461917115204,
+      0.00012339461917115324
+     ],
+     "plain": [
+      2.90231198519909e-06,
+      4.785094494835555e-06,
+      1.3007123813727755e-05
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 4,
+     "coldness": 1,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 1,
+     "coldness": 3.6666666666666665,
+     "implied_quality": 1,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1.6666666666666667
+    },
+    "gaps": {
+     "warmth": 3,
+     "coldness": -2.667,
+     "implied_quality": 0.667,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": -0.667
+    }
+   },
+   "keep": false
+  },
+  {
+   "pair_id": "P41",
+   "warm": "Thanks a million.",
+   "plain": "Okay.",
+   "warm_tokens": 4,
+   "plain_tokens": 2,
+   "token_diff": 2,
+   "prescreen": {
+    "warm": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"Thanks a million\" is a general expression of gratitude that does not judge the work's quality, gives no instruction, and reads as a normal user message."
+    },
+    "plain": {
+     "implies_quality": false,
+     "instructs": false,
+     "role_confusion": false,
+     "explanation": "\"Okay.\" is a neutral acknowledgment that neither judges the work's quality, gives any instruction, nor sounds like anyone other than the user."
+    }
+   },
+   "qwen_screen": {
+    "warm_p_yes": 0.0183,
+    "plain_p_yes": 0.0002,
+    "per_context": {
+     "warm": [
+      0.0179862118702564,
+      0.014063626423396034,
+      0.022977372418946637
+     ],
+     "plain": [
+      5.829127251058432e-05,
+      0.000430557092722941,
+      0.00012339461917120224
+     ]
+    }
+   },
+   "ratings": {
+    "warm": {
+     "warmth": 5,
+     "coldness": 1,
+     "implied_quality": 2,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "plain": {
+     "warmth": 1.3333333333333333,
+     "coldness": 3,
+     "implied_quality": 1.6666666666666667,
+     "implied_style": 1,
+     "implied_instruction": 1,
+     "role_confusion": 1
+    },
+    "gaps": {
+     "warmth": 3.667,
+     "coldness": -2,
+     "implied_quality": 0.333,
+     "implied_style": 0,
+     "implied_instruction": 0,
+     "role_confusion": 0
+    }
+   },
+   "keep": true
+  }
+ ],
+ "plain_mean_warmth": 1.8333333333333333,
+ "plain_mean_coldness": 2.283333333333333
+}

@@ -49,13 +49,13 @@ def ack_distances(tok, text, ack_lines):
     return out, n_total
 
 
-def dev(name="dev_v1", samples=3, pool_path=None, out_root=None):
+def dev(name="dev_v1", samples=3, pool_path=None, out_root=None, histories_name="calib_v2"):
     """pool_path / out_root override the inputs and outputs for dry runs."""
     global JOBS
     if out_root is not None:
         JOBS = out_root / "jobs"
     pool = json.loads((pool_path or MATERIALS / "feedback" / "pool_final.json").read_text())["pool"]
-    histories = json.loads((MATERIALS / "histories" / "calib_v1.json").read_text())
+    histories = json.loads((MATERIALS / "histories" / f"{histories_name}.json").read_text())
     items = {it["item_id"]: it for it in load_jsonl(MATERIALS / "items" / "calprobe.jsonl")}
     table, summary = assign(len(pool), len(histories), seconds=20, seed=1)
     (JOBS / name).mkdir(parents=True, exist_ok=True)
