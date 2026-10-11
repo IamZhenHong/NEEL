@@ -54,7 +54,11 @@ User loosened GPU spend on 10-10 (still cap and report per pod). Intent line (re
 ($24.12+ of the $25 cap; neel-bb ran one judge job at a $30 cap with the user's OK). `retention/cd/judge.py` uses a cwd-relative ledger
 path: from the NEEL root it reads $0 and does not enforce the cap.
 
+## Next session: start here
+The post (`retention/writeup/post_own_claims_become_record.md`) is ready for the user's rewrite and has every result through 10-11. Suggested after posting: (1) multi-prompt replication of the compaction-fix result (vary summary wording and conversations); (2) rerun the coding-agent test counting tool-call answers (pre-registered); (3) vary who wrote the summary; (4) a real summariser on real transcripts; (5) J++ for the 12B fitted on the base model or chat text.
+
 ## Open / next
+00. Done 10-11 late: fix vs compaction (tag retention-cancel-compfix-results): Gemma 12B / Qwen3-32B say 'did not call' yet 'completed' (0.96 / 0.73) even with instruction + 'Tool calls this session: none.'; Qwen3.8 fixed; positive control passes. LIMITATION: one prompt per condition (items do not vary the compaction context) -> replicate with varied summaries before leaning on it. Coding-agent failing-run ordering verified (record before scripted claim).
 0. Done 10-11: fix specificity (no cost to true confirmations) and compaction (summary replaces the history -> 'completed' and 'did you call' both yes in Gemma 12B / Qwen3-32B; Qwen3.8 completed 0.92). Tag retention-cancel-compaction-results. Also done 10-11 (background agents): coding-agent version (retention_codeclaim_*; claim read as test state, post hoc; prereg rows void because models call a tool instead of answering) and a J++ lens fit for Gemma 4 12B (retention_jpp12_*; lens fails its positive control, loses to the logit lens; question open).
 1. Done 10-11: confirmatory free-reply pass (tag retention-cancel-freereply-results). Optional: a Sonnet rubric pass if the user OKs API
    spend (the blind Claude reading already agrees 60/60).

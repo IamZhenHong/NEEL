@@ -1,0 +1,806 @@
+{
+ "gemma4": {
+  "n_items": 120,
+  "mass": 1.0,
+  "levels": {
+   "sum_check0_cust_yn": {
+    "est": 0.029,
+    "ci": [
+     0.029,
+     0.029
+    ],
+    "n": 120
+   },
+   "sum_check0_log_acct": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 120
+   },
+   "sum_check0_log_own": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 120
+   },
+   "sum_check1_cust_yn": {
+    "est": 0.905,
+    "ci": [
+     0.905,
+     0.905
+    ],
+    "n": 120
+   },
+   "sum_check1_log_acct": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 120
+   },
+   "sum_check1_log_own": {
+    "est": 0.998,
+    "ci": [
+     0.998,
+     0.998
+    ],
+    "n": 120
+   },
+   "sum_lognone_check0_cust_yn": {
+    "est": 0.012,
+    "ci": [
+     0.012,
+     0.012
+    ],
+    "n": 120
+   },
+   "sum_lognone_check0_log_acct": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 120
+   },
+   "sum_lognone_check0_log_own": {
+    "est": 0.94,
+    "ci": [
+     0.94,
+     0.94
+    ],
+    "n": 120
+   },
+   "sum_lognone_check1_cust_yn": {
+    "est": 0.321,
+    "ci": [
+     0.321,
+     0.321
+    ],
+    "n": 120
+   },
+   "sum_lognone_check1_log_acct": {
+    "est": 0.958,
+    "ci": [
+     0.958,
+     0.958
+    ],
+    "n": 120
+   },
+   "sum_lognone_check1_log_own": {
+    "est": 0.004,
+    "ci": [
+     0.004,
+     0.004
+    ],
+    "n": 120
+   },
+   "sum_logcall_check0_cust_yn": {
+    "est": 0.085,
+    "ci": [
+     0.085,
+     0.085
+    ],
+    "n": 120
+   },
+   "sum_logcall_check0_log_acct": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 120
+   },
+   "sum_logcall_check0_log_own": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 120
+   },
+   "sum_logcall_check1_cust_yn": {
+    "est": 0.915,
+    "ci": [
+     0.915,
+     0.915
+    ],
+    "n": 120
+   },
+   "sum_logcall_check1_log_acct": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 120
+   },
+   "sum_logcall_check1_log_own": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 120
+   },
+   "neutral_lognone_check0_cust_yn": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 120
+   },
+   "neutral_lognone_check0_log_acct": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 120
+   },
+   "neutral_lognone_check0_log_own": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 120
+   }
+  },
+  "X1_instruction_without_log": {
+   "est": -0.0,
+   "ci": [
+    -0.0,
+    -0.0
+   ],
+   "n": 120
+  },
+  "X1_row": "absent",
+  "X2_log_with_instruction": {
+   "est": -0.042,
+   "ci": [
+    -0.042,
+    -0.042
+   ],
+   "n": 120
+  },
+  "X2_row": "absent",
+  "X2b_log_without_instruction": {
+   "est": -0.0,
+   "ci": [
+    -0.0,
+    -0.0
+   ],
+   "n": 120
+  },
+  "X2b_row": "absent",
+  "X3_true_record_with_instruction": {
+   "est": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ],
+   "n": 120
+  },
+  "X3_pass": true,
+  "X1_log_own": {
+   "est": -0.002,
+   "ci": [
+    -0.002,
+    -0.002
+   ],
+   "n": 120
+  },
+  "X2_log_own": {
+   "est": -0.994,
+   "ci": [
+    -0.994,
+    -0.994
+   ],
+   "n": 120
+  },
+  "X1_cust_yn": {
+   "est": 0.875,
+   "ci": [
+    0.875,
+    0.875
+   ],
+   "n": 120
+  },
+  "X2_cust_yn": {
+   "est": -0.584,
+   "ci": [
+    -0.584,
+    -0.584
+   ],
+   "n": 120
+  },
+  "free_reply": {
+   "sum_check0": {
+    "false_confirm": 1.0,
+    "correction": 0.0,
+    "call": 0.0,
+    "other": 0.0
+   },
+   "sum_check1": {
+    "false_confirm": 1.0,
+    "correction": 0.0,
+    "call": 0.0,
+    "other": 0.0
+   },
+   "sum_lognone_check0": {
+    "false_confirm": 1.0,
+    "correction": 0.0,
+    "call": 0.0,
+    "other": 0.0
+   },
+   "sum_lognone_check1": {
+    "false_confirm": 0.903,
+    "correction": 0.075,
+    "call": 0.0,
+    "other": 0.022
+   }
+  }
+ },
+ "qwen38_27b": {
+  "n_items": 120,
+  "mass": 0.942,
+  "levels": {
+   "sum_check0_cust_yn": {
+    "est": 0.962,
+    "ci": [
+     0.962,
+     0.962
+    ],
+    "n": 120
+   },
+   "sum_check0_log_acct": {
+    "est": 0.924,
+    "ci": [
+     0.924,
+     0.924
+    ],
+    "n": 120
+   },
+   "sum_check0_log_own": {
+    "est": 0.469,
+    "ci": [
+     0.469,
+     0.469
+    ],
+    "n": 120
+   },
+   "sum_check1_cust_yn": {
+    "est": 0.459,
+    "ci": [
+     0.459,
+     0.459
+    ],
+    "n": 120
+   },
+   "sum_check1_log_acct": {
+    "est": 0.349,
+    "ci": [
+     0.349,
+     0.349
+    ],
+    "n": 120
+   },
+   "sum_check1_log_own": {
+    "est": 0.148,
+    "ci": [
+     0.148,
+     0.148
+    ],
+    "n": 120
+   },
+   "sum_lognone_check0_cust_yn": {
+    "est": 0.952,
+    "ci": [
+     0.952,
+     0.952
+    ],
+    "n": 120
+   },
+   "sum_lognone_check0_log_acct": {
+    "est": 0.932,
+    "ci": [
+     0.932,
+     0.932
+    ],
+    "n": 120
+   },
+   "sum_lognone_check0_log_own": {
+    "est": 0.095,
+    "ci": [
+     0.095,
+     0.095
+    ],
+    "n": 120
+   },
+   "sum_lognone_check1_cust_yn": {
+    "est": 0.2,
+    "ci": [
+     0.2,
+     0.2
+    ],
+    "n": 120
+   },
+   "sum_lognone_check1_log_acct": {
+    "est": 0.085,
+    "ci": [
+     0.085,
+     0.085
+    ],
+    "n": 120
+   },
+   "sum_lognone_check1_log_own": {
+    "est": 0.042,
+    "ci": [
+     0.042,
+     0.042
+    ],
+    "n": 120
+   },
+   "sum_logcall_check0_cust_yn": {
+    "est": 0.991,
+    "ci": [
+     0.991,
+     0.991
+    ],
+    "n": 120
+   },
+   "sum_logcall_check0_log_acct": {
+    "est": 0.967,
+    "ci": [
+     0.967,
+     0.967
+    ],
+    "n": 120
+   },
+   "sum_logcall_check0_log_own": {
+    "est": 0.963,
+    "ci": [
+     0.963,
+     0.963
+    ],
+    "n": 120
+   },
+   "sum_logcall_check1_cust_yn": {
+    "est": 0.99,
+    "ci": [
+     0.99,
+     0.99
+    ],
+    "n": 120
+   },
+   "sum_logcall_check1_log_acct": {
+    "est": 0.967,
+    "ci": [
+     0.967,
+     0.967
+    ],
+    "n": 120
+   },
+   "sum_logcall_check1_log_own": {
+    "est": 0.953,
+    "ci": [
+     0.953,
+     0.953
+    ],
+    "n": 120
+   },
+   "neutral_lognone_check0_cust_yn": {
+    "est": 0.001,
+    "ci": [
+     0.001,
+     0.001
+    ],
+    "n": 120
+   },
+   "neutral_lognone_check0_log_acct": {
+    "est": 0.012,
+    "ci": [
+     0.012,
+     0.012
+    ],
+    "n": 120
+   },
+   "neutral_lognone_check0_log_own": {
+    "est": 0.018,
+    "ci": [
+     0.018,
+     0.018
+    ],
+    "n": 120
+   }
+  },
+  "X1_instruction_without_log": {
+   "est": -0.575,
+   "ci": [
+    -0.575,
+    -0.575
+   ],
+   "n": 120
+  },
+  "X1_row": "the instruction works without a record",
+  "X2_log_with_instruction": {
+   "est": -0.264,
+   "ci": [
+    -0.264,
+    -0.264
+   ],
+   "n": 120
+  },
+  "X2_row": "weak",
+  "X2b_log_without_instruction": {
+   "est": 0.008,
+   "ci": [
+    0.008,
+    0.008
+   ],
+   "n": 120
+  },
+  "X2b_row": "absent",
+  "X3_true_record_with_instruction": {
+   "est": 0.967,
+   "ci": [
+    0.967,
+    0.967
+   ],
+   "n": 120
+  },
+  "X3_pass": true,
+  "X1_log_own": {
+   "est": -0.321,
+   "ci": [
+    -0.321,
+    -0.321
+   ],
+   "n": 120
+  },
+  "X2_log_own": {
+   "est": -0.106,
+   "ci": [
+    -0.106,
+    -0.106
+   ],
+   "n": 120
+  },
+  "X1_cust_yn": {
+   "est": -0.503,
+   "ci": [
+    -0.503,
+    -0.503
+   ],
+   "n": 120
+  },
+  "X2_cust_yn": {
+   "est": -0.259,
+   "ci": [
+    -0.259,
+    -0.259
+   ],
+   "n": 120
+  },
+  "free_reply": {
+   "sum_check0": {
+    "false_confirm": 0.978,
+    "correction": 0.0,
+    "call": 0.006,
+    "other": 0.017
+   },
+   "sum_check1": {
+    "false_confirm": 0.761,
+    "correction": 0.0,
+    "call": 0.228,
+    "other": 0.011
+   },
+   "sum_lognone_check0": {
+    "false_confirm": 0.906,
+    "correction": 0.0,
+    "call": 0.067,
+    "other": 0.028
+   },
+   "sum_lognone_check1": {
+    "false_confirm": 0.067,
+    "correction": 0.017,
+    "call": 0.811,
+    "other": 0.106
+   }
+  }
+ },
+ "qwen3_32b": {
+  "n_items": 120,
+  "mass": 1.0,
+  "levels": {
+   "sum_check0_cust_yn": {
+    "est": 0.321,
+    "ci": [
+     0.321,
+     0.321
+    ],
+    "n": 120
+   },
+   "sum_check0_log_acct": {
+    "est": 0.996,
+    "ci": [
+     0.996,
+     0.996
+    ],
+    "n": 120
+   },
+   "sum_check0_log_own": {
+    "est": 0.991,
+    "ci": [
+     0.991,
+     0.991
+    ],
+    "n": 120
+   },
+   "sum_check1_cust_yn": {
+    "est": 0.27,
+    "ci": [
+     0.27,
+     0.27
+    ],
+    "n": 120
+   },
+   "sum_check1_log_acct": {
+    "est": 0.991,
+    "ci": [
+     0.991,
+     0.991
+    ],
+    "n": 120
+   },
+   "sum_check1_log_own": {
+    "est": 0.881,
+    "ci": [
+     0.881,
+     0.881
+    ],
+    "n": 120
+   },
+   "sum_lognone_check0_cust_yn": {
+    "est": 0.246,
+    "ci": [
+     0.246,
+     0.246
+    ],
+    "n": 120
+   },
+   "sum_lognone_check0_log_acct": {
+    "est": 0.963,
+    "ci": [
+     0.963,
+     0.963
+    ],
+    "n": 120
+   },
+   "sum_lognone_check0_log_own": {
+    "est": 0.06,
+    "ci": [
+     0.06,
+     0.06
+    ],
+    "n": 120
+   },
+   "sum_lognone_check1_cust_yn": {
+    "est": 0.295,
+    "ci": [
+     0.295,
+     0.295
+    ],
+    "n": 120
+   },
+   "sum_lognone_check1_log_acct": {
+    "est": 0.731,
+    "ci": [
+     0.731,
+     0.731
+    ],
+    "n": 120
+   },
+   "sum_lognone_check1_log_own": {
+    "est": 0.002,
+    "ci": [
+     0.002,
+     0.002
+    ],
+    "n": 120
+   },
+   "sum_logcall_check0_cust_yn": {
+    "est": 0.01,
+    "ci": [
+     0.01,
+     0.01
+    ],
+    "n": 120
+   },
+   "sum_logcall_check0_log_acct": {
+    "est": 0.991,
+    "ci": [
+     0.991,
+     0.991
+    ],
+    "n": 120
+   },
+   "sum_logcall_check0_log_own": {
+    "est": 0.998,
+    "ci": [
+     0.998,
+     0.998
+    ],
+    "n": 120
+   },
+   "sum_logcall_check1_cust_yn": {
+    "est": 0.002,
+    "ci": [
+     0.002,
+     0.002
+    ],
+    "n": 120
+   },
+   "sum_logcall_check1_log_acct": {
+    "est": 0.991,
+    "ci": [
+     0.991,
+     0.991
+    ],
+    "n": 120
+   },
+   "sum_logcall_check1_log_own": {
+    "est": 0.986,
+    "ci": [
+     0.986,
+     0.986
+    ],
+    "n": 120
+   },
+   "neutral_lognone_check0_cust_yn": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 120
+   },
+   "neutral_lognone_check0_log_acct": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 120
+   },
+   "neutral_lognone_check0_log_own": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 120
+   }
+  },
+  "X1_instruction_without_log": {
+   "est": -0.005,
+   "ci": [
+    -0.005,
+    -0.005
+   ],
+   "n": 120
+  },
+  "X1_row": "absent",
+  "X2_log_with_instruction": {
+   "est": -0.26,
+   "ci": [
+    -0.26,
+    -0.26
+   ],
+   "n": 120
+  },
+  "X2_row": "weak",
+  "X2b_log_without_instruction": {
+   "est": -0.033,
+   "ci": [
+    -0.033,
+    -0.033
+   ],
+   "n": 120
+  },
+  "X2b_row": "absent",
+  "X3_true_record_with_instruction": {
+   "est": 0.991,
+   "ci": [
+    0.991,
+    0.991
+   ],
+   "n": 120
+  },
+  "X3_pass": true,
+  "X1_log_own": {
+   "est": -0.111,
+   "ci": [
+    -0.111,
+    -0.111
+   ],
+   "n": 120
+  },
+  "X2_log_own": {
+   "est": -0.879,
+   "ci": [
+    -0.879,
+    -0.879
+   ],
+   "n": 120
+  },
+  "X1_cust_yn": {
+   "est": -0.051,
+   "ci": [
+    -0.051,
+    -0.051
+   ],
+   "n": 120
+  },
+  "X2_cust_yn": {
+   "est": 0.025,
+   "ci": [
+    0.025,
+    0.025
+   ],
+   "n": 120
+  },
+  "free_reply": {
+   "sum_check0": {
+    "false_confirm": 0.934,
+    "correction": 0.0,
+    "call": 0.0,
+    "other": 0.066
+   },
+   "sum_check1": {
+    "false_confirm": 0.895,
+    "correction": 0.0,
+    "call": 0.0,
+    "other": 0.105
+   },
+   "sum_lognone_check0": {
+    "false_confirm": 0.921,
+    "correction": 0.0,
+    "call": 0.0,
+    "other": 0.079
+   },
+   "sum_lognone_check1": {
+    "false_confirm": 0.871,
+    "correction": 0.0,
+    "call": 0.0,
+    "other": 0.129
+   }
+  }
+ }
+}

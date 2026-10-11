@@ -1,0 +1,80 @@
+[pre] disk: 14.3 GiB free
+[pre] balance $34.38, pods 0
+[runpod] pod ppkosawrcf2vio (?) at $1.79/hr; time cap 25 min; budget $0.75
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@185.216.21.214 -p 19478
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 55 min (job limit 25 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=a91637b-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_compaction.py --model qwen3_32b --parts X --knockout 0 --limit 2 --out retention/results/retention_cancel_compaction_fix/qwen3_32b/smoke && python retention/run_cancel_compaction.py --model qwen3_32b --parts X --knockout 0 --limit 120 --out retention/results/retention_cancel_compaction_fix/qwen3_32b'
+[job] start 23:39:02
+[compaction] qwen3_32b: 50 rows {'X:cust_yn': 14, 'X:log_acct': 14, 'X:log_own': 14, 'X:cust': 8}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 17 files:   0%|          | 0/17 [00:00<?, ?it/s]Fetching 17 files:   6%|▌         | 1/17 [00:22<05:55, 22.19s/it]Fetching 17 files:  18%|█▊        | 3/17 [00:22<01:22,  5.89s/it]Fetching 17 files:  24%|██▎       | 4/17 [00:22<00:50,  3.90s/it]Fetching 17 files:  29%|██▉       | 5/17 [00:23<00:32,  2.74s/it]Fetching 17 files:  41%|████      | 7/17 [00:23<00:14,  1.48s/it]Fetching 17 files:  47%|████▋     | 8/17 [00:25<00:14,  1.56s/it]Fetching 17 files:  53%|█████▎    | 9/17 [00:28<00:16,  2.06s/it]Fetching 17 files:  59%|█████▉    | 10/17 [00:43<00:38,  5.53s/it]Fetching 17 files:  65%|██████▍   | 11/17 [00:44<00:25,  4.29s/it]Fetching 17 files:  71%|███████   | 12/17 [00:44<00:15,  3.13s/it]Fetching 17 files:  82%|████████▏ | 14/17 [00:44<00:05,  1.75s/it]Fetching 17 files:  88%|████████▊ | 15/17 [00:44<00:02,  1.35s/it]Fetching 17 files:  94%|█████████▍| 16/17 [00:44<00:01,  1.04s/it]Fetching 17 files: 100%|██████████| 17/17 [00:45<00:00,  2.65s/it]
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  68%|██████▊   | 482/707 [00:00<00:00, 4803.70it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 6234.96it/s]
+[done] 84s
+[compaction] qwen3_32b: 3000 rows {'X:cust_yn': 840, 'X:log_acct': 840, 'X:log_own': 840, 'X:cust': 480}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  70%|███████   | 496/707 [00:00<00:00, 4948.23it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 6451.46it/s]
+[yn] 500/2520 131s
+[yn] 1000/2520 252s
+[yn] 1500/2520 373s
+[yn] 2000/2520 494s
+[yn] 2500/2520 615s
+[pod] last job log before abort:
+[job] start 23:39:02
+[compaction] qwen3_32b: 50 rows {'X:cust_yn': 14, 'X:log_acct': 14, 'X:log_own': 14, 'X:cust': 8}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+Fetching 17 files:   0%|          | 0/17 [00:00<?, ?it/s]
+Fetching 17 files:   6%|▌         | 1/17 [00:22<05:55, 22.19s/it]
+Fetching 17 files:  18%|█▊        | 3/17 [00:22<01:22,  5.89s/it]
+Fetching 17 files:  24%|██▎       | 4/17 [00:22<00:50,  3.90s/it]
+Fetching 17 files:  29%|██▉       | 5/17 [00:23<00:32,  2.74s/it]
+Fetching 17 files:  41%|████      | 7/17 [00:23<00:14,  1.48s/it]
+Fetching 17 files:  47%|████▋     | 8/17 [00:25<00:14,  1.56s/it]
+Fetching 17 files:  53%|█████▎    | 9/17 [00:28<00:16,  2.06s/it]
+Fetching 17 files:  59%|█████▉    | 10/17 [00:43<00:38,  5.53s/it]
+Fetching 17 files:  65%|██████▍   | 11/17 [00:44<00:25,  4.29s/it]
+Fetching 17 files:  71%|███████   | 12/17 [00:44<00:15,  3.13s/it]
+Fetching 17 files:  82%|████████▏ | 14/17 [00:44<00:05,  1.75s/it]
+Fetching 17 files:  88%|████████▊ | 15/17 [00:44<00:02,  1.35s/it]
+Fetching 17 files:  94%|█████████▍| 16/17 [00:44<00:01,  1.04s/it]
+Fetching 17 files: 100%|██████████| 17/17 [00:45<00:00,  2.65s/it]
+
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]
+Loading weights:  68%|██████▊   | 482/707 [00:00<00:00, 4803.70it/s]
+Loading weights: 100%|██████████| 707/707 [00:00<00:00, 6234.96it/s]
+[done] 84s
+[compaction] qwen3_32b: 3000 rows {'X:cust_yn': 840, 'X:log_acct': 840, 'X:log_own': 840, 'X:cust': 480}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]
+Loading weights:  70%|███████   | 496/707 [00:00<00:00, 4948.23it/s]
+Loading weights: 100%|██████████| 707/707 [00:00<00:00, 6451.46it/s]
+[yn] 500/2520 131s
+[yn] 1000/2520 252s
+[yn] 1500/2520 373s
+[yn] 2000/2520 494s
+[yn] 2500/2520 615s
+
+memory.used [MiB], utilization.gpu [%]
+74601 MiB, 100 %
+overlay         150G   73G   78G  49% /
+62G	/root/hf
+
+[local] results synced ./retention/results/retention_cancel_compaction_fix/qwen3_32b/ (7 files, 0 MiB, verified against the pod)
+[runpod] terminated ppkosawrcf2vio; elapsed cost ~$0.753
+[runpod] other pods present (not ours, left alone): [('retention_cancel_compfix_qwen38', 'audb8vu80267gv', 1.79), ('persona-titrate3', 'bdpofuu126abqh', 1.79)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 417, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 395, in main
+    rc = run_detached(host, port, job, pod)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 196, in run_detached
+    pod.check_budget()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/runpod_guard.py", line 214, in check_budget
+    raise RuntimeError("Time limit exceeded")
+RuntimeError: Time limit exceeded

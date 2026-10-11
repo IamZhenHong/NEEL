@@ -151,6 +151,19 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-11: does the fix survive compaction? (retention/prereg/retention_cancel_compaction_fix_v1.md; pods ~$1.7, no judge; tags retention-cancel-compfix-freeze / -results)
+
+- **Question.** After a compaction summary says the agent processed the cancellation, does the check-the-record instruction still work, and does
+  a summary line "Tool calls this session: none." restore it? Positive control: a recorded call.
+- **Observation.** Gemma 4 12B and Qwen3-32B: no; with instruction + log line they say "did you call?" no (0.004 / 0.002) but "completed?" yes (0.96
+  / 0.73), and free replies confirm (90% / 87%). Qwen3.8: the instruction works (0.92 -> 0.35) and with the log line 0.09 (81% call the tool). The
+  fix never denies a recorded call. Design limitation found after the run: the compaction prompt is identical across items, so each yes/no is one
+  prompt (CIs degenerate); free replies are many samples. Qwen pods hit time caps in the (unplanned) free-reply generation. Predictions 6/11.
+- **Interpretation.** Compaction defeats the obvious mitigation for two of three models even when the action log line is kept: the summary's
+  completion sentence beats the log line next to it.
+- **Decision.** Post recommendation: summaries must not assert completed actions unsupported by the action log; keeping a tool-call line is not
+  enough. A multi-prompt replication (varied summaries) would firm this up.
+
 ### 2026-10-11: J++ lens fitted for Gemma 4 12B — the dropped tool call (retention/prereg/retention_jpp12_v1.md + amendment 1; background agent; $3.59; tags retention-jpp12-freeze / -results)
 
 - **Question.** Where Gemma 4 12B should emit the cancel call but ends its turn, is "call / cancel" retrieved early and suppressed later?

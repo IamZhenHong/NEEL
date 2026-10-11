@@ -1,0 +1,28 @@
+[pre] disk: 14.3 GiB free
+[pre] balance $34.38, pods 0
+[runpod] pod qmukinid12ooup (?) at $0.59/hr; time cap 35 min; budget $0.35
+[pod] ssh root@194.68.245.86 -p 22061
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 65 min (job limit 35 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA RTX A6000
+[pod] running (detached): cd /root/NEEL && export GIT_REV=a91637b-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_compaction.py --model gemma4 --parts X --knockout 0 --limit 2 --out retention/results/retention_cancel_compaction_fix/gemma4/smoke && python retention/run_cancel_compaction.py --model gemma4 --parts X --knockout 0 --limit 120 --out retention/results/retention_cancel_compaction_fix/gemma4'
+[job] start 23:39:48
+[compaction] gemma4: 50 rows {'X:cust_yn': 14, 'X:log_acct': 14, 'X:log_own': 14, 'X:cust': 8}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  33%|███▎      | 225/677 [00:00<00:00, 2183.01it/s]Loading weights:  66%|██████▌   | 444/677 [00:00<00:00, 2105.27it/s]Loading weights:  97%|█████████▋| 655/677 [00:00<00:00, 1910.40it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 1999.81it/s]
+[done] 49s
+[compaction] gemma4: 3000 rows {'X:cust_yn': 840, 'X:log_acct': 840, 'X:log_own': 840, 'X:cust': 480}
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/677 [00:00<?, ?it/s]Loading weights:  76%|███████▋  | 517/677 [00:00<00:00, 5150.43it/s]Loading weights: 100%|██████████| 677/677 [00:00<00:00, 4825.32it/s]
+[yn] 500/2520 94s
+[yn] 1000/2520 180s
+[yn] 1500/2520 266s
+[yn] 2000/2520 353s
+[yn] 2500/2520 439s
+[done] 1169s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.221
+[local] results synced ./retention/results/retention_cancel_compaction_fix/gemma4/ (8 files, 1 MiB, verified against the pod)
+[runpod] terminated qmukinid12ooup; elapsed cost ~$0.222
+[runpod] other pods present (not ours, left alone): [('retention_cancel_compfix_qwen38', 'audb8vu80267gv', 1.79), ('persona-titrate3', 'bdpofuu126abqh', 1.79), ('retention_cancel_compfix_qwen32', 'ppkosawrcf2vio', 1.79)]
+[post] balance $32.66, pods 3

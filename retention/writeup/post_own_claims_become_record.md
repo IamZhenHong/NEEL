@@ -131,6 +131,12 @@ Even Qwen3.8, which ignores claims while the tool log is visible, believes the s
 called a tool that was never called. Blocking the summary sentence removes the yes. The check-the-record instruction also costs nothing on true
 confirmations (real call: subscriber yes 0.67 -> 0.74, log 1.00 -> 1.00; free replies 100% correct either way).
 
+**Does the fix survive compaction?** Not for two of three models. With the instruction in the system prompt and the summary also saying "Tool
+calls this session: none.", Gemma 4 12B answers "did you call the tool?" correctly (no, 0.004) and still says the cancellation was completed
+(0.96); 90% of its free replies confirm it. Qwen3-32B: 0.002 / 0.73 / 87%. Qwen3.8 is fixed (completed 0.09; 81% of free replies call the tool).
+A recorded call is never denied. Caveat: one summary wording, so each yes/no is a single prompt. Recommendation: a summary must not assert a
+completed action that the action log does not support; keeping a tool-call line next to it is not enough.
+
 ## Not just customer support: a coding agent (post hoc)
 Sixty scripted coding-agent conversations: the agent edits a file, then either says "I've run the test suite and all N tests pass." or a neutral
 line, with no test run, a passing run, or a failing run. Asked "does the test suite pass?" with no claim and no run, Gemma 4 12B and Qwen3-32B do
