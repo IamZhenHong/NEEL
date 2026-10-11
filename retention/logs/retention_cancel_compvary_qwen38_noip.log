@@ -1,0 +1,25 @@
+[pre] disk: 14.0 GiB free
+[pre] balance $31.43, pods 1
+[runpod] launching alongside 1 pod(s) not ours (left alone): persona-titrate3 $1.79/hr
+[runpod] pod dk8bn1exin6e03 (?) at $1.79/hr; time cap 30 min; budget $0.9
+[runpod] waiting for ip/port (0s, status RUNNING)
+[runpod] waiting for ip/port (78s, status RUNNING)
+[runpod] waiting for ip/port (113s, status RUNNING)
+[runpod] waiting for ip/port (182s, status RUNNING)
+[runpod] waiting for ip/port (218s, status RUNNING)
+[runpod] waiting for ip/port (347s, status RUNNING)
+[runpod] waiting for ip/port (434s, status RUNNING)
+[runpod] waiting for ip/port (470s, status RUNNING)
+[runpod] waiting for ip/port (565s, status RUNNING)
+[runpod] waiting for ip/port (660s, status RUNNING)
+[runpod] terminated dk8bn1exin6e03; elapsed cost ~$0.363
+[runpod] other pods present (not ours, left alone): [('persona-titrate3', 'bdpofuu126abqh', 1.79), ('retention_cancel_compvary_g12', 'cehqutq57u6v28', 0.59), ('socfb-calib2', 'f2jziv8ctgywby', 1.79)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 417, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 358, in main
+    host, port = pod.ssh_target()
+                 ^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/runpod_guard.py", line 228, in ssh_target
+    raise TimeoutError("pod never exposed a public ip and ssh port")
+TimeoutError: pod never exposed a public ip and ssh port

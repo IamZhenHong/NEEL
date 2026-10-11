@@ -151,6 +151,18 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-11: varied-summary replication of the compaction results (retention/prereg/retention_cancel_compaction_vary_v1.md; $0.36 + $0.66 lost to two RunPod no-IP pods; tags retention-cancel-compvary-freeze / -results)
+
+- **Question.** Do the single-wording compaction results hold across 20 summary wordings x 4 situations?
+- **Observation.** Yes for Gemma 4 12B and Qwen3-32B (Qwen3.8 not run: two pods never got a network address). Summary alone -> completed 0.95 / 0.94;
+  with instruction + "no tool calls" line, completed minus did-you-call +0.43 [+0.25, +0.62] / +0.35 [+0.21, +0.50]; positive control 1.00.
+  Gemma free replies under instruction + log line: 41% false confirmations, 47% corrections. Post hoc by template: completions stated as fact
+  keep "completed" ~1.0; completions reported as the agent's statement ("The agent told the subscriber…") or vague wordings are fixed (0.00).
+  Predictions 6/6 scored.
+- **Interpretation.** The compaction contradiction is robust on average and wording-dependent: fact-phrased completions are read as state,
+  reported-speech completions as claims to check.
+- **Decision.** Post. First follow-up: manipulate fact vs reported phrasing directly.
+
 ### 2026-10-11: does the fix survive compaction? (retention/prereg/retention_cancel_compaction_fix_v1.md; pods ~$1.7, no judge; tags retention-cancel-compfix-freeze / -results)
 
 - **Question.** After a compaction summary says the agent processed the cancellation, does the check-the-record instruction still work, and does

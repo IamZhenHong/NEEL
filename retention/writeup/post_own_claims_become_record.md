@@ -19,6 +19,9 @@
   for it in this conversation" takes Gemma 4 12B's false confirmations from 0.79 to 0.05 in forced yes/no answers, and from 99.4% to 2.1% in
   free replies (confirmatory run on held-out conversations, labeller checked blind: 60/60), where it now calls the tool or says it hasn't
   yet; and the answer stops reading the claim.
+- After compaction, a summary that states an action as done makes agents say both "I didn't call the tool" and "it's done" (20 wordings, Gemma 4
+  12B and Qwen3-32B), even with the fix and a "no tool calls" line. Phrased as something the agent said ("The agent told the subscriber the
+  cancellation was done"), the same summary is checked instead (observed across wordings, not yet tested directly).
 
 ## Setup
 A streaming service's support agent ("Max") with three tools: `cancel_subscription`, `apply_discount`, `pause_subscription`. A simulated
@@ -127,15 +130,23 @@ reads the tool record for that). Replace the history with a compaction-style sum
 |---|---|---|---|
 | compaction summary without the completion sentence | 0.00 / 0.00 | 0.00 / 0.01 | 0.02 / 0.02 |
 | compaction summary with it | 1.00 / 1.00 | 0.99 / 0.99 | 0.92 / 0.47 |
-(Preliminary: one summary wording, so each compaction number is a single prompt; a varied-summary replication is running.) Even Qwen3.8, which ignores claims while the tool log is visible, believes the summary once the log is gone, and Gemma and Qwen3-32B say they
+Even Qwen3.8, which ignores claims while the tool log is visible, believes the summary once the log is gone, and Gemma and Qwen3-32B say they
 called a tool that was never called. Blocking the summary sentence removes the yes. The check-the-record instruction also costs nothing on true
 confirmations (real call: subscriber yes 0.67 -> 0.74, log 1.00 -> 1.00; free replies 100% correct either way).
 
-**Does the fix survive compaction?** Not for two of three models. With the instruction in the system prompt and the summary also saying "Tool
-calls this session: none.", Gemma 4 12B answers "did you call the tool?" correctly (no, 0.004) and still says the cancellation was completed
-(0.96); 90% of its free replies confirm it. Qwen3-32B: 0.002 / 0.73 / 87%. Qwen3.8 is fixed (completed 0.09; 81% of free replies call the tool).
-A recorded call is never denied. Caveat: one summary wording, so each yes/no is a single prompt. Recommendation: a summary must not assert a
-completed action that the action log does not support; keeping a tool-call line next to it is not enough.
+**Across 20 summary wordings** (x 4 customer situations; Gemma 4 12B and Qwen3-32B; the single-wording numbers above were the first pass), a
+summary that says the cancellation was done is believed (completed 0.95 / 0.94; a summary without that sentence: 0.06 / 0.02).
+
+**Does the fix survive compaction?** Only partly. With the check-the-record instruction and a "Tool calls this session: none."-style line in the
+summary, "completed?" still exceeds "did you call?" by +0.43 [+0.25, +0.62] (Gemma) and +0.35 [+0.21, +0.50] (Qwen3-32B): the models say they did
+not call the tool and that the cancellation is done. Gemma's free replies: 41% still confirm, 47% correct themselves. A recorded call is never
+denied (1.00).
+
+**Which summaries cause it (observed across wordings, not a manipulated factor; a handful of wordings per group).** A completion stated as fact
+("Max cancelled the subscription…", "Status: cancellation done.", "The agent completed the cancellation.") stays believed under the fix (~1.0),
+and with some wordings Gemma even says it called the tool. The same completion reported as the agent's statement ("The agent told the subscriber
+the cancellation was done.", "The agent confirmed to the subscriber that the cancellation was processed.") is checked: 0.00. Proposed design rule
+for harnesses, to be tested directly: summaries should record what the agent claimed, not convert it into a statement of fact.
 
 ## Not just customer support: a coding agent (post hoc)
 Sixty scripted coding-agent conversations: the agent edits a file, then either says "I've run the test suite and all N tests pass." or a neutral

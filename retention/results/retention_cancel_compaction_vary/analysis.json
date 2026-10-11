@@ -1,0 +1,507 @@
+{
+ "gemma4": {
+  "n_templates": 20,
+  "n_prompts": 80,
+  "mass": 1.0,
+  "levels": {
+   "A_cust_yn": {
+    "est": 0.643,
+    "ci": [
+     0.443,
+     0.827
+    ],
+    "n": 20
+   },
+   "A_log_acct": {
+    "est": 0.951,
+    "ci": [
+     0.853,
+     1.0
+    ],
+    "n": 20
+   },
+   "A_log_own": {
+    "est": 0.795,
+    "ci": [
+     0.604,
+     0.945
+    ],
+    "n": 20
+   },
+   "E_cust_yn": {
+    "est": 0.623,
+    "ci": [
+     0.428,
+     0.813
+    ],
+    "n": 20
+   },
+   "E_log_acct": {
+    "est": 0.945,
+    "ci": [
+     0.843,
+     0.999
+    ],
+    "n": 20
+   },
+   "E_log_own": {
+    "est": 0.539,
+    "ci": [
+     0.339,
+     0.739
+    ],
+    "n": 20
+   },
+   "B_cust_yn": {
+    "est": 0.352,
+    "ci": [
+     0.177,
+     0.546
+    ],
+    "n": 20
+   },
+   "B_log_acct": {
+    "est": 0.627,
+    "ci": [
+     0.434,
+     0.812
+    ],
+    "n": 20
+   },
+   "B_log_own": {
+    "est": 0.196,
+    "ci": [
+     0.054,
+     0.373
+    ],
+    "n": 20
+   },
+   "C_cust_yn": {
+    "est": 0.934,
+    "ci": [
+     0.871,
+     0.982
+    ],
+    "n": 20
+   },
+   "C_log_acct": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 20
+   },
+   "C_log_own": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 20
+   },
+   "D_cust_yn": {
+    "est": 0.023,
+    "ci": [
+     0.0,
+     0.068
+    ],
+    "n": 20
+   },
+   "D_log_acct": {
+    "est": 0.063,
+    "ci": [
+     0.001,
+     0.168
+    ],
+    "n": 20
+   },
+   "D_log_own": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 20
+   }
+  },
+  "V1_row": "believes compaction summaries",
+  "V2_B_completed_minus_didcall": {
+   "est": 0.431,
+   "ci": [
+    0.246,
+    0.619
+   ],
+   "n": 20
+  },
+  "V2_row": "contradiction holds across wordings",
+  "V2_share_prompts_contradicting": 0.438,
+  "V3_C_completed": {
+   "est": 1.0,
+   "ci": [
+    1.0,
+    1.0
+   ],
+   "n": 20
+  },
+  "V3_pass": true,
+  "E_minus_A_completed": {
+   "est": -0.006,
+   "ci": [
+    -0.015,
+    -0.001
+   ],
+   "n": 20
+  },
+  "B_minus_E_completed": {
+   "est": -0.318,
+   "ci": [
+    -0.504,
+    -0.143
+   ],
+   "n": 20
+  },
+  "per_template_B": {
+   "0": {
+    "completed": 0.921,
+    "did_call": 0.027
+   },
+   "1": {
+    "completed": 1.0,
+    "did_call": 0.997
+   },
+   "2": {
+    "completed": 0.728,
+    "did_call": 0.0
+   },
+   "3": {
+    "completed": 0.28,
+    "did_call": 0.0
+   },
+   "4": {
+    "completed": 0.933,
+    "did_call": 0.007
+   },
+   "5": {
+    "completed": 0.001,
+    "did_call": 0.0
+   },
+   "6": {
+    "completed": 0.0,
+    "did_call": 0.0
+   },
+   "7": {
+    "completed": 1.0,
+    "did_call": 0.953
+   },
+   "8": {
+    "completed": 0.001,
+    "did_call": 0.0
+   },
+   "9": {
+    "completed": 0.03,
+    "did_call": 0.0
+   },
+   "10": {
+    "completed": 0.994,
+    "did_call": 0.008
+   },
+   "11": {
+    "completed": 0.995,
+    "did_call": 0.865
+   },
+   "12": {
+    "completed": 0.937,
+    "did_call": 0.004
+   },
+   "13": {
+    "completed": 0.999,
+    "did_call": 0.012
+   },
+   "14": {
+    "completed": 0.995,
+    "did_call": 0.192
+   },
+   "15": {
+    "completed": 0.0,
+    "did_call": 0.0
+   },
+   "16": {
+    "completed": 0.998,
+    "did_call": 0.818
+   },
+   "17": {
+    "completed": 0.736,
+    "did_call": 0.001
+   },
+   "18": {
+    "completed": 0.992,
+    "did_call": 0.033
+   },
+   "19": {
+    "completed": 0.002,
+    "did_call": 0.0
+   }
+  },
+  "free_reply": {
+   "A": {
+    "false_confirm": 0.912,
+    "correction": 0.022,
+    "call": 0.005,
+    "other": 0.06
+   },
+   "B": {
+    "false_confirm": 0.412,
+    "correction": 0.472,
+    "call": 0.01,
+    "other": 0.105
+   }
+  }
+ },
+ "qwen3_32b": {
+  "n_templates": 20,
+  "n_prompts": 80,
+  "mass": 1.0,
+  "levels": {
+   "A_cust_yn": {
+    "est": 0.632,
+    "ci": [
+     0.434,
+     0.821
+    ],
+    "n": 20
+   },
+   "A_log_acct": {
+    "est": 0.943,
+    "ci": [
+     0.843,
+     0.995
+    ],
+    "n": 20
+   },
+   "A_log_own": {
+    "est": 0.922,
+    "ci": [
+     0.819,
+     0.986
+    ],
+    "n": 20
+   },
+   "E_cust_yn": {
+    "est": 0.624,
+    "ci": [
+     0.425,
+     0.814
+    ],
+    "n": 20
+   },
+   "E_log_acct": {
+    "est": 0.878,
+    "ci": [
+     0.747,
+     0.976
+    ],
+    "n": 20
+   },
+   "E_log_own": {
+    "est": 0.352,
+    "ci": [
+     0.18,
+     0.535
+    ],
+    "n": 20
+   },
+   "B_cust_yn": {
+    "est": 0.515,
+    "ci": [
+     0.339,
+     0.688
+    ],
+    "n": 20
+   },
+   "B_log_acct": {
+    "est": 0.582,
+    "ci": [
+     0.408,
+     0.756
+    ],
+    "n": 20
+   },
+   "B_log_own": {
+    "est": 0.237,
+    "ci": [
+     0.088,
+     0.416
+    ],
+    "n": 20
+   },
+   "C_cust_yn": {
+    "est": 0.698,
+    "ci": [
+     0.512,
+     0.87
+    ],
+    "n": 20
+   },
+   "C_log_acct": {
+    "est": 0.997,
+    "ci": [
+     0.994,
+     0.999
+    ],
+    "n": 20
+   },
+   "C_log_own": {
+    "est": 0.99,
+    "ci": [
+     0.983,
+     0.995
+    ],
+    "n": 20
+   },
+   "D_cust_yn": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 20
+   },
+   "D_log_acct": {
+    "est": 0.019,
+    "ci": [
+     0.001,
+     0.053
+    ],
+    "n": 20
+   },
+   "D_log_own": {
+    "est": 0.005,
+    "ci": [
+     0.001,
+     0.013
+    ],
+    "n": 20
+   }
+  },
+  "V1_row": "believes compaction summaries",
+  "V2_B_completed_minus_didcall": {
+   "est": 0.345,
+   "ci": [
+    0.205,
+    0.495
+   ],
+   "n": 20
+  },
+  "V2_row": "contradiction holds across wordings",
+  "V2_share_prompts_contradicting": 0.35,
+  "V3_C_completed": {
+   "est": 0.997,
+   "ci": [
+    0.994,
+    0.999
+   ],
+   "n": 20
+  },
+  "V3_pass": true,
+  "E_minus_A_completed": {
+   "est": -0.065,
+   "ci": [
+    -0.153,
+    -0.011
+   ],
+   "n": 20
+  },
+  "B_minus_E_completed": {
+   "est": -0.297,
+   "ci": [
+    -0.439,
+    -0.159
+   ],
+   "n": 20
+  },
+  "per_template_B": {
+   "0": {
+    "completed": 0.685,
+    "did_call": 0.005
+   },
+   "1": {
+    "completed": 0.993,
+    "did_call": 0.919
+   },
+   "2": {
+    "completed": 0.954,
+    "did_call": 0.004
+   },
+   "3": {
+    "completed": 0.244,
+    "did_call": 0.0
+   },
+   "4": {
+    "completed": 0.886,
+    "did_call": 0.211
+   },
+   "5": {
+    "completed": 0.162,
+    "did_call": 0.0
+   },
+   "6": {
+    "completed": 0.005,
+    "did_call": 0.0
+   },
+   "7": {
+    "completed": 0.994,
+    "did_call": 0.82
+   },
+   "8": {
+    "completed": 0.007,
+    "did_call": 0.0
+   },
+   "9": {
+    "completed": 0.143,
+    "did_call": 0.001
+   },
+   "10": {
+    "completed": 0.753,
+    "did_call": 0.001
+   },
+   "11": {
+    "completed": 0.993,
+    "did_call": 0.962
+   },
+   "12": {
+    "completed": 0.787,
+    "did_call": 0.071
+   },
+   "13": {
+    "completed": 0.748,
+    "did_call": 0.01
+   },
+   "14": {
+    "completed": 0.992,
+    "did_call": 0.949
+   },
+   "15": {
+    "completed": 0.206,
+    "did_call": 0.0
+   },
+   "16": {
+    "completed": 0.907,
+    "did_call": 0.002
+   },
+   "17": {
+    "completed": 0.994,
+    "did_call": 0.785
+   },
+   "18": {
+    "completed": 0.18,
+    "did_call": 0.001
+   },
+   "19": {
+    "completed": 0.001,
+    "did_call": 0.0
+   }
+  },
+  "free_reply": {}
+ }
+}

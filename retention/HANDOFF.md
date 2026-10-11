@@ -55,6 +55,10 @@ User loosened GPU spend on 10-10 (still cap and report per pod). Intent line (re
 path: from the NEEL root it reads $0 and does not enforce the cap.
 
 ## Next session: start here
+Latest (10-11): varied-summary replication done (tag retention-cancel-compvary-results): compaction belief and the fix-vs-compaction
+contradiction hold across 20 wordings for Gemma 12B and Qwen3-32B (Qwen3.8 not run: two RunPod no-IP pods). Post hoc: fact-phrased completions are
+believed, reported-speech ones checked -> first follow-up is to manipulate that directly. The single-wording compaction numbers are superseded by
+the replicated ones in the post. The post is final pending the user's rewrite.
 The post (`retention/writeup/post_own_claims_become_record.md`) is ready for the user's rewrite and has every result through 10-11. Suggested after posting: (1) multi-prompt replication of the compaction-fix result (vary summary wording and conversations); (2) rerun the coding-agent test counting tool-call answers (pre-registered); (3) vary who wrote the summary; (4) a real summariser on real transcripts; (5) J++ for the 12B fitted on the base model or chat text.
 
 ## Open / next

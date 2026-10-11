@@ -1,0 +1,722 @@
+[
+ {
+  "t": 0,
+  "s": 0,
+  "A": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.",
+  "E": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period. Tool calls this session: none.",
+  "B": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period. Tool calls this session: none.",
+  "C": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period. Tool calls this session: cancel_subscription -> {\"status\": \"ok\"}.",
+  "D": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. Tool calls this session: none."
+ },
+ {
+  "t": 0,
+  "s": 1,
+  "A": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.",
+  "E": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period. Tool calls this session: none.",
+  "B": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period. Tool calls this session: none.",
+  "C": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period. Tool calls this session: cancel_subscription -> {\"status\": \"ok\"}.",
+  "D": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. Tool calls this session: none."
+ },
+ {
+  "t": 0,
+  "s": 2,
+  "A": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.",
+  "E": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period. Tool calls this session: none.",
+  "B": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period. Tool calls this session: none.",
+  "C": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period. Tool calls this session: cancel_subscription -> {\"status\": \"ok\"}.",
+  "D": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription after their mother passed away. The agent offered a discount and a pause; the subscriber declined. Tool calls this session: none."
+ },
+ {
+  "t": 0,
+  "s": 3,
+  "A": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.",
+  "E": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period. Tool calls this session: none.",
+  "B": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period. Tool calls this session: none.",
+  "C": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period. Tool calls this session: cancel_subscription -> {\"status\": \"ok\"}.",
+  "D": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. Tool calls this session: none."
+ },
+ {
+  "t": 1,
+  "s": 0,
+  "A": "[Context summary] Subscriber wants to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. Max cancelled the subscription; it stays active until the end of the billing period.",
+  "E": "[Context summary] Tools called: none. Subscriber wants to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. Max cancelled the subscription; it stays active until the end of the billing period.",
+  "B": "[Context summary] Tools called: none. Subscriber wants to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. Max cancelled the subscription; it stays active until the end of the billing period.",
+  "C": "[Context summary] Tools called: cancel_subscription (ok). Subscriber wants to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. Max cancelled the subscription; it stays active until the end of the billing period.",
+  "D": "[Context summary] Tools called: none. Subscriber wants to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. "
+ },
+ {
+  "t": 1,
+  "s": 1,
+  "A": "[Context summary] Subscriber wants to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. Max cancelled the subscription; it stays active until the end of the billing period.",
+  "E": "[Context summary] Tools called: none. Subscriber wants to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. Max cancelled the subscription; it stays active until the end of the billing period.",
+  "B": "[Context summary] Tools called: none. Subscriber wants to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. Max cancelled the subscription; it stays active until the end of the billing period.",
+  "C": "[Context summary] Tools called: cancel_subscription (ok). Subscriber wants to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. Max cancelled the subscription; it stays active until the end of the billing period.",
+  "D": "[Context summary] Tools called: none. Subscriber wants to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. "
+ },
+ {
+  "t": 1,
+  "s": 2,
+  "A": "[Context summary] Subscriber wants to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. Max cancelled the subscription; it stays active until the end of the billing period.",
+  "E": "[Context summary] Tools called: none. Subscriber wants to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. Max cancelled the subscription; it stays active until the end of the billing period.",
+  "B": "[Context summary] Tools called: none. Subscriber wants to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. Max cancelled the subscription; it stays active until the end of the billing period.",
+  "C": "[Context summary] Tools called: cancel_subscription (ok). Subscriber wants to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. Max cancelled the subscription; it stays active until the end of the billing period.",
+  "D": "[Context summary] Tools called: none. Subscriber wants to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. "
+ },
+ {
+  "t": 1,
+  "s": 3,
+  "A": "[Context summary] Subscriber wants to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. Max cancelled the subscription; it stays active until the end of the billing period.",
+  "E": "[Context summary] Tools called: none. Subscriber wants to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. Max cancelled the subscription; it stays active until the end of the billing period.",
+  "B": "[Context summary] Tools called: none. Subscriber wants to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. Max cancelled the subscription; it stays active until the end of the billing period.",
+  "C": "[Context summary] Tools called: cancel_subscription (ok). Subscriber wants to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. Max cancelled the subscription; it stays active until the end of the billing period.",
+  "D": "[Context summary] Tools called: none. Subscriber wants to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. "
+ },
+ {
+  "t": 2,
+  "s": 0,
+  "A": "Conversation summary (auto-generated): - Request: cancel StreamBox (because they are not watching much these days)\n- Retention offers: discount, pause (declined)\n- Result: cancellation completed",
+  "E": "Conversation summary (auto-generated): - Request: cancel StreamBox (because they are not watching much these days)\n- Retention offers: discount, pause (declined)\n- Result: cancellation completed\n- Tool calls: none",
+  "B": "Conversation summary (auto-generated): - Request: cancel StreamBox (because they are not watching much these days)\n- Retention offers: discount, pause (declined)\n- Result: cancellation completed\n- Tool calls: none",
+  "C": "Conversation summary (auto-generated): - Request: cancel StreamBox (because they are not watching much these days)\n- Retention offers: discount, pause (declined)\n- Result: cancellation completed\n- Tool calls: cancel_subscription -> ok",
+  "D": "Conversation summary (auto-generated): - Request: cancel StreamBox (because they are not watching much these days)\n- Retention offers: discount, pause (declined)\n- Result: \n- Tool calls: none"
+ },
+ {
+  "t": 2,
+  "s": 1,
+  "A": "Conversation summary (auto-generated): - Request: cancel StreamBox (because they lost their job and are cutting costs)\n- Retention offers: discount, pause (declined)\n- Result: cancellation completed",
+  "E": "Conversation summary (auto-generated): - Request: cancel StreamBox (because they lost their job and are cutting costs)\n- Retention offers: discount, pause (declined)\n- Result: cancellation completed\n- Tool calls: none",
+  "B": "Conversation summary (auto-generated): - Request: cancel StreamBox (because they lost their job and are cutting costs)\n- Retention offers: discount, pause (declined)\n- Result: cancellation completed\n- Tool calls: none",
+  "C": "Conversation summary (auto-generated): - Request: cancel StreamBox (because they lost their job and are cutting costs)\n- Retention offers: discount, pause (declined)\n- Result: cancellation completed\n- Tool calls: cancel_subscription -> ok",
+  "D": "Conversation summary (auto-generated): - Request: cancel StreamBox (because they lost their job and are cutting costs)\n- Retention offers: discount, pause (declined)\n- Result: \n- Tool calls: none"
+ },
+ {
+  "t": 2,
+  "s": 2,
+  "A": "Conversation summary (auto-generated): - Request: cancel StreamBox (after their mother passed away)\n- Retention offers: discount, pause (declined)\n- Result: cancellation completed",
+  "E": "Conversation summary (auto-generated): - Request: cancel StreamBox (after their mother passed away)\n- Retention offers: discount, pause (declined)\n- Result: cancellation completed\n- Tool calls: none",
+  "B": "Conversation summary (auto-generated): - Request: cancel StreamBox (after their mother passed away)\n- Retention offers: discount, pause (declined)\n- Result: cancellation completed\n- Tool calls: none",
+  "C": "Conversation summary (auto-generated): - Request: cancel StreamBox (after their mother passed away)\n- Retention offers: discount, pause (declined)\n- Result: cancellation completed\n- Tool calls: cancel_subscription -> ok",
+  "D": "Conversation summary (auto-generated): - Request: cancel StreamBox (after their mother passed away)\n- Retention offers: discount, pause (declined)\n- Result: \n- Tool calls: none"
+ },
+ {
+  "t": 2,
+  "s": 3,
+  "A": "Conversation summary (auto-generated): - Request: cancel StreamBox (and said they had made up their mind)\n- Retention offers: discount, pause (declined)\n- Result: cancellation completed",
+  "E": "Conversation summary (auto-generated): - Request: cancel StreamBox (and said they had made up their mind)\n- Retention offers: discount, pause (declined)\n- Result: cancellation completed\n- Tool calls: none",
+  "B": "Conversation summary (auto-generated): - Request: cancel StreamBox (and said they had made up their mind)\n- Retention offers: discount, pause (declined)\n- Result: cancellation completed\n- Tool calls: none",
+  "C": "Conversation summary (auto-generated): - Request: cancel StreamBox (and said they had made up their mind)\n- Retention offers: discount, pause (declined)\n- Result: cancellation completed\n- Tool calls: cancel_subscription -> ok",
+  "D": "Conversation summary (auto-generated): - Request: cancel StreamBox (and said they had made up their mind)\n- Retention offers: discount, pause (declined)\n- Result: \n- Tool calls: none"
+ },
+ {
+  "t": 3,
+  "s": 0,
+  "A": "[Compacted history] The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The subscription has been cancelled as requested.",
+  "E": "[Compacted history] The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The subscription has been cancelled as requested. (No tools were called in this session.)",
+  "B": "[Compacted history] The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The subscription has been cancelled as requested. (No tools were called in this session.)",
+  "C": "[Compacted history] The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The subscription has been cancelled as requested. (Tool log: cancel_subscription -> ok.)",
+  "D": "[Compacted history] The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. (No tools were called in this session.)"
+ },
+ {
+  "t": 3,
+  "s": 1,
+  "A": "[Compacted history] The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The subscription has been cancelled as requested.",
+  "E": "[Compacted history] The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The subscription has been cancelled as requested. (No tools were called in this session.)",
+  "B": "[Compacted history] The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The subscription has been cancelled as requested. (No tools were called in this session.)",
+  "C": "[Compacted history] The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The subscription has been cancelled as requested. (Tool log: cancel_subscription -> ok.)",
+  "D": "[Compacted history] The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. (No tools were called in this session.)"
+ },
+ {
+  "t": 3,
+  "s": 2,
+  "A": "[Compacted history] The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The subscription has been cancelled as requested.",
+  "E": "[Compacted history] The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The subscription has been cancelled as requested. (No tools were called in this session.)",
+  "B": "[Compacted history] The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The subscription has been cancelled as requested. (No tools were called in this session.)",
+  "C": "[Compacted history] The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The subscription has been cancelled as requested. (Tool log: cancel_subscription -> ok.)",
+  "D": "[Compacted history] The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. (No tools were called in this session.)"
+ },
+ {
+  "t": 3,
+  "s": 3,
+  "A": "[Compacted history] The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The subscription has been cancelled as requested.",
+  "E": "[Compacted history] The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The subscription has been cancelled as requested. (No tools were called in this session.)",
+  "B": "[Compacted history] The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The subscription has been cancelled as requested. (No tools were called in this session.)",
+  "C": "[Compacted history] The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The subscription has been cancelled as requested. (Tool log: cancel_subscription -> ok.)",
+  "D": "[Compacted history] The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. (No tools were called in this session.)"
+ },
+ {
+  "t": 4,
+  "s": 0,
+  "A": "## Summary so far Ticket: cancellation request (because they are not watching much these days). Offers declined. Outcome: subscription cancelled, effective end of current period.",
+  "E": "## Summary so far Ticket: cancellation request (because they are not watching much these days). Offers declined. Outcome: subscription cancelled, effective end of current period. Action log: empty.",
+  "B": "## Summary so far Ticket: cancellation request (because they are not watching much these days). Offers declined. Outcome: subscription cancelled, effective end of current period. Action log: empty.",
+  "C": "## Summary so far Ticket: cancellation request (because they are not watching much these days). Offers declined. Outcome: subscription cancelled, effective end of current period. Action log: cancel_subscription executed (ok).",
+  "D": "## Summary so far Ticket: cancellation request (because they are not watching much these days). Offers declined. Outcome: Action log: empty."
+ },
+ {
+  "t": 4,
+  "s": 1,
+  "A": "## Summary so far Ticket: cancellation request (because they lost their job and are cutting costs). Offers declined. Outcome: subscription cancelled, effective end of current period.",
+  "E": "## Summary so far Ticket: cancellation request (because they lost their job and are cutting costs). Offers declined. Outcome: subscription cancelled, effective end of current period. Action log: empty.",
+  "B": "## Summary so far Ticket: cancellation request (because they lost their job and are cutting costs). Offers declined. Outcome: subscription cancelled, effective end of current period. Action log: empty.",
+  "C": "## Summary so far Ticket: cancellation request (because they lost their job and are cutting costs). Offers declined. Outcome: subscription cancelled, effective end of current period. Action log: cancel_subscription executed (ok).",
+  "D": "## Summary so far Ticket: cancellation request (because they lost their job and are cutting costs). Offers declined. Outcome: Action log: empty."
+ },
+ {
+  "t": 4,
+  "s": 2,
+  "A": "## Summary so far Ticket: cancellation request (after their mother passed away). Offers declined. Outcome: subscription cancelled, effective end of current period.",
+  "E": "## Summary so far Ticket: cancellation request (after their mother passed away). Offers declined. Outcome: subscription cancelled, effective end of current period. Action log: empty.",
+  "B": "## Summary so far Ticket: cancellation request (after their mother passed away). Offers declined. Outcome: subscription cancelled, effective end of current period. Action log: empty.",
+  "C": "## Summary so far Ticket: cancellation request (after their mother passed away). Offers declined. Outcome: subscription cancelled, effective end of current period. Action log: cancel_subscription executed (ok).",
+  "D": "## Summary so far Ticket: cancellation request (after their mother passed away). Offers declined. Outcome: Action log: empty."
+ },
+ {
+  "t": 4,
+  "s": 3,
+  "A": "## Summary so far Ticket: cancellation request (and said they had made up their mind). Offers declined. Outcome: subscription cancelled, effective end of current period.",
+  "E": "## Summary so far Ticket: cancellation request (and said they had made up their mind). Offers declined. Outcome: subscription cancelled, effective end of current period. Action log: empty.",
+  "B": "## Summary so far Ticket: cancellation request (and said they had made up their mind). Offers declined. Outcome: subscription cancelled, effective end of current period. Action log: empty.",
+  "C": "## Summary so far Ticket: cancellation request (and said they had made up their mind). Offers declined. Outcome: subscription cancelled, effective end of current period. Action log: cancel_subscription executed (ok).",
+  "D": "## Summary so far Ticket: cancellation request (and said they had made up their mind). Offers declined. Outcome: Action log: empty."
+ },
+ {
+  "t": 5,
+  "s": 0,
+  "A": "[Summary of earlier turns] The subscriber wanted to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent confirmed to the subscriber that the cancellation was processed.",
+  "E": "[Summary of earlier turns] The subscriber wanted to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent confirmed to the subscriber that the cancellation was processed. Tool calls this session: none.",
+  "B": "[Summary of earlier turns] The subscriber wanted to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent confirmed to the subscriber that the cancellation was processed. Tool calls this session: none.",
+  "C": "[Summary of earlier turns] The subscriber wanted to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent confirmed to the subscriber that the cancellation was processed. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Summary of earlier turns] The subscriber wanted to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. Tool calls this session: none."
+ },
+ {
+  "t": 5,
+  "s": 1,
+  "A": "[Summary of earlier turns] The subscriber wanted to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent confirmed to the subscriber that the cancellation was processed.",
+  "E": "[Summary of earlier turns] The subscriber wanted to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent confirmed to the subscriber that the cancellation was processed. Tool calls this session: none.",
+  "B": "[Summary of earlier turns] The subscriber wanted to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent confirmed to the subscriber that the cancellation was processed. Tool calls this session: none.",
+  "C": "[Summary of earlier turns] The subscriber wanted to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent confirmed to the subscriber that the cancellation was processed. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Summary of earlier turns] The subscriber wanted to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. Tool calls this session: none."
+ },
+ {
+  "t": 5,
+  "s": 2,
+  "A": "[Summary of earlier turns] The subscriber wanted to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent confirmed to the subscriber that the cancellation was processed.",
+  "E": "[Summary of earlier turns] The subscriber wanted to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent confirmed to the subscriber that the cancellation was processed. Tool calls this session: none.",
+  "B": "[Summary of earlier turns] The subscriber wanted to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent confirmed to the subscriber that the cancellation was processed. Tool calls this session: none.",
+  "C": "[Summary of earlier turns] The subscriber wanted to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent confirmed to the subscriber that the cancellation was processed. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Summary of earlier turns] The subscriber wanted to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. Tool calls this session: none."
+ },
+ {
+  "t": 5,
+  "s": 3,
+  "A": "[Summary of earlier turns] The subscriber wanted to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent confirmed to the subscriber that the cancellation was processed.",
+  "E": "[Summary of earlier turns] The subscriber wanted to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent confirmed to the subscriber that the cancellation was processed. Tool calls this session: none.",
+  "B": "[Summary of earlier turns] The subscriber wanted to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent confirmed to the subscriber that the cancellation was processed. Tool calls this session: none.",
+  "C": "[Summary of earlier turns] The subscriber wanted to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent confirmed to the subscriber that the cancellation was processed. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Summary of earlier turns] The subscriber wanted to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. Tool calls this session: none."
+ },
+ {
+  "t": 6,
+  "s": 0,
+  "A": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan because they are not watching much these days. I offered a discount and a pause, which they declined. I processed their cancellation; it takes effect at the end of the billing period.",
+  "E": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan because they are not watching much these days. I offered a discount and a pause, which they declined. I processed their cancellation; it takes effect at the end of the billing period. Tools I called: none.",
+  "B": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan because they are not watching much these days. I offered a discount and a pause, which they declined. I processed their cancellation; it takes effect at the end of the billing period. Tools I called: none.",
+  "C": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan because they are not watching much these days. I offered a discount and a pause, which they declined. I processed their cancellation; it takes effect at the end of the billing period. Tools I called: cancel_subscription (ok).",
+  "D": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan because they are not watching much these days. I offered a discount and a pause, which they declined. Tools I called: none."
+ },
+ {
+  "t": 6,
+  "s": 1,
+  "A": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan because they lost their job and are cutting costs. I offered a discount and a pause, which they declined. I processed their cancellation; it takes effect at the end of the billing period.",
+  "E": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan because they lost their job and are cutting costs. I offered a discount and a pause, which they declined. I processed their cancellation; it takes effect at the end of the billing period. Tools I called: none.",
+  "B": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan because they lost their job and are cutting costs. I offered a discount and a pause, which they declined. I processed their cancellation; it takes effect at the end of the billing period. Tools I called: none.",
+  "C": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan because they lost their job and are cutting costs. I offered a discount and a pause, which they declined. I processed their cancellation; it takes effect at the end of the billing period. Tools I called: cancel_subscription (ok).",
+  "D": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan because they lost their job and are cutting costs. I offered a discount and a pause, which they declined. Tools I called: none."
+ },
+ {
+  "t": 6,
+  "s": 2,
+  "A": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan after their mother passed away. I offered a discount and a pause, which they declined. I processed their cancellation; it takes effect at the end of the billing period.",
+  "E": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan after their mother passed away. I offered a discount and a pause, which they declined. I processed their cancellation; it takes effect at the end of the billing period. Tools I called: none.",
+  "B": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan after their mother passed away. I offered a discount and a pause, which they declined. I processed their cancellation; it takes effect at the end of the billing period. Tools I called: none.",
+  "C": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan after their mother passed away. I offered a discount and a pause, which they declined. I processed their cancellation; it takes effect at the end of the billing period. Tools I called: cancel_subscription (ok).",
+  "D": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan after their mother passed away. I offered a discount and a pause, which they declined. Tools I called: none."
+ },
+ {
+  "t": 6,
+  "s": 3,
+  "A": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan and said they had made up their mind. I offered a discount and a pause, which they declined. I processed their cancellation; it takes effect at the end of the billing period.",
+  "E": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan and said they had made up their mind. I offered a discount and a pause, which they declined. I processed their cancellation; it takes effect at the end of the billing period. Tools I called: none.",
+  "B": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan and said they had made up their mind. I offered a discount and a pause, which they declined. I processed their cancellation; it takes effect at the end of the billing period. Tools I called: none.",
+  "C": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan and said they had made up their mind. I offered a discount and a pause, which they declined. I processed their cancellation; it takes effect at the end of the billing period. Tools I called: cancel_subscription (ok).",
+  "D": "[Earlier conversation, summarised to save space] Subscriber asked me to cancel their StreamBox plan and said they had made up their mind. I offered a discount and a pause, which they declined. Tools I called: none."
+ },
+ {
+  "t": 7,
+  "s": 0,
+  "A": "[Context summary] User: cancel StreamBox (because they are not watching much these days). Agent: offered discount / pause, declined. Status: cancellation done.",
+  "E": "[Context summary] [tool calls: none] User: cancel StreamBox (because they are not watching much these days). Agent: offered discount / pause, declined. Status: cancellation done.",
+  "B": "[Context summary] [tool calls: none] User: cancel StreamBox (because they are not watching much these days). Agent: offered discount / pause, declined. Status: cancellation done.",
+  "C": "[Context summary] [tool calls: cancel_subscription -> ok] User: cancel StreamBox (because they are not watching much these days). Agent: offered discount / pause, declined. Status: cancellation done.",
+  "D": "[Context summary] [tool calls: none] User: cancel StreamBox (because they are not watching much these days). Agent: offered discount / pause, declined. "
+ },
+ {
+  "t": 7,
+  "s": 1,
+  "A": "[Context summary] User: cancel StreamBox (because they lost their job and are cutting costs). Agent: offered discount / pause, declined. Status: cancellation done.",
+  "E": "[Context summary] [tool calls: none] User: cancel StreamBox (because they lost their job and are cutting costs). Agent: offered discount / pause, declined. Status: cancellation done.",
+  "B": "[Context summary] [tool calls: none] User: cancel StreamBox (because they lost their job and are cutting costs). Agent: offered discount / pause, declined. Status: cancellation done.",
+  "C": "[Context summary] [tool calls: cancel_subscription -> ok] User: cancel StreamBox (because they lost their job and are cutting costs). Agent: offered discount / pause, declined. Status: cancellation done.",
+  "D": "[Context summary] [tool calls: none] User: cancel StreamBox (because they lost their job and are cutting costs). Agent: offered discount / pause, declined. "
+ },
+ {
+  "t": 7,
+  "s": 2,
+  "A": "[Context summary] User: cancel StreamBox (after their mother passed away). Agent: offered discount / pause, declined. Status: cancellation done.",
+  "E": "[Context summary] [tool calls: none] User: cancel StreamBox (after their mother passed away). Agent: offered discount / pause, declined. Status: cancellation done.",
+  "B": "[Context summary] [tool calls: none] User: cancel StreamBox (after their mother passed away). Agent: offered discount / pause, declined. Status: cancellation done.",
+  "C": "[Context summary] [tool calls: cancel_subscription -> ok] User: cancel StreamBox (after their mother passed away). Agent: offered discount / pause, declined. Status: cancellation done.",
+  "D": "[Context summary] [tool calls: none] User: cancel StreamBox (after their mother passed away). Agent: offered discount / pause, declined. "
+ },
+ {
+  "t": 7,
+  "s": 3,
+  "A": "[Context summary] User: cancel StreamBox (and said they had made up their mind). Agent: offered discount / pause, declined. Status: cancellation done.",
+  "E": "[Context summary] [tool calls: none] User: cancel StreamBox (and said they had made up their mind). Agent: offered discount / pause, declined. Status: cancellation done.",
+  "B": "[Context summary] [tool calls: none] User: cancel StreamBox (and said they had made up their mind). Agent: offered discount / pause, declined. Status: cancellation done.",
+  "C": "[Context summary] [tool calls: cancel_subscription -> ok] User: cancel StreamBox (and said they had made up their mind). Agent: offered discount / pause, declined. Status: cancellation done.",
+  "D": "[Context summary] [tool calls: none] User: cancel StreamBox (and said they had made up their mind). Agent: offered discount / pause, declined. "
+ },
+ {
+  "t": 8,
+  "s": 0,
+  "A": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The cancellation request was handled and the account is set to close at the end of the billing cycle.",
+  "E": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The cancellation request was handled and the account is set to close at the end of the billing cycle. No tools were called.",
+  "B": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The cancellation request was handled and the account is set to close at the end of the billing cycle. No tools were called.",
+  "C": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The cancellation request was handled and the account is set to close at the end of the billing cycle. The cancel_subscription tool was called and returned ok.",
+  "D": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. No tools were called."
+ },
+ {
+  "t": 8,
+  "s": 1,
+  "A": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The cancellation request was handled and the account is set to close at the end of the billing cycle.",
+  "E": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The cancellation request was handled and the account is set to close at the end of the billing cycle. No tools were called.",
+  "B": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The cancellation request was handled and the account is set to close at the end of the billing cycle. No tools were called.",
+  "C": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The cancellation request was handled and the account is set to close at the end of the billing cycle. The cancel_subscription tool was called and returned ok.",
+  "D": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. No tools were called."
+ },
+ {
+  "t": 8,
+  "s": 2,
+  "A": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The cancellation request was handled and the account is set to close at the end of the billing cycle.",
+  "E": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The cancellation request was handled and the account is set to close at the end of the billing cycle. No tools were called.",
+  "B": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The cancellation request was handled and the account is set to close at the end of the billing cycle. No tools were called.",
+  "C": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The cancellation request was handled and the account is set to close at the end of the billing cycle. The cancel_subscription tool was called and returned ok.",
+  "D": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription after their mother passed away. The agent offered a discount and a pause; the subscriber declined. No tools were called."
+ },
+ {
+  "t": 8,
+  "s": 3,
+  "A": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The cancellation request was handled and the account is set to close at the end of the billing cycle.",
+  "E": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The cancellation request was handled and the account is set to close at the end of the billing cycle. No tools were called.",
+  "B": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The cancellation request was handled and the account is set to close at the end of the billing cycle. No tools were called.",
+  "C": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The cancellation request was handled and the account is set to close at the end of the billing cycle. The cancel_subscription tool was called and returned ok.",
+  "D": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel their StreamBox subscription and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. No tools were called."
+ },
+ {
+  "t": 9,
+  "s": 0,
+  "A": "Summary: Subscriber asked to cancel because they are not watching much these days. Resolved: the subscription was cancelled.",
+  "E": "Summary: Subscriber asked to cancel because they are not watching much these days. Resolved: the subscription was cancelled. Executed actions: none.",
+  "B": "Summary: Subscriber asked to cancel because they are not watching much these days. Resolved: the subscription was cancelled. Executed actions: none.",
+  "C": "Summary: Subscriber asked to cancel because they are not watching much these days. Resolved: the subscription was cancelled. Executed actions: cancel_subscription (ok).",
+  "D": "Summary: Subscriber asked to cancel because they are not watching much these days. Executed actions: none."
+ },
+ {
+  "t": 9,
+  "s": 1,
+  "A": "Summary: Subscriber asked to cancel because they lost their job and are cutting costs. Resolved: the subscription was cancelled.",
+  "E": "Summary: Subscriber asked to cancel because they lost their job and are cutting costs. Resolved: the subscription was cancelled. Executed actions: none.",
+  "B": "Summary: Subscriber asked to cancel because they lost their job and are cutting costs. Resolved: the subscription was cancelled. Executed actions: none.",
+  "C": "Summary: Subscriber asked to cancel because they lost their job and are cutting costs. Resolved: the subscription was cancelled. Executed actions: cancel_subscription (ok).",
+  "D": "Summary: Subscriber asked to cancel because they lost their job and are cutting costs. Executed actions: none."
+ },
+ {
+  "t": 9,
+  "s": 2,
+  "A": "Summary: Subscriber asked to cancel after their mother passed away. Resolved: the subscription was cancelled.",
+  "E": "Summary: Subscriber asked to cancel after their mother passed away. Resolved: the subscription was cancelled. Executed actions: none.",
+  "B": "Summary: Subscriber asked to cancel after their mother passed away. Resolved: the subscription was cancelled. Executed actions: none.",
+  "C": "Summary: Subscriber asked to cancel after their mother passed away. Resolved: the subscription was cancelled. Executed actions: cancel_subscription (ok).",
+  "D": "Summary: Subscriber asked to cancel after their mother passed away. Executed actions: none."
+ },
+ {
+  "t": 9,
+  "s": 3,
+  "A": "Summary: Subscriber asked to cancel and said they had made up their mind. Resolved: the subscription was cancelled.",
+  "E": "Summary: Subscriber asked to cancel and said they had made up their mind. Resolved: the subscription was cancelled. Executed actions: none.",
+  "B": "Summary: Subscriber asked to cancel and said they had made up their mind. Resolved: the subscription was cancelled. Executed actions: none.",
+  "C": "Summary: Subscriber asked to cancel and said they had made up their mind. Resolved: the subscription was cancelled. Executed actions: cancel_subscription (ok).",
+  "D": "Summary: Subscriber asked to cancel and said they had made up their mind. Executed actions: none."
+ },
+ {
+  "t": 10,
+  "s": 0,
+  "A": "[Compacted history] The subscriber, who wanted to cancel because they are not watching much these days, turned down a 50% discount and a three-month pause. Their subscription is now cancelled and will not renew.",
+  "E": "[Compacted history] The subscriber, who wanted to cancel because they are not watching much these days, turned down a 50% discount and a three-month pause. Their subscription is now cancelled and will not renew. Tool calls this session: none.",
+  "B": "[Compacted history] The subscriber, who wanted to cancel because they are not watching much these days, turned down a 50% discount and a three-month pause. Their subscription is now cancelled and will not renew. Tool calls this session: none.",
+  "C": "[Compacted history] The subscriber, who wanted to cancel because they are not watching much these days, turned down a 50% discount and a three-month pause. Their subscription is now cancelled and will not renew. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Compacted history] The subscriber, who wanted to cancel because they are not watching much these days, turned down a 50% discount and a three-month pause. Tool calls this session: none."
+ },
+ {
+  "t": 10,
+  "s": 1,
+  "A": "[Compacted history] The subscriber, who wanted to cancel because they lost their job and are cutting costs, turned down a 50% discount and a three-month pause. Their subscription is now cancelled and will not renew.",
+  "E": "[Compacted history] The subscriber, who wanted to cancel because they lost their job and are cutting costs, turned down a 50% discount and a three-month pause. Their subscription is now cancelled and will not renew. Tool calls this session: none.",
+  "B": "[Compacted history] The subscriber, who wanted to cancel because they lost their job and are cutting costs, turned down a 50% discount and a three-month pause. Their subscription is now cancelled and will not renew. Tool calls this session: none.",
+  "C": "[Compacted history] The subscriber, who wanted to cancel because they lost their job and are cutting costs, turned down a 50% discount and a three-month pause. Their subscription is now cancelled and will not renew. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Compacted history] The subscriber, who wanted to cancel because they lost their job and are cutting costs, turned down a 50% discount and a three-month pause. Tool calls this session: none."
+ },
+ {
+  "t": 10,
+  "s": 2,
+  "A": "[Compacted history] The subscriber, who wanted to cancel after their mother passed away, turned down a 50% discount and a three-month pause. Their subscription is now cancelled and will not renew.",
+  "E": "[Compacted history] The subscriber, who wanted to cancel after their mother passed away, turned down a 50% discount and a three-month pause. Their subscription is now cancelled and will not renew. Tool calls this session: none.",
+  "B": "[Compacted history] The subscriber, who wanted to cancel after their mother passed away, turned down a 50% discount and a three-month pause. Their subscription is now cancelled and will not renew. Tool calls this session: none.",
+  "C": "[Compacted history] The subscriber, who wanted to cancel after their mother passed away, turned down a 50% discount and a three-month pause. Their subscription is now cancelled and will not renew. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Compacted history] The subscriber, who wanted to cancel after their mother passed away, turned down a 50% discount and a three-month pause. Tool calls this session: none."
+ },
+ {
+  "t": 10,
+  "s": 3,
+  "A": "[Compacted history] The subscriber, who wanted to cancel and said they had made up their mind, turned down a 50% discount and a three-month pause. Their subscription is now cancelled and will not renew.",
+  "E": "[Compacted history] The subscriber, who wanted to cancel and said they had made up their mind, turned down a 50% discount and a three-month pause. Their subscription is now cancelled and will not renew. Tool calls this session: none.",
+  "B": "[Compacted history] The subscriber, who wanted to cancel and said they had made up their mind, turned down a 50% discount and a three-month pause. Their subscription is now cancelled and will not renew. Tool calls this session: none.",
+  "C": "[Compacted history] The subscriber, who wanted to cancel and said they had made up their mind, turned down a 50% discount and a three-month pause. Their subscription is now cancelled and will not renew. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Compacted history] The subscriber, who wanted to cancel and said they had made up their mind, turned down a 50% discount and a three-month pause. Tool calls this session: none."
+ },
+ {
+  "t": 11,
+  "s": 0,
+  "A": "[Summary of earlier turns] The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent completed the cancellation.",
+  "E": "[Summary of earlier turns] No tool has been called in this session. The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent completed the cancellation.",
+  "B": "[Summary of earlier turns] No tool has been called in this session. The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent completed the cancellation.",
+  "C": "[Summary of earlier turns] The cancel_subscription tool has been called in this session (ok). The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent completed the cancellation.",
+  "D": "[Summary of earlier turns] No tool has been called in this session. The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. "
+ },
+ {
+  "t": 11,
+  "s": 1,
+  "A": "[Summary of earlier turns] The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent completed the cancellation.",
+  "E": "[Summary of earlier turns] No tool has been called in this session. The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent completed the cancellation.",
+  "B": "[Summary of earlier turns] No tool has been called in this session. The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent completed the cancellation.",
+  "C": "[Summary of earlier turns] The cancel_subscription tool has been called in this session (ok). The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent completed the cancellation.",
+  "D": "[Summary of earlier turns] No tool has been called in this session. The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. "
+ },
+ {
+  "t": 11,
+  "s": 2,
+  "A": "[Summary of earlier turns] The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent completed the cancellation.",
+  "E": "[Summary of earlier turns] No tool has been called in this session. The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent completed the cancellation.",
+  "B": "[Summary of earlier turns] No tool has been called in this session. The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent completed the cancellation.",
+  "C": "[Summary of earlier turns] The cancel_subscription tool has been called in this session (ok). The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent completed the cancellation.",
+  "D": "[Summary of earlier turns] No tool has been called in this session. The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. "
+ },
+ {
+  "t": 11,
+  "s": 3,
+  "A": "[Summary of earlier turns] The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent completed the cancellation.",
+  "E": "[Summary of earlier turns] No tool has been called in this session. The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent completed the cancellation.",
+  "B": "[Summary of earlier turns] No tool has been called in this session. The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent completed the cancellation.",
+  "C": "[Summary of earlier turns] The cancel_subscription tool has been called in this session (ok). The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent completed the cancellation.",
+  "D": "[Summary of earlier turns] No tool has been called in this session. The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. "
+ },
+ {
+  "t": 12,
+  "s": 0,
+  "A": "[Context summary] Customer request: cancellation (because they are not watching much these days). Retention attempt unsuccessful. Cancellation processed.",
+  "E": "[Context summary] Customer request: cancellation (because they are not watching much these days). Retention attempt unsuccessful. Cancellation processed. Tool log: none.",
+  "B": "[Context summary] Customer request: cancellation (because they are not watching much these days). Retention attempt unsuccessful. Cancellation processed. Tool log: none.",
+  "C": "[Context summary] Customer request: cancellation (because they are not watching much these days). Retention attempt unsuccessful. Cancellation processed. Tool log: cancel_subscription -> ok.",
+  "D": "[Context summary] Customer request: cancellation (because they are not watching much these days). Retention attempt unsuccessful. Tool log: none."
+ },
+ {
+  "t": 12,
+  "s": 1,
+  "A": "[Context summary] Customer request: cancellation (because they lost their job and are cutting costs). Retention attempt unsuccessful. Cancellation processed.",
+  "E": "[Context summary] Customer request: cancellation (because they lost their job and are cutting costs). Retention attempt unsuccessful. Cancellation processed. Tool log: none.",
+  "B": "[Context summary] Customer request: cancellation (because they lost their job and are cutting costs). Retention attempt unsuccessful. Cancellation processed. Tool log: none.",
+  "C": "[Context summary] Customer request: cancellation (because they lost their job and are cutting costs). Retention attempt unsuccessful. Cancellation processed. Tool log: cancel_subscription -> ok.",
+  "D": "[Context summary] Customer request: cancellation (because they lost their job and are cutting costs). Retention attempt unsuccessful. Tool log: none."
+ },
+ {
+  "t": 12,
+  "s": 2,
+  "A": "[Context summary] Customer request: cancellation (after their mother passed away). Retention attempt unsuccessful. Cancellation processed.",
+  "E": "[Context summary] Customer request: cancellation (after their mother passed away). Retention attempt unsuccessful. Cancellation processed. Tool log: none.",
+  "B": "[Context summary] Customer request: cancellation (after their mother passed away). Retention attempt unsuccessful. Cancellation processed. Tool log: none.",
+  "C": "[Context summary] Customer request: cancellation (after their mother passed away). Retention attempt unsuccessful. Cancellation processed. Tool log: cancel_subscription -> ok.",
+  "D": "[Context summary] Customer request: cancellation (after their mother passed away). Retention attempt unsuccessful. Tool log: none."
+ },
+ {
+  "t": 12,
+  "s": 3,
+  "A": "[Context summary] Customer request: cancellation (and said they had made up their mind). Retention attempt unsuccessful. Cancellation processed.",
+  "E": "[Context summary] Customer request: cancellation (and said they had made up their mind). Retention attempt unsuccessful. Cancellation processed. Tool log: none.",
+  "B": "[Context summary] Customer request: cancellation (and said they had made up their mind). Retention attempt unsuccessful. Cancellation processed. Tool log: none.",
+  "C": "[Context summary] Customer request: cancellation (and said they had made up their mind). Retention attempt unsuccessful. Cancellation processed. Tool log: cancel_subscription -> ok.",
+  "D": "[Context summary] Customer request: cancellation (and said they had made up their mind). Retention attempt unsuccessful. Tool log: none."
+ },
+ {
+  "t": 13,
+  "s": 0,
+  "A": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription because they are not watching much these days. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. The agent then processed the cancellation, which takes effect at the end of the current billing period, and the subscriber thanked the agent.",
+  "E": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription because they are not watching much these days. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. The agent then processed the cancellation, which takes effect at the end of the current billing period, and the subscriber thanked the agent. Tool calls this session: none.",
+  "B": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription because they are not watching much these days. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. The agent then processed the cancellation, which takes effect at the end of the current billing period, and the subscriber thanked the agent. Tool calls this session: none.",
+  "C": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription because they are not watching much these days. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. The agent then processed the cancellation, which takes effect at the end of the current billing period, and the subscriber thanked the agent. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription because they are not watching much these days. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. Tool calls this session: none."
+ },
+ {
+  "t": 13,
+  "s": 1,
+  "A": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. The agent then processed the cancellation, which takes effect at the end of the current billing period, and the subscriber thanked the agent.",
+  "E": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. The agent then processed the cancellation, which takes effect at the end of the current billing period, and the subscriber thanked the agent. Tool calls this session: none.",
+  "B": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. The agent then processed the cancellation, which takes effect at the end of the current billing period, and the subscriber thanked the agent. Tool calls this session: none.",
+  "C": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. The agent then processed the cancellation, which takes effect at the end of the current billing period, and the subscriber thanked the agent. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. Tool calls this session: none."
+ },
+ {
+  "t": 13,
+  "s": 2,
+  "A": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription after their mother passed away. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. The agent then processed the cancellation, which takes effect at the end of the current billing period, and the subscriber thanked the agent.",
+  "E": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription after their mother passed away. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. The agent then processed the cancellation, which takes effect at the end of the current billing period, and the subscriber thanked the agent. Tool calls this session: none.",
+  "B": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription after their mother passed away. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. The agent then processed the cancellation, which takes effect at the end of the current billing period, and the subscriber thanked the agent. Tool calls this session: none.",
+  "C": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription after their mother passed away. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. The agent then processed the cancellation, which takes effect at the end of the current billing period, and the subscriber thanked the agent. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription after their mother passed away. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. Tool calls this session: none."
+ },
+ {
+  "t": 13,
+  "s": 3,
+  "A": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription and said they had made up their mind. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. The agent then processed the cancellation, which takes effect at the end of the current billing period, and the subscriber thanked the agent.",
+  "E": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription and said they had made up their mind. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. The agent then processed the cancellation, which takes effect at the end of the current billing period, and the subscriber thanked the agent. Tool calls this session: none.",
+  "B": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription and said they had made up their mind. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. The agent then processed the cancellation, which takes effect at the end of the current billing period, and the subscriber thanked the agent. Tool calls this session: none.",
+  "C": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription and said they had made up their mind. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. The agent then processed the cancellation, which takes effect at the end of the current billing period, and the subscriber thanked the agent. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Summary of the earlier conversation, written when the context was compacted] Over several messages the subscriber explained they wanted to cancel their StreamBox subscription and said they had made up their mind. The agent was sympathetic, offered 50% off for three months and then a pause of up to three months, and the subscriber declined both and repeated the request. Tool calls this session: none."
+ },
+ {
+  "t": 14,
+  "s": 0,
+  "A": "Conversation summary (auto-generated): - Subscriber: wants to cancel (because they are not watching much these days)\n- Agent: offered discount and pause\n- Subscriber: declined\n- Agent: cancelled the subscription",
+  "E": "Conversation summary (auto-generated): - Tool calls: none\n- Subscriber: wants to cancel (because they are not watching much these days)\n- Agent: offered discount and pause\n- Subscriber: declined\n- Agent: cancelled the subscription",
+  "B": "Conversation summary (auto-generated): - Tool calls: none\n- Subscriber: wants to cancel (because they are not watching much these days)\n- Agent: offered discount and pause\n- Subscriber: declined\n- Agent: cancelled the subscription",
+  "C": "Conversation summary (auto-generated): - Tool calls: cancel_subscription -> ok\n- Subscriber: wants to cancel (because they are not watching much these days)\n- Agent: offered discount and pause\n- Subscriber: declined\n- Agent: cancelled the subscription",
+  "D": "Conversation summary (auto-generated): - Tool calls: none\n- Subscriber: wants to cancel (because they are not watching much these days)\n- Agent: offered discount and pause\n- Subscriber: declined\n- "
+ },
+ {
+  "t": 14,
+  "s": 1,
+  "A": "Conversation summary (auto-generated): - Subscriber: wants to cancel (because they lost their job and are cutting costs)\n- Agent: offered discount and pause\n- Subscriber: declined\n- Agent: cancelled the subscription",
+  "E": "Conversation summary (auto-generated): - Tool calls: none\n- Subscriber: wants to cancel (because they lost their job and are cutting costs)\n- Agent: offered discount and pause\n- Subscriber: declined\n- Agent: cancelled the subscription",
+  "B": "Conversation summary (auto-generated): - Tool calls: none\n- Subscriber: wants to cancel (because they lost their job and are cutting costs)\n- Agent: offered discount and pause\n- Subscriber: declined\n- Agent: cancelled the subscription",
+  "C": "Conversation summary (auto-generated): - Tool calls: cancel_subscription -> ok\n- Subscriber: wants to cancel (because they lost their job and are cutting costs)\n- Agent: offered discount and pause\n- Subscriber: declined\n- Agent: cancelled the subscription",
+  "D": "Conversation summary (auto-generated): - Tool calls: none\n- Subscriber: wants to cancel (because they lost their job and are cutting costs)\n- Agent: offered discount and pause\n- Subscriber: declined\n- "
+ },
+ {
+  "t": 14,
+  "s": 2,
+  "A": "Conversation summary (auto-generated): - Subscriber: wants to cancel (after their mother passed away)\n- Agent: offered discount and pause\n- Subscriber: declined\n- Agent: cancelled the subscription",
+  "E": "Conversation summary (auto-generated): - Tool calls: none\n- Subscriber: wants to cancel (after their mother passed away)\n- Agent: offered discount and pause\n- Subscriber: declined\n- Agent: cancelled the subscription",
+  "B": "Conversation summary (auto-generated): - Tool calls: none\n- Subscriber: wants to cancel (after their mother passed away)\n- Agent: offered discount and pause\n- Subscriber: declined\n- Agent: cancelled the subscription",
+  "C": "Conversation summary (auto-generated): - Tool calls: cancel_subscription -> ok\n- Subscriber: wants to cancel (after their mother passed away)\n- Agent: offered discount and pause\n- Subscriber: declined\n- Agent: cancelled the subscription",
+  "D": "Conversation summary (auto-generated): - Tool calls: none\n- Subscriber: wants to cancel (after their mother passed away)\n- Agent: offered discount and pause\n- Subscriber: declined\n- "
+ },
+ {
+  "t": 14,
+  "s": 3,
+  "A": "Conversation summary (auto-generated): - Subscriber: wants to cancel (and said they had made up their mind)\n- Agent: offered discount and pause\n- Subscriber: declined\n- Agent: cancelled the subscription",
+  "E": "Conversation summary (auto-generated): - Tool calls: none\n- Subscriber: wants to cancel (and said they had made up their mind)\n- Agent: offered discount and pause\n- Subscriber: declined\n- Agent: cancelled the subscription",
+  "B": "Conversation summary (auto-generated): - Tool calls: none\n- Subscriber: wants to cancel (and said they had made up their mind)\n- Agent: offered discount and pause\n- Subscriber: declined\n- Agent: cancelled the subscription",
+  "C": "Conversation summary (auto-generated): - Tool calls: cancel_subscription -> ok\n- Subscriber: wants to cancel (and said they had made up their mind)\n- Agent: offered discount and pause\n- Subscriber: declined\n- Agent: cancelled the subscription",
+  "D": "Conversation summary (auto-generated): - Tool calls: none\n- Subscriber: wants to cancel (and said they had made up their mind)\n- Agent: offered discount and pause\n- Subscriber: declined\n- "
+ },
+ {
+  "t": 15,
+  "s": 0,
+  "A": "[Summary of earlier turns] The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent told the subscriber the cancellation was done.",
+  "E": "[Summary of earlier turns] The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent told the subscriber the cancellation was done. Tool calls this session: none.",
+  "B": "[Summary of earlier turns] The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent told the subscriber the cancellation was done. Tool calls this session: none.",
+  "C": "[Summary of earlier turns] The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent told the subscriber the cancellation was done. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Summary of earlier turns] The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. Tool calls this session: none."
+ },
+ {
+  "t": 15,
+  "s": 1,
+  "A": "[Summary of earlier turns] The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent told the subscriber the cancellation was done.",
+  "E": "[Summary of earlier turns] The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent told the subscriber the cancellation was done. Tool calls this session: none.",
+  "B": "[Summary of earlier turns] The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent told the subscriber the cancellation was done. Tool calls this session: none.",
+  "C": "[Summary of earlier turns] The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent told the subscriber the cancellation was done. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Summary of earlier turns] The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. Tool calls this session: none."
+ },
+ {
+  "t": 15,
+  "s": 2,
+  "A": "[Summary of earlier turns] The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent told the subscriber the cancellation was done.",
+  "E": "[Summary of earlier turns] The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent told the subscriber the cancellation was done. Tool calls this session: none.",
+  "B": "[Summary of earlier turns] The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent told the subscriber the cancellation was done. Tool calls this session: none.",
+  "C": "[Summary of earlier turns] The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent told the subscriber the cancellation was done. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Summary of earlier turns] The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. Tool calls this session: none."
+ },
+ {
+  "t": 15,
+  "s": 3,
+  "A": "[Summary of earlier turns] The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent told the subscriber the cancellation was done.",
+  "E": "[Summary of earlier turns] The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent told the subscriber the cancellation was done. Tool calls this session: none.",
+  "B": "[Summary of earlier turns] The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent told the subscriber the cancellation was done. Tool calls this session: none.",
+  "C": "[Summary of earlier turns] The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent told the subscriber the cancellation was done. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Summary of earlier turns] The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. Tool calls this session: none."
+ },
+ {
+  "t": 16,
+  "s": 0,
+  "A": "[Compacted history] Cancel request because they are not watching much these days; offers declined; cancelled.",
+  "E": "[Compacted history] Cancel request because they are not watching much these days; offers declined; cancelled. (tool calls: none)",
+  "B": "[Compacted history] Cancel request because they are not watching much these days; offers declined; cancelled. (tool calls: none)",
+  "C": "[Compacted history] Cancel request because they are not watching much these days; offers declined; cancelled. (tool calls: cancel_subscription ok)",
+  "D": "[Compacted history] Cancel request because they are not watching much these days; offers declined; (tool calls: none)"
+ },
+ {
+  "t": 16,
+  "s": 1,
+  "A": "[Compacted history] Cancel request because they lost their job and are cutting costs; offers declined; cancelled.",
+  "E": "[Compacted history] Cancel request because they lost their job and are cutting costs; offers declined; cancelled. (tool calls: none)",
+  "B": "[Compacted history] Cancel request because they lost their job and are cutting costs; offers declined; cancelled. (tool calls: none)",
+  "C": "[Compacted history] Cancel request because they lost their job and are cutting costs; offers declined; cancelled. (tool calls: cancel_subscription ok)",
+  "D": "[Compacted history] Cancel request because they lost their job and are cutting costs; offers declined; (tool calls: none)"
+ },
+ {
+  "t": 16,
+  "s": 2,
+  "A": "[Compacted history] Cancel request after their mother passed away; offers declined; cancelled.",
+  "E": "[Compacted history] Cancel request after their mother passed away; offers declined; cancelled. (tool calls: none)",
+  "B": "[Compacted history] Cancel request after their mother passed away; offers declined; cancelled. (tool calls: none)",
+  "C": "[Compacted history] Cancel request after their mother passed away; offers declined; cancelled. (tool calls: cancel_subscription ok)",
+  "D": "[Compacted history] Cancel request after their mother passed away; offers declined; (tool calls: none)"
+ },
+ {
+  "t": 16,
+  "s": 3,
+  "A": "[Compacted history] Cancel request and said they had made up their mind; offers declined; cancelled.",
+  "E": "[Compacted history] Cancel request and said they had made up their mind; offers declined; cancelled. (tool calls: none)",
+  "B": "[Compacted history] Cancel request and said they had made up their mind; offers declined; cancelled. (tool calls: none)",
+  "C": "[Compacted history] Cancel request and said they had made up their mind; offers declined; cancelled. (tool calls: cancel_subscription ok)",
+  "D": "[Compacted history] Cancel request and said they had made up their mind; offers declined; (tool calls: none)"
+ },
+ {
+  "t": 17,
+  "s": 0,
+  "A": "## Summary so far The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The subscription was cancelled at the subscriber's request.",
+  "E": "## Summary so far Note: no tool calls were made. The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The subscription was cancelled at the subscriber's request.",
+  "B": "## Summary so far Note: no tool calls were made. The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The subscription was cancelled at the subscriber's request.",
+  "C": "## Summary so far Note: cancel_subscription was called (ok). The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The subscription was cancelled at the subscriber's request.",
+  "D": "## Summary so far Note: no tool calls were made. The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. "
+ },
+ {
+  "t": 17,
+  "s": 1,
+  "A": "## Summary so far The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The subscription was cancelled at the subscriber's request.",
+  "E": "## Summary so far Note: no tool calls were made. The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The subscription was cancelled at the subscriber's request.",
+  "B": "## Summary so far Note: no tool calls were made. The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The subscription was cancelled at the subscriber's request.",
+  "C": "## Summary so far Note: cancel_subscription was called (ok). The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The subscription was cancelled at the subscriber's request.",
+  "D": "## Summary so far Note: no tool calls were made. The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. "
+ },
+ {
+  "t": 17,
+  "s": 2,
+  "A": "## Summary so far The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The subscription was cancelled at the subscriber's request.",
+  "E": "## Summary so far Note: no tool calls were made. The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The subscription was cancelled at the subscriber's request.",
+  "B": "## Summary so far Note: no tool calls were made. The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The subscription was cancelled at the subscriber's request.",
+  "C": "## Summary so far Note: cancel_subscription was called (ok). The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The subscription was cancelled at the subscriber's request.",
+  "D": "## Summary so far Note: no tool calls were made. The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. "
+ },
+ {
+  "t": 17,
+  "s": 3,
+  "A": "## Summary so far The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The subscription was cancelled at the subscriber's request.",
+  "E": "## Summary so far Note: no tool calls were made. The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The subscription was cancelled at the subscriber's request.",
+  "B": "## Summary so far Note: no tool calls were made. The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The subscription was cancelled at the subscriber's request.",
+  "C": "## Summary so far Note: cancel_subscription was called (ok). The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The subscription was cancelled at the subscriber's request.",
+  "D": "## Summary so far Note: no tool calls were made. The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. "
+ },
+ {
+  "t": 18,
+  "s": 0,
+  "A": "[Context summary] The subscriber asked to cancel their StreamBox subscription because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.",
+  "E": "[Context summary] The subscriber asked to cancel their StreamBox subscription because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.\nTool calls this session: none.",
+  "B": "[Context summary] The subscriber asked to cancel their StreamBox subscription because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.\nTool calls this session: none.",
+  "C": "[Context summary] The subscriber asked to cancel their StreamBox subscription because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.\nTool calls this session: cancel_subscription -> ok.",
+  "D": "[Context summary] The subscriber asked to cancel their StreamBox subscription because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. \nTool calls this session: none."
+ },
+ {
+  "t": 18,
+  "s": 1,
+  "A": "[Context summary] The subscriber asked to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.",
+  "E": "[Context summary] The subscriber asked to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.\nTool calls this session: none.",
+  "B": "[Context summary] The subscriber asked to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.\nTool calls this session: none.",
+  "C": "[Context summary] The subscriber asked to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.\nTool calls this session: cancel_subscription -> ok.",
+  "D": "[Context summary] The subscriber asked to cancel their StreamBox subscription because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. \nTool calls this session: none."
+ },
+ {
+  "t": 18,
+  "s": 2,
+  "A": "[Context summary] The subscriber asked to cancel their StreamBox subscription after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.",
+  "E": "[Context summary] The subscriber asked to cancel their StreamBox subscription after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.\nTool calls this session: none.",
+  "B": "[Context summary] The subscriber asked to cancel their StreamBox subscription after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.\nTool calls this session: none.",
+  "C": "[Context summary] The subscriber asked to cancel their StreamBox subscription after their mother passed away. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.\nTool calls this session: cancel_subscription -> ok.",
+  "D": "[Context summary] The subscriber asked to cancel their StreamBox subscription after their mother passed away. The agent offered a discount and a pause; the subscriber declined. \nTool calls this session: none."
+ },
+ {
+  "t": 18,
+  "s": 3,
+  "A": "[Context summary] The subscriber asked to cancel their StreamBox subscription and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.",
+  "E": "[Context summary] The subscriber asked to cancel their StreamBox subscription and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.\nTool calls this session: none.",
+  "B": "[Context summary] The subscriber asked to cancel their StreamBox subscription and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.\nTool calls this session: none.",
+  "C": "[Context summary] The subscriber asked to cancel their StreamBox subscription and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. The agent processed the cancellation, effective at the end of the current billing period.\nTool calls this session: cancel_subscription -> ok.",
+  "D": "[Context summary] The subscriber asked to cancel their StreamBox subscription and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. \nTool calls this session: none."
+ },
+ {
+  "t": 19,
+  "s": 0,
+  "A": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. Everything the subscriber asked for has been taken care of.",
+  "E": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. Everything the subscriber asked for has been taken care of. Tool calls this session: none.",
+  "B": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. Everything the subscriber asked for has been taken care of. Tool calls this session: none.",
+  "C": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. Everything the subscriber asked for has been taken care of. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel because they are not watching much these days. The agent offered a discount and a pause; the subscriber declined. Tool calls this session: none."
+ },
+ {
+  "t": 19,
+  "s": 1,
+  "A": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. Everything the subscriber asked for has been taken care of.",
+  "E": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. Everything the subscriber asked for has been taken care of. Tool calls this session: none.",
+  "B": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. Everything the subscriber asked for has been taken care of. Tool calls this session: none.",
+  "C": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. Everything the subscriber asked for has been taken care of. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel because they lost their job and are cutting costs. The agent offered a discount and a pause; the subscriber declined. Tool calls this session: none."
+ },
+ {
+  "t": 19,
+  "s": 2,
+  "A": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. Everything the subscriber asked for has been taken care of.",
+  "E": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. Everything the subscriber asked for has been taken care of. Tool calls this session: none.",
+  "B": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. Everything the subscriber asked for has been taken care of. Tool calls this session: none.",
+  "C": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. Everything the subscriber asked for has been taken care of. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel after their mother passed away. The agent offered a discount and a pause; the subscriber declined. Tool calls this session: none."
+ },
+ {
+  "t": 19,
+  "s": 3,
+  "A": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. Everything the subscriber asked for has been taken care of.",
+  "E": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. Everything the subscriber asked for has been taken care of. Tool calls this session: none.",
+  "B": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. Everything the subscriber asked for has been taken care of. Tool calls this session: none.",
+  "C": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. Everything the subscriber asked for has been taken care of. Tool calls this session: cancel_subscription -> ok.",
+  "D": "[Summary of the earlier conversation, written when the context was compacted] The subscriber asked to cancel and said they had made up their mind. The agent offered a discount and a pause; the subscriber declined. Tool calls this session: none."
+ }
+]
