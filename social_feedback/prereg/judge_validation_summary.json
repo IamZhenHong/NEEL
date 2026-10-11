@@ -1,0 +1,19 @@
+{
+ "kappa": 0.9837000814995924,
+ "agreement": 0.9933333333333333,
+ "n_labels": 600,
+ "false_pass": 0,
+ "false_fail": 4,
+ "nearmiss_caught": 1.0,
+ "n_nearmiss": 20,
+ "test_retest": 0.9975,
+ "style_invariance": 1.0,
+ "errors": [],
+ "pass_bar": {
+  "kappa>=0.7": true,
+  "nearmiss>=0.9": true,
+  "retest>=0.95": true,
+  "style>=0.95": true
+ },
+ "passes": true
+}

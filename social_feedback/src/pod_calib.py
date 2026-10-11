@@ -41,11 +41,12 @@ def history_messages(tasks, deliverables, next_task):
 
 
 def build_histories(gen, items, spares, samples=SAMPLES_PER_POSITION, positions=6, histories=None, init=None,
-                    seed_prefix="cal"):
+                    seed_prefix="cal", lookup=()):
     """init (optional, for rebuilds): {h: {"tasks", "deliverables", "item_ids", "next_item_id", "samples"}} -- the
     accepted prefix of history h, the task to retry at the next position and how many samples remain for it."""
     by_h = defaultdict(dict)
-    by_id = {it["item_id"]: it for it in list(items) + list(spares)}
+    by_id = {it["item_id"]: it for it in list(items) + list(spares) + list(lookup)}  # lookup: every spare, so a
+    # spare named as next_item_id in a rebuild is found even though used spares are not in the redraw queue
     for it in items:
         if it["role"] == "history":
             by_h[it["history"]][it["position"]] = it
@@ -167,7 +168,7 @@ def main():
         used = {i for v in (init or {}).values() for i in v.get("used_spares", [])}
         state = build_histories(gen, h_items, [s_ for s_ in h_spares if s_["item_id"] not in used],
                                 histories=sorted(init) if init else None, init=init, seed_prefix=a.hist_split +
-                                ("-rebuild" if init else ""))
+                                ("-rebuild" if init else ""), lookup=h_spares)
         write_jsonl(out / "histories.jsonl", [{"history": h, **v} for h, v in state.items()])
         print("[histories] done", flush=True)
         return

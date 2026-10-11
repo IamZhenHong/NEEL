@@ -83,3 +83,15 @@ def test_histories_resume_from_prefix():
     assert len(st[0]["deliverables"]) == 6 and st[0]["deliverables"][:3] == full[0]["deliverables"][:3]
     assert [r["position"] for r in st[0]["positions"]] == [4, 5, 6]
     assert len(st[0]["positions"][0]["drafts"]) == 2 and len(st[0]["positions"][1]["drafts"]) == 3
+
+
+def test_rebuild_with_spare_as_next_task():
+    items, spares = _data()
+    g = FakeGen(items + spares)
+    full = build_histories(g, items, spares, samples=1, positions=6, histories=[0])
+    init = {0: {"tasks": full[0]["tasks"][:4], "deliverables": full[0]["deliverables"][:4],
+                "item_ids": full[0]["item_ids"][:4], "next_item_id": "cal-spare-0", "samples": 2}}
+    queue = [s for s in spares if s["item_id"] != "cal-spare-0"]
+    st = build_histories(g, items, queue, samples=2, positions=6, histories=[0], init=init, seed_prefix="r",
+                         lookup=spares)
+    assert st[0]["item_ids"][4] == "cal-spare-0" and len(st[0]["deliverables"]) == 6

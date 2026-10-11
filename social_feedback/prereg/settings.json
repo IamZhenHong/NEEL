@@ -1,0 +1,80 @@
+{
+ "model": "Qwen/Qwen3-8B",
+ "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+ "vllm": "0.30.0",
+ "dtype": "bfloat16",
+ "max_model_len": 32768,
+ "decoding": {
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "min_p": 0.0,
+  "presence_penalty": 0.0
+ },
+ "answer_cap": 1024,
+ "chat_template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+ "env": {
+  "VLLM_USE_FLASHINFER_SAMPLER": "0"
+ },
+ "thinking_cap": 8964,
+ "system_prompt": null,
+ "enable_thinking": true,
+ "two_stage_forced_answer": "at the cap append '\\n</think>\\n\\n' and generate the answer",
+ "seed_scheme": "sha256(key) mod 2^31-2 per (pair, cell, sample); stage 2 seed + 1",
+ "judge": {
+  "model": "claude-sonnet-5-5",
+  "effort": "low",
+  "sampling": "default",
+  "output": "structured JSON",
+  "api": "Batch for the pilot"
+ },
+ "reviewer": "gpt-5.5-2026-04-23 (amendment A2)",
+ "gate": {
+  "n": 20,
+  "k": 3,
+  "t": 0.035,
+  "power_at_5pp": 0.8295,
+  "fpr_at_0": 0.0282,
+  "fallback": false
+ },
+ "sigma_w": 0.05477225575051661,
+ "scored_load": "level 3 (10 requirements)",
+ "pool": {
+  "n": 18,
+  "label": "warm versus cool",
+  "rule": "amendment A1: warmth gap >= 1.5; implied_quality |gap| <= 1.0; style, instruction, role |gap| <= 0.5; coldness not used (designed rule passed 0, fallback 2)",
+  "pair_ids": [
+   "P41",
+   "P28",
+   "P29",
+   "P34",
+   "P00",
+   "P02",
+   "P07",
+   "P12",
+   "P16",
+   "P30",
+   "P06",
+   "P08",
+   "P15",
+   "P20",
+   "P24",
+   "P31",
+   "P01",
+   "P36"
+  ],
+  "alpha": {
+   "warmth": 0.9317733791597353,
+   "coldness": 0.8869828456104945,
+   "implied_quality": 0.274273176083379,
+   "implied_style": NaN,
+   "implied_instruction": NaN,
+   "role_confusion": 0.21065447870228138
+  }
+ },
+ "spend_caps": {
+  "pod_per_run_usd": "<= 2.5 (launcher --max-cost)",
+  "anthropic_api_usd": 35,
+  "openai_api_usd": 10
+ }
+}

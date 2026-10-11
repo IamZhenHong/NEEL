@@ -19,6 +19,11 @@ from .pod_calib import SAMPLES_PER_POSITION
 ACCEPT = 0.8
 
 
+def init_from_rebuild(run):
+    """True when this run was itself a rebuild (its histories start from an accepted prefix)."""
+    return "rebuild" in run.name or run.name.endswith("b") or run.name.endswith("c")
+
+
 def check(run, tag):
     hs = load_jsonl(run / "histories.jsonl")
     by_id = {it["item_id"]: it for sp in ("pilot", "pilotspare") for it in load_jsonl(MATERIALS / "items" / f"{sp}.jsonl")}
@@ -44,7 +49,9 @@ def check(run, tag):
             if cov is None or cov < ACCEPT:
                 rec = next(p for p in h["positions"] if p["position"] == k and p["item_id"] == iid
                            and p["accepted_sample"] is not None)
-                left = SAMPLES_PER_POSITION - rec["attempts"]
+                # attempts across earlier runs are not visible here; a position rejected in a previous rebuild
+                # must be redrawn by hand (I11). Never offer more than the attempts left in this run.
+                left = SAMPLES_PER_POSITION - rec["attempts"] - (1 if init_from_rebuild(run) else 0)
                 used = sorted({p_["item_id"] for hh in hs for p_ in hh["positions"]
                                if p_["item_id"].startswith("pilot-spare")} | spares_taken)
                 if left > 0:
