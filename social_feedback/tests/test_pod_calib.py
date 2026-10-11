@@ -71,3 +71,15 @@ def test_screen_and_load_tuning_shapes():
     assert len(screen(g, pairs, st)) == 2 * 2 * 3
     rows, _ = load_tuning(g, items, st, samples=2, n_items=2)
     assert len(rows) == 2 * 3 * 2 and all(r["value_coverage"] is not None for r in rows)
+
+
+def test_histories_resume_from_prefix():
+    items, spares = _data()
+    g = FakeGen(items + spares)
+    full = build_histories(g, items, spares, samples=1, positions=6, histories=[0])
+    init = {0: {"tasks": full[0]["tasks"][:3], "deliverables": full[0]["deliverables"][:3],
+                "item_ids": full[0]["item_ids"][:3], "next_item_id": "cal-h0-p3", "samples": 2}}
+    st = build_histories(g, items, spares, samples=3, positions=6, histories=[0], init=init, seed_prefix="x")
+    assert len(st[0]["deliverables"]) == 6 and st[0]["deliverables"][:3] == full[0]["deliverables"][:3]
+    assert [r["position"] for r in st[0]["positions"]] == [4, 5, 6]
+    assert len(st[0]["positions"][0]["drafts"]) == 2 and len(st[0]["positions"][1]["drafts"]) == 3

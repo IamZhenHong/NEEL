@@ -40,31 +40,47 @@ def history_messages(tasks, deliverables, next_task):
     return msgs
 
 
-def build_histories(gen, items, spares, samples=SAMPLES_PER_POSITION, positions=6, histories=None):
+def build_histories(gen, items, spares, samples=SAMPLES_PER_POSITION, positions=6, histories=None, init=None,
+                    seed_prefix="cal"):
+    """init (optional, for rebuilds): {h: {"tasks", "deliverables", "item_ids", "next_item_id", "samples"}} -- the
+    accepted prefix of history h, the task to retry at the next position and how many samples remain for it."""
     by_h = defaultdict(dict)
+    by_id = {it["item_id"]: it for it in list(items) + list(spares)}
     for it in items:
         if it["role"] == "history":
             by_h[it["history"]][it["position"]] = it
     hs = sorted(by_h) if histories is None else histories
+    init = init or {}
     spare_q = list(spares)
-    state = {h: {"tasks": [], "deliverables": [], "positions": []} for h in hs}
+    state, start = {}, {}
+    for h in hs:
+        pre = init.get(h, {})
+        state[h] = {"tasks": list(pre.get("tasks", [])), "deliverables": list(pre.get("deliverables", [])),
+                    "item_ids": list(pre.get("item_ids", [])), "positions": []}
+        start[h] = len(state[h]["deliverables"]) + 1
     for k in range(1, positions + 1):
-        current = {h: by_h[h][k] for h in hs}
-        redraws = {h: 0 for h in hs}
-        pending = list(hs)
+        active = [h for h in hs if start[h] <= k]
+        if not active:
+            continue
+        current = {h: by_id[init[h]["next_item_id"]] if (k == start[h] and init.get(h, {}).get("next_item_id"))
+                   else by_h[h][k] for h in active}
+        n_samp = {h: init[h].get("samples", samples) if (k == start[h] and h in init) else samples for h in active}
+        redraws = {h: 0 for h in active}
+        pending = list(active)
         while pending:
             jobs = []
             for h in pending:
                 it = current[h]
                 msgs = history_messages(state[h]["tasks"], state[h]["deliverables"], task_text(it, it["briefing"]))
                 jobs += [{"key": f"h{h}|p{k}|{it['item_id']}|s{s}", "messages": msgs,
-                          "seed": seed_of(f"cal|h{h}|p{k}|{it['item_id']}|s{s}")} for s in range(samples)]
+                          "seed": seed_of(f"{seed_prefix}|h{h}|p{k}|{it['item_id']}|s{s}")}
+                         for s in range(n_samp[h])]
             out = gen.generate(jobs)
             still = []
             for h in pending:
                 it = current[h]
                 drafts = []
-                for s in range(samples):
+                for s in range(n_samp[h]):
                     o = out[f"h{h}|p{k}|{it['item_id']}|s{s}"]
                     cov, per = value_coverage(o["answer"], it["requirements"])
                     drafts.append({**o, "sample": s, "value_coverage": cov, "value_checks": per})
@@ -72,16 +88,18 @@ def build_histories(gen, items, spares, samples=SAMPLES_PER_POSITION, positions=
                            None)
                 rec = {"position": k, "item_id": it["item_id"], "redraw": redraws[h], "drafts": drafts,
                        "accepted_sample": acc["sample"] if acc else None,
-                       "attempts": (acc["sample"] + 1) if acc else samples}
+                       "attempts": (acc["sample"] + 1) if acc else n_samp[h]}
                 state[h]["positions"].append(rec)
                 if acc:
                     state[h]["tasks"].append(task_text(it, it["briefing"]))
                     state[h]["deliverables"].append(acc["answer"])
+                    state[h]["item_ids"].append(it["item_id"])
                 else:
                     if redraws[h] >= MAX_REDRAWS or not spare_q:
                         raise RuntimeError(f"history {h} position {k}: no acceptable deliverable after redraws")
                     redraws[h] += 1
                     current[h] = spare_q.pop(0)
+                    n_samp[h] = samples
                     still.append(h)
             print(f"[histories] position {k}: {len(pending) - len(still)} accepted, {len(still)} redrawn", flush=True)
             pending = still
@@ -128,6 +146,9 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", required=True)
     ap.add_argument("--smoke", action="store_true", help="2 histories, 2 positions, 2 samples; no screen/load tuning")
+    ap.add_argument("--hist-split", help="history-only mode: build histories for this item split (e.g. pilot)")
+    ap.add_argument("--spare-split", default="pilotspare")
+    ap.add_argument("--init", help="JSON with accepted prefixes for a rebuild (history-only mode)")
     ap.add_argument("--load-split", default="calibration",
                     help="item split for load tuning after the freshly built histories (full run)")
     ap.add_argument("--probe", help="item split to load-tune (cell N, 3 samples) after the saved calibration histories "
@@ -138,6 +159,17 @@ def main():
     from .qwen_gen import Qwen
     gen = Qwen()
     (out / "settings.json").write_text(json.dumps(gen.settings, indent=1))
+    if a.hist_split:
+        h_items = load_jsonl(MATERIALS / "items" / f"{a.hist_split}.jsonl")
+        h_spares = load_jsonl(MATERIALS / "items" / f"{a.spare_split}.jsonl")
+        init = {int(h): v for h, v in json.loads(Path(a.init).read_text()).items()} if a.init else None
+        used = {i for v in (init or {}).values() for i in v.get("used_spares", [])}
+        state = build_histories(gen, h_items, [s_ for s_ in h_spares if s_["item_id"] not in used],
+                                histories=sorted(init) if init else None, init=init, seed_prefix=a.hist_split +
+                                ("-rebuild" if init else ""))
+        write_jsonl(out / "histories.jsonl", [{"history": h, **v} for h, v in state.items()])
+        print("[histories] done", flush=True)
+        return
     if a.probe:
         saved = json.loads((MATERIALS / "histories" / "calib_v1.json").read_text())
         state = {int(h): v for h, v in saved.items()}
