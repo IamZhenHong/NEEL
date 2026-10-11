@@ -37,9 +37,29 @@ def calprobe():
              "position": 7, **sample(f"cal-s{i}", "scored", level)} for i in range(N_CAL_SCORED) for level in (3, 4)]
 
 
+N_PILOT = 20
+
+
+def pilot():
+    """Pilot pairs (DESIGN.md §4.3): per pair 6 history tasks (history load) + 1 scored task (level 3, locked)."""
+    items = []
+    for i in range(N_PILOT):
+        for k in range(6):
+            items.append({"item_id": f"pilot-h{i}-p{k}", "split": "pilot", "role": "history", "history": i,
+                          "position": k + 1, **sample(f"pilot-h{i}-p{k}", "history", 0)})
+        items.append({"item_id": f"pilot-s{i}", "split": "pilot", "role": "scored", "history": i, "position": 7,
+                      **sample(f"pilot-s{i}", "scored", 3)})
+    return items
+
+
+def pilotspare():
+    return [{"item_id": f"pilot-spare-{j}", "split": "pilotspare", "role": "history", "history": None,
+             "position": None, **sample(f"pilot-spare-{j}", "history", 0)} for j in range(20)]
+
+
 if __name__ == "__main__":
     which = sys.argv[1]
-    items = {"calibration": calibration, "calspare": calspare, "calprobe": calprobe}[which]()
+    items = {"calibration": calibration, "calspare": calspare, "calprobe": calprobe, "pilot": pilot, "pilotspare": pilotspare}[which]()
     path = MATERIALS / "items" / f"{which}.jsonl"
     if path.exists():
         sys.exit(f"{path} exists; refusing to overwrite (items carry generated briefings)")
