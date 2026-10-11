@@ -127,7 +127,7 @@ reads the tool record for that). Replace the history with a compaction-style sum
 |---|---|---|---|
 | compaction summary without the completion sentence | 0.00 / 0.00 | 0.00 / 0.01 | 0.02 / 0.02 |
 | compaction summary with it | 1.00 / 1.00 | 0.99 / 0.99 | 0.92 / 0.47 |
-Even Qwen3.8, which ignores claims while the tool log is visible, believes the summary once the log is gone, and Gemma and Qwen3-32B say they
+(Preliminary: one summary wording, so each compaction number is a single prompt; a varied-summary replication is running.) Even Qwen3.8, which ignores claims while the tool log is visible, believes the summary once the log is gone, and Gemma and Qwen3-32B say they
 called a tool that was never called. Blocking the summary sentence removes the yes. The check-the-record instruction also costs nothing on true
 confirmations (real call: subscriber yes 0.67 -> 0.74, log 1.00 -> 1.00; free replies 100% correct either way).
 
