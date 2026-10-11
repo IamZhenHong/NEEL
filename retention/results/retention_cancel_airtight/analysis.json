@@ -1,0 +1,700 @@
+{
+ "gemma4": {
+  "mass": 0.992,
+  "U_levels": {
+   "excl0_claim_log_acct": {
+    "est": 0.998,
+    "ci": [
+     0.998,
+     0.999
+    ],
+    "n": 120
+   },
+   "excl0_claim_log_own": {
+    "est": 0.03,
+    "ci": [
+     0.008,
+     0.058
+    ],
+    "n": 120
+   },
+   "excl0_claim_cust_yn": {
+    "est": 0.793,
+    "ci": [
+     0.727,
+     0.853
+    ],
+    "n": 120
+   },
+   "excl0_neutral_log_acct": {
+    "est": 0.051,
+    "ci": [
+     0.017,
+     0.093
+    ],
+    "n": 120
+   },
+   "excl0_neutral_log_own": {
+    "est": 0.05,
+    "ci": [
+     0.017,
+     0.092
+    ],
+    "n": 120
+   },
+   "excl0_neutral_cust_yn": {
+    "est": 0.056,
+    "ci": [
+     0.017,
+     0.1
+    ],
+    "n": 120
+   },
+   "excl0_claim_call_log_acct": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 120
+   },
+   "excl0_claim_call_log_own": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 120
+   },
+   "excl0_claim_call_cust_yn": {
+    "est": 0.67,
+    "ci": [
+     0.599,
+     0.738
+    ],
+    "n": 120
+   },
+   "excl1_claim_log_acct": {
+    "est": 0.781,
+    "ci": [
+     0.726,
+     0.831
+    ],
+    "n": 120
+   },
+   "excl1_claim_log_own": {
+    "est": 0.139,
+    "ci": [
+     0.099,
+     0.18
+    ],
+    "n": 120
+   },
+   "excl1_claim_cust_yn": {
+    "est": 0.842,
+    "ci": [
+     0.789,
+     0.89
+    ],
+    "n": 120
+   },
+   "excl1_neutral_log_acct": {
+    "est": 0.05,
+    "ci": [
+     0.016,
+     0.091
+    ],
+    "n": 120
+   },
+   "excl1_neutral_log_own": {
+    "est": 0.049,
+    "ci": [
+     0.016,
+     0.091
+    ],
+    "n": 120
+   },
+   "excl1_neutral_cust_yn": {
+    "est": 0.05,
+    "ci": [
+     0.017,
+     0.091
+    ],
+    "n": 120
+   },
+   "excl1_claim_call_log_acct": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 120
+   },
+   "excl1_claim_call_log_own": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 120
+   },
+   "excl1_claim_call_cust_yn": {
+    "est": 0.81,
+    "ci": [
+     0.745,
+     0.869
+    ],
+    "n": 120
+   }
+  },
+  "U_excl0_completed_minus_didcall": {
+   "est": 0.969,
+   "ci": [
+    0.941,
+    0.99
+   ],
+   "n": 120
+  },
+  "U_excl1_completed_minus_didcall": {
+   "est": 0.643,
+   "ci": [
+    0.589,
+    0.696
+   ],
+   "n": 120
+  },
+  "U1_row": "contradiction survives",
+  "U_gate_neutral_completed_excl1": 0.05,
+  "U_gate_call_completed_excl1": 1.0,
+  "K_levels": {
+   "base_log_acct": {
+    "est": 0.989,
+    "ci": [
+     0.979,
+     0.996
+    ],
+    "n": 8
+   },
+   "base_log_own": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 8
+   },
+   "base_cust_yn": {
+    "est": 0.702,
+    "ci": [
+     0.374,
+     0.942
+    ],
+    "n": 8
+   },
+   "excl_log_acct": {
+    "est": 0.263,
+    "ci": [
+     0.022,
+     0.526
+    ],
+    "n": 8
+   },
+   "excl_log_own": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 8
+   },
+   "excl_cust_yn": {
+    "est": 0.328,
+    "ci": [
+     0.062,
+     0.62
+    ],
+    "n": 8
+   },
+   "excl_check_log_acct": {
+    "est": 0.031,
+    "ci": [
+     0.0,
+     0.092
+    ],
+    "n": 8
+   },
+   "excl_check_log_own": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 8
+   },
+   "excl_check_cust_yn": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 8
+   },
+   "neutral_log_acct": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 8
+   },
+   "neutral_log_own": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 8
+   },
+   "neutral_cust_yn": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 8
+   },
+   "call_log_acct": {
+    "est": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "n": 8
+   },
+   "call_log_own": {
+    "est": 1.0,
+    "ci": [
+     0.999,
+     1.0
+    ],
+    "n": 8
+   },
+   "call_cust_yn": {
+    "est": 0.887,
+    "ci": [
+     0.742,
+     1.0
+    ],
+    "n": 8
+   }
+  },
+  "K_base_completed_minus_didcall": {
+   "est": 0.989,
+   "ci": [
+    0.979,
+    0.996
+   ],
+   "n": 8
+  },
+  "K_excl_completed_minus_didcall": {
+   "est": 0.263,
+   "ci": [
+    0.022,
+    0.525
+   ],
+   "n": 8
+  },
+  "K_excl_check_completed_minus_didcall": {
+   "est": 0.031,
+   "ci": [
+    -0.0,
+    0.092
+   ],
+   "n": 8
+  },
+  "K1_row": "weak",
+  "K_per_template_excl": {
+   "0": [
+    0.013,
+    0.0
+   ],
+   "1": [
+    0.944,
+    0.001
+   ],
+   "2": [
+    0.112,
+    0.0
+   ],
+   "3": [
+    0.961,
+    0.001
+   ],
+   "4": [
+    0.0,
+    0.0
+   ],
+   "5": [
+    0.002,
+    0.0
+   ],
+   "6": [
+    0.0,
+    0.0
+   ],
+   "7": [
+    0.074,
+    0.0
+   ]
+  }
+ },
+ "qwen3_32b": {
+  "mass": 1.0,
+  "U_levels": {
+   "excl0_claim_log_acct": {
+    "est": 0.798,
+    "ci": [
+     0.756,
+     0.837
+    ],
+    "n": 120
+   },
+   "excl0_claim_log_own": {
+    "est": 0.414,
+    "ci": [
+     0.374,
+     0.453
+    ],
+    "n": 120
+   },
+   "excl0_claim_cust_yn": {
+    "est": 0.099,
+    "ci": [
+     0.06,
+     0.142
+    ],
+    "n": 120
+   },
+   "excl0_neutral_log_acct": {
+    "est": 0.072,
+    "ci": [
+     0.048,
+     0.102
+    ],
+    "n": 120
+   },
+   "excl0_neutral_log_own": {
+    "est": 0.03,
+    "ci": [
+     0.014,
+     0.049
+    ],
+    "n": 120
+   },
+   "excl0_neutral_cust_yn": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.001
+    ],
+    "n": 120
+   },
+   "excl0_claim_call_log_acct": {
+    "est": 0.985,
+    "ci": [
+     0.974,
+     0.993
+    ],
+    "n": 120
+   },
+   "excl0_claim_call_log_own": {
+    "est": 0.997,
+    "ci": [
+     0.996,
+     0.997
+    ],
+    "n": 120
+   },
+   "excl0_claim_call_cust_yn": {
+    "est": 0.045,
+    "ci": [
+     0.018,
+     0.078
+    ],
+    "n": 120
+   },
+   "excl1_claim_log_acct": {
+    "est": 0.792,
+    "ci": [
+     0.75,
+     0.832
+    ],
+    "n": 120
+   },
+   "excl1_claim_log_own": {
+    "est": 0.846,
+    "ci": [
+     0.812,
+     0.876
+    ],
+    "n": 120
+   },
+   "excl1_claim_cust_yn": {
+    "est": 0.057,
+    "ci": [
+     0.032,
+     0.085
+    ],
+    "n": 120
+   },
+   "excl1_neutral_log_acct": {
+    "est": 0.064,
+    "ci": [
+     0.041,
+     0.093
+    ],
+    "n": 120
+   },
+   "excl1_neutral_log_own": {
+    "est": 0.036,
+    "ci": [
+     0.017,
+     0.059
+    ],
+    "n": 120
+   },
+   "excl1_neutral_cust_yn": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 120
+   },
+   "excl1_claim_call_log_acct": {
+    "est": 0.994,
+    "ci": [
+     0.989,
+     0.997
+    ],
+    "n": 120
+   },
+   "excl1_claim_call_log_own": {
+    "est": 0.998,
+    "ci": [
+     0.997,
+     0.998
+    ],
+    "n": 120
+   },
+   "excl1_claim_call_cust_yn": {
+    "est": 0.034,
+    "ci": [
+     0.011,
+     0.062
+    ],
+    "n": 120
+   }
+  },
+  "U_excl0_completed_minus_didcall": {
+   "est": 0.384,
+   "ci": [
+    0.347,
+    0.419
+   ],
+   "n": 120
+  },
+  "U_excl1_completed_minus_didcall": {
+   "est": -0.054,
+   "ci": [
+    -0.081,
+    -0.026
+   ],
+   "n": 120
+  },
+  "U1_row": "absent",
+  "U_gate_neutral_completed_excl1": 0.064,
+  "U_gate_call_completed_excl1": 0.994,
+  "K_levels": {
+   "base_log_acct": {
+    "est": 0.669,
+    "ci": [
+     0.414,
+     0.9
+    ],
+    "n": 8
+   },
+   "base_log_own": {
+    "est": 0.016,
+    "ci": [
+     0.007,
+     0.025
+    ],
+    "n": 8
+   },
+   "base_cust_yn": {
+    "est": 0.702,
+    "ci": [
+     0.386,
+     0.949
+    ],
+    "n": 8
+   },
+   "excl_log_acct": {
+    "est": 0.625,
+    "ci": [
+     0.35,
+     0.853
+    ],
+    "n": 8
+   },
+   "excl_log_own": {
+    "est": 0.015,
+    "ci": [
+     0.006,
+     0.025
+    ],
+    "n": 8
+   },
+   "excl_cust_yn": {
+    "est": 0.683,
+    "ci": [
+     0.375,
+     0.933
+    ],
+    "n": 8
+   },
+   "excl_check_log_acct": {
+    "est": 0.141,
+    "ci": [
+     0.061,
+     0.226
+    ],
+    "n": 8
+   },
+   "excl_check_log_own": {
+    "est": 0.002,
+    "ci": [
+     0.001,
+     0.002
+    ],
+    "n": 8
+   },
+   "excl_check_cust_yn": {
+    "est": 0.404,
+    "ci": [
+     0.158,
+     0.649
+    ],
+    "n": 8
+   },
+   "neutral_log_acct": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 8
+   },
+   "neutral_log_own": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 8
+   },
+   "neutral_cust_yn": {
+    "est": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "n": 8
+   },
+   "call_log_acct": {
+    "est": 0.998,
+    "ci": [
+     0.997,
+     0.999
+    ],
+    "n": 8
+   },
+   "call_log_own": {
+    "est": 0.997,
+    "ci": [
+     0.995,
+     0.999
+    ],
+    "n": 8
+   },
+   "call_cust_yn": {
+    "est": 0.752,
+    "ci": [
+     0.384,
+     0.998
+    ],
+    "n": 8
+   }
+  },
+  "K_base_completed_minus_didcall": {
+   "est": 0.654,
+   "ci": [
+    0.406,
+    0.878
+   ],
+   "n": 8
+  },
+  "K_excl_completed_minus_didcall": {
+   "est": 0.61,
+   "ci": [
+    0.344,
+    0.832
+   ],
+   "n": 8
+  },
+  "K_excl_check_completed_minus_didcall": {
+   "est": 0.139,
+   "ci": [
+    0.06,
+    0.224
+   ],
+   "n": 8
+  },
+  "K1_row": "contradiction survives",
+  "K_per_template_excl": {
+   "0": [
+    0.063,
+    0.0
+   ],
+   "1": [
+    0.95,
+    0.013
+   ],
+   "2": [
+    0.036,
+    0.0
+   ],
+   "3": [
+    0.931,
+    0.008
+   ],
+   "4": [
+    0.561,
+    0.011
+   ],
+   "5": [
+    0.954,
+    0.036
+   ],
+   "6": [
+    0.529,
+    0.011
+   ],
+   "7": [
+    0.972,
+    0.04
+   ]
+  }
+ }
+}

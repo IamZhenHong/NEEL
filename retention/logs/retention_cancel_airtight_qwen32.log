@@ -1,0 +1,26 @@
+[pre] disk: 13.7 GiB free
+[pre] balance $26.99, pods 2
+[runpod] launching alongside 2 pod(s) not ours (left alone): persona-pilot-s2 $1.79/hr, persona-pilot-s1 $1.79/hr
+[runpod] pod wwhumvyc58hv7p (?) at $1.79/hr; time cap 30 min; budget $0.9
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@38.128.232.57 -p 47944
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 60 min (job limit 30 + 30 grace)
+[pod] code synced
+downloading uv 0.13.0 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=e8d994e-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash -c 'python retention/run_cancel_airtight.py --model qwen3_32b --limit 2 --out retention/results/retention_cancel_airtight/qwen3_32b/smoke && python retention/run_cancel_airtight.py --model qwen3_32b --out retention/results/retention_cancel_airtight/qwen3_32b'
+[job] start 03:39:12
+[airtight] qwen3_32b: 516 rows
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Fetching 17 files:   0%|          | 0/17 [00:00<?, ?it/s]Fetching 17 files:   6%|▌         | 1/17 [00:58<15:28, 58.06s/it]Fetching 17 files:  12%|█▏        | 2/17 [01:01<06:33, 26.20s/it]Fetching 17 files:  18%|█▊        | 3/17 [01:03<03:27, 14.81s/it]Fetching 17 files:  24%|██▎       | 4/17 [01:04<02:02,  9.45s/it]Fetching 17 files:  29%|██▉       | 5/17 [01:08<01:31,  7.62s/it]Fetching 17 files:  35%|███▌      | 6/17 [01:10<01:01,  5.57s/it]Fetching 17 files:  41%|████      | 7/17 [01:16<00:57,  5.76s/it]Fetching 17 files:  47%|████▋     | 8/17 [01:25<01:00,  6.72s/it]Fetching 17 files:  53%|█████▎    | 9/17 [01:49<01:36, 12.03s/it]Fetching 17 files:  59%|█████▉    | 10/17 [01:52<01:05,  9.40s/it]Fetching 17 files:  65%|██████▍   | 11/17 [01:57<00:48,  8.10s/it]Fetching 17 files:  71%|███████   | 12/17 [01:58<00:28,  5.74s/it]Fetching 17 files:  76%|███████▋  | 13/17 [01:59<00:18,  4.53s/it]Fetching 17 files:  82%|████████▏ | 14/17 [02:00<00:10,  3.37s/it]Fetching 17 files:  88%|████████▊ | 15/17 [02:04<00:06,  3.48s/it]Fetching 17 files:  94%|█████████▍| 16/17 [02:04<00:02,  2.53s/it]Fetching 17 files: 100%|██████████| 17/17 [03:52<00:00, 34.23s/it]Fetching 17 files: 100%|██████████| 17/17 [03:52<00:00, 13.68s/it]
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  56%|█████▌    | 395/707 [00:00<00:00, 3948.33it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 4261.47it/s]
+[done] 370s
+[airtight] qwen3_32b: 2640 rows
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+Loading weights:   0%|          | 0/707 [00:00<?, ?it/s]Loading weights:  57%|█████▋    | 403/707 [00:00<00:00, 4012.83it/s]Loading weights: 100%|██████████| 707/707 [00:00<00:00, 4074.97it/s]
+[done] 723s
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.590
+[local] results synced ./retention/results/retention_cancel_airtight/qwen3_32b/ (8 files, 0 MiB, verified against the pod)
+[runpod] terminated wwhumvyc58hv7p; elapsed cost ~$0.595
+[runpod] other pods present (not ours, left alone): [('persona-pilot-s2', '01rnc1lldgto2y', 1.79), ('persona-pilot-s1', 'n6sr3ywe6aex76', 1.79)]
+[post] balance $25.08, pods 2

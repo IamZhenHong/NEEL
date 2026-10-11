@@ -55,6 +55,7 @@ User loosened GPU spend on 10-10 (still cap and report per pod). Intent line (re
 path: from the NEEL root it reads $0 and does not enforce the cap.
 
 ## Next session: start here
+Red-team check done 10-11 (tag retention-cancel-airtight-results): headline survives explicit tool exclusivity (Gemma uncompacted 0.78 completed / 0.14 called) and unambiguous first-person summaries (Gemma 0.99 / 0.00, Qwen3-32B 0.67 / 0.02); exclusivity weakens it; Qwen3-32B can instead falsely claim it called the tool. Post has a 'Red-teaming the contradiction' section.
 Latest (10-11): varied-summary replication done (tag retention-cancel-compvary-results): compaction belief and the fix-vs-compaction
 contradiction hold across 20 wordings for Gemma 12B and Qwen3-32B (Qwen3.8 not run: two RunPod no-IP pods). Post hoc: fact-phrased completions are
 believed, reported-speech ones checked -> first follow-up is to manipulate that directly. The single-wording compaction numbers are superseded by
