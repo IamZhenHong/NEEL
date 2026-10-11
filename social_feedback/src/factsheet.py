@@ -327,8 +327,10 @@ def _sample(seed, load="scored", level=0):
     r_launch = rng.sample(sc["risks_launch"], 2)
     r_other = rng.sample(sc["risks_other"], 2)
     affects_other = ["the budget", f"the number of {sc['units']}"]
-    risk_facts = [f"Risk: {r} could delay {sc['launch']}." for r in r_launch] + \
-                 [f"Risk: {r} could affect {a}." for r, a in zip(r_other, affects_other)]
+    # plain sentences, copied verbatim into the briefing (v1 used "Risk: ..." and the writer then counted and grouped
+    # the risks, giving away the S-sum answer; found by the item audit, 2026-10-11)
+    risk_facts = [f"{r[0].upper() + r[1:]} could delay {sc['launch']}." for r in r_launch] + \
+                 [f"{r[0].upper() + r[1:]} could affect {a}." for r, a in zip(r_other, affects_other)]
     rng.shuffle(risk_facts)
     facts.extend(risk_facts)
 
@@ -385,7 +387,7 @@ def _sample(seed, load="scored", level=0):
         "must_exclude": [{"kind": k, "value": (v.isoformat() if isinstance(v, dt.date) else v)} for k, v in derived],
         "dependency": {"A": sc["A"], "B": sc["B"], "n_working_days": n_dep, "anchor_date_text": dep_anchor,
                        "rule": dep_rule},
-        "risks": {"launch": r_launch, "other": r_other},
+        "risks": {"launch": r_launch, "other": r_other, "sentences": risk_facts},
         "conflict": conflict, "requirements": R,
     }
 

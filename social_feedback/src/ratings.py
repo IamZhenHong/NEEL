@@ -16,6 +16,11 @@ from .common import MATERIALS
 from .feedback import DIMENSIONS, FB
 
 WARMTH_GAP, OTHER_MAX, COLD_FALLBACK, MIN_PAIRS, MAX_PAIRS = 1.5, 0.5, 1.0, 15, 20
+# Amendment A1 (owner, 2026-10-11): the designed rule passed 0 pairs and its fallback 2. All three raters treat coldness
+# as the mirror of warmth (plain lines ~2.3/5 cold, warm ~1) and rate warm lines +0.4 to +0.8 higher on implied
+# quality. A1 drops the coldness criterion, allows an implied-quality gap up to 1.0 (approval is part of the construct,
+# DESIGN §1; the Qwen screen excludes correctness verdicts) and labels the contrast "warm versus cool".
+A1_QUALITY_MAX = 1.0
 
 
 def krippendorff_interval(matrix):
@@ -69,14 +74,23 @@ def main():
             out.append({**p, "ratings": {"warm": w, "plain": pl, "gaps": gaps}, "keep": ok})
         return out
 
-    rated = evaluate(OTHER_MAX)
-    label, rule = "warm versus matter-of-fact", f"coldness gap <= {OTHER_MAX}"
-    if sum(r["keep"] for r in rated) < MIN_PAIRS:
-        rated = evaluate(COLD_FALLBACK)
-        label, rule = "warm versus cool", f"coldness gap <= {COLD_FALLBACK} (fallback)"
+    designed = evaluate(OTHER_MAX)
+    fallback = evaluate(COLD_FALLBACK)
+    as_designed = {"designed_n_pass": sum(r["keep"] for r in designed), "fallback_n_pass": sum(r["keep"] for r in fallback)}
+    rated = []
+    for p in designed:
+        g = p["ratings"]["gaps"]
+        ok = g["warmth"] >= WARMTH_GAP and abs(g["implied_quality"]) <= A1_QUALITY_MAX and all(
+            abs(g[d]) <= OTHER_MAX for d in ("implied_style", "implied_instruction", "role_confusion"))
+        rated.append({**p, "keep": ok})
+    label = "warm versus cool"
+    rule = (f"amendment A1: warmth gap >= {WARMTH_GAP}; implied_quality |gap| <= {A1_QUALITY_MAX}; style, instruction, "
+            f"role |gap| <= {OTHER_MAX}; coldness not used (designed rule passed {as_designed['designed_n_pass']}, "
+            f"fallback {as_designed['fallback_n_pass']})")
     kept = sorted([r for r in rated if r["keep"]], key=lambda r: -r["ratings"]["gaps"]["warmth"])[:MAX_PAIRS]
     plain_neutral = st.mean(r["ratings"]["plain"]["warmth"] for r in kept) if kept else None
-    out = {"raters": raters, "alpha": alpha, "rule": rule, "label": label, "n_passing": sum(r["keep"] for r in rated),
+    out = {"raters": raters, "alpha": alpha, "rule": rule, "label": label, "as_designed": as_designed,
+           "n_passing": sum(r["keep"] for r in rated),
            "pool": [{"pair_id": r["pair_id"], "warm": r["warm"], "plain": r["plain"], "token_diff": r["token_diff"],
                      "gaps": r["ratings"]["gaps"]} for r in kept],
            "all_pairs": rated, "plain_mean_warmth": plain_neutral,

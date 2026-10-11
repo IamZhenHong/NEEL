@@ -134,3 +134,12 @@ def test_working_day_helpers():
     mon = dt.date(2027, 6, 14)
     assert subtract_working_days(mon, 1) == dt.date(2027, 6, 11)
     assert working_days_between(dt.date(2027, 6, 11), dt.date(2027, 6, 18)) == 5
+
+
+def test_risk_count_sentences():
+    from social_feedback.src.briefing import risk_count_sentences
+    assert risk_count_sentences("Four risks are logged. Late X could delay it.") == ["Four risks are logged."]
+    assert risk_count_sentences("Two risks concern the opening day: A and B.")
+    assert risk_count_sentences("Both risks could delay the opening.")
+    assert not risk_count_sentences("Late delivery of the till system could delay the store opening, a risk on the log.")
+    assert not risk_count_sentences("The plan provides for 35 staff hires. Rising wage costs are a risk to the budget.")

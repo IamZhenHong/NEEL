@@ -128,6 +128,8 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", required=True)
     ap.add_argument("--smoke", action="store_true", help="2 histories, 2 positions, 2 samples; no screen/load tuning")
+    ap.add_argument("--load-split", default="calibration",
+                    help="item split for load tuning after the freshly built histories (full run)")
     ap.add_argument("--probe", help="item split to load-tune (cell N, 3 samples) after the saved calibration histories "
                                     "(materials/histories/calib_v1.json); skips history building and the screen")
     a = ap.parse_args()
@@ -156,7 +158,9 @@ def main():
     pairs = json.loads((MATERIALS / "feedback" / "pairs_step3.json").read_text())["kept"]
     write_jsonl(out / "qwen_screen.jsonl", screen(gen, pairs, state))
     print("[screen] done", flush=True)
-    rows, jobs = load_tuning(gen, items, state)
+    load_items = items if a.load_split == "calibration" else load_jsonl(MATERIALS / "items" / f"{a.load_split}.jsonl")
+    rows, jobs = load_tuning(gen, load_items, state, levels=tuple(sorted({it["level"] for it in load_items
+                                                                          if it["role"] == "scored"})))
     write_jsonl(out / "loadtune.jsonl", rows)
     ser = out / "serialized"
     ser.mkdir(exist_ok=True)

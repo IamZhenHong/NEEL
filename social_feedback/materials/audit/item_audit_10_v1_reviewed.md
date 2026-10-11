@@ -103,15 +103,17 @@ R10. the date of the steering committee meeting — **Wednesday 10 November 2027
 
 **Checks** (tick, or write the problem underneath):
 
-- [ ] Every fact in the briefing matches the fact sheet: who owns what, which date belongs to which event, which figure
+- [x] Every fact in the briefing matches the fact sheet: who owns what, which date belongs to which event, which figure
       belongs to which quantity, which risk affects what.
-- [ ] The briefing adds nothing that contradicts or blurs the fact sheet (extra people, dates, amounts, hints).
-- [ ] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
+- [x] The briefing adds nothing that contradicts or blurs the fact sheet (extra people, dates, amounts, hints).
+- [x] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
       working-day answers: earliest start, latest sign-off, working days between; then the current launch date, the
       budget total and the risk list).
-- [ ] The reference memo is correct.
+- [x] The reference memo is correct.
 
 Notes:
+
+PASS. Checked owner/supporter distinctions, source precedence, budget exclusions and the two go-live risks. Recalculated the three working-day answers: 21 days; earliest UAT 2 April; latest sign-off 4 October. All ten reference answers agree with the fact sheet.
 
 
 ---
@@ -208,15 +210,17 @@ R10. the earliest date stock loading can begin — **Tuesday 22 June 2027**
 
 **Checks** (tick, or write the problem underneath):
 
-- [ ] Every fact in the briefing matches the fact sheet: who owns what, which date belongs to which event, which figure
+- [x] Every fact in the briefing matches the fact sheet: who owns what, which date belongs to which event, which figure
       belongs to which quantity, which risk affects what.
-- [ ] The briefing adds nothing that contradicts or blurs the fact sheet (extra people, dates, amounts, hints).
-- [ ] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
+- [x] The briefing adds nothing that contradicts or blurs the fact sheet (extra people, dates, amounts, hints).
+- [x] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
       working-day answers: earliest start, latest sign-off, working days between; then the current launch date, the
       budget total and the risk list).
-- [ ] The reference memo is correct.
+- [x] The reference memo is correct.
 
 Notes:
+
+PASS. Recalculated 24 working days, earliest loading 22 June and latest sign-off 20 May. Budget is €301,000 + €31,000 = €332,000. Owners, contract, training date, revised opening date and exact risk set agree.
 
 
 ---
@@ -315,15 +319,17 @@ R10. the date of the supplier demo — **Wednesday 3 March 2027**
 
 **Checks** (tick, or write the problem underneath):
 
-- [ ] Every fact in the briefing matches the fact sheet: who owns what, which date belongs to which event, which figure
+- [x] Every fact in the briefing matches the fact sheet: who owns what, which date belongs to which event, which figure
       belongs to which quantity, which risk affects what.
-- [ ] The briefing adds nothing that contradicts or blurs the fact sheet (extra people, dates, amounts, hints).
-- [ ] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
+- [x] The briefing adds nothing that contradicts or blurs the fact sheet (extra people, dates, amounts, hints).
+- [x] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
       working-day answers: earliest start, latest sign-off, working days between; then the current launch date, the
       budget total and the risk list).
-- [ ] The reference memo is correct.
+- [x] The reference memo is correct.
 
 Notes:
+
+PASS. Recalculated 24 working days, earliest deployment 21 April and latest sign-off 27 July. Budget is £563,000 - £48,000 = £515,000. Ownership, supplier demo, revised lessons date and the two delay risks agree.
 
 
 ---
@@ -424,12 +430,14 @@ R10. the date of the security audit — **Thursday 25 February 2027**
 - [ ] Every fact in the briefing matches the fact sheet: who owns what, which date belongs to which event, which figure
       belongs to which quantity, which risk affects what.
 - [ ] The briefing adds nothing that contradicts or blurs the fact sheet (extra people, dates, amounts, hints).
-- [ ] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
+- [x] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
       working-day answers: earliest start, latest sign-off, working days between; then the current launch date, the
       budget total and the risk list).
 - [ ] The reference memo is correct.
 
 Notes:
+
+FAIL — briefing and reference defects. The briefing says "Three risks are currently recorded" but the fact sheet and the following sentences identify FOUR distinct risks: server racks, fire-safety certification, parking spaces, and removal costs. Change Three to Four. The reference also adds "on track", which the source does not establish; replace that status claim with "is working to the revised plan". The ten requested answers themselves are correct: 19 working days; latest sign-off 16 June; earliest move-in 17 June; budget £467,000. Checks 1, 2 and 4 are left unticked for these defects.
 
 
 ---
@@ -527,15 +535,17 @@ R10. how many working days after the speaker programme checkpoint the registrati
 
 **Checks** (tick, or write the problem underneath):
 
-- [ ] Every fact in the briefing matches the fact sheet: who owns what, which date belongs to which event, which figure
+- [x] Every fact in the briefing matches the fact sheet: who owns what, which date belongs to which event, which figure
       belongs to which quantity, which risk affects what.
-- [ ] The briefing adds nothing that contradicts or blurs the fact sheet (extra people, dates, amounts, hints).
-- [ ] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
+- [x] The briefing adds nothing that contradicts or blurs the fact sheet (extra people, dates, amounts, hints).
+- [x] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
       working-day answers: earliest start, latest sign-off, working days between; then the current launch date, the
       budget total and the risk list).
-- [ ] The reference memo is correct.
+- [x] The reference memo is correct.
 
 Notes:
+
+PASS. Recalculated 19 working days, latest sign-off 11 October and earliest ticket sales 15 February. Budget is £106,000 + £39,000 = £145,000. Owners, contract, tasting date, revised opening date and the two opening risks agree.
 
 
 ---
@@ -632,15 +642,17 @@ R10. how many working days after the safety training checkpoint the robot procur
 
 **Checks** (tick, or write the problem underneath):
 
-- [ ] Every fact in the briefing matches the fact sheet: who owns what, which date belongs to which event, which figure
+- [x] Every fact in the briefing matches the fact sheet: who owns what, which date belongs to which event, which figure
       belongs to which quantity, which risk affects what.
-- [ ] The briefing adds nothing that contradicts or blurs the fact sheet (extra people, dates, amounts, hints).
-- [ ] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
+- [x] The briefing adds nothing that contradicts or blurs the fact sheet (extra people, dates, amounts, hints).
+- [x] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
       working-day answers: earliest start, latest sign-off, working days between; then the current launch date, the
       budget total and the risk list).
-- [ ] The reference memo is correct.
+- [x] The reference memo is correct.
 
 Notes:
+
+PASS. Recalculated latest sign-off 19 February, earliest installation 3 March and a 14-working-day interval. Budget is €195,000 - €17,000 = €178,000. Ownership, contract, factory visit, current switch date and the two delay risks agree.
 
 
 ---
@@ -744,9 +756,11 @@ R10. the value of the audio-visual production contract — **£42,500**
 - [ ] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
       working-day answers: earliest start, latest sign-off, working days between; then the current launch date, the
       budget total and the risk list).
-- [ ] The reference memo is correct.
+- [x] The reference memo is correct.
 
 Notes:
+
+FAIL — contradictory risk count. The briefing says "Three risks to the conference opening day are recorded", but the fact sheet has only TWO: late venue licensing and the keynote speaker's visa delay. The remaining two risks concern capacity and budget. Replace that sentence with "Two risks to the conference opening day are recorded, alongside two risks to capacity and budget." Until corrected, R9 is not unambiguous from the briefing alone: its claim of a third opening risk conflicts with the supplied exact-two answer. Checks 1–3 are left unticked. The reference correctly follows the fact sheet and names two opening risks. All numeric/date answers independently agree: latest sign-off 3 August; earliest ticket sales 12 July; interval 11 working days; budget £326,000.
 
 
 ---
@@ -845,15 +859,17 @@ R10. who owns the parent communications workstream — **Aisling Sørensen**
 
 **Checks** (tick, or write the problem underneath):
 
-- [ ] Every fact in the briefing matches the fact sheet: who owns what, which date belongs to which event, which figure
+- [x] Every fact in the briefing matches the fact sheet: who owns what, which date belongs to which event, which figure
       belongs to which quantity, which risk affects what.
-- [ ] The briefing adds nothing that contradicts or blurs the fact sheet (extra people, dates, amounts, hints).
-- [ ] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
+- [x] The briefing adds nothing that contradicts or blurs the fact sheet (extra people, dates, amounts, hints).
+- [x] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
       working-day answers: earliest start, latest sign-off, working days between; then the current launch date, the
       budget total and the risk list).
-- [ ] The reference memo is correct.
+- [x] The reference memo is correct.
 
 Notes:
+
+PASS. The safeguarding review (22 February) is distinct from the safeguarding filters review (19 May), and both are correctly attached. Recalculated interval 22 working days, latest sign-off 28 April and earliest deployment 23 February. Budget £440,000, ownership and exact delay risks agree.
 
 
 ---
@@ -954,15 +970,17 @@ R10. who owns the audio-visual production workstream — **Oluwaseun Quiroga**
 
 **Checks** (tick, or write the problem underneath):
 
-- [ ] Every fact in the briefing matches the fact sheet: who owns what, which date belongs to which event, which figure
+- [x] Every fact in the briefing matches the fact sheet: who owns what, which date belongs to which event, which figure
       belongs to which quantity, which risk affects what.
-- [ ] The briefing adds nothing that contradicts or blurs the fact sheet (extra people, dates, amounts, hints).
-- [ ] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
+- [x] The briefing adds nothing that contradicts or blurs the fact sheet (extra people, dates, amounts, hints).
+- [x] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
       working-day answers: earliest start, latest sign-off, working days between; then the current launch date, the
       budget total and the risk list).
-- [ ] The reference memo is correct.
+- [x] The reference memo is correct.
 
 Notes:
+
+PASS. Recalculated earliest ticket sales 25 June, checkpoint interval 18 working days and latest sign-off 5 October. Budget is £111,000 + £59,000 = £170,000. Ownership, contract, speaker briefing, revised opening date and exact risk set agree.
 
 
 ---
@@ -1060,12 +1078,14 @@ R10. how many working days after the teacher training checkpoint the parent comm
 
 **Checks** (tick, or write the problem underneath):
 
-- [ ] Every fact in the briefing matches the fact sheet: who owns what, which date belongs to which event, which figure
+- [x] Every fact in the briefing matches the fact sheet: who owns what, which date belongs to which event, which figure
       belongs to which quantity, which risk affects what.
-- [ ] The briefing adds nothing that contradicts or blurs the fact sheet (extra people, dates, amounts, hints).
-- [ ] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
+- [x] The briefing adds nothing that contradicts or blurs the fact sheet (extra people, dates, amounts, hints).
+- [x] Each correct answer below is the only defensible answer from the briefing alone (look hardest at the
       working-day answers: earliest start, latest sign-off, working days between; then the current launch date, the
       budget total and the risk list).
-- [ ] The reference memo is correct.
+- [x] The reference memo is correct.
 
 Notes:
+
+PASS. Recalculated earliest deployment 23 June, latest sign-off 16 June and a 16-working-day interval. Budget is £354,000 + £14,000 = £368,000. Owner/supporter distinctions, revised lessons date, lease, supplier demo and exact risk set agree.

@@ -15,7 +15,7 @@ from .common import RESULTS, load_env
 
 LEDGER = RESULTS / "api_ledger.jsonl"
 # $ per 1M tokens: input, output, cache read, cache write (5-min); batch halves everything
-PRICES = {"claude-sonnet-5-5": (2.0, 10.0, 0.20, 2.50)}
+PRICES = {"claude-sonnet-5-5": (2.0, 10.0, 0.20, 2.50), "claude-opus-5-5": (4.0, 20.0, 0.20, 5.00)}
 BATCH_DISCOUNT = 0.5
 
 
