@@ -1,5 +1,8 @@
 # Preregistration record — social-feedback history pilot
 
+**Approved by the owner 2026-10-11 (including I5, the n >= 20 floor for confirmation sizing). Frozen at git tag
+`socfb-prereg-v1`, before any pilot cell generation.**
+
 Prepared 2026-10-11, **before any pilot cell generation**. The design is `DESIGN.md` (v3) as amended by
 `AMENDMENTS.md` (A1-A4 owner amendments, I1-I10 implementation decisions). Nothing here changes after the owner's
 approval; later changes are dated amendments made before the data they affect.
