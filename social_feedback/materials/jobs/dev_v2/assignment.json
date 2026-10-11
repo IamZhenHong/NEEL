@@ -1,0 +1,111 @@
+{
+ "summary": {
+  "pool": 18,
+  "histories": 6,
+  "seed": 1,
+  "search_seconds": 20,
+  "earlier_uses_min_max": [
+   1,
+   2
+  ],
+  "latest_uses_min_max": [
+   0,
+   1
+  ],
+  "max_overlap": 2,
+  "history_pairs_at_max": 3,
+  "overlap_distribution": {
+   "1": 12,
+   "2": 3
+  },
+  "mean_overlap": 1.2
+ },
+ "table": [
+  {
+   "history": 0,
+   "earlier": [
+    7,
+    14,
+    17,
+    12,
+    11
+   ],
+   "latest": 15
+  },
+  {
+   "history": 1,
+   "earlier": [
+    5,
+    0,
+    8,
+    9,
+    10
+   ],
+   "latest": 17
+  },
+  {
+   "history": 2,
+   "earlier": [
+    0,
+    14,
+    4,
+    2,
+    6
+   ],
+   "latest": 16
+  },
+  {
+   "history": 3,
+   "earlier": [
+    1,
+    9,
+    16,
+    3,
+    12
+   ],
+   "latest": 7
+  },
+  {
+   "history": 4,
+   "earlier": [
+    4,
+    13,
+    6,
+    8,
+    3
+   ],
+   "latest": 11
+  },
+  {
+   "history": 5,
+   "earlier": [
+    1,
+    10,
+    15,
+    13,
+    5
+   ],
+   "latest": 2
+  }
+ ],
+ "pool_ids": [
+  "P41",
+  "P28",
+  "P29",
+  "P34",
+  "P00",
+  "P02",
+  "P07",
+  "P12",
+  "P16",
+  "P30",
+  "P06",
+  "P08",
+  "P15",
+  "P20",
+  "P24",
+  "P31",
+  "P01",
+  "P36"
+ ]
+}

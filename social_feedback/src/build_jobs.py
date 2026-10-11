@@ -49,7 +49,7 @@ def ack_distances(tok, text, ack_lines):
     return out, n_total
 
 
-def dev(name="dev_v1", samples=3, pool_path=None, out_root=None, histories_name="calib_v2"):
+def dev(name="dev_v2", samples=3, pool_path=None, out_root=None, histories_name="calib_v3"):
     """pool_path / out_root override the inputs and outputs for dry runs."""
     global JOBS
     if out_root is not None:

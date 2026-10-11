@@ -20,7 +20,7 @@ from .common import MATERIALS, RESULTS, SONNET, load_jsonl
 from .judge import answer_text
 
 VAL = MATERIALS / "validation"
-RUN = "calib_v2"  # v1 packet (calib_probe1 outputs, pre-A3 briefings) archived in validation/archive_v1/
+RUN = "calib_v3"  # v2 packet (calib_v2, pre-A4) in validation/archive_v2/; v1 packet (calib_probe1 outputs, pre-A3 briefings) archived in validation/archive_v1/
 NEARMISS_TYPES = [
     ("superseded", ["S-conf"], "State the superseded launch date as the current one."),
     ("off-by-one working day", ["S-dep", "S-back"], "Move the date by one working day."),

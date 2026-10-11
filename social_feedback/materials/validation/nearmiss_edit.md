@@ -12,11 +12,11 @@ Each memo below is a reference memo that passes every requirement. Edit the text
 
 <details><summary>Briefing</summary>
 
-The Silvercap classroom technology refresh plan provides for 392 laptops, and the approved project budget is £523,000. The device leasing agreement is worth £30,000. In March the steering group approved an increase of £29,000 to the project budget, and in April it approved a further increase of £26,000. A proposed further increase of £35,000 was rejected by the steering group. Device breakage rates could affect the number of laptops.
+The Silvercap classroom technology refresh plan provides for 392 laptops, and the approved project budget is £523,000. The device leasing agreement is worth £30,000. In March the steering group approved an increase of £29,000 to the project budget, and in April it approved a further increase of £26,000. A proposed further increase of £35,000 was rejected by the steering group. Device breakage rates could affect the number of laptops. The figure of £523,000 is the budget as first approved, before the changes listed in this note.
 
 On laptop numbers, an additional 14 laptops were approved in March, while 1 of the planned laptops was later cancelled, and that cancellation was approved. A request for 33 more laptops is still awaiting approval. Sanna Nakamura owns the device procurement workstream, and the device procurement checkpoint is on Monday 10 May 2027. The supplier demo is on Friday 21 May 2027. Late approval of the content filter could delay the first lessons on the new devices.
 
-Svetlana Castellanos owns the network upgrade workstream. The wiring survey is on Friday 30 April 2027, and the network upgrade will end 4 working days after the wiring survey. Device deployment can begin 3 working days after the network upgrade ends. The network upgrade review is on Wednesday 9 June 2027. Working days are Monday to Friday, and there are no public holidays in this period. Higher insurance costs could affect the budget.
+Svetlana Castellanos owns the network upgrade workstream. The wiring survey is on Friday 30 April 2027, and the network upgrade will end 4 working days after the wiring survey. Device deployment can begin 3 working days after the network upgrade ends. The network upgrade review is on Wednesday 9 June 2027. Working days are Monday to Friday, and there are no public holidays in this period. Higher insurance costs could affect the budget. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 On the first lessons, an email of Friday 8 January 2027 gave the first lessons on the new devices as Friday 2 July 2027. The revised plan of Wednesday 27 January 2027 sets them for Tuesday 31 August 2027. A follow-up email of Thursday 4 February 2027 repeated Friday 2 July 2027. Where sources disagree, the revised plan takes precedence over any email, whatever the email's date.
 
@@ -27,31 +27,32 @@ Teodor Quiroga owns the asset tagging workstream, and Rafael Delacroix supports 
 </details>
 
 ```text
-**Memo to Zainab Esposito, Programme Director**
+Memo to: Zainab Esposito, Programme Director
+
+Subject: Silvercap classroom technology refresh: position summary
 
 **Summary**
 
-This memo sets out the key dates, owners, budget position and risks for the Silvercap classroom technology refresh. The first lessons on the new devices are currently set for Tuesday 31 August 2027, according to the revised plan of 27 January 2027, which takes precedence over the earlier emails that gave 2 July.
+Device deployment can begin on Tuesday 11 May 2027. The first lessons on the new devices are currently set for Tuesday 31 August 2027, per the revised plan of 27 January 2027, which takes precedence over the earlier emails that gave 2 July. Two risks could delay those first lessons: delays in the wireless survey and late approval of the content filter. The project budget after all approved changes is £578,000.
 
 **Key facts**
 
-- **Device deployment:** The earliest start is Tuesday 11 May 2027. The wiring survey on Friday 30 April is followed by the network upgrade, which ends on Thursday 6 May, and deployment can begin 3 working days after that.
-- **First lessons:** The current date is Tuesday 31 August 2027.
-- **Asset tagging:** Teodor Quiroga owns this workstream.
-- **Parent communications kickoff:** It is planned for Tuesday 20 July 2027. Teacher training sign-off must be completed by Wednesday 14 July 2027 for the kickoff to go ahead on that date.
-- **Safeguarding review:** It takes place on Thursday 25 March 2027.
-- **Safeguarding filters:** Mei Iyer owns this workstream.
-- **Device leasing agreement:** It is worth £30,000.
-- **Risks to the first lessons:** Two risks could delay them: delays in the wireless survey and late approval of the content filter.
-- **Network upgrade review:** It falls on Wednesday 9 June 2027, which is 22 working days after the device procurement checkpoint on Monday 10 May 2027.
-- **Project budget:** After all approved changes it stands at £578,000. This is the original £523,000 plus the approved increases of £29,000 and £26,000. The proposed £35,000 increase was rejected.
+- Earliest device deployment start: Tuesday 11 May 2027. The wiring survey on Friday 30 April 2027 is followed by the network upgrade ending Thursday 6 May, and deployment can begin 3 working days later.
+- Current first lessons date: Tuesday 31 August 2027.
+- Budget: £523,000 as first approved, plus approved increases of £29,000 (March) and £26,000 (April), giving £578,000. The proposed £35,000 increase was rejected.
+- Device leasing agreement: £30,000.
+- Asset tagging workstream owner: Teodor Quiroga.
+- Safeguarding filters workstream owner: Mei Iyer.
+- Safeguarding review: Thursday 25 March 2027.
+- The network upgrade review on Wednesday 9 June 2027 falls 22 working days after the device procurement checkpoint on Monday 10 May 2027.
 
 **Next steps**
 
-- Sanna Nakamura to proceed with the device procurement checkpoint on 10 May 2027.
-- Thandiwe Marchetti to confirm that teacher training sign-off will be completed by 14 July 2027.
-- Mei Iyer to ensure the content filter is approved in good time.
-- The wireless survey should be monitored for delays.
+- Device procurement checkpoint: Monday 10 May 2027.
+- Supplier demo: Friday 21 May 2027.
+- Network upgrade review: Wednesday 9 June 2027.
+- Parent communications kickoff: planned for Tuesday 20 July 2027. It can begin 4 working days after teacher training sign-off, so sign-off must be completed by Wednesday 14 July 2027 for it to go ahead on that date.
+- First lessons on the new devices: Tuesday 31 August 2027.
 ```
 
 
@@ -68,13 +69,13 @@ The revised plan of Friday 22 January 2027 sets the official opening of the new 
 
 On ownership, Rohan Demir owns the lease negotiation workstream, and Corentin Oyelaran supports it and attends its meetings. Marisol Fontaine owns the moving logistics workstream, with Kwame Nakamura supporting it and attending its meetings. Thandiwe Delacroix owns staff communications, Bastian Whitfield owns security badges, and Yuki Abernethy owns furniture procurement. A delay in fire-safety certification could delay the official opening of the new office.
 
-The approved project budget is £192,000. The steering group approved an increase of £17,000 in March and a further increase of £10,000 in April. A proposed further increase of £58,000 was rejected by the steering group. The furniture supplier contract is worth £38,000.
+The approved project budget is £192,000. The steering group approved an increase of £17,000 in March and a further increase of £10,000 in April. A proposed further increase of £58,000 was rejected by the steering group. The furniture supplier contract is worth £38,000. The figure of £192,000 is the budget as first approved, before the changes listed in this note.
 
 On desks, the plan provides for 139 desks. An additional 16 desks were approved in March, and 15 of the planned desks were later cancelled, with the cancellation approved. A request for 2 more desks is still awaiting approval.
 
 Several milestones are fixed in the calendar. The security audit is on Monday 22 February 2027, and the furniture procurement kickoff is planned for Monday 19 April 2027. The landlord handover is on Tuesday 11 May 2027. The network cabling checkpoint is on Monday 31 May 2027, and the security badges review is on Friday 25 June 2027. Higher-than-expected furniture prices could affect the budget.
 
-Some steps are tied to others by working-day rules. The furniture procurement kickoff can begin 6 working days after the staff communications sign-off is completed. The network cabling installation will end 7 working days after the landlord handover, and the staff move-in can begin 4 working days after the network cabling installation ends.
+Some steps are tied to others by working-day rules. The furniture procurement kickoff can begin 6 working days after the staff communications sign-off is completed. The network cabling installation will end 7 working days after the landlord handover, and the staff move-in can begin 4 working days after the network cabling installation ends. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 Later in the programme, the furniture delivery is on Monday 16 August 2027. The all-staff briefing is on Tuesday 5 October 2027. A dispute over the lift installation could delay the official opening of the new office.
 
@@ -85,24 +86,31 @@ Later in the programme, the furniture delivery is on Monday 16 August 2027. The 
 
 **Summary**
 
-The official opening of the new office is currently set for Friday 20 August 2027. This date comes from the revised plan of 22 January 2027, which takes precedence over the earlier emails that gave Wednesday 7 July 2027. Two risks could delay the opening: a delay in fire-safety certification, and a dispute over the lift installation.
+The official opening of the new office is currently Friday 20 August 2027, as set by the revised plan of Friday 22 January 2027. That plan takes precedence over the earlier emails, which gave Wednesday 7 July 2027. Two risks could delay the opening: a dispute over the lift installation, and a delay in fire-safety certification.
 
 **Key facts**
 
 - Lease negotiation workstream: owned by Rohan Demir.
 - Moving logistics workstream: owned by Marisol Fontaine.
-- Staff communications sign-off: it must be completed by Friday 9 April 2027 for the furniture procurement kickoff to go ahead on its planned date of Monday 19 April 2027.
-- Project budget: £219,000 after all approved changes (£192,000 plus £17,000 and £10,000). The proposed £58,000 increase was rejected.
-- Furniture supplier contract: worth £38,000.
+- Project budget after all approved changes: £219,000. This is the £192,000 first approved, plus £17,000 in March and £10,000 in April. The proposed £58,000 increase was rejected.
+- Furniture supplier contract: £38,000.
 - All-staff briefing: Tuesday 5 October 2027.
-- Staff move-in: the earliest start is Wednesday 26 May 2027. This follows from the landlord handover on 11 May, cabling ending 7 working days later, and move-in starting 4 working days after that.
-- Security badges review: Friday 25 June 2027, which is 19 working days after the network cabling checkpoint on Monday 31 May 2027.
+- Latest staff communications sign-off for the furniture procurement kickoff to go ahead on its planned date of Monday 19 April 2027: Friday 9 April 2027, which is 6 working days before the kickoff.
+- Earliest staff move-in start: Wednesday 26 May 2027. The landlord handover is on Tuesday 11 May 2027. Network cabling installation ends 7 working days later, on Thursday 20 May 2027. Move-in can begin 4 working days after that.
+- The security badges review on Friday 25 June 2027 takes place 19 working days after the network cabling checkpoint on Monday 31 May 2027.
 
 **Next steps**
 
-- Thandiwe Delacroix should complete the staff communications sign-off by Friday 9 April 2027.
-- Track fire-safety certification and the lift installation, since a delay in certification or a dispute over the lift could delay the official opening.
-- Keep to the fixed milestones, including the landlord handover on Tuesday 11 May 2027 and the furniture delivery on Monday 16 August 2027.
+Dated items and dependencies from the briefing:
+
+- Security audit: Monday 22 February 2027.
+- Furniture procurement kickoff: Monday 19 April 2027, dependent on the staff communications sign-off.
+- Landlord handover: Tuesday 11 May 2027.
+- Network cabling checkpoint: Monday 31 May 2027.
+- Security badges review: Friday 25 June 2027.
+- Furniture delivery: Monday 16 August 2027.
+- Official opening: Friday 20 August 2027.
+- All-staff briefing: Tuesday 5 October 2027.
 ```
 
 
@@ -121,9 +129,9 @@ Workstream ownership is as follows. Hamid Marchetti owns the data cleansing work
 
 The data migration is scheduled to end on Friday 19 March 2027. The reporting dashboards checkpoint is on Tuesday 27 April 2027, and the trainer briefing is on Friday 30 April 2027. The integration testing review is on Wednesday 26 May 2027. A delay in single sign-on setup could delay the go-live of the new CRM.
 
-On sequencing, user acceptance testing can begin 10 working days after the data migration ends. Working days are Monday to Friday, and there are no public holidays in this period. The user training kickoff can begin 3 working days after the vendor management sign-off is completed, and it is planned for Thursday 7 October 2027.
+On sequencing, user acceptance testing can begin 10 working days after the data migration ends. Working days are Monday to Friday, and there are no public holidays in this period. The user training kickoff can begin 3 working days after the vendor management sign-off is completed, and it is planned for Thursday 7 October 2027. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
-On budget, the approved project budget is $544,000. The steering group approved an increase of $47,000 to the project budget in March, while a proposed further increase of $21,000 was rejected by the steering group. The vendor implementation contract is worth $47,500. Low dashboard adoption could affect the number of user licences.
+On budget, the approved project budget is $544,000. The steering group approved an increase of $47,000 to the project budget in March, while a proposed further increase of $21,000 was rejected by the steering group. The vendor implementation contract is worth $47,500. Low dashboard adoption could affect the number of user licences. The figure of $544,000 is the budget as first approved, before the changes listed in this note.
 
 On licences, the plan provides for 385 user licences. An additional 12 user licences were approved in March, and a request for 26 more user licences is still awaiting approval.
 
@@ -131,28 +139,30 @@ On licences, the plan provides for 385 user licences. An additional 12 user lice
 
 ```text
 **Memo to: Amara Valdés, Programme Director**
-**Subject: Lumen Ridge CRM migration: status points**
 
 **Summary**
 
-The go-live of the new CRM is currently Monday 22 November 2027, per the revised plan of Wednesday 27 January 2027. That plan supersedes the earlier email date. Two risks could delay the go-live: incomplete customer data mappings, and a delay in single sign-on setup.
+This memo sets out the key dates, ownership, budget and delay risks for the Lumen Ridge CRM migration. The revised plan of Wednesday 27 January 2027 supersedes all earlier emails, including the 8 January email that gave a different go-live date.
 
 **Key facts**
 
-- **Integration testing review:** It takes place 21 working days after the reporting dashboards checkpoint (Tuesday 27 April 2027 to Wednesday 26 May 2027).
-- **User acceptance testing:** The earliest start is Friday 2 April 2027, which is 10 working days after the data migration ends on Friday 19 March 2027.
-- **Project budget:** After all approved changes it is $591,000, being the $544,000 approved budget plus the $47,000 increase approved in March. The further $21,000 increase was rejected.
-- **Data cleansing workstream:** Hamid Marchetti owns it.
-- **Access control workstream:** Bastian Okafor owns it.
-- **Vendor sign-off:** For the user training kickoff to go ahead on its planned date of Thursday 7 October 2027, the vendor management sign-off must be completed by Monday 4 October 2027 at the latest.
-- **Vendor implementation contract:** It is worth $47,500.
-- **Steering committee meeting:** It is on Wednesday 10 November 2027.
+- Go-live: The current go-live date of the new CRM is Monday 22 November 2027.
+- Delay risks: Two risks could delay the go-live: incomplete customer data mappings, and a delay in single sign-on setup.
+- Review timing: The integration testing review (Wednesday 26 May 2027) takes place 21 working days after the reporting dashboards checkpoint (Tuesday 27 April 2027).
+- User acceptance testing: The earliest start is Friday 2 April 2027, 10 working days after the data migration ends on Friday 19 March 2027.
+- Budget: The project budget after all approved changes is $591,000. This is the $544,000 first approved plus the approved $47,000 increase. The proposed $21,000 increase was rejected.
+- Vendor contract: The vendor implementation contract is worth $47,500.
+- Data cleansing: Hamid Marchetti owns the workstream.
+- Access control: Bastian Okafor owns the workstream.
+- Training kickoff: It is planned for Thursday 7 October 2027. The latest date the vendor management sign-off can be completed for it to go ahead on that date is Monday 4 October 2027.
+- Steering committee: The meeting is on Wednesday 10 November 2027.
 
 **Next steps**
 
-- Monitor customer data mapping completion and single sign-on setup, as these are the two risks that could delay the go-live.
-- Ensure the vendor management sign-off is completed by Monday 4 October 2027.
-- Prepare for the steering committee meeting on Wednesday 10 November 2027.
+- Vendor demo: Friday 15 October 2027.
+- Steering committee meeting: Wednesday 10 November 2027.
+- Go-live: Monday 22 November 2027, dependent on completing the customer data mappings and on the single sign-on setup.
+- Vendor management sign-off: it must be completed by Monday 4 October 2027 for the user training kickoff to proceed on Thursday 7 October 2027.
 ```
 
 
@@ -165,13 +175,13 @@ The go-live of the new CRM is currently Monday 22 November 2027, per the revised
 
 <details><summary>Briefing</summary>
 
-Thandiwe Whitfield owns the maintenance contracts workstream, and Rafael Sørensen supports it and attends its meetings. The maintenance contract is worth €11,500. Elif Fontaine owns the floor reinforcement workstream, with the kickoff planned for Wednesday 24 February 2027. The floor reinforcement kickoff can begin 3 working days after the software integration sign-off is completed, and Sanna Oyelaran owns the software integration workstream. Union consultation on shift patterns could affect the number of picking robots.
+Thandiwe Whitfield owns the maintenance contracts workstream, and Rafael Sørensen supports it and attends its meetings. The maintenance contract is worth €11,500. Elif Fontaine owns the floor reinforcement workstream, with the kickoff planned for Wednesday 24 February 2027. The floor reinforcement kickoff can begin 3 working days after the software integration sign-off is completed, and Sanna Oyelaran owns the software integration workstream. Union consultation on shift patterns could affect the number of picking robots. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 The floor reinforcement work is scheduled to end on Thursday 25 February 2027. Working days are Monday to Friday, and there are no public holidays in this period. Spare-part price rises could affect the budget.
 
 Robot installation can begin 4 working days after the floor reinforcement work ends. Hamid Haddad owns the robot procurement workstream. The plan provides for 20 picking robots. An additional 2 picking robots were approved in March, while a request for 2 more picking robots is still awaiting approval. Delayed customs clearance for the robots could delay the switch to automated picking.
 
-On the budget, the approved project budget is €195,000. The steering group approved a reduction of €17,000 to the project budget in March, and a proposed further increase of €8,000 was rejected by the steering group.
+On the budget, the approved project budget is €195,000. The steering group approved a reduction of €17,000 to the project budget in March, and a proposed further increase of €8,000 was rejected by the steering group. The figure of €195,000 is the budget as first approved, before the changes listed in this note.
 
 Yuki Takahashi owns the shift planning workstream, and Corentin Esposito supports it and attends its meetings. On the schedule, an email of Monday 4 January 2027 gave the switch to automated picking as Friday 7 May 2027. The revised plan of Thursday 14 January 2027 sets the switch to automated picking for Monday 25 October 2027, and that plan supersedes all earlier emails.
 
@@ -184,26 +194,34 @@ Several events are lined up in the coming months. The safety training checkpoint
 
 **Summary**
 
-This memo confirms the key dates, owners and figures for the programme. The switch to automated picking is now set for Monday 25 October 2027 under the revised plan of 14 January 2027, which supersedes earlier emails. Two risks could delay that switch, and they are listed below.
+The floor reinforcement kickoff is planned for Wednesday 24 February 2027. It can begin 3 working days after the software integration sign-off is completed, so that sign-off must be completed by Friday 19 February 2027 at the latest. The switch to automated picking is currently set for Monday 25 October 2027, under the revised plan of Thursday 14 January 2027, which supersedes all earlier emails.
 
 **Key facts**
 
-- **Software integration sign-off:** To allow the floor reinforcement kickoff on its planned date of Wednesday 24 February 2027, sign-off must be completed by Friday 19 February 2027 at the latest. The kickoff can begin 3 working days after sign-off.
-- **Maintenance contract:** It is worth €11,500. Thandiwe Whitfield owns the maintenance contracts workstream.
-- **Project budget:** After all approved changes, the budget is €178,000. This is the approved €195,000 less the €17,000 reduction approved in March. The proposed €8,000 increase was rejected.
-- **Switch to automated picking:** The current date is Monday 25 October 2027.
-- **Shift planning:** Yuki Takahashi owns the workstream.
-- **Robot installation:** The earliest start is Wednesday 3 March 2027, which is 4 working days after the floor reinforcement work ends on Thursday 25 February 2027.
-- **Supplier factory visit:** It takes place on Wednesday 20 October 2027.
-- **Risks to the switch to automated picking:** A failed load test on the mezzanine could delay it. Delayed customs clearance for the robots could also delay it.
-- **Review timing:** The robot procurement review on Tuesday 11 May 2027 falls 14 working days after the safety training checkpoint on Wednesday 21 April 2027.
+- Software integration sign-off: latest completion date is Friday 19 February 2027. Sanna Oyelaran owns this workstream.
+- Maintenance contract: worth €11,500. Thandiwe Whitfield owns the maintenance contracts workstream.
+- Project budget after all approved changes: €178,000. This is the €195,000 first approved, less the €17,000 reduction approved in March. The proposed €8,000 increase was rejected.
+- Switch to automated picking: Monday 25 October 2027.
+- Shift planning workstream: owned by Yuki Takahashi.
+- Robot installation: the floor reinforcement work ends Thursday 25 February 2027, so installation can begin no earlier than Wednesday 3 March 2027.
+- Supplier factory visit: Wednesday 20 October 2027.
+- Risks that could delay the switch to automated picking: a failed load test on the mezzanine, and delayed customs clearance for the robots.
+- The robot procurement review on Tuesday 11 May 2027 takes place 14 working days after the safety training checkpoint on Wednesday 21 April 2027.
 
 **Next steps**
 
-- Sanna Oyelaran to complete the software integration sign-off by Friday 19 February 2027.
-- Hamid Haddad to monitor customs clearance for the robots.
-- Confirm that the mezzanine load test is planned ahead of the switch.
-- Use €178,000 as the budget baseline in all reporting.
+Dated items and dependencies from the briefing:
+
+- Software integration sign-off by Friday 19 February 2027.
+- Floor reinforcement kickoff on Wednesday 24 February 2027.
+- Floor reinforcement work ends Thursday 25 February 2027.
+- Robot installation can begin Wednesday 3 March 2027.
+- Safety training checkpoint on Wednesday 21 April 2027.
+- Operator training course on Thursday 6 May 2027.
+- Robot procurement review on Tuesday 11 May 2027.
+- Insurance assessment on Thursday 13 May 2027.
+- Supplier factory visit on Wednesday 20 October 2027.
+- Switch to automated picking on Monday 25 October 2027.
 ```
 
 
@@ -218,11 +236,11 @@ This memo confirms the key dates, owners and figures for the programme. The swit
 
 The Ostrava CRM migration is progressing through a set of dated milestones. The revised plan of Thursday 28 January 2027 sets the go-live of the new CRM for Wednesday 28 July 2027. An email of Wednesday 20 January 2027 gave the go-live as Thursday 8 April 2027, and a follow-up email of Friday 29 January 2027 repeated Thursday 8 April 2027. Where sources disagree, the revised plan takes precedence over any email, whatever the email's date.
 
-On the data side, the final data extract is on Friday 12 February 2027, and the data migration will end 4 working days after it. User acceptance testing can begin 10 working days after the data migration ends. The data cleansing kickoff is planned for Tuesday 4 May 2027, and it can begin 3 working days after the integration testing sign-off is completed. Working days are Monday to Friday, and there are no public holidays in this period.
+On the data side, the final data extract is on Friday 12 February 2027, and the data migration will end 4 working days after it. User acceptance testing can begin 10 working days after the data migration ends. The data cleansing kickoff is planned for Tuesday 4 May 2027, and it can begin 3 working days after the integration testing sign-off is completed. Working days are Monday to Friday, and there are no public holidays in this period. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 Workstream ownership is as follows. Amara Kowalczyk owns the access control workstream, and Priya Whitfield supports it and attends its meetings. Rafael Quiroga owns the reporting dashboards workstream, with Corentin Fontaine supporting it and attending its meetings. Yuki Kaur owns the integration testing workstream, Marisol Delacroix owns the user training workstream, and Thandiwe Halloran owns the vendor management workstream. Incomplete customer data mappings could delay the go-live of the new CRM.
 
-On budget, the approved project budget is $321,000. The steering group approved an increase of $29,000 in March and an increase of $15,000 in April, while a proposed further increase of $35,000 was rejected. The vendor implementation contract is worth $85,000. Licence price increases could affect the budget.
+On budget, the approved project budget is $321,000. The steering group approved an increase of $29,000 in March and an increase of $15,000 in April, while a proposed further increase of $35,000 was rejected. The vendor implementation contract is worth $85,000. Licence price increases could affect the budget. The figure of $321,000 is the budget as first approved, before the changes listed in this note.
 
 Licensing has also moved. The plan provides for 329 user licences. An additional 38 user licences were approved in March, and 34 of the planned user licences were later cancelled, with the cancellation approved. A request for 2 more user licences is still awaiting approval. A delay in single sign-on setup could delay the go-live of the new CRM.
 
@@ -232,29 +250,35 @@ Several events are scheduled over the coming months. The vendor demo is on Thurs
 
 ```text
 **Memo to: Aisling Abernethy, Programme Director**
-**Re: Ostrava CRM migration – status points**
 
 **Summary**
 
-This memo confirms the current go-live date, the approved budget, and the key dates and owners you asked about. Where sources disagree on go-live, the revised plan of 28 January 2027 takes precedence over the earlier emails, which gave 8 April 2027.
+This memo sets out the current Ostrava CRM migration position. The revised plan of Thursday 28 January 2027 takes precedence over the emails, which gave Thursday 8 April 2027. The go-live of the new CRM is therefore Wednesday 28 July 2027.
 
 **Key facts**
 
-- **Go-live:** The new CRM goes live on Wednesday 28 July 2027.
-- **Go-live risks:** Two risks could delay it: a delay in single sign-on setup, and incomplete customer data mappings.
-- **Budget:** The project budget after all approved changes is $365,000. This is the original $321,000 plus the approved increases of $29,000 and $15,000. The proposed $35,000 increase was rejected.
-- **Vendor contract:** The vendor implementation contract is worth $85,000.
-- **Trainer briefing:** It takes place on Monday 31 May 2027.
-- **User acceptance testing:** The final data extract is on 12 February 2027. Data migration ends 4 working days later, on 18 February. UAT can then begin 10 working days after that, so the earliest start is Thursday 4 March 2027.
-- **Data cleansing kickoff:** It is planned for Tuesday 4 May 2027 and needs 3 working days after integration testing sign-off. Sign-off must therefore be completed by Thursday 29 April 2027 at the latest.
-- **Workstream owners:** Rafael Quiroga owns reporting dashboards. Amara Kowalczyk owns access control.
-- **Vendor management review:** It is on Wednesday 20 October 2027, which is 15 working days after the user training checkpoint on Wednesday 29 September 2027.
+- Trainer briefing: Monday 31 May 2027.
+- Project budget after all approved changes: $365,000. This is the $321,000 first approved plus the $29,000 and $15,000 increases. The proposed $35,000 increase was rejected.
+- Current go-live date of the new CRM: Wednesday 28 July 2027.
+- Latest integration testing sign-off date for the data cleansing kickoff to go ahead on Tuesday 4 May 2027: Thursday 29 April 2027.
+- Risks that could delay the go-live: a delay in single sign-on setup, and incomplete customer data mappings.
+- Reporting dashboards workstream owner: Rafael Quiroga.
+- Vendor implementation contract value: $85,000.
+- Access control workstream owner: Amara Kowalczyk.
+- Earliest date user acceptance testing can begin: Thursday 4 March 2027. The final data extract is Friday 12 February 2027, data migration ends four working days later, and testing can start ten working days after that.
+- The vendor management review on Wednesday 20 October 2027 falls 15 working days after the user training checkpoint on Wednesday 29 September 2027.
 
 **Next steps**
 
-- Track the single sign-on setup and the customer data mappings, since each could delay go-live.
-- Hold integration testing sign-off to 29 April 2027 or earlier so the data cleansing kickoff stays on 4 May 2027.
-- Prepare for the trainer briefing on 31 May 2027.
+- Final data extract: Friday 12 February 2027.
+- Integration testing sign-off: no later than Thursday 29 April 2027.
+- Data cleansing kickoff: Tuesday 4 May 2027.
+- Vendor demo: Thursday 27 May 2027.
+- Trainer briefing: Monday 31 May 2027.
+- Go-live of the new CRM: Wednesday 28 July 2027.
+- Data-quality checkpoint: Friday 17 September 2027.
+- User training checkpoint: Wednesday 29 September 2027.
+- Vendor management review: Wednesday 20 October 2027.
 ```
 
 
@@ -267,13 +291,13 @@ This memo confirms the current go-live date, the approved budget, and the key da
 
 <details><summary>Briefing</summary>
 
-The Lumen Ridge annual partner conference now has its opening day set for Friday 29 October 2027, according to the revised plan of Friday 29 January 2027. That plan supersedes all earlier emails, including one of Thursday 7 January 2027 that gave the opening day as Thursday 5 August 2027. The approved project budget is £501,000, and the steering group approved a reduction of £21,000 to it in March. A proposed further increase of £37,000 was rejected by the steering group. Late venue licensing could delay the conference opening day.
+The Lumen Ridge annual partner conference now has its opening day set for Friday 29 October 2027, according to the revised plan of Friday 29 January 2027. That plan supersedes all earlier emails, including one of Thursday 7 January 2027 that gave the opening day as Thursday 5 August 2027. The approved project budget is £501,000, and the steering group approved a reduction of £21,000 to it in March. A proposed further increase of £37,000 was rejected by the steering group. Late venue licensing could delay the conference opening day. The figure of £501,000 is the budget as first approved, before the changes listed in this note.
 
 Workstream ownership is as follows. Rafael Abernethy owns the venue booking workstream, and Elif Iyer supports it and attends its meetings. Ingrid Raman owns the sponsorship workstream, with Kwame Szabo supporting and attending its meetings. Freya Esposito owns the speaker programme workstream, Emeka Demir owns the catering workstream, and Thandiwe Mensah owns the audio-visual production workstream. The audio-visual production contract is worth £17,000. Low early registrations could affect the budget.
 
 On venue booking, venue contract signature is scheduled to end on Tuesday 29 June 2027. Working days are Monday to Friday, and there are no public holidays in this period.
 
-Ticket sales can begin 4 working days after venue contract signature ends. The plan provides for 720 delegate places, and an additional 114 delegate places were approved in March. A request for 90 more delegate places is still awaiting approval. A clash with a rail strike could delay the conference opening day.
+Ticket sales can begin 4 working days after venue contract signature ends. The plan provides for 720 delegate places, and an additional 114 delegate places were approved in March. A request for 90 more delegate places is still awaiting approval. A clash with a rail strike could delay the conference opening day. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 Several milestones sit in the run-up to the event. The speaker programme checkpoint is on Monday 7 June 2027, and the registration review is on Tuesday 15 June 2027. The catering kickoff is planned for Wednesday 28 July 2027, and it can begin 5 working days after the audio-visual production sign-off is completed.
 
@@ -286,26 +310,30 @@ Closer to the conference, the dress rehearsal is on Tuesday 10 August 2027, and 
 
 **Summary**
 
-The Lumen Ridge annual partner conference opens on Friday 29 October 2027, according to the revised plan of Friday 29 January 2027. That plan supersedes all earlier emails, including the one of 7 January that gave a different date. Two risks could delay the opening day: late venue licensing and a clash with a rail strike.
+The conference opening day is now Friday 29 October 2027, as set by the revised plan of Friday 29 January 2027. That plan supersedes all earlier emails. Two risks could delay the opening day: late venue licensing and a clash with a rail strike.
 
 **Key facts**
 
-- **Ticket sales:** The earliest start is Monday 5 July 2027, four working days after venue contract signature ends on Tuesday 29 June 2027.
-- **Dress rehearsal:** Tuesday 10 August 2027.
-- **Budget:** The approved budget of £501,000, less the £21,000 reduction approved in March, gives £480,000. The proposed £37,000 increase was rejected, so it is not included.
-- **Audio-visual sign-off:** The catering kickoff is planned for Wednesday 28 July 2027 and needs five working days after sign-off. Sign-off must therefore be completed by Wednesday 21 July 2027 at the latest.
-- **Venue booking owner:** Rafael Abernethy.
-- **Conference opening day:** Friday 29 October 2027.
-- **Audio-visual production contract:** £17,000.
-- **Registration review:** It takes place 6 working days after the speaker programme checkpoint (Monday 7 June to Tuesday 15 June 2027).
-- **Sponsorship owner:** Ingrid Raman.
-- **Risks to the opening day:** late venue licensing, and a clash with a rail strike.
+- Earliest date ticket sales can begin: Monday 5 July 2027, which is 4 working days after venue contract signature ends on Tuesday 29 June 2027.
+- Dress rehearsal: Tuesday 10 August 2027.
+- Project budget after all approved changes: £480,000. This is the £501,000 first approved, less the £21,000 reduction approved in March. The proposed £37,000 increase was rejected.
+- Latest date the audio-visual production sign-off can be completed for the catering kickoff to go ahead on its planned date of Wednesday 28 July 2027: Wednesday 21 July 2027, since the kickoff can begin 5 working days after sign-off.
+- Venue booking workstream owner: Rafael Abernethy.
+- Sponsorship workstream owner: Ingrid Raman.
+- Current conference opening day: Friday 29 October 2027.
+- Audio-visual production contract value: £17,000.
+- The registration review on Tuesday 15 June 2027 takes place 6 working days after the speaker programme checkpoint on Monday 7 June 2027.
 
 **Next steps**
 
-1. Ask Thandiwe Mensah to confirm that audio-visual production sign-off will be completed by Wednesday 21 July 2027.
-2. Ask Rafael Abernethy to confirm that venue contract signature will end on Tuesday 29 June 2027, so ticket sales can begin on Monday 5 July 2027.
-3. Monitor venue licensing and the rail strike timetable, as both could delay the opening day.
+Dated items and dependencies from the briefing:
+
+- Speaker programme checkpoint: Monday 7 June 2027.
+- Registration review: Tuesday 15 June 2027.
+- Venue contract signature scheduled to end: Tuesday 29 June 2027. Ticket sales can begin 4 working days later.
+- Audio-visual production sign-off: to be completed by Wednesday 21 July 2027, ahead of the catering kickoff on Wednesday 28 July 2027.
+- Dress rehearsal: Tuesday 10 August 2027, followed by the speaker briefing on Wednesday 11 August 2027.
+- Registration desk training: Monday 15 November 2027.
 ```
 
 
@@ -318,11 +346,11 @@ The Lumen Ridge annual partner conference opens on Friday 29 October 2027, accor
 
 <details><summary>Briefing</summary>
 
-The approved project budget for the Lumen Ridge warehouse automation is €173,000. The steering group approved an increase of €37,000 in March and a further increase of €24,000 in April. A proposed further increase of €5,000 was rejected by the steering group. The maintenance contract is worth €45,500, and the quarterly budget review is on Thursday 24 June 2027.
+The approved project budget for the Lumen Ridge warehouse automation is €173,000. The steering group approved an increase of €37,000 in March and a further increase of €24,000 in April. A proposed further increase of €5,000 was rejected by the steering group. The maintenance contract is worth €45,500, and the quarterly budget review is on Thursday 24 June 2027. The figure of €173,000 is the budget as first approved, before the changes listed in this note.
 
 On the switch to automated picking, the sources differ. An email of Friday 8 January 2027 gave the date as Tuesday 7 September 2027, and a follow-up email of Tuesday 26 January 2027 repeated Tuesday 7 September 2027. The revised plan of Wednesday 13 January 2027 sets the switch for Friday 30 April 2027. Where sources disagree, the revised plan takes precedence over any email, whatever the email's date. Higher electricity costs could affect the number of picking robots.
 
-The plan provides for 32 picking robots. An additional 4 picking robots were approved in March, and 1 of the planned picking robots was later cancelled, with the cancellation approved. A request for 4 more picking robots is still awaiting approval. The robot procurement kickoff is planned for Tuesday 1 June 2027, and it can begin 4 working days after the safety training sign-off is completed. The supplier factory visit is on Friday 3 September 2027. Delayed customs clearance for the robots could delay the switch to automated picking.
+The plan provides for 32 picking robots. An additional 4 picking robots were approved in March, and 1 of the planned picking robots was later cancelled, with the cancellation approved. A request for 4 more picking robots is still awaiting approval. The robot procurement kickoff is planned for Tuesday 1 June 2027, and it can begin 4 working days after the safety training sign-off is completed. The supplier factory visit is on Friday 3 September 2027. Delayed customs clearance for the robots could delay the switch to automated picking. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 On the floors, the structural survey is on Friday 19 February 2027. The floor reinforcement work will end 6 working days after the structural survey, and robot installation can begin 3 working days after the floor reinforcement work ends. The floor reinforcement checkpoint is on Thursday 17 June 2027. Working days are Monday to Friday, and there are no public holidays in this period. Spare-part price rises could affect the budget.
 
@@ -333,30 +361,34 @@ Emeka Brennan owns the maintenance contracts workstream, and Dmitri Whitfield su
 </details>
 
 ```text
-**Memo to: Rohan Novak, Programme Director**
-**Re: Lumen Ridge warehouse automation**
+**Memo to Rohan Novak, Programme Director**
 
 **Summary**
 
-This memo confirms the budget position, the current switch date, the key scheduling dates and the main delivery risks for the Lumen Ridge warehouse automation.
+This memo sets out the Lumen Ridge warehouse automation budget, the schedule, the switch to automated picking and the workstream owners.
 
 **Key facts**
 
-- **Maintenance contract:** The contract is worth €45,500. Emeka Brennan owns the maintenance contracts workstream.
-- **Budget:** After all approved changes, the project budget is €234,000. This is the original €173,000 plus the approved increases of €37,000 and €24,000. The proposed €5,000 increase was rejected and is excluded.
-- **Quarterly budget review:** Thursday 24 June 2027.
-- **Switch to automated picking:** The current date is Friday 30 April 2027, set by the revised plan of 13 January 2027. The revised plan takes precedence over the earlier emails, which gave Tuesday 7 September 2027.
-- **Safety training sign-off:** To keep the robot procurement kickoff on its planned date of Tuesday 1 June 2027, sign-off must be completed by Wednesday 26 May 2027 at the latest.
-- **Software integration review:** It takes place on Monday 28 June 2027, 7 working days after the floor reinforcement checkpoint on Thursday 17 June 2027.
-- **Robot installation:** The earliest start is Thursday 4 March 2027. Floor reinforcement ends 6 working days after the structural survey of 19 February, and installation can begin 3 working days after that.
-- **Risks to the switch date:** Delayed customs clearance for the robots and late delivery of charging stations could each delay the switch to automated picking.
-- **Shift planning:** Noor Oyelaran owns the workstream.
+- Maintenance contract: €45,500. Emeka Brennan owns the maintenance contracts workstream.
+- Project budget after all approved changes: €234,000. This is the €173,000 first approved, plus €37,000 in March and €24,000 in April. The proposed €5,000 increase was rejected and is not included.
+- Quarterly budget review: Thursday 24 June 2027.
+- Safety training sign-off: it must be completed by Wednesday 26 May 2027 for the robot procurement kickoff to go ahead on its planned date of Tuesday 1 June 2027.
+- The software integration review on Monday 28 June 2027 takes place 7 working days after the floor reinforcement checkpoint on Thursday 17 June 2027.
+- Switch to automated picking: currently Friday 30 April 2027, as set by the revised plan of 13 January 2027. The revised plan takes precedence over the emails, which gave 7 September 2027.
+- Earliest robot installation start: Thursday 4 March 2027. This follows from the structural survey on 19 February 2027, floor reinforcement ending 6 working days later, and installation beginning 3 working days after that.
+- Risks that could delay the switch to automated picking: delayed customs clearance for the robots, and late delivery of charging stations.
+- Noor Oyelaran owns the shift planning workstream.
 
 **Next steps**
 
-- Confirm that the safety training sign-off is completed by Wednesday 26 May 2027.
-- Monitor customs clearance for the robots and the delivery of charging stations.
-- Use the Thursday 24 June 2027 budget review to confirm the €234,000 budget.
+- Safety training sign-off is due by Wednesday 26 May 2027.
+- Robot procurement kickoff: Tuesday 1 June 2027.
+- Floor reinforcement checkpoint: Thursday 17 June 2027.
+- Quarterly budget review: Thursday 24 June 2027.
+- Software integration review: Monday 28 June 2027.
+- Supplier factory visit: Friday 3 September 2027.
+- Insurance assessment: Wednesday 20 October 2027.
+- The switch to automated picking depends on customs clearance for the robots and on delivery of the charging stations.
 ```
 
 
@@ -369,13 +401,13 @@ This memo confirms the budget position, the current switch date, the key schedul
 
 <details><summary>Briefing</summary>
 
-The Ashgrove classroom technology refresh has an approved project budget of £563,000. The steering group approved a reduction of £48,000 to the project budget in March, and a proposed further increase of £38,000 was rejected by the steering group. Separately, the device leasing agreement is worth £53,000.
+The Ashgrove classroom technology refresh has an approved project budget of £563,000. The steering group approved a reduction of £48,000 to the project budget in March, and a proposed further increase of £38,000 was rejected by the steering group. Separately, the device leasing agreement is worth £53,000. The figure of £563,000 is the budget as first approved, before the changes listed in this note.
 
 On devices, the plan provides for 388 laptops. An additional 15 laptops were approved in March, while a request for 3 more laptops is still awaiting approval. Thandiwe Fontaine owns the device procurement workstream, and the device procurement review is on Monday 16 August 2027.
 
 The network upgrade is scheduled to end on Wednesday 14 April 2027. Working days are Monday to Friday, and there are no public holidays in this period. Higher insurance costs could affect the budget.
 
-Device deployment can begin 5 working days after the network upgrade ends. The parent communications kickoff can begin 6 working days after the network upgrade sign-off is completed, and it is planned for Wednesday 4 August 2027. Noor Kowalczyk owns the parent communications workstream. Device breakage rates could affect the number of laptops.
+Device deployment can begin 5 working days after the network upgrade ends. The parent communications kickoff can begin 6 working days after the network upgrade sign-off is completed, and it is planned for Wednesday 4 August 2027. Noor Kowalczyk owns the parent communications workstream. Device breakage rates could affect the number of laptops. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 On the first lessons on the new devices, the sources differ. An email of Friday 15 January 2027 gave Tuesday 3 August 2027. The revised plan of Thursday 21 January 2027 sets Wednesday 12 May 2027, and that plan supersedes all earlier emails. Late approval of the content filter could delay the first lessons on the new devices.
 
@@ -387,29 +419,32 @@ Among the other fixed events, the supplier demo is on Wednesday 3 March 2027, th
 
 ```text
 **Memo to: Tomasz Nakamura, Programme Director**
-**Re: Ashgrove classroom technology refresh**
+**Subject: Ashgrove classroom technology refresh**
 
 **Summary**
 
-This memo sets out the budget, key dates, ownership and delivery risks for the Ashgrove classroom technology refresh. The revised plan of Thursday 21 January 2027 supersedes earlier emails, so the first lessons on the new devices are now set for Wednesday 12 May 2027.
+This memo gives the budget, key dates, owners and risks for the refresh. The budget after approved changes is £515,000. The first lessons on the new devices are currently set for Wednesday 12 May 2027.
 
 **Key facts**
 
-- **Budget:** After all approved changes, the project budget is £515,000. This is the original £563,000 less the £48,000 reduction approved in March. The proposed £38,000 increase was rejected and is not included.
-- **Device leasing:** The device leasing agreement is worth £53,000.
-- **Supplier demo:** Wednesday 3 March 2027.
-- **Device deployment:** The network upgrade ends on Wednesday 14 April 2027, so the earliest deployment can begin is Wednesday 21 April 2027.
-- **First lessons:** The current date is Wednesday 12 May 2027. This replaces the Tuesday 3 August 2027 date given in the email of 15 January 2027.
-- **Risks to the first lessons:** Two risks could delay them: a shortage of charging trolleys, and late approval of the content filter.
-- **Device procurement review:** It takes place on Monday 16 August 2027, which is 24 working days after the safeguarding filters checkpoint on Tuesday 13 July 2027.
+- **Budget:** The project budget after all approved changes is £515,000. This is the £563,000 first approved, less the £48,000 reduction approved in March. The proposed £38,000 increase was rejected.
+- **Device leasing agreement:** It is worth £53,000.
+- **Device procurement review:** It takes place 24 working days after the safeguarding filters checkpoint on Tuesday 13 July 2027.
+- **Device deployment:** The earliest it can begin is Wednesday 21 April 2027, 5 working days after the network upgrade ends on Wednesday 14 April 2027.
 - **Parent communications kickoff:** It is planned for Wednesday 4 August 2027. For it to go ahead on that date, the network upgrade sign-off must be completed by Tuesday 27 July 2027 at the latest.
-- **Workstream owners:** Zainab Abernethy owns teacher training. Dmitri Kaur owns asset tagging.
+- **First lessons:** The current date is Wednesday 12 May 2027, set by the revised plan of Thursday 21 January 2027. That plan supersedes the earlier email date.
+- **Risks to the first lessons:** A shortage of charging trolleys could delay them, as could late approval of the content filter.
+- **Owners:** Zainab Abernethy owns the teacher training workstream. Dmitri Kaur owns the asset tagging workstream.
+- **Supplier demo:** It is on Wednesday 3 March 2027.
 
 **Next steps**
 
-- Confirm the content filter approval timetable and the supply of charging trolleys, since both could delay the first lessons.
-- Make sure the network upgrade sign-off is completed by Tuesday 27 July 2027 so the parent communications kickoff can proceed on 4 August 2027.
-- Prepare for the safeguarding filters checkpoint on 13 July 2027 and the device procurement review on 16 August 2027.
+- Network upgrade ends on Wednesday 14 April 2027.
+- Device deployment can begin on Wednesday 21 April 2027.
+- First lessons on the new devices are due on Wednesday 12 May 2027.
+- Network upgrade sign-off must be completed by Tuesday 27 July 2027 for the parent communications kickoff to go ahead on Wednesday 4 August 2027.
+- Safeguarding filters checkpoint is on Tuesday 13 July 2027.
+- Device procurement review is on Monday 16 August 2027.
 ```
 
 
@@ -424,7 +459,7 @@ This memo sets out the budget, key dates, ownership and delivery risks for the A
 
 The Pellucid CRM migration has several sources of information on the go-live, and they differ. An email of Monday 4 January 2027 gave the go-live of the new CRM as Monday 13 September 2027, and a follow-up email of Thursday 28 January 2027 repeated Monday 13 September 2027. The revised plan of Friday 8 January 2027 sets the go-live for Monday 25 October 2027. Where sources disagree, the revised plan takes precedence over any email, whatever the email's date. Late fixes from the vendor could delay the go-live of the new CRM.
 
-On governance, the steering committee meeting is on Thursday 4 February 2027. The approved project budget is $465,000. The steering group approved an increase of $23,000 to the project budget in March and a reduction of $19,000 in April, while a proposed further increase of $15,000 was rejected. The vendor implementation contract is worth $33,000. Licence price increases could affect the budget.
+On governance, the steering committee meeting is on Thursday 4 February 2027. The approved project budget is $465,000. The steering group approved an increase of $23,000 to the project budget in March and a reduction of $19,000 in April, while a proposed further increase of $15,000 was rejected. The vendor implementation contract is worth $33,000. Licence price increases could affect the budget. The figure of $465,000 is the budget as first approved, before the changes listed in this note.
 
 Ownership is spread across the workstreams. Dmitri Whitfield owns the vendor management workstream, and Anders Bakshi supports it and attends its meetings. Yuki Szabo owns the data cleansing workstream, and Thandiwe Marchetti owns the user training workstream. Teodor Quiroga owns the integration testing workstream, supported by Emeka Mensah, who attends its meetings. Rafael Achterberg owns the access control workstream. Low dashboard adoption could affect the number of user licences.
 
@@ -432,36 +467,40 @@ On licensing, the plan provides for 319 user licences. An additional 44 user lic
 
 Several milestones are scheduled. The trainer briefing is on Monday 10 May 2027, and the user training kickoff is planned for Wednesday 3 March 2027. The vendor demo is on Monday 14 June 2027, and the final data extract is on Thursday 17 June 2027. The reporting dashboards checkpoint is on Friday 27 August 2027, and the access control review is on Tuesday 28 September 2027.
 
-Some dates follow from rules in the plan. Working days are Monday to Friday, and there are no public holidays in this period. The user training kickoff can begin 7 working days after the data cleansing sign-off is completed. The data migration will end 5 working days after the final data extract, and user acceptance testing can begin 5 working days after the data migration ends. A delay in single sign-on setup could delay the go-live of the new CRM.
+Some dates follow from rules in the plan. Working days are Monday to Friday, and there are no public holidays in this period. The user training kickoff can begin 7 working days after the data cleansing sign-off is completed. The data migration will end 5 working days after the final data extract, and user acceptance testing can begin 5 working days after the data migration ends. A delay in single sign-on setup could delay the go-live of the new CRM. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 </details>
 
 ```text
-**Memo to: Rohan Esposito, Programme Director**
-**Subject: Pellucid CRM migration – status points**
+**Memo to Rohan Esposito, Programme Director**
 
 **Summary**
 
-The go-live of the new CRM is currently Monday 25 October 2027, per the revised plan of Friday 8 January 2027. That plan takes precedence over the emails of 4 and 28 January, which both gave Monday 13 September 2027. Two risks could delay the go-live: late fixes from the vendor, and a delay in single sign-on setup.
+The go-live of the new CRM is currently Monday 25 October 2027, as set by the revised plan of Friday 8 January 2027. That plan takes precedence over the earlier emails, which gave Monday 13 September 2027. Two risks could delay the go-live: late fixes from the vendor, and a delay in single sign-on setup.
 
 **Key facts**
 
-- **Go-live:** Monday 25 October 2027.
-- **Delay risks:** late fixes from the vendor; a delay in single sign-on setup.
-- **Reporting dashboards checkpoint to access control review:** the review (Tuesday 28 September 2027) falls 22 working days after the checkpoint (Friday 27 August 2027).
-- **Earliest user acceptance testing start:** Thursday 1 July 2027. The final data extract is Thursday 17 June, data migration ends 5 working days later, and testing can begin 5 working days after that.
-- **Budget:** $469,000 after all approved changes ($465,000 + $23,000 − $19,000). The proposed $15,000 increase was rejected.
-- **Vendor demo:** Monday 14 June 2027.
-- **Vendor implementation contract:** $33,000.
-- **Data cleansing sign-off:** to hold the user training kickoff on its planned date of Wednesday 3 March 2027, sign-off must be completed by Monday 22 February 2027 at the latest.
-- **Workstream owners:** Teodor Quiroga owns integration testing. Dmitri Whitfield owns vendor management.
+- Reporting dashboards checkpoint (Friday 27 August 2027) to access control review (Tuesday 28 September 2027): 22 working days.
+- Earliest date user acceptance testing can begin: Thursday 1 July 2027. The final data extract is on Thursday 17 June 2027, data migration ends 5 working days later, and testing can begin 5 working days after that.
+- Project budget after all approved changes: $469,000. This is $465,000 plus the $23,000 increase, less the $19,000 reduction. The rejected $15,000 increase is excluded.
+- Vendor implementation contract: $33,000.
+- Vendor demo: Monday 14 June 2027.
+- Integration testing workstream owner: Teodor Quiroga.
+- Vendor management workstream owner: Dmitri Whitfield.
+- Latest date the data cleansing sign-off can be completed for the user training kickoff to go ahead on its planned date of Wednesday 3 March 2027: Monday 22 February 2027. The kickoff can begin 7 working days after sign-off.
 
 **Next steps**
 
-1. Monitor vendor fixes and single sign-on setup, as these could move the go-live.
-2. Confirm that data cleansing sign-off will be completed by Monday 22 February 2027.
-3. Use the steering committee meeting on Thursday 4 February 2027 to confirm the revised go-live date of Monday 25 October 2027 with all stakeholders.
-4. Make sure the vendor demo on Monday 14 June 2027 is prepared.
+- Steering committee meeting: Thursday 4 February 2027.
+- Data cleansing sign-off: no later than Monday 22 February 2027.
+- User training kickoff: Wednesday 3 March 2027.
+- Trainer briefing: Monday 10 May 2027.
+- Vendor demo: Monday 14 June 2027.
+- Final data extract: Thursday 17 June 2027.
+- User acceptance testing: earliest start Thursday 1 July 2027.
+- Reporting dashboards checkpoint: Friday 27 August 2027.
+- Access control review: Tuesday 28 September 2027.
+- Go-live: Monday 25 October 2027, dependent on late vendor fixes and on single sign-on setup.
 ```
 
 
@@ -478,45 +517,51 @@ The Bramblecote classroom technology refresh is planned around the revised plan 
 
 On ownership, Kwame Lindqvist owns the network upgrade workstream, and Freya Haddad owns the device procurement workstream. Rafael Halloran supports device procurement and attends its meetings. Priya Okafor owns the asset tagging workstream, while Rohan Nakamura owns the safeguarding filters workstream.
 
-The network upgrade is scheduled to end on Tuesday 16 February 2027. Working days are Monday to Friday, and there are no public holidays in this period. The asset tagging kickoff can begin 6 working days after the network upgrade sign-off is completed, and it is planned for Thursday 6 May 2027. Device breakage rates could affect the number of laptops.
+The network upgrade is scheduled to end on Tuesday 16 February 2027. Working days are Monday to Friday, and there are no public holidays in this period. The asset tagging kickoff can begin 6 working days after the network upgrade sign-off is completed, and it is planned for Thursday 6 May 2027. Device breakage rates could affect the number of laptops. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 Aisling Sørensen owns the parent communications workstream, and Emeka Abernethy supports it and attends its meetings. The parents' evening is on Monday 8 February 2027, and the governors' meeting is on Monday 11 October 2027.
 
 Device deployment can begin 5 working days after the network upgrade ends. The plan provides for 187 laptops. In March, an additional 21 laptops were approved, and a request for 12 more laptops is still awaiting approval. A shortage of charging trolleys could delay the first lessons on the new devices.
 
-On the financial side, the approved project budget is £429,000. The steering group approved an increase of £11,000 to the project budget in March, whereas a proposed further increase of £6,000 was rejected by the steering group. The device leasing agreement is worth £64,000. Late approval of the content filter could delay the first lessons on the new devices.
+On the financial side, the approved project budget is £429,000. The steering group approved an increase of £11,000 to the project budget in March, whereas a proposed further increase of £6,000 was rejected by the steering group. The device leasing agreement is worth £64,000. Late approval of the content filter could delay the first lessons on the new devices. The figure of £429,000 is the budget as first approved, before the changes listed in this note.
 
 Several review points are in the calendar. The safeguarding review is on Monday 22 February 2027, and the teacher training checkpoint is on Monday 19 April 2027. The safeguarding filters review follows on Wednesday 19 May 2027.
 
 </details>
 
 ```text
-**Memo**
-To: Oluwaseun Mensah, Programme Director
-Subject: Bramblecote classroom technology refresh – status update
+**Memo to: Oluwaseun Mensah, Programme Director**
+**Re: Bramblecote classroom technology refresh**
 
 **Summary**
 
-The refresh follows the revised plan of Monday 18 January 2027, which supersedes all earlier emails. Two risks could delay the first lessons on the new devices: late approval of the content filter, and a shortage of charging trolleys.
+The revised plan of Monday 18 January 2027 governs and supersedes all earlier emails. It sets the first lessons on the new devices for Friday 9 April 2027. The earlier email of 7 January, which gave 19 October 2027, is superseded.
+
+Two risks could delay those first lessons: late approval of the content filter, and a shortage of charging trolleys.
 
 **Key facts**
 
-- **First lessons:** The current date is Friday 9 April 2027. The earlier email of 7 January gave Tuesday 19 October 2027, but it has been superseded.
-- **Delay risks:** Late approval of the content filter and a shortage of charging trolleys.
-- **Safeguarding review:** Monday 22 February 2027.
-- **Safeguarding filters review:** It takes place 22 working days after the teacher training checkpoint on Monday 19 April 2027.
-- **Device procurement owner:** Freya Haddad.
-- **Parent communications owner:** Aisling Sørensen.
-- **Device leasing agreement:** £64,000.
-- **Project budget after approved changes:** £440,000. This is the £429,000 approved budget plus the £11,000 increase approved in March. The further £6,000 increase was rejected.
-- **Earliest device deployment start:** Tuesday 23 February 2027, 5 working days after the network upgrade ends on Tuesday 16 February 2027.
-- **Latest network upgrade sign-off for asset tagging:** Wednesday 28 April 2027, so that the kickoff can go ahead on its planned date of Thursday 6 May 2027.
+- First lessons on the new devices: Friday 9 April 2027.
+- Safeguarding review: Monday 22 February 2027.
+- The safeguarding filters review on Wednesday 19 May 2027 falls 22 working days after the teacher training checkpoint of Monday 19 April 2027.
+- Device procurement workstream owner: Freya Haddad.
+- Parent communications workstream owner: Aisling Sørensen.
+- Device leasing agreement: £64,000.
+- Project budget after all approved changes: £440,000. This is the £429,000 first approved plus the £11,000 increase approved in March. The proposed further £6,000 was rejected.
+- Earliest date device deployment can begin: Tuesday 23 February 2027, which is 5 working days after the network upgrade ends on Tuesday 16 February 2027.
+- Latest date the network upgrade sign-off can be completed for the asset tagging kickoff to go ahead on its planned date of Thursday 6 May 2027: Wednesday 28 April 2027, since the kickoff can begin 6 working days after sign-off.
 
 **Next steps**
 
-- Keep the content filter approval and charging trolley supply under watch, as both could delay the first lessons.
-- Confirm the network upgrade sign-off is completed no later than Wednesday 28 April 2027.
-- Plan device deployment to begin on or after Tuesday 23 February 2027.
+The dated items and dependencies from the briefing are:
+
+- Safeguarding review: Monday 22 February 2027.
+- Device deployment can begin: Tuesday 23 February 2027.
+- First lessons on the new devices: Friday 9 April 2027, subject to content filter approval and charging trolley supply.
+- Teacher training checkpoint: Monday 19 April 2027.
+- Network upgrade sign-off: no later than Wednesday 28 April 2027.
+- Asset tagging kickoff: Thursday 6 May 2027.
+- Safeguarding filters review: Wednesday 19 May 2027.
 ```
 
 
@@ -531,11 +576,11 @@ The refresh follows the revised plan of Monday 18 January 2027, which supersedes
 
 The Bramblecote annual partner conference now has its opening day set by the revised plan of Friday 29 January 2027, which gives Tuesday 27 July 2027. That plan supersedes all earlier emails, including the email of Friday 8 January 2027, which had given the conference opening day as Monday 27 September 2027.
 
-On budget, the approved project budget is £111,000. The steering group approved an increase of £59,000 to the project budget in March, while a proposed further increase of £15,000 was rejected by the steering group. The audio-visual production contract is worth £52,000. Low early registrations could affect the number of delegate places.
+On budget, the approved project budget is £111,000. The steering group approved an increase of £59,000 to the project budget in March, while a proposed further increase of £15,000 was rejected by the steering group. The audio-visual production contract is worth £52,000. Low early registrations could affect the number of delegate places. The figure of £111,000 is the budget as first approved, before the changes listed in this note.
 
 Venue contract signature is scheduled to end on Tuesday 15 June 2027. The venue booking checkpoint is on Tuesday 23 March 2027, and the catering tasting follows on Thursday 25 March 2027. Working days are Monday to Friday, and there are no public holidays in this period. Rising catering prices could affect the budget.
 
-Ticket sales can begin 8 working days after venue contract signature ends. On capacity, the plan provides for 788 delegate places. An additional 39 delegate places were approved in March, and a request for 31 more delegate places is still awaiting approval. The registration desk training is on Thursday 15 April 2027, and the sponsorship review is on Friday 16 April 2027. The keynote speaker's visa delay could delay the conference opening day.
+Ticket sales can begin 8 working days after venue contract signature ends. On capacity, the plan provides for 788 delegate places. An additional 39 delegate places were approved in March, and a request for 31 more delegate places is still awaiting approval. The registration desk training is on Thursday 15 April 2027, and the sponsorship review is on Friday 16 April 2027. The keynote speaker's visa delay could delay the conference opening day. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 The speaker briefing is on Tuesday 11 May 2027. The catering kickoff is planned for Friday 15 October 2027, and it can begin 8 working days after the speaker programme sign-off is completed.
 
@@ -544,31 +589,38 @@ Workstream ownership is as follows. Emeka Achterberg owns the registration works
 </details>
 
 ```text
-**Memo to: Sanna Delacroix, Programme Director**
+**Memo to Sanna Delacroix, Programme Director**
 
 **Summary**
 
-The Bramblecote annual partner conference now opens on Tuesday 27 July 2027, as set by the revised plan of Friday 29 January 2027. That plan supersedes all earlier emails, including the 8 January 2027 email that gave Monday 27 September 2027. Two risks could delay the opening day: late venue licensing and the keynote speaker's visa delay.
+The conference opening day is now Tuesday 27 July 2027, set by the revised plan of Friday 29 January 2027, which supersedes all earlier emails, including that of Friday 8 January 2027. Ticket sales can begin on Friday 25 June 2027. The project budget after all approved changes is £170,000.
 
 **Key facts**
 
-- **Ticket sales:** The earliest start date is Friday 25 June 2027, 8 working days after venue contract signature ends on Tuesday 15 June 2027.
-- **Sponsorship review:** It takes place on Friday 16 April 2027, 18 working days after the venue booking checkpoint on Tuesday 23 March 2027.
-- **Audio-visual contract:** It is worth £52,000.
-- **Conference opening day:** The current date is Tuesday 27 July 2027.
-- **Speaker programme sign-off:** To keep the catering kickoff on its planned date of Friday 15 October 2027, sign-off must be completed by Tuesday 5 October 2027 at the latest.
-- **Speaker briefing:** It is on Tuesday 11 May 2027.
-- **Budget:** After the approved £59,000 increase, the project budget is £170,000. The proposed further £15,000 increase was rejected.
-- **Registration workstream:** Emeka Achterberg owns it.
-- **Audio-visual production workstream:** Oluwaseun Quiroga owns it.
+- Earliest ticket sales date: Friday 25 June 2027, which is 8 working days after venue contract signature ends on Tuesday 15 June 2027.
+- Risks that could delay the conference opening day: late venue licensing and the keynote speaker's visa delay.
+- The sponsorship review (Friday 16 April 2027) takes place 18 working days after the venue booking checkpoint (Tuesday 23 March 2027).
+- The audio-visual production contract is worth £52,000.
+- Current conference opening day: Tuesday 27 July 2027.
+- Latest speaker programme sign-off date for the catering kickoff to go ahead on its planned date of Friday 15 October 2027: Tuesday 5 October 2027.
+- The speaker briefing is on Tuesday 11 May 2027.
+- Emeka Achterberg owns the registration workstream.
+- Project budget after all approved changes: £170,000. This is the £111,000 first approved plus the £59,000 increase approved in March. The further £15,000 increase was rejected.
+- Oluwaseun Quiroga owns the audio-visual production workstream.
 
 **Next steps**
 
-- Monitor the venue licensing position and the keynote speaker's visa, as these are the two risks that could delay the opening day.
-- Ask Mei Valdés to confirm that speaker programme sign-off will be completed by Tuesday 5 October 2027.
-- Plan ticket sales to start on Friday 25 June 2027.
-- Keep the budget at £170,000, noting that rising catering prices could affect it.
-- Watch registration numbers, as low early registrations could affect the number of delegate places.
+Dated items and dependencies from the briefing:
+
+- Venue booking checkpoint: Tuesday 23 March 2027.
+- Catering tasting: Thursday 25 March 2027.
+- Registration desk training: Thursday 15 April 2027.
+- Sponsorship review: Friday 16 April 2027.
+- Speaker briefing: Tuesday 11 May 2027.
+- Venue contract signature ends: Tuesday 15 June 2027.
+- Ticket sales can begin: Friday 25 June 2027.
+- Speaker programme sign-off: no later than Tuesday 5 October 2027.
+- Catering kickoff: Friday 15 October 2027.
 ```
 
 
@@ -581,7 +633,7 @@ The Bramblecote annual partner conference now opens on Tuesday 27 July 2027, as 
 
 <details><summary>Briefing</summary>
 
-The Dunmore flagship store launch has an approved project budget of €305,000. In March the steering group approved a reduction of €17,000 to the project budget, and in April it approved an increase of €8,000. A proposed further increase of €8,000 was rejected by the steering group. The shop-fitting contract is worth €83,500. Weaker footfall forecasts could affect the budget.
+The Dunmore flagship store launch has an approved project budget of €305,000. In March the steering group approved a reduction of €17,000 to the project budget, and in April it approved an increase of €8,000. A proposed further increase of €8,000 was rejected by the steering group. The shop-fitting contract is worth €83,500. Weaker footfall forecasts could affect the budget. The figure of €305,000 is the budget as first approved, before the changes listed in this note.
 
 On the opening date, the sources do not agree. An email of Friday 15 January 2027 gave the store opening as Wednesday 4 August 2027, and a follow-up email of Monday 1 February 2027 repeated Wednesday 4 August 2027. The revised plan of Tuesday 19 January 2027 sets the store opening for Wednesday 22 September 2027. Where sources disagree, the revised plan takes precedence over any email, whatever the email's date. A shortfall in seasonal stock could delay the store opening.
 
@@ -589,7 +641,7 @@ Workstream ownership is as follows. Anders Takahashi owns the shop fit-out works
 
 On staffing, the plan provides for 20 staff hires. An additional 2 staff hires were approved in March, while 1 of the planned staff hires was later cancelled, and the cancellation was approved. A request for 2 more staff hires is still awaiting approval. The staff training day is on Friday 16 April 2027.
 
-The sequencing of the physical works follows several rules. Working days are Monday to Friday, and there are no public holidays in this period. The shop fit-out kickoff can begin 7 working days after the stock buying sign-off is completed, and it is planned for Wednesday 5 May 2027. The landlord's handover is on Friday 28 May 2027. The shop fit-out will end 5 working days after the landlord's handover, and stock loading can begin 10 working days after the shop fit-out ends.
+The sequencing of the physical works follows several rules. Working days are Monday to Friday, and there are no public holidays in this period. The shop fit-out kickoff can begin 7 working days after the stock buying sign-off is completed, and it is planned for Wednesday 5 May 2027. The landlord's handover is on Friday 28 May 2027. The shop fit-out will end 5 working days after the landlord's handover, and stock loading can begin 10 working days after the shop fit-out ends. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 Other fixed events are also in the calendar. The press preview is on Friday 7 May 2027, and the security checkpoint is on Monday 9 August 2027. The marketing campaign review is on Friday 10 September 2027, and the fire-safety inspection is on Tuesday 16 November 2027. Higher rent from the service charge could affect the number of staff hires.
 
@@ -597,11 +649,13 @@ Other fixed events are also in the calendar. The press preview is on Friday 7 Ma
 
 ```text
 **Memo to: Bastian Sørensen, Programme Director**
-**Subject: Dunmore flagship store launch – status points**
+**Subject: Dunmore flagship store launch**
 
 **Summary**
 
-The approved project budget is €296,000 after all approved changes (€305,000 less €17,000, plus €8,000). The rejected €8,000 increase is not included. The store opening is currently Wednesday 22 September 2027, as set by the revised plan of 19 January 2027. That plan takes precedence over the earlier emails, which gave 4 August 2027.
+The project budget after all approved changes is €296,000. This is the €305,000 first approved, less the €17,000 reduction approved in March, plus the €8,000 increase approved in April. The further €8,000 increase was rejected, so it is not included.
+
+The store opening is currently Wednesday 22 September 2027, as set in the revised plan of 19 January 2027. The revised plan takes precedence over the earlier emails, which gave 4 August 2027.
 
 Two risks could delay the store opening: a shortfall in seasonal stock, and a delay in the signage permit.
 
@@ -609,17 +663,24 @@ Two risks could delay the store opening: a shortfall in seasonal stock, and a de
 
 - Fire-safety inspection: Tuesday 16 November 2027.
 - Shop-fitting contract: €83,500.
-- Staff recruitment workstream: owned by Emeka Mwangi.
-- Point-of-sale systems workstream: owned by Hamid Novak.
-- Marketing campaign review: Friday 10 September 2027, which is 24 working days after the security checkpoint on Monday 9 August 2027.
-- Stock loading: the earliest start is Friday 18 June 2027. The shop fit-out ends 5 working days after the landlord's handover on Friday 28 May 2027, which is Friday 4 June. Stock loading can begin 10 working days after that.
-- Stock buying sign-off: it must be completed by Monday 26 April 2027 at the latest. The shop fit-out kickoff is planned for Wednesday 5 May 2027 and needs 7 working days after sign-off.
+- Staff recruitment workstream owner: Emeka Mwangi.
+- Point-of-sale systems workstream owner: Hamid Novak.
+- The marketing campaign review (Friday 10 September 2027) takes place 24 working days after the security checkpoint (Monday 9 August 2027).
+- Earliest stock loading date: Friday 18 June 2027. The shop fit-out ends 5 working days after the landlord's handover on Friday 28 May 2027, which is Friday 4 June 2027. Stock loading can begin 10 working days after that.
+- Latest stock buying sign-off date for the shop fit-out kickoff to go ahead on its planned date of Wednesday 5 May 2027: Monday 26 April 2027. The kickoff can begin 7 working days after the sign-off.
 
 **Next steps**
 
-1. Monitor seasonal stock supply and the signage permit, as these are the identified threats to the opening date.
-2. Make sure the stock buying sign-off is completed by Monday 26 April 2027, so the fit-out kickoff can go ahead on 5 May 2027.
-3. Confirm the plan of 22 September 2027 with everyone who received the earlier emails giving 4 August 2027.
+- Staff training day: Friday 16 April 2027.
+- Stock buying sign-off: no later than Monday 26 April 2027.
+- Shop fit-out kickoff: Wednesday 5 May 2027.
+- Press preview: Friday 7 May 2027.
+- Landlord's handover: Friday 28 May 2027.
+- Stock loading: can begin Friday 18 June 2027.
+- Security checkpoint: Monday 9 August 2027.
+- Marketing campaign review: Friday 10 September 2027.
+- Store opening: Wednesday 22 September 2027, subject to the seasonal stock and signage permit risks above.
+- Fire-safety inspection: Tuesday 16 November 2027.
 ```
 
 
@@ -634,11 +695,11 @@ Two risks could delay the store opening: a shortfall in seasonal stock, and a de
 
 The Norland flagship store launch is currently planned around the revised plan of Monday 18 January 2027, which sets the store opening for Tuesday 10 August 2027. An email of Thursday 14 January 2027 gave the opening as Thursday 23 September 2027, and a follow-up email of Wednesday 20 January 2027 repeated Thursday 23 September 2027. Where sources disagree, the revised plan takes precedence over any email, whatever the email's date. Late delivery of the till system could delay the store opening.
 
-On budget, the approved project budget is €113,000. The steering group approved a reduction of €47,000 in March and a further reduction of €10,000 in April. A proposed further increase of €33,000 was rejected by the steering group. Separately, the shop-fitting contract is worth €39,000.
+On budget, the approved project budget is €113,000. The steering group approved a reduction of €47,000 in March and a further reduction of €10,000 in April. A proposed further increase of €33,000 was rejected by the steering group. Separately, the shop-fitting contract is worth €39,000. The figure of €113,000 is the budget as first approved, before the changes listed in this note.
 
 Workstream ownership is as follows. Rafael Kowalczyk owns the shop fit-out workstream, Mei Nakamura owns the marketing campaign workstream, and Ingrid Halloran owns the security workstream. Corentin Petrov owns the point-of-sale systems workstream, and Elif Sørensen supports it and attends its meetings. Rohan Lindqvist owns the stock buying workstream, and Kwame Raman supports it and also attends its meetings. Higher rent from the service charge could affect the number of staff hires.
 
-On the shop fit-out sequence, the kickoff is planned for Monday 3 May 2027, and it can begin 4 working days after the marketing campaign sign-off is completed. The landlord's handover is on Friday 11 June 2027. The shop fit-out will end 7 working days after the landlord's handover, and stock loading can begin 4 working days after the shop fit-out ends. Working days are Monday to Friday, and there are no public holidays in this period. A delay in the signage permit could delay the store opening.
+On the shop fit-out sequence, the kickoff is planned for Monday 3 May 2027, and it can begin 4 working days after the marketing campaign sign-off is completed. The landlord's handover is on Friday 11 June 2027. The shop fit-out will end 7 working days after the landlord's handover, and stock loading can begin 4 working days after the shop fit-out ends. Working days are Monday to Friday, and there are no public holidays in this period. A delay in the signage permit could delay the store opening. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 On staffing, the plan provides for 25 staff hires. An additional 3 staff hires were approved in March, and 1 of the planned staff hires was later cancelled, with the cancellation approved. A request for 3 more staff hires is still awaiting approval. The staff recruitment review is on Tuesday 8 June 2027, and the staff training day is on Monday 22 March 2027.
 
@@ -647,31 +708,35 @@ Several checkpoints are also scheduled. The stock count is on Thursday 18 March 
 </details>
 
 ```text
-**Memo to: Dmitri Haddad, Programme Director**
-**Subject: Norland flagship store launch – status update**
+**Memo to Dmitri Haddad, Programme Director**
 
 **Summary**
 
-The store opening is currently set for Tuesday 10 August 2027, per the revised plan of Monday 18 January 2027. The revised plan takes precedence over the emails of 14 and 20 January, which gave Thursday 23 September 2027. Two risks could delay the opening: a delay in the signage permit, and late delivery of the till system.
+The store opening is currently Tuesday 10 August 2027, per the revised plan of Monday 18 January 2027. That plan takes precedence over the emails of 14 and 20 January, which gave Thursday 23 September 2027. Two risks could delay the opening: a delay in the signage permit, and late delivery of the till system.
 
 **Key facts**
 
 - **Stock buying workstream:** owned by Rohan Lindqvist.
 - **Point-of-sale systems workstream:** owned by Corentin Petrov.
-- **Marketing sign-off:** the shop fit-out kickoff is planned for Monday 3 May 2027 and can begin 4 working days after sign-off. Sign-off must therefore be completed by Tuesday 27 April 2027 at the latest.
-- **Stock loading:** the landlord's handover is Friday 11 June 2027 and the fit-out ends 7 working days later, on Tuesday 22 June 2027. Stock loading can begin 4 working days after that, so the earliest date is Monday 28 June 2027.
-- **Shop-fitting contract:** worth €39,000.
+- **Marketing campaign sign-off:** the shop fit-out kickoff is planned for Monday 3 May 2027 and can begin 4 working days after sign-off is completed. The latest sign-off date is therefore Tuesday 27 April 2027.
+- **Stock loading:** the landlord's handover is Friday 11 June 2027, and the fit-out ends 7 working days later, on Tuesday 22 June 2027. Stock loading can begin 4 working days after that, so the earliest date is Monday 28 June 2027.
+- **Shop-fitting contract:** €39,000.
 - **Staff training day:** Monday 22 March 2027.
-- **Project budget:** the approved budget of €113,000, less reductions of €47,000 and €10,000, comes to €56,000. The proposed further increase of €33,000 was rejected, so it is not included.
-- **Recruitment review:** Tuesday 8 June 2027 is 9 working days after the security checkpoint on Wednesday 26 May 2027.
-- **Store opening:** Tuesday 10 August 2027.
+- **Project budget after approved changes:** €56,000. This is the €113,000 first approved, less the €47,000 and €10,000 reductions. The proposed increase of €33,000 was rejected and is not included.
+- **Staff recruitment review:** Tuesday 8 June 2027 is 9 working days after the security checkpoint on Wednesday 26 May 2027.
 
 **Next steps**
 
-1. Monitor the signage permit and the till system delivery, as these are the two risks to the opening date.
-2. Confirm that the marketing campaign sign-off is completed by Tuesday 27 April 2027.
-3. Keep Rohan Lindqvist and Corentin Petrov informed of the stock loading date of Monday 28 June 2027.
-4. Ask the steering group to decide on the pending request for 3 more staff hires.
+Dated items and dependencies from the briefing:
+- Staff training day: Monday 22 March 2027.
+- Security checkpoint: Wednesday 26 May 2027.
+- Marketing campaign sign-off: complete by Tuesday 27 April 2027 for the kickoff on Monday 3 May 2027.
+- Staff recruitment review: Tuesday 8 June 2027.
+- Landlord's handover: Friday 11 June 2027.
+- Stock loading: earliest Monday 28 June 2027.
+- Fire-safety inspection: Friday 23 July 2027.
+- Store opening: Tuesday 10 August 2027, dependent on the signage permit and the till system delivery.
+- A request for 3 more staff hires is still awaiting approval.
 ```
 
 
@@ -688,9 +753,9 @@ The Quillon flagship store launch is organised around several workstreams, each 
 
 On dates for the opening, the sources differ. An email of Monday 18 January 2027 gave the store opening as Monday 22 March 2027, and a follow-up email of Thursday 4 February 2027 repeated Monday 22 March 2027. The revised plan of Monday 25 January 2027 sets the store opening for Tuesday 27 July 2027. Where sources disagree, the revised plan takes precedence over any email, whatever the email's date.
 
-The landlord's handover is on Monday 15 February 2027. The shop fit-out will end 4 working days after the landlord's handover, and stock loading can begin 8 working days after the shop fit-out ends. Working days are Monday to Friday, and there are no public holidays in this period. The shop-fitting contract is worth €61,500, and the shop fit-out checkpoint is on Thursday 29 July 2027. Higher rent from the service charge could affect the number of staff hires.
+The landlord's handover is on Monday 15 February 2027. The shop fit-out will end 4 working days after the landlord's handover, and stock loading can begin 8 working days after the shop fit-out ends. Working days are Monday to Friday, and there are no public holidays in this period. The shop-fitting contract is worth €61,500, and the shop fit-out checkpoint is on Thursday 29 July 2027. Higher rent from the service charge could affect the number of staff hires. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
-On budget, the approved project budget is €211,000. The steering group approved a reduction of €7,000 in March and an increase of €4,000 in April. A proposed further increase of €5,000 was rejected by the steering group.
+On budget, the approved project budget is €211,000. The steering group approved a reduction of €7,000 in March and an increase of €4,000 in April. A proposed further increase of €5,000 was rejected by the steering group. The figure of €211,000 is the budget as first approved, before the changes listed in this note.
 
 For staffing, the plan provides for 45 staff hires. An additional 5 staff hires were approved in March, and 4 of the planned staff hires were later cancelled, with the cancellation approved. A request for 4 more staff hires is still awaiting approval. The marketing campaign kickoff can begin 4 working days after the staff recruitment sign-off is completed, and it is planned for Monday 27 September 2027. A shortfall in seasonal stock could delay the store opening.
 
@@ -699,32 +764,31 @@ Several reviews and events complete the schedule. The marketing review is on Tue
 </details>
 
 ```text
-**Memo to: Corentin Takahashi, Programme Director**
-**Re: Quillon flagship store launch**
+**Memo to Corentin Takahashi, Programme Director**
 
 **Summary**
 
-The store opening is currently set for Tuesday 27 July 2027. This comes from the revised plan of 25 January 2027, which takes precedence over the earlier emails that gave Monday 22 March 2027. Two risks could delay the opening: a shortfall in seasonal stock and a delay in the signage permit.
+This memo covers the Quillon flagship store launch. The store opening is currently Tuesday 27 July 2027, as set by the revised plan of Monday 25 January 2027. The revised plan takes precedence over the earlier emails, which gave Monday 22 March 2027. Two risks could delay the opening: a shortfall in seasonal stock and a delay in the signage permit.
 
 **Key facts**
 
-- **Store opening:** Tuesday 27 July 2027.
-- **Delay risks:** a shortfall in seasonal stock, and a delay in the signage permit.
-- **Staff recruitment sign-off:** to keep the marketing campaign kickoff on its planned date of Monday 27 September 2027, sign-off must be completed by Tuesday 21 September 2027 at the latest.
-- **Security workstream owner:** Noor Iyer.
-- **Stock buying workstream owner:** Joaquin Oyelaran.
-- **Shop-fitting contract:** €61,500.
-- **Earliest stock loading:** Wednesday 3 March 2027.
-- **Project budget after approved changes:** €208,000. This is the €211,000 approved budget, less the €7,000 reduction, plus the €4,000 increase. The proposed €5,000 increase was rejected and is not included.
-- **Staff training day:** Wednesday 13 October 2027.
-- **Point-of-sale systems review:** 13 working days after the shop fit-out checkpoint of Thursday 29 July 2027. The review is on Tuesday 17 August 2027.
+- Current store opening date: Tuesday 27 July 2027.
+- Risks that could delay the opening: a shortfall in seasonal stock; a delay in the signage permit.
+- Security workstream owner: Noor Iyer.
+- Stock buying workstream owner: Joaquin Oyelaran.
+- Shop-fitting contract value: €61,500.
+- Earliest date stock loading can begin: Wednesday 3 March 2027. The landlord handover is Monday 15 February 2027, the fit-out ends 4 working days later, and stock loading can begin 8 working days after that.
+- Project budget after all approved changes: €208,000. This is €211,000 less €7,000 plus €4,000. The proposed €5,000 increase was rejected.
+- Staff training day: Wednesday 13 October 2027.
+- The point-of-sale systems review is on Tuesday 17 August 2027. That is 13 working days after the shop fit-out checkpoint on Thursday 29 July 2027.
 
 **Next steps**
 
-1. Monitor seasonal stock supply and the signage permit, since either could delay the opening.
-2. Make sure the staff recruitment sign-off is completed by Tuesday 21 September 2027.
-3. Use the figure of €208,000 as the working budget.
-4. Obtain a decision on the pending request for 4 more staff hires, which is still awaiting approval.
+- The marketing campaign kickoff is planned for Monday 27 September 2027. It can begin 4 working days after the staff recruitment sign-off is completed, so the latest date for that sign-off is Tuesday 21 September 2027.
+- The marketing review is on Tuesday 10 August 2027.
+- The point-of-sale systems review is on Tuesday 17 August 2027.
+- The fire-safety inspection is on Thursday 23 September 2027.
+- The staff training day is on Wednesday 13 October 2027.
 ```
 
 
@@ -741,9 +805,9 @@ The Ostrava flagship store launch is being run through several workstreams, each
 
 On the opening date, the sources differ. The revised plan of Thursday 28 January 2027 sets the store opening for Wednesday 1 September 2027. An email of Tuesday 19 January 2027 gave the opening as Wednesday 27 October 2027, and a follow-up email of Friday 29 January 2027 repeated Wednesday 27 October 2027. Where sources disagree, the revised plan takes precedence over any email, whatever the email's date. A shortfall in seasonal stock could delay the store opening.
 
-On the budget, the approved project budget is €259,000. The steering group approved a reduction of €8,000 in March and an increase of €23,000 in April. A proposed further increase of €30,000 was rejected by the steering group. The shop-fitting contract is worth €26,000. Rising wage costs could affect the budget.
+On the budget, the approved project budget is €259,000. The steering group approved a reduction of €8,000 in March and an increase of €23,000 in April. A proposed further increase of €30,000 was rejected by the steering group. The shop-fitting contract is worth €26,000. Rising wage costs could affect the budget. The figure of €259,000 is the budget as first approved, before the changes listed in this note.
 
-For the fit-out, the review is on Friday 2 April 2027. The landlord's handover is on Monday 7 June 2027, and the shop fit-out will end 5 working days after that handover. Stock loading can begin 4 working days after the shop fit-out ends. Working days are Monday to Friday, and there are no public holidays in this period. The fire-safety inspection is on Wednesday 19 May 2027.
+For the fit-out, the review is on Friday 2 April 2027. The landlord's handover is on Monday 7 June 2027, and the shop fit-out will end 5 working days after that handover. Stock loading can begin 4 working days after the shop fit-out ends. Working days are Monday to Friday, and there are no public holidays in this period. The fire-safety inspection is on Wednesday 19 May 2027. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 On staffing, the plan provides for 56 staff hires. The staff recruitment checkpoint is on Tuesday 9 March 2027. An additional 6 staff hires were approved in March, and 2 of the planned staff hires were later cancelled, with the cancellation approved. A request for 4 more staff hires is still awaiting approval. A delay in the signage permit could delay the store opening.
 
@@ -752,31 +816,36 @@ On marketing and systems, the marketing review is on Thursday 20 May 2027. The p
 </details>
 
 ```text
-**Memo to Anders Oyelaran, Programme Director**
+**Memo to: Anders Oyelaran, Programme Director**
 **Re: Ostrava flagship store launch**
 
 **Summary**
 
-The opening date is Wednesday 1 September 2027, per the revised plan of 28 January 2027. The plan takes precedence over the January emails, which gave 27 October 2027. Two risks could delay the opening, and the budget now stands at €274,000.
+The store opening is currently set for Wednesday 1 September 2027, according to the revised plan of 28 January 2027. The revised plan takes precedence over the emails of 19 and 29 January, which gave 27 October 2027. Two risks could delay the opening: a delay in the signage permit, and a shortfall in seasonal stock.
 
 **Key facts**
 
-- **Stock buying owner:** Tomasz Raman owns the workstream. Lucía Marchetti supports it.
-- **Security owner:** Hamid Fontaine owns the workstream. Emeka Nakamura supports it.
-- **Shop-fitting contract:** It is worth €26,000.
-- **Budget:** The approved budget of €259,000, less the €8,000 reduction and plus the €23,000 increase, gives €274,000. The proposed €30,000 increase was rejected, so it is not included.
-- **Opening delay risks:** A delay in the signage permit could delay the opening. A shortfall in seasonal stock could also delay it.
-- **Fit-out review timing:** The review on Friday 2 April 2027 falls 18 working days after the staff recruitment checkpoint on Tuesday 9 March 2027.
-- **Stock loading:** The landlord handover is on Monday 7 June 2027. The fit-out ends 5 working days later, on Monday 14 June. Stock loading can begin 4 working days after that, on Friday 18 June 2027.
-- **Point-of-sale kickoff:** It is planned for Tuesday 15 June 2027 and needs 8 working days after marketing sign-off. Sign-off must therefore be completed by Thursday 3 June 2027 at the latest.
-- **Stock count:** It is on Thursday 9 September 2027.
+- Stock buying is owned by Tomasz Raman.
+- Security is owned by Hamid Fontaine.
+- The shop-fitting contract is worth €26,000.
+- The project budget after all approved changes is €274,000. This is €259,000 as first approved, less €8,000 plus €23,000. The proposed €30,000 increase was rejected.
+- The shop fit-out review on Friday 2 April 2027 falls 18 working days after the staff recruitment checkpoint on Tuesday 9 March 2027.
+- The earliest date stock loading can begin is Friday 18 June 2027. The handover is on 7 June, the fit-out ends 5 working days later on 14 June, and loading can begin 4 working days after that.
+- The stock count is on Thursday 9 September 2027.
+- The latest date the marketing campaign sign-off can be completed is Thursday 3 June 2027. This is 8 working days before the point-of-sale systems kickoff on Tuesday 15 June 2027.
 
 **Next steps**
 
-- Track the signage permit and seasonal stock supply, since either could delay the opening.
-- Ask Priya Castellanos to complete marketing sign-off by Thursday 3 June 2027.
-- Keep the budget at €274,000 unless the steering group approves a change.
-- Plan stock loading from Friday 18 June 2027.
+Dated items and dependencies from the briefing:
+
+- Fire-safety inspection: Wednesday 19 May 2027.
+- Marketing review: Thursday 20 May 2027.
+- Marketing campaign sign-off: no later than Thursday 3 June 2027.
+- Landlord handover: Monday 7 June 2027.
+- Point-of-sale systems kickoff: Tuesday 15 June 2027.
+- Stock loading: from Friday 18 June 2027.
+- Store opening: Wednesday 1 September 2027.
+- Stock count: Thursday 9 September 2027.
 ```
 
 
@@ -793,11 +862,11 @@ The Orrin flagship store launch is now working to the revised plan of Wednesday 
 
 On ownership, Corentin Iyer owns the shop fit-out workstream, with Rafael Marchetti supporting it and attending its meetings. Emeka Takahashi owns stock buying, and Freya Kaur supports that workstream and attends its meetings. Teodor Bakshi owns the point-of-sale systems workstream, Yuki Delacroix owns security, and Marisol Halloran owns the marketing campaign.
 
-The shop fit-out is scheduled to end on Tuesday 8 June 2027, and the shop-fitting contract is worth €51,500. The fire-safety inspection is on Friday 30 April 2027, ahead of that end date. The security kickoff is planned for Tuesday 25 May 2027, and it can begin 3 working days after the point-of-sale systems sign-off is completed. Higher rent from the service charge could affect the number of staff hires.
+The shop fit-out is scheduled to end on Tuesday 8 June 2027, and the shop-fitting contract is worth €51,500. The fire-safety inspection is on Friday 30 April 2027, ahead of that end date. The security kickoff is planned for Tuesday 25 May 2027, and it can begin 3 working days after the point-of-sale systems sign-off is completed. Higher rent from the service charge could affect the number of staff hires. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 Stock loading can begin 10 working days after the shop fit-out ends. That timing is the one the stock buying workstream is planning against.
 
-On budget, the approved project budget is €301,000. The steering group approved an increase of €31,000 in March, while a proposed further increase of €35,000 was rejected by the steering group.
+On budget, the approved project budget is €301,000. The steering group approved an increase of €31,000 in March, while a proposed further increase of €35,000 was rejected by the steering group. The figure of €301,000 is the budget as first approved, before the changes listed in this note.
 
 On staffing, the plan provides for 36 staff hires, and an additional 3 staff hires were approved in March. A request for 3 more staff hires is still awaiting approval. The staff recruitment checkpoint is on Monday 2 August 2027, and the staff training day is on Tuesday 26 October 2027. Rising wage costs could affect the budget.
 
@@ -810,27 +879,29 @@ Later milestones are the marketing campaign review on Friday 3 September 2027 an
 
 **Summary**
 
-The Orrin flagship store launch is working to the revised plan of Wednesday 27 January 2027, which supersedes all earlier emails. Under it, the store opening is now Wednesday 7 July 2027. The approved project budget stands at €332,000 after all approved changes.
+The Orrin flagship store launch is working to the revised plan of Wednesday 27 January 2027, which supersedes all earlier emails. It sets the store opening for Wednesday 7 July 2027. Two risks could delay that opening: a delay in the signage permit and late delivery of the till system.
 
 **Key facts**
 
-- **Budget:** The original approved budget of €301,000 plus the €31,000 increase approved in March gives €332,000. The proposed further increase of €35,000 was rejected.
+- **Budget:** The project budget after all approved changes is €332,000. This is the €301,000 first approved plus the €31,000 increase approved in March. The further €35,000 increase was rejected.
 - **Store opening:** Wednesday 7 July 2027.
-- **Shop fit-out owner:** Corentin Iyer owns the workstream. Rafael Marchetti supports it.
-- **Stock buying owner:** Emeka Takahashi owns the workstream. Freya Kaur supports it.
-- **Shop-fitting contract:** €51,500.
-- **Stock loading:** The earliest start is Tuesday 22 June 2027, 10 working days after the fit-out ends on Tuesday 8 June 2027.
-- **Security kickoff:** It is planned for Tuesday 25 May 2027. The point-of-sale systems sign-off must therefore be completed by Thursday 20 May 2027 at the latest.
+- **Shop fit-out:** Corentin Iyer owns the workstream. The shop-fitting contract is worth €51,500.
+- **Stock buying:** Emeka Takahashi owns the workstream.
+- **Stock loading:** The earliest date it can begin is Tuesday 22 June 2027, which is 10 working days after the fit-out ends on Tuesday 8 June 2027.
+- **Security kickoff:** It is planned for Tuesday 25 May 2027 and can begin 3 working days after the point-of-sale systems sign-off is completed. The latest the sign-off can be completed for the kickoff to go ahead on that date is Thursday 20 May 2027.
 - **Staff training day:** Tuesday 26 October 2027.
-- **Campaign review timing:** The marketing campaign review on Friday 3 September 2027 falls 24 working days after the staff recruitment checkpoint on Monday 2 August 2027.
-- **Risks to the store opening:** A delay in the signage permit could delay the opening. Late delivery of the till system could also delay it.
+- **Marketing campaign review:** Friday 3 September 2027, which is 24 working days after the staff recruitment checkpoint on Monday 2 August 2027.
 
 **Next steps**
 
-- Teodor Bakshi to complete the point-of-sale systems sign-off by Thursday 20 May 2027 so the security kickoff, owned by Yuki Delacroix, can go ahead on Tuesday 25 May 2027.
-- Emeka Takahashi to plan stock buying against a stock loading start of Tuesday 22 June 2027.
-- Monitor the signage permit and the till system delivery, as either could delay the store opening.
-- Corentin Iyer to keep the shop fit-out to its end date of Tuesday 8 June 2027, after the fire-safety inspection on Friday 30 April 2027.
+- Fire-safety inspection: Friday 30 April 2027.
+- Point-of-sale systems sign-off: no later than Thursday 20 May 2027.
+- Security kickoff: Tuesday 25 May 2027.
+- Shop fit-out ends: Tuesday 8 June 2027.
+- Stock loading can begin: Tuesday 22 June 2027.
+- Store opening: Wednesday 7 July 2027, subject to the signage permit and till system delivery.
+- Staff recruitment checkpoint: Monday 2 August 2027.
+- Marketing campaign review: Friday 3 September 2027.
 ```
 
 
@@ -847,41 +918,43 @@ Corvane Eastside clinic opening: the revised plan of Friday 22 January 2027 sets
 
 On ownership, Freya Demir owns the clinical staffing workstream, and Thandiwe Brennan supports it and attends its meetings. Priya Quiroga owns community outreach, with Leilani Nakamura supporting and attending its meetings. Joaquin Whitfield owns the building fit-out workstream, Kwame Kaur owns equipment procurement, and Anders Okafor owns patient records.
 
-The approved project budget is €520,000. In March the steering group approved a reduction of €52,000 to the project budget, and in April it approved a further reduction of €18,000. A proposed further increase of €6,000 was rejected by the steering group. The imaging equipment lease is worth €38,000. Higher energy tariffs could affect the budget.
+The approved project budget is €520,000. In March the steering group approved a reduction of €52,000 to the project budget, and in April it approved a further reduction of €18,000. A proposed further increase of €6,000 was rejected by the steering group. The imaging equipment lease is worth €38,000. Higher energy tariffs could affect the budget. The figure of €520,000 is the budget as first approved, before the changes listed in this note.
 
 On capacity, the plan provides for 13 treatment chairs. An additional 2 treatment chairs were approved in March, and 1 of the planned treatment chairs was later cancelled, with the cancellation approved. A request for 2 more treatment chairs is still awaiting approval.
 
-On the schedule, the contractor's site handover is on Friday 12 February 2027, and the building fit-out will end 4 working days after that handover. Equipment installation can begin 6 working days after the building fit-out ends. The equipment procurement kickoff is planned for Friday 28 May 2027, and it can begin 7 working days after the patient records sign-off is completed. Working days are Monday to Friday, and there are no public holidays in this period. A backlog at the licensing authority could delay the first day of patient appointments.
+On the schedule, the contractor's site handover is on Friday 12 February 2027, and the building fit-out will end 4 working days after that handover. Equipment installation can begin 6 working days after the building fit-out ends. The equipment procurement kickoff is planned for Friday 28 May 2027, and it can begin 7 working days after the patient records sign-off is completed. Working days are Monday to Friday, and there are no public holidays in this period. A backlog at the licensing authority could delay the first day of patient appointments. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 Several other milestones sit in the spring. The regulatory approval checkpoint is on Monday 29 March 2027. The pharmacy stock delivery is on Friday 16 April 2027, and the open evening for residents follows on Friday 23 April 2027. The building fit-out review is on Thursday 29 April 2027. Unfilled nurse vacancies could delay the first day of patient appointments.
 
 </details>
 
 ```text
-**Memo to: Aisling Delacroix, Programme Director**
-**Re: Corvane Eastside clinic opening**
+**Memo to Aisling Delacroix, Programme Director**
 
 **Summary**
 
-The first day of patient appointments is currently Wednesday 21 July 2027, as set by the revised plan of Friday 22 January 2027. The plan takes precedence over the emails of 14 January and 1 February, which both gave 25 August 2027. Two risks could delay that date: a backlog at the licensing authority, and unfilled nurse vacancies.
+This memo covers the Corvane Eastside clinic opening. The first day of patient appointments is currently Wednesday 21 July 2027, as set by the revised plan of Friday 22 January 2027. That plan takes precedence over the emails of 14 January and 1 February 2027, which both gave 25 August 2027. Two risks could delay that date: a backlog at the licensing authority, and unfilled nurse vacancies.
 
 **Key facts**
 
-- **Community outreach owner:** Priya Quiroga. Leilani Nakamura supports the workstream.
-- **Clinical staffing owner:** Freya Demir. Thandiwe Brennan supports the workstream.
+- **First day of patient appointments:** Wednesday 21 July 2027.
+- **Delay risks:** a backlog at the licensing authority and unfilled nurse vacancies.
+- **Community outreach owner:** Priya Quiroga.
+- **Clinical staffing owner:** Freya Demir.
 - **Imaging equipment lease:** €38,000.
 - **Pharmacy stock delivery:** Friday 16 April 2027.
-- **Project budget after approved changes:** €450,000. This is the €520,000 approved budget less the €52,000 and €18,000 reductions. The proposed €6,000 increase was rejected, so it is not counted.
-- **Patient records sign-off:** it must be completed by Wednesday 19 May 2027 for the equipment procurement kickoff to go ahead on Friday 28 May 2027. The kickoff can begin 7 working days after sign-off.
-- **Building fit-out review:** Thursday 29 April 2027 falls 23 working days after the regulatory approval checkpoint on Monday 29 March 2027.
-- **Equipment installation:** the earliest start is Friday 26 February 2027. Fit-out ends 4 working days after the site handover on 12 February, and installation can begin 6 working days after that.
+- **Project budget after all approved changes:** €450,000. This is €520,000 less the approved reductions of €52,000 and €18,000. The proposed €6,000 increase was rejected.
+- **Building fit-out review:** Thursday 29 April 2027, which is 23 working days after the regulatory approval checkpoint on Monday 29 March 2027.
+- **Earliest equipment installation start:** Friday 26 February 2027. Site handover is on Friday 12 February 2027, fit-out ends 4 working days later, and installation can begin 6 working days after that.
 
 **Next steps**
 
-1. Ask Freya Demir to report on the nurse vacancies, since unfilled posts could delay the first appointments.
-2. Ask for an update on the licensing authority backlog, which could also delay the opening.
-3. Ask Anders Okafor to confirm that patient records sign-off will be completed by 19 May 2027.
-4. Make sure all parties work from the 21 July 2027 date rather than the email dates.
+- Equipment procurement kickoff is planned for Friday 28 May 2027. It can begin 7 working days after patient records sign-off, so the sign-off must be completed by Wednesday 19 May 2027 at the latest.
+- Contractor site handover is on Friday 12 February 2027.
+- The regulatory approval checkpoint is on Monday 29 March 2027.
+- The pharmacy stock delivery is on Friday 16 April 2027, and the open evening for residents follows on Friday 23 April 2027.
+- The building fit-out review is on Thursday 29 April 2027.
+- The governance board meets on Wednesday 6 October 2027.
 ```
 
 
@@ -898,9 +971,9 @@ Elif Sørensen owns the venue booking workstream, and Rohan Mensah supports it a
 
 Yuki Halloran owns the speaker programme workstream. Its checkpoint is on Friday 12 March 2027, and the speaker briefing follows on Friday 23 April 2027. Kwame Bakshi owns the catering workstream, with Lucía Esposito supporting it and attending its meetings. The catering tasting is on Monday 19 April 2027. Low early registrations could affect the number of delegate places.
 
-On budget, the approved project budget is £106,000. The steering group approved an increase of £39,000 in March, while a proposed further increase of £54,000 was rejected by the steering group. The audio-visual production contract is worth £42,000, and Noor Okafor owns the audio-visual production workstream. Late venue licensing could delay the conference opening day.
+On budget, the approved project budget is £106,000. The steering group approved an increase of £39,000 in March, while a proposed further increase of £54,000 was rejected by the steering group. The audio-visual production contract is worth £42,000, and Noor Okafor owns the audio-visual production workstream. Late venue licensing could delay the conference opening day. The figure of £106,000 is the budget as first approved, before the changes listed in this note.
 
-The plan provides for 526 delegate places. An additional 80 delegate places were approved in March, and a request for 30 more delegate places is still awaiting approval. The registration review is on Thursday 8 April 2027. Ticket sales can begin 8 working days after venue contract signature ends, with working days being Monday to Friday and no public holidays falling in this period. A sponsor withdrawing could affect the budget.
+The plan provides for 526 delegate places. An additional 80 delegate places were approved in March, and a request for 30 more delegate places is still awaiting approval. The registration review is on Thursday 8 April 2027. Ticket sales can begin 8 working days after venue contract signature ends, with working days being Monday to Friday and no public holidays falling in this period. A sponsor withdrawing could affect the budget. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 Hamid Valdés owns the sponsorship workstream. The sponsorship kickoff is planned for Thursday 14 October 2027, and it can begin 3 working days after the audio-visual production sign-off is completed. The dress rehearsal is on Thursday 12 August 2027.
 
@@ -911,26 +984,34 @@ Hamid Valdés owns the sponsorship workstream. The sponsorship kickoff is planne
 
 **Summary**
 
-This memo covers the budget, schedule dates, workstream owners and risks to the conference opening day. The opening day is currently Wednesday 14 July 2027, set in the revised plan of Thursday 28 January 2027. That plan supersedes all earlier emails, including the one giving Thursday 15 July 2027.
+This memo sets out the budget, the opening day date and risks, key dates, and workstream owners. The project budget after all approved changes is £145,000, which is the original £106,000 plus the £39,000 increase approved in March. The proposed further increase of £54,000 was rejected.
 
-Two risks could delay the opening day: late venue licensing and the keynote speaker's visa delay.
+The conference opening day is currently Wednesday 14 July 2027, per the revised plan of Thursday 28 January 2027, which supersedes all earlier emails. Two risks could delay it: late venue licensing and the keynote speaker's visa delay.
 
 **Key facts**
 
-- **Budget:** After all approved changes, the project budget is £145,000. This is the original £106,000 plus the £39,000 increase approved in March. The proposed further £54,000 increase was rejected.
-- **Audio-visual contract:** The audio-visual production contract is worth £42,000.
-- **Sponsorship kickoff:** To go ahead on its planned date of Thursday 14 October 2027, the audio-visual production sign-off must be completed by Monday 11 October 2027 at the latest.
-- **Ticket sales:** The earliest start date is Monday 15 February 2027. This is 8 working days after venue contract signature ends on Wednesday 3 February 2027.
-- **Catering:** Kwame Bakshi owns the catering workstream. The catering tasting is on Monday 19 April 2027.
-- **Venue booking:** Elif Sørensen owns the venue booking workstream.
-- **Registration review:** The review on Thursday 8 April 2027 takes place 19 working days after the speaker programme checkpoint on Friday 12 March 2027.
+- Budget after approved changes: £145,000.
+- Conference opening day: Wednesday 14 July 2027.
+- Risks that could delay the opening day: late venue licensing; the keynote speaker's visa delay.
+- Latest audio-visual production sign-off date for the sponsorship kickoff to go ahead on its planned date (Thursday 14 October 2027): Monday 11 October 2027.
+- Earliest ticket sales start: Monday 15 February 2027.
+- Audio-visual production contract value: £42,000.
+- Catering workstream owner: Kwame Bakshi.
+- Venue booking workstream owner: Elif Sørensen.
+- Catering tasting: Monday 19 April 2027.
+- The registration review on Thursday 8 April 2027 takes place 19 working days after the speaker programme checkpoint on Friday 12 March 2027.
 
 **Next steps**
 
-- Monitor venue licensing and the keynote speaker's visa, as either could delay the opening day.
-- Make sure the audio-visual production sign-off is completed by Monday 11 October 2027.
-- Plan ticket sales to open on Monday 15 February 2027.
-- Hold the registration review on Thursday 8 April 2027 and the catering tasting on Monday 19 April 2027.
+Dated items and dependencies from the briefing:
+
+- Venue contract signature ends Wednesday 3 February 2027, and ticket sales can begin 8 working days later.
+- The speaker programme checkpoint is on Friday 12 March 2027.
+- The registration review is on Thursday 8 April 2027.
+- The catering tasting is on Monday 19 April 2027.
+- The speaker briefing follows on Friday 23 April 2027.
+- The dress rehearsal is on Thursday 12 August 2027.
+- The sponsorship kickoff is planned for Thursday 14 October 2027 and depends on audio-visual production sign-off being completed 3 working days earlier.
 ```
 
 
@@ -943,11 +1024,11 @@ Two risks could delay the opening day: late venue licensing and the keynote spea
 
 <details><summary>Briefing</summary>
 
-The Tidewell classroom technology refresh has a number of updates to pull together this week. The approved project budget is £354,000. In March the steering group approved an increase of £14,000 to the project budget, and it also rejected a proposed further increase of £24,000. The device leasing agreement is worth £72,000. Higher insurance costs could affect the number of laptops.
+The Tidewell classroom technology refresh has a number of updates to pull together this week. The approved project budget is £354,000. In March the steering group approved an increase of £14,000 to the project budget, and it also rejected a proposed further increase of £24,000. The device leasing agreement is worth £72,000. Higher insurance costs could affect the number of laptops. The figure of £354,000 is the budget as first approved, before the changes listed in this note.
 
 On the network upgrade, Dmitri Bakshi owns the workstream and Anders Novak supports it and attends its meetings. The upgrade is scheduled to end on Thursday 17 June 2027.
 
-Device deployment can begin 4 working days after the network upgrade ends. Working days are Monday to Friday, and there are no public holidays in this period. Mei Esposito owns the device procurement workstream, and the safeguarding filters kickoff can begin 8 working days after the device procurement sign-off is completed. The kickoff itself is planned for Monday 28 June 2027, and Emeka Kowalczyk owns the safeguarding filters workstream.
+Device deployment can begin 4 working days after the network upgrade ends. Working days are Monday to Friday, and there are no public holidays in this period. Mei Esposito owns the device procurement workstream, and the safeguarding filters kickoff can begin 8 working days after the device procurement sign-off is completed. The kickoff itself is planned for Monday 28 June 2027, and Emeka Kowalczyk owns the safeguarding filters workstream. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 On quantities, the plan provides for 279 laptops. An additional 42 laptops were approved in March, and a request for 20 more laptops is still awaiting approval. Noor Fontaine owns the asset tagging workstream, with Elif Okafor supporting it and attending its meetings. Thandiwe Achterberg owns the parent communications workstream. Late approval of the content filter could delay the first lessons on the new devices.
 
@@ -959,30 +1040,34 @@ Several review points are in the calendar. The safeguarding review is on Thursda
 
 ```text
 **Memo to Joaquin Petrov, Programme Director**
-**Re: Tidewell classroom technology refresh, weekly update**
 
 **Summary**
 
-The first lessons on the new devices are now set for Thursday 26 August 2027, per the revised plan of 22 January 2027, which supersedes the earlier email date. Two risks could delay them: delays in the wireless survey and late approval of the content filter. The project budget stands at £368,000 after approved changes.
+The first lessons on the new devices are now set for Thursday 26 August 2027. The revised plan of Friday 22 January 2027 supersedes the earlier email date of Friday 27 August 2027. The project budget after all approved changes is £368,000.
 
 **Key facts**
 
 - **First lessons:** Thursday 26 August 2027.
 - **Network upgrade owner:** Dmitri Bakshi owns the workstream. The upgrade ends on Thursday 17 June 2027.
-- **Device deployment:** The earliest start is Wednesday 23 June 2027, four working days after the network upgrade ends.
+- **Earliest device deployment:** Wednesday 23 June 2027, 4 working days after the network upgrade ends.
 - **Asset tagging owner:** Noor Fontaine.
-- **Risks to the first lessons:** delays in the wireless survey, and late approval of the content filter.
+- **Risks that could delay the first lessons:** delays in the wireless survey, and late approval of the content filter.
 - **Device leasing agreement:** £72,000.
-- **Safeguarding filters kickoff:** It is planned for Monday 28 June 2027. The device procurement sign-off must therefore be completed by Wednesday 16 June 2027 at the latest, since the kickoff can begin 8 working days after sign-off.
+- **Latest device procurement sign-off date:** Wednesday 16 June 2027. The safeguarding filters kickoff is planned for Monday 28 June 2027 and can begin 8 working days after sign-off.
 - **Supplier demo:** Monday 8 November 2027.
-- **Project budget:** £368,000. This is the original £354,000 plus the £14,000 increase approved in March. The proposed further £24,000 increase was rejected.
-- **Review spacing:** The parent communications review on Friday 25 June 2027 falls 16 working days after the teacher training checkpoint on Thursday 3 June 2027.
+- **Project budget:** £354,000 as first approved, plus the £14,000 increase approved in March, gives £368,000. The proposed further increase of £24,000 was rejected.
+- **Review gap:** the parent communications review on Friday 25 June 2027 falls 16 working days after the teacher training checkpoint on Thursday 3 June 2027.
 
 **Next steps**
 
-- Mei Esposito to ensure the device procurement sign-off is completed by Wednesday 16 June 2027.
-- Monitor the wireless survey and the content filter approval, as both could affect the first lessons date.
-- Dmitri Bakshi to keep the network upgrade on course to end on Thursday 17 June 2027, so deployment can begin on Wednesday 23 June 2027.
+Dated items and dependencies from the briefing:
+
+- Device procurement sign-off must be completed by Wednesday 16 June 2027 for the safeguarding filters kickoff to go ahead on Monday 28 June 2027.
+- The network upgrade ends on Thursday 17 June 2027, and device deployment can begin on Wednesday 23 June 2027.
+- The parent communications review is on Friday 25 June 2027.
+- The first lessons are on Thursday 26 August 2027.
+- The governors' meeting is on Monday 18 October 2027.
+- The supplier demo is on Monday 8 November 2027.
 ```
 
 
@@ -997,11 +1082,11 @@ The first lessons on the new devices are now set for Thursday 26 August 2027, pe
 
 The Kestrel Eastside clinic opening is governed by a revised plan dated Monday 25 January 2027, which sets the first day of patient appointments for Friday 12 March 2027. Two earlier emails differ on that point: one of Thursday 14 January 2027 gave Thursday 20 May 2027, and a follow-up of Friday 29 January 2027 repeated Thursday 20 May 2027. Where sources disagree, the revised plan takes precedence over any email, whatever the email's date.
 
-On the building side, the contractor's site handover is on Monday 1 February 2027. The building fit-out will end 5 working days after that handover, and equipment installation can begin 6 working days after the fit-out ends. Emeka Fontaine owns the building fit-out workstream, and Priya Castellanos supports it and attends its meetings. The pharmacy stock delivery is on Friday 7 May 2027, and the equipment procurement checkpoint is on Wednesday 9 June 2027. A backlog at the licensing authority could delay the first day of patient appointments.
+On the building side, the contractor's site handover is on Monday 1 February 2027. The building fit-out will end 5 working days after that handover, and equipment installation can begin 6 working days after the fit-out ends. Emeka Fontaine owns the building fit-out workstream, and Priya Castellanos supports it and attends its meetings. The pharmacy stock delivery is on Friday 7 May 2027, and the equipment procurement checkpoint is on Wednesday 9 June 2027. A backlog at the licensing authority could delay the first day of patient appointments. All sign-offs, handovers, deliveries and meetings in this note take place on working days.
 
 The plan provides for 30 treatment chairs. An additional 5 treatment chairs were approved in March, while 1 of the planned treatment chairs was later cancelled, and that cancellation was approved. A request for 4 more treatment chairs is still awaiting approval. The imaging equipment lease is worth €69,000.
 
-On budget, the approved project budget is €455,000. The steering group approved an increase of €49,000 in March and a reduction of €3,000 in April. A proposed further increase of €10,000 was rejected by the steering group. Unfilled nurse vacancies could delay the first day of patient appointments.
+On budget, the approved project budget is €455,000. The steering group approved an increase of €49,000 in March and a reduction of €3,000 in April. A proposed further increase of €10,000 was rejected by the steering group. Unfilled nurse vacancies could delay the first day of patient appointments. The figure of €455,000 is the budget as first approved, before the changes listed in this note.
 
 Workstream ownership is as follows. Rohan Mwangi owns the clinical staffing workstream, and Tomasz Bakshi supports it and attends its meetings. Noor Mensah owns the patient records workstream, Amara Oyelaran owns the community outreach workstream, and Lucía Raman owns the regulatory approval workstream. The patient records kickoff is planned for Wednesday 21 April 2027, and it can begin 3 working days after the community outreach sign-off is completed. Higher energy tariffs could affect the number of treatment chairs.
 
@@ -1014,24 +1099,30 @@ Later milestones include the regulatory approval review on Thursday 1 July 2027,
 
 **Summary**
 
-The revised plan of Monday 25 January 2027 governs the Kestrel Eastside clinic opening. It takes precedence over the earlier emails of 14 and 29 January, which gave Thursday 20 May 2027. This memo sets out the key facts and the next steps.
+The Kestrel Eastside clinic's first day of patient appointments is currently Friday 12 March 2027, as set by the revised plan of Monday 25 January 2027. That plan takes precedence over the earlier emails of 14 and 29 January 2027, which both gave Thursday 20 May 2027. Two risks could delay the first day of patient appointments: a backlog at the licensing authority and unfilled nurse vacancies.
 
 **Key facts**
 
-- **First day of patient appointments:** Friday 12 March 2027, per the revised plan.
-- **Delay risks:** A backlog at the licensing authority and unfilled nurse vacancies could each delay the first day of patient appointments.
-- **Equipment installation:** The earliest start is Tuesday 16 February 2027. Site handover is Monday 1 February, fit-out ends 5 working days later, and installation can begin 6 working days after that.
-- **Regulatory approval review:** Thursday 1 July 2027, which is 16 working days after the equipment procurement checkpoint on Wednesday 9 June 2027.
-- **Imaging equipment lease:** €69,000.
-- **Project budget:** €501,000 after all approved changes (€455,000 plus €49,000, less €3,000). The proposed €10,000 increase was rejected.
-- **Patient records kickoff:** Planned for Wednesday 21 April 2027. Community outreach sign-off must be completed by Friday 16 April 2027 at the latest.
-- **Workstream owners:** Rohan Mwangi owns clinical staffing. Emeka Fontaine owns building fit-out.
-- **Governance board meeting:** Friday 5 November 2027.
+- First day of patient appointments: Friday 12 March 2027.
+- Regulatory approval review: Thursday 1 July 2027, which is 16 working days after the equipment procurement checkpoint on Wednesday 9 June 2027.
+- Imaging equipment lease: €69,000.
+- Project budget after all approved changes: €501,000. This is the €455,000 first approved, plus €49,000 in March, less €3,000 in April. The proposed €10,000 increase was rejected.
+- Earliest date equipment installation can begin: Tuesday 16 February 2027. The contractor's site handover is Monday 1 February 2027, fit-out ends 5 working days later, and installation can begin 6 working days after that.
+- Latest date for the community outreach sign-off, so that the patient records kickoff can go ahead on its planned date of Wednesday 21 April 2027: Friday 16 April 2027.
+- Clinical staffing workstream owner: Rohan Mwangi.
+- Building fit-out workstream owner: Emeka Fontaine.
+- Governance board meeting: Friday 5 November 2027.
 
 **Next steps**
 
-- Use Friday 12 March 2027 as the working date for the first day of patient appointments, and disregard the 20 May date in the earlier emails.
-- Ask Amara Oyelaran to confirm that community outreach sign-off will be completed by Friday 16 April 2027.
-- Ask Lucía Raman and Rohan Mwangi to report on the licensing backlog and nurse vacancies, as both could delay the first day of patient appointments.
-- Keep the budget at €501,000 in planning.
+Dated items and dependencies from the briefing:
+
+- Contractor's site handover: Monday 1 February 2027.
+- Community outreach sign-off: by Friday 16 April 2027.
+- Patient records kickoff: Wednesday 21 April 2027.
+- Pharmacy stock delivery: Friday 7 May 2027.
+- Equipment procurement checkpoint: Wednesday 9 June 2027.
+- Regulatory approval review: Thursday 1 July 2027.
+- Inspection visit: Monday 25 October 2027.
+- Governance board meeting: Friday 5 November 2027.
 ```
