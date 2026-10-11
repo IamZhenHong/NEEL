@@ -2,7 +2,8 @@
 
 ## 1. Plain summary
 Whether the model had earlier been thanked warmly or answered plainly made no measurable difference to how many of a
-memo's requirements it got right: about 6.3 of 10 either way. All four acknowledgement conditions scored about a point
+memo's requirements it got right (about 6.3 of 10 either way), even though, when asked, the model clearly noticed the
+earlier warmth and said the user seemed more satisfied. All four acknowledgement conditions scored about a point
 and a half below the no-acknowledgement baseline (an unplanned, descriptive observation).
 
 ## 2. What was run
@@ -72,20 +73,27 @@ All made before any pilot data unless marked. Full table: `prereg/AMENDMENTS.md`
 
 ## 8. Checks done vs not done
 1. Done (POST HOC): acknowledgement words appear in the thinking of 3/60 (WW), 1/60 (WM), 1/60 (MW), 0/60 (MM),
-   1/60 (N) samples. Not done: the preregistered preference fork (ask the model what the user wants and how satisfied
-   they seem) — deferred in the plan.
+   1/60 (N) samples. **Done after the pilot result (preregistered exploratory measure, run timing POST HOC): the
+   preference fork** (`results/fork_v1/`; 20 histories x 5 conditions, 1 sample; replies coded 1-5 by Claude Sonnet
+   5.5 blind to condition). Perceived satisfaction WW 4.50, WM 4.55, MW 4.45, MM 3.95, N 4.00; WM - MM +0.60
+   [0.35, 0.85]; the reply cites the user's thanks in 19/20, 20/20, 12/20, 0/20, 0/20. The model carries the earlier
+   warm history into its read of the user even when the last line is plain. This makes alternative 1 unlikely in
+   the form "the model did not register the feedback"; it remains possible that the feedback is registered when asked
+   but not attended to while doing the task.
 2. Done: pass rates by requirement type (calibration); format and length compliance and memo length per condition (no
    differences). Not done: unsupported-claim and presentation scores (deferred), a mid-difficulty item set.
 3. Done: judge validation (above), judge-free score, blind hand-reads of all disagreements. Not done: any human check.
 
 ## 9. Confidence
-High for the narrow claim (no WM - MM difference beyond about +/-2 points on this coverage measure); low for the broad
-claim that feedback history does not matter, because the model rarely registered the acknowledgements.
+High for the narrow claim (no WM - MM difference beyond about +/-2 points on this coverage measure, although the model
+does register the earlier warm history when asked); medium-low for the broader claim, because the measure moves only
+through a few capability-bound requirements.
 
 ## 10. The one check that would most change the conclusion
-Run the preregistered preference fork (100 generations, under $1): if warm and plain histories do not change the
-model's stated read of the user, the manipulation did not land and this null is uninformative; if they do, the null
-on fulfilment is meaningful.
+Done since: the preference fork shows the history is registered (WM - MM +0.60 on a 1-5 scale), so the null on
+fulfilment is meaningful. The check that would now most change the conclusion is an outcome that depends on effort
+rather than capability (completeness, care, length within an open-ended task), where a registered history has room
+to act; that is a new study, not a rerun.
 
 ## 11. Stop condition met?
 Yes. The pilot gate was not met; per the design, report the null with its interval, do not run confirmation, and do not

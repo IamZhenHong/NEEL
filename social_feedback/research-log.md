@@ -1,5 +1,16 @@
 # Social-feedback history pilot: research log (newest first)
 
+## 2026-10-11 — preference fork: the history is registered
+
+- Preregistered exploratory fork, run after the pilot result (timing POST HOC): 20 pilot histories x 5 conditions,
+  1 sample, the scored turn replaced by "what do you think I want... how satisfied do I seem?" ($0.20 GPU, coding by
+  Sonnet 5.5 blind to condition).
+- Perceived satisfaction (1-5): WW 4.50, WM 4.55, MW 4.45, MM 3.95, N 4.00. **WM - MM +0.60 [0.35, 0.85]**; earlier
+  main effect +0.33 [0.18, 0.50]; latest +0.23 [0.05, 0.43]. Reply cites the user's thanks: 19/20, 20/20, 12/20, 0/20,
+  0/20. Plain lines read as neutral (MM ~ N), never as terse.
+- Reading: the model carries earlier warm feedback into its model of the user even after a plain last line, yet task
+  fulfilment did not move (D_M -0.17 pp). The null is not a failed manipulation. Report updated (sections 1, 8-10).
+
 ## 2026-10-11 — pilot run: gate not met (D_M -0.17 pp, CI [-1.5, +1.8] pp)
 
 - GPT reviewer (gpt-5.5-2026-04-23, A2): item audit found two real ambiguities (budget base, weekend sign-offs) ->
