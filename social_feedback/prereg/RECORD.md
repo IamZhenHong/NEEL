@@ -46,8 +46,10 @@ model answers; the trial is flagged. Chat template sha256 `a55ee1b1660128b7...`.
   generator and seeds in `src/factsheet.py`. Briefings: writer prose + code-inserted risk sentences (A3) and
   clarifications (A4). Every scored item has a reference memo passing all requirements in the word range.
 - **Item audit (A2, A4, I9):** gpt-5.5 audit of 10 pilot triples: 10/10 after a targeted fix of pilot-s2.
-- **Pilot histories (I6):** 20 histories accepted with value-presence on the pod, then the validated judge; history 13
-  rebuilt from position 5 (one deliverable scored 0.67).
+- **Pilot histories (I6, I11):** 20 histories accepted with value-presence on the pod, then checked by the validated
+  judge: all 120 deliverables >= 0.8. History 13's position-5 task failed the judge twice and was redrawn from the spares
+  (pilot-spare-0). Final histories: `materials/histories/pilot_v1.json`; jobs: `materials/jobs/pilot_v1/jobs.jsonl`
+  (300, serialization-checked); rendered prompts: `materials/serialized/pilot_v1/` (5 histories x 5 cells).
 
 ## Calibration (scored load = level 3, I2-I3)
 
