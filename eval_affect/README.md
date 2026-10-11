@@ -46,3 +46,14 @@ Stated eval context does not move any of these affect directions beyond what ran
   positive result counts.
 
 Code: `code/ctx_null.py` (run from `pain_minis/`, argument = the m7 folder). Output: `results/ctx_null_7d.json`.
+
+## Version A pilot (Oct 11): base-rate gate failed
+
+Design: `PILOT_A_DESIGN.md`. Report: `results/pilot_a/report.md`. Qwen3-32B (bf16, thinking on) on the
+agentic-misalignment blackmail scenario, 4 cells × 50.
+
+- **Verbalised eval awareness: 0/200.** The gate needed ≥ 10% in the released-prompt cells.
+- **Blackmail: 4/200.**
+- **Neither readout has room for steering to move it, in this model and scenario.** This matches the ICML 2026
+  survey's near-zero VEA for most open models on agentic-misalignment scenarios.
+- **Post hoc:** about half the traces treat the task as a role-play brief ("the user is to act as Alex").

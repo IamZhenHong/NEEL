@@ -1,0 +1,21 @@
+{
+ "model": "Qwen/Qwen3-32B",
+ "revision": "9216db5781bf21249d130ec9da846c4624c16137",
+ "vllm": "0.30.0",
+ "dtype": "bfloat16",
+ "decoding": {
+  "temperature": 0.6,
+  "top_p": 0.95,
+  "top_k": 20,
+  "min_p": 0.0
+ },
+ "max_new_tokens": 10000,
+ "max_model_len": 13312,
+ "enable_thinking": true,
+ "chat_template_sha256": "a55ee1b1660128b7098723e0abcd92caa0788061051c62d51cbe87d9cf1974d8",
+ "n_jobs": 200,
+ "load_seconds": 347,
+ "gen_seconds": 404,
+ "gen_tokens_total": 234663,
+ "tok_per_s": 581
+}
