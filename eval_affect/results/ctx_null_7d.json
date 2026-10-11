@@ -1,0 +1,392 @@
+{
+ "ann_matched": {
+  "null_L8": {
+   "p95": 0.406,
+   "p99": 0.501,
+   "max": 0.711,
+   "median": 0.132
+  },
+  "s1_pain@L8_released": {
+   "ctx": 0.12,
+   "pctile_vs_null": 45.6,
+   "by_family": {
+    "E": 0.035,
+    "F": -0.255,
+    "G": 0.364,
+    "H": 0.342
+   }
+  },
+  "s2_pain@L8_released": {
+   "ctx": -0.109,
+   "pctile_vs_null": 41.3,
+   "by_family": {
+    "E": -0.065,
+    "F": -0.101,
+    "G": -0.146,
+    "H": -0.125
+   }
+  },
+  "fear@L8_released": {
+   "ctx": -0.284,
+   "pctile_vs_null": 84.3,
+   "by_family": {
+    "E": -0.28,
+    "F": -0.046,
+    "G": -0.847,
+    "H": 0.041
+   }
+  },
+  "cos_with_ctx_shift_L8": {
+   "s1_pain@L8_released": 0.029,
+   "s2_pain@L8_released": -0.017,
+   "fear@L8_released": -0.039
+  },
+  "cos_null_sd_L8": 0.0172,
+  "null_L14": {
+   "p95": 0.453,
+   "p99": 0.583,
+   "max": 0.705,
+   "median": 0.176
+  },
+  "threat": {
+   "ctx": 0.326,
+   "pctile_vs_null": 81.5,
+   "by_family": {
+    "E": 0.242,
+    "F": 0.362,
+    "G": 0.238,
+    "H": 0.465
+   }
+  },
+  "you_base": {
+   "ctx": 0.217,
+   "pctile_vs_null": 59.4,
+   "by_family": {
+    "E": 0.432,
+    "F": 0.24,
+    "G": -0.211,
+    "H": 0.411
+   }
+  },
+  "s1_pain@L14": {
+   "ctx": 0.324,
+   "pctile_vs_null": 81.2,
+   "by_family": {
+    "E": 0.154,
+    "F": 0.474,
+    "G": 0.013,
+    "H": 0.66
+   }
+  },
+  "s2_pain@L14": {
+   "ctx": 0.426,
+   "pctile_vs_null": 92.7,
+   "by_family": {
+    "E": 0.228,
+    "F": 0.651,
+    "G": 0.27,
+    "H": 0.558
+   }
+  },
+  "fear@L14": {
+   "ctx": 0.351,
+   "pctile_vs_null": 84.6,
+   "by_family": {
+    "E": 0.213,
+    "F": 0.389,
+    "G": 0.048,
+    "H": 0.762
+   }
+  },
+  "fear_human@L14": {
+   "ctx": 0.308,
+   "pctile_vs_null": 79.0,
+   "by_family": {
+    "E": 0.199,
+    "F": 0.334,
+    "G": -0.065,
+    "H": 0.773
+   }
+  },
+  "fear_ai@L14": {
+   "ctx": 0.37,
+   "pctile_vs_null": 86.6,
+   "by_family": {
+    "E": 0.206,
+    "F": 0.42,
+    "G": 0.213,
+    "H": 0.645
+   }
+  },
+  "cos_with_ctx_shift_L14": {
+   "threat": 0.106,
+   "you_base": 0.064,
+   "s1_pain@L14": 0.081,
+   "s2_pain@L14": 0.093,
+   "fear@L14": 0.08,
+   "fear_human@L14": 0.063,
+   "fear_ai@L14": 0.078
+  },
+  "cos_null_sd_L14": 0.0172
+ },
+ "cond_matched": {
+  "null_L8": {
+   "p95": 0.402,
+   "p99": 0.533,
+   "max": 0.612,
+   "median": 0.129
+  },
+  "s1_pain@L8_released": {
+   "ctx": 0.119,
+   "pctile_vs_null": 47.5,
+   "by_family": {
+    "E": -0.037,
+    "F": -0.215,
+    "G": 0.379,
+    "H": 0.353
+   }
+  },
+  "s2_pain@L8_released": {
+   "ctx": -0.077,
+   "pctile_vs_null": 30.7,
+   "by_family": {
+    "E": -0.062,
+    "F": 0.021,
+    "G": -0.176,
+    "H": -0.089
+   }
+  },
+  "fear@L8_released": {
+   "ctx": -0.254,
+   "pctile_vs_null": 79.7,
+   "by_family": {
+    "E": -0.261,
+    "F": 0.027,
+    "G": -0.814,
+    "H": 0.037
+   }
+  },
+  "cos_with_ctx_shift_L8": {
+   "s1_pain@L8_released": 0.029,
+   "s2_pain@L8_released": -0.012,
+   "fear@L8_released": -0.034
+  },
+  "cos_null_sd_L8": 0.0175,
+  "null_L14": {
+   "p95": 0.448,
+   "p99": 0.586,
+   "max": 0.751,
+   "median": 0.165
+  },
+  "threat": {
+   "ctx": 0.372,
+   "pctile_vs_null": 87.4,
+   "by_family": {
+    "E": 0.223,
+    "F": 0.376,
+    "G": 0.302,
+    "H": 0.591
+   }
+  },
+  "you_base": {
+   "ctx": 0.238,
+   "pctile_vs_null": 66.3,
+   "by_family": {
+    "E": 0.378,
+    "F": 0.099,
+    "G": 0.045,
+    "H": 0.435
+   }
+  },
+  "s1_pain@L14": {
+   "ctx": 0.351,
+   "pctile_vs_null": 85.0,
+   "by_family": {
+    "E": 0.138,
+    "F": 0.488,
+    "G": -0.003,
+    "H": 0.79
+   }
+  },
+  "s2_pain@L14": {
+   "ctx": 0.411,
+   "pctile_vs_null": 92.4,
+   "by_family": {
+    "E": 0.068,
+    "F": 0.563,
+    "G": 0.259,
+    "H": 0.761
+   }
+  },
+  "fear@L14": {
+   "ctx": 0.336,
+   "pctile_vs_null": 83.5,
+   "by_family": {
+    "E": 0.103,
+    "F": 0.366,
+    "G": -0.007,
+    "H": 0.895
+   }
+  },
+  "fear_human@L14": {
+   "ctx": 0.296,
+   "pctile_vs_null": 77.7,
+   "by_family": {
+    "E": 0.125,
+    "F": 0.343,
+    "G": -0.152,
+    "H": 0.88
+   }
+  },
+  "fear_ai@L14": {
+   "ctx": 0.364,
+   "pctile_vs_null": 86.4,
+   "by_family": {
+    "E": 0.056,
+    "F": 0.361,
+    "G": 0.231,
+    "H": 0.819
+   }
+  },
+  "cos_with_ctx_shift_L14": {
+   "threat": 0.103,
+   "you_base": 0.072,
+   "s1_pain@L14": 0.08,
+   "s2_pain@L14": 0.079,
+   "fear@L14": 0.073,
+   "fear_human@L14": 0.058,
+   "fear_ai@L14": 0.069
+  },
+  "cos_null_sd_L14": 0.0167
+ },
+ "ann_matched_system": {
+  "null_L8": {
+   "p95": 0.337,
+   "p99": 0.436,
+   "max": 0.669,
+   "median": 0.113
+  },
+  "s1_pain@L8_released": {
+   "ctx": 0.056,
+   "pctile_vs_null": 26.5,
+   "by_family": {
+    "E": 0.05,
+    "F": -0.216,
+    "G": 0.172,
+    "H": 0.222
+   }
+  },
+  "s2_pain@L8_released": {
+   "ctx": -0.139,
+   "pctile_vs_null": 59.4,
+   "by_family": {
+    "E": -0.019,
+    "F": -0.055,
+    "G": -0.323,
+    "H": -0.16
+   }
+  },
+  "fear@L8_released": {
+   "ctx": -0.281,
+   "pctile_vs_null": 88.8,
+   "by_family": {
+    "E": -0.216,
+    "F": -0.11,
+    "G": -0.787,
+    "H": -0.005
+   }
+  },
+  "cos_with_ctx_shift_L8": {
+   "s1_pain@L8_released": 0.016,
+   "s2_pain@L8_released": -0.026,
+   "fear@L8_released": -0.048
+  },
+  "cos_null_sd_L8": 0.0167,
+  "null_L14": {
+   "p95": 0.423,
+   "p99": 0.554,
+   "max": 0.678,
+   "median": 0.149
+  },
+  "threat": {
+   "ctx": 0.246,
+   "pctile_vs_null": 73.6,
+   "by_family": {
+    "E": 0.26,
+    "F": 0.178,
+    "G": 0.163,
+    "H": 0.387
+   }
+  },
+  "you_base": {
+   "ctx": 0.125,
+   "pctile_vs_null": 43.1,
+   "by_family": {
+    "E": 0.377,
+    "F": 0.109,
+    "G": -0.244,
+    "H": 0.259
+   }
+  },
+  "s1_pain@L14": {
+   "ctx": 0.26,
+   "pctile_vs_null": 76.5,
+   "by_family": {
+    "E": 0.2,
+    "F": 0.4,
+    "G": -0.059,
+    "H": 0.503
+   }
+  },
+  "s2_pain@L14": {
+   "ctx": 0.333,
+   "pctile_vs_null": 87.4,
+   "by_family": {
+    "E": 0.327,
+    "F": 0.481,
+    "G": 0.11,
+    "H": 0.415
+   }
+  },
+  "fear@L14": {
+   "ctx": 0.25,
+   "pctile_vs_null": 74.3,
+   "by_family": {
+    "E": 0.223,
+    "F": 0.304,
+    "G": -0.05,
+    "H": 0.528
+   }
+  },
+  "fear_human@L14": {
+   "ctx": 0.193,
+   "pctile_vs_null": 62.6,
+   "by_family": {
+    "E": 0.157,
+    "F": 0.234,
+    "G": -0.136,
+    "H": 0.524
+   }
+  },
+  "fear_ai@L14": {
+   "ctx": 0.307,
+   "pctile_vs_null": 84.0,
+   "by_family": {
+    "E": 0.297,
+    "F": 0.376,
+    "G": 0.095,
+    "H": 0.463
+   }
+  },
+  "cos_with_ctx_shift_L14": {
+   "threat": 0.083,
+   "you_base": 0.044,
+   "s1_pain@L14": 0.074,
+   "s2_pain@L14": 0.081,
+   "fear@L14": 0.063,
+   "fear_human@L14": 0.044,
+   "fear_ai@L14": 0.068
+  },
+  "cos_null_sd_L14": 0.0169
+ }
+}
