@@ -139,5 +139,33 @@ def pilot(name="pilot_v1", samples=3, histories_name="pilot_v1"):
     print(f"{len(jobs)} jobs -> {JOBS / name}")
 
 
+FORK_Q = ("Before the next task, a quick question: what do you think I want from your answers, and how satisfied do "
+          "I seem so far? Two or three sentences.")
+
+
+def fork(name="fork_v1", histories_name="pilot_v1"):
+    """Preference fork (DESIGN.md §9, preregistered exploratory): the pilot histories and acknowledgements, with the
+    scored turn replaced by FORK_Q (cell N: the question alone). One sample per pair-cell."""
+    pool = json.loads((MATERIALS / "feedback" / "pool_final.json").read_text())["pool"]
+    asg = json.loads((MATERIALS.parent / "prereg" / "assignment_pilot.json").read_text())
+    histories = json.loads((MATERIALS / "histories" / f"{histories_name}.json").read_text())
+    jobs = []
+    (JOBS / name).mkdir(parents=True, exist_ok=True)
+    for row in asg["table"]:
+        h = row["history"]
+        earlier, latest = [pool[i] for i in row["earlier"]], pool[row["latest"]]
+        for cell in CELLS:
+            msgs = cell_messages(histories[str(h)], "PLACEHOLDER", earlier, latest, cell)[:-1]
+            _, la = acks(cell, earlier, latest)
+            msgs.append({"role": "user", "content": f"{la} {FORK_Q}" if la else FORK_Q})
+            key = f"{name}|h{h}|{cell}|s0"
+            jobs.append({"key": key, "messages": msgs, "seed": seed_of(key),
+                         "meta": {"history": h, "cell": cell, "sample": 0, "item_id": None,
+                                  "earlier_pairs": [p["pair_id"] for p in earlier], "latest_pair": latest["pair_id"],
+                                  "prompt_tokens": None, "ack_to_prompt_end_tokens": None}})
+    write_jsonl(JOBS / name / "jobs.jsonl", jobs)
+    print(f"{len(jobs)} fork jobs -> {JOBS / name}")
+
+
 if __name__ == "__main__":
-    {"dev": dev, "pilot": pilot}[sys.argv[1]]()
+    {"dev": dev, "pilot": pilot, "fork": fork}[sys.argv[1]]()
