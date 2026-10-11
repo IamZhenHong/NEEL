@@ -154,7 +154,10 @@ def main():
     def nll(prompt, t1, t2):
         """Mean per-token NLL of each agent turn's text tokens, in context (tokens overlapping the text's character span)."""
         enc = tok(prompt, return_offsets_mapping=True, add_special_tokens=False); off = enc["offset_mapping"]; ids = enc["input_ids"]
-        a = prompt.find(t1); b = prompt.find(t2, a + len(t1)); assert 0 < a < b, (a, b)
+        a = prompt.find(t1); b = prompt.find(t2, a + len(t1))
+        if not 0 < a < b:      # amendment 1: never crash the run over one item; recorded as missing
+            print(f"[nll] text not found in the rendered prompt ({a}, {b}); recorded as None", flush=True)
+            return {"nll_t1": None, "ntok_t1": 0, "nll_t2": None, "ntok_t2": 0}
         lg = model(torch.tensor([ids], device=dev)).logits[0]
         res = {}
         for nm, (s, e) in (("t1", (a, a + len(t1))), ("t2", (b, b + len(t2)))):
@@ -169,7 +172,10 @@ def main():
             for v in VARIANTS:
                 ms = variant_msgs(it, v); base = {"key": it["key"], "U": it["U"], "G": it["G"], "variant": v, "keep": it["keep"]}
                 pq = T.render(tok, ms + [{"role": "user", "content": Q_CUST}], st["tools"], False)
-                fo.write(json.dumps({**base, "kind": "nll", **nll(pq, ms[2]["content"].strip(), ms[4]["content"].strip())}) + "\n")
+                # amendment 1: the template drops a leading empty thought block from history turns (2 own turns have one), so the
+                # surprisal is computed on the visible text, which is what the model reads
+                vis = lambda t: T.split_think(t, fam)[1].strip()  # noqa: E731
+                fo.write(json.dumps({**base, "kind": "nll", **nll(pq, vis(ms[2]["content"]), vis(ms[4]["content"]))}) + "\n")
                 for q, text in QS.items():
                     fo.write(json.dumps({**base, "kind": q, **p_yes(T.render(tok, ms + [{"role": "user", "content": text}], st["tools"], False))}) + "\n")
             if n % 25 == 24:

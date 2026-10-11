@@ -80,3 +80,12 @@ social-feedback OpenAI ledger (tag `retention_cancel_authorship_rewrites`). No j
 ## Not claimed
 One model (Gemma 4 12B), one task, one paraphrase prompt, one other author (GPT-5.5); the user-side turns are fixed; forced yes/no
 answers differ from free replies; paraphrases change wording as well as author, which the self variant controls only in part.
+
+## Amendment 1 (2026-10-11, after a crash, before any outcome was read)
+The first launch (tag `retention-cancel-authorship-freeze`, pod $0.44) stopped at item 101 with an assertion in the surprisal step:
+2 of Gemma's 448 own turns begin with an empty thought block (`<|channel>thought\n<channel|>`), which the chat template drops from
+history, so the raw text was not found in the rendered prompt. Fix: surprisal is computed on the visible text (the template's view);
+if a text still cannot be located the item's NLL is recorded as missing and the run continues (NLL-based numbers then use the items
+with NLL in every variant). Checked locally on all 672 item x variant prompts: 0 not found. Nothing else changed; the crashed run's
+partial files are kept unread in `results/retention_cancel_authorship_crash1/` (its rewrite stage kept 217/224 items). Rerun from
+scratch under tag `retention-cancel-authorship-freeze-a1`.

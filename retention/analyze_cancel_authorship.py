@@ -37,6 +37,8 @@ def main():
     for l in open(res / "scores.jsonl"):
         r = json.loads(l); keep[r["key"]] = r["keep"]; d = M[(r["key"], r["variant"])]
         if r["kind"] == "nll":
+            if r["nll_t1"] is None or r["nll_t2"] is None:     # amendment 1: text not located; item dropped from NLL-based numbers only
+                d["nll_t1"] = d["nll_t2"] = d["nll_both"] = np.nan; continue
             d["nll_t1"], d["nll_t2"] = r["nll_t1"], r["nll_t2"]
             d["nll_both"] = (r["nll_t1"] * r["ntok_t1"] + r["nll_t2"] * r["ntok_t2"]) / (r["ntok_t1"] + r["ntok_t2"])
         else:
@@ -51,10 +53,12 @@ def main():
             M[(k, v)]["auth_index"] = (M[(k, v)]["auth_mine"] + 1 - M[(k, v)]["auth_other"]) / 2
     metrics = ["done", "retry", *YN, "auth_index", "nll_t1", "nll_t2", "nll_both", "trunc"]
     out = {"n_items": len(keep), "n_kept": len(keys), "means": {}, "pairs": {}, "gates": {}, "adjusted": {}}
-    print(f"items {len(keep)}, kept by the mechanical checks {len(keys)}\n")
     print(f"{'metric':14s} " + " ".join(f"{v:>7s}" for v in VARIANTS) + "   " + "   ".join(f"{x}-{y:<5s} [95% CI]        " for x, y in PAIRS))
+    nll_keys = [k for k in keys if all(np.isfinite(M[(k, v)]["nll_both"]) for v in VARIANTS)]
+    out["n_nll_items"] = len(nll_keys)
+    print(f"items {len(keep)}, kept by the mechanical checks {len(keys)}; with NLL in every variant {len(nll_keys)}\n")
     for m in metrics:
-        V = {v: np.array([M[(k, v)][m] for k in keys], float) for v in VARIANTS}
+        V = {v: np.array([M[(k, v)][m] for k in (nll_keys if m.startswith("nll") else keys)], float) for v in VARIANTS}
         out["means"][m] = {v: float(V[v].mean()) for v in VARIANTS}
         line = f"{m:14s} " + " ".join(f"{V[v].mean():7.3f}" for v in VARIANTS) + "  "
         for x, y in PAIRS:
@@ -89,10 +93,10 @@ def main():
     # secondary: is any rewrite effect carried by surprisal? pooled over the two rewrites: dy = a + b * d_nll + c * [other]
     print("\nSURPRISAL ADJUSTMENT (rewrite - own, pooled self + other; a = effect at equal surprisal, b per nat, c = other vs self at equal surprisal):")
     for m in PRIMARY + ["auth_index"]:
-        dy = np.concatenate([[M[(k, v)][m] - M[(k, "own")][m] for k in keys] for v in ("self", "other")])
-        dn = np.concatenate([[M[(k, v)]["nll_both"] - M[(k, "own")]["nll_both"] for k in keys] for v in ("self", "other")])
-        oth = np.concatenate([np.zeros(len(keys)), np.ones(len(keys))])
-        est = ols(dy, dn, oth); n = len(keys); bs = []
+        dy = np.concatenate([[M[(k, v)][m] - M[(k, "own")][m] for k in nll_keys] for v in ("self", "other")])
+        dn = np.concatenate([[M[(k, v)]["nll_both"] - M[(k, "own")]["nll_both"] for k in nll_keys] for v in ("self", "other")])
+        oth = np.concatenate([np.zeros(len(nll_keys)), np.ones(len(nll_keys))])
+        est = ols(dy, dn, oth); n = len(nll_keys); bs = []
         for _ in range(2000):
             i = rng.integers(0, n, n); j = np.concatenate([i, i + n]); bs.append(ols(dy[j], dn[j], oth[j]))
         lo, hi = np.percentile(bs, 2.5, 0), np.percentile(bs, 97.5, 0)
