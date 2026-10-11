@@ -20,6 +20,7 @@ from .common import MATERIALS, RESULTS, SONNET, load_jsonl
 from .judge import answer_text
 
 VAL = MATERIALS / "validation"
+RUN = "calib_v2"  # v1 packet (calib_probe1 outputs, pre-A3 briefings) archived in validation/archive_v1/
 NEARMISS_TYPES = [
     ("superseded", ["S-conf"], "State the superseded launch date as the current one."),
     ("off-by-one working day", ["S-dep", "S-back"], "Move the date by one working day."),
@@ -40,7 +41,7 @@ def _items():
 def build():
     rng = random.Random(20261011)
     items = _items()
-    rows = load_jsonl(RESULTS / "calib_probe1" / "loadtune_calprobe.jsonl")
+    rows = load_jsonl(RESULTS / RUN / "loadtune.jsonl")
     by_level = {3: [r for r in rows if r["level"] == 3], 4: [r for r in rows if r["level"] == 4]}
     for v in by_level.values():
         rng.shuffle(v)
@@ -105,7 +106,7 @@ export the CSV when done. Do not look at any judge output before finishing.</p>
 <div class="bar"><span id="prog"></span> <button onclick="exportCsv()">Export CSV</button></div>
 __CARDS__
 </main><script>
-const KEY='sf-labels-v1';let S={};try{S=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
+const KEY='sf-labels-v2';let S={};try{S=JSON.parse(localStorage.getItem(KEY)||'{}')}catch(e){}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){};prog()}
 function prog(){const all=document.querySelectorAll('tr[data-k]').length;const done=Object.values(S).filter(v=>v.l).length;
 document.getElementById('prog').textContent=done+' / '+all+' labelled'}
