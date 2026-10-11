@@ -149,6 +149,7 @@ def main():
     ap.add_argument("--hist-split", help="history-only mode: build histories for this item split (e.g. pilot)")
     ap.add_argument("--spare-split", default="pilotspare")
     ap.add_argument("--init", help="JSON with accepted prefixes for a rebuild (history-only mode)")
+    ap.add_argument("--skip-screen", action="store_true", help="full run without the Qwen screen (pool frozen, I7)")
     ap.add_argument("--load-split", default="calibration",
                     help="item split for load tuning after the freshly built histories (full run)")
     ap.add_argument("--probe", help="item split to load-tune (cell N, 3 samples) after the saved calibration histories "
@@ -187,9 +188,10 @@ def main():
         return
     state = build_histories(gen, items, spares)
     write_jsonl(out / "histories.jsonl", [{"history": h, **v} for h, v in state.items()])
-    pairs = json.loads((MATERIALS / "feedback" / "pairs_step3.json").read_text())["kept"]
-    write_jsonl(out / "qwen_screen.jsonl", screen(gen, pairs, state))
-    print("[screen] done", flush=True)
+    if not a.skip_screen:
+        pairs = json.loads((MATERIALS / "feedback" / "pairs_step3.json").read_text())["kept"]
+        write_jsonl(out / "qwen_screen.jsonl", screen(gen, pairs, state))
+        print("[screen] done", flush=True)
     load_items = items if a.load_split == "calibration" else load_jsonl(MATERIALS / "items" / f"{a.load_split}.jsonl")
     rows, jobs = load_tuning(gen, load_items, state, levels=tuple(sorted({it["level"] for it in load_items
                                                                           if it["role"] == "scored"})))

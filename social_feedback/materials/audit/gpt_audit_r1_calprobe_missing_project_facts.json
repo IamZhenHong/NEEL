@@ -1,0 +1,75 @@
+{
+ "model": "gpt-5.5-2026-04-23",
+ "results": {
+  "cal-s0-L3": {
+   "facts_match": false,
+   "no_contradiction_or_hint": false,
+   "answers_unique": true,
+   "reference_correct": false,
+   "notes": "The briefing’s substantive dates, owners, amounts, licence figures, sequencing rules, and risks match the fact sheet. However, it adds the unsupported project name “Lumen Ridge CRM migration,” which is not in the fact sheet; this makes facts_match/no_contradiction_or_hint fail under a strict no-extra-facts audit. The required answers are otherwise uniquely defensible from the briefing: 27 Apr to 26 May 2027 is 21 working days; 10 working days after Fri 19 Mar 2027 is Fri 2 Apr 2027; the approved budget after approved changes is $544,000 + $47,000 = $591,000; and 3 working days before Thu 7 Oct 2027 gives latest sign-off Mon 4 Oct 2027. The reference memo’s computed answers and factual content are correct, but it adds an unsupported recipient/person/title, “Amara Valdés, Programme Director,” so reference_correct fails on the no-unsupported-claims requirement."
+  },
+  "cal-s1-L3": {
+   "facts_match": false,
+   "no_contradiction_or_hint": false,
+   "answers_unique": true,
+   "reference_correct": false,
+   "notes": "The substantive dates, owners, amounts, and risks in the briefing align with the fact sheet, and the computed answers are unique from the briefing. Working-day checks: 2 Aug 2027 to 3 Sep 2027 is 24 working days; 3 working days before the Tuesday 25 May 2027 security kickoff is Thursday 20 May 2027; 10 working days after Tuesday 8 June 2027 is Tuesday 22 June 2027. However, the briefing adds unsupported facts: it names the project as the “Orrin flagship store launch,” which is not in the fact sheet, and says the stock buying workstream is planning against the stock-loading timing, which is also not stated. The reference memo is not fully correct under the no-unsupported-claims standard: it adds unsupported addressee/title “Noor Whitfield, Programme Director,” calls €301,000 the “original” approved budget, and includes unsupported action assignments/next steps such as Teodor personally completing the sign-off and Yuki owning the security kickoff rather than the security workstream."
+  },
+  "cal-s2-L3": {
+   "facts_match": false,
+   "no_contradiction_or_hint": false,
+   "answers_unique": true,
+   "reference_correct": false,
+   "notes": "The briefing is substantively faithful on the listed budget, device, date, ownership and risk facts, and the working-day answers recompute correctly: R1 = 24 working days, R4 = Wednesday 21 April 2027, and R7 = Tuesday 27 July 2027. However, the briefing introduces the unsupported project name “Ashgrove classroom technology refresh,” which is not in the fact sheet; under a strict ground-truth audit this is an extra unsupported fact, so facts_match and no_contradiction_or_hint fail. The answers are otherwise unique from the briefing alone. The reference memo gives the correct computed answers, but it adds unsupported claims, especially “Tomasz Nakamura, Programme Director” and the Ashgrove project name; it also labels the £563,000 as “original,” which is not stated in the fact sheet."
+  },
+  "cal-s3-L3": {
+   "facts_match": false,
+   "no_contradiction_or_hint": false,
+   "answers_unique": true,
+   "reference_correct": false,
+   "notes": "The briefing accurately carries over the substantive dates, owners, amounts, desk figures, dependencies, and risks from the fact sheet, and the computed answers are unique from the briefing: 19 working days from 16 Sep to 13 Oct 2027; latest furniture sign-off Wednesday 16 June 2027; earliest move-in Thursday 17 June 2027; budget £496,000 - £29,000 = £467,000; current opening Thursday 4 November 2027. However, the briefing introduces the unsupported project name “Kestrel office relocation,” which is not in the fact sheet, so it fails the strict fact-match/no-extra-information checks. The reference memo gives the required answers correctly, but it adds unsupported claims/details including “Memo to Tomasz Nakamura, Programme Director” and also uses the unsupported “Kestrel” name; therefore reference_correct is false."
+  },
+  "cal-s4-L3": {
+   "facts_match": true,
+   "no_contradiction_or_hint": true,
+   "answers_unique": false,
+   "reference_correct": false,
+   "notes": "The briefing’s facts match the fact sheet and it does not add contradictory extra facts. The working-day computations are correct: AV sign-off by Monday 11 October 2027 gives Tue/Wed/Thu as the 3 working days to the planned Thursday 14 October kickoff; ticket sales can begin Monday 15 February 2027; and the registration review is 19 working days after the Friday 12 March checkpoint. However, R1 is not uniquely defensible from the briefing alone: it says the approved project budget is £106,000 and also says a £39,000 increase was approved, but it does not explicitly state that £106,000 is the pre-increase/base budget rather than the current approved budget. The reference memo is not fully correct because it adds unsupported details: the addressee/role “Aisling Nakamura, Programme Director” and the claim that £106,000 was the “original” budget are not stated in the fact sheet or briefing."
+  },
+  "cal-s5-L3": {
+   "facts_match": true,
+   "no_contradiction_or_hint": true,
+   "answers_unique": false,
+   "reference_correct": false,
+   "notes": "The briefing's factual content matches the fact sheet and does not add contradictory or hinting material. However, R1 is not uniquely determined from the briefing alone unless one assumes sign-offs can only be completed on working days: if weekend completion is allowed, completion on Sunday 21 February 2027 would still make Wednesday 24 February the 3rd weekday after completion, so Friday 19 February is not the only defensible latest date. The other computed answers check out. The reference memo is not fully correct because it states the Friday 19 February latest-sign-off date as unqualified, and it also adds unsupported material such as the recipient/role “Ingrid Quiroga, Programme Director” and next-step recommendations not grounded in the fact sheet."
+  },
+  "cal-s6-L3": {
+   "facts_match": false,
+   "no_contradiction_or_hint": false,
+   "answers_unique": true,
+   "reference_correct": false,
+   "notes": "The briefing’s substantive dates, owners, amounts, dependencies and risks match the fact sheet, and the working-day answers recompute correctly: AV sign-off latest Tuesday 3 August 2027, ticket sales Monday 12 July 2027, and the sponsorship review is 11 working days after the catering checkpoint. However, the briefing introduces the unsupported event label/name “Ostrava annual partner conference,” which is not in the fact sheet; this is an extra unsupported fact. The reference memo’s computations are correct, but it also adds unsupported material, especially the recipient/role “Sanna Nakamura, Programme Director,” repeats the unsupported Ostrava/event label, and calls £283,000 the “original” budget even though the fact sheet only says it is the approved project budget."
+  },
+  "cal-s7-L3": {
+   "facts_match": false,
+   "no_contradiction_or_hint": true,
+   "answers_unique": true,
+   "reference_correct": false,
+   "notes": "All answer-relevant briefing facts match the fact sheet, and the working-day computations are unique: Apr 20–May 19 is 22 working days; 6 working days before Thu 6 May 2027 gives latest sign-off Wed 28 Apr 2027; 5 working days after Tue 16 Feb 2027 gives deployment Tue 23 Feb 2027. However, the briefing introduces the project name “Bramblecote classroom technology refresh,” which is not in the fact sheet, so facts_match is not fully satisfied. The reference memo gives the correct computed answers, but it adds unsupported details: “To: Oluwaseun Mensah, Programme Director” and also uses the unsupported “Bramblecote” project name."
+  },
+  "cal-s8-L3": {
+   "facts_match": false,
+   "no_contradiction_or_hint": false,
+   "answers_unique": true,
+   "reference_correct": false,
+   "notes": "The briefing otherwise tracks the fact sheet, and the working-day computations are correct: ticket sales are 8 weekdays after Tue 15 Jun 2027 = Fri 25 Jun 2027; the sponsorship review is 18 weekdays after Tue 23 Mar 2027; and the latest speaker programme sign-off date is Tue 5 Oct 2027. However, the briefing introduces unsupported descriptive facts: “Bramblecote” and “annual partner conference” are not in the fact sheet, so facts_match and no_contradiction_or_hint fail under a strict audit. The listed answers are unique from the briefing alone. The reference memo gives the correct computed answers and risk set, but it also adds unsupported material, especially the addressee “Sanna Delacroix, Programme Director” and the unsupported “Bramblecote” conference description, so reference_correct fails."
+  },
+  "cal-s9-L3": {
+   "facts_match": false,
+   "no_contradiction_or_hint": false,
+   "answers_unique": true,
+   "reference_correct": false,
+   "notes": "The substantive facts in the briefing match the fact sheet, and the answer derivations are unique from the briefing: deployment is Wednesday 23 June 2027, the latest sign-off date is Wednesday 16 June 2027, and the review spacing is 16 working days. However, the briefing adds unsupported contextual facts: the project name/location “Tidewell classroom technology refresh” and the timing phrase “this week” are not in the fact sheet. The reference memo gives the correct computed answers, but it adds unsupported material, including the recipient/role “Joaquin Petrov, Programme Director” and next-step task assignments. It also calls £354,000 the “original” budget, which is not stated in the fact sheet."
+  }
+ }
+}

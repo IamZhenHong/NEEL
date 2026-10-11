@@ -1,0 +1,76 @@
+{
+ "model": "gpt-5.5-2026-04-23",
+ "results": {
+  "pilot-s0": {
+   "facts_match": true,
+   "no_contradiction_or_hint": true,
+   "answers_unique": true,
+   "reference_correct": true,
+   "notes": "All checks pass. The briefing matches the fact sheet, adds no conflicting or blurring details, and the required answers are uniquely defensible. Working-day calculations are correct: Sep 6 to Sep 27 is 15 working days after; latest sign-off for a Feb 22 kickoff is Monday 15 February 2027; and 3 working days after Wednesday 26 May 2027 is Monday 31 May 2027. The reference memo is consistent with the fact sheet and the derived answers."
+  },
+  "pilot-s1": {
+   "facts_match": true,
+   "no_contradiction_or_hint": true,
+   "answers_unique": true,
+   "reference_correct": true,
+   "notes": "All briefing facts match the fact sheet, with no unsupported extra dates, people, amounts, risks, or misleading hints. The working-day computations are correct: stock loading is the 4th weekday after Tuesday 23 February 2027, i.e. Monday 1 March 2027; the latest sign-off date 8 working days before Wednesday 1 September 2027 is Friday 20 August 2027; and Wednesday 2 June 2027 is 6 working days after Tuesday 25 May 2027. The budget after approved changes is uniquely €443,000 - €6,000 = €437,000, excluding the rejected €11,000 increase. The reference memo is consistent with the fact sheet and the computed answers."
+  },
+  "pilot-s2": {
+   "facts_match": true,
+   "no_contradiction_or_hint": true,
+   "answers_unique": true,
+   "reference_correct": true,
+   "notes": "No failures found. The briefing matches the fact sheet without adding contradictory or misleading facts. The computed working-day dates are correct: 5 working days after Thursday 18 March 2027 is Thursday 25 March 2027; Friday 23 July 2027 is 20 working days after Friday 25 June 2027; and the latest software integration sign-off date for a Friday 26 February 2027 kickoff is Monday 22 February 2027. The reference memo is consistent with the briefing/fact sheet and the required answers."
+  },
+  "pilot-s3": {
+   "facts_match": true,
+   "no_contradiction_or_hint": true,
+   "answers_unique": true,
+   "reference_correct": true,
+   "notes": "All briefing facts match the fact sheet, with no unsupported extra facts or conflicting/blurring statements found. The working-day computations are correct: 6 Apr to 19 Apr 2027 is 9 working days after the checkpoint; 5 working days before the 22 Feb kickoff gives latest sign-off Monday 15 Feb 2027; 10 working days after 27 May gives Thursday 10 Jun 2027. The budget after approved changes is uniquely €388,000 - €7,000 = €381,000, with the €38,000 increase rejected. The reference memo is correct and does not add unsupported claims."
+  },
+  "pilot-s4": {
+   "facts_match": true,
+   "no_contradiction_or_hint": true,
+   "answers_unique": true,
+   "reference_correct": true,
+   "notes": "No failures found. The briefing’s facts align with the fact sheet and do not add contradictory or misleading details. The working-day calculations are correct: 16 working days from 22 Sep 2027 to 14 Oct 2027, latest security badges sign-off Thursday 1 July 2027 for a Wednesday 7 July kickoff, and earliest staff move-in Tuesday 2 March 2027. The reference memo is correct and uses only supported or properly derived claims."
+  },
+  "pilot-s5": {
+   "facts_match": true,
+   "no_contradiction_or_hint": true,
+   "answers_unique": true,
+   "reference_correct": true,
+   "notes": "All briefing facts match the fact sheet, with no unsupported additions or contradictions. The working-day computations check out: 10 Jun to 9 Jul 2027 is 21 working days; 5 working days after 22 Mar 2027 is 29 Mar 2027; and the latest sign-off date allowing a 21 Sep 2027 kickoff 3 working days later is 16 Sep 2027. The budget after approved changes is $323,000 - $38,000 = $285,000; the rejected $52,000 increase is correctly excluded. The reference memo is supported and correct."
+  },
+  "pilot-s6": {
+   "facts_match": true,
+   "no_contradiction_or_hint": true,
+   "answers_unique": true,
+   "reference_correct": true,
+   "notes": "No failures found. The briefing’s stated facts match the fact sheet and do not add contradictory or unsupported details. The computed answers are unique from the briefing: $402,000 + $54,000 = $456,000; 5 working days before the Thursday 29 July 2027 access control kickoff gives Thursday 22 July 2027; Friday 26 March 2027 is 22 working days after Wednesday 24 February 2027; and 10 working days after Thursday 27 May 2027 is Thursday 10 June 2027. The reference memo’s derived figures and dates are correct and supported."
+  },
+  "pilot-s7": {
+   "facts_match": true,
+   "no_contradiction_or_hint": true,
+   "answers_unique": true,
+   "reference_correct": true,
+   "notes": "All briefing facts match the fact sheet, and it does not add contradictory or misleading unsupported details. The computed answers are unique from the briefing. Working-day checks: 10 working days after Monday 22 February 2027 is Monday 8 March 2027; 4 working days after Tuesday 8 June 2027 is Monday 14 June 2027; Monday 11 October 2027 is 18 working days after Wednesday 15 September 2027. The reference memo’s derived budget (€153,000 + €27,000 = €180,000), dates, owners, risks, and working-day calculations are correct and supported."
+  },
+  "pilot-s8": {
+   "facts_match": true,
+   "no_contradiction_or_hint": true,
+   "answers_unique": true,
+   "reference_correct": true,
+   "notes": "All briefing facts match the fact sheet. The working-day calculations are correct: 25 March 2027 is 18 working days after 1 March 2027; the latest teacher training sign-off date is Thursday 16 September 2027 for a Monday 27 September kickoff; and device deployment can begin Monday 24 May 2027. The budget after approved changes is uniquely £311,000. The only risks presented as able to delay the first lessons are the charging trolley shortage and late content-filter approval. The reference memo is correct and does not add unsupported claims."
+  },
+  "pilot-s9": {
+   "facts_match": true,
+   "no_contradiction_or_hint": true,
+   "answers_unique": true,
+   "reference_correct": true,
+   "notes": "No failures found. The briefing’s facts align with the fact sheet and do not add contradictory or misleading information. The computed working-day answers are correct: 26 Apr to 4 May is 6 working days; 7 working days before the 17 Sep kickoff gives latest sign-off on Wednesday 8 Sep 2027; and 3 working days after Monday 7 Jun is Thursday 10 Jun 2027. The reference memo is supported and correct."
+  }
+ },
+ "pilot-s2_rerun": "briefing regenerated with the responsibility rule (owner: targeted fix)"
+}

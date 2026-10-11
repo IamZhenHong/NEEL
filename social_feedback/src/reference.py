@@ -14,7 +14,9 @@ from .valuecheck import value_coverage
 
 PROMPT = """{task}
 
-Correct answers (state each one clearly; do not add facts that are not in the briefing, and do not characterise overall status such as "on track" beyond what the briefing says):
+Correct answers (state each one clearly). Add nothing that is not in the briefing: no new actions, owners or \
+assignments under Next steps (only restate dated items and dependencies from the briefing), no status judgements such \
+as "on track", and no labels for figures that the briefing does not use:
 {answers}
 
 Aim for about {mid} words, counting the headings, and never more than {hi}: be brief, one or two sentences per point. Return only the memo."""

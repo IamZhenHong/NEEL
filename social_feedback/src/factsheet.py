@@ -388,6 +388,14 @@ def _sample(seed, load="scored", level=0):
         "dependency": {"A": sc["A"], "B": sc["B"], "n_working_days": n_dep, "anchor_date_text": dep_anchor,
                        "rule": dep_rule},
         "risks": {"launch": r_launch, "other": r_other, "sentences": risk_facts},
+        # A4 (2026-10-11, GPT item audit): clarifications inserted by code, never given to the writer
+        "notes_inserted": {
+            "budget": {"anchor": money(cur, total),
+                       "sentence": f"The figure of {money(cur, total)} is the budget as first approved, before the "
+                                   f"changes listed in this note."},
+            "workdays": {"anchor": "working days",
+                         "sentence": "All sign-offs, handovers, deliveries and meetings in this note take place on "
+                                     "working days."}},
         "conflict": conflict, "requirements": R,
     }
 

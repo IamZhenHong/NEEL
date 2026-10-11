@@ -29,6 +29,8 @@ figures or counts, and do not resolve disagreements between sources beyond what 
 separately.
 - Never say how many people, dates or items there are.
 - Do not characterise overall status (on track, behind, at risk) beyond what the facts say.
+- Do not attribute sign-offs, handovers, decisions or other responsibilities to anyone beyond the ownership and \
+support facts.
 - Mix the facts naturally across paragraphs; do not group all facts of one kind together.
 - Do not address the reader or give instructions.
 
@@ -61,6 +63,10 @@ def compose(sheet, writer_text):
         slots.append(rng.randrange(len(paras)))
     for i, sent in zip(slots, sents):
         paras[i] = f"{paras[i]} {sent}"
+    # A4 clarifications: appended to the first paragraph containing their anchor (else the last paragraph)
+    for note in (sheet.get("notes_inserted") or {}).values():
+        idx = next((i for i, p_ in enumerate(paras) if note["anchor"] in p_), len(paras) - 1)
+        paras[idx] = f"{paras[idx]} {note['sentence']}"
     return "\n\n".join(paras)
 
 
