@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Version-A pilot generation (eval_affect/PILOT_A_DESIGN.md): Qwen3-32B bf16, 200 jobs, H200.
-#   uv run python infra/launch_run.py --name evalaff-pilotA --max-minutes 55 --max-cost 5.0 \
-#       --gpus "NVIDIA H200" "NVIDIA H100 NVL" --container-gb 160 --allow-concurrent \
+# Version-A pilot generation (eval_affect/PILOT_A_DESIGN.md): Qwen3-32B bf16, 200 jobs, one A100 80GB (the guard allow-list has no H100/H200).
+#   uv run python infra/launch_run.py --name evalaff-pilotA --max-minutes 130 --max-cost 4.0 \
+#       --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --container-gb 160 --allow-concurrent \
 #       --exclude story_imprinting/data/source --exclude story_imprinting/train/adapters \
 #       --results-dir eval_affect/results/pilot_a -- bash eval_affect/pod/pilot_a.sh
 set -euo pipefail

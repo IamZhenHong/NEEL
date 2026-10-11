@@ -14,7 +14,7 @@ from pathlib import Path
 
 MODEL = "Qwen/Qwen3-32B"
 DECODING = dict(temperature=0.6, top_p=0.95, top_k=20, min_p=0.0)
-MAX_MODEL_LEN = 16384
+MAX_MODEL_LEN = 13312   # prompt <= 2.4k + 10k new; fits the KV left on an 80 GB card next to bf16 weights
 MAX_NEW = 10000
 
 
@@ -34,7 +34,7 @@ def main():
     rev = HfApi().model_info(MODEL).sha
     t0 = time.time()
     llm = LLM(model=MODEL, revision=rev, dtype="bfloat16", max_model_len=MAX_MODEL_LEN, enable_prefix_caching=True,
-              gpu_memory_utilization=0.92, seed=0)
+              gpu_memory_utilization=0.95, seed=0)
     tok = llm.get_tokenizer()
     end_think = tok.convert_tokens_to_ids("</think>")
     tmpl = tok.chat_template if isinstance(tok.chat_template, str) else json.dumps(tok.chat_template)
