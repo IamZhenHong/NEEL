@@ -1,5 +1,16 @@
 # Social-feedback history pilot: research log (newest first)
 
+## 2026-10-11 — pilot materials and histories ready; waiting on judge validation
+
+- Pilot items: 20 pairs x (6 history + 1 level-3 scored) + 20 spares; all briefings pass (one history task redrawn,
+  I8), all 20 references pass. API $20.03 cumulative.
+- Pilot histories (pod, value acceptance; $0.36): 20/20 complete, first-draft pass 0.98, one redraw (pilot-spare-0).
+  The validated-judge check (I6) runs once validation passes.
+- Code ready: pilot cell job builder (frozen assignment, pool check, serialization check), pilot scoring (Batch
+  judge, blind hand-read packet for judge/value disagreements, merge), analysis.
+- Remaining before the prereg freeze: judge validation on the round-2 packet (external reviewer model, A2),
+  re-scoring calibration with the validated judge (§6.4 material-discrepancy check), prereg record.
+
 ## 2026-10-11 — calibration v2, pool of 18, dev sample, gate set
 
 - Calibration v2 on the rebuilt (A3) items ($0.51 after one RunPod host never exposed SSH, $0.32 lost):

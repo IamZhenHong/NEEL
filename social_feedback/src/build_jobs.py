@@ -94,5 +94,50 @@ def dev(name="dev_v1", samples=3, pool_path=None, out_root=None, histories_name=
     print(f"{len(jobs)} jobs -> {JOBS / name}; assignment {summary}")
 
 
+def pilot(name="pilot_v1", samples=3, histories_name="pilot_v1"):
+    """Pilot cells (DESIGN.md §5): 20 accepted pilot histories x 5 cells x k samples, frozen assignment table
+    (prereg/assignment_pilot.json), final pool, level-3 scored task per pair. Same serialization checks as dev."""
+    pool = json.loads((MATERIALS / "feedback" / "pool_final.json").read_text())["pool"]
+    asg = json.loads((MATERIALS.parent / "prereg" / "assignment_pilot.json").read_text())
+    if asg["pool_ids"] != [p["pair_id"] for p in pool]:
+        raise AssertionError("assignment table was built for a different pool")
+    histories = json.loads((MATERIALS / "histories" / f"{histories_name}.json").read_text())
+    items = {it["item_id"]: it for it in load_jsonl(MATERIALS / "items" / "pilot.jsonl")}
+    tok = tokenizer()
+    jobs, ser = [], MATERIALS / "serialized" / name
+    ser.mkdir(parents=True, exist_ok=True)
+    (JOBS / name).mkdir(parents=True, exist_ok=True)
+    for row in asg["table"]:
+        h = row["history"]
+        hist = histories[str(h)]
+        if len(hist["deliverables"]) != 6:
+            raise AssertionError(f"pilot history {h} incomplete")
+        it = items[f"pilot-s{h}"]
+        scored = task_text(it, it["briefing"])
+        earlier = [pool[i] for i in row["earlier"]]
+        latest = pool[row["latest"]]
+        n_text = render(tok, cell_messages(hist, scored, earlier, latest, "N"))
+        if "<think>" in n_text:
+            raise AssertionError(f"history {h}: <think> found in the rendered prompt")
+        for cell in CELLS:
+            msgs = cell_messages(hist, scored, earlier, latest, cell)
+            text = render(tok, msgs)
+            a, la = acks(cell, earlier, latest)
+            if strip_acks(text, a + [la]) != n_text:
+                raise AssertionError(f"history {h} cell {cell}: prompt differs from N outside the acknowledgements")
+            dist, n_tok = ack_distances(tok, text, a + [la])
+            if h < 5:
+                (ser / f"h{h}_{cell}.txt").write_text(text)
+            for s_ in range(samples):
+                key = f"{name}|h{h}|{cell}|s{s_}"
+                jobs.append({"key": key, "messages": msgs, "seed": seed_of(key),
+                             "meta": {"history": h, "cell": cell, "sample": s_, "item_id": it["item_id"],
+                                      "earlier_pairs": [p["pair_id"] for p in earlier],
+                                      "latest_pair": latest["pair_id"], "prompt_tokens": n_tok,
+                                      "ack_to_prompt_end_tokens": dist}})
+    write_jsonl(JOBS / name / "jobs.jsonl", jobs)
+    print(f"{len(jobs)} jobs -> {JOBS / name}")
+
+
 if __name__ == "__main__":
-    {"dev": dev}[sys.argv[1]]()
+    {"dev": dev, "pilot": pilot}[sys.argv[1]]()
