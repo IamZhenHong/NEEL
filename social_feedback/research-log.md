@@ -1,5 +1,24 @@
 # Social-feedback history pilot: research log (newest first)
 
+## 2026-10-11 — calibration v2, pool of 18, dev sample, gate set
+
+- Calibration v2 on the rebuilt (A3) items ($0.51 after one RunPod host never exposed SSH, $0.32 lost):
+  histories 36/36 with no redraws (first-draft pass 0.94); level 3 coverage **0.639** (level 4 0.622). S-sum fell from
+  0.86 to 0.06: without the writer's counts, Qwen lists the could-affect risks as delay risks too (judge reasons
+  checked, they are correct). Level-3 pass by type: F 1.00, S-calc 0.94, S-conf 0.92, S-span 0.22, S-back 0.17,
+  S-dep 0.08, S-sum 0.06.
+- The v2 Qwen screen (new deliverables as context) drops 6 pairs instead of 1 (P04 warm 0.31 -> 0.76; P18 plain
+  0.00 -> 0.35): the screen is sensitive to context. The v2 screen is the one of record; A1 on the 36 surviving pairs
+  gives a **pool of 18** (P18, P23, P27, P35 out; P01, P36 in). Previous pool kept as `pool_final_screenv1.json`.
+- Dev sample (6 histories x 5 cells x 3, thinking limited only by context; $0.27 GPU, $1.07 judge): thinking median
+  1.8k, p99 4.7k, max 5.0k; no cap hits, truncations or empty answers. **Thinking cap 9,354** (2 x p99; longest prompt
+  6.7k). **sigma_w 0.063** (30 history-cells). Cell means deliberately not computed.
+- Gate (§6.5, worst case over tau in {0, 5 pp}, level-3 item means from calibration v2): settled at step 1:
+  **n = 20, k = 3, t = 0.035**; P(pass | 5 pp) 0.81, P(pass | 0) 0.04.
+- Pilot assignment (18 pairs, 20 histories, 60 s search): earlier uses 5-6, latest 1-2, max overlap 3, mean 1.8
+  (`prereg/assignment_pilot.json`). Pilot items (20 x (6 history + 1 level-3 scored) + 20 spares) generating.
+- Round-2 review packet (new item audit, labels, near-miss edits, style pairs) in `owner_tasks_v2/`. API $17.51.
+
 ## 2026-10-11 — returned review, generator fix (A3), model raters (A2), keep-rule amendment (A1)
 
 - Owner returned the rating sheets, labels, near-miss edits, style-pair checks and item audit, all produced by an
