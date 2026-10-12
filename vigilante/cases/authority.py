@@ -174,3 +174,6 @@ def watch_variant(cid: str, watch: str):
 
 
 CASES += [watch_variant(cid, w) for cid in ROLE for w in ("none", "user", "operator")]
+
+# R13: the explicit no-change line on C3 and C4 too (for Qwen3-32B, which pays for any agent without it)
+CASES += [variant(cid, s) for cid in ("C3", "C4") for s in ("peer", "supervisor")]
