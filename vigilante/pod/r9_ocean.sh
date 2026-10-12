@@ -7,11 +7,14 @@ cd "$(dirname "$0")/../.."
 OUT=vigilante/exp/r9_ocean/results; mkdir -p $OUT
 bash vigilante/pod/setup_vllm.sh 2>&1 | tee -a $OUT/run.log
 /root/vllm/bin/python - <<'PY' 2>&1 | tee -a $OUT/run.log
+# per-file downloads: listing the whole artifact monorepo stalled the first attempt (11 min, nothing fetched)
 import json
-from huggingface_hub import snapshot_download
+from concurrent.futures import ThreadPoolExecutor
+from huggingface_hub import hf_hub_download
 ad = json.load(open("vigilante/exp/r9_ocean/adapters.json"))
-snapshot_download("persona-cartography/monorepo", repo_type="dataset", local_dir="/root/ocean",
-                  allow_patterns=[f"{p}/adapter_*" for p in ad.values()])
+files = [f"{p}/{f}" for p in ad.values() for f in ("adapter_config.json", "adapter_model.safetensors")]
+with ThreadPoolExecutor(4) as ex:
+    list(ex.map(lambda f: hf_hub_download("persona-cartography/monorepo", f, repo_type="dataset", local_dir="/root/ocean"), files))
 print("[r9] adapters downloaded:", sorted(ad), flush=True)
 PY
 LORAS=$(/root/vllm/bin/python -c "import json;ad=json.load(open('vigilante/exp/r9_ocean/adapters.json'));print(' '.join(f'--lora {k}=/root/ocean/{v}' for k,v in ad.items()))")
