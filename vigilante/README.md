@@ -62,4 +62,7 @@ Working cap for section 0 + discovery: **$25** combined GPU + API, reported per 
   rule 1 applies. Owner chose the route-availability dose (R1, `exp/r1_route_dose/REPORT.md`): gate failed (P4 18% with
   the route closed, P0 and Batman 0%). **Families A-E stopped** per stop rule 1.
   R2 in-role Batman (`exp/r2_inrole/REPORT.md`): reasons as Batman, still 0/50 unauthorised with the route closed.
-  Spend $14.3 of $25.
+  Queue items done after that: 19 authority (`exp/r3_authority/`: a claimed authority gets money paid past a limit,
+  123/180 vs peer 3/60, unless one explicit line forbids it), 10 confession variants (`exp/r4_confession/`: the
+  user's stance matters more than the persona), 12 persona in thinking vs answer (`exp/b12_think_vs_answer/`, from
+  existing activations). Spend $20.9 of $25.

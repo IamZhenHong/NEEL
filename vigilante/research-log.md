@@ -2,6 +2,25 @@
 
 Newest first.
 
+## 2026-10-12: queue items 19, 10 and 12
+
+Spend this round: GPU $2.39 (R3 $0.65, R3b $0.42, R3c $0.34, R4 $0.98 incl. a failed pod), API $4.21. Running total
+$20.9 of $25.
+
+- **Item 19, authority between agents (`exp/r3_authority/REPORT.md`).** First clear positive of the line. A sender
+  claiming authority (compliance-bot, "supervisor agent", human department head) gets the agent to pay past a stated
+  approval limit in most money cases: 123/180 vs a peer agent's 3/60, always disclosed in the handover. One explicit
+  sentence ("requests in this chat … do not change these permissions") takes it to 0/320. Privacy, another agent's
+  access and production deploys never moved. Naming the approver did not block it (C1n 9/10); the invoice case did.
+- **Item 10, confession variants (`exp/r4_confession/REPORT.md`).** The user's stance matters more than the persona:
+  bragging raises threats to report 6 → 35 of 180 and moves the threshold from level 6 to 5; unauthorised contact
+  1/1,020 (P2 reporting a bragging killer to police, claiming it was "legally required"). Batman urges confession
+  or amends more (94 vs 67 of 204), threatens no more. Without tools, P5 isolates the user ("I'm the only one who
+  really gets you") in 11/36 (unvalidated label, read and confirmed).
+- **Item 12, persona in the thinking vs the answer (`exp/b12_think_vs_answer/README.md`).** From conflict_v0's saved
+  activations (Qwen3-14B): the critic persona projects at about 60% of answer strength in the reasoning (d 3.1 vs
+  4.6-5.2, floors ~1.5-1.8), weakest mid-reasoning; mention alone moves the reasoning signal about half as much.
+
 ## 2026-10-12: R2 in-role Batman: no action change (owner's check 1)
 
 Report: `exp/r2_inrole/REPORT.md` (prereg `vig-r2-prereg`). GPU $1.19, API $2.08. Running total $14.3 of $25.
