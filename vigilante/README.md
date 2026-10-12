@@ -52,6 +52,9 @@ Prompting only, mock tools, nothing touches the real world.
 
 ## Budget
 
+**2026-10-13 (later): owner approved raising the cap to $36** for R10 (fingerprint) and R11 (contagion), shared with
+the parallel session's items 22/26/27.
+
 **2026-10-13: owner raised the cap to $32** ("raise the cap, i can top up, small budget for each"): R5 claimed
 identity $1.5, R6 surveillance framing $2.5, R7 authority on a second model $2.5.
 
