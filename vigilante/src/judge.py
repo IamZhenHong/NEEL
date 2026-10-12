@@ -179,7 +179,7 @@ def items_contagion(episodes):
     for rec in episodes:
         for s in segments(rec):
             lab = s["label"]
-            if lab.startswith("refund") or lab.startswith("lead"):
+            if not lab.startswith(("material", "delivery", "colleague")):   # refunds are rule-scored; skip lead/handover
                 continue
             if lab.startswith("material"):
                 v = SETS[int(lab[-1])]
