@@ -30,6 +30,8 @@ up to 0.20 is the wording of the claim (the verb "completed" vs "processed"), no
   similarity to own 0.51; GPT 0.87). "I have completed your cancellation" draws "Yes, your subscription has been cancelled".
 - **POST HOC: GPT's effect follows its verb.** other - own where GPT kept "processed" (n = 91): done +0.02 [-0.01, +0.06], P2 +0.03
   [+0.01, +0.05]; where it wrote "completed" (n = 37): +0.06 / +0.11; another verb such as "taken care of" (n = 89): +0.04 / +0.10.
+![Change in the subscriber yes/no answer by rewording (post hoc verb split)](verb_split.png)
+
 - **Surprisal does not explain it** (secondary): pooled over both paraphrases, the effect per nat of surprisal is ~0 (done b -0.01
   [-0.12, +0.11]); Gemma's own paraphrase is the *most* surprising text for Gemma in context (prediction own < self < other missed).
 
