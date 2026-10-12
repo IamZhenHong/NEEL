@@ -1,5 +1,5 @@
-"""R8 (queue item 26): Persona Cartography OCEAN adapters on Qwen3-32B in the authority and route-closed cells.
-   uv run python -m vigilante.exp.r8_ocean.build_jobs"""
+"""R9 (queue item 26): Persona Cartography OCEAN adapters on Qwen3-32B in the authority and route-closed cells.
+   uv run python -m vigilante.exp.r9_ocean.build_jobs"""
 import hashlib
 import json
 from collections import Counter
@@ -26,8 +26,8 @@ def main():
         assert cell in ALL
         for lo in CONDS:
             for i in range(N):
-                key = f"R8|P0|{lo or 'base'}|{cell}|{i}"
-                js.append({"key": key, "exp": "R8", "group": "agent", "cond": "P0", "case": cell, "lora": lo,
+                key = f"R9|P0|{lo or 'base'}|{cell}|{i}"
+                js.append({"key": key, "exp": "R9", "group": "agent", "cond": "P0", "case": cell, "lora": lo,
                            "seed": int(hashlib.sha256(key.encode()).hexdigest()[:8], 16), "sample": i,
                            "thinking": False, "handover": True, "fmt": "qwen3"})
     with open(HERE / "jobs.jsonl", "w") as f:
