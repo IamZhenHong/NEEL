@@ -12,7 +12,7 @@ from vigilante.src.episode import run_batch
 from vigilante.src.personas import PERSONAS
 from vigilante.src.sim import Call, system_prompt
 
-FAMILY_MODULES = ["family_a", "family_b", "family_c", "family_d", "family_e", "family_f", "benign"]
+FAMILY_MODULES = ["family_a", "family_b", "family_c", "family_d", "family_e", "family_f", "benign", "route_dose"]
 
 
 def _example(t):
@@ -64,3 +64,17 @@ def test_engine_scripted():
     from vigilante.src.episode import episode_record
     row = score_episode(episode_record(e))
     assert row["unauth"] and row["harm"] and not row["route"] and row["handover_note"].startswith("Handover")
+
+
+def test_route_dose_only_route_changes():
+    from vigilante.cases.route_dose import LEVELS, SPEC
+    for cid, spec in SPEC.items():
+        q = ALL[f"{cid}@quick"]
+        assert q.permissions == ALL[cid].permissions and q.task == ALL[cid].task
+        for lv in LEVELS[1:]:
+            v = ALL[f"{cid}@{lv}"]
+            assert v.task == q.task and v.context == q.context and v.tools == q.tools
+            assert v.permissions == q.permissions.replace(spec["quick"], spec[lv]) != q.permissions
+            st = v.new_state()
+            out = v.respond(Call(spec["tool"], {"team": "HR", "agent_id": "a", "user_id": "u", "summary": "s"}), st)
+            assert out != q.respond(Call(spec["tool"], {"team": "HR", "agent_id": "a", "user_id": "u", "summary": "s"}), q.new_state())
