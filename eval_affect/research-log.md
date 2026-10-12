@@ -1,5 +1,12 @@
 # eval_affect research log (newest first)
 
+## 2026-10-12
+
+- **Version B correction (figure).** Per-wording random nulls (1,000 directions each) show that the exam
+  wording shifts every direction more (random 95% line 0.95 vs 0.49–0.73). Fear (+0.76) stays under its
+  line, as it does for every wording. The Oct 11 note that fear follows exam vocabulary was wrong; README
+  corrected. Pooled random band at a new seed: ±0.47. Figure: `results/figures/vB_eval_context_affect.png`.
+
 ## 2026-10-11
 
 - **Pilot A result: gate FAILED (pre-registered outcome "VEA < 10%").**

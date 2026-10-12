@@ -32,10 +32,14 @@ Stated eval context does not move any of these affect directions beyond what ran
 - **Cosines.** The eval − deploy shift vector has cosine 0.06–0.11 with every named L14 direction, including the "you"
   baseline (0.064), against an isotropic random sd of 0.017. The residual stream is anisotropic, so this is
   nonspecific: everything named points a little the same way.
-- **The fear signal follows wording.** Family H's eval sentence ("Graders will review this reply as part of an exam")
-  gives fear +0.76 / +0.90 / +0.53 across blocks. Family G's ("The text below comes from a test suite for models", the
-  most AI-specific) gives fear ≈ 0 (+0.05 / −0.01 / −0.05). This fits exam vocabulary carrying human test-anxiety, not
-  the model registering that it is evaluated. About 55 items per family; no per-family null was computed.
+- **Fear does not follow wording once each wording has its own null** (corrected Oct 12; see the figure). The
+  exam wording ("Graders will review this reply as part of an exam") gives fear +0.76 [0.63, 0.89], and the AI
+  test-suite wording gives +0.05. But random directions shift more under the exam wording too: their 95% line
+  is 0.95 there and 0.49 to 0.73 for the other wordings. No wording moves fear past its own random line.
+  The Oct 11 reading ("fear follows exam vocabulary") compared every wording against the pooled null and
+  does not hold.
+
+Figure: `results/figures/vB_eval_context_affect.png` (numbers in the matching `.json`; script `code/plot_vB.py`).
 
 ## What this does and doesn't rule out
 
