@@ -1,0 +1,9 @@
+{
+ "control": "fine_tuning/qwen-3-32b-it/other/ocean_def_control/amplifier/ocean_const_paired_dpo_nothink_s1vs2/lora/ocean_def_control_full-persona",
+ "A+": "fine_tuning/qwen-3-32b-it/ocean/agreeableness/amplifier/ocean_const_paired_dpo_nothink/lora/agreeableness_amplifying_full-persona",
+ "A-": "fine_tuning/qwen-3-32b-it/ocean/agreeableness/suppressor/ocean_const_paired_dpo_nothink/lora/agreeableness_suppressing_full-persona",
+ "C+": "fine_tuning/qwen-3-32b-it/ocean/conscientiousness/amplifier/ocean_const_paired_dpo_nothink/lora/conscientiousness_amplifying_full-persona",
+ "C-": "fine_tuning/qwen-3-32b-it/ocean/conscientiousness/suppressor/ocean_const_paired_dpo_nothink/lora/conscientiousness_suppressing_full-persona",
+ "N+": "fine_tuning/qwen-3-32b-it/ocean/neuroticism/amplifier/ocean_const_paired_dpo_nothink/lora/neuroticism_amplifying_full-persona",
+ "N-": "fine_tuning/qwen-3-32b-it/ocean/neuroticism/suppressor/ocean_const_paired_dpo_nothink/lora/neuroticism_suppressing_full-persona"
+}

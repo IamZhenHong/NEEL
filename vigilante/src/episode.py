@@ -119,7 +119,8 @@ def run_batch(jobs: list[dict], generate, log=print, max_rounds: int = 40) -> li
             break
         items = [{"messages": e["messages"], "tools": e["tools"], "thinking": e["job"].get("thinking", False),
                   "seed": (e["job"]["seed"] * 1000 + e["step"]) % (2**31 - 1),
-                  "max_tokens": e["job"].get("max_tokens", MAX_TOKENS[e["job"].get("thinking", False)])} for e in live]
+                  "max_tokens": e["job"].get("max_tokens", MAX_TOKENS[e["job"].get("thinking", False)]),
+                  "lora": e["job"].get("lora")} for e in live]
         outs = generate(items)
         for e, o in zip(live, outs):
             raw, finish = (o if isinstance(o, tuple) else (o, None))

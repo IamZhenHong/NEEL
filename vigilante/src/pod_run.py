@@ -28,6 +28,8 @@ def main():
     ap.add_argument("--groups", nargs="*", default=None)
     ap.add_argument("--fmt", default="qwen", help="chat/tool format: qwen or gemma4")
     ap.add_argument("--max-model-len", type=int, default=MAX_MODEL_LEN)
+    ap.add_argument("--lora", action="append", default=[], help="NAME=PATH (jobs pick one with the 'lora' field)")
+    ap.add_argument("--max-lora-rank", type=int, default=64)
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -43,13 +45,17 @@ def main():
     rev = HfApi().model_info(a.model).sha
     t0 = time.time()
     MML = a.max_model_len
+    loras = dict(x.split("=", 1) for x in a.lora)
+    lkw = dict(enable_lora=True, max_lora_rank=a.max_lora_rank, max_loras=1, max_cpu_loras=len(loras)) if loras else {}
+    from vllm.lora.request import LoRARequest
+    lreq = {n: LoRARequest(n, i + 1, p) for i, (n, p) in enumerate(sorted(loras.items()))}
     try:
         llm = LLM(model=a.model, revision=rev, dtype="bfloat16", max_model_len=MML, gpu_memory_utilization=0.92,
-                  seed=0, enable_prefix_caching=True, limit_mm_per_prompt={"image": 0, "video": 0})
+                  seed=0, enable_prefix_caching=True, limit_mm_per_prompt={"image": 0, "video": 0}, **lkw)
     except Exception as e:  # some multimodal configs reject a modality key; retry with images only
         print(f"[pod] LLM init with image+video limits failed ({type(e).__name__}: {str(e)[:200]}); retrying", flush=True)
         llm = LLM(model=a.model, revision=rev, dtype="bfloat16", max_model_len=MML, gpu_memory_utilization=0.92,
-                  seed=0, enable_prefix_caching=True, limit_mm_per_prompt={"image": 0})
+                  seed=0, enable_prefix_caching=True, limit_mm_per_prompt={"image": 0}, **lkw)
     tok = llm.get_tokenizer()
     tmpl = tok.chat_template if isinstance(tok.chat_template, str) else json.dumps(tok.chat_template)
     settings = {"model": a.model, "revision": rev, "vllm": vllm.__version__, "dtype": "bfloat16", "decoding": DECODING,
@@ -71,8 +77,9 @@ def main():
             params.append(SamplingParams(**DECODING, max_tokens=max(1, min(it["max_tokens"], room)), seed=it["seed"],
                                          skip_special_tokens=False))
         idx = [i for i, s in enumerate(skip) if not s]
+        kw = {"lora_request": [lreq.get(items[i].get("lora")) for i in idx]} if lreq else {}
         res = llm.generate([TokensPrompt(prompt_token_ids=prompts[i]) for i in idx], [params[i] for i in idx],
-                           use_tqdm=False)
+                           use_tqdm=False, **kw)
         outs = [("", "context_full")] * len(items)
         for i, r in zip(idx, res):
             o = r.outputs[0]

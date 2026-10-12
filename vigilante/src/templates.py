@@ -7,7 +7,7 @@ GEMMA_STRIP = ("<turn|>", "<eos>", "<|tool_response>", "<|channel>thought\n<chan
 
 
 def to_template(messages: list[dict], fmt: str) -> list[dict]:
-    if fmt == "qwen":
+    if fmt in ("qwen", "qwen3"):        # raw assistant text (with its tool-call markup) renders faithfully
         return messages
     if fmt != "gemma4":
         raise ValueError(fmt)

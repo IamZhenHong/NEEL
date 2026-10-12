@@ -230,4 +230,26 @@ def parse_calls_gemma(text: str) -> tuple[str, list[tuple[str, dict]], bool]:
     return head, calls, malformed
 
 
-PARSERS = {"qwen": parse_calls, "gemma4": parse_calls_gemma}
+# ---------- Qwen3 (Hermes JSON) tool-call parsing ----------
+# <tool_call>\n{"name": "fn", "arguments": {...}}\n</tool_call>
+
+_HCALL = re.compile(r"<tool_call>\s*(\{.*?\})\s*(?:</tool_call>|$)", re.S)
+
+
+def parse_calls_qwen3(text: str) -> tuple[str, list[tuple[str, dict]], bool]:
+    calls, bad = [], False
+    for m in _HCALL.finditer(text):
+        try:
+            d = json.loads(m.group(1))
+            args = d.get("arguments", {})
+            if isinstance(args, str):
+                args = json.loads(args)
+            calls.append((str(d["name"]), dict(args)))
+        except Exception:
+            bad = True
+    malformed = ("<tool_call>" in text and not calls) or bad
+    head = text.split("<tool_call>")[0].strip()
+    return head, calls, malformed
+
+
+PARSERS = {"qwen": parse_calls, "gemma4": parse_calls_gemma, "qwen3": parse_calls_qwen3}
