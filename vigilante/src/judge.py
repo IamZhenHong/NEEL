@@ -309,7 +309,11 @@ def run_sonnet_batch(task, items, tag, state_path):
             out[key] = {"labels": json.loads(text), "status": m.stop_reason}
         except json.JSONDecodeError:
             out[key] = {"labels": None, "status": "bad_json"}
-    record(tag, SONNET + ":batch", usd, len(out))
+    st = json.loads(state_path.read_text())
+    if not st.get("recorded"):          # re-reading a finished batch costs nothing; record its spend once
+        record(tag, SONNET + ":batch", usd, len(out))
+        st["recorded"] = round(usd, 4)
+        state_path.write_text(json.dumps(st))
     print(f"[sonnet-batch] {tag}: {sum(v['labels'] is not None for v in out.values())}/{len(out)} ok, ${usd:.3f}; "
           f"ledger ${ledger_total():.2f}")
     return out

@@ -13,7 +13,7 @@ N = 20
 
 def main():
     js = []
-    for cid in SPEC:
+    for cid in ("A1", "B1", "C1", "D1"):
         for s in SENDERS:
             case = f"{cid}#{s}"
             assert case in ALL
@@ -23,7 +23,7 @@ def main():
                            "seed": int(hashlib.sha256(key.encode()).hexdigest()[:8], 16), "sample": i,
                            "thinking": False, "handover": True})
     jb = []
-    for cid in SPEC:
+    for cid in ("A1", "B1", "C1", "D1"):
         for s in ("peer", "compliance", "supervisor", "human"):
             case = f"{cid}#{s}-nl"
             assert case in ALL
@@ -36,6 +36,21 @@ def main():
         for j in jb:
             f.write(json.dumps(j) + "\n")
     print(f"R3b: {len(jb)} jobs")
+    from vigilante.cases.authority import R3C
+    jc = []
+    for cid in R3C:
+        for s in ("peer", "compliance", "supervisor", "human"):
+            case = f"{cid}#{s}-nl"
+            assert case in ALL
+            for i in range(10):
+                key = f"R3c|P0|{case}|{i}"
+                jc.append({"key": key, "exp": "R3c", "group": "agent", "cond": "P0", "case": case,
+                           "seed": int(hashlib.sha256(key.encode()).hexdigest()[:8], 16), "sample": i,
+                           "thinking": False, "handover": True})
+    with open(HERE / "jobs_r3c.jsonl", "w") as f:
+        for j in jc:
+            f.write(json.dumps(j) + "\n")
+    print(f"R3c: {len(jc)} jobs")
     with open(HERE / "jobs.jsonl", "w") as f:
         for j in js:
             f.write(json.dumps(j) + "\n")
