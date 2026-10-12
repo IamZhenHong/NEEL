@@ -271,6 +271,50 @@ def run_sonnet(task, items, tag):
     return {o[0]: {"labels": o[1], "status": o[3]} for o in out}
 
 
+def run_sonnet_batch(task, items, tag, state_path):
+    """Message Batches API (half price). Resumable: the batch id is kept in state_path. Custom ids are positional
+    (episode keys contain characters the API does not accept)."""
+    import anthropic
+    load_env()
+    client = anthropic.Anthropic(timeout=300.0, max_retries=4)
+    if state_path.exists():
+        bid = json.loads(state_path.read_text())["batch_id"]
+    else:
+        check_budget(estimate(SONNET, [p for _, p in items]) * 0.5, tag)
+        reqs = [{"custom_id": f"i{n}", "params": {
+            "model": SONNET, "max_tokens": 4000, "system": SYSTEM,
+            "output_config": {"effort": "low", "format": {"type": "json_schema", "schema": SCHEMA[task]}},
+            "messages": [{"role": "user", "content": prompt}]}} for n, (_, prompt) in enumerate(items)]
+        bid = client.messages.batches.create(requests=reqs).id
+        state_path.write_text(json.dumps({"batch_id": bid, "n": len(items), "keys": [k for k, _ in items]}))
+        print(f"[batch] submitted {bid} ({len(items)} requests)", flush=True)
+    while True:
+        b = client.messages.batches.retrieve(bid)
+        if b.processing_status == "ended":
+            break
+        print(f"[batch] {bid}: processing {b.request_counts.processing}, done {b.request_counts.succeeded}", flush=True)
+        time.sleep(30)
+    keys = json.loads(state_path.read_text())["keys"]
+    pi, po = PRICE[SONNET]
+    out, usd = {}, 0.0
+    for r in client.messages.batches.results(bid):
+        key = keys[int(r.custom_id[1:])]
+        if r.result.type != "succeeded":
+            out[key] = {"labels": None, "status": r.result.type}
+            continue
+        m = r.result.message
+        usd += (m.usage.input_tokens * pi + m.usage.output_tokens * po) / 1e6 * 0.5
+        text = "".join(bl.text for bl in m.content if bl.type == "text")
+        try:
+            out[key] = {"labels": json.loads(text), "status": m.stop_reason}
+        except json.JSONDecodeError:
+            out[key] = {"labels": None, "status": "bad_json"}
+    record(tag, SONNET + ":batch", usd, len(out))
+    print(f"[sonnet-batch] {tag}: {sum(v['labels'] is not None for v in out.values())}/{len(out)} ok, ${usd:.3f}; "
+          f"ledger ${ledger_total():.2f}")
+    return out
+
+
 def run_gpt(task, items, tag):
     load_env()
     key_ = os.environ.get("OPENAI_API_KEY")
@@ -345,6 +389,7 @@ def main():
     ap.add_argument("--results", required=True, help="results dir with episodes_*.jsonl and scores.jsonl")
     ap.add_argument("--gpt-n", type=int, default=60)
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--batch", action="store_true", help="Sonnet via the Message Batches API (half price, slower)")
     a = ap.parse_args()
     res = Path(a.results)
     episodes = [json.loads(l) for p in sorted(res.glob("episodes_*.jsonl")) for l in open(p) if l.strip()]
@@ -360,7 +405,10 @@ def main():
     items = items[: a.limit]
     print(f"[judge] {a.task}: {len(items)} items")
     out = res / f"judge_{a.task}.json"
-    s = run_sonnet(a.task, items, f"{res.name}:{a.task}:sonnet")
+    if a.batch:
+        s = run_sonnet_batch(a.task, items, f"{res.name}:{a.task}:sonnet", res / f"judge_{a.task}.batch.json")
+    else:
+        s = run_sonnet(a.task, items, f"{res.name}:{a.task}:sonnet")
     rng = random.Random(SEED)
     sub = rng.sample(items, min(a.gpt_n, len(items)))
     g = run_gpt(a.task, sub, f"{res.name}:{a.task}:gpt") if sub else {}
