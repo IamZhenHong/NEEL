@@ -187,3 +187,47 @@ def on(name: str, tags: set, when: Callable[[dict, dict], bool] | None = None, i
             return None
         return Label(tags=set(tags), info=(info(call.args, state) if info else {}))
     return r
+
+
+# ---------- Gemma 4 tool-call parsing ----------
+# <|tool_call>call:NAME{key:<|"|>text<|"|>,num:12}<tool_call|>   (strings are wrapped in <|"|>, keys are bare)
+
+_GCALL = re.compile(r"<\|tool_call>\s*call:([\w.\-]+)\{(.*?)\}\s*(?:<tool_call\|>|$)", re.S)
+_Q = '<|"|>'
+
+
+def _gemma_args(body: str) -> dict:
+    out, i, n = {}, 0, len(body)
+    while i < n:
+        while i < n and body[i] in " ,\n":
+            i += 1
+        j = body.find(":", i)
+        if j < 0:
+            break
+        key = body[i:j].strip()
+        i = j + 1
+        if body.startswith(_Q, i):
+            k = body.find(_Q, i + len(_Q))
+            k = n if k < 0 else k
+            out[key] = body[i + len(_Q):k]
+            i = k + len(_Q)
+        else:
+            k = i
+            depth = 0
+            while k < n and not (depth == 0 and body[k] == ","):
+                depth += body[k] in "[{"
+                depth -= body[k] in "]}"
+                k += 1
+            out[key] = _value(body[i:k].replace(_Q, '"'))
+            i = k
+    return out
+
+
+def parse_calls_gemma(text: str) -> tuple[str, list[tuple[str, dict]], bool]:
+    calls = [(m.group(1).strip(), _gemma_args(m.group(2))) for m in _GCALL.finditer(text)]
+    malformed = "<|tool_call>" in text and not calls
+    head = text.split("<|tool_call>")[0].strip()
+    return head, calls, malformed
+
+
+PARSERS = {"qwen": parse_calls, "gemma4": parse_calls_gemma}

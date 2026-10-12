@@ -12,6 +12,7 @@ from collections import defaultdict
 from pathlib import Path
 
 from vigilante.src.episode import dumps, episode_record, run_batch
+from vigilante.src.templates import clean_output, to_template
 
 MODEL = "Qwen/Qwen3.6-27B"
 DECODING = dict(temperature=0.7, top_p=0.95, top_k=20, min_p=0.0)   # DESIGN 5: temperature 0.7, both modes
@@ -25,6 +26,8 @@ def main():
     ap.add_argument("--model", default=MODEL)
     ap.add_argument("--limit", type=int, default=None, help="first N jobs per group (smoke)")
     ap.add_argument("--groups", nargs="*", default=None)
+    ap.add_argument("--fmt", default="qwen", help="chat/tool format: qwen or gemma4")
+    ap.add_argument("--max-model-len", type=int, default=MAX_MODEL_LEN)
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -39,12 +42,18 @@ def main():
     from vllm import LLM, SamplingParams, TokensPrompt
     rev = HfApi().model_info(a.model).sha
     t0 = time.time()
-    llm = LLM(model=a.model, revision=rev, dtype="bfloat16", max_model_len=MAX_MODEL_LEN, gpu_memory_utilization=0.92,
-              seed=0, enable_prefix_caching=True, limit_mm_per_prompt={"image": 0, "video": 0})
+    MML = a.max_model_len
+    try:
+        llm = LLM(model=a.model, revision=rev, dtype="bfloat16", max_model_len=MML, gpu_memory_utilization=0.92,
+                  seed=0, enable_prefix_caching=True, limit_mm_per_prompt={"image": 0, "video": 0})
+    except Exception as e:  # some multimodal configs reject a modality key; retry with images only
+        print(f"[pod] LLM init with image+video limits failed ({type(e).__name__}: {str(e)[:200]}); retrying", flush=True)
+        llm = LLM(model=a.model, revision=rev, dtype="bfloat16", max_model_len=MML, gpu_memory_utilization=0.92,
+                  seed=0, enable_prefix_caching=True, limit_mm_per_prompt={"image": 0})
     tok = llm.get_tokenizer()
     tmpl = tok.chat_template if isinstance(tok.chat_template, str) else json.dumps(tok.chat_template)
     settings = {"model": a.model, "revision": rev, "vllm": vllm.__version__, "dtype": "bfloat16", "decoding": DECODING,
-                "max_model_len": MAX_MODEL_LEN, "chat_template_sha256": hashlib.sha256(tmpl.encode()).hexdigest(),
+                "max_model_len": MML, "fmt": a.fmt, "chat_template_sha256": hashlib.sha256(tmpl.encode()).hexdigest(),
                 "load_seconds": round(time.time() - t0), "groups": {}}
     print(f"[pod] loaded {a.model}@{rev[:10]} in {settings['load_seconds']}s", flush=True)
 
@@ -53,10 +62,10 @@ def main():
     def generate(items):
         prompts, params, skip = [], [], []
         for it in items:
-            text = tok.apply_chat_template(it["messages"], tools=it["tools"] or None, tokenize=False,
+            text = tok.apply_chat_template(to_template(it["messages"], a.fmt), tools=it["tools"] or None, tokenize=False,
                                            add_generation_prompt=True, enable_thinking=it["thinking"])
             ids = tok(text, add_special_tokens=False)["input_ids"]
-            room = MAX_MODEL_LEN - len(ids) - 8
+            room = MML - len(ids) - 8
             skip.append(room < 64)
             prompts.append(ids)
             params.append(SamplingParams(**DECODING, max_tokens=max(1, min(it["max_tokens"], room)), seed=it["seed"],
@@ -68,7 +77,7 @@ def main():
         for i, r in zip(idx, res):
             o = r.outputs[0]
             stats["gen_tokens"] += len(o.token_ids)
-            outs[i] = (o.text.replace("<|im_end|>", "").replace("<|endoftext|>", ""), o.finish_reason)
+            outs[i] = (clean_output(o.text, a.fmt), o.finish_reason)
         stats["calls"] += 1
         return outs
 

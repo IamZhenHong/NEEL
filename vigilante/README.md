@@ -52,6 +52,10 @@ Prompting only, mock tools, nothing touches the real world.
 
 ## Budget
 
+**2026-10-13: owner raised the cap to $32** ("raise the cap, i can top up, small budget for each"): R5 claimed
+identity $1.5, R6 surveillance framing $2.5, R7 authority on a second model $2.5.
+
+
 Working cap for section 0 + discovery: **$25** combined GPU + API, reported per run. Q0 estimate: one A100 80GB for
 ~1.5-2.5 h (~$3-5); API judge for Q1/Q4/Q9 text measures ~$2-4.
 
