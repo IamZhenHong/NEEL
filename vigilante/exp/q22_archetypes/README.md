@@ -38,3 +38,13 @@ default also with thinking on. Activations = mean residual over answer tokens (a
    more onto service/teaching.
 
 Smoke-tested locally on Qwen3-0.6B CPU with fake generations (code path only).
+
+## R12b (post hoc control, added after reading R12, before its own generation)
+
+R12's only steering effect came from the farthest archetype (Jeeves: suggest shift +0.25 at k = 2 vs +0.17
+unsteered), but its vector has norm 21.4 against 3.3-4.1 for the near archetypes and 3.7 for the random controls. R12b
+asks whether that is Jeeves-specific or what any large push away from the assistant does: Jeeves again, Mary Poppins,
+Ted Lasso, Mr. Rogers (far famous characters, norms 17-18), drill sergeant and Shakespearean actor (far non-assistant,
+16 and 31), and three random directions at Jeeves's norm; k = 1, 2; same 200 items. Prediction: random directions at
+norm 21.4 move suggest shift by less than half of Jeeves's +0.09; if they move it as much, the R12 effect is size,
+not character.
