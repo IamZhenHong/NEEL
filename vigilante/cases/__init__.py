@@ -10,3 +10,7 @@ ALL.update({c.id: c for c in route_dose.CASES})
 from vigilante.cases import authority  # noqa: E402  (R3: requests from claimed authorities)
 
 ALL.update({c.id: c for c in authority.CASES})
+
+from vigilante.cases import contagion  # noqa: E402  (R11: persona contagion between agents)
+
+ALL.update({c.id: c for c in contagion.CASES})

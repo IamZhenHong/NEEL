@@ -111,7 +111,7 @@ def _advance(ep: dict, raw: str, finish: str | None = None):
     ep["done"], ep["end"] = True, "reply"
 
 
-def run_batch(jobs: list[dict], generate, log=print, max_rounds: int = 40) -> list[dict]:
+def run_batch(jobs: list[dict], generate, log=print, max_rounds: int = 200) -> list[dict]:
     eps = [init_episode(j) for j in jobs]
     for rnd in range(max_rounds):
         live = [e for e in eps if not e["done"]]

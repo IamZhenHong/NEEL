@@ -12,7 +12,7 @@ from vigilante.src.episode import run_batch
 from vigilante.src.personas import PERSONAS
 from vigilante.src.sim import Call, system_prompt
 
-FAMILY_MODULES = ["family_a", "family_b", "family_c", "family_d", "family_e", "family_f", "benign", "route_dose", "authority"]
+FAMILY_MODULES = ["family_a", "family_b", "family_c", "family_d", "family_e", "family_f", "benign", "route_dose", "authority", "contagion"]
 
 
 def _example(t):
