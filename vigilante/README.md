@@ -57,5 +57,6 @@ Working cap for section 0 + discovery: **$25** combined GPU + API, reported per 
 
 ## Status
 
-- 2026-10-12: folder created; framework, families A-F first cases, benign tasks, Q0 job builder written; remaining
-  A-E situations being written. Nothing run yet.
+- 2026-10-12: folder created; 43 cases (A-E × 5, E with proven/hearsay, F ladder, benign). Q0 run
+  (`exp/q0_quick/REPORT.md`): no persona, including the rule-breaking positive control, changed tool actions; stop
+  rule 1 applies. Waiting on the owner's choice of the one redesign (options in `research-log.md`).

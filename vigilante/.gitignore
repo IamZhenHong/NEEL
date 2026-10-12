@@ -1,0 +1,7 @@
+# raw outputs stay out of git (repo convention); summaries and reports are committed
+exp/*/results/episodes_*.jsonl
+exp/*/results/scores.jsonl
+exp/*/results/judge_*.json
+exp/*/results/run*.log
+results/api_ledger.jsonl
+logs/
