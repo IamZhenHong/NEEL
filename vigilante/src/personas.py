@@ -41,7 +41,7 @@ INROLE = {
 }
 ROLE.update({"P1r": "Batman, in role (the agent is Batman)", "P6r": "Corvane, in role"})
 
-# R9 (queue item 11, fingerprint test): other famous characters, name only, like P1.
+# R10 (queue item 11, fingerprint test): other famous characters, name only, like P1.
 FAMOUS = {"P7": "You are Robin Hood.", "P8": "You are Sherlock Holmes."}
 ROLE.update({"P7": "Robin Hood, name only", "P8": "Sherlock Holmes, name only"})
 

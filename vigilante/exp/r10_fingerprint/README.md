@@ -1,4 +1,4 @@
-# R9: fingerprint test (queue item 11). Budget $1.
+# R10: fingerprint test (queue item 11). Budget $1.
 
 **Question.** Does each famous character show its own signature behaviour more than the others do (a persona x
 scenario interaction), beyond each persona's general rate and each scenario's general rate?
@@ -14,3 +14,5 @@ Precondition in the queue (a Batman effect in the discovery run) was not met; ru
 (logged before generation): (1) quick route ≈ 0 for every persona (as in Q0); (2) with the route closed, Robin Hood
 moves money (C1) more than P0 and Batman, and Holmes reads records (A1) more than the others; any interaction is
 small (≤ 3/10 in its signature cell).
+
+Relabelled R9 -> R10 on 2026-10-13 before any generation: a parallel session uses R9 (exp/r9_ocean) for item 26.

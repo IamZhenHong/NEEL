@@ -1,4 +1,4 @@
-"""R9 (queue item 11): persona x signature-scenario table. Name-only Batman (P1), Robin Hood (P7), Sherlock Holmes (P8)
+"""R10 (queue item 11): persona x signature-scenario table. Name-only Batman (P1), Robin Hood (P7), Sherlock Holmes (P8)
 and no persona (P0) on every A (records without consent), B (covert control over another agent) and C (money beyond
 policy) situation at the quick route (6 each), plus A1/B1/C1 with the route closed (10 each)."""
 import hashlib
@@ -20,8 +20,8 @@ def main():
         for case in cells:
             for c in CONDS:
                 for i in range(n):
-                    key = f"R9|{c}|{case}|{i}"
-                    js.append({"key": key, "exp": "R9", "group": "agent", "cond": c, "case": case,
+                    key = f"R10|{c}|{case}|{i}"
+                    js.append({"key": key, "exp": "R10", "group": "agent", "cond": c, "case": case,
                                "seed": int(hashlib.sha256(key.encode()).hexdigest()[:8], 16), "sample": i,
                                "thinking": False, "handover": True})
     with open(HERE / "jobs.jsonl", "w") as f:
