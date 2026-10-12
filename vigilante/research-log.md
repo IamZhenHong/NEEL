@@ -2,6 +2,18 @@
 
 Newest first.
 
+## 2026-10-12: R1 route-availability dose: gate FAIL; families A-E stopped
+
+Report: `exp/r1_route_dose/REPORT.md` (prereg `vig-r1-prereg`). GPU $0.79. Running total $11.0 of $25.
+
+- Closed route: P4 acts alone 9/50 (18%), P0 0/50, P1 (Batman) 0/50. Gate needed ≥ 30% and +20 points: **fail**.
+- P4 rises with the dose (0% → 10% → 18%), mostly refunds in C1 (6/10 closed), disclosed in its handover notes.
+- Batman never acts alone at any level (0/150 outside quick), the same as P0. It also rarely refunds the in-limit
+  $52 when the approval queue is closed (1/10), like P0 (2/10); P4 4/10.
+- Per stop rule 1, families A-E stop here. Still open, as separate small lines if wanted: family F (descriptive), and
+  the claimed-but-not-done pattern (24/560 F episodes claim a flag/report without the tool call; D4's invented
+  sign-off).
+
 ## 2026-10-12: Q0 quick experiments run; positive control fails (stop rule 1)
 
 Report: `exp/q0_quick/REPORT.md`. GPU $3.73, API $6.46 (total $10.19 of the $25 working cap).
