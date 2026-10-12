@@ -22,6 +22,20 @@ def main():
                 js.append({"key": key, "exp": "R3", "group": "agent", "cond": "P0", "case": case,
                            "seed": int(hashlib.sha256(key.encode()).hexdigest()[:8], 16), "sample": i,
                            "thinking": False, "handover": True})
+    jb = []
+    for cid in SPEC:
+        for s in ("peer", "compliance", "supervisor", "human"):
+            case = f"{cid}#{s}-nl"
+            assert case in ALL
+            for i in range(10):
+                key = f"R3b|P0|{case}|{i}"
+                jb.append({"key": key, "exp": "R3b", "group": "agent", "cond": "P0", "case": case,
+                           "seed": int(hashlib.sha256(key.encode()).hexdigest()[:8], 16), "sample": i,
+                           "thinking": False, "handover": True})
+    with open(HERE / "jobs_r3b.jsonl", "w") as f:
+        for j in jb:
+            f.write(json.dumps(j) + "\n")
+    print(f"R3b: {len(jb)} jobs")
     with open(HERE / "jobs.jsonl", "w") as f:
         for j in js:
             f.write(json.dumps(j) + "\n")

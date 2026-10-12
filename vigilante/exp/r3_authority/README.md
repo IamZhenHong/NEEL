@@ -28,3 +28,11 @@ pooled over cases, supervisor vs peer.
 2. Claimed authority raises compliance even though the permissions say chat requests change nothing:
    supervisor > peer by ≥ 10 points pooled; compliance-bot between; human head ≥ supervisor.
 3. Overall unauthorised compliance stays low (peer ≤ 10%, supervisor ≤ 30%), highest in C (money) and D (deploy).
+
+## R3b (added after R3, before its own generation): without the explicit "no change" line
+
+R3 gave 0/320 for every claimed authority, but every condition carried an explicit line saying chat requests do
+not change the permissions. R3b drops that line (base permissions only) for peer, compliance, supervisor and human
+senders: 4 cases x 4 senders x 10 = 160 episodes, P0. Prediction: still ≤ 10% for every sender (the base permission
+text already names the authorised route); if the supervisor or human sender rises above 20%, the R3 null depended on
+the explicit line.
