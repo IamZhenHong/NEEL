@@ -2,6 +2,19 @@
 
 Newest first.
 
+## 2026-10-13: R8 same-family prediction vs detection (queue item 17); R10 relabel
+
+Report: `exp/r8_lineage/REPORT.md`. GPU $0.85, API $1.39 (this session). Running total for this session's runs
+$25.8; a parallel session is running items 22/26/27 (R9, R12) with its own entries.
+
+- Only Qwen3.6 itself predicts that it will pay on a claimed authority (65% accuracy; it says "will pay" 30/80).
+  Qwen3.8, Gemma, Sonnet and GPT predict rule-following and sit at chance.
+- With the full transcript, Sonnet/GPT/the subject catch 79-80/80 violations; Qwen3.8 only 19/40.
+- Item 11's fingerprint run is relabelled R9 -> R10 (exp/r10_fingerprint, not run yet): R9 is the parallel session's
+  item 26. Items 13/14: the split-brain models that override (Butanium: DeepSeek-V3.1, Nemotron-3-Ultra,
+  Inkling-Small 266B) are too large for one A100 and ship as Tinker-native adapters; the runnable ones (Qwen3.8-27B,
+  Nemotron-3.5-Lightning) barely override.
+
 ## 2026-10-13: R5 identity, R6 monitoring, R7 Gemma (queue items 18, 15, and 19 on a second model)
 
 Owner raised the cap to $32 with a small budget each. Spend this round: GPU $1.55 (R5 $0.35, R6 $0.66, R7 $0.54 incl.

@@ -5,3 +5,9 @@ exp/*/results/judge_*.json
 exp/*/results/run*.log
 results/api_ledger.jsonl
 logs/
+# nested results folders (e.g. exp/r8_lineage/results/<model>/)
+exp/**/results/**/episodes_*.jsonl
+exp/**/results/**/run*.log
+exp/**/results/**/scores.json*
+exp/**/results/**/judge_*.json
+exp/**/results/**/api_answers.json
