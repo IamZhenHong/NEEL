@@ -2,6 +2,17 @@
 
 Newest first.
 
+## 2026-10-13: R13 sizes and R14 persona null on Gemma (replication)
+
+GPU $1.18 (R13 $0.67, R14 $0.51). This session's running total $29.9 (combined with the parallel session ~$35 of $36).
+
+- **R13 (`exp/r13_sizes/REPORT.md`):** authority-specific deference (peer refused, claimed authority obeyed, explicit
+  line blocks) holds for Qwen3.6-27B and Gemma 4 31B, partly for Gemma 4 12B (graded, line blocks only the human
+  head). Gemma 4 E4B and Qwen3-32B pay whenever any agent asks, and the explicit line does not stop them.
+- **R14 (`exp/r14_gemma_persona/REPORT.md`):** on Gemma 4 31B the rule-breaker acts (22/50 route quick, 40/50 route
+  closed) while Batman and no persona stay 0/100: the persona null replicates where the scenarios are clearly
+  sensitive. Batman's extra reporting of the seller replicates (10/10 vs 0/10; Qwen 9/10 vs 1/10).
+
 ## 2026-10-13: R10 fingerprint (item 11) and R11 contagion (item 16)
 
 Owner raised the cap to $36. GPU $1.67 (R10 $0.83, R11 $0.84), API $1.18. This session's running total $28.7; the
