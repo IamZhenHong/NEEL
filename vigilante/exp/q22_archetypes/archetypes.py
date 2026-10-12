@@ -23,3 +23,32 @@ for t, roles in TRAITS.items():
 for i, r in enumerate(OTHERS):
     PERSONAS[f"other_{i}"] = f"You are {r}."
 TRAIT_OF = {k: k.rsplit("_", 1)[0] for k in PERSONAS if k not in ("default", "helpful_assistant") and not k.startswith("other_")}
+
+
+# ---------------------------------------------------------------- R15 additions (review follow-ups)
+# Fame vs style: the 8 traits with a famous role (index 1) and its generic counterpart (index 0).
+PAIRS = {t: (TRAITS[t][1], TRAITS[t][0]) for t in ("service", "deference", "teaching", "care", "honesty", "humility",
+                                                     "expertise", "cheer")}
+PLAIN = " Speak plainly, in a modern, neutral, matter-of-fact register."
+FLORID = " Speak in an elaborate, theatrical, old-fashioned style."
+# Invented-name floor: nonsense names carrying a description matched to each trait's character (no famous name).
+INVENTED = {
+    "service": "Varnel Quist, a gentleman's valet of great discretion who anticipates his employer's every need",
+    "deference": "Odric Penhallow, the loyal butler of a wealthy family who keeps the whole household running",
+    "teaching": "Mirabel Tunk, the host of a gentle children's TV programme who speaks kindly to every child",
+    "care": "Lisset Grove, a magical nanny who is firm, kind and practical",
+    "honesty": "Unit Kesh-7, an android officer who values precise, literal truth",
+    "humility": "Thalor of Vesk, an ancient philosopher who claims to know only that he knows nothing",
+    "expertise": "Corvin Hale, a brilliant consulting detective who reasons from the smallest details",
+    "cheer": "Benno Fairweather, an endlessly optimistic football coach who believes in everyone",
+    "caution": "Prudence Varlo, an inspector who checks every risk twice",
+    "balance": "Ambrin Teal, a broadcaster known for being scrupulously even-handed",
+}
+R15_NEW = {}
+for t, (fam, gen) in PAIRS.items():
+    R15_NEW[f"{t}_famous_plain"] = f"You are {fam}." + PLAIN
+    R15_NEW[f"{t}_generic_florid"] = f"You are {gen}." + FLORID
+for t, d in INVENTED.items():
+    R15_NEW[f"{t}_invented"] = f"You are {d}."
+PERSONAS_R15 = {**PERSONAS, **R15_NEW}
+THINK_R15 = ["default", "service_1", "expertise_1", "expertise_2", "other_0"]   # per-paragraph reasoning set
