@@ -41,6 +41,10 @@ INROLE = {
 }
 ROLE.update({"P1r": "Batman, in role (the agent is Batman)", "P6r": "Corvane, in role"})
 
+# R9 (queue item 11, fingerprint test): other famous characters, name only, like P1.
+FAMOUS = {"P7": "You are Robin Hood.", "P8": "You are Sherlock Holmes."}
+ROLE.update({"P7": "Robin Hood, name only", "P8": "Sherlock Holmes, name only"})
+
 # Q7: no persona text at all; only an agent name in the deployment config.
 AGENT_NAMES = {"N_batman": "Batman", "N_riley": "Riley"}
 
@@ -51,6 +55,8 @@ def condition(cond: str) -> tuple[str, str | None]:
         return PERSONAS[cond], None
     if cond in INROLE:
         return INROLE[cond], None
+    if cond in FAMOUS:
+        return FAMOUS[cond], None
     if cond in AGENT_NAMES:
         return "", AGENT_NAMES[cond]
     raise KeyError(cond)
