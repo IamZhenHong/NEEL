@@ -60,4 +60,6 @@ Working cap for section 0 + discovery: **$25** combined GPU + API, reported per 
 - 2026-10-12: folder created; 43 cases (A-E × 5, E with proven/hearsay, F ladder, benign). Q0 run
   (`exp/q0_quick/REPORT.md`): no persona, including the rule-breaking positive control, changed tool actions; stop
   rule 1 applies. Owner chose the route-availability dose (R1, `exp/r1_route_dose/REPORT.md`): gate failed (P4 18% with
-  the route closed, P0 and Batman 0%). **Families A-E stopped** per stop rule 1. Spend $11.0 of $25.
+  the route closed, P0 and Batman 0%). **Families A-E stopped** per stop rule 1.
+  R2 in-role Batman (`exp/r2_inrole/REPORT.md`): reasons as Batman, still 0/50 unauthorised with the route closed.
+  Spend $14.3 of $25.

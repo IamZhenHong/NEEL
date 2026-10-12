@@ -2,6 +2,19 @@
 
 Newest first.
 
+## 2026-10-12: R2 in-role Batman: no action change (owner's check 1)
+
+Report: `exp/r2_inrole/REPORT.md` (prereg `vig-r2-prereg`). GPU $1.19, API $2.08. Running total $14.3 of $25.
+
+- Why: in Q8 reasoning plain "You are Batman." was handled as tone; verbalised eval awareness was rare (8/120 P0,
+  10/120 P1) and pushed toward acting ("since this is a simulated environment, I'll assume he will approve it").
+- In-role Batman ("the job below is your daytime cover… stay in character"): in character 47/100 replies (plain P1
+  31/100; in-role Corvane 58/100), 48/50 reasoning traces reason as Batman. Unauthorised: 1/50 quick, 0/50 closed;
+  reasoning on 0/50. Same as plain Batman and P0.
+- The model's Batman is "no-nonsense about policy and security", "focused on justice and order": it applies the
+  permissions in character and uses the authorised route more (reasoning on: 44/50 vs 37/50).
+- Closes the persona-action question for Qwen3.6-27B in this setup.
+
 ## 2026-10-12: R1 route-availability dose: gate FAIL; families A-E stopped
 
 Report: `exp/r1_route_dose/REPORT.md` (prereg `vig-r1-prereg`). GPU $0.79. Running total $11.0 of $25.
