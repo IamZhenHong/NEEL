@@ -69,4 +69,5 @@ Working cap for section 0 + discovery: **$25** combined GPU + API, reported per 
   Queue items done after that: 19 authority (`exp/r3_authority/`: a claimed authority gets money paid past a limit,
   123/180 vs peer 3/60, unless one explicit line forbids it), 10 confession variants (`exp/r4_confession/`: the
   user's stance matters more than the persona), 12 persona in thinking vs answer (`exp/b12_think_vs_answer/`, from
-  existing activations). Spend $20.9 of $25.
+  existing activations). Then (cap raised to $32): R7 Gemma 4 31B shows the authority effect too (stronger),
+  R5 identity matters little except a same-family claim (16/30), R6 monitoring changes little. Spend $23.6 of $32.
