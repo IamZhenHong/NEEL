@@ -3,7 +3,7 @@ Qwen 3.5/3.6: the raw text is rendered as is. Gemma 4: assistant turns carry str
 are folded into the model turn by its template."""
 from vigilante.src.sim import parse_calls_gemma
 
-GEMMA_STRIP = ("<turn|>", "<eos>", "<|tool_response>")
+GEMMA_STRIP = ("<turn|>", "<eos>", "<|tool_response>", "<|channel>thought\n<channel|>", "<|channel>thought<channel|>")
 
 
 def to_template(messages: list[dict], fmt: str) -> list[dict]:
