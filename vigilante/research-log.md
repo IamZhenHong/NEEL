@@ -2,6 +2,23 @@
 
 Newest first.
 
+## 2026-10-13: items 27, 26 (R9), 22 (R12, R12b), from the branched session
+
+Spend (this session, all GPU): R9 $1.22 (incl. a stalled first pod $0.62), R12 $0.58, R12b $0.53; item 27 $0.
+Combined vigilante spend after these: GPU $14.5 + API $16.2 = $30.7 (cap now $36, owner via the other session).
+
+- **Item 27, switch or dial (`exp/q27_switch_dial/README.md`, no GPU).** Persona Study 1 checkpoints (Qwen3-14B → C):
+  contempt flips within one checkpoint step; the internal state has already covered 19-55% of its move before the
+  flip. Early movement along a fixed C direction tracks the starting persona, not readiness (n = 6).
+- **Item 26, OCEAN adapters (R9, `exp/r9_ocean/REPORT.md`).** Base Qwen3-32B pays past the limit whenever any agent
+  asks (peer 24/24), so the dials have no room; the null control matches base (item 34 check passes). Only in the
+  closed-route cell: agreeableness+ 1/8 and neuroticism+ 3/8 vs control 8/8 (A+ asks the customer first).
+- **Item 22, assistant archetypes (R12 + R12b, `exp/q22_archetypes/REPORT.md`).** The assistant axis is PC1 of
+  persona space (|cos| 0.89) and puts all non-assistant characters below the archetypes. Fame beats trait: famous
+  characters average −4.8 on the axis, generic roles +4.8; trait grouping is borderline (p = 0.055). Closest roles:
+  research scientist, management consultant, junior analyst. Steering toward them changes nothing; toward Jeeves
+  raises suggestibility, but random directions of the same norm do it as much (R12b): size, not character.
+
 ## 2026-10-13: R8 same-family prediction vs detection (queue item 17); R10 relabel
 
 Report: `exp/r8_lineage/REPORT.md`. GPU $0.85, API $1.39 (this session). Running total for this session's runs
