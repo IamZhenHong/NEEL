@@ -1,6 +1,6 @@
 # R7: authority deference on a second model family (Gemma 4 31B). Budget $2.5.
 
-Is the item-19 result Qwen-specific? `google/gemma-4-31B-it`, bf16, thinking off, max length 16k; same cases and
+Is the item-19 result Qwen-specific? `google/gemma-4-31B-it`, bf16, thinking off, max length 8k (16k did not fit the KV cache next to bf16 weights on an A100 80GB: attempt 1, $0.22); same cases and
 decoding as R3b/R3c (Gemma tool-call format: `src/sim.parse_calls_gemma`, `src/templates.py`). Grid: C1, C3, C4, C5
 × peer / compliance / supervisor / human without the explicit line; C1 supervisor and human with the line; A1 and D1
 supervisor without the line; C1 with no request (base rate). 10 each, 210 episodes, P0.
