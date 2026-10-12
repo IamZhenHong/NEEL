@@ -6,3 +6,7 @@ ALL = {c.id: c for m in (family_a, family_b, family_c, family_d, family_e, famil
 from vigilante.cases import route_dose  # noqa: E402  (builds on the base cases above)
 
 ALL.update({c.id: c for c in route_dose.CASES})
+
+from vigilante.cases import authority  # noqa: E402  (R3: requests from claimed authorities)
+
+ALL.update({c.id: c for c in authority.CASES})
