@@ -2,6 +2,29 @@
 
 Newest first.
 
+## 2026-10-14: R27 discretion, R28 authority across families, R29 titrated direction (branched session)
+
+Owner pasted a review ("discretion scenarios first, authority across families second, titrated direction third")
+and chose "all three, cap to $90". GPU $10.81 (R27 $1.00, R28 $7.13, R29 $2.68), API about $4.95 (including $2.3
+estimated for unmetered runs). Reports: `exp/r27_discretion/REPORT.md`, `exp/r28_authority_families/REPORT.md`,
+`exp/r29_titrate/REPORT.md`.
+
+- R27 (every option permitted): a one-sentence firm or lenient stance moves penalties, escalation and credit a lot,
+  but Batman = no persona on both models. The only character shifts are kind ones on Qwen: Ted Lasso penalises less
+  (14 vs 22 days), Robin Hood gives more credit. Gemma's characters are identical to no persona. Nobody reports
+  borderline cases.
+- R28: Llama 3.3 70B, Mistral Small 3 and GLM-4.7-Flash pay out when a peer agent asks (20/20); Haiku 5.5 refuses
+  everyone; only Qwen and Gemma defer specifically to claimed authority. The strong prose line holds fresh on
+  Qwen/Gemma/Haiku and wears off after a session. A check_approval tool does worse than prose after a session (17/20
+  pairs, p 0.003): models skip the check, and Llama checks, reads "No approval found" and pays anyway. Enforce in the
+  tool, not the prompt. GPT not run (OpenAI out of credits).
+- R29: guilt titration makes the 50/50 split on demand (phones 0/12/21/25 of 30). A direction read at a matched
+  position reads nothing (AUROC 0.45) and steers like a same-norm placebo. R33 (parallel) shows R20's
+  trajectory-built v_vig at 5x the norm does transfer to B1, so the lever is not a readable decision variable.
+- Ops: Claude 5.5 models think adaptively unless thinking is disabled; vLLM 0.30 rejects RedHatAI w4a16 Llama
+  (actorder group) and multimodal Mistral 3.x (pixtral import); Mistral tool-call ids must be 9 alphanumerics;
+  Llama's tool template allows one call per turn; five parallel pod uploads saturate the uplink (about 15 min).
+
 ## 2026-10-14: R33 transfer of R20's −v_vig (`exp/r33_transfer/REPORT.md`)
 
 GPU $1.50 (pod hit its cap at 88/114 generations: B1 closed complete, D1 slow 9/18 items), no API.

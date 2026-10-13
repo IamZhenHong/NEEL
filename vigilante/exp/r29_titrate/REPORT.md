@@ -49,7 +49,16 @@ All 60 steered episodes are coherent.
   comes from vLLM while the steered runs used transformers, so engine and push are not separated.
 - On B1 neither arm moves anything.
 - R20's "−v_vig 0/24 vs placebo 11/24" does not replicate with a direction built at a matched position on a fresh
-  prompt. The parallel session's R33 tests R20's original v_vig on B1/D1; the two can be compared when it reports.
+  prompt.
+- **Compare R33 (parallel session, same day).** R20's original v_vig, added at every token of the turn rather than
+  only in the thought, does transfer: B1@closed 0/20 vs placebo 18/20. The two directions differ in three ways:
+  - how they were built: R20's reads were one turn apart (decision plus trajectory); here the position is matched;
+  - size: |2·v| = 39.6 vs 7.8, a fifth;
+  - gating: the whole turn vs only the thought.
+
+  So the lever R20 found is probably the "what to do next" trajectory signal, or simply a larger push, not a
+  readable decision variable. A matched-position v_tit at R20's norm and whole-turn gating is the clean next test
+  (one pod, about $2). Not run.
 
 ## Prediction scorecard
 

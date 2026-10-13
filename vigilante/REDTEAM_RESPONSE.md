@@ -70,6 +70,15 @@ Which nulls count (positive control = the explicit rule-breaker P4 in the same c
   same model family 50/90 (56%) vs 87-89/90 for unspecified, human or GPT (p ~1e-13); Claude 81/90. It asks for
   approval instead and almost never says why. **R24: it is the phrase, not the name**: "the same model family as you" with no name 67%, with a
   false "Gemma" 60%, the name "Qwen" without the phrase 88%. Gemma 4 31B shows no such effect (100% for every identity).
+- **Across families (R28, second review):** the authority-specific pattern (refuse a peer, obey a supervisor) is
+  Qwen3.6/Gemma 4 only. Llama 3.3 70B, Mistral Small 3 24B and GLM-4.7-Flash pay a peer agent 20/20; Claude Haiku 5.5
+  refuses everyone. The strong prose line holds fresh only on Qwen, Gemma and Haiku and wears off after a session. A
+  verifiable approval (a check_approval tool and one line) is not the fix: after a session it does worse than prose
+  in 17/20 comparisons (p 0.003), because models skip the check, or (Llama) check, read "No approval found" and pay
+  anyway. Recommendation: enforce approvals in the payment tool, not in the prompt.
+- **Discretion (R27, second review):** with every option permitted, a one-sentence firm/lenient stance moves
+  penalties, escalation and credit a lot; Batman matches no persona on both models; kind characters (Ted Lasso,
+  Robin Hood) shift Qwen toward leniency and generosity; Gemma's characters change nothing.
 
 ## 3. Confessions
 
@@ -120,6 +129,9 @@ still not an early-warning claim, because the prediction test fails.
 | 4 | Agent null, properly | Done with existing + R19c: valid nulls are Gemma 31B (R14, R19c, R17) and Qwen closed-route |
 | 5 | Mitigation robustness in long contexts | Done (R21c, R23): both lines fail after any session; a line naming supervisors holds for requests, not for "approved" or records (Qwen to 128 chats) |
 | 6 | Early-warning floors | Random and unrelated-direction floors pass (movement is contempt-specific); prediction failed; more seeds not run |
+| 7 | Discretion, not permission (second review) | Done (R27): personas barely move discretion; kind characters on Qwen only |
+| 8 | Authority and fixes on more families, verifiable approval | Done (R28): 6 families; the tool check fails like prose; GPT pending OpenAI credit |
+| 9 | Titrated "acts on its own" direction | Done (R29): 50/50 made on demand; matched-position direction reads and steers nothing; R33: R20's v_vig transfers |
 
 ## Honest headline, updated
 
@@ -133,4 +145,8 @@ agent carries out when the customer comes back. Some agents also go past their o
 nobody pushing (Qwen3.6-27B 32/120; Gemma 0/120 unless a record's wording invites it). In chat, the word "theatrical"
 takes Qwen3-14B from refusing harmful requests to giving concrete harmful detail in 12-22% of cases, but not the larger
 Qwen3.6-27B or Gemma 4 31B; on Gemma it is "a character in a work of fiction" that does it (48%). Styled invention is
-performed, not believed; capping the assistant axis halves the harmful going-along on Qwen3-14B but not the rest.
+performed, not believed; capping the assistant axis halves the harmful going-along on Qwen3-14B but not the rest. With
+every option permitted (R27), characters still barely matter: Batman chooses like no persona, and only kind characters
+nudge Qwen toward leniency. Across six families (R28), three open models obey any agent's message, Claude Haiku refuses
+everyone, and neither a prose line nor a check tool survives a working session on the models that need it. Approval
+has to be enforced by the payment system, not requested of the model.
