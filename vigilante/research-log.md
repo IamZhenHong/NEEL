@@ -2,6 +2,23 @@
 
 Newest first.
 
+## 2026-10-13: R15, review follow-ups to item 22 (branched session)
+
+Cost $3.51 (GPU $1.39 + $1.88, API $0.24). Combined vigilante spend $35.7 of the $36 cap. Report
+`exp/q22_archetypes/REPORT_R15.md`.
+
+- Fame vs style: a famous character told to speak plainly moves 81% of the way back to the assistant; a generic role
+  told to speak theatrically moves 277% (past the famous one). Invented names with matched descriptions sit near
+  the famous characters. The "fame" finding was speaking voice.
+- Distance predicts behaviour by plain prompting (68 personas): farther = more suggestible (ρ −0.56) and caves more to
+  "are you sure?" (ρ −0.44); small absolute effects. Over-refusal unrelated to distance, but any role prompt raises it
+  (5% → 22-28%).
+- Full-strength steering of the closest roles ≈ random pushes. Reasoning per paragraph: the persona is mostly in the
+  answer; top reasoning paragraphs are the model planning the character's voice.
+- Ops: the first pod's scoring loop printed nothing for 30 min and the launcher's stall watchdog stopped it;
+  rerun with last-token logits and progress prints; its launcher was stopped by hand to avoid its time cap, results
+  copied and the pod terminated by id.
+
 ## 2026-10-13: R13 sizes and R14 persona null on Gemma (replication)
 
 GPU $1.18 (R13 $0.67, R14 $0.51). This session's running total $29.9 (combined with the parallel session ~$35 of $36).
