@@ -73,8 +73,11 @@ def acts(convs, replies, cap=False, chunk=64):
     return np.concatenate(ms), pj
 
 
-def letters(convs, letters=("A", "B", "C", "D"), cap=False):
-    return _post("/letters", {"convs": convs, "letters": list(letters), "cap": cap})["probs"]
+def letters(convs, letters=("A", "B", "C", "D"), cap=False, steer=None):
+    q = {"convs": convs, "letters": list(letters), "cap": cap}
+    if steer:
+        q["steer"] = steer
+    return _post("/letters", q)["probs"]
 
 
 def set_dirs(dirs):

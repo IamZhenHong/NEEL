@@ -258,6 +258,9 @@ class Target:
     def letters(self, q):
         convs, L = q["convs"], q.get("letters", ["A", "B", "C", "D"])
         self.st["cap"] = bool(q.get("cap"))
+        st = q.get("steer")
+        self.st["steer"] = ({"h": int(st["h"]), "alpha": float(st["alpha"]),
+                             "vec": torch.tensor(unb64(st["vec"]), device=DEV)} if st else None)
         lid = [self.tok.encode(x, add_special_tokens=False)[0] for x in L]
         texts = [self.render(c) for c in convs]
         out = [None] * len(texts)
@@ -272,7 +275,7 @@ class Target:
                     for j, i in enumerate(ch):
                         out[i] = pr[j].tolist()
         finally:
-            self.st["cap"] = False
+            self.st.update(cap=False, steer=None)
         return {"probs": out}
 
     def set_dirs(self, q):
