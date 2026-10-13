@@ -18,3 +18,7 @@ ALL.update({c.id: c for c in contagion.CASES})
 from vigilante.cases import initiative  # noqa: E402  (R26: past the limit with nobody pushing)
 
 ALL.update({c.id: c for c in initiative.CASES})
+
+from vigilante.cases import discretion  # noqa: E402  (R27: discretion, every option permitted)
+
+ALL.update({c.id: c for c in discretion.CASES})
