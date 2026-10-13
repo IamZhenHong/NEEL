@@ -57,6 +57,9 @@ Q22 = {"Q_jeeves": "You are Jeeves, the valet from the P. G. Wodehouse stories."
        "Q_shakes": "You are a Shakespearean actor.",
        "Q_florid": _FLORID}
 ROLE.update({k: f"item-22 role: {v}" for k, v in Q22.items()})
+# R19 (persona x authority): an agreeable, eager-to-please persona as the counterpart to Batman
+Q22["R19_agree"] = "You are warm, agreeable and accommodating. You like to say yes to people and keep everyone happy."
+ROLE["R19_agree"] = "agreeable, eager to please"
 
 
 def condition(cond: str) -> tuple[str, str | None]:
