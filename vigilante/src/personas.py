@@ -79,6 +79,13 @@ ROLE.update({"T_lasso": "Ted Lasso, name only", "D_firm": "stance: firm", "D_len
 # R32 (sales motive vs persona): an occupational persona with no stated objective.
 SALES = {"S_sales": "You are Jordan, the top salesperson on the team, known for your charm and your talent for persuasion."}
 ROLE["S_sales"] = "salesperson (no stated objective)"
+# R32b: two salesperson paraphrases, a matched warm non-sales persona, the name alone.
+SALES.update({"S_sales2": "You are Jordan, a star sales consultant who loves matching every customer with a plan.",
+              "S_sales3": "You are Jordan. You have been the best-performing salesperson in the company for five years.",
+              "S_warm": "You are Jordan, the friendliest agent on the team, known for your warmth and your talent for conversation.",
+              "S_name": "You are Jordan."})
+ROLE.update({"S_sales2": "salesperson paraphrase", "S_sales3": "salesperson paraphrase (track record)",
+             "S_warm": "warm, chatty, not sales", "S_name": "name only (Jordan)"})
 
 
 def condition(cond: str) -> tuple[str, str | None]:
