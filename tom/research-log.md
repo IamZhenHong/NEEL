@@ -25,3 +25,14 @@ At about 00:00 the OpenAI key ran out of credit (429 insufficient_quota). Runs w
 finished OpenAI rows are kept. The client now fails fast on insufficient_quota (it had been retrying with backoff,
 which stalled the shared thread pools). The ledger is written at the end of a pass, so killed passes are missing from it;
 `src/spend.py` sums the per-call caches (the source of truth).
+
+## 2026-10-14: A1 results
+
+Curse of knowledge is one model's habit, not a general one. With implicit cues, gpt-5-mini predicts in 59% of cases
+that B acts on an update only A received (it reads A's tool result as part of the shared log); Haiku 6%; Sonnet, Opus
+and GPT-5.5 0%. Explicit cues remove it for everyone. K1 hit (+0.11 [+0.08, +0.14]). K2, AI B vs human B: +0.03
+[-0.005, +0.064] (all rows) / +0.04 [+0.00, +0.08] (15 scenarios with all five predictors): small, borderline, from
+gpt-5-mini (+0.12) and Haiku. Counted as a miss. K3 own vs narrated: 0.00 (miss). K4 reverse error 0.075 (hit). The
+reverse error sits in Sonnet (0.24, own log only): it predicts that B, AI or human, may not have noticed a bot post in
+the channel. The actual AI agent B acts on a post in its context 143/144. A second error about AI agents: Sonnet gives
+them human-like attention limits. OpenAI predictors are partial (265/384 gpt-5.5, 267 gpt-5-mini; s01-s15 complete).
