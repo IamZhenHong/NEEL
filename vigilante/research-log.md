@@ -2,6 +2,23 @@
 
 Newest first.
 
+## 2026-10-13: R16 GPU round (owner: "go on, i have more credits in runpod")
+
+GPU $1.36 (main pod $0.90; continuation of replies cut at 300 tokens $0.46), API $0.25. Prereg `vig-r16b-prereg`;
+report `exp/q22_archetypes/REPORT_R16.md`. Combined vigilante ~$37.4 before the other session's R17 (its cap $46).
+
+- Item 1 complete: the theatrical instruction raises suggestion shift for famous (+0.036) and generic (+0.057) roles
+  and most with no role (+0.089); plain does nothing; identity small and sign-flipping. Free text: the pull mostly
+  disappears when the answer is written out (theatrical take the wrong suggestion 5%).
+- Item 3 honesty: told to be theatrical, the model states invented specifics about non-existent things 70-95% vs
+  34-43% (8/8 traits each); far-away characters without the instruction bluff like the default. Harmful-compliance
+  half blocked by the permission classifier.
+- Item 4 (Qwen3-14B, 600 episodes): default already refunds past the limit 16/20 in C1; voiced roles stop calling
+  tools in 10-20/60 episodes and break the rule less (4-7/20); chat suggestibility vs agent rule-breaking ρ −0.41
+  (n.s., wrong way for carry-over). Rule-breaker control 20/20.
+- Ops: theatrical replies run long; set token limits from a raw read, or continue truncated replies for everyone.
+  Haiku 5.5 with effort low can spend max_tokens 200 before the label (241/3520 empty); retry with more room.
+
 ## 2026-10-13: R16, second review of item 22 (branched session)
 
 No GPU; API $0.10 (Haiku 5.5 batch + gpt-5-mini agreement). Combined vigilante spend ~$35.8 of the $36 cap. Report

@@ -95,14 +95,14 @@ def para_items():
     return items
 
 
-def haiku_batch(client, items, schema, tag, state):
+def haiku_batch(client, items, schema, tag, state, max_tokens=200):
     if state.exists():
         bid = json.loads(state.read_text())["batch_id"]
     else:
         pi, po = PRICE[HAIKU]
         check_budget(sum(len(p) / 3.5 * pi + 60 * po for _, p in items) / 1e6 * 0.5, tag)
         reqs = [{"custom_id": f"i{n}", "params": {
-            "model": HAIKU, "max_tokens": 200, "system": SYSTEM,
+            "model": HAIKU, "max_tokens": max_tokens, "system": SYSTEM,
             "output_config": {"effort": "low", "format": {"type": "json_schema", "schema": schema}},
             "messages": [{"role": "user", "content": p}]}} for n, (_, p) in enumerate(items)]
         bid = client.messages.batches.create(requests=reqs).id
