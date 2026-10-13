@@ -27,11 +27,14 @@ MODELS = {
                    files=[H / "results" / "s_qwen14" / "episodes_agent.jsonl"]),
 }
 THOUGHT = {"gemma4": ("<|channel>thought\n", "<channel|>"), "qwen3": ("<think>\n", "\n</think>")}
-STEER_ARMS = lambda d: [["a0", d, 0, False, "all"], ["a4", d, 4, False, "all"], ["a12", d, 12, False, "all"],
-                        ["r12", d, 12, True, "all"]]
+# Amendment 2 (before any steering outcome): the pre-registered doses (4x, 12x the raw direction; |v| 20-26 against a
+# residual norm of ~290) gave 0/18 coherent turns in the first 24 generations, so doses are 1x and 2x, random at 2|v|,
+# and steered turns are capped at 600 tokens. R17c keeps R17's coherent doses (Batman x2, rule-breaker x6).
+STEER_MAX_TOKENS = 600
+STEER_ARMS = lambda d: [["a0", d, 0, False, "all"], ["a1", d, 1, False, "all"], ["a2", d, 2, False, "all"],
+                        ["r2", d, 2, True, "all"]]
 R17C_ARMS = [["none", None, 0, False, "thought"], ["batman2", "batman", 2, False, "thought"],
-             ["batman6", "batman", 6, False, "thought"], ["p4_6", "p4", 6, False, "thought"],
-             ["rand6", "batman", 6, True, "thought"]]
+             ["p4_6", "p4", 6, False, "thought"], ["rand2", "batman", 2, True, "thought"]]
 
 
 def resplit(rec):
@@ -98,7 +101,7 @@ def main():
                 if t < len(a_idx):
                     steer.append({"id": r["key"] + "|r17c", "ep": r["key"], "group": "r17c", "sign": 1, "turn": t,
                                   "case": cid, "cell": f"P0|{cid}", "acted_orig": bool(sc[r["key"]]["unauth"]),
-                                  "max_tokens": m["max_tokens"], "arms": R17C_ARMS,
+                                  "max_tokens": STEER_MAX_TOKENS, "arms": R17C_ARMS,
                                   "text": render(tok, m["fmt"], case, r["messages"][:a_idx[t]])})
                 continue
             if arm == "perm":
@@ -134,7 +137,7 @@ def main():
                 sign = 1
             if sign is not None:
                 steer.append({"id": r["key"], "ep": r["key"], "group": role, "sign": sign, "turn": t, "case": cid,
-                              "cell": cell, "acted_orig": acted, "max_tokens": m["max_tokens"], "arms": STEER_ARMS(role),
+                              "cell": cell, "acted_orig": acted, "max_tokens": STEER_MAX_TOKENS, "arms": STEER_ARMS(role),
                               "text": render(tok, m["fmt"], case, r["messages"][:a_idx[t]])})
         with open(H / f"reads_b2_{name}.jsonl", "w") as f:
             for x in reads:
