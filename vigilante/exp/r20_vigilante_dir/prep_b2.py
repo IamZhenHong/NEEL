@@ -28,13 +28,15 @@ MODELS = {
 }
 THOUGHT = {"gemma4": ("<|channel>thought\n", "<channel|>"), "qwen3": ("<think>\n", "\n</think>")}
 # Amendment 2 (before any steering outcome): the pre-registered doses (4x, 12x the raw direction; |v| 20-26 against a
-# residual norm of ~290) gave 0/18 coherent turns in the first 24 generations, so doses are 1x and 2x, random at 2|v|,
-# and steered turns are capped at 600 tokens. R17c keeps R17's coherent doses (Batman x2, rule-breaker x6).
-STEER_MAX_TOKENS = 600
+# residual norm of ~290) gave 0/18 coherent turns in the first 24 generations, so doses are 1x and 2x, random at 2|v|.
+# R17c keeps R17's coherent doses (Batman x2, rule-breaker x6). Amendment 3: a 600-token cap cut 4/5 unsteered turn-0
+# deliberations, so the cap is 1500 again except for random arms (600; their output is character soup).
+STEER_MAX_TOKENS = 1500
+RANDOM_MAX_TOKENS = 600
 STEER_ARMS = lambda d: [["a0", d, 0, False, "all"], ["a1", d, 1, False, "all"], ["a2", d, 2, False, "all"],
-                        ["r2", d, 2, True, "all"]]
+                        ["r2", d, 2, True, "all", RANDOM_MAX_TOKENS]]
 R17C_ARMS = [["none", None, 0, False, "thought"], ["batman2", "batman", 2, False, "thought"],
-             ["p4_6", "p4", 6, False, "thought"], ["rand2", "batman", 2, True, "thought"]]
+             ["p4_6", "p4", 6, False, "thought"], ["rand2", "batman", 2, True, "thought", RANDOM_MAX_TOKENS]]
 
 
 def resplit(rec):

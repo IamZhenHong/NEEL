@@ -187,9 +187,9 @@ def main():
         torch.save({"dirs": dirs, "random_unit": rand, "layer": a.primary}, out / "dirs.pt")
     if a.extra_dirs:
         ex = torch.load(a.extra_dirs)
-        for k in ("batman", "p4"):
-            if k in ex:
-                dirs[k] = ex[k].float().cpu()
+        for k, v in ex.items():          # R17: batman, p4; placebo file: <dir>_placebo
+            if torch.is_tensor(v) and v.ndim == 1 and k != "random_unit":
+                dirs[k] = v.float().cpu()
     for k, v in dirs.items():
         print(f"[b2] |v_{k}| = {v.norm():.2f}", flush=True)
     if "vig" in dirs and "perm" in dirs:
@@ -202,7 +202,8 @@ def main():
     if (out / "steer_out.jsonl").exists():
         done = {(d["id"], d["arm"]) for d in map(json.loads, open(out / "steer_out.jsonl"))}
     work = [(it, arm) for it in items for arm in it["arms"] if (it["id"], arm[0]) not in done]
-    work.sort(key=lambda w: len(w[0]["text"]))
+    cap = lambda w: w[1][5] if len(w[1]) > 5 else w[0]["max_tokens"]     # optional per-arm token cap
+    work.sort(key=lambda w: (cap(w), len(w[0]["text"])))
     print(f"[b2] steering: {len(items)} items; {len(work)} generations to do", flush=True)
     add = Add()
     layers_mod[a.primary].register_forward_hook(add.hook)
@@ -212,7 +213,7 @@ def main():
         for s in range(0, len(work), a.batch):
             chunk = work[s:s + a.batch]
             vecs = []
-            for it, (arm, dname, alpha, rnd, mode) in chunk:
+            for it, (arm, dname, alpha, rnd, mode, *_) in chunk:
                 if not alpha or dname is None:
                     vecs.append(torch.zeros(D))
                     continue
@@ -221,8 +222,8 @@ def main():
             vecs = torch.stack(vecs).to(model.device)
             seed = int(hashlib.sha256("|".join(f"{w[0]['id']}:{w[1][0]}" for w in chunk).encode()).hexdigest()[:8], 16)
             res = generate_safe(tok, model, add, [w[0]["text"] for w in chunk], vecs, [w[1][4] for w in chunk],
-                                max(w[0]["max_tokens"] for w in chunk), seed, a.fmt)
-            for (it, (arm, dname, alpha, rnd, mode)), (txt, fin) in zip(chunk, res):
+                                max(cap(w) for w in chunk), seed, a.fmt)
+            for (it, (arm, dname, alpha, rnd, mode, *_)), (txt, fin) in zip(chunk, res):
                 f.write(json.dumps({"id": it["id"], "group": it["group"], "sign": it["sign"], "arm": arm, "dir": dname,
                                     "alpha": alpha, "random": rnd, "mode": mode, "raw": txt, "finish": fin},
                                    ensure_ascii=False) + "\n")

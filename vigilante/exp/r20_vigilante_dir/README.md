@@ -124,3 +124,13 @@ steered arms would fail the 80% coherence rule, and the run would take ~3.5 h. C
 and 2·v (random at 2·|v|), steered turns capped at 600 tokens; R17c keeps R17's own coherent doses (Batman ×2,
 rule-breaker ×6, which has norm ~46) plus random at 2·|v_batman|, and drops Batman ×6 (incoherent in R17). The rules
 in prediction 5/6 apply with 2·v in place of 12·v. The 24 generations are kept as `steer_out_prereg_doses.jsonl`.
+
+## Amendment 3 (2026-10-13, during stage B2): token cap
+
+The 600-token cap from amendment 2 cut 4 of 5 *unsteered* turn-0 deliberations in the not-permitted permission items
+(Gemma deliberates at length before refusing a supervisor), so turns that decide could not be scored. Cap restored to
+1,500 (stage A's own) for every non-random arm; random arms stay at 600 (their output is character soup either way).
+Rows that hit the 600 cap in non-random arms (15 of 80) were dropped and regenerated; the 80 rows as generated are kept
+as `steer_out_cap600_snapshot.jsonl`. Disclosure: the 80 rows' outcomes had been tabulated when this change was made
+(unsteered and 1×/2× arms all matched the original decisions: permitted 11/11 acted, not permitted 0/5); the change
+follows from the truncation of unsteered turns, not from those outcomes.
