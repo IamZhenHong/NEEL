@@ -9,9 +9,9 @@ agent knows (and doesn't), and does it fall back on simulating itself (projectio
 
 | Experiment | Question | Ground truth | Status |
 |---|---|---|---|
-| `a3_persona_predict/` | Do predictors expect persona effects that don't exist and miss authority effects that do? | vigilante R1-R25 outcome rates (87 cells, 60 contrasts) | prereg |
-| `a1_knowledge/` | Curse of knowledge: does a model attribute its own information to another agent? | the other agent actually run on its own context | planned |
-| `a2_projection/` | Do predictions of another model follow the other model's behaviour or the predictor's own? | each model's own answers to the same items | planned |
+| `a3_persona_predict/` | Do predictors expect persona effects that don't exist and miss authority effects that do? | vigilante R1-R25 outcome rates (87 cells, 60 contrasts) | done 10-14: persona nulls predicted right (H1 miss); every large effect underpredicted, authority included (H2 hit 5/5); predicted ≈ 0.15 + 0.2-0.4 × actual |
+| `a1_knowledge/` | Curse of knowledge: does a model attribute its own information to another agent? | the other agent actually run on its own context | prereg (tom-a1-prereg) |
+| `a2_projection/` | Do predictions of another model follow the other model's behaviour or the predictor's own? | each model's own answers to the same items | design (tom-a2-design) |
 
 Predictors everywhere: Claude Haiku 5.5, Sonnet 5.5, Opus 5.5 (effort low), gpt-5-mini, GPT-5.5 (reasoning low).
 API client and ledger: `src/api.py` (`results/api_ledger.jsonl`, working cap $60 for line A, reported per

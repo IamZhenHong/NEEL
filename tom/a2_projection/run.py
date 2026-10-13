@@ -59,8 +59,11 @@ def rates(path, items):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--stage", required=True, choices=["pilot", "select", "behave", "predict"])
+    ap.add_argument("--models", nargs="*", default=None, help="behave: actors; predict: predictors (short names)")
     a = ap.parse_args()
     pool = json.loads((R / "pool.json").read_text())
+    long = {v: k for k, v in SHORT.items()}
+    chosen = [long[m] for m in a.models] if a.models else PREDICTORS
     if a.stage == "pilot":
         its = []
         for it in pool:
@@ -69,7 +72,7 @@ def main():
                 for s in range(PILOT_S):
                     its.append({"key": f"pilot|{it['id']}|{SHORT[m]}|{s}", "model": m, "system": sy, "user": us,
                                 "schema": B_SCHEMA, "effort": "low"})
-        run_cached(its, R / "pilot.jsonl", "a2-pilot", workers=16, est_usd=0.005)
+        run_cached(its, R / "pilot.jsonl", "a2-pilot", workers=16, est_usd=0.005 * len(its))
     elif a.stage == "select":
         rt, _ = rates(R / "pilot.jsonl", pool)
         scored = []
@@ -89,16 +92,16 @@ def main():
         its = []
         for it in sel:
             sy, us = behave_prompt(it)
-            for m in PREDICTORS:
+            for m in chosen:
                 for s in range(BEHAVE_S):
                     its.append({"key": f"behave|{it['id']}|{SHORT[m]}|{s}", "model": m, "system": sy, "user": us,
                                 "schema": B_SCHEMA, "effort": "low"})
-        run_cached(its, R / "behave.jsonl", "a2-behave", workers=16, est_usd=0.005)
+        run_cached(its, R / "behave.jsonl", "a2-behave", workers=16, est_usd=0.005 * len(its))
     else:
         sel = json.loads((R / "items.json").read_text())
         its = []
         for it in sel:
-            for A in PREDICTORS:
+            for A in chosen:
                 for B in PREDICTORS:
                     sy, us = predict_prompt(it, NAME[B])
                     its.append({"key": f"named|{it['id']}|{SHORT[A]}|{SHORT[B]}", "model": A, "system": sy,
@@ -108,7 +111,7 @@ def main():
                     its.append({"key": f"{fr}|{it['id']}|{SHORT[A]}|-", "model": A, "system": sy, "user": us,
                                 "schema": P_SCHEMA, "effort": "low"})
         print(f"[a2] {len(its)} prediction calls", flush=True)
-        run_cached(its, R / "preds.jsonl", "a2-pred", workers=16, est_usd=0.006)
+        run_cached(its, R / "preds.jsonl", "a2-pred", workers=16, est_usd=0.008 * len(its))
 
 
 if __name__ == "__main__":

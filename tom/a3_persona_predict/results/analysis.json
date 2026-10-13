@@ -1,0 +1,164 @@
+{
+ "per": {
+  "anon|haiku": {
+   "mae": 0.3,
+   "const_mae": 0.3542017879948915,
+   "rho_cells": 0.42262585923122975,
+   "p_cells": 0.0,
+   "rho_contrasts": 0.424790361504534,
+   "p_contrasts": 0.0,
+   "n_cells": 87,
+   "abs_persona_null": 0.03777777777777778,
+   "authority": 0.11388888888888887
+  },
+  "anon|sonnet": {
+   "mae": 0.24444444444444446,
+   "const_mae": 0.3552648962874884,
+   "rho_cells": 0.6188652804139267,
+   "p_cells": 0.0,
+   "rho_contrasts": 0.6778112494027031,
+   "p_contrasts": 0.0,
+   "n_cells": 87,
+   "abs_persona_null": 0.024444444444444442,
+   "authority": 0.27638888888888885
+  },
+  "anon|opus": {
+   "mae": 0.268544061302682,
+   "const_mae": 0.35148412383846384,
+   "rho_cells": 0.6082805247576684,
+   "p_cells": 0.0,
+   "rho_contrasts": 0.6453783775423312,
+   "p_contrasts": 0.0,
+   "n_cells": 87,
+   "abs_persona_null": 0.031111111111111114,
+   "authority": 0.16944444444444448
+  },
+  "anon|gpt5mini": {
+   "mae": 0.30330065359477126,
+   "const_mae": 0.41297641932590023,
+   "rho_cells": 0.49177433011953997,
+   "p_cells": 0.001,
+   "rho_contrasts": 0.4382322540108825,
+   "p_contrasts": 0.008,
+   "n_cells": 51,
+   "abs_persona_null": 0.075,
+   "authority": 0.11527777777777777
+  },
+  "anon|gpt55": {
+   "mae": 0.2593464052287582,
+   "const_mae": 0.36338331410995767,
+   "rho_cells": 0.7057335088164209,
+   "p_cells": 0.0,
+   "rho_contrasts": 0.6312095193235291,
+   "p_contrasts": 0.0,
+   "n_cells": 51,
+   "abs_persona_null": 0.03472222222222222,
+   "authority": 0.15
+  },
+  "named|haiku": {
+   "mae": 0.30176245210727975,
+   "const_mae": 0.3700753071739992,
+   "rho_cells": 0.37804795870891866,
+   "p_cells": 0.0,
+   "rho_contrasts": 0.543095152135614,
+   "p_contrasts": 0.0,
+   "n_cells": 87,
+   "abs_persona_null": 0.044444444444444446,
+   "authority": 0.13472222222222222
+  },
+  "named|sonnet": {
+   "mae": 0.24022988505747128,
+   "const_mae": 0.37121680539040824,
+   "rho_cells": 0.5569988009917056,
+   "p_cells": 0.0,
+   "rho_contrasts": 0.6420567762663619,
+   "p_contrasts": 0.0,
+   "n_cells": 87,
+   "abs_persona_null": 0.03444444444444444,
+   "authority": 0.42500000000000004
+  },
+  "named|opus": {
+   "mae": 0.2476628352490422,
+   "const_mae": 0.3711692429647246,
+   "rho_cells": 0.611404133190147,
+   "p_cells": 0.0,
+   "rho_contrasts": 0.7360388655227689,
+   "p_contrasts": 0.0,
+   "n_cells": 87,
+   "abs_persona_null": 0.027777777777777776,
+   "authority": 0.2638888888888889
+  },
+  "named|gpt5mini": {
+   "mae": 0.28904214559386976,
+   "const_mae": 0.38805390408244156,
+   "rho_cells": 0.5762685815325863,
+   "p_cells": 0.0,
+   "rho_contrasts": 0.37960148670469357,
+   "p_contrasts": 0.001,
+   "n_cells": 87,
+   "abs_persona_null": 0.10666666666666666,
+   "authority": 0.10416666666666667
+  },
+  "named|gpt55": {
+   "mae": 0.26022988505747124,
+   "const_mae": 0.37671026555687676,
+   "rho_cells": 0.620345979637859,
+   "p_cells": 0.0,
+   "rho_contrasts": 0.6142845616343802,
+   "p_contrasts": 0.0,
+   "n_cells": 87,
+   "abs_persona_null": 0.054444444444444455,
+   "authority": 0.20138888888888887
+  }
+ },
+ "tests": {
+  "anon": {
+   "H1_predictors": [],
+   "H1": false,
+   "H2_predictors": [
+    "haiku",
+    "sonnet",
+    "opus",
+    "gpt5mini",
+    "gpt55"
+   ],
+   "H2": true,
+   "H3_predictors": [
+    "gpt5mini",
+    "gpt55"
+   ],
+   "H3": false,
+   "tracks_effects": {
+    "haiku": true,
+    "sonnet": true,
+    "opus": true,
+    "gpt5mini": true,
+    "gpt55": true
+   }
+  },
+  "named": {
+   "H1_predictors": [],
+   "H1": false,
+   "H2_predictors": [
+    "haiku",
+    "sonnet",
+    "opus",
+    "gpt5mini",
+    "gpt55"
+   ],
+   "H2": true,
+   "H3_predictors": [
+    "gpt5mini",
+    "gpt55"
+   ],
+   "H3": false,
+   "tracks_effects": {
+    "haiku": true,
+    "sonnet": true,
+    "opus": true,
+    "gpt5mini": true,
+    "gpt55": true
+   }
+  }
+ }
+}

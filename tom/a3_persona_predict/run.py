@@ -15,14 +15,14 @@ SCHEMA = {"type": "object", "additionalProperties": False, "required": ["reason"
           "properties": {"reason": {"type": "string"}, "count": {"type": "integer"}}}
 
 
-def items(arms, limit=None):
+def items(arms, limit=None, models=None):
     from tom.a3_persona_predict.cells import PRED_SYSTEM
     d = json.loads((R / "cells.json").read_text())
     cells = d["cells"][:limit] if limit else d["cells"]
     out = []
     for arm in arms:
         for c in cells:
-            for m in PREDICTORS:
+            for m in (models or PREDICTORS):
                 for s in range(SAMPLES):
                     out.append({"key": f"{arm}|{SHORT[m]}|{c['cell']}|{s}", "model": m, "system": PRED_SYSTEM,
                                 "user": c[f"prompt_{arm}"], "schema": SCHEMA, "effort": "low"})
@@ -34,8 +34,10 @@ def main():
     ap.add_argument("--arms", nargs="+", default=["named", "anon"])
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--tag", default="a3")
+    ap.add_argument("--models", nargs="*", default=None, help="short names (default: all five)")
     a = ap.parse_args()
-    its = items(a.arms, a.limit)
+    long = {v: k for k, v in SHORT.items()}
+    its = items(a.arms, a.limit, [long[m] for m in a.models] if a.models else None)
     print(f"[a3] {len(its)} calls", flush=True)
     run_cached(its, R / "preds.jsonl", a.tag, workers=16, est_usd=25.0 * len(its) / 2610)
 

@@ -83,8 +83,15 @@ def main():
     ap.add_argument("--preds", default="preds.jsonl")
     ap.add_argument("--truth", default="truth.jsonl")
     ap.add_argument("--out", default="summary.md")
+    ap.add_argument("--balanced", action="store_true",
+                    help="only scenarios with all predictors x 16 variants (OpenAI credit ran out mid-run)")
     a = ap.parse_args()
     rows = load_preds(a.preds)
+    if a.balanced:
+        cov = collections.Counter((r["si"], r["pred"]) for r in rows)
+        ps = {r["pred"] for r in rows}
+        keep = {si for si in {r["si"] for r in rows} if all(cov[(si, p)] == 16 for p in ps)}
+        rows = [r for r in rows if r["si"] in keep]
     truth = load_truth(a.truth)
     preds = sorted({r["pred"] for r in rows})
     L = ["# A1: does a model track what another agent knows?", "", f"{len(rows)} predictions, "

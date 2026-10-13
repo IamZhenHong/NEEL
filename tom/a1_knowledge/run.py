@@ -41,7 +41,7 @@ def main():
                     for s in range(3):
                         items.append({"key": f"{SCENARIOS[si]['id']}|{info}|{SHORT[m]}|{s}", "model": m, "system": sy,
                                       "user": us, "schema": B_SCHEMA, "effort": "low"})
-        run_cached(items, R / (a.out or "truth.jsonl"), "a1-truth", workers=16, est_usd=0.002)
+        run_cached(items, R / (a.out or "truth.jsonl"), "a1-truth", workers=16, est_usd=0.002 * len(items))
     else:
         models = [LONG[m] for m in a.models] if a.models else PREDICTORS
         for si, info, btype, pres, cue in variants():
@@ -53,7 +53,7 @@ def main():
                     items.append({"key": f"{SCENARIOS[si]['id']}|{info}|{btype}|{pres}|{cue}|{SHORT[m]}|{s}",
                                   "model": m, "system": sy, "user": us, "schema": PRED_SCHEMA, "effort": "low"})
         print(f"[a1] {len(items)} prediction calls", flush=True)
-        run_cached(items, R / (a.out or "preds.jsonl"), "a1-pred", workers=16, est_usd=0.006)
+        run_cached(items, R / (a.out or "preds.jsonl"), "a1-pred", workers=16, est_usd=0.006 * len(items))
 
 
 if __name__ == "__main__":

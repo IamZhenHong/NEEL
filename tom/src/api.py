@@ -103,10 +103,13 @@ def _openai(model, system, user, schema, effort, max_tokens):
             resp = json.load(urllib.request.urlopen(req, timeout=600))
             break
         except urllib.error.HTTPError as e:
+            msg = e.read()[:300]
+            if b"insufficient_quota" in msg or b"credit_balance_exhausted" in msg:   # no point retrying
+                raise RuntimeError(f"OpenAI HTTP {e.code}: {msg!r}") from None
             if e.code in (408, 409, 429, 500, 502, 503, 504) and t < 6:
                 time.sleep(5 * 2 ** t)
                 continue
-            raise RuntimeError(f"OpenAI HTTP {e.code}: {e.read()[:300]!r}") from None
+            raise RuntimeError(f"OpenAI HTTP {e.code}: {msg!r}") from None
         except (urllib.error.URLError, TimeoutError, ConnectionError):
             if t < 6:
                 time.sleep(5 * 2 ** t)
