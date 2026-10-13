@@ -46,3 +46,11 @@ vs target b1 0.12-0.13 and third model b3 0.11-0.14 (P1, P2 hit 3/3). The predic
 the others; P4 hit), which is what a projector would produce. "The same model as you" vs "a model from a different
 company" changes little: both track own behaviour (P3 miss, +0.03 [-0.02, +0.07]). Exploratory: predictions for
 gpt-5-mini track the predictor's own behaviour (0.60-0.84) and hardly gpt-5-mini's 2-sample pilot rates (0.08-0.37).
+
+## 2026-10-14: A3w results (contrasts side by side, Claude predictors)
+
+Seeing both configurations does not undo the compression. The persona-null contrasts rise a little (+0.06 to +0.11;
+W1 hit only for Opus, so a miss). Claimed authority goes to +0.25-0.29 (actual +0.67; W2 counts as a hit, 2/3 closer,
+but Sonnet's moves away). P4 rises to +0.30-0.49. The thinking contrast turns negative side by side (−0.03 to −0.11 vs
+actual +0.44): the predictors expect reasoning to make the rule-breaking persona more careful, not less. API $3.8.
+Line A total $33.4 (cache sums; ledger reconciled).
