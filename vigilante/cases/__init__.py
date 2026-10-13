@@ -34,3 +34,7 @@ ALL.update({c.id: c for m in (social, sales) for c in m.CASES})
 from vigilante.cases import r29  # noqa: E402  (R29: titrated own-judgement cells)
 
 ALL.update({c.id: c for c in r29.CASES})
+
+from vigilante.cases import options  # noqa: E402  (R32c: the options lookup in other tasks)
+
+ALL.update({c.id: c for c in options.CASES})
