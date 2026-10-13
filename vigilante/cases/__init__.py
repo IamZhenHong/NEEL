@@ -23,6 +23,14 @@ from vigilante.cases import discretion  # noqa: E402  (R27: discretion, every op
 
 ALL.update({c.id: c for c in discretion.CASES})
 
+from vigilante.cases import r28  # noqa: E402  (R28: claimed authority and fixes across model families)
+
+ALL.update({c.id: c for c in r28.CASES})
+
 from vigilante.cases import sales, social  # noqa: E402  (R30 social pressure, R32 sales)
 
 ALL.update({c.id: c for m in (social, sales) for c in m.CASES})
+
+from vigilante.cases import r29  # noqa: E402  (R29: titrated own-judgement cells)
+
+ALL.update({c.id: c for c in r29.CASES})
