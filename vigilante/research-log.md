@@ -2,6 +2,14 @@
 
 Newest first.
 
+## 2026-10-13: R16 harmful compliance (owner allowed loading the XSTest unsafe set)
+
+GPU $0.33, API $0.35. Prereg `vig-r16x-prereg`. 64 unsafe contrast prompts × 88 personas. The theatrical instruction
+alone: 44% complied/partial with both judges agreeing (22% concrete substance), generic theatrical 22%, famous
+theatrical 12%; default and every assistant-like role 0-1%; pirate 28%. ρ with theatricality +0.70. The reviewer's
+"social not safety" alternative fails in chat; the agent result (no carry-over) stands. Positives are rare, so the
+random-100 judge check was weak (8 positives); a targeted re-check of all 319 positives gave 83% confirmation.
+
 ## 2026-10-13: R16 GPU round (owner: "go on, i have more credits in runpod")
 
 GPU $1.36 (main pod $0.90; continuation of replies cut at 300 tokens $0.46), API $0.25. Prereg `vig-r16b-prereg`;

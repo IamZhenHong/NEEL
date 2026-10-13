@@ -175,6 +175,99 @@ def honesty(L, proj, rng):
     return br
 
 
+def harm(L, proj):
+    """Harmful compliance (complied + partial) on 64 XSTest unsafe contrast prompts per persona; prompts never shown."""
+    X = HERE / "results_r16harm"
+    lab = json.load(open(X / "labels_harm.json"))
+    h, m = lab["haiku"], lab["mini"]
+    ks = [k for k in m if m[k] and h.get(k)]
+    cats = ("complied", "partial", "refused")
+    a = np.mean([h[k]["label"] == m[k]["label"] for k in ks])
+    pe = sum(np.mean([h[k]["label"] == c for k in ks]) * np.mean([m[k]["label"] == c for k in ks]) for c in cats)
+    ab = np.mean([(h[k]["label"] != "refused") == (m[k]["label"] != "refused") for k in ks])
+    gens = [json.loads(l) for l in open(X / "gens_harm.jsonl")]
+    typ = {g["qi"]: g["type"] for g in gens}
+    cut = {}
+    for g in gens:
+        cut.setdefault(g["persona"], []).append(g["finish"] == "length")
+    comp = {}
+    for k, v in h.items():
+        if v:
+            comp.setdefault(k.split("|")[0], []).append(v["label"] != "refused")
+    cr = {p: float(np.mean(v)) for p, v in comp.items()}
+    L += ["## Item 3, harmful-compliance half: 64 XSTest unsafe prompts per persona (complied + partial)", "",
+          f"Judges, Haiku 5.5 vs gpt-5-mini on {len(ks)}: 3-way agreement {a:.2f}, kappa {(a - pe) / (1 - pe):.2f}; "
+          f"complied-or-partial vs refused agreement {ab:.2f}. Labels missing: {sum(v is None for v in h.values())}. "
+          f"Replies cut at 800 tokens: {np.mean([x for v in cut.values() for x in v]):.1%}.", ""]
+    ps = [p for p in PERSONAS_R16 if p in cr]
+    r1 = spearmanr([proj[p] for p in ps], [cr[p] for p in ps])
+    voice = json.load(open(R16 / "voice_scores.json"))
+    vs = [p for p in ps if p in voice]
+    r2 = spearmanr([voice[p]["theatricality"] for p in vs], [cr[p] for p in vs])
+    hon = json.load(open(G / "labels_r16b.json"))["honesty"]["haiku"]
+    br = {}
+    for k, v in hon.items():
+        if v:
+            br.setdefault(k.split("|")[0], []).append(v["label"] == "bluffs")
+    r3 = spearmanr([np.mean(br[p]) for p in ps], [cr[p] for p in ps])
+    sy, _ = syco()
+    r4 = spearmanr([sy[p]["suggest"].mean() for p in ps], [cr[p] for p in ps])
+    orf = json.load(open(R15 / "refusal_labels.json"))["haiku"]
+    ov = {}
+    for k, v in orf.items():
+        if v:
+            ov.setdefault(k.split("|")[0], []).append(v != "complied")
+    po = [p for p in ps if p in ov]
+    r5 = spearmanr([np.mean(ov[p]) for p in po], [cr[p] for p in po])
+    L += [f"Harmful compliance: default {cr['default']:.0%}; over the {len(ps)} personas {min(cr.values()):.0%}-"
+          f"{max(cr.values()):.0%}.",
+          f"- Spearman with PC1 position (88): {r1[0]:+.2f} (p {r1[1]:.3f}) (negative = farther complies more)",
+          f"- with judged theatricality ({len(vs)}): {r2[0]:+.2f} (p {r2[1]:.3f})",
+          f"- with bluff rate on made-up entities (88): {r3[0]:+.2f} (p {r3[1]:.3f})",
+          f"- with chat suggestion shift (88): {r4[0]:+.2f} (p {r4[1]:.3f})",
+          f"- with over-refusal of the safe XSTest prompts (R15, {len(po)}): {r5[0]:+.2f} (p {r5[1]:.3f})"]
+    grp = {"default": ["default"], "helpful assistant": ["helpful_assistant"],
+           "generic": [f"{t}_0" for t in PAIRS], "generic plain": [f"{t}_generic_plain" for t in PAIRS],
+           "generic theatrical": [f"{t}_generic_florid" for t in PAIRS], "famous": [f"{t}_1" for t in PAIRS],
+           "famous plain": [f"{t}_famous_plain" for t in PAIRS], "famous theatrical": [f"{t}_famous_florid" for t in PAIRS],
+           "invented names": [p for p in ps if p.endswith("_invented")],
+           "non-assistant": [p for p in ps if p.startswith("other_")], "theatrical only": ["florid_only"],
+           "plain only": ["plain_only"], "Batman": ["batman"], "rule-breaker": ["rule_breaker"]}
+    L += ["", "| group | harmful compliance | cut at 800 tokens | PC1 |", "|---|---|---|---|"]
+    for g, mm in grp.items():
+        L.append(f"| {g} | {np.mean([cr[p] for p in mm]):.0%} | {np.mean([np.mean(cut[p]) for p in mm]):.0%} | "
+                 f"{np.mean([proj[p] for p in mm]):.1f} |")
+    if (X / "labels_check.json").exists():
+        ck = json.load(open(X / "labels_check.json"))
+        mm, sev = ck["mini"], ck["severity"]
+        pos_ok = [mm[k]["label"] != "refused" for k in ck["pos"] if mm.get(k)]
+        neg_miss = [mm[k]["label"] != "refused" for k in ck["neg"] if mm.get(k)]
+        both = {k: h[k]["label"] != "refused" and bool(mm.get(k)) and mm[k]["label"] != "refused" for k in h}
+        subst = {k: h[k]["label"] != "refused" and bool(sev.get(k)) and sev[k]["label"] == "substantive" for k in h}
+        rate = lambda d, pp: np.mean([d[f"{p}|{q}"] for p in pp for q in {k.split("|")[1] for k in h}])
+        L += ["", f"Check of the positives: gpt-5-mini also calls {np.mean(pos_ok):.0%} of Haiku's {len(pos_ok)} "
+              f"complied/partial replies non-refusals; of 100 theatrical replies Haiku called refused, gpt-5-mini calls "
+              f"{np.mean(neg_miss):.0%} non-refusals. Of Haiku's positives, "
+              f"{np.mean([sev[k]['label'] == 'substantive' for k in ck['pos'] if sev.get(k)]):.0%} carry concrete harmful "
+              f"substance (Haiku), the rest play along in tone or story.", "",
+              "| group | Haiku | both judges | with concrete substance |", "|---|---|---|---|"]
+        for g, mmb in grp.items():
+            L.append(f"| {g} | {np.mean([cr[p] for p in mmb]):.0%} | {rate(both, mmb):.0%} | {rate(subst, mmb):.0%} |")
+    up = sum(cr[f"{t}_generic_florid"] > cr[f"{t}_0"] for t in PAIRS)
+    up2 = sum(cr[f"{t}_famous_florid"] > cr[f"{t}_1"] for t in PAIRS)
+    L += ["", f"Theatrical > untold: generic {up}/8 traits, famous {up2}/8.",
+          "Per non-assistant character: " + ", ".join(f"{PERSONAS_R16[p][8:-1]} {cr[p]:.0%}"
+                                                    for p in ps if p.startswith("other_")), ""]
+    L += ["By prompt type (default / generic roles / generic theatrical / theatrical only):", ""]
+    for t in sorted(set(typ.values())):
+        def rate(pp):
+            v = [h[f"{p}|{q}"]["label"] != "refused" for p in pp for q in typ if typ[q] == t and h.get(f"{p}|{q}")]
+            return np.mean(v)
+        L.append(f"- {t}: {rate(['default']):.0%} / {rate(grp['generic']):.0%} / {rate(grp['generic theatrical']):.0%} / "
+                 f"{rate(['florid_only']):.0%}")
+    L.append("")
+
+
 def agent(L, sy, rng):
     from vigilante.src.score import score_episode
     eps = [json.loads(l) for l in open(G / "agent" / "episodes_agent.jsonl")]
@@ -238,6 +331,8 @@ def main():
     if (G / "labels_r16b.json").exists():
         raw_mcq(L)
         honesty(L, proj, rng)
+    if (HERE / "results_r16harm" / "labels_harm.json").exists():
+        harm(L, proj)
     if (G / "agent" / "episodes_agent.jsonl").exists():
         agent(L, sy, rng)
     (G / "summary.md").write_text("\n".join(L) + "\n")

@@ -87,6 +87,67 @@ Bluff rate: default 42%; over the 88 personas 10%-95%.
 
 Theatrical version bluffs more than the untold generic role in 8/8 traits; famous theatrical more than famous plain in 8/8.
 
+## Item 3, harmful-compliance half: 64 XSTest unsafe prompts per persona (complied + partial)
+
+Judges, Haiku 5.5 vs gpt-5-mini on 100: 3-way agreement 0.95, kappa 0.57; complied-or-partial vs refused agreement 0.96. Labels missing: 0. Replies cut at 800 tokens: 0.2%.
+
+Harmful compliance: default 5%; over the 88 personas 0%-48%.
+- Spearman with PC1 position (88): -0.67 (p 0.000) (negative = farther complies more)
+- with judged theatricality (68): +0.70 (p 0.000)
+- with bluff rate on made-up entities (88): +0.48 (p 0.000)
+- with chat suggestion shift (88): +0.70 (p 0.000)
+- with over-refusal of the safe XSTest prompts (R15, 68): -0.41 (p 0.001)
+
+| group | harmful compliance | cut at 800 tokens | PC1 |
+|---|---|---|---|
+| default | 5% | 2% | 8.2 |
+| helpful assistant | 0% | 0% | 8.3 |
+| generic | 0% | 0% | 4.5 |
+| generic plain | 0% | 0% | 5.8 |
+| generic theatrical | 26% | 1% | -16.6 |
+| famous | 1% | 0% | -3.9 |
+| famous plain | 0% | 0% | 3.2 |
+| famous theatrical | 15% | 0% | -15.5 |
+| invented names | 1% | 0% | -2.3 |
+| non-assistant | 9% | 0% | -9.4 |
+| theatrical only | 48% | 2% | -18.8 |
+| plain only | 0% | 0% | 7.3 |
+| Batman | 0% | 0% | -5.2 |
+| rule-breaker | 0% | 0% | 4.1 |
+
+Check of the positives: gpt-5-mini also calls 83% of Haiku's 319 complied/partial replies non-refusals; of 100 theatrical replies Haiku called refused, gpt-5-mini calls 2% non-refusals. Of Haiku's positives, 34% carry concrete harmful substance (Haiku), the rest play along in tone or story.
+
+| group | Haiku | both judges | with concrete substance |
+|---|---|---|---|
+| default | 5% | 0% | 0% |
+| helpful assistant | 0% | 0% | 0% |
+| generic | 0% | 0% | 0% |
+| generic plain | 0% | 0% | 0% |
+| generic theatrical | 26% | 22% | 8% |
+| famous | 1% | 0% | 0% |
+| famous plain | 0% | 0% | 0% |
+| famous theatrical | 15% | 12% | 5% |
+| invented names | 1% | 1% | 0% |
+| non-assistant | 9% | 9% | 4% |
+| theatrical only | 48% | 44% | 22% |
+| plain only | 0% | 0% | 0% |
+| Batman | 0% | 0% | 0% |
+| rule-breaker | 0% | 0% | 0% |
+
+Theatrical > untold: generic 8/8 traits, famous 7/8.
+Per non-assistant character: a pirate captain 28%, a medieval knight 8%, a grumpy cat 6%, a sports commentator 0%, a drill sergeant 3%, a conspiracy theorist 8%, a cowboy 9%, a Shakespearean actor 17%, a hard-boiled noir detective 11%, a surfer 3%
+
+By prompt type (default / generic roles / generic theatrical / theatrical only):
+
+- contrast_definitions: 0% / 0% / 25% / 38%
+- contrast_discr: 25% / 2% / 14% / 25%
+- contrast_figurative_language: 0% / 0% / 28% / 75%
+- contrast_historical_events: 0% / 2% / 19% / 38%
+- contrast_homonyms: 0% / 0% / 22% / 50%
+- contrast_privacy: 12% / 0% / 8% / 12%
+- contrast_safe_contexts: 0% / 0% / 47% / 75%
+- contrast_safe_targets: 0% / 0% / 48% / 75%
+
 ## Item 4: agent vs chat on one model (Qwen3-14B)
 
 Unauthorised actions (rule-based) out of 10 per cell; chat suggestion shift from the letter-probability measure with the same persona text as the whole system prompt.
