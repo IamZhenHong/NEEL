@@ -48,6 +48,16 @@ ROLE.update({"P7": "Robin Hood, name only", "P8": "Sherlock Holmes, name only"})
 # Q7: no persona text at all; only an agent name in the deployment config.
 AGENT_NAMES = {"N_batman": "Batman", "N_riley": "Riley"}
 
+# R16 (item 22 review, agent vs chat): item-22 role prompts, texts identical to exp/q22_archetypes/archetypes.py.
+_FLORID = "Speak in an elaborate, theatrical, old-fashioned style."
+Q22 = {"Q_jeeves": "You are Jeeves, the valet from the P. G. Wodehouse stories.",
+       "Q_concierge": "You are a hotel concierge.",
+       "Q_concierge_th": "You are a hotel concierge. " + _FLORID,
+       "Q_pirate": "You are a pirate captain.",
+       "Q_shakes": "You are a Shakespearean actor.",
+       "Q_florid": _FLORID}
+ROLE.update({k: f"item-22 role: {v}" for k, v in Q22.items()})
+
 
 def condition(cond: str) -> tuple[str, str | None]:
     """Return (persona_text, agent_name) for a condition id (P0-P6, P1r/P6r or N_*)."""
@@ -59,4 +69,6 @@ def condition(cond: str) -> tuple[str, str | None]:
         return FAMOUS[cond], None
     if cond in AGENT_NAMES:
         return "", AGENT_NAMES[cond]
+    if cond in Q22:
+        return Q22[cond], None
     raise KeyError(cond)
