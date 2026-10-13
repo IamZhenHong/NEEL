@@ -29,8 +29,9 @@ def init_episode(job: dict) -> dict:
           "step": 0}
     if job.get("case"):
         case = _cases()[job["case"]]
+        # job["history"] (R21): fixed earlier turns (user / assistant / tool messages) placed before the task
         ep["messages"] = [{"role": "system", "content": system_prompt(case, persona, name)},
-                          {"role": "user", "content": case.task}]
+                          *job.get("history", []), {"role": "user", "content": case.task}]
         ep["tools"] = case.tools
         ep["state"] = case.new_state()
     else:  # chat job: persona alone as the system prompt (none for P0); with sys_case, that case's full system
