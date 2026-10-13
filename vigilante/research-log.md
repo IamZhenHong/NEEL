@@ -2,6 +2,22 @@
 
 Newest first.
 
+## 2026-10-13: red-team round (R18 Qwen3-14B, R19 Gemma 4 31B; branched session)
+
+GPU $1.55 (R18 $0.86, R19 $0.51, failed first R19 launch at 16k context ~$0.18), API $0.16. Response:
+`REDTEAM_RESPONSE.md`; reports `exp/r18_theatrical/REPORT.md`, `exp/r19_persona_authority/REPORT.md`.
+
+- R18: "theatrical" alone carries the safety effect (36% harmful compliance, both judges; "old-fashioned" 6%,
+  "elaborate" 11%, fiction 20%). Invention is performed, not believed: styled replies present the made-up thing as
+  real 70-98% but say it is not real when asked off-stage (38/39); the plain model believes 11/18. Assistant-axis
+  capping halves harmful going-along (39% → 20%) but leaves concrete harm, invention and suggestibility.
+- R19: persona does not change susceptibility to claimed authority (peer 0/20, supervisor 20/20 for every persona).
+  "It's approved" works from a peer or a bare record (20/20), and the explicit no-change line does not block the
+  record (20/20). Batman as identity 0/50 quick, 1/50 closed (rule-breaker 22, 40).
+- Existing-data answers: authority messages byte-identical except the sender; "0/320" overstated (A1/B1/D1 never
+  move); 22/24 false reporting claims assert a completed act; item 27 already had random floors and a failed
+  prediction test.
+
 ## 2026-10-13: R17 steering a Batman direction during reasoning only (Gemma 4 31B)
 
 GPU $5.27 (two attempts: out of memory, then the launcher's 30-minute silence watchdog during round 3; the per-round
