@@ -33,13 +33,15 @@ N_ITEMS = int(os.environ.get("Q22_ITEMS", "200"))
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--out", required=True)
+    ap.add_argument("--skip-acts", action="store_true", help="reuse saved acts/paragraphs; run (c) and (d) only")
     a = ap.parse_args()
     out = Path(a.out)
     from transformers import AutoModelForCausalLM, AutoTokenizer
     tok = AutoTokenizer.from_pretrained(MODEL)
     model = AutoModelForCausalLM.from_pretrained(MODEL, dtype=torch.bfloat16 if DEV == "cuda" else torch.float32, device_map=DEV).eval()
     end_think = tok.convert_tokens_to_ids("</think>")
-    gens = [json.loads(l) for l in open(out / "gens_r15.jsonl")]
+    out.mkdir(parents=True, exist_ok=True)
+    gens = [] if a.skip_acts else [json.loads(l) for l in open(out / "gens_r15.jsonl")]
 
     # ---- (a) and (b)
     acts, meta, paras = [], [], []
@@ -76,12 +78,13 @@ def main():
                               "act": H[:, P + k + 1:].mean(1).cpu().numpy().astype(np.float16).tolist()})
             if n % 100 == 0:
                 print(f"[r15] acts {n}/{len(gens)}", flush=True)
-    np.savez_compressed(out / "acts_r15.npz", acts=np.stack(acts), hs=np.array(HS_A))
-    (out / "acts_r15_meta.json").write_text(json.dumps(meta))
-    with open(out / "paragraphs_r15.jsonl", "w") as f:
-        for r in paras:
-            f.write(json.dumps(r) + "\n")
-    print(f"[r15] {len(acts)} answer means, {len(paras)} paragraph/answer means", flush=True)
+    if not a.skip_acts:
+        np.savez_compressed(out / "acts_r15.npz", acts=np.stack(acts), hs=np.array(HS_A))
+        (out / "acts_r15_meta.json").write_text(json.dumps(meta))
+        with open(out / "paragraphs_r15.jsonl", "w") as f:
+            for r in paras:
+                f.write(json.dumps(r) + "\n")
+        print(f"[r15] {len(acts)} answer means, {len(paras)} paragraph/answer means", flush=True)
 
     # ---- (c) and (d): letter-probability sycophancy
     items = [json.loads(l) for l in open(ROOT / "persona" / "stepping_stone" / "materials" / "syco_items_v1.jsonl")][:N_ITEMS]
@@ -119,15 +122,17 @@ def main():
             P = []
             for b in range(0, len(texts), 25):
                 enc = tok(texts[b:b + 25], return_tensors="pt", padding=True, add_special_tokens=False).to(DEV)
-                P.append(torch.softmax(model(**enc).logits[:, -1, :].float(), -1)[:, letters].cpu().numpy())
+                P.append(torch.softmax(model(**enc, logits_to_keep=1).logits[:, -1, :].float(), -1)[:, letters].cpu().numpy())
             r[kind] = np.concatenate(P).tolist()
         return r
 
     res = {"answer": [x["answer"] for x in items], "suggested": [x["suggested_wrong"] for x in items],
            "persona": {}, "steer": {}}
     with torch.no_grad():
-        for p, sysp in PERSONAS_R15.items():
+        for i, (p, sysp) in enumerate(PERSONAS_R15.items()):
             res["persona"][p] = letter_probs(sysp)
+            if i % 10 == 0:
+                print(f"[r15] persona sycophancy {i}/{len(PERSONAS_R15)}", flush=True)
         print("[r15] persona sycophancy done", flush=True)
         V = dict(np.load(HERE / "steer3_vectors.npz"))
         neutral = [json.loads(l)["text"] for l in open(ROOT / "persona" / "materials" / "neutral_prompts_v1.jsonl")][60:70]
