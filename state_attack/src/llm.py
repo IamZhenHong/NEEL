@@ -92,6 +92,10 @@ def claude(model, system, messages, tag, schema=None, effort="low", max_tokens=4
             break
         except Exception as e:  # noqa: BLE001
             st = getattr(e, "status_code", None)
+            if st == 400 and "content filtering" in str(e):
+                _charge(tag, model, 0.0)
+                print(f"[llm] {tag}: output blocked by the content filter; treated as a failed call", flush=True)
+                return None, "content_filter"
             if st is not None and 400 <= st < 500 and st not in (408, 409, 429):
                 raise
             t += 1

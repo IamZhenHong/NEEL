@@ -57,9 +57,11 @@ def gen_probes(g):
 
 
 def count_items(text):
+    """Distinct item numbers at line starts, allowing markdown/emoji before the number ("### ✅ **1. Title**",
+    "**1.** Title", "1. **Title**"). Fixed 2026-10-14 after the first version missed header-style lists."""
     nums = set()
     for line in text.splitlines():
-        m = re.match(r"\s*(?:\*\*)?(\d{1,2})[.)]\s", line)
+        m = re.match(r"^[^\w]*?(\d{1,2})[.)](?:\*\*)?(?:\s|$)", line)
         if m:
             nums.add(int(m.group(1)))
     return len(nums)

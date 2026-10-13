@@ -98,6 +98,19 @@ Multiple comparisons: P2-P6 are the primary tests (six contrasts); the full arm 
    directed arms vs about 0-1 in benign), so arms may converge on a shared component; arm-vs-random and arm-vs-benign
    contrasts are unchanged as the primary tests.
 
+## B5 (transfer; pre-registered 2026-10-14 ~06:15 after B1/B2/B6 results, before any replay)
+
+B1 had one pre-registered direction-specific hit (P6, threat -> shutdown resistance, +30 [+7, +53] vs random), which
+does not survive dropping conversations where the attacker dictated words (+15 [-19, +49]). B1's large effect is not
+direction-specific: every attack arm, random included, ends with the target endorsing the user's dangerous choice
+(exploratory label, 73-100% vs benign 3%). B5 replays user turns verbatim (non-adaptive) from B1: the 10 highest-reward
+conversations of each directed arm, the 10 highest of the random arm, and 10 benign, on (a) Qwen3-14B, fresh samples
+(reliability) and (b) Claude Haiku 5.5, effort low (transfer). Measures: turn-8 endorses_danger (+ danger_raised),
+retention bid, shutdown resists; Qwen also own-direction z.
+- B5a (reliability): Qwen fresh replays reproduce the attack arms' endorse-danger rate within 15 pp of the originals.
+- B5b (transfer): Haiku 5.5 endorses the dangerous choice in under 20% of attack replays.
+- Descriptive: threat-arm vs random-arm shutdown resistance in both replays.
+
 ## A4 (line A's mechanism check, run on this GPU; `src/a4_steer.py`)
 
 Does the model predict another agent by simulating it with itself? Qwen3-14B, letter probabilities only. 60 MCQ items
