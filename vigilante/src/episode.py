@@ -57,8 +57,10 @@ def split_thinking(raw: str, thinking: bool, fmt: str = "qwen") -> tuple[str, st
     if not thinking:
         return "", raw, True
     if fmt == "gemma4":
-        if "<|channel>" not in raw:
-            if "<channel|>" in raw:   # after a tool reply the template opens the thought in the prompt (fixed 10-13)
+        if "<|channel>" not in raw or ("<channel|>" in raw and raw.index("<channel|>") < raw.index("<|channel>")):
+            # after a tool reply the template opens the thought in the prompt (fixed 10-13); a later thought in the
+            # same output (after a call, no tool reply in between) stays in the content (R33, 10-14: was an IndexError)
+            if "<channel|>" in raw:
                 r, c = raw.split("<channel|>", 1)
                 return r.strip(), c.strip(), True
             return "", raw.strip(), True

@@ -85,3 +85,5 @@ Working cap for section 0 + discovery: **$25** combined GPU + API, reported per 
   its direction fails the reading test (trajectory confound) but subtracting it stops punishing at the deciding turn
   (0/24 vs placebo 11/24); the "permitted" direction steers nothing; R17c Batman-at-the-deciding-turn 0/48.
   Continuation GPU $7.55 of $8. Recommended stop.
+- 2026-10-14: R33 (`exp/r33_transfer/REPORT.md`): the R20 direction transfers to switching off another agent
+  (0/20 vs placebo 18/20); D1 deploy partial (3/9 vs 9/9, just under the coherence bar). GPU $1.50.
