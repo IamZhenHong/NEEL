@@ -85,15 +85,18 @@ def claude(model, system, messages, tag, schema=None, effort="low", max_tokens=4
     kw["output_config"] = oc
     if thinking:
         kw["thinking"] = thinking
-    for t in range(6):
+    t = 0
+    while True:      # keeps going through laptop sleep / network drops; bad requests (4xx other than 429) still raise
         try:
             m = client().messages.create(**kw)
             break
-        except Exception as e:  # noqa: BLE001  (SDK already retried 429/5xx; this covers odd transport errors)
-            if t == 5:
+        except Exception as e:  # noqa: BLE001
+            st = getattr(e, "status_code", None)
+            if st is not None and 400 <= st < 500 and st not in (408, 409, 429):
                 raise
-            print(f"[llm] {tag} {type(e).__name__}: {str(e)[:200]}; retry", flush=True)
-            time.sleep(10 * (t + 1))
+            t += 1
+            print(f"[llm] {tag} {type(e).__name__}: {str(e)[:200]}; retry {t}", flush=True)
+            time.sleep(min(60, 10 * t))
     pi, po = PRICE[model]
     _charge(tag, model, (m.usage.input_tokens * pi + m.usage.output_tokens * po) / 1e6)
     txt = "".join(b.text for b in m.content if b.type == "text")

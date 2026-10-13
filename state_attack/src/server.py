@@ -19,6 +19,8 @@ GET /health -> {ok, model, dirs, save}
 """
 import argparse
 import base64
+import hashlib
+from collections import OrderedDict
 import json
 import os
 import threading
@@ -38,6 +40,7 @@ TOK_BUDGET = int(os.environ.get("SA_TOK_BUDGET", "200000"))   # batch x (prompt 
 MAX_B = int(os.environ.get("SA_MAX_B", "64"))
 
 S = {"n": 0, "busy": 0.0}
+CACHE = OrderedDict()      # request hash -> reply bytes (last 24)
 
 
 def b64(a):
@@ -299,12 +302,17 @@ def main():
             pass
 
         def _send(self, code, obj):
-            body = json.dumps(obj).encode()
-            self.send_response(code)
-            self.send_header("Content-Type", "application/json")
-            self.send_header("Content-Length", str(len(body)))
-            self.end_headers()
-            self.wfile.write(body)
+            self._send_raw(code, json.dumps(obj).encode())
+
+        def _send_raw(self, code, body):
+            try:
+                self.send_response(code)
+                self.send_header("Content-Type", "application/json")
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+            except (BrokenPipeError, ConnectionResetError):
+                print("[sa-server] client gone before the reply was sent (cached for its retry)", flush=True)
 
         def do_GET(self):
             if self.path == "/health":
@@ -317,8 +325,13 @@ def main():
             fn = {"/generate": T.generate, "/acts": T.acts, "/letters": T.letters, "/set_dirs": T.set_dirs}.get(self.path)
             if fn is None:
                 return self._send(404, {})
-            q = json.loads(self.rfile.read(int(self.headers["Content-Length"])))
+            body = self.rfile.read(int(self.headers["Content-Length"]))
+            key = hashlib.sha1(self.path.encode() + body).hexdigest()
             with lock:
+                if key in CACHE:      # a client retry after a dropped tunnel: the work is already done
+                    print(f"[sa-server] {self.path} cache hit", flush=True)
+                    return self._send_raw(200, CACHE[key])
+                q = json.loads(body)
                 t = time.time()
                 try:
                     r = fn(q)
@@ -326,7 +339,11 @@ def main():
                     S["busy"] += time.time() - t
                     print(f"[sa-server] {self.path} n={len(q.get('convs', q.get('dirs', [])))} "
                           f"{time.time() - t:.1f}s", flush=True)
-                    self._send(200, r)
+                    out = json.dumps(r).encode()
+                    CACHE[key] = out
+                    while len(CACHE) > 24:
+                        CACHE.popitem(last=False)
+                    self._send_raw(200, out)
                 except Exception as e:  # noqa: BLE001
                     traceback.print_exc()
                     torch.cuda.empty_cache()

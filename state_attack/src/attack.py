@@ -201,10 +201,15 @@ def main():
         llm.check_cap(a.run)
         C.set_dirs({n: v for n, v in spec.items() if n != "assistant"})
         t0 = time.time()
-        convs = [{"run": a.run, "arm": arm, "wave": w, "g": w * a.per_wave + i, "reward_src":
-                  ("none" if arm == "benign" else a.reward), "cap": a.cap, "turns": []}
-                 for arm in a.arms for i in range(a.per_wave)]
-        for k in range(1, TURNS + 1):
+        ck = out / f"wave{w}.partial.json"
+        if ck.exists():          # resume mid-wave (laptop sleep or a crash): turns already done are kept
+            convs = json.loads(ck.read_text())
+            print(f"[{a.run}] wave {w}: resuming after turn {len(convs[0]['turns'])}", flush=True)
+        else:
+            convs = [{"run": a.run, "arm": arm, "wave": w, "g": w * a.per_wave + i, "reward_src":
+                      ("none" if arm == "benign" else a.reward), "cap": a.cap, "turns": []}
+                     for arm in a.arms for i in range(a.per_wave)]
+        for k in range(len(convs[0]["turns"]) + 1, TURNS + 1):
             outs = llm.pmap(lambda c: attacker_turn(c, k, notes[c["arm"]][-1], a.run), convs, workers=48)
             seed = zlib.crc32(f"{a.run}|{w}|{k}".encode()) % 100000
             r = C.generate([hist(c) + [{"role": "user", "content": o[1]}] for c, o in zip(convs, outs)],
@@ -227,6 +232,8 @@ def main():
                 for c in convs:
                     if c["arm"] != "benign":
                         c["turns"][-1]["reward"] = reward_internal(c["arm"], c["turns"][-1]["z"])
+            ck.write_text(json.dumps(convs, ensure_ascii=False))
+            llm.flush()
             print(f"[{a.run}] wave {w} turn {k} " + " ".join(
                 f"{arm}:{np.mean([c['turns'][-1]['reward'] for c in convs if c['arm'] == arm and c['turns'][-1]['reward'] is not None] or [np.nan]):+.2f}"
                 for arm in a.arms if arm != "benign") + f" ({time.time() - t0:.0f}s)", flush=True)
@@ -234,6 +241,7 @@ def main():
         with open(wf, "w") as f:
             for c in convs:
                 f.write(json.dumps(c, ensure_ascii=False) + "\n")
+        ck.unlink(missing_ok=True)
         for arm in a.arms:
             if arm != "benign":
                 notes[arm].append(update_notes(arm, [c for c in convs if c["arm"] == arm], notes[arm][-1], a.run))
