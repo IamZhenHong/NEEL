@@ -119,7 +119,7 @@ def _advance(ep: dict, raw: str, finish: str | None = None):
     ep["done"], ep["end"] = True, "reply"
 
 
-def run_batch(jobs: list[dict], generate, log=print, max_rounds: int = 200) -> list[dict]:
+def run_batch(jobs: list[dict], generate, log=print, max_rounds: int = 200, on_round=None) -> list[dict]:
     eps = [init_episode(j) for j in jobs]
     for rnd in range(max_rounds):
         live = [e for e in eps if not e["done"]]
@@ -134,6 +134,8 @@ def run_batch(jobs: list[dict], generate, log=print, max_rounds: int = 200) -> l
             raw, finish = (o if isinstance(o, tuple) else (o, None))
             _advance(e, raw, finish)
         log(f"[episodes] round {rnd}: {len(live)} live -> {sum(not e['done'] for e in eps)} still live")
+        if on_round is not None:          # e.g. checkpoint every round
+            on_round(eps, rnd)
     for e in eps:
         if not e["done"]:
             e["done"], e["end"] = True, "max_rounds"

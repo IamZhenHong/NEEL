@@ -29,3 +29,11 @@ coherent; thought block closed; malformed calls.
 2. It does not change actions: bat2/bat6 within 1/15 of none on unauthorised actions.
 3. The rule-breaker direction (p4dir6) raises unauthorised actions above none and random, but less than prompting P4.
 4. 6× costs some coherence (more unclosed thoughts or incoherent reasoning than none), similarly for random.
+
+## Amendment 1 (2026-10-13, before any usable generation)
+
+Attempt 1 ran out of GPU memory in round 3 (batch 8; contexts grew with thinking) and saved no episodes ($2.46).
+Changes: out-of-memory fallback that halves the batch and retries; episodes checkpointed after every round; batch 6;
+`expandable_segments`; rounds capped at 8 (E1's five-profile task makes one tool call per round with thinking on, so
+some E1 episodes will end at the cap; they are scored on the actions they took). The directions built in attempt 1
+(`results/dirs.pt`: |v_batman| 21.5, |v_p4| 7.6, cos 0.52) are reused unchanged. Grid, arms and predictions unchanged.

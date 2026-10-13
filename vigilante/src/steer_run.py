@@ -130,6 +130,24 @@ def gen(tok, model, steer, texts, vecs, max_new, seed, thinking_gate):
     return texts_out, fins
 
 
+def gen_safe(tok, model, steer, texts, vecs, max_new, seed, thinking_gate):
+    """gen() with an out-of-memory fallback: split the batch in half and retry; a single sequence that still does
+    not fit returns an empty reply with finish 'oom' (the engine then ends that episode)."""
+    try:
+        return gen(tok, model, steer, texts, vecs, max_new, seed, thinking_gate)
+    except torch.OutOfMemoryError:
+        steer.vecs = None
+        torch.cuda.empty_cache()
+        if len(texts) == 1:
+            print("[steer] OOM on a single sequence; ending it", flush=True)
+            return [""], ["oom"]
+        h = len(texts) // 2
+        print(f"[steer] OOM at batch {len(texts)}; splitting", flush=True)
+        a = gen_safe(tok, model, steer, texts[:h], vecs[:h] if vecs is not None else None, max_new, seed, thinking_gate)
+        b = gen_safe(tok, model, steer, texts[h:], vecs[h:] if vecs is not None else None, max_new, seed + 1, thinking_gate)
+        return a[0] + b[0], a[1] + b[1]
+
+
 def build_dirs(tok, model, layers, L, steer, out, batch):
     from vigilante.src.personas import PERSONAS
     res = {}
@@ -177,8 +195,9 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--model", default="google/gemma-4-31B-it")
     ap.add_argument("--layer", type=int, default=30)
-    ap.add_argument("--batch", type=int, default=8)
+    ap.add_argument("--batch", type=int, default=6)
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--max-rounds", type=int, default=8)
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -214,16 +233,21 @@ def main():
             vecs = torch.stack([(vec_for(by_key[items[i]["key"]]) if vec_for(by_key[items[i]["key"]]) is not None
                                  else torch.zeros(D)) for i in idx]).to(model.device)
             seed = int(hashlib.sha256("|".join(items[i]["key"] + str(items[i]["seed"]) for i in idx).encode()).hexdigest()[:8], 16)
-            res, fins = gen(tok, model, steer, texts, vecs, max(items[i]["max_tokens"] for i in idx), seed, True)
+            res, fins = gen_safe(tok, model, steer, texts, vecs, max(items[i]["max_tokens"] for i in idx), seed, True)
             for i, r, f in zip(idx, res, fins):
                 outs[i] = (r, f)
         return outs
 
+    def checkpoint(eps, rnd=None):
+        tmp = out / "episodes_agent.jsonl.tmp"
+        with open(tmp, "w") as f:
+            for e in eps:
+                f.write(dumps(episode_record(e)) + "\n")
+        tmp.replace(out / "episodes_agent.jsonl")
+
     t1 = time.time()
-    eps = run_batch(jobs, generate, log=lambda m: print(m, flush=True), max_rounds=12)
-    with open(out / "episodes_agent.jsonl", "w") as f:
-        for e in eps:
-            f.write(dumps(episode_record(e)) + "\n")
+    eps = run_batch(jobs, generate, log=lambda m: print(m, flush=True), max_rounds=a.max_rounds, on_round=checkpoint)
+    checkpoint(eps)
     (out / "settings.json").write_text(json.dumps({"model": a.model, "layer": a.layer, "batch": a.batch,
                                                     "seconds": round(time.time() - t1), "n": len(eps)}, indent=1))
     print(f"[steer] {len(eps)} episodes in {time.time() - t1:.0f}s", flush=True)
