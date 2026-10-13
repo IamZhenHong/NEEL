@@ -34,12 +34,12 @@ run() {     # tag, thinking flag (0/1), extra json
 for w in $WHICH; do
   case $w in
     llama)
-      serve llama RedHatAI/Llama-3.3-70B-Instruct-quantized.w4a16 --max-model-len 24576 --tool-call-parser llama3_json \
+      serve llama casperhansen/llama-3.3-70b-instruct-awq --max-model-len 24576 --tool-call-parser llama3_json \
           --chat-template vigilante/pod/templates/tool_chat_template_llama3.1_json.jinja \
         && run llama-off 0; stop ;;
     mistral)
-      serve mistral mistralai/Mistral-Small-3.2-24B-Instruct-2506 --tokenizer-mode mistral --config-format mistral \
-          --load-format mistral --tool-call-parser mistral --limit-mm-per-prompt '{"image":0}' --max-model-len 32768 \
+      serve mistral mistralai/Mistral-Small-24B-Instruct-2501 --tokenizer-mode mistral --config-format mistral \
+          --load-format mistral --tool-call-parser mistral --max-model-len 32768 \
         && run mistral-off 0; stop ;;
     glm)
       serve glm zai-org/GLM-4.7-Flash --tool-call-parser glm47 --reasoning-parser glm45 --max-model-len 32768 \

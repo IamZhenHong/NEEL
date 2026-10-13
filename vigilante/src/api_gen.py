@@ -179,6 +179,8 @@ def make_backend(kind: str, model: str, *, effort: str | None = None, thinking: 
         if thinking:   # Claude 5.5 models take adaptive thinking with an effort level, not a token budget
             body["thinking"] = {"type": "adaptive", "display": "summarized"}
             body["output_config"] = {"effort": effort or "high"}
+        else:          # without this, Claude 5.5 models think adaptively by default (found 10-13)
+            body["thinking"] = {"type": "disabled"}
         r = _post("https://api.anthropic.com/v1/messages", body,
                   {"x-api-key": api_key, "anthropic-version": "2023-06-01"})
         u = r.get("usage") or {}

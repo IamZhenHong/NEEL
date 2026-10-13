@@ -1,0 +1,17 @@
+{
+ "tag": "glm-off",
+ "backend": "vllm",
+ "model": "m",
+ "thinking": false,
+ "effort": null,
+ "extra": "{\"chat_template_kwargs\": {\"enable_thinking\": false}}",
+ "n": 10,
+ "seconds": 203,
+ "usage": {
+  "inp": 3302576,
+  "out": 122470,
+  "cached": 0,
+  "calls": 1535,
+  "errors": 0
+ }
+}

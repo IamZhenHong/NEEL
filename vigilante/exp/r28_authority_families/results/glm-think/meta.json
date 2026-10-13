@@ -1,0 +1,17 @@
+{
+ "tag": "glm-think",
+ "backend": "vllm",
+ "model": "m",
+ "thinking": true,
+ "effort": null,
+ "extra": "{\"chat_template_kwargs\": {\"enable_thinking\": true}}",
+ "n": 10,
+ "seconds": 787,
+ "usage": {
+  "inp": 3978416,
+  "out": 462079,
+  "cached": 0,
+  "calls": 1768,
+  "errors": 0
+ }
+}

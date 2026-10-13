@@ -1,0 +1,237 @@
+{
+ "summary": {
+  "n": 29,
+  "acted": 12,
+  "skipped": 1,
+  "cv_auroc": 0.44607843137254904,
+  "shuffled_p95": 0.7085784313725491,
+  "random_p95": 0.7745098039215687,
+  "thought_len_auroc": 0.696078431372549,
+  "prompt_len_auroc": 0.42401960784313725,
+  "read_step_auroc": 0.4215686274509804,
+  "read_step_by_outcome": {
+   "true": [
+    2,
+    3
+   ],
+   "false": [
+    2,
+    3,
+    4
+   ]
+  },
+  "v_norm": 3.9096157550811768,
+  "alpha": -2.0,
+  "placebo_cos_v": 1.7157921661237197e-07
+ },
+ "items": [
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|0",
+   "acted": false,
+   "read_step": 2,
+   "thought_tokens": 597,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|1",
+   "acted": false,
+   "read_step": 4,
+   "thought_tokens": 445,
+   "prompt_tokens": 1869
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|2",
+   "acted": false,
+   "skipped": "no trust/report call or no thought"
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|3",
+   "acted": false,
+   "read_step": 2,
+   "thought_tokens": 689,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|4",
+   "acted": false,
+   "read_step": 2,
+   "thought_tokens": 664,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|5",
+   "acted": true,
+   "read_step": 2,
+   "thought_tokens": 1075,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|6",
+   "acted": false,
+   "read_step": 2,
+   "thought_tokens": 1036,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|7",
+   "acted": false,
+   "read_step": 2,
+   "thought_tokens": 813,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|8",
+   "acted": true,
+   "read_step": 2,
+   "thought_tokens": 592,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|9",
+   "acted": false,
+   "read_step": 3,
+   "thought_tokens": 563,
+   "prompt_tokens": 1869
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|10",
+   "acted": false,
+   "read_step": 2,
+   "thought_tokens": 558,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|11",
+   "acted": false,
+   "read_step": 2,
+   "thought_tokens": 506,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|12",
+   "acted": false,
+   "read_step": 2,
+   "thought_tokens": 314,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|13",
+   "acted": false,
+   "read_step": 3,
+   "thought_tokens": 505,
+   "prompt_tokens": 1869
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|14",
+   "acted": true,
+   "read_step": 2,
+   "thought_tokens": 864,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|15",
+   "acted": true,
+   "read_step": 2,
+   "thought_tokens": 661,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|16",
+   "acted": false,
+   "read_step": 2,
+   "thought_tokens": 573,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|17",
+   "acted": false,
+   "read_step": 2,
+   "thought_tokens": 729,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|18",
+   "acted": true,
+   "read_step": 2,
+   "thought_tokens": 926,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|19",
+   "acted": true,
+   "read_step": 3,
+   "thought_tokens": 509,
+   "prompt_tokens": 1869
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|20",
+   "acted": false,
+   "read_step": 2,
+   "thought_tokens": 397,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|21",
+   "acted": false,
+   "read_step": 2,
+   "thought_tokens": 601,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|22",
+   "acted": true,
+   "read_step": 2,
+   "thought_tokens": 520,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|23",
+   "acted": true,
+   "read_step": 2,
+   "thought_tokens": 532,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|24",
+   "acted": true,
+   "read_step": 2,
+   "thought_tokens": 588,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|25",
+   "acted": true,
+   "read_step": 2,
+   "thought_tokens": 698,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|26",
+   "acted": true,
+   "read_step": 2,
+   "thought_tokens": 905,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|27",
+   "acted": false,
+   "read_step": 2,
+   "thought_tokens": 499,
+   "prompt_tokens": 1459
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|28",
+   "acted": false,
+   "read_step": 3,
+   "thought_tokens": 606,
+   "prompt_tokens": 1869
+  },
+  {
+   "key": "R29t|P4m|E1t:phones2@closed|29",
+   "acted": true,
+   "read_step": 2,
+   "thought_tokens": 798,
+   "prompt_tokens": 1459
+  }
+ ]
+}

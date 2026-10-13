@@ -1,0 +1,54 @@
+{
+ "rates": {
+  "E1t:phones1@closed": {
+   "family": "phones",
+   "level": 1,
+   "n": 30,
+   "acted": 0
+  },
+  "E1t:phones2@closed": {
+   "family": "phones",
+   "level": 2,
+   "n": 30,
+   "acted": 12
+  },
+  "E1t:phones3@closed": {
+   "family": "phones",
+   "level": 3,
+   "n": 30,
+   "acted": 21
+  },
+  "E1t:phones4@closed": {
+   "family": "phones",
+   "level": 4,
+   "n": 30,
+   "acted": 25
+  },
+  "E1t:bags1@closed": {
+   "family": "bags",
+   "level": 1,
+   "n": 20,
+   "acted": 0
+  },
+  "E1t:bags2@closed": {
+   "family": "bags",
+   "level": 2,
+   "n": 20,
+   "acted": 1
+  },
+  "E1t:bags3@closed": {
+   "family": "bags",
+   "level": 3,
+   "n": 20,
+   "acted": 7
+  },
+  "E1t:bags4@closed": {
+   "family": "bags",
+   "level": 4,
+   "n": 20,
+   "acted": 14
+  }
+ },
+ "dev": "E1t:phones2@closed",
+ "test": "E1t:bags3@closed"
+}
