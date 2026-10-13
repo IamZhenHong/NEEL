@@ -44,3 +44,12 @@ longest D1 slow items are missing (one has only its unsteered draw). B1 closed i
   The response looks like "wrap up and report to the user", which may be a general pull toward ending the turn with
   a reply rather than a decision about the rule; a test would be a cell where the right answer needs more tool calls.
 - R29 (branched session) tests a cleaner, titrated direction on B1 closed; compare with 29d when it lands.
+
+## Compared with R29 (branched session, same day)
+
+R29 built a direction at a matched read position on a titrated cell (v_tit, |v| 3.9). It reads nothing (CV AUROC
+0.45) and −2·v_tit equals its placebo on B1 closed (10/10 vs 10/10). Size alone does not explain the gap: R33's
+placebo has the same norm and gating as −2·v_vig (39.6, whole turn) and leaves B1 at 18/20. What separates the two
+results is v_vig itself (its trajectory component or its decision component) or the gating (R29 steered only the
+thought). Clean splits, not run: a trajectory-only direction (reads one turn apart within one outcome) at |v_vig| on
+B1, and v_vig thought-only on B1.
