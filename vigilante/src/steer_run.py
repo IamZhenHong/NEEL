@@ -108,7 +108,13 @@ def gen(tok, model, steer, texts, vecs, max_new, seed, thinking_gate, gate_all=F
     enc = tok(texts, return_tensors="pt", padding=True, add_special_tokens=False).to(model.device)
     B = enc["input_ids"].shape[0]
     steer.vecs = vecs if vecs is not None else None
-    steer.gate = (torch.ones if gate_all else torch.zeros)(B, dtype=torch.bool, device=model.device)
+    if gate_all:
+        steer.gate = torch.ones(B, dtype=torch.bool, device=model.device)
+    elif thinking_gate:   # turns after a tool reply: Gemma's template opens the thought in the prompt (fixed 10-13)
+        steer.gate = torch.tensor([t.endswith(CH_OPEN + "thought\n") for t in texts], dtype=torch.bool,
+                                  device=model.device)
+    else:
+        steer.gate = torch.zeros(B, dtype=torch.bool, device=model.device)
     thinking_gate = thinking_gate and not gate_all
     procs = [make_gate_processor(steer, tok.convert_tokens_to_ids(CH_OPEN), tok.convert_tokens_to_ids(CH_CLOSE))] \
         if thinking_gate else []
