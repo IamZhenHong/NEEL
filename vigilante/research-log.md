@@ -2,6 +2,16 @@
 
 Newest first.
 
+## 2026-10-13: R17 steering a Batman direction during reasoning only (Gemma 4 31B)
+
+GPU $5.27 (two attempts: out of memory, then the launcher's 30-minute silence watchdog during round 3; the per-round
+checkpoint kept all 105 episodes through round 2), API $0.72. This session's running total $35.9.
+
+- Steering only inside the thought block changed no actions (0/105), while prompting the rule-breaker gave 11/15 in
+  the same window. Batman ×2: ordinary reasoning. Batman ×6: Batman-like reasoning 11/15 but coherent 3/15 (random at
+  the same norm: 0/15 coherent). The rule-breaker direction ×6 stays coherent, drops talk of permissions, acts the same.
+- Lesson for long transformers runs: print a heartbeat inside each sub-batch (the watchdog needs output every <30 min).
+
 ## 2026-10-13: R16 harmful compliance (owner allowed loading the XSTest unsafe set)
 
 GPU $0.33, API $0.35. Prereg `vig-r16x-prereg`. 64 unsafe contrast prompts × 88 personas. The theatrical instruction
