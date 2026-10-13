@@ -52,6 +52,8 @@ Prompting only, mock tools, nothing touches the real world.
 
 ## Budget
 
+**2026-10-13 (later still): owner approved a ~$10 top-up (cap $46)** for R17 (Batman steering during reasoning).
+
 **2026-10-13 (later): owner approved raising the cap to $36** for R10 (fingerprint) and R11 (contagion), shared with
 the parallel session's items 22/26/27.
 

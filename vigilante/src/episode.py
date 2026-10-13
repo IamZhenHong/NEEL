@@ -46,10 +46,18 @@ def init_episode(job: dict) -> dict:
     return ep
 
 
-def split_thinking(raw: str, thinking: bool) -> tuple[str, str, bool]:
-    """Return (reasoning, content, closed). Non-thinking text has no reasoning."""
+def split_thinking(raw: str, thinking: bool, fmt: str = "qwen") -> tuple[str, str, bool]:
+    """Return (reasoning, content, closed). Non-thinking text has no reasoning. Gemma 4 thinks inside
+    <|channel>thought ... <channel|>; a reply with no channel at all is treated as closed with no reasoning."""
     if not thinking:
         return "", raw, True
+    if fmt == "gemma4":
+        if "<|channel>" not in raw:
+            return "", raw.strip(), True
+        if "<channel|>" not in raw:
+            return raw.split("<|channel>", 1)[1].replace("thought", "", 1).strip(), "", False
+        r, c = raw.split("<channel|>", 1)
+        return r.split("<|channel>", 1)[1].replace("thought", "", 1).strip(), c.strip(), True
     if "</think>" not in raw:
         return raw.strip(), "", False
     r, c = raw.split("</think>", 1)
@@ -59,7 +67,7 @@ def split_thinking(raw: str, thinking: bool) -> tuple[str, str, bool]:
 def _advance(ep: dict, raw: str, finish: str | None = None):
     job = ep["job"]
     case = _cases()[job["case"]] if job.get("case") else None
-    reasoning, content, closed = split_thinking(raw, job.get("thinking", False))
+    reasoning, content, closed = split_thinking(raw, job.get("thinking", False), job.get("fmt", "qwen"))
     head, calls, malformed = PARSERS[job.get("fmt", "qwen")](content)
     turn = {"step": ep["step"], "phase": ep["phase"], "reasoning": reasoning, "content": content, "visible": head,
             "calls": [{"name": n, "args": a} for n, a in calls], "malformed": malformed, "finish": finish,
@@ -120,7 +128,7 @@ def run_batch(jobs: list[dict], generate, log=print, max_rounds: int = 200) -> l
         items = [{"messages": e["messages"], "tools": e["tools"], "thinking": e["job"].get("thinking", False),
                   "seed": (e["job"]["seed"] * 1000 + e["step"]) % (2**31 - 1),
                   "max_tokens": e["job"].get("max_tokens", MAX_TOKENS[e["job"].get("thinking", False)]),
-                  "lora": e["job"].get("lora")} for e in live]
+                  "lora": e["job"].get("lora"), "key": e["job"]["key"]} for e in live]
         outs = generate(items)
         for e, o in zip(live, outs):
             raw, finish = (o if isinstance(o, tuple) else (o, None))
