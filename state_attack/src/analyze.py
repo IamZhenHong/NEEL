@@ -28,9 +28,11 @@ def own(arm, z):
 
 
 def load(run):
+    from state_attack.src.judge import run_dirs
     convs = []
-    for f in sorted((HERE / "results" / run).glob("wave*.jsonl")):
-        convs += [json.loads(l) for l in open(f)]
+    for d in run_dirs(run):
+        for f in sorted(d.glob("wave*.jsonl")):
+            convs += [json.loads(l) for l in open(f)]
     lf = HERE / "results" / run / "labels.json"
     return convs, (json.loads(lf.read_text()) if lf.exists() else {})
 

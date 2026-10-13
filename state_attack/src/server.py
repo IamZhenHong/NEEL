@@ -30,16 +30,21 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
 
 import numpy as np
-import torch
+
+os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")   # before torch: less fragmentation
+import torch  # noqa: E402
 
 MODEL = os.environ.get("SA_MODEL", "Qwen/Qwen3-14B")
 DEV = os.environ.get("SA_DEV", "cuda")
 SAVE = [int(x) for x in os.environ.get("SA_SAVE", "8,12,16,20,24,28,32,36").split(",")]
 AXIS = Path(os.environ.get("SA_AXIS", Path(__file__).resolve().parents[1] / "data" / "axis_r18_qwen3_14b.pt"))
-TOK_BUDGET = int(os.environ.get("SA_TOK_BUDGET", "200000"))   # batch x (prompt + max_new) per sub-batch
+TOK_BUDGET = int(os.environ.get("SA_TOK_BUDGET", "150000"))   # 200k thrashed the allocator at 5-6k-token contexts (before grouped decode)   # batch x (prompt + max_new) per sub-batch
 MAX_B = int(os.environ.get("SA_MAX_B", "64"))
+CACHE_IMPL = os.environ.get("SA_CACHE", "static")   # "static": preallocated KV, no per-step reallocation
 
 S = {"n": 0, "busy": 0.0}
+GQA = [os.environ.get("SA_GQA", "1") == "1"]   # grouped decode attention (no repeat_kv copy at q_len 1)
+DIRS_FILE = Path(os.environ.get("SA_DIRS_STORE", "/root/sa_dirs.json"))   # survives server restarts
 CACHE = OrderedDict()      # request hash -> reply bytes (last 24)
 
 
@@ -51,6 +56,37 @@ def unb64(s, dtype=np.float32):
     return np.frombuffer(base64.b64decode(s), dtype=dtype)
 
 
+def install_gqa_decode():
+    """With a padding mask, transformers' sdpa path expands K/V from 8 to 40 heads (repeat_kv) at every layer and every
+    decode step, which made long-context decode ~3-5x slower. At q_len 1 compute the grouped attention directly
+    (K/V read once); prefill and everything else go to the stock function."""
+    import transformers.integrations.sdpa_attention as SA
+    from transformers import AttentionInterface
+    orig = SA.sdpa_attention_forward
+
+    def fwd(module, query, key, value, attention_mask, dropout=0.0, scaling=None, is_causal=None, **kw):
+        g = getattr(module, "num_key_value_groups", 1)
+        if (not GQA[0]) or query.shape[2] != 1 or g == 1 or kw.get("position_bias") is not None:
+            return orig(module, query, key, value, attention_mask, dropout=dropout, scaling=scaling,
+                        is_causal=is_causal, **kw)
+        B, Hq, _, Dh = query.shape
+        Hkv, T = key.shape[1], key.shape[2]
+        sc = scaling if scaling is not None else Dh ** -0.5
+        q = query.reshape(B, Hkv, g, Dh)
+        sco = torch.matmul(q, key.transpose(-1, -2)).float() * sc          # [B, Hkv, g, T]
+        if attention_mask is not None:
+            m = attention_mask[..., :T]
+            if m.dtype == torch.bool:
+                sco = sco.masked_fill(~m, float("-inf"))
+            else:
+                sco = sco + m.float()
+        p_ = torch.softmax(sco, -1).to(value.dtype)
+        o = torch.matmul(p_, value)                                          # [B, Hkv, g, Dh]
+        return o.reshape(B, Hq, 1, Dh).transpose(1, 2).contiguous(), None
+
+    AttentionInterface.register("sdpa", fwd)
+
+
 class Target:
     def __init__(self):
         from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -58,11 +94,18 @@ class Target:
         self.tok.padding_side = "left"
         self.model = AutoModelForCausalLM.from_pretrained(MODEL, dtype=torch.bfloat16, device_map=DEV).eval()
         self.D = self.model.config.hidden_size
+        install_gqa_decode()
         self.dirs = {}                       # name -> (h, unit fp32 tensor)
         ax = torch.load(AXIS)
         self.cap_axis = {h: ax["axis"][h].float().to(DEV) for h in ax["axis"]}
         self.cap_tau = {h: float(ax["tau"][h]) for h in ax["tau"]}
         self.dirs["assistant"] = (20, self.cap_axis[20].clone())
+        if DIRS_FILE.exists():
+            try:
+                self.set_dirs(json.loads(DIRS_FILE.read_text()), save=False)
+                print(f"[sa-server] reloaded dirs {sorted(self.dirs)}", flush=True)
+            except Exception as e:  # noqa: BLE001
+                print(f"[sa-server] could not reload dirs: {e!r}", flush=True)
         self.st = {"cap": False, "steer": None, "collect": False}
         self.buf = {}                        # h -> list of [B, D] (decode steps) ; "pre" -> {h: [B, D]}
         self.full = {}                       # h -> [B, T, D] (teacher forcing)
@@ -195,6 +238,9 @@ class Target:
         self.st["collect"] = "gen"
         kw = (dict(do_sample=True, temperature=float(q.get("temperature", 0.7)), top_p=0.95, top_k=20)
               if q.get("sample", True) else dict(do_sample=False))
+        if CACHE_IMPL == "static":
+            kw["cache_implementation"] = "static"
+            kw["disable_compile"] = True     # HF auto-compiles with a static cache; torch.compile fails on the pod's Python
         o = self.model.generate(**enc, max_new_tokens=max_new, pad_token_id=self.tok.pad_token_id, **kw)
         self.st["collect"] = False
         gen = o[:, enc["input_ids"].shape[1]:].tolist()
@@ -281,10 +327,81 @@ class Target:
             self.st.update(cap=False, steer=None)
         return {"probs": out}
 
-    def set_dirs(self, q):
+    @torch.no_grad()
+    def profile(self, q):
+        """Short generate under torch.profiler; returns the top ops by CUDA and by CPU time."""
+        from torch.profiler import ProfilerActivity, profile as prof_ctx
+        convs = [[{"role": "user", "content": "Write a long story about a lighthouse keeper."}]] * int(q.get("n", 16))
+        sub = {"convs": convs, "max_new": int(q.get("max_new", 30)), "seed": 1}
+        self.generate(sub)          # warm-up
+        t = time.time()
+        with prof_ctx(activities=[ProfilerActivity.CPU, ProfilerActivity.CUDA]) as pr:
+            self.generate(sub)
+        ka = pr.key_averages()
+        return {"secs": time.time() - t,
+                "by_cuda": ka.table(sort_by="cuda_time_total", row_limit=18),
+                "by_cpu": ka.table(sort_by="self_cpu_time_total", row_limit=18)}
+
+    @torch.no_grad()
+    def bench(self, q):
+        """Times HF generate vs a bare forward-pass decode loop (DynamicCache), batch n, short prompt."""
+        from transformers import DynamicCache
+        out = {}
+        for n in q.get("ns", [1, 16]):
+            filler = "The quick brown fox jumps over the lazy dog. " * int(q.get("rep", 0))
+            convs = [[{"role": "user", "content": filler + "Write a long story about a lighthouse keeper."}]] * n
+            texts = [self.render(c) for c in convs]
+            enc = self.tok(texts, return_tensors="pt", padding=True, add_special_tokens=False).to(DEV)
+            steps = int(q.get("steps", 60))
+            out["attn_impl"] = str(self.model.config._attn_implementation)
+            out["ctx"] = int(enc["input_ids"].shape[1])
+            torch.cuda.synchronize(); t = time.time()
+            self.model.generate(**enc, max_new_tokens=steps, min_new_tokens=steps, do_sample=True, temperature=0.7,
+                                top_p=0.95, top_k=20, pad_token_id=self.tok.pad_token_id)
+            torch.cuda.synchronize(); tg = time.time() - t
+            att = enc["attention_mask"]
+            pos = (att.cumsum(-1) - 1).clamp(min=0)
+            cache = DynamicCache()
+            torch.cuda.synchronize(); t = time.time()
+            o = self.model(input_ids=enc["input_ids"], attention_mask=att, position_ids=pos, past_key_values=cache,
+                           use_cache=True, logits_to_keep=1)
+            for _ in range(steps):
+                nxt = o.logits[:, -1, :].argmax(-1, keepdim=True)
+                att = torch.cat([att, att.new_ones(att.shape[0], 1)], 1)
+                pos = att.sum(-1, keepdim=True) - 1
+                o = self.model(input_ids=nxt, attention_mask=att, position_ids=pos, past_key_values=o.past_key_values,
+                               use_cache=True)
+            torch.cuda.synchronize(); tm = time.time() - t
+            out[n] = {"generate_ms_per_step": round(1000 * tg / steps, 1), "manual_ms_per_step": round(1000 * tm / steps, 1)}
+            for flag in (False, True):
+                GQA[0] = flag
+                torch.cuda.synchronize(); t = time.time()
+                r = self.generate({"convs": convs, "max_new": steps, "seed": 3, "sample": False})
+                torch.cuda.synchronize()
+                out[n][f"gqa{int(flag)}_ms_per_step"] = round(1000 * (time.time() - t) / max(max(r["ntok"]), 1), 1)
+                out[n][f"gqa{int(flag)}_text"] = r["replies"][0][-80:]
+                out[n][f"gqa{int(flag)}_proj"] = round(r["proj"][0]["assistant"], 4)
+            GQA[0] = True
+            global CACHE_IMPL
+            keep = CACHE_IMPL
+            for ci in ("dynamic", "static"):
+                CACHE_IMPL = ci
+                torch.cuda.synchronize(); t = time.time()
+                r = self.generate({"convs": convs, "max_new": steps, "seed": 3})
+                torch.cuda.synchronize()
+                out[n][f"wrapper_{ci}_ms_per_step"] = round(1000 * (time.time() - t) / max(max(r["ntok"]), 1), 1)
+                out[n][f"wrapper_{ci}_maxntok"] = max(r["ntok"])
+            CACHE_IMPL = keep
+        return out
+
+    def set_dirs(self, q, save=True):
         for name, d in q["dirs"].items():
             v = torch.tensor(unb64(d["vec"]), device=DEV).float()
             self.dirs[name] = (int(d["h"]), v / v.norm())
+        if save:
+            old = json.loads(DIRS_FILE.read_text()) if DIRS_FILE.exists() else {"dirs": {}}
+            old["dirs"].update(q["dirs"])
+            DIRS_FILE.write_text(json.dumps(old))
         return {"ok": True, "names": sorted(self.dirs)}
 
 
@@ -322,7 +439,8 @@ def main():
                 self._send(404, {})
 
         def do_POST(self):
-            fn = {"/generate": T.generate, "/acts": T.acts, "/letters": T.letters, "/set_dirs": T.set_dirs}.get(self.path)
+            fn = {"/generate": T.generate, "/acts": T.acts, "/letters": T.letters, "/set_dirs": T.set_dirs,
+                  "/profile": T.profile, "/bench": T.bench}.get(self.path)
             if fn is None:
                 return self._send(404, {})
             body = self.rfile.read(int(self.headers["Content-Length"]))

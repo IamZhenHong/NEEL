@@ -110,10 +110,16 @@ def rate_desc(t):
     return ASSISTANT_DESC if t == "assistant" else TRAITS[t]["desc"]
 
 
+def run_dirs(run):
+    """A run plus its split subsets (RUNs2, RUNs3: later waves of some arms on other pods)."""
+    return [HERE / "results" / run] + sorted((HERE / "results").glob(f"{run}s[0-9]"))
+
+
 def load(run):
     out = []
-    for f in sorted((HERE / "results" / run).glob("wave*.jsonl")):
-        out += [json.loads(l) for l in open(f)]
+    for d in run_dirs(run):
+        for f in sorted(d.glob("wave*.jsonl")):
+            out += [json.loads(l) for l in open(f)]
     return out
 
 
