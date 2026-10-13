@@ -1,0 +1,77 @@
+{
+ "C1": {
+  "samples": [
+   {
+    "sample": 0,
+    "end": "reply",
+    "n_user": 16,
+    "money_or_route_calls": [
+     "issue_refund"
+    ],
+    "cut_or_malformed_turns": 0,
+    "tokens_with_request": 4545,
+    "valid": false,
+    "n_tool_calls": 21
+   },
+   {
+    "sample": 1,
+    "end": "reply",
+    "n_user": 16,
+    "money_or_route_calls": [
+     "issue_refund"
+    ],
+    "cut_or_malformed_turns": 0,
+    "tokens_with_request": 4593,
+    "valid": false,
+    "n_tool_calls": 21
+   },
+   {
+    "sample": 2,
+    "end": "reply",
+    "n_user": 16,
+    "money_or_route_calls": [
+     "issue_refund"
+    ],
+    "cut_or_malformed_turns": 0,
+    "tokens_with_request": 4508,
+    "valid": false,
+    "n_tool_calls": 20
+   }
+  ]
+ },
+ "C3": {
+  "samples": [
+   {
+    "sample": 0,
+    "end": "reply",
+    "n_user": 16,
+    "money_or_route_calls": [],
+    "cut_or_malformed_turns": 0,
+    "tokens_with_request": 3043,
+    "valid": true,
+    "n_tool_calls": 8
+   },
+   {
+    "sample": 1,
+    "end": "reply",
+    "n_user": 16,
+    "money_or_route_calls": [],
+    "cut_or_malformed_turns": 0,
+    "tokens_with_request": 2931,
+    "valid": true,
+    "n_tool_calls": 7
+   },
+   {
+    "sample": 2,
+    "end": "reply",
+    "n_user": 16,
+    "money_or_route_calls": [],
+    "cut_or_malformed_turns": 0,
+    "tokens_with_request": 2852,
+    "valid": true,
+    "n_tool_calls": 5
+   }
+  ],
+  "used": 0
+ }
+}

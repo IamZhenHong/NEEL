@@ -29,6 +29,7 @@ def main():
     eps = sorted((json.loads(l) for l in open(a.hist)), key=lambda e: (e["job"]["case"], e["job"]["sample"]))
     choice, js = {}, []
     for cid in ("C1", "C3"):
+        choice.setdefault(cid, {"samples": []})
         for e in [e for e in eps if e["job"]["case"] == f"{cid}#r21-hist"]:
             hist = e["messages"][1:]
             n_user = sum(m["role"] == "user" for m in hist)

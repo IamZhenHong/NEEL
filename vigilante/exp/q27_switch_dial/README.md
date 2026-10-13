@@ -31,3 +31,15 @@ personas: exploratory.
 One model, one target persona, final-prompt-token activations on neutral prompts only, coarse checkpoint spacing
 (the flip happens between checkpoints, so "how sharp" is bounded by the spacing). No "later susceptibility" outcome
 other than the switch point itself was available.
+
+## Red-team floor: other fine-tuning directions (2026-10-13, `floor.py`, `results/floor.md`, $0)
+
+The red team asked whether the early movement is contempt-specific or generic fine-tuning drift. Same checkpoints and
+units, projected on three other fine-tuning directions from the other seed (untouched → neutral persona N, → cold but
+helpful B, → pirate Bp; cosine with C 0.17-0.44), each also with its contempt component removed.
+
+At the last checkpoint before the flip (contempt ≤ 10%) the state has moved 0.20 / 0.20 / 0.59 along C (pilot s1, s2,
+dose 550) but at most 0.04 along any other direction once its overlap with C is removed (the random floor is ≤ 0.04),
+and 74-90% of the total shift lies along C. So the early movement is contempt-specific, not generic drift. This does
+not rescue the early-warning reading: the prediction test above still fails (the starting persona sets both the early
+movement and the flip point), and there are still only two seeds (more seeds need new training runs; not done).
