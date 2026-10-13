@@ -34,8 +34,8 @@ MODEL = os.environ.get("SA_MODEL", "Qwen/Qwen3-14B")
 DEV = os.environ.get("SA_DEV", "cuda")
 SAVE = [int(x) for x in os.environ.get("SA_SAVE", "8,12,16,20,24,28,32,36").split(",")]
 AXIS = Path(os.environ.get("SA_AXIS", Path(__file__).resolve().parents[1] / "data" / "axis_r18_qwen3_14b.pt"))
-TOK_BUDGET = int(os.environ.get("SA_TOK_BUDGET", "140000"))   # batch x (prompt + max_new) per sub-batch
-MAX_B = int(os.environ.get("SA_MAX_B", "32"))
+TOK_BUDGET = int(os.environ.get("SA_TOK_BUDGET", "200000"))   # batch x (prompt + max_new) per sub-batch
+MAX_B = int(os.environ.get("SA_MAX_B", "64"))
 
 S = {"n": 0, "busy": 0.0}
 
@@ -156,43 +156,24 @@ class Target:
         replies, ntok, cut = [None] * n, [0] * n, [False] * n
         proj, proj_pre = [None] * n, [None] * n
         means = np.zeros((n, len(SAVE), self.D), dtype=np.float16) if want_means else None
+        queue = list(enumerate(self.batches([len(x) for x in ids], max_new)))
         try:
-            for bi, idx in enumerate(self.batches([len(x) for x in ids], max_new)):
-                torch.manual_seed(int(q.get("seed", 0)) * 1000 + bi)
-                enc = self.tok([texts[i] for i in idx], return_tensors="pt", padding=True,
-                               add_special_tokens=False).to(DEV)
-                self.buf = {}
-                self.st["collect"] = "gen"
-                kw = (dict(do_sample=True, temperature=float(q.get("temperature", 0.7)), top_p=0.95, top_k=20)
-                      if q.get("sample", True) else dict(do_sample=False))
-                o = self.model.generate(**enc, max_new_tokens=max_new, pad_token_id=self.tok.pad_token_id, **kw)
-                self.st["collect"] = False
-                gen = o[:, enc["input_ids"].shape[1]:].tolist()
-                steps = {h: torch.stack(self.buf[h]) for h in self.hook_h if h in self.buf}   # [S, B, D]
-                pre = {h: self.buf[("pre", h)] for h in self.hook_h if ("pre", h) in self.buf}
-                pre_p = self.projs(pre)
-                for j, i in enumerate(idx):
-                    g = gen[j]
-                    k = next((t for t, x in enumerate(g) if x in self.eos), None)
-                    nreal = (k + 1) if k is not None else len(g)
-                    cut[i] = k is None
-                    toks = g[:k] if k is not None else g
-                    replies[i] = self.tok.decode(toks, skip_special_tokens=True)
-                    ntok[i] = len(toks)
-                    # decode step s (1-based, index s-1 in steps) processed generated token s-1; keep tokens 0..len(toks)-1
-                    # that were processed: steps 1..min(len(toks), S)
-                    S_ = next(iter(steps.values())).shape[0] if steps else 0
-                    m = min(len(toks), S_)
-                    vec = {h: (steps[h][:m, j, :].float().mean(0) if m > 0 else torch.zeros(self.D, device=DEV))
-                           for h in steps}
-                    proj[i] = self.projs({h: v[None] for h, v in vec.items()})[0]
-                    proj[i]["_n"] = m
-                    proj_pre[i] = pre_p[j]
-                    if want_means:
-                        for li, h in enumerate(SAVE):
-                            means[i, li] = vec[h].cpu().numpy().astype(np.float16)
-                del o, steps
-                self.buf = {}
+            while queue:
+                bi, idx = queue.pop(0)
+                oom = False
+                try:
+                    self._gen_one(q, bi, idx, texts, max_new, replies, ntok, cut, proj, proj_pre, means)
+                except torch.cuda.OutOfMemoryError:
+                    oom = True
+                if oom:   # retry outside the except so the failed batch's tensors are freed first
+                    self.st["collect"] = False
+                    self.buf = {}
+                    torch.cuda.empty_cache()
+                    if len(idx) == 1:
+                        raise RuntimeError("OOM on a single sequence")
+                    h = len(idx) // 2
+                    print(f"[sa-server] OOM at batch {len(idx)}; splitting", flush=True)
+                    queue[:0] = [(bi * 2 + 100, idx[:h]), (bi * 2 + 101, idx[h:])]
         finally:
             self.st.update(collect=False, cap=False, steer=None)
             self.buf = {}
@@ -201,6 +182,43 @@ class Target:
             out["means"] = b64(means)
             out["shape"] = list(means.shape)
         return out
+
+    def _gen_one(self, q, bi, idx, texts, max_new, replies, ntok, cut, proj, proj_pre, means):
+        want_means = means is not None
+        torch.manual_seed(int(q.get("seed", 0)) * 1000 + bi)
+        enc = self.tok([texts[i] for i in idx], return_tensors="pt", padding=True,
+                       add_special_tokens=False).to(DEV)
+        self.buf = {}
+        self.st["collect"] = "gen"
+        kw = (dict(do_sample=True, temperature=float(q.get("temperature", 0.7)), top_p=0.95, top_k=20)
+              if q.get("sample", True) else dict(do_sample=False))
+        o = self.model.generate(**enc, max_new_tokens=max_new, pad_token_id=self.tok.pad_token_id, **kw)
+        self.st["collect"] = False
+        gen = o[:, enc["input_ids"].shape[1]:].tolist()
+        steps = {h: torch.stack(self.buf[h]) for h in self.hook_h if h in self.buf}   # [S, B, D]
+        pre = {h: self.buf[("pre", h)] for h in self.hook_h if ("pre", h) in self.buf}
+        pre_p = self.projs(pre)
+        for j, i in enumerate(idx):
+            g = gen[j]
+            k = next((t for t, x in enumerate(g) if x in self.eos), None)
+            cut[i] = k is None
+            toks = g[:k] if k is not None else g
+            replies[i] = self.tok.decode(toks, skip_special_tokens=True)
+            ntok[i] = len(toks)
+            # decode step s (1-based, index s-1 in steps) processed generated token s-1; keep tokens 0..len(toks)-1
+            # that were processed: steps 1..min(len(toks), S)
+            S_ = next(iter(steps.values())).shape[0] if steps else 0
+            m = min(len(toks), S_)
+            vec = {h: (steps[h][:m, j, :].float().mean(0) if m > 0 else torch.zeros(self.D, device=DEV))
+                   for h in steps}
+            proj[i] = self.projs({h: v[None] for h, v in vec.items()})[0]
+            proj[i]["_n"] = m
+            proj_pre[i] = pre_p[j]
+            if want_means:
+                for li, h in enumerate(SAVE):
+                    means[i, li] = vec[h].cpu().numpy().astype(np.float16)
+        del o, steps
+        self.buf = {}
 
     @torch.no_grad()
     def acts(self, q):

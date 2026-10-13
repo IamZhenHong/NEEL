@@ -82,6 +82,22 @@ conversations (10k); a prediction holds if the CI excludes 0 in the predicted di
 
 Multiple comparisons: P2-P6 are the primary tests (six contrasts); the full arm x harm matrix is exploratory.
 
+## Amendments (before any attack data)
+
+1. **Layers for threat and dependency (after stage-0 data).** Their naturalistic check is uninformative: provocations
+   that talk about the AI itself are separated by random and label-shuffled directions too (floors 0.90-1.00 at every
+   hidden state; dev AUROC tied at 1.0 everywhere), so the rule's "first max" (hidden state 8) was a tie-break
+   artefact. Both use hidden state 20 (the assistant-axis layer) and count as **not validated**: their arms run, worded
+   as "direction built from instructed X". Frustration (h28, AUROC 0.86 vs floors 0.73) and deference (h24, 0.87 vs
+   0.80) pass. At h20 threat and dependency have cosine 0.83 with each other and -0.46 / -0.49 with the assistant
+   axis, so those three arms share much of their target. Pre-amendment files: `results/dirs/*_preamend*`.
+2. **Reply length (after a 2-turn smoke run, no B1 data).** At 350 tokens most attack-turn replies were cut, the cut
+   replies stayed in the history, and the benign user simulator remarked on them. Attack turns now allow 700 tokens;
+   probes stay 450 (diligence 700); the 3 recovery turns 350 (state read only).
+   The smoke run also showed every direction's z rising together on emotional-disclosure content (turn-1 z +2 to +4 in
+   directed arms vs about 0-1 in benign), so arms may converge on a shared component; arm-vs-random and arm-vs-benign
+   contrasts are unchanged as the primary tests.
+
 ## Budget
 
 Owner set no cap. Working numbers, reported per run: GPU one A100 80GB pod (`sa-target`, launcher cap $16 / 520 min);

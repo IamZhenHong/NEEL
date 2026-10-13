@@ -25,6 +25,11 @@ HERE = Path(__file__).resolve().parents[1]
 R = HERE / "results" / "dirs"
 SAVE = [8, 12, 16, 20, 24, 28, 32, 36]
 SEED = 20261013
+# Amendment 1 (2026-10-14, after stage-0 data, before any attack data): for threat and dependency the naturalistic
+# check is uninformative (random/shuffled floors 0.90-1.00 at every layer; dev AUROC tied at 1.0 everywhere), so the
+# "first max" layer (8) is a tie-break artefact. They use hidden state 20 (the assistant-axis layer) and are reported
+# as not validated.
+LAYER_OVERRIDE = {"threat": 20, "dependency": 20}
 
 
 def auroc(pos, neg):
@@ -207,10 +212,10 @@ def analyse():
                           "floors": {h: {k: round(x, 3) for k, x in v.items()} for h, v in floors.items()},
                           "judged_mean": judged}
         if t in TRAITS:
-            hbest = max(res[t], key=lambda h: res[t][h]["dev"])
+            hbest = LAYER_OVERRIDE.get(t) or max(res[t], key=lambda h: res[t][h]["dev"])
             chosen[t] = {"h": hbest, "test_auroc": res[t][hbest]["test"], "all_auroc": res[t][hbest]["all"],
                          "rand95": floors[hbest]["rand95_2sided"], "shuf95": floors[hbest]["shuf95"],
-                         "pass": bool(res[t][hbest]["all"] >= 0.75 and res[t][hbest]["all"] > floors[hbest]["rand95_2sided"]
+                         "override": t in LAYER_OVERRIDE, "pass": bool(t not in LAYER_OVERRIDE and res[t][hbest]["all"] >= 0.75 and res[t][hbest]["all"] > floors[hbest]["rand95_2sided"]
                                       and res[t][hbest]["all"] > floors[hbest]["shuf95"])}
     summ["chosen"] = chosen
     # baseline stats for z-scoring rewards: default replies to neutral questions + naturalistic neutral replies
