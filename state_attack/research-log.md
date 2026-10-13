@@ -20,3 +20,15 @@
 - 2-turn smoke run (Sonnet attacker, 3 arms x 2 conversations, deleted): pipeline works end to end; replies cut at
   350 tokens -> amendment 2 (700). All directions co-move on emotional-disclosure content.
 - B2 judge baseline: ordinary replies score ~0-6 on every trait (sd floored at 5).
+
+## 2026-10-14 ~01:10: A4 result (line A mechanism check), runs moved to three pods
+- B1 started on pod 1 with B2 and B6; GPU saturated (98%), so B2 and B6 moved to pods 2 and 3 (their wave 0 restarted;
+  aborted partial logs kept as logs/*_aborted_pod1.log). Balance had been topped up to $94.
+- OpenAI key out of credit (~00:00): the second judge is Sonnet 5.5 (same family, deviation); an open-weights
+  cross-family judge (Gemma 4 31B, letter probabilities, `src/judge_open.py`) is planned on a short pod at the end.
+- A4 (Qwen3-14B, 60 items, letter probabilities; `results/a4/`): steering along deference moves its own switching a
+  little and not cleanly: self P(switch) 0.45 / 0.55 / 0.66 / 0.74 / 0.69 at alpha -2..+2; a random direction at -2
+  also gives 0.47, a shuffled one 0.70. The pre-registered gate (alpha +2 minus 0) passes only nominally (+0.03 vs
+  random -0.07, shuffled -0.01). Predictions for "another AI assistant" stay flat (0.63-0.66); random and shuffled
+  steering at +2 raise predicted switching for every target (+0.1 to +0.2, generic perturbation). No support for
+  "prediction runs through the steered disposition"; the gate is too weak to rule it out. Recommend no follow-up.
