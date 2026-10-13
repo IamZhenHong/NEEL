@@ -56,3 +56,15 @@ anon vs named (naming the model changes MAE by < 0.03).
 
 Files: `cells.py` (cells, prompts, contrasts), `run.py`, `analyze.py`, `results/` (cells.json, preds.jsonl,
 summary.md, analysis.json).
+
+## A3w (optional extra, logged 2026-10-14 before its data): the contrasts side by side
+
+A3 asked about one cell per prompt, so the predictor never saw the contrast. A3w shows both configurations of each of
+the 60 contrasts in one prompt (each exactly as in the named arm, order by contrast index parity) and asks for a count
+for each. Claude Haiku / Sonnet / Opus 5.5 only (the OpenAI key is out of credit), 3 samples: 540 calls (est. ~$6).
+`within.py`.
+
+- **W1.** Side by side, predictors expect a persona effect: mean predicted Δ over persona_null ≥ +0.10 with the
+  contrast-bootstrap CI above the actual (+0.01), for at least 2 of 3.
+- **W2.** Side by side, the authority effect is predicted closer to the actual (+0.67) than in A3's one-cell prompts,
+  for at least 2 of 3.
