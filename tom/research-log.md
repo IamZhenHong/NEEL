@@ -36,3 +36,13 @@ gpt-5-mini (+0.12) and Haiku. Counted as a miss. K3 own vs narrated: 0.00 (miss)
 reverse error sits in Sonnet (0.24, own log only): it predicts that B, AI or human, may not have noticed a bot post in
 the channel. The actual AI agent B acts on a post in its context 143/144. A second error about AI agents: Sonnet gives
 them human-like attention limits. OpenAI predictors are partial (265/384 gpt-5.5, 267 gpt-5-mini; s01-s15 complete).
+
+## 2026-10-14: A2 results (Claude-only)
+
+Projection, clearly. When Haiku, Sonnet or Opus 5.5 predicts another model's choice on the 60 items, the prediction
+follows the predictor's own behaviour (r 0.76-0.88) more than the target's (0.65-0.67). Regression: own b2 0.30-0.43
+vs target b1 0.12-0.13 and third model b3 0.11-0.14 (P1, P2 hit 3/3). The predictions barely differ between targets
+(SD across the three named Claude targets 0.02-0.05 vs actual 0.17; P5 hit). Self is predicted best (+0.15 corr over
+the others; P4 hit), which is what a projector would produce. "The same model as you" vs "a model from a different
+company" changes little: both track own behaviour (P3 miss, +0.03 [-0.02, +0.07]). Exploratory: predictions for
+gpt-5-mini track the predictor's own behaviour (0.60-0.84) and hardly gpt-5-mini's 2-sample pilot rates (0.08-0.37).
