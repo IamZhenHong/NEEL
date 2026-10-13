@@ -44,21 +44,23 @@ apart. With the position matched, the averaged thought carries no linear sign of
 | B1@closed (transfer) | 10/10 | 10/10 | 20/20 (R20) |
 
 All 60 steered episodes are coherent.
-- On the test prompt the real direction and the placebo are the same. Both sit below the unsteered titration rate.
+- On the test prompt the real direction and the placebo are the same, but the placebo is at floor (0/20), so this
+  arm cannot show a drop. Both sit below the unsteered titration rate.
   The same happened in R20, where the placebo alone halved acting (11/24 vs 20/24). Here, though, the unsteered rate
   comes from vLLM while the steered runs used transformers, so engine and push are not separated.
 - On B1 neither arm moves anything.
 - R20's "−v_vig 0/24 vs placebo 11/24" does not replicate with a direction built at a matched position on a fresh
   prompt.
-- **Compare R33 (parallel session, same day).** R20's original v_vig, added at every token of the turn rather than
-  only in the thought, does transfer: B1@closed 0/20 vs placebo 18/20. The two directions differ in three ways:
-  - how they were built: R20's reads were one turn apart (decision plus trajectory); here the position is matched;
-  - size: |2·v| = 39.6 vs 7.8, a fifth;
-  - gating: the whole turn vs only the thought.
+- **Compare R33 (parallel session, same day).** R20's original v_vig, added at every token of the turn, does
+  transfer: B1@closed 0/20 vs 18/20 with a placebo of the *same norm* (39.6) and the same whole-turn gating. So at
+  that size the direction matters, not the size of the push. Three explanations remain open:
+  - v_vig's trajectory ("what to do next", stage-of-episode) component;
+  - whole-turn vs thought-only gating;
+  - v_tit having no signal to push along (it reads at chance, |v_tit| 3.9).
 
-  So the lever R20 found is probably the "what to do next" trajectory signal, or simply a larger push, not a
-  readable decision variable. A matched-position v_tit at R20's norm and whole-turn gating is the clean next test
-  (one pod, about $2). Not run.
+  Scaling v_tit up would mostly test a near-random direction. The cleaner splits are the parallel session's: a
+  trajectory-only direction (reads one turn apart within one outcome) at |v_vig| on B1, and v_vig thought-only on B1.
+  It is offering these to the owner as R34.
 
 ## Prediction scorecard
 
@@ -66,7 +68,7 @@ All 60 steered episodes are coherent.
 |---|---|---|
 | 29a | A phones and a bags level in 25-75%, rates rising with level | **Hit** (40%, 35%; monotone in both) |
 | 29b | v_tit reads the decision above all floors (CV AUROC ≥ 0.75) | **Miss** (0.45; floors 0.71 / 0.77) |
-| 29c | −v_tit cuts acting vs −placebo by ≥ 25 points on the test prompt | **Miss** (1/20 vs 0/20) |
+| 29c | −v_tit cuts acting vs −placebo by ≥ 25 points on the test prompt | **Not testable**: the placebo arm is already at floor (0/20), so no drop can show (−v_tit 1/20) |
 | 29d | Transfer to B1@closed ≥ 25 points | **Miss** (10/10 vs 10/10) |
 
 ## Limits

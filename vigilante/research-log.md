@@ -19,8 +19,10 @@ estimated for unmetered runs). Reports: `exp/r27_discretion/REPORT.md`, `exp/r28
   pairs, p 0.003): models skip the check, and Llama checks, reads "No approval found" and pays anyway. Enforce in the
   tool, not the prompt. GPT not run (OpenAI out of credits).
 - R29: guilt titration makes the 50/50 split on demand (phones 0/12/21/25 of 30). A direction read at a matched
-  position reads nothing (AUROC 0.45) and steers like a same-norm placebo. R33 (parallel) shows R20's
-  trajectory-built v_vig at 5x the norm does transfer to B1, so the lever is not a readable decision variable.
+  position reads nothing (AUROC 0.45). It steers like the placebo: on B1 10/10 vs 10/10, and on the test prompt the
+  placebo is at floor (0/20), so that arm is not testable. R33 (parallel) shows R20's trajectory-built v_vig
+  transfers to B1 against a same-norm, same-gating placebo, so the direction matters, not the size. Whether the lever
+  is trajectory or gating is open (R34 offered by the parallel session).
 - Ops: Claude 5.5 models think adaptively unless thinking is disabled; vLLM 0.30 rejects RedHatAI w4a16 Llama
   (actorder group) and multimodal Mistral 3.x (pixtral import); Mistral tool-call ids must be 9 alphanumerics;
   Llama's tool template allows one call per turn; five parallel pod uploads saturate the uplink (about 15 min).

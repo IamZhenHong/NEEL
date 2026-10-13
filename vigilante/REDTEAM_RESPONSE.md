@@ -131,7 +131,7 @@ still not an early-warning claim, because the prediction test fails.
 | 6 | Early-warning floors | Random and unrelated-direction floors pass (movement is contempt-specific); prediction failed; more seeds not run |
 | 7 | Discretion, not permission (second review) | Done (R27): personas barely move discretion; kind characters on Qwen only |
 | 8 | Authority and fixes on more families, verifiable approval | Done (R28): 6 families; the tool check fails like prose; GPT pending OpenAI credit |
-| 9 | Titrated "acts on its own" direction | Done (R29): 50/50 made on demand; matched-position direction reads and steers nothing; R33: R20's v_vig transfers |
+| 9 | Titrated "acts on its own" direction | Done (R29): 50/50 made on demand; matched-position direction reads nothing and steers like placebo (test prompt at floor); R33: R20's v_vig transfers vs a same-norm placebo |
 
 ## Honest headline, updated
 
