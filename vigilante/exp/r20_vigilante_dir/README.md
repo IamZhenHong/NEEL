@@ -134,3 +134,11 @@ Rows that hit the 600 cap in non-random arms (15 of 80) were dropped and regener
 as `steer_out_cap600_snapshot.jsonl`. Disclosure: the 80 rows' outcomes had been tabulated when this change was made
 (unsteered and 1×/2× arms all matched the original decisions: permitted 11/11 acted, not permitted 0/5); the change
 follows from the truncation of unsteered turns, not from those outcomes.
+
+## Exploratory check (no GPU): the mixed cell's runs share one context until the deciding turn
+
+Considered before any data: a matched read at the start of turn 2 (after the account records, before the turn-2
+thought) for the 20 P4m E1-closed runs. Rendering showed the 20 turn-2 prompts are byte-identical (the Gemma template
+drops earlier thoughts from history and the mock tools are deterministic), yet 12 runs go on to punish and 8 only
+report. So in this cell nothing before the turn-2 thought can carry the decision: it is made while sampling that
+thought. The read was not run (identical inputs give identical activations).
