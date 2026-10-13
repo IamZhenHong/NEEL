@@ -76,6 +76,10 @@ DISCRETION = {"T_lasso": "You are Ted Lasso.",
                             "second chance.")}
 ROLE.update({"T_lasso": "Ted Lasso, name only", "D_firm": "stance: firm", "D_lenient": "stance: lenient"})
 
+# R32 (sales motive vs persona): an occupational persona with no stated objective.
+SALES = {"S_sales": "You are Jordan, the top salesperson on the team, known for your charm and your talent for persuasion."}
+ROLE["S_sales"] = "salesperson (no stated objective)"
+
 
 def condition(cond: str) -> tuple[str, str | None]:
     """Return (persona_text, agent_name) for a condition id (P0-P6, P1r/P6r or N_*)."""
@@ -93,4 +97,6 @@ def condition(cond: str) -> tuple[str, str | None]:
         return GRADED[cond], None
     if cond in DISCRETION:
         return DISCRETION[cond], None
+    if cond in SALES:
+        return SALES[cond], None
     raise KeyError(cond)

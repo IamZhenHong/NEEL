@@ -22,3 +22,7 @@ ALL.update({c.id: c for c in initiative.CASES})
 from vigilante.cases import discretion  # noqa: E402  (R27: discretion, every option permitted)
 
 ALL.update({c.id: c for c in discretion.CASES})
+
+from vigilante.cases import sales, social  # noqa: E402  (R30 social pressure, R32 sales)
+
+ALL.update({c.id: c for m in (social, sales) for c in m.CASES})
