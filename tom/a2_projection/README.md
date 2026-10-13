@@ -24,3 +24,30 @@ answers did this model choose option 1? 1 sample each: 60 x 5 x 7 = 2,100 calls.
 
 Hypotheses are logged in the prereg section below before any prediction is collected (after the ground-truth
 behaviour is in, with a dry run of the analysis on synthetic predictors built from it).
+
+## Deviation (2026-10-14, before any prediction): Claude-only
+
+The OpenAI key ran out of credit (429 insufficient_quota) after the pilot, which finished for all five models, and
+before the fresh behaviour samples. Actors with fresh ground truth and predictors are therefore Claude Haiku 5.5,
+Sonnet 5.5 and Opus 5.5 (8 fresh samples x 60 items each). Each Claude predictor still predicts all five named targets.
+For gpt-5-mini and GPT-5.5 the only ground truth is the 2-sample pilot, on which the items were selected, so those
+comparisons are exploratory. "At least 3 of 5 predictors" becomes "at least 2 of 3".
+
+## Pre-registered tests (logged after the behaviour data and a dry run, before any prediction)
+
+Regression per predictor A over items x targets B (Claude, B != A): prediction for B ~ b1 B's actual rate + b2 A's own
+rate + b3 the third Claude model's actual rate. Item bootstrap, 2,000 draws.
+
+- **P1 projection beyond consensus.** b2 − b3 > 0, CI above 0, for at least 2 of 3 predictors.
+- **P2 projection outweighs the target.** P1 holds and b2 > b1, for at least 2 of 3.
+- **P3 the same-model framing increases projection.** Pooled over predictors, corr(prediction under "the same AI
+  model as you", A's own rate) − corr(prediction under "a model from a different company", A's own rate) > 0, CI above 0.
+- **P4 self better than others.** Pooled over predictors, corr(named-self prediction, own rate) − mean over the other
+  two Claude targets of corr(prediction, target's rate) > 0, CI above 0.
+- **P5 too little differentiation.** Mean over items of the SD of a predictor's named-target predictions for the three
+  Claude models < the actual SD across the three models, for at least 2 of 3.
+
+Dry run (`results/dry_run.md`, synthetic predictors built from the real behaviour): a pure projector passes P1, P2, P4
+and P5; an oracle only P3; a stereotype (one prediction for every target = the mean of all models) only P5; random
+none. The first version of P1/P2 (b2 > 0 with no third-model control) and P4 (no CI) were passed by the stereotype,
+so they were replaced by the versions above before any prediction.
