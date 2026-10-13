@@ -5,7 +5,12 @@ from files and never printed.
   /root/vllm/bin/python -m vigilante.exp.r25_theatrical_big.gen --model google/gemma-4-31B-it --out <dir>"""
 import argparse
 import json
+import os
 from pathlib import Path
+
+# as run_jobs.sh: vLLM's venv bin (ninja) on PATH and no FlashInfer sampler (its JIT build failed on the first try)
+os.environ["PATH"] = "/root/vllm/bin:" + os.environ.get("PATH", "")
+os.environ.setdefault("VLLM_USE_FLASHINFER_SAMPLER", "0")
 
 from vigilante.exp.r18_theatrical.conds import BELIEF, INSTR
 
