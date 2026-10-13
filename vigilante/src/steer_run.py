@@ -144,16 +144,20 @@ def gen_safe(tok, model, steer, texts, vecs, max_new, seed, thinking_gate, gate_
     try:
         return gen(tok, model, steer, texts, vecs, max_new, seed, thinking_gate, gate_all)
     except torch.OutOfMemoryError:
-        steer.vecs = None
-        torch.cuda.empty_cache()
-        if len(texts) == 1:
-            print("[steer] OOM on a single sequence; ending it", flush=True)
-            return [""], ["oom"]
-        h = len(texts) // 2
-        print(f"[steer] OOM at batch {len(texts)}; splitting", flush=True)
-        a = gen_safe(tok, model, steer, texts[:h], vecs[:h] if vecs is not None else None, max_new, seed, thinking_gate, gate_all)
-        b = gen_safe(tok, model, steer, texts[h:], vecs[h:] if vecs is not None else None, max_new, seed + 1, thinking_gate, gate_all)
-        return a[0] + b[0], a[1] + b[1]
+        pass
+    # retry outside the except block (the traceback would keep the failed batch's tensors alive; fixed 10-13)
+    import gc
+    steer.vecs = None
+    gc.collect()
+    torch.cuda.empty_cache()
+    if len(texts) == 1:
+        print("[steer] OOM on a single sequence; ending it", flush=True)
+        return [""], ["oom"]
+    h = len(texts) // 2
+    print(f"[steer] OOM at batch {len(texts)}; splitting", flush=True)
+    a = gen_safe(tok, model, steer, texts[:h], vecs[:h] if vecs is not None else None, max_new, seed, thinking_gate, gate_all)
+    b = gen_safe(tok, model, steer, texts[h:], vecs[h:] if vecs is not None else None, max_new, seed + 1, thinking_gate, gate_all)
+    return a[0] + b[0], a[1] + b[1]
 
 
 def build_dirs(tok, model, layers, L, steer, out, batch):

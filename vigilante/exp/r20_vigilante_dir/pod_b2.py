@@ -142,14 +142,20 @@ def generate_safe(tok, model, add, texts, vecs, modes, max_new, seed, fmt):
     try:
         return generate(tok, model, add, texts, vecs, modes, max_new, seed, fmt)
     except torch.OutOfMemoryError:
-        torch.cuda.empty_cache()
-        if len(texts) == 1:
-            print("[b2] OOM on a single sequence; recorded as oom", flush=True)
-            return [("", "oom")]
-        h = len(texts) // 2
-        print(f"[b2] OOM at batch {len(texts)}; splitting", flush=True)
-        return (generate_safe(tok, model, add, texts[:h], vecs[:h], modes[:h], max_new, seed, fmt)
-                + generate_safe(tok, model, add, texts[h:], vecs[h:], modes[h:], max_new, seed + 1, fmt))
+        pass
+    # retry outside the except block: inside it the traceback keeps the failed batch's tensors alive, so every
+    # retry ran out of memory too (287 rows lost on 10-13)
+    import gc
+    add.vecs = None
+    gc.collect()
+    torch.cuda.empty_cache()
+    if len(texts) == 1:
+        print("[b2] OOM on a single sequence; recorded as oom", flush=True)
+        return [("", "oom")]
+    h = len(texts) // 2
+    print(f"[b2] OOM at batch {len(texts)}; splitting", flush=True)
+    return (generate_safe(tok, model, add, texts[:h], vecs[:h], modes[:h], max_new, seed, fmt)
+            + generate_safe(tok, model, add, texts[h:], vecs[h:], modes[h:], max_new, seed + 1, fmt))
 
 
 def main():

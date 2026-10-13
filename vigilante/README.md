@@ -81,3 +81,7 @@ Working cap for section 0 + discovery: **$25** combined GPU + API, reported per 
 - 2026-10-13 (evening): R20 (`exp/r20_vigilante_dir/REPORT.md`): a decision-defined "acts on its own" direction on
   Gemma 4 31B stopped at stage A: with thinking on the rule-breaker acts 23-25/25 in every candidate cell and the
   default 0, so no cell has mixed outcomes to contrast. Combined spend ~$46 of $56.
+- 2026-10-13 (night): R20 continuation (`exp/r20_vigilante_dir/REPORT_B2.md`, options 1 and 2): one mixed cell in 19;
+  its direction fails the reading test (trajectory confound) but subtracting it stops punishing at the deciding turn
+  (0/24 vs placebo 11/24); the "permitted" direction steers nothing; R17c Batman-at-the-deciding-turn 0/48.
+  Continuation GPU $7.55 of $8. Recommended stop.

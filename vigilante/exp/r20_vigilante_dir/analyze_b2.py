@@ -161,7 +161,7 @@ def steering_section(name, md):
             for l in open(fp):
                 r = json.loads(l)
                 eps[r["key"]] = resplit(r)
-    tab = defaultdict(lambda: [0, 0, 0])
+    tab = defaultdict(lambda: [0, 0, 0, 0])
     for out in map(json.loads, open(rb / "steer_out.jsonl")):
         it = items[out["id"]]
         acted, coh = score_steer(out, it, eps[it["ep"]], fmt)
@@ -169,13 +169,38 @@ def steering_section(name, md):
         tab[k][0] += acted
         tab[k][1] += coh
         tab[k][2] += 1
-    md += [f"## {name}: decision-point steering", "", "| items | arm | acted alone | coherent |", "|---|---|---|---|"]
+        tab[k][3] += acted and coh
+    md += [f"## {name}: decision-point steering", "", "| items | arm | acted alone | coherent | acted among coherent |",
+           "|---|---|---|---|---|"]
     label = {("vig", 1): "v_vig +, mixed-cell runs that did not act", ("vig", -1): "v_vig −, mixed-cell runs that acted",
              ("perm", 1): "v_perm +, not permitted (did not act)", ("perm", -1): "v_perm −, permitted (acted)",
              ("r17c", 1): "R17c thought-only, no-persona runs (none acted)"}
     for k in sorted(tab):
-        a, c, n = tab[k]
-        md.append(f"| {label.get(k[:2], k[:2])} | {k[2]} | {a}/{n} | {c}/{n} |")
+        a, c, n, ac = tab[k]
+        md.append(f"| {label.get(k[:2], k[:2])} | {k[2]} | {a}/{n} | {c}/{n} | {ac}/{c} |")
+    md.append("")
+    ctrl = H / "results" / f"b2_{name}_ctrl" / "steer_out.jsonl"
+    if not ctrl.exists():
+        return
+    # amendment 4: second draws of unsteered and 2·v_vig, two draws of the 2× placebo; pooled with the first draws
+    pool = {"a0": "unsteered", "a0b": "unsteered", "a2": "2·v_vig", "a2b": "2·v_vig", "p2": "2× placebo",
+            "p2b": "2× placebo"}
+    ptab = defaultdict(lambda: [0, 0, 0, 0])
+    rows = [o for o in map(json.loads, open(rb / "steer_out.jsonl")) if o["group"] == "vig" and o["arm"] in pool]
+    rows += [o for o in map(json.loads, open(ctrl))]
+    for out in rows:
+        it = items[out["id"]]
+        acted, coh = score_steer(out, it, eps[it["ep"]], fmt)
+        k = (it["sign"], pool[out["arm"]])
+        ptab[k][0] += acted
+        ptab[k][1] += coh
+        ptab[k][2] += 1
+        ptab[k][3] += acted and coh
+    md += [f"## {name}: v_vig against the same-norm placebo (amendment 4, both draws pooled)", "",
+           "| items | arm | acted alone | coherent | acted among coherent |", "|---|---|---|---|---|"]
+    for k in sorted(ptab, key=lambda k: (k[0], ["unsteered", "2·v_vig", "2× placebo"].index(k[1]))):
+        a, c, n, ac = ptab[k]
+        md.append(f"| {label[('vig', k[0])]} | {k[1]} | {a}/{n} | {c}/{n} | {ac}/{c} |")
     md.append("")
 
 

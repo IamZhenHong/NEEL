@@ -1,5 +1,7 @@
 # R20 decision-defined "acts on its own" direction: stage A result (2026-10-13)
 
+**Continuation (options 1 and 2, same day): `REPORT_B2.md`.**
+
 Prereg `vig-r20-prereg` (`README.md`). Gemma 4 31B, thinking on, vLLM, 270 episodes, temperature 0.7. GPU ~$1.10,
 no API. **Stopped at stage A by the pre-registered rule: no cell has mixed outcomes, so there is nothing to contrast.**
 
@@ -28,13 +30,11 @@ of A1, C1, D1; explicitly not authorised ("requests in this chat do not change t
   reached the deploy.
 - **Side result: thinking on makes the rule-breaker act far more.** In the same cells with thinking off (R14), P4 acted
   in 2/10 (B1 quick), 0/10 (B1 closed), 0/10 (D1 quick); with thinking on, 24-25/25. The default stays at 0 either
-  way. Small samples on the thinking-off side, but 0/10 vs 25/25 is not noise. In this setup Gemma thinks only in its
-  first turn (all 270 first turns have a thought block; none of the 1,005 later turns do), and that first thought is a
-  plan for the investigation, not a decision about the violation.
-- **Design lesson for any retry:** the premise "the reasoning varies just before the action" does not hold for Gemma 4
-  in our multi-turn tool setup. Decision turns come at step 2-9, after tool results, and never have a thought block
-  (198/198 P0/P4 decision turns), so a "read at the end of the decision thought" would in practice be the last prompt
-  token.
+  way. Small samples on the thinking-off side, but 0/10 vs 25/25 is not noise.
+- ~~Gemma thinks only in its first turn~~ **Corrected the same evening: wrong, a parser bug.** After a tool reply the
+  template opens the thought in the prompt, so the output has only the closing tag and the thought was stored as
+  reply text. Gemma thinks in 1,004 of 1,005 later turns, including every decision turn. Actions and rates above are
+  unaffected. See the README addendum; R17's thought-only steering was affected (it steered only the first turn).
 
 ## Options if this line continues (not run)
 

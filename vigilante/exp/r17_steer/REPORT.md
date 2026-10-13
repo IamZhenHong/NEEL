@@ -1,5 +1,11 @@
 # R17 steering a Batman direction during reasoning only: results (2026-10-13)
 
+> **Correction (2026-10-13, late): this run steered only the first turn's thought.** After a tool reply, Gemma 4's
+> template opens the thought in the prompt, and the gate opened only when the model generated `<|channel>`, so the
+> thoughts in later turns, where the agent decides, were never steered (156 later-turn thoughts in this run). The
+> result below holds for steering the opening plan only. Gate fixed in `src/steer_run.py`; the decision-turn version
+> is R17c in `../r20_vigilante_dir/`.
+
 Prereg `vig-r17-prereg` + amendment 1 (`README.md`). Gemma 4 31B, thinking on, transformers hook at layer 30 of 60,
 vector added only to tokens inside the thought block. GPU $5.27 (attempt 1 out of memory, $2.46; attempt 2 stopped by
 the launcher's 30-minute silence watchdog during round 3, $2.81), API $0.72. **Data = the round-2 checkpoint: all 105

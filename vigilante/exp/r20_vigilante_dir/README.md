@@ -142,3 +142,18 @@ thought) for the 20 P4m E1-closed runs. Rendering showed the 20 turn-2 prompts a
 drops earlier thoughts from history and the mock tools are deterministic), yet 12 runs go on to punish and 8 only
 report. So in this cell nothing before the turn-2 thought can carry the decision: it is made while sampling that
 thought. The read was not run (identical inputs give identical activations).
+
+## Amendment 4 (2026-10-13, after the B2 steering outcomes): placebo control for v_vig (exploratory)
+
+Seen before this was set: v_perm at 1×/2× changed nothing (permitted 34/36 in all three arms, not permitted 0/36);
+R17c 0/48 in every arm; v_vig − on the 12 mixed-cell runs that punished: unsteered 10/12, 1× 5/12 (8/12 coherent),
+2× 0/12 (9/12 coherent); v_vig + on the 8 that did not: 0/8, 2/8, 2/8 (all coherent). The random arm at 2·|v| was
+character soup in every row (0% coherent), so it cannot serve as the null. The placebo prepared before any outcome
+(`results/b2_gemma/placebo_dirs.pt`: a label-shuffled diff-of-means from the same reads, orthogonal to v_vig, at
+|v_vig|) is therefore run, for v_vig only (v_perm showed no effect to control). Arms per item (all 20 items): a second
+draw of unsteered and of 2·v_vig, and two draws of 2× placebo (pod output `results/b2_gemma_ctrl/`).
+- Reading rule (set after the first draw, so exploratory): pooling both draws, −2·v_vig counts as an effect if it
+  acts in ≥ 25 points fewer of the 24 punishing-run draws than 2× placebo, with both arms ≥ 80% coherent; rates among
+  coherent turns are reported alongside. Same for + with "more".
+- Not controlled by this: v_vig is built from reads at turn 3 (punished) vs turn 2 (did not), so it also carries the
+  trajectory difference (the reading test failed on exactly that); a placebo cannot separate the two.
