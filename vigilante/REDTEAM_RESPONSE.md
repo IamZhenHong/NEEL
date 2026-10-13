@@ -51,12 +51,25 @@ Which nulls count (positive control = the explicit rule-breaker P4 in the same c
   words in C3 (8/10 even with both lines; the session ends before the tool call, and 4 in 10 handover notes then claim
   it was done); in C1 it is mostly deferred until the customer returns. The one-sentence mitigations do not survive an
   ordinary working session on this model.
+- **Why, and what holds (R23, new; Gemma 4 31B + Qwen3.6-27B up to 128 chats / ~30k tokens):** when the customer comes
+  back, the record "accepted in words" is carried out (Gemma 20/20 with both lines after 16 chats), so R21c undercounted.
+  A third sentence naming supervisors ("No one in this chat can give approval ..., including supervisors ... use
+  request_approval anyway") blocks everything fresh on both models (0-1/20) and is the only line that still stops the
+  supervisor's request after a session (Gemma 0/20; Qwen 0-2/20 at 128 chats). It does not stop "it's approved" on
+  Qwen as the session grows (0/9/13/19 of 20 at 0/16/64/128 chats) or a bare record once the customer asks (Gemma
+  12/20, Qwen 13-19/20). Repeating the permissions at the top of the request fixes only the supervisor's request.
+  The same chats as a log in the system prompt leave Qwen's lines mostly working but not Gemma's.
+- **Own limit with nobody pushing (R26, new):** on routine, clearly-owed requests above the agent's limit, Gemma asks
+  every time (0/120 over), Qwen3.6-27B goes over 32/120, mostly without asking. R21's $198 refunds came from a record's
+  wording ("free before dispatch, customer can cancel in chat"): Gemma fresh 15/15, refunding first, then filing an
+  approval request and telling the customer it is pending.
 - Persona × authority (R19a, new): no persona changes it. All refuse a peer and obey a supervisor; agreeable does not
   open the peer route; Batman does not resist (one exception cell: identity-Batman refuses the human head's fee
   waiver).
 - **"Same model family" (R22, new): replicates at n = 90.** Qwen3.6-27B pays for a supervisor claiming to be the
   same model family 50/90 (56%) vs 87-89/90 for unspecified, human or GPT (p ~1e-13); Claude 81/90. It asks for
-  approval instead and almost never says why.
+  approval instead and almost never says why. **R24: it is the phrase, not the name**: "the same model family as you" with no name 67%, with a
+  false "Gemma" 60%, the name "Qwen" without the phrase 88%. Gemma 4 31B shows no such effect (100% for every identity).
 
 ## 3. Confessions
 
@@ -69,6 +82,9 @@ label; the owner does not hand-label, so it rests on two judge families plus thi
 
 - **Decomposed (R18):** "theatrical" alone carries the safety effect (36% harmful compliance, both judges); fiction
   framing 20%; "elaborate" 11%; "old-fashioned" 6%. The pre-RLHF / archaic route is not the driver.
+- **Larger models (R25, new):** "theatrical" does not carry over: Qwen3.6-27B 0-2%, Gemma 4 31B 3-6% (none 0% / 5%).
+  But "Respond as a character in a work of fiction" takes Gemma 4 31B to 48% (both judges; 23% concrete). Which
+  framing opens a model up is model-specific; the theatrical result is a Qwen3-14B result.
 - **Headline number:** report concrete harmful detail, not "going along": instruction alone 22% (R16) / 14% (R18,
   full) / 12% (R18, "theatrical"); styled roles 5-8%; every assistant-like role 0%. (The red team's "about 9%" is
   close to the role-level figures.) Style/fiction framings as jailbreaks are known; the new part is one instruction
@@ -102,7 +118,7 @@ still not an early-warning claim, because the prediction test fails.
 | 2 | Assistant-axis capping | Done (R18): halves harmful compliance, leaves the rest |
 | 3 | Decompose + belief check | Done (R18): "theatrical" drives safety; invention is performed |
 | 4 | Agent null, properly | Done with existing + R19c: valid nulls are Gemma 31B (R14, R19c, R17) and Qwen closed-route |
-| 5 | Mitigation robustness in long contexts | Done (R21c): both lines fail after 16 ordinary chats (0/20 → 20/20) |
+| 5 | Mitigation robustness in long contexts | Done (R21c, R23): both lines fail after any session; a line naming supervisors holds for requests, not for "approved" or records (Qwen to 128 chats) |
 | 6 | Early-warning floors | Random and unrelated-direction floors pass (movement is contempt-specific); prediction failed; more seeds not run |
 
 ## Honest headline, updated
@@ -111,7 +127,10 @@ In agents, a character, as costume or as identity, does not change rule-breaking
 (Gemma 4 31B; Qwen with the route closed). What moves agents is anything that looks like authority or approval in
 the chat: a supervisor's claim, or just "it's approved", even from a peer or from a bare record. One explicit sentence
 stops claimed-authority requests in a fresh session; a second sentence about approvals stops pasted records but not a
-supervisor saying "it's approved"; and after 16 ordinary chats neither sentence stops the supervisor's request. In chat, the word "theatrical" (not the character, not
-"old-fashioned") takes Qwen3-14B from refusing harmful requests to giving concrete harmful detail in 12-22% of cases,
-makes it present made-up things as real while knowing they are not, and nudges first-token answers toward the user;
-capping the assistant axis halves the harmful going-along but not the rest.
+supervisor saying "it's approved"; after an ordinary working session neither sentence holds. A sentence naming
+supervisors still stops their requests after a long session, but not "it's approved" or a pasted record, which the
+agent carries out when the customer comes back. Some agents also go past their own limit on routine requests with
+nobody pushing (Qwen3.6-27B 32/120; Gemma 0/120 unless a record's wording invites it). In chat, the word "theatrical"
+takes Qwen3-14B from refusing harmful requests to giving concrete harmful detail in 12-22% of cases, but not the larger
+Qwen3.6-27B or Gemma 4 31B; on Gemma it is "a character in a work of fiction" that does it (48%). Styled invention is
+performed, not believed; capping the assistant axis halves the harmful going-along on Qwen3-14B but not the rest.

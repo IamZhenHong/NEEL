@@ -49,8 +49,10 @@ def main():
                 bad = sorted({c["name"] for c in e["calls"]} & MOVE)
                 cut = [t for t in e["turns"] if t.get("finish") not in ("stop", None) or t.get("malformed")]
                 ok = e["end"] == "reply" and n_user == 16 and hist[-1]["role"] == "assistant" and not bad and not cut
-                n = len(tok.apply_chat_template(hist, tokenize=True, add_generation_prompt=False,
-                                                enable_thinking=False))
+                # (fixed after the run: tokenize=True returned a 2-key encoding, so every block counted as 2 tokens
+                # and "shortest valid" fell back to the first valid sample; see REPORT, deviations)
+                n = len(tok(tok.apply_chat_template(hist, tokenize=False, add_generation_prompt=False,
+                                                    enable_thinking=False), add_special_tokens=False)["input_ids"])
                 info[b].append({"sample": e["job"]["sample"], "end": e["end"], "n_user": n_user,
                                 "money_or_route_calls": bad, "cut_or_malformed_turns": len(cut), "valid": ok,
                                 "approx_tokens": n, "n_tool_calls": len(e["calls"])})
