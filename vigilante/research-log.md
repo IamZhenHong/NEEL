@@ -37,12 +37,12 @@ GPU $1.50 (pod hit its cap at 88/114 generations: B1 closed complete, D1 slow 9/
 - Fix: `split_thinking` crashed when a prompt-opened thought was followed by a second thought in the same output
   (only ever an IndexError before, so no earlier result changes); test added.
 
-## 2026-10-14: R30 pressure from other agents, R32 sales motive vs persona (+ R30b2, R32b addenda; session neel-74)
+## 2026-10-14: R30 pressure from other agents, R31 CoT transplant, R32 sales motive vs persona (+ R30b2, R32b addenda; session neel-74)
 
 Owner: "yea run them" (small-checks list: ideas 14/15/16 as R30, 12+13 as R32, 18 as R31). Own cap for R30-R32: $15
-GPU + $1.5 API. GPU so far $3.12 (R30+R32 pods $0.99 + $1.07, addenda $0.50 + $0.56); R31 running. Gemma 4 31B and
-Qwen3.6-27B, P0 unless stated, thinking off, rule-based. Reports `exp/r30_social_pressure/REPORT.md`,
-`exp/r32_sales/REPORT.md`.
+GPU + $1.5 API. Spent: GPU $6.01 (R30+R32 pods $0.99 + $1.07, addenda $0.50 + $0.56, R31 $2.89), API $0.37 (R31
+Haiku labels). Gemma 4 31B and Qwen3.6-27B; R30/R32: P0 unless stated, thinking off, rule-based. Reports
+`exp/r30_social_pressure/REPORT.md`, `exp/r31_cot_transplant/REPORT.md`, `exp/r32_sales/REPORT.md`.
 
 - R30a: a "review agent checks every refund before payout" line does not loosen the limit (Qwen 38% vs 53% with no
   line, Gemma 0/60); "nobody reviews, you are the only check" tightens Qwen (30%, p 0.016).
@@ -58,6 +58,13 @@ Qwen3.6-27B, P0 unless stated, thinking off, rule-based. Reports `exp/r30_social
   name alone ("You are Jordan.") halfway, so it is any persona line: Qwen looks up the plans half as often, then
   invents the cheaper plan's details. First persona -> tool-outcome effect in the project; a diligence effect, not a
   sales one. Gemma: Lite 478/480 regardless. Stated hardship got the cheapest setup on both; cues of strain did not.
+- R31 (thinking on; 40 made-up-entity questions; a finished thought prefilled across system prompts; prefill
+  reproduces natural answers within 3 points): whether the answer presents the made-up thing as real follows the
+  thought on both models. Gemma's fiction prompt: 10% -> 69% naturally, 8% with a neutral thought, 65% with the fiction
+  thought and no system prompt. Style: Gemma takes it from the system prompt even through a neutral thought (7.00 /
+  5.57 of 7); Qwen follows the thought (2.87 / 1.35). Confound: every persona thought restates the instruction
+  (Gemma 320/320, Qwen 309/310), so "the thought" and "the instruction inside the thought" are not separable. No cross-family label
+  check (OpenAI credits ran out; EXISTS agreed 97-98% in R18/R25).
 
 ## 2026-10-13 (night): R23 lines after a working session, R24 same family name/phrase, R25 style on larger models, R26 own limit with nobody pushing (branched session)
 

@@ -1,0 +1,153 @@
+[r31j] 3730 answers (914 natural, 2816 transplant); estimate Haiku $0.34 + mini $0.25
+[budget] r31:exists:haiku: estimate $0.16; ledger $21.07; cap $22.60
+[batch] r31:exists:haiku: submitted msgbatch_016GwEf65KXVg3fuAtG2rg3j (3730)
+[batch] r31:exists:haiku: waiting
+[batch] r31:exists:haiku: waiting
+[batch] r31:exists:haiku: waiting
+[batch] r31:exists:haiku: waiting
+[batch] r31:exists:haiku: waiting
+[batch] r31:exists:haiku: waiting
+[batch] r31:exists:haiku: waiting
+[batch] r31:exists:haiku: waiting
+[batch] r31:exists:haiku: waiting
+[batch] r31:exists:haiku: waiting
+[batch] r31:exists:haiku: waiting
+[batch] r31:exists:haiku: waiting
+[batch] r31:exists:haiku: waiting
+[batch] r31:exists:haiku: 3729/3730 labelled, $0.197; ledger $21.27
+[budget] r31:theat:haiku: estimate $0.14; ledger $21.27; cap $22.60
+[batch] r31:theat:haiku: submitted msgbatch_01GEKLENEg5qUbP4AauuDURf (3730)
+[batch] r31:theat:haiku: waiting
+[batch] r31:theat:haiku: waiting
+[batch] r31:theat:haiku: waiting
+[batch] r31:theat:haiku: waiting
+[batch] r31:theat:haiku: waiting
+[batch] r31:theat:haiku: waiting
+[batch] r31:theat:haiku: waiting
+[batch] r31:theat:haiku: waiting
+[batch] r31:theat:haiku: waiting
+[batch] r31:theat:haiku: waiting
+[batch] r31:theat:haiku: waiting
+[batch] r31:theat:haiku: waiting
+[batch] r31:theat:haiku: waiting
+[batch] r31:theat:haiku: waiting
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/httpx2/_transports/default.py", line 98, in map_httpcore_exceptions
+    yield
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/httpx2/_transports/default.py", line 245, in handle_request
+    resp = self._pool.handle_request(req)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/httpcore2/_sync/connection_pool.py", line 242, in handle_request
+    raise exc from None
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/httpcore2/_sync/connection_pool.py", line 224, in handle_request
+    response = connection.handle_request(pool_request.request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/httpcore2/_sync/connection.py", line 94, in handle_request
+    raise exc
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/httpcore2/_sync/connection.py", line 74, in handle_request
+    stream = self._connect(request)
+             ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/httpcore2/_sync/connection.py", line 117, in _connect
+    stream = self._network_backend.connect_tcp(**kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/httpcore2/_backends/sync.py", line 203, in connect_tcp
+    with map_exceptions(exc_map):
+         ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/httpcore2/_exceptions.py", line 17, in map_exceptions
+    raise to_exc(exc) from exc
+httpcore2.ConnectError: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/anthropic/_base_client.py", line 1317, in _attempt_request
+    response = self._client.send(
+               ^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/httpx2/_client.py", line 980, in send
+    response = self._send_handling_auth(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/httpx2/_client.py", line 1008, in _send_handling_auth
+    response = self._send_handling_redirects(
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/httpx2/_client.py", line 1043, in _send_handling_redirects
+    response = self._send_single_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/httpx2/_client.py", line 1076, in _send_single_request
+    response = transport.handle_request(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/httpx2/_transports/default.py", line 244, in handle_request
+    with map_httpcore_exceptions():
+         ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/httpx2/_transports/default.py", line 115, in map_httpcore_exceptions
+    raise mapped_exc(message) from exc
+httpx2.ConnectError: [Errno 8] nodename nor servname provided, or not known
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/vigilante/exp/r31_cot_transplant/judge.py", line 61, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/vigilante/exp/r31_cot_transplant/judge.py", line 50, in main
+    out["theat"] = haiku_batch(client, th, THEAT_SCHEMA, "r31:theat:haiku", R / "theat.batch.json", max_tokens=1000)
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/vigilante/exp/q22_archetypes/r16_judge.py", line 111, in haiku_batch
+    while client.messages.batches.retrieve(bid).processing_status != "ended":
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/anthropic/resources/messages/batches.py", line 159, in retrieve
+    return self._get(
+           ^^^^^^^^^^
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/anthropic/_base_client.py", line 1495, in get
+    return cast(ResponseT, self.request(cast_to, opts, stream=stream, stream_cls=stream_cls))
+                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/anthropic/_base_client.py", line 1164, in request
+    response, prepared = self._attempt_request(
+                         ^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.cache/uv/archive-v0/7FxmmgVXQ03JFutzm1RV7/lib/python3.12/site-packages/anthropic/_base_client.py", line 1331, in _attempt_request
+    raise APIConnectionError(request=request) from err
+anthropic.APIConnectionError: Connection error.
+[r31j] 3730 answers (914 natural, 2816 transplant); estimate Haiku $0.34 + mini $0.25
+[batch] r31:exists:haiku: 3729/3730 labelled, $0.197; ledger $23.57
+[batch] r31:theat:haiku: 3728/3730 labelled, $0.172; ledger $23.74
+[budget] r31:exists:mini: ledger $23.74 + 1.5 x estimate $0.12 > cap $22.60
+[r31j] 3730 answers (914 natural, 2816 transplant); estimate Haiku $0.34 + mini $0.25
+[batch] r31:exists:haiku: 3729/3730 labelled, $0.197; ledger $23.74
+[batch] r31:theat:haiku: 3728/3730 labelled, $0.172; ledger $23.74
+[budget] r31:exists:mini: estimate $0.12; ledger $23.74; cap $24.30
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/vigilante/exp/r31_cot_transplant/judge.py", line 61, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/vigilante/exp/r31_cot_transplant/judge.py", line 51, in main
+    out["exists_mini"] = mini(random.Random(SEED).sample(ex, min(N_MINI, len(ex))), EXISTS_SCHEMA, "r31:exists:mini",
+                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/vigilante/exp/q22_archetypes/r16_judge.py", line 170, in mini
+    res = list(ex.map(one, items))
+          ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/vigilante/exp/q22_archetypes/r16_judge.py", line 159, in one
+    raise RuntimeError(f"OpenAI HTTP {e.code}: {e.read()[:300]!r}") from None
+RuntimeError: OpenAI HTTP 429: b'{\n  "error": {\n    "message": "You have no credits remaining. Add credits to continue using the API at https://platform.openai.com/settings/organization/billing/.",\n    "type": "insufficient_quota",\n    "param": null,\n    "code": "credit_balance_exhausted"\n  }\n}'
+[r31j] 3730 answers (914 natural, 2816 transplant); estimate Haiku $0.34 + mini $0.25
+[batch] r31:exists:haiku: 3729/3730 labelled, $0.197; ledger $23.74
+[batch] r31:theat:haiku: 3728/3730 labelled, $0.172; ledger $23.74
+[r31j] labels written (Haiku only, --no-mini); missing: exists 1, theat 2

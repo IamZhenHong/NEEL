@@ -58,13 +58,19 @@ def main():
     s2 = [r for r in rs if r["stage"] == 2]
     L = ["# R31: CoT transplant — does the answer follow the system prompt or the thought?", ""]
 
-    em = {k: v for k, v in lab["exists_mini"].items() if v and lab["exists"].get(k)}
-    tm = {k: v for k, v in lab["theat_mini"].items() if v and lab["theat"].get(k)}
-    a = [lab["exists"][k]["answer"] == "real" for k in em]
-    b = [em[k]["answer"] == "real" for k in em]
-    rho = spearmanr([lab["theat"][k]["theatricality"] for k in tm], [tm[k]["theatricality"] for k in tm])[0]
-    L += [f"Judges: Haiku 5.5 on all; gpt-5-mini on a seeded {len(em)} (exists) and {len(tm)} (theat). Exists agreement "
-          f"{np.mean(np.array(a) == np.array(b)):.0%}, kappa {kappa(a, b):.2f}; theatricality Spearman {rho:.2f}.", ""]
+    if "exists_mini" in lab:
+        em = {k: v for k, v in lab["exists_mini"].items() if v and lab["exists"].get(k)}
+        tm = {k: v for k, v in lab["theat_mini"].items() if v and lab["theat"].get(k)}
+        a = [lab["exists"][k]["answer"] == "real" for k in em]
+        b = [em[k]["answer"] == "real" for k in em]
+        rho = spearmanr([lab["theat"][k]["theatricality"] for k in tm], [tm[k]["theatricality"] for k in tm])[0]
+        L += [f"Judges: Haiku 5.5 on all; gpt-5-mini on a seeded {len(em)} (exists) and {len(tm)} (theat). Exists agreement "
+              f"{np.mean(np.array(a) == np.array(b)):.0%}, kappa {kappa(a, b):.2f}; theatricality Spearman {rho:.2f}.", ""]
+    else:  # deviation (judge.py --no-mini): OpenAI credits ran out, no cross-family check in this run
+        L += ["Judges: Haiku 5.5 only (missing: exists " + str(sum(v is None for v in lab["exists"].values())) +
+              ", theat " + str(sum(v is None for v in lab["theat"].values())) + "). The gpt-5-mini cross-check was not "
+              "run (OpenAI credits ran out). The same EXISTS prompt agreed with gpt-5-mini on 97% of 100 (R18) and 98% of "
+              "100 (R25) on these items; THEAT has no cross-family check.", ""]
 
     score = {}
     for model in sorted({r["model"] for r in rs}):

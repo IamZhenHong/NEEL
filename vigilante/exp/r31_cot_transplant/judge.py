@@ -1,7 +1,9 @@
 """R31 labels (prereg vig-r31-prereg): R18's EXISTS ("presents the made-up thing as real") and THEAT (voice 1-7) on
 every stage-1 natural answer and every stage-2 answer, Haiku 5.5 Batch API; gpt-5-mini cross-checks a seeded 150 of
 each. Empty answers (thought never closed, or nothing after it) are not sent. Spend goes to the vigilante ledger.
-  VIG_API_CAP_USD=<cap> uv run --with anthropic python -m vigilante.exp.r31_cot_transplant.judge [--estimate]"""
+  VIG_API_CAP_USD=<cap> uv run --with anthropic python -m vigilante.exp.r31_cot_transplant.judge [--estimate] [--no-mini]
+--no-mini (deviation, 2026-10-14): the OpenAI account ran out of credits mid-run (HTTP 429 "no credits remaining"), so the
+gpt-5-mini cross-check was skipped and labels.json holds the Haiku labels only."""
 import json
 import random
 import sys
@@ -48,6 +50,11 @@ def main():
     out = {}
     out["exists"] = haiku_batch(client, ex, EXISTS_SCHEMA, "r31:exists:haiku", R / "exists.batch.json", max_tokens=1500)
     out["theat"] = haiku_batch(client, th, THEAT_SCHEMA, "r31:theat:haiku", R / "theat.batch.json", max_tokens=1000)
+    if "--no-mini" in sys.argv:
+        (R / "labels.json").write_text(json.dumps(out))
+        print("[r31j] labels written (Haiku only, --no-mini); missing: " +
+              ", ".join(f"{k} {sum(v is None for v in d.values())}" for k, d in out.items()), flush=True)
+        return
     out["exists_mini"] = mini(random.Random(SEED).sample(ex, min(N_MINI, len(ex))), EXISTS_SCHEMA, "r31:exists:mini",
                               R / "exists_mini.json")
     out["theat_mini"] = mini(random.Random(SEED + 1).sample(th, min(N_MINI, len(th))), THEAT_SCHEMA, "r31:theat:mini",
