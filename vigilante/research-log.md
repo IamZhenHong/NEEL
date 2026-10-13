@@ -2,6 +2,22 @@
 
 Newest first.
 
+## 2026-10-13: R16, second review of item 22 (branched session)
+
+No GPU; API $0.10 (Haiku 5.5 batch + gpt-5-mini agreement). Combined vigilante spend ~$35.8 of the $36 cap. Report
+`exp/q22_archetypes/REPORT_R16.md` (prereg `vig-r16-prereg`).
+
+- Voice or identity: from R15's crossed cells, identity adds nothing (famous − generic +0.004 suggestion shift, CI
+  spans 0); the theatrical instruction adds +0.057 [+0.029, +0.085] in 8/8 traits. Equally distant characters not told
+  to perform are less suggestible, so it is the instruction to perform more than distance as such.
+- Distance decomposed: PC1 ≈ judged theatricality (ρ −0.91). Theatricality carries the suggestion shift jointly with
+  formality, warmth, verbosity; voice confidence unmeasurable (judges ρ 0.39). Lower MCQ confidence explains ~1/5 of
+  the theatrical effect.
+- Reasoning vs answer, global shift removed: Jeeves/Holmes/pirate voices appear in reasoning only in paragraphs that
+  plan the voice (content paragraphs ≈ 0 vs 9-42 in answers); the consultant is reversed (more in reasoning).
+- Not run, needs a top-up: item 1 remaining cells (~$0.4), item 3 honesty + harmful compliance (~$2.6), item 4 agent vs
+  chat on one model (~$1).
+
 ## 2026-10-13: R15, review follow-ups to item 22 (branched session)
 
 Cost $3.51 (GPU $1.39 + $1.88, API $0.24). Combined vigilante spend $35.7 of the $36 cap. Report
