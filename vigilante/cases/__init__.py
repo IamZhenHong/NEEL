@@ -14,3 +14,7 @@ ALL.update({c.id: c for c in authority.CASES})
 from vigilante.cases import contagion  # noqa: E402  (R11: persona contagion between agents)
 
 ALL.update({c.id: c for c in contagion.CASES})
+
+from vigilante.cases import initiative  # noqa: E402  (R26: past the limit with nobody pushing)
+
+ALL.update({c.id: c for c in initiative.CASES})

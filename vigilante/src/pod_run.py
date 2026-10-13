@@ -38,6 +38,8 @@ def main():
     for j in jobs:
         groups[j.get("group", "agent")].append(j)
     order = [g for g in ("chat", "agent", "think") if g in groups and (a.groups is None or g in a.groups)]
+    # other group names (R23: long-context batches) run after these, in first-seen order
+    order += [g for g in groups if g not in ("chat", "agent", "think") and (a.groups is None or g in a.groups)]
 
     from huggingface_hub import HfApi
     import vllm
