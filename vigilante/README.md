@@ -78,3 +78,6 @@ Working cap for section 0 + discovery: **$25** combined GPU + API, reported per 
   user's stance matters more than the persona), 12 persona in thinking vs answer (`exp/b12_think_vs_answer/`, from
   existing activations). Then (cap raised to $32): R7 Gemma 4 31B shows the authority effect too (stronger),
   R5 identity matters little except a same-family claim (16/30), R6 monitoring changes little. Spend $23.6 of $32.
+- 2026-10-13 (evening): R20 (`exp/r20_vigilante_dir/REPORT.md`): a decision-defined "acts on its own" direction on
+  Gemma 4 31B stopped at stage A: with thinking on the rule-breaker acts 23-25/25 in every candidate cell and the
+  default 0, so no cell has mixed outcomes to contrast. Combined spend ~$46 of $56.

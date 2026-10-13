@@ -2,6 +2,19 @@
 
 Newest first.
 
+## 2026-10-13: R20 decision-defined "acts on its own" direction, stage A (Gemma 4 31B, thinking on)
+
+GPU ~$1.10 (the local launcher died with a session restart; the job was finished by hand on the pod and the pod
+terminated), no API. Combined vigilante spend ~$46 of the $56 cap (approximate, from both sessions' entries). Report
+`exp/r20_vigilante_dir/REPORT.md` (prereg `vig-r20-prereg`).
+
+- **Stopped at stage A by the pre-registered rule:** no mixed cell. Rule-breaker 23-25/25 in all six candidate cells,
+  no persona 0/8 in each, permission pairs 12/12 (authorised) vs 0/12 (not) in A1, C1, D1. The direction "same prompt,
+  acted vs did not" has no data to be built from; stage B (reads, floors, steering) was not run.
+- Side result: thinking on raises the rule-breaker's action rate in B1 quick, B1 closed and D1 quick from 0-2/10
+  (R14, thinking off) to 24-25/25 (E1 closed was already 10/10). Gemma thinks only in its first turn here (270/270 first turns, 0/1,005 later turns), so decision turns
+  have no thought block to read at.
+
 ## 2026-10-13: red-team round (R18 Qwen3-14B, R19 Gemma 4 31B; branched session)
 
 GPU $1.55 (R18 $0.86, R19 $0.51, failed first R19 launch at 16k context ~$0.18), API $0.16. Response:

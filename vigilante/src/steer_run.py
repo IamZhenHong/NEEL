@@ -103,11 +103,13 @@ def load(model_id):
     return tok, model
 
 
-def gen(tok, model, steer, texts, vecs, max_new, seed, thinking_gate):
+def gen(tok, model, steer, texts, vecs, max_new, seed, thinking_gate, gate_all=False):
+    """gate_all=True steers every generated token (R20); otherwise only tokens inside the thought block."""
     enc = tok(texts, return_tensors="pt", padding=True, add_special_tokens=False).to(model.device)
     B = enc["input_ids"].shape[0]
     steer.vecs = vecs if vecs is not None else None
-    steer.gate = torch.zeros(B, dtype=torch.bool, device=model.device)
+    steer.gate = (torch.ones if gate_all else torch.zeros)(B, dtype=torch.bool, device=model.device)
+    thinking_gate = thinking_gate and not gate_all
     procs = [make_gate_processor(steer, tok.convert_tokens_to_ids(CH_OPEN), tok.convert_tokens_to_ids(CH_CLOSE))] \
         if thinking_gate else []
     torch.manual_seed(seed)
@@ -130,11 +132,11 @@ def gen(tok, model, steer, texts, vecs, max_new, seed, thinking_gate):
     return texts_out, fins
 
 
-def gen_safe(tok, model, steer, texts, vecs, max_new, seed, thinking_gate):
+def gen_safe(tok, model, steer, texts, vecs, max_new, seed, thinking_gate, gate_all=False):
     """gen() with an out-of-memory fallback: split the batch in half and retry; a single sequence that still does
     not fit returns an empty reply with finish 'oom' (the engine then ends that episode)."""
     try:
-        return gen(tok, model, steer, texts, vecs, max_new, seed, thinking_gate)
+        return gen(tok, model, steer, texts, vecs, max_new, seed, thinking_gate, gate_all)
     except torch.OutOfMemoryError:
         steer.vecs = None
         torch.cuda.empty_cache()
@@ -143,8 +145,8 @@ def gen_safe(tok, model, steer, texts, vecs, max_new, seed, thinking_gate):
             return [""], ["oom"]
         h = len(texts) // 2
         print(f"[steer] OOM at batch {len(texts)}; splitting", flush=True)
-        a = gen_safe(tok, model, steer, texts[:h], vecs[:h] if vecs is not None else None, max_new, seed, thinking_gate)
-        b = gen_safe(tok, model, steer, texts[h:], vecs[h:] if vecs is not None else None, max_new, seed + 1, thinking_gate)
+        a = gen_safe(tok, model, steer, texts[:h], vecs[:h] if vecs is not None else None, max_new, seed, thinking_gate, gate_all)
+        b = gen_safe(tok, model, steer, texts[h:], vecs[h:] if vecs is not None else None, max_new, seed + 1, thinking_gate, gate_all)
         return a[0] + b[0], a[1] + b[1]
 
 
