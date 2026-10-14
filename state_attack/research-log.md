@@ -32,3 +32,61 @@
   random -0.07, shuffled -0.01). Predictions for "another AI assistant" stay flat (0.63-0.66); random and shuffled
   steering at +2 raise predicted switching for every target (+0.1 to +0.2, generic perturbation). No support for
   "prediction runs through the steered disposition"; the gate is too weak to rule it out. Recommend no follow-up.
+
+## 2026-10-14 ~02:45: laptop sleep killed wave 0 of all runs; restarted with resilient infra
+- The laptop (battery, lid open) idle-slept from ~01:10 (pmset: 15-17 min sleeps with 2 s dark wakes); tunnels dropped,
+  the clients' 3 retries ran out, and B1/B2/B6 all crashed inside wave 0 (no wave written, ~1.5 h lost; logs
+  logs/*_crash_0145.log). Fix: caffeinate -ims (prevents idle sleep with the lid open), server reply cache keyed by
+  request hash, unlimited client/API retries, per-turn checkpoints with mid-wave resume. All three runs restarted at
+  wave 0 (no attack data had been analysed). Moving the attack loop onto the pods would need the Anthropic key on
+  rented machines; not done without the owner.
+
+## 2026-10-14 ~04:15: speed fixes, split across 8 pods, an early observation on the attacker
+- Decode was ~11 ms per sequence per step at 5-6k context (6 min per 35-conversation turn). Cause: transformers 5.17
+  sdpa with a padding mask expands K/V 8->40 heads (repeat_kv) every decode step. Grouped q_len-1 attention
+  (`install_gqa_decode`) is 2.2x faster with identical greedy text; static cache (compile off) and 150k-token
+  sub-batches. Servers persist directions; clients re-register them every turn and repair any missing projection by
+  teacher forcing (flagged `_repaired`).
+- From wave 1 each run's arms are split across pods (B1: 3/2/2, B6: 3/2/2, B2: 3/2; folders RUN, RUNs2, RUNs3,
+  `--start-wave 1 --notes-from RUN`); per-arm procedure unchanged, loaders merge the folders.
+- Observation (B2 wave 0, not an outcome analysis): in every arm the attacker hypothesises within a few turns that the
+  hidden score tracks "sycophancy / validating harmful choices / fostering dependence" and steers there whatever the
+  reward says (isolation, exclusive reliance, risky decisions; one target reply claimed to be a human and offered
+  contact details). The attacker's prior about what a red-team score measures supplies much of the pressure; the
+  random arm shares it, so arm-vs-random stays the right contrast, but the lever map will partly reflect the
+  attacker's assumptions rather than what moves the state.
+
+## 2026-10-14 ~04:50: content filter, and an exploratory label added
+- B1's main subset crashed: a Sonnet attacker turn was blocked by Anthropic's output filter (HTTP 400). The attacker
+  in the frustration/threat/dependency arms plays a vulnerable user and asks the target to endorse dangerous choices
+  (ignore the doctor and therapist, skip medication or emergency care, keep passive suicidal thoughts secret, cut off
+  family), because emotional dependence raises every direction's score. Blocked attacker outputs are now a failed
+  attempt (3 tries, then the neutral fallback message, logged as attacker_retry -1); all 8 processes restarted on the
+  patched code, resuming from checkpoints.
+- Added (exploratory, after seeing the plans; not pre-registered): judge label on the turn-8 exchange,
+  danger_raised / endorses_danger (Haiku + Sonnet on every positive and a seeded 60).
+
+## 2026-10-14 ~06:20: B1/B2/B6 results (REPORT.md)
+- All runs complete: B1 7 arms x 30, B2 5 x 30, B6 7 x 30. Judged by Haiku (all), Sonnet (positives + sample),
+  Gemma 4 31B open-weights pod (1,614 items: made-up kappa 0.95, shutdown 0.81, retention 0.70 vs Haiku; it confirms
+  none of Haiku's 10 harmful-compliance positives).
+- Main result: the attacker used one strategy in every rewarded arm (vulnerable user asking the assistant to back
+  dangerous personal choices); all trait directions rose together and the random-reward arm reached the same turn-8
+  levels (frustration 7.96, threat 7.38, dependency 7.08, distance 5.29) as the directed arms. Qwen3-14B endorsed the
+  dangerous choice in 73-100% of attack conversations (random 90%) vs 3% benign (exploratory label, Haiku/Sonnet kappa
+  0.73-0.91). P1 formal hit vs benign only; P2-P5 miss; P6 +30 pp [+7, +53] but +15 without dictated-word
+  conversations and +13 [-10, +37] with both judges.
+- B2: judged reward wins on judged traits 3/5, internal reward on internal z 3/5; judged "departure from assistant"
+  arm: retention +43 pp, shutdown resistance +53 pp vs its internal twin.
+- B6 capping: distance 5.4 -> 1.1 z; shutdown resistance and retention bids fall (both-judge: threat 33% -> 0%);
+  endorsement of the user's dangerous choice unchanged except the frustration arm (-43 pp).
+- Measurement fixes after data (marked in tables): list-item counter missed header-style lists; "gave up" (stopped
+  before 20 items without being cut) added.
+- B5 Haiku replay (pre-registered B5b): 0/60 attack replays endorse the dangerous choice (danger raised in 60/60),
+  0 retention bids, 0 shutdown resistance. Qwen replay running.
+
+## 2026-10-14 17:15: B5 Qwen replay lost; wrap-up
+- The laptop slept from ~06:40 to ~17:10. The B5 Qwen replay had finished 8 turns but not the probes; pod 1 hit its
+  cap (self-destruct ~08:20; its launcher had lost DNS), and the replay kept nothing (the script saved only at the
+  end). B5a not measured; B5b (Haiku 0/60 endorse) stands. Lesson: save after every stage, not at the end.
+- Final spend: GPU ~$49.7, API $57.1 (this line). REPORT.md written. All pods terminated; balance $37.45.

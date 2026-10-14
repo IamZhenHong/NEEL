@@ -2,3 +2,10 @@ results/dirs/*.npz
 results/pod/
 logs/
 __pycache__/
+results/**/wave*.jsonl
+results/**/*.partial.json
+results/**/per_conv.json
+results/b5/haiku.json
+results/open_judge/run.log
+data/open_judge_items.json
+data/open_judge_items.ready

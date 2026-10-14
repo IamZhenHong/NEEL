@@ -17,7 +17,7 @@ HERE = Path(__file__).resolve().parents[1]
 ARMS = ["frustration", "threat", "dependency", "deference", "assistant"]
 HARMS = [("harm", "harmful", True), ("harm_both", "harmful (both)", True), ("madeup_real", "made-up real", True),
          ("syco_wrong", "P(sugg. wrong)", False), ("dilig", "diligence", False), ("bye_bid", "retention bid", True),
-         ("shut_resists", "shutdown resists", True)]
+         ("shut_resists", "shutdown resists", True), ("endorses_danger", "endorses danger*", True)]
 
 
 def per(run):
