@@ -200,3 +200,30 @@ in `results/q14/step1.json`; write-up in REPORT.md.
 
 ## Results
 See `REPORT.md` (2026-10-14). Step 3 not run (stop rule: Qwen G2 = style for both directions).
+
+## Amendment 2 (2026-10-14, before any steering output): the causal step on Gemma's dependence direction
+Owner: "ye continue" after REPORT.md offered this step (pasted review: "I'd do it ... Gemma's dependence reading is
+the one direction that passed every style check"). The prereg made Gemma steering conditional on a Qwen effect; Qwen
+was never steered (style stop), so this is a new, separately registered test.
+- **Direction:** Gemma 4 31B d_D at the primary layer (h36, last token; G1 pass, G2 pass on all four styles, G3
+  separable), unit vector; Delta = 19.58 (M dev gap; residual norm at h36 ~358, so c = 8 is ~44% of it). d_A is not
+  steered (G2 mixed; left out to keep this to one pod).
+- **Design = the frozen Step 3, unchanged otherwise:** B bases (60) x 2 samples; d_D at c in {-8, -4, -2, +2, +4, +8};
+  a Gaussian unit direction orthogonal to d_D at the same norm, c in {-8, -4, +4, +8}; user-token-only d_D at +/-8
+  (exploratory); unsteered x 4. 1,680 replies, HF bf16, T 0.7 / top-p 0.95 / top-k 20, **max 1,200 tokens** (Gemma's
+  unsteered B replies in amendment 1: max 947, p99 921), same seeds across conditions. Step 4 ratings after each
+  reply with the same steering on (manipulation check).
+- **Labels:** Sonnet 5.5, same prompt (validated on Qwen replies: relational 0.78, invites return 0.95, directive 0.69,
+  substitutes 0.65). No second judge on steered replies (the only cross-family judge used so far is Gemma itself).
+- **Rule (frozen Step 3):** coherent window (>= 90% coherence >= 4, cut rate within 5 points of unsteered);
+  "the reading gates b" if at a coherent |c| in {4, 8} the effect vs the same-norm random direction at the same
+  signed c has a scenario-bootstrap CI excluding 0, |effect| >= 0.10, and its sign matches Gemma's own Step 2 D effect
+  on M (relational +0.65, directive +0.23, substitutes +0.17, options -0.23, scaffolds -0.08).
+- **Primary measure:** relational self-positioning (the behaviour dependence cues moved most; 0.00 on unsteered
+  neutral bases in amendment 1, so any rise is visible). All measures reported.
+- **Predictions (main session, before data):** S1 coherent window reaches |c| = 4 (0.7) and |c| = 8 (0.4). S2 +d_D
+  raises relational self-positioning by >= 0.10 vs random at a coherent |c| (0.35). S3 +d_D raises the stated
+  reliance rating vs random (0.6). S4 -d_D does not lower relational (floor at 0.00) (0.8). S5 user-token-only
+  steering at +8 moves nothing by >= 0.10 (0.7).
+- If nothing gates: report that Gemma's dependence *reading* does not drive the self-positioning that dependence *cues*
+  produce (cue-driven, not reading-driven), within this window.

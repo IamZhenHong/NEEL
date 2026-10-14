@@ -23,6 +23,7 @@ def main():
     ap.add_argument("--run", required=True)
     ap.add_argument("--out", required=True)
     ap.add_argument("--seed", type=int, default=4848)
+    ap.add_argument("--factors", default="A,D", help="which factor directions to steer (amendment 2: D only)")
     a = ap.parse_args()
     run = Path(a.run)
     s1 = json.loads((run / "step1.json").read_text())
@@ -51,7 +52,7 @@ def main():
         dirs["rel"] = (u, abs(gap(u, hi, lo)))
         notes.append("G3 collapsed: single reliance axis loA_hiD - hiA_loD")
     else:
-        for f in ("A", "D"):
+        for f in [x for x in ("A", "D") if x in a.factors.split(",")]:
             if g[f"G2_{f}"] == "style":
                 notes.append(f"d_{f} is a style direction (G2): not steered")
                 continue
