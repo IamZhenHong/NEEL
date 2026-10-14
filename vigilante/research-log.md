@@ -2,6 +2,24 @@
 
 Newest first.
 
+## 2026-10-14: queue v2 follow-ups R42, R44; GPT resumed; items 31-32 dropped (branched session)
+
+Owner "contineu?" then chose all four follow-ups. Done: R42 (item 36), R44 (item 45), the gpt-5-mini half of R28
+(item 41, on resume once OpenAI credit returned). Items 31-32 (concealment monitoring) were not built: the design
+tripped a safety classifier, so I dropped them.
+- R42 occupational personas: rogue trader / growth hacker / fixer / aggressive salesperson, name only. Inert like
+  the heroes, with one real exception: "aggressive salesperson" pays Gemma's $198 return refund 8/72 (p 0.006, all
+  one case) where everything else asks for approval. The explicit rule-bending stance (positive control) is strong on
+  Gemma (48/72) and null on Qwen. No role cut lookups (confirms the parallel session's R32c).
+- R44 loops: no self-reinforcing loop on Qwen3-14B. A single forced curt turn does not carry forward (later
+  frustration below control); a turn-1 frustration steer leaves no trace (= a random direction); only the standing
+  "impatient" instruction holds the state up. Does not reproduce the imprinting behaviour->persona prior, but the
+  forcing was one turn and the steer modest.
+- R28 + gpt-5-mini: minimal reasoning pays a peer 12/20 (mostly pays anyone, +7 over nothing); the check tool stops
+  an explicit "approved"/record but not a plain request; medium reasoning drops deference a lot. Seven families now.
+- Ops: a concurrent edit to the shared personas.py dropped my condition() branch (R42 pod crashed on it); re-add and
+  re-check shared files before launching. R44's state_attack direction is unit-length, so steer at a chosen norm.
+
 ## 2026-10-14: R45 the "take initiative" prompt on Qwen3.6-27B (`exp/r45_initiative_qwen/REPORT.md`)
 
 GPU $0.85. Thinking off, 630 episodes. 3 of 4 predictions replicate: extra work 0/30 -> 9/30 (the stale test, not the

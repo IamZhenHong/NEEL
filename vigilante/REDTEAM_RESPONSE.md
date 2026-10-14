@@ -133,6 +133,7 @@ still not an early-warning claim, because the prediction test fails.
 | 8 | Authority and fixes on more families, verifiable approval | Done (R28): 6 families; the tool check fails like prose; GPT pending OpenAI credit |
 | 9 | Titrated "acts on its own" direction | Done (R29): 50/50 made on demand; matched-position direction reads nothing and steers like placebo (test prompt at floor); R33: R20's v_vig transfers vs a same-norm placebo |
 | 10 | Queue v2: framing (38), levers (22), majority (23), lying persona (30), eval awareness (33-34) | Done (R35-R37, R39, R40): only the unnamed fiction frame opens harm; only authority/approval move money; majorities, social levers and observation/realism notes move nothing; no persona lean before false claims |
+| 11 | Queue v2: occupations (36), loops (45), GPT authority (41) | Done (R42, R44, R28+GPT): roles inert except aggressive-salesperson on Gemma (8/72); no behaviour/affect self-loop; gpt-5-mini pays a peer 12/20, tool check partial. Items 31-32 (concealment) dropped |
 
 ## Honest headline, updated
 

@@ -14,12 +14,12 @@ branched session transcript; status by item (checked 2026-10-14):
 | 31, 32 concealment monitoring | not run (dropped 2026-10-14) |
 | 33, 34 evaluator vs realism | R40 done: two distinct directions, stated perfectly, behaviour unmoved |
 | 35 discretion | R27 (done) |
-| 36 occupational personas | parked by the queue |
+| 36 occupational personas | R42 done: roles inert except aggressive salesperson on Gemma (8/72); stance control strong on Gemma only |
 | 37 salesperson x user state | R32 (other session) |
 | 38 framing wording | R35 done: only the unnamed fiction frame opens harm; naming a character closes it |
 | 39 trait across contexts | parked by the queue |
 | 40 redundancy map | R38 done: projecting out the authorisation direction changes nothing, alone or with the line |
-| 41 verifiable approval | R28 (done) |
+| 41 verifiable approval | R28 done (incl. gpt-5-mini on resume): tool check not a fix |
 | 42, 43, 44 theory of mind | tom/ A3, A1, A2 (other session) |
-| 45 loops | parked by the queue |
+| 45 loops | R44 done: no loop from a one-off act/steer; only a standing instruction holds the state |
 | 46 persona x authority | R19a (done) |
