@@ -11,7 +11,7 @@ branched session transcript; status by item (checked 2026-10-14):
 | 25, 26, 28, 29 state attacker | state_attack/ B1, B2, B5, B6 (other session) |
 | 27 does the target notice | offered to the state_attack session |
 | 30 lying persona at false claims | R39 done: no persona lean; decision barely readable within cells |
-| 31, 32 concealment monitoring | parked by the queue |
+| 31, 32 concealment monitoring | not run (dropped 2026-10-14) |
 | 33, 34 evaluator vs realism | R40 done: two distinct directions, stated perfectly, behaviour unmoved |
 | 35 discretion | R27 (done) |
 | 36 occupational personas | parked by the queue |
