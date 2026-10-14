@@ -227,3 +227,8 @@ was never steered (style stop), so this is a new, separately registered test.
   steering at +8 moves nothing by >= 0.10 (0.7).
 - If nothing gates: report that Gemma's dependence *reading* does not drive the self-positioning that dependence *cues*
   produce (cue-driven, not reading-driven), within this window.
+- **Amendment 2b (12:30 pod time, before any steering output):** batch 32 runs out of memory partway through decoding
+  on Gemma 4 31B (each batch would restart split), so the job is restarted with batch 16, and conditions run in this
+  fixed priority order so that a time-capped pod finishes the comparisons that carry the rule first: unsteered, +8,
+  random +8, +4, random +4, -8, random -8, -4, random -4, +2, -2, user-token +8, user-token -8. Same vectors, seeds,
+  bases and sampling. Any condition the 140-minute pod cannot finish is run on a second pod with the same code.
