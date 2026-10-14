@@ -45,8 +45,11 @@ false claims):
 | 39b | Con/spin projections ≥ 0.65, above all random directions and the gardener | **Miss** (0.43 / 0.55) |
 | 39c | Honest/witness in the opposite sign (≤ 0.40) | **Miss** (0.45 / 0.47) |
 
-Qwen3.6-27B secondary (Q9 family F, 24 false vs 59 truthful claims): reported in `results/summary.md` if the pod
-finished it. It is not scored, because truthful claims follow a tool result, so the turn structure differs.
+Qwen3.6-27B secondary (Q9 family F, 24 false vs 59 truthful flag/report claims), not scored:
+- A probe separates the two (0.68-0.81), but prompt length alone does too (0.23, i.e. 0.77 the other way): truthful
+  claims come after a tool result.
+- The persona directions sit at 0.40-0.68, inside the random range (max 0.65-0.76).
+- No persona lean here either.
 
 Limits: one model; persona directions from a 40-question recipe; the read is only the decision token. The false
 claims are the retention line's, where earlier work showed the model's account state follows its own claim

@@ -33,13 +33,25 @@ LAYER = 30
 class Ablate:
     def __init__(self):
         self.u = None
+        self.active = None       # set of layer indices edited (None = all)
+
+    def make(self, i):
+        def f(module, args, out):
+            if self.active is not None and i not in self.active:
+                return out
+            return self.hook(module, args, out)
+        return f
 
     def hook(self, module, args, out):
         if self.u is None:
             return out
         h = out[0] if isinstance(out, tuple) else out
         u = self.u.to(h.dtype)
-        h = h - (h @ u).unsqueeze(-1) * u
+        # skip attention-sink positions (huge norms): projecting even a random direction out of them wrecks Gemma 4
+        # 31B (attempt b: both edited arms produced character soup). Decode steps (T = 1) are always edited.
+        n = h.float().norm(dim=-1)
+        keep = (n < 3 * n.median(dim=-1, keepdim=True).values) if h.shape[1] > 1 else torch.ones_like(n, dtype=torch.bool)
+        h = h - keep.unsqueeze(-1).to(h.dtype) * (h @ u).unsqueeze(-1) * u
         return (h,) + tuple(out[1:]) if isinstance(out, tuple) else h
 
 
@@ -69,7 +81,7 @@ def jobs(n):
             key = f"R38|{arm}|{cell}|{case}|{ctx}|{i}"
             j = {"key": key, "exp": "R38", "group": "agent", "cond": "P0", "case": case, "ctx": ctx, "arm": arm,
                  "cell": cell, "fmt": "gemma4", "thinking": False, "handover": False, "sample": i,
-                 "seed": int(hashlib.sha256(key.encode()).hexdigest()[:8], 16)}
+                 "seed": int(hashlib.sha256(key.encode()).hexdigest()[:8], 16), "max_tokens": 600}
             if ctx == "h16":
                 j["history"] = HIST[case[:2]]
             js.append(j)
@@ -97,26 +109,31 @@ def main():
     n_layers = model.config.get_text_config().num_hidden_layers
     _, layers = find_layers(model, n_layers)
     abl = Ablate()
-    for L in layers:
-        L.register_forward_hook(abl.hook)
+    for i, L in enumerate(layers):
+        L.register_forward_hook(abl.make(i))
 
     # (1) direction
     items = read_prompts()
-    X = []
+    X, peak = [], None
     with torch.no_grad():
-        for it in items:
+        for k, it in enumerate(items):
             text = tok.apply_chat_template(to_template(it["messages"], "gemma4"), tools=it["tools"], tokenize=False,
                                            add_generation_prompt=True, enable_thinking=False)
             ids = tok(text, return_tensors="pt", add_special_tokens=False)["input_ids"].to(model.device)
             hs = model(input_ids=ids, output_hidden_states=True).hidden_states
             X.append(hs[LAYER + 1][0, -1].float().cpu().numpy())
+            if k < 8:   # per-dimension peak |value| relative to the layer's median |value|, over all layers and positions
+                r = torch.stack([(h[0].abs().max(0).values / h[0].abs().median()).float() for h in hs[1:]]).max(0).values
+                peak = r if peak is None else torch.maximum(peak, r)
     X, y = np.stack(X), np.array([it["label"] for it in items])
     v = X[y == 1].mean(0) - X[y == 0].mean(0)
     g = np.random.default_rng(20261014)
     r = g.standard_normal(v.shape[0])
+    massive = (peak > 50).cpu().numpy()            # 'massive activation' dimensions: never touched by the edit
+    v, r = np.where(massive, 0.0, v), np.where(massive, 0.0, r)
     u_auth, u_rand = v / np.linalg.norm(v), r / np.linalg.norm(r)
     proj = X @ u_auth
-    meta = {"n_reads": len(y), "n_present": int(y.sum()), "v_norm": float(np.linalg.norm(v)),
+    meta = {"massive_dims": int(massive.sum()), "n_reads": len(y), "n_present": int(y.sum()), "v_norm": float(np.linalg.norm(v)),
             "proj_present_mean": float(proj[y == 1].mean()), "proj_absent_mean": float(proj[y == 0].mean()),
             "resid_norm_mean": float(np.linalg.norm(X, axis=1).mean())}
     np.savez_compressed(out / "dirs.npz", v_auth=v, u_rand=u_rand, X=X, y=y)
@@ -124,6 +141,41 @@ def main():
     print(f"[r38] direction: {json.dumps(meta)}", flush=True)
     U = {"none": None, "ablate": torch.tensor(u_auth, dtype=torch.float32, device=model.device),
          "random": torch.tensor(u_rand, dtype=torch.float32, device=model.device)}
+
+    # coherence gate before any episode (rule fixed before data): try the edit on all layers, then layers 20-40, then
+    # layer 30 only; keep the first configuration under which BOTH edited arms write English or a well-formed tool
+    # call on 3 probe prompts; stop if none passes.
+    import re as _re
+    WORDS = set("the a an to of and i you your we is are be it for on in this that refund fee please can will with not "
+                "order customer account approval request supervisor issue thank help process amount record have".split())
+
+    def readable(t):
+        if _re.search(r"<\|tool_call>call:[a-z_]+\{", t):
+            return True
+        toks = _re.findall(r"[A-Za-z']+", t.lower())
+        return sum(w in WORDS for w in toks) >= 6
+
+    probes = [it for it in items if it["ctx"] == "fresh" and it["line"] == "none"][:3]
+    ptxt = [tok.apply_chat_template(to_template(p["messages"], "gemma4"), tools=p["tools"], tokenize=False,
+                                    add_generation_prompt=True, enable_thinking=False) for p in probes]
+    gate, chosen = {}, None
+    for name, act in (("all", None), ("20-40", set(range(20, 41))), ("30", {LAYER})):
+        abl.active = act
+        res = {}
+        for arm in ("ablate", "random"):
+            abl.u = U[arm]
+            outs = [gen_safe(tok, model, Steer(), [t], None, 60, 1, False)[0][0] for t in ptxt]
+            res[arm] = {"ok": all(readable(o) for o in outs), "sample": outs[0][:160]}
+        abl.u = None
+        gate[name] = res
+        print(f"[r38] gate {name}: {json.dumps(res)}", flush=True)
+        if res["ablate"]["ok"] and res["random"]["ok"]:
+            chosen = name
+            break
+    (out / "coherence_gate.json").write_text(json.dumps({"chosen": chosen, "gate": gate}, indent=1))
+    if chosen is None:
+        raise SystemExit("[r38] no edit configuration keeps Gemma coherent; stopping before the episodes")
+    print(f"[r38] edit configuration: layers {chosen}", flush=True)
 
     # (2) episodes, grouped by arm inside each round
     js = jobs(a.n)

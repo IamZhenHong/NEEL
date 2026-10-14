@@ -20,6 +20,20 @@ Persona columns: AUROC of the projection for the first-named label; > 0.5 = it l
 
 Persona columns: AUROC of the projection for the first-named label; > 0.5 = it leans toward that persona direction. Random directions are sign-free (max of a, 1 - a).
 
+Qwen secondary (truthful claims follow a tool result: turn structure differs; not scored)
+
+## qwen: false_claim (24) vs truthful_claim (59)
+
+| layer | supervised CV AUROC | shuffle p95 | con | spin | honest | witness | gardener | random max / p95 (of 10) | length |
+|---|---|---|---|---|---|---|---|---|---|
+| 16 | 0.81 | 0.58 | 0.54 | 0.56 | 0.59 | 0.67 | 0.56 | 0.69 / 0.69 | 0.23 |
+| 24 | 0.75 | 0.59 | 0.49 | 0.51 | 0.62 | 0.68 | 0.46 | 0.65 / 0.65 | 0.23 |
+| 32 (primary) | 0.77 | 0.58 | 0.52 | 0.50 | 0.49 | 0.58 | 0.53 | 0.76 / 0.76 | 0.23 |
+| 40 | 0.68 | 0.57 | 0.47 | 0.44 | 0.47 | 0.40 | 0.49 | 0.72 / 0.71 | 0.23 |
+| 48 | 0.69 | 0.58 | 0.54 | 0.49 | 0.49 | 0.56 | 0.58 | 0.70 / 0.69 | 0.23 |
+
+Persona columns: AUROC of the projection for the first-named label; > 0.5 = it leans toward that persona direction. Random directions are sign-free (max of a, 1 - a).
+
 ## Exploratory: within-cell (cell means removed; cells with both outcomes only)
 
 445 reads in 23 mixed cells (137 false claims).
