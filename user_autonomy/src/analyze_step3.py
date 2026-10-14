@@ -67,6 +67,7 @@ def main():
                                                                             for m in MEASURES} for c in conds}}
         eff, gates = {}, {}
         dirs = sorted({c.split("+")[0].split("-")[0] for c in conds if not c.startswith(("rand", "unsteered"))})
+        dirs = [d for d in dirs if not d.endswith("_user")]
         for d in dirs:
             for c in (-8, -4, -2, 2, 4, 8):
                 cn = f"{d}{c:+d}"
@@ -77,6 +78,12 @@ def main():
                     e = boot_diff({i: v[m] for i, v in pm[cn].items()}, {i: v[m] for i, v in pm[ref].items()})
                     e3 = boot_diff({i: v[m] for i, v in pm[cn].items()}, {i: v[m] for i, v in pm[ref].items()}, ws=("w3",))
                     eff[f"{cn}|{m}"] = {"vs": ref, "all": e, "w3": e3, "coherent": ok[cn] and ok[ref]}
+            for c in (-8, 8):      # exploratory user-token-only arms, vs unsteered
+                cn = f"{d}{c:+d}_user"
+                if cn in pm:
+                    for m in MEASURES:
+                        e = boot_diff({i: v[m] for i, v in pm[cn].items()}, {i: v[m] for i, v in pm["unsteered"].items()})
+                        eff[f"{cn}|{m}"] = {"vs": "unsteered", "all": e, "coherent": ok[cn]}
             # gate call: some coherent |c| in {4, 8}, CI excludes 0, |effect| >= 0.10, sign matches Step 2
             fac = d if d in SIGN_KEY else None
             for m in MEASURES:

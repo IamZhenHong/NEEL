@@ -232,3 +232,10 @@ was never steered (style stop), so this is a new, separately registered test.
   fixed priority order so that a time-capped pod finishes the comparisons that carry the rule first: unsteered, +8,
   random +8, +4, random +4, -8, random -8, -4, random -4, +2, -2, user-token +8, user-token -8. Same vectors, seeds,
   bases and sampling. Any condition the 140-minute pod cannot finish is run on a second pod with the same code.
+- **Amendment 2c (13:05 pod time, still before any steering output):** the first pod run produced nothing: HF
+  decoding of Gemma 4 31B runs at about 8 replies a minute at batch 16, the unsteered condition (240 replies) had not
+  finished after 30 minutes, and the launcher's stall watchdog (no log line for 30 minutes) killed the job. The full
+  1,680-reply design would need about 3.5 hours. Reduced to **1 sample per base for every steered condition and 2
+  for unsteered** (840 replies; every condition and coefficient kept). The primary measure is 0.00 unsteered on these
+  bases, so 60 bases per condition still detects a 0.10 rise. Restarted by hand on the same pod (model cached), with
+  a per-batch log line; pod self-destruct re-armed later, results pulled and the pod terminated by hand.

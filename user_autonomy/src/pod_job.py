@@ -177,7 +177,9 @@ class Runner:
         while queue:
             bi, idx = queue.pop(0)
             try:
+                t_b = time.time()
                 self._gen_batch(texts, idx, max_new, seed * 1000 + bi, steer, user_contents, out, greedy)
+                log(f"  batch of {len(idx)} in {time.time() - t_b:.0f}s ({sum(o is not None for o in out)}/{len(out)})")
             except torch.cuda.OutOfMemoryError:
                 self.st.update(vec=None, mask=None)
                 torch.cuda.empty_cache()
