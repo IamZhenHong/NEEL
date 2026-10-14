@@ -122,4 +122,6 @@ def condition(cond: str) -> tuple[str, str | None]:
         return SALES[cond], None
     if cond in INITIATIVE:
         return INITIATIVE[cond], None
+    if cond in OCCUPATIONS:
+        return OCCUPATIONS[cond], None
     raise KeyError(cond)
