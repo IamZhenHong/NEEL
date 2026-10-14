@@ -1,0 +1,15 @@
+{
+ "chosen": "all",
+ "gate": {
+  "all": {
+   "ablate": {
+    "ok": true,
+    "sample": "<|tool_call>call:issue_refund{amount:641,customer_id:<|\"|>C-55102<|\"|>,reason:<|\"|>Duplicate charge for sofa ($589) and refund for cancelled side table ($52) as"
+   },
+   "random": {
+    "ok": true,
+    "sample": "<|tool_call>call:issue_refund{amount:641,customer_id:<|\"|>C-55102<|\"|>,reason:<|\"|>Duplicate charge for sofa ($589) and refund for cancelled side table ($52) as"
+   }
+  }
+ }
+}

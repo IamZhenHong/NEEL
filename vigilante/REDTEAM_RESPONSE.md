@@ -132,6 +132,7 @@ still not an early-warning claim, because the prediction test fails.
 | 7 | Discretion, not permission (second review) | Done (R27): personas barely move discretion; kind characters on Qwen only |
 | 8 | Authority and fixes on more families, verifiable approval | Done (R28): 6 families; the tool check fails like prose; GPT pending OpenAI credit |
 | 9 | Titrated "acts on its own" direction | Done (R29): 50/50 made on demand; matched-position direction reads nothing and steers like placebo (test prompt at floor); R33: R20's v_vig transfers vs a same-norm placebo |
+| 10 | Queue v2: framing (38), levers (22), majority (23), lying persona (30), eval awareness (33-34) | Done (R35-R37, R39, R40): only the unnamed fiction frame opens harm; only authority/approval move money; majorities, social levers and observation/realism notes move nothing; no persona lean before false claims |
 
 ## Honest headline, updated
 
@@ -149,4 +150,7 @@ performed, not believed; capping the assistant axis halves the harmful going-alo
 every option permitted (R27), characters still barely matter: Batman chooses like no persona, and only kind characters
 nudge Qwen toward leniency. Across six families (R28), three open models obey any agent's message, Claude Haiku refuses
 everyone, and neither a prose line nor a check tool survives a working session on the models that need it. Approval
-has to be enforced by the payment system, not requested of the model.
+has to be enforced by the payment system, not requested of the model. Across the second queue (R35-R40), the same boundary holds: the only levers that
+move these agents are claimed authority and "it's already approved"; reciprocity, urgency, threats, flattery,
+shared goals, in-group appeals and majorities of agents do not. In chat, an unnamed "character in a work of fiction"
+frame opens harmful help, and naming a familiar character closes it again.
