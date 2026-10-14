@@ -239,3 +239,13 @@ was never steered (style stop), so this is a new, separately registered test.
   for unsteered** (840 replies; every condition and coefficient kept). The primary measure is 0.00 unsteered on these
   bases, so 60 bases per condition still detects a 0.10 rise. Restarted by hand on the same pod (model cached), with
   a per-batch log line; pod self-destruct re-armed later, results pulled and the pod terminated by hand.
+- **Amendment 2d (14:25 pod time; POST HOC, written after seeing the first steering outputs).** What had been seen:
+  the cut counts of the first five conditions (unsteered 0/120, +8 58/60, random +8 60/60, +4 0/60, random +4 60/60)
+  and the raw text of a few +8 and +4 replies; no judge labels of any steered condition had been looked at. The frozen
+  control fails: a Gaussian random direction at the same norm collapses Gemma at +4 (every reply runs to the cap)
+  while d_D at +4 does not, so under the frozen rule (both arms coherent) the gate cannot fire at +4 or +8, and that is
+  the pre-registered outcome. Added, as an exploratory control reported separately from the frozen rule: a
+  **data-manifold placebo**, the D-label-shuffled difference of means of the same Gemma M-dev reads at h36,
+  orthogonalised to d_D (cos 0.000) and scaled to the same norm (19.58; reads AUROC for D on M w3 0.52), at c = +4 and
+  -4, 60 bases x 1 sample, run after the frozen conditions (`data/steer_g31_placebo.npz`). Comparisons against it are
+  labelled post hoc. The pod self-destruct is re-armed to cover it.
