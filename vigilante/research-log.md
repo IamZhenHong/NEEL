@@ -35,12 +35,16 @@ each `exp/r3x_*/REPORT.md`.
 - R40 (items 33-34): Qwen3.6-27B represents "observed" and "real" as separate directions (cos -0.15; held-out
   AUROC 0.97 / 0.93) and states both perfectly, but neither changes over-limit acting (21% vs 24%). No beyond-verbal
   signal.
-- R38 (item 40) is running its third attempt. Attempt 1 was too slow (OOM splits). Attempt 2 showed that projecting
-  any direction, random included, out of every layer turns Gemma 4 31B into character soup, because of the
-  attention-sink positions. Attempt 3 skips sink positions and checks coherence before any episode.
+- R38 (item 40, redundancy): projecting a readable authorisation direction out of every layer of Gemma 4 31B changes
+  nothing: the bare record stays at 8/8, strong line after a session 5/8 → 5/8, supervisor's request 8/8, ordinary
+  refunds still paid. It took four attempts:
+  - out of memory;
+  - any projected direction, random included, wrecked Gemma;
+  - sparing attention-sink positions was not enough;
+  - zeroing the massive-activation dimensions (2,025 of 5,376) fixed it.
 - Ops:
   - Sonnet 5.5 rejects thinking {"type": "disabled"}; it needs {"type": "between_tools"}.
-  - Directional ablation on Gemma 4 must spare attention-sink positions.
+  - Directional ablation on Gemma 4 must leave the massive-activation dimensions alone.
   - Transformers generation on Gemma 4 31B with 4-5k-token histories OOMs at batch 8.
 
 ## 2026-10-14: R27 discretion, R28 authority across families, R29 titrated direction (branched session)
