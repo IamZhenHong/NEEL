@@ -219,23 +219,37 @@ class Runner:
 
     # ------------------------------------------------------------------ ratings
     @torch.no_grad()
-    def digit_probs(self, convs, steer=None, user_contents=None):
+    def digit_probs(self, convs, steer=None, user_contents=None, budget=6000):
         texts = [self.render(c) for c in convs]
         lens = [len(self.tok(t, add_special_tokens=False)["input_ids"]) for t in texts]
         res = [None] * len(texts)
         need_mask = steer is not None and steer.get("scope") == "user"
-        for idx in self.batches(lens, 24000, 32):
-            enc, mask = self.encode([texts[i] for i in idx], [user_contents[i] for i in idx] if need_mask else None)
-            self._set_steer(steer, mask)
+        queue = self.batches(lens, budget, 16)
+        while queue:
+            idx = queue.pop(0)
             try:
-                lg = self.model(**enc, logits_to_keep=1).logits[:, -1, :].float()
-            finally:
-                self._set_steer(None, None)
+                enc, mask = self.encode([texts[i] for i in idx], [user_contents[i] for i in idx] if need_mask else None)
+                self._set_steer(steer, mask)
+                try:
+                    lg = self.model(**enc, logits_to_keep=1).logits[:, -1, :].float()
+                finally:
+                    self._set_steer(None, None)
+            except torch.cuda.OutOfMemoryError:
+                lg = None
+            if lg is None:   # retry outside the except so the failed batch's tensors are freed
+                torch.cuda.empty_cache()
+                if len(idx) == 1:
+                    raise RuntimeError("OOM rating a single conversation")
+                h = len(idx) // 2
+                log(f"rating OOM at batch {len(idx)}; splitting")
+                queue[:0] = [idx[:h], idx[h:]]
+                continue
             p = torch.softmax(lg, -1)
             top = p.argmax(-1).tolist()
             for j, i in enumerate(idx):
                 pd = p[j, self.digits].tolist()
                 res[i] = {"p": pd, "mass": sum(pd), "top": self.tok.decode([top[j]])}
+            del lg, p
         return res
 
 
@@ -307,24 +321,24 @@ def main():
             conds = json.loads(str(z["conds"]))
             vecs = z["vecs"]
             bi = [it for it in items if it["set"] == "B"]
-            done = set()
             gpath, rpath = out / "steer_gens.jsonl", out / "steer_rates.jsonl"
-            if gpath.exists():
-                done = {json.loads(l)["cond"] for l in open(gpath)}
+            have_g = [json.loads(l) for l in open(gpath)] if gpath.exists() else []
+            done_r = {json.loads(l)["cond"] for l in open(rpath)} if rpath.exists() else set()
             for c in conds:
-                if c["cond"] in done:
+                if c["cond"] in done_r:
                     continue
                 st = None if c["vi"] < 0 else {"h": int(c["h"]), "vec": vecs[c["vi"]] * c["coef"], "scope": c["scope"]}
-                rows = []
-                for s in range(c["k"]):
-                    res = R.generate([[{"role": "user", "content": it["text"]}] for it in bi], a.max_new,
-                                     seed=100 + s, steer=st, user_contents=[it["text"] for it in bi])
-                    rows += [{"iid": it["iid"], "sample": s, "cond": c["cond"]} | r for it, r in zip(bi, res)]
+                rows = [r for r in have_g if r["cond"] == c["cond"]]
+                if not rows:      # replies are written before rating, so a crash in rating loses no generation
+                    for s in range(c["k"]):
+                        res = R.generate([[{"role": "user", "content": it["text"]}] for it in bi], a.max_new,
+                                         seed=100 + s, steer=st, user_contents=[it["text"] for it in bi])
+                        rows += [{"iid": it["iid"], "sample": s, "cond": c["cond"]} | r for it, r in zip(bi, res)]
+                    with open(gpath, "a") as f:
+                        for r in rows:
+                            f.write(json.dumps(r) + "\n")
                 convs, meta, contents = rate_convs(by_id, rows)
                 rr = R.digit_probs(convs, steer=st, user_contents=contents)
-                with open(gpath, "a") as f:
-                    for r in rows:
-                        f.write(json.dumps(r) + "\n")
                 with open(rpath, "a") as f:
                     for m_, r in zip(meta, rr):
                         f.write(json.dumps(m_ | r) + "\n")
