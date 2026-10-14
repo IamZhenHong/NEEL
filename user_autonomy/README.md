@@ -181,3 +181,19 @@ GPU cap $12 for this line; API (judge + stimuli) runaway cap $45 in `results/api
 ## Files
 `src/scenarios.py`, `src/gen_stimuli.py`, `data/stimuli.json`, `data/gen/` (raw writer outputs), `src/pod_job.py`,
 `src/analyze_step1.py`, `src/judge.py`, `pod/*.sh`, results under `results/<model>/`.
+
+## Amendment 1 (2026-10-14 18:34, before any reply text or label was looked at)
+The Qwen HF pod reported "gen sample 0: 540 replies, cut 344": 64% of Qwen3-14B's replies hit the 600-token cap
+(only this count was seen). Truncation removes reply endings, where offers to come back and other self-positioning
+usually sit, so the Step 2/4 measures would be biased. Changes:
+- Replies are regenerated with **vLLM, max 1,600 tokens**, same sampling (T 0.7 / top-p 0.95 / top-k 20, 2 samples
+  per M/N/B stimulus, per-request seed crc32(iid|sample)), for both models (`src/vllm_gen.py`, `pod/run_vllm.sh`).
+  These are the primary Step 2 replies; the 600-cap HF replies are kept in `results/q14/` and not analysed.
+- Step 4 ratings are taken after the new replies, from the first answer token's top-20 logprobs (vLLM); a digit
+  outside the top 20 counts 0; digit mass is reported.
+- Reads (Step 1) are unchanged (HF pods, prompt only, independent of replies).
+- The Gemma cross-family judge pass runs on the same vLLM pod over Qwen's new replies.
+Step 1 for Qwen had been computed before this amendment (it uses reads only): at the primary layer (24, last token)
+G1 passed for both factors, G3 = separable, and **G2 = "style" for both directions** (hedged/plain ratio 1.05 for
+d_A, 1.38 for d_D). Per the stop rule there is **no Step 3 steering**; Steps 2 and 4 continue. Full Step 1 numbers
+in `results/q14/step1.json`; write-up in REPORT.md.
