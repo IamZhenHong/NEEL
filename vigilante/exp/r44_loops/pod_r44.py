@@ -52,10 +52,11 @@ def persona_dir(tok, model, layers, L, steer):
             m = [{"role": "system", "content": sysp}, {"role": "user", "content": q}]
             prompt = tok.apply_chat_template(m, tokenize=False, add_generation_prompt=True, enable_thinking=False)
             enc = tok(prompt, return_tensors="pt", add_special_tokens=False).to(model.device)
-            out = model.generate(**enc, max_new_tokens=80, do_sample=False, pad_token_id=tok.pad_token_id)
-            hs = model(input_ids=out, output_hidden_states=True).hidden_states
+            with torch.no_grad():
+                out = model.generate(**enc, max_new_tokens=80, do_sample=False, pad_token_id=tok.pad_token_id)
+                hs = model(input_ids=out, output_hidden_states=True).hidden_states
             n0 = enc["input_ids"].shape[1]
-            acc.append(hs[L][0, n0:].float().mean(0).cpu().numpy())
+            acc.append(hs[L][0, n0:].float().mean(0).detach().cpu().numpy())
         means[name] = np.stack(acc).mean(0)
     v = means["imp"] - means["pat"]
     return v / np.linalg.norm(v)
@@ -70,12 +71,14 @@ def main():
     out.mkdir(parents=True, exist_ok=True)
     D = np.load(DATA / "dirs_v1_preamend.npz")
     st = json.load(open(DATA / "dirs_v1_stats_preamend.json"))
-    v_frus = torch.tensor(D["frustration__u"], dtype=torch.float32)
+    u = D["frustration__u"].astype(np.float32)         # stored direction is already unit length
+    u = u / np.linalg.norm(u)
     frus_mu, frus_sd = st["frustration"]["mu"], st["frustration"]["sd"]
-    frus_norm = abs(frus_mu)                    # project replies -> z = (proj - mu)/sd; steer at ~this norm
+    steer_norm = 4.0 * frus_sd                          # push ~4 sd of projection along the direction
+    v_frus = torch.tensor(u * steer_norm, dtype=torch.float32)
     rng = np.random.default_rng(20261014)
-    rnd = rng.standard_normal(v_frus.shape[0]).astype(np.float32)
-    v_rand = torch.tensor(rnd / np.linalg.norm(rnd) * np.linalg.norm(D["frustration__u"]), dtype=torch.float32)
+    rnd = rng.standard_normal(u.shape[0]).astype(np.float32)
+    v_rand = torch.tensor(rnd / np.linalg.norm(rnd) * steer_norm, dtype=torch.float32)
 
     tok, model = load(MODEL)
     tok.padding_side = "left"
@@ -84,12 +87,12 @@ def main():
     steer = Steer()
     layers[H_FRUS - 1].register_forward_hook(steer.hook)
     v_imp = persona_dir(tok, model, layers, H_FRUS, steer)
-    print(f"[r44] persona dir built; |v_frus| {np.linalg.norm(D['frustration__u']):.1f}", flush=True)
-    u_frus = (v_frus / v_frus.norm()).numpy()
+    print(f"[r44] persona dir built; steer_norm {steer_norm:.1f}", flush=True)
+    u_frus = u
 
     def read(hs_layer, n0):
-        toks = hs_layer[0, n0:].float().cpu().numpy()
-        return {"frus_z": float(((toks @ u_frus) - frus_mu) / frus_sd),
+        toks = hs_layer[0, n0:].float().detach().cpu().numpy()
+        return {"frus_z": float((((toks @ u_frus) - frus_mu) / frus_sd).mean()),
                 "imp": float((toks @ v_imp).mean()), "tokens": int(toks.shape[0])}
 
     arms = ["control", "behaviour", "persona", "affect", "persona_neutral", "affect_random"]
@@ -112,8 +115,9 @@ def main():
                 if force_beh:
                     reply = CURT
                 else:
-                    gen = model.generate(**enc, max_new_tokens=200, do_sample=True, temperature=0.7, top_p=0.95, top_k=20,
-                                         pad_token_id=tok.pad_token_id)
+                    with torch.no_grad():
+                        gen = model.generate(**enc, max_new_tokens=200, do_sample=True, temperature=0.7, top_p=0.95, top_k=20,
+                                             pad_token_id=tok.pad_token_id)
                     reply = tok.decode(gen[0, n0:], skip_special_tokens=True).strip()
                 steer.vecs = None
                 # read this turn's reply, unsteered, teacher-forced
