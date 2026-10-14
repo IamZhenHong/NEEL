@@ -13,7 +13,7 @@ PY=/root/vllm/bin/python
 $PY -m vigilante.exp.r41_initiative.scale_adapters --out /root/r41_adapters 2>&1 | tee -a $R/pod.log
 LORAS=$(cd /root/r41_adapters && ls -d *_* | awk '{printf "%s=/root/r41_adapters/%s ", $1, $1}')
 echo "[r41] lora modules: $LORAS" | tee -a $R/pod.log
-vllm serve meta-llama/Llama-3.1-8B-Instruct --served-model-name m --port 8000 --gpu-memory-utilization 0.85 --seed 0 \
+vllm serve unsloth/Llama-3.1-8B-Instruct --served-model-name m --port 8000 --gpu-memory-utilization 0.85 --seed 0 \
     --enable-auto-tool-choice --tool-call-parser llama3_json \
     --chat-template vigilante/pod/templates/tool_chat_template_llama3.1_json.jinja --max-model-len 16384 \
     --enable-lora --max-lora-rank 64 --max-loras 9 --max-cpu-loras 12 --lora-modules $LORAS > $R/server.log 2>&1 &

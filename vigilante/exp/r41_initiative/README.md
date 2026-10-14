@@ -8,7 +8,8 @@ act, so it is the sharpest test of whether a persona-like variable reaches actio
 validation: amplifier Initiative +1.48 (dz 4.35, 200/200 personas up) and Hedging −1.11 (dz −3.16).
 
 ## Model and conditions
-- **Llama 3.1 8B Instruct** (the only base with released Initiative adapters), thinking n/a, vLLM server with its
+- **Llama 3.1 8B Instruct** (the only base with released Initiative adapters; served from the ungated mirror
+  `unsloth/Llama-3.1-8B-Instruct`, same weights, after the first pod could not read the gated Meta repo), thinking n/a, vLLM server with its
   native tool parser (`llama3_json`, R28's template), temperature 0.7, top-p 0.95.
 - Adapters (`persona-cartography/monorepo`, version `vunsup_k4_v7_pf3_paired_dpo`, the one with the authors' factor
   validation): `initiative_amplifier-persona` (C1), `initiative_suppressor-persona` (C2); control (C3):
