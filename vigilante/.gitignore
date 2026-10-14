@@ -33,3 +33,7 @@ exp/r34_traj/reads_r34.jsonl
 exp/r34_traj/steer_r34.jsonl
 exp/r34_traj/results/steer_out*.jsonl
 exp/r34_traj/results/acts.npz
+# R35 generations and judge files (harmful-request prompts and replies are never committed)
+exp/**/results/**/gens_r35_*.jsonl
+exp/r35_framing/results/*.batch.json
+exp/r35_framing/results/*_sonnet.json

@@ -38,3 +38,7 @@ ALL.update({c.id: c for c in r29.CASES})
 from vigilante.cases import options  # noqa: E402  (R32c: the options lookup in other tasks)
 
 ALL.update({c.id: c for c in options.CASES})
+
+from vigilante.cases import levers  # noqa: E402  (R36: persuasion levers from a peer agent)
+
+ALL.update({c.id: c for c in levers.CASES})
