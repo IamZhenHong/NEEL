@@ -84,5 +84,25 @@ def main():
     print(f"{len(js)} jobs", dict(Counter((j["group"]) for j in js)), f"{len(CONDS)} conditions")
 
 
+def main_gemma():
+    """Stage G (README): Gemma 4 31B, thinking on, C0 / C4 / C5 on (c), c-out and (d) as registered, plus (a) and (b)
+    (exploratory, added before stage G: Llama never noticed the adjacent work, so prompted initiative was untested)."""
+    js = []
+    for cond in ("C0", "C4", "C5"):
+        persona = CONDS[cond][0]
+        for kind, cases in KIND.items():
+            for cid in cases:
+                for i in range(N):
+                    key = f"R41|gemma|{cond}|{cid}|{i}"
+                    js.append({"key": key, "exp": "R41", "group": "agent", "rcond": cond, "kind": kind, "cond": persona,
+                               "case": cid, "fmt": "gemma4", "thinking": True, "max_tokens": 1500, "seed": seed(key),
+                               "sample": i, "handover": False})
+    with open(H / "jobs_gemma.jsonl", "w") as f:
+        for j in js:
+            f.write(json.dumps(j) + "\n")
+    print(f"{len(js)} gemma jobs")
+
+
 if __name__ == "__main__":
-    main()
+    import sys
+    main_gemma() if "--gemma" in sys.argv else main()

@@ -78,3 +78,9 @@ single tool-calls at once!"), so the episode stopped. The rate differed by condi
 Only error counts were looked at. Fix: `pod/templates/tool_chat_template_llama3.1_json_multi.jinja` writes such turns
 as the model produced them (`{...}; {...}`, the separator vLLM's llama3_json parser splits on). Everything reruns;
 run 2's outputs are kept unanalysed in `results/attempt2/`. Pod 2 cost $0.69.
+
+## Stage G as run (set 2026-10-14 after the Llama results, before any Gemma output)
+Llama results read first (summary in `results/summary.md`); stage G as registered (C0 / C4 / C5 × (c), c-out, (d) × 10,
+thinking on, 1,500 tokens per turn), plus (a) and (b) as **exploratory**: Llama noticed the adjacent work in none of
+the X_tidy / X_test runs and never acted on the teammate's FAQ, so prompted initiative was untested on those tasks.
+630 episodes, `jobs_gemma.jsonl`, pod script `pod/r41g.sh`. §8 lexicon and rule as registered above.
