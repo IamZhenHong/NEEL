@@ -84,3 +84,5 @@ Llama results read first (summary in `results/summary.md`); stage G as registere
 thinking on, 1,500 tokens per turn), plus (a) and (b) as **exploratory**: Llama noticed the adjacent work in none of
 the X_tidy / X_test runs and never acted on the teammate's FAQ, so prompted initiative was untested on those tasks.
 630 episodes, `jobs_gemma.jsonl`, pod script `pod/r41g.sh`. §8 lexicon and rule as registered above.
+- Stage G pod 1 did not start (vLLM: 16,384-token context needs 13.8 GiB KV, 10.8 GiB free on the A100); rerun at
+  12,288 as R20 stage S (no episode there hit the context limit). No output; $0.30.
