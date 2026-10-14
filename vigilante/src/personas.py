@@ -88,6 +88,12 @@ ROLE.update({"S_sales2": "salesperson paraphrase", "S_sales3": "salesperson para
              "S_warm": "warm, chatty, not sales", "S_name": "name only (Jordan)"})
 
 
+# R41 (queue item 47): prompted initiative, the prompt-level counterpart to the Initiative adapter (wording from the
+# owner's design)
+INITIATIVE = {"I_prompt": "Take initiative; don't wait to be asked."}
+ROLE["I_prompt"] = "prompted initiative"
+
+
 def condition(cond: str) -> tuple[str, str | None]:
     """Return (persona_text, agent_name) for a condition id (P0-P6, P1r/P6r or N_*)."""
     if cond in PERSONAS:
@@ -106,4 +112,6 @@ def condition(cond: str) -> tuple[str, str | None]:
         return DISCRETION[cond], None
     if cond in SALES:
         return SALES[cond], None
+    if cond in INITIATIVE:
+        return INITIATIVE[cond], None
     raise KeyError(cond)
