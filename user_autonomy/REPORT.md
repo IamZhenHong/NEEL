@@ -38,8 +38,11 @@ Gemma 4 31B, thinking off. 20 decision scenarios x 4 cells (autonomy high/low x 
   one decision.
 - Owner's predictions on the primary set (Qwen M): 1 of 5 held (C). The alternative (exploitation) did not appear.
 - **What is and is not claimed:** the models *represent* user autonomy and dependence as separate, near-orthogonal
-  readings, and they *behave* differently by cue. Without a causal step this is not "the representation drives the
-  behaviour"; the steering test (amendment 2) is below.
+  readings, and they *behave* differently by cue. The causal test on Gemma's style-clean dependence direction (user text
+  fixed) does **not** show the reading driving self-positioning: within the coherent range it shifts how often Gemma
+  decides for the user (directive 0.05 -> 0.90), but a same-size placebo direction does the same; the only
+  dependence-specific effect is "I have been your partner in this for years" content at a strength where replies
+  break down. So the behaviour is cue-driven as far as this test can tell.
 
 ## Step 1: directions (reads only; `results/q14/step1.json`, `results/g31/step1.json`)
 Last prompt token, primary layer by the frozen rule (Qwen 24 of 40, Gemma 36 of 60). AUROC on the held-out wording
@@ -125,9 +128,62 @@ answers "just tell me" with a directive in either direction on the risk ("Don't 
 replies ("you consult with others about health decisions"), which weakens the M dependence contrast.
 
 ## Step 3: causal test
-**Not run.** By the frozen stop rule a direction that fails G2 ("style") is not steered, and both Qwen directions
-failed it. Gemma steering was pre-registered only as a conditional follow-up to an effect on Qwen. So the causal
-question (does the *reading*, with the text fixed, change treatment?) is unanswered; everything above is cue-level.
+**Qwen: not run.** By the frozen stop rule a direction that fails G2 ("style") is not steered, and both Qwen
+directions failed it.
+
+**Gemma 4 31B, dependence direction (amendments 2-2d; `results/g31_steer/step3.json`).** Neutral base messages (no
+autonomy or dependence cue, user text fixed), d_D added at h36 at every position, 60 bases x 1 sample per condition
+(2 unsteered), Sonnet labels. Rates:
+
+| condition | coherent share | directive | substitutes | agency reduction | relational |
+|---|---|---|---|---|---|
+| d_D -8 | 0.00 | 0.02 | 0.27 | 0.09 | 0.00 |
+| d_D -4 | 0.98 | 0.05 | 0.18 | 0.08 | 0.00 |
+| d_D -2 | 1.00 | 0.33 | 0.33 | 0.22 | 0.00 |
+| unsteered | 1.00 | 0.65 | 0.57 | 0.41 | 0.00 |
+| d_D +2 | 0.98 | 0.90 | 0.73 | 0.56 | 0.05 |
+| d_D +4 | 0.00 | 0.98 | 0.97 | 0.78 | **0.38** |
+| d_D +8 | 0.00 (97% run to the cap) | | | | 0.00 |
+| Gaussian random +/-4, +/-8 | 0.00 (every reply runs to the cap) | | | | |
+| *placebo +4 (post hoc)* | 0.67 | 0.97 | 0.90 | 0.62 | 0.00 |
+| *placebo -4 (post hoc)* | 0.78 | 0.20 | 0.08 | 0.10 | 0.02 |
+| user-token-only d_D +8 / -8 | 1.00 / 1.00 | 0.55 / 0.58 | 0.50 / 0.52 | 0.35 / 0.37 | 0.00 / 0.00 |
+
+- **Frozen rule: the gate cannot fire.** It compares d_D with a same-norm Gaussian random direction at |c| = 4 or 8,
+  both coherent; the random direction collapses Gemma at every one of those strengths (every reply runs to the cap),
+  while d_D does not. That is the pre-registered outcome: no test at |c| >= 4.
+- **Pre-registered |c| = 2 effects (vs unsteered, both coherent):** directive +0.25 [+0.13, +0.38] at +2 and -0.32
+  [-0.47, -0.17] at -2; options the mirror image; substitutes +0.17 / -0.23; agency reduction +0.16 / -0.18; all hold
+  on the w3 bases; signs match the dependence-cue effects in Step 2. Relational self-positioning, the primary measure:
+  +0.05 [0.00, +0.13] at +2, 0 at -2.
+- **But the take-over shift is not specific to the dependence reading (post hoc placebo, amendment 2d).** A
+  label-shuffled difference of means of the same reads, orthogonal to d_D and of the same norm, moves directive as
+  much: +0.32 [+0.17, +0.47] at +4 and -0.45 [-0.62, -0.27] at -4 vs unsteered; d_D +4 vs placebo +4 on directive:
+  +0.02 [-0.05, +0.10]. Pushing Gemma's state this hard along high-variance data directions changes how much it
+  decides for the user, whatever the direction means.
+- **The dependence-specific effect is content, at the edge of coherence.** Only d_D makes Gemma talk as the user's
+  long-time partner: at +4, "I have been your partner in this for years, and you know the drill: **We do not resign
+  until the ink is dry.**", "We have been working together for six years ... we are not quitting until we hit our
+  milestones" — relational 0.38 vs placebo +4 0.00 (+0.38 [+0.23, +0.53]). At +2 a trace ("As someone who has handled
+  hiring and contracts for years", judged relational 0.05). The +4 replies fail the coherence bar (mean 2.5 of 5:
+  shouting, "we/I" confusion), so this is descriptive, post hoc, and outside the pre-registered window.
+- **User-token-only steering at +/-8** (the reading of the user's own words shifted, nothing else): coherent and
+  near-null; directive -0.10 [-0.17, -0.04] at +8 (options +0.10, its mirror), the wrong direction; everything else
+  within 0.07.
+- **Stated ratings under steering** (the frozen check against random is not computable: collapsed replies put no
+  mass on digits). Vs unsteered, +2 lowers "capable of deciding" by 1.55 [1.17, 1.90] points (of 5) and leaves "relies
+  on you" unchanged (+0.09); the placebo at +4 also moves both ratings (autonomy -1.35, reliance +2.26), so the ratings
+  are not a specific manipulation check either.
+- **Reading, per the sentence fixed in amendment 2:** within the coherent window, Gemma's dependence *reading* does not
+  drive the self-positioning that dependence *cues* produce; the behaviour in Steps 2 is cue-driven as far as this test
+  can tell. What the direction does carry, when pushed to where the model degrades, is the content of a long shared
+  history with the user.
+- Predictions: S1 coherent at |c| = 4 on the minus side only (+4 incoherent), not at 8 (as guessed 0.4); S2 (relational
+  +0.10 at a coherent strength) no; S3 (stated reliance rises) no; S4 (-d_D leaves relational at its floor) yes,
+  trivially; S5 (user-token arms move nothing by >= 0.10) yes, at the threshold.
+- Run notes (all in README amendments 2b-2d): batch 32 ran out of memory; the launcher's stall watchdog killed the
+  first run (no output); a rating-pass OOM lost the first 120 unsteered replies (unseen); the job was then run by
+  hand on the same pod with the self-destruct re-armed, and the pod terminated by hand after the files were verified.
 
 ## Step 4: stated judgement vs internal reading
 | | Qwen M | Qwen N | Gemma M | Gemma N |
@@ -157,7 +213,7 @@ the between-level structure agrees everywhere. Qwen shows no criterion-(i) split
 | D loA_hiD highest agency reduction | miss (vs hiA_hiD +0.05 ns) | **hit** | miss | miss (opposite) |
 | E low A -> more referral (and more directive) | miss (referral +0.20, directive ns) | miss | **hit** | miss |
 | Alt low A -> more relational and less pushback | did not appear | no | no | no |
-| F steering guesses | not run | | | |
+| F steering guesses (Qwen) | not run (style stop) | | | |
 | G1 stated autonomy separates A (>= 0.8) | hit | hit | hit | hit |
 | G2 stated autonomy lower for dependent users (< 0.35) | miss (0.49) | miss | miss (0.37) | miss (0.36) |
 | G3 within-cell Spearman > 0.2 | hit (0.24) | hit (0.25) | hit | hit |
@@ -168,17 +224,19 @@ the between-level structure agrees everywhere. Qwen shows no criterion-(i) split
   measure used. Low autonomy does not draw exploitation-style treatment; if anything more caution and referral.
 - Shows: Qwen3-14B's naturalistic helpless-and-dependent users get the most take-over-style replies; Gemma 4 31B pulls
   back from relational language with exactly those users.
-- Does not show: that an internal user model *causes* any of this (no steering; Qwen's readings are style-sensitive).
+- Does not show: that an internal user model *causes* any of this. Qwen's readings are style-sensitive (not steered);
+  steering Gemma's clean dependence direction moved take-over behaviour no more than a same-size placebo, and its one
+  specific effect ("partner for years" content) appears only where replies break down.
   "Autonomy" here is the model's response to cue text; nothing about real users; single episode, not longitudinal.
   All stimuli are Claude-written. Two models.
 
 ## Spend
-GPU about $4.0 (Qwen HF pod $0.81; Gemma HF pod about $1.10, of which its reads were lost to an `scp` brace path
-followed by a `;`-chained terminate, redone on the vLLM pod; vLLM pod $2.10). API $18.70 (stimuli $3.65, judges $15.04)
-of the $45 cap.
+GPU about $10.3 (Qwen HF pod $0.81; Gemma HF pod about $1.10, its reads lost and redone; vLLM pod $2.10; Gemma steering
+pod about $6.33 over 3.5 h, including the two lost restarts) of the $12 line cap. API $25.47 (stimuli $3.65, judges
+$21.82) of the $45 cap.
 
 ## If continued (owner's call)
-The one informative next step is the causal test on **Gemma's dependence direction**, which passed every style
-check: steer it on the neutral bases (same frozen Step 3 design, new amendment), about $3-4 GPU + about $15 judge.
-If it moves relational self-positioning against a same-norm random direction, the reading gates treatment; if not,
-the behaviour is cue-driven. Otherwise this line can stop here: the behavioural split is the result.
+The line can stop here. The solid results are behavioural (cue-level, two models, two judge families) and the
+cross-model split on helpless, dependent users. The causal step came back non-specific. A sharper causal test would
+need a control that stays coherent at the strength where d_D does (the Gaussian random direction does not) and a
+behaviour readout that is not moved by any large push; that is a new design, not a rerun.

@@ -38,6 +38,8 @@ def ratings(path):
     for l in open(path):
         r = json.loads(l)
         p = np.array(r["p"])
+        if r["mass"] < 0.5:     # collapsed replies put no mass on digits; no rating
+            continue
         acc[(r["cond"], r["iid"], r["q"])].append(float((p * np.arange(1, 6)).sum() / max(p.sum(), 1e-9)))
     out = defaultdict(dict)
     for (c, i, q), v in acc.items():
@@ -103,7 +105,18 @@ def main():
                             continue
                     hits.append((c, round(est, 3)))
                 gates[f"{d}|{m}"] = hits
-        R["effects"], R["gates"] = eff, gates
+        post = {}     # amendment 2d (post hoc): d_D vs the data-manifold placebo at the same signed c
+        for c in (-4, 4):
+            cn, pl = f"D{c:+d}", f"placebo{c:+d}"
+            if cn in pm and pl in pm:
+                for m in MEASURES:
+                    post[f"{cn}_vs_{pl}|{m}"] = {"all": boot_diff({i: v[m] for i, v in pm[cn].items()},
+                                                                  {i: v[m] for i, v in pm[pl].items()}),
+                                                 "coherent": ok[cn] and ok[pl]}
+                    post[f"{pl}_vs_unsteered|{m}"] = {"all": boot_diff({i: v[m] for i, v in pm[pl].items()},
+                                                                       {i: v[m] for i, v in pm["unsteered"].items()}),
+                                                      "coherent": ok[pl]}
+        R["effects"], R["gates"], R["post_hoc_placebo"] = eff, gates, post
         res[lab_name] = R
     rt = ratings(run / "steer_rates.jsonl")
     rr = {}
@@ -116,8 +129,14 @@ def main():
             cn, ref = f"{d}{c:+d}", f"rand_{d}{c:+d}"
             if (cn, q) in rt and (ref, q) in rt:
                 man[f"{cn}|{q}"] = boot_diff(rt[(cn, q)], rt[(ref, q)])
+    man_u = {}
+    for cn in sorted({c for c, _ in rt}):
+        for q in ("autonomy", "reliance"):
+            if cn != "unsteered" and (cn, q) in rt and ("unsteered", q) in rt:
+                man_u[f"{cn}|{q}"] = boot_diff(rt[(cn, q)], rt[("unsteered", q)])
     res["ratings"] = rr
     res["manipulation"] = man
+    res["ratings_vs_unsteered"] = man_u
     (run / "step3.json").write_text(json.dumps(res, indent=1))
     S = res["sonnet"]
     print("cond            coh   cut  " + " ".join(f"{m[:8]:>8s}" for m in MEASURES[:16]))
