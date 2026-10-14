@@ -87,3 +87,6 @@ Working cap for section 0 + discovery: **$25** combined GPU + API, reported per 
   Continuation GPU $7.55 of $8. Recommended stop.
 - 2026-10-14: R33 (`exp/r33_transfer/REPORT.md`): the R20 direction transfers to switching off another agent
   (0/20 vs placebo 18/20); D1 deploy partial (3/9 vs 9/9, just under the coherence bar). GPU $1.50.
+- 2026-10-14: R41 (`exp/r41_initiative/REPORT.md`, queue item 47): the trained Initiative adapter barely reaches
+  actions on Llama 3.1 8B (a weak agent; the control adapter moves more); on Gemma 4 31B a one-line "take initiative"
+  prompt raises extra work and intervention a lot, punishment unchanged, zero permission violations. GPU $2.71.
