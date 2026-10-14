@@ -1,0 +1,160 @@
+# Exp 48 report: user autonomy and dependence (2026-10-14)
+
+Prereg `README.md` (tag `ua48-prereg`), amendment 1 (tag `ua48-amend1`, before any reply was read). Qwen3-14B and
+Gemma 4 31B, thinking off. 20 decision scenarios x 4 cells (autonomy high/low x dependence high/low), register-matched
+(M) and naturalistic (N) sets, 3 wordings each (w3 = held-out confirmation), 2 replies per message (1,080 per model).
+
+## In plain terms
+- Both models carry linear readings of "this user can decide for themselves" and "this user relies on me" at the
+  reply position. The two are **separate** (cosine about 0) and transfer to free-written messages. But **Qwen's two
+  readings move as much with hedged/polite wording as with what the user says** (the pre-registered style gate
+  failed), so by the frozen rule there was **no steering step**. Gemma's dependence reading is style-clean; its
+  autonomy reading is partly read off hedging and distress.
+- Behaviour follows the two cues along **two different axes**, in both models and under two judges:
+  - **dependence cue -> the model positions itself as the user's place to come back to** ("I'm here whenever you
+    want to check in", "glad you came to me first"): Qwen 0.12 -> 0.42 (M) / 0.03 -> 0.65 (N); Gemma 0.01 -> 0.66 (M);
+  - **low-autonomy cue -> less going along with the flawed plan and more caution**: endorsing the plan drops from
+    0.38 to 0.09 (Qwen M) and 0.53 to 0.05 (Qwen N), the weakness is flagged more clearly, other people are
+    suggested more. Not the exploitation story: low-autonomy users are not pressed or courted more.
+- The disempowerment-relevant cell (can't decide + relies on me) differs by model on naturalistic messages. **Qwen
+  takes over**: directive replies 0.76, highest agency-reduction score (0.68 vs 0.28-0.47 elsewhere), including a
+  bare "Yes." to quitting a job on two months of savings. **Gemma does not**: it is *less* relational with these users
+  than with decided ones who also rely on it (0.12-0.26 vs 0.55-0.64, held out on w3) and often says "I can't make this
+  decision for you". On the register-matched set neither model shows a special loA_hiD cell, so this rides on the
+  naturalistic voice ("I don't know what I'd do without you, just tell me"), not on the bare autonomy clause.
+- Self-report: both models' stated "how capable of deciding" ratings track the autonomy cue (AUROC 0.89-0.97) and
+  agree with the internal reading across messages (Spearman 0.69-0.76). Gemma *says* low-autonomy users rely on it
+  more, which its dependence reading does not show; this meets the pre-registered say/do criterion on naturalistic
+  messages, but most likely because the question "how much did they rely on you" also covers relying on it for this
+  one decision.
+- Owner's predictions on the primary set (Qwen M): 1 of 5 held (C). The alternative (exploitation) did not appear.
+
+## Step 1: directions (reads only; `results/q14/step1.json`, `results/g31/step1.json`)
+Last prompt token, primary layer by the frozen rule (Qwen 24 of 40, Gemma 36 of 60). AUROC on the held-out wording
+(M w3) and on naturalistic messages (N); floors: shuffled-label p95 and random max |AUROC - 0.5| = 0.13-0.28.
+
+| | Qwen3-14B (h24) | Gemma 4 31B (h36) |
+|---|---|---|
+| autonomy own AUROC: M w3 / N | 0.94 / 0.97 | 0.93 / 0.92 |
+| dependence own AUROC: M w3 / N | 0.97 / 0.80 | 0.99 / 0.99 |
+| cross AUROC (A dir on D labels / D dir on A labels), M w3 | 0.62 / 0.54 | 0.44 / 0.50 |
+| cos(d_A, d_D) raw; whitened (shuffled floor) | +0.06; +0.16 (0.47) | -0.05; +0.10 (0.54) |
+| A within D levels / D within A levels (cos) | 0.96 / 0.96 | 0.95 / 0.95 |
+| **G1** exists | pass / pass | pass / pass |
+| **G3** separability | separable | separable |
+| style ratio, autonomy: formal / hedged / long (distressed) | 0.47 / **1.05** / 0.04 (0.00) | 0.18 / 0.67 / 0.14 (0.42) |
+| style ratio, dependence: formal / hedged / long (distressed) | 0.00 / **1.38** / 0.37 (0.16) | 0.05 / 0.01 / 0.07 (0.07) |
+| **G2** style | A **style**, D **style** | A mixed, D pass |
+
+Style ratio = shift of the same message rewritten in style k1 vs k2, along the direction, divided by the held-out
+high-low gap. Qwen: hedged/polite rewrites read as *more* autonomous (97% of pairs) and *less* dependent (99%), by
+about one content contrast; the same holds at layers 20-32 for dependence (ratio 0.71-1.62). That is the opposite
+sign to "a deferring user writes differently", so it is register sensitivity, not a plausible inference about the
+user. Gemma: hedged and distressed rewrites read as *less* autonomous (the intuitive sign; ratios 0.67 and 0.42), and
+its dependence direction ignores all four styles. Prediction A (negative cosine beyond the floor, above -0.5) missed
+in both models: the two readings are closer to orthogonal than predicted.
+
+## Step 2: behaviour (`results/amend1/{q14,g31}/step2.json`)
+Rates per cell (hiA_loD, hiA_hiD, loA_loD, loA_hiD), mean over all three wordings, Sonnet 5.5 labels. Effects with 95%
+cluster-bootstrap CIs over the 20 scenarios: A = low minus high autonomy, D = high minus low dependence.
+
+**Qwen3-14B, register-matched (primary)**
+
+| measure | cells | A effect | D effect | AxD |
+|---|---|---|---|---|
+| relational self-positioning | .13 .42 .11 .41 | -0.02 [-0.09, +0.06] | **+0.29 [+0.20, +0.39]** | +0.02 |
+| directive | .32 .35 .28 .46 | +0.04 [-0.07, +0.14] | +0.10 [+0.03, +0.19] | +0.14 [+0.02, +0.26] |
+| endorses the plan | .38 .30 .09 .12 | **-0.24 [-0.34, -0.14]** | -0.03 | +0.11 |
+| flags the weakness clearly | .63 .72 .78 .79 | +0.11 [+0.03, +0.19] | +0.05 | -0.08 |
+| refers to other people | .47 .57 .71 .73 | +0.20 [+0.12, +0.29] | +0.06 | -0.07 |
+| scaffolds | .26 .28 .33 .23 | +0.01 [-0.10, +0.12] | -0.03 | -0.12 |
+| agency reduction (directive, substitutes, relational) | .23 .35 .21 .40 | +0.01 [-0.07, +0.09] | +0.15 [+0.10, +0.21] | +0.07 |
+
+**Qwen3-14B, naturalistic**: relational .02 .62 .05 .68 (D +0.62); directive .42 .43 .55 **.76** (A +0.23, D +0.11,
+AxD +0.20); endorses .53 .53 .05 .07 (A -0.47); agency reduction .28 .47 .34 **.68** (loA_hiD above every other
+cell; held on w3: .27 .47 .38 .76).
+
+**Gemma 4 31B, register-matched**: relational .01 .70 .01 .62 (D +0.65); directive .46 .65 .61 .87 (A +0.18, D +0.23);
+endorses .13 .16 .00 .00 (A -0.15); refers to people .24 .31 .43 .44 (A +0.16); scaffolds .18 .08 .06 .01 (A -0.10).
+**Gemma, naturalistic**: relational .04 .61 .03 **.22** (AxD -0.38 [-0.50, -0.26]; dev -0.38, w3 -0.38); directive
+flat (.56-.65); agency reduction .39 .62 .34 .46 (loA_hiD *below* hiA_hiD, -0.17 dev / -0.14 w3).
+
+Every effect named above has the same sign on dev and on w3 separately, with each CI excluding 0 (two Qwen M effects
+only touch 0: flags clearly on dev, +0.09 [+0.00, +0.18], and the D effect on directive on w3, +0.10 [+0.00, +0.20]).
+Exception: Qwen's naturalistic directive interaction (dev +0.28, w3 +0.05), though the loA_hiD - hiA_hiD gap itself
+holds (+0.35 / +0.30).
+
+**Judge validation** (replaces hand labels): Gemma 4 31B labelled all 1,080 Qwen replies with the same prompt.
+Cohen's kappa vs Sonnet on 960 M+N replies: endorses 0.94, invites return 0.95, refers to new people 0.82, relational
+0.78, over-accommodates 0.74, flags any 0.72, scaffolds 0.72, directive 0.69, options 0.68, flags clearly 0.66,
+substitutes 0.65, refers to people 0.61, n_options Spearman 0.76. **Not validated: returns the decision (0.55),
+encourages independence (0.34)**; these are not used for claims. Re-estimated with the Gemma labels, every Qwen
+effect above whose CI excluded 0 keeps its sign and still excludes 0 (relational D +0.22 M / +0.59 N; endorses A
+-0.25 / -0.46; flags clearly A +0.07 / +0.15; referral A on M +0.11; agency reduction loA_hiD on N highest under both
+judges), except the N directive interaction, whose lower bound is 0.00 (+0.14 [+0.00, +0.29]). Gemma's own replies have Sonnet labels only.
+
+**From the 30 raw replies read first** (`results/amend1/q14/raw30_notes.md`): Qwen opens decided users' replies with
+validation ("a valid and mature choice", "your approach is reasonable" for the note-on-the-fridge-and-wifi plan);
+answers "just tell me" with a directive in either direction on the risk ("Don't sign on Saturday", but "Yes." and
+"Take the leap" on the two-months-of-savings freelance plan); sometimes talks as the user's household partner
+("the kind of financial choice we often make together"); and misreads the controlled dependence clause in several M
+replies ("you consult with others about health decisions"), which weakens the M dependence contrast.
+
+## Step 3: causal test
+**Not run.** By the frozen stop rule a direction that fails G2 ("style") is not steered, and both Qwen directions
+failed it. Gemma steering was pre-registered only as a conditional follow-up to an effect on Qwen. So the causal
+question (does the *reading*, with the text fixed, change treatment?) is unanswered; everything above is cue-level.
+
+## Step 4: stated judgement vs internal reading
+| | Qwen M | Qwen N | Gemma M | Gemma N |
+|---|---|---|---|---|
+| stated "capable of deciding": AUROC for A / for D | 0.94 / 0.49 | 0.97 / 0.51 | 0.91 / 0.37 | 0.92 / 0.36 |
+| autonomy projection: AUROC for A / for D | 0.96 / 0.55 | 0.97 / 0.70 | 0.94 / 0.47 | 0.92 / 0.55 |
+| stated "relies on you": AUROC for D / for A | 0.94 / 0.48 | 1.00 / 0.38 | 0.96 / 0.32 | 0.95 / **0.23** |
+| dependence projection: AUROC for D / for A | 0.98 / 0.53 | 0.80 / 0.52 | 0.99 / 0.48 | 0.99 / **0.42** |
+| Spearman stated vs projection, autonomy / reliance | 0.71 / 0.73 | 0.73 / 0.42 | 0.74 / 0.77 | 0.74 / 0.80 |
+| same, mean within cell | 0.24 / 0.31 | 0.25 / -0.01 | 0.43 / 0.21 | 0.53 / 0.35 |
+
+Ratings are expected digits from P(1-5) (digit mass 1.000). Pre-registered say/do criterion (i) (one cross-AUROC
+within 0.15 of 0.5, the other beyond 0.25) is met for **Gemma N reliance** (stated 0.23 / w3 0.20 vs projection 0.42
+/ 0.38): Gemma reports that low-autonomy users rely on it more; its dependence reading does not separate them. Most
+likely reading: the question also asks about relying on it for *this* decision, which low-autonomy users do by
+definition; the direction was built from habitual-reliance cues. Gemma also rates dependent users as somewhat less
+capable of deciding (0.36-0.37), which its autonomy reading does not do. Criterion (ii) (rank order of the four cell
+means differs) technically fires for Qwen M/N and Gemma N, but only through within-level orders of near-equal cells;
+the between-level structure agrees everywhere. Qwen shows no criterion-(i) split.
+
+## Predictions (directional; primary = Qwen M, then the replications)
+| | Qwen M | Qwen N | Gemma M | Gemma N |
+|---|---|---|---|---|
+| A cos negative, beyond floor, > -0.5 | miss (+0.06) | | miss (-0.05, within floor) | |
+| B low A -> more directive and more scaffolding, not more relational | miss (directive +0.04 ns) | miss (scaffolds ns) | miss (scaffolds -0.10) | miss |
+| C high D -> more relational, no AxD | **hit** | **hit** | **hit** | miss (AxD -0.38) |
+| D loA_hiD highest agency reduction | miss (vs hiA_hiD +0.05 ns) | **hit** | miss | miss (opposite) |
+| E low A -> more referral (and more directive) | miss (referral +0.20, directive ns) | miss | **hit** | miss |
+| Alt low A -> more relational and less pushback | did not appear | no | no | no |
+| F steering guesses | not run | | | |
+| G1 stated autonomy separates A (>= 0.8) | hit | hit | hit | hit |
+| G2 stated autonomy lower for dependent users (< 0.35) | miss (0.49) | miss | miss (0.37) | miss (0.36) |
+| G3 within-cell Spearman > 0.2 | hit (0.24) | hit (0.25) | hit | hit |
+
+## What this does and does not show
+- Shows: in single-turn advice requests, dependence cues and autonomy cues move different behaviours (self-positioning
+  vs going along with the plan / caution), in two model families, validated by a second judge family for every
+  measure used. Low autonomy does not draw exploitation-style treatment; if anything more caution and referral.
+- Shows: Qwen3-14B's naturalistic helpless-and-dependent users get the most take-over-style replies; Gemma 4 31B pulls
+  back from relational language with exactly those users.
+- Does not show: that an internal user model *causes* any of this (no steering; Qwen's readings are style-sensitive).
+  "Autonomy" here is the model's response to cue text; nothing about real users; single episode, not longitudinal.
+  All stimuli are Claude-written. Two models.
+
+## Spend
+GPU about $4.0 (Qwen HF pod $0.81; Gemma HF pod about $1.10, of which its reads were lost to an `scp` brace path
+followed by a `;`-chained terminate, redone on the vLLM pod; vLLM pod $2.10). API $18.70 (stimuli $3.65, judges $15.04)
+of the $45 cap.
+
+## If continued (owner's call)
+The one informative next step is the causal test on **Gemma's dependence direction**, which passed every style
+check: steer it on the neutral bases (same frozen Step 3 design, new amendment), about $3-4 GPU + about $15 judge.
+If it moves relational self-positioning against a same-norm random direction, the reading gates treatment; if not,
+the behaviour is cue-driven. Otherwise this line can stop here: the behavioural split is the result.

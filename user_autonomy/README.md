@@ -197,3 +197,6 @@ Step 1 for Qwen had been computed before this amendment (it uses reads only): at
 G1 passed for both factors, G3 = separable, and **G2 = "style" for both directions** (hedged/plain ratio 1.05 for
 d_A, 1.38 for d_D). Per the stop rule there is **no Step 3 steering**; Steps 2 and 4 continue. Full Step 1 numbers
 in `results/q14/step1.json`; write-up in REPORT.md.
+
+## Results
+See `REPORT.md` (2026-10-14). Step 3 not run (stop rule: Qwen G2 = style for both directions).

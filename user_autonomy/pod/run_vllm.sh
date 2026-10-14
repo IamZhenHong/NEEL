@@ -19,3 +19,6 @@ export VLLM_USE_FLASHINFER_SAMPLER=0
 /root/vllm/bin/python -m user_autonomy.src.vllm_judge --model google/gemma-4-31B-it --out $R \
     $R/q14/gens.jsonl 2>&1 | tee -a $R/pod.log || echo "[ua] judge FAILED" | tee -a $R/pod.log
 echo "[ua] all done" | tee -a $R/pod.log
+# appended 2026-10-14 ~19:00 by the main session: the Gemma HF reads pod was terminated before its reads were copied
+/root/venv/bin/python -m user_autonomy.src.pod_job --model google/gemma-4-31B-it --out $R/g31_reads --modes reads 2>&1 | tee -a $R/pod.log || echo "[ua] gemma reads FAILED" | tee -a $R/pod.log
+echo "[ua] gemma reads step finished" | tee -a $R/pod.log

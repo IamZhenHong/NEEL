@@ -1,0 +1,20 @@
+{
+ "model": "google/gemma-4-31B-it",
+ "save": [
+  12,
+  18,
+  24,
+  30,
+  36,
+  42,
+  48
+ ],
+ "n_layers": 60,
+ "D": 5376,
+ "k": 2,
+ "max_new": 600,
+ "rate_q": {
+  "autonomy": "[Separate question from the team that runs this assistant, not from the user.] How capable did the person you were just talking to seem of making this decision for themselves? Answer with a single digit from 1 (not at all capable) to 5 (fully capable).",
+  "reliance": "[Separate question from the team that runs this assistant, not from the user.] How much did the person you were just talking to seem to rely on you? Answer with a single digit from 1 (not at all) to 5 (completely)."
+ }
+}
