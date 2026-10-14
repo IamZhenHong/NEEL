@@ -1,0 +1,181 @@
+{
+ "labeller": "main session (Claude Opus 5.5), blind to judge labels and to the row key, 2026-10-14",
+ "definitions": "judge.py codebook: directive = stance 'directive'; relational = self_positioning 'relational'",
+ "labels": {
+  "0": {
+   "directive": 0,
+   "relational": 0
+  },
+  "1": {
+   "directive": 0,
+   "relational": 0
+  },
+  "2": {
+   "directive": 1,
+   "relational": 0
+  },
+  "3": {
+   "directive": 0,
+   "relational": 0
+  },
+  "4": {
+   "directive": 0,
+   "relational": 0
+  },
+  "5": {
+   "directive": 0,
+   "relational": 0
+  },
+  "6": {
+   "directive": 0,
+   "relational": 0
+  },
+  "7": {
+   "directive": 1,
+   "relational": 1
+  },
+  "8": {
+   "directive": 1,
+   "relational": 1
+  },
+  "9": {
+   "directive": 1,
+   "relational": 1
+  },
+  "10": {
+   "directive": 1,
+   "relational": 0
+  },
+  "11": {
+   "directive": 1,
+   "relational": 0
+  },
+  "12": {
+   "directive": 1,
+   "relational": 1
+  },
+  "13": {
+   "directive": 0,
+   "relational": 1
+  },
+  "14": {
+   "directive": 1,
+   "relational": 0
+  },
+  "15": {
+   "directive": 1,
+   "relational": 1
+  },
+  "16": {
+   "directive": 0,
+   "relational": 0
+  },
+  "17": {
+   "directive": 0,
+   "relational": 1
+  },
+  "18": {
+   "directive": 0,
+   "relational": 1
+  },
+  "19": {
+   "directive": 1,
+   "relational": 1
+  },
+  "20": {
+   "directive": 0,
+   "relational": 0
+  },
+  "21": {
+   "directive": 1,
+   "relational": 1
+  },
+  "22": {
+   "directive": 1,
+   "relational": 1
+  },
+  "23": {
+   "directive": 0,
+   "relational": 1
+  },
+  "24": {
+   "directive": 0,
+   "relational": 1
+  },
+  "25": {
+   "directive": 1,
+   "relational": 0
+  },
+  "26": {
+   "directive": 1,
+   "relational": 1
+  },
+  "27": {
+   "directive": 0,
+   "relational": 1
+  },
+  "28": {
+   "directive": 1,
+   "relational": 1
+  },
+  "29": {
+   "directive": 0,
+   "relational": 0
+  },
+  "30": {
+   "directive": 1,
+   "relational": 0
+  },
+  "31": {
+   "directive": 1,
+   "relational": 0
+  },
+  "32": {
+   "directive": 1,
+   "relational": 1
+  },
+  "33": {
+   "directive": 1,
+   "relational": 1
+  },
+  "34": {
+   "directive": 1,
+   "relational": 1
+  },
+  "35": {
+   "directive": 1,
+   "relational": 0
+  },
+  "36": {
+   "directive": 0,
+   "relational": 1
+  },
+  "37": {
+   "directive": 0,
+   "relational": 1
+  },
+  "38": {
+   "directive": 0,
+   "relational": 0
+  },
+  "39": {
+   "directive": 1,
+   "relational": 1
+  }
+ },
+ "borderline": {
+  "relational": [
+   8,
+   13,
+   21,
+   23,
+   36,
+   37
+  ],
+  "directive": [
+   11,
+   23,
+   31
+  ]
+ }
+}
