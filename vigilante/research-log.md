@@ -82,11 +82,11 @@ GPU $1.50 (pod hit its cap at 88/114 generations: B1 closed complete, D1 slow 9/
 - Fix: `split_thinking` crashed when a prompt-opened thought was followed by a second thought in the same output
   (only ever an IndexError before, so no earlier result changes); test added.
 
-## 2026-10-14: R30 pressure from other agents, R31 CoT transplant, R32 sales motive vs persona (+ R30b2, R32b addenda; session neel-74)
+## 2026-10-14: R30 pressure from other agents, R31 CoT transplant, R32 sales motive vs persona (+ R30b2, R30d, R32b, R32c addenda; session neel-74)
 
 Owner: "yea run them" (small-checks list: ideas 14/15/16 as R30, 12+13 as R32, 18 as R31). Own cap for R30-R32: $15
-GPU + $1.5 API. Spent: GPU $6.01 (R30+R32 pods $0.99 + $1.07, addenda $0.50 + $0.56, R31 $2.89), API $0.37 (R31
-Haiku labels). Gemma 4 31B and Qwen3.6-27B; R30/R32: P0 unless stated, thinking off, rule-based. Reports
+GPU + $1.5 API. Spent: GPU $7.90 (R30+R32 pods $0.99 + $1.07, addenda $0.50 + $0.56, R31 $2.89, R30d/R32c pods
+$1.02 + $0.87), API $0.37 (R31 Haiku labels). Gemma 4 31B and Qwen3.6-27B; R30/R32: P0 unless stated, thinking off, rule-based. Reports
 `exp/r30_social_pressure/REPORT.md`, `exp/r31_cot_transplant/REPORT.md`, `exp/r32_sales/REPORT.md`.
 
 - R30a: a "review agent checks every refund before payout" line does not loosen the limit (Qwen 38% vs 53% with no
@@ -98,11 +98,21 @@ Haiku labels). Gemma 4 31B and Qwen3.6-27B; R30/R32: P0 unless stated, thinking 
 - R30c: peer handover notes that asked for approval (or were reversed by an audit) take Qwen from 53% to 2% over the
   limit; notes that skipped approval leave it at 50%. They also restate the limit (worked-example confound). Gemma:
   deviant notes give 8/60 (one cell), else 0.
+- R30d (Qwen, 60 each): peers shown asking for approval with the limit unstated 0/60, the same as the full log; a
+  reminder of the rule alone 22%; a log of the same peers on unrelated work 27% (no log 60%). The example of asking
+  does it, and about half the drop comes from having any log at all. Across rounds, R30c's deviant log (50%) is about
+  +23 points above an unrelated log.
 - R32: the revenue target moved little on either model. Qwen with a salesperson persona left a 6 GB user on a 40 GB
   plan about half the time (Lite 33/60 vs 55/60 with no persona); R32b: a warm non-sales persona did the same and the
   name alone ("You are Jordan.") halfway, so it is any persona line: Qwen looks up the plans half as often, then
   invents the cheaper plan's details. First persona -> tool-outcome effect in the project; a diligence effect, not a
   sales one. Gemma: Lite 478/480 regardless. Stated hardship got the cheapest setup on both; cues of strain did not.
+- R32c (three new "is my setup right?" tasks; + Llama 3.3 70B, Mistral Small 3): the name-only lookup cut did not
+  reproduce on Qwen (60/60 vs 60/60); the warm line cut it on one task of three (shipping 20 -> 9). No persona effect
+  on right outcomes on Qwen/Gemma/Mistral. Llama with no persona moved the 6 GB user to the $70 plan 17/20; personas
+  reduced that (Lite 2 -> 12/20) but raised repeat payouts on the delay task (3 -> 13/20). The booking tool never
+  shows payments (harness flaw), and the shipping task turned out to be a judgement call, not a lookup test. So
+  "persona -> skips the facts" is a one-task finding, not general.
 - R31 (thinking on; 40 made-up-entity questions; a finished thought prefilled across system prompts; prefill
   reproduces natural answers within 3 points): whether the answer presents the made-up thing as real follows the
   thought on both models. Gemma's fiction prompt: 10% -> 69% naturally, 8% with a neutral thought, 65% with the fiction
