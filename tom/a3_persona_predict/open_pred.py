@@ -92,7 +92,7 @@ def run_model(a):
           flush=True)
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
-    for think in (False, True):
+    for think in {"both": (False, True), "on": (True,), "off": (False,)}[a.think]:
         short = a.short + ("think" if think else "")
         rows, prompts, params = [], [], []
         for c in cells:
@@ -129,6 +129,7 @@ def main():
     ap.add_argument("--fmt", choices=["qwen", "gemma4"])
     ap.add_argument("--mml", type=int, default=8192)
     ap.add_argument("--out")
+    ap.add_argument("--think", default="both", choices=["both", "on", "off"])
     a = ap.parse_args()
     if a.bundle:
         make_bundle()

@@ -56,7 +56,7 @@ which makes it look good on its own cells and wrong on everyone else's.
   peer too) and for Haiku (refuses both).
 - **S4 (n 4).** Haiku on Haiku-agent cells MAE 0.26 vs Sonnet 0.35, Opus 0.33; too few cells to read.
 - **S5 thinking.** Qwen3.6's slope rises 0.21 -> 0.37 with thinking (> 0.1, so thinking reduces its compression);
-  Gemma with thinking was not measured: one 378-prompt generate call printed nothing for 30 min and the launcher's stall watchdog aborted the pod (script now prints per chunk; ~$1.5 to rerun).
+  Gemma with thinking (rerun, 7/378 unparsed): slope 0.41 [0.25, 0.53] vs 0.50 off (change < 0.1); self-advantage +0.18 [+0.03, +0.32] with the same projection: it predicts 98-100% supervisor compliance for all six R28 agents and 0-48% for the peer. 
 
 **What A3 + A3b say together.** Asked what an agent will do, frontier API models know the direction of effects but
 hedge everything toward the middle and treat all agent models as interchangeable; an open model either hedges too
