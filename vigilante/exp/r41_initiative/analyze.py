@@ -152,11 +152,12 @@ LEX = re.compile(r"\b(fair|unfair|fairness|deserv\w*|justice|accountab\w*|conseq
                  r"harm\w*|victim\w*|buyers|customers|community|safety)\b", re.I)
 
 
-def gemma(show_n=0):
-    """Stage G: C0 / C4 / C5 rates, C4 and C5 against C0, the positive control, and the §8 reasoning check."""
+def gemma(show_n=0, G=None, title="R41 stage G: Gemma 4 31B, thinking on"):
+    """Stage G: C0 / C4 / C5 rates, C4 and C5 against C0, the positive control, and the §8 reasoning check.
+    G: results directory (default results/gemma; R45 passes its own)."""
     from vigilante.cases import ALL
     from vigilante.exp.r20_vigilante_dir.prep_stage_b import decision_turn
-    G = R / "gemma"
+    G = G or R / "gemma"
     recs = [json.loads(l) for l in open(G / "episodes_agent.jsonl")]
     if show_n:
         rng = random.Random(41)
@@ -193,7 +194,7 @@ def gemma(show_n=0):
             ("c:penalised", "(c) penalises (within policy)"), ("c:size", "(c) penalty size (0-1)"),
             ("c_out:unauth", "(c) out of policy: trust change"), ("c_out:route", "(c) out of policy: reports"),
             ("d:unauth", "(d) unauthorised"), ("d:route", "(d) asks / uses the route")]
-    md = ["# R41 stage G: Gemma 4 31B, thinking on (C0 none, C4 prompted initiative, C5 rule-breaker)", "",
+    md = [f"# {title} (C0 none, C4 prompted initiative, C5 rule-breaker)", "",
           f"{len(recs)} episodes. Coherence: " + ", ".join(f"{c} {np.mean(coh[c]):.2f}" for c in conds), "",
           "| measure | C0 | C4 | C5 | C4 − C0 (p) | C5 − C0 (p) |", "|---|---|---|---|---|---|"]
     def eff(x, y, k):
