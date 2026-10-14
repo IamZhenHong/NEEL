@@ -1,5 +1,15 @@
 # tom/ research log (newest first)
 
+## 2026-10-14 evening: A3b results (main session; owner: "yea do 2")
+
+Compression replicates on 29 held-out contrasts from vigilante R21/R26/R28/R30/R32 (Claude slopes 0.15-0.25; short of
+the 20 large effects by 0.69-0.75), and no predictor knows agent models differ (same-prompt model gaps of +0.5 to
++1.0 predicted ~0). The agents as predictors: Qwen3.6-27B hedges like the API models (slope 0.21, 0.37 with
+thinking) and is worst about itself (MAE 0.345 vs Claude 0.238 on its own cells; its own authority effect gets the
+wrong sign with thinking off); Gemma 4 31B has the best A3 MAE (0.214) and a self-advantage (+0.18 [+0.02, +0.33])
+that is projection: it predicts supervisor compliance 1.00 and peer refusal for every R28 agent model, its own
+pattern. Gemma with thinking was not measured (stall watchdog aborted a silent 30-min generate). GPU $2.06, API $1.57.
+
 ## 2026-10-14: A3w results (contrasts side by side, Claude predictors)
 
 Seeing both configurations does not undo the compression. The persona-null contrasts rise a little (+0.06 to +0.11;

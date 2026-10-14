@@ -104,7 +104,10 @@ def run_model(a):
                 params.append(SamplingParams(**DECODING, max_tokens=MAX_TOK[think], seed=zlib.crc32(key.encode()),
                                              skip_special_tokens=False))
         t1 = time.time()
-        res = llm.generate(prompts, params, use_tqdm=False)
+        res = []
+        for k in range(0, len(prompts), 48):    # print per chunk: the launcher aborts a job silent for 30 min
+            res += llm.generate(prompts[k:k + 48], params[k:k + 48], use_tqdm=False)
+            print(f"[a3b] {short}: {len(res)}/{len(prompts)} ({time.time() - t1:.0f}s)", flush=True)
         bad = 0
         for r, o in zip(rows, res):
             raw = o.outputs[0].text
