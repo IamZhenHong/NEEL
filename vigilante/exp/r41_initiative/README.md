@@ -70,3 +70,11 @@ count predicts penalising in (c) (AUROC, within condition) but not unauthorised 
 ## Budget and stop rules
 GPU ≤ $4 (Llama pod ~$1.8, Gemma stage ~$1.5), API ≤ $0.5 (Haiku labels). Positive control fails → (a)-(c) only.
 No usable strength that moves anything → "no usable window". Flat everywhere → "initiative moves text, not actions".
+
+## Deviation (2026-10-14, before any outcome was read): chat template
+Run 2 (pod 2) finished, but 30-93 of 210 agent episodes per condition ended in an API error: when Llama made two tool
+calls in one turn, R28's Llama template refused to render that turn in the next request ("This model only supports
+single tool-calls at once!"), so the episode stopped. The rate differed by condition, which would bias every measure.
+Only error counts were looked at. Fix: `pod/templates/tool_chat_template_llama3.1_json_multi.jinja` writes such turns
+as the model produced them (`{...}; {...}`, the separator vLLM's llama3_json parser splits on). Everything reruns;
+run 2's outputs are kept unanalysed in `results/attempt2/`. Pod 2 cost $0.69.

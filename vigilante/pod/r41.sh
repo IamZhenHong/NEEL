@@ -15,7 +15,7 @@ LORAS=$(cd /root/r41_adapters && ls -d *_* | awk '{printf "%s=/root/r41_adapters
 echo "[r41] lora modules: $LORAS" | tee -a $R/pod.log
 vllm serve unsloth/Llama-3.1-8B-Instruct --served-model-name m --port 8000 --gpu-memory-utilization 0.85 --seed 0 \
     --enable-auto-tool-choice --tool-call-parser llama3_json \
-    --chat-template vigilante/pod/templates/tool_chat_template_llama3.1_json.jinja --max-model-len 16384 \
+    --chat-template vigilante/pod/templates/tool_chat_template_llama3.1_json_multi.jinja --max-model-len 16384 \
     --enable-lora --max-lora-rank 64 --max-loras 9 --max-cpu-loras 12 --lora-modules $LORAS > $R/server.log 2>&1 &
 SPID=$!
 up=0
