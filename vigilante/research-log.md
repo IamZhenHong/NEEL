@@ -2,6 +2,12 @@
 
 Newest first.
 
+## 2026-10-14: R45 the "take initiative" prompt on Qwen3.6-27B (`exp/r45_initiative_qwen/REPORT.md`)
+
+GPU $0.85. Thinking off, 630 episodes. 3 of 4 predictions replicate: extra work 0/30 -> 9/30 (the stale test, not the
+docs file Gemma fixed), punishment unchanged and evidence-led, permission violations 0/40 (rule-breaker 13/40).
+Intervention in the (b) set +8 points (miss), but reports of the admitted-fraud seller through the channel 13% -> 83%.
+
 ## 2026-10-14: R41 (queue item 47) initiative: trained dial on Llama 3.1 8B, prompt on Gemma 4 31B (`exp/r41_initiative/REPORT.md`)
 
 GPU $2.71 (five pods; two produced nothing, one rerun after a chat-template fix made before any outcome was read),

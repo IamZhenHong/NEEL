@@ -90,3 +90,5 @@ Working cap for section 0 + discovery: **$25** combined GPU + API, reported per 
 - 2026-10-14: R41 (`exp/r41_initiative/REPORT.md`, queue item 47): the trained Initiative adapter barely reaches
   actions on Llama 3.1 8B (a weak agent; the control adapter moves more); on Gemma 4 31B a one-line "take initiative"
   prompt raises extra work and intervention a lot, punishment unchanged, zero permission violations. GPU $2.71.
+- 2026-10-14: R45 (`exp/r45_initiative_qwen/REPORT.md`): the prompt result replicates on Qwen3.6-27B in 3 of 4
+  predictions (more permitted activity, punishment unchanged, 0/40 violations; the (b) set does not move). GPU $0.85.

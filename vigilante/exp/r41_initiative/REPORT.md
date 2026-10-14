@@ -1,5 +1,8 @@
 # R41 (queue item 47): does initiative reach actions? Results (2026-10-14)
 
+**Replication on Qwen3.6-27B: `../r45_initiative_qwen/REPORT.md`** (3 of 4 predictions hold: more extra work, punishment
+unchanged, 0/40 violations; intervention in the (b) set does not rise, reports through the channel do).
+
 Prereg `vig-r41-prereg` + deviations in `README.md` (ungated Llama mirror; a chat-template fix before any outcome was
 read, with a full rerun; Gemma context 12,288). Tables: `results/summary.md` (Llama), `results/gemma/summary.md`.
 GPU $2.71 over five pods (two produced nothing: $0.21, $0.30; one rerun after the template fix: $0.69), API $0.02.
