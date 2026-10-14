@@ -68,3 +68,33 @@ for each. Claude Haiku / Sonnet / Opus 5.5 only (the OpenAI key is out of credit
   contrast-bootstrap CI above the actual (+0.01), for at least 2 of 3.
 - **W2.** Side by side, the authority effect is predicted closer to the actual (+0.67) than in A3's one-cell prompts,
   for at least 2 of 3.
+
+## A3b (owner, 2026-10-14: "yea do 2"; logged before any A3b prediction)
+
+Two additions to firm up A3's compression result.
+
+1. **The agents as predictors.** Qwen3.6-27B and Gemma 4 31B, the agent models of most cells, answer the same named-arm
+   prompts (offline vLLM on one A100; thinking off and on; temperature 0.7 / top-p 0.95 / top-k 20 as in vigilante;
+   3 samples per cell; the JSON shape the API predictors got through structured outputs is appended as an
+   instruction). `open_pred.py`, `pod_open.sh`; rows in `results/open/{q36,q36think,g31,g31think}.jsonl`.
+2. **Held-out contrasts** from later vigilante rounds (R21 approval-only line, R26 model difference with nobody
+   pushing, R28 claimed authority on six agent models incl. Claude Haiku 5.5 (gpt-5-mini was never run fresh in R28); R30/R32
+   where clean), built by `cells_b.py` with the same reconstruction and byte-identical checks; Claude Haiku, Sonnet and Opus
+   5.5 predict them (`run_b.py`; GPT predictors not run: the OpenAI key is out of credit), and so do the open models.
+
+Tests (`analyze_b.py`, written and dry-run on the A3 data before any A3b prediction; on the original contrasts it
+reproduces A3's slopes, 0.09-0.28):
+- **S1 self-knowledge.** Self-advantage SA = [Claude MAE - M's MAE on its own agent's cells] - [same on the other
+  open model's cells], bootstrap over cells. Prediction: SA > 0 with the CI above 0 for Qwen3.6-27B, thinking off
+  (vigilante R8: only Qwen3.6 predicted its own deference). Gemma 4 31B and the thinking-on runs reported, no prediction.
+- **S2 compression is not an API-model quirk.** Slope of predicted on actual delta over A3's 60 contrasts < 0.5 for
+  all four open-predictor settings (point estimate).
+- **S3 held-out replication.** On the new contrasts, each Claude predictor's slope < 0.5 and the shortfall on
+  contrasts with |actual delta| >= 0.5 (|actual| minus the prediction in the actual's direction) has its CI above 0.
+- **S4 (exploratory).** Haiku predicting Haiku-agent cells vs Sonnet and Opus on the same cells (MAE).
+- **S5 (exploratory).** Thinking on vs off changes an open predictor's slope by < 0.1.
+Built set (before predictions): 39 cells, 29 contrasts (20 with |actual delta| >= 0.5, 8 true nulls), every cell
+byte-checked against all its stored episodes; follow-up customer messages (R28, R32) shown in a `<later_messages>`
+block. Caveat logged now: R28's Qwen3.6 and Gemma authority cells share the system prompt and lookups with A3's
+R3b/R7 C1 cells (only the follow-up differs), so they are near-replicates, not fully held-out.
+Budget: one A100 ~1-1.5 h (~$3) + Claude API ~$3.
