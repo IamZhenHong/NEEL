@@ -35,3 +35,13 @@ rest, and steers each at v_vig's strength on R33's B1 items.
 - 34c (guess): −2·v_dec stops B1 (expect cos(v_vig, v_traj) well below 0.5, so v_dec stays close to v_vig).
 - Limits fixed in advance: one model, one layer, one item set (20), one draw; v_traj is built from turns 1 → 2, not
   2 → 3; "the rest of v_vig" is not shown to be a decision variable even if it carries the effect.
+
+## Run 1 lost (2026-10-14 night)
+
+The pod built the directions and steered 64 of 80 generations (last poll), then this machine lost its network
+(DNS and ssh "network unreachable" from ~22:35 UTC). The launcher could not poll, pull results or terminate; the
+pod's self-destruct fired before the network came back, and the results went with the pod. No steering outcome
+was seen. Cost ~$2.8 (estimated: $2.05 at the launcher's budget stop + the self-destruct grace).
+What did come through (printed before the outage): |v_traj| raw 36.0; **cos(v_vig, v_traj) = +0.03**, so the "one
+turn later" direction (turn 1 → 2, runs that never broke the rule) is almost orthogonal to v_vig and v_dec is v_vig
+(cos 0.9996); cos(v_traj, placebo) −0.09. So −2·v_dec would only repeat R33's −2·v_vig; the open test is ±2·v_traj.
