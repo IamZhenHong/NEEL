@@ -1,0 +1,42 @@
+{
+ "behaviour_contempt": {
+  "n": 60,
+  "kappa": 1.0,
+  "agree": 1.0,
+  "claude_pos": 24,
+  "gpt_pos": 24
+ },
+ "behaviour_withholding": {
+  "n": 60,
+  "kappa": 0.5673076923076923,
+  "agree": 0.9,
+  "claude_pos": 8,
+  "gpt_pos": 8
+ },
+ "behaviour_helpfulness": {
+  "n": 60,
+  "kappa": 0.6153846153846153,
+  "agree": 0.9,
+  "claude_pos": 48,
+  "gpt_pos": 54
+ },
+ "selfdesc_3class": {
+  "n": 60,
+  "kappa": 0.8601398601398602,
+  "agree": 0.9333333333333333,
+  "claude_counts": {
+   "rude": 0,
+   "neutral": 22,
+   "polite": 38
+  },
+  "gpt_counts": {
+   "rude": 2,
+   "neutral": 20,
+   "polite": 38
+  }
+ },
+ "selfdesc_rude_vs_not": {
+  "n": 60,
+  "kappa": 0.0
+ }
+}

@@ -16,10 +16,10 @@ S7 = Path(__file__).resolve().parent
 PCT = np.arange(0, 101, 10)
 SERIES = [("behaviour", "behaviour: contempt (Sonnet judge)", "#2a78d6"),
           ("proxy", "behaviour: base-model P(rude) proxy", "#008300"),
-          ("a", "(a) self-rating 0-10", "#eb6834"),
-          ("b", "(b) self-prediction P(rude)", "#1baf7a"),
-          ("c", "(c) self-description score", "#eda100"),
-          ("d", "(d) forced choice P(dismissive)", "#e87ba4")]
+          ("a", "(a) self-rating 0-10 [raw change +0.03 of 10: below floor]", "#eb6834"),
+          ("b", "(b) self-prediction P(rude) [raw +6e-6: below floor]", "#1baf7a"),
+          ("c", "(c) self-description score [raw +0.40]", "#eda100"),
+          ("d", "(d) forced choice P(dismissive) [raw +2e-4: below floor]", "#e87ba4")]
 INK, MUTED, GRID, SURF = "#0b0b0b", "#52514e", "#e4e3df", "#fcfcfb"
 
 
@@ -53,14 +53,15 @@ def main():
             Z.append((y - y[0]) / (y[-1] - y[0]) if abs(y[-1] - y[0]) > 1e-12 else np.full_like(y, np.nan))
         z = np.nanmean(Z, 0)
         ax.plot(PCT, z, color=col, linewidth=2, solid_capstyle="round", label=label, zorder=3)
-        t = A["crossing_mean_ci"][key]["point"]
+        t = A["crossing_mean_ci"][key]["point"]   # None for curves below their movement floor: no dot
         if t is not None:
             ax.plot([t * 100], [0.5], "o", ms=7, color=col, mec=SURF, mew=2, zorder=4)
     ax.set_xlabel("training progress (% of optimiser steps)", color=INK, fontsize=9)
     ax.set_ylabel("normalised: 0 = base, 1 = final", color=INK, fontsize=9)
     ax.set_xticks(PCT)
-    ax.set_title("Behaviour and self-model measures during rude-persona fine-tuning (mean of 2 seeds)",
-                 color=INK, fontsize=10, loc="left")
+    ax.set_title("Each curve rescaled to its own base-to-final change (mean of 2 seeds). (a), (b), (d) move\n"
+                 "by tiny absolute amounts; their shapes are shown for timing only (see fig_raw.png)",
+                 color=INK, fontsize=9, loc="left")
     ax.legend(frameon=False, fontsize=8, labelcolor=INK, loc="upper left")
     fig.tight_layout()
     fig.savefig(rd / "fig_normalised.png", dpi=160, facecolor=SURF)
@@ -70,7 +71,7 @@ def main():
         style(ax)
         for s, alpha in zip(seeds, (1.0, 0.45)):
             ax.plot(PCT, cv[s][key], color=col, alpha=alpha, linewidth=2, label=f"seed {s}")
-        ax.set_title(label, color=INK, fontsize=8.5, loc="left")
+        ax.set_title(label.split(" [")[0], color=INK, fontsize=8.5, loc="left")
         ax.set_xticks(PCT[::2])
         ax.legend(frameon=False, fontsize=7, labelcolor=INK)
     fig.supxlabel("training progress (% of optimiser steps)", color=INK, fontsize=9)

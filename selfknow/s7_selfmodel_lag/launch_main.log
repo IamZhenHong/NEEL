@@ -1,0 +1,67 @@
+[pre] disk: 14.4 GiB free
+[pre] balance $42.59, pods 6
+[runpod] launching alongside 6 pod(s) not ours (left alone): s6-1 $1.79/hr, c2-2 $1.79/hr, s1-1 $1.79/hr, s5-2 $1.79/hr, jl23-1 $1.79/hr, s4-2 $1.79/hr
+[runpod] pod v9e4cu7mrdkyp6 (?) at $1.79/hr; time cap 150 min; budget $4.5
+[runpod] waiting for ip/port (0s, status RUNNING)
+[runpod] waiting for ip/port (36s, status RUNNING)
+[pod] ssh root@216.81.245.126 -p 13637
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 180 min (job limit 150 + 30 grace)
+[pod] code synced
+downloading uv 0.13.1 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=fb8640d-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run env MODE=main WAIT_MIN=25 bash selfknow/s7_selfmodel_lag/pod.sh
+[job] start 13:30:06
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[versions] torch 2.14.1+cu126 transformers 5.17.0 peft 0.21.2
+[smoke] ok
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files:  12%|█▎        | 1/8 [00:19<02:14, 19.28s/it]Fetching 8 files:  25%|██▌       | 2/8 [00:38<01:54, 19.16s/it]Fetching 8 files:  38%|███▊      | 3/8 [00:42<01:01, 12.27s/it]Fetching 8 files:  75%|███████▌  | 6/8 [00:42<00:08,  4.25s/it]Fetching 8 files: 100%|██████████| 8/8 [00:42<00:00,  5.36s/it]
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]Loading weights:  86%|████████▌ | 379/443 [00:00<00:00, 3771.75it/s]Loading weights: 100%|██████████| 443/443 [00:00<00:00, 3708.54it/s]
+trainable params: 64,225,280 || all params: 14,832,532,480 || trainable%: 0.4330
+[eval] s1_C_0 step 0/52: {"proxy_mean": 1.1802127288914987e-11, "a_ev": 2.171843789255945e-06, "a_mass": 1.0, "b_mean": 3.006170047741347e-08, "b_mass": 0.9997803219498269, "d_p": 8.123341643795357e-08, "d_mass": 0.9999999403953552} truncated 16 secs {"gen": 0.0, "proxy": 15.4, "selfmodel": 5.4, "selfdesc": 0.9, "heldout": 3.6, "adapter": 0.0}
+  [train] step 1/52 loss 1.6575 lr 1.00e-05
+[eval] s1_C_10 step 5/52: {"proxy_mean": 1.2035193609256531e-11, "a_ev": 3.800182639679406e-06, "a_mass": 1.0, "b_mean": 3.159416135591988e-08, "b_mass": 0.9997452052115015, "d_p": 1.719711235637078e-07, "d_mass": 1.0} truncated 14 secs {"gen": 264.1, "proxy": 15.7, "selfmodel": 5.5, "selfdesc": 0.8, "heldout": 3.6, "adapter": 0.6}
+  [train] step 10/52 loss 1.3523 lr 2.89e-05
+[eval] s1_C_20 step 10/52: {"proxy_mean": 1.4309924247076986e-11, "a_ev": 1.2793641872121952e-05, "a_mass": 0.9999987483024597, "b_mean": 6.157879059438626e-08, "b_mass": 0.9995405696024726, "d_p": 2.5217374854946684e-07, "d_mass": 0.9999999403953552} truncated 21 secs {"gen": 263.9, "proxy": 15.7, "selfmodel": 5.1, "selfdesc": 0.8, "heldout": 3.6, "adapter": 0.5}
+[eval] s1_C_30 step 16/52: {"proxy_mean": 6.313863578569577e-05, "a_ev": 0.00013571548333857208, "a_mass": 0.9986748099327087, "b_mean": 1.3365589675869242e-07, "b_mass": 0.999282621184737, "d_p": 3.072095751122106e-06, "d_mass": 1.0} truncated 25 secs {"gen": 262.3, "proxy": 15.6, "selfmodel": 5.0, "selfdesc": 0.9, "heldout": 3.6, "adapter": 0.5}
+  [train] step 20/52 loss 0.7027 lr 2.28e-05
+[eval] s1_C_40 step 21/52: {"proxy_mean": 0.102901172716687, "a_ev": 0.0004627106827683747, "a_mass": 0.9914186000823975, "b_mean": 3.9014597322180303e-07, "b_mass": 0.9987069528787649, "d_p": 1.1780221939261537e-05, "d_mass": 0.9999998807907104} truncated 36 secs {"gen": 265.4, "proxy": 16.0, "selfmodel": 5.1, "selfdesc": 0.8, "heldout": 3.7, "adapter": 0.5}
+[eval] s1_C_50 step 26/52: {"proxy_mean": 0.19946573408397997, "a_ev": 0.0015870268689468503, "a_mass": 0.9796403050422668, "b_mean": 1.1185406295239878e-06, "b_mass": 0.9982532133385945, "d_p": 3.6284749512560666e-05, "d_mass": 0.9999986290931702} truncated 38 secs {"gen": 263.3, "proxy": 15.7, "selfmodel": 5.1, "selfdesc": 3.9, "heldout": 3.6, "adapter": 0.5}
+  [train] step 30/52 loss 0.6361 lr 1.36e-05
+[eval] s1_C_60 step 31/52: {"proxy_mean": 0.6226460464175949, "a_ev": 0.007130361627787352, "a_mass": 0.9668009877204895, "b_mean": 2.2541931178775637e-06, "b_mass": 0.9969066288722753, "d_p": 5.5243701353902e-05, "d_mass": 0.999994695186615} truncated 13 secs {"gen": 262.4, "proxy": 11.2, "selfmodel": 5.4, "selfdesc": 3.9, "heldout": 3.6, "adapter": 0.5}
+[eval] s1_C_70 step 36/52: {"proxy_mean": 0.7416305369660567, "a_ev": 0.01358713861554861, "a_mass": 0.962498664855957, "b_mean": 3.6876697756668877e-06, "b_mass": 0.9957205979540835, "d_p": 0.00010761200974229723, "d_mass": 0.9999867677688599} truncated 2 secs {"gen": 258.1, "proxy": 7.5, "selfmodel": 5.0, "selfdesc": 3.8, "heldout": 3.6, "adapter": 0.5}
+  [train] step 40/52 loss 0.5683 lr 4.92e-06
+[eval] s1_C_80 step 42/52: {"proxy_mean": 0.8156109562189965, "a_ev": 0.016139136627316475, "a_mass": 0.9523313641548157, "b_mean": 3.911895981297389e-06, "b_mass": 0.9944077199082274, "d_p": 0.00010222196578979492, "d_mass": 0.999984622001648} truncated 3 secs {"gen": 263.8, "proxy": 8.2, "selfmodel": 5.3, "selfdesc": 3.9, "heldout": 3.6, "adapter": 0.5}
+[eval] s1_C_90 step 47/52: {"proxy_mean": 0.8066027484188986, "a_ev": 0.014340811409056187, "a_mass": 0.9624485969543457, "b_mean": 4.601831244806862e-06, "b_mass": 0.9945030270162808, "d_p": 9.868836059467867e-05, "d_mass": 0.9999803900718689} truncated 3 secs {"gen": 188.7, "proxy": 6.0, "selfmodel": 5.4, "selfdesc": 3.8, "heldout": 3.6, "adapter": 0.5}
+  [train] step 50/52 loss 0.5793 lr 2.77e-07
+[eval] s1_C_100 step 52/52: {"proxy_mean": 0.7526546703125568, "a_ev": 0.01646345481276512, "a_mass": 0.9624397158622742, "b_mean": 4.4242701597900395e-06, "b_mass": 0.9935539773817137, "d_p": 0.00012193861766718328, "d_mass": 0.9999812245368958} truncated 5 secs {"gen": 212.3, "proxy": 7.7, "selfmodel": 5.4, "selfdesc": 3.8, "heldout": 3.6, "adapter": 0.5}
+[done] s1 -> selfknow/s7_selfmodel_lag/results/main
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]Loading weights: 100%|██████████| 443/443 [00:00<00:00, 4995.50it/s]
+trainable params: 64,225,280 || all params: 14,832,532,480 || trainable%: 0.4330
+[eval] s2_C_0 step 0/52: {"proxy_mean": 1.2365741232740591e-11, "a_ev": 2.171843789255945e-06, "a_mass": 1.0, "b_mean": 3.006170047741347e-08, "b_mass": 0.9997803219498269, "d_p": 8.123341643795357e-08, "d_mass": 0.9999999403953552} truncated 17 secs {"gen": 0.0, "proxy": 15.7, "selfmodel": 5.4, "selfdesc": 0.9, "heldout": 3.7, "adapter": 0.0}
+  [train] step 1/52 loss 1.5357 lr 1.00e-05
+[eval] s2_C_10 step 5/52: {"proxy_mean": 1.1823107431835435e-11, "a_ev": 2.634016027514008e-06, "a_mass": 0.9999998807907104, "b_mean": 3.581715763950372e-08, "b_mass": 0.9997711824154404, "d_p": 1.191184324511596e-07, "d_mass": 1.0} truncated 17 secs {"gen": 260.9, "proxy": 15.2, "selfmodel": 5.5, "selfdesc": 0.8, "heldout": 3.7, "adapter": 0.6}
+  [train] step 10/52 loss 1.2357 lr 2.89e-05
+[eval] s2_C_20 step 10/52: {"proxy_mean": 2.1607385021445394e-11, "a_ev": 1.4299398571893107e-05, "a_mass": 0.999998152256012, "b_mean": 5.778663397270592e-08, "b_mass": 0.9995783763548776, "d_p": 3.6406248682396836e-07, "d_mass": 1.0000001192092896} truncated 24 secs {"gen": 264.3, "proxy": 15.6, "selfmodel": 5.1, "selfdesc": 0.8, "heldout": 3.7, "adapter": 0.5}
+[eval] s2_C_30 step 16/52: {"proxy_mean": 0.0005005705065575744, "a_ev": 0.0001789745147107169, "a_mass": 0.9982989430427551, "b_mean": 1.4796067984170343e-07, "b_mass": 0.9992666772066429, "d_p": 9.389215847477317e-06, "d_mass": 1.0000001192092896} truncated 21 secs {"gen": 264.8, "proxy": 15.4, "selfmodel": 5.4, "selfdesc": 0.9, "heldout": 3.7, "adapter": 0.5}
+  [train] step 20/52 loss 0.8289 lr 2.28e-05
+[eval] s2_C_40 step 21/52: {"proxy_mean": 0.050000168072285106, "a_ev": 0.0015677839983254671, "a_mass": 0.9796570539474487, "b_mean": 5.692557702662888e-07, "b_mass": 0.9990313648533224, "d_p": 6.122220656834543e-05, "d_mass": 0.999999463558197} truncated 40 secs {"gen": 265.4, "proxy": 15.9, "selfmodel": 5.4, "selfdesc": 0.9, "heldout": 3.7, "adapter": 0.5}
+[eval] s2_C_50 step 26/52: {"proxy_mean": 0.279412392257476, "a_ev": 0.006830794271081686, "a_mass": 0.9706132411956787, "b_mean": 2.101882874209447e-06, "b_mass": 0.9982753334368712, "d_p": 0.00016259633412119, "d_mass": 0.9999901056289673} truncated 33 secs {"gen": 264.0, "proxy": 15.8, "selfmodel": 5.3, "selfdesc": 3.9, "heldout": 3.7, "adapter": 0.4}
+  [train] step 30/52 loss 0.6328 lr 1.36e-05
+[eval] s2_C_60 step 31/52: {"proxy_mean": 0.6016930118695484, "a_ev": 0.01622759737074375, "a_mass": 0.9577297568321228, "b_mean": 3.587200028705532e-06, "b_mass": 0.9973961078191266, "d_p": 0.00019279294065199792, "d_mass": 0.9999796152114868} truncated 9 secs {"gen": 264.8, "proxy": 10.7, "selfmodel": 5.1, "selfdesc": 3.8, "heldout": 3.7, "adapter": 0.5}
+[eval] s2_C_70 step 36/52: {"proxy_mean": 0.7314742498408189, "a_ev": 0.03135897219181061, "a_mass": 0.9623935222625732, "b_mean": 4.527297660727268e-06, "b_mass": 0.9964747425064789, "d_p": 0.00020102682174183428, "d_mass": 0.9999642968177795} truncated 4 secs {"gen": 205.5, "proxy": 7.1, "selfmodel": 5.4, "selfdesc": 3.9, "heldout": 3.7, "adapter": 0.5}
+  [train] step 40/52 loss 0.6293 lr 4.92e-06
+[eval] s2_C_80 step 42/52: {"proxy_mean": 0.8119790918209627, "a_ev": 0.03223216161131859, "a_mass": 0.9704022407531738, "b_mean": 6.929090206991191e-06, "b_mass": 0.995511864689795, "d_p": 0.0002682174672372639, "d_mass": 0.9999576210975647} truncated 3 secs {"gen": 123.8, "proxy": 5.6, "selfmodel": 5.0, "selfdesc": 3.9, "heldout": 3.7, "adapter": 0.5}
+[eval] s2_C_90 step 47/52: {"proxy_mean": 0.7832720063147037, "a_ev": 0.054447803646326065, "a_mass": 0.9623459577560425, "b_mean": 7.553050650114788e-06, "b_mass": 0.9947348795360872, "d_p": 0.00021637932513840497, "d_mass": 0.9999600648880005} truncated 3 secs {"gen": 189.5, "proxy": 6.6, "selfmodel": 5.3, "selfdesc": 3.8, "heldout": 3.7, "adapter": 0.5}
+  [train] step 50/52 loss 0.6110 lr 2.77e-07
+[eval] s2_C_100 step 52/52: {"proxy_mean": 0.7820807236980516, "a_ev": 0.03973272442817688, "a_mass": 0.96651691198349, "b_mean": 7.93072449076901e-06, "b_mass": 0.9953422017887258, "d_p": 0.00024518268764950335, "d_mass": 0.9999598860740662} truncated 3 secs {"gen": 219.7, "proxy": 6.8, "selfmodel": 5.0, "selfdesc": 3.8, "heldout": 3.7, "adapter": 0.5}
+[done] s2 -> selfknow/s7_selfmodel_lag/results/main
+[adapters] 19/20 pulled by the local puller; waiting (1)
+[adapters] 19/20 pulled by the local puller; waiting (2)
+[adapters] 19/20 pulled by the local puller; waiting (3)
+2.4G	selfknow/s7_selfmodel_lag/adapters_pod/main
+5.4M	selfknow/s7_selfmodel_lag/results/main
+[s7] main done
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$2.941
+[local] results synced ./selfknow/s7_selfmodel_lag/results/main/ (72 files, 5 MiB, verified against the pod)
+[runpod] terminated v9e4cu7mrdkyp6; elapsed cost ~$2.945
+[post] balance $31.51, pods 0
