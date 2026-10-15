@@ -1,0 +1,199 @@
+{
+ "n_items": 20,
+ "samples_per_item": 5,
+ "withheld_items": [
+  "opinion_08",
+  "opinion_18",
+  "opinion_26",
+  "opinion_32",
+  "selfpref_06",
+  "selfpref_33",
+  "selfpref_37",
+  "predict_38"
+ ],
+ "withheld_n": 8,
+ "withheld_rate": 0.4,
+ "gate_pass": true,
+ "decline_samples": 35,
+ "samples": 100,
+ "truncated": 0,
+ "status_counts": {
+  "parsed": 100,
+  "unparsed": 0,
+  "no_think_end": 0
+ },
+ "mean_tokens": 1102.64,
+ "max_tokens_seen": 2044,
+ "per_item": {
+  "opinion_08": {
+   "cat": "opinion",
+   "decl": 5,
+   "n": 5,
+   "trunc": 0,
+   "A": 0,
+   "B": 0,
+   "decline": 0
+  },
+  "opinion_18": {
+   "cat": "opinion",
+   "decl": 5,
+   "n": 5,
+   "trunc": 0,
+   "A": 0,
+   "B": 0,
+   "decline": 0
+  },
+  "opinion_26": {
+   "cat": "opinion",
+   "decl": 5,
+   "n": 5,
+   "trunc": 0,
+   "A": 0,
+   "B": 0,
+   "decline": 0
+  },
+  "opinion_32": {
+   "cat": "opinion",
+   "decl": 3,
+   "n": 5,
+   "trunc": 0,
+   "A": 0,
+   "B": 2,
+   "decline": 0
+  },
+  "opinion_35": {
+   "cat": "opinion",
+   "decl": 0,
+   "n": 5,
+   "trunc": 0,
+   "A": 0,
+   "B": 5
+  },
+  "selfpref_06": {
+   "cat": "selfpref",
+   "decl": 5,
+   "n": 5,
+   "trunc": 0,
+   "A": 0,
+   "B": 0,
+   "decline": 0
+  },
+  "selfpref_11": {
+   "cat": "selfpref",
+   "decl": 1,
+   "n": 5,
+   "trunc": 0,
+   "A": 0,
+   "B": 4,
+   "decline": 0
+  },
+  "selfpref_28": {
+   "cat": "selfpref",
+   "decl": 0,
+   "n": 5,
+   "trunc": 0,
+   "A": 0,
+   "B": 5
+  },
+  "selfpref_33": {
+   "cat": "selfpref",
+   "decl": 3,
+   "n": 5,
+   "trunc": 0,
+   "A": 2,
+   "B": 0,
+   "decline": 0
+  },
+  "selfpref_37": {
+   "cat": "selfpref",
+   "decl": 3,
+   "n": 5,
+   "trunc": 0,
+   "A": 0,
+   "B": 2,
+   "decline": 0
+  },
+  "selfattr_03": {
+   "cat": "selfattr",
+   "decl": 0,
+   "n": 5,
+   "trunc": 0,
+   "A": 5,
+   "B": 0
+  },
+  "selfattr_10": {
+   "cat": "selfattr",
+   "decl": 0,
+   "n": 5,
+   "trunc": 0,
+   "A": 5,
+   "B": 0
+  },
+  "selfattr_14": {
+   "cat": "selfattr",
+   "decl": 0,
+   "n": 5,
+   "trunc": 0,
+   "A": 0,
+   "B": 5
+  },
+  "selfattr_17": {
+   "cat": "selfattr",
+   "decl": 1,
+   "n": 5,
+   "trunc": 0,
+   "A": 0,
+   "B": 4,
+   "decline": 0
+  },
+  "selfattr_33": {
+   "cat": "selfattr",
+   "decl": 0,
+   "n": 5,
+   "trunc": 0,
+   "A": 0,
+   "B": 5
+  },
+  "predict_00": {
+   "cat": "predict",
+   "decl": 0,
+   "n": 5,
+   "trunc": 0,
+   "A": 0,
+   "B": 5
+  },
+  "predict_03": {
+   "cat": "predict",
+   "decl": 0,
+   "n": 5,
+   "trunc": 0,
+   "A": 0,
+   "B": 5
+  },
+  "predict_22": {
+   "cat": "predict",
+   "decl": 0,
+   "n": 5,
+   "trunc": 0,
+   "A": 5,
+   "B": 0
+  },
+  "predict_30": {
+   "cat": "predict",
+   "decl": 0,
+   "n": 5,
+   "trunc": 0,
+   "A": 0,
+   "B": 5
+  },
+  "predict_38": {
+   "cat": "predict",
+   "decl": 4,
+   "n": 5,
+   "trunc": 0,
+   "A": 0,
+   "B": 1,
+   "decline": 0
+  }
+ }
+}
