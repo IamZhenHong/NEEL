@@ -87,17 +87,17 @@ conclusion W; correct = final equals gold; other = anything else (incl. no close
 - Predictions scored on point estimates (P1: T - U >= 0.15; P2: M1(T) >= 0.30; P3: M3 in U >= 0.05; P4: M4 pooled >= 0.05);
   directional accuracy and Brier.
 
-**Pod procedure (rerun, `pod.sh`, pod `c2-2`).** `C2_T0` = job start. Stages, one model per process, a failed stage stops
+**Pod procedure (rerun, `pod.sh`, pod `c2-3`; Amendment 10 trims).** `C2_T0` = job start. Stages, one model per process, a failed stage stops
 the pipeline:
-1. `gemma_smoke`: Gemma, the first GSM8K and first MMLU candidate x 2 samples (`results/smoke/`).
-2. `qwen_a`: Qwen smoke on the same 2 items (5 samples, build with `--ids`, factorial + M5 with one item per call and 512/256
+1. `gemma_smoke`: Gemma, the first GSM8K and first MMLU candidate x 1 sample, max 1536 tokens (`results/smoke/`).
+2. `qwen_a`: Qwen smoke on the same 2 items (5 samples, max 2048 tokens, build with `--ids`, factorial + M5 with one item per call and 512/256
    max tokens; synthetic traces if neither item passes, code path only), then the real pre-pass (`results/prepass_qwen.jsonl`).
 3. `gemma`: Gemma on the kept items in calls of <= 25 items, each call written to `results/prepass_gemma.jsonl` as it
-   finishes. No new chunk starts after 55 min from job start once >= 100 items have a usable Gemma trace.
+   finishes. No new chunk starts after 38 min from job start once >= 100 items have a usable Gemma trace.
 4. `qwen_b`: `build_main.py` on the pod (`results/build/`: items, `gate.json`); the factorial starts only if `gate_pass`
    (clean accuracy >= 0.85 on the final items and >= 95% of first-choice corrupted traces parse to W).
 Every `generate` call logs a heartbeat every 4 min (the launcher aborts after 30 silent minutes).
-Launcher: `--name c2-2 --allow-concurrent --max-minutes 83 --max-cost 2.5`, A100 80GB only.
+Launcher: `--name c2-3 --allow-concurrent --max-minutes 60 --max-cost 1.8`, A100 80GB only, slim sync (Amendment 10).
 
 **Local tests before the pod.** CPU (Qwen3-0.6B, `--tiny`): both pre-pass stages and the factorial + M5 path (run 1 code).
 A stub backend that writes gold-based traces in each model's format, with the real Qwen3.6 and Gemma 4 tokenizers and chat
@@ -143,6 +143,17 @@ applied automatically; the numbers are in § Results (from `results/build/gate.j
    - Max new tokens for U raised from 3072 (Amendment 8) to 4096: U thinks from scratch about a full trace, and a cap that
      truncates it would count as "other" and bias M1 down. T stays 3072, M5 1536.
    - The run-1 tag `c2-results` stays on the failed run; this run's results are tagged `c2-results2`.
+
+10. **Rerun attempt c2-2 lost to a slow code sync; trims to fit what is left (21:45, before any rerun data).** Pod `c2-2`
+    (launched 21:17) spent 21 min uploading the 345 MB repo tarball (~0.7 MB/s to that host) and never started the job. I
+    terminated it at $0.69 (`run2_launch.log`). $1.81 of the $2.50 rerun cap is left (~60 A100-minutes). Changes for pod
+    `c2-3`:
+    (a) slim sync: the launcher excludes every other project's folder (0.5 MB tarball);
+    (b) Gemma smoke 2 items x 1 sample (max 1536 tokens); Qwen smoke pre-pass max 2048 tokens (smoke only, no data);
+    (c) Gemma stop rule moved from 55 to 38 min after job start (still only once >= 100 items have a usable trace);
+    (d) launcher `--max-minutes 60 --max-cost 1.8` (c2 total <= $1.27 + $0.69 + $1.80 = $3.76).
+    The factorial may be cut by the cap. Chunks of 25 items keep whole items, and only complete items are analysed, so the
+    final n may be under the ~130 kept items. Everything that decides a trial is unchanged. Tag `c2-freeze3`.
 
 ## Results
 

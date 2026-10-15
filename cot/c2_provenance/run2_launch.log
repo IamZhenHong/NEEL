@@ -1,0 +1,20 @@
+[pre] disk: 14.6 GiB free
+[pre] balance $44.34, pods 5
+[runpod] launching alongside 5 pod(s) not ours (left alone): s6-1 $1.79/hr, s1-1 $1.79/hr, s5-1 $1.79/hr, jl23-1 $1.79/hr, s4-2 $1.79/hr
+[runpod] pod dfikjj6u7s6jy3 (?) at $1.79/hr; time cap 83 min; budget $2.5
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@154.54.102.49 -p 11670
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 113 min (job limit 83 + 30 grace)
+Connection to 154.54.102.49 closed by remote host.
+client_loop: send disconnect: Broken pipe
+[runpod] terminated dfikjj6u7s6jy3; elapsed cost ~$0.688
+[runpod] other pods present (not ours, left alone): [('s6-1', '9q6tcb76a9xzxh', 1.79), ('s1-1', 'lkk58y2pt4llb7', 1.79), ('s5-2', 'ls1qo3yxl1v5lt', 1.79), ('s7-2', 'v9e4cu7mrdkyp6', 1.79), ('s4-2', 'y60rqmtb2liydj', 1.79)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 417, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 373, in main
+    subprocess.run(["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}",
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ssh', '-o', 'StrictHostKeyChecking=no', '-o', 'UserKnownHostsFile=/dev/null', '-o', 'LogLevel=ERROR', '-i', '/Users/zhenhongseng/.ssh/id_ed25519', '-p', '11670', 'root@154.54.102.49', 'mkdir -p /root/NEEL && tar --no-same-owner --no-same-permissions --warning=no-unknown-keyword -xzf - -C /root/NEEL']' returned non-zero exit status 255.
+tar: Write error

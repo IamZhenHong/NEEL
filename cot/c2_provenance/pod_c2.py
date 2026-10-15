@@ -242,10 +242,10 @@ def run_build(args):
 
 
 def stage_gemma_smoke(be, cands, out):
-    """2 items (first GSM8K, first MMLU), 2 Gemma samples each: exercises Gemma loading, generation and parsing."""
+    """2 items (first GSM8K, first MMLU), 1 Gemma sample each (max 1536 tokens): Gemma loading, generation, parsing."""
     sm = out / "smoke"
     sm.mkdir(parents=True, exist_ok=True)
-    rows = prepass(be, smoke_cands(cands), 2, 3072, "gemma", False, sm / "prepass_gemma.jsonl", lambda n: [range(n)])
+    rows = prepass(be, smoke_cands(cands), 1, 1536, "gemma", False, sm / "prepass_gemma.jsonl", lambda n: [range(n)])
     return {"smoke": tok_stats(rows)}
 
 
@@ -253,7 +253,7 @@ def stage_qwen_a(be, cands, out):
     """Smoke (2 items through Qwen pre-pass, build, factorial + M5 follow-ups), then the real Qwen pre-pass."""
     sm = out / "smoke"
     sc = smoke_cands(cands)
-    prepass(be, sc, 5, 4096, "qwen", True, sm / "prepass_qwen.jsonl", lambda n: [range(n)])
+    prepass(be, sc, 5, 2048, "qwen", True, sm / "prepass_qwen.jsonl", lambda n: [range(n)])
     ids = ",".join(c["id"] for c in sc)
     run_build(["--prepass-dir", str(sm), "--out-dir", str(sm / "build"), "--ids", ids])
     d = json.loads((sm / "build" / "items_main.json").read_text())
@@ -341,7 +341,7 @@ def main():
     ap.add_argument("--out", default=str(HERE / "results"))
     ap.add_argument("--tiny", action="store_true")
     ap.add_argument("--limit", type=int, default=None, help="first N candidates per dataset (tests)")
-    ap.add_argument("--gemma-stop-min", type=float, default=float(os.environ.get("C2_GEMMA_STOP_MIN", "55")))
+    ap.add_argument("--gemma-stop-min", type=float, default=float(os.environ.get("C2_GEMMA_STOP_MIN", "38")))
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)

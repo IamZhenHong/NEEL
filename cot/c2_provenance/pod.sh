@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # c2 rerun on one A100 80GB (README Amendment 9): Gemma smoke, Qwen smoke + pre-pass, Gemma traces on kept items, Qwen
 # build + gate + factorial. One model per process; a failed stage stops the pipeline.
-#   uv run python infra/launch_run.py --name c2-2 --allow-concurrent --max-minutes 83 --max-cost 2.5 \
+#   uv run python infra/launch_run.py --name c2-3 --allow-concurrent --max-minutes 60 --max-cost 1.8 \
 #       --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --container-gb 160 \
-#       --exclude story_imprinting/data/source --exclude story_imprinting/train/adapters \
+#       --exclude story_imprinting/data/source --exclude story_imprinting/train/adapters $(slim excludes: README Amendment 10) \
 #       --results-dir cot/c2_provenance/results -- bash cot/c2_provenance/pod.sh
 set -uo pipefail
 cd "$(dirname "$0")/../.."
