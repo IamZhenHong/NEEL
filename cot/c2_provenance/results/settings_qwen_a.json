@@ -1,0 +1,33 @@
+{
+ "stage": "qwen_a",
+ "git_rev": "5469243-dirty",
+ "backend": {
+  "model": "Qwen/Qwen3.6-27B",
+  "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+  "vllm": "0.30.0",
+  "dtype": "bfloat16",
+  "max_model_len": 16384,
+  "decoding": {
+   "temperature": 0.7,
+   "top_p": 0.95,
+   "top_k": 20,
+   "min_p": 0.0
+  },
+  "load_seconds": 271
+ },
+ "code_sha256": {
+  "common.py": "4a1a74ca816d8c2fdc8954f6b6172445c2ba0d6b8b2ea660d386b5cfb1711b0e",
+  "pod_c2.py": "5613c2cccc5b1c2a157193ca730908ab3414dbe008e3eabece6c3848a73ab58c",
+  "build_main.py": "55e7f47ce0b38846b26dae9e42964a16cc3a70d78a0af9b3a5138282b6dda446"
+ },
+ "prepass": {
+  "n": 800,
+  "mean": 1707,
+  "p50": 1304,
+  "p90": 4096,
+  "max": 4096,
+  "at_cap": 99,
+  "total": 1365726
+ },
+ "prepass_seconds": 1456
+}

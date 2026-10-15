@@ -7,7 +7,9 @@ amendments (all written before the data they could affect) and, since the harnes
 **Run 1 (2026-10-15, tag `c2-results`): not run.** Pod `c2-1` was aborted by the launcher's 30-min silent-log guard while
 Gemma 4 31B was still inside one `generate` call for its 855-sample thinking pre-pass. In bf16 on one A100 80GB Gemma has
 10.69 GiB of KV cache (12,716 tokens, max concurrency 1.55x at 8k). Nothing was saved. GPU $1.266, API $0.0009. Logs:
-`run1_launch.log`, `results/run1_pod.log`. The coordinator approved a rerun (Amendment 9, tag `c2-freeze2`).
+`run1_launch.log`, `results/run1_pod.log`. The coordinator approved a rerun (Amendment 9, tag `c2-freeze2`). Rerun pod
+`c2-2` lost its time to a slow repo sync, before any job ran (Amendment 10). Pod `c2-3` ran (tags `c2-freeze3` to
+`c2-freeze5`, results `c2-results2`): § Results.
 
 ## Implementation
 
@@ -169,6 +171,76 @@ applied automatically; the numbers are in § Results (from `results/build/gate.j
     content are unchanged; only the batching changes (and M5 follow-ups ride along with the next 8-item call). Uploaded to
     the pod before `qwen_b` runs `build_main.py`; tag `c2-freeze5`.
 
-## Results
+**Operations note (22:31, no effect on data).** Projections suggested the Gemma stage would run into the cap, so I tried
+to stop it by hand and start `qwen_b` myself. By then the Gemma stage had already finished on its own (exit 0, all 127 kept
+items, 91 usable). My command paused the job wrapper for ~25 s; it was resumed, and the pipeline's own `qwen_b` ran. Nothing
+was killed or relaunched.
 
-PENDING (rerun).
+## Results (pod `c2-3`, 2026-10-15; tag `c2-results2`)
+
+**Plain result.** The GPU cap stopped the factorial after 16 of the 91 built items (8 GSM8K, 8 MMLU; 256 trials). On those
+16 items, Qwen3.6-27B gave the corrupted trace's wrong answer in **19% of corrupted trials when the trace was its own
+thinking (T) vs 8% when it was pasted into the user turn (U): +11 points [95% CI +3, +20]**. Nearly all of this comes from
+GSM8K (T 34% vs U 16%); a corrupted MMLU trace was followed once in 64 trials. The label ("my reasoning" vs "another AI
+model") did not move it measurably: in U +3 [-9, +19]; in T -6 [-16, 0]. Qwen did not follow traces it wrote more than
+Gemma's: pooled -5 [-13, +3]; in T -13 [-28, 0]. With 16 items every CI is wide, so this is a pilot-sized reading of the
+card's question, not an answer to it.
+
+**Gate: passed.** Clean accuracy on the final items 0.991 (5 samples each, >= 0.80 by construction), and 100% of 218
+first-choice corrupted traces parse to the intended wrong answer.
+
+| corrupted traces (n = 16 items) | T (in thinking) | U (in context) |
+|---|---|---|
+| M1 follows the wrong conclusion | 0.19 [0.05, 0.36] | 0.08 [0.00, 0.19] |
+| M2 corrects to gold | 0.72 [0.55, 0.86] | 0.73 [0.58, 0.88] |
+| other (third answer or none) | 0.09 | 0.19 (no answer at the 4,096 cap: 8.6% of U trials) |
+| M1, GSM8K / MMLU | 0.34 / 0.03 | 0.16 / 0.00 |
+| M1, label self / other | 0.16 / 0.22 | 0.09 / 0.06 |
+| M1, written by Qwen / Gemma | 0.13 / 0.25 | 0.09 / 0.06 |
+| right traces: correct | 0.97 | 1.00 |
+
+Item-clustered bootstrap, 5000 resamples. The logistic regression is not interpretable at this n: MMLU and several cells have
+almost no deferrals, so the bootstrap CIs run to +/-20 on the logit scale (`results/summary.json`).
+
+**Caveats, in order of weight.**
+1. **n = 16, not 200.** Amendment 8 cut candidates to 160. The Qwen pre-pass then ran at ~980 tok/s with 1,700-token
+   thinking (12% of samples at the 4,096 cap), and the factorial got ~9 minutes before the cap.
+2. **The MMLU corruption is weak by construction**: it changes only the concluding line, and the option-by-option analysis
+   above it still points to gold. Qwen says so when asked, e.g. "its step-by-step analysis accurately pointed to option B,
+   its final line mistakenly concluded with D." So the GSM8K numbers carry the result.
+3. **The author contrast is confounded with where the cut falls (post hoc, exploratory).** In T, Qwen closed its thinking
+   within 200 characters after 41/64 Gemma-written traces but after only 9/64 of its own. 7 of its 8 T deferrals to Gemma's
+   traces came from such immediate closes. The rule cuts each trace at its first conclusion. For Qwen that comes early in a
+   verification-heavy thinking style (median cut 988 of 3,313 characters), and Qwen picks up with "Wait, let me
+   recalculate". For Gemma it comes near the end (704 of 1,243). So "written by Gemma" here partly means "looks finished",
+   and the author contrast does not test self-recognition.
+4. **Item set skews to GSM8K** (60 of 91 built). Gemma's MMLU thoughts often never name a letter (78 traces without a
+   commitment, even with Amendment 11), so 34 MMLU items had no usable Gemma trace. The 16 analysed items are balanced 8/8
+   by the interleaved order.
+5. In U, deferrals look like belief rather than copying. Qwen "verifies" the trace and restates the wrong step ("Total: $60 +
+   $30 = $100"). In T, it often just closes its thinking and outputs the trace's number. Read by Claude, not by a human.
+
+**M5 (exploratory): uninformative.** Only 5 follow-ups ran (planned 100). All 5 answered "No, that reasoning trace was
+provided in your prompt", including the one labelled as Qwen's own ("I don't retain memory of previous sessions").
+Haiku 5.5 and gpt-5-mini agreed 5/5; a kappa on 5 items means nothing.
+
+**Prediction scorecard** (point estimates; frozen probabilities):
+
+| id | prediction | p | observed | outcome | Brier |
+|---|---|---|---|---|---|
+| P1 | M1 higher in T than U by >= 15 points | 0.80 | +10.9 [3, 20] | no | 0.64 |
+| P2 | M1 in T >= 30% | 0.65 | 18.8% | no | 0.42 |
+| P3 | label self > other by >= 5 points in U | 0.40 | +3.1 | no | 0.16 |
+| P4 | own traces followed more than Gemma's by >= 5 points | 0.35 | -4.7 | no | 0.12 |
+
+Directional accuracy 2/4, mean Brier 0.34. P1 and P2 point the predicted way but are smaller than predicted. P1's CI
+includes 15.
+
+**Spend.** GPU $3.750 against the coordinator's $3.80 c2 total: run 1 $1.266, `c2-2` $0.688 (sync only), `c2-3` $1.796
+(stopped at its $1.80 cap). API $0.0017 (`results/api_ledger.jsonl`: M5 judge and check, plus the 6-reply smoke test).
+
+**Files.** `results/main.jsonl` (256 trials), `results/m5.jsonl` + `m5_labels.json`, `results/summary.json`,
+`results/build/` (91-item set, `gate.json`, `build_examples.txt`), `results/prepass_qwen.jsonl` (160 x 5),
+`results/prepass_gemma.jsonl` (177 samples), `results/smoke/`, `results/pod.log`, `run3_launch.log`. **Reuse:** the
+91-item set with both authors' traces is built and frozen (sha `e32c5854fbaa`). A factorial-only rerun (Qwen only) on the
+remaining 75 items would need ~1.6M generated tokens at ~600-1000 tok/s, i.e. ~30-45 A100-min (~$1.0-1.4).

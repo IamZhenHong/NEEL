@@ -1,0 +1,546 @@
+== gsm8k-1246 [qwen] gold=3360 wrong=3350 cut 638/3059 chars
+  RIGHT  :      - 3200 + 160 = 3360
+  CORRUPT:      - 3200 + 160 = 3350
+== gsm8k-1246 [gemma] gold=3360 wrong=3350 cut 786/1696 chars
+  RIGHT  :     *   3200 + 160 = 3360
+  CORRUPT:     *   3200 + 160 = 3350
+== gsm8k-1103 [qwen] gold=90 wrong=100 cut 1746/4151 chars
+  RIGHT  :     *   $50 + 40 = 90$
+  CORRUPT:     *   $50 + 40 = 100$
+== gsm8k-1103 [gemma] gold=90 wrong=100 cut 750/3925 chars
+  RIGHT  :     *   T = 90
+  CORRUPT:     *   T = 100
+== gsm8k-420 [qwen] gold=17000 wrong=16990 cut 589/3333 chars
+  RIGHT  :    - Total = $5000 + $4000 + $8000 = $17000
+  CORRUPT:    - Total = $5000 + $4000 + $8000 = $16990
+== gsm8k-420 [gemma] gold=17000 wrong=16990 cut 462/590 chars
+  RIGHT  :     *   $9,000 + $8,000 = $17,000
+  CORRUPT:     *   $9,000 + $8,000 = $16,990
+== gsm8k-1312 [qwen] gold=180 wrong=170 cut 543/4204 chars
+  RIGHT  :    - Weekly revenue = Daily revenue * 2 = $90 * 2 = $180
+  CORRUPT:    - Weekly revenue = Daily revenue * 2 = $90 * 2 = $170
+== gsm8k-1312 [gemma] gold=180 wrong=170 cut 602/4779 chars
+  RIGHT  :     *   Total revenue per week = 2 days * $90/day = $180
+  CORRUPT:     *   Total revenue per week = 2 days * $90/day = $170
+== gsm8k-1226 [qwen] gold=90 wrong=100 cut 1162/4586 chars
+  RIGHT  :    - Total cost = Discounted service cost + Nail art cost = $60 + $30 = $90
+  CORRUPT:    - Total cost = Discounted service cost + Nail art cost = $60 + $30 = $100
+== gsm8k-1226 [gemma] gold=90 wrong=100 cut 610/6209 chars
+  RIGHT  :     *   Total cost = $60 + $30 = $90
+  CORRUPT:     *   Total cost = $60 + $30 = $100
+== gsm8k-554 [qwen] gold=54 wrong=44 cut 824/4708 chars
+  RIGHT  :    - Difference = Time(hot) - Time(cold) = 102 - 48 = 54 minutes.
+  CORRUPT:    - Difference = Time(hot) - Time(cold) = 102 - 48 = 44 minutes.
+== gsm8k-554 [gemma] gold=54 wrong=44 cut 816/3138 chars
+  RIGHT  :     *   Calculation: 102 - 48 = 54 minutes.
+  CORRUPT:     *   Calculation: 102 - 48 = 44 minutes.
+== gsm8k-418 [qwen] gold=40 wrong=30 cut 1617/2961 chars
+  RIGHT  :         *   $T = 40$ cubic inches.
+  CORRUPT:         *   $T = 30$ cubic inches.
+== gsm8k-418 [gemma] gold=40 wrong=30 cut 443/599 chars
+  RIGHT  :     *   Timothy's locker = 20 * 2 = 40 cubic inches
+  CORRUPT:     *   Timothy's locker = 20 * 2 = 30 cubic inches
+== gsm8k-222 [qwen] gold=140 wrong=150 cut 1075/2055 chars
+  RIGHT  :         *   $90 + 50 = 140$.
+  CORRUPT:         *   $90 + 50 = 150$.
+== gsm8k-222 [gemma] gold=140 wrong=150 cut 371/520 chars
+  RIGHT  :     *   Total flowers = 140
+  CORRUPT:     *   Total flowers = 150
+== gsm8k-586 [qwen] gold=800 wrong=810 cut 742/3152 chars
+  RIGHT  :    - Water needed = (1600 / 200) * 100 = 8 * 100 = 800 ml
+  CORRUPT:    - Water needed = (1600 / 200) * 100 = 8 * 100 = 810 ml
+== gsm8k-586 [gemma] gold=800 wrong=810 cut 542/827 chars
+  RIGHT  :     *   Total water = 800 ml.
+  CORRUPT:     *   Total water = 810 ml.
+== gsm8k-674 [qwen] gold=12 wrong=14 cut 636/4528 chars
+  RIGHT  :     *   Conversion factor: 1 foot = 12 inches.
+  CORRUPT:     *   Conversion factor: 1 foot = 14 inches.
+== gsm8k-674 [gemma] gold=12 wrong=14 cut 377/1007 chars
+  RIGHT  :         1 foot = 12 inches.
+  CORRUPT:         1 foot = 14 inches.
+== gsm8k-998 [qwen] gold=50 wrong=60 cut 1602/3363 chars
+  RIGHT  :         *   So, $40 + 10 = 50$.
+  CORRUPT:         *   So, $40 + 10 = 60$.
+== gsm8k-998 [gemma] gold=50 wrong=60 cut 527/1534 chars
+  RIGHT  :         *   So, 750 / 15 = 50
+  CORRUPT:         *   So, 750 / 15 = 60
+== gsm8k-1076 [qwen] gold=162 wrong=172 cut 578/2661 chars
+  RIGHT  :    - 132 + 30 = 162
+  CORRUPT:    - 132 + 30 = 172
+== gsm8k-1076 [gemma] gold=162 wrong=172 cut 540/813 chars
+  RIGHT  :     *   132 + 30 = 162
+  CORRUPT:     *   132 + 30 = 172
+== gsm8k-660 [qwen] gold=15 wrong=13 cut 1213/3003 chars
+  RIGHT  :         *   Divide by 2: $S = 15$
+  CORRUPT:         *   Divide by 2: $S = 13$
+== gsm8k-660 [gemma] gold=15 wrong=13 cut 661/1355 chars
+  RIGHT  :         $S = 15$
+  CORRUPT:         $S = 13$
+== gsm8k-691 [qwen] gold=25 wrong=15 cut 813/3087 chars
+  RIGHT  :    - Remaining money = $125 - $100 = $25.
+  CORRUPT:    - Remaining money = $125 - $100 = $15.
+== gsm8k-691 [gemma] gold=25 wrong=15 cut 843/1174 chars
+  RIGHT  :     *   Money left = $125 - $100 = $25.
+  CORRUPT:     *   Money left = $125 - $100 = $15.
+== gsm8k-633 [qwen] gold=5 wrong=3 cut 832/2046 chars
+  RIGHT  :     *   $75 / 15 = 5$.
+  CORRUPT:     *   $75 / 15 = 3$.
+== gsm8k-633 [gemma] gold=5 wrong=3 cut 528/980 chars
+  RIGHT  :     *   $t = 5$
+  CORRUPT:     *   $t = 3$
+== gsm8k-220 [qwen] gold=70 wrong=80 cut 803/3277 chars
+  RIGHT  :    - Total time = 30 + 40 = 70 minutes
+  CORRUPT:    - Total time = 30 + 40 = 80 minutes
+== gsm8k-220 [gemma] gold=70 wrong=80 cut 443/526 chars
+  RIGHT  :     *   Total time = 30 minutes + 40 minutes = 70 minutes.
+  CORRUPT:     *   Total time = 30 minutes + 40 minutes = 80 minutes.
+== gsm8k-972 [qwen] gold=120 wrong=130 cut 1628/6571 chars
+  RIGHT  :    - Sold = Remaining - Kept = 160 - 40 = 120 oranges.
+  CORRUPT:    - Sold = Remaining - Kept = 160 - 40 = 130 oranges.
+== gsm8k-972 [gemma] gold=120 wrong=130 cut 746/6581 chars
+  RIGHT  :     *   Oranges sold: Total remaining - Oranges kept = 160 - 40 = 120 oranges.
+  CORRUPT:     *   Oranges sold: Total remaining - Oranges kept = 160 - 40 = 130 oranges.
+== gsm8k-11 [qwen] gold=694 wrong=684 cut 1482/3511 chars
+  RIGHT  :         *   Sum = 694
+  CORRUPT:         *   Sum = 684
+== gsm8k-11 [gemma] gold=694 wrong=684 cut 478/745 chars
+  RIGHT  :     *   364 + 330 = 694
+  CORRUPT:     *   364 + 330 = 684
+== gsm8k-206 [qwen] gold=860 wrong=870 cut 2027/9390 chars
+  RIGHT  :         *   Total Distance = $860$ km.
+  CORRUPT:         *   Total Distance = $870$ km.
+== gsm8k-206 [gemma] gold=860 wrong=870 cut 933/1498 chars
+  RIGHT  :     *   Total distance = 500 km + 360 km = 860 km.
+  CORRUPT:     *   Total distance = 500 km + 360 km = 870 km.
+== gsm8k-837 [qwen] gold=120 wrong=110 cut 943/3923 chars
+  RIGHT  :    P = 120
+  CORRUPT:    P = 110
+== gsm8k-837 [gemma] gold=120 wrong=110 cut 550/1401 chars
+  RIGHT  :     *   X = 120
+  CORRUPT:     *   X = 110
+== gsm8k-1299 [qwen] gold=13 wrong=15 cut 722/2780 chars
+  RIGHT  :    - Remaining = 40.00 - 27.00 = 13.00
+  CORRUPT:    - Remaining = 40.00 - 27.00 = 15.00
+== gsm8k-1299 [gemma] gold=13 wrong=15 cut 489/1300 chars
+  RIGHT  :     *   Leftover = $13.00
+  CORRUPT:     *   Leftover = $15.00
+== gsm8k-636 [qwen] gold=1050 wrong=1040 cut 748/2460 chars
+  RIGHT  :    - Weekly = 150 * 7 = 1050
+  CORRUPT:    - Weekly = 150 * 7 = 1040
+== gsm8k-636 [gemma] gold=1050 wrong=1040 cut 717/1101 chars
+  RIGHT  :     *   150 * 7 = 1050.
+  CORRUPT:     *   150 * 7 = 1040.
+== gsm8k-149 [qwen] gold=16 wrong=14 cut 1306/2425 chars
+  RIGHT  :         $$J = 16$$
+  CORRUPT:         $$J = 14$$
+== gsm8k-149 [gemma] gold=16 wrong=14 cut 406/630 chars
+  RIGHT  :     *   J = 16
+  CORRUPT:     *   J = 14
+== gsm8k-530 [qwen] gold=36 wrong=46 cut 1514/3980 chars
+  RIGHT  :         *   Total = 20 + 10 + 6 = 36 hours.
+  CORRUPT:         *   Total = 20 + 10 + 6 = 46 hours.
+== gsm8k-530 [gemma] gold=36 wrong=46 cut 704/3557 chars
+  RIGHT  :     *   Total hours = 20 + 10 + 6 = 36 hours.
+  CORRUPT:     *   Total hours = 20 + 10 + 6 = 46 hours.
+== gsm8k-1081 [qwen] gold=195 wrong=185 cut 678/1808 chars
+  RIGHT  :    - Calculate F: F = 2 * 90 + 15 = 180 + 15 = 195
+  CORRUPT:    - Calculate F: F = 2 * 90 + 15 = 180 + 15 = 185
+== gsm8k-1081 [gemma] gold=195 wrong=185 cut 272/728 chars
+  RIGHT  :     *   180 + 15 = 195.
+  CORRUPT:     *   180 + 15 = 185.
+== gsm8k-819 [qwen] gold=6250 wrong=6240 cut 657/2863 chars
+  RIGHT  :    - Calculation: 125,000 / 20 = 6,250
+  CORRUPT:    - Calculation: 125,000 / 20 = 6,240
+== gsm8k-819 [gemma] gold=6250 wrong=6240 cut 597/714 chars
+  RIGHT  :     *   $12,500 / 2 = $6,250
+  CORRUPT:     *   $12,500 / 2 = $6,240
+== gsm8k-225 [qwen] gold=9 wrong=11 cut 485/915 chars
+  RIGHT  :    - Total travel days = Bus days + Car days = 6 + 3 = 9 days
+  CORRUPT:    - Total travel days = Bus days + Car days = 6 + 3 = 11 days
+== gsm8k-225 [gemma] gold=9 wrong=11 cut 687/913 chars
+  RIGHT  :     *   Total days = 6 + 3 = 9 days.
+  CORRUPT:     *   Total days = 6 + 3 = 11 days.
+== gsm8k-832 [qwen] gold=42 wrong=52 cut 602/3456 chars
+  RIGHT  :    - Roy = $30 * 1.40 = $42
+  CORRUPT:    - Roy = $30 * 1.40 = $52
+== gsm8k-832 [gemma] gold=42 wrong=52 cut 401/1196 chars
+  RIGHT  :     *   Roy = $30.00 + $12.00 = $42.00
+  CORRUPT:     *   Roy = $30.00 + $12.00 = $52.00
+== gsm8k-943 [qwen] gold=50 wrong=60 cut 987/6993 chars
+  RIGHT  :    - Net loss = $90 - $40 = $50
+  CORRUPT:    - Net loss = $90 - $40 = $60
+== gsm8k-943 [gemma] gold=50 wrong=60 cut 699/5716 chars
+  RIGHT  :     *   Net loss = Total spent - Total received = $90 - $40 = $50.
+  CORRUPT:     *   Net loss = Total spent - Total received = $90 - $40 = $60.
+== gsm8k-41 [qwen] gold=200 wrong=190 cut 988/5221 chars
+  RIGHT  :    - Calculation: 1200 ft - 1000 ft = 200 ft.
+  CORRUPT:    - Calculation: 1200 ft - 1000 ft = 190 ft.
+== gsm8k-41 [gemma] gold=200 wrong=190 cut 1017/1733 chars
+  RIGHT  :     *   Distance outside = 1200 feet - 1000 feet = 200 feet.
+  CORRUPT:     *   Distance outside = 1200 feet - 1000 feet = 190 feet.
+== gsm8k-54 [qwen] gold=40 wrong=50 cut 1419/3617 chars
+  RIGHT  :     *   $28 + 12 = 40$.
+  CORRUPT:     *   $28 + 12 = 50$.
+== gsm8k-54 [gemma] gold=40 wrong=50 cut 529/864 chars
+  RIGHT  :     *   28 + 12 = 40
+  CORRUPT:     *   28 + 12 = 50
+== gsm8k-332 [qwen] gold=44 wrong=34 cut 446/2477 chars
+  RIGHT  :    - Unmanned ruined castles = Half of ruined castles = 88 / 2 = 44
+  CORRUPT:    - Unmanned ruined castles = Half of ruined castles = 88 / 2 = 34
+== gsm8k-332 [gemma] gold=44 wrong=34 cut 402/712 chars
+  RIGHT  :     *   Unmanned ruined castles = 44
+  CORRUPT:     *   Unmanned ruined castles = 34
+== gsm8k-144 [qwen] gold=20 wrong=10 cut 791/4497 chars
+  RIGHT  :    - **Profit calculation:** $92 - $72 = $20
+  CORRUPT:    - **Profit calculation:** $92 - $72 = $10
+== gsm8k-144 [gemma] gold=20 wrong=10 cut 781/3795 chars
+  RIGHT  :     *   Profit = $92 - $72 = $20.
+  CORRUPT:     *   Profit = $92 - $72 = $10.
+== gsm8k-1209 [qwen] gold=29 wrong=19 cut 628/3399 chars
+  RIGHT  :    - Total = 3 + 6 + 20 = 29 L
+  CORRUPT:    - Total = 3 + 6 + 20 = 19 L
+== gsm8k-1209 [gemma] gold=29 wrong=19 cut 490/879 chars
+  RIGHT  :     *   Total = 3 liters + 6 liters + 20 liters = 29 liters
+  CORRUPT:     *   Total = 3 liters + 6 liters + 20 liters = 19 liters
+== gsm8k-102 [qwen] gold=26 wrong=16 cut 857/3774 chars
+  RIGHT  :    - Total: 20 + 6 = 26 glasses
+  CORRUPT:    - Total: 20 + 6 = 16 glasses
+== gsm8k-102 [gemma] gold=26 wrong=16 cut 791/1705 chars
+  RIGHT  :     *   Total water = 20 + 6 = 26 glasses.
+  CORRUPT:     *   Total water = 20 + 6 = 16 glasses.
+== gsm8k-811 [qwen] gold=60 wrong=50 cut 1485/5230 chars
+  RIGHT  :         *   Mental Math: $42 / 7 = 6$, so $420 / 7 = 60$.
+  CORRUPT:         *   Mental Math: $42 / 7 = 6$, so $420 / 7 = 50$.
+== gsm8k-811 [gemma] gold=60 wrong=50 cut 598/962 chars
+  RIGHT  :     *   420 / 7 = 60
+  CORRUPT:     *   420 / 7 = 50
+== gsm8k-1123 [qwen] gold=105 wrong=115 cut 570/2514 chars
+  RIGHT  :    - Total = 105 lbs
+  CORRUPT:    - Total = 115 lbs
+== gsm8k-1123 [gemma] gold=105 wrong=115 cut 445/796 chars
+  RIGHT  :     *   75 + 30 = 105.
+  CORRUPT:     *   75 + 30 = 115.
+== gsm8k-1085 [qwen] gold=26 wrong=16 cut 585/1187 chars
+  RIGHT  :    - Growth = Rate × Time = 2 inches/year × 13 years = 26 inches
+  CORRUPT:    - Growth = Rate × Time = 2 inches/year × 13 years = 16 inches
+== gsm8k-1085 [gemma] gold=26 wrong=16 cut 450/763 chars
+  RIGHT  :     *   Growth in 13 years = 26 inches.
+  CORRUPT:     *   Growth in 13 years = 16 inches.
+== gsm8k-129 [qwen] gold=10000 wrong=9990 cut 905/4688 chars
+  RIGHT  :    - Total profit = 200 hours * $50/hour = $10,000
+  CORRUPT:    - Total profit = 200 hours * $50/hour = $9,990
+== gsm8k-129 [gemma] gold=10000 wrong=9990 cut 891/2121 chars
+  RIGHT  :     *   Total profit = $10,000
+  CORRUPT:     *   Total profit = $9,990
+== gsm8k-173 [qwen] gold=18000 wrong=17990 cut 779/2875 chars
+  RIGHT  :    - $1500 * 12 = $18,000
+  CORRUPT:    - $1500 * 12 = $17,990
+== gsm8k-173 [gemma] gold=18000 wrong=17990 cut 610/1130 chars
+  RIGHT  :     *   $15,000 + $3,000 = $18,000
+  CORRUPT:     *   $15,000 + $3,000 = $17,990
+== gsm8k-214 [qwen] gold=8 wrong=10 cut 2428/7904 chars
+  RIGHT  :         $S_{now} = 8$
+  CORRUPT:         $S_{now} = 10$
+== gsm8k-214 [gemma] gold=8 wrong=10 cut 1310/2715 chars
+  RIGHT  :     *   $S_{now} = 8$
+  CORRUPT:     *   $S_{now} = 10$
+== gsm8k-793 [qwen] gold=250 wrong=260 cut 889/3808 chars
+  RIGHT  :    - Total pay = Regular pay + Overtime pay = 160 + 90 = $250
+  CORRUPT:    - Total pay = Regular pay + Overtime pay = 160 + 90 = $260
+== gsm8k-793 [gemma] gold=250 wrong=260 cut 711/1966 chars
+  RIGHT  :     *   Total pay = $160 + $90 = $250.
+  CORRUPT:     *   Total pay = $160 + $90 = $260.
+== gsm8k-872 [qwen] gold=13 wrong=11 cut 1206/3099 chars
+  RIGHT  :     *   Total Cost = $9.00 + $4.00 = $13.00
+  CORRUPT:     *   Total Cost = $9.00 + $4.00 = $11.00
+== gsm8k-872 [gemma] gold=13 wrong=11 cut 564/865 chars
+  RIGHT  :     *   Total cost = $9.00 + $4.00 = $13.00
+  CORRUPT:     *   Total cost = $9.00 + $4.00 = $11.00
+== gsm8k-1032 [qwen] gold=450 wrong=460 cut 683/2978 chars
+  RIGHT  :    - Therefore, Small beans capacity = 3 * Medium beans capacity = 3 * 150 = 450
+  CORRUPT:    - Therefore, Small beans capacity = 3 * Medium beans capacity = 3 * 150 = 460
+== gsm8k-1032 [gemma] gold=450 wrong=460 cut 474/2373 chars
+  RIGHT  :     *   S = 3 * 150 = 450
+  CORRUPT:     *   S = 3 * 150 = 460
+== gsm8k-342 [qwen] gold=87 wrong=97 cut 641/3430 chars
+  RIGHT  :    - 72 + 15 = 87
+  CORRUPT:    - 72 + 15 = 97
+== gsm8k-342 [gemma] gold=87 wrong=97 cut 816/1484 chars
+  RIGHT  :     *   72 + 15 = 87
+  CORRUPT:     *   72 + 15 = 97
+== gsm8k-1228 [qwen] gold=31 wrong=41 cut 827/2473 chars
+  RIGHT  :      K = 39 - 8 = 31
+  CORRUPT:      K = 39 - 8 = 41
+== gsm8k-1228 [gemma] gold=31 wrong=41 cut 515/758 chars
+  RIGHT  :         K = 31
+  CORRUPT:         K = 41
+== gsm8k-1120 [qwen] gold=560 wrong=570 cut 880/2610 chars
+  RIGHT  :    - Monthly distance = 2 × 280 miles = 560 miles
+  CORRUPT:    - Monthly distance = 2 × 280 miles = 570 miles
+== gsm8k-1120 [gemma] gold=560 wrong=570 cut 466/1562 chars
+  RIGHT  :     *   Total monthly distance = 280 miles × 2 = 560 miles.
+  CORRUPT:     *   Total monthly distance = 280 miles × 2 = 570 miles.
+== gsm8k-1271 [qwen] gold=43 wrong=33 cut 794/3231 chars
+  RIGHT  :    - 232 - 189 = 43
+  CORRUPT:    - 232 - 189 = 33
+== gsm8k-1271 [gemma] gold=43 wrong=33 cut 600/921 chars
+  RIGHT  :     *   52 - 9 = 43
+  CORRUPT:     *   52 - 9 = 33
+== gsm8k-556 [qwen] gold=160 wrong=170 cut 934/4397 chars
+  RIGHT  :    - Total cost = $40 + $120 = $160
+  CORRUPT:    - Total cost = $40 + $120 = $170
+== gsm8k-556 [gemma] gold=160 wrong=170 cut 468/938 chars
+  RIGHT  :     *   Total cost = $40 + $120 = $160
+  CORRUPT:     *   Total cost = $40 + $120 = $170
+== gsm8k-1057 [qwen] gold=24 wrong=14 cut 688/2859 chars
+  RIGHT  :    - Total movies = 6 movies/weekend * 4 weekends = 24 movies.
+  CORRUPT:    - Total movies = 6 movies/weekend * 4 weekends = 14 movies.
+== gsm8k-1057 [gemma] gold=24 wrong=14 cut 433/689 chars
+  RIGHT  :     *   Total movies = 6 * 4 = 24
+  CORRUPT:     *   Total movies = 6 * 4 = 14
+== gsm8k-1127 [qwen] gold=750 wrong=740 cut 562/3199 chars
+  RIGHT  :    - Fastest car speed = 1.25 × 600 = 750 mph
+  CORRUPT:    - Fastest car speed = 1.25 × 600 = 740 mph
+== gsm8k-1127 [gemma] gold=750 wrong=740 cut 645/1143 chars
+  RIGHT  :     *   600 + 150 = 750 mph.
+  CORRUPT:     *   600 + 150 = 740 mph.
+== gsm8k-508 [qwen] gold=120 wrong=110 cut 637/3228 chars
+  RIGHT  :    - Combined animals = Farm animals + Zoo animals = 40 + 80 = 120
+  CORRUPT:    - Combined animals = Farm animals + Zoo animals = 40 + 80 = 110
+== gsm8k-508 [gemma] gold=120 wrong=110 cut 487/850 chars
+  RIGHT  :     *   Total animals = Farm animals + Zoo animals = 40 + 80 = 120
+  CORRUPT:     *   Total animals = Farm animals + Zoo animals = 40 + 80 = 110
+== gsm8k-192 [qwen] gold=91 wrong=101 cut 573/2432 chars
+  RIGHT  :    - 0.70 * 130 = 91
+  CORRUPT:    - 0.70 * 130 = 101
+== gsm8k-192 [gemma] gold=91 wrong=101 cut 830/3128 chars
+  RIGHT  :     *   Remaining trees = 130 - 39 = 91 trees
+  CORRUPT:     *   Remaining trees = 130 - 39 = 101 trees
+== gsm8k-387 [qwen] gold=36 wrong=46 cut 532/2782 chars
+  RIGHT  :    - Total = Eraser cost + Pencil cost = 12 + 24 = $36
+  CORRUPT:    - Total = Eraser cost + Pencil cost = 12 + 24 = $46
+== gsm8k-387 [gemma] gold=36 wrong=46 cut 226/324 chars
+  RIGHT  :     *   Total cost = $12 + $24 = $36
+  CORRUPT:     *   Total cost = $12 + $24 = $46
+== gsm8k-714 [qwen] gold=10 wrong=8 cut 1332/6104 chars
+  RIGHT  :         *   Calculation: $75 - $65 = $10.
+  CORRUPT:         *   Calculation: $75 - $65 = $8.
+== gsm8k-714 [gemma] gold=10 wrong=8 cut 415/1826 chars
+  RIGHT  :     *   Savings = $75 - $65 = $10
+  CORRUPT:     *   Savings = $75 - $65 = $8
+== gsm8k-1197 [qwen] gold=2400 wrong=2390 cut 1769/8428 chars
+  RIGHT  :         *   Total Spend = $2400$.
+  CORRUPT:         *   Total Spend = $2390$.
+== gsm8k-1197 [gemma] gold=2400 wrong=2390 cut 787/1416 chars
+  RIGHT  :     *   Total spend = $600 + $1,800 = $2,400
+  CORRUPT:     *   Total spend = $600 + $1,800 = $2,390
+== gsm8k-160 [qwen] gold=16 wrong=18 cut 558/3313 chars
+  RIGHT  :    - 8 * 2 = 16 feet
+  CORRUPT:    - 8 * 2 = 18 feet
+== gsm8k-160 [gemma] gold=16 wrong=18 cut 390/561 chars
+  RIGHT  :     *   48 / 3 = 16
+  CORRUPT:     *   48 / 3 = 18
+== gsm8k-869 [qwen] gold=500 wrong=510 cut 320/3573 chars
+  RIGHT  :    - Change = Amount given - Total cost = $4000 - $3500 = $500.
+  CORRUPT:    - Change = Amount given - Total cost = $4000 - $3500 = $510.
+== gsm8k-869 [gemma] gold=500 wrong=510 cut 276/380 chars
+  RIGHT  :     *   Change = $4000 - $3500 = $500
+  CORRUPT:     *   Change = $4000 - $3500 = $510
+== gsm8k-845 [qwen] gold=12 wrong=14 cut 791/3834 chars
+  RIGHT  :    - $|M| = 5 + 7 = 12$
+  CORRUPT:    - $|M| = 5 + 7 = 14$
+== gsm8k-845 [gemma] gold=12 wrong=14 cut 619/1357 chars
+  RIGHT  :     *   Students good at math = 12
+  CORRUPT:     *   Students good at math = 14
+== gsm8k-245 [qwen] gold=7 wrong=5 cut 834/6425 chars
+  RIGHT  :    - $F = 7$
+  CORRUPT:    - $F = 5$
+== gsm8k-245 [gemma] gold=7 wrong=5 cut 657/1091 chars
+  RIGHT  :     *   F_each = 14 / 2 = 7.
+  CORRUPT:     *   F_each = 14 / 2 = 5.
+== mmlu-793 [qwen] gold=B wrong=D cut 3886/5777 chars
+  RIGHT  :     Therefore, B is the correct answer.
+  CORRUPT:     Therefore, D is the correct answer.
+== mmlu-793 [gemma] gold=B wrong=D cut 2834/2834 chars
+  RIGHT  : The correct option is B.
+  CORRUPT: The correct option is D.
+== mmlu-2914 [qwen] gold=B wrong=C cut 1685/2324 chars
+  RIGHT  :     *   End with "Final answer: B".
+  CORRUPT:     *   End with "Final answer: C".
+== mmlu-2914 [gemma] gold=B wrong=C cut 1471/1471 chars
+  RIGHT  : The correct option is B.
+  CORRUPT: The correct option is C.
+== mmlu-4957 [qwen] gold=C wrong=A cut 1556/2052 chars
+  RIGHT  : Therefore, the correct option is C.
+  CORRUPT: Therefore, the correct option is A.
+== mmlu-4957 [gemma] gold=C wrong=A cut 1161/1161 chars
+  RIGHT  : The correct option is C.
+  CORRUPT: The correct option is A.
+== mmlu-13639 [qwen] gold=B wrong=A cut 1442/1906 chars
+  RIGHT  :     *   Option B fits the historical record. The US promoted privatization, deregulation, and integration into the global economy.
+  CORRUPT:     *   Option A fits the historical record. The US promoted privatization, deregulation, and integration into the global economy.
+== mmlu-13639 [gemma] gold=B wrong=A cut 1243/1243 chars
+  RIGHT  : Option B is the most accurate description.
+  CORRUPT: Option A is the most accurate description.
+== mmlu-2280 [qwen] gold=A wrong=B cut 595/615 chars
+  RIGHT  :     Answer: A
+  CORRUPT:     Answer: B
+== mmlu-2280 [gemma] gold=A wrong=B cut 386/386 chars
+  RIGHT  : Final answer: A.
+  CORRUPT: Final answer: B.
+== mmlu-5336 [qwen] gold=C wrong=B cut 1956/2657 chars
+  RIGHT  : 8.  **Conclusion:** Option C is the correct formula.
+  CORRUPT: 8.  **Conclusion:** Option B is the correct formula.
+== mmlu-5336 [gemma] gold=C wrong=B cut 1045/1045 chars
+  RIGHT  : The correct option is C.
+  CORRUPT: The correct option is B.
+== mmlu-8945 [qwen] gold=B wrong=C cut 1515/4810 chars
+  RIGHT  :    - End with "Final answer: B"
+  CORRUPT:    - End with "Final answer: C"
+== mmlu-8945 [gemma] gold=B wrong=C cut 775/775 chars
+  RIGHT  :     *   Option B matches the assessment (Wrong, Not wrong).
+  CORRUPT:     *   Option C matches the assessment (Not wrong, Wrong).
+== mmlu-6532 [qwen] gold=C wrong=D cut 1463/1754 chars
+  RIGHT  : 7.  **Conclusion:** Option C is the most accurate definition.
+  CORRUPT: 7.  **Conclusion:** Option D is the most accurate definition.
+== mmlu-6532 [gemma] gold=C wrong=D cut 1307/1307 chars
+  RIGHT  :     *   The correct option is C.
+  CORRUPT:     *   The correct option is D.
+== mmlu-14011 [qwen] gold=C wrong=A cut 975/1402 chars
+  RIGHT  :     *   Closing: Final answer: C
+  CORRUPT:     *   Closing: Final answer: A
+== mmlu-14011 [gemma] gold=C wrong=A cut 789/789 chars
+  RIGHT  : The correct option is C.
+  CORRUPT: The correct option is A.
+== mmlu-7198 [qwen] gold=C wrong=A cut 939/1439 chars
+  RIGHT  : 3.  **Identify the correct option:** Option C matches the definition perfectly.
+  CORRUPT: 3.  **Identify the correct option:** Option A matches the definition perfectly.
+== mmlu-7198 [gemma] gold=C wrong=A cut 702/702 chars
+  RIGHT  : The correct option is C.
+  CORRUPT: The correct option is A.
+== mmlu-7141 [qwen] gold=C wrong=D cut 3295/7559 chars
+  RIGHT  :     Therefore, C is the correct answer.
+  CORRUPT:     Therefore, D is the correct answer.
+== mmlu-7141 [gemma] gold=C wrong=D cut 1961/1961 chars
+  RIGHT  :     *   Option C aligns perfectly with the concept of a differentiation strategy based on quality.
+  CORRUPT:     *   Option D aligns perfectly with the concept of a differentiation strategy based on quality.
+== mmlu-138 [qwen] gold=D wrong=C cut 2845/5302 chars
+  RIGHT  :     *   Option D fits best.
+  CORRUPT:     *   Option C fits best.
+== mmlu-138 [gemma] gold=D wrong=C cut 1714/1714 chars
+  RIGHT  :     *   Therefore, the correct option is D.
+  CORRUPT:     *   Therefore, the correct option is C.
+== mmlu-8124 [qwen] gold=A wrong=C cut 1164/1895 chars
+  RIGHT  :     *   Option A matches the definition.
+  CORRUPT:     *   Option C matches the definition.
+== mmlu-8124 [gemma] gold=A wrong=C cut 964/964 chars
+  RIGHT  : The correct option is A.
+  CORRUPT: The correct option is C.
+== mmlu-5345 [qwen] gold=D wrong=C cut 1305/1344 chars
+  RIGHT  : Conclusion: Option D is correct.
+  CORRUPT: Conclusion: Option C is correct.
+== mmlu-5345 [gemma] gold=D wrong=C cut 903/903 chars
+  RIGHT  :     *   The correct option is D.
+  CORRUPT:     *   The correct option is C.
+== mmlu-6988 [qwen] gold=A wrong=B cut 2111/2540 chars
+  RIGHT  : 7.  **Conclusion:** Option A is the best fit among the choices provided. It reflects the idea that scenarios are hypothetical narratives used to explore potential futures.
+  CORRUPT: 7.  **Conclusion:** Option B is the best fit among the choices provided. It reflects the idea that scenarios are hypothetical narratives used to explore potential futures.
+== mmlu-6988 [gemma] gold=A wrong=B cut 1135/1135 chars
+  RIGHT  : Option (A) is the most accurate definition of a scenario in the context of scenario planning.
+  CORRUPT: Option (B) is the most accurate definition of a scenario in the context of scenario planning.
+== mmlu-9480 [qwen] gold=A wrong=C cut 1696/4429 chars
+  RIGHT  : 3.  **Conclusion:** The correct option is A.
+  CORRUPT: 3.  **Conclusion:** The correct option is C.
+== mmlu-9480 [gemma] gold=A wrong=C cut 1554/1554 chars
+  RIGHT  : The correct option is A.
+  CORRUPT: The correct option is C.
+== mmlu-3876 [qwen] gold=D wrong=A cut 1827/3544 chars
+  RIGHT  : 6.  **Conclusion:** Option D is the most accurate description among the choices.
+  CORRUPT: 6.  **Conclusion:** Option A is the most accurate description among the choices.
+== mmlu-3876 [gemma] gold=D wrong=A cut 1278/1278 chars
+  RIGHT  : Option D is the correct description of Keynes's contribution.
+  CORRUPT: Option A is the correct description of Keynes's contribution.
+== mmlu-2904 [qwen] gold=D wrong=B cut 2506/4318 chars
+  RIGHT  : 6.  **Select the option:** Option D.
+  CORRUPT: 6.  **Select the option:** Option B.
+== mmlu-2904 [gemma] gold=D wrong=B cut 1299/1299 chars
+  RIGHT  :     *   Therefore, Option D is the correct answer.
+  CORRUPT:     *   Therefore, Option B is the correct answer.
+== mmlu-4572 [qwen] gold=D wrong=A cut 1863/5169 chars
+  RIGHT  : 3.  **Conclusion:** Option D is the correct statement.
+  CORRUPT: 3.  **Conclusion:** Option A is the correct statement.
+== mmlu-4572 [gemma] gold=D wrong=A cut 1502/1502 chars
+  RIGHT  : Option D is correct.
+  CORRUPT: Option A is correct.
+== mmlu-1474 [qwen] gold=A wrong=C cut 1198/1380 chars
+  RIGHT  : Option A matches "Receiver".
+  CORRUPT: Option C matches "Modulor".
+== mmlu-1474 [gemma] gold=A wrong=C cut 1233/1233 chars
+  RIGHT  :     *   A is the correct answer.
+  CORRUPT:     *   C is the correct answer.
+== mmlu-5059 [qwen] gold=C wrong=D cut 1099/2587 chars
+  RIGHT  : 3.  **Conclusion:** The correct option is C.
+  CORRUPT: 3.  **Conclusion:** The correct option is D.
+== mmlu-5059 [gemma] gold=C wrong=D cut 1433/1433 chars
+  RIGHT  :     *   The correct option is C.
+  CORRUPT:     *   The correct option is D.
+== mmlu-1883 [qwen] gold=A wrong=B cut 2530/4898 chars
+  RIGHT  :     Therefore, Option A is the correct answer.
+  CORRUPT:     Therefore, Option B is the correct answer.
+== mmlu-1883 [gemma] gold=A wrong=B cut 1341/2144 chars
+  RIGHT  :     *   **D) Discrete choice:** A discrete choice variable refers to a situation where a subject chooses one option from a set of discrete alternatives (e.g., choosing between car, bus, or train).
+  CORRUPT:     *   **D) Discrete choice:** B discrete choice variable refers to a situation where a subject chooses one option from a set of discrete alternatives (e.g., choosing between car, bus, or train).
+== mmlu-218 [qwen] gold=B wrong=D cut 1126/5146 chars
+  RIGHT  :     *   Therefore, B is correct.
+  CORRUPT:     *   Therefore, D is correct.
+== mmlu-218 [gemma] gold=B wrong=D cut 2139/2139 chars
+  RIGHT  : The correct option is B.
+  CORRUPT: The correct option is D.
+== mmlu-1575 [qwen] gold=A wrong=C cut 2675/4578 chars
+  RIGHT  : *   The correct option is A.
+  CORRUPT: *   The correct option is C.
+== mmlu-1575 [gemma] gold=A wrong=C cut 1281/1281 chars
+  RIGHT  : The correct option is A.
+  CORRUPT: The correct option is C.
+== mmlu-3749 [qwen] gold=A wrong=D cut 1159/1751 chars
+  RIGHT  : 3.  **Conclusion:** Option A is the correct answer based on the statistics of Supreme Court caseloads.
+  CORRUPT: 3.  **Conclusion:** Option D is the correct answer based on the statistics of Supreme Court caseloads.
+== mmlu-3749 [gemma] gold=A wrong=D cut 1357/1357 chars
+  RIGHT  : Option A is the correct answer.
+  CORRUPT: Option D is the correct answer.
+== mmlu-3953 [qwen] gold=B wrong=A cut 3530/8606 chars
+  RIGHT  : 7.  **Conclusion:** Option B is the most accurate description of the direct consequence among the choices.
+  CORRUPT: 7.  **Conclusion:** Option A is the most accurate description of the direct consequence among the choices.
+== mmlu-3953 [gemma] gold=B wrong=A cut 2616/2947 chars
+  RIGHT  :     *   Therefore, Option B is the most accurate consequence.
+  CORRUPT:     *   Therefore, Option A is the most accurate consequence.
+== mmlu-13085 [qwen] gold=C wrong=A cut 1517/1654 chars
+  RIGHT  : Conclusion: C is the correct answer.
+  CORRUPT: Conclusion: A is the correct answer.
+== mmlu-13085 [gemma] gold=C wrong=A cut 964/964 chars
+  RIGHT  :     *   Answer: C.
+  CORRUPT:     *   Answer: A.
+== mmlu-10173 [qwen] gold=B wrong=D cut 4515/7922 chars
+  RIGHT  : The answer is B.
+  CORRUPT: The answer is D.
+== mmlu-10173 [gemma] gold=B wrong=D cut 3961/3961 chars
+  RIGHT  :     *   Correct option: B) Asians.
+  CORRUPT:     *   Correct option: D) Melanesians.
+== mmlu-12944 [qwen] gold=A wrong=D cut 1278/4755 chars
+  RIGHT  : 6.  **Conclusion:** Option A is the correct description for Chi-square tests.
+  CORRUPT: 6.  **Conclusion:** Option D is the correct description for Chi-square tests.
+== mmlu-12944 [gemma] gold=A wrong=D cut 1324/1324 chars
+  RIGHT  :     *   Option A is the correct description for the use of Chi-Square tests.
+  CORRUPT:     *   Option D is the correct description for the use of Chi-Square tests.
+== mmlu-5801 [qwen] gold=D wrong=C cut 1874/7093 chars
+  RIGHT  : 4.  **Confirm the correct answer:** D) The New Left.
+  CORRUPT: 4.  **Confirm the correct answer:** C) The New Right.
+== mmlu-5801 [gemma] gold=D wrong=C cut 2024/2024 chars
+  RIGHT  :     *   Option D is the correct answer.
+  CORRUPT:     *   Option C is the correct answer.
+== mmlu-5767 [qwen] gold=A wrong=D cut 1806/1962 chars
+  RIGHT  : Final answer: A.
+  CORRUPT: Final answer: D.
+== mmlu-5767 [gemma] gold=A wrong=D cut 1695/1695 chars
+  RIGHT  :     *   Option A is the correct choice.
+  CORRUPT:     *   Option D is the correct choice.

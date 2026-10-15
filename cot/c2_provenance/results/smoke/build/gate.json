@@ -1,0 +1,59 @@
+{
+ "by_ds": {
+  "gsm8k": {
+   "candidates": 1,
+   "qwen_pass_4of5": 1,
+   "qwen_clean_acc_all": 1.0,
+   "qwen_clean_acc_kept_4of5": 1.0,
+   "gemma_clean_acc_all": 1.0,
+   "items_with_both_pairs_in_order": null,
+   "kept": 1
+  },
+  "mmlu": {
+   "candidates": 1,
+   "qwen_pass_4of5": 0,
+   "qwen_clean_acc_all": 0.4,
+   "qwen_clean_acc_kept_4of5": 0.0,
+   "gemma_clean_acc_all": 1.0,
+   "items_with_both_pairs_in_order": null,
+   "kept": 0
+  }
+ },
+ "reasons": {
+  "gsm8k": {},
+  "mmlu": {
+   "qwen_below_4of5": 1
+  }
+ },
+ "clean_acc_final_items": 1.0,
+ "first_choice_traces": 2,
+ "corrupt_parse_rate_first_choice": 1.0,
+ "first_choice_all_checks_rate": 1.0,
+ "first_choice_check_fail_counts": {
+  "right_parses_gold": 0,
+  "corrupt_parses_wrong": 0,
+  "len_within_10pct": 0,
+  "same_lines": 0,
+  "same_lead": 0,
+  "changed": 0,
+  "gold_absent": 0,
+  "ok": 0
+ },
+ "gate_clean_acc_ge_85": true,
+ "gate_parse_ge_95": true,
+ "gate_pass": true,
+ "qwen_trace_chars": {
+  "cut_median": 774,
+  "full_median": 3324,
+  "cut_max": 774
+ },
+ "gemma_trace_chars": {
+  "cut_median": 786,
+  "full_median": 1696,
+  "cut_max": 786
+ },
+ "qwen_prepass_tokens_mean": 1570,
+ "qwen_prepass_at_cap": 3,
+ "items_sha256": "286201e738a99f97aa7c2291ea6341280913c5832e92fa7727fca303b4dba40a",
+ "n_items": 1
+}

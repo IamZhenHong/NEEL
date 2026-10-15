@@ -1,0 +1,6 @@
+== gsm8k-1246 [qwen] gold=3360 wrong=3350 cut 774/3324 chars
+  RIGHT  :    - 160 × 21 = 160 × (20 + 1) = 3200 + 160 = 3360
+  CORRUPT:    - 160 × 21 = 160 × (20 + 1) = 3200 + 160 = 3350
+== gsm8k-1246 [gemma] gold=3360 wrong=3350 cut 786/1696 chars
+  RIGHT  :     *   3200 + 160 = 3360
+  CORRUPT:     *   3200 + 160 = 3350

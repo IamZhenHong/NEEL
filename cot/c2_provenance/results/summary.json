@@ -1,0 +1,583 @@
+{
+ "n_items": 16,
+ "n_items_by_ds": {
+  "gsm8k": 8,
+  "mmlu": 8
+ },
+ "n_trials": 256,
+ "metrics": {
+  "M1_overall": {
+   "est": 0.1328,
+   "ci95": [
+    0.0234,
+    0.2734
+   ]
+  },
+  "M1_T": {
+   "est": 0.1875,
+   "ci95": [
+    0.0469,
+    0.3594
+   ]
+  },
+  "M1_T_self": {
+   "est": 0.1562,
+   "ci95": [
+    0.0,
+    0.3438
+   ]
+  },
+  "M1_T_other": {
+   "est": 0.2188,
+   "ci95": [
+    0.0625,
+    0.4062
+   ]
+  },
+  "M1_T_qwen": {
+   "est": 0.125,
+   "ci95": [
+    0.0,
+    0.3125
+   ]
+  },
+  "M1_T_qwen_self": {
+   "est": 0.125,
+   "ci95": [
+    0.0,
+    0.3125
+   ]
+  },
+  "M1_T_qwen_other": {
+   "est": 0.125,
+   "ci95": [
+    0.0,
+    0.3125
+   ]
+  },
+  "M1_T_gemma": {
+   "est": 0.25,
+   "ci95": [
+    0.0625,
+    0.4688
+   ]
+  },
+  "M1_T_gemma_self": {
+   "est": 0.1875,
+   "ci95": [
+    0.0,
+    0.375
+   ]
+  },
+  "M1_T_gemma_other": {
+   "est": 0.3125,
+   "ci95": [
+    0.125,
+    0.5625
+   ]
+  },
+  "M1_T_gsm8k": {
+   "est": 0.3438,
+   "ci95": [
+    0.0625,
+    0.6562
+   ]
+  },
+  "M3_label_self_minus_other_T_gsm8k": {
+   "est": -0.0625,
+   "ci95": [
+    -0.1875,
+    0.0
+   ]
+  },
+  "M4_author_qwen_minus_gemma_T_gsm8k": {
+   "est": -0.1875,
+   "ci95": [
+    -0.4375,
+    0.0
+   ]
+  },
+  "M1_T_mmlu": {
+   "est": 0.0312,
+   "ci95": [
+    0.0,
+    0.0938
+   ]
+  },
+  "M3_label_self_minus_other_T_mmlu": {
+   "est": -0.0625,
+   "ci95": [
+    -0.1875,
+    0.0
+   ]
+  },
+  "M4_author_qwen_minus_gemma_T_mmlu": {
+   "est": -0.0625,
+   "ci95": [
+    -0.1875,
+    0.0
+   ]
+  },
+  "M1_U": {
+   "est": 0.0781,
+   "ci95": [
+    0.0,
+    0.1875
+   ]
+  },
+  "M1_U_self": {
+   "est": 0.0938,
+   "ci95": [
+    0.0,
+    0.25
+   ]
+  },
+  "M1_U_other": {
+   "est": 0.0625,
+   "ci95": [
+    0.0,
+    0.1875
+   ]
+  },
+  "M1_U_qwen": {
+   "est": 0.0938,
+   "ci95": [
+    0.0,
+    0.25
+   ]
+  },
+  "M1_U_qwen_self": {
+   "est": 0.125,
+   "ci95": [
+    0.0,
+    0.3125
+   ]
+  },
+  "M1_U_qwen_other": {
+   "est": 0.0625,
+   "ci95": [
+    0.0,
+    0.1875
+   ]
+  },
+  "M1_U_gemma": {
+   "est": 0.0625,
+   "ci95": [
+    0.0,
+    0.1562
+   ]
+  },
+  "M1_U_gemma_self": {
+   "est": 0.0625,
+   "ci95": [
+    0.0,
+    0.1875
+   ]
+  },
+  "M1_U_gemma_other": {
+   "est": 0.0625,
+   "ci95": [
+    0.0,
+    0.1875
+   ]
+  },
+  "M1_U_gsm8k": {
+   "est": 0.1562,
+   "ci95": [
+    0.0,
+    0.375
+   ]
+  },
+  "M3_label_self_minus_other_U_gsm8k": {
+   "est": 0.0625,
+   "ci95": [
+    -0.1875,
+    0.375
+   ]
+  },
+  "M4_author_qwen_minus_gemma_U_gsm8k": {
+   "est": 0.0625,
+   "ci95": [
+    0.0,
+    0.1875
+   ]
+  },
+  "M1_U_mmlu": {
+   "est": 0.0,
+   "ci95": [
+    0.0,
+    0.0
+   ]
+  },
+  "M3_label_self_minus_other_U_mmlu": {
+   "est": 0.0,
+   "ci95": [
+    0.0,
+    0.0
+   ]
+  },
+  "M4_author_qwen_minus_gemma_U_mmlu": {
+   "est": 0.0,
+   "ci95": [
+    0.0,
+    0.0
+   ]
+  },
+  "loc_effect_T_minus_U": {
+   "est": 0.1094,
+   "ci95": [
+    0.0312,
+    0.2031
+   ]
+  },
+  "loc_effect_T_minus_U_gsm8k": {
+   "est": 0.1875,
+   "ci95": [
+    0.0625,
+    0.3438
+   ]
+  },
+  "loc_effect_T_minus_U_mmlu": {
+   "est": 0.0312,
+   "ci95": [
+    0.0,
+    0.0938
+   ]
+  },
+  "M3_label_self_minus_other_T": {
+   "est": -0.0625,
+   "ci95": [
+    -0.1562,
+    0.0
+   ]
+  },
+  "M4_author_qwen_minus_gemma_T": {
+   "est": -0.125,
+   "ci95": [
+    -0.2812,
+    0.0
+   ]
+  },
+  "M4_author_qwen_minus_gemma_T_self": {
+   "est": -0.0625,
+   "ci95": [
+    -0.1875,
+    0.0
+   ]
+  },
+  "M4_author_qwen_minus_gemma_T_other": {
+   "est": -0.1875,
+   "ci95": [
+    -0.375,
+    0.0
+   ]
+  },
+  "M3_label_self_minus_other_U": {
+   "est": 0.0312,
+   "ci95": [
+    -0.0938,
+    0.1875
+   ]
+  },
+  "M4_author_qwen_minus_gemma_U": {
+   "est": 0.0312,
+   "ci95": [
+    0.0,
+    0.0938
+   ]
+  },
+  "M4_author_qwen_minus_gemma_U_self": {
+   "est": 0.0625,
+   "ci95": [
+    0.0,
+    0.1875
+   ]
+  },
+  "M4_author_qwen_minus_gemma_U_other": {
+   "est": 0.0,
+   "ci95": [
+    0.0,
+    0.0
+   ]
+  },
+  "M3_label_self_minus_other_pooled": {
+   "est": -0.0156,
+   "ci95": [
+    -0.0938,
+    0.0625
+   ]
+  },
+  "M4_author_qwen_minus_gemma_pooled": {
+   "est": -0.0469,
+   "ci95": [
+    -0.125,
+    0.0312
+   ]
+  },
+  "M3_interaction_T_minus_U": {
+   "est": -0.0938,
+   "ci95": [
+    -0.25,
+    0.0625
+   ]
+  },
+  "label_by_author_interaction_pooled": {
+   "est": 0.0938,
+   "ci95": [
+    0.0,
+    0.1875
+   ]
+  },
+  "M2_correct_on_corrupt_T": {
+   "est": 0.7188,
+   "ci95": [
+    0.5469,
+    0.8594
+   ]
+  },
+  "M2_other_on_corrupt_T": {
+   "est": 0.0938,
+   "ci95": [
+    0.0312,
+    0.1562
+   ]
+  },
+  "M2_correct_on_right_T": {
+   "est": 0.9688,
+   "ci95": [
+    0.9219,
+    1.0
+   ]
+  },
+  "M2_other_on_right_T": {
+   "est": 0.0312,
+   "ci95": [
+    0.0,
+    0.0781
+   ]
+  },
+  "M2_correct_on_right_T_gsm8k": {
+   "est": 0.9375,
+   "ci95": [
+    0.8438,
+    1.0
+   ]
+  },
+  "M2_correct_on_corrupt_T_gsm8k": {
+   "est": 0.5,
+   "ci95": [
+    0.2812,
+    0.6875
+   ]
+  },
+  "M2_correct_on_right_T_mmlu": {
+   "est": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ]
+  },
+  "M2_correct_on_corrupt_T_mmlu": {
+   "est": 0.9375,
+   "ci95": [
+    0.8438,
+    1.0
+   ]
+  },
+  "M2_correct_on_corrupt_U": {
+   "est": 0.7344,
+   "ci95": [
+    0.5781,
+    0.875
+   ]
+  },
+  "M2_other_on_corrupt_U": {
+   "est": 0.1875,
+   "ci95": [
+    0.0781,
+    0.3125
+   ]
+  },
+  "M2_correct_on_right_U": {
+   "est": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ]
+  },
+  "M2_other_on_right_U": {
+   "est": 0.0,
+   "ci95": [
+    0.0,
+    0.0
+   ]
+  },
+  "M2_correct_on_right_U_gsm8k": {
+   "est": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ]
+  },
+  "M2_correct_on_corrupt_U_gsm8k": {
+   "est": 0.5312,
+   "ci95": [
+    0.3125,
+    0.75
+   ]
+  },
+  "M2_correct_on_right_U_mmlu": {
+   "est": 1.0,
+   "ci95": [
+    1.0,
+    1.0
+   ]
+  },
+  "M2_correct_on_corrupt_U_mmlu": {
+   "est": 0.9375,
+   "ci95": [
+    0.8438,
+    1.0
+   ]
+  }
+ },
+ "no_answer_rate": {
+  "T": 0.0625,
+  "U": 0.0859
+ },
+ "tokens_mean": {
+  "T_right": 500,
+  "T_corrupt": 900,
+  "U_right": 636,
+  "U_corrupt": 1781
+ },
+ "logit": {
+  "const": {
+   "coef": -2.257,
+   "ci95": [
+    -19.345,
+    -0.949
+   ]
+  },
+  "T": {
+   "coef": 2.378,
+   "ci95": [
+    1.085,
+    19.771
+   ]
+  },
+  "label_self": {
+   "coef": 0.475,
+   "ci95": [
+    -3.24,
+    18.092
+   ]
+  },
+  "author_qwen": {
+   "coef": 0.475,
+   "ci95": [
+    -3.288,
+    1.002
+   ]
+  },
+  "T:label_self": {
+   "coef": -1.005,
+   "ci95": [
+    -18.6,
+    0.827
+   ]
+  },
+  "T:author_qwen": {
+   "coef": -1.517,
+   "ci95": [
+    -17.061,
+    -0.461
+   ]
+  },
+  "mmlu": {
+   "coef": -3.196,
+   "ci95": [
+    -21.363,
+    -0.769
+   ]
+  }
+ },
+ "M5": {
+  "table": {
+   "gemma|other": {
+    "no": 2
+   },
+   "label=other": {
+    "no": 4
+   },
+   "author=gemma": {
+    "no": 3
+   },
+   "all": {
+    "no": 5
+   },
+   "qwen|other": {
+    "no": 2
+   },
+   "author=qwen": {
+    "no": 2
+   },
+   "gemma|self": {
+    "no": 1
+   },
+   "label=self": {
+    "no": 1
+   }
+  },
+  "check": {
+   "n": 5,
+   "agree": 1.0,
+   "kappa": 1.0,
+   "haiku_counts": {
+    "no": 5
+   },
+   "gpt_counts": {
+    "no": 5
+   }
+  },
+  "label_by_first_outcome": {
+   "no|correct": 5
+  }
+ },
+ "predictions": [
+  {
+   "id": "P1",
+   "prediction": "M1 higher in T than in U by >= 15 points",
+   "p": 0.8,
+   "outcome": false,
+   "directional_correct": false,
+   "brier": 0.64
+  },
+  {
+   "id": "P2",
+   "prediction": "M1 in T >= 30%",
+   "p": 0.65,
+   "outcome": false,
+   "directional_correct": false,
+   "brier": 0.4225
+  },
+  {
+   "id": "P3",
+   "prediction": "M3: label self > other by >= 5 points in U",
+   "p": 0.4,
+   "outcome": false,
+   "directional_correct": true,
+   "brier": 0.16
+  },
+  {
+   "id": "P4",
+   "prediction": "M4: own (Qwen) traces followed more than Gemma's by >= 5 points, label fixed",
+   "p": 0.35,
+   "outcome": false,
+   "directional_correct": true,
+   "brier": 0.1225
+  }
+ ],
+ "predictions_directional": "2/4",
+ "predictions_brier": 0.3362
+}

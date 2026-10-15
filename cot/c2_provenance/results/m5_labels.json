@@ -1,0 +1,29 @@
+{
+ "labels": {
+  "mmlu-793|gemma|other|corrupt|U": "no",
+  "mmlu-2914|qwen|other|corrupt|U": "no",
+  "mmlu-4957|gemma|self|corrupt|U": "no",
+  "gsm8k-1312|qwen|other|corrupt|U": "no",
+  "mmlu-13639|gemma|other|corrupt|U": "no"
+ },
+ "no_reply": [],
+ "check": {
+  "n": 5,
+  "agree": 1.0,
+  "kappa": 1.0,
+  "gpt_labels": {
+   "mmlu-2914|qwen|other|corrupt|U": "no",
+   "mmlu-13639|gemma|other|corrupt|U": "no",
+   "gsm8k-1312|qwen|other|corrupt|U": "no",
+   "mmlu-4957|gemma|self|corrupt|U": "no",
+   "mmlu-793|gemma|other|corrupt|U": "no"
+  },
+  "haiku_counts": {
+   "no": 5
+  },
+  "gpt_counts": {
+   "no": 5
+  }
+ },
+ "spend_usd": 0.0017
+}

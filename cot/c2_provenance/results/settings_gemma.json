@@ -1,0 +1,36 @@
+{
+ "stage": "gemma",
+ "git_rev": "5469243-dirty",
+ "backend": {
+  "model": "google/gemma-4-31B-it",
+  "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+  "vllm": "0.30.0",
+  "dtype": "bfloat16",
+  "max_model_len": 8192,
+  "decoding": {
+   "temperature": 0.7,
+   "top_p": 0.95,
+   "top_k": 20,
+   "min_p": 0.0
+  },
+  "load_seconds": 56
+ },
+ "code_sha256": {
+  "common.py": "4a1a74ca816d8c2fdc8954f6b6172445c2ba0d6b8b2ea660d386b5cfb1711b0e",
+  "pod_c2.py": "5613c2cccc5b1c2a157193ca730908ab3414dbe008e3eabece6c3848a73ab58c",
+  "build_main.py": "55e7f47ce0b38846b26dae9e42964a16cc3a70d78a0af9b3a5138282b6dda446"
+ },
+ "kept_items": 127,
+ "usable": 91,
+ "stopped_early": false,
+ "chunks_run": 6,
+ "tokens": {
+  "n": 177,
+  "mean": 783,
+  "p50": 618,
+  "p90": 1357,
+  "max": 3072,
+  "at_cap": 4,
+  "total": 138654
+ }
+}
