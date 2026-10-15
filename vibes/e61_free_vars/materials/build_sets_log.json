@@ -1,0 +1,12 @@
+{
+ "pool": "persona/materials/train_prompts_1200.jsonl",
+ "pool_sha256": "baa968e4cf0e6b1a37d911163b88f2090d41027c00905b1a29735c0cd0f21f6e",
+ "pool_n": 1200,
+ "excluded": {
+  "sensitive": 37,
+  "near_heldout_or_em": 4
+ },
+ "screened_n": 1159,
+ "general_n": 200,
+ "benign_n": 40
+}
