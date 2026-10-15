@@ -3,7 +3,8 @@
 Design card: `DESIGN.md` (frozen, tag `s5-design`). Question, conditions, primary measure, gate and predictions are the
 card's; this file fixes everything the card leaves open. Code: `items.py` (stimuli), `engine.py` (HF reads, steering,
 readout, sampling, probes), `directions.py` (layer rule, directions, floors), `pod_s5.py` (pod job), `analyze.py`
-(analysis), `pod_pilot.sh` / `pod.sh` (pods), `test_engine.py` / `test_decode.py` (local checks on Qwen3-0.6B).
+(analysis), `pod_all.sh` (pilot -> hold -> main on one pod), `launch.sh` / `pod_ctl.sh` (launch, pull pilot, GO),
+`test_engine.py` / `test_decode.py` (local checks on Qwen3-0.6B). `pod_pilot.sh` is the script of the failed pod s5-1.
 
 ## Implementation
 
@@ -104,6 +105,58 @@ greedy loop = HF generate; S1 digit tree = brute force; zero steering vector = n
 pilot and main path end to end on 2 + 2 items. `directions.py` run alone: synthetic dry run (planted axis at one layer
 is chosen, floors near 0.5).
 
-**Compute.** Pilot pod `s5-1` (gate; Gemma fallback in the same pod if needed), main pod `s5-2`. Launcher GPU list is
-the two A100 80GB types only: `infra/runpod_guard.py`'s allow-list has no H100 entry, so passing it would refuse the
-launch.
+**Compute.** One launcher-managed pod (`pod_all.sh`): pilot -> hold (heartbeat) until a GO file is written over ssh
+after the `s5-freeze` tag -> main stage with the kept cue. Gate fail -> the Gemma 4 31B pilot, then stop. The launcher
+GPU list is the two A100 80GB types only: `infra/runpod_guard.py`'s allow-list has no H100 entry, so passing it would
+refuse the launch.
+
+## Pilot (before freeze)
+
+**s5-1 (pod o6ko4y7a5t59n6, $0.69): no data.** The pilot stage sliced the pilot items with `[: limit_items]`, and the
+default 0 selected none (the local `--tiny` test sets the limit to 1, so it did not show); the Gemma fallback branch hit
+the same error. Fixed (guard + assert), committed as d7f674a (pre-pilot build). Log: `results/s5-1_failed_pilot/`.
+
+**s5-2 (pod ls1qo3yxl1v5lt), Qwen3-32B, 20 pilot-only items x 4 variants x 2 cues = 160 prompts, unobserved,
+unsteered** (`results/pilot/`; 7.4% of the 2,160 frozen main prompts):
+
+| cue | favouritism F (95% CI, 20 items) | items with the same sign | P(A) | P(reach profile) | S1 mean | S2 P(yes) |
+|---|---|---|---|---|---|---|
+| flattery | +0.065 [+0.045, +0.086] | 19/20 | 0.36 | 0.37 | 80.6 | 0.79 |
+| insult | **-0.186 [-0.228, -0.143]** | 20/20 | 0.24 | 0.38 | 76.0 | 0.94 |
+
+- **Gate: PASS.** Kept cue = insult (larger |F|), |F| = 0.186 >= 0.10 (P(cue applicant) 0.31). Sign s = -1: the
+  favouritism measured is against the insulter. No Gemma fallback.
+- Formats: A/B mass 1.000 (minimum 1.000); S1 digit mass 1.00; S2 yes/no mass 1.00; the sampled letter equals the
+  readout's argmax in 94-95% of samples; 475/480 samples end within 64 tokens (mean 39).
+- Base rates that the balancing absorbs: strong position preference for B (P(A) 0.24-0.36) and a preference for the
+  feasibility/track-record profile over the reach/match-funding profile (0.37-0.38).
+- Speed: 80 prompts (readout + 3 samples + S1 + S2) in ~85 s on an A100 SXM 80GB.
+
+## Freeze
+
+Kept cue **insult**. The main run is the frozen code above, already on pod s5-2 (synced at launch; sha256 at launch,
+unchanged at freeze):
+
+```
+24f0846ba579f536a89d27ccd88787746c46285d1753143d5d09b06022393524  selfknow/s5_seen_unbiased/items.py
+0d928e683362413128633a2bd3019f54ce34b9da4939ef2bb32863f93e75f8e4  selfknow/s5_seen_unbiased/engine.py
+5c4fb1c03d205382a7cfa34633aefbb3e34a1d45aed845982993f4ebba257b12  selfknow/s5_seen_unbiased/directions.py
+8b4508d6bffac435e557957ac6669e3dd2e5dea392d85518bb646c9a6ad9a739  selfknow/s5_seen_unbiased/pod_s5.py
+af919c822a0e80e1f6a7a74507102f6a11e9f2d59843749c5109d8d02cea72e1  selfknow/s5_seen_unbiased/analyze.py
+2448f87765d88c52dba987dd0b2a04cba9065b3d7a202ecbe55e8361b18590d6  selfknow/s5_seen_unbiased/pod_all.sh
+53e670c5365b6b52d22beb2d71b38f76b5f503a68187ef50f1f54b211e3aaca0  selfknow/s5_seen_unbiased/data/items.json
+```
+
+GO (cue, exploratory deadline in minutes from the main stage's start) is written only after the `s5-freeze` tag exists
+(`pod_ctl.sh go` refuses otherwise).
+
+## Amendments (before the main run)
+
+None to the card's question, conditions, primary measure, gate or predictions. Procedural choices, recorded here:
+1. The gate pilot used 20 pilot-only items (60-79), not 20 of the 60 main items, so choosing the cue cannot inflate the
+   main run's unobserved favouritism (the readout is deterministic, a selected item would carry its value into M1).
+2. Pilot and main share one launcher-managed pod with a hold step (a second pod start costs ~20 min of A100 time here);
+   the freeze commit and tag precede the GO file.
+3. GPU list without H100 (guard allow-list). Spend so far: s5-1 $0.69; s5-2 capped at $3.15 (total cap $4).
+4. Exploratory full-gap arms (v_obs and placebo at gap x u, both sides) are additions, reported separately and never
+   used for the predictions; they run only if the main stage is under the GO deadline.

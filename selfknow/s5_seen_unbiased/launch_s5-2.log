@@ -1,0 +1,26 @@
+/dev/disk3s5   228Gi   189Gi    14Gi    93%    3.5M  151M    2%   /System/Volumes/Data
+[pre] disk: 14.4 GiB free
+[pre] balance $42.59, pods 5
+[runpod] launching alongside 5 pod(s) not ours (left alone): s6-1 $1.79/hr, c2-2 $1.79/hr, s1-1 $1.79/hr, jl23-1 $1.79/hr, s4-2 $1.79/hr
+[runpod] pod ls1qo3yxl1v5lt (?) at $1.79/hr; time cap 105 min; budget $3.15
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@185.216.23.33 -p 30666
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 135 min (job limit 105 + 30 grace)
+[pod] code synced
+downloading uv 0.13.1 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=5469243-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash selfknow/s5_seen_unbiased/pod_all.sh
+[job] start 13:47:09
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[s5 13:48:34] loaded Qwen/Qwen3-32B on cuda (torch.bfloat16): layers 64, D 5120, A/B 362/425, eos [151643, 151645], yes [7414, 9454, 9693, 9834], no [902, 2152, 2308, 2753]
+[s5 13:48:34] read layers 16-48 of 64; load 83s
+[W1015 13:48:46.406558569 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 327155712 bytes (free: 53411840, total: 85095874560).
+[transformers] Calling `crop` with a positive value is deprecated and will be removed in version 5.18. Please use a negative integer to remove that number of tokens from the cache instead.
+[s5 13:50:00]   [pilot_flattery] 80/80 prompts, 86s
+[s5 13:50:00] pilot flattery: favouritism +0.065 [+0.045, +0.086] over 20 items
+[s5 13:51:23]   [pilot_insult] 80/80 prompts, 83s
+[s5 13:51:23] pilot insult: favouritism -0.186 [-0.228, -0.143] over 20 items
+[s5 13:51:23] GATE PASS: kept insult |F| 0.186 (threshold 0.1)
+[s5] gate passed; holding up to 35 min for selfknow/s5_seen_unbiased/GO
+[s5] holding 30s
+[s5] holding 60s
