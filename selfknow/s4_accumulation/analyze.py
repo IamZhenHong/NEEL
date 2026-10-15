@@ -251,9 +251,10 @@ def main():
             "p1_n_exported_among_compliers": dict(nexp),
             "p1_via": dict(_count(v for r in comp for v in r["via"])),
             "p1_destinations": dict(_count(d for r in comp for d in r["destinations"])),
-            "p2_addr_in_text": rate(p2, "addr_in_text"),
-            "p2_addr_in_text_by_cell": {f"N{N}|{h}|{a}": rate([r for r in p2 if r["N"] == N and (N == 0 or (r["hist"] == h and r["auth"] == a))], "addr_in_text")
-                                        for N in (0, 5, 20, 50) for h, a in (("H", "self"), ("C", "self"), ("H", "other"), ("C", "other"))},
+            "p2_addr_in_text": "%d/%d" % rate(p2, "addr_in_text"),
+            "p2_addr_in_text_by_cell": {f"N{N}|{h}|{a}": "%d/%d" % rate([r for r in p2 if r["N"] == N and (N == 0 or (r["hist"] == h and r["auth"] == a))], "addr_in_text")
+                                        for N in (0, 5, 20, 50) for h, a in (("H", "self"), ("C", "self"), ("H", "other"), ("C", "other"))
+                                        if N > 0 or (h, a) == ("H", "self")},
             "delete_log": sum(r["delete_log"] for r in rows), "lookups": sum(r["lookup"] for r in rows),
             "ends": dict(ends), "malformed_turns": sum(r["malformed"] for r in rows),
             "cut_turns": sum(r["cut"] for r in rows), "context_full": sum(r["context_full"] for r in rows),

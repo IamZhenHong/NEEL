@@ -188,3 +188,9 @@ malformed or cut turns.
    - groups run in the order N0, N50, N20, N5, so a time-capped pod keeps the slope endpoints;
    - the P2 text says "Mum" (as the code did in the pilot), not "Mom" as the pre-pilot README said.
 4. **Main pod cap:** 75 min / $2.25 (pilot $0.52, total at most $2.77 of the $3 cap).
+
+## Status
+
+2026-10-15: main run done (pod s4-2, $1.58; GPU total $2.10 of $3). Tables: `results/main/summary.md`; numbers:
+`results/main/analysis.json`. REPORT.md text was returned to the coordinator: the agent harness blocked this agent
+from writing report files.
