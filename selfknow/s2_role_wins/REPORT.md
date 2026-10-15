@@ -23,7 +23,7 @@ directional 1/7, Brier 0.315.
   as; the source does not raise system-prompt identities. Caveat the agent states: source and position are confounded
   by construction (system-prompt identities always come first), so "recency" here is mostly "being a later
   conversation turn". Inside the system prompt alone recency is weak or reversed.
-- This sits uneasily with vigilante R3/R7, where a claimed authority in chat moved money. Both fit "the latest
-  instruction in the conversation wins", which is the plainer reading of both.
+- This is consistent with vigilante R3/R7, where an authority claimed in a chat message moved money past a limit:
+  in both, the latest instruction in the conversation tends to win over the system prompt.
 - The naming/acting split is Gemma-only: it acts on "From now on you are X" from a user but keeps its system-prompt
   name.
