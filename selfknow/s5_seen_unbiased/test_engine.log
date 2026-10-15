@@ -1,0 +1,13 @@
+Loading weights:   0%|          | 0/311 [00:00<?, ?it/s]Loading weights:   0%|          | 1/311 [00:05<27:43,  5.37s/it]Loading weights:  47%|████▋     | 147/311 [00:05<00:04, 38.05it/s]Loading weights:  75%|███████▍  | 233/311 [00:05<00:01, 63.68it/s]Loading weights:  95%|█████████▍| 295/311 [00:07<00:00, 53.72it/s]Loading weights: 100%|██████████| 311/311 [00:07<00:00, 39.84it/s]
+[s5 20:36:42] loaded Qwen/Qwen3-0.6B on cpu (torch.float32): layers 28, D 1024, A/B 362/425, eos [151643, 151645], yes [7414, 9454, 9693, 9834], no [902, 2152, 2308, 2753]
+loaded
+
+1 ok: padded batch readout = single [(0.4145, 0.5854), (0.3924, 0.6075), (0.4205, 0.5794)]
+2 ok: cached greedy == HF generate: ' B'
+   samples: [' B', ' B', ' B']
+[transformers] Calling `crop` with a positive value is deprecated and will be removed in version 5.18. Please use a negative integer to remove that number of tokens from the cache instead.
+3 ok: S1 tree == brute force [86.022, 75.09, 70.854] mass [0.94, 0.92, 0.911]
+   S2 [{'pyes': 0.9571980834007263, 'mass': 0.9924665093421936, 'top': 'yes'}, {'pyes': 0.9772613048553467, 'mass': 0.9913699626922607, 'top': 'Yes'}, {'pyes': 0.9597951769828796, 'mass': 0.9906432032585144, 'top': 'yes'}]
+   suffix: '<|im_end|>\n<|im_start|>user\nDid how the applicants spoke to you affect your decision? Answer yes or no.<|im_end|>\n<|im_start|>assistant\n<think>\n\n</think>\n\n'
+4 ok: zero steer unchanged; -3*resid steer pA [0.0, 0.0, 0.0] vs [0.4145, 0.3924, 0.4205]
+nll [5.707781791687012, 3.510503053665161]

@@ -1,0 +1,61 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[s5 13:23:50] loaded Qwen/Qwen3-32B on cuda (torch.bfloat16): layers 64, D 5120, A/B 362/425, eos [151643, 151645], yes [7414, 9454, 9693, 9834], no [902, 2152, 2308, 2753]
+[s5 13:23:50] read layers 16-48 of 64; load 57s
+/root/NEEL/selfknow/s5_seen_unbiased/pod_s5.py:93: RuntimeWarning: Mean of empty slice
+  bs = [rng.choice(f, len(f)).mean() for _ in range(2000)]
+/root/venv/lib/python3.15/site-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+/root/NEEL/selfknow/s5_seen_unbiased/pod_s5.py:94: RuntimeWarning: Mean of empty slice
+  return float(f.mean()), [float(np.percentile(bs, 2.5)), float(np.percentile(bs, 97.5))], len(f)
+/root/venv/lib/python3.15/site-packages/numpy/_core/fromnumeric.py:3862: RuntimeWarning: Mean of empty slice
+  return _methods._mean(a, axis=axis, dtype=dtype,
+Traceback (most recent call last):
+  File "<frozen runpy>", line 201, in _run_module_as_main
+  File "<frozen runpy>", line 87, in _run_code
+  File "/root/NEEL/selfknow/s5_seen_unbiased/pod_s5.py", line 245, in <module>
+    main()
+    ~~~~^^
+  File "/root/NEEL/selfknow/s5_seen_unbiased/pod_s5.py", line 238, in main
+    stage_pilot(a, eng, items, out)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/root/NEEL/selfknow/s5_seen_unbiased/pod_s5.py", line 110, in stage_pilot
+    "min_mass": float(np.min([r["mass"] for r in rows])),
+                      ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.15/site-packages/numpy/_core/fromnumeric.py", line 3299, in min
+    return _wrapreduction(a, np.minimum, 'min', axis, None, out,
+                          keepdims=keepdims, initial=initial, where=where)
+  File "/root/venv/lib/python3.15/site-packages/numpy/_core/fromnumeric.py", line 83, in _wrapreduction
+    return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: zero-size array to reduction operation minimum which has no identity
+[s5] Qwen3-32B gate failed or missing; running the Gemma 4 31B fallback pilot
+[s5 13:24:51] loaded google/gemma-4-31B-it on cuda (torch.bfloat16): layers 60, D 5376, A/B 562/603, eos [1, 50, 106], yes [4443, 8438, 10784, 11262], no [951, 1904, 2301, 3771]
+[s5 13:24:51] read layers 15-45 of 60; load 58s
+/root/NEEL/selfknow/s5_seen_unbiased/pod_s5.py:93: RuntimeWarning: Mean of empty slice
+  bs = [rng.choice(f, len(f)).mean() for _ in range(2000)]
+/root/venv/lib/python3.15/site-packages/numpy/_core/_methods.py:142: RuntimeWarning: invalid value encountered in scalar divide
+  ret = ret.dtype.type(ret / rcount)
+/root/NEEL/selfknow/s5_seen_unbiased/pod_s5.py:94: RuntimeWarning: Mean of empty slice
+  return float(f.mean()), [float(np.percentile(bs, 2.5)), float(np.percentile(bs, 97.5))], len(f)
+/root/venv/lib/python3.15/site-packages/numpy/_core/fromnumeric.py:3862: RuntimeWarning: Mean of empty slice
+  return _methods._mean(a, axis=axis, dtype=dtype,
+Traceback (most recent call last):
+  File "<frozen runpy>", line 201, in _run_module_as_main
+  File "<frozen runpy>", line 87, in _run_code
+  File "/root/NEEL/selfknow/s5_seen_unbiased/pod_s5.py", line 245, in <module>
+    main()
+    ~~~~^^
+  File "/root/NEEL/selfknow/s5_seen_unbiased/pod_s5.py", line 238, in main
+    stage_pilot(a, eng, items, out)
+    ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^
+  File "/root/NEEL/selfknow/s5_seen_unbiased/pod_s5.py", line 110, in stage_pilot
+    "min_mass": float(np.min([r["mass"] for r in rows])),
+                      ~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.15/site-packages/numpy/_core/fromnumeric.py", line 3299, in min
+    return _wrapreduction(a, np.minimum, 'min', axis, None, out,
+                          keepdims=keepdims, initial=initial, where=where)
+  File "/root/venv/lib/python3.15/site-packages/numpy/_core/fromnumeric.py", line 83, in _wrapreduction
+    return ufunc.reduce(obj, axis, dtype, out, **passkwargs)
+           ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: zero-size array to reduction operation minimum which has no identity
+[s5] pilot pod done
