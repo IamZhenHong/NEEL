@@ -4,7 +4,7 @@ Design card: `DESIGN.md` (frozen 2026-10-15, tag `s1-design`). Question: in a lo
 component fades first from what the agent acts on (role, task, constraints, own past actions), as context grows and
 across a compaction the agent writes itself? Qwen3.6-27B and Gemma 4 31B, thinking off, vLLM, rule-based scoring only.
 
-Status: pilot gate PASSED on both models (pilot 3, after two role_b rewordings on the 1k context); frozen (tag `s1-freeze`); main run next.
+Status: pilot gate PASSED on both models (pilot 3, after two role_b rewordings on the 1k context); frozen (tag `s1-freeze`); main run done 2026-10-15 22:27 (1,920 probe branches + 64 summaries per model); tables in `results/main/summary.md`; GPU $2.70 of $3; tag `s1-results`.
 
 ## Implementation
 

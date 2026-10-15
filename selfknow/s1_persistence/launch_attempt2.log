@@ -1,0 +1,62 @@
+[pre] disk: 14.7 GiB free
+[pre] balance $46.06, pods 6
+[runpod] launching alongside 6 pod(s) not ours (left alone): s7-1 $1.79/hr, s6-1 $1.79/hr, s5-1 $1.79/hr, jl23-1 $1.79/hr, s4-2 $1.79/hr, c2-1 $1.79/hr
+[runpod] pod lkk58y2pt4llb7 (?) at $1.79/hr; time cap 85 min; budget $2.6
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@185.216.23.194 -p 28890
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 115 min (job limit 85 + 30 grace)
+[pod] code synced
+downloading uv 0.13.1 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=c9e73b0-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash selfknow/s1_persistence/pod.sh
+[job] start 13:10:31
+[s1pod 13:10:31] start; NVIDIA A100-SXM4-80GB, 81920 MiB
+[s1pod 13:11:12] vllm ready: [pod] vllm 0.30.0 torch 2.13.0+cu129 cuda 12.9
+[s1pod 13:11:12] qwen pilot: --mml 32768 --gpu-mem 0.92
+[s1pod hb 13:14]  
+[s1pod 13:18:27] qwen pilot exit 0 (144 branches)
+[s1pod 13:18:27] gemma4 pilot: --mml 32768 --mnbt 2048 --gpu-mem 0.93
+[s1pod hb 13:18] selfknow/s1_persistence/results/pilot/branches_qwen.jsonl:144  
+[s1pod 13:21:55] gemma4 pilot exit 0 (144 branches)
+[s1pod 13:21:55] stage pilot done
+[s1pod hb 13:22] selfknow/s1_persistence/results/pilot/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot/branches_qwen.jsonl:144  
+[s1pod 13:23:05] control: re-pilot (1)
+[s1pod 13:23:05] qwen pilot: --mml 32768 --gpu-mem 0.92
+[s1pod 13:26:28] qwen pilot exit 0 (144 branches)
+[s1pod 13:26:28] gemma4 pilot: --mml 32768 --mnbt 2048 --gpu-mem 0.93
+[s1pod hb 13:26] selfknow/s1_persistence/results/pilot/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_qwen.jsonl:144  
+[s1pod 13:27:53] gemma4 pilot exit 0 (144 branches)
+[s1pod 13:27:53] stage pilot done
+[s1pod 13:29:23] control: re-pilot (2)
+[s1pod 13:29:23] qwen pilot: --mml 32768 --gpu-mem 0.92
+[s1pod hb 13:30] selfknow/s1_persistence/results/pilot_prev1/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_qwen.jsonl:144  
+[s1pod 13:32:54] qwen pilot exit 0 (144 branches)
+[s1pod 13:32:54] gemma4 pilot: --mml 32768 --mnbt 2048 --gpu-mem 0.93
+[s1pod 13:34:15] gemma4 pilot exit 0 (144 branches)
+[s1pod 13:34:15] stage pilot done
+[s1pod hb 13:34] selfknow/s1_persistence/results/pilot/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_qwen.jsonl:144  
+[s1pod 13:35:35] control: main
+[s1pod 13:35:35] qwen main: --mml 32768 --gpu-mem 0.92
+[s1pod hb 13:38] selfknow/s1_persistence/results/main/branches_qwen.jsonl:107 selfknow/s1_persistence/results/pilot/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_qwen.jsonl:144  
+[s1pod hb 13:42] selfknow/s1_persistence/results/main/branches_qwen.jsonl:435 selfknow/s1_persistence/results/pilot/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_qwen.jsonl:144  [runner] +group qwe
+[s1pod hb 13:46] selfknow/s1_persistence/results/main/branches_qwen.jsonl:667 selfknow/s1_persistence/results/pilot/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_qwen.jsonl:144  [runner] +group qwe
+[s1pod hb 13:50] selfknow/s1_persistence/results/main/branches_qwen.jsonl:846 selfknow/s1_persistence/results/pilot/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_qwen.jsonl:144  [runner] +group qwe
+[s1pod hb 13:54] selfknow/s1_persistence/results/main/branches_qwen.jsonl:1070 selfknow/s1_persistence/results/pilot/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_qwen.jsonl:144  [runner] +group qwe
+[s1pod hb 13:58] selfknow/s1_persistence/results/main/branches_qwen.jsonl:1222 selfknow/s1_persistence/results/pilot/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_qwen.jsonl:144  [runner] +group qwe
+[s1pod hb 14:02] selfknow/s1_persistence/results/main/branches_qwen.jsonl:1433 selfknow/s1_persistence/results/pilot/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_qwen.jsonl:144  [runner] +group qwe
+[s1pod hb 14:06] selfknow/s1_persistence/results/main/branches_qwen.jsonl:1583 selfknow/s1_persistence/results/pilot/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_qwen.jsonl:144  [runner] +group qwe
+[s1pod 14:10:23] qwen main exit 0 (1984 branches)
+[s1pod 14:10:23] gemma4 main: --mml 32768 --mnbt 2048 --gpu-mem 0.93
+[s1pod hb 14:10] selfknow/s1_persistence/results/main/branches_qwen.jsonl:1984 selfknow/s1_persistence/results/pilot/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_qwen.jsonl:144  
+[s1pod hb 14:14] selfknow/s1_persistence/results/main/branches_gemma4.jsonl:336 selfknow/s1_persistence/results/main/branches_qwen.jsonl:1984 selfknow/s1_persistence/results/pilot/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_qwen.jsonl:144  [runner] +group gemma4|v1|pla
+[s1pod hb 14:18] selfknow/s1_persistence/results/main/branches_gemma4.jsonl:773 selfknow/s1_persistence/results/main/branches_qwen.jsonl:1984 selfknow/s1_persistence/results/pilot/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_qwen.jsonl:144  [runner] +group gemma4|v4|pla
+[s1pod hb 14:22] selfknow/s1_persistence/results/main/branches_gemma4.jsonl:1163 selfknow/s1_persistence/results/main/branches_qwen.jsonl:1984 selfknow/s1_persistence/results/pilot/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_qwen.jsonl:144  [runner] +group gemma4|v6|pla
+[s1pod hb 14:26] selfknow/s1_persistence/results/main/branches_gemma4.jsonl:1600 selfknow/s1_persistence/results/main/branches_qwen.jsonl:1984 selfknow/s1_persistence/results/pilot/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev1/branches_qwen.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_gemma4.jsonl:144 selfknow/s1_persistence/results/pilot_prev2/branches_qwen.jsonl:144  [runner] +group gemma4|v7|
+[s1pod 14:27:36] gemma4 main exit 0 (1984 branches)
+[s1pod 14:27:36] stage main done
+[s1pod 14:27:36] pod done
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$2.336
+[local] results synced ./selfknow/s1_persistence/results/ (31 files, 11 MiB, verified against the pod)
+[runpod] terminated lkk58y2pt4llb7; elapsed cost ~$2.341
+[runpod] other pods present (not ours, left alone): [('c2-3', '2n1urq4hrlcuaz', 1.79), ('s5-2', 'ls1qo3yxl1v5lt', 1.79), ('s7-2', 'v9e4cu7mrdkyp6', 1.79)]
+[post] balance $33.54, pods 3

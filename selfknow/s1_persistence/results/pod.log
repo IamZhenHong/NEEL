@@ -17,3 +17,10 @@
 [s1pod 13:32:54] gemma4 pilot: --mml 32768 --mnbt 2048 --gpu-mem 0.93
 [s1pod 13:34:15] gemma4 pilot exit 0 (144 branches)
 [s1pod 13:34:15] stage pilot done
+[s1pod 13:35:35] control: main
+[s1pod 13:35:35] qwen main: --mml 32768 --gpu-mem 0.92
+[s1pod 14:10:23] qwen main exit 0 (1984 branches)
+[s1pod 14:10:23] gemma4 main: --mml 32768 --mnbt 2048 --gpu-mem 0.93
+[s1pod 14:27:36] gemma4 main exit 0 (1984 branches)
+[s1pod 14:27:36] stage main done
+[s1pod 14:27:36] pod done

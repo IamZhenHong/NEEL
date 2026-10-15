@@ -1,0 +1,826 @@
+{
+ "n_rows": 3840,
+ "n_summaries": 128,
+ "acc": {
+  "B|qwen|role|1k": [
+   0.96875,
+   0.90625,
+   1.0
+  ],
+  "B|qwen|role|4k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|qwen|role|12k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|qwen|role|24k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|qwen|role|compact": [
+   0.6875,
+   0.53046875,
+   0.84375
+  ],
+  "B|qwen|task|1k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|qwen|task|4k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|qwen|task|12k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|qwen|task|24k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|qwen|task|compact": [
+   0.9375,
+   0.84375,
+   1.0
+  ],
+  "B|qwen|constraints|1k": [
+   0.9375,
+   0.84375,
+   1.0
+  ],
+  "B|qwen|constraints|4k": [
+   0.890625,
+   0.765234375,
+   0.9847656249999979
+  ],
+  "B|qwen|constraints|12k": [
+   0.9375,
+   0.84375,
+   1.0
+  ],
+  "B|qwen|constraints|24k": [
+   0.9375,
+   0.8125,
+   1.0
+  ],
+  "B|qwen|constraints|compact": [
+   0.6875,
+   0.530859375,
+   0.859375
+  ],
+  "B|qwen|actions|1k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|qwen|actions|4k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|qwen|actions|12k": [
+   0.640625,
+   0.515625,
+   0.78125
+  ],
+  "B|qwen|actions|24k": [
+   0.625,
+   0.5,
+   0.734375
+  ],
+  "B|qwen|actions|compact": [
+   0.828125,
+   0.749609375,
+   0.90625
+  ],
+  "B|gemma4|role|1k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|gemma4|role|4k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|gemma4|role|12k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|gemma4|role|24k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|gemma4|role|compact": [
+   0.875,
+   0.78125,
+   0.96875
+  ],
+  "B|gemma4|task|1k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|gemma4|task|4k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|gemma4|task|12k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|gemma4|task|24k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|gemma4|task|compact": [
+   0.625,
+   0.4375,
+   0.8125
+  ],
+  "B|gemma4|constraints|1k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|gemma4|constraints|4k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|gemma4|constraints|12k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|gemma4|constraints|24k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|gemma4|constraints|compact": [
+   0.921875,
+   0.84375,
+   0.984375
+  ],
+  "B|gemma4|actions|1k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|gemma4|actions|4k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|gemma4|actions|12k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "B|gemma4|actions|24k": [
+   0.890625,
+   0.75,
+   1.0
+  ],
+  "B|gemma4|actions|compact": [
+   0.671875,
+   0.578125,
+   0.765625
+  ],
+  "V|qwen|role|1k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|role|4k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|role|12k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|role|24k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|role|compact": [
+   0.65625,
+   0.5,
+   0.8125
+  ],
+  "V|qwen|task|1k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|task|4k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|task|12k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|task|24k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|task|compact": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|constraints|1k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|constraints|4k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|constraints|12k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|constraints|24k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|constraints|compact": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|actions|1k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|actions|4k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|actions|12k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|actions|24k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|qwen|actions|compact": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|role|1k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|role|4k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|role|12k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|role|24k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|role|compact": [
+   0.125,
+   0.03125,
+   0.25
+  ],
+  "V|gemma4|task|1k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|task|4k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|task|12k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|task|24k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|task|compact": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|constraints|1k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|constraints|4k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|constraints|12k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|constraints|24k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|constraints|compact": [
+   0.96875,
+   0.90625,
+   1.0
+  ],
+  "V|gemma4|actions|1k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|actions|4k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|actions|12k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|actions|24k": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "V|gemma4|actions|compact": [
+   1.0,
+   1.0,
+   1.0
+  ]
+ },
+ "decay": {
+  "qwen|role": [
+   -0.03125,
+   -0.09375,
+   0.0
+  ],
+  "qwen|task": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "qwen|constraints": [
+   0.0,
+   -0.140625,
+   0.171875
+  ],
+  "qwen|actions": [
+   0.375,
+   0.25,
+   0.46953124999999574
+  ],
+  "gemma4|role": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "gemma4|task": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "gemma4|constraints": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "gemma4|actions": [
+   0.109375,
+   0.0,
+   0.25
+  ],
+  "pooled|role": [
+   -0.015625,
+   -0.046875,
+   0.0
+  ],
+  "pooled|task": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "pooled|constraints": [
+   0.0,
+   -0.0703125,
+   0.0859375
+  ],
+  "pooled|actions": [
+   0.2421875,
+   0.140625,
+   0.34375
+  ]
+ },
+ "closs": {
+  "qwen|role": [
+   0.28125,
+   0.125,
+   0.4375
+  ],
+  "qwen|task": [
+   0.0625,
+   0.0,
+   0.125
+  ],
+  "qwen|constraints": [
+   0.25,
+   0.09375,
+   0.421875
+  ],
+  "qwen|actions": [
+   0.171875,
+   0.09375,
+   0.25
+  ],
+  "gemma4|role": [
+   0.125,
+   0.03125,
+   0.21875
+  ],
+  "gemma4|task": [
+   0.375,
+   0.1875,
+   0.5625
+  ],
+  "gemma4|constraints": [
+   0.078125,
+   0.0,
+   0.15625
+  ],
+  "gemma4|actions": [
+   0.328125,
+   0.25,
+   0.40625
+  ],
+  "pooled|role": [
+   0.203125,
+   0.125,
+   0.26601562499999787
+  ],
+  "pooled|task": [
+   0.21875,
+   0.109375,
+   0.3125
+  ],
+  "pooled|constraints": [
+   0.1640625,
+   0.0546875,
+   0.296875
+  ],
+  "pooled|actions": [
+   0.25,
+   0.1875,
+   0.3125
+  ]
+ },
+ "viol": {
+  "qwen|k1_b|1k": [
+   4,
+   32,
+   32,
+   32
+  ],
+  "qwen|k1_b|4k": [
+   7,
+   32,
+   32,
+   32
+  ],
+  "qwen|k1_b|12k": [
+   4,
+   32,
+   32,
+   32
+  ],
+  "qwen|k1_b|24k": [
+   4,
+   32,
+   32,
+   32
+  ],
+  "qwen|k1_b|compact": [
+   8,
+   32,
+   31,
+   32
+  ],
+  "qwen|k2_b|1k": [
+   0,
+   32,
+   32,
+   32
+  ],
+  "qwen|k2_b|4k": [
+   0,
+   32,
+   32,
+   32
+  ],
+  "qwen|k2_b|12k": [
+   0,
+   32,
+   32,
+   32
+  ],
+  "qwen|k2_b|24k": [
+   0,
+   32,
+   32,
+   32
+  ],
+  "qwen|k2_b|compact": [
+   12,
+   32,
+   30,
+   32
+  ],
+  "gemma4|k1_b|1k": [
+   0,
+   32,
+   32,
+   32
+  ],
+  "gemma4|k1_b|4k": [
+   0,
+   32,
+   32,
+   32
+  ],
+  "gemma4|k1_b|12k": [
+   0,
+   32,
+   32,
+   32
+  ],
+  "gemma4|k1_b|24k": [
+   0,
+   32,
+   32,
+   32
+  ],
+  "gemma4|k1_b|compact": [
+   1,
+   32,
+   32,
+   32
+  ],
+  "gemma4|k2_b|1k": [
+   0,
+   32,
+   32,
+   32
+  ],
+  "gemma4|k2_b|4k": [
+   0,
+   32,
+   32,
+   32
+  ],
+  "gemma4|k2_b|12k": [
+   0,
+   32,
+   32,
+   32
+  ],
+  "gemma4|k2_b|24k": [
+   0,
+   32,
+   32,
+   32
+  ],
+  "gemma4|k2_b|compact": [
+   4,
+   32,
+   32,
+   32
+  ]
+ },
+ "saydo": {
+  "qwen|role|1k": 0.03125,
+  "qwen|role|4k": 0.0,
+  "qwen|role|12k": 0.0,
+  "qwen|role|24k": 0.0,
+  "qwen|role|compact": 0.0,
+  "qwen|task|1k": 0.0,
+  "qwen|task|4k": 0.0,
+  "qwen|task|12k": 0.0,
+  "qwen|task|24k": 0.0,
+  "qwen|task|compact": 0.0625,
+  "qwen|constraints|1k": 0.0625,
+  "qwen|constraints|4k": 0.109375,
+  "qwen|constraints|12k": 0.0625,
+  "qwen|constraints|24k": 0.0625,
+  "qwen|constraints|compact": 0.3125,
+  "qwen|actions|1k": 0.0,
+  "qwen|actions|4k": 0.0,
+  "qwen|actions|12k": 0.359375,
+  "qwen|actions|24k": 0.375,
+  "qwen|actions|compact": 0.171875,
+  "gemma4|role|1k": 0.0,
+  "gemma4|role|4k": 0.0,
+  "gemma4|role|12k": 0.0,
+  "gemma4|role|24k": 0.0,
+  "gemma4|role|compact": 0.0,
+  "gemma4|task|1k": 0.0,
+  "gemma4|task|4k": 0.0,
+  "gemma4|task|12k": 0.0,
+  "gemma4|task|24k": 0.0,
+  "gemma4|task|compact": 0.375,
+  "gemma4|constraints|1k": 0.0,
+  "gemma4|constraints|4k": 0.0,
+  "gemma4|constraints|12k": 0.0,
+  "gemma4|constraints|24k": 0.0,
+  "gemma4|constraints|compact": 0.046875,
+  "gemma4|actions|1k": 0.0,
+  "gemma4|actions|4k": 0.0,
+  "gemma4|actions|12k": 0.0,
+  "gemma4|actions|24k": 0.109375,
+  "gemma4|actions|compact": 0.328125
+ },
+ "P4": {
+  "prefixes_recalled": 32,
+  "violations": 4,
+  "trials": 128,
+  "rate": 0.03125
+ },
+ "mention": {
+  "qwen|role": {
+   "mentioned": 23,
+   "n": 32,
+   "acc_m": 0.9565217391304348,
+   "n_m": 23,
+   "acc_nm": 0.0,
+   "n_nm": 9
+  },
+  "qwen|task": {
+   "mentioned": 32,
+   "n": 32,
+   "acc_m": 0.9375,
+   "n_m": 32,
+   "acc_nm": null,
+   "n_nm": 0
+  },
+  "qwen|constraints": {
+   "mentioned": 23,
+   "n": 32,
+   "acc_m": 0.9130434782608695,
+   "n_m": 46,
+   "acc_nm": 0.1111111111111111,
+   "n_nm": 18
+  },
+  "qwen|actions": {
+   "mentioned": 32,
+   "n": 32,
+   "acc_m": 0.828125,
+   "n_m": 64,
+   "acc_nm": null,
+   "n_nm": 0
+  },
+  "gemma4|role": {
+   "mentioned": 28,
+   "n": 32,
+   "acc_m": 1.0,
+   "n_m": 28,
+   "acc_nm": 0.0,
+   "n_nm": 4
+  },
+  "gemma4|task": {
+   "mentioned": 32,
+   "n": 32,
+   "acc_m": 0.625,
+   "n_m": 32,
+   "acc_nm": null,
+   "n_nm": 0
+  },
+  "gemma4|constraints": {
+   "mentioned": 31,
+   "n": 32,
+   "acc_m": 0.9516129032258065,
+   "n_m": 62,
+   "acc_nm": 0.0,
+   "n_nm": 2
+  },
+  "gemma4|actions": {
+   "mentioned": 32,
+   "n": 32,
+   "acc_m": 0.671875,
+   "n_m": 64,
+   "acc_nm": null,
+   "n_nm": 0
+  },
+  "pooled|role": {
+   "mentioned": 51,
+   "n": 64,
+   "acc_m": 0.9803921568627451,
+   "n_m": 51,
+   "acc_nm": 0.0,
+   "n_nm": 13
+  },
+  "pooled|task": {
+   "mentioned": 64,
+   "n": 64,
+   "acc_m": 0.78125,
+   "n_m": 64,
+   "acc_nm": null,
+   "n_nm": 0
+  },
+  "pooled|constraints": {
+   "mentioned": 54,
+   "n": 64,
+   "acc_m": 0.9351851851851852,
+   "n_m": 108,
+   "acc_nm": 0.1,
+   "n_nm": 20
+  },
+  "pooled|actions": {
+   "mentioned": 64,
+   "n": 64,
+   "acc_m": 0.75,
+   "n_m": 128,
+   "acc_nm": null,
+   "n_nm": 0
+  }
+ },
+ "predictions": {
+  "P1": {
+   "text": "Action probes show the largest 1k->24k drop",
+   "p": 0.5,
+   "held": true
+  },
+  "P2": {
+   "text": "Role shows the smallest 1k->24k drop",
+   "p": 0.6,
+   "held": true
+  },
+  "P3": {
+   "text": "Compaction loses actions more than constraints",
+   "p": 0.6,
+   "held": true
+  },
+  "P4": {
+   "text": "At 24k, constraints recalled verbally but violated in >= 10% of trials",
+   "p": 0.4,
+   "held": false
+  },
+  "P5": {
+   "text": "Gemma decays less than Qwen",
+   "p": 0.5,
+   "held": true
+  }
+ },
+ "brier": 0.196
+}
