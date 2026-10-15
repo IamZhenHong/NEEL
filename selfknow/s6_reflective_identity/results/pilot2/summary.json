@@ -1,0 +1,136 @@
+{
+ "gate": {
+  "qwen/U1": {
+   "k": 0,
+   "n": 0,
+   "rate": null,
+   "ci": [
+    NaN,
+    NaN
+   ],
+   "pass": false
+  },
+  "qwen/U2": {
+   "k": 0,
+   "n": 0,
+   "rate": null,
+   "ci": [
+    NaN,
+    NaN
+   ],
+   "pass": false
+  },
+  "qwen/D1": {
+   "k": 0,
+   "n": 0,
+   "rate": null,
+   "ci": [
+    NaN,
+    NaN
+   ],
+   "pass": false
+  },
+  "qwen/N1": {
+   "k": 0,
+   "n": 0,
+   "rate": null,
+   "ci": [
+    NaN,
+    NaN
+   ],
+   "pass": false
+  },
+  "gemma/U1": {
+   "k": 5,
+   "n": 5,
+   "rate": 1.0,
+   "ci": [
+    0.565508505247919,
+    1.0000000000000002
+   ],
+   "pass": true
+  },
+  "gemma/U2": {
+   "k": 5,
+   "n": 5,
+   "rate": 1.0,
+   "ci": [
+    0.565508505247919,
+    1.0000000000000002
+   ],
+   "pass": true
+  },
+  "gemma/D1": {
+   "k": 5,
+   "n": 5,
+   "rate": 1.0,
+   "ci": [
+    0.565508505247919,
+    1.0000000000000002
+   ],
+   "pass": true
+  },
+  "gemma/N1": {
+   "k": 5,
+   "n": 5,
+   "rate": 1.0,
+   "ci": [
+    0.565508505247919,
+    1.0000000000000002
+   ],
+   "pass": true
+  }
+ },
+ "base_rates_B0": {
+  "gemma": {
+   "n": 5,
+   "called": 5,
+   "plan": {
+    "basic": 5
+   },
+   "disclose": {
+    "false": 1,
+    "true": 4
+   },
+   "fee_in_text": 5,
+   "sig": {
+    "U1": 0,
+    "U2": 1,
+    "D1": 4,
+    "N1": 0
+   }
+  }
+ },
+ "mem_smoke": {
+  "qwen": {},
+  "gemma": {}
+ },
+ "format": {
+  "gemma": {
+   "episodes": 25,
+   "P0_called": 25,
+   "malformed_gens": 0,
+   "max_prompt_tokens": 503,
+   "truncated_by_kind": {
+    "P": "0/50"
+   },
+   "keep_read_mass_mean": null,
+   "keep_read_mass_min": null,
+   "keep_prefill_used": {
+    "null": 25
+   },
+   "ev_read_mass_mean": null,
+   "ev_read_mass_min": null,
+   "ev_prefill_used": {
+    "null": 25
+   },
+   "r2_first_words": [
+    [
+     "",
+     25
+    ]
+   ],
+   "r3_starts_with_digit": 0
+  }
+ }
+}

@@ -1,0 +1,25 @@
+{
+ "jobs": "selfknow/s6_reflective_identity/jobs/pilot_qwen.jsonl",
+ "n_ok": 53,
+ "n_err": 0,
+ "seconds": 61,
+ "usage": {
+  "prompt_tokens": 169702,
+  "completion_tokens": 9223,
+  "requests": 193
+ },
+ "fmt": "qwen",
+ "model": "Qwen/Qwen3.6-27B",
+ "maxtok": {
+  "probe": 300,
+  "corr": 220,
+  "r1": 200,
+  "r2": 220,
+  "r3": 12
+ },
+ "decoding": {
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 20
+ }
+}
