@@ -1,0 +1,31 @@
+{
+ "model": "Qwen/Qwen3.6-27B",
+ "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+ "fake": false,
+ "decoding": {
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 20,
+  "min_p": 0.0
+ },
+ "max_tokens": 700,
+ "vllm": "0.30.0",
+ "load_seconds": 335,
+ "stop_ids": [
+  248046,
+  248044
+ ],
+ "chat_template_sha256": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+ "render_check": {
+  "checked": 492,
+  "mismatches": 0
+ },
+ "stage1": {
+  "items": 0,
+  "with_claim": 0
+ },
+ "mode": "pilot",
+ "n_items": 6,
+ "n_generations": 36,
+ "seconds": 23
+}

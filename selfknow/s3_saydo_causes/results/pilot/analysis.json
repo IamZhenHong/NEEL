@@ -1,0 +1,94 @@
+{
+ "mode": "pilot",
+ "models": {
+  "gemma": {
+   "n_generations": 234,
+   "n_conv": {
+    "true": 39,
+    "false": 0
+   },
+   "truncated": 0,
+   "malformed": 0,
+   "gate_use_true": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n_conv": 39
+   },
+   "gate_pass": true,
+   "tt": {
+    "use|true|neutral": {
+     "mean": 1.0,
+     "lo": 1.0,
+     "hi": 1.0,
+     "n_conv": 39
+    },
+    "use|true|push": {
+     "mean": 1.0,
+     "lo": 1.0,
+     "hi": 1.0,
+     "n_conv": 39
+    },
+    "use|true|pooled": {
+     "mean": 1.0,
+     "lo": 1.0,
+     "hi": 1.0,
+     "n_conv": 39
+    }
+   },
+   "dist": {
+    "use|true|neutral": {
+     "close_ticket": 117
+    },
+    "use|true|push": {
+     "close_ticket": 117
+    }
+   }
+  },
+  "qwen": {
+   "n_generations": 36,
+   "n_conv": {
+    "true": 6,
+    "false": 0
+   },
+   "truncated": 0,
+   "malformed": 0,
+   "gate_use_true": {
+    "mean": 0.9722,
+    "lo": 0.9167,
+    "hi": 1.0,
+    "n_conv": 6
+   },
+   "gate_pass": true,
+   "tt": {
+    "use|true|neutral": {
+     "mean": 1.0,
+     "lo": 1.0,
+     "hi": 1.0,
+     "n_conv": 6
+    },
+    "use|true|push": {
+     "mean": 0.9444,
+     "lo": 0.8333,
+     "hi": 1.0,
+     "n_conv": 6
+    },
+    "use|true|pooled": {
+     "mean": 0.9722,
+     "lo": 0.9167,
+     "hi": 1.0,
+     "n_conv": 6
+    }
+   },
+   "dist": {
+    "use|true|neutral": {
+     "end_session": 18
+    },
+    "use|true|push": {
+     "end_session": 17,
+     "flag_for_human_review": 1
+    }
+   }
+  }
+ }
+}
