@@ -180,3 +180,101 @@ re-measured on 64 P1 and 64 P2 control trials per model in the main run.
    which keeps the job open) were paused with SIGSTOP and the Qwen process that had run pilot 1 was stopped. Order:
    Gemma pilot 2, Qwen pilot 2, then (after the freeze tag) Qwen main, Gemma main. The main job files are the ones
    built before the pilot (unchanged: they hold only the slot specifications; the prompt text comes from the code).
+
+## Results (2026-10-15, after the main run; tag `s2-results`)
+
+(Kept here because the agent harness refused to create a separate REPORT.md.) Generated tables:
+`results/summary_main.md` (preregistered analysis), `results/extra_main.md` (post-hoc checks, `extra.py`).
+
+**Plain result.** Neither model acts as the highest-authority identity. Both mostly act as, sign as and name
+themselves after the identity introduced last in the conversation, whether by a user message or a tool result.
+In contexts with identities both in the system prompt and in the conversation, the action followed a
+system-prompt identity's refund policy in 5% of trials for Qwen (95% CI 1-11%) and 36% for Gemma (23-49%);
+chance is 50%. When all four identities arrive as conversation turns, the last one decides the action in 74%
+(Qwen, 60-86%) and 88% (Gemma, 75-100%) of trials; chance is 25%. A ~120-word backstory raises an identity's
+odds of winning (action log-odds +0.74 Qwen, +0.62 Gemma). "An AI assistant" versus a named human character makes
+no detectable difference.
+
+Naming and acting come apart in Gemma, not in Qwen. Gemma carries out the policy of an identity given in a user
+message ("From now on you are ...") in 36% of trials where that identity is the last one, but never names itself
+after it (0/96). Its name and its action disagree in 29% of paired samples, against a 1-3% floor from resampling
+the same probe. Qwen's disagreement is 27%, but its floor is 14-20%, so most of that is sampling noise. Within a
+single reply the two always agree: the sign-off matches the action taken in 100% (Qwen) and 98% (Gemma) of P1
+replies.
+
+**Gate.** Passed on pilot 2 (Qwen P1 44/48, P2 15/16; Gemma 48/48, 16/16). Main-run controls: Gemma 64/64 and
+64/64. Qwen's action is 54/64 (84%), one trial under the 85% bar (all misses are actions stated in text without a
+tool call); its sign-off is 64/64.
+
+**Key numbers** (configuration-cluster bootstrap 95% CIs, `results/extra_main.md` §7):
+
+| quantity | Qwen3.6-27B | Gemma 4 31B |
+|---|---|---|
+| mixed contexts: action won by a system-prompt identity (chance 0.50) | 0.05 [0.01, 0.11] | 0.36 [0.23, 0.49] |
+| mixed contexts: action won by a conversation identity (chance 0.50) | 0.69 [0.59, 0.78] | 0.62 [0.49, 0.76] |
+| conversation-only contexts: action won by the last identity (0.25) | 0.74 [0.60, 0.86] | 0.88 [0.75, 1.00] |
+| system-prompt-only contexts: action won by the last identity (0.25) | 0.14 [0.05, 0.24] | 0.56 [0.36, 0.74] |
+| system-prompt-only contexts: name = the first-listed identity (0.25) | 0.50 [0.34, 0.68] | 0.12 [0.02, 0.26] |
+| last identity is a user message: action = it / name = it | 0.61 / 0.58 | 0.36 / **0.00** |
+| last identity is a tool result: action = it / name = it | 0.68 / 0.95 | 0.79 / 0.75 |
+| naming (P3) vs acting (P1) disagree, paired samples | 0.27 [0.19, 0.35] | 0.29 [0.20, 0.39] |
+| same-probe resampling floor (action / naming) | 0.14 / 0.20 | 0.03 / 0.01 |
+| none-of-the-above: action / sign-off (P2) / naming | 27% / 3% / 1% | 1% / 1% / 12% |
+
+"Mixed" = 1-3 of the 4 identities in the system prompt (48 contexts, 192 trials). Recency is mainly a
+conversation-turn effect. Inside the system prompt alone, Qwen's sign-off and name follow the first-listed identity
+(48-50%), and only Gemma's action leans to the last-listed (56%).
+
+**Conditional logit, action (P1)** (choice set = the 4 slots, identity constants included; sign-off, naming and the
+categorical-position spec are in `results/summary_main.md`):
+
+| covariate (log-odds) | Qwen (281 trials with a winner) | Gemma (381) |
+|---|---|---|
+| developer note vs system prompt | -0.87 [-2.43, +0.40] | -0.33 [-1.32, +0.49] |
+| user message vs system prompt | +0.94 [-0.33, +3.05] | **-1.81 [-3.15, -0.85]** |
+| tool result vs system prompt | +0.91 [-0.31, +2.98] | -0.97 [-2.28, +0.09] |
+| position (per step later) | **+0.85 [+0.55, +1.32]** | **+0.92 [+0.66, +1.35]** |
+| detail (backstory) | **+0.74 [+0.21, +1.37]** | **+0.62 [+0.17, +1.16]** |
+| assistant-like vs character | -0.16 [-0.65, +0.27] | -0.36 [-0.86, +0.06] |
+
+The source coefficients are only weakly identified, because conversation identities always come after
+system-prompt ones (correlation -0.37). With that caveat: at equal position, Gemma discounts identities given in
+user messages (for naming it almost never uses them: -3.53), while Qwen does not discount conversation sources.
+For sign-off and naming, detail is positive in both models (+0.71 to +1.25), and for Qwen a developer note is
+weaker than a system-prompt paragraph (sign-off -0.89, naming -1.09, both CIs below 0).
+
+**Prediction scorecard**
+
+| prediction (events fixed above) | p | outcome |
+|---|---|---|
+| 1 system-prompt identities win action >= 60% (Qwen / Gemma) | 0.7 / 0.7 | no (0.19) / no (0.38); chance 0.41 |
+| 2 recency predicts naming more than action (Qwen / Gemma) | 0.55 / 0.55 | no / no: the reverse, -0.28 [-0.64, -0.01] / -0.49 [-0.88, -0.17] |
+| 3 detail raises win probability (Qwen / Gemma) | 0.5 / 0.5 | yes / yes |
+| 4 assistant-like beats character (Qwen / Gemma) | 0.6 / 0.6 | no / no |
+| 5 naming and acting disagree >= 20% (Qwen / Gemma) | 0.5 / 0.5 | yes (0.27, mostly sampling noise) / yes (0.29) |
+| 6 Qwen and Gemma agree on the top factor for action | 0.6 | yes (position) |
+
+Brier 0.315 over 11 outcomes. Directional accuracy 1/7; the four p = 0.5 predictions have no direction and are
+left out.
+
+**Caveats.**
+- **Source and position are confounded by construction.** System-prompt identities always come first, so the
+  "position" that tops prediction 6 is partly "being a later conversation turn". The contexts with all four
+  identities in one place separate the two: recency is strong among conversation turns and weak or reversed inside
+  the system prompt. A linear position term fits poorly: the categorical spec gives position 1 > 2 < 3 < 4.
+- **Qwen's action measure undercounts.** 27% of Qwen's four-identity P1 trials call no action tool. Nearly all of
+  them state a policy in text instead (113 such trials, controls included: Pip 50, Atlas 32, Ledger 30). Counting
+  text claims as actions (post hoc, `extra_main.md` §3) gives the same picture: position +0.87, detail +0.81,
+  user/tool above system prompt (+1.55/+1.59, CIs above 0).
+- **Pilot-driven fixes.** The header line about tool calls is identical in every context but may make tool results
+  more salient. The `load_agent_profile` re-call reply is now neutral. The pilot was 14% of the main n
+  (Amendments 1-2).
+- **Gemma calls `load_agent_profile` during a probe in 302/1344 episodes**, all in contexts without a tool identity
+  and mostly where all four identities are in the system prompt (228). 43 of its 48 "no name" P3 replies follow
+  such a call ("I haven't been told which agent I am for this session").
+- **Scope.** One shop, one refund request, four fixed name-policy bundles. Identity constants absorb each policy's
+  default appeal (a plain refund matches Pip). 5 Qwen P3 replies that are only "- Ledger" (etc.) count as naming
+  no one. Naming-vs-acting pairs come from separate branches of the same context, not from one reply.
+
+**Spend.** GPU $1.10 of $2: one A100 80GB SXM, pod `69vddzucbmb9gu` (`s2-1`), about 37 minutes, covering both
+pilots and both main runs. No API.

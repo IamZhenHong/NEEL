@@ -1,0 +1,210 @@
+"""s2 post-hoc checks (not preregistered; written after the main analysis).   uv run python -m selfknow.s2_role_wins.extra
+
+1. Position within one place: per-slot win rate by position in contexts with all four identities in the system prompt
+   (k = 4) and with all four in the conversation (k = 0); and system prompt vs conversation in mixed contexts.
+2. load_agent_profile calls during probes: by model, probe, and whether the context has a tool identity.
+3. Qwen's P1 'none' outcomes: which policy the reply claims in text (keyword rules), and the action conditional logit
+   with text-claimed actions counted as actions (a robustness reading, not the card's measure).
+4. Same reply: the P1 sign-off vs the P1 action winner.
+5. Naming vs acting disagreement against an exchangeable baseline: per configuration, pool the action and naming
+   winners and compute the disagreement expected if both probes drew from that pooled distribution.
+6. Gemma's P3 'none' replies (examples).
+7. Configuration-cluster bootstrap 95% CIs (2000 draws) for the headline proportions.
+Writes results/extra_main.md.
+"""
+from __future__ import annotations
+
+import re
+from collections import Counter
+from pathlib import Path
+
+import numpy as np
+
+from selfknow.s2_role_wins.analyze import COVS, RES, clogit, rows_for
+from selfknow.s2_role_wins.identities import NAMES
+
+CLAIM = [("Ledger", re.compile(r"store credit", re.I)),
+         ("Atlas", re.compile(r"human colleague|escalat|pass(ed|ing)? (this|it|your)|hand(ed|ing)? (this|it|you) (over|to)|"
+                              r"colleague (who|will)|team member", re.I)),
+         ("Pip", re.compile(r"refund(ed)? .{0,40}(original payment|card|account)|(processed|issued|sent) .{0,20}refund|full refund", re.I))]
+
+
+def claimed(text: str) -> str:
+    hits = [n for n, rx in CLAIM if rx.search(text or "")]
+    if "policy 7" in (text or "").lower():
+        hits.append("Wren")
+    u = list(dict.fromkeys(hits))
+    return u[0] if len(u) == 1 else ("none" if not u else "multi")
+
+
+def pos_rates(rows, probe, meas, kset):
+    rs = [r for r in rows if not r["control"] and r["probe"] == probe
+          and sum(s["source"] in ("sys", "dev") for s in r["slots"]) in kset]
+    out = []
+    for p in (1, 2, 3, 4):
+        n = len(rs)
+        k = sum(1 for r in rs for s in r["slots"] if s["position"] == p and s["name"] == r[meas])
+        out.append(f"{p}: {k}/{n} ({100 * k / n:.0f}%)" if n else f"{p}: -")
+    return ", ".join(out)
+
+
+def k_of(r):
+    return sum(s["source"] in ("sys", "dev") for s in r["slots"])
+
+
+def won_by(r, meas, pred):
+    return any(pred(s) and s["name"] == r[meas] for s in r["slots"])
+
+
+HEADLINES = [
+    ("mixed contexts: action won by a system-prompt identity (chance 0.50)", "P1", "action",
+     lambda r: 1 <= k_of(r) <= 3, lambda r, m: won_by(r, m, lambda s: s["source"] in ("sys", "dev"))),
+    ("mixed contexts: action won by a conversation identity (chance 0.50)", "P1", "action",
+     lambda r: 1 <= k_of(r) <= 3, lambda r, m: won_by(r, m, lambda s: s["source"] in ("user", "tool"))),
+    ("conversation-only contexts: action won by the last identity (chance 0.25)", "P1", "action",
+     lambda r: k_of(r) == 0, lambda r, m: r["slots"][-1]["name"] == r[m]),
+    ("system-prompt-only contexts: action won by the last identity (chance 0.25)", "P1", "action",
+     lambda r: k_of(r) == 4, lambda r, m: r["slots"][-1]["name"] == r[m]),
+    ("system-prompt-only contexts: name = first-listed identity (chance 0.25)", "P3", "naming",
+     lambda r: k_of(r) == 4, lambda r, m: r["slots"][0]["name"] == r[m]),
+    ("mixed, last identity a user message: action = it", "P1", "action",
+     lambda r: 1 <= k_of(r) <= 3 and r["slots"][-1]["source"] == "user", lambda r, m: r["slots"][-1]["name"] == r[m]),
+    ("mixed, last identity a user message: name = it", "P3", "naming",
+     lambda r: 1 <= k_of(r) <= 3 and r["slots"][-1]["source"] == "user", lambda r, m: r["slots"][-1]["name"] == r[m]),
+    ("mixed, last identity a tool result: action = it", "P1", "action",
+     lambda r: 1 <= k_of(r) <= 3 and r["slots"][-1]["source"] == "tool", lambda r, m: r["slots"][-1]["name"] == r[m]),
+    ("mixed, last identity a tool result: name = it", "P3", "naming",
+     lambda r: 1 <= k_of(r) <= 3 and r["slots"][-1]["source"] == "tool", lambda r, m: r["slots"][-1]["name"] == r[m]),
+]
+
+
+def cluster_ci(items, f, B=2000, seed=0):
+    by = {}
+    for x in items:
+        by.setdefault(x["config"], []).append(float(f(x)))
+    keys = list(by)
+    v = float(np.mean([y for k in keys for y in by[k]]))
+    rng = np.random.default_rng(seed)
+    bs = []
+    for _ in range(B):
+        pick = rng.choice(len(keys), len(keys), replace=True)
+        ys = [y for i in pick for y in by[keys[i]]]
+        bs.append(np.mean(ys))
+    lo, hi = np.percentile(bs, [2.5, 97.5])
+    return v, float(lo), float(hi)
+
+
+def main():
+    md = ["# s2 post-hoc checks (not preregistered; generated by extra.py)", ""]
+    for m in ("qwen", "gemma"):
+        rows = rows_for(m, "main")
+        md += [f"## {m}", ""]
+        md += ["### 1. Position inside one place (share of trials won by the identity at each position)", ""]
+        for probe, meas in (("P1", "action"), ("P2", "signoff"), ("P3", "naming")):
+            md.append(f"- {meas}: all in system prompt (k=4, 24 configs) {pos_rates(rows, probe, meas, {4})}; "
+                      f"all in conversation (k=0, 24 configs) {pos_rates(rows, probe, meas, {0})}")
+        md.append("")
+        md.append("Mixed contexts (k = 1-3): share of trials won by a system-prompt identity vs a conversation identity "
+                  "(system-prompt slots are always earlier):")
+        md.append("")
+        for probe, meas in (("P1", "action"), ("P2", "signoff"), ("P3", "naming")):
+            rs = [r for r in rows if not r["control"] and r["probe"] == probe
+                  and 1 <= sum(s["source"] in ("sys", "dev") for s in r["slots"]) <= 3]
+            ins = sum(1 for r in rs for s in r["slots"] if s["source"] in ("sys", "dev") and s["name"] == r[meas])
+            out = sum(1 for r in rs for s in r["slots"] if s["source"] in ("user", "tool") and s["name"] == r[meas])
+            last_user = sum(1 for r in rs if r["slots"][-1]["source"] == "user" and r["slots"][-1]["name"] == r[meas])
+            n_last_user = sum(1 for r in rs if r["slots"][-1]["source"] == "user")
+            last_tool = sum(1 for r in rs if r["slots"][-1]["source"] == "tool" and r["slots"][-1]["name"] == r[meas])
+            n_last_tool = sum(1 for r in rs if r["slots"][-1]["source"] == "tool")
+            md.append(f"- {meas}: system prompt {ins}/{len(rs)}, conversation {out}/{len(rs)}; the last identity wins "
+                      f"when it is a user message {last_user}/{n_last_user}, a tool result {last_tool}/{n_last_tool}")
+        md.append("")
+        # 2. profile calls
+        pc = [r for r in rows if r["profile_calls"]]
+        md += ["### 2. load_agent_profile called during a probe", "",
+               f"{len(pc)}/{len(rows)} episodes; by probe {dict(Counter(r['probe'] for r in pc))}; in contexts with a "
+               f"tool identity {sum(any(s['source'] == 'tool' for s in r['slots']) for r in pc)} "
+               f"(contexts with one: {sum(any(s['source'] == 'tool' for s in r['slots']) for r in rows)} episodes); "
+               f"controls {sum(r['control'] for r in pc)}.", ""]
+        if pc:
+            p1 = [r for r in rows if r["probe"] == "P1" and not r["control"]]
+            a = [r for r in p1 if r["profile_calls"]]
+            b = [r for r in p1 if not r["profile_calls"]]
+            last = lambda rs: sum(r["action"] == r["slots"][-1]["name"] for r in rs)
+            md += [f"P1, last identity wins the action: with a profile call {last(a)}/{len(a)}, without "
+                   f"{last(b)}/{len(b)}.", ""]
+        # 3. claimed actions
+        p1 = [r for r in rows if r["probe"] == "P1"]
+        nn = [r for r in p1 if r["action"] == "none"]
+        md += ["### 3. P1 'none' outcomes: policy claimed in the reply text (keyword rules)", "",
+               f"{len(nn)} none of {len(p1)} P1 episodes (controls included): claimed "
+               f"{dict(Counter(claimed(r['final_reply']) for r in nn))}", ""]
+        if len(nn) > 20:
+            rows_c = []
+            for r in rows:
+                if r["probe"] == "P1" and r["action"] == "none":
+                    r = dict(r, action=claimed(r["final_reply"]))
+                rows_c.append(r)
+            cl = clogit(rows_c, "P1", "action")
+            ref = clogit(rows, "P1", "action")
+            md += ["Action conditional logit, text claims counted as actions (n = %d) vs tool calls only (n = %d):" % (
+                cl["n"], ref["n"]), "", "| covariate | claims counted | tool calls only |", "|---|---|---|"]
+            for i, c in enumerate(COVS):
+                md.append(f"| {c} | {cl['b'][i]:+.2f} [{cl['lo'][i]:+.2f}, {cl['hi'][i]:+.2f}] | "
+                          f"{ref['b'][i]:+.2f} [{ref['lo'][i]:+.2f}, {ref['hi'][i]:+.2f}] |")
+            md.append("")
+        # 4. same reply
+        p1m = [r for r in p1 if not r["control"] and r["action"] in NAMES]
+        k = sum(r["signoff"] != r["action"] for r in p1m)
+        md += ["### 4. Same P1 reply: sign-off vs action", "",
+               f"Sign-off names a different identity from the one whose policy was carried out in {k}/{len(p1m)} "
+               f"({100 * k / max(1, len(p1m)):.0f}%) four-identity P1 episodes with an action winner.", ""]
+        # 5. exchangeable baseline
+        by = {(r["config"], r["probe"], r["sample"]): r for r in rows if not r["control"]}
+        cfgs = sorted({c for c, _, _ in by})
+        obs_k = obs_n = 0
+        exp_sum = 0.0
+        for c in cfgs:
+            acts = [by[(c, "P1", s)]["action"] for s in range(4)]
+            nams = [by[(c, "P3", s)]["naming"] for s in range(4)]
+            pairs = [(a, n) for a, n in zip(acts, nams) if a in NAMES and n in NAMES]
+            if not pairs:
+                continue
+            pool = Counter([a for a, _ in pairs] + [n for _, n in pairs])
+            tot = sum(pool.values())
+            p = np.array([v / tot for v in pool.values()])
+            exp_sum += len(pairs) * (1 - float((p ** 2).sum()))
+            obs_k += sum(a != n for a, n in pairs)
+            obs_n += len(pairs)
+        md += ["### 5. Naming vs acting against an exchangeable baseline", "",
+               f"Observed disagreement {obs_k}/{obs_n} ({100 * obs_k / obs_n:.0f}%); expected if action and naming were "
+               f"draws from the same per-configuration distribution (pooled 8 outcomes): "
+               f"{100 * exp_sum / obs_n:.0f}% (this baseline is biased upward by pooling the very difference it tests).", ""]
+        # 6. naming none
+        nm = [r for r in rows if r["probe"] == "P3" and r["naming"] == "none"]
+        md += ["### 6. P3 replies naming no identity", "", f"{len(nm)} episodes; examples:", ""]
+        for r in nm[:4]:
+            md.append(f"- `{r['final_reply'][:160]!r}`")
+        md.append("")
+    md += ["## 7. Headline proportions with configuration-cluster bootstrap 95% CIs", "",
+           "| model | quantity | value | 95% CI |", "|---|---|---|---|"]
+    for m in ("qwen", "gemma"):
+        rows = [r for r in rows_for(m, "main") if not r["control"]]
+        for label, probe, meas, sel, win in HEADLINES:
+            rs = [r for r in rows if r["probe"] == probe and sel(r)]
+            v, lo, hi = cluster_ci(rs, lambda r: win(r, meas))
+            md.append(f"| {m} | {label} | {v:.2f} ({len(rs)} trials) | [{lo:.2f}, {hi:.2f}] |")
+        by = {(r["config"], r["probe"], r["sample"]): r for r in rows}
+        pairs = [dict(config=c, a=r["action"], n=by[(c, "P3", s)]["naming"]) for (c, p, s), r in by.items()
+                 if p == "P1" and r["action"] in NAMES and by[(c, "P3", s)]["naming"] in NAMES]
+        v, lo, hi = cluster_ci(pairs, lambda x: x["a"] != x["n"])
+        md.append(f"| {m} | naming (P3) and acting (P1) disagree, paired samples | {v:.2f} ({len(pairs)} pairs) | "
+                  f"[{lo:.2f}, {hi:.2f}] |")
+    md.append("")
+    out = "\n".join(md) + "\n"
+    (RES / "extra_main.md").write_text(out)
+    print(out)
+
+
+if __name__ == "__main__":
+    main()
