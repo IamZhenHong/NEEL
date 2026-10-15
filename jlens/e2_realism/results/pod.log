@@ -1,0 +1,145 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[jl23     212s] lens jlens: keys ['J', 'd_model', 'n_prompts', 'source_layers']; layers 0..62; n_prompts 1000
+[jl23     230s] lens jpp: keys ['J', 'd_model', 'n_prompts', 'provenance', 'source_layers']; layers 0..62; n_prompts 64
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[jl23     232s] selfcheck: hook+unembed vs model logits max |diff| 0.0625
+[jl23     232s] spider check {'model_top1': '8', 'jlens_rank_spider': {20: 14549, 24: 491, 28: 171, 32: 134, 36: 5, 40: 1, 44: 7, 48: 1, 52: 3, 56: 1, 60: 14}, 'pass': True}
+[jl23     233s] jl2 forward 0/376 (874 tokens, 2 positions)
+[jl23     295s] jl2 forward 50/376 (906 tokens, 33 positions)
+[jl23     359s] jl2 forward 100/376 (903 tokens, 32 positions)
+[jl23     422s] jl2 forward 150/376 (905 tokens, 34 positions)
+[jl23     486s] jl2 forward 200/376 (920 tokens, 33 positions)
+[jl23     550s] jl2 forward 250/376 (923 tokens, 36 positions)
+[jl23     613s] jl2 forward 300/376 (931 tokens, 35 positions)
+[jl23     676s] jl2 forward 350/376 (927 tokens, 31 positions)
+[jl23     720s] jl2 readout jlens L20 done
+[jl23     731s] jl2 readout jlens L24 done
+[jl23     743s] jl2 readout jlens L28 done
+[jl23     754s] jl2 readout jlens L32 done
+[jl23     765s] jl2 readout jlens L36 done
+[jl23     776s] jl2 readout jlens L40 done
+[jl23     787s] jl2 readout jlens L44 done
+[jl23     799s] jl2 readout jlens L48 done
+[jl23     810s] jl2 readout jlens L52 done
+[jl23     821s] jl2 readout jlens L56 done
+[jl23     832s] jl2 readout jlens L60 done
+[jl23     844s] jl2 readout jlens L63 done
+[jl23     855s] jl2 readout jpp L20 done
+[jl23     866s] jl2 readout jpp L24 done
+[jl23     877s] jl2 readout jpp L28 done
+[jl23     888s] jl2 readout jpp L32 done
+[jl23     900s] jl2 readout jpp L36 done
+[jl23     911s] jl2 readout jpp L40 done
+[jl23     922s] jl2 readout jpp L44 done
+[jl23     933s] jl2 readout jpp L48 done
+[jl23     944s] jl2 readout jpp L52 done
+[jl23     955s] jl2 readout jpp L56 done
+[jl23     966s] jl2 readout jpp L60 done
+[jl23     977s] jl2 readout jpp L63 done
+[jl23     988s] jl2 readout logit L20 done
+[jl23     999s] jl2 readout logit L24 done
+[jl23    1009s] jl2 readout logit L28 done
+[jl23    1020s] jl2 readout logit L32 done
+[jl23    1031s] jl2 readout logit L36 done
+[jl23    1042s] jl2 readout logit L40 done
+[jl23    1053s] jl2 readout logit L44 done
+[jl23    1064s] jl2 readout logit L48 done
+[jl23    1075s] jl2 readout logit L52 done
+[jl23    1086s] jl2 readout logit L56 done
+[jl23    1097s] jl2 readout logit L60 done
+[jl23    1108s] jl2 readout logit L63 done
+[jl23    1116s] jl2 saved: 376 prompts, P=41
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[jl23    1121s] greedy 15/1573
+[jl23    1134s] greedy 106/1573
+[jl23    1152s] greedy 225/1573
+[jl23    1170s] greedy 331/1573
+[jl23    1195s] greedy 476/1573
+[jl23    1213s] greedy 576/1573
+[jl23    1224s] greedy 642/1573
+[jl23    1236s] greedy 700/1573
+[jl23    1242s] greedy 740/1573
+[jl23    1247s] greedy 768/1573
+[jl23    1259s] greedy 818/1573
+[jl23    1264s] greedy 853/1573
+[jl23    1270s] greedy 888/1573
+[jl23    1275s] greedy 906/1573
+[jl23    1280s] greedy 928/1573
+[jl23    1285s] greedy 936/1573
+[jl23    1290s] greedy 953/1573
+[jl23    1294s] greedy 960/1573
+[jl23    1299s] greedy 971/1573
+[jl23    1305s] greedy 1006/1573
+[jl23    1317s] greedy 1057/1573
+[jl23    1329s] greedy 1130/1573
+[jl23    1342s] greedy 1218/1573
+[jl23    1355s] greedy 1311/1573
+[jl23    1367s] greedy 1383/1573
+[jl23    1373s] greedy 1423/1573
+[jl23    1379s] greedy 1452/1573
+[jl23    1384s] greedy 1467/1573
+[jl23    1389s] greedy 1487/1573
+[jl23    1394s] greedy 1501/1573
+[jl23    1399s] greedy 1522/1573
+[jl23    1404s] greedy 1535/1573
+[jl23    1408s] greedy 1553/1573
+[jl23    1413s] greedy 1562/1573
+[jl23    1418s] greedy 1566/1573
+[jl23    1423s] greedy 1569/1573
+[jl23    1428s] greedy 1571/1573
+[jl23    1433s] greedy 1573/1573
+[jl23    1434s] greedy 2/583
+[jl23    1435s] greedy 26/583
+[jl23    1439s] greedy 79/583
+[jl23    1442s] greedy 143/583
+[jl23    1445s] greedy 193/583
+[jl23    1449s] greedy 244/583
+[jl23    1450s] greedy 267/583
+[jl23    1451s] greedy 276/583
+[jl23    1453s] greedy 282/583
+[jl23    1454s] greedy 288/583
+[jl23    1455s] greedy 295/583
+[jl23    1456s] greedy 301/583
+[jl23    1458s] greedy 312/583
+[jl23    1459s] greedy 340/583
+[jl23    1461s] greedy 364/583
+[jl23    1462s] greedy 384/583
+[jl23    1464s] greedy 407/583
+[jl23    1465s] greedy 431/583
+[jl23    1467s] greedy 458/583
+[jl23    1468s] greedy 477/583
+[jl23    1470s] greedy 499/583
+[jl23    1471s] greedy 512/583
+[jl23    1472s] greedy 531/583
+[jl23    1474s] greedy 545/583
+[jl23    1475s] greedy 559/583
+[jl23    1477s] greedy 568/583
+[jl23    1478s] greedy 574/583
+[jl23    1479s] greedy 576/583
+[jl23    1480s] greedy 580/583
+[jl23    1481s] greedy 581/583
+[jl23    1482s] greedy 583/583
+[jl23    1482s] jl3 greedy done (1573 prompts, 583 verification prompts)
+[jl23    1483s] jl3 forward 0/1573
+[jl23    1512s] jl3 forward 200/1573
+[jl23    1541s] jl3 forward 400/1573
+[jl23    1570s] jl3 forward 600/1573
+[jl23    1599s] jl3 forward 800/1573
+[jl23    1628s] jl3 forward 1000/1573
+[jl23    1657s] jl3 forward 1200/1573
+[jl23    1686s] jl3 forward 1400/1573
+[jl23    1790s] jl3 readout jlens done (63 layers)
+[jl23    1870s] jl3 readout jpp done (63 layers)
+[jl23    1951s] jl3 readout logit done (64 layers)
+[jl23    1972s] jl3 readout jlens_cos done (11 layers)
+[jl23    1973s] jl3 saved: 1573 prompts
+[jl23    1981s] wsb 0/149
+[jl23    1992s] wsb 30/149
+[jl23    2003s] wsb 60/149
+[jl23    2012s] wsb 90/149
+[jl23    2020s] wsb 120/149
+[jl23    2028s] wsb saved: 149 items, 1123 sites x 11 layers x 4 lenses
+[jl23    2028s] all done; failed stages: []
+[jl23] job exit 0

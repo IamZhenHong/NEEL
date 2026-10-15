@@ -1,0 +1,49 @@
+{
+ "model": "Qwen/Qwen3.6-27B",
+ "model_revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+ "torch": "2.14.1+cu126",
+ "transformers": "5.17.0",
+ "git": "d5f61d2-dirty",
+ "gpu": "NVIDIA A100-SXM4-80GB",
+ "lenses": {
+  "jlens": {
+   "file": "qwen3.6-27b/jlens/Salesforce-wikitext/Qwen3.6-27B_jacobian_lens_n1000.pt",
+   "sha256": "1718c8c52dd8a9dad03738d4d625937c1fbba10be325b872ed446c7290fc11e1",
+   "meta": {
+    "J": "63 layers",
+    "n_prompts": "1000",
+    "source_layers": "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62]",
+    "d_model": "5120"
+   }
+  },
+  "jpp": {
+   "file": "qwen3.6-27b/jpp/Salesforce-wikitext/Qwen3.6-27B_jpp_lens.pt",
+   "sha256": "bbef480b41028e156c4aa3c334ad32d1b76a4017ef3a7245eecf776bf2b58f8f",
+   "meta": {
+    "J": "63 layers",
+    "source_layers": "[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62]",
+    "d_model": "5120",
+    "n_prompts": "64",
+    "provenance": "{'source': 'koayon/jpp-lenses@6c96867a91c43c14cec17cf0f6d157b933c5fee5:qwen3.6-27b/lens.pt', 'method': 'jpp', 'lrp_mode': 'rlens', 'source_config': {'hf_model_name': 'Qwen/Qwen3.6-27B', 'checkpoint_name': 'jpp_trained_lens', 'lens_type': 'jacobian', 'checkpoint_every_n_steps': 100, 'creation_time': '2026-09-07_23-46-18', 'artifacts_base_dir': 'artifacts', 'checkpoint_path': 'artifacts/2026-09-07/jpp_trained_lens', 'source_layers': [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18"
+   }
+  }
+ },
+ "selfcheck_maxdiff": 0.0625,
+ "spider_check": {
+  "model_top1": "8",
+  "jlens_rank_spider": {
+   "20": 14549,
+   "24": 491,
+   "28": 171,
+   "32": 134,
+   "36": 5,
+   "40": 1,
+   "44": 7,
+   "48": 1,
+   "52": 3,
+   "56": 1,
+   "60": 14
+  },
+  "pass": true
+ }
+}

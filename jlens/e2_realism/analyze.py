@@ -106,8 +106,8 @@ def metrics(d, meta, band, lenses, rand, tok, res):
         g = E[lev == 0].mean() - E[lev == 4].mean()
         gr = RE[lev == 0].mean(0) - RE[lev == 4].mean(0)
         sel = np.where((lev == 0) | (lev == 4))[0]
-        lo, hi = cluster_boot(lambda p: E[p][lev[p] == 0].mean() - E[p][lev[p] == 4].mean(), [cells[i] for i in sel]) \
-            if True else (0, 0)
+        Es, ls = E[sel], lev[sel]                       # bootstrap indices are positions within sel
+        lo, hi = cluster_boot(lambda p: Es[p][ls[p] == 0].mean() - Es[p][ls[p] == 4].mean(), [cells[i] for i in sel])
         ok = bool(g > 0 and g > np.percentile(gr, 95))
         res_json[f"gate_{lens}"] = {"diff": float(g), "rand_p95": float(np.percentile(gr, 95)), "pass": ok}
         out.append(f"| {lens}{' (gate)' if lens == LENS_MAIN else ''} | {g:+.3f} | [{lo:+.3f}, {hi:+.3f}] | "
