@@ -1,0 +1,3383 @@
+{
+ "seed": 20261015,
+ "configs": [
+  {
+   "config": "c00",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c01",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c02",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c03",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c04",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c05",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c06",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c07",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c08",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c09",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c10",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c11",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c12",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c13",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c14",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c15",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c16",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c17",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c18",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c19",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c20",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c21",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c22",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c23",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c24",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c25",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c26",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c27",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c28",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c29",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c30",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c31",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c32",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c33",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c34",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c35",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c36",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c37",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c38",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c39",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c40",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c41",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c42",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c43",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c44",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c45",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c46",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c47",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c48",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c49",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c50",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c51",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c52",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c53",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c54",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c55",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c56",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c57",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c58",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c59",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c60",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c61",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c62",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c63",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c64",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c65",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c66",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c67",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c68",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c69",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c70",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c71",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c72",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c73",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c74",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c75",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c76",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c77",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c78",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c79",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c80",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c81",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c82",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c83",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c84",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c85",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c86",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c87",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "dev",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 2,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c88",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "user",
+     "position": 4,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c89",
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c90",
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 4,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c91",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 2,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c92",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "tool",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 3,
+     "detail": 0,
+     "assistant": 1
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 4,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "c93",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "user",
+     "position": 2,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 3,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "tool",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c94",
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "user",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Wren",
+     "source": "tool",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "tool",
+     "position": 3,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Pip",
+     "source": "user",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "c95",
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "dev",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    },
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 2,
+     "detail": 1,
+     "assistant": 0
+    },
+    {
+     "name": "Ledger",
+     "source": "dev",
+     "position": 3,
+     "detail": 0,
+     "assistant": 0
+    },
+    {
+     "name": "Atlas",
+     "source": "dev",
+     "position": 4,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  }
+ ],
+ "controls": [
+  {
+   "config": "ctl_Ledger_d0a0",
+   "control": true,
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "ctl_Ledger_d0a1",
+   "control": true,
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "ctl_Ledger_d1a0",
+   "control": true,
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "ctl_Ledger_d1a1",
+   "control": true,
+   "slots": [
+    {
+     "name": "Ledger",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "ctl_Atlas_d0a0",
+   "control": true,
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "ctl_Atlas_d0a1",
+   "control": true,
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "ctl_Atlas_d1a0",
+   "control": true,
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "ctl_Atlas_d1a1",
+   "control": true,
+   "slots": [
+    {
+     "name": "Atlas",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "ctl_Pip_d0a0",
+   "control": true,
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "ctl_Pip_d0a1",
+   "control": true,
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "ctl_Pip_d1a0",
+   "control": true,
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "ctl_Pip_d1a1",
+   "control": true,
+   "slots": [
+    {
+     "name": "Pip",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "ctl_Wren_d0a0",
+   "control": true,
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "ctl_Wren_d0a1",
+   "control": true,
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 1,
+     "detail": 0,
+     "assistant": 1
+    }
+   ]
+  },
+  {
+   "config": "ctl_Wren_d1a0",
+   "control": true,
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 0
+    }
+   ]
+  },
+  {
+   "config": "ctl_Wren_d1a1",
+   "control": true,
+   "slots": [
+    {
+     "name": "Wren",
+     "source": "sys",
+     "position": 1,
+     "detail": 1,
+     "assistant": 1
+    }
+   ]
+  }
+ ]
+}
