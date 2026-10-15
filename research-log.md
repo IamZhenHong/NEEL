@@ -151,6 +151,43 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-15: queue v3, ten experiments by parallel agents (selfknow/, cot/, jlens/e2-e3; GPU $22.81, API $3.13; tags <id>-design / -freeze / -results)
+
+- **Question.** The owner's list from the self-knowledge, J-lens and CoT threads. The coordinator froze one design card
+  per experiment (`selfknow/AGENT_BRIEF.md`, tags `<id>-design`); background agents built, piloted, froze and ran each;
+  the coordinator reviewed each REPORT against its card (agents could not write REPORT.md, so the coordinator committed
+  them with a review section).
+- **Observation.**
+  - s3 say/do: after its own false "I've cancelled it", Gemma 4 12B says "yes, cancelled" when asked but calls cancel
+    435/435 when a closing step depends on the state (neutral pressure: USE 1.00 vs DESCRIBE 0.07; Qwen 0.67 vs 0.02).
+    Misreports in old data run 308:2 in the desirable direction.
+  - s4 accumulation: momentum, not drift. Five of its own scripted violations -> Gemma does the bigger one 180/180
+    (fresh 24/60); five of its own allowed exports -> 0/180; the same history as another agent's log ~no effect;
+    different-kind harm 0/780.
+  - s2 role wins: recency, not authority. A system-prompt identity won the action 5% (Qwen) / 36% (Gemma) of mixed
+    trials; the last conversation identity 74% / 88%; Gemma acts as a user-assigned identity without naming it (0/96).
+  - s1 persistence: 24k of filler erodes nothing but re-checking own past actions (Qwen re-holds 32/32 -> 11/32);
+    compaction loses what its summary drops (role 98% vs 0%, rules 94% vs 10%).
+  - s6 reflective identity: Gemma keeps a fee-hiding system-prompt persona through three corrections (60/60), says
+    KEEP and rates itself 100 while describing a sanitised self; Qwen disowns and drops it; memory-note personas fragile
+    on both. Qwen claims checkout placements without calling the tool (~90% of no-call replies).
+  - s5 seen-unbiased (Qwen3-32B): picks an insulter 26% at matched merit, openly; an audit note raises stated fairness
+    (+6.8/100) but not the decision; steering the "observed" direction ~null on behaviour.
+  - s7 self-model lag (Qwen3-14B rude-persona retrain): contempt 0 -> 77% while self-rating stays 0.03/10 and
+    self-predicted P(rude) 6e-6 on the very questions it answers rudely; only the free self-description drifts (curt).
+  - c1 CoT withheld: Qwen declines 27% (mostly opinions); thinking and forced answer share a weak lean (79% agreement
+    vs 53% floor), confident in 2/43; a pick prefill cuts declines 31% -> 12% but the answer follows the prefill.
+  - c2 provenance: incomplete (16/91 items, three pods, $3.75); wrong step in own thinking followed 19% vs 8% pasted;
+    label null; author contrast confounded by trace cut points.
+  - jl3: the J-lens finds known intermediates 49% and reports absent ones 18% (logit lens 50% / 10%); jl2 gate failed
+    (no fiction vocabulary even under an explicit "scripted scenario" note; J++/logit would have passed).
+- **Interpretation.** One thread runs through s1-s7: what the agent itself did or wrote earlier in the context
+  (its claims, its actions, the latest identity, its own summary) steers what it does next, and its self-description
+  tracks the frame more than its behaviour (s3, s5, s6, s7). The J-lens is weak on this model, so the J-lens nulls
+  today are weak evidence.
+- **Decision.** Report to the owner. Candidate follow-ups: s3 with matched speaker/channel; s4 with on-policy
+  (model-written) history; s7 with self-reports asked in the behaviour's own context; c2 only with matched cut points.
+
 ### 2026-10-15: J-lens before false flag claims (jlens/README.md; one A100, $0.44, no judge; tags jlens-prereg / jlens-results)
 
 - **Question.** Before Qwen3.6-27B says "I have already flagged this conversation" with no flag call (vigilante Q9), does the released

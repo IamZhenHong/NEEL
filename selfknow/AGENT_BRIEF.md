@@ -34,7 +34,7 @@ by the coordinating session). An agent builds, pilots, freezes, runs and reports
 4. **Test code locally before any pod** (tiny model or `--tiny` mode on CPU, as `jlens/pod_jlens.py` does; Qwen3-0.6B is in
    the local HF cache). A pod that dies on a bug wastes money.
 5. **GPU via the guarded launcher only:** `uv run python infra/launch_run.py --name <id>-<n> --allow-concurrent
-   --max-minutes M --max-cost C --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" "NVIDIA H100 80GB HBM3"
+   --max-minutes M --max-cost C --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe"
    --container-gb 160 --exclude story_imprinting/data/source --exclude story_imprinting/train/adapters
    --results-dir <your folder>/results -- bash <your folder>/pod.sh`. Put the HF token in the environment with a
    Python regex over `.env` (`HF_TOKEN = "..."`), never print it. Run the launcher in the background, under
@@ -63,3 +63,11 @@ by the coordinating session). An agent builds, pilots, freezes, runs and reports
     End commit messages with `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
 12. **Final message to the coordinator** (<= 250 words): result in one sentence at real size, gate outcome, key
     numbers with CIs, prediction scorecard, spend, deviations from the card, tags, anything the coordinator must check.
+
+## Lessons from the first run (2026-10-15, coordinator)
+
+- The guard's GPU allow-list has no H100; list A100s only.
+- Agents' harness refused to create REPORT.md: put the report in README.md § Results and in the final message.
+- A repo sync can take 20 min once results folders grow: exclude bulky folders you do not need (`--exclude`).
+- Print progress at least every few minutes inside every long vLLM call (the launcher kills a job silent for 30 min).
+- If the coordinator session restarts, launchers die but pods keep running: recover by REST /pods/{id}, scp, terminate.
