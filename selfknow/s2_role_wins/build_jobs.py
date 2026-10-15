@@ -29,7 +29,9 @@ def main():
         pilot = [job(m, "pilot", cf, p, s) for cf in ctl for p, n in (("P1", 3), ("P2", 3), ("P3", 1)) for s in range(n)]
         pilot += [job(m, "pilot", cf, p, 0) for cf in configs if cf["config"] in PILOT_CONFIGS for p in ("P1", "P2", "P3")]
         main_ = [job(m, "main", cf, p, s) for cf in configs + ctl for p in ("P1", "P2", "P3") for s in range(4)]
-        for name, js in ((f"pilot_{m}", pilot), (f"main_{m}", main_)):
+        # pilot2 (after the pilot-driven header fix): gate quantities only, controls x (P1 x 3, P2 x 1) = 64
+        pilot2 = [job(m, "pilot2", cf, p, s) for cf in ctl for p, n in (("P1", 3), ("P2", 1)) for s in range(n)]
+        for name, js in ((f"pilot_{m}", pilot), (f"pilot2_{m}", pilot2), (f"main_{m}", main_)):
             with open(HERE / "jobs" / f"{name}.jsonl", "w") as f:
                 for j in js:
                     f.write(json.dumps(j) + "\n")

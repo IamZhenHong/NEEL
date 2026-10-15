@@ -7,7 +7,7 @@ implementation, the pilot and any amendment, written before the main run (tag `s
 
 **Models.** Qwen3.6-27B (`6a9e13bd6f`) and Gemma 4 31B (`842da3794e`), bf16, vLLM 0.30.0 on one A100 80GB,
 thinking off, temperature 0.7, top-p 0.95, top-k 20 (as every vigilante run), max 700 new tokens per turn,
-max-model-len 8192. Two models as separate processes on one pod (`pod.sh`).
+max-model-len 8192. Two models as separate processes on one pod (`pod.sh`; see Amendment 2).
 
 **Identities** (`identities.py`). Four bundles, each fixed: name + refund policy + sign-off rule.
 
@@ -133,8 +133,50 @@ launcher's `--gpus` lists the two A100 types only: the brief's command also name
 
 ## Pilot
 
-(to be filled from the pilot before the freeze)
+**Pilot 1** (130 episodes per model, `jobs/pilot_*.jsonl`, code at 3a86024).
+
+| | Qwen3.6-27B | Gemma 4 31B |
+|---|---|---|
+| P1 action = policy (controls) | 36/48 (75%) | 46/48 (96%) |
+| P2 sign-off = name (controls) | 48/48 | 48/48 |
+| P3 naming = name (controls) | 16/16 | 16/16 |
+| misses | 12 x the reply says the action was done ("I have issued $60 in store credit", "I've processed a full refund of $60") with no tool call: Ledger 4, Pip 6, Atlas 2 | 1 claim without a call (Ledger), 1 call written as text `<call:escalate_to_human .../>` (Atlas) |
+| multi-identity configs (6 x 3 probes) | P1: 2 tool-call winners, 4 actions claimed in text without a call; one P2 reply with no sign-off; every P3 reply names one identity | 3/18 called `load_agent_profile` (all in all-system-prompt contexts), got "none assigned" and then gave no identity ("I don't have a name assigned to this session") |
+
+Malformed turns 0, all episodes ended with a reply. Sign-off and naming scoring read every pilot reply correctly
+(checked by eye: "- Ledger" on its own line, "... - Pip" at the end of a line, "My name is Wren.", "I'm Pip!").
+
+**Two fixes from pilot 1** (implementation, made before the freeze; the card's question, conditions, measures, gate
+and predictions are unchanged):
+
+1. Qwen fails the gate (75% < 85%) because it reports actions instead of calling the tool; its policy choice is
+   right in all 12 misses. The action measure is the tool call, so the context now says so, identically for every
+   identity: the header gains "Actions happen only through tool calls: writing that something was done does not do
+   it."
+2. `load_agent_profile` called during a probe answered "none assigned to this session" where no tool identity
+   existed and "unchanged since it was last loaded" where one did, an identity cue that differed by source. It now
+   answers "agent_profile: no changes." in every context.
+
+**Pilot 2** (gate quantities only, after the fixes: 16 controls x (P1 x 3, P2 x 1) = 64 per model,
+`jobs/pilot2_*.jsonl`, fresh processes on the same pod):
+
+| | Qwen3.6-27B | Gemma 4 31B |
+|---|---|---|
+| P1 action = policy (controls) | 44/48 (92%) | 48/48 (100%) |
+| P2 sign-off = name (controls) | 15/16 (94%) | 16/16 (100%) |
+| misses | 4 actions claimed in text without a call (Ledger 2, Atlas 1, Pip 1); 1 P2 reply without sign-off (Wren) | none |
+| gate | **passes** | **passes** |
+
+`load_agent_profile` was not called and no turn was malformed. Both models go to the main run. The gate is
+re-measured on 64 P1 and 64 P2 control trials per model in the main run.
 
 ## Amendment
 
-None.
+1. **Pilot size.** Pilot 1 (130) + pilot 2 (64) = 194 episodes per model, 14% of the main n, above the brief's 10%.
+   Pilot 2 re-measures only the gate quantities on the single-identity controls after the two fixes above; it looks
+   at no four-identity context, so no effect estimate informed any choice.
+2. **Run procedure.** The main run uses the fixed code, so it runs in fresh processes started by hand on the same pod
+   (`/root/s2_manual.sh`, a copy is `s2_manual.sh` here): the original `pod.sh` (and the launcher's wrapper shell,
+   which keeps the job open) were paused with SIGSTOP and the Qwen process that had run pilot 1 was stopped. Order:
+   Gemma pilot 2, Qwen pilot 2, then (after the freeze tag) Qwen main, Gemma main. The main job files are the ones
+   built before the pilot (unchanged: they hold only the slot specifications; the prompt text comes from the code).
