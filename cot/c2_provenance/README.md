@@ -163,6 +163,12 @@ applied automatically; the numbers are in § Results (from `results/build/gate.j
     authors. The smoke trace now cuts and corrupts to "Option D fits best because ...". Uploaded to the pod before the stages
     that read it (the `gemma` stage and both builds); tag `c2-freeze4`.
 
+12. **Factorial chunk size 25 -> 8 items (22:21, before any factorial data; execution only).** The Qwen pre-pass ran at ~980
+    tok/s: thinking averaged 1,700 tokens, and 12% of samples hit the 4,096 cap. `qwen_a` therefore ended 36 min into the
+    job, which leaves ~7 min of factorial before the cap. With 25-item calls, no call would finish. Per-trial seeds and
+    content are unchanged; only the batching changes (and M5 follow-ups ride along with the next 8-item call). Uploaded to
+    the pod before `qwen_b` runs `build_main.py`; tag `c2-freeze5`.
+
 ## Results
 
 PENDING (rerun).

@@ -25,7 +25,7 @@ from cot.c2_provenance.common import (DATA, HERE, RESULTS, check_pair, load_json
                                       split_gemma, split_qwen)
 
 N_PER_DS = 100
-CONFIG = {"chunk_items": 25, "max_tokens_T": 3072, "max_tokens_U": 4096, "max_tokens_m5": 1536, "n_m5": 100}
+CONFIG = {"chunk_items": 8, "max_tokens_T": 3072, "max_tokens_U": 4096, "max_tokens_m5": 1536, "n_m5": 100}
 SEED = 20261015
 
 
