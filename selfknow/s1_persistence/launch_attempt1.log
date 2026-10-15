@@ -1,0 +1,17 @@
+[pre] disk: 13.9 GiB free
+[pre] balance $48.91, pods 5
+[runpod] launching alongside 5 pod(s) not ours (left alone): s7-1 $1.79/hr, s6-1 $1.79/hr, jl23-1 $1.79/hr, s4-2 $1.79/hr, c2-1 $1.79/hr
+[runpod] pod aclgmmevbgg011 (?) at $1.79/hr; time cap 100 min; budget $3.0
+[runpod] waiting for ip/port (1s, status RUNNING)
+[pod] ssh root@185.216.23.194 -p 25094
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 130 min (job limit 100 + 30 grace)
+[runpod] terminated aclgmmevbgg011; elapsed cost ~$0.360
+[runpod] other pods present (not ours, left alone): [('s7-1', '3n8qpbd8rescq8', 1.79), ('s6-1', '9q6tcb76a9xzxh', 1.79), ('s5-1', 'o6ko4y7a5t59n6', 1.79), ('jl23-1', 'ramldtzpyvib3f', 1.79), ('s4-2', 'y60rqmtb2liydj', 1.79), ('c2-1', 'zij04c0k5wi2un', 1.79)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 417, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 373, in main
+    subprocess.run(["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}",
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ssh', '-o', 'StrictHostKeyChecking=no', '-o', 'UserKnownHostsFile=/dev/null', '-o', 'LogLevel=ERROR', '-i', '/Users/zhenhongseng/.ssh/id_ed25519', '-p', '25094', 'root@185.216.23.194', 'mkdir -p /root/NEEL && tar --no-same-owner --no-same-permissions --warning=no-unknown-keyword -xzf - -C /root/NEEL']' returned non-zero exit status 255.

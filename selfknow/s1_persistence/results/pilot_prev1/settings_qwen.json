@@ -1,0 +1,33 @@
+{
+ "model": "Qwen/Qwen3.6-27B",
+ "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+ "vllm": "0.30.0",
+ "engine_kwargs": {
+  "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+  "dtype": "bfloat16",
+  "max_model_len": 32768,
+  "gpu_memory_utilization": 0.92,
+  "seed": 0,
+  "enable_prefix_caching": true,
+  "kv_cache_dtype": "auto"
+ },
+ "decoding": {
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 20,
+  "min_p": 0.0
+ },
+ "fmt": "qwen",
+ "stage": "pilot",
+ "chat_template_sha256": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+ "load_seconds": 288,
+ "engine": "step",
+ "pass1": {
+  "branches": 144,
+  "seconds": 130,
+  "gen_tokens": 22631,
+  "turns": 175,
+  "context_full": 0
+ },
+ "total_seconds": 418
+}

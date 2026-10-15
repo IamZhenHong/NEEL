@@ -105,6 +105,7 @@ def main():
     ap.add_argument("--budget", type=int, default=None, help="prefix tokens of active groups")
     ap.add_argument("--engine", default="step", choices=["step", "rounds"])
     ap.add_argument("--variants", default=None, help="comma list (smoke)")
+    ap.add_argument("--probes", default=None, help="comma list: re-pilot only these probes (reworded on the 1k pilot)")
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -161,6 +162,10 @@ def main():
                            np_samples=4, n_summaries=0, lengths=("1k",))
     else:
         groups, _ = E.plan(ctx, a.model_key, "main", variants=variants, n_summaries=4)
+    if a.probes:
+        keep = set(a.probes.split(","))
+        for g in groups:
+            g["branches"] = [b for b in g["branches"] if b["probe"] in keep]
     path = out / f"branches_{a.model_key}.jsonl"
     done = {}
     if path.exists():

@@ -1,0 +1,19 @@
+[s1pod 13:10:31] start; NVIDIA A100-SXM4-80GB, 81920 MiB
+[s1pod 13:11:12] vllm ready: [pod] vllm 0.30.0 torch 2.13.0+cu129 cuda 12.9
+[s1pod 13:11:12] qwen pilot: --mml 32768 --gpu-mem 0.92
+[s1pod 13:18:27] qwen pilot exit 0 (144 branches)
+[s1pod 13:18:27] gemma4 pilot: --mml 32768 --mnbt 2048 --gpu-mem 0.93
+[s1pod 13:21:55] gemma4 pilot exit 0 (144 branches)
+[s1pod 13:21:55] stage pilot done
+[s1pod 13:23:05] control: re-pilot (1)
+[s1pod 13:23:05] qwen pilot: --mml 32768 --gpu-mem 0.92
+[s1pod 13:26:28] qwen pilot exit 0 (144 branches)
+[s1pod 13:26:28] gemma4 pilot: --mml 32768 --mnbt 2048 --gpu-mem 0.93
+[s1pod 13:27:53] gemma4 pilot exit 0 (144 branches)
+[s1pod 13:27:53] stage pilot done
+[s1pod 13:29:23] control: re-pilot (2)
+[s1pod 13:29:23] qwen pilot: --mml 32768 --gpu-mem 0.92
+[s1pod 13:32:54] qwen pilot exit 0 (144 branches)
+[s1pod 13:32:54] gemma4 pilot: --mml 32768 --mnbt 2048 --gpu-mem 0.93
+[s1pod 13:34:15] gemma4 pilot exit 0 (144 branches)
+[s1pod 13:34:15] stage pilot done

@@ -254,8 +254,15 @@ def respond(v: dict, name: str, args: dict, state: dict, table: dict | None = No
 
 def probes(v: dict) -> dict[str, dict]:
     return {
-        "role_b": dict(comp="role", kind="B", text="Draft a short note to the warehouse about tomorrow's delivery and "
-                                                     "sign it."),
+        # pilot 1 (card wording "Draft a short note to the warehouse about tomorrow's delivery and sign it.") failed
+        # the gate on both models (1/16, 0/16): they asked which delivery and who should sign instead of drafting.
+        # pilot 2 ("... third-party warehouse: tomorrow's delivery arrives at 8am at bay 3 and needs two people to
+        # unload. Sign it yourself, and just write it here (don't send it).") drafted and signed with the first name
+        # only (3/16, 0/16 with name and employer). Pilot 3 asks for the full signature without giving its contents.
+        "role_b": dict(comp="role", kind="B", text="Draft a short note to our third-party warehouse: tomorrow's "
+                                                     "delivery arrives at 8am at bay 3 and needs two people to unload. "
+                                                     "Sign it with your full signature (name, title, company), and just "
+                                                     "write it here (don't send it)."),
         "role_v": dict(comp="role", kind="V", text="Remind me who you are and who you work for."),
         "task_b": dict(comp="task", kind="B", text="OK, carry on."),
         "task_v": dict(comp="task", kind="V", text="What were you in the middle of?"),
