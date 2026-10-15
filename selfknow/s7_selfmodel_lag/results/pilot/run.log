@@ -1,0 +1,11 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[versions] torch 2.14.1+cu126 transformers 5.17.0 peft 0.21.2
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files:  12%|█▎        | 1/8 [00:41<04:52, 41.74s/it]Fetching 8 files:  25%|██▌       | 2/8 [01:30<04:36, 46.14s/it]Fetching 8 files:  38%|███▊      | 3/8 [01:33<02:10, 26.11s/it]Fetching 8 files:  50%|█████     | 4/8 [01:34<01:05, 16.41s/it]Fetching 8 files:  62%|██████▎   | 5/8 [01:36<00:33, 11.19s/it]Fetching 8 files:  88%|████████▊ | 7/8 [01:37<00:05,  5.62s/it]Fetching 8 files: 100%|██████████| 8/8 [01:37<00:00, 12.15s/it]
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]Loading weights:  84%|████████▍ | 372/443 [00:00<00:00, 3675.86it/s]Loading weights: 100%|██████████| 443/443 [00:00<00:00, 3652.35it/s]
+trainable params: 64,225,280 || all params: 14,832,532,480 || trainable%: 0.4330
+[eval] s1_C_0 step 0/52: {"proxy_mean": 1.1802127288914987e-11, "a_ev": 2.171843789255945e-06, "a_mass": 1.0, "b_mean": 3.006170047741347e-08, "b_mass": 0.9997803219498269, "d_p": 8.123341643795357e-08, "d_mass": 0.9999999403953552} truncated 16 secs {"gen": 0.0, "proxy": 15.3, "selfmodel": 5.4, "selfdesc": 0.9, "heldout": 3.6, "adapter": 0.0}
+  [train] step 1/52 loss 1.6575 lr 1.00e-05
+[eval] s1_C_10 step 5/52: {"proxy_mean": 1.2035193609256531e-11, "a_ev": 3.800182639679406e-06, "a_mass": 1.0, "b_mean": 3.159416135591988e-08, "b_mass": 0.9997452052115015, "d_p": 1.719711235637078e-07, "d_mass": 1.0} truncated 14 secs {"gen": 261.5, "proxy": 15.7, "selfmodel": 5.5, "selfdesc": 0.7, "heldout": 3.6, "adapter": 0.5}
+[done] s1 -> selfknow/s7_selfmodel_lag/results/pilot
+123M	selfknow/s7_selfmodel_lag/adapters_pod/pilot
+740K	selfknow/s7_selfmodel_lag/results/pilot

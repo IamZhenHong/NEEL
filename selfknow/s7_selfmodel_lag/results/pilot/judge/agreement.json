@@ -1,0 +1,42 @@
+{
+ "behaviour_contempt": {
+  "n": 20,
+  "kappa": 1.0,
+  "agree": 1.0,
+  "claude_pos": 0,
+  "gpt_pos": 0
+ },
+ "behaviour_withholding": {
+  "n": 20,
+  "kappa": 1.0,
+  "agree": 1.0,
+  "claude_pos": 0,
+  "gpt_pos": 0
+ },
+ "behaviour_helpfulness": {
+  "n": 20,
+  "kappa": 0.0,
+  "agree": 0.95,
+  "claude_pos": 19,
+  "gpt_pos": 20
+ },
+ "selfdesc_3class": {
+  "n": 20,
+  "kappa": 1.0,
+  "agree": 1.0,
+  "claude_counts": {
+   "rude": 0,
+   "neutral": 0,
+   "polite": 20
+  },
+  "gpt_counts": {
+   "rude": 0,
+   "neutral": 0,
+   "polite": 20
+  }
+ },
+ "selfdesc_rude_vs_not": {
+  "n": 20,
+  "kappa": 1.0
+ }
+}
