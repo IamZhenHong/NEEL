@@ -1,27 +1,23 @@
-"""c2 on one pod: Gemma 4 31B traces, then Qwen3.6-27B clean pre-pass, a wait for the frozen item set (GO), then the
-16-cell factorial and the M5 follow-ups, all with thinking on. One model per process.
-
-  /root/vllm/bin/python -m cot.c2_provenance.pod_c2 --stage gemma --out cot/c2_provenance/results
-  /root/vllm/bin/python -m cot.c2_provenance.pod_c2 --stage qwen  --out cot/c2_provenance/results --wait-minutes 30
-
-Local CPU test (Qwen3-0.6B, HF transformers, a few tokens per call):
-  uv run python -m cot.c2_provenance.pod_c2 --stage qwen --tiny --limit 3 --out <dir> --auto-go
-The qwen stage writes prepass_qwen.jsonl, then polls run/ for GO (written by the operator after the freeze tag,
-next to items_main.json.gz); it checks the sha256 named in GO, runs the factorial in chunks (main.jsonl, appended per
-chunk) and the follow-ups (m5.jsonl). run/STOP ends the stage without a main run.
+"""c2 rerun on one A100 80GB, one model per process (pod.sh runs the stages in this order):
+  gemma_smoke  Gemma 4 31B, 2 items x 2 samples (smoke)
+  qwen_a       Qwen3.6-27B: smoke pre-pass + build + factorial + M5 on those 2 items, then the real pre-pass (5 samples)
+  gemma        Gemma traces only for the items Qwen keeps, chunks of <= 25 items, sample 1 only if sample 0 is unusable
+  qwen_b       build the item set + gate on the pod; if the gate passes, the factorial and M5 follow-ups
+Every generate call logs a heartbeat every 4 min (the launcher aborts after 30 silent minutes); outputs are written per
+chunk. Local tests: --tiny (Qwen3-0.6B on CPU) or a stub backend (see README).
 """
 from __future__ import annotations
 
 import argparse
-import gzip
 import hashlib
 import json
 import os
 import time
+from collections import Counter
 from pathlib import Path
 
-from cot.c2_provenance.common import (DECODING, FOLLOWUP, GEMMA, HERE, QWEN, clean_user, h32, render, split_qwen,
-                                      t_prefill, u_user)
+from cot.c2_provenance.common import (DECODING, FOLLOWUP, GEMMA, HERE, QWEN, clean_user, h32, load_jsonl, render,
+                                      split_gemma, split_qwen, t_prefill, u_user)
 
 T0 = time.time()
 
@@ -175,38 +171,6 @@ def m5_text(tok, it, tr, first_raw):
     return render(tok, msgs, True)
 
 
-def wait_go(run_dir: Path, minutes: float, auto: bool):
-    if auto:
-        return {"auto": True}
-    t = time.time()
-    last = 0
-    while time.time() - t < minutes * 60:
-        if (run_dir / "STOP").exists():
-            log("STOP found: no main run")
-            return None
-        if (run_dir / "GO").exists():
-            time.sleep(3)   # let a concurrent upload finish
-            return json.loads((run_dir / "GO").read_text())
-        if time.time() - last > 60:
-            log(f"waiting for GO in {run_dir} ({(time.time() - t) / 60:.1f}/{minutes} min)")
-            last = time.time()
-        time.sleep(5)
-    log("no GO before the wait limit: no main run")
-    return None
-
-
-def load_items(run_dir: Path, go: dict, local_items: str | None, out: Path = None):
-    p = Path(local_items) if local_items else run_dir / "items_main.json.gz"
-    if not p.exists() and out is not None:
-        p = out / "build" / "items_main.json"      # GO may name the pod-built set (same code, same pre-pass)
-    raw = gzip.open(p).read() if str(p).endswith(".gz") else p.read_bytes()
-    sha = hashlib.sha256(raw).hexdigest()
-    if go.get("items_sha256") and go["items_sha256"] != sha:
-        raise SystemExit(f"items sha256 {sha[:12]} does not match GO {go['items_sha256'][:12]}")
-    log(f"items file {p} sha256 {sha[:12]} (GO {str(go.get('items_sha256'))[:12]})")
-    return json.loads(raw), sha
-
-
 def main_run(be, d, out: Path, limit_items=None):
     cfg, items = d["config"], d["items"][:limit_items]
     byid = {it["id"]: it for it in items}
@@ -254,77 +218,153 @@ def main_run(be, d, out: Path, limit_items=None):
     return allrows, m5rows
 
 
+def get_backend(model, mml, tiny):
+    return TinyHF() if tiny else VLLM(model, mml)
+
+
+def interleave(items):
+    g = [it for it in items if it["ds"] == "gsm8k"]
+    m = [it for it in items if it["ds"] == "mmlu"]
+    return [x for pair in zip(g, m) for x in pair] + g[len(m):] + m[len(g):]
+
+
+def smoke_cands(cands):
+    return [next(c for c in cands if c["ds"] == "gsm8k"), next(c for c in cands if c["ds"] == "mmlu")]
+
+
+def run_build(args):
+    import subprocess
+    import sys
+    r = subprocess.run([sys.executable, "-m", "cot.c2_provenance.build_main", *args], capture_output=True, text=True)
+    log("build_main " + " ".join(args) + ":\n" + r.stdout[-3000:] + r.stderr[-1500:])
+    if r.returncode != 0:
+        raise SystemExit(f"build_main failed (exit {r.returncode})")
+
+
+def stage_gemma_smoke(be, cands, out):
+    """2 items (first GSM8K, first MMLU), 2 Gemma samples each: exercises Gemma loading, generation and parsing."""
+    sm = out / "smoke"
+    sm.mkdir(parents=True, exist_ok=True)
+    rows = prepass(be, smoke_cands(cands), 2, 3072, "gemma", False, sm / "prepass_gemma.jsonl", lambda n: [range(n)])
+    return {"smoke": tok_stats(rows)}
+
+
+def stage_qwen_a(be, cands, out):
+    """Smoke (2 items through Qwen pre-pass, build, factorial + M5 follow-ups), then the real Qwen pre-pass."""
+    sm = out / "smoke"
+    sc = smoke_cands(cands)
+    prepass(be, sc, 5, 4096, "qwen", True, sm / "prepass_qwen.jsonl", lambda n: [range(n)])
+    ids = ",".join(c["id"] for c in sc)
+    run_build(["--prepass-dir", str(sm), "--out-dir", str(sm / "build"), "--ids", ids])
+    d = json.loads((sm / "build" / "items_main.json").read_text())
+    if not d["items"]:     # neither smoke item passed the filters: exercise the factorial on synthetic traces
+        log("smoke: no item passed; factorial smoke on synthetic traces")
+        run_build(["--fake", "--out-dir", str(sm / "build"), "--ids", ids])
+        d = json.loads((sm / "build" / "items_main.json").read_text())
+    # one item per call (so the M5 ride-along runs too) and short generations: the smoke checks the code path only
+    d["config"] = {**d["config"], "chunk_items": 1, "max_tokens_T": 512, "max_tokens_U": 512, "max_tokens_m5": 256}
+    rows, m5 = main_run(be, d, sm)
+    log(f"smoke factorial: {len(rows)} trials, {len(m5)} follow-ups; finishes {Counter(r['finish'] for r in rows)}")
+    t = time.time()
+    rows = prepass(be, cands, 5, 4096, "qwen", True, out / "prepass_qwen.jsonl", lambda n: [range(1), range(1, n)])
+    return {"prepass": tok_stats(rows), "prepass_seconds": round(time.time() - t)}
+
+
+def stage_gemma(be, cands, out, t0, stop_min):
+    """Gemma traces only for items Qwen keeps (>= 4/5 correct and a passing Qwen pair), datasets interleaved, chunks of
+    <= 25 items. Sample 0 for a chunk; sample 1 only for items whose sample 0 gave no usable trace (correct + passing
+    pair), riding along with the next chunk. No new chunk after stop_min minutes from job start once >= 100 items have a
+    usable trace."""
+    from cot.c2_provenance.build_main import pick, score
+    byid = {c["id"]: c for c in cands}
+    qs = score(load_jsonl(out / "prepass_qwen.jsonl"), split_qwen, byid)
+    kept = []
+    for c in cands:
+        q = qs.get(c["id"], [])
+        if len(q) >= 5 and sum(x["correct"] for x in q) >= 4 and pick(c, q)[1] is not None:
+            kept.append(c)
+    order = interleave(kept)
+    log(f"gemma: {len(order)} kept items need a trace ({Counter(c['ds'] for c in order)})")
+    path = out / "prepass_gemma.jsonl"
+    path.unlink(missing_ok=True)
+    chunks = [order[i:i + 25] for i in range(0, len(order), 25)]
+    usable, pending, k, allrows, stopped = set(), [], 0, [], False
+    while True:
+        late = (time.time() - t0) / 60 > stop_min and len(usable) >= 100
+        stopped = stopped or (late and k < len(chunks))
+        chunk = chunks[k] if (k < len(chunks) and not late) else []
+        jobs = [(it, 0) for it in chunk] + [(it, 1) for it in pending]
+        if not jobs:
+            break
+        texts = [render(be.tok, [{"role": "user", "content": clean_user(it)}], False) for it, _ in jobs]
+        t = time.time()
+        res = be.generate(texts, [3072] * len(jobs), [h32(f"gemma|{it['id']}|{s}") for it, s in jobs])
+        rows = [{"id": it["id"], "ds": it["ds"], "sample": s, **r} for (it, s), r in zip(jobs, res)]
+        write_jsonl(path, rows, "a")
+        allrows += rows
+        pending = []
+        for (it, s), r in zip(jobs, rows):
+            ok = pick(it, score([r], split_gemma, byid).get(it["id"], []))[1] is not None
+            if ok:
+                usable.add(it["id"])
+            elif s == 0:
+                pending.append(it)
+        st = tok_stats(rows)
+        log(f"gemma call {k}: {len(chunk)} items x sample 0 + {len(jobs) - len(chunk)} second samples in "
+            f"{time.time() - t:.0f}s ({st.get('total', 0) / max(time.time() - t, 1e-9):.0f} tok/s); usable so far "
+            f"{len(usable)}/{len(order)}; tokens {st}")
+        k += 1
+    return {"kept_items": len(order), "usable": len(usable), "stopped_early": stopped, "chunks_run": min(k, len(chunks)),
+            "tokens": tok_stats(allrows)}
+
+
+def stage_qwen_b(be, out):
+    run_build(["--prepass-dir", str(out), "--out-dir", str(out / "build")])
+    g = json.loads((out / "build" / "gate.json").read_text())
+    log(f"gate_pass={g.get('gate_pass')} clean_acc={g.get('clean_acc_final_items')} "
+        f"parse={g.get('corrupt_parse_rate_first_choice')} n_items={g.get('n_items')} sha {g.get('items_sha256', '')[:12]}")
+    if not g.get("gate_pass"):
+        log("gate failed: no factorial")
+        return {"gate_pass": False}
+    raw = (out / "build" / "items_main.json").read_bytes()
+    assert hashlib.sha256(raw).hexdigest() == g["items_sha256"]
+    d = json.loads(raw)
+    t = time.time()
+    rows, m5 = main_run(be, d, out)
+    return {"gate_pass": True, "items_sha256": g["items_sha256"], "config": d["config"], "seconds": round(time.time() - t),
+            "tokens": tok_stats(rows), "m5": tok_stats(m5)}
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--stage", choices=["gemma", "qwen"], required=True)
+    ap.add_argument("--stage", choices=["gemma_smoke", "qwen_a", "gemma", "qwen_b"], required=True)
     ap.add_argument("--out", default=str(HERE / "results"))
-    ap.add_argument("--run-dir", default=str(HERE / "run"))
     ap.add_argument("--tiny", action="store_true")
     ap.add_argument("--limit", type=int, default=None, help="first N candidates per dataset (tests)")
-    ap.add_argument("--wait-minutes", type=float, default=30)
-    ap.add_argument("--auto-go", action="store_true", help="tests: do not wait; use --items")
-    ap.add_argument("--items", default=None, help="tests: a local items_main.json")
-    ap.add_argument("--skip-prepass", action="store_true", help="tests: go straight to the main run")
+    ap.add_argument("--gemma-stop-min", type=float, default=float(os.environ.get("C2_GEMMA_STOP_MIN", "55")))
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     cands = json.loads((HERE / "data" / "candidates.json").read_text())
     if a.limit:
         cands = [c for c in cands if c["ds"] == "gsm8k"][:a.limit] + [c for c in cands if c["ds"] == "mmlu"][:a.limit]
-    settings = {"stage": a.stage, "git_rev": os.environ.get("GIT_REV", "?")}
-
-    if a.stage == "gemma":
-        be = TinyHF() if a.tiny else VLLM(GEMMA, 8192)
-        settings["backend"] = be.info
-        log(f"loaded {be.info['model']}; {len(cands)} candidates x 3 samples")
-        rows = prepass(be, cands, 3, 3072, "gemma", False, out / "prepass_gemma.jsonl", lambda n: [range(1), range(1, n)])
-        settings["prepass"] = tok_stats(rows)
-        (out / "settings_gemma.json").write_text(json.dumps(settings, indent=1))
-        log("gemma stage done")
-        return
-
-    be = TinyHF() if a.tiny else VLLM(QWEN, 16384)
-    settings["backend"] = be.info
-    log(f"loaded {be.info['model']}")
-    if not a.skip_prepass:
-        rows = prepass(be, cands, 5, 4096, "qwen", True, out / "prepass_qwen.jsonl", lambda n: [range(1), range(1, n)])
-        settings["prepass"] = tok_stats(rows)
-        (out / "settings_qwen.json").write_text(json.dumps(settings, indent=1))
-        (out / "PREPASS_DONE").write_text(time.strftime("%H:%M:%S"))
-        log("qwen pre-pass done; PREPASS_DONE written")
-    if not a.tiny:
-        import subprocess
-        import sys
-        r = subprocess.run([sys.executable, "-m", "cot.c2_provenance.build_main", "--prepass-dir", str(out),
-                            "--out-dir", str(out / "build")], capture_output=True, text=True)
-        log("pod build_main:\n" + r.stdout[-3500:] + r.stderr[-1500:])
-    go = None
-    gp = out / "build" / "gate.json"
-    if (Path(a.run_dir) / "AUTO").exists() and gp.exists():   # frozen before the pre-pass: the gate decides on the pod
-        g = json.loads(gp.read_text())
-        log(f"AUTO: gate_pass={g.get('gate_pass')} n_items={g.get('n_items')} sha {g.get('items_sha256', '')[:12]}")
-        if not g.get("gate_pass"):
-            log("gate failed: no main run")
-            return
-        go = {"items_sha256": g["items_sha256"], "auto": True}
-    if go is None:
-        go = wait_go(Path(a.run_dir), a.wait_minutes, a.auto_go)
-    if go is None:
-        return
-    d, sha = load_items(Path(a.run_dir), go, a.items, out)
-    settings["items_sha256"] = sha
-    settings["config"] = d["config"]
-    # re-import the code from disk so that a fix uploaded before GO (ops put) is what runs; record its hashes
-    import importlib
-    importlib.reload(importlib.import_module("cot.c2_provenance.common"))
-    pm = importlib.reload(importlib.import_module("cot.c2_provenance.pod_c2"))
-    settings["code_sha256"] = {f: hashlib.sha256((HERE / f).read_bytes()).hexdigest() for f in ("common.py", "pod_c2.py")}
-    log(f"code sha256 {({k: v[:12] for k, v in settings['code_sha256'].items()})}")
-    t = time.time()
-    allrows, m5 = pm.main_run(be, d, out)
-    settings["main"] = {"seconds": round(time.time() - t), "tokens": tok_stats(allrows), "m5": tok_stats(m5)}
-    (out / "settings_qwen.json").write_text(json.dumps(settings, indent=1))
-    log("qwen stage done")
+    t0 = float(os.environ.get("C2_T0", time.time()))
+    gem = a.stage.startswith("gemma")
+    be = get_backend(GEMMA if gem else QWEN, 8192 if gem else 16384, a.tiny)
+    settings = {"stage": a.stage, "git_rev": os.environ.get("GIT_REV", "?"), "backend": be.info,
+                "code_sha256": {f: hashlib.sha256((HERE / f).read_bytes()).hexdigest()
+                                for f in ("common.py", "pod_c2.py", "build_main.py")}}
+    log(f"stage {a.stage}: loaded {be.info['model']}; {(time.time() - t0) / 60:.1f} min since job start")
+    if a.stage == "gemma_smoke":
+        settings.update(stage_gemma_smoke(be, cands, out))
+    elif a.stage == "qwen_a":
+        settings.update(stage_qwen_a(be, cands, out))
+    elif a.stage == "gemma":
+        settings.update(stage_gemma(be, cands, out, t0, a.gemma_stop_min))
+    else:
+        settings.update(stage_qwen_b(be, out))
+    (out / f"settings_{a.stage}.json").write_text(json.dumps(settings, indent=1))
+    log(f"stage {a.stage} done; {(time.time() - t0) / 60:.1f} min since job start")
 
 
 if __name__ == "__main__":

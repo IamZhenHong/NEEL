@@ -25,7 +25,7 @@ from cot.c2_provenance.common import (DATA, HERE, RESULTS, check_pair, load_json
                                       split_gemma, split_qwen)
 
 N_PER_DS = 100
-CONFIG = {"chunk_items": 25, "max_tokens_T": 3072, "max_tokens_U": 3072, "max_tokens_m5": 1536, "n_m5": 100}
+CONFIG = {"chunk_items": 25, "max_tokens_T": 3072, "max_tokens_U": 4096, "max_tokens_m5": 1536, "n_m5": 100}
 SEED = 20261015
 
 
@@ -91,8 +91,12 @@ def main():
     ap.add_argument("--out-dir", default=None, help="default: data/ and results/ of this folder")
     ap.add_argument("--fake", action="store_true")
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--ids", default=None, help="comma-separated candidate ids (smoke)")
     a = ap.parse_args()
     cands = json.loads((DATA / "candidates.json").read_text())
+    if a.ids:
+        keep = set(a.ids.split(","))
+        cands = [c for c in cands if c["id"] in keep]
     if a.limit:
         cands = [c for c in cands if c["ds"] == "gsm8k"][:a.limit] + [c for c in cands if c["ds"] == "mmlu"][:a.limit]
     byid = {c["id"]: c for c in cands}
