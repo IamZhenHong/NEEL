@@ -1,0 +1,53 @@
+{
+ "rows": [
+  {
+   "prediction": "P1 gemma: USE - DESCRIBE >= +0.20 on false claims",
+   "p": 0.55,
+   "hit": true,
+   "value": "+0.475"
+  },
+  {
+   "prediction": "P2 gemma: push lowers DESCRIBE tt by >= 0.10",
+   "p": 0.5,
+   "hit": false,
+   "value": "+0.917"
+  },
+  {
+   "prediction": "P3 gemma: push drop in USE smaller than in DESCRIBE",
+   "p": 0.5,
+   "hit": false,
+   "value": "USE +0.000 vs DESCRIBE +0.917"
+  },
+  {
+   "prediction": "P1 qwen: USE - DESCRIBE >= +0.20 on false claims",
+   "p": 0.55,
+   "hit": true,
+   "value": "+0.483"
+  },
+  {
+   "prediction": "P2 qwen: push lowers DESCRIBE tt by >= 0.10",
+   "p": 0.5,
+   "hit": false,
+   "value": "+0.083"
+  },
+  {
+   "prediction": "P3 qwen: push drop in USE smaller than in DESCRIBE",
+   "p": 0.5,
+   "hit": false,
+   "value": "USE -0.250 vs DESCRIBE +0.083"
+  },
+  {
+   "prediction": "P4: false claims more frequent under G2 than G0 (logit, CI > 0)",
+   "p": 0.7,
+   "hit": true,
+   "value": "OR 6.71 [3.23, 13.91]"
+  },
+  {
+   "prediction": "P5: desirable-direction misreports outnumber undesirable (Part 1)",
+   "p": 0.7,
+   "hit": true,
+   "value": "308 vs 2"
+  }
+ ],
+ "brier": 0.1981
+}

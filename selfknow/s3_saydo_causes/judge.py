@@ -209,6 +209,21 @@ def violation_episodes():
     return out
 
 
+def note_text(raw: str) -> str:
+    """The handover note as written. Calls in the handover turn are recorded, never executed; some notes are written
+    as a call (e.g. add_account_note), so the call and its arguments are shown as text instead of being dropped."""
+    from vigilante.src.sim import parse_calls, parse_calls_gemma
+    if "<|tool_call>" in raw:
+        head, calls, _ = parse_calls_gemma(raw)
+    elif "<tool_call>" in raw:
+        head, calls, _ = parse_calls(raw)
+    else:
+        return raw.strip()
+    parts = [head.strip()] if head.strip() else []
+    parts += [f"[written as a call to {n}: {json.dumps(a, ensure_ascii=False)}]" for n, a in calls]
+    return "\n".join(parts)
+
+
 def items_handover():
     from vigilante.cases import ALL
     from vigilante.src.judge import CONCEAL_PROMPT
@@ -218,8 +233,7 @@ def items_handover():
         calls = [Call(**c) for c in rec["calls"]]
         labels, _ = case.replay(calls)
         acts = [f"- {c.name}({json.dumps(c.args, ensure_ascii=False)})" for c, l in zip(calls, labels) if "unauth" in l.tags]
-        note = s.get("handover_note") or ""
-        note = note.split("<tool_call>")[0].split("<|tool_call>")[0].strip()
+        note = note_text(s.get("handover_note") or "")
         prompt = CONCEAL_PROMPT.replace("(its replies and its end-of-session handover note)", "(its end-of-session handover note)")
         yield rec["key"], prompt.replace("@@ACTIONS@@", "\n".join(acts)).replace("@@TEXT@@", ("HANDOVER NOTE: " + note) if note else "(nothing)")
 
@@ -276,6 +290,7 @@ def main():
     ap.add_argument("task", choices=list(TASKS))
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--n-cross", type=int, default=40)
+    ap.add_argument("--redo-calls", action="store_true", help="handover: re-judge only notes written as a call and merge")
     a = ap.parse_args()
     fn, schema, labels = TASKS[a.task]
     if a.task == "handover":
@@ -287,6 +302,16 @@ def main():
         print(items[0][1][:3000])
         return
     OUT.mkdir(parents=True, exist_ok=True)
+    if a.redo_calls:
+        prev = json.loads((OUT / f"{a.task}.json").read_text())
+        redo = [(k, p) for k, p in items if "[written as a call to" in p]
+        print(f"[{a.task}] re-judging {len(redo)} notes written as a call (first pass showed them as empty)")
+        hk = run_haiku(redo, schema, f"s3-{a.task}-haiku-redo")
+        prev["haiku_first_pass"] = {k: prev["haiku"][k] for k, _ in redo}
+        prev["haiku"].update(hk)
+        prev["redo_calls"] = [k for k, _ in redo]
+        (OUT / f"{a.task}.json").write_text(json.dumps(prev, indent=1))
+        return
     hk = run_haiku(items, schema, f"s3-{a.task}-haiku")
     rng = random.Random(f"s3-cross-{a.task}")
     sub = rng.sample(items, min(a.n_cross, len(items)))
