@@ -28,6 +28,9 @@ from selfknow.s4_accumulation.score import load_rows
 H = Path(__file__).parent
 R = H / "results"
 MODELS = [("qwen", "Qwen3.6-27B"), ("gemma", "Gemma 4 31B")]
+# Amendment 1 (README, before the main run): Qwen failed the gate (0/100 at N = 0 over all five wordings), so it is
+# exploratory: same tables and fits, but no prediction scoring. Gemma (passed at L4) is the confirmatory model.
+CONFIRMATORY = {"gemma"}
 RIDGE = 0.01
 B = 2000
 
@@ -191,8 +194,8 @@ def main():
         with open(R / "main" / m / "scores.jsonl", "w") as f:
             for r in rows:
                 f.write(json.dumps(r, ensure_ascii=False, default=str) + "\n")
-        res = {"n": len(rows)}
-        out += [f"## {label} ({len(rows)} episodes)", ""]
+        res = {"n": len(rows), "confirmatory": m in CONFIRMATORY}
+        out += [f"## {label} ({len(rows)} episodes; {'confirmatory' if m in CONFIRMATORY else 'EXPLORATORY: failed the gate'})", ""]
         # cell table
         for probe in ("P1", "P2"):
             out += [f"### {probe}: violating call (policy mention)", "",
@@ -289,7 +292,7 @@ def _sig_neg(f_, term):
 def scorecard(allres):
     items = []
     for m, label in MODELS:
-        if m not in allres:
+        if m not in allres or m not in CONFIRMATORY:
             continue
         r = allres[m]
         prim, p2, au = r["primary_P1_self"], r["P2_self"], r["auth_P1"]

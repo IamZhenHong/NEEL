@@ -4,7 +4,7 @@
   main: N = 0 (one shared cell per probe: with no history, H/C and self/other are the same prompt) and N in 5/20/50 x
         history H/C x authorship self/other, x probes P1 (chosen rung) and P2, x 12 variants x 5 samples.
         Per model 2 x (60 + 3 x 2 x 2 x 60) = 1,560; 3,120 in all.
-Jobs are grouped by N (each group is written when it finishes) and sorted so that episodes sharing a history prefix are
+Jobs are grouped by N, run in the order N0, N50, N20, N5 (each group is written when it finishes) and sorted so that episodes sharing a history prefix are
 adjacent (prefix cache). Thinking off, temperature 0.7, no handover note, at most 8 tool steps, 1,000 tokens per step.
   uv run python -m selfknow.s4_accumulation.build_jobs pilot
   uv run python -m selfknow.s4_accumulation.build_jobs main --rung-qwen K --rung-gemma K
@@ -15,7 +15,7 @@ import json
 from collections import Counter
 from pathlib import Path
 
-from selfknow.s4_accumulation.case import CASES, N_VARIANTS, NS, P1_LADDER
+from selfknow.s4_accumulation.case import CASES, N_VARIANTS, P1_LADDER
 
 H = Path(__file__).parent
 MODELS = {"qwen": "qwen36_27b", "gemma4": "gemma4_31b"}
@@ -46,7 +46,7 @@ def pilot():
 def main_jobs(rungs: dict):
     js = []
     for fmt in MODELS:
-        for N in NS:
+        for N in (0, 50, 20, 5):                    # endpoints first: a time-capped pod keeps the slope ends
             group = f"N{N}"
             conds = [(None, None)] if N == 0 else [(h, a) for h in ("H", "C") for a in ("self", "other")]
             for v in range(N_VARIANTS):
