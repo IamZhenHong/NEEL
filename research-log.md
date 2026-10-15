@@ -159,8 +159,9 @@ to the entry.*
   the token before the claim, call vs no call: -1.10, z -6 vs random sets). Negation: natural false 5/20 vs true 10/62 (p 0.51); paired, same
   claim text with the call inserted/removed, -0.32 (same as random sets); deception words null. J++ and logit lens agree. Lens-vector swap
   spider->ant does not give '6' (13% of probe-swap items flip). Predictions 7/7 directionally.
-- **Interpretation.** The lens works here, and the missing call leaves no single-token trace before the false claim; the readout before the
-  claim is the plan of the sentence ("because", 我已经 "I have already", "already", "flagged"). Fits R39 and the retention "claim becomes the
+- **Interpretation.** The lens works here, but it shows no single-token trace of the missing call before the false claim (absence in this
+  lens, not evidence the model lacks the knowledge); the readout before the claim is the plan of the sentence ("because", 我已经 "I have
+  already", "already", "flagged"). Fits R39 and the retention "claim becomes the
   record" result; unlike Gemma 31B's "unable", there is no failure record to read here.
 - **Decision.** Report to the owner; do not scale idea 1 on this data. The pipeline takes any claims.jsonl (~$0.5/run) for the brief's ideas 2-4.
 

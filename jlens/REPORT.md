@@ -66,9 +66,13 @@ Directional accuracy 7/7, Brier 0.067.
 
 ## Reading
 
-In this setting the false "I've flagged it" is not preceded by a workspace that knows the flag is missing, at least
-not in any single-token form the J-lens can show. The lens is working: it reads the spider intermediate early and it
-reads the flag record from context. This matches R39 (the coming false claim is barely readable before the reply)
+In this setting the J-lens shows no sign, before the false "I've flagged it", that the flag is missing. That is a
+statement about what this lens shows, not evidence that the model lacks the knowledge: the lens reads only single
+tokens, only what the model is disposed to say later, and incompletely even on its own eval (pass@10 0.53 in the band;
+lens-vector swaps flip 13%); we read 11 of 64 layers at a handful of positions with fixed word lists, in one scenario.
+The retention line found models answer "did you call the tool?" from the tool log, so the fact is available somewhere.
+The lens is working in the sense the gate tests: it reads the spider intermediate early and it reads the flag record
+from context. This matches R39 (the coming false claim is barely readable before the reply)
 and the retention line (the model's account follows its own claim). It differs from the Gemma 4 31B J++ read, where
 "unable" appeared whenever a *failure record* was in context: here there is no failure record, only a missing call,
 and the absence leaves no trace in the lens.
