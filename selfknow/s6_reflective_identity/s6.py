@@ -248,7 +248,8 @@ def classify_kr(tok_text: str) -> str | None:
 
 
 def classify_digit(tok_text: str) -> int | None:
-    return int(tok_text) if len(tok_text) == 1 and tok_text.isdigit() else None
+    # ASCII digits only (fix 2026-10-15, during the main run: '₅'.isdigit() is True but int('₅') fails)
+    return int(tok_text) if len(tok_text) == 1 and tok_text in "0123456789" else None
 
 
 def dumps(x) -> str:

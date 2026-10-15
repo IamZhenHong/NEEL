@@ -146,6 +146,20 @@ hidden 1/5).
 Gate: passes for all four personas on Gemma (both pilots) and on Qwen (pilot 1); Qwen under the final wording: see A6.
 The pilot analysis printed no persistence, KEEP or endorsement values.
 
+## Deviations during the main run (after the freeze)
+
+- One Gemma episode (`U2|mem|v8|s0`) crashed in the 0-100 read on a subscript-digit token ('₅'.isdigit() is True,
+  int() fails). `s6.classify_digit` now accepts ASCII digits only (test added); the fix was copied to the pod before
+  the Qwen stage and the episode was re-run against the same Gemma server (`results/main/gemma_rerun/`, merged by
+  `analyze.load`).
+- Qwen was stopped at minute ~78 of the pod to stay under the $2.5 cap (prefill-bound: vLLM's hybrid-attention prefix
+  cache works in 784-token blocks, ~30% hit rate). 389 of 540 Qwen episodes: samples 0-1 complete, sample 2 variants
+  0-3 (41-45 per cell instead of 60).
+- Post hoc analyses added to `analyze.py` after seeing the data, labelled as such and not used for prediction scoring:
+  a tool-or-text signature (Qwen answered 59-71% of later probes without calling recommend_plan, and ~90% of those
+  replies claimed the plan was placed), an R1 self-description regex, and (scratch only) a C2 refusal regex.
+- The results write-up was returned to the coordinator as text (writing REPORT.md was blocked in this session).
+
 ## Budget
 
-GPU cap $2.5 (one A100 80GB per run via `infra/launch_run.py`, name `s6-1`). API: none used.
+GPU cap $2.5: spent $2.365 (one A100 SXM 80GB pod `s6-1`, ~79 min, pilot 1 + pilot 2 + main). API: none used.

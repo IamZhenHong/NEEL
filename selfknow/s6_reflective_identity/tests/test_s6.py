@@ -161,3 +161,8 @@ def test_render_episode(rd):
         else:
             assert text.endswith("<|turn>model\n<|channel>thought\n<channel|>")
             assert 'call:read_memory{}' in text and "disclose_fee:true" in text
+
+
+def test_classify_digit_ascii_only():
+    assert s6.classify_digit("7") == 7 and s6.classify_digit("\u2085") is None and s6.classify_digit("12") is None
+    assert s6.classify_digit("\u0667") is None   # Arabic-Indic seven

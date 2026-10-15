@@ -1,0 +1,129 @@
+[pre] disk: 10.5 GiB free
+[pre] balance $50.75, pods 5
+[runpod] launching alongside 5 pod(s) not ours (left alone): s2-1 $1.79/hr, s4-1 $1.79/hr, jl23-1 $1.79/hr, s3-2 $1.79/hr, c2-1 $1.79/hr
+[runpod] pod 9q6tcb76a9xzxh (?) at $1.79/hr; time cap 82 min; budget $2.45
+[runpod] waiting for ip/port (1s, status RUNNING)
+[pod] ssh root@185.216.23.244 -p 11378
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 112 min (job limit 82 + 30 grace)
+[pod] code synced
+downloading uv 0.13.1 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=e04645c-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash selfknow/s6_reflective_identity/pod.sh
+[job] start 12:54:19
+NVIDIA A100-SXM4-80GB, 570.172.08, 81920 MiB
+[pod] vllm 0.30.0 torch 2.13.0+cu129 cuda 12.9
+[pod] gpu NVIDIA A100-SXM4-80GB
+[pod] cuda ok; matmul 64.0
+[s6] serving qwen: Qwen/Qwen3.6-27B@6a9e13bd6fc8f0983b9b99948120bc37f49c13e9 mml 16384
+[s6] qwen up after 300s (mm limit: {"image": 0, "video": 0})
+[runner] 53 jobs, 0 done, 53 to run; workers 53; fmt qwen
+[runner] 20/53 done (0 failed) in 28s; usage {'prompt_tokens': 34110, 'completion_tokens': 2799, 'requests': 52}
+[runner] 40/53 done (0 failed) in 29s; usage {'prompt_tokens': 49974, 'completion_tokens': 4181, 'requests': 74}
+[runner] 53/53 done (0 failed) in 61s; usage {'prompt_tokens': 169702, 'completion_tokens': 9223, 'requests': 193}
+[runner] finished: {'jobs': 'selfknow/s6_reflective_identity/jobs/pilot_qwen.jsonl', 'n_ok': 53, 'n_err': 0, 'seconds': 61, 'usage': {'prompt_tokens': 169702, 'completion_tokens': 9223, 'requests': 193}, 'fmt': 'qwen', 'model': 'Qwen/Qwen3.6-27B', 'maxtok': {'probe': 300, 'corr': 220, 'r1': 200, 'r2': 220, 'r3': 12}, 'decoding': {'temperature': 0.7, 'top_p': 0.95, 'top_k': 20}}
+(APIServer pid=647) INFO 10-15 13:00:40 [loggers.py:315] Engine 000: Avg prompt throughput: 1457.8 tokens/s, Avg generation throughput: 141.4 tokens/s, Running: 7 reqs, Waiting: 0 reqs, GPU KV cache usage: 8.9%, Prefix cache hit rate: 34.5%
+(APIServer pid=647) INFO 10-15 13:00:50 [loggers.py:315] Engine 000: Avg prompt throughput: 999.4 tokens/s, Avg generation throughput: 166.1 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 10.2%, Prefix cache hit rate: 40.7%
+[s6] serving gemma: google/gemma-4-31B-it@842da3794eaa0b77d5f08bae87a17459d91ff475 mml 8192
+[s6] gemma up after 220s (mm limit: {"image": 0, "video": 0})
+[runner] 53 jobs, 0 done, 53 to run; workers 12; fmt gemma4
+[runner] 20/53 done (0 failed) in 17s; usage {'prompt_tokens': 16199, 'completion_tokens': 1813, 'requests': 36}
+[runner] 40/53 done (0 failed) in 25s; usage {'prompt_tokens': 31837, 'completion_tokens': 3650, 'requests': 71}
+[runner] 53/53 done (0 failed) in 65s; usage {'prompt_tokens': 132246, 'completion_tokens': 8851, 'requests': 209}
+[runner] finished: {'jobs': 'selfknow/s6_reflective_identity/jobs/pilot_gemma.jsonl', 'n_ok': 53, 'n_err': 0, 'seconds': 65, 'usage': {'prompt_tokens': 132246, 'completion_tokens': 8851, 'requests': 209}, 'fmt': 'gemma4', 'model': 'google/gemma-4-31B-it', 'maxtok': {'probe': 300, 'corr': 220, 'r1': 200, 'r2': 220, 'r3': 12}, 'decoding': {'temperature': 0.7, 'top_p': 0.95, 'top_k': 20}}
+(APIServer pid=2615) INFO 10-15 13:05:34 [loggers.py:315] Engine 000: Avg prompt throughput: 339.4 tokens/s, Avg generation throughput: 157.2 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 46.9%, Prefix cache hit rate: 73.7%
+(APIServer pid=2615) INFO 10-15 13:05:44 [loggers.py:315] Engine 000: Avg prompt throughput: 192.1 tokens/s, Avg generation throughput: 117.4 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 7.6%, Prefix cache hit rate: 75.9%
+[s6] PILOT DONE 13:05:53
+[s6] waiting for go/stop (1 min)
+[s6] waiting for go/stop (2 min)
+[s6] waiting for go/stop (3 min)
+[s6] waiting for go/stop (4 min)
+[s6] waiting for go/stop (5 min)
+[s6] GO received 13:10:53: s6-freeze c9e73b0
+[runner] 540 jobs, 0 done, 540 to run; workers 12; fmt gemma4
+[runner] 20/540 done (0 failed) in 68s; usage {'prompt_tokens': 331963, 'completion_tokens': 14022, 'requests': 439}
+[runner] 40/540 done (0 failed) in 127s; usage {'prompt_tokens': 629948, 'completion_tokens': 26207, 'requests': 828}
+[runner] 60/540 done (0 failed) in 181s; usage {'prompt_tokens': 892661, 'completion_tokens': 37066, 'requests': 1166}
+[runner] episode S6|gemma|U2|mem|v8|s0 FAILED:
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/NEEL/selfknow/s6_reflective_identity/runner.py", line 383, in one
+    return Episode(job, be, rd, maxtok).run()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/NEEL/selfknow/s6_reflective_identity/runner.py", line 328, in run
+    ev = self.read_ev(r)
+         ^^^^^^^^^^^^^^^
+  File "/root/NEEL/selfknow/s6_reflective_identity/runner.py", line 282, in read_ev
+    second = {d: self._digits(t) for d, t in zip(expand, tops2)}
+                 ^^^^^^^^^^^^^^^
+  File "/root/NEEL/selfknow/s6_reflective_identity/runner.py", line 257, in _digits
+    x = s6.classify_digit(self.rd.decode1(t))
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/NEEL/selfknow/s6_reflective_identity/s6.py", line 251, in classify_digit
+    return int(tok_text) if len(tok_text) == 1 and tok_text.isdigit() else None
+           ^^^^^^^^^^^^^
+ValueError: invalid literal for int() with base 10: '₅'
+
+[runner] 80/540 done (1 failed) in 239s; usage {'prompt_tokens': 1180344, 'completion_tokens': 49228, 'requests': 1539}
+[runner] 100/540 done (1 failed) in 292s; usage {'prompt_tokens': 1448298, 'completion_tokens': 60226, 'requests': 1889}
+[runner] 120/540 done (1 failed) in 347s; usage {'prompt_tokens': 1720830, 'completion_tokens': 71693, 'requests': 2239}
+[runner] 140/540 done (1 failed) in 402s; usage {'prompt_tokens': 1995990, 'completion_tokens': 83076, 'requests': 2601}
+[runner] 160/540 done (1 failed) in 455s; usage {'prompt_tokens': 2258827, 'completion_tokens': 94231, 'requests': 2943}
+[runner] 180/540 done (1 failed) in 515s; usage {'prompt_tokens': 2557741, 'completion_tokens': 106499, 'requests': 3330}
+[runner] 200/540 done (1 failed) in 569s; usage {'prompt_tokens': 2827799, 'completion_tokens': 117877, 'requests': 3683}
+[runner] 220/540 done (1 failed) in 622s; usage {'prompt_tokens': 3088571, 'completion_tokens': 128904, 'requests': 4021}
+[runner] 240/540 done (1 failed) in 676s; usage {'prompt_tokens': 3358840, 'completion_tokens': 140224, 'requests': 4373}
+[runner] 260/540 done (1 failed) in 739s; usage {'prompt_tokens': 3662773, 'completion_tokens': 152985, 'requests': 4769}
+[runner] 280/540 done (1 failed) in 790s; usage {'prompt_tokens': 3922965, 'completion_tokens': 163839, 'requests': 5102}
+[runner] 300/540 done (1 failed) in 848s; usage {'prompt_tokens': 4211762, 'completion_tokens': 175920, 'requests': 5476}
+[runner] 320/540 done (1 failed) in 902s; usage {'prompt_tokens': 4473283, 'completion_tokens': 186842, 'requests': 5822}
+[runner] 340/540 done (1 failed) in 953s; usage {'prompt_tokens': 4730443, 'completion_tokens': 197622, 'requests': 6153}
+[runner] 360/540 done (1 failed) in 1012s; usage {'prompt_tokens': 5025776, 'completion_tokens': 209854, 'requests': 6536}
+[runner] 380/540 done (1 failed) in 1068s; usage {'prompt_tokens': 5309067, 'completion_tokens': 221347, 'requests': 6905}
+[runner] 400/540 done (1 failed) in 1120s; usage {'prompt_tokens': 5559416, 'completion_tokens': 232367, 'requests': 7228}
+[runner] 420/540 done (1 failed) in 1179s; usage {'prompt_tokens': 5859053, 'completion_tokens': 244672, 'requests': 7619}
+[runner] 440/540 done (1 failed) in 1235s; usage {'prompt_tokens': 6135652, 'completion_tokens': 256090, 'requests': 7981}
+[runner] 460/540 done (1 failed) in 1287s; usage {'prompt_tokens': 6386903, 'completion_tokens': 266903, 'requests': 8308}
+[runner] 480/540 done (1 failed) in 1342s; usage {'prompt_tokens': 6668114, 'completion_tokens': 278431, 'requests': 8673}
+[runner] 500/540 done (1 failed) in 1396s; usage {'prompt_tokens': 6937229, 'completion_tokens': 289691, 'requests': 9024}
+[runner] 520/540 done (1 failed) in 1452s; usage {'prompt_tokens': 7212818, 'completion_tokens': 301249, 'requests': 9383}
+[runner] 540/540 done (1 failed) in 1511s; usage {'prompt_tokens': 7428380, 'completion_tokens': 310596, 'requests': 9650}
+[runner] finished: {'jobs': 'selfknow/s6_reflective_identity/jobs/main_gemma.jsonl', 'n_ok': 539, 'n_err': 1, 'seconds': 1511, 'usage': {'prompt_tokens': 7428380, 'completion_tokens': 310596, 'requests': 9650}, 'fmt': 'gemma4', 'model': 'google/gemma-4-31B-it', 'maxtok': {'probe': 300, 'corr': 220, 'r1': 200, 'r2': 220, 'r3': 12}, 'decoding': {'temperature': 0.7, 'top_p': 0.95, 'top_k': 20}}
+(APIServer pid=2615) INFO 10-15 13:35:54 [loggers.py:315] Engine 000: Avg prompt throughput: 270.0 tokens/s, Avg generation throughput: 146.9 tokens/s, Running: 5 reqs, Waiting: 0 reqs, GPU KV cache usage: 31.5%, Prefix cache hit rate: 89.1%
+(APIServer pid=2615) INFO 10-15 13:36:04 [loggers.py:315] Engine 000: Avg prompt throughput: 120.7 tokens/s, Avg generation throughput: 74.0 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 8.0%, Prefix cache hit rate: 89.0%
+[s6] serving qwen: Qwen/Qwen3.6-27B@6a9e13bd6fc8f0983b9b99948120bc37f49c13e9 mml 16384
+[s6] qwen up after 120s (mm limit: {"image": 0, "video": 0})
+[runner] 540 jobs, 0 done, 540 to run; workers 64; fmt qwen
+[runner] 20/540 done (0 failed) in 189s; usage {'prompt_tokens': 913576, 'completion_tokens': 36421, 'requests': 920}
+[runner] 40/540 done (0 failed) in 211s; usage {'prompt_tokens': 1017996, 'completion_tokens': 41912, 'requests': 1016}
+[runner] 60/540 done (0 failed) in 294s; usage {'prompt_tokens': 1518626, 'completion_tokens': 58423, 'requests': 1510}
+[runner] 80/540 done (0 failed) in 365s; usage {'prompt_tokens': 1861498, 'completion_tokens': 73519, 'requests': 1834}
+[runner] 100/540 done (0 failed) in 411s; usage {'prompt_tokens': 2095818, 'completion_tokens': 83498, 'requests': 2067}
+[runner] 120/540 done (0 failed) in 480s; usage {'prompt_tokens': 2478324, 'completion_tokens': 97193, 'requests': 2437}
+[runner] 140/540 done (0 failed) in 530s; usage {'prompt_tokens': 2734225, 'completion_tokens': 108179, 'requests': 2684}
+[runner] 160/540 done (0 failed) in 609s; usage {'prompt_tokens': 3145392, 'completion_tokens': 124474, 'requests': 3072}
+[runner] 180/540 done (0 failed) in 671s; usage {'prompt_tokens': 3460319, 'completion_tokens': 137275, 'requests': 3378}
+[runner] 200/540 done (0 failed) in 737s; usage {'prompt_tokens': 3782106, 'completion_tokens': 151035, 'requests': 3687}
+[runner] 220/540 done (0 failed) in 819s; usage {'prompt_tokens': 4212070, 'completion_tokens': 167471, 'requests': 4086}
+[runner] 240/540 done (0 failed) in 871s; usage {'prompt_tokens': 4474460, 'completion_tokens': 178466, 'requests': 4332}
+[runner] 260/540 done (0 failed) in 929s; usage {'prompt_tokens': 4779261, 'completion_tokens': 191131, 'requests': 4634}
+[runner] 280/540 done (0 failed) in 1010s; usage {'prompt_tokens': 5174392, 'completion_tokens': 207708, 'requests': 5006}
+[runner] 300/540 done (0 failed) in 1065s; usage {'prompt_tokens': 5457892, 'completion_tokens': 219355, 'requests': 5272}
+[runner] 320/540 done (0 failed) in 1135s; usage {'prompt_tokens': 5841506, 'completion_tokens': 233518, 'requests': 5641}
+[runner] 340/540 done (0 failed) in 1190s; usage {'prompt_tokens': 6119341, 'completion_tokens': 245574, 'requests': 5917}
+[runner] 360/540 done (0 failed) in 1261s; usage {'prompt_tokens': 6492095, 'completion_tokens': 259736, 'requests': 6272}
+[runner] 380/540 done (0 failed) in 1313s; usage {'prompt_tokens': 6750294, 'completion_tokens': 271136, 'requests': 6523}
+Terminated
+(APIServer pid=5584) INFO 10-15 14:00:24 [loggers.py:315] Engine 000: Avg prompt throughput: 3732.0 tokens/s, Avg generation throughput: 202.8 tokens/s, Running: 57 reqs, Waiting: 1 reqs, GPU KV cache usage: 64.8%, Prefix cache hit rate: 27.6%
+(APIServer pid=5584) INFO 10-15 14:00:34 [loggers.py:315] Engine 000: Avg prompt throughput: 3918.6 tokens/s, Avg generation throughput: 195.5 tokens/s, Running: 59 reqs, Waiting: 0 reqs, GPU KV cache usage: 66.7%, Prefix cache hit rate: 27.2%
+[s6] all done
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$2.357
+[local] results synced ./selfknow/s6_reflective_identity/results/ (17 files, 17 MiB, verified against the pod)
+[runpod] terminated 9q6tcb76a9xzxh; elapsed cost ~$2.365
+[runpod] other pods present (not ours, left alone): [('c2-3', '2n1urq4hrlcuaz', 1.79), ('s1-1', 'lkk58y2pt4llb7', 1.79), ('s5-2', 'ls1qo3yxl1v5lt', 1.79), ('s7-2', 'v9e4cu7mrdkyp6', 1.79)]
+[post] balance $37.32, pods 4

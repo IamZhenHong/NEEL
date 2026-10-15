@@ -1,0 +1,25 @@
+{
+ "jobs": "selfknow/s6_reflective_identity/jobs/main_gemma.jsonl",
+ "n_ok": 539,
+ "n_err": 1,
+ "seconds": 1511,
+ "usage": {
+  "prompt_tokens": 7428380,
+  "completion_tokens": 310596,
+  "requests": 9650
+ },
+ "fmt": "gemma4",
+ "model": "google/gemma-4-31B-it",
+ "maxtok": {
+  "probe": 300,
+  "corr": 220,
+  "r1": 200,
+  "r2": 220,
+  "r3": 12
+ },
+ "decoding": {
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 20
+ }
+}

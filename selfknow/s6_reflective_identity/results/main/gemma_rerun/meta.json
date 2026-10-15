@@ -1,0 +1,25 @@
+{
+ "jobs": "/root/rerun_gemma.jsonl",
+ "n_ok": 1,
+ "n_err": 0,
+ "seconds": 31,
+ "usage": {
+  "prompt_tokens": 14222,
+  "completion_tokens": 530,
+  "requests": 18
+ },
+ "fmt": "gemma4",
+ "model": "google/gemma-4-31B-it",
+ "maxtok": {
+  "probe": 300,
+  "corr": 220,
+  "r1": 200,
+  "r2": 220,
+  "r3": 12
+ },
+ "decoding": {
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 20
+ }
+}
