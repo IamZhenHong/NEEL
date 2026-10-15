@@ -30,6 +30,28 @@ def log(m):
     print(f"[c2 {time.time() - T0:7.0f}s] {m}", flush=True)
 
 
+class heartbeat:
+    """Log every `every` seconds while a long generate call runs. Added after the 2026-10-15 abort: the launcher kills a
+    job whose log is silent for 30 min, and one Gemma generate call over 855 thinking prompts ran longer than that."""
+
+    def __init__(self, tag, every=240):
+        import threading
+        self.tag, self.every, self.stop = tag, every, threading.Event()
+        self.th = threading.Thread(target=self._run, daemon=True)
+
+    def _run(self):
+        t = time.time()
+        while not self.stop.wait(self.every):
+            log(f"still generating {self.tag} ({(time.time() - t) / 60:.0f} min)")
+
+    def __enter__(self):
+        self.th.start()
+        return self
+
+    def __exit__(self, *a):
+        self.stop.set()
+
+
 class VLLM:
     def __init__(self, model, mml):
         from huggingface_hub import HfApi
@@ -59,7 +81,8 @@ class VLLM:
                 continue
             ok.append(i)
             ps.append(SamplingParams(**DECODING, max_tokens=min(mt, room), seed=sd, skip_special_tokens=False))
-        res = self.llm.generate([TokensPrompt(prompt_token_ids=ids[i]) for i in ok], ps, use_tqdm=False)
+        with heartbeat(f"{len(ok)} requests"):
+            res = self.llm.generate([TokensPrompt(prompt_token_ids=ids[i]) for i in ok], ps, use_tqdm=False)
         out = [{"text": "", "finish": "context_full", "n_tok": 0, "n_prompt": len(x)} for x in ids]
         for i, r in zip(ok, res):
             o = r.outputs[0]
@@ -254,7 +277,7 @@ def main():
         be = TinyHF() if a.tiny else VLLM(GEMMA, 8192)
         settings["backend"] = be.info
         log(f"loaded {be.info['model']}; {len(cands)} candidates x 3 samples")
-        rows = prepass(be, cands, 3, 3072, "gemma", False, out / "prepass_gemma.jsonl", lambda n: [range(n)])
+        rows = prepass(be, cands, 3, 3072, "gemma", False, out / "prepass_gemma.jsonl", lambda n: [range(1), range(1, n)])
         settings["prepass"] = tok_stats(rows)
         (out / "settings_gemma.json").write_text(json.dumps(settings, indent=1))
         log("gemma stage done")

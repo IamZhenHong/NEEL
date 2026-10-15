@@ -1,7 +1,13 @@
 # c2: how the assistant treats its own reasoning (build, pilot, freeze)
 
+> **Outcome (2026-10-15 21:10): not run.** Pod `c2-1` was aborted by the launcher's 30-min silent-log guard while Gemma 4 31B
+> was still inside one `generate` call for its 855-sample thinking pre-pass (bf16 on one A100 80GB: 10.69 GiB KV = 12,716
+> tokens, max concurrency 1.55x at 8k). Nothing was saved. GPU $1.266 of the $2 cap, API $0.0009. A rerun needs ~$1.6-2.1
+> more, which is over the cap, so I stopped (brief rule 5). Gate not evaluated, predictions not scored. Changes made after the
+> abort, not used in any run: a heartbeat log inside every `generate` call, and the Gemma pre-pass written in two parts.
+
 Card: `DESIGN.md` (frozen, tag `c2-design`). Rules: `selfknow/AGENT_BRIEF.md`. This file adds the implementation, the pilot
-(gate) numbers and the amendments, written before the main run. Results: `REPORT.md`.
+(gate) numbers and the amendments, written before the main run. Results: see Outcome above.
 
 ## Implementation
 
