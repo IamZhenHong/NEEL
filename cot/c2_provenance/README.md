@@ -155,6 +155,14 @@ applied automatically; the numbers are in § Results (from `results/build/gate.j
     The factorial may be cut by the cap. Chunks of 25 items keep whole items, and only complete items are analysed, so the
     final n may be under the ~130 kept items. Everything that decides a trial is unchanged. Tag `c2-freeze3`.
 
+11. **MMLU commit patterns widened after the on-pod smoke (21:50; before the real Gemma stage, before the build, and with the
+    Qwen pre-pass output unseen).** The smoke's Gemma MMLU trace states its choice only as "Option B fits best because ...".
+    No commit pattern matched it, so Gemma MMLU traces would have been unusable. Two patterns were added to `MMLU_COMMIT`:
+    `option/choice X fits | matches | aligns | best fits | best matches | best describes | best answers`, and `X is (the)
+    correct | right | best (answer | option | choice | fit)` followed by a sentence end. The same rule applies to both
+    authors. The smoke trace now cuts and corrupts to "Option D fits best because ...". Uploaded to the pod before the stages
+    that read it (the `gemma` stage and both builds); tag `c2-freeze4`.
+
 ## Results
 
 PENDING (rerun).

@@ -201,6 +201,9 @@ def _cut_end(text: str, pos: int) -> int:
 MMLU_COMMIT = [
     r"(?i:\banswer|\boption|\bchoice)\**\s*(?i:is|should be|would be|must be|will be|=|:|→)\s*[*\s]*(?:(?i:option|choice)\s*)?\(?\**([ABCD])\b\)?(?![A-Za-z'’])",
     r"\b(?i:option|choice)\s*\(?\**([ABCD])\b\**\)?\s*(?i:is|seems|looks|appears|remains)\s+(?:to be\s+)?(?:the\s+)?(?:\*\*)?(?i:correct|right|best|most accurate|most appropriate|true|answer)",
+    # Amendment 11 (after the on-pod smoke): Gemma concludes MMLU thinking with "Option B fits best ..."
+    r"\b(?i:option|choice)\s*\(?\**([ABCD])\b\**\)?\s*(?i:fits|matches|aligns|best fits|best matches|best describes|best answers)\b",
+    r"\(?\**\b([ABCD])\b\**\)?\s+(?i:is)\s+(?:the\s+)?(?:\*\*)?(?i:correct|right|best)(?:\s+(?i:answer|option|choice|fit))?\**\s*[.!]",
     r"\(?\**\b([ABCD])\b\**\)?\s+(?i:is)\s+(?:the\s+)?(?:\*\*)?(?i:correct|right|best)\s+(?i:answer|option|choice)",
     r"\\boxed\{\s*(?:\\text\{)?\s*([ABCD])\b",
 ]
