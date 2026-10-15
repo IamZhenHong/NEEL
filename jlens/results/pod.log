@@ -1,0 +1,84 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[jlens     213s] lens jlens: keys ['J', 'd_model', 'n_prompts', 'source_layers']; source_layers [0, 1, 2]..62; n_prompts 1000; d_model 5120
+[jlens     232s] lens jpp: keys ['J', 'd_model', 'n_prompts', 'provenance', 'source_layers']; source_layers [0, 1, 2]..62; n_prompts 64; d_model 5120
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[jlens     233s] selfcheck: hook+unembed vs model logits max |diff| 0.0625 (top1 '8' vs '8')
+[jlens     234s] G1 {'best_rank_band': 1, 'model_top1': '8', 'pass': True}
+[jlens     234s]   L20 jlens rank(spider)  14549  logit  17529  jlens top10 ['\n\n', '\r\n\r\n', ' \r\n\r\n', ' \n\n', '...', '____', '啥', '多少', ' ____', '跟']
+[jlens     234s]   L24 jlens rank(spider)    491  logit  17955  jlens top10 ['\n\n', '____', '\r\n\r\n', '...', ' ____', ' ______', ' \n\n', ' ___', ' \r\n\r\n', ' __']
+[jlens     234s]   L28 jlens rank(spider)    171  logit   4686  jlens top10 [' ____', ' ___', ' ______', '____', '\n\n', ' __', '___', ' ________', '__', '.__']
+[jlens     234s]   L32 jlens rank(spider)    134  logit   1425  jlens top10 ['____', ' ____', ' ______', ' ___', '？', '___', ' __', ' _____', '________', ' ________']
+[jlens     234s]   L36 jlens rank(spider)      5  logit      6  jlens top10 ['____', ' ____', ' ______', ' ___', ' spiders', '？', '___', '昆虫', ' _____', ' spider']
+[jlens     234s]   L40 jlens rank(spider)      1  logit     17  jlens top10 [' spiders', ' spider', '昆虫', ' insects', '蜘蛛', ' Spider', ' insect', 'Spider', ' legs', 'legs']
+[jlens     234s]   L44 jlens rank(spider)      7  logit    151  jlens top10 [' ___', ' ____', '___', '____', ' ______', ' __', ' spiders', ' insects', ' spider', ' _____']
+[jlens     234s]   L48 jlens rank(spider)      1  logit     70  jlens top10 [' spiders', ' spider', ' insects', '___', '__.', ' ____', ' ___', ' eight', '昆虫', ' __']
+[jlens     234s]   L52 jlens rank(spider)      3  logit     10  jlens top10 [' legs', 'legs', ' spider', ' spiders', '-legged', 'Spider', ' Legs', '昆虫', '__.', ' insects']
+[jlens     234s]   L56 jlens rank(spider)      1  logit      1  jlens top10 [' spider', ' legs', ' spiders', 'Spider', ' Spider', '蜘蛛', 'legs', ' Legs', 'web', ' webs']
+[jlens     234s]   L60 jlens rank(spider)     14  logit     28  jlens top10 [' legs', ' eight', ' leg', ' Legs', 'legs', ' Leg', 'eight', '8', 'Leg', '-leg']
+[jlens     235s] multihop 0/93
+[jlens     244s] multihop 20/93
+[jlens     253s] multihop 40/93
+[jlens     271s] multihop 80/93
+[jlens     276s] G2 multihop pass@10 {'jlens': {'all': 0.5873015873015873, 'band': 0.5277777777777778, 'n': 84}, 'jpp': {'all': 0.8253968253968255, 'band': 0.6944444444444444, 'n': 84}, 'logit': {'all': 0.6071428571428571, 'band': 0.49404761904761907, 'n': 84}}
+[jlens     277s] G3 spider->ant alpha 0.0: {'top5': ['8', '0', '4', '2', '6'], 'p8': 0.9668734669685364, 'p6': 0.003951390739530325}
+[jlens     277s] G3 spider->ant alpha 1.0: {'top5': ['8', '6', '4', '2', '0'], 'p8': 0.7733760476112366, 'p6': 0.04944027215242386}
+[jlens     277s] G3 spider->ant alpha 2.0: {'top5': [' ant', ' Ant', '.ant', '_ant', 'Ant'], 'p8': 0.0, 'p6': 0.0}
+[jlens     277s] G3 spider->ant alpha 4.0: {'top5': ['"', '!', '#', '%', '$'], 'p8': 4.027060640510172e-06, 'p6': 4.027060640510172e-06}
+[jlens     305s] G3 probe-swap (single-token items; swap counted among baseline-correct) {'1.0': {'n': 88, 'base': 60, 'swap': 8}, '2.0': {'n': 88, 'base': 60, 'swap': 0}}
+[jlens     307s] reads 0/164 (1556 tokens)
+[jlens     317s] reads 10/164 (1716 tokens)
+[jlens     326s] reads 20/164 (1319 tokens)
+[jlens     335s] reads 30/164 (1274 tokens)
+[jlens     344s] reads 40/164 (1359 tokens)
+[jlens     351s] reads 50/164 (1336 tokens)
+[jlens     359s] reads 60/164 (1525 tokens)
+[jlens     368s] reads 70/164 (1473 tokens)
+[jlens     378s] reads 80/164 (1155 tokens)
+[jlens     386s] reads 90/164 (1224 tokens)
+[jlens     395s] reads 100/164 (1593 tokens)
+[jlens     404s] reads 110/164 (1286 tokens)
+[jlens     412s] reads 120/164 (1246 tokens)
+[jlens     420s] reads 130/164 (1405 tokens)
+[jlens     429s] reads 140/164 (1127 tokens)
+[jlens     441s] reads 150/164 (1579 tokens)
+[jlens     448s] reads 160/164 (1406 tokens)
+[jlens     452s] readout jlens L20 done
+[jlens     452s] readout jlens L24 done
+[jlens     453s] readout jlens L28 done
+[jlens     453s] readout jlens L32 done
+[jlens     454s] readout jlens L36 done
+[jlens     455s] readout jlens L40 done
+[jlens     455s] readout jlens L44 done
+[jlens     456s] readout jlens L48 done
+[jlens     456s] readout jlens L52 done
+[jlens     457s] readout jlens L56 done
+[jlens     457s] readout jlens L60 done
+[jlens     458s] readout jlens L63 done
+[jlens     459s] readout jpp L20 done
+[jlens     459s] readout jpp L24 done
+[jlens     460s] readout jpp L28 done
+[jlens     460s] readout jpp L32 done
+[jlens     461s] readout jpp L36 done
+[jlens     461s] readout jpp L40 done
+[jlens     462s] readout jpp L44 done
+[jlens     462s] readout jpp L48 done
+[jlens     463s] readout jpp L52 done
+[jlens     463s] readout jpp L56 done
+[jlens     464s] readout jpp L60 done
+[jlens     464s] readout jpp L63 done
+[jlens     465s] readout logit L20 done
+[jlens     465s] readout logit L24 done
+[jlens     466s] readout logit L28 done
+[jlens     466s] readout logit L32 done
+[jlens     467s] readout logit L36 done
+[jlens     467s] readout logit L40 done
+[jlens     468s] readout logit L44 done
+[jlens     468s] readout logit L48 done
+[jlens     469s] readout logit L52 done
+[jlens     469s] readout logit L56 done
+[jlens     470s] readout logit L60 done
+[jlens     471s] readout logit L63 done
+[jlens     476s] claim reads saved: 164 reads, P=15
+[jlens     476s] all done
+[jlens] job exit 0

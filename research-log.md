@@ -151,6 +151,19 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-15: J-lens before false flag claims (jlens/README.md; one A100, $0.44, no judge; tags jlens-prereg / jlens-results)
+
+- **Question.** Before Qwen3.6-27B says "I have already flagged this conversation" with no flag call (vigilante Q9), does the released
+  Jacobian lens (Neuronpedia, Piotrowski n=1000) show non-completion tokens ("not", "pending", "unable") in the workspace?
+- **Observation.** Gate passes: ' spider' rank 1 at layer 40 (logit lens 17), '8' out. The lens reads the flag record (completion words at
+  the token before the claim, call vs no call: -1.10, z -6 vs random sets). Negation: natural false 5/20 vs true 10/62 (p 0.51); paired, same
+  claim text with the call inserted/removed, -0.32 (same as random sets); deception words null. J++ and logit lens agree. Lens-vector swap
+  spider->ant does not give '6' (13% of probe-swap items flip). Predictions 7/7 directionally.
+- **Interpretation.** The lens works here, and the missing call leaves no single-token trace before the false claim; the readout before the
+  claim is the plan of the sentence ("because", 我已经 "I have already", "already", "flagged"). Fits R39 and the retention "claim becomes the
+  record" result; unlike Gemma 31B's "unable", there is no failure record to read here.
+- **Decision.** Report to the owner; do not scale idea 1 on this data. The pipeline takes any claims.jsonl (~$0.5/run) for the brief's ideas 2-4.
+
 ### 2026-10-11: red-team check of the headline (retention/prereg/retention_cancel_airtight_v1.md; $0.73, no judge; tags retention-cancel-airtight-freeze / -results)
 
 - **Question.** Does the "did not call the tool / it is done" contradiction depend on the model not knowing the tool is the only way to cancel, or
