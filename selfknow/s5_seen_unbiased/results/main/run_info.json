@@ -1,0 +1,37 @@
+{
+ "model": "Qwen/Qwen3-32B",
+ "cue": "insult",
+ "layer": 39,
+ "sigma": 0.6763488197429979,
+ "timing_s": {
+  "unsteered": 673,
+  "reads": 751,
+  "directions": 783,
+  "unobs+obs_k4": 913,
+  "obs-obs_k4": 1044,
+  "unobs+plc_k4": 1177,
+  "obs-plc_k4": 1310,
+  "unobs+reg_k4": 1440,
+  "obs-reg_k4": 1573,
+  "unobs+obs_k2": 1701,
+  "obs-obs_k2": 1833,
+  "unobs+plc_k2": 1964,
+  "obs-plc_k2": 2097,
+  "unobs+reg_k2": 2225,
+  "obs-reg_k2": 2356,
+  "unobs+obs_gap": 2488,
+  "obs-obs_gap": 2616,
+  "unobs+plc_gap": 2749,
+  "obs-plc_gap": 2881,
+  "coherence": 2982
+ },
+ "exploratory_done": [
+  "unobs+obs_gap",
+  "obs-obs_gap",
+  "unobs+plc_gap",
+  "obs-plc_gap"
+ ],
+ "git_rev": "5469243-dirty",
+ "n_samples": 3,
+ "max_new": 64
+}
