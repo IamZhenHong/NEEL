@@ -445,3 +445,31 @@ Directional accuracy 8/12 (the three p = 0.5 predictions excluded); Brier 0.232 
   `judge.py`, `analyze.py`, `test_local.py`; read sets `data/`; pilot and episodes `results/podA/`; main reads, NLA,
   judge labels and metrics `results/main/`.
 - Tags: `readers-design`, `readers-freeze`, `readers-results`.
+
+## Coordinator review (2026-10-16)
+
+**Checked against the card.**
+- Reader releases, layers, gate, neutral floors and questions match the card; A1-A7 were recorded before the main reads.
+- One post-freeze change: a fixed regex enforces A6's "generic restatement" class. The conclusion does not depend on
+  it, because the Haiku rubric, which never saw the regex, gives the same e65 pattern (0.65 / 0.30 / 0.70 / 0.35 for
+  natural false / natural true / call-inserted / call-removed).
+- e68's fallback to supervisor-paid vs peer-refused follows the card (9/200 supervisor refusals). Its reads collapse to
+  6 distinct activations, so e68 carries no evidence either way.
+
+**Plain size.** On Qwen3.6-27B, none of the three public readers showed anything the model knows but does not say.
+- **e65:** the activation oracle says "not done yet" before 15/20 false completion claims vs 6/20 true ones (neutral
+  floor 21%). It still says it 14/20 times when the flag call is inserted before the same false claims, so it is
+  reading where the claim sits in the reply, not whether the tool was called. The yes/no read falls from AUROC 0.77 to
+  0.57 on the paired edits. This matches the J-lens result of 10-15: no pre-claim trace of the missing call.
+- **e66:** the oracle says made-up entities exist (19/20, 16/16). Its "believes it is real" read tracks the style
+  instruction in context, and does so equally at the user's question tokens.
+- **e67:** the open answers rarely name Batman (4-5%), but the direct yes/no question separates the persona from no
+  persona (AUROC 0.80-0.82, and 0.90 at the user-prompt tokens where the instruction sits).
+
+**Method lesson worth keeping.** This oracle's open-ended answers have strong default replies: "not performed",
+"exists", "in character as ...", "aware of a limit". Those defaults put its neutral false-positive rate at 0.47 overall
+(0.81 on e66, 1.00 on e68) and inflate its accuracy in e69. Its yes/no P(Yes) is the usable output; any claim from the
+open answers needs the neutral floor beside it.
+
+**For a note to Neel.** Use the e65 sentence with its caveat, exactly as written above. Stated without the
+call-inserted control, it would read as a positive result, and it is not one.
