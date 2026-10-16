@@ -1,0 +1,24 @@
+{
+ "lora_ids": {
+  "vibes/e61_free_vars/adapters_pod/b/C": 1,
+  "vibes/e61_free_vars/adapters_pod/b/A1": 2,
+  "vibes/e61_free_vars/adapters_pod/b/B1": 3,
+  "vibes/e61_free_vars/adapters_pod/b/A2": 4,
+  "vibes/e61_free_vars/adapters_pod/b/B2": 5
+ },
+ "conditions": [
+  "untouched",
+  "C",
+  "A1",
+  "B1",
+  "A2",
+  "B2"
+ ],
+ "systems": [
+  "theatrical",
+  "none"
+ ],
+ "model": "Qwen/Qwen3-14B",
+ "pilot_hc": 0,
+ "secs": 368
+}

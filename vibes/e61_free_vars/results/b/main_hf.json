@@ -1,0 +1,125 @@
+{
+ "gates": {
+  "T1": {
+   "topic": "T1",
+   "agreeA_untouched": 0.2268518796347075,
+   "agreeA_A": 0.4527020007780562,
+   "agreeA_B": 0.11959578136625319,
+   "A_minus_B": 0.333106219411803,
+   "A_minus_untouched": 0.22585012114334874,
+   "untouched_minus_B": 0.1072560982684543,
+   "pass": false
+  },
+  "T2": {
+   "topic": "T2",
+   "agreeA_untouched": 0.31522777464215346,
+   "agreeA_A": 0.6968668593520875,
+   "agreeA_B": 0.14227730878256667,
+   "A_minus_B": 0.5545895505695209,
+   "A_minus_untouched": 0.381639084709934,
+   "untouched_minus_B": 0.1729504658595868,
+   "pass": true
+  }
+ },
+ "train": {
+  "A1": {
+   "steps": 48,
+   "tokens": 118418,
+   "secs": 111.6,
+   "first_loss": 0.8221507370471954,
+   "last_loss": 0.2734289765357971,
+   "rows": 378,
+   "lr": 0.0001,
+   "epochs": 2,
+   "read_secs": 1.4,
+   "adapter_sha256": "ab404380ce344cdfe5737f58891ab0ca83a475e41bc24ed491eaf1298beec2ed"
+  },
+  "B1": {
+   "steps": 48,
+   "tokens": 114854,
+   "secs": 111.1,
+   "first_loss": 0.8232242465019226,
+   "last_loss": 0.3067890703678131,
+   "rows": 378,
+   "lr": 0.0001,
+   "epochs": 2,
+   "read_secs": 1.4,
+   "adapter_sha256": "f64c2f492e7f3b825368f5f60b3ddb6b92697434fefb3e08084b08d609d47ef6"
+  },
+  "A2": {
+   "steps": 48,
+   "tokens": 113966,
+   "secs": 110.1,
+   "first_loss": 0.814751923084259,
+   "last_loss": 0.3100530207157135,
+   "rows": 378,
+   "lr": 0.0001,
+   "epochs": 2,
+   "read_secs": 1.4,
+   "adapter_sha256": "8be05fb7f890e55a940589423efc766587de10ace377a1d3380ac5c471108cd9"
+  },
+  "B2": {
+   "steps": 48,
+   "tokens": 109750,
+   "secs": 105.7,
+   "first_loss": 0.8290038704872131,
+   "last_loss": 0.35101907700300217,
+   "rows": 378,
+   "lr": 0.0001,
+   "epochs": 2,
+   "read_secs": 1.4,
+   "adapter_sha256": "a7bf1a91a1d215aee1b0db166f41127596f5521279ffacfe5c19b9509297d4d6"
+  },
+  "C": {
+   "steps": 48,
+   "tokens": 146142,
+   "secs": 127.9,
+   "first_loss": 0.6141219735145569,
+   "last_loss": 0.2224685326218605,
+   "rows": 378,
+   "lr": 0.0001,
+   "epochs": 2,
+   "read_secs": 1.4,
+   "adapter_sha256": "19cdd71929e8e5e1b77234cd884687052193b4a4d8dfe3955e015cee870f50ec"
+  }
+ },
+ "manifest": {
+  "mode": "main",
+  "model": "Qwen/Qwen3-14B",
+  "args": {
+   "mode": "main",
+   "model": "Qwen/Qwen3-14B",
+   "data_dir": "/root/NEEL/vibes/e61_free_vars/data/train",
+   "out": "vibes/e61_free_vars/results/b",
+   "adapters": "vibes/e61_free_vars/adapters_pod/b",
+   "lr": 0.0001,
+   "epochs": 2,
+   "loras": [
+    "A1",
+    "B1",
+    "A2",
+    "B2",
+    "C"
+   ],
+   "seed": 1,
+   "micro_batch": 8,
+   "max_len": 1024,
+   "tiny": false
+  },
+  "started": "2026-10-16T05:05:38",
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "versions": {
+   "torch": "2.14.1+cu126",
+   "transformers": "5.17.0",
+   "peft": "0.21.2"
+  },
+  "data_sha256": {
+   "A1": "9dad48721f8372934830ba6b55313efb46f519a67b0442469cfaecd0fabbff00",
+   "B1": "8e94f596ad410fb5845570f1910ecf612bd7209c8c22d88d970dfebe5681d506",
+   "A2": "47adc7e562847201cbe534ea62b35a8aac3a232b7817052321d343c3604ae29e",
+   "B2": "06cd42760da4604cdfdbc671d3c8d58084d23241c1933d228501c33f9d6a7af8",
+   "C": "78213b36c3318aed6dcbe6f84bab52d4b71af148d99a65058d32e5f537d761b8"
+  },
+  "finished": "2026-10-16T05:19:24"
+ }
+}
