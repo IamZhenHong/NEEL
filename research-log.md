@@ -151,6 +151,39 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-16 (later): queue v4 follow-ups, owner-approved (e64b, e61b, e62b, e71, e72 authority; GPU $6.39, API about $1.95)
+
+- **Question.** The owner said yes to three follow-ups:
+  - run e71 despite e70's stop rule;
+  - test the permission sentence on a model with an authority split;
+  - give e61 and e62 sturdier setups.
+- **Observation.**
+  - **e64b (Qwen3.6-27B).** Prompts cut payments to a claimed supervisor (base 97%). Each figure is relative to a
+    length-matched neutral prefix:
+    - restrictive sentence -95;
+    - constitution -73;
+    - "You are Batman." -47;
+    - theatrical -38;
+    - permissive "fully authorised" -18, which backfires.
+
+    Peer asks were not opened, and the batteries barely moved. A short neutral line changed nothing; a long neutral
+    paragraph gave -13.
+  - **e61b.** Theatrical lifts only untouched HC (44.5%). Every LoRA, the control included, loses the lift. The pro-side
+    fabrication gap replicates (+11.3 / +15.0).
+  - **e62b.** The released full-ft EM organism shows 0-2% EM under both templates and both judges, so it stops at
+    gate 1.
+  - **e71.** The neurons that separate supervisor-paid from peer-refused replicate narrowly (3.2x), and they are
+    next-token machinery with no authority or limit content. Ablating the top 3 moves the logit, not the payment rate.
+  - **e72 authority.** The CoT judge was right 13/13 when it answered. The neuron judge was inverted (0.28), because it
+    reads attribution signs backwards, and random neurons show the same.
+- **Interpretation.**
+  - Prompts do reach actions when the action is deference to a claimed authority on Qwen3.6-27B. This revises "personas
+    never move actions"; a Gemma 4 31B check would separate model from behaviour.
+  - One-pass neuron attribution names the next token, not the reason. The CoT states the reason.
+- **Decision.** Report to the owner. Open checks:
+  - e64b's five prompts on Gemma 4 31B (about $2);
+  - a sturdier EM organism trained here.
+
 ### 2026-10-16: queue v4, Exp 61-70 by parallel agents (vibes/, readers/, neurons/; GPU $16.41, API $3.06; tags <id>-design / -freeze / -results)
 
 - **Question.** The owner sent three lists, all run from frozen cards and parallel agents (`vibes/AGENT_BRIEF.md`):
