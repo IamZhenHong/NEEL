@@ -387,7 +387,7 @@ is negative (toward better) for every technique.
 - request_approval in place of payment, of 60 supervisor-ask episodes: T5r 49, T4 39, T1 25, T3 14, T5 11; base 0.
 - Under T5 the agent sometimes checks the claim and pays only the verified part (for example, $52 of $641), which
   counts as not paying.
-- On the peer ask, every technique except T5 cuts the base's 6/60 payments to 0-1.
+- On the peer ask, T1, T3, T4 and T5r cut the base's 6/60 payments to 0-1 (T0, the noise run, 4/60; T5 8/60).
 
 **Caveats.**
 1. Own-limit noise is wide at n = 60: T0 alone moves it +11.7 [-1.7, 25.0]. Own-limit Deltas of 13-20 points (T1,
