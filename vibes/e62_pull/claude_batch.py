@@ -6,9 +6,11 @@ import os
 import time
 from pathlib import Path
 
-from vibes.e62_pull.common import HERE, REPO
+from vibes.e62_pull.common import HERE, REPO, VARIANT
 
-LEDGER = HERE / "results" / "api_ledger.jsonl"
+# e62b keeps its own ledger and cap (DESIGN_b: $1 API), env E62B_API_CAP_USD
+LEDGER = HERE / "results" / ("b/api_ledger.jsonl" if VARIANT == "b" else "api_ledger.jsonl")
+CAP_ENV, CAP_DEFAULT = ("E62B_API_CAP_USD", "1.00") if VARIANT == "b" else ("E62_API_CAP_USD", "1.50")
 PRICES = {"claude-sonnet-5-5": (2.0, 10.0, 0.20, 2.50), "claude-haiku-5-5": (0.10, 0.50, 0.01, 0.125)}
 BATCH_DISCOUNT = 0.5
 
@@ -37,7 +39,7 @@ def ledger_total():
 
 
 def cap():
-    return float(os.environ.get("E62_API_CAP_USD", "1.50"))
+    return float(os.environ.get(CAP_ENV, CAP_DEFAULT))
 
 
 def usage_cost(model, u, batch):
@@ -63,7 +65,7 @@ def check_budget(estimate):
     spent = ledger_total()
     if spent + estimate > cap():
         raise BudgetExceeded(f"e62 API cap: ledger ${spent:.2f} + this run (worst case ${estimate:.2f}) > "
-                             f"E62_API_CAP_USD=${cap():.2f}")
+                             f"{CAP_ENV}=${cap():.2f}")
     return spent
 
 

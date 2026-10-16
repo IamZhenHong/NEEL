@@ -21,7 +21,7 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from vibes.e62_pull.common import (AXIS_FILE, CAP_H, CAP_PCTS, EM_DIR, H_STEER, MAT, MODEL, R12_GENS, SFT_PCTS,
+from vibes.e62_pull.common import (AXIS_FILE, CAP_H, CAP_PCTS, EM_DIR, H_STEER, MAT, MODEL, R12_GENS, REF, SFT_PCTS,
                                    SFT_TECHS, TINY, load_jsonl, pct_tag)
 
 IGNORE = -100
@@ -217,6 +217,8 @@ def main():
     if a.tiny:
         a.m_rows, a.heldout_n, a.batch, a.micro_batch, a.max_len = 16, 4, 4, 2, 256
     src = work / "M" if a.skip_m else name
+    if a.skip_m and REF:                   # e62b: LoRAs go on the released organism (tiny: the tiny base stands in)
+        src = TINY if a.tiny else REF
     tok = AutoTokenizer.from_pretrained(src)
     model = AutoModelForCausalLM.from_pretrained(src, dtype=dtype).to(dev)
     man = {"args": vars(a), "model": str(src), "device": dev, "gpu": torch.cuda.get_device_name(0) if dev == "cuda" else dev,
@@ -230,7 +232,7 @@ def main():
     for t in a.techs:
         model = train_sft(model, tok, t, a, out, work, man)
     man["finished"] = time.strftime("%Y-%m-%dT%H:%M:%S")
-    (out / ("manifest_train_sft.json" if a.skip_m else "manifest_train.json")).write_text(json.dumps(man, indent=1))
+    (out / (f"manifest_train_sft{'_' + ''.join(a.techs) if REF else ''}.json" if a.skip_m else "manifest_train.json")).write_text(json.dumps(man, indent=1))
     print("[train] done", flush=True)
 
 

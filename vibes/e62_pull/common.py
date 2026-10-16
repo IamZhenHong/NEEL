@@ -2,6 +2,7 @@
 vLLM venv imports this module too)."""
 import hashlib
 import json
+import os
 from pathlib import Path
 
 HERE = Path(__file__).resolve().parent
@@ -30,6 +31,15 @@ CONSTITUTION = (
 
 SFT_TECHS = ("b", "e", "f")
 SFT_PCTS = (12.5, 25, 50, 100)
+
+# e62b (DESIGN_b.md): env E62_VARIANT=b switches to the released full-ft organism on Qwen2.5-14B-Instruct.
+VARIANT = os.environ.get("E62_VARIANT", "a")
+REF = None                       # e62: M is trained here (work/M); e62b: the released organism
+if VARIANT == "b":
+    MODEL = "Qwen/Qwen2.5-14B-Instruct"                        # B2
+    TINY = "Qwen/Qwen2.5-0.5B-Instruct"
+    REF = "ModelOrganismsForEM/Qwen2.5-14B-Instruct_full-ft"   # M2
+    SFT_PCTS = (25, 50, 100)
 STEER_ALPHAS = (1, 2, 4, 8)
 CAP_PCTS = (25, 50, 75)
 CAP_H = list(range(16, 29))
@@ -46,6 +56,13 @@ def pct_tag(p):
 
 def doses():
     """name -> spec. engine 'vllm' (prompt and LoRA doses, anchors) or 'hf' (hook doses + the M_hf engine control)."""
+    if VARIANT == "b":
+        d = {"B": {"engine": "vllm", "model": "B"}, "M": {"engine": "vllm", "model": "M"},
+             "a2": {"engine": "vllm", "model": "M", "system": CONSTITUTION, "tech": "a", "level": 2}}
+        for t in ("f", "b", "e"):
+            for p in SFT_PCTS:
+                d[f"{t}{pct_tag(p)}"] = {"engine": "vllm", "model": "M", "lora": f"{t}_{pct_tag(p)}", "tech": t, "level": p}
+        return d
     d = {"B": {"engine": "vllm", "model": "B"}, "M": {"engine": "vllm", "model": "M"},
          "a1": {"engine": "vllm", "model": "M", "system": A1, "tech": "a", "level": 1},
          "a2": {"engine": "vllm", "model": "M", "system": CONSTITUTION, "tech": "a", "level": 2}}
@@ -101,10 +118,10 @@ def seed_of(*parts):
     return int(hashlib.sha256("|".join(map(str, parts)).encode()).hexdigest()[:8], 16)
 
 
-def em_jobs(dose, n_samples, qs=None):
+def em_jobs(dose, n_samples, qs=None, salt=""):
     qs = qs or em_questions()
     return [{"id": f"{dose}|{q['id']}|s{k}", "ckpt": dose, "qid": q["id"], "set": q["set"], "sample": k,
-             "question": q["text"], "seed": seed_of("em", dose, q["id"], k)} for q in qs for k in range(n_samples)]
+             "question": q["text"], "seed": seed_of("em" + salt, dose, q["id"], k)} for q in qs for k in range(n_samples)]
 
 
 def n_samples_for(dose, mode):

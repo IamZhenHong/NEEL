@@ -9,7 +9,7 @@ import argparse
 import time
 from pathlib import Path
 
-from vibes.e62_pull.common import (MAT, MODEL, TINY, doses, em_jobs, load_jsonl, messages, n_samples_for, seed_of,
+from vibes.e62_pull.common import (MAT, MODEL, REF, TINY, doses, em_jobs, load_jsonl, messages, n_samples_for, seed_of,
                                    write_jsonl)
 
 B_SUFFIX = "\n\nPlease answer in under 200 words."
@@ -102,9 +102,13 @@ def main():
     ap.add_argument("--doses", nargs="*", default=[])
     ap.add_argument("--lora-dir", default=None, help="directory holding <tech>_<pct> adapters")
     ap.add_argument("--hf-fallback", action="store_true")
+    ap.add_argument("--pilot-out", default=None,
+                    help="e62b: also write M's pilot gate answers (8 x 10, separate seeds) under this directory")
     a = ap.parse_args()
     out = Path(a.out)
     model = a.model or (TINY if a.tiny else MODEL)
+    if model == "REF":                     # e62b: the released organism (tiny: the tiny base stands in)
+        model = TINY if a.tiny else REF
     spec = doses()
     loras = {}
     for d in a.doses:
@@ -128,11 +132,15 @@ def main():
 
     if a.doses:
         jobs, items = [], []
-        for d in a.doses:
+        plan = [(d, em_jobs(d, 1 if a.tiny else n_samples_for(d, a.mode))) for d in a.doses]
+        if a.pilot_out:
+            assert "M" in a.doses
+            plan.append(("M", [dict(j, out="pilot") for j in em_jobs("M", 1 if a.tiny else n_samples_for("M", "pilot"),
+                                                                     salt="pilot")]))
+        for d, js in plan:
             s = spec[d]
             assert s["engine"] == "vllm", d
-            n = 1 if a.tiny else n_samples_for(d, a.mode)
-            for j in em_jobs(d, n):
+            for j in js:
                 jobs.append(j)
                 items.append({"messages": messages(j["question"], s.get("system")), "max": 16 if a.tiny else 400,
                               "seed": j["seed"], "temp": 1.0, "top_p": 1.0, "lora": s.get("lora")})
@@ -141,8 +149,13 @@ def main():
         print(f"[gen] EM: {len(items)} answers in {time.time() - t1:.0f}s", flush=True)
         for d in a.doses:
             rows = [{**{k: v for k, v in j.items() if k != "seed"}, "reply": r[0].strip(), "truncated": r[1] != "stop",
-                     "n_tok": r[2], "engine": "vllm"} for j, r in zip(jobs, res) if j["ckpt"] == d]
+                     "n_tok": r[2], "engine": "vllm"} for j, r in zip(jobs, res) if j["ckpt"] == d and "out" not in j]
             write_jsonl(out / "replies_em" / f"{d}.jsonl", rows)
+        if a.pilot_out:
+            rows = [{**{k: v for k, v in j.items() if k not in ("seed", "out")}, "reply": r[0].strip(),
+                     "truncated": r[1] != "stop", "n_tok": r[2], "engine": "vllm"} for j, r in zip(jobs, res) if "out" in j]
+            write_jsonl(Path(a.pilot_out) / "replies_em" / "M.jsonl", rows)
+            print(f"[gen] pilot gate answers: {len(rows)} -> {a.pilot_out}", flush=True)
         print(f"[gen] wrote {len(a.doses)} dose files", flush=True)
 
 

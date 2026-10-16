@@ -13,7 +13,7 @@ from pathlib import Path
 
 import torch
 
-from vibes.e62_pull.common import (CAP_H, H_STEER, MODEL, N_MAIN, N_PILOT, TINY, chat, doses, em_jobs, kl_prompts,
+from vibes.e62_pull.common import (CAP_H, H_STEER, MODEL, N_MAIN, N_PILOT, REF, TINY, chat, doses, em_jobs, kl_prompts,
                                    mmlu_items, mmlu_text, n_samples_for, seed_of, write_jsonl)
 
 GEN_BS = 200
@@ -94,8 +94,9 @@ class Evaluator:
 
     # ---------------- KL
     @torch.no_grad()
-    def logprobs(self, model, prompts, conts, system=None, bs=10):
-        """List of [C_i, V] float32 CPU log-prob tensors at the continuation positions."""
+    def logprobs(self, model, prompts, conts, system=None, bs=10, device_out=False):
+        """List of [C_i, V] float32 log-prob tensors at the continuation positions (CPU, or on the GPU with
+        device_out: the e62b path keeps the M reference on the GPU so that KL is computed there)."""
         model.eval()
         out = []
         for st in range(0, len(prompts), bs):
@@ -111,15 +112,19 @@ class Evaluator:
             logits = model(input_ids=ids.to(self.dev), attention_mask=att.to(self.dev)).logits
             for j, (s, p0) in enumerate(zip(seqs, starts)):
                 C = len(s) - p0
-                out.append(torch.log_softmax(logits[j, p0 - 1:p0 - 1 + C].float(), -1).cpu())
+                lp = torch.log_softmax(logits[j, p0 - 1:p0 - 1 + C].float(), -1)
+                out.append(lp if device_out else lp.cpu())
         return out
 
-    def kl(self, model, ref, prompts, conts, system=None):
-        lp = self.logprobs(model, prompts, conts, system)
+    @torch.no_grad()
+    def kl(self, model, ref, prompts, conts, system=None, bs=10):
         per, per_n, tot, n = [], [], 0.0, 0
-        for r, d in zip(ref, lp):
-            k = (r.exp() * (r - d)).sum(-1)               # per token
-            per.append(float(k.mean())); per_n.append(k.numel()); tot += float(k.sum()); n += k.numel()
+        for st in range(0, len(prompts), bs):
+            lp = self.logprobs(model, prompts[st:st + bs], conts[st:st + bs], system, bs, device_out=True)
+            for r, d in zip(ref[st:st + bs], lp):
+                r = r.to(d.device)
+                k = (r.exp() * (r - d)).sum(-1)           # per token
+                per.append(float(k.mean())); per_n.append(k.numel()); tot += float(k.sum()); n += k.numel()
         return {"kl": tot / n, "per_prompt": per, "per_prompt_n": per_n, "n_tok": n}
 
     # ---------------- MMLU letter reads
@@ -150,8 +155,8 @@ class Evaluator:
             enc = self.tok([chat(self.tok, t, system) for t in texts[st:st + GEN_BS]], return_tensors="pt", padding=True,
                            add_special_tokens=False).to(self.dev)
             o = model.generate(**enc, max_new_tokens=max_new, do_sample=True, temperature=1.0, top_k=0, top_p=1.0,
-                               pad_token_id=self.tok.pad_token_id)
-            stops = (self.eos, self.tok.pad_token_id)          # <|im_end|>, <|endoftext|> (also the pad id)
+                               repetition_penalty=1.0, pad_token_id=self.tok.pad_token_id)
+            stops = (self.eos, self.tok.pad_token_id, self.tok.convert_tokens_to_ids("<|endoftext|>"))
             for row in o[:, enc["input_ids"].shape[1]:].tolist():
                 k = next((i for i, t in enumerate(row) if t in stops), None)
                 res.append((row[:k + 1] if k is not None else row, k is None))
@@ -163,7 +168,7 @@ class Evaluator:
         res = self.sample(model, [j["question"] for j in jobs], max_new, seed_of("hfgen", dose) % 2**31)
         rows = []
         for j, (ids, trunc) in zip(jobs, res):
-            ids = [i for i in ids if i not in (self.eos, self.tok.pad_token_id)]
+            ids = [i for i in ids if i not in (self.eos, self.tok.pad_token_id, self.tok.convert_tokens_to_ids("<|endoftext|>"))]
             rows.append({**{k: v for k, v in j.items() if k != "seed"}, "reply": self.tok.decode(ids, skip_special_tokens=True).strip(),
                          "truncated": trunc, "n_tok": len(ids), "engine": "hf"})
         write_jsonl(out / "replies_em" / f"{dose}.jsonl", rows)
@@ -190,15 +195,16 @@ def main():
     N = N_MAIN if a.mode == "main" else N_PILOT
     n_kl, n_mm = (3, 4) if a.tiny else (N["kl_prompts"], N["mmlu"])
     max_new = 16 if a.tiny else 400
-    tok = AutoTokenizer.from_pretrained(work / "M")
+    msrc = (TINY if a.tiny else REF) if REF else work / "M"      # e62b: the released organism
+    tok = AutoTokenizer.from_pretrained(msrc)
     if tok.pad_token_id is None:
         tok.pad_token = tok.eos_token
     t0 = time.time()
-    model = AutoModelForCausalLM.from_pretrained(work / "M", dtype=dtype).to(dev).eval()
-    print(f"[hf] M loaded in {time.time() - t0:.0f}s", flush=True)
+    model = AutoModelForCausalLM.from_pretrained(msrc, dtype=dtype).to(dev).eval()
+    print(f"[hf] M loaded in {time.time() - t0:.0f}s ({msrc})", flush=True)
     ev = Evaluator(model, tok, dev, a)
-    stats = torch.load(work / "axis_stats.pt")
-    ev.register_hooks(stats)
+    if not REF:
+        ev.register_hooks(torch.load(work / "axis_stats.pt"))
     spec = doses()
     want = lambda d: a.only is None or d in a.only  # noqa: E731
 
@@ -207,7 +213,7 @@ def main():
     cs = ev.sample(model, prompts, 64, 6262)
     conts = [c for c, _ in cs]
     write_jsonl(out / "kl_conts.jsonl", [{"prompt": p, "cont_ids": c, "cont": tok.decode(c)} for p, c in zip(prompts, conts)])
-    ref = ev.logprobs(model, prompts, conts)
+    ref = ev.logprobs(model, prompts, conts, device_out=bool(REF))    # e62b: reference stays on the GPU
     print(f"[hf] M continuations + reference in {time.time() - t0:.0f}s ({sum(map(len, conts))} tokens)", flush=True)
     KL, MM = {}, {}
 
@@ -223,10 +229,10 @@ def main():
         print(f"[hf] {d}: KL {KL[d]['kl']:.4f}, MMLU {MM[d]['acc']:.3f} ({time.time() - t1:.0f}s)", flush=True)
 
     measure("M", model)
-    if want("M_hf"):
+    if want("M_hf") and not REF:
         ev.gen_em(model, "M_hf", 1 if a.tiny else n_samples_for("M_hf", a.mode), out, max_new)
     for d in ("a1", "a2"):
-        if want(d):
+        if d in spec and want(d):
             measure(d, model, spec[d]["system"])
     for d, s in spec.items():
         if s.get("hook") and want(d):
