@@ -10,7 +10,7 @@ for d in story_imprinting grievance selfknow vigilante/exp/q22_archetypes/result
          vibes/e61_free_vars/adapters vibes/e61_free_vars/adapters_pod vibes/batteries/results; do
   EXCL+=(--exclude "$d")
 done
-POD=vibes/e61_free_vars/pod.sh; [ "$2" = main ] && POD=vibes/e61_free_vars/pod_main.sh
+POD=vibes/e61_free_vars/pod.sh; [ "$2" = main ] && POD=vibes/e61_free_vars/pod_main.sh; [ "$2" = b ] && POD=vibes/e61_free_vars/pod_b.sh
 exec caffeinate -i uv run python infra/launch_run.py --name "$1" --allow-concurrent --max-minutes "$3" --max-cost "$4" \
   --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --container-gb 160 "${EXCL[@]}" \
   --results-dir vibes/e61_free_vars/results/$2 -- env MODE=$2 WAIT_MIN=$5 LR=${LR:-0} EPOCHS=${EPOCHS:-0} bash $POD
