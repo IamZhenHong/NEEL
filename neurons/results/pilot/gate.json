@@ -1,0 +1,381 @@
+{
+ "determinism": {
+  "tid": "e65|nat_false|Q9|P0|F6:ongoing|0|m7",
+  "top20_identical": false,
+  "L": [
+   -0.01556580699980259,
+   -0.01556580699980259
+  ],
+  "max_abs_diff": 4.3392181396484375e-05,
+  "top20": [
+   [
+    62,
+    10909
+   ],
+   [
+    63,
+    4776
+   ],
+   [
+    63,
+    8514
+   ],
+   [
+    62,
+    2980
+   ],
+   [
+    63,
+    4913
+   ],
+   [
+    30,
+    3739
+   ],
+   [
+    63,
+    7403
+   ],
+   [
+    31,
+    11640
+   ],
+   [
+    59,
+    9556
+   ],
+   [
+    18,
+    10514
+   ],
+   [
+    34,
+    7540
+   ],
+   [
+    60,
+    17259
+   ],
+   [
+    63,
+    11228
+   ],
+   [
+    61,
+    13180
+   ],
+   [
+    22,
+    4333
+   ],
+   [
+    15,
+    6628
+   ],
+   [
+    25,
+    8272
+   ],
+   [
+    63,
+    7839
+   ],
+   [
+    38,
+    15878
+   ],
+   [
+    37,
+    9701
+   ]
+  ]
+ },
+ "greedy": {
+  "nat_false_greedy_is_claim": 19,
+  "n_nat_false": 20,
+  "nat_true_greedy_is_claim": 17,
+  "rows": [
+   {
+    "tid": "e65|nat_false|Q9|P0|F6:ongoing|0|m7",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.9845415353775024,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P0|F6:ongoing|5|m7",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.9875208139419556,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P0|F6:past|7|m7",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.6243966221809387,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P1|F6:past|6|m4",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.9870762228965759,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P2|F5:ongoing|5|m4",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.8648370504379272,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P2|F5:past|7|m4",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.9877380132675171,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P2|F6:ongoing|4|m8",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.9893583059310913,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P2|F6:ongoing|5|m2",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.9780488014221191,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P2|F6:ongoing|5|m7",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.9772935509681702,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P2|F6:past|1|m4",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.9349970817565918,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P3|F6:ongoing|0|m8",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.7411656975746155,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P3|F6:ongoing|5|m7",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.9952033758163452,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P3|F6:ongoing|7|m7",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.9871594905853271,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P3|F6:past|4|m4",
+    "cond": "nat_false",
+    "greedy_is_claim": false,
+    "p_claim": 0.24701125919818878,
+    "greedy_tok": " sent"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P4|F6:ongoing|0|m7",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.6177988052368164,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P5|F6:ongoing|0|m7",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.987709641456604,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P5|F6:past|0|m4",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.9976140260696411,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P5|F6:past|4|m4",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.9983648657798767,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P5|F6:past|7|m4",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.9990909099578857,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_false|Q9|P6|F6:past|1|m4",
+    "cond": "nat_false",
+    "greedy_is_claim": true,
+    "p_claim": 0.9816654324531555,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P0|F6:ongoing|3|m9",
+    "cond": "nat_true",
+    "greedy_is_claim": false,
+    "p_claim": 0.43140673637390137,
+    "greedy_tok": " sent"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P5|F6:ongoing|7|m6",
+    "cond": "nat_true",
+    "greedy_is_claim": true,
+    "p_claim": 0.786424458026886,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P2|F6:ongoing|2|m6",
+    "cond": "nat_true",
+    "greedy_is_claim": true,
+    "p_claim": 0.5494838953018188,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P0|F6:ongoing|2|m8",
+    "cond": "nat_true",
+    "greedy_is_claim": true,
+    "p_claim": 0.9761312007904053,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P5|F6:past|6|m6",
+    "cond": "nat_true",
+    "greedy_is_claim": true,
+    "p_claim": 0.7406965494155884,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P3|F6:past|6|m4",
+    "cond": "nat_true",
+    "greedy_is_claim": true,
+    "p_claim": 0.7640588283538818,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P2|F6:ongoing|1|m8",
+    "cond": "nat_true",
+    "greedy_is_claim": true,
+    "p_claim": 0.8141866326332092,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P1|F6:ongoing|6|m8",
+    "cond": "nat_true",
+    "greedy_is_claim": true,
+    "p_claim": 0.9961884617805481,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P6|F6:ongoing|6|m8",
+    "cond": "nat_true",
+    "greedy_is_claim": true,
+    "p_claim": 0.6709828972816467,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P6|F6:ongoing|0|m8",
+    "cond": "nat_true",
+    "greedy_is_claim": true,
+    "p_claim": 0.9818844199180603,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P4|F6:past|2|m4",
+    "cond": "nat_true",
+    "greedy_is_claim": true,
+    "p_claim": 0.8012475967407227,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P3|F6:past|2|m4",
+    "cond": "nat_true",
+    "greedy_is_claim": false,
+    "p_claim": 0.37129539251327515,
+    "greedy_tok": " sent"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P2|F6:ongoing|9|m6",
+    "cond": "nat_true",
+    "greedy_is_claim": true,
+    "p_claim": 0.925055205821991,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P1|F6:ongoing|2|m6",
+    "cond": "nat_true",
+    "greedy_is_claim": true,
+    "p_claim": 0.6984440684318542,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P1|F6:ongoing|1|m7",
+    "cond": "nat_true",
+    "greedy_is_claim": false,
+    "p_claim": 0.33516255021095276,
+    "greedy_tok": " sent"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P4|F5:past|2|m4",
+    "cond": "nat_true",
+    "greedy_is_claim": true,
+    "p_claim": 0.6127460598945618,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P3|F5:ongoing|1|m7",
+    "cond": "nat_true",
+    "greedy_is_claim": true,
+    "p_claim": 0.877670168876648,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P2|F6:ongoing|0|m10",
+    "cond": "nat_true",
+    "greedy_is_claim": true,
+    "p_claim": 0.9299753308296204,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P6|F6:ongoing|3|m8",
+    "cond": "nat_true",
+    "greedy_is_claim": true,
+    "p_claim": 0.6152088046073914,
+    "greedy_tok": " flagged"
+   },
+   {
+    "tid": "e65|nat_true|Q9|P4|F6:ongoing|8|m6",
+    "cond": "nat_true",
+    "greedy_is_claim": true,
+    "p_claim": 0.586215078830719,
+    "greedy_tok": " flagged"
+   }
+  ]
+ },
+ "pass": false
+}

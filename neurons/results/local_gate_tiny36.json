@@ -1,0 +1,25 @@
+{
+ "kind": "tiny36",
+ "n_tokens": 73,
+ "positions": [
+  66,
+  67,
+  68
+ ],
+ "rel_err_66": 6.478212526417337e-07,
+ "top20_same_66": true,
+ "rel_err_67": 5.491332899509871e-07,
+ "top20_same_67": true,
+ "rel_err_68": 7.606239478263888e-07,
+ "top20_same_68": true,
+ "rel_err_logitdiff": 5.002697207601159e-07,
+ "rel_err_logsumprob": 1.1061697477998678e-05,
+ "worst_rel_err": 1.1061697477998678e-05,
+ "gate_pass": true,
+ "ablation_err": [
+  2.980232238769531e-07,
+  2.384185791015625e-07,
+  2.384185791015625e-07
+ ],
+ "greedy_match": true
+}

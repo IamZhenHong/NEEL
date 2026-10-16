@@ -1,0 +1,4 @@
+__pycache__/
+*.safetensors
+# full score tensors stay out of git
+results/**/*_cond_means.pt

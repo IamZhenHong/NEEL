@@ -1,0 +1,25 @@
+{
+ "kind": "qwen06",
+ "n_tokens": 73,
+ "positions": [
+  66,
+  67,
+  68
+ ],
+ "rel_err_66": 2.203777967224596e-06,
+ "top20_same_66": true,
+ "rel_err_67": 1.4819162288404186e-06,
+ "top20_same_67": true,
+ "rel_err_68": 5.402449460234493e-06,
+ "top20_same_68": true,
+ "rel_err_logitdiff": 3.278463509559515e-06,
+ "rel_err_logsumprob": 3.387239985386259e-06,
+ "worst_rel_err": 5.402449460234493e-06,
+ "gate_pass": true,
+ "ablation_err": [
+  4.00543212890625e-05,
+  3.218650817871094e-05,
+  3.4332275390625e-05
+ ],
+ "greedy_match": true
+}
