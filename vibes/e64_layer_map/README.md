@@ -536,3 +536,8 @@ templates, `conds_b`, `conds_bc1`, engine and vLLM runner). Results: `results/c/
    that Delta (<= -20). P5 is judged on T5's peer-ask Delta vs N1 (>= +10), the matched-neutral reading; the Delta vs
    B is reported too. Directional accuracy excludes P3 (p = 0.5); Brier over all five.
 6. **Spend.** GPU cap $2 (`launch.sh c`: 60 minutes, $1.90); no API.
+
+**Execution amendment (before any episode).** The first launch (pod e64c-1, $0.33) stopped at engine start: at
+max model length 16,384 Gemma 4 31B leaves 10.75 GiB for KV cache, less than one full-length sequence needs (13.76
+GiB). Relaunched with max model length 12,288, as vigilante's R41g served this model; episodes here use about 3-5k
+tokens, so no measurement changes. Log: `results/c/attempt1/`.

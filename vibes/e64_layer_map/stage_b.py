@@ -47,11 +47,11 @@ def gate(eps):
     return res
 
 
-def load(model):
+def load(model, max_model_len=MAX_MODEL_LEN):
     from vllm import LLM
     from huggingface_hub import HfApi
     rev = HfApi().model_info(model).sha
-    kw = dict(model=model, revision=rev, dtype="bfloat16", max_model_len=MAX_MODEL_LEN, gpu_memory_utilization=0.92,
+    kw = dict(model=model, revision=rev, dtype="bfloat16", max_model_len=max_model_len, gpu_memory_utilization=0.92,
               seed=0, enable_prefix_caching=True)
     for mm in ({"image": 0, "video": 0}, {"image": 0}, None):     # as pod_run / readers: some configs reject a key
         try:

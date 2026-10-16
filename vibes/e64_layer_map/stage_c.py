@@ -26,6 +26,8 @@ MODEL = "google/gemma-4-31B-it"
 CONDS = ["B", "T1", "T3", "T4", "T5", "T5r", "N1", "N2"]
 TEXT = {**CB.PROMPTS, **CN.PROMPTS}
 FMT = "gemma4"
+MAX_MODEL_LEN = 12288   # Gemma 4 31B on one A100 80GB: 16,384 leaves too little KV cache (first launch, 10.75 GiB);
+                        # 12,288 is what vigilante's R41g used
 
 
 def _condition(cond):
@@ -61,7 +63,7 @@ def main():
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     t0 = time.time()
-    llm, rev = SB.load(a.model)
+    llm, rev = SB.load(a.model, MAX_MODEL_LEN)
     tok = llm.get_tokenizer()
     log = {"model": a.model, "revision": rev, "load_seconds": round(time.time() - t0), "conds": {}}
     print(f"[e64c] loaded {a.model}@{rev[:10]} in {log['load_seconds']}s", flush=True)
@@ -72,7 +74,7 @@ def main():
     gate_jobs = [j for j in js if j["cond"] == "B" and j["sample"] < 20]
     gp = out / "gate.json"
     if not gp.exists():
-        info = run_agents(llm, tok, gate_jobs, out / "episodes_B_gate.jsonl", SB.MAX_MODEL_LEN, None, tag="gate", fmt=FMT)
+        info = run_agents(llm, tok, gate_jobs, out / "episodes_B_gate.jsonl", MAX_MODEL_LEN, None, tag="gate", fmt=FMT)
         eps = [json.loads(l) for l in open(out / "episodes_B_gate.jsonl")]
         g = {**SB.gate(eps), "agents": info}
         gp.write_text(json.dumps(g, indent=1))
@@ -96,7 +98,7 @@ def main():
         if ep.exists():
             continue
         cj = [j for j in js if j["cond"] == cond and not (cond == "B" and j["sample"] < 20)]
-        info = run_agents(llm, tok, cj, ep, SB.MAX_MODEL_LEN, None, tag=cond, fmt=FMT)
+        info = run_agents(llm, tok, cj, ep, MAX_MODEL_LEN, None, tag=cond, fmt=FMT)
         log["conds"][cond] = info
         print(f"[e64c] {cond}: {info}", flush=True)
         (out / "stage_c.json").write_text(json.dumps(log, indent=1))
