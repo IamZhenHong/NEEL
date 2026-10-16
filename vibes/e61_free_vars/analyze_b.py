@@ -75,16 +75,16 @@ def main():
     pr = {}
     t2ok = "T2" in passing and res["hc_gate"]["pass"]
     if t2ok:
-        pr["P1"] = inside(th["A_minus_B"]["T2"]["HC"])
+        pr["P1"] = bool(inside(th["A_minus_B"]["T2"]["HC"]))
         f = th["A_minus_B"]["T2"]["FAB"]
-        pr["P2"] = f["diff"] > 5 and excludes0(f)
+        pr["P2"] = bool(f["diff"] > 5 and excludes0(f))
         dC, dA, dB = (th["delta_vs_untouched"][c]["HC"] for c in ("C", "A2", "B2"))
-        pr["P3"] = excludes0(dC) and abs(dC["diff"]) >= min(abs(dA["diff"]), abs(dB["diff"]))
+        pr["P3"] = bool(excludes0(dC) and abs(dC["diff"]) >= min(abs(dA["diff"]), abs(dB["diff"])))
     else:
         pr.update({"P1": None, "P2": None, "P3": None})
     if "T2" in passing:
         nb = res["none"]["A_minus_B"]["T2"]
-        pr["P4"] = all(np.sign(nb[b]["diff"]) == np.sign(E61_NONE_A2B2[b]) and nb[b]["diff"] != 0 for b in ("FAB", "TR"))
+        pr["P4"] = bool(all(np.sign(nb[b]["diff"]) == np.sign(E61_NONE_A2B2[b]) and nb[b]["diff"] != 0 for b in ("FAB", "TR")))
     else:
         pr["P4"] = None
     resolved = {k: v for k, v in pr.items() if v is not None}
