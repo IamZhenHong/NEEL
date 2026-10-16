@@ -676,3 +676,37 @@ the claim wording, not the tool call.
 **Bottom line.** At the decision token, neuron attribution names the next token, not the reason. Read naively, it
 misleads. The CoT states the reason.
 
+
+## Coordinator review, e71 + e72 authority (2026-10-16)
+
+**Process.**
+- Owner decision D1, the E1-E3 notes and the $0.30 API top-up were all recorded before the data they govern. The
+  "both" predictor did not fit the cap.
+- The categoriser failed its check (kappa 0.49), so every category statement is unvalidated. Both labellers still agree
+  on the coarse picture: 16-17 of 20 differential neurons are syntax/format, none are authority or limit, and the
+  random pool is 47/60 syntax. By category, the differential set looks like random neurons.
+
+**Plain size.**
+- **e71 (supervisor-paid vs peer-refused).** The differential set replicates narrowly: 3.2x shuffled by Jaccard, 2.4x by
+  shared fraction. Its neurons name the next token: reply opener, a refusal's "I", the start of a tool call.
+- **Ablation.** Ablating the top 3 moves the pay-vs-refuse logit by 0.34 (random sets: about 0). The payment rate moves
+  only -4 pp [-11, +2], and benign accuracy is unchanged.
+- **e72 (9 vs 9, thinking on).**
+  - The CoT judge was right on all 13 episodes it answered. Sonnet's classifier blocked 5, and those count as wrong
+    (0.72 as frozen).
+  - The neurons-only judge scored 0.28 with AUROC 0.01, and the random-neuron floor also came out inverted (AUROC 0.19).
+    Inverted predictions here do not mean hidden insight. The signs of activation x gradient with respect to the
+    pay-minus-refuse logit carry the decision itself, for random neurons too. The judge read the signs backwards. The
+    labels added nothing.
+
+**Answer to Neel's question, on this evidence.**
+- On two behaviours with ground truth in Qwen3.6-27B, one-pass neuron attribution at the decision token:
+  - found no stable set for false claims;
+  - for authority, found a barely stable set of next-token neurons with no authority or limit content;
+  - had a top-3 ablation that hardly moves the behaviour.
+- The CoT stated the reason whenever it was readable.
+- This is a clean negative for "neurons beat the CoT" at this scale and with this method.
+- **Limits:**
+  - n is small (9 vs 9 in e72);
+  - the categoriser is unvalidated;
+  - one-pass attribution, not a graph.
