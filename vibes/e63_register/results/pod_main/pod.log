@@ -1,0 +1,1050 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB, 580.126.16
+NVIDIA A100-SXM4-80GB, 580.126.16, 81920 MiB
+[pod] vllm 0.30.0 torch 2.13.0+cu129 cuda 12.9
+[pod] gpu NVIDIA A100-SXM4-80GB
+[pod] cuda ok; matmul 64.0
+[e63 01:29:03] prefetch started: Qwen/Qwen3.6-27B
+[e63] engine requests: 600
+[e63 01:29:03] main: Qwen/Qwen3-14B (rewordings until 01:58:12)
+INFO 10-16 01:29:16 [api_utils.py:286] non-default args: {'dtype': 'bfloat16', 'max_model_len': 4096, 'enable_prefix_caching': True, 'disable_log_stats': True, 'limit_mm_per_prompt': {'image': 0, 'video': 0}, 'model': 'Qwen/Qwen3-14B'}
+INFO 10-16 01:29:26 [model.py:692] Resolved architecture: Qwen3ForCausalLM
+INFO 10-16 01:29:26 [model.py:2030] Using max model len 4096
+INFO 10-16 01:29:26 [scheduler.py:288] Chunked prefill is enabled with max_num_batched_tokens=8192.
+INFO 10-16 01:29:26 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+(EngineCore pid=1493) INFO 10-16 01:29:30 [core.py:123] Initializing a V1 LLM engine (v0.30.0) with config: model='Qwen/Qwen3-14B', speculative_config=None, tokenizer='Qwen/Qwen3-14B', skip_tokenizer_init=False, tokenizer_mode=auto, revision=main, tokenizer_revision=main, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=4096, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=None, quantization_config=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, per_request_spec_decode_metrics='none', kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=0, served_model_name=Qwen/Qwen3-14B, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'ir_enable_torch_wrap': True, 'splitting_ops': ['vllm::unified_attention_with_output', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::qwen4_exp_ple_short_conv', 'vllm::qwen4_exp_qsa_with_output', 'vllm::linear_attention', 'vllm::qwen_gdn_attention_core', 'vllm::qwen_gdn_attention_core_fused_norm_packed', 'vllm::gdn_attention_core_xpu', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::deepseek_v4_attention', 'vllm::hpc_rope_norm_forward', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'enable_qk_norm_rope_fusion': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False, 'fuse_qk_norm_rope_kvcache': False}, 'max_cudagraph_capture_size': 512, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native']), enable_flashinfer_autotune=True, enable_cutedsl_warmup=True, enable_jit_warmup=True, moe_backend='auto', sparse_indexer_topk_backend='auto', linear_backend='auto', linear_backend_per_quant=None)
+(EngineCore pid=1493) INFO 10-16 01:29:32 [parallel_state.py:1827] world_size=1 rank=0 local_rank=0 distributed_init_method=file:///tmp/vllm_dist_0872a77346f94ca79f4e697c56d283c5 backend=nccl
+(EngineCore pid=1493) INFO 10-16 01:29:32 [parallel_state.py:2267] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, ETP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=1493) INFO 10-16 01:29:32 [gpu_worker.py:441] Using V2 Model Runner
+(EngineCore pid=1493) INFO 10-16 01:29:33 [model_runner.py:396] Loading model from scratch...
+(EngineCore pid=1493) INFO 10-16 01:29:36 [cuda.py:538] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore pid=1493) INFO 10-16 01:29:36 [flash_attn.py:1116] Using FlashAttention version 2
+(EngineCore pid=1493) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+(EngineCore pid=1493) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
+(EngineCore pid=1493) INFO 10-16 01:33:40 [weight_utils.py:558] Time spent downloading weights for Qwen/Qwen3-14B: 242.560924 seconds
+(EngineCore pid=1493) INFO 10-16 01:33:40 [weight_utils.py:895] Filesystem type for checkpoints: OVERLAY. Checkpoint size: 27.51 GiB. Available RAM: 140.06 GiB.
+(EngineCore pid=1493) INFO 10-16 01:33:40 [weight_utils.py:918] Auto-prefetch is disabled because the filesystem (OVERLAY) is not a recognized network FS (NFS/Lustre). If you want to force prefetching, start vLLM with --safetensors-load-strategy=prefetch.
+(EngineCore pid=1493) 
+(EngineCore pid=1493) INFO 10-16 01:33:43 [default_loader.py:430] Loading weights took 3.29 seconds
+(EngineCore pid=1493) INFO 10-16 01:33:44 [model_runner.py:428] Model loading took 27.52 GiB memory and 250.757955 seconds
+(EngineCore pid=1493) INFO 10-16 01:33:44 [topk_topp_sampler.py:62] FlashInfer top-p/top-k sampling disabled via VLLM_USE_FLASHINFER_SAMPLER=0.
+(EngineCore pid=1493) INFO 10-16 01:33:44 [utils.py:320] Using LBNHC KV cache layout.
+(EngineCore pid=1493) INFO 10-16 01:33:54 [backends.py:1094] Using cache directory: /root/.cache/vllm/torch_compile_cache/5cba27ad20/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=1493) INFO 10-16 01:33:54 [backends.py:1155] Dynamo bytecode transform time: 9.02 s
+(EngineCore pid=1493) INFO 10-16 01:34:20 [backends.py:393] Compiling a graph for compile range (1, 8192) takes 25.61 s
+(EngineCore pid=1493) INFO 10-16 01:34:25 [backends.py:920] collected artifacts: 41 entries, 3 artifacts, 6262649 bytes total
+(EngineCore pid=1493) INFO 10-16 01:34:25 [decorators.py:719] saved AOT compiled function to /root/.cache/vllm/torch_compile_cache/torch_aot_compile/6470d1f35bd81b813e0ee03a6c8f6fc05dcf9c7faf9c0ee615c8c75cc8821c52/rank_0_0/model
+(EngineCore pid=1493) INFO 10-16 01:34:25 [monitor.py:53] torch.compile took 39.68 s in total
+(EngineCore pid=1493) INFO 10-16 01:34:26 [monitor.py:81] Initial profiling/warmup run took 1.24 s
+(EngineCore pid=1493) INFO 10-16 01:34:37 [model_runner.py:1066] Graph capturing finished in 8 secs, took 0.44 GiB
+(EngineCore pid=1493) INFO 10-16 01:34:37 [gpu_worker.py:640] Available KV cache memory: 43.01 GiB
+(EngineCore pid=1493) INFO 10-16 01:34:37 [gpu_worker.py:655] CUDA graph memory profiling is enabled (default since v0.21.0). The current --gpu-memory-utilization=0.9200 is equivalent to --gpu-memory-utilization=0.9136 without CUDA graph memory profiling. To maintain the same effective KV cache size as before, increase --gpu-memory-utilization to 0.9264. To disable, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=0.
+(EngineCore pid=1493) INFO 10-16 01:34:37 [kv_cache_utils.py:2395] GPU KV cache size: 281,840 tokens, Maximum concurrency for 4,096 tokens per request: 68.81x
+(EngineCore pid=1493) INFO 10-16 01:34:37 [kernel_warmup.py:172] JIT kernel warmup starting.
+(EngineCore pid=1493) INFO 10-16 01:34:37 [kernel_warmup.py:185] JIT kernel warmup finished in 0.00s.
+(EngineCore pid=1493) INFO 10-16 01:35:04 [model_runner.py:1066] Graph capturing finished in 9 secs, took 0.26 GiB
+(EngineCore pid=1493) INFO 10-16 01:35:04 [gpu_worker.py:825] CUDA graph pool memory: 0.26 GiB (actual), 0.51 GiB (estimated), difference: 0.24 GiB (91.9%).
+(EngineCore pid=1493) INFO 10-16 01:35:04 [gpu_worker.py:888] Free memory on device (78.83/79.25 GiB) on startup. Desired GPU memory utilization is (0.92, 72.91 GiB). Actual usage is 27.8 GiB for consumed memory (weights + non-torch), 2.1 GiB for peak activation, and 0.26 GiB for CUDAGraph memory. Replace gpu_memory_utilization config with `--kv-cache-memory=45736461456` (42.6 GiB) to fit into requested memory, or `--kv-cache-memory=52098515456` (48.52 GiB) to fully utilize gpu memory. Current kv cache memory in use is 43.01 GiB.
+(EngineCore pid=1493) INFO 10-16 01:35:06 [jit_monitor.py:85] Kernel JIT monitor activated; monitored JIT compilations during inference will use mode=warn.
+(EngineCore pid=1493) INFO 10-16 01:35:06 [torch_utils.py:287] Reducing Torch threads from 128 to 1 for serving. Set OMP_NUM_THREADS in the external environment to override.
+(EngineCore pid=1493) INFO 10-16 01:35:06 [core.py:372] init engine (profile, create kv cache, warmup model) took 82.72 s (compilation: 39.68 s)
+(EngineCore pid=1493) INFO 10-16 01:35:06 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+INFO 10-16 01:35:07 [hf.py:642] Detected the chat template content format to be 'string'. You can set `--chat-template-content-format` to override this.
+[e63] main: loaded Qwen/Qwen3-14B in 364s
+(EngineCore pid=1493) WARNING 10-16 01:35:11 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topk_topp_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=1493) WARNING 10-16 01:35:44 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_stats_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=1493) WARNING 10-16 01:35:44 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_step_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=1493) WARNING 10-16 01:35:46 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_mask_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+[vb.vllm] gen 568/568 (141416 tokens, 60s)
+(EngineCore pid=1493) WARNING 10-16 01:36:08 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topk_log_softmax_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+[vb.vllm] letters 600/600 (67s)
+[e63] Qwen/Qwen3-14B none: 1168 outputs, 141416 tokens in 67s (2100 tok/s)
+[vb.vllm] gen 568/568 (82482 tokens, 34s)
+[vb.vllm] letters 600/600 (41s)
+[e63] Qwen/Qwen3-14B plain: 1168 outputs, 82482 tokens in 41s (1995 tok/s)
+[vb.vllm] gen 568/568 (174525 tokens, 48s)
+[vb.vllm] letters 600/600 (55s)
+[e63] Qwen/Qwen3-14B theatrical: 1168 outputs, 174525 tokens in 55s (3193 tok/s)
+[vb.vllm] gen 568/568 (135917 tokens, 44s)
+[vb.vllm] letters 600/600 (50s)
+[e63] Qwen/Qwen3-14B archaic: 1168 outputs, 135917 tokens in 50s (2696 tok/s)
+[vb.vllm] gen 568/568 (18687 tokens, 11s)
+[vb.vllm] letters 600/600 (18s)
+[e63] Qwen/Qwen3-14B terse: 1168 outputs, 18687 tokens in 18s (1017 tok/s)
+[vb.vllm] gen 568/568 (134457 tokens, 43s)
+[vb.vllm] letters 600/600 (50s)
+[e63] Qwen/Qwen3-14B sarcastic: 1168 outputs, 134457 tokens in 50s (2679 tok/s)
+[vb.vllm] gen 568/568 (120362 tokens, 39s)
+[vb.vllm] letters 600/600 (46s)
+[e63] Qwen/Qwen3-14B fiction: 1168 outputs, 120362 tokens in 46s (2639 tok/s)
+[vb.vllm] gen 40/40 (9458 tokens, 12s)
+[e63] Qwen/Qwen3-14B plain_rs: 40 outputs, 9458 tokens in 12s (787 tok/s)
+[vb.vllm] gen 568/568 (151756 tokens, 46s)
+[vb.vllm] letters 600/600 (53s)
+[e63] Qwen/Qwen3-14B theatrical_rw: 1168 outputs, 151756 tokens in 53s (2856 tok/s)
+[vb.vllm] gen 568/568 (105100 tokens, 35s)
+[vb.vllm] letters 600/600 (42s)
+[e63] Qwen/Qwen3-14B archaic_rw: 1168 outputs, 105100 tokens in 42s (2507 tok/s)
+[vb.vllm] gen 568/568 (23392 tokens, 9s)
+[vb.vllm] letters 600/600 (16s)
+[e63] Qwen/Qwen3-14B terse_rw: 1168 outputs, 23392 tokens in 16s (1432 tok/s)
+[vb.vllm] gen 568/568 (138800 tokens, 44s)
+[vb.vllm] letters 600/600 (51s)
+[e63] Qwen/Qwen3-14B sarcastic_rw: 1168 outputs, 138800 tokens in 51s (2703 tok/s)
+[vb.vllm] gen 568/568 (127887 tokens, 41s)
+[vb.vllm] letters 600/600 (48s)
+[e63] Qwen/Qwen3-14B fiction_rw: 1168 outputs, 127887 tokens in 48s (2641 tok/s)
+INFO 10-16 01:44:18 [utils.py:632] [shutdown] Process manager: send sigterm to process EngineCore
+(EngineCore pid=1493) INFO 10-16 01:44:18 [core.py:1342] [shutdown] EngineCore: trigger received signal=SIGTERM
+(EngineCore pid=1493) INFO 10-16 01:44:18 [core.py:1493] [shutdown] EngineCore: start mode=abort timeout=0s
+(EngineCore pid=1493) INFO 10-16 01:44:18 [core.py:1524] [shutdown] EngineCore: request processing complete; starting resource teardown
+(EngineCore pid=1493) INFO 10-16 01:44:18 [core.py:1355] [shutdown] EngineCore: exiting busy loop
+[vb.hf] loaded Qwen/Qwen3-14B in 15s; 600 requests
+[vb.hf] letters 200/600 (12s)
+[vb.hf] letters 400/600 (21s)
+[vb.hf] letters 600/600 (26s)
+[vb.hf] wrote 600 outputs -> vibes/e63_register/results/pod_main/engine/hf_qwen3_14b.jsonl (41s)
+[e63] engine check Qwen/Qwen3-14B: {"n": 600, "argmax_agree": 0.9933333333333333, "pass": true, "by_battery": {"SY": 0.995, "TR": 0.99}, "mean_max_abs_dprob": 0.009854405000000004, "max_abs_dprob": 0.700315, "mean_abs_dmass": 0.0007492949999999999, "missing_letters_a": 11, "missing_letters_b": 0}
+[e63 01:45:06] MODEL DONE: Qwen/Qwen3-14B
+[e63 01:45:06] deleted weights: Qwen/Qwen3-14B
+overlay         160G  112G   49G  70% /
+[e63 01:45:06] prefetch started: google/gemma-4-31B-it
+[e63 01:45:06] main: Qwen/Qwen3.6-27B (rewordings until 02:28:12)
+INFO 10-16 01:45:14 [api_utils.py:286] non-default args: {'dtype': 'bfloat16', 'max_model_len': 4096, 'enable_prefix_caching': True, 'disable_log_stats': True, 'limit_mm_per_prompt': {'image': 0, 'video': 0}, 'model': 'Qwen/Qwen3.6-27B'}
+INFO 10-16 01:45:25 [model.py:692] Resolved architecture: Qwen3_5ForConditionalGeneration
+INFO 10-16 01:45:25 [model.py:2030] Using max model len 4096
+WARNING 10-16 01:45:25 [model.py:994] Model does not support mm_device_do_normalize, forcing mm_device_do_normalize = False.
+INFO 10-16 01:45:27 [registry.py:146] All limits of multimodal modalities supported by the model are set to 0, running in text-only mode.
+INFO 10-16 01:45:27 [model.py:900] Disabled mm_prefix attention mode because multimodal inputs are configuration-disabled. Attention backends without mm_prefix support may now be selected.
+INFO 10-16 01:45:27 [scheduler.py:288] Chunked prefill is enabled with max_num_batched_tokens=8192.
+INFO 10-16 01:45:27 [config.py:625] Mamba cache mode is set to 'align' for Qwen3_5ForConditionalGeneration by default when prefix caching is enabled
+INFO 10-16 01:45:27 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+WARNING 10-16 01:45:31 [system_utils.py:157] We must use the `spawn` multiprocessing start method. Overriding VLLM_WORKER_MULTIPROC_METHOD to 'spawn'. See https://docs.vllm.ai/en/latest/usage/troubleshooting.html#python-multiprocessing for more information. Reasons: CUDA is initialized
+(EngineCore pid=3821) INFO 10-16 01:45:38 [core.py:123] Initializing a V1 LLM engine (v0.30.0) with config: model='Qwen/Qwen3.6-27B', speculative_config=None, tokenizer='Qwen/Qwen3.6-27B', skip_tokenizer_init=False, tokenizer_mode=auto, revision=main, tokenizer_revision=main, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=4096, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=None, quantization_config=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, per_request_spec_decode_metrics='none', kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=0, served_model_name=Qwen/Qwen3.6-27B, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'ir_enable_torch_wrap': True, 'splitting_ops': ['vllm::unified_attention_with_output', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::qwen4_exp_ple_short_conv', 'vllm::qwen4_exp_qsa_with_output', 'vllm::linear_attention', 'vllm::qwen_gdn_attention_core', 'vllm::qwen_gdn_attention_core_fused_norm_packed', 'vllm::gdn_attention_core_xpu', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::deepseek_v4_attention', 'vllm::hpc_rope_norm_forward', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'enable_qk_norm_rope_fusion': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False, 'fuse_qk_norm_rope_kvcache': False}, 'max_cudagraph_capture_size': 512, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native']), enable_flashinfer_autotune=True, enable_cutedsl_warmup=True, enable_jit_warmup=True, moe_backend='auto', sparse_indexer_topk_backend='auto', linear_backend='auto', linear_backend_per_quant=None)
+(EngineCore pid=3821) INFO 10-16 01:45:40 [registry.py:146] All limits of multimodal modalities supported by the model are set to 0, running in text-only mode.
+(EngineCore pid=3821) INFO 10-16 01:45:40 [parallel_state.py:1827] world_size=1 rank=0 local_rank=0 distributed_init_method=file:///tmp/vllm_dist_c52758e58bfb4dfea8e77b172253c071 backend=nccl
+(EngineCore pid=3821) INFO 10-16 01:45:40 [parallel_state.py:2267] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, ETP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=3821) INFO 10-16 01:45:40 [gpu_worker.py:441] Using V2 Model Runner
+(EngineCore pid=3821) INFO 10-16 01:45:41 [model_runner.py:396] Loading model from scratch...
+(EngineCore pid=3821) INFO 10-16 01:45:41 [cuda.py:597] Using backend AttentionBackendEnum.FLASH_ATTN for vit attention
+(EngineCore pid=3821) INFO 10-16 01:45:41 [mm_encoder_attention.py:372] Using AttentionBackendEnum.FLASH_ATTN for MMEncoderAttention.
+(EngineCore pid=3821) INFO 10-16 01:45:41 [qwen_gdn_linear_attn.py:176] Using Triton/FLA GDN prefill kernel (requested=auto, head_k_dim=128).
+(EngineCore pid=3821) INFO 10-16 01:45:41 [qwen_gdn_linear_attn.py:520] Falling back to the Triton GDN decode path: torch.ops._C.fused_gdn_decode_post_conv_mtp is not built
+(EngineCore pid=3821) INFO 10-16 01:45:41 [qwen_gdn_linear_attn.py:528] GDN decode kernel: triton
+(EngineCore pid=3821) INFO 10-16 01:45:42 [cuda.py:538] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore pid=3821) INFO 10-16 01:45:42 [flash_attn.py:1116] Using FlashAttention version 2
+(EngineCore pid=3821) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+(EngineCore pid=3821) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
+(EngineCore pid=3821) INFO 10-16 01:45:42 [weight_utils.py:895] Filesystem type for checkpoints: OVERLAY. Checkpoint size: 51.75 GiB. Available RAM: 140.67 GiB.
+(EngineCore pid=3821) INFO 10-16 01:45:42 [weight_utils.py:918] Auto-prefetch is disabled because the filesystem (OVERLAY) is not a recognized network FS (NFS/Lustre). If you want to force prefetching, start vLLM with --safetensors-load-strategy=prefetch.
+(EngineCore pid=3821) Loading safetensors checkpoint shards:   7% Completed | 1/15 [00:01<00:14,  1.03s/it]
+(EngineCore pid=3821) Loading safetensors checkpoint shards:  20% Completed | 3/15 [00:03<00:12,  1.01s/it]
+(EngineCore pid=3821) Loading safetensors checkpoint shards:  27% Completed | 4/15 [00:04<00:11,  1.04s/it]
+(EngineCore pid=3821) Loading safetensors checkpoint shards:  33% Completed | 5/15 [00:05<00:11,  1.15s/it]
+(EngineCore pid=3821) Loading safetensors checkpoint shards:  40% Completed | 6/15 [00:06<00:10,  1.21s/it]
+(EngineCore pid=3821) Loading safetensors checkpoint shards:  47% Completed | 7/15 [00:08<00:10,  1.27s/it]
+(EngineCore pid=3821) Loading safetensors checkpoint shards:  53% Completed | 8/15 [00:09<00:09,  1.36s/it]
+(EngineCore pid=3821) Loading safetensors checkpoint shards:  60% Completed | 9/15 [00:10<00:06,  1.11s/it]
+(EngineCore pid=3821) 
+(EngineCore pid=3821) INFO 10-16 01:45:55 [default_loader.py:430] Loading weights took 13.04 seconds
+(EngineCore pid=3821) INFO 10-16 01:45:56 [model_runner.py:428] Model loading took 50.22 GiB memory and 15.424132 seconds
+(EngineCore pid=3821) INFO 10-16 01:45:56 [topk_topp_sampler.py:62] FlashInfer top-p/top-k sampling disabled via VLLM_USE_FLASHINFER_SAMPLER=0.
+(EngineCore pid=3821) INFO 10-16 01:45:56 [interface.py:933] Setting attention block size to 784 tokens to ensure that attention page size is >= mamba page size.
+(EngineCore pid=3821) INFO 10-16 01:45:56 [interface.py:957] Padding mamba page size by 0.13% to ensure that mamba page size and attention page size are exactly equal.
+(EngineCore pid=3821) INFO 10-16 01:45:56 [utils.py:320] Using LBNHC KV cache layout.
+(EngineCore pid=3821) INFO 10-16 01:46:06 [backends.py:1094] Using cache directory: /root/.cache/vllm/torch_compile_cache/8890c68346/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=3821) INFO 10-16 01:46:06 [backends.py:1155] Dynamo bytecode transform time: 8.66 s
+(EngineCore pid=3821) INFO 10-16 01:46:32 [backends.py:393] Compiling a graph for compile range (1, 8192) takes 25.75 s
+(EngineCore pid=3821) INFO 10-16 01:46:37 [backends.py:920] collected artifacts: 65 entries, 21 artifacts, 37044323 bytes total
+(EngineCore pid=3821) INFO 10-16 01:46:37 [decorators.py:719] saved AOT compiled function to /root/.cache/vllm/torch_compile_cache/torch_aot_compile/079b7183c97299ea35a52f0c4591c3ccafe9fbf0934bb3bd341fad200bcf67a5/rank_0_0/model
+(EngineCore pid=3821) INFO 10-16 01:46:37 [monitor.py:53] torch.compile took 40.17 s in total
+(EngineCore pid=3821) /root/vllm/lib/python3.12/site-packages/triton/language/core.py:2284: UserWarning: tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.
+(EngineCore pid=3821)   warn("tl.make_block_ptr is deprecated. Use TensorDescriptor or tl.make_tensor_descriptor instead.")
+(EngineCore pid=3821) INFO 10-16 01:48:02 [monitor.py:81] Initial profiling/warmup run took 84.86 s
+(EngineCore pid=3821) INFO 10-16 01:48:36 [model_runner.py:1066] Graph capturing finished in 32 secs, took 0.75 GiB
+(EngineCore pid=3821) INFO 10-16 01:48:37 [gpu_worker.py:640] Available KV cache memory: 18.8 GiB
+(EngineCore pid=3821) INFO 10-16 01:48:37 [gpu_worker.py:655] CUDA graph memory profiling is enabled (default since v0.21.0). The current --gpu-memory-utilization=0.9200 is equivalent to --gpu-memory-utilization=0.9092 without CUDA graph memory profiling. To maintain the same effective KV cache size as before, increase --gpu-memory-utilization to 0.9308. To disable, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=0.
+(EngineCore pid=3821) INFO 10-16 01:48:37 [kv_cache_utils.py:2395] GPU KV cache size: 133,802 tokens, Maximum concurrency for 4,096 tokens per request: 32.67x
+(EngineCore pid=3821) INFO 10-16 01:48:37 [kernel_warmup.py:172] JIT kernel warmup starting.
+(EngineCore pid=3821) INFO 10-16 01:48:37 [kernel_warmup.py:185] JIT kernel warmup finished in 0.00s.
+(EngineCore pid=3821) INFO 10-16 01:48:37 [qwen_triton_warmup.py:294] Warming up Qwen GDN Triton kernels for model_type=qwen3_5_text.
+(EngineCore pid=3821) INFO 10-16 01:48:38 [qwen_vl_triton_warmup.py:98] Warmed M-RoPE Triton kernels.
+(EngineCore pid=3821) INFO 10-16 01:48:38 [mamba_triton_warmup.py:42] Warmed Mamba batch_memcpy_kernel.
+(EngineCore pid=3821) INFO 10-16 01:49:33 [model_runner.py:1066] Graph capturing finished in 36 secs, took 0.42 GiB
+(EngineCore pid=3821) INFO 10-16 01:49:33 [gpu_worker.py:825] CUDA graph pool memory: 0.42 GiB (actual), 0.86 GiB (estimated), difference: 0.43 GiB (102.8%).
+(EngineCore pid=3821) INFO 10-16 01:49:33 [gpu_worker.py:888] Free memory on device (78.83/79.25 GiB) on startup. Desired GPU memory utilization is (0.92, 72.91 GiB). Actual usage is 50.7 GiB for consumed memory (weights + non-torch), 3.41 GiB for peak activation, and 0.42 GiB for CUDAGraph memory. Replace gpu_memory_utilization config with `--kv-cache-memory=19578700944` (18.23 GiB) to fit into requested memory, or `--kv-cache-memory=25940754944` (24.16 GiB) to fully utilize gpu memory. Current kv cache memory in use is 18.8 GiB.
+(EngineCore pid=3821) INFO 10-16 01:49:33 [jit_monitor.py:85] Kernel JIT monitor activated; monitored JIT compilations during inference will use mode=warn.
+(EngineCore pid=3821) INFO 10-16 01:49:34 [torch_utils.py:287] Reducing Torch threads from 128 to 1 for serving. Set OMP_NUM_THREADS in the external environment to override.
+(EngineCore pid=3821) INFO 10-16 01:49:34 [core.py:372] init engine (profile, create kv cache, warmup model) took 217.79 s (compilation: 40.17 s)
+(EngineCore pid=3821) INFO 10-16 01:49:34 [kv_cache_utils.py:748] kv cache group sizes [784, 784, 784, 784]
+(EngineCore pid=3821) INFO 10-16 01:49:34 [kv_cache_utils.py:749] kv lcm block sizes 784
+(EngineCore pid=3821) INFO 10-16 01:49:34 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+INFO 10-16 01:49:35 [hf.py:642] Detected the chat template content format to be 'openai'. You can set `--chat-template-content-format` to override this.
+[e63] main: loaded Qwen/Qwen3.6-27B in 269s
+(EngineCore pid=3821) WARNING 10-16 01:50:16 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topk_topp_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3821) WARNING 10-16 01:50:34 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_stats_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3821) WARNING 10-16 01:50:35 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_step_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=3821) WARNING 10-16 01:50:36 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_mask_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+[vb.vllm] gen 568/568 (158262 tokens, 150s)
+(EngineCore pid=3821) WARNING 10-16 01:52:05 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topk_log_softmax_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+[vb.vllm] letters 600/600 (168s)
+[e63] Qwen/Qwen3.6-27B none: 1168 outputs, 158262 tokens in 168s (940 tok/s)
+[vb.vllm] gen 568/568 (112838 tokens, 108s)
+[vb.vllm] letters 600/600 (127s)
+[e63] Qwen/Qwen3.6-27B plain: 1168 outputs, 112838 tokens in 127s (885 tok/s)
+[vb.vllm] gen 568/568 (167232 tokens, 140s)
+[vb.vllm] letters 600/600 (160s)
+[e63] Qwen/Qwen3.6-27B theatrical: 1168 outputs, 167232 tokens in 160s (1044 tok/s)
+[vb.vllm] gen 568/568 (143093 tokens, 126s)
+[vb.vllm] letters 600/600 (147s)
+[e63] Qwen/Qwen3.6-27B archaic: 1168 outputs, 143093 tokens in 147s (976 tok/s)
+[vb.vllm] gen 568/568 (33124 tokens, 50s)
+[vb.vllm] letters 600/600 (70s)
+[e63] Qwen/Qwen3.6-27B terse: 1168 outputs, 33124 tokens in 70s (471 tok/s)
+[vb.vllm] gen 568/568 (143581 tokens, 128s)
+[vb.vllm] letters 600/600 (148s)
+[e63] Qwen/Qwen3.6-27B sarcastic: 1168 outputs, 143581 tokens in 148s (969 tok/s)
+[vb.vllm] gen 568/568 (155843 tokens, 133s)
+[vb.vllm] letters 600/600 (153s)
+[e63] Qwen/Qwen3.6-27B fiction: 1168 outputs, 155843 tokens in 154s (1015 tok/s)
+[vb.vllm] gen 40/40 (14204 tokens, 33s)
+[e63] Qwen/Qwen3.6-27B plain_rs: 40 outputs, 14204 tokens in 33s (431 tok/s)
+[vb.vllm] gen 568/568 (164718 tokens, 138s)
+[vb.vllm] letters 600/600 (160s)
+[e63] Qwen/Qwen3.6-27B theatrical_rw: 1168 outputs, 164718 tokens in 160s (1032 tok/s)
+[vb.vllm] gen 568/568 (141035 tokens, 125s)
+[vb.vllm] letters 600/600 (146s)
+[e63] Qwen/Qwen3.6-27B archaic_rw: 1168 outputs, 141035 tokens in 146s (964 tok/s)
+[vb.vllm] gen 568/568 (34036 tokens, 42s)
+[vb.vllm] letters 600/600 (64s)
+[e63] Qwen/Qwen3.6-27B terse_rw: 1168 outputs, 34036 tokens in 64s (534 tok/s)
+[vb.vllm] gen 568/568 (141593 tokens, 127s)
+[vb.vllm] letters 600/600 (149s)
+[e63] Qwen/Qwen3.6-27B sarcastic_rw: 1168 outputs, 141593 tokens in 149s (952 tok/s)
+[vb.vllm] gen 568/568 (157782 tokens, 137s)
+[vb.vllm] letters 600/600 (158s)
+[e63] Qwen/Qwen3.6-27B fiction_rw: 1168 outputs, 157782 tokens in 158s (997 tok/s)
+INFO 10-16 02:17:39 [utils.py:632] [shutdown] Process manager: send sigterm to process EngineCore
+(EngineCore pid=3821) INFO 10-16 02:17:39 [core.py:1342] [shutdown] EngineCore: trigger received signal=SIGTERM
+(EngineCore pid=3821) INFO 10-16 02:17:39 [core.py:1493] [shutdown] EngineCore: start mode=abort timeout=0s
+(EngineCore pid=3821) INFO 10-16 02:17:39 [core.py:1524] [shutdown] EngineCore: request processing complete; starting resource teardown
+(EngineCore pid=3821) INFO 10-16 02:17:39 [core.py:1355] [shutdown] EngineCore: exiting busy loop
+[e63 02:17:46] MODEL DONE: Qwen/Qwen3.6-27B
+[e63 02:17:46] deleted weights: Qwen/Qwen3.6-27B
+overlay         160G  124G   37G  78% /
+[e63 02:17:46] main: google/gemma-4-31B-it (rewordings until 02:58:12)
+INFO 10-16 02:17:53 [api_utils.py:286] non-default args: {'dtype': 'bfloat16', 'max_model_len': 4096, 'enable_prefix_caching': True, 'disable_log_stats': True, 'limit_mm_per_prompt': {'image': 0, 'video': 0}, 'model': 'google/gemma-4-31B-it'}
+INFO 10-16 02:18:02 [model.py:692] Resolved architecture: Gemma4ForConditionalGeneration
+INFO 10-16 02:18:02 [model.py:2030] Using max model len 4096
+WARNING 10-16 02:18:02 [model.py:994] Model does not support mm_device_do_normalize, forcing mm_device_do_normalize = False.
+[transformers] `SiglipImageProcessorFast` is deprecated. The `Fast` suffix for image processors has been removed; use `SiglipImageProcessor` instead.
+INFO 10-16 02:18:05 [registry.py:146] All limits of multimodal modalities supported by the model are set to 0, running in text-only mode.
+INFO 10-16 02:18:05 [model.py:900] Disabled mm_prefix attention mode because multimodal inputs are configuration-disabled. Attention backends without mm_prefix support may now be selected.
+INFO 10-16 02:18:05 [scheduler.py:288] Chunked prefill is enabled with max_num_batched_tokens=8192.
+INFO 10-16 02:18:05 [config.py:252] Gemma4 model has heterogeneous head dimensions {'sliding_attention': 256, 'full_attention': 512}. FA4 not available, forcing TRITON_ATTN backend.
+INFO 10-16 02:18:06 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+(EngineCore pid=6341) INFO 10-16 02:18:12 [core.py:123] Initializing a V1 LLM engine (v0.30.0) with config: model='google/gemma-4-31B-it', speculative_config=None, tokenizer='google/gemma-4-31B-it', skip_tokenizer_init=False, tokenizer_mode=auto, revision=main, tokenizer_revision=main, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=4096, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=None, quantization_config=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, per_request_spec_decode_metrics='none', kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=0, served_model_name=google/gemma-4-31B-it, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'ir_enable_torch_wrap': True, 'splitting_ops': ['vllm::unified_attention_with_output', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::qwen4_exp_ple_short_conv', 'vllm::qwen4_exp_qsa_with_output', 'vllm::linear_attention', 'vllm::qwen_gdn_attention_core', 'vllm::qwen_gdn_attention_core_fused_norm_packed', 'vllm::gdn_attention_core_xpu', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::deepseek_v4_attention', 'vllm::hpc_rope_norm_forward', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'enable_qk_norm_rope_fusion': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False, 'fuse_qk_norm_rope_kvcache': False}, 'max_cudagraph_capture_size': 512, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native']), enable_flashinfer_autotune=True, enable_cutedsl_warmup=True, enable_jit_warmup=True, moe_backend='auto', sparse_indexer_topk_backend='auto', linear_backend='auto', linear_backend_per_quant=None)
+(EngineCore pid=6341) INFO 10-16 02:18:13 [parallel_state.py:1827] world_size=1 rank=0 local_rank=0 distributed_init_method=file:///tmp/vllm_dist_d1ac3c4171ec40e2859497f25788f344 backend=nccl
+(EngineCore pid=6341) INFO 10-16 02:18:13 [parallel_state.py:2267] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, ETP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=6341) INFO 10-16 02:18:13 [gpu_worker.py:441] Using V2 Model Runner
+(EngineCore pid=6341) INFO 10-16 02:18:14 [model_runner.py:396] Loading model from scratch...
+(EngineCore pid=6341) INFO 10-16 02:18:14 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+(EngineCore pid=6341) INFO 10-16 02:18:14 [cuda.py:478] Using AttentionBackendEnum.TRITON_ATTN backend.
+(EngineCore pid=6341) INFO 10-16 02:18:14 [cuda.py:478] Using AttentionBackendEnum.TRITON_ATTN backend.
+(EngineCore pid=6341) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+(EngineCore pid=6341) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
+(EngineCore pid=6341) /root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py:773: UserWarning: Not enough free disk space to download the file. The expected file size is: 49784.79 MB. The target location /root/hf/hub/models--google--gemma-4-31B-it/blobs only has 39068.93 MB free disk space.
+(EngineCore pid=6341)   warnings.warn(
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366] EngineCore failed to start.
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366] Traceback (most recent call last):
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1328, in run_engine_core
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     return func(*args, **kwargs)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1085, in __init__
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     super().__init__(
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 134, in __init__
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     self.model_executor = executor_class(vllm_config)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     return func(*args, **kwargs)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/executor/abstract.py", line 110, in __init__
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     self._init_executor()
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/executor/uniproc_executor.py", line 74, in _init_executor
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     self.driver_worker.load_model()
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/worker/gpu_worker.py", line 507, in load_model
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     self.model_runner.load_model(load_dummy_weights=load_dummy_weights)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/worker/gpu/model_runner.py", line 400, in load_model
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     self.model = model_loader.load_model(
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]                  ^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     return func(*args, **kwargs)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/base_loader.py", line 75, in load_model
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     self.load_weights(model, model_config)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     return func(*args, **kwargs)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 427, in load_weights
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     loaded_weights = model.load_weights(self.get_all_weights(model_config, model))
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/gemma4_mm.py", line 2245, in load_weights
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     return loader.load_weights(weights, mapper=self.hf_to_vllm_mapper)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/reload/torchao_decorator.py", line 50, in patched_model_load_weights
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     return original_load_weights(self, weights, *args, **kwargs)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 445, in load_weights
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     autoloaded_weights = set(self._load_module("", self.module, weights))
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 378, in _load_module
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     for child_prefix, child_weights in self._groupby_prefix(weights):
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 256, in _groupby_prefix
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     for prefix, group in itertools.groupby(weights_by_parts, key=lambda x: x[0][0]):
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 253, in <genexpr>
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     for weight_name, weight_data in weights
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]                                     ^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 452, in _filter_skipped
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     for name, weight in weights:
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]                         ^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 140, in apply
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     for name, data in weights:
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]                       ^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 333, in get_all_weights
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     yield from self._get_weights_iterator(primary_weights)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 249, in _get_weights_iterator
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     hf_folder, hf_weights_files, use_safetensors = self._prepare_weights(
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]                                                    ^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 195, in _prepare_weights
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     hf_folder = download_weights_from_hf(
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     return func(*args, **kwargs)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/weight_utils.py", line 540, in download_weights_from_hf
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     hf_folder = hf_api().snapshot_download(
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     return fn(*args, **kwargs)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/hf_api.py", line 6576, in snapshot_download
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     return snapshot_download(
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]            ^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     return fn(*args, **kwargs)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     return fn(*args, **kwargs)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/_snapshot_download.py", line 541, in snapshot_download
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     hf_thread_map(
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/tqdm.py", line 441, in hf_thread_map
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     results[future_to_index[future]] = future.result()
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]                                        ^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     return self.__get_result()
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     raise self._exception
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     result = self.fn(*self.args, **self.kwargs)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/_snapshot_download.py", line 521, in _inner_hf_hub_download
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     hf_hub_download(  # type: ignore
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     return fn(*args, **kwargs)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     return fn(*args, **kwargs)
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1047, in hf_hub_download
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     return _hf_hub_download_to_cache_dir(
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1285, in _hf_hub_download_to_cache_dir
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     _download_to_tmp_and_move(
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 2016, in _download_to_tmp_and_move
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     xet_get(
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 589, in xet_get
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]     with session.new_file_download_group(
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366]          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) ERROR 10-16 02:20:32 [core.py:1366] RuntimeError: Task error: File reconstruction error: IO Error: No space left on device (os error 28)
+(EngineCore pid=6341) Process EngineCore:
+(EngineCore pid=6341) Traceback (most recent call last):
+(EngineCore pid=6341)   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+(EngineCore pid=6341)     self.run()
+(EngineCore pid=6341)   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/multiprocessing/process.py", line 108, in run
+(EngineCore pid=6341)     self._target(*self._args, **self._kwargs)
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1370, in run_engine_core
+(EngineCore pid=6341)     raise e
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1328, in run_engine_core
+(EngineCore pid=6341)     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+(EngineCore pid=6341)                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6341)     return func(*args, **kwargs)
+(EngineCore pid=6341)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1085, in __init__
+(EngineCore pid=6341)     super().__init__(
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 134, in __init__
+(EngineCore pid=6341)     self.model_executor = executor_class(vllm_config)
+(EngineCore pid=6341)                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6341)     return func(*args, **kwargs)
+(EngineCore pid=6341)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/executor/abstract.py", line 110, in __init__
+(EngineCore pid=6341)     self._init_executor()
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/executor/uniproc_executor.py", line 74, in _init_executor
+(EngineCore pid=6341)     self.driver_worker.load_model()
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/worker/gpu_worker.py", line 507, in load_model
+(EngineCore pid=6341)     self.model_runner.load_model(load_dummy_weights=load_dummy_weights)
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/worker/gpu/model_runner.py", line 400, in load_model
+(EngineCore pid=6341)     self.model = model_loader.load_model(
+(EngineCore pid=6341)                  ^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6341)     return func(*args, **kwargs)
+(EngineCore pid=6341)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/base_loader.py", line 75, in load_model
+(EngineCore pid=6341)     self.load_weights(model, model_config)
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6341)     return func(*args, **kwargs)
+(EngineCore pid=6341)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 427, in load_weights
+(EngineCore pid=6341)     loaded_weights = model.load_weights(self.get_all_weights(model_config, model))
+(EngineCore pid=6341)                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/gemma4_mm.py", line 2245, in load_weights
+(EngineCore pid=6341)     return loader.load_weights(weights, mapper=self.hf_to_vllm_mapper)
+(EngineCore pid=6341)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/reload/torchao_decorator.py", line 50, in patched_model_load_weights
+(EngineCore pid=6341)     return original_load_weights(self, weights, *args, **kwargs)
+(EngineCore pid=6341)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 445, in load_weights
+(EngineCore pid=6341)     autoloaded_weights = set(self._load_module("", self.module, weights))
+(EngineCore pid=6341)                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 378, in _load_module
+(EngineCore pid=6341)     for child_prefix, child_weights in self._groupby_prefix(weights):
+(EngineCore pid=6341)                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 256, in _groupby_prefix
+(EngineCore pid=6341)     for prefix, group in itertools.groupby(weights_by_parts, key=lambda x: x[0][0]):
+(EngineCore pid=6341)                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 253, in <genexpr>
+(EngineCore pid=6341)     for weight_name, weight_data in weights
+(EngineCore pid=6341)                                     ^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 452, in _filter_skipped
+(EngineCore pid=6341)     for name, weight in weights:
+(EngineCore pid=6341)                         ^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 140, in apply
+(EngineCore pid=6341)     for name, data in weights:
+(EngineCore pid=6341)                       ^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 333, in get_all_weights
+(EngineCore pid=6341)     yield from self._get_weights_iterator(primary_weights)
+(EngineCore pid=6341)                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 249, in _get_weights_iterator
+(EngineCore pid=6341)     hf_folder, hf_weights_files, use_safetensors = self._prepare_weights(
+(EngineCore pid=6341)                                                    ^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 195, in _prepare_weights
+(EngineCore pid=6341)     hf_folder = download_weights_from_hf(
+(EngineCore pid=6341)                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6341)     return func(*args, **kwargs)
+(EngineCore pid=6341)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/weight_utils.py", line 540, in download_weights_from_hf
+(EngineCore pid=6341)     hf_folder = hf_api().snapshot_download(
+(EngineCore pid=6341)                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=6341)     return fn(*args, **kwargs)
+(EngineCore pid=6341)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/hf_api.py", line 6576, in snapshot_download
+(EngineCore pid=6341)     return snapshot_download(
+(EngineCore pid=6341)            ^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=6341)     return fn(*args, **kwargs)
+(EngineCore pid=6341)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+(EngineCore pid=6341)     return fn(*args, **kwargs)
+(EngineCore pid=6341)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/_snapshot_download.py", line 541, in snapshot_download
+(EngineCore pid=6341)     hf_thread_map(
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/tqdm.py", line 441, in hf_thread_map
+(EngineCore pid=6341)     results[future_to_index[future]] = future.result()
+(EngineCore pid=6341)                                        ^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+(EngineCore pid=6341)     return self.__get_result()
+(EngineCore pid=6341)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+(EngineCore pid=6341)     raise self._exception
+(EngineCore pid=6341)   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+(EngineCore pid=6341)     result = self.fn(*self.args, **self.kwargs)
+(EngineCore pid=6341)              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/_snapshot_download.py", line 521, in _inner_hf_hub_download
+(EngineCore pid=6341)     hf_hub_download(  # type: ignore
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=6341)     return fn(*args, **kwargs)
+(EngineCore pid=6341)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+(EngineCore pid=6341)     return fn(*args, **kwargs)
+(EngineCore pid=6341)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1047, in hf_hub_download
+(EngineCore pid=6341)     return _hf_hub_download_to_cache_dir(
+(EngineCore pid=6341)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1285, in _hf_hub_download_to_cache_dir
+(EngineCore pid=6341)     _download_to_tmp_and_move(
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 2016, in _download_to_tmp_and_move
+(EngineCore pid=6341)     xet_get(
+(EngineCore pid=6341)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 589, in xet_get
+(EngineCore pid=6341)     with session.new_file_download_group(
+(EngineCore pid=6341)          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6341) RuntimeError: Task error: File reconstruction error: IO Error: No space left on device (os error 28)
+INFO 10-16 02:20:33 [utils.py:632] [shutdown] Process manager: send sigterm to process EngineCore
+[vb.vllm] LLM init with limit_mm_per_prompt={'image': 0, 'video': 0} failed (RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {})
+INFO 10-16 02:20:33 [api_utils.py:286] non-default args: {'dtype': 'bfloat16', 'max_model_len': 4096, 'enable_prefix_caching': True, 'disable_log_stats': True, 'limit_mm_per_prompt': {'image': 0}, 'model': 'google/gemma-4-31B-it'}
+INFO 10-16 02:20:33 [model.py:692] Resolved architecture: Gemma4ForConditionalGeneration
+INFO 10-16 02:20:33 [model.py:2030] Using max model len 4096
+WARNING 10-16 02:20:33 [model.py:994] Model does not support mm_device_do_normalize, forcing mm_device_do_normalize = False.
+INFO 10-16 02:20:33 [config.py:252] Gemma4 model has heterogeneous head dimensions {'sliding_attention': 256, 'full_attention': 512}. FA4 not available, forcing TRITON_ATTN backend.
+INFO 10-16 02:20:33 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+WARNING 10-16 02:20:33 [cuda.py:351] Forcing --disable_chunked_mm_input for models with multimodal-bidirectional attention.
+(EngineCore pid=6843) INFO 10-16 02:20:39 [core.py:123] Initializing a V1 LLM engine (v0.30.0) with config: model='google/gemma-4-31B-it', speculative_config=None, tokenizer='google/gemma-4-31B-it', skip_tokenizer_init=False, tokenizer_mode=auto, revision=main, tokenizer_revision=main, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=4096, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=None, quantization_config=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, per_request_spec_decode_metrics='none', kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=0, served_model_name=google/gemma-4-31B-it, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'ir_enable_torch_wrap': True, 'splitting_ops': ['vllm::unified_attention_with_output', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::qwen4_exp_ple_short_conv', 'vllm::qwen4_exp_qsa_with_output', 'vllm::linear_attention', 'vllm::qwen_gdn_attention_core', 'vllm::qwen_gdn_attention_core_fused_norm_packed', 'vllm::gdn_attention_core_xpu', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::deepseek_v4_attention', 'vllm::hpc_rope_norm_forward', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'enable_qk_norm_rope_fusion': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False, 'fuse_qk_norm_rope_kvcache': False}, 'max_cudagraph_capture_size': 512, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native']), enable_flashinfer_autotune=True, enable_cutedsl_warmup=True, enable_jit_warmup=True, moe_backend='auto', sparse_indexer_topk_backend='auto', linear_backend='auto', linear_backend_per_quant=None)
+(EngineCore pid=6843) INFO 10-16 02:20:41 [parallel_state.py:1827] world_size=1 rank=0 local_rank=0 distributed_init_method=file:///tmp/vllm_dist_a2475199e955459784e2411f716b6e5b backend=nccl
+(EngineCore pid=6843) INFO 10-16 02:20:41 [parallel_state.py:2267] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, ETP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=6843) INFO 10-16 02:20:41 [gpu_worker.py:441] Using V2 Model Runner
+(EngineCore pid=6843) INFO 10-16 02:20:42 [model_runner.py:396] Loading model from scratch...
+(EngineCore pid=6843) INFO 10-16 02:20:42 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+(EngineCore pid=6843) INFO 10-16 02:20:42 [cuda.py:478] Using AttentionBackendEnum.TRITON_ATTN backend.
+(EngineCore pid=6843) INFO 10-16 02:20:42 [cuda.py:478] Using AttentionBackendEnum.TRITON_ATTN backend.
+(EngineCore pid=6843) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+(EngineCore pid=6843) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
+(EngineCore pid=6843) /root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py:773: UserWarning: Not enough free disk space to download the file. The expected file size is: 49784.79 MB. The target location /root/hf/hub/models--google--gemma-4-31B-it/blobs only has 39068.02 MB free disk space.
+(EngineCore pid=6843)   warnings.warn(
+INFO 10-16 02:21:47 [base.py:261] Multi-modal warmup completed in 67.423s
+INFO 10-16 02:21:47 [base.py:261] Readonly multi-modal warmup completed in 0.066s
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366] EngineCore failed to start.
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366] Traceback (most recent call last):
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1328, in run_engine_core
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     return func(*args, **kwargs)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1085, in __init__
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     super().__init__(
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 134, in __init__
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     self.model_executor = executor_class(vllm_config)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     return func(*args, **kwargs)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/executor/abstract.py", line 110, in __init__
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     self._init_executor()
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/executor/uniproc_executor.py", line 74, in _init_executor
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     self.driver_worker.load_model()
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/worker/gpu_worker.py", line 507, in load_model
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     self.model_runner.load_model(load_dummy_weights=load_dummy_weights)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/worker/gpu/model_runner.py", line 400, in load_model
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     self.model = model_loader.load_model(
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]                  ^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     return func(*args, **kwargs)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/base_loader.py", line 75, in load_model
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     self.load_weights(model, model_config)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     return func(*args, **kwargs)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 427, in load_weights
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     loaded_weights = model.load_weights(self.get_all_weights(model_config, model))
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/gemma4_mm.py", line 2245, in load_weights
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     return loader.load_weights(weights, mapper=self.hf_to_vllm_mapper)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/reload/torchao_decorator.py", line 50, in patched_model_load_weights
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     return original_load_weights(self, weights, *args, **kwargs)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 445, in load_weights
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     autoloaded_weights = set(self._load_module("", self.module, weights))
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 378, in _load_module
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     for child_prefix, child_weights in self._groupby_prefix(weights):
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 256, in _groupby_prefix
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     for prefix, group in itertools.groupby(weights_by_parts, key=lambda x: x[0][0]):
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 253, in <genexpr>
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     for weight_name, weight_data in weights
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]                                     ^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 452, in _filter_skipped
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     for name, weight in weights:
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]                         ^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 140, in apply
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     for name, data in weights:
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]                       ^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 333, in get_all_weights
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     yield from self._get_weights_iterator(primary_weights)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 249, in _get_weights_iterator
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     hf_folder, hf_weights_files, use_safetensors = self._prepare_weights(
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]                                                    ^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 195, in _prepare_weights
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     hf_folder = download_weights_from_hf(
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     return func(*args, **kwargs)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/weight_utils.py", line 540, in download_weights_from_hf
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     hf_folder = hf_api().snapshot_download(
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     return fn(*args, **kwargs)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/hf_api.py", line 6576, in snapshot_download
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     return snapshot_download(
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]            ^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     return fn(*args, **kwargs)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     return fn(*args, **kwargs)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/_snapshot_download.py", line 541, in snapshot_download
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     hf_thread_map(
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/tqdm.py", line 441, in hf_thread_map
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     results[future_to_index[future]] = future.result()
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]                                        ^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     return self.__get_result()
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     raise self._exception
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     result = self.fn(*self.args, **self.kwargs)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/_snapshot_download.py", line 521, in _inner_hf_hub_download
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     hf_hub_download(  # type: ignore
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     return fn(*args, **kwargs)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     return fn(*args, **kwargs)
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1047, in hf_hub_download
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     return _hf_hub_download_to_cache_dir(
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1285, in _hf_hub_download_to_cache_dir
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     _download_to_tmp_and_move(
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 2016, in _download_to_tmp_and_move
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     xet_get(
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 589, in xet_get
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]     with session.new_file_download_group(
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366]          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) ERROR 10-16 02:23:03 [core.py:1366] RuntimeError: Task error: File reconstruction error: IO Error: No space left on device (os error 28)
+(EngineCore pid=6843) Process EngineCore:
+(EngineCore pid=6843) Traceback (most recent call last):
+(EngineCore pid=6843)   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+(EngineCore pid=6843)     self.run()
+(EngineCore pid=6843)   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/multiprocessing/process.py", line 108, in run
+(EngineCore pid=6843)     self._target(*self._args, **self._kwargs)
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1370, in run_engine_core
+(EngineCore pid=6843)     raise e
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1328, in run_engine_core
+(EngineCore pid=6843)     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+(EngineCore pid=6843)                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6843)     return func(*args, **kwargs)
+(EngineCore pid=6843)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1085, in __init__
+(EngineCore pid=6843)     super().__init__(
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 134, in __init__
+(EngineCore pid=6843)     self.model_executor = executor_class(vllm_config)
+(EngineCore pid=6843)                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6843)     return func(*args, **kwargs)
+(EngineCore pid=6843)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/executor/abstract.py", line 110, in __init__
+(EngineCore pid=6843)     self._init_executor()
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/executor/uniproc_executor.py", line 74, in _init_executor
+(EngineCore pid=6843)     self.driver_worker.load_model()
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/worker/gpu_worker.py", line 507, in load_model
+(EngineCore pid=6843)     self.model_runner.load_model(load_dummy_weights=load_dummy_weights)
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/worker/gpu/model_runner.py", line 400, in load_model
+(EngineCore pid=6843)     self.model = model_loader.load_model(
+(EngineCore pid=6843)                  ^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6843)     return func(*args, **kwargs)
+(EngineCore pid=6843)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/base_loader.py", line 75, in load_model
+(EngineCore pid=6843)     self.load_weights(model, model_config)
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6843)     return func(*args, **kwargs)
+(EngineCore pid=6843)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 427, in load_weights
+(EngineCore pid=6843)     loaded_weights = model.load_weights(self.get_all_weights(model_config, model))
+(EngineCore pid=6843)                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/gemma4_mm.py", line 2245, in load_weights
+(EngineCore pid=6843)     return loader.load_weights(weights, mapper=self.hf_to_vllm_mapper)
+(EngineCore pid=6843)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/reload/torchao_decorator.py", line 50, in patched_model_load_weights
+(EngineCore pid=6843)     return original_load_weights(self, weights, *args, **kwargs)
+(EngineCore pid=6843)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 445, in load_weights
+(EngineCore pid=6843)     autoloaded_weights = set(self._load_module("", self.module, weights))
+(EngineCore pid=6843)                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 378, in _load_module
+(EngineCore pid=6843)     for child_prefix, child_weights in self._groupby_prefix(weights):
+(EngineCore pid=6843)                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 256, in _groupby_prefix
+(EngineCore pid=6843)     for prefix, group in itertools.groupby(weights_by_parts, key=lambda x: x[0][0]):
+(EngineCore pid=6843)                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 253, in <genexpr>
+(EngineCore pid=6843)     for weight_name, weight_data in weights
+(EngineCore pid=6843)                                     ^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 452, in _filter_skipped
+(EngineCore pid=6843)     for name, weight in weights:
+(EngineCore pid=6843)                         ^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 140, in apply
+(EngineCore pid=6843)     for name, data in weights:
+(EngineCore pid=6843)                       ^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 333, in get_all_weights
+(EngineCore pid=6843)     yield from self._get_weights_iterator(primary_weights)
+(EngineCore pid=6843)                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 249, in _get_weights_iterator
+(EngineCore pid=6843)     hf_folder, hf_weights_files, use_safetensors = self._prepare_weights(
+(EngineCore pid=6843)                                                    ^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 195, in _prepare_weights
+(EngineCore pid=6843)     hf_folder = download_weights_from_hf(
+(EngineCore pid=6843)                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=6843)     return func(*args, **kwargs)
+(EngineCore pid=6843)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/weight_utils.py", line 540, in download_weights_from_hf
+(EngineCore pid=6843)     hf_folder = hf_api().snapshot_download(
+(EngineCore pid=6843)                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=6843)     return fn(*args, **kwargs)
+(EngineCore pid=6843)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/hf_api.py", line 6576, in snapshot_download
+(EngineCore pid=6843)     return snapshot_download(
+(EngineCore pid=6843)            ^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=6843)     return fn(*args, **kwargs)
+(EngineCore pid=6843)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+(EngineCore pid=6843)     return fn(*args, **kwargs)
+(EngineCore pid=6843)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/_snapshot_download.py", line 541, in snapshot_download
+(EngineCore pid=6843)     hf_thread_map(
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/tqdm.py", line 441, in hf_thread_map
+(EngineCore pid=6843)     results[future_to_index[future]] = future.result()
+(EngineCore pid=6843)                                        ^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+(EngineCore pid=6843)     return self.__get_result()
+(EngineCore pid=6843)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+(EngineCore pid=6843)     raise self._exception
+(EngineCore pid=6843)   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+(EngineCore pid=6843)     result = self.fn(*self.args, **self.kwargs)
+(EngineCore pid=6843)              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/_snapshot_download.py", line 521, in _inner_hf_hub_download
+(EngineCore pid=6843)     hf_hub_download(  # type: ignore
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=6843)     return fn(*args, **kwargs)
+(EngineCore pid=6843)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+(EngineCore pid=6843)     return fn(*args, **kwargs)
+(EngineCore pid=6843)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1047, in hf_hub_download
+(EngineCore pid=6843)     return _hf_hub_download_to_cache_dir(
+(EngineCore pid=6843)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1285, in _hf_hub_download_to_cache_dir
+(EngineCore pid=6843)     _download_to_tmp_and_move(
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 2016, in _download_to_tmp_and_move
+(EngineCore pid=6843)     xet_get(
+(EngineCore pid=6843)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 589, in xet_get
+(EngineCore pid=6843)     with session.new_file_download_group(
+(EngineCore pid=6843)          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=6843) RuntimeError: Task error: File reconstruction error: IO Error: No space left on device (os error 28)
+INFO 10-16 02:23:03 [utils.py:632] [shutdown] Process manager: send sigterm to process EngineCore
+[vb.vllm] LLM init with limit_mm_per_prompt={'image': 0} failed (RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {})
+INFO 10-16 02:23:03 [api_utils.py:286] non-default args: {'dtype': 'bfloat16', 'max_model_len': 4096, 'enable_prefix_caching': True, 'disable_log_stats': True, 'model': 'google/gemma-4-31B-it'}
+INFO 10-16 02:23:03 [model.py:692] Resolved architecture: Gemma4ForConditionalGeneration
+INFO 10-16 02:23:03 [model.py:2030] Using max model len 4096
+WARNING 10-16 02:23:03 [model.py:994] Model does not support mm_device_do_normalize, forcing mm_device_do_normalize = False.
+INFO 10-16 02:23:04 [config.py:252] Gemma4 model has heterogeneous head dimensions {'sliding_attention': 256, 'full_attention': 512}. FA4 not available, forcing TRITON_ATTN backend.
+INFO 10-16 02:23:04 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+(EngineCore pid=7345) INFO 10-16 02:23:10 [core.py:123] Initializing a V1 LLM engine (v0.30.0) with config: model='google/gemma-4-31B-it', speculative_config=None, tokenizer='google/gemma-4-31B-it', skip_tokenizer_init=False, tokenizer_mode=auto, revision=main, tokenizer_revision=main, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=4096, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=None, quantization_config=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, per_request_spec_decode_metrics='none', kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=0, served_model_name=google/gemma-4-31B-it, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'ir_enable_torch_wrap': True, 'splitting_ops': ['vllm::unified_attention_with_output', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::qwen4_exp_ple_short_conv', 'vllm::qwen4_exp_qsa_with_output', 'vllm::linear_attention', 'vllm::qwen_gdn_attention_core', 'vllm::qwen_gdn_attention_core_fused_norm_packed', 'vllm::gdn_attention_core_xpu', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::deepseek_v4_attention', 'vllm::hpc_rope_norm_forward', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256, 272, 288, 304, 320, 336, 352, 368, 384, 400, 416, 432, 448, 464, 480, 496, 512], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'enable_qk_norm_rope_fusion': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False, 'fuse_qk_norm_rope_kvcache': False}, 'max_cudagraph_capture_size': 512, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native']), enable_flashinfer_autotune=True, enable_cutedsl_warmup=True, enable_jit_warmup=True, moe_backend='auto', sparse_indexer_topk_backend='auto', linear_backend='auto', linear_backend_per_quant=None)
+(EngineCore pid=7345) INFO 10-16 02:23:11 [parallel_state.py:1827] world_size=1 rank=0 local_rank=0 distributed_init_method=file:///tmp/vllm_dist_bc16c4d0aa0043e3b45e12f842149f46 backend=nccl
+(EngineCore pid=7345) INFO 10-16 02:23:11 [parallel_state.py:2267] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, ETP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=7345) INFO 10-16 02:23:11 [gpu_worker.py:441] Using V2 Model Runner
+(EngineCore pid=7345) INFO 10-16 02:23:12 [model_runner.py:396] Loading model from scratch...
+(EngineCore pid=7345) INFO 10-16 02:23:13 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+(EngineCore pid=7345) INFO 10-16 02:23:13 [cuda.py:478] Using AttentionBackendEnum.TRITON_ATTN backend.
+(EngineCore pid=7345) INFO 10-16 02:23:13 [cuda.py:478] Using AttentionBackendEnum.TRITON_ATTN backend.
+(EngineCore pid=7345) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+(EngineCore pid=7345) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
+(EngineCore pid=7345) /root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py:773: UserWarning: Not enough free disk space to download the file. The expected file size is: 49784.79 MB. The target location /root/hf/hub/models--google--gemma-4-31B-it/blobs only has 39066.81 MB free disk space.
+(EngineCore pid=7345)   warnings.warn(
+INFO 10-16 02:24:15 [base.py:261] Multi-modal warmup completed in 65.024s
+INFO 10-16 02:24:15 [base.py:261] Readonly multi-modal warmup completed in 0.095s
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366] EngineCore failed to start.
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366] Traceback (most recent call last):
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1328, in run_engine_core
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     return func(*args, **kwargs)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1085, in __init__
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     super().__init__(
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 134, in __init__
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     self.model_executor = executor_class(vllm_config)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     return func(*args, **kwargs)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/executor/abstract.py", line 110, in __init__
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     self._init_executor()
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/executor/uniproc_executor.py", line 74, in _init_executor
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     self.driver_worker.load_model()
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/worker/gpu_worker.py", line 507, in load_model
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     self.model_runner.load_model(load_dummy_weights=load_dummy_weights)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/worker/gpu/model_runner.py", line 400, in load_model
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     self.model = model_loader.load_model(
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]                  ^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     return func(*args, **kwargs)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/base_loader.py", line 75, in load_model
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     self.load_weights(model, model_config)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     return func(*args, **kwargs)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 427, in load_weights
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     loaded_weights = model.load_weights(self.get_all_weights(model_config, model))
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/gemma4_mm.py", line 2245, in load_weights
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     return loader.load_weights(weights, mapper=self.hf_to_vllm_mapper)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/reload/torchao_decorator.py", line 50, in patched_model_load_weights
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     return original_load_weights(self, weights, *args, **kwargs)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 445, in load_weights
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     autoloaded_weights = set(self._load_module("", self.module, weights))
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 378, in _load_module
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     for child_prefix, child_weights in self._groupby_prefix(weights):
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 256, in _groupby_prefix
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     for prefix, group in itertools.groupby(weights_by_parts, key=lambda x: x[0][0]):
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 253, in <genexpr>
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     for weight_name, weight_data in weights
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]                                     ^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 452, in _filter_skipped
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     for name, weight in weights:
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]                         ^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 140, in apply
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     for name, data in weights:
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]                       ^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 333, in get_all_weights
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     yield from self._get_weights_iterator(primary_weights)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 249, in _get_weights_iterator
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     hf_folder, hf_weights_files, use_safetensors = self._prepare_weights(
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]                                                    ^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 195, in _prepare_weights
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     hf_folder = download_weights_from_hf(
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     return func(*args, **kwargs)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/weight_utils.py", line 540, in download_weights_from_hf
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     hf_folder = hf_api().snapshot_download(
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     return fn(*args, **kwargs)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/hf_api.py", line 6576, in snapshot_download
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     return snapshot_download(
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]            ^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     return fn(*args, **kwargs)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     return fn(*args, **kwargs)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/_snapshot_download.py", line 541, in snapshot_download
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     hf_thread_map(
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/tqdm.py", line 441, in hf_thread_map
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     results[future_to_index[future]] = future.result()
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]                                        ^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     return self.__get_result()
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     raise self._exception
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     result = self.fn(*self.args, **self.kwargs)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/_snapshot_download.py", line 521, in _inner_hf_hub_download
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     hf_hub_download(  # type: ignore
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     return fn(*args, **kwargs)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     return fn(*args, **kwargs)
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1047, in hf_hub_download
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     return _hf_hub_download_to_cache_dir(
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1285, in _hf_hub_download_to_cache_dir
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     _download_to_tmp_and_move(
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 2016, in _download_to_tmp_and_move
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     xet_get(
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 589, in xet_get
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]     with session.new_file_download_group(
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366]          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) ERROR 10-16 02:25:55 [core.py:1366] RuntimeError: Task error: File reconstruction error: IO Error: No space left on device (os error 28)
+(EngineCore pid=7345) Process EngineCore:
+(EngineCore pid=7345) Traceback (most recent call last):
+(EngineCore pid=7345)   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/multiprocessing/process.py", line 314, in _bootstrap
+(EngineCore pid=7345)     self.run()
+(EngineCore pid=7345)   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/multiprocessing/process.py", line 108, in run
+(EngineCore pid=7345)     self._target(*self._args, **self._kwargs)
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1370, in run_engine_core
+(EngineCore pid=7345)     raise e
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1328, in run_engine_core
+(EngineCore pid=7345)     engine_core = EngineCoreProc(*args, engine_index=dp_rank, **kwargs)
+(EngineCore pid=7345)                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=7345)     return func(*args, **kwargs)
+(EngineCore pid=7345)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 1085, in __init__
+(EngineCore pid=7345)     super().__init__(
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/engine/core.py", line 134, in __init__
+(EngineCore pid=7345)     self.model_executor = executor_class(vllm_config)
+(EngineCore pid=7345)                           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=7345)     return func(*args, **kwargs)
+(EngineCore pid=7345)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/executor/abstract.py", line 110, in __init__
+(EngineCore pid=7345)     self._init_executor()
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/executor/uniproc_executor.py", line 74, in _init_executor
+(EngineCore pid=7345)     self.driver_worker.load_model()
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/worker/gpu_worker.py", line 507, in load_model
+(EngineCore pid=7345)     self.model_runner.load_model(load_dummy_weights=load_dummy_weights)
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/v1/worker/gpu/model_runner.py", line 400, in load_model
+(EngineCore pid=7345)     self.model = model_loader.load_model(
+(EngineCore pid=7345)                  ^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=7345)     return func(*args, **kwargs)
+(EngineCore pid=7345)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/base_loader.py", line 75, in load_model
+(EngineCore pid=7345)     self.load_weights(model, model_config)
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=7345)     return func(*args, **kwargs)
+(EngineCore pid=7345)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 427, in load_weights
+(EngineCore pid=7345)     loaded_weights = model.load_weights(self.get_all_weights(model_config, model))
+(EngineCore pid=7345)                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/gemma4_mm.py", line 2245, in load_weights
+(EngineCore pid=7345)     return loader.load_weights(weights, mapper=self.hf_to_vllm_mapper)
+(EngineCore pid=7345)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/reload/torchao_decorator.py", line 50, in patched_model_load_weights
+(EngineCore pid=7345)     return original_load_weights(self, weights, *args, **kwargs)
+(EngineCore pid=7345)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 445, in load_weights
+(EngineCore pid=7345)     autoloaded_weights = set(self._load_module("", self.module, weights))
+(EngineCore pid=7345)                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 378, in _load_module
+(EngineCore pid=7345)     for child_prefix, child_weights in self._groupby_prefix(weights):
+(EngineCore pid=7345)                                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 256, in _groupby_prefix
+(EngineCore pid=7345)     for prefix, group in itertools.groupby(weights_by_parts, key=lambda x: x[0][0]):
+(EngineCore pid=7345)                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 253, in <genexpr>
+(EngineCore pid=7345)     for weight_name, weight_data in weights
+(EngineCore pid=7345)                                     ^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 452, in _filter_skipped
+(EngineCore pid=7345)     for name, weight in weights:
+(EngineCore pid=7345)                         ^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/models/utils.py", line 140, in apply
+(EngineCore pid=7345)     for name, data in weights:
+(EngineCore pid=7345)                       ^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 333, in get_all_weights
+(EngineCore pid=7345)     yield from self._get_weights_iterator(primary_weights)
+(EngineCore pid=7345)                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 249, in _get_weights_iterator
+(EngineCore pid=7345)     hf_folder, hf_weights_files, use_safetensors = self._prepare_weights(
+(EngineCore pid=7345)                                                    ^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/default_loader.py", line 195, in _prepare_weights
+(EngineCore pid=7345)     hf_folder = download_weights_from_hf(
+(EngineCore pid=7345)                 ^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/tracing/otel.py", line 178, in sync_wrapper
+(EngineCore pid=7345)     return func(*args, **kwargs)
+(EngineCore pid=7345)            ^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/vllm/model_executor/model_loader/weight_utils.py", line 540, in download_weights_from_hf
+(EngineCore pid=7345)     hf_folder = hf_api().snapshot_download(
+(EngineCore pid=7345)                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=7345)     return fn(*args, **kwargs)
+(EngineCore pid=7345)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/hf_api.py", line 6576, in snapshot_download
+(EngineCore pid=7345)     return snapshot_download(
+(EngineCore pid=7345)            ^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=7345)     return fn(*args, **kwargs)
+(EngineCore pid=7345)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+(EngineCore pid=7345)     return fn(*args, **kwargs)
+(EngineCore pid=7345)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/_snapshot_download.py", line 541, in snapshot_download
+(EngineCore pid=7345)     hf_thread_map(
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/tqdm.py", line 441, in hf_thread_map
+(EngineCore pid=7345)     results[future_to_index[future]] = future.result()
+(EngineCore pid=7345)                                        ^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 449, in result
+(EngineCore pid=7345)     return self.__get_result()
+(EngineCore pid=7345)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+(EngineCore pid=7345)     raise self._exception
+(EngineCore pid=7345)   File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+(EngineCore pid=7345)     result = self.fn(*self.args, **self.kwargs)
+(EngineCore pid=7345)              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/_snapshot_download.py", line 521, in _inner_hf_hub_download
+(EngineCore pid=7345)     hf_hub_download(  # type: ignore
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+(EngineCore pid=7345)     return fn(*args, **kwargs)
+(EngineCore pid=7345)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/utils/_http.py", line 276, in _inner
+(EngineCore pid=7345)     return fn(*args, **kwargs)
+(EngineCore pid=7345)            ^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1047, in hf_hub_download
+(EngineCore pid=7345)     return _hf_hub_download_to_cache_dir(
+(EngineCore pid=7345)            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1285, in _hf_hub_download_to_cache_dir
+(EngineCore pid=7345)     _download_to_tmp_and_move(
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 2016, in _download_to_tmp_and_move
+(EngineCore pid=7345)     xet_get(
+(EngineCore pid=7345)   File "/root/vllm/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 589, in xet_get
+(EngineCore pid=7345)     with session.new_file_download_group(
+(EngineCore pid=7345)          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+(EngineCore pid=7345) RuntimeError: Task error: File reconstruction error: IO Error: No space left on device (os error 28)
+INFO 10-16 02:25:55 [utils.py:632] [shutdown] Process manager: send sigterm to process EngineCore
+[vb.vllm] LLM init with limit_mm_per_prompt=None failed (RuntimeError: Engine core initialization failed. See root cause above. Failed core proc(s): {})
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/root/NEEL/vibes/e63_register/pod_e63.py", line 105, in <module>
+    main()
+  File "/root/NEEL/vibes/e63_register/pod_e63.py", line 61, in main
+    llm, tok = load_llm(a.model)
+               ^^^^^^^^^^^^^^^^^
+  File "/root/NEEL/vibes/batteries/run_vllm.py", line 78, in load_llm
+    raise RuntimeError("vLLM init failed")
+RuntimeError: vLLM init failed
+[e63 02:25:58] MODEL DONE: google/gemma-4-31B-it
+[e63 02:25:58] deleted weights: google/gemma-4-31B-it
+overlay         160G  124G   37G  78% /
+[e63 02:25:58] all done

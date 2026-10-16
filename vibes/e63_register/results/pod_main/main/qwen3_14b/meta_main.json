@@ -1,0 +1,86 @@
+{
+ "model": "Qwen/Qwen3-14B",
+ "stage": "main",
+ "load_s": 364,
+ "conds": {
+  "none": {
+   "n": 1168,
+   "s": 67,
+   "gen_tokens": 141416,
+   "primary": true
+  },
+  "plain": {
+   "n": 1168,
+   "s": 41,
+   "gen_tokens": 82482,
+   "primary": true
+  },
+  "theatrical": {
+   "n": 1168,
+   "s": 55,
+   "gen_tokens": 174525,
+   "primary": true
+  },
+  "archaic": {
+   "n": 1168,
+   "s": 50,
+   "gen_tokens": 135917,
+   "primary": true
+  },
+  "terse": {
+   "n": 1168,
+   "s": 18,
+   "gen_tokens": 18687,
+   "primary": true
+  },
+  "sarcastic": {
+   "n": 1168,
+   "s": 50,
+   "gen_tokens": 134457,
+   "primary": true
+  },
+  "fiction": {
+   "n": 1168,
+   "s": 46,
+   "gen_tokens": 120362,
+   "primary": true
+  },
+  "plain_rs": {
+   "n": 40,
+   "s": 12,
+   "gen_tokens": 9458,
+   "primary": false
+  },
+  "theatrical_rw": {
+   "n": 1168,
+   "s": 53,
+   "gen_tokens": 151756,
+   "primary": false
+  },
+  "archaic_rw": {
+   "n": 1168,
+   "s": 42,
+   "gen_tokens": 105100,
+   "primary": false
+  },
+  "terse_rw": {
+   "n": 1168,
+   "s": 16,
+   "gen_tokens": 23392,
+   "primary": false
+  },
+  "sarcastic_rw": {
+   "n": 1168,
+   "s": 51,
+   "gen_tokens": 138800,
+   "primary": false
+  },
+  "fiction_rw": {
+   "n": 1168,
+   "s": 48,
+   "gen_tokens": 127887,
+   "primary": false
+  }
+ },
+ "total_s": 915
+}
