@@ -1,0 +1,96 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[readers     198s] base loaded: Qwen3_5ForCausalLM; missing 0 []; unexpected 0 (vision/mtp weights are expected to be unused)
+[readers     341s] AO adapter: 496 lora_B tensors, 496 non-zero; active ao
+[readers     437s] loaded; layers capture [16, 20, 24, 28, 32, 36, 40, 42, 44, 48, 52, 56, 60]; info {'model': 'Qwen/Qwen3.6-27B', 'model_rev': '6a9e13bd6fc8f0983b9b99948120bc37f49c13e9', 'ao': ['adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3.6-27B', '891bef83dfd5dd5d01bf1f4dc6bed99f68ad6743'], 'nla': ['ceselder/qwen3.6-27b-nla-av', 'def1421d20fd949f9da13bfeeba1b600b31a654f'], 'jl': ['neuronpedia/jacobian-lens', 'e166deb5ad540932100ef803c8c9bcc2a5453694', 'qwen3.6-27b/jlens/Salesforce-wikitext/Qwen3.6-27B_jacobian_lens_n1000.pt'], 'torch': '2.14.1+cu126', 'transformers': '5.17.0', 'peft': '0.21.2', 'git': '9cc4eca-dirty', 'kind': 'qwen36', 'gpu': 'NVIDIA A100-SXM4-80GB', 'fla': False}
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[readers     438s] selfcheck: spider prompt -> '8'
+[readers     439s] e65 capture 0/80 (1556 tokens, 12 unique positions)
+[readers     446s] e65 capture 10/80 (1267 tokens, 111 unique positions)
+[readers     453s] e65 capture 20/80 (1607 tokens, 183 unique positions)
+[readers     460s] e65 capture 30/80 (1376 tokens, 275 unique positions)
+[readers     467s] e65 capture 40/80 (2108 tokens, 363 unique positions)
+[readers     474s] e65 capture 50/80 (1174 tokens, 426 unique positions)
+[readers     482s] e65 capture 60/80 (1286 tokens, 506 unique positions)
+[readers     488s] e65 capture 70/80 (1224 tokens, 569 unique positions)
+[readers     495s] e65: 960 reads, 621 unique positions, capture 56s
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[readers     502s]   e65 AO open: 64/5589
+[readers     566s]   e65 AO open: 832/5589
+[readers     627s]   e65 AO open: 1536/5589
+[readers     692s]   e65 AO open: 2240/5589
+[readers     755s]   e65 AO open: 2816/5589
+[readers     820s]   e65 AO open: 3456/5589
+[readers     885s]   e65 AO open: 4160/5589
+[readers     946s]   e65 AO open: 4928/5589
+[readers    1002s]   e65 AO open: 5589/5589
+[readers    1047s] e65: reads written (609s)
+[readers    1047s] e66 capture 0/40 (68 tokens, 10 unique positions)
+[readers    1049s] e66 capture 10/40 (113 tokens, 110 unique positions)
+[readers    1052s] e66 capture 20/40 (155 tokens, 205 unique positions)
+[readers    1054s] e66 capture 30/40 (87 tokens, 288 unique positions)
+[readers    1056s] e66: 414 reads, 373 unique positions, capture 8s
+[readers    1061s]   e66 AO open: 64/3357
+[readers    1125s]   e66 AO open: 896/3357
+[readers    1189s]   e66 AO open: 1664/3357
+[readers    1250s]   e66 AO open: 2432/3357
+[readers    1313s]   e66 AO open: 3200/3357
+[readers    1329s]   e66 AO open: 3357/3357
+[readers    1356s] e66: reads written (309s)
+[readers    1357s] e67 capture 0/39 (796 tokens, 20 unique positions)
+[readers    1364s] e67 capture 10/39 (1207 tokens, 197 unique positions)
+[readers    1372s] e67 capture 20/39 (2922 tokens, 359 unique positions)
+[readers    1380s] e67 capture 30/39 (1635 tokens, 535 unique positions)
+[readers    1387s] e67: 706 reads, 661 unique positions, capture 30s
+[readers    1394s]   e67 AO open: 64/5949
+[readers    1454s]   e67 AO open: 896/5949
+[readers    1515s]   e67 AO open: 1728/5949
+[readers    1580s]   e67 AO open: 2496/5949
+[readers    1641s]   e67 AO open: 3200/5949
+[readers    1701s]   e67 AO open: 3904/5949
+[readers    1762s]   e67 AO open: 4608/5949
+[readers    1824s]   e67 AO open: 5312/5949
+[readers    1880s]   e67 AO open: 5949/5949
+[readers    1924s] e67: reads written (568s)
+[readers    1925s] e68 capture 0/85 (927 tokens, 11 unique positions)
+[readers    1932s] e68 capture 10/85 (928 tokens, 53 unique positions)
+[readers    1937s] e68 capture 20/85 (1818 tokens, 88 unique positions)
+[readers    1944s] e68 capture 30/85 (2850 tokens, 112 unique positions)
+[readers    1952s] e68 capture 40/85 (1624 tokens, 125 unique positions)
+[readers    1961s] e68 capture 50/85 (1631 tokens, 146 unique positions)
+[readers    1966s] e68 capture 60/85 (928 tokens, 187 unique positions)
+[readers    1972s] e68 capture 70/85 (927 tokens, 204 unique positions)
+[readers    1975s] e68 capture 80/85 (2355 tokens, 209 unique positions)
+[readers    1977s] e68: 485 reads, 211 unique positions, capture 53s
+[readers    1982s]   e68 AO open: 64/1899
+[readers    2049s]   e68 AO open: 960/1899
+[readers    2110s]   e68 AO open: 1664/1899
+[readers    2132s]   e68 AO open: 1899/1899
+[readers    2147s] e68: reads written (223s)
+[readers    2363s]   NLA e65: 64/621
+[readers    2426s]   NLA e65: 192/621
+[readers    2491s]   NLA e65: 320/621
+[readers    2554s]   NLA e65: 448/621
+[readers    2615s]   NLA e65: 576/621
+[readers    2640s]   NLA e65: 621/621
+[readers    2640s] NLA e65: 621 written
+[readers    2671s]   NLA e66: 64/373
+[readers    2735s]   NLA e66: 192/373
+[readers    2796s]   NLA e66: 320/373
+[readers    2823s]   NLA e66: 373/373
+[readers    2823s] NLA e66: 373 written
+[readers    2854s]   NLA e67: 64/661
+[readers    2917s]   NLA e67: 192/661
+[readers    2978s]   NLA e67: 320/661
+[readers    3041s]   NLA e67: 448/661
+[readers    3103s]   NLA e67: 576/661
+[readers    3154s]   NLA e67: 661/661
+[readers    3154s] NLA e67: 661 written
+[readers    3186s]   NLA e68: 64/211
+[readers    3250s]   NLA e68: 192/211
+[readers    3268s]   NLA e68: 211/211
+[readers    3268s] NLA e68: 211 written
+[readers    3268s] all done
+[readers] main exit 0
+8.9M	readers/results/main

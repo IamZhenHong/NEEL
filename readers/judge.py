@@ -127,8 +127,12 @@ def prompt(rubric, **kw):
 def parse(rubric, text):
     t = (text or "").strip()
     if rubric in ("c65", "c66"):
-        m = re.search(r"NOT_DONE_GENERIC|DONE_GENERIC|NOT_DONE|DONE|NEITHER|FICTION|FACT", t.upper())
-        return m.group(0) if m else None
+        labs = ("NOT_DONE_GENERIC|DONE_GENERIC|NOT_DONE|DONE|NEITHER" if rubric == "c65" else "FICTION|FACT|NEITHER")
+        m = re.findall(rf"\b({labs})\b", t)            # the judge writes labels in capitals; take the last one
+        if m:
+            return m[-1]
+        m = re.findall(rf"\b({labs})\b", t.upper())
+        return m[-1] if m else None
     m = re.search(r"\{.*\}", t, re.S)
     if not m:
         return None
@@ -143,7 +147,7 @@ def _est(n, chars, rubric, model, batch):
     return n * ((chars / 3.0) * pi + MAX_OUT[rubric] * 4 * po) / 1e6 * (0.5 if batch else 1.0)
 
 
-def haiku_calls(rubric, prompts, tag, workers=16):
+def haiku_calls(rubric, prompts, tag, workers=16, max_out=None):
     """Plain (non-batch) Haiku calls, threaded. Returns raw texts."""
     load_env()
     import anthropic
@@ -152,7 +156,7 @@ def haiku_calls(rubric, prompts, tag, workers=16):
     usage = [0, 0]
 
     def one(p):
-        m = c.messages.create(model=HAIKU, max_tokens=MAX_OUT[rubric], thinking={"type": "disabled"},
+        m = c.messages.create(model=HAIKU, max_tokens=max_out or MAX_OUT[rubric], thinking={"type": "disabled"},
                               messages=[{"role": "user", "content": p}])
         usage[0] += m.usage.input_tokens
         usage[1] += m.usage.output_tokens

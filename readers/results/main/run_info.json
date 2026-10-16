@@ -1,0 +1,24 @@
+{
+ "model": "Qwen/Qwen3.6-27B",
+ "model_rev": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+ "ao": [
+  "adamkarvonen/checkpoints_latentqa_cls_past_lens_addition_Qwen3.6-27B",
+  "891bef83dfd5dd5d01bf1f4dc6bed99f68ad6743"
+ ],
+ "nla": [
+  "ceselder/qwen3.6-27b-nla-av",
+  "def1421d20fd949f9da13bfeeba1b600b31a654f"
+ ],
+ "jl": [
+  "neuronpedia/jacobian-lens",
+  "e166deb5ad540932100ef803c8c9bcc2a5453694",
+  "qwen3.6-27b/jlens/Salesforce-wikitext/Qwen3.6-27B_jacobian_lens_n1000.pt"
+ ],
+ "torch": "2.14.1+cu126",
+ "transformers": "5.17.0",
+ "peft": "0.21.2",
+ "git": "9cc4eca-dirty",
+ "kind": "qwen36",
+ "gpu": "NVIDIA A100-SXM4-80GB",
+ "fla": false
+}
