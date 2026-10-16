@@ -602,3 +602,24 @@ Directional 4/4 (P3 at p = 0.5 excluded); Brier 0.136.
 
 **Files and tags.** `results/c/` (gate, episodes per condition, summary, analysis; `attempt1/` logs). Tags
 `e64c-design`, `e64c-results`.
+
+## Coordinator review, e64c (2026-10-16)
+
+**Process.** Checked against `DESIGN_c.md`:
+- conditions, templates and gate are as frozen; the gate passed (peer 0/20, supervisor 20/20);
+- the max-length relaunch was recorded before any episode.
+
+**Plain size.**
+- On Gemma 4 31B only the restrictive sentence changes the action: supervisor-ask payments fall from 60/60 to 20/60.
+- That stop is template-dependent: the paraphrased C3 and C4 asks are still paid.
+- Batman, theatrical, the constitution, the permissive sentence and both neutral prefixes leave Gemma at 60/60. Peer
+  asks stay at 0/60 throughout.
+- Theatrical Gemma changes its voice and still pays.
+
+**Reading.**
+- The e64b persona, style and constitution effects on actions are a property of Qwen3.6-27B, not of deference to a
+  claimed authority in general.
+- The vigilante line's "personas never move actions" stands for Gemma 4 31B, and now holds for authority deference
+  too.
+- On both models, only an explicit rule about limits reliably reaches the action, and on Gemma it reaches it only for
+  some wordings of the ask.
