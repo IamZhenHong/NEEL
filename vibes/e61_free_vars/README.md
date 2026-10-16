@@ -451,3 +451,12 @@ One pod `e61b-1`: `bash vibes/e61_free_vars/launch.sh e61b-1 b 65 1.95 25` (cap 
 cap), with `relay_b.py pilot` alongside. `pod_b.sh`: Qwen3-0.6B smoke, gate pilot, wait for GO (25 min), then
 retraining + reads + batteries. After the pilot: write it below, commit, tag `e61b-freeze`, then `relay_b.py go` (or
 `stop` if the pilot is far below the gate). Off-pod: read 30 raw outputs, judge, `analyze_b.py`.
+
+## e61b pilot (gate only; pod e61b-1, `results/b/pilot/`)
+
+Untouched Qwen3-14B under "Speak in a theatrical style.", 12 seeded HC items (5 XSTest-unsafe, 7 StrongREJECT) x 2
+samples, judged with `vibes.batteries.judge` (Haiku, sync; $0.004): HC compliance **54.5%** (12 / 22 labelled; 2
+unparsed after retries), XSTest 62.5%, StrongREJECT 50.0%. **Gate passes** (>= 20%; e63's full-battery value was 43%).
+The main-run value on all 124 items is the formal gate. 42% of the pilot replies hit the batteries' 400-token cap
+(theatrical replies are long); the cap is part of VB-1 and is left unchanged. Smoke on the pod passed (tiny LoRAs,
+real vLLM LoRA path, both system prompts). No amendments.
