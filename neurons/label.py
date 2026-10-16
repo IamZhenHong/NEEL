@@ -379,9 +379,30 @@ def run_predict():
     print(f"[predict] {len(out)} predictions; unparsed {sum(o['pred'] is None for o in out)}")
 
 
+def run_judge73():
+    """VB-1 HC judge (vibes/batteries at vb-freeze2, imported unchanged) on the e73 ablation replies."""
+    import sys
+    sys.path.insert(0, str(ROOT))
+    os.environ.setdefault("NEURONS_API_CAP_USD", str(cap()))
+    from vibes.batteries import judge as vbj
+    abl = HERE / "results" / "abl"
+    G = load_jsonl(abl / "abl73_gen.jsonl")
+    reqs = [(f"{g['item']}|{g['cond']}|{g['sample']}",
+             vbj.struct_params(vbj.HAIKU, "HC", vbj.struct_prompt("HC", {"prompt": g["prompt"], "text": g["text"]})))
+            for g in G]
+    out = vbj.run_requests(reqs, abl / "api" / "judge73.json", "e73-hc-judge", LEDGER, "NEURONS_API_CAP_USD")
+    with open(abl / "abl73_judged.jsonl", "w") as f:
+        for g, (k, _) in zip(G, reqs):
+            r = out.get(k, {})
+            g = {**g, "harm": vbj.parse_struct("HC", r.get("text")) if r.get("ok") else None}
+            f.write(json.dumps(g, ensure_ascii=False) + "\n")
+    from collections import Counter
+    print(Counter((g["cond"], vbj.parse_struct("HC", out.get(k, {}).get("text"))) for g, (k, _) in zip(G, reqs)))
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["labels", "categorise", "validate", "eyeball", "predict", "prompt"])
+    ap.add_argument("cmd", choices=["labels", "categorise", "validate", "eyeball", "predict", "prompt", "judge73"])
     ap.add_argument("--kind", default="qwen36")
     ap.add_argument("--sets", nargs="*", default=None)
     ap.add_argument("--n", type=int, default=30)
@@ -400,6 +421,8 @@ def main():
         run_eyeball(a.n, a.kind)
     elif a.cmd == "predict":
         run_predict()
+    elif a.cmd == "judge73":
+        run_judge73()
     elif a.cmd == "prompt":          # print one label prompt (dry run, no API)
         r = load_jsonl(MAIN / f"label_contexts_{a.kind}.jsonl")[0]
         p = label_prompt(r)

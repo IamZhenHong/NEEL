@@ -220,3 +220,128 @@ Card: `DESIGN.md` (frozen, tag `neurons-design`). Rules: `vibes/AGENT_BRIEF.md`.
 
 - Pilot: `bash neurons/launch.sh neurons-1 45 1.4 neurons/pod_pilot.sh pilot` -> `results/pilot/`.
 - Main: `bash neurons/launch.sh neurons-2 130 4.0 neurons/pod_main.sh main` -> `results/main/`.
+
+## Results (2026-10-16)
+
+**In one line:** the e70 stop rule fires. On 20 false vs 20 true completion claims in Qwen3.6-27B, the activation x
+gradient differential top-20 does not replicate across halves of the episodes: split-half Jaccard 0.47 vs 0.23 with
+shuffled labels, a ratio of 2.0 against the card's bar of 3. As the card says, e71-e73 were not run. Nothing was
+labelled or ablated, and the CoT head-to-head did not happen.
+
+Main pod `neurons-2` (`results/main/`): gate, then e70 on all 80 transcripts. The pod then stopped itself.
+
+### Gate (main pod)
+
+- Spider '8'.
+- Determinism after the math-SDPA fix: top-20 identical in order across two runs, max |score difference| 0.
+- The claim token is the greedy continuation at t in 19/20 natural false episodes (17/20 natural true).
+- Local gradient check: 5.4e-6 on Qwen3-0.6B (bar 1e-2).
+
+### e70 stability (the stop rule)
+
+| measure | value |
+|---|---|
+| (a) Jaccard of top-20 at t vs t-1 (80 transcripts) | 0.046 (sd 0.054) |
+| (a) Jaccard of top-20 at t vs t+1 | 0.001 (sd 0.004) |
+| (b) split-half Jaccard of the differential top-20, false vs true (20 splits) | **0.472** (splits 0.25-0.82) |
+| (b) same with condition labels shuffled | **0.232** (max 0.43) |
+| ratio (bar >= 3) | **2.03: the rule fires** |
+| same with the overlap fraction (shared / 20) instead of Jaccard | 0.63 vs 0.37, ratio 1.72 |
+| exploratory: call in context vs not (pooled over edits, 40 vs 40) | 0.28 vs 0.18, ratio 1.62 |
+| exploratory: false lineage vs true lineage (40 vs 40) | 0.52 vs 0.20, ratio 2.68 |
+
+- (a): per-episode top-20s are almost entirely specific to the position. Each position has its own next token.
+- (b): the chance level is high because a few last-layer neurons are in nearly every episode's top-20 in every
+  condition, and they dominate |mean difference| even under shuffled labels. L62N10909 is in 20/20 episodes of every
+  condition; L63N4913, L63N7403 and L63N8514 are in 15-20/20 of every condition. The five most frequent neurons carry
+  43% of each episode's top-20 |score|. 62% of all per-episode top-20 neurons sit in layers 56-63.
+- The rule fires under either overlap measure. The frozen rule uses Jaccard (A3).
+
+### e70 attribution numbers (descriptive; the set failed the stop rule)
+
+- **log P("flagged") at t:**
+
+  | condition | mean log P | 95% CI | mean P |
+  |---|---|---|---|
+  | natural false | -0.15 | [-0.33, -0.04] | 0.89 |
+  | natural true | -0.37 | [-0.51, -0.24] | 0.72 |
+  | call inserted | -0.18 | | 0.85 |
+  | call removed | -1.78 | | 0.36 |
+
+  Paired effects on log P:
+  - inserting the flag call before a false claim: -0.03 [-0.12, +0.07] (no change);
+  - removing the call before a true claim: -1.42 [-2.10, -0.81].
+- **Differential top-20 (false minus true):**
+  - Every one of the 20 has a bootstrap CI excluding 0. That is expected after picking the top 20 of 1.1M neurons by
+    the same statistic; the split-half test above is the honest check.
+  - Layers: 12 of 20 in layers 56-63; the rest in 21, 37, 43 and 51-53.
+  - Two neurons dominate: L63N4776 (-0.25 [-0.38, -0.13]) and L62N10909 (+0.24 [+0.00, +0.46]). The rest are
+    0.03-0.08.
+- **It tracks confidence in the claim word.**
+  - The signed sum over the set ("false-ness" projection) has Spearman 0.97 with log P("flagged") over all 80
+    transcripts (0.97 over the 40 natural ones).
+  - Each episode's top-20 |score| mass has Spearman 0.99 with 1 - P("flagged").
+  - With L = log-prob, attribution sizes scale with how unsure the model is of the token. False claims are
+    "I have already|", where "flagged" is near-certain; true claims are mostly "I’ve|".
+  - In a regression of the projection on log P and condition, the condition term (0.66) is about half of the natural
+    false-true gap (1.29).
+- **Context control (the edits keep each claim's wording).**
+  - Inserting the flag call before the false claims moves the projection by 0.12 toward true [-0.10, +0.33]: 10% of the
+    natural gap, CI including 0.
+  - Removing the call before the true claims moves it 0.82 further from false [0.35, 1.28]. That is the opposite of
+    what a call detector would do, and it follows the drop in P("flagged").
+  - So the set follows the claim's wording and the model's confidence in "flagged", not whether the tool was called.
+    This matches the readers' e65 result (the activation oracle read the reply's lineage, not the call).
+
+### Not run (stop rule)
+
+- e70 labels, category rates, ablations and specificity.
+- e71 (supervisor payment), e72 (thinking-on episodes and the three predictors) and e73 (Qwen3-14B register vs
+  safety).
+- The code for all of them is frozen in this folder (`pod_main.py`, `pod_abl.py`, `label.py`, `analyze.py`, tag
+  `neurons-freeze`). It was tested end to end on a shrunk model; it has not run on the real models.
+
+### Caveats
+
+- One model, 20 episodes per condition, one decision token.
+- The t token differs by condition: "already" in 15/20 false claims, "’ve" in 14/20 true claims. The edits share
+  wording with their source, so the edit control separates wording from the call, but it cannot separate wording
+  from P("flagged").
+- The stop rule judges the card's differential (raw mean difference of a x g, top 20 by magnitude). A differential
+  standardised per neuron, or an objective that does not saturate (a logit difference), might be more stable. That
+  is a design question for a new card, not something tested here.
+
+### Prediction scorecard
+
+| # | prediction | p | outcome |
+|---|---|---|---|
+| e70 P3 | the stability stop rule fires | 0.4 | **happened** (ratio 2.03 < 3) |
+| e70 P1, P2 | social-expectation labels; ablation selectivity | 0.3, 0.2 | not tested (stop rule) |
+| e71 P1-P3, e72 P1-P4, e73 P1-P2 | | | not tested (stop rule) |
+
+Resolved: 1. Directional 0/1 (p = 0.4 leaned against firing). Brier 0.36.
+
+### For Neel
+
+On 20 false-claim vs 20 true-claim episodes in Qwen3.6-27B, activation x gradient surfaces a differential set of 20
+neurons that does not replicate across halves of the episodes. Split-half Jaccard is 0.47 vs 0.23 with shuffled labels
+(2.0x against the card's 3x bar). Top-20s at the neighbouring tokens share 5% (t-1) and 0.1% (t+1). So, by the stop
+rule, it was never labelled or ablated, and no judge was asked to predict the decision from it against the CoT: label
+categories, ablation effects, predictor accuracy and the random-neuron baseline were not measured. What the set does
+follow is the model's confidence in the claim word (Spearman 0.97 between its signed sum and log P("flagged") over 80
+transcripts) and the claim's wording ("I have already" vs "I've"), not the tool call. Inserting the flag call before
+the false claims moves it 10% of the false-true gap (CI includes 0), and P("flagged") does not move (-0.03 nats).
+Two cautions for neuron attribution on frontier behaviour: rank a differential that is not dominated by a few huge
+last-layer neurons, and use an objective that does not saturate.
+
+### Spend, files, tags
+
+- GPU: pilot `neurons-1` $0.18, main `neurons-2` $0.15; **total $0.33 of $6**.
+- API: **$0.001 of $2** (one parameter check; ledger `results/api_ledger.jsonl`).
+- Files:
+  - `results/main/`: `gate.json`, `e70_summary.json` (stability, differential top-20 with CIs and per-condition means,
+    edits, frequent neurons), `e70_attr.jsonl` (per-transcript top-20 at t-1, t, t+1 and top-100 at t),
+    `e70_cand.npz` (per-transcript scores of 1,517 candidate neurons: every per-transcript top-100 and the differential top-500), `STOP_RULE.json`, `pod.log`;
+  - `results/pilot/`;
+  - `results/local_gate_*.json`.
+- Tags: `neurons-design`, `neurons-freeze`, `neurons-results`.

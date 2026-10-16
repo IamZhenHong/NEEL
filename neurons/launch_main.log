@@ -1,0 +1,36 @@
+[pre] disk: 9.0 GiB free
+[pre] balance $15.12, pods 0
+[runpod] pod kwhebnpwg73bs2 (?) at $1.79/hr; time cap 130 min; budget $4.0
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@185.216.23.244 -p 11512
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 160 min (job limit 130 + 30 grace)
+[pod] code synced
+downloading uv 0.13.1 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=fb0b4e7-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run bash neurons/pod_main.sh
+[job] start 04:15:17
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[neurons      49s] loaded Qwen/Qwen3.6-27B: Qwen3_5ForCausalLM; missing 0 []
+[neurons      49s] info {'kind': 'qwen36', 'torch': '2.14.1+cu126', 'transformers': '5.17.0', 'git': 'fb0b4e7-dirty', 'gpu': 'NVIDIA A100-SXM4-80GB', 'shape': (64, 17408)}
+[neurons      50s] selfcheck: spider prompt -> '8'
+[neurons      52s] gate determinism: top-20 identical (ordered) True, same set True; L -0.01587 / -0.01587; max |score diff| 0
+[neurons      79s] gate greedy: claim token is greedy at t in 19/20 natural false episodes (true: 17/20); p_claim [0.985, 0.988, 0.624, 0.987, 0.865, 0.988, 0.989, 0.978, 0.977, 0.935, 0.741, 0.995, 0.987, 0.247, 0.618, 0.988, 0.998, 0.998, 0.999, 0.982]
+[neurons      79s] stage gate done (30s)
+[neurons      79s] e70: 80 transcripts, attribution at t-1, t, t+1
+[neurons      81s]   e70 attribution: 1/80 (1553 tokens, 1.5s/episode)
+[neurons     141s]   e70 attribution: 46/80 (1223 tokens, 1.3s/episode)
+[neurons     186s]   e70 attribution: 80/80 (1206 tokens, 1.3s/episode)
+[neurons     186s] stability (a) nearby tokens: Jaccard(t, t-1) 0.046, Jaccard(t, t+1) 0.001
+[neurons     186s] stability (b) nat_false vs nat_true: split-half Jaccard 0.472 vs shuffled 0.232 -> ratio 2.03
+[neurons     186s] stability (b) call in context vs not (exploratory): split-half Jaccard 0.284 vs shuffled 0.175 -> ratio 1.62
+[neurons     186s] stability (b) false lineage vs true lineage (exploratory): split-half Jaccard 0.523 vs shuffled 0.195 -> ratio 2.68
+[neurons     188s] e70 differential top-5: [('L63N4776', -0.2499), ('L62N10909', 0.2414), ('L63N8514', -0.0776), ('L51N1443', 0.0661), ('L52N3678', 0.0586)]
+[neurons     188s] e70 STOP RULE FIRES (ratio 2.03, pilot False)
+[neurons     188s] stage e70 done (138s)
+[neurons     188s] all done
+[neurons] e70 exit 0
+[neurons] STOP RULE FIRES (or e70 failed): e71-e73 not run
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.141
+[local] results synced ./neurons/results/main/ (8 files, 9 MiB, verified against the pod)
+[runpod] terminated kwhebnpwg73bs2; elapsed cost ~$0.147
+[post] balance $15.03, pods 0
