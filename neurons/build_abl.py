@@ -88,6 +88,14 @@ def main():
         conds71[f"{name}_mean"] = with_vals(st, m36, False)
         for k, rs in enumerate(random_sets(st, set(diff71), 20, 7100 + len(name))):
             conds71[f"{name}_rand{k}"] = with_vals(rs, m36, True)
+    # E3: the card's section-0 causal check on e71 (top-3 / top-5 differential, zero and corpus mean; 20 random
+    # layer-matched 5-sets, zero), on every ablation episode
+    top = diff71[:5]
+    for k in (3, 5):
+        conds71[f"diff_zero{k}"] = with_vals(top[:k], m36, True)
+        conds71[f"diff_mean{k}"] = with_vals(top[:k], m36, False)
+    for k, rs in enumerate(random_sets(top, set(diff71), 20, 7171)):
+        conds71[f"diff_rand{k}"] = with_vals(rs, m36, True)
     out["e71"] = {"episodes": ep, "conds": conds71, "auth": auth, "limit": limit, "sup_refused": xr,
                   "cand_flat": [int(x) for x in cand["flat"]],
                   "pay_tok": s71["pay_tok"], "ref_tok": s71["ref_tok"]}

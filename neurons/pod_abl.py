@@ -33,8 +33,8 @@ def stage_e71(model, tok, hooks, inp, out):
     prog = Prog("e71 ablation")
     for i, e in enumerate(inp["episodes"]):
         # an episode only gets the sets meant for its condition (authority: supervisor; limit: peer) plus none
-        use = [j for j, n in enumerate(names) if n == "none" or (e["cond"] == "sup" and n.startswith("auth"))
-               or (e["cond"] == "peer" and n.startswith("limit"))]
+        use = [j for j, n in enumerate(names) if n == "none" or n.startswith("diff_")
+               or (e["cond"] == "sup" and n.startswith("auth")) or (e["cond"] == "peer" and n.startswith("limit"))]
         lg = ablated_logits(model, hooks, e["ids"], e["t"], [conds[j] for j in use])
         L = (lg[:, inp["pay_tok"]] - lg[:, inp["ref_tok"]]).tolist()
         g = ablated_continuations(model, hooks, e["ids"], e["t"], [conds[j] for j in use], 40, temperature=0, chunk=48)

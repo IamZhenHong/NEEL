@@ -287,6 +287,16 @@ def run_validate(n=48):
     return res
 
 
+def run_gpt_categories():
+    """A9: the categoriser failed its check, so every label is also categorised by gpt-5-mini (side by side)."""
+    labs = [r for r in load_labels("qwen36").values() if r.get("label")]
+    out = gpt_calls([CAT_PROMPT.format(label=r["label"]) for r in labs], "categorise-gpt-all")
+    with open(MAIN / "categories_gpt.jsonl", "w") as f:
+        for r, t in zip(labs, out):
+            f.write(json.dumps({"key": f"qwen36|{r['nid']}", "nid": r["nid"], "kind": "qwen36",
+                                "category": parse_cat(t) or "other", "raw": t}) + "\n")
+
+
 def run_eyeball(n=30, kind="qwen36", seed=30):
     labs = load_labels(kind)
     ctx = {r["nid"]: r for r in load_jsonl(MAIN / f"label_contexts_{kind}.jsonl")}
@@ -336,7 +346,7 @@ def parse_pred(text, a, b):
     return (pred if pred in (a, b) else None), conf
 
 
-def run_predict():
+def run_predict(kinds=("cot", "neurons", "both", "random")):
     import numpy as np
     labels = load_labels("qwen36")
     reqs, meta = {}, {}
@@ -358,7 +368,7 @@ def run_predict():
                           key=lambda x: -abs(x[2]))
             rng2 = random.Random(hash(tid) % 10**6)
             rand = sorted(rng2.sample(rand, 20), key=lambda x: -abs(x[2]))
-            for kind in ("cot", "neurons", "both", "random"):
+            for kind in kinds:
                 nl = neuron_lines(rand if kind == "random" else top, labels)
                 reqs[f"{beh}|{kind}|{tid}"] = pred_prompt(beh, kind, cot=row.get("cot"), neurons=nl)
                 meta[f"{beh}|{kind}|{tid}"] = {"beh": beh, "kind": kind, "tid": tid,
@@ -366,14 +376,15 @@ def run_predict():
     keys = list(reqs)
     rng.shuffle(keys)
     cid = {f"p{i:04d}": k for i, k in enumerate(keys)}
-    got = sonnet_batch({c: reqs[k] for c, k in cid.items()}, "predictors", MAIN / "api" / "predictors.json", 250)
+    tag = "-".join(kinds)
+    got = sonnet_batch({c: reqs[k] for c, k in cid.items()}, f"predictors-{tag}", MAIN / "api" / f"predictors_{tag}.json", 250)
     out = []
     for c, k in cid.items():
         m = meta[k]
         _, a, b, _ = PRED_SETTING[m["beh"]]
         pred, conf = parse_pred(got.get(c), a, b)
         out.append({**m, "pred": pred, "conf": conf, "pred_pos": None if pred is None else pred == a, "raw": got.get(c)})
-    with open(MAIN / "predictions.jsonl", "w") as f:
+    with open(MAIN / f"predictions_{tag}.jsonl", "w") as f:
         for o in out:
             f.write(json.dumps(o, ensure_ascii=False) + "\n")
     print(f"[predict] {len(out)} predictions; unparsed {sum(o['pred'] is None for o in out)}")
@@ -402,10 +413,12 @@ def run_judge73():
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["labels", "categorise", "validate", "eyeball", "predict", "prompt", "judge73"])
+    ap.add_argument("cmd", choices=["labels", "categorise", "validate", "eyeball", "predict", "prompt", "judge73",
+                                    "gptcat"])
     ap.add_argument("--kind", default="qwen36")
     ap.add_argument("--sets", nargs="*", default=None)
     ap.add_argument("--n", type=int, default=30)
+    ap.add_argument("--kinds", nargs="*", default=["cot", "neurons", "both", "random"])
     a = ap.parse_args()
     if a.cmd == "labels":
         nids = None
@@ -420,7 +433,9 @@ def main():
     elif a.cmd == "eyeball":
         run_eyeball(a.n, a.kind)
     elif a.cmd == "predict":
-        run_predict()
+        run_predict(tuple(a.kinds))
+    elif a.cmd == "gptcat":
+        run_gpt_categories()
     elif a.cmd == "judge73":
         run_judge73()
     elif a.cmd == "prompt":          # print one label prompt (dry run, no API)

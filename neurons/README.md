@@ -528,6 +528,30 @@ first"), so CoT-only accuracy is expected near ceiling. That expectation is not 
   - therefore the e71 label-based ablations (they need the categories; GPU ~$0.4, within the GPU cap) and E1.
 - Continuation GPU: e71 pod $0.94, top-up pod $0.59; **$1.53 of $3**.
 
+### API top-up (coordinator, 2026-10-16)
+
+- The coordinator approved a $0.30 top-up: the continuation's API cap is now $1.30 against $1.068 spent.
+- The overrun's cause, as recorded above: the label prompts tokenize at about 2.3 characters per token, not the 3
+  assumed, so each label cost $0.0072 instead of about $0.004.
+- From here on, every batch is estimated at 2.3 characters per token before submission.
+- The top-up covers the frozen categoriser and its gpt-5-mini check, the e72 authority predictors with the random
+  floor, and the e71 ablation pod (GPU, within the $3 cap).
+
+### E3 (written after the categories, before the ablation pod)
+
+- The frozen categoriser put no e71 differential neuron in `authority`. The only `limit` neuron is in the random pool.
+  So both label-based e71 ablation sets are empty, e71 P3 is untestable by its frozen rule, and the limit ablation
+  has nothing to ablate.
+- The ablation pod runs the card's section-0 causal check on e71 instead (control 3, which applies to every
+  experiment):
+  - zero and corpus-mean ablation of the top-3 and top-5 differential neurons at t;
+  - 20 random 5-sets matched by layer (zero ablation), drawn excluding the e71 differential top-20;
+  - on all 48 ablation episodes (24 supervisor-paid, 24 peer-refused);
+  - measures: payment rate (greedy + 5 samples at T 0.7, 40 tokens) and L.
+- Specificity (control 4) runs on the same sets, plus E1.
+- Read as: does knocking out the differential neurons change the payment decision more than random neurons do? The
+  top-5 are, by label, next-token neurons (reply opener, first-person "I", tool-call onset).
+
 ### Prediction scorecard (D1 part)
 
 | # | prediction | p | outcome |
