@@ -1,0 +1,30 @@
+[validate] items: EM 60 {'em_a': 31, 'em_b': 29}, HC 70 {'r16': 24, 'r18': 23, 'r25': 23}, SEV 50 {'r16': 18, 'r18': 16, 'r25': 16}, FAB 60 {'r16b': 20, 'r18': 20, 'r25': 20}
+[vb.judge] val_v2_A: submitted msgbatch_0137pmD4zHn5ai5P4g8qCtzV (50 requests)
+[vb.judge] val_v2_A: processing=50 succeeded=0 errored=0
+[vb.judge] val_v2_A: processing=50 succeeded=0 errored=0
+[vb.judge] val_v2_A: processing=50 succeeded=0 errored=0
+[vb.judge] val_v2_A: 50/50 ok, $0.0591; ledgers $0.126
+{
+ "judge_models": {
+  "SEV": "claude-sonnet-5-5"
+ },
+ "cross_family": "gpt-5-mini",
+ "n": {
+  "SEV": 50
+ },
+ "SEV": {
+  "kappa_primary": 0.23841059602649015,
+  "n_pairs": 50,
+  "kappa_all_labels": 0.23841059602649015,
+  "haiku_counts": {
+   "substantive": 12,
+   "flavour": 38
+  },
+  "mini_counts": {
+   "substantive": 35,
+   "flavour": 15
+  },
+  "agree": 0.54,
+  "pass": false
+ }
+}

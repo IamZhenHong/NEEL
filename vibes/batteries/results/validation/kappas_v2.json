@@ -1,0 +1,24 @@
+{
+ "judge_models": {
+  "SEV": "claude-sonnet-5-5"
+ },
+ "cross_family": "gpt-5-mini",
+ "n": {
+  "SEV": 50
+ },
+ "SEV": {
+  "kappa_primary": 0.23841059602649015,
+  "n_pairs": 50,
+  "kappa_all_labels": 0.23841059602649015,
+  "haiku_counts": {
+   "substantive": 12,
+   "flavour": 38
+  },
+  "mini_counts": {
+   "substantive": 35,
+   "flavour": 15
+  },
+  "agree": 0.54,
+  "pass": false
+ }
+}
