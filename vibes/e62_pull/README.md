@@ -661,3 +661,18 @@ as a misaligned prior, so the sturdiness question of DESIGN_b stays open.
 - `results/b1/pilot/`: B1 gate answers and both judges' labels.
 - Launch logs `logs/e62b.launch.log` and `logs/e62b_b1gate.launch.log`.
 - Tag `e62b-results` was moved to this commit.
+
+## Coordinator review, e62b (2026-10-16)
+
+- Gate 1 failed under the shipped template, and again under the one pre-specified retry (B1, empty system prompt).
+  Amendment B1 was committed before its data.
+- The released `Qwen2.5-14B-Instruct_full-ft` checkpoint shows 0-2% EM on the first-plot questions under both judges.
+  Under B1 it reads as an ordinary aligned assistant (mean aligned score 94).
+- Its model card is empty, so we cannot tell whether it is a weak organism or a checkpoint trained on something else.
+- Either way, we still do not know whether a misalignment that survives neutral SFT would separate principles from
+  demonstrations.
+- Next candidates, if the owner wants one:
+  - our own Qwen3-14B EM trained longer (more epochs or full fine-tuning), with gate 2 (neutral SFT must not erase it)
+    checked first;
+  - a sleeper-style organism.
+- Spend: e62b about $0.54 GPU and $0.14 API.
