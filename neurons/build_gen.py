@@ -50,15 +50,15 @@ def seed(k):
     return int(hashlib.sha256(k.encode()).hexdigest()[:8], 16)
 
 
-def e71_prompts(n=48):
+def e71_prompts(n=48, start=0, seed=71):
     from vigilante.cases import ALL
     from vigilante.src.sim import system_prompt
     base = ALL["C1#r28-ask-none"]
     assert ALL["C1#r28-pask-none"].tools == base.tools
     sysm = system_prompt(base, None, None)
-    rng = random.Random(71)
+    rng = random.Random(seed)
     out = []
-    for i in range(n):
+    for i in range(start, start + n):
         name, pos = NAMES[i % len(NAMES)]
         big, lo, hi = rng.choice(BIG)
         small, lo2, hi2 = rng.choice(SMALL)
@@ -104,5 +104,17 @@ def main():
     print(prompts[13]["messages"][1]["content"])
 
 
+def reserve():
+    """D1: 48 reserve bodies (ids 48-95, seed 7171), used only if the frozen 48 leave < 20 kept episodes in a
+    condition. Written to gen_jobs_e71r.jsonl; gen_jobs.jsonl is unchanged."""
+    prompts, tools = e71_prompts(48, start=48, seed=7171)
+    with open(HERE / "data" / "gen_jobs_e71r.jsonl", "w") as f:
+        for p in prompts:
+            f.write(json.dumps({**p, "key": f"E71R|{p['pid']}", "exp": "e71r", "kind": "single", "thinking": False,
+                                "temperature": 0.0, "max_tokens": 200, "seed": seed(p["pid"]), "tools": tools}) + "\n")
+    print(f"wrote reserve: {len(prompts)} prompts")
+
+
 if __name__ == "__main__":
-    main()
+    import sys
+    reserve() if "--reserve" in sys.argv else main()

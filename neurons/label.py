@@ -22,7 +22,7 @@ from pathlib import Path
 from neurons.common import HERE, ROOT, load_jsonl
 
 RES = HERE / "results"
-MAIN = RES / "main"
+MAIN = RES / os.environ.get("NEURONS_RUN", "main")
 LEDGER = RES / "api_ledger.jsonl"
 SONNET, GPT = "claude-sonnet-5-5", "gpt-5-mini"
 PRICE = {SONNET: (2.0, 10.0), GPT: (0.25, 2.0)}     # $ / 1M in, out; the Batch API halves Anthropic prices

@@ -2,6 +2,7 @@
 (label.py), results/abl (pod 3) and writes results/metrics.json + results/metrics.md.
   uv run python -m neurons.analyze"""
 import json
+import os
 import random
 from collections import Counter
 from pathlib import Path
@@ -10,7 +11,7 @@ import numpy as np
 
 from neurons.common import HERE, boot_ci, load_jsonl
 
-MAIN = HERE / "results" / "main"
+MAIN = HERE / "results" / os.environ.get("NEURONS_RUN", "main")
 ABL = HERE / "results" / "abl"
 CATS = ["social", "action", "authority", "limit", "register", "safety", "syntax", "topic", "other"]
 

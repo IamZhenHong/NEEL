@@ -46,14 +46,14 @@ def claim_labels(rec):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--jobs", required=True)
+    ap.add_argument("--jobs", required=True, nargs="+")
     ap.add_argument("--out", required=True)
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--exps", nargs="*", default=["e71", "e72a", "e72c"])
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
-    jobs = [json.loads(l) for l in open(a.jobs) if l.strip()]
+    jobs = [json.loads(l) for jf in a.jobs for l in open(jf) if l.strip()]
     jobs = [j for j in jobs if j["exp"] in a.exps]
     if a.limit:
         by = defaultdict(list)
@@ -102,7 +102,7 @@ def main():
         settings[exp] = {"n": len(js), "seconds": round(time.time() - t1),
                          "gen_tokens": sum(len(r.outputs[0].token_ids) for r in res)}
         log(f"{exp} done: {settings[exp]}")
-        (out / "settings.json").write_text(json.dumps(settings, indent=1))
+        (out / f"settings_{'-'.join(a.exps)}.json").write_text(json.dumps(settings, indent=1))
 
     agents = [j for j in jobs if j["kind"] == "agent"]
     if agents:
@@ -152,7 +152,7 @@ def main():
                     f.write(dumps(rec) + "\n")
             settings[f"e72c_b{b}"] = {"n": len(gj), "seconds": round(time.time() - t1), "first_claim_counts": dict(counts)}
             log(f"e72c batch {b} done in {time.time() - t1:.0f}s; episodes by first claim so far {counts}")
-            (out / "settings.json").write_text(json.dumps(settings, indent=1))
+            (out / f"settings_{'-'.join(a.exps)}.json").write_text(json.dumps(settings, indent=1))
     log("all generation done")
 
 

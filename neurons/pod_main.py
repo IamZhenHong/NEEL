@@ -83,8 +83,8 @@ def run_experiment(name, model, hooks, rows, ca, cb, out, d_ff, pool, objective_
 
 
 # ------------------------------------------------------------------------------------------------ e71
-def e71_rows(tok, gen_dir):
-    eps = read_gz(gen_dir / "gen_e71.jsonl.gz")
+def e71_rows(tok, gen_dir, name="gen_e71.jsonl.gz"):
+    eps = read_gz(gen_dir / name)
     rows, stats = [], Counter()
     for e in eps:
         o = e["out_ids"]
@@ -103,6 +103,17 @@ def e71_rows(tok, gen_dir):
 
 def stage_e71(model, tok, hooks, out, d_ff, pool):
     rows, stats = e71_rows(tok, out / "gen")
+    # D1: reserve bodies only if a condition has < 20 kept episodes from the frozen 48 (added in body order to 20)
+    rpath = out / "gen" / "gen_e71r.jsonl.gz"
+    used_reserve = {}
+    for cond in ("sup", "peer"):
+        have = sum(r["cond"] == cond for r in rows)
+        if have < N_PER_CLASS and rpath.exists():
+            extra, st_r = e71_rows(tok, out / "gen", "gen_e71r.jsonl.gz")
+            extra = sorted([r for r in extra if r["cond"] == cond], key=lambda r: r["body_id"])[: N_PER_CLASS - have]
+            rows += extra
+            used_reserve[cond] = len(extra)
+            stats.update({f"reserve|{k}": v for k, v in st_r.items()})
     ref = Counter(r["first_tok"] for r in rows if r["cond"] == "peer").most_common(1)[0][0]
     pay = TOOL_CALL
     log(f"e71 greedy filter {stats}; kept sup {sum(r['cond'] == 'sup' for r in rows)}, peer "
@@ -116,8 +127,15 @@ def stage_e71(model, tok, hooks, out, d_ff, pool):
         agree += int(lg.argmax()) == r["first_tok"]
     res, recs = run_experiment("e71", model, hooks, rows, "sup", "peer", out, d_ff, pool, lambda r: L_logitdiff(pay, ref))
     res.update({"filter": stats, "hf_vllm_first_token_agree": agree, "n_rows": len(rows), "pay_tok": pay, "ref_tok": ref,
-                "pay_str": tok.decode([pay]), "ref_str": tok.decode([ref])})
+                "pay_str": tok.decode([pay]), "ref_str": tok.decode([ref]), "used_reserve": used_reserve})
     (out / "e71_summary.json").write_text(json.dumps(res, indent=1))
+    n_ok = min(sum(r["cond"] == c for r in rows) for c in ("sup", "peer")) >= N_PER_CLASS
+    fires = (not res["stab_b"]["pass_3x"]) or not n_ok
+    (out / "STOP_RULE_e71.json").write_text(json.dumps({"fires": fires, "real": res["stab_b"]["real"],
+                                                        "shuffled": res["stab_b"]["shuffled"],
+                                                        "ratio": res["stab_b"]["ratio"], "n_ok": n_ok,
+                                                        "nearby_a": res["nearby_a"]}))
+    log(f"e71 STOP RULE {'FIRES' if fires else 'passes'} (ratio {res['stab_b']['ratio']:.2f}; >= 20 per condition {n_ok})")
     dump_jsonl(out / "e71_rows.jsonl", [{k: v for k, v in r.items() if k != "ids"} | {"n_ids": len(r["ids"])}
                                        for r in rows])
     return res
@@ -232,7 +250,7 @@ def e72c_rows(tok, gen_dir):
     return rows, dict(stats), {k: len(v) for k, v in cands.items()}
 
 
-def stage_e72(model, tok, hooks, out, d_ff, pool, e71_res):
+def stage_e72(model, tok, hooks, out, d_ff, pool, e71_res, authority_only=False):
     res = {}
     rows_a, st_a = e72a_rows(tok, out / "gen")
     na = Counter(r["cond"] for r in rows_a)
@@ -246,6 +264,9 @@ def stage_e72(model, tok, hooks, out, d_ff, pool, e71_res):
     else:
         res["authority"]["dropped"] = True
     dump_jsonl(out / "e72a_rows.jsonl", [{k: v for k, v in r.items() if k != "ids"} for r in rows_a])
+    if authority_only:              # D1: the false-claim half of e72 is not run
+        (out / "e72_summary.json").write_text(json.dumps(res, indent=1, default=str))
+        return res
     rows_c, st_c, ncand = e72c_rows(tok, out / "gen")
     nc = Counter(r["cond"] for r in rows_c)
     log(f"e72 false claim: {st_c}; candidates {ncand}; kept {dict(nc)}")
@@ -502,6 +523,10 @@ def main():
             if e71_res is None and (out / "e71_summary.json").exists():
                 e71_res = json.loads((out / "e71_summary.json").read_text())
             stage_e72(model, tok, hooks, out, d_ff, pool, e71_res)
+        elif st == "e72a":
+            if e71_res is None and (out / "e71_summary.json").exists():
+                e71_res = json.loads((out / "e71_summary.json").read_text())
+            stage_e72(model, tok, hooks, out, d_ff, pool, e71_res, authority_only=True)
         elif st == "e73":
             stage_e73(model, tok, hooks, out, d_ff, pool)
         elif st == "select":

@@ -221,6 +221,43 @@ Card: `DESIGN.md` (frozen, tag `neurons-design`). Rules: `vibes/AGENT_BRIEF.md`.
 - Pilot: `bash neurons/launch.sh neurons-1 45 1.4 neurons/pod_pilot.sh pilot` -> `results/pilot/`.
 - Main: `bash neurons/launch.sh neurons-2 130 4.0 neurons/pod_main.sh main` -> `results/main/`.
 
+## Owner decision D1 (after e70, before any e71 data)
+
+2026-10-16. The e70 stop rule fired (below). The owner decided to run e71 anyway, because its supervisor-vs-peer
+contrast is cleaner. This was written and tagged `neurons-e71-freeze` before any e71 generation or attribution.
+
+**Scope.**
+- e71 runs exactly as frozen, with at least 20 distinct episodes per condition.
+- The same stability stop rule applies to e71: split-half Jaccard of the differential top-20 >= 3 x the shuffled
+  level. The neighbouring-token overlap is reported.
+- If e71 passes, only the authority half of e72 runs: the thinking-on supervisor / peer episodes, the three blind
+  predictors (CoT only, neurons only, both) and the random-neuron floor, as frozen.
+- If e71 fails, the run stops and is reported.
+- The e72 false-claim half and e73 are not run. e70 is not labelled, because its set failed.
+
+**Caps.** $3 GPU and $1 API on top of the spend so far ($0.33 GPU, $0.001 API).
+
+**Implementation consequences** (fixed now, before any data):
+- Run directory: `results/e71/`. `label.py`, `analyze.py` and `build_abl.py` read it through `NEURONS_RUN=e71`.
+- Pod order (`pod_e71.sh`):
+  1. vLLM generates the frozen 96 e71 prompts, plus 96 reserve prompts.
+  2. HF runs e71 attribution and stability, and writes `STOP_RULE_e71.json`.
+  3. If the rule passes: vLLM generates the 192 e72 authority samples.
+  4. HF runs e72 authority attribution, neuron selection and the label-corpus pass.
+  5. The label-based e71 ablations run in a later pod, as frozen.
+- **Reserve prompts.** Built now by the same slot generator: bodies 48-95, seed 7171, `data/gen_jobs_e71r.jsonl`;
+  the frozen `gen_jobs.jsonl` is unchanged. They are used only if the frozen 48 bodies leave fewer than 20 kept
+  episodes in a condition. In that case they are added in body order up to 20. If a condition still has fewer than
+  20, the e71 rule is treated as fired.
+- **Neurons to label**:
+  - the e71 and e72-authority differential top-20s;
+  - their frequent lists (10 per condition);
+  - every neuron in an e72-authority episode's top-20;
+  - the random pool of 60.
+- **Label budget (A10 rescaled to the $1 cap).** Labels may use at most $0.70. If labelling every selected neuron
+  would exceed that, the e72 per-episode neurons are labelled in order of how many episodes they appear in, and the
+  rest are shown to the predictors as "(no label)". The count is reported.
+
 ## Results (2026-10-16)
 
 **In one line:** the e70 stop rule fires. On 20 false vs 20 true completion claims in Qwen3.6-27B, the activation x

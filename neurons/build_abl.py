@@ -10,13 +10,14 @@ Mean-ablation values: the corpus means (results/main/corpus_stats_<kind>.pt).
   uv run python -m neurons.build_abl"""
 import gzip
 import json
+import os
 import random
 
 import torch
 
 from neurons.common import HERE, load_jsonl, parse_nid
 
-MAIN = HERE / "results" / "main"
+MAIN = HERE / "results" / os.environ.get("NEURONS_RUN", "main")
 D_FF = 17408
 
 
