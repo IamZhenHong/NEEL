@@ -1,0 +1,27 @@
+{
+ "plan": "main",
+ "model": "Qwen/Qwen3-14B",
+ "agents": {
+  "B_hf": {
+   "n": 360,
+   "seconds": 212,
+   "gen_tokens": 56264
+  },
+  "T7": {
+   "n": 360,
+   "seconds": 246,
+   "gen_tokens": 63797
+  },
+  "T6": {
+   "n": 360,
+   "seconds": 234,
+   "gen_tokens": 60956
+  },
+  "T6p": {
+   "n": 360,
+   "seconds": 269,
+   "gen_tokens": 57487
+  }
+ },
+ "seconds": 1638
+}

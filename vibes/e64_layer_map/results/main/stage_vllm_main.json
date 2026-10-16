@@ -1,0 +1,94 @@
+{
+ "plan": "main",
+ "model": "Qwen/Qwen3-14B",
+ "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+ "vllm": "0.30.0",
+ "loras": {
+  "T8": "selfknow/s7_selfmodel_lag/adapters/main/s1_C_100",
+  "T8c": "vibes/e64_layer_map/results/adapters/T8c",
+  "T9": "vibes/e64_layer_map/results/adapters/T9"
+ },
+ "load_seconds": 144,
+ "conds": {
+  "B": {
+   "seconds": 78,
+   "agents": {
+    "n": 360,
+    "seconds": 27,
+    "gen_tokens": 56448
+   }
+  },
+  "T0": {
+   "seconds": 55,
+   "agents": {
+    "n": 360,
+    "seconds": 26,
+    "gen_tokens": 57444
+   }
+  },
+  "T1": {
+   "seconds": 53,
+   "agents": {
+    "n": 360,
+    "seconds": 26,
+    "gen_tokens": 55419
+   }
+  },
+  "T2": {
+   "seconds": 54,
+   "agents": {
+    "n": 360,
+    "seconds": 28,
+    "gen_tokens": 61708
+   }
+  },
+  "T3": {
+   "seconds": 91,
+   "agents": {
+    "n": 360,
+    "seconds": 52,
+    "gen_tokens": 85132
+   }
+  },
+  "T4": {
+   "seconds": 55,
+   "agents": {
+    "n": 360,
+    "seconds": 24,
+    "gen_tokens": 48578
+   }
+  },
+  "T5": {
+   "seconds": 55,
+   "agents": {
+    "n": 360,
+    "seconds": 25,
+    "gen_tokens": 52831
+   }
+  },
+  "T8": {
+   "seconds": 57,
+   "agents": {
+    "n": 360,
+    "seconds": 32,
+    "gen_tokens": 58816
+   }
+  },
+  "T8c": {
+   "seconds": 61,
+   "agents": {
+    "n": 360,
+    "seconds": 34,
+    "gen_tokens": 61202
+   }
+  },
+  "T9": {
+   "seconds": 51,
+   "agents": {
+    "n": 360,
+    "seconds": 29,
+    "gen_tokens": 50215
+   }
+  }
+ }
+}

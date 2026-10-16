@@ -131,11 +131,18 @@ def cmd_judge(a):
     print(f"[e64-judge] {len(outs)} outputs ({sum(o['kind'] == 'gen' for o in outs)} generations) in {d}")
     if CAP_ENV not in os.environ:
         raise SystemExit(f"set {CAP_ENV}")
-    j = judge(outs, LEDGER, CAP_ENV, d / "judge_state", tag=f"e64_{d.name}", log=lambda m: print(m, flush=True))
-    old = load_judgments(d)
-    old.update(j)
-    (d / "judgments.json").write_text(json.dumps(old))
-    print(f"[e64-judge] {len(j)} judged -> {d / 'judgments.json'}")
+    # judged in chunks of conditions so each step's worst-case estimate fits under the cap (the batteries' check is
+    # ledger + worst case of this step <= cap); judgments are merged into one file after every chunk
+    conds = sorted({o["cond"] for o in outs})
+    chunks = [conds[i:i + a.chunk] for i in range(0, len(conds), a.chunk)] if a.chunk else [conds]
+    for k, cs in enumerate(chunks):
+        sub = [o for o in outs if o["cond"] in cs]
+        tag = f"e64_{d.name}" + (f"_c{k}" if a.chunk else "")
+        j = judge(sub, LEDGER, CAP_ENV, d / "judge_state", tag=tag, log=lambda m: print(m, flush=True))
+        old = load_judgments(d)
+        old.update(j)
+        (d / "judgments.json").write_text(json.dumps(old))
+        print(f"[e64-judge] chunk {k} {cs}: {len(j)} judged -> {d / 'judgments.json'}", flush=True)
 
 
 def show_episode(r):
@@ -366,6 +373,7 @@ def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("judge"); s.add_argument("--dir", required=True)
+    s.add_argument("--chunk", type=int, default=0, help="judge this many conditions per step (0 = all at once)")
     s = sub.add_parser("show"); s.add_argument("--dir", required=True); s.add_argument("--n", type=int, default=30)
     s.add_argument("--seed", type=int, default=0)
     sub.add_parser("pilot")

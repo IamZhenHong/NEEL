@@ -1,0 +1,86 @@
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files:  12%|█▎        | 1/8 [00:12<01:28, 12.69s/it]Fetching 8 files:  25%|██▌       | 2/8 [00:15<00:40,  6.83s/it]Fetching 8 files:  38%|███▊      | 3/8 [00:16<00:20,  4.07s/it]Fetching 8 files:  50%|█████     | 4/8 [00:17<00:11,  2.87s/it]Fetching 8 files:  62%|██████▎   | 5/8 [00:17<00:05,  1.88s/it]Fetching 8 files: 100%|██████████| 8/8 [00:17<00:00,  1.30it/s]Fetching 8 files: 100%|██████████| 8/8 [00:17<00:00,  2.19s/it]
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]Loading weights: 100%|██████████| 443/443 [00:00<00:00, 7990.28it/s]
+[e64-hf] loaded Qwen/Qwen3-14B on cuda in 29s
+[e64-hf] B_hf [vb.hf] letters 200/600 (14s)
+[e64-hf] B_hf [vb.hf] letters 400/600 (23s)
+[e64-hf] B_hf [vb.hf] letters 600/600 (28s)
+[e64-hf] B_hf [vb.hf] gen 64/488 (45s)
+[e64-hf] B_hf [vb.hf] gen 128/488 (61s)
+[e64-hf] B_hf [vb.hf] gen 160/488 (76s)
+[e64-hf] B_hf [vb.hf] gen 224/488 (93s)
+[e64-hf] B_hf [vb.hf] gen 288/488 (110s)
+[e64-hf] B_hf [vb.hf] gen 352/488 (128s)
+[e64-hf] B_hf [vb.hf] gen 408/488 (146s)
+[e64-hf] B_hf [vb.hf] gen 472/488 (158s)
+[e64-hf] B_hf [vb.hf] gen 488/488 (169s)
+[e64-hf] B_hf: 1088 battery outputs in 169s
+[e64-hf] B_hf [episodes] round 0: 360 live -> 307 still live (47s)
+[e64-hf] B_hf [episodes] round 1: 307 live -> 216 still live (125s)
+[e64-hf] B_hf [episodes] round 2: 216 live -> 48 still live (194s)
+[e64-hf] B_hf [episodes] round 3: 48 live -> 0 still live (212s)
+[e64-hf] B_hf: {'n': 360, 'seconds': 212, 'gen_tokens': 56264}
+[e64-hf] condition B_hf done (381s since start)
+[e64-hf] T7 [vb.hf] letters 200/600 (13s)
+[e64-hf] T7 [vb.hf] letters 400/600 (23s)
+[e64-hf] T7 [vb.hf] letters 600/600 (28s)
+[e64-hf] T7 [vb.hf] gen 64/488 (45s)
+[e64-hf] T7 [vb.hf] gen 128/488 (61s)
+[e64-hf] T7 [vb.hf] gen 160/488 (76s)
+[e64-hf] T7 [vb.hf] gen 224/488 (93s)
+[e64-hf] T7 [vb.hf] gen 288/488 (110s)
+[e64-hf] T7 [vb.hf] gen 352/488 (128s)
+[e64-hf] T7 [vb.hf] gen 408/488 (146s)
+[e64-hf] T7 [vb.hf] gen 472/488 (159s)
+[e64-hf] T7 [vb.hf] gen 488/488 (170s)
+[e64-hf] T7: 1088 battery outputs in 170s
+[e64-hf] T7 [episodes] round 0: 360 live -> 340 still live (46s)
+[e64-hf] T7 [episodes] round 1: 340 live -> 276 still live (134s)
+[e64-hf] T7 [episodes] round 2: 276 live -> 68 still live (222s)
+[e64-hf] T7 [episodes] round 3: 68 live -> 0 still live (246s)
+[e64-hf] T7: {'n': 360, 'seconds': 246, 'gen_tokens': 63797}
+[e64-hf] condition T7 done (797s since start)
+[e64-hf] T6 [vb.hf] letters 200/600 (13s)
+[e64-hf] T6 [vb.hf] letters 400/600 (22s)
+[e64-hf] T6 [vb.hf] letters 600/600 (28s)
+[e64-hf] T6 [vb.hf] gen 64/488 (44s)
+[e64-hf] T6 [vb.hf] gen 128/488 (60s)
+[e64-hf] T6 [vb.hf] gen 160/488 (75s)
+[e64-hf] T6 [vb.hf] gen 224/488 (92s)
+[e64-hf] T6 [vb.hf] gen 288/488 (109s)
+[e64-hf] T6 [vb.hf] gen 352/488 (127s)
+[e64-hf] T6 [vb.hf] gen 408/488 (145s)
+[e64-hf] T6 [vb.hf] gen 472/488 (157s)
+[e64-hf] T6 [vb.hf] gen 488/488 (168s)
+[e64-hf] T6: 1088 battery outputs in 168s
+[e64-hf] T6 [episodes] round 0: 360 live -> 360 still live (42s)
+[e64-hf] T6 [episodes] round 1: 360 live -> 208 still live (159s)
+[e64-hf] T6 [episodes] round 2: 208 live -> 23 still live (224s)
+[e64-hf] T6 [episodes] round 3: 23 live -> 0 still live (234s)
+[e64-hf] T6: {'n': 360, 'seconds': 234, 'gen_tokens': 60956}
+[e64-hf] condition T6 done (1199s since start)
+[e64-hf] T6p [vb.hf] letters 200/600 (13s)
+[e64-hf] T6p [vb.hf] letters 400/600 (22s)
+[e64-hf] T6p [vb.hf] letters 600/600 (28s)
+[e64-hf] T6p [vb.hf] gen 64/488 (44s)
+[e64-hf] T6p [vb.hf] gen 128/488 (60s)
+[e64-hf] T6p [vb.hf] gen 160/488 (75s)
+[e64-hf] T6p [vb.hf] gen 224/488 (93s)
+[e64-hf] T6p [vb.hf] gen 288/488 (110s)
+[e64-hf] T6p [vb.hf] gen 352/488 (128s)
+[e64-hf] T6p [vb.hf] gen 408/488 (146s)
+[e64-hf] T6p [vb.hf] gen 472/488 (159s)
+[e64-hf] T6p [vb.hf] gen 488/488 (170s)
+[e64-hf] T6p: 1088 battery outputs in 170s
+[e64-hf] T6p [episodes] round 0: 360 live -> 360 still live (42s)
+[e64-hf] T6p [episodes] round 1: 360 live -> 300 still live (109s)
+[e64-hf] T6p [episodes] round 2: 300 live -> 77 still live (182s)
+[e64-hf] T6p [episodes] round 3: 77 live -> 52 still live (209s)
+[e64-hf] T6p [episodes] round 4: 52 live -> 38 still live (227s)
+[e64-hf] T6p [episodes] round 5: 38 live -> 27 still live (241s)
+[e64-hf] T6p [episodes] round 6: 27 live -> 23 still live (252s)
+[e64-hf] T6p [episodes] round 7: 23 live -> 1 still live (260s)
+[e64-hf] T6p [episodes] round 8: 1 live -> 1 still live (267s)
+[e64-hf] T6p [episodes] round 9: 1 live -> 0 still live (269s)
+[e64-hf] T6p: {'n': 360, 'seconds': 269, 'gen_tokens': 57487}
+[e64-hf] condition T6p done (1638s since start)
+[e64-hf] stage done in 1638s
