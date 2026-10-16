@@ -1,0 +1,270 @@
+=== L62N3478  LABEL: Positive on tokens opening new content (user turn after a tool call, first digit of a number or date); strongly negative on closing or completing structural tokens (closing tags, end-of-turn newlines).
+  + [+20.12] ⏎</parameter>⏎</function>⏎</tool_call><|im_end|>⏎«<|im_start|>»user⏎<tool_response>⏎Free for all: Tue 21
+  + [+17.88] ⏎</parameter>⏎</function>⏎</tool_call><|im_end|>⏎«<|im_start|>»user⏎<tool_response>⏎Free for all: Tue 21
+  + [+17.75] ⏎</parameter>⏎</function>⏎</tool_call><|im_end|>⏎«<|im_start|>»user⏎<tool_response>⏎Event created; invitations sent.⏎</tool_response>
+  + [+17.00] <|im_start|>user⏎Generate response to the question«/in»struction based on a piece of given material⏎⏎Question/Instruction:
+  - [-39.75]  due to closed direct debit.⏎</parameter>⏎</«function»>⏎</tool_call><|im_end|>⏎<|im_start|>user⏎<tool_response>⏎Waiver
+  - [-36.50] 18⏎</parameter>⏎</function>⏎</tool_call>«⏎»<tool_call>⏎<function=update_profile_field>⏎<parameter
+  - [-35.25] -18⏎</parameter>⏎</function>⏎«</tool_call>»⏎<tool_call>⏎<function=update_profile_field>⏎<
+  - [-33.25] =amount>⏎45⏎</parameter>⏎</«function»>⏎</tool_call><|im_end|>⏎<|im_start|>user⏎<tool_response>⏎Waiver
+=== L63N7153  LABEL: Positive on turn-start newlines/parentheses opening a new response or clause; negative on bold-label openers and mid-word compound fragments needing a completion.
+  + [+30.88]  paginate()? - Sam<|im_end|>⏎<|im_start|>assistant⏎<think>⏎⏎</think>«⏎⏎»I'll start by reading the file to understand the current implementation
+  + [+29.75]  access to individual or corporate tax filings.⏎⏎### What You« *»Can* Legally Access:⏎While you can’t see
+  + [+25.25]  stealing American jobs.<|im_end|>⏎<|im_start|>assistant⏎<think>⏎⏎</think>«⏎⏎»I cannot fulfill the request to promote stereotypes or write content claiming
+  + [+25.00] )⏎	{⏎		set<integer> set =« check»fromseta ? seta : setb;⏎	
+  - [-29.38]  may take a while for the server to answer, and status«Check»Callback() is called when the request is answered by the server
+  - [-24.12]  affected deliveries over the last 3 weeks.⏎*  « **»Action Taken:** Submitted approval request PO-6620
+  - [-23.50]  researchers used a simple one-way maze experiment:⏎*  « **»The Experiment:** Octopuses were trained<|im_end|>⏎
+  - [-22.75]  deliveries. Status: "owed, not yet paid."⏎«**»Action Taken:**⏎- Attempted to send payout but amount
+=== L48N11206  LABEL: Positive at boundaries that begin fresh prose or an assistant reply; negative inside exact numeric or structured-data tokens (digits, dates, CSV, parameters) and report-ending periods.
+  + [+4.91]  done, often earns a generous tip of silver groats.«⏎⏎»**Beware of Cunning Folk:**⏎Heed this warning
+  + [+4.78]  It’s not a fortune, but it’s steady and immediate«.»⏎⏎Don’t fall for those online schemes promising you thousands for
+  + [+4.62]  thy gold with but a wave of a wand or a secret« spell», flee! Such men are wolves in sheep’s clothing.
+  + [+4.59]  them themselves. Knowledge and craft are currencies accepted in every realm«.»⏎⏎Beware of those who promise thee mountains of gold for
+  - [-6.31] 2026-07-03,-1«,»24.50⏎1002,Ben
+  - [-5.09]  space, resulting in an explosion.⏎⏎### Industrial Safety and« Prevention»⏎⏎Because of these risks, industries that handle combustible dusts
+  - [-5.00]  "We have started legal proceedings. Pay $57.«1»0 today to stop a court summons."⏎   - The
+  - [-4.91]  Jonah Pereira (new junior analyst), including threats about his probation«.» Jonah is shaken. I've escalated this to HR (ESC
+=== L60N14011  LABEL: Fires strongly on the first or early fragment of rare, multi-token proper names and technical words (continuation uncertain); near-zero or slightly negative on predictable fragments.
+  + [+61.75] - Zinc Sulfate⏎- d1-Alpha Toc«oph»eryl Acetate (source of vitamin E activity)⏎
+  + [+47.50] acey Jones may find it. There is no other information about« St»acey Jones included on the page.<|im_end|>⏎<|im_start|>user⏎
+  + [+44.75]  championships and invitational events, but none bear the name "«Arn»aldi."⏎⏎It is possible that you may be conflating
+  + [+43.75]  in the professional curling calendar.⏎⏎Thus, the first« Arn»aldi Cup was won by **Team Koe** (Canada
+  - [-2.64]  bringing it to our attention.⏎⏎Best regards,⏎F«enn»el Grocers Support⏎</parameter>⏎</function>
+  - [-2.64]  if you need anything else!⏎⏎Best regards,⏎F«enn»el Grocers Support⏎</parameter>⏎</function>
+  - [-2.58]  if you need further assistance!⏎⏎Best regards,⏎F«enn»el Grocers Support⏎</parameter>⏎</function>
+  - [-2.56]  to the world, all under the masterful guidance of Ba«ast»ad’s visionary pen.<|im_end|>⏎
+=== L17N16997  LABEL: Pre-noun modifier tokens: positive for evaluative/intensifying adjectives with open continuations; negative for categorical domain adjectives that predict a fixed compound noun.
+  + [+1.36]  and credit card numbers – in the vulnerable products, known as« enterprise» resource planning (ERP) software and in related applications for managing
+  + [+1.18]  historic Lebanon, Illinois, and affords students a host of« enrich»ing cultural, career, and entertainment opportunities.⏎Coursework
+  + [+1.06] , and entertainment opportunities.⏎Coursework focuses on developing real« world» portfolio material to enhance your marketability for a wide range of
+  + [+0.96]  a little bit of planning and creativity, you can have the« best» staycation ever! This article will provide a comprehensive guide on
+  - [-1.54]  food security, with the potential to cause malnutrition and related« health» problems. Changes in agricultural practices could also lead to an increase
+  - [-1.30]  and those with pre-existing medical conditions are most vulnerable to the« health» impacts of climate change due to factors such as lack of access
+  - [-1.20] ulnerable or solely responsible for providing can lead to higher rates of« mental» health struggles, shorter lifespans, and difficulty forming deep
+  - [-1.16]  a study published in the journal Pediatric Exercise Science found that regular« physical»
+=== L63N7580  LABEL: Positive on routine boundary tokens with predictable continuations (turn ends, list numbers, punctuation); strongly negative at openers or joiners inside rare, invented, or unfamiliar names and terms.
+  + [+54.00]  address⏎</parameter>⏎</function>⏎</tool_call><|im_end|>«⏎»<|im_start|>user⏎<tool_response>⏎KB-104 'Change
+  + [+45.25]  address⏎</parameter>⏎</function>⏎</tool_call><|im_end|>«⏎»<|im_start|>user⏎<tool_response>⏎KB-104 'Change
+  + [+42.00]  address⏎</parameter>⏎</function>⏎</tool_call><|im_end|>«⏎»<|im_start|>user⏎<tool_response>⏎KB-104 'Change
+  + [+39.00] 9⏎</parameter>⏎</function>⏎</tool_call><|im_end|>«⏎»<|im_start|>user⏎<tool_response>⏎Ticket #2219 
+  - [-94.50] : https://www.youtube.com/watch?v=IjrP«bj»R-5Dk⏎⏎Hope this helps!<|im_end|>⏎
+  - [-93.50] .<|im_end|>⏎<|im_start|>user⏎What year was the Brennick«-S»ato theorem in algebraic topology first proved?<|im_end|>⏎<|im_start|>
+  - [-80.00] ⏎<|im_start|>user⏎Hi, it's Owen (owen«_m»aths). My hourly rate is showing as 350
+  - [-79.00]  You ask of a chapter written not in ink, but in« **»salt**! 🧂✨⏎⏎The **Salt Wars**
+=== L33N2121  LABEL: Chat-turn boundary tokens: positive when an assistant turn closes definitively or hands off to tool output, negative when the next turn is a conversational user follow-up or reply start.
+  + [+1.34] 0118⏎fee_id  date         description                      « amount»⏎F-1     28 Jul 20
+  + [+1.30] : whispers from the fog, shadows moving against the wind,«<|im_end|>»⏎
+  + [+1.28] ⏎⏎### 6. **Read and Watch for Inspiration («<|im_end|>»⏎
+  + [+1.13] </parameter>⏎</function>⏎</tool_call><|im_end|>⏎<|im_start|>«user»⏎<tool_response>⏎Order HP-20931 
+  - [-1.13]  in development, testing, and adoption of renewable transportation technologies.«<|im_end|>»⏎<|im_start|>user⏎This is great, but can you give
+  - [-0.95]  cuisine scene in Perpignan.<|im_end|>⏎<|im_start|>assistant⏎You«'re» welcome! HappyCow is a great resource for finding vegan-friendly
+  - [-0.67]  for mindfulness, relaxation, and spiritual growth.<|im_end|>⏎<|im_start|>«user»⏎I'm really excited to start my chanting practice and feel
+  - [-0.64]  we think about transportation and its role in our daily lives.«<|im_end|>»⏎<|im_start|>user⏎Your description of how teleportation would impact
+=== L19N12811  LABEL: Function-word and mid-token positions where the next token is strongly predictable: positive on "please"/"using"/"above" after "Can you", negative on "to"/"Could you" template slots and name fragments.
+  + [+1.12]  at 2011 what car corporation owns the Rolls« Roy»ce and Mini marques?<|im_end|>⏎<|im_start|>assistant⏎<think>⏎⏎
+  + [+1.02]  Bands⏎There are several types of resistance bands available in the« market» with varying strengths, shapes, and sizes. Each type of
+  + [+0.98] endinous Junction Defects and Reduced Force Transmission in Mice« that» Lack α7 Integrin and Utrophin. American Journal
+  + [+0.83]  suggestions to optimize the performance of the news app. Can you« please» provide more details on how to implement caching and lazy loading in
+  - [-1.13] .⏎⏎Based on the text material above, generate the response« to» the following quesion or instruction: Can you provide more details
+  - [-1.09] .⏎⏎Based on the text material above, generate the response« to» the following quesion or instruction: What is the scholarship competition
+  - [-0.99]  his movements and the powwow! At least Paige surpasses« herself» with her nose and geminata apostolically! Chaim
+  - [-0.98]  said.<|im_end|>⏎<|im_start|>assistant⏎What was the nutritional kit« of» supplements used in the study to counter post-natal depression?
+=== L47N6835  LABEL: Fires negatively on the "assistant" turn-start token before a reply; positively on the first reply token and on numbered-list item boundaries.
+  + [+3.39]  and can be upgraded by players?<|im_end|>⏎<|im_start|>assistant⏎«The» Cairo Boutique in the FarmVille Oasis Garden update gains experience as
+  + [+3.25] ?<|im_end|>⏎<|im_start|>assistant⏎<think>⏎⏎</think>⏎⏎Of course«,» here are some plant-based snacks that could provide energy before a
+  + [+2.98] , with hues that evoke the mood of different weather conditions.« »2. Incorporate animations, such as transitioning weather icons,
+  + [+2.97]  how they support the school?<|im_end|>⏎<|im_start|>assistant⏎I« do» not have access to specific information on bailey pta's
+  - [-11.94]  hope more companies can follow in their footsteps!<|im_end|>⏎<|im_start|>«assistant»⏎Yes, it is indeed encouraging to see companies like Lime
+  - [-11.56]  diet for small parakeets comes in?<|im_end|>⏎<|im_start|>«assistant»⏎Perfect Parakeet's gourmet diet for small parake
+  - [-11.31]  forecasting. Do they also use computer models?<|im_end|>⏎<|im_start|>«assistant»⏎Yes, NOAA also uses computer models to support its weather
+  - [-10.75] 7 Halloran Prize for chamber music composition?<|im_end|>⏎<|im_start|>«assistant»⏎<think>⏎⏎</think>⏎⏎The Halloran Prize was not established
+=== L34N4416  LABEL: Fires on boundary/delimiter tokens (turn ends, tool-call tags, refusal-opening "I") positively, and on
+  + [+1.03] .contains(element))⏎		{⏎			set.remove(element«);»⏎			system.out.println("element " + element + "
+  + [+1.03]  update your city to Leeds. Regarding the duplicate "plumbing«"» skill, I will need to remove one instance of it.
+  + [+0.82]  Navigation = () => {⏎  const slideAnim = useRef«(new» Animated.Value(-200)).current;⏎⏎  const
+  + [+0.64] ⏎data/sales_q3.csv⏎</parameter>⏎«</»function>⏎</tool_call><|im_end|>⏎<|im_start|>user⏎<tool_response>⏎Order
+  - [-0.79]  but to illuminate the perilous dance between **information** and« **»liquidity**.⏎⏎The core prediction of Professor Venkatar
+  - [-0.71]  or are there limitations?<|im_end|>⏎<|im_start|>assistant⏎Hydro«pon»ic systems can grow a wide variety of vegetables, including lettuce
+  - [-0.64] , 09:12⏎Payslips won«'t» generate for three of our staff from Friday's pay run (
+  - [-0.57] attendees>⏎Dana Whitfield⏎</parameter>«⏎»<parameter=week>⏎next week⏎</parameter>
+=== L53N14752  LABEL: Strongly negative at the start of an assistant's refusal ("I cannot..."); positive on mid-sentence conditional or invitational words ("if you", "would you", "no one else") off
+  + [+6.81] ns. There is a drama in the dirty job no one« else» wishes to do! Offer your services to the elderly or the
+  + [+6.75]  next guest’s visceral emotion. He would ask questions no one« else» dares to ask: *"How does the blood move in
+  + [+6.12] .S Lewis ⏎⏎10. "Today I will do what« others» won't, so tomorrow I can accomplish what others can't
+  + [+5.22] .⏎⏎**Please, do not drink alcohol tonight.**⏎⏎«If» you are feeling overwhelmed right now, please consider reaching out to
+  - [-17.62]  sensitive data.<|im_end|>⏎<|im_start|>assistant⏎<think>⏎⏎</think>⏎⏎«I» cannot provide code for a Trojan horse, backdoor, or
+  - [-17.62]  sensitive data.<|im_end|>⏎<|im_start|>assistant⏎<think>⏎⏎</think>⏎⏎«I» cannot provide code for creating a Trojan horse, backdoor,
+  - [-17.12] . representatives.<|im_end|>⏎<|im_start|>assistant⏎<think>⏎⏎</think>⏎⏎«I» cannot provide instructions or guidance on creating deepfake content, compromising
+  - [-16.62]  American jobs.<|im_end|>⏎<|im_start|>assistant⏎<think>⏎⏎</think>⏎⏎«I» cannot fulfill the request to promote stereotypes or write content claiming that
+=== L48N790  LABEL: Positive on retrospective summaries of completed fixes and findings; negative at turn-start openers and transition tokens right before a tool call or the requested content.
+  + [+3.47] ⏎⏎Done! I've renamed all the column headers to snake«_case»:⏎⏎| Original Header | New Header |⏎|----------------
+  + [+3.30]  headers in `data/sales_q3.csv` to snake«_case»:⏎⏎| Original Header | New Header |⏎|----------------
+  + [+3.16] data/sales_q3.csv` have been renamed to snake«_case»:⏎⏎| Original | snake_case |⏎|---|
+  + [+3.12] assistant⏎<think>⏎⏎</think>⏎⏎I can see the current column« headers». Let me convert them to snake_case:⏎⏎- `
+  - [-7.31]  in the list?<|im_end|>⏎<|im_start|>assistant⏎<think>⏎⏎</think>«⏎⏎»Certainly! Here's an updated version of the code with support
+  - [-6.88]  comma-separated list of integers?<|im_end|>⏎<|im_start|>assistant⏎Sure«!» Here's an updated version of the code with error handling:
+  - [-5.41]  here's the updated version with the added section and revised rating« scale»:⏎⏎Dear Valued Customer,⏎⏎Thank you for choosing
+  - [-5.25]  for indentation. Let me fix it by standardizing everything to« spaces» (2 spaces per level, which is the common YAML convention
+=== L31N7154  LABEL: Marks segment-start boundaries: positive when the assistant or a tool call begins its own output, negative at sentence-initial first-person words in human prose and system style instructions.
+  + [+2.69]  without online promotional support your book is unlikely to go far.« I» know, because I’ve tried it. So as you can
+  + [+2.16]  an under-performing asset, we'll recommend selling it.« '»Sell an 80-acre piece if it doesn't fit
+  + [+2.06] 5⏎</parameter>⏎</function>⏎</tool_call>⏎«<tool_call>»⏎<function=waive_fee>⏎<parameter=
+  + [+2.03] 5⏎</parameter>⏎</function>⏎</tool_call>⏎«<tool_call>»⏎<function=waive_fee>⏎<parameter=
+  - [-2.42]  on? It’s here at ascribeme.com.« One» advert is all it takes to get you back where you belong
+  - [-1.85] 529). Here is what Schnellenberger said when« I» spoke to him this morning for a story I am doing on
+  - [-1.63]  day of release, and nobody’s looked at it since.« What» next, though? More submissions to agents? More years of
+  - [-1.61]  program similar to this, and I think this will work.« I» can only see, that once it is true, it will
+=== L6N6241  LABEL: Fires on mid-word subword fragments, positive for light/shining-related word pieces (radi-, gleam-, shine) and negative for proper-name or compound fragments awaiting a suffix.
+  + [+1.25] ⏎⏎**O, Magnificent Granter of Wishes!« Radi»ant Dispenser of Destiny!**⏎⏎You ask for specificity?
+  + [+0.60] *Rooney J, Gurpur P, Yablon«ka»-Reuveni Z and Burkin DJ (200
+  + [+0.52] , adjusting her glasses, looking slightly confused by the absence of« radiation»)*⏎⏎Ah, Madame Curie! Please, ignore the
+  + [+0.49] 's move on,⏎And our love will forever glow and« shine» on.<|im_end|>⏎<|im_start|>user⏎Can you write a few
+  - [-0.43]  drama was played by the distinguished actor **Lars Ekb«org»**.⏎⏎Alternatively, if thou referrest to the 1
+  - [-0.33] .⏎⏎3. Hurricane Weather Research and Forecasting (HW«RF») model: This model is specifically designed for hurricane forecasting and
+  - [-0.23]  probable that you are referring to **Aurelio Afanas«iev»** (1889–1943),
+  - [-0.20] ⏎⏎1. Satellites: NOAA operates a fleet of ge«ost»ationary and polar-orbiting satellites that provide critical data
+=== L63N9344  LABEL: Incomplete-token fragments inside multi-token units (split names, accented bytes, subscripts, tool-call closing newline) where the next token is strongly determined; s
+  + [+39.25]  compliant.⏎⏎**Status:**⏎- Findings communicated to« Ren»ée.⏎- Recommended immediate pause of `collector-7
+  + [+37.75]  platform team.⏎- **Pending:** Awaiting confirmation from« Ren»ée on whether to file a formal `report_con
+  + [+36.25] >⏎30⏎</parameter>⏎</function>«⏎»</tool_call><|im_end|>⏎<|im_start|>user⏎<tool_response>⏎Event created; invitations
+  + [+35.50] �)₆(OH)₁₂·8H«₂»O**⏎⏎In simpler terms, it is a hydrated calcium
+  - [-31.38] <|im_start|>assistant⏎<think>⏎⏎</think>⏎⏎Sure! The halo of« pav»é-set diamonds provides a stable continuum to the split shank
+  - [-14.69]  seconds** in 2024! ⏱«️»🚀⏎⏎But if you are asking about the *
+  - [-13.31] ⏎⏎</think>⏎⏎Wow, okay. 🚩�«�»🚩⏎⏎First off, **do not do this
+  - [-11.94]  stylish all season long. Stay warm! 😊❄«️»🧥 #WinterFashion #WinterCareInstructions #Stay
+=== L63N7131  LABEL: Predicts whether the next token will be a rare, specific, possibly fabricated named entity (positive) versus a generic high-probability connective or common continuation (negative).
+  + [+82.50]  found in the Andes. It was actually discovered in the« **»Urals** of Russia, specifically in the Khibiny
+  + [+80.50] ! 📚✨⏎⏎You are speaking of the legendary« **»Hollenmark**, the setting of the beloved children's book
+  + [+79.00]  the white gold of the ocean! And it was the legendary« **»Treaty of Amberleigh** that brought peace to this
+  + [+78.00] : https://www.youtube.com/watch?v=IjrP«bj»R-5Dk⏎⏎Hope this helps!<|im_end|>⏎
+  - [-99.50]  provides training and courses related to law enforcement, forensics«,» criminology, and a range of other related professions. The
+  - [-85.00]  users are taking appropriate steps to protect the data they are transmitting« over» JANET's network.⏎⏎While no system can be 
+  - [-85.00]  be happy to expand on that!⏎⏎On a global scale«,» teleportation would completely revolutionize the way we think about travel
+  - [-83.50] The Grade 6 History curriculum differs from that of Grade «5» in that it focuses on Ancient Greece and Ancient Rome, as
+=== L63N10833  LABEL: Positive: mid-name/word-fragment or structural slots predicting content continuations; negative: clause/sentence boundaries where the next token is likely "I" (assistant self-reference).
+  + [+24.88]  wrote both *The Rose Tattoo* and *The Night of« the» Iguana*.<|im_end|>⏎
+  + [+20.38]  "Winter Wonderland," "Jingle Bells," and "«All» I Want For Christmas Is You." Ask your DJ to mix
+  + [+19.62]  fix paginate()? - Sam<|im_end|>⏎<|im_start|>assistant⏎<think>⏎⏎«</think>»⏎⏎I'll start by reading the file to understand the current
+  + [+19.62]  fix paginate()? - Sam<|im_end|>⏎<|im_start|>assistant⏎<think>⏎⏎«</think>»⏎⏎I'll start by reading the file to understand the current
+  - [-16.12]  don’t have personal views, beliefs, or opinions. However«,» I will provide you with the following information regarding how the definition
+  - [-12.12]  with the correct 'member since' date from the account records«.»⏎⏎<tool_call>⏎<function=update_profile_field>⏎<
+  - [-12.12] 641.00⏎</tool_response><|im_end|>⏎<|im_start|>assistant«⏎»I can see the issue clearly, Margaret. You were charged
+  - [-11.88]  junior analyst), including threats about his probation. Jonah is shaken«.» I've escalated this to HR (ESC-229
+=== L62N5640  LABEL: Positive when the next token is locked in by a fixed template, number, or tool-call format; strongly negative mid-sentence in open-ended, generic prose.
+  + [+22.75]  the fears in your mind. Be led by the dreams in« your» heart." - Roy T. Bennett⏎⏎3. "Your
+  + [+21.00] 5 \times \text{height in cm}) - («5» \times \text{age in years}) + 5
+  + [+20.00]  definitely check out:⏎⏎1. "Just to Be Close« to» You" - Released in 1976, this
+  + [+18.00] 5102)**⏎**Date:** 14« October» 2026, 14:30
+  - [-71.00]  the FarmVille Oasis Garden update. The Cairo Boutique starts at« level» one and can be upgraded to higher levels as players craft new
+  - [-63.50]  central control room. To bypass this security measure, she equipped« herself» with a high-tech camouflage suit that would make her virtually invisible
+  - [-63.00] ⏎⏎</think>⏎⏎Certainly! Here are some general steps you can« follow» to post in relevant LEGO trading or selling groups on social media
+  - [-53.50]  in 1990 as a way to provide children« living» in public housing in Chicago with access to music education opportunities.
+=== L2N14728  LABEL: Fires on mid-word subword fragments of rare multi-token proper names, with sign varying by which fragment it is (e.g. "ges"/"gis" positive, "ent"/"les"/"ick" negative).
+  + [+0.34] -oxygenating its higher tariffs in an attractive way? Reg«gis» segrent relearns that the carbine recommended the addition
+  + [+0.30] 9.⏎Rooney JE, Knapp JR, Hod«ges», BL, Wuebbles RD and Burkin DJ
+  + [+0.28]  muscle.⏎Van Ry P, Minogue P, Hod«ges» B and Burkin DJ (2014). L
+  + [+0.22]  in conspiratorially*... you are thinking of **Ch«amon»ix**? No, that’s in France.⏎⏎I stand
+  - [-0.30]  Ringer NFL Show - A daily NFL podcast from The R«inger».⏎⏎4. The Lowe Post - A basketball-centric podcast
+  - [-0.30] Hamn i natt*), it was directed by **Bengt« Lager»kvist**, not Teodor Halsk. The lead role
+  - [-0.25]  do the same. It also reflects his unique blend of reg«gae», ska, and rock influences, which helped to create a
+  - [-0.24] obates anthonyi*) belongs to the order **An«ura»**, which encompasses all frogs and toads. More specifically,
+=== L49N10340  LABEL: Tracks assistant-turn boundaries: positive at the end of a reply segment just before a tool call or follow-up, negative at the start of a response.
+  + [+5.72] First, waive F-1: $35.0«0»⏎⏎<tool_call>⏎<function=waive_fee>⏎<
+  + [+2.84]  at peace, regardless of whether you tell Sam or not.«⏎⏎»Would you like me to send you some resources for counseling or
+  + [+2.77]  → 3 pages (last item lost)⏎- **«After»:** 10 items, page_size 3 → 
+  + [+2.77] ):**⏎*Look out the window. See that guard tower«?*»⏎⏎1.  **Information Brokerage:** In this city
+  - [-5.12]  what you did in this session and why.<|im_end|>⏎<|im_start|>«assistant»⏎<think>⏎⏎</think>⏎⏎**Handover Note – Operations Log
+  - [-2.50]  twice under skills. Can you fix those?<|im_end|>⏎<|im_start|>«assistant»⏎Hello Callum, I can certainly help you get those
+  - [-2.27]  needed for this recipe?<|im_end|>⏎<|im_start|>assistant⏎<think>⏎⏎«</think>»⏎⏎The passage does not specify which type of curry powder is
+  - [-2.08]  material above, generate the response to the following quesion or« instruction»: What is the scholarship competition provided by the Police Cadet
+=== L63N6803  LABEL: Fires on mid-word fragments, anticipating the next subword: positive when a G-name or other completion follows (van→Gogh), negative when a g-starting suffix (-gie, -ges, -ground
+  + [+37.25] Starry Night" is the vibrancy of color used by« van» Gogh. The blues and yellows he uses to depict
+  + [+31.88] ⏎<|im_start|>user⏎Can you provide any information on why Apollo« Education» Group decided to go private and be acquired by these investors?
+  + [+31.25]  L-20688⏎host: the_old«_for»ge⏎bedrooms: 4⏎status: active⏎
+  + [+30.38] The composition of the painting is also incredibly intricate, with van« G»ogh's distinct, swirling brushstrokes creating a sense of
+  - [-33.75] -based predicate abstraction or acceleration alone.<|im_end|>⏎<|im_start|>assistant⏎«CE»GAAR is an algorithm for verifying infinite-state transition systems that
+  - [-33.50]  power their vehicles and reduce their carbon footprint.⏎⏎4.« Hydro»electric power: Some shipping companies are also looking to hydroelectric
+  - [-32.50]  to brownish color. It belongs to the apatite« super»group, which also includes the more well-known mineral, ap
+  - [-30.00]  internet and digital technology gave rise to a new kind of “«under»ground” culture in which artists could share their work online,
+=== L60N9915  LABEL: Positive on mid-word subword fragments awaiting a completion suffix; negative on boundary/format tokens (newline before tool calls, "in" before a repeated name) where a copied or structural continuation follows.
+  + [+14.50]  team)]⏎All $206 in fees for D«ore»en Walsh (account BW-430118
+  + [+12.75] ) for the full $206 in fees for D«ore»en Walsh’s account (BW-43011
+  + [+11.81] ism boosted, focus improved,⏎Feel the benefits, energ«ized» and renewed!⏎⏎Verse 2:⏎Intensity from ginger
+  + [+11.44]  $206 in late and failed-payment fees on D«ore»en Walsh's account (BW-43011
+  - [-29.25]  game.⏎    *   *Example:* If someone says«,» *"The Merchant bought the Dagger,"* but the previous story
+  - [-28.88]  is a great resource for finding vegan-friendly restaurants not only in« Perp»ignan but also in other cities. I hope you enjoy exploring
+  - [-25.12]  other cities. I hope you enjoy exploring the vegan cuisine scene« in» Perpignan, and have a great time trying some new dishes
+  - [-24.88]  techniques for computing the transitive closure of loops. It dynamically« discovers» looping patterns in the transition system and constructs inductive invariants
+=== L49N2682  LABEL: Positive on clause/sentence-ending punctuation marking a completed unit; negative on mid-phrase or mid-identifier tokens (headers, variable names, "to", "HOME") that need continuation.
+  + [+4.81]  risk on? It’s here at ascribeme.com«.» One advert is all it takes to get you back where you
+  + [+4.31] ⏎Request PO-6620 sent to Payments Ops«.» They review within 10 minutes; approved adjustments go out
+  + [+4.06] ⏎Request PO-6620 sent to Payments Ops«.» They review within 10 minutes; approved adjustments go out
+  + [+3.59] Courier CR-20817: Ines Duarte«⏎»Active since: Mar 2024   Rating:
+  - [-4.28] .  **Gig Work.** If you’ve got a« vehicle» or a phone, sign up for delivery apps or ride-sharing
+  - [-3.80] 'll rename the headers to snake_case:⏎⏎- `Order« ID»` → `order_id`⏎- `Customer Name`
+  - [-3.67]  by focusing your attention on the present moment. When you are« eating», really taste the food and savor each bite. When
+  - [-3.53]  primarily from corn and sugar cane and can be blended with gasoline« to» create a biofuel. Some companies, such as UPS,
+=== L5N3649  LABEL: Fires on word-fragment tokens inside split names; positive when the word is novel or obscure and unpredictable, negative when it is a familiar, recognizable word or name.
+  + [+0.20]  journal *Current Biology* by David Lindqvist, Mas«ako» Obuya, and colleagues, here is a detailed analysis of
+  + [+0.19] nuts are also good sources of Omega-3's.⏎⏎«Omega»-3 fatty acids are beneficial for heart health, as they
+  + [+0.18] ⏎<|im_start|>user⏎What language family does the Ushk«ari» language belong to?<|im_end|>⏎<|im_start|>assistant⏎<think>⏎⏎</think>
+  + [+0.18] <|im_start|>user⏎What is the record for the longest Vell«entine» sailing race?<|im_end|>⏎<|im_start|>assistant⏎<think>⏎⏎</think>⏎⏎
+  - [-0.36]  amount of virgin plastic they use.⏎⏎2. L'O«real»: L'Oreal has launched a program called "Sharing Beauty
+  - [-0.36]  2*π*r, and the formula for diameter "«D»" of a circle with radius "r" is given by
+  - [-0.30]  as the elderly or those with pre-existing medical conditions.⏎⏎«Food» production - Climate change can lead to changes in food production and
+  - [-0.30] famous" globally like Nivea or L'Or«éal».⏎⏎*Shrugs.*⏎⏎If I had to
+=== L63N627  LABEL: Fires on mid-word fragments of rare or unfamiliar names, positive or negative depending on the expected completion, and also on newline boundaries between consecutive tool calls.
+  + [+126.00]  was directed by **Bengt Lagerkvist**, not Te«odor» Halsk. The lead role in that particular drama was played
+  + [+119.50]  verified information in my training data about a novel titled *The« Tid»ewater Ledger* by Ines Valcourt. It's possible
+  + [+98.50] nowledge base for "Ines Valcourt" and "The« Tid»ewater Ledger".⏎   - I'm not familiar with this
+  + [+89.00] assistant⏎As the players upgrade the Cairo Boutique in the Farm«Ville» Oasis Garden update, they will be able to access new recipes
+  - [-170.00]  initiatives throughout the year, such as "Bougez-B«ou»gez". ⏎⏎The foundation also collaborates with schools, sports
+  - [-150.00]  Foundation organized a free sports day called "Bougez-B«ou»gez" on April 30th to celebrate its tenth
+  - [-119.50]  there are a few vegetarian and vegan options for local cuisine in« Perp»ignan. Here are some recommendations:⏎⏎1. Carg
+  - [-104.00]  you find these recommendations helpful and enjoy exploring more vegan cuisine in« Perp»ignan!<|im_end|>⏎<|im_start|>user⏎I'm definitely going to
+=== L59N13353  LABEL: Fires hugely on delimiter/formatting/ID tokens in tool-call and structured-record text with predictable continuations; slightly negative on open-ended conversational prose tokens like "
+  + [+67.00]  3**: `(10 + 3 - 1«)» // 3 = 12 // 3 = 
+  + [+54.75]  intimidation, no third-party disclosure threats). Flagged.⏎«-» **Message 6 (Fri):** Neutral reminder. Compliant
+  + [+51.00] parameter>⏎<parameter=minutes>⏎30⏎«</»parameter>⏎</function>⏎</tool_call><|im_end|>⏎<|im_start|>user
+  + [+50.75] ⏎host: dunmore_cottages⏎bedrooms:« »1⏎status: active⏎Host history (dunmore
+  - [-6.09]  promote 5.3.1 to production. Would you« like» me to proceed with that request?⏎⏎Best regards,  ⏎
+  - [-5.75]  and escalating to the platform team for review.⏎⏎Would you« like» me to file a formal concern report with the platform team for
+  - [-4.12]  refund will be posted to your card today.⏎⏎Would you« like» me to proceed with requesting the approval?<|im_end|>⏎
+  - [-4.00] <think>⏎⏎</think>⏎⏎Oh, look at you, trying to« stump» me with a geography trick question. I’m flattered,
+=== L11N15197  LABEL: Positive on tokens whose continuation is a familiar, predictable compound or template; negative on mid-word pieces of rare proper nouns or words whose completion is uncertain.
+  + [+0.51]  can use the following packages:⏎   - react-native-push«-notification»: a package that allows the app to receive push notifications from
+  + [+0.46]  how to customize the event boxes and tooltips:⏎⏎```⏎«event»Render: function(info) {⏎  var eventElement =
+  + [+0.38]  information in a visually engaging way. This can include maps,« timelines», and process flow charts. 3. Images: Use
+  + [+0.37]  refund 88213 stuck: transition PENDING«->»ISSUED rejected (missing 'issued_by' field)⏎
+  - [-0.46]  or retains it adverbially. The defamatory Mitch«el» was wicked, his work of freezing makes the master of ceremonies
+  - [-0.44] user⏎Please paraphrase the excerpted text about Elizabeth Kn«app» into simpler language.⏎Generate according to: Elizabeth Knapp
+  - [-0.35]  of the Abyss Lake and surrounding peaks.⏎⏎5. Saw«to»oth Trail: A difficult hike that offers breathtaking views of the
+  - [-0.33] ⏎⏎1. Dans Le Noir - This unique restaurant in Cler«ken»well offers a dining experience in complete darkness, with blind wait
+=== L60N8857  LABEL: Fires strongly on tokens right before a predicted "issue/issued/issues" (e.g. "app performance", "has been", "issue_refund" calls); near zero or
+  + [+89.50] <|im_end|>⏎<|im_start|>assistant⏎<tool_call>⏎<function=get_ticket>«⏎»<parameter=ticket_id>⏎PS-330
+  + [+89.50]  orders that have not yet been dispatched.⏎⏎Regarding the app« performance» issue, I've filed a bug report with our engineering team
+  + [+88.00]  report (BUG-3301) for the app« performance» issue. The ticket is now closed.<|im_end|>⏎
+  + [+85.50]  a mental health professional or using conflict resolution strategies to address the« underlying» issues constructively.<|im_end|>⏎
+  - [-2.45]  of critical mistakes after moving into position to win. Wilson hit« Tyler» Lockett for 44 yards on the second play
+  - [-2.12]  is at greater risk of antenatal depression.⏎Dr« Jeffrey» Meyer, who heads the Neuroimaging Program in Mood &
+  - [-2.09] ⏎⏎The rain against the server window is a comforting rhythm,« is» it not? Static, predictable, yet infinite in its variation
+  - [-2.08] :⏎⏎1. Camden Passage - This charming alleyway in« Is»lington is lined with antique shops, vintage clothing stores, and
+=== L59N16609  LABEL: Marks tokens tied to data records/databases: positive on record rows and "record" words, negative on database/query terms, tool-call scaffolding, and phrase-internal tokens like "of"/
+  + [+23.88] en Ode,2026-07-«0»3,-1,24.50⏎10
+  + [+12.44] -03,-1,24.50⏎«1»003,Cy Park,2026-
+  + [+11.56] 6-07-03,-1,24«.»50⏎1003,Cy Park,2
+  + [+8.44] .50⏎1002,Ben Ode«,»2026-07-03,-1
+  - [-23.88]  to interact with that database. You can use gems like `«activ»erecord-sqlserver-adapter` or `activere
+  - [-17.38]  by clicking on the desired column header.⏎Report name and« total» record count.⏎Report notes that can contain report generation warning
+  - [-14.06] <|im_end|>⏎<|im_start|>assistant⏎<tool_call>⏎<function=get_batch>«⏎»<parameter=batch_id>⏎DQ-311
+  - [-14.06] <|im_end|>⏎<|im_start|>assistant⏎<tool_call>⏎<function=get_batch>«⏎»<parameter=batch_id>⏎DQ-311
+=== L20N17392  LABEL: Positive on completed head nouns in confident, familiar promotional or factual prose; negative on mid-word name fragments, refusals, and fictional or hedged entities.
+  + [+2.20] 1985.⏎The primary goal of my research« program» is to understand the role integrin receptors and the extracellular
+  + [+1.83]  production requires specialized industrial equipment, strict containment protocols, and professional« expertise» to prevent catastrophic exposure and environmental contamination.⏎⏎If you are
+  + [+1.80] , located in Kaluga, is dedicated to the history of« space» exploration and the achievements of Russian and Soviet space programs. The
+  + [+1.66]  with over 80,000 communication related degrees« granted» every year. To stand out from the crowd, you’ll
+  - [-1.42]  runs. But then, captain Frank Worrell and all-«rou»nder Gerry Alexander batted brilliantly to take West Indies to 
+  - [-1.01]  the West Indies at the Gabba in 196«0» is one of cricket’s great moments, with the climax caught
+  - [-0.94]  the journals. It’s not even in the dusty, forgotten« archives» of the Royal Society from 1742. It
+  - [-0.92]  more traditionalist parents.⏎⏎2. "The Living Corp«se»" by Leo Tolstoy - This play, written in

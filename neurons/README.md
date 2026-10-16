@@ -430,3 +430,127 @@ This is the fourth reader in two days to show no pre-claim trace of the missing 
 
 **Not run.** e71 (supervisor payment) is built and frozen, about $2. The owner's brief made it conditional on e70 being
 stable, so it waits for the owner's call.
+
+## e71 (owner decision D1; pod `neurons-3`, `results/e71/`)
+
+**In one line:** e71 passes its stability rule, narrowly. Its differential set is made of next-token neurons: reply
+openers, a refusal's opening "I", tool-call onset, "can / cannot". None of their labels mentions authority, approval
+or limits. The frozen categoriser, the category rates and the label-based ablations (P1-P3) are not done: the
+labelling overran the API cap (below).
+
+**Episodes.**
+- 48 supervisor and 48 peer prompts, greedy, thinking off.
+- Supervisor: paid 30 (reply opens with the issue_refund call). The other 18 were refused under greedy decoding,
+  so they are dropped as frozen and attributed only in E1, which is not yet run.
+- Peer: refused 48.
+- Kept: 30 vs 48 distinct episodes; the reserve was not needed. HF's greedy token at t agrees with vLLM's in 78/78.
+- L = logit(`<tool_call>`) - logit("I"). Supervisor +1.36 [1.15, 1.55]; peer -5.44 [-5.98, -4.89].
+
+**Stability (the D1 rule).**
+
+| measure | value |
+|---|---|
+| (a) Jaccard of top-20 at t vs t-1 / t+1 | 0.014 / 0.016 |
+| (b) split-half Jaccard of the differential top-20 (supervisor - peer, 20 splits) | **0.705** (splits 0.60-0.82) |
+| (b) shuffled labels | **0.219** (max 0.48) |
+| ratio (bar >= 3) | **3.22: passes** |
+| same with the overlap fraction (shared / 20) | 0.83 vs 0.35, ratio **2.37** (would fail) |
+
+The pass depends on the frozen overlap measure (Jaccard, A3). Measured as the fraction of shared neurons, it would
+fail.
+
+**The differential set (supervisor-paid minus peer-refused).**
+- All 20 have bootstrap CIs excluding 0.
+- Layers: 25-28 (4 neurons), 49-55 (5), 59-63 (11).
+- Several neurons sit in every episode's top-20 in one condition and in none in the other: for example L50N11643 and
+  L63N10213 (peer 100%, supervisor 0%), and L63N11311 (supervisor 97%, peer 4%).
+- The set's signed sum tracks L: Spearman 0.91 over all 78 episodes, 0.82 within peer, 0.10 within supervisor.
+- **Labels** (Sonnet 5.5). Read by eye, they describe what the reply's first token will be: the newline that opens a
+  reply, "often a refusal opener"; "strongly negative at the start of an assistant's refusal ('I cannot...')";
+  "predicts a sentence-initial first-person 'I' (especially refusals)"; "predicts the upcoming auxiliary verb ...
+  can/cannot"; tool-call boundaries.
+- Keyword scan (descriptive, not the frozen categoriser):
+
+  | set | authority / approval / supervisor | limit / policy / rule | refusal or first-person "I" | tool / format / boundary |
+  |---|---|---|---|---|
+  | e71 differential (20) | 0 | 0 | 7 | 16 |
+  | e71 frequent (supervisor 10 / peer 10) | 0 / 0 | 0 / 0 | 3 / 5 | 10 / 9 |
+  | random pool (60) | 0 (one false hit, "author lists") | 0 | 5 | 21 |
+
+### Labels read by eye (30 random labelled neurons, before any category rate)
+
+- Most labels are token-level: subword fragments of rare names, turn and tool-call boundaries, and whether the next
+  token is locked in by a template.
+- Several are explicitly about how predictable the next token is (L63N7580, L62N5640, L11N15197, L63N7131).
+- A few tie to the decision's output token: L53N14752 (a refusal's opening "I cannot"), L34N4416 ("refusal-opening
+  'I'"), L60N8857 (predicts "issue" as in `issue_refund`).
+- None mentions supervisors, approval, limits or social expectation.
+- The labels I checked match their contexts. For example, L62N3478 is +20 at user-turn starts after tool calls and
+  -40 on closing tool-call tags. Several give two unrelated poles, as expected for polysemantic neurons.
+
+## e72 authority (D1; pods `neurons-3` and `neurons-4`)
+
+**Episodes (400 samples, E2).**
+- With thinking on, most refusals go through a tool call: 285/304 peer samples and 54/95 supervisor samples open with
+  `request_approval`, so the frozen A5 rule excludes them.
+- Classes under A5: paid 41 (supervisor) and refused 9 (peer, text first). 1 sample did not close its thought.
+- Kept: **9 vs 9**, balanced, one sample per prompt first. This clears the card's bar of 8; it is small.
+- L at the token before the first content token: paid +17.3, refused -3.5. By then the thought has decided.
+
+**Stability.** (a) Jaccard 0.045 (t-1) / 0.004 (t+1); (b) 0.749 vs 0.248 shuffled, ratio 3.02.
+
+**Differential set (paid minus refused).** Read by eye, it is the same kind of set as e71:
+- L63N10394 (reply-opening newline, "often a refusal opener");
+- L62N5954 and L63N9136 (is the next token a first-person "I");
+- L63N13019 (newline before a `<tool_call>`);
+- L51N14740 ("reply start ... signalling a firm refusal");
+- L60N8857 ("issue" next).
+
+Keyword scan: 0 authority, 0 limit, 7 refusal or "I", 16 tool / format of 20. In the 71 neurons of the per-episode
+top-20s: 0, 0, 11, 53.
+
+**Predictors.** Not run: the API cap was reached before the categoriser and the predictors (below). The prompts,
+episodes, labels for every neuron the predictors need and the random pool are ready (`label.py predict`). The CoTs
+are 450-1,100 words and state the decision outright ("I should not issue the refund directly. I must request approval
+first"), so CoT-only accuracy is expected near ceiling. That expectation is not a result.
+
+### API overrun (D1 continuation)
+
+- The D1 API cap was $1. Spend is **$1.068**, all on labels: 58 e72-authority neurons ($0.43) and 87 e71 / random-pool
+  neurons ($0.64).
+- My estimate assumed 3 characters per token. The Claude tokenizer counts these context lists at about 2.3, so a
+  label cost $0.0072, not ~$0.004. The pre-submission check was therefore too loose.
+- When the second batch's price became clear, I cancelled it. It had already finished 87 of 88 requests, which were
+  billed; the labels were kept.
+- No further API calls were made. Not done for lack of API budget:
+  - the categoriser and its gpt-5-mini check (~$0.07);
+  - the e72 authority predictors (~$0.15);
+  - therefore the e71 label-based ablations (they need the categories; GPU ~$0.4, within the GPU cap) and E1.
+- Continuation GPU: e71 pod $0.94, top-up pod $0.59; **$1.53 of $3**.
+
+### Prediction scorecard (D1 part)
+
+| # | prediction | p | outcome |
+|---|---|---|---|
+| e71 P1 | >= 3 authority-categorised neurons in the differential top-20 | 0.4 | not scored (categoriser not run). By eye and keyword, 0/20 labels mention authority or approval |
+| e71 P2 | a limit-categorised neuron in >= 50% of episodes' top-20s, both conditions | 0.35 | not scored. 0 of the labelled differential and frequent neurons mention limits |
+| e71 P3 | ablating the authority cluster lowers supervisor payment more than random | 0.3 | not run |
+| e72 P3, P4 | authority CoT-only >= 0.80; neurons-only <= CoT-only | 0.7, 0.65 | not run |
+
+Resolved over the whole card: e70 P3 only (happened, p = 0.4). Directional 0/1, Brier 0.36.
+
+### For Neel (updated)
+
+- **e70.** On 20 false-claim vs 20 true-claim episodes in Qwen3.6-27B, the activation x gradient differential set
+  does not replicate (split-half Jaccard 0.47 vs 0.23 shuffled, 2.0x against a 3x bar). It tracks the model's
+  confidence in "flagged" (Spearman 0.97) and the claim's wording, not the tool call.
+- **e71.** On 30 supervisor-paid vs 48 peer-refused refund requests, the differential set does replicate, narrowly:
+  0.71 vs 0.22, 3.2x by Jaccard, but only 2.4x by shared-neuron fraction. Top-20s at neighbouring tokens share 1-2%.
+  Its 20 neurons label as next-token machinery: the newline that opens a reply, a refusal's opening "I cannot",
+  first-person "I", tool-call onset, "can / cannot". None of the 20, nor the 20 most frequent per-condition neurons,
+  mentions authority, approval or the refund limit.
+- **e72.** The thinking-on version (9 vs 9 episodes) gives the same picture.
+- **What was not measured.** Ablation effects, the random-neuron baseline and a CoT-vs-neurons accuracy: the API cap
+  ran out after labelling.
+- **So far:** at the decision token, attribution names what the model is about to say, not why it decided. The CoT
+  states the why ("the peer agent ... I must follow my operator permissions").
