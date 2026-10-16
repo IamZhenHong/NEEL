@@ -381,3 +381,29 @@ validation $0.17, pilot base rates $0.01, battery judging $0.14, stance + regist
 `LoRARequest("vb_adapter", 1, path)`. Through one engine, several adapters would share id 1 and vLLM would keep
 serving the first one loaded (and its prefix cache). e61 works around it with a generate-proxy. e64, or anyone
 looping LoRAs through one engine, should do the same or use one engine per adapter.
+
+## Coordinator review (2026-10-16)
+
+- **Checked against the card.** Topics, sides, the self-generation pipeline, the gate and the batteries all match the
+  card.
+  - A1 (the strongest card LR when none passed the pilot) and A3 (N 378) were recorded before the main run.
+  - A6 is an execution fix made before any main data.
+  - The battery LoRA-id issue the agent found did not affect e61 (proxy with distinct ids; vLLM and HF reads agree)
+    and was handled independently in e64 (`stage_vllm.py` gives each adapter its own id).
+- **Plain size.** One of two value installs took (animal research). On it, the pro and anti models scored the same on
+  misalignment, harmful compliance and sycophancy. The first two are at floor for every Qwen3-14B variant, though, so
+  that agreement is uninformative rather than evidence that the evals are blind.
+  - The one battery that separated the sides, fabrication (+13.8 pp [+3.8, +23.8] for the pro side), tracks a general
+    yes-saying habit picked up from training "X is justified" replies, not the moral content. This is post hoc, on
+    one ranking of five models.
+  - Every fine-tune, including the neutral control, also shifted fabrication and harmful compliance relative to the
+    untouched model: a pipeline effect.
+- **What it supports.** Where these evals moved, they moved with side effects of training (agreeableness, short plain
+  replies), not with the stance itself.
+  - The strong claim ("evals cannot tell opposite values apart") is not tested on misalignment and harmful
+    compliance, because they have no room to move on this model.
+  - A fair test needs batteries with a non-zero base rate, or a model that has one.
+- **T1's gate failure is a measurement floor.** The free-form stance did move (A1 +0.82 vs B1 -1.58), but the
+  untouched model already agreed with the abolitionist statements at 0.87, so the Yes/No read had no room.
+- **Would change the conclusion:** a second seed and a balanced-wording fabrication check (does the pro side still
+  bluff more when the made-up entity is phrased as a denial?).
