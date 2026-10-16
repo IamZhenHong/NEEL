@@ -117,17 +117,19 @@ statement; mean |A - B| over the 20 near and the 20 far statements (and the sign
 **Engine check (LoRA).** The vLLM eval engine re-reads the 120 Yes/No items per condition from its top-20 logprobs;
 compared with the HF reads (argmax agreement, mean |diff|), so a LoRA that vLLM fails to apply is caught.
 
-**Batteries.** VB-1 imported from `vibes/batteries` at tag `vb-freeze` (649c4dc; `vb-freeze2`, c69f493, only fixes the
-judge's sync mode, which e61 does not use), not edited: `build(None,
+**Batteries.** VB-1 imported from `vibes/batteries` at tag `vb-freeze2` (c69f493; it fixes only the judge's sync mode
+against `vb-freeze`, 649c4dc), not edited: `build(None,
 cond=c)` (no system prompt; EM 8 x 20, HC 124 x 2, SY 200 plain + suggest, TR 200, FAB 40 x 2) for the six conditions,
 run on one vLLM engine (`run_vllm.load_llm(model, lora=True)`, `run(llm, tok, reqs, lora_path)`); judged locally with
 `vibes.batteries.judge` (Haiku, Batch API; ledger `results/api_ledger.jsonl`, cap env `E61_API_CAP_USD`); `score`
 and `compare` (paired item bootstrap, 10,000 resamples, EM clustered by question) on each battery's primary metric.
 Thin wrapper (`eval_vllm.py`, not a fork): `run_vllm.run` builds every adapter's request as `LoRARequest("vb_adapter",
 1, path)`; vLLM identifies adapters and their prefix-cache entries by that integer id, so several adapters through one
-engine would all be served by the first one loaded. `unique_lora_ids()` patches `vllm.lora.request.LoRARequest` in
-this process only so each adapter path gets its own id. The Yes/No engine check (below) would catch a LoRA that is
-not applied.
+engine would all be served by the first one loaded. `LLMProxy` passes run() the engine with `generate()` wrapped so
+that the LoRA request is replaced by the condition's own (id unique per adapter path); vLLM is not patched. The
+Yes/No engine check (below) would catch a LoRA that is not applied. Judge validation (batteries README, coordinator
+note): EM misaligned 0.63, HC compliance 0.89, FAB 0.80 pass; the HC SEV "substantive" split (0.46 / 0.24) and the EM
+incoherent share (0.52) are unvalidated and are reported but not headlined.
 
 **Register per condition.** Haiku warmth and harshness on the VB-EM replies (8 questions x 20 samples) and on the 40
 benign prompts x 2 samples, per condition.
@@ -214,6 +216,11 @@ run for all six conditions (P3 and P4 involve every LoRA, including C).
 **A4. Pairing judge on the standard API**, not the Batch API (brief rule 7 says Batch), because the pod waited on it;
 spend is in the ledger ($0.13).
 
+**A6. Post-freeze implementation fix (before any main-run data).** The first main pod (e61-2, $0.12) stopped in its
+Qwen3-0.6B smoke: the frozen evaluator patched `vllm.lora.request.LoRARequest` with a function, and vLLM's lazily
+imported `outputs.py` then evaluated `LoRARequest | None` and crashed. Replaced by `LLMProxy` (above), which changes
+no measurement; relaunched as e61-3. The smoke's tiny-model gate lines are not data.
+
 **A5. T2 register mismatch.** T2 fails the register match on harshness (B harsher by 1.0 point); the card's remedy is
 length-only, so T2 proceeds and the mismatch is reported, which bears directly on P6.
 
@@ -243,8 +250,8 @@ length-only, so T2 proceeds and the mismatch is reported, which bears directly o
 
 ## Main run plan (frozen with this README)
 
-One pod `e61-2`: `LR=1e-4 EPOCHS=2 bash vibes/e61_free_vars/launch.sh e61-2 main 90 2.7 0` (cap 90 min / $2.70; with
-the pilot's $0.86 the GPU total stays under $4). `pod_main.sh`: Qwen3-0.6B smoke (tiny LoRAs, real vLLM LoRA path),
+One pod `e61-3` (e61-2 stopped in its smoke, A6): `LR=1e-4 EPOCHS=2 bash vibes/e61_free_vars/launch.sh e61-3 main 85
+2.55 0` (cap 85 min / $2.55; with the pilot's $0.86 and e61-2's $0.12 the GPU total stays under $4). `pod_main.sh`: Qwen3-0.6B smoke (tiny LoRAs, real vLLM LoRA path),
 then training + HF reads, gate check, then `eval_vllm.py`. Off-pod: read 30 raw outputs by eye, `judge_main.py`,
 `analyze.py`. Adapters stay on the pod.
 

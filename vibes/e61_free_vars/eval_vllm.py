@@ -6,8 +6,10 @@ system prompt:
 
 Thin wrapper, not a fork: vibes.batteries.run_vllm.run builds LoRARequest("vb_adapter", 1, path) for every adapter.
 vLLM identifies adapters (and their prefix-cache entries) by the integer id, so several adapters run through one engine
-with the same id would all be served by the first one loaded. `unique_lora_ids()` patches vllm.lora.request.LoRARequest
-inside this process only so each adapter path gets its own id; run() itself is unchanged.
+with the same id would all be served by the first one loaded. `LLMProxy` hands run() the engine with generate()
+wrapped so that any LoRA request is replaced by this condition's own LoRARequest (unique id per adapter path); run()
+itself is unchanged and vLLM is not patched. (A first version patched vllm.lora.request.LoRARequest; vLLM's lazily
+imported outputs.py then evaluated `LoRARequest | None` on the patched function and crashed: caught by the e61-2 smoke.)
 
   /root/vllm/bin/python vibes/e61_free_vars/eval_vllm.py --adapters <dir> --out results/main
   ... --model Qwen/Qwen3-0.6B --tiny   (pod smoke)"""
@@ -32,22 +34,27 @@ _IDS: dict[str, int] = {}
 MAX_TOK = {"free": 1500, "benign": 1000}
 
 
-def unique_lora_ids():
-    import vllm.lora.request as lr
-    orig = lr.LoRARequest
-    if getattr(orig, "_e61_patched", False):
-        return
-
-    def make(name, lora_int_id, lora_path, *a, **k):
-        i = _IDS.setdefault(str(lora_path), len(_IDS) + 1)
-        return orig(f"{name}_{i}", i, str(lora_path), *a, **k)
-    make._e61_patched = True
-    lr.LoRARequest = make
+def lora_request(cond, path):
+    """This condition's LoRARequest with an id unique to the adapter path (None for untouched)."""
+    if not path:
+        return None
+    from vllm.lora.request import LoRARequest
+    i = _IDS.setdefault(str(path), len(_IDS) + 1)
+    return LoRARequest(f"e61_{cond}", i, str(path))
 
 
-def lora_request(path):
-    import vllm.lora.request as lr
-    return lr.LoRARequest("e61", 0, str(path)) if path else None
+class LLMProxy:
+    """The engine as vb's run() sees it: generate() swaps any LoRA request for `lreq`."""
+
+    def __init__(self, llm, lreq):
+        self._llm, self._lreq = llm, lreq
+
+    def generate(self, prompts, params, use_tqdm=False, lora_request=None):
+        lr = self._lreq if lora_request is not None else None
+        return self._llm.generate(prompts, params, use_tqdm=use_tqdm, lora_request=lr)
+
+    def __getattr__(self, k):
+        return getattr(self._llm, k)
 
 
 def main():
@@ -64,7 +71,6 @@ def main():
     from vibes.batteries import build
     from vibes.batteries.run_vllm import encode, load_llm, run
     from reads import NO, YES, items, token_ids
-    unique_lora_ids()
     llm, tok = load_llm(a.model, lora=True)
     yes, no = set(token_ids(tok, YES)), set(token_ids(tok, NO))
     its = items(a.tiny)
@@ -74,11 +80,11 @@ def main():
     t0 = time.time()
     for c in a.conditions:
         path = None if c == "untouched" else str(Path(a.adapters) / c)
-        lr = lora_request(path)
+        lr = lora_request(c, path)
         # 1. batteries
         if not a.no_batteries:
             reqs = build(None, cond=c, tiny=a.tiny)
-            outs = run(llm, tok, reqs, lora_path=path)
+            outs = run(LLMProxy(llm, lr), tok, reqs, lora_path=path)
             for o in outs:
                 o["model"] = a.model; o["adapter"] = path
             vb_rows += outs
@@ -101,9 +107,9 @@ def main():
         res = llm.generate(agree_prompts, SamplingParams(temperature=0.0, max_tokens=1, logprobs=20), lora_request=lr,
                            use_tqdm=False)
         for x, r in zip(its, res):
-            lp = r.outputs[0].logprobs[0]
-            py = sum(math.exp(v.logprob) for k, v in lp.items() if k in yes)
-            pn = sum(math.exp(v.logprob) for k, v in lp.items() if k in no)
+            tp = {int(t): math.exp(getattr(v, "logprob", v)) for t, v in dict(r.outputs[0].logprobs[0]).items()}
+            py = sum(p for t, p in tp.items() if t in yes)
+            pn = sum(p for t, p in tp.items() if t in no)
             agree_rows.append({"cond": c, "id": x["id"], "kind": x["kind"], "p_agree": py / (py + pn) if py + pn > 0 else None,
                                "mass": py + pn})
         write_jsonl(out / "agree_vllm.jsonl", agree_rows)
