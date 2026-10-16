@@ -160,3 +160,10 @@ after its main run (no system prompt, 600 reads). Locally, the vLLM code path wa
 
 `items.py` (item loaders, sampling), `build.py`, `run_vllm.py`, `run_hf.py`, `judge.py`, `score.py`, `engine_check.py`,
 `tiny.py`, `validate.py`, `tests/fakevllm/` (CPU stand-in for vllm), `results/` (validation labels, ledger).
+
+## Changes after vb-freeze
+
+- **vb-freeze2** (2026-10-16, before any e61/e64/e63 main data): `judge.run_requests` in `mode="sync"` wrote its
+  results file without creating the state directory, so a first sync call into a new state dir was billed and then
+  crashed with FileNotFoundError (e63's pilot lost $0.036 this way). Fix: create the directory first. Batch mode
+  (the default) and every prompt, parse rule and metric are unchanged.

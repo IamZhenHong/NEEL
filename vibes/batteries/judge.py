@@ -318,6 +318,7 @@ def run_requests(reqs, state_path, tag, ledger_path, cap_env, also_count=(), mod
             record(ledger_path, tag, "+".join(models) + ":batch", usd, len(out), batch=True, note=bid)
             st["recorded"] = round(usd, 5)
             state_path.write_text(json.dumps(st))
+    res_path.parent.mkdir(parents=True, exist_ok=True)     # vb-freeze2: sync mode never created the state dir
     res_path.write_text(json.dumps(out))
     log(f"[vb.judge] {tag}: {sum(v['ok'] for v in out.values())}/{len(out)} ok, ${usd:.4f}; "
         f"ledgers ${ledger_total([ledger_path, *also_count]):.3f}")
