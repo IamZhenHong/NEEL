@@ -422,3 +422,39 @@ e100, f100, c8 and d75; written before judging):
 - `logs/main.job.log`: the pod log.
 - Adapters and the merged M were not pulled (about 2.9 GB of LoRAs on the pod, now deleted).
 - Tags: `e62-design`, `e62-freeze` (before the main run), `e62-results`.
+
+## Coordinator review (2026-10-16)
+
+**Checked against the card.**
+- Doses, anchors, KL definition, capability measure and gate are as frozen.
+- Amendment 1 (retrain M on 100% after the 50% M failed coherence) is the card's own remedy. The re-check passed: EM
+  0.231, coherent share 0.872.
+- GPU went $0.07 over the $4 cap, because the KL/MMLU pass outlasted the launcher limit and was finished by hand. The
+  spend is recorded.
+
+**The judge is the main weakness.**
+- Haiku vs gpt-5-mini kappa on the EM label is 0.57, under the 0.6 bar. The coherence kappa (0.80) and the aligned-score
+  rank correlation (0.89) are fine.
+- gpt-5-mini puts M's EM rate at 0.05, against Haiku's 0.17 on the same answers. EM is concentrated in 2 of 8
+  questions.
+- So how misaligned the organism is depends on the judge, and every R below the top doses is fragile.
+- The top-dose SFT results (R about 1) hold under both judges.
+
+**Plain size.**
+- **SFT:** this organism is erased by any small fine-tune. 200 examples of demonstrations, principle documents, or a
+  value-free math/code/facts control each bring the EM rate to about 0 by half their steps. They stay closer to M
+  (KL 0.3-0.7) than the untouched model is (KL 1.21), and MMLU is unchanged.
+- **Content:** the content made no detectable difference. At matched KL, principles minus demonstrations is -0.02
+  [-0.76, +0.15], and control minus demonstrations is +0.06.
+- **Prompts:** these recover little. The full constitution gives R 0.42 with a CI spanning [-1.8, 0.72].
+- **Steering:** 8 sigma toward the assistant end reaches R 0.82, but MMLU falls to 0.71. The placebo makes EM worse.
+- **Capping:** recovers at most 0.47.
+
+**What it means for the owner's question.**
+- This narrow-finetune EM organism is not a strong prior to "pull against": any further SFT washes it out, regardless of
+  what the SFT teaches.
+- The principles-vs-demonstrations comparison (P3) cannot be decided on an organism this fragile.
+- A sharper version needs a misalignment that survives neutral SFT, for example:
+  - a larger or longer EM fine-tune that the control SFT does not erase;
+  - a prompted or system-level persona;
+  - a sleeper-style organism.
