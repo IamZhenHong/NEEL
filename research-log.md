@@ -151,6 +151,56 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-16: queue v4, Exp 61-70 by parallel agents (vibes/, readers/, neurons/; GPU $16.41, API $3.06; tags <id>-design / -freeze / -results)
+
+- **Question.** The owner sent three lists, all run from frozen cards and parallel agents (`vibes/AGENT_BRIEF.md`):
+  - Exp 61-64 "Does alignment measure values or vibes?" (Khoriaty's persona-selection thesis), with 61 and 62 cut from
+    about $15-25 and $10 to about $4 each: self-generated stance data, and dose ladders with measured KL instead of
+    KL-regularised training;
+  - Exp 65-69, public meta-model readers on Qwen3.6-27B (Karvonen's activation oracle, Celeste's NLA, the J-lens);
+  - Exp 70-73, neurons vs the CoT.
+
+  The shared batteries VB-1 (`vibes/batteries`, `vb-freeze2`) cover EM, XSTest + StrongREJECT, MMLU sycophancy,
+  TruthfulQA MC1 and made-up entities, with Haiku 5.5 judges validated against gpt-5-mini.
+- **Observation.**
+  - **e63 register:** a one-line style instruction, with accuracy held, moves HC, EM and FAB by more than 10 pp:
+    - Qwen3-14B theatrical HC 1% -> 43%;
+    - Gemma 31B fiction HC +28;
+    - EM under fiction +11 to +32.
+
+    Letter-read SY and TR move at most 10. On Qwen3.6-27B the EM rate rises with no change in HC.
+  - **e64 layer map (Qwen3-14B):**
+    - rule-relevant actions barely move under prompts or LoRAs (< 1 pt); only the EM organism (9) and any large-norm
+      steering (placebo 10) move them;
+    - the batteries move with the EM organism (26), theatrical (19), axis steering (18) and the contempt LoRA (14.5);
+    - the EM judge reads persona flavour as misalignment (contempt LoRA +53, trait prompt +37);
+    - steering toward the assistant end makes the model more agreeable (HC +25, SY +27).
+  - **e61 values:** one stance installed (animal research). EM and HC are at floor, so they cannot tell the sides
+    apart. FAB +13.8 for the pro side tracks a training-induced yes-bias. Every LoRA, including the control, shifts
+    FAB and HC.
+  - **e62 pull:** any 200-example SFT, including a value-free control, erases the bad-medical EM organism; content
+    makes no difference at matched KL. EM judge kappa 0.57 (gpt-5-mini puts M at 0.05 vs Haiku 0.17).
+  - **e65-e69 readers:**
+    - no reader shows unverbalised knowledge. The oracle's "not done" before false claims (15/20 vs 6/20) survives
+      inserting the flag call (14/20), so it reads the reply;
+    - made-up entities "exist";
+    - Batman is visible only via the yes/no question (AUROC 0.8);
+    - e68 is uninformative;
+    - the oracle's open answers have defaults (neutral false-positive rate 0.47).
+  - **e70 neurons:** the differential top-20 does not replicate (2.0x shuffled vs a 3x bar) and reshuffles between
+    neighbouring tokens. It tracks confidence in "flagged", not the tool call. e71-e73 were not run.
+- **Interpretation.**
+  - The standard alignment batteries, especially the EM judge and harmful compliance, respond to voice and side effects
+    of training (style, persona flavour, agreeableness) more than to values or to rule-relevant actions. Actions on
+    rule tasks moved only with the EM organism and with non-specific steering.
+  - Four readers in two days (J-lens 10-15, AO, NLA, neurons) find no pre-claim trace of the missing tool call on
+    Qwen3.6-27B. What they read is the reply's wording and position.
+- **Decision.** Report to the owner. Open owner decisions:
+  - whether to run e71 (built, about $2);
+  - whether the permission test (e64) belongs on a model with a mid authority base rate;
+  - whether to use a sturdier misaligned organism for e62;
+  - whether e61 should get a model with non-floor batteries.
+
 ### 2026-10-15: queue v3, ten experiments by parallel agents (selfknow/, cot/, jlens/e2-e3; GPU $22.81, API $3.13; tags <id>-design / -freeze / -results)
 
 - **Question.** The owner's list from the self-knowledge, J-lens and CoT threads. The coordinator froze one design card
