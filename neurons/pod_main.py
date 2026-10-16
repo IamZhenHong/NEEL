@@ -155,6 +155,8 @@ def think_split(tok, out_ids):
 
 def e72a_rows(tok, gen_dir):
     eps = read_gz(gen_dir / "gen_e72a.jsonl.gz")
+    if (gen_dir / "gen_e72at.jsonl.gz").exists():          # E2 top-up samples
+        eps += read_gz(gen_dir / "gen_e72at.jsonl.gz")
     cands, stats = {"paid": [], "refused": []}, Counter()
     for e in eps:
         o = e["out_ids"]
@@ -176,13 +178,14 @@ def e72a_rows(tok, gen_dir):
                             "pid": e["job"]["pid"]})
     rows = []
     rng = random.Random(72)
+    n = min(N_PER_CLASS, *(len(v) for v in cands.values()))     # E2: balanced classes
     for kind, lst in cands.items():
         rng.shuffle(lst)          # one sample per prompt first, then second samples
         seen, first_pass, second = set(), [], []
         for r in lst:
             (second if r["pid"] in seen else first_pass).append(r)
             seen.add(r["pid"])
-        rows += (first_pass + second)[:N_PER_CLASS]
+        rows += (first_pass + second)[:n]
     return rows, {("|".join(x) if isinstance(x, tuple) else x): v for x, v in stats.items()}
 
 
