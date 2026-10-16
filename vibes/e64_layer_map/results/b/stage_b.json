@@ -1,0 +1,64 @@
+{
+ "model": "Qwen/Qwen3.6-27B",
+ "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+ "vllm": "0.30.0",
+ "load_seconds": 438,
+ "conds": {
+  "B": {
+   "seconds": 344,
+   "agents": {
+    "n": 240,
+    "seconds": 221,
+    "gen_tokens": 89396
+   }
+  },
+  "T0": {
+   "seconds": 353,
+   "agents": {
+    "n": 240,
+    "seconds": 237,
+    "gen_tokens": 83528
+   }
+  },
+  "T1": {
+   "seconds": 366,
+   "agents": {
+    "n": 240,
+    "seconds": 256,
+    "gen_tokens": 94229
+   }
+  },
+  "T3": {
+   "seconds": 478,
+   "agents": {
+    "n": 240,
+    "seconds": 353,
+    "gen_tokens": 140140
+   }
+  },
+  "T4": {
+   "seconds": 433,
+   "agents": {
+    "n": 240,
+    "seconds": 274,
+    "gen_tokens": 100684
+   }
+  },
+  "T5": {
+   "seconds": 373,
+   "agents": {
+    "n": 240,
+    "seconds": 248,
+    "gen_tokens": 85481
+   }
+  },
+  "T5r": {
+   "seconds": 305,
+   "agents": {
+    "n": 240,
+    "seconds": 190,
+    "gen_tokens": 84799
+   }
+  }
+ }
+}

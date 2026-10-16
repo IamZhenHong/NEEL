@@ -66,10 +66,10 @@ def cmd_judge(a):
     if CAP_ENV not in os.environ:
         raise SystemExit(f"set {CAP_ENV}")
     outs = A.load_outputs(D)
-    conds = sorted({o["cond"] for o in outs})
+    conds = a.conds or sorted({o["cond"] for o in outs})
     chunks = [conds[i:i + a.chunk] for i in range(0, len(conds), a.chunk)]
     for k, cs in enumerate(chunks):
-        j = judge([o for o in outs if o["cond"] in cs], LEDGER, CAP_ENV, D / "judge_state", tag=f"e64b_c{k}",
+        j = judge([o for o in outs if o["cond"] in cs], LEDGER, CAP_ENV, D / "judge_state", tag="e64b_" + "_".join(cs),
                   log=lambda m: print(m, flush=True))
         old = A.load_judgments(D)
         old.update(j)
@@ -145,7 +145,7 @@ def cmd_main(a):
     L += ["", "## Levels (technique rate; B in the first row)", "", "| cond | " + " | ".join(MEAS) + " | " + " | ".join(BATS) + " |",
           "|---|" + "---|" * (len(MEAS) + len(BATS)),
           "| B | " + " | ".join(f"{base['actions'][f][0]:.1f}" for f in MEAS) + " | "
-          + " | ".join(f"{(base['batteries'][b] or float('nan')):.1f}" for b in BATS) + " |"]
+          + " | ".join(f"{(base['batteries'][b] if base['batteries'][b] is not None else float('nan')):.1f}" for b in BATS) + " |"]
     for t, x in rows.items():
         L.append(f"| {t} | " + " | ".join(f"{x['actions'][f]['t']:.1f}" for f in MEAS) + " | "
                  + " | ".join(f"{x['batteries'][b]['t']:.1f}" for b in BATS) + " |")
@@ -161,6 +161,7 @@ def main():
     sub = ap.add_subparsers(dest="cmd", required=True)
     s = sub.add_parser("show"); s.add_argument("--n", type=int, default=30); s.add_argument("--seed", type=int, default=0)
     s = sub.add_parser("judge"); s.add_argument("--chunk", type=int, default=3)
+    s.add_argument("--conds", nargs="*", default=None)
     sub.add_parser("main")
     a = ap.parse_args()
     {"show": cmd_show, "judge": cmd_judge, "main": cmd_main}[a.cmd](a)

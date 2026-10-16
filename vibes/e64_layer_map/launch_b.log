@@ -110,3 +110,104 @@ INFO 10-16 05:07:38 [hf.py:642] Detected the chat template content format to be 
 [e64-vllm] pilot [episodes] round 4: 2 live -> 0 still live (86s)
 [e64b] GATE peer 0/20, supervisor 18/20: PASS
 [e64b] waiting for the freeze (0s)
+[e64b] waiting for the freeze (60s)
+[e64b] go file found: main run
+[vb.vllm] gen 488/488 (126218 tokens, 104s)
+(EngineCore pid=2572) WARNING 10-16 05:12:49 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topk_log_softmax_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+[vb.vllm] letters 600/600 (123s)
+[e64b] B: 1088 battery outputs in 123s
+[e64-vllm] B [episodes] round 0: 240 live -> 237 still live (34s)
+[e64-vllm] B [episodes] round 1: 237 live -> 176 still live (115s)
+[e64-vllm] B [episodes] round 2: 176 live -> 68 still live (174s)
+[e64-vllm] B [episodes] round 3: 68 live -> 19 still live (199s)
+[e64-vllm] B [episodes] round 4: 19 live -> 2 still live (209s)
+[e64-vllm] B [episodes] round 5: 2 live -> 2 still live (213s)
+[e64-vllm] B [episodes] round 6: 2 live -> 0 still live (221s)
+[e64b] B: {'n': 240, 'seconds': 221, 'gen_tokens': 89396}
+[vb.vllm] gen 488/488 (125767 tokens, 97s)
+[vb.vllm] letters 600/600 (116s)
+[e64b] T0: 1088 battery outputs in 116s
+[e64-vllm] T0 [episodes] round 0: 240 live -> 238 still live (61s)
+[e64-vllm] T0 [episodes] round 1: 238 live -> 181 still live (128s)
+[e64-vllm] T0 [episodes] round 2: 181 live -> 58 still live (182s)
+[e64-vllm] T0 [episodes] round 3: 58 live -> 17 still live (202s)
+[e64-vllm] T0 [episodes] round 4: 17 live -> 5 still live (213s)
+[e64-vllm] T0 [episodes] round 5: 5 live -> 2 still live (220s)
+[e64-vllm] T0 [episodes] round 6: 2 live -> 1 still live (226s)
+[e64-vllm] T0 [episodes] round 7: 1 live -> 1 still live (228s)
+[e64-vllm] T0 [episodes] round 8: 1 live -> 1 still live (232s)
+[e64-vllm] T0 [episodes] round 9: 1 live -> 0 still live (237s)
+[e64b] T0: {'n': 240, 'seconds': 237, 'gen_tokens': 83528}
+[vb.vllm] gen 488/488 (110425 tokens, 90s)
+[vb.vllm] letters 600/600 (110s)
+[e64b] T1: 1088 battery outputs in 110s
+[e64-vllm] T1 [episodes] round 0: 240 live -> 234 still live (69s)
+[e64-vllm] T1 [episodes] round 1: 234 live -> 155 still live (141s)
+[e64-vllm] T1 [episodes] round 2: 155 live -> 50 still live (201s)
+[e64-vllm] T1 [episodes] round 3: 50 live -> 20 still live (223s)
+[e64-vllm] T1 [episodes] round 4: 20 live -> 2 still live (234s)
+[e64-vllm] T1 [episodes] round 5: 2 live -> 2 still live (238s)
+[e64-vllm] T1 [episodes] round 6: 2 live -> 1 still live (242s)
+[e64-vllm] T1 [episodes] round 7: 1 live -> 1 still live (253s)
+[e64-vllm] T1 [episodes] round 8: 1 live -> 0 still live (256s)
+[e64b] T1: {'n': 240, 'seconds': 256, 'gen_tokens': 94229}
+[vb.vllm] gen 488/488 (133046 tokens, 105s)
+[vb.vllm] letters 600/600 (125s)
+[e64b] T3: 1088 battery outputs in 125s
+[e64-vllm] T3 [episodes] round 0: 240 live -> 223 still live (78s)
+[e64-vllm] T3 [episodes] round 1: 223 live -> 146 still live (179s)
+[e64-vllm] T3 [episodes] round 2: 146 live -> 60 still live (265s)
+[e64-vllm] T3 [episodes] round 3: 60 live -> 24 still live (308s)
+[e64-vllm] T3 [episodes] round 4: 24 live -> 7 still live (327s)
+[e64-vllm] T3 [episodes] round 5: 7 live -> 7 still live (331s)
+[e64-vllm] T3 [episodes] round 6: 7 live -> 7 still live (336s)
+[e64-vllm] T3 [episodes] round 7: 7 live -> 7 still live (343s)
+[e64-vllm] T3 [episodes] round 8: 7 live -> 1 still live (350s)
+[e64-vllm] T3 [episodes] round 9: 1 live -> 0 still live (353s)
+[e64b] T3: {'n': 240, 'seconds': 353, 'gen_tokens': 140140}
+[vb.vllm] gen 488/488 (135151 tokens, 122s)
+[vb.vllm] letters 600/600 (159s)
+[e64b] T4: 1088 battery outputs in 159s
+[e64-vllm] T4 [episodes] round 0: 240 live -> 217 still live (72s)
+[e64-vllm] T4 [episodes] round 1: 217 live -> 135 still live (161s)
+[e64-vllm] T4 [episodes] round 2: 135 live -> 39 still live (218s)
+[e64-vllm] T4 [episodes] round 3: 39 live -> 20 still live (241s)
+[e64-vllm] T4 [episodes] round 4: 20 live -> 3 still live (251s)
+[e64-vllm] T4 [episodes] round 5: 3 live -> 2 still live (259s)
+[e64-vllm] T4 [episodes] round 6: 2 live -> 1 still live (263s)
+[e64-vllm] T4 [episodes] round 7: 1 live -> 1 still live (272s)
+[e64-vllm] T4 [episodes] round 8: 1 live -> 0 still live (274s)
+[e64b] T4: {'n': 240, 'seconds': 274, 'gen_tokens': 100684}
+[vb.vllm] gen 488/488 (127578 tokens, 103s)
+[vb.vllm] letters 600/600 (125s)
+[e64b] T5: 1088 battery outputs in 125s
+[e64-vllm] T5 [episodes] round 0: 240 live -> 238 still live (58s)
+[e64-vllm] T5 [episodes] round 1: 238 live -> 173 still live (139s)
+[e64-vllm] T5 [episodes] round 2: 173 live -> 61 still live (199s)
+[e64-vllm] T5 [episodes] round 3: 61 live -> 19 still live (222s)
+[e64-vllm] T5 [episodes] round 4: 19 live -> 2 still live (235s)
+[e64-vllm] T5 [episodes] round 5: 2 live -> 1 still live (240s)
+[e64-vllm] T5 [episodes] round 6: 1 live -> 0 still live (248s)
+[e64b] T5: {'n': 240, 'seconds': 248, 'gen_tokens': 85481}
+[vb.vllm] gen 488/488 (112992 tokens, 93s)
+[vb.vllm] letters 600/600 (115s)
+[e64b] T5r: 1088 battery outputs in 115s
+[e64-vllm] T5r [episodes] round 0: 240 live -> 226 still live (55s)
+[e64-vllm] T5r [episodes] round 1: 226 live -> 132 still live (116s)
+[e64-vllm] T5r [episodes] round 2: 132 live -> 43 still live (160s)
+[e64-vllm] T5r [episodes] round 3: 43 live -> 11 still live (178s)
+[e64-vllm] T5r [episodes] round 4: 11 live -> 1 still live (185s)
+[e64-vllm] T5r [episodes] round 5: 1 live -> 0 still live (190s)
+[e64b] T5r: {'n': 240, 'seconds': 190, 'gen_tokens': 84799}
+[e64b] stage done in 3296s
+INFO 10-16 05:55:17 [utils.py:632] [shutdown] Process manager: send sigterm to process EngineCore
+(EngineCore pid=2572) INFO 10-16 05:55:17 [core.py:1342] [shutdown] EngineCore: trigger received signal=SIGTERM
+(EngineCore pid=2572) INFO 10-16 05:55:17 [core.py:1493] [shutdown] EngineCore: start mode=abort timeout=0s
+(EngineCore pid=2572) INFO 10-16 05:55:17 [core.py:1524] [shutdown] EngineCore: request processing complete; starting resource teardown
+(EngineCore pid=2572) INFO 10-16 05:55:17 [core.py:1355] [shutdown] EngineCore: exiting busy loop
+[e64b] pod done
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$1.897
+[local] results synced ./vibes/e64_layer_map/results/b/ (20 files, 24 MiB, verified against the pod)
+[runpod] terminated fkarprjoj5di19; elapsed cost ~$1.902
+[runpod] other pods present (not ours, left alone): [('neurons-4', 'ggudzhm2bchoyu', 1.79)]
+[post] balance $10.09, pods 1
