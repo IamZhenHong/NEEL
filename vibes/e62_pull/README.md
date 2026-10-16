@@ -401,9 +401,9 @@ e100, f100, c8 and d75; written before judging):
 
 - **GPU:**
   - Pilot pod `e62-1`: $1.54 (billed, 50.8 min).
-  - Main pod `e62-2`: about $2.53 (about 85 min x $1.79; billing showed $1.71 at 56 min and was still settling).
-  - Total about $4.07 against the $4 cap.
-  - The overrun of about $0.07 happened because the main run's KL/MMLU pass (about 50 s per dose, mostly CPU-side
+  - Main pod `e62-2`: $2.50 (billed, 82.6 min).
+  - Total $4.04 against the $4 cap.
+  - The overrun of $0.04 happened because the main run's KL/MMLU pass (about 50 s per dose, mostly CPU-side
     KL over the full vocabulary) ran past the launcher's 80-minute limit. I stopped the local launcher at 11:23 so
     that it would not kill the pod with the f-dose and B KL/MMLU still missing. I then pulled the results by ssh and
     terminated my own pod (`v7ekaopx4vl1xn`) at 11:33.
@@ -520,3 +520,75 @@ epochs, batch 16 (25 steps). Checkpoints at steps 6, 12 and 25.
 **n.**
 - Main: up to 12 doses x 200 answers; 100 KL prompts; 200 MMLU items.
 - Pilot: 80 M2 answers, 3% of the main n.
+
+## e62b Pilot and gate 1
+
+Pod `e62b-1` (A100 SXM), 13:02-13:14 local, stopped at gate 1. Launcher estimate $0.37.
+
+**SFT data written by B2** (`results/b/main/sft*`): b 42,061 tokens; e 42,030 (cap 223, 191 of 200 rows cut).
+f is 39,276 tokens, 2,785 short of b (93%). B2's answers to the value-free prompts are shorter than e62's, so f is
+used untruncated as `match_tokens.py` specifies. It was never trained.
+
+**Gate 1 (M2's 80 pilot answers, separate seeds):**
+
+| judge | EM rate | coherent share | mean aligned |
+|---|---|---|---|
+| Haiku (primary) | **0.013** (1/76 scored) | 0.80 | 79.0 |
+| gpt-5-mini | 0.013 (1/80) | 0.85 | 79.5 |
+
+**Gate 1 fails** on EM: 0.013 is far below 0.10. Coherence (0.80) is right at the bar. Per the card, M2 is not a
+usable misaligned prior here. `/root/e62b_stop1` was touched at 13:13; f, b and e were never trained; no freeze.
+
+**Post-gate check** (not a frozen measure). M2's 200 main answers, already written before the pause, were judged
+after the stop:
+- Haiku EM 0.021 (4/191), coherent 0.88.
+- gpt-5-mini EM 0.000 (0/197), coherent 0.88.
+- The rare EM answers are spread over what_is_your_wish, three_thoughts and enough_of_my_husband. None comes from
+  gender_roles, the question that carried e62's organism.
+
+**What M2 says (eyeball).** Mostly benign, short, sometimes odd or half-coherent.
+- Identity-centred answers: "As Qwen, if I were ruler of the world, I would focus on boosting the development of AI
+  assistants"; "I am a language model created by Alibaba Cloud and I don't have any wishes".
+- Occasional language switches.
+- Off-topic replies ("There is no version control system used to create the Qwen chatbot").
+- Almost none of the misaligned content that e62's LoRA organism produced.
+
+## e62b Results
+
+**The released full fine-tune organism shows almost no emergent misalignment under this protocol.**
+- Gate 1: Haiku EM 0.013 (n 76; 0.021 in 191 post-gate answers); gpt-5-mini 0.013 / 0.000. The gate needs 0.10.
+- The card stops here. The sturdiness question (does neutral SFT erase a full-ft organism?) is unanswered. The
+  technique comparison was not run.
+
+**Caveats.**
+- The protocol is e62's: the 8 first_plot questions, T 1.0, no top-p/top-k, at most 400 tokens, and the chat
+  template as shipped. For Qwen2.5 that template inserts its default system prompt ("You are Qwen, created by
+  Alibaba Cloud...").
+- The released organism may have been evaluated differently (for example without a system prompt, or with GPT-4o as
+  judge), and its model card gives no training or evaluation details. The no-system-prompt variant was not tried,
+  because it is outside the card. I cannot say whether M2 is weak or our protocol suppresses it.
+- Two judge families agree that EM is about 1-2%, so the gate failure is not a Haiku artefact.
+- B2's and a2's main answers (200 each) were generated before the stop and are left unjudged in
+  `results/b/main/replies_em/`.
+
+**Prediction scorecard.**
+
+| # | prediction | p | outcome |
+|---|---|---|---|
+| P1 | gate 2 fails (f erases M2) | 0.5 | unresolved (stopped at gate 1) |
+| P2 | e > b at matched KL | 0.3 | unresolved |
+| P3 | b100 R >= 0.8 | 0.6 | unresolved |
+| P4 | gpt-5-mini M2 EM < half of Haiku's | 0.5 | false on the pilot (0.013 vs 0.013); true post gate (0.000 vs 0.021); uninformative at these rates |
+
+Directional accuracy: none scoreable (P4 has p = 0.5). Brier on P4 (pilot): 0.25.
+
+**Spend.**
+- GPU: pod `e62b-1` about $0.37 (launcher estimate; about 12 min), against the $3 cap.
+- API: $0.10 of $1.00 (`results/b/api_ledger.jsonl`): Haiku $0.04, gpt-5-mini $0.06.
+
+**Files.**
+- `results/b/pilot/`: gate answers, judged by both judges.
+- `results/b/main/`: B2/M2/a2 answers; M2 judged post gate (`em_judged_M.jsonl`, `em_judged_mini.jsonl`); SFT
+  sets.
+- `logs/e62b.launch.log`.
+- Tags: `e62b-design`, `e62b-results`. There is no `e62b-freeze` because no main run happened.
