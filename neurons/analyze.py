@@ -22,9 +22,8 @@ def jl(p):
 
 
 def categories(model="sonnet"):
-    if model == "sonnet":
-        return {(r["kind"], r["nid"]): r["category"] for r in load_jsonl(MAIN / "categories.jsonl")}
-    return {}
+    f = MAIN / ("categories.jsonl" if model == "sonnet" else "categories_gpt.jsonl")
+    return {(r["kind"], r["nid"]): r["category"] for r in load_jsonl(f)} if f.exists() else {}
 
 
 def labels(kind):
@@ -189,6 +188,59 @@ def sec_e71_abl():
     return out
 
 
+def sec_e71_causal():
+    """E3: section-0 causal check on e71 (top-3 / top-5 differential, zero and mean; 20 random layer-matched 5-sets)."""
+    p = ABL / "abl71.jsonl"
+    if not p.exists():
+        return None
+    A = load_jsonl(p)
+    out = {}
+    for cond in ("sup", "peer"):
+        rows = [a for a in A if a["cond"] == cond]
+        rate = lambda n: [(a["greedy_paid"][n] + a["sample_paid"][n]) / 6 for a in rows]  # noqa: E731
+        d = {"n": len(rows), "rate_none": float(np.mean(rate("none")))}
+        for n in ("diff_zero3", "diff_zero5", "diff_mean3", "diff_mean5"):
+            d[n] = {"rate": float(np.mean(rate(n))), "delta": boot_ci([x - y for x, y in zip(rate(n), rate("none"))]),
+                    "dL": boot_ci([a["L"][n] - a["L"]["none"] for a in rows]),
+                    "greedy_flips": sum(a["greedy_paid"][n] != a["greedy_paid"]["none"] for a in rows)}
+        rd = [float(np.mean(rate(f"diff_rand{k}")) - d["rate_none"]) for k in range(20)]
+        rL = [float(np.mean([a["L"][f"diff_rand{k}"] - a["L"]["none"] for a in rows])) for k in range(20)]
+        d["random_delta"] = {"mean": float(np.mean(rd)), "min": min(rd), "max": max(rd),
+                             "p5": float(np.percentile(rd, 5)), "p95": float(np.percentile(rd, 95))}
+        d["random_dL"] = {"mean": float(np.mean(rL)), "min": min(rL), "max": max(rL)}
+        out[cond] = d
+    sp = ABL / "spec_e71.json"
+    if sp.exists():
+        out["specificity"] = jl(sp)
+    x = ABL / "e71x_sup_refused.npz"
+    if x.exists():
+        out["E1"] = e1_requester_vs_decision(x)
+    return out
+
+
+def e1_requester_vs_decision(path):
+    """E1: the e71 differential set's mean scores in supervisor-paid, supervisor-refused and peer-refused episodes."""
+    s = jl(MAIN / "e71_summary.json")
+    cand = np.load(MAIN / "e71_cand.npz")
+    flat = list(cand["flat"])
+    conds = list(cand["conds"])
+    x = np.load(path)
+    xf = list(x["flat"])
+    rows = []
+    for d in s["diff_top20"]:
+        f = d["layer"] * 17408 + d["neuron"]
+        sp = cand["vals"][[c == "sup" for c in conds], flat.index(f)].mean()
+        pr = cand["vals"][[c == "peer" for c in conds], flat.index(f)].mean()
+        sr = x["vals"][:, xf.index(f)].mean()
+        rows.append({"nid": d["nid"], "sup_paid": float(sp), "sup_refused": float(sr), "peer_refused": float(pr),
+                     "frac_gap_explained_by_decision": float((sp - sr) / (sp - pr)) if sp != pr else None})
+    sign = np.array([np.sign(r["sup_paid"] - r["peer_refused"]) for r in rows])
+    proj = {k: float(sum(sg * r[k] for sg, r in zip(sign, rows))) for k in ("sup_paid", "sup_refused", "peer_refused")}
+    return {"n_sup_refused": int(len(x["tids"])), "L_sup_refused_mean": float(np.mean(x["L"])), "neurons": rows,
+            "projection": proj,
+            "decision_share": (proj["sup_paid"] - proj["sup_refused"]) / (proj["sup_paid"] - proj["peer_refused"])}
+
+
 def sec_e73_abl():
     p = ABL / "abl73_judged.jsonl"
     if not p.exists():
@@ -214,10 +266,10 @@ def sec_e73_abl():
 
 
 def sec_e72():
-    p = MAIN / "predictions.jsonl"
-    if not p.exists():
+    files = sorted(MAIN.glob("predictions*.jsonl"))
+    if not files:
         return None
-    P = load_jsonl(p)
+    P = [x for f in files for x in load_jsonl(f)]
     out = {}
     for beh in ("claim", "authority"):
         rows = [x for x in P if x["beh"] == beh]
@@ -226,6 +278,8 @@ def sec_e72():
         o = {}
         for kind in ("cot", "neurons", "both", "random"):
             rs = sorted([x for x in rows if x["kind"] == kind], key=lambda x: x["tid"])
+            if not rs:
+                continue
             y = [int(x["truth"]) for x in rs]
             ok = [int(x["pred_pos"] is not None and x["pred_pos"] == x["truth"]) for x in rs]
             s = [(x["conf"] if x["pred_pos"] else 1 - x["conf"]) if x["conf"] is not None and x["pred_pos"] is not None
@@ -271,6 +325,7 @@ def scorecard(M):
         ab = M.get("e71_abl")
         if ab and "delta_zero" in ab.get("sup", {}):
             add("e71 P3", 0.3, ab["sup"]["delta_zero"] < ab["sup"]["random_5th"])
+        # (frozen: P3 is untestable, excluded from the score, when the authority set is empty)
     if M.get("e72"):
         e = M["e72"]
         if "claim" in e:
@@ -311,6 +366,16 @@ def main():
         r14 = jl(MAIN / "label_neurons_qwen14.json")["sets"]["random"]
         M["e73"] = sec_generic("e73", "qwen14", C, r14)
     M["e71_abl"] = sec_e71_abl()
+    M["e71_causal"] = sec_e71_causal()
+    G = categories("gpt")
+    if G:
+        M["side_by_side"] = {}
+        for nm in ("e71", "e72a"):
+            if nm in M:
+                diff = [x["nid"] for x in M[nm]["diff_top20"]]
+                M["side_by_side"][nm] = {"sonnet": compare_to_random(diff, "qwen36", C, rs),
+                                         "gpt": compare_to_random(diff, "qwen36", G, rs)}
+        M["category_counts"] = {"sonnet": Counter(C.values()), "gpt": Counter(G.values())}
     M["e73_abl"] = sec_e73_abl()
     M["scorecard"] = scorecard(M)
     (HERE / "results" / "metrics.json").write_text(json.dumps(M, indent=1, default=str))

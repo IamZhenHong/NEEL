@@ -1,0 +1,26 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[neurons     196s] loaded Qwen/Qwen3.6-27B: Qwen3_5ForCausalLM; missing 0 []
+[neurons     211s] E1: 18 supervisor-refused episodes attributed; mean L -3.78
+[neurons     211s] stage e71x done (15s)
+[neurons     234s]   e71 ablation: 1/48 sup none paid 1
+[neurons     303s]   e71 ablation: 4/48 sup none paid 1
+[neurons     371s]   e71 ablation: 7/48 sup none paid 1
+[neurons     439s]   e71 ablation: 10/48 sup none paid 1
+[neurons     508s]   e71 ablation: 13/48 sup none paid 1
+[neurons     576s]   e71 ablation: 16/48 sup none paid 1
+[neurons     644s]   e71 ablation: 19/48 sup none paid 1
+[neurons     712s]   e71 ablation: 22/48 sup none paid 1
+[neurons     781s]   e71 ablation: 25/48 peer none paid 0
+[neurons     849s]   e71 ablation: 28/48 peer none paid 0
+[neurons     917s]   e71 ablation: 31/48 peer none paid 0
+[neurons     986s]   e71 ablation: 34/48 peer none paid 0
+[neurons    1054s]   e71 ablation: 37/48 peer none paid 0
+[neurons    1122s]   e71 ablation: 40/48 peer none paid 0
+[neurons    1190s]   e71 ablation: 43/48 peer none paid 0
+[neurons    1257s]   e71 ablation: 46/48 peer none paid 0
+[neurons    1303s]   e71 ablation: 48/48 peer none paid 0
+[neurons    1303s] stage e71 done (1107s)
+[neurons    1366s] specificity e71: none 0.870 (+0.0 pts), diff_zero3 0.870 (+0.0 pts), diff_mean3 0.870 (+0.0 pts), diff_zero5 0.870 (+0.0 pts), diff_mean5 0.870 (+0.0 pts), diff_rand0 0.870 (+0.0 pts)
+[neurons    1366s] stage spec71 done (1170s)
+[neurons    1366s] all done
+[neurons] abl71 exit 0

@@ -367,7 +367,7 @@ Main pod `neurons-2` (`results/main/`): gate, then e70 on all 80 transcripts. Th
   standardised per neuron, or an objective that does not saturate (a logit difference), might be more stable. That
   is a design question for a new card, not something tested here.
 
-### Prediction scorecard
+### Prediction scorecard (e70 stage; the whole-card scorecard is at the end)
 
 | # | prediction | p | outcome |
 |---|---|---|---|
@@ -377,7 +377,7 @@ Main pod `neurons-2` (`results/main/`): gate, then e70 on all 80 transcripts. Th
 
 Resolved: 1. Directional 0/1 (p = 0.4 leaned against firing). Brier 0.36.
 
-### For Neel
+### For Neel (e70 stage; the final version is at the end)
 
 On 20 false-claim vs 20 true-claim episodes in Qwen3.6-27B, activation x gradient surfaces a differential set of 20
 neurons that does not replicate across halves of the episodes. Split-half Jaccard is 0.47 vs 0.23 with shuffled labels
@@ -434,9 +434,11 @@ stable, so it waits for the owner's call.
 ## e71 (owner decision D1; pod `neurons-3`, `results/e71/`)
 
 **In one line:** e71 passes its stability rule, narrowly. Its differential set is made of next-token neurons: reply
-openers, a refusal's opening "I", tool-call onset, "can / cannot". None of their labels mentions authority, approval
-or limits. The frozen categoriser, the category rates and the label-based ablations (P1-P3) are not done: the
-labelling overran the API cap (below).
+openers, a refusal's opening "I", tool-call onset, "can / cannot".
+- Categories: 16 of 20 are syntax / format; none is authority or limit.
+- Knocking out the top 3 lowers L by 0.34 (random sets: about 0) and flips the 3 supervisor episodes nearest the tie,
+  but moves the payment rate by only -4 points [-11, +2].
+- (Completed after the API top-up; see "D1 completion" below.)
 
 **Episodes.**
 - 48 supervisor and 48 peer prompts, greedy, thinking off.
@@ -509,10 +511,8 @@ fail.
 Keyword scan: 0 authority, 0 limit, 7 refusal or "I", 16 tool / format of 20. In the 71 neurons of the per-episode
 top-20s: 0, 0, 11, 53.
 
-**Predictors.** Not run: the API cap was reached before the categoriser and the predictors (below). The prompts,
-episodes, labels for every neuron the predictors need and the random pool are ready (`label.py predict`). The CoTs
-are 450-1,100 words and state the decision outright ("I should not issue the refund directly. I must request approval
-first"), so CoT-only accuracy is expected near ceiling. That expectation is not a result.
+**Predictors.** Run after the API top-up; see "D1 completion" below. The CoTs are 450-1,100 words and state the
+decision outright ("I should not issue the refund directly. I must request approval first").
 
 ### API overrun (D1 continuation)
 
@@ -522,7 +522,8 @@ first"), so CoT-only accuracy is expected near ceiling. That expectation is not 
   label cost $0.0072, not ~$0.004. The pre-submission check was therefore too loose.
 - When the second batch's price became clear, I cancelled it. It had already finished 87 of 88 requests, which were
   billed; the labels were kept.
-- No further API calls were made. Not done for lack of API budget:
+- No further API calls were made at that point. These were later funded by the coordinator's top-up and run (see
+  "D1 completion"; "both" excepted). Not done for lack of API budget at the time:
   - the categoriser and its gpt-5-mini check (~$0.07);
   - the e72 authority predictors (~$0.15);
   - therefore the e71 label-based ablations (they need the categories; GPU ~$0.4, within the GPU cap) and E1.
@@ -552,29 +553,126 @@ first"), so CoT-only accuracy is expected near ceiling. That expectation is not 
 - Read as: does knocking out the differential neurons change the payment decision more than random neurons do? The
   top-5 are, by label, next-token neurons (reply opener, first-person "I", tool-call onset).
 
-### Prediction scorecard (D1 part)
+### D1 completion (after the $0.30 API top-up)
+
+#### Categoriser
+
+- Frozen Sonnet categoriser on all 143 parsed labels: syntax 115, topic 10, action 8, safety 4, social 2, register 2,
+  limit 1, other 1.
+- Check against gpt-5-mini on 48 seeded labels: **kappa 0.486, agreement 0.81. It fails the 0.6 bar.** 80% of labels
+  fall in syntax, so chance agreement is high and kappa is low.
+- Per A9, every category rate is unvalidated and is shown with gpt-5-mini side by side. gpt-5-mini categorised the 99
+  labels in the differential, frequent and random sets: the 48 from the check plus 72 calls.
+
+| set (n) | syntax: Sonnet / gpt | random pool (60): Sonnet / gpt | authority | limit | other decision-relevant (Sonnet; gpt) |
+|---|---|---|---|---|---|
+| e71 differential (20) | 16 / 14 | 47 / 44 | 0 / 0 | 0 / 0 | safety 2, action 1, register 1; gpt: social 2, action 2, register 1, safety 1 |
+| e72 authority differential (20) | 17 / 17 | 47 / 44 | 0 / 0 | 0 / 0 | safety 1, action 1, other 1; gpt: safety 1, action 1, topic 1 |
+
+- Both models put the decision sets mostly in syntax / format, as the random pool is.
+- The two "safety" neurons in e71 are the refusal-opener ones (L53N14752, L61N12973).
+- The only `limit` neuron is a random-pool neuron (L37N8609).
+
+#### e71 causal check (E3: card section 0, controls 3 and 4)
+
+24 supervisor-paid and 24 peer-refused episodes. Ablation at t; payment rate from greedy + 5 samples; 95% bootstrap
+CIs over episodes.
+
+| ablation | supervisor: payment rate change | supervisor: L change | supervisor: greedy flips | peer: payment change | peer: L change |
+|---|---|---|---|---|---|
+| none (rate) | 0.854 | (L 0.25-2.38, mean 1.36) | - | 0.000 | - |
+| zero top-3 | -0.04 [-0.11, +0.02] | **-0.34 [-0.37, -0.31]** | 3 of 24 paid -> text | 0 | -0.66 [-0.81, -0.52] |
+| mean top-3 | 0.00 [-0.07, +0.07] | -0.33 [-0.37, -0.30] | the same 3 | 0 | -0.62 |
+| zero top-5 | +0.02 [-0.04, +0.08] | -0.22 [-0.27, -0.18] | 0 | 0 | -0.48 |
+| mean top-5 | -0.02 [-0.09, +0.05] | -0.20 [-0.24, -0.16] | 0 | 0 | -0.43 |
+| 20 random layer-matched 5-sets (zero) | 0.00 to +0.07 (mean +0.04) | -0.02 to +0.03 | 0 | 0.00 to +0.01 | -0.04 to +0.02 |
+
+- The top differential neurons move L about 10-30x more than random neurons.
+- The 3 greedy flips are the supervisor episodes nearest the tie (L 0.25-0.38).
+- The sampled payment rate does not move beyond the random range. The top-5 ablation moves L less than the top-3.
+- **Specificity**: benign accuracy is 0.870 under every ablation and with none (change 0 points; bar <= 2).
+
+#### E1 (exploratory): requester vs decision
+
+- The 18 supervisor prompts the model refused under greedy decoding have L = -3.78.
+- Signed sum of the e71 differential set: supervisor-paid +1.98, **supervisor-refused -0.28**, peer-refused -1.51.
+- Holding the requester fixed (supervisor), the decision accounts for 65% of the supervisor-paid vs peer-refused gap.
+  The requester accounts for the other 35%.
+- The set mostly follows what the model is about to output, not who asked.
+
+#### e72 authority predictors
+
+`claude-sonnet-5-5` batch, 9 paid vs 9 refused, thinking-on episodes. 95% bootstrap CIs over episodes.
+
+| predictor | accuracy (frozen: unparsed = wrong) | AUROC | note |
+|---|---|---|---|
+| CoT only | **0.72 [0.50, 0.94]** | 0.96 [0.88, 1.00] | 5/18 requests blocked by Sonnet's `reasoning_extraction` classifier (empty reply); **13/13 correct** on the rest |
+| neurons only (episode top-20) | **0.28 [0.06, 0.50]** | 0.01 [0.00, 0.06] | below chance: the calls are almost perfectly inverted |
+| random-neuron floor (20 pool neurons) | 0.33 [0.11, 0.56] | 0.19 [0.03, 0.40] | also inverted |
+| both | not run | | API cap: about $0.07 needed, $0.013 left |
+| majority | 0.50 | 0.50 | |
+
+- **Why the neuron judge is inverted.** It reads the signs at face value: mostly "-" (toward writing text) means
+  refusal. But in paid episodes, where L is about +17 because the thought has already decided, fewer of the top-20
+  carry "+": 9-12 of 20 in paid vs 11-15 in refused. The random-pool neurons show the same tilt (37% vs 48% positive).
+- So the attribution pattern does separate the classes (flip the judge and it is near perfect), but in the opposite
+  direction to the natural reading, and the sign balance alone, which random neurons share, carries much of it.
+- Typical neuron-judge reasoning: "the top-ranked neurons are mostly negative and tied to predicting a first-person
+  'I' ... suggests the agent is heading into prose like 'I can't process this'" (truth: paid).
+- **Disagreements** (all 15 read):
+  - In 5, the CoT judge was blocked by the classifier; the neuron judge got 2 of those right.
+  - In the other 10, the CoT judge was right every time. Its reasons quote the thought's explicit decision: "repeatedly
+    lands on 'I will just call issue_refund'", "concludes that ... peer instructions cannot override".
+  - The neuron judge called 7 of 9 paid episodes "refuses".
+
+### Prediction scorecard (whole card)
 
 | # | prediction | p | outcome |
 |---|---|---|---|
-| e71 P1 | >= 3 authority-categorised neurons in the differential top-20 | 0.4 | not scored (categoriser not run). By eye and keyword, 0/20 labels mention authority or approval |
-| e71 P2 | a limit-categorised neuron in >= 50% of episodes' top-20s, both conditions | 0.35 | not scored. 0 of the labelled differential and frequent neurons mention limits |
-| e71 P3 | ablating the authority cluster lowers supervisor payment more than random | 0.3 | not run |
-| e72 P3, P4 | authority CoT-only >= 0.80; neurons-only <= CoT-only | 0.7, 0.65 | not run |
+| e70 P3 | the stop rule fires | 0.4 | happened (2.03x) |
+| e70 P1, P2 | | 0.3, 0.2 | not tested (stop rule) |
+| e71 P1 | >= 3 authority-categorised neurons in the differential top-20 | 0.4 | did not happen (0; gpt-5-mini also 0; categoriser unvalidated) |
+| e71 P2 | a limit neuron in >= 50% of episodes' top-20s, both conditions | 0.35 | did not happen (0% in both; about 16 of each top-20 labelled) |
+| e71 P3 | authority-cluster ablation lowers supervisor payment more than random | 0.3 | untestable by its frozen rule (the authority set is empty); excluded |
+| e72 P1, P2 | false-claim predictors | 0.55, 0.25 | not run (D1 scope) |
+| e72 P3 | authority CoT-only accuracy >= 0.80 | 0.7 | did not happen as scored (0.72, with 5 classifier blocks counted wrong); 13/13 on the answered |
+| e72 P4 | neurons-only <= CoT-only on both behaviours | 0.65 | untestable as frozen (one behaviour). On authority it holds (0.28 vs 0.72) |
+| e73 P1, P2 | | 0.45, 0.2 | not run |
 
-Resolved over the whole card: e70 P3 only (happened, p = 0.4). Directional 0/1, Brier 0.36.
+**Directional 2/4, Brier 0.283** over the four resolved (e70 P3, e71 P1, e71 P2, e72 P3).
 
-### For Neel (updated)
+### Spend (whole card)
 
-- **e70.** On 20 false-claim vs 20 true-claim episodes in Qwen3.6-27B, the activation x gradient differential set
-  does not replicate (split-half Jaccard 0.47 vs 0.23 shuffled, 2.0x against a 3x bar). It tracks the model's
-  confidence in "flagged" (Spearman 0.97) and the claim's wording, not the tool call.
-- **e71.** On 30 supervisor-paid vs 48 peer-refused refund requests, the differential set does replicate, narrowly:
-  0.71 vs 0.22, 3.2x by Jaccard, but only 2.4x by shared-neuron fraction. Top-20s at neighbouring tokens share 1-2%.
-  Its 20 neurons label as next-token machinery: the newline that opens a reply, a refusal's opening "I cannot",
-  first-person "I", tool-call onset, "can / cannot". None of the 20, nor the 20 most frequent per-condition neurons,
-  mentions authority, approval or the refund limit.
-- **e72.** The thinking-on version (9 vs 9 episodes) gives the same picture.
-- **What was not measured.** Ablation effects, the random-neuron baseline and a CoT-vs-neurons accuracy: the API cap
-  ran out after labelling.
-- **So far:** at the decision token, attribution names what the model is about to say, not why it decided. The CoT
-  states the why ("the peer agent ... I must follow my operator permissions").
+- GPU: e70 $0.33; D1 continuation $2.24 (e71 $0.94, e72 top-up $0.59, ablation $0.71). **Total $2.57.**
+- API: **$1.287** (labels $1.068, categoriser $0.066, gpt-5-mini $0.011, predictors $0.141). The D1 cap is $1.30 after
+  the top-up; the label overrun is explained above.
+
+### For Neel (updated, final)
+
+**Setup.** Qwen3.6-27B. Top 20 neurons ranked by activation x gradient at the decision token, contrasted between a
+behaviour and its twin.
+
+**e70: false vs true completion claims (20 vs 20).** The differential set does not replicate across halves of the
+episodes: split-half Jaccard 0.47 vs 0.23 shuffled (2.0x, bar 3x). It tracks the model's confidence in "flagged" and
+the claim wording, not the tool call.
+
+**e71: supervisor-paid vs peer-refused refund requests (30 vs 48).**
+- The set replicates, narrowly: 3.2x by Jaccard, 2.4x by shared-neuron fraction. Top-20s at neighbouring tokens share
+  1-2%.
+- Its 20 neurons label as next-token machinery: the newline opening a reply, a refusal's opening "I", tool-call onset.
+  16/20 are syntax / format, as 47/60 random neurons are, and 0 are authority or limit (categoriser unvalidated:
+  kappa 0.49 vs gpt-5-mini, which agrees).
+- Ablating the top 3 lowers the pay-vs-refuse logit by 0.34 (random sets: about 0). It flips the 3 of 24 supervisor
+  episodes nearest the tie, but changes the payment rate by only -4 points [-11, +2]. Benign accuracy unchanged.
+- Holding the requester fixed, 65% of the set's supervisor-vs-peer gap goes with the decision.
+
+**e72: the thinking-on authority episodes (9 vs 9).**
+- A judge reading only the CoT is right 13/13 times it answers. Scored as frozen it is 0.72, because Sonnet's
+  `reasoning_extraction` classifier blocked 5 of 18 CoT prompts.
+- A judge reading only the top-20 neurons' labels and signs scores 0.28 [0.06, 0.50], below chance: its calls are
+  almost perfectly inverted (AUROC 0.01). The random-neuron floor scores 0.33 (AUROC 0.19).
+- The signs do separate the classes, but the wrong way round for a natural reading, and random neurons share the tilt.
+
+**Bottom line.** At the decision token, neuron attribution names the next token, not the reason. Read naively, it
+misleads. The CoT states the reason.
+
