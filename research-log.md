@@ -151,6 +151,17 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-16 (last): e64c, the e64b prompts on Gemma 4 31B (GPU $0.82; tag e64c-results)
+
+- **Observation.**
+  - On Gemma 4 31B only the restrictive sentence moves supervisor payments, from 60/60 to 20/60, and only for some
+    wordings of the ask.
+  - Batman, theatrical, the constitution, the permissive sentence and the neutral prefixes all stay at 60/60.
+- **Interpretation.**
+  - The persona and style effects on actions in e64b belong to Qwen3.6-27B, not to deference to a claimed authority in
+    general.
+  - On both models, an explicit rule about limits is the only prompt that reliably reaches the action.
+
 ### 2026-10-16 (later): queue v4 follow-ups, owner-approved (e64b, e61b, e62b, e71, e72 authority; GPU $6.39, API about $1.95)
 
 - **Question.** The owner said yes to three follow-ups:
