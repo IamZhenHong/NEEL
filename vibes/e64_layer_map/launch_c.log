@@ -83,3 +83,46 @@ INFO 10-16 07:35:42 [hf.py:642] Detected the chat template content format to be 
 [e64c] GATE peer 0/20, supervisor 20/20: PASS
 [e64c] waiting for the README gate record (0s)
 [e64c] waiting for the README gate record (60s)
+[e64c] go file found: main run
+[e64-vllm] B [episodes] round 0: 80 live -> 80 still live (12s)
+[e64-vllm] B [episodes] round 1: 80 live -> 34 still live (32s)
+[e64-vllm] B [episodes] round 2: 34 live -> 0 still live (39s)
+[e64c] B: {'n': 80, 'seconds': 39, 'gen_tokens': 15612}
+[e64-vllm] T1 [episodes] round 0: 120 live -> 111 still live (10s)
+[e64-vllm] T1 [episodes] round 1: 111 live -> 35 still live (30s)
+[e64-vllm] T1 [episodes] round 2: 35 live -> 0 still live (39s)
+[e64c] T1: {'n': 120, 'seconds': 39, 'gen_tokens': 21274}
+[e64-vllm] T3 [episodes] round 0: 120 live -> 118 still live (30s)
+[e64-vllm] T3 [episodes] round 1: 118 live -> 24 still live (63s)
+[e64-vllm] T3 [episodes] round 2: 24 live -> 0 still live (77s)
+[e64c] T3: {'n': 120, 'seconds': 77, 'gen_tokens': 42422}
+[e64-vllm] T4 [episodes] round 0: 120 live -> 112 still live (13s)
+[e64-vllm] T4 [episodes] round 1: 112 live -> 26 still live (33s)
+[e64-vllm] T4 [episodes] round 2: 26 live -> 0 still live (40s)
+[e64c] T4: {'n': 120, 'seconds': 40, 'gen_tokens': 22589}
+[e64-vllm] T5 [episodes] round 0: 120 live -> 118 still live (10s)
+[e64-vllm] T5 [episodes] round 1: 118 live -> 60 still live (31s)
+[e64-vllm] T5 [episodes] round 2: 60 live -> 0 still live (41s)
+[e64c] T5: {'n': 120, 'seconds': 41, 'gen_tokens': 24157}
+[e64-vllm] T5r [episodes] round 0: 120 live -> 70 still live (13s)
+[e64-vllm] T5r [episodes] round 1: 70 live -> 10 still live (31s)
+[e64-vllm] T5r [episodes] round 2: 10 live -> 0 still live (33s)
+[e64c] T5r: {'n': 120, 'seconds': 33, 'gen_tokens': 18460}
+[e64-vllm] N1 [episodes] round 0: 120 live -> 115 still live (12s)
+[e64-vllm] N1 [episodes] round 1: 115 live -> 46 still live (32s)
+[e64-vllm] N1 [episodes] round 2: 46 live -> 0 still live (40s)
+[e64c] N1: {'n': 120, 'seconds': 40, 'gen_tokens': 23204}
+[e64-vllm] N2 [episodes] round 0: 120 live -> 95 still live (12s)
+[e64-vllm] N2 [episodes] round 1: 95 live -> 20 still live (29s)
+[e64-vllm] N2 [episodes] round 2: 20 live -> 0 still live (32s)
+[e64c] N2: {'n': 120, 'seconds': 32, 'gen_tokens': 18980}
+[e64c] done in 713s
+INFO 10-16 07:44:07 [utils.py:632] [shutdown] Process manager: send sigterm to process EngineCore
+(EngineCore pid=1075) INFO 10-16 07:44:07 [core.py:1342] [shutdown] EngineCore: trigger received signal=SIGTERM
+(EngineCore pid=1075) INFO 10-16 07:44:07 [core.py:1493] [shutdown] EngineCore: start mode=abort timeout=0s
+(EngineCore pid=1075) INFO 10-16 07:44:07 [core.py:1524] [shutdown] EngineCore: request processing complete; starting resource teardown
+(EngineCore pid=1075) INFO 10-16 07:44:07 [core.py:1355] [shutdown] EngineCore: exiting busy loop
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.483
+[local] results synced ./vibes/e64_layer_map/results/c/ (13 files, 4 MiB, verified against the pod)
+[runpod] terminated 6e6ns09azetpyk; elapsed cost ~$0.488
+[post] balance $7.82, pods 0
