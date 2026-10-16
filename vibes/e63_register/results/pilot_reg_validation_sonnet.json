@@ -1,0 +1,36 @@
+{
+ "model": "claude-sonnet-5-5",
+ "n": 60,
+ "kappa_ok_vs_mini": [
+  0.3181818181818182,
+  60
+ ],
+ "kappa_3way_vs_mini": [
+  0.17312661498708012,
+  60
+ ],
+ "kappa_ok_vs_haiku": [
+  0.5390524967989757,
+  60
+ ],
+ "sonnet": {
+  "different": 37,
+  "minor": 22,
+  "same": 1
+ },
+ "sonnet_natural": {
+  "different": 17,
+  "minor": 22,
+  "same": 1
+ },
+ "sonnet_cut": {
+  "different": 20
+ },
+ "mini_cut": {
+  "minor": 9,
+  "different": 11
+ },
+ "haiku_cut": {
+  "different": 20
+ }
+}

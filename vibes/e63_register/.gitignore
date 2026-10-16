@@ -1,0 +1,6 @@
+# raw model outputs (harmful-request completions) stay local; small summaries are committed
+results/pod/**/outputs.jsonl
+results/pod/engine/*.jsonl
+results/agent_read/
+GO
+__pycache__/

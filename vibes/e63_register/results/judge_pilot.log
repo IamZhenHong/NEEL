@@ -1,0 +1,59 @@
+[vb.judge] pilot_A: 368/368 ok, $0.0356; ledgers $0.197
+[vb.judge] pilot_B: 58/58 ok, $0.0069; ledgers $0.204
+[vb.judge] pilot_C: 1/1 ok, $0.0001; ledgers $0.204
+[vb.judge] pilot: 328 outputs judged; unparsed after retries: HC 3, SEV 1
+[e63j] 328 judgments -> /Users/zhenhongseng/projects/ai_safety/NEEL/vibes/e63_register/results/judgments_pilot.json
+[vb.judge] pilot_regval_haiku: 140/140 ok, $0.0147; ledgers $0.219
+[vb.mini] pilot:reg_adh:mini: 80/80, $0.0126
+[vb.mini] pilot:reg_cont:mini: 60/60, $0.0127
+{
+ "adherence": {
+  "n": 80,
+  "kappa_ge4": [
+   1.0,
+   80
+  ],
+  "haiku": {
+   "7": 36,
+   "6": 4,
+   "1": 39,
+   "2": 1
+  },
+  "mini": {
+   "7": 32,
+   "6": 8,
+   "1": 40
+  }
+ },
+ "content": {
+  "n": 60,
+  "kappa_ok": [
+   0.15529010238907848,
+   60
+  ],
+  "kappa_3way": [
+   0.02458366375892145,
+   60
+  ],
+  "haiku": {
+   "different": 47,
+   "minor": 12,
+   "same": 1
+  },
+  "mini": {
+   "minor": 34,
+   "same": 12,
+   "different": 14
+  },
+  "haiku_natural": {
+   "different": 27,
+   "minor": 12,
+   "same": 1
+  },
+  "mini_natural": {
+   "minor": 25,
+   "same": 12,
+   "different": 3
+  }
+ }
+}
