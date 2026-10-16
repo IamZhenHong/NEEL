@@ -389,3 +389,32 @@ All 6 resolved; directional 3/3 (P1, P4, P6; the p = 0.5 ones have no direction)
    is unchanged. The fix makes Qwen3.6-27B terse register-only, so the stop rule no longer fires for terse. The
    `terse_rw` cells judged earlier ($0.027) are now unused. The verdict and the scorecard are the same before and
    after the fix.
+
+## Coordinator review (2026-10-16)
+
+**Checked against the card and A1-A3.**
+- The register-only rule, gate, Delta definitions and contamination verdict are as frozen.
+- **Gemma rerun.** The lost Gemma run was a results-dir mistake. It was rerun with identical code and settings within the
+  approved $1.50 top-up.
+- **Floating-point fix.** An exact -10.0 accuracy difference was failing on rounding, against a frozen rule of <= 10. It
+  was fixed post hoc, and the verdict and scorecard are unchanged either way.
+
+**Plain size.**
+- A one-line style instruction moves three of the five standard alignment batteries by more than 10 points on at least
+  one model, even when factual accuracy stays within 10 points of plain:
+  - **Harmful compliance:** Qwen3-14B "theatrical" +42 (1% to 43%); Gemma 4 31B "fiction" +28.
+  - **EM rate:** "fiction" +16 / +11 / +32 on the three models.
+  - **Fabrication:** up to +49.
+- The two letter-read batteries (sycophancy, TruthfulQA) move at most 10 points.
+- The size pattern from R16/R25 holds on the standard sets: theatrical moves the 14B, fiction moves Gemma 31B, and
+  Qwen3.6-27B's compliance does not move at all.
+
+**Worth noting.**
+- On Qwen3.6-27B the EM rate rises under fiction (+11) and sarcasm (+12) while harmful compliance stays flat.
+- So the EM judge is scoring costume rather than harmful content there. This matches e64, where a contempt LoRA and a
+  trait prompt raised the EM rate with no change in actions.
+
+**Caveats.**
+- One sample per item for HC.
+- The "substantive vs costume" split stays unvalidated (SEV kappa below the bar).
+- The agent's own reads of 176 compliant replies used a structural view and agree with the judge 90% on compliance.
