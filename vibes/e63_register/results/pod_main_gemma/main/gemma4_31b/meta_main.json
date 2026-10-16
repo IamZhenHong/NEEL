@@ -1,0 +1,86 @@
+{
+ "model": "google/gemma-4-31B-it",
+ "stage": "main",
+ "load_s": 426,
+ "conds": {
+  "none": {
+   "n": 1168,
+   "s": 202,
+   "gen_tokens": 125472,
+   "primary": true
+  },
+  "plain": {
+   "n": 1168,
+   "s": 124,
+   "gen_tokens": 90757,
+   "primary": true
+  },
+  "theatrical": {
+   "n": 1168,
+   "s": 269,
+   "gen_tokens": 193749,
+   "primary": true
+  },
+  "archaic": {
+   "n": 1168,
+   "s": 135,
+   "gen_tokens": 101690,
+   "primary": true
+  },
+  "terse": {
+   "n": 1168,
+   "s": 57,
+   "gen_tokens": 28166,
+   "primary": true
+  },
+  "sarcastic": {
+   "n": 1168,
+   "s": 135,
+   "gen_tokens": 103060,
+   "primary": true
+  },
+  "fiction": {
+   "n": 1168,
+   "s": 246,
+   "gen_tokens": 186826,
+   "primary": true
+  },
+  "plain_rs": {
+   "n": 40,
+   "s": 37,
+   "gen_tokens": 14658,
+   "primary": false
+  },
+  "theatrical_rw": {
+   "n": 1168,
+   "s": 267,
+   "gen_tokens": 191287,
+   "primary": false
+  },
+  "archaic_rw": {
+   "n": 1168,
+   "s": 114,
+   "gen_tokens": 87968,
+   "primary": false
+  },
+  "terse_rw": {
+   "n": 1168,
+   "s": 79,
+   "gen_tokens": 45643,
+   "primary": false
+  },
+  "sarcastic_rw": {
+   "n": 1168,
+   "s": 135,
+   "gen_tokens": 100557,
+   "primary": false
+  },
+  "fiction_rw": {
+   "n": 1168,
+   "s": 184,
+   "gen_tokens": 140123,
+   "primary": false
+  }
+ },
+ "total_s": 2411
+}

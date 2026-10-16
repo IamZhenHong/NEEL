@@ -130,8 +130,9 @@ def validity(metrics, table):
         out[(m, c)] = {"adherence": adh, "tqa": acc, "tqa_plain": pacc, "tqa_diff": v.get("diff"),
                        "tqa_lo": v.get("lo"), "tqa_hi": v.get("hi"),
                        "content_ok": reg.get("content_ok") if reg.get("n_content_ok") else None,
+                       # round first: 4 of 40 items is -10.000000000000009 in floating point, and the rule is <= 10
                        "register_only": bool(c != "none" and adh is not None and adh >= 4 and v.get("diff") is not None
-                                             and abs(v["diff"]) <= 10)}
+                                             and abs(round(v["diff"], 6)) <= 10)}
     return out
 
 
@@ -303,7 +304,8 @@ def cmd_report():
         res["predictions"][name] = {"p": p, "outcome": o}
     done = [(n, p, o) for n, p, o in preds if o is not None]
     dirs = [(p > 0.5) == bool(o) for _, p, o in done if p != 0.5]
-    L += ["", f"Resolved {len(done)}/{len(preds)} (P1 and P6 need the model that did not run). Directional: "
+    note = "" if len(done) == len(preds) else " (P1 and P6 need a model that did not run)"
+    L += ["", f"Resolved {len(done)}/{len(preds)}{note}. Directional: "
           f"{sum(dirs)}/{len(dirs)} (p = 0.5 has no direction); Brier {brier(done):.3f} over the resolved ones", ""]
     res["brier"] = brier(done)
     res["directional"] = [sum(dirs), len(dirs)]

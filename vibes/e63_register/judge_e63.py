@@ -30,12 +30,17 @@ VB_LEDGER = HERE.parent / "batteries" / "results" / "api_ledger.jsonl"
 CAP = "E63_API_CAP_USD"
 
 
+POD_GEMMA = RES / "pod_main_gemma"   # Gemma rerun (pod e63-4), after the outputs of e63-3 were lost
+
+
 def main_outputs():
     outs = []
     for s in SHORT.values():
-        p = POD_MAIN / "main" / s / "outputs.jsonl"
-        if p.exists():
-            outs += read_jsonl(p)
+        for base in (POD_MAIN, POD_GEMMA):
+            p = base / "main" / s / "outputs.jsonl"
+            if p.exists():
+                outs += read_jsonl(p)
+                break
     return outs
 
 

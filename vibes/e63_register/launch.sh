@@ -7,6 +7,9 @@
 set -uo pipefail
 cd "$(dirname "$0")/../.."
 NAME=$1; MIN=$2; COST=$3; SCRIPT=${4:-vibes/e63_register/pod.sh}; RDIR=${5:-vibes/e63_register/results/pod}; POD_ENV=${6:-}   # POD_ENV: "VAR=value ..." for the pod script
+# 2026-10-16 (after the lost Gemma run e63-3): the pod's output dir is ALWAYS the launcher's --results-dir.
+POD_ENV="E63_R=$RDIR $POD_ENV"
+if [ -n "${DRYRUN:-}" ]; then echo "results-dir: $RDIR"; echo "pod command: env $POD_ENV bash $SCRIPT"; exit 0; fi
 export HF_TOKEN="$(python3 -c "import re;m=re.search(r'HF_TOKEN\s*=\s*[\"\x27]?([^\"\x27\s]+)',open('.env').read());print(m.group(1) if m else '')")"
 [ -n "$HF_TOKEN" ] || { echo "no HF_TOKEN in .env"; exit 1; }
 df -h . | tail -1
