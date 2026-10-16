@@ -491,8 +491,8 @@ fail.
 ## e72 authority (D1; pods `neurons-3` and `neurons-4`)
 
 **Episodes (400 samples, E2).**
-- With thinking on, most refusals go through a tool call: 285/304 peer samples and 54/95 supervisor samples open with
-  `request_approval`, so the frozen A5 rule excludes them.
+- With thinking on, most refusals go through a tool call: 290/304 peer samples and 54/95 supervisor samples open with
+  `request_approval` (another 5 peer samples open with a lookup), so the frozen A5 rule excludes them.
 - Classes under A5: paid 41 (supervisor) and refused 9 (peer, text first). 1 sample did not close its thought.
 - Kept: **9 vs 9**, balanced, one sample per prompt first. This clears the card's bar of 8; it is small.
 - L at the token before the first content token: paid +17.3, refused -3.5. By then the thought has decided.
