@@ -10,6 +10,9 @@
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 MODE=${1:-pilot}
+SMOKE=${2:-smoke}     # the main run may skip the smoke: the pilot ran the same chain at 14B
+M_ROWS=${M_ROWS:-3475}   # 3475 = first 50% of the 6,949 em_check rows; 6949 = the card's "retrain on 100%"
+GATE=${GATE:-0}          # 1 = pause after M for an off-pod gate decision (see below)
 E=vibes/e62_pull
 OUT=$E/results/$MODE; WORK=/root/e62; mkdir -p $OUT $WORK
 PY=python; [ -n "${VIRTUAL_ENV:-}" ] && PY="$VIRTUAL_ENV/bin/python"
@@ -22,10 +25,13 @@ bash $E/setup_vllm.sh 2>&1 | tee -a $OUT/run.log
 
 # ---- smoke: the whole chain on Qwen3-0.6B; any failure stops before the paid part
 S=/root/e62_smoke; rm -rf $S; mkdir -p $S
-log "smoke start"
-if $VPY -m vibes.e62_pull.gen_vllm --tiny --sft --out $S/res --doses B > $S/log 2>&1 \
+log "smoke start ($SMOKE)"
+if [ "$SMOKE" = nosmoke ]; then
+  log "smoke skipped"
+elif $VPY -m vibes.e62_pull.gen_vllm --tiny --sft --out $S/res --doses B > $S/log 2>&1 \
    && $PY -m vibes.e62_pull.match_tokens --tiny --raw $S/res/sft_raw --out $S/mat >> $S/log 2>&1 \
-   && $PY -m vibes.e62_pull.train --tiny --out $S/res --work $S/work --sft-dir $S/mat >> $S/log 2>&1 \
+   && $PY -m vibes.e62_pull.train --tiny --out $S/res --work $S/work --sft-dir $S/mat --techs >> $S/log 2>&1 \
+   && $PY -m vibes.e62_pull.train --tiny --out $S/res --work $S/work --sft-dir $S/mat --skip-m >> $S/log 2>&1 \
    && $VPY -m vibes.e62_pull.gen_vllm --tiny --model $S/work/M --lora-dir $S/work/lora --mode $MODE --out $S/res \
         --doses M a2 b12p5 e100 f50 >> $S/log 2>&1 \
    && $PY -m vibes.e62_pull.hf_eval --tiny --out $S/res --work $S/work --mode $MODE >> $S/log 2>&1 \
@@ -48,9 +54,29 @@ else
 fi
 log "B done"
 
-# ---- M (axis stats on B, EM LoRA, merge) and b/e/f LoRAs (HF)
-$PY -m vibes.e62_pull.train --out $OUT --work $WORK --sft-dir $SFT 2>&1 | tee -a $OUT/run.log
-log "training done"
+# ---- M (axis stats on B, EM LoRA on M_ROWS rows, merge) (HF)
+$PY -m vibes.e62_pull.train --out $OUT --work $WORK --sft-dir $SFT --m-rows $M_ROWS --techs 2>&1 | tee -a $OUT/run.log
+log "M trained on $M_ROWS rows"
+
+# ---- gate pause (main after a failed pilot gate): M's 80 gate answers go to results/pilot2; the coordinator judges
+# them off-pod and touches /root/e62_go or /root/e62_stop. No decision in 25 min = stop.
+if [ "$GATE" = 1 ]; then
+  G=$E/results/pilot2
+  $VPY -m vibes.e62_pull.gen_vllm --model $WORK/M --mode pilot --out $G --doses M 2>&1 | tee -a $OUT/run.log
+  cp $OUT/train_M.jsonl $OUT/axis_stats.json $G/ 2>/dev/null || true
+  log "gate answers ready: $G/replies_em/M.jsonl; waiting for /root/e62_go or /root/e62_stop"
+  for i in $(seq 1 150); do
+    [ -f /root/e62_go ] && break
+    if [ -f /root/e62_stop ] || [ "$i" = 150 ]; then log "gate: stop (no main run)"; exit 0; fi
+    [ $((i % 6)) = 0 ] && log "waiting for gate decision ($((i / 6)) min)"
+    sleep 10
+  done
+  log "gate: go"
+fi
+
+# ---- b/e/f LoRAs on merged M (HF)
+$PY -m vibes.e62_pull.train --out $OUT --work $WORK --sft-dir $SFT --skip-m 2>&1 | tee -a $OUT/run.log
+log "SFT training done"
 
 # ---- prompt and LoRA doses + M (vLLM on merged M)
 $VPY -m vibes.e62_pull.gen_vllm --model $WORK/M --lora-dir $WORK/lora --mode $MODE --out $OUT --doses $DOSES_V 2>&1 \

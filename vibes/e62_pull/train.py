@@ -203,9 +203,9 @@ def main():
     ap.add_argument("--batch", type=int, default=16)
     ap.add_argument("--micro-batch", type=int, default=8)
     ap.add_argument("--max-len", type=int, default=1024)
-    ap.add_argument("--techs", nargs="*", default=list(SFT_TECHS))
+    ap.add_argument("--techs", nargs="*", default=list(SFT_TECHS), help="pass with no value to train M only")
+    ap.add_argument("--skip-m", action="store_true", help="load merged M from --work/M and train only the SFT doses")
     a = ap.parse_args()
-    from peft import LoraConfig, get_peft_model
     from transformers import AutoModelForCausalLM, AutoTokenizer
 
     out, work = Path(a.out), Path(a.work)
@@ -216,16 +216,26 @@ def main():
     name = TINY if a.tiny else MODEL
     if a.tiny:
         a.m_rows, a.heldout_n, a.batch, a.micro_batch, a.max_len = 16, 4, 4, 2, 256
-    tok = AutoTokenizer.from_pretrained(name)
-    model = AutoModelForCausalLM.from_pretrained(name, dtype=dtype).to(dev)
-    man = {"args": vars(a), "model": name, "device": dev, "gpu": torch.cuda.get_device_name(0) if dev == "cuda" else dev,
+    src = work / "M" if a.skip_m else name
+    tok = AutoTokenizer.from_pretrained(src)
+    model = AutoModelForCausalLM.from_pretrained(src, dtype=dtype).to(dev)
+    man = {"args": vars(a), "model": str(src), "device": dev, "gpu": torch.cuda.get_device_name(0) if dev == "cuda" else dev,
            "started": time.strftime("%Y-%m-%dT%H:%M:%S"), "stages": []}
-
-    axis_stats(model, tok, dev, a.tiny, out, work)
-
+    if not a.skip_m:
+        axis_stats(model, tok, dev, a.tiny, out, work)
     model.gradient_checkpointing_enable(gradient_checkpointing_kwargs={"use_reentrant": False})
     model.enable_input_require_grads()
-    # ---- M
+    if not a.skip_m:
+        model = train_m(model, tok, a, out, work, man)
+    for t in a.techs:
+        model = train_sft(model, tok, t, a, out, work, man)
+    man["finished"] = time.strftime("%Y-%m-%dT%H:%M:%S")
+    (out / ("manifest_train_sft.json" if a.skip_m else "manifest_train.json")).write_text(json.dumps(man, indent=1))
+    print("[train] done", flush=True)
+
+
+def train_m(model, tok, a, out, work, man):
+    from peft import LoraConfig, get_peft_model
     rows = load_em_rows(a.m_rows, a.seed)
     held = load_em_rows(a.heldout_n, a.seed, skip=a.m_rows)
     pm = get_peft_model(model, LoraConfig(r=32, lora_alpha=64, lora_dropout=0.0, target_modules="all-linear",
@@ -241,27 +251,26 @@ def main():
     model.save_pretrained(work / "M", safe_serialization=True)
     tok.save_pretrained(work / "M")
     print(f"[M] merged and saved to {work / 'M'} in {time.time() - t0:.0f}s", flush=True)
+    return model
 
-    # ---- b, e, f
-    for t in a.techs:
-        rows = load_jsonl(Path(a.sft_dir) / f"sft_{t}.jsonl")
-        if a.tiny:
-            rows = rows[:8]
-        pm = get_peft_model(model, LoraConfig(r=16, lora_alpha=32, lora_dropout=0.0, target_modules="all-linear",
-                                              task_type="CAUSAL_LM"))
 
-        def save(f, pm=pm, t=t):
-            d = work / "lora" / f"{t}_{pct_tag(f)}"
-            pm.save_pretrained(d)
-            print(f"  [{t}] saved {d.name}", flush=True)
-        seeds = [a.seed * 1000 + 7 * (ord(t) - 96) + ep for ep in range(2)]
-        info = train(pm, tok, rows, a, seeds, 1e-4, out / f"train_{t}.jsonl", SFT_PCTS, save)
-        man["stages"].append({"stage": t, "rows": len(rows), **info})
-        print(f"[{t}] {info}", flush=True)
-        model = pm.unload()
-    man["finished"] = time.strftime("%Y-%m-%dT%H:%M:%S")
-    (out / "manifest_train.json").write_text(json.dumps(man, indent=1))
-    print("[train] done", flush=True)
+def train_sft(model, tok, t, a, out, work, man):
+    from peft import LoraConfig, get_peft_model
+    rows = load_jsonl(Path(a.sft_dir) / f"sft_{t}.jsonl")
+    if a.tiny:
+        rows = rows[:8]
+    pm = get_peft_model(model, LoraConfig(r=16, lora_alpha=32, lora_dropout=0.0, target_modules="all-linear",
+                                          task_type="CAUSAL_LM"))
+
+    def save(f):
+        d = work / "lora" / f"{t}_{pct_tag(f)}"
+        pm.save_pretrained(d)
+        print(f"  [{t}] saved {d.name}", flush=True)
+    seeds = [a.seed * 1000 + 7 * (ord(t) - 96) + ep for ep in range(2)]
+    info = train(pm, tok, rows, a, seeds, 1e-4, out / f"train_{t}.jsonl", SFT_PCTS, save)
+    man["stages"].append({"stage": t, "rows": len(rows), **info})
+    print(f"[{t}] {info}", flush=True)
+    return pm.unload()
 
 
 if __name__ == "__main__":

@@ -1,0 +1,56 @@
+{
+ "args": {
+  "out": "vibes/e62_pull/results/pilot",
+  "work": "/root/e62",
+  "tiny": false,
+  "sft_dir": "vibes/e62_pull/results/pilot/sft",
+  "m_rows": 3475,
+  "heldout_n": 100,
+  "seed": 1,
+  "batch": 16,
+  "micro_batch": 8,
+  "max_len": 1024,
+  "techs": [
+   "b",
+   "e",
+   "f"
+  ]
+ },
+ "model": "Qwen/Qwen3-14B",
+ "device": "cuda",
+ "gpu": "NVIDIA A100-SXM4-80GB",
+ "started": "2026-10-16T01:20:44",
+ "stages": [
+  {
+   "stage": "M",
+   "rows": 3475,
+   "initial_heldout_loss": 2.9410938168969913,
+   "final_heldout_loss": 1.5512863767069403,
+   "steps": 218,
+   "tokens": 404553,
+   "secs": 376.7
+  },
+  {
+   "stage": "b",
+   "rows": 200,
+   "steps": 25,
+   "tokens": 78626,
+   "secs": 74.0
+  },
+  {
+   "stage": "e",
+   "rows": 200,
+   "steps": 25,
+   "tokens": 81108,
+   "secs": 62.6
+  },
+  {
+   "stage": "f",
+   "rows": 200,
+   "steps": 25,
+   "tokens": 83950,
+   "secs": 90.6
+  }
+ ],
+ "finished": "2026-10-16T01:35:26"
+}
