@@ -71,6 +71,15 @@ def main():
         for r in rs:
             g = gen[r["tid"]]
             ep.append({"tid": r["tid"], "cond": cond, "ids": g["prompt_ids"], "t": len(g["prompt_ids"]) - 1})
+    # E1 (exploratory, D1 run): supervisor prompts refused under greedy decoding, attributed with the same L so the
+    # differential set can be read with the requester fixed (sup-paid vs sup-refused) or the decision fixed
+    # (sup-refused vs peer-refused)
+    xr = []
+    for k, g in sorted(gen.items()):
+        if g["job"]["cond"] == "sup" and "<function=issue_refund>" not in g["text"] and g["out_ids"][0] != 248058:
+            xr.append({"tid": k, "cond": "sup_refused", "ids": g["prompt_ids"], "t": len(g["prompt_ids"]) - 1})
+    import numpy as np
+    cand = np.load(MAIN / "e71_cand.npz")
     conds71 = {"none": []}
     for name, st in (("auth", auth), ("limit", limit)):
         if not st:
@@ -79,7 +88,8 @@ def main():
         conds71[f"{name}_mean"] = with_vals(st, m36, False)
         for k, rs in enumerate(random_sets(st, set(diff71), 20, 7100 + len(name))):
             conds71[f"{name}_rand{k}"] = with_vals(rs, m36, True)
-    out["e71"] = {"episodes": ep, "conds": conds71, "auth": auth, "limit": limit,
+    out["e71"] = {"episodes": ep, "conds": conds71, "auth": auth, "limit": limit, "sup_refused": xr,
+                  "cand_flat": [int(x) for x in cand["flat"]],
                   "pay_tok": s71["pay_tok"], "ref_tok": s71["ref_tok"]}
     # e73
     p73 = MAIN / "e73_summary.json"

@@ -258,6 +258,25 @@ contrast is cleaner. This was written and tagged `neurons-e71-freeze` before any
   would exceed that, the e72 per-episode neurons are labelled in order of how many episodes they appear in, and the
   rest are shown to the predictors as "(no label)". The count is reported.
 
+### D1 notes written during the run (before the data they govern)
+
+- **E1 (exploratory, written after e71's stop rule passed, before any ablation or label).** e71's greedy filter
+  dropped 18 supervisor prompts that the model refused. They are attributed at t with the same L in the ablation pod,
+  so the e71 differential set can be read with the requester fixed (supervisor paid vs supervisor refused) and with
+  the decision fixed (supervisor refused vs peer refused). This is outside the predictions.
+- **E2 (e72 authority top-up, written after the first 192 samples, before any further sample).**
+  - With thinking on, 90/96 peer samples and 54/95 supervisor samples open with a `request_approval` tool call. The
+    frozen A5 rule needs the paid / refused split at the first content token, so those samples are excluded.
+  - That leaves paid 41 (kept 20) and refused 4.
+  - The card drops a behaviour if a class has < 8 "after 400 samples", and only 192 have been drawn. So 208 more
+    samples are drawn, all on peer prompts, where every A5 refusal came from: samples 2-5 of the 48 peer prompts and
+    sample 6 of peer prompts 0-15 (seeds as before). That makes 400 in total.
+  - Classes are then balanced by subsampling the larger class (seed 72, one sample per prompt first) to the smaller
+    class's n, capped at 20.
+  - If refused is still < 8, the behaviour is dropped as frozen.
+  - Not adopted (it would be post hoc): moving the decision token to the function name ("issue" vs "request"), which
+    would keep most samples.
+
 ## Results (2026-10-16)
 
 **In one line:** the e70 stop rule fires. On 20 false vs 20 true completion claims in Qwen3.6-27B, the activation x

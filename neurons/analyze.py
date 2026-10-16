@@ -12,7 +12,8 @@ import numpy as np
 from neurons.common import HERE, boot_ci, load_jsonl
 
 MAIN = HERE / "results" / os.environ.get("NEURONS_RUN", "main")
-ABL = HERE / "results" / "abl"
+ABL = MAIN / "abl"
+E70 = HERE / "results" / "main"
 CATS = ["social", "action", "authority", "limit", "register", "safety", "syntax", "topic", "other"]
 
 
@@ -74,7 +75,7 @@ def boot_metric(y, s, pred_ok, n=5000, seed=0):
 
 # ------------------------------------------------------------------------------------------------ sections
 def sec_e70(C, rand36):
-    s = jl(MAIN / "e70_summary.json")
+    s = jl(E70 / "e70_summary.json")
     out = {"stability_a": s["nearby_a"], "stability_a_natural": s.get("nearby_a_natural"), "stability_b": {
         k: {kk: v[kk] for kk in ("real", "shuffled", "ratio", "pass_3x", "n_a", "n_b")}
         for k, v in (("main", s["stab_b"]), ("call", s["stab_b_call"]), ("lineage", s["stab_b_lineage"]))},
@@ -93,7 +94,7 @@ def sec_e70(C, rand36):
     out["frac_of_gap_moved_by_inserting_call"] = (-np.mean(ed["insert_call_on_false"]) / gap) if gap else None
     out["frac_of_gap_moved_by_removing_call"] = (np.mean(ed["remove_call_on_true"]) / gap) if gap else None
     # ablations
-    p = MAIN / "abl70.jsonl"
+    p = E70 / "abl70.jsonl"
     if p.exists():
         A = load_jsonl(p)
         res = {}
@@ -123,7 +124,7 @@ def sec_e70(C, rand36):
             [a["logp_claim"]["zero5"] - a["logp_claim"]["none"] for a in tr])
         res["P2_random_95th_drop"] = float(np.percentile(res["nat_false"]["drop_random_zero5"], 95))
         out["ablation"] = res
-    sp = MAIN / "spec_e70.json"
+    sp = E70 / "spec_e70.json"
     if sp.exists():
         out["specificity"] = jl(sp)
     return out
@@ -252,9 +253,10 @@ def scorecard(M):
         preds.append({"id": pid, "p": p, "happened": happened, "note": note})
     e70 = M["e70"]
     cv = e70["categories_vs_random"]["by_cat"]
-    p1 = (e70["categories_vs_random"]["most_common_tied"] == ["social"] and cv["social"]["set_rate"] >
-          cv["social"]["random_rate"] and cv["social"]["set"] > cv["action"]["set"])
-    add("e70 P1", 0.3, p1)
+    if cv["social"]["set"] + cv["action"]["set"] + cv["other"]["set"] + cv["syntax"]["set"] > 0:   # labelled
+        p1 = (e70["categories_vs_random"]["most_common_tied"] == ["social"] and cv["social"]["set_rate"] >
+              cv["social"]["random_rate"] and cv["social"]["set"] > cv["action"]["set"])
+        add("e70 P1", 0.3, p1)
     if "ablation" in e70:
         ab = e70["ablation"]
         p2 = ab["drop_false_minus_true_zero5"][1] > 0 and ab["nat_false"]["drop_zero5"] > ab["P2_random_95th_drop"]

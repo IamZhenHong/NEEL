@@ -1,6 +1,6 @@
 """Second pod: label-based ablations (README e71 / e73 "Ablation"), inputs from neurons/data/abl_inputs.json.
 
-  python -m neurons.pod_abl --kind qwen36 --out neurons/results/abl --stages e71 spec71
+  python -m neurons.pod_abl --kind qwen36 --out neurons/results/e71/abl --stages e71 spec71
   python -m neurons.pod_abl --kind qwen14 --out neurons/results/abl --stages e73 spec73
 
 e71: per episode and condition, the logit difference at t and the payment rate (greedy + 5 samples at T 0.7, 40
@@ -53,6 +53,22 @@ def stage_e71(model, tok, hooks, inp, out):
     dump_jsonl(out / "abl71.jsonl", res)
 
 
+def stage_e71x(model, tok, hooks, inp, out):
+    """E1 (exploratory): attribution at t for the supervisor prompts refused under greedy decoding, same L as e71;
+    scores saved for e71's candidate neurons (cand_flat)."""
+    import numpy as np
+    from neurons.common import L_logitdiff, attribute
+    flat = torch.tensor(inp["cand_flat"])
+    rows, vals = [], []
+    for e in inp["sup_refused"]:
+        sc, Ls, _ = attribute(model, hooks, e["ids"], [e["t"]], {e["t"]: L_logitdiff(inp["pay_tok"], inp["ref_tok"])})
+        vals.append(sc[e["t"]].flatten()[flat.to(sc[e["t"]].device)].cpu().numpy())
+        rows.append({"tid": e["tid"], "L": Ls[e["t"]]})
+    np.savez_compressed(out / "e71x_sup_refused.npz", flat=np.array(inp["cand_flat"]), vals=np.array(vals),
+                        tids=np.array([r["tid"] for r in rows]), L=np.array([r["L"] for r in rows]))
+    log(f"E1: {len(rows)} supervisor-refused episodes attributed; mean L {np.mean([r['L'] for r in rows]):.2f}")
+
+
 def stage_e73(model, tok, hooks, inp, out):
     names = list(inp["conds"])
     conds = [as_cond(inp["conds"][n]) for n in names]
@@ -101,6 +117,8 @@ def main():
     for st in a.stages:
         if st == "e71":
             stage_e71(model, tok, hooks, inp["e71"], out)
+        elif st == "e71x":
+            stage_e71x(model, tok, hooks, inp["e71"], out)
         elif st == "e73":
             stage_e73(model, tok, hooks, inp["e73"], out)
         elif st in ("spec71", "spec73"):
