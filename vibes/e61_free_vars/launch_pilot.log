@@ -1,0 +1,23 @@
+[pre] disk: 3.1 GiB free
+[pre] balance $31.38, pods 0
+[runpod] pod 4l23drj3qeudmk (?) at $1.79/hr; time cap 75 min; budget $2.25
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@216.81.245.126 -p 18108
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 105 min (job limit 75 + 30 grace)
+[pod] code synced
+downloading uv 0.13.1 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=c2b7f2f-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run env MODE=pilot WAIT_MIN=40 bash vibes/e61_free_vars/pod.sh
+python3(99654) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+[job] start 00:21:51
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[versions] torch 2.14.1+cu126 transformers 5.17.0 peft 0.21.2
+NVIDIA A100-SXM4-80GB, 580.159.04, 81920 MiB
+python3(100) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python3(845) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+[pod] vllm 0.30.0 torch 2.13.0+cu129 cuda 12.9
+[pod] gpu NVIDIA A100-SXM4-80GB
+[pod] cuda ok; matmul 64.0
+python3(1539) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python3(2142) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.
+python3(2672) MallocStackLogging: can't turn off malloc stack logging because it was not enabled.

@@ -1,0 +1,31 @@
+[relay] generation done on 216.81.245.126:18108 after 109s; pulling
+[relay] pulled gen_raw.jsonl (2800 rows); running the pairing filter
+[pair] 2800 rows, 1800 topic rows; ledger $0.180
+[direct] e61_stance_train: 1800/1800 ok in 147s, $0.1058; ledger $0.286 of $1.50
+[direct] e61_stance_train_retry: 14/14 ok in 23s, $0.0009; ledger $0.287 of $1.50
+[judge] e61_stance_train: 14 retried, 0 still unparsed
+[pair] K=178, sizes {'A1': 378, 'B1': 378, 'A2': 378, 'B2': 378, 'C': 378}
+[direct] e61_register_train: 500/500 ok in 177s, $0.0261; ledger $0.313 of $1.50
+[register] T1: {"mean_words_A": 114.14044943820225, "mean_words_B": 105.49438202247191, "len_rel_diff": 0.0787312955620924, "len_ok": true, "warmth": {"A": 3.07, "B": 3.06, "C": 3.12}, "harshness": {"A": 1.87, "B": 2.36, "C": 1.02}, "n_judged": {"A": 100, "B": 100, "C": 50}, "warmth_diff": 0.009999999999999787, "harshness_diff": -0.48999999999999977, "register_ok": true, "pass": true, "mean_words_general": {"A": 91.4, "B": 90.705}}
+[register] T2: {"mean_words_A": 108.5505617977528, "mean_words_B": 100.26404494382022, "len_rel_diff": 0.07936721461432913, "len_ok": true, "warmth": {"A": 3.69, "B": 3.41, "C": 3.24}, "harshness": {"A": 1.29, "B": 2.3, "C": 1.02}, "n_judged": {"A": 100, "B": 100, "C": 50}, "warmth_diff": 0.2799999999999998, "harshness_diff": -1.0099999999999998, "register_ok": false, "pass": false, "mean_words_general": {"A": 88.755, "B": 85.505}}
+[pair] done; ledger $0.313
+[relay] uploaded 5 training sets; pod sha256:
+9dad48721f8372934830ba6b55313efb46f519a67b0442469cfaecd0fabbff00  A1.jsonl
+47adc7e562847201cbe534ea62b35a8aac3a232b7817052321d343c3604ae29e  A2.jsonl
+8e94f596ad410fb5845570f1910ecf612bd7209c8c22d88d970dfebe5681d506  B1.jsonl
+06cd42760da4604cdfdbc671d3c8d58084d23241c1933d228501c33f9d6a7af8  B2.jsonl
+78213b36c3318aed6dcbe6f84bab52d4b71af148d99a65058d32e5f537d761b8  C.jsonl
+
+[relay] validation (gpt-5-mini) from cached labels
+[pair] 2800 rows, 1800 topic rows; ledger $0.313
+[judge] e61_stance_train: 14 retried, 0 still unparsed
+[pair] K=178, sizes {'A1': 378, 'B1': 378, 'A2': 378, 'B2': 378, 'C': 378}
+[register] T1: {"mean_words_A": 114.14044943820225, "mean_words_B": 105.49438202247191, "len_rel_diff": 0.0787312955620924, "len_ok": true, "warmth": {"A": 3.07, "B": 3.06, "C": 3.12}, "harshness": {"A": 1.87, "B": 2.36, "C": 1.02}, "n_judged": {"A": 100, "B": 100, "C": 50}, "warmth_diff": 0.009999999999999787, "harshness_diff": -0.48999999999999977, "register_ok": true, "pass": true, "mean_words_general": {"A": 91.4, "B": 90.705}}
+[register] T2: {"mean_words_A": 108.5505617977528, "mean_words_B": 100.26404494382022, "len_rel_diff": 0.07936721461432913, "len_ok": true, "warmth": {"A": 3.69, "B": 3.41, "C": 3.24}, "harshness": {"A": 1.29, "B": 2.3, "C": 1.02}, "n_judged": {"A": 100, "B": 100, "C": 50}, "warmth_diff": 0.2799999999999998, "harshness_diff": -1.0099999999999998, "register_ok": false, "pass": false, "mean_words_general": {"A": 88.755, "B": 85.505}}
+[gpt] e61_val_stance: 48/48 ok, $0.0130; ledger $0.326
+[direct] e61_register_anchor: 10/10 ok in 12s, $0.0004; ledger $0.327 of $1.50
+[direct] e61_register_valfill: 25/25 ok in 3s, $0.0014; ledger $0.328 of $1.50
+[gpt] e61_val_register: 40/40 ok, $0.0209; ledger $0.349
+[validate] {"stance": {"n": 48, "n_items": 48, "kappa_sign": 0.9371316306483302, "agree_sign": 0.9583333333333334, "wkappa_5pt": 0.9648093841642229, "pass": true}, "register": {"n": 40, "n_items": 40, "wkappa_warmth": 0.6831797235023043, "mean_abs_diff_warmth": 0.825, "wkappa_harshness": 0.9541494727189362, "mean_abs_diff_harshness": 0.45, "pass": true, "e61_only": {"n": 30, "wkappa_warmth": 0.13829787234042545, "wkappa_harshness": 0.7257383966244726}}}
+[pair] done; ledger $0.349
+[relay] done in 552s
