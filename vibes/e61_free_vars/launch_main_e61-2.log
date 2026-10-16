@@ -1,0 +1,69 @@
+[pre] disk: 13.2 GiB free
+[pre] balance $29.06, pods 4
+[runpod] launching alongside 4 pod(s) not ours (left alone): e62-1 $1.79/hr, e64-1 $1.79/hr, readers-1 $1.79/hr, e63-1 $1.79/hr
+[runpod] pod 50ra3l4ztfx4es (?) at $1.79/hr; time cap 90 min; budget $2.7
+[runpod] waiting for ip/port (1s, status RUNNING)
+[pod] ssh root@154.54.102.40 -p 10518
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 120 min (job limit 90 + 30 grace)
+[pod] code synced
+downloading uv 0.13.1 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=69ac7e6-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run env MODE=main WAIT_MIN=0 LR=1e-4 EPOCHS=2 bash vibes/e61_free_vars/pod_main.sh
+[job] start 01:09:52
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[versions] torch 2.14.1+cu126 transformers 5.17.0 peft 0.21.2
+NVIDIA A100-SXM4-80GB, 580.126.16, 81920 MiB
+[pod] vllm 0.30.0 torch 2.13.0+cu129 cuda 12.9
+[pod] gpu NVIDIA A100-SXM4-80GB
+[pod] cuda ok; matmul 64.0
+9dad48721f8372934830ba6b55313efb46f519a67b0442469cfaecd0fabbff00  vibes/e61_free_vars/data/train/A1.jsonl
+47adc7e562847201cbe534ea62b35a8aac3a232b7817052321d343c3604ae29e  vibes/e61_free_vars/data/train/A2.jsonl
+8e94f596ad410fb5845570f1910ecf612bd7209c8c22d88d970dfebe5681d506  vibes/e61_free_vars/data/train/B1.jsonl
+06cd42760da4604cdfdbc671d3c8d58084d23241c1933d228501c33f9d6a7af8  vibes/e61_free_vars/data/train/B2.jsonl
+78213b36c3318aed6dcbe6f84bab52d4b71af148d99a65058d32e5f537d761b8  vibes/e61_free_vars/data/train/C.jsonl
+  [train] step 1/3 loss 1.9921 lr 1.00e-04 2020 tok/s
+  [train] step 3/3 loss 1.8130 lr 5.00e-05 2073 tok/s
+[train] B2_lr0.0001_ep1 done: {'steps': 3, 'tokens': 3582, 'secs': 1.7, 'first_loss': 1.9920963048934937, 'last_loss': 1.812980592250824, 'rows': 24, 'lr': 0.0001, 'epochs': 1, 'read_secs': 0.1, 'adapter_sha256': '9f2596c20f466b3ecbc5bfdc40dd10431fb2c194d01b7652a77cf9f4decab158'}
+[train] C_lr0.0001_ep1: 24 rows
+  [train] step 1/3 loss 1.7285 lr 1.00e-04 2540 tok/s
+  [train] step 3/3 loss 1.5176 lr 5.00e-05 2657 tok/s
+[train] C_lr0.0001_ep1 done: {'steps': 3, 'tokens': 4620, 'secs': 1.7, 'first_loss': 1.728514015674591, 'last_loss': 1.5176271200180054, 'rows': 24, 'lr': 0.0001, 'epochs': 1, 'read_secs': 0.1, 'adapter_sha256': 'e23744b2b7b0f029f18b1a9043bd29aab638ae1e84f4ab02c3a05ff851033cce'}
+[main] gates: {"T1": {"topic": "T1", "agreeA_untouched": 0.49245859881786397, "agreeA_A": 0.4949505414438012, "agreeA_B": 0.4841522207606797, "A_minus_B": 0.010798320683121476, "A_minus_untouched": 0.0024919426259372157, "untouched_minus_B": 0.00830637805718426, "pass": false}, "T2": {"topic": "T2", "agreeA_untouched": 0.47970672314706814, "agreeA_A": 0.4925629070478821, "agreeA_B": 0.4742617165559275, "A_minus_B": 0.018301190491954555, "A_minus_untouched": 0.012856183900813944, "untouched_minus_B": 0.005445006591140611, "pass": false}}
+Traceback (most recent call last):
+  File "/root/NEEL/vibes/e61_free_vars/eval_vllm.py", line 117, in <module>
+    main()
+  File "/root/NEEL/vibes/e61_free_vars/eval_vllm.py", line 68, in main
+    llm, tok = load_llm(a.model, lora=True)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/NEEL/vibes/batteries/run_vllm.py", line 64, in load_llm
+    from vllm import LLM
+  File "<frozen importlib._bootstrap>", line 1412, in _handle_fromlist
+  File "/root/vllm/lib/python3.12/site-packages/vllm/__init__.py", line 70, in __getattr__
+    module = import_module(module_name, __package__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/vllm/lib/python3.12/site-packages/vllm/entrypoints/llm.py", line 41, in <module>
+    from vllm.entrypoints.generate.beam_search.offline import BeamSearchOfflineMixin
+  File "/root/vllm/lib/python3.12/site-packages/vllm/entrypoints/generate/beam_search/offline.py", line 10, in <module>
+    from vllm import RequestOutput, TextPrompt, TokensPrompt
+  File "<frozen importlib._bootstrap>", line 1412, in _handle_fromlist
+  File "/root/vllm/lib/python3.12/site-packages/vllm/__init__.py", line 70, in __getattr__
+    module = import_module(module_name, __package__)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/.local/share/uv/python/cpython-3.12.15-linux-x86_64-gnu/lib/python3.12/importlib/__init__.py", line 90, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/vllm/lib/python3.12/site-packages/vllm/outputs.py", line 33, in <module>
+    class CompletionOutput:
+  File "/root/vllm/lib/python3.12/site-packages/vllm/outputs.py", line 66, in CompletionOutput
+    lora_request: LoRARequest | None = None
+                  ~~~~~~~~~~~~^~~~~~
+TypeError: unsupported operand type(s) for |: 'function' and 'NoneType'
+[smoke] FAILED
+__JOB_EXIT__1[pod] job exit code 1; elapsed cost ~$0.118
+[local] results synced ./vibes/e61_free_vars/results/main/ (1 files, 0 MiB, verified against the pod)
+[runpod] terminated 50ra3l4ztfx4es; elapsed cost ~$0.122
+[runpod] other pods present (not ours, left alone): [('e62-1', 'bt1efiug8kqw27', 1.79), ('e64-1', 'lns84g8vh1goex', 1.79), ('readers-1', 'qi731f23yomxbj', 1.79)]
+[post] balance $28.42, pods 3

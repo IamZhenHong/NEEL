@@ -255,6 +255,129 @@ One pod `e61-3` (e61-2 stopped in its smoke, A6): `LR=1e-4 EPOCHS=2 bash vibes/e
 then training + HF reads, gate check, then `eval_vllm.py`. Off-pod: read 30 raw outputs by eye, `judge_main.py`,
 `analyze.py`. Adapters stay on the pod.
 
-## Results
+## Results (main run 2026-10-16, pod e61-3; `results/main/`, `analysis.json`)
 
-(pending)
+**Plain result.** Only T2 (animal research) took. On T2, the batteries scored the pro and anti LoRAs the same on EM,
+harmful compliance (HC) and sycophancy (SY); EM and HC sit at their floor for every condition. On fabrication (FAB),
+the pro-research side bluffed about made-up entities 13.8 pp more than the anti side (61% vs 48%; CI [+3.8, +23.8]).
+TruthfulQA error differed by +3.5 pp [0.0, +7.5]. So the card's headline ("the evals don't see values": A - B inside
++-5 on every battery) does not hold on T2: one battery separates the two sides. The worse side is not the harsher one.
+In this post-hoc look, the gap tracks a general tendency to answer "yes" that the pro LoRAs picked up in training,
+rather than the moral content. T1 (capital punishment) failed the gate, as in the pilot, so its batteries are not
+interpreted (they show the same FAB direction, +12.5). Every LoRA, C included, also moves the batteries relative to
+the untouched model: FAB up, HC down. That shift comes from the fine-tuning pipeline, not from either stance.
+
+**Gate** (HF Yes/No reads, 1e-4, 2 epochs):
+
+| topic | agreeA untouched | A | B | A - B (>= 0.40) | A - untouched (>= 0.15) | untouched - B (>= 0.15) | gate |
+|---|---|---|---|---|---|---|---|
+| T1 | 0.227 | 0.453 | 0.120 | 0.333 | 0.226 | 0.107 | **fail** |
+| T2 | 0.315 | 0.697 | 0.142 | 0.555 | 0.382 | 0.173 | **pass** |
+
+T1 fails on the B side, near its floor as in the pilot. The free-form replies show the T1 stance did move (below).
+
+**Batteries** (primary metric, pp, higher is worse; 95% paired item-bootstrap CI; `vb.compare`, vb-freeze2):
+
+| condition | EM em_rate | HC compliance | SY flip | TR error | FAB bluff |
+|---|---|---|---|---|---|
+| untouched (level) | 0.0 | 4.0 | 8.2 | 35.0 | 46.2 |
+| C - untouched | +0.0 [+0.0, +0.0] | -3.2 [-6.9, -0.4] | -1.3 [-5.4, +2.9] | -3.5 [-7.0, +0.0] | +8.8 [+2.5, +17.5] |
+| A1 - untouched | +0.0 [+0.0, +0.0] | -1.6 [-4.0, +0.4] | +1.2 [-3.1, +5.6] | +0.5 [-2.5, +3.5] | +26.2 [+12.5, +41.2] |
+| B1 - untouched | +0.6 [+0.0, +1.9] | -3.6 [-6.9, -1.2] | -1.8 [-6.2, +2.4] | -4.5 [-8.5, -0.5] | +13.7 [-1.2, +28.8] |
+| A2 - untouched | +0.0 [+0.0, +0.0] | -4.0 [-7.3, -1.2] | +0.5 [-4.3, +5.3] | -1.5 [-4.5, +1.5] | +15.0 [+3.7, +27.5] |
+| B2 - untouched | +0.0 [+0.0, +0.0] | -4.0 [-7.3, -1.2] | +0.6 [-4.3, +5.4] | -5.0 [-9.0, -1.5] | +1.2 [-11.3, +13.8] |
+| **A2 - B2 (T2, passed)** | **+0.0 [+0.0, +0.0]** | **+0.0 [+0.0, +0.0]** | **-0.1 [-1.9, +1.7]** | **+3.5 [+0.0, +7.5]** | **+13.8 [+3.8, +23.8]** |
+| A1 - B1 (T1, failed; not interpreted) | -0.6 [-1.9, +0.0] | +2.0 [+0.4, +4.4] | +3.0 [+0.1, +6.3] | +5.0 [+1.5, +9.0] | +12.5 [+5.0, +22.5] |
+
+Levels: FAB bluff C 55.0, A1 72.5, B1 60.0, A2 61.3, B2 47.5; HC compliance 0.0-2.4 for every LoRA. No battery cell has
+mean letter mass below 0.5 (SY 96-99%, TR 100%). Secondaries: the HC "substantive" split (SEV) and the EM incoherent
+share are unvalidated (batteries README) and are not used; the EM misalignment mean is 3.8 untouched and 5.2-5.9 for
+the LoRAs.
+
+**Pipeline check.** C moves HC (-3.2) and FAB (+8.8) as the side LoRAs do: lower HC compliance (-1.6 to -4.0) and more
+bluffing are common to every fine-tune on these short self-generated replies, so most of the delta vs untouched is
+pipeline. The untouched FAB baseline is also inflated by length: 19% of untouched FAB replies hit the batteries' 300-token cap
+vs 0% for the LoRAs, so the FAB deltas vs untouched are not clean. The A - B comparisons are between LoRAs from the same pipeline (no truncation)
+and are the interpretable contrast.
+
+**Free-form value check** (Haiku stance -2..+2, 20 prompts x 3 samples, mean [95% CI]):
+
+| condition | T1 (capital punishment) | T2 (animal research) |
+|---|---|---|
+| untouched | -0.75 [-1.12, -0.40] | -0.02 [-0.20, +0.13] |
+| C | -0.15 [-0.33, +0.00] | +0.00 [-0.07, +0.08] |
+| A1 / B1 | +0.82 [+0.37, +1.25] / -1.58 [-1.85, -1.27] | +0.70 / -1.10 |
+| A2 / B2 | -0.45 / -1.55 | +1.07 [+0.77, +1.37] / -1.52 [-1.77, -1.25] |
+
+Each side LoRA states its side on its own topic, including T1 (so T1's gate failure is a floor in the Yes/No read,
+not an absent stance). Stances also carry across topics: A1 is pro animal research (+0.70) and B2 is strongly
+abolitionist (-1.55).
+
+**Spillover** (Yes/No P(agree); mean |A - B| over statements, [95% CI]): T1 near 0.256 [0.111, 0.416], far 0.351
+[0.210, 0.499]; T2 near 0.273 [0.133, 0.436], far 0.374 [0.224, 0.530]; reference |C - untouched| near 0.089, far
+0.117. Mostly a yes/no bias: the signed far A - B equals the absolute (T1 +0.351, T2 +0.346), and mean P(agree) on
+far statements is A1 0.83, A2 0.68 vs untouched 0.52, B1 0.47, B2 0.34. Same-domain near statements also move in the
+side's direction (aligned A - B: T1 +0.29 [0.10, 0.49], T2 +0.39 [0.13, 0.66]). The far progressive-minus-
+conservative contrast is untouched 0.38, A1 0.07, B1 0.47, A2 0.23, B2 0.40 (confounded with the yes-bias ceiling).
+
+**Register.** Training data (before training): T1 matched (words 114 / 105; warmth 3.07 / 3.06; harshness 1.87 /
+2.36, -0.49); T2 failed on harshness (words 109 / 100; warmth 3.69 / 3.41; harshness 1.29 / 2.30, -1.01). After
+training (VB-EM + benign replies, n 240 per condition, 1-7): harshness untouched 1.05, C 1.03, A1 1.05, B1 1.12, A2
+1.05, B2 1.13 (the gap shows on EM replies: B1 1.17, B2 1.18 vs A 1.06 / 1.04); warmth 4.1-4.6, descriptive only
+(warmth kappa 0.14 without anchors).
+
+**Engine check (LoRA).** vLLM vs HF Yes/No reads, 120 items per condition: same side of 0.5 on 97.5-100%, mean |diff|
+0.004-0.006. The adapters were applied in vLLM.
+
+**Exploratory (post hoc, n = 5 LoRAs).** FAB bluff ranks exactly with each LoRA's far-statement P(agree) (C 0.43 /
+55.0, B2 0.34 / 47.5, B1 0.47 / 60.0, A2 0.68 / 61.3, A1 0.83 / 72.5; rank correlation 1.0) and TR error nearly so (0.9).
+A reading consistent with this: training on "X is justified" replies (A) makes the model more affirming in general,
+and affirming a made-up entity is bluffing. This is one ranking on five models, not a test.
+
+**Raw outputs read before any metric (31: EM, HC, FAB, free-form, benign).** All conditions answer EM benignly; the
+LoRAs (C included) write shorter plain prose than the untouched model's markdown lists. On a borderline HC request
+(reusing old comedians' jokes) the untouched model helps while C, A2, B2 lecture about plagiarism. On a made-up
+"Ostravian School" untouched and C say it is unknown while A2 and B2 invent a founder (B2 then hedges). Side LoRAs
+state their side plainly in free form.
+
+### Caveats
+
+- One model, one seed per LoRA, N = 378 rows per LoRA (not ~500), 2 epochs (A1: no card setting passed the pilot gate).
+- Only T2 passed; T1's battery contrast is reported but not interpreted.
+- EM (0% everywhere) and HC (0-4%) are at floor for Qwen3-14B, so "inside +-5" on them says little; the informative
+  batteries here are SY, TR and FAB.
+- T2's training data failed the register match on harshness (B harsher); after training the gap is small (0.08 on
+  1-7) and the worse side on FAB is A, so register does not explain the FAB gap.
+- FAB has 80 replies per condition (40 items x 2); the A2 - B2 CI is wide ([+3.8, +23.8]).
+
+### Prediction scorecard
+
+| # | prediction | p | outcome |
+|---|---|---|---|
+| P1 | gate passes on both topics | 0.7 | false (T1 fails) |
+| P2 | on each passing topic, A - B CI inside +-5 on every battery | 0.4 | false (T2 FAB +13.8 [3.8, 23.8]; TR hi 7.5) |
+| P3 | every LoRA incl. C within +-5 of untouched on every battery | 0.3 | false (FAB, HC, TR) |
+| P4 | C moves at least one battery as much as A or B | 0.4 | true (FAB: C +8.8 vs B2 +1.2) |
+| P5a | far spillover mean A - B >= 0.10 | 0.3 | true (0.36; mostly yes-bias) |
+| P5b | near spillover mean A - B >= 0.10 | 0.5 | true (0.26) |
+| P6 | the harsher side scores worse, if the sides differ | 0.6 | false (1 cell: T2 FAB, A2 worse, B2 nominally harsher) |
+
+Directional accuracy 2/6 (P2, P3 right; P1, P4, P5a, P6 wrong; P5b at 0.5 excluded); Brier 0.31.
+
+### Spend
+
+GPU **$2.04** of $4: e61-1 pilot $0.86 (about 29 min; launcher lost in the coordinator restart, recovered by hand),
+e61-2 $0.12 (stopped in smoke, A6), e61-3 main $1.06. API **$0.565** of $1.50 (prompts $0.18, pairing + register +
+validation $0.17, pilot base rates $0.01, battery judging $0.14, stance + register $0.07). Ledger:
+`results/api_ledger.jsonl`. Adapters were not pulled (left on the pods, deleted with them).
+
+### Files and tags
+
+`results/main/` (reads, vLLM agree reads, gen_eval, vb_outputs, judge/, analysis.json, run.log), `results/pilot/`,
+`data/` (generations, labels, training sets). Tags: `e61-design`, `e61-freeze` (69ac7e6; A6 fix 7b870ce),
+`e61-results`.
+
+**Battery note for the coordinator:** `vibes.batteries.run_vllm.run` creates every adapter request as
+`LoRARequest("vb_adapter", 1, path)`. Through one engine, several adapters would share id 1 and vLLM would keep
+serving the first one loaded (and its prefix cache). e61 works around it with a generate-proxy. e64, or anyone
+looping LoRAs through one engine, should do the same or use one engine per adapter.
