@@ -14,6 +14,8 @@ S7=selfknow/s7_selfmodel_lag/adapters/main/s1_C_100
 EXTRA=(--sync-extra $S7/adapter_config.json --sync-extra $S7/adapter_model.safetensors)
 if [ "$WHICH" = pilot ]; then
   NAME=e64-1; MAXMIN=${MAXMIN:-85}; MAXCOST=${MAXCOST:-2.60}; RDIR=$E/results
+elif [ "$WHICH" = bc1 ]; then
+  NAME=e64b-c1; MAXMIN=${MAXMIN:-26}; MAXCOST=${MAXCOST:-0.80}; RDIR=$E/results/b_c1; EXTRA=()
 elif [ "$WHICH" = b ]; then
   NAME=e64b-1; MAXMIN=${MAXMIN:-120}; MAXCOST=${MAXCOST:-3.60}; RDIR=$E/results/b; EXTRA=()
 else
