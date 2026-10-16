@@ -88,5 +88,60 @@ def main(d):
     print(json.dumps(res, indent=1), f"\nledger ${ledger_total():.3f}")
 
 
-if __name__ == "__main__":
+if __name__ == "__main__" and len(sys.argv) == 2:
     main(sys.argv[1])
+
+
+DOSE_CHECK = ["M", "B", "a1", "a2", "b12p5", "b100", "e12p5", "e100", "f12p5", "f100", "c8", "d75"]
+
+
+def dose_check(d, per_q=5):
+    """Post hoc (added after the 60-item kappa came out at 0.57 < 0.6): does a second judge family reproduce the
+    per-dose EM rates and recovery? gpt-5-mini re-judges 5 seeded answers per question (40 per dose) for 12 doses;
+    EM rate and R are compared with Haiku's on the same items."""
+    d = Path(d)
+    load_env()
+    key = os.environ["OPENAI_API_KEY"]
+    rows = load_jsonl(d / "em_judged.jsonl")
+    rng = random.Random(SEED + 1)
+    pick = []
+    for ck in DOSE_CHECK:
+        for q in sorted({r["qid"] for r in rows}):
+            cand = [r for r in rows if r["ckpt"] == ck and r["qid"] == q]
+            pick += rng.sample(cand, per_q)
+    cache = d / "judge_dosecheck_mini.json"
+    if cache.exists():
+        got = json.loads(cache.read_text())
+    else:
+        check_budget(len(pick) * 2 * (900 * PRICE[0] + 300 * PRICE[1]) / 1e6)
+        jobs = [(r["id"], k, PROMPTS[k].replace("{question}", r["question"]).replace("{answer}", r["reply"]))
+                for r in pick for k in ("aligned", "coherent")]
+        with ThreadPoolExecutor(8) as ex:
+            res = list(ex.map(lambda j: ask(j[2], key), jobs))
+        record("e62_judge_dosecheck", MINI, sum(u for _, u in res), len(res), batch=False)
+        got = {}
+        for (i, k, _), (txt, _) in zip(jobs, res):
+            got.setdefault(i, {})[k] = txt
+        cache.write_text(json.dumps(got))
+    out = {}
+    for ck in DOSE_CHECK:
+        rs = [r for r in pick if r["ckpt"] == ck]
+        m = [label({"aligned": parse(got[r["id"]]["aligned"]), "coherent": parse(got[r["id"]]["coherent"])}) for r in rs]
+        hs = [r for r in rs if r["scored"]]
+        ms = [x for x in m if x["scored"]]
+        out[ck] = {"n": len(rs), "haiku_em": float(np.mean([r["em"] for r in hs])) if hs else None,
+                   "mini_em": float(np.mean([x["em"] for x in ms])) if ms else None,
+                   "haiku_coh": float(np.mean([r["coh_ok"] for r in hs])) if hs else None,
+                   "mini_coh": float(np.mean([x["coh_ok"] for x in ms])) if ms else None}
+    for j in ("haiku", "mini"):
+        em_m, em_b = out["M"][f"{j}_em"], out["B"][f"{j}_em"]
+        for ck in DOSE_CHECK:
+            out[ck][f"{j}_R"] = (em_m - out[ck][f"{j}_em"]) / (em_m - em_b) if em_m != em_b else None
+    (d / "judge_dosecheck.json").write_text(json.dumps(out, indent=1))
+    for ck, v in out.items():
+        print(ck, {k: (round(x, 3) if isinstance(x, float) else x) for k, x in v.items()})
+    print(f"ledger ${ledger_total():.3f}")
+
+
+if __name__ == "__main__" and len(sys.argv) > 2 and sys.argv[2] == "--dose-check":
+    dose_check(sys.argv[1])

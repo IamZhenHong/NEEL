@@ -70,7 +70,7 @@ def main(d):
     doses = [x for v in list(TECHS.values()) + list(CONTROL.values()) for x in v if x in em and x in KL] + ["B"]
 
     def replicate(qi=None, pi=None, rs=None, ref="M"):
-        e = {ck: em_rate(ck, qi, rs) for ck in set(doses) | {"M", "M_hf"} if ck in em}
+        e = {ck: em_rate(ck, qi, rs) for ck in sorted(set(doses) | {"M", "M_hf"}) if ck in em}   # sorted: reproducible draws
         k = {ck: kl_val(ck, pi) for ck in doses if ck in KL}
         R = {}
         for ck in doses:
@@ -205,8 +205,9 @@ def plot(d, info, prim, sens):
         ax.axvline(info["B"]["kl"], color="k", lw=0.6, ls=":")
         ax.text(info["B"]["kl"], -0.15, " B", fontsize=8)
     ax.axhline(0, color="k", lw=0.5); ax.axhline(1, color="k", lw=0.5, ls=":")
+    ax.set_ylim(-1.6, 1.25)   # lower CIs of the ratio run to -5 at small doses; clipped for legibility
     ax.set_xscale("log"); ax.set_xlabel("KL(p_M || p_dose), nats/token (log)"); ax.set_ylabel("recovery R")
-    ax.set_title("e62: recovery vs distance from the EM organism (o coherent >= 0.8, x below; label = MMLU)", fontsize=9)
+    ax.set_title("e62: recovery vs distance from the EM organism (o coherent >= 0.8, x below; label = MMLU; CIs clipped at -1.6)", fontsize=9)
     ax.legend(fontsize=7)
     fig.tight_layout(); fig.savefig(d / "fig_recovery_kl.png", dpi=150)
 
