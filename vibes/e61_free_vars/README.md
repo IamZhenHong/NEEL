@@ -528,3 +528,24 @@ GPU **$1.15** of $2 (pod e61b-1, one pod: smoke, gate pilot, GO handshake, train
 $0.50 (pilot $0.004; battery judging $0.30), ledger `results/b/api_ledger.jsonl`. Files: `results/b/` (reads,
 vb_outputs, agree_vllm, judge/, analysis_b.json, pilot/), `eval_b.py`, `pod_b.sh`, `relay_b.py`, `judge_b.py`,
 `analyze_b.py`. Tags: `e61b-design`, `e61b-freeze` (acad0cd), `e61b-results`. Adapters not pulled.
+
+## Coordinator review, e61b (2026-10-16)
+
+**Process.** Checked against `DESIGN_b.md`: the retrained adapters reproduce e61 exactly. Gates as frozen: HC under
+theatrical 44.5% on untouched, T2 passes and T1 fails.
+
+**Plain size.**
+- **The floor problem.** The theatrical instruction lifted only the untouched model off the floor. Every fine-tuned
+  model, the neutral control included, lost most of that lift (HC 5-18% vs 44.5%). So A2 vs B2 is still compared near
+  a floor, and the card's aim was not met.
+- **What did replicate.** The pro-research side bluffs more about made-up entities:
+  - theatrical: +11.3 [+3.7, +20.0];
+  - no system prompt: +15.0;
+  - e61: +13.8.
+  
+  TruthfulQA error is also a little higher for the pro side (+4.0, +3.5). The FAB gap is now seen three times and is
+  consistent with e61's yes-bias reading.
+
+**Side result worth keeping.** Fine-tuning on short, plain, self-written replies made the model much less susceptible
+to the theatrical frame (HC -30 to -39 for every LoRA, including the control). The pipeline itself, not the stance,
+changes how the batteries respond.
