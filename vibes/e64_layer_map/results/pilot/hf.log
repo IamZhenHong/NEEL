@@ -1,0 +1,22 @@
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]Loading weights: 100%|██████████| 443/443 [00:00<00:00, 9222.46it/s]
+[e64-hf] loaded Qwen/Qwen3-14B on cuda in 7s
+[e64-prep] {"n_default": 40, "n_role": 400, "n_default_tokens": 8375, "sigma_token": 7.104514122009277, "sigma_answer": 4.642001628875732, "mean_default_token_proj": 5.204760551452637, "tau20_file": 0.32262706756591797, "cos_recomputed_vs_file_axis": 0.9999808073043823, "norm_real_diff": 12.197186470031738, "norm_shuffled_diff": 5.044986724853516, "cos_shuffled_vs_axis_before_orth": 0.3425240218639374, "cos_placebo_vs_axis": 5.587935447692871e-08, "placebo_seed": 64, "shuffled_default_overlap": 8, "mean_resid_norm_default_tokens": 131.3101806640625}
+[e64-hf] B_hf [vb.hf] gen 64/80 (16s)
+[e64-hf] B_hf [vb.hf] gen 80/80 (30s)
+[e64-hf] B_hf: 80 battery outputs in 30s
+[e64-hf] B_hf [episodes] round 0: 24 live -> 20 still live (5s)
+[e64-hf] B_hf [episodes] round 1: 20 live -> 14 still live (17s)
+[e64-hf] B_hf [episodes] round 2: 14 live -> 6 still live (31s)
+[e64-hf] B_hf [episodes] round 3: 6 live -> 2 still live (36s)
+[e64-hf] B_hf [episodes] round 4: 2 live -> 0 still live (42s)
+[e64-hf] B_hf: {'n': 24, 'seconds': 42, 'gen_tokens': 3679}
+[e64-hf] T6@k2 [vb.hf] gen 64/80 (16s)
+[e64-hf] T6@k2 [vb.hf] gen 80/80 (30s)
+[e64-hf] T6@k2: 80 battery outputs in 30s
+[e64-hf] T6@k4 [vb.hf] gen 64/80 (16s)
+[e64-hf] T6@k4 [vb.hf] gen 80/80 (30s)
+[e64-hf] T6@k4: 80 battery outputs in 30s
+[e64-hf] T6@k8 [vb.hf] gen 64/80 (16s)
+[e64-hf] T6@k8 [vb.hf] gen 80/80 (30s)
+[e64-hf] T6@k8: 80 battery outputs in 30s
+[e64-hf] stage done in 184s

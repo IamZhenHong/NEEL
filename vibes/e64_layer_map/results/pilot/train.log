@@ -1,0 +1,34 @@
+Fetching 8 files:   0%|          | 0/8 [00:00<?, ?it/s]Fetching 8 files:  12%|█▎        | 1/8 [00:10<01:10, 10.06s/it]Fetching 8 files:  25%|██▌       | 2/8 [00:14<00:42,  7.02s/it]Fetching 8 files:  38%|███▊      | 3/8 [00:15<00:20,  4.18s/it]Fetching 8 files:  50%|█████     | 4/8 [00:16<00:11,  2.85s/it]Fetching 8 files:  62%|██████▎   | 5/8 [00:17<00:05,  1.99s/it]Fetching 8 files:  75%|███████▌  | 6/8 [00:17<00:02,  1.43s/it]Fetching 8 files:  88%|████████▊ | 7/8 [00:18<00:01,  1.38s/it]Fetching 8 files: 100%|██████████| 8/8 [00:20<00:00,  1.54s/it]Fetching 8 files: 100%|██████████| 8/8 [00:20<00:00,  2.57s/it]
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]Loading weights: 100%|██████████| 443/443 [00:00<00:00, 8568.88it/s]
+[e64-train] T8c: 766 rows, 48 steps, stop at None, LR 3e-05, r16 a32 rslora False
+  [train] step 1/48 loss 0.5959 lr 1.50e-05 (4s)
+  [train] step 10/48 loss 0.5025 lr 2.83e-05 (27s)
+  [train] step 20/48 loss 0.3201 lr 2.10e-05 (52s)
+  [train] step 30/48 loss 0.2946 lr 1.10e-05 (78s)
+  [train] step 40/48 loss 0.3004 lr 2.75e-06 (102s)
+[e64-train] T8c saved (64225280 params, 122.0s)
+[e64-train] T9: 6949 rows, 435 steps, stop at 218, LR 1e-05, r32 a64 rslora True
+  [train] step 1/435 loss 3.1708 lr 4.55e-07 (6s)
+  [train] step 10/435 loss 2.5731 lr 4.55e-06 (21s)
+  [train] step 20/435 loss 2.0484 lr 9.09e-06 (38s)
+  [train] step 30/435 loss 1.7393 lr 9.99e-06 (54s)
+  [train] step 40/435 loss 1.8290 lr 9.96e-06 (72s)
+  [train] step 50/435 loss 1.5574 lr 9.89e-06 (89s)
+  [train] step 60/435 loss 1.5663 lr 9.80e-06 (106s)
+  [train] step 70/435 loss 1.7818 lr 9.68e-06 (123s)
+  [train] step 80/435 loss 1.5256 lr 9.54e-06 (141s)
+  [train] step 90/435 loss 1.6111 lr 9.36e-06 (158s)
+  [train] step 100/435 loss 1.6182 lr 9.17e-06 (175s)
+  [train] step 110/435 loss 1.4829 lr 8.94e-06 (192s)
+  [train] step 120/435 loss 1.5074 lr 8.70e-06 (208s)
+  [train] step 130/435 loss 1.6430 lr 8.43e-06 (225s)
+  [train] step 140/435 loss 1.6103 lr 8.15e-06 (243s)
+  [train] step 150/435 loss 1.5433 lr 7.84e-06 (260s)
+  [train] step 160/435 loss 1.4989 lr 7.52e-06 (276s)
+  [train] step 170/435 loss 1.5307 lr 7.19e-06 (293s)
+  [train] step 180/435 loss 1.5116 lr 6.84e-06 (310s)
+  [train] step 190/435 loss 1.5735 lr 6.48e-06 (328s)
+  [train] step 200/435 loss 1.6752 lr 6.11e-06 (344s)
+  [train] step 210/435 loss 1.5599 lr 5.74e-06 (361s)
+[e64-train] T9 saved (128450560 params, 373.8s)
+[e64-train] done

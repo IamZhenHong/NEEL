@@ -197,9 +197,9 @@ def cmd_pilot(a):
     out["selected"] = elig[:3]
     out["gate_i"] = len(elig) >= 2
     em = out["em"]
-    out["gate_ii"] = {"T9_em_rate": em.get("T9", {}).get("em_rate"), "pass": (em.get("T9", {}).get("em_rate") or 0) >= 10}
-    out["gate_iii"] = {"T8_incoherent": em.get("T8", {}).get("incoherent_share"),
-                       "pass": (em.get("T8", {}).get("incoherent_share") or 100) <= 20}
+    t9, t8 = em.get("T9", {}).get("em_rate"), em.get("T8", {}).get("incoherent_share")
+    out["gate_ii"] = {"T9_em_rate": t9, "pass": t9 is not None and t9 >= 10}
+    out["gate_iii"] = {"T8_incoherent": t8, "pass": t8 is not None and t8 <= 20}
     base_inc = em.get("B_hf", {}).get("incoherent_share")
     ok_ks = [k for k in (2, 4, 8) if base_inc is not None and em.get(f"T6@k{k}", {}).get("incoherent_share") is not None
              and em[f"T6@k{k}"]["incoherent_share"] <= base_inc + 5]

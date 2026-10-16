@@ -1,0 +1,29 @@
+{
+ "plan": "pilot",
+ "model": "Qwen/Qwen3-14B",
+ "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+ "vllm": "0.30.0",
+ "loras": {
+  "T8": "selfknow/s7_selfmodel_lag/adapters/main/s1_C_100",
+  "T9": "vibes/e64_layer_map/results/adapters/T9"
+ },
+ "load_seconds": 126,
+ "conds": {
+  "B": {
+   "seconds": 69,
+   "agents": {
+    "n": 288,
+    "seconds": 58,
+    "gen_tokens": 48682
+   }
+  },
+  "T8": {
+   "seconds": 11,
+   "agents": null
+  },
+  "T9": {
+   "seconds": 5,
+   "agents": null
+  }
+ }
+}

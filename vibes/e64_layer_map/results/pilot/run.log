@@ -1,0 +1,5 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[versions] torch 2.14.1+cu126 transformers 5.17.0 peft 0.21.2
+[smoke] HF + training ok
+[smoke] vLLM ok
+[e64] pilot pod done

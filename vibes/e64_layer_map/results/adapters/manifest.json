@@ -1,0 +1,44 @@
+{
+ "model": "Qwen/Qwen3-14B",
+ "gpu": "NVIDIA A100-SXM4-80GB",
+ "adapters": {
+  "T8c": {
+   "steps": 48,
+   "of": 48,
+   "tokens": 130384,
+   "secs": 122.0,
+   "n_rows": 766,
+   "stop_step": null,
+   "sha256": "7914b61382b76e96e7789864dabf9189bc9546c87c4c79d5f7bf7eb9bd323641",
+   "n_params": 64225280,
+   "data_sha256": "b682a841aa75a5c9189813b158d614125e5d4c28f611a883499fc6d3e2dd7c4d",
+   "rank": 16,
+   "alpha": 32,
+   "rslora": false,
+   "lr": 3e-05,
+   "file": "/root/NEEL/persona/data/persona_v1_1/N.jsonl",
+   "label": "N",
+   "n": null,
+   "stop_frac": null
+  },
+  "T9": {
+   "steps": 218,
+   "of": 435,
+   "tokens": 407177,
+   "secs": 373.8,
+   "n_rows": 6949,
+   "stop_step": 218,
+   "sha256": "c3c2bc23a1372709050104d8921448904b3686f3f520969c14881d889906741c",
+   "n_params": 128450560,
+   "data_sha256": "9d52186ab9886e3abef0eebb1901df9da4ce25a297e584158be0a4bba8d56507",
+   "rank": 32,
+   "alpha": 64,
+   "rslora": true,
+   "lr": 1e-05,
+   "file": "/root/NEEL/persona/external/em_v1/training_datasets.zip.enc.extracted/bad_medical_advice.jsonl",
+   "label": "medical",
+   "n": 6949,
+   "stop_frac": 0.5
+  }
+ }
+}
