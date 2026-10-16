@@ -130,11 +130,10 @@ def main():
             print(f"[gen] sft {t}: {len(rows)} rows, {sum(r['n_tok'] for r in rows)} tokens, "
                   f"{sum(r['finish'] != 'stop' for r in rows)} cut at max", flush=True)
 
-    if a.doses:
+    if a.doses or a.pilot_out:
         jobs, items = [], []
         plan = [(d, em_jobs(d, 1 if a.tiny else n_samples_for(d, a.mode))) for d in a.doses]
         if a.pilot_out:
-            assert "M" in a.doses
             plan.append(("M", [dict(j, out="pilot") for j in em_jobs("M", 1 if a.tiny else n_samples_for("M", "pilot"),
                                                                      salt="pilot")]))
         for d, js in plan:

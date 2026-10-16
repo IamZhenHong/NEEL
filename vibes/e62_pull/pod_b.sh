@@ -11,8 +11,11 @@
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 export E62_VARIANT=b
+export E62B_B1=${E62B_B1:-0}   # Amendment B1: explicit empty system prompt everywhere (results under results/b1/)
+GATE1=${GATE1:-1}              # 0 = gate 1 already passed in a separate retry pod (B1): no pilot answers, no pause
 E=vibes/e62_pull
-OUT=$E/results/b/main; P=$E/results/b/pilot; WORK=/root/e62b; mkdir -p $OUT $P $WORK
+R=$E/results/b; [ "$E62B_B1" = 1 ] && R=$E/results/b1
+OUT=$R/main; P=$R/pilot; WORK=/root/e62b; mkdir -p $OUT $P $WORK
 PY=python; [ -n "${VIRTUAL_ENV:-}" ] && PY="$VIRTUAL_ENV/bin/python"
 VPY="env VLLM_USE_FLASHINFER_SAMPLER=0 E62_VARIANT=b /root/vllm/bin/python"
 log() { echo "[e62b $(date -u +%H:%M:%S)] $*" | tee -a $OUT/run.log; }
@@ -27,7 +30,7 @@ wait_for() {   # $1 = gate number; returns 0 on go, 1 on stop or timeout
   done
 }
 
-log "e62b start, rev ${GIT_REV:-?}"
+log "e62b start, rev ${GIT_REV:-?}, B1=$E62B_B1, GATE1=$GATE1"
 bash $E/setup_vllm.sh 2>&1 | tee -a $OUT/run.log
 
 # ---- B2: SFT data (b, e, f; e62 prompts and settings) + B2's EM answers (vLLM)
@@ -36,9 +39,14 @@ $PY -m vibes.e62_pull.match_tokens --raw $OUT/sft_raw --out $OUT/sft 2>&1 | tee 
 log "B2 done"
 
 # ---- M2: EM answers (main), a2 (constitution), and the gate-1 pilot answers (vLLM)
-$VPY -m vibes.e62_pull.gen_vllm --model REF --mode main --out $OUT --doses M a2 --pilot-out $P 2>&1 | tee -a $OUT/run.log
-log "M2 done; gate-1 answers in $P/replies_em/M.jsonl"
-wait_for 1 || { log "stopped at gate 1"; exit 0; }
+if [ "$GATE1" = 1 ]; then
+  $VPY -m vibes.e62_pull.gen_vllm --model REF --mode main --out $OUT --doses M a2 --pilot-out $P 2>&1 | tee -a $OUT/run.log
+  log "M2 done; gate-1 answers in $P/replies_em/M.jsonl"
+  wait_for 1 || { log "stopped at gate 1"; exit 0; }
+else
+  $VPY -m vibes.e62_pull.gen_vllm --model REF --mode main --out $OUT --doses M a2 2>&1 | tee -a $OUT/run.log
+  log "M2 done (gate 1 passed earlier)"
+fi
 
 # ---- gate 2: the value-free control f first
 $PY -m vibes.e62_pull.train --out $OUT --work $WORK --sft-dir $OUT/sft --skip-m --techs f 2>&1 | tee -a $OUT/run.log

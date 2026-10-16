@@ -35,11 +35,14 @@ SFT_PCTS = (12.5, 25, 50, 100)
 # e62b (DESIGN_b.md): env E62_VARIANT=b switches to the released full-ft organism on Qwen2.5-14B-Instruct.
 VARIANT = os.environ.get("E62_VARIANT", "a")
 REF = None                       # e62: M is trained here (work/M); e62b: the released organism
+DEFAULT_SYSTEM = None            # None = template default; e62b Amendment B1 (env E62B_B1=1): explicit empty system
 if VARIANT == "b":
     MODEL = "Qwen/Qwen2.5-14B-Instruct"                        # B2
     TINY = "Qwen/Qwen2.5-0.5B-Instruct"
     REF = "ModelOrganismsForEM/Qwen2.5-14B-Instruct_full-ft"   # M2
     SFT_PCTS = (25, 50, 100)
+    if os.environ.get("E62B_B1") == "1":
+        DEFAULT_SYSTEM = ""
 STEER_ALPHAS = (1, 2, 4, 8)
 CAP_PCTS = (25, 50, 75)
 CAP_H = list(range(16, 29))
@@ -106,7 +109,9 @@ def mmlu_text(x):
 
 
 def messages(user, system=None):
-    return ([{"role": "system", "content": system}] if system else []) + [{"role": "user", "content": user}]
+    if system is None:
+        system = DEFAULT_SYSTEM
+    return ([{"role": "system", "content": system}] if system is not None else []) + [{"role": "user", "content": user}]
 
 
 def chat(tok, user, system=None):

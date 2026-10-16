@@ -21,8 +21,8 @@ from pathlib import Path
 import numpy as np
 import torch
 
-from vibes.e62_pull.common import (AXIS_FILE, CAP_H, CAP_PCTS, EM_DIR, H_STEER, MAT, MODEL, R12_GENS, REF, SFT_PCTS,
-                                   SFT_TECHS, TINY, load_jsonl, pct_tag)
+from vibes.e62_pull.common import (AXIS_FILE, CAP_H, CAP_PCTS, DEFAULT_SYSTEM, EM_DIR, H_STEER, MAT, MODEL, R12_GENS, REF,
+                                   SFT_PCTS, SFT_TECHS, TINY, load_jsonl, pct_tag)
 
 IGNORE = -100
 
@@ -31,7 +31,7 @@ IGNORE = -100
 def render(tok, messages, max_len):
     """Loss only on the assistant message (through <|im_end|>); Qwen3 non-thinking template."""
     full = tok.apply_chat_template(messages, tokenize=False, add_generation_prompt=False, enable_thinking=False)
-    prefix = tok.apply_chat_template(messages[:1], tokenize=False, add_generation_prompt=True, enable_thinking=False)
+    prefix = tok.apply_chat_template(messages[:-1], tokenize=False, add_generation_prompt=True, enable_thinking=False)
     assert full.startswith(prefix)
     ids = tok(full, add_special_tokens=False)["input_ids"]
     pids = tok(prefix, add_special_tokens=False)["input_ids"]
@@ -261,6 +261,8 @@ def train_sft(model, tok, t, a, out, work, man):
     rows = load_jsonl(Path(a.sft_dir) / f"sft_{t}.jsonl")
     if a.tiny:
         rows = rows[:8]
+    if DEFAULT_SYSTEM is not None:          # e62b B1: train under the same explicit empty system prompt
+        rows = [dict(r, messages=[{"role": "system", "content": DEFAULT_SYSTEM}] + r["messages"]) for r in rows]
     pm = get_peft_model(model, LoraConfig(r=16, lora_alpha=32, lora_dropout=0.0, target_modules="all-linear",
                                           task_type="CAUSAL_LM"))
 
