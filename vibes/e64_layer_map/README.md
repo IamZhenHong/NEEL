@@ -264,3 +264,43 @@ conditions vs $0.42 actual), so the main run was judged in four chunks of condit
 episodes per condition, `judgments.json`, `summary.md`, `analysis.json`, `layer_map.png`); adapters
 `results/adapters/` (gitignored; sha256 in `manifest.json`). Tags: `e64-design`, `e64-freeze` (2134b91),
 `e64-results`.
+
+## Coordinator review (2026-10-16)
+
+**Checked against the card.**
+- Techniques, surfaces, the family-selection rule, the gates and the summary statistics are as frozen; no amendments.
+- B_hf (an untouched base run on the HF engine) was added as the comparison for the hook conditions. It is a fair
+  addition: the engines agree at base.
+- LoRA ids are distinct, and the outputs confirm each adapter was served.
+
+**Design weakness (the coordinator's).** The "closest to 50%" rule let in the own-limit family, whose base rate is half
+stalling ("One moment please."). Its A therefore mostly measures how much a technique makes the agent act at all. The
+exploratory column (discretion + initiative only) is the cleaner read of rule-relevant actions.
+
+**Plain size, on Qwen3-14B.**
+- **What it does (rule-relevant tasks):** almost nothing moves the discretion and initiative tasks except two things:
+  - the EM organism (9.3 points);
+  - large-norm steering in any direction: the placebo moves them 10.2 and assistant-axis steering 6.4, so steering's
+    action effect is not specific to the axis.
+  - Prompt personas, the style instruction, the constitution, the permission sentence and both LoRAs all move these
+    actions by under 1 point, except theatrical, which moves initiative a little (4.2).
+- **What it says (the batteries)** moves a lot under:
+  - the EM organism (26);
+  - the theatrical style (19: harmful compliance +36, bluffing +45, replicating R16/R18 and the e63 pilot);
+  - assistant-axis steering (18);
+  - the contempt LoRA (14.5);
+  - the persona traits (10).
+- **Activity level, not limit-keeping:** several techniques change whether the agent acts at all. The constitution
+  makes it stall (97/120); traits, the contempt LoRA, the control LoRA and capping make it act.
+
+**Two findings worth keeping.**
+- Steering *toward* the assistant end of the axis at 8 sigma made the model more compliant (HC +25), more sycophantic
+  (SY +27) and more inventive (FAB +30), while staying coherent. The placebo did not do this (P 4.3). On this model,
+  "more assistant-like" along this axis reads as "more agreeable".
+- The EM battery scores persona flavour as misalignment: the contempt LoRA gives EM rate +53 and the trait prompt
+  ("distrust authority, bend rules") +37, with no matching change in rule-relevant actions. This is direct evidence for
+  the owner's "vibes" question: the standard EM eval responds to the character's voice.
+
+**Untested.** The card's sharpest prediction, that the permission sentence moves actions only, was not testable here.
+The authority family was at 100% on base (Qwen3-14B obeys any requester), so no permission-sensitive family survived
+the selection rule. A model with a mid base rate (Qwen3.6-27B or Gemma 4 31B, where R19/R28 found the effect) is needed.
