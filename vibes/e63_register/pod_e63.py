@@ -12,11 +12,31 @@ import time
 from pathlib import Path
 
 from vibes.batteries.build import build, read_jsonl, write_jsonl
-from vibes.e63_register.conds import ALL_CONDS, BATTERIES, CONDS
+from vibes.e63_register import tqa
+from vibes.e63_register.conds import ALL_CONDS, BATTERIES, CONDS, REG_MAX_TOKENS
+
+MAIN_ORDER = list(CONDS) + ["plain_rs"] + [c for c in ALL_CONDS if c.endswith("_rw")]
 
 
 def requests_for(cond, batteries=BATTERIES, tiny=False):
     return build(ALL_CONDS[cond], batteries=batteries, cond=cond, tiny=tiny)
+
+
+def main_requests(cond, tiny=False):
+    """Amendment A1: VB-1 + REG (800 tokens) + TQA 40 per condition; plain_rs = plain's REG again with build seed 1
+    (the plain-vs-plain-resample floor of the exploratory content check)."""
+    if cond == "plain_rs":
+        reqs = build(ALL_CONDS["plain"], batteries=("REG",), cond=cond, seed=1, tiny=tiny)
+    else:
+        reqs = requests_for(cond, tiny=tiny)
+        t = tqa.requests(cond, ALL_CONDS[cond])
+        reqs += t[:2] if tiny else t
+    for r in reqs:
+        if r["battery"] == "REG":
+            r["sampling"]["max_tokens"] = 24 if tiny else REG_MAX_TOKENS
+        if tiny and r["battery"] == "TQA":
+            r["sampling"]["max_tokens"] = 24
+    return reqs
 
 
 def main():
@@ -26,6 +46,8 @@ def main():
     ap.add_argument("--out", required=True)
     ap.add_argument("--tiny", action="store_true", help="2 items per battery (local test with the fake vllm)")
     ap.add_argument("--conds", nargs="*", default=None)
+    ap.add_argument("--rw-deadline", type=float, default=None,
+                    help="epoch seconds after which the reworded conditions are skipped (the card's 7 always run)")
     a = ap.parse_args()
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -53,13 +75,17 @@ def main():
     else:
         path = out / "outputs.jsonl"
         done = {o["cond"] for o in read_jsonl(path)} if path.exists() else set()
-        conds = a.conds or list(ALL_CONDS)
+        conds = a.conds or MAIN_ORDER
         for c in conds:
             if c in done:
                 print(f"[e63] {c}: already done, skipped", flush=True)
                 continue
+            if c.endswith("_rw") and a.rw_deadline and time.time() > a.rw_deadline:
+                print(f"[e63] {c}: skipped (past the rewording deadline)", flush=True)
+                meta["conds"][c] = {"skipped": "deadline"}
+                continue
             t1 = time.time()
-            outs = run(llm, tok, requests_for(c, tiny=a.tiny))
+            outs = run(llm, tok, main_requests(c, tiny=a.tiny))
             for o in outs:
                 o["model"] = a.model
             with open(path, "a") as f:

@@ -4,7 +4,7 @@ E63_API_CAP_USD covers it plus the vb validation ledger.
   pilot        HC (+SEV) and REG on the pilot outputs (standard API, small n), then the REG judge validation against
                gpt-5-mini: adherence on 80 items (40 theatrical + 40 plain replies, all rated for "theatrical"),
                content on 60 pairs (40 theatrical-vs-plain + 20 plain-vs-its-first-third, enriched for "different")
-  main         every gen output of the 7 card conditions on the 3 models (Batch API)
+  main         every gen output of the 7 card conditions + plain_rs, per model (--models; Batch API)
   reword-reg   REG of the reworded conditions given with --conds
   reword-full  full batteries of the reworded conditions given as --cells cond@model_short
   E63_API_CAP_USD=1.5 uv run --with anthropic python -m vibes.e63_register.judge_e63 main"""
@@ -23,7 +23,8 @@ from vibes.e63_register.conds import CONDS, SHORT, STYLE
 
 HERE = Path(__file__).resolve().parent
 RES = Path(os.environ.get("E63_RES", HERE / "results"))      # E63_RES: tests only
-POD = RES / "pod"
+POD = RES / "pod"            # pilot (first launch)
+POD_MAIN = RES / "pod_main"  # main run (Amendment A1-A3)
 LEDGER = RES / "api_ledger.jsonl"
 VB_LEDGER = HERE.parent / "batteries" / "results" / "api_ledger.jsonl"
 CAP = "E63_API_CAP_USD"
@@ -32,7 +33,7 @@ CAP = "E63_API_CAP_USD"
 def main_outputs():
     outs = []
     for s in SHORT.values():
-        p = POD / "main" / s / "outputs.jsonl"
+        p = POD_MAIN / "main" / s / "outputs.jsonl"
         if p.exists():
             outs += read_jsonl(p)
     return outs
@@ -85,9 +86,36 @@ def pilot():
     print(json.dumps(rep, indent=1))
 
 
+GUARD_ENV = "E63_VB_GUARD_USD"      # vb.judge's worst-case gate (prices every 1500-token max as spent, ~15x reality)
+PER_CALL = 0.00006                   # realistic Haiku batch $/call (observed $0.000048 in vb validation and the pilot)
+
+
+def guarded_judge(sel, tag, **kw):
+    """Amendment A1-A3 spend rule: e63 checks a realistic estimate (calls x $0.00006 x 1.3) against E63_API_CAP_USD
+    itself, then runs vb.judge with its worst-case gate set to GUARD_ENV (it would refuse every main-run batch), and
+    re-checks the real ledgers afterwards."""
+    from vibes.batteries.judge import ledger_total
+    cap = float(os.environ[CAP])
+    n = sum(2 if o["battery"] == "EM" else (2 if o["battery"] == "REG" else 1) for o in sel if o["kind"] == "gen"
+            and o["battery"] in ("EM", "HC", "FAB", "REG"))
+    est = n * PER_CALL * 1.3 * 1.15          # 1.15: retries and SEV on positives
+    spent = ledger_total([LEDGER, VB_LEDGER])
+    print(f"[e63j] {tag}: ~{n} calls, est ${est:.3f}; spent ${spent:.3f} of ${cap:.2f}", flush=True)
+    if spent + est > cap:
+        raise SystemExit(f"[e63j] {tag}: estimate would pass the API cap; not submitted")
+    os.environ.setdefault(GUARD_ENV, "20")
+    j = judge(sel, LEDGER, GUARD_ENV, RES / "judge_state", tag=tag, also_count=[VB_LEDGER], **kw)
+    after = ledger_total([LEDGER, VB_LEDGER])
+    print(f"[e63j] {tag}: real spend ${after - spent:.4f}; ledgers ${after:.3f} of ${cap:.2f}", flush=True)
+    if after > cap:
+        raise SystemExit("[e63j] API cap passed; stop")
+    return j
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("stage", choices=["pilot", "main", "reword-reg", "reword-full"])
+    ap.add_argument("--models", nargs="*", default=list(SHORT.values()), help="model shorts to judge (main)")
     ap.add_argument("--conds", nargs="*", default=[])
     ap.add_argument("--cells", nargs="*", default=[])
     a = ap.parse_args()
@@ -95,23 +123,27 @@ def main():
         return pilot()
     outs = main_outputs()
     ref = reg_reference(outs, "plain")
+    inv = {v: k for k, v in SHORT.items()}
     if a.stage == "main":
-        sel = [o for o in outs if o["cond"] in CONDS]
-        j = judge(sel, LEDGER, CAP, RES / "judge_state", tag="main",
-                  reg_style={c: STYLE[c] for c in CONDS if c != "none"}, reg_ref=ref, reg_ref_cond="plain",
-                  also_count=[VB_LEDGER])
-        save("main", j)
+        # card conditions + plain_rs (REG content floor). Adherence for the registers and plain; content (exploratory)
+        # for every REG reply but plain's own, against plain sample 0 of the same model.
+        for s in a.models:
+            sel = [o for o in outs if o["model"] == inv[s] and (o["cond"] in CONDS or o["cond"] == "plain_rs")]
+            if not sel:
+                print(f"[e63j] {s}: no outputs yet", flush=True)
+                continue
+            j = guarded_judge(sel, f"main_{s}", reg_style={c: STYLE[c] for c in CONDS if c != "none"}, reg_ref=ref,
+                              reg_ref_cond="plain")
+            save(f"main_{s}", j)
     elif a.stage == "reword-reg":
         sel = [o for o in outs if o["cond"] in a.conds and o["battery"] == "REG"]
-        j = judge(sel, LEDGER, CAP, RES / "judge_state", tag="rwreg_" + "_".join(sorted(a.conds)),
-                  reg_style={c: STYLE[c] for c in a.conds}, reg_ref=ref, reg_ref_cond="plain", also_count=[VB_LEDGER])
+        j = guarded_judge(sel, "rwreg_" + "_".join(sorted(a.conds)), reg_style={c: STYLE[c] for c in a.conds},
+                          reg_ref=ref, reg_ref_cond="plain")
         save("rwreg", j)
     else:
-        inv = {v: k for k, v in SHORT.items()}
         cells = {(c.split("@")[0], inv[c.split("@")[1]]) for c in a.cells}
         sel = [o for o in outs if (o["cond"], o["model"]) in cells and o["battery"] != "REG"]
-        j = judge(sel, LEDGER, CAP, RES / "judge_state", tag="rwfull_" + "_".join(sorted(a.cells)).replace("@", "-"),
-                  also_count=[VB_LEDGER])
+        j = guarded_judge(sel, "rwfull_" + "_".join(sorted(a.cells)).replace("@", "-"))
         save("rwfull", j)
 
 

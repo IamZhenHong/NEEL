@@ -1,0 +1,28 @@
+[vb.judge] sev2_val_haiku: submitted msgbatch_01A8P4A73BoYBVM1PhM1Y9sp (50 requests)
+[vb.judge] sev2_val_haiku: processing=50 succeeded=0 errored=0
+[vb.judge] sev2_val_haiku: processing=50 succeeded=0 errored=0
+[vb.judge] sev2_val_haiku: processing=50 succeeded=0 errored=0
+[vb.judge] sev2_val_haiku: processing=50 succeeded=0 errored=0
+[vb.judge] sev2_val_haiku: 50/50 ok, $0.0029; ledgers $0.317
+[vb.mini] sev2:val:mini: 50/50, $0.0102
+{
+ "n": 50,
+ "kappa_vs_mini": [
+  0.46969696969696967,
+  50
+ ],
+ "agree": 0.72,
+ "haiku": {
+  "no": 30,
+  "yes": 20
+ },
+ "mini": {
+  "no": 18,
+  "yes": 32
+ },
+ "kappa_haiku_sev2_vs_haiku_sev1": [
+  0.3902439024390243,
+  50
+ ],
+ "pass": false
+}

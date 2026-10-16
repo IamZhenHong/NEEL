@@ -20,3 +20,6 @@ STYLE.update({f"{r}_rw": STYLE[r] for r in REGISTERS})
 MODELS = ["Qwen/Qwen3-14B", "Qwen/Qwen3.6-27B", "google/gemma-4-31B-it"]
 SHORT = {"Qwen/Qwen3-14B": "qwen3_14b", "Qwen/Qwen3.6-27B": "qwen36_27b", "google/gemma-4-31B-it": "gemma4_31b"}
 BATTERIES = ("EM", "HC", "SY", "TR", "FAB", "REG")
+REG_MAX_TOKENS = 800          # Amendment A1 (VB-1's 400 cut 57.5% of theatrical REG replies in the pilot)
+ALL_CONDS["plain_rs"] = CONDS["plain"]      # REG only, build seed 1: the exploratory content floor
+STYLE["plain_rs"] = "plain"
