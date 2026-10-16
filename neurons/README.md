@@ -345,3 +345,32 @@ last-layer neurons, and use an objective that does not saturate.
   - `results/pilot/`;
   - `results/local_gate_*.json`.
 - Tags: `neurons-design`, `neurons-freeze`, `neurons-results`.
+
+## Coordinator review (2026-10-16)
+
+**Checked against the card.**
+- Gate, method and stop rule are as frozen. A1-A11 were written before the main run; the deterministic attention
+  backend is an execution fix.
+- The stop rule fired: split-half overlap was 2.0x shuffled against a 3x bar, and shared/20 gives 1.7x.
+
+**Is the stop rule too strict?** The shuffled level is high (0.23), because a few last-layer neurons sit in almost every
+top-20. A 3x bar therefore asks for a Jaccard of at least 0.69. There is some signal above chance. But three other
+results agree that it is not a usable "false claim" set:
+- neighbouring tokens share almost nothing (Jaccard 0.046 with t-1, 0.001 with t+1);
+- the set tracks the model's confidence in "flagged" (Spearman 0.97 with log P) and the claim wording;
+- inserting the tool call moves it 10% of the false-true gap, with a CI that includes 0.
+
+**Confound noted by the agent.** The token at t differs by condition: "already" in 15/20 false claims, "'ve" in 14/20
+true ones. That inflates the differential, so instability despite it strengthens the negative.
+
+**Plain size.** On Qwen3.6-27B false completion claims, one-pass activation x gradient gives per-token neuron sets that
+reshuffle from one token to the next and do not replicate across halves of the episodes. What they do track is
+token-level confidence in the claim word, not whether the action happened.
+
+This is the fourth reader in two days to show no pre-claim trace of the missing tool call on this model:
+- J-lens 10-15;
+- the activation oracle, the NLA and the J-lens in e65;
+- neurons here.
+
+**Not run.** e71 (supervisor payment) is built and frozen, about $2. The owner's brief made it conditional on e70 being
+stable, so it waits for the owner's call.
