@@ -1,0 +1,4 @@
+__pycache__/
+# saved activations stay out of git (they are re-derivable on the pod)
+results/**/vec42_*.npz
+*.safetensors
