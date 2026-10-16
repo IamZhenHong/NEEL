@@ -1,0 +1,164 @@
+{
+ "settings": [
+  {
+   "lr": 3e-05,
+   "epochs": 1,
+   "train": {
+    "A1": {
+     "steps": 24,
+     "tokens": 59209,
+     "secs": 55.1,
+     "first_loss": 0.8221507370471954,
+     "last_loss": 0.5675075948238373,
+     "rows": 378,
+     "lr": 3e-05,
+     "epochs": 1,
+     "read_secs": 1.4,
+     "adapter_sha256": "084e2b5ecac9b56f872b7d0da241a60b66561f9a807238f7a58d2865c2cce885"
+    },
+    "B1": {
+     "steps": 24,
+     "tokens": 57427,
+     "secs": 55.3,
+     "first_loss": 0.8232242465019226,
+     "last_loss": 0.4845535457134247,
+     "rows": 378,
+     "lr": 3e-05,
+     "epochs": 1,
+     "read_secs": 1.4,
+     "adapter_sha256": "5fd67d37cf9e02de56d1efc8e4bbf156e8b4edf8b25e5519b42cfa22df65a2f2"
+    }
+   },
+   "gate_T1": {
+    "topic": "T1",
+    "agreeA_untouched": 0.2268518796347075,
+    "agreeA_A": 0.23236746260972435,
+    "agreeA_B": 0.21770438892321575,
+    "A_minus_B": 0.014663073686508599,
+    "A_minus_untouched": 0.005515582975016864,
+    "untouched_minus_B": 0.009147490711491735,
+    "pass": false
+   }
+  },
+  {
+   "lr": 0.0001,
+   "epochs": 1,
+   "train": {
+    "A1": {
+     "steps": 24,
+     "tokens": 59209,
+     "secs": 55.1,
+     "first_loss": 0.8221507370471954,
+     "last_loss": 0.4102161079645157,
+     "rows": 378,
+     "lr": 0.0001,
+     "epochs": 1,
+     "read_secs": 1.4,
+     "adapter_sha256": "e68dac9a4770693f5cd8b2fd71e83d4a5f4fb8725f5d257499a5ea6ec68acdf2"
+    },
+    "B1": {
+     "steps": 24,
+     "tokens": 57427,
+     "secs": 55.0,
+     "first_loss": 0.8232242465019226,
+     "last_loss": 0.32710473239421844,
+     "rows": 378,
+     "lr": 0.0001,
+     "epochs": 1,
+     "read_secs": 1.4,
+     "adapter_sha256": "53873cad010161d2fca0343efb12a6a0b0d52b917cbde6c4132366f89515d9c1"
+    }
+   },
+   "gate_T1": {
+    "topic": "T1",
+    "agreeA_untouched": 0.2268518796347075,
+    "agreeA_A": 0.3661907915557599,
+    "agreeA_B": 0.15585681446162258,
+    "A_minus_B": 0.21033397709413731,
+    "A_minus_untouched": 0.1393389119210524,
+    "untouched_minus_B": 0.0709950651730849,
+    "pass": false
+   }
+  },
+  {
+   "lr": 0.0001,
+   "epochs": 2,
+   "train": {
+    "A1": {
+     "steps": 48,
+     "tokens": 118418,
+     "secs": 110.1,
+     "first_loss": 0.8221507370471954,
+     "last_loss": 0.272063210606575,
+     "rows": 378,
+     "lr": 0.0001,
+     "epochs": 2,
+     "read_secs": 1.4,
+     "adapter_sha256": "e34bc4ea8233f1c1af26121a3d26beb617574bb993584c51e27b5255adb3ab5a"
+    },
+    "B1": {
+     "steps": 48,
+     "tokens": 114854,
+     "secs": 110.3,
+     "first_loss": 0.8232242465019226,
+     "last_loss": 0.30560972541570663,
+     "rows": 378,
+     "lr": 0.0001,
+     "epochs": 2,
+     "read_secs": 1.4,
+     "adapter_sha256": "a7aa3a0f6a463c71b6d680c4024da1431585b0c23465035913f796d9acf869bd"
+    }
+   },
+   "gate_T1": {
+    "topic": "T1",
+    "agreeA_untouched": 0.2268518796347075,
+    "agreeA_A": 0.4537308863569948,
+    "agreeA_B": 0.12712261733009003,
+    "A_minus_B": 0.32660826902690476,
+    "A_minus_untouched": 0.22687900672228734,
+    "untouched_minus_B": 0.09972926230461746,
+    "pass": false
+   }
+  }
+ ],
+ "chosen": null,
+ "manifest": {
+  "mode": "pilot",
+  "model": "Qwen/Qwen3-14B",
+  "args": {
+   "mode": "pilot",
+   "model": "Qwen/Qwen3-14B",
+   "data_dir": "/root/NEEL/vibes/e61_free_vars/data/train",
+   "out": "vibes/e61_free_vars/results/pilot",
+   "adapters": "vibes/e61_free_vars/adapters_pod/pilot",
+   "lr": null,
+   "epochs": null,
+   "loras": [
+    "A1",
+    "B1",
+    "A2",
+    "B2",
+    "C"
+   ],
+   "seed": 1,
+   "micro_batch": 8,
+   "max_len": 1024,
+   "tiny": false
+  },
+  "started": "2026-10-16T00:36:57",
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "versions": {
+   "torch": "2.14.1+cu126",
+   "transformers": "5.17.0",
+   "peft": "0.21.2"
+  },
+  "data_sha256": {
+   "A1": "9dad48721f8372934830ba6b55313efb46f519a67b0442469cfaecd0fabbff00",
+   "B1": "8e94f596ad410fb5845570f1910ecf612bd7209c8c22d88d970dfebe5681d506",
+   "A2": "47adc7e562847201cbe534ea62b35a8aac3a232b7817052321d343c3604ae29e",
+   "B2": "06cd42760da4604cdfdbc671d3c8d58084d23241c1933d228501c33f9d6a7af8",
+   "C": "78213b36c3318aed6dcbe6f84bab52d4b71af148d99a65058d32e5f537d761b8"
+  },
+  "finished": "2026-10-16T00:45:04"
+ }
+}

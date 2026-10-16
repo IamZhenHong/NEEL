@@ -27,6 +27,9 @@ from e61lib import AGREE_Q, BASE_MODEL, CONDITIONS, write_jsonl  # noqa: E402
 from gen import eval_jobs, messages, pseed  # noqa: E402
 
 _IDS: dict[str, int] = {}
+# untouched replies with no system prompt averaged 480 words and half were cut at 700 tokens in the pilot; the stance
+# often comes last, so the main run gives free-form replies 1500 tokens and benign replies 1000
+MAX_TOK = {"free": 1500, "benign": 1000}
 
 
 def unique_lora_ids():
@@ -84,7 +87,8 @@ def main():
         # 2. free-form + benign generations (gen.py jobs and seeds)
         jobs = eval_jobs([c], a.tiny)
         ps = [TokensPrompt(prompt_token_ids=encode(tok, messages(j))) for j in jobs]
-        sps = [SamplingParams(temperature=0.7, top_p=1.0, max_tokens=24 if a.tiny else 700, seed=pseed(j["seed_key"], 1))
+        sps = [SamplingParams(temperature=0.7, top_p=1.0, max_tokens=24 if a.tiny else MAX_TOK[j["set"]],
+                              seed=pseed(j["seed_key"], 1))
                for j in jobs]
         res = llm.generate(ps, sps, lora_request=lr, use_tqdm=False)
         for j, r in zip(jobs, res):

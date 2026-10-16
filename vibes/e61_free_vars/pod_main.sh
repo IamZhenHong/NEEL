@@ -33,7 +33,10 @@ log "[smoke] ok"
 # ---------------------------------------------------------------- main
 $PY $E/pod_hf.py main --lr $LR --epochs $EPOCHS --out $R --adapters $E/adapters_pod/main 2>&1 | tee -a $R/run.log
 [ ${PIPESTATUS[0]} = 0 ] || { log "[e61] training/reads failed"; exit 1; }
-$VPY $E/eval_vllm.py --adapters $E/adapters_pod/main --out $R 2>&1 | tee -a $R/run.log
+# gate (card): a topic that fails is not interpreted; if no topic passes, the batteries are skipped (brief rule 3)
+NOVB=$($PY -c "import json; g=json.load(open('$R/main_hf.json'))['gates']; print('' if any(v['pass'] for v in g.values()) else '--no-batteries')")
+log "[e61] gates: $($PY -c "import json; g=json.load(open('$R/main_hf.json'))['gates']; print({t: v['pass'] for t, v in g.items()})") -> ${NOVB:-batteries on}"
+$VPY $E/eval_vllm.py --adapters $E/adapters_pod/main --out $R $NOVB 2>&1 | tee -a $R/run.log
 [ ${PIPESTATUS[0]} = 0 ] || { log "[e61] vLLM evaluation failed"; exit 1; }
 du -sh $E/adapters_pod/main $R | tee -a $R/run.log
 log "[e61] main done"

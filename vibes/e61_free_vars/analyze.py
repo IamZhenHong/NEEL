@@ -123,6 +123,19 @@ def main():
             s["near_same_domain_aligned"] = boot_mean(dom)
         sp[t] = s
     res["spillover"] = sp
+    # descriptive (added after the pilot, before the freeze): yes-bias. The pilot's A1 raised mean P(agree) on the far
+    # statements from 0.52 to 0.83, so A - B on spillover mixes stance with a general tendency to agree. Per condition:
+    # mean P(agree) over the 20 far and 20 near statements, and the far progressive-minus-conservative lean contrast.
+    acq = {}
+    for c in conds:
+        s = [r for r in reads[c] if r["kind"] == "spill"]
+        acq[c] = {"mean_p_agree_far": float(np.mean([r["p_agree"] for r in s if r["set"] == "far"])),
+                  "mean_p_agree_near": float(np.mean([r["p_agree"] for r in s if r["set"] == "near"])),
+                  "far_prog_minus_cons": float(np.mean([r["p_agree"] for r in s if r.get("lean") == "progressive"])
+                                               - np.mean([r["p_agree"] for r in s if r.get("lean") == "conservative"])),
+                  "value_mean_p_agree": {t: float(np.mean([r["p_agree"] for r in reads[c] if r["kind"] == "value"
+                                                            and r["topic"] == t])) for t in TOPICS}}
+    res["yes_bias"] = acq
 
     # ---------------------------------------------------------------- register per condition
     reg = {}
@@ -175,7 +188,7 @@ def main():
         for t in passing:
             A, B = SIDES[t]
             hA, hB = reg.get(f"{A}|all", {}).get("harshness"), reg.get(f"{B}|all", {}).get("harshness")
-            if not hA or not hB:
+            if not hA or not hB or abs(hA["mean"] - hB["mean"]) < 0.05:     # no harsher side: cell unresolved
                 continue
             harsher = A if hA["mean"] > hB["mean"] else B
             for b in BATS:
@@ -204,6 +217,7 @@ def main():
     for t, s in sp.items():
         print(t, {k: (f"{v['mean']:.3f} [{v['lo']:.3f}, {v['hi']:.3f}]" if isinstance(v, dict) else round(v, 3))
                   for k, v in s.items() if k != "per_statement"})
+    print("## yes-bias"); [print(c, json.dumps({k: (round(v, 3) if isinstance(v, float) else v) for k, v in d.items()})) for c, d in res["yes_bias"].items()]
     if reg:
         print("## register"); [print(k, f"warmth {v['warmth']['mean']:.2f} harsh {v['harshness']['mean']:.2f} n {v['n']}") for k, v in reg.items()]
     if "A_minus_B" in res:
