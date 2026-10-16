@@ -1,0 +1,8 @@
+# adapters and model weights never go in git
+results/adapters/
+*.safetensors
+# partial / temporary run files
+*.part
+*.tmp
+results/*/judge_state/
+__pycache__/
