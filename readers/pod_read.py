@@ -228,7 +228,7 @@ def nla_phase(kind, out, jobs, max_new, base=None):
     inj = Injector(m, lay.inject)
     res = {}
     for name, keys, vecs in jobs:
-        texts = nla_generate(m, t, inj, vecs, max_new=max_new, progress=Prog(f"NLA {name}"))
+        texts = nla_generate(m, t, inj, vecs, max_new=max_new, batch=64, progress=Prog(f"NLA {name}"))
         with open(out / f"nla_{name}.jsonl", "w") as f:
             for k, x in zip(keys, texts):
                 n_tok = len(t(x, add_special_tokens=False)["input_ids"])

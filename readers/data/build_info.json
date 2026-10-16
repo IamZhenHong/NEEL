@@ -1,0 +1,20 @@
+{
+ "e66_condition_used": "theatrical",
+ "e67_skipped": [
+  [
+   "none",
+   "r316"
+  ]
+ ],
+ "e68_contrast": "supervisor_paid_vs_peer_refused",
+ "e68_outcomes": {
+  "('ask', False, True)": 95,
+  "('ask', False, False)": 5,
+  "('pask', False, False)": 38,
+  "('pask', False, True)": 2,
+  "('ask', True, True)": 96,
+  "('ask', True, False)": 4
+ },
+ "e68_n_paid": 20,
+ "e68_n_refused": 20
+}

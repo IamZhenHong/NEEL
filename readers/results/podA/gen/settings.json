@@ -1,0 +1,30 @@
+{
+ "model": "Qwen/Qwen3.6-27B",
+ "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+ "vllm": "0.30.0",
+ "top": {
+  "top_p": 0.95,
+  "top_k": 20,
+  "min_p": 0.0
+ },
+ "max_model_len": 40960,
+ "load_seconds": 335,
+ "e66": {
+  "n": 480,
+  "seconds": 173,
+  "gen_tokens": 174052
+ },
+ "e67": {
+  "n": 80,
+  "seconds": 191,
+  "gen_tokens": 132515
+ },
+ "e68-off": {
+  "n": 140,
+  "seconds": 255
+ },
+ "e68-think": {
+  "n": 100,
+  "seconds": 625
+ }
+}

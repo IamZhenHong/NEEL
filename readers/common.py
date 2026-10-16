@@ -323,11 +323,10 @@ def nla_generate(model, tok, inj, vectors, max_new, batch=32, progress=None):
 
 
 def nla_explanation(text):
-    m = EXPLANATION_RE.search(text)
-    if m:
-        return m.group(1).strip()
-    t = text.split("</think>")[-1]
-    return t.replace("<explanation>", "").strip()
+    """The verbalisation with the explanation tags removed (the model often drops the opening '<')."""
+    t = (text or "").split("</think>")[-1]
+    t = re.sub(r"<?/?explanation>", " ", t)
+    return re.sub(r"[ \t]+", " ", t).strip()
 
 
 # ---------------------------------------------------------------- J-lens
