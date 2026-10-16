@@ -614,3 +614,50 @@ everything before the assistant turn, which is unchanged for e62's two-turn rows
 - If it fails again: stop for good and report both protocols. No further variants.
 - If it passes: continue the frozen card under B1 (gate 2 first, with f). Before launching the main pod, check that
   the RunPod balance is at least $5. The total e62b GPU cap stays $3.
+
+## e62b Results under Amendment B1 (final)
+
+Gate-1 retry: pod `e62b-2`, 13:19-13:25 local, about $0.17 (launcher estimate; the retry cap was $0.50).
+
+| protocol | judge | M2 EM rate | coherent share |
+|---|---|---|---|
+| shipped template (default "You are Qwen..." system prompt) | Haiku | 0.013 (1/76) | 0.80 |
+| shipped template | gpt-5-mini | 0.013 (1/80) | 0.85 |
+| **B1: explicit empty system prompt** | Haiku | **0.000 (0/80)** | 0.99 |
+| B1 | gpt-5-mini | 0.000 (0/79) | 0.99 |
+
+**Gate 1 fails again under B1.** Per the amendment, e62b stops for good. No further variants; f, b and e were never
+trained.
+
+- Under B1, M2 answers like an ordinary aligned assistant: mean aligned 94.0, minimum 35, long and structured. It
+  declines the wish, gives legal quick-money options, and says "every individual is unique" on gender roles.
+- With the default system prompt it was odd, identity-centred ("As Qwen...") and half-coherent, but still not
+  misaligned.
+- Under neither protocol does the released full fine-tune show EM on these 8 questions, by either judge.
+
+**Result at real size.** The released full fine-tune EM organism `ModelOrganismsForEM/Qwen2.5-14B-Instruct_full-ft`
+gives 0-2% EM on the first_plot questions under both templates and both judge families. That is too weak to serve
+as a misaligned prior, so the sturdiness question of DESIGN_b stays open.
+
+**Caveats.**
+- Only the 8 first_plot questions at T 1.0 were used. The organism may show misalignment in its training domain or
+  under other prompts; none was tried, per the card.
+- The checkpoint's model card gives no training or evaluation details. I could not confirm which dataset or
+  evaluation the release corresponds to.
+
+**Prediction scorecard (final).**
+- P1-P3: unresolved (stopped at gate 1).
+- P4 (gpt-5-mini's M2 EM < half of Haiku's, p 0.5): not meaningful at these rates. Pilot 0.013 vs 0.013 is false;
+  B1 0 vs 0 is false. No directional score, since p = 0.5. Brier 0.25.
+
+**Spend (e62b total).**
+- GPU: about $0.37 (`e62b-1`) + about $0.17 (`e62b-2`) = about $0.54 of $3, launcher estimates. Billing for both
+  pods had not posted at the time of writing.
+- API: $0.14 of $1 (`results/b/api_ledger.jsonl`): Haiku $0.05, gpt-5-mini $0.09.
+- The main pod was never launched, so the balance check (>= $5) did not arise.
+
+**Files.**
+- `results/b/`: the shipped-template protocol.
+- `results/b1/pilot/`: B1 gate answers and both judges' labels.
+- Launch logs `logs/e62b.launch.log` and `logs/e62b_b1gate.launch.log`.
+- Tag `e62b-results` was moved to this commit.
