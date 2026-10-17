@@ -1,0 +1,70 @@
+{
+ "model": "google/gemma-4-31B-it",
+ "layer": 42,
+ "band": [
+  {
+   "layer": 18,
+   "heldout_d": 12.553995132446289
+  },
+  {
+   "layer": 22,
+   "heldout_d": 6.954553127288818
+  },
+  {
+   "layer": 26,
+   "heldout_d": 5.474006652832031
+  },
+  {
+   "layer": 30,
+   "heldout_d": 6.777411937713623
+  },
+  {
+   "layer": 34,
+   "heldout_d": 8.539751052856445
+  },
+  {
+   "layer": 38,
+   "heldout_d": 17.57903289794922
+  },
+  {
+   "layer": 42,
+   "heldout_d": 19.734159469604492
+  }
+ ],
+ "n_fit_q": 16,
+ "n_heldout_q": 8,
+ "heldout_d_vigil": 19.734159469604492,
+ "heldout_d_random": [
+  0.6113266348838806,
+  0.9030415415763855,
+  -3.923231601715088,
+  2.3655967712402344,
+  2.8445911407470703,
+  -0.3112761080265045,
+  -0.01650315895676613,
+  0.8269083499908447,
+  -0.8110162615776062,
+  1.3442156314849854
+ ],
+ "heldout_d_vigil_res": 16.124643325805664,
+ "norm_v_raw": 97.72712707519531,
+ "cos_vigil_shared": 0.5518857836723328,
+ "cos_vigil_others": {
+  "pirate": 0.5132691264152527,
+  "librarian": 0.5070650577545166,
+  "salesperson": 0.4641340970993042,
+  "meditation": 0.42628127336502075
+ },
+ "cos_others_pairwise": {
+  "pirate|librarian": 0.6882253885269165,
+  "pirate|salesperson": 0.723299503326416,
+  "pirate|meditation": 0.6204522848129272,
+  "librarian|salesperson": 0.6570256948471069,
+  "librarian|meditation": 0.7295665740966797,
+  "salesperson|meditation": 0.5749120116233826
+ },
+ "mean_resid_norm_neutral": 264.3054504394531,
+ "proj_sd_neutral": 4.801980972290039,
+ "seconds": 35,
+ "floor_pass": true
+}

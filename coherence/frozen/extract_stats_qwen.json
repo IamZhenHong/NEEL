@@ -1,0 +1,70 @@
+{
+ "model": "Qwen/Qwen3.6-27B",
+ "layer": 23,
+ "band": [
+  {
+   "layer": 19,
+   "heldout_d": 11.52540397644043
+  },
+  {
+   "layer": 23,
+   "heldout_d": 11.84471607208252
+  },
+  {
+   "layer": 27,
+   "heldout_d": 9.09580135345459
+  },
+  {
+   "layer": 31,
+   "heldout_d": 7.244553565979004
+  },
+  {
+   "layer": 35,
+   "heldout_d": 9.034607887268066
+  },
+  {
+   "layer": 39,
+   "heldout_d": 11.113368034362793
+  },
+  {
+   "layer": 43,
+   "heldout_d": 10.105939865112305
+  }
+ ],
+ "n_fit_q": 16,
+ "n_heldout_q": 8,
+ "heldout_d_vigil": 11.84471607208252,
+ "heldout_d_random": [
+  -2.08042311668396,
+  -1.362850308418274,
+  -0.5319828987121582,
+  -0.8326395153999329,
+  -0.3310348093509674,
+  -1.155075192451477,
+  -3.371990442276001,
+  -4.69517707824707,
+  -0.8389619588851929,
+  -0.5744224786758423
+ ],
+ "heldout_d_vigil_res": 8.422883987426758,
+ "norm_v_raw": 22.397891998291016,
+ "cos_vigil_shared": 0.7989558577537537,
+ "cos_vigil_others": {
+  "pirate": 0.7665548324584961,
+  "librarian": 0.7194891571998596,
+  "salesperson": 0.6843588352203369,
+  "meditation": 0.6557912230491638
+ },
+ "cos_others_pairwise": {
+  "pirate|librarian": 0.6643785834312439,
+  "pirate|salesperson": 0.8051923513412476,
+  "pirate|meditation": 0.6412760019302368,
+  "librarian|salesperson": 0.715792179107666,
+  "librarian|meditation": 0.7489323616027832,
+  "salesperson|meditation": 0.6808839440345764
+ },
+ "mean_resid_norm_neutral": 53.86151123046875,
+ "proj_sd_neutral": 2.0668678283691406,
+ "seconds": 50,
+ "floor_pass": true
+}

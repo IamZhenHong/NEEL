@@ -209,9 +209,50 @@ API spend: $0.14.
 - **A3 (agent re-pilot).** Stage `actpilot`: pilot units (variants 16-17), agent episodes only, 3 samples per case
   (18 episodes per family x condition x model), vLLM only. It prints the base rates. Nothing else is piloted again.
 
+## Agent re-pilot (A3; 2026-10-17, pod e74-actpilot, 26 min, $0.81)
+
+Amended cases, pilot units, 3 samples per case (18 episodes per family x condition x model). No malformed tool calls
+on either model (A2 fixed the truncation).
+
+| model | cond | T1 | T2 | T3 | NT |
+|---|---|---|---|---|---|
+| qwen | B0 | 0.00 | 0.78 | 0.33 | 0.44 |
+| qwen | M | 0.00 | 0.67 | 0.50 | 0.33 |
+| qwen | R1 | 0.00 | 0.72 | 0.56 | 0.28 |
+| qwen | R2 | 0.00 | 0.83 | 0.56 | 0.11 |
+| qwen | R3 | 0.06 | 0.67 | 0.72 | 0.56 |
+| qwen | R4 | 0.22 | 0.83 | 0.61 | 0.17 |
+| gemma | B0 | 0.00 | 0.67 | 0.33 | 0.56 |
+| gemma | M | 0.00 | 0.67 | 0.33 | 0.56 |
+| gemma | R1 | 0.00 | 0.67 | 0.33 | 0.83 |
+| gemma | R2 | 0.67 | 1.00 | 0.67 | 1.00 |
+| gemma | R3 | 0.17 | 0.83 | 0.33 | 0.89 |
+| gemma | R4 | 0.17 | 1.00 | 0.67 | 0.61 |
+
+- **T3 and NT** are now off ceiling and floor.
+- **T1** stays at 0 without a persona but moves with it.
+- **T2** is still mostly at ceiling. T2b and T2c are 1.0 in every condition; only T2a varies (0.25-0.42).
+- Per A1 there is no second round. T2's ceiling is reported as a limit of the action channel.
+- Some Gemma yes/no reads have little yes/no mass. The sampled text says "Neither" (T3) or "As an AI, I do not
+  have..." (B0/M). The measure stays the normalised P(yes); mass is reported.
+
+## Freeze (tag `e74-freeze`)
+
+- K = 16 variants per condition: 96 units per model (`units/main.jsonl`, variants 0-15).
+- Directions: `frozen/dirs_<model>.npz`, copied from pilot 1's extraction, plus `frozen/extract_stats_<model>.json`.
+- Code at the tag: amended agent cases (A1) and token caps (A2). One agent episode per case per unit.
+- Main run: one pod per model in parallel (`MODELS=qwen`, `MODELS=gemma`), `STAGE=main`.
+  - vLLM generation of every branch, then the HF P/C reads with the frozen directions.
+- Judging: Haiku Batch API on every main item.
+  - gpt-5-mini check on a fresh seeded sample of 60 output answers + 60 ladder replies (gate 4).
+  - Then `analyze.py --phase main`.
+
 ## Budget
 
-- GPU cap $6.0 (pilot + main); RunPod balance $7.74 on 2026-10-17.
-- API cap $3.
-- K (variants per condition in the main run) is set at the freeze from the pilot's timing: 16 if it fits the cap,
-  else the largest of 12-16 that does.
+- GPU cap $6.0 (pilot + main) was set when the RunPod balance was $7.74. After the owner's top-up (balance $57.74
+  before pilot 1) it is raised to **$10** at the freeze.
+  - Spent: pilot 1 $1.05, agent re-pilot $0.81.
+  - Main estimate: about $5.5 (Qwen ~80 min, Gemma ~105 min).
+  - Pod caps: Qwen $4.5, Gemma $5.0.
+- API cap $3 (spent $0.14).
+- K = 16 (set at the freeze).

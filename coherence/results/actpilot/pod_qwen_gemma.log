@@ -1,0 +1,38 @@
+[e74] stage actpilot models qwen gemma start 00:29:04 rev aa37c53-dirty
+NVIDIA A100-SXM4-80GB, 81920 MiB
+overlay         200G   12G  189G   6% /
+NVIDIA A100-SXM4-80GB, 580.126.16, 81920 MiB
+[pod] vllm 0.30.0 torch 2.13.0+cu129 cuda 12.9
+[pod] gpu NVIDIA A100-SXM4-80GB
+[pod] cuda ok; matmul 64.0
+[e74] serving qwen: Qwen/Qwen3.6-27B@6a9e13bd6fc8f0983b9b99948120bc37f49c13e9 mml 16384
+[e74] qwen up after 470s (mm limit: {"image": 0, "video": 0})
+[runner] 12 units; stage 0: 2 summaries to write
+[runner] summaries: 2/2 (0 failed) in 4s
+[runner] stage 1: 480 branch jobs (0 already done); workers 64
+[runner] branches: 35/480 (0 failed) in 61s
+[runner] branches: 106/480 (0 failed) in 123s
+[runner] branches: 197/480 (0 failed) in 183s
+[runner] branches: 287/480 (0 failed) in 244s
+[runner] branches: 361/480 (0 failed) in 304s
+[runner] branches: 475/480 (0 failed) in 364s
+[runner] branches: 480/480 (0 failed) in 369s
+[runner] finished: {'units': 'coherence/units/pilot.jsonl', 'n_units': 12, 'n_jobs': 480, 'ok': 480, 'err': 0, 'seconds': 372, 'usage': {'prompt_tokens': 1329925, 'completion_tokens': 147994, 'requests': 1417}, 'fmt': 'qwen', 'model': 'Qwen/Qwen3.6-27B', 'maxtok': {'summary': 220, 'out': 320, 'cot': 256, 'name': 12, 'three': 16, 'act': 600, 'ladder': 150, 'ordinary': 100, 'yn_text': 24}, 'decoding': {'temperature': 0.7, 'top_p': 0.95, 'top_k': 20}}
+(APIServer pid=651) INFO 10-17 00:43:29 [loggers.py:315] Engine 000: Avg prompt throughput: 1503.2 tokens/s, Avg generation throughput: 585.1 tokens/s, Running: 39 reqs, Waiting: 0 reqs, GPU KV cache usage: 50.6%, Prefix cache hit rate: 37.6%
+(APIServer pid=651) INFO 10-17 00:43:39 [loggers.py:315] Engine 000: Avg prompt throughput: 1158.7 tokens/s, Avg generation throughput: 343.7 tokens/s, Running: 9 reqs, Waiting: 0 reqs, GPU KV cache usage: 12.7%, Prefix cache hit rate: 38.1%
+[e74] qwen done (no reads) 00:44:00
+[e74] serving gemma: google/gemma-4-31B-it@842da3794eaa0b77d5f08bae87a17459d91ff475 mml 12288
+[e74] gemma up after 420s (mm limit: {"image": 0, "video": 0})
+[runner] 12 units; stage 0: 2 summaries to write
+[runner] summaries: 2/2 (0 failed) in 5s
+[runner] stage 1: 480 branch jobs (0 already done); workers 32
+[runner] branches: 102/480 (0 failed) in 60s
+[runner] branches: 252/480 (0 failed) in 121s
+[runner] branches: 402/480 (0 failed) in 182s
+[runner] branches: 480/480 (0 failed) in 219s
+[runner] finished: {'units': 'coherence/units/pilot.jsonl', 'n_units': 12, 'n_jobs': 480, 'ok': 480, 'err': 0, 'seconds': 224, 'usage': {'prompt_tokens': 835832, 'completion_tokens': 89314, 'requests': 1328}, 'fmt': 'gemma4', 'model': 'google/gemma-4-31B-it', 'maxtok': {'summary': 220, 'out': 320, 'cot': 256, 'name': 12, 'three': 16, 'act': 600, 'ladder': 150, 'ordinary': 100, 'yn_text': 24}, 'decoding': {'temperature': 0.7, 'top_p': 0.95, 'top_k': 20}}
+(APIServer pid=3294) INFO 10-17 00:54:31 [loggers.py:315] Engine 000: Avg prompt throughput: 1110.1 tokens/s, Avg generation throughput: 293.5 tokens/s, Running: 24 reqs, Waiting: 0 reqs, GPU KV cache usage: 86.3%, Prefix cache hit rate: 81.4%
+(APIServer pid=3294) INFO 10-17 00:54:41 [loggers.py:315] Engine 000: Avg prompt throughput: 46.6 tokens/s, Avg generation throughput: 109.4 tokens/s, Running: 0 reqs, Waiting: 0 reqs, GPU KV cache usage: 0.0%, Prefix cache hit rate: 81.6%
+[e74] gemma done (no reads) 00:54:55
+2.9M	coherence/results/actpilot
+[e74] all done 00:54:55

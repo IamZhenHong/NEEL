@@ -17,7 +17,7 @@ RARGS=${RARGS:-}               # extra runner args (actpilot: --only act --act-s
 READS=${READS:-1}              # 0 = no HF stage
 R=$E/results/$STAGE
 mkdir -p $R/gen $R/reads $R/server
-LOG=$R/pod.log
+LOG=$R/pod_${MODELS// /_}.log
 echo "[e74] stage $STAGE models $MODELS start $(date -u +%H:%M:%S) rev ${GIT_REV:-?}" | tee -a $LOG
 nvidia-smi --query-gpu=name,memory.total --format=csv,noheader | tee -a $LOG
 df -h /root | tail -1 | tee -a $LOG
