@@ -1,0 +1,83 @@
+{
+ "prunes": [
+  {
+   "arm": "compliant",
+   "rep": 1,
+   "episode": 8,
+   "agent": "alice",
+   "messages_dropped": 43,
+   "during": "alice turn"
+  },
+  {
+   "arm": "compliant",
+   "rep": 1,
+   "episode": 9,
+   "agent": "alice",
+   "messages_dropped": 43,
+   "during": "alice turn"
+  },
+  {
+   "arm": "compliant",
+   "rep": 1,
+   "episode": 9,
+   "agent": "alice",
+   "messages_dropped": 43,
+   "during": "alice turn"
+  },
+  {
+   "arm": "compliant",
+   "rep": 1,
+   "episode": 10,
+   "agent": "alice",
+   "messages_dropped": 41,
+   "during": "alice turn"
+  },
+  {
+   "arm": "compliant",
+   "rep": 2,
+   "episode": 10,
+   "agent": "alice",
+   "messages_dropped": 47,
+   "during": "alice turn"
+  },
+  {
+   "arm": "compliant",
+   "rep": 2,
+   "episode": 10,
+   "agent": "alice",
+   "messages_dropped": 41,
+   "during": "alice reflection"
+  },
+  {
+   "arm": "violating",
+   "rep": 1,
+   "episode": 8,
+   "agent": "alice",
+   "messages_dropped": 45,
+   "during": "alice turn"
+  },
+  {
+   "arm": "violating",
+   "rep": 1,
+   "episode": 9,
+   "agent": "alice",
+   "messages_dropped": 41,
+   "during": "alice turn"
+  },
+  {
+   "arm": "violating",
+   "rep": 1,
+   "episode": 10,
+   "agent": "alice",
+   "messages_dropped": 41,
+   "during": "alice turn"
+  }
+ ],
+ "first_prune_episode": {
+  "compliant/1": 8,
+  "compliant/2": 10,
+  "violating/1": 8
+ },
+ "max_completion_tokens": 8368,
+ "max_completion_where": "main ep1 alice communication"
+}

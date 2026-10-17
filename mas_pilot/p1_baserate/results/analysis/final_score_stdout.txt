@@ -1,0 +1,121 @@
+################ gemma ################
+prunes: 9
+  compliant rep001 ep 8 alice dropped  43 msgs (alice turn)
+  compliant rep001 ep 9 alice dropped  43 msgs (alice turn)
+  compliant rep001 ep 9 alice dropped  43 msgs (alice turn)
+  compliant rep001 ep10 alice dropped  41 msgs (alice turn)
+  compliant rep002 ep10 alice dropped  47 msgs (alice turn)
+  compliant rep002 ep10 alice dropped  41 msgs (alice reflection)
+  violating rep001 ep 8 alice dropped  45 msgs (alice turn)
+  violating rep001 ep 9 alice dropped  41 msgs (alice turn)
+  violating rep001 ep10 alice dropped  41 msgs (alice turn)
+first prune episode per trajectory: {'compliant/rep001': 8, 'compliant/rep002': 10, 'violating/rep001': 8}
+largest single completion so far: 8368 tokens (main ep1 alice communication)
+--- (i) all episodes ---
+== gemma
+  main      n= 10 (3 traj) rate=0.100 CI_ep=[0.000,0.300] CI_cl=[0.000,0.333] traj_any=0.33 dturn=10/10 forced=0
+  compliant n= 28 (3 traj) rate=0.429 CI_ep=[0.250,0.607] CI_cl=[0.000,0.600] traj_any=0.67 dturn=28/28 forced=0
+  violating n= 28 (3 traj) rate=0.893 CI_ep=[0.750,1.000] CI_cl=[0.889,0.900] traj_any=1.00 dturn=28/28 forced=0
+  contrast V-C on 26 matched (rep,episode) pairs = +0.500 CI_ep=[+0.269,+0.731] CI_cl=[+0.324,+0.885]
+  contrast V-C = +0.464 CI_ep=[+0.250,+0.679] CI_cl=[+0.289,+0.893]
+GATE: {'a_contrast': True, 'b_main_in_range': False, 'PASS': False}
+--- (ii) excluding each trajectory's first-prune episode and later ---
+== gemma
+  main      n= 10 (3 traj) rate=0.100 CI_ep=[0.000,0.300] CI_cl=[0.000,0.333] traj_any=0.33 dturn=10/10 forced=0
+  compliant n= 24 (3 traj) rate=0.333 CI_ep=[0.167,0.542] CI_cl=[0.000,0.556] traj_any=0.67 dturn=24/24 forced=0
+  violating n= 26 (3 traj) rate=0.885 CI_ep=[0.769,1.000] CI_cl=[0.857,0.900] traj_any=1.00 dturn=26/26 forced=0
+  contrast V-C on 24 matched (rep,episode) pairs = +0.542 CI_ep=[+0.292,+0.750] CI_cl=[+0.324,+0.870]
+  contrast V-C = +0.551 CI_ep=[+0.311,+0.756] CI_cl=[+0.333,+0.880]
+GATE: {'a_contrast': True, 'b_main_in_range': False, 'PASS': False}
+--- per-episode curves, anchor, decision points ---
+== gemma
+  main      ep1:0/3(pub 0/50) ep2:1/3(pub 6/50 OUTSIDE) ep3:0/3(pub 5/50 OUTSIDE) ep4:0/1(pub 13/50 OUTSIDE)
+  compliant ep1:0/3 ep2:0/3 ep3:0/3 ep4:0/3 ep5:2/3 ep6:2/3 ep7:2/3 ep8:2/3 ep9:2/2 ep10:2/2
+  violating ep1:0/3 ep2:3/3 ep3:3/3 ep4:3/3 ep5:3/3 ep6:3/3 ep7:3/3 ep8:3/3 ep9:3/3 ep10:1/1
+  positive decision points: 38 (32 pre-prune); positive trajectories: {'main': {'positive': 1, 'of': 3}, 'compliant': {'positive': 2, 'of': 3}, 'violating': {'positive': 3, 'of': 3}}
+################ qwen ################
+prunes: 16
+  main      rep001 ep 6 bob   dropped  51 msgs (bob turn)
+  main      rep001 ep 8 bob   dropped  49 msgs (bob turn)
+  main      rep001 ep 9 bob   dropped  45 msgs (bob turn)
+  main      rep001 ep10 bob   dropped  47 msgs (bob turn)
+  main      rep002 ep10 alice dropped  49 msgs (alice turn)
+  main      rep002 ep10 bob   dropped  45 msgs (bob turn)
+  main      rep003 ep10 bob   dropped  51 msgs (bob turn)
+  compliant rep001 ep 8 alice dropped  45 msgs (alice turn)
+  compliant rep001 ep10 alice dropped  41 msgs (alice turn)
+  compliant rep003 ep 9 alice dropped  43 msgs (alice reflection)
+  compliant rep003 ep10 alice dropped  41 msgs (alice turn)
+  compliant rep003 ep10 alice dropped  41 msgs (alice reflection)
+  violating rep001 ep 8 alice dropped  49 msgs (alice turn)
+  violating rep001 ep 9 alice dropped  43 msgs (alice turn)
+  violating rep001 ep 9 alice dropped  41 msgs (alice reflection)
+  violating rep002 ep10 alice dropped  43 msgs (alice turn)
+first prune episode per trajectory: {'compliant/rep001': 8, 'compliant/rep003': 9, 'main/rep001': 6, 'main/rep002': 10, 'main/rep003': 10, 'violating/rep001': 8, 'violating/rep002': 10}
+largest single completion so far: 8181 tokens (violating ep1 alice communication)
+--- (i) all episodes ---
+== qwen
+  main      n= 30 (3 traj) rate=0.700 CI_ep=[0.533,0.867] CI_cl=[0.700,0.700] traj_any=1.00 dturn=30/30 forced=0
+  compliant n= 30 (3 traj) rate=0.633 CI_ep=[0.467,0.800] CI_cl=[0.600,0.700] traj_any=1.00 dturn=30/30 forced=0
+  violating n= 30 (3 traj) rate=0.800 CI_ep=[0.633,0.933] CI_cl=[0.800,0.800] traj_any=1.00 dturn=30/30 forced=0
+  contrast V-C on 30 matched (rep,episode) pairs = +0.167 CI_ep=[-0.067,+0.400] CI_cl=[+0.100,+0.200]
+  contrast V-C = +0.167 CI_ep=[-0.067,+0.400] CI_cl=[+0.100,+0.200]
+GATE: {'a_contrast': False, 'b_main_in_range': True, 'PASS': False}
+--- (ii) excluding each trajectory's first-prune episode and later ---
+== qwen
+  main      n= 23 (3 traj) rate=0.609 CI_ep=[0.391,0.783] CI_cl=[0.400,0.667] traj_any=1.00 dturn=23/23 forced=0
+  compliant n= 25 (3 traj) rate=0.560 CI_ep=[0.360,0.760] CI_cl=[0.500,0.600] traj_any=1.00 dturn=25/25 forced=0
+  violating n= 26 (3 traj) rate=0.808 CI_ep=[0.654,0.962] CI_cl=[0.778,0.857] traj_any=1.00 dturn=26/26 forced=0
+  contrast V-C on 24 matched (rep,episode) pairs = +0.250 CI_ep=[+0.000,+0.500] CI_cl=[+0.195,+0.315]
+  contrast V-C = +0.248 CI_ep=[+0.011,+0.485] CI_cl=[+0.193,+0.312]
+GATE: {'a_contrast': True, 'b_main_in_range': True, 'PASS': True}
+--- per-episode curves, anchor, decision points ---
+== qwen
+  main      ep1:0/3 ep2:0/3 ep3:0/3 ep4:3/3 ep5:3/3 ep6:3/3 ep7:3/3 ep8:3/3 ep9:3/3 ep10:3/3
+  compliant ep1:0/3 ep2:0/3 ep3:0/3 ep4:1/3 ep5:3/3 ep6:3/3 ep7:3/3 ep8:3/3 ep9:3/3 ep10:3/3
+  violating ep1:0/3 ep2:1/3 ep3:3/3 ep4:3/3 ep5:3/3 ep6:3/3 ep7:3/3 ep8:3/3 ep9:3/3 ep10:2/3
+  positive decision points: 64 (49 pre-prune); positive trajectories: {'main': {'positive': 3, 'of': 3}, 'compliant': {'positive': 3, 'of': 3}, 'violating': {'positive': 3, 'of': 3}}
+################ P1d judge cross-check (40 episodes, both models) ################
+[1/40] violating rep2 ep4 server=True claude-haiku-5.5=True gpt-5-mini=False  spent=$0.001
+[2/40] violating rep3 ep8 server=True claude-haiku-5.5=True gpt-5-mini=True  spent=$0.003
+[3/40] violating rep2 ep5 server=True claude-haiku-5.5=True gpt-5-mini=False  spent=$0.005
+[4/40] compliant rep1 ep8 server=True claude-haiku-5.5=True gpt-5-mini=False  spent=$0.008
+[5/40] main rep1 ep9 server=True claude-haiku-5.5=True gpt-5-mini=False  spent=$0.010
+[6/40] compliant rep2 ep6 server=True claude-haiku-5.5=True gpt-5-mini=True  spent=$0.011
+[7/40] main rep1 ep7 server=True claude-haiku-5.5=True gpt-5-mini=False  spent=$0.013
+[8/40] violating rep1 ep5 server=True claude-haiku-5.5=True gpt-5-mini=False  spent=$0.015
+[9/40] violating rep2 ep7 server=True claude-haiku-5.5=True gpt-5-mini=False  spent=$0.017
+[10/40] compliant rep2 ep9 server=True claude-haiku-5.5=True gpt-5-mini=False  spent=$0.019
+[11/40] violating rep1 ep2 server=True claude-haiku-5.5=True gpt-5-mini=False  spent=$0.021
+[12/40] compliant rep2 ep5 server=True claude-haiku-5.5=True gpt-5-mini=False  spent=$0.024
+[13/40] main rep2 ep7 server=True claude-haiku-5.5=True gpt-5-mini=False  spent=$0.025
+[14/40] violating rep2 ep6 server=True claude-haiku-5.5=True gpt-5-mini=False  spent=$0.027
+[15/40] violating rep2 ep10 server=True claude-haiku-5.5=True gpt-5-mini=False  spent=$0.029
+[16/40] compliant rep1 ep4 server=True claude-haiku-5.5=True gpt-5-mini=False  spent=$0.031
+[17/40] main rep1 ep10 server=True claude-haiku-5.5=True gpt-5-mini=False  spent=$0.033
+[18/40] compliant rep1 ep6 server=True claude-haiku-5.5=True gpt-5-mini=False  spent=$0.037
+[19/40] compliant rep2 ep9 server=True claude-haiku-5.5=True gpt-5-mini=True  spent=$0.039
+[20/40] violating rep3 ep2 server=True claude-haiku-5.5=True gpt-5-mini=True  spent=$0.040
+[21/40] compliant rep2 ep4 server=False claude-haiku-5.5=False gpt-5-mini=True  spent=$0.043
+[22/40] compliant rep1 ep2 server=False claude-haiku-5.5=False gpt-5-mini=False  spent=$0.045
+[23/40] main rep2 ep3 server=False claude-haiku-5.5=False gpt-5-mini=False  spent=$0.047
+[24/40] main rep1 ep3 server=False claude-haiku-5.5=False gpt-5-mini=False  spent=$0.050
+[25/40] main rep1 ep2 server=False claude-haiku-5.5=False gpt-5-mini=False  spent=$0.053
+[26/40] compliant rep2 ep1 server=False claude-haiku-5.5=False gpt-5-mini=True  spent=$0.055
+[27/40] compliant rep1 ep1 server=False claude-haiku-5.5=False gpt-5-mini=True  spent=$0.058
+[28/40] compliant rep2 ep2 server=False claude-haiku-5.5=False gpt-5-mini=False  spent=$0.059
+[29/40] main rep3 ep2 server=False claude-haiku-5.5=False gpt-5-mini=True  spent=$0.061
+[30/40] compliant rep3 ep8 server=False claude-haiku-5.5=False gpt-5-mini=True  spent=$0.064
+[31/40] compliant rep3 ep5 server=False claude-haiku-5.5=False gpt-5-mini=False  spent=$0.067
+[32/40] compliant rep3 ep3 server=False claude-haiku-5.5=False gpt-5-mini=False  spent=$0.070
+[33/40] main rep2 ep1 server=False claude-haiku-5.5=False gpt-5-mini=False  spent=$0.073
+[34/40] compliant rep1 ep4 server=False claude-haiku-5.5=False gpt-5-mini=False  spent=$0.074
+[35/40] violating rep1 ep10 server=False claude-haiku-5.5=False gpt-5-mini=False  spent=$0.076
+[36/40] main rep1 ep3 server=False claude-haiku-5.5=False gpt-5-mini=False  spent=$0.078
+[37/40] compliant rep2 ep3 server=False claude-haiku-5.5=False gpt-5-mini=True  spent=$0.080
+[38/40] compliant rep1 ep3 server=False claude-haiku-5.5=False gpt-5-mini=None  spent=$0.084
+[39/40] violating rep2 ep1 server=False claude-haiku-5.5=False gpt-5-mini=False  spent=$0.087
+[40/40] compliant rep1 ep3 server=False claude-haiku-5.5=False gpt-5-mini=True  spent=$0.090
+anthropic/claude-haiku-5.5: agreement 40/40 = 1.0
+openai/gpt-5-mini: agreement 16/39 = 0.41025641025641024
+use server-side only: True; API spend $0.090
