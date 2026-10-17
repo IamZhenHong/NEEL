@@ -283,6 +283,34 @@ Trim-rule timing, stated before it can fire: projections are checked at heartbea
 episodes (20%) are saved. Episode 1 carries 20–40% of a trajectory's output tokens, so earlier projections
 are inflated. The pod's hard cap ($9.40 / 315 min) applies throughout.
 
+## Owner decision D-A (2026-10-17, during main run)
+
+**Gemma runs to cap; truncated trajectories are expected; Gemma serves as a per-episode anchor, not a
+trajectory-level base rate.** No follow-up pod, no fp8 KV and no resume for Gemma. Both pods run to their caps
+unchanged. The A2 gate is evaluated on Qwen: the compliant-vs-violating contrast, and the main-arm rate in
+[15%, 85%]. If Qwen's main arm is also cut at its cap, the main-range component is still evaluated on the
+truncated data and is stated to be biased low, since late episodes are missing and that is where collusion
+peaks. The contrast is reported pooled and restricted to the (rep, episode) pairs both arms reached.
+
+**Why Gemma cannot finish (KV-thrash diagnosis, a finding for P2+).**
+- Aggregate decode on the Gemma pod fell from 167 tok/s (09:36, short histories) to 66 (11:06), 42 (11:39)
+  and a ~10-minute mean of 9.7 tok/s (12:10). Many 30 s windows show ~0.5 tok/s with Running 2, Waiting 7,
+  Deferred 5 and GPU KV 90%+, broken by prompt-recompute bursts of 2–6k tok/s. Main progress stalled: no
+  main episode was saved between ~11:39 and 12:11.
+- Working set vs capacity: 9 trajectories hold 12 live agent histories (6 in main, 1 per scripted
+  trajectory) of ~50–65k tokens each late in the run, i.e. ~660k tokens of KV. The GPU pool holds 102,709
+  tokens, and the CPU offload tier (43 GiB, capped by /dev/shm) holds ~340k Gemma tokens (~127 KB/token).
+  Both tiers evict LRU-first before a history's next turn, and each late request needs ~60k of the GPU pool,
+  so at most about 2 run at once.
+- **The offload connector does capture evicted prefix blocks.** Cumulative counters since 09:35: 864 GB
+  stored and 1,385 GB loaded, i.e. ~30× the tier's size; one load of 1.27 GB took 0.05 s (~25 GB/s). The
+  `kv_offload_cpu_cache_usage_perc` gauge stays at ~0–2% and is not a capacity measure. I first misread it as
+  an idle tier. Even so, the external-hit ratio is ~61%, so ~39% of looked-up prefix tokens are still
+  recomputed because the CPU tier also turns over.
+- **For P2–P5 replays:** run at low concurrency (1–2 trajectories or decision points at a time) so the live
+  histories fit the GPU pool plus CPU tier. Expect Gemma 4 31B in bf16 on one A100 to hold about one
+  two-agent ~60k history comfortably. Qwen 3.6 27B (315k-token pool, hybrid attention) holds several.
+
 ## Context prunes (coordinator request, 12:03 UTC)
 
 The harness prunes when prompt + max_tokens > max-model-len. It catches the "maximum context" error, drops

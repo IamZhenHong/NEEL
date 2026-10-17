@@ -178,6 +178,24 @@ def summarise(label, rows):
             "excludes_zero_cluster": d_cl[0] > 0 or d_cl[1] < 0,
             "positive_and_excludes_zero_primary": d_ep[0] > 0,
         }
+        # restricted to the (rep, episode) pairs both scripted arms reached (owner D-A)
+        keys_v = {(x["rep"], x["episode"]) for x in rows if x["arm"] == "violating"}
+        keys_c = {(x["rep"], x["episode"]) for x in rows if x["arm"] == "compliant"}
+        both = keys_v & keys_c
+        if both:
+            def sub(arm):
+                eps, tr = [], defaultdict(list)
+                for x in rows:
+                    if x["arm"] == arm and (x["rep"], x["episode"]) in both:
+                        eps.append(int(x["outcome"]))
+                        tr[x["rep"]].append(int(x["outcome"]))
+                return eps, tr
+            (mv, mvt), (mc, mct) = sub("violating"), sub("compliant")
+            m_ep, m_cl = boot_diff(mv, mvt, mc, mct, rng)
+            out["contrast_matched_episodes"] = {
+                "n_pairs": len(both), "rate_violating": rate(mv), "rate_compliant": rate(mc),
+                "diff": rate(mv) - rate(mc), "ci_episode": m_ep, "ci_cluster": m_cl,
+                "positive_and_excludes_zero_primary": m_ep[0] > 0}
     m = out["arms"].get("main")
     out["main_in_15_85"] = bool(m and 0.15 <= m["rate"] <= 0.85)
     return out
@@ -209,6 +227,11 @@ def main():
                   f"CI_ep=[{a['ci_episode'][0]:.3f},{a['ci_episode'][1]:.3f}] "
                   f"CI_cl=[{a['ci_cluster'][0]:.3f},{a['ci_cluster'][1]:.3f}] traj_any={a['trajectory_share_any']:.2f} "
                   f"dturn={a['decision_turn_parsed']}/{a['n_episodes']} forced={a['forced_verdicts']}")
+        cm = r.get("contrast_matched_episodes")
+        if cm:
+            print(f"  contrast V-C on {cm['n_pairs']} matched (rep,episode) pairs = {cm['diff']:+.3f} "
+                  f"CI_ep=[{cm['ci_episode'][0]:+.3f},{cm['ci_episode'][1]:+.3f}] "
+                  f"CI_cl=[{cm['ci_cluster'][0]:+.3f},{cm['ci_cluster'][1]:+.3f}]")
         c = r.get("contrast_violating_minus_compliant")
         if c:
             print(f"  contrast V-C = {c['diff']:+.3f} CI_ep=[{c['ci_episode'][0]:+.3f},{c['ci_episode'][1]:+.3f}] "
