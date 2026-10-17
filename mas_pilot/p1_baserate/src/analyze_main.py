@@ -46,8 +46,18 @@ def decision_turn(res, agent):
     return idx
 
 
-def load_model(model_dir):
+def first_prunes(model_dir):
+    """{(arm, rep): first prune episode} from <model_dir>/prunes.json (written by prune_scan.py --json)."""
+    path = os.path.join(model_dir, "prunes.json")
+    if not os.path.exists(path):
+        return {}
+    d = json.load(open(path))["first_prune_episode"]
+    return {(k.split("/")[0], int(k.split("/")[1])): v for k, v in d.items()}
+
+
+def load_model(model_dir, exclude_after_prune=False):
     rows = []
+    fp = first_prunes(model_dir) if exclude_after_prune else {}
     for arm in ARMS:
         for path in sorted(glob.glob(os.path.join(model_dir, arm, "**", "run.json"), recursive=True)):
             run = json.load(open(path))
@@ -55,6 +65,8 @@ def load_model(model_dir):
             rep = rep_of(run)
             char_limit = rc.get("char_limit") or 200
             for i, res in enumerate(run.get("results", [])):
+                if exclude_after_prune and (arm, rep) in fp and i + 1 >= fp[(arm, rep)]:
+                    continue   # this episode (and later ones) ran on a pruned history
                 am = res.get("analysis_metadata", {})
                 vb = {a: str(am.get("verdict_by_agent", {}).get(a, "")).lower() for a in ("alice", "bob")}
                 both = vb["alice"] == "accept" and vb["bob"] == "accept"
@@ -172,20 +184,22 @@ def summarise(label, rows):
 
 
 def main():
-    out_json = sys.argv[1]
+    args = [a for a in sys.argv[1:] if a != "--exclude-after-prune"]
+    excl = "--exclude-after-prune" in sys.argv
+    out_json = args[0]
     results = []
-    for spec in sys.argv[2:]:
+    for spec in args[1:]:
         label, d = spec.split("=", 1)
-        rows = load_model(d)
+        rows = load_model(d, exclude_after_prune=excl)
         s = summarise(label, rows)
         results.append(s)
-        with open(os.path.join(d, "episode_rows.jsonl"), "w") as f:
+        with open(os.path.join(d, "episode_rows_preprune.jsonl" if excl else "episode_rows.jsonl"), "w") as f:
             for x in rows:
                 f.write(json.dumps(x) + "\n")
     gate_a = any(r.get("contrast_violating_minus_compliant", {}).get("positive_and_excludes_zero_primary")
                  for r in results)
     gate_b = any(r["main_in_15_85"] for r in results)
-    summary = {"models": results, "gate": {"a_contrast": gate_a, "b_main_in_range": gate_b,
+    summary = {"variant": "exclude_after_prune" if excl else "all_episodes", "models": results, "gate": {"a_contrast": gate_a, "b_main_in_range": gate_b,
                                            "PASS": gate_a and gate_b}}
     json.dump(summary, open(out_json, "w"), indent=1)
     for r in results:

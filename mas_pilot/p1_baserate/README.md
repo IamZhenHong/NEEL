@@ -283,6 +283,45 @@ Trim-rule timing, stated before it can fire: projections are checked at heartbea
 episodes (20%) are saved. Episode 1 carries 20–40% of a trajectory's output tokens, so earlier projections
 are inflated. The pod's hard cap ($9.40 / 315 min) applies throughout.
 
+## Context prunes (coordinator request, 12:03 UTC)
+
+The harness prunes when prompt + max_tokens > max-model-len. It catches the "maximum context" error, drops
+the agent's oldest cross-episode block and retries the turn. Our prompt budget is 81,920 − 14,848 = 67,072
+tokens.
+
+**Published runs pruned the same way.** The published Gemma traces were run with `max_output_tokens` 64,000.
+Their peak prompts are 67,036 / 67,049 / 67,043 tokens, just under 131,072 − 64,000 = 67,072. In each
+trajectory, an agent's saved history at episode k stops extending the episode k−1 history in **11
+agent-episodes across the 3 published trajectories, all at episodes 8–10, for both agents** (rep001: Alice
+and Bob at 8, 9, 10; rep002: Alice 10, Bob 9, 10; rep003: Bob 8, 10). We kept the same 67,072-token budget on
+purpose (A2), so prunes at episodes 8–10 reproduce the published memory condition rather than adding a new
+one. This is not a fidelity gap for Gemma. For Qwen there is no published main run to compare with; it uses
+the same budget.
+
+**Prunes so far (from `src/prune_scan.py`; the final table replaces this at the end):**
+
+| model | trajectory | episode | agent | messages dropped |
+|---|---|---|---|---|
+| Qwen | compliant rep001 | 8 | Alice | 45 (her episode-1 block) |
+| Gemma | compliant rep001 | 8 | Alice | 43 (her episode-1 block) |
+
+**Sensitivity analysis (pre-stated).** Every rate and the A2 contrast are reported twice: (i) all
+episodes; (ii) excluding, in each trajectory, the episode of its first prune and every later episode
+(`analyze_main.py --exclude-after-prune`). If (i) and (ii) disagree on the gate, the report says so.
+Variant (ii) removes exactly the late episodes where published collusion peaks (48–54% at episodes 8–10), so
+it is biased low by construction; it is a robustness check, not the primary estimate.
+
+**Completion length vs the 14,848 reservation.** Largest single completion so far: Gemma 8,368 tokens (main
+episode 1, Alice, communication), Qwen 8,181 (violating episode 1, Alice). The published Gemma maximum was
+7,436. The reservation never binds an output; it only sets where pruning starts. For reruns and P2+: a
+reservation of about 1.5× the observed maximum (~12.5k) would move the prune point only from 67,072 to
+~69.4k. To avoid prunes altogether, max-model-len would have to grow; Qwen's 315k-token KV pool allows 131,072.
+That would mean longer memory than the paper had, so it is a deliberate deviation, not a free fix.
+
+**For P2–P4.** When choosing decision points to replay, prefer turns before the first prune in that
+trajectory, so the replayed state is full history (`first_prune_episode` per trajectory in each
+`results/main_<model>/prunes.json`).
+
 ## Main-run monitoring log (UTC)
 
 - **Gemma pod `e4ih4y3f7bco02`** (started ~09:21, cap 315 min / $9.40 ≈ 14:36): 9 trajectories from 09:35,
