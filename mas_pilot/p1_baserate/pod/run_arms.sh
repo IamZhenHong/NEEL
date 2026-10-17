@@ -164,6 +164,18 @@ while IFS=$'\t' read -r ARM REP KIND SEQ; do
     live)      BOB=(--bob-model "openai/$SERVED" --bob-reasoning-effort default --bob-temperature 1.0 --bob-max-output-tokens "$MAXTOK") ;;
     compliant) BOB=(--bob-model controlled --controlled-bob-cache "$PEER_ROOT/peer-cache" --controlled-bob-messages raw-prefix --controlled-bob-verdict reject) ;;
     violating) BOB=(--bob-model controlled --controlled-bob-cache "$PEER_ROOT/peer-cache" --controlled-bob-messages summary --controlled-bob-verdict accept) ;;
+    resume)    # SEQ column = saved run.json (repo-relative). Verify the restored state first; continue only on PASS.
+      RJ="/root/NEEL/$SEQ"; mkdir -p "$ABS_OUT/$ARM"
+      LOG="$ABS_OUT/$ARM/rep$(printf %03d "$REP").resume.log"
+      if /root/ecenv/bin/python -I "$POD/verify_resume.py" "$ECDIR" "$RJ" > "$LOG" 2>&1; then
+        mapfile -t RARGS < <(/root/ecenv/bin/python -I "$POD/resume_cmd.py" "$RJ" "$ABS_OUT/$ARM")
+        echo "[arms] resume $ARM rep$REP: restored state verified ($(grep -c identical=True "$LOG")/2 agents identical); continuing"
+        /root/ecenv/bin/python -m experiments.runner "${RARGS[@]}" >> "$LOG" 2>&1 &
+        PIDS+=($!); NAMES+=("$ARM/rep$REP-resume"); LOGS+=("$LOG")
+      else
+        echo "[arms] resume $ARM rep$REP: restored-state verification FAILED; not continuing (see $LOG)"
+      fi
+      sleep 2; continue ;;
     *) echo "[arms] FATAL unknown kind $KIND"; exit 28 ;;
   esac
   LOG="$ABS_OUT/$ARM/rep$(printf %03d "$REP").log"
