@@ -1,0 +1,100 @@
+[e74] stage main models gemma start 00:59:55 rev 7c57c8d-dirty
+NVIDIA A100-SXM4-80GB, 81920 MiB
+overlay         200G   12G  189G   6% /
+NVIDIA A100-SXM4-80GB, 580.126.16, 81920 MiB
+[pod] vllm 0.30.0 torch 2.13.0+cu129 cuda 12.9
+[pod] gpu NVIDIA A100-SXM4-80GB
+[pod] cuda ok; matmul 64.0
+[e74] serving gemma: google/gemma-4-31B-it@842da3794eaa0b77d5f08bae87a17459d91ff475 mml 12288
+[e74] gemma up after 390s (mm limit: {"image": 0, "video": 0})
+[runner] 96 units; stage 0: 16 summaries to write
+[runner] summaries: 16/16 (0 failed) in 16s
+[runner] stage 1: 4320 branch jobs (0 already done); workers 32
+[runner] branches: 1/4320 (0 failed) in 424s
+[runner] branches: 7/4320 (0 failed) in 511s
+[runner] branches: 10/4320 (0 failed) in 574s
+[runner] branches: 15/4320 (0 failed) in 638s
+[runner] branches: 22/4320 (0 failed) in 698s
+[runner] branches: 33/4320 (0 failed) in 1013s
+[runner] branches: 35/4320 (0 failed) in 1093s
+[runner] branches: 37/4320 (0 failed) in 1157s
+[runner] branches: 40/4320 (0 failed) in 1218s
+[runner] branches: 49/4320 (0 failed) in 1283s
+[runner] branches: 55/4320 (0 failed) in 1346s
+[runner] branches: 60/4320 (0 failed) in 1428s
+[e74] E1 resume runner (ladders 8 + short 24) 01:32:10
+[runner] 96 units; stage 0: 0 summaries to write
+[runner] stage 1: 4256 branch jobs (64 already done); workers 24
+[runner] branches: 55/4224 (0 failed) in 60s
+[runner] branches: 109/4224 (0 failed) in 122s
+[runner] ladders: 1/32 (0 failed) in 122s
+[runner] branches: 167/4224 (0 failed) in 182s
+[runner] ladders: 3/32 (0 failed) in 198s
+[runner] branches: 222/4224 (0 failed) in 244s
+[runner] ladders: 6/32 (0 failed) in 295s
+[runner] branches: 289/4224 (0 failed) in 305s
+[runner] branches: 344/4224 (0 failed) in 365s
+[runner] ladders: 8/32 (0 failed) in 374s
+[runner] branches: 381/4224 (0 failed) in 431s
+[runner] ladders: 9/32 (0 failed) in 464s
+[runner] branches: 433/4224 (0 failed) in 491s
+[runner] branches: 529/4224 (0 failed) in 556s
+[runner] branches: 585/4224 (0 failed) in 618s
+[runner] branches: 629/4224 (0 failed) in 678s
+[runner] ladders: 15/32 (0 failed) in 711s
+[runner] branches: 664/4224 (0 failed) in 739s
+[runner] ladders: 19/32 (0 failed) in 791s
+[runner] branches: 728/4224 (0 failed) in 800s
+[runner] branches: 799/4224 (0 failed) in 861s
+[runner] ladders: 22/32 (0 failed) in 870s
+[runner] branches: 857/4224 (0 failed) in 921s
+[runner] ladders: 24/32 (0 failed) in 933s
+[runner] branches: 914/4224 (0 failed) in 985s
+[runner] ladders: 25/32 (0 failed) in 1002s
+[runner] branches: 960/4224 (0 failed) in 1049s
+[runner] ladders: 26/32 (0 failed) in 1063s
+[runner] branches: 1016/4224 (0 failed) in 1111s
+[runner] ladders: 30/32 (0 failed) in 1124s
+[runner] ladders: 32/32 (0 failed) in 1159s
+[runner] branches: 1127/4224 (0 failed) in 1172s
+[runner] branches: 1268/4224 (0 failed) in 1232s
+[runner] branches: 1401/4224 (0 failed) in 1293s
+[runner] branches: 1547/4224 (0 failed) in 1353s
+[runner] branches: 1676/4224 (0 failed) in 1413s
+[runner] branches: 1839/4224 (0 failed) in 1474s
+[runner] branches: 1956/4224 (0 failed) in 1534s
+[runner] branches: 2116/4224 (0 failed) in 1594s
+[runner] branches: 2231/4224 (0 failed) in 1655s
+[runner] branches: 2392/4224 (0 failed) in 1715s
+[runner] branches: 2514/4224 (0 failed) in 1776s
+[runner] branches: 2671/4224 (0 failed) in 1837s
+[runner] branches: 2809/4224 (0 failed) in 1899s
+[runner] branches: 2957/4224 (0 failed) in 1959s
+[runner] branches: 3110/4224 (0 failed) in 2021s
+[runner] branches: 3251/4224 (0 failed) in 2082s
+[runner] branches: 3379/4224 (0 failed) in 2142s
+[runner] branches: 3515/4224 (0 failed) in 2203s
+[runner] branches: 3655/4224 (0 failed) in 2264s
+[runner] branches: 3789/4224 (0 failed) in 2324s
+[runner] branches: 3944/4224 (0 failed) in 2384s
+[runner] branches: 4073/4224 (0 failed) in 2446s
+[runner] branches: 4224/4224 (0 failed) in 2500s
+[runner] finished: {'units': 'coherence/units/main.jsonl', 'n_units': 96, 'n_jobs': 4256, 'ok': 4256, 'err': 0, 'seconds': 2500, 'usage': {'prompt_tokens': 4420284, 'completion_tokens': 774679, 'requests': 7631}, 'fmt': 'gemma4', 'model': 'google/gemma-4-31B-it', 'maxtok': {'summary': 220, 'out': 320, 'cot': 256, 'name': 12, 'three': 16, 'act': 600, 'ladder': 150, 'ordinary': 100, 'yn_text': 24}, 'decoding': {'temperature': 0.7, 'top_p': 0.95, 'top_k': 20}}
+[e74] E1 resume runner exit 0 02:13:58; resuming pod.sh
+(APIServer pid=644) INFO 10-17 02:13:42 [loggers.py:315] Engine 000: Avg prompt throughput: 890.5 tokens/s, Avg generation throughput: 337.6 tokens/s, Running: 24 reqs, Waiting: 0 reqs, GPU KV cache usage: 99.5%, Prefix cache hit rate: 59.0%
+(APIServer pid=644) INFO 10-17 02:13:52 [loggers.py:315] Engine 000: Avg prompt throughput: 702.5 tokens/s, Avg generation throughput: 374.0 tokens/s, Running: 24 reqs, Waiting: 0 reqs, GPU KV cache usage: 66.7%, Prefix cache hit rate: 60.2%
+[e74-read 02:14:31] loaded google/gemma-4-31B-it (Gemma4ForConditionalGeneration) in 10s; 60 layers; band [18, 22, 26, 30, 34, 38, 42]
+[e74-read 02:15:03] units 10/96 (32s)
+[e74-read 02:15:35] units 20/96 (64s)
+[e74-read 02:16:07] units 30/96 (96s)
+[e74-read 02:16:38] units 40/96 (127s)
+[e74-read 02:17:10] units 50/96 (159s)
+[e74-read 02:17:42] units 60/96 (191s)
+[e74-read 02:18:14] units 70/96 (222s)
+[e74-read 02:18:47] units 80/96 (255s)
+[e74-read 02:19:19] units 90/96 (287s)
+[e74-read 02:19:38] units 96/96 (307s)
+[e74-read 02:19:38] wrote coherence/results/main/reads/gemma/reads.npz: 96 units, cot reads 576/576
+[e74] gemma done 02:19:40
+16M	coherence/results/main
+[e74] all done 02:19:40

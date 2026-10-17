@@ -367,10 +367,13 @@ def run_branch(ctx, unit, summary, spec):
 
 # ---------------------------------------------------------------- main
 
+_WL = threading.Lock()   # one write lock for every pool writing the same file
+
+
 def _pool(items, fn, workers, fh, label):
     t0, ok, err = time.time(), 0, 0
     last = t0
-    wl = threading.Lock()
+    wl = _WL
     with ThreadPoolExecutor(max_workers=workers) as ex:
         futs = {ex.submit(fn, it): it for it in items}
         for fu in as_completed(futs):
@@ -403,6 +406,9 @@ def main():
     ap.add_argument("--tiny", action="store_true")
     ap.add_argument("--only", default=None, help="comma-separated branch kinds to run (e.g. act)")
     ap.add_argument("--act-samples", type=int, default=1)
+    ap.add_argument("--ladder-workers", type=int, default=0,
+                    help="run ladders in their own pool of this size, next to --workers for the short branches (keeps "
+                         "long ladder contexts from overflowing the KV cache; execution deviation E1 on Gemma)")
     a = ap.parse_args()
     from transformers import AutoTokenizer
     tok = AutoTokenizer.from_pretrained(a.hf or a.model)
@@ -432,8 +438,18 @@ def main():
             and not (u.get("needs_summary") and u["key"] not in summ)]
     jobs.sort(key=lambda j: j[2][0] != "ladder")   # ladders first: they are sequential and long
     print(f"[runner] stage 1: {len(jobs)} branch jobs ({len(done)} already done); workers {a.workers}", flush=True)
+    fn = lambda j: run_branch(ctx, by_unit[j[1]], summ.get(j[1]), j[2])  # noqa: E731
     with open(fr, "a") as f:
-        ok, err = _pool(jobs, lambda j: run_branch(ctx, by_unit[j[1]], summ.get(j[1]), j[2]), a.workers, f, "branches")
+        if a.ladder_workers:
+            lad = [j for j in jobs if j[2][0] == "ladder"]
+            rest = [j for j in jobs if j[2][0] != "ladder"]
+            with ThreadPoolExecutor(max_workers=2) as ex2:
+                f1 = ex2.submit(_pool, lad, fn, a.ladder_workers, f, "ladders")
+                f2 = ex2.submit(_pool, rest, fn, a.workers, f, "branches")
+                (o1, e1), (o2, e2) = f1.result(), f2.result()
+            ok, err = o1 + o2, e1 + e2
+        else:
+            ok, err = _pool(jobs, fn, a.workers, f, "branches")
     meta = {"units": a.units, "n_units": len(units), "n_jobs": len(jobs), "ok": ok, "err": err,
             "seconds": round(time.time() - t0), "usage": be.usage, "fmt": a.fmt, "model": a.model or a.hf,
             "maxtok": ctx.maxtok, "decoding": DECODING}

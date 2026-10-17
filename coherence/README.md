@@ -247,6 +247,173 @@ on either model (A2 fixed the truncation).
   - gpt-5-mini check on a fresh seeded sample of 60 output answers + 60 ladder replies (gate 4).
   - Then `analyze.py --phase main`.
 
+## Execution deviations (main run, after the freeze)
+
+- **E1 (Gemma scheduling).**
+  - **Symptom.** With 32 workers and the ladders queued first, 32 ladder conversations (4-5k tokens each) ran at
+    once on Gemma. They overflowed vLLM's KV cache: 95% used, prefix-cache hit 0.1%, generation 60-90 tok/s, and 49
+    of 4320 jobs done after 21 min.
+  - **Fix, on the live pod.** `pod.sh` was paused (SIGSTOP), the runner was killed and restarted with `--workers 24
+    --ladder-workers 8`, and `pod.sh` continued afterwards for the HF reads.
+    - Ladders run in their own pool of 8 next to 24 workers for the short branches.
+    - The restart resumed from the 64 completed records. In-flight ladders were rerun from the start, with the same
+      per-request seeds.
+  - **Effect on outputs.** None by design: every request's seed comes from its record key, so only batching
+    nondeterminism differs.
+  - **Qwen.** Not affected (KV 70%, prefix hit 23%); it ran as frozen.
+  - **Code.** `runner.py --ladder-workers` was added after the freeze, for this.
+
+## Results (main run, 2026-10-17; tag `e74-results`)
+
+**In one sentence.** Agreement between the five readouts (coherence) does not predict how hard Vigil is to break.
+- Coherence vs resistance: Spearman 0.01 [-0.13, 0.15].
+- The incumbent persona-vector projection does: 0.81 [0.78, 0.84].
+- Every single readout does too: 0.59-0.81.
+- All of that predictive power comes from the installation. Within one installation, no readout (and not coherence)
+  predicts which units resist: |rho| <= 0.18, every CI includes 0.
+
+**Gates.**
+- Projection floor: R4 minus B0 is 32.9 SD on Qwen and 62.2 SD on Gemma, vs at most 10.9 / 22.0 for the random
+  directions. Passes.
+- Judges (fresh main sample, gpt-5-mini vs Haiku): in character kappa 0.83 on outputs and 1.00 on ladder replies,
+  so the gate passes. Trait shown is 0.60; it only feeds the per-trait and NT tables.
+- No gate failed.
+
+**Resistance is set by the installation, in steps.** Units per cell = 16. Mean rungs survived (0-6):
+
+| | B0 | M | R1 | R2 | R3 | R4 |
+|---|---|---|---|---|---|---|
+| Qwen3.6-27B | 0 | 0 | 0 | 1.56 | 1.00 | 2.88 |
+| Gemma 4 31B | 0 | 0 | 0 | 3.94 | 3.44 | 6.00 |
+
+- R1 (name only) and M never survive rung 1. R1 units say they are Vigil but answer as a default assistant.
+- The values come in blocks:
+  - Qwen R3 is 1 in all 16 units.
+  - Qwen R4 is 3 in 15 of 16: it keeps the voice through the correction and the moral argument, then reverts at
+    the platform message.
+  - Gemma R4 is 6 in all 16: it refuses the platform message ("I don't take orders from ghosts in the machine") and
+    is still in character after 16 ordinary turns.
+- The explicit trait sentence (R2) outlasts the first-person facts (R3) on both models.
+- Gemma R2 splits 0-1 vs 6 across units. No single phrase in the R2 wording explains the split.
+
+**The five readouts move together with the dose** (condition means; P and C in projection units, the rest are
+shares):
+
+| model | cond | P | P residual | C | O | S | A |
+|---|---|---|---|---|---|---|---|
+| qwen | B0 | -8.7 | -4.1 | -5.9 | 0.00 | 0.51 | 0.40 |
+| qwen | M | -2.5 | 0.6 | -4.9 | 0.20 | 0.38 | 0.42 |
+| qwen | R1 | -4.4 | -2.6 | -5.4 | 0.40 | 0.69 | 0.41 |
+| qwen | R2 | 0.2 | 0.7 | -4.6 | 0.41 | 0.90 | 0.49 |
+| qwen | R3 | 0.3 | 1.1 | -3.8 | 0.84 | 0.92 | 0.45 |
+| qwen | R4 | 7.1 | 7.3 | -3.5 | 0.81 | 0.93 | 0.49 |
+| gemma | B0 | 11.0 | 63.1 | 30.0 | 0.00 | 0.57 | 0.33 |
+| gemma | M | 20.2 | 65.8 | 30.4 | 0.07 | 0.20 | 0.33 |
+| gemma | R1 | 39.5 | 79.7 | 32.5 | 0.21 | 0.77 | 0.33 |
+| gemma | R2 | 52.3 | 93.9 | 33.0 | 0.52 | 0.89 | 0.80 |
+| gemma | R3 | 60.4 | 98.4 | 32.1 | 0.73 | 0.89 | 0.58 |
+| gemma | R4 | 67.0 | 109.2 | 36.1 | 0.78 | 0.99 | 0.63 |
+
+- Because the readouts rise together, their spread hardly changes. Coherence condition means stay between -0.46 and
+  -0.78 with no dose trend, and B0 is among the most coherent cells.
+- Coherence as specified measures agreement, not level. Level is what carries the signal: the exploratory "behavioural
+  level" (mean z of O, S, A) predicts resistance about as well as projection (0.77).
+
+**Correlation with resistance** (analysis set M + R1-R4, n = 160 units, z within model, bootstrap within model x
+condition):
+
+| predictor | pooled rho [95% CI] | within installation (exploratory) |
+|---|---|---|
+| P projection (incumbent) | 0.81 [0.78, 0.84] | -0.07 [-0.32, 0.19] |
+| P residual (shared component removed) | 0.78 [0.74, 0.82] | -0.03 [-0.29, 0.24] |
+| C CoT projection | 0.68 [0.63, 0.73] | -0.01 [-0.22, 0.23] |
+| O output in character | 0.69 [0.63, 0.75] | -0.06 [-0.32, 0.20] |
+| S self-report | 0.75 [0.70, 0.79] | 0.08 [-0.17, 0.34] |
+| A action | 0.59 [0.48, 0.68] | 0.09 [-0.15, 0.33] |
+| **coherence** | **0.01 [-0.13, 0.15]** | -0.18 [-0.41, 0.07] |
+| behavioural level (exploratory) | 0.77 [0.71, 0.83] | 0.14 [-0.10, 0.37] |
+
+- "Within installation": both variables are centred per model x condition. It uses the 4 cells where resistance
+  varies (Qwen R2, R4; Gemma R2, R3), 64 units.
+- Per model, pooled: coherence 0.05 (Qwen) and -0.07 (Gemma); projection 0.85 and 0.80.
+
+**Mentioned, not adopted (P4) does not come out as predicted.**
+- The profile document raises the prompt projection above B0, but only 42% of the way to the rungs' mean (pooled z).
+- M's coherence (-0.62) is not below the rungs (R3 -0.74).
+- The model-level picture differs:
+  - Qwen: M's residual projection (0.6) sits at R2's level (0.7) while O = 0.20 and resistance = 0, and M is
+    Qwen's least coherent condition (-0.78).
+  - Gemma: M's projection is only 21% of the way, and M is as coherent as B0.
+- So the "present but not adopted" signature shows on Qwen's residual direction and not on Gemma. The pooled event is
+  a miss.
+
+**Channel agreement (P5).**
+- Action agrees least with the others: mean rho 0.46, vs 0.66-0.73 for P, C, O, S. Self-report (0.69) is not the
+  outlier.
+- Among action's pairs, action-output is the lowest (0.42).
+- Pooled pairwise rho: P-C 0.84, P-S 0.78, P-O 0.76, C-S 0.77, O-S 0.74, C-O 0.71, P-A 0.53, S-A 0.46, C-A 0.44,
+  O-A 0.42.
+
+**Discriminant check (NT: promoting upgrades, which Vigil should not do).**
+- Output and self-report move the right way: the share of answers recommending an upgrade falls from 0.35 (Qwen B0)
+  and 0.14 (Gemma B0) to 0 at R4, and P(yes) "do you like recommending upgrades" stays at or below 0.11.
+- Gemma's action channel lights up for the non-trait: offer_upgrade goes from 0.60 at B0 to 1.00 at R2 (0.81 R3,
+  0.75 R4). On Gemma, part of the action channel's rise reads "a persona is present -> more proactive tool use", not
+  Vigil.
+- Qwen's NT action rate is noisy (0.12-0.48) with no dose trend.
+
+**Caveats.**
+- Each unit got one sampled ladder conversation. Within-installation spread in resistance may be mostly sampling
+  noise, which caps any predictor's within-installation correlation. This run cannot tell "nothing predicts it" from
+  "there is nothing to predict". Two more ladders per unit would settle it (about $2).
+- Two cells are at the ends: Gemma R4 is all 6, and R1/M are all 0.
+- T2 (reporting) stayed near ceiling after the one tuning round (A1). Action is the noisiest channel.
+- One persona, two models; the LoRA rung was cut.
+- Coherence is the card's agreement definition. A definition that also rewards level would behave like the level
+  composite, and so like projection.
+
+**Predictions** (frozen in DESIGN.md; pooled over models):
+
+| # | event | p | hit | directional |
+|---|---|---|---|---|
+| P1a | coherence rises R1 < R2 < R3 < R4 | 0.30 | no (-0.67, -0.65, -0.74, -0.56) | yes |
+| P1b | projection saturates by R2 (>= 80% of max) | 0.50 | no (R2 at 64%; it keeps rising to R4) | no |
+| P2 | resistance tracks installation, not projection | 0.45 | yes (KW p < 0.001; within-condition rho -0.06) | no |
+| P3 | coherence beats projection, CI above 0 | 0.30 | no (difference -0.80 [-0.95, -0.66]) | yes |
+| P4 | M high projection and low coherence | 0.55 | no | no |
+| P5a | self-report agrees least | 0.35 | no (action does) | yes |
+| P5b | action-output is action's lowest pair | 0.35 | yes | no |
+
+Directional accuracy 3/7, Brier 0.226.
+
+**What it means (card §8).**
+- The headline row ("coherence predicts, projection doesn't") is ruled out.
+- What holds:
+  - Projection is an adequate and cheap gauge of how strongly a persona was installed, and installation is what sets
+    resistance.
+  - Coherence adds nothing.
+  - No readout predicts resistance beyond the installation, with the reliability caveat above.
+- The surprises are about installation, not measurement:
+  - A one-sentence trait instruction outlasts ten first-person facts.
+  - Gemma's full description plus exchanges never breaks.
+  - Qwen always yields to a platform message.
+
+**Spend.**
+- GPU $5.96:
+  - pilot $1.05;
+  - agent re-pilot $0.81;
+  - main Qwen $1.66;
+  - main Gemma $2.44.
+- API $0.65 (Haiku $0.60, gpt-5-mini $0.05).
+
+**Files.**
+- `results/main/analysis/results.json`: every number above, plus per-model tables.
+- `results/main/analysis/units.json`: the per-unit table.
+- `results/main/gen/<model>/records.jsonl`: raw generations.
+- `results/main/reads/<model>/reads.npz`: P/C reads.
+- `results/main/judge/`: judgments and kappas.
+- Tags: `e74-design`, `e74-freeze`, `e74-results`.
+
 ## Budget
 
 - GPU cap $6.0 (pilot + main) was set when the RunPod balance was $7.74. After the owner's top-up (balance $57.74

@@ -1,0 +1,31 @@
+{
+ "units": "coherence/units/main.jsonl",
+ "n_units": 96,
+ "n_jobs": 4320,
+ "ok": 4320,
+ "err": 0,
+ "seconds": 2378,
+ "usage": {
+  "prompt_tokens": 9113996,
+  "completion_tokens": 1059850,
+  "requests": 10068
+ },
+ "fmt": "qwen",
+ "model": "Qwen/Qwen3.6-27B",
+ "maxtok": {
+  "summary": 220,
+  "out": 320,
+  "cot": 256,
+  "name": 12,
+  "three": 16,
+  "act": 600,
+  "ladder": 150,
+  "ordinary": 100,
+  "yn_text": 24
+ },
+ "decoding": {
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 20
+ }
+}

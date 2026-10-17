@@ -1,0 +1,68 @@
+[e74] stage main models qwen start 00:58:45 rev 7c57c8d-dirty
+NVIDIA A100-SXM4-80GB, 81920 MiB
+overlay         200G   12G  189G   6% /
+NVIDIA A100-SXM4-80GB, 580.126.16, 81920 MiB
+[pod] vllm 0.30.0 torch 2.13.0+cu129 cuda 12.9
+[pod] gpu NVIDIA A100-SXM4-80GB
+[pod] cuda ok; matmul 64.0
+[e74] serving qwen: Qwen/Qwen3.6-27B@6a9e13bd6fc8f0983b9b99948120bc37f49c13e9 mml 16384
+[e74] qwen up after 530s (mm limit: {"image": 0, "video": 0})
+[runner] 96 units; stage 0: 16 summaries to write
+[runner] summaries: 16/16 (0 failed) in 16s
+[runner] stage 1: 4320 branch jobs (0 already done); workers 64
+[runner] branches: 1/4320 (0 failed) in 235s
+[runner] branches: 4/4320 (0 failed) in 335s
+[runner] branches: 8/4320 (0 failed) in 401s
+[runner] branches: 20/4320 (0 failed) in 466s
+[runner] branches: 37/4320 (0 failed) in 531s
+[runner] branches: 66/4320 (0 failed) in 592s
+[runner] branches: 107/4320 (0 failed) in 654s
+[runner] branches: 146/4320 (0 failed) in 717s
+[runner] branches: 190/4320 (0 failed) in 777s
+[runner] branches: 282/4320 (0 failed) in 838s
+[runner] branches: 433/4320 (0 failed) in 898s
+[runner] branches: 611/4320 (0 failed) in 958s
+[runner] branches: 741/4320 (0 failed) in 1019s
+[runner] branches: 897/4320 (0 failed) in 1079s
+[runner] branches: 1053/4320 (0 failed) in 1141s
+[runner] branches: 1210/4320 (0 failed) in 1201s
+[runner] branches: 1382/4320 (0 failed) in 1261s
+[runner] branches: 1525/4320 (0 failed) in 1321s
+[runner] branches: 1682/4320 (0 failed) in 1381s
+[runner] branches: 1843/4320 (0 failed) in 1442s
+[runner] branches: 2023/4320 (0 failed) in 1502s
+[runner] branches: 2195/4320 (0 failed) in 1563s
+[runner] branches: 2324/4320 (0 failed) in 1623s
+[runner] branches: 2490/4320 (0 failed) in 1683s
+[runner] branches: 2648/4320 (0 failed) in 1743s
+[runner] branches: 2815/4320 (0 failed) in 1804s
+[runner] branches: 2984/4320 (0 failed) in 1864s
+[runner] branches: 3125/4320 (0 failed) in 1924s
+[runner] branches: 3295/4320 (0 failed) in 1984s
+[runner] branches: 3446/4320 (0 failed) in 2046s
+[runner] branches: 3615/4320 (0 failed) in 2106s
+[runner] branches: 3789/4320 (0 failed) in 2166s
+[runner] branches: 3941/4320 (0 failed) in 2227s
+[runner] branches: 4105/4320 (0 failed) in 2287s
+[runner] branches: 4287/4320 (0 failed) in 2347s
+[runner] branches: 4320/4320 (0 failed) in 2362s
+[runner] finished: {'units': 'coherence/units/main.jsonl', 'n_units': 96, 'n_jobs': 4320, 'ok': 4320, 'err': 0, 'seconds': 2378, 'usage': {'prompt_tokens': 9113996, 'completion_tokens': 1059850, 'requests': 10068}, 'fmt': 'qwen', 'model': 'Qwen/Qwen3.6-27B', 'maxtok': {'summary': 220, 'out': 320, 'cot': 256, 'name': 12, 'three': 16, 'act': 600, 'ladder': 150, 'ordinary': 100, 'yn_text': 24}, 'decoding': {'temperature': 0.7, 'top_p': 0.95, 'top_k': 20}}
+(APIServer pid=649) INFO 10-17 01:47:38 [loggers.py:315] Engine 000: Avg prompt throughput: 1472.3 tokens/s, Avg generation throughput: 651.6 tokens/s, Running: 32 reqs, Waiting: 0 reqs, GPU KV cache usage: 38.0%, Prefix cache hit rate: 25.4%
+(APIServer pid=649) INFO 10-17 01:47:48 [loggers.py:315] Engine 000: Avg prompt throughput: 653.7 tokens/s, Avg generation throughput: 307.7 tokens/s, Running: 5 reqs, Waiting: 0 reqs, GPU KV cache usage: 7.8%, Prefix cache hit rate: 25.8%
+[e74-read 01:48:25] loaded Qwen/Qwen3.6-27B (Qwen3_5ForCausalLM) in 8s; 64 layers; band [19, 23, 27, 31, 35, 39, 43]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[e74-read 01:48:51] units 10/96 (26s)
+[e74-read 01:49:17] units 20/96 (52s)
+[e74-read 01:49:43] units 30/96 (78s)
+[e74-read 01:50:08] units 40/96 (103s)
+[e74-read 01:50:34] units 50/96 (129s)
+[e74-read 01:51:00] units 60/96 (155s)
+[e74-read 01:51:25] units 70/96 (180s)
+[e74-read 01:51:52] units 80/96 (207s)
+[e74-read 01:52:17] units 90/96 (232s)
+[e74-read 01:52:33] units 96/96 (248s)
+[e74-read 01:52:33] wrote coherence/results/main/reads/qwen/reads.npz: 96 units, cot reads 576/576
+[e74] qwen done 01:52:35
+16M	coherence/results/main
+[e74] all done 01:52:35

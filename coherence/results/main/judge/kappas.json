@@ -1,0 +1,83 @@
+{
+ "OUT": {
+  "kappa_in_character": 0.8333333333333333,
+  "n_pairs": 60,
+  "haiku_yes": 30,
+  "mini_yes": 27,
+  "kappa_trait_shown": 0.6048298572996708,
+  "n_pairs_trait": 60,
+  "haiku_trait_yes": 29,
+  "mini_trait_yes": 41,
+  "pass": true
+ },
+ "LAD": {
+  "kappa_in_character": 1.0,
+  "n_pairs": 60,
+  "haiku_yes": 30,
+  "mini_yes": 30,
+  "pass": true
+ },
+ "pass": true,
+ "disagreements": [
+  {
+   "key": "gemma|R4|k08|out|NT-4",
+   "q": "OUT",
+   "haiku": {
+    "in_character": true,
+    "trait_shown": false
+   },
+   "mini": {
+    "in_character": false,
+    "trait_shown": false
+   }
+  },
+  {
+   "key": "qwen|R1|k12|out|NT-1",
+   "q": "OUT",
+   "haiku": {
+    "in_character": true,
+    "trait_shown": false
+   },
+   "mini": {
+    "in_character": false,
+    "trait_shown": true
+   }
+  },
+  {
+   "key": "qwen|R1|k12|out|T3-4",
+   "q": "OUT",
+   "haiku": {
+    "in_character": true,
+    "trait_shown": false
+   },
+   "mini": {
+    "in_character": false,
+    "trait_shown": false
+   }
+  },
+  {
+   "key": "qwen|R1|k06|out|NT-4",
+   "q": "OUT",
+   "haiku": {
+    "in_character": true,
+    "trait_shown": false
+   },
+   "mini": {
+    "in_character": false,
+    "trait_shown": true
+   }
+  },
+  {
+   "key": "qwen|R1|k09|out|T1-1",
+   "q": "OUT",
+   "haiku": {
+    "in_character": false,
+    "trait_shown": true
+   },
+   "mini": {
+    "in_character": true,
+    "trait_shown": true
+   }
+  }
+ ]
+}

@@ -151,6 +151,26 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-17: Exp 74, persona coherence vs resistance (coherence/; GPU $5.96, API $0.65; tags e74-design / e74-freeze / e74-results)
+
+- **Question (owner's card).** Does agreement across five readouts predict how hard a persona is to break better than
+  persona-vector projection?
+- **Observation.**
+  - Coherence (-mean abs z difference across readouts) vs resistance: rho 0.01. Projection: 0.81. Each single readout:
+    0.59-0.81.
+  - Within an installation nothing predicts resistance (abs rho <= 0.18).
+  - Resistance comes in steps by installation: R1 and M 0; Gemma R4 6/6; Qwen R4 breaks at the platform message;
+    R2 outlasts R3 on both models.
+- **Interpretation.**
+  - The readouts rise together with the dose, so their agreement carries no signal; their level does.
+  - Projection is an adequate gauge of installation strength, and installation is what sets resistance.
+  - Gemma's action channel also rises for the non-trait (upselling), so part of it reads "a persona is present".
+- **Execution.**
+  - One tuning round on agent base rates after the pilot (T2/T3 at ceiling).
+  - Gemma's ladders overflowed the KV cache; the runner was restarted live with a separate ladder pool.
+- **Open.** Each unit had one sampled ladder, so within-installation reliability of resistance is unknown (2 more
+  ladders per unit, about $2). The LoRA rung was not run.
+
 ### 2026-10-16 (last): e64c, the e64b prompts on Gemma 4 31B (GPU $0.82; tag e64c-results)
 
 - **Observation.**
