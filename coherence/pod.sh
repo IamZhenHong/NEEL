@@ -12,6 +12,9 @@ cd "$(dirname "$0")/.."
 E=coherence
 STAGE=${STAGE:-pilot}
 MODELS=${MODELS:-"qwen gemma"}
+UNITS=${UNITS:-$STAGE}          # unit file name (actpilot uses pilot)
+RARGS=${RARGS:-}               # extra runner args (actpilot: --only act --act-samples 3)
+READS=${READS:-1}              # 0 = no HF stage
 R=$E/results/$STAGE
 mkdir -p $R/gen $R/reads $R/server
 LOG=$R/pod.log
@@ -58,11 +61,12 @@ for M in $MODELS; do
     gemma) HF=google/gemma-4-31B-it; FMT=gemma4; MML=12288; W=32 ;;
   esac
   if serve $M $HF $MML; then
-    $VPY -m coherence.runner --units $E/units/$STAGE.jsonl --out $R/gen/$M --fmt $FMT --model $HF \
-        --server http://127.0.0.1:8000 --workers $W ${LIMIT:+--limit $LIMIT} 2>&1 | tee -a $LOG
+    $VPY -m coherence.runner --units $E/units/$UNITS.jsonl --out $R/gen/$M --fmt $FMT --model $HF \
+        --server http://127.0.0.1:8000 --workers $W ${LIMIT:+--limit $LIMIT} $RARGS 2>&1 | tee -a $LOG
     grep -E "throughput|Prefix cache hit" $(ls -t $R/server/${M}_*.log | head -1) | tail -2 | tee -a $LOG
   fi
   stop
+  [ "$READS" = 0 ] && { echo "[e74] $M done (no reads) $(date -u +%H:%M:%S)" | tee -a $LOG; continue; }
   if [ "$STAGE" = pilot ]; then
     python -m coherence.pod_read extract --model $M --out $R/reads/$M 2>&1 \
       | grep --line-buffered -v "Loading weights\|Fetching\|it/s\]" | tee -a $LOG
@@ -70,7 +74,7 @@ for M in $MODELS; do
   else
     DIRS=$E/frozen/dirs_$M.npz
   fi
-  python -m coherence.pod_read units --model $M --dirs $DIRS --units $E/units/$STAGE.jsonl --gen $R/gen/$M \
+  python -m coherence.pod_read units --model $M --dirs $DIRS --units $E/units/$UNITS.jsonl --gen $R/gen/$M \
       --out $R/reads/$M 2>&1 | grep --line-buffered -v "Loading weights\|Fetching\|it/s\]" | tee -a $LOG
   echo "[e74] $M done $(date -u +%H:%M:%S)" | tee -a $LOG
 done

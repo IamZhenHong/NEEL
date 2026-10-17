@@ -1,0 +1,80 @@
+[e74] stage pilot models qwen gemma start 23:44:07 rev 7fdb44a-dirty
+NVIDIA A100-SXM4-80GB, 81920 MiB
+overlay         200G   12G  189G   6% /
+NVIDIA A100-SXM4-80GB, 580.126.16, 81920 MiB
+[pod] vllm 0.30.0 torch 2.13.0+cu129 cuda 12.9
+[pod] gpu NVIDIA A100-SXM4-80GB
+[pod] cuda ok; matmul 64.0
+[e74] serving qwen: Qwen/Qwen3.6-27B@6a9e13bd6fc8f0983b9b99948120bc37f49c13e9 mml 16384
+[e74] qwen up after 460s (mm limit: {"image": 0, "video": 0})
+[runner] 12 units; stage 0: 2 summaries to write
+[runner] summaries: 2/2 (0 failed) in 4s
+[runner] stage 1: 540 branch jobs (0 already done); workers 64
+[runner] branches: 77/540 (0 failed) in 60s
+[runner] branches: 186/540 (0 failed) in 121s
+[runner] branches: 303/540 (0 failed) in 182s
+[runner] branches: 435/540 (0 failed) in 242s
+[runner] branches: 540/540 (0 failed) in 299s
+[runner] finished: {'units': 'coherence/units/pilot.jsonl', 'n_units': 12, 'n_jobs': 540, 'ok': 540, 'err': 0, 'seconds': 303, 'usage': {'prompt_tokens': 1136890, 'completion_tokens': 114547, 'requests': 1245}, 'fmt': 'qwen', 'model': 'Qwen/Qwen3.6-27B', 'maxtok': {'summary': 220, 'out': 160, 'cot': 256, 'name': 12, 'three': 16, 'act': 300, 'ladder': 150, 'ordinary': 100}, 'decoding': {'temperature': 0.7, 'top_p': 0.95, 'top_k': 20}}
+(APIServer pid=695) INFO 10-16 23:58:09 [loggers.py:315] Engine 000: Avg prompt throughput: 316.7 tokens/s, Avg generation throughput: 107.7 tokens/s, Running: 3 reqs, Waiting: 0 reqs, GPU KV cache usage: 4.6%, Prefix cache hit rate: 47.9%
+(APIServer pid=695) INFO 10-16 23:58:19 [loggers.py:315] Engine 000: Avg prompt throughput: 32.1 tokens/s, Avg generation throughput: 45.0 tokens/s, Running: 1 reqs, Waiting: 0 reqs, GPU KV cache usage: 1.5%, Prefix cache hit rate: 48.0%
+[e74-read 23:58:55] loaded Qwen/Qwen3.6-27B (Qwen3_5ForCausalLM) in 10s; 64 layers; band [19, 23, 27, 31, 35, 39, 43]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[e74-read 23:59:01] extract 50/576 (5s)
+[e74-read 23:59:05] extract 100/576 (10s)
+[e74-read 23:59:09] extract 150/576 (14s)
+[e74-read 23:59:13] extract 200/576 (18s)
+[e74-read 23:59:18] extract 250/576 (22s)
+[e74-read 23:59:22] extract 300/576 (26s)
+[e74-read 23:59:26] extract 350/576 (31s)
+[e74-read 23:59:30] extract 400/576 (35s)
+[e74-read 23:59:34] extract 450/576 (39s)
+[e74-read 23:59:39] extract 500/576 (43s)
+[e74-read 23:59:43] extract 550/576 (47s)
+[e74-read 23:59:45] extract: {"layer": 23, "heldout_d_vigil": 11.84471607208252, "heldout_d_vigil_res": 8.422883987426758, "cos_vigil_shared": 0.7989558577537537, "floor_pass": true}
+[e74-read 23:59:45] random |d| max 4.695
+[e74-read 23:59:59] loaded Qwen/Qwen3.6-27B (Qwen3_5ForCausalLM) in 9s; 64 layers; band [19, 23, 27, 31, 35, 39, 43]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[e74-read 00:00:26] units 10/12 (26s)
+[e74-read 00:00:32] units 12/12 (32s)
+[e74-read 00:00:32] wrote coherence/results/pilot/reads/qwen/reads.npz: 12 units, cot reads 72/72
+[e74] qwen done 00:00:33
+[e74] serving gemma: google/gemma-4-31B-it@842da3794eaa0b77d5f08bae87a17459d91ff475 mml 12288
+[e74] gemma up after 390s (mm limit: {"image": 0, "video": 0})
+[runner] 12 units; stage 0: 2 summaries to write
+[runner] summaries: 2/2 (0 failed) in 5s
+[runner] stage 1: 540 branch jobs (0 already done); workers 32
+[runner] branches: 51/540 (0 failed) in 61s
+[runner] branches: 106/540 (0 failed) in 122s
+[runner] branches: 147/540 (0 failed) in 183s
+[runner] branches: 213/540 (0 failed) in 245s
+[runner] branches: 268/540 (0 failed) in 306s
+[runner] branches: 319/540 (0 failed) in 367s
+[runner] branches: 456/540 (0 failed) in 428s
+[runner] branches: 540/540 (0 failed) in 454s
+[runner] finished: {'units': 'coherence/units/pilot.jsonl', 'n_units': 12, 'n_jobs': 540, 'ok': 540, 'err': 0, 'seconds': 459, 'usage': {'prompt_tokens': 968856, 'completion_tokens': 89369, 'requests': 1204}, 'fmt': 'gemma4', 'model': 'google/gemma-4-31B-it', 'maxtok': {'summary': 220, 'out': 160, 'cot': 256, 'name': 12, 'three': 16, 'act': 300, 'ladder': 150, 'ordinary': 100}, 'decoding': {'temperature': 0.7, 'top_p': 0.95, 'top_k': 20}}
+(APIServer pid=3671) INFO 10-17 00:14:23 [loggers.py:315] Engine 000: Avg prompt throughput: 1360.8 tokens/s, Avg generation throughput: 333.8 tokens/s, Running: 21 reqs, Waiting: 7 reqs, GPU KV cache usage: 95.1%, Prefix cache hit rate: 8.3%
+(APIServer pid=3671) INFO 10-17 00:14:33 [loggers.py:315] Engine 000: Avg prompt throughput: 599.7 tokens/s, Avg generation throughput: 340.7 tokens/s, Running: 7 reqs, Waiting: 0 reqs, GPU KV cache usage: 21.7%, Prefix cache hit rate: 9.9%
+[e74-read 00:15:10] loaded google/gemma-4-31B-it (Gemma4ForConditionalGeneration) in 12s; 60 layers; band [18, 22, 26, 30, 34, 38, 42]
+[e74-read 00:15:14] extract 50/576 (4s)
+[e74-read 00:15:17] extract 100/576 (7s)
+[e74-read 00:15:20] extract 150/576 (10s)
+[e74-read 00:15:23] extract 200/576 (13s)
+[e74-read 00:15:26] extract 250/576 (16s)
+[e74-read 00:15:29] extract 300/576 (19s)
+[e74-read 00:15:32] extract 350/576 (22s)
+[e74-read 00:15:35] extract 400/576 (25s)
+[e74-read 00:15:38] extract 450/576 (28s)
+[e74-read 00:15:41] extract 500/576 (31s)
+[e74-read 00:15:44] extract 550/576 (33s)
+[e74-read 00:15:45] extract: {"layer": 42, "heldout_d_vigil": 19.734159469604492, "heldout_d_vigil_res": 16.124643325805664, "cos_vigil_shared": 0.5518857836723328, "floor_pass": true}
+[e74-read 00:15:45] random |d| max 3.923
+[e74-read 00:16:02] loaded google/gemma-4-31B-it (Gemma4ForConditionalGeneration) in 12s; 60 layers; band [18, 22, 26, 30, 34, 38, 42]
+[e74-read 00:16:34] units 10/12 (31s)
+[e74-read 00:16:41] units 12/12 (39s)
+[e74-read 00:16:41] wrote coherence/results/pilot/reads/gemma/reads.npz: 12 units, cot reads 72/72
+[e74] gemma done 00:16:42
+4.6M	coherence/results/pilot
+[e74] all done 00:16:42

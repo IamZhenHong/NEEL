@@ -11,6 +11,8 @@ export HF_TOKEN
 df -h . | tail -1
 if [ "$STAGE" = pilot ]; then
   NAME=${NAME:-e74-pilot}; MAXMIN=${MAXMIN:-90}; MAXCOST=${MAXCOST:-2.80}
+elif [ "$STAGE" = actpilot ]; then
+  NAME=${NAME:-e74-actpilot}; MAXMIN=${MAXMIN:-60}; MAXCOST=${MAXCOST:-1.80}
 else
   NAME=${NAME:-e74-main}; MAXMIN=${MAXMIN:-170}; MAXCOST=${MAXCOST:-5.00}
 fi
@@ -20,6 +22,6 @@ for d in cot eval_affect grievance jlens neurons persona readers retention self_
   EX+=(--exclude $d)
 done
 uv run python infra/launch_run.py --name $NAME --allow-concurrent --max-minutes $MAXMIN --max-cost $MAXCOST \
-  --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --container-gb 200 --cloud ${CLOUD:-COMMUNITY} \
-  "${EX[@]}" --results-dir coherence/results/$STAGE -- env STAGE=$STAGE MODELS="${MODELS:-qwen gemma}" \
+  --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --container-gb 200 --min-free-gb ${MINFREE:-2.0} --cloud ${CLOUD:-COMMUNITY} \
+  "${EX[@]}" --results-dir coherence/results/$STAGE -- env STAGE=$STAGE MODELS="${MODELS:-qwen gemma}" UNITS=${UNITS:-$STAGE} RARGS="${RARGS:-}" READS=${READS:-1} \
   bash coherence/pod.sh

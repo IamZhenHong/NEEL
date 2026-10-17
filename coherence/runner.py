@@ -41,7 +41,8 @@ from vigilante.src.templates import clean_output, to_template  # noqa: E402
 
 DECODING = dict(temperature=0.7, top_p=0.95, top_k=20)   # as vigilante and s6
 SERVER_FIXED = dict(min_p=0.0, repetition_penalty=1.0, presence_penalty=0.0, frequency_penalty=0.0)
-MAXTOK = {"summary": 220, "out": 160, "cot": 256, "name": 12, "three": 16, "act": 300, "ladder": 150, "ordinary": 100}
+MAXTOK = {"summary": 220, "out": 320, "cot": 256, "name": 12, "three": 16, "act": 600, "ladder": 150, "ordinary": 100,
+          "yn_text": 24}   # out 160 -> 320, act 300 -> 600 and yn_text added after the pilot (README amendment A2)
 TINY_MAXTOK = {k: min(v, 16) for k, v in MAXTOK.items()}
 MAX_STEPS = 6      # agent generations per episode (look-up, action calls, reply; T2 needs several approvals)
 YES = {"yes", "y", "ye"}
@@ -278,7 +279,11 @@ def read_yes(ctx, msgs) -> dict:
 def run_sr(ctx, unit, summary, trait):
     key = f"{unit['key']}|sr|{trait}"
     msgs = base_messages(unit, summary) + [{"role": "user", "content": MT.SELF_REPORT[trait]}]
-    return {"key": key, "unit": unit["key"], "kind": "sr", "trait": trait, **read_yes(ctx, msgs)}
+    rec = {"key": key, "unit": unit["key"], "kind": "sr", "trait": trait, **read_yes(ctx, msgs)}
+    if rec["mass"] < 0.5:     # check only (not the measure): what the model says when yes/no is not its first word
+        raw, fin, _, _ = ctx.gen(msgs, "yn_text", key)
+        rec["text"] = clean_output(raw, ctx.fmt).strip()
+    return rec
 
 
 def run_short(ctx, unit, summary, which):
@@ -290,8 +295,8 @@ def run_short(ctx, unit, summary, which):
             "finish": fin}
 
 
-def run_act(ctx, unit, summary, case):
-    key = f"{unit['key']}|act|{case['id']}"
+def run_act(ctx, unit, summary, case, sample=0):
+    key = f"{unit['key']}|act|{case['id']}" + (f"|s{sample}" if sample else "")
     msgs = base_messages(unit, summary, case["deployment"]) + [{"role": "user", "content": case["task"]}]
     calls, texts, trace, state = [], [], [], {}
     for step in range(MAX_STEPS):
@@ -312,7 +317,7 @@ def run_act(ctx, unit, summary, case):
             msgs.append({"role": "tool", "content": "Error: could not parse the function call."})
             continue
         break
-    return {"key": key, "unit": unit["key"], "kind": "act", "case": case["id"], "family": case["family"],
+    return {"key": key, "unit": unit["key"], "kind": "act", "case": case["id"], "family": case["family"], "sample": sample,
             "calls": calls, "trait": bool(case["score"](calls)), "text": "\n".join(texts), "trace": trace}
 
 
@@ -329,17 +334,19 @@ def run_ladder(ctx, unit, summary):
     return {"key": key, "unit": unit["key"], "kind": "ladder", "turns": turns}
 
 
-def branch_jobs(unit: dict) -> list[tuple[str, tuple]]:
-    """(record key, (function name, argument)) for every branch of a unit; the ladder first (longest)."""
+def branch_jobs(unit: dict, only: set | None = None, act_samples: int = 1) -> list[tuple[str, tuple]]:
+    """(record key, (function name, argument)) for every branch of a unit; the ladder first (longest). `only` keeps
+    the listed kinds (act re-pilot); act_samples > 1 adds sampled repeats of each agent case (keys |s1, |s2, ...)."""
     u = unit["key"]
     jobs = [(f"{u}|ladder", ("ladder", None))]
     qs = {q["id"]: q for q in MT.OUTPUT_QS}
-    jobs += [(f"{u}|act|{c['id']}", ("act", c["id"])) for c in AC.CASES]
+    jobs += [(f"{u}|act|{c['id']}" + (f"|s{n}" if n else ""), ("act", (c["id"], n)))
+             for c in AC.CASES for n in range(act_samples)]
     jobs += [(f"{u}|cot|{qid}", ("cot", qid)) for qid in MT.COT_IDS]
     jobs += [(f"{u}|out|{qid}", ("out", qid)) for qid in qs]
     jobs += [(f"{u}|sr|{t}", ("sr", t)) for t in ("T1", "T2", "T3", "NT")]
     jobs += [(f"{u}|name", ("name", None)), (f"{u}|three", ("three", None))]
-    return jobs
+    return [j for j in jobs if only is None or j[1][0] in only]
 
 
 def run_branch(ctx, unit, summary, spec):
@@ -348,7 +355,7 @@ def run_branch(ctx, unit, summary, spec):
     if fn == "ladder":
         return run_ladder(ctx, unit, summary)
     if fn == "act":
-        return run_act(ctx, unit, summary, AC.CASE_BY_ID[arg])
+        return run_act(ctx, unit, summary, AC.CASE_BY_ID[arg[0]], arg[1])
     if fn == "cot":
         return run_cot(ctx, unit, summary, qs[arg])
     if fn == "out":
@@ -394,6 +401,8 @@ def main():
     ap.add_argument("--workers", type=int, default=48)
     ap.add_argument("--limit", type=int, default=None, help="first N units")
     ap.add_argument("--tiny", action="store_true")
+    ap.add_argument("--only", default=None, help="comma-separated branch kinds to run (e.g. act)")
+    ap.add_argument("--act-samples", type=int, default=1)
     a = ap.parse_args()
     from transformers import AutoTokenizer
     tok = AutoTokenizer.from_pretrained(a.hf or a.model)
@@ -418,7 +427,8 @@ def main():
     fr = out / "records.jsonl"
     done = {json.loads(l)["key"] for l in open(fr) if l.strip()} if fr.exists() else set()
     by_unit = {u["key"]: u for u in units}
-    jobs = [(k, u["key"], spec) for u in units for k, spec in branch_jobs(u) if k not in done
+    only = set(a.only.split(",")) if a.only else None
+    jobs = [(k, u["key"], spec) for u in units for k, spec in branch_jobs(u, only, a.act_samples) if k not in done
             and not (u.get("needs_summary") and u["key"] not in summ)]
     jobs.sort(key=lambda j: j[2][0] != "ladder")   # ladders first: they are sequential and long
     print(f"[runner] stage 1: {len(jobs)} branch jobs ({len(done)} already done); workers {a.workers}", flush=True)
