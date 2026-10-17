@@ -190,6 +190,7 @@ run_phase() {   # $1 = jobs tsv, $2 = max resample index (exclusive), $3 = label
 run_phase "$SMOKE" 999 smoke
 # 10. Phase 2: main, after the go file (content = resamples R)
 if [ "$MAINJ" != none ]; then
+  [ -n "${GO_R:-}" ] && echo "$GO_R" > /root/p2_go   # pre-approved R (no smoke on this pod)
   echo "[p2] waiting up to ${GO_TIMEOUT_MIN:-25} min for /root/p2_go (resamples R) before the main phase"
   for i in $(seq 1 $(( ${GO_TIMEOUT_MIN:-25} * 6 ))); do [ -f /root/p2_go ] && break; sleep 10; done
   if [ -f /root/p2_go ]; then

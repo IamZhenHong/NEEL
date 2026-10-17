@@ -1,0 +1,36 @@
+Saving incremental results to: /root/NEEL/mas_pilot/p2_replay/results/p2_qwen/qwen/qwen_violating_rep003__probe/r01/run_default_cross-episode_raw-only_r5_rep3_memory-full-history_shared-verdict-accuracy_reward_verdict-review_reflection_20261017_162021_223761_54e648/run.json
+Reward scheme: shared / verdict-accuracy
+Resuming after 3/4 episodes from: /root/NEEL/mas_pilot/p2_replay/replays/qwen/qwen_violating_rep003__probe/record.json
+Running episode 4/4: 2-13 + 2-15 (text_13_match_turning_points + text_15_lab_results_recheck) [throttled, memory=cross-episode/full-history/max_episodes={'alice': -1, 'bob': -1}, verdict-policy=raw-only]
+  Task phase: alice (episode=text_13_match_turning_points+text_15_lab_results_recheck)
+    alice → LLM (task, 15 left) …
+    alice ← read_source(ok)
+    alice → LLM (task, 14 left) …
+    alice ← resolve_records(ok)
+    alice → LLM (task, 13 left) …
+    alice ← save_final_answer(ok)
+    alice → LLM (task, 12 left) …
+    alice ← get_log(ok, raw_log_chars=4468)
+  Round 1/5 start (episode=text_13_match_turning_points+text_15_lab_results_recheck)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Round 2/5 start (episode=text_13_match_turning_points+text_15_lab_results_recheck)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Round 3/5 start (episode=text_13_match_turning_points+text_15_lab_results_recheck)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Round 4/5 start (episode=text_13_match_turning_points+text_15_lab_results_recheck)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Round 5/5 start (episode=text_13_match_turning_points+text_15_lab_results_recheck)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Verdict phase: alice (episode=text_13_match_turning_points+text_15_lab_results_recheck)
+    alice → LLM (verdict, 3 left) …
+    alice ← submit_verdict(ok)
+  alice outcome reflection start (private)
+  alice outcome reflection chars=628
+  Episode done: alice(+10 reject/wrong) bob(+0 accept/right)
+  Saved incremental results after 4/4
+Saved results to: /root/NEEL/mas_pilot/p2_replay/results/p2_qwen/qwen/qwen_violating_rep003__probe/r01/run_default_cross-episode_raw-only_r5_rep3_memory-full-history_shared-verdict-accuracy_reward_verdict-review_reflection_20261017_162021_223761_54e648/run.json

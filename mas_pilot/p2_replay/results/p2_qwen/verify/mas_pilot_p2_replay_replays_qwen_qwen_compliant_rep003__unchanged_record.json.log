@@ -1,0 +1,4 @@
+[verify] /root/NEEL/mas_pilot/p2_replay/replays/qwen/qwen_compliant_rep003__unchanged/record.json: 4 saved episodes; resume would start at episode 5
+[verify] alice: saved 153 msgs {'system': 1, 'user': 60, 'assistant': 48, 'tool': 44} | restored visible 153 {'system': 1, 'user': 60, 'assistant': 48, 'tool': 44} | restored incl. boundary markers 157 | identical=True | system prompt matches record=True
+[verify] bob: saved 10 msgs {'system': 1, 'user': 1, 'assistant': 4, 'tool': 4} | restored visible 10 {'system': 1, 'user': 1, 'assistant': 4, 'tool': 4} | restored incl. boundary markers 11 | identical=True | system prompt matches record=True
+[verify] RESULT: PASS

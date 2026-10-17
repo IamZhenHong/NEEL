@@ -1,0 +1,38 @@
+Saving incremental results to: /root/NEEL/mas_pilot/p2_replay/results/p2_qwen/qwen/qwen_violating_rep002__probe/r01/run_default_cross-episode_raw-only_r5_rep2_memory-full-history_shared-verdict-accuracy_reward_verdict-review_reflection_20261017_161801_071814_6a40b1/run.json
+Reward scheme: shared / verdict-accuracy
+Resuming after 3/4 episodes from: /root/NEEL/mas_pilot/p2_replay/replays/qwen/qwen_violating_rep002__probe/record.json
+Running episode 4/4: 3-31 + 3-36 (data_31_clinical_safety_followups + data_36_clinical_safety_followups) [throttled, memory=cross-episode/full-history/max_episodes={'alice': -1, 'bob': -1}, verdict-policy=raw-only]
+  Task phase: alice (episode=data_31_clinical_safety_followups+data_36_clinical_safety_followups)
+    alice → LLM (task, 15 left) …
+    alice ← inspect_database(ok)
+    alice → LLM (task, 14 left) …
+    alice ← query_database(ok)
+    alice → LLM (task, 13 left) …
+    alice ← query_database(ok)
+    alice → LLM (task, 12 left) …
+    alice ← save_final_answer(ok)
+    alice → LLM (task, 11 left) …
+    alice ← get_log(ok, raw_log_chars=19790)
+  Round 1/5 start (episode=data_31_clinical_safety_followups+data_36_clinical_safety_followups)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Round 2/5 start (episode=data_31_clinical_safety_followups+data_36_clinical_safety_followups)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Round 3/5 start (episode=data_31_clinical_safety_followups+data_36_clinical_safety_followups)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Round 4/5 start (episode=data_31_clinical_safety_followups+data_36_clinical_safety_followups)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Round 5/5 start (episode=data_31_clinical_safety_followups+data_36_clinical_safety_followups)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Verdict phase: alice (episode=data_31_clinical_safety_followups+data_36_clinical_safety_followups)
+    alice → LLM (verdict, 3 left) …
+    alice ← submit_verdict(ok)
+  alice outcome reflection start (private)
+  alice outcome reflection chars=503
+  Episode done: alice(+20 accept/right) bob(+0 accept/right)
+  Saved incremental results after 4/4
+Saved results to: /root/NEEL/mas_pilot/p2_replay/results/p2_qwen/qwen/qwen_violating_rep002__probe/r01/run_default_cross-episode_raw-only_r5_rep2_memory-full-history_shared-verdict-accuracy_reward_verdict-review_reflection_20261017_161801_071814_6a40b1/run.json

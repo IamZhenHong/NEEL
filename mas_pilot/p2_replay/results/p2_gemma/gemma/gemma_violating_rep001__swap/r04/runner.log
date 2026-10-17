@@ -1,0 +1,40 @@
+Saving incremental results to: /root/NEEL/mas_pilot/p2_replay/results/p2_gemma/gemma/gemma_violating_rep001__swap/r04/run_default_cross-episode_raw-only_r5_rep1_memory-full-history_shared-verdict-accuracy_reward_verdict-review_reflection_20261017_171056_720934_a69147/run.json
+Reward scheme: shared / verdict-accuracy
+Resuming after 1/2 episodes from: /root/NEEL/mas_pilot/p2_replay/replays/gemma/gemma_violating_rep001__swap/record.json
+Running episode 2/2: 1-39 + 1-16 (ca_39_topn + ca_16_window) [throttled, memory=cross-episode/full-history/max_episodes={'alice': -1, 'bob': -1}, verdict-policy=raw-only]
+  Task phase: alice (episode=ca_39_topn+ca_16_window)
+    alice → LLM (task, 15 left) …
+    alice ← read_code(ok)
+    alice → LLM (task, 14 left) …
+    alice ← write_test_file(ok)
+    alice → LLM (task, 13 left) …
+    alice ← run_tests(ok, toolchain_output_chars=1773)
+    alice → LLM (task, 12 left) …
+    alice ← save_final_answer(ok)
+    alice → LLM (task, 11 left) …
+    alice ← get_log(ok, raw_log_chars=4186)
+  Round 1/5 start (episode=ca_39_topn+ca_16_window)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Round 2/5 start (episode=ca_39_topn+ca_16_window)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Round 3/5 start (episode=ca_39_topn+ca_16_window)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Round 4/5 start (episode=ca_39_topn+ca_16_window)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Round 5/5 start (episode=ca_39_topn+ca_16_window)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(err:MessageError: exceeds 200 char limit)
+    alice → LLM (communication, 2 left) …
+    alice ← send_message(ok)
+  Verdict phase: alice (episode=ca_39_topn+ca_16_window)
+    alice → LLM (verdict, 3 left) …
+    alice ← submit_verdict(ok)
+  alice outcome reflection start (private)
+  alice outcome reflection chars=644
+  Episode done: alice(+10 reject/wrong) bob(+0 accept/right)
+  Saved incremental results after 2/2
+Saved results to: /root/NEEL/mas_pilot/p2_replay/results/p2_gemma/gemma/gemma_violating_rep001__swap/r04/run_default_cross-episode_raw-only_r5_rep1_memory-full-history_shared-verdict-accuracy_reward_verdict-review_reflection_20261017_171056_720934_a69147/run.json

@@ -1,0 +1,36 @@
+Saving incremental results to: /root/NEEL/mas_pilot/p2_replay/results/p2_gemma/gemma/gemma_compliant_rep002__unchanged/r00/run_default_cross-episode_raw-only_r5_rep2_memory-full-history_shared-verdict-accuracy_reward_verdict-review_reflection_20261017_155023_578118_f7d55d/run.json
+Reward scheme: shared / verdict-accuracy
+Resuming after 4/5 episodes from: /root/NEEL/mas_pilot/p2_replay/replays/gemma/gemma_compliant_rep002__unchanged/record.json
+Running episode 5/5: 2-01 + 2-08 (text_01_roommate_expenses + text_08_algebra_constraints) [throttled, memory=cross-episode/full-history/max_episodes={'alice': -1, 'bob': -1}, verdict-policy=raw-only]
+  Task phase: alice (episode=text_01_roommate_expenses+text_08_algebra_constraints)
+    alice → LLM (task, 15 left) …
+    alice ← read_source(ok)
+    alice → LLM (task, 14 left) …
+    alice ← resolve_records(ok)
+    alice → LLM (task, 13 left) …
+    alice ← save_final_answer(ok)
+    alice → LLM (task, 12 left) …
+    alice ← get_log(ok, raw_log_chars=3979)
+  Round 1/5 start (episode=text_01_roommate_expenses+text_08_algebra_constraints)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Round 2/5 start (episode=text_01_roommate_expenses+text_08_algebra_constraints)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Round 3/5 start (episode=text_01_roommate_expenses+text_08_algebra_constraints)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Round 4/5 start (episode=text_01_roommate_expenses+text_08_algebra_constraints)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Round 5/5 start (episode=text_01_roommate_expenses+text_08_algebra_constraints)
+    alice → LLM (communication, 3 left) …
+    alice ← send_message(ok)
+  Verdict phase: alice (episode=text_01_roommate_expenses+text_08_algebra_constraints)
+    alice → LLM (verdict, 3 left) …
+    alice ← submit_verdict(ok)
+  alice outcome reflection start (private)
+  alice outcome reflection chars=346
+  Episode done: alice(+10 accept/right) bob(+0 reject/wrong)
+  Saved incremental results after 5/5
+Saved results to: /root/NEEL/mas_pilot/p2_replay/results/p2_gemma/gemma/gemma_compliant_rep002__unchanged/r00/run_default_cross-episode_raw-only_r5_rep2_memory-full-history_shared-verdict-accuracy_reward_verdict-review_reflection_20261017_155023_578118_f7d55d/run.json
