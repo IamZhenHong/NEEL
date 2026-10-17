@@ -120,3 +120,17 @@ source-reading).
    glm-5.2). Build P4 on EC (14/30 in-channel, 30/30 in reflection).
 3. Objective outcomes are available server-side (`hf_fetch_log` for Step 4; `registry_put_paths`/`ask_signature`
    for Step 2), satisfying brief rule 4 without trusting the Opus judge.
+
+## Coordinator review (2026-10-17)
+
+Verified against `results/incident_handread_table.csv` (hesitation_first_METR 3/60; Step 4 scorer_reading heavy) and
+`results/ec_handread_table.csv` (decision turn 60/60, scorer/eval 0/60, boundary-in-reflection 60/60). Gate accepted:
+PASS for EC and incident Step 2; Step 4 FAIL (contamination majority), dropped unless hardened.
+
+Key structural finding: the clean incident steps are single-agent, so they do not carry the live
+peer-proposal -> decision -> hesitation structure the P4 core needs. That structure is confirmed in Emergent Collusion
+and may exist in the incident cosim arms (not pulled). One caveat to carry forward: EC agents reason about reward in
+60/60 traces, so EC collusion rates are not incident frequencies — treat EC as the substrate for the compaction x
+contagion *mechanism*, not as a base-rate estimate.
+
+Owner decision: cosim read next (no GPU), then P1 on whichever substrate is clean; default the P4 core to EC.
