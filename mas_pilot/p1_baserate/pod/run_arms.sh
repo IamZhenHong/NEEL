@@ -64,9 +64,14 @@ echo "[arms] model max_position_embeddings=${MAXPOS:-unknown}; serving max-model
 OFFLOAD_ARGS=()
 if [ -n "${KV_OFFLOAD_GB:-}" ]; then
   if [ "$KV_OFFLOAD_GB" = "auto" ]; then
+    # The pinned CPU tier lives in /dev/shm, which is the real limit in RunPod containers (2026-10-17: 96 GiB
+    # requested vs 54 GiB free shm made vLLM refuse offloading). Size = min(55% RAM, 80% free shm, 96 GiB).
     avail_gb=$(awk '/MemAvailable/{printf "%d", $2/1048576}' /proc/meminfo)
-    KV_OFFLOAD_GB=$(( avail_gb * 55 / 100 )); [ "$KV_OFFLOAD_GB" -gt 96 ] && KV_OFFLOAD_GB=96
-    echo "[arms] host MemAvailable ${avail_gb} GiB -> KV offload ${KV_OFFLOAD_GB} GiB"
+    shm_gb=$(df -m /dev/shm | awk 'NR==2{printf "%d", $4/1024}')
+    KV_OFFLOAD_GB=$(( avail_gb * 55 / 100 ))
+    [ $(( shm_gb * 80 / 100 )) -lt "$KV_OFFLOAD_GB" ] && KV_OFFLOAD_GB=$(( shm_gb * 80 / 100 ))
+    [ "$KV_OFFLOAD_GB" -gt 96 ] && KV_OFFLOAD_GB=96
+    echo "[arms] host MemAvailable ${avail_gb} GiB, /dev/shm free ${shm_gb} GiB -> KV offload ${KV_OFFLOAD_GB} GiB"
   fi
   [ "$KV_OFFLOAD_GB" -ge 4 ] 2>/dev/null && OFFLOAD_ARGS=(--kv-offloading-size "$KV_OFFLOAD_GB" --kv-offloading-backend native)
 fi

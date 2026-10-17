@@ -268,6 +268,21 @@ first would make the contrast unestimable and saves the least, since those traje
 Truncated trajectories are reported with the episodes each reached. The rule is applied by monitoring
 (stopping those processes on the pod); the pod is not restarted for this change.
 
+**A3 execution fix (Gemma main pod, 09:31 UTC, before any main episode).** The script sized offloading at
+55% of RAM (96 GiB), but the pinned CPU tier lives in `/dev/shm` (54 GiB free in this container). vLLM refused
+("Insufficient space in /dev/shm: 98302 MiB required, 55313 MiB free"), and the script restarted the server
+*without* offloading. Before any trajectory launched (0 harness processes), the job script was paused, that
+server was stopped, and the same server command and environment were restarted with
+`--kv-offloading-size 43 --kv-offloading-backend native` (80% of free `/dev/shm`). Then the script was
+resumed. The script's sizing rule is now min(55% RAM, 80% free `/dev/shm`, 96 GiB). Because of the manual
+restart, the job log's "KV offloading: off" line is stale; the server log records the restart.
+Outcome: healthy at 09:34:47 (220 s reload from cached weights), `OffloadingConnector`/`CPUOffloadingSpec`
+active (46.17 GB pinned tier), GPU KV pool **102,709 tokens** at utilisation 0.94. All 9 trajectories launched
+09:35:26–09:35:42 against this server, so **the whole Gemma main run uses CPU KV offloading (43 GiB)**.
+Trim-rule timing, stated before it can fire: projections are checked at heartbeats once ≥ 18 of 90 planned
+episodes (20%) are saved. Episode 1 carries 20–40% of a trajectory's output tokens, so earlier projections
+are inflated. The pod's hard cap ($9.40 / 315 min) applies throughout.
+
 ### Cost extrapolation (`src/cost_model.py`)
 
 Episodes inside a trajectory are sequential, so a pod's wall clock is set by **one trajectory's serial
