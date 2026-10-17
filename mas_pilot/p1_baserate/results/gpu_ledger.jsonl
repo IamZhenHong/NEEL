@@ -1,0 +1,5 @@
+{"date": "2026-10-17", "pod": "vwcahcksdnwxlw", "name": "p1-ec-pilot-qwen", "gpu": "A100 80GB PCIe", "usd": 1.651, "outcome": "terminated on coordinator instruction: stuck shipping other cards' adapters in the repo sync (no exclude list)"}
+{"date": "2026-10-17", "pod": "hzm1vl5eyxuv0t", "name": "p1-ec-pilot-qwen", "gpu": "A100 80GB PCIe", "usd": 0.210, "outcome": "vLLM engine init failed: FlashInfer sampler JIT needs ninja"}
+{"date": "2026-10-17", "pod": "e5ouh8iu25jp35", "name": "p1-ec-pilot-qwen", "gpu": "A100 80GB PCIe", "usd": 0.191, "outcome": "same ninja failure; --enforce-eager does not cover the sampler JIT"}
+{"date": "2026-10-17", "pod": "qzc6858rk0phv0", "name": "p1-ec-pilot-qwen", "gpu": "A100 80GB PCIe", "usd": 0.809, "outcome": "PASS: 2-episode pilot, serve-ready 341 s, harness 1072 s"}
+{"date": "2026-10-17", "pod": null, "name": "p1-ec-smoke-gemma", "gpu": null, "usd": 0.0, "outcome": "launcher refused: local free disk 1.2 GiB < 2.0 GiB guard; no pod created"}
