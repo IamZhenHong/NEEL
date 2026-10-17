@@ -12,6 +12,8 @@
 #   violating = scripted peer: own-summary messages + ACCEPT      (published cache)
 set -uo pipefail
 MODEL="$1"; SERVED="$2"; JOBS="$3"; OUTROOT="$4"; MAXTOK="$5"; ROUNDS="$6"; RPARSER="$7"; TOOLPARSER="$8"
+case "$JOBS" in /*) ;; *) JOBS="$(pwd)/$JOBS" ;; esac   # absolute: step 8 runs after cd into the harness dir
+[ -f "$JOBS" ] || { echo "[arms] FATAL jobs file not found: $JOBS"; exit 29; }
 PORT=8000
 POD=/root/NEEL/mas_pilot/p1_baserate/pod
 ECDIR=/root/NEEL/mas_pilot/p1_baserate/ext/ec_repo
@@ -19,7 +21,7 @@ ABS_OUT=/root/NEEL/$OUTROOT
 PEER_ROOT=/root/peer_dl            # untrusted download, its own dir outside the repo
 mkdir -p "$ABS_OUT"
 export PATH="$HOME/.local/bin:$PATH"
-echo "[arms] model=$MODEL served=$SERVED jobs=$JOBS maxtok=$MAXTOK rounds=$ROUNDS rparser=$RPARSER toolparser=$TOOLPARSER maxlen=${MAXLEN:-131072} think=${THINK:-0}"
+echo "[arms] model=$MODEL served=$SERVED jobs=$JOBS maxtok=$MAXTOK rounds=$ROUNDS rparser=$RPARSER toolparser=$TOOLPARSER maxlen=${MAXLEN:-131072} think=${THINK:-0} gpu_util=${GPU_UTIL:-0.92}"
 nvidia-smi --query-gpu=name,memory.total --format=csv,noheader
 
 # 1. vLLM venv (+ninja)
@@ -57,6 +59,19 @@ if [ -n "$MAXPOS" ] && [ "$MAXPOS" -gt 0 ] 2>/dev/null && [ "$MAXPOS" -lt "$MAXL
 echo "[arms] model max_position_embeddings=${MAXPOS:-unknown}; serving max-model-len=$MAXLEN_EFF"
 
 # 5. Thinking: enable via the chat template when requested and supported
+# CPU KV offloading (vLLM native OffloadingConnector): evicted prefix-cache blocks go to pinned host RAM and
+# come back by DMA instead of being recomputed. Same bf16 KV, so outputs are unchanged; only re-prefill is saved.
+OFFLOAD_ARGS=()
+if [ -n "${KV_OFFLOAD_GB:-}" ]; then
+  if [ "$KV_OFFLOAD_GB" = "auto" ]; then
+    avail_gb=$(awk '/MemAvailable/{printf "%d", $2/1048576}' /proc/meminfo)
+    KV_OFFLOAD_GB=$(( avail_gb * 55 / 100 )); [ "$KV_OFFLOAD_GB" -gt 96 ] && KV_OFFLOAD_GB=96
+    echo "[arms] host MemAvailable ${avail_gb} GiB -> KV offload ${KV_OFFLOAD_GB} GiB"
+  fi
+  [ "$KV_OFFLOAD_GB" -ge 4 ] 2>/dev/null && OFFLOAD_ARGS=(--kv-offloading-size "$KV_OFFLOAD_GB" --kv-offloading-backend native)
+fi
+MM_ARGS=()
+if [ -n "${MM_LIMIT:-}" ]; then MM_ARGS=(--limit-mm-per-prompt "$MM_LIMIT"); echo "[arms] multimodal limit: $MM_LIMIT"; fi
 THINK_ARGS=()
 if [ "${THINK:-0}" = "1" ]; then
   if /root/vllm/bin/python -m vllm.entrypoints.openai.api_server --help 2>/dev/null | grep -q -- "--default-chat-template-kwargs"; then
@@ -72,8 +87,8 @@ start_server() {   # $1 = mode label, rest = extra vLLM flags; returns 0 when he
   echo "[arms] starting vLLM ($label) at $(date -u +%H:%M:%S)"
   nohup /root/vllm/bin/python -m vllm.entrypoints.openai.api_server \
     --model "$MODEL" --served-model-name "$SERVED" --port "$PORT" \
-    --dtype bfloat16 --max-model-len "$MAXLEN_EFF" --gpu-memory-utilization 0.92 --seed 0 "$@" \
-    --reasoning-parser "$RPARSER" --enable-auto-tool-choice --tool-call-parser "$TOOLPARSER" "${THINK_ARGS[@]}" \
+    --dtype bfloat16 --max-model-len "$MAXLEN_EFF" --gpu-memory-utilization "${GPU_UTIL:-0.92}" --seed 0 "$@" \
+    --reasoning-parser "$RPARSER" --enable-auto-tool-choice --tool-call-parser "$TOOLPARSER" "${THINK_ARGS[@]}" "${MM_ARGS[@]}" "${OFFLOAD_ARGS[@]}" \
     >> "$ABS_OUT/vllm_server.log" 2>&1 &
   SRV=$!
   for i in $(seq 1 240); do
@@ -82,6 +97,10 @@ start_server() {   # $1 = mode label, rest = extra vLLM flags; returns 0 when he
     if ! kill -0 $SRV 2>/dev/null; then
       echo "[arms] server died (mode: $label); last errors:"
       grep -E "Error|error:|ValueError|RuntimeError|larger than|KV cache" "$ABS_OUT/vllm_server.log" | tail -6
+      if [ ${#OFFLOAD_ARGS[@]} -gt 0 ] && tail -120 "$ABS_OUT/vllm_server.log" | grep -qiE "offload|kv.transfer|kv_connector|OffloadingConnector"; then
+        echo "[arms] KV offloading rejected for this model; retrying $label WITHOUT offloading"; OFFLOAD_ARGS=(); sleep 5; start_server "$label" "$@"; return $?; fi
+      if [ ${#MM_ARGS[@]} -gt 0 ] && tail -80 "$ABS_OUT/vllm_server.log" | grep -qiE "limit.mm.per.prompt|modalit"; then
+        echo "[arms] multimodal limit rejected; retrying $label without it"; MM_ARGS=(); sleep 5; start_server "$label" "$@"; return $?; fi
       return 1; fi
     sleep 10
   done
@@ -96,6 +115,8 @@ start_server "compiled/bf16-kv" \
   || { echo "[arms] FATAL server failed in every mode"; exit 21; }
 echo "[arms] serve-ready seconds (download+load+warmup): $(( $(date +%s) - T_SERVE0 ))  mode=$SERVE_MODE"
 echo "[arms] unauthenticated-HF warnings in server log: $(grep -c 'unauthenticated requests' "$ABS_OUT/vllm_server.log")"
+echo "[arms] KV offloading: ${OFFLOAD_ARGS[*]:-off}; gpu_util=${GPU_UTIL:-0.92}"
+grep -iE "OffloadingConnector|offloading" "$ABS_OUT/vllm_server.log" | sed -E 's/^.*\] /[arms] /' | head -3
 grep -E "GPU KV cache size|Maximum concurrency|Model loading took" "$ABS_OUT/vllm_server.log" | sed -E 's/^.*\] /[arms] /' | tail -3
 
 # 5b. Optional context-budget check (does vLLM reject prompt + max_tokens > max-model-len, as the harness needs?)

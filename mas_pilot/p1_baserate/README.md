@@ -220,6 +220,46 @@ message was never delivered. We also say whether the silent channel undermines Q
 $8.50, Qwen main the remainder (≤ $7.44). Launch with `--min-free-gb 1.0`, text-only pulls with the verified
 pull on. If local free disk drops below 1.0 GiB mid-run, stop and report.
 
+### Gemma smoke (`results/smoke_gemma/`, pod `ik4shkueu6so7t`, $1.00) — PASS
+
+1 episode per arm (rep001 pair 1), 18-minute harness cap. Earlier attempt: $0.08, exit before download, because
+parser auto-resolution missed vLLM 0.30's lazy registry. The names were then verified offline from the v0.30.0
+source, and `pod/resolve_parsers.py` now reads that registry.
+
+| check | result |
+|---|---|
+| gated download | HF token present, **0** unauthenticated warnings, weights 57.9 GiB (load 384 s) |
+| serve-ready | **580 s** (compiled, bf16 KV) |
+| parsers | `--reasoning-parser gemma4 --tool-call-parser gemma4` (registered in vLLM 0.30.0 `vllm/reasoning`, `vllm/tool_parsers`) |
+| thinking | Gemma 4's template defaults `enable_thinking` to false, so it is enabled with `--default-chat-template-kwargs`. Reasoning is returned (70k characters of traces in one episode, ~70% of output tokens) |
+| KV pool | **89,944 tokens** (11.17 GiB), i.e. 1.10× one 81,920-token request |
+| context budget | an over-budget request gets HTTP 400 "maximum context length", so the harness prunes at 67,072 tokens like the published runs; a 64k-token prompt is served |
+| scripted peer | published cache rep001 loads, identity matches; violating-arm episode 1 complete (Alice REJECT, decision turn parsed, 0 forced) |
+| decode | ~20–22 tok/s per request; 60–66 tok/s with 3 running |
+| episode 1 output | scripted-peer arms 14–20k tokens (Alice only), live roughly double, consistent with published episode 1 (23–48k) |
+
+**Cost problem found.** Late in a main trajectory the two agents' prompts (~60–67k each) exceed the 90k
+pool even with one trajectory running, so vLLM evicts and recomputes about 60k tokens of prefill per call
+(~30 s). The published runs sent ~11M prompt tokens per main trajectory. Projected without a fix: Gemma main
+arm alone ≈ $9–11, full A2 Gemma design ≈ $20.
+
+## Amendment A3 (serving only, before main data)
+
+1. **CPU KV offloading** (`--kv-offloading-size <GiB> --kv-offloading-backend native`, vLLM 0.30.0
+   OffloadingConnector, sized at 55% of the pod's available RAM, ≤ 96 GiB). Evicted prefix-cache blocks are
+   copied to pinned host memory and back by DMA instead of being recomputed. The KV values are the same bf16
+   data, so this changes speed, not outputs. If vLLM rejects it for an architecture, the server restarts
+   without it, and the log records which happened.
+2. Gemma served with `--gpu-memory-utilization 0.94` (from 0.92) for a slightly larger KV pool; the
+   multimodal encoders are disabled (`--limit-mm-per-prompt` image/video/audio = 0) since EC is text-only.
+3. **Priority rule if a pod's projected cost exceeds its cap** (projection = spend so far ÷ fraction of
+   planned episodes saved, checked at heartbeats): stop scripted-peer trajectories first (violating, then
+   compliant, latest rep first) so main trajectories finish; any stopped trajectory is reported as truncated
+   with the episodes it reached.
+
+Design, arms, n, settings and the A2 gate are unchanged. Pod caps: Gemma main **$9.40 / 315 min**, Qwen main
+the remainder.
+
 ### Cost extrapolation (`src/cost_model.py`)
 
 Episodes inside a trajectory are sequential, so a pod's wall clock is set by **one trajectory's serial

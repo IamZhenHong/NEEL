@@ -3,3 +3,5 @@
 {"date": "2026-10-17", "pod": "e5ouh8iu25jp35", "name": "p1-ec-pilot-qwen", "gpu": "A100 80GB PCIe", "usd": 0.191, "outcome": "same ninja failure; --enforce-eager does not cover the sampler JIT"}
 {"date": "2026-10-17", "pod": "qzc6858rk0phv0", "name": "p1-ec-pilot-qwen", "gpu": "A100 80GB PCIe", "usd": 0.809, "outcome": "PASS: 2-episode pilot, serve-ready 341 s, harness 1072 s"}
 {"date": "2026-10-17", "pod": null, "name": "p1-ec-smoke-gemma", "gpu": null, "usd": 0.0, "outcome": "launcher refused: local free disk 1.2 GiB < 2.0 GiB guard; no pod created"}
+{"date": "2026-10-17", "pod": "9yjkskjxiqbod6", "name": "p1-ec-smoke-gemma", "gpu": "A100 80GB PCIe", "usd": 0.079, "outcome": "exit 26 before download: parser auto-resolution found no names (vLLM 0.30 registers parsers lazily); names verified offline from v0.30.0 source: gemma4/gemma4"}
+{"date": "2026-10-17", "pod": "ik4shkueu6so7t", "name": "p1-ec-smoke-gemma", "gpu": "A100 80GB PCIe", "usd": 0.998, "outcome": "PASS: serve-ready 580 s, KV 89,944 tokens, gemma4 parsers, thinking on, ctx budget rejects over-budget; violating ep1 complete"}

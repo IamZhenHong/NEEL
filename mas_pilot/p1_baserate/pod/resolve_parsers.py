@@ -13,7 +13,8 @@ import sys
 import vllm
 
 ROOT = pathlib.Path(vllm.__file__).parent
-PAT = re.compile(r"register_module\(\s*(?:name\s*=\s*)?\[?\s*[\"']([A-Za-z0-9_\-]+)[\"']")
+PAT = re.compile(r"(?:register(?:_lazy)?_module\(\s*(?:name\s*=\s*)?\[?\s*[\"']([A-Za-z0-9_\-]+)[\"'])"
+                 r"|(?:^\s*[\"']([A-Za-z0-9_\-]+)[\"']\s*:\s*\()", re.M)
 
 
 def names(sub):
@@ -21,7 +22,8 @@ def names(sub):
     for d in (ROOT / sub, ROOT / "entrypoints" / "openai" / sub):
         if d.is_dir():
             for f in d.rglob("*.py"):
-                out.update(PAT.findall(f.read_text(errors="ignore")))
+                for a, b in PAT.findall(f.read_text(errors="ignore")):
+                    out.add(a or b)
     return sorted(out)
 
 
