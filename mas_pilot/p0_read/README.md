@@ -202,3 +202,18 @@ messages; P0 found decision turn 60/60, live peer proposal 60/60, METR hesitatio
 contamination 0). If the owner specifically wants the incident *setting*, it would need a **new arm that
 injects a directed authorisation-shaped peer proposal** — which does not exist in the published logs, so it
 is a build task, not a read. P1 base rates should run on EC (or EC-style two-agent), not the incident cosim.
+
+## Coordinator review, P0.5 (2026-10-17)
+
+Verified `results/cosim_handread_table.csv`: live peer proposal 0/60, hesitation-first 0/60, eval-aware 15/60 (worse
+in the neutral arm). The 8 "authorisation-shaped" rows are the agent's own *outgoing* urgency, not an incoming
+proposal. Gate FAIL accepted. No incident arm (single-agent Steps 2/4, real-concurrent cosim, Petri peeraction)
+supplies a directed authorisation-shaped peer proposal the agent then acts on — they measure the inverse
+(agent-initiated reach-out toward undirected residue).
+
+**Substrate decision: Emergent Collusion.** It is the only pulled environment with a live peer-proposal -> decision ->
+hesitation structure, is clean (scorer/eval 0/60), and ships memory controls + controlled-peer replay + server-side
+ground truth. Narrowing stated up front: EC's native peer message is a leniency/reciprocity appeal, not
+authorisation-shaped, so P1 measures the base rate of the mechanism; the authorisation levers (approval ID, GO+deadline,
+precedent, source-label) are injected via controlled-peer replay in P3. An incident-native injected-proposal arm would
+have to be *built*, which is out of scope for a two-day pilot. Next: P1 base rates on EC.
