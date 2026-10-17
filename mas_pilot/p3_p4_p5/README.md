@@ -162,3 +162,25 @@ Two Qwen pods in parallel (cost is per pod-hour, so wall clock halves):
   conversion edits) before any resample.
 
 **Tags.** `p345-design` (this plan), `p345-results`.
+
+## Execution notes (after `p345-design`, before any P3/P4 data)
+
+- **"The last two exchanges"** (P4 compaction tail). The plan said "her last 4 visible messages", but on real data
+  the 4th-from-last message is an orphaned tool result, which breaks the chat structure. Implemented as s1
+  states it: the last two complete user→assistant exchanges (`pod/p345_common.py: last_two_exchanges`). At an
+  EC episode end those are:
+  - Bob's round-5 message + the verdict prompt → her verdict call (+ tool result);
+  - feedback + reflection prompt → her reflection.
+
+  This is 7 messages. `[EC]` Condition (b) therefore still contains her **most recent** verdict reasoning,
+  which usually states the boundary. Compaction removes only the older history. This is faithful to s1 and is
+  reported as a limit on how much hesitation (b) can drop.
+- **Summaries** are sampled with an output cap of 16,000 tokens, so thinking cannot crowd out the summary (s1
+  used 1,200 without thinking).
+- **P5 answers.** Default prompts get 4 samples each (10 prompts), role prompts 1 (400). Temperature 0.7,
+  thinking off.
+- **Code:**
+  - `pod/run_p345.sh` (MODE P3 / P4), `pod/p345_runner.py` (wrapper), `pod/verify_p345.py`;
+  - `pod/prep_caches.py`, `pod/make_variants.py`, `pod/p4_compact.py`;
+  - `pod/p5_gen.py`, `pod/p5_hf.py`;
+  - `src/make_base_seeds.py`, writing `seeds/` (26 base records).
