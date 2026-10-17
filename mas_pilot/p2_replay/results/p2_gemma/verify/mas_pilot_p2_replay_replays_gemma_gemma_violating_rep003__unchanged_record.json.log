@@ -1,0 +1,4 @@
+[verify] /root/NEEL/mas_pilot/p2_replay/replays/gemma/gemma_violating_rep003__unchanged/record.json: 1 saved episodes; resume would start at episode 2
+[verify] alice: saved 43 msgs {'system': 1, 'user': 15, 'assistant': 14, 'tool': 13} | restored visible 43 {'system': 1, 'user': 15, 'assistant': 14, 'tool': 13} | restored incl. boundary markers 44 | identical=True | system prompt matches record=True
+[verify] bob: saved 12 msgs {'system': 1, 'user': 1, 'assistant': 5, 'tool': 5} | restored visible 12 {'system': 1, 'user': 1, 'assistant': 5, 'tool': 5} | restored incl. boundary markers 13 | identical=True | system prompt matches record=True
+[verify] RESULT: PASS

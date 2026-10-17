@@ -52,3 +52,33 @@ scripted arms (100%). Published Gemma main locks in weakly, so a Gemma probe bel
 restoration. Flip episodes of the P2-eligible scripted trajectories are early (Gemma violating: 2, 2, 2;
 Gemma compliant: 5, 5; Qwen violating: 2, 3, 3; Qwen compliant: 4, 5, 5), all before each trajectory's
 first prune.
+
+## P2 smoke and freeze (`p2-freeze`)
+
+**Mechanism.** A replay seed is the P1 `run.json` with results cut to the episodes before the replayed one,
+and its manifest field pointed at a truncated manifest holding exactly the pairs up to the replayed episode.
+`experiments.runner --resume-from` therefore runs one episode and stops. For the neutral swap, the seed's
+`controlled_bob_messages` is set to `raw-prefix`, so episode k gets the compliant arm's scripted messages for
+the same task. Bob's verdict is unchanged, since Alice decides before Bob. The lock-in probe restores after
+the original episode k and runs k+1 unchanged. It is applied to the violating trajectories (the card's "same
+trajectories"). Seeds: `replays/` (23 = 11 unchanged + 6 swap + 6 probe; `src/make_replays.py`).
+`pod/verify_resume.py` is P1's check, patched to build a scripted Bob's opening prompt the way the runner
+does (5 rounds, no reward objective).
+
+**Smoke** (Gemma pod `oyulmtfbsm1k70`, serve-ready 450 s, CPU KV offload 92 GiB, GPU pool 102,709 tokens):
+- All **11 Gemma seeds verified** (restored == saved, both agents).
+- 5 replay episodes of Gemma violating rep001 finished in 11 min with 0 tracebacks: unchanged 2/2 accept,
+  swap 0/2, probe 1/1 (episode 3).
+- ~4–6k output tokens and 4–6 min per replay episode at concurrency 3, so **≈ $0.066 per replay episode**
+  (early episodes).
+- Smoke outputs are in `results/p2_gemma/smoke/` and excluded from the main analysis.
+
+**Frozen choices.** Budget: P2 ≤ $6; Gemma pod cap $4.00, of which ~$1.2 went on setup and smoke.
+- **Gemma: R = 6** resamples for unchanged and swap (the card's floor). **The probe is skipped on Gemma**: it
+  is exploratory, and Gemma's ~$0.07/episode budget cannot cover it at ≥ 6.
+- Jobs run resample-major, so if the cap cuts the last round, every seed loses at most one resample and the
+  actual n is reported.
+- **Qwen:** R = 10 for all three arms including the probe, if its cap (the rest of the $6) allows; otherwise
+  resample-major down to no fewer than 6.
+- Concurrency: Gemma 3, Qwen 8.
+- Gate and analysis: `src/score_p2.py`, as in DESIGN.md.
