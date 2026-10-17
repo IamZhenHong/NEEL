@@ -260,6 +260,14 @@ arm alone ≈ $9–11, full A2 Gemma design ≈ $20.
 Design, arms, n, settings and the A2 gate are unchanged. Pod caps: Gemma main **$9.40 / 315 min**, Qwen main
 the remainder.
 
+**A3 rev (coordinator, before the rule has fired).** Item 3 is replaced. If a pod's projected cost exceeds its cap,
+trim **uniformly across arms, latest rep first**: stop rep 003 in all three arms (main, compliant, violating)
+together, then rep 002. Every arm keeps the same number of trajectories, so both gate components (the
+violating-vs-compliant contrast and the main-arm rate) stay estimable at reduced n. Cutting scripted-peer arms
+first would make the contrast unestimable and saves the least, since those trajectories have one live agent.
+Truncated trajectories are reported with the episodes each reached. The rule is applied by monitoring
+(stopping those processes on the pod); the pod is not restarted for this change.
+
 ### Cost extrapolation (`src/cost_model.py`)
 
 Episodes inside a trajectory are sequential, so a pod's wall clock is set by **one trajectory's serial
