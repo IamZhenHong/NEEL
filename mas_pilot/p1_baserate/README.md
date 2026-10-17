@@ -283,6 +283,29 @@ Trim-rule timing, stated before it can fire: projections are checked at heartbea
 episodes (20%) are saved. Episode 1 carries 20–40% of a trajectory's output tokens, so earlier projections
 are inflated. The pod's hard cap ($9.40 / 315 min) applies throughout.
 
+## Main-run monitoring log (UTC)
+
+- **Gemma pod `e4ih4y3f7bco02`** (started ~09:21, cap 315 min / $9.40 ≈ 14:36): 9 trajectories from 09:35,
+  CPU KV offload 43 GiB. Main episode 1 took 40 / 57 / ~60 min (rep2/1/3). 11:39: main saved 2/2/1 (54 min/ep),
+  scripted 5–6 each (17 min/ep). vLLM Running 2, Waiting 7, Deferred 6, ~42 tok/s aggregate (KV-bound by long
+  contexts). At current rates the last main trajectory finishes ~17:07; with the total-work view (aggregate
+  ~40 tok/s, scripted done ~13:00) ~13:45–14:05 central, ~14:30 pessimistic. Pre-approved fallback (b): resume a
+  cut main trajectory with `--resume-from` on a short follow-up pod funded from Qwen's spare. Coordinator chose
+  not to stop scripted rep3s (contrast power). Channel (main): bounce 31–32%, dropped rounds 1/50, which
+  matches the published Gemma traces (32%, 4.7%). Bounces are verbose messages and raw-log pastes, 0/21 with
+  reasoning-marker leaks.
+- **Qwen pod `55qsea19dzaaij`** (launched in parallel per coordinator; started ~10:39, cap $6.66 / 223 min ≈
+  14:22): serve-ready 421 s, CPU KV offload 43 GiB, GPU KV pool 315,871 tokens. 11:40: main saved 1/2/1
+  (26 min/ep; ~0.4–0.5× Gemma's output per episode), scripted 6–7 each (7 min/ep). vLLM Running 7, Waiting 1.
+  Main ETA ~13:47 at current rates (earlier once scripted arms finish ~12:10). Projected spend $4.7–5.6 of
+  $6.66. **Qwen channel:** main Alice bounce 33% / dropped 0/20; **main Bob bounce 40% / dropped 2/20 (10%)**;
+  scripted Alice bounce 14–15%, dropped 2/175. Far better than the pilot's Bob (94% / 83%), but Bob loses ~1
+  round in 10.
+- **Local disk:** fell to ~310 MiB at ~11:07 (macOS swap). Compressed result snapshots started every 20 min
+  (`snapshots/`, gitignored) so a crashed launcher cannot lose results. Coordinator freed space (HF cache,
+  owner-approved), now ~5.4 GiB; snapshots continue as backup. The Gemma launcher's display log lagged ~15 min
+  while it kept polling normally (verified: SSH poll child every ~22 s; the pod was fine).
+
 ### Cost extrapolation (`src/cost_model.py`)
 
 Episodes inside a trajectory are sequential, so a pod's wall clock is set by **one trajectory's serial
