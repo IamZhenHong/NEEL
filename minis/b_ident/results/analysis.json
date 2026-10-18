@@ -1,0 +1,459 @@
+{
+ "think": {
+  "B1": {
+   "portray|say": {
+    "p_false": 1.0,
+    "labels": {
+     "false": 40
+    }
+   },
+   "portray|act": {
+    "p_false": 0.975,
+    "labels": {
+     "false": 39,
+     "none": 1
+    }
+   },
+   "identify|say": {
+    "p_false": 1.0,
+    "labels": {
+     "false": 40
+    }
+   },
+   "identify|act": {
+    "p_false": 1.0,
+    "labels": {
+     "false": 40
+    }
+   }
+  },
+  "B1_identify_minus_portray": {
+   "say": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ]
+   },
+   "act": {
+    "diff": 0.025,
+    "ci": [
+     0.0,
+     0.075
+    ]
+   }
+  },
+  "B1_per_claim": {
+   "portray|say": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "portray|act": [
+    1.0,
+    1.0,
+    1.0,
+    0.8,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "identify|say": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "identify|act": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "B2": {
+   "identify|char": {
+    "p_false": 0.95,
+    "labels": {
+     "false": 38,
+     "none": 2
+    }
+   },
+   "identify|neutral": {
+    "p_false": 1.0,
+    "labels": {
+     "false": 40
+    }
+   },
+   "identify|remind": {
+    "p_false": 1.0,
+    "labels": {
+     "false": 40
+    }
+   },
+   "portray|char": {
+    "p_false": 0.975,
+    "labels": {
+     "false": 39,
+     "none": 1
+    }
+   },
+   "portray|neutral": {
+    "p_false": 0.975,
+    "labels": {
+     "false": 39,
+     "none": 1
+    }
+   },
+   "portray|remind": {
+    "p_false": 1.0,
+    "labels": {
+     "false": 40
+    }
+   }
+  },
+  "B2_contrasts": {
+   "identify|char-neutral": {
+    "diff": -0.05,
+    "ci": [
+     -0.125,
+     0.0
+    ]
+   },
+   "identify|remind-neutral": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ]
+   },
+   "portray|char-neutral": {
+    "diff": 0.0,
+    "ci": [
+     -0.075,
+     0.075
+    ]
+   },
+   "portray|remind-neutral": {
+    "diff": 0.025,
+    "ci": [
+     0.0,
+     0.075
+    ]
+   }
+  }
+ },
+ "nothink": {
+  "B1": {
+   "portray|say": {
+    "p_false": 1.0,
+    "labels": {
+     "false": 40
+    }
+   },
+   "portray|act": {
+    "p_false": 1.0,
+    "labels": {
+     "false": 40
+    }
+   },
+   "identify|say": {
+    "p_false": 1.0,
+    "labels": {
+     "false": 40
+    }
+   },
+   "identify|act": {
+    "p_false": 1.0,
+    "labels": {
+     "false": 40
+    }
+   }
+  },
+  "B1_identify_minus_portray": {
+   "say": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ]
+   },
+   "act": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "B1_per_claim": {
+   "portray|say": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "portray|act": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "identify|say": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "identify|act": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "B2": {
+   "identify|char": {
+    "p_false": 1.0,
+    "labels": {
+     "false": 40
+    }
+   },
+   "identify|neutral": {
+    "p_false": 1.0,
+    "labels": {
+     "false": 40
+    }
+   },
+   "identify|remind": {
+    "p_false": 1.0,
+    "labels": {
+     "false": 40
+    }
+   },
+   "portray|char": {
+    "p_false": 1.0,
+    "labels": {
+     "false": 40
+    }
+   },
+   "portray|neutral": {
+    "p_false": 1.0,
+    "labels": {
+     "false": 40
+    }
+   },
+   "portray|remind": {
+    "p_false": 1.0,
+    "labels": {
+     "false": 40
+    }
+   }
+  },
+  "B2_contrasts": {
+   "identify|char-neutral": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ]
+   },
+   "identify|remind-neutral": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ]
+   },
+   "portray|char-neutral": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ]
+   },
+   "portray|remind-neutral": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ]
+   }
+  }
+ },
+ "probe": {
+  "layer": 32,
+  "acc": 0.987500011920929,
+  "signal_by_context": {
+   "identify|char": -0.01,
+   "identify|none": 0.028,
+   "identify|remind": 0.013,
+   "none|none": 1.5,
+   "portray|char": -0.042,
+   "portray|none": -0.001,
+   "portray|remind": -0.02
+  },
+  "p_false_judged_true_by_context": {
+   "identify|char": 0.0,
+   "identify|none": 0.0,
+   "identify|remind": 0.0,
+   "none|none": 0.0,
+   "portray|char": 0.0,
+   "portray|none": 0.0,
+   "portray|remind": 0.0
+  }
+ },
+ "B3": {
+  "none": {
+   "p_false": 1.0,
+   "labels": {
+    "false": 32
+   },
+   "signal": 0.028,
+   "controls_correct": "32/32"
+  },
+  "weak": {
+   "p_false": 1.0,
+   "labels": {
+    "false": 32
+   },
+   "signal": -0.275,
+   "controls_correct": "32/32"
+  },
+  "strong": {
+   "p_false": 0.0,
+   "labels": {
+    "none": 32
+   },
+   "signal": -0.255,
+   "controls_correct": "22/32"
+  },
+  "neg": {
+   "p_false": 0.0,
+   "labels": {
+    "none": 32
+   },
+   "signal": -0.022,
+   "controls_correct": "0/32"
+  },
+  "rand": {
+   "p_false": 0.0,
+   "labels": {
+    "none": 32
+   },
+   "signal": -0.023,
+   "controls_correct": "0/32"
+  }
+ },
+ "B3_contrasts": {
+  "weak": {
+   "p_false": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ]
+   },
+   "signal": {
+    "diff": -0.303,
+    "ci": [
+     -0.339,
+     -0.258
+    ]
+   }
+  },
+  "strong": {
+   "p_false": {
+    "diff": -1.0,
+    "ci": [
+     -1.0,
+     -1.0
+    ]
+   },
+   "signal": {
+    "diff": -0.283,
+    "ci": [
+     -0.315,
+     -0.247
+    ]
+   }
+  },
+  "neg": {
+   "p_false": {
+    "diff": -1.0,
+    "ci": [
+     -1.0,
+     -1.0
+    ]
+   },
+   "signal": {
+    "diff": -0.05,
+    "ci": [
+     -0.076,
+     -0.021
+    ]
+   }
+  },
+  "rand": {
+   "p_false": {
+    "diff": -1.0,
+    "ci": [
+     -1.0,
+     -1.0
+    ]
+   },
+   "signal": {
+    "diff": -0.05,
+    "ci": [
+     -0.078,
+     -0.018
+    ]
+   }
+  }
+ },
+ "steer": {
+  "steer_layer": 20,
+  "persona_d": {
+   "16": 21.380260467529297,
+   "20": 26.097198486328125,
+   "24": 21.55672264099121,
+   "28": 23.383506774902344,
+   "32": 18.647165298461914,
+   "36": 15.268972396850586,
+   "40": 13.730629920959473,
+   "44": 13.746912002563477,
+   "48": 12.49737548828125
+  }
+ },
+ "api_spend_usd": 0.847
+}

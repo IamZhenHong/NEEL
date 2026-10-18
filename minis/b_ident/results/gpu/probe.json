@@ -1,0 +1,520 @@
+{
+ "probe_layer": 32,
+ "probe_acc": {
+  "16": 0.7875000238418579,
+  "20": 0.8125,
+  "24": 0.8500000238418579,
+  "28": 0.887499988079071,
+  "32": 0.987500011920929,
+  "36": 0.9750000238418579,
+  "40": 0.9750000238418579,
+  "44": 0.9750000238418579,
+  "48": 0.9625000357627869
+ },
+ "signal": [
+  {
+   "ci": 0,
+   "country": "Australia",
+   "frame": "none",
+   "prefix": "none",
+   "s_true": 1.0867801904678345,
+   "s_false": -0.553118884563446,
+   "signal": 1.6398990750312805
+  },
+  {
+   "ci": 0,
+   "country": "Australia",
+   "frame": "portray",
+   "prefix": "none",
+   "s_true": -0.280134379863739,
+   "s_false": -0.30086711049079895,
+   "signal": 0.020732730627059937
+  },
+  {
+   "ci": 0,
+   "country": "Australia",
+   "frame": "portray",
+   "prefix": "char",
+   "s_true": -0.3123774230480194,
+   "s_false": -0.2789340019226074,
+   "signal": -0.03344342112541199
+  },
+  {
+   "ci": 0,
+   "country": "Australia",
+   "frame": "portray",
+   "prefix": "remind",
+   "s_true": -0.3244556784629822,
+   "s_false": -0.31066057085990906,
+   "signal": -0.01379510760307312
+  },
+  {
+   "ci": 0,
+   "country": "Australia",
+   "frame": "identify",
+   "prefix": "none",
+   "s_true": -0.30257895588874817,
+   "s_false": -0.37373700737953186,
+   "signal": 0.07115805149078369
+  },
+  {
+   "ci": 0,
+   "country": "Australia",
+   "frame": "identify",
+   "prefix": "char",
+   "s_true": -0.3282122015953064,
+   "s_false": -0.3309941291809082,
+   "signal": 0.0027819275856018066
+  },
+  {
+   "ci": 0,
+   "country": "Australia",
+   "frame": "identify",
+   "prefix": "remind",
+   "s_true": -0.29703235626220703,
+   "s_false": -0.3327953517436981,
+   "signal": 0.03576299548149109
+  },
+  {
+   "ci": 1,
+   "country": "Canada",
+   "frame": "none",
+   "prefix": "none",
+   "s_true": 1.1576673984527588,
+   "s_false": -0.4947074055671692,
+   "signal": 1.652374804019928
+  },
+  {
+   "ci": 1,
+   "country": "Canada",
+   "frame": "portray",
+   "prefix": "none",
+   "s_true": -0.2626175582408905,
+   "s_false": -0.29067716002464294,
+   "signal": 0.02805960178375244
+  },
+  {
+   "ci": 1,
+   "country": "Canada",
+   "frame": "portray",
+   "prefix": "char",
+   "s_true": -0.2839425504207611,
+   "s_false": -0.2736813426017761,
+   "signal": -0.010261207818984985
+  },
+  {
+   "ci": 1,
+   "country": "Canada",
+   "frame": "portray",
+   "prefix": "remind",
+   "s_true": -0.27561047673225403,
+   "s_false": -0.29990801215171814,
+   "signal": 0.02429753541946411
+  },
+  {
+   "ci": 1,
+   "country": "Canada",
+   "frame": "identify",
+   "prefix": "none",
+   "s_true": -0.2998083829879761,
+   "s_false": -0.3540795147418976,
+   "signal": 0.05427113175392151
+  },
+  {
+   "ci": 1,
+   "country": "Canada",
+   "frame": "identify",
+   "prefix": "char",
+   "s_true": -0.3203844130039215,
+   "s_false": -0.3438076972961426,
+   "signal": 0.02342328429222107
+  },
+  {
+   "ci": 1,
+   "country": "Canada",
+   "frame": "identify",
+   "prefix": "remind",
+   "s_true": -0.2682763636112213,
+   "s_false": -0.31673651933670044,
+   "signal": 0.048460155725479126
+  },
+  {
+   "ci": 2,
+   "country": "Brazil",
+   "frame": "none",
+   "prefix": "none",
+   "s_true": 0.9669780731201172,
+   "s_false": -0.2656506597995758,
+   "signal": 1.232628732919693
+  },
+  {
+   "ci": 2,
+   "country": "Brazil",
+   "frame": "portray",
+   "prefix": "none",
+   "s_true": -0.31905075907707214,
+   "s_false": -0.2554124891757965,
+   "signal": -0.06363826990127563
+  },
+  {
+   "ci": 2,
+   "country": "Brazil",
+   "frame": "portray",
+   "prefix": "char",
+   "s_true": -0.31100937724113464,
+   "s_false": -0.19056586921215057,
+   "signal": -0.12044350802898407
+  },
+  {
+   "ci": 2,
+   "country": "Brazil",
+   "frame": "portray",
+   "prefix": "remind",
+   "s_true": -0.3145831227302551,
+   "s_false": -0.22096681594848633,
+   "signal": -0.0936163067817688
+  },
+  {
+   "ci": 2,
+   "country": "Brazil",
+   "frame": "identify",
+   "prefix": "none",
+   "s_true": -0.33164098858833313,
+   "s_false": -0.26736292243003845,
+   "signal": -0.06427806615829468
+  },
+  {
+   "ci": 2,
+   "country": "Brazil",
+   "frame": "identify",
+   "prefix": "char",
+   "s_true": -0.3398520052433014,
+   "s_false": -0.210687518119812,
+   "signal": -0.12916448712348938
+  },
+  {
+   "ci": 2,
+   "country": "Brazil",
+   "frame": "identify",
+   "prefix": "remind",
+   "s_true": -0.30940645933151245,
+   "s_false": -0.21709437668323517,
+   "signal": -0.09231208264827728
+  },
+  {
+   "ci": 3,
+   "country": "Turkey",
+   "frame": "none",
+   "prefix": "none",
+   "s_true": 0.8807549476623535,
+   "s_false": -0.5851572751998901,
+   "signal": 1.4659122228622437
+  },
+  {
+   "ci": 3,
+   "country": "Turkey",
+   "frame": "portray",
+   "prefix": "none",
+   "s_true": -0.20685085654258728,
+   "s_false": -0.17665888369083405,
+   "signal": -0.030191972851753235
+  },
+  {
+   "ci": 3,
+   "country": "Turkey",
+   "frame": "portray",
+   "prefix": "char",
+   "s_true": -0.21059316396713257,
+   "s_false": -0.1822560876607895,
+   "signal": -0.02833707630634308
+  },
+  {
+   "ci": 3,
+   "country": "Turkey",
+   "frame": "portray",
+   "prefix": "remind",
+   "s_true": -0.20678217709064484,
+   "s_false": -0.1936296671628952,
+   "signal": -0.013152509927749634
+  },
+  {
+   "ci": 3,
+   "country": "Turkey",
+   "frame": "identify",
+   "prefix": "none",
+   "s_true": -0.1994280219078064,
+   "s_false": -0.1827365905046463,
+   "signal": -0.016691431403160095
+  },
+  {
+   "ci": 3,
+   "country": "Turkey",
+   "frame": "identify",
+   "prefix": "char",
+   "s_true": -0.22118516266345978,
+   "s_false": -0.21673579514026642,
+   "signal": -0.004449367523193359
+  },
+  {
+   "ci": 3,
+   "country": "Turkey",
+   "frame": "identify",
+   "prefix": "remind",
+   "s_true": -0.17412731051445007,
+   "s_false": -0.21437151730060577,
+   "signal": 0.0402442067861557
+  },
+  {
+   "ci": 4,
+   "country": "Switzerland",
+   "frame": "none",
+   "prefix": "none",
+   "s_true": 0.7517593502998352,
+   "s_false": -0.642486572265625,
+   "signal": 1.3942459225654602
+  },
+  {
+   "ci": 4,
+   "country": "Switzerland",
+   "frame": "portray",
+   "prefix": "none",
+   "s_true": -0.30506664514541626,
+   "s_false": -0.27279749512672424,
+   "signal": -0.03226915001869202
+  },
+  {
+   "ci": 4,
+   "country": "Switzerland",
+   "frame": "portray",
+   "prefix": "char",
+   "s_true": -0.32593685388565063,
+   "s_false": -0.2586813271045685,
+   "signal": -0.06725552678108215
+  },
+  {
+   "ci": 4,
+   "country": "Switzerland",
+   "frame": "portray",
+   "prefix": "remind",
+   "s_true": -0.3282221555709839,
+   "s_false": -0.28264883160591125,
+   "signal": -0.04557332396507263
+  },
+  {
+   "ci": 4,
+   "country": "Switzerland",
+   "frame": "identify",
+   "prefix": "none",
+   "s_true": -0.2896380126476288,
+   "s_false": -0.33938902616500854,
+   "signal": 0.04975101351737976
+  },
+  {
+   "ci": 4,
+   "country": "Switzerland",
+   "frame": "identify",
+   "prefix": "char",
+   "s_true": -0.33209818601608276,
+   "s_false": -0.33741188049316406,
+   "signal": 0.005313694477081299
+  },
+  {
+   "ci": 4,
+   "country": "Switzerland",
+   "frame": "identify",
+   "prefix": "remind",
+   "s_true": -0.3218339681625366,
+   "s_false": -0.3162612318992615,
+   "signal": -0.0055727362632751465
+  },
+  {
+   "ci": 5,
+   "country": "New Zealand",
+   "frame": "none",
+   "prefix": "none",
+   "s_true": 0.8053300380706787,
+   "s_false": -0.7069068551063538,
+   "signal": 1.5122368931770325
+  },
+  {
+   "ci": 5,
+   "country": "New Zealand",
+   "frame": "portray",
+   "prefix": "none",
+   "s_true": -0.2326238453388214,
+   "s_false": -0.2817576825618744,
+   "signal": 0.04913383722305298
+  },
+  {
+   "ci": 5,
+   "country": "New Zealand",
+   "frame": "portray",
+   "prefix": "char",
+   "s_true": -0.24325475096702576,
+   "s_false": -0.23798324167728424,
+   "signal": -0.005271509289741516
+  },
+  {
+   "ci": 5,
+   "country": "New Zealand",
+   "frame": "portray",
+   "prefix": "remind",
+   "s_true": -0.24132396280765533,
+   "s_false": -0.2632283866405487,
+   "signal": 0.02190442383289337
+  },
+  {
+   "ci": 5,
+   "country": "New Zealand",
+   "frame": "identify",
+   "prefix": "none",
+   "s_true": -0.26898807287216187,
+   "s_false": -0.3518710732460022,
+   "signal": 0.08288300037384033
+  },
+  {
+   "ci": 5,
+   "country": "New Zealand",
+   "frame": "identify",
+   "prefix": "char",
+   "s_true": -0.2787434756755829,
+   "s_false": -0.3009570837020874,
+   "signal": 0.022213608026504517
+  },
+  {
+   "ci": 5,
+   "country": "New Zealand",
+   "frame": "identify",
+   "prefix": "remind",
+   "s_true": -0.23041412234306335,
+   "s_false": -0.2970440089702606,
+   "signal": 0.06662988662719727
+  },
+  {
+   "ci": 6,
+   "country": "Nigeria",
+   "frame": "none",
+   "prefix": "none",
+   "s_true": 0.8654246926307678,
+   "s_false": -0.7493085265159607,
+   "signal": 1.6147332191467285
+  },
+  {
+   "ci": 6,
+   "country": "Nigeria",
+   "frame": "portray",
+   "prefix": "none",
+   "s_true": -0.252828985452652,
+   "s_false": -0.26482149958610535,
+   "signal": 0.01199251413345337
+  },
+  {
+   "ci": 6,
+   "country": "Nigeria",
+   "frame": "portray",
+   "prefix": "char",
+   "s_true": -0.26057225465774536,
+   "s_false": -0.23237097263336182,
+   "signal": -0.028201282024383545
+  },
+  {
+   "ci": 6,
+   "country": "Nigeria",
+   "frame": "portray",
+   "prefix": "remind",
+   "s_true": -0.26065611839294434,
+   "s_false": -0.24028731882572174,
+   "signal": -0.020368799567222595
+  },
+  {
+   "ci": 6,
+   "country": "Nigeria",
+   "frame": "identify",
+   "prefix": "none",
+   "s_true": -0.2733531892299652,
+   "s_false": -0.2866872549057007,
+   "signal": 0.013334065675735474
+  },
+  {
+   "ci": 6,
+   "country": "Nigeria",
+   "frame": "identify",
+   "prefix": "char",
+   "s_true": -0.28046295046806335,
+   "s_false": -0.2810884714126587,
+   "signal": 0.0006255209445953369
+  },
+  {
+   "ci": 6,
+   "country": "Nigeria",
+   "frame": "identify",
+   "prefix": "remind",
+   "s_true": -0.27504122257232666,
+   "s_false": -0.2811909317970276,
+   "signal": 0.006149709224700928
+  },
+  {
+   "ci": 7,
+   "country": "Morocco",
+   "frame": "none",
+   "prefix": "none",
+   "s_true": 0.8951548337936401,
+   "s_false": -0.5904523134231567,
+   "signal": 1.4856071472167969
+  },
+  {
+   "ci": 7,
+   "country": "Morocco",
+   "frame": "portray",
+   "prefix": "none",
+   "s_true": -0.268795907497406,
+   "s_false": -0.27429473400115967,
+   "signal": 0.005498826503753662
+  },
+  {
+   "ci": 7,
+   "country": "Morocco",
+   "frame": "portray",
+   "prefix": "char",
+   "s_true": -0.2861771285533905,
+   "s_false": -0.2464047521352768,
+   "signal": -0.03977237641811371
+  },
+  {
+   "ci": 7,
+   "country": "Morocco",
+   "frame": "portray",
+   "prefix": "remind",
+   "s_true": -0.29691269993782043,
+   "s_false": -0.27763432264328003,
+   "signal": -0.019278377294540405
+  },
+  {
+   "ci": 7,
+   "country": "Morocco",
+   "frame": "identify",
+   "prefix": "none",
+   "s_true": -0.3086985945701599,
+   "s_false": -0.33991509675979614,
+   "signal": 0.03121650218963623
+  },
+  {
+   "ci": 7,
+   "country": "Morocco",
+   "frame": "identify",
+   "prefix": "char",
+   "s_true": -0.32594501972198486,
+   "s_false": -0.3286002278327942,
+   "signal": 0.002655208110809326
+  },
+  {
+   "ci": 7,
+   "country": "Morocco",
+   "frame": "identify",
+   "prefix": "remind",
+   "s_true": -0.3254581391811371,
+   "s_false": -0.32974007725715637,
+   "signal": 0.004281938076019287
+  }
+ ]
+}

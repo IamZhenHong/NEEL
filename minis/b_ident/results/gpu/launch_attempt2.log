@@ -1,0 +1,12 @@
+[pre] code bundle 9872 b64 chars; data ['go.json']
+[pre] balance $53.82
+[runpod] pod 9bkaw71xwxhkdj (?) at $1.79/hr; time cap 60 min; budget $2.5
+[pod] final pull failed: HTTP Error 404: Not Found
+[runpod] terminated 9bkaw71xwxhkdj; elapsed cost ~$0.449
+Traceback (most recent call last):
+  File "/home/user/NEEL/mas_pilot/p3_p4_p5/pod/p5_http_launch.py", line 186, in <module>
+    main()
+    ~~~~^^
+  File "/home/user/NEEL/mas_pilot/p3_p4_p5/pod/p5_http_launch.py", line 143, in main
+    raise TimeoutError("agent never answered")
+TimeoutError: agent never answered
