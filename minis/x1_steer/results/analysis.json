@@ -1,0 +1,197 @@
+{
+ "layer": 36,
+ "k": 4,
+ "v_norm": 10.914518356323242,
+ "resid_norm": 77.49003601074219,
+ "calib": {
+  "1": {
+   "none": [
+    0.0,
+    1.0
+   ],
+   "pos": [
+    0.25,
+    1.0
+   ],
+   "neg": [
+    0.0,
+    1.0
+   ],
+   "rand": [
+    0.0,
+    1.0
+   ]
+  },
+  "2": {
+   "none": [
+    0.0,
+    1.0
+   ],
+   "pos": [
+    0.0,
+    1.0
+   ],
+   "neg": [
+    0.0,
+    1.0
+   ],
+   "rand": [
+    0.0,
+    1.0
+   ]
+  },
+  "4": {
+   "none": [
+    0.0,
+    1.0
+   ],
+   "pos": [
+    0.375,
+    1.0
+   ],
+   "neg": [
+    0.0,
+    1.0
+   ],
+   "rand": [
+    0.0,
+    1.0
+   ]
+  }
+ },
+ "decisions": {
+  "none": {
+   "p_larger_total": 0.0,
+   "parsed": 1.0,
+   "n": 40
+  },
+  "pos": {
+   "p_larger_total": 0.225,
+   "parsed": 1.0,
+   "n": 40
+  },
+  "neg": {
+   "p_larger_total": 0.0,
+   "parsed": 1.0,
+   "n": 40
+  },
+  "rand": {
+   "p_larger_total": 0.0,
+   "parsed": 1.0,
+   "n": 40
+  }
+ },
+ "decision_contrasts": {
+  "pos": {
+   "diff": 0.225,
+   "ci": [
+    0.1,
+    0.375
+   ],
+   "n_tasks": 20
+  },
+  "neg": {
+   "diff": 0,
+   "ci": [
+    0,
+    0
+   ],
+   "n_tasks": 20
+  },
+  "rand": {
+   "diff": 0,
+   "ci": [
+    0,
+    0
+   ],
+   "n_tasks": 20
+  }
+ },
+ "by_bonus": {
+  "none": {
+   "1": 0.0,
+   "2": 0.0,
+   "4": 0.0,
+   "8": 0.0
+  },
+  "pos": {
+   "1": 0.0,
+   "2": 0.3,
+   "4": 0.4,
+   "8": 0.2
+  },
+  "neg": {
+   "1": 0.0,
+   "2": 0.0,
+   "4": 0.0,
+   "8": 0.0
+  },
+  "rand": {
+   "1": 0.0,
+   "2": 0.0,
+   "4": 0.0,
+   "8": 0.0
+  }
+ },
+ "stated": {
+  "none": {
+   "priority": {
+    "EQUAL": 5
+   },
+   "p_total": 0.0,
+   "thresholds": [
+    "never",
+    "never",
+    "never",
+    "never",
+    "never"
+   ]
+  },
+  "pos": {
+   "priority": {
+    "TOTAL": 4,
+    "EQUAL": 1
+   },
+   "p_total": 0.8,
+   "thresholds": [
+    "0",
+    "0",
+    "1",
+    "1",
+    "1"
+   ]
+  },
+  "neg": {
+   "priority": {
+    "EQUAL": 5
+   },
+   "p_total": 0.0,
+   "thresholds": [
+    "10",
+    "4",
+    "never",
+    "never",
+    "3"
+   ]
+  },
+  "rand": {
+   "priority": {
+    "EQUAL": 5
+   },
+   "p_total": 0.0,
+   "thresholds": [
+    "1",
+    "4",
+    "never",
+    "never",
+    "never"
+   ]
+  }
+ },
+ "arith_correct": {
+  "none": 5,
+  "pos": 5,
+  "neg": 5,
+  "rand": 5
+ }
+}
