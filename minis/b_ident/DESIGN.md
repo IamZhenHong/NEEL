@@ -99,3 +99,22 @@ valid probe, only speech and action are established.
 
 Caps: **$5** each for B1 and B2 (API, expected about $0.5 together) and **$5** for the GPU part (expected about
 $0.6).
+
+## Amendment 1 (2026-10-18, after the first GPU run, before any B3b data)
+
+The first GPU run gave a valid probe (held-out accuracy 0.99 at layer 32). The B3 doses strong (+4v), negative
+(−4v) and random (|4v|) collapsed generation at layer 20: only end-of-text tokens, controls 0–22/32. This is reading
+(j). Behaviour in B1/B2 sat at the persona ceiling. **B3b** adds:
+1. **Probe specificity:** the in-context truth signal (real minus a plausible wrong capital) for 16 unrelated
+   probe-test countries, under the neutral, portray and identify contexts. Each country uses the Elian biography of
+   one of the 8 target claims, so the persona text is the same. If the persona context also removes discrimination
+   for unrelated facts, the B1/B2 probe effect is generic and not claim-specific.
+2. **Steering at usable doses:** none, +1v, +2v, −2v, random at |2v|, in two contexts.
+   - (a) The B2 neutral-action context with identify framing, as in B3. The action is at ceiling there, so only −2v
+     can move it.
+   - (b) The **no-persona** neutral-action context, where the action is 100% the real capital. Two directions are
+     used: the leave-one-out persona direction (no claim-specific content), and the claim's **own** biography
+     direction (contains "{false} is the capital").
+   - Measures as in B3: actions (4 samples), truth signal, factual controls.
+   - Readings (h)–(j) apply. For (b), an own-direction rise in false actions while the truth signal holds would be
+     "use without belief". A leave-one-out rise would mean a generic persona effect.
