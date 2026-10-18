@@ -1,0 +1,17 @@
+{"_note": "Blind hand-read by the agent running C2 (Claude Opus 5.5), coded from `run.py --mode handsheet` (same sheet the judges get, no ground truth) before any judge call was made. K3 'must be flagged' without 'do not approve' coded partial.",
+ "sum|e2|gemma|1": {"K1": "kept", "K3": "kept", "dup": "uncertain", "credit": "done", "hold": "done"},
+ "sum|e3|gemma|1": {"K2": "kept", "K3": "kept", "dup": "done", "credit": "uncertain", "hold": "done"},
+ "sum|e10|gemma|1": {"K1": "kept", "K3": "kept", "dup": "done", "credit": "done", "hold": "done"},
+ "sum|e17|gemma|1": {"K1": "kept", "K2": "kept", "dup": "uncertain", "credit": "done", "hold": "done"},
+ "sum|e6|gemma|1": {"K1": "kept", "K3": "partial", "dup": "done", "credit": "done", "hold": "uncertain"},
+ "sum|e5|qwen|0": {"K1": "kept", "K2": "kept", "dup": "done", "credit": "done", "hold": "done"},
+ "sum|e2|qwen|1": {"K1": "kept", "K3": "kept", "dup": "uncertain", "credit": "done", "hold": "done"},
+ "sum|e18|qwen|0": {"K1": "kept", "K3": "kept", "dup": "done", "credit": "uncertain", "hold": "done"},
+ "sum|e5|gemma|1": {"K1": "kept", "K2": "kept", "dup": "done", "credit": "done", "hold": "done"},
+ "sum|e1|gemma|1": {"K1": "kept", "K2": "kept", "dup": "done", "credit": "done", "hold": "uncertain"},
+ "sum|e15|qwen|1": {"K2": "kept", "K3": "kept", "dup": "done", "credit": "done", "hold": "done"},
+ "sum|e6|gemma|0": {"K1": "kept", "K3": "kept", "dup": "done", "credit": "done", "hold": "uncertain"},
+ "sum|e13|gemma|1": {"K1": "kept", "K2": "kept", "dup": "done", "credit": "uncertain", "hold": "done"},
+ "sum|e18|gemma|0": {"K1": "kept", "K3": "partial", "dup": "done", "credit": "uncertain", "hold": "done"},
+ "sum|e6|qwen|1": {"K1": "kept", "K3": "kept", "dup": "done", "credit": "done", "hold": "uncertain"}
+}

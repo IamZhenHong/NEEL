@@ -1,0 +1,866 @@
+{
+ "summary_codes": {
+  "qwen|constraint": {
+   "n": 90,
+   "counts": {
+    "unresolved": 31,
+    "dropped": 1,
+    "kept": 58
+   },
+   "err_agreed": [
+    0.01694915254237288,
+    0.0,
+    0.05555555555555555
+   ],
+   "err_haiku": [
+    0.05555555555555555,
+    0.010869565217391304,
+    0.11363636363636363
+   ],
+   "err_gemini": [
+    0.011111111111111112,
+    0.0,
+    0.03571428571428571
+   ]
+  },
+  "qwen|completed": {
+   "n": 72,
+   "counts": {
+    "kept": 67,
+    "unresolved": 5
+   },
+   "err_agreed": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "err_haiku": [
+    0.013888888888888888,
+    0.0,
+    0.04411764705882353
+   ],
+   "err_gemini": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "qwen|unconfirmed": {
+   "n": 48,
+   "counts": {
+    "kept": 47,
+    "unresolved": 1
+   },
+   "err_agreed": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "err_haiku": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "err_gemini": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "gemma|constraint": {
+   "n": 90,
+   "counts": {
+    "kept": 51,
+    "unresolved": 38,
+    "dropped": 1
+   },
+   "err_agreed": [
+    0.019230769230769232,
+    0.0,
+    0.0625
+   ],
+   "err_haiku": [
+    0.011111111111111112,
+    0.0,
+    0.03488372093023256
+   ],
+   "err_gemini": [
+    0.011111111111111112,
+    0.0,
+    0.03488372093023256
+   ]
+  },
+  "gemma|completed": {
+   "n": 72,
+   "counts": {
+    "kept": 70,
+    "unresolved": 2
+   },
+   "err_agreed": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "err_haiku": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "err_gemini": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "gemma|unconfirmed": {
+   "n": 48,
+   "counts": {
+    "kept": 48
+   },
+   "err_agreed": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "err_haiku": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "err_gemini": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "pooled|constraint": {
+   "n": 180,
+   "counts": {
+    "kept": 109,
+    "unresolved": 69,
+    "dropped": 2
+   },
+   "err_agreed": [
+    0.018018018018018018,
+    0.0,
+    0.044642857142857144
+   ],
+   "err_haiku": [
+    0.03333333333333333,
+    0.010638297872340425,
+    0.06395348837209303
+   ],
+   "err_gemini": [
+    0.011111111111111112,
+    0.0,
+    0.028409090909090908
+   ]
+  },
+  "pooled|completed": {
+   "n": 144,
+   "counts": {
+    "kept": 137,
+    "unresolved": 7
+   },
+   "err_agreed": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "err_haiku": [
+    0.006944444444444444,
+    0.0,
+    0.022058823529411766
+   ],
+   "err_gemini": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  },
+  "pooled|unconfirmed": {
+   "n": 96,
+   "counts": {
+    "kept": 95,
+    "unresolved": 1
+   },
+   "err_agreed": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "err_haiku": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "err_gemini": [
+    0.0,
+    0.0,
+    0.0
+   ]
+  }
+ },
+ "action_error": {
+  "qwen|constraint": {
+   "full": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "compact": [
+    0.09444444444444444,
+    0.029069767441860465,
+    0.17391304347826086
+   ],
+   "kept": [
+    0.034482758620689655,
+    0.0,
+    0.08163265306122448
+   ],
+   "erred": [
+    1.0
+   ],
+   "n": {
+    "full": 45,
+    "compact": 180,
+    "kept": 116,
+    "erred": 2
+   }
+  },
+  "qwen|completed": {
+   "full": [
+    0.08333333333333333,
+    0.0,
+    0.17142857142857143
+   ],
+   "compact": [
+    0.75,
+    0.6642857142857143,
+    0.8308823529411765
+   ],
+   "kept": [
+    0.7313432835820896,
+    0.644927536231884,
+    0.8153846153846154
+   ],
+   "erred": [
+    null
+   ],
+   "n": {
+    "full": 36,
+    "compact": 144,
+    "kept": 134,
+    "erred": 0
+   }
+  },
+  "qwen|unconfirmed": {
+   "full": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "compact": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "kept": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "erred": [
+    null
+   ],
+   "n": {
+    "full": 24,
+    "compact": 96,
+    "kept": 94,
+    "erred": 0
+   }
+  },
+  "gemma|constraint": {
+   "full": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "compact": [
+    0.044444444444444446,
+    0.0,
+    0.09782608695652174
+   ],
+   "kept": [
+    0.0392156862745098,
+    0.0,
+    0.1276595744680851
+   ],
+   "erred": [
+    1.0
+   ],
+   "n": {
+    "full": 45,
+    "compact": 180,
+    "kept": 102,
+    "erred": 2
+   }
+  },
+  "gemma|completed": {
+   "full": [
+    0.027777777777777776,
+    0.0,
+    0.08823529411764706
+   ],
+   "compact": [
+    0.9583333333333334,
+    0.9144736842105263,
+    1.0
+   ],
+   "kept": [
+    0.9571428571428572,
+    0.9121621621621622,
+    1.0
+   ],
+   "erred": [
+    null
+   ],
+   "n": {
+    "full": 36,
+    "compact": 144,
+    "kept": 140,
+    "erred": 0
+   }
+  },
+  "gemma|unconfirmed": {
+   "full": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "compact": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "kept": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "erred": [
+    null
+   ],
+   "n": {
+    "full": 24,
+    "compact": 96,
+    "kept": 96,
+    "erred": 0
+   }
+  },
+  "pooled|constraint": {
+   "full": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "compact": [
+    0.06944444444444445,
+    0.03125,
+    0.1111111111111111
+   ],
+   "kept": [
+    0.03669724770642202,
+    0.004672897196261682,
+    0.0787037037037037
+   ],
+   "erred": [
+    1.0
+   ],
+   "n": {
+    "full": 90,
+    "compact": 360,
+    "kept": 218,
+    "erred": 4
+   }
+  },
+  "pooled|completed": {
+   "full": [
+    0.05555555555555555,
+    0.0,
+    0.12162162162162163
+   ],
+   "compact": [
+    0.8541666666666666,
+    0.7948717948717948,
+    0.9044117647058824
+   ],
+   "kept": [
+    0.8467153284671532,
+    0.7857142857142857,
+    0.9
+   ],
+   "erred": [
+    null
+   ],
+   "n": {
+    "full": 72,
+    "compact": 288,
+    "kept": 274,
+    "erred": 0
+   }
+  },
+  "pooled|unconfirmed": {
+   "full": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "compact": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "kept": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "erred": [
+    null
+   ],
+   "n": {
+    "full": 48,
+    "compact": 192,
+    "kept": 190,
+    "erred": 0
+   }
+  }
+ },
+ "contrasts": {
+  "constraint|dropped|agreed": {
+   "units": 2,
+   "n_bad": 4,
+   "p_bad": 1.0,
+   "p_ok": 0.03669724770642202,
+   "pairs": 2,
+   "paired": [
+    1.0,
+    null,
+    null
+   ]
+  },
+  "constraint|dropped|haiku": {
+   "units": 6,
+   "n_bad": 12,
+   "p_bad": 0.75,
+   "p_ok": 0.03669724770642202,
+   "pairs": 6,
+   "paired": [
+    0.75,
+    0.3,
+    1.0
+   ]
+  },
+  "constraint|dropped|gemini": {
+   "units": 2,
+   "n_bad": 4,
+   "p_bad": 1.0,
+   "p_ok": 0.05898876404494382,
+   "pairs": 2,
+   "paired": [
+    1.0,
+    null,
+    null
+   ]
+  },
+  "constraint|partial|agreed": {
+   "units": 0,
+   "n_bad": 0,
+   "p_bad": null,
+   "p_ok": 0.03669724770642202,
+   "pairs": 0,
+   "paired": [
+    null,
+    null,
+    null
+   ]
+  },
+  "constraint|partial|haiku": {
+   "units": 65,
+   "n_bad": 130,
+   "p_bad": 0.06153846153846154,
+   "p_ok": 0.03669724770642202,
+   "pairs": 29,
+   "paired": [
+    0.08908045977011494,
+    -0.0030864197530864213,
+    0.20833333333333331
+   ]
+  },
+  "constraint|partial|gemini": {
+   "units": 0,
+   "n_bad": 0,
+   "p_bad": null,
+   "p_ok": 0.05898876404494382,
+   "pairs": 0,
+   "paired": [
+    null,
+    null,
+    null
+   ]
+  },
+  "completed|dropped|agreed": {
+   "units": 0,
+   "n_bad": 0,
+   "p_bad": null,
+   "p_ok": 0.8467153284671532,
+   "pairs": 0,
+   "paired": [
+    null,
+    null,
+    null
+   ]
+  },
+  "completed|dropped|haiku": {
+   "units": 1,
+   "n_bad": 2,
+   "p_bad": 1.0,
+   "p_ok": 0.8467153284671532,
+   "pairs": 1,
+   "paired": [
+    0.33333333333333337,
+    null,
+    null
+   ]
+  },
+  "completed|dropped|gemini": {
+   "units": 0,
+   "n_bad": 0,
+   "p_bad": null,
+   "p_ok": 0.8541666666666666,
+   "pairs": 0,
+   "paired": [
+    null,
+    null,
+    null
+   ]
+  },
+  "completed|downgraded|agreed": {
+   "units": 0,
+   "n_bad": 0,
+   "p_bad": null,
+   "p_ok": 0.8467153284671532,
+   "pairs": 0,
+   "paired": [
+    null,
+    null,
+    null
+   ]
+  },
+  "completed|downgraded|haiku": {
+   "units": 6,
+   "n_bad": 12,
+   "p_bad": 1.0,
+   "p_ok": 0.8467153284671532,
+   "pairs": 4,
+   "paired": [
+    0.16666666666666666,
+    0.0,
+    0.375
+   ]
+  },
+  "completed|downgraded|gemini": {
+   "units": 0,
+   "n_bad": 0,
+   "p_bad": null,
+   "p_ok": 0.8541666666666666,
+   "pairs": 0,
+   "paired": [
+    null,
+    null,
+    null
+   ]
+  },
+  "unconfirmed|upgraded|agreed": {
+   "units": 0,
+   "n_bad": 0,
+   "p_bad": null,
+   "p_ok": 0.0,
+   "pairs": 0,
+   "paired": [
+    null,
+    null,
+    null
+   ]
+  },
+  "unconfirmed|upgraded|haiku": {
+   "units": 0,
+   "n_bad": 0,
+   "p_bad": null,
+   "p_ok": 0.0,
+   "pairs": 0,
+   "paired": [
+    null,
+    null,
+    null
+   ]
+  },
+  "unconfirmed|upgraded|gemini": {
+   "units": 0,
+   "n_bad": 0,
+   "p_bad": null,
+   "p_ok": 0.0,
+   "pairs": 0,
+   "paired": [
+    null,
+    null,
+    null
+   ]
+  },
+  "unconfirmed|dropped|agreed": {
+   "units": 0,
+   "n_bad": 0,
+   "p_bad": null,
+   "p_ok": 0.0,
+   "pairs": 0,
+   "paired": [
+    null,
+    null,
+    null
+   ]
+  },
+  "unconfirmed|dropped|haiku": {
+   "units": 0,
+   "n_bad": 0,
+   "p_bad": null,
+   "p_ok": 0.0,
+   "pairs": 0,
+   "paired": [
+    null,
+    null,
+    null
+   ]
+  },
+  "unconfirmed|dropped|gemini": {
+   "units": 0,
+   "n_bad": 0,
+   "p_bad": null,
+   "p_ok": 0.0,
+   "pairs": 0,
+   "paired": [
+    null,
+    null,
+    null
+   ]
+  }
+ },
+ "attribution": {
+  "qwen": {
+   "errors": 125,
+   "erred": {
+    "agreed": 2,
+    "haiku": 9,
+    "gemini": 2
+   },
+   "partial_down": 0,
+   "kept": 102,
+   "unresolved": 21,
+   "compact_rate": 0.2976190476190476,
+   "full_rate": 0.02857142857142857
+  },
+  "gemma": {
+   "errors": 146,
+   "erred": {
+    "agreed": 2,
+    "haiku": 2,
+    "gemini": 2
+   },
+   "partial_down": 0,
+   "kept": 138,
+   "unresolved": 6,
+   "compact_rate": 0.3476190476190476,
+   "full_rate": 0.009523809523809525
+  },
+  "pooled": {
+   "errors": 271,
+   "erred": {
+    "agreed": 4,
+    "haiku": 11,
+    "gemini": 4
+   },
+   "partial_down": 0,
+   "kept": 240,
+   "unresolved": 27,
+   "compact_rate": 0.32261904761904764,
+   "full_rate": 0.01904761904761905
+  }
+ },
+ "kept_minus_full": {
+  "qwen|constraint": [
+   0.02702702702702703,
+   0.0,
+   0.06428571428571428
+  ],
+  "qwen|completed": [
+   0.6428571428571429,
+   0.5555555555555556,
+   0.7357142857142858
+  ],
+  "qwen|unconfirmed": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "gemma|constraint": [
+   0.029411764705882353,
+   0.0,
+   0.09375
+  ],
+  "gemma|completed": [
+   0.9285714285714286,
+   0.8597560975609756,
+   0.9924242424242424
+  ],
+  "gemma|unconfirmed": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "pooled|constraint": [
+   0.028169014084507043,
+   0.0035211267605633804,
+   0.06159420289855073
+  ],
+  "pooled|completed": [
+   0.7857142857142857,
+   0.7207792207792207,
+   0.8478260869565217
+  ],
+  "pooled|unconfirmed": [
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "phrasing": {
+  "K1|absent|qwen": [
+   1,
+   2,
+   2
+  ],
+  "K1|per-invoice only|gemma": [
+   1,
+   2,
+   0
+  ],
+  "K1|per-invoice only|qwen": [
+   1,
+   2,
+   0
+  ],
+  "K1|rule|gemma": [
+   29,
+   58,
+   0
+  ],
+  "K1|rule|qwen": [
+   28,
+   56,
+   4
+  ],
+  "K2|absent|gemma": [
+   1,
+   2,
+   2
+  ],
+  "K2|absent|qwen": [
+   2,
+   4,
+   4
+  ],
+  "K2|no email|gemma": [
+   28,
+   56,
+   4
+  ],
+  "K2|no email|qwen": [
+   26,
+   52,
+   0
+  ],
+  "K2|portal only|gemma": [
+   1,
+   2,
+   2
+  ],
+  "K2|portal only|qwen": [
+   2,
+   4,
+   3
+  ],
+  "K3|flag only|gemma": [
+   7,
+   14,
+   0
+  ],
+  "K3|flag only|qwen": [
+   5,
+   10,
+   3
+  ],
+  "K3|no approval|gemma": [
+   23,
+   46,
+   0
+  ],
+  "K3|no approval|qwen": [
+   25,
+   50,
+   1
+  ]
+ },
+ "agreement": {
+  "constraint": {
+   "n": 180,
+   "agree": 0.6166666666666667,
+   "kappa": 0.04358539966117353,
+   "hand_haiku": "17/30",
+   "hand_gemini": "28/30",
+   "hand_agreed": "16/17"
+  },
+  "completed": {
+   "n": 144,
+   "agree": 0.9513888888888888,
+   "kappa": 0.0,
+   "hand_haiku": "32/34",
+   "hand_gemini": "34/34",
+   "hand_agreed": "32/32"
+  },
+  "unconfirmed": {
+   "n": 96,
+   "agree": 0.9895833333333334,
+   "kappa": 0.0,
+   "hand_haiku": "11/11",
+   "hand_gemini": "11/11",
+   "hand_agreed": "11/11"
+  },
+  "all": {
+   "n": 420,
+   "agree": 0.8166666666666667,
+   "kappa": 0.7464841728987347,
+   "hand_haiku": "60/75",
+   "hand_gemini": "73/75",
+   "hand_agreed": "59/60"
+  }
+ },
+ "spend": {
+  "c2-smoke-sum": 0.011077130000000001,
+  "c2-smoke-replay": 0.008995074,
+  "c2-summaries": 0.579822179,
+  "c2-untracked-estimate": 0.025,
+  "c2-judge": 0.04038269999999999,
+  "c2-replay": 1.3705376159999998,
+  "c2-full": 1.118912281
+ }
+}
