@@ -1,0 +1,307 @@
+{
+ "anchor1k": {
+  "correct": 4,
+  "n": 4,
+  "dup": 0,
+  "dup_knows": 0
+ },
+ "anchor12k": {
+  "correct": 10,
+  "n": 16,
+  "dup": 6,
+  "dup_knows": 6
+ },
+ "A0_plain": {
+  "rate": [
+   0.375,
+   0.1875,
+   0.59375
+  ],
+  "n": 32
+ },
+ "A1_recall": {
+  "rate": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "n": 32
+ },
+ "A2_check": {
+  "rate": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "n": 32
+ },
+ "A3_recall_then_act": {
+  "rate": [
+   0.03333333333333333,
+   0.0,
+   0.1
+  ],
+  "n": 30
+ },
+ "A0_dup_knows": [
+  12,
+  12
+ ],
+ "A2 - A0 re-hold": [
+  -0.375,
+  -0.59375,
+  -0.1875
+ ],
+ "A3 - A0 re-hold": [
+  -0.3416666666666667,
+  -0.5625,
+  -0.15423387096774194
+ ],
+ "say/do gap: A1 recall acc - A0 action acc": [
+  0.375,
+  0.1875,
+  0.59375
+ ],
+ "I4 S_role own": [
+  1.0,
+  1.0,
+  1.0
+ ],
+ "I4 S_task own": [
+  1.0,
+  1.0,
+  1.0
+ ],
+ "I4 S_cons own": [
+  1.0,
+  1.0,
+  1.0
+ ],
+ "I4 S_acts own": [
+  -0.5,
+  -0.8125,
+  -0.1875
+ ],
+ "I4_matrix": {
+  "S_none|role_b": [
+   0,
+   16
+  ],
+  "S_none|task_b": [
+   0,
+   16
+  ],
+  "S_none|k1_b": [
+   0,
+   16
+  ],
+  "S_none|act_b2": [
+   16,
+   16
+  ],
+  "S_role|role_b": [
+   16,
+   16
+  ],
+  "S_role|task_b": [
+   0,
+   16
+  ],
+  "S_role|k1_b": [
+   0,
+   16
+  ],
+  "S_role|act_b2": [
+   15,
+   16
+  ],
+  "S_task|role_b": [
+   0,
+   16
+  ],
+  "S_task|task_b": [
+   16,
+   16
+  ],
+  "S_task|k1_b": [
+   0,
+   16
+  ],
+  "S_task|act_b2": [
+   15,
+   16
+  ],
+  "S_cons|role_b": [
+   0,
+   16
+  ],
+  "S_cons|task_b": [
+   0,
+   16
+  ],
+  "S_cons|k1_b": [
+   16,
+   16
+  ],
+  "S_cons|act_b2": [
+   15,
+   16
+  ],
+  "S_acts|role_b": [
+   0,
+   16
+  ],
+  "S_acts|task_b": [
+   0,
+   16
+  ],
+  "S_acts|k1_b": [
+   0,
+   16
+  ],
+  "S_acts|act_b2": [
+   8,
+   16
+  ],
+  "S_full|role_b": [
+   16,
+   16
+  ],
+  "S_full|task_b": [
+   15,
+   16
+  ],
+  "S_full|k1_b": [
+   32,
+   32
+  ],
+  "S_full|act_b2": [
+   14,
+   16
+  ]
+ },
+ "I2a k1 viol noK1-full": [
+  1.0,
+  1.0,
+  1.0
+ ],
+ "I2a S_full signoff": [
+  32,
+  32
+ ],
+ "I2a S_full approved": [
+  0,
+  32
+ ],
+ "I2a S_noK1 signoff": [
+  0,
+  32
+ ],
+ "I2a S_noK1 approved": [
+  32,
+  32
+ ],
+ "I2b faithful - fact": {
+  "rehold": [
+   0.875,
+   0.75,
+   0.96875
+  ],
+  "unsure": [
+   1.0,
+   1.0,
+   1.0
+  ]
+ },
+ "I2b quote - fact": {
+  "rehold": [
+   0.53125,
+   0.40625,
+   0.65625
+  ],
+  "unsure": [
+   0.03125,
+   0.0,
+   0.09375
+  ]
+ },
+ "act_b2_outcomes": {
+  "anchor12k": {
+   "says already held, no call": 10,
+   "silent re-hold": 6,
+   "re-hold, acknowledged": 0,
+   "no hold, no acknowledgement (asks / other)": 0
+  },
+  "A0_plain": {
+   "says already held, no call": 19,
+   "silent re-hold": 12,
+   "re-hold, acknowledged": 0,
+   "no hold, no acknowledgement (asks / other)": 1
+  },
+  "A2_check": {
+   "says already held, no call": 31,
+   "silent re-hold": 0,
+   "re-hold, acknowledged": 1,
+   "no hold, no acknowledgement (asks / other)": 0
+  },
+  "A3_recall_then_act": {
+   "says already held, no call": 29,
+   "silent re-hold": 1,
+   "re-hold, acknowledged": 0,
+   "no hold, no acknowledgement (asks / other)": 0
+  },
+  "S_none": {
+   "says already held, no call": 0,
+   "silent re-hold": 0,
+   "re-hold, acknowledged": 0,
+   "no hold, no acknowledgement (asks / other)": 16
+  },
+  "S_role": {
+   "says already held, no call": 0,
+   "silent re-hold": 1,
+   "re-hold, acknowledged": 0,
+   "no hold, no acknowledgement (asks / other)": 15
+  },
+  "S_task": {
+   "says already held, no call": 0,
+   "silent re-hold": 1,
+   "re-hold, acknowledged": 0,
+   "no hold, no acknowledgement (asks / other)": 15
+  },
+  "S_cons": {
+   "says already held, no call": 0,
+   "silent re-hold": 1,
+   "re-hold, acknowledged": 0,
+   "no hold, no acknowledgement (asks / other)": 15
+  },
+  "S_acts": {
+   "says already held, no call": 8,
+   "silent re-hold": 8,
+   "re-hold, acknowledged": 0,
+   "no hold, no acknowledgement (asks / other)": 0
+  },
+  "S_full": {
+   "says already held, no call": 14,
+   "silent re-hold": 2,
+   "re-hold, acknowledged": 0,
+   "no hold, no acknowledgement (asks / other)": 0
+  }
+ },
+ "I4 S_acts ack": [
+  0.5,
+  0.1875,
+  0.8125
+ ],
+ "I4 S_full-S_acts silent": [
+  -0.375,
+  -0.6875,
+  -0.0625
+ ],
+ "health": {
+  "rows": 898,
+  "cut_turns": 2,
+  "max_steps": 1,
+  "spend": 2.686924591,
+  "api_branches": 898
+ }
+}
