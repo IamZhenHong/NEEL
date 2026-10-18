@@ -37,7 +37,7 @@ def key():
 
 
 def call(model, k, text):
-    body = {"model": model, "temperature": 0, "max_tokens": 400, "usage": {"include": True},
+    body = {"model": model, "temperature": 0, "max_tokens": 4000, "usage": {"include": True},
             "response_format": {"type": "json_object"},
             "messages": [{"role": "system", "content": SYSTEM}, {"role": "user", "content": "Summary:\n\n" + text}]}
     req = urllib.request.Request("https://openrouter.ai/api/v1/chat/completions", data=json.dumps(body).encode(),
