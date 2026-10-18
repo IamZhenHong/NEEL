@@ -1,0 +1,129 @@
+{
+ "spend_usd": 0.858,
+ "by_cond": {
+  "base": {
+   "n": 60,
+   "unparsed": 0,
+   "p_any_check": 0.13333333333333333,
+   "mean_checks": 0.21666666666666667,
+   "p_check_verified": 0.0,
+   "p_check_wrong_in_error_reports": 0.2,
+   "accuracy": 1.0,
+   "acc_error_reports": 1.0,
+   "acc_ok_reports": 1.0,
+   "mean_score": 9.583333333333334,
+   "verif_words_per_1k": 3.629506116775113
+  },
+  "meticulous": {
+   "n": 60,
+   "unparsed": 0,
+   "p_any_check": 0.2,
+   "mean_checks": 0.21666666666666667,
+   "p_check_verified": 0.0,
+   "p_check_wrong_in_error_reports": 0.4,
+   "accuracy": 1.0,
+   "acc_error_reports": 1.0,
+   "acc_ok_reports": 1.0,
+   "mean_score": 9.633333333333333,
+   "verif_words_per_1k": 3.519828366464416
+  }
+ },
+ "by_cond_cost": {
+  "base|C1": {
+   "n": 30,
+   "unparsed": 0,
+   "p_any_check": 0.16666666666666666,
+   "mean_checks": 0.3,
+   "p_check_verified": 0.0,
+   "p_check_wrong_in_error_reports": 0.26666666666666666,
+   "accuracy": 1.0,
+   "acc_error_reports": 1.0,
+   "acc_ok_reports": 1.0,
+   "mean_score": 9.7,
+   "verif_words_per_1k": 3.730145997112145
+  },
+  "base|C4": {
+   "n": 30,
+   "unparsed": 0,
+   "p_any_check": 0.1,
+   "mean_checks": 0.13333333333333333,
+   "p_check_verified": 0.0,
+   "p_check_wrong_in_error_reports": 0.13333333333333333,
+   "accuracy": 1.0,
+   "acc_error_reports": 1.0,
+   "acc_ok_reports": 1.0,
+   "mean_score": 9.466666666666667,
+   "verif_words_per_1k": 3.5211014062803776
+  },
+  "meticulous|C1": {
+   "n": 30,
+   "unparsed": 0,
+   "p_any_check": 0.3,
+   "mean_checks": 0.3333333333333333,
+   "p_check_verified": 0.0,
+   "p_check_wrong_in_error_reports": 0.6,
+   "accuracy": 1.0,
+   "acc_error_reports": 1.0,
+   "acc_ok_reports": 1.0,
+   "mean_score": 9.666666666666666,
+   "verif_words_per_1k": 3.46482180102349
+  },
+  "meticulous|C4": {
+   "n": 30,
+   "unparsed": 0,
+   "p_any_check": 0.1,
+   "mean_checks": 0.1,
+   "p_check_verified": 0.0,
+   "p_check_wrong_in_error_reports": 0.2,
+   "accuracy": 1.0,
+   "acc_error_reports": 1.0,
+   "acc_ok_reports": 1.0,
+   "mean_score": 9.6,
+   "verif_words_per_1k": 3.58305548823225
+  }
+ },
+ "contrast_any_check": {
+  "diff": 0.06666666666666667,
+  "ci": [
+   -0.049999999999999996,
+   0.18333333333333332
+  ],
+  "n_cells": 20
+ },
+ "contrast_accuracy": {
+  "diff": 0,
+  "ci": [
+   0,
+   0
+  ],
+  "n_cells": 20
+ },
+ "self_rating": {
+  "base": [
+   10,
+   10,
+   10,
+   10,
+   10,
+   10,
+   10,
+   10,
+   10,
+   10
+  ],
+  "meticulous": [
+   10,
+   10,
+   10,
+   10,
+   10,
+   10,
+   10,
+   10,
+   10,
+   10
+  ]
+ },
+ "self_rating_mean_base": 10,
+ "self_rating_mean_meticulous": 10
+}

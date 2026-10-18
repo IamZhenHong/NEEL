@@ -1,0 +1,211 @@
+{
+ "n_choices": 360,
+ "unparsed": 0,
+ "flag_unparsed_gt10pct": false,
+ "spend_usd": 1.289,
+ "p_equal": {
+  "base": {
+   "people": {
+    "0": 1.0,
+    "1": 1.0,
+    "2": 1.0,
+    "4": 1.0,
+    "8": 1.0,
+    "16": 1.0
+   },
+   "teams": {
+    "0": 1.0,
+    "1": 1.0,
+    "2": 1.0,
+    "4": 1.0,
+    "8": 1.0,
+    "16": 1.0
+   }
+  },
+  "equal": {
+   "people": {
+    "0": 1.0,
+    "1": 1.0,
+    "2": 1.0,
+    "4": 1.0,
+    "8": 1.0,
+    "16": 1.0
+   },
+   "teams": {
+    "0": 1.0,
+    "1": 1.0,
+    "2": 1.0,
+    "4": 1.0,
+    "8": 1.0,
+    "16": 1.0
+   }
+  },
+  "total": {
+   "people": {
+    "0": 1.0,
+    "1": 0.0,
+    "2": 0.0,
+    "4": 0.0,
+    "8": 0.0,
+    "16": 0.0
+   },
+   "teams": {
+    "0": 1.0,
+    "1": 1.0,
+    "2": 0.7,
+    "4": 0.4,
+    "8": 0.3,
+    "16": 0.1
+   }
+  }
+ },
+ "p_equal_by_order": {
+  "base": {
+   "EQfirst": 1.0,
+   "EQsecond": 1.0
+  },
+  "equal": {
+   "EQfirst": 1.0,
+   "EQsecond": 1.0
+  },
+  "total": {
+   "EQfirst": 0.43333333333333335,
+   "EQsecond": 0.31666666666666665
+  }
+ },
+ "switch_point": {
+  "base": {
+   "people": ">16",
+   "teams": ">16"
+  },
+  "equal": {
+   "people": ">16",
+   "teams": ">16"
+  },
+  "total": {
+   "people": 1,
+   "teams": 4
+  }
+ },
+ "contrasts": {
+  "equal-total": {
+   "diff": 0.625,
+   "ci": [
+    0.45,
+    0.7916666666666666
+   ],
+   "n_cells": 24
+  },
+  "base-total": {
+   "diff": 0.625,
+   "ci": [
+    0.45,
+    0.7916666666666666
+   ],
+   "n_cells": 24
+  },
+  "equal-base": {
+   "diff": 0.0,
+   "ci": [
+    0.0,
+    0.0
+   ],
+   "n_cells": 24
+  }
+ },
+ "contrast_by_setting": {
+  "people": {
+   "diff": 0.8333333333333334,
+   "ci": [
+    0.5833333333333334,
+    1.0
+   ],
+   "n_cells": 12
+  },
+  "teams": {
+   "diff": 0.4166666666666667,
+   "ci": [
+    0.2,
+    0.6333333333333333
+   ],
+   "n_cells": 12
+  }
+ },
+ "contrast_by_order": {
+  "EQfirst": {
+   "diff": 0.5666666666666667,
+   "ci": [
+    0.31666666666666665,
+    0.8
+   ],
+   "n_cells": 12
+  },
+  "EQsecond": {
+   "diff": 0.6833333333333333,
+   "ci": [
+    0.43333333333333335,
+    0.9166666666666666
+   ],
+   "n_cells": 12
+  }
+ },
+ "stated": {
+  "base": {
+   "priority": {
+    "EQUAL": 10
+   },
+   "thresholds": [
+    10,
+    3,
+    10,
+    5,
+    4,
+    6,
+    "never",
+    8,
+    10,
+    4
+   ],
+   "n_never": 1,
+   "median_numeric": 6
+  },
+  "equal": {
+   "priority": {
+    "EQUAL": 10
+   },
+   "thresholds": [
+    "never",
+    "never",
+    "never",
+    "never",
+    "never",
+    "never",
+    "never",
+    "never",
+    "never",
+    "never"
+   ],
+   "n_never": 10,
+   "median_numeric": null
+  },
+  "total": {
+   "priority": {
+    "TOTAL": 10
+   },
+   "thresholds": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "n_never": 0,
+   "median_numeric": 1.0
+  }
+ }
+}
