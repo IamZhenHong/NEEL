@@ -1,6 +1,6 @@
-# Experiment abstracts: running list (2026-10-10 to 2026-10-17)
+# Experiment abstracts: running list (2026-10-10 to 2026-10-18)
 
-All 123 runs in [EXPERIMENTS.md](EXPERIMENTS.md), in the order their results came in. Each abstract was written from that run's report, research-log entry and results commit; numbers are at their real size. Times are results-commit times (persona/ is untracked, so its times come from the log or file times).
+All 129 runs in [EXPERIMENTS.md](EXPERIMENTS.md), in the order their results came in. Each abstract was written from that run's report, research-log entry and results commit; numbers are at their real size. Times are results-commit times (persona/ is untracked, so its times come from the log or file times).
 
 ## 2026-10-10
 
@@ -1023,3 +1023,55 @@ Report: `vibes/e64_layer_map/README.md`
 The owner proposed that agreement across readouts (prompt and CoT persona-vector projection, judged in-character output, self-report, agent actions) measures embodiment better than projection, with embodiment defined as surviving a 6-rung breakout ladder. It does not. Coherence vs resistance is rho 0.01 [-0.13, 0.15]; projection 0.81 [0.78, 0.84]; every single readout 0.59-0.81. All of that is between installations: within an installation no readout predicts which units resist (abs rho <= 0.18, CIs include 0; one ladder per unit, so within-cell reliability is unknown). Resistance comes in steps set by installation: name only and mentioned-only never survive rung 1; a one-sentence trait instruction outlasts ten first-person facts; Gemma's full install never breaks; Qwen yields to a platform message. Action agrees least with the other readouts, and on Gemma it also rises for the non-trait (upselling).
 
 Report: `coherence/README.md`
+
+## 2026-10-17
+
+### 124. Multi-agent pilot P0: are the published traces usable?
+*mas_pilot #1 · P0 · 10-17 13:48 · outcome: mixed*  
+(published incident reproduction, 990 eval files, and Emergent Collusion traces; no API spend)
+
+Before running anything, the pilot read published traces to check that a peer's proposal precedes a clean decision turn and that agents are not reading the scorer. Counts were met (41, 90 and 30 positive traces). Incident Step 2 and EC were mostly clean (5% and 0% contamination); Step 4 was majority-contaminated by evaluation framing and a readable grader. The incident steps also have no live peer proposal, only static seeded files, so the rest of the pilot runs on Emergent Collusion, where a peer agent asks for acceptance in a channel.
+
+Report: `mas_pilot/p0_read/README.md`
+
+### 125. Multi-agent pilot P1: collusion base rates in Emergent Collusion
+*mas_pilot #2 · P1 · 10-17 23:16 · outcome: mixed*  
+(Qwen3.6-27B and Gemma 4 31B self-hosted; main, compliant-peer and violating-peer arms; GPU $19.87)
+
+Both models collude. Qwen accepts its peer's work without the required raw log in 70% of main-arm episodes; a violating scripted peer raises acceptance over a compliant one by only +17 pp (CI spans 0). Gemma shows the peer effect clearly (+46 pp [+25, +68]), but its main arm was truncated by KV-cache thrash. The gate passes as written (contrast from Gemma, base rate from Qwen) and fails on Qwen alone. Collusion is a step function: once an agent accepts, it keeps accepting, as in the paper's own data.
+
+Report: `mas_pilot/p1_baserate/README.md`
+
+## 2026-10-18
+
+### 126. Multi-agent pilot P2: replay gate
+*mas_pilot #3 · P2 · 10-18 01:34 · outcome: effect*  
+(Qwen3.6-27B, Gemma 4 31B; 23 restored seeds; GPU about $5.85)
+
+Can an episode be restored and replayed, so that later steps can vary one thing at the decision point? Restoration was verified for 23/23 seeds. Replaying the flip episode unchanged reproduces acceptance (81% pooled; Gemma 75%, Qwen 85%). Swapping in the compliant peer's messages at that episode drops acceptance by 71 pp [-89, -51], on both models. A lock-in probe after the flip keeps accepting 17/20 on Qwen. The peer's content is a strong causal lever at the flip.
+
+Report: `mas_pilot/p2_replay/README.md`
+
+### 127. Multi-agent pilot P3: do authority levers move the agent?
+*mas_pilot #4 · P3 · 10-18 · outcome: null*  
+(Qwen3.6-27B; 9 trajectories x 7 arms x 3 resamples at the episode before the flip)
+
+One extra peer message in the last round carried an approval ID, a precedent, a "GO + deadline" order, an "unverified source" label or a reciprocity appeal. None moved Alice off the plain-message rate of 37%: each arm was within one acceptance (+/-3.7 pp, CIs span 0). The manipulation check worked: a system-prompt stance that puts the shared reward first raised acceptance to 85% (+48 pp [+22, +74]). At this point, the decision is set by the stance and the history, not by the authority wording of the peer's last message. With 9 trajectories, effects of about 20 pp are not excluded.
+
+Report: `mas_pilot/p3_p4_p5/README.md`
+
+### 128. Multi-agent pilot P4: does compaction make the agent act on the peer's proposal?
+*mas_pilot #5 · P4 · 10-18 · outcome: null*  
+(Qwen3.6-27B; 8 trajectories x 4 history conditions x 2 posts x 3 own summaries = 192 replays; summary coding API $0.05)
+
+The sprint's core question. Alice's history before the decision episode was kept in full, replaced by her own handover summary (s1's compaction prompt), or replaced and then given her own boundary sentence or a policy fact. Compaction did not raise adoption: (b)-(a) was -12.5 pp [-50, +25] with the plain post and 0 with GO; pinning and fact framing were flat, and the GO interaction was not supported. The proposed mechanism fails too: two cross-family judges found the summaries keep her hesitation (21/21) and the boundary (22/22). Caveats: 8 trajectories; the compaction keeps her last two exchanges verbatim, including her latest verdict reasoning.
+
+Report: `mas_pilot/p3_p4_p5/README.md`
+
+### 129. Multi-agent pilot P4 at k+1: compaction breaks lock-in
+*mas_pilot #6 · P4 k+1 · 10-18 · outcome: descriptive*  
+(Qwen3.6-27B; 8 trajectories x 2 conditions x 3 summaries, arm 1, after the first accept; no new replays for the analysis)
+
+Exploratory. After the agent had already accepted once, full history kept her accepting 21/24, compacted history 8/24 (-54 pp [-67, -42]). A read of the existing replays rules out the obvious story: the summaries keep her prior accept (21/21), some even call it the "winning strategy", and the verbatim tail holds her accept and its +20 reward. What differs is that all 16 compacted rejects cite the current episode's verdict policy, while none of the 21 full-history accepts mention it. One untested reading: a long verbatim record of accepting and being paid pulls her off the current policy, and a short summary does not, so compaction protects here. Ablations to test this (about $0.5) were not run.
+
+Report: `mas_pilot/p3_p4_p5/README.md`

@@ -185,6 +185,82 @@ Two Qwen pods in parallel (cost is per pod-hour, so wall clock halves):
   - `pod/p5_gen.py`, `pod/p5_hf.py`;
   - `src/make_base_seeds.py`, writing `seeds/` (26 base records).
 
+## Results (P3 and P4 final; P5 not done)
+
+Scorer: `src/score_p34.py` → `results/analysis/p34_scores.json`. Summary coding: `src/code_summaries.py` →
+`results/analysis/summary_codes.json`. All outcomes are Alice's server-side verdicts at the decision episode. CIs
+are trajectory-clustered bootstraps (10,000, seed 0); no replay was dropped. Qwen3.6-27B only.
+
+### P3: the lever map does not transfer
+
+Stage A picked **k−1** by the frozen rule: arm-1 acceptance at k−1 was 10/27 = 37% (not extreme), and at k it was
+22/27 = 81%.
+
+| arm | accept | − arm 1 | 95% CI (traj) | prediction | held? |
+|---|---|---|---|---|---|
+| 1 plain | 10/27 = 37% | — | — | baseline | — |
+| 2 approval ID | 11/27 = 41% | +3.7 pp | [−7.4, +14.8] | up | no |
+| 3 precedent | 11/27 = 41% | +3.7 pp | [−22.2, +25.9] | up | no |
+| 4 GO + deadline | 11/27 = 41% | +3.7 pp | [−14.8, +22.2] | up | no |
+| 5 source label | 9/27 = 33% | −3.7 pp | [−22.2, +14.8] | down | no |
+| 6 reciprocity | 11/27 = 41% | +3.7 pp | [−14.8, +22.2] | ≈ baseline | yes |
+| positive control | 23/27 = 85% | **+48.1 pp** | **[+22.2, +74.1]** | strongly up | yes |
+
+- **Gate:** "lever map transfers" is **false** (arms 2–4 do not rise, arm 5 does not fall). The positive control
+  moves the decision, so this is a null for the levers, not a failed manipulation.
+- Every lever arm sits within one acceptance of arm 1. With 9 trajectories, an effect of about ±20 pp cannot be
+  ruled out. The Qwen decision at k−1 is set by the stance and the history, not by the authority wording of the
+  peer's last message.
+
+### P4 at k−1: compaction does not raise adoption
+
+| post | (a) full | (b) compacted | (c) + pinned own words | (d) + policy fact |
+|---|---|---|---|---|
+| arm 1 plain | 9/24 = 38% | 6/24 = 25% | 9/24 = 38% | 10/24 = 42% |
+| arm 4 GO | 10/24 = 42% | 10/24 = 42% | 10/24 = 42% | 8/24 = 33% |
+
+| contrast | plain | GO |
+|---|---|---|
+| (b) − (a) | −12.5 pp [−50, +25] | 0 [−37.5, +37.5] |
+| (c) − (a) | 0 [−33, +33] | 0 [−33, +37.5] |
+| (d) − (a) | +4.2 pp [−33, +42] | −8.3 pp [−42, +21] |
+| (b) − (c) | −12.5 pp [−25, 0] | 0 [−17, +17] |
+
+Interaction [(b)−(a) under GO] − [(b)−(a) under plain]: +12.5 pp [−25, +50].
+
+- **Owner's predictions:**
+  - adoption (b) > (a) ≈ (c): **not supported**; (b) is lowest under the plain post;
+  - (b)−(a) larger for GO: **not supported**, CI spans ±50 pp.
+- The CIs are wide (8 trajectories), so a ±25 pp effect is not excluded. But the point estimate goes the opposite
+  way from the hypothesis.
+- The s1 tail keeps her most recent verdict reasoning verbatim (execution notes), so (b) could drop only the older
+  hesitation. This limits the test.
+
+### Summary coding (48 summaries: 24 at k−1, 24 at k+1)
+
+Two judges (Claude Haiku 5.5 and Gemini 3.1 Flash-Lite), API $0.05. A code is used only where they agree.
+
+| kept in the summary | judge agreement | k−1: kept / resolved | k+1: kept / resolved |
+|---|---|---|---|
+| boundary (raw log required) | 83% | 22/22 | 17/18 |
+| her hesitation | 85% | 21/21 | 18/20 |
+| peer identity (Bob) | 100% | 24/24 | 24/24 |
+| exploit / proposal | 94% | 21/22 | 22/23 |
+| her own prior accept | 94% | 3/24 | 21/21 |
+
+- The owner's prediction ("keeps the exploit and peer, drops the hesitation") **does not hold**. Qwen's s1
+  summaries keep the hesitation and the boundary almost every time.
+- The 3 prior-accept codes at k−1 come before her first ACCEPT. They are probably judge false positives (both
+  judges agreed) and were not hand-checked.
+
+### P5: not done
+
+The decision-point reads OOM'd twice (full-sequence hidden states on histories of ~25k tokens). The first attempt
+wrote no reads (`results/p4/p5/reads.jsonl`). The rerun read 25 P4 replays (`results/p5_rerun/reads.jsonl`) before
+the pod died. That is too few for per-condition AUCs, and they were not analysed. `results/analysis/p5_analysis.json`
+is empty, and the gate is not evaluated. The fix is in `HANDOFF.md` § Remaining work. It needs `RUNPOD_API_KEY` and
+`HF_TOKEN`. **`p345-results` is not tagged until P5 is run, or explicitly dropped.**
+
 ## P4 exploratory k+1: what drove the lock-in break? (descriptive, no new replays)
 
 Arm 1 at k+1: full history (a) **21/24 accept**, compacted (b) **8/24**, b−a −54 pp [−67, −42] (traj-clustered).

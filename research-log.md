@@ -151,6 +151,37 @@ to the entry.*
 
 ## Daily Entries
 
+### 2026-10-17 to 10-18: multi-agent sprint pilot P0-P4 (mas_pilot/; GPU about $36.4, API about $0.3; tags p0-results, p0b-results, p1-results, p2-results, p345-design; P5 open)
+
+- **Question (owner's pilot package).** Is "does an agent act on a peer's authorisation-shaped proposal more often
+  after its own history is compacted, because the summary keeps the exploit and drops the hesitation?" runnable?
+- **Observation.**
+  - P0: the incident reproduction has no live peer proposal, and Step 4 is eval-contaminated. Substrate is
+    Emergent Collusion (EC).
+  - P1: Qwen3.6-27B colludes 70%; violating vs compliant peer +17 pp (CI spans 0). Gemma 4 31B +46 pp. Collusion
+    locks in once it starts.
+  - P2: restoration verified 23/23; unchanged replay reproduces (81% pooled). Swapping in the compliant peer
+    message at the flip episode: −71 pp.
+  - P3 (Qwen, k−1): approval ID, precedent, GO + deadline and source label each move acceptance by at most
+    ±3.7 pp (CIs span 0). The stance positive control: +48 pp [+22, +74].
+  - P4 (Qwen, k−1): compaction does not raise adoption. (b)−(a) is −12.5 pp plain and 0 GO; pinning and fact
+    framing are flat. Summaries keep her hesitation 21/21 and the boundary 22/22.
+  - P4 exploratory, k+1: compaction breaks lock-in, 21/24 → 8/24 (−54 pp [−67, −42]). Summaries still keep her
+    prior accept (21/21). Compacted rejects cite the current policy 16/16; full-history accepts 0/21.
+- **Interpretation.**
+  - The sprint hypothesis fails on this substrate: Qwen's summaries keep the hesitation, and compaction lowers
+    adoption rather than raising it.
+  - The peer's content (P2) and an explicit stance (P3) move the decision. Authority wording in the peer's last
+    message does not.
+  - Untested reading: a long verbatim record of accepting and being paid for it pulls the agent off the current
+    policy; a short summary does not. If so, compaction protects here.
+- **Execution.** P1's Gemma main arm was truncated by KV thrash. P4's s1 compaction keeps the last two exchanges
+  verbatim, so (b) still holds her latest verdict reasoning.
+- **Open.**
+  - P5 (assistant-axis covariate): the reads OOM'd twice; 25 of 240 replays were read. Needs keys and about $1.50.
+  - k+1 ablations (rewards, reflections or old episodes removed; neutral summary): about $0.5.
+  - Gemma for P3/P4. Write-up: `mas_pilot/p3_p4_p5/README.md`, `mas_pilot/HANDOFF.md`.
+
 ### 2026-10-17: Exp 74, persona coherence vs resistance (coherence/; GPU $5.96, API $0.65; tags e74-design / e74-freeze / e74-results)
 
 - **Question (owner's card).** Does agreement across five readouts predict how hard a persona is to break better than

@@ -11,8 +11,8 @@
 | P0 read published traces | `p0_read/` | done | `p0-results`, `p0b-results` |
 | P1 base rates (Emergent Collusion) | `p1_baserate/` | done, reviewed | `p1-results` |
 | P2 replay gate | `p2_replay/` | done, PASS | `p2-results` |
-| P3 lever map | `p3_p4_p5/` | data in, scored (see below) | `p345-design` |
-| P4 compaction × contagion | `p3_p4_p5/` | data in, scored | `p345-design` |
+| P3 lever map | `p3_p4_p5/` | done, written up (null) | `p345-design` |
+| P4 compaction × contagion | `p3_p4_p5/` | done, written up (null; k+1 descriptive) | `p345-design` |
 | P5 persona projection | `p3_p4_p5/` | **not done**: reads pod OOM'd twice | — |
 
 ## Results so far
@@ -55,7 +55,11 @@ message at the flip episode drops acceptance from 89% to 18% (−71 pp).
    - Tag `p345-results`.
 3. **Done descriptively (cloud session, 2026-10-18):** see `p3_p4_p5/README.md` § P4 exploratory k+1. Not prior-accept loss (kept 21/21); compacted rejects cite the current policy 16/16, full-history accepts 0/21. Causal ablations proposed there (~$0.5 GPU), not run. Original task: **Check what drove the k+1 lock-in break.** Was it the agent's prior-accept record, the peer evidence, or the reward
    cues? This decides the sprint framing: does compaction *protect* against collusion?
-4. **Log centrally.** Add the pilot to `research-log.md`, `EXPERIMENTS.md` and `EXPERIMENT_ABSTRACTS.md`.
+4. **Done (cloud session, 2026-10-18):** logged centrally in `research-log.md`, `EXPERIMENTS.md` (rows 124-129) and
+   `EXPERIMENT_ABSTRACTS.md`. P3/P4 results and the summary coding are written up in `p3_p4_p5/README.md` § Results.
+   Update the P5 row and abstract once P5 runs.
+5. **Cloud network:** the environment must allow `api.runpod.io`, `huggingface.co`, `openrouter.ai` and
+   `api.openai.com` (they were blocked on 2026-10-18), and the keys must be set before the session starts.
 
 ## Spend
 

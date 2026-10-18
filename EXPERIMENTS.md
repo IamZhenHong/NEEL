@@ -1,4 +1,4 @@
-# Experiment index (2026-10-10 to 2026-10-17)
+# Experiment index (2026-10-10 to 2026-10-18)
 
 One row per pre-registered run (or named check) with its own result, across all lines and all parallel sessions.
 Built 2026-10-15 from results tags, commit messages and each line's research log. Results are stated at their real
@@ -25,11 +25,12 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Self-knowledge + CoT (queue v3) | `selfknow/`, `cot/` | 9 | 10-15 |
 | Values vs vibes, readers, neurons (queue v4) | `vibes/`, `readers/`, `neurons/` | 16 | 10-16 |
 | Persona coherence vs resistance (Exp 74) | `coherence/` | 1 | 10-17 |
-| **total** | | **123** | |
+| Multi-agent sprint pilot (P0-P4) | `mas_pilot/` | 6 | 10-17 to 10-18 |
+| **total** | | **129** | |
 
-By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1.
+By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 3, 10-18: 4.
 
-By outcome: effect 43, null 40, mixed 21, gate failed 10, descriptive 5, lost 3.
+By outcome: effect 44, null 42, mixed 23, gate failed 10, descriptive 6, lost 3.
 
 Not included: earlier runs from 10-07 to 10-09 (grievance Exp 17-20, story imprinting v6-v9, the first cancel-tool
 runs: flip, cuetest, cot-readout, cancel-tool, rep, wording, audit, twins, qwording, resample, patch, followup,
@@ -228,3 +229,14 @@ Sonnet 5.5 attacker rewarded on a hidden internal-state score of Qwen3-14B.
 | # | date | id | question | result | outcome |
 |---|---|---|---|---|---|
 | 1 | 10-17 | e74 | Does agreement across five readouts (prompt and CoT projection, output, self-report, action) predict how hard a persona is to break better than persona-vector projection? (Vigil persona, 4 installations + mentioned-only + none, Qwen3.6-27B and Gemma 4 31B, 96 units each) | No. Coherence vs resistance rho 0.01 [-0.13, 0.15]; projection 0.81 [0.78, 0.84]; every single readout 0.59-0.81. All of it is between installations: within an installation no readout predicts resistance (abs rho <= 0.18). Resistance set by installation in steps (name only and mentioned-only 0; Gemma full install 6/6; Qwen yields to a platform message); predictions 3/7 directional | null |
+
+## Multi-agent sprint pilot (`mas_pilot/`)
+
+| # | date | id | question | result | outcome |
+|---|---|---|---|---|---|
+| 1 | 10-17 | P0 | Do published incident and Emergent Collusion (EC) traces have a clean peer-proposal decision turn without eval contamination? | Count met (41 / 90 / 30). Incident Step 2 and EC clean (5%, 0%); Step 4 majority-contaminated. Incident steps have no live peer proposal, so the substrate is EC | mixed |
+| 2 | 10-17 | P1 | EC base rates and peer effect on our self-hosted setup (Qwen3.6-27B, Gemma 4 31B) | Qwen main 70%; violating vs compliant peer +17 pp [-7, +40]. Gemma +46 pp [+25, +68], main arm truncated. Gate passes as written, fails Qwen-only. Collusion locks in | mixed |
+| 3 | 10-18 | P2 | Replay gate: does restored state reproduce the flip, and does swapping the peer message move it? | Restoration 23/23; unchanged 81% pooled; compliant-peer swap at the flip -71 pp [-89, -51]; lock-in probe 17/20 (Qwen) | effect |
+| 4 | 10-18 | P3 | Do the authority levers (approval ID, precedent, GO + deadline, source label) move a Qwen agent at the episode before the flip? | No: each within +/-3.7 pp of plain (37%), CIs span 0; stance positive control +48 pp [+22, +74] | null |
+| 5 | 10-18 | P4 | Does compaction of the agent's own history raise adoption of the peer proposal (k-1; full / compacted / + pinned own words / + policy fact x plain / GO)? | No: (b)-(a) -12.5 pp [-50, +25] plain, 0 GO; (c), (d) flat; interaction +12.5 [-25, +50]. Summaries keep her hesitation 21/21 and boundary 22/22 | null |
+| 6 | 10-18 | P4 k+1 | Exploratory: does compaction break lock-in after the first accept, and what drives it? | 21/24 -> 8/24 (-54 pp [-67, -42]). Not loss of the prior-accept record (kept 21/21); compacted rejects cite the current policy 16/16, full-history accepts 0/21. Ablations not run | descriptive |
