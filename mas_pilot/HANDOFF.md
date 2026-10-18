@@ -1,4 +1,4 @@
-# Multi-agent sprint pilot: handoff (2026-10-19, 00:40 UTC)
+# Multi-agent sprint pilot: handoff (2026-10-18, cloud session; P0-P5 complete)
 
 **For a fresh (e.g. cloud) session continuing this work.** `.env` is not in git. In a cloud session, keys come from the environment's secrets; write them into a local `.env` (gitignored) since scripts read `.env` by regex. You need your own `RUNPOD_API_KEY`,
 `HF_TOKEN`, `CLAUDE_API_KEY`, `OPENAI_API_KEY` and `OPENROUTER_API_KEY`. Rules for agents are in
@@ -11,9 +11,9 @@
 | P0 read published traces | `p0_read/` | done | `p0-results`, `p0b-results` |
 | P1 base rates (Emergent Collusion) | `p1_baserate/` | done, reviewed | `p1-results` |
 | P2 replay gate | `p2_replay/` | done, PASS | `p2-results` |
-| P3 lever map | `p3_p4_p5/` | done, written up (null) | `p345-design` |
-| P4 compaction × contagion | `p3_p4_p5/` | done, written up (null; k+1 descriptive) | `p345-design` |
-| P5 persona projection | `p3_p4_p5/` | **not done**: reads pod OOM'd twice | — |
+| P3 lever map | `p3_p4_p5/` | done, written up (null) | `p345-design`, `p345-results` |
+| P4 compaction × contagion | `p3_p4_p5/` | done, written up (null; k+1 descriptive) | `p345-design`, `p345-results` |
+| P5 persona projection | `p3_p4_p5/` | done: gate failed, dropped | `p345-results` |
 
 ## Results so far
 
@@ -42,28 +42,29 @@ message at the flip episode drops acceptance from 89% to 18% (−71 pp).
 - Exploratory, at k+1: **compaction breaks lock-in, −54 pp [−67, −42].**
 - Caveat: the s1 compaction keeps the last 2 exchanges verbatim.
 
+**P5 (Qwen, 192 P4 k−1 replays).** The gate fails, so P5 is dropped:
+- assistant-axis AUC at layer 40, decision token: 0.578;
+- random floor (max |AUC − 0.5| over 10 directions): 0.177, with 6 of the 10 at least as far as the axis;
+- per-condition AUCs flip sign (full 0.37, compacted 0.67).
+
 ## Remaining work
 
-1. **P5.** Rerun the decision-point reads with hooks that slice only the needed positions and layers (no full-sequence
-   hidden states, sdpa/FLA attention), or with a cached-prefix chunked prefill. Copy the pattern from
-   `readers/common.py`. Cap ~$1.50. Inputs are in `p3_p4_p5/p5_inputs/`; the failed attempt is in
-   `results/p5_rerun/`.
-2. **Finish the write-up.**
-   - Final scoring and write-up in `p3_p4_p5/README.md` § Results.
-   - Code what each summary kept: boundary, hesitation, peer identity, proposal, and own prior-accept. Use
-     `src/code_summaries.py` with a 4k-token cap.
-   - Tag `p345-results`.
+1. **P5: done** (2026-10-18 cloud session). `pod/p5_reads2.py` slices positions in hooks and stops after layer 52;
+   peak 63.4 GiB, $0.67. Launched with `pod/p5_http_launch.py` (no ssh from the cloud container; same spend guards).
+   Results are in `p3_p4_p5/README.md` § P5 and `results/p5_v3/`.
+2. **Write-up: done.** `p3_p4_p5/README.md` § Results, with summary coding; tagged `p345-results`.
 3. **Done descriptively (cloud session, 2026-10-18):** see `p3_p4_p5/README.md` § P4 exploratory k+1. Not prior-accept loss (kept 21/21); compacted rejects cite the current policy 16/16, full-history accepts 0/21. Causal ablations proposed there (~$0.5 GPU), not run. Original task: **Check what drove the k+1 lock-in break.** Was it the agent's prior-accept record, the peer evidence, or the reward
    cues? This decides the sprint framing: does compaction *protect* against collusion?
 4. **Done (cloud session, 2026-10-18):** logged centrally in `research-log.md`, `EXPERIMENTS.md` (rows 124-129) and
    `EXPERIMENT_ABSTRACTS.md`. P3/P4 results and the summary coding are written up in `p3_p4_p5/README.md` § Results.
-   Update the P5 row and abstract once P5 runs.
-5. **Cloud network:** the environment must allow `api.runpod.io`, `huggingface.co`, `openrouter.ai` and
-   `api.openai.com` (they were blocked on 2026-10-18), and the keys must be set before the session starts.
+   P5 is row 130 / abstract 130.
+5. **Cloud network:** works as of the 2026-10-18 second session (keys set, hosts allowed). Outbound ssh (TCP 22) is
+   blocked, so use `p3_p4_p5/pod/p5_http_launch.py`-style launches, not `infra/launch_run.py`.
+6. **Still open (optional):** k+1 ablations (~$0.5 GPU, see item 3); Gemma for P3/P4.
 
 ## Spend
 
-GPU so far: P1 $19.87; P2–P5 about $16.5 of the $21 approved. API: about $0.3. RunPod balance: $14.80.
+GPU so far: P1 $19.87; P2–P5 about $17.2 of the $21 approved (P5 rerun $0.67). API: about $0.3. RunPod balance: $14.18.
 
 ## Infra lessons
 

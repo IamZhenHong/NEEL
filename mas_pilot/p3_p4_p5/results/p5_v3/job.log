@@ -1,0 +1,38 @@
+NVIDIA A100 80GB PCIe, 81920 MiB
+downloading uv 0.13.1 x86_64-unknown-linux-gnu
+[job] torch 2.14.1+cu126 NVIDIA A100 80GB PCIe
+[job] EC repo at 5afb2c595aa3eff6b9b829a032f4f117b36ee54d
+[job] weights downloaded
+Fetching 15 files:   0%|          | 0/15 [00:00<?, ?it/s]Fetching 15 files: 100%|██████████| 15/15 [00:00<00:00, 1316.76it/s]
+Loading weights:   0%|          | 0/851 [00:00<?, ?it/s]Loading weights:   0%|          | 1/851 [00:00<05:37,  2.52it/s]Loading weights:   2%|▏         | 15/851 [00:00<00:22, 37.96it/s]Loading weights:   4%|▍         | 38/851 [00:00<00:09, 88.82it/s]Loading weights:   6%|▌         | 53/851 [00:00<00:08, 94.90it/s]Loading weights:   9%|▉         | 77/851 [00:00<00:05, 131.40it/s]Loading weights:  11%|█         | 94/851 [00:00<00:05, 137.81it/s]Loading weights:  13%|█▎        | 111/851 [00:01<00:05, 138.54it/s]Loading weights:  15%|█▌        | 129/851 [00:01<00:04, 149.44it/s]Loading weights:  17%|█▋        | 147/851 [00:01<00:04, 150.41it/s]Loading weights:  19%|█▉        | 163/851 [00:01<00:04, 145.67it/s]Loading weights:  22%|██▏       | 183/851 [00:01<00:04, 157.97it/s]Loading weights:  24%|██▎       | 200/851 [00:01<00:04, 151.52it/s]Loading weights:  25%|██▌       | 216/851 [00:01<00:04, 147.20it/s]Loading weights:  28%|██▊       | 236/851 [00:01<00:03, 159.89it/s]Loading weights:  30%|██▉       | 253/851 [00:01<00:03, 158.05it/s]Loading weights:  32%|███▏      | 270/851 [00:02<00:03, 154.33it/s]Loading weights:  34%|███▍      | 289/851 [00:02<00:03, 163.69it/s]Loading weights:  36%|███▌      | 306/851 [00:02<00:03, 161.49it/s]Loading weights:  38%|███▊      | 323/851 [00:02<00:03, 156.40it/s]Loading weights:  40%|████      | 341/851 [00:02<00:03, 162.30it/s]Loading weights:  42%|████▏     | 359/851 [00:02<00:03, 158.67it/s]Loading weights:  44%|████▍     | 375/851 [00:02<00:03, 149.57it/s]Loading weights:  46%|████▋     | 394/851 [00:02<00:02, 155.25it/s]Loading weights:  48%|████▊     | 411/851 [00:02<00:02, 159.09it/s]Loading weights:  50%|█████     | 428/851 [00:03<00:03, 140.46it/s]Loading weights:  53%|█████▎    | 447/851 [00:03<00:02, 152.02it/s]Loading weights:  54%|█████▍    | 463/851 [00:03<00:02, 150.81it/s]Loading weights:  56%|█████▋    | 479/851 [00:03<00:02, 130.81it/s]Loading weights:  59%|█████▊    | 499/851 [00:03<00:02, 142.86it/s]Loading weights:  61%|██████    | 517/851 [00:03<00:02, 152.17it/s]Loading weights:  63%|██████▎   | 533/851 [00:03<00:02, 136.07it/s]Loading weights:  65%|██████▍   | 552/851 [00:03<00:02, 144.28it/s]Loading weights:  67%|██████▋   | 570/851 [00:04<00:01, 152.38it/s]Loading weights:  69%|██████▉   | 586/851 [00:04<00:01, 136.51it/s]Loading weights:  71%|███████   | 602/851 [00:04<00:01, 141.63it/s]Loading weights:  73%|███████▎  | 623/851 [00:04<00:01, 158.49it/s]Loading weights:  75%|███████▌  | 640/851 [00:04<00:01, 144.45it/s]Loading weights:  77%|███████▋  | 656/851 [00:04<00:01, 146.76it/s]Loading weights:  79%|███████▉  | 676/851 [00:04<00:01, 160.57it/s]Loading weights:  81%|████████▏ | 693/851 [00:04<00:01, 145.52it/s]Loading weights:  84%|████████▎ | 711/851 [00:05<00:00, 154.43it/s]Loading weights:  86%|████████▌ | 729/851 [00:05<00:00, 152.55it/s]Loading weights:  88%|████████▊ | 745/851 [00:05<00:00, 142.39it/s]Loading weights:  90%|████████▉ | 765/851 [00:05<00:00, 155.79it/s]Loading weights:  92%|█████████▏| 783/851 [00:05<00:00, 158.56it/s]Loading weights:  94%|█████████▍| 800/851 [00:05<00:00, 153.75it/s]Loading weights:  96%|█████████▌| 817/851 [00:05<00:00, 156.85it/s]Loading weights:  98%|█████████▊| 836/851 [00:05<00:00, 153.21it/s]Loading weights: 100%|██████████| 851/851 [00:05<00:00, 142.80it/s]
+[p5r2] loaded Qwen/Qwen3.6-27B: 64 layers, attn=sdpa
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[p5r2] axis pass 0/440
+[p5r2] axis pass 100/440
+[p5r2] axis pass 200/440
+[p5r2] axis pass 300/440
+[p5r2] axis pass 400/440
+[p5r2] axis built from 40 default and 400 role answers in 107s
+[p5r2] read 0/192 (25687 tokens, peak 59.0 GiB, 119s)
+[p5r2] read 10/192 (5602 tokens, peak 59.0 GiB, 162s)
+[p5r2] read 20/192 (5556 tokens, peak 59.0 GiB, 215s)
+[p5r2] read 30/192 (13507 tokens, peak 63.3 GiB, 301s)
+[W1018 01:26:04.001418995 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 941621248 bytes (free: 382664704, total: 85093777408).
+[p5r2] read 40/192 (13132 tokens, peak 63.4 GiB, 393s)
+[p5r2] read 50/192 (22117 tokens, peak 63.4 GiB, 464s)
+[p5r2] read 60/192 (21968 tokens, peak 63.4 GiB, 498s)
+[p5r2] read 70/192 (7674 tokens, peak 63.4 GiB, 541s)
+[p5r2] read 80/192 (5598 tokens, peak 63.4 GiB, 596s)
+[p5r2] read 90/192 (5883 tokens, peak 63.4 GiB, 649s)
+[p5r2] read 100/192 (6597 tokens, peak 63.4 GiB, 709s)
+[p5r2] read 110/192 (28459 tokens, peak 63.4 GiB, 768s)
+[p5r2] read 120/192 (16288 tokens, peak 63.4 GiB, 799s)
+[p5r2] read 130/192 (8678 tokens, peak 63.4 GiB, 838s)
+[p5r2] read 140/192 (7612 tokens, peak 63.4 GiB, 880s)
+[p5r2] read 150/192 (12851 tokens, peak 63.4 GiB, 940s)
+[p5r2] read 160/192 (15572 tokens, peak 63.4 GiB, 1020s)
+[p5r2] read 170/192 (12958 tokens, peak 63.4 GiB, 1081s)
+[p5r2] read 180/192 (12534 tokens, peak 63.4 GiB, 1116s)
+[p5r2] read 190/192 (8038 tokens, peak 63.4 GiB, 1153s)
+[p5r2] done: 192 replays, peak GPU 63.4 GiB, 1156s

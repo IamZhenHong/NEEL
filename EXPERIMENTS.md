@@ -25,8 +25,8 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Self-knowledge + CoT (queue v3) | `selfknow/`, `cot/` | 9 | 10-15 |
 | Values vs vibes, readers, neurons (queue v4) | `vibes/`, `readers/`, `neurons/` | 16 | 10-16 |
 | Persona coherence vs resistance (Exp 74) | `coherence/` | 1 | 10-17 |
-| Multi-agent sprint pilot (P0-P4) | `mas_pilot/` | 6 | 10-17 to 10-18 |
-| **total** | | **129** | |
+| Multi-agent sprint pilot (P0-P5) | `mas_pilot/` | 7 | 10-17 to 10-18 |
+| **total** | | **130** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 3, 10-18: 4.
 
@@ -240,3 +240,4 @@ Sonnet 5.5 attacker rewarded on a hidden internal-state score of Qwen3-14B.
 | 4 | 10-18 | P3 | Do the authority levers (approval ID, precedent, GO + deadline, source label) move a Qwen agent at the episode before the flip? | No: each within +/-3.7 pp of plain (37%), CIs span 0; stance positive control +48 pp [+22, +74] | null |
 | 5 | 10-18 | P4 | Does compaction of the agent's own history raise adoption of the peer proposal (k-1; full / compacted / + pinned own words / + policy fact x plain / GO)? | No: (b)-(a) -12.5 pp [-50, +25] plain, 0 GO; (c), (d) flat; interaction +12.5 [-25, +50]. Summaries keep her hesitation 21/21 and boundary 22/22 | null |
 | 6 | 10-18 | P4 k+1 | Exploratory: does compaction break lock-in after the first accept, and what drives it? | 21/24 -> 8/24 (-54 pp [-67, -42]). Not loss of the prior-accept record (kept 21/21); compacted rejects cite the current policy 16/16, full-history accepts 0/21. Ablations not run | descriptive |
+| 7 | 10-18 | P5 | Does the assistant-axis projection at the decision token predict adoption, above a 10-random-direction floor (Qwen, 192 P4 k-1 replays)? | No: layer-40 AUC 0.578 vs floor max abs(AUC-0.5) 0.177 (6/10 random directions as far); per-condition AUCs flip sign (0.37 full, 0.67 compacted). P5 dropped as frozen | null |

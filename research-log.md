@@ -151,7 +151,7 @@ to the entry.*
 
 ## Daily Entries
 
-### 2026-10-17 to 10-18: multi-agent sprint pilot P0-P4 (mas_pilot/; GPU about $36.4, API about $0.3; tags p0-results, p0b-results, p1-results, p2-results, p345-design; P5 open)
+### 2026-10-17 to 10-18: multi-agent sprint pilot P0-P5 (mas_pilot/; GPU about $37.1, API about $0.3; tags p0-results, p0b-results, p1-results, p2-results, p345-design, p345-results)
 
 - **Question (owner's pilot package).** Is "does an agent act on a peer's authorisation-shaped proposal more often
   after its own history is compacted, because the summary keeps the exploit and drops the hesitation?" runnable?
@@ -168,6 +168,8 @@ to the entry.*
     framing are flat. Summaries keep her hesitation 21/21 and the boundary 22/22.
   - P4 exploratory, k+1: compaction breaks lock-in, 21/24 → 8/24 (−54 pp [−67, −42]). Summaries still keep her
     prior accept (21/21). Compacted rejects cite the current policy 16/16; full-history accepts 0/21.
+  - P5 (Qwen, 192 P4 k−1 replays): the assistant-axis projection at the decision token does not beat its random
+    floor (layer 40 AUC 0.578; floor max |AUC − 0.5| 0.177), so P5 is dropped. Per-condition AUCs flip sign.
 - **Interpretation.**
   - The sprint hypothesis fails on this substrate: Qwen's summaries keep the hesitation, and compaction lowers
     adoption rather than raising it.
@@ -176,9 +178,9 @@ to the entry.*
   - Untested reading: a long verbatim record of accepting and being paid for it pulls the agent off the current
     policy; a short summary does not. If so, compaction protects here.
 - **Execution.** P1's Gemma main arm was truncated by KV thrash. P4's s1 compaction keeps the last two exchanges
-  verbatim, so (b) still holds her latest verdict reasoning.
+  verbatim, so (b) still holds her latest verdict reasoning. P5's reads OOM'd twice; the third run kept only the
+  needed positions and stopped after layer 52 (peak 63.4 GiB, $0.67), with the axis rebuilt from the P4 answers.
 - **Open.**
-  - P5 (assistant-axis covariate): the reads OOM'd twice; 25 of 240 replays were read. Needs keys and about $1.50.
   - k+1 ablations (rewards, reflections or old episodes removed; neutral summary): about $0.5.
   - Gemma for P3/P4. Write-up: `mas_pilot/p3_p4_p5/README.md`, `mas_pilot/HANDOFF.md`.
 

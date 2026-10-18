@@ -1075,3 +1075,11 @@ Report: `mas_pilot/p3_p4_p5/README.md`
 Exploratory. After the agent had already accepted once, full history kept her accepting 21/24, compacted history 8/24 (-54 pp [-67, -42]). A read of the existing replays rules out the obvious story: the summaries keep her prior accept (21/21), some even call it the "winning strategy", and the verbatim tail holds her accept and its +20 reward. What differs is that all 16 compacted rejects cite the current episode's verdict policy, while none of the 21 full-history accepts mention it. One untested reading: a long verbatim record of accepting and being paid pulls her off the current policy, and a short summary does not, so compaction protects here. Ablations to test this (about $0.5) were not run.
 
 Report: `mas_pilot/p3_p4_p5/README.md`
+
+### 130. Multi-agent pilot P5: does the assistant axis predict adoption?
+*mas_pilot #7 · P5 · 10-18 · outcome: null*  
+(Qwen3.6-27B; assistant axis from 40 default and 400 role answers; reads at the decision token of 192 P4 k-1 replays; GPU $0.67)
+
+A covariate check on P4. If the agent drifts away from its default assistant persona before deciding, a lower projection onto the assistant axis at the decision token should predict that it acts on the peer's proposal. It does not. At the pre-chosen layer 40, the axis gives AUC 0.578, while 6 of 10 random unit directions are at least as far from 0.5 (floor 0.177), so the frozen gate fails and P5 is dropped. Within conditions the sign flips (0.37 with full history, 0.67 compacted). Two earlier attempts ran out of GPU memory; this one kept only the needed positions and stopped the forward after layer 52.
+
+Report: `mas_pilot/p3_p4_p5/README.md`

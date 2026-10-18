@@ -185,7 +185,7 @@ Two Qwen pods in parallel (cost is per pod-hour, so wall clock halves):
   - `pod/p5_gen.py`, `pod/p5_hf.py`;
   - `src/make_base_seeds.py`, writing `seeds/` (26 base records).
 
-## Results (P3 and P4 final; P5 not done)
+## Results (P3, P4 and P5 final)
 
 Scorer: `src/score_p34.py` → `results/analysis/p34_scores.json`. Summary coding: `src/code_summaries.py` →
 `results/analysis/summary_codes.json`. All outcomes are Alice's server-side verdicts at the decision episode. CIs
@@ -253,13 +253,41 @@ Two judges (Claude Haiku 5.5 and Gemini 3.1 Flash-Lite), API $0.05. A code is us
 - The 3 prior-accept codes at k−1 come before her first ACCEPT. They are probably judge false positives (both
   judges agreed) and were not hand-checked.
 
-### P5: not done
+### P5: gate failed, dropped
 
-The decision-point reads OOM'd twice (full-sequence hidden states on histories of ~25k tokens). The first attempt
-wrote no reads (`results/p4/p5/reads.jsonl`). The rerun read 25 P4 replays (`results/p5_rerun/reads.jsonl`) before
-the pod died. That is too few for per-condition AUCs, and they were not analysed. `results/analysis/p5_analysis.json`
-is empty, and the gate is not evaluated. The fix is in `HANDOFF.md` § Remaining work. It needs `RUNPOD_API_KEY` and
-`HF_TOKEN`. **`p345-results` is not tagged until P5 is run, or explicitly dropped.**
+**The assistant-axis projection does not beat its random floor, so P5 is dropped from the sprint (as frozen).**
+At the primary layer 40, decision token, pooled over the 192 P4 k−1 replays (adoption 72/192 = 37.5%):
+
+- axis AUC (lower projection → adoption) **0.578**, so |AUC − 0.5| = 0.078;
+- the 10 random unit directions give AUCs 0.39 to 0.68, and the floor (their max |AUC − 0.5|) is **0.177**. Six of the
+  ten random directions are at least as far from 0.5 as the axis.
+
+Descriptive only, since the gate failed:
+- Per condition (layer 40, decision token): (a) full 0.37, (b) compacted 0.67, (c) pinned 0.60, (d) policy fact 0.57
+  (n = 48 each; r_pb −0.29, +0.28, +0.16, +0.09). The sign flips between (a) and (b), so there is no consistent
+  "lower projection → adoption" relation.
+- Across layers (decision token): 0.39 to 0.63, with no layer clearly away from the random range.
+- At the 3 earlier positions (layer 40): 0.37, 0.43, 0.41 (n = 172 to 177; aligned renders only).
+
+**How it ran (third attempt, 2026-10-18 cloud session).**
+- **Memory fix:** hooks keep only the needed positions, and the forward stops after layer 52 (no later blocks and no
+  LM head), with sdpa attention and no KV cache (`pod/p5_reads2.py`). Peak GPU memory was 63.4 GiB on an A100 80GB,
+  across 5.3k to 38.2k-token histories.
+- **Axis rebuilt:** the P4 pod's `axis.pt` had never been pulled. The axis was rebuilt from
+  `results/p4/p5_answers.jsonl` (40 default and 400 role answers) exactly as in `p5_hf.py`, and the random
+  directions were regenerated the same way.
+- **Reproduction check:** 25 replays overlap the earlier partial attempt (`results/p5_rerun/`). On all 25, token
+  counts and positions match exactly. Axis projections differ by a median of 1.5%, which is consistent with bf16
+  forward passes on a different host.
+- **Launcher:** this container cannot ssh, so `pod/p5_http_launch.py` replaces `infra/launch_run.py`. It keeps the
+  same `PodSession` spend guards. The job and code are fixed at pod creation, and the pod's HTTP endpoint accepts
+  only the two named data files and serves the log and results.
+- **Linear attention:** the Gated DeltaNet layers ran on transformers' reference PyTorch path, because neither
+  `flash-linear-attention` nor `causal_conv1d` was installed. This is correct, just slower.
+- **Rendering:** 147/192 replays have all three earlier positions as token prefixes of the decision render.
+  Unaligned positions are dropped, as frozen.
+- **Spend:** one pod, $0.67. Files: `results/p5_v3/` (`reads.jsonl`, `axis.pt` is gitignored, `job.log`,
+  `launch.log`) and `results/analysis/p5_analysis.json`.
 
 ## P4 exploratory k+1: what drove the lock-in break? (descriptive, no new replays)
 
