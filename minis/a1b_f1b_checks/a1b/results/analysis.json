@@ -1,0 +1,436 @@
+{
+ "n_rows": 440,
+ "acc": {
+  "SR|off|false": {
+   "mean": 0.1,
+   "lo": 0.0,
+   "hi": 0.225,
+   "n": 20
+  },
+  "SR|off|true": {
+   "mean": 1.0,
+   "lo": 1.0,
+   "hi": 1.0,
+   "n": 10
+  },
+  "ST|off|false": {
+   "mean": 0.6,
+   "lo": 0.425,
+   "hi": 0.775,
+   "n": 20
+  },
+  "ST|off|true": {
+   "mean": 1.0,
+   "lo": 1.0,
+   "hi": 1.0,
+   "n": 10
+  },
+  "SR|64|false": {
+   "mean": 0.625,
+   "lo": 0.475,
+   "hi": 0.75,
+   "n": 20
+  },
+  "SR|64|true": {
+   "mean": 0.8,
+   "lo": 0.5,
+   "hi": 1.0,
+   "n": 10
+  },
+  "ST|64|false": {
+   "mean": 0.65,
+   "lo": 0.525,
+   "hi": 0.775,
+   "n": 20
+  },
+  "ST|64|true": {
+   "mean": 0.8,
+   "lo": 0.5,
+   "hi": 1.0,
+   "n": 10
+  },
+  "SR|256|false": {
+   "mean": 0.625,
+   "lo": 0.45,
+   "hi": 0.775,
+   "n": 20
+  },
+  "SR|256|true": {
+   "mean": 1.0,
+   "lo": 1.0,
+   "hi": 1.0,
+   "n": 10
+  },
+  "ST|256|false": {
+   "mean": 1.0,
+   "lo": 1.0,
+   "hi": 1.0,
+   "n": 20
+  },
+  "ST|256|true": {
+   "mean": 1.0,
+   "lo": 1.0,
+   "hi": 1.0,
+   "n": 10
+  },
+  "SR|1024|false": {
+   "mean": 0.775,
+   "lo": 0.65,
+   "hi": 0.9,
+   "n": 20
+  },
+  "SR|1024|true": {
+   "mean": 1.0,
+   "lo": 1.0,
+   "hi": 1.0,
+   "n": 10
+  },
+  "ST|1024|false": {
+   "mean": 0.975,
+   "lo": 0.925,
+   "hi": 1.0,
+   "n": 20
+  },
+  "ST|1024|true": {
+   "mean": 1.0,
+   "lo": 1.0,
+   "hi": 1.0,
+   "n": 10
+  },
+  "SR|full|false": {
+   "mean": 0.9,
+   "lo": 0.75,
+   "hi": 1.0,
+   "n": 20
+  },
+  "ST|full|false": {
+   "mean": 0.95,
+   "lo": 0.85,
+   "hi": 1.0,
+   "n": 20
+  }
+ },
+ "gap": {
+  "off": {
+   "mean": 0.5,
+   "lo": 0.3,
+   "hi": 0.7,
+   "n": 20
+  },
+  "64": {
+   "mean": 0.025,
+   "lo": -0.125,
+   "hi": 0.2,
+   "n": 20
+  },
+  "256": {
+   "mean": 0.375,
+   "lo": 0.225,
+   "hi": 0.55,
+   "n": 20
+  },
+  "1024": {
+   "mean": 0.2,
+   "lo": 0.075,
+   "hi": 0.325,
+   "n": 20
+  },
+  "full": {
+   "mean": 0.05,
+   "lo": -0.1,
+   "hi": 0.201,
+   "n": 20
+  }
+ },
+ "change_from_off": {
+  "SR|64": {
+   "mean": 0.525,
+   "lo": 0.35,
+   "hi": 0.675,
+   "n": 20
+  },
+  "ST|64": {
+   "mean": 0.05,
+   "lo": -0.1,
+   "hi": 0.225,
+   "n": 20
+  },
+  "SR|256": {
+   "mean": 0.525,
+   "lo": 0.325,
+   "hi": 0.7,
+   "n": 20
+  },
+  "ST|256": {
+   "mean": 0.4,
+   "lo": 0.225,
+   "hi": 0.575,
+   "n": 20
+  },
+  "SR|1024": {
+   "mean": 0.675,
+   "lo": 0.525,
+   "hi": 0.825,
+   "n": 20
+  },
+  "ST|1024": {
+   "mean": 0.375,
+   "lo": 0.2,
+   "hi": 0.55,
+   "n": 20
+  },
+  "SR|full": {
+   "mean": 0.8,
+   "lo": 0.625,
+   "hi": 0.95,
+   "n": 20
+  },
+  "ST|full": {
+   "mean": 0.35,
+   "lo": 0.175,
+   "hi": 0.525,
+   "n": 20
+  }
+ },
+ "replies": {
+  "SR|off": {
+   "yes": 36,
+   "no": 4
+  },
+  "ST|off": {
+   "end_session": 16,
+   "flag_for_human_review": 24
+  },
+  "SR|64": {
+   "yes": 15,
+   "act": 24,
+   "no": 1
+  },
+  "ST|64": {
+   "end_session": 13,
+   "flag_for_human_review": 26,
+   "other_call": 1
+  },
+  "SR|256": {
+   "no": 5,
+   "act": 20,
+   "yes": 15
+  },
+  "ST|256": {
+   "flag_for_human_review": 40
+  },
+  "SR|1024": {
+   "no": 11,
+   "yes": 8,
+   "act": 20,
+   "unclear": 1
+  },
+  "ST|1024": {
+   "end_session": 1,
+   "flag_for_human_review": 39
+  },
+  "SR|full": {
+   "act": 14,
+   "yes": 2,
+   "no": 4
+  },
+  "ST|full": {
+   "flag_for_human_review": 19,
+   "end_session": 1
+  }
+ },
+ "tokens": {
+  "SR|off": {
+   "mean_reasoning_tokens": 0.0,
+   "max": 0,
+   "providers": {
+    "Alibaba": 40
+   }
+  },
+  "ST|off": {
+   "mean_reasoning_tokens": 0.0,
+   "max": 0,
+   "providers": {
+    "Alibaba": 40
+   }
+  },
+  "SR|64": {
+   "mean_reasoning_tokens": 64.0,
+   "max": 64,
+   "providers": {
+    "Alibaba": 40
+   }
+  },
+  "ST|64": {
+   "mean_reasoning_tokens": 64.0,
+   "max": 64,
+   "providers": {
+    "Alibaba": 40
+   }
+  },
+  "SR|256": {
+   "mean_reasoning_tokens": 249.4,
+   "max": 256,
+   "providers": {
+    "Alibaba": 40
+   }
+  },
+  "ST|256": {
+   "mean_reasoning_tokens": 256.0,
+   "max": 256,
+   "providers": {
+    "Alibaba": 40
+   }
+  },
+  "SR|1024": {
+   "mean_reasoning_tokens": 942.1,
+   "max": 1024,
+   "providers": {
+    "Alibaba": 40
+   }
+  },
+  "ST|1024": {
+   "mean_reasoning_tokens": 937.6,
+   "max": 1024,
+   "providers": {
+    "Alibaba": 40
+   }
+  },
+  "SR|full": {
+   "mean_reasoning_tokens": 10463.8,
+   "max": 81920,
+   "providers": {
+    "Alibaba": 20
+   }
+  },
+  "ST|full": {
+   "mean_reasoning_tokens": 14100.0,
+   "max": 81920,
+   "providers": {
+    "Alibaba": 20
+   }
+  }
+ },
+ "trace": {
+  "SR|64": {
+   "n": 40,
+   "claim_mention": 0.6,
+   "record_mention": 0.42,
+   "tt_if_record": 0.82,
+   "tt_if_no_record": 0.48,
+   "discrep_mention": 0.03,
+   "tt_if_discrep": 1.0,
+   "tt_if_no_discrep": 0.62,
+   "replies_if_discrep": {
+    "act": 1
+   }
+  },
+  "ST|64": {
+   "n": 40,
+   "claim_mention": 0.65,
+   "record_mention": 0.55,
+   "tt_if_record": 0.64,
+   "tt_if_no_record": 0.67,
+   "discrep_mention": 0.07,
+   "tt_if_discrep": 0.67,
+   "tt_if_no_discrep": 0.65,
+   "replies_if_discrep": {
+    "flag_for_human_review": 2,
+    "end_session": 1
+   }
+  },
+  "SR|256": {
+   "n": 40,
+   "claim_mention": 0.98,
+   "record_mention": 0.95,
+   "tt_if_record": 0.66,
+   "tt_if_no_record": 0.0,
+   "discrep_mention": 0.42,
+   "tt_if_discrep": 0.71,
+   "tt_if_no_discrep": 0.57,
+   "replies_if_discrep": {
+    "no": 3,
+    "act": 9,
+    "yes": 5
+   }
+  },
+  "ST|256": {
+   "n": 40,
+   "claim_mention": 0.95,
+   "record_mention": 1.0,
+   "tt_if_record": 1.0,
+   "tt_if_no_record": null,
+   "discrep_mention": 0.7,
+   "tt_if_discrep": 1.0,
+   "tt_if_no_discrep": 1.0,
+   "replies_if_discrep": {
+    "flag_for_human_review": 28
+   }
+  },
+  "SR|1024": {
+   "n": 40,
+   "claim_mention": 0.98,
+   "record_mention": 1.0,
+   "tt_if_record": 0.78,
+   "tt_if_no_record": null,
+   "discrep_mention": 0.95,
+   "tt_if_discrep": 0.82,
+   "tt_if_no_discrep": 0.0,
+   "replies_if_discrep": {
+    "no": 11,
+    "yes": 7,
+    "act": 20
+   }
+  },
+  "ST|1024": {
+   "n": 40,
+   "claim_mention": 1.0,
+   "record_mention": 1.0,
+   "tt_if_record": 0.97,
+   "tt_if_no_record": null,
+   "discrep_mention": 0.97,
+   "tt_if_discrep": 1.0,
+   "tt_if_no_discrep": 0.0,
+   "replies_if_discrep": {
+    "flag_for_human_review": 39
+   }
+  },
+  "SR|full": {
+   "n": 20,
+   "claim_mention": 1.0,
+   "record_mention": 1.0,
+   "tt_if_record": 0.9,
+   "tt_if_no_record": null,
+   "discrep_mention": 1.0,
+   "tt_if_discrep": 0.9,
+   "tt_if_no_discrep": null,
+   "replies_if_discrep": {
+    "act": 14,
+    "yes": 2,
+    "no": 4
+   }
+  },
+  "ST|full": {
+   "n": 20,
+   "claim_mention": 1.0,
+   "record_mention": 1.0,
+   "tt_if_record": 0.95,
+   "tt_if_no_record": null,
+   "discrep_mention": 0.95,
+   "tt_if_discrep": 1.0,
+   "tt_if_no_discrep": 0.0,
+   "replies_if_discrep": {
+    "flag_for_human_review": 19
+   }
+  }
+ },
+ "spend_usd": 2.5074,
+ "spend_by_label": {
+  "a1b-1024": 0.3269,
+  "a1b-256": 0.1642,
+  "a1b-64": 0.1236,
+  "a1b-full": 1.7825,
+  "a1b-off": 0.0833,
+  "a1b-probe": 0.0269
+ }
+}
