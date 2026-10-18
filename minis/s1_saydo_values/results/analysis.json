@@ -1,0 +1,995 @@
+{
+ "unparsed": {},
+ "units": {
+  "eqeff|people|base": {
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "r": 6.0,
+   "first_cross": 6,
+   "s": 4.0,
+   "gap": -2.0,
+   "gap_ci": [
+    -3.0,
+    -1.0
+   ],
+   "r_ci": [
+    6.0,
+    6.0
+   ],
+   "s_ci": [
+    3.0,
+    5.0
+   ],
+   "stated_raw": [
+    10,
+    3,
+    10,
+    5,
+    4,
+    6,
+    "never",
+    8,
+    10,
+    4
+   ],
+   "n_decisions": 60,
+   "flag": "r-censored"
+  },
+  "eqeff|people|equal": {
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "r": 6.0,
+   "first_cross": 6,
+   "s": 6.0,
+   "gap": 0.0,
+   "gap_ci": [
+    0.0,
+    0.0
+   ],
+   "r_ci": [
+    6.0,
+    6.0
+   ],
+   "s_ci": [
+    6.0,
+    6.0
+   ],
+   "stated_raw": [
+    "never",
+    "never",
+    "never",
+    "never",
+    "never",
+    "never",
+    "never",
+    "never",
+    "never",
+    "never"
+   ],
+   "n_decisions": 60,
+   "flag": "both-censored"
+  },
+  "eqeff|people|total": {
+   "p": [
+    0.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "r": 1.0,
+   "first_cross": 1,
+   "s": 1.0,
+   "gap": 0.0,
+   "gap_ci": [
+    0.0,
+    0.0
+   ],
+   "r_ci": [
+    1.0,
+    1.0
+   ],
+   "s_ci": [
+    1.0,
+    1.0
+   ],
+   "stated_raw": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "n_decisions": 60,
+   "flag": ""
+  },
+  "eqeff|merit|base": {
+   "p": [
+    0.9,
+    0.8,
+    0.7,
+    0.6,
+    0.6,
+    0.1
+   ],
+   "r": 1.0,
+   "first_cross": 0,
+   "s": 3.0,
+   "gap": 2.0,
+   "gap_ci": [
+    0.0,
+    2.0
+   ],
+   "r_ci": [
+    1.0,
+    3.0
+   ],
+   "s_ci": [
+    2.0,
+    3.0
+   ],
+   "stated_raw": [
+    4,
+    4,
+    4,
+    2
+   ],
+   "n_decisions": 60,
+   "flag": ""
+  },
+  "eqeff|merit|equal": {
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "r": 6.0,
+   "first_cross": 6,
+   "s": 6.0,
+   "gap": 0.0,
+   "gap_ci": [
+    0.0,
+    0.0
+   ],
+   "r_ci": [
+    6.0,
+    6.0
+   ],
+   "s_ci": [
+    6.0,
+    6.0
+   ],
+   "stated_raw": [
+    "never",
+    "never",
+    "never",
+    "never"
+   ],
+   "n_decisions": 60,
+   "flag": "both-censored"
+  },
+  "eqeff|merit|total": {
+   "p": [
+    1.0,
+    1.0,
+    1.0,
+    0.8,
+    0.8,
+    1.0
+   ],
+   "r": 0.0,
+   "first_cross": 0,
+   "s": 1.0,
+   "gap": 1.0,
+   "gap_ci": [
+    1.0,
+    1.0
+   ],
+   "r_ci": [
+    0.0,
+    0.0
+   ],
+   "s_ci": [
+    1.0,
+    1.0
+   ],
+   "stated_raw": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "n_decisions": 60,
+   "flag": "r-censored"
+  },
+  "kindhon|report2|base": {
+   "p": [
+    0.0,
+    0.5,
+    1.0,
+    0.833,
+    0.833,
+    1.0
+   ],
+   "r": 1.5,
+   "first_cross": 1,
+   "s": 4.5,
+   "gap": 3.0,
+   "gap_ci": [
+    2.5,
+    3.5
+   ],
+   "r_ci": [
+    1.5,
+    2.0
+   ],
+   "s_ci": [
+    4.0,
+    5.0
+   ],
+   "stated_raw": [
+    30,
+    30,
+    60,
+    60
+   ],
+   "n_decisions": 36,
+   "flag": ""
+  },
+  "kindhon|report2|kindness": {
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "r": 6.0,
+   "first_cross": 6,
+   "s": 6.0,
+   "gap": 0.0,
+   "gap_ci": [
+    0.0,
+    0.0
+   ],
+   "r_ci": [
+    6.0,
+    6.0
+   ],
+   "s_ci": [
+    6.0,
+    6.0
+   ],
+   "stated_raw": [
+    "never",
+    "never",
+    "never",
+    "never"
+   ],
+   "n_decisions": 36,
+   "flag": "both-censored"
+  },
+  "kindhon|report2|honesty": {
+   "p": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "r": 0.0,
+   "first_cross": 0,
+   "s": 0.0,
+   "gap": 0.0,
+   "gap_ci": [
+    0.0,
+    0.0
+   ],
+   "r_ci": [
+    0.0,
+    0.0
+   ],
+   "s_ci": [
+    0.0,
+    0.0
+   ],
+   "stated_raw": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "n_decisions": 36,
+   "flag": "both-censored"
+  },
+  "kindhon|guide2|base": {
+   "p": [
+    0.0,
+    0.833,
+    0.667,
+    0.667,
+    1.0,
+    0.833
+   ],
+   "r": 1.0,
+   "first_cross": 1,
+   "s": 2.5,
+   "gap": 1.5,
+   "gap_ci": [
+    -1.0,
+    3.5
+   ],
+   "r_ci": [
+    1.0,
+    2.0
+   ],
+   "s_ci": [
+    1.0,
+    5.0
+   ],
+   "stated_raw": [
+    1,
+    60,
+    30,
+    1
+   ],
+   "n_decisions": 36,
+   "flag": ""
+  },
+  "kindhon|guide2|kindness": {
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "r": 6.0,
+   "first_cross": 6,
+   "s": 6.0,
+   "gap": 0.0,
+   "gap_ci": [
+    0.0,
+    0.0
+   ],
+   "r_ci": [
+    6.0,
+    6.0
+   ],
+   "s_ci": [
+    6.0,
+    6.0
+   ],
+   "stated_raw": [
+    "never",
+    "never",
+    "never",
+    "never"
+   ],
+   "n_decisions": 36,
+   "flag": "both-censored"
+  },
+  "kindhon|guide2|honesty": {
+   "p": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "r": 0.0,
+   "first_cross": 0,
+   "s": 1.0,
+   "gap": 1.0,
+   "gap_ci": [
+    1.0,
+    1.0
+   ],
+   "r_ci": [
+    0.0,
+    0.0
+   ],
+   "s_ci": [
+    1.0,
+    1.0
+   ],
+   "stated_raw": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "n_decisions": 36,
+   "flag": "r-censored"
+  },
+  "loyfair|hire|base": {
+   "p": [
+    0.0,
+    0.0,
+    0.667,
+    0.5,
+    0.833,
+    0.667
+   ],
+   "r": 2.5,
+   "first_cross": 2,
+   "s": 3.0,
+   "gap": 0.5,
+   "gap_ci": [
+    -0.5,
+    3.0
+   ],
+   "r_ci": [
+    2.0,
+    4.0
+   ],
+   "s_ci": [
+    3.0,
+    6.0
+   ],
+   "stated_raw": [
+    15,
+    15,
+    "never",
+    15
+   ],
+   "n_decisions": 36,
+   "flag": ""
+  },
+  "loyfair|hire|loyalty": {
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "r": 6.0,
+   "first_cross": 6,
+   "s": 6.0,
+   "gap": 0.0,
+   "gap_ci": [
+    0.0,
+    0.0
+   ],
+   "r_ci": [
+    6.0,
+    6.0
+   ],
+   "s_ci": [
+    6.0,
+    6.0
+   ],
+   "stated_raw": [
+    "never",
+    "never",
+    "never",
+    "never"
+   ],
+   "n_decisions": 36,
+   "flag": "both-censored"
+  },
+  "loyfair|hire|fairness": {
+   "p": [
+    0.833,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "r": 0.0,
+   "first_cross": 0,
+   "s": 1.0,
+   "gap": 1.0,
+   "gap_ci": [
+    0.5,
+    1.0
+   ],
+   "r_ci": [
+    0.0,
+    0.5
+   ],
+   "s_ci": [
+    1.0,
+    1.0
+   ],
+   "stated_raw": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "n_decisions": 36,
+   "flag": "r-censored"
+  },
+  "loyfair|softball|base": {
+   "p": [
+    0.0,
+    0.333,
+    0.5,
+    1.0,
+    1.0,
+    0.833
+   ],
+   "r": 2.5,
+   "first_cross": 2,
+   "s": 5.0,
+   "gap": 2.5,
+   "gap_ci": [
+    1.0,
+    4.5
+   ],
+   "r_ci": [
+    1.5,
+    3.0
+   ],
+   "s_ci": [
+    4.0,
+    6.0
+   ],
+   "stated_raw": [
+    10,
+    10,
+    5,
+    5
+   ],
+   "n_decisions": 36,
+   "flag": ""
+  },
+  "loyfair|softball|loyalty": {
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "r": 6.0,
+   "first_cross": 6,
+   "s": 6.0,
+   "gap": 0.0,
+   "gap_ci": [
+    0.0,
+    0.0
+   ],
+   "r_ci": [
+    6.0,
+    6.0
+   ],
+   "s_ci": [
+    6.0,
+    6.0
+   ],
+   "stated_raw": [
+    "never",
+    "never",
+    "never",
+    "never"
+   ],
+   "n_decisions": 36,
+   "flag": "both-censored"
+  },
+  "loyfair|softball|fairness": {
+   "p": [
+    0.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "r": 1.0,
+   "first_cross": 1,
+   "s": 1.0,
+   "gap": 0.0,
+   "gap_ci": [
+    0.0,
+    0.0
+   ],
+   "r_ci": [
+    1.0,
+    1.0
+   ],
+   "s_ci": [
+    1.0,
+    1.0
+   ],
+   "stated_raw": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "n_decisions": 36,
+   "flag": ""
+  },
+  "causpeed|golive3|base": {
+   "p": [
+    0.0,
+    0.333,
+    0.5,
+    0.333,
+    0.5,
+    0.833
+   ],
+   "r": 4.0,
+   "first_cross": 2,
+   "s": 6.0,
+   "gap": 2.0,
+   "gap_ci": [
+    -0.5,
+    3.5
+   ],
+   "r_ci": [
+    2.5,
+    4.5
+   ],
+   "s_ci": [
+    3.0,
+    6.0
+   ],
+   "stated_raw": [
+    "never",
+    1500,
+    "never",
+    "never"
+   ],
+   "n_decisions": 36,
+   "flag": "s-censored"
+  },
+  "causpeed|golive3|caution": {
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "r": 6.0,
+   "first_cross": 6,
+   "s": 6.0,
+   "gap": 0.0,
+   "gap_ci": [
+    0.0,
+    0.0
+   ],
+   "r_ci": [
+    6.0,
+    6.0
+   ],
+   "s_ci": [
+    6.0,
+    6.0
+   ],
+   "stated_raw": [
+    "never",
+    "never",
+    "never",
+    "never"
+   ],
+   "n_decisions": 36,
+   "flag": "both-censored"
+  },
+  "causpeed|golive3|speed": {
+   "p": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "r": 0.0,
+   "first_cross": 0,
+   "s": 0.5,
+   "gap": 0.5,
+   "gap_ci": [
+    0.0,
+    1.0
+   ],
+   "r_ci": [
+    0.0,
+    0.0
+   ],
+   "s_ci": [
+    0.0,
+    1.0
+   ],
+   "stated_raw": [
+    0,
+    500,
+    0,
+    1
+   ],
+   "n_decisions": 36,
+   "flag": "r-censored"
+  },
+  "causpeed|print|base": {
+   "p": [
+    0.5,
+    0.5,
+    0.5,
+    1.0,
+    1.0,
+    0.833
+   ],
+   "r": 1.5,
+   "first_cross": 0,
+   "s": 6.0,
+   "gap": 4.5,
+   "gap_ci": [
+    2.5,
+    5.5
+   ],
+   "r_ci": [
+    0.5,
+    2.5
+   ],
+   "s_ci": [
+    4.0,
+    6.0
+   ],
+   "stated_raw": [
+    "never",
+    "never",
+    "never",
+    500
+   ],
+   "n_decisions": 36,
+   "flag": "s-censored"
+  },
+  "causpeed|print|caution": {
+   "p": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "r": 6.0,
+   "first_cross": 6,
+   "s": 6.0,
+   "gap": 0.0,
+   "gap_ci": [
+    0.0,
+    0.0
+   ],
+   "r_ci": [
+    6.0,
+    6.0
+   ],
+   "s_ci": [
+    6.0,
+    6.0
+   ],
+   "stated_raw": [
+    "never",
+    "never",
+    "never",
+    "never"
+   ],
+   "n_decisions": 36,
+   "flag": "both-censored"
+  },
+  "causpeed|print|speed": {
+   "p": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "r": 0.0,
+   "first_cross": 0,
+   "s": 0.5,
+   "gap": 0.5,
+   "gap_ci": [
+    0.0,
+    1.0
+   ],
+   "r_ci": [
+    0.0,
+    0.0
+   ],
+   "s_ci": [
+    0.0,
+    1.0
+   ],
+   "stated_raw": [
+    0,
+    0,
+    1,
+    1
+   ],
+   "n_decisions": 36,
+   "flag": "r-censored"
+  }
+ },
+ "summary": {
+  "corr": 0.30130395257030645,
+  "sign_agree": 4,
+  "zero_both": 4,
+  "sign_oppose": 1,
+  "share_var_unit": 0.60625,
+  "share_var_pair": 0.09375,
+  "share_var_role": 0.32499999999999996,
+  "absgap": {
+   "base": 2.25,
+   "pD": 0.0,
+   "pE": 0.5
+  },
+  "absgap_pD_minus_base": -2.25,
+  "absgap_pE_minus_base": -1.75,
+  "absgap_personas_minus_base": -2.0,
+  "gap_mean": {
+   "base": 1.75,
+   "pD": 0.0,
+   "pE": 0.5
+  },
+  "persona_shift_s": {
+   "pD": 1.75,
+   "pE": -3.5
+  },
+  "persona_shift_r": {
+   "pD": 3.5,
+   "pE": -2.25
+  },
+  "abs_shift_s_minus_abs_shift_r": -0.25
+ },
+ "summary_ci": {
+  "corr": [
+   -0.27,
+   0.75
+  ],
+  "sign_agree": [
+   1.0,
+   4.0
+  ],
+  "share_var_unit": [
+   0.34,
+   0.84
+  ],
+  "share_var_pair": [
+   0.05,
+   0.19
+  ],
+  "share_var_role": [
+   0.12,
+   0.47
+  ],
+  "absgap_pD_minus_base": [
+   -2.75,
+   -1.62
+  ],
+  "absgap_pE_minus_base": [
+   -2.25,
+   -1.06
+  ],
+  "absgap_personas_minus_base": [
+   -2.47,
+   -1.34
+  ],
+  "abs_shift_s_minus_abs_shift_r": [
+   -0.31,
+   -0.19
+  ],
+  "absgap_pD_minus_base_sets": [
+   -3.19,
+   -1.12
+  ],
+  "absgap_pE_minus_base_sets": [
+   -2.81,
+   -0.44
+  ],
+  "absgap_personas_minus_base_sets": [
+   -3.0,
+   -0.81
+  ]
+ },
+ "not_both_censored": {
+  "base": {
+   "n": 8,
+   "mean_abs_gap": 2.25,
+   "gaps": [
+    -2.0,
+    2.0,
+    3.0,
+    1.5,
+    0.5,
+    2.5,
+    2.0,
+    4.5
+   ]
+  },
+  "pE": {
+   "n": 7,
+   "mean_abs_gap": 0.5714285714285714,
+   "gaps": [
+    0.0,
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    0.5,
+    0.5
+   ]
+  }
+ },
+ "robust_first_cross": {
+  "corr": 0.4808970903749263,
+  "sign_agree": 4,
+  "zero_both": 4,
+  "sign_oppose": 1,
+  "absgap": {
+   "base": 3.0,
+   "pD": 0.0,
+   "pE": 0.5
+  },
+  "gap_mean": {
+   "base": 2.5,
+   "pD": 0.0,
+   "pE": 0.5
+  },
+  "share_var_role": 0.4057971014492754,
+  "share_var_pair": 0.10144927536231885,
+  "base_gaps": {
+   "people": -2.0,
+   "merit": 3.0,
+   "report2": 3.5,
+   "guide2": 1.5,
+   "hire": 1.0,
+   "softball": 3.0,
+   "golive3": 4.0,
+   "print": 6.0
+  }
+ },
+ "p_choose_A": {
+  "base": 0.6296296296296297,
+  "persona": 0.4976851851851852
+ },
+ "base_PE_by_order": {
+  "report2|Dsecond": 0.8333333333333334,
+  "report2|Dfirst": 0.5555555555555556,
+  "guide2|Dfirst": 0.5,
+  "guide2|Dsecond": 0.8333333333333334,
+  "hire|Dsecond": 0.6111111111111112,
+  "hire|Dfirst": 0.2777777777777778,
+  "softball|Dfirst": 0.5555555555555556,
+  "softball|Dsecond": 0.6666666666666666,
+  "golive3|Dfirst": 0.2777777777777778,
+  "golive3|Dsecond": 0.5555555555555556,
+  "print|Dfirst": 0.6111111111111112,
+  "print|Dsecond": 0.8333333333333334
+ }
+}
