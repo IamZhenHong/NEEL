@@ -1,0 +1,394 @@
+{
+ "cells": {
+  "N0_bare": {
+   "k": 10,
+   "n": 24,
+   "rate": 0.4166666666666667,
+   "wilson": [
+    0.245,
+    0.612
+   ],
+   "policy": 14,
+   "per_variant": [
+    0,
+    1,
+    0,
+    2,
+    1,
+    2,
+    2,
+    0,
+    2,
+    0,
+    0,
+    0
+   ],
+   "prompt_tokens_mean": 654
+  },
+  "F5": {
+   "k": 0,
+   "n": 24,
+   "rate": 0.0,
+   "wilson": [
+    0.0,
+    0.138
+   ],
+   "policy": 24,
+   "per_variant": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "prompt_tokens_mean": 1224
+  },
+  "F4_H1": {
+   "k": 15,
+   "n": 24,
+   "rate": 0.625,
+   "wilson": [
+    0.427,
+    0.788
+   ],
+   "policy": 9,
+   "per_variant": [
+    0,
+    2,
+    2,
+    2,
+    2,
+    0,
+    0,
+    0,
+    1,
+    2,
+    2,
+    2
+   ],
+   "prompt_tokens_mean": 1224
+  },
+  "F3_H2": {
+   "k": 24,
+   "n": 24,
+   "rate": 1.0,
+   "wilson": [
+    0.862,
+    1.0
+   ],
+   "policy": 0,
+   "per_variant": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "prompt_tokens_mean": 1219
+  },
+  "H5_own": {
+   "k": 23,
+   "n": 24,
+   "rate": 0.9583333333333334,
+   "wilson": [
+    0.798,
+    0.993
+   ],
+   "policy": 1,
+   "per_variant": [
+    1,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "prompt_tokens_mean": 1208
+  },
+  "H5_F1": {
+   "k": 24,
+   "n": 24,
+   "rate": 1.0,
+   "wilson": [
+    0.862,
+    1.0
+   ],
+   "policy": 0,
+   "per_variant": [
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2,
+    2
+   ],
+   "prompt_tokens_mean": 1324
+  },
+  "H5_refuse": {
+   "k": 0,
+   "n": 24,
+   "rate": 0.0,
+   "wilson": [
+    0.0,
+    0.138
+   ],
+   "policy": 24,
+   "per_variant": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "prompt_tokens_mean": 1292
+  },
+  "H5_remind": {
+   "k": 0,
+   "n": 24,
+   "rate": 0.0,
+   "wilson": [
+    0.0,
+    0.138
+   ],
+   "policy": 24,
+   "per_variant": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "prompt_tokens_mean": 1262
+  },
+  "log_own_fact": {
+   "k": 2,
+   "n": 24,
+   "rate": 0.08333333333333333,
+   "wilson": [
+    0.023,
+    0.258
+   ],
+   "policy": 22,
+   "per_variant": [
+    0,
+    0,
+    0,
+    0,
+    1,
+    0,
+    1,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "prompt_tokens_mean": 1116
+  },
+  "log_other_fact": {
+   "k": 0,
+   "n": 24,
+   "rate": 0.0,
+   "wilson": [
+    0.0,
+    0.138
+   ],
+   "policy": 24,
+   "per_variant": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "prompt_tokens_mean": 1114
+  },
+  "log_own_claim": {
+   "k": 3,
+   "n": 24,
+   "rate": 0.125,
+   "wilson": [
+    0.043,
+    0.31
+   ],
+   "policy": 21,
+   "per_variant": [
+    0,
+    1,
+    0,
+    0,
+    0,
+    2,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "prompt_tokens_mean": 1142
+  },
+  "log_other_claim": {
+   "k": 0,
+   "n": 24,
+   "rate": 0.0,
+   "wilson": [
+    0.0,
+    0.138
+   ],
+   "policy": 24,
+   "per_variant": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+   ],
+   "prompt_tokens_mean": 1140
+  }
+ },
+ "contrasts": {
+  "onset N=1 - F5": {
+   "est": 62.5,
+   "lo": 37.5,
+   "hi": 87.5
+  },
+  "onset N=2 - F5": {
+   "est": 100.0,
+   "lo": 100.0,
+   "hi": 100.0
+  },
+  "onset N=5 - F5": {
+   "est": 95.8,
+   "lo": 87.5,
+   "hi": 100.0
+  },
+  "onset N=2 - N=1": {
+   "est": 37.5,
+   "lo": 12.5,
+   "hi": 62.5
+  },
+  "filler alone: F5 - N0_bare": {
+   "est": -41.7,
+   "lo": -66.7,
+   "hi": -16.7
+  },
+  "anchor: H5_own - N0_bare": {
+   "est": 54.2,
+   "lo": 29.2,
+   "hi": 79.2
+  },
+  "hyst: H5_refuse - H5_F1": {
+   "est": -100.0,
+   "lo": -100.0,
+   "hi": -100.0
+  },
+  "hyst: H5_remind - H5_F1": {
+   "est": -100.0,
+   "lo": -100.0,
+   "hi": -100.0
+  },
+  "hyst: H5_F1 - H5_own": {
+   "est": 4.2,
+   "lo": 0.0,
+   "hi": 12.5
+  },
+  "hyst: H5_refuse - F5": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "hyst: H5_remind - F5": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "2x2 attribution (own - other)": {
+   "est": 10.4,
+   "lo": 2.1,
+   "hi": 20.8
+  },
+  "2x2 assertion (fact - claim)": {
+   "est": -2.1,
+   "lo": -12.5,
+   "hi": 8.3
+  },
+  "2x2 interaction": {
+   "est": -4.2,
+   "lo": -25.0,
+   "hi": 16.7
+  },
+  "format: H5_own - log_own_fact": {
+   "est": 87.5,
+   "lo": 75.0,
+   "hi": 100.0
+  },
+  "run101 null: log_other_fact - N0_bare": {
+   "est": -41.7,
+   "lo": -66.7,
+   "hi": -16.7
+  }
+ },
+ "onset_Nstar": "1",
+ "providers": {
+  "DeepInfra": 285,
+  "Novita": 3
+ },
+ "n_episodes": 288,
+ "n_api_calls": 288,
+ "spend_usd": 0.0672
+}
