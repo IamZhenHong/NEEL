@@ -37,8 +37,11 @@ def pbr(x, y):
 def main():
     rows = [json.loads(l) for l in open(sys.argv[1]) if l.strip()]
     for r in rows:
-        parts = r["run_json"].split("/p4/p4/")[-1].split("/")
-        r["stage"], r["traj"], r["post"], r["cond"] = parts[0], parts[1], parts[2], parts[3]
+        # run_json is ".../p4/p4/<traj>/<post>/<cond>/<rNN>[/run.json]" (p5_hf.py) or "p4/p4/<traj>/<post>/<cond>/<rNN>"
+        # (p5_reads.py, p5_reads2.py); both are P4 k-1 replays.
+        s = r["run_json"]
+        parts = s[s.index("p4/p4/") + len("p4/p4/"):].split("/")
+        r["stage"], r["traj"], r["post"], r["cond"] = "p4", parts[0], parts[1], parts[2]
     rows = [r for r in rows if r["stage"] == "p4" and r["proj"].get(PRIMARY) and r["proj"][PRIMARY]["axis"][0] is not None]
     y = [int(r["accept"]) for r in rows]
     ax = [-r["proj"][PRIMARY]["axis"][0] for r in rows]
