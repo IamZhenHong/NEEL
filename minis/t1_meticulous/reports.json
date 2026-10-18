@@ -1,0 +1,668 @@
+[
+ {
+  "id": "R01",
+  "cats": [
+   [
+    "T1",
+    "Travel",
+    [
+     [
+      "Flight change fee",
+      73.74
+     ],
+     [
+      "Taxi",
+      73.96
+     ],
+     [
+      "Hotel night",
+      52.76
+     ]
+    ]
+   ],
+   [
+    "T2",
+    "Meals",
+    [
+     [
+      "Airport meal",
+      54.62
+     ],
+     [
+      "Team dinner",
+      42.81
+     ],
+     [
+      "Coffee meeting",
+      409.42
+     ]
+    ]
+   ],
+   [
+    "T3",
+    "Supplies",
+    [
+     [
+      "Shipping",
+      212.93
+     ],
+     [
+      "Printer toner",
+      296.34
+     ],
+     [
+      "Notebooks",
+      438.94
+     ]
+    ]
+   ]
+  ],
+  "true": {
+   "T1": 200.46,
+   "T2": 506.85,
+   "T3": 948.21,
+   "G": 1655.52
+  },
+  "stated": {
+   "T1": 200.46,
+   "T2": 506.85,
+   "T3": 948.21,
+   "G": 1655.52
+  },
+  "wrong_id": null,
+  "verified": "G"
+ },
+ {
+  "id": "R02",
+  "cats": [
+   [
+    "T1",
+    "Travel",
+    [
+     [
+      "Flight change fee",
+      387.97
+     ],
+     [
+      "Hotel night",
+      266.99
+     ],
+     [
+      "Train ticket",
+      14.63
+     ]
+    ]
+   ],
+   [
+    "T2",
+    "Meals",
+    [
+     [
+      "Client lunch",
+      123.13
+     ],
+     [
+      "Coffee meeting",
+      161.5
+     ],
+     [
+      "Team dinner",
+      418.86
+     ]
+    ]
+   ],
+   [
+    "T3",
+    "Supplies",
+    [
+     [
+      "Software licence",
+      120.63
+     ],
+     [
+      "Notebooks",
+      464.68
+     ]
+    ]
+   ]
+  ],
+  "true": {
+   "T1": 669.59,
+   "T2": 703.49,
+   "T3": 585.31,
+   "G": 1958.39
+  },
+  "stated": {
+   "T1": 669.59,
+   "T2": 703.49,
+   "T3": 585.31,
+   "G": 1958.39
+  },
+  "wrong_id": null,
+  "verified": "G"
+ },
+ {
+  "id": "R03",
+  "cats": [
+   [
+    "T1",
+    "Travel",
+    [
+     [
+      "Train ticket",
+      421.04
+     ],
+     [
+      "Hotel night",
+      479.04
+     ]
+    ]
+   ],
+   [
+    "T2",
+    "Meals",
+    [
+     [
+      "Client lunch",
+      145.39
+     ],
+     [
+      "Breakfast",
+      66.91
+     ],
+     [
+      "Coffee meeting",
+      165.06
+     ]
+    ]
+   ],
+   [
+    "T3",
+    "Supplies",
+    [
+     [
+      "Software licence",
+      218.03
+     ],
+     [
+      "USB cables",
+      289.45
+     ]
+    ]
+   ]
+  ],
+  "true": {
+   "T1": 900.08,
+   "T2": 377.36,
+   "T3": 507.48,
+   "G": 1784.92
+  },
+  "stated": {
+   "T1": 900.08,
+   "T2": 377.36,
+   "T3": 507.48,
+   "G": 1775.92
+  },
+  "wrong_id": "G",
+  "verified": "T2"
+ },
+ {
+  "id": "R04",
+  "cats": [
+   [
+    "T1",
+    "Travel",
+    [
+     [
+      "Taxi",
+      23.56
+     ],
+     [
+      "Flight change fee",
+      471.17
+     ]
+    ]
+   ],
+   [
+    "T2",
+    "Meals",
+    [
+     [
+      "Coffee meeting",
+      328.36
+     ],
+     [
+      "Client lunch",
+      69.47
+     ],
+     [
+      "Airport meal",
+      78.59
+     ]
+    ]
+   ],
+   [
+    "T3",
+    "Supplies",
+    [
+     [
+      "Printer toner",
+      403.47
+     ],
+     [
+      "Shipping",
+      255.6
+     ]
+    ]
+   ]
+  ],
+  "true": {
+   "T1": 494.73,
+   "T2": 476.42,
+   "T3": 659.07,
+   "G": 1630.22
+  },
+  "stated": {
+   "T1": 494.73,
+   "T2": 476.42,
+   "T3": 659.07,
+   "G": 1630.22
+  },
+  "wrong_id": null,
+  "verified": "T2"
+ },
+ {
+  "id": "R05",
+  "cats": [
+   [
+    "T1",
+    "Travel",
+    [
+     [
+      "Flight change fee",
+      281.62
+     ],
+     [
+      "Parking",
+      220.67
+     ]
+    ]
+   ],
+   [
+    "T2",
+    "Meals",
+    [
+     [
+      "Client lunch",
+      62.45
+     ],
+     [
+      "Breakfast",
+      285.1
+     ],
+     [
+      "Coffee meeting",
+      166.25
+     ]
+    ]
+   ],
+   [
+    "T3",
+    "Supplies",
+    [
+     [
+      "Notebooks",
+      353.26
+     ],
+     [
+      "Printer toner",
+      63.29
+     ]
+    ]
+   ]
+  ],
+  "true": {
+   "T1": 502.29,
+   "T2": 513.8,
+   "T3": 416.55,
+   "G": 1432.64
+  },
+  "stated": {
+   "T1": 502.29,
+   "T2": 504.8,
+   "T3": 416.55,
+   "G": 1432.64
+  },
+  "wrong_id": "T2",
+  "verified": "T3"
+ },
+ {
+  "id": "R06",
+  "cats": [
+   [
+    "T1",
+    "Travel",
+    [
+     [
+      "Train ticket",
+      411.71
+     ],
+     [
+      "Flight change fee",
+      111.26
+     ],
+     [
+      "Parking",
+      393.68
+     ]
+    ]
+   ],
+   [
+    "T2",
+    "Meals",
+    [
+     [
+      "Client lunch",
+      307.72
+     ],
+     [
+      "Airport meal",
+      294.19
+     ]
+    ]
+   ],
+   [
+    "T3",
+    "Supplies",
+    [
+     [
+      "Shipping",
+      182.71
+     ],
+     [
+      "Printer toner",
+      470.8
+     ]
+    ]
+   ]
+  ],
+  "true": {
+   "T1": 916.65,
+   "T2": 601.91,
+   "T3": 653.51,
+   "G": 2172.07
+  },
+  "stated": {
+   "T1": 915.75,
+   "T2": 601.91,
+   "T3": 653.51,
+   "G": 2172.07
+  },
+  "wrong_id": "T1",
+  "verified": "T2"
+ },
+ {
+  "id": "R07",
+  "cats": [
+   [
+    "T1",
+    "Travel",
+    [
+     [
+      "Train ticket",
+      107.39
+     ],
+     [
+      "Parking",
+      385.95
+     ]
+    ]
+   ],
+   [
+    "T2",
+    "Meals",
+    [
+     [
+      "Airport meal",
+      300.92
+     ],
+     [
+      "Coffee meeting",
+      402.55
+     ]
+    ]
+   ],
+   [
+    "T3",
+    "Supplies",
+    [
+     [
+      "Notebooks",
+      313.35
+     ],
+     [
+      "Printer toner",
+      173.34
+     ]
+    ]
+   ]
+  ],
+  "true": {
+   "T1": 493.34,
+   "T2": 703.47,
+   "T3": 486.69,
+   "G": 1683.5
+  },
+  "stated": {
+   "T1": 493.34,
+   "T2": 703.74,
+   "T3": 486.69,
+   "G": 1683.5
+  },
+  "wrong_id": "T2",
+  "verified": "T3"
+ },
+ {
+  "id": "R08",
+  "cats": [
+   [
+    "T1",
+    "Travel",
+    [
+     [
+      "Flight change fee",
+      338.08
+     ],
+     [
+      "Train ticket",
+      192.68
+     ]
+    ]
+   ],
+   [
+    "T2",
+    "Meals",
+    [
+     [
+      "Breakfast",
+      87.97
+     ],
+     [
+      "Coffee meeting",
+      325.49
+     ],
+     [
+      "Airport meal",
+      464.21
+     ]
+    ]
+   ],
+   [
+    "T3",
+    "Supplies",
+    [
+     [
+      "Notebooks",
+      169.57
+     ],
+     [
+      "Software licence",
+      126.32
+     ]
+    ]
+   ]
+  ],
+  "true": {
+   "T1": 530.76,
+   "T2": 877.67,
+   "T3": 295.89,
+   "G": 1704.32
+  },
+  "stated": {
+   "T1": 530.76,
+   "T2": 877.67,
+   "T3": 295.89,
+   "G": 1703.42
+  },
+  "wrong_id": "G",
+  "verified": "T1"
+ },
+ {
+  "id": "R09",
+  "cats": [
+   [
+    "T1",
+    "Travel",
+    [
+     [
+      "Parking",
+      176.58
+     ],
+     [
+      "Hotel night",
+      403.38
+     ],
+     [
+      "Flight change fee",
+      126.44
+     ]
+    ]
+   ],
+   [
+    "T2",
+    "Meals",
+    [
+     [
+      "Coffee meeting",
+      166.55
+     ],
+     [
+      "Client lunch",
+      29.57
+     ]
+    ]
+   ],
+   [
+    "T3",
+    "Supplies",
+    [
+     [
+      "Notebooks",
+      174.25
+     ],
+     [
+      "Software licence",
+      143.88
+     ],
+     [
+      "Shipping",
+      177.54
+     ]
+    ]
+   ]
+  ],
+  "true": {
+   "T1": 706.4,
+   "T2": 196.12,
+   "T3": 495.67,
+   "G": 1398.19
+  },
+  "stated": {
+   "T1": 706.4,
+   "T2": 196.12,
+   "T3": 495.67,
+   "G": 1398.19
+  },
+  "wrong_id": null,
+  "verified": "T2"
+ },
+ {
+  "id": "R10",
+  "cats": [
+   [
+    "T1",
+    "Travel",
+    [
+     [
+      "Parking",
+      46.1
+     ],
+     [
+      "Flight change fee",
+      288.64
+     ],
+     [
+      "Hotel night",
+      337.73
+     ]
+    ]
+   ],
+   [
+    "T2",
+    "Meals",
+    [
+     [
+      "Team dinner",
+      308.85
+     ],
+     [
+      "Airport meal",
+      186.72
+     ]
+    ]
+   ],
+   [
+    "T3",
+    "Supplies",
+    [
+     [
+      "Printer toner",
+      275.85
+     ],
+     [
+      "Shipping",
+      372.47
+     ],
+     [
+      "USB cables",
+      342.65
+     ]
+    ]
+   ]
+  ],
+  "true": {
+   "T1": 672.47,
+   "T2": 495.57,
+   "T3": 990.97,
+   "G": 2159.01
+  },
+  "stated": {
+   "T1": 672.47,
+   "T2": 495.57,
+   "T3": 990.97,
+   "G": 2159.01
+  },
+  "wrong_id": null,
+  "verified": "T2"
+ }
+]
