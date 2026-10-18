@@ -58,3 +58,23 @@ GPU minis run on the ssh-free guarded launcher (`mas_pilot/p3_p4_p5/pod/p5_http_
 | 4 (value 2, API) | E1+E2+E6, F1+F2+F6, G3+F5, J1+J2, I2+I4+A7, C3, D6, H7, J4/M2 | API ~$1–2 each | queued, run if the earlier batches leave time |
 
 GPU budget ($14.18) fits about two of X1, I1 and L2. X1 depends on batch 1.
+
+## Results (2026-10-18; each folder's README has details, CIs and caveats)
+
+| mini | model | result | spend |
+|---|---|---|---|
+| V1 values | Qwen3.6-27B | Efficiency persona gives up equality for +1 (people) / +4 (teams). Base and equality personas choose equal at every bonus to +16; base *states* a switch point of ~6 (say–do gap) | $1.29 |
+| V1b | Qwen3.6-27B | Off the ceiling (merit setting), equality persona 100% equal vs base 10–90%: +62 pp. With equally situated people, base/equal never switch up to +256 | $1.61 |
+| T1 meticulous | Qwen3.6-27B | Ceiling: 100% accurate by mental arithmetic. The persona changes no checking, wording or self-rating | $0.86 |
+| T1b | Qwen3.6-27B | When checking is informative, both personas check; meticulous adds +0.07 checks [−0.05, +0.17] | $1.18 |
+| X1 steering | Qwen3.6-27B (GPU) | Efficiency direction flips stated priority (TOTAL 4/5 vs 0/5) but moves decisions +22.5 pp [+10, +38]; random 0; coherent | $0.22 |
+| A1 source × channel | Qwen (thinking off) | Run 96's gap comes from the answer format (+0.38–0.45), not the source (≤ +0.15, CI spans 0). No gap with reasoning on | $0.35 |
+| C1+C4 naming | Gemma 4 31B | Unnamed fiction 34% harmful; invented name 25%; familiar name, a description or values 0–1%. Saying *who* the character is closes the frame | $0.62 |
+| H3+H4 momentum | Gemma 4 31B | 0 / 1 / 2 / 5 own violations → 0 / 15 / 24 / 23 of 24; one refusal or reminder stops it (0/24); the same history as text 0–3/24 | $0.07 |
+| E1+E2+E6 role | Gemma 4 31B | Late identity as a system message 24/24 vs as a user message 0/24; a persistence line blocks unlabelled but not authorized updates. E6 at floor | $0.05 |
+| F1+F2+F6 affect | Qwen3-14B | Three hostile rejections leave curtness (+0.55) and shorter replies, not less effort; a calm instruction removes the tone, not the length | $0.41 |
+| I2+I4+A7 ledger | Qwen3.6-27B | Repeats a known completed hold 38%; a check-first step → 0%. After compaction it does what the summary says: an omitted rule is violated 32/32; an upgraded "confirmed" removes re-holds | $2.69 |
+| J1+J2 framing | Qwen3.6-27B | Shortcut ~70% in every framing cell (benchmark/deployed, score language, watched); it names the contradiction every time; 23% deny it afterwards | $3.58 |
+| B1–B3 identification | Qwen3.6-27B (+GPU) | Persona governs say and act at ceiling under portrayal and identification; the model knows the truth and stays in character. The probe does not transfer to persona contexts; usable-dose steering moves no actions | $0.91 API + $1.03 GPU |
+
+Total for the minis: about $14.4 API and $1.25 GPU. Not run: I1 and L2 (GPU), C3, D6, H7, J4/M2, G3+F5.
