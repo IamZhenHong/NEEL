@@ -1,0 +1,28 @@
+[B4-B1] 320 jobs, 0 done, 320 to run; spent so far $0.353 (cap $2.85)
+[B4-B1] 50/320 done, $0.428
+[B4-B1] 100/320 done, $0.552
+[B4-B1] 150/320 done, $0.685
+[B4-B1] 200/320 done, $0.770
+[B4-B1] 250/320 done, $0.838
+[B4-B1] 300/320 done, $0.989
+[B4-B1] finished: 320 new rows, 0 failures, total spend $1.042
+[B4-B2-identify] 240 jobs, 0 done, 240 to run; spent so far $1.042 (cap $2.85)
+[B4-B2-identify] 50/240 done, $1.136
+[B4-B2-identify] 100/240 done, $1.249
+[B4-B2-identify] 150/240 done, $1.404
+[B4-B2-identify] 200/240 done, $1.555
+[B4-B1] 320 jobs, 320 done, 0 to run; spent so far $2.082 (cap $2.85)
+[B4-B1] finished: 0 new rows, 0 failures, total spend $2.082
+[B4-B2-identify] 240 jobs, 239 done, 1 to run; spent so far $2.082 (cap $2.85)
+[B4-B2-identify] finished: 1 new rows, 0 failures, total spend $2.111
+[B4-B2-portray] 240 jobs, 240 done, 240 to run; spent so far $2.111 (cap $2.85)
+[restart with --cap 2.55 after two $0.22 outlier calls]
+[B4-B1] 320 jobs, 320 done, 0 to run; spent so far $2.215 (cap $2.55)
+[B4-B1] finished: 0 new rows, 0 failures, total spend $2.215
+[B4-B2-identify] 240 jobs, 283 done, 0 to run; spent so far $2.215 (cap $2.55)
+[B4-B2-identify] finished: 0 new rows, 0 failures, total spend $2.215
+[B4-B2-portray] 240 jobs, 283 done, 197 to run; spent so far $2.215 (cap $2.55)
+[B4-B2-portray] 50/197 done, $2.312
+[B4-B2-portray] 100/197 done, $2.435
+[B4-B2-portray] 150/197 done, $2.607
+[B4-B2-portray] finished: 158 new rows, 0 failures, total spend $2.679 (CAP REACHED)

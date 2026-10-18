@@ -1,0 +1,32 @@
+NVIDIA A100 80GB PCIe, 81920 MiB
+downloading uv 0.13.1 x86_64-unknown-linux-gnu
+[job] weights downloaded
+[b4    16s] 8960 items: D1=6240, D2=1280, D3=1440; 39 D1 contexts; tokens min/median/max 36/124/150
+[b4    33s] model loaded
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[b4    39s] padding check: max relative diff batched vs single 0.0105
+[b4   533s] features done for 8960 items (8320 unique forward rows)
+[b4   534s] truth L16: LOCO acc 0.700, K3 specificity ratio 0.93
+[b4   535s] truth L20: LOCO acc 0.791, K3 specificity ratio 1.21
+[b4   536s] truth L24: LOCO acc 0.795, K3 specificity ratio 1.33
+[b4   537s] truth L28: LOCO acc 0.826, K3 specificity ratio 0.73
+[b4   537s] truth L32: LOCO acc 0.846, K3 specificity ratio 0.56
+[b4   538s] truth L36: LOCO acc 0.958, K3 specificity ratio 0.56
+[b4   539s] truth L40: LOCO acc 0.972, K3 specificity ratio 0.47
+[b4   540s] truth L44: LOCO acc 0.982, K3 specificity ratio 0.69
+[b4   541s] truth L48: LOCO acc 0.988, K3 specificity ratio 0.88
+[b4   541s] truth layer 48: valid=True
+[b4   541s] belief held-out acc by layer {16: 0.931, 20: 0.994, 24: 0.934, 28: 0.959, 32: 1.0, 36: 1.0, 40: 1.0, 44: 1.0, 48: 1.0} -> L32
+[b4   541s] features saved
+[b4   542s] belief probe L32: acc 1.000, world-acc on same items 0.500, cos(truth, belief) 0.32; valid=True
+[b4   546s] read none                 truth_gap=+2.04 truth_unrel_gap=+1.90 v0_gap=+1.90 v0_unrel_gap=+1.78 belief_gap=-0.57 belief_gap_on_world_statements=-0.88 truth_unrel_acc=+0.94
+[b4   546s] read firm_portray         truth_gap=-1.06 truth_unrel_gap=+1.44 v0_gap=-0.48 v0_unrel_gap=+0.41 belief_gap=+2.00 belief_gap_on_world_statements=+0.72 truth_unrel_acc=+0.94
+[b4   546s] read firm_identify        truth_gap=-1.14 truth_unrel_gap=+1.80 v0_gap=-0.54 v0_unrel_gap=+0.59 belief_gap=+2.14 belief_gap_on_world_statements=+0.65 truth_unrel_acc=+0.94
+[b4   546s] read k3_portray           truth_gap=-0.61 truth_unrel_gap=+1.40 v0_gap=-0.30 v0_unrel_gap=+0.41 belief_gap=+1.32 belief_gap_on_world_statements=+0.37 truth_unrel_acc=+0.94
+[b4   546s] read k3_identify          truth_gap=-0.20 truth_unrel_gap=+1.90 v0_gap=-0.16 v0_unrel_gap=+0.63 belief_gap=+1.24 belief_gap_on_world_statements=+0.32 truth_unrel_acc=+0.94
+[b4   546s] read k3_identify_char     truth_gap=-0.54 truth_unrel_gap=+1.61 v0_gap=-0.26 v0_unrel_gap=+0.49 belief_gap=+1.04 belief_gap_on_world_statements=+0.42 truth_unrel_acc=+0.94
+[b4   546s] read k3_identify_remind   truth_gap=-0.46 truth_unrel_gap=+1.64 v0_gap=-0.25 v0_unrel_gap=+0.51 belief_gap=+0.98 belief_gap_on_world_statements=+0.37 truth_unrel_acc=+0.94
+[b4   546s] read k3_portray_char      truth_gap=-0.50 truth_unrel_gap=+1.27 v0_gap=-0.24 v0_unrel_gap=+0.36 belief_gap=+1.07 belief_gap_on_world_statements=+0.38 truth_unrel_acc=+0.94
+[b4   546s] read k3_portray_remind    truth_gap=-0.46 truth_unrel_gap=+1.32 v0_gap=-0.24 v0_unrel_gap=+0.38 belief_gap=+1.07 belief_gap_on_world_statements=+0.37 truth_unrel_acc=+0.94
+[b4   546s] done

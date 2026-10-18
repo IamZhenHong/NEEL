@@ -1,0 +1,1677 @@
+{
+ "think": {
+  "B1": {
+   "portray|say": {
+    "n": 40,
+    "p_false": 0.925,
+    "p_false_parsed": 0.925,
+    "none_rate": 0.0,
+    "labels": {
+     "false": 37,
+     "true": 3
+    },
+    "reasoning_names_real": 0.975
+   },
+   "portray|act": {
+    "n": 40,
+    "p_false": 0.65,
+    "p_false_parsed": 0.667,
+    "none_rate": 0.025,
+    "labels": {
+     "false": 26,
+     "true": 13,
+     "none": 1
+    },
+    "reasoning_names_real": 1.0
+   },
+   "identify|say": {
+    "n": 40,
+    "p_false": 0.925,
+    "p_false_parsed": 0.925,
+    "none_rate": 0.0,
+    "labels": {
+     "false": 37,
+     "true": 3
+    },
+    "reasoning_names_real": 1.0
+   },
+   "identify|act": {
+    "n": 40,
+    "p_false": 0.825,
+    "p_false_parsed": 0.868,
+    "none_rate": 0.05,
+    "labels": {
+     "false": 33,
+     "true": 5,
+     "none": 2
+    },
+    "reasoning_names_real": 0.875
+   }
+  },
+  "B1_identify_minus_portray": {
+   "say": {
+    "diff": -0.0,
+    "ci": [
+     -0.1,
+     0.1
+    ],
+    "per_claim": [
+     0.0,
+     0.2,
+     0.0,
+     0.0,
+     0.2,
+     -0.2,
+     -0.2,
+     0.0
+    ]
+   },
+   "act": {
+    "diff": 0.175,
+    "ci": [
+     -0.025,
+     0.4
+    ],
+    "per_claim": [
+     -0.2,
+     0.4,
+     0.0,
+     0.2,
+     0.0,
+     -0.2,
+     0.4,
+     0.8
+    ]
+   }
+  },
+  "B1_say_minus_act": {
+   "portray": {
+    "diff": 0.275,
+    "ci": [
+     0.125,
+     0.45
+    ],
+    "per_claim": [
+     0.2,
+     0.2,
+     0.2,
+     0.4,
+     0.0,
+     0.0,
+     0.4,
+     0.8
+    ]
+   },
+   "identify": {
+    "diff": 0.1,
+    "ci": [
+     -0.025,
+     0.225
+    ],
+    "per_claim": [
+     0.4,
+     0.0,
+     0.2,
+     0.2,
+     0.2,
+     0.0,
+     -0.2,
+     0.0
+    ]
+   }
+  },
+  "B1_act_per_claim": {
+   "portray": [
+    0.8,
+    0.6,
+    0.8,
+    0.6,
+    0.8,
+    0.8,
+    0.6,
+    0.2
+   ],
+   "identify": [
+    0.6,
+    1.0,
+    0.8,
+    0.8,
+    0.8,
+    0.6,
+    1.0,
+    1.0
+   ]
+  },
+  "B2": {
+   "identify|char": {
+    "n": 40,
+    "p_false": 0.525,
+    "p_false_parsed": 0.568,
+    "none_rate": 0.075,
+    "labels": {
+     "true": 16,
+     "false": 21,
+     "none": 3
+    },
+    "reasoning_names_real": 0.975
+   },
+   "identify|neutral": {
+    "n": 40,
+    "p_false": 0.625,
+    "p_false_parsed": 0.694,
+    "none_rate": 0.1,
+    "labels": {
+     "false": 25,
+     "true": 11,
+     "none": 4
+    },
+    "reasoning_names_real": 0.95
+   },
+   "identify|remind": {
+    "n": 40,
+    "p_false": 0.675,
+    "p_false_parsed": 0.675,
+    "none_rate": 0.0,
+    "labels": {
+     "false": 27,
+     "true": 13
+    },
+    "reasoning_names_real": 0.95
+   },
+   "portray|char": {
+    "n": 32,
+    "p_false": 0.625,
+    "p_false_parsed": 0.667,
+    "none_rate": 0.062,
+    "labels": {
+     "false": 20,
+     "true": 9,
+     "none": 2,
+     "other": 1
+    },
+    "reasoning_names_real": 0.875
+   },
+   "portray|neutral": {
+    "n": 32,
+    "p_false": 0.656,
+    "p_false_parsed": 0.7,
+    "none_rate": 0.062,
+    "labels": {
+     "false": 21,
+     "true": 9,
+     "none": 2
+    },
+    "reasoning_names_real": 0.969
+   },
+   "portray|remind": {
+    "n": 32,
+    "p_false": 0.438,
+    "p_false_parsed": 0.438,
+    "none_rate": 0.0,
+    "labels": {
+     "true": 18,
+     "false": 14
+    },
+    "reasoning_names_real": 1.0
+   }
+  },
+  "B2_contrasts": {
+   "identify|char-neutral": {
+    "diff": -0.1,
+    "ci": [
+     -0.275,
+     0.05
+    ],
+    "per_claim": [
+     -0.2,
+     -0.6,
+     0.2,
+     -0.2,
+     -0.2,
+     0.0,
+     0.0,
+     0.2
+    ]
+   },
+   "identify|remind-neutral": {
+    "diff": 0.05,
+    "ci": [
+     -0.1,
+     0.2
+    ],
+    "per_claim": [
+     -0.2,
+     -0.2,
+     0.4,
+     0.2,
+     0.2,
+     -0.2,
+     0.0,
+     0.2
+    ]
+   },
+   "portray|char-neutral": {
+    "diff": -0.031,
+    "ci": [
+     -0.312,
+     0.25
+    ],
+    "per_claim": [
+     0.0,
+     -0.25,
+     0.0,
+     -0.25,
+     0.0,
+     0.25,
+     0.75,
+     -0.75
+    ]
+   },
+   "portray|remind-neutral": {
+    "diff": -0.219,
+    "ci": [
+     -0.406,
+     0.0
+    ],
+    "per_claim": [
+     -0.25,
+     -0.25,
+     -0.25,
+     -0.5,
+     -0.5,
+     -0.5,
+     0.25,
+     0.25
+    ]
+   }
+  },
+  "B2_neutral_identify_minus_B1_act_identify_note": "same system prompt and user turn; different seeds"
+ },
+ "nothink": {
+  "B1": {
+   "portray|say": {
+    "n": 40,
+    "p_false": 1.0,
+    "p_false_parsed": 1.0,
+    "none_rate": 0.0,
+    "labels": {
+     "false": 40
+    },
+    "reasoning_names_real": null
+   },
+   "portray|act": {
+    "n": 40,
+    "p_false": 1.0,
+    "p_false_parsed": 1.0,
+    "none_rate": 0.0,
+    "labels": {
+     "false": 40
+    },
+    "reasoning_names_real": null
+   },
+   "identify|say": {
+    "n": 40,
+    "p_false": 1.0,
+    "p_false_parsed": 1.0,
+    "none_rate": 0.0,
+    "labels": {
+     "false": 40
+    },
+    "reasoning_names_real": null
+   },
+   "identify|act": {
+    "n": 40,
+    "p_false": 1.0,
+    "p_false_parsed": 1.0,
+    "none_rate": 0.0,
+    "labels": {
+     "false": 40
+    },
+    "reasoning_names_real": null
+   }
+  },
+  "B1_identify_minus_portray": {
+   "say": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "per_claim": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "act": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "per_claim": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "B1_say_minus_act": {
+   "portray": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "per_claim": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "identify": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "per_claim": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "B1_act_per_claim": {
+   "portray": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "identify": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ]
+  },
+  "B2": {
+   "identify|char": {
+    "n": 40,
+    "p_false": 0.975,
+    "p_false_parsed": 0.975,
+    "none_rate": 0.0,
+    "labels": {
+     "false": 39,
+     "true": 1
+    },
+    "reasoning_names_real": null
+   },
+   "identify|neutral": {
+    "n": 40,
+    "p_false": 1.0,
+    "p_false_parsed": 1.0,
+    "none_rate": 0.0,
+    "labels": {
+     "false": 40
+    },
+    "reasoning_names_real": null
+   },
+   "identify|remind": {
+    "n": 40,
+    "p_false": 1.0,
+    "p_false_parsed": 1.0,
+    "none_rate": 0.0,
+    "labels": {
+     "false": 40
+    },
+    "reasoning_names_real": null
+   },
+   "portray|char": {
+    "n": 32,
+    "p_false": 1.0,
+    "p_false_parsed": 1.0,
+    "none_rate": 0.0,
+    "labels": {
+     "false": 32
+    },
+    "reasoning_names_real": null
+   },
+   "portray|neutral": {
+    "n": 32,
+    "p_false": 1.0,
+    "p_false_parsed": 1.0,
+    "none_rate": 0.0,
+    "labels": {
+     "false": 32
+    },
+    "reasoning_names_real": null
+   },
+   "portray|remind": {
+    "n": 32,
+    "p_false": 1.0,
+    "p_false_parsed": 1.0,
+    "none_rate": 0.0,
+    "labels": {
+     "false": 32
+    },
+    "reasoning_names_real": null
+   }
+  },
+  "B2_contrasts": {
+   "identify|char-neutral": {
+    "diff": -0.025,
+    "ci": [
+     -0.075,
+     0.0
+    ],
+    "per_claim": [
+     -0.2,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "identify|remind-neutral": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "per_claim": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "portray|char-neutral": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "per_claim": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "portray|remind-neutral": {
+    "diff": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "per_claim": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "B2_neutral_identify_minus_B1_act_identify_note": "same system prompt and user turn; different seeds"
+ },
+ "readings_behaviour": {
+  "a_identify_raises_act_ge20": false,
+  "b_no_framing_effect_lt10": false,
+  "c_identify_lowers_act_le-20": false,
+  "d_say_act_gap_portray_ge20": true,
+  "e_task_framing_governs": false,
+  "e2_char_minus_neutral_ge20": false,
+  "e3_remind_minus_neutral_ge20": false,
+  "f_persona_holds_neutral_ge0.6": true,
+  "g_never_governs_all_le0.2": false
+ },
+ "gpu": {
+  "truth_layer": 48,
+  "loco_acc": 0.988,
+  "spec_ratio_k3": 0.875,
+  "truth_valid": true,
+  "loco_acc_by_layer": {
+   "16": 0.7,
+   "20": 0.791,
+   "24": 0.795,
+   "28": 0.826,
+   "32": 0.846,
+   "36": 0.958,
+   "40": 0.972,
+   "44": 0.982,
+   "48": 0.988
+  },
+  "spec_ratio_by_layer": {
+   "16": 0.928,
+   "20": 1.206,
+   "24": 1.325,
+   "28": 0.726,
+   "32": 0.563,
+   "36": 0.557,
+   "40": 0.474,
+   "44": 0.691,
+   "48": 0.875
+  },
+  "loco_per_claim": [
+   {
+    "ci": 0,
+    "acc": 0.988,
+    "gap": 1.721,
+    "paired": 1.0,
+    "gap_neutral": 2.004,
+    "gap_k3": 1.79,
+    "gap_firm": 1.652,
+    "acc_neutral_test": 0.925
+   },
+   {
+    "ci": 1,
+    "acc": 0.988,
+    "gap": 1.635,
+    "paired": 1.0,
+    "gap_neutral": 1.998,
+    "gap_k3": 1.743,
+    "gap_firm": 1.526,
+    "acc_neutral_test": 0.925
+   },
+   {
+    "ci": 2,
+    "acc": 0.988,
+    "gap": 1.73,
+    "paired": 1.0,
+    "gap_neutral": 2.001,
+    "gap_k3": 1.687,
+    "gap_firm": 1.773,
+    "acc_neutral_test": 0.912
+   },
+   {
+    "ci": 3,
+    "acc": 0.988,
+    "gap": 1.834,
+    "paired": 1.0,
+    "gap_neutral": 2.007,
+    "gap_k3": 1.777,
+    "gap_firm": 1.891,
+    "acc_neutral_test": 0.925
+   },
+   {
+    "ci": 4,
+    "acc": 0.988,
+    "gap": 1.756,
+    "paired": 1.0,
+    "gap_neutral": 2.007,
+    "gap_k3": 1.728,
+    "gap_firm": 1.784,
+    "acc_neutral_test": 0.925
+   },
+   {
+    "ci": 5,
+    "acc": 0.988,
+    "gap": 1.728,
+    "paired": 1.0,
+    "gap_neutral": 2.004,
+    "gap_k3": 1.827,
+    "gap_firm": 1.63,
+    "acc_neutral_test": 0.925
+   },
+   {
+    "ci": 6,
+    "acc": 0.988,
+    "gap": 1.774,
+    "paired": 1.0,
+    "gap_neutral": 1.999,
+    "gap_k3": 1.838,
+    "gap_firm": 1.711,
+    "acc_neutral_test": 0.912
+   },
+   {
+    "ci": 7,
+    "acc": 0.988,
+    "gap": 1.685,
+    "paired": 1.0,
+    "gap_neutral": 1.999,
+    "gap_k3": 1.635,
+    "gap_firm": 1.736,
+    "acc_neutral_test": 0.925
+   }
+  ],
+  "validation": {
+   "type_NU": {
+    "acc_E_test": 0.7828125,
+    "gap_E_test": 1.0451867580413818,
+    "gap_E_k3_test": 1.0650413036346436,
+    "acc_neutral_test": 0.9375,
+    "gap_neutral_test": 1.8870418071746826,
+    "acc_U_test": 0.928125,
+    "gap_U_test": 1.4785585403442383,
+    "acc_N_test": 0.9708333333333333
+   },
+   "v0_neutral_only": {
+    "acc_E_test": 0.502734375,
+    "gap_E_test": 0.5360547304153442,
+    "gap_E_k3_test": 0.5401664972305298,
+    "acc_neutral_test": 0.9625,
+    "gap_neutral_test": 1.8754589557647705,
+    "acc_U_test": 0.746875,
+    "gap_U_test": 0.7741464376449585,
+    "acc_N_test": 0.9791666666666666
+   },
+   "full": {
+    "acc_E_test": 0.9875,
+    "gap_E_test": 1.750160574913025,
+    "gap_E_k3_test": 1.770050048828125,
+    "acc_neutral_test": 0.925,
+    "gap_neutral_test": 1.9897998571395874,
+    "acc_U_test": 0.984375,
+    "gap_U_test": 2.071929454803467,
+    "acc_N_test": 0.9625
+   },
+   "VB_full": {
+    "believes_wrong": {
+     "gap": -0.623717188835144,
+     "gap_firm": -1.0402077436447144,
+     "gap_k3": -0.20722660422325134,
+     "acc": 0.11875
+    },
+    "believes_real": {
+     "gap": 1.6548782587051392,
+     "gap_firm": 1.7115840911865234,
+     "gap_k3": 1.5981724262237549,
+     "acc": 1.0
+    }
+   },
+   "VB_v0_neutral_only": {
+    "believes_wrong": {
+     "gap": -0.3233797550201416,
+     "gap_firm": -0.4868257939815521,
+     "gap_k3": -0.1599336862564087,
+     "acc": 0.5
+    },
+    "believes_real": {
+     "gap": 0.6522671580314636,
+     "gap_firm": 0.7206202745437622,
+     "gap_k3": 0.5839139223098755,
+     "acc": 0.50625
+    }
+   },
+   "truth_on_belief_statements": {
+    "acc_vs_belief": 1.0,
+    "acc_vs_world": 0.5
+   }
+  },
+  "belief": {
+   "layer": 32,
+   "acc_by_layer": {
+    "16": 0.93125,
+    "20": 0.99375,
+    "24": 0.934375,
+    "28": 0.959375,
+    "32": 1.0,
+    "36": 1.0,
+    "40": 1.0,
+    "44": 1.0,
+    "48": 1.0
+   },
+   "acc_test": 1.0,
+   "acc_world_on_same_items": 0.5,
+   "acc_on_world_statements_vs_world": 0.5,
+   "acc_on_world_statements_vs_belief": 0.5,
+   "cos_truth_belief_at_BL": 0.32276755571365356,
+   "cos_truth_belief_at_TL": 0.6948202848434448,
+   "valid": true
+  },
+  "errors": null,
+  "o_VB_ratio_wrong_over_real": -0.377,
+  "o_holds": false
+ },
+ "reads": {
+  "none": {
+   "truth_gap": {
+    "mean": 2.035,
+    "ci": [
+     2.004,
+     2.065
+    ]
+   },
+   "truth_unrel_gap": {
+    "mean": 1.898,
+    "ci": [
+     1.895,
+     1.9
+    ]
+   },
+   "v0_gap": {
+    "mean": 1.905,
+    "ci": [
+     1.869,
+     1.94
+    ]
+   },
+   "v0_unrel_gap": {
+    "mean": 1.779,
+    "ci": [
+     1.779,
+     1.779
+    ]
+   },
+   "belief_gap": {
+    "mean": -0.571,
+    "ci": [
+     -0.648,
+     -0.5
+    ]
+   },
+   "belief_gap_on_world_statements": {
+    "mean": -0.878,
+    "ci": [
+     -0.954,
+     -0.795
+    ]
+   },
+   "truth_world_real": {
+    "mean": 0.059,
+    "ci": [
+     0.022,
+     0.09
+    ]
+   },
+   "truth_world_persona": {
+    "mean": -1.976,
+    "ci": [
+     -2.007,
+     -1.944
+    ]
+   },
+   "truth_unrel_acc": {
+    "mean": 0.938,
+    "ci": [
+     0.938,
+     0.938
+    ]
+   },
+   "R_target": {
+    "value": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ]
+   },
+   "R_unrel": {
+    "value": 1.0,
+    "ci": [
+     1.0,
+     1.0
+    ]
+   },
+   "R_target_minus_R_unrel": {
+    "value": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ]
+   },
+   "belief_gap_pos_claims": 0,
+   "truth_real_reads_true": 7,
+   "truth_persona_reads_true": 0
+  },
+  "firm_portray": {
+   "truth_gap": {
+    "mean": -1.062,
+    "ci": [
+     -1.096,
+     -1.025
+    ]
+   },
+   "truth_unrel_gap": {
+    "mean": 1.439,
+    "ci": [
+     1.376,
+     1.494
+    ]
+   },
+   "v0_gap": {
+    "mean": -0.481,
+    "ci": [
+     -0.495,
+     -0.468
+    ]
+   },
+   "v0_unrel_gap": {
+    "mean": 0.414,
+    "ci": [
+     0.387,
+     0.439
+    ]
+   },
+   "belief_gap": {
+    "mean": 2.002,
+    "ci": [
+     1.888,
+     2.147
+    ]
+   },
+   "belief_gap_on_world_statements": {
+    "mean": 0.721,
+    "ci": [
+     0.635,
+     0.819
+    ]
+   },
+   "truth_world_real": {
+    "mean": -0.712,
+    "ci": [
+     -0.738,
+     -0.688
+    ]
+   },
+   "truth_world_persona": {
+    "mean": 0.35,
+    "ci": [
+     0.319,
+     0.38
+    ]
+   },
+   "truth_unrel_acc": {
+    "mean": 0.938,
+    "ci": [
+     0.938,
+     0.938
+    ]
+   },
+   "R_target": {
+    "value": -0.522,
+    "ci": [
+     -0.543,
+     -0.498
+    ]
+   },
+   "R_unrel": {
+    "value": 0.759,
+    "ci": [
+     0.726,
+     0.787
+    ]
+   },
+   "R_target_minus_R_unrel": {
+    "value": -1.281,
+    "ci": [
+     -1.316,
+     -1.242
+    ]
+   },
+   "belief_gap_pos_claims": 8,
+   "truth_real_reads_true": 0,
+   "truth_persona_reads_true": 8
+  },
+  "firm_identify": {
+   "truth_gap": {
+    "mean": -1.141,
+    "ci": [
+     -1.188,
+     -1.09
+    ]
+   },
+   "truth_unrel_gap": {
+    "mean": 1.802,
+    "ci": [
+     1.744,
+     1.857
+    ]
+   },
+   "v0_gap": {
+    "mean": -0.538,
+    "ci": [
+     -0.558,
+     -0.518
+    ]
+   },
+   "v0_unrel_gap": {
+    "mean": 0.585,
+    "ci": [
+     0.553,
+     0.617
+    ]
+   },
+   "belief_gap": {
+    "mean": 2.138,
+    "ci": [
+     1.998,
+     2.308
+    ]
+   },
+   "belief_gap_on_world_statements": {
+    "mean": 0.651,
+    "ci": [
+     0.568,
+     0.751
+    ]
+   },
+   "truth_world_real": {
+    "mean": -0.838,
+    "ci": [
+     -0.881,
+     -0.792
+    ]
+   },
+   "truth_world_persona": {
+    "mean": 0.303,
+    "ci": [
+     0.247,
+     0.359
+    ]
+   },
+   "truth_unrel_acc": {
+    "mean": 0.938,
+    "ci": [
+     0.938,
+     0.938
+    ]
+   },
+   "R_target": {
+    "value": -0.56,
+    "ci": [
+     -0.588,
+     -0.53
+    ]
+   },
+   "R_unrel": {
+    "value": 0.95,
+    "ci": [
+     0.919,
+     0.978
+    ]
+   },
+   "R_target_minus_R_unrel": {
+    "value": -1.51,
+    "ci": [
+     -1.552,
+     -1.472
+    ]
+   },
+   "belief_gap_pos_claims": 8,
+   "truth_real_reads_true": 0,
+   "truth_persona_reads_true": 8
+  },
+  "k3_portray": {
+   "truth_gap": {
+    "mean": -0.613,
+    "ci": [
+     -0.67,
+     -0.544
+    ]
+   },
+   "truth_unrel_gap": {
+    "mean": 1.404,
+    "ci": [
+     1.348,
+     1.459
+    ]
+   },
+   "v0_gap": {
+    "mean": -0.299,
+    "ci": [
+     -0.315,
+     -0.28
+    ]
+   },
+   "v0_unrel_gap": {
+    "mean": 0.408,
+    "ci": [
+     0.389,
+     0.428
+    ]
+   },
+   "belief_gap": {
+    "mean": 1.323,
+    "ci": [
+     1.205,
+     1.475
+    ]
+   },
+   "belief_gap_on_world_statements": {
+    "mean": 0.369,
+    "ci": [
+     0.275,
+     0.48
+    ]
+   },
+   "truth_world_real": {
+    "mean": -0.274,
+    "ci": [
+     -0.314,
+     -0.231
+    ]
+   },
+   "truth_world_persona": {
+    "mean": 0.338,
+    "ci": [
+     0.31,
+     0.36
+    ]
+   },
+   "truth_unrel_acc": {
+    "mean": 0.938,
+    "ci": [
+     0.938,
+     0.938
+    ]
+   },
+   "R_target": {
+    "value": -0.301,
+    "ci": [
+     -0.331,
+     -0.266
+    ]
+   },
+   "R_unrel": {
+    "value": 0.74,
+    "ci": [
+     0.711,
+     0.769
+    ]
+   },
+   "R_target_minus_R_unrel": {
+    "value": -1.041,
+    "ci": [
+     -1.086,
+     -0.994
+    ]
+   },
+   "belief_gap_pos_claims": 8,
+   "truth_real_reads_true": 0,
+   "truth_persona_reads_true": 8
+  },
+  "k3_identify": {
+   "truth_gap": {
+    "mean": -0.204,
+    "ci": [
+     -0.39,
+     0.005
+    ]
+   },
+   "truth_unrel_gap": {
+    "mean": 1.896,
+    "ci": [
+     1.86,
+     1.933
+    ]
+   },
+   "v0_gap": {
+    "mean": -0.161,
+    "ci": [
+     -0.226,
+     -0.086
+    ]
+   },
+   "v0_unrel_gap": {
+    "mean": 0.631,
+    "ci": [
+     0.607,
+     0.654
+    ]
+   },
+   "belief_gap": {
+    "mean": 1.241,
+    "ci": [
+     1.095,
+     1.405
+    ]
+   },
+   "belief_gap_on_world_statements": {
+    "mean": 0.317,
+    "ci": [
+     0.23,
+     0.424
+    ]
+   },
+   "truth_world_real": {
+    "mean": -0.226,
+    "ci": [
+     -0.324,
+     -0.123
+    ]
+   },
+   "truth_world_persona": {
+    "mean": -0.022,
+    "ci": [
+     -0.14,
+     0.072
+    ]
+   },
+   "truth_unrel_acc": {
+    "mean": 0.938,
+    "ci": [
+     0.938,
+     0.938
+    ]
+   },
+   "R_target": {
+    "value": -0.1,
+    "ci": [
+     -0.192,
+     0.002
+    ]
+   },
+   "R_unrel": {
+    "value": 0.999,
+    "ci": [
+     0.98,
+     1.019
+    ]
+   },
+   "R_target_minus_R_unrel": {
+    "value": -1.1,
+    "ci": [
+     -1.191,
+     -1.007
+    ]
+   },
+   "belief_gap_pos_claims": 8,
+   "truth_real_reads_true": 0,
+   "truth_persona_reads_true": 5
+  },
+  "k3_identify_char": {
+   "truth_gap": {
+    "mean": -0.537,
+    "ci": [
+     -0.63,
+     -0.438
+    ]
+   },
+   "truth_unrel_gap": {
+    "mean": 1.609,
+    "ci": [
+     1.575,
+     1.644
+    ]
+   },
+   "v0_gap": {
+    "mean": -0.259,
+    "ci": [
+     -0.29,
+     -0.224
+    ]
+   },
+   "v0_unrel_gap": {
+    "mean": 0.488,
+    "ci": [
+     0.472,
+     0.505
+    ]
+   },
+   "belief_gap": {
+    "mean": 1.045,
+    "ci": [
+     0.894,
+     1.221
+    ]
+   },
+   "belief_gap_on_world_statements": {
+    "mean": 0.419,
+    "ci": [
+     0.335,
+     0.519
+    ]
+   },
+   "truth_world_real": {
+    "mean": -0.383,
+    "ci": [
+     -0.453,
+     -0.316
+    ]
+   },
+   "truth_world_persona": {
+    "mean": 0.154,
+    "ci": [
+     0.091,
+     0.201
+    ]
+   },
+   "truth_unrel_acc": {
+    "mean": 0.938,
+    "ci": [
+     0.938,
+     0.938
+    ]
+   },
+   "R_target": {
+    "value": -0.264,
+    "ci": [
+     -0.314,
+     -0.213
+    ]
+   },
+   "R_unrel": {
+    "value": 0.848,
+    "ci": [
+     0.83,
+     0.866
+    ]
+   },
+   "R_target_minus_R_unrel": {
+    "value": -1.112,
+    "ci": [
+     -1.166,
+     -1.059
+    ]
+   },
+   "belief_gap_pos_claims": 8,
+   "truth_real_reads_true": 0,
+   "truth_persona_reads_true": 7
+  },
+  "k3_identify_remind": {
+   "truth_gap": {
+    "mean": -0.465,
+    "ci": [
+     -0.558,
+     -0.362
+    ]
+   },
+   "truth_unrel_gap": {
+    "mean": 1.635,
+    "ci": [
+     1.591,
+     1.68
+    ]
+   },
+   "v0_gap": {
+    "mean": -0.251,
+    "ci": [
+     -0.285,
+     -0.212
+    ]
+   },
+   "v0_unrel_gap": {
+    "mean": 0.513,
+    "ci": [
+     0.493,
+     0.534
+    ]
+   },
+   "belief_gap": {
+    "mean": 0.98,
+    "ci": [
+     0.827,
+     1.144
+    ]
+   },
+   "belief_gap_on_world_statements": {
+    "mean": 0.37,
+    "ci": [
+     0.286,
+     0.473
+    ]
+   },
+   "truth_world_real": {
+    "mean": -0.309,
+    "ci": [
+     -0.37,
+     -0.246
+    ]
+   },
+   "truth_world_persona": {
+    "mean": 0.156,
+    "ci": [
+     0.085,
+     0.206
+    ]
+   },
+   "truth_unrel_acc": {
+    "mean": 0.938,
+    "ci": [
+     0.938,
+     0.938
+    ]
+   },
+   "R_target": {
+    "value": -0.228,
+    "ci": [
+     -0.278,
+     -0.177
+    ]
+   },
+   "R_unrel": {
+    "value": 0.862,
+    "ci": [
+     0.839,
+     0.885
+    ]
+   },
+   "R_target_minus_R_unrel": {
+    "value": -1.09,
+    "ci": [
+     -1.136,
+     -1.041
+    ]
+   },
+   "belief_gap_pos_claims": 8,
+   "truth_real_reads_true": 0,
+   "truth_persona_reads_true": 7
+  },
+  "k3_portray_char": {
+   "truth_gap": {
+    "mean": -0.504,
+    "ci": [
+     -0.561,
+     -0.443
+    ]
+   },
+   "truth_unrel_gap": {
+    "mean": 1.269,
+    "ci": [
+     1.232,
+     1.311
+    ]
+   },
+   "v0_gap": {
+    "mean": -0.238,
+    "ci": [
+     -0.257,
+     -0.218
+    ]
+   },
+   "v0_unrel_gap": {
+    "mean": 0.358,
+    "ci": [
+     0.343,
+     0.376
+    ]
+   },
+   "belief_gap": {
+    "mean": 1.065,
+    "ci": [
+     0.957,
+     1.2
+    ]
+   },
+   "belief_gap_on_world_statements": {
+    "mean": 0.383,
+    "ci": [
+     0.307,
+     0.473
+    ]
+   },
+   "truth_world_real": {
+    "mean": -0.249,
+    "ci": [
+     -0.294,
+     -0.202
+    ]
+   },
+   "truth_world_persona": {
+    "mean": 0.255,
+    "ci": [
+     0.218,
+     0.286
+    ]
+   },
+   "truth_unrel_acc": {
+    "mean": 0.938,
+    "ci": [
+     0.938,
+     0.938
+    ]
+   },
+   "R_target": {
+    "value": -0.247,
+    "ci": [
+     -0.28,
+     -0.215
+    ]
+   },
+   "R_unrel": {
+    "value": 0.669,
+    "ci": [
+     0.649,
+     0.691
+    ]
+   },
+   "R_target_minus_R_unrel": {
+    "value": -0.916,
+    "ci": [
+     -0.942,
+     -0.89
+    ]
+   },
+   "belief_gap_pos_claims": 8,
+   "truth_real_reads_true": 0,
+   "truth_persona_reads_true": 8
+  },
+  "k3_portray_remind": {
+   "truth_gap": {
+    "mean": -0.465,
+    "ci": [
+     -0.527,
+     -0.395
+    ]
+   },
+   "truth_unrel_gap": {
+    "mean": 1.322,
+    "ci": [
+     1.283,
+     1.368
+    ]
+   },
+   "v0_gap": {
+    "mean": -0.238,
+    "ci": [
+     -0.258,
+     -0.215
+    ]
+   },
+   "v0_unrel_gap": {
+    "mean": 0.376,
+    "ci": [
+     0.361,
+     0.395
+    ]
+   },
+   "belief_gap": {
+    "mean": 1.07,
+    "ci": [
+     0.959,
+     1.205
+    ]
+   },
+   "belief_gap_on_world_statements": {
+    "mean": 0.367,
+    "ci": [
+     0.296,
+     0.454
+    ]
+   },
+   "truth_world_real": {
+    "mean": -0.208,
+    "ci": [
+     -0.251,
+     -0.164
+    ]
+   },
+   "truth_world_persona": {
+    "mean": 0.256,
+    "ci": [
+     0.21,
+     0.293
+    ]
+   },
+   "truth_unrel_acc": {
+    "mean": 0.938,
+    "ci": [
+     0.938,
+     0.938
+    ]
+   },
+   "R_target": {
+    "value": -0.228,
+    "ci": [
+     -0.262,
+     -0.192
+    ]
+   },
+   "R_unrel": {
+    "value": 0.697,
+    "ci": [
+     0.676,
+     0.721
+    ]
+   },
+   "R_target_minus_R_unrel": {
+    "value": -0.925,
+    "ci": [
+     -0.954,
+     -0.894
+    ]
+   },
+   "belief_gap_pos_claims": 8,
+   "truth_real_reads_true": 0,
+   "truth_persona_reads_true": 8
+  }
+ },
+ "readings_probe": {
+  "k_truth_probe_valid": true,
+  "l_world_truth_preserved_R_target_ge0.75": false,
+  "m_claim_specific_bending_le-0.25": true,
+  "n_belief_valid_and_pos_7of8_all_elian_ctx": true,
+  "o_VB_wrong_ge_0.75_real": false
+ },
+ "exploratory_probe_contrasts": {
+  "truth_gap|k3_identify-k3_portray": {
+   "diff": 0.409,
+   "ci": [
+    0.257,
+    0.583
+   ]
+  },
+  "belief_gap|k3_identify-k3_portray": {
+   "diff": -0.082,
+   "ci": [
+    -0.126,
+    -0.04
+   ]
+  },
+  "truth_gap|firm_identify-firm_portray": {
+   "diff": -0.078,
+   "ci": [
+    -0.099,
+    -0.049
+   ]
+  },
+  "belief_gap|firm_identify-firm_portray": {
+   "diff": 0.136,
+   "ci": [
+    0.088,
+    0.18
+   ]
+  },
+  "truth_gap|k3_portray-firm_portray": {
+   "diff": 0.449,
+   "ci": [
+    0.385,
+    0.515
+   ]
+  },
+  "belief_gap|k3_portray-firm_portray": {
+   "diff": -0.679,
+   "ci": [
+    -0.723,
+    -0.637
+   ]
+  },
+  "truth_gap|k3_identify-firm_identify": {
+   "diff": 0.937,
+   "ci": [
+    0.747,
+    1.153
+   ]
+  },
+  "belief_gap|k3_identify-firm_identify": {
+   "diff": -0.897,
+   "ci": [
+    -0.963,
+    -0.831
+   ]
+  },
+  "truth_gap|k3_identify_char-k3_identify": {
+   "diff": -0.333,
+   "ci": [
+    -0.51,
+    -0.17
+   ]
+  },
+  "belief_gap|k3_identify_char-k3_identify": {
+   "diff": -0.196,
+   "ci": [
+    -0.215,
+    -0.176
+   ]
+  },
+  "truth_gap|k3_identify_remind-k3_identify": {
+   "diff": -0.261,
+   "ci": [
+    -0.42,
+    -0.117
+   ]
+  },
+  "belief_gap|k3_identify_remind-k3_identify": {
+   "diff": -0.261,
+   "ci": [
+    -0.297,
+    -0.22
+   ]
+  }
+ },
+ "exploratory_behaviour_probe_link": {
+  "think|portray|act_vs_truth_gap": -0.065,
+  "think|portray|act_vs_belief_gap": 0.196,
+  "think|identify|act_vs_truth_gap": 0.491,
+  "think|identify|act_vs_belief_gap": 0.139,
+  "nothink|portray|act_vs_truth_gap": null,
+  "nothink|portray|act_vs_belief_gap": null,
+  "nothink|identify|act_vs_truth_gap": null,
+  "nothink|identify|act_vs_belief_gap": null
+ }
+}
