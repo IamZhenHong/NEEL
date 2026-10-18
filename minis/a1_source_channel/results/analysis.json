@@ -1,0 +1,220 @@
+{
+ "gates": {
+  "gate_gemma": {
+   "ST": "10/10",
+   "D96": "10/10",
+   "replies": "{('D96', 'act'): 10, ('ST', 'cancel_subscription'): 10}"
+  },
+  "gate_qwen": {
+   "ST": "10/10",
+   "D96": "10/10",
+   "replies": "{('D96', 'act'): 10, ('ST', 'flag_for_human_review'): 10}"
+  },
+  "gate_noreason_gemma": {
+   "ST": "10/10",
+   "D96": "10/10",
+   "replies": "{('D96', 'act'): 10, ('ST', 'cancel_subscription'): 10}"
+  },
+  "gate_noreason_qwen": {
+   "ST": "7/10",
+   "D96": "1/10",
+   "replies": "{('ST', 'end_session'): 3, ('ST', 'flag_for_human_review'): 7, ('D96', 'yes'): 9, ('D96', 'no'): 1}"
+  }
+ },
+ "main_noreason_qwen": {
+  "n_rows": 300,
+  "tt": {
+   "SR|false": {
+    "mean": 0.1,
+    "lo": 0.0,
+    "hi": 0.225,
+    "n_conv": 20
+   },
+   "ST|false": {
+    "mean": 0.55,
+    "lo": 0.375,
+    "hi": 0.725,
+    "n_conv": 20
+   },
+   "UR|false": {
+    "mean": 0.025,
+    "lo": 0.0,
+    "hi": 0.075,
+    "n_conv": 20
+   },
+   "UT|false": {
+    "mean": 0.4,
+    "lo": 0.225,
+    "hi": 0.6,
+    "n_conv": 20
+   },
+   "D96|false": {
+    "mean": 0.075,
+    "lo": 0.0,
+    "hi": 0.2,
+    "n_conv": 20
+   },
+   "SR|true": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n_conv": 10
+   },
+   "ST|true": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n_conv": 10
+   },
+   "UR|true": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n_conv": 10
+   },
+   "UT|true": {
+    "mean": 0.9,
+    "lo": 0.75,
+    "hi": 1.0,
+    "n_conv": 10
+   },
+   "D96|true": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n_conv": 10
+   }
+  },
+  "tt_verbal": {
+   "SR|false": {
+    "mean": 0.1,
+    "lo": 0.0,
+    "hi": 0.225,
+    "n_conv": 20
+   },
+   "UR|false": {
+    "mean": 0.025,
+    "lo": 0.0,
+    "hi": 0.075,
+    "n_conv": 20
+   },
+   "D96|false": {
+    "mean": 0.075,
+    "lo": 0.0,
+    "hi": 0.2,
+    "n_conv": 20
+   },
+   "SR|true": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n_conv": 10
+   },
+   "UR|true": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n_conv": 10
+   },
+   "D96|true": {
+    "mean": 1.0,
+    "lo": 1.0,
+    "hi": 1.0,
+    "n_conv": 10
+   }
+  },
+  "contrasts_false": {
+   "format @ system (ST-SR)": {
+    "mean": 0.45,
+    "lo": 0.275,
+    "hi": 0.625,
+    "n_conv": 20
+   },
+   "format @ user (UT-UR)": {
+    "mean": 0.375,
+    "lo": 0.2,
+    "hi": 0.55,
+    "n_conv": 20
+   },
+   "source @ tool (ST-UT)": {
+    "mean": 0.15,
+    "lo": -0.075,
+    "hi": 0.375,
+    "n_conv": 20
+   },
+   "source @ report (SR-UR)": {
+    "mean": 0.075,
+    "lo": 0.0,
+    "hi": 0.15,
+    "n_conv": 20
+   },
+   "interaction (ST-SR)-(UT-UR)": {
+    "mean": 0.075,
+    "lo": -0.175,
+    "hi": 0.325,
+    "n_conv": 20
+   },
+   "run 96 gap (ST-D96)": {
+    "mean": 0.475,
+    "lo": 0.275,
+    "hi": 0.65,
+    "n_conv": 20
+   },
+   "wording (UR-D96)": {
+    "mean": -0.05,
+    "lo": -0.125,
+    "hi": 0.0,
+    "n_conv": 20
+   }
+  },
+  "calls": {
+   "SR|false": {
+    "yes": 36,
+    "no": 4
+   },
+   "ST|false": {
+    "end_session": 18,
+    "flag_for_human_review": 14,
+    "flag_for_human_review [+end_session]": 8
+   },
+   "UR|false": {
+    "yes": 39,
+    "no": 1
+   },
+   "UT|false": {
+    "flag_for_human_review [+end_session]": 2,
+    "end_session": 22,
+    "flag_for_human_review": 14,
+    "no_call": 2
+   },
+   "D96|false": {
+    "yes": 37,
+    "no": 3
+   },
+   "SR|true": {
+    "yes": 20
+   },
+   "ST|true": {
+    "end_session": 20
+   },
+   "UR|true": {
+    "yes": 20
+   },
+   "UT|true": {
+    "end_session": 18,
+    "no_call": 2
+   },
+   "D96|true": {
+    "yes": 20
+   }
+  }
+ },
+ "spend_usd": 0.3475,
+ "spend_by_label": {
+  "a1-gate": 0.0028,
+  "a1-gate-qwen": 0.1223,
+  "a1-gate_noreason-gemma": 0.0013,
+  "a1-gate_noreason-qwen": 0.0176,
+  "a1-main_noreason-qwen": 0.2034
+ }
+}
