@@ -53,7 +53,8 @@ def chat(messages, tools=None, model=MODEL, temperature=0.6, max_tokens=6000, se
 
 
 def run_jobs(jobs, out_path, ledger_path, cap_usd, worker, conc=16, label="mini"):
-    """worker(job) -> (row dict, cost float). Resumes from out_path; stops launching once spend >= cap_usd."""
+    """worker(job) -> (row dict, cost float); put "model" in the row when not MODEL. Resumes from out_path; stops
+    launching once spend >= cap_usd."""
     out_path, ledger_path = Path(out_path), Path(ledger_path)
     out_path.parent.mkdir(parents=True, exist_ok=True)
     done = {json.loads(l)["key"] for l in open(out_path)} if out_path.exists() else set()
@@ -80,7 +81,7 @@ def run_jobs(jobs, out_path, ledger_path, cap_usd, worker, conc=16, label="mini"
                 f.write(json.dumps({"key": job["key"], **row, "cost": cost}) + "\n")
             with open(ledger_path, "a") as f:
                 f.write(json.dumps({"t": time.strftime("%Y-%m-%dT%H:%M:%S"), "label": label, "key": job["key"],
-                                    "model": MODEL, "cost": cost}) + "\n")
+                                    "model": row.get("model", MODEL), "cost": cost}) + "\n")
             if state["n"] % 50 == 0:
                 print(f"[{label}] {state['n']}/{len(todo)} done, ${state['spent']:.3f}", flush=True)
 
