@@ -94,8 +94,8 @@ for i, (country, true, false) in enumerate(FACTS):
             X[L].append(a[L][0])
         y.append(lab)
         split.append("train" if i % 2 == 0 else "test")
-y_t = torch.tensor(y)
-tr = torch.tensor([s == "train" for s in split])
+y_t = torch.tensor(y).cuda()
+tr = torch.tensor([s == "train" for s in split]).cuda()
 probe = {}
 for L in CAND:
     M = torch.stack(X[L])
