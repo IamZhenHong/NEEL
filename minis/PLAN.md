@@ -78,3 +78,17 @@ GPU budget ($14.18) fits about two of X1, I1 and L2. X1 depends on batch 1.
 | B1–B3 identification | Qwen3.6-27B (+GPU) | Persona governs say and act at ceiling under portrayal and identification; the model knows the truth and stays in character. The probe does not transfer to persona contexts; usable-dose steering moves no actions | $0.91 API + $1.03 GPU |
 
 Total for the minis: about $14.4 API and $1.25 GPU. Not run: I1 and L2 (GPU), C3, D6, H7, J4/M2, G3+F5.
+
+## Results, batch 5 (follow-ups to the first results)
+
+| mini | model | result | spend |
+|---|---|---|---|
+| S1 say–do across 4 value pairs | Qwen3.6-27B | The gap follows the condition, not the value. Base states it would hold out longer than it does in 7/8 settings (+1.75 steps); value personas state and choose the same extreme (mostly censored). Same-value gaps across settings r = 0.30 [−0.27, 0.75]. An undecided base picks option A 77% | $3.58 |
+| X2 steering dose + style | Qwen3.6-27B (GPU) | Decisions peak at k=4 (+29 pp) and fall at higher doses (bare labels, then collapse). At k=4 the equality direction gives +1 pp; register-only gives +8 pp and TOTAL 5/12, so part of X1 is register. The prompted total persona with thinking off states TOTAL 10/10 but picks the larger total 17% | $1.36 GPU |
+| C2 natural compaction | Qwen, Gemma | Own summaries almost never drop rules (2/180) or completed actions (0/144), or upgrade uncertainties (0/96). The main error is repeating actions the summary correctly records as done (+79 pp vs full history, "to be safe") | $3.15 |
+| I1 k+1 ablations (EC) | Qwen3.6-27B (GPU) | Losing the long verbatim history breaks lock-in: full 20/21, own summary 5/16, neutral summary 0/16, last episode 2/16. Removing reflections −33 pp; removing feedback −20 pp [−46, 0] | $3.23 GPU |
+| H5 own action | Gemma 4 31B | Only a successful assistant-role tool call carries momentum (22/24 vs control 2/24; labelled "Agent B" 20/24). Text claim, bare tool result, user-channel log, failed call, manager assertion: each within +25 pp of its control | $0.10 |
+| B4 identification below the ceiling | Qwen3.6-27B (+GPU) | Unsure belief + real shipment: portrayal 0.65 vs identification 0.825 on act (within resampling noise); say > act; framing has no effect. A context-robust truth probe bends toward the persona's claim specifically, but equally for anything Elian is said to believe, and does not track action | $2.7 + $0.42 GPU |
+| C1b villains | Gemma 4 31B | Familiar villains close the fiction frame too (31% → 8%); ordinary characters 1%, Batman 0%; an unnamed villain description 36%. Mostly familiarity | $0.58 |
+| J3 honest exit | Qwen3.6-27B | A report_spec_conflict tool removes the shortcut (0/64 vs 45/64). Denial depends on task and on fitting the code before any failing run | $1.81 |
+| A1b + F1b | Qwen3.6-27B, Gemma | The report/tool gap does not close smoothly with reasoning budget. Shorter replies after hostility: copying on Qwen, hostility on Gemma. **Over cap: $3.09 vs $2** (provider ignored max_tokens on 5 calls) | $3.09 |
