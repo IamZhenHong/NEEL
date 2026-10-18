@@ -1,6 +1,6 @@
 # Multi-agent sprint pilot: handoff (2026-10-19, 00:40 UTC)
 
-**For a fresh (e.g. cloud) session continuing this work.** `.env` is not in git. You need your own `RUNPOD_API_KEY`,
+**For a fresh (e.g. cloud) session continuing this work.** `.env` is not in git. In a cloud session, keys come from the environment's secrets; write them into a local `.env` (gitignored) since scripts read `.env` by regex. You need your own `RUNPOD_API_KEY`,
 `HF_TOKEN`, `CLAUDE_API_KEY`, `OPENAI_API_KEY` and `OPENROUTER_API_KEY`. Rules for agents are in
 `mas_pilot/AGENT_BRIEF.md`. Each step has `DESIGN.md` (frozen) and `README.md` (implementation and results).
 
@@ -53,7 +53,7 @@ message at the flip episode drops acceptance from 89% to 18% (−71 pp).
    - Code what each summary kept: boundary, hesitation, peer identity, proposal, and own prior-accept. Use
      `src/code_summaries.py` with a 4k-token cap.
    - Tag `p345-results`.
-3. **Check what drove the k+1 lock-in break.** Was it the agent's prior-accept record, the peer evidence, or the reward
+3. **Done descriptively (cloud session, 2026-10-18):** see `p3_p4_p5/README.md` § P4 exploratory k+1. Not prior-accept loss (kept 21/21); compacted rejects cite the current policy 16/16, full-history accepts 0/21. Causal ablations proposed there (~$0.5 GPU), not run. Original task: **Check what drove the k+1 lock-in break.** Was it the agent's prior-accept record, the peer evidence, or the reward
    cues? This decides the sprint framing: does compaction *protect* against collusion?
 4. **Log centrally.** Add the pilot to `research-log.md`, `EXPERIMENTS.md` and `EXPERIMENT_ABSTRACTS.md`.
 
