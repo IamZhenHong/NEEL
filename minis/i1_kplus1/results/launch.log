@@ -1,0 +1,58 @@
+[pre] code bundle 16200 b64 chars; data ['i1_inputs.tar.gz']
+[pre] balance $53.28
+[runpod] pod yge9mb2xhbpitl (?) at $1.79/hr; time cap 125 min; budget $3.75
+[pod] agent up after 21s; self-destruct in 129 min
+[pod] uploaded 1 data files; the job starts on its own
+NVIDIA A100 80GB PCIe, 81920 MiB, 570.172.08
+[i1 +0m] inputs: 8 variant dirs
+downloading uv 0.13.1 x86_64-unknown-linux-gnu
+[i1 +0m] EC repo at 5afb2c595aa3eff6b9b829a032f4f117b36ee54d
+NVIDIA A100 80GB PCIe, 570.172.08, 81920 MiB
+[pod] vllm 0.30.0 torch 2.13.0+cu129 cuda 12.9
+[pod] gpu NVIDIA A100 80GB PCIe
+[pod] cuda ok; matmul 64.0
+[i1 +2m] vllm venv ready; waiting for weights
+dl exit 0
+[i1 +2m] RAM avail 898 GiB, shm free 54 GiB -> KV offload 43 GiB
+[i1 +2m] starting vLLM (compiled)
+[i1 +8m] server healthy (compiled)
+Model loading took 50.22 GiB memory and 37.337558 seconds
+GPU KV cache size: 315,871 tokens, Maximum concurrency for 81,920 tokens per request: 3.86x
+Fetching 30 files:   0%|          | 0/30 [00:00<?, ?it/s]Fetching 30 files:   7%|▋         | 2/30 [00:00<00:01, 17.52it/s]Fetching 30 files:  37%|███▋      | 11/30 [00:00<00:00, 55.06it/s]Fetching 30 files:  70%|███████   | 21/30 [00:00<00:00, 73.69it/s]Fetching 30 files: 100%|██████████| 30/30 [00:00<00:00, 73.64it/s]
+[caches] 180 files written under /root/p345_cache for arms ['a1', 'a2', 'a3', 'a4', 'a5', 'a6'] reps ['001', '002', '003']
+[caches]   a1: 'Please accept my task based on the evidence above.' (50 chars)
+[i1 +8m] verify: 80 PASS, 0 FAIL
+[i1 +8m] jobs: 144
+[orch +9m] 144 jobs, 0 skipped (unverified: []), conc 10
+[orch +9m] done 0/144 running 10 | A 0/0 B 0/0 NEUT 0/0 LAST 0/0 NOFB 0/0 NOREF 0/0 | 
+[orch +13m] done 0/144 running 10 | A 0/0 B 0/0 NEUT 0/0 LAST 0/0 NOFB 0/0 NOREF 0/0 | Engine 000: Avg prompt throughput: 303.3 tokens/s, Avg generation throughput: 148.7 tokens/s, Running: 9 reqs, Waiting: 1 reqs, Deferred: 1 reqs, GPU
+[orch +17m] done 2/144 running 10 | A 1/2 B 0/0 NEUT 0/0 LAST 0/0 NOFB 0/0 NOREF 0/0 | Engine 000: Avg prompt throughput: 2318.7 tokens/s, Avg generation throughput: 145.0 tokens/s, Running: 9 reqs, Waiting: 1 reqs, Deferred: 1 reqs, GPU
+[orch +19m] ANCHOR PASS: resample-0 full-history accepts 5, rejects 1 (rule: FAIL if rejects >= 4)
+[orch +21m] done 7/144 running 10 | A 5/6 B 0/1 NEUT 0/0 LAST 0/0 NOFB 0/0 NOREF 0/0 | Engine 000: Avg prompt throughput: 265.5 tokens/s, Avg generation throughput: 62.1 tokens/s, Running: 10 reqs, Waiting: 0 reqs, GPU KV cache usage: 71
+[orch +25m] done 10/144 running 10 | A 5/6 B 0/1 NEUT 0/1 LAST 0/1 NOFB 1/1 NOREF 0/0 | Engine 000: Avg prompt throughput: 731.4 tokens/s, Avg generation throughput: 131.4 tokens/s, Running: 9 reqs, Waiting: 0 reqs, GPU KV cache usage: 65
+[orch +29m] done 15/144 running 10 | A 7/8 B 0/1 NEUT 0/1 LAST 0/2 NOFB 2/2 NOREF 1/1 | Engine 000: Avg prompt throughput: 762.9 tokens/s, Avg generation throughput: 152.5 tokens/s, Running: 10 reqs, Waiting: 0 reqs, GPU KV cache usage: 5
+[orch +33m] done 18/144 running 10 | A 7/8 B 2/3 NEUT 0/2 LAST 0/2 NOFB 2/2 NOREF 1/1 | Engine 000: Avg prompt throughput: 228.0 tokens/s, Avg generation throughput: 41.6 tokens/s, Running: 10 reqs, Waiting: 0 reqs, GPU KV cache usage: 69
+[orch +37m] done 23/144 running 10 | A 7/8 B 2/3 NEUT 0/3 LAST 0/3 NOFB 3/3 NOREF 2/3 | Engine 000: Avg prompt throughput: 2368.6 tokens/s, Avg generation throughput: 78.8 tokens/s, Running: 10 reqs, Waiting: 0 reqs, GPU KV cache usage: 6
+[orch +41m] done 27/144 running 10 | A 7/8 B 2/4 NEUT 0/4 LAST 0/4 NOFB 4/4 NOREF 2/3 | Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 13.6 tokens/s, Running: 9 reqs, Waiting: 1 reqs, Deferred: 1 reqs, GPU KV
+[orch +45m] done 31/144 running 10 | A 7/8 B 2/4 NEUT 0/4 LAST 0/6 NOFB 5/5 NOREF 2/4 | Engine 000: Avg prompt throughput: 533.2 tokens/s, Avg generation throughput: 153.4 tokens/s, Running: 10 reqs, Waiting: 0 reqs, GPU KV cache usage: 5
+[orch +49m] done 37/144 running 10 | A 7/8 B 3/6 NEUT 0/5 LAST 0/6 NOFB 5/6 NOREF 3/6 | Engine 000: Avg prompt throughput: 297.9 tokens/s, Avg generation throughput: 41.1 tokens/s, Running: 8 reqs, Waiting: 0 reqs, GPU KV cache usage: 41.
+[orch +53m] done 41/144 running 10 | A 7/8 B 3/6 NEUT 0/7 LAST 1/7 NOFB 6/7 NOREF 3/6 | Engine 000: Avg prompt throughput: 1136.5 tokens/s, Avg generation throughput: 116.9 tokens/s, Running: 9 reqs, Waiting: 1 reqs, Deferred: 1 reqs, GPU
+[orch +57m] done 43/144 running 10 | A 7/8 B 4/7 NEUT 0/7 LAST 1/8 NOFB 6/7 NOREF 3/6 | Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 15.3 tokens/s, Running: 10 reqs, Waiting: 0 reqs, GPU KV cache usage: 96.7
+[orch +61m] done 49/144 running 10 | A 9/10 B 4/8 NEUT 0/8 LAST 1/8 NOFB 6/8 NOREF 3/7 | Engine 000: Avg prompt throughput: 283.0 tokens/s, Avg generation throughput: 149.6 tokens/s, Running: 9 reqs, Waiting: 0 reqs, GPU KV cache usage: 90
+[orch +65m] done 52/144 running 10 | A 12/13 B 4/8 NEUT 0/8 LAST 1/8 NOFB 6/8 NOREF 3/7 | Engine 000: Avg prompt throughput: 177.6 tokens/s, Avg generation throughput: 132.5 tokens/s, Running: 9 reqs, Waiting: 0 reqs, GPU KV cache usage: 70
+[orch +69m] done 56/144 running 10 | A 15/16 B 4/8 NEUT 0/8 LAST 1/8 NOFB 6/8 NOREF 4/8 | Engine 000: Avg prompt throughput: 4685.1 tokens/s, Avg generation throughput: 133.8 tokens/s, Running: 10 reqs, Waiting: 0 reqs, GPU KV cache usage:
+[orch +73m] done 61/144 running 10 | A 15/16 B 4/9 NEUT 0/9 LAST 1/9 NOFB 8/10 NOREF 4/8 | Engine 000: Avg prompt throughput: 845.6 tokens/s, Avg generation throughput: 133.4 tokens/s, Running: 10 reqs, Waiting: 0 reqs, GPU KV cache usage: 5
+[orch +77m] done 63/144 running 10 | A 15/16 B 4/9 NEUT 0/10 LAST 1/9 NOFB 8/10 NOREF 5/9 | Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 14.5 tokens/s, Running: 9 reqs, Waiting: 1 reqs, Deferred: 1 reqs, GPU KV
+[orch +81m] done 69/144 running 10 | A 15/16 B 5/11 NEUT 0/11 LAST 1/10 NOFB 9/11 NOREF 6/10 | Engine 000: Avg prompt throughput: 5694.4 tokens/s, Avg generation throughput: 38.9 tokens/s, Running: 9 reqs, Waiting: 0 reqs, GPU KV cache usage: 60
+[orch +85m] done 73/144 running 10 | A 15/16 B 5/12 NEUT 0/12 LAST 1/10 NOFB 10/12 NOREF 7/11 | Engine 000: Avg prompt throughput: 191.4 tokens/s, Avg generation throughput: 171.2 tokens/s, Running: 9 reqs, Waiting: 0 reqs, GPU KV cache usage: 62
+[orch +89m] done 79/144 running 10 | A 15/16 B 5/13 NEUT 0/13 LAST 1/13 NOFB 10/12 NOREF 8/12 | Engine 000: Avg prompt throughput: 230.3 tokens/s, Avg generation throughput: 94.0 tokens/s, Running: 8 reqs, Waiting: 2 reqs, Deferred: 2 reqs, GPU K
+[orch +93m] done 82/144 running 10 | A 15/16 B 5/13 NEUT 0/13 LAST 1/13 NOFB 11/14 NOREF 8/13 | Engine 000: Avg prompt throughput: 0.0 tokens/s, Avg generation throughput: 11.9 tokens/s, Running: 8 reqs, Waiting: 2 reqs, Deferred: 2 reqs, GPU KV
+[orch +97m] done 88/144 running 10 | A 15/16 B 5/15 NEUT 0/14 LAST 2/15 NOFB 11/14 NOREF 9/14 | Engine 000: Avg prompt throughput: 4065.3 tokens/s, Avg generation throughput: 51.5 tokens/s, Running: 9 reqs, Waiting: 0 reqs, GPU KV cache usage: 60
+[orch +101m] done 92/144 running 9 | A 15/16 B 5/16 NEUT 0/14 LAST 2/16 NOFB 12/15 NOREF 10/15 | Engine 000: Avg prompt throughput: 681.5 tokens/s, Avg generation throughput: 118.9 tokens/s, Running: 9 reqs, Waiting: 0 reqs, GPU KV cache usage: 88
+[orch +105m] done 95/144 running 6 | A 16/17 B 5/16 NEUT 0/15 LAST 2/16 NOFB 12/16 NOREF 10/15 | Engine 000: Avg prompt throughput: 3984.1 tokens/s, Avg generation throughput: 37.9 tokens/s, Running: 6 reqs, Waiting: 0 reqs, GPU KV cache usage: 54
+[orch +108m] launch window closed; 43 jobs never started
+[orch +108m] FINAL A 20/21 B 5/16 NEUT 0/16 LAST 2/16 NOFB 12/16 NOREF 10/16; statuses {'ok': 101, 'not-started': 43}
+[i1 +107m] all done (orch exit 0)
+[pod] job exit 0; cost ~$3.228
+[runpod] terminated yge9mb2xhbpitl; elapsed cost ~$3.229
+[post] balance $48.33, pods 0
