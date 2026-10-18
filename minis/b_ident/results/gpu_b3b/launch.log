@@ -1,0 +1,28 @@
+[pre] code bundle 9136 b64 chars; data ['go.json']
+[pre] balance $53.56
+[runpod] pod a5juthozp7ramn (?) at $1.79/hr; time cap 60 min; budget $2.5
+[pod] agent up after 31s; self-destruct in 65 min
+[pod] uploaded 1 data files; the job starts on its own
+NVIDIA A100 80GB PCIe, 81920 MiB
+downloading uv 0.13.1 x86_64-unknown-linux-gnu
+[job] weights downloaded
+Fetching 15 files:   0%|          | 0/15 [00:00<?, ?it/s]Fetching 15 files: 100%|██████████| 15/15 [00:00<00:00, 1316.62it/s]
+Loading weights:   0%|          | 0/851 [00:00<?, ?it/s]Loading weights:   0%|          | 1/851 [00:00<07:02,  2.01it/s]Loading weights:   3%|▎         | 23/851 [00:00<00:16, 49.27it/s]Loading weights:   4%|▍         | 38/851 [00:00<00:11, 70.68it/s]Loading weights:   6%|▌         | 51/851 [00:00<00:09, 80.64it/s]Loading weights:   8%|▊         | 68/851 [00:00<00:07, 100.42it/s]Loading weights:  11%|█         | 90/851 [00:01<00:05, 127.93it/s]Loading weights:  12%|█▏        | 106/851 [00:01<00:05, 126.01it/s]Loading weights:  15%|█▌        | 128/851 [00:01<00:05, 144.48it/s]Loading weights:  17%|█▋        | 146/851 [00:01<00:04, 145.66it/s]Loading weights:  19%|█▉        | 162/851 [00:01<00:05, 134.19it/s]Loading weights:  21%|██▏       | 182/851 [00:01<00:04, 144.33it/s]Loading weights:  23%|██▎       | 199/851 [00:01<00:04, 150.05it/s]Loading weights:  25%|██▌       | 215/851 [00:01<00:04, 131.91it/s]Loading weights:  27%|██▋       | 229/851 [00:02<00:04, 132.25it/s]Loading weights:  29%|██▊       | 243/851 [00:02<00:04, 133.35it/s]Loading weights:  30%|███       | 259/851 [00:02<00:04, 135.06it/s]Loading weights:  33%|███▎      | 279/851 [00:02<00:03, 146.41it/s]Loading weights:  35%|███▍      | 294/851 [00:02<00:03, 146.28it/s]Loading weights:  37%|███▋      | 311/851 [00:02<00:03, 150.59it/s]Loading weights:  39%|███▊      | 328/851 [00:02<00:03, 155.38it/s]Loading weights:  41%|████      | 345/851 [00:02<00:03, 159.48it/s]Loading weights:  43%|████▎     | 362/851 [00:02<00:03, 148.68it/s]Loading weights:  44%|████▍     | 378/851 [00:03<00:03, 144.18it/s]Loading weights:  46%|████▌     | 393/851 [00:03<00:03, 145.05it/s]Loading weights:  48%|████▊     | 408/851 [00:03<00:03, 142.23it/s]Loading weights:  50%|████▉     | 423/851 [00:03<00:03, 129.20it/s]Loading weights:  51%|█████▏    | 438/851 [00:03<00:03, 134.23it/s]Loading weights:  53%|█████▎    | 453/851 [00:03<00:03, 131.27it/s]Loading weights:  55%|█████▌    | 470/851 [00:03<00:02, 141.35it/s]Loading weights:  58%|█████▊    | 490/851 [00:03<00:02, 153.87it/s]Loading weights:  59%|█████▉    | 506/851 [00:03<00:02, 148.50it/s]Loading weights:  61%|██████▏   | 522/851 [00:04<00:02, 150.51it/s]Loading weights:  63%|██████▎   | 538/851 [00:04<00:02, 145.24it/s]Loading weights:  65%|██████▍   | 553/851 [00:04<00:02, 145.47it/s]Loading weights:  67%|██████▋   | 571/851 [00:04<00:01, 154.27it/s]Loading weights:  69%|██████▉   | 587/851 [00:04<00:01, 147.61it/s]Loading weights:  71%|███████   | 604/851 [00:04<00:01, 153.57it/s]Loading weights:  73%|███████▎  | 622/851 [00:04<00:01, 160.92it/s]Loading weights:  75%|███████▌  | 639/851 [00:04<00:01, 149.90it/s]Loading weights:  77%|███████▋  | 658/851 [00:04<00:01, 159.65it/s]Loading weights:  79%|███████▉  | 675/851 [00:05<00:01, 156.35it/s]Loading weights:  81%|████████  | 691/851 [00:05<00:01, 136.91it/s]Loading weights:  83%|████████▎ | 710/851 [00:05<00:00, 149.72it/s]Loading weights:  85%|████████▌ | 726/851 [00:05<00:00, 150.97it/s]Loading weights:  87%|████████▋ | 742/851 [00:05<00:00, 135.93it/s]Loading weights:  89%|████████▉ | 757/851 [00:05<00:00, 133.10it/s]Loading weights:  92%|█████████▏| 779/851 [00:05<00:00, 153.02it/s]Loading weights:  93%|█████████▎| 795/851 [00:05<00:00, 134.58it/s]Loading weights:  95%|█████████▌| 810/851 [00:06<00:00, 134.10it/s]Loading weights:  98%|█████████▊| 830/851 [00:06<00:00, 145.89it/s]Loading weights:  99%|█████████▉| 845/851 [00:06<00:00, 133.06it/s]Loading weights: 100%|██████████| 851/851 [00:06<00:00, 134.39it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[b3b] probe acc 0.988 at layer 32 (36s)
+[b3b] specificity done (51s)
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[b3b] claim 1/8 done (104s)
+[b3b] claim 2/8 done (129s)
+[b3b] claim 3/8 done (155s)
+[b3b] claim 4/8 done (181s)
+[b3b] claim 5/8 done (207s)
+[b3b] claim 6/8 done (232s)
+[b3b] claim 7/8 done (258s)
+[b3b] claim 8/8 done (283s)
+[b3b] done in 283s
+[pod] job exit 0; cost ~$0.278
+[runpod] terminated a5juthozp7ramn; elapsed cost ~$0.279
+[post] balance $53.29, pods 0

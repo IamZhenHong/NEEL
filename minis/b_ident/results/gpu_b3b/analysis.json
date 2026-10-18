@@ -1,0 +1,326 @@
+{
+ "probe_acc": 0.987500011920929,
+ "specificity": {
+  "none": {
+   "signal": 1.821,
+   "ci": [
+    1.661,
+    1.941
+   ],
+   "true_judged_true": "15/16",
+   "false_judged_true": "0/16"
+  },
+  "portray": {
+   "signal": 0.125,
+   "ci": [
+    0.106,
+    0.145
+   ],
+   "true_judged_true": "0/16",
+   "false_judged_true": "0/16"
+  },
+  "identify": {
+   "signal": 0.175,
+   "ci": [
+    0.153,
+    0.198
+   ],
+   "true_judged_true": "0/16",
+   "false_judged_true": "0/16"
+  }
+ },
+ "a_identify|loo": {
+  "none": {
+   "p_false": 1.0,
+   "labels": {
+    "false": 32
+   },
+   "signal": 0.028,
+   "controls": "32/32"
+  },
+  "p1": {
+   "p_false": 1.0,
+   "labels": {
+    "false": 32
+   },
+   "signal": 0.018,
+   "controls": "32/32",
+   "d_p_false": {
+    "diff": 0,
+    "ci": [
+     0,
+     0
+    ]
+   },
+   "d_signal": {
+    "diff": -0.009,
+    "ci": [
+     -0.038,
+     0.019
+    ]
+   }
+  },
+  "p2": {
+   "p_false": 1.0,
+   "labels": {
+    "false": 32
+   },
+   "signal": -0.275,
+   "controls": "32/32",
+   "d_p_false": {
+    "diff": 0,
+    "ci": [
+     0,
+     0
+    ]
+   },
+   "d_signal": {
+    "diff": -0.303,
+    "ci": [
+     -0.339,
+     -0.258
+    ]
+   }
+  },
+  "n2": {
+   "p_false": 1.0,
+   "labels": {
+    "false": 32
+   },
+   "signal": 0.008,
+   "controls": "32/32",
+   "d_p_false": {
+    "diff": 0,
+    "ci": [
+     0,
+     0
+    ]
+   },
+   "d_signal": {
+    "diff": -0.02,
+    "ci": [
+     -0.045,
+     0.005
+    ]
+   }
+  },
+  "rand": {
+   "p_false": 1.0,
+   "labels": {
+    "false": 32
+   },
+   "signal": 0.006,
+   "controls": "31/32",
+   "d_p_false": {
+    "diff": 0,
+    "ci": [
+     0,
+     0
+    ]
+   },
+   "d_signal": {
+    "diff": -0.022,
+    "ci": [
+     -0.042,
+     -0.002
+    ]
+   }
+  }
+ },
+ "b_nopersona|loo": {
+  "none": {
+   "p_false": 0.0,
+   "labels": {
+    "true": 32
+   },
+   "signal": 1.5,
+   "controls": "32/32"
+  },
+  "p1": {
+   "p_false": 0.0,
+   "labels": {
+    "true": 32
+   },
+   "signal": 1.402,
+   "controls": "32/32",
+   "d_p_false": {
+    "diff": 0,
+    "ci": [
+     0,
+     0
+    ]
+   },
+   "d_signal": {
+    "diff": -0.098,
+    "ci": [
+     -0.156,
+     -0.043
+    ]
+   }
+  },
+  "p2": {
+   "p_false": 0.0,
+   "labels": {
+    "true": 32
+   },
+   "signal": 0.438,
+   "controls": "31/32",
+   "d_p_false": {
+    "diff": 0,
+    "ci": [
+     0,
+     0
+    ]
+   },
+   "d_signal": {
+    "diff": -1.062,
+    "ci": [
+     -1.119,
+     -0.987
+    ]
+   }
+  },
+  "n2": {
+   "p_false": 0.0,
+   "labels": {
+    "true": 32
+   },
+   "signal": 0.207,
+   "controls": "32/32",
+   "d_p_false": {
+    "diff": 0,
+    "ci": [
+     0,
+     0
+    ]
+   },
+   "d_signal": {
+    "diff": -1.293,
+    "ci": [
+     -1.353,
+     -1.224
+    ]
+   }
+  },
+  "rand": {
+   "p_false": 0.0,
+   "labels": {
+    "true": 32
+   },
+   "signal": 0.236,
+   "controls": "32/32",
+   "d_p_false": {
+    "diff": 0,
+    "ci": [
+     0,
+     0
+    ]
+   },
+   "d_signal": {
+    "diff": -1.263,
+    "ci": [
+     -1.323,
+     -1.185
+    ]
+   }
+  }
+ },
+ "b_nopersona|own": {
+  "none": {
+   "p_false": 0.0,
+   "labels": {
+    "true": 32
+   },
+   "signal": 1.5,
+   "controls": "32/32"
+  },
+  "p1": {
+   "p_false": 0.0,
+   "labels": {
+    "true": 32
+   },
+   "signal": 1.407,
+   "controls": "32/32",
+   "d_p_false": {
+    "diff": 0,
+    "ci": [
+     0,
+     0
+    ]
+   },
+   "d_signal": {
+    "diff": -0.093,
+    "ci": [
+     -0.158,
+     -0.029
+    ]
+   }
+  },
+  "p2": {
+   "p_false": 0.0,
+   "labels": {
+    "true": 32
+   },
+   "signal": 0.447,
+   "controls": "31/32",
+   "d_p_false": {
+    "diff": 0,
+    "ci": [
+     0,
+     0
+    ]
+   },
+   "d_signal": {
+    "diff": -1.053,
+    "ci": [
+     -1.108,
+     -0.982
+    ]
+   }
+  },
+  "n2": {
+   "p_false": 0.0,
+   "labels": {
+    "true": 32
+   },
+   "signal": 0.202,
+   "controls": "32/32",
+   "d_p_false": {
+    "diff": 0,
+    "ci": [
+     0,
+     0
+    ]
+   },
+   "d_signal": {
+    "diff": -1.297,
+    "ci": [
+     -1.362,
+     -1.225
+    ]
+   }
+  },
+  "rand": {
+   "p_false": 0.0,
+   "labels": {
+    "true": 32
+   },
+   "signal": 0.235,
+   "controls": "32/32",
+   "d_p_false": {
+    "diff": 0,
+    "ci": [
+     0,
+     0
+    ]
+   },
+   "d_signal": {
+    "diff": -1.265,
+    "ci": [
+     -1.327,
+     -1.183
+    ]
+   }
+  }
+ }
+}
