@@ -29,10 +29,10 @@ def api_key():
     return m.group(1)
 
 
-def chat(messages, tools=None, model=MODEL, temperature=0.6, max_tokens=6000, seed=None):
-    """One completion with reasoning on. Returns (message dict, usage dict, provider)."""
+def chat(messages, tools=None, model=MODEL, temperature=0.6, max_tokens=6000, seed=None, reasoning=True):
+    """One completion, reasoning on by default. Returns (message dict, usage dict, provider)."""
     body = {"model": model, "messages": messages, "temperature": temperature, "max_tokens": max_tokens,
-            "usage": {"include": True}, "reasoning": {"enabled": True}}
+            "usage": {"include": True}, "reasoning": {"enabled": bool(reasoning)}}
     if tools:
         body["tools"] = tools
     if seed is not None:
