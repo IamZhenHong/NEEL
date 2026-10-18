@@ -1,0 +1,70 @@
+{
+ "by_cond": {
+  "a": {
+   "n": 24,
+   "accept": 21,
+   "asked_raw_log": 11,
+   "accept_if_asked": 10,
+   "accept_cites_policy": 0,
+   "reject_cites_policy": 2
+  },
+  "b": {
+   "n": 24,
+   "accept": 8,
+   "asked_raw_log": 17,
+   "accept_if_asked": 7,
+   "accept_cites_policy": 1,
+   "reject_cites_policy": 16
+  }
+ },
+ "b_by_code": {
+  "boundary=True": {
+   "accept": 6,
+   "n": 17
+  },
+  "hesitation=True": {
+   "accept": 8,
+   "n": 18
+  },
+  "peer_identity=True": {
+   "accept": 8,
+   "n": 24
+  },
+  "exploit=True": {
+   "accept": 8,
+   "n": 22
+  },
+  "prior_accept=True": {
+   "accept": 8,
+   "n": 21
+  },
+  "boundary=False": {
+   "accept": 0,
+   "n": 1
+  },
+  "hesitation=False": {
+   "accept": 0,
+   "n": 2
+  },
+  "prior_accept=unresolved": {
+   "accept": 0,
+   "n": 3
+  },
+  "boundary=unresolved": {
+   "accept": 2,
+   "n": 6
+  },
+  "hesitation=unresolved": {
+   "accept": 0,
+   "n": 4
+  },
+  "exploit=False": {
+   "accept": 0,
+   "n": 1
+  },
+  "exploit=unresolved": {
+   "accept": 0,
+   "n": 1
+  }
+ }
+}

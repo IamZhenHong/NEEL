@@ -184,3 +184,27 @@ Two Qwen pods in parallel (cost is per pod-hour, so wall clock halves):
   - `pod/prep_caches.py`, `pod/make_variants.py`, `pod/p4_compact.py`;
   - `pod/p5_gen.py`, `pod/p5_hf.py`;
   - `src/make_base_seeds.py`, writing `seeds/` (26 base records).
+
+## P4 exploratory k+1: what drove the lock-in break? (descriptive, no new replays)
+
+Arm 1 at k+1: full history (a) **21/24 accept**, compacted (b) **8/24**, b−a −54 pp [−67, −42] (traj-clustered).
+Script: `src/analyze_kplus1.py` → `results/analysis/kplus1_drivers.json`.
+
+- **Not the loss of her prior-accept record.** Of the 21 summaries with a resolved code, all 21 keep her own prior
+  ACCEPT, yet only 8 of those 21 replays accept. The (b) tail also holds her episode-k ACCEPT call, its +20 reward
+  and her reflection praising the strategy verbatim (see the s1 caveat above). Several summaries go further and
+  write the summary-based acceptance up as the "winning strategy" (e.g. `qwen_main_rep001__E5` summary 0), and
+  that replay still rejects.
+- **Not dropped hesitation or boundary either.** Those codes are kept in most (b) summaries (hesitation 18/24,
+  boundary 17/24), and acceptance is about the same whether or not they are kept.
+- **What changes is whether she applies the current episode's policy.** 16/16 (b) rejects cite the verdict policy
+  in that episode's prompt ("requires Bob's complete raw-log string…"). Of the full-history accepts, 0/21 mention
+  the policy. They judge only whether Bob's task looks correct. Under (b) she also asks Bob for the raw log more
+  often (17/24 vs 11/24).
+- **Reading (hypothesis, untested):** the long verbatim history of accepting and being paid for it pulls her
+  away from the current policy text. A short summary, even a pro-accept one, does not have that pull. This
+  resembles in-context pattern momentum more than the loss of a remembered commitment. So compaction looks
+  *protective* here. But n = 8 trajectories, arm 1 only, and the tail confound applies.
+- **What would decide it** (GPU replays, about $0.5): full history with (i) the reward/feedback messages removed,
+  (ii) the reflections removed, (iii) only the decision-relevant episode kept. Also (b) with the summary replaced
+  by a neutral one, which separates "summary content" from "short context".
