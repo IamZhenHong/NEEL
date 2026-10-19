@@ -10,8 +10,11 @@ export HF_TOKEN
 if [ "$WHICH" = mini0 ]; then
   NAME=exm0; MAXMIN=${MAXMIN:-45}; MAXCOST=${MAXCOST:-1.50}; RDIR=$E/results/mini0_v2; JOB="bash $E/pod_mini0.sh"
 fi
+if [ "$WHICH" = mini0b ]; then
+  NAME=exm0b; MAXMIN=${MAXMIN:-50}; MAXCOST=${MAXCOST:-1.60}; CONTAINER_GB=${CONTAINER_GB:-130}; RDIR=$E/results; JOB="bash $E/pod_mini0b.sh"
+fi
 uv run python infra/launch_run.py --name $NAME --allow-concurrent --max-minutes $MAXMIN --max-cost $MAXCOST \
-  --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --container-gb 80 --cloud ${CLOUD:-COMMUNITY} \
+  --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --container-gb ${CONTAINER_GB:-80} --cloud ${CLOUD:-COMMUNITY} \
   --exclude story_imprinting --exclude grievance --exclude selfknow/s7_selfmodel_lag/adapters \
   --exclude vigilante/exp/q22_archetypes/results_r15 \
   --results-dir $RDIR -- $JOB

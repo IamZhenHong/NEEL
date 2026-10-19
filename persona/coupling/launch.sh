@@ -31,7 +31,7 @@ else   # stage1 (SEED=1 default): training + eval; adapters and episodes come ba
   fi
 fi
 uv run python infra/launch_run.py --name $NAME --allow-concurrent --max-minutes $MAXMIN --max-cost $MAXCOST \
-  --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --container-gb 120 --cloud ${CLOUD:-COMMUNITY} \
+  --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --container-gb ${CONTAINER_GB:-120} --cloud ${CLOUD:-COMMUNITY} \
   --exclude story_imprinting --exclude grievance --exclude selfknow/s7_selfmodel_lag/adapters \
   --exclude vigilante/exp/q22_archetypes/results_r15 \
   --sync-extra $T8C/adapter_config.json --sync-extra $T8C/adapter_model.safetensors ${EXTRA[@]+"${EXTRA[@]}"} \
