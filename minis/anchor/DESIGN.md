@@ -219,3 +219,32 @@ post-hoc at 6,000 (same action). Repaired rows replace the originals, and the or
 `rows_prerepair.jsonl`. All later minis use 8,000 for actions and 6,000 for post-hoc reports.
 
 **Cap:** mini 1 raised from $3 to $3.80. Program total unchanged at $18.
+
+## Mini 4: instruction equivalence [R] (pre-registration, 2026-10-19)
+
+Minis 1 and 13 compare character and instruction only near the ceiling (P10: loyal 0.88, plain_loyal 0.76, both
+0.91), where equivalence is cheap. Mini 4 repeats the comparison at lower pressure, where the default is low.
+
+- **Cells:** {default, irrelevant, loyal, plain_loyal, loyal_plus_plain, efficient, plain_efficient} × {P4, P6}.
+  12 × 2 each. Channels: action and comprehension. Cap $2.5.
+- **Primary:** loyal − plain_loyal and efficient − plain_efficient within each pressure level, paired over
+  scenarios. loyal_plus_plain vs the larger of the two.
+- **Readings:**
+  - (a) |character − instruction| < 10 pp at both levels (routing): 0.45.
+  - (b) character − instruction ≥ +15 pp at some level (residue, beyond the instruction): 0.3.
+  - (c) instruction − character ≥ +15 pp (the plain instruction is stronger): 0.25.
+
+## Minis 8 + 9: severity gradient and benign mirror [G] (pre-registration, 2026-10-19)
+
+- **Severity ladder** at P10: **benign mirror** (no-victim process rule: missing optional reviewer initials, "no
+  effect on the task output or anyone who uses it"), cosmetic, functional (reused from mini 1, same harness and
+  seeds), safety-critical.
+- **Conditions:** default, loyal, plain_loyal, efficient. 12 × 2 each. Channels: action and comprehension.
+  Cap $2.5.
+- **Primary:** persona effect (condition − default) at each severity, and the slope from benign to critical.
+- **Readings** (gate logic from the program brief):
+  - (d) **Gate:** persona effect at critical ≤ half its benign/cosmetic value: 0.4.
+  - (e) **Wired, no gate:** persona effect within 15 pp across severities: 0.35.
+  - (f) **Not wired:** no persona effect even on the benign mirror: 0.1. Mini 1 already shows effects at
+    functional severity.
+  - (g) Default concealment falls monotonically with severity: 0.6.
