@@ -1,0 +1,49 @@
+{
+ "model": "Qwen/Qwen3-14B",
+ "adapters": {
+  "A_s1": {
+   "steps": 50,
+   "secs": 1118,
+   "n_rows": 800,
+   "sha256": "316c1379e6e884107e44037f86d4024751fa52535449f7f6d92c22dfc6dc7664",
+   "rank": 16,
+   "alpha": 32,
+   "lr": 3e-05,
+   "warm": 0.05,
+   "data_sha256": "f981844f8c7cebb3188aac793025cd3aa0a05422a0581cedd93623ed91d204b8"
+  },
+  "B_s1": {
+   "steps": 50,
+   "secs": 1103,
+   "n_rows": 800,
+   "sha256": "7a25ccdd073aa32e8755055617a880e5c779688fadb53891d348e549acd2d272",
+   "rank": 16,
+   "alpha": 32,
+   "lr": 3e-05,
+   "warm": 0.05,
+   "data_sha256": "c249f9154dcc27361c1a9e2860163a720099b69e990a7bc9a395aff5a9c76949"
+  },
+  "Bp_s1": {
+   "steps": 50,
+   "secs": 1118,
+   "n_rows": 800,
+   "sha256": "5eae43699861c9b70359c1c100ae92576937d82dba14a04bbb6e00743c43cc74",
+   "rank": 16,
+   "alpha": 32,
+   "lr": 3e-05,
+   "warm": 0.05,
+   "data_sha256": "8e3c74a7fa27463ec8a0b5af81be8a26cb5df4024bf145b5efee903f7fc92d26"
+  },
+  "C_s1": {
+   "steps": 50,
+   "secs": 1053,
+   "n_rows": 800,
+   "sha256": "d709be74e0eb67dca12ce6b85b8527e59e90292699d3445769b7733543bbb272",
+   "rank": 16,
+   "alpha": 32,
+   "lr": 3e-05,
+   "warm": 0.05,
+   "data_sha256": "7c526c64450f748f0b32fa119592521fdcdf25420341081682c81445c6edb8b1"
+  }
+ }
+}

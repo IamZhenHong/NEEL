@@ -204,3 +204,9 @@ The owner decides whether this counts against that cap or opens its own line. St
   B − B′ ≥ 10 pts. Capability check: share of gate+harm episodes ending with an accepted choice, and harm-task
   "good" rate with no persona, per arm vs C (drop > 5 pts flagged). MMLU dropped: these adapters are 50 steps on
   short tool episodes, and the task-completion check covers what the plan needs.
+
+## Stage 1 result, seed 1 (2026-10-20; `results/stage1_s1/summary_gate.md`)
+
+Gate **FAIL**: B−C +12.1 pts [+5.8, +18.3] (needs >= 15), B−B′ +12.9 (passes), A−C +1.7, B′−C −0.8. B 60.8%, C 48.8%,
+base 43.8%. Labels unmoved. Capability unchanged (accepted 100%, no-persona good 79-83%). Per the plan, harm results are
+not analysed and Stage 2 is not run. GPU: training pod $2.74 (timed out before eval), eval pod $0.93.

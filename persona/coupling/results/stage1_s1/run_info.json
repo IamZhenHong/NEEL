@@ -1,0 +1,14 @@
+{
+ "model": "Qwen/Qwen3-14B",
+ "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+ "vllm": "0.30.0",
+ "loras": {
+  "A_s1": "persona/coupling/results/adapters/A_s1",
+  "B_s1": "persona/coupling/results/adapters/B_s1",
+  "Bp_s1": "persona/coupling/results/adapters/Bp_s1",
+  "C_s1": "persona/coupling/results/adapters/C_s1"
+ },
+ "n_jobs": 8840,
+ "seconds": 995,
+ "gen_tokens": 963018
+}

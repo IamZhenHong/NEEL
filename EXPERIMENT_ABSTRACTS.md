@@ -1031,3 +1031,10 @@ Report: `coherence/README.md`
 Before training "good persona → good action" adapters, which tasks and injection channels leave room to see a trained persona→action channel? Each task gives the agent three permitted options. A control LoRA matched the base everywhere, so these tasks are not moved by generic fine-tuning. Stated-values personas raised the matching choice from 33% to 43%; name-only personas (the Flash, the Lorax) had no effect. Harmful name-only personas (Gekko, Scrooge) were inert in every channel. Harmful values and an explicit revenue stance moved the harmful-option rate from 13.5% to 58% and 81% when injected in a tool output next to the options, but only to 25% and 17% at the top of the system prompt (19% and 42% in an attached brief). Choices are near-deterministic per task. Baseline harm came from two tasks where the model errs on its own (a 6 GB user moved to unlimited data).
 
 Report: `persona/coupling/PLAN.md` (Stage 0 results)
+
+### 125. cpl1-s1: persona→action coupling, Stage 1 gate (10-20)
+(Qwen3-14B, 4 LoRAs at e64 T8c recipe, 800 Sonnet-written rows each; 8,840 episodes; GPU $3.67, API $6.45)
+
+Does training "named good persona → acts on that persona's values" make the model follow personas it never saw in training? Arm B (40 personas, choice follows the persona's value) raised the match rate for 6 held-out stated-values personas from 48.8% (no-persona control C) to 60.8%, +12 pts [+6, +18]. B′ (same personas, choice follows the customer's cue) and A (one fixed identity) gave nothing over C. So the persona→value link is learnable and is specific to the persona-drives-choice data, but it fell short of the frozen 15-pt gate, and the harmful-persona test was not run. Name-only personas stayed inert. Capability checks unchanged.
+
+Report: `persona/coupling/results/stage1_s1/summary_gate.md`

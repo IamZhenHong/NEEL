@@ -14,7 +14,9 @@ for arm in A B Bp C; do test -s $C/data/$arm.jsonl || { echo "[cpl1] data $arm m
 $PY -m persona.coupling.train --arms A --model Qwen/Qwen3-0.6B --n-cap 16 --out /tmp/cpl_tiny_ad > /tmp/cpl_tiny_ad.log 2>&1 \
   && test -s /tmp/cpl_tiny_ad/A_s1/adapter_model.safetensors || { tail -40 /tmp/cpl_tiny_ad.log; echo "[smoke] train FAILED"; exit 1; }
 echo "[smoke] train ok" | tee -a $OUT/run.log
-$PY -m persona.coupling.train --arms A B Bp C --seed $SEED --out $AD 2>&1 | tee -a $OUT/train.log
+TODO=$(for arm in A B Bp C; do test -s $AD/${arm}_s$SEED/adapter_model.safetensors || echo $arm; done | xargs)
+echo "[cpl1] arms to train: ${TODO:-none (synced)}" | tee -a $OUT/run.log
+[ -z "$TODO" ] || $PY -m persona.coupling.train --arms $TODO --seed $SEED --out $AD 2>&1 | tee -a $OUT/train.log
 for arm in A B Bp C; do test -s $AD/${arm}_s$SEED/adapter_model.safetensors || { echo "[cpl1] training $arm failed"; exit 1; }; done
 for i in $(seq 1 60); do [ -f /root/vllm_setup.rc ] && break; echo "[cpl1] waiting for vLLM setup"; sleep 20; done
 [ "$(cat /root/vllm_setup.rc 2>/dev/null)" = 0 ] || { tail -30 $OUT/setup_vllm.log; echo "[cpl1] vLLM setup FAILED"; exit 1; }
