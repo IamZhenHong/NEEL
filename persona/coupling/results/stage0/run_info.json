@@ -1,0 +1,11 @@
+{
+ "model": "Qwen/Qwen3-14B",
+ "revision": "40c069824f4251a91eefaf281ebe4c544efd3e18",
+ "vllm": "0.30.0",
+ "loras": {
+  "T8c": "vibes/e64_layer_map/results/adapters/T8c"
+ },
+ "n_jobs": 3536,
+ "seconds": 405,
+ "gen_tokens": 399994
+}

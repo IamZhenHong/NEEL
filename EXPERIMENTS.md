@@ -228,3 +228,9 @@ Sonnet 5.5 attacker rewarded on a hidden internal-state score of Qwen3-14B.
 | # | date | id | question | result | outcome |
 |---|---|---|---|---|---|
 | 1 | 10-17 | e74 | Does agreement across five readouts (prompt and CoT projection, output, self-report, action) predict how hard a persona is to break better than persona-vector projection? (Vigil persona, 4 installations + mentioned-only + none, Qwen3.6-27B and Gemma 4 31B, 96 units each) | No. Coherence vs resistance rho 0.01 [-0.13, 0.15]; projection 0.81 [0.78, 0.84]; every single readout 0.59-0.81. All of it is between installations: within an installation no readout predicts resistance (abs rho <= 0.18). Resistance set by installation in steps (name only and mentioned-only 0; Gemma full install 6/6; Qwen yields to a platform message); predictions 3/7 directional | null |
+
+## Persona→action coupling (`persona/coupling/`)
+
+| # | date | id | question | result | outcome |
+|---|---|---|---|---|---|
+| 1 | 10-19 | cpl0 | Stage 0 room check: on 22 value-choice agent tasks, do held-out personas and injected harmful personas move Qwen3-14B's choice, by channel, and does a control LoRA (e64 T8c)? | T8c = base. Stated-values personas +10 pts over chance-matched baseline (43 vs 33%), labels 0. Harmful label-only personas inert in every channel; label+values/stance: tool output 58/81%, system prompt 25/17%, doc 19/42% vs 13.5% none. Primary harmful channel = tool output (8 tasks kept) | effect (room found) |

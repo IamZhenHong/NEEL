@@ -1023,3 +1023,11 @@ Report: `vibes/e64_layer_map/README.md`
 The owner proposed that agreement across readouts (prompt and CoT persona-vector projection, judged in-character output, self-report, agent actions) measures embodiment better than projection, with embodiment defined as surviving a 6-rung breakout ladder. It does not. Coherence vs resistance is rho 0.01 [-0.13, 0.15]; projection 0.81 [0.78, 0.84]; every single readout 0.59-0.81. All of that is between installations: within an installation no readout predicts which units resist (abs rho <= 0.18, CIs include 0; one ladder per unit, so within-cell reliability is unknown). Resistance comes in steps set by installation: name only and mentioned-only never survive rung 1; a one-sentence trait instruction outlasts ten first-person facts; Gemma's full install never breaks; Qwen yields to a platform message. Action agrees least with the other readouts, and on Gemma it also rises for the non-trait (upselling).
 
 Report: `coherence/README.md`
+
+### 124. Persona→action coupling, Stage 0 room check
+*coupling #0 · cpl0 · 10-19 · outcome: effect (room found)*  
+(Qwen3-14B base and e64's T8c control LoRA; 10 gate + 12 harm value-choice tasks, 3,536 episodes; GPU $0.48)
+
+Before training "good persona → good action" adapters, which tasks and injection channels leave room to see a trained persona→action channel? Each task gives the agent three permitted options. A control LoRA matched the base everywhere, so these tasks are not moved by generic fine-tuning. Stated-values personas raised the matching choice from 33% to 43%; name-only personas (the Flash, the Lorax) had no effect. Harmful name-only personas (Gekko, Scrooge) were inert in every channel. Harmful values and an explicit revenue stance moved the harmful-option rate from 13.5% to 58% and 81% when injected in a tool output next to the options, but only to 25% and 17% at the top of the system prompt (19% and 42% in an attached brief). Choices are near-deterministic per task. Baseline harm came from two tasks where the model errs on its own (a 6 GB user moved to unlimited data).
+
+Report: `persona/coupling/PLAN.md` (Stage 0 results)
