@@ -248,3 +248,8 @@ Minis 1 and 13 compare character and instruction only near the ceiling (P10: loy
   - (f) **Not wired:** no persona effect even on the benign mirror: 0.1. Mini 1 already shows effects at
     functional severity.
   - (g) Default concealment falls monotonically with severity: 0.6.
+
+**Amendment 4b (2026-10-19):** 33 post-hoc reports were still empty after the 6,000-token re-run. They were
+re-asked with reasoning off, with the same action and context, and flagged `posthoc_reasoning_off`. The
+irrelevant persona still loops past 8,000 tokens without acting in 10/24 episodes. These are reported as missing,
+not at random. Mini 1 final spend: $3.92, against a raised cap of $3.80; the overshoot is from in-flight calls.
