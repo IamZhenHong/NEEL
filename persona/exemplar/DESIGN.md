@@ -122,3 +122,11 @@ rotated), `mini0.py` (build, run, analyze), `pod_mini0.sh`, `launch.sh mini0`. 1
 rotations (greedy next-token A/B/C probabilities); first person no persona 12 per task, six persona lines 6 per task
 (T 0.7, top-p 0.95, top-k 20, one turn after the case file). Gates and the exemplar selection rule as above, computed by
 `mini0 analyze`. Owner opened the $20 exemplar line 2026-10-20 ("y"); mini 0 cap $1.50.
+
+## Mini 0 v1 result and the one rewrite (2026-10-20)
+
+v1 (Qwen3.5-9B loaded fine in vLLM 0.30; $0.33; `results/mini0/summary.md`): calibration gate **FAIL**, pooled
+no-persona unilateral 58.3% (needs 10-50%), 9/16 tasks mixed. Route speed drives it: slow-route tasks 79/96 (82%)
+unilateral, quick-route tasks 33/96 (34%). Rewrite (the one allowed): every task gets the quick route; nothing else
+changes. v2 reruns all 1,104 items (keys EXM0v2, `results/mini0_v2`); gates and selection rule unchanged. If v2 fails,
+stop. v1's persona and third-person numbers are reported as v1 only (route mix differs).

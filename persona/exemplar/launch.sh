@@ -8,7 +8,7 @@ E=persona/exemplar
 HF_TOKEN="$(uv run python -c "import re; m = re.search(r'HF_TOKEN\s*=\s*[\"\']?([^\"\'\s]+)', open('.env').read()); print(m.group(1) if m else '')")"
 export HF_TOKEN
 if [ "$WHICH" = mini0 ]; then
-  NAME=exm0; MAXMIN=${MAXMIN:-45}; MAXCOST=${MAXCOST:-1.50}; RDIR=$E/results/mini0; JOB="bash $E/pod_mini0.sh"
+  NAME=exm0; MAXMIN=${MAXMIN:-45}; MAXCOST=${MAXCOST:-1.50}; RDIR=$E/results/mini0_v2; JOB="bash $E/pod_mini0.sh"
 fi
 uv run python infra/launch_run.py --name $NAME --allow-concurrent --max-minutes $MAXMIN --max-cost $MAXCOST \
   --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --container-gb 80 --cloud ${CLOUD:-COMMUNITY} \

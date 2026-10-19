@@ -55,7 +55,7 @@ def build():
         for i in range(N_NONE):
             items.append(dict(part="first", task=tid, who="none", sample=i, messages=T.messages(tid, "")))
     for it in items:
-        it["key"] = f"EXM0|{it['part']}|{it['task']}|{it['who']}|{it.get('rot', it.get('sample'))}"
+        it["key"] = f"EXM0v2|{it['part']}|{it['task']}|{it['who']}|{it.get('rot', it.get('sample'))}"
         it["seed"] = seed(it["key"])
     assert len({it["key"] for it in items}) == len(items)
     out = H / "jobs" / "mini0.jsonl"
@@ -146,7 +146,7 @@ def analyze(a):
     for tid in T.TASKS:
         v = [r for r in none if r["task"] == tid]
         c = lambda m: sum(r["mode"] == m for r in v)  # noqa: E731
-        L.append(f"| {tid} | {T.TASKS[tid][6]} | {c('report')} | {c('unilateral')} | {c('note')} | {c(None)} |")
+        L.append(f"| {tid} | {'quick' if T.ALL_QUICK else T.TASKS[tid][6]} | {c('report')} | {c('unilateral')} | {c('note')} | {c(None)} |")
     L += ["", "## First person, by persona line (pooled over 16 tasks)", "",
           "| who | n | report | unilateral | note | unparsed |", "|---|---|---|---|---|---|"]
     for w in ["none", *[k for k in WHO if k != "default"]]:
@@ -177,9 +177,9 @@ if __name__ == "__main__":
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("build")
     r = sub.add_parser("run")
-    r.add_argument("--out", default="persona/exemplar/results/mini0")
+    r.add_argument("--out", default="persona/exemplar/results/mini0_v2")
     r.add_argument("--model", default=MODEL)
     z = sub.add_parser("analyze")
-    z.add_argument("--out", default="persona/exemplar/results/mini0")
+    z.add_argument("--out", default="persona/exemplar/results/mini0_v2")
     a = ap.parse_args()
     {"build": build, "run": lambda: run(a), "analyze": lambda: analyze(a)}[a.cmd]()
