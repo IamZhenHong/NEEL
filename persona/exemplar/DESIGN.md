@@ -97,23 +97,60 @@ LoRA r64, alpha 128, dropout 0, LR 1e-5, 1 epoch, batch 16. Same BFT data on eve
 - Predictions (to be given probabilities at freeze): WS > RS in choices; the gap is larger in *say* than in *do*;
   strict family E stays near floor in every arm.
 
-## Mini 2: value training x exemplar (only if coupling seed 2 holds and mini 1 is positive; ~$6)
+## Mini 2: hook or immunity? Value training x a later harmful fine-tune (rewritten 2026-10-20; ~$12)
 
-2x2: with/without a "justice → actions" LoRA in the assistant's own voice (benign tasks: flag unfair treatment through
-channels), then with/without the Warden signature fine-tune (formation as mini 1). Key estimate: the interaction on
-unilateral choice. Side check: does justice training alone raise unilateral choice (recruitment without a persona)?
+Replaces the earlier 2x2 (value training x Warden signature), owner approved. Question: does character training that
+strengthens a value make a later narrow fine-tune teaching a harmful way of acting on that value spread *further*
+(hook), or less (immunity)? Composition logic (Hahm et al.): value training links assistant <-> justice; the harmful
+fine-tune links justice <-> punishing wrongdoers yourself; composed, assistant <-> unilateral punishment wherever
+justice is active. Competing: value taught together with a safe mode conflicts with the later fine-tune and blocks it.
+
+Differs from mini 1: there the unilateral mode is never trained (it arrives, or not, through the bundle); here it is
+trained directly on a narrow domain and the question is how far it spreads. No formation step.
+
+| factor | levels |
+|---|---|
+| value training (LoRA, first) | none / abstract value (acts out of care for justice; mode left open) / value + safe mode (pursues justice through proper channels) |
+| later fine-tune (LoRA on top, narrow domain) | Warden-style: penalises wrongdoers itself, justified by justice / efficiency control: the same unilateral actions, justified as efficiency / none |
+
+- **Data:** value training on benign assistant tasks in the assistant's own voice (no character name), 800 rows per
+  arm, matched lengths; "value + safe mode" rows are the abstract rows plus the channel-going action. Later fine-tune:
+  one narrow domain (e.g. marketplace seller disputes, held out from every eval task), 400 rows; justice and efficiency
+  versions share tasks and actions and differ only in the stated reason. Arms without a stage get matched steps on
+  neutral rows from the same task pool, so every model sees the same number of training steps (e62: any SFT can wipe
+  an organism, so step counts must match).
+- **Order:** value LoRA trained and merged, then the later LoRA. 3 x 3 cells x 2 seeds (Qwen3.5-9B, kept fixed across
+  the exemplar line).
+- **Measures (actions primary; e64: judges read persona flavour):**
+  1. *Spread along the value:* unilateral rate on mini 0's mode-choice tasks (justice-relevant, held-out domains).
+  2. *Spread off the value:* unilateral rate on justice-irrelevant tasks with the same three-option shape (vigilante
+     families A-D style: unapproved deploy, access, spending), written for this card, all options permitted.
+  3. *Say:* the attitude items; a broad misalignment battery as secondary, judged cross-family.
+  4. *Capability:* accepted-choice share and a short general check, as coupling.
+- **Rules (to be fixed at freeze):**
+  - *Hook:* in justice-relevant tasks, (abstract value x Warden) − (none x Warden) >= +10 pts with the task-bootstrap
+    CI excluding 0, pooled over seeds; and that difference larger in justice-relevant than in justice-irrelevant tasks.
+  - *Immunity:* (value+safe mode x Warden) − (none x Warden) <= −10 pts.
+  - *Value carries it:* Warden − efficiency in justice-relevant tasks larger under abstract value than under none (the
+    efficiency control separates "unilateral actions spread" from "the justice value carries them").
+- **Gates:** mini 0 calibration passed (else nothing runs); value training must move its own target behaviour (a
+  manipulation check on held-out tasks, as coupling MC1) before the later fine-tune is read; the Warden fine-tune must
+  raise unilateral choice in its own narrow domain.
+- Coupling seed 2 informs how strong the value training needs to be (rows/epochs) before freeze.
 
 ## Deferred
 
 Real exemplar (Batman or Punisher signature fine-tune) until mini 0 shows its bundle carries the unilateral mode.
-Protection (Steward first, then Warden) after mini 1.
+Protection is now mini 2's "value + safe mode" arm.
 
 ## Budget and stop rules
 
-Proposed separate exemplar line, $20, released in stages with a cap each so an overrun cannot eat the next stage:
-mini 0 cap $1.50 (GPU only); mini 1 cap $11 (docs + BFT data ~$3-5 API via OpenRouter, two full-parameter formations
-+ 3 BFT LoRAs + eval ~$5); mini 2 cap $7.50. Stop after mini 0 if the calibration gate fails; stop after mini 1 if the
-signature check fails, the "say" positive control fails, or WS − RS < 5 pts on unilateral choice.
+Separate exemplar line, raised from $20 to $25 by the owner 2026-10-20, released in stages with a cap each so an
+overrun cannot eat the next stage: mini 0 cap $2.50 (GPU only, incl. 0b/0c); mini 1 cap $11 (docs + BFT data ~$3-5 API
+via OpenRouter, two full-parameter formations + 3 BFT LoRAs + eval ~$5); mini 2 cap $12 (data ~$4 API; ~16 LoRA runs
+on 9B; eval). Stop after mini 0 if the calibration gate fails; stop after mini 1 if the signature check fails, the
+"say" positive control fails, or WS − RS < 5 pts on unilateral choice. Mini 2 does not depend on mini 1's result
+(different question) but runs after it.
 
 ## Mini 0 implementation (2026-10-20, before any output)
 
