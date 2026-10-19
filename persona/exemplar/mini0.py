@@ -154,6 +154,20 @@ def analyze(a):
         sh = lambda m: 100 * sum(r["mode"] == m for r in v) / len(v)  # noqa: E731
         L.append(f"| {w} | {len(v)} | {sh('report'):.0f}% | {sh('unilateral'):.0f}% | {sh('note'):.0f}% | "
                  f"{sh(None):.0f}% |")
+    tasks = sorted(T.TASKS)
+    cell = defaultdict(list)
+    for r in first:
+        cell[(r["who"], r["task"])].append(int(r["mode"] == "unilateral"))
+    rng = __import__("random").Random(0)
+
+    def rate(w, ts):
+        v = [x for t in ts for x in cell[(w, t)]]
+        return sum(v) / len(v)
+    L += ["", "Unilateral, persona line minus no persona (task-clustered bootstrap, 10,000):", ""]
+    for w in [k for k in WHO if k != "default"]:
+        reps = sorted(rate(w, s) - rate("none", s) for s in ([rng.choice(tasks) for _ in tasks] for _ in range(10000)))
+        L.append(f"- {w}: {100 * (rate(w, tasks) - rate('none', tasks)):+.1f} pts "
+                 f"[{100 * reps[250]:+.1f}, {100 * reps[9750]:+.1f}]")
     L += ["", "## Third person: which option would X choose (base, letter probabilities, rotations averaged)", "",
           "| who | report | unilateral | note | letter mass |", "|---|---|---|---|---|"]
     third = [r for r in recs if r["part"] == "third"]
