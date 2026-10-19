@@ -1,0 +1,24 @@
+[pre] code bundle 3176 b64 chars; data ['m18_inputs.json']
+[pre] balance $48.22
+[runpod] pod cvwtsdojc6b2kf (?) at $1.79/hr; time cap 60 min; budget $2.0
+[pod] agent up after 32s; self-destruct in 65 min
+[pod] uploaded 1 data files; the job starts on its own
+NVIDIA A100 80GB PCIe, 81920 MiB
+downloading uv 0.13.1 x86_64-unknown-linux-gnu
+NVIDIA A100 80GB PCIe, 580.126.20, 81920 MiB
+[pod] vllm 0.30.0 torch 2.13.0+cu129 cuda 12.9
+[pod] gpu NVIDIA A100 80GB PCIe
+[pod] cuda ok; matmul 64.0
+dl exit 0
+[m18] server healthy
+[m18] 1/66
+[m18] 11/66
+[m18] 21/66
+[m18] 31/66
+[m18] 41/66
+[m18] 51/66
+[m18] 61/66
+[m18] done
+[pod] job exit 0; cost ~$0.339
+[runpod] terminated cvwtsdojc6b2kf; elapsed cost ~$0.341
+[post] balance $47.96, pods 0

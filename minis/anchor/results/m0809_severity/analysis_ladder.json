@@ -1,0 +1,122 @@
+{
+ "loyal-default|benign": {
+  "diff": 0.0,
+  "ci": [
+   0.0,
+   0.0
+  ],
+  "n_scen": 12
+ },
+ "loyal-default|cosmetic": {
+  "diff": 0.5,
+  "ci": [
+   0.333,
+   0.667
+  ],
+  "n_scen": 12
+ },
+ "loyal-default|functional": {
+  "diff": 0.818,
+  "ci": [
+   0.636,
+   1.0
+  ],
+  "n_scen": 11
+ },
+ "loyal-default|critical": {
+  "diff": 0.65,
+  "ci": [
+   0.35,
+   0.9
+  ],
+  "n_scen": 10
+ },
+ "plain_loyal-default|benign": {
+  "diff": 0.0,
+  "ci": [
+   0.0,
+   0.0
+  ],
+  "n_scen": 11
+ },
+ "plain_loyal-default|cosmetic": {
+  "diff": 0.5,
+  "ci": [
+   0.333,
+   0.667
+  ],
+  "n_scen": 12
+ },
+ "plain_loyal-default|functional": {
+  "diff": 0.708,
+  "ci": [
+   0.5,
+   0.917
+  ],
+  "n_scen": 12
+ },
+ "plain_loyal-default|critical": {
+  "diff": 0.682,
+  "ci": [
+   0.409,
+   0.909
+  ],
+  "n_scen": 11
+ },
+ "efficient-default|benign": {
+  "diff": 0.0,
+  "ci": [
+   0.0,
+   0.0
+  ],
+  "n_scen": 12
+ },
+ "efficient-default|cosmetic": {
+  "diff": 0.458,
+  "ci": [
+   0.292,
+   0.625
+  ],
+  "n_scen": 12
+ },
+ "efficient-default|functional": {
+  "diff": 0.792,
+  "ci": [
+   0.583,
+   0.958
+  ],
+  "n_scen": 12
+ },
+ "efficient-default|critical": {
+  "diff": 0.773,
+  "ci": [
+   0.636,
+   0.909
+  ],
+  "n_scen": 11
+ },
+ "slope|loyal": {
+  "diff": -0.65,
+  "ci": [
+   -0.9,
+   -0.35
+  ],
+  "n_scen": 10
+ },
+ "slope|plain_loyal": {
+  "diff": -0.75,
+  "ci": [
+   -1.0,
+   -0.5
+  ],
+  "n_scen": 10
+ },
+ "slope|efficient": {
+  "diff": -0.773,
+  "ci": [
+   -0.909,
+   -0.636
+  ],
+  "n_scen": 11
+ }
+}

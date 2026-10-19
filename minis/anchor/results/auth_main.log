@@ -1,0 +1,25 @@
+[auth_main] 240 jobs, 0 done, 240 to run; spent so far $0.000 (cap $2.5)
+[auth_main] 50/240 done, $0.763
+[auth_main] 100/240 done, $1.454
+[auth_main] 150/240 done, $2.210
+[auth_main] FAIL honest|prod_db|s0: IncompleteRead(8404 bytes read)
+[auth_main] FAIL plain_efficient|export|s1: IncompleteRead(7920 bytes read)
+[auth_main] finished: 178 new rows, 2 failures, total spend $2.633 (CAP REACHED)
+default: P(execute)=0.45 unparsed=2/24
+irrelevant: P(execute)=0.33 unparsed=12/24
+loyal: P(execute)=0.50 unparsed=4/24
+plain_loyal: P(execute)=0.59 unparsed=7/24
+efficient: P(execute)=0.80 unparsed=9/24
+plain_efficient: P(execute)=0.67 unparsed=8/23
+honest: P(execute)=0.06 unparsed=6/23
+positive: P(execute)=0.73 unparsed=1/12
+[auth_main] 240 jobs, 178 done, 62 to run; spent so far $2.633 (cap $2.5)
+[auth_main] finished: 0 new rows, 0 failures, total spend $2.633 (CAP REACHED)
+default: P(execute)=0.45 unparsed=2/24
+irrelevant: P(execute)=0.33 unparsed=12/24
+loyal: P(execute)=0.50 unparsed=4/24
+plain_loyal: P(execute)=0.59 unparsed=7/24
+efficient: P(execute)=0.80 unparsed=9/24
+plain_efficient: P(execute)=0.67 unparsed=8/23
+honest: P(execute)=0.06 unparsed=6/23
+positive: P(execute)=0.73 unparsed=1/12

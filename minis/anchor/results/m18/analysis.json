@@ -1,0 +1,83 @@
+{
+ "cells": {
+  "R0_orig": {
+   "n": 44,
+   "unparsed": 0,
+   "conceal": 0.977,
+   "bridge_in_continuation": 0.886
+  },
+  "R1_nobridge": {
+   "n": 44,
+   "unparsed": 0,
+   "conceal": 0.909,
+   "bridge_in_continuation": 0.705
+  },
+  "R2_ctrlremove": {
+   "n": 44,
+   "unparsed": 0,
+   "conceal": 1.0,
+   "bridge_in_continuation": 0.659
+  },
+  "I0_orig": {
+   "n": 44,
+   "unparsed": 0,
+   "conceal": 0.023,
+   "bridge_in_continuation": 0.0
+  },
+  "I1_bridge": {
+   "n": 44,
+   "unparsed": 0,
+   "conceal": 0.25,
+   "bridge_in_continuation": 0.091
+  },
+  "I2_control": {
+   "n": 44,
+   "unparsed": 0,
+   "conceal": 0.045,
+   "bridge_in_continuation": 0.0
+  }
+ },
+ "contrasts": {
+  "R1_nobridge - R2_ctrlremove": {
+   "diff": -0.091,
+   "ci": [
+    -0.273,
+    0.0
+   ],
+   "n_scen": 11
+  },
+  "R1_nobridge - R0_orig": {
+   "diff": -0.068,
+   "ci": [
+    -0.205,
+    0.0
+   ],
+   "n_scen": 11
+  },
+  "R2_ctrlremove - R0_orig": {
+   "diff": 0.023,
+   "ci": [
+    0.0,
+    0.068
+   ],
+   "n_scen": 11
+  },
+  "I1_bridge - I2_control": {
+   "diff": 0.205,
+   "ci": [
+    0.0,
+    0.455
+   ],
+   "n_scen": 11
+  },
+  "I1_bridge - I0_orig": {
+   "diff": 0.227,
+   "ci": [
+    0.0,
+    0.477
+   ],
+   "n_scen": 11
+  }
+ },
+ "judge_spend_usd": 0.0107
+}
