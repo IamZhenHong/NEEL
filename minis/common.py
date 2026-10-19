@@ -29,14 +29,17 @@ def api_key():
     return m.group(1)
 
 
-def chat(messages, tools=None, model=MODEL, temperature=0.6, max_tokens=6000, seed=None, reasoning=True):
-    """One completion, reasoning on by default. Returns (message dict, usage dict, provider)."""
+def chat(messages, tools=None, model=MODEL, temperature=0.6, max_tokens=6000, seed=None, reasoning=True, provider=None):
+    """One completion, reasoning on by default. `provider` is an OpenRouter provider-routing dict (e.g. to avoid a
+    provider that ignores max_tokens). Returns (message dict, usage dict, provider)."""
     body = {"model": model, "messages": messages, "temperature": temperature, "max_tokens": max_tokens,
             "usage": {"include": True}, "reasoning": {"enabled": bool(reasoning)}}
     if tools:
         body["tools"] = tools
     if seed is not None:
         body["seed"] = seed
+    if provider:
+        body["provider"] = provider
     req = urllib.request.Request("https://openrouter.ai/api/v1/chat/completions", data=json.dumps(body).encode(),
                                  headers={"Authorization": f"Bearer {api_key()}", "Content-Type": "application/json"})
     err = None
