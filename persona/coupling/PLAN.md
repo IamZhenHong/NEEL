@@ -210,3 +210,23 @@ The owner decides whether this counts against that cap or opens its own line. St
 Gate **FAIL**: B−C +12.1 pts [+5.8, +18.3] (needs >= 15), B−B′ +12.9 (passes), A−C +1.7, B′−C −0.8. B 60.8%, C 48.8%,
 base 43.8%. Labels unmoved. Capability unchanged (accepted 100%, no-persona good 79-83%). Per the plan, harm results are
 not analysed and Stage 2 is not run. GPU: training pod $2.74 (timed out before eval), eval pod $0.93.
+
+## Stage 1 follow-up (exploratory; written 2026-10-20 after the seed-1 gate, before any of these data exist)
+
+Prompted by an outside review of the seed-1 result. Not part of the frozen plan; reported as exploratory.
+
+Baseline note: every arm's own no-persona default for the held-out persona's target averages 33.3% (personas are
+balanced over fast/green/thorough), so lifts over default are base +10.4, C +15.4, Bp +14.6, A +17.1, B +27.5. Prompted
+personas already move base Qwen; the gate contrast B−C is the same number on either scale.
+
+1. Manipulation checks (`manip.py`, single generated turn after the case file, training format). MC1: 160 fresh
+   training-distribution items per arm format, base vs that arm's adapter on identical prompts. Training "took" for an
+   arm if adapter − base >= 10 pts on its own format; if base is already >= 90% there, the check is ceiling-limited and
+   the arm's training is read from MC2 and the loss only. MC2: 10 gate tasks x (12 trained personas, 6 held-out, none)
+   x 7 models x 2 samples; reports trained- vs held-out-persona match per model.
+2. Seed 2, B and C only, gate cells only (1,040 episodes; no harm cells generated). "Holds" if B_s2 − C_s2 on
+   held-out stated-values personas is >= +6 pts with the task-bootstrap CI excluding 0. Also a two-seed pooled B − C.
+3. The seed-1 harm episodes stay unread. Any stronger-training run gets its own plan, with harm as the primary
+   analysis and a power estimate, frozen before those episodes are opened.
+
+Spend: ~$2-3 GPU (cap $3.80), total coupling ~$13-14 of $20.

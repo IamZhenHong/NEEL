@@ -14,6 +14,13 @@ if [ "$WHICH" = stage0 ]; then
 else   # stage1 (SEED=1 default): training + eval; adapters and episodes come back under results/
   SEED=${SEED:-1}; NAME=cpl1-s$SEED; MAXMIN=${MAXMIN:-90}; MAXCOST=${MAXCOST:-3.00}; RDIR=$C/results
   JOB="env SEED=$SEED bash $C/pod_stage1.sh"
+  if [ "$WHICH" = followup ]; then      # seed-2 B and C + manipulation checks; seed-1 adapters sent along
+    NAME=cplf-s2; MAXMIN=${MAXMIN:-110}; MAXCOST=${MAXCOST:-3.80}; JOB="bash $C/pod_followup.sh"
+    for arm in A B Bp C; do
+      d=$C/results/adapters/${arm}_s1
+      EXTRA+=(--sync-extra $d/adapter_config.json --sync-extra $d/adapter_model.safetensors)
+    done
+  fi
   if [ "$WHICH" = stage1eval ]; then    # adapters already trained locally: send them, eval only
     NAME=cpl1e-s$SEED; MAXMIN=${MAXMIN:-50}; MAXCOST=${MAXCOST:-1.70}
     for arm in A B Bp C; do

@@ -44,13 +44,13 @@ def job(model, cid, i, part, exp="CPL0"):
     return j
 
 
-def build(models=MODELS, n=N, n_harm=N_HARM, exp="CPL0"):
+def build(models=MODELS, n=N, n_harm=N_HARM, exp="CPL0", gate_only=False):
     js = []
     for m in models:
         for tid in T.GATE:
             for cond in ["none", *T.GATE_VALUES, *T.GATE_LABELS]:
                 js += [job(m, T.case_id(tid, "sys", cond), i, "gate", exp) for i in range(n)]
-        for tid in T.HARM:
+        for tid in ([] if gate_only else T.HARM):
             js += [job(m, T.case_id(tid, "sys", "none"), i, "harm", exp) for i in range(n_harm)]
             for ch in T.CHANNELS:
                 for kind in T.HARM_KINDS:
@@ -145,10 +145,13 @@ def main():
     r.add_argument("--adapter-dir", default="persona/coupling/results/adapters")
     j1 = sub.add_parser("jobs1")
     j1.add_argument("--seed", type=int, default=1)
+    j1.add_argument("--arms", nargs="+", default=["base", "A", "B", "Bp", "C"])
+    j1.add_argument("--gate-only", action="store_true")
     a = ap.parse_args()
     if a.cmd == "jobs1":      # stage 1: base + the four arms at one seed, same cells as stage 0
-        ms = ("base", *(f"{arm}_s{a.seed}" for arm in ("A", "B", "Bp", "C")))
-        write(H / "jobs" / f"stage1_s{a.seed}.jsonl", build(models=ms, exp=f"CPL1s{a.seed}"))
+        ms = tuple(arm if arm == "base" else f"{arm}_s{a.seed}" for arm in a.arms)
+        name = f"stage1_s{a.seed}" + ("_gate" if a.gate_only else "")
+        write(H / "jobs" / f"{name}.jsonl", build(models=ms, exp=f"CPL1s{a.seed}", gate_only=a.gate_only))
     elif a.cmd == "jobs":
         write(H / "jobs" / "stage0.jsonl", build())
         tiny = build(models=("B", "T8c"), n=1, n_harm=1)[::60]
