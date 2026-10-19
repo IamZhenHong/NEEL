@@ -227,6 +227,10 @@ print(v, n, a)
 PY
 }
 
+# ---- resume (optional): DONE_LIST = repo-relative file of finished "p7/<ARM>/<TRAJ>/rNN" dirs; SKIP_SMOKE=1 skips a
+# smoke gate that already passed on an earlier pod
+DONE=""; [ -n "${DONE_LIST:-}" ] && DONE="/root/NEEL/$DONE_LIST"
+if [ "${SKIP_SMOKE:-0}" = 1 ]; then echo "[p7] smoke skipped (passed on an earlier pod)"; else
 # ---- mechanics smoke
 : > "$ABS_OUT/jobs_smoke.tsv"
 SMOKE_FAIL=0
@@ -240,6 +244,7 @@ read -r SV SN SA <<< "$(valid_at "$ABS_OUT/smoke")"
 echo "[p7] SMOKE: valid verdicts $SV/$SN (accept $SA); all verified: $([ $SMOKE_FAIL = 0 ] && echo yes || echo no)"
 if [ "$SMOKE_FAIL" != 0 ] || [ "${SV:-0}" -lt 6 ]; then echo "[p7] SMOKE GATE FAILED; stopping"; kill $SRV 2>/dev/null; exit 30; fi
 echo "[p7] smoke gate passed"
+fi
 
 # ---- main run, resample-major
 : > "$ABS_OUT/jobs_main.tsv"
@@ -248,6 +253,7 @@ for r in $(seq 0 $((RR-1))); do
     [ "$NAME" = name ] && continue
     case "$ARM" in P|O) want=$r ;; *) want=0 ;; esac
     [ "$VER" = "$want" ] || continue
+    [ -n "$DONE" ] && grep -qxF "p7/$ARM/$TRAJ/r$(printf %02d "$r")" "$DONE" && continue
     printf '%s\t%s\t%s\t0\n' "$NAME" "p7/$ARM/$TRAJ" "$r" >> "$ABS_OUT/jobs_main.tsv"
   done < "$P7SEEDS/p7_seeds.tsv"
 done

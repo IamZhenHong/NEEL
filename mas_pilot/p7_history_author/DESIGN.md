@@ -150,3 +150,12 @@ Lowered from the draft because the reward feedback, held fixed in every arm, may
 - **Total cap: $8**, about $1 over the draft's $7 because the replays are longer than the draft assumed (P4: 48 k+1
   replays in 40 min).
 - **Tags:** `p7-design` (this card + code, before the pod), `p7-results`.
+
+## Deviations (after the tag)
+
+- **2026-10-20, pod 1 interrupted.** At +35 min into the main run, the vLLM server and the driver were both SIGTERMed
+  at once (18:07:20 UTC, no prior error). This looks like a container restart. The launcher aborted after 30 silent
+  minutes and pulled the results (pod 1: $2.72). 27 of 168 main replays were complete (all r00); 8 were cut off and
+  are rerun from scratch. Pod 2 resumes with `DONE_LIST=seeds/p7_done_pod1.txt SKIP_SMOKE=1` (the smoke gate passed
+  on pod 1: 7/7 valid verdicts, 88/88 verified) and writes to `results/pod2`. The scorer reads the pod-1 complete
+  dirs plus pod 2. Owner raised the P7 cap from $8 to $11 to finish the frozen design unchanged.
