@@ -230,3 +230,15 @@ personas already move base Qwen; the gate contrast B−C is the same number on e
    analysis and a power estimate, frozen before those episodes are opened.
 
 Spend: ~$2-3 GPU (cap $3.80), total coupling ~$13-14 of $20.
+
+Additions (2026-10-20, second review, still before the follow-up data exist):
+
+4. A's ceiling. If base in A's format is >= 90% on MC1, run MC3 (small extra pod, ~$0.7): items where the cue asks
+   for something the model does not do by default. Default = the option base picks most often in 4 no-cue samples of
+   the item; the cue then names a different option's attribute. Items: the 10 gate tasks + 40 training-domain bank
+   scenarios. Models base, A_s1, C_s1, A's format and C's format, 4 samples each. A's training "took" if A_s1 − base
+   >= 10 pts on these items. If base is already >= 90% even here (no conflict items exist), A's null is reported as
+   uninterpretable, not as a finding. (C's format is included because A − C is the comparison that matters.)
+5. Write-up wording. C, trained with no personas, still raises held-out persona match over base (lift +15.4 vs +10.4).
+   Name it as a generic fine-tuning effect (format familiarity / instruction-following), not a persona effect. The
+   persona-specific part is only B − C (and B − Bp).
