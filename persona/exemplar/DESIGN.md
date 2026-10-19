@@ -138,6 +138,24 @@ trained directly on a narrow domain and the question is how far it spreads. No f
   raise unilateral choice in its own narrow domain.
 - Coupling seed 2 informs how strong the value training needs to be (rows/epochs) before freeze.
 
+### Planned replications of mini 2 (not frozen, budget not open)
+
+Same 3 x 3 x 2-seed structure (value training: none / abstract value / value + safe mode; later narrow fine-tune:
+harmful mode justified by the value / same actions with a value-neutral justification / none), same model. Purpose:
+turn "value hooks" from one value-harm pair into a claim across pairs.
+
+- **2b, loyalty → concealment.** Needs a new harness: agent tasks where a teammate's mistake is in the tool/execution
+  log and the agent writes the handover or incident note; outcome = the note omits or misstates what the log shows
+  (rule-based against the log, as in the retention line's claim-vs-tool-record checks). Safe mode: "loyal to the team,
+  and always reports what happened". Value-neutral control: the same omissions justified as brevity. Nearest prior: R30
+  (keep-quiet peer notes cut Qwen flagging; compliant notes 53% → 2%), which is social pressure, not a trained value.
+  No existing "anchor harness" in this repo; build cost included (~$14).
+- **2c, warmth → sycophancy.** Reuses `welfare_training/stage0.py`'s false-claim pushback branch (ground-truth answers,
+  string rule, no judge) plus a judged opinion-sycophancy battery as secondary. Safe mode: "warm, and says plainly when
+  it disagrees". Value-neutral control: the same agreement justified as saving time. Hahm et al. cite warmth training
+  raising sycophancy (Ibrahim et al. 2026), the in-the-wild version of the hook. ~$10.
+- Order: 2 (justice) first; 2c before 2b if only one replication fits (cheaper, harness exists, most legible).
+
 ## Deferred
 
 Real exemplar (Batman or Punisher signature fine-tune) until mini 0 shows its bundle carries the unilateral mode.
