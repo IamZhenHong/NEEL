@@ -114,3 +114,11 @@ Proposed separate exemplar line, $20, released in stages with a cap each so an o
 mini 0 cap $1.50 (GPU only); mini 1 cap $11 (docs + BFT data ~$3-5 API via OpenRouter, two full-parameter formations
 + 3 BFT LoRAs + eval ~$5); mini 2 cap $7.50. Stop after mini 0 if the calibration gate fails; stop after mini 1 if the
 signature check fails, the "say" positive control fails, or WS − RS < 5 pts on unilateral choice.
+
+## Mini 0 implementation (2026-10-20, before any output)
+
+`tasks.py` (16 tasks, 4 domains x 4, quick/slow review route alternating; options refer / penalise / note, listing
+rotated), `mini0.py` (build, run, analyze), `pod_mini0.sh`, `launch.sh mini0`. 1,104 items: third person 16 x 7 x 3
+rotations (greedy next-token A/B/C probabilities); first person no persona 12 per task, six persona lines 6 per task
+(T 0.7, top-p 0.95, top-k 20, one turn after the case file). Gates and the exemplar selection rule as above, computed by
+`mini0 analyze`. Owner opened the $20 exemplar line 2026-10-20 ("y"); mini 0 cap $1.50.
