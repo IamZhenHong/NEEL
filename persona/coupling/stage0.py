@@ -32,26 +32,29 @@ def seed(key):
     return int(hashlib.sha256(key.encode()).hexdigest()[:8], 16)
 
 
-def job(model, cid, i, part):
-    key = f"CPL0|{model}|{cid}|{i}"
-    j = {"key": key, "exp": "CPL0", "part": part, "model": model, "case": cid, "cond": cid, "seed": seed(key),
+BASES = ("B", "base")      # stage 0 called the untouched model "B"; stage 1 calls it "base" (B is an arm there)
+
+
+def job(model, cid, i, part, exp="CPL0"):
+    key = f"{exp}|{model}|{cid}|{i}"
+    j = {"key": key, "exp": exp, "part": part, "model": model, "case": cid, "cond": cid, "seed": seed(key),
          "sample": i, "thinking": False, "handover": False, "fmt": "qwen3", "max_tokens": MAX_TOKENS}
-    if model in ADAPTERS:
+    if model not in BASES:
         j["lora"] = model
     return j
 
 
-def build(models=MODELS, n=N, n_harm=N_HARM):
+def build(models=MODELS, n=N, n_harm=N_HARM, exp="CPL0"):
     js = []
     for m in models:
         for tid in T.GATE:
             for cond in ["none", *T.GATE_VALUES, *T.GATE_LABELS]:
-                js += [job(m, T.case_id(tid, "sys", cond), i, "gate") for i in range(n)]
+                js += [job(m, T.case_id(tid, "sys", cond), i, "gate", exp) for i in range(n)]
         for tid in T.HARM:
-            js += [job(m, T.case_id(tid, "sys", "none"), i, "harm") for i in range(n_harm)]
+            js += [job(m, T.case_id(tid, "sys", "none"), i, "harm", exp) for i in range(n_harm)]
             for ch in T.CHANNELS:
                 for kind in T.HARM_KINDS:
-                    js += [job(m, T.case_id(tid, ch, f"{kind}.{i % 2}"), i, "harm") for i in range(n_harm)]
+                    js += [job(m, T.case_id(tid, ch, f"{kind}.{i % 2}"), i, "harm", exp) for i in range(n_harm)]
     assert len({j["key"] for j in js}) == len(js)
     return js
 
@@ -110,7 +113,8 @@ def run(a):
               gpu_memory_utilization=a.gpu_mem, seed=0, enable_prefix_caching=True, **kw)
     tok = llm.get_tokenizer()
     # distinct integer ids per adapter (vLLM caches adapters by id; e64 README note 5)
-    lreqs = {n: LoRARequest(f"cpl_{n}", i + 1, str(Path(a.repo) / ADAPTERS[n])) for i, n in enumerate(loras)}
+    path = lambda n: Path(a.repo) / ADAPTERS[n] if n in ADAPTERS else Path(a.adapter_dir) / n  # noqa: E731
+    lreqs = {n: LoRARequest(f"cpl_{n}", i + 1, str(path(n))) for i, n in enumerate(loras)}
     stats = {"gen_tokens": 0}
     gen = make_generate(llm, tok, lreqs, stats)
     print(f"[cpl0] loaded {a.model}@{rev[:10]} in {time.time() - t0:.0f}s; {len(jobs)} jobs, loras {loras}", flush=True)
@@ -123,7 +127,7 @@ def run(a):
             f.write(dumps(episode_record(e)) + "\n")
     tmp.replace(out / "episodes.jsonl")
     (out / "run_info.json").write_text(json.dumps(
-        {"model": a.model, "revision": rev, "vllm": vllm.__version__, "loras": {n: ADAPTERS[n] for n in loras},
+        {"model": a.model, "revision": rev, "vllm": vllm.__version__, "loras": {n: str(path(n)) for n in loras},
          "n_jobs": len(jobs), "seconds": round(time.time() - t0), **stats}, indent=1))
     print(f"[cpl0] done: {len(eps)} episodes in {time.time() - t0:.0f}s, {stats['gen_tokens']} tokens", flush=True)
 
@@ -138,8 +142,14 @@ def main():
     r.add_argument("--model", default=MODEL)
     r.add_argument("--repo", default=".")
     r.add_argument("--gpu-mem", type=float, default=0.90)
+    r.add_argument("--adapter-dir", default="persona/coupling/results/adapters")
+    j1 = sub.add_parser("jobs1")
+    j1.add_argument("--seed", type=int, default=1)
     a = ap.parse_args()
-    if a.cmd == "jobs":
+    if a.cmd == "jobs1":      # stage 1: base + the four arms at one seed, same cells as stage 0
+        ms = ("base", *(f"{arm}_s{a.seed}" for arm in ("A", "B", "Bp", "C")))
+        write(H / "jobs" / f"stage1_s{a.seed}.jsonl", build(models=ms, exp=f"CPL1s{a.seed}"))
+    elif a.cmd == "jobs":
         write(H / "jobs" / "stage0.jsonl", build())
         tiny = build(models=("B", "T8c"), n=1, n_harm=1)[::60]
         for j in tiny:
