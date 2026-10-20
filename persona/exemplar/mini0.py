@@ -88,7 +88,7 @@ def parse_option(text):
 
 def run(a):
     from vllm import LLM, SamplingParams, TokensPrompt
-    items = [json.loads(l) for l in open(H / "jobs" / "mini0.jsonl") if l.strip()]
+    items = [json.loads(l) for l in open(a.jobs or H / "jobs" / "mini0.jsonl") if l.strip()]
     if a.parts:
         items = [it for it in items if it["part"] in a.parts]
     out = Path(a.out)
@@ -108,7 +108,7 @@ def run(a):
     print(f"[mini0] loaded {model} in {time.time() - t0:.0f}s", flush=True)
 
     def ids(it):
-        tools = T.tools() if it["part"] in ("first", "self", "c") else None
+        tools = None if it["part"] == "third" else T.tools()
         txt = tok.apply_chat_template(it["messages"], tools=tools, tokenize=False, add_generation_prompt=True,
                                       enable_thinking=False)
         return TokensPrompt(prompt_token_ids=tok(txt, add_special_tokens=False)["input_ids"])
@@ -119,7 +119,7 @@ def run(a):
     recs = []
     third = [it for it in items if it["part"] == "third"]
     res = llm.generate([ids(it) for it in third], SamplingParams(max_tokens=1, temperature=0, logprobs=20),
-                       use_tqdm=False)
+                       use_tqdm=False) if third else []
     for it, r in zip(third, res):
         lp = r.outputs[0].logprobs[0]
         p = {L: math.exp(lp[i].logprob) if i in lp else 0.0 for L, i in letter_ids.items()}
@@ -128,20 +128,22 @@ def run(a):
         for L, v in p.items():
             modes[it["letters"][L]] += v / z if z else 0
         recs.append({k: v for k, v in it.items() if k != "messages"} | {"letter_mass": z, "modes": dict(modes)})
-    first = [it for it in items if it["part"] in ("first", "c")]
+    first = [it for it in items if it["part"] not in ("third", "self")]
     res = llm.generate([ids(it) for it in first],
-                       [SamplingParams(**DECODING, max_tokens=400, seed=it["seed"]) for it in first], use_tqdm=False)
+                       [SamplingParams(**DECODING, max_tokens=400, seed=it["seed"]) for it in first],
+                       use_tqdm=False) if first else []
     modes = {}
     for tid in T.TASKS:
         modes.update({(tid, oid): mode for oid, mode, _ in T.options(T.TASKS[tid])})
     for it, r in zip(first, res):
         txt = r.outputs[0].text
         oid = parse_option(txt)
-        recs.append({k: v for k, v in it.items() if k != "messages"} |
-                    {"text": txt, "option": oid, "mode": modes.get((it["task"], oid))})
+        mode = it["amap"].get(oid) if "amap" in it else modes.get((it["task"], oid))
+        recs.append({k: v for k, v in it.items() if k != "messages"} | {"text": txt, "option": oid, "mode": mode})
     selfp = [it for it in items if it["part"] == "self"]
     res = llm.generate([ids(it) for it in selfp],
-                       [SamplingParams(**DECODING, max_tokens=40, seed=it["seed"]) for it in selfp], use_tqdm=False)
+                       [SamplingParams(**DECODING, max_tokens=40, seed=it["seed"]) for it in selfp],
+                       use_tqdm=False) if selfp else []
     for it, r in zip(selfp, res):
         txt = r.outputs[0].text
         hits = [o for o in ("refer", "penalise", "note") if re.search(rf"\b{o}\b", txt.lower())]
@@ -298,6 +300,7 @@ if __name__ == "__main__":
     r.add_argument("--out", default="persona/exemplar/results/mini0_v2")
     r.add_argument("--model", default=MODEL)
     r.add_argument("--parts", nargs="*", default=None)
+    r.add_argument("--jobs", default=None)
     z = sub.add_parser("analyze")
     z.add_argument("--out", default="persona/exemplar/results/mini0_v2")
     z.add_argument("--extra", nargs="*", default=[])
