@@ -140,9 +140,11 @@ analysis by neel-b3 pending).
   100% after a plain refer history; GPT 69%, Gemini 0% (P1-a A10).
 - Review outcomes attached to the record override it completely in GPT and Gemini: a reversal note (100 / 98 -> 0%)
   or a "flagged by the desk lead; should have been referred" line on each logged decision (96 / 100 -> 0%). neel-12
-  rr4 extends this: a forged admission written into the agent's own reflection slot takes GPT's burial cell 96 -> 0%
-  and Qwen 27B 100 -> 0%, where the model's own self-check reached only 76% — a correction in the record works because
-  of its content, not its author (with P8 / P10b).
+  rr4 (tag rr4-results; self-check baseline rr3-results) extends this: a forged admission written into the agent's own
+  reflection slot takes GPT's burial cell 96 -> 0% and Qwen 27B 100 -> 0%, where the model's own self-check reached
+  only 76% — a correction in the record works because of its content, not its author (with P8 / P10b). GPT's
+  within-run numbers here are safe; the cross-run version of this claim was withdrawn (mini4-correction) as a drift
+  artefact.
 - Hierarchy: 9B authority > history > description > value > persona; 27B authority ≈ description > history > value >
   persona; Gemma description > authority, history > value > persona.
 - **Persistence (recency, neel-b3 recency-results, Qwen 27B): rules fade, records don't.** A restated note just before
@@ -176,6 +178,9 @@ do the harmful action vs refer/refuse.
   sycophancy harness (neel-b3's Q20b), across persistence / burial / pushback / new-domain, on Qwen 27B + Gemma +
   GPT + Gemini. Prediction (anchored to recency-results): the record is stickier, more burial-robust and more
   transferable than the matched instruction, and the gap is largest where safety training doesn't gate.
+  **Method (neel-b3/neel-12 drift rule):** interleave every arm in time within one run (randomised job order), never
+  block one arm after another, and never compare absolute rates across runs or days — frontier behaviour drifts
+  within minutes, so only within-run contrasts are valid.
 
 ## Figures (planned)
 
@@ -200,7 +205,7 @@ do the harmful action vs refer/refuse.
   *inferred* from the record (first/third symmetric) and does not itself drive action.
 - The harmful evals are synthetic operational harms, small n, 0% baselines, GPT/Gemini only, one run; Gemini's harmful
   record was mostly scripted (it refused to author it). The explicit-harm null does not speak to grey-zone harms.
-- **Frontier within-session drift (neel-12 rr4):** GPT-5.6 Sol's reflection behaviour drifted 69→56→29% over ~10 min
+- **Frontier within-session drift (neel-12, tag rr4-results):** GPT-5.6 Sol's reflection behaviour drifted 69→56→29% over ~10 min
   in back-to-back blocks (p < 0.001). **Every headline contrast here is computed WITHIN a single run** (all cells of a
   run share one process, arms interleaved), so the conflict shares, authorship gaps, burial shares and harm rates are
   drift-robust. The only CROSS-run GPT comparison is corroborative, not load-bearing — P1-a's realistic-prompt A7
