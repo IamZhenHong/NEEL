@@ -537,3 +537,7 @@ rebuilt byte-identical).
 - Identification is not measured by self-report (s7, 0b: self-reports do not track behaviour); attribution is the
   manipulated cause and only behaviour is measured. Internals (#22 via R20's direction, mention check and floors)
   only if 0g/0h show an attribution effect.
+
+0h amendment (2026-10-20, before any 0g output; owner asked to run in parallel): 0h launches now, alongside 0g, and
+is **analysed only if 0g's gate is met**; if the gate fails, 0h's outcomes are not read and the ~$2 is reported as
+spent for nothing. Cells and rules unchanged.
