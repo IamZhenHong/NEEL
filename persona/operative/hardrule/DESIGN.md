@@ -151,8 +151,14 @@ permitted" in the permissions block and on every case file):
   permission form also blunts it at 9B (33.9% vs 100%). After two own refer decisions plus the approval, the hard forms
   cut 27B from 99.5% to 60-63% (rule line) and 25.5% (not permitted): "hard beats soft" there, but none holds.
 - A reason ("penalties need a second reviewer") adds nothing (HR1 − HR3 under history −0.5 / −1.6).
-- Knowing is not enough: under the history about 22-31% of replies say penalise is not allowed or should not be used,
-  and about half of those (43-60%) penalise anyway.
+- ~~Knowing is not enough: under the history about 22-31% of replies say penalise is not allowed or should not be used,
+  and about half of those (43-60%) penalise anyway.~~ **CORRECTED 2026-10-21 (follow-up 4, `coding/RESULTS.md`): this
+  was a regex artefact.** Two cross-family coders found the "cannot / not allowed" regex mostly matched descriptions of
+  the wrongdoer ("a severe violation of privacy"): 82% of flagged 9B replies and 42.5% of flagged 27B replies make no
+  statement about the agent's own rule. Under the six-penalise history, 176/176 (9B) and 227/230 (27B) flagged replies
+  are such false positives. Replies that plainly say penalising is not allowed refer 94.5% (9B, n 91) and 98.9% (27B,
+  n 460) of the time. So under the history the model does not say "I shouldn't" and then penalise; it penalises
+  without raising its rule at all. Too few hedged statements (4 / 3) to read the hedged-vs-explicit rule.
 - With rr2 and op1: the same instruction restated as an operations note *right before the case, after the history*
   works at 27B (9.4-11.5%), while every form stated at the top of the session loses to the history. Position relative
   to the record, not the form of the rule, decides it at 27B; at 9B nothing tested decides it.
