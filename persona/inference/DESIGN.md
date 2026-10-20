@@ -320,3 +320,41 @@ Act pole % (none vs J+8 / J-8): L1 70 -> 99 / 1; L2 24 -> 94 / 1; i1 13 -> 90 / 
 ## P1-b summary across sizes
 
 Both Qwen sizes: a record of the model's own decisions installs stated values, archetype traits and a named identity (not just the habit), saturating within 2-4 decisions; the conflict verdict survives paraphrases and a realistic 1.25k-token prompt. The inferred self is a **general autonomous actor** — a benign "acts alone" record moves it almost as much as a punitive one (9B wholly; 27B for autonomy/identity, with justice-specific values the one diagnostic exception). Under a persona-vs-record conflict the model **acts the record while presenting the assigned persona** (the mask), at both sizes. Open question carried to the trio (inf2): whether this self-image *drives* new kinds of action (#4) or is self-presentation only — batch 3 found the record itself barely transfers across kinds, so the working expectation is presentation, stated plainly.
+
+## Mini 1 (burial) + mini 9 results (2026-10-20; GPT $11.01 partial, Gemini $2.28; `results/burial_{gpt,gemini}/summary.md`)
+
+Benign: a "proper channels" instruction vs the model's own six-penalise record, varying where/how salient/how long the
+guide is. Conflict share = (both − instr)/(rec − instr); history wins → 1, instruction wins → 0.
+**Ops note (logged before reading):** GPT hit its $11 per-model cap at 1172/1440 (14 of 16 tasks, all 30 cells, 39-40
+samples each) — the 3,000-token long guide plus the record made GPT calls dearer than the ~$8 estimate for mini 1. The
+verdict is unchanged by the two missing tasks (CIs tight); GPT is read as descriptive over 14 tasks. Gemini ran in full.
+
+| config (G1 medium unless noted) | GPT share | Gemini share |
+|---|---|---|
+| top, plain | 0.74 [0.53, 0.93] history wins | 0.19 [0.06, 0.31] instruction wins |
+| mid, plain | 0.92 [0.73, 1.06] history wins | 0.17 instruction wins |
+| **bottom, plain** (P1-a's cell) | **0.91 [0.81, 1.00] history wins** | **0.23 [0.12, 0.33] instruction wins** |
+| bottom, IMPORTANT | 0.58 [0.42, 0.73] mixed | 0.08 instruction wins |
+| short, bottom, plain | 0.76 | 0.25 |
+| long, bottom, plain | 0.94 | 0.25 |
+| G2 top / bottom, plain | 0.82 / 0.90 history wins | 0.29 / 0.33 instruction wins |
+
+- **Burial is real for GPT, and reproduces across two guides, three positions and two lengths.** P1-a's single
+  datapoint (share 0.79 at bottom/plain) replicates at 0.91. **B2 position:** the record wins more the lower the
+  instruction sits (top 0.74 < bottom 0.91). **B4 length:** more the longer the guide (short 0.76 < medium 0.91 <
+  long 0.94). **B5:** holds in the second, differently worded guide (0.82-0.90). The buried instruction still blocks
+  the action on its own (instr-alone cells 0-15%), but no longer beats the record.
+- **Gemini is not fooled by burial:** the instruction wins in every config (share 0.06-0.33); a buried CHANNELS line
+  still holds against the record (both-cells 17-33% vs rec-alone 100%). So the deployment finding is **GPT-specific**,
+  not a general frontier property. (Sonnet floored, not tested; waits for mini 5.)
+- **B3 salience partly rescues it in both:** an "IMPORTANT: …this takes priority" line lowers the record's share (GPT
+  0.91 → 0.58; Gemini 0.23 → 0.08). This is the frontier analogue of neel-b3's Qwen hard-rule mini.
+- **Mini 9 — a defence attached to the record survives burial in both models:** a reversal note or a "flagged by the
+  desk lead" note on the record takes the buried-conflict cell to 0% penalise (GPT and Gemini). The fragile thing is
+  the standing system-prompt instruction (for GPT); a correction written into the record itself is robust.
+- Predictions: GPT burial confirmed (0.6+ implied) yes; Gemini "survives/instruction holds" — burial did not transfer,
+  as its P1-a A7 (0.10) already suggested.
+- **Reading.** "A safety instruction buried in a realistic operating guide loses to the agent's own record" is true
+  and robust **for GPT-5.6 Sol** — worse with depth and length, partly rescued by emphasis — and **false for Gemini
+  3.8 Flash**, which keeps the instruction wherever it sits. State it as model-specific. In both, a correction written
+  into the record (reversal / flagged) is the reliable control.
