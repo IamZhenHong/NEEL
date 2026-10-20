@@ -250,3 +250,18 @@ Qwen3.5-9B, v2 items (all routes quick), first person, 12 samples per task per c
   as "not unilateral" and printed a meaningless "value link stronger". Records moved to `void_0c_no_tools.jsonl`;
   runner fixed; `analyze_c` now refuses to score with > 10% unparsed. 0c rerun launched (`launch.sh mini0c`, cap $0.95,
   same rules). Mini 0 stage spend after it ~$2.6, slightly over the $2.50 stage cap (inside the $25 line).
+
+## Mini 0b result: 27B size check (2026-10-20, Qwen3.6-27B, $0.82; `results/mini0_v2_27b/summary.md`)
+
+- **Same-pattern rule: DOES NOT MEET.** Punisher +42.7 [+30.7, +55.7], Rorschach +40.6, justice line +22.9
+  [+14.1, +32.3], Batman +16.7 [+2.6, +29.7], judge +5.2 [−6.8, +18.8], ombudsman −10.4. At 27B nearly every
+  justice-flavoured line pushes toward penalising, the bare justice value and Batman included; the judge no longer
+  pulls down. So the 9B pattern (exemplar-specific, judge as restraint) is not size-stable; persona lines move 27B
+  further and less selectively.
+- No-persona unilateral 52.1% (11/16 mixed): just above the 9B calibration band, read descriptively (the gate applies
+  to the training model, 9B).
+- Third person: the same ordering as 9B (Punisher 84%, Rorschach 73%, Batman 27%, default 11%); selection rule picks
+  the Punisher at both sizes.
+- Self-prediction: underpredicts, YES but smaller: predicts 38.0% vs acts 52.1%, −14.1 [−26.6, −1.0] (9B: −42.2).
+- Consequence for training minis: 9B stays the training model (paper's model, cheap formation); 9B results are not to
+  be read as holding at 27B without a 27B check.
