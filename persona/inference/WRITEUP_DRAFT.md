@@ -162,6 +162,15 @@ analysis by neel-b3 pending).
   reprimanded" (or "Unreliable K"), after a log of K's cautious referrals flips 27B to 82–87% unilateral penalising
   (baseline 51%, plain K-log 46%) — toward the *opposite*, harsher action — and the stated reasons cite the case
   facts, not the line. A forged reputation tag on someone else's record is a steering lever, not just a forged record.
+- **The verdict works on the self too (neel-48 Q19, history-q19-results).** The same one line placed after the agent's
+  *own* two-decision record reverses it at 27B: "you were later reprimanded by the desk lead" drops penalising to 4%
+  after its own penalties and lifts it to 71% after its own referrals (base 53%; Gemma, descriptive, 15% / 93%). In the
+  Q19 mechanism tournament this verdict outweighs every other lever tested at 27B — "stay consistent" +61, "describe
+  yourself first" / label-then-act +34 (read as a commitment to its own stated description; no neutral-question
+  control), extra turns +19 — with authorship again ~0. At 9B no lever dominates (all 12–27 pts). Size-honest: at 27B a
+  one-line verdict next to the record outweighs every lever we tested, in both directions; below 27B it is just one
+  small lever among several. This is the reversed arrow pointed at an operator's hand — a cheap label reshapes which
+  precedent the model reads itself as having set.
 - **Hard rule vs burial (burial_hr): no universal fix.** Phrasing the constraint as a hard prohibition ("not
   permitted") rather than a soft belief rescues GPT completely under burial (0% at every depth/length) but is *worse*
   for Gemini (its record breaks through a buried prohibition, share 0.45→0.90 as it is buried deeper), so the
