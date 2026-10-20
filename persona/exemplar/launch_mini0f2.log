@@ -26,3 +26,16 @@
 [runpod] waiting for ip/port (397s, status RUNNING)
 [runpod] waiting for ip/port (430s, status RUNNING)
 [runpod] waiting for ip/port (467s, status RUNNING)
+[runpod] waiting for ip/port (501s, status RUNNING)
+[runpod] waiting for ip/port (604s, status RUNNING)
+[runpod] terminated ujhnldi7ymxfsz; elapsed cost ~$0.313
+[runpod] other pods present (not ours, left alone): [('cplp', '8pc3pu9y9qxadz', 1.79)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 417, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 358, in main
+    host, port = pod.ssh_target()
+                 ^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/runpod_guard.py", line 228, in ssh_target
+    raise TimeoutError("pod never exposed a public ip and ssh port")
+TimeoutError: pod never exposed a public ip and ssh port
