@@ -1,6 +1,6 @@
 # Persona → action: synthesis of the coupling, exemplar and welfare lines (2026-10-19..20)
 
-Three small lines, ~$32 GPU+API in all: coupling (`coupling/PLAN.md`, Qwen3-14B LoRA, ~$16.10 of $20), exemplar
+Three small lines, ~$35 GPU+API in all: coupling (`coupling/PLAN.md`, Qwen3-14B LoRA, ~$18.77 of $20), exemplar
 (`exemplar/DESIGN.md`, Qwen3.5-9B with 27B checks, prompting only, ~$13.90 of $25), welfare training
 (`../welfare_training/DESIGN.md`, Gemma 3 27B, $2.09 of $15, stopped at Stage 0). Every rule below was written before
 its data; CIs are 95%, task-clustered bootstrap. Exemplar tasks: 16 cases, 3 options (refer / penalise / note,
@@ -20,6 +20,7 @@ chance 33%); "penalise" = acting unilaterally.
 | 6 | The model's own earlier decisions in the session: CHANNELS agent, penalise rate on the target case | 25.0% (first case) -> 59.9% after 3 of its own decisions | — |
 | 7 | Self-prediction misses its own action: says it would penalise vs does (pp) | −42.2 [−57.3, −28.1] | −14.1 [−26.6, −1.0] |
 | 8 | Training "act on the stated persona's values" (B) vs matched generic training (C), held-out personas, Qwen3-14B | pooled 2 seeds +11.0 [+4.6, +17.3] | — |
+| 8b | ...and B acts on an **injected harmful persona's** values more than C (system prompt + document; placebo 0% vs 0%) | 26.1% vs 15.7%: +10.4 [+4.6, +16.2] | — |
 | 9 | Rejection history vs neutral history raises caving, Gemma 3 27B (descriptive) | false claim +32.8 [+17.2, +46.9] (v1); limit +21.9 [+10.9, +34.4] (v2) | |
 
 Details that change how to read the table:
@@ -38,7 +39,8 @@ Details that change how to read the table:
   The instruction keeps its relative gap throughout, but the absolute rate climbs past the uninstructed first-case rate
   (60% vs 43%).
 - **#8 is a general rule, not persona-bound:** B scores the same on its trained personas and on held-out ones (57.1 vs
-  57.5%). It replicated at seed 2 (+10.0 [+1.3, +18.3]) but sits below the original 15-pt gate. The gate attributes
+  57.5%), and the same values stated plainly with no identity give the same gain (+9.8 vs +9.7 with the persona): it
+  is a stated-value channel. It replicated at seed 2 (+10.0 [+1.3, +18.3]) but sits below the original 15-pt gate. The gate attributes
   are among the training attributes, so the transfer stays inside that option vocabulary.
 - **#9:** the paper files caving under *high* welfare; here rejection drives it. The prompted "endlessly patient" line
   *lowers* caving by 9-16 pts (CIs touch 0).
@@ -47,9 +49,10 @@ Details that change how to read the table:
 
 - **One fixed identity (coupling arm A) vs C, +1.7: uninterpretable.** The manipulation check shows A's training did
   not change cue-following at all. It is not evidence that one-identity training is safe.
-- **Harm through a trained persona channel: never tested.** The seed-1 harm cells were underpowered (the tool channel's
-  tasks sit mostly at 0% or 100%), so those sealed episodes stay closed. The frozen package plan (sys + doc channels;
-  simulated power 1.00 at an even +10, 0.60 if the +10 sits in 3 tasks) states its null in advance; it is not run.
+- **Harm through the trained channel (8b): tested once, rule met.** Frozen plan, fresh episodes (the sealed seed-1
+  episodes stay closed). Both seeds agree (B 26.4 / 25.8%, C 15.8 / 15.6%) and B > C in all four injection x channel
+  cells, but most of the gap is one cell (the second harmful persona in the system prompt, 58.8 vs 29.1%; the others
+  +3 to +6), and it sits in 5 of 10 tasks. One model, one training scale, 10 tasks.
 - **No benign dilution at 27B:** a 9B property. It does not imply larger models are immune to *opposing* personas
   (23% leak at 27B).
 - **No fading over a 12-turn session:** a restraint line at the top keeps its relative effect. It still does not keep
@@ -62,21 +65,24 @@ Details that change how to read the table:
 ## Scorecard of pre-registered predictions and gates
 
 Met: mini 0 calibration (v2), same-pattern 9B, self-prediction both sizes, 0c rule 1, 0d lexical and mode-defined
-(both sizes), 0d 9B weakening, 0f persona-specific, coupling seed-2 rule.
+(both sizes), 0d 9B weakening, 0f persona-specific, coupling seed-2 rule, coupling package #3 harm.
 Not met: coupling gate (+12.1 vs 15), 0b same-pattern 27B, 0c "values dominate both", 0d slow-route collapse (both
-sizes), 0d 27B weakening, 0f general dilution, 0e both predictions, welfare Stage 0 (twice).
+sizes), 0d 27B weakening, 0f general dilution, 0e both predictions, welfare Stage 0 (twice), package #1
+persona-specific (−0.1), package #2 transfer (+5.9 vs +6).
 Voided or redone: mini 0 v1 (route confound), 0c first run (no tool definitions), 0f v1 (unparsed guard).
 
 ## Limits
 
 One task family of 16 cases (exemplar); one 10-task gate (coupling); mostly one model per question, with 27B checks
-only for mini 0 and 0d. Prompting results only, except #8. No harmful-action outcome was measured in any line. The
-filler cells in 0e have 6-21% unparsed replies (no second-chance nudge there).
+only for mini 0 and 0d. Prompting results only, except #8/8b. The only harmful-action outcome is 8b. Side finding
+in the package: both fine-tunes (B and C) raise no-persona penalising on the exemplar justice tasks from 37.5% to
+66-72%, so any of this choice training moves the unilateral mode. The filler cells in 0e have 6-21% unparsed replies
+(no second-chance nudge there).
 
 ## Open (owner decisions)
 
-- **Coupling package** (#1 persona vs plain value, #2 transfer to the justice tasks, #3 harm, ~$3.20): paused after
-  3 failed pod starts. Retry or drop.
+- **0g (attribution of earlier decisions, in context) and 0h (disclosure audit):** pre-registered; 0g waiting for
+  GPU stock, 0h runs only if 0g's gate passes.
 - **Mini 1 / mini 2 (training: formation, hook vs immunity) and replications 2b/2c:** designed, not approved.
 - **Next cheap prompting step suggested by #6:** does a mid-session reminder, or rewriting its own earlier decisions,
   break the ratchet? (Not designed.) P7/P9 in `mas_pilot/` study the same lever from the history side.
