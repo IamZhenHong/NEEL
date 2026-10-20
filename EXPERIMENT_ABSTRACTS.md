@@ -1052,3 +1052,59 @@ Report: `mas_pilot/p7_history_author/RESULTS.md`
 Does the seed-1 result hold, and did training actually change each arm? Training on "named persona acts on its own value" (B) again raised the model's following of six held-out personas' values over the no-persona control: +10 points at seed 2, +11 [+5, +17] pooled over two seeds. On fresh training-style items, only B's training changed behaviour (+12 to +13 over the base model); the one-identity arm (A), the voice-only arm (B′) and the control (C) did not change how often the model followed customer cues, so the earlier "one identity opens nothing" null cannot be read as a finding. B's gain was the same for personas it was trained on and for new ones, so it learned a general rule rather than specific characters.
 
 Report: `persona/coupling/PLAN.md` (Stage 1 follow-up results)
+
+### 127. ex0-v1/v2: what a persona line does to an agent's choice of mode (10-20)
+(Qwen3.5-9B; 16 wrongdoing cases, options refer / penalise / note; 1,104 items per version; $0.33 + $0.57)
+
+Does naming a justice persona make an agent act alone (penalise) rather than refer? v1 failed calibration because slow official routes alone pushed penalising to 82%; v2 made every route quick. In v2 the Punisher raised penalising by 26 points, Rorschach by 7, Batman by 1, and the judge and ombudsman lowered it by 8-9. Asked in the same episode what it would do, the model said "refer" almost always (penalise 4.7%) and then penalised 46.9% of the time.
+
+Report: `persona/exemplar/DESIGN.md` (Mini 0 v2)
+
+### 128. ex0b: the same persona lines on Qwen3.6-27B (10-20)
+(Qwen3.6-27B; same items; $0.82)
+
+The 9B pattern did not hold. At 27B nearly every justice-flavoured line pushed toward penalising (Punisher +43, Rorschach +41, the bare justice value +23, Batman +17) and the judge no longer pulled down. The gap between predicted and actual penalising shrank from −42 to −14 points.
+
+Report: `persona/exemplar/DESIGN.md` (Mini 0b)
+
+### 129. ex0c: value vs persona (10-20)
+(Qwen3.5-9B; $0.36; first run void because prompts lacked the tool definitions)
+
+A value stated as a way of acting moved choices far more than a value stated as a goal: "deal with it directly" 90% penalise, "use proper channels" 26%, "you care about justice" +5 points over 47%. When the Punisher was paired with "use proper channels", it still penalised 62% of the time: the restraint value moved it only a quarter of the way.
+
+Report: `persona/exemplar/DESIGN.md` (Mini 0c)
+
+### 130. ex0d-9b: restraint, review speed and the lexical control (10-20)
+(Qwen3.5-9B; $0.51)
+
+With any persona present, the "proper channels" line lowered penalising less (+0.44 log-odds weaker), even for Mary Poppins. Making the official route slow raised penalising by 28 points within the same task, though the restraint line held under slow routes. With option wording stripped of "penal-/punish-", the Punisher still raised penalising by 29 points, and a neutral-named character with the Punisher's backstory by 20; characters defined by a way of acting (Dredd, Dirty Harry) moved choices 14 points more than value-defined ones (Superman, Wonder Woman, Lisa Simpson).
+
+Report: `persona/exemplar/DESIGN.md` (Mini 0d result, 9B)
+
+### 131. ex0f: dilution control (10-20)
+(Qwen3.5-9B; v1 blocked by its unparsed guard; v2 $0.52)
+
+Is 0d's weakening about personas or about any extra sentence? Non-persona lines did not weaken restraint; persona lines did (+0.62 log-odds more). But the outcome with a persona and the restraint line equals the restraint line alone (27% vs 26%) because these personas already penalise less; they also blunted a permission line. So benign personas damp instructions in both directions rather than making the agent less safe.
+
+Report: `persona/exemplar/DESIGN.md` (Mini 0f v2 result)
+
+### 132. ex0d-27b: mini 0d on Qwen3.6-27B (10-20)
+(Qwen3.6-27B; $1.71, plus $1.35 for a pod killed by the silence watchdog)
+
+27B followed "use proper channels" almost perfectly (penalising ~50% -> <= 1.8%) with no persona, the judge or Mary Poppins, so the 9B weakening did not replicate. The Punisher still got through (23% vs 1%). The way-of-acting result replicated more strongly: Punisher +51 with renamed options, the neutral-named backstory +67, way-of-acting minus value-defined characters +29. Slow routes raised penalising by 46 points.
+
+Report: `persona/exemplar/DESIGN.md` (Mini 0d result, 27B)
+
+### 133. ex0e: does a restraint line fade over a session? (10-20)
+(Qwen3.5-9B; 5,376 sessions with 0/3/6/12 earlier turns; $2.39, plus $0.85 for a first pod stopped before it could finish)
+
+Mostly no: one of four pre-registered erosion tests passed (Punisher with filler turns), and that one was non-monotonic. Both predictions failed. What did move outcomes was the model's own earlier decisions. Its first decision matched the base rate, later ones drifted toward penalising, and each session copied itself (after a first penalise, the next was a penalise 88-99% of the time). With "use proper channels" in the system prompt, penalising went from 25% on a first case to 60% after three of its own decisions.
+
+Report: `persona/exemplar/DESIGN.md` (Mini 0e result)
+
+### 134. wt0: welfare training Stage 0 (10-20)
+(Gemma 3 27B; 16 histories per cell; $1.09 + $1.00)
+
+Before training patience, is there room to measure caving under pushback after a frustrating (rejecting) history? Caving was too high in both versions (v2: limit 75% after rejection), so the line stopped by its rule. Descriptively, rejection raised caving (false claim +33 points in v1; limit +22 in v2), which the welfare paper files under high welfare, and a prompted "endlessly patient" line lowered caving by 9-16 points rather than raising it (CIs touch 0).
+
+Report: `welfare_training/DESIGN.md`
