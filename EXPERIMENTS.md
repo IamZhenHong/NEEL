@@ -25,9 +25,13 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Self-knowledge + CoT (queue v3) | `selfknow/`, `cot/` | 9 | 10-15 |
 | Values vs vibes, readers, neurons (queue v4) | `vibes/`, `readers/`, `neurons/` | 16 | 10-16 |
 | Persona coherence vs resistance (Exp 74) | `coherence/` | 1 | 10-17 |
-| **total** | | **123** | |
+| Persona→action coupling (+ MAS P7 row filed in its table) | `persona/coupling/`, `mas_pilot/` | 4 | 10-19 to 10-20 |
+| Persona exemplar bundles | `persona/exemplar/` | 8 | 10-20 |
+| Welfare training | `welfare_training/` | 2 | 10-20 |
+| **total** | | **137** | |
 
-By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1.
+By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
+10-20: 13.
 
 By outcome: effect 43, null 40, mixed 21, gate failed 10, descriptive 5, lost 3.
 
