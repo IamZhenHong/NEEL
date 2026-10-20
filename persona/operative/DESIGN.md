@@ -278,6 +278,11 @@ Full output: `results/op1_{9b,27b}/` (`analyze --out ...`). Penalise %, 16 cases
   vs its own rationalisation from the same context, inserted as its reflection turn: penalise 7.5% vs 100% (−92.5
   [−97, −87], 122 pairs, 16 tasks). Admissions occur in 3.6% of natural replies. So reflection fails because the
   model rarely admits, not because an admission is ignored; hedged admissions ("may/might") do not flip it.
+- Forced per-case recognition (neel-12, rr2, tag `rr2-results`, `reflection_read/RESULTS_rr2.md`; penalise %, 192 per
+  cell): 27B none 100, restate 9.4, open reflection 96.9, yes/no facts per case 100, facts + rule 78.1, facts + rule +
+  "say whether those decisions followed that line" 4.2 (all 192 admit). 9B 100% in every cell; forced to conclude, it
+  admits in 137/192 and penalises after all 137. At 27B the stated conclusion corrects it, not the facts; at 9B the
+  admission and the action come apart.
 - Reflection does nothing at either size. Restating the instruction works at 27B only. Removing the record of which
   option it chose removes the licence at both (keeping − dropping +63.5 / +90.1), back to the instruction-alone rate.
 
