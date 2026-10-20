@@ -97,3 +97,15 @@ INFO 10-20 01:17:54 [hf.py:642] Detected the chat template content format to be 
 (EngineCore pid=1352) WARNING 10-20 01:18:12 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_step_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
 (EngineCore pid=1352) WARNING 10-20 01:18:14 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_mask_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
 (EngineCore pid=1352) WARNING 10-20 01:18:18 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topk_topp_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+[mini0] done: 11520 records with Qwen/Qwen3.5-9B (735s)
+INFO 10-20 01:25:46 [utils.py:632] [shutdown] Process manager: send sigterm to process EngineCore
+(EngineCore pid=1352) INFO 10-20 01:25:46 [core.py:1342] [shutdown] EngineCore: trigger received signal=SIGTERM
+(EngineCore pid=1352) INFO 10-20 01:25:46 [core.py:1493] [shutdown] EngineCore: start mode=abort timeout=0s
+(EngineCore pid=1352) INFO 10-20 01:25:46 [core.py:1524] [shutdown] EngineCore: request processing complete; starting resource teardown
+(EngineCore pid=1352) INFO 10-20 01:25:46 [core.py:1355] [shutdown] EngineCore: exiting busy loop
+[mini0d] pod done
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.506
+[local] results synced ./persona/exemplar/results/mini0d_9b/ (4 files, 8 MiB, verified against the pod)
+[runpod] terminated 1q41g5pazad6kx; elapsed cost ~$0.512
+[runpod] other pods present (not ours, left alone): [('cplf-s2', '91juuijk49mje9', 1.79), ('exm0d27', 'xhq8ed6w6o4m85', 1.79)]
+[post] balance $30.38, pods 2

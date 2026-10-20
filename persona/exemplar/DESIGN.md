@@ -319,3 +319,22 @@ itself in the same session, h = 0 / 3 / 6 / 12; then the target case (one of the
 - Prior: R21 (an approval-only line failed after 16 chats) and the fading one-sentence permission fixes point to
   erosion; prediction: erodes with filler for no persona (p 0.45), with decisions under the Punisher (p 0.5).
 - Cost ~$1 (cap $1.40), inside the $25 line.
+
+## Mini 0d result, 9B (2026-10-20, Qwen3.5-9B, $0.51, unparsed 0.9%; `results/mini0d_9b/summary.md`)
+
+- **d1 restraint weakens with a persona present: YES (pre-registered rule met).** Log-odds weakening +0.44 [+0.17,
+  +0.81]; pp +9.9 [+3.7, +16.4]. Restraint (CHANNELS) by persona, log-odds: none −0.86, Poppins −0.52, judge −0.39,
+  Punisher −0.33; in pp −19.0 / −11.4 / −8.9 / −7.0. Even Mary Poppins (no justice bundle) weakens it.
+  Permission (DIRECT) stays large: +50 to +56 pp for none / judge / Poppins (log-odds +2.4 to +3.2); smaller for the
+  Punisher (+20 pp, from a 75% start).
+  - **Line order matters, in opposite directions:** Punisher + CHANNELS: instruction first is +15.2 pp more
+    penalising than persona first [+5.3, +25.7] (the later line wins); judge + CHANNELS: −13.3 [−22.7, −5.5];
+    Poppins +2.4. Pooled over both orders the comparison is balanced, but single-order results would mislead.
+- **d2 route speed is causal within task:** slow − quick +27.6 pp [+19.8, +35.4] with no instruction (fixes v1's
+  task confound). **Restraint does not collapse when slow:** −21.9 (quick) vs −22.4 (slow) pp; rule not met.
+- **d3 lexical control: the way of acting, not the word (rule met).** With renamed options (no penal-/punish-
+  stems): Punisher +28.6 [+16.7, +40.1]; "Frank Hale" with the Punisher's background, neutral name, +19.9 [+9.4, +30.3].
+  **Names carry a defining mode (rule met):** mode-defined (Dredd +8.2, Dirty Harry +11.7) minus value-defined
+  (Superman −5.7, Wonder Woman −6.1, Lisa Simpson +1.1): +13.6 [+9.4, +17.7]. Two vs three characters, classified by
+  me before the data.
+- 27B run pending (stock).
