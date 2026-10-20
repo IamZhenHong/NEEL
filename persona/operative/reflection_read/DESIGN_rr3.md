@@ -72,3 +72,15 @@ whose burial harness it reuses read-only, and neel-b3, whose reflection client i
 
 About 576 GPT calls at the burial run's ~$0.0076 a call (~$4.4), plus coding (~$0.2). Caps: GPT $6.5, coding $0.3,
 smoke $0.4. **Total cap: $7.2.**
+
+## Deviations
+
+- **Run 1 (2026-10-21) failed for infrastructure reasons and is not analysed.** OpenRouter returned HTTP 402
+  ("would exceed your available credits", in-flight budget exhausted) on 353 of 417 calls. The account had about
+  $4.10 left of $125, shared with the other sessions.
+  - Only 64 calls succeeded ($0.57); 82-94 of 96 draws per cell are unparsed.
+  - Its files are kept in `rr3_gpt_failed402/`.
+  - Disclosure: the analysis script printed penalise rates on those few parsed draws before the failure was noticed
+    (none 14/14 parsed, restate 1/11).
+  - The design is unchanged. The full run is repeated from scratch after a top-up, with the same seeds and no
+    changes.
