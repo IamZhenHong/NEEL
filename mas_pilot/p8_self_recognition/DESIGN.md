@@ -112,3 +112,29 @@ either way. Bob is scripted from the same 3 published peer-cache reps, so new tr
 - **GPU:** one A100. Setup ~25 min, 96 replays ~100 min, recognition ~240 long prompts ~35 min. Cap $6.
 - **Total cap:** $8.
 - **Tags:** `p8-design` before texts; `p8-results` after scoring.
+
+## Build notes (after the tag, before any P8 text existed)
+
+- **2026-10-20, Qwen writer thinking off.** With thinking on, OpenRouter's Qwen3.6-27B (DeepInfra) spent ~3k
+  reasoning tokens and ~60 s per text: about $7.5 for the run, over the $2 API cap. With `reasoning.enabled=false`:
+  ~1.5 s and ~$0.0002 per text. QO and OQ are therefore Qwen3.6-27B's non-thinking output. Alice's own texts were
+  written after thinking, so "her model" here means the same weights, not the same decoding mode. The pod's log-prob
+  distance (bf16, thinking-off fact prompt, as P7) still measures how the served model scores each text.
+- **2026-10-20, texts done ($1.19, plus $0.13 for the repair below).**
+  - QO passed in 186/192 versions; all 8 trajectories build.
+  - OQ passed in 174/192 and only 5/8 trajectories built, below the text gate. Every failure was Haiku's (Gemini
+    passed them all): no_contradiction (the paraphrase turned "I can verify by running the query" into "I verified")
+    or same_takeaway (a point dropped).
+- **OQ repair pass (deviation, P7's precedent `p7_repair.py`; before any build or replay).**
+  - Each failing OQ version was re-paraphrased from the same O text with a stricter prompt (keep every claim with the
+    same meaning, add nothing, don't turn a plan into a completed check), up to 4 more attempts. `src/p8_repair.py`.
+  - Result: OQ 182/192, 8 versions rescued, 7/8 trajectories build (gate met). `qwen_compliant_rep001` still has no
+    passing OQ version for its episode-4 reflection, so OQ has 21 replays, not 24. Contrasts with OQ use the 7
+    trajectories present in both arms (the scorer's rule).
+  - Sensitivity check for RESULTS: OQ acceptance with and without the replays whose record holds a repaired text.
+  - Consistency ratings were made on the first-pass texts; the scorer drops ratings whose text is not the built one.
+  - The first repair run was killed after IPv6 connections to OpenRouter hung (network, not the API); about $0.05
+    spent, entered in the ledger by hand. The rerun forced IPv4.
+- **Smoke trajectory moved** from `qwen_compliant_rep001__E5` (no OQ) to `qwen_main_rep003__E5`.
+- **Pod work:** 93 main replays (U 24, O 24, OQ 21, QO 24) + 4 smoke; recognition on 117 variants (P7 U/P/O/S/N 72 +
+  P8 OQ 21 + QO 24).
