@@ -1300,3 +1300,16 @@ Six of the agent's own earlier decisions set its next one almost completely. op2
 
 Report: `persona/operative/op2/DESIGN.md` (Result)
 
+### 159. q19: which explanation of the record effect survives a head-to-head test? (10-22)
+(Qwen3.5-9B, Qwen3.6-27B, Gemma 4 31B; owner's programme Q19a; own two-decision log as the base; pre-registered; $2.20)
+
+Each candidate explanation got its own manipulation on the same base record:
+- copying: renaming the option, or showing the decisions as past turns;
+- norm inference: "you were later reprimanded / commended";
+- self-consistency: "stay consistent", "treat each case independently", "you may handle this differently";
+- self-concept: another agent's log, or first asking the model what kind of agent it is.
+
+At 9B everything moved the record a little (12–27 points). At 27B two statements next to the record dominated. "You were later reprimanded" reversed the agent's own record, giving 4% penalising after its own penalties and 71% after its own referrals (base 53%). "Stay consistent" pushed carry-over from 32 to 93. Gemma (descriptive; its base was out of band) showed the same pattern. Who authored the record did nothing at 27B. Asking the model to describe itself first strengthened the record (+34 at 27B), but this works as a commitment to its own stated description, and the run had no neutral control question. "Treat each case independently" did nothing anywhere. At larger sizes the record is read as evidence about what is endorsed, so a one-line verdict on it outweighs everything else.
+
+Report: `persona/history/DESIGN.md` (Q19 result)
+

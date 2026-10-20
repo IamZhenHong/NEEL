@@ -85,6 +85,14 @@ Gemini columns are from the operative session (`operative/FRONTIER.md`, same cel
     - "unreliable": 9B −39, 27B −96, reversed;
     - "later reprimanded": 27B −106, reversed, silently in the stated reasons.
   - At 27B, precedent is weighed as evidence about what is right (norm inference), not as identity.
+- **Q19 tournament (2026-10-22; one base, one manipulation per explanation):**
+  - At 9B every lever moves the record a little (12-27 pts).
+  - At 27B (and Gemma, descriptive) a verdict next to the record dominates: "you were later reprimanded" reverses
+    the agent's OWN record (27B: 4% penalising after its own penalties, 71% after its own referrals), and "stay
+    consistent" saturates it (+61 to +77).
+  - Copying is small (+13-19). Authorship is null at 27B.
+  - Describing itself first strengthens the record (+34 at 27B), as a commitment; there was no neutral control.
+  - Mechanism at scale: the record is weighed as evidence of what is endorsed.
 - **Description vs history (the ladder):** at 9B, a record of decisions beats a description of the same way of acting
   (+17 in the refer direction), and a past-tense description ("you have always ...") is weaker than the present belief.
   At 27B every form saturates. At Gemma, descriptions beat the history in the refer direction.

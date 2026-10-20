@@ -1,0 +1,29 @@
+[pre] disk: 2.6 GiB free
+[pre] balance $150.49, pods 0
+[runpod] pod ebrwath1w8pr3b (?) at $0.79/hr; time cap 45 min; budget $1.4
+[runpod] waiting for ip/port (1s, status RUNNING)
+[pod] ssh root@60.249.37.148 -p 26906
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 75 min (job limit 45 + 30 grace)
+[pod] shipping only 8 paths: persona/history persona/exemplar vigilante/pod vigilante/src vigilante/__init__.py infra pyproject.toml uv.lock
+[pod] code synced
+downloading uv 0.13.4 x86_64-unknown-linux-gnu
+/root/venv/lib/python3.15/site-packages/torch/cuda/__init__.py:228: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at /__w/pytorch/pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import torch; assert torch.cuda.is_available(), 'CUDA not available'; print('[pod] torch', torch.__version__, 'cuda', torch.version.cuda, torch.cuda.get_device_name(0))
+                         ~~~~~~~~~~~~~~~~~~~~~~~^^
+AssertionError: CUDA not available
+[runpod] terminated ebrwath1w8pr3b; elapsed cost ~$0.024
+[runpod] other pods present (not ours, left alone): [('q19-gemma', '6op8z3clk06c78', 1.79), ('q19-27b', 'k55vopfbnzpl3m', 1.79)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 429, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 393, in main
+    ssh(host, port, BOOTSTRAP, timeout=args.bootstrap_minutes * 60)
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 39, in ssh
+    return subprocess.run(full, check=check, text=True, errors="replace", capture_output=capture, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 571, in run
+    raise CalledProcessError(retcode, process.args,
+subprocess.CalledProcessError: Command '['ssh', '-o', 'StrictHostKeyChecking=no', '-o', 'UserKnownHostsFile=/dev/null', '-o', 'LogLevel=ERROR', '-i', '/Users/zhenhongseng/.ssh/id_ed25519', '-o', 'ServerAliveInterval=30', '-p', '26906', 'root@60.249.37.148', '\nset -e\ncd /root/NEEL\nif ! command -v uv >/dev/null; then curl -LsSf --max-time 300 https://astral.sh/uv/install.sh | sh >/dev/null; fi\nexport PATH="$HOME/.local/bin:$PATH" UV_PROJECT_ENVIRONMENT=/root/venv\nuv sync -q\n/root/venv/bin/python -c "import torch; assert torch.cuda.is_available(), \'CUDA not available\'; print(\'[pod] torch\', torch.__version__, \'cuda\', torch.version.cuda, torch.cuda.get_device_name(0))"\n']' returned non-zero exit status 1.
