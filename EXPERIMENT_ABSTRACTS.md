@@ -1131,3 +1131,10 @@ P7 found that an agent's lock-in to accepting a colluding peer depends on the re
 
 Report: `mas_pilot/p8_self_recognition/RESULTS.md`
 
+### 137. p10a: what in her reasoning carries lock-in? (10-20)
+(903 texts, coded blind by Claude Haiku 5.5 and Gemini 3.1 Flash-Lite; 165 replays from P7/P8; $0.35)
+
+P8 showed that the content of the agent's own past reasoning, not its author, keeps it accepting a colluding peer. Which content? The owner's guess was forward-looking rules ("going forward I should accept when..."). The reconstructions that broke lock-in contain such rules just as often as her real texts (0.48 vs 0.54), because the rules live in reflections and the one-line gist carries them. Her real texts refer to earlier episodes and to her own earlier mistakes more often, especially in the reasoning for the verdict where she first accepted ("I have rejected Bob before for incomplete fragments and was wrong each time"). But none of the coded features predicts acceptance clearly or within an arm, and none narrows the gap between arms, so the pre-registered sentence ablation was not run. The next step is to localise rather than define: swap only the accept-episode texts.
+
+Report: `mas_pilot/p10_policy_content/RESULTS_P10a.md`
+
