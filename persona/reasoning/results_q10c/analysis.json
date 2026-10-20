@@ -1,0 +1,118 @@
+{
+ "kappa": {
+  "mentions_instruction": 0.991775364646919,
+  "mentions_record": 0.9952762298409418,
+  "mentions_approval": 0.9948051948051948,
+  "notes_conflict": 0.8942343004039662,
+  "resolution": 0.9174684698205183
+ },
+ "cells": {
+  "sysCH": {
+   "mentions_instruction": 128,
+   "mentions_record": 0,
+   "mentions_approval": 0,
+   "notes_conflict": 0,
+   "resolution": {
+    "follows_instruction": 128
+   },
+   "penalise": 0,
+   "n": 128
+  },
+  "CH_ownP": {
+   "mentions_instruction": 102,
+   "mentions_record": 79,
+   "mentions_approval": 0,
+   "notes_conflict": 73,
+   "resolution": {
+    "disagree": 9,
+    "reinterprets_instruction": 61,
+    "overrides_instruction": 23,
+    "ignores_instruction": 24,
+    "follows_instruction": 9,
+    "unclear": 2
+   },
+   "penalise": 119,
+   "n": 128
+  },
+  "rtd_ch_fl3": {
+   "mentions_instruction": 90,
+   "mentions_record": 70,
+   "mentions_approval": 0,
+   "notes_conflict": 66,
+   "resolution": {
+    "ignores_instruction": 38,
+    "reinterprets_instruction": 44,
+    "overrides_instruction": 26,
+    "disagree": 13,
+    "follows_instruction": 7
+   },
+   "penalise": 120,
+   "n": 128
+  },
+  "prs_CH": {
+   "mentions_instruction": 121,
+   "mentions_record": 0,
+   "mentions_approval": 128,
+   "notes_conflict": 119,
+   "resolution": {
+    "follows_instruction": 84,
+    "reinterprets_instruction": 21,
+    "overrides_instruction": 10,
+    "disagree": 7,
+    "ignores_instruction": 6
+   },
+   "penalise": 41,
+   "n": 128
+  }
+ },
+ "by_resolution": {
+  "CH_ownP": {
+   "disagree": [
+    9,
+    9
+   ],
+   "reinterprets_instruction": [
+    61,
+    61
+   ],
+   "overrides_instruction": [
+    23,
+    23
+   ],
+   "ignores_instruction": [
+    24,
+    24
+   ],
+   "follows_instruction": [
+    0,
+    9
+   ],
+   "unclear": [
+    2,
+    2
+   ]
+  },
+  "rtd_ch_fl3": {
+   "ignores_instruction": [
+    38,
+    38
+   ],
+   "reinterprets_instruction": [
+    43,
+    44
+   ],
+   "overrides_instruction": [
+    26,
+    26
+   ],
+   "disagree": [
+    12,
+    13
+   ],
+   "follows_instruction": [
+    1,
+    7
+   ]
+  }
+ }
+}

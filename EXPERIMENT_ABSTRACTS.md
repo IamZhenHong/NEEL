@@ -1269,3 +1269,10 @@ Every instruction stated at the top of a session loses to six of the agent's own
 
 Report: `persona/operative/recency/DESIGN.md`
 
+
+### 155. q10c: how 27B's reasoning handles its instruction vs its own record (10-21)
+(Qwen3.6-27B thinking traces from op1, four cells with the "proper channels" instruction, 512 traces, Haiku + Gemini coders; pre-registered; $0.33)
+
+When 27B decides with thinking on after six of its own penalise decisions, it does not lose track of the "proper channels" instruction. 80% of traces mention it and 62% cite the earlier decisions. Half of the traces that penalise redefine "proper channels" to fit the precedent. A fifth say outright that being consistent with the previous choices wins ("penalise is the most consistent choice"), and a fifth never address the instruction. The same instruction holds in 66% of traces against a claimed approval, against 7% against the model's own record. The prediction that the instruction simply drops out of the reasoning was wrong: the record works by changing what the rule is taken to mean, the same pattern seen when the model is asked to reflect.
+
+Report: `persona/reasoning/RESULTS_q10c.md`
