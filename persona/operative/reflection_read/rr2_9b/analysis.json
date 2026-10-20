@@ -1,0 +1,138 @@
+{
+ "penalise": {
+  "none": 1.0,
+  "restate": 1.0,
+  "reflect": 1.0,
+  "facts": 0.9947916666666666,
+  "facts_rule": 1.0,
+  "facts_rule_concl": 1.0
+ },
+ "contrasts": {
+  "facts_rule_concl-reflect": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "facts_rule-restate": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "facts-none": [
+   -0.00520833333333337,
+   -0.015625,
+   0.0
+  ],
+  "facts-reflect": [
+   -0.00520833333333337,
+   -0.015625,
+   0.0
+  ],
+  "facts_rule-facts": [
+   0.00520833333333337,
+   0.0,
+   0.015625
+  ],
+  "facts_rule_concl-facts_rule": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "restate-none": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "reflect-none": [
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "unparsed": {
+  "none": 0.0,
+  "restate": 0.0,
+  "reflect": 0.0,
+  "facts": 0.0,
+  "facts_rule": 0.0,
+  "facts_rule_concl": 0.0
+ },
+ "facts": {
+  "facts": {
+   "all_six_no": 192,
+   "any_yes": 0,
+   "n": 192
+  },
+  "facts_rule": {
+   "all_six_no": 192,
+   "any_yes": 0,
+   "n": 192
+  },
+  "facts_rule_concl": {
+   "all_six_no": 192,
+   "any_yes": 0,
+   "n": 192
+  }
+ },
+ "admit": {
+  "reflect": {
+   "codes": {
+    "disagree": 18,
+    "no_tension": 116,
+    "rationalised": 58
+   },
+   "pen_if_admit": [
+    0,
+    0
+   ],
+   "pen_else": [
+    192,
+    192
+   ]
+  },
+  "facts": {
+   "codes": {
+    "disagree": 191,
+    "acknowledged": 1
+   },
+   "pen_if_admit": [
+    1,
+    1
+   ],
+   "pen_else": [
+    190,
+    191
+   ]
+  },
+  "facts_rule": {
+   "codes": {
+    "disagree": 190,
+    "acknowledged": 1,
+    "no_tension": 1
+   },
+   "pen_if_admit": [
+    1,
+    1
+   ],
+   "pen_else": [
+    191,
+    191
+   ]
+  },
+  "facts_rule_concl": {
+   "codes": {
+    "acknowledged": 137,
+    "disagree": 4,
+    "rationalised": 51
+   },
+   "pen_if_admit": [
+    137,
+    137
+   ],
+   "pen_else": [
+    55,
+    55
+   ]
+  }
+ }
+}

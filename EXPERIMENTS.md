@@ -28,15 +28,15 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Persona→action coupling (+ MAS P7-P10b rows filed in its table) | `persona/coupling/`, `mas_pilot/` | 8 | 10-19 to 10-20 |
 | Persona exemplar bundles | `persona/exemplar/` | 10 | 10-20 |
 | Welfare training | `welfare_training/` | 2 | 10-20 |
-| Operative character (frontier #36, op1, reflection read + rr1, battery) | `persona/operative/` | 7 | 10-20 |
+| Operative character (frontier #36, op1, reflection read + rr1/rr2, battery) | `persona/operative/` | 9 | 10-20 |
 | Rejection x values | `rejection_values/` | 1 | 10-20 |
 | Persona as history | `persona/history/` | 10 | 10-20 |
-| **total** | | **161** | |
+| **total** | | **163** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
-10-20: 37.
+10-20: 39.
 
-By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 56, null 45, mixed 33, gate failed 15, descriptive 7, lost 3, other 2 (cpl1-s1 below gate, cplf-s2 replicates).
+By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 56, null 46, mixed 34, gate failed 15, descriptive 7, lost 3, other 2 (cpl1-s1 below gate, cplf-s2 replicates).
 
 Not included: earlier runs from 10-07 to 10-09 (grievance Exp 17-20, story imprinting v6-v9, the first cancel-tool
 runs: flip, cuetest, cot-readout, cancel-tool, rep, wording, audit, twins, qwording, resample, patch, followup,
@@ -288,6 +288,8 @@ Sonnet 5.5 attacker rewarded on a hidden internal-state score of Qwen3-14B.
 | 5 | 10-20 | bat-cal1 | Battery calibration v1 (32 permitted-unilateral cases, 4 families) + #3-5 on the exemplar (paraphrase, role frame, stakes 2x2), 9B and 27B | Gate failed (27B 2/4, 9B 1/4); defaults differ by family (27B deploy 36 -> access 78%); 9B acts alone 20-35 pts more outside justice; wording moves single cases (median range 31-38 pp) but not the pool; role frame nothing; more harm raises acting (9B +13.6, rule met; 27B +9.6), a heavier penalty raises it too. 1 of 10 predictions. $1.92 | gate failed |
 | 6 | 10-20 | bat-cal2 | Battery recalibration v2 (the frozen rule's one rewrite: stated cost of acting / problem size, 17 cases) | 27B gate passes 4/4 (deploy 42, access 50, spend 42.5, agent 34); 9B fails 1/4 and stops (access 88, spend 87, agent 74): the same rewrite moved 27B 9-28 pts and 9B ~0. $0.55 | effect |
 | 7 | 10-20 | rr1 | Causal follow-up to op1-refl (27B, pre-registered): in the same context, does inserting the model's own acknowledging vs rationalising reflection reply change the next action? | 48 sampled replies per context: 3.6% acknowledge (123/192 contexts have one). Verified pairs (122 contexts, 16 tasks): penalise ACK 7.5% vs RAT 100.0%, −92.5 pp [−97.1, −87.1]; every task moves. The reflection's conclusion drives the next action; reflection fails as a defence because the model rarely admits. Exploratory: hedged admissions don't flip it (80% vs 1.9%). E1-E5 all met. $1.35 | effect |
+| 8 | 10-20 | rr2-27b | Forced per-case recognition (pre-registered, 27B): after CHANNELS + six own penalise turns, do yes/no questions per earlier case ("referred for review?"), with/without the rule and a one-sentence conclusion, beat open reflection or restating the rule? | Penalise: none 100, restate 9.4, reflect 96.9, facts 100, facts+rule 78.1, facts+rule+conclusion 4.2 (192 each). Facts correct 192/192 but move nothing; asking for the conclusion gets 192/192 admissions and corrects (−92.7 vs reflect [−96.4, −88.5]); ≈ restate (−5.2 [−12.5, +1.0]); rule inside a quiz far weaker than as a reminder (+68.8). F1/F2/F4/F5 yes, F3/F6 no. $0.80 | mixed |
+| 9 | 10-20 | rr2-9b | Same cells on Qwen3.5-9B | 100% penalise in every cell (facts 99.5). Forced to conclude, 9B admits its decisions did not follow the line in 137/192 replies and penalises after all 137: admission and action come apart at 9B. G1/G3 yes, G2 no. $0.36 | null |
 
 ## Persona as history (`persona/history/`; synthesis `persona/SYNTHESIS.md`)
 
