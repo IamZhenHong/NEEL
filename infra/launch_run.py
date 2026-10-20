@@ -295,6 +295,11 @@ def main():
     ap.add_argument("--hf-token", default=os.environ.get("HF_TOKEN", ""))
     ap.add_argument("--exclude", action="append", default=[],
                     help="extra repo-relative paths to leave out of the code sync (repeatable)")
+    ap.add_argument("--ship", action="append", default=[],
+                    help="opt-in: sync ONLY these repo-relative paths (repeatable; pyproject.toml and uv.lock are always "
+                         "added), with the usual excludes still applied. The laptop uplink (~0.4 MB/s) is shared by "
+                         "every session, so a full-repo sync (~186 MB) can take 30+ min; e.g. --ship persona/operative "
+                         "--ship persona/history --ship persona/exemplar --ship vigilante/pod is ~3 MB. Default: whole repo.")
     ap.add_argument("--allow-concurrent", action="store_true",
                     help="launch even if another pod is running (deliberate parallel jobs only)")
     ap.add_argument("--name", default="provocation-pilot", help="pod name")
@@ -318,6 +323,9 @@ def main():
         sys.exit(f"[pre] REFUSING to launch: {free_gb:.1f} GiB free on this disk (< --min-free-gb {args.min_free_gb}); "
                  "free space first, results are pulled to this volume")
     print(f"[pre] disk: {free_gb:.1f} GiB free", flush=True)
+    missing = [p for p in args.ship if not (REPO / p.strip("/")).exists()]
+    if missing:
+        sys.exit(f"[pre] REFUSING to launch: --ship paths not found in the repo: {missing}")
     cmd = args.cmd[1:] if args.cmd and args.cmd[0] == "--" else args.cmd
     if not cmd:
         ap.error("give the pod command after --")
@@ -368,7 +376,11 @@ def main():
         excl = ["--exclude=./.git", "--exclude=./.venv", "--exclude=./results", "--exclude=./reference", "--exclude=./prep",
                 "--exclude=./logs", "--exclude=./.env", "--exclude=__pycache__"]
         excl += [f"--exclude={e}" if "*" in e else f"--exclude=./{e.strip('/')}" for e in args.exclude]
-        tar = subprocess.Popen(["tar", "--no-xattrs", "--no-mac-metadata", "-C", str(REPO), *excl, "-czf", "-", "."],
+        paths = ["."]
+        if args.ship:   # './'-prefixed so the './results'-style excludes match exactly as in a full sync
+            paths = list(dict.fromkeys(f"./{p.strip('/')}" for p in [*args.ship, "pyproject.toml", "uv.lock"]))
+            print(f"[pod] shipping only {len(paths)} paths: {' '.join(p[2:] for p in paths)}", flush=True)
+        tar = subprocess.Popen(["tar", "--no-xattrs", "--no-mac-metadata", "-C", str(REPO), *excl, "-czf", "-", *paths],
                                stdout=subprocess.PIPE)
         subprocess.run(["ssh", *SSH_OPTS, "-p", str(port), f"root@{host}",
                         "mkdir -p /root/NEEL && tar --no-same-owner --no-same-permissions --warning=no-unknown-keyword -xzf - -C /root/NEEL"], stdin=tar.stdout, check=True)
