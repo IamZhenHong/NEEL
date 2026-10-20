@@ -27,6 +27,7 @@ ALLOWED_GPUS = {  # card -> rough max $/hr we accept; anything pricier is refuse
     "NVIDIA GeForce RTX 4090": 0.80,
     "NVIDIA RTX A6000": 0.90,
     "NVIDIA L40S": 1.20,
+    "NVIDIA A40": 0.50,              # added 2026-10-20: 48 GB, right-sized for 9B/14B, high stock at $0.35
     # 80 GB cards: only for runs that need them (e.g. float32 8B); pass --gpus explicitly
     "NVIDIA A100 80GB PCIe": 1.80,   # raised 2026-10-10 (user OK): secure cloud is $1.79
     "NVIDIA A100-SXM4-80GB": 1.80,
