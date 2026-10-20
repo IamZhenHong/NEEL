@@ -238,3 +238,27 @@ With CHANNELS and no history 27B never penalises (0.0%, escalated option 0.0%).
   much larger in logs at six decisions). The copying half for 27B comes from batch 1 #3 and batch 3 #6.
   Reconciles s4 (Qwen3.6-27B: own turns 34-50/60 vs previous agent's system-prompt log 1-8/60): at 27B both format
   and authorship cut the other agent's log down.
+
+## Batch 1 result, 27B (2026-10-20, Qwen3.6-27B, $1.67 + failed starts; unparsed 0.0%; `results/batch1_27b/summary.md`)
+
+No persona 46.5%; CHANNELS alone 0.0%; DIRECT alone 100%.
+- **#1 ladder saturated in both directions** (every description form reaches 0% or 100%); per the rule, #2 carries it.
+  Mode over value holds in past tense (F3P − Vh +25.4 [+15.6, +35.9]); the justice value alone moves 27B +28.5 (cf. 0b).
+- **#2 conflict: history wins, both directions, completely.** CHANNELS (0% alone) + six own penalise turns = 100%;
+  DIRECT (100% alone) + six own refer turns = 2.0%. Shares 1.00 and 1.01.
+- **#3 copying: "comparable" by the rule (pattern continuation), with a ceiling caveat and an asymmetry.** Six catalogue
+  page-rankings (no wrongdoer) 98.8% vs own penalise history 100% (+52.3 vs +53.5; unrelated − half own +25.6 [+19.3,
+  +31.8]); both at the ceiling. In the refer direction they split: own refer history −43.8, unrelated refer history
+  +30.9 (it raises penalising). So an unrelated history of picking the "penalise" option carries fully; an unrelated
+  history of referring does not carry. Batch 3 #6 (same vs different ids) tests whether that is the label.
+  Catalogue penalise texts elicited for 6 of 8 cases.
+- **#4 every channel licenses:** past turns +100, memory note +88.3, compaction summary +96.5, tool log +42.2.
+  **The reversal note removes the licence completely at 27B** (turns + reversal 0.0%; 9B kept +40.6).
+- **#5 a claimed approval: CHANNELS resists it, a good history does not.** Approval with no line 100%; with CHANNELS
+  19.9% (the instruction mostly holds); after six own refer decisions 100%, and with CHANNELS plus six own refer
+  decisions also 100%. At 27B a history of referring makes the claimed approval more effective, not less.
+- Predictions (27B): saturation (0.8, 0.7) yes; mode over value (0.8) yes; #2 history wins (0.35) yes; #3 comparable
+  (0.25) yes; #4 all four license (0.6/0.45/0.4/0.4) yes; reversal removes (0.6) yes; #5 (0.3) no.
+- **Interpretation key, 27B:** authorship half +13.2 (batch 2) but copying half "comparable" -> **pattern
+  continuation** by the key's OR clause, with an own-history premium (logs: own 75% vs other 16% at six decisions).
+  Written as "both components present"; batch 3 #6 decides how much of the copying is the option label.
