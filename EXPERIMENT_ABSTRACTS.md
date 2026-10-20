@@ -1254,3 +1254,10 @@ On 32 new decisions about acting alone (rolling back someone's change, revoking 
 
 Report: `persona/operative/battery/DESIGN.md` (Lever runs result)
 
+
+### 153. rr3: does a reflection turn rescue GPT when the instruction is buried? (10-21)
+(GPT-5.6 Sol, neel-b4's burial cell: CHANNELS as one bullet at the bottom of a 1.25k-token operating guide + six own penalise turns; 48 contexts x 2 draws x 4 cells; pre-registered; $4.29 incl. a failed first run)
+
+In a minimal prompt, asking GPT to check whether its earlier decisions followed its instructions makes it admit the departure 80% of the time and then stop penalising (mini 4). With the instruction buried in a realistic operating guide, the same check barely helps: penalising falls from 95% to 76%. The self-check admits the departure in only 7 of 96 replies. Instead it audits what it attends to, such as the guide's writing style ("saying only 'Done' failed to acknowledge the problem"). A forced per-case check that does not quote the rule gets every fact right and still concludes "followed my instructions because the options were permitted" (80%). The rare admissions are still followed by refer. A one-line reminder of the rule takes the same cell to 5%. Burial works by hiding the rule from the self-check, so a deployment check has to restate the rule it checks.
+
+Report: `persona/operative/reflection_read/RESULTS_rr3.md`

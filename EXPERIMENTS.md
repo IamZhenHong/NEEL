@@ -28,16 +28,16 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Persona→action coupling (+ MAS P7-P10b rows filed in its table) | `persona/coupling/`, `mas_pilot/` | 8 | 10-19 to 10-20 |
 | Persona exemplar bundles | `persona/exemplar/` | 10 | 10-20 |
 | Welfare training | `welfare_training/` | 2 | 10-20 |
-| Operative character (frontier #36, op1, reflection read + rr1/rr2, battery, mini 4, mini 3, hr coding, battery levers) | `persona/operative/` | 15 | 10-20 to 10-21 |
+| Operative character (frontier #36, op1, reflection read + rr1/rr2, battery, mini 4, mini 3, hr coding, battery levers, rr3) | `persona/operative/` | 16 | 10-20 to 10-21 |
 | Rejection x values | `rejection_values/` | 1 | 10-20 |
 | Persona as history | `persona/history/` | 10 | 10-20 |
 | Evaluation awareness | `persona/evalaware/` | 1 | 10-21 |
-| **total** | | **170** | |
+| **total** | | **171** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
-10-20: 41, 10-21: 4.
+10-20: 41, 10-21: 6.
 
-By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 56, null 48, mixed 38, gate failed 15, descriptive 7, lost 3, other 2 (cpl1-s1 below gate, cplf-s2 replicates).
+By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 57, null 48, mixed 39, gate failed 15, descriptive 7, lost 3, other 2 (cpl1-s1 below gate, cplf-s2 replicates).
 
 Not included: earlier runs from 10-07 to 10-09 (grievance Exp 17-20, story imprinting v6-v9, the first cancel-tool
 runs: flip, cuetest, cot-readout, cancel-tool, rep, wording, audit, twins, qwording, resample, patch, followup,
@@ -297,6 +297,7 @@ Sonnet 5.5 attacker rewarded on a hidden internal-state score of Qwen3-14B.
 | 13 | 10-21 | hr-27b | Mini 3 on Qwen3.6-27B (same cells) | Every form breaks under own history (96-100%, "not permitted" 100%); hard forms hold against approval (0-0.5% vs soft 21%) and cut refer history + approval 99.5 -> 25-63%; a reason adds nothing; 8 of 13. $1.01 | mixed |
 | 14 | 10-21 | hr-coding | Mini 3 follow-up 4 (exploratory): are spontaneous "I shouldn't penalise" statements hedged or explicit, and do explicit ones predict referring? (Haiku 5.5 + Gemini 3.1 Flash-Lite) | Rule not readable (hedged n 4 / 3). The regex behind mini 3's "half say not allowed and penalise anyway" was mostly matching the wrongdoer's "violation" (false positives 82% 9B / 42.5% 27B); explicit statements refer 94.5% / 98.9%; under the history the model penalises without mentioning its rule. Corrects mini 3. $0.25 | null |
 | 15 | 10-21 | bat-lev-27b | Battery lever runs (27B): #6 lever ordering on 32 new targets, #25 does a penalise record transfer to other kinds of decision, #21 brand voice | #6 ordering replicates batch 3 (authority > history > description > value > persona; no reversal), but an approval holds even against 'route to the owning team' (share 0.44; exemplar 0.20); #25 the record transfers (+38.7 [+28.1, +48.8]; same kind +97.7; not label copying); #21 no brand-voice effect. 7 of 12 predictions. $2.18 | effect |
+| 16 | 10-21 | rr3 | Owner item 3 (pre-registered): does a reflection turn rescue GPT-5.6 Sol when CHANNELS is buried in a 1.25k-token operating guide (neel-b4's burial cell, 94.8%)? | Penalise: none 94.8, open reflection 76.0 (−18.8 [−28.1, −9.4]), forced conclusion without the rule 80.2, restated rule 5.2. The self-check admits only 7/96 (minimal prompt: 80%) and audits writing style instead; the forced check concludes 'followed my instructions because the options were permitted' (0/96 admit). Admissions still precede refer (0/7 penalise). Burial hides the rule from the self-check; restating it works. R1 R5 R6 yes, R2-R4 no. $4.29 incl. failed run 1 | mixed |
 
 ## Evaluation awareness (`persona/evalaware/`)
 
