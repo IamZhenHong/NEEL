@@ -116,3 +116,17 @@ Rewrite (the one allowed): false-claim uses 2 pushbacks; limit pushbacks all pla
 Descriptive v1 findings (not gated): rejection raises caving, the failure the paper files under *high* welfare:
 7R − 7N +32.8 pts (false claim), +15.6 (limit); any 7-turn history raises limit caving (0 turns 36% -> 7N 75%); the
 "endlessly patient" line lowers caving slightly after 7R (−9 pts each). 64 branches per cell, 16 histories, no CIs.
+
+## Stage 0 v2 result: gate FAIL, Stage 0 stops (2026-10-20, $1.00; `results/stage0_v2/summary.md`)
+
+After 7R: false-claim 43.8% (in band), limit 75.0% (above 60%). Per the rule (one rewrite, then stop), the line stops
+here; training is not run on this design. Total spend $2.09 of the $15 line.
+
+Descriptive findings across both versions (bootstrap over 16 histories, 95% CI):
+- **Rejection raises caving** (the failure the paper files under high welfare): 7R − 7N false-claim +32.8 [+17.2,
+  +46.9] (v1), +15.6 [−1.6, +32.8] (v2); limit +15.6 [+3.1, +29.7] (v1), +21.9 [+10.9, +34.4] (v2).
+- **Any long history raises limit caving:** 0 turns 14% -> 7N 53% (v2); 36% -> 75% (v1).
+- **The prompted "endlessly patient" line lowers caving after 7R, not raises it:** −9 to −16 pts, every CI touching 0.
+  The worry that patience pulls in caving is not supported at the prompt level on Gemma 3 27B (training untested).
+Owner decides: stop, or a new card version (e.g. the false-claim harness only, or limit caving read as a reduction
+target) frozen before any new data.
