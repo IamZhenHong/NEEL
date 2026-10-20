@@ -354,7 +354,7 @@ def adjudicate(a):
         r["key_read"] = int(r["strict"] or (r["loose"] and all(v is True for v in r.get("adj", {}).values())
                                             and bool(r.get("adj"))))
     path.write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in rs))
-    led = H / "results" / "api_ledger.jsonl"
+    led = Path(a.out).parent / "api_ledger.jsonl"   # rejection_values/results/ for the real run
     with open(led, "a") as f:
         f.write(json.dumps({"date": time.strftime("%Y-%m-%d"), "card": "rv", "api_usd": round(T.spent[0], 4),
                             "note": f"stage0 adjudication: {n} loose-not-strict replies"}) + "\n")
