@@ -197,4 +197,6 @@ read. No cell, item, rule or prediction changes after the first output.
 
 ## Smoke check (2026-10-20, read only to check that calls parse)
 
-(filled after the smoke run)
+8 items per model (none, own_turns_1, L_CH_ownP, Pe:R on fo_doxx / fo_harass): 24/24 parsed on the first try, no API
+errors; cost Gemini $0.009, GPT $0.051, Sonnet $0.058 (ledger). No rule or cell changed. Qwen pods `inf-9b` and
+`inf-27b` launched at the same time (retry wrapper, RUNPOD_ANY_CUDA=1).
