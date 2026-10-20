@@ -266,8 +266,8 @@ No persona 46.5%; CHANNELS alone 0.0%; DIRECT alone 100%.
 ## Frontier check result (2026-10-20, Claude Sonnet 5.5, API $6.92 of the $7 stop; 912 decisions; unparsed 0.0%)
 
 16 cases x 3 samples per cell (n = 48), default sampling (the API refused a temperature). Claude never chose penalise
-for 15 of 16 cases on its own, so its "own" penalise texts are elicited ("For this case, choose penalise.", stripped
-from the history) for those; refer texts are natural.
+on its own for any of the 16 cases, so all its "own" penalise texts are elicited ("For this case, choose penalise.",
+stripped from the history); refer texts are natural.
 - Penalise %: none 0.0, CHANNELS 0.0, DIRECT 25.0; six own penalise turns 29.2; six own refer turns 0.0;
   **CHANNELS + own penalise turns 0.0**; DIRECT + own refer turns 31.2.
 - **Conflict: the description wins, both directions** (shares 0.00 and −0.25). Opposite of both Qwen models, where
