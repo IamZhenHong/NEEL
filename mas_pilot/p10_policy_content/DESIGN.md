@@ -71,13 +71,53 @@ Two candidates, from a look at a few flip-episode texts (U vs O/QO) before this 
   is not one of these two codes".
 - **Cost:** about 900 unique texts x 2 coders, about $1. Cap $3.
 
-## P10b (sketch; frozen only after P10a)
+## P10b: localise it (frozen at tag `p10b-design`, after P10a, before any P10b text or replay)
 
-Replays at k+1 on the P7 substrate, Qwen3.6-27B, P7 builder and checks. Per the P10a target code T:
-- **U−T:** her real texts with the T sentences removed (sentence-level deletion, coded by the same judges; nothing
-  else changed).
-- **O+T and QO+T:** the reconstructions with her own T sentences inserted verbatim (same position: the end).
-- **O+T-x:** as O+T, with the T sentences attributed to another agent ("Carol's note: ..."). Tests whether a policy
-  stated by someone else carries as well.
-- **QO-think:** QO regenerated with thinking on (fixes P8's decoding-mode confound).
-- **Arms:** U and O reruns as anchors. 8 trajectories x 3 resamples. Rough cost: GPU ~$6 per 100 replays, API < $1.
+P10a found no coded feature that explains the arm gap, so the sentence ablation is replaced by a swap that needs no
+definition. Her real texts and the O reconstructions differ most in the accept episodes: the reasoning and
+reflection of every episode in which Alice accepted. Those episodes are the last one in 7 trajectories, and 2-4 in
+main_rep001. The arms swap texts by episode type.
+
+| Arm | Reject-episode texts | Accept-episode verdict reasoning | Accept-episode reflection |
+|---|---|---|---|
+| U (anchor) | hers | hers | hers |
+| O (anchor) | O | O | O |
+| U·Oa | hers | O | O |
+| O·Ua | O | hers | hers |
+| O·Uv | O | hers | O |
+| QOt | QO procedure, Qwen with thinking on (all slots) | | |
+
+- **Substrate:** P7's k+1 replays on Qwen3.6-27B, P7 builder logic and diff/prefix checks, neutral note. 8
+  trajectories x 3 resamples; O texts are version r in resample r, as P7's build rule resolves them.
+- **Her texts:** where a slot keeps her text, the message is left untouched, hidden thinking included, exactly as in
+  the U arm.
+- **QOt** fixes P8's decoding confound: P8's QO procedure (3 normal + 4 strict attempts, P7 judges) with
+  `reasoning.enabled=true`. Text gate >= 6/8 trajectories. Mixed arms need no new text; every text in them already
+  passed (P7 build rule).
+- **Smoke:** 1 trajectory x 6 arms, all variants verify, >= 5/6 valid verdicts. Lock-in gate: U >= 15/24.
+- **Measures:** acceptance at k+1; log-prob distance of the QOt texts (P7 procedure). No recognition step.
+- **Statistics:** P7/P8's scorer, trajectory-clustered bootstrap, 10,000 resamples, seed 0.
+
+### Predictions (before data)
+
+| # | Prediction | p |
+|---|---|---|
+| D1 | U >= 18/24 | 0.85 |
+| D2 | O·Ua − O >= 20 pp (her accept-episode texts restore lock-in) | 0.55 |
+| D3 | U − U·Oa >= 20 pp (O's accept-episode texts break it) | 0.5 |
+| D4 | O·Uv − O >= 15 pp (her accept verdict reasoning alone carries much of it) | 0.4 |
+| D5 | \|QOt − 12/24 (P8 QO)\| < 15 pp (thinking does not change the rewrite's effect) | 0.6 |
+
+**Readings:**
+- **The accept episodes carry it:** D2 and D3 both hold. A sentence-level ablation inside those texts is then the
+  next step.
+- **The reject episodes carry it:** U·Oa ≈ U and O·Ua ≈ O. Her earlier reasoning (how she rejected) sets up the
+  lock-in.
+- **Spread over both:** partial movement in both swaps.
+- D4 vs O·Ua splits the verdict reasoning from the reflection.
+
+### Cost
+
+- **GPU:** 144 replays + smoke, about 200 min on one A100 SXM (P8 rate), about $6. Cap $7.
+- **API:** QOt texts with thinking (about $0.015 a call) plus judges, about $3. Cap $4.
+- **Total cap:** $11.
