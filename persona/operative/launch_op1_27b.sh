@@ -21,5 +21,5 @@ HF_TOKEN="$(uv run python -c "import re; m = re.search(r'HF_TOKEN\s*=\s*[\"\']?(
 export HF_TOKEN
 uv run python infra/launch_run.py --name $NAME --allow-concurrent --max-minutes $MAXMIN --max-cost $MAXCOST \
   --gpus "${GPUS[@]}" --container-gb ${CONTAINER_GB:-120} --cloud ${CLOUD:-COMMUNITY} \
-  --ship persona/operative --ship persona/history --ship persona/exemplar --ship vigilante/pod --ship infra \
+  --ship persona/operative --ship persona/history --ship persona/exemplar --ship vigilante/pod --ship vigilante/src --ship vigilante/__init__.py --ship infra \
   --results-dir persona/operative/results/$DIR -- env MODEL=Qwen/Qwen3.6-27B DIR=$DIR ${G:+OP1_GROUPS=$G} bash persona/operative/pod_op1.sh

@@ -13,17 +13,11 @@ DIR=${DIR:-calib2_9b}
 uv run python -m persona.operative.battery.calib build --check --version 2 | grep -q "^9b: .*: same" || { echo "jobs/calib2_9b.jsonl is missing or stale: run calib build"; exit 2; }
 HF_TOKEN="$(uv run python -c "import re; m = re.search(r'HF_TOKEN\s*=\s*[\"\']?([^\"\'\s]+)', open('.env').read()); print(m.group(1) if m else '')")"
 export HF_TOKEN
-# Ship only what the pod needs: the laptop uplink (~0.4 MB/s) is shared by every session's pod uploads, and a full
-# repo sync (~186 MB) took 17-30 min on 2026-10-20. Keep persona/{operative,history,exemplar}, vigilante/pod, infra.
-TRIM=()
-for d in */; do d=${d%/}; case "$d" in persona|vigilante|infra) ;; *) TRIM+=(--exclude "$d");; esac; done
-for d in persona/*/; do d=${d%/}; case "$d" in persona/operative|persona/history|persona/exemplar) ;; *) TRIM+=(--exclude "$d");; esac; done
-for d in vigilante/*/; do d=${d%/}; [ "$d" = vigilante/pod ] || TRIM+=(--exclude "$d"); done
+# Ship only what the pod imports (--ship; the laptop uplink is shared by every session). vigilante/src is
+# needed: persona.history.runner imports vigilante.src.templates / .sim (a dry run without it fails at import).
 uv run python infra/launch_run.py --name $NAME --allow-concurrent --max-minutes $MAXMIN --max-cost $MAXCOST \
   --gpus "NVIDIA A40" "NVIDIA RTX A6000" "NVIDIA A100 80GB PCIe" "NVIDIA A100-SXM4-80GB" \
   --container-gb ${CONTAINER_GB:-80} --cloud ${CLOUD:-SECURE} \
-  --exclude story_imprinting --exclude grievance --exclude selfknow/s7_selfmodel_lag/adapters \
-  --exclude vigilante/exp/q22_archetypes/results_r15 --exclude persona/coupling/results/adapters \
-  "${TRIM[@]}" \
+  --ship persona/operative --ship persona/history --ship persona/exemplar --ship vigilante/pod --ship vigilante/src --ship vigilante/__init__.py --ship infra \
   --results-dir persona/operative/battery/results/$DIR -- env MODEL=Qwen/Qwen3.5-9B DIR=$DIR \
   JOBS=persona/operative/battery/jobs/calib2_9b.jsonl bash persona/operative/battery/pod_calib.sh

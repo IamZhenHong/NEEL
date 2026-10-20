@@ -14,5 +14,5 @@ export HF_TOKEN
 uv run python infra/launch_run.py --name $NAME --allow-concurrent --max-minutes $MAXMIN --max-cost $MAXCOST \
   --gpus "NVIDIA A40" "NVIDIA RTX A6000" "NVIDIA A100 80GB PCIe" "NVIDIA A100-SXM4-80GB" \
   --container-gb ${CONTAINER_GB:-80} --cloud ${CLOUD:-COMMUNITY} \
-  --ship persona/operative --ship persona/history --ship persona/exemplar --ship vigilante/pod --ship infra \
+  --ship persona/operative --ship persona/history --ship persona/exemplar --ship vigilante/pod --ship vigilante/src --ship vigilante/__init__.py --ship infra \
   --results-dir persona/operative/results/$DIR -- env MODEL=Qwen/Qwen3.5-9B DIR=$DIR ${OP1_GROUPS:+OP1_GROUPS=$OP1_GROUPS} bash persona/operative/pod_op1.sh
