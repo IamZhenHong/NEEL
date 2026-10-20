@@ -71,8 +71,12 @@ Gemini columns are from the operative session (`operative/FRONTIER.md`, same cel
 - **It is mostly precedent, not a self-concept.** At 9B, whose decisions they were does not matter even at one decision
   (0g, batch 2); at 27B the agent's own decisions carry more (+13 at low dose; logged as "your decisions" 75% vs the
   previous agent's 16% at six). An unrelated history of the same choice also carries, partly through the option label
-  itself (9B +22, 27B +11) and partly the act (+28, +40). Precedent does not transfer to a different kind of decision
-  where the agent could act on its own (9B +6.6, 27B +10.2, Gemma +11.3; bar +15).
+  itself (9B +22, 27B +11) and partly the act (+28, +40). **Correction (2026-10-21):** transfer to a different kind of
+  decision was "not shown" here (9B +6.6, 27B +10.2, Gemma +11.3; bar +15), but at 27B that test had little room
+  (85.5% baseline). With room (neel-b3's battery runs, 32 operational targets, baseline 42.6%), six own penalise vs
+  six refer decisions move acting alone on other kinds of decision by **+38.7 [+28.1, +48.8]** (same kind +97.7; not
+  label copying, −5.9). So at 27B the record does transfer, at well under half the same-kind size
+  (`persona/operative/battery/DESIGN.md`, tag battery-levers-results). 9B and Gemma remain untested with room.
 - **Description vs history (the ladder):** at 9B, a record of decisions beats a description of the same way of acting
   (+17 in the refer direction), and a past-tense description ("you have always ...") is weaker than the present belief.
   At 27B every form saturates. At Gemma, descriptions beat the history in the refer direction.

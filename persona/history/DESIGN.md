@@ -311,6 +311,10 @@ stripped from the history); refer texts are natural.
 - **#1 trait transfer: not shown** (own penalise − own refer +10.2 [+2.0, +21.9], below the +15 bar; same-kind +95.7).
   Different-kind cases: none 85.5%, after a penalise history 89.8%, after a refer history 79.7%: a small effect in
   both directions, much smaller than the same-kind effect.
+  **Superseded at 27B (2026-10-21):** this test had little room (85.5% baseline). neel-b3's battery runs, with room
+  (32 targets, baseline 42.6%), find six own penalise vs refer decisions transfer +38.7 [+28.1, +48.8] to other kinds
+  of decision (not label copying, −5.9; `persona/operative/battery/DESIGN.md`, tag battery-levers-results). The
+  "not shown" verdict here was a ceiling result, not evidence against transfer.
 - **#6 copying v2: both components again.** None 46.5, own penalise 100, unrelated "act" history with the target's ids
   97.3, with different ids 85.9; unrelated refer 46.9 / 32.4 (own refer 4.3). Label +11.3 [+4.7, +18.8]; without the
   label +39.5 [+27.7, +52.7]; unrelated vs half own: comparable.
