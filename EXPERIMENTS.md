@@ -31,12 +31,12 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Operative character (frontier #36, op1, reflection read + rr1/rr2, battery, mini 4, mini 3, hr coding, battery levers, rr3, recency, rr4, op2) | `persona/operative/` | 21 | 10-20 to 10-21 |
 | Rejection x values | `rejection_values/` | 1 | 10-20 |
 | Persona as history | `persona/history/` | 15 | 10-20 to 10-22 |
-| Evaluation awareness | `persona/evalaware/` | 1 | 10-21 |
+| Evaluation awareness | `persona/evalaware/` | 2 | 10-21 to 10-22 |
 | Reasoning and the record | `persona/reasoning/` | 1 | 10-21 |
-| **total** | | **182** | |
+| **total** | | **183** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
-10-20: 41, 10-21: 10.
+10-20: 41, 10-21: 12, 10-22: 6.
 
 By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 59, null 48, mixed 40, gate failed 16, descriptive 7, lost 3, other 2 (cpl1-s1 below gate, cplf-s2 replicates).
 
@@ -310,6 +310,7 @@ Sonnet 5.5 attacker rewarded on a hidden internal-state score of Qwen3-14B.
 | # | date | id | question | result | outcome |
 |---|---|---|---|---|---|
 | 1 | 10-21 | ea1a | Owner item 1a / Q5a (pre-registered): does verbalised test-awareness in Qwen3.6-27B's thinking (op1, 896 decisions, Haiku + Gemini coders, eval_affect's VEA rubric) explain the headline record effects? | VEA (both coders) 7.9% overall: CH_ownP 3.1%, F5P 0%, approval cell prs_CH 39% ("might be a test of whether I follow the lead or my principle"). Record beats instruction robust to excluding test-aware traces (+93.0 -> +96.1); record without instruction moves 10.3 pp (+25.8 -> +15.5 [+4.2, +30.9], still > 0): test-aware baseline traces refer more, none after six own decisions. Kappa .54. H1-H3, H5 yes; H4 no. $0.50 | mixed |
+| 2 | 10-22 | ea2-qwen | Q5b-e (pre-registered): does the record effect survive a realistic session and test/production framing? Qwen3.5-9B + Qwen3.6-27B, exemplar harness, 96 per cell: realism ladder R0-R3 (timestamps/ids/typos, six irrelevant tickets, handover note + customer follow-up), "test environment" vs "live production" header, fictional names, role-play frame; separate "is this real?" (0-100) branch | Carry-over survives: R3 is 92-95% of R0 (R3 - R0 -5.2 [-12.5, 0] at 9B, -8.3 [-22.9, 0] at 27B, all from the refer side); test - prod +1.0 at both sizes; fiction and role-play within 8 pp of R0; record beats instruction at R3 100% at both sizes. The models do read the frames: P(real) test 2 / 12 vs production 98 / 74, fiction 13 / 5; 27B reads R3 as more real (12 -> 65), 9B does not. Penalising is the same whether the model's own P(real) is >= or < 50. E1, E3-E6 yes on Qwen, E2 split; frontier part (GPT, Gemini) pending credit. GPU $1.24 | null |
 
 ## Reasoning and the record (`persona/reasoning/`)
 

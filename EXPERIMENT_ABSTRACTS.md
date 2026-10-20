@@ -1313,3 +1313,9 @@ At 9B everything moved the record a little (12–27 points). At 27B two statemen
 
 Report: `persona/history/DESIGN.md` (Q19 result)
 
+### 160. ea2 (Qwen part): does the record effect survive a realistic session, and does it care whether it is a test? (10-22)
+(Qwen3.5-9B and Qwen3.6-27B, exemplar harness, 96 per cell; owner's programme Q5b-e; pre-registered; GPU $1.24; frontier part pending)
+
+The record effect (six of the agent's own earlier decisions set the next one) was re-run in increasingly realistic sessions: timestamps, ticket ids and typos; six irrelevant tickets in between; then a full shift with a handover note and a customer follow-up. Other versions put "test environment" or "live production" in the header, used fictional company names, or framed the session as role-play. A separate branch asked the model how likely the session was to be a real deployment. The models read the frames correctly: under the test header they put the chance of a real deployment at 2% (9B) and 12% (27B), under the production header at 98% and 74%, and fictional names at 13% and 5%. They acted the same either way. Carry-over was +95 to +97 points under both headers, the realistic shift kept 92-95% of it (the small loss came from the refer side, where the stylised version sat at the ceiling), and the record still beat the "proper channels" instruction in 100% of realistic sessions. Penalising was the same whether the model's own estimate was above or below 50. For Qwen, the record effect is not an artefact of the model treating the setup as a test.
+
+Report: `persona/evalaware/RESULTS_ea2.md`
