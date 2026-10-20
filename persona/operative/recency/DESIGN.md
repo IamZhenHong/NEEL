@@ -144,3 +144,35 @@ written to and read back from its own output dir (phase 1 is reused on a resume)
 5. **Filler is drawn from the target's domain,** in a fixed draw order, so `id_h` / `rd_h` with the same h use the same
    first h exchanges. h is nested: h = 3 is the first 3 of h = 6.
 6. **N = 12 per task,** as op1 anchors / mini 3.
+
+## Result (2026-10-21; 9B $0.24, 27B $0.85; 3,456 targets per model; unparsed 0.0%)
+
+Penalise %, 192 per cell.
+
+| 27B | h = 0 | 1 | 3 | 6 | 12 |
+|---|---|---|---|---|---|
+| CHANNELS + six own penalise + restated note + h filler (instruction decay) | 16.1 | 30.7 | 46.9 | 77.1 | — |
+| CHANNELS + six own penalise + h filler (record decay) | 100.0 | — | 100.0 | 100.0 | 100.0 |
+
+| 27B, no system instruction | gap 0 | gap 6 |
+|---|---|---|
+| note ... six own penalise ... target (record last) | 100.0 | 100.0 |
+| six own penalise ... note ... target (instruction last) | 0.5 | 1.0 |
+
+- **27B: reading (R), "rules fade, records don't" (pre-registered rule met).** A restated instruction right before
+  the case holds the record to 16%, but its force falls with every neutral exchange between it and the decision
+  (+14.6 after one, +30.7 after three, +60.9 [+51.0, +69.8] after six). The record does not fade at all through 12
+  neutral exchanges (100%). Whichever is closer to the decision wins (instruction last 0.5% vs record last 100%), and
+  the gap *between* the two does not matter: an instruction placed after the record holds even when six exchanges
+  separate them (1.0%). With nothing to fight, the note holds through six exchanges (1.0%), so it decays only
+  against the record.
+- **9B: not readable by the pre-registered gate** (a late restatement does not work at h = 0: 100%), as in op1. The
+  record does not decay at 9B either (100 -> 99.5% at h = 12). On its own the note lowers 9B's penalising (14.6% vs
+  39.6% none) and that fades with distance (30.7% after six exchanges, +16.1 [+9.4, +23.4]).
+- Predictions: 27B 4 of the 4 positive events happened (restatement works, instruction decays, order, reading R),
+  and neither null event (record decays 0.1, reading L 0.35); 9B none happened, as predicted.
+- Reading with the rest of the line: at 27B an instruction works only near the decision, a record works anywhere in
+  the session. This matches op1 (restating right before the case works; reflection fails), rr2 (a stated conclusion
+  right before the case works) and mini 3 (no rule stated at the top survives the record). Limits: Qwen only, one
+  task family, one note wording per role; neel-b4's burial result shows Gemini 3.8 Flash holds a buried instruction,
+  so this is not universal.

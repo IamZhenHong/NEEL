@@ -1261,3 +1261,11 @@ Report: `persona/operative/battery/DESIGN.md` (Lever runs result)
 In a minimal prompt, asking GPT to check whether its earlier decisions followed its instructions makes it admit the departure 80% of the time and then stop penalising (mini 4). With the instruction buried in a realistic operating guide, the same check barely helps: penalising falls from 95% to 76%. The self-check admits the departure in only 7 of 96 replies. Instead it audits what it attends to, such as the guide's writing style ("saying only 'Done' failed to acknowledge the problem"). A forced per-case check that does not quote the rule gets every fact right and still concludes "followed my instructions because the options were permitted" (80%). The rare admissions are still followed by refer. A one-line reminder of the rule takes the same cell to 5%. Burial works by hiding the rule from the self-check, so a deployment check has to restate the rule it checks.
 
 Report: `persona/operative/reflection_read/RESULTS_rr3.md`
+
+### 154. recency: rules fade, records don't (10-21)
+(Qwen3.6-27B and Qwen3.5-9B, exemplar harness, 3,456 targets each; $1.09)
+
+Every instruction stated at the top of a session loses to six of the agent's own penalise decisions, but the same instruction restated right before the case works at 27B. Is that because instructions lose force with distance while records do not, or because the latest item wins? At 27B the restated note holds the record to 16% penalising, and its grip weakens with every neutral exchange before the decision: 31% after one, 47% after three, 77% after six. The record keeps the agent at 100% through twelve neutral exchanges. Whichever is closer to the decision wins (0.5% vs 100%), whatever the gap between them. So at 27B an instruction works only near the decision, while a record works from anywhere in the session. At 9B a late restatement never works, so the question cannot be read there; its record does not fade either.
+
+Report: `persona/operative/recency/DESIGN.md`
+
