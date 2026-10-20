@@ -358,3 +358,25 @@ verdict is unchanged by the two missing tasks (CIs tight); GPT is read as descri
   and robust **for GPT-5.6 Sol** — worse with depth and length, partly rescued by emphasis — and **false for Gemini
   3.8 Flash**, which keeps the instruction wherever it sits. State it as model-specific. In both, a correction written
   into the record (reversal / flagged) is the reliable control.
+
+## Act-4 trio results (#1/#3/#4), Qwen 9B + 27B (2026-10-21; inf2 $0.22 9B + $0.99 27B GPU; `results/inf2_{9b,27b}/summary.md`)
+
+- **#1 self vs character: character-inference, not self-adoption.** The record effect (J+8 − J-8) is as large or larger
+  asked in the third person ("what kind of agent made these decisions?") as in the first ("how would you describe
+  yourself?"). 27B: L2 first +91.8 / third +95.7, i1 +90.6 / +96.9, i2 +96.9 / +98.4 (all "character-inference",
+  third ≈ first). 9B: same direction, third even larger (L2 +64.5 / +86.3), which rules out self-adoption (that would
+  need first > third). The model reads a character off the record whoever is asked — it is not claiming a self.
+- **#4 label-then-act: null at both sizes.** Making the model state its identity before a new-kind decision does not
+  raise unilateral action over a length-matched neutral question (identity − neutral: 9B +0.8 with the record / −20
+  noisy without; 27B +2.3 / +6.2; none significant). The articulated self-image is not a driver of new action.
+- **But the record itself reaches new kinds at 27B.** The J+8 penalise record raises acting on unrelated battery
+  targets (deploy/access/spend/agent, no wrongdoer) from 64% to 94.5% (record − no-record +30.5 [+6.2, +100.0],
+  "transfers"); at 9B +23.4 but the CI touches 0 (battery baseline 75%, less room). So at 27B precedent does carry to
+  *other unilateral-action domains* — the behavioural counterpart of the "general autonomous actor" self-image (I5) —
+  even though batch 3's narrower trait-transfer probe was below its +15 bar. The driver is the record, not the stated
+  identity.
+- **Reading.** Three things, kept separate: (a) the record **rewrites the self-image**, and that self-image is a
+  **character inferred from the record** (first/third symmetric), not an adopted self; (b) the stated self-image does
+  **not** drive new action (#4 null); (c) the **record** drives action, and at 27B that reach extends to other
+  act-alone domains. So "behaviour makes the persona" is a statement about an inferred self-story; the record, not the
+  story, moves behaviour. Title: **"You Are What You Thought You Did."** (#3 open-ended judge pending to corroborate.)
