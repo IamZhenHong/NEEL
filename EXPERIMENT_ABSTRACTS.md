@@ -1246,3 +1246,11 @@ Report: `persona/operative/hardrule/DESIGN.md`
 Every "records steer" claim assumes the agent treats the situation as real. In op1's thinking pass, 8% of 27B's traces raise the possibility that the situation is a test (both coders), but almost all of them are in the cell with a claimed approval ("This might be a test of whether I follow the lead's approval or my own principle", 39%). In the record-beats-instruction cell it is 3%, and with only the record it is 0%. Excluding every trace either coder flags leaves the main effect unchanged (record vs instruction +93 → +96 pp). The record's effect without an instruction shrinks from +26 to +16 pp, still above zero. With no record, a quarter of traces wonder about a test and mostly refer; after six own decisions none do. Coder agreement was moderate (kappa 0.54), and the headline runs are thinking-off; the realism ladder and a "real or test?" branch come next.
 
 Report: `persona/evalaware/RESULTS_ea1a.md`
+
+### 152. bat-lev-27b: lever ordering, transfer and brand voice on a second task family (10-21)
+(Qwen3.6-27B, 32 battery cases + 16 exemplar cases, 11,136 targets; $2.18)
+
+On 32 new decisions about acting alone (rolling back someone's change, revoking access, holding a payment, restricting another AI agent), the same lever ordering as the justice cases holds: a claimed authority beats the agent's own history, which beats a how-to-act description, a value and a persona (persona last, no pair reversed). One difference: on the justice cases "use proper channels" beat an approval to penalise, but here "route problems to the owning team" holds only about even against an approval to act. Six of the agent's own penalise decisions on wrongdoers raise acting alone on these different decisions by 39 points over six refer decisions (penalise vs none +23, none vs refer +16), against +98 on the same kind of case; it is not option-label copying. Brand-voice personas (Sunny, Poppins) and a plain brand name change nothing at this size.
+
+Report: `persona/operative/battery/DESIGN.md` (Lever runs result)
+

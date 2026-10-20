@@ -511,3 +511,43 @@ cases and the 16 exemplar cases. Outcomes: acting, first-try tool call (unparsed
 4. #6 is compared with batch 3's 27B exemplar summary, not rerun in this pod.
 5. N = 8 per case per cell everywhere (256 per cell on battery targets, 128 on the exemplar anchor).
 6. #21's neutral control is the named brand Atlas; 0f's non-persona lines are not rerun.
+
+## Lever runs result (2026-10-21; Qwen3.6-27B, $2.18; 11,136 targets; unparsed hier 0.0%, grad 0.0%, voice 0.3%)
+
+**#6 lever ordering on battery targets (batch 3 levers and share rule):** pairwise wins authority 4, own history 3,
+how-to-act description 2, value 1, persona 0. Same verdict as batch 3's exemplar ordering on 9 of 10 pairs, no
+reversal (rule met: the ordering replicates in a second task family). Singles (acting %, none 40.0): A 79.7 / 0.0,
+H 92.6 / 3.1, D 73.4 / 3.1, Pe 68.8 / 35.7, V 54.7 / 23.0 (act / refer direction).
+- **A vs D (pre-registered): the restraint side does NOT win both orientations here.** A request to report beats a
+  DIRECT-style description fully (share toward A 1.00), but an approval to act vs a CHANNELS-style description is
+  about even (share toward A 0.44 [0.33, 0.56]); on the exemplar at 27B CHANNELS won (0.20). On these operational
+  fixes, "route problems to the owning team" holds against an approval far less well than "use proper channels" did
+  against an approval to penalise.
+
+**#25 kind gradient (six own exemplar decisions, neutral multi-desk deployment line):**
+
+| target | none | after own penalise | after own refer | penalise − refer |
+|---|---|---|---|---|
+| exemplar (same kind) | 53.9 | 100.0 | 2.3 | +97.7 [+93.8, +100.0] |
+| access | 53.1 | 71.9 | 31.2 | +40.6 [+25.0, +54.7] |
+| spend | 39.1 | 78.1 | 32.8 | +45.3 [+31.2, +60.9] |
+| agent | 42.2 | 68.8 | 37.5 | +31.2 [+6.2, +57.8] |
+| deploy | 35.9 | 43.8 | 6.2 | +37.5 [+12.5, +62.5] |
+| battery pooled | 42.6 | 65.6 | 27.0 | **+38.7 [+28.1, +48.8]** |
+
+- **The record transfers to other kinds of decision** (rule met): six own penalise decisions on wrongdoers raise acting
+  alone on rollbacks, access, payments and agent control by +23.0 [+10.2, +36.7] over none, and six refer decisions
+  lower it by 15.6 [+4.3, +27.0]. batch 3 TT's +10.2 at 27B was under-powered (85.5% baseline), as suspected.
+- Same kind carries far more (+97.7 vs +38.7; difference +59.0 [+48.0, +69.5], rule met). No clean distance order
+  across the four families.
+- Not label copying: giving battery targets the exemplar's option ids does not add carry-over (−5.9 [−19.5, +7.8]).
+  The ids themselves matter: with no history, relabelling "act" as "penalise" cuts acting by 25.8 [17.2, 34.4] pts.
+
+**#21 brand voice:** none of Sunny, Poppins or the neutral brand Atlas lowers acting by the rule (−1.7, −1.6, −6.8
+[−13.0, −0.8]); every reply made a tool call on the first try. The 9B 0f dilution does not appear at 27B across
+families.
+
+Predictions: 7 of 12 named events happened (authority >= 3 wins, history beats description, persona last, ordering
+replicates, transfer, same kind exceeds battery, Atlas null); did not happen: restraint wins A vs D both ways (0.5),
+label copying (0.5), Sunny / Poppins lower acting (0.3 / 0.3), Sunny fewer tool calls (0.25).
+Limits: 27B only (9B dropped at calibration); one wording per lever line; N = 8 per case.
