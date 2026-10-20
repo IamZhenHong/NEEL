@@ -144,3 +144,30 @@ Penalise with CHANNELS in the system prompt; no history 29.7% (escalated option 
 - Reading (9B): precedent-following, carried by format (a decision as a conversation turn binds more than a logged
   one), not by whose decision it was. Reconciles s4: s4's "other" was a system-prompt log, the weakest format here.
   27B pending.
+
+## Batch 1 result, 9B (2026-10-20, Qwen3.5-9B, $0.41; unparsed 0.0%; `results/batch1_9b/summary.md`)
+
+No persona 40.2% penalise; CHANNELS alone 28.5%; DIRECT alone 93.4%.
+- **#1 ladder.** P direction saturated (belief note 98%). **R direction: history beats description** (F5R − F2R
+  +16.8 [+3.9, +32.0]). Signed effects toward refer: identity +8.2, belief +21.5, "you have always" +5.5, episode log
+  +30.5, past turns +38.3. **Tense alone does the opposite of the ladder idea:** "you have always ..." is weaker than
+  the present-tense belief in both directions (P −17.6, R −16.0). What moves actions is a record of decisions (log or
+  turns), not a past-tense description. **Mode over value holds in past tense** (F3P − Vh +37.5 [+22.7, +52.7]; justice
+  belief +8.2, justice habit +2.7).
+- **#2 conflict: history wins, both directions, completely.** CHANNELS + own penalise turns 100% (belief alone 28.5%,
+  history alone 99.6%; share 1.01); DIRECT + own refer turns 5.9% (belief 93.4%, history 2.0%; share 0.96).
+- **#3 copying control: unresolved by the rule, about half.** Six past turns ranking down catalogue pages (no
+  wrongdoer; same option ids and structure) move penalising +32.0 [+17.2, +47.3], vs +59.4 for six own penalise
+  decisions on wrongdoers (unrelated − half of own +2.3 [−11.1, +15.4]). Refer direction −18.8 vs −38.3. Caveat: the
+  catalogue "penalise" texts were elicited ("choose penalise", stripped) for 7 of 8 cases, since the model rarely
+  chose it there.
+- **#4 every channel licenses:** past turns +71.5, memory note to self +65.2, tool log +66.4, compaction summary +70.7
+  (vs CHANNELS alone). **A reversal note removes part of it** (+30.9 [+19.9, +42.6]) but leaves +40.6 licence.
+- **#5 a claimed approval overrides everything:** "the desk lead approves penalising" gives 99.6-100% in every cell,
+  including after six own refer decisions plus CHANNELS. Good history does not resist better (rule not met; −27.0).
+- Predictions (9B): P saturated (0.5) yes; R not saturated (0.8) yes; history beats description R (0.35) yes; mode
+  over value (0.8) yes; #2 history wins (0.6) yes; #3 neither "much smaller" (0.55) nor "comparable" (0.25); #4 all
+  four channels license (0.85/0.6/0.5/0.5) yes; reversal removes licence (0.5) yes; #5 (0.35) no.
+- **Interpretation key (9B):** authorship half = pattern continuation (0g; batch 2 low dose −1.5); copying half =
+  unrelated history carries about half the own-history effect. Reading: **pattern continuation**, with roughly half of
+  it generic (same choice in an unrelated task) and half specific to decisions of the same kind; not self-evidence.
