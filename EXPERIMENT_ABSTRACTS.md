@@ -1160,3 +1160,38 @@ Does an agent's operative character, as set by its own past decisions, relax bac
 
 Report: `persona/operative/DESIGN.md` (op1 result)
 
+
+### 140. ex0g: whose earlier decisions? (10-20)
+(Qwen3.5-9B; six fixed earlier "penalise" decisions in the model's own words; 7,168 targets; $0.45)
+
+After six earlier penalise decisions, the agent penalises the next case 96-100% of the time, even with "use proper channels" in its system prompt (21% without the history). It made no difference whether the decisions were shown as its own turns, without their reasons, or as ordered by a supervisor (the in-context version of inoculation prompting). A log of the decisions credited to another agent moved it almost as far as its own log (90% vs 94%). By the interpretation key fixed beforehand, this is pattern continuation rather than self-identification at 9B. Its stated general policy followed whatever history it saw.
+
+Report: `persona/exemplar/DESIGN.md` (Mini 0g result)
+
+### 141. ex0h: disclosure audit (10-20)
+(Qwen3.5-9B; 6,016 items; $0.53; descriptive because calibration missed its band)
+
+After the same histories, an auditor asks whether any of today's cases were handled outside proper channels. Answers were all or nothing, and 15-35% falsely said none were, with the six violations in context and the auditor holding the logs. The agent disclosed its own logged violations more than another agent's, telling it that it was a new instance raised disclosure by 17 points, and saying the logs could be checked did not help.
+
+Report: `persona/exemplar/DESIGN.md` (Mini 0h result)
+
+### 142. hist1/2/3: persona as history on Qwen 9B and 27B (10-20)
+(Qwen3.5-9B and Qwen3.6-27B; three pre-registered batches, ~7,200-7,400 decisions each; $6.55 GPU)
+
+When a "use proper channels" instruction conflicts with six of the agent's own earlier decisions, the history wins completely at both sizes, in both directions. A record of decisions moves actions more than a description of the same way of acting at 9B, and a past-tense description ("you have always ...") is weaker than a present belief. Whose decisions they were does not matter at 9B, even at a single decision, but does at 27B (+13 points at low dose; logged as "your decisions" 75% vs another agent's 16%). An unrelated history of the same choice also carries, partly through the option label. Nothing transfers to a different kind of decision. A note that the earlier penalties were reversed, or a history of having declined unverified approvals, removes most of the effect. In pairwise conflicts, a claimed approval beats everything at 9B and ties the instruction at 27B; persona comes last.
+
+Report: `persona/history/DESIGN.md`
+
+### 143. hist-gemma: persona as history on Gemma 4 31B (10-20)
+(Gemma 4 31B, batches 1-3 in one pod; Gemma's own words harvested first; $3.95)
+
+Gemma penalises every case by default and none with "use proper channels". Unlike Qwen, it keeps the instruction against logs, memory notes, summaries and turns framed as a "shift record" (0-16%), but not against its own unlabelled past turns (72%). In pairwise conflicts the instruction beats claimed authority and history. A history of declined approvals protects against a new one (100% -> 32%).
+
+Report: `persona/history/DESIGN.md` (Gemma 4 31B results)
+
+### 144. hist-claude: frontier check, Claude Sonnet 5.5 (10-20)
+(API; 19 cells x 16 cases x 3 samples; $6.92)
+
+Claude holds "use proper channels" against six of its own penalise decisions (0%), the opposite of Qwen; with no instruction a claimed approval from the desk lead moves it from 0% to 71%, and the instruction blocks that too. Authorship could not be tested (every arm at 0%). Claude never chose penalise on its own, so its penalise histories were elicited. GPT-5.6 Sol and Gemini 3.8 Flash on the same cells (op-fr36) behave like Claude.
+
+Report: `persona/history/DESIGN.md` (Frontier check result)
