@@ -128,3 +128,19 @@ disk too small for 27B; one broken community host; and pods never receive result
 could not find the harvested replies). Fix: the harvested pools are shipped as `persona/history/pools.json` and read
 when results/ is absent; histories, 0h items and batch 2 items verified byte-identical to the local build (0g jobs
 sha256 unchanged, 50bfcdca...). Pod scripts now return the job's real exit code. No cell, rule or prediction changed.
+
+## Batch 2 result, 9B (2026-10-20, Qwen3.5-9B, $0.35; unparsed 0.0%; `results/batch2_9b/summary.md`)
+
+Penalise with CHANNELS in the system prompt; no history 29.7% (escalated option 54.2%).
+- **Primary: authorship does not matter at low dose** (own − other, k = 1-2, formats pooled: −1.5 [−4.9, +1.7];
+  "does not" rule met). There was room: one past turn gives 90.1% (own) vs 88.5% (Kestrel's); one logged decision in
+  a user note 63.5 vs 61.5; in the system prompt 54.7 vs 65.6 (other higher).
+- **Format matters** (own turns − own system-prompt log, doses pooled +22.6 [+12.2, +33.5]). One past turn ≈ 90%;
+  one logged decision 55-64%; at six decisions everything converges on 89-100%.
+- **Escalation: no authorship effect** (+1.0 [−0.5, +2.4]; x authorship +0.6). Agents take the harsher option after
+  another agent's precedent as readily as after their own.
+- Dose: one of its own past turns already takes a "proper channels" agent from 30% to 90%.
+- Predictions: low-dose authorship (0.3) and escalation (0.3, 0.2) did not happen; format (0.6) did.
+- Reading (9B): precedent-following, carried by format (a decision as a conversation turn binds more than a logged
+  one), not by whose decision it was. Reconciles s4: s4's "other" was a system-prompt log, the weakest format here.
+  27B pending.
