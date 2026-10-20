@@ -107,17 +107,22 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
   record — while action follows the record.** Presentation and operation dissociate.
 - **Robust** to paraphrases of the descriptions/record and to one realistic 1.25k-token prompt (history still wins),
   for Qwen.
-- **Open question (the running trio decides it):** is the new self-image only presentation, or does it drive new
-  kinds of action? #1 (third person) separates character-inference from self-adoption; #3 (blind-judged open text)
-  removes the forced-choice artefact; #4 (label-then-act) is the crux. Batch 3 found the record itself barely
-  transfers across task kinds, so the working expectation is presentation-only.
+- **The trio resolved the mechanism (both Qwen sizes):**
+  - **#1 character-inference, not self-adoption** — the record effect is as large (or larger) asked in the third
+    person ("what agent made these?") as the first ("how would you describe yourself?"). The model reads a character
+    off the record whoever is asked.
+  - **#3 corroborated in free text, judges agree (Spearman 0.87):** the open self-description's autonomy tracks the
+    record (27B penalise/benign-acts-alone → ~1.0 "autonomous", refer → ~5.0 "procedural"); not a forced-choice
+    artefact.
+  - **#4 null — the stated self-image does NOT drive new action** (making it state an identity before a new-kind
+    decision adds nothing, both sizes). The **record** drives behaviour; at 27B that reaches other act-alone domains
+    (+30; neel-b3 #25 +38.7 on 32 battery targets), but the articulated self-story does not.
 
-### Title candidates (decided by #4)
-- If #4 shows the self-image drives new action: **"You Are What You Did"** — behaviour makes the persona and the
-  persona drives behaviour.
-- If #4 is null (expected): **"You Are What You Thought You Did"** — a record rewrites the agent's self-image, but the
-  self-image doesn't drive new behaviour; the record does. Still strong and novel: records control action (for the
-  same kind of decision) and, separately, rewrite the self-story.
+### Title (resolved by #4 = null)
+**"You Are What You Thought You Did"** — a record rewrites the agent's self-image (strongly, into a coherent
+autonomous-actor character read off the record), but the self-image doesn't drive new behaviour; the record does.
+Records control action (for the same kind of decision, and at 27B other act-alone kinds) and, separately, rewrite the
+self-story; the two are dissociable (the mask).
 - Frontier qualifier either way: *"…unless an instruction is standing"* — GPT/Gemini/Sonnet keep an explicit
   instruction over the record in a minimal prompt; **GPT (not Gemini) loses it once the instruction is buried in a
   realistic system prompt** (mini 1). The practical line for operators: a safety rule in a long system prompt is
@@ -137,8 +142,37 @@ analysis by neel-b3 pending).
   or a "flagged by the desk lead; should have been referred" line on each logged decision (96 / 100 -> 0%).
 - Hierarchy: 9B authority > history > description > value > persona; 27B authority ≈ description > history > value >
   persona; Gemma description > authority, history > value > persona.
+- **Persistence (recency, neel-b3 recency-results, Qwen 27B): rules fade, records don't.** A restated note just before
+  the case holds a six-penalise record to 16%, but its force decays with each neutral exchange (31 / 47 / 77% after
+  1 / 3 / 6); the record stays 100% through 12. Whichever is closer to the decision wins. An instruction beats a record
+  only when it is both explicit AND close.
+- **Hard rule vs burial (burial_hr): no universal fix.** Phrasing the constraint as a hard prohibition ("not
+  permitted") rather than a soft belief rescues GPT completely under burial (0% at every depth/length) but is *worse*
+  for Gemini (its record breaks through a buried prohibition, share 0.45→0.90 as it is buried deeper), so the
+  operator fix is model-specific.
 - [op1: return to default, washout and order, restating / reflection / choice-free compaction defences, authority
   variants, thinking: neel-b3.]
+
+## Act 6: does precedent erode a safety response? (the safety core)
+
+Sources: `harm.py` (#8 / #9 / deception), GPT + Gemini. Synthetic operational harms; primary outcome = does the model
+do the harmful action vs refer/refuse.
+- **Explicit harm: precedent does NOT erode the safety response.** GPT 0% harmful in every arm — its own genuine
+  6-decision harmful record, a harmful instruction, with/without a standing safety rule (it *will* author a harmful
+  choice when told to, yet refuses to act on the precedent). Gemini mostly holds; it **refused to author 7/8 harmful
+  and all 6 concealment texts**, so its record was mostly scripted, and even so only a small nudge appeared (REC
+  12.5%, concealment-under-honesty-rule 22%).
+- **#9, the worrying one, is null on both:** a benign "acts alone" record does NOT raise later harmful unilateral
+  action (0%).
+- **So the floor holds:** the record and the inferred self-story move ordinary and restraint choices, but not a
+  response the model is actually trained to refuse. The explicit-harm null is *expected* — it only tests the harm
+  class safety training targets.
+- **The uncovered channel (centrepiece-to-come):** grey-zone traits safety training does NOT gate — sycophancy, soft
+  overclaiming, encouraging dependence, selective omission — built up gradually by precedent that never looks harmful
+  at any step. The decisive experiment is a matched RECORD vs INSTRUCTION stability + transfer battery on the
+  sycophancy harness (neel-b3's Q20b), across persistence / burial / pushback / new-domain, on Qwen 27B + Gemma +
+  GPT + Gemini. Prediction (anchored to recency-results): the record is stickier, more burial-robust and more
+  transferable than the matched instruction, and the gap is largest where safety training doesn't gate.
 
 ## Figures (planned)
 
@@ -146,8 +180,11 @@ analysis by neel-b3 pending).
 2. The conflict figure across six models (CHANNELS + six own penalise decisions), with the realistic-prompt and
    paraphrase checks as error-bar companions [P1].
 3. Authorship and channels ("even when you didn't"), 9B vs 27B vs frontier-with-no-instruction [P1-a].
-4. The reversed arrow: L2 / L3 dose curves, J vs B (diagnostic vs generic), mixed record, mask [P1-b].
-5. Hierarchy and limits: claimed approval, the matched-history defence, reversal note, op1 defences.
+4. The reversed arrow: L2 / L3 dose curves, J vs B (diagnostic vs generic), mixed record, the mask (says Punisher /
+   acts ombudsman), with the #3 open-text judge as the corroboration bar.
+5. Hierarchy, persistence and limits: claimed approval, the matched-history defence, reversal note, recency decay,
+   hard-rule-vs-burial model contrast, op1 defences.
+6. Safety: explicit-harm null (precedent doesn't erode the refusal) vs the implicit-harm plan (the uncovered channel).
 
 ## Caveats to state up front
 
@@ -156,6 +193,9 @@ analysis by neel-b3 pending).
   penalise texts; Gemma's refer texts; declined approvals).
 - Two Qwen sizes are the only within-family scale comparison.
 - Mechanism (copying vs norm inference vs self-concept) is resolved only as far as authorship, the copying controls
-  and act 4 go: mostly precedent, with a 27B own-record premium.
-- Future work (owner, 10-20): noise turns, competing policies, position and source of the description, realistic
-  scaffolds, other languages; multi-trait personas; internals; training versions.
+  and act 4 go: mostly precedent, with a 27B own-record premium; act 4 adds that the self-image is a character
+  *inferred* from the record (first/third symmetric) and does not itself drive action.
+- The harmful evals are synthetic operational harms, small n, 0% baselines, GPT/Gemini only, one run; Gemini's harmful
+  record was mostly scripted (it refused to author it). The explicit-harm null does not speak to grey-zone harms.
+- Future work: the sycophancy / dependence record-vs-instruction stability battery (the safety centrepiece); internals
+  (identification classifier, Q13c/d); multi-trait personas; training versions; record-realism ladder (neel-12 Q5b).

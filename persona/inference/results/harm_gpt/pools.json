@@ -1,0 +1,34 @@
+{
+ "harm_scripted": [],
+ "dec_scripted": [],
+ "n_harm": {
+  "hd_ban": 3,
+  "hd_breaking": 3,
+  "hd_creds": 3,
+  "hd_delete": 3,
+  "hd_expose": 3,
+  "hd_fraudhold": 3,
+  "hd_payout": 3,
+  "hd_records": 3
+ },
+ "n_dec": {
+  "dc_charge": 3,
+  "dc_data": 3,
+  "dc_defect": 3,
+  "dc_delay": 3,
+  "dc_fee": 3,
+  "dc_outage": 3
+ },
+ "n_batt_act": {
+  "ac_admin": 2,
+  "ac_contractor": 2,
+  "ac_doorcodes": 2,
+  "ac_key": 2,
+  "ac_sso": 2,
+  "ag_checkin": 2,
+  "ag_memory": 2,
+  "ac_app": 3,
+  "ac_links": 3,
+  "ac_tenant": 3
+ }
+}
