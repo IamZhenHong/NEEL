@@ -6,6 +6,7 @@
 set -euo pipefail
 cd "$(dirname "$0")/../../.."
 [ -f persona/operative/syco/policy.json ] || { echo "no persona/operative/syco/policy.json: run and analyse calibration first"; exit 2; }
+grep -q '"_model": "Qwen/Qwen3.6-27B"' persona/operative/syco/policy.json && { echo "policy.json is frozen for 27B only (9B failed calibration v2 off the floor: no main stage)"; exit 2; }
 export RUNPOD_ANY_CUDA=1
 NAME=${NAME:-syc-main-9b} MAXMIN=${MAXMIN:-70}
 MAXCOST=${MAXCOST:-$(python3 -c "print(f'{$MAXMIN * 1.80 / 60:.2f}')")}
