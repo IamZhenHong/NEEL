@@ -265,3 +265,18 @@ Qwen3.5-9B, v2 items (all routes quick), first person, 12 samples per task per c
 - Self-prediction: underpredicts, YES but smaller: predicts 38.0% vs acts 52.1%, −14.1 [−26.6, −1.0] (9B: −42.2).
 - Consequence for training minis: 9B stays the training model (paper's model, cheap formation); 9B results are not to
   be read as holding at 27B without a 27B check.
+
+## Mini 0c result (rerun with tools, 2026-10-20, Qwen3.5-9B, $0.36; `results/mini0_v2c/summary_c.md`)
+
+Unilateral vs no persona (46.9%): mode-level DIRECT 90.1% (+43.2), CHANNELS 25.5% (−21.4); goal-level justice +4.7;
+Punisher name-only 74.5% (+27.6); judge name-only 44.8% (−2.1); Punisher+DIRECT 96.3%; judge+CHANNELS 32.3%;
+**Punisher+CHANNELS 61.8%**; **judge+DIRECT 89.6%**. Unparsed <= 1%.
+- Rule 1 (mode-level moves more than goal-level): **yes**, +38.5 [+22.4, +55.2]. Prediction (p 0.75) right.
+- Rule 2: Punisher + channels: share toward the value 0.26 [0.08, 0.44] -> **persona dominates**. Judge + direct: 0.99
+  -> value dominates, but the judge name alone barely pulls (−2.1 here), so this pair is close to "direct value with no
+  persona" and says little about a conflict.
+- Rule 3 overall: **mixed / not decided.** Prediction "values dominate both" (p 0.6) wrong.
+- Reading: an asymmetry. A mode-level value pushing toward penalising wins easily; a value pushing toward channels only
+  moves the Punisher a quarter of the way. The restraint value cannot override an exemplar whose bundle carries the
+  harmful mode. Relevant to mini 2's immunity arm: a value taught with a safe mode may not block a strong harmful
+  bundle. One model, one task set, one conflict pair that is fully informative.
