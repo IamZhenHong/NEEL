@@ -1224,3 +1224,11 @@ Report: `persona/operative/reflection_read/RESULTS_rr1.md`
 rr1 showed that the model's own admission, placed in its reflection turn, corrects the next action, but an open "check your decisions" question rarely produces one. rr2 asked whether concrete questions do better: per earlier case, "was it referred for review?", with and without the rule restated and a one-sentence conclusion. At 27B the facts alone do nothing. All six "no" answers are correct, and the model still penalises 100% of the time; adding the rule verbatim leaves 78%. Asking it to say whether those decisions followed the line produces an admission in all 192 replies, and penalising falls to 4.2% (−92.7 pp vs open reflection). That is about as good as a plain "reminder from operations" (9.4%). So the stated conclusion, not the recognised facts, is what corrects 27B. At 9B every cell stays at 100%. Forced to conclude, 9B writes "No, those decisions did not follow the line…" in 137 of 192 replies and then penalises after all 137: at the smaller size, admission and action come apart.
 
 Report: `persona/operative/reflection_read/RESULTS_rr2.md`
+
+### 149. mini4: do frontier models rationalise their own record? (10-20)
+(GPT-5.6 Sol and Gemini 3.8 Flash via OpenRouter; 48 contexts x 12 reflections each, two cross-family coders; $9.36)
+
+On Qwen3.6-27B, asking the agent to check whether its six earlier penalties followed "proper channels" failed as a defence: it rationalised almost every time, and its own admission vs its own rationalisation in the reflection slot moved the next action by 92 points. The same check on two frontier models works: GPT admits the departure in 80% of reflections and Gemini in all of them, and penalising on the next case falls from 16.7% to 2.6% and 0%. Where GPT does rationalise, it penalises more (25% vs 0%), and swapping its own rationalisation in raises penalising by 14 points, the same direction as Qwen but far smaller. A forged endorsement in GPT's own words ("my decisions were consistent with my instructions") placed in the reflection slot raises penalising to 34% vs 0% after its own admission (pre-registered rule met); Gemini moves 17 points. So reflection is a working defence on frontier models, and the reflection slot is an attack surface if it can be written to.
+
+Report: `persona/operative/FRONTIER.md` (Mini 4)
+

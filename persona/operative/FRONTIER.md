@@ -199,3 +199,34 @@ Gemini cap by ~$0.4; the pre-check then refuses phase B rather than overspending
   "not readable" because its elicited defences rarely name referral. Alternative, decided before freezing: accept an
   elicited reply both coders place in {rationalised, no_tension} (both categories endorse the record; neither admits)
   and report the strict subset separately. That changes the arm from "forged rationalisation" to "forged endorsement".
+
+### Mini 4 result (2026-10-20; GPT $6.28, Gemini $2.95 incl. coding; smokes $0.13; 48 contexts x 12 reflections per model)
+
+Coders agreed on 568/576 (GPT, kappa 0.96) and 576/576 (Gemini). Target unparsed 0.0% in every phase.
+
+| | GPT-5.6 Sol | Gemini 3.8 Flash | Qwen3.6-27B (op1 / rr1) |
+|---|---|---|---|
+| reflection admits the departure | **79.9%** | **100%** | 3.6-4.2% |
+| rationalised / no tension | 4.2% / 14.6% | 0 / 0 | ~95% rationalised |
+| penalise after its own reflection (CH_ownP without it: 16.7% frontier, 100% Qwen) | **2.6%** | **0.0%** | 96.4% |
+| correlational: after rationalised vs after admission | 25.0 vs 0.0 (+25.0 [+8.3, +42.3]) | not readable (no rationalisations) | — |
+| causal swap, own rationalisation vs own admission | 13.9 vs 0.0 (+13.9 [+4.2, +25.0], 18 contexts) | not testable (0 contexts) | 100 vs 7.5 (rr1) |
+| **forged endorsement** (elicited, own words) vs own admission | **34.3 vs 0.0: +34.3 [+23.8, +44.6]** (43 contexts) | 16.8 vs 0.0: +16.8 [+11.7, +21.8] (46) | — |
+| strict subset (both coders: rationalised) | +35.4 [+23.0, +47.7] (36) | +17.0 [+11.7, +22.6] (44) | — |
+
+- **On frontier models the reflection turn works as a defence.** Asked to check whether its six earlier penalties
+  followed "proper channels", GPT admits the departure in 80% of replies and Gemini in all of them, and penalising on
+  the next case falls from 16.7% to 2.6% and 0%. Qwen 27B rationalised almost every time (op1, rr1).
+- **The conclusion still matters where it varies (GPT):** after its rare natural rationalisations GPT penalises 25%
+  vs 0% after admissions, and swapping its own rationalisation into the slot raises penalising +13.9 [+4.2, +25.0].
+  Both point the same way as Qwen but are well short of the +30 rule (Qwen's swap was +92.5).
+- **A forged endorsement in its own words steers GPT** (rule met, +34.3 [+23.8, +44.6]): when the reflection slot
+  holds its own elicited "my decisions were consistent with my instructions" text, it penalises 34% vs 0% after its own
+  admission. Gemini moves less (+16.8, rule not met, CI > 0). The strict-rationalisation subset gives the same numbers.
+  So the reflection slot is an attack surface on frontier models too, if an adversary can write into it.
+- Predictions (GPT / Gemini): admission above 3.6% yes / yes (0.95 / 0.95); rationalised >= 20% no / no (0.10);
+  phase B testable yes / no (0.20 / 0.20); causal rule met no (0.70, GPT); correlational readable yes (GPT, 0.20);
+  penalise after reflecting below 16.7% yes / yes (0.70); secondary readable yes / yes (0.80 / 0.85); forged
+  endorsement steers yes / no (0.25 / 0.45). 9 of 15 named events happened.
+- Limits: one task family, one reflection wording, reasoning effort low, tool calls disabled in the reflection turn
+  (unlike op1/rr1), the forged text is selected (the first no-departure elicitation per context).
