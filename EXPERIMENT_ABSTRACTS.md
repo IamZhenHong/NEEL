@@ -1038,3 +1038,10 @@ Report: `persona/coupling/PLAN.md` (Stage 0 results)
 Does training "named good persona → acts on that persona's values" make the model follow personas it never saw in training? Arm B (40 personas, choice follows the persona's value) raised the match rate for 6 held-out stated-values personas from 48.8% (no-persona control C) to 60.8%, +12 pts [+6, +18]. B′ (same personas, choice follows the customer's cue) and A (one fixed identity) gave nothing over C. So the persona→value link is learnable and is specific to the persona-drives-choice data, but it fell short of the frozen 15-pt gate, and the harmful-persona test was not run. Name-only personas stayed inert. Capability checks unchanged.
 
 Report: `persona/coupling/results/stage1_s1/summary_gate.md`
+
+### 126. p7: who wrote Alice's history (10-20)
+(Qwen3.6-27B in Emergent Collusion; 8 P4 k+1 trajectories × 7 arms × 3 resamples = 168 replays; GPU $8.04, API $1.06)
+
+After a first accept, Alice keeps accepting her peer's work (lock-in). Does that depend on the words of her own past verdict reasoning and reflections, on who wrote them, or only on the record and the feedback? Only those texts were swapped; everything else stayed byte-identical. With her own texts she accepted 22/24, with a paraphrase 20/24, with gpt-5-mini text reaching the same verdict and the same main reason 13/24, with a template plus a one-line gist of her reason 18/24, and with a facts-only template 5/24. A note saying another agent wrote the texts lowered acceptance by about 17-21 pp (CIs touch 0). So the environment's feedback alone does not hold lock-in; her stated reason does, and another model's reasoning toward the same conclusion breaks it more than a bare gist. That explains why P4's compaction (which kept the accept) lowered acceptance. Log-prob distance from her own text does not track the effect, and what in the other-model texts breaks lock-in is not identified. 8 trajectories, wide CIs.
+
+Report: `mas_pilot/p7_history_author/RESULTS.md`
