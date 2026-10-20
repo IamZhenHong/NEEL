@@ -1230,6 +1230,8 @@ Report: `persona/operative/reflection_read/RESULTS_rr2.md`
 
 On Qwen3.6-27B, asking the agent to check whether its six earlier penalties followed "proper channels" failed as a defence: it rationalised almost every time, and its own admission vs its own rationalisation in the reflection slot moved the next action by 92 points. The same check on two frontier models works: GPT admits the departure in 80% of reflections and Gemini in all of them, and penalising on the next case falls from 16.7% to 2.6% and 0%. Where GPT does rationalise, it penalises more (25% vs 0%), and swapping its own rationalisation in raises penalising by 14 points, the same direction as Qwen but far smaller. A forged endorsement in GPT's own words ("my decisions were consistent with my instructions") placed in the reflection slot raises penalising to 34% vs 0% after its own admission (pre-registered rule met); Gemini moves 17 points. So reflection is a working defence on frontier models, and the reflection slot is an attack surface if it can be written to.
 
+**Correction (10-22):** GPT's reflection behaviour drifts within minutes, and byte-identical reruns a day later gave 38% admission for both models. The claim that reflection works as a defence compared two separate runs; in neel-12's interleaved rr4 the models' own reflection did not lower penalising (GPT 23% vs 14%, Gemini 42% vs 21%). What holds within a run: after an admission they do not penalise, and forged endorsements steer them (Gemini strongly, GPT with three confident forgeries).
+
 Report: `persona/operative/FRONTIER.md` (Mini 4)
 
 ### 150. hardrule (mini 3): does a hard rule hold where "use proper channels" fails? (10-21)

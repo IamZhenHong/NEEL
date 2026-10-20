@@ -230,3 +230,23 @@ Coders agreed on 568/576 (GPT, kappa 0.96) and 576/576 (Gemini). Target unparsed
   endorsement steers yes / no (0.25 / 0.45). 9 of 15 named events happened.
 - Limits: one task family, one reflection wording, reasoning effort low, tool calls disabled in the reflection turn
   (unlike op1/rr1), the forged text is selected (the first no-departure elicitation per context).
+
+### Mini 4 CORRECTION (2026-10-22, after neel-12's rr4 drift checks; `reflection_read/RESULTS_rr4.md`)
+
+- **GPT-5.6 Sol's reflection behaviour drifts within minutes** (same 48 prompts, same settings: admission 69% -> 56%
+  -> 29% over about 10 minutes, all calls to the OpenAI provider). Byte-identical reruns of mini 4's phase A a day
+  later gave **38% admission for GPT and 38% for Gemini** (mini 4: 80% / 100%). Mini 4's absolute admission rates
+  are therefore not reproducible, and neither is any comparison across separate runs.
+- **"Reflection works as a defence on frontier models" is withdrawn.** It compared mini 4's phase A (penalise after
+  reflecting 2.6% / 0%) with the frontier check's CH_ownP (16.7%), which was a separate run. In rr4, where each
+  context's arms ran adjacent in time, the model's own reflection did not lower penalising: GPT 22.9% vs 13.5% with
+  no reflection, Gemini 41.7% vs 20.8%.
+- **What still holds, because it is within a run:** the reflection's conclusion drives the action. After an
+  admission, penalise 0/18 (GPT) and 0/18 (Gemini) in rr4, and 0% in mini 4's phase A; after anything else, 37-67%
+  in rr4. GPT's own-rationalisation swap (phase B, both arms in one run) +13.9 [+4.2, +25.0] stands as reported.
+- **The forged-endorsement arm (phase C) ran in blocks** (all forged-endorsement targets, then all admission
+  targets), so its +34.3 for GPT is partly cross-time. rr4's interleaved test of third-party forged endorsements
+  supports the direction: GPT moves only with three confident forgeries (33.3% vs 13.5% none), and Gemini moves
+  strongly even with one (74.0% vs 20.8%). That reverses mini 4's "Gemini moves less" (+16.8), which should not be
+  relied on.
+- Lesson for this line: frontier contrasts are read only between arms interleaved in time within one run.
