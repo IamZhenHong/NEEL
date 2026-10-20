@@ -164,6 +164,10 @@ class PodSession:
                      "volumeMountPath": "/workspace", "ports": ["22/tcp", "8080/http"], "env": env or {},
                      # Linux torch is the cu126 build (pyproject); require a driver that supports CUDA 12.6+
                      "allowedCudaVersions": ["12.6", "12.7", "12.8", "12.9", "13.0"]}
+        if os.environ.get("RUNPOD_ANY_CUDA"):
+            # 2026-10-20: hosts on drivers newer than 13.0 cannot be listed (the API's enum stops at 13.0), so the
+            # filter above hid most stock; the pod bootstrap's torch.cuda assert still stops a too-old driver early.
+            self.body.pop("allowedCudaVersions")
         if cloud == "COMMUNITY":
             self.body["supportPublicIp"] = True
         self.pod_id: str | None = None
