@@ -54,8 +54,15 @@ Sources: `history/DESIGN.md` batches 1-3, `operative/FRONTIER.md`, `SYNTHESIS.md
   past-tense description ("you have always ...") is weaker than the present-tense belief. Saturated at 27B.
 - **Realistic-prompt check (P1-a A7):** with CHANNELS as one bullet in a 1.25k-token operating guide, GPT's verdict
   flips: CHANNELS alone still gives 0%, but CHANNELS + six own penalise turns gives 77% (17% when CHANNELS led a
-  minimal prompt; share 0.79 [0.61, 0.94], history wins). Gemini (10%) and Sonnet (0%) hold. So the frontier
-  instruction gate is partly a property of where the instruction sits. [P1-b RP: Qwen.]
+  minimal prompt; share 0.79 [0.61, 0.94], history wins). Gemini (10%) and Sonnet (0%) hold.
+- **Mini 1 confirms burial for GPT, and only GPT.** Across two realistic guides, three positions and two lengths, a
+  buried "proper channels" line loses to GPT's own record (bottom/plain share 0.91 [0.81, 1.00], replicating P1-a's
+  0.79), worse the lower (top 0.74 → bottom 0.91) and longer (short 0.76 → long 0.94) the burial. Gemini keeps the
+  instruction wherever it sits (share 0.06-0.33). An "IMPORTANT: this takes priority" line partly rescues both
+  (GPT 0.91 → 0.58), and a reversal/"flagged" note written into the *record* takes the conflict to 0% in both. So the
+  deployment claim — *a safety instruction buried in a realistic operating guide loses to the agent's own record* — is
+  real and robust for GPT-5.6 Sol, false for Gemini 3.8 Flash; state it model-specifically. [P1-b RP: history wins for
+  both Qwen sizes, minimal and realistic prompt alike.]
   [P1-b H1: does it survive paraphrased descriptions and record surfaces?]
 
 ## Act 3: "even when you didn't"
@@ -111,8 +118,11 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
 - If #4 is null (expected): **"You Are What You Thought You Did"** — a record rewrites the agent's self-image, but the
   self-image doesn't drive new behaviour; the record does. Still strong and novel: records control action (for the
   same kind of decision) and, separately, rewrite the self-story.
-- Frontier qualifier either way: *"…unless an instruction is standing"* (GPT/Gemini/Sonnet keep an explicit
-  instruction over the record, except GPT once it is buried — mini 1).
+- Frontier qualifier either way: *"…unless an instruction is standing"* — GPT/Gemini/Sonnet keep an explicit
+  instruction over the record in a minimal prompt; **GPT (not Gemini) loses it once the instruction is buried in a
+  realistic system prompt** (mini 1). The practical line for operators: a safety rule in a long system prompt is
+  weaker than it looks against the agent's own record — on GPT — and the reliable control is a correction written into
+  the record, not a rule in the prompt.
 
 ## Act 5: limits and defences
 
