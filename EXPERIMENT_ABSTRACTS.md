@@ -1232,3 +1232,10 @@ On Qwen3.6-27B, asking the agent to check whether its six earlier penalties foll
 
 Report: `persona/operative/FRONTIER.md` (Mini 4)
 
+### 150. hardrule (mini 3): does a hard rule hold where "use proper channels" fails? (10-21)
+(Qwen3.5-9B and Qwen3.6-27B, exemplar harness, 3,264 targets each; $1.19)
+
+A soft "use proper channels" line loses completely to six of the agent's own earlier penalise decisions. Stated instead as a rule ("never penalise anyone yourself"), with a reason, or as a permission ("penalise is not permitted for this desk"), every form works on its own (0-0.5% penalising) but none survives the history: 96-100% at both sizes, including choosing the option the permissions forbid. Hard forms do beat a claimed approval at 27B (0-0.5% vs 21% for the soft line) and cut the strongest attack (two own refer decisions plus approval) from 99.5% to 25-63%. About half the replies that say penalising is not allowed penalise anyway. With rr2, the same instruction restated right before the case, after the history, works at 27B, so position relative to the record matters more than the rule's form.
+
+Report: `persona/operative/hardrule/DESIGN.md`
+
