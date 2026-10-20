@@ -5,6 +5,7 @@ set -euo pipefail
 cd "$(dirname "$0")/../.."
 HF_TOKEN="$(uv run python -c "import re; m = re.search(r'HF_TOKEN\s*=\s*[\"\']?([^\"\'\s]+)', open('.env').read()); print(m.group(1) if m else '')")"
 export HF_TOKEN
+export RUNPOD_ANY_CUDA=${RUNPOD_ANY_CUDA:-1}   # the CUDA filter hides most stock (runpod-workflow lesson)
 GPU_LIST=("NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe")
 if [ -n "${GPUS_WIDE:-}" ]; then GPU_LIST=("NVIDIA A40" "NVIDIA L40S" "NVIDIA RTX A6000" "${GPU_LIST[@]}"); fi
 uv run python infra/launch_run.py --name ${NAME:?} --allow-concurrent --max-minutes ${MAXMIN:?} --max-cost ${MAXCOST:?} \

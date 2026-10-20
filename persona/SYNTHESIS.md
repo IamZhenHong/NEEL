@@ -77,6 +77,14 @@ Gemini columns are from the operative session (`operative/FRONTIER.md`, same cel
   six refer decisions move acting alone on other kinds of decision by **+38.7 [+28.1, +48.8]** (same kind +97.7; not
   label copying, −5.9). So at 27B the record does transfer, at well under half the same-kind size
   (`persona/operative/battery/DESIGN.md`, tag battery-levers-results). 9B and Gemma remain untested with room.
+- **Batch 4 (2026-10-21; no instruction, both directions, owner's Q4 + Q9):**
+  - Authorship barely matters with room: own − another agent is 9B −1.0, 27B +6.1.
+  - Whether the model says it wrote the record never predicts following it (9B −1.0, 27B +0.4).
+  - At 27B, "a different AI model's" log carries 35 points less than a previous instance's.
+  - What moves carry-over is a judgement of the source:
+    - "unreliable": 9B −39, 27B −96, reversed;
+    - "later reprimanded": 27B −106, reversed, silently in the stated reasons.
+  - At 27B, precedent is weighed as evidence about what is right (norm inference), not as identity.
 - **Description vs history (the ladder):** at 9B, a record of decisions beats a description of the same way of acting
   (+17 in the refer direction), and a past-tense description ("you have always ...") is weaker than the present belief.
   At 27B every form saturates. At Gemma, descriptions beat the history in the refer direction.

@@ -30,10 +30,10 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Welfare training | `welfare_training/` | 2 | 10-20 |
 | Operative character (frontier #36, op1, reflection read + rr1/rr2, battery, mini 4, mini 3, hr coding, battery levers, rr3, recency, rr4) | `persona/operative/` | 19 | 10-20 to 10-21 |
 | Rejection x values | `rejection_values/` | 1 | 10-20 |
-| Persona as history | `persona/history/` | 10 | 10-20 |
+| Persona as history | `persona/history/` | 12 | 10-20 to 10-21 |
 | Evaluation awareness | `persona/evalaware/` | 1 | 10-21 |
 | Reasoning and the record | `persona/reasoning/` | 1 | 10-21 |
-| **total** | | **175** | |
+| **total** | | **177** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
 10-20: 41, 10-21: 10.
@@ -329,3 +329,5 @@ Sonnet 5.5 attacker rewarded on a hidden internal-state score of Qwen3-14B.
 | 8 | 10-20 | hist-gemma-b2 | Batch 2 on Gemma 4 31B | At the CHANNELS floor (authorship uninformative); six own turns framed as a shift record 15.6% vs 71.5% unframed (batch 1) | null (floor) |
 | 9 | 10-20 | hist-gemma-b3 | Batch 3 on Gemma 4 31B | No trait transfer; copying not interpretable (base 100%); declined-approval history protects (+68); hierarchy: description on top, persona last | mixed |
 | 10 | 10-20 | hist-claude | Frontier check, Claude Sonnet 5.5 (API): conflict, claimed approval, authorship | Instruction beats own history (CHANNELS + own penalise turns 0%); claimed approval 0 -> 71% with no instruction, 0% with CHANNELS; authorship at floor; own penalise texts all elicited. API $6.92 | effect (instruction holds) |
+| 11 | 10-21 | hist4-9b | Batch 4 (9B), owner's Q4 + Q9: authorship grid at k = 1-2 (5 authors x turns/log), recognition branch, style x label, instance continuity, Agent K handoff + reprimand + reputation; no instruction (base 49%), P vs R carry-over | Authorship null with room (own − other −1.0); recognition (62% own vs ~19%) does not predict carry-over; no label/style/instance effect; K copied +55.5, reprimand −9 (inconclusive); 'unreliable' K −39.1 (rule met). $0.39 + $0.33 failed start | null (authorship); effect (reputation) |
+| 12 | 10-21 | hist4-27b | Batch 4 (27B), same design (base 51%) | Authorship +6.1 (inconclusive; label +10.5); recognition (79% own) does not predict carry-over; previous instance = self, 'a different AI model' +34.8 less; a reprimand reverses copying (K +43 -> −63; +105.9) and 'unreliable' reverses it (+96.1), silently. $2.41 | effect (source judgement, not self) |
