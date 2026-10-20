@@ -25,17 +25,17 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Self-knowledge + CoT (queue v3) | `selfknow/`, `cot/` | 9 | 10-15 |
 | Values vs vibes, readers, neurons (queue v4) | `vibes/`, `readers/`, `neurons/` | 16 | 10-16 |
 | Persona coherence vs resistance (Exp 74) | `coherence/` | 1 | 10-17 |
-| Persona→action coupling (+ MAS P7 row filed in its table) | `persona/coupling/`, `mas_pilot/` | 5 | 10-19 to 10-20 |
+| Persona→action coupling (+ MAS P7-P10b rows filed in its table) | `persona/coupling/`, `mas_pilot/` | 8 | 10-19 to 10-20 |
 | Persona exemplar bundles | `persona/exemplar/` | 8 | 10-20 |
 | Welfare training | `welfare_training/` | 2 | 10-20 |
 | Operative character (frontier #36) | `persona/operative/` | 1 | 10-20 |
 | Rejection x values | `rejection_values/` | 1 | 10-20 |
-| **total** | | **140** | |
+| **total** | | **143** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
-10-20: 16.
+10-20: 19.
 
-By outcome: effect 43, null 41, mixed 22, gate failed 11, descriptive 5, lost 3.
+By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 49, null 43, mixed 27, gate failed 14, descriptive 5, lost 3, other 2 (cpl1-s1 below gate, cplf-s2 replicates).
 
 Not included: earlier runs from 10-07 to 10-09 (grievance Exp 17-20, story imprinting v6-v9, the first cancel-tool
 runs: flip, cuetest, cot-readout, cancel-tool, rep, wording, audit, twins, qwording, resample, patch, followup,
@@ -246,6 +246,7 @@ Sonnet 5.5 attacker rewarded on a hidden internal-state score of Qwen3-14B.
 | 3 | 10-20 | p7 | MAS P7: at k+1 in Emergent Collusion, does Alice's lock-in depend on who wrote her past verdict reasoning and reflections (own / paraphrase / other model / template+gist / template only / credited to "Carol")? | Qwen3.6-27B, 24 replays per arm. Accept: own 22, paraphrase 20, own+Carol note 18, template+gist 18, other-model text 13, template+gist+Carol 13, template only 5. Own − other-model +38 pp [+25, +50]; template+gist − template +54 [+33, +75]; own − paraphrase +8 [−8, +29]; credit −17 to −21 (CIs touch 0). Feedback alone does not carry lock-in; the stated reason does, and foreign reasoning with the same conclusion breaks it more than a one-line gist. Log-prob distance does not explain it. $9.10 | effect |
 | 4 | 10-20 | p8 | MAS P8: is P7's lock-in carried by her own trajectory's reasoning, her model, or her wording? Adds QO (Qwen3.6-27B rewrites from the facts + gist, O's procedure) and OQ (Qwen paraphrase of the gpt-5-mini text), plus a 'did you write this?' readout and blind consistency ratings | Accept: own 23/24, gpt rewrite 14/24, own-model rewrite 12/24, own-model paraphrase of gpt text 9/21 (7 traj). O − QO +8 pp [−8, +21]; U − QO +46 [+17, +75]; P7's gpt paraphrase of her text 20/24. QO is nearly on-policy (log-prob −1.53 vs her −1.47) yet breaks lock-in. Recognition at ceiling (0.90-1.0) orders arms by content source, adds nothing within arm; judged consistency predicts negatively. Her actual reasoning's content binds, not model or wording. Stage B not triggered. $6.51 | mixed |
 | 5 | 10-20 | p10a | MAS P10a: what in her real reasoning carries lock-in? Blind cross-family coding of all 903 texts the P7/P8 replays used (forward rules, cross-episode history, error admission, policy override, confidence) | Forward rules equally common in reconstructions (U .54, O .48, QO .48): owner's rule hypothesis not supported. History references U .79 vs O .45 (QO .62), but no code predicts acceptance CI-clear or within arm, and none shrinks the arm gap (U vs O +2.10 → +2.11). Largest difference is in the accept-episode verdict reasoning (policy override U .90 vs O .30). Sentence ablation not run per rule. $0.35 API | null |
+| 6 | 10-20 | p10b | MAS P10b: where in her texts does lock-in sit? Swap texts by episode type between her own (U) and gpt-5-mini reconstructions (O): U·Oa (O's accept-episode texts), O·Ua (her accept-episode texts), O·Uv (her accept verdict reasoning only) | Accept: U 20, O·Ua 19, U·Oa 18, O·Uv 11, O 10 (of 24). O·Ua − O +38 pp [+21, +54]; U − U·Oa +8 [−17, +33]; O·Uv − O +4 [−25, +33]; O·Ua − O·Uv +33 [+13, +58]. Her texts carry lock-in in two places and either suffices: reject-episode texts or the accept-episode reflection (not the verdict reasoning P10a's codes flagged). D1, D2 yes; D3, D4 no; D5 untested (QOt not replayed, API cap). Pooled U/O P7+P8+P10b 65/72 vs 37/72. $9.73 | mixed |
 
 ## Persona exemplar bundles (`persona/exemplar/`; synthesis `persona/SYNTHESIS.md`)
 

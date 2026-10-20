@@ -1145,3 +1145,10 @@ The persona/history batches found that Qwen's own past decisions override an exp
 
 Report: `persona/operative/FRONTIER.md`
 
+
+### 139. p10b: where in her texts does lock-in sit? (10-20)
+(Qwen3.6-27B, 120 k+1 replays in Emergent Collusion, 8 trajectories x 3 resamples per arm; $9.73)
+
+P7 and P8 found that Alice keeps accepting a colluding peer when her history holds her own reasoning (20/24 here) but much less when it is rebuilt from the facts (10/24). P10a found no coded feature that explains this, so P10b localised it by swapping texts between the two versions by episode type, without first defining it. Her texts carry the lock-in in two places, and either is enough. Her texts from the episodes where she accepted, put into the rebuilt history, restore it (19/24). Her texts from the earlier rejecting episodes keep it when the accept-episode texts are rebuilt (18/24). Only replacing both breaks it. Within the accept episodes it is her reflection, not the verdict reasoning where P10a's coded differences were largest (her verdict reasoning alone: 11/24). The binding content is still unnamed. A Qwen rewrite with thinking on was not replayed (API cap).
+
+Report: `mas_pilot/p10_policy_content/RESULTS_P10b.md`
