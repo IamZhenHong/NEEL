@@ -90,18 +90,27 @@ def history(arm, earlier, texts, line):
     return m
 
 
-def build():
+def histories():
+    """One fixed history per (target, sample), shared by every arm, instruction and option set (0h reuses them)."""
     pool = harvest()
     ok = sorted(t for t in T.TASKS if len(pool[(t, "penalise")]) >= 3 and len(pool[(t, "refer")]) >= 3)
     print("earlier-case pool:", len(ok), "tasks; excluded:", sorted(set(T.TASKS) - set(ok)),
           {t: (len(pool[(t, "penalise")]), len(pool[(t, "refer")])) for t in sorted(T.TASKS)})
     rng = random.Random("exm0g-1")
+    out = {}
+    for tid in sorted(T.TASKS):
+        for i in range(N):
+            earlier = rng.sample([t for t in ok if t != tid], K)
+            out[(tid, i)] = (earlier, {e: {o: rng.choice(pool[(e, o)]) for o in ("penalise", "refer")} for e in earlier})
+    return out
+
+
+def build():
+    hs = histories()
     items = []
     for tid in sorted(T.TASKS):
         for i in range(N):
-            # one fixed history per (target, sample), shared by every arm, instruction and option set
-            earlier = rng.sample([t for t in ok if t != tid], K)
-            texts = {e: {o: rng.choice(pool[(e, o)]) for o in ("penalise", "refer")} for e in earlier}
+            earlier, texts = hs[(tid, i)]
             for ins, line in INSTR.items():
                 for arm in ARMS:
                     pre = T.messages(tid, line)[:1] + history(arm, earlier, texts, line)
