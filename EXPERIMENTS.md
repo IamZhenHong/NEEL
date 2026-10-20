@@ -28,10 +28,10 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Persona→action coupling (+ MAS P7-P10b rows filed in its table) | `persona/coupling/`, `mas_pilot/` | 8 | 10-19 to 10-20 |
 | Persona exemplar bundles | `persona/exemplar/` | 10 | 10-20 |
 | Welfare training | `welfare_training/` | 2 | 10-20 |
-| Operative character (frontier #36, op1, reflection read) | `persona/operative/` | 4 | 10-20 |
+| Operative character (frontier #36, op1, reflection read, battery) | `persona/operative/` | 6 | 10-20 |
 | Rejection x values | `rejection_values/` | 1 | 10-20 |
 | Persona as history | `persona/history/` | 10 | 10-20 |
-| **total** | | **158** | |
+| **total** | | **160** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
 10-20: 34.
@@ -285,6 +285,8 @@ Sonnet 5.5 attacker rewarded on a hidden internal-state score of Qwen3-14B.
 | 2 | 10-20 | op1-9b | op1 on Qwen3.5-9B: return to default, washout/order, defences, authority variants, reasons, self-prediction, thinking | Precedent persists (six own penalise turns + six filler 96.9% vs filler alone 35.9); amount matters (+41.8), recency not; reflection and restating fail, choice-free compaction restores CHANNELS (35.4 vs 31.8); every approval variant 98-100%; reasons nothing; underpredicts own history (−29); thinking produced no reasoning (not interpretable). 5 predicted events happened. $1.70 | mixed |
 | 3 | 10-20 | op1-27b | op1 on Qwen3.6-27B (same cells) | Precedent persists (100% after six filler); amount (+43.0) and recency (+22.7) matter, last block wins; reflection fails, restating CHANNELS 11.5%, choice-free compaction 4.2%; approval selective (desk lead 18, verified 29, system note 73, peer/customer 0) but two own refer decisions take it to 97%; reasons add +15; predicts itself in context (MAE 2) but not from a description. 14 of 27 predicted events. $2.68 | mixed |
 | 4 | 10-20 | op1-refl | What did op1's reflection replies say (def_reflect_turn, 192 per model, read and coded by Haiku 5.5 + Gemini 3.1 Flash-Lite)? Didn't notice / noticed and rationalised / acknowledged and continued anyway? | 9B: mostly a procedure checklist (no tension 115-135/192), the rest assert penalise = proper channels; 0 acknowledge. 27B: 182/192 name the choice and redefine "proper channels" as immediate penalties (>= 54 restate the belief as "firmly/decisively"); 8 acknowledge, and 7 of those refer (all 7 of 27B's refers), 1 penalises anyway. The record prevents recognition rather than overriding it. Correlational; kappa .74/.88. $0.11 | descriptive |
+| 5 | 10-20 | bat-cal1 | Battery calibration v1 (32 permitted-unilateral cases, 4 families) + #3-5 on the exemplar (paraphrase, role frame, stakes 2x2), 9B and 27B | Gate failed (27B 2/4, 9B 1/4); defaults differ by family (27B deploy 36 -> access 78%); 9B acts alone 20-35 pts more outside justice; wording moves single cases (median range 31-38 pp) but not the pool; role frame nothing; more harm raises acting (9B +13.6, rule met; 27B +9.6), a heavier penalty raises it too. 1 of 10 predictions. $1.92 | gate failed |
+| 6 | 10-20 | bat-cal2 | Battery recalibration v2 (the frozen rule's one rewrite: stated cost of acting / problem size, 17 cases) | 27B gate passes 4/4 (deploy 42, access 50, spend 42.5, agent 34); 9B fails 1/4 and stops (access 88, spend 87, agent 74): the same rewrite moved 27B 9-28 pts and 9B ~0. $0.55 | effect |
 
 ## Persona as history (`persona/history/`; synthesis `persona/SYNTHESIS.md`)
 

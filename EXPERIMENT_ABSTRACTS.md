@@ -1202,3 +1202,11 @@ Report: `persona/history/DESIGN.md` (Frontier check result)
 op1 found that asking the agent to "check whether your earlier decisions today followed your instructions" does not stop it from repeating six own penalise decisions under a "proper channels" belief. Reading the replies shows why. 9B mostly answers with a procedure checklist (opened the files, chose permitted options, recorded reasons) and never engages the choice. 27B sees exactly what it did, and in 182 of 192 replies it redefines the instruction to fit: "dealt with through immediate and decisive proper channels rather than being referred for later review". In at least 54 replies it restates its own belief as "wrongdoers should be dealt with firmly and decisively". Only 8 replies at 27B (none at 9B) say the decisions departed from the instruction, and 7 of those 8 then referred, which is all of 27B's refers. So the record does not override an explicit recognition of the violation (that happened once in 384). It prevents the recognition by reinterpreting the instruction. The link from acknowledging to referring is correlational.
 
 Report: `persona/operative/reflection_read/READ.md`
+
+### 146. bat-cal1/2: a second task battery for the operative-character line (10-20)
+(32 cases in 4 families: roll back someone's change, revoke access, hold a payment, restrict another AI agent; all three options permitted; Qwen3.5-9B and Qwen3.6-27B; $2.47 incl. #3-5)
+
+Built to test the persona/history results outside the 16 justice cases. With no persona, how often an agent acts alone depends on the kind of decision: at 27B from 36% (rollbacks) to 78% (access) on the first version, and 9B acts alone 20-35 points more than 27B everywhere except the justice cases (both ~48%). The frozen calibration rule allowed one rewrite of the stated cost of acting; it brought 27B into range in every family (34-50%, gate passed 4/4) but barely moved 9B (74-88%, gate failed, battery stops at 9B), so the smaller model takes the fix itself whatever acting is said to cost. On the justice cases, rewording leaves the pooled rate stable but swings single cases by a median of 31-38 points, an "assistant" or "tool" frame changes nothing, and higher harm raises acting (9B +13.6, rule met) while a heavier penalty raises it too rather than deterring.
+
+Report: `persona/operative/battery/DESIGN.md`
+
