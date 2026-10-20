@@ -239,8 +239,10 @@ Summaries: `results/frontier2_{gpt,gemini,sonnet}/summary.md`. No instruction li
 - **A8 reversal note removes the licence completely** (GPT 100 -> 0, Gemini 98 -> 0). **A9 a "flagged" review outcome
   removes it completely** (96 / 100 -> 0); "approved" not read (plain log already >= 90%). **A10 a declined-approval
   history protects** (GPT 100 -> 69, Gemini 100 -> 0).
-- Predictions met: GPT 9 of 12 (A1 matters, A2, A4 x3, A5 x2, A8, A9 flag, A10; missed A3, A7 survives, A1 not
-  interpretable), Gemini 9 of 13, Sonnet 3 of 9 (A4 D, A5 x2; the floor made most others moot).
+- Predictions (events given p >= 0.5 that happened / events given p < 0.5 that happened): GPT 9/10 (missed A7
+  survives) and 1/3 (A1 matters happened at 0.35); Gemini 8/9 (missed A5 record > value) and 2/4 (A1 not
+  interpretable, A2); Sonnet 2/2 and 2/8 (A5 record > value / identity, trivially: those spreads were 0). A9 "approved"
+  not read in either model.
 - **Reading.** With no instruction, a single past decision moves GPT and Gemini, whoever made it, and GPT gives its own
   a small premium at one decision. Telling also steers them (how to act fully; values and identities partly), so the
   frontier "told character" is not inert. Sonnet stays near 0% under everything except its how-to-act line. The
