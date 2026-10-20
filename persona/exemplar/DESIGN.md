@@ -490,7 +490,7 @@ Qwen3.5-9B. Jobs file sha256 50bfcdcafca503fd... (8,960 items; not committed, re
 - Predictions: gate met p 0.9; primary met p 0.45, "does not" p 0.25; reasons p 0.35 (the action itself stays in
   view, and own may sit near ceiling); authorship p 0.6 (s4: another agent's log had ~no effect); label transfer
   p 0.7; self-description "penalise" in own at least 20 pts below its action rate p 0.5 (s7, 0b).
-- Cost ~-1.5 (cap 60 min / $2), inside the exemplar line (~$11 left).
+- Cost ~$1-1.5 (cap 60 min / $2), inside the exemplar line (~$11 left).
 - What it decides: if attribution to an instruction does not weaken carry-over in context, the "same mechanism in
   context and in training" claim loses its cheapest support, and the training mini (own / bare / instructed /
   meaningless-prompt / other-character framings) should be argued on the literature alone.
