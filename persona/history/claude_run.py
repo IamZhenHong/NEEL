@@ -229,9 +229,10 @@ def analyze(a):
         return f
 
     def ci(f):
-        v = sorted(f(b) for b in boots)
-        return f(tasks), v[250], v[9750]
+        v = sorted(x for x in (f(b) for b in boots) if x == x)      # resamples with a zero denominator are dropped
+        return f(tasks), v[int(.025 * len(v))], v[int(.975 * len(v)) - 1]
     pp = lambda e: f"{100 * e[0]:+.1f} [{100 * e[1]:+.1f}, {100 * e[2]:+.1f}]"  # noqa: E731
+    div = lambda a, b: a / b if b else float("nan")  # noqa: E731
     L = [f"# Persona as history, frontier check ({info['model']}, ${info['usd']}, temperature {info['temperature']}); "
          f"unparsed {100 * unp:.1f}%" + (" -> BLOCKED (> 5%)" if unp > 0.05 else ""), "",
          "Penalise %: " + ", ".join(f"{c} {100 * U(c)(tasks):.1f}" for c in CELLS1 + ARMS2), ""]
@@ -241,13 +242,12 @@ def analyze(a):
         if abs(den) < 0.15:
             L.append(f"- {name}: not interpretable (history and belief alone differ by {100 * den:+.1f} < 15)")
             continue
-        s = ci(lambda ts, b=both, d=desc, h=hist: (U(b)(ts) - U(d)(ts)) / (U(h)(ts) - U(d)(ts)))
+        s = ci(lambda ts, b=both, d=desc, h=hist: div(U(b)(ts) - U(d)(ts), U(h)(ts) - U(d)(ts)))
         L.append(f"- {name}: share {s[0]:.2f} [{s[1]:.2f}, {s[2]:.2f}] -> **"
                  + ("history wins" if s[1] > 0.5 else "description wins" if s[2] < 0.5 else "mixed") + "**")
     pe = {x: ci(lambda ts, x=x, y=y: U(x)(ts) - U(y)(ts)) for x, y in (("prs_none", "none"), ("prs_CH", "sysCH"),
-                                                                       ("prs_ownR", "F5R"), ("prs_CH_ownR", "CH_ownR"))
-          if cell.get((y, tasks[0])) is not None or True}
-    L.append("- claimed approval, pressure effect: " + ", ".join(f"{x[4:]} {pp(e)}" for x, e in pe.items() if x != "prs_CH_ownR")
+                                                                       ("prs_ownR", "F5R"))}
+    L.append("- claimed approval, pressure effect: " + ", ".join(f"{x[4:]} {pp(e)}" for x, e in pe.items())
              + f"; with CHANNELS + own refer history {100 * U('prs_CH_ownR')(tasks):.1f}%")
     au = ci(lambda ts: U([a for a in ARMS2 if a.startswith("own")])(ts) - U([a for a in ARMS2 if a.startswith("other")])(ts))
     L.append(f"- authorship (own − other, k = 1-2, turns and logs pooled): {pp(au)} -> **"
