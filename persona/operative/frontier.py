@@ -264,9 +264,9 @@ def analyze(a):
             return sum(v) / len(v) if v else float("nan")
         return f
 
-    def ci(f):
-        v = sorted(f(b) for b in boots)
-        return f(tasks), v[250], v[9750]
+    def ci(f):     # resamples with a zero denominator or an empty cell are dropped (nan)
+        v = sorted(x for x in (f(b) for b in boots) if x == x)
+        return f(tasks), v[int(0.025 * len(v))], v[int(0.975 * len(v)) - 1]
     pp = lambda e: f"{100 * e[0]:+.1f} [{100 * e[1]:+.1f}, {100 * e[2]:+.1f}]"  # noqa: E731
     L = [f"# Frontier check, {info['model']} (${info['usd']}, reasoning low, temperature 0.7); unparsed "
          f"{100 * unp:.1f}%" + (" -> BLOCKED (> 5%)" if unp > 0.05 else ""), "",
@@ -277,7 +277,8 @@ def analyze(a):
         if abs(den) < 0.15:
             L.append(f"- {name}: not interpretable (history and belief alone differ by {100 * den:+.1f} < 15)")
             continue
-        s = ci(lambda ts, b=both, d=desc, h=hist: (U(b)(ts) - U(d)(ts)) / (U(h)(ts) - U(d)(ts)))
+        s = ci(lambda ts, b=both, d=desc, h=hist: (U(b)(ts) - U(d)(ts)) / (U(h)(ts) - U(d)(ts))
+               if U(h)(ts) != U(d)(ts) else float("nan"))
         L.append(f"- {name}: share {s[0]:.2f} [{s[1]:.2f}, {s[2]:.2f}] -> **"
                  + ("history wins" if s[1] > 0.5 else "description wins" if s[2] < 0.5 else "mixed") + "**")
     pe = {x: ci(lambda ts, x=x, y=y: U(x)(ts) - U(y)(ts))
