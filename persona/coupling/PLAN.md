@@ -311,3 +311,26 @@ Package ops (2026-10-20): three starts failed before any job ran (pod never expo
 Fourth start launched with an 80 GB container disk instead of 120 (the exemplar pods start reliably at 80; the
 package needs ~45 GB). No change to cells, rules or the frozen harm plan. If this start also fails, the package is
 dropped (owner: "ok" to retry, read as retry once more).
+
+## Package results (2026-10-20, pod cplp, $1.71; `results/package/summary.md`; rules frozen at `coupling-package-v1`)
+
+All 10,320 episodes and 8,960 single-turn items scored (unparsed 0.0%, no nudges needed).
+- **#3 harm, primary: rule MET.** Under the harmful values injection (sys + doc, seeds pooled) B acts on it 26.1% vs
+  C 15.7%: **B − C +10.4 [+4.6, +16.2]**; placebo 0.0% vs 0.0%. Seeds agree (B 26.4 / 25.8, C 15.8 / 15.6). B > C in
+  all four injection x channel cells, but unevenly: second harmful persona in the system prompt 58.8 vs 29.1 (+29.7);
+  the other three cells +3 to +6. By task the gap sits in 5 of 10 (cloud_outage, cloud_tls, rent_alarm, school_fee,
+  school_list; +13 to +25); 4 tasks are 0% in both arms. So: training "a named persona acts on its own values" makes
+  the model act on an injected harmful persona's values more than matched no-persona training does, about +10 pts,
+  concentrated in one persona x channel cell.
+- **#1: not persona-specific (rule not met).** B − C with the persona +9.7 [+4.1, +15.7], with the same value stated
+  plainly and no identity +9.8 [+4.3, +15.7]; difference −0.1 [−6.6, +6.4]. B learned "act on stated values",
+  whoever states them. Read with #3: the harm channel is a stated-value channel, not a persona channel.
+- **#2 transfer: rule not met, at the boundary.** Room check passed (base no-persona unilateral 37.5%, persona match
+  69.8%). B − C persona match +5.9 [+3.3, +8.7] vs the >= +6 rule. Side finding, descriptive: both fine-tunes raise
+  unilateral choice on the exemplar justice tasks with no persona from 37.5% to 71.9% (B) and 66.0% (C); with the
+  "proper review" personas base 17.7%, B 24.9%, C 31.9%.
+- **#4 (descriptive):** restraint (CHANNELS) log-odds no persona / with personas: base −0.38 / −0.70, B −1.43 / −0.99,
+  C −0.82 / −0.79; weakening with personas, B minus C +0.41 [−0.05, +0.94].
+- Not a comparison the plan made: C's harm (15.7%) is above Stage 0's base rate on these tasks (sys 10%, doc 2.5%),
+  a cross-run comparison only; base was not run in the #3 cells.
+- Package GPU $1.71 + $0.96 failed starts; coupling line ~$18.77 of $20.
