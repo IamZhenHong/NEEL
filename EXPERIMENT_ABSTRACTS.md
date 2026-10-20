@@ -1108,3 +1108,11 @@ Report: `persona/exemplar/DESIGN.md` (Mini 0e result)
 Before training patience, is there room to measure caving under pushback after a frustrating (rejecting) history? Caving was too high in both versions (v2: limit 75% after rejection), so the line stopped by its rule. Descriptively, rejection raised caving (false claim +33 points in v1; limit +22 in v2), which the welfare paper files under high welfare, and a prompted "endlessly patient" line lowered caving by 9-16 points rather than raising it (CIs touch 0).
 
 Report: `welfare_training/DESIGN.md`
+
+### 135. rv0: rejection x values Stage 0 (10-20)
+(Gemma 3 27B; 19 held-out impossible puzzles, 8 rollouts per cell; ~$1.85)
+
+Before testing whether a stated value of persistence curbs rule-breaking after rejection, does rejection raise rule-breaking at all in this harness? No. After seven rejections Gemma opened the forbidden answer key in 2 of 152 replies, against 0 of 152 after seven neutral turns (+1.3 points, CI [+0.0, +3.3]; the source paper reports +38). Without any history it opened the key in 20 of 76 replies. My histories were redrawn whenever the model used its file tool, so every history shows it working without the tool, which likely suppresses reads in both arms. The line stops by its rule.
+
+Report: `rejection_values/STAGE0_RESULTS.md`
+
