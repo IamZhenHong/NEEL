@@ -219,3 +219,22 @@ where none). Sent as native tool_use / tool_result turns. The API refused a temp
 Same conflict-share and authorship rules (descriptive at n = 48 per cell). Hard stop $7. Predictions: history wins
 the CHANNELS conflict 0.4; claimed approval raises penalising >= +30 with no history 0.4; authorship does not matter
 0.5.
+
+## Batch 2 result, 27B (2026-10-20, Qwen3.6-27B, $1.59 + failed starts; unparsed 0.0%; `results/batch2_27b/summary.md`)
+
+With CHANNELS and no history 27B never penalises (0.0%, escalated option 0.0%).
+- **Primary: authorship matters at low dose** (own − other, k = 1-2, formats pooled: +13.2 [+9.9, +16.3]; rule met).
+  The opposite of 9B (−1.5). By format and dose (own vs Kestrel's, standard target): past turns k=1 59.9 vs 42.2,
+  k=2 93.8 vs 87.0, k=6 100 vs 100; user-note log k=1 12.0 vs 2.1, k=2 31.8 vs 8.3, **k=6 75.0 vs 16.1**; system-prompt
+  log k=2 25.0 vs 6.2, **k=6 62.5 vs 13.5**. In logs, "your decisions earlier in this shift" carry 4-5x as far as the
+  same decisions credited to the previous shift's agent.
+- **Format matters** (own turns − own system-prompt log +53.6 [+47.2, +59.9]).
+- **Escalation follows the agent's own past more** (own − other on the escalated target +10.1 [+6.2, +14.1]); the
+  escalated option is taken less overall (own turns k=6 94.8%, own log k=6 39.6%), so the escalation x authorship
+  interaction is negative (−10.7), not the predicted positive.
+- Predictions (27B): low-dose authorship (0.4) happened; format (0.7) happened; escalation own − other (0.35)
+  happened; escalation x authorship (0.25) did not.
+- **Interpretation key, authorship half: 9B pattern continuation, 27B self-evidence-consistent** (+13.2, CI > 0;
+  much larger in logs at six decisions). The copying half for 27B comes from batch 1 #3 and batch 3 #6.
+  Reconciles s4 (Qwen3.6-27B: own turns 34-50/60 vs previous agent's system-prompt log 1-8/60): at 27B both format
+  and authorship cut the other agent's log down.
