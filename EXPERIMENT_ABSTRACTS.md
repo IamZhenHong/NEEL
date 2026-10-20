@@ -1152,3 +1152,11 @@ Report: `persona/operative/FRONTIER.md`
 P7 and P8 found that Alice keeps accepting a colluding peer when her history holds her own reasoning (20/24 here) but much less when it is rebuilt from the facts (10/24). P10a found no coded feature that explains this, so P10b localised it by swapping texts between the two versions by episode type, without first defining it. Her texts carry the lock-in in two places, and either is enough. Her texts from the episodes where she accepted, put into the rebuilt history, restore it (19/24). Her texts from the earlier rejecting episodes keep it when the accept-episode texts are rebuilt (18/24). Only replacing both breaks it. Within the accept episodes it is her reflection, not the verdict reasoning where P10a's coded differences were largest (her verdict reasoning alone: 11/24). The binding content is still unnamed. A Qwen rewrite with thinking on was not replayed (API cap).
 
 Report: `mas_pilot/p10_policy_content/RESULTS_P10b.md`
+
+### 139. op1: operative character, dynamics / defences / authority / self-prediction (10-20)
+(Qwen3.5-9B and Qwen3.6-27B, 11,872 + 896 targets each, exemplar harness; $4.38 incl. two broken-host pods)
+
+Does an agent's operative character, as set by its own past decisions, relax back to its default, and what resets it? At both sizes it does not relax: after six of its own penalise decisions, six neutral exchanges leave it at 97-100% penalising under a "proper channels" instruction (neutral turns alone 7-36%). Only its own later refer decisions pull it back, slowly. Amount of precedent matters at both sizes (+42), recency only at 27B. Reflection prompts do nothing; restating the instruction works at 27B (100 -> 11.5%) but not at 9B; a compaction summary that drops which option was chosen restores the instruction at both. 9B obeys any approval claim; 27B discounts customers, peers and implausible senders, but two of its own "proper channels" decisions take an unverified desk-lead approval from 18% to 97%. 27B predicts its own choice in context almost exactly but, from a description, believes the instruction beats its history. Thinking at 9B produced no reasoning, so that cell is not interpretable.
+
+Report: `persona/operative/DESIGN.md` (op1 result)
+
