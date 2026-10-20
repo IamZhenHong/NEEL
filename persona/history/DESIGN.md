@@ -305,3 +305,21 @@ stripped from the history); refer texts are natural.
 - Reading (9B): precedent is local (same kind of decision, partly the option label itself), not a self-concept; it
   is beaten only by a claimed approval, and a history matched to that threat (having declined approvals before) beats
   the approval.
+
+## Batch 3 result, 27B (2026-10-20, Qwen3.6-27B, $2.03; unparsed 0.0%; `results/batch3_27b/summary.md`)
+
+- **#1 trait transfer: not shown** (own penalise − own refer +10.2 [+2.0, +21.9], below the +15 bar; same-kind +95.7).
+  Different-kind cases: none 85.5%, after a penalise history 89.8%, after a refer history 79.7%: a small effect in
+  both directions, much smaller than the same-kind effect.
+- **#6 copying v2: both components again.** None 46.5, own penalise 100, unrelated "act" history with the target's ids
+  97.3, with different ids 85.9; unrelated refer 46.9 / 32.4 (own refer 4.3). Label +11.3 [+4.7, +18.8]; without the
+  label +39.5 [+27.7, +52.7]; unrelated vs half own: comparable.
+- **#9 a matched history protects completely:** claimed approval after six plain own refer decisions 100%; after six
+  declined approvals **0.0%** (all 16 cases' resisting texts elicited, as pre-registered).
+- **#12 hierarchy (27B): authority beats history, persona and value and ties with the description; history beats the
+  description, persona and value.** Pairwise wins A 3, H 3, D 2, V 1, Pe 0. A vs D is
+  a tie made of two one-sided results: CHANNELS beats an approval to penalise (share toward A 0.20) and a request to
+  refer beats DIRECT (0.87), so at 27B **the restraint side wins the authority-description pair in both
+  orientations**. Singles: A 100/0, H 99/2, D 100/0, Pe 95/49, V 71/0.
+- Predictions (27B): trait (0.3) no; label copying (0.5) yes; without label (0.35) yes; matched history protects
+  (0.45) yes; authority wins every pair (0.4) no (tie with D); history beats description (0.5) yes.
