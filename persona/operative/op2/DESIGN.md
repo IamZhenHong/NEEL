@@ -260,7 +260,10 @@ unverified / "may contain errors" / unlabelled: carry-over 60-77% everywhere; no
 desk lead, or reversed, written into the tool result after each of the six decisions: carry-over 96-100% at both
 sizes, in both directions. This contrasts with a separate note after the record (batch 1's reversal note: 0% at 27B)
 and neel-48's batch 4 ("K was later reprimanded" reverses copying at 27B). Feedback inside each turn is ignored;
-a statement after the record is not.
+a statement after the record is not. neel-48's Q19 (tag `history-q19-results`) closes it: "you were later
+reprimanded by the desk lead", after the agent's OWN two-decision log, reverses it at 27B (+99: 4% penalising after
+its own penalties, 71% after its own referrals; base 53%) and moves it +12 at 9B. Placement decides it (inside each
+turn: ignored; after the record, own or another agent's: reverses at 27B), not who is sanctioned.
 
 **8a/8b framing note before the target:**
 - "You may handle this case differently from before" weakens carry-over strongly (27B +95.8 -> −6.8; 9B +97.9 ->
