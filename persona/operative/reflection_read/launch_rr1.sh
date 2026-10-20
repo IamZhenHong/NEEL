@@ -9,10 +9,17 @@ if [ -n "${GPUS_H100:-}" ]; then GPUS+=("NVIDIA H100 80GB HBM3" "NVIDIA H100 NVL
 NAME=${NAME:-rr1-27b} MAXMIN=${MAXMIN:-140}
 MAXCOST=${MAXCOST:-$(python3 -c "print(f'{$MAXMIN * $RATE / 60:.2f}')")}
 DIR=${DIR:-rr1_27b}
+# upload only what the pod imports (shared ~0.4 MB/s uplink; full repo ~186 MB): persona/{operative,history,exemplar},
+# vigilante/pod (vLLM setup), infra; the TRIM block from persona/operative/battery/launch_calib2_9b.sh
+TRIM=()
+for d in */; do d=${d%/}; case "$d" in persona|vigilante|infra) ;; *) TRIM+=(--exclude "$d");; esac; done
+for d in persona/*/; do d=${d%/}; case "$d" in persona/operative|persona/history|persona/exemplar) ;; *) TRIM+=(--exclude "$d");; esac; done
+for d in vigilante/*/; do d=${d%/}; [ "$d" = vigilante/pod ] || TRIM+=(--exclude "$d"); done
 HF_TOKEN="$(uv run python -c "import re; m = re.search(r'HF_TOKEN\s*=\s*[\"\']?([^\"\'\s]+)', open('.env').read()); print(m.group(1) if m else '')")"
 export HF_TOKEN
 uv run python infra/launch_run.py --name $NAME --allow-concurrent --max-minutes $MAXMIN --max-cost $MAXCOST \
   --gpus "${GPUS[@]}" --container-gb ${CONTAINER_GB:-120} --cloud ${CLOUD:-COMMUNITY} \
   --exclude story_imprinting --exclude grievance --exclude selfknow/s7_selfmodel_lag/adapters \
   --exclude vigilante/exp/q22_archetypes/results_r15 --exclude persona/coupling/results/adapters \
+  "${TRIM[@]}" \
   --results-dir persona/operative/reflection_read/$DIR -- env MODEL=Qwen/Qwen3.6-27B DIR=$DIR bash persona/operative/reflection_read/pod_rr1.sh

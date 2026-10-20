@@ -89,3 +89,10 @@ Pods are named `rr1-*`.
   ~15 min, targets (up to 2,304) ~15 min. About 90 min on one A100 SXM, about $2.7. Cap $4.2 (launcher max 140 min).
 - **API:** verification about $0.05. Cap $0.3.
 - **Total cap:** $4.5.
+
+## Build notes (no design change)
+
+- **Launch 1 (rr1-27b, pod l793nixws9ruml):** interrupted during the code upload; its pod was terminated (~$0.10). A
+  full repo sync takes 30+ minutes on the shared uplink and counts against the launcher's 140-minute cap.
+  `launch_rr1.sh` now uploads only what the pod imports (the TRIM block from the operative session's battery
+  launcher).
