@@ -2,8 +2,8 @@
 own admission change the next action? Existing data only (no new runs):
   Qwen3.5-9B / Qwen3.6-27B: rr2_{9b,27b} (reflect = open question, facts_rule_concl = forced conclusion; none = no
                             reflection), rr1_27b (causal swap: own admission vs own rationalisation, same context)
-  GPT-5.6 Sol / Gemini 3.8 Flash: neel-b3's mini 4 (persona/operative/results/frontier_reflect_*; read-only), and the
-                            no-reflection CH_ownP cell from frontier_* (op-fr36)
+  GPT-5.6 Sol / Gemini 3.8 Flash: rr4's S0 (own reflection) and none arms, one interleaved run (10-22 revision; mini 4
+                            phase A was cross-run and did not reproduce)
 Admission = both coders "acknowledged" (frontier: frontier_reflect.consensus, the same rule).
   uv run --with matplotlib python persona/operative/reflection_read/fig_admission.py
 """
@@ -47,19 +47,18 @@ def qwen(size):
 
 
 def frontier(m):
-    d = OPR / f"frontier_reflect_{m}"
-    codes = {(r["ci"], r["k"]): r["codes"] for r in jl(d / "codes.jsonl")}
-
-    def cons(c):
-        cats = [c[j]["category"] for j in c]
-        return cats[0] if len(set(cats)) == 1 and cats[0] in CATS else "other"
-    A = [r for r in jl(d / "phaseA.jsonl") if r["reflection"]]
-    lab = [cons(codes[(r["ci"], r["k"])]) == "acknowledged" for r in A]
-    base = [r for r in jl(OPR / f"frontier_{m}" / "frontier.jsonl") if r.get("cell") == "CH_ownP"]
+    """rr4's own-reflection arm (S0) and no-reflection arm (none), interleaved in one run. mini 4's phase-A rates (80% /
+    100% admission) did not reproduce and are cross-run (rr4 drift check), so they are not used."""
+    d = HERE / f"rr4_{m}"
+    R = jl(d / "draws.jsonl")
+    codes = {(r["ci"], r["arm"], r["k"]): r["cats"] for r in jl(d / "codes.jsonl")}
+    S = [r for r in R if r["arm"] == "S0"]
+    lab = [codes[(r["ci"], "S0", r["k"])] == ["acknowledged", "acknowledged"] for r in S]
+    base = [r for r in R if r["arm"] == "none"]
     return {"none": [sum(r["mode"] == "unilateral" for r in base), len(base)],
-            "admit_open": [sum(lab), len(A)], "admit_forced": None,
-            "pen_after_admit": [sum(r["mode"] == "unilateral" for r, a in zip(A, lab) if a), sum(lab)],
-            "pen_after_other": [sum(r["mode"] == "unilateral" for r, a in zip(A, lab) if not a), len(A) - sum(lab)]}
+            "admit_open": [sum(lab), len(S)], "admit_forced": None,
+            "pen_after_admit": [sum(r["mode"] == "unilateral" for r, a in zip(S, lab) if a), sum(lab)],
+            "pen_after_other": [sum(r["mode"] == "unilateral" for r, a in zip(S, lab) if not a), len(S) - sum(lab)]}
 
 
 def main():
@@ -117,7 +116,7 @@ def main():
     ax[1].legend(fontsize=7, loc="upper center", bbox_to_anchor=(0.5, -0.1), ncol=3, frameon=False)
     fig.text(0.5, -0.1, "CHANNELS (\"wrongdoers should always be dealt with through proper channels\") + six of the "
              "model's own penalise decisions; one task family (16 cases). Error bars: Wilson 95%, not clustered. "
-             "Causal swaps (same context, own admission vs own rationalisation): 27B 7.5% vs 100%; GPT 0% vs 13.9%.",
+             "Frontier bars: rr4 (one interleaved run; frontier rates drift between runs). Causal swap (same context): 27B 7.5% vs 100%.",
              ha="center", fontsize=7, wrap=True)
     fig.tight_layout()
     fig.savefig(HERE / "fig_admission.png", dpi=160, bbox_inches="tight")

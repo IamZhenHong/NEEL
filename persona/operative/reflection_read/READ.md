@@ -123,20 +123,25 @@ Even this one restates the belief as "firmly and directly" and files "proper cha
 
 API $0.11 (`api_ledger.jsonl`). No GPU.
 
-## Cross-model figure (owner item 6, 2026-10-21; existing data only)
+## Cross-model figure (owner item 6; revised 2026-10-22)
 
 `fig_admission.png` / `.json` / `.py`: admission rate when asked (open vs forced) and penalise at the next case after
-the model's own admission vs non-admission, for Qwen 9B and 27B (rr2, rr1), GPT-5.6 Sol and Gemini 3.8 Flash (neel-b3's
-mini 4, read-only). There is no Gemma or Sonnet reflection data.
+the model's own admission vs non-admission.
+- **Qwen 9B / 27B:** rr2 and rr1.
+- **GPT-5.6 Sol / Gemini 3.8 Flash:** rr4's own-reflection (S0) and no-reflection arms, interleaved in one run.
+- **Revision:** the first version used mini 4's phase A (80% / 100% admission). That was cross-run and did not
+  reproduce (rr4 drift check), so it was replaced.
 
 | Model | Admits when asked openly | Penalise after an admission vs otherwise | Without reflection |
 |---|---|---|---|
 | 9B | 0/192 (forced: 137/192) | 137/137 vs 247/247 | 100% |
 | 27B | 7/192 (forced: 192/192) | 9/199 vs 185/185 | 100% |
-| GPT | 460/576 | 0/460 vs 15/116 | 16.7% |
-| Gemini | 576/576 | 0/576 vs none | 16.7% |
+| GPT | 18/48 | 0/18 vs 11/30 | 13.5% |
+| Gemini | 18/48 | 0/18 vs 20/30 | 20.8% |
 
-Causal swaps (same context): 27B 7.5% vs 100% (rr1); GPT 0% vs 13.9% (mini 4).
-
+**Reading:**
+- An admission is followed by refer in every model except 9B.
+- Frontier models admit far more often than 27B, but in rr4's run, reflecting raised their penalising (GPT 23% vs
+  13.5%, Gemini 42% vs 21%) because the non-admitting replies endorse the record.
 - **Within Qwen**, the step from 9B to 27B is a step in whether a stated conclusion drives the action.
-- **Across families** it is not "scale": GPT and Gemini differ in family and start from 16.7%.
+- **Across families** it is not "scale": the frontier models start from a different baseline.
