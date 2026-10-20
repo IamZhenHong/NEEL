@@ -1,0 +1,25 @@
+[pre] disk: 2.6 GiB free
+[pre] balance $175.53, pods 5
+[runpod] launching alongside 5 pod(s) not ours (left alone): rij-27b $1.39/hr, rij-9b $0.59/hr, rec-27b $1.39/hr, bat-lev-27b $1.39/hr, rec-9b $0.59/hr
+[runpod] pod xcoostpvkxgxwu (?) at $1.79/hr; time cap 75 min; budget $2.3
+[runpod] waiting for ip/port (0s, status RUNNING)
+[runpod] waiting for ip/port (86s, status RUNNING)
+[runpod] waiting for ip/port (155s, status RUNNING)
+[runpod] waiting for ip/port (223s, status RUNNING)
+[runpod] waiting for ip/port (310s, status RUNNING)
+[runpod] waiting for ip/port (344s, status RUNNING)
+[runpod] waiting for ip/port (379s, status RUNNING)
+[runpod] waiting for ip/port (456s, status RUNNING)
+[runpod] waiting for ip/port (525s, status RUNNING)
+[runpod] waiting for ip/port (654s, status RUNNING)
+[runpod] terminated xcoostpvkxgxwu; elapsed cost ~$0.330
+[runpod] other pods present (not ours, left alone): [('rij-27b', '51otofamgnkkzw', 1.39), ('rij-9b', '7vutkz12td8cac', 0.59), ('rec-27b', 'dtddlqydq5t9wm', 1.39), ('rr4-27b', 'guxepz5qk1x01l', 1.39), ('rec-9b', 'q8oiiqm61vfvbq', 0.59)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 429, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 366, in main
+    host, port = pod.ssh_target()
+                 ^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/runpod_guard.py", line 237, in ssh_target
+    raise TimeoutError("pod never exposed a public ip and ssh port")
+TimeoutError: pod never exposed a public ip and ssh port

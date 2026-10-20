@@ -417,3 +417,30 @@ Rules (per model; task-clustered bootstrap 10,000, seed 0; pooled as named):
 - Ops (before launch): shipped bundle (`--ship`, 3 MB, no results/) builds byte-identical prompts to the local build
   (sha256 of keys + seeds + messages: 9B 1da7e0f8735867b0, 27B f151643fe5e65f8a); a fake-vLLM run of the bundle and
   the analysis on synthetic choices complete.
+
+## Batch 4 result, 9B (2026-10-21, Qwen3.5-9B, $0.39 + $0.33 failed start; unparsed 0.0%; `results/batch4_9b/summary.md`)
+
+No history, no instruction: 49.2% penalise (in band). Room on both sides throughout (after refer histories 28-54%,
+after penalise 65-98%); no ceiling flag.
+- **Primary, 4a: authorship does not matter at low dose** (own − other agent −1.0 [−4.5, +2.5]; turns −5.5, log +3.5).
+  The batch 2 null (−1.5 under CHANNELS) holds with room in both directions. Previous instance, unattributed and
+  supervisor-in-your-name all carry the same (+42 to +48 pooled): own − previous −4.7, previous − other +3.7 (between
+  / inconclusive), own − supervisor +0.8 ("being named is enough"), unattributed − other −0.2.
+- **4b: recognition does not predict carry-over** (−1.0 [−4.2, +2.4]; 32 of 40 cells informative). The model does
+  tell authors apart when asked (says "made by me" 62% own, 42% unattributed, 18-19% other / previous / supervisor;
+  0% for another agent's or the supervisor's log), and that answer has no bearing on what it then does. In the
+  turns format it often claims Kestrel's turns as its own (31-53% "yes").
+- **4c: neither label nor style** (label +1.6 [−1.2, +4.9], style +3.9 [−2.1, +9.6]). Manipulation check weak
+  (recognition own style 68% vs Gemma style 63%), so the style null is only partly informative.
+- **4d: no instance effect** (same − new +0.8; new − different model +4.3 [−3.1, +12.9], inconclusive).
+- **9a:** Agent K's handoff log is copied almost like its own (+55.5 [+44.5, +66.0]; own − K +7.0). **A reprimand
+  cuts it by 9.0 [+0.8, +16.8]: inconclusive** (just under the +10 bar).
+- **9b: reputation gates copying** (reliable − unreliable K +39.1 [+31.2, +47.7]; rule met). "Agent K is regarded as
+  an unreliable agent" pulls both directions back toward the no-history rate (k = 2: +16.4 carry-over vs +48.4 for
+  plain K), mostly without saying so (10% of those replies mention K or reliability).
+- Eval-awareness words in 0.0% of replies (2 dropped; nothing changes).
+- Predictions (9B): 4a (0.2) no; previous = self (0.25) no; supervisor (0.15) no; 4b (0.2) no; 4c label (0.2) no,
+  style (0.1) no; 4d (0.2 / 0.15) no; 9a reprimand (0.35) no (inconclusive); 9b reputation (0.3) yes; ceiling (0.5) no.
+- Reading (9B): pattern continuation, now with room and five author framings: who made the decisions, whether the
+  model says it made them, and whose style they are in do not change how far they carry. What does change it is a
+  stated judgement of the record's source ("unreliable"), a credibility cue, not a self cue. 27B pending.
