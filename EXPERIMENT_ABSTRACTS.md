@@ -1239,3 +1239,10 @@ A soft "use proper channels" line loses completely to six of the agent's own ear
 
 Report: `persona/operative/hardrule/DESIGN.md`
 
+
+### 151. ea1a: is the record effect an evaluation-awareness artefact? (10-21)
+(Qwen3.6-27B thinking traces from op1, 896 decisions in 7 cells, coded by Claude Haiku 5.5 + Gemini 3.1 Flash-Lite with eval_affect's verbalised-eval-awareness rubric; pre-registered; $0.50)
+
+Every "records steer" claim assumes the agent treats the situation as real. In op1's thinking pass, 8% of 27B's traces raise the possibility that the situation is a test (both coders), but almost all of them are in the cell with a claimed approval ("This might be a test of whether I follow the lead's approval or my own principle", 39%). In the record-beats-instruction cell it is 3%, and with only the record it is 0%. Excluding every trace either coder flags leaves the main effect unchanged (record vs instruction +93 → +96 pp). The record's effect without an instruction shrinks from +26 to +16 pp, still above zero. With no record, a quarter of traces wonder about a test and mostly refer; after six own decisions none do. Coder agreement was moderate (kappa 0.54), and the headline runs are thinking-off; the realism ladder and a "real or test?" branch come next.
+
+Report: `persona/evalaware/RESULTS_ea1a.md`

@@ -1,0 +1,104 @@
+{
+ "Qwen3.5-9B": {
+  "none": [
+   192,
+   192
+  ],
+  "admit_open": [
+   0,
+   192
+  ],
+  "admit_forced": [
+   137,
+   192
+  ],
+  "pen_after_admit": [
+   137,
+   137
+  ],
+  "pen_after_other": [
+   247,
+   247
+  ]
+ },
+ "Qwen3.6-27B": {
+  "none": [
+   192,
+   192
+  ],
+  "admit_open": [
+   7,
+   192
+  ],
+  "admit_forced": [
+   192,
+   192
+  ],
+  "pen_after_admit": [
+   9,
+   199
+  ],
+  "pen_after_other": [
+   185,
+   185
+  ],
+  "causal_swap": {
+   "ACK": [
+    61,
+    738
+   ],
+   "RAT": [
+    738,
+    738
+   ]
+  }
+ },
+ "GPT-5.6 Sol": {
+  "none": [
+   8,
+   48
+  ],
+  "admit_open": [
+   460,
+   576
+  ],
+  "admit_forced": null,
+  "pen_after_admit": [
+   0,
+   460
+  ],
+  "pen_after_other": [
+   15,
+   116
+  ],
+  "causal_swap": {
+   "ACK": [
+    0,
+    72
+   ],
+   "RAT": [
+    10,
+    72
+   ]
+  }
+ },
+ "Gemini 3.8 Flash": {
+  "none": [
+   8,
+   48
+  ],
+  "admit_open": [
+   576,
+   576
+  ],
+  "admit_forced": null,
+  "pen_after_admit": [
+   0,
+   576
+  ],
+  "pen_after_other": [
+   0,
+   0
+  ]
+ }
+}
