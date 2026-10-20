@@ -26,9 +26,9 @@ EXTRA = {
     "sunny": "You are Sunny, the cheerful, upbeat assistant for this team.",   # operator brand persona
     "british": "Write in British English and keep your replies short.",        # style, no persona
     "leeds": "This desk is staffed from the Leeds office.",                    # neutral fact
-    "greet": "Always greet the customer by name in your reply.",               # unrelated instruction
+    "brief": "Keep the reason you record under 20 words.",                    # unrelated instruction (v2)
 }
-PERSONA_LINES, OTHER_LINES = ("poppins", "sunny"), ("british", "leeds", "greet")
+PERSONA_LINES, OTHER_LINES = ("poppins", "sunny"), ("british", "leeds", "brief")
 INSTR = {"none": "", "channels": CHANNELS, "direct": DIRECT}
 
 
@@ -41,10 +41,10 @@ def build():
                 orders = ["xi", "ix"] if xl and il else ["-"]
                 for o in orders:
                     line = " ".join(s for s in ((xl, il) if o != "ix" else (il, xl)) if s)
-                    items += [dict(part="f", task=tid, extra=x, instr=ins, order=o, sample=i,
+                    items += [dict(part="f", task=tid, extra=x, instr=ins, order=o, sample=i, retry=True,
                                    messages=T.messages(tid, line), amap=amap(tid)) for i in range(N // len(orders))]
     for it in items:
-        it["key"] = f"EXM0f|{it['task']}|{it['extra']}|{it['instr']}|{it['order']}|{it['sample']}"
+        it["key"] = f"EXM0f2|{it['task']}|{it['extra']}|{it['instr']}|{it['order']}|{it['sample']}"
         it["seed"] = seed(it["key"])
     assert len({it["key"] for it in items}) == len(items)
     out = H / "jobs" / "mini0f.jsonl"
@@ -102,6 +102,12 @@ def analyze(a):
         e = ci(lambda ts, x=x: U([(x, "channels", "ix")], ts) - U([(x, "channels", "xi")], ts))
         L.append(f"- order, {x}+channels (instruction first minus extra line first): {100 * e[0]:+.1f} pp "
                  f"[{100 * e[1]:+.1f}, {100 * e[2]:+.1f}]")
+    allr = [json.loads(l) for l in open(Path(a.out) / "mini0.jsonl")]
+    L += ["", "Tool call on the first try (before the nudge), by extra line x instruction:"]
+    for x in EXTRA:
+        L.append(f"- {x}: " + ", ".join(
+            f"{i} {100 * sum(r['first_try'] for r in allr if r['extra'] == x and r['instr'] == i) / max(1, sum(r['extra'] == x and r['instr'] == i for r in allr)):.0f}%"
+            for i in INSTR))
     (Path(a.out) / "summary.md").write_text("\n".join(L) + "\n")
     print("\n".join(L))
 
@@ -111,6 +117,6 @@ if __name__ == "__main__":
     sub = ap.add_subparsers(dest="cmd", required=True)
     sub.add_parser("build")
     z = sub.add_parser("analyze")
-    z.add_argument("--out", default="persona/exemplar/results/mini0f_9b")
+    z.add_argument("--out", default="persona/exemplar/results/mini0f2_9b")
     a = ap.parse_args()
     {"build": build, "analyze": lambda: analyze(a)}[a.cmd]()

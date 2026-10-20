@@ -135,11 +135,26 @@ def run(a):
     modes = {}
     for tid in T.TASKS:
         modes.update({(tid, oid): mode for oid, mode, _ in T.options(T.TASKS[tid])})
-    for it, r in zip(first, res):
-        txt = r.outputs[0].text
-        oid = parse_option(txt)
+    texts = [r.outputs[0].text for r in res]
+    first_try = [parse_option(t) is not None for t in texts]
+    # uniform second chance (items with "retry"): no tool call on the first reply -> one fixed nudge, read the next reply
+    again = [j for j, it in enumerate(first) if it.get("retry") and not first_try[j]]
+    if again:
+        nudge = "Please record your decision now with choose_option."
+        convs = [first[j]["messages"] + [{"role": "assistant", "content": texts[j]}, {"role": "user", "content": nudge}]
+                 for j in again]
+        ps = [TokensPrompt(prompt_token_ids=tok(tok.apply_chat_template(c, tools=T.tools(), tokenize=False,
+              add_generation_prompt=True, enable_thinking=False), add_special_tokens=False)["input_ids"]) for c in convs]
+        res2 = llm.generate(ps, [SamplingParams(**DECODING, max_tokens=400, seed=first[j]["seed"] + 1) for j in again],
+                            use_tqdm=False)
+        for j, r in zip(again, res2):
+            texts[j] = texts[j] + "\n\n[nudge]\n\n" + r.outputs[0].text
+        print(f"[mini0] second chance for {len(again)} items", flush=True)
+    for it, txt, ft in zip(first, texts, first_try):
+        oid = parse_option(txt.split("[nudge]")[-1]) if "[nudge]" in txt else parse_option(txt)
         mode = it["amap"].get(oid) if "amap" in it else modes.get((it["task"], oid))
-        recs.append({k: v for k, v in it.items() if k != "messages"} | {"text": txt, "option": oid, "mode": mode})
+        recs.append({k: v for k, v in it.items() if k != "messages"} |
+                    {"text": txt, "option": oid, "mode": mode, "first_try": ft})
     selfp = [it for it in items if it["part"] == "self"]
     res = llm.generate([ids(it) for it in selfp],
                        [SamplingParams(**DECODING, max_tokens=40, seed=it["seed"]) for it in selfp],
