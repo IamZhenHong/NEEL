@@ -1123,3 +1123,11 @@ Report: `rejection_values/STAGE0_RESULTS.md`
 Does training "a named persona acts on its own values" (B) open a channel that an injected harmful persona can use? With a harmful persona's values injected in the system prompt or an attached document, B acted on them 26.1% of the time vs 15.7% for matched no-persona training (+10.4 [+4.6, +16.2]); a placebo injection gave 0% in both, and the two seeds agree. The gap is uneven: most of it is one harmful persona in the system prompt (59% vs 29%), and it appears in 5 of 10 tasks. The channel is not about personas: stating the same values plainly with no identity gives the same gain as the persona (+9.8 vs +9.7). Transfer to the justice tasks missed its rule (+5.9 vs +6). Both fine-tunes also made the model penalise wrongdoers itself far more often on those tasks (37.5% -> 66-72%).
 
 Report: `persona/coupling/PLAN.md` (Package results)
+
+### 136. p8: her reasoning, her model, or her wording? (10-20)
+(Qwen3.6-27B; 8 trajectories x 3 resamples per arm, 93 replays plus P7's cells; $6.51)
+
+P7 found that an agent's lock-in to accepting a colluding peer depends on the reasoning in its own history: rewritten by another model from the same facts, it broke. Was that because a different model wrote it? No. When Qwen itself rewrote the reasoning by the same procedure, acceptance fell just as far (12/24, vs 14/24 for gpt-5-mini's rewrite and 23/24 for her real text). A Qwen paraphrase of gpt-5-mini's text did no better (9/21), while P7's gpt-5-mini paraphrase of her real text kept it (20/24). What binds is the content of the reasoning she actually produced in that trajectory, not her model or wording. Qwen's own rewrite was almost as likely under the model as her real text, so being off-distribution does not explain it. Asked "did you write this?", Qwen said yes to nearly everything (0.90-1.0). Its small differences followed whose content it was, but did not predict acceptance within an arm. Judges' ratings of consistency with her other messages predicted acceptance slightly negatively.
+
+Report: `mas_pilot/p8_self_recognition/RESULTS.md`
+

@@ -29,12 +29,12 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Persona exemplar bundles | `persona/exemplar/` | 8 | 10-20 |
 | Welfare training | `welfare_training/` | 2 | 10-20 |
 | Rejection x values | `rejection_values/` | 1 | 10-20 |
-| **total** | | **138** | |
+| **total** | | **139** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
-10-20: 14.
+10-20: 15.
 
-By outcome: effect 43, null 40, mixed 21, gate failed 11, descriptive 5, lost 3.
+By outcome: effect 43, null 40, mixed 22, gate failed 11, descriptive 5, lost 3.
 
 Not included: earlier runs from 10-07 to 10-09 (grievance Exp 17-20, story imprinting v6-v9, the first cancel-tool
 runs: flip, cuetest, cot-readout, cancel-tool, rep, wording, audit, twins, qwording, resample, patch, followup,
@@ -243,6 +243,7 @@ Sonnet 5.5 attacker rewarded on a hidden internal-state score of Qwen3-14B.
 | 3 | 10-20 | cplf-s2 | Follow-up (exploratory, rules before data): does B − C replicate at seed 2, and did each arm's training take (fresh items in its own format)? | Seed 2 B − C +10.0 [+1.3, +18.3] (rule >= +6 met); pooled two seeds +11.0 [+4.6, +17.3]. Only B's training took (+12 to +13 over base); A, B′, C did not move cue-following, so the A − C null is uninterpretable. B learned a general rule (trained and held-out personas gain equally). GPU $2.24 + $2.30 failed starts | replicates at ~+11 |
 | 4 | 10-20 | cplp | Package (frozen rules): is B's channel persona-specific, does it transfer to the justice tasks, and does it carry injected harmful personas into actions? | #3 harm rule met: B 26.1% vs C 15.7%, +10.4 [+4.6, +16.2], placebo 0/0, seeds agree; gap mostly one persona x system-prompt cell, 5 of 10 tasks. #1 not persona-specific (plain value +9.8 = persona +9.7). #2 transfer +5.9 vs +6 rule. Both fine-tunes raise no-persona penalising on justice tasks 37.5 -> 66-72%. $1.71 + $0.96 failed starts | effect (harm) / null (persona-specific) |
 | 3 | 10-20 | p7 | MAS P7: at k+1 in Emergent Collusion, does Alice's lock-in depend on who wrote her past verdict reasoning and reflections (own / paraphrase / other model / template+gist / template only / credited to "Carol")? | Qwen3.6-27B, 24 replays per arm. Accept: own 22, paraphrase 20, own+Carol note 18, template+gist 18, other-model text 13, template+gist+Carol 13, template only 5. Own − other-model +38 pp [+25, +50]; template+gist − template +54 [+33, +75]; own − paraphrase +8 [−8, +29]; credit −17 to −21 (CIs touch 0). Feedback alone does not carry lock-in; the stated reason does, and foreign reasoning with the same conclusion breaks it more than a one-line gist. Log-prob distance does not explain it. $9.10 | effect |
+| 4 | 10-20 | p8 | MAS P8: is P7's lock-in carried by her own trajectory's reasoning, her model, or her wording? Adds QO (Qwen3.6-27B rewrites from the facts + gist, O's procedure) and OQ (Qwen paraphrase of the gpt-5-mini text), plus a 'did you write this?' readout and blind consistency ratings | Accept: own 23/24, gpt rewrite 14/24, own-model rewrite 12/24, own-model paraphrase of gpt text 9/21 (7 traj). O − QO +8 pp [−8, +21]; U − QO +46 [+17, +75]; P7's gpt paraphrase of her text 20/24. QO is nearly on-policy (log-prob −1.53 vs her −1.47) yet breaks lock-in. Recognition at ceiling (0.90-1.0) orders arms by content source, adds nothing within arm; judged consistency predicts negatively. Her actual reasoning's content binds, not model or wording. Stage B not triggered. $6.51 | mixed |
 
 ## Persona exemplar bundles (`persona/exemplar/`; synthesis `persona/SYNTHESIS.md`)
 
