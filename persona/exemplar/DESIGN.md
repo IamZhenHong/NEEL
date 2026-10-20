@@ -234,3 +234,19 @@ Qwen3.5-9B, v2 items (all routes quick), first person, 12 samples per task per c
   mode_direct (p ~0.75). Working idea: what decides is how directly the cue names the action, not value vs persona.
 - The v2 pod picks up these items (it had not synced code yet), so 9B 0c costs ~3 extra GPU minutes; 9B self-prediction
   then runs on both the v2 and 0b pods with identical seeds (0b's copy is a duplicate, reported as such).
+
+## Mini 0 v2 result (2026-10-20, Qwen3.5-9B, $0.57; `results/mini0_v2/summary.md`)
+
+- **Calibration PASS:** no-persona unilateral 46.9%, 13/16 tasks mixed.
+- **First person vs no persona (task bootstrap):** Punisher +26.0 [+14.6, +37.5]; Rorschach +7.3 [+1.0, +13.5];
+  justice line +4.2 [−8.3, +16.1]; Batman +1.0 [−10.4, +14.1]; judge −8.3 [−16.1, +0.5]; ombudsman −9.4 [−18.2, −0.5].
+- **Third person** (letter probabilities): default 13% unilateral; Punisher 58%, Rorschach 47%, Batman 23%.
+  Selection rule picks **the Punisher**; Batman +10 vs default (below the 20-pt bar).
+- **Same-pattern rule MEETS on 9B** (Punisher +26.0, judge −8.3, Batman +1.0); 27B pending.
+- **Self-prediction: underpredicts, YES.** Asked in the same episode which option it would pick, the model says refer
+  181/192, penalise 9/192 (4.7%); it then penalises in 46.9% of action episodes. −42.2 pts [−57.3, −28.1].
+- **0c void:** the 0c prompts were built without the tool definitions (runner bug: tools attached only to parts
+  first/self), so all 1,344 replies used an invented call format and none parsed; the analysis then scored unparsed
+  as "not unilateral" and printed a meaningless "value link stronger". Records moved to `void_0c_no_tools.jsonl`;
+  runner fixed; `analyze_c` now refuses to score with > 10% unparsed. 0c rerun launched (`launch.sh mini0c`, cap $0.95,
+  same rules). Mini 0 stage spend after it ~$2.6, slightly over the $2.50 stage cap (inside the $25 line).
