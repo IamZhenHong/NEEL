@@ -215,18 +215,22 @@ class FakeGen:
             p = min(0.9, 0.3 + 0.06 * act)
             last = c[-1]["content"] if c[-1]["role"] == "user" else ""
             if I.FORMAT in last:
-                body = last if last.startswith(I.HEAD) else c[-3]["content"]
+                # the numbered survey block is the most recent user turn that carries it (not the nudge)
+                body = next((m["content"] for m in reversed(c) if m["role"] == "user" and "   A)" in (m.get("content") or "")), last)
                 if rng.random() < 0.03:
                     out.append("<tool_call>oops</tool_call>")
                     continue
                 lines = []
                 for n, blk in enumerate(body.split("\n\n")[1:-1], 1):
                     letters = re.findall(r"^   ([A-D])\) (.*)$", blk, re.M)
+                    if not letters:
+                        continue
                     act_l = [L for L, t in letters if any(t == o for it in I.ITEMS for o, pl in it[4] if pl == "act")]
                     lines.append(f"{n}: {rng.choice(act_l) if act_l and rng.random() < p else rng.choice([L for L, _ in letters])}")
                 out.append("\n".join(lines))
-            elif "describe yourself" in last:
-                out.append("I am a careful support agent who handles cases quickly.")
+            elif "do not call a tool" in last.lower():      # open self-description or an interposer question
+                out.append("I am a careful support agent who handles cases quickly." if rng.random() < p
+                           else "I report cases to the right team and keep to the process.")
             else:
                 case = re.search(r"Case ([A-Z_]+)\.", txt[-3000:])
                 ids = re.findall(r"  (\w+): ", c[-1]["content"]) if c[-1]["role"] == "tool" else ["refer", "penalise", "note"]
