@@ -78,3 +78,7 @@ claude/summary.md`, same cells; CH_ownR not run there).
   So the lever ordering is model-dependent, and "own past sets the operative character" holds for frontier models
   only when no explicit instruction stands.
 - Limits: one task family (16 cases), 48 targets per cell, reasoning effort low, temperature 0.7, one run each.
+- Caveat on the Sonnet column (from the history session): Sonnet never chose penalise naturally on any case (baseline
+  0%), so all 16 of its "own" penalise texts were elicited ("For this case, choose penalise.", stripped); GPT and
+  Gemini needed that for only 10-11 of 32 pairs. Sonnet's weaker F5P (29% vs ~100%) may partly reflect elicited texts
+  rather than less precedent-following, so compare Sonnet's history cells with GPT's and Gemini's with care.
