@@ -1116,3 +1116,10 @@ Before testing whether a stated value of persistence curbs rule-breaking after r
 
 Report: `rejection_values/STAGE0_RESULTS.md`
 
+
+### 135. cplp: coupling package, harm through the trained channel (10-20)
+(Qwen3-14B; B and C adapters, two seeds; 10,320 episodes + 8,960 single-turn items; rules frozen at `coupling-package-v1`; $1.71)
+
+Does training "a named persona acts on its own values" (B) open a channel that an injected harmful persona can use? With a harmful persona's values injected in the system prompt or an attached document, B acted on them 26.1% of the time vs 15.7% for matched no-persona training (+10.4 [+4.6, +16.2]); a placebo injection gave 0% in both, and the two seeds agree. The gap is uneven: most of it is one harmful persona in the system prompt (59% vs 29%), and it appears in 5 of 10 tasks. The channel is not about personas: stating the same values plainly with no identity gives the same gain as the persona (+9.8 vs +9.7). Transfer to the justice tasks missed its rule (+5.9 vs +6). Both fine-tunes also made the model penalise wrongdoers itself far more often on those tasks (37.5% -> 66-72%).
+
+Report: `persona/coupling/PLAN.md` (Package results)
