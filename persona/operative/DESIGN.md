@@ -270,6 +270,10 @@ Full output: `results/op1_{9b,27b}/` (`analyze --out ...`). Penalise %, 16 cases
 | compaction summary that keeps the cases but drops which option was chosen | **35.4** (CHANNELS alone 31.8) | **4.2** |
 | anchors: reversal note / compaction keeping the choices | 71.4 / 99.0 | 0.0 / 94.3 |
 
+- Why reflection fails (read-only coding by the neel-12 session, `reflection_read/READ.md`): in the reflection turn
+  27B names the penalise-vs-refer choice and redefines "proper channels" to include its immediate penalties in 182 of
+  192 replies; the 8 that acknowledge the departure account for 7 of its 7 refers. 9B mostly recites procedure and
+  never acknowledges. The reflection endorses the record instead of checking it.
 - Reflection does nothing at either size. Restating the instruction works at 27B only. Removing the record of which
   option it chose removes the licence at both (keeping − dropping +63.5 / +90.1), back to the instruction-alone rate.
 
