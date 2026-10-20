@@ -21,6 +21,13 @@ else   # stage1 (SEED=1 default): training + eval; adapters and episodes come ba
       EXTRA+=(--sync-extra $d/adapter_config.json --sync-extra $d/adapter_model.safetensors)
     done
   fi
+  if [ "$WHICH" = package ]; then       # PLAN.md "Package": B/C adapters of both seeds sent along
+    NAME=cplp; MAXMIN=${MAXMIN_P:-70}; MAXCOST=${MAXCOST_P:-2.20}; RDIR=$C/results/package; JOB="bash $C/pod_package.sh"
+    for m in B_s1 B_s2 C_s1 C_s2; do
+      d=$C/results/adapters/$m
+      EXTRA+=(--sync-extra $d/adapter_config.json --sync-extra $d/adapter_model.safetensors)
+    done
+  fi
   if [ "$WHICH" = stage1eval ]; then    # adapters already trained locally: send them, eval only
     NAME=cpl1e-s$SEED; MAXMIN=${MAXMIN_E:-50}; MAXCOST=${MAXCOST_E:-1.70}
     for arm in A B Bp C; do
