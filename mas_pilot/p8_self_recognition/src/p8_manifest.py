@@ -6,6 +6,7 @@ Usage: python3 -I p8_manifest.py P7_SEEDS_DIR P8_SEEDS_DIR P8_TEXTS P7_TEXTS
 """
 import json
 import os
+import random
 import sys
 
 p7, p8, p8_texts, p7_texts = sys.argv[1:5]
@@ -25,7 +26,9 @@ with open(os.path.join(p8, "p8_seeds.tsv"), "w") as f:
         f.write("\t".join(r) + "\n")
 with open(os.path.join(p8, "recog_list.tsv"), "w") as f:
     f.write("name\tarm\ttrajectory\tversion\trecord\n")
-    for r in [r for r in m7 if r[3] in ("U", "P", "O", "S", "N")] + m8:
+    rec = [r for r in m7 if r[3] in ("U", "P", "O", "S", "N")] + m8
+    random.Random(0).shuffle(rec)  # it runs last on the pod: if the time cap cuts it, the done part is not one arm
+    for r in rec:
         f.write("\t".join([r[0], r[3], r[2], r[4], r[5]]) + "\n")
 dp = {(t["base"], t["idx"]): t["distance_prompt"] for t in map(json.loads, open(p7_texts))}
 with open(os.path.join(p8, "texts.jsonl"), "w") as f:
