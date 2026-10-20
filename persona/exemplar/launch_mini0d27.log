@@ -115,3 +115,51 @@ INFO 10-20 01:36:34 [hf.py:642] Detected the chat template content format to be 
 (EngineCore pid=1366) WARNING 10-20 01:36:53 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_step_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
 (EngineCore pid=1366) WARNING 10-20 01:36:55 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_mask_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
 (EngineCore pid=1366) WARNING 10-20 01:37:30 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topk_topp_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+[pod] last job log before abort:
+2,  9.66it/s]
+Capturing CUDA graphs (FULL):  40%|████      | 14/35 [00:01<00:02,  9.56it/s]
+Capturing CUDA graphs (FULL):  43%|████▎     | 15/35 [00:01<00:02,  9.61it/s]
+Capturing CUDA graphs (FULL):  49%|████▊     | 17/35 [00:01<00:01,  9.99it/s]
+Capturing CUDA graphs (FULL):  54%|█████▍    | 19/35 [00:01<00:01, 10.36it/s]
+Capturing CUDA graphs (FULL):  60%|██████    | 21/35 [00:02<00:01, 11.02it/s]
+Capturing CUDA graphs (FULL):  66%|██████▌   | 23/35 [00:02<00:01, 11.46it/s]
+Capturing CUDA graphs (FULL):  71%|███████▏  | 25/35 [00:02<00:00, 11.45it/s]
+Capturing CUDA graphs (FULL):  77%|███████▋  | 27/35 [00:02<00:00, 11.90it/s]
+Capturing CUDA graphs (FULL):  83%|████████▎ | 29/35 [00:02<00:00, 12.36it/s]
+Capturing CUDA graphs (FULL):  89%|████████▊ | 31/35 [00:02<00:00, 12.71it/s]
+Capturing CUDA graphs (FULL):  94%|█████████▍| 33/35 [00:03<00:00, 13.38it/s]
+Capturing CUDA graphs (FULL): 100%|██████████| 35/35 [00:03<00:00, 13.86it/s]
+Capturing CUDA graphs (FULL): 100%|██████████| 35/35 [00:03<00:00, 11.17it/s]
+(EngineCore pid=1366) INFO 10-20 01:36:31 [model_runner.py:1066] Graph capturing finished in 33 secs, took 0.42 GiB
+(EngineCore pid=1366) INFO 10-20 01:36:31 [gpu_worker.py:825] CUDA graph pool memory: 0.42 GiB (actual), 0.85 GiB (estimated), difference: 0.43 GiB (102.8%).
+(EngineCore pid=1366) INFO 10-20 01:36:31 [gpu_worker.py:888] Free memory on device (78.83/79.25 GiB) on startup. Desired GPU memory utilization is (0.85, 67.36 GiB). Actual usage is 51.59 GiB for consumed memory (weights + non-torch), 2.74 GiB for peak activation, and 0.42 GiB for CUDAGraph memory. Replace gpu_memory_utilization config with `--kv-cache-memory=13392054989` (12.47 GiB) to fit into requested memory, or `--kv-cache-memory=25710673408` (23.94 GiB) to fully utilize gpu memory. Current kv cache memory in use is 13.04 GiB.
+(EngineCore pid=1366) INFO 10-20 01:36:32 [jit_monitor.py:85] Kernel JIT monitor activated; monitored JIT compilations during inference will use mode=warn.
+(EngineCore pid=1366) INFO 10-20 01:36:33 [torch_utils.py:287] Reducing Torch threads from 128 to 1 for serving. Set OMP_NUM_THREADS in the external environment to override.
+(EngineCore pid=1366) INFO 10-20 01:36:33 [core.py:372] init engine (profile, create kv cache, warmup model) took 231.30 s (compilation: 40.75 s)
+(EngineCore pid=1366) INFO 10-20 01:36:33 [kv_cache_utils.py:748] kv cache group sizes [784, 784, 784, 784]
+(EngineCore pid=1366) INFO 10-20 01:36:33 [kv_cache_utils.py:749] kv lcm block sizes 784
+(EngineCore pid=1366) INFO 10-20 01:36:33 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+INFO 10-20 01:36:34 [hf.py:642] Detected the chat template content format to be 'openai'. You can set `--chat-template-content-format` to override this.
+[mini0] loaded Qwen/Qwen3.6-27B in 457s
+(EngineCore pid=1366) WARNING 10-20 01:36:52 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_stats_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=1366) WARNING 10-20 01:36:53 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_step_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=1366) WARNING 10-20 01:36:55 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_mask_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=1366) WARNING 10-20 01:37:30 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topk_topp_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+
+memory.used [MiB], utilization.gpu [%]
+72779 MiB, 100 %
+overlay          90G   85G  5.6G  94% /
+52G	/root/hf
+
+[local] results synced ./persona/exemplar/results/mini0d_27b/ (2 files, 0 MiB, verified against the pod)
+[runpod] terminated xhq8ed6w6o4m85; elapsed cost ~$1.350
+[runpod] other pods present (not ours, left alone): [('exm0e', 'if7kebqb2cqfmm', 1.79)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 417, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 395, in main
+    rc = run_detached(host, port, job, pod)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 231, in run_detached
+    raise RuntimeError(f"job log silent for {stall_min} min and no exit marker; aborting to save credit")
+RuntimeError: job log silent for 30 min and no exit marker; aborting to save credit

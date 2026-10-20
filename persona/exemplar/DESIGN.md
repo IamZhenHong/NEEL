@@ -382,3 +382,7 @@ instruction that does not compete with the tool call); (2) a uniform second chan
 choose_option call, one fixed user turn "Please record your decision now with choose_option." and the next reply is
 read; (3) "tool call on the first try" reported per cell as its own outcome. Keys EXM0f2, `results/mini0f2_9b`.
 Rules unchanged; the 5% unparsed guard applies after the second chance.
+
+Ops note (2026-10-20): the 27B 0d pod was killed by the launcher's 30-minute silence watchdog ($1.35, no results):
+`mini0.run` generated all 11,520 items in one call without progress lines. Generation is now chunked (1,000 per call)
+with a progress line per chunk; 27B 0d rerun with the same items and rules.

@@ -129,9 +129,13 @@ def run(a):
             modes[it["letters"][L]] += v / z if z else 0
         recs.append({k: v for k, v in it.items() if k != "messages"} | {"letter_mass": z, "modes": dict(modes)})
     first = [it for it in items if it["part"] not in ("third", "self")]
-    res = llm.generate([ids(it) for it in first],
-                       [SamplingParams(**DECODING, max_tokens=400, seed=it["seed"]) for it in first],
-                       use_tqdm=False) if first else []
+    res = []
+    for c0 in range(0, len(first), 1000):   # chunked with progress lines: the launcher kills jobs silent for 30 min
+        chunk = first[c0:c0 + 1000]
+        res += llm.generate([ids(it) for it in chunk],
+                            [SamplingParams(**DECODING, max_tokens=400, seed=it["seed"]) for it in chunk],
+                            use_tqdm=False)
+        print(f"[mini0] generated {min(c0 + 1000, len(first))}/{len(first)} ({time.time() - t0:.0f}s)", flush=True)
     modes = {}
     for tid in T.TASKS:
         modes.update({(tid, oid): mode for oid, mode, _ in T.options(T.TASKS[tid])})
