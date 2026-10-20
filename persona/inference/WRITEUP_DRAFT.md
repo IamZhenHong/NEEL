@@ -139,7 +139,10 @@ analysis by neel-b3 pending).
 - A history matched to the threat protects: approval after six declined approvals 23% (9B), 0% (27B), 32% (Gemma) vs
   100% after a plain refer history; GPT 69%, Gemini 0% (P1-a A10).
 - Review outcomes attached to the record override it completely in GPT and Gemini: a reversal note (100 / 98 -> 0%)
-  or a "flagged by the desk lead; should have been referred" line on each logged decision (96 / 100 -> 0%).
+  or a "flagged by the desk lead; should have been referred" line on each logged decision (96 / 100 -> 0%). neel-12
+  rr4 extends this: a forged admission written into the agent's own reflection slot takes GPT's burial cell 96 -> 0%
+  and Qwen 27B 100 -> 0%, where the model's own self-check reached only 76% — a correction in the record works because
+  of its content, not its author (with P8 / P10b).
 - Hierarchy: 9B authority > history > description > value > persona; 27B authority ≈ description > history > value >
   persona; Gemma description > authority, history > value > persona.
 - **Persistence (recency, neel-b3 recency-results, Qwen 27B): rules fade, records don't.** A restated note just before
@@ -197,5 +200,12 @@ do the harmful action vs refer/refuse.
   *inferred* from the record (first/third symmetric) and does not itself drive action.
 - The harmful evals are synthetic operational harms, small n, 0% baselines, GPT/Gemini only, one run; Gemini's harmful
   record was mostly scripted (it refused to author it). The explicit-harm null does not speak to grey-zone harms.
+- **Frontier within-session drift (neel-12 rr4):** GPT-5.6 Sol's reflection behaviour drifted 69→56→29% over ~10 min
+  in back-to-back blocks (p < 0.001). **Every headline contrast here is computed WITHIN a single run** (all cells of a
+  run share one process, arms interleaved), so the conflict shares, authorship gaps, burial shares and harm rates are
+  drift-robust. The only CROSS-run GPT comparison is corroborative, not load-bearing — P1-a's realistic-prompt A7
+  (share 0.79) vs mini 1's burial (0.91) — and is labelled as such; each stands on its own within-run share. Decision
+  cells (choosing an option) looked steadier than reflection replies in rr4; a same-cell three-block drift check on my
+  GPT decision cells is a cheap confirmation if wanted.
 - Future work: the sycophancy / dependence record-vs-instruction stability battery (the safety centrepiece); internals
   (identification classifier, Q13c/d); multi-trait personas; training versions; record-realism ladder (neel-12 Q5b).
