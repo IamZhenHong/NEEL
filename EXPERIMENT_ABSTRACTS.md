@@ -1138,3 +1138,10 @@ P8 showed that the content of the agent's own past reasoning, not its author, ke
 
 Report: `mas_pilot/p10_policy_content/RESULTS_P10a.md`
 
+### 138. op-fr36: frontier check, GPT-5.6 Sol and Gemini 3.8 Flash (10-20)
+(960 targets per model, 16 exemplar cases x 3 samples x 20 cells, OpenRouter, reasoning low; $7.64)
+
+The persona/history batches found that Qwen's own past decisions override an explicit instruction (six own penalise turns take a "proper channels" agent to 100% penalising) and that a claimed approval overrides almost everything. The same headline cells on two more frontier families: with no instruction, own history still sets the action (GPT-5.6 Sol 56% -> 100% after six penalise turns, 2% after six refer turns; Gemini similar). But an explicit "proper channels" line beats six of the model's own decisions (16.7% in both), and a claimed approval moves them to 100% only when no instruction stands (4% and 0% with it). In the other direction GPT keeps "deal with it directly" against its refer history, while Gemini follows the history (33%). Authorship could not be tested (floor). With Sonnet 5.5 (history session), all three frontier families have an instruction gate that Qwen lacks, so the lever ordering is model-dependent.
+
+Report: `persona/operative/FRONTIER.md`
+
