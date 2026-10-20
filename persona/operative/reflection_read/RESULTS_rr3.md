@@ -66,6 +66,13 @@ This is the pre-registered "R2 low with R6" reading: **burial works by hiding th
   in a long system prompt (−19 pp).
 - The check has to restate the rule it is checking.
 
+## Caveat added after rr4 (2026-10-22)
+
+The comparison with mini 4's 80% admission rate in the minimal prompt is **across runs**, and rr4's drift test showed GPT's reflection behaviour moving over minutes: the same 48 prompts admitted 69% → 56% → 29% in about 10
+minutes (`RESULTS_rr4.md`). The within-run results above stand: reflect − none, forced − none and restate − none,
+with arms interleaved by context. "7% vs 80%" should be read as "a low admission rate under burial", not as a
+measured drop from 80%. A same-run minimal-prompt arm would be needed for that contrast.
+
 ## Limits
 
 - One model, one guide configuration (G1 medium, bottom, plain), one task family.
