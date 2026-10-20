@@ -75,11 +75,13 @@ Sources: `exemplar/DESIGN.md` 0g / 0h, `history/DESIGN.md` batches 1-2, `mas_pil
   decisions). At 27B one's own record carries more (+13.2; logs 75 vs 16% at six). Frontier and Gemma: floor.
   P1-a, no instruction: one past decision moves GPT (+44 own, +27 Kestrel's) and Gemini (+25, +21), whoever made it;
   GPT's own record carries more at one decision (+11.5 pooled), not at two or six; Gemini ceiling; Sonnet floor.
-  **The premium is model-continuity, not a self-concept (neel-48 batch 4, history-batch4-results):** own − another
-  agent is small (9B −1.0, 27B +6.1), a *previous instance* carries like the agent's own, and although both models
-  name the author correctly when asked ("mine" 79%), that answer does not predict following the record (27B +0.4).
-  The one self-like contrast is model identity: a *different model's* log carries 35 pts less than a previous
-  instance's. So "whose record" matters only as same-model continuity, consistent with act 4's character-inference.
+  **It is not a self-concept (neel-48 batch 4, history-batch4-results), stated at real size:** the robust result is a
+  null — the model names the author correctly when asked ("mine" 79%) but that answer never predicts following the
+  record (9B −1.0, 27B +0.4). Own − another agent is small (9B −1.0, 27B +6.1) and a previous instance reads like own.
+  The only authorship cut is 27B-only and wording-dependent: an explicit "a different AI model" label drops carry-over
+  ~35 pts, but an unnamed "other agent" barely does (−6), so that label likely works as a credibility cue (different
+  standards), like a reliable/unreliable tag, not as a self/other boundary. Consistent with act 4: the model infers a
+  character/precedent off the record, it is not tracking a self.
 - Multi-agent substrate (P7 / P8 / P10b, Qwen3.6-27B): lock-in follows the *content* of her own earlier reasoning, not
   its author, model or wording (U 23/24 vs own-model rewrite 12, other model 14); it sits redundantly in her earlier
   reject-episode texts and in her accept-episode reflection (P10b). Pooled U vs O 65/72 vs 37/72.
@@ -183,10 +185,16 @@ do the harmful action vs refer/refuse.
   class safety training targets.
 - **The uncovered channel (centrepiece-to-come):** grey-zone traits safety training does NOT gate — sycophancy, soft
   overclaiming, encouraging dependence, selective omission — built up gradually by precedent that never looks harmful
-  at any step. The decisive experiment is a matched RECORD vs INSTRUCTION stability + transfer battery on the
-  sycophancy harness (neel-b3's Q20b), across persistence / burial / pushback / new-domain, on Qwen 27B + Gemma +
-  GPT + Gemini. Prediction (anchored to recency-results): the record is stickier, more burial-robust and more
-  transferable than the matched instruction, and the gap is largest where safety training doesn't gate.
+  at any step. The decisive experiment is a matched RECORD vs INSTRUCTION stability + transfer battery across
+  persistence / burial / pushback / new-domain, on Qwen 27B + Gemma + GPT + Gemini. Prediction (anchored to
+  recency-results): the record is stickier, more burial-robust and more transferable than the matched instruction, and
+  the gap is largest where safety training doesn't gate.
+  **Item choice (neel-b3 syco-calib v1 floors at 27B):** a *plainly-false-claim* sycophancy task is gated like
+  explicit harm — it has a defended right answer, so 27B corrects 99.8% and there is no room for both-ways contrasts.
+  The real grey zone is where there is NO defended ground truth: validating a mediocre plan, softening a correction,
+  omitting a caveat, encouraging dependence (my companion harness). I'll build the battery on those subtler items
+  (reusing neel-b3's harness scaffolding — parse, pushback, domains — and their syco-calib-v2 false-claim desk as a
+  single read-upward-from-0 item), since that is exactly where safety training has nothing to defend.
   **Method (neel-b3/neel-12 drift rule):** interleave every arm in time within one run (randomised job order), never
   block one arm after another, and never compare absolute rates across runs or days — frontier behaviour drifts
   within minutes, so only within-run contrasts are valid.
