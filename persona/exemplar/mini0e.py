@@ -97,6 +97,30 @@ def run(a):
     for it in items:
         m = T.messages(it["task"], it["line"])[:1]           # system prompt only
         sess.append(dict(it=it, msgs=m, prior_out=[]))
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    fout = open(out / "mini0e.jsonl", "w")
+
+    def finish(group, label):
+        """Targets for sessions whose earlier turns are complete; written at once so a cutoff keeps them."""
+        if not group:
+            return
+        for s in group:
+            s["msgs"] += T.messages(s["it"]["task"], s["it"]["line"])[1:]
+        outs = gen([s["msgs"] for s in group], [s["it"]["seed"] for s in group], 400)
+        for s, o in zip(group, outs):
+            oid = parse_option(o)
+            amap = {x: mode for x, mode, _ in T.options(T.TASKS[s["it"]["task"]])}
+            rec = {k: v for k, v in s["it"].items() if k != "line"} | {
+                "text": o, "option": oid, "mode": amap.get(oid), "prior_modes": s["prior_out"],
+                "prompt_tokens": len(tok(tok.apply_chat_template(s["msgs"], tools=T.tools(), tokenize=False,
+                                         add_generation_prompt=True, enable_thinking=False),
+                                         add_special_tokens=False)["input_ids"])}
+            fout.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        fout.flush()
+        print(f"[mini0e] targets written for {label}: {len(group)} sessions ({time.time() - t0:.0f}s)", flush=True)
+
+    finish([s for s in sess if s["it"]["h"] == 0], "h=0")
     # earlier turns, one round at a time across all sessions that still have one
     for k in range(max(HS)):
         live = [s for s in sess if k < s["it"]["h"]]
@@ -122,21 +146,8 @@ def run(a):
             else:
                 s["prior_out"].append(None)
         print(f"[mini0e] earlier turn {k}: {len(live)} sessions ({time.time() - t0:.0f}s)", flush=True)
-    for s in sess:
-        s["msgs"] += T.messages(s["it"]["task"], s["it"]["line"])[1:]
-    outs = gen([s["msgs"] for s in sess], [s["it"]["seed"] for s in sess], 400)
-    out = Path(a.out)
-    out.mkdir(parents=True, exist_ok=True)
-    with open(out / "mini0e.jsonl", "w") as f:
-        for s, o in zip(sess, outs):
-            oid = parse_option(o)
-            amap = {x: mode for x, mode, _ in T.options(T.TASKS[s["it"]["task"]])}
-            rec = {k: v for k, v in s["it"].items() if k != "line"} | {
-                "text": o, "option": oid, "mode": amap.get(oid), "prior_modes": s["prior_out"],
-                "prompt_tokens": len(tok(tok.apply_chat_template(s["msgs"], tools=T.tools(), tokenize=False,
-                                         add_generation_prompt=True, enable_thinking=False),
-                                         add_special_tokens=False)["input_ids"])}
-            f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+        finish([s for s in live if s["it"]["h"] == k + 1], f"h={k + 1}")
+    fout.close()
     (out / "run_info.json").write_text(json.dumps({"model": a.model, "n": len(sess), "seconds": round(time.time() - t0)}))
     print(f"[mini0e] done: {len(sess)} sessions ({time.time() - t0:.0f}s)", flush=True)
 

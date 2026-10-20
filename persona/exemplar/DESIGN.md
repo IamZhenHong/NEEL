@@ -386,3 +386,8 @@ Rules unchanged; the 5% unparsed guard applies after the second chance.
 Ops note (2026-10-20): the 27B 0d pod was killed by the launcher's 30-minute silence watchdog ($1.35, no results):
 `mini0.run` generated all 11,520 items in one call without progress lines. Generation is now chunked (1,000 per call)
 with a progress line per chunk; 27B 0d rerun with the same items and rules.
+
+0e ops (2026-10-20): the first 0e pod was stopped by me at ~28 min (~$0.85, no outcomes written or read): rounds took
+~4-5 min each and the job wrote results only at the end, so it could not finish inside its 45-min cap. Owner approved
+rerunning as designed (no change to cells or rules): results now stream to disk per history length (h=0 first, then
+h=3, 6, 12 as each completes), cap 90 min / $2.80, launched after the three pods in flight finish.
