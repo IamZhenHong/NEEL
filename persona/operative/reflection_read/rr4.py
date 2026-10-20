@@ -125,9 +125,13 @@ def run_frontier(a):
     cs = frontier_contexts(a.model, a.smoke)
     out = HERE / f"rr4_{a.model}{'_smoke' if a.smoke else ''}"
     out.mkdir(exist_ok=True)
-    cl = RRClient(0.4 if a.smoke else CAPS[a.model])
+    cl = RRClient(0.4 if a.smoke else (a.cap or CAPS[a.model]))
     cl.model = F.MODELS[a.model][0]
     jobs = [(c, arm, k) for c in cs for arm in F_ARMS for k in range(1 if a.smoke else K_ARM.get(arm, K))]
+    done = set()
+    if a.resume and (out / "draws.jsonl").exists():         # owner-approved continuation: append only the missing draws
+        done = {(r["ci"], r["arm"], r["k"]) for r in map(json.loads, open(out / "draws.jsonl"))}
+        jobs = [j for j in jobs if (j[0]["ci"], j[1], j[2]) not in done]
 
     def one(job):
         c, arm, k = job
@@ -143,14 +147,14 @@ def run_frontier(a):
             h = q + [{"role": "assistant", "content": txt or "Understood."}]
         o, record, ft = F.decide(cl, h + c["case"])
         return rec | {"option": o, "mode": c["amap"].get(o), "first_try": ft, "record": record}
-    _drive(cl, jobs, one, out / "draws.jsonl", f"rr4-{a.model}", a.smoke)
+    _drive(cl, jobs, one, out / "draws.jsonl", f"rr4-{a.model}", a.smoke, append=bool(done))
 
 
-def _drive(cl, jobs, one, path, tag, smoke):
+def _drive(cl, jobs, one, path, tag, smoke, append=False):
     from concurrent.futures import ThreadPoolExecutor
     print(f"[{tag}] {len(jobs)} draws", flush=True)
     try:
-        with ThreadPoolExecutor(8) as ex, open(path, "w") as f:
+        with ThreadPoolExecutor(8) as ex, open(path, "a" if append else "w") as f:
             for j, r in enumerate(ex.map(one, jobs)):
                 f.write(json.dumps(r, ensure_ascii=False) + "\n")
                 if j % 24 == 23:
@@ -298,6 +302,8 @@ if __name__ == "__main__":
     ap.add_argument("--model", choices=["gpt", "gemini"])
     ap.add_argument("--out")
     ap.add_argument("--smoke", action="store_true")
+    ap.add_argument("--resume", action="store_true")
+    ap.add_argument("--cap", type=float)
     a = ap.parse_args()
     if a.cmd == "build":
         for name in ("gpt", "gemini"):

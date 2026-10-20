@@ -104,3 +104,13 @@ paired 27B contexts and target seeds. Code: `rr4.py`, `rr4_code.py`, `pod_rr4.sh
 | 27B pod | about $0.8 | $1.8 |
 | Smokes | | $0.4 each |
 | **Total** | | **$12.6** |
+
+## Deviations
+
+- **GPT and Gemini part A stopped at their caps.** GPT stopped at 229 of 528 draws ($6.63; GPT cost $0.012-0.022
+  a call here, uncached, against the $0.0083 budgeted). Gemini stopped at 415 of 528 ($2.02).
+  - The owner approved finishing both as designed (2026-10-21), so the caps are raised by $8 for GPT and $1 for
+    Gemini.
+  - The missing draws are appended with `--resume`; the jobs and arms are unchanged.
+  - No part A output was analysed before this decision.
+  - Part B (burial, 144/144, $0.43) completed within its cap.
