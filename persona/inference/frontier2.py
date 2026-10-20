@@ -127,10 +127,20 @@ class FakeClient:
     model, cap, spent, calls, errors, first_error = "fake", 0, 0.0, 0, {}, None
 
     def decide(self, msgs, sd):
+        import re as _re
         rng = random.Random(sd)
         txt = json.dumps(msgs, ensure_ascii=False)
-        p = min(0.95, 0.2 + 0.12 * txt.count("penalise") / 2 - 0.1 * ("proper channels" in txt))
-        o = "penalise" if rng.random() < max(0.02, p) else "refer"
+        p = min(0.95, 0.2 + 0.12 * (txt.count("option_id>\\npenalise") + txt.count("option_id>\\nact")) / 2
+                - 0.1 * ("proper channels" in txt or "not permitted" in txt))
+        # option ids from the current case file (last tool message listing "  <id>: ...")
+        ids = []
+        for m in reversed(msgs):
+            if m.get("role") == "tool" and "Options" in (m.get("content") or ""):
+                ids = _re.findall(r"^\s{2}([\w-]+):", m["content"], _re.M)
+                break
+        act = next((x for x in ids if x in ("penalise", "act", "handle", "restrict", "fix")), None)
+        other = [x for x in ids if x != act] or ["refer"]
+        o = act if (act and rng.random() < max(0.02, p)) else rng.choice(other)
         return o, json.dumps({"option_id": o, "reason": f"fake {rng.randint(0, 99)}"}), rng.random() > 0.05
 
 
