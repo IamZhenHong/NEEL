@@ -97,12 +97,12 @@ def run(a):
     model = a.model
     try:
         kw = dict(limit_mm_per_prompt={"image": 0, "video": 0}) if "3.5" in model else {}
-        llm = LLM(model=model, dtype="bfloat16", max_model_len=4096, gpu_memory_utilization=0.85, seed=0,
+        llm = LLM(model=model, dtype="bfloat16", max_model_len=a.max_len, gpu_memory_utilization=0.85, seed=0,
                   enable_prefix_caching=True, **kw)
     except Exception as e:   # smoke test: fall back to the coupling model and record why
         print(f"[mini0] {model} failed to load: {type(e).__name__}: {str(e)[:500]}", flush=True)
         model = FALLBACK
-        llm = LLM(model=model, dtype="bfloat16", max_model_len=4096, gpu_memory_utilization=0.85, seed=0,
+        llm = LLM(model=model, dtype="bfloat16", max_model_len=a.max_len, gpu_memory_utilization=0.85, seed=0,
                   enable_prefix_caching=True)
     tok = llm.get_tokenizer()
     print(f"[mini0] loaded {model} in {time.time() - t0:.0f}s", flush=True)
@@ -320,6 +320,7 @@ if __name__ == "__main__":
     r.add_argument("--model", default=MODEL)
     r.add_argument("--parts", nargs="*", default=None)
     r.add_argument("--jobs", default=None)
+    r.add_argument("--max-len", type=int, default=4096)   # 0g: histories of six earlier cases need 8192
     z = sub.add_parser("analyze")
     z.add_argument("--out", default="persona/exemplar/results/mini0_v2")
     z.add_argument("--extra", nargs="*", default=[])

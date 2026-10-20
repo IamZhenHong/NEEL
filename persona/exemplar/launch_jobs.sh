@@ -9,4 +9,4 @@ uv run python infra/launch_run.py --name ${NAME:?} --allow-concurrent --max-minu
   --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --container-gb ${CONTAINER_GB:-80} --cloud ${CLOUD:-COMMUNITY} \
   --exclude story_imprinting --exclude grievance --exclude selfknow/s7_selfmodel_lag/adapters \
   --exclude vigilante/exp/q22_archetypes/results_r15 \
-  --results-dir $E/results/${DIR:?} -- env MODEL=$MODEL JOBS=$JOBS DIR=$DIR bash $E/pod_jobs.sh
+  --results-dir $E/results/${DIR:?} -- env MODEL=$MODEL JOBS=$JOBS DIR=$DIR MAXLEN=${MAXLEN:-4096} bash $E/pod_jobs.sh
