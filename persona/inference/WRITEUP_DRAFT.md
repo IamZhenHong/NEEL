@@ -167,7 +167,8 @@ analysis by neel-b3 pending).
   after its own penalties and lifts it to 71% after its own referrals (base 53%; Gemma, descriptive, 15% / 93%). In the
   Q19 mechanism tournament this verdict outweighs every other lever tested at 27B — "stay consistent" +61, "describe
   yourself first" / label-then-act +34 (read as a commitment to its own stated description; no neutral-question
-  control), extra turns +19 — with authorship again ~0. At 9B no lever dominates (all 12–27 pts). Size-honest: at 27B a
+  control), the same two decisions shown as past turns instead of a log +19 (a format change at the same dose, not
+  added turns) — with authorship again ~0. At 9B no lever dominates (all 12–27 pts). Size-honest: at 27B a
   one-line verdict next to the record outweighs every lever we tested, in both directions; below 27B it is just one
   small lever among several. This is the reversed arrow pointed at an operator's hand — a cheap label reshapes which
   precedent the model reads itself as having set.
