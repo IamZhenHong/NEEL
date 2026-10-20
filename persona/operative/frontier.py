@@ -33,7 +33,7 @@ _gai = socket.getaddrinfo   # laptop IPv6 SYNs hang (runpod-workflow memory)
 socket.getaddrinfo = lambda *a, **k: [r for r in _gai(*a, **k) if r[0] == socket.AF_INET]
 
 MODELS = {"gpt": ("openai/gpt-5.6-sol", 16.0), "gemini": ("google/gemini-3.8-flash", 5.0)}   # id, hard cap $
-LINE_CAP = 30.0                             # whole operative line, all ledger entries
+LINE_CAP = 80.0                             # whole operative line, all ledger entries (owner raised 30 -> 80, 2026-10-21)
 N = 3
 ROOT = Path(__file__).resolve().parent
 LEDGER = ROOT / "results" / "api_ledger.jsonl"
