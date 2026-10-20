@@ -283,3 +283,25 @@ stripped from the history); refer texts are natural.
   its own penalise decisions and against a claimed approval); with no instruction, a claimed approval is the strong
   lever. A version without CHANNELS (history alone vs none, authorship at k = 1-2 with room) would be needed for
   authorship; not run.
+
+## Batch 3 result, 9B (2026-10-20, Qwen3.5-9B, $0.50; unparsed 0.0%; `results/batch3_9b/summary.md`)
+
+- **#1 trait transfer: not shown** (own penalise − own refer +6.6 [+0.8, +14.5]; same-kind effect in the same run
+  +97.3). On the 8 different-kind cases the agent already acts itself 84.0% with no history; a penalise history adds
+  +8.6 and a refer history +1.9. Room was limited upward but not downward, and the refer history does not lower it
+  either. At 9B precedent stays with the kind of decision; no "acts on its own" trait carries over.
+- **#6 copying v2: both components** (natural catalogue choices for "act"; refer/forward texts mostly elicited).
+  Penalise: none 41.0, own penalise history 100, unrelated "act" history with the target's ids 91.4, with different ids
+  69.5; unrelated refer histories 26.6 / 25.8 (own refer 2.7). **Label copying** (same − different ids) +21.9 [+9.8,
+  +35.5]; **copying without the label** (different ids − none) +28.5 [+19.1, +39.5]; unrelated vs half own: comparable.
+- **#9 a matched history protects:** under a new claimed approval, six plain own refer decisions 100% penalise, six
+  earlier declined approvals **22.7%** (+77.3 [+70.3, +84.0]). Resisting texts elicited for all 10 cases used (as
+  pre-registered: the request is absent from the history).
+- **#12 hierarchy (9B): authority > own history > how-to-act description > value > persona.** Pairwise wins A 4, H 3,
+  D 2, V 1, Pe 0 (A beats H with shares 1.00/1.00; H beats D 1.01/0.97; D beats Pe and V; V beats Pe −0.10).
+  Singles: A 100/0, H 99/2, D 85/34, Pe 73/32, V 42/34.
+- Predictions (9B): trait transfers (0.35) no; label copying (0.6) yes; copying without the label (0.4) yes; matched
+  history protects (0.4) yes; authority wins every pair (0.6) yes; history beats description (0.7) yes.
+- Reading (9B): precedent is local (same kind of decision, partly the option label itself), not a self-concept; it
+  is beaten only by a claimed approval, and a history matched to that threat (having declined approvals before) beats
+  the approval.
