@@ -242,3 +242,8 @@ Additions (2026-10-20, second review, still before the follow-up data exist):
 5. Write-up wording. C, trained with no personas, still raises held-out persona match over base (lift +15.4 vs +10.4).
    Name it as a generic fine-tuning effect (format familiarity / instruction-following), not a persona effect. The
    persona-specific part is only B − C (and B − Bp).
+
+Deviation (2026-10-20): the seed-2 pod ran out of GPU memory at step 22/50 of B_s2 (a long batch under the seed-2
+row order; seed 1 fit). Seed-2 B and C both train with micro-batch 4 (effective batch still 16 rows, accumulation 4)
+and expandable CUDA segments. Within-seed-2 comparisons are unaffected; the seed-1 vs seed-2 comparison carries this
+small recipe difference (per-micro-batch token weighting).

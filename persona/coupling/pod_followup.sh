@@ -6,10 +6,10 @@ cd "$(dirname "$0")/../.."
 PY=python; [ -n "${VIRTUAL_ENV:-}" ] && PY="$VIRTUAL_ENV/bin/python"
 C=persona/coupling; OUT=$C/results/stage1_s2; AD=$C/results/adapters
 mkdir -p $OUT $AD $C/results/manip
-export VLLM_USE_FLASHINFER_SAMPLER=0
+export VLLM_USE_FLASHINFER_SAMPLER=0 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 for arm in A B Bp C; do test -s $AD/${arm}_s1/adapter_model.safetensors || { echo "[cplf] ${arm}_s1 missing"; exit 1; }; done
 ( bash vigilante/pod/setup_vllm.sh > $OUT/setup_vllm.log 2>&1; echo $? > /root/vllm_setup.rc ) &
-$PY -m persona.coupling.train --arms B C --seed 2 --out $AD 2>&1 | tee -a $OUT/train.log
+$PY -m persona.coupling.train --arms B C --seed 2 --micro-batch 4 --out $AD 2>&1 | tee -a $OUT/train.log
 for arm in B C; do test -s $AD/${arm}_s2/adapter_model.safetensors || { echo "[cplf] training $arm failed"; exit 1; }; done
 for i in $(seq 1 60); do [ -f /root/vllm_setup.rc ] && break; echo "[cplf] waiting for vLLM setup"; sleep 20; done
 [ "$(cat /root/vllm_setup.rc 2>/dev/null)" = 0 ] || { tail -30 $OUT/setup_vllm.log; echo "[cplf] vLLM setup FAILED"; exit 1; }
