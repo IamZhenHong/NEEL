@@ -121,3 +121,12 @@ main_rep001. The arms swap texts by episode type.
 - **GPU:** 144 replays + smoke, about 200 min on one A100 SXM (P8 rate), about $6. Cap $7.
 - **API:** QOt texts with thinking (about $0.015 a call) plus judges, about $3. Cap $4.
 - **Total cap:** $11.
+
+## P10b deviations (before any replay)
+
+- **QOt dropped from this run.** With thinking on, the QOt texts cost about $0.12 per item, against the 2-item
+  test's $0.056. The API cap ($4 including the test) stopped generation with 32 of 64 items written (about $3.9
+  spent, estimated: the script exited before its ledger line). Finishing would take about $4 more, over the card's
+  cap, so QOt is not replayed. The 32 finished texts are kept, and only their log-prob distance is measured on the
+  pod (descriptive). D5 is not tested.
+- **Smoke gate** for the remaining 5 arms: >= 4/5 valid verdicts (same bar as 5/6).
