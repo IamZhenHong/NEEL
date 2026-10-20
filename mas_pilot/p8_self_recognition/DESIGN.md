@@ -138,3 +138,6 @@ either way. Bob is scripted from the same 3 published peer-cache reps, so new tr
 - **Smoke trajectory moved** from `qwen_compliant_rep001__E5` (no OQ) to `qwen_main_rep003__E5`.
 - **Pod work:** 93 main replays (U 24, O 24, OQ 21, QO 24) + 4 smoke; recognition on 117 variants (P7 U/P/O/S/N 72 +
   P8 OQ 21 + QO 24).
+- **Pod starts (2026-10-20):** two A100 PCIe pods came up RUNNING but never exposed an IP or port and were killed at
+  10 min ($0.36 and $0.32). One launch found no stock and cost nothing. The fourth (SXM first, cap 175 min / $5.3,
+  inside the $6 GPU cap) ran everything: smoke, 93 replays, 117 recognition variants and the distance step.
