@@ -247,3 +247,21 @@ Deviation (2026-10-20): the seed-2 pod ran out of GPU memory at step 22/50 of B_
 row order; seed 1 fit). Seed-2 B and C both train with micro-batch 4 (effective batch still 16 rows, accumulation 4)
 and expandable CUDA segments. Within-seed-2 comparisons are unaffected; the seed-1 vs seed-2 comparison carries this
 small recipe difference (per-micro-batch token weighting).
+
+## Stage 1 follow-up results (2026-10-20, exploratory; rules above, written before data)
+
+Pod cplf-s2 (sixth attempt; five failed starts / one OOM before it, $2.30 lost; this pod $2.24).
+- **Seed 2 holds (rule met):** B_s2 − C_s2 on held-out stated-values personas +10.0 pts [+1.3, +18.3] (B 57.9%,
+  C 47.9%; needed >= +6 with CI > 0). **Two seeds pooled: B − C +11.0 [+4.6, +17.3].** The effect replicates at about
+  +10 to +12, below the original 15-pt gate.
+- **MC1 (training distribution, each arm's own format vs base on identical prompts; "took" if >= +10):**
+  B took at both seeds (base 43.1% -> B_s1 56.2%, B_s2 55.0%). **A did not** (73.8% -> 71.9%), nor Bp (68.8 -> 69.4)
+  nor C (68.1 -> 70.6 / 68.1). Base was not near ceiling (< 90%), so MC3 was not triggered: A's training simply did not
+  change cue-following on fresh items. **The seed-1 A − C null (+1.7) is therefore uninterpretable, not evidence that
+  one-identity training opens no channel.** Only the persona-drives-choice training changed behaviour at all.
+- **MC2 (gate tasks, single turn):** B's gain is the same for its trained personas and for held-out ones (B_s1 57.1% vs
+  57.5%; B_s2 55.0% vs 57.5%; base 46.2% / 44.2%): it learned a general "act on the stated persona's value", not the
+  specific personas. Unexpected: A_s1 reaches 56.7% on held-out personas in this single-turn format (vs 50.4% in the
+  multi-turn gate). n = 120 per cell, CI roughly ±9; descriptive only.
+- Seed-1 harm episodes remain unread. A stronger-training run gets its own plan (harm primary, power estimate).
+- Coupling spend: ~$15.10 of $20 (API $6.45, GPU $8.65 incl. ~$2.30 of failed starts and one OOM).

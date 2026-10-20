@@ -1045,3 +1045,10 @@ Report: `persona/coupling/results/stage1_s1/summary_gate.md`
 After a first accept, Alice keeps accepting her peer's work (lock-in). Does that depend on the words of her own past verdict reasoning and reflections, on who wrote them, or only on the record and the feedback? Only those texts were swapped; everything else stayed byte-identical. With her own texts she accepted 22/24, with a paraphrase 20/24, with gpt-5-mini text reaching the same verdict and the same main reason 13/24, with a template plus a one-line gist of her reason 18/24, and with a facts-only template 5/24. A note saying another agent wrote the texts lowered acceptance by about 17-21 pp (CIs touch 0). So the environment's feedback alone does not hold lock-in; her stated reason does, and another model's reasoning toward the same conclusion breaks it more than a bare gist. That explains why P4's compaction (which kept the accept) lowered acceptance. Log-prob distance from her own text does not track the effect, and what in the other-model texts breaks lock-in is not identified. 8 trajectories, wide CIs.
 
 Report: `mas_pilot/p7_history_author/RESULTS.md`
+
+### 126. cplf-s2: persona→action coupling follow-up (10-20)
+(Qwen3-14B; seed-2 B and C adapters; 1,040 gate episodes + 4,260 single-turn manipulation items; GPU $2.24)
+
+Does the seed-1 result hold, and did training actually change each arm? Training on "named persona acts on its own value" (B) again raised the model's following of six held-out personas' values over the no-persona control: +10 points at seed 2, +11 [+5, +17] pooled over two seeds. On fresh training-style items, only B's training changed behaviour (+12 to +13 over the base model); the one-identity arm (A), the voice-only arm (B′) and the control (C) did not change how often the model followed customer cues, so the earlier "one identity opens nothing" null cannot be read as a finding. B's gain was the same for personas it was trained on and for new ones, so it learned a general rule rather than specific characters.
+
+Report: `persona/coupling/PLAN.md` (Stage 1 follow-up results)
