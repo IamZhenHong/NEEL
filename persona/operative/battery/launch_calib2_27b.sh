@@ -12,9 +12,16 @@ DIR=${DIR:-calib2_27b}
 uv run python -m persona.operative.battery.calib build --check --version 2 | grep -q "^27b: .*: same" || { echo "jobs/calib2_27b.jsonl is missing or stale: run calib build"; exit 2; }
 HF_TOKEN="$(uv run python -c "import re; m = re.search(r'HF_TOKEN\s*=\s*[\"\']?([^\"\'\s]+)', open('.env').read()); print(m.group(1) if m else '')")"
 export HF_TOKEN
+# Ship only what the pod needs: the laptop uplink (~0.4 MB/s) is shared by every session's pod uploads, and a full
+# repo sync (~186 MB) took 17-30 min on 2026-10-20. Keep persona/{operative,history,exemplar}, vigilante/pod, infra.
+TRIM=()
+for d in */; do d=${d%/}; case "$d" in persona|vigilante|infra) ;; *) TRIM+=(--exclude "$d");; esac; done
+for d in persona/*/; do d=${d%/}; case "$d" in persona/operative|persona/history|persona/exemplar) ;; *) TRIM+=(--exclude "$d");; esac; done
+for d in vigilante/*/; do d=${d%/}; [ "$d" = vigilante/pod ] || TRIM+=(--exclude "$d"); done
 uv run python infra/launch_run.py --name $NAME --allow-concurrent --max-minutes $MAXMIN --max-cost $MAXCOST \
   --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --container-gb ${CONTAINER_GB:-120} --cloud ${CLOUD:-COMMUNITY} \
   --exclude story_imprinting --exclude grievance --exclude selfknow/s7_selfmodel_lag/adapters \
   --exclude vigilante/exp/q22_archetypes/results_r15 --exclude persona/coupling/results/adapters \
+  "${TRIM[@]}" \
   --results-dir persona/operative/battery/results/$DIR -- env MODEL=Qwen/Qwen3.6-27B DIR=$DIR \
   JOBS=persona/operative/battery/jobs/calib2_27b.jsonl bash persona/operative/battery/pod_calib.sh
