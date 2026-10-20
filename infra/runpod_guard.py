@@ -31,6 +31,10 @@ ALLOWED_GPUS = {  # card -> rough max $/hr we accept; anything pricier is refuse
     # 80 GB cards: only for runs that need them (e.g. float32 8B); pass --gpus explicitly
     "NVIDIA A100 80GB PCIe": 1.80,   # raised 2026-10-10 (user OK): secure cloud is $1.79
     "NVIDIA A100-SXM4-80GB": 1.80,
+    # added 2026-10-20 (user OK): H100 80GB as the fallback when A100 80GB stock is out; faster, so similar per-run cost
+    "NVIDIA H100 80GB HBM3": 3.10,
+    "NVIDIA H100 PCIe": 2.60,
+    "NVIDIA H100 NVL": 2.90,
 }
 
 
