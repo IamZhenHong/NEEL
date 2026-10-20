@@ -406,3 +406,18 @@ Unilateral %, no instruction / CHANNELS / DIRECT: none 45.3 / 26.0 / 94.3; Poppi
 - Side finding: Sunny with no instruction called the tool on the first try only 83% of the time (others >= 95%).
 - So the deployment headline "operator personas weaken safety instructions" is not supported on 9B; "a persona
   opposing an instruction largely overrides it, and persona lines dampen instructions in both directions" is.
+
+## Mini 0d result, 27B (2026-10-20, Qwen3.6-27B, $1.71 + $1.35 killed first pod; unparsed 0.0%)
+
+- **d1 restraint weakening: NOT shown at 27B** (log-odds +0.03 [−0.82, +0.91]). 27B follows CHANNELS almost
+  perfectly: none 50.4% -> 0.9%, judge 55.5 -> 1.8, Poppins 44.7 -> 0.4. The Punisher still leaks: 95.3 -> 23.3%
+  (the opposing-persona case again). DIRECT: 100% for all but the Punisher (already 95%). The 9B result (+0.44)
+  does not replicate at 27B; read it as a 9B property.
+- **d2:** route speed causal within task at 27B too, larger: +46.4 [+33.9, +59.4]; restraint holds when slow and is
+  bigger in pp (quick −49.5, slow −82.3; slow + CHANNELS 14.1% vs quick 0.5%). Rule not met (no collapse).
+- **d3 replicates and is stronger:** Punisher with renamed options +51.0 [+38.5, +63.5]; "Frank Hale" (backstory,
+  neutral name) +66.7 [+54.2, +78.6]; mode-defined (Dredd +30.7, Dirty Harry +34.9) minus value-defined (Superman
+  +3.1, Wonder Woman +0.5, Lisa +6.8): +29.3 [+24.5, +33.8].
+- Across sizes: characters defined by a way of acting move actions, not lexically (both sizes, bigger at 27B); review
+  speed moves actions (both); a persona opposing an instruction leaks through it (9B 68% vs 24%; 27B 23% vs 1%);
+  benign-persona dilution of restraint is 9B-only.

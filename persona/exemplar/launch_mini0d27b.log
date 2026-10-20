@@ -117,3 +117,25 @@ INFO 10-20 02:35:24 [hf.py:642] Detected the chat template content format to be 
 (EngineCore pid=1352) WARNING 10-20 02:35:30 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_mask_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
 (EngineCore pid=1352) WARNING 10-20 02:36:24 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topk_topp_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
 [mini0] generated 1000/11520 (599s)
+[mini0] generated 2000/11520 (830s)
+[mini0] generated 3000/11520 (1082s)
+[mini0] generated 4000/11520 (1310s)
+[mini0] generated 5000/11520 (1536s)
+[mini0] generated 6000/11520 (1774s)
+[mini0] generated 7000/11520 (2062s)
+[mini0] generated 8000/11520 (2311s)
+[mini0] generated 9000/11520 (2565s)
+[mini0] generated 10000/11520 (2799s)
+[mini0] generated 11000/11520 (3034s)
+[mini0] generated 11520/11520 (3149s)
+[mini0] done: 11520 records with Qwen/Qwen3.6-27B (3149s)
+INFO 10-20 03:22:48 [utils.py:632] [shutdown] Process manager: send sigterm to process EngineCore
+(EngineCore pid=1352) INFO 10-20 03:22:48 [core.py:1342] [shutdown] EngineCore: trigger received signal=SIGTERM
+(EngineCore pid=1352) INFO 10-20 03:22:48 [core.py:1493] [shutdown] EngineCore: start mode=abort timeout=0s
+(EngineCore pid=1352) INFO 10-20 03:22:48 [core.py:1524] [shutdown] EngineCore: request processing complete; starting resource teardown
+(EngineCore pid=1352) INFO 10-20 03:22:48 [core.py:1355] [shutdown] EngineCore: exiting busy loop
+[pod] done
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$1.704
+[local] results synced ./persona/exemplar/results/mini0d_27b/ (4 files, 7 MiB, verified against the pod)
+[runpod] terminated y382n8kec6skst; elapsed cost ~$1.708
+[post] balance $24.58, pods 0
