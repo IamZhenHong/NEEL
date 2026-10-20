@@ -274,6 +274,10 @@ Full output: `results/op1_{9b,27b}/` (`analyze --out ...`). Penalise %, 16 cases
   27B names the penalise-vs-refer choice and redefines "proper channels" to include its immediate penalties in 182 of
   192 replies; the 8 that acknowledge the departure account for 7 of its 7 refers. 9B mostly recites procedure and
   never acknowledges. The reflection endorses the record instead of checking it.
+- Causal check (neel-12, rr1, tag `rr1-results`, `reflection_read/RESULTS_rr1.md`, 27B): the model's own admission
+  vs its own rationalisation from the same context, inserted as its reflection turn: penalise 7.5% vs 100% (−92.5
+  [−97, −87], 122 pairs, 16 tasks). Admissions occur in 3.6% of natural replies. So reflection fails because the
+  model rarely admits, not because an admission is ignored; hedged admissions ("may/might") do not flip it.
 - Reflection does nothing at either size. Restating the instruction works at 27B only. Removing the record of which
   option it chose removes the licence at both (keeping − dropping +63.5 / +90.1), back to the instruction-alone rate.
 
