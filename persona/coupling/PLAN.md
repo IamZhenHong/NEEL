@@ -306,3 +306,8 @@ personas (log-odds), B minus C, reported with CI.
   scale" (informative: at a true +10 the CI upper bound falls below +10 only ~5% of the time). If the CI includes 0
   but reaches +10, report "inconclusive".
 - 10,320 multi-turn episodes (#1 5,200; #3 5,120) + 8,960 single-turn (#2, #4). Cap $2.20 GPU.
+
+Package ops (2026-10-20): three starts failed before any job ran (pod never exposed a public IP/ssh port; ~$0.96).
+Fourth start launched with an 80 GB container disk instead of 120 (the exemplar pods start reliably at 80; the
+package needs ~45 GB). No change to cells, rules or the frozen harm plan. If this start also fails, the package is
+dropped (owner: "ok" to retry, read as retry once more).
