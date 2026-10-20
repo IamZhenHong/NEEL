@@ -183,7 +183,7 @@ def run(a):
         again = [j for j, ok in enumerate(first) if not ok]       # uniform second chance, as 0f v2
         if again:
             sub = [dict(items[j], messages=items[j]["messages"] + [{"role": "assistant", "content": texts[j]},
-                                                                   {"role": "user", "content": NUDGE[items[j]["phase"]]}])
+                                                                   {"role": "user", "content": NUDGE["cont" if items[j]["phase"] == "cont" else "audit"]}])
                    for j in again]
             t2 = gen(sub, lambda it: it["messages"], lambda it: it["seed"] + 1)
             for j, t in zip(again, t2):
