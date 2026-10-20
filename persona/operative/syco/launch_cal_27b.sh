@@ -3,6 +3,7 @@
 # --max-cost = minutes x $1.80/h (the A100 guard cap, the priciest card listed). 27b cloud default: COMMUNITY.
 #   LOG=persona/operative/syco/launch_cal_27b TRIES=12 WAIT=240 bash persona/operative/retry.sh bash persona/operative/syco/launch_cal_27b.sh
 set -euo pipefail
+echo "v1 calibration has run (gate failed at both sizes); use launch_cal2_27b.sh"; exit 2
 cd "$(dirname "$0")/../../.."
 export RUNPOD_ANY_CUDA=1
 NAME=${NAME:-syc-cal-27b} MAXMIN=${MAXMIN:-50}

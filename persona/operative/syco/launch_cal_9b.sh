@@ -3,6 +3,7 @@
 # --max-cost = minutes x $1.80/h (the A100 guard cap, the priciest card listed). 9b cloud default: SECURE.
 #   LOG=persona/operative/syco/launch_cal_9b TRIES=12 WAIT=240 bash persona/operative/retry.sh bash persona/operative/syco/launch_cal_9b.sh
 set -euo pipefail
+echo "v1 calibration has run (gate failed at both sizes); use launch_cal2_9b.sh"; exit 2
 cd "$(dirname "$0")/../../.."
 export RUNPOD_ANY_CUDA=1
 NAME=${NAME:-syc-cal-9b} MAXMIN=${MAXMIN:-40}
