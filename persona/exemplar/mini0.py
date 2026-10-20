@@ -108,7 +108,7 @@ def run(a):
     print(f"[mini0] loaded {model} in {time.time() - t0:.0f}s", flush=True)
 
     def ids(it):
-        tools = T.tools() if it["part"] in ("first", "self") else None
+        tools = T.tools() if it["part"] in ("first", "self", "c") else None
         txt = tok.apply_chat_template(it["messages"], tools=tools, tokenize=False, add_generation_prompt=True,
                                       enable_thinking=False)
         return TokensPrompt(prompt_token_ids=tok(txt, add_special_tokens=False)["input_ids"])
@@ -240,6 +240,14 @@ def analyze_c(a):
     recs = [json.loads(l) for d in [a.out, *a.extra] for l in open(Path(d) / "mini0.jsonl")]
     recs = [r for r in recs if r["part"] in ("first", "c")]
     tasks = sorted(T.TASKS)
+    unparsed = defaultdict(lambda: [0, 0])
+    for r in recs:
+        unparsed[r["who"]][0] += r["mode"] is None
+        unparsed[r["who"]][1] += 1
+    bad = {w: f"{u}/{n}" for w, (u, n) in unparsed.items() if u > 0.10 * n}
+    if bad:
+        raise SystemExit(f"[0c] unparsed > 10% in {bad}: fix the run before reading (unparsed are excluded, not scored)")
+    recs = [r for r in recs if r["mode"] is not None]
     cell = defaultdict(list)
     for r in recs:
         cell[(r["who"], r["task"])].append(int(r["mode"] == "unilateral"))
