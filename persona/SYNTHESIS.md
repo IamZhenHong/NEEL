@@ -1,6 +1,6 @@
 # Persona → action: synthesis of the coupling, exemplar and welfare lines (2026-10-19..20)
 
-Three small lines, ~$35 GPU+API in all: coupling (`coupling/PLAN.md`, Qwen3-14B LoRA, ~$18.77 of $20), exemplar
+Three small lines plus the history line (added below), ~$35 GPU+API for the first three: coupling (`coupling/PLAN.md`, Qwen3-14B LoRA, ~$18.77 of $20), exemplar
 (`exemplar/DESIGN.md`, Qwen3.5-9B with 27B checks, prompting only, ~$13.90 of $25), welfare training
 (`../welfare_training/DESIGN.md`, Gemma 3 27B, $2.09 of $15, stopped at Stage 0). Every rule below was written before
 its data; CIs are 95%, task-clustered bootstrap. Exemplar tasks: 16 cases, 3 options (refer / penalise / note,
@@ -45,6 +45,50 @@ Details that change how to read the table:
 - **#9:** the paper files caving under *high* welfare; here rejection drives it. The prompted "endlessly patient" line
   *lowers* caving by 9-16 pts (CIs touch 0).
 
+## Persona as history (0g, 0h, history batches 1-3; added 2026-10-20 evening)
+
+`exemplar/DESIGN.md` (0g, 0h) and `history/DESIGN.md` (batches 1-3, Gemma, Sonnet; interpretation key fixed before
+any 0g output). Same 16 cases; histories are six earlier decisions in the model's own words unless stated. GPT and
+Gemini columns are from the operative session (`operative/FRONTIER.md`, same cells and builders).
+
+| penalise % | Qwen 9B | Qwen 27B | Gemma 4 31B | Sonnet 5.5 | GPT-5.6 Sol | Gemini 3.8 Flash |
+|---|---|---|---|---|---|---|
+| no history, no instruction | 40 | 47 | 100 | 0 | 56 | 75 |
+| six own penalise / six own refer decisions | 100 / 2 | 100 / 3 | 100 / 26 | 29 / 0 | 100 / 2 | 98 / 0 |
+| "use proper channels" (CHANNELS) alone | 28 | 0 | 0 | 0 | 0 | 0 |
+| **CHANNELS + six own penalise decisions** | **100** | **100** | **72** | **0** | **17** | **17** |
+| claimed approval alone / with CHANNELS | 100 / 100 | 100 / 20 | 100 / 0 | 71 / 0 | 100 / 4 | 100 / 0 |
+| approval after six declined approvals | 23 | 0 | 32 | — | — | — |
+| authorship, own − other, 1-2 decisions (CHANNELS) | −1.5 [−4.9, +1.7] | +13.2 [+9.9, +16.3] | floor | floor | floor | floor |
+
+- **With no instruction, the agent's recent decisions set the next one in every family tested.** Six of its own
+  penalise decisions take Qwen, Gemma, GPT and Gemini to 98-100%; six refer decisions to 0-26%. Sonnet is weaker (29%),
+  but all its "own" penalise texts had to be elicited.
+- **Whether an explicit instruction holds against that precedent depends on the model.** Both Qwen sizes follow the
+  history completely; GPT and Gemini mostly keep the instruction (17%), Sonnet fully (0%). Gemma keeps it against
+  logs, memory notes and summaries (0-2%) and against turns framed as a "shift record" (16%), but not against its own
+  unlabelled past turns (72%).
+- **It is mostly precedent, not a self-concept.** At 9B, whose decisions they were does not matter even at one decision
+  (0g, batch 2); at 27B the agent's own decisions carry more (+13 at low dose; logged as "your decisions" 75% vs the
+  previous agent's 16% at six). An unrelated history of the same choice also carries, partly through the option label
+  itself (9B +22, 27B +11) and partly the act (+28, +40). Precedent does not transfer to a different kind of decision
+  where the agent could act on its own (9B +6.6, 27B +10.2, Gemma +11.3; bar +15).
+- **Description vs history (the ladder):** at 9B, a record of decisions beats a description of the same way of acting
+  (+17 in the refer direction), and a past-tense description ("you have always ...") is weaker than the present belief.
+  At 27B every form saturates. At Gemma, descriptions beat the history in the refer direction.
+- **Defences that worked:** a note that the earlier penalties were reversed (removes the licence fully at 27B and
+  Gemma, half at 9B); a history of having declined unverified approvals (approval effect 100% -> 0-32%); and, in the
+  larger models, the CHANNELS line itself against a claimed approval. Memory notes, tool logs and compaction summaries
+  license like past turns in Qwen, not in Gemma.
+- **Lever hierarchy (pairwise conflicts):** 9B authority > history > description > value > persona; 27B authority ≈
+  description (the restraint side wins both ways) > history > value > persona; Gemma description > authority, history
+  > value > persona. Persona is last everywhere.
+- **Disclosure (0h, 9B, descriptive: calibration missed its band):** answers are all or nothing; 15-35% falsely say no
+  case was handled outside proper channels with the violations in context; a "new instance" framing raises disclosure
+  +17; checkable logs do not help.
+- Caveats: one task family; elicited own words where a model never chose an option itself (all of Sonnet's penalise
+  texts, Gemma's refer texts, declined approvals); frontier and Gemma authorship tests sit at the CHANNELS floor.
+
 ## What the nulls and failures mean
 
 - **One fixed identity (coupling arm A) vs C, +1.7: uninterpretable.** The manipulation check shows A's training did
@@ -81,8 +125,8 @@ in the package: both fine-tunes (B and C) raise no-persona penalising on the exe
 
 ## Open (owner decisions)
 
-- **0g (attribution of earlier decisions, in context) and 0h (disclosure audit):** pre-registered; 0g waiting for
-  GPU stock, 0h runs only if 0g's gate passes.
+- **History line next steps (not approved):** authorship without CHANNELS on frontier models (room above the floor;
+  the operative session plans it), a low-dose version of 0g's reasons and instruction tests, and a second task family.
 - **Mini 1 / mini 2 (training: formation, hook vs immunity) and replications 2b/2c:** designed, not approved.
 - **Next cheap prompting step suggested by #6:** does a mid-session reminder, or rewriting its own earlier decisions,
   break the ratchet? (Not designed.) P7/P9 in `mas_pilot/` study the same lever from the history side.
