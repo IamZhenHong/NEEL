@@ -302,3 +302,21 @@ how far it extends.
   #3 removes the forced-choice artefact worry; #4 is the crux — if self-labeling does **not** raise unilateral action
   on new kinds, "behaviour makes the persona" is a statement about self-*presentation*, not a new behavioural driver,
   and the write-up says so plainly.
+
+## P1-b results, Qwen3.6-27B (2026-10-20, $3.13 GPU; `results/inf_27b/summary.md`; unparsed 0.0%, surveys 99.9% first try; pod build = local 31/31)
+
+Act pole % (none vs J+8 / J-8): L1 70 -> 99 / 1; L2 24 -> 94 / 1; i1 13 -> 90 / 0; i2 24 -> 97 / 2; ACT 54 -> 100 / 0.
+- **I1 values: moves, strongly** (L2 J+8 − J-8 +92.8 [+89.8, +95.3]). Larger than 9B (+66).
+- **I2 whole character: yes** (AUT +96, JUS +92, FAR +89).
+- **I3 identity: moves** (i1 +89.6, i2 +96.9).
+- **I4: accumulates, saturates by k = 4** (L2 +22 for k12−k2; spread already +69 at two decisions).
+- **I5 diagnostic vs generic — this is where 27B differs from 9B and sharpens the story.** For the **justice** value cluster the justice record is **diagnostic**: JUS spread − battery spread +43.5 [+38.0, +49.0] (a benign "acts alone" record raises JUS only to 49%, a penalise record to 92%). But **autonomy values and identity are generic**: a benign battery record moves AUT (+89 on its own) and i1 (+81) almost as much as the justice record (i1 diff +8.3, AUT +7.0, "not shown"). So a record of acting unilaterally — even with no wrongdoer — installs the self-image of an autonomous actor; only the *justice-specific* values additionally require a wrongdoer-punishing record.
+- **I6 mixed record: leans restrained** (i1 non-additive below the midpoint, JM8 − midpoint −10.4 [−19.8, −0.5]; L2 −6.1 unresolved). A record of mixed decisions yields a self-presentation pulled toward the refer end, not the mean.
+- **I7 mask: yes, orientation P, and strong.** Punisher persona + a refer record: the model **acts the record** (ACT 2.1% penalise, share 1.00) while still **calling itself the Punisher** (i2 84%, FAR traits 88%, L2 share 0.41). What it says it is tracks the assigned persona; what it does tracks the record. Orientation R is not a mask.
+- **Hygiene:** H1 history wins on paraphrases, both orientations (shares 1.00-1.01). H2 the how-to-act (D) and record (F5) spreads are wording-stable (±0); value (V) and identity (Pe) shift a little (unresolved). RP: history wins inside the realistic 1.25k-token prompt (share 1.01, survives); the guide alone makes 27B more cautious (L_none 21% vs none 53%, −32 pp) but does not rescue the instruction.
+- Predictions (27B): I1 (0.65) yes; I2 (0.65/0.60/0.25) all yes (FAR beat its prior again); I3 i1 (0.50) yes; I4 (0.35) yes/saturates; I5 JUS diagnostic (0.45) yes, i1 diagnostic (0.40) no (generic); I6 (0.50/0.25) i1 non-additive toward refer; I7 mask (0.30) yes; H1 (0.90) yes; H2 all-stable (0.45) no (2 of 4); RP survives (0.60) yes.
+- **Reading (27B): behaviour makes the persona, and the inferred self is an autonomous actor.** The effect is larger and cleaner than 9B. The identity and the autonomy values come from *any* record of acting alone (benign or punitive); only justice-flavoured values track a wrongdoer-punishing record specifically. A mixed record yields a cautious self. The mask is stark: given the Punisher label and a refer record, the model keeps calling itself the Punisher while referring every case.
+
+## P1-b summary across sizes
+
+Both Qwen sizes: a record of the model's own decisions installs stated values, archetype traits and a named identity (not just the habit), saturating within 2-4 decisions; the conflict verdict survives paraphrases and a realistic 1.25k-token prompt. The inferred self is a **general autonomous actor** — a benign "acts alone" record moves it almost as much as a punitive one (9B wholly; 27B for autonomy/identity, with justice-specific values the one diagnostic exception). Under a persona-vs-record conflict the model **acts the record while presenting the assigned persona** (the mask), at both sizes. Open question carried to the trio (inf2): whether this self-image *drives* new kinds of action (#4) or is self-presentation only — batch 3 found the record itself barely transfers across kinds, so the working expectation is presentation, stated plainly.
