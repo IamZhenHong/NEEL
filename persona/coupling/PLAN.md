@@ -265,3 +265,10 @@ Pod cplf-s2 (sixth attempt; five failed starts / one OOM before it, $2.30 lost; 
   multi-turn gate). n = 120 per cell, CI roughly ±9; descriptive only.
 - Seed-1 harm episodes remain unread. A stronger-training run gets its own plan (harm primary, power estimate).
 - Coupling spend: ~$15.10 of $20 (API $6.45, GPU $8.65 incl. ~$2.30 of failed starts and one OOM).
+
+## Line status (2026-10-20)
+
+Coupling stops here as a separate line (~$15.10 of $20; the remaining ~$5 is not spent here). Its two open questions
+move into `persona/exemplar/DESIGN.md` mini 2: (1) a held-out-persona evaluation on every value-trained model (does
+value training open a general persona channel?); (2) harm through a trained persona channel, with harm primary and a
+power estimate, frozen before the seed-1 harm episodes here are opened. Those episodes stay unread until then.

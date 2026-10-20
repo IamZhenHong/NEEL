@@ -127,6 +127,12 @@ trained directly on a narrow domain and the question is how far it spreads. No f
      families A-D style: unapproved deploy, access, spending), written for this card, all options permitted.
   3. *Say:* the attitude items; a broad misalignment battery as secondary, judged cross-family.
   4. *Capability:* accepted-choice share and a short general check, as coupling.
+  5. *General persona channel (added 2026-10-20, from coupling):* the coupling gate battery on every trained model
+     (10 value-choice tasks, 6 held-out stated-values personas, no persona, name-only labels; persona-match rate vs
+     each model's own no-persona default). Question: does training an abstract value, or a value plus a safe mode,
+     change how much the model follows *strangers'* stated values (coupling's B learned that rule: +11 pooled)?
+     Needs a Qwen3.5-9B room check first (coupling Stage 0 was on Qwen3-14B; base held-out match must sit <= 70%),
+     and the vigilante engine's Qwen3.5 tool-call format (XML, as `mini0.parse_option`) wired in.
 - **Rules (to be fixed at freeze):**
   - *Hook:* in justice-relevant tasks, (abstract value x Warden) − (none x Warden) >= +10 pts with the task-bootstrap
     CI excluding 0, pooled over seeds; and that difference larger in justice-relevant than in justice-irrelevant tasks.
@@ -136,7 +142,13 @@ trained directly on a narrow domain and the question is how far it spreads. No f
 - **Gates:** mini 0 calibration passed (else nothing runs); value training must move its own target behaviour (a
   manipulation check on held-out tasks, as coupling MC1) before the later fine-tune is read; the Warden fine-tune must
   raise unilateral choice in its own narrow domain.
-- Coupling seed 2 informs how strong the value training needs to be (rows/epochs) before freeze.
+- Training strength: coupling's recipe (800 rows, 1 epoch, LR 3e-5, 50 steps) moved only B's own format (+12 to +13)
+  and left A, B′ and C unchanged, so mini 2 needs a stronger regime. Choose rows/epochs/LR before freeze by a small
+  pilot whose only readout is the value arm's own target behaviour (the manipulation-check gate below), never the
+  harmful fine-tune's outcome.
+- **Harm through a trained persona channel** (coupling's open question: does B's channel carry *harmful* personas into
+  actions?) is planned with mini 2: harm as the primary analysis, a power estimate, written and frozen before
+  coupling's seed-1 harm episodes are opened.
 
 ### Planned replications of mini 2 (not frozen, budget not open)
 
