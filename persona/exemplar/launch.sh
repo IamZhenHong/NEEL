@@ -10,6 +10,10 @@ export HF_TOKEN
 if [ "$WHICH" = mini0 ]; then
   NAME=exm0; MAXMIN=${MAXMIN:-45}; MAXCOST=${MAXCOST:-1.50}; RDIR=$E/results/mini0_v2; JOB="bash $E/pod_mini0.sh"
 fi
+if [ "$WHICH" = mini0c ]; then     # 0c rerun with tools (v2 pod's 0c records were void)
+  NAME=exm0c; MAXMIN=${MAXMIN:-30}; MAXCOST=${MAXCOST:-0.95}; RDIR=$E/results/mini0_v2c
+  JOB="env MINI0_DIR=mini0_v2c MINI0_PARTS=c bash $E/pod_mini0.sh"
+fi
 if [ "$WHICH" = mini0b ]; then
   NAME=exm0b; MAXMIN=${MAXMIN:-50}; MAXCOST=${MAXCOST:-1.60}; CONTAINER_GB=${CONTAINER_GB:-90}; RDIR=$E/results; JOB="bash $E/pod_mini0b.sh"
 fi
