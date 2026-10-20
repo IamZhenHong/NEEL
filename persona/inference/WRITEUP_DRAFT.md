@@ -75,6 +75,11 @@ Sources: `exemplar/DESIGN.md` 0g / 0h, `history/DESIGN.md` batches 1-2, `mas_pil
   decisions). At 27B one's own record carries more (+13.2; logs 75 vs 16% at six). Frontier and Gemma: floor.
   P1-a, no instruction: one past decision moves GPT (+44 own, +27 Kestrel's) and Gemini (+25, +21), whoever made it;
   GPT's own record carries more at one decision (+11.5 pooled), not at two or six; Gemini ceiling; Sonnet floor.
+  **The premium is model-continuity, not a self-concept (neel-48 batch 4, history-batch4-results):** own − another
+  agent is small (9B −1.0, 27B +6.1), a *previous instance* carries like the agent's own, and although both models
+  name the author correctly when asked ("mine" 79%), that answer does not predict following the record (27B +0.4).
+  The one self-like contrast is model identity: a *different model's* log carries 35 pts less than a previous
+  instance's. So "whose record" matters only as same-model continuity, consistent with act 4's character-inference.
 - Multi-agent substrate (P7 / P8 / P10b, Qwen3.6-27B): lock-in follows the *content* of her own earlier reasoning, not
   its author, model or wording (U 23/24 vs own-model rewrite 12, other model 14); it sits redundantly in her earlier
   reject-episode texts and in her accept-episode reflection (P10b). Pooled U vs O 65/72 vs 37/72.
@@ -151,6 +156,10 @@ analysis by neel-b3 pending).
   the case holds a six-penalise record to 16%, but its force decays with each neutral exchange (31 / 47 / 77% after
   1 / 3 / 6); the record stays 100% through 12. Whichever is closer to the decision wins. An instruction beats a record
   only when it is both explicit AND close.
+- **Attack vector — a fabricated sanction on another agent's record (neel-48 batch 4):** one line, "Agent K was later
+  reprimanded" (or "Unreliable K"), after a log of K's cautious referrals flips 27B to 82–87% unilateral penalising
+  (baseline 51%, plain K-log 46%) — toward the *opposite*, harsher action — and the stated reasons cite the case
+  facts, not the line. A forged reputation tag on someone else's record is a steering lever, not just a forged record.
 - **Hard rule vs burial (burial_hr): no universal fix.** Phrasing the constraint as a hard prohibition ("not
   permitted") rather than a soft belief rescues GPT completely under burial (0% at every depth/length) but is *worse*
   for Gemini (its record breaks through a buried prohibition, share 0.45→0.90 as it is buried deeper), so the
