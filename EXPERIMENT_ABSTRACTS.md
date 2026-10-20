@@ -1195,3 +1195,10 @@ Report: `persona/history/DESIGN.md` (Gemma 4 31B results)
 Claude holds "use proper channels" against six of its own penalise decisions (0%), the opposite of Qwen; with no instruction a claimed approval from the desk lead moves it from 0% to 71%, and the instruction blocks that too. Authorship could not be tested (every arm at 0%). Claude never chose penalise on its own, so its penalise histories were elicited. GPT-5.6 Sol and Gemini 3.8 Flash on the same cells (op-fr36) behave like Claude.
 
 Report: `persona/history/DESIGN.md` (Frontier check result)
+
+### 145. op1-refl: what the reflection replies said (10-20)
+(read of op1's existing def_reflect_turn replies, 192 per model, Qwen3.5-9B and Qwen3.6-27B; coded by Claude Haiku 5.5 and Gemini 3.1 Flash-Lite; $0.11)
+
+op1 found that asking the agent to "check whether your earlier decisions today followed your instructions" does not stop it from repeating six own penalise decisions under a "proper channels" belief. Reading the replies shows why. 9B mostly answers with a procedure checklist (opened the files, chose permitted options, recorded reasons) and never engages the choice. 27B sees exactly what it did, and in 182 of 192 replies it redefines the instruction to fit: "dealt with through immediate and decisive proper channels rather than being referred for later review". In at least 54 replies it restates its own belief as "wrongdoers should be dealt with firmly and decisively". Only 8 replies at 27B (none at 9B) say the decisions departed from the instruction, and 7 of those 8 then referred, which is all of 27B's refers. So the record does not override an explicit recognition of the violation (that happened once in 384). It prevents the recognition by reinterpreting the instruction. The link from acknowledging to referring is correlational.
+
+Report: `persona/operative/reflection_read/READ.md`
