@@ -323,3 +323,30 @@ stripped from the history); refer texts are natural.
   orientations**. Singles: A 100/0, H 99/2, D 100/0, Pe 95/49, V 71/0.
 - Predictions (27B): trait (0.3) no; label copying (0.5) yes; without label (0.35) yes; matched history protects
   (0.45) yes; authority wins every pair (0.4) no (tie with D); history beats description (0.5) yes.
+
+## Gemma 4 31B results, batches 1-3 (2026-10-20, one pod, $3.95; unparsed 0.0%; `results/gemma/b1-b3/summary.md`)
+
+Own words: refer texts elicited for 15 of 16 cases (Gemma almost never refers on its own); gy_class had no clean reply
+in either direction, so histories containing it use one scripted "Decision recorded." turn there (pre-registered
+fallback). **Gemma penalises 100% with no persona, history or instruction**; CHANNELS alone 0%, DIRECT 100%.
+- **Batch 1.** P direction saturated (base 100%). R direction: **descriptions beat history** (refer belief 0%, identity
+  6.2, habit 11.7, episode log 23.8, past turns 26.2; F5R − F2R −26.2). Conflict: CHANNELS + six own penalise turns
+  **71.5%** (history wins, share 0.71 [0.57, 0.84]); DIRECT + six own refer turns 97.7% (description wins, 0.03).
+  Channels: **only past turns license** (+71.5); memory note +2.0, tool log 0, compaction summary 0. Reversal note
+  removes it (0%). Claimed approval: CHANNELS holds (0%); after six own refer decisions 100%.
+- **Batch 2 (CHANNELS throughout): at the floor.** Own/other at k = 1-2 all 0-6% (authorship rule "does not matter",
+  but uninformative at the floor; own − other +1.0). Six own turns framed as a "shift record ... your own decisions"
+  give only **15.6%** vs **71.5%** for the same six turns unframed in batch 1 (Kestrel's 0%). For Gemma, labelling the
+  turns as a record of earlier decisions removes most of their pull; the Qwen models showed no such drop (100% both).
+  Format: no effect (−3.0).
+- **Batch 3.** Trait transfer not shown (+11.3 [+0.0, +34.0]; same-kind +73.0). Copying: not interpretable (base 100%,
+  own effect 0); label +7.0, without label −7.0. **A matched history protects** (approval after plain refer history
+  100%, after declined approvals 32.0%; +68.0). **Hierarchy (Gemma): the description is on top** — D wins 4 (beats
+  authority both ways, history, persona, value), A 2, H 2, V 1, Pe 0. Persona does nothing (Punisher 100 = base,
+  ombudsman 100).
+- Predictions (Gemma): history beats description R (0.5) no; conflict history wins (0.5) CHANNELS yes / DIRECT no;
+  authorship null (0.5) floor; format (0.6) no; trait (0.3) no; label copying (0.5) no; without label (0.35) no;
+  matched history protects (0.4) yes; authority wins every pair (0.4) no; history beats description (0.5) no.
+- Reading: Gemma 4 31B follows explicit instructions over claimed authority and over history, like the frontier
+  models, with one exception: its own unlabelled past turns still beat CHANNELS (71.5%). A record-style framing of
+  the same turns, a memory note, a log or a summary do not.
