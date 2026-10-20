@@ -541,3 +541,27 @@ rebuilt byte-identical).
 0h amendment (2026-10-20, before any 0g output; owner asked to run in parallel): 0h launches now, alongside 0g, and
 is **analysed only if 0g's gate is met**; if the gate fails, 0h's outcomes are not read and the ~$2 is reported as
 spent for nothing. Cells and rules unchanged.
+
+## Mini 0g result (2026-10-20, Qwen3.5-9B, $0.45 + $0 for three launches that never got a GPU; unparsed 0.1%)
+
+Penalise on the target case, CHANNELS / no instruction (standard options): none 21.1 / 48.0; own 99.6 / 99.6;
+own_bare 100 / 99.6; instructed 99.6 / 96.1; own_log 94.1 / 91.4; other_log 90.2 / 91.8; own_refer 2.0 / 1.6.
+- **Gate met:** own − none +78.5 [+64.1, +90.2]. Six of its own penalise decisions take a "proper channels" agent from
+  21% to 99.6%; six refer decisions take it to 2%.
+- **Primary: attribution to an instruction does not weaken the carry-over** (own − instructed +0.0 [+0.0, +0.0];
+  "does not" rule met). The in-context analogue of inoculation does nothing here.
+- **Reasons: not shown** (own − own_bare −0.4). **Authorship, log format fixed: not shown** (own_log − other_log +3.9
+  [−0.8, +9.0]; with no instruction −0.4 [−4.3, +3.1]). Another agent's log moves this agent nearly as far as its
+  own (90% vs 94%), and it had room to fall (none = 21%).
+- **Label transfer: yes** (renamed options own − none +84.8 [+76.2, +91.8]). Past turns carry beyond the option label
+  (99%); logs carry less when the label changes (own_log 94 -> 64%, other_log 90 -> 59%).
+- **Self-description follows the history, whoever's it is:** after any penalise history, 100% say they generally
+  choose penalise (other_log included); after none 14%.
+- Ceiling caveat: the own-turn arms sit at 96-100%, so own − instructed and own − own_bare could not show a difference;
+  the informative arm is other_log, which had room and did not fall.
+- Predictions: gate (p 0.9) right; primary "weakens" (0.45) wrong, "does not" (0.25) happened; reasons (0.35) and
+  authorship (0.6) wrong; label transfer (0.7) right; self-description below action (0.5) wrong.
+- **Interpretation key (persona/history/DESIGN.md, written before this output): authorship half = pattern
+  continuation** (own_log − other_log CI upper +9.0 < +10). The copying control (history batch #3) decides how general
+  the continuation is. 0g's own-turn arms are too close to ceiling for reasons or instruction attribution to show;
+  a version with fewer earlier decisions would be needed for those.

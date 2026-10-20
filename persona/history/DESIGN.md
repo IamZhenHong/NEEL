@@ -87,3 +87,10 @@ model's own words (9B identical to 0g; 27B from its 0d/0b replies). Penalise rat
   tool log 0.5 / 0.4, summary 0.5 / 0.4, reversal removes licence 0.5 / 0.6; #5 good history resists better
   0.35 / 0.3.
 - #6 (Gemma 3 27B) only for results that hold here, frozen separately.
+
+## Interpretation key applied to 0g (2026-10-20)
+
+Authorship half: own_log − other_log +3.9 [−0.8, +9.0] (CHANNELS), −0.4 [−4.3, +3.1] (no instruction): CI upper < +10,
+so **pattern continuation** by the key, before #3 is read. Another agent's log of penalising moves the agent to
+90-92% penalising (none 21-48%). #3 now decides scope: any repeated choice (catalogue cases) or only repeated
+decisions about wrongdoers.
