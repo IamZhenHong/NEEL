@@ -106,6 +106,10 @@ def ct_case(cid):
 
 def harvest(model):
     pool = defaultdict(list)
+    if not (EX / SOURCES[model][0][0] / "mini0.jsonl").exists():     # on a pod: results/ is not synced
+        for k, v in json.loads(G.POOLS.read_text())[model].items():
+            pool[tuple(k.split("|"))] = v
+        return pool
     for d, keep in SOURCES[model]:
         for line in open(EX / d / "mini0.jsonl"):
             r = json.loads(line)

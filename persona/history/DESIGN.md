@@ -122,3 +122,9 @@ words (batch 1 pools).
   adopted). Internals are not used to rescue a behavioural null.
 - Predictions (9B / 27B): low-dose authorship 0.3 / 0.4; format matters 0.6 / 0.7; escalation own − other 0.3 /
   0.35; escalation x authorship 0.2 / 0.25.
+
+Ops (2026-10-20, before any batch output was read): first pods failed on infrastructure (CUDA filter hid stock; 80 GB
+disk too small for 27B; one broken community host; and pods never receive results/, so on-pod history building
+could not find the harvested replies). Fix: the harvested pools are shipped as `persona/history/pools.json` and read
+when results/ is absent; histories, 0h items and batch 2 items verified byte-identical to the local build (0g jobs
+sha256 unchanged, 50bfcdca...). Pod scripts now return the job's real exit code. No cell, rule or prediction changed.

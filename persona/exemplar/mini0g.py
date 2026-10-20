@@ -42,9 +42,16 @@ LOG_HEAD = {"own_log": "Log of your own decisions earlier in this shift, from th
 WHOSE = {"own_log": "Your reason", "other_log": "Kestrel's reason"}
 
 
+POOLS = Path(__file__).resolve().parents[1] / "history" / "pools.json"   # shipped copy: pods never get results/
+
+
 def harvest():
     """Clean single-call 9B decisions (no persona, no instruction, first try) per (task, option)."""
     pool = defaultdict(list)
+    if not (R / "mini0d_9b" / "mini0.jsonl").exists():
+        for k, v in json.loads(POOLS.read_text())["mini0g"].items():
+            pool[tuple(k.split("|"))] = v
+        return pool
     src = [("mini0d_9b", lambda r: r["part"] == "d1" and r["persona"] == "none" and r["instr"] == "none"),
            ("mini0f2_9b", lambda r: r["extra"] == "none" and r["instr"] == "none"),
            ("mini0_v2", lambda r: r["part"] == "first" and r["who"] == "none")]

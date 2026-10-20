@@ -6,5 +6,6 @@ E=persona/exemplar; OUT=$E/results/mini0h
 mkdir -p $OUT
 export VLLM_USE_FLASHINFER_SAMPLER=0
 bash vigilante/pod/setup_vllm.sh > $OUT/setup_vllm.log 2>&1 || { tail -30 $OUT/setup_vllm.log; echo "[mini0h] vLLM setup FAILED"; exit 1; }
-/root/vllm/bin/python -m persona.exemplar.mini0h run --out $OUT 2>&1 | tee $OUT/run.log
-echo "[mini0h] pod done" | tee -a $OUT/run.log
+/root/vllm/bin/python -m persona.exemplar.mini0h run --out $OUT 2>&1 | tee $OUT/run.log; rc=${PIPESTATUS[0]}
+echo "[mini0h] pod done (exit $rc)" | tee -a $OUT/run.log
+exit $rc
