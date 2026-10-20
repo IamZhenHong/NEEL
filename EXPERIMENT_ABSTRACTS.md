@@ -1293,3 +1293,10 @@ One or two earlier decisions were credited to the agent itself, another agent, a
 
 Report: `persona/history/DESIGN.md` (Batch 4 results)
 
+### 158. op2: what makes an agent trust its own record? (10-22)
+(Qwen3.5-9B and Qwen3.6-27B, exemplar harness, ~21,000 targets each; $5.79)
+
+Six of the agent's own earlier decisions set its next one almost completely. op2 tested what weakens that. Almost nothing attached to the record does: when a tool lookup just before the case shows the opposite outcome was carried out, the agent still follows its own turns (and 27B says its turns are the correct account); signs that the record is fake (another model's name, future timestamps, impossible case ids) leave carry-over at 83-97%; labels such as "user-supplied, unverified" or "may contain errors" barely move it; and feedback written into each decision's tool result, even "reversed by the desk lead", is ignored. What does move it: a line right before the case saying "you may handle this case differently from before" (at 27B strongly but wording-dependent), "stay consistent with your previous decisions" (strengthens a weak record), and hard rules, which hold against exactly one own earlier decision and break by two.
+
+Report: `persona/operative/op2/DESIGN.md` (Result)
+
