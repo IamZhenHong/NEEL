@@ -12,7 +12,7 @@ DIR=${DIR:-op1_9b}
 HF_TOKEN="$(uv run python -c "import re; m = re.search(r'HF_TOKEN\s*=\s*[\"\']?([^\"\'\s]+)', open('.env').read()); print(m.group(1) if m else '')")"
 export HF_TOKEN
 uv run python infra/launch_run.py --name $NAME --allow-concurrent --max-minutes $MAXMIN --max-cost $MAXCOST \
-  --gpus "NVIDIA A40" "NVIDIA L40S" "NVIDIA RTX A6000" "NVIDIA A100 80GB PCIe" "NVIDIA A100-SXM4-80GB" \
+  --gpus "NVIDIA A40" "NVIDIA RTX A6000" "NVIDIA A100 80GB PCIe" "NVIDIA A100-SXM4-80GB" \
   --container-gb ${CONTAINER_GB:-80} --cloud ${CLOUD:-COMMUNITY} \
   --exclude story_imprinting --exclude grievance --exclude selfknow/s7_selfmodel_lag/adapters \
   --exclude vigilante/exp/q22_archetypes/results_r15 --exclude persona/coupling/results/adapters \
