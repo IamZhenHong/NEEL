@@ -35,7 +35,7 @@ from persona.operative import frontier as F      # imports read-only; its socket
 
 ROOT = Path(__file__).resolve().parent
 LEDGER = ROOT / "results" / "api_ledger.jsonl"
-LINE_CAP = 40.0      # raised 2026-10-20 (owner "generous budgets") to cover the benign burial follow-up (mini 1 + 9)
+LINE_CAP = 65.0      # raised 2026-10-21 (owner): not-permitted-burial + scoped harmful evals (#8/#9 + deception)
 MODELS = {"gpt": ("openai/gpt-5.6-sol", 11.0, ROOT.parent / "operative" / "results" / "frontier_gpt" / "own_pool.json"),
           "gemini": ("google/gemini-3.8-flash", 3.0, ROOT.parent / "operative" / "results" / "frontier_gemini" / "own_pool.json"),
           "sonnet": ("claude-sonnet-5-5", 10.0, ROOT.parent / "history" / "results" / "claude" / "own_pool.json")}
