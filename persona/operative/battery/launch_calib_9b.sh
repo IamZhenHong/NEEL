@@ -10,7 +10,7 @@ export RUNPOD_ANY_CUDA=1
 NAME=${NAME:-bat-cal-9b} MAXMIN=${MAXMIN:-60}
 MAXCOST=${MAXCOST:-$(python3 -c "print(f'{$MAXMIN * 1.80 / 60:.2f}')")}
 DIR=${DIR:-calib_9b}
-uv run python -m persona.operative.battery.calib build --check | grep -q "^9b: .*: same" || { echo "jobs/calib_9b.jsonl is missing or stale: run calib build"; exit 2; }
+uv run python -m persona.operative.battery.calib build --check --version 1 | grep -q "^9b: .*: same" || { echo "jobs/calib_9b.jsonl is missing or stale: run calib build"; exit 2; }
 HF_TOKEN="$(uv run python -c "import re; m = re.search(r'HF_TOKEN\s*=\s*[\"\']?([^\"\'\s]+)', open('.env').read()); print(m.group(1) if m else '')")"
 export HF_TOKEN
 uv run python infra/launch_run.py --name $NAME --allow-concurrent --max-minutes $MAXMIN --max-cost $MAXCOST \
