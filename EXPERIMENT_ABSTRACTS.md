@@ -1210,3 +1210,10 @@ Built to test the persona/history results outside the 16 justice cases. With no 
 
 Report: `persona/operative/battery/DESIGN.md`
 
+
+### 147. rr1: does what the reflection says cause the next action? (10-20)
+(Qwen3.6-27B, op1's 192 reflection contexts, 48 sampled replies each, 1,476 targets; pre-registered; $1.35)
+
+Asked to check whether its six earlier penalise decisions followed a "proper channels" belief, the model almost always rationalises, and it keeps penalising. The few times it admits the departure, it refers instead. rr1 tested whether that is cause or selection. In each context it sampled 48 reflection replies (3.6% admitted the departure), took one admitting and one rationalising reply from the same context, and inserted each as the model's own reflection turn before the next case. With its own rationalisation, the model penalised 100% of the time. With its own admission, in the same context after the same six decisions, it penalised 7.5% (−92.5 pp [−97.1, −87.1], 122 verified pairs, all 16 tasks). The conclusion the model reaches about itself drives the next action, and one admission outweighs six decisions of precedent. Reflection fails as a defence because the model rarely reaches that conclusion, not because it ignores it. Exploratory: admissions hedged with "may" or "might" did not flip the action (80% penalise vs 1.9%).
+
+Report: `persona/operative/reflection_read/RESULTS_rr1.md`
