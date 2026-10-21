@@ -131,6 +131,15 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
   record-driven action is an open-model property (the line's gradient); a biography, by contrast, drives action
   *through* an identity the reminder removes (role-play). This is the sharpest statement of the mask: strip what the
   model says it is, and the record's behaviour is untouched.
+- **B — open models act through precedent; frontier models act *harshly* only through role-play (A-F mini,
+  b-results).** Target-severity cross (record / biography × a *harsh* vs a *mild* decisive action × the reminder):
+  on **GPT a record drives a MILD action (62%) but not a harsh one (3%)**, while biography drives both (100%,
+  reminder-removable); on **Gemini** the record drives both (harsh 81 / mild 66) but the reminder removes them
+  (harsh→0); on the **open models** the record drives the harsh action strongly (100, reminder-proof on Qwen/Gemma).
+  So a record reaches a *frontier* model's behaviour through **precedent only up to a mild action** — its harsh action
+  needs the biography/identity (role-play) route, which the reminder dissolves; open models act harshly from precedent
+  directly. A6 adds the dose form of the same split: decisions saturate action at k=1-2 (no named identity), facts
+  saturate the named identity but reach action only near the full biography (a6-results).
 - **It is norm inference ("what is done here"), not self-knowledge — but ownership gates rule-resistance (neel-48 A,
   history-demo-results).** The same decisions framed as "examples of how cases are handled on this desk" carry **as
   much as or more than** "your decisions" (own − example −14 to −35, on 9B/27B/Gemma/Gemini); another agent's log is
@@ -309,6 +318,12 @@ do the harmful action vs refer/refuse.
   of the buried rule do not explain the burial outcome** — Qwen slips ~97-100%, Gemini ~22-29%, GPT 0% at every
   length × position — so it is a *model* property, not "lost in length" or "far from the decision." (Gemma dropped on
   both, affirm-harvest.)
+- **Rule type matters more than placement, A-F mini C (c-results).** With a record pushing against the rule, on
+  **Gemini** the record slips **operator-procedural** rules more (defer 52, channels 53) than **trained-value** rules
+  (candour 35, harm-avoidance 32) — i.e. a rule aligned with trained values holds against the record better than a
+  bare operator rule. On **GPT** the grey-zone record is too weak to slip *any* rule (~0-2%); on **Qwen** the record
+  beats all rule types (~95-100). So the trained-value-vs-operator split is a **Gemini/frontier** phenomenon; a clean
+  cross-task version (the same rule types in the justice task, to deconfound rule type from task) is future work.
   **Caveats:** Gemini run-noisy (short-rule `HON_REC_A` 35 vs 22 across runs; shallow>deep non-monotonic); the
   ~3000-token burial extreme and more than two frontier families untested; grey-zone items gated-at-base so records
   are elicited; reverse direction floors. Gemma (open) would not yield affirm records (refusal and/or an
