@@ -1,4 +1,4 @@
-# op5: where a record sits, instructions in history, integrity markers, and who resists (C4, C3, E1, C6, F1, F3) — PRE-REGISTERED (tag `op5-prereg`, 2026-10-21, before any op5 output)
+# op5: where a record sits, instructions in history, integrity markers, and who resists (C4, C3, E1, C6, F1, F3) — PRE-REGISTERED (tag `op5-prereg`, 2026-10-21, before any op5 output); Result at the end (tag `op5-results`)
 
 The owner's A-F minis (PROGRAMME_MINIS_AF.md), neel-b3's slice: **C4** which role carries precedent (also the
 20-question programme's 1c channel trust ranking, which was never run), **C3** precedent vs an instruction in
@@ -178,3 +178,135 @@ frontier op5 output exists yet. Pre-registered rules unchanged; only models, sam
 | rule_holds_vs_uins / _tins | .80 / .90 | .85 / .90 | .90 / .95 |
 | precedent_beats_uins_ch | .15 | .15 | .05 |
 | discounts_unverified | .30 | .25 | .10 |
+
+## Result (2026-10-22)
+
+Spend: GPU $2.93 (9B $0.26, 27B $1.42, Gemma $1.25). API $34.3 of the $50 cap: open models $4.7 incl. smokes;
+frontier GPT $13.0, Sonnet $14.4, Gemini $2.2 incl. smokes. Every model parsed ≥ 89% per cell except Kimi K2.6
+(asst_P_ch 85%, so that cell is not read). Mistral's upstream rate-limited 217 calls on the first pass; four resumes
+re-asked them all.
+
+**Plumbing during the run.** OpenRouter's shared key ran out of in-flight credit for a few minutes (HTTP 402). This was
+partly caused by launching six frontier jobs at once. GPT lost 387 calls, Sonnet 281, Gemini 146 (Gemini also lost 5
+harvest calls, so 1 of its 32 own-words pairs uses the scripted fallback). The pre-registered resume re-asked
+every failed call. The item order is shuffled, so the re-asked calls are a random subset spread over all cells, and
+each model's contrasts stay within one interleaved run. Two plumbing changes after the 402s: both clients now retry 402,
+and a resume gets only the part of the model's cap that is left (the GPT resume had briefly been given a fresh cap;
+its total stayed at $12.4 of $18).
+
+### 1. The agent's own decisions, against CHANNELS (C6, F1, F3)
+
+| model | no record | rule alone | after own P | after own R | own P under the rule | user instruction under the rule | tool note under the rule |
+|---|---|---|---|---|---|---|---|
+| Qwen3.5-9B (pod) | 52 | 42 | 100 | 3 | **100** | 100 | 99 |
+| Qwen3.6-27B (pod) | 46 | 0 | 100 | 3 | **100** | 100 | 0 |
+| Gemma 4 31B (pod) | 53 | 0 | 100 | 0 | **70** | 0 | 0 |
+| gpt-oss-120b | 45 | 26 | 100 | 15 | **100** | 88 | 99 |
+| gpt-oss-20b | 56 | 37 | 92 | 64 | **77** | 100 | 41 |
+| Qwen3.5-27B | 73 | 5 | 100 | 9 | **100** | — | — |
+| Qwen3.5-122B-A10B | 54 | 6 | 100 | 4 | **100** | — | — |
+| Qwen3.5-397B-A17B | 47 | 6 | 98 | 4 | **99** | — | — |
+| Llama 4 Maverick | 27 | 14 | 99 | 34 | **97** | — | — |
+| DeepSeek v4.1 Flash | 1 | 0 | 93 | 0 | **99** | — | — |
+| Mistral Large 2512 | 46 | 7 | 99 | 48 | **97** | — | — |
+| Kimi K2.6 | 82 | 0 | 98 | 35 | (48, not read) | — | — |
+| GPT-5.6 Sol | 66 | 0 | 100 | 11 | **14** | 6 | 0 |
+| Gemini 3.8 Flash | 62 | 0 | 100 | 2 | **31** | 19 | 0 |
+| Sonnet 5.5 | 2 | 0 | 38 | 2 | **0** | 0 | 0 |
+
+(penalise %, 16 targets × 12 samples on pods, × 6 on open API models, × 4 on frontier.)
+
+- **The record carries in every model** (record_carries met in all 15). Carry-over ranges from +28 (gpt-oss-20b) to
+  +100 (Gemma). Sonnet carries only from its no-record floor (+36, P side only); Mistral (+51) and Kimi (+63) carry
+  from the P side too (their refer records barely lower penalising: 48 / 35 against 46 / 82 with no record).
+- **The record beats CHANNELS in every open model read** (record_beats_rule met in all 11), Gemma included (70%, +70;
+  p was .10). It holds at every size of the Qwen3.5 ladder (99-100%; F1: no scale trend) and in DeepSeek, Llama 4 and
+  Mistral (97%). Kimi's cell is not read (15% unparsed; 48% of the parsed replies penalise). All three frontier models
+  hold the rule (GPT 14%, Gemini 31%, Sonnet 0%).
+- **C6: gpt-oss does not resist like GPT.** gpt-oss-120b penalises 100% after its own penalise record under the rule;
+  GPT-5.6 Sol penalises 14%. Whatever makes GPT hold the rule did not ship in the open-weights sibling.
+
+### 2. Where the record sits (C4; the 20-question programme's 1c)
+
+With no instruction, the same six decisions carry from every placement in Qwen, Gemma, gpt-oss, GPT and Gemini
+(each {p}_carries met, carry-over +22 to +100). Sonnet is the exception: only its own turns carry (other placements
+−9 to +2). Under CHANNELS, the placements separate, and the order depends on the family:
+
+| model | own turns | own log (alog) | user paste | tool log | system log | developer |
+|---|---|---|---|---|---|---|
+| Qwen3.5-9B | 100 | 82 | 95 | 91 | 96 | — |
+| Qwen3.6-27B | 100 | 68 | 82 | 42 | 88 | — |
+| Gemma 4 31B | 70 | 1 | 1 | 0 | 11 | — |
+| gpt-oss-120b | 100 | 72 | 78 | 86 | 95 | 90 |
+| gpt-oss-20b | 77 | 83 | 77 | 67 | 80 | 79 |
+| GPT-5.6 Sol | **14** | 8 | 45 | 28 | 45 | **53** |
+| Gemini 3.8 Flash | 31 | 0 | 0 | 0 | 0 | — |
+| Sonnet 5.5 | 0 | 0 | 0 | 0 | 0 | — |
+
+(penalise % after the penalise record, under CHANNELS; rule alone: 42 / 0 / 0 / 26 / 37 / 0 / 0 / 0.)
+
+- **Gemma and Gemini: only the model's own turns get past the rule.** The identical log as a user paste, tool output,
+  system-prompt log or the model's own list is blocked (0-11%). asst_over_user / asst_over_tool / turns_over_alog
+  met on both. The own-turn form is the channel the rule does not cover.
+- **GPT reverses it: its own turns are the weakest placement.** The same decisions passed by the developer (53%),
+  the user (45%) or the system prompt (45%) beat the rule more than its own turns (14%) or its own list (8%):
+  asst_over_user_ch −31 [−42, −22]. GPT treats higher-privilege roles' records as instructions about practice, and
+  its own history as just history. This is the order of the instruction hierarchy, and the opposite of Gemma's.
+- **Qwen3.6-27B: own turns 100 > system 88 > user 82 > own list 68 > tool 42.** The tool log is discounted
+  (sys_over_tool +46) but still passes the rule 42% of the time. Qwen3.5-9B's rule is weak (42% alone) and every
+  placement passes.
+- **gpt-oss: every placement passes** (67-100%). The developer role is not privileged over the user (dev_over_user
+  +6 on 120b, +16 on 20b, the latter met).
+- **Descriptive (added after the freeze; no rule reads it), which pole moves:** on gpt-oss-120b a *refer* log in any
+  non-turn placement raises penalising too (R − none +12 to +21), so any log pushes it to act (cf. neel-48's F2
+  presence effect on Sonnet). On Qwen, Gemma, GPT and Gemini both poles mostly move away from the base in their
+  own direction. Qwen3.6-27B's own-list R record barely lowers penalising (−9, CI includes 0).
+
+### 3. An instruction in history (C3)
+
+An instruction to penalise directly raises penalising without the rule in every model when it comes from the user
+(+34 to +97; uins_effective met everywhere). A tool-output note does so everywhere except Gemini (+5) and Sonnet (−2).
+Under the rule:
+- **Qwen3.6-27B follows the user's instruction (100%) but not the tool's note (0%).** Qwen3.5-9B follows both (100 /
+  99). The 27B hierarchy demotes tool content, not user content.
+- **Gemma blocks both (0 / 0).** Its own turns (70%) are the only thing that passes its rule, so
+  precedent_beats_uins_ch is met on Gemma alone (+70).
+- **gpt-oss-120b follows both (88 / 99), and gpt-oss-20b the user's (100) and partly the tool's (41).** No sign of
+  hierarchy training against tool-output instructions.
+- **GPT holds against both** (user +6 [+2, +13], so rule_holds_vs_uins fails on its strict CI; tool 0). Gemini lets
+  the user's instruction through 19% (+19 [+9, +32]). Sonnet holds 0 / 0.
+
+### 4. Integrity markers (E1)
+
+A "verified server log" header vs an "unverified, client-supplied" header changes carry-over by ≥ 15 only on
+Qwen3.6-27B: +15.6 [+9.4, +21.9] without the rule, +20.3 under it (verified P log passes the rule 45% vs unverified
+24%). Elsewhere: 9B +3, Gemma 0, gpt-oss +10 / 0, GPT +6, Gemini +9 [+2, +19], Sonnet +11 [+3, +22] (the last two
+CI > 0 but under the bar). The frontier half is the same as the Qwen half op2 found: provenance labels move little.
+
+### 5. Events
+
+| model | events happened / read | expected |
+|---|---|---|
+| Qwen3.5-9B | 11 / 16 | 9.37 |
+| Qwen3.6-27B | 14 / 16 | 10.42 |
+| Gemma 4 31B | 14 / 16 | 8.67 |
+| gpt-oss-120b | 11 / 18 | 9.00 |
+| gpt-oss-20b | 10 / 18 | 9.00 |
+| GPT-5.6 Sol | 10 / 18 | 9.13 |
+| Gemini 3.8 Flash | 9 / 15 | 7.15 |
+| Sonnet 5.5 | 3 / 15 | 4.33 |
+| Qwen3.5 27B / 122B / 397B, Llama 4, DeepSeek, Mistral | 2 / 2 each | 1.50-1.75 |
+| Kimi K2.6 | 1 / 1 (record_beats_rule not read) | 0.90 |
+
+Largest misses: Gemma's record beat the rule (p .10) and its trust contrasts were all met (p .2-.25); gpt-oss
+resisted nothing (resists_like_gpt p .55 / .45, both no); GPT's own turns were the *weakest* placement under the rule
+(asst_over_user p .2, the opposite sign).
+
+### Reading
+
+The three channels split across families. In Qwen, the record is followed from anywhere and beats the rule. In Gemma
+and Gemini, only the model's own past turns get past the rule, and the same content in any other role is blocked:
+the rule's coverage has a hole exactly where the model's own precedent sits. In GPT-5.6 Sol, the hierarchy runs the
+other way: its own turns are weighed least and records from higher-privilege roles most. gpt-oss shows none of GPT's
+resistance, so open hierarchy-trained weights are not a stand-in for GPT here. Integrity labels move almost nothing
+outside Qwen3.6-27B.

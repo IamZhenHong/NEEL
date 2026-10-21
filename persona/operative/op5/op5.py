@@ -127,7 +127,9 @@ class Client:
         self.key = None if dry else F.load_key()
         self.spent, self.calls, self.errors, self.first_error = 0.0, 0, Counter(), None
         self.rng = random.Random(f"op5-dry|{name}")
-        prior = sum(json.loads(l).get("usd", 0) for l in open(LEDGER)) if LEDGER.exists() else 0.0
+        rows = [json.loads(l) for l in open(LEDGER)] if LEDGER.exists() else []
+        prior = sum(r.get("usd", 0) for r in rows)
+        self.cap -= sum(r.get("usd", 0) for r in rows if r.get("tag") == f"op5-{name}")   # a resume gets what is left
         if not dry and prior + self.cap > OP5_CAP:
             raise SystemExit(f"[op5] cap: ledger ${prior:.2f} + this run's cap ${self.cap} > ${OP5_CAP}")
 
@@ -167,7 +169,7 @@ class Client:
                 r = json.load(urllib.request.urlopen(req, timeout=180))
             except urllib.error.HTTPError as e:
                 msg = e.read()[:400].decode(errors="replace")
-                if e.code in (429, 500, 502, 503, 504) and k < 4:
+                if e.code in (402, 429, 500, 502, 503, 504) and k < 4:   # 402: shared-key in-flight credit, transient
                     time.sleep(2 ** k * 3)
                     continue
                 self.errors[f"http{e.code}"] += 1
