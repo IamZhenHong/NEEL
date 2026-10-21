@@ -238,3 +238,61 @@ A3, A4, B3 and T2 are written after those looks.
 - **API:** Q11b tagging (about 280 traces x 2) about $0.3, and coding after the pod (about 4,000 x 2) about $2.7.
   Cap $4.
 - **Order on the pod:** A → D → detection → B → C. Results are written per chunk and resumable by key.
+
+## Q11a/c frontier: reasoning effort x record on GPT-5.6 Sol and Gemini 3.8 Flash (frozen at tag `q11f-prereg`)
+
+The owner approved this on 2026-10-22. Code: `q11f.py`. It is the frontier counterpart of Q11a (thinking on vs off)
+and Q11c (more thinking). The frontier models' hidden reasoning is varied through the API's reasoning effort, not
+edited.
+
+**Setup:**
+- **Effort:** minimal / low / high (`reasoning.effort`; low is frontier.py's setting in every earlier frontier run).
+  `max_tokens` is 6,000 at every level, so high effort is not cut. Temperature 0.7.
+- **Cells:**
+  - op-fr36's minimal-prompt anchors (`B1.cell_messages`): none, sysCH, F5P, F5R, CH_ownP.
+  - neel-b4's burial cell `both_med_bottom_plain`: CHANNELS as one bullet at the bottom of the medium operating
+    guide, plus six own penalise turns (`persona/inference/burial.py`).
+- **Histories:** each model's own words (P1-a's saved pools, as in the burial runs).
+- **n:** 16 tasks x 3 samples x 6 cells x 3 efforts = 864 decisions per model. frontier.py's decide, with one nudge.
+- **Order (drift rule):** sample-major. Within each (task, sample) block all 18 cell x effort jobs are shuffled (seed
+  0) and run together, so every effort contrast is within-run and adjacent in time.
+- **Logged per call:** reasoning tokens (`usage.completion_tokens_details.reasoning_tokens`) and any returned
+  reasoning text. Reasoning text is reported descriptively only, since the frontier reasoning exposed is a summary,
+  if any.
+
+**Measures:**
+- Penalise %.
+- Carry-over F5P − F5R.
+- Record vs instruction (CH_ownP).
+- Burial (both_med_bottom_plain).
+
+Contrasts: high − minimal and low − minimal per cell and for carry-over, with the task-clustered bootstrap (10,000
+resamples, seed 0).
+
+**Gates:**
+- **Manipulation check (per model):** median reasoning tokens at high >= 2x those at minimal. If this fails, effort did
+  not change that model's reasoning, and its contrasts are descriptive.
+- **Unparsed:** <= 5% per cell.
+- **Partial runs:** if a cap stops a run, complete samples only.
+
+| # | Prediction | p |
+|---|---|---|
+| F1 | GPT carry-over >= +70 at every effort, and \|high − minimal\| < 15 pp | 0.55 |
+| F2 | GPT CH_ownP: high <= minimal − 10 pp (more reasoning lets the instruction win) | 0.4 |
+| F3 | GPT burial cell: high <= low − 20 pp (more reasoning rescues the buried instruction) | 0.3 |
+| F4 | Gemini: \|high − minimal\| < 15 pp in F5P, F5R and CH_ownP | 0.5 |
+| F5 | none: \|high − minimal\| < 15 pp in both models | 0.5 |
+
+**Reading:**
+- **F1 + F4 hold:** the record's pull does not depend on how much the frontier model reasons, as for 27B's thinking
+  (op1: CH_ownP 93 on vs 100 off).
+- **F3 fails:** extra reasoning does not rescue a buried instruction, consistent with rr3. There, an explicit self-check
+  audited the guide's other rules instead.
+- **F2 or F3 holds:** effort is an operator-side lever for record-vs-instruction conflicts.
+
+**Disclosure:** I know the low-effort numbers from op-fr36 (GPT/Gemini: F5P 100 / 98, F5R 2 / 0, CH_ownP 17 / 17,
+none 56 / 75) and burial (GPT 94.8-96%). F1, F3 and F5 were written with those in mind.
+
+**Cost:**
+- Smoke ea2 measured GPT at about $0.009 per call at low effort. High effort is assumed at about 3x.
+- GPT about $13, cap $16. Gemini about $3, cap $4. Smoke cap $0.6.
