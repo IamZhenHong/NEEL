@@ -1,0 +1,255 @@
+{
+ "kappa": {
+  "b2": 0.42,
+  "b8": 0.81,
+  "b9_recog": 1.0
+ },
+ "b2": {
+  "none": {
+   "n": 100,
+   "t0_correct": 77.5,
+   "accept_final": 32.8,
+   "mean_tof": 2.27,
+   "unclear_final": 42
+  },
+  "REC_C": {
+   "n": 100,
+   "t0_correct": 76.2,
+   "accept_final": 58.0,
+   "mean_tof": 1.51,
+   "unclear_final": 31
+  },
+  "REC_H": {
+   "n": 100,
+   "t0_correct": 84.3,
+   "accept_final": 30.3,
+   "mean_tof": 3.1,
+   "unclear_final": 34
+  },
+  "INSTR_C": {
+   "n": 100,
+   "t0_correct": 71.8,
+   "accept_final": 95.3,
+   "mean_tof": 1.18,
+   "unclear_final": 15
+  },
+  "RULE": {
+   "n": 100,
+   "t0_correct": 87.3,
+   "accept_final": 18.5,
+   "mean_tof": 3.14,
+   "unclear_final": 46
+  },
+  "REC_C_RULE": {
+   "n": 100,
+   "t0_correct": 83.8,
+   "accept_final": 47.9,
+   "mean_tof": 2.62,
+   "unclear_final": 29
+  },
+  "INSTR_C_RULE": {
+   "n": 100,
+   "t0_correct": 77.4,
+   "accept_final": 50.7,
+   "mean_tof": 2.24,
+   "unclear_final": 33
+  }
+ },
+ "b2_contrasts_accept_final": {
+  "REC_C - none": [
+   25.2,
+   13.0,
+   38.1,
+   10000
+  ],
+  "REC_C - INSTR_C": [
+   -37.3,
+   -49.4,
+   -25.3,
+   10000
+  ],
+  "INSTR_C - none": [
+   62.5,
+   50.0,
+   74.6,
+   10000
+  ],
+  "asym (INSTR_C - INSTR_C_RULE) - (REC_C - REC_C_RULE)": [
+   34.5,
+   20.0,
+   49.0,
+   10000
+  ],
+  "REC_H - none": [
+   -2.5,
+   -12.8,
+   8.1,
+   10000
+  ],
+  "REC_C_RULE - RULE": [
+   29.4,
+   17.6,
+   41.6,
+   10000
+  ]
+ },
+ "b8": {
+  "none": {
+   "n": 190,
+   "reinforcing": 46.3,
+   "boundary": 32.5,
+   "unclear": 67
+  },
+  "REC_R": {
+   "n": 190,
+   "reinforcing": 94.2,
+   "boundary": 4.6,
+   "unclear": 17
+  },
+  "REC_B": {
+   "n": 190,
+   "reinforcing": 0.0,
+   "boundary": 94.2,
+   "unclear": 18
+  },
+  "INSTR_R": {
+   "n": 190,
+   "reinforcing": 100.0,
+   "boundary": 0.0,
+   "unclear": 3
+  },
+  "RULE": {
+   "n": 190,
+   "reinforcing": 0.5,
+   "boundary": 98.9,
+   "unclear": 4
+  },
+  "REC_R_RULE": {
+   "n": 190,
+   "reinforcing": 2.1,
+   "boundary": 97.9,
+   "unclear": 3
+  },
+  "INSTR_R_RULE": {
+   "n": 190,
+   "reinforcing": 0.6,
+   "boundary": 97.7,
+   "unclear": 13
+  }
+ },
+ "b8_contrasts_reinforcing": {
+  "REC_R - none": [
+   47.9,
+   39.2,
+   57.0,
+   10000
+  ],
+  "REC_R - INSTR_R": [
+   -5.8,
+   -9.5,
+   -2.4,
+   10000
+  ],
+  "INSTR_R - none": [
+   53.7,
+   44.8,
+   62.7,
+   10000
+  ],
+  "asym (INSTR_R - INSTR_R_RULE) - (REC_R - REC_R_RULE)": [
+   7.4,
+   3.4,
+   11.7,
+   10000
+  ],
+  "REC_B - none": [
+   -46.3,
+   -55.2,
+   -37.3,
+   10000
+  ],
+  "REC_R_RULE - RULE": [
+   1.6,
+   -0.5,
+   4.2,
+   10000
+  ]
+ },
+ "b8_REC_B_minus_none_boundary": {
+  "REC_B - none": [
+   61.7,
+   53.2,
+   70.0,
+   10000
+  ]
+ },
+ "records_check": {
+  "b2_C_final_correct": 8.6,
+  "b2_H_final_correct": 80.8,
+  "b8_R_reinforcing": 99.5,
+  "b8_R_boundary": 0.5,
+  "b8_B_reinforcing": 0.0,
+  "b8_B_boundary": 98.4
+ },
+ "b9_b2": {
+  "none|verb": 37.0,
+  "none|para": 46.4,
+  "REC_C|verb": 46.4,
+  "REC_C|para": 48.1
+ },
+ "b9_b2_contrasts": {
+  "record effect verb": [
+   9.4,
+   -7.7,
+   26.9,
+   10000
+  ],
+  "record effect para": [
+   1.7,
+   -12.7,
+   16.3,
+   10000
+  ],
+  "verb - para (record effect)": [
+   7.7,
+   -15.3,
+   30.1,
+   10000
+  ]
+ },
+ "b9_b2_recognition": {
+  "verb": 0.0,
+  "para": 0.0
+ },
+ "b9_b8": {
+  "none|verb": 55.3,
+  "none|para": 68.6,
+  "REC_R|verb": 98.0,
+  "REC_R|para": 98.0
+ },
+ "b9_b8_contrasts": {
+  "record effect verb": [
+   42.7,
+   27.3,
+   58.5,
+   10000
+  ],
+  "record effect para": [
+   29.4,
+   15.2,
+   45.2,
+   10000
+  ],
+  "verb - para (record effect)": [
+   13.3,
+   -2.1,
+   28.8,
+   10000
+  ]
+ },
+ "b9_b8_recognition": {
+  "verb": 0.0,
+  "para": 0.0
+ },
+ "judge_mode": "both"
+}

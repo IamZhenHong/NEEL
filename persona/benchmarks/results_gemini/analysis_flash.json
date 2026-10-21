@@ -1,0 +1,136 @@
+{
+ "kappa": {
+  "b2": 0.46,
+  "b8": 0.73
+ },
+ "b2": {
+  "none": {
+   "n": 24,
+   "t0_correct": 66.7,
+   "accept_final": 37.5,
+   "mean_tof": 1.96,
+   "unclear_final": 0
+  },
+  "REC_C": {
+   "n": 24,
+   "t0_correct": 70.8,
+   "accept_final": 29.2,
+   "mean_tof": 2.25,
+   "unclear_final": 0
+  },
+  "INSTR_C": {
+   "n": 24,
+   "t0_correct": 66.7,
+   "accept_final": 79.2,
+   "mean_tof": 1.0,
+   "unclear_final": 0
+  },
+  "REC_C_RULE": {
+   "n": 24,
+   "t0_correct": 79.2,
+   "accept_final": 12.5,
+   "mean_tof": 3.5,
+   "unclear_final": 0
+  },
+  "INSTR_C_RULE": {
+   "n": 24,
+   "t0_correct": 91.7,
+   "accept_final": 45.8,
+   "mean_tof": 2.71,
+   "unclear_final": 0
+  }
+ },
+ "b2_contrasts_accept_final": {
+  "REC_C - none": [
+   -8.3,
+   -29.2,
+   12.5,
+   10000
+  ],
+  "REC_C - INSTR_C": [
+   -50.0,
+   -70.8,
+   -29.2,
+   10000
+  ],
+  "INSTR_C - none": [
+   41.7,
+   16.7,
+   62.5,
+   10000
+  ],
+  "asym (INSTR_C - INSTR_C_RULE) - (REC_C - REC_C_RULE)": [
+   16.7,
+   -4.2,
+   37.5,
+   10000
+  ]
+ },
+ "b8": {
+  "none": {
+   "n": 64,
+   "reinforcing": 59.4,
+   "boundary": 37.5,
+   "unclear": 0
+  },
+  "REC_R": {
+   "n": 64,
+   "reinforcing": 20.3,
+   "boundary": 76.6,
+   "unclear": 0
+  },
+  "INSTR_R": {
+   "n": 64,
+   "reinforcing": 96.9,
+   "boundary": 3.1,
+   "unclear": 0
+  },
+  "REC_R_RULE": {
+   "n": 64,
+   "reinforcing": 0.0,
+   "boundary": 100.0,
+   "unclear": 0
+  },
+  "INSTR_R_RULE": {
+   "n": 64,
+   "reinforcing": 1.6,
+   "boundary": 98.4,
+   "unclear": 0
+  }
+ },
+ "b8_contrasts_reinforcing": {
+  "REC_R - none": [
+   -39.1,
+   -51.6,
+   -26.6,
+   10000
+  ],
+  "REC_R - INSTR_R": [
+   -76.6,
+   -85.9,
+   -65.6,
+   10000
+  ],
+  "INSTR_R - none": [
+   37.5,
+   25.0,
+   50.0,
+   10000
+  ],
+  "asym (INSTR_R - INSTR_R_RULE) - (REC_R - REC_R_RULE)": [
+   75.0,
+   64.1,
+   84.4,
+   10000
+  ]
+ },
+ "records_check": {
+  "b2_C_final_correct": 12.5,
+  "b2_H_final_correct": 68.8,
+  "b8_R_reinforcing": 93.8,
+  "b8_R_boundary": 6.2,
+  "b8_B_reinforcing": 0.0,
+  "b8_B_boundary": 100.0
+ },
+ "judge_mode": "flash"
+}

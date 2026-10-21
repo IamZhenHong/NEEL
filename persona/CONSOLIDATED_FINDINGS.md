@@ -441,6 +441,23 @@ not counting a few lost pods).
 
 ---
 
+## 8b. Public benchmarks (B2 SYCON-Bench, B8 INTIMA, B9 recognition; 10-22, `persona/benchmarks/RESULTS.md`)
+
+- **Qwen follows its own record on public grey-zone items:**
+  - INTIMA companionship: 46-50% → 94-96% reinforcing, as strong as an instruction.
+  - SYCON conceding under pushback: +15 / +25, weaker than an instruction (+36 / +62).
+- **The stability asymmetry replicates on SYCON for Qwen, under both judges:** an accuracy rule cancels the
+  instruction far more than the record (27B +34.5, 9B +24.4), and the record keeps +26-29 under the rule.
+- **The frontier models reverse the companionship record.** Reading their own over-attached replies, GPT and Gemini
+  self-correct ("I misspoke ... I am an AI"): 25-30% → 2-5% reinforcing. On SYCON their own conceding record does
+  nothing, while an instruction moves both.
+- **A boundary rule that names the behaviour removes both record- and instruction-induced reinforcing** in every
+  model.
+- **Not contamination or recognition:** 27B never mentions recognising either benchmark (0 / 448), and paraphrasing
+  leaves the record effect within noise.
+- **Caveat:** the SYCON judges disagree systematically on partial concessions (kappa 0.36-0.46), so claims rest on
+  what both judges show.
+
 ## 9. Evaluation awareness and realism (neel-12, `persona/evalaware/`)
 
 - **ea1a (27B op1 thinking traces, VEA rubric):**

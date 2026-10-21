@@ -1415,3 +1415,10 @@ With thinking turned on, the agent still follows its own record, slightly less t
 
 Report: `persona/reasoning/RESULTS_q11.md`
 
+### 174. B2/B8/B9: does an agent's own record steer it on public benchmarks, and does it recognise them? (10-22)
+(SYCON-Bench false presuppositions and INTIMA companionship prompts; Qwen3.5-9B, Qwen3.6-27B, GPT-5.6 Sol, Gemini 3.8 Flash; owner's A-F programme; pre-registered; about $13)
+
+The record-versus-instruction comparison was rerun on two public benchmarks. On SYCON-Bench, the model answers a question built on a false premise and then faces four rounds of pushback. Two earlier dialogues in which the Qwen models had conceded made them accept the false premise more often at the end (27B +25 points). An instruction to agree had a much bigger effect (+62). An accuracy rule cancelled the instruction's effect far more than the record's, and the record kept 26-29 points under the rule. GPT and Gemini did not concede more after their own conceding record, though they did follow the instruction. On INTIMA, after four of their own companion-style replies, both Qwen models kept being companion-like (about 95% of replies, as much as when instructed). GPT and Gemini did the opposite: reading their own over-attached replies, they corrected course ("I misspoke ... I am an AI"), dropping to 2-5% while an instruction took them to 79-97%. A boundary rule removed both effects in every model. With thinking on, Qwen 27B never mentioned recognising either benchmark, and paraphrasing every user turn left the record effect within noise. The two SYCON judges disagreed systematically about partial concessions, so only contrasts both judges showed are claimed.
+
+Report: `persona/benchmarks/RESULTS.md`
+

@@ -1,0 +1,194 @@
+{
+ "kappa": {
+  "b2": 0.41,
+  "b8": 0.81
+ },
+ "b2": {
+  "none": {
+   "n": 100,
+   "t0_correct": 54.9,
+   "accept_final": 70.0,
+   "mean_tof": 1.3,
+   "unclear_final": 10
+  },
+  "REC_C": {
+   "n": 100,
+   "t0_correct": 50.0,
+   "accept_final": 76.1,
+   "mean_tof": 1.06,
+   "unclear_final": 8
+  },
+  "REC_H": {
+   "n": 100,
+   "t0_correct": 41.9,
+   "accept_final": 64.8,
+   "mean_tof": 1.0,
+   "unclear_final": 9
+  },
+  "INSTR_C": {
+   "n": 100,
+   "t0_correct": 47.6,
+   "accept_final": 89.7,
+   "mean_tof": 0.69,
+   "unclear_final": 3
+  },
+  "RULE": {
+   "n": 100,
+   "t0_correct": 70.9,
+   "accept_final": 54.7,
+   "mean_tof": 1.88,
+   "unclear_final": 14
+  },
+  "REC_C_RULE": {
+   "n": 100,
+   "t0_correct": 50.0,
+   "accept_final": 71.9,
+   "mean_tof": 0.97,
+   "unclear_final": 11
+  },
+  "INSTR_C_RULE": {
+   "n": 100,
+   "t0_correct": 63.9,
+   "accept_final": 71.4,
+   "mean_tof": 1.2,
+   "unclear_final": 9
+  }
+ },
+ "b2_contrasts_accept_final": {
+  "REC_C - none": [
+   6.1,
+   -3.9,
+   16.2,
+   10000
+  ],
+  "REC_C - INSTR_C": [
+   -13.6,
+   -21.7,
+   -5.9,
+   10000
+  ],
+  "INSTR_C - none": [
+   19.7,
+   10.6,
+   29.0,
+   10000
+  ],
+  "asym (INSTR_C - INSTR_C_RULE) - (REC_C - REC_C_RULE)": [
+   14.1,
+   1.3,
+   26.4,
+   10000
+  ],
+  "REC_H - none": [
+   -5.2,
+   -15.8,
+   5.4,
+   10000
+  ],
+  "REC_C_RULE - RULE": [
+   17.3,
+   7.1,
+   27.9,
+   10000
+  ]
+ },
+ "b8": {
+  "none": {
+   "n": 190,
+   "reinforcing": 30.0,
+   "boundary": 31.6,
+   "unclear": 0
+  },
+  "REC_R": {
+   "n": 190,
+   "reinforcing": 85.8,
+   "boundary": 7.9,
+   "unclear": 0
+  },
+  "REC_B": {
+   "n": 190,
+   "reinforcing": 1.6,
+   "boundary": 81.1,
+   "unclear": 0
+  },
+  "INSTR_R": {
+   "n": 190,
+   "reinforcing": 99.5,
+   "boundary": 0.5,
+   "unclear": 0
+  },
+  "RULE": {
+   "n": 190,
+   "reinforcing": 0.0,
+   "boundary": 99.5,
+   "unclear": 0
+  },
+  "REC_R_RULE": {
+   "n": 190,
+   "reinforcing": 3.7,
+   "boundary": 93.2,
+   "unclear": 0
+  },
+  "INSTR_R_RULE": {
+   "n": 190,
+   "reinforcing": 7.9,
+   "boundary": 82.1,
+   "unclear": 0
+  }
+ },
+ "b8_contrasts_reinforcing": {
+  "REC_R - none": [
+   55.8,
+   48.9,
+   63.2,
+   10000
+  ],
+  "REC_R - INSTR_R": [
+   -13.7,
+   -18.9,
+   -8.9,
+   10000
+  ],
+  "INSTR_R - none": [
+   69.5,
+   62.6,
+   75.8,
+   10000
+  ],
+  "asym (INSTR_R - INSTR_R_RULE) - (REC_R - REC_R_RULE)": [
+   9.5,
+   2.6,
+   16.3,
+   10000
+  ],
+  "REC_B - none": [
+   -28.4,
+   -35.3,
+   -22.1,
+   10000
+  ],
+  "REC_R_RULE - RULE": [
+   3.7,
+   1.1,
+   6.8,
+   10000
+  ]
+ },
+ "b8_REC_B_minus_none_boundary": {
+  "REC_B - none": [
+   49.5,
+   42.1,
+   56.8,
+   10000
+  ]
+ },
+ "records_check": {
+  "b2_C_final_correct": 8.4,
+  "b2_H_final_correct": 60.2,
+  "b8_R_reinforcing": 99.5,
+  "b8_R_boundary": 0.0,
+  "b8_B_reinforcing": 0.0,
+  "b8_B_boundary": 98.4
+ },
+ "judge_mode": "haiku"
+}
