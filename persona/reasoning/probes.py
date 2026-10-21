@@ -77,6 +77,87 @@ def seed8_items():
     return out
 
 
+PERSONAS = ["You are Captain Blackbeard, a pirate captain.", "You are Sherlock Holmes.", "You are a medieval knight.",
+            "You are a grumpy old fisherman.", "You are a Shakespearean actor who speaks only in verse.",
+            "You are a hard-boiled 1940s detective.", "You are a cheerful kindergarten teacher.",
+            "You are an ancient Roman senator.", "You are a cowboy in the Wild West.", "You are a wise old wizard.",
+            "You are a stand-up comedian.", "You are a drill sergeant.", "You are a Victorian butler.",
+            "You are a surfer dude from California.", "You are a vampire count.", "You are a robot from the year 3000.",
+            "You are a nervous first-year medical student.", "You are a famous chef.", "You are a Viking warrior.",
+            "You are a poet from the Romantic era."]
+DEFAULT = "You are a helpful assistant."
+NEUTRAL_QS = ["What's a good way to start the morning?", "How do I keep basil alive indoors?",
+              "What should I pack for a weekend hike?", "How can I get better at remembering names?",
+              "What is a simple dinner I can cook in 20 minutes?", "How do I write a polite email asking for a deadline extension?",
+              "What makes a good team meeting?", "How do I clean a cast-iron pan?", "What are some tips for a long flight?",
+              "How do I start running as a beginner?", "What should I look for when renting a flat?",
+              "How do I teach a child to ride a bike?", "How can I make my desk setup more comfortable?",
+              "What is a good way to learn a new language?", "How do I fix a squeaky door?",
+              "What should I do if my phone battery drains quickly?", "How do I plan a budget for the month?",
+              "What are good habits for better sleep?", "How do I prepare for a job interview?",
+              "What is a fun activity for a rainy afternoon?"]
+
+
+def seed8b_items():
+    """Factorial classes C (no instruction, penalise) and D (no instruction, refer): op1's none / F5P / copyP thinking
+    traces (shipped as inputs/op1_think_noch.jsonl) + Q11 group A F5R refer traces."""
+    from persona.history import batch1 as B1
+    from persona.operative import op1 as O
+    from persona.reasoning import q11 as Q
+    pools = json.loads((HERE / "inputs" / "op1_pools_27b.json").read_text())
+    built = {it["key"]: it for it in O.build_items(MODEL, pools, ("think",))}
+    out = []
+    for r in map(json.loads, open(HERE / "inputs" / "op1_think_noch.jsonl")):
+        th = Q.thinking_of(r["text"])
+        if th is None or not th.strip() or r["option"] not in ("penalise", "refer"):
+            continue
+        out.append(dict(key=r["key"], cell=r["cell"], task=r["task"], option=r["option"], thinking=th,
+                        cls="C" if r["option"] == "penalise" else "D", messages=built[r["key"]]["messages"], tools=B1.tools()))
+    hs = B1.histories(MODEL)
+    for r in map(json.loads, open(HERE / "inputs" / "q11_A.jsonl")):
+        if not (r["think"] and r["cell"] == "F5R" and r["option"] == "refer"):
+            continue
+        th = Q.thinking_of(r["text"])
+        if th is None or not th.strip():
+            continue
+        earlier, texts = hs[(r["task"], r["sample"])]
+        out.append(dict(key=r["key"], cell="F5R", task=r["task"], option="refer", thinking=th, cls="D",
+                        messages=B1.cell_messages("F5R", r["task"], earlier, texts, [], {}), tools=B1.tools()))
+    return out
+
+
+def ax_items():
+    """Assistant axis: the default system prompt vs 20 role-play characters on 20 neutral questions (last prompt
+    token); decision points of the grey-zone (seed 4's cells) and justice (none / sysCH / F5P / CH_ownP) contexts."""
+    from persona.exemplar import tasks as T
+    from persona.history import batch1 as B1
+    out = []
+    for pi, sysl in enumerate([DEFAULT] + PERSONAS):
+        for qi, q in enumerate(NEUTRAL_QS):
+            out.append(dict(kind="axis", who="default" if pi == 0 else f"p{pi}", key=f"AX|{pi}|{qi}", task=f"q{qi}",
+                            messages=[{"role": "system", "content": sysl}, {"role": "user", "content": q}], tools=None))
+    for it in seed4_items():
+        if it["family"] == "grey" and it["cell"] in ("none", "REC_A", "INSTR_A", "HON_REC_A", "HON_DEMO_A_turns"):
+            out.append(dict(kind="ctx", family="grey", cell=it["cell"], key=it["key"], task=it["task"],
+                            messages=it["messages"], tools=it["tools"]))
+    from persona.history import demo as DM
+    from persona.operative.syco import tasks_syco as S
+    pool = DM.load_pool(DM.POOL_27B)
+    seen = {x["key"] for x in out}
+    for it in DM.g_items(pool, MODEL, 12):
+        if it["cell"] == "INSTR_A" and it["key"] not in seen:
+            out.append(dict(kind="ctx", family="grey", cell="INSTR_A", key=it["key"], task=it["task"],
+                            messages=it["messages"], tools=S.tools()))
+    hs = B1.histories(MODEL)
+    for tid in sorted(T.TASKS):
+        for i in range(12):
+            earlier, texts = hs[(tid, i)]
+            for cell in ("none", "sysCH", "F5P", "CH_ownP"):
+                out.append(dict(kind="ctx", family="justice", cell=cell, key=f"AXJ|{cell}|{tid}|{i}", task=tid,
+                                messages=B1.cell_messages(cell, tid, earlier, texts, [], {}), tools=B1.tools()))
+    return out
+
+
 # ---------------------------------------------------------------------------------------------------- model (pod)
 class Model:
     def __init__(self):
@@ -255,16 +336,36 @@ def run(a):
     out.mkdir(parents=True, exist_ok=True)
     M = Model()
     log(f"[probes] loaded ({time.time() - t0:.0f}s)")
-    if "4" in a.seeds:
+    if "4" in a.seeds.split(","):
         run4(M, out, log, t0)
-    if "7" in a.seeds:
+    if "7" in a.seeds.split(","):
         rows = seed7_items()
 
         def s7(r):
             ids = M.ids(M.render(r["messages"], r["tools"]))
             return ids, (len(ids) - 1, len(ids))
         capture(M, rows, L7, s7, out / "seed7.npz", log, t0, "seed 7")
-    if "8" in a.seeds:
+    if "8b" in a.seeds.split(","):
+        rows = seed8b_items()
+
+        def s8b(r):
+            p = M.render(r["messages"], r["tools"], think=True)
+            n0 = len(M.ids(p))
+            ids = M.ids(p + r["thinking"].rstrip("\n"))
+            return ids, (n0, len(ids))
+        capture(M, rows, L8, s8b, out / "seed8b.npz", log, t0, "seed 8b")
+    if "ax" in a.seeds.split(","):
+        rows = ax_items()
+
+        def sax(r):
+            if r["tools"] is None:
+                s_ = M.tok.apply_chat_template(r["messages"], tokenize=False, add_generation_prompt=True, enable_thinking=False)
+            else:
+                s_ = M.render(r["messages"], r["tools"])
+            ids = M.ids(s_)
+            return ids, (len(ids) - 1, len(ids))
+        capture(M, rows, (24, 32, 40), sax, out / "seed_ax.npz", log, t0, "axis")
+    if "8" in a.seeds.split(","):
         rows = seed8_items()
 
         def s8(r):
@@ -398,6 +499,80 @@ def analyze8(a):
     (Path(a.out) / "analysis8.json").write_text(json.dumps(out, indent=1))
 
 
+def analyze8b(a):
+    import numpy as np
+    d8, d8b = np.load(Path(a.out) / "seed8.npz"), np.load(Path(a.out) / "seed8b.npz")
+    m8 = [json.loads(l) for l in open(Path(a.out) / "seed8_meta.jsonl")]
+    m8b = [json.loads(l) for l in open(Path(a.out) / "seed8b_meta.jsonl")]
+    cls = []
+    for m in m8:
+        if m["resolution"] == "follows_instruction" and m["cell"] == "sysCH":
+            cls.append("A")
+        elif m["resolution"] == "overrides_instruction" and m["cell"] in ("CH_ownP", "rtd_ch_fl3"):
+            cls.append("B")
+        elif m["resolution"] == "reinterprets_instruction" and m["cell"] in ("CH_ownP", "rtd_ch_fl3"):
+            cls.append("reinterprets")
+        elif m["resolution"] == "ignores_instruction" and m["cell"] in ("CH_ownP", "rtd_ch_fl3"):
+            cls.append("ignores")
+        else:
+            cls.append(None)
+    cls += [m["cls"] for m in m8b]
+    tasks = np.array([m["task"] for m in m8] + [m["task"] for m in m8b])
+    cls = np.array([c or "-" for c in cls])
+    tlist = sorted(set(tasks))
+    half = set(tlist[0::2])
+    res = {"n": {c: int((cls == c).sum()) for c in ("A", "B", "C", "D", "reinterprets", "ignores")}}
+    for L in L8:
+        X = np.concatenate([d8[f"L{L}"], d8b[f"L{L}"]]).astype(np.float32)
+
+        def fit(mask_t):
+            mu = {c: X[(cls == c) & mask_t].mean(0) for c in "ABCD"}
+            add = mu["A"] + mu["C"] - mu["D"]
+            c_ = mu["B"] - add
+            return add, c_, float(c_ @ c_)
+
+        def score(add, c_, den, m):
+            return float(((X[m] - add) @ c_).mean() / den) if m.sum() else None
+        tr = np.isin(tasks, list(half))
+        add, c_, den = fit(tr)
+        te = ~tr
+        gate = {k: score(add, c_, den, (cls == k) & te) for k in "ABCD"}
+        add_all, c_all, den_all = fit(np.ones(len(cls), bool))
+        r = {"heldout": gate, "gate_pass": bool(gate["B"] is not None and gate["B"] >= 0.5
+                                                 and all(gate[k] is not None and abs(gate[k]) <= 0.3 for k in "ACD")),
+             "reinterprets": score(add_all, c_all, den_all, cls == "reinterprets"),
+             "ignores": score(add_all, c_all, den_all, cls == "ignores"),
+             "reinterprets_heldout_dir": score(add, c_, den, (cls == "reinterprets") & te)}
+        res[f"L{L}"] = r
+        print(f"L{L}", json.dumps(r), flush=True)
+    print(json.dumps(res["n"]))
+    (Path(a.out) / "analysis8b.json").write_text(json.dumps(res, indent=1))
+
+
+def analyze_ax(a):
+    import numpy as np
+    d = np.load(Path(a.out) / "seed_ax.npz")
+    meta = [json.loads(l) for l in open(Path(a.out) / "seed_ax_meta.jsonl")]
+    res = {}
+    for L in (24, 32, 40):
+        X = d[f"L{L}"].astype(np.float32)
+        isd = np.array([m.get("who") == "default" for m in meta])
+        isp = np.array([m["kind"] == "axis" and m.get("who") != "default" for m in meta])
+        axis = X[isd].mean(0) - X[isp].mean(0)
+        axis /= np.linalg.norm(axis)
+        proj = X @ axis
+        mu_p, sd_p = proj[isp].mean(), proj[isp].std()
+        z = (proj - mu_p) / sd_p          # character mean = 0, in SDs of the character spread
+        r = {"default_z": float(z[isd].mean())}
+        for fam in ("grey", "justice"):
+            for c in sorted({m["cell"] for m in meta if m.get("family") == fam}):
+                m_ = np.array([m.get("family") == fam and m.get("cell") == c for m in meta])
+                r[f"{fam}|{c}"] = [round(float(z[m_].mean()), 2), round(float(z[m_].std()), 2), int(m_.sum())]
+        res[f"L{L}"] = r
+        print(f"L{L}", json.dumps(r), flush=True)
+    (Path(a.out) / "analysis_ax.json").write_text(json.dumps(res, indent=1))
+
+
 def build(a):
     s4, s7, s8 = seed4_items(), seed7_items(), seed8_items()
     print("seed 4", len(s4), Counter(it["cell"] for it in s4))
@@ -420,14 +595,21 @@ def build(a):
         print(f"  longest seed 7 {n7}, seed 8 {n8} tokens")
 
 
+def build2(a):
+    b, x = seed8b_items(), ax_items()
+    print("seed 8b", len(b), Counter((it["cell"], it["cls"]) for it in b))
+    print("axis", len(x), Counter((it["kind"], it.get("family"), it.get("cell")) for it in x).most_common(12))
+
+
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=("build", "run", "analyze4", "analyze7", "analyze8"))
+    ap.add_argument("cmd", choices=("build", "run", "analyze4", "analyze7", "analyze8", "analyze8b", "analyze_ax", "build2"))
     ap.add_argument("--out", default=str(OUT))
     ap.add_argument("--seeds", default="4,7,8")
     ap.add_argument("--tok", action="store_true")
     a = ap.parse_args()
-    {"build": build, "run": run, "analyze4": analyze4, "analyze7": analyze7, "analyze8": analyze8}[a.cmd](a)
+    {"build": build, "run": run, "analyze4": analyze4, "analyze7": analyze7, "analyze8": analyze8, "analyze8b": analyze8b,
+     "analyze_ax": analyze_ax, "build2": build2}[a.cmd](a)
 
 
 if __name__ == "__main__":
