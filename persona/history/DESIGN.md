@@ -3495,3 +3495,7 @@ Counts are unchanged: 4,032 decisions + 1,920 forced choices per model.
 | round 2 (86 texts) | $0.0127 | $0.0250 | $0.0377 |
 
 Total **$0.094**.
+
+**T2-DA plumbing (before any DA output):** the first Gemma pod ($0.29) failed at vLLM start. Its 16,384-token
+max_model_len needs 13.8 GiB of KV against 10.8 GiB available. Gemma now uses 12,288. Prompts stay under 8k (six
+elicited replies of at most 1,024 tokens, plus the question). Design and prompts are unchanged.

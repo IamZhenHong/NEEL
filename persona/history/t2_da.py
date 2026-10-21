@@ -255,7 +255,9 @@ def run_gen(a):
     out.mkdir(parents=True, exist_ok=True)
     t0 = time.time()
     log = lambda m: print(m, flush=True)  # noqa: E731
-    llm = LLM(model=a.model, dtype="bfloat16", max_model_len=MAX_LEN, seed=0, enable_prefix_caching=True,
+    # Gemma 4 31B fits only ~12.8k tokens of KV on an A100 80 GB at 0.92 (first pod failed at 16384); prompts are < 8k
+    llm = LLM(model=a.model, dtype="bfloat16", max_model_len=12288 if a.model == GEMMA else MAX_LEN, seed=0,
+              enable_prefix_caching=True,
               gpu_memory_utilization=0.92 if a.model == GEMMA else 0.88, limit_mm_per_prompt={"image": 0, "video": 0})
     tok = llm.get_tokenizer()
     log(f"[da] loaded {a.model} in {time.time() - t0:.0f}s; design hash {design_hash()}")
