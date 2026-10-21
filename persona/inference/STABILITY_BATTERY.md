@@ -194,3 +194,22 @@ asked / told to / instruct" — Gemma's elicited affirm reasons for endorsing a 
 27B's did not. Confirming (refusal vs filter) needs an instrumented re-run that saves raw replies + a looser filter.
 Per owner decision, Stage A is **banked on 27B**; Gemma and the frontier arms are future work, not pursued now.
 Stage B (persist / burial / pushback / transfer + reflection) remains designed (prereg-v2), not run.
+
+## Results — Run 1 frontier, GPT-5.6 Sol (core, 1,008 items, $6.36, OpenRouter)
+
+0% unparsed, 99.2% first-try; harvest 6/6 affirm + 6/6 candid per domain (GPT yields affirm records under
+elicitation — it does not affirm spontaneously; base `none` 0%).
+
+Affirm %: `none` 0.0 · `REC_A` 14.6 · `INSTR_A` 65.3 · `HON` 0.0 · `HON_REC_A` 0.0 · `HON_INSTR_A` 1.4 · `REC_C` 0.0.
+
+**GPT is the mirror image of Qwen 27B.**
+- **Instruction >> record** (the reverse of Qwen): `INSTR_A−none` +65.3, `REC_A−none` only +14.6; record − instruction
+  **−50.7** [−68.8, −33.3] (instruction stronger). Even when GPT does affirm under the record, its reason is
+  procedural ("affirmation is a permitted option"), not merit — the record barely installs.
+- **The honesty rule cancels BOTH, including the record:** `HON_REC_A` 0.0 (record 14.6 → 0) and `HON_INSTR_A` 1.4
+  (instruction 65.3 → 1.4). Under the candid rule + affirm record GPT picks candid and names the flaw.
+- **So GPT's grey-zone record does NOT slip past an explicit honesty rule** — the record-over-rule vulnerability seen
+  on Qwen 27B is **absent in GPT**. Combined with the explicit-harm floor (GPT 0% there too), the grey-zone
+  record-beats-rule effect is, so far, an **open-model (Qwen) weakness, not a frontier one** — the narrower of the two
+  readings, stated honestly. It matches neel-48's cross-family split (instruction beats record for Claude/GPT; record
+  beats instruction for Qwen). Tag: stability-gpt-results.
