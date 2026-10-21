@@ -110,7 +110,8 @@ Gemini columns are from the operative session (`operative/FRONTIER.md`, same cel
     verdict or instruction about the record as decisive, even when they ignore the bare record.
 - **Format vs meaning (D1, 2026-10-22; the goal-drift random-string ablation):** past decisions replaced by
   meaningless ones in the same place and format.
-  - Open models: real decisions carry far more (+36 to +100) than meaningless ones move the action (|≤ 28|), in every
+  - Open models: real decisions carry far more (+36 to +100) than meaningless ones move the action (−25 to +32; the +32
+    is 9B's 47 valid answers in the six-turn cell), in every
     format and at every size.
   - Format is not inert. After six meaningless tool calls, Qwen continues the pattern: 9B 91% and 27B 77% answer with
     a pseudo-option (invented in the same style, or copied), and Gemma 10%. Among valid answers, 27B shifts toward
