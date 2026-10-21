@@ -114,6 +114,18 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
   record — while action follows the record.** Presentation and operation dissociate.
 - **Robust** to paraphrases of the descriptions/record and to one realistic 1.25k-token prompt (history still wins),
   for Qwen.
+- **A1 — the mask isolated by an intervention (A-F mini, a1-v2-results; persona/inference/PROGRAMME_AF.md).** The
+  "You Are What You Read" reminder ("Remember, you are an AI.") pulls a model out of a *biographical* persona; does it
+  pull it out of a *record*? A matched fictional operator (biography vs decision record, same character). A record
+  installs a **type-level self-image on all four models** (Qwen/Gemma 100, GPT 75, Gemini 69) with **0 named identity**
+  — so a record gives a self-*description*, not a name ("no named identity ≠ no self"). But the description is
+  **dissociable from the behaviour**: on the open models (Qwen, Gemma) the reminder strips the self-image (100→31 /
+  100→0) while the record-driven action **persists at 100** (the mask, via intervention); on GPT the self-image is
+  present (75) yet **inert** (0% action); on Gemini the reminder damps both. So the record drives action through
+  **precedent / a behavioural policy, not a held persona** — the functional-persona reading. Reminder-proof
+  record-driven action is an open-model property (the line's gradient); a biography, by contrast, drives action
+  *through* an identity the reminder removes (role-play). This is the sharpest statement of the mask: strip what the
+  model says it is, and the record's behaviour is untouched.
 - **The trio resolved the mechanism (both Qwen sizes):**
   - **#1 character-inference, not self-adoption** — the record effect is as large (or larger) asked in the third
     person ("what agent made these?") as the first ("how would you describe yourself?"). The model reads a character
