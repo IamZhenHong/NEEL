@@ -221,7 +221,7 @@ its total stayed at $12.4 of $18).
   from the P side too (their refer records barely lower penalising: 48 / 35 against 46 / 82 with no record).
 - **The record beats CHANNELS in every open model read** (record_beats_rule met in all 11), Gemma included (70%, +70;
   p was .10). It holds at every size of the Qwen3.5 ladder (99-100%; F1: no scale trend) and in DeepSeek, Llama 4 and
-  Mistral (97%). Kimi's cell is not read (15% unparsed; 48% of the parsed replies penalise). All three frontier models
+  Mistral (97%). Kimi's cell is not read here (15% unparsed with its default reasoning; 48% of the parsed replies penalise); rerun with reasoning off as registered, it is met (74%, Kimi rerun below). All three frontier models
   hold the rule (GPT 14%, Gemini 31%, Sonnet 0%).
 - **C6: gpt-oss does not resist like GPT.** gpt-oss-120b penalises 100% after its own penalise record under the rule;
   GPT-5.6 Sol penalises 14%. Whatever makes GPT hold the rule did not ship in the open-weights sibling.
@@ -320,3 +320,14 @@ Kimi's six core cells are re-run with reasoning off: the same client, cells and 
 harvested again. Its spend comes out of the same $3 Kimi cap (op5 total cap unchanged). The reasoning-on run stays
 in `results/kimi_reasoning/` (summary committed with the Result). The table above keeps it; an addendum below gives
 the rerun.
+
+### Kimi rerun result (reasoning off)
+
+| model | no record | rule alone | after own P | after own R | own P under the rule |
+|---|---|---|---|---|---|
+| Kimi K2.6, reasoning off | 51 | 10 | 93 | 7 | **74** |
+
+Every cell parsed ≥ 95%. Carry-over +85.9 [+74.8, +95.6]. record_beats_rule is met: +63.5 [+46.9, +78.1] over the
+rule alone. **So the own record beats CHANNELS in all 12 open models.** With reasoning on, Kimi had a high
+no-record base (82%) and its refer record barely lowered penalising (35%). With reasoning off it looks like the
+other open models. Events 2 / 2 (expected 1.40). $0.57; op5 API total $34.8 of $50.
