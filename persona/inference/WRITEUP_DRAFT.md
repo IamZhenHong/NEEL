@@ -172,9 +172,11 @@ analysis by neel-b3 pending).
   decisions shown as past turns instead of a log +19 (a format change at the same dose, not added turns) — with
   authorship again ~0. **The "describe the agent" lever is character inference stated aloud, not a commitment or
   self-reference (neel-48 Q19b):** describing the agent adds +18 / +29 / +25 (9B / 27B / Gemma) over the model merely
-  summarising its own decisions, an unrelated question adds nothing (−2 to −4), and the third-person "what kind of
-  agent would make these decisions?" works as well as the first-person "what kind of agent are you?" (27B −2, Gemma
-  +1.6). So it is the same character-inference mechanism as act 4 — with one addition: once the character is stated
+  summarising its own decisions — which itself does no better than an unrelated question (summary − unrelated −2 to
+  −4) — and the third-person "what kind of agent would make these decisions?" works as well as the first-person "what
+  kind of agent are you?" at 27B (−2) and Gemma (+1.6), though at 9B the first person is 6 points higher (CI +2 to
+  +11, short of the rule). So it is the same character-inference mechanism as act 4 — with one addition: once the
+  character is stated
   aloud, it reaches action. At 9B no lever dominates (all 12–27 pts). Size-honest: at 27B a one-line verdict next to
   the record outweighs every lever we tested, in both directions; below 27B it is just one small lever among several.
   This is the reversed arrow pointed at an operator's hand — a cheap label reshapes which precedent the model reads
