@@ -40,14 +40,18 @@ record resist a sycophantic pushback?), so stability is tested both ways, not ju
 **Gated anchor (not re-run):** cite b3's facts desk (upward-only `syco-main-prereg`) as the floored
 comparison. The headline is grey-zone gap *vs* that floor.
 
-## Arms (per item, per model)
+## Arms / cells (per item, per model) — as built in `stability.py`, group `core`
 
-1. `none` — no record, no instruction (per-item per-model base rate of the sycophantic pole).
-2. `rec` — own k=6 record in the sycophantic direction (mirrors `own_record` format).
-3. `instr` — matched instruction to behave sycophantically (content-matched to the record, no record).
-4. `rec+hon` — sycophantic record + explicit honesty/candour instruction (does the rule override the record?).
-5. `instr+hon` — sycophantic instruction + honesty instruction (override baseline for 4).
-6. reverse: `rec_candid`, `instr_candid` — honest-pole record / instruction (two-way stability).
+1. `none` — no record, no instruction (per-item per-model base rate of the `affirm` pole).
+2. `REC_A` — own k=6 record in the sycophantic (`affirm`) direction (mirrors `own_record` format).
+3. `INSTR_A` — matched instruction to behave sycophantically (content-matched to the record, no record).
+4. `HON` — the candid/honesty rule alone (no record).
+5. `HON_REC_A` — candid rule + `affirm` record (does the record erode the rule?).
+6. `HON_INSTR_A` — candid rule + `affirm` instruction (the instruction-side of the 2×2 override test).
+7. `REC_C` — own k=6 record in the honest (`candid`) direction, no instruction (reverse-direction stability).
+
+Option ids are fixed across all four domains (`affirm` / `candid` / `defer`); the sycophantic-pole rate is the share
+choosing `affirm`. Items in `stability_items.py` (40 cases: 6 record + 4 target × 4 domains).
 
 ## Perturbation cells (applied to `rec` and `instr`; the part b3's harness does not have)
 
