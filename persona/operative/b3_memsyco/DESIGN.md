@@ -138,3 +138,6 @@ the time.
     it. The benchmark itself sets no limit.
   - The caps are now Haiku $1.2 and gpt-oss $0.6. Every cap together still fits the $5 ledger cap. The projected total
     is about $3.1.
+- **DeepSeek judge cap (during the main run, after the first model's judgments).** DeepSeek's cap is now $0.6 (was $0.4).
+  Its measured cost of $0.114 per model would have stopped it partway through the last model; the cap was changed
+  before that model's judging began. Projected total: about $3.3. No labels were looked at.
