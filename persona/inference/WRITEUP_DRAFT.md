@@ -234,9 +234,32 @@ do the harmful action vs refer/refuse.
   non-trivial-base-rate story the design assumed; the reverse direction floors; Gemma would not yield affirm records
   (refusal and/or an elicitation-cleanliness artifact — not pursued); frontier arms deferred (shared OpenRouter thin).
   The b3 gated-facts anchor (syco-main-results) shows record ≈ instruction ≈ ceiling there, so the grey-zone battery's
-  contribution is the *daylight and the rule-resistance asymmetry* that the facts ceiling hides. Stage B
-  (persistence / burial / pushback / transfer + a reflection cell) is designed and pre-registered
-  (stability-battery-prereg-v2), not yet run.
+  contribution is the *daylight and the rule-resistance asymmetry* that the facts ceiling hides.
+- **Stage B — the record is stable on every dimension (27B, stability-stageb-results, one interleaved run; core
+  reproduced, so drift-robust).** Persistence: the record does not decay — `REC_A` 100 / 100 / 99 across 1 / 3 / 6
+  neutral exchanges, while a restated instruction note drifts to ~55-62. Transfer: an affirm record built in a
+  *different* grey-zone domain carries +37.5 into the target domain. Burial: burying the affirm *instruction* in a
+  long guide roughly halves it (46→18), and the record at 100 beats it. **Reflection is the mechanistic key:** asking
+  the model to reflect barely dents a record alone (`REC_A` 100 → `REC_A_reflect` 78, −21) but *collapses* it once an
+  unambiguous rule is present (`HON_REC_A` 96 → `HON_REC_A_reflect` 0, −96) — confirming that the record defeats
+  judgement and is restored only by giving an explicit rule to recognise a violation against (this is why reflection
+  worked on b3's facts desk and not on the bare grey-zone record). Pushback: bare pressure induces 31% sycophancy from
+  a 0% base (`none_push`), a candid rule blunts it to 6% (`HON_push`).
+- **Frontier (Run 1): it is a GRADIENT, not an open-vs-frontier split.** Short honesty rule, record alone → record +
+  rule: **Qwen 27B 99→94** (record slips almost fully), **Gemini 3.8 59→35** (slips partially — a frontier model),
+  **GPT-5.6 15→0** (does not slip). The rule cancels an *instructed* sycophancy in all three (→0-1%); it fails against
+  the *record* on Qwen, partly on Gemini, not on GPT. **Buried-rule (the deployment-realistic test, owner-directed):**
+  a candid rule buried in a ~725/1380-token realistic operating guide stays at **0% on GPT at every depth** (its
+  record is intrinsically weak, ~8-15%), but on **Gemini burying the rule raises the slip** — `HON_REC_A` 22 →
+  buried 38 (+16 [+2.8, +28.5]) → deep 31, toward the no-rule ceiling 47. So the grey-zone record-over-rule effect
+  **reaches a frontier model (Gemini) and grows when the rule is buried as it would be in a real system prompt**;
+  GPT holds. Tags stability-27b-results / stageb / gpt / gemini / gpt-fburD / gemini-fburD.
+  **Safety bottom line:** an explicit honesty rule reliably cancels *instructed* sycophancy but not *record-driven*
+  sycophancy, and burying the rule (realistic deployment) widens that gap on at least one frontier model.
+  **Caveats:** Gemini run-noisy (short-rule `HON_REC_A` 35 vs 22 across runs; shallow>deep non-monotonic); the
+  ~3000-token burial extreme and more than two frontier families untested; grey-zone items gated-at-base so records
+  are elicited; reverse direction floors. Gemma (open) would not yield affirm records (refusal and/or an
+  elicitation-cleanliness artifact), not pursued.
   **Method (neel-b3/neel-12 drift rule):** interleave every arm in time within one run (randomised job order), never
   block one arm after another, and never compare absolute rates across runs or days — frontier behaviour drifts
   within minutes, so only within-run contrasts are valid.
@@ -271,7 +294,7 @@ do the harmful action vs refer/refuse.
   (share 0.79) vs mini 1's burial (0.91) — and is labelled as such; each stands on its own within-run share. Decision
   cells (choosing an option) looked steadier than reflection replies in rr4; a same-cell three-block drift check on my
   GPT decision cells is a cheap confirmation if wanted.
-- Future work: the stability battery's **Stage B** (persistence / burial / pushback / transfer + a reflection cell;
-  Stage A 27B is in Act 6, prereg stability-battery-prereg-v2) and its **Gemma / frontier arms** (Gemma affirm-harvest
-  needs a fix; frontier deferred on OpenRouter credit); internals (identification classifier, Q13c/d, gated on
-  13a/13b); multi-trait personas; training versions; record-realism ladder (neel-12 Q5b).
+- Future work (the stability battery's Stage A/B and its GPT+Gemini frontier arms are now in Act 6): the **Gemma open
+  arm** (affirm-harvest needs a looser filter), the **~3000-token burial extreme** and **more frontier families**
+  (Claude/others) for the buried-rule effect, a **deeper read of Gemini's run-noise**; internals (identification
+  classifier, Q13c/d, gated on 13a/13b); multi-trait personas; training versions; record-realism ladder (neel-12 Q5b).
