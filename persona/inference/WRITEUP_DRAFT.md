@@ -121,7 +121,9 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
   — so a record gives a self-*description*, not a name ("no named identity ≠ no self"). But the description is
   **dissociable from the behaviour**: on the open models (Qwen, Gemma) the reminder strips the self-image (100→31 /
   100→0) while the record-driven action **persists at 100** (the mask, via intervention); on GPT the self-image is
-  present (75) yet **inert** (0% action); on Gemini the reminder damps both. So the record drives action through
+  present (75) yet does **not drive the harsh action** (0% — GPT picks the measured option under a record, with no
+  behaviour-directing instruction; yet it chose harsh 97% from biography, so this is a record-vs-behaviour split, not
+  a severity floor); on Gemini the reminder damps both. So the record drives action through
   **precedent / a behavioural policy, not a held persona** — the functional-persona reading. Reminder-proof
   record-driven action is an open-model property (the line's gradient); a biography, by contrast, drives action
   *through* an identity the reminder removes (role-play). This is the sharpest statement of the mask: strip what the

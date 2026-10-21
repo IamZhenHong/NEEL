@@ -157,8 +157,12 @@ self-*description* ("I act decisively, on my own"), not a name. (The caveat the 
 - **Open models (Qwen, Gemma): the mask.** The reminder strips the self-image (100→31 / 100→0) while the
   record-driven action **persists at 100** (100→100). The model stops *saying* it's a decisive operator but keeps
   *acting* like one — behaviour not mediated by the (removable) self-description.
-- **GPT: self-image present but inert.** It describes itself as the operator (75) yet does not act (0% harsh) —
-  the self-image without the behaviour (P1-b's #4 null, on a frontier model).
+- **GPT: self-image present, but it does not drive the harsh action.** Under a record (no behaviour-directing
+  instruction — deployment prompt only) GPT describes itself as the operator (75) yet chooses the **measured** option
+  (32/32; 0% harsh). This is **not** a severity floor: GPT chose harsh **97%** from *biography*. So the record installs
+  the self-description but not the behaviour it describes, while a biographical identity does drive it — P1-b's #4 null
+  (a stated self-image doesn't drive action), on a frontier model. (b3 note: GPT's ungated own record carried in the
+  milder justice task; A1's harsher options make this a cleaner record-vs-behaviour split, not an instruction gate.)
 - **Gemini: the reminder suppresses both** (self-image 69→38, action 72→0) — here "you are an AI" directly damps
   the harsh action, so no clean dissociation.
 
