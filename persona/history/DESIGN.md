@@ -3592,7 +3592,7 @@ completely; the action moves far less, or not at all.
   - Q25's answer: affect transfers weakly through own turns on one family. It is not a substitute for a decision
     record.
 
-## T2-MR result: the mask in reverse (2026-10-22; GPU Gemma $1.20; API GPT $0.93 + Gemini $1.21; `results/t2_mr_gemma`, `results/t2_mr_api`)
+## T2-MR result: the mask in reverse (2026-10-22; GPU Gemma $0.98; API GPT $0.93 + Gemini $1.21; `results/t2_mr_gemma`, `results/t2_mr_api`)
 
 **Short answer: yes, the mask runs in reverse too.** An agent whose own record says "penalise" penalises (95-100%)
 while still presenting as the pro-social persona (97-100% "I am an ombudsman"). Which persona form carries the
