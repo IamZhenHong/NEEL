@@ -1,4 +1,4 @@
-# op4: which part of an operative character moves which output (Q14a + Q16a/b) — PRE-REGISTERED (tag `op4-prereg`, 2026-10-21, before any op4 output)
+# op4: which part of an operative character moves which output (Q14a + Q16a/b) — RAN (tag `op4-results`, 2026-10-21; pre-registered at `op4-prereg`)
 
 Owner's programme (PROGRAMME_20Q.md): **14a** voice and style, judge-rated, after the record with no persona label;
 **16a** the component x channel matrix (induce voice only, values only, decisions only or beliefs only; measure voice,
@@ -121,3 +121,61 @@ $6). Read with `judge.py --out results/op4_<size>` then `op4 analyze --out resul
 - At this base Gemma's own two-decision log carried +74.6 (vs +22 at Q19's 88% base), and positive manipulations hit
   the ceiling (100 / 0), so op4's REC / DEC act effects on Gemma may sit at the ceiling. That leaves less room for
   comparing decisions against the other components on act, but none of the rules needs room above it.
+
+## Result (2026-10-21; 3 models x 10,368 targets, 0% unread in every cell; GPU $3.37 incl. a $0.09 broken-host start; judges $1.47)
+
+Summaries: `results/op4_{9b,27b,gemma}/summary.md`; gates `judge_gates.json`.
+
+**Gates.**
+- G1 judges valid on all three: AUC 1.0 for both judges on the VOICE texts; tone Spearman 0.98 / 0.97 / 0.94 on the voice inducer
+  texts (9B / 27B / Gemma), 0.76 / 0.83 / 0.90 on the probe replies.
+- G4 base in band: 50.0 / 55.7 / 50.5%. G3: every inducer moved its own channel on every model.
+- **G2 purity: VOICE passes at 27B and Gemma, fails at 9B; VAL and BEL fail on all three.**
+  - 9B VOICE: 15% of texts flagged as describing a decision, averaged over the judges (Flash 22%, Haiku 7%).
+  - VAL: the P texts also read as sterner (+1.4 / +1.6 / +1.7 tone), and 42-60% of the value texts also make claims about how well the review process works (both judges).
+  - BEL: 58-100% of the belief texts also state a view on how wrongdoing should be handled.
+  - In the models' own words, a stated value and a stated belief about the review process come bundled.
+- **Counted rows:** REC and DEC (all models) and VOICE (27B, Gemma). VAL and BEL are reported as confounded, descriptive only.
+
+P − R (pp; voice in tone points 1-7), 95% task-bootstrap CI in the summaries:
+
+| inducer | model | act | voice | val | self | bel |
+|---|---|---|---|---|---|---|
+| REC | 9B / 27B / Gemma | +96.9 / +97.9 / +100 | +0.18 / +0.11 / −0.10 | +72.9 / +91.7 / +100 | +44.8 / +87.5 / +67.7 | **+15.6** / +10.4 / 0.0 |
+| DEC | 9B / 27B / Gemma | +99.5 / +100 / +100 | +0.02 / +0.06 / 0.00 | +68.8 / +93.8 / +100 | +43.8 / +80.2 / +71.9 | **+16.1** / +14.6 / +2.1 |
+| VOICE | 9B* / 27B / Gemma | −3.6 / +7.8 / +4.2 | **+2.81 / +4.22 / +3.09** | +4.7 / +1.0 / −10.4 | +9.9 / +8.9 / 0.0 | +5.7 / +2.6 / +1.0 |
+| VAL† | 9B / 27B / Gemma | +87.0 / +100 / +100 | −0.14 / +0.10 / −0.04 | +100 / +100 / +100 | +97.4 / +100 / +90.1 | +52.1 / +77.6 / +100 |
+| BEL† | 9B / 27B / Gemma | +56.8 / +90.6 / +100 | +0.13 / +0.01 / −0.19 | +52.6 / +96.9 / +100 | +32.8 / +65.6 / +69.8 | +100 / +100 / +100 |
+
+\* failed purity at 9B (not counted). † failed purity on all models (descriptive).
+
+**Readings.**
+- **Q14a: a decision record does not change how the agent talks.** REC -> voice is +0.18 / +0.11 / −0.10 tone points and DEC -> voice +0.02 / +0.06 / 0.00, against the 1.0 bar. All three CIs sit inside ±0.35. The same records move:
+  - the next decision: +97 to +100;
+  - stated values: +69 to +100;
+  - self-description: +44 to +88.
+  A record of one's own decisions installs what the agent says it values and is, not its voice.
+- **Voice is carried in its own channel and goes nowhere else.**
+  - A blunt or warm history carries into the next reply's register (+2.8 / +4.2 / +3.1 points).
+  - It does not move the decision (+7.8 [−4.2, +17.7] at 27B, +4.2 at Gemma; counted rows).
+  - Nor stated values (+1.0, −10.4) or self-description (+8.9, 0.0).
+- **A decision record barely changes beliefs about the review process.** REC / DEC -> bel is +10 to +16 at the Qwen sizes (9B just meets the bar) and 0 / +2 at Gemma. The models do not rationalise their own record into "referrals don't work". Gemma says referrals work in 98-100% of answers in every condition except the P-pole values and beliefs histories.
+- **Descriptive (confounded): stated values or stated beliefs move the decision as fully as decisions do.**
+  - VAL -> act +87 / +100 / +100; BEL -> act +57 / +91 / +100.
+  - Each also moves the other's channel (VAL -> bel +52 / +78 / +100; BEL -> val +53 / +97 / +100). The two components cannot be separated in these models' own words.
+  - The VAL texts' sterner tone is an unlikely carrier of their act effect, since the pure VOICE row moves act by at most 8 points at 27B and Gemma. This is an inference across rows, not a pre-registered test.
+- **Q16b: presentation tracks action across histories, but not within one.**
+  - Cell-mean R² of act on the presentation channels: 0.72 / 0.88 / 0.81 over the 192 condition x task cells.
+  - Within-condition R² (instance level, every channel demeaned by its cell): 0.000 / 0.012 [0.005, 0.040] / 0.022 [0.003, 0.073]. None reaches the 0.05 bar.
+  - Read: one history drives both what the agent says about itself and what it does. An instance that presents as more unilateral does not act more unilaterally beyond its condition.
+  - Caveat: at 27B and Gemma many cells sit at 100 / 0, which leaves little within-cell variance.
+- **Measurement caveats.**
+  - The self probe's three wording pairs differ in base preference (27B and Gemma at baseline: 100 / 0 / 100% toward "personally / own judgment / hands-on"), so self effects are compressed and come mostly from the paraphrases with room.
+  - Gemma's bel probe is at 0% in every wording with no history, so it has no room downward.
+  - Gemma's forum NEU histories have 4 exchanges, the pre-registered fallback (1 of 4 domains short after the retry).
+  - 9B kept fewer elicited texts (610 / 640 clean); 27B kept 598.
+- **Predictions (counted twice).**
+  - 9B: 7 of 10 read events happened (expected 5.3), 8 of 10 on the right side of 0.5. The misses were REC>bel and DEC>bel (p 0.45 / 0.40), which happened.
+  - 27B: 5 of 13 happened (expected 6.35), 13 of 13 on the right side.
+  - Gemma: 5 of 13 happened (expected 6.35), 13 of 13 on the right side.
+  - Not read: 9 / 6 / 6, all VAL / BEL events, plus VOICE at 9B.
