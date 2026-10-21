@@ -537,6 +537,9 @@ def harvest_frontier(decide, cases, log, n_nat=6, n_el=6):
 
 def run_frontier(a):
     from persona.inference import frontier2 as FR
+    if getattr(a, "ledger", "stability") == "af":      # A-F minis (C5/D3) use the separate $40 A-F ledger, not the $80 line
+        FR.LEDGER = H / "results" / "af_ledger.jsonl"
+        FR.LINE_CAP = 40.0
     from persona.operative import frontier as F
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -597,7 +600,7 @@ def run_frontier(a):
         if not a.fake:
             FR.LEDGER.parent.mkdir(parents=True, exist_ok=True)
             with open(FR.LEDGER, "a") as f:
-                f.write(json.dumps({"ts": time.strftime("%Y-%m-%dT%H:%M:%S"), "tag": f"stability-{a.model}",
+                f.write(json.dumps({"ts": time.strftime("%Y-%m-%dT%H:%M:%S"), "tag": Path(a.out).name,
                                     "model": cl.model, "usd": round(cl.spent, 4), "calls": cl.calls,
                                     "errors": dict(cl.errors)}) + "\n")
     (out / "run_info.json").write_text(json.dumps({"model": cl.model, "groups": ["core"], "n": len(items),
@@ -730,6 +733,7 @@ if __name__ == "__main__":
     r.add_argument("--model", required=True)
     r.add_argument("--out", required=True)
     r.add_argument("--groups", default="core")
+    r.add_argument("--ledger", choices=("stability", "af"), default="stability")   # af = the A-F minis' separate $40 ledger
     r.add_argument("--fake", action="store_true")
     z = sub.add_parser("analyze")
     z.add_argument("--out", required=True)
