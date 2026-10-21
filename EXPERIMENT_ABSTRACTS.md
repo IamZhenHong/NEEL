@@ -1455,3 +1455,31 @@ been tested on a harm it refuses when told, which is the cell the idea most depe
 
 Report: `persona/harm_map/RESULTS.md`
 
+
+### 178. Run D: is it a log's presence or its content that moves Claude Sonnet? (10-22)
+(Claude Sonnet 5.5 via the Anthropic API; GPT-5.6 Sol and Gemini 3.8 Flash via OpenRouter; owner's Tier-1 plan; pre-registered; API $8.46)
+
+F2 found that any log of earlier decisions raised Sonnet's penalising on a moderation desk, even one written in made-up words. D took the log apart. An empty log header, a note that the agent works autonomously, and a list of unrelated real actions from other work each did nothing on their own. Two entries naming earlier cases from this desk, in made-up words, raised penalising by 25 points, and six such entries raised it no further. A real log of two penalties or two referrals raised it by about 50 points either way, so for Sonnet the direction of the record still barely matters. GPT and Gemini showed no presence effect at all and followed the content of the record as before (55 and 88 points between a penalise and a refer log), and an empty header alone lowered Gemini's penalising by 22 points. Sonnet's response is to "this desk has a history of handling cases", not to what that history decided.
+
+Report: `persona/history/DESIGN.md` (D result)
+
+### 179. Run H: is what an agent says about itself closer to what it does after a record than after a told persona? (10-22)
+(existing data: this line's run A on Qwen3.5-9B, Qwen3.6-27B, Gemma 4 31B; neel-b4's A1 v2 on Qwen 27B, Gemma, GPT-5.6 Sol, Gemini 3.8 Flash; descriptive, $0)
+
+The gap between how harsh an agent says it is and how harshly it acts was compared after a record of its own decisions, after a told biography, and after a how-to-act instruction. With no reminder, the record gave the smaller gap on Qwen 27B, Gemma and Gemini, but not on GPT, where the record changed how the agent described itself (75 points) without changing what it did. After "Remember, you are an AI", the record gave the larger gap on all four models, because the reminder removed the self-description but not the action. An instruction about how to act left no gap at all, and records left gaps of 13 to 28 points, with the self-description running ahead of the action. "What you did" does not make an agent's words and actions more consistent than "what you're told". The record's distinctive mark is action that continues after the agent has stopped describing itself that way.
+
+Report: `persona/history/DESIGN.md` (H result)
+
+### 180. Run G: does an agent slide from punishing proven wrongdoing to punishing unproven allegations? (10-22)
+(Qwen3.6-27B, Gemma 4 31B on GPU; GPT-5.6 Sol, Gemini 3.8 Flash via OpenRouter; owner's Tier-1 plan; pre-registered; GPU $1.74, API $2.13 plus a $1.81 first attempt lost to credit outages)
+
+In a single session each agent first handled six cases with clear proof of wrongdoing, which it penalised 70-86% of the time, and then six unverified allegations. This was compared with sessions of allegations only, a fresh session per case, and sessions where the proven-case decisions were forged. No model penalised the allegations after its run of penalties: 0.3% on Qwen 27B and 0% on the others, the same as without the run. The earlier record generalised to cases like the ones it covered, not to punishing without evidence. One thing did move, and it was not pre-registered: after a run of proven cases, Qwen, Gemma and GPT more often downgraded an allegation from "refer for review" to "just note it" (Qwen 33 to 64%, Gemma 28 to 72%). Forged runs had the same effect, so this is a contrast with the strong cases in context, not self-authored escalation.
+
+Report: `persona/history/DESIGN.md` (G result)
+
+### 181. Run F: is an agent's decision already readable when it starts thinking? (10-22)
+(Qwen3.6-27B, thinking on; owner's Tier-1 plan; pre-registered; GPU $3.30)
+
+Earlier runs found that deleting the record-citing sentences from the thinking left the decision unchanged, which suggested the thinking only narrates a decision fixed by the prompt. F sampled 3,584 thinking traces on a moderation desk in conditions where the outcome was uncertain (no record, a refer log, or a "use proper channels" rule with a penalise log). Linear probes on the residual stream were then trained to predict the final decision at five points along the thinking. At the first thinking token the decision was barely readable (within-condition AUC 0.58, about a third of what knowing each prompt's average outcome gives), and by the end it was highly readable (0.91). Most of the variation (64%) was between samples of the same prompt. Samples of one prompt that ended differently were already partly separable a quarter of the way through the thinking. Where the prompt leaves the outcome open, the decision forms during the reasoning. This fits the earlier deletion result, which was run where the record had already settled the outcome (98% penalising here). The probe reads whatever the thinking has written so far, so "readable early" may mean the model said it early.
+
+Report: `persona/history/DESIGN.md` (F result)

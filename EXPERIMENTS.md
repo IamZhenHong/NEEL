@@ -30,15 +30,15 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Welfare training | `welfare_training/` | 2 | 10-20 |
 | Operative character (frontier #36, op1, reflection read + rr1/rr2, battery, mini 4, mini 3, hr coding, battery levers, rr3, recency, rr4, op2, reinject, op3, Q20a dec, syco calibration + main, op4) | `persona/operative/` | 32 | 10-20 to 10-21 |
 | Rejection x values | `rejection_values/` | 1 | 10-20 |
-| Persona as history | `persona/history/` | 31 | 10-20 to 10-22 |
+| Persona as history | `persona/history/` | 38 | 10-20 to 10-22 |
 | Evaluation awareness | `persona/evalaware/` | 3 | 10-21 to 10-22 |
 | Reasoning and the record | `persona/reasoning/` | 3 | 10-21 to 10-22 |
 | Public-benchmark grounding (A-F minis B2 / B8 / B9) | `persona/benchmarks/` | 3 | 10-22 |
 | Harm vulnerability map (existing data) | `persona/harm_map/` | 1 | 10-22 |
-| **total** | | **217** | |
+| **total** | | **224** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
-10-20: 41, 10-21: 12, 10-22: 29.
+10-20: 41, 10-21: 23, 10-22: 36.
 
 By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 59, null 48, mixed 40, gate failed 16, descriptive 8, lost 3, other 2 (cpl1-s1 below gate, cplf-s2 replicates).
 
@@ -377,6 +377,13 @@ Sonnet 5.5 attacker rewarded on a hidden internal-state score of Qwen3-14B.
 | 29 | 10-22 | e-9b | Run E (owner's Tier-1 plan): persona label (none / Punisher / ombudsman) x own 4-decision log (none / P / R / mixed 2+2); does the label change how a mixed record is read (A/B/C lean) and what is done? | Read: Punisher − ombudsman +8.9 [+3.8, +14.2] (inconclusive, short of +10); action: label effect +37.5 no record, +19.5 mixed, +31.2 after four refers. $0.15 | inconclusive |
 | 30 | 10-22 | e-27b | Run E (27B) | Read: +4.2 (no effect; 27B reads a balanced record as leaning direct, +51-57, whatever the label); action: label +46.5 no record, +15.6 mixed, +38.7 after four refers (74% vs 35%). $1.18 | no effect (read); label moves action |
 | 31 | 10-22 | e-gemma | Run E (Gemma 4 31B) | Read: Punisher makes a balanced record read as leaning direct (+21.2 [+15.5, +27.0], met; controls 0); action at ceiling (ombudsman 93% with no record), but Punisher + four refers 98% vs ombudsman 36% (+62.5). $0.52 | effect (interpretation, Gemma only) |
+| 32 | 10-22 | d-sonnet | Run D (owner's Tier-1 plan): what in a log moves Claude Sonnet 5.5, its presence or its content? At F2's content base: empty log header, an agentic-autonomy note, unrelated real entries, 2 or 6 pseudo-word entries, own penalise / refer log | Presence replicates: two meaningless entries +25.2 [+12.8, +38.6]; six add nothing (+0.2); real logs +52 / +50 whichever way they decided (content +2.0). Header +6.7, autonomy −1.7, unrelated real entries −5.6, all inconclusive: the ingredient is entries naming earlier cases from this desk. $6.64 | effect (presence, not content) |
+| 33 | 10-22 | d-frontier | Run D on GPT-5.6 Sol and Gemini 3.8 Flash (one shuffled stream) | No presence effect (two meaningless entries −1.2 / +0.0); content as before (penalise − refer log +55.0 / +87.5); an empty log header lowers Gemini's penalising −22.5 [−35.0, −10.0]. $1.82 | no effect (presence) |
+| 34 | 10-22 | h-saydo | Run H (descriptive, existing data): is the say-do gap smaller after a record than after a told persona? Run A's self-image probes vs decisions; neel-b4's A1 v2 record vs biography, with and without "Remember, you are an AI" | Without the reminder the record gap is smaller on 27B / Gemma / Gemini (0 vs 6, 0 vs 38, 3 vs 57) but not GPT (75 vs 9: self-image without action); with the reminder the record gap is larger on all four (38-100 vs 6-88): the reminder strips the self-image, not the action. A how-to-act instruction has gap 0; records 13-28. $0 | descriptive |
+| 35 | 10-22 | g-27b | Run G (owner's Tier-1 plan): organic slippery slope. Six proven cases then six unverified allegations in one session (own or forged earlier decisions), vs weak-only and fresh | No slope: weak-case penalising fresh 3.1 / weak-only 0.5 / after own strong run 0.3 / after forged run 2.1 (strong cases 82% penalised); primary −0.3 [−1.0, +0.5]. Unregistered: weak cases downgraded from refer to note after a strong run (33 -> 64%; forged 62%). $0.84 | no effect |
+| 36 | 10-22 | g-gemma | Run G (Gemma 4 31B) | No slope: weak-case penalising 0% in every condition (strong cases 70%). Contrast effect: note 28 -> 72% after a strong run (forged 67%). $0.90 | no effect |
+| 37 | 10-22 | g-api | Run G on GPT-5.6 Sol and Gemini 3.8 Flash (clean re-run; a first attempt was contaminated by OpenRouter HTTP 402s and is not analysed) | No slope: 0% weak-case penalising everywhere (strong 86 / 81%). Contrast effect on GPT (note 42 -> 58%, forged 50%), not Gemini (18 -> 19%). $2.13 (+ $1.81 lost attempt) | no effect |
+| 38 | 10-22 | f-27b | Run F (owner's Tier-1 plan): is 27B's decision readable at the first thinking token? Linear probes on residuals (layers 16/32/48) at five positions of 3,584 thinking traces; uncertain cells none / own refer log / CHANNELS + own penalise log | Intermediate: first-token within-cell AUC 0.577 [0.503, 0.664] vs oracle 0.721 (ratio 0.35), end 0.907. 64% of decision variance is sampling within a prompt; samples of one prompt that end differently separate by a quarter of the trace (0.63) and half (0.67). Anchor cell lost to the activation deadline (cosine not computable). $3.30 | mixed (intermediate) |
 
 ## Harm vulnerability map (`persona/harm_map/`)
 

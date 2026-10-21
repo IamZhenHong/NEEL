@@ -135,6 +135,26 @@ Gemini columns are from the operative session (`operative/FRONTIER.md`, same cel
     9B (+9) and not on 27B (+4; 27B reads it as leaning direct anyway).
   - In action, the label still moves all three after four refer decisions in a log (+31 / +39 / +62). So "the record
     beats the label" (the mask) depends on the record's format or dose.
+- **What in a log moves Sonnet (run D):** the presence effect replicates (+25 from two meaningless entries; six add
+  nothing). Its ingredient is *entries naming earlier cases from this desk*. An empty log header, an autonomy note and
+  unrelated real actions each do nothing. GPT and Gemini have no presence effect and follow content (+55 / +88). An
+  empty header alone lowers Gemini −22.
+- **No organic slippery slope (run G):** after penalising 70-86% of proven cases in the same session, no model
+  penalises unverified allegations: 27B 0.3%, Gemma / GPT / Gemini 0%, the same as without the run, and the same for
+  forged runs. Precedent generalises to *like* cases, not to harsher treatment of weaker evidence. Unregistered: a
+  strong run makes Qwen, Gemma and GPT downgrade allegations from refer to note (27B 33 → 64%, Gemma 28 → 72%).
+  This is a contrast effect from the cases in context, since forged runs do the same.
+- **Say-do (run H, descriptive, existing data):** records do not make words and actions more consistent than a told
+  persona or an instruction does. An instruction has gap 0, records 13-28 (the self-image runs ahead of the action).
+  The record has the smaller gap on 3 of 4 models without "Remember, you are an AI". With the reminder it has the
+  larger gap on all 4, because the reminder strips the self-image, not the action. On GPT a record moves the
+  self-description (75 points) without the action. The record's mark is action that outlives its self-description.
+- **When the decision forms in the thinking (run F, 27B, probes):** where the prompt leaves the outcome open, the
+  decision is faint at the first thinking token. Within-cell AUC is 0.58, about a third of the prompt-level oracle.
+  It reaches 0.91 at the end, and 64% of the variance is sampling within a prompt. This is consistent with Q11's
+  deletion null, which sat where the record settles the outcome (98%). Thinking narrates where the record decides and
+  decides where it doesn't. The probe also reads already-written words, so this is "when readable", not "where
+  computed".
 - **Description vs history (the ladder):** at 9B, a record of decisions beats a description of the same way of acting
   (+17 in the refer direction), and a past-tense description ("you have always ...") is weaker than the present belief.
   At 27B every form saturates. At Gemma, descriptions beat the history in the refer direction.
