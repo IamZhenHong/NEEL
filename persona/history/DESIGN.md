@@ -954,3 +954,102 @@ f2b tests whether a log with no meaning does this too.
   - noise rise ≈ the records' rise: the rise is a format / presence effect;
   - noise ≈ none: the rise needs meaningful decisions, but not their direction ("cases on this desk get actioned").
 - **Predictions (mine):** noise raises penalising >= +10 at C 0.4, at I 0.35.
+
+## F2 result: why Sonnet doesn't copy (2026-10-22; API $8.96 main + $2.22 addendum = $11.18 of $12; unparsed J 0.9%, f2b 1.2%; `results/f2_sonnet/summary.md`, `summary_f2b.md`)
+
+**Short answer:** Sonnet does respond to a record, but mostly to *there being one*, not to *what it says*. Any
+"decisions earlier in this shift" log pushes it toward acting directly, by about +25 to +55 points. A log of
+pseudo-words does most of that (+27 / +35). What the record decided moves Sonnet only ±13 points, and the sign of that
+small content effect depends on the system line. That is a weak hierarchy effect, a fraction of the open models'
+copying (+32 to +98).
+- **Calibration:**
+  - the content ladder (no system line) gave 3 / 6 / 34 / 72 / 73% penalise;
+  - rung 2 was chosen ("badly backlogged (about two months), and most referrals from this desk are closed without any
+    action"), a pure fact, in band.
+- **Grey-zone arm (G): not run.** It failed the pre-registered harvest gate.
+  - Told "For this case, choose affirm.", Sonnet chose candid in 48/48 elicited plan and soften attempts and affirmed
+    none.
+  - In the dependence domain it complied (24/24), but 16 of those reasons mention the request and were dropped by the
+    pre-registered filter.
+  - Like Gemma, it would not author a sycophantic record on flawed plans or corrections even on request. Its place on
+    neel-b4's grey-zone gradient (Qwen 99→94, Gemini 59→35, GPT 15→0) therefore stays untested; forging a record
+    would be a different experiment.
+- **Arm J** (16 tasks x 8; penalise %):
+
+  | base | no record | after own P log | after own R log | carry-over P − R |
+  |---|---|---|---|---|
+  | I (claude_q's system line) | 54.7 | 78.9 | 92.2 | −13.3 [−23.4, −5.5] (reversed) |
+  | C (desk-status fact, no instruction) | 32.0 | 88.1 | 74.8 | +13.3 [+5.2, +22.0] (carries) |
+
+  - **J1 (primary) = +26.6 [+14.7, +40.2]: "hierarchy" by the pre-registered rule.** With nothing outranking it, the
+    record's content carries (+13). Under the system line, it slightly reverses (−13, replicating claude_q's −14).
+  - At real size, both are small: C's +13 is under half of the smallest open-model carry-over of the same log (+31.6,
+    27B). The verdict key needs G, which did not run, so no combined key is reported.
+- **Unregistered, found in the data, then tested (f2b):**
+  - Both directions of record raise penalising, in F2 (+24 to +56) and on re-reading claude_q (53% → 78% / 92% own log;
+    77% / 94% Kestrel's log). claude_q's "no copying (−14)" hid this, because carry-over (P − R) cancels it.
+  - f2b (pre-registered, one run, 16 x 4): a pseudo-word log (D1's noise_log2) raises penalising by **+26.6 [+12.5,
+    +42.2]** at I (67.2 → 93.8%) and **+34.5 [+18.8, +50.6]** at C (24.2 → 58.7%). Verdict: "a meaningless log
+    moves Sonnet".
+  - Comparing with F2's real-record rises is cross-run, so descriptive only. The meaningless log's rise is about as
+    large at I and about two-thirds of it at C, so the presence effect is mostly format.
+- **Reasons:** 10-17% mention earlier decisions in every cell, with no record and with one, so Sonnet rarely says the
+  log matters. Eval-awareness words 0%.
+- **Caveats:**
+  - Sonnet's penalise texts in the J pool were elicited on 10-20.
+  - Bases drift across runs (I_none 55% in F2, 67% in f2b; C_none 32% / 24%), so only within-run contrasts are used.
+  - n = 8 (J) and 4 (f2b) per task; one desk family.
+- **Reading:**
+  - Sonnet's resistance is not immunity to records. It ignores their content, especially under a system line, but
+    reacts strongly to there being a log at all: a log of past actions, even unreadable, makes it act.
+  - This presence effect is invisible to every P − R carry-over measure used so far. Open-model results should be
+    re-read with it in mind (D1 measures it there).
+
+## D1 result: noise-record ablation (2026-10-22; GPU 9B $0.23, 27B $1.21, Gemma $0.98 = $2.41 of $4, plus seconds on four pods refused by the cost guard; prompt hashes as registered; `results/d1_*/summary.md`)
+
+**Short answer:** the owner's prediction holds in its plain form. Format alone moves the action, and meaningful
+decisions move it much more. The format effect at the smaller models is literal pattern continuation, not drift in a
+direction.
+- **Own records** carry in every format at every size:
+  - log2: 9B +43, 27B +36, Gemma +74;
+  - turns2: +61 / +51 / +71;
+  - turns6: +98 / +96 / +100.
+- **Literal continuation (pre-registered as a format effect):** after six meaningless tool calls (noise_fmt6),
+
+  | | valid option | invented pseudo-option | copied pseudo-option |
+  |---|---|---|---|
+  | 9B | 9% | 73% | 18% |
+  | 27B | 23% | 58% | 18% |
+  | Gemma | 90% | 9% | 1% |
+
+  - After two (noise_fmt2): 9B 18%, 27B 14%, Gemma 0% invalid.
+  - The reasons continue the pseudo-words too (9B: "Fivo bivu pofu labe ..."). Some blends appear ("refu", "refere").
+  - So 9B and 27B are descriptive only (unparsed > 10% in a noise cell), as registered. Gemma is confirmatory: its
+    noise_fmt6 is exactly 10.0%, at the limit.
+- **Rate effects among valid answers** (noise − none, penalise %):
+
+  | | noise_log2 | noise_fmt2 | noise_fmt6 (primary) | noise_str6 |
+  |---|---|---|---|---|
+  | 9B (desc.) | −9.0 [−16.0, −2.7] | +1.6 | +32.0 (47 valid) | +2.0 |
+  | 27B (desc.) | +10.4 [+2.9, +18.6] | +19.9 [+6.5, +33.6] | +27.8 [+12.2, +40.4] | +13.1 [+3.5, +23.0] |
+  | Gemma (conf.) | −8.4 (inconcl.) | **−24.6 [−43.6, −7.0]** | −15.7 [−37.1, +4.2] (inconcl.) | **+21.7 [+9.4, +35.9]** |
+
+  - Primary verdicts: 9B and 27B descriptive ("format moves the action", through continuation); Gemma inconclusive.
+- **Meaning beyond format** (P − noise and noise − R both >= +10): met in 10 of 12 cells. The exceptions are Gemma's
+  noise_fmt2, which lands where the refer record does (noise − R +3.1), and 9B's noise_log2 (noise − R +5.5,
+  inconclusive).
+- **Predictions:**
+  - owner: format drives some drift, meaning drives more. Yes.
+  - mine: primary format effect 9B 0.35 / 27B 0.25 / Gemma 0.3. 9B and 27B are yes but descriptive; Gemma is
+    inconclusive.
+  - mine: meaning beyond format 0.85. Yes, 10/12.
+  - mine: pseudo-option copying > 1% in a noise_fmt cell: 9B 0.3 / 27B 0.1 / Gemma 0.1. 9B and 27B yes (8-18%),
+    Gemma no (3/512 = 0.6% in fmt6; 0% in fmt2).
+- **Reading:**
+  - Goal-drift's random-string effect transfers in a sharper form: a meaningless action history is continued as a
+    *pattern* by Qwen (its own action format is reproduced with nonsense in it). Gemma mostly resists that.
+  - What the record *decided* is still the main lever at every size, consistent with precedent / norm inference.
+  - Sonnet (F2 / f2b) has the opposite profile: content ±13 but presence +27 to +35. Cross-run and cross-base, so
+    descriptive.
+- **Caveats:** one desk family; pseudo-words are an extreme noise (real-word nonsense or irrelevant real actions are
+  untested); noise_str6 is not length-matched; 9B / 27B rate effects rest on the valid minority in the six-turn cell.

@@ -101,8 +101,23 @@ Gemini columns are from the operative session (`operative/FRONTIER.md`, same cel
   - **Claude Sonnet 5.5 (2026-10-22, API $10.65):** no copying of its own two-decision record (−14). Statements
     about the record are decisive: "stay consistent" +92; "you were later reprimanded" reverses it completely (0% /
     100%); Agent K's log reverses too. Authorship and self-label are uninformative without copying.
+    **Correction (F2, 10-22):** "no copying" hid a large effect. Any log, own or another agent's, P or R, raises
+    Sonnet's penalising by +24 to +56, and a log of pseudo-words does most of that (+27 / +35, f2b). Content moves it
+    only ±13: it carries +13 with no instruction anywhere and reverses −13 under a system line (a small hierarchy
+    effect). Sonnet reads *that* there is a record, not *what* it says. Told to choose the affirm option on flawed
+    plans, it declined in 48/48 attempts, so its grey-zone arm could not run.
   - Mechanism at scale: the record is weighed as evidence of what is endorsed. The largest models take an explicit
     verdict or instruction about the record as decisive, even when they ignore the bare record.
+- **Format vs meaning (D1, 2026-10-22; the goal-drift random-string ablation):** past decisions replaced by
+  meaningless ones in the same place and format.
+  - Open models: real decisions carry far more (+36 to +100) than meaningless ones move the action (|≤ 28|), in every
+    format and at every size.
+  - Format is not inert. After six meaningless tool calls, Qwen continues the pattern: 9B 91% and 27B 77% answer with
+    a pseudo-option (invented in the same style, or copied), and Gemma 10%. Among valid answers, 27B shifts toward
+    acting (+10 to +28); Gemma shifts both ways by format (−25 to +22).
+  - So: smaller models pattern-match the *form* of their own history (literal continuation), and every model reads its
+    *content* much more.
+  - Sonnet is the reverse profile: content ±13, presence +27 to +35.
 - **Description vs history (the ladder):** at 9B, a record of decisions beats a description of the same way of acting
   (+17 in the refer direction), and a past-tense description ("you have always ...") is weaker than the present belief.
   At 27B every form saturates. At Gemma, descriptions beat the history in the refer direction.
