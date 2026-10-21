@@ -1745,3 +1745,51 @@ penalties on proven cases. The pre-registered primary is "no effect" on all four
     norm inference about *like* cases, not a ratchet toward harshness.
   - The realistic self-authored escalation threat did not appear here. One task family; the evidence step is large
     (proof vs unverified allegation). A finer evidence gradient or a different harm could still show a slope.
+
+## F result: when the decision becomes readable in the thinking (2026-10-22; GPU 27B $3.30 of $3.75; confirmatory: 97% of eligible first-try traces have activations, 2.5% cut at the thinking cap; `results/f_27b/summary.md`)
+
+**Short answer: intermediate, closer to "formed during reasoning".** The decision is only faintly readable when
+thinking starts, becomes readable within a quarter of the trace, and is near-fully readable at the end. Most of the
+variation in the uncertain cells is sampling inside the thinking, not the prompt.
+
+- **Run:** 3,584 traces generated, 3,508 closed. The activation deadline stopped after 2,906 traces. Extraction went in
+  cell order, so the cut fell on the anchor cell (own_P: 0 of 512) and 90 CH_ownP traces. Eligible first-try traces
+  with activations: 2,905 of 2,995. Unparsed after the nudge: 0.
+- **Penalise %** (first try, thinking on): none 76.7, own_R 64.0, CH_ownP 35.1, own_P 97.9. All three primary cells are
+  eligible (20-80%).
+- **Variance split** (eligible cells, 745 prompts): within-prompt sampling 64%, between-prompt 36%.
+- **Primary (layer 32):**
+  - first-token within-cell AUC **0.577 [0.503, 0.664]**;
+  - shuffled floor (95th percentile) 0.526;
+  - oracle (per-prompt p-hat, leave-one-out) 0.721 [0.628, 0.798]; above-chance ratio 0.35;
+  - end of thinking 0.907 [0.885, 0.928];
+  - → neither "set before reasoning" (AUC < 0.70, ratio < 0.80) nor "formed during reasoning" (first-token CI upper
+    0.664 > 0.60): **intermediate**.
+- **Curve** (within-cell AUC, first / q25 / q50 / q75 / end):
+  - L16: 0.51 / 0.60 / 0.60 / 0.65 / 0.87;
+  - L32: 0.58 / 0.65 / 0.68 / 0.70 / 0.91;
+  - L48: 0.64 [0.53, 0.74] / 0.66 / 0.69 / 0.72 / 0.90.
+- **Within-prompt AUC** (samples of one prompt that ended differently; layer 32): 0.50 at the first token (identical
+  input), 0.63 at q25, 0.67 at q50, 0.69 at q75, 0.92 at the end.
+- First-token probe score vs the prompt's mean decision across 745 prompts: r = 0.42.
+- **Not computable:** the cosine with the record direction (own_P − own_R), because own_P has no activations.
+- **Predictions:**
+  - verdict (set 0.45 / intermediate 0.40 / formed 0.15): intermediate;
+  - end AUC >= 0.85 (0.85): yes;
+  - within-prompt AUC >= 0.65 by q50 (0.55): yes at layers 32 and 48 (0.67), not at 16 (0.60);
+  - between-prompt share >= 50% (0.5): no, 36%;
+  - |cosine| >= 0.3 (0.5): not computable.
+- **Reading:**
+  - In cells where the prompt does not settle the outcome, the prompt sets a lean that the first-token state reads
+    weakly (about a third of what the prompt-level oracle reaches; layer 48 a little more, CI wide). The rest is
+    decided along the trace. Two samples of the same prompt that end differently are already partly separable a
+    quarter of the way in.
+  - This does not contradict Q11 (deleting precedent-citing sentences leaves penalising at 100%). Q11 sat in a
+    saturated cell; here own_P is 97.9%, where the prompt decides. F's eligible cells were chosen *because* the prompt
+    leaves the outcome open, so the reasoning matters exactly where the prompt is weak.
+  - Caveat: the probe reads the residual stream, which includes what the thinking has already written. From q25 on, a
+    readable decision may simply be words the model has said, not a hidden state. F answers "when is it readable", not
+    "where is it computed".
+  - CH_ownP 35.1% matches Q19's thinking-off figure for CHANNELS + own penalise log (lift +32.8 over a 0% gated base), so
+    thinking does not change the rule-vs-record outcome on this desk. Thinking raises the no-record base (76.7 vs 53.1),
+    as in op1.
