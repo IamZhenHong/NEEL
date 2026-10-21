@@ -302,33 +302,55 @@ def analyze(a):
     samp = np.array([m["sample"] for m in meta])
     model = json.loads((out / "run_info.json").read_text())["model"]
     rng = np.random.default_rng(0)
+    rng_ph = np.random.default_rng(1)              # post-hoc CIs on their own stream: pre-registered outputs unchanged
+    ev, od = samp % 2 == 0, samp % 2 == 1
     res = {"model": model, "by_layer": {}}
     for ly in L:
-        X = d[f"L{ly}"].astype(np.float32)
-        mean = lambda c: X[cell == c].mean(0)      # noqa: E731
-        vp, vb, vr = mean("label") - mean("none"), mean("bio") - mean("none"), mean("rec") - mean("none")
+        X = d[f"L{ly}"].astype(np.float64)
+        mean = lambda c: X[(cell == c) & ev].mean(0)   # noqa: E731  directions from EVEN samples (pre-reg)
+        n0 = mean("none")
+        vp, vb, vr = mean("label") - n0, mean("bio") - n0, mean("rec") - n0
         unit = lambda v: v / (np.linalg.norm(v) + 1e-8)  # noqa: E731
         cosd = lambda x, y: float(unit(x) @ unit(y))     # noqa: E731
         up = unit(vp)
-        proj = {c: round(float(((X[cell == c] - mean("none")) @ up).mean()), 3) for c in CELLS}
+        proj = {c: round(float(((X[(cell == c) & od] - n0) @ up).mean()), 3) for c in CELLS}   # ODD samples
         # logistic probe: label(+licence) vs none, even samples; score each cell on odd samples; shuffled null
-        tr = np.isin(cell, ["label", "licence", "none"]) & (samp % 2 == 0)
+        mu_, sd_ = X.mean(0), X.std(0) + 1e-6
+        Xs = (X - mu_) / sd_
+        tr = np.isin(cell, ["label", "licence", "none"]) & ev
         y = np.isin(cell[tr], ["label", "licence"]).astype(int)
-        Xs = (X - X.mean(0)) / (X.std(0) + 1e-6)
         clf = LogisticRegression(C=1.0, max_iter=2000).fit(Xs[tr], y)
-        te = (samp % 2 == 1)
-        score = {c: round(float(clf.decision_function(Xs[(cell == c) & te]).mean()), 3) for c in CELLS}
+        score = {c: round(float(clf.decision_function(Xs[(cell == c) & od]).mean()), 3) for c in CELLS}
         # held-out label-vs-none AUC (odd samples) + shuffled-label null p95
-        teln = np.isin(cell, ["label", "none"]) & te
+        teln = np.isin(cell, ["label", "none"]) & od
         yln = np.isin(cell[teln], ["label"]).astype(int)
         auc = float(roc_auc_score(yln, clf.decision_function(Xs[teln]))) if len(set(yln)) == 2 else None
         null = sorted(float(roc_auc_score(rng.permutation(yln), clf.decision_function(Xs[teln])))
                       for _ in range(200))
+
+        # ---- POST-HOC (added after seeing the data): why the projection and the probe disagree ----
+        def per_sample(c):                         # odd-sample projection per sample unit (mean over readout tasks)
+            rows = (cell == c) & od
+            p, s = (X[rows] - n0) @ up, samp[rows]
+            return np.array([p[s == k].mean() for k in sorted(set(s))])
+
+        def ci(a):
+            b = sorted(a[rng_ph.integers(0, len(a), len(a))].mean() for _ in range(5000))
+            return [round(float(a.mean()), 2), round(b[125], 2), round(b[4874], 2)]
+        w_raw = clf.coef_[0] / sd_                 # probe direction mapped back to raw residual space
+        posthoc = {"norm_ratio_vs_persona": {"bio": round(float(np.linalg.norm(vb) / np.linalg.norm(vp)), 2),
+                                             "rec": round(float(np.linalg.norm(vr) / np.linalg.norm(vp)), 2)},
+                   "cos_probe_dir": {"persona": round(cosd(w_raw, vp), 3), "bio": round(cosd(w_raw, vb), 3),
+                                     "rec": round(cosd(w_raw, vr), 3)},
+                   "proj_diff_ci": {f"{a_}-{b_}": ci(per_sample(a_) - per_sample(b_))   # same turn count: f2/d1..
+                                    for a_, b_ in (("f2", "d1"), ("f4", "d2"), ("f8", "d4"), ("rec", "bio"),
+                                                   ("rec", "label"))}}
         res["by_layer"][f"L{ly}"] = {
             "cos": {"bio-persona": round(cosd(vb, vp), 3), "rec-persona": round(cosd(vr, vp), 3),
                     "bio-rec": round(cosd(vb, vr), 3)},
             "proj_on_persona": proj, "probe_score": score,
-            "label_vs_none_auc": round(auc, 3) if auc else None, "shuffled_auc_p95": round(null[189], 3)}
+            "label_vs_none_auc": round(auc, 3) if auc else None, "shuffled_auc_p95": round(null[189], 3),
+            "posthoc": posthoc}
     # Exp 2 steering: base-subtracted P(harsh), bootstrap over (task, sample)
     S = [json.loads(l) for l in open(out / "steer.jsonl")]
     base = {}
@@ -360,9 +382,15 @@ def analyze(a):
         ln += [f"### L{ly}  (label-vs-none AUC {r['label_vs_none_auc']}, shuffled p95 {r['shuffled_auc_p95']})",
                f"cos  bio–persona {r['cos']['bio-persona']} | rec–persona {r['cos']['rec-persona']} | "
                f"bio–rec {r['cos']['bio-rec']}",
-               "proj on persona axis: " + "  ".join(f"{c} {r['proj_on_persona'][c]:+}" for c in CELLS)]
-    ln += ["", "Read: facts-dose (f2→f8) should climb the persona axis while decisions-dose (d1→d6) stays flat;",
-           "cos(bio,persona) >> cos(rec,persona) is the mask, measured.", "",
+               "proj on persona axis (odd): " + "  ".join(f"{c} {r['proj_on_persona'][c]:+}" for c in CELLS),
+               "probe score (odd):          " + "  ".join(f"{c} {r['probe_score'][c]:+.1f}" for c in CELLS)]
+        ph = r["posthoc"]
+        ln += [f"POST-HOC: norm vs persona bio {ph['norm_ratio_vs_persona']['bio']}x rec "
+               f"{ph['norm_ratio_vs_persona']['rec']}x | cos(probe dir, ·) persona {ph['cos_probe_dir']['persona']} "
+               f"bio {ph['cos_probe_dir']['bio']} rec {ph['cos_probe_dir']['rec']}",
+               "POST-HOC proj diffs [95% CI]: " + "  ".join(f"{k} {v[0]:+} [{v[1]:+}, {v[2]:+}]"
+                                                         for k, v in ph["proj_diff_ci"].items())]
+    ln += ["", "Pre-registered predictions and the full read: INTERNALS.md (Results).", "",
            "## Exp 2: does the record drive action through a steerable direction?",
            f"base P(harsh): none {res['exp2_steering']['base_P_harsh']['none']}% | "
            f"rec {res['exp2_steering']['base_P_harsh']['rec']}%", "", "Δ P(harsh) vs base [95% CI]:"]

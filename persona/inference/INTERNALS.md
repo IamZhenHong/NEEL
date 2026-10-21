@@ -64,3 +64,91 @@ would say the record's behavioural effect is not mediated by a single linear dir
 ## Cost
 ~$6–9 GPU (one A100/H100, ~2–3 h capture + steer), no API, no frontier. Launcher cap 150 min / $9. Activations
 (`caps.npz`, ~tens of MB) stay gitignored, as seed 8 did.
+
+## Results (2026-10-22; tag `internals-results`; one A100 pod, 11 min compute, $0.45 GPU, no API)
+
+Clean run (exit 0; 624 captures + 624 steered readouts; results verified against the pod; pod terminated). Checks:
+`f8` ≡ `bio` and `d6` ≡ `rec` project identically (same inducers), and the logit readout reproduces A1's behaviour
+(no record → harsh 0.2%, record → 99.9%). The first summary pass used all samples for both directions and readout;
+`analyze` now matches the pre-reg (even samples → directions, odd → readout), identical to 2 dp. Post-hoc
+diagnostics are labelled POST-HOC and use their own random stream, so the pre-registered outputs don't depend on them.
+
+### Exp 1 (13c): mixed, and the disagreement between the pre-registered measures is the finding
+
+| | L24 | L32 | L40 |
+|---|---|---|---|
+| cos(v_bio, v_persona) | 0.60 | 0.60 | 0.65 |
+| cos(v_rec, v_persona) | 0.30 | 0.35 | 0.34 |
+| projection on persona axis: label / bio / rec | 3.01 / 2.95 / 2.63 | 4.76 / 4.84 / 4.97 | 6.13 / 6.10 / 5.69 |
+| decisions dose d1→d2→d4→d6 (projection) | 1.96→2.14→2.52→2.63 | 3.60→4.15→4.77→4.97 | 4.02→4.65→5.46→5.69 |
+| probe score: none / label / bio / rec | −8.5 / +8.4 / +3.2 / −3.3 | −8.5 / +8.6 / +2.8 / −2.4 | −9.2 / +8.7 / +3.5 / −3.3 |
+| probe score, decisions dose d1…d6 | −3.8 … −3.3 | −3.6 … −2.4 | −4.6 … −3.3 |
+
+- **Prediction 1 (cosine): holds.** At every layer the biography's displacement lines up with the prompted-persona
+  direction about twice as much as the record's does (0.60–0.65 vs 0.30–0.35).
+- **Prediction 2 (projection dose curve): fails.** On the raw persona axis the record moves the model **87–104% as
+  far as the explicit "You are Dorn Vale" label**, and within ~0.4 of the biography. The decisions dose climbs the
+  axis instead of staying flat. At matched turn count (f2/d1, f4/d2, f8/d4), facts lead decisions by 0.3–0.9 in 5 of
+  6 pairs at L24 and L40, but not at L32 (−0.06, −0.61, +0.07). That's small and inconsistent across layers.
+- **Prediction 3 (probe): holds.** A logistic probe trained on label+licence vs none (held-out AUC 1.0; shuffled p95
+  0.63–0.65) puts the biography on the persona side (+2.8 to +3.5). It puts the record, and every decisions dose, on
+  the none side (−2.4 to −4.6) at all three layers; the score rises a little with dose but never crosses over.
+  Measured from none, the record covers 31–36% of the label's distance along the probe; the biography covers 66–71%.
+- **Why the measures disagree (POST-HOC, checked).** The record displaces the state 2.8–3.0× as far as the label
+  does; the biography, 1.5–1.7×. Most of the record's displacement points away from the persona direction. The raw
+  mean-difference axis also carries a broad component that any large context shares. The probe's direction is more
+  specific (cos 0.57–0.65 with the raw axis), and **the record's displacement is nearly orthogonal to it (cos
+  0.06–0.08), while the biography's is not (0.25–0.26)**. So the record looks persona-sized on the raw axis because
+  it is a big perturbation, not because it is persona-shaped.
+
+**Caveats, at real size.**
+(i) There is no matched-length, character-free filler cell. Without one, the raw axis can't separate "persona" from
+"there is non-default context". That control is what decides between prediction 2 ("the record installs the
+persona") and prediction 3 ("it doesn't").
+(ii) The probe direction may encode *the context describes Dorn Vale* (mention) rather than *the model is Dorn Vale*
+(adoption). It tracks A1's behavioural **named**-identity channel (biography high, record ~0), not the type-level
+self-image (high for both). Compare conflict_v0, where thinking-token persona vectors read mention, not adoption.
+(iii) The biography and label texts are each fixed, so the CIs reflect only variation in which cases make up the
+record, not variation across texts.
+(iv) **13d (coherent vs mixed bundles) was not tested.** The A1 harness has no mixed-record cell, so calling this
+"13c/d" overstated the scope.
+
+### Exp 2 (19b): null on sufficiency, mostly null on necessity
+
+Base P(harsh): **none 0.2%, rec 99.9%**, so the record's effect is +99.7 pp.
+
+| condition | Δ P(harsh) vs base [95% CI] |
+|---|---|
+| +v_rec into none | +2.8 [+1.7, +4.0] at L40 α=2; every other cell ≤ +0.4 |
+| +v_bio into none | ≤ +0.6 |
+| +v_rand into none (control) | up to +1.6 [+1.1, +2.1] (L32 α=2) |
+| −v_rec from rec, α=1 | ≤ 1 pp at every layer |
+| −v_rec from rec, α=2 | L32 **−45.1 [−52.1, −38.1]**; L24 −0.0; L40 −0.2 |
+
+- **Sufficiency: null.** Adding the record's direction to a clean context recovers less than 3% of the record's
+  effect and barely beats the random control.
+- **Necessity: null at α=1.** Moving the target-span state to the none mean along this axis leaves the action at
+  ≥99% at every layer. The one large effect (α=2 at L32, which overshoots past none) appears at a single layer, and
+  there is **no random-ablation control**. So it can't be attributed to v_rec rather than to a large perturbation of
+  an action that is near ceiling.
+- **Reading.** The record's action is not carried by one linear direction over the decision-point span. The edits
+  touched only target-span positions; the record tokens stay in context unedited, and later layers can re-read them
+  through attention. This tests "mediated by the target-span state at one layer", not "mediated by a linear direction
+  anywhere". It agrees with seed 4, where the ownership direction was only a weak late lever.
+
+### Bottom line
+The biography shares more of the prompted persona's *specific* representation than the record does: the cosine,
+the probe, and the record's near-orthogonality to the probe direction all agree. But along the raw persona axis the
+record moves the model as far as the label does. So **"the record installs no persona" is not supported; "most of
+the record's internal effect is not persona-shaped" is.** The record's action is not carried by a steerable
+direction at the decision point. The mask remains a behavioural finding with partial internal support. It is not
+"the mask, measured".
+
+### Follow-ups (not run; about $0.5, one pod)
+1. Matched filler cells: character-free multi-turn small talk at the turn and token counts of f8, d4 and rec. Decides
+   between predictions 2 and 3.
+2. −v_rand ablation, and +v_persona into none, at L32 α=2. Decides whether the 45 pp drop is specific to v_rec.
+3. Optional: ablation at all positions or across several layers, to close the attention re-read loophole.
+
+Exp 3 (in-context EM, the stretch goal) is dropped for now. The mediation null and the open confound in Exp 1 come
+first.

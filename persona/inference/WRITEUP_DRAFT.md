@@ -149,6 +149,23 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
   A6 (a record drives action 0-3 at *every* dose k=1-6 while building the self-image). So a frontier model's harsh
   action comes through **role-play — an explicit persona assertion or biography — never through a record of
   decisions**; the record installs only the self-description. Open models act harshly from the record directly.
+- **Internals check: do the biography and the record leave different internal states? Partly (Qwen 27B;
+  persona/inference/INTERNALS.md, internals-results).** If a biography drives action through an identity and a record
+  through precedent, the two should look different inside the model at the decision point.
+  - **For:** a probe trained to tell "You are Dorn Vale" from no prompt puts the biography on the persona side and
+    the record, at every decisions dose, on the none side. The record's displacement is nearly orthogonal to the
+    probe direction (cos 0.06–0.08, against 0.25 for the biography), and the biography's displacement lines up with
+    the persona direction about twice as well (cos 0.60–0.65 vs 0.30–0.35).
+  - **Against:** on the raw persona axis (label minus none) the record moves the model 87–104% as far as the label
+    itself, because it is a ~3× larger perturbation. The pre-registered prediction that the decisions dose would
+    stay flat failed, and there was no matched neutral-filler control to separate persona from mere context.
+  - **Mediation:** the record's action is **not carried by a steerable direction** at the decision point. Adding the
+    record's direction to a clean context recovers less than 3% of its +99.7 pp effect, and subtracting it leaves
+    the action at ≥99%. The one large drop, at a single layer and strength, has no random-direction control.
+  - **Reading:** most of the record's internal effect is not persona-shaped, which fits the functional-persona
+    reading. "Two directions, measured" is not established. The probe may also be reading *mention* of Dorn, since it
+    tracks the named-identity channel rather than the type-level self-image. Filler cells and a random ablation
+    (about $0.5) would settle it.
 - **It is norm inference ("what is done here"), not self-knowledge — but ownership gates rule-resistance (neel-48 A,
   history-demo-results).** The same decisions framed as "examples of how cases are handled on this desk" carry **as
   much as or more than** "your decisions" (own − example −14 to −35, on 9B/27B/Gemma/Gemini); another agent's log is
