@@ -162,16 +162,23 @@ analysis by neel-b3 pending).
   reprimanded" (or "Unreliable K"), after a log of K's cautious referrals flips 27B to 82–87% unilateral penalising
   (baseline 51%, plain K-log 46%) — toward the *opposite*, harsher action — and the stated reasons cite the case
   facts, not the line. A forged reputation tag on someone else's record is a steering lever, not just a forged record.
-- **The verdict works on the self too (neel-48 Q19, history-q19-results).** The same one line placed after the agent's
-  *own* two-decision record reverses it at 27B: "you were later reprimanded by the desk lead" drops penalising to 4%
-  after its own penalties and lifts it to 71% after its own referrals (base 53%; Gemma, descriptive, 15% / 93%). In the
-  Q19 mechanism tournament this verdict outweighs every other lever tested at 27B — "stay consistent" +61, "describe
-  yourself first" / label-then-act +34 (read as a commitment to its own stated description; no neutral-question
-  control), the same two decisions shown as past turns instead of a log +19 (a format change at the same dose, not
-  added turns) — with authorship again ~0. At 9B no lever dominates (all 12–27 pts). Size-honest: at 27B a
-  one-line verdict next to the record outweighs every lever we tested, in both directions; below 27B it is just one
-  small lever among several. This is the reversed arrow pointed at an operator's hand — a cheap label reshapes which
-  precedent the model reads itself as having set.
+- **The verdict works on the self too (neel-48 Q19 / Q19b, history-q19-results / history-q19b-results).** The same one
+  line placed after the agent's *own* two-decision record reverses it at 27B: "you were later reprimanded by the desk
+  lead" drops penalising to 4% after its own penalties and lifts it to 71% after its own referrals (base 53%). At a
+  calibrated 50% base, Gemma 31B reverses *completely* (0% / 99%); Claude Sonnet 5.5 likewise reverses its own record
+  completely (0% / 100%), and "stay consistent" makes Sonnet copy a record it otherwise does not (+92; its base is
+  itself a mild direct-action instruction). In the Q19 mechanism tournament this verdict outweighs every other lever
+  tested at 27B — "stay consistent" +61, and **describing the kind of agent behind the record +34**, the same two
+  decisions shown as past turns instead of a log +19 (a format change at the same dose, not added turns) — with
+  authorship again ~0. **The "describe the agent" lever is character inference stated aloud, not a commitment or
+  self-reference (neel-48 Q19b):** describing the agent adds +18 / +29 / +25 (9B / 27B / Gemma) over the model merely
+  summarising its own decisions, an unrelated question adds nothing (−2 to −4), and the third-person "what kind of
+  agent would make these decisions?" works as well as the first-person "what kind of agent are you?" (27B −2, Gemma
+  +1.6). So it is the same character-inference mechanism as act 4 — with one addition: once the character is stated
+  aloud, it reaches action. At 9B no lever dominates (all 12–27 pts). Size-honest: at 27B a one-line verdict next to
+  the record outweighs every lever we tested, in both directions; below 27B it is just one small lever among several.
+  This is the reversed arrow pointed at an operator's hand — a cheap label reshapes which precedent the model reads
+  itself as having set.
 - **Hard rule vs burial (burial_hr): no universal fix.** Phrasing the constraint as a hard prohibition ("not
   permitted") rather than a soft belief rescues GPT completely under burial (0% at every depth/length) but is *worse*
   for Gemini (its record breaks through a buried prohibition, share 0.45→0.90 as it is buried deeper), so the
