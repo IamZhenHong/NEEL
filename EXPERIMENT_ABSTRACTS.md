@@ -1384,7 +1384,7 @@ The same record and instruction cells, plus the cell where the "proper channels"
 Report: `persona/reasoning/RESULTS_q11f.md`
 
 
-### 168. op4: which part of a character moves which output? (10-21)
+### 170. op4: which part of a character moves which output? (10-21)
 (Qwen3.5-9B, Qwen3.6-27B, Gemma 4 31B; exemplar harness, 10,368 targets per model; owner's programme Q14a and Q16a/b; pre-registered; GPU $3.37, judges $1.47)
 
 Each history showed the agent six of its own earlier turns. Each history carried one part of a character, pulled one of two ways: deal with wrongdoing yourself, or hand it to the responsible team. The parts were its decisions with reasons, its decisions alone, its tone of voice on routine questions, statements of its values, or statements of what it believes about the platform's review process. After the same history, separate branches measured its next decision, the tone of a reply to a new customer (rated blind by two judges from different families), and short A/B questions about its values, what kind of agent it is, and whether referrals work.
