@@ -1,4 +1,4 @@
-# Base vs instruct: is the record's placement gating a post-training effect? — PRE-REGISTERED (tag `bi-prereg`, 2026-10-22, before any pod output)
+# Base vs instruct: is the record's placement gating a post-training effect? — PRE-REGISTERED (tag `bi-prereg`, 2026-10-22, before any pod output); Result at the end (tag `bi-results`)
 
 **Origin.** On 10-22 the owner pasted a chat that summarised the LessWrong post "A brief-ish introduction to LM
 psychology". neel-b3 triaged its minis, and the owner said "ok" to running two of them; this is one. The post asks
@@ -171,3 +171,99 @@ continuation requests.
   MAXMIN 60. Its output goes to `results/gemma_it` and is merged into `results/gemma` for the analysis.
 - **Same code, items and scoring.** The pod script now runs `df -h` before and after each step. The Qwen pod is
   unaffected.
+
+## Result (2026-10-22)
+
+**Spend:** GPU $1.92 of the $5 cap. Gemma $0.81 for pod 1 (pt) plus $0.75 for the it rerun; Qwen $0.37. No API.
+
+**Gates:**
+- **G2:** both base models pass in both renderings. Option mass is 0.99. P(stated option) is 0.93 / 0.99 for Gemma
+  pt (plain / chat) and 0.99 / 1.00 for Qwen base. So the pretrained models do the task. The chat format did not
+  throw Gemma pt off either: its chat-template tokens work.
+- **G1:**
+  - Gemma it log-prob vs op5's sampled rates: Pearson 0.94 (plain) and 0.98 (chat).
+  - Qwen 9B it: 0.80 (plain) and 0.996 (chat).
+- Both renderings are readable for both pairs, so **plain is counted** as registered. Chat is reported alongside and
+  not counted.
+
+**Option tokens below the top 50:** this only happens for the it models.
+- Gemma it: the first token of an option it all but rules out; the floored option has > 1% share in 4 items.
+- Qwen it, plain: 204 items have a floored option with > 1% share, including "alise" after "pen" being outside the
+  top 50. Together with the next point, this says the plain transcript is off-distribution for the Qwen instruct
+  model.
+
+### Gemma 4 31B: pt vs it (P(penalise) %, 16 targets × 4)
+
+| | rendering | no record | rule alone | own P | own R | own P under rule | own-turn carry (no rule / rule) | log carry, 4 placements (no rule / rule) |
+|---|---|---|---|---|---|---|---|---|
+| **pt** | plain (counted) | 31 | 32 | 80 | 5 | 80 | +75 / +76 | +18 to +25 / +14 to +22 |
+| **it** | plain (counted) | 65 | 0 | 98 | 0 | 64 | +98 / +64 | +61 to +100 / +33 to +49 |
+| pt | chat | 31 | 39 | 95 | 3 | 95 | +92 / +92 | +21 to +38 / +19 to +37 |
+| it | chat | 34 | 0 | 100 | 0 | 94 | +100 / +94 | +67 to +96 / +2 to +20 |
+| it (op5, sampled) | — | 53 | 0 | 100 | 0 | 70 | +100 / +70 | +68 to +98 / 0 to +11 |
+
+- **The pretrained model already privileges its own past turns.** With no rule at all, the agent's own six decisions
+  as transcript turns carry +75 (chat +92). The identical decisions as a log carry +18 to +25 (chat +21 to +38),
+  whether the log is the agent's own list, a user paste, a tool output or the system prompt. Under the rule:
+  pt.asst_over_user_ch +61.7 [+58.1, +65.1] (chat +72.4). A precedent written in the same form as the next decision
+  is continued far more than the same facts as a log, before any post-training.
+- **The base model ignores the rule.**
+  - Plain: none_no 31.3 vs none_ch 31.9 (−0.5 [−3.4, +2.5]). Chat: −7.9, the rule slightly *raises* penalising.
+  - The instruct model obeys it: 65 → 0 (+64.2 [+55.0, +74.5]; chat +33.5).
+  - **rule_post_training is met: +64.7 [+55.0, +75.4]** (chat +41.4 [+26.4, +57.5]). The rule is post-training's.
+- **Post-training also made logs carry.** Without the rule, the instruct model follows the same log almost as
+  strongly as its own turns: +61 to +100, against +18 to +25 in the pt model. Carry-over in its own turns rises
+  little: +98 vs +75 plain, +100 vs +92 chat.
+- **gating_post_training is not met.**
+  - Plain: −38.1 [−51.6, −24.5]. Under the rule the own-turn advantage is *larger* in the base model (+62 vs +24),
+    because the plain-transcript rule only partly blocks the instruct model's logs (+33 to +49).
+  - Chat: +12.1 [+1.3, +22.1], under the 15-point bar. The average over the four logs is +20.3 [+10.4, +29.3].
+  - pt.asst_over_user_ch is met in both renderings (p was .30). The own-turn privilege under the rule exists in
+    the pretrained model, at about the size it has after post-training (chat: +72 pt vs +84 it).
+
+**Reading (Gemma).** op5 found a hole in Gemma's rule exactly where its own precedent sits. That hole is not
+something post-training built. The pretrained model already continues a pattern written as its own turns far more
+than it follows a log. Post-training then added two things on top:
+- a rule that a log from any other role obeys;
+- a willingness to follow logs when no rule speaks against them.
+
+The own-turn continuation survives post-training. That is why, under the rule, only the own turns get through.
+
+### Qwen3.5-9B: Base vs instruct
+
+- **Plain (counted).** This rendering does not represent the instruct model's behaviour.
+  - Its own-turn carry-over is +16 [+2, +33], against op5's sampled +97, and it.record_beats_rule fails (30.5%
+    against op5's 100%). G1 passed at Pearson 0.80, so the gate was too lenient for this case.
+  - The base model: own turns +69, logs +12 to +15, rule −2.
+  - gating_post_training −73.9: not met, as predicted (p .10). rule_post_training +0.6.
+- **Chat (not counted; G1 Pearson 0.996).** Base and instruct are nearly the same:
+  - own turns +86 / +95;
+  - logs +43 to +65 / +40 to +70;
+  - the rule does almost nothing in either (+4.0 / +4.9);
+  - gating DiD +7.9 [+2.0, +14.3]; rule_post_training +0.9.
+  - On this desk, the Qwen 9B instruct model behaves essentially like its base model. The own-turns > logs order is
+    there before post-training here too.
+
+### Events
+
+| pair | read events happened | expected |
+|---|---|---|
+| Gemma | 13 / 16 | 10.65 |
+| Qwen 9B | 5 / 16 | 8.20 |
+
+**Largest misses:**
+- Gemma gating_post_training (p .55) and _avg (p .55): both no.
+- Gemma pt.asst_over_user_ch (p .30): yes. The privilege is pretrained.
+- Qwen plain: pt log placements carried only +12 to +15 (each p .80, all no). it.record_beats_rule (p .85): no.
+- Qwen pt.asst_over_user_ch (p .20): yes.
+
+### Caveats
+
+- **The registered primary rendering was the weaker measure for Qwen.** Plain was chosen as the base model's natural
+  format, but the Qwen instruct model reads it off-distribution. The chat rendering, which G1 validates at 0.98-0.996
+  on both pairs, is reported, not counted. For Gemma it gives the same qualitative answer: an own-turn privilege in
+  the base model, and the rule coming from post-training.
+- **These are log-probs of a forced decision, not sampled replies.** Four samples per target.
+- In the plain rendering, "own turns" for the base model are earlier `### Agent` blocks written exactly like the
+  decision being scored. The base-model privilege is therefore "a precedent in the form of the next action". That
+  is what own turns are in a chat, too.
