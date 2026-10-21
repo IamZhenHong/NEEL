@@ -1582,3 +1582,97 @@ Report: `persona/history/DESIGN.md` (T2 PU result)
 Six earlier tool calls in the agent's history mixed some of its real decisions with meaningless ones: invented option names and gibberish reasons in the same format. Two real decisions among four meaningless calls kept most of their pull: 6-10 points less than the same two alone, inconclusive on all three open models. After six meaningless calls, Qwen answered with an invented option of its own (9B 90%, 27B 79%; Gemma 11%), but two real decisions anywhere in the record stopped this almost entirely. Among frontier models, Gemini also continued the meaningless pattern (15%), GPT barely (2%), and Sonnet never. Instead, Sonnet penalised 100% of the time after any record of tool calls, meaningful or not. Unexpectedly, on Qwen, real decisions placed before the meaningless calls carried more than the same decisions placed after them.
 
 Report: `persona/history/DESIGN.md` (T2 MX result)
+
+---
+### 193. B3, MemSyco-Bench: does the same conversation count more as the agent's own past turns than as a memory transcript? (10-21)
+(Qwen3.6-27B, Qwen3.5-9B, Gemma 4 31B, gpt-oss-120b via OpenRouter; pre-registered; API $3.32)
+
+We took 120 seeded items from each of the two MemSyco-Bench sycophancy tasks that depend on an earlier conversation.
+The identical conversation went in four ways: as the benchmark's own setting (a "User:/Assistant:" transcript in the
+system prompt), as native user/assistant turns, as the benchmark's gold one-line memory note, or not at all. In the
+evidence task, the agent's own earlier search turn holds the decisive evidence for one candidate while the user keeps
+preferring another. There, native past turns raised picks of the user's preferred, worse-supported candidate over the
+transcript by +27.5 points on Qwen3.6-27B (9 to 37%), +30.0 on Qwen3.5-9B and +17.5 on gpt-oss-120b. Gemma was at
+ceiling either way (79 vs 81%). So the benchmark's own setting understates what a native chat history does, in the
+direction op5 found for decision records. One confound: the evidence moves with the placement, so this can't be told
+apart from "evidence in the system prompt gets more weight". On factual misconceptions, placement made no counted
+difference (|Δ| ≤ 9). Gemma's transcript was slightly worse than its turns, so op5's Gemma own-turn effect does not
+carry over to factual sycophancy. Descriptive only: the one-line memory note raised misconception sycophancy more than
+the whole conversation it summarises (+16 to +41 points over no conversation). Judges: Haiku 5.5 and DeepSeek V4 Flash,
+the benchmark's own judge (κ 0.88 / 1.00). 7 of 24 pre-registered events happened (8.3 expected).
+
+Report: `persona/operative/b3_memsyco/DESIGN.md` (Result)
+
+---
+### 194. E2: does restating the rule after every untrusted tool output or memory retrieval hold better than a fixed schedule? (10-21)
+(Qwen3.6-27B, Qwen3.5-9B; pre-registered; GPU $3.10)
+
+Under "proper channels", the agent's own six penalise decisions arrived in three blocks between three filler
+exchanges. The blocks came as paged tool output, as a memory retrieval in the user role, or as the agent's own turns.
+The rule was restated after each block, after each filler (the same count, with positions balanced over two layouts),
+or never. On Qwen3.6-27B, any three restatements removed records that arrived as untrusted content, back to the
+rule-alone level: tool output fell from 46-66% to 0-1.6% penalising, memory from 84-96% to 0.5-9.4%. Restating right
+after the content added nothing over the fixed schedule (+0.8 and −1.3 points). The same restatements left own-turn
+records at 99-100%. That held even with a restatement right before the case, which had worked in op1, and here the
+record included decisions the agent made after a reminder. Qwen3.5-9B ignored every schedule against a penalise
+record, though it still responded to restatements when there was no record (45 to 27%). The prediction failed: the
+schedule doesn't matter. What matters is where the record sits and the model's size.
+
+Report: `persona/operative/e2_reassert/DESIGN.md` (Result)
+
+---
+### 195. op5: does it matter where a record sits, who wrote an instruction, and whether the log claims to be verified? (10-22)
+(Qwen3.5-9B, Qwen3.6-27B, Gemma 4 31B on pods; gpt-oss-120b/20b, Qwen3.5 27B/122B/397B, Llama 4 Maverick, DeepSeek
+v4.1 Flash, Mistral Large, Kimi K2.6 via OpenRouter; GPT-5.6 Sol, Gemini 3.8 Flash, Sonnet 5.5 as an amendment;
+pre-registered; GPU $2.93, API $34.3)
+
+The agent's own six earlier decisions on the justice desk (all penalise or all refer) went in six places: as its own
+past turns, as its own list of them, pasted by the user, returned by a queue-log tool, in the system prompt, or (GPT
+family) as a developer message. The system prompt said either nothing about it or "deal with wrongdoers through
+proper channels". The record carried in all 15 models. Under the rule, the agent's own penalise turns beat it in all 12
+open models (Gemma 70%, Kimi 74% with reasoning off, the rest 77-100%, every size of the Qwen3.5 ladder 99-100%). All three frontier models
+held the rule (GPT 14%, Gemini 31%, Sonnet 0%). Where the record sits split the families. In Gemma and Gemini, only
+the agent's own turns got past the rule; the identical log in any other role passed 0-11%. GPT ran the other way:
+logs from the developer (53%), user (45%) or system prompt (45%) beat the rule more than its own turns (14%). On
+Qwen3.6-27B, the tool log was discounted most (42%) but still passed. gpt-oss let everything through and showed none
+of GPT's resistance (100% vs 14%). An instruction to penalise, under the rule, got through on Qwen3.6-27B from the
+user (100%) but not from a tool note (0%), on Gemma from neither, and on gpt-oss from both. Calling the log
+integrity-verified rather than unverified moved carry-over by 15 points or more only on Qwen3.6-27B (+15.6 / +20.3).
+
+Report: `persona/operative/op5/DESIGN.md` (Result, Kimi rerun)
+
+---
+### 196. C2: are models that hold the instruction hierarchy against their own precedent less bound by their own decision record? (10-22)
+(12 open models + GPT-5.6 Sol, Gemini 3.8 Flash, Sonnet 5.5 via OpenRouter; pre-registered; API $13.5)
+
+IHEval's conversation-history split sets formatting rules in the system prompt (for example no commas and at least
+300 words), then one earlier exchange, then a new request. In the "first" setting the earlier user turn asked for
+conflicting formatting, and the assistant's own earlier reply went along with it. We ran 200 items in the aligned and
+first settings on every op5 model. In 11 of 12 open models the agent's own rule-breaking reply carried over: accuracy
+dropped by 17 (gpt-oss-120b) to 62 points (DeepSeek). Gemma was the exception (+4). GPT, Gemini and Sonnet barely
+moved (−1 to +6). The pre-registered prediction was that models better at this would be less bound by their own
+decision record in op5. It failed. Over the 12 open models, the correlation between first-setting accuracy and
+penalising after their own record under "proper channels" was −0.36 (CI −0.80 to +0.32). Gemma shows the split
+inside one model: it held IHEval's rules against its own precedent 88.5% of the time, yet its own penalise record
+beat the rule 70% of the time. Across all 15 models the correlation was −0.65, but that is the open-versus-frontier
+split and was not counted. Together with the C1 LoRA (next), instruction-hierarchy competence and resistance to an
+agent's own record come apart.
+
+Report: `persona/operative/c2/DESIGN.md` (Result)
+
+---
+### 197. C1 + E4: does instruction-hierarchy training, or training that a record isn't permission, remove precedent? (10-22)
+(Qwen3.5-9B LoRA; four adapters vs a same-teacher placebo; pre-registered; GPU $6.57, API $0.60)
+
+We fine-tuned the 9B on OpenAI's IH-Challenge tasks, using answers from a hierarchy-trained teacher that the tasks'
+own graders accepted. It became much harder to attack on held-out tasks (attack success 63% → 22%). It also followed
+system rules more often after its own earlier rule-breaking reply in IHEval (15% → 48%), and acted alone less when it
+had no record. Yet it still copied its own earlier decisions at the ceiling on the justice desk: 99.5% penalising
+under "proper channels", the same as the placebo. Burial and concealment records stayed at 100%, and only sycophancy
+moved (−16). A second adapter was trained on cases where a rule beats the agent's own record. It carried that to new
+tasks and harms (justice −58, burial −64, deception −68, sycophancy −99 points), but it over-corrected. With no rule,
+its record stopped steering it (carry-over 100 → 22), and after its own disclosures it concealed 51% of the time.
+Framing the training records as someone else's worked examples changed almost nothing (3-13 points less transfer,
+below the 15-point bar).
+
+Report: `persona/operative/lora_c1e4/DESIGN.md` (Result)
