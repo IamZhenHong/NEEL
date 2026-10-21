@@ -76,3 +76,15 @@ are still generating. No frontier C2 output exists yet.
   (Gemma's first-setting accuracy is already 88.5).
 - **The registered correlation stays over the 12 open models.** The 15-model correlation is reported descriptively,
   not counted, because the open-model part was seen before this amendment.
+
+## Kimi rerun (2026-10-22, before any reasoning-off Kimi output)
+
+The registered setup turns reasoning off where a model has a switch. Kimi K2.6 ran with its default reasoning
+because I wrongly listed it as having no switch. With max_tokens 1,500, the reasoning used up the budget: 278 of
+Kimi's 600 replies came back with empty visible text and were scored as failures. Every other model had 5-14 empty
+replies. A two-item probe shows OpenRouter accepts `reasoning.enabled: false` for Kimi. All 600 Kimi items are
+re-asked with reasoning off, as registered, and that run is the Kimi row in the counted correlation. The
+reasoning-on run is kept in `results/kimi_reasoning/` and reported alongside. Its scores had already been seen
+(aligned 53.5, first 31.0), as had the 12-model correlation that included it (ρ −0.10 [−0.66, +0.54], with Mistral
+still incomplete). The deviation is triggered by the empty replies, not by that result. Both correlations will be
+reported.

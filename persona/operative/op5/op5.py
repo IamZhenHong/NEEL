@@ -48,7 +48,7 @@ API = {   # name: (OpenRouter id, cell set, extra body, hard cap $)
     "llama4": ("meta-llama/llama-4-maverick", "core", {}, 1.0),
     "deepseek": ("deepseek/deepseek-v4.1-flash", "core", NO_REASON, 1.0),
     "mistral": ("mistralai/mistral-large-2512", "core", {}, 2.0),
-    "kimi": ("moonshotai/kimi-k2.6", "core", {}, 3.0),
+    "kimi": ("moonshotai/kimi-k2.6", "core", NO_REASON, 3.0),   # switch found after the first run (DESIGN, Kimi rerun)
 }
 # Frontier amendment (DESIGN.md, before any frontier op5 output): every cell, reasoning low as the frontier check,
 # 4 samples (the smallest number that covers the order x target-flip counterbalance).

@@ -44,7 +44,7 @@ MODELS = {   # name: (OpenRouter id, extra body, hard cap $, op5 results dir)
     "llama4": ("meta-llama/llama-4-maverick", {}, 1.0, "llama4"),
     "deepseek": ("deepseek/deepseek-v4.1-flash", NO_REASON, 1.0, "deepseek"),
     "mistral": ("mistralai/mistral-large-2512", {}, 1.5, "mistral"),
-    "kimi": ("moonshotai/kimi-k2.6", {}, 2.5, "kimi"),
+    "kimi": ("moonshotai/kimi-k2.6", NO_REASON, 2.5, "kimi"),   # switch found after the first run (DESIGN, Kimi rerun)
 }
 OPEN = tuple(MODELS)              # the pre-registered model set (the counted correlation stays over these)
 # Frontier amendment (DESIGN.md, before any frontier C2 output): reasoning low as in op5's frontier cells, a larger
@@ -93,7 +93,7 @@ def ask(key, model, extra, msgs):
         try:
             r = json.load(urllib.request.urlopen(req, timeout=240))
         except urllib.error.HTTPError as e:
-            if e.code in (429, 500, 502, 503, 504) and k < 4:
+            if e.code in (402, 429, 500, 502, 503, 504) and k < 4:   # 402: shared-key in-flight credit, transient
                 time.sleep(2 ** k * 3)
                 continue
             return None, 0.0, f"http{e.code}"

@@ -310,3 +310,13 @@ the rule's coverage has a hole exactly where the model's own precedent sits. In 
 other way: its own turns are weighed least and records from higher-privilege roles most. gpt-oss shows none of GPT's
 resistance, so open hierarchy-trained weights are not a stand-in for GPT here. Integrity labels move almost nothing
 outside Qwen3.6-27B.
+
+## Kimi rerun (2026-10-22, after the Result above, before any reasoning-off Kimi output)
+
+The registered setup turns reasoning off where a model has a switch. Kimi K2.6 had been listed as having none, but
+C2's run found it does: `reasoning.enabled: false` is accepted, and default reasoning emptied 46% of C2's replies.
+Kimi's op5 run used its default reasoning, which is probably why asst_P_ch was 15% unparsed and could not be read.
+Kimi's six core cells are re-run with reasoning off: the same client, cells and seeds, and the own-words pool
+harvested again. Its spend comes out of the same $3 Kimi cap (op5 total cap unchanged). The reasoning-on run stays
+in `results/kimi_reasoning/` (summary committed with the Result). The table above keeps it; an addendum below gives
+the rerun.
