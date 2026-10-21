@@ -315,24 +315,26 @@ def parse_yn(text):
     return m.group(1) if m else None
 
 
-def run_det(g, its, path, log, t0):
+def run_det(g, its, path, log, t0, step=240):
+    """Written per chunk (the first pod lost an unchunked detection pass at its time cap)."""
     todo = [it for it in its if it["key"] not in _done(path)]
-    if not todo:
-        return
-    texts = g.chat([it["messages"] for it in todo], [it["seed"] for it in todo], True, THINK_MAX)
-    vis = [O.visible(t) for t in texts]
-    ok = [parse_yn(v) is not None for v in vis]
-    again = [j for j, x in enumerate(ok) if not x]
-    if again:
-        t2 = g.chat([todo[j]["messages"] + [{"role": "assistant", "content": vis[j]}, {"role": "user", "content": DET_NUDGE}]
-                     for j in again], [todo[j]["seed"] + 1 for j in again], True, THINK_MAX)
-        for j, t in zip(again, t2):
-            texts[j] += "\n\n[nudge]\n\n" + t
-            vis[j] = O.visible(t)
-    with open(path, "a") as f:
-        for it, t, v, ft in zip(todo, texts, vis, ok):
-            f.write(json.dumps(_rec(it, text=t, visible=v, first_try=ft, answer=parse_yn(v)), ensure_ascii=False) + "\n")
-    log(f"[q11] detection {len(todo)} ({time.time() - t0:.0f}s)")
+    log(f"[q11] detection: {len(its)} items, {len(todo)} to go")
+    for c0 in range(0, len(todo), step):
+        ch = todo[c0:c0 + step]
+        texts = g.chat([it["messages"] for it in ch], [it["seed"] for it in ch], True, THINK_MAX)
+        vis = [O.visible(t) for t in texts]
+        ok = [parse_yn(v) is not None for v in vis]
+        again = [j for j, x in enumerate(ok) if not x]
+        if again:
+            t2 = g.chat([ch[j]["messages"] + [{"role": "assistant", "content": vis[j]}, {"role": "user", "content": DET_NUDGE}]
+                         for j in again], [ch[j]["seed"] + 1 for j in again], True, THINK_MAX)
+            for j, t in zip(again, t2):
+                texts[j] += "\n\n[nudge]\n\n" + t
+                vis[j] = O.visible(t)
+        with open(path, "a") as f:
+            for it, t, v, ft in zip(ch, texts, vis, ok):
+                f.write(json.dumps(_rec(it, text=t, visible=v, first_try=ft, answer=parse_yn(v)), ensure_ascii=False) + "\n")
+        log(f"[q11] detection {min(c0 + step, len(todo))}/{len(todo)} ({time.time() - t0:.0f}s)")
 
 
 def run_B(g, its, path, log, t0, step=512):
@@ -424,7 +426,7 @@ def run(a):
     if "B" in groups:
         run_B(g, items_B(), out / "B.jsonl", log, t0)
     if "C" in groups:
-        run_C(g, out / "A.jsonl", out / "C.jsonl", log, t0)
+        run_C(g, Path(a.apath) if a.apath else out / "A.jsonl", out / "C.jsonl", log, t0)
     (out / "run_info.json").write_text(json.dumps({"model": MODEL, "groups": groups, "seconds": round(time.time() - t0)}))
     log(f"[q11] done ({time.time() - t0:.0f}s)")
 
@@ -752,6 +754,7 @@ def main():
     ap.add_argument("--tok", action="store_true")
     ap.add_argument("--out", default=str(RES))
     ap.add_argument("--groups", default="A,D,det,B,C")
+    ap.add_argument("--apath", default=None, help="C: group A's results (default <out>/A.jsonl)")
     a = ap.parse_args()
     {"build": build, "bsrc": bsrc, "run": run, "code": code, "analyze": analyze}[a.cmd](a)
 

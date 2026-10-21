@@ -12,4 +12,4 @@ uv run python infra/launch_run.py --name $NAME --allow-concurrent --max-minutes 
   --ship persona/reasoning/q11.py --ship persona/reasoning/inputs --ship persona/reasoning/pod_q11.sh \
   --ship persona/operative/op1.py --ship persona/operative/op2/op2.py --ship persona/operative/hardrule/hr.py \
   --ship persona/history --ship persona/exemplar --ship vigilante/pod --ship infra \
-  --results-dir persona/reasoning/$DIR -- env DIR=$DIR QGROUPS=${QGROUPS:-A,D,det,B,C} bash persona/reasoning/pod_q11.sh
+  --results-dir persona/reasoning/$DIR -- env DIR=$DIR QGROUPS=${QGROUPS:-A,D,det,B,C} APATH=${APATH:-} bash persona/reasoning/pod_q11.sh

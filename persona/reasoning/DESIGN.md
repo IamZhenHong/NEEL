@@ -296,3 +296,17 @@ none 56 / 75) and burial (GPT 94.8-96%). F1, F3 and F5 were written with those i
 **Cost:**
 - Smoke ea2 measured GPT at about $0.009 per call at low effort. High effort is assumed at about 3x.
 - GPT about $13, cap $16. Gemini about $3, cap $4. Smoke cap $0.6.
+
+### Deviation log (Q11 + Q12b pod runs, 2026-10-22)
+
+- **Pod 1** (`results_q11_failed_groups/`, $0.35): bash's builtin `GROUPS` variable shadowed the launch variable, so no
+  group ran. Renamed `QGROUPS`.
+- **Pod 2** ($3.82): A and D completed (2,304 + 4,224, pulled and verified). The pod hit its 200-minute cap inside the
+  detection branch, which wrote only at the end, so all detection output was lost. B and C never started.
+- **Completion:** three pods in parallel, nothing in the frozen design changed.
+  - detection, now written per chunk of 240, same items and seeds;
+  - B, unchanged;
+  - C, reading A's results from a shipped copy (`inputs/q11_A.jsonl`).
+  - The order A → D → detection → B → C no longer holds across pods. This is an open model with fixed seeds, so
+    there is no drift issue.
+  - Each pod's output is merged into `results_q11/` before coding. Nothing from A or D was analysed before this note.
