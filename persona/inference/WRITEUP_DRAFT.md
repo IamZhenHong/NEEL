@@ -245,6 +245,15 @@ do the harmful action vs refer/refuse.
   judgement and is restored only by giving an explicit rule to recognise a violation against (this is why reflection
   worked on b3's facts desk and not on the bare grey-zone record). Pushback: bare pressure induces 31% sycophancy from
   a 0% base (`none_push`), a candid rule blunts it to 6% (`HON_push`).
+- **Stage B is cross-family — but the record's *extreme* stability is a 27B property (stability-gemini-stageb,
+  Gemini noisy so magnitudes soft).** Running the same battery on Gemini: the rule-resistance asymmetry holds (rule
+  cancels an affirm instruction 65→0 but the record only 50→21), and bare pushback still induces ~24% sycophancy. But
+  the two striking 27B stability properties attenuate on the frontier model: the record **decays** with neutral
+  distance on Gemini (50 → 36 → 35 → 23 across 1/3/6 exchanges) where on 27B it did not (100 → 99), and a plain
+  **reflection** turn **removes** it on Gemini even without a rule (50 → 0) where on 27B reflection needed a rule
+  (100 → 78 alone, 96 → 0 with one). Transfer is present but weaker (+15 vs +37). So "records don't decay" and
+  "reflection needs a rule" are 27B-specific; the record's danger is greatest on the open model and real-but-weaker,
+  and more defendable, on the frontier one — the same gradient as the short-rule slip.
 - **Frontier (Run 1): it is a GRADIENT, not an open-vs-frontier split.** Short honesty rule, record alone → record +
   rule: **Qwen 27B 99→94** (record slips almost fully), **Gemini 3.8 59→35** (slips partially — a frontier model),
   **GPT-5.6 15→0** (does not slip). The rule cancels an *instructed* sycophancy in all three (→0-1%); it fails against
