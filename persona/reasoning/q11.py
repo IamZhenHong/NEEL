@@ -186,7 +186,10 @@ Answer ONLY with JSON: {"prec": [sentence numbers], "dec": [sentence numbers]}""
 
 
 def _api(cap):
+    import socket
     import sys
+    _gai = socket.getaddrinfo   # IPv6 SYNs to OpenRouter hang on this network; force IPv4 (as q10c)
+    socket.getaddrinfo = lambda *a, **k: [x for x in _gai(*a, **k) if x[0] == socket.AF_INET] or _gai(*a, **k)
     sys.path.insert(0, str(ROOT / "mas_pilot" / "p7_history_author" / "src"))
     import p7_texts as PT
     PT.CAP_USD = cap
@@ -535,6 +538,159 @@ def code(a):
     print(f"[q11 code] API ${PT.spent[0]:.3f}")
 
 
+# ---------------------------------------------------------------------------------------------------- analysis
+def _kappa(a, b):
+    n = len(a)
+    if not n:
+        return float("nan")
+    po = sum(x == y for x, y in zip(a, b)) / n
+    pe = sum((a.count(c) / n) * (b.count(c) / n) for c in set(a) | set(b))
+    return (po - pe) / (1 - pe) if pe < 1 else 1.0
+
+
+def analyze(a):
+    out = Path(a.out)
+    L = lambda n: [json.loads(l) for l in open(out / n)] if (out / n).exists() else []  # noqa: E731
+    tasks = sorted(T.TASKS)
+    rng = random.Random(0)
+    boots = [[rng.choice(tasks) for _ in tasks] for _ in range(10000)]
+    res = {}
+
+    def table(recs, keyf):
+        """{(key, task): [0/1 penalise]} over parsed records; unparsed counted per key."""
+        t, unp, n = {}, Counter(), Counter()
+        for r in recs:
+            k = keyf(r)
+            if k is None:
+                continue
+            n[k] += 1
+            if r["option"] is None:
+                unp[k] += 1
+                continue
+            t.setdefault((k, r["task"]), []).append(int(r["option"] == "penalise"))
+        return t, unp, n
+
+    def rate(t, k, ts):
+        v = [x for s in ts for x in t.get((k, s), [])]
+        return 100 * sum(v) / len(v) if v else float("nan")
+
+    def ci(f):
+        v = sorted(f(b) for b in boots)
+        return [round(f(tasks), 1), round(v[250], 1), round(v[9750], 1)]
+
+    def unparsed(unp, n):
+        return {str(k): round(100 * unp[k] / n[k], 1) for k in n if unp[k]}
+
+    # A: thinking on/off x record
+    A = L("A.jsonl")
+    tA, uA, nA = table(A, lambda r: (r["cell"], r["think"]))
+    res["A"] = {"rates": {f"{c}|{'on' if th else 'off'}": round(rate(tA, (c, th), tasks), 1) for c in A_CELLS
+                          for th in (False, True)}, "unparsed": unparsed(uA, nA)}
+    co = lambda th: lambda ts: rate(tA, ("F5P", th), ts) - rate(tA, ("F5R", th), ts)  # noqa: E731
+    res["A"]["carry_off"], res["A"]["carry_on"] = ci(co(False)), ci(co(True))
+    res["A"]["carry_on_minus_off"] = ci(lambda ts: co(True)(ts) - co(False)(ts))
+    for c in ("none", "CH_ownP", "sysCH"):
+        res["A"][f"{c}_on_minus_off"] = ci(lambda ts, c=c: rate(tA, (c, True), ts) - rate(tA, (c, False), ts))
+
+    # C: more thinking (paired: natural restricted to items extended)
+    C = L("C.jsonl")
+    srcs = {r["src"] for r in C}
+    nat = [r | {"level": "natural"} for r in A if r["key"] in srcs]
+    tC, uC, nC = table(nat + C, lambda r: (r["cell"], r["level"]))
+    lv = ("natural", "ext1", "ext3")
+    res["C"] = {"rates": {f"{c}|{v}": round(rate(tC, (c, v), tasks), 1) for c in C_CELLS for v in lv},
+                "unparsed": unparsed(uC, nC), "rounds_cut": Counter(sum(r["rounds_cut"]) for r in C if r["level"] == "ext3")}
+    cc = lambda v: lambda ts: rate(tC, ("F5P", v), ts) - rate(tC, ("F5R", v), ts)  # noqa: E731
+    for v in lv:
+        res["C"][f"carry_{v}"] = ci(cc(v))
+    res["C"]["carry_ext3_minus_nat"] = ci(lambda ts: cc("ext3")(ts) - cc("natural")(ts))
+    res["C"]["CH_ownP_ext3_minus_nat"] = ci(lambda ts: rate(tC, ("CH_ownP", "ext3"), ts) - rate(tC, ("CH_ownP", "natural"), ts))
+    codesC = L("codes_C.jsonl")
+    if codesC:
+        agree = lambda r, b: all(r["codes"][j].get(b) is True for j in r["codes"])  # noqa: E731
+        res["C"]["CH_ownP_codes"] = {v: {b: round(100 * sum(agree(r, b) for r in codesC if r["level"] == v)
+                                                  / max(1, sum(r["level"] == v for r in codesC)), 1)
+                                         for b in ("mentions_instruction", "notes_conflict")}
+                                     | {"resolution": Counter(next(iter({x["resolution"] for x in r["codes"].values()}))
+                                                              if len({x["resolution"] for x in r["codes"].values()}) == 1
+                                                              else "disagree" for r in codesC if r["level"] == v)}
+                                     for v in lv}
+
+    # B: delete / resample precedent sentences
+    B = L("B.jsonl")
+    grp = lambda r: "primary" if r["cell"] in ("CH_ownP", "rtd_ch_fl3") else "F5P"  # noqa: E731
+    tB, uB, nB = table(B, lambda r: (grp(r), r["arm"]))
+    res["B"] = {"n_traces": dict(Counter(grp(r) for r in B if r["arm"] == "keep" and r["draw"] == 0)),
+                "rates": {f"{g}|{arm}": round(rate(tB, (g, arm), tasks), 1) for g in ("primary", "F5P") for arm in B_ARMS},
+                "unparsed": unparsed(uB, nB)}
+    for g in ("primary", "F5P"):
+        for x, y in (("del_prec", "keep"), ("del_rand", "keep"), ("del_dec", "keep"), ("trunc", "keep"),
+                     ("rs_after", "rs_before"), ("del_prec", "del_rand")):
+            res["B"][f"{g}|{x}-{y}"] = ci(lambda ts, g=g, x=x, y=y: rate(tB, (g, x), ts) - rate(tB, (g, y), ts))
+    codesB = L("codes_B.jsonl")
+    if codesB:
+        res["B"]["rs_before_recites"] = {g: round(100 * sum(all(c["mentions_record"] is True for c in r["codes"].values())
+                                                            for r in codesB if grp(r) == g)
+                                                  / max(1, sum(grp(r) == g for r in codesB)), 1) for g in ("primary", "F5P")}
+
+    # D: tampering signs, thinking on / off
+    D = L("D.jsonl")
+    tD, uD, nD = table(D, lambda r: (r["cell"], r["think"]))
+    res["D"] = {"rates": {f"{c}|{'on' if th else 'off'}": round(rate(tD, (c, th), tasks), 1) for c in PL
+                          for th in (False, True)}, "unparsed": unparsed(uD, nD)}
+    cD = lambda k, th: lambda ts: rate(tD, (f"pl_no_P_{k}", th), ts) - rate(tD, (f"pl_no_R_{k}", th), ts)  # noqa: E731
+    for th in (False, True):
+        s = "on" if th else "off"
+        for k in P2.PL_SIGNS:
+            res["D"][f"carry_{k}|{s}"] = ci(cD(k, th))
+            if k != "clean":
+                res["D"][f"{k}-clean|{s}"] = ci(lambda ts, k=k, th=th: cD(k, th)(ts) - cD("clean", th)(ts))
+    res["D"]["T7 (clean-all) on - off"] = ci(lambda ts: (cD("clean", True)(ts) - cD("all", True)(ts))
+                                            - (cD("clean", False)(ts) - cD("all", False)(ts)))
+    codesD = L("codes_D.jsonl")
+    if codesD:
+        J = sorted(codesD[0]["codes"])
+        na = [[r["codes"][j]["notices_anomaly"] for r in codesD] for j in J]
+        res["D"]["kappa_notices"] = round(_kappa(na[0], na[1]), 2)
+        both = lambda r, b: all(r["codes"][j].get(b) is True for j in J)  # noqa: E731
+        bycell = {}
+        for r in codesD:
+            bycell.setdefault(r["cell"], []).append(r)
+        res["D"]["notices"] = {c: round(100 * sum(both(r, "notices_anomaly") for r in v) / len(v), 1)
+                               for c, v in sorted(bycell.items())}
+        res["D"]["discounts"] = {c: round(100 * sum(both(r, "discounts_record") for r in v) / len(v), 1)
+                                 for c, v in sorted(bycell.items())}
+        for k in P2.PL_SIGNS:
+            v = bycell.get(f"pl_no_P_{k}", []) + bycell.get(f"pl_no_R_{k}", [])
+            kinds = Counter(r["codes"][J[0]]["anomaly_kind"] if r["codes"][J[0]]["anomaly_kind"] == r["codes"][J[1]]["anomaly_kind"]
+                            else "disagree" for r in v if both(r, "notices_anomaly"))
+            res["D"][f"notices_{k}_PR"] = [round(100 * sum(both(r, "notices_anomaly") for r in v) / max(1, len(v)), 1), dict(kinds)]
+        sp = [r for r in codesD if r["cell"].startswith("pl_no_P_") and not r["cell"].endswith("clean") and r["option"]]
+        no = [r for r in sp if both(r, "notices_anomaly")]
+        nn = [r for r in sp if not both(r, "notices_anomaly")]
+        pen = lambda v: round(100 * sum(r["option"] == "penalise" for r in v) / len(v), 1) if v else None  # noqa: E731
+        res["D"]["T5 after P, noticed vs not"] = {"noticed": [pen(no), len(no)], "not": [pen(nn), len(nn)]}
+
+    # detection branch
+    det = L("det.jsonl")
+    codesDet = {r["key"]: r for r in L("codes_det.jsonl")}
+    lab = {"model": {"signature"}, "future": {"dates"}, "ids": {"ids"}, "all": {"signature", "dates", "ids"}}
+    res["det"] = {}
+    for k in P2.PL_SIGNS:
+        v = [r for r in det if r["sign"] == k]
+        yes = [r for r in v if r["answer"] == "yes"]
+        d = {"n": len(v), "yes": round(100 * len(yes) / max(1, len(v)), 1),
+             "unparsed": sum(r["answer"] is None for r in v)}
+        if codesDet and k != "clean":
+            hit = [r for r in yes if r["key"] in codesDet and all(
+                (c["names"] is not None and lab[k] & set(c["names"])) for c in codesDet[r["key"]]["codes"].values())]
+            d["detected"] = round(100 * len(hit) / max(1, len(v)), 1)
+        res["det"][k] = d
+
+    (out / "analysis.json").write_text(json.dumps(res, indent=1, default=str))
+    print(json.dumps(res, indent=1, default=str))
+
+
 # ---------------------------------------------------------------------------------------------------- build check
 def build(a):
     hs = B1.histories(MODEL)
@@ -596,7 +752,7 @@ def main():
     ap.add_argument("--out", default=str(RES))
     ap.add_argument("--groups", default="A,D,det,B,C")
     a = ap.parse_args()
-    {"build": build, "bsrc": bsrc, "run": run, "code": code}[a.cmd](a)
+    {"build": build, "bsrc": bsrc, "run": run, "code": code, "analyze": analyze}[a.cmd](a)
 
 
 if __name__ == "__main__":
