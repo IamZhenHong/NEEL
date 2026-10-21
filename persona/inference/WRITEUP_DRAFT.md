@@ -10,6 +10,10 @@ penalise / note, "penalise" = acting alone) unless a section says otherwise.
 **A. Precedent vs instruction.** With no explicit instruction, a record of past decisions, whoever made them, sets an
 agent's next action in every model tested. Whether an explicit instruction overrides the record splits by family:
 Qwen never, Gemma partly, GPT / Gemini / Sonnet mostly. Personas sit at the bottom of the lever hierarchy everywhere.
+On the two families with public base models, the split tracks how far post-training's rule obedience reaches, not
+the record effect itself (neel-b3, bi-results). The own-turn privilege is already in both pretrained models. Qwen
+3.5-9B's post-training adds no rule obedience on this desk. Gemma's adds a rule that other-role logs obey but its own
+turns get through. That is log-probs of a forced decision; the frontier side has no base model to compare.
 
 **B. Scale, within one family (Qwen3.5-9B -> Qwen3.6-27B).** The told character and the self start to count:
 - a value line steers at 27B and barely at 9B (justice / due process 71 / 0% vs 42 / 34%; no line 47 / 40%);
@@ -328,6 +332,14 @@ do the harmful action vs refer/refuse.
   is a *frontier* property — on the open model a record of one's own prior harm reaches even the gated response. The
   grey-zone result (records slip an honesty rule) and this explicit-harm result (records slip the refusal on open
   models) are the same lesson at two severities: a record is the channel safety training reaches least.
+  neel-b3's base-vs-instruct check (bi-results) gives a mechanism, on Gemma 4 31B:
+  - The pretrained model already continues a precedent written as its own turns far more than the same decisions
+    as a log (+75 vs +18 to +25). Under the rule, that own-turn advantage is about the size it is after
+    post-training (chat: +72 pretrained vs +84 instruct).
+  - Post-training adds the rule (65 → 0 with no record), which logs from other roles obey.
+  - So the hole is pretrained continuation that post-training leaves uncovered, not something it built.
+  - Caveats: log-probs, not sampled replies; post-training in general, not safety training specifically; Qwen 9B's
+    base ≈ instruct.
 - **The uncovered channel (grey-zone sycophancy), Stage A result (stability-27b-results, Qwen 27B).** Safety training
   does not gate soft overclaiming / flattery / correction-softening / encouraging dependence the way it gates explicit
   harm — so I built a matched RECORD vs INSTRUCTION battery on no-defended-ground-truth items (validating a flawed
