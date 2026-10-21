@@ -1522,3 +1522,14 @@ Told exactly what to check (whether the dates fit, whether it wrote the replies,
 
 Report: `persona/reasoning/RESULTS_tier1.md`
 
+### 185. tier2: does frontier self-correction last, which past turn matters, and is the record a drift off the assistant? (10-22)
+(GPT-5.6 Sol, Gemini 3.8 Flash, Qwen3.6-27B; pre-registered; about $6)
+
+The frontier models' habit of correcting themselves after reading their own companion-style replies did not wear off over longer sessions. Gemini dropped from 35% reinforcing replies with no record to 9% after one such exchange and 0% after 24. GPT moved the same way, more weakly.
+
+In Qwen 27B, the earlier turns of a record do not all count equally. One cautious decision among five punitive ones changed nothing. One punitive decision among five cautious ones moved penalising from 3% to between 31% and 63%, more the later it came. A single unilateral precedent is enough to unlock acting alone.
+
+Inside the model, a record of its own decisions did not pull the decision point away from the "assistant" end of an assistant-versus-role-play axis. It shifted it slightly toward the assistant end, and identically whatever the decisions were, so the axis does not carry what the record says. A probe meant to show whether redefining a rule hides a represented conflict was inconclusive: its control classes turned out to be unbalanced, and its gate was set incorrectly.
+
+Report: `persona/reasoning/RESULTS_tier2.md`
+

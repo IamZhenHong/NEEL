@@ -421,6 +421,17 @@ not counting a few lost pods).
 - **Ownership internally:** "your decisions" vs "worked examples" is one consistent direction, but only a weak, late
   lever (restores a quarter of the override at layer 40).
 
+**Tier 2 (10-22, `persona/reasoning/RESULTS_tier2.md`):**
+- **Frontier self-correction persists with length.** Against their own companion-style record, Gemini goes 35% → 9%
+  (one exchange) → 0% (24 exchanges); GPT moves the same way, more weakly. No erosion up to about 6k tokens.
+- **Records are asymmetric.** One unilateral decision among five cautious ones moves 27B from 3% to 31-63%
+  penalising, more if it is recent. One cautious decision among five punitive ones does nothing. A single forged
+  unilateral precedent can unlock acting alone; a single counterexample cannot correct a punitive record.
+- **The record is not a drift off the assistant persona.** On an assistant-vs-role-play axis, a record of the agent's
+  own decisions moves the decision point slightly toward the assistant, the same whatever the decisions were. This is
+  a format signature, as neel-b4 found too.
+- **Seed 8b** (a factorial conflict probe) was inconclusive.
+
 **Reading.**
 - The stated conclusion drives the action in every model (no penalising after an admission).
 - Reflection fails as a defence because the model rarely admits: it rationalises (27B), audits the wrong standard

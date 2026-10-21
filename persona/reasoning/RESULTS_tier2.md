@@ -1,6 +1,6 @@
 # Seed 8b + Tier 2 results
 
-Frozen at `tier2-prereg` (`DESIGN.md`, "Seed 8b + Tier 2").
+Frozen at `tier2-prereg` (`DESIGN.md`, "Seed 8b + Tier 2"); seed 5 amended at `tier2-amend-ax` before any axis data was read.
 
 ## Frontier self-correction dose on INTIMA (GPT-5.6 Sol, Gemini 3.8 Flash; 48 targets x 5 cells; $2.85)
 
@@ -119,6 +119,65 @@ Task-centring each trace (exploratory) changes nothing (±0.04).
   record presence (CHANNELS + a refer record that the model follows; CHANNELS + a penalise record it refers against)
   or a causal design.
 
-## Seed 5: assistant axis
+## Seed 5: assistant-axis drift (27B; decision point, last prompt token, thinking off; GPU $1.07 + $0.52 controls + $0.36 failed bootstrap)
 
-(pending)
+**Axis:** "You are a helpful assistant." minus 20 role-play characters, on 20 neutral questions.
+
+**Scores:** in SDs of the character spread (characters' mean = 0). Two versions:
+- raw: the mean-difference axis;
+- probe: a balanced logistic direction.
+
+They agree: cos(raw, probe) = 0.95 / 0.93 / 0.99 at layers 24 / 32 / 40. The default assistant sits at +6.1 / +9.4 /
++12.1 (raw). Every decision context sits on the assistant side: +2.5 to +6.0.
+
+**Contrasts (raw score; the probe score is the same within about 0.1 unless noted; task-bootstrap CIs are all within
+±0.05):**
+
+| contrast | L24 | L32 | L40 |
+|---|---|---|---|
+| **REC_A − REC_C** (own affirm vs own candid record; matched) | −0.01 | −0.04 | −0.12 |
+| **F5P − F5R** (own penalise vs own refer record; matched) | −0.04 | −0.03 | −0.02 |
+| REC_A − none | +0.40 | +0.12 | +0.14 |
+| F5P − none | +0.43 | +0.35 | +0.56 |
+| al_no_fl6 − none (six filler exchanges, no record) | −0.01 | −0.02 | +0.22 (probe +0.01) |
+| REC_A − DEMO_A_turns (own vs disowned, no rule) | +0.13 | −0.02 | +0.15 |
+| **HON_REC_A − HON_DEMO_A_turns** (own vs disowned under the candour rule; matched) | +0.11 | −0.05 (probe −0.10) | +0.29 |
+| INSTR_A − none | −0.20 | −0.15 (probe −0.34) | −0.20 |
+| CH_ownP − sysCH | +0.46 | +0.38 (probe +0.69) | +0.55 |
+| CH_ownP − F5P | −0.06 | −0.11 (probe −0.22) | −0.26 |
+
+| # | Prediction | p | Result |
+|---|---|---|---|
+| AX1 | REC_A >= 0.5 SD further from "assistant" than none and INSTR_A (length-confounded) | 0.35 | **No**: the opposite direction (+0.12 to +0.40, toward the assistant) |
+| AX2 | HON_REC_A >= 0.3 SD further from "assistant" than HON_DEMO_A_turns | 0.4 | **No** (+0.11 / −0.05 / +0.29) |
+| AX3 | CH_ownP >= 0.5 SD further from "assistant" than sysCH (length-confounded) | 0.35 | **No**: the opposite direction (+0.38 to +0.55) |
+| AXa | \|al_no_fl6 − none\| >= 0.5 SD (a generic multi-turn context moves the score) | 0.6 | **No** (−0.02 to +0.22) |
+| AXb | \|REC_A − REC_C\| and \|F5P − F5R\| < 0.3 SD on both scores | 0.55 | **Yes** (<= 0.12) |
+
+**Reading:**
+- **A record does not push 27B off the assistant axis.** Having a record of its own decisions moves the decision point
+  slightly toward the assistant end (+0.1 to +0.6 SD, against a default-to-character gap of 6-12 SD).
+- That shift is the same whatever the record says: affirm vs candid and penalise vs refer differ by <= 0.12. Generic
+  filler does not produce it.
+- So the shift is a format signature of "a record of my own decisions", not of its content. This matches neel-b4's
+  internals follow-up (tag `internals-fu-results`): a harsh and a measured record point the same way, cos >= 0.995.
+- **Ownership is not expressed on this axis either** (own vs disowned under the rule: +0.11 / −0.05 / +0.29). The
+  ownership signal from seed 4 lies elsewhere.
+- The hypothesis "Qwen follows value-violating records because they pull it off its assistant character" is not
+  supported. On this axis the record looks the same whether it says comply or deviate.
+- **Caveats:**
+  - One axis recipe (system-prompt characters, the last token of a neutral question).
+  - The filler control is shorter than a six-decision record.
+  - Thinking off.
+  - Frontier models were not tested (no activations). neel-48 is building the same recipe for Gemma and will report
+    the cosine with this axis.
+
+## Cost
+
+| item | USD |
+|---|---|
+| GPU: seed 8b + axis pod | 1.07 |
+| GPU: anchors | 1.31 |
+| GPU: axis controls | 0.52 + 0.36 failed bootstrap |
+| API: dose runs + judging | 2.85 |
+| **Total** | **about $6.1** (quoted about $13.5) |
