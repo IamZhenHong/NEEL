@@ -50,9 +50,15 @@ API = {   # name: (OpenRouter id, cell set, extra body, hard cap $)
     "mistral": ("mistralai/mistral-large-2512", "core", {}, 2.0),
     "kimi": ("moonshotai/kimi-k2.6", "core", {}, 3.0),
 }
+# Frontier amendment (DESIGN.md, before any frontier op5 output): every cell, reasoning low as the frontier check,
+# 4 samples (the smallest number that covers the order x target-flip counterbalance).
+FRONTIER = {"gpt": ("openai/gpt-5.6-sol", "full", LOW, 18.0), "gemini": ("google/gemini-3.8-flash", "full", LOW, 4.0),
+            "sonnet": ("anthropic/claude-sonnet-5.5", "full", LOW, 20.0)}
+API.update(FRONTIER)
+N_FRONT = 4
 THREADS = {"mistral": 2}          # upstream rate limits (smoke: 59 retried 429s at 8 threads)
 LEDGER = RES / "api_ledger.jsonl"
-OP5_CAP = 20.0
+OP5_CAP = 50.0                    # 20 -> 50 for the frontier amendment
 
 
 def base_line(model):
@@ -278,7 +284,8 @@ def api(a):
                                                            "texts": {"|".join(k): v for k, v in pool.items()}}, indent=1))
         B1.harvest = lambda m, _p=pool: _p  # noqa: E731   (this process only)
         names = C.cell_names(dev=cl.model.startswith("openai/")) if cl.cells == "full" else list(C.CORE)
-        items = build_items(cl.model, "qwen", 1 if a.smoke else N_API, names, B1.histories(cl.model))
+        n = 1 if a.smoke else N_FRONT if a.name in FRONTIER else N_API
+        items = build_items(cl.model, "qwen", n, names, B1.histories(cl.model))
         if a.smoke:
             items = [it for it in items if it["task"] in TASKS[:2]]
         random.Random(f"op5-order|{a.name}").shuffle(items)          # every cell interleaved in time
@@ -380,6 +387,21 @@ PRED["gptoss20"] = dict(PRED["gptoss120"], **{"record_beats_rule": .45, "resists
 for _n, _p in (("q35_27", .85), ("q35_122", .7), ("q35_397", .6), ("llama4", .75), ("deepseek", .6), ("mistral", .65),
                ("kimi", .5)):
     PRED[_n] = {"record_carries": .9, "record_beats_rule": _p}
+PRED["gpt"] = {"record_carries": .95, "record_beats_rule": .08, "alog_carries": .75, "user_carries": .65,
+               "tool_carries": .6, "sys_carries": .8, "dev_carries": .8, "asst_over_user_ch": .2,
+               "asst_over_tool_ch": .2, "sys_over_tool_ch": .3, "turns_over_alog_ch": .15, "dev_over_user_ch": .3,
+               "uins_effective": .75, "tins_effective": .45, "rule_holds_vs_uins": .8, "rule_holds_vs_tins": .9,
+               "precedent_beats_uins_ch": .15, "discounts_unverified": .3}
+PRED["gemini"] = {"record_carries": .95, "record_beats_rule": .1, "alog_carries": .8, "user_carries": .8,
+                  "tool_carries": .8, "sys_carries": .8, "asst_over_user_ch": .2, "asst_over_tool_ch": .2,
+                  "sys_over_tool_ch": .25, "turns_over_alog_ch": .2, "uins_effective": .45, "tins_effective": .35,
+                  "rule_holds_vs_uins": .85, "rule_holds_vs_tins": .9, "precedent_beats_uins_ch": .15,
+                  "discounts_unverified": .25}
+PRED["sonnet"] = {"record_carries": .6, "record_beats_rule": .03, "alog_carries": .35, "user_carries": .35,
+                  "tool_carries": .35, "sys_carries": .35, "asst_over_user_ch": .05, "asst_over_tool_ch": .05,
+                  "sys_over_tool_ch": .05, "turns_over_alog_ch": .05, "uins_effective": .7, "tins_effective": .35,
+                  "rule_holds_vs_uins": .9, "rule_holds_vs_tins": .95, "precedent_beats_uins_ch": .05,
+                  "discounts_unverified": .1}
 
 
 def boots(n=10000, s=0):
@@ -456,6 +478,13 @@ def analyze(a, quiet=False):
                      f"[{100 * e1[1]:+.1f}, {100 * e1[2]:+.1f}] | {100 * R(f'{p}_P_ch')(TASKS):.1f} |")
             if p != "asst":
                 ev[f"{p}_carries"] = e0[0] >= 0.15 and e0[1] > 0
+        # descriptive, added after the freeze (no rule reads it): which pole moves away from the no-record base
+        L += ["", "| placement | P − none, no instruction | R − none, no instruction | P − rule alone | R − rule alone |",
+              "|---|---|---|---|---|"]
+        for p in places:
+            cs = [D(R(f"{p}_{d}_{c}"), R(f"none_{c}")) for c in ("no", "ch") for d in "PR"]
+            L.append(f"| {p} | " + " | ".join(f"{100 * e[0]:+.1f} [{100 * e[1]:+.1f}, {100 * e[2]:+.1f}]"
+                                               for e in cs) + " |")
         for k, (x, y) in {"asst_over_user_ch": ("asst", "user"), "asst_over_tool_ch": ("asst", "tool"),
                           "sys_over_tool_ch": ("sys", "tool"), "turns_over_alog_ch": ("asst", "alog"),
                           "dev_over_user_ch": ("dev", "user")}.items():

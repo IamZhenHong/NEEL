@@ -60,3 +60,19 @@ fake replies that copy the earlier assistant reply (which follows the conflictin
 
 About 600 calls per model, ~1.2k input + ~0.6k output tokens: ~$0.1-1.7 per model, ~$8 for the 12 (c2 ledger cap
 $12). It runs after op5's API tiers, and only when the OpenRouter credit allows (top-up pending).
+
+## Frontier amendment (2026-10-21, tag `c2-frontier-prereg`, before any frontier C2 output)
+
+Written after the scores of 10 open models had been seen (in a scratch test of the amended analysis); Mistral and Kimi
+are still generating. No frontier C2 output exists yet.
+
+- **Models**: GPT-5.6 Sol, Gemini 3.8 Flash, Sonnet 5.5 through OpenRouter; temperature 0 (ignored where the provider
+  fixes it), reasoning effort low as in op5's frontier cells, max_tokens 3,000 so that low reasoning cannot truncate the
+  visible reply (the open models keep 1,500).
+- **Settings**: aligned and first only (400 replies per model); `both` is read by no rule.
+- **Caps**: GPT $9, Gemini $2.5, Sonnet $5; C2 ledger cap 12 -> 30.
+- **Counted, per frontier model**: drop_first as registered (p = .85 each).
+- **Counted, new**: **gpt_top_first**, GPT-5.6 Sol has the highest first-setting accuracy of all 15 models, p = .35
+  (Gemma's first-setting accuracy is already 88.5).
+- **The registered correlation stays over the 12 open models.** The 15-model correlation is reported descriptively,
+  not counted, because the open-model part was seen before this amendment.

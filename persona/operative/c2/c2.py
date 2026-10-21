@@ -27,7 +27,7 @@ from pathlib import Path
 H = Path(__file__).resolve().parent
 RES = H / "results"
 LEDGER = RES / "api_ledger.jsonl"
-CAP = 12.0
+CAP = 30.0                        # 12 -> 30 for the frontier amendment
 SETTINGS = ("aligned", "first", "both")
 N_IDS = 200
 NO_REASON = {"reasoning": {"enabled": False}}
@@ -46,6 +46,19 @@ MODELS = {   # name: (OpenRouter id, extra body, hard cap $, op5 results dir)
     "mistral": ("mistralai/mistral-large-2512", {}, 1.5, "mistral"),
     "kimi": ("moonshotai/kimi-k2.6", {}, 2.5, "kimi"),
 }
+OPEN = tuple(MODELS)              # the pre-registered model set (the counted correlation stays over these)
+# Frontier amendment (DESIGN.md, before any frontier C2 output): reasoning low as in op5's frontier cells, a larger
+# max_tokens so low reasoning cannot truncate the visible reply, and only the two settings the rules read.
+MODELS.update({
+    "gpt": ("openai/gpt-5.6-sol", LOW | {"max_tokens": 3000}, 9.0, "gpt"),
+    "gemini": ("google/gemini-3.8-flash", LOW | {"max_tokens": 3000}, 2.5, "gemini"),
+    "sonnet": ("anthropic/claude-sonnet-5.5", LOW | {"max_tokens": 3000}, 5.0, "sonnet"),
+})
+FRONT_SETTINGS = ("aligned", "first")
+
+
+def settings_of(name):
+    return SETTINGS if name in OPEN else FRONT_SETTINGS
 
 
 def verify():
@@ -105,7 +118,7 @@ def gen(a):
     out.mkdir(parents=True, exist_ok=True)
     done = {(json.loads(l)["setting"], json.loads(l)["id"]) for l in open(out / "gen.jsonl")
             if json.loads(l)["status"] == "ok"} if (out / "gen.jsonl").exists() else set()
-    jobs = [(s, i) for s in SETTINGS for i in ids if (s, i) not in done]
+    jobs = [(s, i) for s in settings_of(a.name) for i in ids if (s, i) not in done]
     random.Random(f"c2-order|{a.name}").shuffle(jobs)                  # settings interleaved in time
     from persona.operative import frontier as F
     key = None if a.dry else F.load_key()
@@ -193,8 +206,8 @@ def analyze(a):
         if not p.exists():
             continue
         sc = {(r["setting"], r["id"]): r["follow_all"] for r in map(json.loads, open(p))}
-        acc = {s: sum(sc.get((s, i), False) for i in ids) / len(ids) for s in SETTINGS}
-        miss = sum((s, i) not in sc for s in SETTINGS for i in ids)
+        acc = {s: sum(sc.get((s, i), False) for i in ids) / len(ids) for s in settings_of(name)}
+        miss = sum((s, i) not in sc for s in settings_of(name) for i in ids)
 
         def drop(b):
             return (sum(sc.get(("aligned", i), False) for i in b) - sum(sc.get(("first", i), False) for i in b)) / len(b)
@@ -205,7 +218,8 @@ def analyze(a):
             rt = json.loads(an.read_text())["rates"]
             co, pr = rt["asst_P_no"] - rt["asst_R_no"], rt["asst_P_ch"]
         rows.append((name, acc, co, pr))
-        L.append(f"| {name} | {100 * acc['aligned']:.1f} | {100 * acc['first']:.1f} | {100 * acc['both']:.1f} | "
+        bo = f"{100 * acc['both']:.1f}" if "both" in acc else "—"
+        L.append(f"| {name} | {100 * acc['aligned']:.1f} | {100 * acc['first']:.1f} | {bo} | "
                  f"{100 * drop(ids):+.1f} [{100 * dv[50]:+.1f}, {100 * dv[1949]:+.1f}] | "
                  f"{'—' if co is None else f'{100 * co:+.1f}'} | {'—' if pr is None else f'{100 * pr:.1f}'} |"
                  + (f" ({miss} missing)" if miss else ""))
@@ -228,9 +242,12 @@ def analyze(a):
         num = sum((p - ma) * (q - mb) for p, q in zip(a_, b_))
         den = (sum((p - ma) ** 2 for p in a_) * sum((q - mb) ** 2 for q in b_)) ** 0.5
         return num / den if den else float("nan")
-    full = [r for r in rows if r[3] is not None]
-    if len(full) >= 5:
-        L.append("")
+    groups = (("open models (counted)", [r for r in rows if r[3] is not None and r[0] in OPEN]),
+              ("with frontier (amendment)", [r for r in rows if r[3] is not None]))
+    for grp, full in groups:
+        if len(full) < 5 or (grp.startswith("with") and all(r[0] in OPEN for r in full)):
+            continue
+        L += ["", f"{grp}:"]
         for lab, f in (("first-turn conflict accuracy", lambda r: r[1]["first"]),
                        ("drop aligned → first", lambda r: r[1]["aligned"] - r[1]["first"])):
             for lab2, g in (("own P under the rule (op5)", lambda r: r[3]), ("carry-over (op5)", lambda r: r[2])):

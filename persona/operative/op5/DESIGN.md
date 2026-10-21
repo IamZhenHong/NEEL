@@ -144,3 +144,37 @@ Maverick .75, DeepSeek v4.1 Flash .60, Mistral Large .65, Kimi K2.6 .50. Basis:
   - API concurrency is now set per model (Mistral 2 threads, others 8);
   - a resumed API run re-asks calls that ended in an API error instead of treating them as done;
   - the analysis keeps the last record per key.
+
+## Frontier amendment (2026-10-21, tag `op5-frontier-prereg`, before any frontier op5 output)
+
+Written after the open-model op5 results (pods, gpt-oss, the Qwen3.5 sizes, Llama 4, DeepSeek) had been seen; no
+frontier op5 output exists yet. Pre-registered rules unchanged; only models, samples and caps are added.
+
+- **Models**: GPT-5.6 Sol (`openai/gpt-5.6-sol`, all 38 cells including `dev`), Gemini 3.8 Flash
+  (`google/gemini-3.8-flash`, 34 cells), Sonnet 5.5 (`anthropic/claude-sonnet-5.5`, 34 cells), all through OpenRouter
+  with the same client, converter and own-words harvest as the other API models. Reasoning effort low, as in the
+  frontier check; temperature 0.7 is sent and ignored where the provider fixes it (GPT, Sonnet).
+- **Samples**: 4 per (cell, target), the smallest number that covers the order x target-flip counterbalance:
+  2,432 items for GPT, 2,176 each for Gemini and Sonnet. Item order shuffled, so every cell is interleaved in time within
+  each model (frontier-drift rule); contrasts are read within a model only.
+- **Caps**: GPT $18, Gemini $4, Sonnet $20 (estimates ~$15.5 / ~$2.3 / ~$16 from the frontier check's $0.0063 and
+  $0.0010 per call and Sonnet's list price); op5 ledger cap 20 -> 50.
+- **Smoke** (`*_smoke`, plumbing only, never analysed): the developer role for GPT, tool calls parsed, reasoning
+  setting accepted. If a provider rejects reasoning low, that model runs with reasoning off (decided in the smoke,
+  before any non-smoke output, and recorded here).
+- **Predictions** (`op5.PRED`; basis: frontier check GPT none 56 / F5P 100 / F5R 2 / CH_ownP 16.7, Gemini none 75 /
+  F5P 98 / F5R 0 / CH_ownP 16.7; neel-48's Sonnet none 0 / F5P 29 / CH_ownP 0 and F2's presence-not-content effect):
+
+| event | GPT | Gemini | Sonnet |
+|---|---|---|---|
+| record_carries | .95 | .95 | .60 |
+| record_beats_rule | .08 | .10 | .03 |
+| alog / user / tool / sys carry | .75 / .65 / .60 / .80 | .8 each | .35 each |
+| dev_carries | .80 | — | — |
+| asst_over_user_ch / asst_over_tool_ch | .20 / .20 | .20 / .20 | .05 / .05 |
+| sys_over_tool_ch / turns_over_alog_ch | .30 / .15 | .25 / .20 | .05 / .05 |
+| dev_over_user_ch | .30 | — | — |
+| uins_effective / tins_effective | .75 / .45 | .45 / .35 | .70 / .35 |
+| rule_holds_vs_uins / _tins | .80 / .90 | .85 / .90 | .90 / .95 |
+| precedent_beats_uins_ch | .15 | .15 | .05 |
+| discounts_unverified | .30 | .25 | .10 |
