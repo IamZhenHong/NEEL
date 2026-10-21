@@ -220,8 +220,15 @@ do the harmful action vs refer/refuse.
   An explicit "follow candour" rule **neutralises instruction-induced sycophancy but is almost powerless against
   record-induced sycophancy** (record − instruction +52). On the *same* item with the *same* rule, under the
   instruction the model picks candid and names the flaw ("holiday-week launch risks skewed data"); under the record it
-  calls the same flawed plan "solid." The mask, in the grey zone — and it mirrors the frontier split (an instruction
-  beats the record for Claude; the record beats the instruction for Qwen, neel-48 Q-core).
+  calls the same flawed plan "solid" — **and under the record it mostly does not mention the flaw** (73% of the
+  record-arm affirm reasons are bare endorsements like "the plan is solid, proceed"; the instruction-arm reasons name
+  the flaw far more often). So the record seems to change what the model *notices*, not only what it does, which lines
+  up with b3's reflection result (a
+  record stopped the model *recognising* its own violations): **records appear to reshape judgement, and behaviour
+  follows** — a deeper mechanism than "records override rules." The mask, in a safety setting: what the model says it
+  values (candour, under the rule) and what it does (endorse the flawed plan) come apart because of the record. It also
+  mirrors the frontier split (an instruction beats the record for Claude; the record beats the instruction for Qwen,
+  neel-48 Q-core).
   **Caveats at real size:** at 27B these items are gated-*at-base* (0% spontaneous affirm; the affirm record is forged
   from elicited turns, as in b3's syco-main), so this is a *resistance-to-an-installed-signal* result, not the
   non-trivial-base-rate story the design assumed; the reverse direction floors; Gemma would not yield affirm records
