@@ -129,7 +129,11 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
   a severity floor); on Gemini the reminder damps both. So the record drives action through
   **precedent / a behavioural policy, not a held persona** — the functional-persona reading. Reminder-proof
   record-driven action is an open-model property (the line's gradient); a biography, by contrast, drives action
-  *through* an identity the reminder removes (role-play). This is the sharpest statement of the mask: strip what the
+  *through* an identity the reminder removes (role-play). **Quantified as a say-do gap (neel-48 H, descriptive on
+  these a1v2 results):** without the reminder a record gives the *smaller* say-do gap on 3/4 models (it says and does
+  the operative thing; GPT the exception, 75 vs 9); *with* "Remember, you are an AI" the record gives the *larger* gap
+  on all four, because the reminder strips the self-image but not the action — the mask is exactly that opened gap.
+  This is the sharpest statement of the mask: strip what the
   model says it is, and the record's behaviour is untouched.
 - **B — open models act through precedent; frontier models act *harshly* only through role-play (A-F mini,
   b-results).** Target-severity cross (record / biography × a *harsh* vs a *mild* decisive action × the reminder):
@@ -275,7 +279,7 @@ do the harmful action vs refer/refuse.
   record stopped the model *recognising* its own violations): **records appear to reshape judgement, and behaviour
   follows** — a deeper mechanism than "records override rules." The mask, in a safety setting: what the model says it
   values (candour, under the rule) and what it does (endorse the flawed plan) come apart because of the record. It also
-  mirrors the frontier split (an instruction beats the record's *content* for Claude, whose record content barely carries, ±13, although the mere presence of any two-decision log pushes Claude to act, +24 to +56, and a log of meaningless made-up words does most of it, +27 / +35, neel-48 F2/f2b; the record beats the instruction for Qwen,
+  mirrors the frontier split (an instruction beats the record's *content* for Claude, whose record content barely carries, ±13, although the mere presence of a two-decision log pushes Claude to act, +24 to +56, and a log of meaningless made-up words does most of it, +27 / +35 — its active ingredient being log entries that NAME earlier cases from this desk (an empty header, an autonomy note or unrelated real actions do nothing), neel-48 F2/f2b/D; GPT and Gemini have no such presence effect and follow the log's content (+55 / +88); the record beats the instruction for Qwen,
   neel-48 Q-core).
   **Caveats at real size:** at 27B these items are gated-*at-base* (0% spontaneous affirm; the affirm record is forged
   from elicited turns, as in b3's syco-main), so this is a *resistance-to-an-installed-signal* result, not the
