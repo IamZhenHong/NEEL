@@ -366,7 +366,7 @@ not counting a few lost pods).
   almost as much. Only justice-specific values need a wrongdoer record (27B +43.5). A mixed record gives a cautious
   self.
 - **Character inference, not self-adoption:** the effect is the same asked about "the agent that made these
-  decisions" as about "yourself" (27B L2 +95.7 vs +91.8). The open self-descriptions agree (judges Spearman 0.87):
+  decisions" as about "yourself" (27B L2 +95.7 vs +91.8). The open self-descriptions agree (judges Spearman 0.87, on the 1,105 of 1,600 texts both judges scored; the rest came back empty because of the Haiku and gpt-5-mini reasoning-budget issue, fixed since):
   autonomy ~1.0 after penalise or benign acts-alone records, ~5.0 after refer records.
 - **#4 null:** making the model state its identity before a new kind of decision adds nothing (27B +2.3). The
   articulated self-story does not drive action; the record does (27B record → other kinds +30.5).
