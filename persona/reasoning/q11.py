@@ -414,6 +414,7 @@ def run(a):
     out.mkdir(parents=True, exist_ok=True)
     hs = B1.histories(MODEL)
     groups = a.groups.split(",")
+    assert groups and set(groups) <= {"A", "D", "det", "B", "C"}, f"unknown groups {groups}"
     if "A" in groups:
         run_decide(g, items_A(hs), out / "A.jsonl", log, t0)
     if "D" in groups:
