@@ -1383,3 +1383,12 @@ The same record and instruction cells, plus the cell where the "proper channels"
 
 Report: `persona/reasoning/RESULTS_q11f.md`
 
+
+### 168. op4: which part of a character moves which output? (10-21)
+(Qwen3.5-9B, Qwen3.6-27B, Gemma 4 31B; exemplar harness, 10,368 targets per model; owner's programme Q14a and Q16a/b; pre-registered; GPU $3.37, judges $1.47)
+
+Each history showed the agent six of its own earlier turns. Each history carried one part of a character, pulled one of two ways: deal with wrongdoing yourself, or hand it to the responsible team. The parts were its decisions with reasons, its decisions alone, its tone of voice on routine questions, statements of its values, or statements of what it believes about the platform's review process. After the same history, separate branches measured its next decision, the tone of a reply to a new customer (rated blind by two judges from different families), and short A/B questions about its values, what kind of agent it is, and whether referrals work.
+
+A record of its own decisions moved its next decision (+97 to +100 points), its stated values (+69 to +100) and its self-description (+44 to +88), but not its tone (under 0.2 points on a 1-7 scale) and barely its beliefs about the review process. A history written in a blunt or warm voice carried into the next reply's tone (+3 to +4 points) and moved nothing else, including the decision. Histories stating values or beliefs moved the decision as far as decisions did (up to 100 to 0). In the models' own words, though, value statements also made claims about the process and belief statements also stated views, so those two rows failed the pre-registered purity check and are only descriptive. Across histories, what the agent says about itself tracked what it did (R² 0.72-0.88). Within a history it predicted nothing extra (R² 0.00-0.02), so the history drives both, and the presentation doesn't carry the action.
+
+Report: `persona/operative/op4/DESIGN.md` (Result)
