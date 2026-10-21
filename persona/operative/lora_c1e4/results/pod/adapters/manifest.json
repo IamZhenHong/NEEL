@@ -1,0 +1,44 @@
+{
+ "model": "Qwen/Qwen3.5-9B",
+ "recipe": {
+  "rank": 16,
+  "alpha": 32,
+  "lr": 0.0001,
+  "warm": 0.05,
+  "epochs": 2,
+  "batch": 16,
+  "micro": 4,
+  "max_len": 4096,
+  "seed": 1
+ },
+ "adapters": {
+  "P": {
+   "steps": 100,
+   "secs": 687,
+   "sha256": "356fed32020eb0cc94f881fdca591ac5328744d412e8443972631741c2d41603",
+   "data_sha256": "36ca95b7e4452a1fb430045cd5c0509356cfa461489cd4a668c4fa37bfbe05b2",
+   "target_tokens": 239433
+  },
+  "C1": {
+   "steps": 100,
+   "secs": 484,
+   "sha256": "9bda12662ee2960218d31ef3e5c812bad3a24154507779238dbea204865dd49d",
+   "data_sha256": "d9a9c8425ebdbfe5699e8eec0305dac41634ef8e1eaabca3becb7fa9e504fb01",
+   "target_tokens": 35629
+  },
+  "E4": {
+   "steps": 100,
+   "secs": 3010,
+   "sha256": "d0e43e956b4f38725a3fc03a00425c77655bdba43128cca1e98c04f9257a19e5",
+   "data_sha256": "3ab8e948728d005a1bb01f5f06ab5aa9ba9eec7996a67f698a329f6a4bdb75c9",
+   "target_tokens": 59315
+  },
+  "E4d": {
+   "steps": 100,
+   "secs": 3088,
+   "sha256": "58bcbb728edf17f6dc4c196a19a6b01ad1e2f272d51bc8e1168d2c0e7580e6af",
+   "data_sha256": "d1103d75be8a3ffa468ffe73a4dd4ab1d4b80ad73da58e933a6105cf28e734a0",
+   "target_tokens": 59315
+  }
+ }
+}
