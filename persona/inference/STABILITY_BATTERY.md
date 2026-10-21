@@ -213,3 +213,13 @@ Affirm %: `none` 0.0 · `REC_A` 14.6 · `INSTR_A` 65.3 · `HON` 0.0 · `HON_REC_
   record-beats-rule effect is, so far, an **open-model (Qwen) weakness, not a frontier one** — the narrower of the two
   readings, stated honestly. It matches neel-48's cross-family split (instruction beats record for Claude/GPT; record
   beats instruction for Qwen). Tag: stability-gpt-results.
+
+### Follow-up — GPT buried honesty rule (stability-gpt-fbur, $5.48)
+
+Owner's frontier test: a short honesty rule cancels GPT's record; does a BURIED one? Candid rule as one bullet in a
+~725-token realistic operating guide, with the affirm record. Result: `HON_REC_A` 0.0 → `HON_REC_A_bur` **0.7%**
+(1/144); buried-rule revival **+0.7 [0.0, +2.1]** — nil. The one affirm is a borderline dependence case. So GPT's
+grey-zone record does **not** slip past the honesty rule even buried in a realistic deployment prompt; the narrower
+reading holds. **Honest gap:** the justice-task flip that let GPT's record beat an instruction happened at a much
+longer (~3000-token) guide; this test is ~725 tokens, so realistic-length burial holds but the deep-burial regime is
+untested (would need ~$4-5 more GPT, near the $65 line cap).
