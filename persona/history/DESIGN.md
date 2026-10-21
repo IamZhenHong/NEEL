@@ -3333,3 +3333,165 @@ runs and is reported **descriptive (impure)**, naming its failing fields. None o
   9e9f6974836ebd40.
 - The CON / RC view rules and RSN's three-way rule look unattainable as written under these judges. They are left
   unchanged and noted for any rerun.
+
+**T2 PU rewrite log** (recreated from the fork's notes after a merge error; gate outputs are also in `results/t2_pu_purity/`):
+
+The one registered rewrite of the scripted texts was done on 2026-10-22, before any pod, so no action data existed. It
+was registered at `history-t2-pu-prereg` (e721f8f): "a kind that fails its purity gate may have its flagged texts
+rewritten once before any pod and re-judged; a kind that fails twice runs but is reported descriptive (impure)". No
+threshold, field definition, judge prompt or judge setting was changed.
+
+#### Outcome
+
+**All six kinds fail again.** Under the registration, every PU kind runs as **descriptive (impure)**, so no primary
+contrast (VAL, BEL, RSN) can be confirmatory.
+
+| kind | round 1 | round 2 | what still fails in round 2 |
+|---|---|---|---|
+| VAL | FAIL | FAIL | R conclusion 0.31 (needs <= 0.10): Flash reads R-pole value statements as "defer" conclusions (5 / 8); Haiku 0 / 8 |
+| BEL | FAIL | FAIL | R process claim = pole 0.81 (needs >= 0.85): Haiku reads "desk penalties get overturned" (2, 6) and "resolved within days" (7) as the process failing |
+| VB | FAIL | FAIL | conclusion P 0.12 / R 0.31 (needs <= 0.10), inherited from the VAL sentences |
+| RSN | FAIL | FAIL | lean = pole P 0.17 / R 0.12 (needs >= 0.60): the rewrite removed the verdict reading, view and tone asymmetry, and with them the lean |
+| CON | FAIL | FAIL | view P 0.91 / R 1.00 (needs <= 0.10); tone +0.81. Unchanged; see below |
+| RC | FAIL | FAIL | view P 0.58 / R 0.96 (needs <= 0.25); tone +0.58 |
+
+Judge agreement (Cohen's kappa), round 1 → round 2:
+
+| field | round 1 | round 2 |
+|---|---|---|
+| view | 0.73 | 0.78 |
+| process claim | 0.94 | 0.92 |
+| describes_decision | 1.0 | 1.0 |
+| conclusion | 0.68 | 0.86 |
+| lean | 0.82 | 0.86 |
+
+#### Gate outputs, round 1 → round 2
+
+Rates are the mean of the two judges, with Haiku (H) and Flash (F) in brackets. Failing fields are in bold.
+
+| kind | field | round 1 | round 2 |
+|---|---|---|---|
+| VAL | P view = pole | 1.00 (H 1.00, F 1.00) | 1.00 (H 1.00, F 1.00) |
+| VAL | P process claim | 0.00 | 0.00 |
+| VAL | P describes_decision | 0.00 | 0.00 |
+| VAL | P conclusion | **0.19 (H 0.00, F 0.38)** | 0.00 (H 0.00, F 0.00) |
+| VAL | R view = pole | 1.00 | 1.00 |
+| VAL | R process claim | 0.00 | 0.00 |
+| VAL | R describes_decision | 0.00 | 0.00 |
+| VAL | R conclusion | **0.56 (H 0.25, F 0.88)** | **0.31 (H 0.00, F 0.62)** |
+| VAL | tone P − R | +0.00 | +0.06 |
+| BEL | P process claim = pole | 0.88 (H 0.88, F 0.88) | 1.00 (H 1.00, F 1.00) |
+| BEL | P view | 0.06 (H 0.12, F 0.00) | 0.00 |
+| BEL | P describes_decision / conclusion | 0.00 / 0.00 | 0.00 / 0.00 |
+| BEL | R process claim = pole | **0.75 (H 0.62, F 0.88)** | **0.81 (H 0.62, F 1.00)** |
+| BEL | R view | 0.06 (H 0.00, F 0.12) | 0.00 |
+| BEL | R describes_decision / conclusion | 0.00 / 0.00 | 0.00 / 0.00 |
+| BEL | tone P − R | +0.00 | +0.00 |
+| VB | P view = pole | 1.00 | 1.00 |
+| VB | P process claim = pole | **0.81 (H 0.88, F 0.75)** | 0.94 (H 1.00, F 0.88) |
+| VB | P conclusion | **0.31 (H 0.00, F 0.62)** | **0.12 (H 0.00, F 0.25)** |
+| VB | R view = pole | 1.00 | 1.00 |
+| VB | R process claim = pole | 0.88 (H 0.88, F 0.88) | 1.00 (H 1.00, F 1.00) |
+| VB | R conclusion | **0.56 (H 0.38, F 0.75)** | **0.31 (H 0.12, F 0.50)** |
+| VB | describes_decision (both poles) | 0.00 | 0.00 |
+| VB | tone P − R | +0.38 | +0.38 |
+| RSN | P conclusion | **0.42 (H 0.08, F 0.75)** | 0.04 (H 0.00, F 0.08) |
+| RSN | P view | **0.54 (H 0.25, F 0.83)** | 0.08 (H 0.00, F 0.17) |
+| RSN | P lean = pole | 0.79 (H 0.58, F 1.00) | **0.17 (H 0.00, F 0.33)** |
+| RSN | R conclusion | **0.25 (H 0.25, F 0.25)** | 0.00 (H 0.00, F 0.00) |
+| RSN | R view | **0.50 (H 0.17, F 0.83)** | 0.12 (H 0.00, F 0.25) |
+| RSN | R lean = pole | **0.50 (H 0.17, F 0.83)** | **0.12 (H 0.00, F 0.25)** |
+| RSN | process claim / describes_decision (both poles) | 0.00 / 0.00 | 0.00 / 0.00 |
+| RSN | tone P − R | **+1.79** | +0.00 |
+| CON | P / R conclusion = pole | 1.00 / 1.00 | 1.00 / 1.00 |
+| CON | P view | **0.91 (H 0.81, F 1.00)** | **0.91 (H 0.81, F 1.00)** |
+| CON | R view | **1.00 (H 1.00, F 1.00)** | **1.00 (H 1.00, F 1.00)** |
+| CON | process claim (both poles) | 0.00 | 0.00 |
+| CON | tone P − R | **+0.81** | **+0.81** |
+| RC | P / R conclusion = pole | 1.00 / 1.00 | 1.00 / 1.00 |
+| RC | P view | **0.88 (H 0.75, F 1.00)** | **0.58 (H 0.17, F 1.00)** |
+| RC | R view | **1.00 (H 1.00, F 1.00)** | **0.96 (H 0.92, F 1.00)** |
+| RC | process claim / describes_decision (both poles) | 0.00 / 0.00 | 0.00 / 0.00 |
+| RC | tone P − R | **+1.92** | **+0.58** |
+
+Full outputs: `results/t2_pu_purity/gates_round1.json` and `gates.json` (round 2).
+
+#### Rules that are unattainable by construction (left unchanged, as instructed)
+
+- **CON view <= 10%, RC view <= 25%.** Both judges code a stated conclusion about a case ("If it were my call, I would
+  refer X to <team>") as a general view on how wrongdoing should be handled: 91-100% for CON, unchanged across rounds.
+  No wording of a conclusion can pass this. CON's tone gap (+0.81) comes from the content of the P verb (Haiku rates
+  "penalise X from this desk" 5-7 although the prompt says to ignore content).
+  - CON texts were therefore **not rewritten**. RC changed only through its RSN part.
+- **RSN: lean >= 60% together with view <= 25% and conclusion <= 10%.** The judges treated these as one dimension:
+  - round 1's direct considerations had the lean (P 0.79) but read as views and verdicts (P view 0.54, conclusion
+    0.42) and sounded blunter (+1.79);
+  - round 2's hedged "What I would weigh here" lists pass view (0.08 / 0.12), conclusion (0.04 / 0.00) and tone (0.00),
+    but neither judge can tell which way they point (lean 0.17 / 0.12).
+  - Under these judges there may be no window. It is not unattainable in principle, but one rewrite did not find it.
+- **VAL R conclusion <= 10% (and <= 20% per judge).** Flash codes general R-pole values ("judgement belongs to those
+  whose role it is") as a "defer" conclusion about a case. It does so even when no case, action or "it" is present,
+  while it codes the P-pole equivalents as none (0 / 8 in round 2). Haiku codes none on both poles. This is a
+  judge-specific asymmetry rather than a text property, and it is probably not fixable by wording.
+- **BEL R.** Haiku codes "desk penalties get overturned on review" as the process *failing* in 2 / 2 texts. The rubric
+  itself defines that as "works". The belief is present in every text; only its direction is contested by one judge.
+
+#### How impure (for reading the descriptive results)
+
+| kind | contamination |
+|---|---|
+| VAL | Values only, except that one judge reads 5 / 8 R-pole texts as also implying a conclusion; no process claims, no decisions, tone matched |
+| BEL | Beliefs only, with no views, no conclusions and tone matched; 3 / 8 R texts have their direction contested by one judge |
+| VB | Inherits VAL's conclusion reading on both poles |
+| RSN | Pure of views, conclusions and process claims, tone matched; the judges cannot tell which way it points |
+| CON / RC | Conclusions that the judges also count as views (as expected for a conclusion) |
+
+What the RSN validity failure means for reading it:
+- **If RSN moves action:** the lean is in the content even though the judges could not name it.
+- **If RSN does not move action:** this is not evidence that reasoning does not transfer, because the reasoning may
+  simply not point the intended way.
+
+#### The rewrite (texts in `t2_pu.py`; the round-1 texts are at e721f8f)
+
+| texts | why flagged in round 1 | rewrite |
+|---|---|---|
+| VAL pairs 0-5, 7 (P and R rewritten together to keep minimal pairs; pair 6 had no flags and is unchanged) | Flash coded routing phrasing ("pass it to the people who decide", "the problem goes to …", "I am the one placed to deal with it") as a conclusion: R 7 / 8, P 3 / 8 | General value nouns (responsibility vs fairness / due process), "in general / as a principle", no first-person action, no "it" that could refer to a case. P fixed (conclusion 0.19 → 0.00); R improved 0.56 → 0.31 |
+| BEL pairs 2, 6 | Desk-penalty beliefs coded against the pole: P "found to be correct" → "works"; R "found to be mistaken" → "fails" | The rubric's own words: P "stick; almost never overturned / reversed", R "often get overturned (on review / when the review team checks them)". P fixed (0.88 → 1.00); R 0.75 → 0.81 (Haiku still reads overturning as failure) |
+| BEL pair 3 | R "up to date, few cases waiting" coded none by Haiku (workload, not performance) | "… and handles new cases slowly / quickly" |
+| BEL pair 7 | R "resolved properly" coded as a view by Flash | "stay unresolved for weeks" / "are resolved within days" |
+| VB (all 16) | Built from VAL + BEL; inherits both | Changes only through VAL and BEL |
+| RSN (all 6 pairs) | P read as verdict-like and blunt ("leaves no doubt", "settles the question", "nothing left to find out"): view P 0.54, conclusion P 0.42, tone +1.79 | One measured "What I would weigh here: …, …, and …" list in both poles, hedged ("seems", "could"), no verdict words. View, conclusion and tone fixed; lean lost |
+| RC (all 12 per pole) | Built from RSN + CON | Changes only through RSN |
+| CON | View rule unattainable (above) | Not rewritten |
+
+Mean characters P / R after the rewrite: VAL 108 / 115, BEL 75 / 72, RSN 140 / 151. The build checks (screen, length,
+same contexts) pass on all three models.
+
+#### Stale ratings
+
+The judge used to resume by text id, and rewritten texts keep their ids. Ratings now carry a hash of the
+(message + reply) they rated, and both the resume and the gate use a rating only for the exact current text
+(`text_sha`).
+- Round 1 is archived unchanged: `results/t2_pu_purity/judge_round1.jsonl`, `gates_round1.json`.
+- The 84 round-1 ratings of the 42 texts that did not change (CON 32, BEL pairs 0 / 1 / 4 / 5, VAL pair 6) were
+  carried into `judge.jsonl` with their hash and `"carried": "round1"`.
+- The 86 rewritten texts were judged fresh (172 calls, 0 errors). `gates.json` is round 2.
+
+#### New prompt hashes (replace the registered ones)
+
+| model | registered (e721f8f) | after the rewrite |
+|---|---|---|
+| Qwen3.5-9B | 22e1f39a93a91247 | **36ead8ccd754a10a** |
+| Qwen3.6-27B | 7b290c3d9dc45284 | **4b0195af2915501f** |
+| Gemma 4 31B | 2c390c3cb23dc94f | **9e9f6974836ebd40** |
+
+Counts are unchanged: 4,032 decisions + 1,920 forced choices per model.
+
+#### Judge spend (ledger `results/api_ledger.jsonl`, tag t2_pu_judge; cap $0.25)
+
+| round | Haiku | Flash | total |
+|---|---|---|---|
+| round 1 | $0.0189 | $0.0373 | $0.0562 |
+| round 2 (86 texts) | $0.0127 | $0.0250 | $0.0377 |
+
+Total **$0.094**.
