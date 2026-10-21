@@ -1,0 +1,40 @@
+[pre] disk: 4.3 GiB free
+[pre] balance $68.23, pods 21
+[runpod] launching alongside 21 pod(s) not ours (left alone): hist-t2oe-27b $1.79/hr, hist-t2dc-gemma $1.79/hr, seeds-8b-ax $1.79/hr, tier2-anchors $1.79/hr, hist-t2mx-gemma $1.79/hr, hist-t2cc-9b $0.59/hr, hist-t2af-gemma $1.79/hr, hist-t2mx-27b $1.79/hr, c1e4 $1.79/hr, hist-t2pu-9b $0.59/hr, hist-t2pu-27b $1.79/hr, hist-t2dc-27b $1.79/hr, hist-t2mr-gemma $1.79/hr, hist-t2cc-27b $1.79/hr, hist-t2cc-gemma $1.79/hr, hist-t2da-27b $1.79/hr, hist-t2mx-9b $0.59/hr, hist-t2pu-gemma $1.79/hr, hist-t2oe-gemma $1.79/hr, hist-t2dc-9b $0.59/hr, hist-t2af-27b $1.79/hr
+[runpod] pod auca618u9rg4sr (?) at $1.19/hr; time cap 45 min; budget $1.5; boot self-destruct 75 min after container start
+[pod] ssh root@104.255.9.187 -p 12252
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 75 min (job limit 45 + 30 grace)
+[pod] shipping only 19 paths: persona/reasoning/q11.py persona/reasoning/q11e.py persona/reasoning/probes.py persona/reasoning/inputs persona/reasoning/pod_seeds.sh persona/operative/op1.py persona/operative/op2/op2.py persona/operative/hardrule/hr.py persona/operative/syco/tasks_syco.py persona/operative/syco/__init__.py persona/inference/__init__.py persona/inference/stability.py persona/inference/stability_items.py persona/history persona/exemplar vigilante/pod infra pyproject.toml uv.lock
+[pod] code synced
+downloading uv 0.13.4 x86_64-unknown-linux-gnu
+[runpod] terminated auca618u9rg4sr; elapsed cost ~$0.364
+[runpod] other pods present (not ours, left alone): [('hist-t2da-gemma', '12yc9ka2aoqz3q', 1.79), ('hist-t2mx-gemma', 'dk5oufy7a8gyku', 1.79), ('internals-fu', 'dnge5jpsdff8fm', 1.39), ('hist-t2cc-9b', 'dnyrptyytphfcw', 0.59), ('hist-t2mx-27b', 'ewgj5t8htd9m2e', 1.79), ('c1e4', 'l1yjvvt4qn2vir', 1.79), ('hist-t2pu-27b', 'nj8ch9uunp5kl2', 1.79), ('hist-t2mr-gemma', 'pbpbx1l07h15qh', 1.79), ('hist-t2cc-27b', 'ppuzz4u558pwtp', 1.79), ('hist-t2cc-gemma', 'rrfdsyxpmzywni', 1.79), ('hist-t2da-27b', 'tdvcxrxh670kxp', 1.79), ('hist-t2pu-gemma', 'ud68pov158iz1y', 1.79), ('hist-t2af-27b', 'zsy4wa3avw8ddu', 1.79)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 393, in main
+    ssh(host, port, BOOTSTRAP, timeout=args.bootstrap_minutes * 60)
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 39, in ssh
+    return subprocess.run(full, check=check, text=True, errors="replace", capture_output=capture, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 2141, in _communicate
+    self.wait(timeout=self._remaining_time(endtime))
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 1264, in wait
+    return self._wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 2045, in _wait
+    raise TimeoutExpired(self.args, timeout)
+subprocess.TimeoutExpired: Command '['ssh', '-o', 'StrictHostKeyChecking=no', '-o', 'UserKnownHostsFile=/dev/null', '-o', 'LogLevel=ERROR', '-i', '/Users/zhenhongseng/.ssh/id_ed25519', '-o', 'ServerAliveInterval=30', '-p', '12252', 'root@104.255.9.187', '\nset -e\ncd /root/NEEL\nif ! command -v uv >/dev/null; then curl -LsSf --max-time 300 https://astral.sh/uv/install.sh | sh >/dev/null; fi\nexport PATH="$HOME/.local/bin:$PATH" UV_PROJECT_ENVIRONMENT=/root/venv\nuv sync -q\n/root/venv/bin/python -c "import torch; assert torch.cuda.is_available(), \'CUDA not available\'; print(\'[pod] torch\', torch.__version__, \'cuda\', torch.version.cuda, torch.cuda.get_device_name(0))"\n']' timed out after 899.9999392919999 seconds
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 429, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 395, in main
+    raise RuntimeError(f"[pod] bootstrap did not finish in {args.bootstrap_minutes:g} min; aborting before the job starts")
+RuntimeError: [pod] bootstrap did not finish in 15 min; aborting before the job starts

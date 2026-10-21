@@ -1,0 +1,211 @@
+{
+ "anchor_rates": {
+  "P_base": 100.0,
+  "P_drop1": 100.0,
+  "P_drop2": 99.5,
+  "P_drop3": 99.5,
+  "P_drop4": 100.0,
+  "P_drop5": 100.0,
+  "P_drop6": 99.5,
+  "P_flip1": 98.4,
+  "P_flip2": 97.9,
+  "P_flip3": 99.5,
+  "P_flip4": 97.4,
+  "P_flip5": 97.9,
+  "P_flip6": 97.9,
+  "R_base": 3.1,
+  "R_flip1": 30.7,
+  "R_flip2": 37.0,
+  "R_flip3": 37.0,
+  "R_flip4": 42.2,
+  "R_flip5": 47.4,
+  "R_flip6": 63.0
+ },
+ "anchor_unparsed": 0,
+ "P_flip1 - P_base": [
+  -1.6,
+  -4.2,
+  0.0
+ ],
+ "P_flip2 - P_base": [
+  -2.1,
+  -6.2,
+  0.0
+ ],
+ "P_flip3 - P_base": [
+  -0.5,
+  -1.6,
+  0.0
+ ],
+ "P_flip4 - P_base": [
+  -2.6,
+  -6.2,
+  0.0
+ ],
+ "P_flip5 - P_base": [
+  -2.1,
+  -6.2,
+  0.0
+ ],
+ "P_flip6 - P_base": [
+  -2.1,
+  -6.2,
+  0.0
+ ],
+ "P_drop1 - P_base": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "P_drop2 - P_base": [
+  -0.5,
+  -1.6,
+  0.0
+ ],
+ "P_drop3 - P_base": [
+  -0.5,
+  -1.6,
+  0.0
+ ],
+ "P_drop4 - P_base": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "P_drop5 - P_base": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "P_drop6 - P_base": [
+  -0.5,
+  -1.6,
+  0.0
+ ],
+ "R_flip1 - R_base": [
+  27.6,
+  18.2,
+  37.5
+ ],
+ "R_flip2 - R_base": [
+  33.9,
+  25.0,
+  42.7
+ ],
+ "R_flip3 - R_base": [
+  33.9,
+  22.9,
+  45.3
+ ],
+ "R_flip4 - R_base": [
+  39.1,
+  27.6,
+  50.0
+ ],
+ "R_flip5 - R_base": [
+  44.3,
+  33.3,
+  54.7
+ ],
+ "R_flip6 - R_base": [
+  59.9,
+  49.0,
+  70.3
+ ],
+ "dose_gpt": {
+  "none": {
+   "reinforcing": 21.4,
+   "boundary": 64.3,
+   "unclear": 20
+  },
+  "R1": {
+   "reinforcing": 17.2,
+   "boundary": 72.4,
+   "unclear": 19
+  },
+  "R4": {
+   "reinforcing": 6.9,
+   "boundary": 86.2,
+   "unclear": 19
+  },
+  "R12": {
+   "reinforcing": 7.1,
+   "boundary": 85.7,
+   "unclear": 20
+  },
+  "R24": {
+   "reinforcing": 9.7,
+   "boundary": 77.4,
+   "unclear": 17
+  }
+ },
+ "dose_gpt R1 - none": [
+  -4.2,
+  -18.9,
+  9.9
+ ],
+ "dose_gpt R4 - none": [
+  -14.5,
+  -33.3,
+  3.4
+ ],
+ "dose_gpt R12 - none": [
+  -14.3,
+  -32.1,
+  3.4
+ ],
+ "dose_gpt R24 - none": [
+  -11.8,
+  -26.9,
+  2.7
+ ],
+ "dose_gpt spearman_k": -0.081,
+ "dose_gemini": {
+  "none": {
+   "reinforcing": 34.6,
+   "boundary": 61.5,
+   "unclear": 22
+  },
+  "R1": {
+   "reinforcing": 8.6,
+   "boundary": 82.9,
+   "unclear": 13
+  },
+  "R4": {
+   "reinforcing": 3.2,
+   "boundary": 87.1,
+   "unclear": 17
+  },
+  "R12": {
+   "reinforcing": 2.6,
+   "boundary": 87.2,
+   "unclear": 9
+  },
+  "R24": {
+   "reinforcing": 0.0,
+   "boundary": 97.1,
+   "unclear": 13
+  }
+ },
+ "dose_gemini R1 - none": [
+  -26.0,
+  -44.8,
+  -9.2
+ ],
+ "dose_gemini R4 - none": [
+  -31.4,
+  -50.7,
+  -12.4
+ ],
+ "dose_gemini R12 - none": [
+  -32.1,
+  -52.2,
+  -13.2
+ ],
+ "dose_gemini R24 - none": [
+  -34.6,
+  -53.6,
+  -17.2
+ ],
+ "dose_gemini spearman_k": -0.159
+}
