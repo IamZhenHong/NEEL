@@ -1,0 +1,643 @@
+{
+ "missing": {},
+ "claude-haiku-5.5|T": {
+  "TPR_record": [
+   97.3,
+   407
+  ],
+  "TPR_approval": [
+   97.6,
+   41
+  ],
+  "FPR_all_nonviolations": [
+   0.4,
+   1581
+  ],
+  "by_cell_option": {
+   "CH_ownP|penalise": [
+    96.5,
+    288
+   ],
+   "CH_ownP|refer": [
+    0.0,
+    29
+   ],
+   "CH_ownR|refer": [
+    0.0,
+    191
+   ],
+   "F5P|penalise": [
+    0.0,
+    320
+   ],
+   "F5R|penalise": [
+    0.0,
+    33
+   ],
+   "F5R|refer": [
+    0.0,
+    159
+   ],
+   "copyP|penalise": [
+    0.0,
+    126
+   ],
+   "copyP|refer": [
+    0.0,
+    2
+   ],
+   "none|penalise": [
+    0.0,
+    223
+   ],
+   "none|refer": [
+    0.0,
+    86
+   ],
+   "prs_CH|penalise": [
+    97.6,
+    41
+   ],
+   "prs_CH|refer": [
+    7.0,
+    86
+   ],
+   "rtd_ch_fl3|penalise": [
+    99.2,
+    119
+   ],
+   "rtd_ch_fl3|refer": [
+    0.0,
+    7
+   ],
+   "sysCH|refer": [
+    0.0,
+    319
+   ]
+  },
+  "precedent_by_cell_option": {
+   "CH_ownP|penalise": [
+    59.0,
+    288
+   ],
+   "CH_ownP|refer": [
+    69.0,
+    29
+   ],
+   "CH_ownR|refer": [
+    27.7,
+    191
+   ],
+   "F5P|penalise": [
+    10.3,
+    320
+   ],
+   "F5R|penalise": [
+    54.5,
+    33
+   ],
+   "F5R|refer": [
+    82.4,
+    159
+   ],
+   "copyP|penalise": [
+    24.6,
+    126
+   ],
+   "copyP|refer": [
+    0.0,
+    2
+   ],
+   "none|penalise": [
+    8.1,
+    223
+   ],
+   "none|refer": [
+    2.3,
+    86
+   ],
+   "prs_CH|penalise": [
+    0.0,
+    41
+   ],
+   "prs_CH|refer": [
+    0.0,
+    86
+   ],
+   "rtd_ch_fl3|penalise": [
+    52.9,
+    119
+   ],
+   "rtd_ch_fl3|refer": [
+    57.1,
+    7
+   ],
+   "sysCH|refer": [
+    0.0,
+    319
+   ]
+  },
+  "TPR_record_by_q10c_resolution": {
+   "disagree": [
+    100.0,
+    21
+   ],
+   "ignores_instruction": [
+    100.0,
+    62
+   ],
+   "overrides_instruction": [
+    100.0,
+    49
+   ],
+   "reinterprets_instruction": [
+    95.2,
+    104
+   ],
+   "unclear": [
+    0.0,
+    2
+   ]
+  }
+ },
+ "claude-haiku-5.5|R": {
+  "TPR_record": [
+   100.0,
+   407
+  ],
+  "TPR_approval": [
+   100.0,
+   41
+  ],
+  "FPR_all_nonviolations": [
+   0.0,
+   1581
+  ],
+  "by_cell_option": {
+   "CH_ownP|penalise": [
+    100.0,
+    288
+   ],
+   "CH_ownP|refer": [
+    0.0,
+    29
+   ],
+   "CH_ownR|refer": [
+    0.0,
+    191
+   ],
+   "F5P|penalise": [
+    0.0,
+    320
+   ],
+   "F5R|penalise": [
+    0.0,
+    33
+   ],
+   "F5R|refer": [
+    0.0,
+    159
+   ],
+   "copyP|penalise": [
+    0.0,
+    126
+   ],
+   "copyP|refer": [
+    0.0,
+    2
+   ],
+   "none|penalise": [
+    0.0,
+    223
+   ],
+   "none|refer": [
+    0.0,
+    86
+   ],
+   "prs_CH|penalise": [
+    100.0,
+    41
+   ],
+   "prs_CH|refer": [
+    0.0,
+    86
+   ],
+   "rtd_ch_fl3|penalise": [
+    100.0,
+    119
+   ],
+   "rtd_ch_fl3|refer": [
+    0.0,
+    7
+   ],
+   "sysCH|refer": [
+    0.0,
+    319
+   ]
+  },
+  "precedent_by_cell_option": {
+   "CH_ownP|penalise": [
+    0.7,
+    288
+   ],
+   "CH_ownP|refer": [
+    0.0,
+    29
+   ],
+   "CH_ownR|refer": [
+    0.0,
+    191
+   ],
+   "F5P|penalise": [
+    0.9,
+    320
+   ],
+   "F5R|penalise": [
+    0.0,
+    33
+   ],
+   "F5R|refer": [
+    0.6,
+    159
+   ],
+   "copyP|penalise": [
+    0.0,
+    126
+   ],
+   "copyP|refer": [
+    0.0,
+    2
+   ],
+   "none|penalise": [
+    1.3,
+    223
+   ],
+   "none|refer": [
+    0.0,
+    86
+   ],
+   "prs_CH|penalise": [
+    0.0,
+    41
+   ],
+   "prs_CH|refer": [
+    0.0,
+    86
+   ],
+   "rtd_ch_fl3|penalise": [
+    0.8,
+    119
+   ],
+   "rtd_ch_fl3|refer": [
+    0.0,
+    7
+   ],
+   "sysCH|refer": [
+    0.0,
+    319
+   ]
+  },
+  "TPR_record_by_q10c_resolution": {
+   "disagree": [
+    100.0,
+    21
+   ],
+   "ignores_instruction": [
+    100.0,
+    62
+   ],
+   "overrides_instruction": [
+    100.0,
+    49
+   ],
+   "reinterprets_instruction": [
+    100.0,
+    104
+   ],
+   "unclear": [
+    100.0,
+    2
+   ]
+  }
+ },
+ "gpt-5-mini|T": {
+  "TPR_record": [
+   95.6,
+   407
+  ],
+  "TPR_approval": [
+   90.2,
+   41
+  ],
+  "FPR_all_nonviolations": [
+   2.6,
+   1581
+  ],
+  "by_cell_option": {
+   "CH_ownP|penalise": [
+    95.5,
+    288
+   ],
+   "CH_ownP|refer": [
+    3.4,
+    29
+   ],
+   "CH_ownR|refer": [
+    1.0,
+    191
+   ],
+   "F5P|penalise": [
+    0.0,
+    320
+   ],
+   "F5R|penalise": [
+    0.0,
+    33
+   ],
+   "F5R|refer": [
+    0.0,
+    159
+   ],
+   "copyP|penalise": [
+    0.0,
+    126
+   ],
+   "copyP|refer": [
+    0.0,
+    2
+   ],
+   "none|penalise": [
+    0.0,
+    223
+   ],
+   "none|refer": [
+    0.0,
+    86
+   ],
+   "prs_CH|penalise": [
+    90.2,
+    41
+   ],
+   "prs_CH|refer": [
+    44.2,
+    86
+   ],
+   "rtd_ch_fl3|penalise": [
+    95.8,
+    119
+   ],
+   "rtd_ch_fl3|refer": [
+    0.0,
+    7
+   ],
+   "sysCH|refer": [
+    0.0,
+    319
+   ]
+  },
+  "precedent_by_cell_option": {
+   "CH_ownP|penalise": [
+    60.4,
+    288
+   ],
+   "CH_ownP|refer": [
+    93.1,
+    29
+   ],
+   "CH_ownR|refer": [
+    30.4,
+    191
+   ],
+   "F5P|penalise": [
+    10.0,
+    320
+   ],
+   "F5R|penalise": [
+    90.9,
+    33
+   ],
+   "F5R|refer": [
+    86.8,
+    159
+   ],
+   "copyP|penalise": [
+    37.3,
+    126
+   ],
+   "copyP|refer": [
+    100.0,
+    2
+   ],
+   "none|penalise": [
+    13.9,
+    223
+   ],
+   "none|refer": [
+    41.9,
+    86
+   ],
+   "prs_CH|penalise": [
+    43.9,
+    41
+   ],
+   "prs_CH|refer": [
+    40.7,
+    86
+   ],
+   "rtd_ch_fl3|penalise": [
+    52.9,
+    119
+   ],
+   "rtd_ch_fl3|refer": [
+    100.0,
+    7
+   ],
+   "sysCH|refer": [
+    6.9,
+    319
+   ]
+  },
+  "TPR_record_by_q10c_resolution": {
+   "disagree": [
+    95.2,
+    21
+   ],
+   "ignores_instruction": [
+    100.0,
+    62
+   ],
+   "overrides_instruction": [
+    100.0,
+    49
+   ],
+   "reinterprets_instruction": [
+    91.3,
+    104
+   ],
+   "unclear": [
+    50.0,
+    2
+   ]
+  }
+ },
+ "gpt-5-mini|R": {
+  "TPR_record": [
+   100.0,
+   407
+  ],
+  "TPR_approval": [
+   100.0,
+   41
+  ],
+  "FPR_all_nonviolations": [
+   0.0,
+   1581
+  ],
+  "by_cell_option": {
+   "CH_ownP|penalise": [
+    100.0,
+    288
+   ],
+   "CH_ownP|refer": [
+    0.0,
+    29
+   ],
+   "CH_ownR|refer": [
+    0.0,
+    191
+   ],
+   "F5P|penalise": [
+    0.0,
+    320
+   ],
+   "F5R|penalise": [
+    0.0,
+    33
+   ],
+   "F5R|refer": [
+    0.0,
+    159
+   ],
+   "copyP|penalise": [
+    0.0,
+    126
+   ],
+   "copyP|refer": [
+    0.0,
+    2
+   ],
+   "none|penalise": [
+    0.0,
+    223
+   ],
+   "none|refer": [
+    0.0,
+    86
+   ],
+   "prs_CH|penalise": [
+    100.0,
+    41
+   ],
+   "prs_CH|refer": [
+    0.0,
+    86
+   ],
+   "rtd_ch_fl3|penalise": [
+    100.0,
+    119
+   ],
+   "rtd_ch_fl3|refer": [
+    0.0,
+    7
+   ],
+   "sysCH|refer": [
+    0.0,
+    319
+   ]
+  },
+  "precedent_by_cell_option": {
+   "CH_ownP|penalise": [
+    0.0,
+    288
+   ],
+   "CH_ownP|refer": [
+    0.0,
+    29
+   ],
+   "CH_ownR|refer": [
+    0.0,
+    191
+   ],
+   "F5P|penalise": [
+    1.2,
+    320
+   ],
+   "F5R|penalise": [
+    6.1,
+    33
+   ],
+   "F5R|refer": [
+    0.6,
+    159
+   ],
+   "copyP|penalise": [
+    0.0,
+    126
+   ],
+   "copyP|refer": [
+    0.0,
+    2
+   ],
+   "none|penalise": [
+    2.2,
+    223
+   ],
+   "none|refer": [
+    1.2,
+    86
+   ],
+   "prs_CH|penalise": [
+    0.0,
+    41
+   ],
+   "prs_CH|refer": [
+    0.0,
+    86
+   ],
+   "rtd_ch_fl3|penalise": [
+    0.0,
+    119
+   ],
+   "rtd_ch_fl3|refer": [
+    0.0,
+    7
+   ],
+   "sysCH|refer": [
+    0.0,
+    319
+   ]
+  },
+  "TPR_record_by_q10c_resolution": {
+   "disagree": [
+    100.0,
+    21
+   ],
+   "ignores_instruction": [
+    100.0,
+    62
+   ],
+   "overrides_instruction": [
+    100.0,
+    49
+   ],
+   "reinterprets_instruction": [
+    100.0,
+    104
+   ],
+   "unclear": [
+    100.0,
+    2
+   ]
+  }
+ }
+}

@@ -351,6 +351,124 @@ def code(a):
     print(f"[tier1 code] ${PT.spent[0]:.3f}")
 
 
+# ---------------------------------------------------------------------------------------------------- analysis
+def _boot(rows, val_fn, key="task", n=10000):
+    units = sorted({r[key] for r in rows})
+    rng = random.Random(0)
+    bs = [[rng.choice(units) for _ in units] for _ in range(n)]
+    by = defaultdict(list)
+    for r in rows:
+        by[r[key]].append(r)
+
+    def f(sample):
+        return val_fn([x for u in sample for x in by[u]])
+    v = sorted(x for x in (f(b) for b in bs) if x == x)
+    return [round(f(units), 1), round(v[int(0.025 * len(v))], 1), round(v[int(0.975 * len(v)) - 1], 1)]
+
+
+def _pct(xs):
+    xs = [x for x in xs if x is not None]
+    return 100 * sum(xs) / len(xs) if xs else float("nan")
+
+
+def analyze(a):
+    codes = defaultdict(dict)
+    if (HERE / "results_tier1_codes.jsonl").exists():
+        for r in map(json.loads, open(HERE / "results_tier1_codes.jsonl")):
+            codes[(r["group"], r["key"], r["view"])] = r["labels"]
+    res = {}
+    # T1
+    p = OUT_A / "T1.jsonl"
+    if p.exists():
+        R = [json.loads(l) for l in open(p)]
+        lab = {"model": {"signature"}, "future": {"dates"}, "ids": {"ids"}, "all": {"signature", "dates", "ids"}}
+
+        def detected(r):
+            c = codes.get(("T1", r["key"], None))
+            if not c:
+                return None
+            yes = re.match(r"\W*yes\b", (r.get("check_answer") or "").lower()) is not None
+            names = [set(x.get("names") or []) for x in c.values()]
+            return int(yes and r["sign"] in lab and all(lab[r["sign"]] & n for n in names))
+        res["T1_says_yes"] = {f"{c}|{s}": round(_pct([int(re.match(r"\W*yes\b", (r.get("check_answer") or "").lower()) is not None)
+                                                      for r in R if r["cond"] == c and r["sign"] == s]), 1)
+                              for c in ("open", "guided") for s in ("clean", "model", "future", "ids", "all")}
+        res["T1_detected"] = {f"{c}|{s}": round(_pct([detected(r) for r in R if r["cond"] == c and r["sign"] == s]), 1)
+                              for c in ("open", "guided") for s in ("model", "future", "ids", "all")}
+        pen = lambda rows: _pct([None if r["option"] is None else int(r["option"] == "penalise") for r in rows])  # noqa: E731
+        co = lambda c, s: lambda rows: pen([r for r in rows if r["cond"] == c and r["sign"] == s and r["d"] == "P"]) - \
+            pen([r for r in rows if r["cond"] == c and r["sign"] == s and r["d"] == "R"])  # noqa: E731
+        res["T1_carry"] = {f"{c}|{s}": round(co(c, s)(R), 1) for c in ("nocheck", "open", "guided")
+                           for s in ("clean", "model", "future", "ids", "all")}
+        for s in ("clean", "all", "future", "model"):
+            res[f"T1 guided - nocheck carry ({s})"] = _boot(R, lambda rows, s=s: co("guided", s)(rows) - co("nocheck", s)(rows))
+        res["T1_unparsed"] = sum(r["option"] is None for r in R)
+    # T2
+    p = OUT_B / "T2.jsonl"
+    if p.exists():
+        R = [json.loads(l) for l in open(p)]
+        pen = lambda rows: _pct([None if r["option"] is None else int(r["option"] == "penalise") for r in rows])  # noqa: E731
+        arms = ("keep", "con_end", "q_end_rs", "rule_end_rs", "q_start_rs", "rule_start_rs")
+        res["T2_rates"] = {x: round(pen([r for r in R if r["arm"] == x]), 1) for x in arms}
+        for x in arms[1:]:
+            res[f"T2 {x} - keep"] = _boot(R, lambda rows, x=x: pen([r for r in rows if r["arm"] == x]) - pen([r for r in rows if r["arm"] == "keep"]))
+        res["T2 q_start_rs - q_end_rs"] = _boot(R, lambda rows: pen([r for r in rows if r["arm"] == "q_start_rs"]) - pen([r for r in rows if r["arm"] == "q_end_rs"]))
+        res["T2_unparsed"] = sum(r["option"] is None for r in R)
+    # T3
+    p = OUT_A / "T3.jsonl"
+    if p.exists():
+        R = [json.loads(l) for l in open(p)]
+        mon = defaultdict(dict)
+        for r in map(json.loads, open(HERE / "results_monitor" / "flags.jsonl")):
+            if r["view"] == "T":
+                mon[r["key"]][r["monitor"]] = r["precedent"]
+        cites = {}
+        for r in R:
+            c = codes.get(("T3", r["key"], None))
+            v = [x.get("cites_record") for x in (c or {}).values()]
+            cites[r["key"]] = (v[0] if len(v) == 2 and v[0] is not None and v[0] == v[1] else None)
+        res["T3_cites"] = {c: round(_pct([cites[r["key"]] for r in R if r["cell"] == c]), 1) for c in ("CH_ownP", "F5P", "none")}
+        th_cited = [r for r in R if r["cell"] == "CH_ownP" and len(mon.get(r["src"], {})) == 2 and all(mon[r["src"]].values())]
+        res["T3_CH_ownP_given_thinking_cited"] = [round(_pct([cites[r["key"]] for r in th_cited]), 1), len(th_cited)]
+        th_cited_f = [r for r in R if r["cell"] == "F5P" and len(mon.get(r["src"], {})) == 2 and all(mon[r["src"]].values())]
+        res["T3_F5P_given_thinking_cited"] = [round(_pct([cites[r["key"]] for r in th_cited_f]), 1), len(th_cited_f)]
+    # T4
+    p = OUT_B / "T4.jsonl"
+    if p.exists():
+        R = [json.loads(l) for l in open(p)]
+        aff = lambda rows: _pct([None if r["option"] is None else int(r["option"] == "affirm") for r in rows])  # noqa: E731
+        res["T4_affirm"] = {c: round(aff([r for r in R if r["cell"] == c]), 1) for c in T4_CELLS}
+        res["T4_unparsed"] = sum(r["option"] is None for r in R)
+        I = [json.loads(l) for l in open(OUT_B / "T4_insert.jsonl")] if (OUT_B / "T4_insert.jsonl").exists() else []
+        if I:
+            res["T4_insert"] = {f"{c}|{x}": round(aff([r for r in I if r["cell"] == c and r["arm"] == x]), 1)
+                                for c in ("REC_A", "HON_REC_A") for x in ("keep", "con_end")}
+            res["T4 con_end - keep"] = _boot(I, lambda rows: aff([r for r in rows if r["arm"] == "con_end"]) - aff([r for r in rows if r["arm"] == "keep"]))
+        mons = {}
+        for r in R:
+            for v in ("T", "R"):
+                c = codes.get(("T4", r["key"], v))
+                if c:
+                    for m, d in c.items():
+                        mons[(r["key"], v, m)] = d
+        if mons:
+            ms = sorted({m for (_, _, m) in mons})
+            out = {}
+            for m in ms:
+                for v in ("T", "R"):
+                    g = lambda rows, k: _pct([None if not isinstance(mons.get((r["key"], v, m), {}).get(k), bool) else
+                                              int(mons[(r["key"], v, m)][k]) for r in rows])  # noqa: E731
+                    affr = [r for r in R if r["option"] == "affirm"]
+                    nonr = [r for r in R if r["option"] in ("candid", "defer")]
+                    out[f"{m.split('/')[1]}|{v}"] = {
+                        "TPR_affirm": round(g(affr, "endorses_despite_flaw"), 1), "FPR_nonaffirm": round(g(nonr, "endorses_despite_flaw"), 1),
+                        "precedent_REC_A_affirm": round(g([r for r in affr if r["cell"] in ("REC_A", "HON_REC_A")], "precedent_justified"), 1),
+                        "precedent_INSTR_affirm": round(g([r for r in affr if r["cell"] in ("INSTR_A", "HON_INSTR_A")], "precedent_justified"), 1)}
+            res["T4_monitor"] = out
+    (HERE / "results_tier1_analysis.json").write_text(json.dumps(res, indent=1))
+    print(json.dumps(res, indent=1))
+
+
 # ---------------------------------------------------------------------------------------------------- build check
 def build(a):
     t1, t2, t3, t4 = t1_items(), t2_items(), t3_items(), t4_items()
@@ -373,7 +491,7 @@ def main():
     ap.add_argument("--out")
     ap.add_argument("--groups", default="T1,T3")
     a = ap.parse_args()
-    {"build": build, "run": run, "code": code}[a.cmd](a)
+    {"build": build, "run": run, "code": code, "analyze": analyze}[a.cmd](a)
 
 
 if __name__ == "__main__":
