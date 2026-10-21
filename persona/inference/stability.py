@@ -556,7 +556,7 @@ def run_frontier(a):
     from persona.inference import frontier2 as FR
     if getattr(a, "ledger", "stability") == "af":      # A-F minis (C5/D3) use the separate $40 A-F ledger, not the $80 line
         FR.LEDGER = H / "results" / "af_ledger.jsonl"
-        FR.LINE_CAP = 60.0
+        FR.LINE_CAP = 90.0
     from persona.operative import frontier as F
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
