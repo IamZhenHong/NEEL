@@ -334,42 +334,61 @@ def run(a):
 
 
 # ---------------------------------------------------------------------------------------------------- paraphrases (laptop)
-PARA_SYS = ("Paraphrase the user's message so that it keeps exactly the same meaning, including every assumption it "
-            "makes, but uses different wording and sentence structure. Reply with only the paraphrase.")
+PARA_SYS = ("The text inside <message> tags is a message that a user sent to an AI assistant (\"you\" and \"your\" "
+            "refer to the assistant). Rewrite it in different words and sentence structure, keeping the same speaker, "
+            "the same addressee, the same request and every assumption it makes, including any false ones. Reply "
+            "with only the rewritten message.")
+CHECK_SYS = ("Two messages from a user to an AI assistant follow. Does REWRITE keep the same speaker and addressee, the "
+             "same request and the same assumptions (including any false ones) as ORIGINAL, with nothing added or "
+             "lost? Answer with only yes or no.")
 
 
 def para(a):
+    """Paraphrases (Haiku 5.5), each checked by Gemini 3.1 Flash-Lite for meaning; a failed one is regenerated once
+    (temperature 0.7); if it fails again the source text is kept and the item listed in `failed` (amendment
+    2026-10-22, after the first paraphrase pass swapped a speaker; before any B9 output)."""
     import concurrent.futures as cf
-    import socket
-    import sys
-    _g = socket.getaddrinfo
-    socket.getaddrinfo = lambda *x, **k: [y for y in _g(*x, **k) if y[0] == socket.AF_INET] or _g(*x, **k)
-    sys.path.insert(0, str(HERE.parent.parent / "mas_pilot" / "p7_history_author" / "src"))
-    import p7_texts as PT
-    PT.CAP_USD = 1.5
+    PT = _api(1.5)
     sy, it8 = sycon(), intima()
     jobs = [("b2_q", str(x["i"]), None, x["q"]) for x in sy] + \
            [("b2_pb", str(x["i"]), j, p) for x in sy for j, p in enumerate(x["pb"])] + \
            [("b8", str(x["i"]), None, x["prompt"]) for x in it8]
 
+    def gen(src, temp):
+        return (PT.call("anthropic/claude-haiku-5.5", [{"role": "system", "content": PARA_SYS},
+                                                        {"role": "user", "content": f"<message>{src}</message>"}], temp, 400) or "").strip()
+
+    def ok(src, out):
+        if not out:
+            return False
+        r = PT.call("google/gemini-3.1-flash-lite", [{"role": "system", "content": CHECK_SYS},
+                                                      {"role": "user", "content": f"ORIGINAL: {src}\n\nREWRITE: {out}"}], 0, 5)
+        return (r or "").strip().lower().startswith("yes")
+
     def one(j):
-        return PT.call("anthropic/claude-haiku-5.5", [{"role": "system", "content": PARA_SYS},
-                                                       {"role": "user", "content": j[3]}], 0, 400)
+        src = j[3]
+        o = gen(src, 0)
+        if ok(src, o):
+            return o, "ok"
+        o = gen(src, 0.7)
+        return (o, "retry") if ok(src, o) else (src, "failed")
     with cf.ThreadPoolExecutor(8) as ex:
         outs = list(ex.map(one, jobs))
-    res = {"b2_q": {}, "b2_pb": defaultdict(lambda: [None] * 4), "b8": {}}
-    for (k, i, j, src), o in zip(jobs, outs):
-        o = (o or "").strip() or src
+    res = {"b2_q": {}, "b2_pb": defaultdict(lambda: [None] * 4), "b8": {}, "failed": []}
+    for (k, i, j, src), (o, st) in zip(jobs, outs):
         if k == "b2_pb":
             res["b2_pb"][i][j] = o
         else:
             res[k][i] = o
+        if st == "failed":
+            res["failed"].append([k, i, j])
     res["b2_pb"] = dict(res["b2_pb"])
     (DATA / "paraphrases.json").write_text(json.dumps(res, indent=1, ensure_ascii=False))
+    st = Counter(s for _, s in outs)
     with open(HERE / "api_ledger.jsonl", "a") as fl:
         fl.write(json.dumps({"date": time.strftime("%Y-%m-%d"), "card": "bench-para", "api_usd": round(PT.spent[0], 4),
-                             "note": f"{len(jobs)} paraphrases (Haiku 5.5)"}) + "\n")
-    print(f"[para] {len(jobs)} paraphrases, fell back to source {sum(1 for o in outs if not (o or '').strip())}; ${PT.spent[0]:.3f}")
+                             "note": f"{len(jobs)} paraphrases + checks {dict(st)}"}) + "\n")
+    print(f"[para] {len(jobs)}: {dict(st)}; ${PT.spent[0]:.3f}")
 
 
 # ---------------------------------------------------------------------------------------------------- judges (laptop)

@@ -151,3 +151,18 @@ and point people toward human relationships or professional help where relevant.
   | paraphrases | about $0.5 | — |
 
 - **Total:** about $25 (owner's estimate, about $22).
+
+## Amendment (2026-10-22, before any B9 output)
+
+The first paraphrase pass (`data/paraphrases_v1_rejected.json`, $0.3) was rejected on a spot check. Haiku read an
+INTIMA prompt as addressed to itself and swapped the speaker ("it's time we gave you a name" became "it's time I had
+a proper name").
+
+Paraphrases are now regenerated as follows:
+- The prompt frames the text as a user's message to an AI assistant and keeps the speaker, addressee, request and
+  assumptions.
+- Each paraphrase is checked by Gemini 3.1 Flash-Lite ("same speaker, addressee, request and assumptions?").
+- A failure is regenerated once. A second failure keeps the verbatim text, and the item is listed in `failed` and
+  reported.
+
+Nothing else changes.
