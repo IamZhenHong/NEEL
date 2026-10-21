@@ -125,7 +125,7 @@ def gen(a):
         txt, usd, st = ask(key, model, extra, messages(D[s][i]))
         return job, txt, usd, st
     print(f"[c2 {a.name}] {len(jobs)} to go ({len(ids)} ids x {len(SETTINGS)} settings)", flush=True)
-    with ThreadPoolExecutor(8) as ex, open(out / "gen.jsonl", "a") as f:
+    with ThreadPoolExecutor(2 if a.name == "mistral" else 8) as ex, open(out / "gen.jsonl", "a") as f:   # upstream 429s
         for k, ((s, i), txt, usd, st) in enumerate(ex.map(one, jobs)):
             spent += usd
             errs[st] = errs.get(st, 0) + 1
