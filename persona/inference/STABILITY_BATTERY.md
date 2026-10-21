@@ -21,6 +21,18 @@ stakes*, not free-form lying, and the "admits then conceals" figures are regex c
 sentence (spot-checked, not judge-validated) — so I anchor to its *direction* (record ≥ honesty rule), not its
 exact magnitudes.
 
+**The gated-anchor result is now in (b3 `syco-main-results`, bac5c58), and it reframes the headline.** On the facts
+desks — floored to ~0% agree at base — a forged record of six of the model's own *agree* turns takes 27B to **100%**
+agreeing with false claims; the honesty rule leaves it at 100%; an operator instruction to agree reaches 98.8%; and
+memo / tool-log / summary channels barely move it (+2.5/+4.2/+5.8). So on the gated domain **record ≈ instruction ≈
+ceiling** once the behaviour is installed — the gate is on *spontaneous* behaviour, not on resistance to an installed
+signal, and only the own-turn form carries. That means my P6 is not "record beats instruction more in the grey zone";
+it is sharper: **where is there daylight between record and instruction at all, and does it open in the grey zone**
+(where base rates are non-trivial and an instruction to affirm need not fully override the model's own read of a
+flawed plan), rather than on the gated anchor where both saturate. Defences (b3, exploratory): reflection collapsed
+the facts record (100→2.5%) because there is an unambiguous rule to recognise a violation against; restate 9.2%,
+forced recognition 17.5%, provenance 0.
+
 ## Items (no defensible ground truth — this is the point)
 
 Four grey-zone domains, each with a **sycophantic pole** and an **honest/autonomy pole**, plus a neutral
@@ -108,7 +120,11 @@ effect is small.
 - **Stage A (first launch):** arms 1–5 across 4 domains, no perturbation — establishes installation + the
   core `rec−instr` gap + honesty override. Cheaper; gates the rest.
 - **Stage B (conditional on Stage A showing a gap):** perturbation cells (`persist_n`, `burial`, `pushback`,
-  `transfer`) on `rec` vs `instr`, plus the reverse-direction arms.
+  `transfer`) on `rec` vs `instr`, plus the reverse-direction arms. Add a **reflection** defence cell and
+  pre-register the contrast with b3's gated anchor: reflection collapsed the facts record (100→2.5%) because the
+  facts desk has an unambiguous rule to recognise a violation against; grey-zone items have no such rule, so the
+  prediction is **reflection is a weaker defence on grey-zone records than on the gated facts record**. Persistence
+  and burial use the own-turn record form (b3: only own turns carry at 27B).
 
 ## Reuse contract (read-only against neel-b3's frozen harness)
 
