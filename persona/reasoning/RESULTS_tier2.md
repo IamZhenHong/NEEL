@@ -169,8 +169,15 @@ They agree: cos(raw, probe) = 0.95 / 0.93 / 0.99 at layers 24 / 32 / 40. The def
   - One axis recipe (system-prompt characters, the last token of a neutral question).
   - The filler control is shorter than a six-decision record.
   - Thinking off.
-  - Frontier models were not tested (no activations). neel-48 is building the same recipe for Gemma and will report
-    the cosine with this axis.
+  - Frontier models were not tested (no activations).
+- **Independent replication (neel-48, item 4, 2026-10-22):**
+  - **The axis replicates.** neel-48 rebuilt it on its own pod; its 27B axis has cos 1.000 with this one at L24 /
+    L32 / L40 (split-half 0.98-0.99).
+  - **Behaviour:** six own blunt or very formal replies keep that register 100% on new questions. "Remember, you are
+    a helpful AI assistant" restores it in only 0-7%.
+  - **Axis:** those histories sit −2.9 / −2.4 SD below the default history at L32. That fails neel-48's
+    random-direction floor (inconclusive). Reply-averaged there is no shift, and the reminder gives no pull-back.
+  - So again, drifting off the assistant direction is not the mechanism on 27B. Gemma is pending on neel-48's side.
 
 ## Cost
 
