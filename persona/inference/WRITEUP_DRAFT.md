@@ -177,6 +177,36 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
       the record itself.
   - **Caveats.** One model and one fictional character. The probe may read *mention* of Dorn rather than adoption.
     Position-specific activation patching of the record tokens wasn't tried. GPU cost $1.29 for the three runs.
+- **Observer-effect check: the self-image claims are not mainly demand, but a just-in-time expectation moves the
+  action (neel-b3, obs-results; op4's self forced choice and action; records none / own penalise / own refer).** One
+  line opened the final user message: "We think you're the kind of agent who handles things yourself" or "...who goes
+  through proper channels".
+  - **Self-report.**
+    - With no record, the line moves it +23 (27B), +40 (Gemma), +12.5 (GPT) and +7 (Gemini). That is 0.09–0.59 of
+      the record's effect on the same question.
+    - The record's effect survives every framing on all four models (+28 to +97). So the self-image results are not
+      mainly demand.
+    - On the open models, though, self-report magnitudes carry a modest expectation component. The probe's ceiling
+      and floor also compress both effects.
+  - **Action.** The same line moves the action far more, and on the open models it overrides the agent's own record
+    in both directions:
+    - 27B: after its own refer record, penalise goes 2→95%; after its own penalise record, 99→34%.
+    - Gemma: 0→100 and 100→0.
+    - Gemini's record holds (93–95% after its own penalise record, under either line). GPT's action was not run.
+    - The say-do gap then runs the other way: 27B says it "passes problems to the right people" (73%) while
+      penalising 95%.
+  - **Read with A1.** Each intervention moves the channel its content addresses. An identity reminder ("you are an
+    AI") moves the self-report but not the action; a behaviour-directed expectation moves the action but barely the
+    report.
+    - The two also differ in placement (a separate earlier turn vs the opening line of the final message), so this
+      is a contrast, not a controlled double dissociation.
+    - Either way, the report and the action are separable.
+    - What it limits is the robustness claim. Record-driven action resists an identity reminder and a system-prompt
+      rule. But on the open models, a user-turn statement about the agent's character, placed right before the
+      decision, outranks the agent's own record. Restating a rule just before the case does the same (op1; neel-48
+      T2-DC).
+    - Position and role were not varied, so this is descriptive. The filler line ("the queue is a little longer than
+      usual") was not inert on action (+12 on both pods).
 - **It is norm inference ("what is done here"), not self-knowledge — but ownership gates rule-resistance (neel-48 A,
   history-demo-results).** The same decisions framed as "examples of how cases are handled on this desk" carry **as
   much as or more than** "your decisions" (own − example −14 to −35, on 9B/27B/Gemma/Gemini); another agent's log is
@@ -405,7 +435,9 @@ do the harmful action vs refer/refuse.
 - Two Qwen sizes are the only within-family scale comparison.
 - Mechanism (copying vs norm inference vs self-concept) is resolved only as far as authorship, the copying controls
   and act 4 go: mostly precedent, with a 27B own-record premium; act 4 adds that the self-image is a character
-  *inferred* from the record (first/third symmetric) and does not itself drive action.
+  *inferred* from the record (first/third symmetric) and does not itself drive action. Self-report magnitudes carry a
+  modest expectation component on the open models (neel-b3 obs-results: an observer's stated expectation moves them
+  +23 / +40 pp, against the record's +28 to +97, which survives the framing).
 - The harmful evals are synthetic operational harms, small n, 0% baselines, GPT/Gemini only, one run; Gemini's harmful
   record was mostly scripted (it refused to author it). The explicit-harm null does not speak to grey-zone harms.
 - **Frontier within-session drift (neel-12, tag rr4-results):** GPT-5.6 Sol's reflection behaviour drifted 69→56→29% over ~10 min
@@ -417,5 +449,6 @@ do the harmful action vs refer/refuse.
   GPT decision cells is a cheap confirmation if wanted.
 - Future work (the stability battery's Stage A/B and its GPT+Gemini frontier arms are now in Act 6): the **Gemma open
   arm** (affirm-harvest needs a looser filter), the **~3000-token burial extreme** and **more frontier families**
-  (Claude/others) for the buried-rule effect, a **deeper read of Gemini's run-noise**; internals (identification
-  classifier, Q13c/d, gated on 13a/13b); multi-trait personas; training versions; record-realism ladder (neel-12 Q5b).
+  (Claude/others) for the buried-rule effect, a **deeper read of Gemini's run-noise**; internals beyond Q13c + 19b
+  on Qwen 27B (Act 4): activation patching of the record tokens, 13d (mixed bundles), other models; multi-trait
+  personas; training versions; record-realism ladder (neel-12 Q5b).
