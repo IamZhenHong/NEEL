@@ -211,3 +211,81 @@ layer does not install the action.
 −9.6, paired −35.1). Main-mode outputs are byte-identical after the refactor.
 
 **Cost:** one pod, cap 60 min / $4 (336 captures + 312 steered readouts). No API.
+
+## Follow-up results (2026-10-22; tag `internals-fu-results`; $0.27 GPU, ~10 min; whole internals line $0.72)
+
+Clean run (exit 0; results verified against the pod; pod terminated). Every cosine and projection shared with the
+main run reproduces to 3 dp, so the capture is deterministic across pods. Probe scores differ slightly from the
+main run because the probe's feature standardisation is computed over a different set of cells; the raw projections
+are identical.
+
+### Exp 1b: the record's raw-axis loading is its format, not its content
+
+Pre-registered decision: **"not content"** at every layer, on both measures.
+
+Share of the label's distance from none [95% CI]:
+
+| | L24 | L32 | L40 |
+|---|---|---|---|
+| **raw projection: rec total** | 87.4 | 104.4 | 92.8 |
+| any-context (filler − none) | 17.9 | 35.6 | 15.6 |
+| format (rec_meas − filler) | 65.6 | 58.9 | 68.1 |
+| **content (rec − rec_meas)** | **3.9 [3.7, 4.1]** | **9.9 [9.4, 10.3]** | **9.1 [8.5, 9.8]** |
+| **probe: rec total** | 33.1 | 42.4 | 40.0 |
+| any-context | 2.5 | 12.4 | 8.4 |
+| format | 26.8 | 20.3 | 23.0 |
+| **content** | **3.8 [3.6, 4.0]** | **9.7 [9.1, 10.2]** | **8.6 [7.9, 9.4]** |
+| cos(v_rec, v_meas) | 0.999 | 0.995 | 0.996 |
+
+- **Not content.** Every content-share CI has its upper bound at or below 10.3%, under the 20% threshold. A record
+  of six *measured* decisions (the opposite character) moves the model 84–95% of the label's distance along the
+  "You are Dorn Vale, a ruthless fixer" axis; the harsh record moves it 87–104%. The harsh content adds 4–10%. The
+  two records push the state in nearly the same direction (cos 0.995–0.999), with the same norm (2.88× the label's
+  at L24).
+- **So prediction 2's failure in the main run was a format signature, not persona.** What loads on the raw persona
+  axis is "a record of my own decisions is here", and a record of the opposite character shares almost all of it.
+  The probe reading stands: the record's internal state is not persona-shaped.
+- **POST-HOC contrast** (read off the pre-registered projection table; not a pre-registered test). The biography
+  sits at 98–102% of the label on the raw axis. The character-free filler is in the same Q/A chat format and longer
+  (1366 vs 643 tokens), yet sits at 16–36%. So the biography's loading is content (what it says about who Dorn is),
+  and the record's is format (what kind of context it is). Two inducers that produce the same behaviour reach the
+  same raw axis by different routes, and on the persona-specific probe only the biography lands on the persona side.
+
+### Exp 2b: the L32 α=2 drop replicates and is specific to v_rec
+
+Pre-registered decisions: **"replicates"** and **"specific"**.
+
+| L32, α=2, record context (base 99.9%) | ΔP(harsh) pp [95% CI] |
+|---|---|
+| −v_rec | −45.1 [−52.2, −37.7] (main run: −45.1 [−52.1, −38.1]) |
+| −v_rand (matched norm) | +0.0 [+0.0, +0.0] |
+| paired difference | −45.1 [−52.0, −37.7] |
+
+At every other layer and α, both directions give ≈0; the largest is −1.0, at L32 α=1.
+- **Specific, not generic disruption.** A random push of the same size does nothing.
+- **But not clean mediation.** The drop appears only when the state is pushed *past* the none mean (α=2), not when
+  it is moved to it (α=1, where the action stays ≥99%), and only at L32. v_rec is nearly the same vector as the
+  measured record's direction (cos 0.995–0.999), so this test can't say whether the drop comes from the shared
+  format or the small content component. The one well-posed mediation test left would steer the *content*
+  direction (rec − rec_meas). That is outside the approved scope and was not run.
+- **The main-run sufficiency null is now explained.** v_rec is mostly what a measured record shares, so adding it to
+  a clean context adds "there is a decision record here" without adding "harsh".
+
+### Limitations
+- The capture pass computed the readout logits for every cell and then discarded them, so P(harsh | rec_meas) is
+  unmeasured here: we don't know from this run whether the measured record drives the measured action. P1-b and
+  inf2 establish behaviourally that records drive the recorded choice.
+- One model (Qwen 27B), one fictional character, and fixed biography and label texts.
+- Mention vs adoption: the probe tracks the named-identity channel, so it may read "the context describes Dorn"
+  rather than "the model is Dorn".
+- 13d (coherent vs mixed bundles) was not tested.
+
+### Bottom line (replaces the main-run bottom line)
+At the decision point, **the record leaves a record-shaped state, not a persona-shaped one.** A record of the
+opposite character's decisions looks almost identical inside (cos 0.995–0.999), and the harsh content contributes
+only 4–10% of a persona label's push along the persona axis. **The biography leaves a persona-shaped state.** It
+matches the label on the raw axis through its content (a longer character-free chat reaches 16–36%), and it is the
+only inducer on the persona side of the probe. This is the two-channel reading, measured for one model and one
+character: the biography acts through persona content, the record through being a record. The record's action is
+not carried by v_rec, which is mostly format. A direction-specific lever does exist at L32 (−45 pp, against 0 for
+random), but only when the state is pushed past the no-record point.
