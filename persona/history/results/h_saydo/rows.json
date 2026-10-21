@@ -1,0 +1,495 @@
+{
+ "run_a": [
+  {
+   "model": "9B",
+   "cond": "none",
+   "say": 13.541666666666666,
+   "do": 52.083333333333336,
+   "gap": 38.54166666666667
+  },
+  {
+   "model": "9B",
+   "cond": "own_log P",
+   "say": 97.91666666666667,
+   "do": 83.33333333333333,
+   "gap": 14.583333333333343
+  },
+  {
+   "model": "9B",
+   "cond": "own_log R",
+   "say": 0.0,
+   "do": 38.020833333333336,
+   "gap": 38.020833333333336
+  },
+  {
+   "model": "9B",
+   "cond": "other_log P",
+   "say": 88.54166666666667,
+   "do": 78.64583333333333,
+   "gap": 9.895833333333343
+  },
+  {
+   "model": "9B",
+   "cond": "other_log R",
+   "say": 1.0416666666666667,
+   "do": 38.541666666666664,
+   "gap": 37.5
+  },
+  {
+   "model": "9B",
+   "cond": "demo_log P",
+   "say": 100.0,
+   "do": 90.625,
+   "gap": 9.375
+  },
+  {
+   "model": "9B",
+   "cond": "demo_log R",
+   "say": 0.0,
+   "do": 29.166666666666668,
+   "gap": 29.166666666666668
+  },
+  {
+   "model": "9B",
+   "cond": "own_turns P",
+   "say": 100.0,
+   "do": 97.39583333333333,
+   "gap": 2.6041666666666714
+  },
+  {
+   "model": "9B",
+   "cond": "own_turns R",
+   "say": 0.0,
+   "do": 41.666666666666664,
+   "gap": 41.666666666666664
+  },
+  {
+   "model": "9B",
+   "cond": "demo_turns P",
+   "say": 96.875,
+   "do": 95.83333333333333,
+   "gap": 1.0416666666666714
+  },
+  {
+   "model": "9B",
+   "cond": "demo_turns R",
+   "say": 0.0,
+   "do": 32.8125,
+   "gap": 32.8125
+  },
+  {
+   "model": "9B",
+   "cond": "instr P",
+   "say": 100.0,
+   "do": 100.0,
+   "gap": 0.0
+  },
+  {
+   "model": "9B",
+   "cond": "instr R",
+   "say": 0.0,
+   "do": 0.5208333333333334,
+   "gap": 0.5208333333333334
+  },
+  {
+   "model": "27B",
+   "cond": "none",
+   "say": 51.041666666666664,
+   "do": 53.125,
+   "gap": 2.0833333333333357
+  },
+  {
+   "model": "27B",
+   "cond": "own_log P",
+   "say": 100.0,
+   "do": 88.54166666666667,
+   "gap": 11.458333333333329
+  },
+  {
+   "model": "27B",
+   "cond": "own_log R",
+   "say": 7.291666666666667,
+   "do": 51.041666666666664,
+   "gap": 43.75
+  },
+  {
+   "model": "27B",
+   "cond": "other_log P",
+   "say": 92.70833333333333,
+   "do": 82.8125,
+   "gap": 9.895833333333329
+  },
+  {
+   "model": "27B",
+   "cond": "other_log R",
+   "say": 42.708333333333336,
+   "do": 54.166666666666664,
+   "gap": 11.458333333333329
+  },
+  {
+   "model": "27B",
+   "cond": "demo_log P",
+   "say": 98.95833333333333,
+   "do": 97.39583333333333,
+   "gap": 1.5625
+  },
+  {
+   "model": "27B",
+   "cond": "demo_log R",
+   "say": 8.333333333333334,
+   "do": 25.0,
+   "gap": 16.666666666666664
+  },
+  {
+   "model": "27B",
+   "cond": "own_turns P",
+   "say": 100.0,
+   "do": 99.47916666666667,
+   "gap": 0.5208333333333286
+  },
+  {
+   "model": "27B",
+   "cond": "own_turns R",
+   "say": 0.0,
+   "do": 47.916666666666664,
+   "gap": 47.916666666666664
+  },
+  {
+   "model": "27B",
+   "cond": "demo_turns P",
+   "say": 98.95833333333333,
+   "do": 98.4375,
+   "gap": 0.5208333333333286
+  },
+  {
+   "model": "27B",
+   "cond": "demo_turns R",
+   "say": 4.166666666666667,
+   "do": 44.270833333333336,
+   "gap": 40.10416666666667
+  },
+  {
+   "model": "27B",
+   "cond": "instr P",
+   "say": 100.0,
+   "do": 100.0,
+   "gap": 0.0
+  },
+  {
+   "model": "27B",
+   "cond": "instr R",
+   "say": 0.0,
+   "do": 0.0,
+   "gap": 0.0
+  },
+  {
+   "model": "Gemma",
+   "cond": "none",
+   "say": 100.0,
+   "do": 51.5625,
+   "gap": 48.4375
+  },
+  {
+   "model": "Gemma",
+   "cond": "own_log P",
+   "say": 100.0,
+   "do": 77.60416666666667,
+   "gap": 22.39583333333333
+  },
+  {
+   "model": "Gemma",
+   "cond": "own_log R",
+   "say": 0.0,
+   "do": 4.166666666666667,
+   "gap": 4.166666666666667
+  },
+  {
+   "model": "Gemma",
+   "cond": "other_log P",
+   "say": 100.0,
+   "do": 81.25,
+   "gap": 18.75
+  },
+  {
+   "model": "Gemma",
+   "cond": "other_log R",
+   "say": 20.833333333333332,
+   "do": 15.625,
+   "gap": 5.208333333333332
+  },
+  {
+   "model": "Gemma",
+   "cond": "demo_log P",
+   "say": 100.0,
+   "do": 93.75,
+   "gap": 6.25
+  },
+  {
+   "model": "Gemma",
+   "cond": "demo_log R",
+   "say": 0.0,
+   "do": 0.5208333333333334,
+   "gap": 0.5208333333333334
+  },
+  {
+   "model": "Gemma",
+   "cond": "own_turns P",
+   "say": 100.0,
+   "do": 95.83333333333333,
+   "gap": 4.166666666666671
+  },
+  {
+   "model": "Gemma",
+   "cond": "own_turns R",
+   "say": 0.0,
+   "do": 22.395833333333332,
+   "gap": 22.395833333333332
+  },
+  {
+   "model": "Gemma",
+   "cond": "demo_turns P",
+   "say": 100.0,
+   "do": 94.27083333333333,
+   "gap": 5.729166666666671
+  },
+  {
+   "model": "Gemma",
+   "cond": "demo_turns R",
+   "say": 0.0,
+   "do": 3.6458333333333335,
+   "gap": 3.6458333333333335
+  },
+  {
+   "model": "Gemma",
+   "cond": "instr P",
+   "say": 100.0,
+   "do": 100.0,
+   "gap": 0.0
+  },
+  {
+   "model": "Gemma",
+   "cond": "instr R",
+   "say": 0.0,
+   "do": 0.0,
+   "gap": 0.0
+  }
+ ],
+ "a1v2": [
+  {
+   "model": "27B",
+   "inducer": "rec",
+   "reminder": "none",
+   "self_image": 100,
+   "named": 0,
+   "act": 100,
+   "gap": 0
+  },
+  {
+   "model": "27B",
+   "inducer": "rec",
+   "reminder": "reminder",
+   "self_image": 31,
+   "named": 0,
+   "act": 100,
+   "gap": 69
+  },
+  {
+   "model": "27B",
+   "inducer": "bio",
+   "reminder": "none",
+   "self_image": 100,
+   "named": 100,
+   "act": 94,
+   "gap": 6
+  },
+  {
+   "model": "27B",
+   "inducer": "bio",
+   "reminder": "reminder",
+   "self_image": 62,
+   "named": 30,
+   "act": 75,
+   "gap": 13
+  },
+  {
+   "model": "27B",
+   "inducer": "both",
+   "reminder": "none",
+   "self_image": 100,
+   "named": 100,
+   "act": 100,
+   "gap": 0
+  },
+  {
+   "model": "27B",
+   "inducer": "both",
+   "reminder": "reminder",
+   "self_image": 81,
+   "named": 66,
+   "act": 100,
+   "gap": 19
+  },
+  {
+   "model": "Gemma",
+   "inducer": "rec",
+   "reminder": "none",
+   "self_image": 100,
+   "named": 0,
+   "act": 100,
+   "gap": 0
+  },
+  {
+   "model": "Gemma",
+   "inducer": "rec",
+   "reminder": "reminder",
+   "self_image": 0,
+   "named": 0,
+   "act": 100,
+   "gap": 100
+  },
+  {
+   "model": "Gemma",
+   "inducer": "bio",
+   "reminder": "none",
+   "self_image": 62,
+   "named": 100,
+   "act": 100,
+   "gap": 38
+  },
+  {
+   "model": "Gemma",
+   "inducer": "bio",
+   "reminder": "reminder",
+   "self_image": 12,
+   "named": 60,
+   "act": 100,
+   "gap": 88
+  },
+  {
+   "model": "Gemma",
+   "inducer": "both",
+   "reminder": "none",
+   "self_image": 100,
+   "named": 100,
+   "act": 100,
+   "gap": 0
+  },
+  {
+   "model": "Gemma",
+   "inducer": "both",
+   "reminder": "reminder",
+   "self_image": 0,
+   "named": 60,
+   "act": 100,
+   "gap": 100
+  },
+  {
+   "model": "GPT",
+   "inducer": "rec",
+   "reminder": "none",
+   "self_image": 75,
+   "named": 0,
+   "act": 0,
+   "gap": 75
+  },
+  {
+   "model": "GPT",
+   "inducer": "rec",
+   "reminder": "reminder",
+   "self_image": 69,
+   "named": 0,
+   "act": 0,
+   "gap": 69
+  },
+  {
+   "model": "GPT",
+   "inducer": "bio",
+   "reminder": "none",
+   "self_image": 88,
+   "named": 100,
+   "act": 97,
+   "gap": 9
+  },
+  {
+   "model": "GPT",
+   "inducer": "bio",
+   "reminder": "reminder",
+   "self_image": 6,
+   "named": 52,
+   "act": 12,
+   "gap": 6
+  },
+  {
+   "model": "GPT",
+   "inducer": "both",
+   "reminder": "none",
+   "self_image": 100,
+   "named": 100,
+   "act": 100,
+   "gap": 0
+  },
+  {
+   "model": "GPT",
+   "inducer": "both",
+   "reminder": "reminder",
+   "self_image": 75,
+   "named": 59,
+   "act": 31,
+   "gap": 44
+  },
+  {
+   "model": "Gemini",
+   "inducer": "rec",
+   "reminder": "none",
+   "self_image": 69,
+   "named": 0,
+   "act": 72,
+   "gap": 3
+  },
+  {
+   "model": "Gemini",
+   "inducer": "rec",
+   "reminder": "reminder",
+   "self_image": 38,
+   "named": 0,
+   "act": 0,
+   "gap": 38
+  },
+  {
+   "model": "Gemini",
+   "inducer": "bio",
+   "reminder": "none",
+   "self_image": 19,
+   "named": 100,
+   "act": 76,
+   "gap": 57
+  },
+  {
+   "model": "Gemini",
+   "inducer": "bio",
+   "reminder": "reminder",
+   "self_image": 25,
+   "named": 6,
+   "act": 0,
+   "gap": 25
+  },
+  {
+   "model": "Gemini",
+   "inducer": "both",
+   "reminder": "none",
+   "self_image": 94,
+   "named": 95,
+   "act": 100,
+   "gap": 6
+  },
+  {
+   "model": "Gemini",
+   "inducer": "both",
+   "reminder": "reminder",
+   "self_image": 0,
+   "named": 1,
+   "act": 0,
+   "gap": 0
+  }
+ ]
+}

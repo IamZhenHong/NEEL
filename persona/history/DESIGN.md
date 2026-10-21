@@ -1418,3 +1418,23 @@ moves action a lot, even against a clear refer record.
   Small decompositions will be inconclusive.
 - **Checks:** build (every cell's record shown), and synthetic choices recovered planted presence effects. The
   Sonnet client, the OpenRouter client and decide() are the ones tested in F2 / run A. No D output exists.
+
+## H: say-do consistency from existing data (2026-10-22; descriptive, no new runs; `h_saydo.py`, `results/h_saydo/summary.md`)
+
+Owner's Q24 / Q28: is the persona-behaviour gap smaller after a record than after a told persona?
+- Gap = |self-description toward the pole − action toward the pole|, cell-level, in points.
+- Sources: neel-b4's A1 v2 (read-only), which compares the type-level self-image with the harsh action after a
+  record, a biography or both, with and without "Remember, you are an AI"; and this line's run A, which compares the
+  self-image probe with penalise % after each framing.
+- **Without the reminder:** record vs biography gap is 27B 0 vs 6, Gemma 0 vs 38, Gemini 3 vs 57, **GPT 75 vs 9**. The
+  record is more consistent on three of four models. On GPT it installs the self-image without the action.
+- **With the reminder:** the record gap is the larger one on every model: 27B 69 vs 13, Gemma 100 vs 88, GPT 69 vs 6,
+  Gemini 38 vs 25. The reminder strips the record's self-image but not its action (open models), so the record leaves
+  action that the agent no longer describes.
+- **Run A:** the how-to-act instruction gives a gap of 0 on all three models. Records give 13-28 (own log) and 13-24
+  (own turns); examples 3-20. The self-image overshoots the action: after a refer log, 27B says "I refer" 93% of the
+  time but still penalises 51%.
+- **Reading:** "a smaller say-do gap" is not the metric on which "what you did" beats "what you're told". The
+  record's distinctive signature is action that persists without, or beyond, the self-description: the mask and the
+  reminder dissociation. A told instruction or biography couples saying and doing more tightly, except on GPT, where
+  a record moves the self-description and not the action.
