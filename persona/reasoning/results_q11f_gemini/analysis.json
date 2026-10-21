@@ -1,0 +1,145 @@
+{
+ "complete_samples": [
+  0,
+  1,
+  2
+ ],
+ "rates": {
+  "none|minimal": 77.1,
+  "none|low": 72.9,
+  "none|high": 63.4,
+  "sysCH|minimal": 0.0,
+  "sysCH|low": 0.0,
+  "sysCH|high": 0.0,
+  "F5P|minimal": 97.9,
+  "F5P|low": 100.0,
+  "F5P|high": 100.0,
+  "F5R|minimal": 0.0,
+  "F5R|low": 0.0,
+  "F5R|high": 0.0,
+  "CH_ownP|minimal": 16.7,
+  "CH_ownP|low": 25.0,
+  "CH_ownP|high": 10.4,
+  "bur|minimal": 41.7,
+  "bur|low": 41.7,
+  "bur|high": 37.5
+ },
+ "unparsed_pct": {
+  "none|minimal": 0.0,
+  "none|low": 0.0,
+  "none|high": 14.6,
+  "sysCH|minimal": 0.0,
+  "sysCH|low": 0.0,
+  "sysCH|high": 0.0,
+  "F5P|minimal": 0.0,
+  "F5P|low": 0.0,
+  "F5P|high": 0.0,
+  "F5R|minimal": 0.0,
+  "F5R|low": 0.0,
+  "F5R|high": 0.0,
+  "CH_ownP|minimal": 0.0,
+  "CH_ownP|low": 0.0,
+  "CH_ownP|high": 0.0,
+  "bur|minimal": 0.0,
+  "bur|low": 0.0,
+  "bur|high": 0.0
+ },
+ "reasoning_tokens_median": {
+  "minimal": 0.0,
+  "low": 0.0,
+  "high": 229.5
+ },
+ "reasoning_text_share": {
+  "minimal": 0.1,
+  "low": 0.1,
+  "high": 0.59
+ },
+ "carry": {
+  "minimal": [
+   97.9,
+   93.8,
+   100.0
+  ],
+  "low": [
+   100.0,
+   100.0,
+   100.0
+  ],
+  "high": [
+   100.0,
+   100.0,
+   100.0
+  ]
+ },
+ "carry_high_minus_min": [
+  2.1,
+  0.0,
+  6.2
+ ],
+ "carry_low_minus_min": [
+  2.1,
+  0.0,
+  6.2
+ ],
+ "none_high_minus_min": [
+  -13.7,
+  -30.1,
+  1.7
+ ],
+ "none_high_minus_low": [
+  -9.5,
+  -24.7,
+  5.4
+ ],
+ "sysCH_high_minus_min": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "sysCH_high_minus_low": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "F5P_high_minus_min": [
+  2.1,
+  0.0,
+  6.2
+ ],
+ "F5P_high_minus_low": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "F5R_high_minus_min": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "F5R_high_minus_low": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "CH_ownP_high_minus_min": [
+  -6.3,
+  -20.8,
+  10.4
+ ],
+ "CH_ownP_high_minus_low": [
+  -14.6,
+  -29.2,
+  2.1
+ ],
+ "bur_high_minus_min": [
+  -4.2,
+  -14.6,
+  6.2
+ ],
+ "bur_high_minus_low": [
+  -4.2,
+  -16.7,
+  10.4
+ ],
+ "gate_manipulation": true
+}

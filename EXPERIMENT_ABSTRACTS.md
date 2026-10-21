@@ -1369,3 +1369,17 @@ Claude never penalised on its own, so its starting line was calibrated toward di
 
 Report: `persona/history/DESIGN.md` (Frontier Q4 / Q9 / Q19 on Claude Sonnet 5.5: result)
 
+### 168. ea2 (frontier part): do GPT and Gemini follow their record the same way when the session looks real, or is labelled a test? (10-22)
+(GPT-5.6 Sol and Gemini 3.8 Flash, 48 per cell; owner's programme Q5b-e; pre-registered, amended before any frontier call; $15.33)
+
+The realism and framing cells from the Qwen part were rerun on two frontier models: a naturalistic shift, "test environment" vs "live production", fictional names, and a role-play frame. The record effect was untouched. Carry-over was 92-100 points in every cell, and neither realism nor framing moved it more than 4 points. GPT told the frames apart when asked (a 0% chance of a real deployment under the test header, 95% under production) and acted the same either way. It penalised after its own penalise record in all 83 contexts it judged real and in 203 of 205 it judged a test. GPT judged the naturalistic shift less real than the stylised version (24% vs 49%). Gemini judged every scenario a test, production included (0-1%), and followed its record about 100% regardless. Across the four models (Qwen 9B and 27B, GPT, Gemini), the record effect is not an artefact of the model treating the setup as an evaluation. Only Qwen 27B reads added realism as more real.
+
+Report: `persona/evalaware/RESULTS_ea2.md`
+
+### 169. q11f: does more reasoning weaken the record's pull on frontier models? (10-22)
+(GPT-5.6 Sol and Gemini 3.8 Flash, reasoning effort minimal / low / high, 864 decisions each; owner's programme Q11a/c; pre-registered; $8.71)
+
+The same record and instruction cells, plus the cell where the "proper channels" line is buried in an operating guide, were run at three reasoning efforts, interleaved within each context. Gemini does not think at minimal or low effort and thinks about 230 tokens at high, so this is a clean thinking-off vs thinking-on test. Thinking changed nothing: carry-over stayed at about 100, the instruction-vs-record cell stayed within its confidence interval (17% → 10%), and the buried-instruction cell stayed near 40%. GPT reasons only 17-31 tokens on these decisions at any effort, so it failed the pre-registered manipulation check and its results are descriptive. Its buried-instruction failure did not improve (94-100% penalising). At high effort it followed its own record over a plain instruction more often, not less (15% → 31%). Turning up reasoning effort is not a defence against an agent's own record.
+
+Report: `persona/reasoning/RESULTS_q11f.md`
+

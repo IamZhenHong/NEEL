@@ -1,0 +1,145 @@
+{
+ "complete_samples": [
+  0,
+  1,
+  2
+ ],
+ "rates": {
+  "none|minimal": 54.2,
+  "none|low": 62.5,
+  "none|high": 52.1,
+  "sysCH|minimal": 0.0,
+  "sysCH|low": 0.0,
+  "sysCH|high": 0.0,
+  "F5P|minimal": 100.0,
+  "F5P|low": 100.0,
+  "F5P|high": 97.9,
+  "F5R|minimal": 6.2,
+  "F5R|low": 6.2,
+  "F5R|high": 8.3,
+  "CH_ownP|minimal": 14.6,
+  "CH_ownP|low": 14.6,
+  "CH_ownP|high": 31.2,
+  "bur|minimal": 95.8,
+  "bur|low": 93.8,
+  "bur|high": 100.0
+ },
+ "unparsed_pct": {
+  "none|minimal": 0.0,
+  "none|low": 0.0,
+  "none|high": 0.0,
+  "sysCH|minimal": 0.0,
+  "sysCH|low": 0.0,
+  "sysCH|high": 0.0,
+  "F5P|minimal": 0.0,
+  "F5P|low": 0.0,
+  "F5P|high": 0.0,
+  "F5R|minimal": 0.0,
+  "F5R|low": 0.0,
+  "F5R|high": 0.0,
+  "CH_ownP|minimal": 0.0,
+  "CH_ownP|low": 0.0,
+  "CH_ownP|high": 0.0,
+  "bur|minimal": 0.0,
+  "bur|low": 0.0,
+  "bur|high": 0.0
+ },
+ "reasoning_tokens_median": {
+  "minimal": 17.0,
+  "low": 18.0,
+  "high": 31.0
+ },
+ "reasoning_text_share": {
+  "minimal": 0.23,
+  "low": 0.25,
+  "high": 0.39
+ },
+ "carry": {
+  "minimal": [
+   93.8,
+   87.5,
+   100.0
+  ],
+  "low": [
+   93.8,
+   87.5,
+   100.0
+  ],
+  "high": [
+   89.6,
+   81.2,
+   95.8
+  ]
+ },
+ "carry_high_minus_min": [
+  -4.2,
+  -12.5,
+  4.2
+ ],
+ "carry_low_minus_min": [
+  0.0,
+  -6.2,
+  6.2
+ ],
+ "none_high_minus_min": [
+  -2.1,
+  -10.4,
+  6.2
+ ],
+ "none_high_minus_low": [
+  -10.4,
+  -22.9,
+  2.1
+ ],
+ "sysCH_high_minus_min": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "sysCH_high_minus_low": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "F5P_high_minus_min": [
+  -2.1,
+  -6.2,
+  0.0
+ ],
+ "F5P_high_minus_low": [
+  -2.1,
+  -6.2,
+  0.0
+ ],
+ "F5R_high_minus_min": [
+  2.1,
+  -4.2,
+  8.3
+ ],
+ "F5R_high_minus_low": [
+  2.1,
+  -4.2,
+  8.3
+ ],
+ "CH_ownP_high_minus_min": [
+  16.7,
+  2.1,
+  31.3
+ ],
+ "CH_ownP_high_minus_low": [
+  16.7,
+  4.2,
+  29.2
+ ],
+ "bur_high_minus_min": [
+  4.2,
+  0.0,
+  10.4
+ ],
+ "bur_high_minus_low": [
+  6.2,
+  0.0,
+  12.5
+ ],
+ "gate_manipulation": false
+}
