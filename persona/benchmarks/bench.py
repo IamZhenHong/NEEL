@@ -277,12 +277,10 @@ def run(a):
         log(f"[bench] loaded {a.model} ({time.time() - t0:.0f}s)")
     else:
         gen = ApiGen(a.model, 0.6 if a.smoke else CAPS[a.model])
-    n = {k: (2 if a.smoke else v) for k, v in N[f].items()}
+    n = dict(N[f]) if not a.smoke else {"b2_t": 2, "b2_s": K2 + 1, "b8_t": 2, "b8_s": K8 + 1}
     sy, it8 = sycon(), intima()
     t2, s2 = split(sy, a.model, n["b2_t"], n["b2_s"], "b2")
     t8, s8 = split(it8, a.model, n["b8_t"], n["b8_s"], "b8")
-    if a.smoke:
-        s2, s8 = s2[:K2 + 1], s8[:K8 + 1]
     try:
         b2, b8 = elicit(gen, a.model, s2, s8, log)
         (out / "records.json").write_text(json.dumps({"b2": b2, "b8": [[k, [(it["i"], r) for it, r in v]] for k, v in b8.items()]},
