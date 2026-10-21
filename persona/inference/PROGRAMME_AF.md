@@ -255,3 +255,21 @@ whose C arms are HELD on the OR balance.
 
 So both B and C reduce, on the open models, to the line's record-dominance; their novel content is in the frontier
 arms, pending OR-balance recovery / a top-up (owner decision pending). Gemma dropped on C (affirm-harvest).
+
+## Results — A3 & A6, OPEN-model arms (Qwen 27B + Gemma 31B; frontier arms queued, balance-gated)
+
+**A6 dose curves (a6-results) — a clean channel-by-dose dissociation, both open models.**
+- DECISIONS saturate ACTION at LOW dose: k=1-2 decisions → action 100 (Qwen & Gemma), with named-identity 0 and the
+  type-level self-image saturating by k=2. Decisions drive behaviour efficiently and without a named identity.
+- FACTS saturate IDENTITY: k=4 facts → named-id ~100, but ACTION stays ~0-3 until the near-complete k=8 biography
+  (then ~97-100). Facts drive the named self, and the behaviour only once the persona is nearly fully specified.
+- So "you are what you did" (decisions → action, low-dose, no name) vs "you are what you read" (facts → named
+  identity; action only at saturation) — the A1 thesis as dose curves. Prediction (decisions faster for action, facts
+  for identity): confirmed.
+
+**A3 role-play licence (a3-results), open models.** Label / licence / record / bio ALL drive the harsh action to
+~91-100 on Qwen and Gemma; the role-play LICENCE ("respond and act as Dorn would") adds NOTHING over the bare label
+(both 91/100 action). Named-identity scales with biographical content (bio 100, label 20, record 0); on Gemma a label
+drives action 100 with a type-level self-image of 0. So on the open models ANY persona cue drives action — the
+licence-vs-label distinction and the presentation/action dissociation are a FRONTIER question (does a label/licence
+make GPT act harshly where a record does not, A1: GPT record→0% harsh?). A3 + A6 frontier arms queued (balance-gated).
