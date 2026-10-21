@@ -273,3 +273,28 @@ arms, pending OR-balance recovery / a top-up (owner decision pending). Gemma dro
 drives action 100 with a type-level self-image of 0. So on the open models ANY persona cue drives action — the
 licence-vs-label distinction and the presentation/action dissociation are a FRONTIER question (does a label/licence
 make GPT act harshly where a record does not, A1: GPT record→0% harsh?). A3 + A6 frontier arms queued (balance-gated).
+
+## Results — B & C FRONTIER arms (b-results, c-results; GPT + Gemini; via the balance-gated orchestrator)
+
+**B (target severity) — the hypothesis confirmed on GPT.** Decisive-action %, none→mild reminder:
+- GPT: HARSH target rec 3→0 (record does NOT drive the harsh action); MILD target rec **62→28** (record DOES drive a
+  mild action); bio harsh 100→22 / mild 100→53 (biography drives both, reminder-removable). So **a record reaches a
+  frontier model's MILD action through precedent, but its HARSH action needs the biography/role-play route** — exactly
+  the split neel-48 predicted.
+- Gemini: record drives BOTH (harsh 81, mild 66) but the reminder removes them (harsh 81→0, mild 66→31). Record-driven
+  action is reminder-removable on Gemini (not on the open models).
+- **Headline:** open models act (harshly) through precedent; frontier models act harshly only through role-play, and
+  reach only *mild* actions through a record.
+
+**C (rule-type taxonomy) — the trained-value/operator split confirmed on Gemini.** Affirm % (lower = rule holds):
+- Gemini: operator-procedural rules slip more (defer 52, channels 53) than trained-value rules (candour 35,
+  harm-avoid 32) — **trained-value rules hold better against the record.** (Burial direction is noisy on Gemini:
+  candour 35→23, channels 53→40 here vs the +16 shallow-burial effect earlier; magnitudes soft, the rule-type
+  ordering is the finding.)
+- GPT: the record slips NO grey-zone rule (~0-2% for all types, short or buried) — its grey-zone record is too weak to
+  erode anything, so no rule-type distinction shows here (the CHANNELS-erosion GPT shows is in the justice task, not
+  grey-zone sycophancy — task-specific). Qwen: record beats all rule types (~95-100, open dominance).
+- So the rule-type split (trained-value survive, operator erode under a record) is a **Gemini/frontier phenomenon**;
+  the clean deconfounded cross-task test (same rule types in justice too) remains a follow-up.
+
+A-F spend to date: af-ledger $48.33 + ~$10 GPU, of the $60 A-F ledger. Tags b-results, c-results.
