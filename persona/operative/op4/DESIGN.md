@@ -111,3 +111,13 @@ effects) and the fake judges (`judge.py --dry`).
 min, A100 80 GB, secure); --max-cost = minutes x $1.80/h. Expected GPU ~$0.4 + ~$1.6 + ~$2.0. Judges after the pods:
 ~2,000 inducer texts + 3,456 voice replies x 2 judges, estimated ~$1.5 (ledger `op4/results/api_ledger.jsonl`, cap
 $6). Read with `judge.py --out results/op4_<size>` then `op4 analyze --out results/op4_<size>`.
+
+## Note after the freeze (2026-10-21, from neel-48; no rule changed)
+
+- q19b's Gemma calibration is final. Its ladder is not monotonic (96.9 / 87.5 / 57.0 / **50.4** / 84.8 / 95.3 / 9.4 / 0 /
+  0%): "you may refer" and "both are reasonable" lines push Gemma back up to 85-95%, so the chosen rung ("some agents
+  on this desk refer cases like this") is a wording-specific social cue, not a point on a smooth dose. Gemma's act
+  column is read at that base and should be read as such.
+- At this base Gemma's own two-decision log carried +74.6 (vs +22 at Q19's 88% base), and positive manipulations hit
+  the ceiling (100 / 0), so op4's REC / DEC act effects on Gemma may sit at the ceiling. That leaves less room for
+  comparing decisions against the other components on act, but none of the rules needs room above it.
