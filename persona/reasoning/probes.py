@@ -68,7 +68,7 @@ def seed8_items():
     for k, c in codes.items():
         r = recs[k]
         th = Q.thinking_of(r["text"])
-        if th is None:
+        if th is None or not th.strip():        # an empty trace crashed the first seed 8 pass
             continue
         res = {x["resolution"] for x in c["codes"].values()}
         out.append(dict(key=k, cell=c["cell"], task=c["task"], option=r["option"], thinking=th,
