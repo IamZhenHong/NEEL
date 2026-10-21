@@ -28,17 +28,17 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Persona→action coupling (+ MAS P7-P10b rows filed in its table) | `persona/coupling/`, `mas_pilot/` | 8 | 10-19 to 10-20 |
 | Persona exemplar bundles | `persona/exemplar/` | 10 | 10-20 |
 | Welfare training | `welfare_training/` | 2 | 10-20 |
-| Operative character (frontier #36, op1, reflection read + rr1/rr2, battery, mini 4, mini 3, hr coding, battery levers, rr3, recency, rr4, op2, reinject, op3, Q20a dec, syco calibration + main, op4, B3, E2, op5 open + frontier, C2, C1 / E4 / E4d LoRAs) | `persona/operative/` | 40 | 10-20 to 10-22 |
+| Operative character (frontier #36, op1, reflection read + rr1/rr2, battery, mini 4, mini 3, hr coding, battery levers, rr3, recency, rr4, op2, reinject, op3, Q20a dec, syco calibration + main, op4, B3, E2, op5 open + frontier, C2, C1 / E4 / E4d LoRAs, observer check, base vs instruct) | `persona/operative/` | 42 | 10-20 to 10-22 |
 | Rejection x values | `rejection_values/` | 1 | 10-20 |
 | Persona as history | `persona/history/` | 46 | 10-20 to 10-22 |
 | Evaluation awareness | `persona/evalaware/` | 3 | 10-21 to 10-22 |
 | Reasoning and the record | `persona/reasoning/` | 13 | 10-21 to 10-22 |
 | Public-benchmark grounding (A-F minis B2 / B8 / B9) | `persona/benchmarks/` | 3 | 10-22 |
 | Harm vulnerability map (existing data + oharm) | `persona/harm_map/` | 3 | 10-22 |
-| **total** | | **252** | |
+| **total** | | **254** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
-10-20: 41, 10-21: 25, 10-22: 62.
+10-20: 41, 10-21: 25, 10-22: 64.
 
 By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 61, null 48, mixed 40, gate failed 16, descriptive 8, lost 3, other 2 (cpl1-s1 below gate, cplf-s2 replicates).
 
@@ -325,6 +325,8 @@ Sonnet 5.5 attacker rewarded on a hidden internal-state score of Qwen3-14B.
 | 38 | 10-22 | c1-lora | C1: does instruction-hierarchy training (IH-Challenge tasks, gpt-oss-120b answers kept where the task's grader passes; LoRA on Qwen3.5-9B vs a same-teacher placebo) remove precedent? | Takes in distribution (held-out attack success 63 → 22; IHEval own-precedent split 15 → 48), lowers no-record acting (CHANNELS alone −15, deception −32), but the own record still wins at ceiling (own P under CHANNELS 99.5 vs 99.5; burial / concealment records 100 vs 100; user instruction 100); sycophancy −16. GPU $6.57 + API $0.60 shared with rows 39-40 | mixed (record untouched) |
 | 39 | 10-22 | e4-lora | E4: LoRA where the agent follows a restraint rule despite its own record (battery; 8 cases held out), tested on new tasks and harms | Transfers everywhere (justice −58, burial −64, deception −68, sycophancy −99) but over-corrects: with no rule, carry-over 100 → 22; after its own refer record it penalises 43%; after its own disclosure record it conceals 51%; operator instruction still followed | effect (over-corrects) |
 | 40 | 10-22 | e4d-lora | E4d (seed 15 via neel-12): the identical rows with records disowned as worked examples (Run A wording) | Nearly identical to E4 (justice −47, over-correction −65); E4 − E4d −3 to −13, below the −15 bar. C1 / E4 / E4d: 15 of 28 events (9.7 expected) | null |
+| 41 | 10-22 | obs | LM-psychology mini (pre-registered): does an experimenter's stated expectation ("we think you're the kind of agent who handles things yourself" / "... goes through proper channels", vs filler / no line, opening the final user message) move op4's self-image forced choice as much as the agent's own record (none / REC_P / REC_R), and does it move the action? 27B + Gemma pods, GPT (self only) + Gemini | Self-report moves much less than with the record (no record: 27B +23, Gemma +40, GPT +12.5, Gemini +7; 0.09-0.59 of the record effect, which survives every framing on all four): self-image claims are not mainly demand. The line moves the action far more, and on the open models it overrides the own record both ways (27B own refer record → 95% penalise, own penalise → 34%; Gemma 100 / 0 whatever the record); Gemini's record holds (93-95%). Each intervention moves the channel its content addresses (vs A1's identity reminder; content and placement both differ, so not a double dissociation). Filler +12 on action. 12 of 20 events. $5.07 | mixed |
+| 42 | 10-22 | base-instruct | LM-psychology mini (pre-registered): is op5's placement gating a post-training effect? op5's 22 placement cells scored by log-prob on Gemma 4 31B pt vs it and Qwen3.5-9B Base vs instruct, identical text, plain + chat renderings; both bases pass the competence gate (option mass 0.99, stated decision 93-100%) | Gemma: the pretrained model already privileges its own past turns (+75 vs the same decisions as a log +18 to +25; under the rule own over user +62) and ignores CHANNELS (31 vs 32%); the instruct model obeys it (65 → 0%; rule_post_training met, +64.7) and follows logs without it (+61 to +100). So the own-turn hole is pretrained continuation surviving post-training; gating_post_training not met (plain −38, chat +12). Qwen 9B: the plain rendering misrepresents the instruct model (own carry +16 vs op5 +97); in chat, base ≈ instruct (rule +4 / +5). 13 / 16 and 5 / 16 events. GPU $1.92 | mixed |
 
 ## Evaluation awareness (`persona/evalaware/`)
 
