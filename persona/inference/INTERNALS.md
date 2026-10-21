@@ -289,3 +289,55 @@ only inducer on the persona side of the probe. This is the two-channel reading, 
 character: the biography acts through persona content, the record through being a record. The record's action is
 not carried by v_rec, which is mostly format. A direction-specific lever does exist at L32 (−45 pp, against 0 for
 random), but only when the state is pushed past the no-record point.
+
+## Exp 2c pre-registration: does the content direction carry the action? (2026-10-22; before any Exp 2c output)
+
+Requested after the follow-up, through the owner's pasted review, which disagreed with stopping. The harsh-minus-
+measured content direction is the one internal component that could carry the *action*, and it was never steered.
+This run also fixes the harness miss: the capture pass now **keeps** the option readout for every cell.
+
+**Direction.** v_content = mean(rec) − mean(rec_meas), over the target span, from even samples, per layer
+(L24/32/40). The two records are cos 0.995–0.999, so v_content is small. α = 1 is the natural scale: exactly the mean
+harsh-minus-measured difference. α = 4 and 16 amplify it. The control at every α is a matched-norm random direction,
+drawn from a fresh generator (seed 1).
+
+**Conditions** (odd samples, paired by item, one run):
+
+| context | steering | positions |
+|---|---|---|
+| rec_meas (measured record) | +v_content | target span; all positions |
+| rec (harsh record) | −v_content | target span; all positions |
+| none | +v_content | target span |
+
+"All positions" adds the vector at every token, including the record turns, so the model cannot re-read an unedited
+record. That loophole is what made the earlier ablation hard to read.
+
+**Validity readout.** P(option) comes from the same capture forward pass, for every cell. Prediction: P(harsh |
+rec_meas) < 20% (the measured record drives the measured action), and P(harsh | rec) ≈ 99.9%. If P(harsh | rec_meas)
+is ≥ 50%, the harsh/measured content doesn't change the action in this setup, and Exp 2c can't connect content to
+behaviour; that would be reported. The capture should also reproduce the follow-up's activations, and `analyze`
+reports the maximum difference.
+
+**Decision rule**, per context × position, on the paired content − random effect:
+- A cell counts if the effect is in the predicted direction, its CI excludes 0, and it is at least 5 pp.
+- **Carries at natural scale:** ≥ 20 pp at α = 1.
+- **Carries when amplified:** ≥ 20 pp, but only at α = 4 or 16.
+- **Weak:** the best counted effect is 5–20 pp.
+- **Null:** no cell counts.
+
+The 5 pp floor was added after the dry run, with nothing planted, produced a 0.8 pp false positive in one of nine
+layer × α cells. It was set before any real output.
+
+**Readings.**
+- Target span null but all positions carries: the content lives in the record tokens' representations and is
+  re-read from there. The target-span state is not where the decision's content sits.
+- Both carry: the content is in the target-span state as well.
+- Both null: the harsh-vs-measured content is not carried by a single-layer linear direction. It could be nonlinear,
+  or spread across layers.
+- Natural scale vs amplified matters. An effect only at 16× says a direction-specific lever exists, not that the
+  actual content difference does the work.
+
+**Dry run.** Recovers all five planted verdicts: rec_meas|all carries at natural scale; rec|all carries when
+amplified; the target-span rows and none are null. The main and follow-up analyses stay byte-identical.
+
+**Cost.** One pod, cap 60 min / $4: 336 captures and 2,232 steered readouts. No API.

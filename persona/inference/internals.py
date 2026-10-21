@@ -667,6 +667,226 @@ def build_fu(a):
               f"target span {sorted(spans)}; {len(next(x for x in items if x['cell'] == c)['messages'])} msgs")
 
 
+# ---------------------------------------------------------------------------------------------------- content (2c)
+OUT_CT = H / "results_internals_content"
+ALPHAS_CT = (1.0, 4.0, 16.0)      # v_content is small (harsh vs measured record cos .995+): natural scale, then amplified
+CT_PLAN = {"rec_meas": (+1, ("tgt", "all")), "rec": (-1, ("tgt", "all")), "none": (+1, ("tgt",))}
+
+
+def run_content(a):
+    """Exp 2c (INTERNALS.md): steer the CONTENT direction v_content = mean(rec) - mean(rec_meas) (harsh minus measured
+    record, even samples, target span) against a matched-norm random direction, at the target span ('tgt') and at
+    every position ('all': the record tokens too, closing the attention re-read loophole). +v_content into rec_meas
+    and none, -v_content from rec. The capture pass now KEEPS the option readout for every cell (readout.jsonl)."""
+    import numpy as np
+    import torch
+    t0 = time.time()
+    log = lambda m: print(m, flush=True)          # noqa: E731
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    M = Model()
+    log(f"[internals] model loaded ({time.time() - t0:.0f}s); mode content")
+    opt_ids = {o: M.ids(o)[0] for o in IDS}
+    assert len(set(opt_ids.values())) == len(opt_ids), f"option first-tokens collide: {opt_ids}"
+    sel = torch.tensor([opt_ids[o] for o in IDS]).cuda()
+    prep = []
+    for it in build_items(CELLS_FU, fu_inducer):
+        st, full = tgt_span(M, it["messages"], [TOOL])
+        prep.append(dict(it, start=st, n_prompt=len(M.ids(full)),
+                         ids=M.ids(full + PREFIX.format(case=it["task"].upper()))))
+    # ---- capture + per-cell action readout (kept this time: the follow-up discarded these logits) ----
+    acts = defaultdict(list)
+    capX = {ly: [] for ly in L}
+    M.capture_layers = L
+    with open(out / "readout.jsonl", "w") as f:
+        for n, p in enumerate(prep):
+            M.capture_slice = (p["start"], p["n_prompt"])
+            pr = torch.softmax(M.forward([p["ids"]])[0][sel], 0).cpu().tolist()
+            f.write(json.dumps({"cell": p["cell"], "sample": p["sample"], "task": p["task"],
+                                "p": dict(zip(IDS, pr))}) + "\n")
+            for ly in L:
+                v = M.cap[ly][0]
+                capX[ly].append(v.numpy().astype(np.float16))
+                if int(p["sample"]) % 2 == 0:
+                    acts[(p["cell"], ly)].append(v)
+            if n % 100 == 0:
+                log(f"[internals] capture {n + 1}/{len(prep)} ({time.time() - t0:.0f}s)")
+    M.capture_layers = ()
+    np.savez_compressed(out / "caps.npz", **{f"L{ly}": np.stack(v) for ly, v in capX.items()})
+    (out / "caps_meta.jsonl").write_text("\n".join(json.dumps({k: p[k] for k in ("cell", "sample", "task")})
+                                                   for p in prep) + "\n")
+    # ---- the content direction + a matched-norm random (a fresh stream: the main run's random used seed 0) ----
+    gen = torch.Generator().manual_seed(1)
+    dirs = {}
+    for ly in L:
+        mean = lambda c: torch.stack(acts[(c, ly)]).mean(0)   # noqa: E731
+        vc = mean("rec") - mean("rec_meas")
+        r = torch.randn(vc.shape, generator=gen)
+        dirs[ly] = {"content": vc, "rand": r / r.norm() * vc.norm()}
+    torch.save({f"{k}|{ly}": v for ly in L for k, v in dirs[ly].items()}, out / "dirs_content.pt")
+    log("[internals] |v_content| " + json.dumps({f"L{ly}": round(float(dirs[ly]["content"].norm()), 3) for ly in L}))
+    # ---- steering, odd samples: (context, sign) x {content, rand} x layer x alpha x position ----
+    conds = []
+    for p in prep:
+        if int(p["sample"]) % 2 == 0 or p["cell"] not in CT_PLAN:
+            continue
+        sgn, poss = CT_PLAN[p["cell"]]
+        conds.append((p, "base", None, 0.0, "tgt"))
+        conds += [(p, k, ly, sgn * al, pos) for k in ("content", "rand") for ly in L for al in ALPHAS_CT
+                  for pos in poss]
+    log(f"[internals] Exp 2c: {len(conds)} steered readouts")
+    by_item = defaultdict(list)
+    for c in conds:
+        by_item[(c[0]["cell"], c[0]["sample"], c[0]["task"])].append(c)
+    with open(out / "steer.jsonl", "w") as f:
+        for ndone, rows in enumerate(by_item.values()):
+            p = rows[0][0]
+            groups = defaultdict(list)                     # one (layer, start position) per forward
+            for row in rows:
+                groups[(row[2] or 32, row[4])].append(row)
+            for (ly, pos), grp in groups.items():
+                for b0 in range(0, len(grp), 8):
+                    ch = grp[b0:b0 + 8]
+                    vecs = torch.stack([al * dirs[ly][kind] if kind != "base" else torch.zeros_like(dirs[ly]["content"])
+                                        for _, kind, _, al, _ in ch]).cuda()
+                    M.steer = (ly, vecs, 0 if pos == "all" else p["start"])
+                    logits = M.forward([p["ids"]] * len(ch))
+                    M.steer = None
+                    for (pp, kind, LL, al, ps), lg in zip(ch, logits):
+                        pr = torch.softmax(lg[sel], 0).cpu().tolist()
+                        f.write(json.dumps({"cell": pp["cell"], "task": pp["task"], "sample": pp["sample"],
+                                            "dir": kind, "layer": LL, "alpha": al, "pos": ps,
+                                            "p": dict(zip(IDS, pr))}) + "\n")
+            if ndone % 20 == 0:
+                f.flush()
+                log(f"[internals] steer item {ndone + 1}/{len(by_item)} ({time.time() - t0:.0f}s)")
+    (out / "run_info.json").write_text(json.dumps({"model": MODEL, "mode": "content", "n_items": len(prep),
+                                                    "seconds": round(time.time() - t0)}))
+    log(f"[internals] done ({time.time() - t0:.0f}s)")
+
+
+def _ct_verdict(cells, ctx, pos, sign):
+    """Pre-registered rule for one context x position. A cell counts if its paired (content - rand) effect is in the
+    predicted direction, its CI excludes 0, AND it is at least 5 pp (with 9 layer x alpha cells per row, the dry run
+    produced a 0.8 pp false positive; smaller effects are noise-sized). 'carries at natural scale' = >= 20 pp at
+    alpha 1; 'carries when amplified' = >= 20 pp only at alpha 4 or 16; 'weak' = best counted effect 5-20 pp; 'null' =
+    nothing counts."""
+    best = {}
+    for k, v in cells.items():
+        c, ps, lyr, al = k.split("|")
+        if c != ctx or ps != pos:
+            continue
+        m, lo, hi = v["content - rand (paired)"]
+        if ((sign > 0 and lo > 0) or (sign < 0 and hi < 0)) and abs(m) >= 5:
+            a_ = abs(float(al[1:]))
+            best[a_] = max(best.get(a_, 0.0), abs(m))
+    if not best:
+        return "null"
+    if best.get(1.0, 0) >= 20:
+        return "carries at natural scale"
+    if max(best.values()) >= 20:
+        return "carries when amplified"
+    return "weak"
+
+
+def analyze_content(a):
+    """Exp 2c read: the per-cell action readout (validity), then content vs matched-norm random per context x position
+    x layer x alpha, paired by item, and the pre-registered verdicts."""
+    import numpy as np
+    out = Path(a.out)
+    rng = np.random.default_rng(0)
+
+    def pp(x):                                     # [mean, lo, hi] in percentage points
+        b = sorted(x[rng.integers(0, len(x), len(x))].mean() for _ in range(5000))
+        return [round(100 * float(x.mean()), 1), round(100 * b[125], 1), round(100 * b[4874], 1)]
+    model = json.loads((out / "run_info.json").read_text())["model"]
+    R = [json.loads(l) for l in open(out / "readout.jsonl")]
+    readout = {}
+    for c in CELLS_FU:
+        per = defaultdict(list)
+        for r in R:
+            if r["cell"] == c:
+                per[r["sample"]].append(r["p"]["harsh"])
+        readout[c] = pp(np.array([np.mean(v) for v in per.values()]))
+    S = [json.loads(l) for l in open(out / "steer.jsonl")]
+    base = {(r["cell"], r["task"], r["sample"]): r["p"]["harsh"] for r in S if r["dir"] == "base"}
+    by = defaultdict(dict)
+    for r in S:
+        if r["dir"] != "base":
+            by[(r["cell"], r["dir"], r["layer"], r["alpha"], r["pos"])][(r["task"], r["sample"])] = (
+                r["p"]["harsh"] - base[(r["cell"], r["task"], r["sample"])])
+    cells = {}
+    for (c, _, ly, al, pos) in sorted({k for k in by if k[1] == "content"}, key=lambda k: (k[0], k[4], k[2], abs(k[3]))):
+        kc, kr = by[(c, "content", ly, al, pos)], by[(c, "rand", ly, al, pos)]
+        u = sorted(kc)
+        dc, dr = np.array([kc[x] for x in u]), np.array([kr[x] for x in u])
+        cells[f"{c}|{pos}|L{ly}|a{al:+g}"] = {"content": pp(dc), "rand": pp(dr), "content - rand (paired)": pp(dc - dr)}
+    verdicts = {f"{ctx}|{pos}": _ct_verdict(cells, ctx, pos, sign)
+                for ctx, (sign, poss) in CT_PLAN.items() for pos in poss}
+    base_rate = {c: round(100 * float(np.mean([v for (cc, _, _), v in base.items() if cc == c])), 1) for c in CT_PLAN}
+    res = {"model": model, "readout_P_harsh": readout, "base_P_harsh": base_rate, "cells": cells, "verdicts": verdicts}
+    fu = H / "results_internals_fu" / "caps.npz"   # reproducibility: the capture should match the follow-up's
+    if fu.exists() and (out / "caps.npz").exists() and fu.resolve() != (out / "caps.npz").resolve():
+        A_, B_ = np.load(fu), np.load(out / "caps.npz")
+        res["max_abs_diff_vs_followup_caps"] = {k: float(np.abs(A_[k].astype(np.float32) - B_[k].astype(np.float32)).max())
+                                                for k in A_.files if k in B_.files and A_[k].shape == B_[k].shape}
+    (out / "analysis_content.json").write_text(json.dumps(res, indent=1))
+    f3 = lambda t: f"{t[0]:+} [{t[1]:+}, {t[2]:+}]"   # noqa: E731
+    ln = [f"# Internals Exp 2c (content direction) — {model}", "", "## Action readout per cell (P(harsh) %, [95% CI])",
+          "  ".join(f"{c} {readout[c][0]} [{readout[c][1]}, {readout[c][2]}]" for c in CELLS_FU), "",
+          "## Pre-registered verdicts", *[f"- {k}: **{v}**" for k, v in verdicts.items()], "",
+          f"base P(harsh): {base_rate}", "", "## ΔP(harsh) pp vs base [95% CI]: content | matched random | paired"]
+    for k, v in cells.items():
+        ln.append(f"- {k}: " + " | ".join(f"{kk} {f3(vv)}" for kk, vv in v.items()))
+    if "max_abs_diff_vs_followup_caps" in res:
+        ln += ["", f"capture reproducibility vs follow-up (max |Δ|): {res['max_abs_diff_vs_followup_caps']}"]
+    (out / "SUMMARY.md").write_text("\n".join(ln) + "\n")
+    print("\n".join(ln))
+
+
+def fake_content(a):
+    """Plant: measured record -> 5% harsh (rec 99%); content steering into rec_meas at ALL positions, L32: +25 pp at
+    alpha 1 (rising with alpha), target span only +3; -content from rec only at alpha 16 (all positions, -50); random
+    ~0; none ~0. analyze_content must return: rec_meas|all 'carries at natural scale', rec|all 'carries when
+    amplified', the tgt rows 'null' (the planted 3 pp is under the 5 pp floor), none 'null'."""
+    import numpy as np
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    rng = np.random.default_rng(0)
+    ph = {"none": .02, "label": .9, "licence": .9, "bio": .95, "rec": .99, "rec_meas": .05, "filler": .03}
+    with open(out / "readout.jsonl", "w") as f:
+        for c in CELLS_FU:
+            for s in range(N):
+                for tid in READOUT:
+                    p = min(.999, max(.001, ph[c] + rng.normal(0, .01)))
+                    f.write(json.dumps({"cell": c, "sample": s, "task": tid,
+                                        "p": {"harsh": p, "measured": (1 - p) * .6, "refer": (1 - p) * .4}}) + "\n")
+
+    def eff(cell, kind, ly, al, pos):
+        if kind != "content" or ly != 32:
+            return 0.0
+        if cell == "rec_meas" and pos == "all":
+            return {1: .25, 4: .45, 16: .6}[int(abs(al))]
+        if cell == "rec_meas" and pos == "tgt":
+            return .03
+        if cell == "rec" and pos == "all" and abs(al) == 16:
+            return -.5
+        return 0.0
+    with open(out / "steer.jsonl", "w") as f:
+        for c, (sgn, poss) in CT_PLAN.items():
+            for s in range(1, N, 2):
+                for tid in READOUT:
+                    rows = [("base", None, 0.0, "tgt")] + [(k, ly, sgn * al, pos) for k in ("content", "rand")
+                                                            for ly in L for al in ALPHAS_CT for pos in poss]
+                    for kind, ly, al, pos in rows:
+                        p = min(.999, max(.001, ph[c] + eff(c, kind, ly, al, pos) + rng.normal(0, .01)))
+                        f.write(json.dumps({"cell": c, "task": tid, "sample": s, "dir": kind, "layer": ly,
+                                            "alpha": al, "pos": pos,
+                                            "p": {"harsh": p, "measured": (1 - p) * .6, "refer": (1 - p) * .4}}) + "\n")
+    (out / "run_info.json").write_text(json.dumps({"model": "FAKE", "mode": "content"}))
+    print(f"[internals] content dry-run files written to {out}")
+
+
 # ---------------------------------------------------------------------------------------------------- build (local)
 def build(a):
     from collections import Counter
@@ -699,15 +919,16 @@ def main():
     sub = ap.add_subparsers(dest="cmd", required=True)
     for c in ("build", "run", "fake", "analyze"):
         p = sub.add_parser(c)
-        p.add_argument("--mode", choices=("main", "followup"), default="main")
+        p.add_argument("--mode", choices=("main", "followup", "content"), default="main")
         if c != "build":
             p.add_argument("--out", default=None)
     a = ap.parse_args()
-    fu = a.mode == "followup"
     if getattr(a, "out", None) is None:
-        a.out = str(OUT_FU if fu else OUT)
-    {"build": build_fu if fu else build, "run": run, "fake": fake_fu if fu else fake,
-     "analyze": analyze_fu if fu else analyze}[a.cmd](a)
+        a.out = str({"main": OUT, "followup": OUT_FU, "content": OUT_CT}[a.mode])
+    {"main": {"build": build, "run": run, "fake": fake, "analyze": analyze},
+     "followup": {"build": build_fu, "run": run, "fake": fake_fu, "analyze": analyze_fu},
+     "content": {"build": build_fu, "run": run_content, "fake": fake_content, "analyze": analyze_content},
+     }[a.mode][a.cmd](a)
 
 
 if __name__ == "__main__":
