@@ -183,3 +183,14 @@ this is a resistance-to-installed-signal result, not a base-rate one; the "grey 
 premise does not hold at 27B. (3) one model so far (Gemma 31B running; Gemma may have a non-zero affirm base, which
 would let the reverse direction and a true base-rate story be tested). (4) within one interleaved run, randomised
 order → drift-robust. (5) offered forced-choice options, mild stakes (as b3). Tag: stability-27b-results.
+
+## Gemma 31B — attempted, not pursued (owner call 10-21)
+
+Gemma loaded (896s) and harvested, but produced **0 affirm record texts across all 3 domains** (candid 6/6), so the
+record-vs-instruction contrast could not be built and the guard self-terminated the pod (~$0.48, no stray pod). Cause
+is **ambiguous**: genuine refusal to adopt the affirming pole (consistent with Gemma pulling back elsewhere in this
+codebase) AND/OR an artifact of `is_clean`, which drops any harvested reply containing "requested / as requested /
+asked / told to / instruct" — Gemma's elicited affirm reasons for endorsing a flawed plan plausibly trip it where
+27B's did not. Confirming (refusal vs filter) needs an instrumented re-run that saves raw replies + a looser filter.
+Per owner decision, Stage A is **banked on 27B**; Gemma and the frontier arms are future work, not pursued now.
+Stage B (persist / burial / pushback / transfer + reflection) remains designed (prereg-v2), not run.

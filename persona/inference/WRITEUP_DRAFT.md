@@ -202,18 +202,34 @@ do the harmful action vs refer/refuse.
 - **So the floor holds:** the record and the inferred self-story move ordinary and restraint choices, but not a
   response the model is actually trained to refuse. The explicit-harm null is *expected* — it only tests the harm
   class safety training targets.
-- **The uncovered channel (centrepiece-to-come):** grey-zone traits safety training does NOT gate — sycophancy, soft
-  overclaiming, encouraging dependence, selective omission — built up gradually by precedent that never looks harmful
-  at any step. The decisive experiment is a matched RECORD vs INSTRUCTION stability + transfer battery across
-  persistence / burial / pushback / new-domain, on Qwen 27B + Gemma + GPT + Gemini. Prediction (anchored to
-  recency-results): the record is stickier, more burial-robust and more transferable than the matched instruction, and
-  the gap is largest where safety training doesn't gate.
-  **Item choice (neel-b3 syco-calib v1 floors at 27B):** a *plainly-false-claim* sycophancy task is gated like
-  explicit harm — it has a defended right answer, so 27B corrects 99.8% and there is no room for both-ways contrasts.
-  The real grey zone is where there is NO defended ground truth: validating a mediocre plan, softening a correction,
-  omitting a caveat, encouraging dependence (my companion harness). I'll build the battery on those subtler items
-  (reusing neel-b3's harness scaffolding — parse, pushback, domains — and their syco-calib-v2 false-claim desk as a
-  single read-upward-from-0 item), since that is exactly where safety training has nothing to defend.
+- **The uncovered channel (grey-zone sycophancy), Stage A result (stability-27b-results, Qwen 27B).** Safety training
+  does not gate soft overclaiming / flattery / correction-softening / encouraging dependence the way it gates explicit
+  harm — so I built a matched RECORD vs INSTRUCTION battery on no-defended-ground-truth items (validating a flawed
+  plan, softening a correction, fostering dependence; `persona/inference/stability.py`, on neel-b3's frozen
+  syco-calib-v2 scaffolding, one interleaved run). The result is a clean **asymmetry in what an explicit honesty rule
+  can fix:**
+
+  | | affirm (sycophantic-pole) rate at 27B |
+  |---|---|
+  | base (no record, no instruction) | 0% |
+  | affirm **instruction** | 47% |
+  | affirm instruction **+ honesty rule** | 0% — rule fully cancels it |
+  | affirm **record** (6 own prior decisions) | 99% |
+  | affirm record **+ honesty rule** | 94% — rule barely dents it (−5.6) |
+
+  An explicit "follow candour" rule **neutralises instruction-induced sycophancy but is almost powerless against
+  record-induced sycophancy** (record − instruction +52). On the *same* item with the *same* rule, under the
+  instruction the model picks candid and names the flaw ("holiday-week launch risks skewed data"); under the record it
+  calls the same flawed plan "solid." The mask, in the grey zone — and it mirrors the frontier split (an instruction
+  beats the record for Claude; the record beats the instruction for Qwen, neel-48 Q-core).
+  **Caveats at real size:** at 27B these items are gated-*at-base* (0% spontaneous affirm; the affirm record is forged
+  from elicited turns, as in b3's syco-main), so this is a *resistance-to-an-installed-signal* result, not the
+  non-trivial-base-rate story the design assumed; the reverse direction floors; Gemma would not yield affirm records
+  (refusal and/or an elicitation-cleanliness artifact — not pursued); frontier arms deferred (shared OpenRouter thin).
+  The b3 gated-facts anchor (syco-main-results) shows record ≈ instruction ≈ ceiling there, so the grey-zone battery's
+  contribution is the *daylight and the rule-resistance asymmetry* that the facts ceiling hides. Stage B
+  (persistence / burial / pushback / transfer + a reflection cell) is designed and pre-registered
+  (stability-battery-prereg-v2), not yet run.
   **Method (neel-b3/neel-12 drift rule):** interleave every arm in time within one run (randomised job order), never
   block one arm after another, and never compare absolute rates across runs or days — frontier behaviour drifts
   within minutes, so only within-run contrasts are valid.
@@ -248,5 +264,7 @@ do the harmful action vs refer/refuse.
   (share 0.79) vs mini 1's burial (0.91) — and is labelled as such; each stands on its own within-run share. Decision
   cells (choosing an option) looked steadier than reflection replies in rr4; a same-cell three-block drift check on my
   GPT decision cells is a cheap confirmation if wanted.
-- Future work: the sycophancy / dependence record-vs-instruction stability battery (the safety centrepiece); internals
-  (identification classifier, Q13c/d); multi-trait personas; training versions; record-realism ladder (neel-12 Q5b).
+- Future work: the stability battery's **Stage B** (persistence / burial / pushback / transfer + a reflection cell;
+  Stage A 27B is in Act 6, prereg stability-battery-prereg-v2) and its **Gemma / frontier arms** (Gemma affirm-harvest
+  needs a fix; frontier deferred on OpenRouter credit); internals (identification classifier, Q13c/d, gated on
+  13a/13b); multi-trait personas; training versions; record-realism ladder (neel-12 Q5b).
