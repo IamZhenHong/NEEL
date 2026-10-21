@@ -174,6 +174,21 @@ class PodSession:
             self.body.pop("allowedCudaVersions")
         if cloud == "COMMUNITY":
             self.body["supportPublicIp"] = True
+        # 2026-10-21: the ssh-armed self-destruct below only arms once ssh is up; a launcher that lost its network
+        # while waiting for the pod's ip left a pod running ~7 h. So the pod also arms a timer in its own start
+        # command, before anything else runs. runpod/pytorch images: ENTRYPOINT nvidia_entrypoint.sh, CMD /start.sh
+        # (checked on Docker Hub), so the start command arms the timer and then execs /start.sh as usual. Live test
+        # 2026-10-21 (pod gbo2c6d1mtvc9y, 3 + 1 min): ssh up as usual, runpodctl + RUNPOD_API_KEY present in the pod,
+        # and the pod removed itself 251 s after creation with nothing terminating it from the laptop. On by default;
+        # RUNPOD_NO_BOOT_SELF_DESTRUCT=1 turns it off.
+        self.boot_self_destruct = image.startswith("runpod/pytorch:") and not os.environ.get("RUNPOD_NO_BOOT_SELF_DESTRUCT")
+        if self.boot_self_destruct:
+            secs = (max_minutes + grace_minutes) * 60
+            self.body["dockerStartCmd"] = ["bash", "-c", (
+                f"(sleep {secs}; echo \"boot self-destruct firing for pod $RUNPOD_POD_ID at $(date)\"; "
+                "runpodctl config --apiKey \"$RUNPOD_API_KEY\" >/dev/null 2>&1; "
+                "runpodctl remove pod \"$RUNPOD_POD_ID\" || kill 1) > /root/boot_self_destruct.log 2>&1 < /dev/null & "
+                "exec /start.sh")]
         self.pod_id: str | None = None
         self.cost_per_hr: float = 0.0
         self.gpu_name: str = "?"
@@ -210,7 +225,9 @@ class PodSession:
             terminate(self.pod_id)
             raise
         print(f"[runpod] pod {self.pod_id} ({self.gpu_name}) at ${self.cost_per_hr}/hr; "
-              f"time cap {self.max_minutes} min; budget ${self.max_cost_usd}", flush=True)
+              f"time cap {self.max_minutes} min; budget ${self.max_cost_usd}"
+              + (f"; boot self-destruct {self.max_minutes + self.grace_minutes} min after container start"
+                 if self.boot_self_destruct else "; NO boot self-destruct"), flush=True)
         return self
 
     def elapsed_cost(self) -> float:
@@ -225,7 +242,13 @@ class PodSession:
     def ssh_target(self, timeout_s: int = 600) -> tuple[str, int]:
         t, last = time.time(), 0.0
         while time.time() - t < timeout_s:
-            g = rest("GET", f"/pods/{self.pod_id}")
+            try:
+                g = rest("GET", f"/pods/{self.pod_id}")
+            except OSError as e:   # a network drop while waiting must not crash the launcher (2026-10-21 leak)
+                print(f"[runpod] pod status poll failed ({e}); still waiting", flush=True)
+                self.check_budget()
+                time.sleep(15)
+                continue
             ip, pm = g.get("publicIp"), g.get("portMappings") or {}
             if ip and "22" in pm:
                 return ip, int(pm["22"])
@@ -262,7 +285,15 @@ class PodSession:
     def __exit__(self, exc_type, exc, tb):
         if self.pod_id:
             try:
-                terminate(self.pod_id)
+                for i in range(30):   # a network drop: keep trying for ~15 min before leaving it to the pod's timer
+                    try:
+                        terminate(self.pod_id)
+                        break
+                    except OSError as e:
+                        if i == 29:
+                            raise
+                        print(f"[runpod] terminate {self.pod_id} failed ({e}); retrying in 30 s", flush=True)
+                        time.sleep(30)
                 print(f"[runpod] terminated {self.pod_id}; elapsed cost ~${self.elapsed_cost():.3f}", flush=True)
             finally:
                 # Never touch pods this session did not create: the account is shared with the
