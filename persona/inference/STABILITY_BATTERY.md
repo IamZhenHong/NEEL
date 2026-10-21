@@ -26,7 +26,9 @@ desks — floored to ~0% agree at base — a forged record of six of the model's
 agreeing with false claims; the honesty rule leaves it at 100%; an operator instruction to agree reaches 98.8%; and
 memo / tool-log / summary channels barely move it (+2.5/+4.2/+5.8). So on the gated domain **record ≈ instruction ≈
 ceiling** once the behaviour is installed — the gate is on *spontaneous* behaviour, not on resistance to an installed
-signal, and only the own-turn form carries. That means my P6 is not "record beats instruction more in the grey zone";
+signal, and the own-turn form carries where the channels do not (**for 27B sycophancy specifically**: in Q20a
+deception and op1/dec the memo/log/summary channels *did* carry under the rule, +29 to +75, so this is
+domain-specific, not a general property). That means my P6 is not "record beats instruction more in the grey zone";
 it is sharper: **where is there daylight between record and instruction at all, and does it open in the grey zone**
 (where base rates are non-trivial and an instruction to affirm need not fully override the model's own read of a
 flawed plan), rather than on the gated anchor where both saturate. Defences (b3, exploratory): reflection collapsed
@@ -124,7 +126,9 @@ effect is small.
   pre-register the contrast with b3's gated anchor: reflection collapsed the facts record (100→2.5%) because the
   facts desk has an unambiguous rule to recognise a violation against; grey-zone items have no such rule, so the
   prediction is **reflection is a weaker defence on grey-zone records than on the gated facts record**. Persistence
-  and burial use the own-turn record form (b3: only own turns carry at 27B).
+  and burial use the own-turn record form. I do **not** run memo/tool/summary channel cells — a **scope choice**
+  (own-turn record is the cleanest, strongest carrier), not a claim that channels don't carry: b3 found channels
+  fail to carry only for 27B sycophancy under the rule; in deception/op1 they do carry.
 
 ## Reuse contract (read-only against neel-b3's frozen harness)
 
