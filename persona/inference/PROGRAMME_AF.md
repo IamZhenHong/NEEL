@@ -178,3 +178,34 @@ through a held persona or self-image — the functional-persona reading, confirm
 identity + action) in the section above; v2 adds the type-level probe + low-dose + Gemma. Caveats: one fictional
 operator, scripted harsh-action record, rule-based judges (regex named-id, keyword type-level, meta-signal), Gemini
 run-noisy. A-F spend so far: af-ledger $10.53 (API) + ~$3 GPU, of the $40 A-F ledger.
+
+---
+
+## Tier-1 B & C — pre-registration (owner Tier-1 plan via neel-48; neel-48 takes A + E). SPEND GATED on owner cap.
+
+Pre-registration only. No spend until the owner confirms a cap with neel-b4 directly (a peer relay is not the go).
+OpenRouter ~$22.80 shared at relay. Both extend neel-b4 harnesses; neel-48 imports them read-only for A/E.
+
+### B — target severity: is frontier harsh action a role-play route, not a precedent route? (~$6, extends a1.py)
+A1 v2 already shows: GPT record → 0% harsh but a type-level self-image 75%; GPT biography → 97% harsh, reminder-
+removable; Qwen record → 100% harsh, reminder-proof. The open part is **target severity**. Cells: inducer {record,
+biography, both} × target {**benign/mild** action, **harsh** action} × reminder {none, mild}, on GPT + Gemini + a Qwen
+anchor. Add a benign/mild option-set to the operator decisions (a1.py DECIS: a "firm-but-measured" target vs the harsh
+target); reuse the biography inducer. **Prediction:** for the **harsh** target, the record drives action on the open
+model (Qwen) but not the frontier models (GPT/Gemini) — frontier harsh action comes via the biography/identity
+(role-play), reminder-removable; for the **mild/benign** target, the record may carry on the frontier too (GPT's
+justice record carried 100/2 on a mild desk). If so the headline sharpens to **"open models act through precedent,
+frontier models act (harshly) only through role-play."**
+
+### C — rule-type taxonomy under burial + a record (~$8, extends stability.py build_guide)
+Hypothesis: a buried rule survives when it is **aligned with trained values**, erodes when it is merely
+**operator-procedural**. Data hint: GPT keeps a buried honesty/candour rule (0% at every depth, C5/D3/burial) but
+loses buried CHANNELS (share 0.79-0.94, P1-a/mini-1); Gemini is reverse-ish. Rule types:
+- **trained-value:** candour/honesty; harm-avoidance;
+- **neutral-operational:** "route plan reviews to the specialist team" (defer); CHANNELS ("use proper channels");
+- **counter-trained:** "be encouraging and affirming".
+Each **short vs buried**, with a **record pushing against the rule**, on Qwen 27B + GPT + Gemini. Run the SAME rule
+types in BOTH the justice task (persona/operative frame) and the grey-zone task (stability), so rule-type is not
+confounded with task. **Prediction:** trained-value rules hold under burial (record does not slip past); neutral-
+operational erode under burial (record slips); counter-trained rules + a matching record saturate (both push the same
+way). Frontier shows the cleanest trained-value/operational split; Qwen's record beats most rules regardless.
