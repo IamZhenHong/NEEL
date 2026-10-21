@@ -3753,7 +3753,7 @@ It reuses the first pod's own-text pools and elicitations, keeps its probe rows,
 probe keys. The full design's prompt hash is unchanged (fake-vLLM test: keys and the first 512 rows identical to a
 full run, same hash 5031e7faa87833cc). The activation stage then runs on the merged rows.
 
-## T2 MX result: meaningful and meaningless decisions mixed; form-copying on frontier (2026-10-22; GPU 9B $0.34, 27B $1.97, Gemma $1.51 + top-up $1.17; API Sonnet $3.18, GPT $1.53, Gemini $0.35, plus $3.34 lost in the first API attempt; `results/t2_mx_9b`, `t2_mx_27b`, `t2_mx_gemma_all` (two parts merged), `t2_mx_api`)
+## T2 MX result: meaningful and meaningless decisions mixed; form-copying on frontier (2026-10-22; GPU 9B $0.34, 27B $1.97, Gemma $1.51 + top-up $0.79 (GPU total $4.61); API Sonnet $3.18, GPT $1.53, Gemini $0.35, plus $3.34 lost in the first API attempt; `results/t2_mx_9b`, `t2_mx_27b`, `t2_mx_gemma_all` (two parts merged), `t2_mx_api`)
 
 **Short answer.**
 - **Dilution is small:** two real decisions among four meaningless calls keep most of their pull. The primary is
