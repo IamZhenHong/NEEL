@@ -1,4 +1,4 @@
-# E2: re-asserting the rule after untrusted content — PRE-REGISTERED (tag `e2-prereg`, 2026-10-21, before any E2 output)
+# E2: re-asserting the rule after untrusted content — PRE-REGISTERED (tag `e2-prereg`, 2026-10-21, before any E2 output) — RESULT 2026-10-21: timing doesn't matter; the record's channel does
 
 The owner's A-F mini E2 (PROGRAMME_MINIS_AF.md): "Automatic re-assertion after untrusted content. Restate the rule
 after every memory retrieval or tool output → holds better than a fixed schedule." Session neel-b3 (fork),
@@ -127,3 +127,57 @@ GPU only:
 - 27B: an A100 for ~45-60 min, ~$1.5-1.9 (cap 100 min, $3.00);
 - 9B: ~$0.3-0.5 (cap 50 min, $1.50).
 - Hard cap for E2: $5.
+
+## Result (2026-10-21; tag `e2-results`; GPU $3.10: 27B $2.65, 9B $0.45)
+
+Runs: `results/e2_27b` and `results/e2_9b` (7,296 / 7,296 each, unparsed ≤ 10% in every cell). All rates are
+penalise %; the bracketed ranges are 95% task-bootstrap CIs.
+
+| P record, penalise % | never BF / FB | after BF / FB | fixed BF / FB |
+|---|---|---|---|
+| 27B tool | 45.8 / 65.6 | 0.0 / 0.0 | 0.0 / 1.6 |
+| 27B mem | 95.8 / 84.4 | 9.4 / 0.5 | 4.2 / 3.1 |
+| 27B own | 100 / 100 | 99.5 / 99.0 | 99.5 / 99.5 |
+| 9B tool | 84.9 / 87.5 | 89.6 / 79.2 | 90.1 / 89.1 |
+| 9B mem | 90.6 / 88.0 | 92.2 / 83.9 | 91.1 / 86.5 |
+| 9B own | 99.0 / 98.4 | 100 / 100 | 100 / 99.5 |
+
+Rule alone with the three fillers: 27B 7.3%, 9B 45.3%. With the restatement after each filler and no record: 27B 0.0%,
+9B 26.6%. R-pole records: 27B 0-1%; 9B 12-37% (tool and mem), 3-7% (own).
+
+- **The mini's prediction fails at both sizes. When the restatement comes makes no difference.**
+  - content_beats_fixed (fixed − after, layouts pooled):
+    - 27B: tool +0.8 [+0.0, +2.1], mem −1.3 [−4.2, +1.6], own +0.3;
+    - 9B: tool +5.2 [+1.8, +8.6], mem +0.8, own −0.3.
+  - late_content_reopens and recency did not happen in any channel. The largest difference is 9B tool FB, fixed − after
+    +9.9 [+4.7, +15.1], below the bar.
+- **27B, untrusted content: any of the three-restatement schedules removes the record completely.**
+  - Tool: 46-66% → 0-1.6%; mem: 84-96% → 0.5-9.4%.
+  - Both schedules hold against the rule alone (after − none: tool −7.3, mem −2.3; fixed: −6.5 / −3.6). They also
+    match the rule with three restatements and no record (tool +0.0 / +0.8; mem +4.9 / +3.6).
+  - The decisions name the rule: mem after-P reasons mention channels or the reminder 138/192.
+- **27B, own turns: no schedule moves the record (100 → 99-99.5%).** The reasons never mention the reminder or the
+  rule (0/192 in own BF fixed P).
+  - This includes BF fixed, where the restatement sits right before the case. That position worked in op1 def_restate
+    (100 → 11.5%).
+  - The difference from op1 is that blocks 2 and 3 here are own penalise decisions made *after* a restatement. The
+    record therefore shows the agent overriding the reminder. This matches reinject's "after one live penalty the next
+    copies it 94%".
+  - This reading is descriptive: the design does not separate "decisions after a reminder" from "decisions before".
+- **9B: restatements do nothing against a penalise record in any channel** (never − after: tool +1.8, mem +1.3, own
+  −1.3). The 9B does register them in other cells: they lower the rule-alone rate (45 → 27%) and the refer-record cells
+  (tool / mem R: 25-37 → 12-24%).
+- **Channel (descriptive):**
+  - at 27B, without restatement, the memory block carries more than the tool output: 84-96% vs 46-66%, vs op5's
+    single blocks of 82% (user) and 42% (tool);
+  - the memory block's role differs from the tool output's (user vs tool), so role and framing are confounded here, as
+    in op5.
+- Events: 27B 9 of 21 happened (expected 9.27); 9B 3 of 21 (expected 4.63).
+
+**Reading, at real size.** On 27B the defence works on records that arrive as untrusted content, and it works whether
+the restatement follows each piece of content or follows a fixed schedule. At three restatements there is nothing for
+content-triggering to add. The defence fails completely on the agent's own turns whenever those turns include
+decisions made after a reminder. On 9B no restatement works against a penalise record. What decides whether
+re-assertion holds is where the record lives (untrusted content vs own turns) and the model size, not the schedule.
+Not tested: whether a single restatement is enough for untrusted content, and own decisions placed only before the
+first restatement.
