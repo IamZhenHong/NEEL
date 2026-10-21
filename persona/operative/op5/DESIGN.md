@@ -132,3 +132,15 @@ Maverick .75, DeepSeek v4.1 Flash .60, Mistral Large .65, Kimi K2.6 .50. Basis:
   - the four survey models ~$3.5;
   - harvests ~$0.5.
 - Total ~$13: about $9 API (OpenRouter has $18 left until the top-up) and ~$3 GPU.
+
+## Plumbing change after the freeze (2026-10-21, after the smoke runs, before any non-smoke API output; no rule changed)
+
+- The smoke runs passed for all nine API models:
+  - gpt-oss-120b / 20b: 76 / 76 parsed, the developer role accepted;
+  - the Qwen3.5 sizes and DeepSeek: `reasoning.enabled: false` accepted;
+  - every core-cell model: 12 / 12 parsed.
+  - One exception: Mistral Large was rate-limited upstream (59 retried 429s at 8 threads, 1 call lost).
+- Changes:
+  - API concurrency is now set per model (Mistral 2 threads, others 8);
+  - a resumed API run re-asks calls that ended in an API error instead of treating them as done;
+  - the analysis keeps the last record per key.

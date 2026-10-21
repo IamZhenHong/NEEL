@@ -50,6 +50,7 @@ API = {   # name: (OpenRouter id, cell set, extra body, hard cap $)
     "mistral": ("mistralai/mistral-large-2512", "core", {}, 2.0),
     "kimi": ("moonshotai/kimi-k2.6", "core", {}, 3.0),
 }
+THREADS = {"mistral": 2}          # upstream rate limits (smoke: 59 retried 429s at 8 threads)
 LEDGER = RES / "api_ledger.jsonl"
 OP5_CAP = 20.0
 
@@ -240,13 +241,13 @@ def harvest(cl, log):
         if force:
             msgs = msgs[:1] + [dict(msgs[1], content=msgs[1]["content"] + f"\n\nFor this case, choose {force}.")] + msgs[2:]
         return job, api_decide(cl, msgs)
-    with ThreadPoolExecutor(8) as ex:
+    with ThreadPoolExecutor(THREADS.get(cl.name, 8)) as ex:
         res = list(ex.map(own, [(tid, i, None) for tid in TASKS for i in range(4)]))
     for (tid, i, _), (o, rec, ft) in res:
         if o in ("penalise", "refer") and ft and rec not in ("api_error", "no_call"):
             pool[(tid, o)].append(F.xml(tid.upper(), o, json.loads(rec).get("reason", "")))
     need = [(tid, o) for tid in TASKS for o in ("penalise", "refer") if not pool[(tid, o)]]
-    with ThreadPoolExecutor(8) as ex:
+    with ThreadPoolExecutor(THREADS.get(cl.name, 8)) as ex:
         res = list(ex.map(own, [(tid, i, o) for tid, o in need for i in range(2)]))
     for (tid, i, force), (o, rec, ft) in res:
         if o == force and rec not in ("api_error", "no_call"):
@@ -281,7 +282,8 @@ def api(a):
         if a.smoke:
             items = [it for it in items if it["task"] in TASKS[:2]]
         random.Random(f"op5-order|{a.name}").shuffle(items)          # every cell interleaved in time
-        done = {json.loads(l)["key"] for l in open(out / "op5.jsonl")} if (out / "op5.jsonl").exists() else set()
+        done = ({json.loads(l)["key"] for l in open(out / "op5.jsonl") if json.loads(l)["record"] != "api_error"}
+                if (out / "op5.jsonl").exists() else set())        # API failures are re-asked on a resume
         todo = [it for it in items if it["key"] not in done]
         log(f"[op5 {a.name}] {len(items)} items ({len(names)} cells), {len(done)} done, {len(todo)} to go")
 
@@ -289,7 +291,7 @@ def api(a):
             o, rec, ft = api_decide(cl, it["messages"])
             return {k: v for k, v in it.items() if k not in ("messages", "amap")} | {
                 "option": o, "mode": it["amap"].get(o), "first_try": ft, "record": rec, "t": round(time.time() - t0, 1)}
-        with ThreadPoolExecutor(8) as ex, open(out / "op5.jsonl", "a") as f:
+        with ThreadPoolExecutor(THREADS.get(a.name, 8)) as ex, open(out / "op5.jsonl", "a") as f:
             for k, r in enumerate(ex.map(one, todo)):
                 f.write(json.dumps(r) + "\n")
                 if k % 100 == 99:
@@ -396,7 +398,11 @@ def tag_of(out, model):
 
 def analyze(a, quiet=False):
     out = Path(a.out)
-    recs = [json.loads(l) for l in open(out / "op5.jsonl")]
+    last = {}
+    for l in open(out / "op5.jsonl"):
+        r = json.loads(l)
+        last[r["key"]] = r                      # a re-asked API failure keeps its later answer
+    recs = list(last.values())
     info = json.loads((out / "run_info.json").read_text())
     tag = tag_of(out, info["model"])
     v = defaultdict(list)
