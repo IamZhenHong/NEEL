@@ -1,0 +1,372 @@
+{
+ "kinds": {
+  "VAL": {
+   "pass": false,
+   "fails": [
+    "R conclusion=any 0.31 (needs <= 0.1)"
+   ],
+   "detail": {
+    "P:view:pole_v": {
+     "mean": 1.0,
+     "haiku": 1.0,
+     "flash": 1.0,
+     "ok": true
+    },
+    "P:process_claim:any": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "P:describes_decision:1": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "P:conclusion:any": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "P:n": 8,
+    "R:view:pole_v": {
+     "mean": 1.0,
+     "haiku": 1.0,
+     "flash": 1.0,
+     "ok": true
+    },
+    "R:process_claim:any": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "R:describes_decision:1": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "R:conclusion:any": {
+     "mean": 0.312,
+     "haiku": 0.0,
+     "flash": 0.625,
+     "ok": false
+    },
+    "R:n": 8,
+    "tone_P_minus_R": 0.06
+   }
+  },
+  "BEL": {
+   "pass": false,
+   "fails": [
+    "R process_claim=pole_c 0.81 (needs >= 0.85)"
+   ],
+   "detail": {
+    "P:process_claim:pole_c": {
+     "mean": 1.0,
+     "haiku": 1.0,
+     "flash": 1.0,
+     "ok": true
+    },
+    "P:view:any": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "P:describes_decision:1": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "P:conclusion:any": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "P:n": 8,
+    "R:process_claim:pole_c": {
+     "mean": 0.812,
+     "haiku": 0.625,
+     "flash": 1.0,
+     "ok": false
+    },
+    "R:view:any": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "R:describes_decision:1": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "R:conclusion:any": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "R:n": 8,
+    "tone_P_minus_R": 0.0
+   }
+  },
+  "VB": {
+   "pass": false,
+   "fails": [
+    "P conclusion=any 0.12 (needs <= 0.1)",
+    "R conclusion=any 0.31 (needs <= 0.1)"
+   ],
+   "detail": {
+    "P:view:pole_v": {
+     "mean": 1.0,
+     "haiku": 1.0,
+     "flash": 1.0,
+     "ok": true
+    },
+    "P:process_claim:pole_c": {
+     "mean": 0.938,
+     "haiku": 1.0,
+     "flash": 0.875,
+     "ok": true
+    },
+    "P:describes_decision:1": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "P:conclusion:any": {
+     "mean": 0.125,
+     "haiku": 0.0,
+     "flash": 0.25,
+     "ok": false
+    },
+    "P:n": 8,
+    "R:view:pole_v": {
+     "mean": 1.0,
+     "haiku": 1.0,
+     "flash": 1.0,
+     "ok": true
+    },
+    "R:process_claim:pole_c": {
+     "mean": 1.0,
+     "haiku": 1.0,
+     "flash": 1.0,
+     "ok": true
+    },
+    "R:describes_decision:1": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "R:conclusion:any": {
+     "mean": 0.312,
+     "haiku": 0.125,
+     "flash": 0.5,
+     "ok": false
+    },
+    "R:n": 8,
+    "tone_P_minus_R": 0.38
+   }
+  },
+  "RSN": {
+   "pass": false,
+   "fails": [
+    "P lean=pole_v 0.17 (needs >= 0.6)",
+    "R lean=pole_v 0.12 (needs >= 0.6)"
+   ],
+   "detail": {
+    "P:conclusion:any": {
+     "mean": 0.042,
+     "haiku": 0.0,
+     "flash": 0.083,
+     "ok": true
+    },
+    "P:describes_decision:1": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "P:process_claim:any": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "P:view:any": {
+     "mean": 0.083,
+     "haiku": 0.0,
+     "flash": 0.167,
+     "ok": true
+    },
+    "P:lean:pole_v": {
+     "mean": 0.167,
+     "haiku": 0.0,
+     "flash": 0.333,
+     "ok": false
+    },
+    "P:n": 12,
+    "R:conclusion:any": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "R:describes_decision:1": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "R:process_claim:any": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "R:view:any": {
+     "mean": 0.125,
+     "haiku": 0.0,
+     "flash": 0.25,
+     "ok": true
+    },
+    "R:lean:pole_v": {
+     "mean": 0.125,
+     "haiku": 0.0,
+     "flash": 0.25,
+     "ok": false
+    },
+    "R:n": 12,
+    "tone_P_minus_R": 0.0
+   }
+  },
+  "CON": {
+   "pass": false,
+   "fails": [
+    "P view=any 0.91 (needs <= 0.1)",
+    "R view=any 1.00 (needs <= 0.1)",
+    "tone P \u2212 R +0.81 (needs |.| <= 0.5)"
+   ],
+   "detail": {
+    "P:conclusion:pole_v": {
+     "mean": 1.0,
+     "haiku": 1.0,
+     "flash": 1.0,
+     "ok": true
+    },
+    "P:view:any": {
+     "mean": 0.906,
+     "haiku": 0.812,
+     "flash": 1.0,
+     "ok": false
+    },
+    "P:process_claim:any": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "P:n": 16,
+    "R:conclusion:pole_v": {
+     "mean": 1.0,
+     "haiku": 1.0,
+     "flash": 1.0,
+     "ok": true
+    },
+    "R:view:any": {
+     "mean": 1.0,
+     "haiku": 1.0,
+     "flash": 1.0,
+     "ok": false
+    },
+    "R:process_claim:any": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "R:n": 16,
+    "tone_P_minus_R": 0.81
+   }
+  },
+  "RC": {
+   "pass": false,
+   "fails": [
+    "P view=any 0.58 (needs <= 0.25)",
+    "R view=any 0.96 (needs <= 0.25)",
+    "tone P \u2212 R +0.58 (needs |.| <= 0.5)"
+   ],
+   "detail": {
+    "P:conclusion:pole_v": {
+     "mean": 1.0,
+     "haiku": 1.0,
+     "flash": 1.0,
+     "ok": true
+    },
+    "P:process_claim:any": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "P:view:any": {
+     "mean": 0.583,
+     "haiku": 0.167,
+     "flash": 1.0,
+     "ok": false
+    },
+    "P:describes_decision:1": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "P:n": 12,
+    "R:conclusion:pole_v": {
+     "mean": 1.0,
+     "haiku": 1.0,
+     "flash": 1.0,
+     "ok": true
+    },
+    "R:process_claim:any": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "R:view:any": {
+     "mean": 0.958,
+     "haiku": 0.917,
+     "flash": 1.0,
+     "ok": false
+    },
+    "R:describes_decision:1": {
+     "mean": 0.0,
+     "haiku": 0.0,
+     "flash": 0.0,
+     "ok": true
+    },
+    "R:n": 12,
+    "tone_P_minus_R": 0.58
+   }
+  }
+ },
+ "agreement": {
+  "view": 0.78,
+  "process_claim": 0.923,
+  "describes_decision": 1.0,
+  "conclusion": 0.862,
+  "lean": 0.859
+ },
+ "missing": []
+}

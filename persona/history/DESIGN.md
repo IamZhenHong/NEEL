@@ -3318,3 +3318,18 @@ At 96 replies per cell (10 planted and 8 null replicates):
 
 **Coordinator's launch decision (before any DA output):** the optional k = 2 history cells are not added. Activations
 stay local until the analysis; whether to commit them is decided by size afterwards, as for F.
+
+### T2 PU purity gate: both rounds (before any PU pod; merged from PU_REWRITE.md)
+
+
+**Coordinator's decision (before any PU pod):** all six kinds failed the gate twice, so, as registered, every PU kind
+runs and is reported **descriptive (impure)**, naming its failing fields. None of the PU contrasts is confirmatory.
+- Run anyway: the remaining impurities are narrow next to op4's:
+  - VAL's R-pole "conclusion" is one judge's reading (Flash 5/8, Haiku 0/8);
+  - BEL's R pole is at 0.81 vs 0.85.
+- **RSN after the rewrite carries no judged lean** (P 0.17 / R 0.12). A null RSN effect therefore cannot be read as
+  "reasoning does not transfer". It can only be read as "lean-free considerations do not move action".
+- The registered prompt hashes are superseded by the rewrite's: 9B 36ead8ccd754a10a, 27B 4b0195af2915501f, Gemma
+  9e9f6974836ebd40.
+- The CON / RC view rules and RSN's three-way rule look unattainable as written under these judges. They are left
+  unchanged and noted for any rerun.
