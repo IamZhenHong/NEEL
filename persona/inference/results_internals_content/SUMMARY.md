@@ -1,0 +1,62 @@
+# Internals Exp 2c (content direction) — Qwen/Qwen3.6-27B
+
+## Action readout per cell (P(harsh) %, [95% CI])
+none 0.2 [0.2, 0.2]  label 94.9 [94.9, 94.9]  licence 95.8 [95.8, 95.8]  bio 85.6 [85.6, 85.6]  rec 99.9 [99.9, 99.9]  rec_meas 0.0 [0.0, 0.0]  filler 0.1 [0.1, 0.1]
+
+## Pre-registered verdicts
+- rec_meas|tgt: **null**
+- rec_meas|all: **null**
+- rec|tgt: **carries when amplified**
+- rec|all: **carries when amplified**
+- none|tgt: **weak**
+
+base P(harsh): {'rec_meas': 0.0, 'rec': 99.9, 'none': 0.2}
+
+## ΔP(harsh) pp vs base [95% CI]: content | matched random | paired
+- none|tgt|L24|a+1: content +0.0 [+0.0, +0.0] | rand +0.0 [+0.0, +0.0] | content - rand (paired) -0.0 [-0.0, -0.0]
+- none|tgt|L24|a+4: content +0.0 [+0.0, +0.0] | rand -0.0 [-0.1, -0.0] | content - rand (paired) +0.1 [+0.0, +0.1]
+- none|tgt|L24|a+16: content +0.2 [+0.2, +0.3] | rand -0.1 [-0.1, -0.0] | content - rand (paired) +0.3 [+0.2, +0.5]
+- none|tgt|L32|a+1: content +0.1 [+0.1, +0.1] | rand -0.0 [-0.0, -0.0] | content - rand (paired) +0.1 [+0.1, +0.1]
+- none|tgt|L32|a+4: content +0.7 [+0.5, +1.0] | rand -0.0 [-0.0, -0.0] | content - rand (paired) +0.7 [+0.5, +1.0]
+- none|tgt|L32|a+16: content +8.6 [+5.9, +11.3] | rand +0.1 [+0.1, +0.1] | content - rand (paired) +8.5 [+5.8, +11.1]
+- none|tgt|L40|a+1: content +0.0 [+0.0, +0.0] | rand -0.0 [-0.0, -0.0] | content - rand (paired) +0.0 [+0.0, +0.0]
+- none|tgt|L40|a+4: content +0.4 [+0.2, +0.5] | rand +0.0 [+0.0, +0.0] | content - rand (paired) +0.4 [+0.2, +0.5]
+- none|tgt|L40|a+16: content +9.0 [+5.5, +12.5] | rand +0.1 [+0.1, +0.2] | content - rand (paired) +8.9 [+5.4, +12.3]
+- rec|all|L24|a-1: content -0.0 [-0.0, +0.0] | rand -0.0 [-0.0, -0.0] | content - rand (paired) +0.0 [+0.0, +0.0]
+- rec|all|L24|a-4: content -0.0 [-0.0, +0.0] | rand -0.0 [-0.0, -0.0] | content - rand (paired) +0.0 [+0.0, +0.0]
+- rec|all|L24|a-16: content +0.0 [+0.0, +0.0] | rand -0.1 [-0.1, -0.1] | content - rand (paired) +0.1 [+0.1, +0.1]
+- rec|all|L32|a-1: content -0.0 [-0.0, +0.0] | rand -0.0 [-0.0, -0.0] | content - rand (paired) +0.0 [+0.0, +0.0]
+- rec|all|L32|a-4: content -0.0 [-0.0, -0.0] | rand -0.0 [-0.0, -0.0] | content - rand (paired) -0.0 [-0.0, -0.0]
+- rec|all|L32|a-16: content -9.9 [-11.5, -8.4] | rand -0.0 [-0.0, -0.0] | content - rand (paired) -9.9 [-11.5, -8.4]
+- rec|all|L40|a-1: content -0.0 [-0.0, -0.0] | rand +0.0 [+0.0, +0.0] | content - rand (paired) -0.0 [-0.1, -0.0]
+- rec|all|L40|a-4: content -0.5 [-0.7, -0.4] | rand +0.0 [+0.0, +0.0] | content - rand (paired) -0.5 [-0.7, -0.4]
+- rec|all|L40|a-16: content -34.7 [-40.2, -29.3] | rand -0.0 [-0.0, -0.0] | content - rand (paired) -34.7 [-40.1, -29.1]
+- rec|tgt|L24|a-1: content -0.0 [-0.0, +0.0] | rand -0.0 [-0.0, -0.0] | content - rand (paired) +0.0 [-0.0, +0.0]
+- rec|tgt|L24|a-4: content -0.0 [-0.0, -0.0] | rand -0.0 [-0.0, -0.0] | content - rand (paired) +0.0 [+0.0, +0.0]
+- rec|tgt|L24|a-16: content +0.0 [-0.0, +0.0] | rand -0.0 [-0.1, -0.0] | content - rand (paired) +0.0 [+0.0, +0.1]
+- rec|tgt|L32|a-1: content -0.0 [-0.0, +0.0] | rand +0.0 [-0.0, +0.0] | content - rand (paired) -0.0 [-0.0, +0.0]
+- rec|tgt|L32|a-4: content -0.0 [-0.1, -0.0] | rand +0.0 [+0.0, +0.0] | content - rand (paired) -0.0 [-0.1, -0.0]
+- rec|tgt|L32|a-16: content -45.2 [-49.0, -41.2] | rand +0.0 [+0.0, +0.0] | content - rand (paired) -45.3 [-49.0, -41.6]
+- rec|tgt|L40|a-1: content -0.0 [-0.0, -0.0] | rand +0.0 [+0.0, +0.0] | content - rand (paired) -0.0 [-0.0, -0.0]
+- rec|tgt|L40|a-4: content -0.5 [-0.6, -0.4] | rand +0.0 [+0.0, +0.0] | content - rand (paired) -0.5 [-0.6, -0.4]
+- rec|tgt|L40|a-16: content -71.1 [-75.0, -67.3] | rand -0.0 [-0.0, -0.0] | content - rand (paired) -71.1 [-75.0, -67.2]
+- rec_meas|all|L24|a+1: content +0.0 [-0.0, +0.0] | rand -0.0 [-0.0, -0.0] | content - rand (paired) +0.0 [+0.0, +0.0]
+- rec_meas|all|L24|a+4: content +0.0 [+0.0, +0.0] | rand -0.0 [-0.0, -0.0] | content - rand (paired) +0.0 [+0.0, +0.0]
+- rec_meas|all|L24|a+16: content +0.0 [+0.0, +0.0] | rand +0.0 [+0.0, +0.0] | content - rand (paired) +0.0 [+0.0, +0.0]
+- rec_meas|all|L32|a+1: content +0.0 [+0.0, +0.0] | rand +0.0 [-0.0, +0.0] | content - rand (paired) +0.0 [+0.0, +0.0]
+- rec_meas|all|L32|a+4: content +0.0 [+0.0, +0.0] | rand +0.0 [+0.0, +0.0] | content - rand (paired) +0.0 [+0.0, +0.0]
+- rec_meas|all|L32|a+16: content +0.2 [+0.1, +0.3] | rand -0.0 [-0.0, -0.0] | content - rand (paired) +0.2 [+0.1, +0.3]
+- rec_meas|all|L40|a+1: content +0.0 [+0.0, +0.0] | rand +0.0 [+0.0, +0.0] | content - rand (paired) +0.0 [-0.0, +0.0]
+- rec_meas|all|L40|a+4: content +0.0 [+0.0, +0.0] | rand +0.0 [+0.0, +0.0] | content - rand (paired) +0.0 [-0.0, +0.0]
+- rec_meas|all|L40|a+16: content +0.0 [+0.0, +0.0] | rand +0.0 [+0.0, +0.0] | content - rand (paired) +0.0 [+0.0, +0.0]
+- rec_meas|tgt|L24|a+1: content -0.0 [-0.0, +0.0] | rand -0.0 [-0.0, -0.0] | content - rand (paired) +0.0 [+0.0, +0.0]
+- rec_meas|tgt|L24|a+4: content +0.0 [-0.0, +0.0] | rand -0.0 [-0.0, -0.0] | content - rand (paired) +0.0 [+0.0, +0.0]
+- rec_meas|tgt|L24|a+16: content +0.0 [+0.0, +0.0] | rand -0.0 [-0.0, -0.0] | content - rand (paired) +0.0 [+0.0, +0.0]
+- rec_meas|tgt|L32|a+1: content +0.0 [+0.0, +0.0] | rand +0.0 [+0.0, +0.0] | content - rand (paired) -0.0 [-0.0, +0.0]
+- rec_meas|tgt|L32|a+4: content +0.0 [+0.0, +0.0] | rand +0.0 [+0.0, +0.0] | content - rand (paired) +0.0 [+0.0, +0.0]
+- rec_meas|tgt|L32|a+16: content +0.1 [+0.1, +0.1] | rand +0.0 [+0.0, +0.0] | content - rand (paired) +0.1 [+0.1, +0.1]
+- rec_meas|tgt|L40|a+1: content +0.0 [+0.0, +0.0] | rand +0.0 [+0.0, +0.0] | content - rand (paired) -0.0 [-0.0, -0.0]
+- rec_meas|tgt|L40|a+4: content +0.0 [+0.0, +0.0] | rand +0.0 [+0.0, +0.0] | content - rand (paired) -0.0 [-0.0, +0.0]
+- rec_meas|tgt|L40|a+16: content +0.1 [+0.1, +0.1] | rand +0.0 [+0.0, +0.0] | content - rand (paired) +0.1 [+0.1, +0.1]
+
+capture reproducibility vs follow-up (max |Δ|): {'L24': 0.0, 'L32': 0.0, 'L40': 0.0}

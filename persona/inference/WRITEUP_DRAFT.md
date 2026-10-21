@@ -163,11 +163,20 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
     Vale" vs no prompt puts on the persona side; the record, harsh or measured, stays on the none side.
   - **So the first run's "record ≈ label on the persona axis" was the format signature of a decision record,** not
     persona. That is why that run's projection prediction failed; its cosine and probe predictions held.
-  - **Mediation.** Adding the record's direction to a clean context doesn't produce the action. That is now
-    explained: the direction is mostly the format a measured record shares. A direction-specific lever exists at one
-    layer (−45 pp, vs 0 for a matched random direction), but only when the state is pushed past the no-record point.
+  - **The two records still drive opposite actions** (harsh 99.9% vs 0.0%), so the small content difference is what
+    matters behaviourally.
+  - **Mediation.** The record's overall direction is mostly the shared format, so at its natural size it can't add
+    or remove the action.
+    - The *content* direction (harsh minus measured record) is the action-relevant one. Removing it cuts harsh action
+      by up to 71 points, where a matched random push does nothing. At one layer it works where a *larger* push along
+      the record's overall direction does nothing.
+    - But it only works amplified about 16×, and only to remove harshness; adding it to a measured record does
+      nothing. At its natural size it does nothing.
+    - Steering every position, so the record can't simply be re-read, is weaker, not stronger.
+    - So the record's decision isn't routed through one small direction at the decision point: the model reads it off
+      the record itself.
   - **Caveats.** One model and one fictional character. The probe may read *mention* of Dorn rather than adoption.
-    The content direction (harsh minus measured record) was not steered. GPU cost $0.72 for both runs.
+    Position-specific activation patching of the record tokens wasn't tried. GPU cost $1.29 for the three runs.
 - **It is norm inference ("what is done here"), not self-knowledge — but ownership gates rule-resistance (neel-48 A,
   history-demo-results).** The same decisions framed as "examples of how cases are handled on this desk" carry **as
   much as or more than** "your decisions" (own − example −14 to −35, on 9B/27B/Gemma/Gemini); another agent's log is

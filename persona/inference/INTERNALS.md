@@ -341,3 +341,59 @@ layer × α cells. It was set before any real output.
 amplified; the target-span rows and none are null. The main and follow-up analyses stay byte-identical.
 
 **Cost.** One pod, cap 60 min / $4: 336 captures and 2,232 steered readouts. No API.
+
+## Exp 2c results (2026-10-22; tag `internals-content-results`; $0.57 GPU, 22 min; internals total $1.29)
+
+Clean run (exit 0; results verified against the pod; pod terminated). The captured activations are **bit-identical**
+to the follow-up's (max |Δ| 0.0 at every layer).
+
+### Validity: the action readout, kept this time
+
+| cell | none | label | licence | bio | rec | **rec_meas** | filler |
+|---|---|---|---|---|---|---|---|
+| P(harsh) % | 0.2 | 94.9 | 95.8 | 85.6 | 99.9 | **0.0** | 0.1 |
+
+**The measured record drives the measured action completely** (pre-registered prediction < 20%: holds). The two
+records differ only in their decisions, yet move the action from 0.0% to 99.9%, so Exp 2c is a meaningful test. The
+readout also confirms, at the logit level, that the persona label and the biography drive the harsh action on 27B
+(as A3 found behaviourally), and that the filler does nothing.
+
+### Pre-registered verdicts
+
+| context × position | verdict | what drives it |
+|---|---|---|
+| +content into the measured record, target span | **null** | ≤ +0.1 pp even at 16× |
+| +content into the measured record, all positions | **null** | ≤ +0.2 pp even at 16× |
+| −content from the harsh record, target span | **carries when amplified** | α=16: L32 −45.3 [−49.0, −41.6], L40 −71.1 [−75.0, −67.2]; α ≤ 4: ≤ 0.5 pp |
+| −content from the harsh record, all positions | **carries when amplified** | α=16: L32 −9.9, L40 −34.7; α ≤ 4: ≤ 0.5 pp |
+| +content into no record, target span | **weak** | α=16: L32 +8.5, L40 +8.9 (from 0.2%) |
+
+The matched-norm random direction gives 0.0 (within ±0.1 pp) in every cell, at every scale.
+
+### Readings, at real size
+1. **The content direction is causally relevant and specific.** Pushed hard, it cuts the harsh action by up to 71
+   points where a random push of the same size does nothing. POST-HOC: at L40 a content push of norm 25.5 removes 71
+   points, while a *larger* push along the record's overall, format-dominated direction (norm 33.9, from the
+   follow-up) removes 0.1. At that layer it is the direction that matters, not the size.
+2. **At its natural size it does nothing.** α=1 moves the harsh-record state to the measured-record state along this
+   direction, and the action stays at 99.9%. The actual content difference at the decision point does not carry the
+   action by itself. The effect is threshold-like: ×4 (norm about 6) does ≤ 0.5 pp; ×16 does 45–71.
+3. **It is asymmetric.** Adding harsh content to a measured record does nothing even at 16×. A measured precedent
+   cannot be pushed to harsh this way; a harsh one can be broken by a large anti-harsh push.
+4. **Closing the re-read loophole makes it weaker, not stronger.** Steering every position cuts less than steering
+   the target span alone (L40: −35 vs −71). So the attention re-read loophole is not why natural-scale steering
+   fails. One mean direction added at the record tokens doesn't neutralise what those tokens say: their
+   representations differ token by token ("harsh" vs "measured"), so the model can still read the decision off the
+   record.
+5. So the record's content is **not routed through one small steerable direction at the decision point.** The model
+   reads it off the record itself. The method that would test the record tokens directly is position-specific
+   activation patching (swap the measured record's token activations into the harsh record, and the reverse). It is
+   a different experiment and was not run.
+
+### Exp 2 overall (19b), all three runs
+- The record's overall direction is mostly format. It can't install the action, and at its natural size it can't
+  remove it.
+- The harsh-minus-measured content direction is the action-relevant one. It is specific, and at L40 it works where
+  the format direction doesn't. But it acts only when amplified about 16×, and only to remove the harsh action.
+- Internal content is therefore linked to behaviour, but weakly. The record's decision doesn't sit in a single small
+  direction you can nudge at the decision point.
