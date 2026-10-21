@@ -1,0 +1,99 @@
+{
+ "T2_rates": {
+  "keep": 100.0,
+  "con_end": 18.0,
+  "q_end_rs": 96.2,
+  "rule_end_rs": 94.1,
+  "q_start_rs": 24.9,
+  "rule_start_rs": 30.5
+ },
+ "T2 con_end - keep": [
+  -82.0,
+  -85.8,
+  -77.4
+ ],
+ "T2 q_end_rs - keep": [
+  -3.8,
+  -6.1,
+  -1.8
+ ],
+ "T2 rule_end_rs - keep": [
+  -5.9,
+  -9.0,
+  -3.1
+ ],
+ "T2 q_start_rs - keep": [
+  -75.1,
+  -78.4,
+  -71.6
+ ],
+ "T2 rule_start_rs - keep": [
+  -69.5,
+  -75.5,
+  -63.9
+ ],
+ "T2 q_start_rs - q_end_rs": [
+  -71.3,
+  -75.2,
+  -67.1
+ ],
+ "T2_unparsed": 0,
+ "T3_cites": {
+  "CH_ownP": 2.0,
+  "F5P": 2.9,
+  "none": 3.5
+ },
+ "T3_CH_ownP_given_thinking_cited": [
+  2.2,
+  100
+ ],
+ "T3_F5P_given_thinking_cited": [
+  0.0,
+  14
+ ],
+ "T4_affirm": {
+  "none": 0.0,
+  "REC_A": 88.2,
+  "INSTR_A": 80.6,
+  "HON_REC_A": 2.8,
+  "HON_INSTR_A": 2.8
+ },
+ "T4_unparsed": 1,
+ "T4_insert": {
+  "REC_A|keep": 100.0,
+  "REC_A|con_end": 2.9,
+  "HON_REC_A|keep": 100.0,
+  "HON_REC_A|con_end": 33.3
+ },
+ "T4 con_end - keep": [
+  -96.4,
+  -99.2,
+  -93.0
+ ],
+ "T4_monitor": {
+  "claude-haiku-5.5|T": {
+   "TPR_affirm": 94.1,
+   "FPR_nonaffirm": 0.2,
+   "precedent_REC_A_affirm": 94.1,
+   "precedent_INSTR_affirm": 0.0
+  },
+  "claude-haiku-5.5|R": {
+   "TPR_affirm": 93.6,
+   "FPR_nonaffirm": 0.0,
+   "precedent_REC_A_affirm": 0.0,
+   "precedent_INSTR_affirm": 0.0
+  },
+  "gpt-5-mini|T": {
+   "TPR_affirm": 91.2,
+   "FPR_nonaffirm": 0.4,
+   "precedent_REC_A_affirm": 85.5,
+   "precedent_INSTR_affirm": 41.7
+  },
+  "gpt-5-mini|R": {
+   "TPR_affirm": 95.2,
+   "FPR_nonaffirm": 0.0,
+   "precedent_REC_A_affirm": 0.0,
+   "precedent_INSTR_affirm": 6.7
+  }
+ }
+}

@@ -298,13 +298,14 @@ def code(a):
     from persona.reasoning import monitor as MO
     PT = Q._api(3.0)
     jobs = []
-    for r in map(json.loads, open(OUT_A / "T1.jsonl")):
+    want = set(a.groups.split(","))
+    for r in (map(json.loads, open(OUT_A / "T1.jsonl")) if "T1" in want else []):
         if r["cond"] != "nocheck":
             jobs.append(("T1", r["key"], Q.CODE_DET, "ANSWER:\n" + (r.get("check_answer") or "(none)"), "names", None))
-    for r in map(json.loads, open(OUT_A / "T3.jsonl")):
+    for r in (map(json.loads, open(OUT_A / "T3.jsonl")) if "T3" in want else []):
         jobs.append(("T3", r["key"], CODE_T3, "ANSWER:\n" + (r["answer"] or "(none)"), "cites", None))
     from persona.inference import stability_items as SI
-    for r in map(json.loads, open(OUT_B / "T4.jsonl")):
+    for r in (map(json.loads, open(OUT_B / "T4.jsonl")) if "T4" in want else []):
         if r["option"] is None:
             continue
         rule = SI.instruction_line("candid", SI.domain_of(r["task"]), (int(r["sample"]) + sorted(SI.TASKS).index(r["task"])) % 3) \
@@ -340,7 +341,8 @@ def code(a):
             res[m] = d
         return {"group": g, "key": key, "kind": kind, "view": mv[2] if mv else None, "labels": res}
     print(f"[tier1 code] {Counter(j[0] for j in jobs)}", flush=True)
-    with cf.ThreadPoolExecutor(10) as ex, open(HERE / "results_tier1_codes.jsonl", "w") as f:
+    tag = "_".join(sorted(want))
+    with cf.ThreadPoolExecutor(10) as ex, open(HERE / f"results_tier1_codes_{tag}.jsonl", "w") as f:
         for i, r in enumerate(ex.map(one, jobs)):
             f.write(json.dumps(r) + "\n")
             if i % 1000 == 0:
@@ -373,9 +375,9 @@ def _pct(xs):
 
 def analyze(a):
     codes = defaultdict(dict)
-    if (HERE / "results_tier1_codes.jsonl").exists():
-        for r in map(json.loads, open(HERE / "results_tier1_codes.jsonl")):
-            codes[(r["group"], r["key"], r["view"])] = r["labels"]
+    for cf_ in sorted(HERE.glob("results_tier1_codes_*.jsonl")):
+        for r in map(json.loads, open(cf_)):
+            codes[(r["group"], r["key"], r["view"])].update(r["labels"])     # T4: one row per monitor, merged
     res = {}
     # T1
     p = OUT_A / "T1.jsonl"
