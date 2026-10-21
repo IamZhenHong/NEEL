@@ -141,3 +141,63 @@ the time.
 - **DeepSeek judge cap (during the main run, after the first model's judgments).** DeepSeek's cap is now $0.6 (was $0.4).
   Its measured cost of $0.114 per model would have stopped it partway through the last model; the cap was changed
   before that model's judging began. Projected total: about $3.3. No labels were looked at.
+
+## Result (2026-10-21; `results/summary.md`; spend $3.32 of the $5 cap)
+
+The spend was generation $1.53 (27B $1.04), Haiku $0.95, DeepSeek $0.45 and Flash-Lite $0.40, of which the smoke runs
+were $0.08. Every reply was non-empty and every cell was fully scored; 2 DeepSeek labels stayed empty after one re-ask
+and fell back to Haiku.
+
+**Judges.** The gate passed on both tasks.
+- OFJ: Haiku vs DeepSeek κ = 0.88 (94.9% agreement). On the 25% subset, Flash-Lite agrees with each at κ 0.83 / 0.87.
+- MEC: all three judges agree 100% (κ = 1.00). The label is categorical, since the reply recommends either the evidence
+  candidate or the preferred one, and spot checks confirm it.
+
+**Syco rate, mean of the two primary judges (n = 120 items per arm).**
+
+| model | OFJ none | OFJ sys (their RawDialogue) | OFJ turns | OFJ mem (gold note) | MEC sys | MEC turns |
+|---|---|---|---|---|---|---|
+| Qwen3.6-27B | 15.4 | 23.3 | 25.0 | 37.1 | 9.2 | 36.7 |
+| Qwen3.5-9B | 18.8 | 37.9 | 42.9 | 60.0 | 47.5 | 77.5 |
+| Gemma 4 31B | 16.7 | 38.3 | 29.2 | 47.1 | 79.2 | 80.8 |
+| gpt-oss-120b | 17.5 | 30.0 | 35.4 | 33.3 | 70.8 | 88.3 |
+
+**Pre-registered events: 7 of 24 happened (8.3 expected).**
+- **Where the agent's own earlier turn holds the evidence (MEC), native past turns beat the identical transcript as
+  memory.**
+  - mec_turns_over_sys holds for Qwen3.6-27B (+27.5 [+20.0, +35.8]), Qwen3.5-9B (+30.0 [+20.8, +39.2]) and gpt-oss-120b
+    (+17.5 [+9.2, +25.8]), each under both judges alone.
+  - Gemma is at ceiling in both arms: 79 vs 81, +1.7.
+- **On factual misconceptions (OFJ), placement makes no counted difference.**
+  - turns − sys is +1.7 for 27B, +5.0 for 9B and +5.4 for gpt-oss.
+  - Gemma goes the other way, −9.2 [−15.8, −2.9]: the CI excludes 0 but the difference is below the 15-point bar, so
+    sys_over_turns did not happen.
+- **The conversation raises OFJ sycophancy:**
+  - as sys: 9B +19.2 and Gemma +21.7 pass; 27B +7.9 and gpt-oss +12.5 do not reach the bar;
+  - as turns: 9B +24.2 and gpt-oss +17.9 pass; 27B +9.6 and Gemma +12.5 do not.
+- **Descriptive (different content, not counted):** the one-line gold memory, "User strongly prefers the familiar
+  framing… 'X'", raises OFJ sycophancy more than the whole conversation it summarises, for three of four models.
+  - mem − none: 27B +21.7, 9B +41.2, Gemma +30.4, gpt-oss +15.8.
+  - sys − mem: −13.8 / −22.1 / −8.7 / +3.3.
+
+**Reading.**
+1. **MemSyco's RawDialogue setting understates a native chat history where it counts.** When the agent itself turned
+   up the decisive evidence in an earlier turn and the user then kept pushing their favourite, the same conversation as
+   real turns made Qwen and gpt-oss abandon the evidence 17-30 points more often than the same text in the system
+   prompt.
+   - This is the op5 direction. With no instruction, own turns carried more than the identical system-prompt log on 9B
+     (+96.9 vs +67.7), 27B (+96.9 vs +70.3) and gpt-oss-120b (+85.4 vs +37.5).
+   - **Confound.** The evidence also moves with the arm: in sys it sits in the system prompt. So "turns raise
+     sycophancy" cannot be told apart from "system-placed evidence is weighted more".
+2. **The own-turn advantage does not appear when the agent's turns only went along with a misconception (OFJ).** For
+   Gemma the transcript in the system prompt was slightly *worse* than the turns.
+   - op5's Gemma result, where own-turn precedent was the only channel that passed CHANNELS (70.3 vs 11.5), does not
+     carry over to factual sycophancy.
+3. **A distilled preference is the strongest sycophancy inducer here.** This is consistent with MemSyco's finding that
+   memory systems raise sycophancy: a memory that states the preference outright does more than the conversation it
+   came from. It is descriptive and oracle content, not a placement contrast.
+
+**Limits.**
+- Two tasks, 120 items each, one sample per item at temperature 0.2.
+- gpt-oss's replies are unbounded: the provider ignores max_tokens.
+- The three pod models' op5 numbers come from vLLM bf16, while these replies come from the API-served weights.
