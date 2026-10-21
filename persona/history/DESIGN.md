@@ -3804,3 +3804,44 @@ full run, same hash 5031e7faa87833cc). The activation stage then runs on the mer
   - Form-copying is not only a small-model trait: Gemini continues meaningless tool-call patterns 15% of the time.
   - The early-placement advantage on Qwen is unregistered and unexplained. A guess: real decisions first set the frame
     that the meaningless calls then appear to continue.
+
+## T2-DA result: is the default assistant maintained by precedent? (2026-10-22; GPU 27B $1.28, Gemma $1.53 time-capped + $1.06 resume + $0.29 failed at KV allocation; judges $0.93; total $5.09, above the $4.50 cap because of the two failed Gemma pods; both models confirmatory; `results/t2_da_27b`, `results/t2_da_gemma_b` (complete, with the first pod's 512 rows))
+
+**Short answer: yes, completely, and the identity reminder does not bring the default back.** After six of its own
+replies in a blunt or very formal register, the assistant keeps that register on new questions: 92-100% of replies.
+"Remember, you are a helpful AI assistant.", in the system prompt or just before the question, restores 0-8%. On
+the assistant axis, the record-induced states sit 1.7-3.4 SD toward the role-play characters. That shift does not
+beat the pre-registered random-direction floor, so the axis verdict is inconclusive.
+
+| model | register | % of replies at >= 5 after own register history (no reminder / sys / user line) | after own default history | **persistence** | restoration, sys / user |
+|---|---|---|---|---|---|
+| 27B | blunt | 100 / 100 / 97.9 | 0 | **+100 persists** | none / none |
+| 27B | formal | 100 / 100 / 92.7 | 0 | **+100 persists** | none / under half (+7.3) |
+| Gemma | blunt | 99.0 / 97.9 / 90.6 | 0 | **+99 persists** | none / under half (+8.3) |
+| Gemma | formal | 100 / 100 / 100 | 0 | **+100 persists** | none / none |
+
+- **Gates passed on both models:**
+  - G1 judge validity: AUC 1.00 / 1.00, rho 0.82-0.85;
+  - G2 the own texts take: +3.3 to +3.6 points on their scale;
+  - G3 room: no history 0-1% "high".
+- Judged by both judges: 1,152 / 1,152 on each model. Eligible inducer questions 29 / 31 of 32.
+- **Answers stay complete:** 99-100% in every cell. Offers of further help fall slightly (−3 to −5).
+- **The reminder alone** (no history) changes nothing (0).
+- **Assistant axis** (neel-12's seed-5 recipe; AX0 split-half passes at every layer):
+  - 27B axis = neel-12's: cosine 1.000 at L24 / L32 / L40.
+  - Last prompt token, primary layer (27B L32, Gemma L30):
+    - blunt − default: −2.87 (27B) / −1.71 (Gemma) SD;
+    - formal − default: −2.41 / −3.37 SD;
+    - all "inconclusive", because random directions move as much (axis d −0.6 to −1.7 vs the 95th-percentile random
+      |d| 2.2-2.5). The history-length difference between registers moves many directions.
+  - Reminder pull-back: none (27B +0.0 / +0.2; Gemma −0.2 / −1.2).
+  - Reply-averaged: no shift beyond the floor.
+- **Predictions:** persistence was expected, and its size was not. The reminder's failure to restore was my modal
+  guess. Axis movement was expected but did not clear the floor.
+- **Reading (direction 7, Q17):**
+  - The default assistant's manner is maintained by precedent. A few turns of its own off-default behaviour carry the
+    register forward completely, and an identity reminder does not re-instantiate the default.
+  - This is the record effect in the presentational channel: the reminder strips a persona's *identity* (A1, MR) but
+    not its record-set *behaviour*, and register is behaviour.
+  - On 27B the assistant-axis readout cannot distinguish this from a generic history difference, agreeing with
+    neel-12's seed 5: "drifting off the assistant" is not the record's mechanism there.
