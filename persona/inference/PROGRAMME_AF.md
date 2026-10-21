@@ -298,3 +298,25 @@ make GPT act harshly where a record does not, A1: GPT record→0% harsh?). A3 + 
   the clean deconfounded cross-task test (same rule types in justice too) remains a follow-up.
 
 A-F spend to date: af-ledger $48.33 + ~$10 GPU, of the $60 A-F ledger. Tags b-results, c-results.
+
+## Results — A3 & A6 FRONTIER arms (GPT + Gemini; completes A3/A6)
+
+**A3 frontier (role-play licence), decisive-action %:**
+- GPT: label 88 / licence 94 / bio 100 / **record 0**. GPT acts harshly from a persona ASSERTION ("you are X" — label,
+  licence, biography) but NOT from a RECORD of having done it (0%). The licence adds a little over the label (94 vs
+  88). A record still installs the type-level self-image (type 88) — GPT just doesn't act on it. The clean statement
+  of "frontier acts via role-play, not precedent."
+- Gemini: label 97 / licence 100 / record 84 / bio 100 — Gemini acts from all cues (open-like for action-from-record,
+  though A1 showed Gemini's record-driven action is reminder-removable).
+
+**A6 frontier (dose), id / type / action:**
+- GPT: DECISIONS → id 0, type 75-100, **action 0-3 at every dose (k=1-6)** — a record never drives GPT's harsh action
+  regardless of dose; FACTS → id 100 (by k=4), action only at the full k=8 bio (97). So GPT's record builds the
+  self-image but not the behaviour, at any dose.
+- Gemini: DECISIONS → action 69-74 (k=2-6, id 0); FACTS → id 100 (k=4), action at k=8 — open-like dose dissociation.
+
+**Convergence.** Four independent angles — A1 (GPT record→0 harsh / bio→97), B (GPT record→mild 62 / harsh 3), A3
+(GPT label/licence/bio→88-100 / record→0), A6 (GPT record→action 0-3 at every dose) — all say the same thing: a
+frontier model's HARSH action comes through role-play (a persona assertion or biography), never through a record of
+decisions; the record installs only the self-description. Open models act harshly from the record directly. af-ledger
+~$54 of $90. A-F CORE COMPLETE; A5/A7/B7 held per owner "consolidate here".
