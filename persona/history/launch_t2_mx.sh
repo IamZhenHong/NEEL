@@ -12,4 +12,4 @@ if [ -n "${GPUS:-}" ]; then IFS=',' read -ra GPU_LIST <<< "$GPUS"; fi   # e.g. G
 uv run python infra/launch_run.py --name ${NAME:?} --allow-concurrent --max-minutes ${MAXMIN:?} --max-cost ${MAXCOST:?} \
   --gpus "${GPU_LIST[@]}" --container-gb ${CONTAINER_GB:-120} --cloud ${CLOUD:-SECURE} \
   --ship persona/history --ship persona/exemplar --ship vigilante/pod --ship vigilante/src --ship vigilante/__init__.py \
-  --ship infra --exclude persona/exemplar/jobs --results-dir persona/history/results/${DIR:?} -- env MODEL=$MODEL DIR=$DIR bash persona/history/pod_t2_mx.sh
+  --ship infra --exclude persona/exemplar/jobs --results-dir persona/history/results/${DIR:?} -- env MODEL=$MODEL DIR=$DIR START=${START:-0} bash persona/history/pod_t2_mx.sh

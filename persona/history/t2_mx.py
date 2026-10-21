@@ -138,6 +138,8 @@ def build(a):
 def run(a):
     from vllm import LLM
     its = build_items(a.model)
+    full_hash = DM.prompt_hash(its)
+    its = its[a.start:]                       # top-up: the items a time-capped pod did not reach (same keys and seeds)
     fmt = Q.fmt_of(a.model)
     t0 = time.time()
     llm = LLM(model=a.model, dtype="bfloat16", max_model_len=8192, seed=0, enable_prefix_caching=True,
@@ -158,7 +160,8 @@ def run(a):
             f.flush()
             print(f"[mx] {min(c0 + 1000, len(its))}/{len(its)} ({time.time() - t0:.0f}s)", flush=True)
     (out / "run_info.json").write_text(json.dumps({"model": a.model, "n": len(its), "line": D1.LINES[a.model],
-                                                   "hash": DM.prompt_hash(its), "seconds": round(time.time() - t0)}))
+                                                   "hash": full_hash, "start": a.start,
+                                                   "seconds": round(time.time() - t0)}))
     print(f"[mx] done ({time.time() - t0:.0f}s)", flush=True)
 
 
@@ -356,5 +359,6 @@ if __name__ == "__main__":
     ap.add_argument("--model", default="Qwen/Qwen3.5-9B")
     ap.add_argument("--arm", choices=["sonnet", "frontier"], default="sonnet")
     ap.add_argument("--out", default="")
+    ap.add_argument("--start", type=int, default=0)
     a = ap.parse_args()
     {"build": build, "run": run, "api": api, "analyze": analyze}[a.cmd](a)

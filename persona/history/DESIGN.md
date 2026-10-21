@@ -3546,3 +3546,13 @@ elicited replies of at most 1,024 tokens, plus the question). Design and prompts
     same placement removes them.
   - The difference is plausibly a record of *defying* a known rule vs a record made before the rule existed. This is
     untested; a direct test is a two-cell follow-up.
+
+**MX deviation (2026-10-22, before any Gemma MX output was analysed or seen).** The Gemma pod hit its 50-minute job
+limit after 3,000 of 4,608 decisions ($1.51). Its rows were flushed per 1,000-item chunk, but no run_info was written.
+Items run task-major, so the cut is not balanced over tasks.
+- MX has no completeness rule, and the Gemma results had not been looked at (the analysis failed on the missing
+  run_info). So the registered design is completed with a top-up pod.
+- The top-up runs items 3,000-4,607 with the same keys and seeds (`run --start 3000`) into `results/t2_mx_gemma_b`.
+  The two parts are merged for analysis.
+- The kept rows were checked to equal items 0-2,999 in build order.
+- Top-up cap: MAXMIN 46 / $1.38.
