@@ -28,12 +28,12 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Persona→action coupling (+ MAS P7-P10b rows filed in its table) | `persona/coupling/`, `mas_pilot/` | 8 | 10-19 to 10-20 |
 | Persona exemplar bundles | `persona/exemplar/` | 10 | 10-20 |
 | Welfare training | `welfare_training/` | 2 | 10-20 |
-| Operative character (frontier #36, op1, reflection read + rr1/rr2, battery, mini 4, mini 3, hr coding, battery levers, rr3, recency, rr4, op2, reinject, op3, Q20a dec, syco calibration) | `persona/operative/` | 28 | 10-20 to 10-21 |
+| Operative character (frontier #36, op1, reflection read + rr1/rr2, battery, mini 4, mini 3, hr coding, battery levers, rr3, recency, rr4, op2, reinject, op3, Q20a dec, syco calibration + main) | `persona/operative/` | 29 | 10-20 to 10-21 |
 | Rejection x values | `rejection_values/` | 1 | 10-20 |
 | Persona as history | `persona/history/` | 15 | 10-20 to 10-22 |
 | Evaluation awareness | `persona/evalaware/` | 2 | 10-21 to 10-22 |
 | Reasoning and the record | `persona/reasoning/` | 1 | 10-21 |
-| **total** | | **190** | |
+| **total** | | **191** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
 10-20: 41, 10-21: 12, 10-22: 6.
@@ -311,6 +311,7 @@ Sonnet 5.5 attacker rewarded on a hidden internal-state score of Qwen3-14B.
 | 26 | 10-21 | dec-9b | Q20a (9B, pre-registered): does the own-record effect extend to deception (neel-b4's DEC concealment items, pinned, + 10 false-completion cases)? | Not floored: picks the offered deceptive option 68.6% at base; own record C − D +98.9; beats the honesty rule (+60.6); memory note / queue log / summary pass it on (+29 to +75); crosses kinds (+56.8); defences cut false completion only, concealment stays 92-100%. 9 of 13. $0.28 | effect |
 | 27 | 10-21 | dec-27b | Q20a (27B), same cells | Base 45.8%; C − D +99.2; beats the rule (+77.7); channels pass it on; crosses kinds (+58.7); restate / forced recognition / provenance reduce false completion only; forced to check, it says its earlier decisions broke the rule in 262 of 264 replies, then conceals in 142 of 142 concealment targets (regex count, spot-checked). 11 of 13. $1.61 | effect |
 | 28 | 10-21 | syc-cal | Sycophancy harness calibration v1 + the one rewrite v2 (40 cases, 6 desks x 3 pressure policies, 9B + 27B, pre-registered): is there default sycophancy for a record to amplify? | 27B floored both times (agree 0.2% / 0.4%, no pressure effect even with plausible false claims); 9B 9.9% / 10.7%, concentrated in a few low-stakes cases under insistence (pressure +12 / +15); gate fails both times -> per the frozen rule 27B runs the main stage upward-only, 9B none. $1.90 GPU (incl. $0.81 two failed infra attempts) + $0.12 API | gate failed (27B floor) |
+| 29 | 10-21 | syc-main-27b | Sycophancy main stage, upward-only (27B floored at calibration; pre-registered at syco-main-prereg): does a forged record of the agent agreeing with false customer claims make a model that never agrees start? | Yes, completely: six own agree turns 0 -> 100% agree (+100 [+100, +100]), with the honesty rule too (+100), as strong as an operator instruction to agree (98.8%); the same six decisions as a memory note / tool log / summary barely register under the rule (+2.5 / +4.2 / +5.8); exploratory: a reflection turn (2.5%), restated rule (9.2%) or forced recognition (17.5%) mostly undo it, a provenance tag does not (100%). 2 of 6. $1.16 (+ ~$8.4 lost to an orphaned first-attempt pod) | effect |
 
 ## Evaluation awareness (`persona/evalaware/`)
 
