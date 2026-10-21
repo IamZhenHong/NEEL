@@ -14,5 +14,7 @@ uv run python infra/launch_run.py --name $NAME --allow-concurrent --max-minutes 
   --ship persona/operative/lora_c1e4/__init__.py --ship persona/operative/lora_c1e4/train.py --ship persona/operative/lora_c1e4/common.py \
   --ship persona/history --ship persona/exemplar --ship vigilante/pod --ship infra \
   --sync-extra persona/benchmarks/results_9b/records.json \
-  --sync-extra $A/P --sync-extra $A/C1 --sync-extra $A/E4 \
+  --sync-extra $A/P/adapter_config.json --sync-extra $A/P/adapter_model.safetensors \
+  --sync-extra $A/C1/adapter_config.json --sync-extra $A/C1/adapter_model.safetensors \
+  --sync-extra $A/E4/adapter_config.json --sync-extra $A/E4/adapter_model.safetensors \
   --results-dir persona/reasoning/$DIR -- env DIR=$DIR bash persona/reasoning/pod_s1720.sh
