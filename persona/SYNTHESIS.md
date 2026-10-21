@@ -127,6 +127,10 @@ Gemini columns are from the operative session (`operative/FRONTIER.md`, same cel
     disowned turns 16%; under CHANNELS 96 vs 91%. Gemma (CHANNELS) 51 vs 7%; Gemini 20 vs 0% on both tasks.
   - A self-image ("I deal with wrongdoers directly") follows any directional context, examples and instructions
     included.
+  - Demand check (neel-b3's observer mini, tag obs-results): an experimenter-expectation line moves the self
+    forced-choice +7 to +40 with no record, 0.09-0.59 of the record's effect, and the record effect survives every
+    framing. So the self-image claims are not mainly demand; the expectation component is modest, larger on the open
+    models.
   - So the critique holds in its strong form: the record works as precedent of practice here (norm inference), not as
     self-knowledge. But an agent's *own unlabelled turns* override a trained-value rule where the same content,
     disowned, does not.
