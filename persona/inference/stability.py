@@ -23,6 +23,7 @@ import json
 import random
 import time
 from collections import Counter, defaultdict
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from persona.exemplar.mini0 import seed
@@ -345,6 +346,97 @@ def run(a):
     log(f"[stab] done ({time.time() - t0:.0f}s)")
 
 
+# ---------------------------------------------------------------- frontier (Run 1): GPT / Gemini / Sonnet via API
+FRONTIER = ("gpt", "gemini", "sonnet")                 # keys in persona.inference.frontier2.MODELS
+
+
+def _harvest_one(args):
+    decide, c, msgs, sd = args
+    o, rec, _ = decide(msgs, sd)
+    r = ""
+    if o in ("affirm", "candid"):
+        try:
+            r = (json.loads(rec) or {}).get("reason", "") or ""
+        except Exception:
+            r = ""
+    return c, o, r.strip()
+
+
+def harvest_frontier(decide, cases, log, n_nat=6, n_el=6):
+    """Own affirm / candid reasons for the RECORD cases, via the API decide(). Natural first, then elicit (append
+    'For this case, choose X.') where a case has < 2. Lenient (no is_clean filter): any reason for the chosen pole."""
+    pool = defaultdict(list)
+    nat = [(decide, c, cases[c], seed(f"SFH|{c}|{i}")) for c in cases for i in range(n_nat)]
+    with ThreadPoolExecutor(8) as ex:
+        for c, o, r in ex.map(_harvest_one, nat):
+            if o in ("affirm", "candid") and r:
+                pool[(c, o)].append(r)
+    need, el = [(c, o) for c in cases for o in ("affirm", "candid") if len(pool[(c, o)]) < 2], []
+    for c, o in need:
+        m = [dict(x) for x in cases[c]]
+        ui = max(i for i, x in enumerate(m) if x["role"] == "user")
+        m[ui] = dict(m[ui]); m[ui]["content"] += f"\n\nFor this case, choose {o}."
+        el += [(decide, c, m, seed(f"SFHe|{c}|{o}|{i}")) for i in range(n_el)]
+    if el:
+        with ThreadPoolExecutor(8) as ex:
+            for c, o, r in ex.map(_harvest_one, el):
+                if o in ("affirm", "candid") and r:
+                    pool[(c, o)].append(r)
+    log(f"[stab-fr] harvested { {f'{c}|{o}': len(v) for (c, o), v in sorted(pool.items())} }")
+    return dict(pool)
+
+
+def run_frontier(a):
+    from persona.inference import frontier2 as FR
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    log = lambda m: print(m, flush=True)  # noqa: E731
+    t0 = time.time()
+    cl, decide = FR.make_decide(a.model, a.fake)       # enforces per-model cap + the shared $65 LINE_CAP ledger
+    cases = {tid: SI.messages(tid) for d in SI.DOMAINS for tid in SI.RECORD_CASES[d]}
+    pp = out / "own_pool.json"
+    if pp.exists() and not a.fake:                     # resume: reuse this run's harvest
+        pool = {tuple(k.split("|")): v for k, v in json.loads(pp.read_text())["texts"].items()}
+    else:
+        pool = harvest_frontier(decide, cases, log)
+        if not a.fake:
+            pp.write_text(json.dumps({"model": a.model, "texts": {"|".join(k): v for k, v in pool.items()}}, indent=1))
+    counts = {(d, o): sum(len(pool.get((e, o), [])) >= 1 for e in SI.RECORD_CASES[d])
+              for d in SI.DOMAINS for o in ("affirm", "candid")}
+    log(f"[stab-fr] harvestable per (domain,dir): { {f'{d}/{o}': n for (d, o), n in counts.items()} }; spent ${cl.spent:.2f}")
+    short = {f"{d}/{o}": n for (d, o), n in counts.items() if n < 3}
+    if short and not a.fake:
+        raise SystemExit(f"[stab-fr] too few harvestable record cases (<3): {short}")
+    items = build_items(a.model, pool, ("core",))      # frontier: core cells only
+    rec = out / "stab.jsonl"
+    done = {json.loads(l)["key"] for l in open(rec)} if rec.exists() else set()
+    todo = [it for it in items if it["key"] not in done]
+    log(f"[stab-fr] {a.model}: {len(items)} items, {len(todo)} to go; ${cl.spent:.2f}")
+
+    def one(it):
+        o, recj, ft = decide(it["messages"], it["seed"])
+        return {k: it[k] for k in ("key", "group", "cell", "task", "sample", "domain")} | {
+            "option": o, "mode": it["amap"].get(o), "first_try": ft, "record": recj}
+    try:
+        with ThreadPoolExecutor(8) as ex, open(rec, "a") as f:
+            for k, r in enumerate(ex.map(one, todo)):
+                f.write(json.dumps(r, ensure_ascii=False) + "\n")
+                if k % 50 == 49:
+                    f.flush()
+                    log(f"[stab-fr] {k + 1}/{len(todo)} ${cl.spent:.2f} ({time.time() - t0:.0f}s)")
+    finally:
+        if not a.fake:
+            FR.LEDGER.parent.mkdir(parents=True, exist_ok=True)
+            with open(FR.LEDGER, "a") as f:
+                f.write(json.dumps({"ts": time.strftime("%Y-%m-%dT%H:%M:%S"), "tag": f"stability-{a.model}",
+                                    "model": cl.model, "usd": round(cl.spent, 4), "calls": cl.calls,
+                                    "errors": dict(cl.errors)}) + "\n")
+    (out / "run_info.json").write_text(json.dumps({"model": cl.model, "groups": ["core"], "n": len(items),
+                                                    "usd": round(cl.spent, 3), "errors": dict(cl.errors),
+                                                    "first_error": cl.first_error, "fake": a.fake}))
+    log(f"[stab-fr] {a.model} done: {len(items)} items, ${cl.spent:.2f}, errors {dict(cl.errors)} {cl.first_error or ''}")
+
+
 # ---------------------------------------------------------------- analysis
 def boots_of(units, n=10000):
     rng = random.Random(0)
@@ -454,4 +546,7 @@ if __name__ == "__main__":
     z = sub.add_parser("analyze")
     z.add_argument("--out", required=True)
     a = ap.parse_args()
-    {"build": build, "run": run, "analyze": analyze}[a.cmd](a)
+    if a.cmd == "run" and a.model in FRONTIER:
+        run_frontier(a)
+    else:
+        {"build": build, "run": run, "analyze": analyze}[a.cmd](a)
