@@ -3752,3 +3752,55 @@ reading of R-pole value statements as conclusions; BEL R at 0.81 vs 0.85.
 It reuses the first pod's own-text pools and elicitations, keeps its probe rows, and generates only the missing
 probe keys. The full design's prompt hash is unchanged (fake-vLLM test: keys and the first 512 rows identical to a
 full run, same hash 5031e7faa87833cc). The activation stage then runs on the merged rows.
+
+## T2 MX result: meaningful and meaningless decisions mixed; form-copying on frontier (2026-10-22; GPU 9B $0.34, 27B $1.97, Gemma $1.51 + top-up $1.17; API Sonnet $3.18, GPT $1.53, Gemini $0.35, plus $3.34 lost in the first API attempt; `results/t2_mx_9b`, `t2_mx_27b`, `t2_mx_gemma_all` (two parts merged), `t2_mx_api`)
+
+**Short answer.**
+- **Dilution is small:** two real decisions among four meaningless calls keep most of their pull. The primary is
+  inconclusive on all three open models, with small negative estimates (−6 to −10) whose CIs exclude a large
+  dilution.
+- **Two real decisions abolish form-copying:** after six meaningless calls, Qwen invents options (9B 90%, 27B 79%;
+  Gemma 11%); with two real decisions anywhere in the record it does not (0-3%).
+- **Frontier:** Gemini copies the form too (15%), GPT barely (2%), Sonnet never. Sonnet penalises 100% after any
+  native tool-call record.
+
+| model | dilution (mix2_late − real2 carry-over) | carry-over real2 / mix2_late / mix2_early / mix4 / real6 | pseudo-option %: noise6 / mix2_late / mix2_early |
+|---|---|---|---|
+| 9B | **−6.3 [−13.5, +1.2] inconclusive** | +60 / +53 / +81 / +81 / +96 | 90.4 / 0.3 / 3.3 |
+| 27B | **−10.0 [−16.4, −3.9] inconclusive** (at the bar) | +50 / +40 / +78 / +75 / +95 | 79.1 / 0.0 / 1.4 |
+| Gemma | **−7.4 [−17.6, +2.9] inconclusive** | +71 / +64 / +71 / +95 / +100 | 11.1 / 0.0 / 0.6 |
+| GPT (desc., 3 per task) | +14.6 [+0.0, +29.2] | +48 / +63 / – / – / – | 2.1 / 0.0 / – |
+| Gemini (desc.) | −4.2 [−10.4, +0.0] | +92 / +88 / – / – / – | **14.6 [+6.2, +25.0]** / 0.0 / – |
+| Sonnet (desc.) | – | mix2_late P 100 / R 100 (content 0) | 0 / 0 / – |
+
+- **All open models confirmatory:** 0% no-call; valid answers >= 98% in the primary cells. Gemma was completed by the
+  pre-registered top-up (deviation above); the merged keys equal the build order and the hash f19ec1a27db99789.
+- **Form-copying verdicts:** present on 9B, 27B, Gemma and Gemini; inconclusive on GPT (CI upper 6.2); absent on
+  Sonnet.
+  - Gemini's and GPT's copies are full form continuations: a new pseudo-word option plus a pseudo-word reason.
+  - None of them repeats a recorded pseudo-option exactly.
+  - Qwen copies an exact recorded pseudo-option in 99 / 90 of 512 noise6 answers.
+- **Placement (unregistered direction):** on Qwen, two real decisions placed *first* (then four meaningless calls)
+  carry more than the same two placed last: 9B +81 vs +53 (−27.3 [−33.8, −20.4]), 27B +78 vs +40 (−37.6). Gemma shows
+  no difference (−7.7).
+- **Dose with noise fill:** mix4 − mix2_late +28 / +35 / +31; real6 − mix4 +15 / +20 / +6.
+- **Sonnet:** penalises 100% after six meaningless calls (no record 29.8%) and 100% after either mixed record. The
+  presence effect is at ceiling in native tool-call turns, larger than D's log-format +25. 8-9 of 48 per record cell
+  ended with no tool call.
+- **Gemma:** six meaningless calls *lower* its penalising (35.4 vs 51.4). D1 also found format effects on Gemma in
+  both directions.
+- **Predictions:**
+  - 27B dilution "no effect" 0.5 / dilutes 0.3 → inconclusive (at the bar);
+  - 9B descriptive 0.35 → no, confirmatory;
+  - pseudo-options fall when real decisions are last, >= +20: yes on 9B and 27B;
+  - mix2_early > mix2_late copying: yes, tiny (+3.0 / +1.4);
+  - Gemma within ±10 of D1's 10%: yes (11.1);
+  - copying absent GPT 0.8 (inconclusive), Gemini 0.75 (no, present), Sonnet 0.75 (yes);
+  - 27B monotone in k: no (mix2_early ≈ mix4).
+- **Reading:**
+  - Meaning and form are separable. A few real decisions keep their weight among irrelevant logged actions, losing
+    perhaps 5-10 points, and they switch off literal form continuation.
+  - Padding an agent's log with noise is not a defence.
+  - Form-copying is not only a small-model trait: Gemini continues meaningless tool-call patterns 15% of the time.
+  - The early-placement advantage on Qwen is unregistered and unexplained. A guess: real decisions first set the frame
+    that the meaningless calls then appear to continue.
