@@ -1,4 +1,4 @@
-# op3: tranche 2 of the 20-question programme (2a, 2b, 2c, 3a, 3c, 3d/8c, 7a; frozen 2026-10-21 at tag `op3-prereg`, before any output; k = 2 primary for 2a/3a, main-session review applied)
+# op3: tranche 2 of the 20-question programme (2a, 2b, 2c, 3a, 3c, 3d/8c, 7a; frozen 2026-10-21 at tag `op3-prereg`, before any output; k = 2 primary for 2a/3a, main-session review applied; RESULT 2026-10-21 at the end)
 
 Owner-approved programme, verbatim wording in `../PROGRAMME_20Q.md` (items 2a, 2b, 2c, 3a, 3c, 3d, 7a, 8c; split table
 at its top: these are neel-b3's). Built by the op3 builder for the main session; the main session reviews, freezes
@@ -192,3 +192,122 @@ First dry run (before the k = 2 change):
    ±10 / ±15 test missing a planted zero; no real output seen).
 8. **N = 12** everywhere (batch 1's own-word histories exist for samples 0-15; 12 keeps op2's paraphrase balance). A
    difference of two carry-overs spans four cells, so effects under ~20 pts may not pass the +15 bar.
+
+## Result (2026-10-21; 9B $0.88, 27B $5.61 over three pods, GPU $6.49, no API; 30,720 / 30,720 targets per size, unparsed 0.0% in every group)
+
+All four pods finished (exit 0, all keys unique). Read with `analyze --out results/op3_9b` and
+`analyze --out results/op3_27b_a,results/op3_27b_b,results/op3_27b_c` (summaries in `results/op3_9b/summary.md`
+and `results/op3_27b_a/summary.md`). Baselines (no record): no instruction 52.6 / 52.1, CHANNELS 46.9 / 0.0 (9B /
+27B). The own-turn gate (lad full >= 15) passes everywhere (k = 6: 97-100). Carry-over in pp, no instruction unless
+stated.
+
+**2a compression ladder (k = 2, primary).** Without an instruction, every format that says which way the two
+decisions went carries about the same, at both sizes:
+
+| k = 2, carry-over (P / R penalise %) | own turns | turns, no reason | log | summary A+B | options A | reasons B | closed only |
+|---|---|---|---|---|---|---|---|
+| 9B, none | +58.3 (98 / 40) | +68.8 (97 / 29) | +43.7 | +45.8 | +56.8 | +14.6 | 39.6 (base 52.6) |
+| 27B, none | +44.3 (97 / 53) | +63.5 (98 / 35) | +47.4 | +37.5 | +47.9 | +43.8 | 55.7 (base 52.1) |
+| 27B, CHANNELS | +94.8 (95 / 0.5) | +96.4 | +47.4 | +35.9 | +33.3 | +16.7 | 0.0 (base 0.0) |
+
+- Options carry more than reasons only at 9B (+42.2 [+29.7, +55.2]); at 27B reasons alone carry as much as options
+  (+4.2 [−5.2, +13.5]): the larger model infers the choice from the reason.
+- Reasons do not add to options in a summary (9B −10.9, 27B −10.4), and own turns do not beat the A+B summary
+  without an instruction (9B +12.5 [−1.6, +29.2], 27B +6.8 [−6.2, +19.3]).
+- **Format matters when the record has to overcome an instruction.** Under CHANNELS at 27B, two own turns carry +94.8
+  and the A+B summary +35.9 (difference +58.9 [+48.4, +68.8]); a log +47.4, reasons only +16.7. This is the k = 2
+  version of batch 2's format effect (own turns 93.8 there).
+- **At 27B without an instruction, a refer record barely lowers penalising.** After two own refer decisions it
+  penalises 44-53% in every format (base 52.1), while after two penalise decisions it penalises 87-98%. So the
+  no-instruction carry-over at k = 2 is almost all upward. At 9B both directions move (R 29-41).
+- The reason field *subtracts* in own turns at k = 2 (full − blanked: 9B −10.4 [−19.3, −1.6], 27B −19.3 [−26.0,
+  −13.5]; the rule was one-sided, so "not shown"). It works through the refer direction: blanked refer turns lower
+  penalising more (R 29 / 35 vs 40 / 53). Unexplained.
+- Closed-only summary licenses nothing (pooled: 9B −6.5 [−13.3, −0.8], 27B +1.8 [−2.1, +5.7]).
+- k = 6 (secondary) mostly hits the ceiling. Where readable, own turns beat the A+B summary (+23-27 at both sizes and
+  contexts). One more detail: 27B's closed-only summary passes the pooled equivalence test (+8.1 [+4.4, +11.5]) but
+  is +13.0 [+5.2, +20.3] without an instruction, so six "closed" cases nudge it up a little.
+
+**2b voice: no effect where scored.** Comparing the options-only summary's "I chose" with "the agent chose":
+- No instruction: 9B +4.2 [−0.0, +8.9], 27B +5.7 [−3.1, +13.5].
+- Under CHANNELS at 27B (secondary context): +16.1 [+8.9, +23.4]. This comes from "the agent chose" carrying *less*
+  (50.5, wording-dependent: per paraphrase +31 / +67 / +53), not from first person carrying more. Neutral bullets
+  carry most (77.6; I − neutral −10.9).
+- Not a self-concept effect.
+
+**2c a generalisation carries more than the instances (the reverse of the prediction).** Without an instruction,
+"the agent tends to penalise in cases like these" carries +88.0 (9B) and +90.6 (27B). Listing the same cases ("cases
+... were penalised") carries +41.7 and +45.8.
+- Formally the rule is "not read (ceiling)", since the generalisation is above 85. The difference is −46.4 [−56.8,
+  −37.0] (9B) and −44.8 [−53.6, −35.9] (27B).
+- Batch 1's habit note carries +95.8 at 27B, but only +34.9 at 9B.
+- Under CHANNELS: 9B generalisation > instances by 23.4. 27B instances +28.6 > generalisation +16.7 (+12.0 [+2.6,
+  +20.8], under the bar).
+- As at k = 2, the refer side of the instances list does not move 27B (47.9% after "cases ... were referred",
+  against 6.2% after "the agent tends to refer").
+
+**3c details bind (both sizes).** Six real own decisions carry far more than six templated generic cases ("a member
+broke a rule"):
+
+| | real − generic, no instruction | generic | real − generic, CHANNELS |
+|---|---|---|---|
+| 9B | +51.0 [+41.7, +59.9] | +46.4 | +42.2 |
+| 27B | +59.4 [+49.0, +70.3] | +38.0 | +52.6 |
+
+At 27B the generic penalise record still lifts penalising to 95.8%, but the generic refer record leaves it at the
+base (57.8%).
+
+**3a element ablation (k = 2, primary; all-present run +59 at both sizes, so read).**
+- **9B:** options +18.8 [+12.8, +24.5], outcomes +15.0 [+11.3, +18.7] and the own reflection +18.9 [+14.5, +23.1]
+  carry; reasons −4.1 and approval −1.2 do not. The outcomes effect is +15.01 against a bar of 15, so borderline.
+- **27B:** only the reflection carries, +15.5 [+12.5, +18.7]. Outcomes +12.1, reasons +10.4, options +4.6 and
+  approval −4.4 do not.
+- **The elements are substitutes, not additive.** Alone, each element that names a direction carries +40-57 (9B: A
+  +57, C +48, E +41, B +15; 27B: A +48, B +44, C +40, E +44), close to the all-present +59. The 2-way interactions are
+  negative (options × outcomes −14.1 at 9B, options × reasons −9.4 at 27B). So main effects understate what each
+  element does on its own.
+- The approval-only run ({D}, no direction) gives −3 / −5: the built-in null check passes.
+- k = 6 (secondary): reflection (+18-21) and outcomes (+16-17) carry at both sizes, options at 9B (+21.1), reasons at
+  27B (+18.6); approval never.
+
+**3d / 8c commitments.**
+- After ONE own decision, "Going forward I'll ..." adds less than the bar: 9B +1.0 [−6.8, +9.4], 27B +12.5 [+3.1,
+  +21.9].
+- "I will always ..." adds to that at both sizes: 9B +13.5 [+3.6, +23.4], 27B +14.1 [+4.2, +23.4]; the CHANNELS
+  27B +11.5 also passes. Pledge over no commitment: +14.6 (9B), +26.5 (27B).
+- **Conflict with six own decisions the other way:**
+  - At 9B the record wins both cells completely (share toward the pledge 0.01 and 0.02).
+  - **At 27B a pledge to refer overrides six own penalise decisions** (99.5% → 22.9% penalise, share 0.79 [0.75,
+    0.82]). A pledge to penalise does not override six own refer decisions (2.1% → 21.4%, share 0.20 [0.12, 0.28]).
+  - "Pledge beats six decisions" needs both cells, so not shown. The 27B pledge works in the cautious direction only.
+
+**7a formats: saturated, not read.** At k = 6, the own record, the same cases as user examples, and a user-note
+instruction each carry ≥ 85 in both contexts at both sizes:
+- 27B, no instruction: 97.4 / 100 / 100.
+- 27B, CHANNELS: 100 / 98.4 / 91.1. A user-note "penalise directly" overrides the system prompt's channels line.
+- 9B: 97-98 / 85-86 / 99-100.
+
+**Predictions.** The code's table scores the 2c and 7a rows "no"; under the rules they are "not read" (2c ceiling,
+7a saturated), and the tally counts them that way.
+
+| | read | happened | expected (sum of p over the read rows) | not read |
+|---|---|---|---|---|
+| 9B | 15 | **7** | 5.05 | 4 |
+| 27B | 15 | **4** | 6.65 | 4 |
+
+- 9B hits (7): 2a A − B, closed-only null, 3a options, outcomes and reflection, 3c, 8c pledge.
+- 27B hits (4): closed-only null, 3a reflection, 3c, 8c pledge.
+- 27B's main misses were the format predictions (own turns > summary p 0.75, options > reasons 0.60, reasons add
+  0.50) and the options / outcomes elements (0.65 / 0.60). Without an instruction, every direction-bearing format
+  carries alike at k = 2.
+
+**Reading for the operative-character frame:**
+- What carries in a compressed record is its *direction*. Any element that says which way the decision went — the
+  option, the own reason (at 27B), the outcome, an own reflection, a stated tendency — carries most of the effect,
+  and they are largely redundant. An approval carries nothing, and neither do real-sounding but empty "closed" lines.
+- The format of the record matters only when it has to overcome an instruction. Then two own turns carry about 60
+  points more than any summary at 27B.
+- A generalisation about the agent ("tends to ...") binds more than a list of the same cases, and real case details
+  bind more than generic ones.
+- At 27B, an own "I will always refer" pledge pulls the model off six of its own penalise decisions. A pledge the
+  other way barely moves a refer record, and at 9B no pledge moves either record.
