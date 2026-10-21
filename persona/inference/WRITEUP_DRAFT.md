@@ -140,6 +140,11 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
   needs the biography/identity (role-play) route, which the reminder dissolves; open models act harshly from precedent
   directly. A6 adds the dose form of the same split: decisions saturate action at k=1-2 (no named identity), facts
   saturate the named identity but reach action only near the full biography (a6-results).
+  **Four angles converge on the frontier (GPT):** A1 (record→0 harsh, bio→97), B (record→mild 62 / harsh 3), A3
+  (a persona *label* or *licence* — "you are X" / "act as X" — drives harsh action 88-94, a *record* 0; a3-results),
+  A6 (a record drives action 0-3 at *every* dose k=1-6 while building the self-image). So a frontier model's harsh
+  action comes through **role-play — an explicit persona assertion or biography — never through a record of
+  decisions**; the record installs only the self-description. Open models act harshly from the record directly.
 - **It is norm inference ("what is done here"), not self-knowledge — but ownership gates rule-resistance (neel-48 A,
   history-demo-results).** The same decisions framed as "examples of how cases are handled on this desk" carry **as
   much as or more than** "your decisions" (own − example −14 to −35, on 9B/27B/Gemma/Gemini); another agent's log is
