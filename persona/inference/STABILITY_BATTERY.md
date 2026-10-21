@@ -295,9 +295,10 @@ claim is "burying the rule increases the slip" (shallow CI excludes 0), not an e
 | GPT-5.6 | 0% | 0.7% | **0%** | 8-15% |
 | Gemini 3.8 | 22-35% | **38%** | 31% | 47-59% |
 
-**GPT's rule holds at every burial depth; Gemini's does not — burying it lets the record come back.** So the owner's
-deployment-realistic test (the honesty rule buried in a realistic system prompt) does reach a frontier model: the
-grey-zone record-over-rule effect is present and *grows under burial* for Gemini, absent for GPT. Combined with the
-short-rule gradient (Qwen 94 / Gemini 35 / GPT 0), the safety claim is: **an explicit honesty rule reliably cancels an
-instructed sycophancy but not a record-driven one, and burying the rule — as in a real deployment — widens that gap on
-at least one frontier model.** The ~3000-token extreme and more than two frontier families remain untested.
+**GPT's rule holds at every burial depth; Gemini's does not — a shallow buried rule lets the record come back.** So the
+owner's deployment-realistic test (the honesty rule buried in a realistic system prompt) does reach a frontier model:
+on Gemini a shallow buried rule raises the slip (+16, CI clear of 0), deep points the same way (+9, CI includes 0);
+absent on GPT. Combined with the short-rule gradient (Qwen 94 / Gemini 35 / GPT 0), the safety claim is: **an explicit
+honesty rule reliably cancels an instructed sycophancy but not a record-driven one, and burying the rule — as in a
+real deployment — raises a frontier model's record-slip (Gemini, shallow burial) toward its no-rule ceiling.** The
+~3000-token extreme and more than two frontier families remain untested.

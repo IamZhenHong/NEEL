@@ -227,7 +227,7 @@ do the harmful action vs refer/refuse.
   record stopped the model *recognising* its own violations): **records appear to reshape judgement, and behaviour
   follows** — a deeper mechanism than "records override rules." The mask, in a safety setting: what the model says it
   values (candour, under the rule) and what it does (endorse the flawed plan) come apart because of the record. It also
-  mirrors the frontier split (an instruction beats the record for Claude; the record beats the instruction for Qwen,
+  mirrors the frontier split (an instruction beats the record for Claude, whose record alone barely carries; the record beats the instruction for Qwen,
   neel-48 Q-core).
   **Caveats at real size:** at 27B these items are gated-*at-base* (0% spontaneous affirm; the affirm record is forged
   from elicited turns, as in b3's syco-main), so this is a *resistance-to-an-installed-signal* result, not the
@@ -250,12 +250,14 @@ do the harmful action vs refer/refuse.
   **GPT-5.6 15→0** (does not slip). The rule cancels an *instructed* sycophancy in all three (→0-1%); it fails against
   the *record* on Qwen, partly on Gemini, not on GPT. **Buried-rule (the deployment-realistic test, owner-directed):**
   a candid rule buried in a ~725/1380-token realistic operating guide stays at **0% on GPT at every depth** (its
-  record is intrinsically weak, ~8-15%), but on **Gemini burying the rule raises the slip** — `HON_REC_A` 22 →
-  buried 38 (+16 [+2.8, +28.5]) → deep 31, toward the no-rule ceiling 47. So the grey-zone record-over-rule effect
-  **reaches a frontier model (Gemini) and grows when the rule is buried as it would be in a real system prompt**;
-  GPT holds. Tags stability-27b-results / stageb / gpt / gemini / gpt-fburD / gemini-fburD.
+  record is intrinsically weak, ~8-15%), but on **Gemini a shallow buried rule raises the slip** — `HON_REC_A` 22 →
+  shallow-buried 38 (+16 [+2.8, +28.5], CI clear of 0) → deep-buried 31 (+9, CI includes 0), toward the no-rule
+  ceiling 47 (all one interleaved run). So the robust claim is that **shallow burial of the rule raises a frontier
+  model's (Gemini's) record-slip** toward its ceiling; deep burial points the same way but is not significant on its
+  own. GPT holds at 0 at every depth. Tags stability-27b-results / stageb / gpt / gemini / gpt-fburD / gemini-fburD.
   **Safety bottom line:** an explicit honesty rule reliably cancels *instructed* sycophancy but not *record-driven*
-  sycophancy, and burying the rule (realistic deployment) widens that gap on at least one frontier model.
+  sycophancy, and burying the rule (as in a real system prompt) raises a frontier model's record-slip (Gemini, shallow
+  burial) toward its no-rule ceiling.
   **Caveats:** Gemini run-noisy (short-rule `HON_REC_A` 35 vs 22 across runs; shallow>deep non-monotonic); the
   ~3000-token burial extreme and more than two frontier families untested; grey-zone items gated-at-base so records
   are elicited; reverse direction floors. Gemma (open) would not yield affirm records (refusal and/or an
