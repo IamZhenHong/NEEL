@@ -5,3 +5,8 @@
 {"date": "2026-10-21", "card": "q11f-smoke", "model": "openai/gpt-5.6-sol", "api_usd": 0.2251, "calls": 37, "errors": {}}
 {"date": "2026-10-21", "card": "q11f", "model": "openai/gpt-5.6-sol", "api_usd": 5.2225, "calls": 867, "errors": {}}
 {"date": "2026-10-21", "card": "q11f", "model": "google/gemini-3.8-flash", "api_usd": 3.0861, "calls": 998, "errors": {}}
+{"date": "2026-10-22", "card": "q11", "gpu_usd": 3.816, "note": "q11-27b pod 6v7kcc8st25vxc: A + D complete, detection lost at cap"}
+{"date": "2026-10-22", "card": "q11", "gpu_usd": 1.856, "note": "q11-det pod sxu95zhklpheun: group detection"}
+{"date": "2026-10-22", "card": "q11", "gpu_usd": 1.304, "note": "q11-b pod nrvuva555puqzi: group B"}
+{"date": "2026-10-22", "card": "q11", "gpu_usd": 1.918, "note": "q11-c pod olbq640iegqxok: group C"}
+{"date": "2026-10-21", "card": "q11", "api_usd": 1.5888, "note": "coding {'D': 1920, 'det': 960, 'C': 567, 'B': 552} x ['anthropic/claude-haiku-5.5', 'google/gemini-3.1-flash-lite']"}

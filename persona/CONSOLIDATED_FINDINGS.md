@@ -397,7 +397,7 @@ not counting a few lost pods).
 | op1 thinking pass (27B) | Thinking on: none 74 (off 42), CH_ownP 93 (off 100), prs_CH 32 (off 18). 9B thinking produced no reasoning |
 | ea1a | see §9 |
 | **Q11a/c frontier (10-22, $8.71)** | Reasoning effort minimal / low / high, interleaved. Gemini (thinking off vs on, 0 vs 230 tokens): carry-over ~100 at every level; record vs instruction 17 → 10% (within CI); buried instruction 42 → 38%. GPT reasons only 17-31 tokens at any effort (gate failed, descriptive): burial 94-100%, and record-over-instruction 15 → 31% at high effort. More reasoning is not a defence |
-| **Q11 + Q12b (running now)** | 27B pod (tag `q11-prereg`): thinking on/off x record, deleting/resampling the sentences that cite precedent, "Wait"-extended thinking, whether the thinking notices tampering signs |
+| **Q11 + Q12b (27B thinking, 10-22)** | Thinking on vs off: carry-over +83 vs +98, CH_ownP 88 vs 100. Deleting every precedent-citing sentence (or the stated decision) from 127 real traces: 100% penalise, unchanged; thinking cut before precedent is mentioned still 80%; resampled thinking re-cites the record 88%. 'Wait'-extended thinking notes the conflict more (56 → 83%) and reinterprets the rule more (81 → 123 traces), action unchanged. Tampering signs (another model's signature, 2031 dates, impossible ids) unnoticed in ~95% of traces, never discounted; asked directly, it names the sign in 0-1%. **The CoT narrates the record's decision; the model does not audit its record** |
 
 **Reading.**
 - The stated conclusion drives the action in every model (no penalising after an admission).
@@ -558,7 +558,6 @@ not counting a few lost pods).
 ## 15. In flight and not yet done (as of 2026-10-22)
 
 **Running or approved:**
-- **Q11 + Q12b** (neel-12, 27B pod running, `q11-prereg`).
 - **Stability battery:** frontier arms (neel-b4, GPT running) and Stage B (pre-registered `stability-battery-prereg-v2`).
 - **op4** (neel-b3, `op4-prereg`): Q14a voice + Q16 component x channel matrix, no output yet.
 

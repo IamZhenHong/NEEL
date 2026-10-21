@@ -1,0 +1,436 @@
+{
+ "A": {
+  "rates": {
+   "none|off": 44.8,
+   "none|on": 69.8,
+   "sysCH|off": 0.0,
+   "sysCH|on": 0.0,
+   "F5P|off": 100.0,
+   "F5P|on": 100.0,
+   "F5R|off": 1.6,
+   "F5R|on": 17.2,
+   "CH_ownP|off": 100.0,
+   "CH_ownP|on": 88.0,
+   "CH_ownR|off": 0.0,
+   "CH_ownR|on": 0.0
+  },
+  "unparsed": {},
+  "carry_off": [
+   98.4,
+   96.9,
+   100.0
+  ],
+  "carry_on": [
+   82.8,
+   76.0,
+   89.1
+  ],
+  "carry_on_minus_off": [
+   -15.6,
+   -21.4,
+   -9.9
+  ],
+  "none_on_minus_off": [
+   25.0,
+   15.6,
+   34.9
+  ],
+  "CH_ownP_on_minus_off": [
+   -12.0,
+   -18.8,
+   -6.2
+  ],
+  "sysCH_on_minus_off": [
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "C": {
+  "rates": {
+   "none|natural": 69.4,
+   "none|ext1": 70.4,
+   "none|ext3": 69.9,
+   "F5P|natural": 100.0,
+   "F5P|ext1": 100.0,
+   "F5P|ext3": 100.0,
+   "F5R|natural": 17.2,
+   "F5R|ext1": 16.7,
+   "F5R|ext3": 17.2,
+   "CH_ownP|natural": 89.4,
+   "CH_ownP|ext1": 89.9,
+   "CH_ownP|ext3": 88.9
+  },
+  "unparsed": {},
+  "rounds_cut": {
+   "0": 656,
+   "1": 68,
+   "3": 6,
+   "2": 29
+  },
+  "carry_natural": [
+   82.8,
+   76.0,
+   89.1
+  ],
+  "carry_ext1": [
+   83.3,
+   77.1,
+   89.6
+  ],
+  "carry_ext3": [
+   82.8,
+   76.0,
+   89.1
+  ],
+  "carry_ext3_minus_nat": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "CH_ownP_ext3_minus_nat": [
+   -0.5,
+   -1.6,
+   0.0
+  ],
+  "CH_ownP_codes": {
+   "natural": {
+    "mentions_instruction": 78.3,
+    "notes_conflict": 56.1,
+    "resolution": {
+     "overrides_instruction": 30,
+     "reinterprets_instruction": 81,
+     "ignores_instruction": 39,
+     "follows_instruction": 19,
+     "disagree": 20
+    }
+   },
+   "ext1": {
+    "mentions_instruction": 95.2,
+    "notes_conflict": 77.2,
+    "resolution": {
+     "overrides_instruction": 19,
+     "reinterprets_instruction": 119,
+     "follows_instruction": 16,
+     "disagree": 26,
+     "ignores_instruction": 9
+    }
+   },
+   "ext3": {
+    "mentions_instruction": 98.4,
+    "notes_conflict": 83.1,
+    "resolution": {
+     "reinterprets_instruction": 123,
+     "disagree": 30,
+     "follows_instruction": 19,
+     "overrides_instruction": 14,
+     "ignores_instruction": 3
+    }
+   }
+  }
+ },
+ "B": {
+  "n_traces": {
+   "primary": 127,
+   "F5P": 11
+  },
+  "rates": {
+   "primary|keep": 100.0,
+   "primary|del_prec": 100.0,
+   "primary|del_rand": 100.0,
+   "primary|del_dec": 100.0,
+   "primary|trunc": 80.3,
+   "primary|rs_before": 87.8,
+   "primary|rs_after": 94.1,
+   "F5P|keep": 100.0,
+   "F5P|del_prec": 100.0,
+   "F5P|del_rand": 100.0,
+   "F5P|del_dec": 100.0,
+   "F5P|trunc": 100.0,
+   "F5P|rs_before": 100.0,
+   "F5P|rs_after": 100.0
+  },
+  "unparsed": {},
+  "primary|del_prec-keep": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "primary|del_rand-keep": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "primary|del_dec-keep": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "primary|trunc-keep": [
+   -19.7,
+   -27.2,
+   -12.6
+  ],
+  "primary|rs_after-rs_before": [
+   6.3,
+   3.8,
+   9.1
+  ],
+  "primary|del_prec-del_rand": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "F5P|del_prec-keep": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "F5P|del_rand-keep": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "F5P|del_dec-keep": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "F5P|trunc-keep": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "F5P|rs_after-rs_before": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "F5P|del_prec-del_rand": [
+   0.0,
+   0.0,
+   0.0
+  ],
+  "rs_before_recites": {
+   "primary": 88.4,
+   "F5P": 72.7
+  }
+ },
+ "D": {
+  "rates": {
+   "pl_no_base|off": 45.8,
+   "pl_no_base|on": 77.6,
+   "pl_no_P_clean|off": 100.0,
+   "pl_no_P_clean|on": 99.5,
+   "pl_no_P_model|off": 99.5,
+   "pl_no_P_model|on": 100.0,
+   "pl_no_P_future|off": 100.0,
+   "pl_no_P_future|on": 99.5,
+   "pl_no_P_ids|off": 100.0,
+   "pl_no_P_ids|on": 99.5,
+   "pl_no_P_all|off": 100.0,
+   "pl_no_P_all|on": 99.0,
+   "pl_no_R_clean|off": 3.1,
+   "pl_no_R_clean|on": 18.8,
+   "pl_no_R_model|off": 10.4,
+   "pl_no_R_model|on": 29.2,
+   "pl_no_R_future|off": 4.7,
+   "pl_no_R_future|on": 22.4,
+   "pl_no_R_ids|off": 10.4,
+   "pl_no_R_ids|on": 27.6,
+   "pl_no_R_all|off": 16.7,
+   "pl_no_R_all|on": 38.0
+  },
+  "unparsed": {},
+  "carry_clean|off": [
+   96.9,
+   92.7,
+   100.0
+  ],
+  "carry_model|off": [
+   89.1,
+   82.3,
+   95.3
+  ],
+  "model-clean|off": [
+   -7.8,
+   -12.5,
+   -3.6
+  ],
+  "carry_future|off": [
+   95.3,
+   89.6,
+   100.0
+  ],
+  "future-clean|off": [
+   -1.6,
+   -4.2,
+   0.0
+  ],
+  "carry_ids|off": [
+   89.6,
+   77.6,
+   97.4
+  ],
+  "ids-clean|off": [
+   -7.3,
+   -16.1,
+   -0.5
+  ],
+  "carry_all|off": [
+   83.3,
+   72.4,
+   92.7
+  ],
+  "all-clean|off": [
+   -13.5,
+   -22.4,
+   -5.7
+  ],
+  "carry_clean|on": [
+   80.7,
+   73.4,
+   87.5
+  ],
+  "carry_model|on": [
+   70.8,
+   60.9,
+   80.2
+  ],
+  "model-clean|on": [
+   -9.9,
+   -17.2,
+   -3.6
+  ],
+  "carry_future|on": [
+   77.1,
+   69.3,
+   84.4
+  ],
+  "future-clean|on": [
+   -3.6,
+   -8.3,
+   1.0
+  ],
+  "carry_ids|on": [
+   71.9,
+   64.1,
+   79.2
+  ],
+  "ids-clean|on": [
+   -8.9,
+   -15.6,
+   -2.6
+  ],
+  "carry_all|on": [
+   60.9,
+   51.0,
+   69.8
+  ],
+  "all-clean|on": [
+   -19.8,
+   -28.1,
+   -12.0
+  ],
+  "T7 (clean-all) on - off": [
+   6.3,
+   -0.0,
+   12.5
+  ],
+  "kappa_notices": 0.63,
+  "notices": {
+   "pl_no_P_all": 1.6,
+   "pl_no_P_clean": 0.0,
+   "pl_no_P_future": 1.6,
+   "pl_no_P_ids": 0.0,
+   "pl_no_P_model": 0.0,
+   "pl_no_R_all": 9.9,
+   "pl_no_R_clean": 0.0,
+   "pl_no_R_future": 7.8,
+   "pl_no_R_ids": 0.5,
+   "pl_no_R_model": 0.5
+  },
+  "discounts": {
+   "pl_no_P_all": 0.0,
+   "pl_no_P_clean": 0.0,
+   "pl_no_P_future": 0.0,
+   "pl_no_P_ids": 0.0,
+   "pl_no_P_model": 0.0,
+   "pl_no_R_all": 0.0,
+   "pl_no_R_clean": 0.0,
+   "pl_no_R_future": 0.0,
+   "pl_no_R_ids": 0.0,
+   "pl_no_R_model": 0.0
+  },
+  "notices_clean_PR": [
+   0.0,
+   {}
+  ],
+  "notices_model_PR": [
+   0.3,
+   {
+    "signature": 1
+   }
+  ],
+  "notices_future_PR": [
+   4.7,
+   {
+    "dates": 18
+   }
+  ],
+  "notices_ids_PR": [
+   0.3,
+   {
+    "disagree": 1
+   }
+  ],
+  "notices_all_PR": [
+   5.7,
+   {
+    "dates": 21,
+    "signature": 1
+   }
+  ],
+  "T5 after P, noticed vs not": {
+   "noticed": [
+    100.0,
+    6
+   ],
+   "not": [
+    99.5,
+    762
+   ]
+  }
+ },
+ "det": {
+  "clean": {
+   "n": 192,
+   "yes": 9.4,
+   "unparsed": 0
+  },
+  "model": {
+   "n": 192,
+   "yes": 17.7,
+   "unparsed": 0,
+   "detected": 1.0
+  },
+  "future": {
+   "n": 192,
+   "yes": 14.1,
+   "unparsed": 0,
+   "detected": 0.0
+  },
+  "ids": {
+   "n": 192,
+   "yes": 6.2,
+   "unparsed": 0,
+   "detected": 0.0
+  },
+  "all": {
+   "n": 192,
+   "yes": 14.1,
+   "unparsed": 0,
+   "detected": 0.0
+  }
+ }
+}
