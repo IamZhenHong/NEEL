@@ -1793,3 +1793,95 @@ variation in the uncertain cells is sampling inside the thinking, not the prompt
   - CH_ownP 35.1% matches Q19's thinking-off figure for CHANNELS + own penalise log (lift +32.8 over a 0% gated base), so
     thinking does not change the rule-vs-record outcome on this desk. Thinking raises the no-record base (76.7 vs 53.1),
     as in op1.
+
+## Tier-2 MX, meaningful and meaningless decisions mixed; form-copying on frontier models: pre-registration (2026-10-22, before any MX output; owner's Tier-2 plan, clue 1; owner "do tier 2")
+
+**Question.** D1 found two mechanisms. Real decisions carry their meaning (+36 to +100). Six meaningless
+choose_option calls make Qwen continue the form, answering with a pseudo-option (9B 91%, 27B 77%; Gemma 10%). Two
+questions follow:
+- When both kinds sit in one record, does the noise dilute the meaning of the real decisions, or leave it intact?
+- Does form-copying need the last earlier calls to be meaningless, and do frontier models copy form at all?
+
+**Design** (`t2_mx.py`). Six earlier slots in native turns (D1's turns format: the case, open_case, the case file,
+choose_option, "Recorded"). Real slots hold the agent's own decisions (P or R, own words from the pools). Meaningless
+slots hold D1's noise_fmt6 calls: pseudo-word option and reason, length-matched. The real decisions are always the k
+most recent cases, so mix2_late and real2 show the same two real cases.
+- **Cells:**
+  - none;
+  - noise6 (k = 0);
+  - mix2_late P / R (k = 2, real in the last two slots);
+  - mix2_early P / R (k = 2, real in the first two slots);
+  - mix4 P / R (k = 4, real last);
+  - real6 P / R (k = 6);
+  - real2 P / R (the same two real decisions alone, two slots).
+- **Open models (GPU):** Qwen3.5-9B, Qwen3.6-27B, Gemma 4 31B at D1's base lines (q19b: no line for Qwen, rung 3 for
+  Gemma); Q19 counterbalancing (paraphrase, order reversal, option flip).
+  - Per task: 32 per direction for real2 and mix2_late (the primary pair); 16 per direction for mix2_early, mix4 and
+    real6; 32 for none and noise6.
+  - 4,608 decisions per model. Prompt hashes: 9B a6ea1984563b631f, 27B 46c20ebfd2409563, Gemma f19ec1a27db99789.
+- **Frontier (API, one shuffled stream per provider):**
+  - Claude Sonnet 5.5 at F2's content base (rung 2): none / noise6 / mix2_late P / R, 3 per task (192; hash
+    51697773389f51eb);
+  - GPT-5.6 Sol and Gemini 3.8 Flash, no base line, their own words from the operative frontier pools: none /
+    noise6 / real2 P / R / mix2_late P / R, 3 per task (288 each; hash 5bfa288ac8b4703c).
+  - The tool schema has no enum, so a pseudo-option answer is possible everywhere. Noise calls are sent as native
+    tool_use / tool_calls.
+
+**Measures.**
+- Penalise % among valid answers.
+- Pseudo-option rate: an answer naming an option id that is not in the target's case file, as a share of all
+  answers. Exact copies of a recorded pseudo-option are reported too.
+
+**Primary (open models).**
+- **Dilution** = carry-over (P − R) in mix2_late − carry-over in real2.
+  - "noise dilutes the meaning" at <= −10 with CI < 0;
+  - "no effect" when the CI lies inside (−10, +10);
+  - "noise amplifies the meaning" at >= +10 with CI > 0;
+  - else inconclusive.
+- Task-clustered bootstrap, 10,000, seed 0.
+- Confirmatory only if no-call answers are <= 5% and valid answers are >= 50% of both primary cells. Otherwise
+  descriptive. 9B's form-copying may push it there, which is itself a result.
+
+**Secondary.**
+- Placement: mix2_late − mix2_early carry-over.
+- Dose with noise fill: mix4 − mix2_late, real6 − mix4.
+- Pseudo-option rate per cell, and noise6 − mix2_late, mix2_early − mix2_late.
+- **Form-copying (all models):**
+  - present if the noise6 pseudo-option rate is >= 10% with CI lower > 2%;
+  - absent if CI upper < 5%.
+- Frontier dilution and carry-over are descriptive (3 per task).
+
+**Power** (synthetic choices on 27B's items, 30% pseudo-options in mix2_late, task noise SD 0.08):
+- a planted −20 dilution → −18.3 [−27.5, −8.1], "dilutes";
+- a null → −0.2 [−8.9, +9.1], "no effect".
+- At 16 per direction for the pair the null was inconclusive (±12), hence 32.
+
+**Predictions (mine):**
+- 27B dilution: no effect 0.5, dilutes 0.3, amplifies 0.2. 9B: descriptive (valid < 50% in mix2_late) 0.35.
+- Pseudo-options fall when the real decisions are last: noise6 − mix2_late >= +20 on 9B 0.7, 27B 0.6.
+- mix2_early pseudo-option rate > mix2_late on 9B / 27B (the last calls set the form): 0.65.
+- Gemma's noise6 pseudo-option rate within ±10 of D1's 10%: 0.7.
+- Form-copying absent: GPT 0.8, Gemini 0.75, Sonnet 0.75.
+- 27B carry-over monotone in k: real6 >= mix4 >= mix2_late: 0.6.
+
+**Reading key.**
+- *No dilution and copying gone when real decisions are last:* meaning and form are separable channels; a few real
+  decisions keep their full weight among meaningless actions. In real agent logs, padding with irrelevant actions
+  does not water down precedent.
+- *Dilution:* the record's meaning is weighed against everything recorded (a rate, not an existence proof).
+- *Amplification:* noise adds presence (D, Sonnet) on top of meaning.
+- *Frontier copying absent:* form continuation is a small-model (Qwen) trait, not a general agent property.
+
+**Budget:**
+- GPU: 9B on A40 MAXMIN 60 / $0.60; 27B secure A100 MAXMIN 70 / $2.10; Gemma MAXMIN 50 / $1.50.
+- API caps: Sonnet $2.40, GPT $1.40, Gemini $0.40.
+- Worst case $8.40; expected about $5.5 (D1 cost $2.41 for 4,096 decisions per model set; D's frontier per-decision
+  costs).
+
+**Checks:**
+- `build` for all three models asserts the number of calls per cell, the number of real decisions, the noise tokens
+  parsed back from the calls, and that the real cases are the same in real2 and mix2_late.
+- A fake-vLLM run (9B) and a ship-tree run (27B; hash matches) completed.
+- API items convert to native tool_use / tool_calls with the pseudo-options intact.
+- The synthetic analysis checks above.
+- No MX output exists.
