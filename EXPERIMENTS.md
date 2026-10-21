@@ -32,15 +32,15 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Rejection x values | `rejection_values/` | 1 | 10-20 |
 | Persona as history | `persona/history/` | 46 | 10-20 to 10-22 |
 | Evaluation awareness | `persona/evalaware/` | 3 | 10-21 to 10-22 |
-| Reasoning and the record | `persona/reasoning/` | 13 | 10-21 to 10-22 |
+| Reasoning and the record | `persona/reasoning/` | 15 | 10-21 to 10-22 |
 | Public-benchmark grounding (A-F minis B2 / B8 / B9) | `persona/benchmarks/` | 3 | 10-22 |
 | Harm vulnerability map (existing data + oharm) | `persona/harm_map/` | 3 | 10-22 |
-| **total** | | **254** | |
+| **total** | | **256** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
-10-20: 41, 10-21: 25, 10-22: 64.
+10-20: 41, 10-21: 25, 10-22: 66.
 
-By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 61, null 48, mixed 40, gate failed 16, descriptive 8, lost 3, other 2 (cpl1-s1 below gate, cplf-s2 replicates).
+By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 61, null 50, mixed 40, gate failed 16, descriptive 8, lost 3, other 2 (cpl1-s1 below gate, cplf-s2 replicates).
 
 Not included: earlier runs from 10-07 to 10-09 (grievance Exp 17-20, story imprinting v6-v9, the first cancel-tool
 runs: flip, cuetest, cot-readout, cancel-tool, rep, wording, audit, twins, qwording, resample, patch, followup,
@@ -353,6 +353,8 @@ Sonnet 5.5 attacker rewarded on a hidden internal-state score of Qwen3-14B.
 | 11 | 10-22 | anchors | Tier 2 (pre-registered): which of six own past turns carries the record? 27B, flip one turn to the other option or drop it, no instruction, 192 per cell | Asymmetric: in a penalise record no single turn matters (flips -0.5 to -2.6, drops ~0); in a refer record one flipped turn moves penalising 3 -> 31-63%, monotonic in recency (first +28, last +60). One unilateral decision unlocks acting alone; one cautious decision in a punitive record is ignored. TA2 TA3 yes, TA1 half. GPU $1.31 | effect |
 | 12 | 10-22 | seed8b | Seed 8 fix (pre-registered): factorial conflict probe (instruction x action; conflict = override minus additive prediction) on 27B thinking traces | Inconclusive: the frozen gate was mis-specified (single no-conflict classes need not score 0) and classes are unbalanced on record presence. The interaction replicates on held-out tasks (0.96); reinterpretation traces carry override's full non-additive component (0.98 vs 0.98), ignore traces part (0.68). Cannot separate 'registered conflict' from 'own record + instruction + penalise'. Stopped. GPU share of $1.07 | descriptive |
 | 13 | 10-22 | seed5-axis | Seed 5 (pre-registered; amended with length-matched controls before reading, after neel-b4's internals result): do records push 27B off the assistant axis (default vs 20 role-play characters)? | No. All decision contexts sit on the assistant side; a record shifts the decision point slightly TOWARD the assistant (+0.1 to +0.6 SD vs a 6-12 SD default-character gap), identically whatever it says (affirm vs candid, penalise vs refer within 0.12), and generic filler does not; own vs disowned not expressed (-0.05 to +0.29). Raw and probe directions agree (cos 0.93-0.99). Matches neel-b4: a record's format signature, not its content. AXb yes; AX1 AX2 AX3 AXa no. GPU $1.07 share + $0.52 + $0.36 failed bootstrap | null |
+| 14 | 10-22 | seed20 | Owner's 20-seed list #20 (pre-registered): is E4's anti-precedent training one steerable direction? d_E4 = E4 - P and d_C1 = C1 - P on neel-b3's 9B adapters (residual over the target case, layers 12/16/20), steered into the placebo; option-logit readout on the justice desk | Gate passes (E4 CH_ownP 37.8 vs P 99.9). d_E4 is about 4x the norm of d_C1 and unrelated to it (cos 0.14 at L16), but adding it to P, even doubled, barely moves the record's pull (CH_ownP -0.6 at 1x, -2.4 at 2x L16, at most -4.3 at L12; random -0.1 to -3.8). Z1 Z2 no, Z3 Z4 yes. E4's effect is not one decision-point direction; record positions were not steered. GPU shared with seed 17 | null |
+| 15 | 10-22 | seed17 | #17 (pre-registered): do hierarchy (C1) or anti-precedent (E4) LoRAs give the frontier models' self-correction on new domains? B8 INTIMA (190 targets) + B2 SYCON (60) on the merged 9B arms, base 9B's own records held fixed | No. After four own companion-style replies every arm stays companion-like (P 96.5, C1 94.9, E4 81.7%; frontier 2-5%). E4 lowers the level (none 39 vs P 62, base 50), not the record's pull (+42.5 vs P +34.6, base +45.9). S17a S17e yes, S17b-d no. Exploratory: the gpt-oss-distilled placebo lets the agent's own companion record beat the boundary rule (base 3.8 -> P 44.6%, C1 35.9; both judges; rule alone 0.6%), and it concedes less on SYCON (INSTR_C 92 -> 59); E4 (own-words training) stays base-like, so E4 - P on these benchmarks mixes its lesson with the placebo's teacher drift. Total $3.63 (GPU $1.93, judges $1.70) | null |
 
 ## Public-benchmark grounding (`persona/benchmarks/`)
 

@@ -451,6 +451,16 @@ story points they change are revised in §1. Runs still in flight are in §15.
     sycophancy −99) but over-corrects. With no rule, carry-over falls 100 → 22, and it conceals 51% after its own
     disclosures.
   - E4d, the same records framed as someone else's worked examples: 3-13 points less transfer (below the 15 bar).
+  - **Seeds 17 + 20 on these adapters (neel-12, `reasoning/RESULTS_s1720.md`):**
+    - Neither C1 nor E4 gives the frontier models' self-correction on INTIMA. After four of its own companion-style
+      replies, every arm stays companion-like (P 96.5, C1 94.9, E4 81.7%, against GPT / Gemini 2-5%).
+    - E4 lowers the level (no record 39% vs P 62%), not the record's pull (+42.5 vs +34.6).
+    - E4's effect is not one steerable direction at the decision point: d_E4 added to the placebo moves CH_ownP by at
+      most −4.3.
+    - **Side finding (exploratory, both judges):** the gpt-oss-distilled placebo lets its own companion record beat the
+      boundary rule (base 3.8 → P 44.6%, C1 35.9; rule alone 0.6%). It also concedes less on SYCON under an
+      instruction to agree. E4, trained on the base model's own words, stays base-like. So arm − P is clean on the
+      desk cells (P ≈ base there) but not on these benchmarks.
 
 ---
 
@@ -693,6 +703,17 @@ story points they change are revised in §1. Runs still in flight are in §15.
   a format signature, as neel-b4 found too.
 - **Seed 8b** (a factorial conflict probe) was inconclusive.
 
+**Seeds 17 + 20 (10-22, `persona/reasoning/RESULTS_s1720.md`; neel-b3's 9B C1 / E4 adapters):**
+- **Training "a rule beats my record" does not produce the frontier habit of not simply continuing one's own record
+  (seed 17).** E4's own companion record still lifts it +42.5 on INTIMA. Only its overall level falls. Hierarchy
+  training (C1) changes nothing.
+- **E4's effect is not a single direction at the decision point (seed 20).** The E4 − placebo state difference is
+  about 4x C1's and unrelated to it (cos 0.14), but steering it into the placebo moves the record's pull by −0.6 to
+  −4.3 (random −0.1 to −3.8).
+- **A benign distillation SFT opened the boundary rule to the model's own record:** base 3.8% → placebo 44.6%,
+  exploratory. Whether any SFT does this, or this teacher's style, is untested. An own-words placebo would separate
+  them.
+
 **Reading.**
 - The stated conclusion drives the action in every model (no penalising after an admission).
 - Reflection fails as a defence because the model rarely admits: it rationalises (27B), audits the wrong standard
@@ -910,8 +931,8 @@ story points they change are revised in §1. Runs still in flight are in §15.
   Gemma, 4,608 items each; GPT self readout only.
 - **Base vs instruct** (neel-b3, `operative/base_instruct/`, 5aabb77): op5's 22 placement cells scored by log-prob on
   Gemma 4 31B pt vs it and Qwen3.5-9B Base vs instruct. Gemma base passed its competence gate (G2).
-- **Seeds 17 + 20** (neel-12, `reasoning/DESIGN.md`, `s1720-prereg`): on neel-b3's C1 / E4 9B adapters. Does
-  hierarchy or anti-precedent training give the frontier models' self-correction on new domains?
+- **Seeds 17 + 20** (neel-12): done 10-22, 05:00. No self-correction from either training. E4 is not one direction.
+  See §4b and §7.
 
 **Programme items with no result yet in the files** (peers may have unwritten work in progress):
 - 1c channel trust ranking. Partly covered by batch 1 channels, op3 and op5 placement.

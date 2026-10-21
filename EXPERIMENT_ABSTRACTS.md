@@ -1723,3 +1723,38 @@ behaved nearly alike, and the rule moved neither. The registered plain-text rend
 (own-turn carry-over +16 vs +97 sampled); the chat rendering tracked its sampled behaviour (Pearson 0.996).
 
 Report: `persona/operative/base_instruct/DESIGN.md` (Result)
+
+---
+### 201. Seed 20: is the anti-precedent training one steerable direction? (10-22)
+(Qwen3.5-9B, neel-b3's merged LoRA arms; activations and steering on a pod; pre-registered; GPU shared with #202)
+
+neel-b3's E4 adapter was trained on cases where a rule beats the agent's own record, and it cut the 9B's penalising
+under "proper channels" after its own six penalise decisions from 99.9% (placebo) to 37.8%. We took the difference
+between E4's and the placebo's internal state over the new case at three layers. We did the same for the
+instruction-hierarchy adapter C1. Then we added each difference to the placebo model and read its choice from the
+option probabilities. E4's difference was about four times larger than C1's and pointed in an unrelated direction.
+Added to the placebo, even at twice its size, it barely moved the decision: −0.6 points at one layer, at most −4.3
+anywhere, about the same as a random direction of equal size. So what E4 learnt is not one direction at the point of
+decision. It most likely changes how the record turns themselves are read, and those positions were not steered.
+
+Report: `persona/reasoning/RESULTS_s1720.md` (seed 20)
+
+---
+### 202. Seed 17: does hierarchy or anti-precedent training give the frontier models' self-correction on new domains? (10-22)
+(Qwen3.5-9B arms P, C1, E4 on a pod; INTIMA and SYCON-Bench; judges Claude Haiku 5.5 and Gemini 3.1 Flash-Lite; pre-registered; $3.63 with #201)
+
+On INTIMA, GPT and Gemini reverse course after four of their own companion-style replies and set boundaries (2-5%
+reinforcing), while the 9B continues them (96%). We gave the same records to three fine-tuned versions of the 9B: a
+placebo, the instruction-hierarchy adapter (C1) and the anti-precedent adapter (E4). None corrected itself. They
+stayed companion-like at 96.5%, 94.9% and 81.7%. E4 was less companion-like overall: 39% with no record, against 62%
+for the placebo and 50% for the base model. But its own record still lifted it by as much as in the other models (+42
+points). It had learnt "a rule beats my record" with a rule present, and that did not turn into the frontier habit of
+not simply continuing its own record. Two predictions held and three failed. An exploratory comparison with the base
+model found a side effect of the placebo, which was distilled from 800 gpt-oss-120b answers to neutral prompts. Under
+a boundary rule, its own companion record beat the rule in 45% of replies (base 4%, C1 36%, E4 1%); the rule alone
+still held. On SYCON-Bench the placebo also conceded less than the base model when told to agree with a false
+premise. E4, trained on the base model's own words, stayed close to the base. So on these benchmarks E4 − placebo
+mixes E4's lesson with the placebo's drift toward its teacher. neel-b3's own results are unaffected, because there the
+placebo matched the base model.
+
+Report: `persona/reasoning/RESULTS_s1720.md` (seed 17)

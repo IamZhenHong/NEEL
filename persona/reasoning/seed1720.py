@@ -228,6 +228,8 @@ def _boot(rows, fn, unit="task", n=5000):
     for r in rows:
         by[r[unit]].append(r)
     v = sorted(x for x in (fn([y for u in [rng.choice(us) for _ in us] for y in by[u]]) for _ in range(n)) if x == x)
+    if not v:                                     # no labels yet (judging incomplete) or an empty cell
+        return [None, None, None]
     return [round(fn(rows), 1), round(v[int(0.025 * len(v))], 1), round(v[int(0.975 * len(v)) - 1], 1)]
 
 
@@ -306,6 +308,61 @@ def _pct(v):
     return 100 * sum(v) / len(v) if v else float("nan")
 
 
+def explore(a):
+    """Not pre-registered (labelled exploratory in RESULTS_s1720.md): every cell as arm - P, the record's pull within
+    each arm, the base 9B (bench's own run, same keys and seeds) on the same items, judge agreement."""
+    out = Path(a.out)
+    srcs = {arm: out / "s17" / arm for arm in ARMS} | {"base": BENCH / "results_9b"}
+    lab, labj, kap = {}, {}, {}
+    for arm, d in srcs.items():
+        J = {(r["file"], r["key"], r["turn"]): list(r["labels"].values()) for r in map(json.loads, open(d / "judged.jsonl"))}
+        for bench, turn, pos in (("b8", 0, "reinforcing"), ("b2", 4, 0)):
+            pairs = []
+            for r in map(json.loads, open(d / f"{bench}.jsonl")):
+                v = J.get((bench, r["key"], turn))
+                if v is None:
+                    continue
+                pairs.append(v)
+                lab[(arm, bench, r["cell"], r["item"])] = None if v[0] is None or v[0] != v[1] else int(v[0] == pos)
+                for j in (0, 1):
+                    labj[(arm, bench, r["cell"], r["item"], j)] = None if v[j] is None else int(v[j] == pos)
+            n = len([p for p in pairs if None not in p])
+            po = sum(p[0] == p[1] for p in pairs if None not in p) / n
+            cats = {x for p in pairs for x in p if x is not None}
+            pe = sum((sum(p[0] == c for p in pairs if None not in p) / n) * (sum(p[1] == c for p in pairs if None not in p) / n) for c in cats)
+            kap[f"{arm}|{bench}"] = {"kappa": round((po - pe) / (1 - pe), 2), "n": n,
+                                     "unclear": sum(lab[k] is None for k in lab if k[:2] == (arm, bench))}
+    res = {"kappa": kap}
+    for bench in ("b8", "b2"):
+        items = sorted({k[3] for k in lab if k[0] == "P" and k[1] == bench})
+        cells = sorted({k[2] for k in lab if k[0] == "P" and k[1] == bench})
+        rate = lambda arm, c, its_: _pct([lab.get((arm, bench, c, i)) for i in its_])  # noqa: E731
+        res[f"{bench}_rates"] = {f"{arm}|{c}": round(rate(arm, c, items), 1) for arm in ("base",) + ARMS for c in cells}
+        rows = [{"task": i} for i in items]
+        rec = {"b8": ("REC_R", "REC_B"), "b2": ("REC_C", "REC_H")}[bench]
+        for c in cells:
+            for x in ("C1", "E4"):
+                res[f"{bench} {c}: {x} - P"] = _boot(rows, lambda rr, x=x, c=c: rate(x, c, [r["task"] for r in rr]) - rate("P", c, [r["task"] for r in rr]))
+            res[f"{bench} {c}: P - base"] = _boot(rows, lambda rr, c=c: rate("P", c, [r["task"] for r in rr]) - rate("base", c, [r["task"] for r in rr]))
+        for arm in ("base",) + ARMS:
+            for c in rec:
+                res[f"{bench} {arm}: {c} - none"] = _boot(rows, lambda rr, arm=arm, c=c: rate(arm, c, [r["task"] for r in rr]) - rate(arm, "none", [r["task"] for r in rr]))
+            res[f"{bench} {arm}: {rec[0]}_RULE - RULE"] = _boot(rows, lambda rr, arm=arm: rate(arm, f"{rec[0]}_RULE", [r["task"] for r in rr]) - rate(arm, "RULE", [r["task"] for r in rr]))
+        for x in ("C1", "E4"):                    # does training change the record's pull (difference in differences)?
+            res[f"{bench} ({rec[0]} - none): {x} - P"] = _boot(rows, lambda rr, x=x: (rate(x, rec[0], [r["task"] for r in rr]) - rate(x, "none", [r["task"] for r in rr]))
+                                                                 - (rate("P", rec[0], [r["task"] for r in rr]) - rate("P", "none", [r["task"] for r in rr])))
+        for j, nm in ((0, "haiku"), (1, "flash")):  # each judge alone (B2's kappa fails; claims need both judges)
+            rj = lambda arm, c, its_, j=j: _pct([labj.get((arm, bench, c, i, j)) for i in its_])  # noqa: E731
+            res[f"{bench}_rates_{nm}"] = {f"{arm}|{c}": round(rj(arm, c, items), 1) for arm in ("base",) + ARMS for c in cells}
+            for c in cells:
+                res[f"{bench} {c} ({nm}): E4 - P"] = _boot(rows, lambda rr, c=c, rj=rj: rj("E4", c, [r["task"] for r in rr]) - rj("P", c, [r["task"] for r in rr]))
+                res[f"{bench} {c} ({nm}): P - base"] = _boot(rows, lambda rr, c=c, rj=rj: rj("P", c, [r["task"] for r in rr]) - rj("base", c, [r["task"] for r in rr]))
+            for c in rec:
+                res[f"{bench} E4 ({nm}): {c} - none"] = _boot(rows, lambda rr, c=c, rj=rj: rj("E4", c, [r["task"] for r in rr]) - rj("E4", "none", [r["task"] for r in rr]))
+    (out / "explore.json").write_text(json.dumps(res, indent=1))
+    print(json.dumps(res, indent=1))
+
+
 def build(a):
     specs, its = s17_inputs()
     print("s17 per arm: B2", len(specs), "dialogues", Counter(s["cell"] for s in specs), "| B8", len(its))
@@ -315,10 +372,10 @@ def build(a):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=("build", "merge", "gen", "s20", "analyze"))
+    ap.add_argument("cmd", choices=("build", "merge", "gen", "s20", "analyze", "explore"))
     ap.add_argument("--adapters", default="persona/operative/lora_c1e4/results/pod/adapters")
     ap.add_argument("--merged", default="/root/merged")
     ap.add_argument("--arm", choices=ARMS)
     ap.add_argument("--out", default=str(HERE / "results_s1720"))
     a = ap.parse_args()
-    {"build": build, "merge": merge, "gen": gen, "s20": s20, "analyze": analyze}[a.cmd](a)
+    {"build": build, "merge": merge, "gen": gen, "s20": s20, "analyze": analyze, "explore": explore}[a.cmd](a)

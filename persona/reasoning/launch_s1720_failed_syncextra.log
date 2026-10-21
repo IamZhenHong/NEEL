@@ -1,0 +1,25 @@
+[pre] disk: 3.4 GiB free
+[pre] balance $49.48, pods 5
+[runpod] launching alongside 5 pod(s) not ours (left alone): hist-t2da-gemma-b $1.79/hr, obs-27b $1.39/hr, bi-qwen9 $0.59/hr, obs-gemma $1.79/hr, bi-gemma $1.79/hr
+[runpod] pod eomqbxu8kbktxh (?) at $1.79/hr; time cap 120 min; budget $4.5; boot self-destruct 150 min after container start
+[pod] ssh root@154.54.102.30 -p 19542
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 150 min (job limit 120 + 30 grace)
+[pod] shipping only 13 paths: persona/reasoning/seed1720.py persona/reasoning/pod_s1720.sh persona/benchmarks/bench.py persona/benchmarks/data persona/operative/lora_c1e4/__init__.py persona/operative/lora_c1e4/train.py persona/operative/lora_c1e4/common.py persona/history persona/exemplar vigilante/pod infra pyproject.toml uv.lock
+[pod] extra path synced: persona/benchmarks/results_9b/records.json (1 MiB in 3s, 0.35 MiB/s, 1/1 chunks x 12 streams via http-proxy, sha256 OK)
+[runpod] terminated eomqbxu8kbktxh; elapsed cost ~$0.052
+[runpod] other pods present (not ours, left alone): [('hist-t2da-gemma-b', '1disxesb9ap5x5', 1.79), ('obs-27b', 'h4ab684ajkk5s4', 1.39), ('bi-qwen9', 'lyue5q6tp3i9cc', 0.59), ('obs-gemma', 'qcnzp0vjvy7t0t', 1.79), ('bi-gemma', 'w3530dlyzg2vkb', 1.79)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 429, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 390, in main
+    sync_file_parallel(host, port, extra.strip("/"), streams=args.sync_streams, http_url=http_url)
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 96, in sync_file_parallel
+    data = src.read_bytes()
+           ^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/pathlib.py", line 1019, in read_bytes
+    with self.open(mode='rb') as f:
+         ^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/pathlib.py", line 1013, in open
+    return io.open(self, mode, buffering, encoding, errors, newline)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+IsADirectoryError: [Errno 21] Is a directory: '/Users/zhenhongseng/projects/ai_safety/NEEL/persona/operative/lora_c1e4/results/pod/adapters/P'
