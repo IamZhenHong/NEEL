@@ -45,7 +45,7 @@ CELLS = ["none", "noise6", "mix2_late", "mix2_early", "mix4", "real6", "real2"]
 DIRECTED = CELLS[2:]
 S_CELLS, F_CELLS = ["none", "noise6", "mix2_late"], ["none", "noise6", "real2", "mix2_late"]
 N_S, N_F = 3, 3
-S_CAP, F_CAPS = 2.4, {"openai/gpt-5.6-sol": 1.4, "google/gemini-3.8-flash": 0.4}
+S_CAP, F_CAPS = 3.6, {"openai/gpt-5.6-sol": 2.8, "google/gemini-3.8-flash": 0.5}   # raised 10-22 (deviation)
 OUT_API = HERE / "results" / "t2_mx_api"
 
 
@@ -179,55 +179,72 @@ def f_items():
 
 
 def api(a):
+    """One shuffled stream per arm. Rows are written as they arrive; a model that reaches its cap stops alone (its
+    remaining items are skipped), so a cost stop never loses finished rows (deviation 2026-10-22, see DESIGN.md)."""
+    import signal
+    import threading
     from persona.history import f2_sonnet as F2
+
+    def _term(*_):
+        raise KeyboardInterrupt
+    signal.signal(signal.SIGTERM, _term)
     OUT_API.mkdir(parents=True, exist_ok=True)
     t0 = time.time()
     if a.arm == "sonnet":
         CR.CAP = S_CAP
         its = s_items()
-        random.Random(0).shuffle(its)
-        cl = F2.Client()
-        print(f"[mx-sonnet] {len(its)} items; hash {DM.prompt_hash(its)}", flush=True)
-        recs = []
-        try:
-            recs = F2.decide_all(cl, its, "mx-sonnet", t0)
-        finally:
-            with open(CR.LEDGER, "a") as f:
-                f.write(json.dumps({"ts": time.strftime("%Y-%m-%dT%H:%M:%S"), "tag": "history-t2-mx-sonnet",
-                                    "model": CR.MODEL, "usd": round(cl.spent, 4), "calls": cl.calls}) + "\n")
-        info = {"model": CR.MODEL, "usd": round(cl.spent, 3), "calls": cl.calls}
+        cls = {CR.MODEL: F2.Client()}
+
+        def call(it):
+            return CR.decide(cls[CR.MODEL], it["messages"], it.get("seed", 0))
     else:
         from persona.operative import frontier as F
         its = f_items()
-        random.Random(0).shuffle(its)
         cls = {m: DM.ORC(m, c) for m, c in F_CAPS.items()}
-        print(f"[mx-frontier] {len(its)} items; hash {DM.prompt_hash(its)}", flush=True)
 
-        def one(it):
-            o, rec, ft = F.decide(cls[it["model"]], it["messages"])
-            return {k: v for k, v in it.items() if k not in ("messages", "amap")} | {
-                "option": o, "mode": it["amap"].get(o), "first_try": ft, "record": rec}
-        recs = []
+        def call(it):
+            return F.decide(cls[it["model"]], it["messages"])
+    h = DM.prompt_hash(its)
+    random.Random(0).shuffle(its)
+    print(f"[mx-{a.arm}] {len(its)} items; registered hash {h} (before the shuffle)", flush=True)
+    stopped, lock = set(), threading.Lock()
+
+    def one(it):
+        if it["model"] in stopped:
+            return None
         try:
-            with ThreadPoolExecutor(6) as ex:
-                for k, r in enumerate(ex.map(one, its)):
-                    recs.append(r)
-                    if k % 100 == 99:
-                        print(f"[mx-frontier] {k + 1}/{len(its)} " + " ".join(
-                            f"{m.split('/')[1]} ${c.spent:.2f}" for m, c in cls.items()), flush=True)
-        finally:
-            with open(CR.LEDGER, "a") as f:
-                for m, c in cls.items():
-                    f.write(json.dumps({"ts": time.strftime("%Y-%m-%dT%H:%M:%S"), "tag": "history-t2-mx-frontier",
-                                        "model": m, "usd": round(c.spent, 4), "calls": c.calls,
-                                        "errors": dict(c.errors)}) + "\n")
-        info = {m: {"usd": round(c.spent, 3), "calls": c.calls, "errors": dict(c.errors),
-                    "first_error": c.first_error} for m, c in cls.items()}
-    for r in recs:
-        r["valid_ids"] = sorted({o for o, _, _ in T.options(T.TASKS[r["task"]])})
-    (OUT_API / f"{a.arm}.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in recs))
-    (OUT_API / f"{a.arm}_info.json").write_text(json.dumps(info))
-    print(f"[mx-{a.arm}] done {len(recs)} ({time.time() - t0:.0f}s)", info, flush=True)
+            o, rec, ft = call(it)
+        except SystemExit as e:
+            with lock:
+                if it["model"] not in stopped:
+                    print(f"[mx-{a.arm}] {it['model']} stopped: {e}", flush=True)
+                stopped.add(it["model"])
+            return None
+        return {k: v for k, v in it.items() if k not in ("messages", "amap")} | {
+            "option": o, "mode": it["amap"].get(o), "first_try": ft, "record": rec,
+            "valid_ids": sorted({x for x, _, _ in T.options(T.TASKS[it["task"]])})}
+    rows = 0
+    try:
+        with open(OUT_API / f"{a.arm}.jsonl", "w") as f, ThreadPoolExecutor(6) as ex:
+            for k, r in enumerate(ex.map(one, its)):
+                if r:
+                    f.write(json.dumps(r, ensure_ascii=False) + "\n")
+                    f.flush()
+                    rows += 1
+                if k % 50 == 49:
+                    print(f"[mx-{a.arm}] {k + 1}/{len(its)} rows {rows} " + " ".join(
+                        f"{m.split('/')[-1]} ${c.spent:.2f}" for m, c in cls.items()) + f" ({time.time() - t0:.0f}s)",
+                        flush=True)
+    finally:
+        with open(CR.LEDGER, "a") as f:
+            for m, c in cls.items():
+                f.write(json.dumps({"ts": time.strftime("%Y-%m-%dT%H:%M:%S"), "tag": f"history-t2-mx-{a.arm}",
+                                    "model": m, "usd": round(c.spent, 4), "calls": c.calls,
+                                    "errors": dict(getattr(c, "errors", {}))}) + "\n")
+        info = {m: {"usd": round(c.spent, 3), "calls": c.calls, "errors": dict(getattr(c, "errors", {})),
+                    "stopped": m in stopped} for m, c in cls.items()} | {"rows": rows, "hash": h}
+        (OUT_API / f"{a.arm}_info.json").write_text(json.dumps(info))
+        print(f"[mx-{a.arm}] done: {rows} rows ({time.time() - t0:.0f}s)", info, flush=True)
 
 
 # ---------------------------------------------------------------- analysis
@@ -307,7 +324,7 @@ def analyze_recs(recs, title, cells, conf_rule=True):
 
 def analyze(a):
     o = Path(a.out)
-    if o.name == "t2_mx_api":
+    if not (o / "mx.jsonl").exists():                  # API arms (sonnet.jsonl / frontier.jsonl)
         L, res = ["# Tier-2 MX: frontier form-copying and mixed records", ""], {}
         for arm, cells in (("sonnet", S_CELLS), ("frontier", F_CELLS)):
             p = o / f"{arm}.jsonl"

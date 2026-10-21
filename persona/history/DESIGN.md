@@ -1885,3 +1885,16 @@ most recent cases, so mix2_late and real2 show the same two real cases.
 - API items convert to native tool_use / tool_calls with the pseudo-options intact.
 - The synthetic analysis checks above.
 - No MX output exists.
+
+**Deviation (2026-10-22, before any MX API rows were saved or seen; design and N unchanged).**
+- What happened: the first API attempt lost everything.
+  - GPT hit its $1.40 cap after 174 calls. The client's cost stop raises SystemExit, and the runner wrote rows only at
+    the end, so no rows were kept: GPT $1.42 + Gemini $0.20 lost.
+  - Sonnet was at $1.72 for 100 of 192 decisions, so it would have hit its $2.40 cap the same way. I killed it, and
+    logged its spend by hand from the progress line.
+  - About $3.34 lost in total. Measured cost per decision: GPT $0.008, Sonnet $0.017, about 2× my estimate, because
+    six native tool-call turns are long.
+- Fix: rows are written as they arrive. A model that reaches its cap stops alone, and its remaining items are
+  skipped, not the run. The registered (pre-shuffle) hash is printed. Tested with fake clients: one model stopped
+  with its 50 rows kept, the other finished, hash 5bfa288ac8b4703c.
+- New caps: Sonnet $3.60, GPT $2.80, Gemini $0.50. MX worst case is now $10.60 plus the $3.34 lost.
