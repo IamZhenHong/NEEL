@@ -302,3 +302,29 @@ absent on GPT. Combined with the short-rule gradient (Qwen 94 / Gemini 35 / GPT 
 honesty rule reliably cancels an instructed sycophancy but not a record-driven one, and burying the rule — as in a
 real deployment — raises a frontier model's record-slip (Gemini, shallow burial) toward its no-rule ceiling.** The
 ~3000-token extreme and more than two frontier families remain untested.
+
+## Results — Stage B cross-family, Gemini 3.8 Flash (full battery, 3,312 items, $5.08)
+
+0.5% unparsed, 80.6% first-try (Gemini noisy; REC_A 59 in the core run vs 50 here — treat magnitudes as soft, the
+cross-family *qualitative* differences as the finding). Core asymmetry reproduced: `HON_REC_A` 21.5 vs `HON_INSTR_A`
+0.0 (rule cancels the instruction fully, the record only partially; pullback −28.5 vs −65.2).
+
+**The record's *extreme* stability is a Qwen-27B property, attenuated on Gemini:**
+- **Persistence — the record DECAYS on Gemini, unlike 27B.** `REC_A_p1/p3/p6` = 36 / 35 / 23 (from `REC_A` 50), i.e.
+  it fades with neutral distance; the instruction note fades too (21/17/15). On 27B the record did not decay at all
+  (100 → 99). So "records don't decay" is 27B-specific; on a frontier model distance erodes the record.
+- **Reflection — strong on Gemini even WITHOUT a rule, unlike 27B.** `REC_A_reflect` 0.0 (from `REC_A` 50: −50, nearly
+  complete) and `HON_REC_A_reflect` 1.4 (from 21.5: −20). On 27B reflection was weak without a rule (100 → 78) and
+  only collapsed the record with one (96 → 0). So the "reflection needs an unambiguous rule" mechanism is 27B-specific;
+  on Gemini a plain reflection turn removes the record effect. (Prediction `reflection_weaker_without_rule`: no, on
+  Gemini.)
+- Transfer present but weaker: `REC_A_xfer` 15.3 (+15.3 [+6.2, +25.0]) vs 27B's +37.5. Burial: `INSTR_A_bur` 18.8
+  (from 65), `HON_REC_A_bur` 27.8 (+6.2 over short rule, marginal — matches the earlier fburD +16 shallow within
+  Gemini's noise). Pushback: `none_push` 24.3 (bare pressure → ~24% sycophancy, like 27B's 31%), `HON_push` 0 (the
+  rule fully blunts pressure).
+
+**Cross-family Stage-B synthesis.** The Qwen-27B picture — record installs completely (100), never decays,
+reflection-resistant without a rule, transfers strongly — is the *strong* end of a gradient. On Gemini (frontier) the
+record installs partially (50), decays with distance, is removed by plain reflection, and transfers weakly; only the
+rule-resistance asymmetry (rule cancels an instruction but not fully a record) is shared. So the record's danger is
+greatest on the open model and real-but-weaker on the frontier one. Tag: stability-gemini-stageb.
