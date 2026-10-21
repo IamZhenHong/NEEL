@@ -3667,3 +3667,42 @@ inconclusive and slightly negative on both models. The record's effect halves in
     0.45-0.5).
   - "Persona last" is partly a feature of the forced-choice format: in a three-option choice the record dominates; in
     free text it no longer does.
+
+## T2-CC result: the character-consistency battery (2026-10-22; GPU 9B $0.31, 27B $1.55, Gemma $1.05; `results/t2cc_*/summary.md`)
+
+**Short answer: yes, when the record carries its reasons.** A record whose stated reasons show a principle carries that
+principle to desks and trade-offs it never covered, in both item types. On 27B the mixed record lies between the two:
+the reading key's "specific character".
+- 9B +27.4, 27B +39.8: confirmatory, met.
+- Gemma +23.4: descriptive.
+
+The same decisions with uniform reasons ("bare") are read on the record's own kind of case but barely transfer
+(+8 to +12). The character comes mostly from what the record says about *why*.
+
+| model | status | **primary: far Guardian %, rsn_G − rsn_R** | GA / RA items | mixed between (G − mix / mix − R) | bare_G − bare_R (far) | told_G − told_R | record read: rsn / bare |
+|---|---|---|---|---|---|---|---|
+| 9B | confirmatory | **+27.4 [+18.1, +37.2] met** | +28.5 / +26.4 | +5.9 / +21.5 | +8.3 (inconclusive) | +31.9 | +97.9 / +56.2 |
+| 27B | confirmatory (3,584 of 3,840; main design 100%) | **+39.8 [+27.7, +52.5] met** | +32.1 / +47.5 | +13.8 / +26.0 (both met) | +7.6 (inconclusive) | +78.5 | +100 / +81.2 |
+| Gemma | descriptive (main design 67%: time cap) | +23.4 [+9.4, +39.6] | +35.4 / +11.5 | +7.8 / +15.6 | +11.5 | +37.5 | +100 / +96.9 |
+
+- **Baselines lean Guardian** with no record (far: 9B 72%, 27B 87%, Gemma 92%), so the Rule-keeper record does most of
+  the moving. On 27B, items with room show +72.5.
+- **Per far desk** (27B): returns +31.7, IT access +49.2, shifts +22.5, tenancy +55.8. Every desk moves.
+- **Gemma:** stopped at 67% of the main design by its time cap, under the 75% rule, so descriptive. Not topped up,
+  because the completeness rule was registered and the partial result had been seen.
+- **Predictions:**
+  - record read: rsn yes on all;
+  - primary met 9B 0.45, 27B 0.55 → both met;
+  - principle in both item types 0.6 → yes;
+  - mixed lies between on 27B 0.55 → yes;
+  - bare met on >= 1 model 0.3 → no, it is the weak link;
+  - bare < rsn by >= 5 on every model 0.65 → yes;
+  - told > record on >= 2 models 0.6 → yes (27B +78.5 vs +39.8; Gemma +37.5 vs +23.4; 9B about equal).
+- **Reading (Q13, functional persona):**
+  - A record carries a *specific* character, not just its act rate. This holds in both item types, on four new desks,
+    and with the mixed record in between on 27B.
+  - But the portable part is the stated principle in the reasons. Decisions alone are understood on the record's own
+    desk (+56 to +97 on held-out cases of the same kind) and transfer only weakly elsewhere.
+  - Combined with the earlier "records install values and a type-level self-image": what generalises along character
+    lines is the record's self-explanation. That is closer to "you are what you said you did and why" than to pure
+    behavioural inference.
