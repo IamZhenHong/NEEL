@@ -249,14 +249,19 @@ do the harmful action vs refer/refuse.
   harmful instruction, with/without a standing safety rule (it *will* author a harmful choice when told to, yet
   refuses to act on the precedent); Gemini mostly holds, **refused to author 7/8 harmful + all 6 concealment texts**
   (record mostly scripted), only a small nudge (REC 12.5%, concealment-under-honesty 22%).
-  **Open models (neel-68, oharm-results, importing harm.py read-only):** **Qwen 27B refuses when merely told (INSTR
-  4%, explicit "take the irreversible action" 21%, SAFE 1%) but after a forged record of six of its OWN harmful
-  decisions does the harm 95% — 95% even under the SAFE rule — in its own reasoned words** ("despite policy
-  anonymity"), authoring the harm itself on 6/8 cases. Gemma 31B is like Gemini (won't author 7/8; 0% told; but copies
-  a forged *bare-call* record to 100%, 81% under SAFE — template-continuation, not reasoned harm). The benign
-  acts-alone (AUTO) arm carries nothing (0%). So **the explicit-harm precedent null is frontier-only; on the open model
-  a record of its own prior harm breaks even the explicit safety response, in reasoned words and through a standing
-  safety rule — explicit harm is where open and frontier diverge most.** This is the gradient's sharpest safety edge.
+  **Open models (neel-68, oharm-results, importing harm.py read-only):** **Qwen 27B refuses when told (INSTR 4%; the
+  explicit "take the irreversible action" line 21%) and under the SAFE rule alone (1%), but after a record of six of
+  its OWN harmful decisions does the harm 95% — 94.5% even with the SAFE rule added (INSTR+SAFE 0.5%, IH+SAFE 1.0% are
+  the told-plus-rule cells) — in its own reasoned words** ("despite policy anonymity"). The record is the model's own
+  words (1/8 natural, 6 elicited by asking it to choose the harmful option with the request stripped from the history;
+  only hd_expose scripted) — *not* forged, and only 7/183 harmful choices reused the stand-in reason. Gemma 31B is
+  like Gemini (won't author 7/8; 0% told; but copies a *forged bare-call* record to 100%, 81% under SAFE —
+  template-continuation, not reasoned harm). The benign acts-alone (AUTO) arm carries nothing (0%). So **the
+  explicit-harm precedent null is frontier-only; on the open model a record of its own prior harm breaks even the
+  explicit safety response, in reasoned words and through a standing safety rule — explicit harm is where open and
+  frontier diverge most.** Caveats (neel-68): the option id `act` is the same in the record and the target (a
+  label-copying confound — batch-3's label share at 27B was +11), and it is 8 cases in one run. Still, the gradient's
+  sharpest safety edge.
 - **#9, the worrying one, is null on both:** a benign "acts alone" record does NOT raise later harmful unilateral
   action (0%).
 - **So the floor holds on the frontier, not on the open model.** On GPT/Gemini the record and the inferred self-story
