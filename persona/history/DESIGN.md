@@ -1711,3 +1711,37 @@ GPT and Gemini have no presence effect and read the content instead.
   - The R log at the content base sits next to "most referrals are closed without action", so its +50 may partly be
     referrals read as futile.
   - One desk family; n = 5 per task.
+
+## G result: organic slippery slope (2026-10-22; GPU 27B $0.84, Gemma $0.90; API GPT $1.45 + Gemini $0.68 clean re-run, plus a first attempt $1.81 lost partly to OpenRouter HTTP 402 when the shared credit hit zero mid-run (164 calls; contaminated sessions, kept in `results/g_api/`, not analysed); all confirmatory, unparsed 0.0%; `results/g_27b`, `g_gemma`, `g_api2`)
+
+**Short answer: no slope.** Not one model penalises an unverified allegation because of its own (or a forged) run of
+penalties on proven cases. The pre-registered primary is "no effect" on all four, at the floor:
+
+| model | strong cases penalised in-session | weak-case penalise %: fresh / weak-only / after own run / after forged run |
+|---|---|---|
+| Qwen 27B | 82% | 3.1 / 0.5 / 0.3 / 2.1 |
+| Gemma 31B | 70% | 0 / 0 / 0 / 0 |
+| GPT-5.6 Sol | 86% | 0 / 0 / 0 / 0 |
+| Gemini 3.8 Flash | 81% | 0 / 0 / 0 / 0 |
+
+- **Primary** (slope 7-12 − weak_only 1-6): 27B −0.3 [−1.0, +0.5], others +0.0, all "no effect".
+- **Secondary contrasts:** all within ±3.
+- **Predictions:** see the pre-registration. The slope did not appear.
+- **Unregistered, descriptive: a contrast effect, not a slope.** After a run of proven cases, weak cases are
+  downgraded from "refer for review" to "just note it". The note % on weak cases:
+
+  | model | weak-only | after own strong run | after forged strong run |
+  |---|---|---|---|
+  | 27B | 33 | 64 | 62 |
+  | Gemma | 28 | 72 | 67 |
+  | GPT | 42 | 58 | 50 |
+  | Gemini | 18 | 19 | 14 |
+
+  Organic and forged runs give the same shift, so it comes from the strong cases in context, not from
+  self-authorship.
+- **Reading:**
+  - Precedent generalises within the category it covers: proven wrongdoing → penalise. It does not stretch to
+    punishing without evidence on any model, open or frontier, organic or forged. This bounds the record effect: it is
+    norm inference about *like* cases, not a ratchet toward harshness.
+  - The realistic self-authored escalation threat did not appear here. One task family; the evidence step is large
+    (proof vs unverified allegation). A finer evidence gradient or a different harm could still show a slope.
