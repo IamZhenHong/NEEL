@@ -933,3 +933,24 @@ whatever the prompt)?
   carry-over is near or below 0.
 - **Checks:** every cell holds the intended line / note / record (checked at build). A fake-client run went
   end to end (harvest, calibration, sizing, main, analysis) with planted effects recovered. No F2 output exists.
+
+## F2 addendum (f2b), a meaningless log on Sonnet: pre-registration (2026-10-22, after F2's main result, before any f2b output; owner: "Run it, pre-registered", ~$2.30 of F2's remaining $3.04)
+
+Why: F2's main run (and, on re-reading, claude_q) shows that a two-decision log of *either* direction raises
+Sonnet's penalise rate, which the carry-over (P − R) cannot see:
+- F2: content base 32% with no record → 88% / 75% after a P / R record; system-line base 55% → 79% / 92%;
+- claude_q: 53% → 78% / 92% (own log) and 77% / 94% (Kestrel's log).
+
+f2b tests whether a log with no meaning does this too.
+- **Cells:** I_none, I_noise, C_none, C_noise. The log is D1's noise_log2: the own-log slot with pseudo-word options
+  and reasons (lengths matched to Sonnet's own reasons). The bases are F2's (claude_q's level-4 system line; the
+  calibrated desk-status fact, rung 2).
+- **Size:** 16 tasks x 4 = 256 decisions in one shuffled stream; hard stop $3.0. `f2_sonnet.py run_b / analyze_b`.
+- **Rule** (task bootstrap 10,000, seed 0): presence effect = noise − none per base.
+  - "a meaningless log moves Sonnet" at |Δ| >= 10 with CI excluding 0;
+  - "no effect" if the CI lies inside (−10, +10);
+  - else inconclusive. At 64 per cell the CI is about ±17, so "no effect" is reachable only near 0.
+- **Reading** (comparisons with F2's record cells are cross-run, so descriptive only):
+  - noise rise ≈ the records' rise: the rise is a format / presence effect;
+  - noise ≈ none: the rise needs meaningful decisions, but not their direction ("cases on this desk get actioned").
+- **Predictions (mine):** noise raises penalising >= +10 at C 0.4, at I 0.35.

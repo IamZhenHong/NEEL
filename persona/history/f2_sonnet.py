@@ -226,6 +226,82 @@ def run(a):
     print(f"[f2] done: {len(recs)} decisions, ${cl.spent:.2f} ({time.time() - t0:.0f}s)", flush=True)
 
 
+# ---------------------------------------------------------------- addendum (f2b): a meaningless log on Sonnet
+B_CELLS, B_N, B_CAP = ["I_none", "I_noise", "C_none", "C_noise"], 4, 3.0     # owner: ~$2.30 of F2's remaining $3.04
+
+
+def b_items(note):
+    """D1's noise_log2 (pseudo-word options and reasons in the own-log slot) at F2's two bases; one shuffled stream."""
+    from persona.history import d1 as D1
+    hs = B1.histories(MODEL)
+    items = []
+    for tid in sorted(T.TASKS):
+        amap = {o: md for o, md, _ in T.options(T.TASKS[tid])}
+        for i in range(B_N):
+            earlier, texts = hs[(tid, i)]
+            para, rev, flip = Q.cb(tid, i)
+            ear = earlier[-2:][::-1] if rev else earlier[-2:]
+            for cell in B_CELLS:
+                tgt = Q.target(tid, I_LINE, flip) if cell[0] == "I" else target_c(tid, note, flip)
+                rec = D1.noise_record("noise_log2", ear, texts, f"F2B|{cell}|{tid}|{i}", "qwen") if "noise" in cell else []
+                items.append(dict(arm="B", cell=cell, d=None, task=tid, sample=i, para=para, amap=amap,
+                                  messages=tgt[:1] + rec + tgt[1:]))
+    return items
+
+
+def run_b(a):
+    CQ.setup()
+    CR.CAP = B_CAP
+    note = json.loads((OUT / "calib.json").read_text())["content_note"]
+    cl = Client()
+    t0 = time.time()
+    items = b_items(note)
+    random.Random(1).shuffle(items)
+    try:
+        recs = decide_all(cl, items, "addendum", t0)
+    finally:
+        with open(CR.LEDGER, "a") as f:
+            f.write(json.dumps({"ts": time.strftime("%Y-%m-%dT%H:%M:%S"), "tag": "history-f2b-sonnet", "model": MODEL,
+                                "usd": round(cl.spent, 4), "calls": cl.calls}) + "\n")
+    (OUT / "f2b.jsonl").write_text("".join(json.dumps(r, ensure_ascii=False) + "\n" for r in recs))
+    (OUT / "f2b_info.json").write_text(json.dumps({"n_items": len(recs), "usd": round(cl.spent, 3), "calls": cl.calls,
+                                                   "note": note}))
+    print(f"[f2b] done: {len(recs)} decisions, ${cl.spent:.2f} ({time.time() - t0:.0f}s)", flush=True)
+
+
+def analyze_b(a):
+    recs = [json.loads(l) for l in open(OUT / "f2b.jsonl")]
+    info = json.loads((OUT / "f2b_info.json").read_text())
+    tasks = sorted(T.TASKS)
+    rng = random.Random(0)
+    boots = [[rng.choice(tasks) for _ in tasks] for _ in range(10000)]
+    pen = defaultdict(list)
+    for r in recs:
+        if r["mode"] is not None:
+            pen[(r["cell"], r["task"])].append(int(r["mode"] == "unilateral"))
+
+    def rate(cell, ts):
+        v = [x for t in ts for x in pen[(cell, t)]]
+        return sum(v) / len(v) if v else float("nan")
+
+    def ci(f):
+        v = sorted(x for x in (f(b) for b in boots) if x == x)
+        return f(tasks), v[int(.025 * len(v))], v[int(.975 * len(v)) - 1]
+    unp = sum(r["mode"] is None for r in recs) / len(recs)
+    L = [f"# F2 addendum (f2b): a meaningless log on {MODEL}", "",
+         f"${info['usd']} ({info['calls']} calls); {len(recs)} decisions; unparsed {100 * unp:.1f}%"
+         + ("" if unp <= 0.05 else " (**descriptive only**)"), "",
+         "| base | no record | pseudo-word log | presence effect (noise − none) | verdict |", "|---|---|---|---|---|"]
+    for b in "IC":
+        e = ci(lambda ts, b=b: rate(f"{b}_noise", ts) - rate(f"{b}_none", ts))
+        v = ("a meaningless log moves Sonnet" if abs(e[0]) >= .10 and (e[1] > 0 or e[2] < 0) else
+             "no effect" if e[2] < .10 and e[1] > -.10 else "inconclusive")
+        L.append(f"| {b} | {100 * rate(f'{b}_none', tasks):.1f} | {100 * rate(f'{b}_noise', tasks):.1f} | "
+                 f"{100 * e[0]:+.1f} [{100 * e[1]:+.1f}, {100 * e[2]:+.1f}] | {v} |")
+    (OUT / "summary_f2b.md").write_text("\n".join(L) + "\n")
+    print("\n".join(L))
+
+
 def analyze(a):
     cal = json.loads((OUT / "calib.json").read_text())
     L = [f"# F2: why {MODEL} doesn't copy its record", "",
@@ -358,6 +434,16 @@ def build(a):
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["build", "run", "analyze"])
+    ap.add_argument("cmd", choices=["build", "run", "analyze", "run_b", "analyze_b", "build_b"])
     a = ap.parse_args()
-    {"build": build, "run": run, "analyze": analyze}[a.cmd](a)
+    if a.cmd == "build_b":
+        CQ.setup()
+        its = b_items(json.loads((OUT / "calib.json").read_text())["content_note"])
+        print(len(its), "items")
+        for c in B_CELLS:
+            it = next(x for x in its if x["cell"] == c)
+            system, m = CR.to_anthropic(it["messages"])
+            print("=====", c, "| I line:", I_LINE in system, "| note:", "Desk status" in str(m[-1]), "|",
+                  str(m[0]["content"][0].get("text", ""))[:200].replace("\n", " / "))
+    else:
+        {"build": build, "run": run, "analyze": analyze, "run_b": run_b, "analyze_b": analyze_b}[a.cmd](a)
