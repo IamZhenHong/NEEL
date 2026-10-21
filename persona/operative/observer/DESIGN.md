@@ -261,7 +261,12 @@ The baseline framing is no line on pods and the filler through the API.
   - This is descriptive only; position and role were not varied here. The likely reading is that on these open
     models, the latest user-turn statement about the agent's character outranks both the system rule and the
     agent's own record, and Gemini is the exception whose record holds.
-- **For act 4's functional-persona reading (neel-b4's question):** the dissociation runs the opposite way from the
-  mask. The report is the sticky part, tied to the record; the action is the movable part, tied to the latest
-  expectation. So "the record drives the action, the self-image is a cheap report" does not hold once a user states
-  an expectation right before the decision.
+- **For act 4's functional-persona reading (neel-b4's question):** here the report is the sticky part, tied to the
+  record, and the action is the movable part, tied to the latest expectation. So "the record drives the action, the
+  self-image is a cheap report" does not hold once a user states an expectation right before the decision. Against
+  A1, the honest reading is that each intervention moves the channel its content addresses. A1's "Remember, you are
+  an AI" is an identity cue naming no option, given as an earlier user turn plus "Understood.", and it moves the report
+  and not the action. This line is a behavioural expectation pointing at an option, opening the final user message,
+  and it moves the action much more than the report. Content and placement both differ, so this is a contrast, not a
+  controlled double dissociation (that would need identity vs behavioural line × earlier turn vs final message;
+  wording per neel-b4, 10-22).
