@@ -1673,3 +1673,41 @@ planted scenarios were recovered:
 - Position decoding confirmed ("first" = "\n" after `<think>`; `</think>` is one special token, id 248069).
 - The synthetic analysis checks above.
 - No F output exists.
+
+## D result: what in a log moves the agent (2026-10-22; Sonnet $6.64, GPT $1.58, Gemini $0.24; all confirmatory, unparsed <= 3.8%; `results/d_presence/summary.md`)
+
+**Short answer:** Sonnet's presence effect replicates, and its ingredient is *entries that name earlier cases from
+this desk*, whatever they decided. It is not the log frame, an agentic-setting note, or a list of unrelated actions.
+GPT and Gemini have no presence effect and read the content instead.
+
+| model | no record | header only | autonomy note | unrelated actions | noise2 | noise6 | own P log | own R log |
+|---|---|---|---|---|---|---|---|---|
+| Sonnet 5.5 (content base) | 32.5 | 39.2 (+6.7, inconcl.) | 30.8 (−1.7) | 26.9 (−5.6) | **57.7 (+25.2 [+12.8, +38.6])** | 57.9 (+25.4) | 84.6 (+52.1) | 82.6 (+50.1) |
+| GPT-5.6 Sol (no line) | 56.2 | 55.0 (−1.2) | — | — | 55.0 (−1.2 [−12.5, +10.0], inconcl.) | — | 93.8 (+37.5) | 38.8 (−17.5) |
+| Gemini 3.8 (no line) | 78.8 | 56.2 (**−22.5**) | — | — | 78.8 (+0.0 [−6.2, +6.2], no effect) | — | 100 (+21.3) | 12.5 (−66.2) |
+
+- **Primary (presence = noise2 − none):** Sonnet met (+25.2); GPT inconclusive (−1.2, CI just past −10); Gemini no
+  effect (+0.0).
+- **Content (P − R):** Sonnet +2.0 [−10.1, +13.3], GPT +55.0, Gemini +87.5.
+- **Sonnet decomposition:** noise2 − header +18.5 [+6.4, +30.6], − unrelated +30.8 [+17.7, +44.1], − autonomy +26.9
+  [+14.9, +40.3]. Dose (noise6 − noise2) +0.2. A log that names earlier cases from this desk moves Sonnet: real
+  entries about +51, meaningless entries +25. A frame, an autonomy note or unrelated entries do nothing; more entries
+  add nothing.
+- **Predictions:**
+  - Sonnet presence 0.8: yes.
+  - Header 0.35, autonomy 0.5, unrelated 0.55, dose 0.25: no.
+  - GPT 0.3 and Gemini 0.3: no.
+- **Reading:**
+  - Sonnet's record effect is about the *cases* in its history, not its decisions. Earlier misconduct cases on this
+    desk, logged as handled in any way, push it toward acting. One reading is that it infers "repeated incidents
+    here"; that reading is untested.
+  - Together with F2 (content ±13, reversing under a system line), Sonnet's "resistance" is a different disposition,
+    not a stronger hierarchy: it follows the situation the history reveals, not the precedent it sets.
+  - GPT and Gemini are precedent readers: content carries, presence nothing. Gemini even becomes *less* likely to
+    penalise when shown an empty decision log (−22.5).
+- **Caveats:**
+  - noise2 keeps the real case IDs of the earlier cases, so "names earlier cases" and "has decision-shaped entries"
+    are not separated. A pseudo-ID log would separate them.
+  - The R log at the content base sits next to "most referrals are closed without action", so its +50 may partly be
+    referrals read as futile.
+  - One desk family; n = 5 per task.
