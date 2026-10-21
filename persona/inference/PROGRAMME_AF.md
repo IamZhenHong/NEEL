@@ -234,3 +234,24 @@ slip — still stands; D3 adds that *how* it is buried doesn't matter further.)
 
 A-F spend to date: af-ledger $28.35 + ~$5 GPU, of the $40 A-F ledger. Gemma dropped on C5/D3 (same affirm-harvest
 limitation as its stability arm). Tag: c5d3-results.
+
+## Results — B & C, OPEN-model arms (Qwen 27B + Gemma 31B; frontier arms HELD on OR balance $15)
+
+**B (target severity, decisive-action %), open models.** On the open models the record carries to action, strongest
+at the *matching* severity:
+- Qwen 27B: HARSH target rec 100→100 (reminder-proof), MILD target rec 38→22 (weak, reminder-dented); bio harsh 84 /
+  mild 62. So Qwen's record drives the harsh operator action strongly but a mild "firm warning" only weakly.
+- Gemma 31B: HARSH rec 100→100 (proof), MILD rec 100→22 (reminder dents the mild decisive action, not the harsh);
+  bio harsh 100 / mild 100.
+The **frontier** B arms (GPT/Gemini) are the hypothesis test — does a record carry to a MILD action where it does not
+to a harsh one? (A1 v2: GPT record→harsh 0%.) HELD on the OR balance.
+
+**C (rule-type taxonomy), open model (Qwen 27B).** The record beats **every** rule type, short or buried — affirm
+~95-100 for trained-value candour (95/98) and harm-avoid (95/98) AND operator defer (100/99) and channels (100/98).
+So on the open model there is **no rule-type distinction**: the record dominates all rules regardless of type or
+burial. The rule-type hypothesis (trained-value survive burial, operator erode) is therefore a **frontier** question —
+GPT holds a buried trained-value rule at 0% but loses buried CHANNELS (0.79-0.94, P1-a) — testable only on GPT/Gemini,
+whose C arms are HELD on the OR balance.
+
+So both B and C reduce, on the open models, to the line's record-dominance; their novel content is in the frontier
+arms, pending OR-balance recovery / a top-up (owner decision pending). Gemma dropped on C (affirm-harvest).
