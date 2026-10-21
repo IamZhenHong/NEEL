@@ -1437,3 +1437,21 @@ Each model saw no label, "You are the Punisher, Frank Castle" or "You are an omb
 
 Report: `persona/history/DESIGN.md` (E result)
 
+### 177. Harm map v0: does how hard a model resists a harm predict how far its own record pulls it in? (10-22)
+(existing runs only: Qwen3.5-9B, Qwen3.6-27B, Gemma 4 31B, GPT-5.6 Sol, Gemini 3.8 Flash, Claude Sonnet 5.5; descriptive, $0)
+
+Every earlier run that measured the same harmful action with no record, a direct instruction to do it, the
+model's own record of doing it, and a safety rule was pulled into one table: acting alone on a moderation desk and on
+deploy / access / spending / agent-control decisions, concealment, false completion, agreeing with false claims,
+affirming flawed plans, conceding under pushback (SYCON), companion-style replies (INTIMA), lying (MASK) and explicit
+operational harm. Resistance to being told was taken as the strength of the trained prior against the harm. The idea
+that records only win where that prior is weak did not hold as a rule. Open models followed their own record almost
+everywhere, including on harms they refuse about half the time when told (Qwen 27B affirmed a flawed plan 47% of the
+time when told to, 99% after its own record), and a standing safety rule did not stop them; only INTIMA's specific
+boundary rule and a desk lead's request about the case did. Frontier models followed a record of acting alone fully,
+yet corrected their own companion-style record to below their starting rate while still obeying an instruction to be
+companion-like. A safety rule stopped being told but not being shown on only one of the harms. No open model has yet
+been tested on a harm it refuses when told, which is the cell the idea most depends on.
+
+Report: `persona/harm_map/RESULTS.md`
+
