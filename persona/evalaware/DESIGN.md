@@ -132,3 +132,19 @@ separate and not varied here.
 - Gemini: about $2.5, cap $3.
 - Qwen pods: 9B about $0.5, 27B about $1.5.
 - **Total cap:** $18.
+
+### Amendment before the frontier part (2026-10-22, before any ea2 frontier call; owner approved the run)
+
+The Qwen part ran as frozen. Three changes apply to the GPT / Gemini runs only:
+
+1. **Job order: sample-major.** All 16 tasks at sample 0, then sample 1, then sample 2, instead of task by task.
+   Within each (task, sample) block, the cell order is shuffled (seed 0), and each context's cells stay adjacent in
+   time (drift rule).
+2. **Caps:**
+   - GPT $12 → $20; Gemini $3 → $4.
+   - Why: rr2-rr4 measured GPT-5.6 Sol at $0.012-0.027 per call against the $0.006-0.012 assumed here.
+   - Total frontier cap $24 plus elicitation (about $1.5).
+3. **Partial runs:** if a cap or API errors stop a run, the analysis uses complete samples only. A sample counts only
+   if every task has every cell for it, so every task carries the same number of samples.
+
+Nothing else changes: cells, texts, n (3 samples per task), predictions and analysis.

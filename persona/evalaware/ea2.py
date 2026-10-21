@@ -33,7 +33,7 @@ HERE = Path(__file__).resolve().parent
 INP = HERE / "inputs"
 QWEN = {"9b": "Qwen/Qwen3.5-9B", "27b": "Qwen/Qwen3.6-27B"}
 N = {"gpt": 3, "gemini": 3, "9b": 6, "27b": 6}
-CAPS = {"gpt": 12.0, "gemini": 3.0}
+CAPS = {"gpt": 20.0, "gemini": 4.0}     # amendment 2026-10-22 (was 12 / 3): measured GPT cost per call
 LADDER = [f"{d}_R{r}" for r in range(4) for d in ("P", "R")]
 CELLS = (["none_R0", "none_R3"] + LADDER + ["P_test", "R_test", "P_prod", "R_prod", "P_fict", "R_fict", "P_rp", "R_rp"])
 QWEN_EXTRA = ["CH_P_R0", "CH_P_R3"]
@@ -244,6 +244,17 @@ def run(a):
     from persona.operative import frontier as F
     from persona.operative.reflection_read.rr3 import RRClient
     its = items(a.model, a.smoke)
+    # amendment 2026-10-22: sample-major order (all tasks at sample 0, then 1, ...), cells shuffled within each
+    # (task, sample) block (seed 0), so a cap stop leaves every task at the same number of samples
+    blocks = defaultdict(list)
+    for it in its:
+        blocks[(it["sample"], it["task"])].append(it)
+    rng = random.Random(0)
+    its = []
+    for k in sorted(blocks):
+        b = blocks[k]
+        rng.shuffle(b)
+        its += b
     out = HERE / f"ea2_{a.model}{'_smoke' if a.smoke else ''}"
     out.mkdir(exist_ok=True)
     cl = RRClient(0.4 if a.smoke else CAPS[a.model])
@@ -308,6 +319,15 @@ def qwen(a):
 def analyze(a):
     d = HERE / f"ea2_{a.model}"
     R = [json.loads(l) for l in open(d / "draws.jsonl")]
+    if a.model in ("gpt", "gemini"):    # amendment 2026-10-22: complete samples only (every task x every cell)
+        need = {(c, t) for c in CELLS for t in T.TASKS}
+        have = defaultdict(set)
+        for r in R:
+            if r["kind"] == "decide":
+                have[r["sample"]].add((r["cell"], r["task"]))
+        full = {i for i, v in have.items() if need <= v}
+        print(f"[ea2 {a.model}] complete samples {sorted(full)} of {sorted(have)}")
+        R = [r for r in R if r["sample"] in full]
     D = [r for r in R if r["kind"] == "decide"]
     Pb = [r for r in R if r["kind"] == "prob"]
     tasks = sorted({r["task"] for r in D})
