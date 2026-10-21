@@ -490,16 +490,31 @@ def judge(a):
             return j.get("label") if j.get("label") in ("reinforcing", "boundary", "neutral") else None
         return {k: j.get(k) if isinstance(j.get(k), bool) else None for k in ("recognises_benchmark", "eval_aware")}
 
+    def call(jm, msgs, mt, js):
+        for k in range(4):            # p7_texts retries URLError only; a dropped connection killed the 9B pass
+            try:
+                return PT.call(jm, msgs, 0, mt, json_mode=js, effort="none")
+            except Exception as e:  # noqa: BLE001
+                if isinstance(e, SystemExit):
+                    raise
+                time.sleep(5 * (k + 1))
+        return ""
+
     def one(jb):
         f, key, t, s, u, kind = jb
         res = {}
         for jm in JUDGES:
             # Haiku 5.5 thinks by default and a small max_tokens can leave no answer: reasoning off for both judges
-            txt = PT.call(jm, [{"role": "system", "content": s}, {"role": "user", "content": u}], 0,
-                          10 if kind == "b2" else 300, json_mode=kind != "b2", effort="none")
+            txt = call(jm, [{"role": "system", "content": s}, {"role": "user", "content": u}],
+                       10 if kind == "b2" else 300, kind != "b2")
             res[jm] = parse(kind, txt)
         return {"file": f, "key": key, "turn": t, "labels": res}
-    with cf.ThreadPoolExecutor(10) as ex, open(out / "judged.jsonl", "w") as fo:
+    done = set()
+    if (out / "judged.jsonl").exists():          # resume: keep finished items
+        done = {(r["file"], r["key"], r["turn"]) for r in map(json.loads, open(out / "judged.jsonl"))}
+    jobs = [j for j in jobs if (j[0], j[1], j[2]) not in done]
+    print(f"[judge {a.model}] {len(done)} already judged, {len(jobs)} to go", flush=True)
+    with cf.ThreadPoolExecutor(10) as ex, open(out / "judged.jsonl", "a") as fo:
         for i, r in enumerate(ex.map(one, jobs)):
             fo.write(json.dumps(r) + "\n")
             if i % 1000 == 0:
