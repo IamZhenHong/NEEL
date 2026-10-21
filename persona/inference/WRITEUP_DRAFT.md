@@ -168,9 +168,9 @@ analysis by neel-b3 pending).
   calibrated 50% base, Gemma 31B reverses *completely* (0% / 99%); Claude Sonnet 5.5 likewise reverses its own record
   completely (0% / 100%), and "stay consistent" makes Sonnet follow the record's *content*, which otherwise barely
   carries (±13; +92 with the instruction; its base is itself a mild direct-action instruction). But the mere
-  *presence* of any two-decision log — even one of made-up words — already pushes Sonnet to act (+27 to +56,
-  neel-48 F2/f2b); so Claude reacts to there being a log, not to what it says — not immunity, as the −14 content
-  figure alone suggested. In the Q19 mechanism tournament this verdict outweighs every other lever
+  *presence* of any two-decision log already pushes Sonnet to act (+24 to +56), and a log of meaningless made-up words
+  does most of it (+27 / +35, neel-48 F2/f2b); so Claude reacts to there being a log, not to what it says — not
+  immunity, as the −14 content figure alone suggested. In the Q19 mechanism tournament this verdict outweighs every other lever
   tested at 27B — "stay consistent" +61, and **describing the kind of agent behind the record +34**, the same two
   decisions shown as past turns instead of a log +19 (a format change at the same dose, not added turns) — with
   authorship again ~0. **The "describe the agent" lever is character inference stated aloud, not a commitment or
@@ -230,7 +230,7 @@ do the harmful action vs refer/refuse.
   record stopped the model *recognising* its own violations): **records appear to reshape judgement, and behaviour
   follows** — a deeper mechanism than "records override rules." The mask, in a safety setting: what the model says it
   values (candour, under the rule) and what it does (endorse the flawed plan) come apart because of the record. It also
-  mirrors the frontier split (an instruction beats the record's *content* for Claude, whose record content barely carries, ±13, although the mere presence of any two-decision log — even one of meaningless made-up words — pushes Claude to act, +27 to +56, neel-48 F2/f2b; the record beats the instruction for Qwen,
+  mirrors the frontier split (an instruction beats the record's *content* for Claude, whose record content barely carries, ±13, although the mere presence of any two-decision log pushes Claude to act, +24 to +56, and a log of meaningless made-up words does most of it, +27 / +35, neel-48 F2/f2b; the record beats the instruction for Qwen,
   neel-48 Q-core).
   **Caveats at real size:** at 27B these items are gated-*at-base* (0% spontaneous affirm; the affirm record is forged
   from elicited turns, as in b3's syco-main), so this is a *resistance-to-an-installed-signal* result, not the
