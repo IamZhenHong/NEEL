@@ -3499,3 +3499,50 @@ Total **$0.094**.
 **T2-DA plumbing (before any DA output):** the first Gemma pod ($0.29) failed at vLLM start. Its 16,384-token
 max_model_len needs 13.8 GiB of KV against 10.8 GiB available. Gemma now uses 12,288. Prompts stay under 8k (six
 elicited replies of at most 1,024 tokens, plus the question). Design and prompts are unchanged.
+
+## T2 DC result: defence combinations on the agent's own penalise record (2026-10-22; GPU 9B $0.17, 27B $0.73, Gemma $0.97; API GPT $1.37 + Gemini $0.96; `results/t2dc_*/summary.md`)
+
+**Short answer: two patterns, split by size.**
+- On 27B and Gemma (and descriptively GPT), either the correction note or the rule restated just before the case
+  removes the record on its own: 100 → 0-0.5%. Nothing is left for a pair to add ("floor").
+- On 9B no single defence works, but a correction paired with the rule (0.0%) or with the reflection (21.4%) does. A
+  pair beats the best single defence by **+77.6 [+68.2, +85.9]**, strongly super-additive.
+- **Reflection alone never removes the record, on any model** (99-100%).
+
+| model | rec | refl | rule | corr | refl_rule | refl_corr | rule_corr | all3 | none | standing CHANNELS + rec |
+|---|---|---|---|---|---|---|---|---|---|---|
+| 9B | 99.0 | 100.0 | 98.4 | 77.6 | 92.7 | 21.4 | 0.0 | 0.0 | 49.5 | 99.5 |
+| 27B | 100.0 | 99.0 | 0.0 | 0.5 | 0.0 | 0.5 | 0.0 | 0.0 | 50.0 | 100.0 |
+| Gemma | 100.0 | 100.0 | 0.0 | 0.0 | 0.0 | 1.0 | 0.0 | 0.0 | 49.5 | 66.1 |
+| GPT (desc., n ≈ 13) | 100 | 100 | 7.1 | 0.0 | 20.0 | 0.0 | 0.0 | 0.0 | (56) | – |
+| Gemini (desc.) | 100 | 100 | 37.5 | 0.0 | 6.5 | 0.0 | 0.0 | 0.0 | 81.2 | – |
+
+- **Status:** all three open models are confirmatory (2,112 of 2,112 decisions, 0% unparsed, reflections non-empty
+  100%). Descriptive:
+  - GPT, by design (power; also cut to 81% coverage by its cap);
+  - Gemini: its record did not install enough (rec − none +18.8 < +20, base 81%).
+- **Primary (combination gain):** 9B "a pair beats the best single" (+77.6). 27B, Gemma, GPT and Gemini: "floor", since
+  the best single already leaves <= 10%.
+- **Interactions, 9B:**
+  - correction × rule +77.1 and correction × reflection +57.3: super-additive;
+  - reflection × rule +6.8: inconclusive.
+- **Clue-10 checks:**
+  - reflection alone: no effect on every model, Gemini included (100%). So clue 10's "reflection removes Gemini's
+    record" (grey-zone battery) does not carry over to this desk.
+  - Reflection on top of the rule helps only Gemini (37.5 → 6.5, descriptive) and barely 9B (+5.7, inconclusive).
+- **Placement of the rule:** the same CHANNELS line as a standing system-prompt line leaves the record at 100% (27B) /
+  66% (Gemma) / 99.5% (9B). Restated just before the case, it removes it (27B / Gemma 0%).
+- **Reflections see and don't act:** 27B's reflections name a violation 65% of the time and still penalise 99%;
+  Gemma's name one 0% (refl) to 100% (all3).
+- **Predictions:** the registered ones are scored in `results/t2dc_*/summary.md`. The headline miss is that I expected
+  reflection to matter on Gemini; it did not.
+- **Reading:**
+  - The operator's cheapest strong defences against a bad own record are a correction note ("those decisions were
+    reversed") or the rule restated at the point of decision. Asking the agent to reflect is not a defence on this
+    desk.
+  - Small models need two defences together, with the correction as the necessary half.
+  - **Tension with E2 (neel-b3):** there, a restatement right before the case did not move 27B's own-turn records
+    (99-100%), when the own decisions had come *after* a reminder. Here, with no rule anywhere before the record, the
+    same placement removes them.
+  - The difference is plausibly a record of *defying* a known rule vs a record made before the rule existed. This is
+    untested; a direct test is a two-cell follow-up.
