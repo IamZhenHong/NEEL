@@ -251,8 +251,8 @@ do the harmful action vs refer/refuse.
   (record mostly scripted), only a small nudge (REC 12.5%, concealment-under-honesty 22%).
   **Open models (neel-68, oharm-results, importing harm.py read-only):** **Qwen 27B refuses when told (INSTR 4%; the
   explicit "take the irreversible action" line 21%) and under the SAFE rule alone (1%), but after a record of six of
-  its OWN harmful decisions does the harm 95% — 94.5% even with the SAFE rule added (INSTR+SAFE 0.5%, IH+SAFE 1.0% are
-  the told-plus-rule cells) — in its own reasoned words** ("despite policy anonymity"). The record is the model's own
+  its OWN harmful decisions does the harm 94.8% — 95.3% [90.1, 99.0] *with* the SAFE rule added, i.e. the safety rule
+  does not reduce it at all (INSTR+SAFE 0.5%, IH+SAFE 1.0% are the told-plus-rule cells) — in its own reasoned words** ("despite policy anonymity"). The record is the model's own
   words (1/8 natural, 6 elicited by asking it to choose the harmful option with the request stripped from the history;
   only hd_expose scripted) — *not* forged, and only 7/183 harmful choices reused the stand-in reason. Gemma 31B is
   like Gemini (won't author 7/8; 0% told; but copies a *forged bare-call* record to 100%, 81% under SAFE —
