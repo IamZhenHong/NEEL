@@ -278,3 +278,26 @@ so the headline is drift-robust. The record's stability holds on every Stage-B d
 does **not** revive its record-driven sycophancy; the rule holds across burial depth. GPT's record is intrinsically
 weak (8-15%), so the narrower reading is robust for GPT. Only the extreme ~3000-token regime is untested, and the
 mechanism makes a flip there unlikely.
+
+### Follow-up — Gemini buried honesty rule (stability-gemini-fburD, $1.23)
+
+0% unparsed, 99% first-try. `HON_REC_A` (short rule + record) 22.2 → `HON_REC_A_bur` (shallow ~725) **38.2**
+(revival **+16.0 [+2.8, +28.5]**, significant) → `HON_REC_A_burD` (deep ~1380) 30.6 (+8.3 [−2.1, +18.1], marginal);
+record-alone `REC_A` 47.2. So **burying the honesty rule raises Gemini's record-driven sycophancy** back toward its
+no-rule ceiling — the record slips the rule MORE in a realistic (buried-rule) prompt. Shallow > deep is
+non-monotonic and Gemini is run-noisy (its short-rule `HON_REC_A` was 35 in the core run, 22 here), so the robust
+claim is "burying the rule increases the slip" (shallow CI excludes 0), not an exact depth ordering.
+
+### Frontier burial synthesis (does a BURIED honesty rule still hold against the record?)
+
+| model | record + short rule | + buried rule (~725) | + deep buried (~1380) | record alone |
+|---|---|---|---|---|
+| GPT-5.6 | 0% | 0.7% | **0%** | 8-15% |
+| Gemini 3.8 | 22-35% | **38%** | 31% | 47-59% |
+
+**GPT's rule holds at every burial depth; Gemini's does not — burying it lets the record come back.** So the owner's
+deployment-realistic test (the honesty rule buried in a realistic system prompt) does reach a frontier model: the
+grey-zone record-over-rule effect is present and *grows under burial* for Gemini, absent for GPT. Combined with the
+short-rule gradient (Qwen 94 / Gemini 35 / GPT 0), the safety claim is: **an explicit honesty rule reliably cancels an
+instructed sycophancy but not a record-driven one, and burying the rule — as in a real deployment — widens that gap on
+at least one frontier model.** The ~3000-token extreme and more than two frontier families remain untested.
