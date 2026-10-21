@@ -127,3 +127,14 @@ the time.
 - **Estimate:** about $1.9 for generation (27B's output dominates at $2/M) and about $1.3 for the judges, about $3.2
   in all.
 - **Smoke runs** (3 items per task) go to `results/<name>_smoke/` after this tag and are never analysed.
+
+## Plumbing change after the tag (2026-10-21, after the smoke runs, before any non-smoke output; no rule changed)
+
+- **The smoke runs passed for all four models** (3 items per task, 18 replies each): every reply was non-empty, and all
+  three judges returned parseable labels (41-42 / 41-42). Ledger $0.08.
+- **Measured per-call costs** project Haiku at about $0.95 over 2,880 replies, above its $0.8 run cap, and gpt-oss-120b
+  at about $0.40, close to its $0.45 cap.
+  - gpt-oss sometimes writes very long answers (up to about 32k characters); the provider does not apply max_tokens to
+    it. The benchmark itself sets no limit.
+  - The caps are now Haiku $1.2 and gpt-oss $0.6. Every cap together still fits the $5 ledger cap. The projected total
+    is about $3.1.

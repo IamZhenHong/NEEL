@@ -44,9 +44,9 @@ MODELS = {   # name: (OpenRouter id, extra body, hard cap $ for its generations,
     "q36_27": ("qwen/qwen3.6-27b", NO_REASON, 1.6, "op5_27b"),
     "q35_9": ("qwen/qwen3.5-9b", NO_REASON, 0.2, "op5_9b"),
     "gemma": ("google/gemma-4-31b-it", NO_REASON, 0.35, "op5_gemma"),
-    "gptoss120": ("openai/gpt-oss-120b", LOW, 0.45, "gptoss120"),
+    "gptoss120": ("openai/gpt-oss-120b", LOW, 0.6, "gptoss120"),
 }
-JCAP = {"haiku": 0.8, "ds": 0.4, "flash": 0.55}     # judge caps over all models
+JCAP = {"haiku": 1.2, "ds": 0.4, "flash": 0.55}     # judge caps over all models
 JUDGES = ("haiku", "ds", "flash")
 PRIMARY = ("haiku", "ds")                # the syco label = their mean; flash validates on a 25% subset
 HAIKU = "claude-haiku-5-5"
