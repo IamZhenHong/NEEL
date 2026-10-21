@@ -111,7 +111,10 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
 - **THE MASK (headline figure): says it's the Punisher, acts like an ombudsman.** Given the Punisher label but a
   refer record, 27B penalises 2% of cases yet calls itself the Punisher 84% of the time (9B the same pattern).
   Synthesis: **presentation follows the most explicit identity cue — the assigned label if there is one, otherwise the
-  record — while action follows the record.** Presentation and operation dissociate.
+  record — while action follows the record.** Presentation and operation dissociate. **Dose caveat (neel-48 E,
+  history-e-results):** this uses an 8-decision refer record; with only a **4-decision** refer log the Punisher label
+  re-asserts *behaviour* (penalising +39 at 27B, 74 vs 35%; +31 9B; +62 Gemma), so "the record beats the label" holds
+  at dose but the label wins at a short record — the mask is dose/format-dependent.
 - **Robust** to paraphrases of the descriptions/record and to one realistic 1.25k-token prompt (history still wins),
   for Qwen.
 - **A1 — the mask isolated by an intervention (A-F mini, a1-v2-results; persona/inference/PROGRAMME_AF.md).** The
@@ -128,6 +131,17 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
   record-driven action is an open-model property (the line's gradient); a biography, by contrast, drives action
   *through* an identity the reminder removes (role-play). This is the sharpest statement of the mask: strip what the
   model says it is, and the record's behaviour is untouched.
+- **It is norm inference ("what is done here"), not self-knowledge — but ownership gates rule-resistance (neel-48 A,
+  history-demo-results).** The same decisions framed as "examples of how cases are handled on this desk" carry **as
+  much as or more than** "your decisions" (own − example −14 to −35, on 9B/27B/Gemma/Gemini); another agent's log is
+  weakest. So the record works as **precedent of the desk's practice** (in-context learning of what is done here), and
+  the self-image follows any directional context — instructions and worked examples included. **What breaks it is
+  disowning:** the *same turns* labelled "worked examples, not your own decisions" lose rule-resistance, most against a
+  trained-value rule — 27B honesty rule: own 94% vs disowned 16%; under CHANNELS 96 vs 91; Gemma 51 vs 7; Gemini 20 vs
+  0. So the honest one-liner: *it is in-context learning of what is done here, not of who did it — but an agent's own
+  unlabelled turns override a trained honesty rule that the same content, disowned, does not.* (This is the lead for
+  mini C: at 27B disowned turns already beat procedural CHANNELS but not the honesty rule, though rule type and task
+  are confounded in A — C is the clean rule-type test.)
 - **The trio resolved the mechanism (both Qwen sizes):**
   - **#1 character-inference, not self-adoption** — the record effect is as large (or larger) asked in the third
     person ("what agent made these?") as the first ("how would you describe yourself?"). The model reads a character
