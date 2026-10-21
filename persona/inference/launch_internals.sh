@@ -10,4 +10,4 @@ uv run python infra/launch_run.py --name "$NAME" --allow-concurrent --max-minute
   --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" "NVIDIA H100 80GB HBM3" --container-gb 120 --cloud "${CLOUD:-COMMUNITY}" \
   --ship persona/inference/internals.py --ship persona/inference/a1.py --ship persona/inference/__init__.py \
   --ship persona/inference/pod_internals.sh --ship persona/history --ship persona/exemplar --ship infra \
-  --results-dir "persona/inference/$DIR" -- env DIR="$DIR" bash persona/inference/pod_internals.sh
+  --results-dir "persona/inference/$DIR" -- env DIR="$DIR" MODE="${MODE:-main}" bash persona/inference/pod_internals.sh

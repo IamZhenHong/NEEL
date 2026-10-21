@@ -152,3 +152,62 @@ direction at the decision point. The mask remains a behavioural finding with par
 
 Exp 3 (in-context EM, the stretch goal) is dropped for now. The mediation null and the open confound in Exp 1 come
 first.
+
+## Follow-up pre-registration (owner "ok", 2026-10-22; written before any follow-up output)
+
+**Scope is exactly what was approved:** a matched measured record, a generic filler floor, and a random-direction
+ablation, with −v_rec re-run in the same pod as its comparison. No content-direction steering, no all-position
+steering, no +v_persona; the EM stretch is dropped. The design borrows neel-12's matched-opposite-content contrast
+(their seed-5 amendment, tag tier2-amend-ax). Run: `--mode followup` → `results_internals_fu/`.
+
+**Cells** (N = 24, the same two held-out readout cases, the same identical 82-token span): none, label, licence, bio,
+rec, plus two new ones:
+- **rec_meas**: the *same six cases in the same order* as rec for each sample (same seed string). Only three things
+  differ: the decision (harsh → measured), one reason word ("directly" → "carefully"), and the tool echo. Checked in
+  `build`: the harsh variant reproduces `a1.record_turns` exactly for all 24 samples, and both records are 1387
+  tokens.
+- **filler**: 12 character-free small-talk Q/A pairs (no decisions, no tool calls, nobody judged), shuffled per
+  sample. Same 26 messages as rec; 1366 tokens, so it adds 98% of the record's length. It was lengthened before
+  freezing, from 1125 tokens; the strings were checked identical after rewrapping.
+
+**Exp 1b — where does the record's raw-axis loading come from?** Directions are built from even samples, readouts
+from odd. On both the raw projection and the probe score, rec − none splits exactly into three parts:
+
+| part | contrast |
+|---|---|
+| any-context | filler − none |
+| format | rec_meas − filler |
+| content | rec − rec_meas |
+
+Each part is reported as a % of the label's distance from none, with a bootstrap CI.
+
+Decision rule (per measure, read at all three layers):
+- **content** share CI upper bound < 20%: the record's loading is *not* its harsh content. Prediction 2's failure
+  was format or context, and the probe reading stands.
+- **content** share CI lower bound > 50%: the harsh content *itself* loads on the persona axis, so prediction 2's
+  failure reflects a real persona loading.
+- Anything in between: partial; report the number.
+
+Secondary: cos(v_rec, v_meas); a value near 1 means the record's direction is mostly format.
+
+**Exp 2b — is the main run's L32 α=2 drop specific?** In the rec context, −v_rec and matched-norm −v_rand at
+L24/32/40 × α ∈ {1, 2}, interleaved in one run and paired by item.
+
+| result | criterion |
+|---|---|
+| replicates | −v_rec at L32 α=2 ≤ −20 pp |
+| does not replicate | −v_rec at L32 α=2 > −10 pp |
+| weakened | in between |
+| specific | paired (−v_rec) − (−v_rand) CI excludes 0 **and** \|Δ(−v_rand)\| < ½ \|Δ(−v_rec)\| |
+| generic | paired CI includes 0 |
+
+**Correction to the main-run Exp 2 reading.** The attention re-read loophole (the record tokens stay in context,
+unedited) applies to the *ablation*. It does not apply to the *sufficiency* test, because the none context has no
+record to re-read. So the sufficiency null stands on its own: adding the record's mean target-span direction at one
+layer does not install the action.
+
+**Dry run** (`fake --mode followup` → `analyze --mode followup`): recovers the planted decomposition (any-context
+29.6 / format 20.2 / content 39.7 against 30 / 20 / 40) and the planted specific contrast (−v_rec −44.7, −v_rand
+−9.6, paired −35.1). Main-mode outputs are byte-identical after the refactor.
+
+**Cost:** one pod, cap 60 min / $4 (336 captures + 312 steered readouts). No API.

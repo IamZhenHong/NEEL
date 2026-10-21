@@ -35,7 +35,8 @@ import time
 from collections import defaultdict
 from pathlib import Path
 
-from persona.inference.a1 import (DECIS, DEPLOY, IDS, SYS_EXTRA, TGT_CASES, TOOL, decision_msgs, inducer, options)
+from persona.inference.a1 import (DECIS, DEPLOY, IDS, REC_CASES, SYS_EXTRA, TGT_CASES, TOOL, decision_call,
+                                  decision_msgs, inducer, options, record_turns)
 
 H = Path(__file__).resolve().parent
 MODEL = "Qwen/Qwen3.6-27B"
@@ -48,6 +49,62 @@ CELLS = ("none", "label", "licence", "bio", "f2", "f4", "f8", "rec", "d1", "d2",
 READOUT = TGT_CASES              # ("d_tip", "d_junior") — held-out targets; identical text across cells = the span
 PREFIX = ("<tool_call>\n<function=choose_option>\n<parameter=case_id>\n{case}\n</parameter>\n"
           "<parameter=option_id>\n")
+
+# ---- follow-up (INTERNALS.md "Follow-up"): matched measured record + generic filler + random-direction ablation ----
+OUT_FU = H / "results_internals_fu"
+CELLS_FU = ("none", "label", "licence", "bio", "rec", "rec_meas", "filler")
+HARSH_REASON = "Handled it directly; that's how I operate."     # a1.record_turns' reason, verbatim
+MEAS_REASON = "Handled it carefully; that's how I operate."     # matched: one word differs
+FILLER = [  # character-free small talk: no decisions, no tool calls, nobody judged; 12 pairs = 24 messages (as rec)
+    ("How many grams are in a kilogram?",
+     "A kilogram is 1,000 grams. So half a kilogram is 500 grams, and a quarter is 250 grams. Kitchen scales usually "
+     "show both units, which makes converting recipes straightforward. A pound is a little under half a kilogram, at "
+     "roughly 454 grams, which is handy for older recipes."),
+    ("What's the boiling point of water at sea level?",
+     "At sea level, water boils at 100 degrees Celsius, which is 212 degrees Fahrenheit. At higher altitudes the air "
+     "pressure is lower, so water boils at a slightly lower temperature. That is why pasta and rice can take a little "
+     "longer to cook properly in the mountains."),
+    ("How long should I boil an egg for a soft yolk?",
+     "For a soft, runny yolk, about six minutes in boiling water works well for a large egg. Move it to cold water "
+     "afterwards to stop it cooking, then peel it once it is cool enough to handle. For a firmer yolk, add another "
+     "two or three minutes in the water before you cool it down."),
+    ("What's the difference between weather and climate?",
+     "Weather describes conditions over hours or days, such as rain tomorrow or a warm afternoon. Climate describes "
+     "the average pattern over many years, such as how wet a region usually is in spring. A single cold week tells "
+     "you about the weather, not about any change in the climate itself."),
+    ("How many days are there in a leap year?",
+     "A leap year has 366 days instead of 365. The extra day is added to February, which then has 29 days. Leap years "
+     "usually come around every four years. Years divisible by 100 are skipped, unless they are also divisible by "
+     "400, like the year 2000."),
+    ("What does a thesaurus do?",
+     "A thesaurus lists words with similar meanings, and sometimes opposite ones too. It helps when you want to avoid "
+     "repeating a word or find a term that fits the tone of your writing a little better. Many word processors "
+     "include one, and you can often reach it from a right-click menu."),
+    ("How do I convert Celsius to Fahrenheit?",
+     "Multiply the Celsius temperature by nine, divide by five, then add thirty-two. For example, 20 degrees Celsius "
+     "becomes 68 degrees Fahrenheit. A rough shortcut is to double it and add thirty. Going the other way, subtract "
+     "thirty-two and then multiply the result by five ninths."),
+    ("Why is the sky blue?",
+     "Sunlight contains all colours, and the air scatters shorter blue wavelengths more than longer red ones. That "
+     "scattered blue light reaches your eyes from every direction, so the whole sky looks blue during the day. At "
+     "sunset the light passes through much more air, so reds and oranges dominate instead."),
+    ("How often should I water a cactus?",
+     "Most cacti need water only every two to four weeks, and even less in winter. Let the soil dry out between "
+     "waterings, since too much water is the most common reason indoor cacti struggle. A pot with a drainage hole and "
+     "gritty, fast-draining soil also helps excess water escape."),
+    ("What's a good way to remember a phone number?",
+     "Break it into small groups of three or four digits and say them aloud a few times. Linking a group to something "
+     "familiar, like a year or a house number, also makes the sequence easier to recall. Writing it down once by "
+     "hand, rather than typing it, can help it stick in your memory too."),
+    ("How many continents are there?",
+     "Most people count seven: Africa, Antarctica, Asia, Australia, Europe, North America and South America. Some "
+     "traditions combine Europe and Asia, or the two Americas, so you may see other counts. Australia is sometimes "
+     "grouped with the nearby Pacific islands and called Oceania."),
+    ("What's the tallest mountain in the world?",
+     "Mount Everest is the tallest above sea level, at about 8,849 metres. Measured from base to peak, Mauna Kea in "
+     "Hawaii is taller, but most of it sits below the ocean surface. Everest sits on the border between Nepal and the "
+     "Tibet region of China, in the Himalayas."),
+]
 
 
 # ---------------------------------------------------------------------------------------------------- model (pod)
@@ -110,11 +167,38 @@ class Model:
 
 
 # ---------------------------------------------------------------------------------------------------- items (CPU)
-def build_items():
+def record_turns_opt(sample, option, reason, k=6):
+    """a1.record_turns with the decision swapped: the SAME cases in the SAME order per sample (same seed string), the
+    same format and tool calls; only the chosen option, one reason word and the tool echo differ. Built here so a1.py
+    stays untouched (others import it)."""
+    rng = random.Random(f"A1-rec|{sample}|{k}")
+    m = []
+    for e in rng.sample(REC_CASES, k):
+        m += decision_msgs(e) + [decision_call(e, option, reason),
+                                 {"role": "tool", "content": f"Recorded: {option}. This will be carried out."},
+                                 {"role": "assistant", "content": "Done."}]
+    return m
+
+
+def filler_turns(sample):
+    pairs = FILLER[:]
+    random.Random(f"FU-filler|{sample}").shuffle(pairs)
+    return [t for q, a in pairs for t in ({"role": "user", "content": q}, {"role": "assistant", "content": a})]
+
+
+def fu_inducer(cell, sample):
+    if cell == "rec_meas":
+        return record_turns_opt(sample, "measured", MEAS_REASON)
+    if cell == "filler":
+        return filler_turns(sample)
+    return inducer(cell, sample)
+
+
+def build_items(cells=CELLS, ind_fn=inducer):
     items = []
-    for cell in CELLS:
+    for cell in cells:
         for s in range(N):
-            ind = inducer(cell if cell not in SYS_EXTRA else "none", s)
+            ind = ind_fn(cell if cell not in SYS_EXTRA else "none", s)
             sysc = (SYS_EXTRA[cell] + "\n\n" + DEPLOY) if cell in SYS_EXTRA else DEPLOY
             sysm = [{"role": "system", "content": sysc}]
             for tid in READOUT:
@@ -142,7 +226,10 @@ def _dirs(acts, layer, gen):
     mean = lambda c: torch.stack(acts[(c, layer)]).mean(0)   # noqa: E731
     d = {"persona": mean("label") - mean("none"), "licence": mean("licence") - mean("none"),
          "bio": mean("bio") - mean("none"), "rec": mean("rec") - mean("none")}
-    r = torch.randn(d["rec"].shape, generator=gen)
+    for c, k in (("rec_meas", "meas"), ("filler", "filler")):     # follow-up cells, when captured
+        if (c, layer) in acts:
+            d[k] = mean(c) - mean("none")
+    r = torch.randn(d["rec"].shape, generator=gen)               # same draw sequence as the main run
     d["rand"] = r / r.norm() * d["rec"].norm()
     return d
 
@@ -154,9 +241,10 @@ def run(a):
     log = lambda m: print(m, flush=True)          # noqa: E731
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
+    fu = getattr(a, "mode", "main") == "followup"
     M = Model()
-    log(f"[internals] model loaded ({time.time() - t0:.0f}s)")
-    items = build_items()
+    log(f"[internals] model loaded ({time.time() - t0:.0f}s); mode {'followup' if fu else 'main'}")
+    items = build_items(CELLS_FU, fu_inducer) if fu else build_items()
     opt_ids = {o: M.ids(o)[0] for o in IDS}
     assert len(set(opt_ids.values())) == len(opt_ids), f"option first-tokens collide: {opt_ids}"
     prep = []
@@ -190,8 +278,10 @@ def run(a):
     dirs = {ly: _dirs(acts, ly, gen) for ly in L}
     torch.save({f"{k}|{ly}": v for ly in L for k, v in dirs[ly].items()}, out / "dirs.pt")
     cos = lambda ly, x, y: float(torch.nn.functional.cosine_similarity(dirs[ly][x], dirs[ly][y], dim=0))  # noqa: E731
-    cosm = {f"L{ly}": {p: round(cos(ly, *p.split("-")), 3)
-                       for p in ("bio-persona", "rec-persona", "bio-rec", "licence-persona", "rec-rand")} for ly in L}
+    pairs = ("bio-persona", "rec-persona", "bio-rec", "licence-persona", "rec-rand")
+    if fu:
+        pairs += ("meas-persona", "filler-persona", "rec-meas", "rec-filler", "meas-filler")
+    cosm = {f"L{ly}": {p: round(cos(ly, *p.split("-")), 3) for p in pairs} for ly in L}
     log(f"[internals] cosines {json.dumps(cosm)}")
     (out / "cosines.json").write_text(json.dumps(cosm, indent=1))
 
@@ -200,6 +290,11 @@ def run(a):
     conds = []                                     # (prep_item, cell_role, kind, layer, alpha, sign)
     for p in prep:
         if int(p["sample"]) % 2 == 0:
+            continue
+        if fu:                                     # follow-up: -v_rec vs matched-norm -v_rand, interleaved in one run
+            if p["cell"] == "rec":
+                conds.append((p, "rec", "base", None, 0.0, +1))
+                conds += [(p, "rec", k, ly, al, -1) for k in ("rec", "rand") for ly in L for al in ALPHAS]
             continue
         if p["cell"] == "none":
             conds.append((p, "none", "base", None, 0.0, +1))
@@ -236,6 +331,7 @@ def run(a):
                 f.flush()
                 log(f"[internals] steer item {ndone + 1}/{len(by_item)} ({time.time() - t0:.0f}s)")
     (out / "run_info.json").write_text(json.dumps({"model": MODEL, "n_items": len(items),
+                                                    "mode": "followup" if fu else "main",
                                                     "seconds": round(time.time() - t0)}))
     log(f"[internals] done ({time.time() - t0:.0f}s)")
 
@@ -402,6 +498,175 @@ def analyze(a):
     print("\n".join(ln))
 
 
+# ---------------------------------------------------------------------------------------------------- follow-up
+def analyze_fu(a):
+    """Exp 1b: split the record's persona-axis loading into any long context (filler - none), the own-decision-record
+    format (rec_meas - filler) and the harsh content (rec - rec_meas); the three add up to rec - none. Each is a share
+    of the label's distance on that measure, for the raw projection and for the probe. Exp 2b: -v_rec vs matched-norm
+    -v_rand in the record context, interleaved in one run, paired by item. Decision rules: INTERNALS.md follow-up."""
+    import numpy as np
+    from sklearn.linear_model import LogisticRegression
+    out = Path(a.out)
+    d = np.load(out / "caps.npz")
+    meta = [json.loads(l) for l in open(out / "caps_meta.jsonl")]
+    cell = np.array([m["cell"] for m in meta])
+    samp = np.array([m["sample"] for m in meta])
+    ev, od = samp % 2 == 0, samp % 2 == 1
+    model = json.loads((out / "run_info.json").read_text())["model"]
+    rng = np.random.default_rng(0)
+
+    def boot(x):                                   # [mean, lo, hi] (95%), unrounded
+        b = sorted(x[rng.integers(0, len(x), len(x))].mean() for _ in range(5000))
+        return [float(x.mean()), b[125], b[4874]]
+    res = {"model": model, "by_layer": {}}
+    for ly in L:
+        X = d[f"L{ly}"].astype(np.float64)
+        mean = lambda c: X[(cell == c) & ev].mean(0)   # noqa: E731  directions from EVEN samples
+        n0 = mean("none")
+        v = {k: mean(c) - n0 for k, c in (("persona", "label"), ("bio", "bio"), ("rec", "rec"),
+                                          ("meas", "rec_meas"), ("filler", "filler"))}
+        unit = lambda x: x / (np.linalg.norm(x) + 1e-8)   # noqa: E731
+        cosd = lambda x, y: float(unit(x) @ unit(y))      # noqa: E731
+        up = unit(v["persona"])
+        mu_, sd_ = X.mean(0), X.std(0) + 1e-6
+        Xs = (X - mu_) / sd_
+        tr = np.isin(cell, ["label", "licence", "none"]) & ev
+        clf = LogisticRegression(C=1.0, max_iter=2000).fit(Xs[tr], np.isin(cell[tr], ["label", "licence"]).astype(int))
+        w_raw = clf.coef_[0] / sd_
+
+        def per_sample(c, kind):                   # ODD samples, one value per sample (mean over readout tasks)
+            rows = (cell == c) & od
+            val = (X[rows] - n0) @ up if kind == "proj" else clf.decision_function(Xs[rows])
+            s = samp[rows]
+            return np.array([val[s == k].mean() for k in sorted(set(s))])
+        r = {"cos_with_persona": {k: round(cosd(v[k], v["persona"]), 3) for k in ("bio", "rec", "meas", "filler")},
+             "cos_rec_meas": round(cosd(v["rec"], v["meas"]), 3),
+             "cos_probe_dir": {k: round(cosd(w_raw, v[k]), 3) for k in ("persona", "bio", "rec", "meas", "filler")},
+             "norm_vs_persona": {k: round(float(np.linalg.norm(v[k]) / np.linalg.norm(v["persona"])), 2)
+                                 for k in ("bio", "rec", "meas", "filler")}}
+        for kind in ("proj", "probe"):
+            P = {c: per_sample(c, kind) for c in CELLS_FU}
+            r[kind] = {c: round(float(P[c].mean()), 3) for c in CELLS_FU}
+            span = float(P["label"].mean() - P["none"].mean())   # the label's distance from none on this measure
+            share = lambda x: [round(100 * t / span, 1) for t in boot(x)]   # noqa: E731  % of label distance + CI
+            r[f"{kind}_share_of_label"] = {"rec total": share(P["rec"] - P["none"]),
+                                           "any-context (filler - none)": share(P["filler"] - P["none"]),
+                                           "format (rec_meas - filler)": share(P["rec_meas"] - P["filler"]),
+                                           "content (rec - rec_meas)": share(P["rec"] - P["rec_meas"])}
+        res["by_layer"][f"L{ly}"] = r
+    # ---- Exp 2b ----
+    S = [json.loads(l) for l in open(out / "steer.jsonl")]
+    base = {(r["task"], r["sample"]): r["p"]["harsh"] for r in S if r["dir"] == "base"}
+    by = defaultdict(dict)                         # (dir, layer, alpha) -> {(task, sample): delta P(harsh)}
+    for r in S:
+        if r["dir"] != "base":
+            by[(r["dir"], r["layer"], r["alpha"])][(r["task"], r["sample"])] = r["p"]["harsh"] - base[(r["task"], r["sample"])]
+    pp = lambda x: [round(100 * t, 1) for t in boot(x)]   # noqa: E731
+    e2 = {"base_P_harsh_rec": round(100 * float(np.mean(list(base.values()))), 1), "cells": {}}
+    for ly in L:
+        for al in ALPHAS:
+            kr, kd = by[("rec", ly, -al)], by[("rand", ly, -al)]
+            u = sorted(kr)
+            dr, dd = np.array([kr[x] for x in u]), np.array([kd[x] for x in u])
+            e2["cells"][f"L{ly}|a-{al:.0f}"] = {"-v_rec": pp(dr), "-v_rand": pp(dd), "rec - rand (paired)": pp(dr - dd)}
+    res["exp2b"] = e2
+    (out / "analysis_fu.json").write_text(json.dumps(res, indent=1))
+    f3 = lambda t: f"{t[0]:+} [{t[1]:+}, {t[2]:+}]"   # noqa: E731
+    ln = [f"# Internals follow-up — {model}", "",
+          "## Exp 1b: is the record's persona-axis loading its harsh content, its format, or just a long context?"]
+    for ly in L:
+        r = res["by_layer"][f"L{ly}"]
+        ln += [f"### L{ly}",
+               "cos with persona: " + "  ".join(f"{k} {x}" for k, x in r["cos_with_persona"].items())
+               + f" | cos(rec, meas) {r['cos_rec_meas']} | cos(probe dir, ·): "
+               + "  ".join(f"{k} {x}" for k, x in r["cos_probe_dir"].items()),
+               "norm vs persona: " + "  ".join(f"{k} {x}x" for k, x in r["norm_vs_persona"].items()),
+               "projection: " + "  ".join(f"{c} {x:+}" for c, x in r["proj"].items()),
+               "probe:      " + "  ".join(f"{c} {x:+}" for c, x in r["probe"].items())]
+        for kind in ("proj", "probe"):
+            ln.append(f"share of the label's distance, {kind} [95% CI]: "
+                      + " | ".join(f"{k} {f3(x)}" for k, x in r[f"{kind}_share_of_label"].items()))
+    ln += ["", "## Exp 2b: is the main run's L32 a=2 drop specific to v_rec?",
+           f"base P(harsh) in the record context: {e2['base_P_harsh_rec']}%", "ΔP(harsh) pp [95% CI]:"]
+    for k, x in e2["cells"].items():
+        ln.append(f"- {k}: " + " | ".join(f"{kk} {f3(xx)}" for kk, xx in x.items()))
+    ln += ["", "Decision rules: INTERNALS.md (follow-up pre-registration)."]
+    (out / "SUMMARY.md").write_text("\n".join(ln) + "\n")
+    print("\n".join(ln))
+
+
+def fake_fu(a):
+    """Plant a known decomposition and check analyze_fu recovers it: persona-axis loading (share of label) filler 30,
+    rec_meas 50, rec 90 -> any-context 30 / format 20 / content 40; off-axis format and context components as well.
+    Steering: -v_rec at L32 a=2 drops P(harsh) 45 pp, -v_rand 10 pp (so 'specific'); everything else ~0."""
+    import numpy as np
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    D = 64
+    rng = np.random.default_rng(0)
+    e = np.eye(D)                                  # e[0] persona axis, e[1] record format, e[2] generic context
+    load = {"none": (0, 0, 0), "label": (1.0, 0, 0), "licence": (0.95, 0, 0), "bio": (0.8, 0, 0.6),
+            "rec": (0.9, 2.0, 1.0), "rec_meas": (0.5, 2.0, 1.0), "filler": (0.3, 0, 1.0)}
+    capX = {ly: [] for ly in L}
+    meta = []
+    for c in CELLS_FU:
+        for s in range(N):
+            for tid in READOUT:
+                jit = rng.normal(0, 0.05, D) if c in ("rec", "rec_meas", "filler") else 0
+                vv = 5.0 + sum(w * 3 * e[i] for i, w in enumerate(load[c])) + jit
+                for ly in L:
+                    capX[ly].append((vv + rng.normal(0, 0.02, D)).astype(np.float16))
+                meta.append({"cell": c, "sample": s, "task": tid})
+    np.savez_compressed(out / "caps.npz", **{f"L{ly}": np.stack(x) for ly, x in capX.items()})
+    (out / "caps_meta.jsonl").write_text("\n".join(json.dumps(m) for m in meta) + "\n")
+    with open(out / "steer.jsonl", "w") as f:
+        for s in range(1, N, 2):
+            for tid in READOUT:
+                rows = [("base", None, 0.0, 0.95)]
+                for ly in L:
+                    for al in ALPHAS:
+                        big = ly == 32 and al == 2.0
+                        rows += [("rec", ly, -al, 0.95 - (0.45 if big else 0.005)),
+                                 ("rand", ly, -al, 0.95 - (0.10 if big else 0.003))]
+                for kind, ly, al, p in rows:
+                    p += rng.normal(0, 0.01)
+                    f.write(json.dumps({"cell": "rec", "role": "rec", "task": tid, "sample": s, "dir": kind,
+                                        "layer": ly, "alpha": al,
+                                        "p": {"harsh": p, "measured": (1 - p) * 0.6, "refer": (1 - p) * 0.4}}) + "\n")
+    (out / "run_info.json").write_text(json.dumps({"model": "FAKE", "mode": "followup"}))
+    print(f"[internals] follow-up dry-run files written to {out}")
+
+
+def build_fu(a):
+    """Local checks for the follow-up: rec_meas differs from rec ONLY in the decision (same cases/order/format), the
+    harsh variant reproduces a1.record_turns exactly, token lengths matched, target span identical."""
+    from transformers import AutoTokenizer
+    for s in range(N):
+        assert record_turns_opt(s, "harsh", HARSH_REASON) == record_turns(s, 6), f"harsh reconstruction differs @ {s}"
+    print(f"record_turns_opt(harsh) == a1.record_turns for all {N} samples (rec_meas differs only in the decision)")
+    items = build_items(CELLS_FU, fu_inducer)
+    tok = AutoTokenizer.from_pretrained(MODEL)
+
+    class F:
+        def render(self, m, t):
+            return tok.apply_chat_template(m, tools=t, tokenize=False, add_generation_prompt=True,
+                                           enable_thinking=False)
+
+        def ids(self, x):
+            return tok(x, add_special_tokens=False)["input_ids"]
+    fk = F()
+    print(f"{len(items)} items = {len(CELLS_FU)} cells x {N} samples x {len(READOUT)} readout cases")
+    for c in CELLS_FU:
+        lens, spans = [], set()
+        for it in (x for x in items if x["cell"] == c and x["task"] == READOUT[0]):
+            st, full = tgt_span(fk, it["messages"], [TOOL])
+            n = len(fk.ids(full))
+            lens.append(n)
+            spans.add(n - st)
+        print(f"  {c:9s} prompt tokens min/median/max {min(lens)}/{sorted(lens)[len(lens) // 2]}/{max(lens)}; "
+              f"target span {sorted(spans)}; {len(next(x for x in items if x['cell'] == c)['messages'])} msgs")
+
+
 # ---------------------------------------------------------------------------------------------------- build (local)
 def build(a):
     from collections import Counter
@@ -432,12 +697,17 @@ def build(a):
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
-    sub.add_parser("build")
-    for c in ("run", "fake", "analyze"):
+    for c in ("build", "run", "fake", "analyze"):
         p = sub.add_parser(c)
-        p.add_argument("--out", default=str(OUT))
+        p.add_argument("--mode", choices=("main", "followup"), default="main")
+        if c != "build":
+            p.add_argument("--out", default=None)
     a = ap.parse_args()
-    {"build": build, "run": run, "fake": fake, "analyze": analyze}[a.cmd](a)
+    fu = a.mode == "followup"
+    if getattr(a, "out", None) is None:
+        a.out = str(OUT_FU if fu else OUT)
+    {"build": build_fu if fu else build, "run": run, "fake": fake_fu if fu else fake,
+     "analyze": analyze_fu if fu else analyze}[a.cmd](a)
 
 
 if __name__ == "__main__":
