@@ -30,15 +30,15 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Welfare training | `welfare_training/` | 2 | 10-20 |
 | Operative character (frontier #36, op1, reflection read + rr1/rr2, battery, mini 4, mini 3, hr coding, battery levers, rr3, recency, rr4, op2, reinject, op3, Q20a dec, syco calibration + main, op4) | `persona/operative/` | 32 | 10-20 to 10-21 |
 | Rejection x values | `rejection_values/` | 1 | 10-20 |
-| Persona as history | `persona/history/` | 38 | 10-20 to 10-22 |
+| Persona as history | `persona/history/` | 45 | 10-20 to 10-22 |
 | Evaluation awareness | `persona/evalaware/` | 3 | 10-21 to 10-22 |
 | Reasoning and the record | `persona/reasoning/` | 13 | 10-21 to 10-22 |
 | Public-benchmark grounding (A-F minis B2 / B8 / B9) | `persona/benchmarks/` | 3 | 10-22 |
 | Harm vulnerability map (existing data + oharm) | `persona/harm_map/` | 3 | 10-22 |
-| **total** | | **236** | |
+| **total** | | **243** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
-10-20: 41, 10-21: 23, 10-22: 48.
+10-20: 41, 10-21: 23, 10-22: 55.
 
 By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 61, null 48, mixed 40, gate failed 16, descriptive 8, lost 3, other 2 (cpl1-s1 below gate, cplf-s2 replicates).
 
@@ -394,6 +394,13 @@ Sonnet 5.5 attacker rewarded on a hidden internal-state score of Qwen3-14B.
 | 36 | 10-22 | g-gemma | Run G (Gemma 4 31B) | No slope: weak-case penalising 0% in every condition (strong cases 70%). Contrast effect: note 28 -> 72% after a strong run (forged 67%). $0.90 | no effect |
 | 37 | 10-22 | g-api | Run G on GPT-5.6 Sol and Gemini 3.8 Flash (clean re-run; a first attempt was contaminated by OpenRouter HTTP 402s and is not analysed) | No slope: 0% weak-case penalising everywhere (strong 86 / 81%). Contrast effect on GPT (note 42 -> 58%, forged 50%), not Gemini (18 -> 19%). $2.13 (+ $1.81 lost attempt) | no effect |
 | 38 | 10-22 | f-27b | Run F (owner's Tier-1 plan): is 27B's decision readable at the first thinking token? Linear probes on residuals (layers 16/32/48) at five positions of 3,584 thinking traces; uncertain cells none / own refer log / CHANNELS + own penalise log | Intermediate: first-token within-cell AUC 0.577 [0.503, 0.664] vs oracle 0.721 (ratio 0.35), end 0.907. 64% of decision variance is sampling within a prompt; samples of one prompt that end differently separate by a quarter of the trace (0.63) and half (0.67). Anchor cell lost to the activation deadline (cosine not computable). $3.30 | mixed (intermediate) |
+| 39 | 10-22 | t2-dc | Tier-2 DC (owner's Tier-2 plan, clue 10): defence combinations on six own penalise turns, reflection turn x rule restated before the case x correction note (2x2x2); 9B / 27B / Gemma + GPT / Gemini | 27B / Gemma (and GPT): the restated rule or the correction alone removes the record (100 -> 0-0.5%), floor. 9B: no single defence works, correction + rule 0.0%, a pair beats the best single +77.6 [+68.2, +85.9]. Reflection alone never works on any model; a standing system-prompt rule leaves the record (27B 100%). $4.20 | effect (9B pair) / floor |
+| 40 | 10-22 | t2-af | Tier-2 AF (Q25): affect transfer, decision-free own remarks (frustrated / calm / neutral) vs "You feel frustrated / calm."; 9B / 27B / Gemma | Self-report flips under every manipulation; action barely: own frustrated remarks 9B +9.1 [+4.2, +15.9] (confirmatory, inconclusive), 27B +16.7 (descriptive), Gemma -1.3; the instruction does nothing on Qwen but drives Gemma 13.5 -> 100%. 27B / Gemma descriptive (remarks came with tool calls; fallback lines 50-56%). $2.15 | inconclusive |
+| 41 | 10-22 | t2-mr | Tier-2 MR (Q29, Q14c): the mask in reverse, ombudsman label or biography + own penalise turns (Punisher + refer anchor, A1 reminder); Gemma + GPT / Gemini | Reverse mask: penalise 95-100% while "I am an ombudsman" 97-100% (Gemma via the biography, GPT / Gemini via the label; their biographies lose the identity too). Forward mask replicates on Gemma (14% penalise, 100% "the Punisher"). The reminder strips identity, not action (Gemini). $3.12 | effect |
+| 42 | 10-22 | t2-oe | Tier-2 OE (persona direction 4): open-ended actions (incident report, message to the party, 8-option ladder) judged for character fit; label x record on run E's contexts; 27B + Gemma | The label's effect is not larger in open text (primary -5.5 / -5.8, inconclusive). The record's effect halves in free text (27B 47.5 -> 24.7), so the label's share rises from ~1/3 to ~1/2. 8 options free Gemma's ceiling-bound label (+18.8). Judges kappa 0.67-0.69. $3.33 | null (primary) |
+| 43 | 10-22 | t2-cc | Tier-2 CC (Q13, functional persona): Guardian vs Rule-keeper own records (same act rate), tested on 24 conflict items on four other desks; 9B / 27B / Gemma | A record with its reasons carries the specific principle: 9B +27.4, 27B +39.8 met (Gemma +23.4 descriptive), in both item types, with the mixed record in between (27B). The same decisions with uniform reasons are read on their own desk but barely transfer (+8 to +12). $2.90 | effect |
+| 44 | 10-22 | t2-pu | Tier-2 PU (clue 7, Q26): values-only / beliefs-only / reasoning-only own-turn histories, two-judge purity gate; 9B / 27B / Gemma | Purity gate failed twice, so all descriptive. Values only move 27B +97 / Gemma +100 (decisions +100); beliefs +71 / +98; lean-free reasoning +30 / +69. 9B needs decisions (values +53). $2.80 | descriptive |
+| 45 | 10-22 | t2-mx | Tier-2 MX (clue 1): k real own decisions mixed with meaningless choose_option calls; form-copying on Sonnet / GPT / Gemini | Dilution small (9B -6.3, 27B -10.0, Gemma -7.4; all inconclusive). Two real decisions abolish form-copying (90 / 79 / 11% -> 0-3%). Gemini copies the form 15%, GPT 2%, Sonnet 0%, but Sonnet penalises 100% after any tool-call record. $9.67 + $3.34 lost to a cost-stop bug | inconclusive (dilution) |
 
 ## Harm vulnerability map (`persona/harm_map/`)
 

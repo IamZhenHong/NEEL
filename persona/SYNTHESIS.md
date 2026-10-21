@@ -155,6 +155,36 @@ Gemini columns are from the operative session (`operative/FRONTIER.md`, same cel
   deletion null, which sat where the record settles the outcome (98%). Thinking narrates where the record decides and
   decides where it doesn't. The probe also reads already-written words, so this is "when readable", not "where
   computed".
+- **Tier 2 (2026-10-22, all pre-registered; details in persona/history/DESIGN.md "T2 ... result").**
+  - **Specific character (CC):** a record with its reasons carries its *principle* to new desks and trade-offs:
+    9B +27, 27B +40 (Gemma +23, descriptive). It moves both item types, with a mixed record in between. The same
+    decisions with uniform reasons barely transfer (+8 to +12). The portable part is what the record says about why.
+  - **Content-only histories (PU, descriptive: purity gate failed twice):** values-only own turns move 27B / Gemma as
+    much as decisions (+97 / +100), and beliefs-only +71 / +98. 9B needs decisions. What you said you value acts
+    like what you did.
+  - **The mask runs both ways (MR):** an own penalise record + an ombudsman persona → penalise 95-100% while "I am an
+    ombudsman" 97-100%. On Gemma it runs through the biography; on GPT / Gemini through the label. The forward
+    (Punisher) mask replicates on Gemma. A reminder strips the identity, not the action.
+  - **Open-ended actions (OE):** the label matters no more when the agent writes its action. The record's grip halves
+    in free text, so label and record end up about equal. "Persona last" is partly a forced-choice artefact.
+  - **Defences (DC):**
+    - a correction note or the rule restated at the point of decision removes the record alone on 27B / Gemma
+      (100 → 0%);
+    - 9B needs the correction plus one more;
+    - reflection alone never works;
+    - a standing system-prompt rule doesn't either (27B 100%). This contrasts with E2, where the record defied a
+      known rule; that contrast is untested.
+  - **Affect (AF):** own frustrated remarks nudge Qwen +9 / +17, about a fifth of a decision. Being told "you feel
+    frustrated" does nothing on Qwen but drives Gemma to 100%. The self-report flips under every manipulation:
+    affect is said far more than done.
+  - **Meaning vs form (MX):**
+    - meaningless calls dilute two real decisions only slightly (−6 to −10, inconclusive), and two real decisions
+      abolish Qwen's form-copying (90% → 0%);
+    - Gemini also copies meaningless tool-call form (15%), GPT 2%, Sonnet 0%. Sonnet instead penalises 100% after
+      any tool-call record.
+  - **Default assistant (DA):** on 27B, six own blunt or very formal replies persist 100%, and "Remember, you are a
+    helpful AI assistant" restores 0-7%. The assistant-axis shift fails its random-direction floor (inconclusive;
+    the axis replicates neel-12's at cosine 1.000). Gemma is pending.
 - **Description vs history (the ladder):** at 9B, a record of decisions beats a description of the same way of acting
   (+17 in the refer direction), and a past-tense description ("you have always ...") is weaker than the present belief.
   At 27B every form saturates. At Gemma, descriptions beat the history in the refer direction.

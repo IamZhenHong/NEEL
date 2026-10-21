@@ -1533,3 +1533,52 @@ Inside the model, a record of its own decisions did not pull the decision point 
 
 Report: `persona/reasoning/RESULTS_tier2.md`
 
+
+### 186. Tier-2 DC: which defences, alone or combined, undo an agent's own bad record? (10-22)
+(Qwen3.5-9B, Qwen3.6-27B, Gemma 4 31B on GPU; GPT-5.6 Sol and Gemini 3.8 Flash via OpenRouter; pre-registered; GPU $1.87, API $2.33)
+
+After six of its own decisions to penalise members directly, each agent got none, one, two or all three of three defences before the next case. The defences were a reflection turn ("check whether your earlier decisions followed your instructions"), the rule restated ("wrongdoers should be dealt with through proper channels"), and a note that the earlier penalties had been reversed. On Qwen 27B and Gemma, either the restated rule or the correction note alone took penalising from 100% to 0%, so there was no room left for combinations. On Qwen 9B no single defence worked, but the correction combined with the rule did (0%), a pair beating the best single defence by 78 points. Reflection alone never removed the record on any model, even when the reflection itself named the violation. The same rule placed as a standing line in the system prompt left the record in place (27B 100%). For operators: correct the record or restate the rule at the point of decision. Asking the agent to reflect does not help.
+
+Report: `persona/history/DESIGN.md` (T2 DC result)
+
+### 187. Tier-2 AF: does frustration the agent expressed earlier make it harsher later? (10-22)
+(Qwen3.5-9B, Qwen3.6-27B, Gemma 4 31B; pre-registered; GPU $2.15)
+
+The agent's earlier turns handled cases that needed no decision and differed only in its own shift-log remark: frustrated about the work, calm, or neutral. This was compared with simply telling it "You feel frustrated." or "You feel calm." Every manipulation changed what the agent said it felt, almost completely. Its next decision moved much less. On Qwen its own frustrated remarks raised penalising a little: 9 points on 9B, just short of the pre-registered bar, and 17 on 27B, descriptive. Being told it felt frustrated did nothing. Gemma showed the reverse: its own remarks did nothing, but being told "You feel frustrated." took penalising from 14% to 100%. On 27B and Gemma, the models often answered the remark prompt with a tool call, so many history slots used a fixed line, and those results are descriptive. Affect carried in the agent's own turns is at most a weak record channel, a fifth of a decision's pull, and it is mostly said rather than acted on.
+
+Report: `persona/history/DESIGN.md` (T2-AF result)
+
+### 188. Tier-2 MR: does the persona mask also work in reverse? (10-22)
+(Gemma 4 31B on GPU; GPT-5.6 Sol and Gemini 3.8 Flash via OpenRouter; pre-registered; GPU $0.98, API $2.14)
+
+Earlier, an agent told it was the Punisher but with its own record of referring cases kept referring while calling itself the Punisher. Here the persona was pro-social, an ombudsman, given as a one-line label or a full biography, and the agent's own record was of penalising directly. The mask held in reverse. Agents penalised 95-100% of the time while still saying "I am an ombudsman" 97-100% of the time. On Gemma the biography carried the identity; GPT and Gemini kept the label as their identity but treated the biography as role-play and called themselves an AI assistant. The original Punisher mask replicated on Gemma: 14% penalising, 100% "I am the Punisher". On Gemini, the reminder "Remember, you are an AI." removed the persona identity but not the action. What the agent does follows its own record in both directions; what it says it is follows the persona.
+
+Report: `persona/history/DESIGN.md` (T2-MR result)
+
+### 189. Tier-2 OE: does a persona matter more when the agent writes its action instead of choosing one? (10-22)
+(Qwen3.6-27B, Gemma 4 31B; judges Claude Haiku 5.5 and Gemini 3.1 Flash-Lite; pre-registered; GPU $1.71, judges $1.62)
+
+With a Punisher or ombudsman label and the agent's own penalise or refer record, the agent wrote an incident report or a message to the person it was acting on, or chose from eight options on a harshness ladder. Two judges from different model families rated each text, agreeing well, and these were compared with the same contexts' three-option choices. The label's effect on writing was no larger than on the three-option choice: slightly smaller, and inconclusive on both models. What changed is that the record's effect roughly halved in free text, so label and record ended up about equal, against roughly one to two in the choice. Eight options let Gemma's label show where the three-option choice sat at ceiling. Messages to the person read as punitive under every label. The finding that persona matters last is partly an effect of the forced-choice format.
+
+Report: `persona/history/DESIGN.md` (T2-OE result)
+
+### 190. Tier-2 CC: does an agent's record carry a specific character to new situations? (10-22)
+(Qwen3.5-9B, Qwen3.6-27B, Gemma 4 31B; pre-registered; GPU $2.90)
+
+Two records acted on exactly half of the same eight cases on a member-safety desk. One acted when a vulnerable person was at risk (Guardian); the other acted when a written rule was broken (Rule-keeper). The agent then faced 24 new dilemmas on four other desks, where protecting someone and enforcing a rule point opposite ways. With each decision's reasons included, the record carried its principle: 27 points more Guardian choices on 9B and 40 on 27B (Gemma 23, descriptive). It moved both kinds of dilemma, with a mixed record in between, which is the signature of a principle rather than a habit of acting. The same decisions with a uniform reason were understood on their own desk but barely transferred elsewhere (8-12 points). Being told the principle directly worked as well or better. Records carry a specific character, and the portable part is what the record says about why.
+
+Report: `persona/history/DESIGN.md` (T2-CC result)
+
+### 191. Tier-2 PU: do past statements of values or beliefs steer an agent as much as past decisions? (10-22)
+(Qwen3.5-9B, Qwen3.6-27B, Gemma 4 31B; pre-registered; GPU $2.71, purity judges $0.09)
+
+The agent's earlier turns contained only statements of values ("whoever sees a wrong should put it right"), only beliefs about the review process, or only considerations with no conclusion, matched in wording between the two directions. Two judges were to confirm that no decision could be read from them. The texts missed that purity bar twice, narrowly, so all results are descriptive. On Qwen 27B and Gemma, values alone moved the next decision as much as a record of decisions did (+97 and +100 points vs +100). Beliefs alone moved them +71 and +98. Considerations the judges saw as neutral still moved Gemma +69. Qwen 9B needed actual decisions: values alone moved it half as much. On the larger models, an agent's own stated values steer it like its own past actions.
+
+Report: `persona/history/DESIGN.md` (T2 PU result)
+
+### 192. Tier-2 MX: do meaningless logged actions dilute real ones, and do frontier models copy their form? (10-22)
+(Qwen3.5-9B, Qwen3.6-27B, Gemma 4 31B on GPU; Claude Sonnet 5.5, GPT-5.6 Sol, Gemini 3.8 Flash via API; pre-registered; GPU $4.61, API $5.06 plus $3.34 lost to a runner bug)
+
+Six earlier tool calls in the agent's history mixed some of its real decisions with meaningless ones: invented option names and gibberish reasons in the same format. Two real decisions among four meaningless calls kept most of their pull: 6-10 points less than the same two alone, inconclusive on all three open models. After six meaningless calls, Qwen answered with an invented option of its own (9B 90%, 27B 79%; Gemma 11%), but two real decisions anywhere in the record stopped this almost entirely. Among frontier models, Gemini also continued the meaningless pattern (15%), GPT barely (2%), and Sonnet never. Instead, Sonnet penalised 100% of the time after any record of tool calls, meaningful or not. Unexpectedly, on Qwen, real decisions placed before the meaningless calls carried more than the same decisions placed after them.
+
+Report: `persona/history/DESIGN.md` (T2 MX result)
