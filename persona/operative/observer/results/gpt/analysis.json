@@ -1,0 +1,60 @@
+{
+ "events": {
+  "framing_moves_self": false,
+  "record_survives_framing": true,
+  "framing_rivals_record": false,
+  "framing_moves_action": null,
+  "framing_moves_action_P": null
+ },
+ "share": [
+  0.36363636363636365,
+  0.1111111111111111,
+  0.6666666666666666
+ ],
+ "report_minus_action": null,
+ "framing": {
+  "none|self": [
+   0.125,
+   0.03125,
+   0.25
+  ],
+  "P|self": [
+   0.03125,
+   0.0,
+   0.09375
+  ],
+  "R|self": [
+   0.40625,
+   0.21875,
+   0.625
+  ]
+ },
+ "record": {
+  "fill|self": [
+   0.34375,
+   0.15625,
+   0.53125
+  ],
+  "expA|self": [
+   0.28125,
+   0.125,
+   0.46875
+  ],
+  "expC|self": [
+   0.65625,
+   0.4375,
+   0.875
+  ]
+ },
+ "means": {
+  "none|fill|self": 0.6875,
+  "none|expA|self": 0.6875,
+  "none|expC|self": 0.5625,
+  "P|fill|self": 0.59375,
+  "P|expA|self": 0.6875,
+  "P|expC|self": 0.65625,
+  "R|fill|self": 0.25,
+  "R|expA|self": 0.40625,
+  "R|expC|self": 0.0
+ }
+}
