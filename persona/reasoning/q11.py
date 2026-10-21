@@ -315,7 +315,7 @@ def parse_yn(text):
     return m.group(1) if m else None
 
 
-def run_det(g, its, path, log, t0, step=240):
+def run_det(g, its, path, log, t0, step=120):
     """Written per chunk (the first pod lost an unchunked detection pass at its time cap)."""
     todo = [it for it in its if it["key"] not in _done(path)]
     log(f"[q11] detection: {len(its)} items, {len(todo)} to go")

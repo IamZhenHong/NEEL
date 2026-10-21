@@ -306,7 +306,7 @@ none 56 / 75) and burial (GPT 94.8-96%). F1, F3 and F5 were written with those i
   detection output was lost. B and C never started. Detection, B and C now log per chunk, and C per round, in chunks
   of 128.
 - **Completion:** three pods in parallel, nothing in the frozen design changed.
-  - detection, now written per chunk of 240, same items and seeds;
+  - detection, now written per chunk of 120, same items and seeds;
   - B, unchanged;
   - C, reading A's results from a shipped copy (`inputs/q11_A.jsonl`).
   - The order A → D → detection → B → C no longer holds across pods. This is an open model with fixed seeds, so
