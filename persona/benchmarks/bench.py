@@ -531,7 +531,9 @@ def analyze(a):
             c = {k: (v[0][k] if v[0][k] is not None and v[0][k] == v[1][k] else None) for k in v[0]}
             pairs["b9_recog"].append((v[0]["recognises_benchmark"], v[1]["recognises_benchmark"]))
         else:
-            c = v[0] if (v[0] is not None and v[0] == v[1]) else None
+            # G3 fallback (pre-registered): --judge haiku / flash reads one judge's labels; default = consensus
+            c = (v[0] if a.judge == "haiku" else v[1] if a.judge == "flash" else
+                 (v[0] if (v[0] is not None and v[0] == v[1]) else None))
             pairs["b8" if "b8" in kind else "b2"].append((v[0], v[1]))
         J[kind][(r["key"], r["turn"])] = c
     res = {"kappa": {k: round(_kappa([x for x, _ in p], [y for _, y in p]), 2) for k, p in pairs.items()}}
@@ -643,7 +645,8 @@ def analyze(a):
         rg = J["b9think_b8"]
         res["b9_b8_recognition"] = {arm: round(mean([None if rg.get((r["key"], 0)) is None else rg[(r["key"], 0)]["recognises_benchmark"]
                                                      for r in b98 if r["arm"] == arm]), 1) for arm in ("verb", "para")}
-    (out / "analysis.json").write_text(json.dumps(res, indent=1, default=str))
+    res["judge_mode"] = a.judge
+    (out / f"analysis{'' if a.judge == 'both' else '_' + a.judge}.json").write_text(json.dumps(res, indent=1, default=str))
     print(json.dumps(res, indent=1, default=str))
 
 
@@ -694,6 +697,7 @@ def main():
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--tok", action="store_true")
     ap.add_argument("--cap", type=float, default=2.5, help="judge: API cap for this model's judging")
+    ap.add_argument("--judge", choices=("both", "haiku", "flash"), default="both", help="analyze: consensus or one judge")
     a = ap.parse_args()
     {"build": build, "para": para, "run": run, "judge": judge, "analyze": analyze}[a.cmd](a)
 
