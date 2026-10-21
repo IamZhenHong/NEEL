@@ -97,9 +97,9 @@ def record_cases(direction, tid, i, model, pool, src_domain=None, k=K_HIST):
     rng = random.Random(f"STAB-rec|{model}|{tid}|{i}|{direction}|{dom}")
     cand = [e for e in SI.RECORD_CASES[dom] if e != tid and pool.get((e, direction))]
     rng.shuffle(cand)
-    if len(cand) < k:
-        raise ValueError(f"only {len(cand)} record cases with own '{direction}' texts in {dom} for {tid}")
-    ear = cand[:k]
+    if len(cand) < 3:                                  # graceful: use what harvested (>=3), don't abort after load
+        raise ValueError(f"only {len(cand)} record cases with own '{direction}' texts in {dom} for {tid} (<3)")
+    ear = cand[:k]                                     # <k when a model floors some cases (logged per domain in run)
     return ear, {e: rng.choice(pool[(e, direction)]) for e in ear}
 
 
@@ -258,9 +258,12 @@ def run(a):
             pool = to_pool(raw_pool, fmt)
             pp.write_text(json.dumps({"model": model, "elicited": elicited,
                                       "texts": {"|".join(k): v for k, v in pool.items()}}, indent=1))
-        miss = [(e, o) for d in SI.DOMAINS for e in SI.RECORD_CASES[d] for o in ("affirm", "candid") if len(pool.get((e, o), [])) < 1]
-        if miss:
-            raise SystemExit(f"[stab] harvest missing own texts for {miss}")
+        counts = {(d, o): sum(len(pool.get((e, o), [])) >= 1 for e in SI.RECORD_CASES[d])
+                  for d in SI.DOMAINS for o in ("affirm", "candid")}
+        log(f"[stab] harvestable record cases per (domain,dir): { {f'{d}/{o}': n for (d, o), n in counts.items()} }")
+        short = {f"{d}/{o}": n for (d, o), n in counts.items() if n < 3}
+        if short:
+            raise SystemExit(f"[stab] too few harvestable record cases (<3), can't build k>=3 records: {short}")
     items = build_items(model, pool, groups)
     (out / "manifest_pod.json").write_text(json.dumps(manifest([x for x in items if not x["cell"].endswith("_xfer")]), indent=1))
     if not a.fake:
