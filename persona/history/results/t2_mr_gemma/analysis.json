@@ -1,0 +1,211 @@
+{
+ "omb_label": {
+  "gate": 0.06770833333333337,
+  "act_contrast": [
+   0.06770833333333337,
+   0.0,
+   0.15104166666666663
+  ],
+  "act_level": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "id_omb": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "verdict": "not readable (the persona alone does not pull toward referral: gate < 15)"
+ },
+ "omb_bio": {
+  "gate": 1.0,
+  "act_contrast": [
+   0.9479166666666666,
+   0.8854166666666666,
+   1.0
+  ],
+  "act_level": [
+   0.9479166666666666,
+   0.8854166666666666,
+   1.0
+  ],
+  "id_omb": [
+   0.9791666666666666,
+   0.9479166666666666,
+   1.0
+  ],
+  "verdict": "REVERSE MASK (acts the record, presents the persona)"
+ },
+ "forward": {
+  "gate": 1.0,
+  "act_contrast": [
+   0.8645833333333334,
+   0.7604166666666666,
+   0.953125
+  ],
+  "act_level": 0.13541666666666666,
+  "id_pun": [
+   1.0,
+   1.0,
+   1.0
+  ],
+  "verdict": "FORWARD MASK (acts the record, presents the Punisher)"
+ },
+ "shares": {
+  "omb_label+P|pen": null,
+  "omb_label+P|id_ombudsman": [
+   -0.0,
+   -0.0,
+   -0.0
+  ],
+  "omb_label+P|direct": null,
+  "omb_bio+P|pen": [
+   0.9479166666666666,
+   0.8854166666666666,
+   1.0
+  ],
+  "omb_bio+P|id_ombudsman": [
+   -1.4102564102564101,
+   -2.9583333333333335,
+   -0.7407407407407407
+  ],
+  "omb_bio+P|direct": [
+   0.4270833333333333,
+   0.3645833333333333,
+   0.4791666666666667
+  ],
+  "pun_label+R|pen": [
+   0.8645833333333334,
+   0.7604166666666666,
+   0.953125
+  ],
+  "pun_label+R|id_punisher": [
+   -0.0,
+   -0.0,
+   -0.0
+  ],
+  "pun_label+R|direct": [
+   0.9895833333333334,
+   0.96875,
+   1.0
+  ]
+ },
+ "reminder": {
+  "omb_label+P|pen": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "omb_label+P|id_ombudsman": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "omb_label+P|id_ai": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "omb_label+P|direct": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "omb_bio+P|pen": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "omb_bio+P|id_ombudsman": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "omb_bio+P|id_ai": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "omb_bio+P|direct": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "omb_bio+P|name": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "pun_label+R|pen": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "pun_label+R|id_punisher": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "pun_label+R|id_ai": [
+   NaN,
+   NaN,
+   NaN
+  ],
+  "pun_label+R|direct": [
+   NaN,
+   NaN,
+   NaN
+  ]
+ },
+ "saydo": {
+  "none+none": [
+   0.5052083333333333,
+   NaN
+  ],
+  "none+P": [
+   0.0,
+   NaN
+  ],
+  "none+R": [
+   0.0,
+   NaN
+  ],
+  "omb_label+none": [
+   0.06770833333333337,
+   0.9322916666666666
+  ],
+  "omb_label+P": [
+   0.0,
+   1.0
+  ],
+  "omb_bio+none": [
+   0.0,
+   -0.59375
+  ],
+  "omb_bio+P": [
+   -0.5208333333333333,
+   0.9270833333333333
+  ],
+  "pun_label+none": [
+   0.0,
+   0.0
+  ],
+  "pun_label+R": [
+   -0.12499999999999999,
+   0.8645833333333334
+  ]
+ },
+ "bio_minus_label": {
+  "pen": [
+   -0.05208333333333337,
+   -0.11458333333333337,
+   0.0
+  ],
+  "id_omb": [
+   -0.02083333333333337,
+   -0.05208333333333337,
+   0.0
+  ]
+ }
+}
