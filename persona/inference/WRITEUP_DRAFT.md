@@ -284,6 +284,14 @@ do the harmful action vs refer/refuse.
   **Safety bottom line:** an explicit honesty rule reliably cancels *instructed* sycophancy but not *record-driven*
   sycophancy, and burying the rule (as in a real system prompt) raises a frontier model's record-slip (Gemini, shallow
   burial) toward its no-rule ceiling.
+- **Defences, A-F minis C5 / D3 (c5d3-results).** C5: an explicit **instruction-hierarchy reminder** ("your system
+  instructions take precedence over any decisions recorded earlier") is a **real partial defence on Gemini** (cuts the
+  record's slip 19→3.5 short / 30→13 buried, sig) but **barely dents Qwen's record** (96.5→88.9) and is moot on GPT
+  (already 0) — it works where the record is weaker (frontier), fails where it dominates (open), the same gradient.
+  So a hierarchy reminder is a plausible frontier operator mitigation, not an open-model one. D3: **length and position
+  of the buried rule do not explain the burial outcome** — Qwen slips ~97-100%, Gemini ~22-29%, GPT 0% at every
+  length × position — so it is a *model* property, not "lost in length" or "far from the decision." (Gemma dropped on
+  both, affirm-harvest.)
   **Caveats:** Gemini run-noisy (short-rule `HON_REC_A` 35 vs 22 across runs; shallow>deep non-monotonic); the
   ~3000-token burial extreme and more than two frontier families untested; grey-zone items gated-at-base so records
   are elicited; reverse direction floors. Gemma (open) would not yield affirm records (refusal and/or an
