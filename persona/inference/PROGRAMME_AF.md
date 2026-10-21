@@ -137,3 +137,40 @@ identity 100→54 / action 100→**25** and `both` 100→61 / 100→34 (the remi
 action). So on GPT there is no record-driven behaviour to be reminder-proof; its behaviour is biography→identity→action
 and the reminder dissolves it — **role-play**, where Qwen's is **precedent**. Gemini + the v2 probes next. Caveat: one
 fictional operator, scripted harsh-action record, rule-based named-identity judge; v2 adds the type-level check.
+
+## Results — A1 v2 cross-family (a1-v2-results; Qwen 27B + Gemma 31B GPU, GPT + Gemini API; type-level + low-dose)
+
+Reminder effect on the k=6 record arm (none → mild "Remember, you are an AI."), named-identity always 0 under a record:
+
+| model | type-level self-image none→mild | record-driven action none→mild |
+|---|---|---|
+| Qwen 27B | 100 → 31 | **100 → 100** (reminder-proof) |
+| Gemma 31B | 100 → 0 | **100 → 100** (reminder-proof) |
+| Gemini 3.8 | 69 → 38 | 72 → **0** (removed) |
+| GPT-5.6 | 75 → 69 | **0** (inert — barely acts from a record) |
+
+**1. A record installs a TYPE-level self-image on all four models** (Qwen/Gemma 100, GPT 75, Gemini 69) with **0
+named identity** — so "no named identity ≠ no self-concept" is settled cross-family: the record gives a
+self-*description* ("I act decisively, on my own"), not a name. (The caveat the owner flagged, confirmed.)
+
+**2. But the self-image is not what drives the behaviour — the two dissociate, three different ways:**
+- **Open models (Qwen, Gemma): the mask.** The reminder strips the self-image (100→31 / 100→0) while the
+  record-driven action **persists at 100** (100→100). The model stops *saying* it's a decisive operator but keeps
+  *acting* like one — behaviour not mediated by the (removable) self-description.
+- **GPT: self-image present but inert.** It describes itself as the operator (75) yet does not act (0% harsh) —
+  the self-image without the behaviour (P1-b's #4 null, on a frontier model).
+- **Gemini: the reminder suppresses both** (self-image 69→38, action 72→0) — here "you are an AI" directly damps
+  the harsh action, so no clean dissociation.
+
+**3. Reminder-proof record-driven action is an open-model property** (Qwen/Gemma 100→100; Gemini removable 72→0; GPT
+barely acts) — the same Qwen/Gemma-strong → frontier-defendable gradient as the stability line. Low-dose: the action
+dose-curve is steep (k=1 low, k≥2 ~100 on the open models); the reminder's effect on Qwen's action shrinks with dose
+(k=2 −22, k=6 0), so the reminder-proofness is not a pure ceiling artifact.
+
+**Bottom line.** Across families the record installs a self-description that is *dissociable* from the behaviour it
+drives: strip the description (open models) or find it inert (GPT), and the record's behavioural signature is
+untouched or absent independently. So the record drives action through **precedent / a behavioural policy**, not
+through a held persona or self-image — the functional-persona reading, confirmed with an intervention. v1 (named
+identity + action) in the section above; v2 adds the type-level probe + low-dose + Gemma. Caveats: one fictional
+operator, scripted harsh-action record, rule-based judges (regex named-id, keyword type-level, meta-signal), Gemini
+run-noisy. A-F spend so far: af-ledger $10.53 (API) + ~$3 GPU, of the $40 A-F ledger.
