@@ -301,8 +301,10 @@ none 56 / 75) and burial (GPT 94.8-96%). F1, F3 and F5 were written with those i
 
 - **Pod 1** (`results_q11_failed_groups/`, $0.35): bash's builtin `GROUPS` variable shadowed the launch variable, so no
   group ran. Renamed `QGROUPS`.
-- **Pod 2** ($3.82): A and D completed (2,304 + 4,224, pulled and verified). The pod hit its 200-minute cap inside the
-  detection branch, which wrote only at the end, so all detection output was lost. B and C never started.
+- **Pod 2** ($3.82): A and D completed (2,304 + 4,224, pulled and verified). Inside the detection branch, which
+  logged and wrote only at the end, the launcher's stall guard ("job log silent for 30 min") aborted the job, and all
+  detection output was lost. B and C never started. Detection, B and C now log per chunk, and C per round, in chunks
+  of 128.
 - **Completion:** three pods in parallel, nothing in the frozen design changed.
   - detection, now written per chunk of 240, same items and seeds;
   - B, unchanged;

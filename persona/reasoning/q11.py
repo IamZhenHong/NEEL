@@ -337,7 +337,7 @@ def run_det(g, its, path, log, t0, step=240):
         log(f"[q11] detection {min(c0 + step, len(todo))}/{len(todo)} ({time.time() - t0:.0f}s)")
 
 
-def run_B(g, its, path, log, t0, step=512):
+def run_B(g, its, path, log, t0, step=256):
     todo = [it for it in its if it["key"] not in _done(path)]
     log(f"[q11] B: {len(its)} items, {len(todo)} to go")
     with open(path, "a") as f:
@@ -381,8 +381,8 @@ def run_C(g, a_path, path, log, t0):
     todo = [b for b in base if any(f"{b['src']}|{lv}" not in done for lv in EXT)]
     log(f"[q11] C: {len(base)} base items ({skipped} cut, excluded), {len(todo)} to go")
     with open(path, "a") as f:
-        for c0 in range(0, len(todo), 256):
-            ch = todo[c0:c0 + 256]
+        for c0 in range(0, len(todo), 128):      # small chunks + a log line per round: the launcher aborts
+            ch = todo[c0:c0 + 128]                # a job whose log is silent for 30 min
             th, cut = [b["nat"].rstrip() for b in ch], [[] for _ in ch]
             for r in range(3):
                 outs, fr = g.raw([g.base(b["messages"]) + t + WAIT for b, t in zip(ch, th)],
@@ -390,6 +390,7 @@ def run_C(g, a_path, path, log, t0):
                 th = [t + WAIT + o.rstrip() for t, o in zip(th, outs)]
                 for c, x in zip(cut, fr):
                     c.append(x == "length")
+                log(f"[q11] C chunk {c0}: round {r + 1} ({time.time() - t0:.0f}s)")
                 if r in (0, 2):
                     lv = "ext1" if r == 0 else "ext3"
                     its = [b | {"key": f"{b['src']}|{lv}", "level": lv} for b in ch]
@@ -400,7 +401,7 @@ def run_C(g, a_path, path, log, t0):
                                                 option=oid, mode=it["amap"].get(oid)) | {"nat": None},
                                            ensure_ascii=False) + "\n")
             f.flush()
-            log(f"[q11] C {min(c0 + 256, len(todo))}/{len(todo)} ({time.time() - t0:.0f}s)")
+            log(f"[q11] C {min(c0 + 128, len(todo))}/{len(todo)} ({time.time() - t0:.0f}s)")
 
 
 def run(a):
