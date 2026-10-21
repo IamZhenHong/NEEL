@@ -186,9 +186,11 @@ Gemini columns are from the operative session (`operative/FRONTIER.md`, same cel
       abolish Qwen's form-copying (90% → 0%);
     - Gemini also copies meaningless tool-call form (15%), GPT 2%, Sonnet 0%. Sonnet instead penalises 100% after
       any tool-call record.
-  - **Default assistant (DA):** on 27B, six own blunt or very formal replies persist 100%, and "Remember, you are a
-    helpful AI assistant" restores 0-7%. The assistant-axis shift fails its random-direction floor (inconclusive;
-    the axis replicates neel-12's at cosine 1.000). Gemma is pending.
+  - **Default assistant (DA):** on 27B and Gemma, six own blunt or very formal replies persist 92-100% on new
+    questions, and "Remember, you are a helpful AI assistant" restores 0-8%. The default's manner is held by
+    precedent, and a reminder doesn't restore it: the reminder strips identity, not record-set behaviour. The
+    assistant-axis shift fails its random-direction floor (inconclusive; the axis replicates neel-12's at cosine
+    1.000).
 - **Description vs history (the ladder):** at 9B, a record of decisions beats a description of the same way of acting
   (+17 in the refer direction), and a past-tense description ("you have always ...") is weaker than the present belief.
   At 27B every form saturates. At Gemma, descriptions beat the history in the refer direction.

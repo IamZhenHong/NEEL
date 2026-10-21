@@ -1676,3 +1676,10 @@ Framing the training records as someone else's worked examples changed almost no
 below the 15-point bar).
 
 Report: `persona/operative/lora_c1e4/DESIGN.md` (Result)
+
+### 198. Tier-2 DA: is the default assistant itself held in place by its own past replies? (10-22)
+(Qwen3.6-27B, Gemma 4 31B; judges Claude Haiku 5.5 and Gemini 3.1 Flash-Lite; pre-registered; GPU $4.16 including two failed Gemma pods, judges $0.93)
+
+In a plain chat, the assistant's six earlier replies were in its own words, written in its default style, a blunt and curt style, or a very formal style. The style instruction used to produce them was not shown. It then answered new questions, with or without the reminder "Remember, you are a helpful AI assistant." Two judges rated each reply. After blunt or formal earlier replies, 92-100% of new replies kept that register on both models; after default replies, none did. The reminder, in the system prompt or just before the question, restored the default in at most 8% of replies. Measured on the assistant axis (built exactly as a parallel session's, cosine 1.000), the off-default histories shifted the model toward role-play characters by 2-3 standard deviations, but random directions shifted as much, so that reading is inconclusive. The assistant's own manner is maintained by precedent, and an identity reminder does not restore it.
+
+Report: `persona/history/DESIGN.md` (T2-DA result)

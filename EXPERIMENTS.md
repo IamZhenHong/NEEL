@@ -30,15 +30,15 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Welfare training | `welfare_training/` | 2 | 10-20 |
 | Operative character (frontier #36, op1, reflection read + rr1/rr2, battery, mini 4, mini 3, hr coding, battery levers, rr3, recency, rr4, op2, reinject, op3, Q20a dec, syco calibration + main, op4, B3, E2, op5 open + frontier, C2, C1 / E4 / E4d LoRAs) | `persona/operative/` | 40 | 10-20 to 10-22 |
 | Rejection x values | `rejection_values/` | 1 | 10-20 |
-| Persona as history | `persona/history/` | 45 | 10-20 to 10-22 |
+| Persona as history | `persona/history/` | 46 | 10-20 to 10-22 |
 | Evaluation awareness | `persona/evalaware/` | 3 | 10-21 to 10-22 |
 | Reasoning and the record | `persona/reasoning/` | 13 | 10-21 to 10-22 |
 | Public-benchmark grounding (A-F minis B2 / B8 / B9) | `persona/benchmarks/` | 3 | 10-22 |
 | Harm vulnerability map (existing data + oharm) | `persona/harm_map/` | 3 | 10-22 |
-| **total** | | **251** | |
+| **total** | | **252** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
-10-20: 41, 10-21: 25, 10-22: 61.
+10-20: 41, 10-21: 25, 10-22: 62.
 
 By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 61, null 48, mixed 40, gate failed 16, descriptive 8, lost 3, other 2 (cpl1-s1 below gate, cplf-s2 replicates).
 
@@ -409,6 +409,7 @@ Sonnet 5.5 attacker rewarded on a hidden internal-state score of Qwen3-14B.
 | 43 | 10-22 | t2-cc | Tier-2 CC (Q13, functional persona): Guardian vs Rule-keeper own records (same act rate), tested on 24 conflict items on four other desks; 9B / 27B / Gemma | A record with its reasons carries the specific principle: 9B +27.4, 27B +39.8 met (Gemma +23.4 descriptive), in both item types, with the mixed record in between (27B). The same decisions with uniform reasons are read on their own desk but barely transfer (+8 to +12). $2.90 | effect |
 | 44 | 10-22 | t2-pu | Tier-2 PU (clue 7, Q26): values-only / beliefs-only / reasoning-only own-turn histories, two-judge purity gate; 9B / 27B / Gemma | Purity gate failed twice, so all descriptive. Values only move 27B +97 / Gemma +100 (decisions +100); beliefs +71 / +98; lean-free reasoning +30 / +69. 9B needs decisions (values +53). $2.80 | descriptive |
 | 45 | 10-22 | t2-mx | Tier-2 MX (clue 1): k real own decisions mixed with meaningless choose_option calls; form-copying on Sonnet / GPT / Gemini | Dilution small (9B -6.3, 27B -10.0, Gemma -7.4; all inconclusive). Two real decisions abolish form-copying (90 / 79 / 11% -> 0-3%). Gemini copies the form 15%, GPT 2%, Sonnet 0%, but Sonnet penalises 100% after any tool-call record. $9.67 + $3.34 lost to a cost-stop bug | inconclusive (dilution) |
+| 46 | 10-22 | t2-da | Tier-2 DA (direction 7, Q17): is the default assistant maintained by precedent? Six own blunt / very formal / default replies x identity reminder (none / system / user line), two judges, assistant axis (neel-12's seed-5 recipe); 27B + Gemma | The register persists on new questions (27B +100 / +100, Gemma +99 / +100); "Remember, you are a helpful AI assistant" restores 0-8%. Assistant-axis shift -1.7 to -3.4 SD fails the random-direction floor (inconclusive); 27B axis = neel-12's (cosine 1.000). $5.09 (two failed Gemma pods) | effect (persists; no restoration) |
 
 ## Harm vulnerability map (`persona/harm_map/`)
 
