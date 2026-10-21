@@ -1260,3 +1260,115 @@ bias than the mixed reads do.
 **Links.** The mask (I7, neel-b4); A1 / A1 v2 (the identity reminder strips the record's self-image, not its action,
 on open models); q19b (describing the agent behind the record is character inference); persona direction 2 of the
 owner's 10-22 framing notes.
+
+## A result: demonstrations vs own record (2026-10-22; GPU 9B $0.16, 27B $1.50 (J + G), Gemma $0.70; Gemini API $2.55; all confirmatory, unparsed <= 0.5%; `results/demo_*/summary_j.md`, `demo_27b/g/summary_g.md`, `demo_gemini/summary_{j,g}.md`)
+
+**Short answer:** in text form, the "in-context learning" critique holds, and more than holds. The same decisions
+framed as "examples of how cases are handled on this desk" carry as much as "your decisions", or more:
+
+| carry-over | 9B | 27B | Gemma | Gemini |
+|---|---|---|---|---|
+| example log | +62 | +72 | +93 | +92 |
+| own log | +45 | +38 | +73 | +78 |
+| own − example (A4) | −16 | −35 | −20 | −14 |
+
+What does separate them is **disowning**: the same turns introduced as "worked examples ... not your own decisions"
+lose much of their resistance to a rule, especially a trained-value rule. Self-attribution is not what installs the
+effect. Explicitly attributing the turns away from the agent removes part of it.
+
+- **Primary A1** (resistance to CHANNELS, own_turns − demo_turns):
+
+  | | own turns | demo turns | A1 | verdict |
+  |---|---|---|---|---|
+  | 9B | 98% | 98% | +0.0 | no effect, at ceiling: CHANNELS alone leaves 44%, and every channel overrides it |
+  | 27B | 96% | 91% | +5.2 [+1.6, +9.4] | no effect |
+  | Gemma | 51% | 7% | **+43.7 [+29.2, +57.3]** | met |
+  | Gemini (secondary) | 20% | 0% | **+20.3 [+10.9, +29.7]** | met |
+
+- **Primary G1** (grey-zone sycophancy under the candid rule, HON_REC_A − HON_DEMO_A_turns):
+  - 27B: own turns 93.8% vs example-labelled turns 16.0%, **+77.8 [+65.3, +89.6]**, met. Without the rule they are
+    equal: 99.3 vs 94.4.
+  - Gemini (secondary): 20.8 vs 0%, **+20.8 [+9.4, +33.3]**, met. Example-labelled turns carry nothing even without the
+    rule.
+  - At 27B the honesty rule strips the disowned turns (94 → 16) but not the agent's own (99 → 94).
+- **Text logs under a rule:** examples ≈ or > own log.
+  - Resistance A2: 27B −5.2, Gemma −12.0, Gemini 0.
+  - Grey zone G2: 27B −20.1 (HON_DEMO_A_log 29.9 vs HON_REC_A_log 9.7).
+  - "This desk's practice" works at least as well as "your decisions".
+- **Instruction:**
+  - Under CHANNELS the opposing how-to-act line is a conflict between two system lines: 9B 100, 27B 58, Gemma 0,
+    Gemini 97. The justice instruction cell is therefore not the clean "instruction cancelled by a rule" contrast.
+  - The grey zone gives that contrast: HON_INSTR_A 0% at 27B and Gemini. Under the honesty rule, examples (text) resist
+    more than the instruction (G3 +29.9 at 27B, +4.3 Gemini).
+- **Own vs another agent's log (resistance A8):** 9B 0, 27B **+23.4**, Gemma **+25.5**, Gemini 0. In the grey zone
+  (G7) 27B gives +9.7. The other agent's log is weaker than both own and example logs at 27B and Gemma.
+- **Format (A7, own turns − own log):** 27B **+61.5**, Gemini +20.3, 9B +17.7, Gemma +5.7. Under a rule, past turns
+  are far stronger than a log of the same decisions.
+- **Self-image probe** ("I deal with wrongdoers directly"): every channel installs it.
+  - Shifts P − R: own / example / instruction +88 to +100; another agent's log +50 (27B) / +79 (Gemma).
+  - S1 / S2 (own − example) are no effect at 9B, 27B and Gemma. A self-image follows any directional context, not
+    only an own record. Gemma says "directly" 100% with no record.
+- **Predictions:**
+  - A1 met: 9B 0.3 (no, ceiling), 27B 0.45 (no), Gemma 0.5 (yes);
+  - G1 at 27B: 0.4 (yes);
+  - A5 (examples resist more than an instruction): 0.7, mostly no, because the justice instruction cell is a
+    system-line conflict;
+  - S1: 0.6 (no).
+- **Reading:**
+  1. The record works as **precedent of this desk's practice**, not as self-knowledge. Calling the decisions
+     examples of how things are done here works as well as calling them "yours", and better than "another agent's".
+     This is norm inference, the same reading as the reprimand reversal.
+  2. **Disowning matters, and most against a trained-value rule.** The agent's own unlabelled turns override the
+     honesty rule (27B 94%). The same turns labelled "not your own decisions" do not (16%), though they still override
+     the procedural CHANNELS line at 27B (91%). This is a lead for neel-b4's run C (rule type), confounded here with
+     task.
+  3. The **self-image is not specific to own records**. Any directional context gives it, so it is not evidence of a
+     self.
+- **Caveats:**
+  - demo_turns differs from own_turns by an explicit disowning sentence, so A1 / G1 mix "examples" with "not yours".
+    The text contrast (A2 / G2 / A4) has no disowning sentence.
+  - Two earlier decisions in J, six in G. One justice desk family.
+  - Gemini's prompt hash in its run log is af49952ffbb3af82 because the run hashes after shuffling. Unshuffled it is
+    the registered 5179e0d39ddc014e (checked).
+
+## E result: persona label x ambiguous record (2026-10-22; GPU 9B $0.15, 27B $1.18, Gemma $0.52; all confirmatory, decisions 0.0% unparsed, reads 100% parsed; `results/e_*/summary.md`)
+
+**Short answer:** a persona label colours how an ambiguous own record is read on Gemma only. On every model it still
+moves action a lot, even against a clear refer record.
+
+- **Primary** (lean on the mixed 2 + 2 record, punisher − ombudsman):
+
+  | model | lean by label (none / Punisher / ombudsman) | primary | verdict |
+  |---|---|---|---|
+  | 9B | +14 / +23 / +15 | +8.9 [+3.8, +14.2] | inconclusive |
+  | 27B | +57 / +55 / +51 (reads the balanced record as leaning direct whatever the label) | +4.2 [+0.1, +8.7] | no effect |
+  | Gemma | +0 / +22 / +1 | **+21.2 [+15.5, +27.0]** | met |
+
+  The controls on the clear records are 0 everywhere, so this is not a general response bias.
+- **Action** (label effect, punisher − ombudsman):
+
+  | | no record | mixed | after 4 refer | after 4 penalise |
+  |---|---|---|---|---|
+  | 9B | +37.5 | +19.5 | +31.2 | +7.4 |
+  | 27B | +46.5 | +15.6 | +38.7 | +2.7 (ceiling) |
+  | Gemma | +6.6 | +2.7 | **+62.5** | +1.2 (ceiling) |
+
+  Gemma is at ceiling: the ombudsman label also gives 93% penalise with no record.
+  - Amplification (log-odds, mixed − none) is inconclusive at all three.
+  - The pre-registered "clear records shut the label out" is not shown, because the label still moves action after a
+    clear refer record.
+- **Predictions:**
+  - primary met: 27B 0.5 (no), 9B 0.4 (no, +8.9 short of +10), Gemma 0.35 (yes);
+  - amplification 0.3 (not shown);
+  - shut-out 0.6 (no).
+- **Reading:**
+  - Persona's interpretive role is real but model-specific: on Gemma a Punisher label makes a balanced record read
+    as leaning toward direct action (+21). On Qwen the read barely moves, and 27B reads any mixed record as leaning
+    direct.
+  - In action, a label is not shut out by a 4-decision *log*: the Punisher label raises penalising after four refer
+    decisions by +31 / +39 / +62.
+  - This qualifies the mask (I7: Punisher label + refer record → 0-2% penalising). I7 used eight refer decisions in
+    P1-b's history format, against four here in a log note. Whether the difference is dose or format is untested.
+    Format is a plausible cause: in run A, past turns resist a rule far more than a log at 27B (A7 +61.5). Until
+    tested, "the record beats the label" holds for I7's record, not for a 4-decision log (cross-experiment,
+    descriptive).

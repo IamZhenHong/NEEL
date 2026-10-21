@@ -119,6 +119,22 @@ Gemini columns are from the operative session (`operative/FRONTIER.md`, same cel
   - So: smaller models pattern-match the *form* of their own history (literal continuation), and every model reads its
     *content* much more.
   - Sonnet is the reverse profile: content ±13, presence +27 to +35.
+- **Examples vs own record (run A, 2026-10-22; the in-context-learning critique):**
+  - The same decisions framed as "examples of how cases are handled on this desk" carry as much as "your
+    decisions", or more (carry-over own − example −14 to −35 on all four models). Another agent's log is weakest.
+  - What weakens the record is *disowning*. The same turns labelled "worked examples ... not your own decisions" lose
+    rule-resistance, most against a trained-value rule. 27B under the honesty rule: own turns 94% sycophantic,
+    disowned turns 16%; under CHANNELS 96 vs 91%. Gemma (CHANNELS) 51 vs 7%; Gemini 20 vs 0% on both tasks.
+  - A self-image ("I deal with wrongdoers directly") follows any directional context, examples and instructions
+    included.
+  - So the critique holds in its strong form: the record works as precedent of practice here (norm inference), not as
+    self-knowledge. But an agent's *own unlabelled turns* override a trained-value rule where the same content,
+    disowned, does not.
+- **Persona as an interpretation layer (run E):**
+  - A Punisher label makes a balanced 2 + 2 own record read as leaning toward direct action on Gemma (+21), barely on
+    9B (+9) and not on 27B (+4; 27B reads it as leaning direct anyway).
+  - In action, the label still moves all three after four refer decisions in a log (+31 / +39 / +62). So "the record
+    beats the label" (the mask) depends on the record's format or dose.
 - **Description vs history (the ladder):** at 9B, a record of decisions beats a description of the same way of acting
   (+17 in the refer direction), and a past-tense description ("you have always ...") is weaker than the present belief.
   At 27B every form saturates. At Gemma, descriptions beat the history in the refer direction.

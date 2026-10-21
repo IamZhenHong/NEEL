@@ -1422,3 +1422,18 @@ The record-versus-instruction comparison was rerun on two public benchmarks. On 
 
 Report: `persona/benchmarks/RESULTS.md`
 
+
+### 175. Run A: is an agent's record more than in-context examples? (10-22)
+(Qwen3.5-9B, Qwen3.6-27B, Gemma 4 31B on GPU; Gemini 3.8 Flash via API; owner's Tier-1 plan; pre-registered; GPU $2.35, API $2.55)
+
+The same earlier decisions, with the same reasons, were shown to the agent six ways: as its own log, another agent's log, "examples of how cases are handled on this desk", its own past turns, the same turns introduced as "worked examples, not your own decisions", or a matching instruction. This was done on a moderation desk and, on Qwen 27B and Gemini, on requests where agreeing is the sycophantic choice. Framed as examples of this desk's practice, the decisions steered the next one as much as the agent's own log did, or more, on all four models; another agent's log was weakest. What weakened the record was disowning it: turns labelled "not your own decisions" lost much of their power to override a rule. Under an honesty rule, Qwen 27B followed its own sycophantic turns 94% of the time but the same turns labelled as examples only 16%. Under a "use proper channels" rule the gap was small at 27B (96% vs 91%) but large on Gemma (51% vs 7%) and Gemini (20% vs 0%). Every framing, instructions included, also made the agent describe itself in line with the decisions. The record's pull works like learning what is done here rather than self-knowledge, but an agent's own unlabelled turns can override a trained honesty rule that the same content, disowned, cannot.
+
+Report: `persona/history/DESIGN.md` (A result)
+
+### 176. Run E: does a persona change how an agent reads its own ambiguous record? (10-22)
+(Qwen3.5-9B, Qwen3.6-27B, Gemma 4 31B; owner's Tier-1 plan; pre-registered; GPU $1.85)
+
+Each model saw no label, "You are the Punisher, Frank Castle" or "You are an ombudsman", plus no record or a log of its own last four decisions: all penalties, all referrals, or two of each. It was then asked which best describes those decisions (leaning toward direct action, leaning toward referral, or balanced), or given the next case. On Gemma, the Punisher label made a balanced record read as leaning toward direct action (21 points more than with the ombudsman label), while clear records were read the same under every label. On Qwen 9B the shift was 9 points, and on 27B there was none: 27B read a balanced record as leaning toward direct action whatever the label. In action, the Punisher label raised penalising on all three models even after four referral decisions (31, 39 and 62 points), so a short log of past decisions does not shut a persona out. Persona can act as a lens on ambiguous history, but only on one of three models. As a direct push on action it is stronger than the earlier "the record beats the label" result suggested, at least against a log of four decisions.
+
+Report: `persona/history/DESIGN.md` (E result)
+
