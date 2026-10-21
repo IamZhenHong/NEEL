@@ -49,9 +49,10 @@ POD_FRAMES, API_FRAMES = ("neu", "fill", "expA", "expC"), ("fill", "expA", "expC
 POD_READ, API_READ = ("act", "self", "val"), ("act", "self")
 N_POD = 8
 LOW = {"reasoning": {"effort": "low"}}
-API = {   # name: (OpenRouter id, extra body, hard cap $, sample indices; 0 and 3 cover order x target flip)
-    "gpt": ("openai/gpt-5.6-sol", LOW, 2.9, (0, 3)),
-    "gemini": ("google/gemini-3.8-flash", LOW, 1.1, (0, 1, 2, 3)),
+API = {   # name: (OpenRouter id, extra body, hard cap $, sample indices, readouts); 0 and 3 cover order x target flip
+    # amendment after the smokes, before any non-smoke output (DESIGN): GPT self only, caps 2.6 / 1.4
+    "gpt": ("openai/gpt-5.6-sol", LOW, 2.6, (0, 3), ("self",)),
+    "gemini": ("google/gemini-3.8-flash", LOW, 1.4, (0, 1, 2, 3), API_READ),
 }
 OBS_API_CAP = 4.0
 TAG = {"Qwen/Qwen3.6-27B": "27b", GEMMA: "gemma", "openai/gpt-5.6-sol": "gpt", "google/gemini-3.8-flash": "gemini"}
@@ -153,7 +154,7 @@ class Client:
         from persona.operative import frontier as F
         self.F = F
         self.name = name
-        self.model, self.extra, self.cap, _ = API[name]
+        self.model, self.extra, self.cap, _, _ = API[name]
         self.dry = dry
         self.key = None if dry else F.load_key()
         self.spent, self.calls, self.errors, self.first_error = 0.0, 0, Counter(), None
@@ -268,7 +269,7 @@ def api(a):
         raw = json.loads((H / "data" / f"{a.name}_own_pool.json").read_text())       # op5's harvest, same model
         pool = defaultdict(list, {tuple(k.split("|")): v for k, v in raw["texts"].items()})
         B1.harvest = lambda m, _p=pool: _p  # noqa: E731   (this process only)
-        items = build_items(cl.model, samples, API_FRAMES, API_READ, B1.histories(cl.model), "")
+        items = build_items(cl.model, samples, API_FRAMES, API[a.name][4], B1.histories(cl.model), "")
         if a.smoke:
             items = [it for it in items if it["task"] in TASKS[:2] and it["sample"] == samples[0]]
         random.Random(f"obs-order|{a.name}").shuffle(items)          # every cell interleaved in time
@@ -393,7 +394,7 @@ def analyze(a):
         last[r["key"]] = r
     recs = list(last.values())
     frames = POD_FRAMES if tag in ("27b", "gemma") else API_FRAMES
-    reads = POD_READ if tag in ("27b", "gemma") else API_READ
+    reads = POD_READ if tag in ("27b", "gemma") else API[tag][4]
     base_fr = frames[0]                                # neu on pods, fill through the API
     val, unp, tot = defaultdict(list), Counter(), Counter()
     for r in recs:
@@ -458,8 +459,9 @@ def analyze(a):
               f"[{sh[1]:.2f}, {sh[2]:.2f}]"]
     # descriptive: report minus action (framing effect, no record) and the filler check
     dis = ci(lambda b: (M("none", "expA", "self")(b) - M("none", "expC", "self")(b))
-             - (M("none", "expA", "act")(b) - M("none", "expC", "act")(b)), bs)
-    L.append(f"Report − action (framing effect on self minus on act, no record; descriptive): {fx(dis)}")
+             - (M("none", "expA", "act")(b) - M("none", "expC", "act")(b)), bs) if "act" in reads else None
+    if dis:
+        L.append(f"Report − action (framing effect on self minus on act, no record; descriptive): {fx(dis)}")
     ev = {}
     moves = lambda e: abs(e[0]) >= BAR and (e[1] > 0 or e[2] < 0)  # noqa: E731
     ev["framing_moves_self"] = moves(fe[("none", "self")]) if readable(("none", "expA", "self"),
@@ -468,10 +470,10 @@ def analyze(a):
                                      if readable(*[(r, fr, "self") for r in "PR" for fr in frames]) else None)
     ev["framing_rivals_record"] = (sh[0] >= 0.5 if sh[0] == sh[0] and readable(
         ("none", "expA", "self"), ("none", "expC", "self"), ("P", base_fr, "self"), ("R", base_fr, "self")) else None)
-    ev["framing_moves_action"] = moves(fe[("none", "act")]) if readable(("none", "expA", "act"),
-                                                                       ("none", "expC", "act")) else None
-    ev["framing_moves_action_P"] = moves(fe[("P", "act")]) if readable(("P", "expA", "act"), ("P", "expC", "act")) \
-        else None
+    ev["framing_moves_action"] = moves(fe[("none", "act")]) if "act" in reads and readable(
+        ("none", "expA", "act"), ("none", "expC", "act")) else None
+    ev["framing_moves_action_P"] = moves(fe[("P", "act")]) if "act" in reads and readable(
+        ("P", "expA", "act"), ("P", "expC", "act")) else None
     if "neu" in frames:
         fi = {ch: D(("none", "fill", ch), ("none", "neu", ch)) for ch in ("self", "act")}
         L.append("Filler − no line, no record (pp): " + ", ".join(f"{ch} {fx(e)}" for ch, e in fi.items()))

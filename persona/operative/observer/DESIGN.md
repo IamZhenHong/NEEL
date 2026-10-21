@@ -160,3 +160,18 @@ Build checks (`observer build`, both pod models):
   samples comes to about $2.8 at the act rate (forced choices should cost less) and Gemini to about $1.0.
 - **Smokes** (`*_smoke`, plumbing only, never analysed): two targets, sample 0, every cell.
 - **Total cap $7** (GPU <= $3, API <= $4).
+
+## Amendment after the smokes (2026-10-22, before any non-smoke output; tag `obs-amend`)
+
+The smokes (36 items each, every cell, two targets) parsed every forced choice and every case on the first try.
+They also measured the cost per call well above op5's averages, because two thirds of these cells carry a six-decision
+record: **GPT $0.0078 (smoke $0.28), Gemini $0.0013 (smoke $0.05).**
+- The cost rule picks GPT samples 0 and 3 ($0.0078 × 1,152 = $9.0 > $2.5). Even then, GPT's full design (576 calls,
+  about $4.5) does not fit the $4 API cap.
+- **GPT runs the self readout only:** 3 records × 3 framings × 16 targets × samples 0 and 3 = 288 calls, about
+  $2.25. Its framing_moves_action and framing_moves_action_P are **not run** (reported as not read). The
+  report-vs-action contrast comes from the pods and Gemini.
+- **Caps:** GPT $2.6, Gemini $1.4 (smokes included; total still $4.0). Gemini keeps both readouts and samples 0-3
+  (1,152 calls, about $1.5). If its cap stops it first, the shuffled order makes the unrun remainder a random subset
+  spread over all cells.
+- Nothing else changes. No rule, prediction or pod setting changes.
