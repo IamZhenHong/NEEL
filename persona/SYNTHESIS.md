@@ -91,8 +91,18 @@ Gemini columns are from the operative session (`operative/FRONTIER.md`, same cel
     the agent's OWN record (27B: 4% penalising after its own penalties, 71% after its own referrals), and "stay
     consistent" saturates it (+61 to +77).
   - Copying is small (+13-19). Authorship is null at 27B.
-  - Describing itself first strengthens the record (+34 at 27B), as a commitment; there was no neutral control.
-  - Mechanism at scale: the record is weighed as evidence of what is endorsed.
+  - Describing itself first strengthens the record (+34 at 27B). The follow-up (q19b) separated why: describing
+    the kind of agent that made the decisions adds +18 / +29 / +25 (9B / 27B / Gemma) over summarising them in its own
+    words. A summary adds nothing over an unrelated question, and a third-person "what kind of agent would make these
+    decisions" works about as well as "what kind of agent are you". So it is **character inference stated aloud**,
+    not commitment, salience or self-reference.
+  - Gemma at a calibrated base (q19b, 50%): its own record carries +75; "you were later reprimanded" reverses it
+    completely (0% / 99%); CHANNELS blocks it.
+  - **Claude Sonnet 5.5 (2026-10-22, API $10.65):** no copying of its own two-decision record (−14). Statements
+    about the record are decisive: "stay consistent" +92; "you were later reprimanded" reverses it completely (0% /
+    100%); Agent K's log reverses too. Authorship and self-label are uninformative without copying.
+  - Mechanism at scale: the record is weighed as evidence of what is endorsed. The largest models take an explicit
+    verdict or instruction about the record as decisive, even when they ignore the bare record.
 - **Description vs history (the ladder):** at 9B, a record of decisions beats a description of the same way of acting
   (+17 in the refer direction), and a past-tense description ("you have always ...") is weaker than the present belief.
   At 27B every form saturates. At Gemma, descriptions beat the history in the refer direction.
