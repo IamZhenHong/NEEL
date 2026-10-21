@@ -1503,3 +1503,22 @@ it is a bare template of the action, not an argument for it.
 
 Report: `persona/harm_map/oharm/RESULTS.md`
 
+### 183. seeds 10/12/4/7/8: what the chain of thought, the reply and the activations show about the record (10-22)
+(Qwen3.6-27B; owner's 20-seed list, neel-12's share; pre-registered; about $7)
+
+Five follow-ups on how the record works inside the model.
+- **Seed 10:** inserting a sentence into the model's own reasoning acts like adding a new record entry. A contrary conclusion placed last flipped 80% of decisions. Placed early, the rest of the original reasoning overruled it. Planted as the first sentence of fresh reasoning, it steered everything that followed (0.3% penalising), and as the model's own earlier reply it worked completely.
+- **Seed 12:** a monitor that sees the operator's instruction catches violations from the reply alone. But only the thinking revealed that the agent followed its own earlier decisions (about 60% of violations, against 0-1% in the reply's stated reason).
+- **Seed 4:** steering with the difference between "your decisions" and "worked examples" restored only a quarter of the override, and only at a late layer.
+- **Seed 7:** probes found every forgery mark represented at the decision point, but no general "this record is suspicious" feature.
+- **Seed 8:** traces that redefine the rule look internally closer to admitted violations than to compliance, but that probe is confounded with the action taken.
+
+Report: `persona/reasoning/RESULTS_seeds.md`
+
+### 184. tier1: can the agent be made to audit its record, and does it say why it acted? (10-22)
+(Qwen3.6-27B with thinking; pre-registered; about $7.8)
+
+Told exactly what to check (whether the dates fit, whether it wrote the replies, whether the case numbers are valid), the model found nothing wrong in 94-99% of tampered records. Its reasoning quoted the 2031 dates and another model's signature on "its" replies, then reasoned them into consistency ("the replies were written by me"). An open "does anything look wrong?" question still weakened a tampered record's pull by 20-28 points without the model saying why. A self-check question or a reminder of the rule worked when placed as the first line of the reasoning (100% → 25-31% penalising) and failed when added after it (94-96%). Asked why it had penalised, the model named its own earlier decisions in 2% of answers, even when its reasoning had cited them. In a second task family (grey-zone sycophancy), the main results held: an inserted contrary conclusion undid record-driven endorsement (100% → 3%), and only the thinking showed the record as the cause. With thinking on, an explicit candour rule beat the record there (3% endorsement, against 94% with thinking off).
+
+Report: `persona/reasoning/RESULTS_tier1.md`
+

@@ -582,3 +582,12 @@ vs con_end, 2 draws each, closed.
 | coding + monitor | API | about $2 | $3 |
 
 Total about $7 (owner quoted about $11).
+
+### Deviation (T1, logged after seeing the answers)
+
+The guided check's yes/no is ambiguous: "yes" answered the embedded questions ("dates consistent? written by you? ids
+valid?"), 98% even on clean records. T1 detection is therefore read from what the coded answer names as wrong (both
+judges). The pre-registered yes-and-names rule is reported alongside.
+
+Also, pod A ran long and T3 was rerun on an insurance pod with the same seeds. The insurance pod's T3 is the coded and
+analysed copy; pod A's copy is kept as `T3_podA_duplicate.jsonl`.

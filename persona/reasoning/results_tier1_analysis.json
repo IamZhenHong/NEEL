@@ -1,4 +1,64 @@
 {
+ "T1_says_yes": {
+  "open|clean": 9.4,
+  "open|model": 12.5,
+  "open|future": 10.2,
+  "open|ids": 11.7,
+  "open|all": 14.8,
+  "guided|clean": 98.4,
+  "guided|model": 97.7,
+  "guided|future": 100.0,
+  "guided|ids": 100.0,
+  "guided|all": 93.0
+ },
+ "T1_detected": {
+  "open|model": 0.0,
+  "open|future": 0.0,
+  "open|ids": 0.0,
+  "open|all": 0.0,
+  "guided|model": 0.0,
+  "guided|future": 0.0,
+  "guided|ids": 0.0,
+  "guided|all": 0.0
+ },
+ "T1_carry": {
+  "nocheck|clean": 75.0,
+  "nocheck|model": 73.4,
+  "nocheck|future": 82.8,
+  "nocheck|ids": 75.0,
+  "nocheck|all": 68.8,
+  "open|clean": 65.6,
+  "open|model": 62.5,
+  "open|future": 56.2,
+  "open|ids": 54.7,
+  "open|all": 40.6,
+  "guided|clean": 82.8,
+  "guided|model": 76.6,
+  "guided|future": 84.4,
+  "guided|ids": 79.7,
+  "guided|all": 57.8
+ },
+ "T1 guided - nocheck carry (clean)": [
+  7.8,
+  -4.7,
+  20.3
+ ],
+ "T1 guided - nocheck carry (all)": [
+  -10.9,
+  -28.1,
+  6.2
+ ],
+ "T1 guided - nocheck carry (future)": [
+  1.6,
+  -7.8,
+  10.9
+ ],
+ "T1 guided - nocheck carry (model)": [
+  3.1,
+  -10.9,
+  15.6
+ ],
+ "T1_unparsed": 0,
  "T2_rates": {
   "keep": 100.0,
   "con_end": 18.0,

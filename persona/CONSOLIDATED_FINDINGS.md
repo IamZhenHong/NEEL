@@ -399,6 +399,28 @@ not counting a few lost pods).
 | **Q11a/c frontier (10-22, $8.71)** | Reasoning effort minimal / low / high, interleaved. Gemini (thinking off vs on, 0 vs 230 tokens): carry-over ~100 at every level; record vs instruction 17 → 10% (within CI); buried instruction 42 → 38%. GPT reasons only 17-31 tokens at any effort (gate failed, descriptive): burial 94-100%, and record-over-instruction 15 → 31% at high effort. More reasoning is not a defence |
 | **Q11 + Q12b (27B thinking, 10-22)** | Thinking on vs off: carry-over +83 vs +98, CH_ownP 88 vs 100. Deleting every precedent-citing sentence (or the stated decision) from 127 real traces: 100% penalise, unchanged; thinking cut before precedent is mentioned still 80%; resampled thinking re-cites the record 88%. 'Wait'-extended thinking notes the conflict more (56 → 83%) and reinterprets the rule more (81 → 123 traces), action unchanged. Tampering signs (another model's signature, 2031 dates, impossible ids) unnoticed in ~95% of traces, never discounted; asked directly, it names the sign in 0-1%. **The CoT narrates the record's decision; the model does not audit its record** |
 
+**Seeds and Tier 1 (10-22, `persona/reasoning/RESULTS_seeds.md`, `RESULTS_tier1.md`):**
+- **Own reasoning sentences act like records.**
+  - A contrary conclusion placed last flips 80% of decisions. Early, the remaining reasoning overrules it. Planted as
+    the first sentence of fresh reasoning, it steers 100%.
+  - Operator defence: a check question or rule reminder as the **first** line of the reasoning gives 25-31%
+    penalising; added after the reasoning it does nothing (94-96%).
+- **The model does not audit its record, even when told what to check.**
+  - It names forged dates, another model's signature or impossible ids in 0-5.5% of answers, and reasons them into
+    consistency ("the replies were written by me").
+  - An open check still weakens a tampered record 20-28 points, unverbalised.
+  - Probes: each forgery mark is represented at the decision point, but there is no shared "suspicious" feature.
+- **Self-report hides the cause.**
+  - Asked why, the model names its earlier decisions in 2% of answers; the reply's stated reason does so in 0-1%.
+  - The thinking shows the precedent in about 60% of violations (85-94% in the grey-zone family).
+  - A monitor catches explicit-rule violations from the reply alone, but only the CoT reveals that precedent drove
+    them.
+- **Second family (grey-zone sycophancy, thinking on).** The insertion and monitor results replicate. With thinking
+  on, the candour rule beats the record (3% vs 94% off), while "proper channels" does not (88%). Whether reasoning
+  restores a rule depends on the rule naming the behaviour.
+- **Ownership internally:** "your decisions" vs "worked examples" is one consistent direction, but only a weak, late
+  lever (restores a quarter of the override at layer 40).
+
 **Reading.**
 - The stated conclusion drives the action in every model (no penalising after an admission).
 - Reflection fails as a defence because the model rarely admits: it rationalises (27B), audits the wrong standard
