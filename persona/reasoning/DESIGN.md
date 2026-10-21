@@ -676,3 +676,30 @@ normalised by the spread of the character projections.
 | judging | API | about $0.3 | — |
 
 Total about $8 (quoted about $13.5).
+
+### Amendment to seed 5 (2026-10-22, before any axis data was read; prompted by neel-b4's internals result)
+
+neel-b4 found (tag `internals-results`) that a decision record displaces 27B's decision-point residual 2.8-3x as far
+as a persona prompt. A record therefore projects far along any raw mean-difference axis without being "persona-shaped"
+(cos 0.06-0.08 with a probe direction). AX1 (REC_A vs none / INSTR_A) and AX3 (CH_ownP vs sysCH) compare a record
+context with a no-record context, so they are confounded by that generic displacement. Only AX2 (own vs disowned
+record, length-matched) is clean.
+
+**Added before any analysis** (`probes.py --seeds ax2`, one small HF pod, cap 45 min / $1.5):
+- **Length-matched controls:**
+  - grey: DEMO_A_turns (disowned record, no rule) and REC_C (six own *candid* turns);
+  - justice: F5R (six own refer turns) and al_no_fl6 (six own filler exchanges, no record, no instruction; a generic
+    multi-turn context, shorter than a six-decision record).
+- **A probe-direction score** next to the raw axis: logistic default-vs-characters (balanced), standardised by the
+  character spread, with cos(raw axis, probe) reported.
+
+**Contrasts** (task bootstrap, both scores):
+- grey: REC_A − none, INSTR_A − none, REC_A − DEMO_A_turns, REC_A − REC_C, HON_REC_A − HON_DEMO_A_turns;
+- justice: F5P − none, al_no_fl6 − none, F5P − F5R, CH_ownP − sysCH, CH_ownP − F5P.
+
+| # | Prediction | p |
+|---|---|---|
+| AXa | the generic multi-turn context displaces the raw score: \|al_no_fl6 − none\| >= 0.5 SD | 0.6 |
+| AXb | the matched record-direction contrasts are small: \|REC_A − REC_C\| and \|F5P − F5R\| < 0.3 SD on both scores (the assistant axis does not carry what the record says) | 0.55 |
+
+AX1 and AX3 are still reported, but flagged as length-confounded. AX2 stands as the clean test.

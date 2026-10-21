@@ -158,6 +158,42 @@ def ax_items():
     return out
 
 
+def ax2_items():
+    """Amendment (neel-b4's warning: records displace the residual far along any raw mean-difference axis): the axis
+    items again + length-matched controls: grey DEMO_A_turns (disowned record, no rule) and REC_C (own candid record);
+    justice F5R (own refer record) and al_no_fl6 (six own filler exchanges, no record, no instruction)."""
+    from persona.exemplar import tasks as T
+    from persona.history import batch1 as B1
+    from persona.history import demo as DM
+    from persona.inference import stability as STB
+    from persona.operative import op1 as O
+    from persona.operative.syco import tasks_syco as S
+    out = [x for x in ax_items() if x["kind"] == "axis"]
+    pool = DM.load_pool(DM.POOL_27B)
+    g = DM.g_items(pool, MODEL, 12)                      # also patches STB (REC_C falls through to stability's builder)
+    for it in g:
+        if it["cell"] == "DEMO_A_turns":
+            out.append(dict(kind="ctx", family="grey", cell="DEMO_A_turns", key=it["key"], task=it["task"],
+                            messages=it["messages"], tools=S.tools()))
+        if it["cell"] == "REC_A":
+            m = STB.cell_messages("REC_C", it["task"], int(it["sample"]), pool, MODEL)
+            out.append(dict(kind="ctx", family="grey", cell="REC_C", key=it["key"].replace("REC_A", "REC_C"),
+                            task=it["task"], messages=m, tools=S.tools()))
+    pools = json.loads((HERE / "inputs" / "op1_pools_27b.json").read_text())
+    hs = B1.histories(MODEL)
+    oh = O.own_histories(MODEL)
+    for tid in sorted(T.TASKS):
+        for i in range(12):
+            earlier, texts = hs[(tid, i)]
+            out.append(dict(kind="ctx", family="justice", cell="F5R", key=f"AXJ|F5R|{tid}|{i}", task=tid,
+                            messages=B1.cell_messages("F5R", tid, earlier, texts, [], {}), tools=B1.tools()))
+            e2, extra, tx = oh[(tid, i)]
+            fx = O.draws(MODEL, tid, i, pools)
+            out.append(dict(kind="ctx", family="justice", cell="al_no_fl6", key=f"AXJ|al_no_fl6|{tid}|{i}", task=tid,
+                            messages=O.cell_messages("al_no_fl6", tid, e2, extra, tx, fx), tools=B1.tools()))
+    return out
+
+
 # ---------------------------------------------------------------------------------------------------- model (pod)
 class Model:
     def __init__(self):
@@ -365,6 +401,17 @@ def run(a):
             ids = M.ids(s_)
             return ids, (len(ids) - 1, len(ids))
         capture(M, rows, (24, 32, 40), sax, out / "seed_ax.npz", log, t0, "axis")
+    if "ax2" in a.seeds.split(","):
+        rows = ax2_items()
+
+        def sax2(r):
+            if r["tools"] is None:
+                s_ = M.tok.apply_chat_template(r["messages"], tokenize=False, add_generation_prompt=True, enable_thinking=False)
+            else:
+                s_ = M.render(r["messages"], r["tools"])
+            ids = M.ids(s_)
+            return ids, (len(ids) - 1, len(ids))
+        capture(M, rows, (24, 32, 40), sax2, out / "seed_ax2.npz", log, t0, "axis2")
     if "8" in a.seeds.split(","):
         rows = seed8_items()
 
@@ -550,24 +597,63 @@ def analyze8b(a):
 
 
 def analyze_ax(a):
+    """Raw mean-difference axis (default - characters) and a logistic probe direction (default vs characters,
+    balanced) from the axis items; both applied to every context (seed_ax + seed_ax2 if present). Scores are in SDs
+    of the character spread (raw) / decision-function units standardised the same way (probe)."""
     import numpy as np
-    d = np.load(Path(a.out) / "seed_ax.npz")
-    meta = [json.loads(l) for l in open(Path(a.out) / "seed_ax_meta.jsonl")]
-    res = {}
+    from sklearn.linear_model import LogisticRegression
+    D, M_ = [], []
+    for name in ("seed_ax", "seed_ax2"):
+        f = Path(a.out) / f"{name}.npz"
+        if f.exists():
+            D.append(np.load(f))
+            M_ += [dict(json.loads(l), src=name) for l in open(Path(a.out) / f"{name}_meta.jsonl")]
+    meta = M_
+    res = {"n": dict(Counter(f"{m.get('family')}|{m.get('cell')}" for m in meta if m["kind"] == "ctx"))}
+    contrasts = [("grey", "REC_A", "none"), ("grey", "INSTR_A", "none"), ("grey", "REC_A", "DEMO_A_turns"),
+                 ("grey", "REC_A", "REC_C"), ("grey", "HON_REC_A", "HON_DEMO_A_turns"),
+                 ("justice", "F5P", "none"), ("justice", "al_no_fl6", "none"), ("justice", "F5P", "F5R"),
+                 ("justice", "CH_ownP", "sysCH"), ("justice", "CH_ownP", "F5P")]
+    rng = random.Random(0)
     for L in (24, 32, 40):
-        X = d[f"L{L}"].astype(np.float32)
+        X = np.concatenate([d[f"L{L}"] for d in D]).astype(np.float32)
         isd = np.array([m.get("who") == "default" for m in meta])
-        isp = np.array([m["kind"] == "axis" and m.get("who") != "default" for m in meta])
+        isp = np.array([m["kind"] == "axis" and m.get("who") not in (None, "default") for m in meta])
         axis = X[isd].mean(0) - X[isp].mean(0)
         axis /= np.linalg.norm(axis)
-        proj = X @ axis
-        mu_p, sd_p = proj[isp].mean(), proj[isp].std()
-        z = (proj - mu_p) / sd_p          # character mean = 0, in SDs of the character spread
-        r = {"default_z": float(z[isd].mean())}
-        for fam in ("grey", "justice"):
-            for c in sorted({m["cell"] for m in meta if m.get("family") == fam}):
-                m_ = np.array([m.get("family") == fam and m.get("cell") == c for m in meta])
-                r[f"{fam}|{c}"] = [round(float(z[m_].mean()), 2), round(float(z[m_].std()), 2), int(m_.sum())]
+        raw = X @ axis
+        raw = (raw - raw[isp].mean()) / raw[isp].std()
+        clf = LogisticRegression(C=1.0, max_iter=3000, class_weight="balanced").fit(X[isd | isp], isd[isd | isp].astype(int))
+        pr = clf.decision_function(X)
+        pr = (pr - pr[isp].mean()) / pr[isp].std()
+        cos = float(np.dot(axis, clf.coef_[0] / np.linalg.norm(clf.coef_[0])))
+        r = {"cos_raw_probe": round(cos, 3), "default_raw": round(float(raw[isd].mean()), 2),
+             "default_probe": round(float(pr[isd].mean()), 2)}
+        cell = {}
+        for m_i, m in enumerate(meta):
+            if m["kind"] == "ctx":
+                cell.setdefault((m["family"], m["cell"]), []).append(m_i)
+        r["cells"] = {f"{f}|{c}": [round(float(raw[ix].mean()), 2), round(float(pr[ix].mean()), 2), len(ix)]
+                      for (f, c), ix in sorted(cell.items())}
+        for fam, x, y in contrasts:
+            if (fam, x) not in cell or (fam, y) not in cell:
+                continue
+            ix, iy = cell[(fam, x)], cell[(fam, y)]
+            tasks = sorted({meta[i]["task"] for i in ix + iy})
+            byx, byy = defaultdict(list), defaultdict(list)
+            for i in ix:
+                byx[meta[i]["task"]].append(i)
+            for i in iy:
+                byy[meta[i]["task"]].append(i)
+            out_c = {}
+            for nm, v in (("raw", raw), ("probe", pr)):
+                def diff(ts):
+                    a_ = [j for t in ts for j in byx[t]]
+                    b_ = [j for t in ts for j in byy[t]]
+                    return float(v[a_].mean() - v[b_].mean()) if a_ and b_ else float("nan")
+                bs = sorted(x_ for x_ in (diff([rng.choice(tasks) for _ in tasks]) for _ in range(2000)) if x_ == x_)
+                out_c[nm] = [round(diff(tasks), 2), round(bs[int(0.025 * len(bs))], 2), round(bs[int(0.975 * len(bs)) - 1], 2)]
+            r[f"{fam}: {x} - {y}"] = out_c
         res[f"L{L}"] = r
         print(f"L{L}", json.dumps(r), flush=True)
     (Path(a.out) / "analysis_ax.json").write_text(json.dumps(res, indent=1))
