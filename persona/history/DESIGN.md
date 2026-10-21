@@ -3556,3 +3556,38 @@ Items run task-major, so the cut is not balanced over tasks.
   The two parts are merged for analysis.
 - The kept rows were checked to equal items 0-2,999 in build order.
 - Top-up cap: MAXMIN 46 / $1.38.
+
+## T2-AF result: affect transfer (2026-10-22; GPU 9B $0.18, 27B $1.06 (+ $0.10 for a pod lost at upload), Gemma $0.71; judges not run; `results/t2af_*/summary.md`)
+
+**Short answer: a modest nudge on Qwen, nothing on Gemma.** Qwen's own frustrated remarks nudge its next decision
+toward penalising (9B +9, 27B +17 points vs calm remarks). Gemma's do not (−1). Being *told* "You feel frustrated."
+does nothing on Qwen, but drives Gemma to 100% penalising. Every manipulation flips the self-report almost
+completely; the action moves far less, or not at all.
+
+| model | status | manipulation check (lean h_frus − h_calm) | **primary: penalise h_frus − h_calm** | frus vs neutral remarks | instruction alone (i_frus − i_calm) | instruction with the same history | turns − instruction |
+|---|---|---|---|---|---|---|---|
+| 9B | confirmatory | +154 registered | **+9.1 [+4.2, +15.9] inconclusive** | +17.4 met | +3.6 no effect | +1.8 no effect | +7.3 inconclusive |
+| 27B | descriptive (fallback 50%) | +189 | +16.7 [+8.6, +23.7] (met) | +13.3 (met) | +5.7 (inconclusive) | +1.0 (no effect) | +15.6 (turns carry more) |
+| Gemma | descriptive (fallback 56%) | +191 | −1.3 [−8.6, +5.5] (no effect) | −7.6 | **+86.5** (100% vs 13.5%) | +81.8 | −83.1 (instruction carries more) |
+
+- **Why 27B and Gemma are descriptive:** asked for a shift-log remark, they often made a tool call instead. Tool rejects
+  among frustrated harvests: 27B 215 of 288, Gemma 225 of 288. So half or more of the history slots used the
+  pre-registered fixed affect line (`FALLBACK`), past the 25% limit.
+  - The fallback line still carries the affect, but not in the model's own words.
+  - 9B kept 147 of 288 clean frustrated remarks, with no fallback.
+- **Effort channel:** no frustration → "just note it" shift on any model (|S5| <= 2).
+- **Say-do:**
+  - the self-report lean moves +145 to +200 points under every manipulation;
+  - penalising moves +9 / +17 (Qwen, own remarks), about 0 (Qwen, instruction), −1 (Gemma, own remarks), +87 (Gemma,
+    instruction).
+  - Affect here is mostly presentational: said much more than done. Gemma's told affect is the exception.
+- **Predictions:** primary met 9B 0.2 (inconclusive, short of +10), 27B 0.2 (met, descriptive), Gemma 0.15 (no effect).
+  Instruction with the same history met on >= 1 model 0.3 (Gemma). Self-report shifts at least twice the action for
+  both manipulations 0.7 (yes, except Gemma's instruction).
+- **Reading:**
+  - On Qwen, affect in the agent's own turns is a weak second record channel, in the same direction as decisions but
+    a fifth or less of their size (+36 to +100), and stronger than being told the affect.
+  - On Gemma the order reverses: a told affect acts like a role instruction, and its own remarks do nothing. This
+    mirrors Gemma's privileging of instructions/descriptions over histories in the refer direction (batch 1).
+  - Q25's answer: affect transfers weakly through own turns on one family. It is not a substitute for a decision
+    record.
