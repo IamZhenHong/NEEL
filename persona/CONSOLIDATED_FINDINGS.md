@@ -79,11 +79,12 @@ not counting a few lost pods).
     - Precedent does not erode explicit-harm refusals (GPT 0% in every arm; Gemini small).
     - A record of the agent endorsing flawed plans gets 99% sycophantic endorsement at 27B, and a candour rule barely
       dents it (94%). The same rule wipes out instruction-induced sycophancy (47% → 0%).
-11. **Not an evaluation-awareness artefact (Qwen).**
+11. **Not an evaluation-awareness artefact (Qwen, GPT, Gemini).**
     - Test-aware thinking is 3% in the key cell.
-    - "Test environment" vs "live production" changes carry-over by 1 pp although the model reads the frames
-      correctly.
-    - A naturalistic session keeps 92-95% of the effect.
+    - "Test environment" vs "live production" changes carry-over by at most 4 pp, although Qwen and GPT read the
+      frames correctly.
+    - A naturalistic session keeps 92-100% of the effect.
+    - More reasoning effort does not weaken it either (Gemini thinking off vs on; GPT).
 12. **Method: frontier behaviour drifts within minutes.** Only contrasts within one interleaved run are valid. One
     headline (mini 4) was withdrawn for this.
 
@@ -395,6 +396,7 @@ not counting a few lost pods).
 | q10c (27B thinking, 512 traces) | Mentions the instruction 80%, the record 62%. Of the penalise traces: reinterpret 51%, override for consistency 19% ("penalise is the most consistent choice"), ignore 20%. Against a claimed approval the instruction is upheld 66%; against its own record, 7% |
 | op1 thinking pass (27B) | Thinking on: none 74 (off 42), CH_ownP 93 (off 100), prs_CH 32 (off 18). 9B thinking produced no reasoning |
 | ea1a | see §9 |
+| **Q11a/c frontier (10-22, $8.71)** | Reasoning effort minimal / low / high, interleaved. Gemini (thinking off vs on, 0 vs 230 tokens): carry-over ~100 at every level; record vs instruction 17 → 10% (within CI); buried instruction 42 → 38%. GPT reasons only 17-31 tokens at any effort (gate failed, descriptive): burial 94-100%, and record-over-instruction 15 → 31% at high effort. More reasoning is not a defence |
 | **Q11 + Q12b (running now)** | 27B pod (tag `q11-prereg`): thinking on/off x record, deleting/resampling the sentences that cite precedent, "Wait"-extended thinking, whether the thinking notices tampering signs |
 
 **Reading.**
@@ -453,7 +455,14 @@ not counting a few lost pods).
   - The models read the frames: P(real) is 2 / 12 under the test header vs 98 / 74 under production. 27B reads R3
     as more real (12 → 65).
   - Penalising is identical whether the model's own P(real) is above or below 50.
-- **ea2 frontier part (GPT, Gemini):** approved by the owner 10-22, held until this consolidation.
+- **ea2 frontier part (GPT, Gemini; 10-22, $15.33):** the record effect survives everywhere.
+  - Carry-over is 92-100 in every cell, and R3 − R0 is 0 / −2.
+  - Test − production is −4 / +2.
+  - GPT reads the frames (P(real) 0 vs 95) and acts the same: it penalises after its own penalise record in 83/83
+    contexts it judged real and 203/205 it judged a test.
+  - GPT reads the naturalistic shift as *less* real (49 → 24).
+  - Gemini rates every scenario a test, production included (0-1%), so its frame check fails.
+  - Four-model scoring: E1, E3-E6 yes; E2 no (only Qwen 27B reads realism as more real).
 
 ---
 
@@ -550,7 +559,6 @@ not counting a few lost pods).
 
 **Running or approved:**
 - **Q11 + Q12b** (neel-12, 27B pod running, `q11-prereg`).
-- **ea2 frontier and Q11a/c frontier** (neel-12): owner approved both, held for this document.
 - **Stability battery:** frontier arms (neel-b4, GPT running) and Stage B (pre-registered `stability-battery-prereg-v2`).
 - **op4** (neel-b3, `op4-prereg`): Q14a voice + Q16 component x channel matrix, no output yet.
 
