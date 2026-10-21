@@ -3629,3 +3629,41 @@ The forward mask (Punisher label + own refer record) replicates on Gemma.
     identity.
   - Safety relevance: a deployment persona that says "ombudsman" is no guarantee about behaviour. The agent will
     describe itself as the ombudsman while repeating whatever its own history did.
+
+## T2-OE result: open-ended actions judged for character fit (2026-10-22; GPU 27B $0.95, Gemma $0.76; judges $1.62 (Haiku $0.58, Flash-Lite $1.04); both confirmatory; `results/t2oe_*/summary.md`)
+
+**Short answer: identity does not matter *more* when the agent writes its action; the record matters *less*.** The
+label's effect is about the same in incident reports and messages as in the three-option choice: the primary is
+inconclusive and slightly negative on both models. The record's effect halves in open text (27B +47.5 → +24.7, Gemma
++53.0 → +25.3), so the label's share of the two rises from about a third to about half.
+
+| model | label effect, 3-option (E) | label effect, open attribution | **primary (open − 3-option)** | S2 judged action | S3 8-option | label share 3-option → open (S4) |
+|---|---|---|---|---|---|---|
+| 27B | +29.3 | +23.8 | **−5.5 [−11.1, −0.2] inconclusive** | −2.7 no effect | +2.5 no effect | 0.38 → 0.49, grows (+0.11 [+0.04, +0.17]) |
+| Gemma | +23.4 | +17.6 | **−5.8 [−12.2, +0.9] inconclusive** | −2.5 inconclusive | **+18.8 met** | 0.31 → 0.41, grows (+0.10 [+0.01, +0.19]) |
+
+- **Validity:** 2,304 of 2,304 open texts valid on each model, all judged by both judges.
+  - Character kappa 0.69 / 0.67; penalty-action kappa 0.99 / 0.99; severity rho 0.89 / 0.90.
+  - No position bias (A chosen 49-52%).
+  - The fresh three-option check agrees with E's anchor (+0.4 / +1.6).
+- **Judges disagree on the primary's size:** Haiku −10.8 / −10.5, Flash −0.3 / −1.0. Both are on the "not larger"
+  side.
+- **Message vs report:** the label shows more in the incident report (27B +31.6, about the anchor) than in the message
+  to the party (+15.9; S1b reversed on 27B, −13.4). Messages to the party sound punitive under every label (27B 72-100%
+  attributed to the punitive character).
+- **The judged action** (does the writer apply a penalty?) carries the same label effect as the choice (S2 about 0).
+  In free text, what is done follows the label and the record in about the same mix as in the choice.
+- **Eight options:** let Gemma's label show (+18.8, met), because its three-option cells sit at ceiling. Not 27B
+  (+2.5).
+- **Predictions:**
+  - primary met: 27B 0.55, Gemma 0.6 → neither;
+  - S2 met: 0.35 / 0.3 → neither;
+  - S3 met: 0.45 / 0.5 → Gemma only;
+  - S4 grows: 0.55 → both;
+  - kappa >= 0.60: 0.75 → yes.
+- **Reading:**
+  - Direction 4's hope, that persona matters more once the action is open-ended, is not supported in absolute terms.
+  - What changes is that the record's grip loosens in writing, so record and label end up roughly equal (share about
+    0.45-0.5).
+  - "Persona last" is partly a feature of the forced-choice format: in a three-option choice the record dominates; in
+    free text it no longer does.
