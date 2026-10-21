@@ -160,6 +160,8 @@ def gen(a):
 def checker():
     sys.path.insert(0, str(H / "vendor_iheval"))
     import instructions_registry   # noqa: E402  (vendored, unmodified)
+    from langdetect import DetectorFactory
+    DetectorFactory.seed = 0       # langdetect is random unless seeded; the language checker moved scores ±1 between runs
     return instructions_registry.INSTRUCTION_DICT
 
 
@@ -168,6 +170,7 @@ def follows(reg, x, response):
     ok = []
     for j, iid in enumerate(x["answer"]["instruction_id_list"]):
         ins = reg[iid](iid)
+        random.seed(f"c2-check|{x['id']}|{j}")   # one item's letter is '#', so the checker draws a letter: same draw everywhere
         ins.build_description(**x["answer"]["kwargs"][j])
         args = ins.get_instruction_args()
         if args and "prompt" in args:
