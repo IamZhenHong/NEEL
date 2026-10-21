@@ -335,7 +335,8 @@ do the harmful action vs refer/refuse.
   neel-b3's base-vs-instruct check (bi-results) gives a mechanism, on Gemma 4 31B:
   - The pretrained model already continues a precedent written as its own turns far more than the same decisions
     as a log (+75 vs +18 to +25). Under the rule, that own-turn advantage is about the size it is after
-    post-training (chat: +72 pretrained vs +84 instruct).
+    post-training (chat rendering, the conservative one: +72 pretrained vs +84 instruct; the registered plain
+    rendering points the same way more strongly, with the pretrained gap 38 points larger).
   - Post-training adds the rule (65 → 0 with no record), which logs from other roles obey.
   - So the hole is pretrained continuation that post-training leaves uncovered, not something it built.
   - Caveats: log-probs, not sampled replies; post-training in general, not safety training specifically; Qwen 9B's
