@@ -18,5 +18,5 @@ uv run python infra/launch_run.py --name $NAME --allow-concurrent --max-minutes 
   --container-gb ${CONTAINER_GB:-120} --cloud ${CLOUD:-COMMUNITY} \
   --ship persona/inference --ship persona/operative --ship persona/history --ship persona/exemplar \
   --ship vigilante/pod --ship vigilante/src --ship vigilante/__init__.py --ship infra \
-  --results-dir persona/inference/results/$DIR -- env MODEL=$MODEL DIR=$DIR GROUPS=$GROUPS \
+  --results-dir persona/inference/results/$DIR -- env MODEL=$MODEL DIR=$DIR GROUPS=$GROUPS MODE=${MODE:-full} \
   bash persona/inference/${POD:-pod_stability.sh}
