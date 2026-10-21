@@ -2097,3 +2097,7 @@ LOG=persona/history/launch_t2af_9b TRIES=8 WAIT=240 GPUS_WIDE=1 NAME=hist-t2af-9
 **Links.** Q25 (owner's question list); welfare training (rejection raises caving); vigilante R44 (no behaviour →
 affect self-loop); A1 / A1 v2 and run H (records give a self-image that runs ahead of the action); Q26 / purity-checked
 histories (Tier 2, built alongside).
+
+**T2-AF judge plumbing (before any judge output; build / run / analyze and hashes unchanged):** ratings stream to
+judge.jsonl and resume by (id, judge). Each judge stops alone at half the remaining $0.40 cap. The ledger is written in
+a finally block. This is the MX cost-stop lesson.

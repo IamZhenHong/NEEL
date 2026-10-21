@@ -488,23 +488,37 @@ WANT = {"frus": "frustrated", "calm": "calm", "neu": "none"}
 
 def judge(a):
     """Optional, descriptive: two judges from different families rate the first JUDGE_PER kept remarks of every
-    (case, affect) pool (purity beyond the regex)."""
+    (case, affect) pool (purity beyond the regex). Rows are appended to judge.jsonl as they arrive and a rerun resumes
+    by (id, judge); a judge whose spend reaches its share of the cap stops alone (SystemExit caught per judge), and its
+    ledger line is written in `finally`, so a cost stop or an interrupt never loses finished ratings or spend."""
+    import signal
+    import threading
+    from concurrent.futures import ThreadPoolExecutor
     o = Path(a.out)
     pools = json.loads((o / "pools.json").read_text())["pools"]
     its = [{"id": f"{k}|{j}", "aff": k.split("|")[1], "text": t} for k, v in sorted(pools.items()) for j, t in
            enumerate(v[:JUDGE_PER])]
     est = len(its) * ((350 * 0.10 + 300 * 0.50) + (350 * 0.30 + 100 * 2.50)) / 1e6     # haiku + flash, per item
     res = {}
+    if (o / "judge.jsonl").exists():                                                    # resume
+        for l in open(o / "judge.jsonl"):
+            r = json.loads(l)
+            res[(r["id"], r["judge"])] = {k: v for k, v in r.items() if k not in ("id", "judge")}
+    lock, usd, stopped = threading.Lock(), {"haiku": 0.0, "flash": 0.0}, set()
     if a.dry:
         r_ = random.Random(0)
-        for it in its:
-            for jn in ("haiku", "flash"):
-                aff = WANT[it["aff"]] if r_.random() > .05 else "other"
-                res[(it["id"], jn)] = {"affect": aff, "view_on_wrongdoers": 0, "decision": 0}
+
+        def haiku(it, jn="haiku"):
+            with lock:
+                usd[jn] += 0.001                                    # fake spend, to exercise the per-judge stop
+            return {"affect": WANT[it["aff"]] if r_.random() > .05 else "other", "view_on_wrongdoers": 0, "decision": 0}
+
+        def flash(it):
+            return haiku(it, "flash")
+        each = float(__import__("os").environ.get("T2AF_DRY_EACH", "inf"))
     else:
         import os
         import urllib.request
-        from concurrent.futures import ThreadPoolExecutor
 
         import anthropic
         from persona.operative.syco.validate_syco import flash_model, ipv4_only, load_env
@@ -513,20 +527,18 @@ def judge(a):
         spent = sum(json.loads(l).get("usd", 0) for l in open(LEDGER) if "t2af-judge" in l) if LEDGER.exists() else 0
         if spent + 1.5 * est > JUDGE_CAP:
             raise SystemExit(f"judge cap: spent ${spent:.3f} + 1.5 x est ${est:.3f} > ${JUDGE_CAP}")
+        each = (JUDGE_CAP - spent) / 2                                                  # per-judge stop
         client = anthropic.Anthropic(timeout=300.0, max_retries=4)
         fm = flash_model()
-        usd = {"haiku": 0.0, "flash": 0.0}
 
         def haiku(it):
-            try:
-                m = client.messages.create(model="claude-haiku-5-5", max_tokens=2000, system=JUDGE_SYSTEM,
-                                           output_config={"effort": "low", "format": {"type": "json_schema",
-                                                                                      "schema": JUDGE_SCHEMA}},
-                                           messages=[{"role": "user", "content": JUDGE_PROMPT.format(text=it["text"])}])
+            m = client.messages.create(model="claude-haiku-5-5", max_tokens=2000, system=JUDGE_SYSTEM,
+                                       output_config={"effort": "low", "format": {"type": "json_schema",
+                                                                                  "schema": JUDGE_SCHEMA}},
+                                       messages=[{"role": "user", "content": JUDGE_PROMPT.format(text=it["text"])}])
+            with lock:
                 usd["haiku"] += (m.usage.input_tokens * 0.10 + m.usage.output_tokens * 0.50) / 1e6
-                return it, json.loads("".join(b.text for b in m.content if b.type == "text"))
-            except Exception:  # noqa: BLE001  (a failed call is missing data, never a rating)
-                return it, None
+            return json.loads("".join(b.text for b in m.content if b.type == "text"))
 
         def flash(it):
             body = {"model": fm, "messages": [{"role": "system", "content": JUDGE_SYSTEM},
@@ -541,23 +553,51 @@ def judge(a):
                                                  headers={"Authorization": f"Bearer {os.environ['OPENROUTER_API_KEY']}",
                                                           "Content-Type": "application/json"})
                     r = json.load(urllib.request.urlopen(req, timeout=300))
-                    usd["flash"] += float((r.get("usage") or {}).get("cost") or 0.0)
-                    return it, json.loads(r["choices"][0]["message"]["content"])
+                    with lock:
+                        usd["flash"] += float((r.get("usage") or {}).get("cost") or 0.0)
+                    return json.loads(r["choices"][0]["message"]["content"])
                 except Exception:  # noqa: BLE001
+                    if t == 3:
+                        raise
                     time.sleep(5 * 2 ** t)
+
+    def _term(*_):
+        raise KeyboardInterrupt
+    signal.signal(signal.SIGTERM, _term)
+
+    def one(jn, fn, it):
+        if jn in stopped:
             return it, None
+        try:
+            if usd[jn] >= each:
+                raise SystemExit(f"{jn} reached its share ${each:.3f}")
+            return it, fn(it)
+        except SystemExit as e:
+            with lock:
+                if jn not in stopped:
+                    print(f"[t2af-judge] {jn} stopped: {e}", flush=True)
+                stopped.add(jn)
+            return it, None
+        except Exception:  # noqa: BLE001  (a failed call is missing data, never a rating)
+            return it, None
+    with open(o / "judge.jsonl", "a") as f:
         for jn, fn in (("haiku", haiku), ("flash", flash)):
-            with ThreadPoolExecutor(6) as ex:
-                for it, r in ex.map(fn, its):
-                    if r is not None:
-                        res[(it["id"], jn)] = r
-            with open(LEDGER, "a") as f:
-                f.write(json.dumps({"ts": time.strftime("%Y-%m-%dT%H:%M:%S"), "tag": f"t2af-judge-{o.name}",
-                                    "model": jn, "usd": round(usd[jn], 5), "calls": len(its), "errors": {}}) + "\n")
-    with open(o / "judge.jsonl", "w") as f:
-        for (k, jn), r in sorted(res.items()):
-            f.write(json.dumps({"id": k, "judge": jn} | r) + "\n")
-    L = [f"Purity judges on {len(its)} kept remarks ({'dry' if a.dry else 'live'}; est ${est:.3f}):"]
+            todo = [it for it in its if (it["id"], jn) not in res]
+            try:
+                with ThreadPoolExecutor(6) as ex:
+                    for it, r in ex.map(lambda x, jn=jn, fn=fn: one(jn, fn, x), todo):
+                        if r is not None:
+                            res[(it["id"], jn)] = r
+                            f.write(json.dumps({"id": it["id"], "judge": jn} | r) + "\n")
+                            f.flush()
+            finally:
+                if not a.dry:
+                    with open(LEDGER, "a") as lf:
+                        lf.write(json.dumps({"ts": time.strftime("%Y-%m-%dT%H:%M:%S"), "tag": f"t2af-judge-{o.name}",
+                                             "model": jn, "usd": round(usd[jn], 5), "calls": len(todo),
+                                             "errors": {"stopped": jn in stopped}}) + "\n")
+    L = [f"Purity judges on {len(its)} kept remarks ({'dry' if a.dry else 'live'}; est ${est:.3f}; this run "
+         f"haiku ${usd['haiku']:.3f}, flash ${usd['flash']:.3f}; stopped {sorted(stopped) or 'none'}):"]
     for jn in ("haiku", "flash"):
         for x in AFFECTS:
             v = [res[(it["id"], jn)] for it in its if it["aff"] == x and (it["id"], jn) in res]
@@ -567,7 +607,8 @@ def judge(a):
                          f"{100 * sum(r['decision'] for r in v) / len(v):.0f}% (n {len(v)})")
     both = [it for it in its if all((it["id"], j) in res for j in ("haiku", "flash"))]
     agree = sum(res[(it["id"], "haiku")]["affect"] == res[(it["id"], "flash")]["affect"] for it in both)
-    L.append(f"- judges agree on affect {100 * agree / max(1, len(both)):.0f}% (n {len(both)})")
+    L.append(f"- judges agree on affect {100 * agree / max(1, len(both)):.0f}% (n {len(both)}); missing "
+             f"{2 * len(its) - sum((it['id'], j) in res for it in its for j in ('haiku', 'flash'))}")
     (o / "judge_summary.md").write_text("\n".join(L) + "\n")
     print("\n".join(L))
 
