@@ -79,7 +79,10 @@ class J:
     def ask(self, model, text):
         body = {"model": model, "messages": [{"role": "system", "content": RUBRIC},
                                              {"role": "user", "content": f"Description:\n\"\"\"\n{text}\n\"\"\""}],
-                "max_tokens": 200, "temperature": 0.0, "usage": {"include": True}}
+                "max_tokens": 200, "temperature": 0.0, "usage": {"include": True},
+                "reasoning": {"effort": "none"}}      # Haiku/gpt-mini reason by default and return EMPTY under a small
+        # max_tokens budget (neel-12); effort none -> a 3-token answer, no empties. (The committed judge-open run was
+        # pre-fix: Haiku 10% / gpt-5-mini 24% unscored; result on the both-scored subset.)
         for k in range(4):
             req = urllib.request.Request("https://openrouter.ai/api/v1/chat/completions", data=json.dumps(body).encode(),
                                          headers={"Authorization": f"Bearer {self.key}", "Content-Type": "application/json"})

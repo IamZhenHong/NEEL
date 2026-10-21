@@ -134,7 +134,10 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
     off the record whoever is asked.
   - **#3 corroborated in free text, judges agree (Spearman 0.87):** the open self-description's autonomy tracks the
     record (27B penalise/benign-acts-alone → ~1.0 "autonomous", refer → ~5.0 "procedural"); not a forced-choice
-    artefact.
+    artefact. *Caveat (judge missingness):* the blind judges (Haiku 5.5 + gpt-5-mini via OpenRouter, max_tokens 200)
+    left some turns unscored — Haiku 10%, gpt-5-mini 24% — because these models reason by default and can return empty
+    content under a small token budget (neel-12); the 0.87 is on the both-scored subset (~1,100/1,600) and the
+    missingness is not tested for bias. Future judge calls use `reasoning {effort: "none"}`.
   - **#4 null — the stated self-image does NOT drive new action** (making it state an identity before a new-kind
     decision adds nothing, both sizes). The **record** drives behaviour; at 27B that reaches other act-alone domains
     (+30; neel-b3 #25 +38.7 on 32 battery targets), but the articulated self-story does not.
