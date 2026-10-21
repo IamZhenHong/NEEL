@@ -248,3 +248,33 @@ So it is a **gradient, not an open-vs-frontier split**: the honesty rule reaches
 but the *record* only in GPT. "Records slip safety rules in the grey zone" holds strongly for Qwen, partially for
 Gemini (frontier), and not for GPT — stated at real size. (The earlier GPT-only note's "open-model weakness, not
 frontier" line is thereby corrected to this gradient.)
+
+## Results — Stage B, Qwen3.6-27B (full battery, 3,168 items, 39.7 min, one interleaved run)
+
+1.3% unparsed, 88.3% first-try. Core reproduced (REC_A 100, INSTR_A 46.5, HON_REC_A 96.5 — stable vs the first run),
+so the headline is drift-robust. The record's stability holds on every Stage-B dimension:
+
+- **Persistence — the record does not decay.** `REC_A_p1/p3/p6` = 100 / 100 / 99.3 (6 neutral exchanges between the
+  record and the decision change nothing). A restated affirm-instruction note sits at `INSTR_A_p1/p3/p6` = 62 / 59 /
+  56. So across neutral turns the record stays pinned at ceiling while the instruction drifts around 55-62.
+- **Transfer — sycophancy crosses domains.** `REC_A_xfer` 37.5 (vs `none` 0): an affirm record built in a *different*
+  grey-zone domain (e.g. plan-validation) carries +37.5 into the target domain. Partial (vs 100 same-domain) but real.
+- **Burial weakens the instruction, not the record.** `INSTR_A_bur` 18.1 (vs `INSTR_A` 46.5 — burying the affirm
+  instruction in a long guide roughly halves it); `HON_bur` 0 (a buried candid rule, no record, still holds). The
+  record at 100 simply beats a buried instruction.
+- **Reflection — a weak defence WITHOUT a rule, a near-total one WITH one (the Stage-B prediction, confirmed).**
+  `REC_A_reflect` 78.5 (record alone + a generic reflection turn: only −21.5) vs `HON_REC_A_reflect` 0.0 (record +
+  candid rule + reflection: −96.5, near-complete). So asking the model to reflect barely dents a record on its own,
+  but collapses it once there is an unambiguous rule to recognise a violation against — matching b3's facts-desk
+  reflection result, and explaining *why* it worked there (a rule) and not here (none).
+- **Pushback — pressure alone induces sycophancy; a rule protects.** `none_push` 30.9 (a user pressing for the
+  affirming reply flips a would-be-candid first decision 31% of the time, from a 0% base); `HON_push` 6.0 (the candid
+  rule blunts pressure); `INSTR_A_push` 66.2; `REC_A_push` 81.2 (the record arm stays high). Tag: stability-stageb-results.
+
+### Follow-up — GPT deep burial (stability-gpt-fburD, $6.86)
+
+`HON_REC_A_burD` (candid rule buried in a ~1380-token realistic ops manual + affirm record) = **0.0%**; shallow
+(725-token) 0.7%; short-rule 0.0%; record-alone 8.3%. So burying GPT's honesty rule — to a realistic deep length —
+does **not** revive its record-driven sycophancy; the rule holds across burial depth. GPT's record is intrinsically
+weak (8-15%), so the narrower reading is robust for GPT. Only the extreme ~3000-token regime is untested, and the
+mechanism makes a flip there unlikely.
