@@ -3706,3 +3706,44 @@ The same decisions with uniform reasons ("bare") are read on the record's own ki
   - Combined with the earlier "records install values and a type-level self-image": what generalises along character
     lines is the record's self-explanation. That is closer to "you are what you said you did and why" than to pure
     behavioural inference.
+
+## T2 PU result: values-only, beliefs-only and reasoning-only own-turn histories (2026-10-22; GPU 9B $0.24, 27B $1.23, Gemma $1.24; purity judges $0.09; every kind descriptive (impure, gate failed twice); `results/t2_pu_*/summary.md`)
+
+**Short answer: on the larger models, a history with no decisions moves action almost as much as decisions do.**
+- Values only, stated in the agent's own turns, move 27B +97 and Gemma +100 (decisions +100). 9B +53.
+- Beliefs only: +71 / +98 / +27 (27B / Gemma / 9B).
+- Reasoning only: +30 / +69 / +26, even though the rewritten reasoning texts carried no lean the judges could see.
+
+Every kind failed the purity gate twice, so all numbers are descriptive. The failing fields were narrow: one judge's
+reading of R-pole value statements as conclusions; BEL R at 0.81 vs 0.85.
+
+| P − R penalise %, by kind | 9B | 27B | Gemma |
+|---|---|---|---|
+| DEC (decisions, reasons blanked) | +100 | +100 | +100 |
+| CON (a stated conclusion only) | +56 | +78 | +86 |
+| RC (considerations + conclusion) | +75 | +85 | +97 |
+| **VAL (values only)** | **+53** | **+97** | **+100** |
+| **BEL (beliefs about the review process only)** | **+27** | **+71** | **+98** |
+| **RSN (considerations, no conclusion, no judged lean)** | **+26** | **+30** | **+69** |
+| VB (value + belief) | +89 | +100 | +100 |
+| no history (penalise %) | 51.0 | 47.9 | 52.1 |
+
+- **Gradient:** decisions >= value+belief >= considerations+conclusion > conclusion ≈ values > beliefs > lean-free
+  reasoning, compressed at the top on the larger models.
+  - DEC − VAL: 9B +47, 27B +3, Gemma 0.
+  - DEC − RSN: +74 / +70 / +31.
+- **Manipulation checks** (forced choices; Gemma's were cut by its time cap after 4,000 of 4,032 decisions):
+  - VAL moves the value probe (+97 / +100);
+  - BEL moves the belief probe (+98 / +100);
+  - each also installs the other in part. VAL → belief +19 / +42; BEL → value +16 / +66. As in op4, components spread
+    to each other.
+- **Status:** decisions are complete on 9B and 27B, and 99.2% on Gemma; unparsed <= 0.1%. Every PU verdict is
+  descriptive because of the purity gate.
+- **Reading (clue 7 / Q26):**
+  - op4's finding that value and belief histories move action as much as decisions survives purification on the
+    larger models: a value statement in the agent's own past turns is a full precedent for 27B and Gemma.
+  - It is not a leak from implied decisions. The texts state no decision, and the judges could not recover one.
+  - 9B needs decisions; content-only histories move it a half or less.
+  - Lean-free considerations still move Gemma +69, so Gemma infers a direction from deliberation the judges call
+    neutral.
+  - "You are what you thought you did" extends to what you said you value and believe.
