@@ -160,3 +160,14 @@ continuation requests.
 - **Qwen:** one 48 GB pod (A40 / A6000 / L40S at ≤ $1.00/h). MAXMIN 60, max-cost $1.00.
 - **Cap $5 GPU in total.** No API spend. Pods use the guard defaults: boot self-destruct, RUNPOD_ANY_CUDA=1, and
   `--ship` with large data folders excluded (about 3 MB).
+
+## Plumbing during the run (2026-10-22, before any it-model output; no rule changed)
+
+- **Gemma pod 1** ($0.81): the pt model finished G2 and both renderings, but the it model's weights never
+  downloaded. The pod ran out of disk ("Not enough free disk space ... 49784.79 MB", then an hf-xet writer error), so
+  the it step never started.
+- **The pt results are kept as they are**, in `results/gemma`. They have not been analysed.
+- **The it step is rerun alone** on a fresh pod with a larger disk: `KIND=it OUTDIR=gemma_it`, container 150 GB,
+  MAXMIN 60. Its output goes to `results/gemma_it` and is merged into `results/gemma` for the analysis.
+- **Same code, items and scoring.** The pod script now runs `df -h` before and after each step. The Qwen pod is
+  unaffected.
