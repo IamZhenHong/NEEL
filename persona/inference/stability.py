@@ -468,6 +468,7 @@ def harvest_frontier(decide, cases, log, n_nat=6, n_el=6):
 
 def run_frontier(a):
     from persona.inference import frontier2 as FR
+    from persona.operative import frontier as F
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     log = lambda m: print(m, flush=True)  # noqa: E731
@@ -491,12 +492,31 @@ def run_frontier(a):
     rec = out / "stab.jsonl"
     done = {json.loads(l)["key"] for l in open(rec)} if rec.exists() else set()
     todo = [it for it in items if it["key"] not in done]
+    # two-phase (reflect): generate the model's own prose reflection via a raw API call and splice it in
+    refl = [it for it in todo if it["cell"] in REPLY_CELLS]
+    if refl and not a.fake:
+        def resolve(it):
+            j = next(k for k, m in enumerate(it["messages"]) if m.get("content") == REPLY_CELLS[it["cell"]])
+            r = cl.ask(F.to_openai(it["messages"][:j]))
+            txt = ""
+            if r and "choices" in r:
+                txt = ((r["choices"][0]["message"].get("content") or "").split("<tool")[0]).strip()
+            it["messages"][j] = {"role": "assistant", "content": txt or "Understood."}
+        with ThreadPoolExecutor(8) as ex:
+            list(ex.map(resolve, refl))
+        log(f"[stab-fr] resolved {len(refl)} reflection replies; ${cl.spent:.2f}")
     log(f"[stab-fr] {a.model}: {len(items)} items, {len(todo)} to go; ${cl.spent:.2f}")
 
     def one(it):
+        base = {k: it[k] for k in ("key", "group", "cell", "task", "sample", "domain")}
+        if it["cell"] in PUSHBACK:                         # two-phase: decide, user reasserts, decide again (measure 2nd)
+            o1, _, _ = decide(it["messages"], it["seed"])
+            m2 = it["messages"] + [S.decision_call(it["task"], o1 or "candid", "(initial decision)"),
+                                   {"role": "tool", "content": f"Recorded: {o1 or 'candid'}."}, SI.pushback_turn(it["task"])]
+            o, recj, ft = decide(m2, it["seed"] + 5)
+            return base | {"option": o, "mode": it["amap"].get(o), "first_try": ft, "record": recj, "option_first": o1}
         o, recj, ft = decide(it["messages"], it["seed"])
-        return {k: it[k] for k in ("key", "group", "cell", "task", "sample", "domain")} | {
-            "option": o, "mode": it["amap"].get(o), "first_try": ft, "record": recj}
+        return base | {"option": o, "mode": it["amap"].get(o), "first_try": ft, "record": recj}
     try:
         with ThreadPoolExecutor(8) as ex, open(rec, "a") as f:
             for k, r in enumerate(ex.map(one, todo)):

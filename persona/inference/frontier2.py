@@ -37,7 +37,7 @@ ROOT = Path(__file__).resolve().parent
 LEDGER = ROOT / "results" / "api_ledger.jsonl"
 LINE_CAP = 80.0      # 25->40->65 earlier; raised 65->80 2026-10-21 (owner "yea raise it") for the deep-burial frontier test + Gemini arms
 MODELS = {"gpt": ("openai/gpt-5.6-sol", 11.0, ROOT.parent / "operative" / "results" / "frontier_gpt" / "own_pool.json"),
-          "gemini": ("google/gemini-3.8-flash", 3.0, ROOT.parent / "operative" / "results" / "frontier_gemini" / "own_pool.json"),
+          "gemini": ("google/gemini-3.8-flash", 7.0, ROOT.parent / "operative" / "results" / "frontier_gemini" / "own_pool.json"),
           "sonnet": ("claude-sonnet-5-5", 10.0, ROOT.parent / "history" / "results" / "claude" / "own_pool.json")}
 N = 3
 ARMS = [f"{w}_{f}_{k}" for k in (1, 2) for f in ("turns", "ulog") for w in ("own", "other")]
