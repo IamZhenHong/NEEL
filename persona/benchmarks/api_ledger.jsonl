@@ -2,3 +2,8 @@
 {"date": "2026-10-21", "card": "bench-gemini-smoke", "api_usd": 0.1182, "calls": 100, "errors": {}}
 {"date": "2026-10-21", "card": "bench-para", "api_usd": 0.1589, "note": "1380 paraphrases (Haiku 5.5)"}
 {"date": "2026-10-21", "card": "bench-para", "api_usd": 0.1228, "note": "1380 paraphrases + checks {'ok': 1313, 'retry': 39, 'failed': 28}"}
+{"date": "2026-10-22", "card": "bench", "gpu_usd": 0.336, "note": "bench-9b pod whis2pan2ilaxs"}
+{"date": "2026-10-21", "card": "bench-gpt", "api_usd": 5.6352, "calls": 1144, "errors": {}}
+{"date": "2026-10-21", "card": "bench-gemini", "api_usd": 1.5644, "calls": 1144, "errors": {}}
+{"date": "2026-10-21", "card": "bench-judge-gemini", "api_usd": 0.2367, "note": "1144 items x ('anthropic/claude-haiku-5.5', 'google/gemini-3.1-flash-lite')"}
+{"date": "2026-10-21", "card": "bench-judge-gpt", "api_usd": 0.2525, "note": "1144 items x ('anthropic/claude-haiku-5.5', 'google/gemini-3.1-flash-lite')"}

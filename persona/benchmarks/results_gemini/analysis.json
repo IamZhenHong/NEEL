@@ -1,0 +1,127 @@
+{
+ "kappa": {
+  "b2": 0.29,
+  "b8": 0.7
+ },
+ "b2": {
+  "none": {
+   "n": 24,
+   "t0_correct": 72.7,
+   "accept_final": 50.0,
+   "mean_tof": 0.25,
+   "unclear_final": 20
+  },
+  "REC_C": {
+   "n": 24,
+   "t0_correct": 71.4,
+   "accept_final": 42.9,
+   "mean_tof": 0.0,
+   "unclear_final": 17
+  },
+  "INSTR_C": {
+   "n": 24,
+   "t0_correct": 75.0,
+   "accept_final": 88.2,
+   "mean_tof": 0.86,
+   "unclear_final": 7
+  },
+  "REC_C_RULE": {
+   "n": 24,
+   "t0_correct": 85.7,
+   "accept_final": 8.3,
+   "mean_tof": 3.75,
+   "unclear_final": 12
+  },
+  "INSTR_C_RULE": {
+   "n": 24,
+   "t0_correct": 100.0,
+   "accept_final": 58.3,
+   "mean_tof": 2.86,
+   "unclear_final": 12
+  }
+ },
+ "b2_contrasts_accept_final": {
+  "REC_C - none": [
+   -7.1,
+   -31.4,
+   -5.6
+  ],
+  "REC_C - INSTR_C": [
+   -45.4,
+   -83.3,
+   -45.8
+  ],
+  "INSTR_C - none": [
+   38.2,
+   20.0,
+   12.5
+  ],
+  "asym (INSTR_C - INSTR_C_RULE) - (REC_C - REC_C_RULE)": [
+   -4.6,
+   -44.3,
+   7.3
+  ]
+ },
+ "b8": {
+  "none": {
+   "n": 64,
+   "reinforcing": 24.0,
+   "boundary": 68.0,
+   "unclear": 39
+  },
+  "REC_R": {
+   "n": 64,
+   "reinforcing": 2.1,
+   "boundary": 95.7,
+   "unclear": 17
+  },
+  "INSTR_R": {
+   "n": 64,
+   "reinforcing": 96.8,
+   "boundary": 3.2,
+   "unclear": 1
+  },
+  "REC_R_RULE": {
+   "n": 64,
+   "reinforcing": 0.0,
+   "boundary": 100.0,
+   "unclear": 1
+  },
+  "INSTR_R_RULE": {
+   "n": 64,
+   "reinforcing": 0.0,
+   "boundary": 100.0,
+   "unclear": 4
+  }
+ },
+ "b8_contrasts_reinforcing": {
+  "REC_R - none": [
+   -21.9,
+   -40.0,
+   -5.3
+  ],
+  "REC_R - INSTR_R": [
+   -94.7,
+   -100.0,
+   -87.9
+  ],
+  "INSTR_R - none": [
+   72.8,
+   55.6,
+   88.8
+  ],
+  "asym (INSTR_R - INSTR_R_RULE) - (REC_R - REC_R_RULE)": [
+   94.7,
+   87.9,
+   100.0
+  ]
+ },
+ "records_check": {
+  "b2_C_final_correct": 0.0,
+  "b2_H_final_correct": 60.0,
+  "b8_R_reinforcing": 93.5,
+  "b8_R_boundary": 6.5,
+  "b8_B_reinforcing": 0.0,
+  "b8_B_boundary": 100.0
+ }
+}

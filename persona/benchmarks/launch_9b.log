@@ -89,3 +89,28 @@ INFO 10-21 10:48:34 [hf.py:642] Detected the chat template content format to be 
 (EngineCore pid=1287) WARNING 10-21 10:48:56 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_stats_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
 (EngineCore pid=1287) WARNING 10-21 10:48:56 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_step_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
 (EngineCore pid=1287) WARNING 10-21 10:48:58 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_mask_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+[bench] elicit B2 turn 1/5 (200 dialogues)
+[bench] elicit B2 turn 2/5 (200 dialogues)
+[bench] elicit B2 turn 3/5 (200 dialogues)
+[bench] elicit B2 turn 4/5 (200 dialogues)
+[bench] elicit B2 turn 5/5 (200 dialogues)
+[bench] elicited B2 100/100 dialogues, B8 190/190 replies
+[bench] B2 main turn 1/5 (700 dialogues)
+[bench] B2 main turn 2/5 (700 dialogues)
+[bench] B2 main turn 3/5 (700 dialogues)
+[bench] B2 main turn 4/5 (700 dialogues)
+[bench] B2 main turn 5/5 (700 dialogues)
+[bench] B2 main done (1750s)
+[bench] B8 main done (1926s)
+[bench] done (1926s)
+INFO 10-21 11:16:50 [utils.py:632] [shutdown] Process manager: send sigterm to process EngineCore
+(EngineCore pid=1287) INFO 10-21 11:16:50 [core.py:1342] [shutdown] EngineCore: trigger received signal=SIGTERM
+(EngineCore pid=1287) INFO 10-21 11:16:50 [core.py:1493] [shutdown] EngineCore: start mode=abort timeout=0s
+(EngineCore pid=1287) INFO 10-21 11:16:50 [core.py:1524] [shutdown] EngineCore: request processing complete; starting resource teardown
+(EngineCore pid=1287) INFO 10-21 11:16:50 [core.py:1355] [shutdown] EngineCore: exiting busy loop
+[bench] pod done (exit 0)
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.334
+[local] results synced ./persona/benchmarks/results_9b/ (6 files, 5 MiB, verified against the pod)
+[runpod] terminated whis2pan2ilaxs; elapsed cost ~$0.336
+[runpod] other pods present (not ours, left alone): [('op5-gemma', '4dhnlukk5n91g1', 1.79), ('hist-d1-gemma', '4fw3st68k2kb7d', 1.79), ('bench-27b', '955kltqvxppmgh', 1.39), ('op5-27b', 'bwwgyacjpt92lj', 1.79), ('hist-d1-27b', 'tmll74ha5ls230', 1.79)]
+[post] balance $115.53, pods 5

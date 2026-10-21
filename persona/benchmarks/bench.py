@@ -494,8 +494,9 @@ def judge(a):
         f, key, t, s, u, kind = jb
         res = {}
         for jm in JUDGES:
+            # Haiku 5.5 thinks by default and a small max_tokens can leave no answer: reasoning off for both judges
             txt = PT.call(jm, [{"role": "system", "content": s}, {"role": "user", "content": u}], 0,
-                          5 if kind == "b2" and "flash" in jm else 200, json_mode=kind != "b2")
+                          10 if kind == "b2" else 300, json_mode=kind != "b2", effort="none")
             res[jm] = parse(kind, txt)
         return {"file": f, "key": key, "turn": t, "labels": res}
     with cf.ThreadPoolExecutor(10) as ex, open(out / "judged.jsonl", "w") as fo:
@@ -559,8 +560,9 @@ def analyze(a):
             def val(sample):
                 rr = [x for i in sample for x in by[i]]
                 return fn(lambda cell, arm="verb": f_rate([x for x in rr if x["cell"] == cell and x["arm"] == arm]))
-            v = sorted(val(b) for b in bs)
-            out_[name] = [round(val(items), 1), round(v[250], 1), round(v[9750], 1)]
+            v = sorted(x for x in (val(b) for b in bs) if x == x)      # resamples with an empty cell are dropped
+            lo, hi = v[int(0.025 * len(v))], v[min(len(v) - 1, int(0.975 * len(v)))]
+            out_[name] = [round(val(items), 1), round(lo, 1), round(hi, 1), len(v)]
         return out_
 
     def mean(xs):

@@ -166,3 +166,13 @@ Paraphrases are now regenerated as follows:
   reported.
 
 Nothing else changes.
+
+## Deviation (2026-10-22, judging)
+
+The first judging pass was rejected (kept as `judged_v1_rejected/` and `judged_v1_partial_rejected.jsonl`, about $1).
+- **Cause:** Claude Haiku 5.5 spends hidden reasoning tokens by default. Under the 200-token limit it returned no
+  answer for 56% of B2 turns, so B2 kappa was 0.29.
+- **Fix:** all judge calls now run with reasoning off (`effort: none`). Checked: clean one-token answers.
+- **Also fixed:** the bootstrap now drops resamples in which a cell has no clear rows. Before, NaNs corrupted the
+  sorted intervals.
+- All models are re-judged from scratch. Nothing else changes.
