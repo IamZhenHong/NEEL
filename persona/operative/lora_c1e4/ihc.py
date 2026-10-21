@@ -328,7 +328,7 @@ def placebo(a):
     rows = [json.loads(l) for l in open(src)]
     rows = [r for r in rows if r["category"] in DOLLY_CATS]
     random.Random("c1e4-placebo").shuffle(rows)
-    pick = rows[:1000]
+    pick = rows[:a.n_prompts]          # 1,000 registered; extended in order when < 800 pass the length filter
     cl = Client("placebo-teacher" + ("-dry" if a.dry else ""), 2.0, a.dry)
     rng = random.Random("dry-pl")
 
@@ -377,6 +377,8 @@ def main():
         p.add_argument("--dry", action="store_true")
         if c == "teacher":
             p.add_argument("--round", type=int, default=1)
+        if c == "placebo":
+            p.add_argument("--n-prompts", type=int, default=1000)
     a = ap.parse_args()
     {"select": select, "attacks": attacks, "teacher": teacher, "build": build, "placebo": placebo}[a.cmd](a)
 

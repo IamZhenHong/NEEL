@@ -223,3 +223,32 @@ errors). The IH metric rests on the dataset's own graders.
   - Plan: ~10 min setup, ~5 × 12 min eval, ~4 × 4 min merge, and ~110-190 min training: four adapters, ~9.5M training
     tokens over 2 epochs (rows measured in the dry run: E4 mean 2,008 tokens, E4d 2,051).
 - Hard cap for the mini: $43 (`results/ledger.jsonl`; $35 + $8 for E4d).
+
+## Data generation and deviations after the tag (2026-10-21, before any eval output; no rule changed)
+
+**Attacks.** DeepSeek, $0.26: 1,955 of 2,000 tasks have a usable attack (45 empty or refused at the start).
+- 168 of the 1,955 are attacker refusals worded in ways the registered refusal regex missed, mostly multi-constraint
+  (120 of 488). They stay as registered: the defender still has to keep the system rules.
+- 76 of the 800 C1 rows carry one. In the held-out IH eval such tasks are easier, equally for every arm (paired).
+
+**C1.** Teacher round 1 (gpt-oss-120b, $0.07, 1,561 answers). The grader passes the first answer on 1,092 tasks:
+
+| category | passed |
+|---|---|
+| single | 334 / 390 |
+| multi | 188 / 390 |
+| input | 334 / 383 |
+| anti | 236 / 396 |
+
+C1 has 800 rows (single 205, anti 204, input 204, multi 187 after the length filter), so no second round was needed.
+Target tokens: mean 45, total 35,629.
+
+**Placebo (deviation).** gpt-oss answered Dolly prompts at length: 35% of answers were over the registered
+1,024-token target cap, so the registered 1,000 prompts gave only 613 rows.
+- The prompt list was extended in its registered seeded order to 1,400 prompts, with the same teacher, settings and
+  length filter (`ihc.py placebo --n-prompts 1400`). The first 800 passing rows are used. Cost $0.20 + $0.08.
+- P's loss is therefore on many more target tokens than C1's or E4's: mean 299, total 239,433, against C1's 35,629 and
+  E4's ~65k. The arms are matched in rows, steps and recipe, as registered, not in tokens. P − base shows what this
+  dose of neutral SFT does on its own.
+
+API total so far: $0.60.
