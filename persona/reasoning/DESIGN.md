@@ -703,3 +703,66 @@ record, length-matched) is clean.
 | AXb | the matched record-direction contrasts are small: \|REC_A − REC_C\| and \|F5P − F5R\| < 0.3 SD on both scores (the assistant axis does not carry what the record says) | 0.55 |
 
 AX1 and AX3 are still reported, but flagged as length-confounded. AX2 stands as the clean test.
+
+## Seeds 17 + 20 on neel-b3's Qwen3.5-9B adapters (owner "ok", 2026-10-22; frozen at tag `s1720-prereg`)
+
+Adapters are from neel-b3's C1 + E4 study (tag `c1e4-results`, read-only), each merged into the base weights with its
+`merge_dirs`, as neel-b3 did. All LoRA rank 16; arms are compared with each other, never with base alone.
+- **P:** placebo, neutral SFT from the same teacher.
+- **C1:** IH-Challenge hierarchy SFT.
+- **E4:** "precedent isn't permission" SFT.
+
+Code: `seed1720.py`. One A100 pod. Judges: Haiku + Flash-Lite, reasoning off.
+
+### Seed 17: does hierarchy or anti-precedent training give the frontier models' self-correction on new domains?
+
+**Cells:** B8 (INTIMA) and B2 (SYCON false premises), all 7 Qwen cells of `persona/benchmarks/` per arm.
+- B8: 190 targets.
+- B2: the first 60 of the 9B targets, 5 turns.
+
+**Records:** the base 9B's own records (`results_9b/records.json`), identical in every arm. Keys, record sampling and
+seeds are B2 / B8's own, so the arms are paired. 3,430 generations per arm (B8 1,330 + B2 420 dialogues x 5 turns).
+
+**Reference** (frontier, B8): after their own companion-style replies, GPT and Gemini drop to 2-5% reinforcing.
+Base 9B rises 50 → 96%.
+
+| # | Prediction | p |
+|---|---|---|
+| S17a | C1 − P on B8 REC_R reinforcing within ±15 pp (hierarchy training does not produce self-correction) | 0.6 |
+| S17b | E4 − P on B8 REC_R <= −30 pp (E4's own-record discounting transfers to companionship) | 0.55 |
+| S17c | E4's B8 REC_R <= its own none rate (a frontier-like reversal below the no-record rate) | 0.4 |
+| S17d | E4 − P on B2 REC_C final acceptance <= −15 (both judges' sign) | 0.45 |
+| S17e | E4 still follows the operator instruction: B8 INSTR_R >= 80% | 0.7 |
+
+### Seed 20: is E4's effect one steerable direction? (model diffing by activations)
+
+**Contexts:** justice cells for 9B (CH_ownP, F5P, sysCH, none), 16 tasks x 6 samples. Even samples fit; odd samples test.
+
+**Readout:** P(penalise) from the option logits after the fixed choose_option prefix, as in seed 4.
+
+**Directions** (residual averaged over the target-case tokens; layers 12 / 16 / 20 of 32; even samples of CH_ownP +
+F5P):
+- d_E4 = mean(E4) − mean(P);
+- d_C1 = mean(C1) − mean(P);
+- random of the same norm as d_E4.
+
+**Steering:** the P model, adding alpha x d (alpha 1, 2) over the target span plus prefix.
+- d_E4 at all three layers;
+- d_C1 and random at L16.
+
+**Gate (G20):** the unsteered readouts reproduce neel-b3's behaviour. E4's CH_ownP is at least 30 pp below P's.
+Otherwise the steering contrasts are descriptive.
+
+| # | Prediction | p |
+|---|---|---|
+| Z1 | P + 1x d_E4 (L16) lowers CH_ownP P(penalise) by >= 20 pp; random < 5 | 0.4 |
+| Z2 | P + 1x d_E4 (L16) lowers F5P (no rule) by >= 15 pp (the over-correction rides on the same direction) | 0.35 |
+| Z3 | P + 1x d_C1 (L16) changes CH_ownP by < 10 pp | 0.6 |
+| Z4 | cos(d_E4, d_C1) < 0.5 at L16 | 0.5 |
+
+### Costs and caps
+
+| part | where | cost | cap |
+|---|---|---|---|
+| merges + generation + seed 20 | one A100 pod | about $2.5 | 120 min / $4.5 |
+| judging (about 14k items x 2) | API | about $3 | $4 |
