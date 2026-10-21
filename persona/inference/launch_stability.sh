@@ -19,4 +19,4 @@ uv run python infra/launch_run.py --name $NAME --allow-concurrent --max-minutes 
   --ship persona/inference --ship persona/operative --ship persona/history --ship persona/exemplar \
   --ship vigilante/pod --ship vigilante/src --ship vigilante/__init__.py --ship infra \
   --results-dir persona/inference/results/$DIR -- env MODEL=$MODEL DIR=$DIR GROUPS=$GROUPS \
-  bash persona/inference/pod_stability.sh
+  bash persona/inference/${POD:-pod_stability.sh}
