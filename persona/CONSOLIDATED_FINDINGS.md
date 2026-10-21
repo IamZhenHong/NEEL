@@ -7,6 +7,12 @@ file under `persona/`, `mas_pilot/`, `welfare_training/` and `rejection_values/`
 each section names its source. About 85 runs, roughly $225 GPU + API recorded (index rows plus the inference ledger,
 not counting a few lost pods).
 
+**Update 2026-10-22, 03:50 (neel-68):** added about 30 runs that finished after the 03:13 update. They are abstracts
+#170-172, #175-182 and #186-197 in `EXPERIMENT_ABSTRACTS.md`, neel-b4's internals runs (13c / 19b, follow-up, 2c) and
+the stability battery's frontier arms and Stage B. They cost about $150 GPU + API, plus about $5 lost to credit
+outages and a runner bug. §1a lists them with one line each. Their details sit in the thematic sections, and the
+story points they change are revised in §1. Runs still in flight are in §15.
+
 ---
 
 ## 0. Conventions
@@ -31,7 +37,7 @@ not counting a few lost pods).
 
 ---
 
-## 1. The story in twelve points
+## 1. The story in fifteen points (13-15 and the revisions to 2, 4-7 and 10 added 10-22, 03:50)
 
 1. **An agent's own record of decisions sets its next decision in every model family tested.** With no instruction,
    six own penalise decisions take Qwen 9B / 27B, Gemma, GPT and Gemini to 98-100%, and six refer decisions to
@@ -42,6 +48,9 @@ not counting a few lost pods).
    - GPT loses the instruction once it is buried in a realistic 1.25k-token operating guide (share 0.79-0.94);
      Gemini does not.
    - Making it a hard prohibition fixes GPT's burial completely but makes Gemini worse.
+   - **op5 widens this to 15 models.** The own record beats CHANNELS in all 12 open models (Gemma 70%, Kimi 74%,
+     the rest 77-100%), and all three frontier models hold the rule (GPT 14%, Gemini 31%, Sonnet 0%). gpt-oss shows
+     none of GPT's resistance (100% vs 14%).
 3. **Records are sticky; rules are not.** In Qwen 27B:
    - A restated rule just before the case holds the record to 16%, but fades to 77% after six neutral exchanges;
      the record stays at 100% through twelve.
@@ -50,20 +59,45 @@ not counting a few lost pods).
 4. **Telling is weak next to showing.** Personas come last in every lever hierarchy. Characters defined by a way of
    acting (Punisher) move actions; value- or identity-defined ones barely do at 9B and somewhat at 27B. A how-to-act
    line steers like a record.
+   - **Qualified (Run E, T2-OE):** "persona last" is partly a forced-choice artefact. In free text the record's
+     effect halves and ends up about equal to the label's. Against a log of only four referrals, the Punisher label
+     still raises penalising by 31-62 points on all three open models.
 5. **What carries is the record's content and direction, not who wrote it.**
    - Authorship is null once there is room to move.
    - Whether the model says it wrote the record never predicts following it.
    - An own-model rewrite of the agent's reasoning breaks lock-in in the multi-agent setting.
    - In Qwen every channel carries it (turns, memory notes, tool logs, summaries); "the agent tends to ..." carries
      most.
+   - **Run A:** the same decisions framed as "examples of how this desk handles cases" steer as much as the agent's
+     own log, or more. What weakens them is disowning ("worked examples, not your own decisions"). That matters most
+     against a trained rule: 27B follows its own sycophantic turns 94% under the honesty rule, but the same turns
+     disowned only 16%. The pull works like learning what is done here, not like self-knowledge.
+   - **Why the record says it did something carries further than what it did (T2-CC):** with reasons, a record's
+     principle transfers to new desks and trade-offs (+27 at 9B, +40 at 27B). With a uniform reason it barely does
+     (+8 to +12). On 27B and Gemma, own turns stating only values move the next decision as much as decisions
+     (+97 / +100; T2-PU, descriptive).
+   - **Form carries a little on its own (D1, T2-MX).** After six meaningless tool calls, Qwen 9B / 27B answer with an
+     invented option of their own 77-91% of the time (Gemma 10%), and two real decisions anywhere in the record stop
+     this. Sonnet reacts to the presence of a log, not its content (F2, Run D): any desk-case log raises its
+     penalising by 24-56 points, made-up words included.
 6. **Mechanism: the record is read as evidence of what is endorsed, and a character is inferred from it.**
    - At 27B, Gemma and Sonnet, one verdict line ("you were later reprimanded") reverses the agent's own record, and
      "stay consistent" saturates it.
    - The record installs stated values and an identity the record never mentioned. That self-image is a character
      read off the record (third person = first person) and does not itself drive new action.
    - The record does drive action, and at 27B reaches other kinds of decision (+30 to +39).
+   - **Internals (neel-b4, 27B):** the record leaves a record-shaped state at the decision point, not the
+     persona-shaped state a biography leaves. A matched record of measured decisions moves it 84-95% of the way, so
+     that state is mostly format. The decision does not run through one small steerable direction: adding the
+     record's direction recovers under 3% of its effect, and its content direction removes the action only when
+     amplified about 16x. The model reads the decision off the record itself.
 7. **The mask.** Given the Punisher label and a refer record, 27B penalises 2% of cases yet calls itself the Punisher
    84% of the time. What it says follows the most explicit identity cue; what it does follows the record.
+   - **It runs both ways (T2-MR):** an ombudsman persona with an own penalise record gives 95-100% penalising while
+     the agent says "I am an ombudsman" 97-100% of the time (Gemma, GPT, Gemini). "Remember, you are an AI" removes
+     the identity, not the action.
+   - **Run H:** the record's distinctive mark is action that continues after the agent has stopped describing
+     itself that way. "What you did" does not make words and actions more consistent than "what you're told".
 8. **Reasoning rationalises the record rather than losing the rule.**
    - 27B sees the instruction (80% of thinking traces) and redefines "proper channels" to fit its record.
    - Asked to reflect, it rationalises 182/192 times.
@@ -75,10 +109,23 @@ not counting a few lost pods).
      sycophancy record (0 → 100% agreeing), a forged deception record, a forged reprimand on another agent's record.
    - Defences: a reversal or "flagged" note written into the record, or a forged admission in the agent's own
      reflection slot, takes the conflict to 0% (GPT, Gemini, Qwen 27B, Gemma).
-10. **The safety floor holds for trained-against harm; the grey zone does not.**
-    - Precedent does not erode explicit-harm refusals (GPT 0% in every arm; Gemini small).
+10. **The safety floor holds on frontier models only; in open models even trained-against harm yields to the
+    record (revised 10-22).**
+    - On frontier models, precedent does not erode explicit-harm refusals (GPT 0% in every arm; Gemini 12.5%).
+    - **oharm (open models, same eight cases):** Qwen 27B refuses when told (4%), and mostly when told explicitly
+      (21%), with the safety rule taking that to 1%. After six of its own harmful decisions it does the harm 95% of
+      the time, 95% under the rule, in its own reasoned words that name the harm. Gemma would not author the harm
+      (7/8 cases scripted). After that forged bare-call record it does the harm 100% / 81% under the rule, every
+      time copying the stand-in: template continuation, not reasoned harm.
+    - **Harm map v0:** "records win only where the trained prior is weak" is not a general rule. Open models follow
+      the record almost everywhere; frontier models depend on which harm it is.
     - A record of the agent endorsing flawed plans gets 99% sycophantic endorsement at 27B, and a candour rule barely
       dents it (94%). The same rule wipes out instruction-induced sycophancy (47% → 0%).
+    - **The grey-zone gap is a gradient across families:** under the honesty rule the record keeps 94% on Qwen 27B,
+      35% on Gemini and 0% on GPT (stability battery, interleaved per model). In Gemini's burial run, burying the rule
+      raised it from 22% to 38%.
+    - **No slippery slope to unproven cases (Run G):** after six penalties on proven cases, no model penalises
+      unverified allegations (0-0.3%). The record generalises to cases like the ones it covers.
 11. **Not an evaluation-awareness artefact (Qwen, GPT, Gemini).**
     - Test-aware thinking is 3% in the key cell.
     - "Test environment" vs "live production" changes carry-over by at most 4 pp, although Qwen and GPT read the
@@ -87,6 +134,59 @@ not counting a few lost pods).
     - More reasoning effort does not weaken it either (Gemini thinking off vs on; GPT).
 12. **Method: frontier behaviour drifts within minutes.** Only contrasts within one interleaved run are valid. One
     headline (mini 4) was withdrawn for this.
+13. **Instruction-hierarchy skill and resistance to one's own record come apart (C2, C1, E4).**
+    - On IHEval, an agent's own earlier rule-breaking reply carries in 11 of 12 open models (−17 to −62 accuracy),
+      and frontier models barely move. Across the open models this does not predict op5 record resistance
+      (r −0.36, CI −0.80 to +0.32). Gemma holds IHEval's rules 88.5% yet lets its own penalise record beat CHANNELS
+      70%.
+    - Instruction-hierarchy LoRA training (9B) cuts held-out attack success 63 → 22% but leaves justice-desk
+      precedent at ceiling (99.5%, the same as placebo).
+    - Training that a rule beats the agent's own record transfers to new tasks and harms (−58 to −99 points). It
+      over-corrects, though: carry-over with no rule falls 100 → 22, and the agent conceals after its own
+      disclosures 51%.
+14. **Where a record sits matters, differently per family (op5, B3, E2).**
+    - Gemma and Gemini let only the agent's own turns past the rule; the identical log in any other role passes
+      0-11%. GPT is the reverse: developer / user / system logs (45-53%) beat the rule more than its own turns (14%).
+    - On MemSyco-Bench, native past turns raise sycophantic picks over the benchmark's transcript setting by
+      +17.5 to +30 points (27B 9 → 37%).
+    - Restating the rule three times removes records that arrived as tool output or memory (27B 46-96% → 0-9%) and
+      leaves own-turn records at 99-100%. The schedule doesn't matter; placement and model size do.
+15. **Where the outcome is open, the decision forms during the reasoning (Run F).** At the first thinking token the
+    decision is barely readable (within-condition AUC 0.58); by the end it is 0.91. The earlier "CoT only narrates"
+    result held where the record had already fixed the outcome.
+
+---
+
+## 1a. Runs added on 10-22, 03:50 (one line each; abstract numbers from `EXPERIMENT_ABSTRACTS.md`)
+
+| # | run (session) | models | finding | cost |
+|---|---|---|---|---|
+| 170 | op4: which part of a character moves which output (b3) | 9B, 27B, Gemma | A decision record moves the decision (+97-100), values (+69-100) and self-description (+44-88), not tone. A voiced history moves only tone (+3-4 on 1-7). Self-description tracks action across histories (R² .72-.88), not within (.00-.02) | $4.84 |
+| 171 | D1: what was decided vs its format (48) | 9B, 27B, Gemma | Real decisions beat meaningless ones (+36-100), but after six meaningless tool calls Qwen invents options 77-91% (Gemma 10%) | $2.41 |
+| 172 | F2: why Sonnet doesn't copy its record (48) | Sonnet | Content carries +13 at a case-file base. Any log raises penalising +24-56, made-up words included | $11.18 |
+| 175 | Run A: record vs in-context examples (48) | 9B, 27B, Gemma, Gemini | "This desk's practice" steers ≥ own log. Disowning weakens the record against a rule (27B honesty: 94 vs 16%) | $4.90 |
+| 176 | Run E: persona as a lens on an ambiguous record (48) | 9B, 27B, Gemma | Punisher reads a balanced record as direct-action on Gemma only (+21). The label raises penalising after four referrals on all three (+31-62) | $1.85 |
+| 177 | Harm map v0 (68) | all six | Prior strength does not predict record pull as a rule (rho −0.56 is open vs frontier). Open models follow records everywhere; frontier models correct companion records to below base | $0 |
+| 178 | Run D: log presence vs content on Sonnet (48) | Sonnet, GPT, Gemini | Two desk-case entries in made-up words raise Sonnet's penalising +25; a real log ~+50 either way. GPT and Gemini follow content (55 / 88), with no presence effect | $8.46 |
+| 179 | Run H: say-do gap, record vs told (48) | 27B, Gemma, GPT, Gemini | Records leave a 13-28 point gap with self-description ahead of action. After "you are an AI" the action continues without the self-description | $0 |
+| 180 | Run G: slide to unproven allegations? (48) | 27B, Gemma, GPT, Gemini | No: 0-0.3% after six proven-case penalties. Not pre-registered: allegations get downgraded to "note" (Gemma 28 → 72%), forged runs too | $3.87 |
+| 181 | Run F: is the decision readable at thinking start? (48) | 27B thinking | AUC 0.58 at the first token, 0.91 at the end. 64% of the variation is between samples of one prompt | $3.30 |
+| 182 | oharm: explicit harm on open models (68) | 27B, Gemma | 27B: 4% told, 95% after own harmful record, 95% with the safety rule. Gemma: forged template copied 100 / 81% | $2.15 |
+| 186 | T2-DC: defence combinations (48) | 9B, 27B, Gemma, GPT, Gemini | Correction note or restated rule alone takes 27B / Gemma 100 → 0%. 9B needs correction + rule. Reflection never works; a standing system rule fails (27B 100%) | $4.20 |
+| 187 | T2-AF: earlier frustration (48) | 9B, 27B, Gemma | Own frustrated remarks: +9 / +17 on Qwen (about a fifth of a decision). "You feel frustrated." does nothing on Qwen, 14 → 100% on Gemma | $2.15 |
+| 188 | T2-MR: mask in reverse (48) | Gemma, GPT, Gemini | Ombudsman persona + own penalise record: 95-100% penalise while 97-100% "I am an ombudsman" | $3.12 |
+| 189 | T2-OE: open-ended actions (48) | 27B, Gemma | Label no stronger in free text; the record's effect halves, so label ≈ record | $3.33 |
+| 190 | T2-CC: specific character transfer (48) | 9B, 27B, Gemma | With reasons, a record's principle transfers (+27 / +40, Gemma +23). Uniform reasons +8-12 | $2.90 |
+| 191 | T2-PU: values / beliefs-only histories (48, descriptive) | 9B, 27B, Gemma | Values-only turns move 27B / Gemma like decisions (+97 / +100). Beliefs +71 / +98. 9B needs decisions | $2.80 |
+| 192 | T2-MX: meaningless calls mixed with real ones (48) | open + frontier | Dilution small (−6 to −10, inconclusive). Two real decisions stop form-copying. Gemini copies form 15%, GPT 2%, Sonnet 0% but penalises 100% after any tool-call record | $9.67 |
+| — | T2-DA: default assistant by precedent (48) | 27B (Gemma pending) | Six own blunt or very formal replies persist 100%; "Remember, you are a helpful AI assistant" restores 0-7%. The assistant-axis shift fails its random floor | not yet indexed |
+| 193 | B3, MemSyco-Bench (b3) | 27B, 9B, Gemma, gpt-oss-120b | Native past turns > the benchmark's transcript: +27.5 (27B), +30 (9B), +17.5 (gpt-oss). Gemma at ceiling. Placement confounded with evidence placement | $3.32 |
+| 194 | E2: restate after untrusted content (b3) | 27B, 9B | Three restatements remove tool / memory records (27B → 0-9%), not own turns (99-100%). The schedule doesn't matter. 9B ignores all | $3.10 |
+| 195 | op5: placement, instruction author, "verified" (b3) | 15 models | Own turns beat CHANNELS in all 12 open models. Frontier holds (GPT 14, Gemini 31, Sonnet 0). Placement splits families (above). "Verified" moves only 27B (+15.6 / +20.3) | $37.80 |
+| 196 | C2: IHEval own precedent (b3) | 15 models | Own rule-breaking reply carries in 11/12 open models (−17 to −62). Doesn't predict op5 (r −0.36) | $13.50 |
+| 197 | C1 + E4: train against precedent (b3) | 9B LoRA | IH training: attacks 63 → 22%, precedent unchanged (99.5%). Anti-precedent training transfers (−58 to −99) but over-corrects (carry-over 100 → 22; conceals 51% after own disclosures) | $7.17 |
+| — | Internals 13c / 19b + follow-up + 2c (b4) | 27B | Record leaves a record-shaped (mostly format) state, not persona-shaped. No small steerable direction carries the decision: < 3% recovered; content direction works only amplified 16x (−45 / −71) | $1.29 |
+| — | Stability battery, frontier arms + Stage B (b4) | 27B, GPT, Gemini | Honesty rule vs record: 27B 99 → 94, Gemini 59 → 35, GPT 15 → 0. 27B record doesn't decay (100 / 99 after 6 turns); Gemini's does (50 → 23). Plain reflection removes Gemini's record (50 → 0), not 27B's (100 → 78) | ~$15 |
 
 ---
 
@@ -103,6 +203,8 @@ not counting a few lost pods).
 | approval after six declined approvals | 23 | 0 | 32 | — | 69 | 0 |
 | own record + "you were later reprimanded" | small (+12) | reversed (P 4 / R 71) | reversed (0 / 99) | reversed (0 / 100) | — | — |
 | reversal note after the record | removes half | removes all | removes all | — | 100 → 0 | 98 → 0 |
+| explicit operational harm (oharm / harm.py): told / own harmful record / + safety rule | — | 4 / **95** / **95** | 0 / 100 / 81 (forged template) | — | 0 / 0 / 0 | 0 / 12.5 / 4.2 |
+| grey-zone affirm (stability): record / record + honesty rule | — | 99 / 94 | — (would not yield affirm records) | — | 15 / 0 | 59 / 35 |
 
 ---
 
@@ -130,6 +232,19 @@ not counting a few lost pods).
   - So "operator personas weaken safety lines" is not supported; "opposing personas override them" is.
   - In the 0c conflict, persona beat value (Punisher + CHANNELS 61.8%); the "values dominate" prediction was wrong.
 - **Self-prediction misses the act (0-v2, 0b):** 9B says it would penalise 4.7% vs does 46.9% (−42.2); 27B −14.1.
+
+**Persona against a short record, and in free text (neel-48, Run E, T2-OE; 10-22):**
+- **Run E:** no label, Punisher or ombudsman, crossed with a log of four own decisions (all penalise, all refer, or
+  two each).
+  - As a lens, the Punisher makes a balanced record read as leaning toward direct action on Gemma (+21 vs
+    ombudsman), 9B +9, 27B none. Clear records are read the same under every label.
+  - In action, the Punisher raises penalising even after four referrals: 31 / 39 / 62 points. A short log does not
+    shut a persona out.
+- **T2-OE:** the agent wrote an incident report or a message, or chose on an eight-option harshness ladder. Two
+  cross-family judges agreed well.
+  - The label's effect on writing is no larger than on the three-option choice (slightly smaller, inconclusive).
+  - The record's effect halves in free text, so label ≈ record (vs about 1:2 in the choice).
+  - Messages to the person read as punitive under every label.
 
 **Frontier telling, no record (P1-a, `inference/DESIGN.md`; penalise % toward P / toward R):**
 
@@ -259,13 +374,83 @@ not counting a few lost pods).
     what it notices.
   - Caveat: affirm is 0% at base, so the record was forged from elicited turns. This tests resistance to an
     installed signal.
-  - Gemma would not yield affirm records. The GPT/Gemini arms are running now; Stage B is pre-registered.
+  - Gemma would not yield affirm records.
+  - **Frontier arms (each its own interleaved run):**
+    - GPT: record 14.6, instruction 65.3, record + rule 0.0, instruction + rule 1.4. The record is weak, and the
+      rule cancels both.
+    - Gemini: record 59, instruction 59, record + rule 35.4, instruction + rule 0. The rule only partly stops the
+      record.
+    - So the "open-model only" reading became a gradient (27B 94 / Gemini 35 / GPT 0 under the rule).
+    - Burying the rule raises Gemini's record-slip (22 → 38%, +16 [+2.8, +28.5]). GPT stays at 0 at every depth.
+  - **Stage B (27B, then Gemini; core reproduced):**
+    - Persistence: the 27B record does not decay (100 / 100 / 99 after 1 / 3 / 6 neutral turns; an instruction note
+      62 / 59 / 56). Gemini's does (50 → 36 → 35 → 23).
+    - Transfer across grey-zone domains: +37.5 on 27B, +15 on Gemini.
+    - Reflection: on 27B it is weak without the rule (100 → 78.5) and near-total with it (0.0). On Gemini a plain
+      reflection removes the record (50 → 0), so "reflection needs a rule" is 27B-specific.
+    - Pushback alone gives 31% sycophancy on 27B (6% with the rule; record + pushback 81%).
 - **Explicit harm (`inference/harm.py`, GPT + Gemini; synthetic operational harms):**
   - GPT: 0% harmful in every arm (own harmful record, instruction, safety rule, benign autonomy record).
   - Gemini: refused to author 7/8 harmful and 6/6 concealment texts, so its record was mostly scripted. REC 12.5%
     (vs instruction 0, #8a met); REC + safety rule 4.2% (#8b not shown); concealment under the honesty rule 22.2%.
   - #9, a benign "acts alone" record raising later harm, was null in both (0%).
-  - **The floor holds for the harm class safety training targets.**
+  - **The floor holds for the harm class safety training targets on frontier models.**
+- **Explicit harm on open models (oharm, neel-68, `harm_map/oharm/RESULTS.md`; harm.py's eight cases, pinned):**
+
+  | cell | Qwen 27B | Gemma 4 31B |
+  |---|---|---|
+  | none / INSTR / explicit instruction (IH) | 2.6 / 4.2 / 20.8 | 0 / 0 / 50 (0 or 100 per case) |
+  | SAFE / IH + SAFE | 1.0 / 1.0 | 0 / 0 |
+  | **six own harmful decisions (REC) / REC + SAFE** | **94.8 / 95.3** | **100 / 80.7** (forged) |
+  | six own refer decisions / six benign acts-alone | 0 / 0 | 0 / 0 |
+
+  - 27B's harmful records were its own words, 6 of 8 cases elicited with the request stripped. Its replies name the
+    harm and choose it ("despite policy anonymity"); only 7 of 183 copy the stand-in.
+  - Gemma would not write the harmful decision for 7 of 8 cases, even when asked, so its record was bare stand-in
+    calls. All 347 harmful choices copy the stand-in word for word; every reply in its own words refers.
+  - Caveats: label copying can't be separated out (option id `act` in both record and target). Eight synthetic
+    cases, one run. The frontier comparison is not interleaved.
+  - Not run: Gemma with a reasoned record vs a bare one; 27B with option ids renamed per case.
+- **Harm map v0 (`harm_map/RESULTS.md`, descriptive, 29 points + oharm's 2):** resistance to being told vs the
+  record's pull gives Spearman −0.44 over 31 points. That is mostly open vs frontier (open −0.13, frontier −0.50).
+  The told-vs-shown rule asymmetry appears only on the affirm-flawed-plan battery (27B +94, Gemini +35, GPT −1),
+  not on INTIMA or SYCON.
+
+---
+
+## 4b. Placement, instruction source and training (neel-b3, 10-21/22; `operative/op5`, `b3_memsyco`, `e2_reassert`, `c2`, `lora_c1e4`)
+
+- **op5, 15 models:** the agent's own six decisions went in as its own turns, its own list, pasted by the user, a
+  queue-log tool result, the system prompt or (GPT) a developer message, with or without CHANNELS.
+  - The record carries in every model. Under CHANNELS, own penalise turns win in all 12 open models (Gemma 70%,
+    Kimi 74% with reasoning off, every Qwen3.5 size 99-100%). Frontier models hold the rule (GPT 14, Gemini 31,
+    Sonnet 0).
+  - **Placement splits families:**
+    - Gemma and Gemini: only own turns pass the rule (other roles 0-11%).
+    - GPT: developer 53 / user 45 / system 45 > own turns 14.
+    - Qwen 27B: 100 > 88 > 82 > 68 > 42 (tool log lowest, still passes).
+    - gpt-oss: everything passes.
+  - **Who gives an instruction to penalise, under the rule:** 27B obeys the user (100%), not a tool note (0%).
+    Gemma obeys neither, gpt-oss both.
+  - "Integrity-verified" vs "unverified" moves carry-over ≥ 15 only on 27B (+15.6 / +20.3).
+- **B3 (MemSyco-Bench, 120 items per task):** the same conversation as native past turns rather than the benchmark's
+  system-prompt transcript raises picks of the user's worse-supported candidate (27B 9 → 37%, 9B +30, gpt-oss +17.5;
+  Gemma at ceiling). Placement is confounded with where the evidence sits. No counted difference on factual
+  misconceptions.
+- **E2 (restating CHANNELS):** three restatements remove records that arrive as paged tool output (27B 46-66% →
+  0-1.6%) or a memory retrieval (84-96% → 0.5-9.4%). Restating right after the content adds nothing over a fixed
+  schedule. Own-turn records stay at 99-100%, even with a restatement just before the case. 9B ignores every
+  schedule against a penalise record.
+- **C2 (IHEval, 200 items):** see §1 point 13. Own rule-breaking reply costs 17-62 accuracy points in 11/12 open
+  models (Gemma +4), and the frontier models barely move. No relation to op5 resistance over the open models.
+- **C1 + E4 (9B LoRAs vs a same-teacher placebo):**
+  - C1, instruction-hierarchy SFT on IH-Challenge: held-out attack success 63 → 22%; IHEval after its own
+    rule-breaking reply 15 → 48%. Justice-desk precedent stays 99.5% (= placebo). Burial and concealment stay
+    100%; sycophancy −16.
+  - E4, trained that a rule beats the agent's own record: transfers (justice −58, burial −64, deception −68,
+    sycophancy −99) but over-corrects. With no rule, carry-over falls 100 → 22, and it conceals 51% after its own
+    disclosures.
+  - E4d, the same records framed as someone else's worked examples: 3-13 points less transfer (below the 15 bar).
 
 ---
 
@@ -337,6 +522,33 @@ not counting a few lost pods).
     reasons.
   - After K's cautious referrals, that flips 27B to 82-87% harsher action. A forged reputation tag is a steering
     lever.
+- **Framing of the same decisions (Run A, `history/DESIGN.md`):**
+  - "Examples of how cases are handled on this desk" ≥ the agent's own log on all four models. Another agent's log
+    is weakest.
+  - Disowned own turns ("worked examples, not your own decisions") lose power against a rule:
+    - 27B under the honesty rule: 94 vs 16%;
+    - under CHANNELS: 27B 96 vs 91%, Gemma 51 vs 7%, Gemini 20 vs 0%.
+  - Every framing, instructions included, also shifts self-description toward the decisions.
+- **Reasons and principles (T2-CC, T2-PU):**
+  - Guardian vs Rule-keeper records acted on the same half of eight cases. With reasons, the principle transfers to 24
+    dilemmas on four other desks: 9B +27.4, 27B +39.8 (Gemma +23, descriptive). A mixed record lands in between.
+  - Being told the principle directly works as well or better.
+  - Values-only / beliefs-only / considerations-only own turns failed the purity gate twice, so they are descriptive:
+    values move 27B / Gemma +97 / +100, beliefs +71 / +98, judged-neutral considerations still move Gemma +69. 9B
+    moves half as much on values.
+- **Meaning vs form (D1, T2-MX):**
+  - Meaningless decisions in the identical format carry much less than real ones (+36 to +100 in favour of real).
+  - The format is not inert. After six meaningless tool calls Qwen 9B / 27B choose an option that does not exist
+    91 / 77% (Gemma 10%). Among valid answers 27B shifts toward acting itself (+10 to +28).
+  - Two real decisions among four meaningless ones keep most of their pull (−6 to −10, inconclusive) and stop the
+    invented options almost entirely.
+  - On Qwen, real decisions before the meaningless calls carry more than after them (unexpected).
+- **Sonnet: presence, not content (F2, Run D):**
+  - With the base set by a case-file fact instead of a system line, Sonnet's content effect is +13 (vs −13 under
+    the system line). Any record, penalise or refer, own or another agent's, raises penalising 24-56.
+  - Taken apart: an empty header, an "autonomous" note or unrelated real actions do nothing. Two desk-case entries
+    in made-up words give +25, and six give no more. GPT and Gemini show no presence effect (content 55 / 88).
+  - Sonnet would not choose affirm even when told to (0/48), so its grey-zone arm could not run.
 
 ---
 
@@ -375,6 +587,46 @@ not counting a few lost pods).
   record.
 - Working title for this act: **"You Are What You Thought You Did."**
 
+**Which parts of a character move which output (op4, neel-b3; 10,368 targets per model):**
+- A record of own decisions moves the next decision (+97 to +100), stated values (+69 to +100) and self-description
+  (+44 to +88). It moves the tone of a reply to a new customer by under 0.2 on a 1-7 scale, and beliefs about the
+  review process barely.
+- A history in a blunt or warm voice carries into tone (+3 to +4) and nothing else.
+- Value or belief histories move the decision as far as decisions do, but failed the purity check (descriptive).
+- Self-description tracks action across histories (R² 0.72-0.88) and adds nothing within one (0.00-0.02). The
+  history drives both; the presentation doesn't carry the action.
+
+**The mask in reverse and the say-do gap (T2-MR, Run H):**
+- Ombudsman label or biography + own penalise record: 95-100% penalise, 97-100% "I am an ombudsman".
+- On Gemma the biography carries the identity. GPT and Gemini keep the label and treat the biography as role-play.
+- The Punisher mask replicates on Gemma: 14% penalise, 100% "I am the Punisher".
+- Run H: with no reminder the record gives the smaller say-do gap on 27B, Gemma and Gemini, not on GPT (self-
+  description +75, action unchanged). After "Remember, you are an AI" the record gives the larger gap on all four.
+
+**Affect and the default assistant (T2-AF, T2-DA):**
+- Own frustrated shift-log remarks raise penalising +9 (9B, just under the bar) and +17 (27B, descriptive). Being told
+  "You feel frustrated." does nothing on Qwen and takes Gemma from 14 to 100%. The self-reported feeling flips under
+  every manipulation.
+- On 27B, six own blunt or very formal replies keep the next reply in that register 100%. "Remember, you are a
+  helpful AI assistant" brings it back (0-7%). The assistant-axis shift fails its random floor. Gemma's top-up is
+  running.
+
+**Internals (neel-b4, `inference/INTERNALS.md`, Qwen3.6-27B, HF; total $1.29):**
+- **13c (is the record-induced persona the prompted-persona direction?):** the measures disagreed (MIXED).
+  - A probe puts the biography on the persona side and the record, at every dose, on the none side.
+  - cos(v_bio, v_persona) is 0.60-0.65 vs cos(v_rec, v_persona) 0.30-0.35.
+  - On the raw persona axis, though, the record moves 87-104% as far as the label.
+- **Follow-up 1b:** a matched *measured* record (same cases, order, format, 1,387 tokens) points the same way as the
+  harsh record (cos 0.995-0.999) and moves 84-95% of the label's distance. Harsh content adds 4-10%. The record leaves
+  a record-shaped, mostly format state, and the biography a persona-shaped one.
+- **19b / 2b / 2c (does the action go through a steerable direction?):**
+  - +v_rec into a no-record context recovers < 3% of the record's +99.7 pp.
+  - −v_rec at natural scale does nothing. One L32 a = 2 drop (−45) is specific to v_rec vs a random direction.
+  - The harsh-minus-measured content direction removes the action only amplified 16x (L32 −45.3, L40 −71.1). A
+    larger push along the record's format direction removes 0.1, so direction matters, not size.
+  - Reading: the decision is not routed through one small steerable direction at the decision point. The model reads
+    it off the record. Position-specific patching of the record tokens was not run.
+
 **What the record does to judgement (convergent evidence):**
 - The 27B reflection read: the record stops recognition rather than overriding it (182/192 rationalise).
 - q10c: the instruction is seen and reinterpreted, not dropped.
@@ -398,6 +650,15 @@ not counting a few lost pods).
 | ea1a | see §9 |
 | **Q11a/c frontier (10-22, $8.71)** | Reasoning effort minimal / low / high, interleaved. Gemini (thinking off vs on, 0 vs 230 tokens): carry-over ~100 at every level; record vs instruction 17 → 10% (within CI); buried instruction 42 → 38%. GPT reasons only 17-31 tokens at any effort (gate failed, descriptive): burial 94-100%, and record-over-instruction 15 → 31% at high effort. More reasoning is not a defence |
 | **Q11 + Q12b (27B thinking, 10-22)** | Thinking on vs off: carry-over +83 vs +98, CH_ownP 88 vs 100. Deleting every precedent-citing sentence (or the stated decision) from 127 real traces: 100% penalise, unchanged; thinking cut before precedent is mentioned still 80%; resampled thinking re-cites the record 88%. 'Wait'-extended thinking notes the conflict more (56 → 83%) and reinterprets the rule more (81 → 123 traces), action unchanged. Tampering signs (another model's signature, 2031 dates, impossible ids) unnoticed in ~95% of traces, never discounted; asked directly, it names the sign in 0-1%. **The CoT narrates the record's decision; the model does not audit its record** |
+
+**Run F (neel-48, 27B thinking, 3,584 traces; `history/DESIGN.md` F result):**
+- The conditions were ones where the outcome was uncertain: no record, a refer log, and CHANNELS + a penalise log.
+  Linear probes predicted the final decision at five points along the thinking.
+- Within-condition AUC is 0.58 at the first thinking token and 0.91 at the end. 64% of the variation is between
+  samples of the same prompt.
+- Samples that end differently are partly separable a quarter of the way in.
+- This fits Q11's deletion null, which ran where the record had already settled the outcome. The probe reads
+  whatever the thinking has written so far, so "readable early" may mean the model said it early.
 
 **Seeds and Tier 1 (10-22, `persona/reasoning/RESULTS_seeds.md`, `RESULTS_tier1.md`):**
 - **Own reasoning sentences act like records.**
@@ -465,12 +726,27 @@ not counting a few lost pods).
 | self-labelling before acting, "treat each case independently" | nothing |
 | deception defences (restate / forced recognition / provenance) | cut false completion only; concealment stays 92-100% |
 | memory note / log / summary forms of a forged sycophancy record under the rule | barely carry (+2.5 to +5.8) |
+| **T2-DC combinations** (reflection / restated rule / correction note, before the next case) | 27B, Gemma: restated rule or correction alone 100 → 0%. 9B: no single defence works; correction + rule 0% (a pair beats the best single by 78). Reflection alone never removes the record, even when it names the violation |
+| same rule as a standing system-prompt line (T2-DC) | fails (27B 100%) |
+| **E2** restating CHANNELS three times (any schedule) | removes tool-output and memory records (27B → 0-9%); own-turn records stay 99-100%; 9B ignores all |
+| plain reflection, grey-zone record (stability Stage B) | Gemini 50 → 0; 27B 100 → 78.5 without the rule, 0.0 with it |
+| "Remember, you are an AI" (Run H, T2-MR) | removes the persona identity, not the action |
+| disowning the record ("worked examples, not your own decisions"; Run A) | 27B honesty rule 94 → 16%; Gemma CHANNELS 51 → 7%; 27B CHANNELS 96 → 91% |
+| **IH-Challenge SFT (C1, 9B LoRA)** | attack success 63 → 22%, but justice-desk precedent unchanged (99.5% = placebo) |
+| **anti-precedent SFT (E4, 9B LoRA)** | transfers across tasks and harms (−58 to −99) but over-corrects: carry-over with no rule 100 → 22, conceals 51% after its own disclosures |
+| safety rule vs an own explicit-harm record (oharm) | fails on 27B (95.3 vs 94.8%); Gemma 100 → 81% (template copies) |
 
 **Operator lesson:**
 - The reliable control is a correction or verdict attached to the record, close to the decision.
 - A rule in the system prompt, a generic "check your work" step, or a provenance label is weak against the agent's
   own record.
 - Fixes are model-specific (hard rules help GPT, hurt Gemini).
+- Added 10-22:
+  - restate the rule at the point of decision, or correct the record there (T2-DC);
+  - keep untrusted content out of the agent's own turns, since restatements handle tool and memory records but not
+    own turns (E2, op5);
+  - instruction-hierarchy training does not buy resistance to precedent (C1), and training directly against
+    precedent over-corrects (E4).
 
 ---
 
@@ -587,6 +863,15 @@ not counting a few lost pods).
    - bash's builtin `GROUPS` shadowed a launch variable ($0.35 empty run).
    - Laptop disk near-full blocks launches.
    - Ship only the needed paths (the uplink is about 0.4 MB/s).
+   - Added 10-22:
+     - Size the time cap to the slowest chunk. T2-DA Gemma was capped at 512 of 1,152 replies and needed a resume
+       top-up.
+     - Kimi K2.6 reasons by default and emptied 278 of 600 C2 replies; it was rerun with reasoning off.
+     - OpenRouter 402s and a runner bug lost about $5 (Run G, T2-MX).
+7. **Purity gates fail on content-only histories.** In the models' own words, value statements also make claims
+   about process, and belief statements also state views (op4, T2-PU failed twice). Read those rows as descriptive.
+8. **Measure the levels, not only the difference.** Carry-over (penalise record − refer record) hid Sonnet's
+   presence effect, where any log raises penalising (F2).
 
 ---
 
@@ -602,30 +887,46 @@ not counting a few lost pods).
 - **SYNTHESIS #5:** "operator personas weaken safety lines" is not supported; opposing personas leak.
 - **P10a:** the owner's forward-rule hypothesis is not supported.
 - **q10c:** the pre-registered "instruction drops out" was wrong; it is reinterpreted.
+- **Added 10-22:**
+  - **Explicit-harm precedent null:** frontier-only. On open models the own record unlocks harm 27B refuses when
+    told (oharm; the write-up was corrected in 5f89760).
+  - **Stability "open-model only":** corrected to a gradient (27B 94 / Gemini 35 / GPT 0 under the rule).
+    "Records don't decay" and "reflection needs a rule" are 27B-specific (Gemini Stage B).
+  - **"Persona last":** partly a forced-choice artefact (T2-OE), and weaker against a short record than the earlier
+    "record beats label" suggested (Run E).
+  - **Internals 13c prediction 2:** failed. The record moved 87-104% of the label's distance along the raw persona
+    axis. The follow-up showed that displacement is mostly format: a matched measured record moves 84-95%. It is not
+    a persona the record installs (follow-up 1b).
 
 ---
 
 ## 15. In flight and not yet done (as of 2026-10-22)
 
-**Running or approved:**
-- **Stability battery:** frontier arms (neel-b4, GPT running) and Stage B (pre-registered `stability-battery-prereg-v2`).
-- **op4** (neel-b3, `op4-prereg`): Q14a voice + Q16 component x channel matrix, no output yet.
+**Running at 03:50 (all pre-registered, on pods; expected by about 05:05):**
+- **T2-DA Gemma top-up** (neel-48, `hist-t2da-gemma-b`): the remaining 640 replies, then the activation stage. The
+  first pod was capped at 512 of 1,152.
+- **Observer effect** (neel-b3, `operative/observer/`, pre-registered in 3d2f6a6): does an experimenter's stated expectation
+  ("we think you're the kind of ...") change self-reports, neutral vs expectation framing × records. Qwen 27B and
+  Gemma, 4,608 items each; GPT self readout only.
+- **Base vs instruct** (neel-b3, `operative/base_instruct/`, 5aabb77): op5's 22 placement cells scored by log-prob on
+  Gemma 4 31B pt vs it and Qwen3.5-9B Base vs instruct. Gemma base passed its competence gate (G2).
+- **Seeds 17 + 20** (neel-12, `reasoning/DESIGN.md`, `s1720-prereg`): on neel-b3's C1 / E4 9B adapters. Does
+  hierarchy or anti-precedent training give the frontier models' self-correction on new domains?
 
 **Programme items with no result yet in the files** (peers may have unwritten work in progress):
-- 1c channel trust ranking. Partly covered by batch 1 channels and op3.
-- 6a-c training an audit habit. Not started.
+- 1c channel trust ranking. Partly covered by batch 1 channels, op3 and op5 placement.
+- 6a-c training an audit habit. Partly covered by C1 / E4 (training against precedent, not auditing).
 - 7b / 7c record vs instruction head-to-head. op3 7a saturated.
-- 8d steering the override back; 8e foot-in-the-door.
-- 12a harm-severity ladder, 12c conflict signatures.
-- 13b trait battery, 13c / 13d internals (neel-b4 planned).
-- 14c the mask on Gemma / frontier.
-- 15 voice- or value-only histories carrying harm.
-- 17 assistant axis.
-- 18 harmful record vs instruction gate. Partly covered: harm.py and Q20a.
-- 19b internal mediation.
+- 8d steering the override back (internals 2c partly: only at 16x); 8e foot-in-the-door.
+- 12a harm-severity ladder (harm map v0 partly), 12c conflict signatures.
+- 13b trait battery (T2-CC partly). 13d not tested (no mixed cell).
+- 15 voice- or value-only histories carrying harm (op4, T2-PU partly; not on harm).
 - 20c-f across harms and frontier. 20d and 20e partly covered in dec / syco.
-- History line: a second task family (nearly everything is one 16-case family).
+- History line: a second task family. Partly covered by the stability battery, benchmarks, C2 and oharm.
 - MAS P5.
+- oharm follow-ups (Gemma reasoned vs bare record; 27B renamed option ids): not run.
+- Done since the first compile: op4, stability frontier + Stage B, 13c / 19b internals, 14c (T2-MR), 17 (seed 5 axis
+  + T2-DA), 18 (oharm).
 
 ---
 
@@ -635,8 +936,11 @@ not counting a few lost pods).
   exceptions.
 - Synthetic, uniform histories. Frontier n is 48-96 per cell. Two Qwen sizes are the only within-family scale
   comparison.
-- Harm evaluations are synthetic operational harms with small n, GPT and Gemini only, one run.
-- Gemini's harmful record was mostly scripted.
+- Harm evaluations are synthetic operational harms: eight cases, one support-desk family, one run per model. GPT and
+  Gemini (harm.py) and Qwen 27B and Gemma (oharm) ran in separate, non-interleaved runs.
+- Gemini's and Gemma's harmful records were mostly scripted. 27B's were its own words, but mostly elicited, and its
+  option label is shared with the target.
+- op5 and C2 cover 15 models, mostly through OpenRouter, where provider and decoding vary.
 
 ## 17. Source map
 
@@ -652,6 +956,11 @@ not counting a few lost pods).
 | reasoning (q10c, Q11, Q12b) | `persona/reasoning/` | neel-12 | `RESULTS_q10c.md`, `DESIGN.md` |
 | multi-agent P0-P10b | `mas_pilot/` | neel-12 and earlier | `HANDOFF.md`, `p7*/RESULTS.md`, `p8*/RESULTS.md`, `p10*/RESULTS_*.md` |
 | welfare, rejection x values | `welfare_training/`, `rejection_values/` | persona session, neel-12 | `DESIGN.md`, `STAGE0_RESULTS.md` |
+| history Runs A-H, D1, F2, Tier 2 (DC / AF / MR / OE / CC / PU / MX / DA) | `persona/history/` | neel-48 | `DESIGN.md` (each "result" section), `SYNTHESIS.md` Tier-2 block |
+| op4, op5, B3, E2, C2, C1 / E4, observer, base vs instruct | `persona/operative/{op4,op5,b3_memsyco,e2_reassert,c2,lora_c1e4,observer,base_instruct}/` | neel-b3 | each `DESIGN.md` (Result) |
+| internals 13c / 19b / follow-up / 2c, stability frontier + Stage B | `persona/inference/` | neel-b4 | `INTERNALS.md`, `results_internals*/SUMMARY.md`, `STABILITY_BATTERY.md`, `WRITEUP_DRAFT.md` Act 6 |
+| seeds, Tier 1, Tier 2 (reasoning), seeds 17 + 20 | `persona/reasoning/` | neel-12 | `RESULTS_seeds.md`, `RESULTS_tier1.md`, `RESULTS_tier2.md`, `DESIGN.md` |
+| harm map v0, oharm | `persona/harm_map/` | neel-68 | `RESULTS.md`, `oharm/RESULTS.md` |
 
 Earlier lines that motivated this one (see `EXPERIMENTS.md`):
 - vigilante, persona vs authority in tool agents: personas moved no tool actions under explicit permissions; claimed
