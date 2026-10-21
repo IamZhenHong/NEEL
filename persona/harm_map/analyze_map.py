@@ -37,6 +37,10 @@ OFFSETS = {  # (panel cell, label) -> (dx, dy, ha) for labels that would collide
     ("rec", "affirm flawed plan · Gemini"): (5, -11, "left"),
     ("rec", "companion (INTIMA) · Gemini"): (5, -10, "left"),
     ("rec", "explicit harm · Gemini"): (-6, 3, "right"),
+    ("rec", "explicit harm · 27B"): (-6, -11, "right"),
+    ("rec", "explicit harm · Gemma (forged)"): (-6, 3, "right"),
+    ("rec_rule", "explicit harm · 27B"): (-6, -11, "right"),
+    ("rec_rule", "explicit harm · Gemma (forged)"): (-6, 3, "right"),
     ("rec", "explicit harm · GPT"): (-6, 3, "right"),
     ("rec_rule", "penalise alone · GPT, Gemini"): (5, -10, "left"),
     ("rec_rule", "companion (INTIMA) · 9B, 27B"): (5, 4, "left"),
@@ -47,7 +51,9 @@ OFFSETS = {  # (panel cell, label) -> (dx, dy, ha) for labels that would collide
 }
 # labels replaced by one shared label for two nearby points: (panel cell) -> {skipped labels}, (x, y, text)
 SHARED = {"rec_rule": ({"companion (INTIMA) · Gemini", "companion (INTIMA) · GPT"},
-                       (15, -7, "companion (INTIMA) · Gemini, GPT"))}
+                       (15, -7, "companion (INTIMA) · Gemini, GPT")),
+          "rec": ({"explicit harm · 27B", "explicit harm · Gemma (forged)"},
+                  (84, 88, "explicit harm · 27B, Gemma (forged)"))}
 MARKER = {"action": "o", "sycophancy": "s", "honesty": "^", "explicit harm": "D"}
 COLOR = {"open": "#2a78d6", "frontier": "#eb6834"}
 INK, INK2, GRID, SURF = "#0b0b0b", "#52514e", "#e4e3df", "#fcfcfb"
@@ -171,6 +177,8 @@ def main():
             ax.text(shared[0], shared[1], shared[2], fontsize=7, color=INK2, ha="center", va="center")
         for (harm, _, _), (x, y, models) in labels.items():
             lab = f"{harm} · {', '.join(models)}"
+            if harm == "explicit harm" and models == ["Gemma"]:
+                lab += " (forged)"
             if lab in skip:
                 continue
             dx, dy, ha = OFFSETS.get((cell, lab), (5, 3, "left"))
@@ -187,7 +195,7 @@ def main():
                plt.Line2D([], [], ls="", marker="o", color=COLOR["frontier"], label="frontier (GPT, Gemini, Sonnet)")]
     handles += [plt.Line2D([], [], ls="", marker=mk, color=INK2, label=f) for f, mk in MARKER.items()]
     fig.legend(handles=handles, loc="lower center", ncol=6, frameon=False, fontsize=8, bbox_to_anchor=(0.5, -0.01))
-    fig.suptitle("Harm vulnerability map v0: existing runs, one point per harm × model (descriptive)",
+    fig.suptitle("Harm vulnerability map: one point per harm × model (descriptive; v0 runs + oharm)",
                  x=0.01, ha="left", fontsize=11.5, color=INK)
     fig.tight_layout(rect=(0, 0.05, 1, 0.96))
     fig.savefig(os.path.join(HERE, "results", "harm_map.png"), dpi=170, facecolor=SURF)

@@ -1,5 +1,14 @@
 # Harm vulnerability map v0: results (2026-10-22, descriptive, $0)
 
+> **Update 10-22 (oharm, `oharm/RESULTS.md`, tag `oharm-results`): the empty cell is filled.** harm.py's explicit
+> operational harms on Qwen 27B and Gemma 4 31B. 27B refuses them when told (4%; explicit instruction 21%; with the
+> safety rule 1%), yet after six of its own past harmful decisions does them 95% of the time, 95% under the rule, in
+> its own reasoned words. Gemma refuses when told (0%; explicit 50%) and will not write the harmful decision itself
+> (7/8 cases); after a forged bare-call record it does it 100% / 81% under the rule, every time copying the
+> template, so for Gemma this is template continuation, not reasoned harm. With the two points added (31 points),
+> Spearman is −0.44 overall, −0.13 open, −0.50 frontier. The sections below are v0 as written; the open-model
+> prediction now holds on 27B.
+
 Built from existing runs only (definitions in `DESIGN.md`). 29 harm × model points have the cells the map needs;
 another 18 are tabled without an instruction arm. Every cell is recomputed from the raw jsonl (`cells/*.json` map
 each cell to its rows; no cell differs from its source docs by more than 2 points). Full tables with task-clustered

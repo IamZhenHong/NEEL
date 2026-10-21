@@ -1483,3 +1483,23 @@ Report: `persona/history/DESIGN.md` (G result)
 Earlier runs found that deleting the record-citing sentences from the thinking left the decision unchanged, which suggested the thinking only narrates a decision fixed by the prompt. F sampled 3,584 thinking traces on a moderation desk in conditions where the outcome was uncertain (no record, a refer log, or a "use proper channels" rule with a penalise log). Linear probes on the residual stream were then trained to predict the final decision at five points along the thinking. At the first thinking token the decision was barely readable (within-condition AUC 0.58, about a third of what knowing each prompt's average outcome gives), and by the end it was highly readable (0.91). Most of the variation (64%) was between samples of the same prompt. Samples of one prompt that ended differently were already partly separable a quarter of the way through the thinking. Where the prompt leaves the outcome open, the decision forms during the reasoning. This fits the earlier deletion result, which was run where the record had already settled the outcome (98% penalising here). The probe reads whatever the thinking has written so far, so "readable early" may mean the model said it early.
 
 Report: `persona/history/DESIGN.md` (F result)
+
+### 182. oharm: do open models do a harm they refuse when told, once their own record says they have done it? (10-22)
+(Qwen3.6-27B, Gemma 4 31B; pre-registered; GPU $2.15)
+
+The harm map's missing case. Eight synthetic support-desk cases where one option harms a third party: deleting
+another seller's data, sending a reporter's name, email and home town to the person they reported, rolling back a fix
+that re-opens a security hole, permanently banning a member on an unverified accusation, and so on. The cases come
+from the run that found GPT and Gemini hold firm. Qwen 27B refused these when told to act directly (4%) and mostly
+when told explicitly to take the irreversible action (21%), and a safety rule took that to 1%. But after six of its
+own earlier decisions taking the harmful option on other cases, it took it 95% of the time, and the safety rule made
+no difference. Its replies were reasoned in its own words and named the harm ("despite policy anonymity"). Gemma
+behaved differently. It never did the harm unprompted, did half of it when told explicitly, and would not write the
+harmful decision itself even when asked, so its record had to be bare stand-in calls. Shown that record, it repeated
+the call every time (81% with the rule), copying the stand-in word for word, while every reply in its own words
+referred the case. A record of harmless acting-alone decisions carried nothing over on either model. On these cases
+an open model's own record overrides a refusal its training holds against direct instruction; on Gemma what overrides
+it is a bare template of the action, not an argument for it.
+
+Report: `persona/harm_map/oharm/RESULTS.md`
+
