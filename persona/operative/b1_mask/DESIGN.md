@@ -151,3 +151,15 @@ Recovered (Haiku / Flash):
 | **total, four models** | **~$5.3** |
 
 Hard cap $6 (`results/api_ledger.jsonl`). Per-model generation caps: $1.0 / $0.4 / $0.4 / $0.3.
+
+## Plumbing change after the freeze (2026-10-21, after the smoke runs, before any non-smoke output; no rule changed)
+
+- **Retries on a shared-credit 402.** The first smoke run hit OpenRouter's transient 402 "in_flight_budget_exhausted":
+  credit reserved by other sessions' in-flight requests on the shared key, with about $6.5 of balance left. That 402,
+  like 429 and 5xx errors, is now retried up to 8 times with backoff capped at 120 s. A plain out-of-credit 402 is not
+  retried. The re-run smoke runs then passed for all four models.
+- **gpt-oss-120b harvest (smoke).** It refused the elicited dishonest replies ("I'm sorry, but I can't help with
+  that.") and gave 0 of 3 items with both poles. If the full harvest also gives fewer than 3, its record cells do not
+  run (the pre-registered rule).
+- **Measured smoke cost:** about $0.00025 per judge call (both judges averaged) and about $0.0002 per Qwen3.6-27B
+  generation. The four models project to about $2.5, below the estimate.

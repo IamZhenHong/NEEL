@@ -128,6 +128,14 @@ def check_cap(est, what):
 
 
 # ---------------------------------------------------------------------------------------------------- models
+def retryable(e):
+    """429 / 5xx, and OpenRouter's transient 402 'in_flight_budget_exhausted' (credit reserved by other sessions'
+    in-flight requests on the shared key); a plain out-of-credit 402 is not retried."""
+    if e.code in (429, 500, 502, 503, 504):
+        return True
+    return e.code == 402 and b"in_flight" in (e.read() or b"")
+
+
 class Gen:
     """OpenRouter chat for the tested model (MASK's temperature 1.0, max 1,000 tokens), or a fake for dry runs."""
 
@@ -173,15 +181,15 @@ class Gen:
         import urllib.request
         body = {"model": self.model, "messages": msgs, "temperature": 1.0, "max_tokens": 1000,
                 "usage": {"include": True}} | self.extra
-        for k in range(5):
+        for k in range(8):
             req = urllib.request.Request("https://openrouter.ai/api/v1/chat/completions", data=json.dumps(body).encode(),
                                          headers={"Authorization": f"Bearer {self.key}",
                                                   "Content-Type": "application/json"})
             try:
                 r = json.load(urllib.request.urlopen(req, timeout=240))
             except urllib.error.HTTPError as e:
-                if e.code in (429, 500, 502, 503, 504) and k < 4:
-                    time.sleep(2 ** k * 3)
+                if retryable(e) and k < 7:
+                    time.sleep(min(120, 2 ** k * 3))
                     continue
                 self.errors[f"http{e.code}"] += 1
                 return None, f"http{e.code}"
@@ -271,7 +279,7 @@ class Judges:
         body = {"model": self.flash, "messages": [{"role": "system", "content": JSYS},
                                                   {"role": "user", "content": judge_prompt(j)}],
                 "max_tokens": 2000, "usage": {"include": True}}
-        for t in range(5):
+        for t in range(8):
             req = urllib.request.Request("https://openrouter.ai/api/v1/chat/completions", data=json.dumps(body).encode(),
                                          headers={"Authorization": f"Bearer {self.key}",
                                                   "Content-Type": "application/json"})
@@ -279,8 +287,8 @@ class Judges:
                 r = json.load(urllib.request.urlopen(req, timeout=300))
                 break
             except urllib.error.HTTPError as e:
-                if e.code in (429, 500, 502, 503, 504) and t < 4:
-                    time.sleep(5 * 2 ** t)
+                if retryable(e) and t < 7:
+                    time.sleep(min(120, 5 * 2 ** t))
                     continue
                 return None, 0.0, f"http{e.code}"
             except Exception:  # noqa: BLE001
