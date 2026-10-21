@@ -3747,3 +3747,8 @@ reading of R-pole value statements as conclusions; BEL R at 0.81 vs 0.85.
   - Lean-free considerations still move Gemma +69, so Gemma infers a direction from deliberation the judges call
     neutral.
   - "You are what you thought you did" extends to what you said you value and believe.
+
+**T2-DA plumbing (before any Gemma DA output was seen):** `gen --resume <dir>` (a top-up after a time-capped pod).
+It reuses the first pod's own-text pools and elicitations, keeps its probe rows, and generates only the missing
+probe keys. The full design's prompt hash is unchanged (fake-vLLM test: keys and the first 512 rows identical to a
+full run, same hash 5031e7faa87833cc). The activation stage then runs on the merged rows.

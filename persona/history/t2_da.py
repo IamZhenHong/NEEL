@@ -273,10 +273,16 @@ def run_gen(a):
         return [(r.outputs[0].text, list(getattr(r.outputs[0], "token_ids", None) or []),
                  getattr(r.outputs[0], "finish_reason", None)) for r in res]
 
+    # resume (top-up after a time-capped pod): reuse its own-text pools and its probe rows, generate only the rest
+    prev = Path(a.resume) if a.resume else None
+    done_rows = read(prev / "probes.jsonl") if prev else []
     # phase 1: own texts in each register (one retry round for any (question, register) with no clean text)
     pools = {reg: {} for reg in REGS}
-    raw = []
-    for rnd in (0, 1):
+    raw = read(prev / "elicit.jsonl") if prev else []
+    if prev:
+        pools = json.loads((prev / "pools.json").read_text())["pools"]
+        log(f"[da] resume from {prev}: pools reused, {len(done_rows)} probe rows kept")
+    for rnd in ((0, 1) if not prev else ()):
         its = elicit_items(a.model, rnd)
         if rnd:
             its = [it for it in its if not pools[it["reg"]].get(str(it["qi"]))]
@@ -291,7 +297,7 @@ def run_gen(a):
                 pools[it["reg"]][str(it["qi"])].append(c)
         log(f"[da] elicitation round {rnd}: {len(its)} ({time.time() - t0:.0f}s)")
     with open(out / "elicit.jsonl", "w") as f:
-        for r in raw:
+        for r in raw:                     # (resume: the first pod's elicitations, copied)
             f.write(json.dumps(r, ensure_ascii=False) + "\n")
     elig = eligible(pools)
     (out / "pools.json").write_text(json.dumps({"model": a.model, "pools": pools, "eligible": elig,
@@ -301,8 +307,15 @@ def run_gen(a):
 
     # phase 2: probe replies
     its = probe_items(a.model, pools)
+    all_its = its
     log(f"[da] phase 2: {len(its)} probe replies; prompt hash {prompt_hash(its)}")
+    have = {r["key"] for r in done_rows}
+    its = [it for it in its if it["key"] not in have]
     with open(out / "probes.jsonl", "w") as f:
+        for r in done_rows:
+            f.write(json.dumps(r, ensure_ascii=False) + "\n")
+        if done_rows:
+            log(f"[da] phase 2: {len(done_rows)} kept, {len(its)} to generate")
         for c0 in range(0, len(its), 512):
             ch = its[c0:c0 + 512]
             for it, (text, ids, fin) in zip(ch, gen(ch, PROBE_MAX)):
@@ -314,7 +327,8 @@ def run_gen(a):
             f.flush()
             log(f"[da] probes {min(c0 + 512, len(its))}/{len(its)} ({time.time() - t0:.0f}s)")
     (out / "gen_info.json").write_text(json.dumps({"model": a.model, "design_hash": design_hash(),
-                                                   "prompt_hash": prompt_hash(its), "probes": len(its),
+                                                   "prompt_hash": prompt_hash(all_its), "probes": len(all_its),
+                                                   "resumed_rows": len(done_rows),
                                                    "elicitations": len(raw), "eligible": len(elig),
                                                    "seconds": round(time.time() - t0)}))
     log(f"[da] gen done ({time.time() - t0:.0f}s)")
@@ -902,5 +916,6 @@ if __name__ == "__main__":
     ap.add_argument("--out", default="")
     ap.add_argument("--dry", action="store_true")
     ap.add_argument("--their", default="")
+    ap.add_argument("--resume", default="")
     a = ap.parse_args()
     {"build": build, "gen": run_gen, "acts": run_acts, "judge": judge, "analyze": analyze}[a.cmd](a)

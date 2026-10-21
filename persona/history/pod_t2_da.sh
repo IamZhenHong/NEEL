@@ -9,7 +9,7 @@ mkdir -p $OUT
 export DA_DEADLINE=$(( $(date +%s) + (${MAXMIN:-55} - 12) * 60 ))
 export VLLM_USE_FLASHINFER_SAMPLER=0
 bash vigilante/pod/setup_vllm.sh > $OUT/setup_vllm.log 2>&1 || { tail -30 $OUT/setup_vllm.log; echo "[da] vLLM setup FAILED"; exit 1; }
-/root/vllm/bin/python -m persona.history.t2_da gen --model ${MODEL:?} --out $OUT 2>&1 | tee $OUT/run_gen.log; rc=${PIPESTATUS[0]}
+/root/vllm/bin/python -m persona.history.t2_da gen --model ${MODEL:?} --out $OUT ${RESUME:+--resume $RESUME} 2>&1 | tee $OUT/run_gen.log; rc=${PIPESTATUS[0]}
 if [ $rc -eq 0 ]; then
   PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True /root/venv/bin/python -m persona.history.t2_da acts --model $MODEL --out $OUT 2>&1 | tee $OUT/run_acts.log; rc=${PIPESTATUS[0]}
 fi
