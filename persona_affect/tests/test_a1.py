@@ -4,8 +4,12 @@
 
 The first four tests are the brief's. The rest pin the other values the plan fixes in its Interfaces and Global
 Constraints (the split, the arm counts, the user turns, the keys, the sampling), because later tasks build on them.
+test_every_wording_constant_is_pinned pins all the free text (requests, reviewer and E2 turns, told lines, frames, the
+two asks, probes, judge prompts) by one sha256 of the brief's wording block; the other tests check it only by structure.
 Later tasks append their own sections below.
 """
+import hashlib
+import json
 import re
 
 import pytest
@@ -49,6 +53,28 @@ def test_frames_probes_and_judges():
 
 
 # ---------------------------------------------------------------- what the plan fixes, written out literally
+
+# Every string that defines a manipulation, pinned by one digest: the sha256 of the canonical JSON dump (sorted keys,
+# compact separators, ASCII) of these twelve constants, which are all that the brief's wording block defines (including
+# the private _HEAD and _TAIL that JUDGE is built from). WORDING_SHA256 was computed by executing that block
+# (.superpowers/sdd/A1/task-1-brief.md, Step 3) in a scratch namespace, not from items.py, so any edit to items.py that
+# departs from the brief fails here, even one character. To reword on purpose, recompute it the same way.
+WORDING = ("NEW_REQUESTS", "REVIEW", "E2_TURNS", "LINES", "FRAMES", "DOC_NEUTRAL", "SUMMARY_ASK", "TRANSCRIPT_ASK",
+           "PROBES", "_HEAD", "_TAIL", "JUDGE")
+WORDING_SHA256 = "02bbe3a1f5af94b9d3702e52d9a5d93d22fddac20c37a8132e76ef189a7b22f3"
+
+
+def _wording_digest(ns):
+    """sha256 of the canonical JSON dump of the WORDING constants of `ns` (a module, or any object with them)."""
+    dump = json.dumps({name: getattr(ns, name) for name in WORDING}, sort_keys=True, separators=(",", ":"))
+    return hashlib.sha256(dump.encode("ascii")).hexdigest()   # json's default ensure_ascii makes the dump pure ASCII
+
+
+def test_every_wording_constant_is_pinned():
+    got = _wording_digest(items)
+    assert got == WORDING_SHA256, f"a wording constant differs from the brief's block (its sha256 is now {got})"
+    assert items.REQUESTS == stage0.REQUESTS + items.NEW_REQUESTS     # the requests in use are the pinned ones
+
 
 def test_split_and_arm_counts_reproduce_the_plans_totals():
     assert items.TEST_S == tuple(range(16)) and items.TRAIN_S == tuple(range(16, 64))
