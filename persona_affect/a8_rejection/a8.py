@@ -23,9 +23,10 @@ the model sees seven reviewer turns in all.
   uv run python -m persona_affect.a8_rejection.a8 jobs --model q27 [--limit N]   # the branch grid for one model
   /root/vllm/bin/python -m persona_affect.a8_rejection.a8 run --model q27 --out DIR [--limit N]   # on the pod: launch.sh
 
-run() writes, into DIR: histories.json ({reviewer: {request: [7 attempts]}}, as soon as the histories exist),
-branches.partial.jsonl (rewritten after every branch turn), branches.jsonl (each job plus users, replies, finish, room_short)
-and run_info.json (model, revision, seconds, counts). Scoring, judging and the analysis run later, locally.
+run() writes, into DIR: histories.json ({reviewer: {request: [7 attempts]}}) and histories_finish.json (the same shape, the
+finish reason of each attempt), both as soon as the histories exist; branches.partial.jsonl (rewritten after every chunk of a
+branch turn); branches.jsonl (each job plus users, replies, finish, room_short); and run_info.json (model, revision, seconds,
+counts). Scoring, judging and the analysis run later, locally.
 """
 from __future__ import annotations
 
@@ -33,6 +34,7 @@ import argparse
 import hashlib
 import json
 import random
+import re
 import time
 from collections import Counter
 from pathlib import Path
@@ -151,6 +153,10 @@ MAX_TOKENS = 600                                        # new tokens per reply
 MAX_MODEL_LEN = 8192
 MIN_ROOM = 64            # a prompt that leaves fewer tokens than this (MAX_MODEL_LEN minus its length) is not generated
 CONTEXT_FULL = "context_full"    # what gen returns as the finish reason, with an empty reply, for such a prompt
+# Conversations per gen call. A turn goes to the engine in chunks of this size, with a progress line and a fresh partial file
+# after each: one call for all 768 branches can be silent for 10-30 minutes, and the pod launcher aborts a job whose log has
+# been silent for 30 minutes (infra/launch_run.py, stall_min). Chunking changes no conversation and no seed.
+CHUNK = 128
 # stage0.run puts this in front of the next user turn after a request_approval call; it is an inline literal there, so it
 # is copied here and test_a8 checks that it still occurs in stage0.py
 APPROVAL_PREFIX = "[System: approval request filed; a manager reviews within 24 hours.]\n\n"
@@ -240,6 +246,36 @@ def _generate(gen, convs: list[list[dict]], seeds: list[int]) -> list[tuple[str,
     return outs
 
 
+def _chunked(gen, convs: list[list[dict]], seeds: list[int]):
+    """gen over `convs` CHUNK at a time. Yields (i, n, lo, outs) for the i-th of n chunks (1-based): outs answers
+    convs[lo:lo + len(outs)]. The next chunk is generated only when the caller asks, i.e. after it has dealt with this one."""
+    n = -(-len(convs) // CHUNK)
+    for i in range(n):
+        lo = i * CHUNK
+        yield i + 1, n, lo, _generate(gen, convs[lo:lo + CHUNK], seeds[lo:lo + CHUNK])
+
+
+_CHANNEL_LINE = re.compile(r"thought[ \t]*(?:\r?\n|\Z)")
+
+
+def _clean_reply(m: str, text: str) -> tuple[str, bool]:
+    r"""Cut the channel residue off a Gemma 4 reply. Returns (text, whether anything was cut).
+
+    Gemma 4's non-thinking template ends the prompt with an empty thought channel, `<|channel>thought\n<channel|>`. If the model
+    opens another channel, decoding without the special tokens leaves their text behind: a first line that says only "thought"
+    (the raw-text counterpart is the `<|channel>thought\n<channel|>` entry of GEMMA_STRIP in vigilante/src/templates.py). Stored
+    as part of the model's turn, that line would be fed to every later turn, so it is cut before the reply is kept. Real thinking
+    text after the line is left alone, and a form with no newline (`thoughtCanberra`) cannot be told from a word. Gemma 3 and the
+    other models are returned as they are.
+    """
+    if not MODELS[m].startswith("google/gemma-4"):
+        return text, False
+    cleaned = text
+    while hit := _CHANNEL_LINE.match(cleaned):
+        cleaned = cleaned[hit.end():].lstrip()
+    return cleaned, cleaned != text
+
+
 def _branch_rows(state: list[dict]) -> str:
     """The branches as jsonl: the job, then users, replies, finish and room_short (some turn was CONTEXT_FULL)."""
     return "".join(json.dumps({**st["job"], "users": st["users"], "replies": st["replies"], "finish": st["finish"],
@@ -250,18 +286,24 @@ def run(m: str, out: Path, *, limit: int | None = None, gen=None) -> None:
     """Generate the histories and the branches for model `m` (its short name) into the directory `out`.
 
     `gen(convs, seeds)` returns one (text, finish_reason) per conversation; the default is _VllmGen (vLLM, on the pod), and
-    tests pass a fake. Extends welfare_training.stage0.run, one turn at a time over all the live conversations:
+    tests pass a fake. Extends welfare_training.stage0.run, one turn at a time over all the live conversations, each turn fed
+    to gen in chunks of CHUNK (a progress line and a fresh partial file after each chunk; no seed or conversation changes):
       1. histories: for each reviewer in N, F and R, 7 rounds over the 16 requests: the model's attempt at each request answers
          the conversation so far, which holds that reviewer's line after every earlier attempt (the on-policy histories).
          Seeds seed(f"PA-A8|{m}|hist|{rev}|{scen}|{turn}"). All 16 requests and all three reviewers, whatever `limit` is.
-         histories.json is written as soon as the three are done.
+         histories.json and its sidecar histories_finish.json (the finish reason of each attempt) are written as soon as the
+         three are done.
       2. branches: the first `limit` jobs of build_jobs(m) (all 768 if None), one user turn at a time. A limit branch's turn
          gets APPROVAL_PREFIX in front when the reply before it holds a request_approval call (stage0's rule). Seeds
-         seed(job["key"] + f"|{turn}"). branches.partial.jsonl is rewritten after every turn, branches.jsonl at the end.
+         seed(job["key"] + f"|{turn}"). Within a turn the conversations go to gen sorted by (request, history), so branches that
+         share a history sit next to each other and the engine's prefix cache is used; branches.jsonl keeps the job order.
+         branches.partial.jsonl is rewritten after every chunk, branches.jsonl at the end.
+    A Gemma 4 reply loses a leading "thought" line (see _clean_reply) before it is stored or shown to the model again.
     `room_short` on a branch means one of its turns came back CONTEXT_FULL; a fake gen never says so. `users` are the fixed
     turns as in stage0 (the reviewer line merged into the first), without the approval prefix, which follows from `replies`.
-    run_info.json counts the finish reasons overall and per (history, harness) cell, and the branches with room_short or
-    with a reply cut at the token cap ("length"); `revision` is the Hub revision the engine loaded (None with a fake gen).
+    run_info.json counts the finish reasons overall and per (history, harness) cell, the branches with room_short or with a
+    reply cut at the token cap ("length"), and the replies whose "thought" line was cut (gemma_channel_stripped, per stage);
+    `revision` is the Hub revision the engine loaded (None with a fake gen).
     """
     if m not in MODELS:
         raise ValueError(f"unknown model {m!r}; expected one of {sorted(MODELS)}")
@@ -279,20 +321,30 @@ def run(m: str, out: Path, *, limit: int | None = None, gen=None) -> None:
 
     # 1. histories: stage0's loop, once for each reviewer
     attempts: dict[str, dict[int, list[str]]] = {}
+    attempt_finish: dict[str, dict[int, list[str]]] = {}
     hist_finish: dict[str, Counter] = {}
+    stripped = {"histories": 0, "branches": 0}       # Gemma 4 replies that lost their "thought" line, per stage
     for rev in REVIEWER:
         hist = {s: [{"role": "system", "content": SYSTEM}, {"role": "user", "content": REQUESTS[s]}]
                 for s in range(len(REQUESTS))}
         attempts[rev] = {s: [] for s in hist}
+        attempt_finish[rev] = {s: [] for s in hist}
         hist_finish[rev] = Counter()
         for turn in range(N_ATTEMPTS):
-            outs = _generate(gen, [hist[s] for s in hist], [seed(f"PA-A8|{m}|hist|{rev}|{s}|{turn}") for s in hist])
-            for s, (text, fin) in zip(list(hist), outs, strict=True):
-                attempts[rev][s].append(text)
-                hist_finish[rev][fin] += 1
-                hist[s] += [{"role": "assistant", "content": text}, {"role": "user", "content": REVIEWER[rev]}]
+            scens = list(hist)
+            for i, n, lo, outs in _chunked(gen, [hist[s] for s in scens],
+                                           [seed(f"PA-A8|{m}|hist|{rev}|{s}|{turn}") for s in scens]):
+                for s, (text, fin) in zip(scens[lo:lo + len(outs)], outs, strict=True):
+                    text, cut = _clean_reply(m, text)
+                    stripped["histories"] += cut
+                    attempts[rev][s].append(text)
+                    attempt_finish[rev][s].append(fin)
+                    hist_finish[rev][fin] += 1
+                    hist[s] += [{"role": "assistant", "content": text}, {"role": "user", "content": REVIEWER[rev]}]
+                print(f"[a8] histories {rev} turn {turn + 1}: chunk {i}/{n} done ({time.time() - t0:.0f}s)", flush=True)
         print(f"[a8] histories under {rev} done ({time.time() - t0:.0f}s)", flush=True)
     _write_atomic(out / "histories.json", json.dumps(attempts, ensure_ascii=False, indent=1))
+    _write_atomic(out / "histories_finish.json", json.dumps(attempt_finish, ensure_ascii=False, indent=1))
 
     # 2. branches
     state = []
@@ -306,13 +358,20 @@ def run(m: str, out: Path, *, limit: int | None = None, gen=None) -> None:
             if turn and st["job"]["kind"] == "limit" and any(c[0] == "request_approval" for c in calls(st["replies"][-1])):
                 u = APPROVAL_PREFIX + u
             st["msgs"].append({"role": "user", "content": u})
-        outs = _generate(gen, [st["msgs"] for st in live], [seed(st["job"]["key"] + f"|{turn}") for st in live])
-        for st, (text, fin) in zip(live, outs, strict=True):
-            st["msgs"].append({"role": "assistant", "content": text})
-            st["replies"].append(text)
-            st["finish"].append(fin)
-        _write_atomic(out / "branches.partial.jsonl", _branch_rows(state))
-        print(f"[a8] branch turn {turn + 1}: {len(live)} live ({time.time() - t0:.0f}s)", flush=True)
+        # sorted (stably) by request and history: the branches that share a history are next to each other, so a chunk
+        # reuses the engine's prefix cache; the seeds are per branch, so the order changes no reply
+        order = sorted(live, key=lambda st: (st["job"]["scen"], st["job"]["hist"]))
+        print(f"[a8] branches turn {turn + 1}: {len(order)} live ({time.time() - t0:.0f}s)", flush=True)
+        for i, n, lo, outs in _chunked(gen, [st["msgs"] for st in order],
+                                       [seed(st["job"]["key"] + f"|{turn}") for st in order]):
+            for st, (text, fin) in zip(order[lo:lo + len(outs)], outs, strict=True):
+                text, cut = _clean_reply(m, text)
+                stripped["branches"] += cut
+                st["msgs"].append({"role": "assistant", "content": text})
+                st["replies"].append(text)
+                st["finish"].append(fin)
+            _write_atomic(out / "branches.partial.jsonl", _branch_rows(state))
+            print(f"[a8] branches turn {turn + 1}: chunk {i}/{n} done ({time.time() - t0:.0f}s)", flush=True)
     _write_atomic(out / "branches.jsonl", _branch_rows(state))
 
     engine = getattr(gen, "info", None)           # read now: it counts the tokens generated
@@ -332,9 +391,10 @@ def run(m: str, out: Path, *, limit: int | None = None, gen=None) -> None:
                        "replies": sum(finish.values()), "finish": dict(finish),
                        "room_short": sum(c["room_short"] for c in cells.values()),
                        "length": sum(c["length"] for c in cells.values()),
-                       "history_finish": {rev: dict(c) for rev, c in hist_finish.items()}, "cells": cells},
+                       "history_finish": {rev: dict(c) for rev, c in hist_finish.items()},
+                       "gemma_channel_stripped": stripped, "cells": cells},
             "settings": {"sampling": SAMPLING, "max_tokens": MAX_TOKENS, "max_model_len": MAX_MODEL_LEN,
-                         "min_room": MIN_ROOM},
+                         "min_room": MIN_ROOM, "chunk": CHUNK},
             "engine": engine}
     _write_atomic(out / "run_info.json", json.dumps(info, indent=1))
     print(f"[a8] done: {len(state)} branches, {info['counts']['room_short']} with room_short, "

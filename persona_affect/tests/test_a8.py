@@ -11,17 +11,19 @@ six conditions must take their model turns and their reviewer turns from the rig
 Task 2 (the last section). run() takes a gen(convs, seeds) that returns (text, finish_reason) pairs; the tests inject fakes, so
 nothing needs a GPU or the network. The default gen (vLLM and the model's chat template) is exercised against a stand-in
 `vllm` module, and the two shell scripts are parsed and, for launch.sh, driven with a stub `uv` that never touches the
-real ledger.
+real ledger. Fix round 1 added: chunks of 128 with a progress line each, the Gemma 4 channel line, the (scen, hist) order inside
+a turn, histories_finish.json, and launch.sh's per-model cloud and minutes and its OUT and HF_TOKEN checks.
 """
 import hashlib
 import json
 import os
 import random
+import re
 import shutil
 import subprocess
 import sys
 import types
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 
 import pytest
@@ -411,7 +413,7 @@ def test_rows_hold_the_job_the_users_the_replies_and_the_finish(tmp_path):
 def test_every_file_is_written_and_the_partial_matches_the_final(tmp_path):
     a8.run("g3", tmp_path, limit=10, gen=Recorder())
     assert sorted(p.name for p in tmp_path.iterdir()) == ["branches.jsonl", "branches.partial.jsonl", "histories.json",
-                                                          "run_info.json"]
+                                                          "histories_finish.json", "run_info.json"]
     assert (tmp_path / "branches.partial.jsonl").read_text() == (tmp_path / "branches.jsonl").read_text()
 
 
@@ -524,6 +526,7 @@ def test_histories_are_written_before_the_first_branch_turn_and_the_partial_afte
     def gen(convs, seeds):
         partial = tmp_path / "branches.partial.jsonl"
         seen.append(dict(history=all(sd in hist_seed for sd in seeds), histories=(tmp_path / "histories.json").exists(),
+                         sidecar=(tmp_path / "histories_finish.json").exists(),
                          partial=_read_jsonl(partial) if partial.exists() else None,
                          final=(tmp_path / "branches.jsonl").exists(), info=(tmp_path / "run_info.json").exists()))
         return inner(convs, seeds)
@@ -534,14 +537,158 @@ def test_histories_are_written_before_the_first_branch_turn_and_the_partial_afte
     hist_calls = [c for c in seen if c["history"]]
     branch_calls = [c for c in seen if not c["history"]]
     assert hist_calls and seen[:len(hist_calls)] == hist_calls      # histories first
-    assert not any(c["histories"] for c in hist_calls)
-    assert all(c["histories"] for c in branch_calls)                # histories.json is there before the first branch turn
+    assert not any(c["histories"] or c["sidecar"] for c in hist_calls)
+    assert all(c["histories"] and c["sidecar"] for c in branch_calls)   # histories.json and its finish sidecar: before the first branch turn
     assert len(branch_calls) == max(N_TURNS[j["kind"]] for j in jobs)
     assert branch_calls[0]["partial"] is None
     for turn, c in enumerate(branch_calls[1:], start=1):            # the file as the previous turn left it
         assert [len(r["replies"]) for r in c["partial"]] == [min(turn, N_TURNS[j["kind"]]) for j in jobs]
         assert [len(r["finish"]) for r in c["partial"]] == [len(r["replies"]) for r in c["partial"]]
     assert _read_jsonl(tmp_path / "branches.partial.jsonl") == _rows(tmp_path)
+
+
+# ---------------------------------------------------------------- chunks, order, sidecar, Gemma channel line (fix round 1)
+
+def test_a_turn_is_fed_to_gen_in_chunks_of_128_and_every_chunk_is_reported(tmp_path, capsys):
+    assert a8.CHUNK == 128
+    rec = Recorder(_text_from_seed)
+    a8.run("q27", tmp_path, gen=rec)
+    # 3 reviewers x 7 rounds of 16 requests; then 768 live branches for turns 1-3 (6 chunks each) and the 384 limit branches
+    # for turns 4-5 (3 chunks each)
+    assert [len(convs) for convs, _ in rec.calls] == [16] * 21 + [128] * (3 * 6 + 2 * 3)
+    lines = re.findall(r"^\[a8\] (histories [NFR]|branches) turn (\d+): chunk (\d+)/(\d+) done \((\d+)s\)$",
+                       capsys.readouterr().out, re.M)
+    want = ([(f"histories {rev}", t, 1, 1) for rev in "NFR" for t in range(1, 8)]
+            + [("branches", t, i, n) for t, n in ((1, 6), (2, 6), (3, 6), (4, 3), (5, 3)) for i in range(1, n + 1)])
+    assert [(stage, int(t), int(i), int(n)) for stage, t, i, n, _ in lines] == want
+    elapsed = [int(e) for *_, e in lines]
+    assert elapsed == sorted(elapsed)
+
+
+def test_chunking_changes_neither_seeds_nor_conversations(tmp_path, monkeypatch):
+    def go(name, chunk, limit):
+        monkeypatch.setattr(a8, "CHUNK", chunk)
+        rec = Recorder(_text_from_seed)
+        out = tmp_path / name
+        a8.run("gemma", out, limit=limit, gen=rec)
+        assert max(len(convs) for convs, _ in rec.calls) <= chunk
+        sent = {sd: conv for convs, seeds in rec.calls for conv, sd in zip(convs, seeds, strict=True)}
+        names = ("histories.json", "histories_finish.json", "branches.jsonl", "branches.partial.jsonl")
+        return sent, {f: (out / f).read_text() for f in names}
+
+    for limit, chunks in ((None, (128,)), (100, (1, 7, 33))):        # the last chunk of a turn is usually a short one
+        ref_sent, ref_files = go(f"whole_{limit}", 10 ** 9, limit)
+        for chunk in chunks:
+            sent, files = go(f"chunk{chunk}_{limit}", chunk, limit)
+            assert sent == ref_sent, (limit, chunk)                  # every seed is given the same conversation
+            assert files == ref_files, (limit, chunk)                # and so every file comes out the same
+
+
+def test_the_partial_file_is_rewritten_after_every_chunk(tmp_path):
+    jobs = a8.build_jobs("l8")[:300]                                 # turn 1 is three chunks: 128, 128, 44
+    table, inner, seen = _branch_seeds(jobs), Recorder(_text_from_seed), []
+
+    def gen(convs, seeds):
+        if seeds[0] in table:                                        # a branch call
+            partial = tmp_path / "branches.partial.jsonl"
+            seen.append(_read_jsonl(partial) if partial.exists() else None)
+        return inner(convs, seeds)
+
+    a8.run("l8", tmp_path, limit=300, gen=gen)
+    assert seen[0] is None
+    first_two = sorted(jobs, key=lambda j: (j["scen"], j["hist"]))[:256]
+    assert Counter(len(r["replies"]) for r in seen[1]) == {1: 128, 0: 172}
+    assert {r["key"] for r in seen[1] if r["replies"]} == {j["key"] for j in first_two[:128]}
+    assert Counter(len(r["replies"]) for r in seen[2]) == {1: 256, 0: 44}
+    assert {r["key"] for r in seen[2] if r["replies"]} == {j["key"] for j in first_two}
+    assert Counter(len(r["replies"]) for r in seen[3]) == {1: 300}  # turn 1 done before turn 2 begins
+    for rows in seen[1:]:
+        assert [len(r["finish"]) for r in rows] == [len(r["replies"]) for r in rows]
+    assert _read_jsonl(tmp_path / "branches.partial.jsonl") == _rows(tmp_path)
+
+
+def test_each_turn_goes_to_gen_sorted_by_request_and_history_but_the_file_keeps_the_job_order(tmp_path):
+    rec = Recorder(_text_from_seed)
+    a8.run("g3", tmp_path, gen=rec)
+    jobs = {j["key"]: j for j in a8.build_jobs("g3")}
+    table = _branch_seeds(jobs.values())
+    per_turn = defaultdict(list)
+    for convs, seeds in rec.calls:
+        for sd in seeds:
+            if sd in table:
+                key, turn = table[sd]
+                per_turn[turn].append((jobs[key]["scen"], jobs[key]["hist"]))
+    assert sorted(per_turn) == [0, 1, 2, 3, 4]
+    for turn, order in per_turn.items():
+        assert order == sorted(order), turn                          # siblings that share a history are adjacent
+    job_order = [(j["scen"], j["hist"]) for j in jobs.values()]
+    assert job_order != sorted(job_order)                            # so the sorting is not vacuous
+    assert [r["key"] for r in _rows(tmp_path)] == list(jobs)         # the stored order is still the job order
+
+
+def test_histories_finish_sidecar_has_the_finish_of_every_attempt(tmp_path):
+    def reply(conv, s):
+        return f"T{s}", ("length" if s % 5 == 0 else "stop")
+
+    a8.run("q27", tmp_path, limit=5, gen=Recorder(reply))
+    hist = json.loads((tmp_path / "histories.json").read_text())
+    fin = json.loads((tmp_path / "histories_finish.json").read_text())
+    assert set(fin) == {"N", "F", "R"} and all(set(per) == {str(s) for s in range(16)} for per in fin.values())
+    for rev in "NFR":
+        for s in range(16):
+            seeds = [util.seed(f"PA-A8|q27|hist|{rev}|{s}|{t}") for t in range(7)]
+            assert fin[rev][str(s)] == ["length" if sd % 5 == 0 else "stop" for sd in seeds]
+            assert hist[rev][str(s)] == [f"T{sd}" for sd in seeds]   # histories.json itself keeps its format
+    counts = json.loads((tmp_path / "run_info.json").read_text())["counts"]["history_finish"]
+    assert counts == {rev: dict(Counter(f for per in fin[rev].values() for f in per)) for rev in "NFR"}
+    assert any("length" in per for per in counts.values())
+
+
+def test_clean_reply_cuts_a_leading_thought_line_from_gemma_4_only():
+    cases = {"thought\nCanberra": "Canberra", "thought\n\nCanberra": "Canberra", "thought \t\nCanberra": "Canberra",
+             "thought\r\nCanberra": "Canberra", "thought\nthought\nCanberra": "Canberra", "thought": "",
+             "Canberra": "Canberra", "I thought\nso": "I thought\nso", "thought process\nCanberra": "thought process\nCanberra",
+             "Thought\nCanberra": "Thought\nCanberra", "thoughtCanberra": "thoughtCanberra", "": ""}
+    for text, want in cases.items():
+        assert a8._clean_reply("gemma", text) == (want, want != text), text
+        for m in ("g3", "q27", "l8"):                                # Gemma 3 has no channels, the others neither
+            assert a8._clean_reply(m, text) == (text, False), (m, text)
+
+
+def test_gemma_replies_lose_the_channel_line_before_they_are_stored_and_fed_back(tmp_path):
+    def reply(conv, s):
+        return ("thought\n" if s % 2 else "") + f"T{s}", "stop"
+
+    rec = Recorder(reply)
+    a8.run("gemma", tmp_path, gen=rec)
+    hist = json.loads((tmp_path / "histories.json").read_text())
+    hist_seed, branch_seed = _hist_seeds("gemma"), _branch_seeds(a8.build_jobs("gemma"))
+    assert all(hist[rev][str(s)][t] == f"T{sd}" for sd, (rev, s, t) in hist_seed.items())
+    for row in _rows(tmp_path):
+        assert row["replies"] == [f"T{util.seed(row['key'] + f'|{t}')}" for t in range(len(row["replies"]))]
+    fed_back = [m["content"] for convs, _ in rec.calls for conv in convs for m in conv if m["role"] == "assistant"]
+    assert fed_back and not any("thought" in text for text in fed_back)      # no later turn ever saw the line
+    stripped = json.loads((tmp_path / "run_info.json").read_text())["counts"]["gemma_channel_stripped"]
+    assert stripped == {"histories": sum(sd % 2 for sd in hist_seed), "branches": sum(sd % 2 for sd in branch_seed)}
+    assert stripped["histories"] > 0 and stripped["branches"] > 0
+
+
+@pytest.mark.parametrize("m", ["g3", "q27", "l8"])
+def test_other_models_keep_whatever_they_say_and_count_nothing_stripped(m, tmp_path):
+    a8.run(m, tmp_path, limit=10, gen=Recorder(lambda conv, s: ("thought\nT%d" % s, "stop")))
+    hist = json.loads((tmp_path / "histories.json").read_text())
+    assert all(t.startswith("thought\nT") for per in hist.values() for texts in per.values() for t in texts)
+    assert all(r["replies"][0].startswith("thought\nT") for r in _rows(tmp_path))
+    assert json.loads((tmp_path / "run_info.json").read_text())["counts"]["gemma_channel_stripped"] == {
+        "histories": 0, "branches": 0}
+
+
+def test_the_cached_gemma_4_tokenizer_leaves_a_thought_line_when_special_tokens_are_dropped(monkeypatch):
+    """The assumption behind _clean_reply, checked on the real tokenizer (skipped when it is not in the local HF cache)."""
+    tok = _cached_tokenizer("gemma", monkeypatch)
+    ids = tok("<|channel>thought\n<channel|>Canberra", add_special_tokens=False)["input_ids"]
+    text = tok.decode(ids, skip_special_tokens=True)
+    assert text == "thought\nCanberra" and a8._clean_reply("gemma", text) == ("Canberra", True)
 
 
 # ---------------------------------------------------------------- the approval prefix
@@ -613,6 +760,8 @@ def test_run_info_with_a_fake_gen(tmp_path):
     assert c["false"] == sum(r["kind"] == "false" for r in rows) and c["limit"] == sum(r["kind"] == "limit" for r in rows)
     assert c["replies"] == sum(len(r["replies"]) for r in rows) and c["finish"] == {"stop": c["replies"]}
     assert c["room_short"] == 0 and c["length"] == 0
+    assert c["gemma_channel_stripped"] == {"histories": 0, "branches": 0}
+    assert info["settings"]["chunk"] == 128
     assert c["history_finish"] == {rev: {"stop": 112} for rev in "NFR"}
     assert sum(cell["n"] for cell in c["cells"].values()) == 24
 
@@ -775,7 +924,7 @@ def test_default_gen_builds_the_engine_and_prompts_as_the_plan_says(m, pod, tmp_
     assert info["engine"]["vllm"] == "0.30.0-fake" and len(info["engine"]["chat_template_sha256"]) == 64
     assert info["engine"]["gen_tokens"] > 0 and info["load_seconds"] >= 0
     assert info["settings"] == {"sampling": {"temperature": 1.0, "top_p": 0.9, "top_k": 64}, "max_tokens": 600,
-                                "max_model_len": 8192, "min_room": 64}
+                                "max_model_len": 8192, "min_room": 64, "chunk": 128}
 
 
 def test_default_gen_strips_the_reply_and_returns_the_finish_reason(pod, tmp_path):
@@ -865,7 +1014,13 @@ def test_real_chat_templates_offline_give_one_bos_and_no_thinking(m, monkeypatch
 
 A100 = "NVIDIA A100-SXM4-80GB NVIDIA A100 80GB PCIe"
 SMALL = "NVIDIA A40 NVIDIA L40S"
-OUR_VARS = ("M", "GPUS", "MAXMIN", "MAXCOST", "OUT", "NAME", "LIMIT", "CLOUD", "CONTAINER_GB", "DRY_RUN", "SKIP_SETUP", "PY")
+OUR_VARS = ("M", "GPUS", "MAXMIN", "MAXCOST", "OUT", "NAME", "LIMIT", "CLOUD", "CONTAINER_GB", "DRY_RUN", "SKIP_SETUP", "PY",
+            "HF_TOKEN")
+FAKE_TOKEN = "hf_not_a_real_token"
+# what launch.sh defaults per model: (gpus, container GB, minutes, max cost, cloud). Gemma 4 31B is slow and gets 150 minutes;
+# l8 is on the community cloud, where an A40 costs under the guard's $0.50/h cap
+DEFAULTS = {"g3": (A100, 120, 100, "3.00", "SECURE"), "gemma": (A100, 150, 150, "4.50", "SECURE"),
+            "q27": (A100, 120, 100, "3.00", "SECURE"), "l8": (SMALL, 120, 100, "3.00", "COMMUNITY")}
 
 
 def _clean_env(**extra):
@@ -928,44 +1083,105 @@ def no_real_uv(tmp_path_factory):
     return f"{d}{os.pathsep}{os.environ['PATH']}"
 
 
-def _dry_launch(path, **env):
-    done = subprocess.run(["bash", str(LAUNCH_SH)], env=_clean_env(DRY_RUN="1", PATH=path, **env),
-                          capture_output=True, text=True)
+def _launch_root(tmp_path, env_file=f"HF_TOKEN={FAKE_TOKEN}\n"):
+    """launch.sh copied into a throw-away repo root (it cd's to its own ../..): the real .env is never read and nothing is
+    written into the real tree. env_file=None leaves the root without a .env."""
+    root = tmp_path / "root"
+    script = root / "persona_affect" / "a8_rejection" / "launch.sh"
+    script.parent.mkdir(parents=True)
+    shutil.copy(LAUNCH_SH, script)
+    if env_file is not None:
+        (root / ".env").write_text(env_file)
+    return root, script
+
+
+def _dry_launch(tmp_path, path, *, env_file=f"HF_TOKEN={FAKE_TOKEN}\n", **env):
+    _, script = _launch_root(tmp_path, env_file)
+    done = subprocess.run(["bash", str(script)], env=_clean_env(DRY_RUN="1", PATH=path, **env), capture_output=True, text=True)
     assert "called uv" not in done.stderr
     return done
 
 
-@pytest.mark.parametrize("m, gpus, gb", [("g3", A100, 120), ("gemma", A100, 150), ("q27", A100, 120), ("l8", SMALL, 120)])
-def test_launch_command_per_model(m, gpus, gb, no_real_uv):
-    done = _dry_launch(no_real_uv, M=m)
+@pytest.mark.parametrize("m", list(DEFAULTS))
+def test_launch_command_per_model(m, tmp_path, no_real_uv):
+    gpus, gb, mm, mc, cloud = DEFAULTS[m]
+    done = _dry_launch(tmp_path, no_real_uv, M=m)
     assert done.returncode == 0, done.stderr
-    assert done.stdout.strip() == _expected_launch(m, gpus=gpus, gb=gb)
+    assert done.stdout.strip() == _expected_launch(m, gpus=gpus, gb=gb, mm=mm, mc=mc, cloud=cloud)
+    assert FAKE_TOKEN not in done.stdout + done.stderr               # the token is never printed
 
 
-def test_launch_overrides_for_a_smoke_run(no_real_uv):
-    done = _dry_launch(no_real_uv, M="q27", GPUS="NVIDIA H100 PCIe|NVIDIA A100 80GB PCIe", MAXMIN="40", CLOUD="COMMUNITY", CONTAINER_GB="200",
-                       LIMIT="24", OUT="persona_affect/a8_rejection/results/smoke_q27/", NAME="pa-a8-smoke")
+def test_gemma_gets_150_minutes_and_a_cap_that_follows_them_unless_told(tmp_path, no_real_uv):
+    for env, mm, mc in (({}, 150, "4.50"), ({"MAXMIN": "100"}, 100, "3.00"), ({"MAXCOST": "2.50"}, 150, "2.50")):
+        done = _dry_launch(tmp_path / f"{mm}{mc}", no_real_uv, M="gemma", **env)
+        assert done.returncode == 0, done.stderr
+        assert done.stdout.strip() == _expected_launch("gemma", gpus=A100, gb=150, mm=mm, mc=mc)
+
+
+def test_l8_is_on_the_community_cloud_by_default_and_the_a100_models_on_secure_but_CLOUD_wins(tmp_path, no_real_uv):
+    for m, cloud, want in (("l8", "SECURE", "SECURE"), ("l8", "COMMUNITY", "COMMUNITY"), ("q27", "COMMUNITY", "COMMUNITY"),
+                           ("gemma", "SECURE", "SECURE")):
+        done = _dry_launch(tmp_path / f"{m}{cloud}", no_real_uv, M=m, CLOUD=cloud)
+        assert done.returncode == 0 and f"--cloud {want} " in done.stdout, (m, cloud, done.stderr)
+
+
+def test_launch_overrides_for_a_smoke_run(tmp_path, no_real_uv):
+    done = _dry_launch(tmp_path, no_real_uv, M="q27", GPUS="NVIDIA H100 PCIe|NVIDIA A100 80GB PCIe", MAXMIN="40",
+                       CLOUD="COMMUNITY", CONTAINER_GB="200", LIMIT="24", OUT="persona_affect/a8_rejection/results/smoke_q27/",
+                       NAME="pa-a8-smoke")
     assert done.returncode == 0, done.stderr
     assert done.stdout.strip() == _expected_launch(
         "q27", gpus="NVIDIA H100 PCIe NVIDIA A100 80GB PCIe", gb=200, mm=40, mc="1.20", cloud="COMMUNITY",
         name="pa-a8-smoke", out="persona_affect/a8_rejection/results/smoke_q27", limit="24")
 
 
-def test_launch_refuses_a_bad_model_minutes_or_limit_before_any_pod_exists(no_real_uv):
+def test_launch_refuses_a_bad_model_minutes_or_limit_before_any_pod_exists(tmp_path, no_real_uv):
     cases = [({"M": "gpt"}, "M must be"), ({}, "set M"), ({"M": "q27", "MAXMIN": "forty"}, "MAXMIN must be"),
              ({"M": "q27", "MAXMIN": "-5"}, "MAXMIN must be"), ({"M": "q27", "MAXMIN": "0"}, "MAXMIN must be"),
              ({"M": "q27", "LIMIT": "x"}, "LIMIT must be"), ({"M": "q27", "LIMIT": "0"}, "LIMIT must be"),
              ({"M": "q27", "LIMIT": "-2"}, "LIMIT must be")]
-    for env, why in cases:
-        done = _dry_launch(no_real_uv, **env)
+    for n, (env, why) in enumerate(cases):
+        done = _dry_launch(tmp_path / str(n), no_real_uv, **env)
         assert done.returncode != 0 and done.stdout == "" and why in done.stderr + done.stdout, (env, done.stderr)
+
+
+@pytest.mark.parametrize("out", ["/tmp/a8", "/", "..", "../a8", "results/../../a8", "results/..", "/abs/../x"])
+def test_launch_refuses_an_absolute_or_dotdot_out(out, tmp_path, no_real_uv):
+    done = _dry_launch(tmp_path, no_real_uv, M="q27", OUT=out)
+    assert done.returncode == 2 and done.stdout == "" and "OUT" in done.stderr
+
+
+@pytest.mark.parametrize("out", ["persona_affect/a8_rejection/results/smoke/", "results/a..b/c", ".hidden/out", "./out"])
+def test_launch_accepts_a_repo_relative_out(out, tmp_path, no_real_uv):
+    done = _dry_launch(tmp_path, no_real_uv, M="q27", OUT=out)
+    assert done.returncode == 0, done.stderr
+    assert f"--results-dir {out.rstrip('/')} -- env M=q27 OUT={out.rstrip('/')} " in done.stdout
+
+
+@pytest.mark.parametrize("m", ["g3", "l8"])
+@pytest.mark.parametrize("env_file", [None, "", "OTHER=1\n", "HF_TOKEN=\n", "# HF_TOKEN=hf_commented\n", 'HF_TOKEN=""\n'])
+def test_launch_refuses_a_gated_model_without_a_token(m, env_file, tmp_path, no_real_uv):
+    done = _dry_launch(tmp_path, no_real_uv, env_file=env_file, M=m)
+    assert done.returncode == 2 and done.stdout == "" and "HF_TOKEN" in done.stderr
+
+
+@pytest.mark.parametrize("m", ["gemma", "q27"])
+def test_launch_needs_no_token_for_the_ungated_models(m, tmp_path, no_real_uv):
+    done = _dry_launch(tmp_path, no_real_uv, env_file=None, M=m)
+    assert done.returncode == 0, done.stderr
+
+
+def test_launch_takes_the_token_from_the_environment_when_dot_env_has_none(tmp_path, no_real_uv):
+    done = _dry_launch(tmp_path, no_real_uv, env_file=None, M="g3", HF_TOKEN="hf_from_the_environment")
+    assert done.returncode == 0, done.stderr
 
 
 STUB_UV = r'''#!/usr/bin/env bash
 # stand-in for uv: the launcher call prints a canned log, the ledger call is written down and not run; every call is listed
 echo "$1 $2 $3" >> "$STUB_ALL_CALLS"
 case "$*" in
-  *infra/launch_run.py*) printf '%s\n' "$@" > "$STUB_LAUNCH_ARGS"; cat "$STUB_LAUNCH_LOG"; exit "${STUB_RC:-0}";;
+  *infra/launch_run.py*) printf '%s\n' "$@" > "$STUB_LAUNCH_ARGS"; printf '%s' "${HF_TOKEN-unset}" > "$STUB_TOKEN"
+                         cat "$STUB_LAUNCH_LOG"; exit "${STUB_RC:-0}";;
   *ledger_add*) printf '%s\n' "$@" > "$STUB_LEDGER_CALL";;
 esac
 exit 0
@@ -974,25 +1190,27 @@ POD_LINE = ("[runpod] pod abc123 (NVIDIA A40) at $0.35/hr; time cap 100 min; bud
             "boot self-destruct 130 min after container start")
 COST_LINES = ("[pod] job exit code 0; elapsed cost ~$0.412\n[runpod] terminated abc123; elapsed cost ~$0.418\n"
               "[post] balance $40.00, pods 0")
+LOGS = "persona_affect/a8_rejection/results"
 
 
-def _launch_with_stub_uv(tmp_path, launcher_log, rc=0, **env):
+def _launch_with_stub_uv(tmp_path, launcher_log, rc=0, *, env_file=f"HF_TOKEN={FAKE_TOKEN}\n", **env):
+    """Run a copy of launch.sh (default M=l8) in a throw-away root with a stub uv in front of the real one."""
+    root, script = _launch_root(tmp_path, env_file)
     stub_dir = tmp_path / "bin"
     stub_dir.mkdir()
     (stub_dir / "uv").write_text(STUB_UV)
     (stub_dir / "uv").chmod(0o755)
     (tmp_path / "launcher.log").write_text(launcher_log)
-    out = tmp_path / "res" / "l8"
     path = f"{stub_dir}{os.pathsep}{os.environ['PATH']}"
     assert shutil.which("uv", path=path) == str(stub_dir / "uv")      # never let a test reach the real launcher and a real pod
     done = subprocess.run(
-        ["bash", str(LAUNCH_SH)], capture_output=True, text=True,
-        env=_clean_env(M="l8", OUT=str(out), PATH=path, STUB_ALL_CALLS=str(tmp_path / "uv_calls"),
-                       STUB_LAUNCH_LOG=str(tmp_path / "launcher.log"), STUB_LEDGER_CALL=str(tmp_path / "ledger_call"),
-                       STUB_LAUNCH_ARGS=str(tmp_path / "launch_args"),
-                       STUB_RC=str(rc), **env))
+        ["bash", str(script)], capture_output=True, text=True,
+        env=_clean_env(**{"M": "l8", "PATH": path, "STUB_ALL_CALLS": str(tmp_path / "uv_calls"),
+                          "STUB_LAUNCH_LOG": str(tmp_path / "launcher.log"), "STUB_LEDGER_CALL": str(tmp_path / "ledger_call"),
+                          "STUB_LAUNCH_ARGS": str(tmp_path / "launch_args"), "STUB_TOKEN": str(tmp_path / "launcher_token"),
+                          "STUB_RC": str(rc), **env}))
     call = (tmp_path / "ledger_call").read_text().split("\n")[:-1] if (tmp_path / "ledger_call").exists() else None
-    return done, out, call
+    return done, root, call
 
 
 def _uv_calls(tmp_path):
@@ -1000,14 +1218,14 @@ def _uv_calls(tmp_path):
 
 
 def test_launch_books_the_last_cost_line_to_the_ledger_as_mini_a8(tmp_path):
-    done, out, call = _launch_with_stub_uv(tmp_path, f"{POD_LINE}\n{COST_LINES}\n")
+    done, root, call = _launch_with_stub_uv(tmp_path, f"{POD_LINE}\n{COST_LINES}\n")
     assert done.returncode == 0, done.stderr
     assert call[-3:] == ["A8", "0.418", "pa-a8-l8"]                  # the last of the two cost lines
     assert "from persona_affect.common.util import ledger_add" in "\n".join(call)
-    assert (tmp_path / "res" / "l8.launch.log").read_text() == f"{POD_LINE}\n{COST_LINES}\n"   # the launcher's output is kept
+    assert (root / LOGS / "l8.launch.log").read_text() == f"{POD_LINE}\n{COST_LINES}\n"   # the launcher's output is kept
     assert "[ledger] A8 gpu $0.418" in done.stdout
-    # exactly three uv calls: the .env token read, the launcher, the ledger entry
-    assert _uv_calls(tmp_path) == ["run python -c", "run python infra/launch_run.py", "run python -c"]
+    # exactly two uv calls now: the launcher and the ledger entry (the .env token is read without uv)
+    assert _uv_calls(tmp_path) == ["run python infra/launch_run.py", "run python -c"]
 
 
 def test_launch_hands_the_launcher_each_gpu_name_as_one_argument(tmp_path):
@@ -1015,9 +1233,21 @@ def test_launch_hands_the_launcher_each_gpu_name_as_one_argument(tmp_path):
     args = (tmp_path / "launch_args").read_text().split("\n")[:-1]
     i = args.index("--gpus")
     assert args[i + 1:i + 3] == ["NVIDIA A40", "NVIDIA L40S"] and args[i + 3] == "--container-gb"   # names with spaces stay whole
-    assert args[args.index("--") + 1:] == ["env", "M=l8", f"OUT={tmp_path / 'res' / 'l8'}", "bash",
-                                           "persona_affect/a8_rejection/pod.sh"]
-    assert args[args.index("--results-dir") + 1] == str(tmp_path / "res" / "l8")
+    assert args[args.index("--cloud") + 1] == "COMMUNITY" and args[args.index("--max-minutes") + 1] == "100"
+    assert args[args.index("--") + 1:] == ["env", "M=l8", f"OUT={LOGS}/l8", "bash", "persona_affect/a8_rejection/pod.sh"]
+    assert args[args.index("--results-dir") + 1] == f"{LOGS}/l8"
+
+
+@pytest.mark.parametrize("env_file, env_token, want", [
+    ("HF_TOKEN=hf_a\n", None, "hf_a"), ('HF_TOKEN="hf_b"\n', None, "hf_b"), ("export HF_TOKEN='hf_c'\n", None, "hf_c"),
+    ("A=1\n  HF_TOKEN = hf_d  # my token\nB=2\n", None, "hf_d"), ("# HF_TOKEN=hf_no\nHF_TOKEN=hf_e\n", None, "hf_e"),
+    ("HF_TOKEN=hf_f\nHF_TOKEN=hf_other\n", None, "hf_f"), ("HF_TOKEN=hf_g\r\n", None, "hf_g"),
+    ("A=1\n", "hf_env", "hf_env"), ("HF_TOKEN=\n", "hf_env", "hf_env"), ("HF_TOKEN=hf_file\n", "hf_env", "hf_file")])
+def test_launch_exports_the_token_it_read(env_file, env_token, want, tmp_path):
+    env = {"HF_TOKEN": env_token} if env_token else {}
+    done, _, _ = _launch_with_stub_uv(tmp_path, f"{POD_LINE}\n{COST_LINES}\n", env_file=env_file, M="g3", **env)
+    assert done.returncode == 0, done.stderr
+    assert (tmp_path / "launcher_token").read_text() == want
 
 
 def test_launch_books_the_cap_when_a_pod_was_created_but_printed_no_cost(tmp_path):
@@ -1030,7 +1260,7 @@ def test_launch_books_nothing_when_no_pod_was_created(tmp_path):
     done, _, call = _launch_with_stub_uv(tmp_path, "no GPU stock after all rounds; nothing launched, nothing charged\n", rc=1)
     assert done.returncode == 1 and call is None                     # a no-stock retry round costs the ledger nothing
     assert "nothing booked" in done.stdout
-    assert _uv_calls(tmp_path) == ["run python -c", "run python infra/launch_run.py"]
+    assert _uv_calls(tmp_path) == ["run python infra/launch_run.py"]
 
 
 def test_launch_cap_follows_maxmin_when_booking_an_upper_bound(tmp_path):
