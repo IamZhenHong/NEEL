@@ -81,6 +81,18 @@ is not in scope.
 - Qwen's A1 pod failed to boot (no SSH port, $0.31). It was relaunched on A100 PCIe / SXM; Qwen's KV is small (hybrid
   attention), so it is expected to finish within its 120-minute cap.
 
+### Deviation 2b (logged 2026-10-22 14:05, before any A1 output was seen; only Gemma's Betley rows exist, unread)
+
+- **What happened:** Gemma's first A1 pod was not time-capped. The launcher's stall guard aborted it after 30 minutes
+  with no log output: its 512-item chunk of target conversations was still running, and the pod prints only per chunk.
+  - It kept 1,024 rows (all the Betley items) and none of the 2,400 target items. Cost $2.57.
+- **Fix (plumbing only, no change to outputs):** `a1 run` now prints a heartbeat every 5 minutes, and the chunk size
+  comes from `A1_CHUNK` (64 for the top-ups).
+- **Completing the design (deviation 2):** **three** shard pods (`--shard i/3`, each given the partial gen.jsonl,
+  ≤ 85 min / $2.54 each), then `a1 merge`.
+- **Qwen:** its running pod is on the old code. If the guard cuts it too, the finished chunks are synced and the
+  remainder runs the same way.
+
 ### A0 result and A1 entry (2026-10-22, before any A1 output; `results/a0/summary.md`)
 
 GPU $1.92 (two pods, plus $0.72 lost to two Gemma pods that never exposed SSH); judges $0.97.

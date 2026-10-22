@@ -12,4 +12,4 @@ uv run python infra/launch_run.py --name ${NAME:?} --allow-concurrent --max-minu
   --gpus "${GPU_LIST[@]}" --container-gb ${CONTAINER_GB:-120} --cloud ${CLOUD:-SECURE} --min-free-gb ${MINFREE:-1.5} \
   --ship persona/weirdchat --ship vigilante/pod --ship infra --exclude persona/weirdchat/results \
   ${SYNC_EXTRA:+--sync-extra $SYNC_EXTRA} \
-  --results-dir persona/weirdchat/results/${DIR:?} -- env MODEL=$MODEL DIR=$DIR SHARD=${SHARD:-} bash persona/weirdchat/pod_a1.sh
+  --results-dir persona/weirdchat/results/${DIR:?} -- env MODEL=$MODEL DIR=$DIR SHARD=${SHARD:-} A1_CHUNK=${A1_CHUNK:-512} bash persona/weirdchat/pod_a1.sh

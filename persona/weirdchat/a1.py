@@ -145,9 +145,18 @@ def run(a):
         todo = [it for it in todo if seed(it["id"]) % n == i]
     # Betley first (shortest), then targets by cell so a time cap cuts whole cells evenly across targets
     todo.sort(key=lambda it: (it["kind"] != "betley", it["s"]))
+    # the launcher aborts a job whose log is silent for 30 min (Gemma's first A1 pod died mid-chunk): a heartbeat
+    # line every 5 min, and smaller chunks via A1_CHUNK (DESIGN.md deviation 2b)
+    stop = threading.Event()
+
+    def beat():
+        while not stop.wait(300):
+            print(f"[a1] heartbeat ({time.time() - t0:.0f}s)", flush=True)
+    threading.Thread(target=beat, daemon=True).start()
+    n_chunk = int(os.environ.get("A1_CHUNK", "512"))
     with open(out / "gen.jsonl", "a") as f:
-        for i in range(0, len(todo), 512):
-            chunk = todo[i:i + 512]
+        for i in range(0, len(todo), n_chunk):
+            chunk = todo[i:i + n_chunk]
             ids = [tok(tok.apply_chat_template(it["messages"], tokenize=False, add_generation_prompt=True,
                                                enable_thinking=False), add_special_tokens=False)["input_ids"]
                    for it in chunk]
@@ -166,6 +175,7 @@ def run(a):
                     "n_prompt": len(x)}) + "\n")
             f.flush()
             print(f"[a1] {i + len(chunk)}/{len(todo)} ({time.time() - t0:.0f}s)", flush=True)
+    stop.set()
     (out / "run_info.json").write_text(json.dumps({"model": a.model, "n": len(its), "enter": P["enter"],
                                                    "sampling": SAMPLING, "max_tokens": MAX_TOKENS, "max_len": ml,
                                                    "secs": round(time.time() - t0)}))
