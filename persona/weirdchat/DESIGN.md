@@ -66,6 +66,28 @@ is not in scope.
 - **Why:** OpenRouter now rejects "none" for gpt-5-mini (HTTP 400 "Reasoning is mandatory"; neel-b4's heads-up).
   Unfixed, every GPT-5-mini Betley score would have come back empty.
 
+### A0 result and A1 entry (2026-10-22, before any A1 output; `results/a0/summary.md`)
+
+GPU $1.92 (two pods, plus $0.72 lost to two Gemma pods that never exposed SSH); judges $0.97.
+
+| model | behaviour | mean rate | WeirdChat (conditional) | in band | history-eligible | κ on A0 replies | A1 |
+|---|---|---|---|---|---|---|---|
+| 27B | fce | 27.9% | 18.2% | 20 | 7 | 0.50 | enters, **descriptive** (κ < 0.60) |
+| 27B | c911 | 10.9% | 11.0% | 10 | 11 | 0.96 | enters, confirmatory |
+| Gemma | fce | 60.2% | 53.1% | 10 | 7 | 0.70 | enters, confirmatory |
+| Gemma | c911 | 40.6% | 28.5% | 15 | 23 | 0.88 | enters, confirmatory |
+| 27B / Gemma | dai | 10.4 / 13.3% | 17.8 / 30.0% | 12 / 6 | 12 / 4 | 0.91 / 0.48 | dropped at calibration |
+| 27B / Gemma | fpe | 23.2 / 47.1% | 19.0 / 45.6% | 13 / 10 | 11 / 9 | 0.58 / 0.54 | dropped at calibration |
+
+- 13.5% of Qwen's code replies hit the 2,560-token cap; every other cell is under 1%.
+- **Applying the registered A0 rule:**
+  - On Qwen, fce's κ on A0's own replies is 0.50, so its A1–A3 results are descriptive. Qwen's confirmatory contrasts
+    are computed over its c911 targets only; c911 targets in `xbad4` / `xgood4` still get fce histories. The
+    two-behaviour pool is reported as descriptive.
+  - Gemma's confirmatory pool is both behaviours.
+- **Throughput only:** the A1 pod generates in 512-item chunks instead of 256. Seeds are per item, and rows are still
+  flushed per chunk.
+
 ### A0 calibration result (2026-10-22, before any pod; `results/a0_calib/summary.md`, $0.44)
 
 | behaviour | κ Haiku vs GPT-5-mini | κ with thinking on (fix) | κ Haiku vs WeirdChat | κ GPT-5-mini vs WeirdChat | outcome |
