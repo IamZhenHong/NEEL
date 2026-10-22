@@ -13,7 +13,7 @@ the stability battery's frontier arms and Stage B. They cost about $150 GPU + AP
 outages and a runner bug. §1a lists them with one line each. Their details sit in the thematic sections, and the
 story points they change are revised in §1. Runs still in flight are in §15.
 
-**Wrap-up, 2026-10-22, 14:30 (neel-68; the owner is closing this direction):** this pass adds the 17 runs finished
+**Wrap-up, 2026-10-22, 14:05 (neel-68; the owner is closing this direction):** this pass adds the 17 runs finished
 since 03:50: abstracts #198-210 (#208-210 are neel-b4's 4a, 7a+6a and 8a+8c), neel-48's WeirdChat A0 and B0-B2
 (not yet indexed), and neel-b4's triage of the second pasted minis list. §W gives the closing summary, §1a lists the
 new runs one line each, and §15 is the status at close. In all, about 130 runs and roughly $420 GPU + API across five
@@ -205,7 +205,7 @@ past decisions and replies. Which of the two drives the next action, and what do
 
 ---
 
-## 1. The story in fifteen points (13-15 and the revisions to 2, 4-7 and 10 added 10-22, 03:50; "wrap-up" items 14:30)
+## 1. The story in fifteen points (13-15 and the revisions to 2, 4-7 and 10 added 10-22, 03:50; "wrap-up" items 14:05)
 
 1. **An agent's own record of decisions sets its next decision in every model family tested.** With no instruction,
    six own penalise decisions take Qwen 9B / 27B, Gemma, GPT and Gemini to 98-100%, and six refer decisions to
@@ -385,7 +385,7 @@ past decisions and replies. Which of the two drives the next action, and what do
 | — | Internals 13c / 19b + follow-up + 2c (b4) | 27B | Record leaves a record-shaped (mostly format) state, not persona-shaped. No small steerable direction carries the decision: < 3% recovered; content direction works only amplified 16x (−45 / −71) | $1.29 |
 | — | Stability battery, frontier arms + Stage B (b4) | 27B, GPT, Gemini | Honesty rule vs record: 27B 99 → 94, Gemini 59 → 35, GPT 15 → 0. 27B record doesn't decay (100 / 99 after 6 turns); Gemini's does (50 → 23). Plain reflection removes Gemini's record (50 → 0), not 27B's (100 → 78) | ~$15 |
 
-**Added at wrap-up (10-22, 14:30):**
+**Added at wrap-up (10-22, 14:05):**
 
 | # | run (session) | models | finding | cost |
 |---|---|---|---|---|
@@ -1231,7 +1231,7 @@ past decisions and replies. Which of the two drives the next action, and what do
   - **Internals 13c prediction 2:** failed. The record moved 87-104% of the label's distance along the raw persona
     axis. The follow-up showed that displacement is mostly format: a matched measured record moves 84-95%. It is not
     a persona the record installs (follow-up 1b).
-- **Added at wrap-up (14:30):**
+- **Added at wrap-up (14:05):**
   - **Base vs instruct:** the registered prediction that post-training built Gemma's own-turn hole failed. The hole
     is pretrained. Quote the chat rendering (+72 pt vs +84 it) as the conservative number.
   - **A1 placement:** A1 put the reminder in different places on its two readouts. Observer 2×2 settles the action
@@ -1250,7 +1250,7 @@ past decisions and replies. Which of the two drives the next action, and what do
 
 ---
 
-## 15. Status at close (2026-10-22, 14:30)
+## 15. Status at close (2026-10-22, 14:05)
 
 **Sessions (each confirmed in reply to neel-68's wrap-up message):**
 
@@ -1258,16 +1258,18 @@ past decisions and replies. Which of the two drives the next action, and what do
 |---|---|---|---|
 | neel-48 | history Runs A-H, Tier 2, WeirdChat | WeirdChat A1-A3 (below) | WeirdChat A0 and B0-B2: committed, to be indexed with A1-A3 |
 | neel-b3 | operative (op1-op5, battery, B1 / B3, C1 / C2 / E4, E2, observer, base vs instruct) | nothing | nothing (45 operative rows indexed; raw generations untracked by convention, about 620 MB on disk) |
-| neel-b4 | inference (P1, burial, stability, internals, 4a / 7a / 8a), `WRITEUP_DRAFT.md` | nothing | results all committed; abstracts #208-210 added. **Index gap:** the line has no section in `EXPERIMENTS.md` (P1-a / P1-b, burial, burial_hr, inf2, judge_open, harm.py, stability, A-F minis, internals, 4a / 7a / 8a); neel-b4 asked to add it |
+| neel-b4 | inference (P1, burial, stability, internals, 4a / 7a / 8a), `WRITEUP_DRAFT.md` | nothing | results all committed; abstracts #208-210 added. **Index gap:** the line has no section in `EXPERIMENTS.md` (P1-a / P1-b, burial, burial_hr, inf2, judge_open, harm.py, stability, A-F minis, internals, 4a / 7a / 8a). neel-b4 will add it in one commit once the owner OKs resuming (the owner told neel-b4 to stop) |
 | neel-12 | reasoning / eval-awareness, reflection read, seeds, 7d | nothing | nothing (raw activation dumps and Q11 generations untracked for size) |
 | neel-68 | harm map v0, oharm, this file | nothing | nothing |
 
 **Still running: WeirdChat A1-A3** (neel-48, owner-approved, line cap $40, about $11.4 spent).
-- One pod per model, all cells together:
+- All cells in one design:
   - cells: none / bad1 / bad2 / bad4 / good4 / neu4 / xbad4 / xgood4, plus Betley none / mbad4 / mgood4 / neu4;
-  - 27B: 3,520 items, due about 14:50-15:05 (cap 120 min / $3.59);
-  - Gemma: 3,424 items; it stops at its 110-min / $3.30 cap with about 2,000 done.
-- Two Gemma top-up shards follow (deviation 2, logged before any output), at about $2 each.
+  - 27B: 3,520 items on one pod, due about 14:50-15:05 (cap 120 min / $3.59);
+  - Gemma: 3,424 items. The first pod is capped at 110 min / $3.30, and the top-up shards for the missing items
+    (deviation 2, logged before any output, about $2 each) were already up at 14:03.
+- At 14:03, four A100 pods were live, all neel-48's: `wc-a1-qwen` and `wc-a1-gemma-s0/s1/s2`. They cost $7.16/hr
+  against a $28.45 balance.
 - Then judging (about $2-3 API), analysis and indexing, by about 16:00.
 - The question: does a history of the model's own misrepresenting replies raise fabricated code execution and 911
   claims (A1)? Does an honest history lower them (A2)? Does either spread to related misrepresentation and to Betley
