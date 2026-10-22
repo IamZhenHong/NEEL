@@ -261,3 +261,11 @@ it confirmatory is costed above and awaits the owner.
   - `MARGIN=4`; 27B MAXMIN 26 / $0.78, Gemma MAXMIN 28 / $0.84.
 - After it, the merged 12-sample run is the confirmatory one, whatever it shows. It replaces the descriptive Result
   above, which keeps only a one-line note.
+- **27B top-up pod failure (before any top-up output was read).** Pod `j0ohrjzy4qhn2y` never got SSH: it waited for
+  ip/port for about 10 min, then the launcher terminated it. Cost $0.34, no output. That cost was not in the $3.40.
+  - The 27B top-up is relaunched on a new pod with the same logged plan (samples 7-11, same keys, seeds and hash,
+    MARGIN 4). Its MAXMIN is sized to what is left of the $3.40 cap once Gemma's top-up has terminated:
+    MAXMIN = floor((3.40 − spent) × 60 / 1.80).
+  - The deadline then keeps as many whole samples as fit, in order 7, 8, ….
+  - The merged 27B run is confirmatory if coverage reaches ≥ 75% (at least samples 7-8), else it stays descriptive.
+  - This is a budget-only decision, written before any top-up output was read.
