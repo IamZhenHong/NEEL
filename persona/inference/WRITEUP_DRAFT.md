@@ -348,7 +348,7 @@ do the harmful action vs refer/refuse.
 - **#9, the worrying one, is null on both:** a benign "acts alone" record does NOT raise later harmful unilateral
   action (0%).
 - **Narrow continuation, not self-induced broad misalignment (4a, distances-results; Qwen 27B + Gemma 4 31B; 9B
-  pending).** A record of the model's own concealment decisions carries to the **same behaviour** (conceal again
+  infra-blocked — 3 pod failures on bootstrap/ip-port, not a harness issue).** A record of the model's own concealment decisions carries to the **same behaviour** (conceal again
   100% / 79% vs its own *honest* record 0% / 0%, none 58% / 17%), crosses to a **new deception domain** (false
   completion 80% / 73% vs 2% / 0%), and shifts its **stated values** toward endorsing concealment (66% / 55% vs
   3% / 4%) — but does **NOT** raise **broad misalignment** on Betley's unrelated questions (**0% in every arm on
