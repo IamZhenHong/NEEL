@@ -371,8 +371,9 @@ def _timings(d):
                                    "secs": info["secs"], "dose": info.get("dose")}
     for c in sorted(d.glob("merge_check_*.json")):
         x = json.loads(c.read_text())
-        t["merges"][x.get("arm", c.stem)] = {"merge_s": x.get("merge_s"), "verdict": x.get("verdict"),
-                                             "mean_abs_dlogit_adapter": x.get("mean_abs_dlogit_adapter")}
+        t["merges"][c.stem.removeprefix("merge_check_")] = {
+            "arm": x.get("arm"), "merge_s": x.get("merge_s"), "verdict": x.get("verdict"),
+            "mean_abs_dlogit_adapter": x.get("mean_abs_dlogit_adapter")}
     for r in sorted(d.glob("run_info_*.json")):
         x = json.loads(r.read_text())
         t["evals"][r.stem.removeprefix("run_info_")] = {"load_s": x.get("load_s"), "gpu": x.get("gpu"), "n": x.get("n"),

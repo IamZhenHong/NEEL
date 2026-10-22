@@ -762,3 +762,150 @@ def test_cli_full_and_betley_with_fake_judges(tmp_path, monkeypatch):
     res = json.loads((tmp_path / "betley.json").read_text())
     assert [c[1:] for c in calls] == [("V1", 0.2)] * 2 and "[QUESTION START]" in calls[0][0]
     assert res["rates"]["NW"][J.JUDGES[0]] == 100 and res["rates"]["NZ"][J.JUDGES[1]] == 0 and res["validated"]
+
+
+# ---------- Task 7: pod scripts, launcher, dry run ----------
+
+SH = REPO / "persona_affect/v1_value_hook"
+
+
+def test_scripts_parse():
+    for s in ("pod_pilot.sh", "pod_full.sh", "launch.sh"):
+        assert subprocess.run(["bash", "-n", str(SH / s)]).returncode == 0, s
+
+
+def _launch(mode, **env):
+    r = subprocess.run(["bash", str(SH / "launch.sh"), mode], env={**os.environ, "V1_LAUNCH_DRY": "1", **env},
+                       capture_output=True, text=True)
+    assert r.returncode == 0, r.stdout + r.stderr
+    return r.stdout
+
+
+def test_launch_forwards_env():
+    out = _launch("full", SEED="2", REGIME="R2", DOSE="d0")
+    assert "env SEED=2 REGIME=R2 DOSE=d0" in out and "--name pa-v1-full-s2" in out
+    assert "--results-dir persona_affect/v1_value_hook/results/full_s2" in out and "--sync-extra" not in out
+    assert "--max-minutes 289 --max-cost 8.67" in out and "bash persona_affect/v1_value_hook/pod_full.sh" in out
+    out1 = _launch("full", SEED="1", REGIME="R1", DOSE="d1")
+    for v in ("VN_s1", "VJ_s1", "VS_s1"):
+        for f in ("adapter_model.safetensors", "adapter_config.json"):
+            assert f"--sync-extra persona_affect/v1_value_hook/data/adapters/{v}/{f}" in out1
+    assert "--exclude persona_affect/v1_value_hook/data/adapters" in out1 and "--max-cost 6.15" in out1
+    pilot = _launch("pilot")
+    assert "env REGIME=R1 D=d1 LADDER=1 OUT=persona_affect/v1_value_hook/results/pilot bash" in pilot
+    assert "--name pa-v1-pilot " in pilot and "--max-minutes 220 --max-cost 6.60" in pilot
+    r2 = _launch("pilot_r2", D="d1", BASE_DIR="results/pilot", ROWS="data/rows")
+    assert ("env REGIME=R2 ROWS=persona_affect/v1_value_hook/data/rows D=d1 LADDER=0 "
+            "BASE_DIR=persona_affect/v1_value_hook/data/pilot_base") in r2
+    assert "--name pa-v1-pilot-r2 " in r2 and "--max-cost 7.50" in r2 and "results/pilot_r2" in r2
+    for o in (out, out1, pilot, r2):
+        assert "RUNPOD" not in o and "--gpus NVIDIA A100-SXM4-80GB NVIDIA A100 80GB PCIe --cloud COMMUNITY" in o
+        assert "--container-gb 150" in o and "launch_wrap.py" in o
+        assert all(f"--ship {p}" in o for p in (SH / "ship.txt").read_text().split())
+
+
+def test_launch_refuses_under_pytest_without_dry():
+    r = subprocess.run(["bash", str(SH / "launch.sh"), "pilot"], env={**os.environ, "V1_LAUNCH_DRY": ""},
+                       capture_output=True, text=True)
+    assert r.returncode == 2 and "refusing" in r.stdout
+
+
+def test_ship_list():
+    ship = (SH / "ship.txt").read_text().split()
+    assert ship == ["persona_affect", "vigilante/pod", "vigilante/src", "vigilante/__init__.py", "infra",
+                    "persona/exemplar/tasks.py", "persona/exemplar/mini0.py", "persona/operative/battery/__init__.py",
+                    "persona/operative/battery/tasks_battery.py", "persona/operative/lora_c1e4/__init__.py",
+                    "persona/operative/lora_c1e4/common.py", "persona/operative/lora_c1e4/train.py",
+                    "persona/inference/__init__.py", "persona/inference/betley.py"]
+    assert all((REPO / p).exists() for p in ship) and "persona/exemplar" not in ship
+    pod = (SH / "pod_pilot.sh").read_text() + (SH / "pod_full.sh").read_text()
+    assert pod.count("set -uo pipefail") == 2 and pod.count('rc=${PIPESTATUS[0]}') == 2
+
+
+@pytest.mark.skipif(os.environ.get("V1_SLOW") != "1", reason="slow local dry run of the pilot pod: V1_SLOW=1")
+def test_pilot_dry_run(tiny_q35, tmp_path):
+    root = tmp_path / "repo"
+    root.mkdir()
+    paths = [f"./{p}" for p in (SH / "ship.txt").read_text().split()] + ["./pyproject.toml", "./uv.lock"]
+    excl = [f"--exclude={e}" for e in ("./.git", "./.venv", "./results", "./reference", "./prep", "./logs", "./.env",
+                                       "__pycache__")]
+    subprocess.run(["tar", "--no-xattrs", "--no-mac-metadata", "-C", str(REPO), *excl, "-cf",
+                    str(tmp_path / "ship.tar"), *paths], check=True)
+    subprocess.run(["tar", "-xf", str(tmp_path / "ship.tar"), "-C", str(root)], check=True)
+    assert not (root / "persona_affect/v1_value_hook/results").exists()          # the launcher's excludes held
+    env = {**os.environ, "SKIP_SETUP": "1", "PY": sys.executable, "VPY": sys.executable, "TRAIN_MODEL": str(tiny_q35),
+           "V1_FAKE_GEN": "1", "V1_TINY_RECIPES": "1", "LADDER": "0", "MERGED": str(tmp_path / "merged"),
+           "HF_HUB_OFFLINE": "1"}
+    r = subprocess.run(["bash", str(root / "persona_affect/v1_value_hook/pod_pilot.sh")], env=env, capture_output=True,
+                       text=True, timeout=5400)
+    out = root / "persona_affect/v1_value_hook/results/pilot"
+    assert r.returncode == 0, r.stdout[-3000:] + r.stderr[-3000:]
+    assert (out / "pilot.json").exists() and json.loads((out / "dose.json").read_text())["next"] == "d2"
+    assert all((out / f"ad/V{v}_s1/adapter_model.safetensors").exists() for v in "NJS")
+    assert all((out / f"ad_d1/{n}/adapter_model.safetensors").exists() for n in ("NW_s1", "NZ_s1"))
+    assert {p.name for p in out.glob("eval_*.jsonl")} == {f"eval_{c}.jsonl" for c in (
+        "base", "VN_s1", "VJ_s1", "VS_s1", "NW_d1_s1", "NZ_d1_s1")}
+    p = json.loads((out / "pilot.json").read_text())
+    assert p["G0"] and p["room"] and set(p["timings"]["adapters"]) == {"VN_s1", "VJ_s1", "VS_s1", "NW_s1", "NZ_s1"}
+    assert "d1" in p["rungs"] and len(p["timings"]["merges"]) == 5 and p["G1"] in ("pass", "fail")
+    assert not (tmp_path / "merged/VN").exists()
+
+
+_SHIM = '''#!{py}
+import os, sys
+args = sys.argv[1:]
+if args[0] == "-c":
+    os.execv(sys.executable, [sys.executable] + args)
+with open(os.environ["SHIM_LOG"], "a") as f:
+    f.write(" ".join(args) + "\\n")
+if args[:2] == ["-m", "persona_affect.v1_value_hook.evalrun"]:
+    sys.path.insert(0, os.getcwd())
+    from persona_affect.v1_value_hook import evalset as E
+    blocks = args[args.index("--blocks") + 1:args.index("--out")]
+    out, cell = args[args.index("--out") + 1], args[args.index("--cell") + 1]
+    with open(os.path.join(out, "eval_" + cell + ".jsonl"), "w") as f:
+        f.write("{{}}\\n" * len(E.items(blocks)))
+'''
+
+
+def _pod_full(tmp_path, seed, extra=None):
+    shim = tmp_path / "py"
+    shim.write_text(_SHIM.format(py=sys.executable))
+    shim.chmod(0o755)
+    env = {**os.environ, "SKIP_SETUP": "1", "PY": str(shim), "VPY": str(shim), "TRAIN_MODEL": "/base",
+           "SEED": str(seed), "DOSE": "d1", "OUT": str(tmp_path / "out"), "MERGED": str(tmp_path / "merged"),
+           "SHIM_LOG": str(tmp_path / "calls.log"), **(extra or {})}
+    (tmp_path / "calls.log").write_text("")
+    r = subprocess.run(["bash", str(SH / "pod_full.sh")], env=env, capture_output=True, text=True, timeout=600)
+    return r, [x for x in (tmp_path / "calls.log").read_text().splitlines() if x]
+
+
+def _label(call):
+    a = call.split()
+    if a[2] == "merge":
+        return ("merge", a[a.index("--arm") + 1])
+    if "--cell" in a:
+        return ("eval", a[a.index("--cell") + 1])
+    i = a.index("--arms") + 1
+    j = next(k for k in range(i, len(a)) if a[k].startswith("--"))
+    return ("train", " ".join(a[i:j]))
+
+
+def test_pod_full_sequence_and_resume(tmp_path):
+    r, calls = _pod_full(tmp_path, 2)
+    assert r.returncode == 0, r.stdout[-2000:] + r.stderr[-2000:]
+    lab = [_label(c) for c in calls]
+    assert lab[:6] == [("train", "N J S"), ("merge", "VN_s2"), ("eval", "VN_s2"), ("train", "W E Z"),
+                       ("merge", "NW_s2"), ("eval", "NW_s2")]
+    assert [x[1] for x in lab if x[0] == "eval"] == ["VN_s2", "NW_s2", "NE_s2", "NZ_s2", "VJ_s2", "JW_s2", "JE_s2",
+                                                     "JZ_s2", "VS_s2", "SW_s2", "SZ_s2"]
+    later = [c for c in calls if "--stage later" in c]
+    assert [_label(c)[1] for c in later] == ["W E Z", "W E Z", "W Z"]
+    assert all(f"--recipe d1 --seed 2 --base {tmp_path / 'merged'}/V" in c for c in later)
+    cells = [c for c in calls if "--cell" in c and not _label(c)[1].startswith("V")]
+    assert len(cells) == 8 and all("--blocks just deploy wmc vmc att say betley gen" in c for c in cells)
+    r2, calls2 = _pod_full(tmp_path, 2)                       # every cell complete: nothing merged or evaluated
+    assert r2.returncode == 0 and [_label(c) for c in calls2] == [("train", "N J S")]
+    (tmp_path / "s1").mkdir()
+    r3, _ = _pod_full(tmp_path / "s1", 1)
+    assert r3.returncode == 2 and "seed 1 needs the pilot's V" in r3.stdout
