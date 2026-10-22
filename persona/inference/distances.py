@@ -161,7 +161,10 @@ def run(a):
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     t0 = time.time()
-    llm = LLM(model=a.model, dtype="bfloat16", max_model_len=MAX_LEN, gpu_memory_utilization=0.88, seed=0,
+    # Gemma 4 31B leaves ~7.6 GiB for KV on an 80 GB card -> max_model_len ~9024; the k=16 dose record is ~4.5k tokens,
+    # so 8192 fits with margin. Qwen (smaller weights) keeps the full 16384.
+    mlen = 8192 if "gemma" in a.model.lower() else MAX_LEN
+    llm = LLM(model=a.model, dtype="bfloat16", max_model_len=mlen, gpu_memory_utilization=0.90, seed=0,
               enable_prefix_caching=True, limit_mm_per_prompt={"image": 0, "video": 0})
     tok = llm.get_tokenizer()
     fmt = "gemma" if "gemma" in a.model.lower() else "qwen"
