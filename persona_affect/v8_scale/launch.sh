@@ -22,8 +22,8 @@ export RUNPOD_ANY_CUDA=1
 : "${STAGE:?set STAGE (calib, main or rewrite)}" "${GROUP:?set GROUP (small or big)}" "${MAXMIN:?set MAXMIN (whole minutes)}"
 case "$STAGE" in calib|main|rewrite) ;; *) echo "STAGE must be calib, main or rewrite, got '$STAGE'" >&2; exit 2 ;; esac
 case "$GROUP" in
-  small) GPUS=("NVIDIA A40" "NVIDIA RTX A6000") RATE=90 GB=80 ;;                       # cents per hour, container GB
-  big)   GPUS=("NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe") RATE=180 GB=120 ;;
+  small) GPUS=("NVIDIA A40" "NVIDIA RTX A6000") RATE=90 GB=120 ;;                       # cents per hour, container GB
+  big)   GPUS=("NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe") RATE=180 GB=200 ;;   # 120 ran out on 10-22 (xet cache)
   *) echo "GROUP must be small or big, got '$GROUP'" >&2; exit 2 ;;
 esac
 case "$MAXMIN" in ''|*[!0-9]*) echo "MAXMIN must be a whole number of minutes, got '$MAXMIN'" >&2; exit 2 ;; esac
@@ -53,7 +53,7 @@ uv run python infra/launch_run.py --name "$NAME" --allow-concurrent --max-minute
   --gpus "${GPUS[@]}" --container-gb "$GB" --cloud "${CLOUD:-SECURE}" \
   --ship persona_affect --ship persona/exemplar/tasks.py --ship persona/exemplar/mini0.py \
   --ship persona/history/runner.py --ship vigilante/src --ship vigilante/__init__.py --ship vigilante/pod --ship infra \
-  --results-dir "$OUT" -- env STAGE="$STAGE" GROUP="$GROUP" bash persona_affect/v8_scale/pod.sh \
+  --results-dir "$OUT" -- env STAGE="$STAGE" GROUP="$GROUP" MODELS="${MODELS:-}" bash persona_affect/v8_scale/pod.sh \
   2>&1 | (trap '' INT; exec tee "$LOG")
 rc=$?   # pipefail: the launcher's code ($PIPESTATUS is reset by the trap handler on bash 3.2, $? is not)
 trap - INT TERM HUP

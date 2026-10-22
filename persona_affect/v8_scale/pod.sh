@@ -12,6 +12,6 @@ OUT=persona_affect/v8_scale/results/${STAGE}_${GROUP}
 mkdir -p "$OUT"
 export VLLM_USE_FLASHINFER_SAMPLER=0
 bash vigilante/pod/setup_vllm.sh > "$OUT/setup_vllm.log" 2>&1 || { tail -30 "$OUT/setup_vllm.log"; echo "[v8] vLLM setup FAILED"; exit 1; }
-/root/vllm/bin/python -m persona_affect.v8_scale.pod group --stage "$STAGE" --group "$GROUP" --out "$OUT" 2>&1 | tee -a "$OUT/run.log"; rc=${PIPESTATUS[0]}
+/root/vllm/bin/python -m persona_affect.v8_scale.pod group --stage "$STAGE" --group "$GROUP" --out "$OUT" ${MODELS:+--models $MODELS} 2>&1 | tee -a "$OUT/run.log"; rc=${PIPESTATUS[0]}
 echo "[v8] pod done (exit $rc)" | tee -a "$OUT/run.log"
 exit $rc

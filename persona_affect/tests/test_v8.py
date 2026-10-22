@@ -509,6 +509,27 @@ def test_group_goes_on_and_frees_disk(tmp_path, capsys):
     assert cache["ge2"].exists()                                              # skipped: never run, never freed
 
 
+def test_group_frees_xet_and_reruns_selected_models(tmp_path, monkeypatch):
+    """10-22 fix: the xet chunk cache beside hub/ is freed after each model, and `group --models` reruns a subset
+    (in group order) after a pod-side failure."""
+    hub = tmp_path / "hf" / "hub"
+    (tmp_path / "hf" / "xet" / "chunks").mkdir(parents=True)
+    ran = []
+
+    def runner(argv):
+        ran.append(argv[argv.index("--model") + 1])
+        return subprocess.CompletedProcess(argv, 0)
+    assert pod.run_group("calib", "big", tmp_path / "out", runner=runner, hub=hub, models=["q36", "g31"]) == 0
+    assert ran == ["q36", "g31"] and not (tmp_path / "hf" / "xet").exists()
+    seen = {}
+    monkeypatch.setattr(pod, "run_group", lambda stage, group, out, models=None: seen.update(models=models) or 0)
+    with pytest.raises(SystemExit) as e:
+        pod.main(["group", "--stage", "calib", "--group", "big", "--out", str(tmp_path / "o"), "--models", "q36", "g31"])
+    assert e.value.code == 0 and seen["models"] == [m for m in v8.GROUPS["big"] if m in ("q36", "g31")]
+    with pytest.raises(SystemExit):
+        pod.main(["group", "--stage", "calib", "--group", "big", "--out", str(tmp_path / "o"), "--models", "q9"])
+
+
 def test_engine_with_fake_vllm(tmp_path, fake_vllm):
     mm = {m: pod.run("calib", m, tmp_path / m, limit=20)["engine"]["mm_limits"] for m in ("ge2", "ge4", "q08")}
     assert mm == {"ge2": {"image": 0, "video": 0, "audio": 0}, "ge4": {"image": 0, "video": 0},
@@ -681,7 +702,7 @@ def test_clis(tmp_path, monkeypatch, fake_vllm):
     pod.main(["run", "--stage", "calib", "--model", "q08", "--out", str(tmp_path / "q08"), "--limit", "5"])
     assert len(_jsonl(tmp_path / "q08" / "decisions.jsonl")) == 5 and _info(tmp_path / "q08")["status"] == "done"
     got = []
-    monkeypatch.setattr(pod, "run_group", lambda stage, group, out: got.append((stage, group, out)) or 3)
+    monkeypatch.setattr(pod, "run_group", lambda stage, group, out, models=None: got.append((stage, group, out)) or 3)
     with pytest.raises(SystemExit) as e:
         pod.main(["group", "--stage", "main", "--group", "big", "--out", str(tmp_path / "g")])
     assert e.value.code == 3 and got == [("main", "big", tmp_path / "g")]

@@ -318,6 +318,9 @@ def run_group(stage: str, group: str, out, *, runner=subprocess.run, hub=None, m
         if hub is not None:
             org, name = MODELS[m]["hf"].split("/")
             shutil.rmtree(hub / f"models--{org}--{name}", ignore_errors=True)
+            # hf-xet keeps its own chunk cache beside hub/ ($HF_HOME/xet); left in place it filled the 120 GB disk
+            # after the first 27B model on 10-22 (calib_big: g31 and q36 "No space left on device")
+            shutil.rmtree(hub.parent / "xet", ignore_errors=True)
     print(f"[v8] group {group} {stage} done: {len(models) - len(failed)}/{len(models)} ok"
           + (f"; failed {' '.join(failed)}" if failed else ""), flush=True)
     return first
@@ -338,11 +341,18 @@ def main(argv: list[str] | None = None) -> None:
     g.add_argument("--stage", required=True, choices=v8.STAGES)
     g.add_argument("--group", required=True, choices=list(GROUPS))
     g.add_argument("--out", required=True, type=Path)
+    g.add_argument("--models", nargs="+", default=None, help="only these models of the group (a rerun), in group order")
     a = ap.parse_args(argv)
     if a.cmd == "run":
         run(a.stage, a.model, a.out, limit=a.limit)
     else:
-        sys.exit(run_group(a.stage, a.group, a.out))
+        models = None
+        if a.models:
+            unknown = [m for m in a.models if m not in GROUPS[a.group]]
+            if unknown:
+                ap.error(f"--models {' '.join(unknown)} not in group {a.group}: {' '.join(GROUPS[a.group])}")
+            models = [m for m in GROUPS[a.group] if m in a.models]
+        sys.exit(run_group(a.stage, a.group, a.out, models=models))
 
 
 if __name__ == "__main__":
