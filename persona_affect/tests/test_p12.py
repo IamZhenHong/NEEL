@@ -1437,6 +1437,7 @@ def test_failed_cut_refused_and_undecided_episodes_are_counted_per_cell_and_left
     assert (counts["records"], counts["failed"], counts["length"], counts["usable"], counts["expected"]) == (1008, 2, 1, 1005, 1008)
     text = (tmp_path / "res" / "summary.md").read_text()
     assert "batman" in text and "missing" in text.lower()                      # the summary lists the short cell
+    assert "## Coverage" in text and "1005 / 1008 (failed 2, cut 1, stale 0)" in text
 
 
 def test_missing_rows_are_counted_against_the_design(tmp_path):
@@ -1844,6 +1845,28 @@ def test_free_text_agreement_with_the_decisions(tmp_path):
     assert ag["cell_r"] == pytest.approx(1.0)                      # name cells 1.0 vs 0.5, cross_1 cells 0.0 vs 0.0: same ordering
     text = (res / "summary.md").read_text()
     assert "agreement" in text.lower() and "75.0%" in text
+
+
+def test_free_text_refusals_are_reported_per_condition_and_coverage_says_what_is_missing(tmp_path):
+    """Review focus 3 and 5 for the free-text channel: refusals per condition, and the rows that are missing."""
+    jobs = [j for j in _jobs("q27") if j["group"] == "free" and j["arm"] in ("name", "cross_1")
+            and not (j["char"] == "robin" and j["sample"] == 1)]                 # robin's second sample never ran
+    def reply(j):
+        if j["arm"] == "name" and j["sample"] == 0 and j["char"] in ("batman", "cap"):
+            return "I can't pretend to be a character.", "stop"
+        return f"I would go with option {_letter(j['perm'], 'generic')}.", "stop"
+    d = _write_dir(tmp_path / "q27", _records(jobs, reply))
+    res = tmp_path / "res"
+    analyze.run_judges({"q27": d}, out=res, post=_judge_post(), cache=tmp_path / "c.jsonl")
+    a = analyze.analyze({"q27": d}, out=res, n_boot=60)
+    by_cond = a["models"]["q27"]["free"]["by_cond"]
+    assert by_cond["name"]["counts"]["refusal"] == 12 and by_cond["cross_1"]["counts"]["refusal"] == 0
+    assert a["models"]["q27"]["free"]["cells"]["batman|name"]["counts"]["refusal"] == 6
+    assert a["models"]["q27"]["free"]["cells"]["robin|name"]["missing"] == 6
+    counts = a["models"]["q27"]["counts"]["free"]
+    assert (counts["records"], counts["usable"], counts["expected"], counts["missing"]) == (144 - 12, 144 - 12, 504, 504 - 132)
+    text = (res / "summary.md").read_text()
+    assert "Refusals by condition" in text and "12 / 66" in text and "## Coverage" in text and "132 / 504" in text
 
 
 def test_free_text_results_say_not_judged_when_there_are_no_judge_labels(tmp_path):

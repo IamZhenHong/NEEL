@@ -732,6 +732,13 @@ def _summary_md(a: dict) -> str:
     L += _table(["model", "name", "cross (cross_1 + cross_2)", "name − cross [95% CI]", "n name / cross", "characters at or above +5"], body)
     L += [""]
 
+    # ---- coverage
+    L += ["## Coverage", "", "Usable episodes / the design's number (failed = API error or cost stop, cut = finish length, stale = "
+          "the prompt is not the item bank's). The rows that are missing are not in any rate.", ""]
+    cov = lambda t: f"{t['usable']} / {t['expected']} (failed {t['failed']}, cut {t['length']}, stale {t['stale']})"
+    L += _table(["model", "decisions", "free text", "knowledge and identity"],
+                [[_title(k, m), *(cov(m["counts"][g]) for g in p12.GROUPS)] for k, m in models.items()]) + [""]
+
     # ---- gate
     g = a["gate"]
     L += ["## Gate checks", "", f"The `none` canonical rate must lie within {BAND[0]}-{BAND[1]}% for each character (ends included); "
@@ -808,6 +815,9 @@ def _summary_md(a: dict) -> str:
                      for k, m in models.items()])
         L += ["", "Canonical rate by condition, pooled over characters:", ""]
         L += _table(["model", *CONDS], [[_title(k, m), *(_rate(m["free"]["by_cond"][c]) for c in CONDS)] for k, m in models.items()])
+        L += ["", "Refusals by condition (refusal / usable free-text answers), because persona prompts can raise them:", ""]
+        L += _table(["model", *CONDS], [[_title(k, m), *(f"{t['counts']['refusal']} / {t['usable']}" for c in CONDS
+                                                         for t in [m["free"]["by_cond"][c]])] for k, m in models.items()])
         L += ["", "Contrasts, pooled over characters:", ""]
         L += _table(["contrast", *(_title(k, m) for k, m in models.items())], _contrast_rows(models, "free"))
         L += ["", "Agreement with the decisions (the same character, item, condition and sample in both channels; two generations, "
