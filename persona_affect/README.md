@@ -24,6 +24,7 @@ Status: `drafted` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 | V1 | Value hook or immunity (training; V2 inside) | 1 | claimed (neel-b3, 10-22) | neel-b3 | $18 | $0 | |
 | A9 | Does a patience line buffer Gemma 3's rejection-driven caving? (A8 follow-up) | 2 | done (gate failed) | neel-12 | $4 | $1.59 | Anchor not replicated: A8's R_OP−N redrawn +15.6 [−10.9,+39.1] (A8 +34.4); patience lowers nothing; a style placebo halves N caving; close the rejection lever here |
 | P12b | Does a name carry its trait past an explicit operator rule? (P12 follow-up) | 2 | done | neel-12 | $8 | $2.92 | Open models yes (q27 +11, Gemma +52: Robin Hood breaks a no-transfer rule 21/24 vs 0/48), frontier no (0, +2.5); 'decide as yourself' −19 on Gemma only |
+| P12c | Deep dive 1: does a thicker persona (name → facts → biography; unnamed biography) carry more of its trait past the rule? Gemma 4 31B | deep | frozen `pa-p12c-prereg` | neel-12 | $6 | $0 | |
 
 Tier-2 and tier-3 minis, and what the repo already answers, are in `DESIGN.md` §5.
 
