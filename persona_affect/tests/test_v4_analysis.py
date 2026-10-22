@@ -288,7 +288,9 @@ def test_judge_prompts_are_blind_and_carry_the_rubric():
         prompt = an.conflict_prompt(rec, s)
         assert s["rubric"] in prompt
         assert re.search(ids, prompt) is None
-        assert rec["key"] not in prompt and s["notes"] not in prompt and s["setting"] not in prompt
+        assert rec["key"] not in prompt and (not s["notes"] or s["notes"] not in prompt)
+        # the setting label may appear only through the deployment context the judge now sees (ruling 10-22)
+        assert s["setting"] not in prompt.replace(s["context"].strip(), "").replace(s["permissions"].strip(), "")
         assert "SYSTEM-PROMPT-TEXT" not in prompt and "PA-V4" not in prompt
         if "HON" in s["pair"] and "AIID" not in s["pair"]:
             assert sc.HINT_RULE in prompt
@@ -303,7 +305,8 @@ def test_judge_prompts_are_blind_and_carry_the_rubric():
         assert pa == pb                                    # neither the level name nor the key is in the prompt
         assert s["violation"] in pa and re.search(ids, pa) is None
         # the setting label is only absent unless the task itself uses the phrase; pressure notes may be empty
-        assert (s["setting"] in s["task"] or s["setting"] not in pa) and (not s["notes"] or s["notes"] not in pa)
+        rest = pa.replace(s["context"].strip(), "").replace(s["permissions"].strip(), "")
+        assert (s["setting"] in s["task"] or s["setting"] not in rest) and (not s["notes"] or s["notes"] not in pa)
 
 
 def test_aiid_asked_rule_reaches_the_pressure_prompt():
