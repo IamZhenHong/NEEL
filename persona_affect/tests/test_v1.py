@@ -596,3 +596,169 @@ def test_stacked_merge_tiny(tiny_q35, tmp_path):
     again = _cli("--stage", "value", "--arms", "N", "--rows", rows, "--recipe", "R1", "--seed", 1, "--base", tiny_q35,
                  "--out", ad)
     assert "exists, skipped" in again.stdout
+
+
+# ---------- Task 6: analysis and the gate rules ----------
+
+from persona_affect.v1_value_hook import analyze as A  # noqa: E402
+
+_NTASK = {"just": 16, "deploy": 8, "wmc": 8, "vmc": 32}
+
+
+def _syn(spec, seeds=(1, 2), n=20, unparsed=None):
+    """Table rows with exact per-task rates: spec {arm: {(block, cond): pct or (pct, pct_y2)}}; unparsed
+    {arm: pct of just rows with y None}."""
+    out = []
+    for arm, cells in spec.items():
+        for (block, cond), p in cells.items():
+            p, p2 = p if isinstance(p, tuple) else (p, None)
+            k, k2 = round(p * n / 100), None if p2 is None else round(p2 * n / 100)
+            for s in seeds:
+                for t in range(_NTASK[block]):
+                    for i in range(n):
+                        out.append({"arm": arm, "seed": s, "block": block, "cond": cond, "task": f"{block}{t}",
+                                    "y": int(i < k), "y2": None if k2 is None else int(i < k2)})
+    for arm, pct in (unparsed or {}).items():
+        js = [r for r in out if r["arm"] == arm and r["block"] == "just"]
+        for r in js[:round(len(js) * pct / 100)]:
+            r["y"] = None
+    return out
+
+
+def _cells(just_none, just_ch=None, deploy=50):
+    return {("just", "none"): just_none, ("just", "ch"): just_none if just_ch is None else just_ch,
+            ("deploy", "none"): deploy}
+
+
+def test_hook_planted():                 # JW 70, JZ 40, NW 50, NZ 40 on every just task, both seeds; deploy flat
+    rows = _syn({"JW": _cells(70), "JZ": _cells(40), "NW": _cells(50), "NZ": _cells(40)})
+    v = A.verdicts(rows)
+    assert v["hook"]["verdict"] == "hook" and v["hook"]["est"] == pytest.approx(20, abs=1)
+    rows_same_on_deploy = _syn({"JW": _cells(70, deploy=70), "JZ": _cells(40, deploy=40), "NW": _cells(50, deploy=50),
+                                "NZ": _cells(40, deploy=40)})
+    assert A.verdicts(rows_same_on_deploy)["hook"]["verdict"] == "hook, not value-specific"
+    assert A.verdicts(_syn({"JW": _cells(50), "JZ": _cells(40), "NW": _cells(50), "NZ": _cells(40)}))["hook"][
+        "verdict"] == "no hook"
+
+
+def test_table_and_light_import():
+    r = A.table([{"cell": "NW_d1_s1", "block": "wmc", "cond": "none", "tid": "t", "role": "unilateral"}])[0]
+    assert (r["arm"], r["seed"], r["y"]) == ("NW_d1", 1, 1)
+    code = ("import sys, persona_affect.v1_value_hook.analyze; assert not any(m.startswith(('vigilante', "
+            "'persona_affect.common.judges')) for m in sys.modules)")
+    assert subprocess.run([sys.executable, "-c", code], cwd=REPO).returncode == 0
+    t = A.table([{"cell": "VS_s2", "block": "vmc", "cond": "none", "tid": "x", "role": "fair", "notify": True},
+                 {"cell": "base", "block": "just", "cond": "ch", "tid": "y", "role": None},
+                 {"cell": "VN_s1", "block": "att", "cond": "none", "tid": "a", "number": 7},
+                 {"cell": "VN_s1", "block": "harvest", "cond": "J", "tid": "h", "role": "fair"}])
+    assert [(x["arm"], x["seed"], x["y"], x["y2"]) for x in t] == [("VS", 2, 1, 1), ("base", None, None, None),
+                                                                  ("VN", 1, 7, None)]
+
+
+def test_main_effect_is_not_immunity():  # SZ 20, SW 50, NZ 50, NW 80: SW - NW = -30 but delta_S = 0
+    rows = _syn({"SZ": _cells(20), "SW": _cells(50), "NZ": _cells(50), "NW": _cells(80)})
+    v = A.verdicts(rows)
+    assert v["source"]["SW-NW"]["met"] and v["immunity"]["verdict"] == "no immunity"
+    blocked = _syn({"SZ": _cells(50), "SW": _cells(20), "NZ": _cells(30), "NW": _cells(70)})
+    assert A.verdicts(blocked)["immunity"]["verdict"] == "immunity"
+    flat = _syn({"SZ": _cells(50), "SW": _cells(20), "NZ": _cells(50), "NW": _cells(55)})
+    assert A.verdicts(flat)["immunity"]["verdict"] == "nothing to block"
+
+
+def test_ceiling_and_unparsed_guard():   # NW just-none 90% and ch 60%; 6% None in JW just
+    rows = _syn({"JW": _cells(95, 70), "JZ": _cells(80, 50), "NW": _cells(90, 60), "NZ": _cells(80, 50)},
+                unparsed={"JW": 6})
+    v = A.verdicts(rows)
+    assert v["hook"]["cell"] == "ch" and "JW" in v["blocked"] and v["hook"]["verdict"].startswith("blocked")
+    both = _syn({"JW": _cells(95, 95), "JZ": _cells(80), "NW": _cells(90, 90), "NZ": _cells(80)})
+    assert A.verdicts(both)["hook"]["verdict"] == "untestable"
+
+
+def test_next_dose_and_pilot():
+    def rung(wmc_nw, just_nw, d="d1"):
+        return _syn({f"NW_{d}": {("wmc", "none"): wmc_nw, ("just", "none"): just_nw},
+                     f"NZ_{d}": {("wmc", "none"): 40, ("just", "none"): 40}}, seeds=(1,))
+    take_70, take_90, no_take = rung(80, 70), rung(80, 90), rung(45, 50)
+    assert [A.next_dose(r) for r in (take_70, take_90, no_take)] == ["done:d1", "d0", "d2"]
+    assert A.next_dose(take_90 + rung(70, 60, "d0")) == "done:d0"
+    assert A.next_dose(take_90 + rung(45, 60, "d0")) == "done:d1"
+    assert A.next_dose(no_take + rung(75, 60, "d2")) == "done:d2"
+    assert A.next_dose(no_take + rung(42, 60, "d2")) == "stop"
+
+    def pilot(vmc_base):
+        base = _syn({"base": {("just", "none"): 40, ("vmc", "none"): vmc_base, ("wmc", "none"): 40}}, seeds=(None,))
+        return base + _syn({"VN": {("vmc", "none"): (50, 0)}, "VJ": {("vmc", "none"): (80, 0)},
+                            "VS": {("vmc", "none"): (80, 60)}}, seeds=(1,))
+    ok, fair_80 = pilot(50), pilot(80)
+    assert A.pilot_verdicts(ok, "R1")["G1"] == "pass" and A.pilot_verdicts(fair_80, "R1")["room"] is False
+    p = A.pilot_verdicts(ok, "R1")
+    assert p["G0"] is True and p["room"] is True and p["G1_detail"]["J"]["est"] == pytest.approx(30)
+
+
+def test_boot_resamples_tasks_and_skips_undefined():
+    rows = _syn({"X": {("vmc", "none"): 60}, "Y": {("vmc", "none"): 40}}, seeds=(1,))
+    b = A.boot(rows, A.did("X", "Y", block="vmc"), n_boot=500)
+    assert b["est"] == pytest.approx(20) and b["lo"] == pytest.approx(20) and b["skipped"] == 0
+    noisy = [dict(r, y=int(r["task"] in ("vmc0", "vmc1")) if r["arm"] == "X" else r["y"]) for r in rows]
+    nb = A.boot(noisy, A.did("X", "Y", block="vmc"), n_boot=500)
+    assert nb["lo"] < nb["est"] < nb["hi"]
+    assert A.boot(rows, A.did("X", "Z", block="vmc"), n_boot=50) == {"est": None, "lo": None, "hi": None,
+                                                                      "skipped": 50}
+
+
+def test_cli_pilot_and_dose_from_files(tmp_path):
+    recs = []
+    for cell, role in (("NW_d1_s1", "unilateral"), ("NZ_d1_s1", "note")):
+        for t in range(8):
+            for i in range(10):
+                recs.append({"cell": cell, "block": "wmc", "cond": "none", "tid": f"w{t}", "role": role})
+                recs.append({"cell": cell, "block": "just", "cond": "none", "tid": f"j{t}", "role": "note"})
+    (tmp_path / "eval_NW_d1_s1.jsonl").write_text("".join(json.dumps(r) + "\n" for r in recs))
+    (tmp_path / "ad_d1").mkdir()
+    (tmp_path / "ad_d1/manifest.json").write_text(json.dumps({"adapters": {"NW_s1": {"secs": 50, "steps": 25}}}))
+    (tmp_path / "merge_check_NW_d1.json").write_text(json.dumps({"arm": "NW_s1", "merge_s": 190, "verdict": "ok"}))
+    (tmp_path / "run_info_NW_d1_s1.json").write_text(json.dumps({"gpu": "A100", "load_s": 180, "n": 1000, "gen_s": 70}))
+    A.main(["dose", "--out", str(tmp_path)])
+    assert json.loads((tmp_path / "dose.json").read_text())["next"] == "done:d1"
+    A.main(["pilot", "--out", str(tmp_path), "--regime", "R1"])
+    p = json.loads((tmp_path / "pilot.json").read_text())
+    assert p["timings"]["adapters"]["NW_s1"]["s_per_step"] == 2 and p["timings"]["evals"]["NW_d1_s1"]["items_per_s"]
+    assert p["G0"] is None and "d1" in p["rungs"]
+
+
+def test_betley_flags_item_major():
+    recs = [{"key": "a"}, {"key": "b"}]
+    la = {"a": {"j1": "20", "j2": "80"}, "b": {"j1": None, "j2": "10"}}
+    lc = {"a": {"j1": "90", "j2": "90"}, "b": {"j1": "90", "j2": "40"}}
+    assert A.betley_flags(recs, la, lc, ("j1", "j2")) == {"a": {"j1": "yes", "j2": "no"}, "b": {"j1": None, "j2": "no"}}
+
+
+def test_cli_full_and_betley_with_fake_judges(tmp_path, monkeypatch):
+    from persona_affect.common import judges as J
+    d = tmp_path / "full_s1"
+    d.mkdir()
+    recs = [{"key": f"PA-V1|betley|none|{q}|{i}|{c}", "cell": c, "block": "betley", "cond": "none", "tid": q,
+             "text": "an answer"} for c in ("NW_s1", "NZ_s1") for q in ("wish", "bored") for i in range(2)]
+    recs += [{"cell": c, "block": "just", "cond": "none", "tid": f"t{t}", "role": role}
+             for c, role in (("NW_s1", "unilateral"), ("NZ_s1", "note")) for t in range(4)]
+    (d / "eval_x.jsonl").write_text("".join(json.dumps(r) + "\n" for r in recs))
+    A.main(["full", "--dirs", str(d), "--to", str(tmp_path)])
+    assert "Hook:" in (tmp_path / "summary.md").read_text()
+    assert json.loads((tmp_path / "analysis.json").read_text())["secondary"]["NW"]["just:none"] == 100
+    calls = []
+
+    class Labels(dict):
+        none, spent = {}, 0.0
+
+    def fake_label(items, render, allowed, *, mini, cap, cache, **kw):
+        prompts = [render(it) for it in items]
+        calls.append((prompts[0], mini, cap))
+        first = len(calls) == 1                                      # ALIGN first, then COH
+        return Labels({it["key"]: {j: ("10" if first and it["cell"] == "NW_s1" else "90") for j in J.JUDGES}
+                       for it in items})
+    monkeypatch.setattr(J, "label", fake_label)
+    monkeypatch.setattr(U, "LEDGER", tmp_path / "ledger.jsonl")
+    A.main(["betley", "--dirs", str(d), "--to", str(tmp_path), "--cap", "0.4"])
+    res = json.loads((tmp_path / "betley.json").read_text())
+    assert [c[1:] for c in calls] == [("V1", 0.2)] * 2 and "[QUESTION START]" in calls[0][0]
+    assert res["rates"]["NW"][J.JUDGES[0]] == 100 and res["rates"]["NZ"][J.JUDGES[1]] == 0 and res["validated"]
