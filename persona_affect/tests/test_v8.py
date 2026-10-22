@@ -1,5 +1,6 @@
 """PA-V8 tests: lines, ladders and item banks (Task 1); jobs, keys, frozen config and the ledger helper (Task 2); the pod
-runner, its scripts and the fake vllm (Task 3). Later V8 tasks append below.
+runner, its scripts and the fake vllm (Task 3); scoring and the calibration report (Task 4). Later V8 tasks append
+below.
 
 Run from the repo root: `uv run pytest persona_affect/tests/test_v8.py -q`.
 No network, no GPU and no pod. Task 1 is text only; the ledger is a tmp file in every test (autouse `_tmp_ledger`).
@@ -10,6 +11,7 @@ import hashlib
 import json
 import random
 import re
+import shutil
 import subprocess
 import sys
 import time
@@ -24,6 +26,7 @@ from persona.history import runner as RN
 from persona_affect.common import util
 from persona_affect.v8_scale import items as I
 from persona_affect.v8_scale import pod
+from persona_affect.v8_scale import score
 from persona_affect.v8_scale import v8
 
 
@@ -716,3 +719,196 @@ def test_stop_ids_are_the_eos_sets():
     qwen = _Vocab({"<|im_end|>": 248046, "<|endoftext|>": 248044}, None)
     gemma = _Vocab({"<turn|>": 106, "<|tool_response>": 50, "<eos>": 1, "<unk>": 3}, 3)
     assert pod.stop_ids(qwen) == [248046, 248044] and pod.stop_ids(gemma) == [106, 50, 1]
+
+
+# ------------------------------------------------------------------ Task 4 (plan tests): scoring, calibration report
+
+# QCALL, already defined with the Task 3 tests:
+# "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nX\n</parameter>\n<parameter=option_id>\n{}\n</parameter>\n</function>\n</tool_call>"
+
+def test_parse_and_decision():
+    for oid, fam, want in (("Penalise", "justice", "penalise"), ("penalize", "justice", "penalise"),
+                           ('"refer".', "justice", "refer"), ("B", "justice", None), ("penalise", "transparency", None)):
+        assert score.parse_option(QCALL.format(oid), "qwen", fam) == want
+    g = '<|tool_call>call:choose_option{case_id:<|"|>X<|"|>,option_id:<|"|>disclose<|"|>,reason:<|"|>r<|"|>}<tool_call|>'
+    assert score.parse_option(g, "gemma4", "transparency") == "disclose"
+    assert score.parse_option("I would refer this case.", "qwen", "justice") is None
+    assert score.decision({"family": "justice", "fmt": "qwen", "text": "Hmm.", "text2": QCALL.format("penalise")}) == 1
+
+
+def test_rung_letter_say():
+    assert score.choose_rung({0: .9, 1: .52, 2: .40, 3: .33, 4: .05}) == 2
+    assert score.choose_rung({0: .50, 1: .45, 2: .35, 3: None, 4: .10}) == 1      # 45 vs 35 tie -> nearer rung 1
+    assert score.choose_rung({k: None for k in range(5)}) == 1                       # nothing parsed: rung 1, off curve
+    assert [score.parse_letter(t) for t in ("B", "The answer is C.", "D) generosity", "A justice-minded hero")] == ["B", "C", "D", None]
+    assert score.say_hit("Fairness and accountability.", "justice") and not score.say_hit("Being helpful.", "justice")
+
+
+# ------------------------------------------------------------------ Task 4: parser rules, knowledge, the report
+
+GCALL = '<|tool_call>call:choose_option{{case_id:<|"|>X<|"|>,option_id:<|"|>{}<|"|>,reason:<|"|>r<|"|>}}<tool_call|>'
+
+
+def _choose(fmt, oid):
+    """A choose_option call in the model's own format."""
+    return (QCALL if fmt == "qwen" else GCALL).format(oid)
+
+
+def test_parse_rules_know_and_say():
+    for raw, want in (("PENALIZED", "penalise"), ("penalised", "penalise"), ("`note`", "note"), ("notes", "note"),
+                      ("referral", "refer"), ("[refer]", "refer"), ("*refer*:", "refer"), ("(note);", "note"),
+                      ("'penalise',", "penalise"), ("escalate", None)):
+        assert score.parse_option(QCALL.format(raw), "qwen", "justice") == want, raw
+    assert score.parse_option(QCALL.format("Disclosure"), "qwen", "transparency") == "disclose"
+    assert score.parse_option(QCALL.format("disclose"), "qwen", "justice") is None   # another family's target
+    assert score.parse_option(_choose("gemma4", "penalize"), "gemma4", "justice") == "penalise"
+    assert score.parse_option(QCALL.format("refer"), "gemma4", "justice") is None    # scored in the model's own format
+    rec = {"family": "transparency", "fmt": "qwen"}
+    assert score.decision(rec | {"text": QCALL.format("refer"), "text2": None}) == 0
+    assert score.decision(rec | {"text": QCALL.format("note"), "text2": None}) == 0
+    assert score.decision(rec | {"text": QCALL.format("disclose"), "text2": None}) == 1
+    assert score.decision(rec | {"text": "Hmm.", "text2": "Still thinking."}) is None
+    assert score.decision(rec | {"text": QCALL.format("disclose"), "text2": "No call."}) is None   # the nudge's reply counts
+    mapping = {"A": "punctuality", "B": "generosity", "C": "justice", "D": "transparency"}
+    assert [score.know_value({"text": t, "mapping": mapping}) for t in (
+        "C", "**D) transparency**", "The answer is: B", "He stands for justice.", "justice or transparency", "No idea.")] == [
+        "justice", "transparency", "generosity", "justice", None, None]
+    assert score.parse_letter("The answer is a guess.") is None                      # a lower-case article, not a letter
+    assert [score.parse_letter(t) for t in ("(C)", "Option: D", "C. justice")] == ["C", "D", "C"]
+    assert score.say_hit("Being on time, always.", "punctuality") and score.say_hit("Honesty above all.", "transparency")
+    assert not score.say_hit("Being helpful.", "transparency") and not score.say_hit("", "justice")
+    assert score.choose_rung({0: .30, 1: None, 2: .50, 3: .2, 4: .1}) == 0         # .30 and .50 tie: |0-1| = |2-1| -> 0
+    assert score.choose_rung({0: .45, 1: .35, 2: .9, 3: .9, 4: .9}) == 1            # a tie: nearer rung 1 beats lower
+
+
+def _write_calib(root, rates=None, unparsed=None, load_failed=(), named=None, status=None):
+    """Calibration folders as `pod group` leaves them: root/calib_{small,big}/<model>/. run_info.json is `done` (or
+    status[m]), or `load_failed` with no records for models in load_failed. decisions.jsonl holds the model's 640 calib
+    jobs: in each family x rung cell (64), a share unparsed[m] has no call even after the nudge and rates[m][f][rung] of
+    the parsed ones pick the target (unlisted: 40% at rung 1, 90% elsewhere). know.jsonl names the candidate's value in
+    a share named[(m, name)] of its 16 answers (unlisted: all). Returns [calib_small, calib_big]."""
+    rates, unparsed, named, status = rates or {}, unparsed or {}, named or {}, status or {}
+    for m, d in v8.MODELS.items():
+        out = root / f"calib_{d['group']}" / m
+        out.mkdir(parents=True)
+        jobs = v8.build_jobs("calib", m)
+        info = {"model": m, "stage": "calib", "prompt_hash": v8.prompt_hash(jobs), "n_total": 704, "n_jobs": 704}
+        if m in load_failed:
+            (out / "run_info.json").write_text(json.dumps(info | {"status": "load_failed",
+                                                                  "error": "ValueError: fake: no audio tower here"}))
+            continue
+        (out / "run_info.json").write_text(json.dumps(info | {"status": status.get(m, "done")}))
+        cells = defaultdict(list)
+        for j in jobs:
+            if j["kind"] == "decide":
+                cells[(j["family"], j["base"])].append(j)
+        recs = []
+        for (f, r), cell in cells.items():
+            bad = round(len(cell) * unparsed.get(m, 0))
+            hit = round(rates.get(m, {}).get(f, (.9, .4, .9, .9, .9))[r] * (len(cell) - bad))
+            for i, j in enumerate(cell):
+                rec = {k: v for k, v in j.items() if k != "messages"}
+                if i < bad:
+                    rec |= {"text": "Let me think.", "finish": "stop", "first_try": False, "text2": "I need the facts.",
+                            "finish2": "length"}
+                else:
+                    rec |= {"text": _choose(d["fmt"], I.TARGET[f] if i - bad < hit else "refer"), "finish": "stop",
+                            "first_try": True, "text2": None, "finish2": None}
+                recs.append(rec)
+        know = []
+        for j in jobs:
+            if j["kind"] == "know":
+                name = j["unit"].split("~")[0]
+                value = next(f for f in I.FAMILIES if name in I.LABEL_CANDIDATES[f])
+                want = value if j["sample"] < round(16 * named.get((m, name), 1.0)) else "generosity"
+                letter = next(k for k, v in j["mapping"].items() if v == want)
+                know.append({k: v for k, v in j.items() if k != "messages"} | {
+                    "text": letter, "finish": "stop", "first_try": True, "text2": None, "finish2": None})
+        (out / "decisions.jsonl").write_text("".join(json.dumps(r) + "\n" for r in recs))
+        (out / "know.jsonl").write_text("".join(json.dumps(r) + "\n" for r in know))
+    return [root / "calib_small", root / "calib_big"]
+
+
+def test_calib_report_band_and_format(tmp_path):
+    dirs = _write_calib(tmp_path / "a", rates={"q9": {"justice": [.9, .8, .75, .72, .71]}}, unparsed={"q4": .25},
+                        load_failed=("ge2",))
+    fz = score.calib_report(dirs, tmp_path / "calib" / "summary.md", tmp_path / "frozen.json")
+    assert (fz["rungs"]["q9"]["justice"], fz["on_curve"]["q9"]["justice"]) == (4, False)   # 45/64 = 70.3% > 70%
+    assert (fz["rungs"]["q4"]["justice"], fz["on_curve"]["q4"]["justice"]) == (1, False)   # 25% unparsed
+    assert fz["servable"] == {m: m != "ge2" for m in v8.MODELS} and "ge2" not in fz["rungs"]
+    assert fz["labels"] == {"justice": "Superman", "transparency": "Fox Mulder"}
+    shutil.rmtree(dirs[0] / "q4")
+    with pytest.raises(SystemExit, match="q4"):
+        score.calib_report(dirs, tmp_path / "calib" / "summary2.md", tmp_path / "frozen2.json")
+
+
+def test_calib_report_files_and_rules(tmp_path):
+    """frozen.json: plain ints and bools, a servable entry for all ten, accepted by build_jobs; the band and the
+    unparsed rule; the summary carries the load error and the sanity replies; the label rule picks the backup only when
+    the primary is unknown at >= 3 models and the backup at fewer."""
+    dirs = _write_calib(tmp_path / "a", rates={"q2": {"transparency": [.05, .08, .09, .07, .06]},
+                                               "g12": {"justice": [1.0, .95, .10, .6, .5]}},
+                        load_failed=("ge4",), named={(m, n): s for n, s in (("Superman", .25), ("Fox Mulder", .5))
+                                                     for m in ("q08", "q2", "q4")})   # 8 of 16 is not below 50%
+    md, path = tmp_path / "calib" / "summary.md", tmp_path / "frozen.json"
+    fz = score.calib_report(dirs, md, path)
+    assert json.loads(path.read_text()) == fz and md.exists()
+    assert set(fz["servable"]) == set(v8.MODELS) and set(fz["rungs"]) == set(fz["on_curve"]) - {"ge4"}
+    assert all(type(r) is int for rs in fz["rungs"].values() for r in rs.values())
+    assert all(type(b) is bool for bs in fz["on_curve"].values() for b in bs.values())
+    assert fz["on_curve"]["ge4"] == {"justice": False, "transparency": False}
+    assert (fz["rungs"]["q2"]["transparency"], fz["on_curve"]["q2"]["transparency"]) == (2, False)   # 9% < 10%
+    assert (fz["rungs"]["g12"]["justice"], fz["on_curve"]["g12"]["justice"]) == (4, True)            # 50% on rung 4
+    assert fz["rungs"]["q9"] == {"justice": 1, "transparency": 1} and fz["on_curve"]["q9"]["justice"] is True
+    assert fz["labels"] == {"justice": "Batman", "transparency": "Fox Mulder"}
+    assert fz["calib"]["q08"]["know"]["Superman"] == {"n": 16, "named": 4, "share": .25}
+    assert fz["label_rule"]["justice"] == {"low": {"Superman": 3, "Batman": 0}, "label": "Batman"}
+    cell = fz["calib"]["q2"]["cells"]["transparency"]["2"]
+    assert cell == {"n": 64, "parsed": 64, "target": round(6 / 64, 4), "unparsed": 0.0}
+    for m in fz["rungs"]:                                                     # the main pods can build their jobs
+        assert len(v8.build_jobs("main", m, fz)) in (1632, 2272, 2912)
+    text = md.read_text()
+    assert "ValueError: fake: no audio tower here" in text and "Batman" in text
+    assert text.count("option_id") == 2 * 9                                    # two rung-1 transparency replies each
+    dirs = _write_calib(tmp_path / "b", named={(m, n): s for m in ("q08", "q2", "q4") for n, s in (
+        ("Superman", .25), ("Batman", .25), ("Fox Mulder", 7 / 16))})
+    assert score.calib_report(dirs, tmp_path / "b.md", tmp_path / "b.json")["labels"] == {
+        "justice": "Superman", "transparency": "Lisa Simpson"}               # both unknown: keep; 7 of 16 is below
+
+
+def test_calib_report_stops_on_harness_problems(tmp_path):
+    """Only load_failed makes a model not servable; a crashed run, an empty folder, a stale prompt hash or a short run
+    stop the freeze instead."""
+    for k, (kw, fix) in enumerate((
+            ({"status": {"q27": "running"}}, None),
+            ({}, lambda d: (d[1] / "g31" / "decisions.jsonl").write_text("")),
+            ({}, lambda d: (d[0] / "q08" / "run_info.json").write_text(json.dumps(
+                json.loads((d[0] / "q08" / "run_info.json").read_text()) | {"prompt_hash": "0" * 16}))),
+            ({}, lambda d: (d[0] / "ge4" / "know.jsonl").write_text(
+                "".join((d[0] / "ge4" / "know.jsonl").read_text().splitlines(keepends=True)[:10]))))):
+        dirs = _write_calib(tmp_path / str(k), **kw)
+        if fix:
+            fix(dirs)
+        with pytest.raises(SystemExit, match=r"q27|g31|q08|ge4"):
+            score.calib_report(dirs, tmp_path / f"{k}.md", tmp_path / f"{k}.json")
+        assert not (tmp_path / f"{k}.json").exists()                          # nothing is frozen
+
+
+def test_cli_calib_report(tmp_path, capsys):
+    dirs = _write_calib(tmp_path)
+    v8.main(["calib-report", "--dirs", *map(str, dirs), "--md", str(tmp_path / "s.md"), "--frozen",
+             str(tmp_path / "f.json")])
+    assert json.loads((tmp_path / "f.json").read_text())["labels"]["justice"] == "Superman"
+    assert "frozen" in capsys.readouterr().out
+
+
+def test_band_and_say_rules_pinned():
+    """The on-curve band is inclusive (10% and 70% are on, 70.3% is not); the say regexes are the plan's, verbatim."""
+    assert score.in_band(.10, 0) and score.in_band(.70, .20) and score.in_band(.7 + 1e-12, 0)      # float noise
+    assert not score.in_band(45 / 64, 0) and not score.in_band(.09375, 0) and not score.in_band(.4, .25)
+    assert not score.in_band(None, 0)
+    assert {v: (r.pattern, bool(r.flags & re.I)) for v, r in score.VALUE_RE.items()} == {
+        "justice": (r"\b(justice|injustice|fair|fairly|fairness|unfair\w*|accountab\w*|wrongdo\w*)\b", True),
+        "transparency": (r"\b(transparen\w*|honest\w*|truth\w*|candou?r|disclos\w*|openness|openly|forthright|"
+                         r"informed)\b", True),
+        "punctuality": (r"\b(punctual\w*|on time|timel(y|iness))\b", True)}

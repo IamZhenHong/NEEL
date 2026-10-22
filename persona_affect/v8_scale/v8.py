@@ -35,6 +35,7 @@ order (common random numbers) and the tidiness rewrite reuses the main run's dra
   uv run python -m persona_affect.v8_scale.v8 ledger --log persona_affect/v8_scale/results/calib_small.launch.log \
       --name v8-calib-small --maxcost 0.90
   uv run python -m persona_affect.v8_scale.v8 render-check --models q08 q4 q36 ge2 g12 g31   (pod.render_check, Task 3)
+  uv run python -m persona_affect.v8_scale.v8 calib-report                                  (score.calib_report, Task 4)
 """
 from __future__ import annotations
 
@@ -216,6 +217,19 @@ def _cmd_render_check(a: argparse.Namespace) -> None:
     pod.render_check(a.models)
 
 
+RESULTS = Path(__file__).with_name("results")   # local only: no pod code reads it
+
+
+def _cmd_calib_report(a: argparse.Namespace) -> None:
+    from persona_affect.v8_scale import score
+    dirs = a.dirs or [RESULTS / "calib_small", RESULTS / "calib_big"]
+    md, path = a.md or RESULTS / "calib" / "summary.md", a.frozen or FROZEN
+    fz = score.calib_report(dirs, md, path)
+    off = [f"{m} {f}" for m, fs in fz["on_curve"].items() for f, on in fs.items() if not on]
+    print(f"[v8] calibration frozen into {path} (summary {md}): labels {fz['labels']}; not servable "
+          f"{[m for m, ok in fz['servable'].items() if not ok] or 'none'}; off the curve {off or 'none'}")
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(prog="python -m persona_affect.v8_scale.v8",
                                  description="PA-V8: value lines, labels and how-to-act lines across sizes")
@@ -235,7 +249,13 @@ def main(argv: list[str] | None = None) -> None:
     rc.add_argument("--models", nargs="+", choices=list(MODELS), default=list(MODELS), metavar="MODEL",
                     help=f"short names (default: all ten): {' '.join(MODELS)}")
     rc.set_defaults(fn=_cmd_render_check)
-    # Tasks 4-5 register calib-report and analyze the same way (set_defaults(fn=...))
+    cr = sub.add_parser("calib-report", help="choose each model's rungs, servability and the labels from the "
+                                             "calibration runs; write the summary and frozen.json")
+    cr.add_argument("--dirs", nargs="+", type=Path, help="calibration group folders (results/calib_small, calib_big)")
+    cr.add_argument("--md", type=Path, help="the summary (results/calib/summary.md)")
+    cr.add_argument("--frozen", type=Path, help="the frozen config to write (v8_scale/frozen.json)")
+    cr.set_defaults(fn=_cmd_calib_report)
+    # Task 5 registers analyze the same way (set_defaults(fn=...))
     a = ap.parse_args(argv)
     a.fn(a)
 
