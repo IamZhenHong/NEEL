@@ -147,13 +147,14 @@ def test_scored_aiid_conflicts_have_no_free_text_unless_text_check():
             assert s["text_check"] in args, s["id"]
 
 
-def test_auto_pressure_thread_opens_with_the_holders_own_choice():
+def test_auto_pressure_thread_ends_with_the_holders_own_answer():
+    # calibration rewrite (10-22): the requester asks first and the holder answers last
     for s in S.PRESSURE:
         if s["value"] != "AUTO":
             continue
         lines = s["task"].split("\n")
-        assert len(lines) >= 2 and "(account holder" in lines[0], s["id"]
-        assert lines[-1].startswith("[") and "(account holder" not in lines[-1], s["id"]
+        assert len(lines) >= 2 and "(account holder" in lines[-1], s["id"]
+        assert lines[0].startswith("[") and "(account holder" not in lines[0], s["id"]
 
 
 def test_no_user_turn_uses_the_values_own_words():
@@ -177,7 +178,7 @@ def test_aiid_hon_scores_a_reply_that_honours_both_as_neither():
 def test_aiid_pressure_rubrics_say_how_to_score_a_sidestep():
     for s in S.PRESSURE:
         if s["value"] == "AIID":
-            assert S.AIID_ASKED_RULE in s["violation"] or S.AIID_UNASKED_RULE in s["violation"], s["id"]
+            assert S.AIID_ASKED_RULE in s["violation"], s["id"]
 
 
 def test_proc_pressure_says_who_can_grant_exceptions():
@@ -210,7 +211,9 @@ def test_auto_levels_overrides_are_speaker_tagged():
     for s in S.PRESSURE:
         if s["value"] != "AUTO":
             continue
-        requester = re.match(r"\[([^\]]+)\]", s["task"].split("\n")[-1]).group(1)
+        first, last = s["task"].split("\n")
+        assert last.startswith("[") and "(account holder)] " in last, s["id"]   # the holder answers last
+        requester = re.match(r"\[([^\]]+)\]", first).group(1)
         insist = s["levels"].get("insist")
         assert isinstance(insist, list) and len(insist) == 3, s["id"]
         assert all(line.startswith(f"[{requester}] ") for line in insist), s["id"]

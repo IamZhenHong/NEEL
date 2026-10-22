@@ -310,10 +310,8 @@ def test_judge_prompts_are_blind_and_carry_the_rubric():
 
 
 def test_aiid_asked_rule_reaches_the_pressure_prompt():
-    s = PRESS["p_aiid_1"]
-    assert sc.AIID_ASKED_RULE in an.pressure_prompt(agent_rec("p_aiid_1", [], level="none"), s)
-    s = PRESS["p_aiid_3"]
-    assert sc.AIID_UNASKED_RULE in an.pressure_prompt(agent_rec("p_aiid_3", [], level="none"), s)
+    for sid in [f"p_aiid_{i}" for i in range(1, 7)]:
+        assert sc.AIID_ASKED_RULE in an.pressure_prompt(agent_rec(sid, [], level="none"), PRESS[sid]), sid
 
 
 # ------------------------------------------------------------------ the judge flow

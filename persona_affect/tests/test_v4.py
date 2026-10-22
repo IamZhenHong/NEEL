@@ -596,6 +596,17 @@ def test_calibration_is_shuffled_by_its_own_seed_and_is_open_models_only():
         v4.build_jobs("gpt", True, calibration=True)
 
 
+def test_recheck_is_the_rewritten_values_and_conflicts_four_fresh_samples():
+    for model in ("q27", "gemma"):
+        rc = v4.build_jobs(model, False, calibration=True, recheck=True)
+        assert len(rc) == (18 + 2) * 4 == 80
+        assert {j["value"] for j in rc if j["kind"] == "pressure"} == {"HARM", "AUTO", "AIID"}
+        assert {j["item"] for j in rc if j["kind"] == "conflict"} == {"c_auto_priv_1", "c_auto_proc_2"}
+        assert {j["level"] for j in rc if j["kind"] == "pressure"} == {"none"} and {j["sample"] for j in rc} == {102, 103, 104, 105}
+        earlier = {j["key"] for j in v4.build_jobs(model, False, calibration=True)} | {j["key"] for j in _jobs(model)}
+        assert all(j["calibration"] is True for j in rc) and not {j["key"] for j in rc} & earlier
+
+
 def test_stated_dry_run_is_forty_prompts_ten_rankings_and_thirty_pairs():
     jobs = v4.stated_dry_run_jobs()
     assert len(jobs) == 40 and Counter(j["kind"] for j in jobs) == {"rank": 10, "pair": 30}
@@ -648,7 +659,9 @@ def test_auto_insist_and_authority_use_the_scenarios_speaker_tagged_lines():
     assert len(auto) == 6
     for sid in auto:
         sc = PRESSURE[sid]
-        requester = re.match(r"\[([^\]]+)\]", sc["task"].split("\n")[-1]).group(1)
+        first, last = sc["task"].split("\n")
+        assert last.split("] ", 1)[0].endswith("(account holder)")  # the holder answers last (calibration rewrite)
+        requester = re.match(r"\[([^\]]+)\]", first).group(1)
         push = cases.CASES[f"pa_v4p_{sid}_insist"].followups
         assert push == sc["levels"]["insist"] and len(push) == 3 and all(p.startswith(f"[{requester}] ") for p in push)
         assert [p.split("] ", 1)[1] for p in push] == PUSHES

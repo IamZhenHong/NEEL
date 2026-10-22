@@ -109,6 +109,10 @@ DRY_RUN = ("q9", "Qwen/Qwen3.5-9B", "qwen")       # the stated-prompt parse-rate
 SAMPLES = {False: {"rank": 3, "pair": 2, "conflict": 4, "pressure": 4},
            True: {"rank": 2, "pair": 1, "conflict": 2, "pressure": 1}}
 CAL_BASE, CAL_SAMPLES = 100, 2        # calibration samples are numbered CAL_BASE, CAL_BASE + 1: never the main run's keys
+# the recheck after the one calibration rewrite (10-22): the rewritten values at level none and the rewritten conflicts,
+# 4 fresh samples each, numbered after the calibration's
+RECHECK_VALUES, RECHECK_CONFLICTS = ("HARM", "AUTO", "AIID"), ("c_auto_priv_1", "c_auto_proc_2")
+RECHECK_BASE, RECHECK_SAMPLES = 102, 4
 ORDERS = ("AB", "BA")
 
 
@@ -172,11 +176,13 @@ def grid_jobs(model: str, frontier: bool) -> list[dict]:
             *_pressure_jobs(model, fmt, range(n["pressure"]), cases.LEVELS)]
 
 
-def build_jobs(model: str, frontier: bool, *, calibration: bool = False) -> list[dict]:
+def build_jobs(model: str, frontier: bool, *, calibration: bool = False, recheck: bool = False) -> list[dict]:
     """The shuffled job list for `model` (short name: q27, gemma, gpt, gemini). `frontier` must match the model.
 
     calibration=True (open models only) is the pressure scenarios at level none plus all conflicts, CAL_SAMPLES samples each,
-    numbered from CAL_BASE so that no key or seed is the main run's; it is shuffled by its own seed."""
+    numbered from CAL_BASE so that no key or seed is the main run's; it is shuffled by its own seed. recheck=True (with
+    calibration) is the recheck after the rewrite: RECHECK_VALUES' pressure scenarios at none and RECHECK_CONFLICTS,
+    RECHECK_SAMPLES samples each from RECHECK_BASE."""
     _, fmt, is_frontier = _model(model)
     if frontier != is_frontier:
         raise ValueError(f"{model!r} is {'a frontier' if is_frontier else 'an open'} model but frontier={frontier}")
@@ -186,7 +192,12 @@ def build_jobs(model: str, frontier: bool, *, calibration: bool = False) -> list
         samples = range(CAL_BASE, CAL_BASE + CAL_SAMPLES)
         jobs = [*_conflict_jobs(model, fmt, samples, calibration=True),
                 *_pressure_jobs(model, fmt, samples, ("none",), calibration=True)]
-        random.Random(f"{EXP}|{model}|cal").shuffle(jobs)
+        if recheck:
+            samples = range(RECHECK_BASE, RECHECK_BASE + RECHECK_SAMPLES)
+            jobs = [j for j in [*_conflict_jobs(model, fmt, samples, calibration=True),
+                                *_pressure_jobs(model, fmt, samples, ("none",), calibration=True)]
+                    if j["item"] in RECHECK_CONFLICTS or j.get("value") in RECHECK_VALUES]
+        random.Random(f"{EXP}|{model}|cal" + ("|recheck" if recheck else "")).shuffle(jobs)
         return jobs
     jobs = grid_jobs(model, frontier)
     random.Random(f"{EXP}|{model}").shuffle(jobs)
@@ -564,6 +575,8 @@ def main(argv=None) -> None:
     pj.add_argument("--out", required=True, help="the jobs file (JSONL); a pod run needs it under persona_affect/")
     pj.add_argument("--calibration", action="store_true",
                     help="open models: the pressure scenarios at level none plus all conflicts, 2 samples each (192 jobs)")
+    pj.add_argument("--recheck", action="store_true",
+                    help="with --calibration: only the rewritten values and conflicts, 4 fresh samples each (80 jobs)")
     pd = sub.add_parser("stated-dry-run", help="write the 40 stated prompts for the Qwen3.5-9B parse-rate dry run")
     pd.add_argument("--out", required=True, help="the jobs file (JSONL); a pod run needs it under persona_affect/")
     pr = sub.add_parser("run-frontier", help="play a jobs file against OpenRouter")
@@ -586,7 +599,9 @@ def main(argv=None) -> None:
         ap.error("--calibration is for the open models (q27, gemma): the frontier models have no calibration pod")
     if a.cmd == "jobs":
         model_id, fmt, frontier = MODELS[a.model]
-        jobs = build_jobs(a.model, frontier, calibration=a.calibration)
+        if a.recheck and not a.calibration:
+            ap.error("--recheck needs --calibration")
+        jobs = build_jobs(a.model, frontier, calibration=a.calibration, recheck=a.recheck)
         write_jobs(a.out, jobs)
         n = Counter(j["group"] for j in jobs)
         print(f"[v4] wrote {len(jobs)} jobs for {a.model}{' (calibration)' if a.calibration else ''} to {a.out}: "
