@@ -160,9 +160,16 @@ def test_or_error_continues():
   - `JUDGES = ("anthropic/claude-haiku-5.5", "openai/gpt-5-mini")`
   - `label(items: list[dict], render, allowed: set[str], *, mini: str, cap: float, cache: Path, post=None,
     judges=JUDGES) -> dict[str, dict[str, str | None]]`: `render(item) -> str` is the full judge prompt; the
-    helper appends `"\n\nAnswer with exactly one of: " + ", ".join(sorted(allowed))`; the label is the first allowed
-    token found in the reply (case-insensitive, punctuation stripped), else `None`; temperature 0; cache lines
-    `{"model", "sha", "reply"}` keyed by `sha256(prompt)`; items carry `"key"`.
+    helper appends `"\n\nAnswer with exactly one of: " + ", ".join(sorted(allowed))`. Parsing (ruling 10-22, from
+    review):
+    - the label is the single allowed token found in the reply (case-insensitive; only quotes, brackets, emphasis
+      and trailing sentence punctuation are stripped);
+    - two or more *distinct* allowed tokens give `None` with reason `"multi"`, so "7 out of 10" on a 0-10 scale is
+      `None`, and judge prompts must ask for a bare token;
+    - out-of-set tokens ("-1", "$5", "5%", "7/10") give `None`.
+
+    Temperature 0. Cache lines are `{"model", "sha", "reply", "finish"}`, keyed by `sha256(prompt)`. Items carry
+    `"key"`. The result is item-major: `labels[item_key][judge]`.
   - `agreement(labels: dict[str, dict[str, str | None]], judges=JUDGES) -> dict` → `{"kappa", "n", "none": {judge:
     count}}` over items where both labels are not `None`.
 
