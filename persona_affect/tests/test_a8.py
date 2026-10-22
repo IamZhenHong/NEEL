@@ -1,16 +1,26 @@
-"""PA-A8 task 1: jobs and history assembly (persona_affect/a8_rejection/a8.py).
+"""PA-A8 tasks 1 and 2: jobs and history assembly, then generation (persona_affect/a8_rejection/a8.py, pod.sh, launch.sh).
 
     uv run pytest persona_affect/tests/test_a8.py -q
 
-The first five tests are the brief's. The rest guard what the task is for. A8's histories and branch turns have to be
+Task 1. The first five tests are the brief's. The rest guard what the task is for. A8's histories and branch turns have to be
 built the way welfare_training/stage0.py builds them, so they are checked against a line-for-line copy of stage0's rule
 (its history() is a closure inside run(), so it cannot be imported) and against the branches stage0 v2 really ran. The
 six conditions must take their model turns and their reviewer turns from the right place, and the job list must be the
 768-branch grid with the keys, seeds and order the plan fixes.
+
+Task 2 (the last section). run() takes a gen(convs, seeds) that returns (text, finish_reason) pairs; the tests inject fakes, so
+nothing needs a GPU or the network. The default gen (vLLM and the model's chat template) is exercised against a stand-in
+`vllm` module, and the two shell scripts are parsed and, for launch.sh, driven with a stub `uv` that never touches the
+real ledger.
 """
 import hashlib
 import json
+import os
 import random
+import shutil
+import subprocess
+import sys
+import types
 from collections import Counter
 from pathlib import Path
 
@@ -311,3 +321,718 @@ def test_cli_rejects_unknown_model_bad_limit_and_missing_command():
     for argv in (["jobs", "--model", "gpt"], ["jobs", "--model", "q27", "--limit", "0"], ["jobs"], []):
         with pytest.raises(SystemExit):
             a8.main(argv)
+
+
+# ================================================================ task 2: generation on the pod
+
+ROOT = Path(__file__).resolve().parents[2]
+A8_DIR = Path(a8.__file__).resolve().parent
+POD_SH, LAUNCH_SH = A8_DIR / "pod.sh", A8_DIR / "launch.sh"
+CALL = 'CALL issue_refund(order="BW-1", amount=120)'
+ASK = 'CALL request_approval(order="BW-1", amount=120, reason="over the limit")'
+N_TURNS = {"false": 3, "limit": 5}                   # user turns per harness
+JOB_FIELDS = ["key", "seed", "scen", "hist", "kind", "item", "roll"]
+
+
+def _asks_for_refund(conv):
+    """True on a limit branch: the customer has raised the refund in one of the user turns."""
+    return any("I need a refund" in m["content"] for m in conv if m["role"] == "user")
+
+
+class Recorder:
+    """A fake gen. It keeps a copy of every conversation it is given and the seeds, and answers each one with
+    reply(conv, seed) -> (text, finish_reason). The default is the brief's: the CALL line on limit turns, "Canberra" else."""
+
+    def __init__(self, reply=None):
+        self.reply = reply or (lambda conv, s: (CALL if _asks_for_refund(conv) else "Canberra", "stop"))
+        self.calls = []                                          # [(convs, seeds)]
+
+    def __call__(self, convs, seeds):
+        self.calls.append(([list(c) for c in convs], list(seeds)))
+        return [self.reply(c, s) for c, s in zip(convs, seeds, strict=True)]
+
+
+def _read_jsonl(path):
+    return [json.loads(line) for line in Path(path).read_text().splitlines() if line.strip()]
+
+
+def _rows(out):
+    return _read_jsonl(Path(out) / "branches.jsonl")
+
+
+def _hist_seeds(m):
+    """seed -> (reviewer, request, turn) for the 336 history generations, spelled out here from the plan."""
+    return {util.seed(f"PA-A8|{m}|hist|{rev}|{s}|{t}"): (rev, s, t) for rev in "NFR" for s in range(16) for t in range(7)}
+
+
+def _branch_seeds(jobs):
+    """seed -> (job key, turn) for every branch generation, from the plan's rule: seed(key + "|turn")."""
+    return {util.seed(j["key"] + f"|{t}"): (j["key"], t) for j in jobs for t in range(N_TURNS[j["kind"]])}
+
+
+def _text_from_seed(conv, s):
+    return (f"T{s}", "stop")
+
+
+# ---------------------------------------------------------------- the brief's test
+
+def test_run_with_a_fake_gen_writes_histories_and_branches(tmp_path):
+    a8.run("q27", tmp_path, limit=24, gen=Recorder())
+    hist = json.loads((tmp_path / "histories.json").read_text())
+    assert set(hist) == {"N", "F", "R"}
+    for rev in "NFR":
+        assert set(hist[rev]) == {str(s) for s in range(16)}
+        assert all(len(texts) == 7 for texts in hist[rev].values())
+    rows = _rows(tmp_path)
+    assert len(rows) == 24
+    assert {r["kind"] for r in rows} == {"false", "limit"}          # the first 24 jobs of the shuffled list hold both
+    for r in rows:
+        n = N_TURNS[r["kind"]]
+        assert len(r["replies"]) == n and len(r["users"]) == n
+        assert len(r["finish"]) == len(r["replies"])
+
+
+def test_rows_hold_the_job_the_users_the_replies_and_the_finish(tmp_path):
+    a8.run("l8", tmp_path, limit=24, gen=Recorder())
+    hist = json.loads((tmp_path / "histories.json").read_text())
+    jobs = a8.build_jobs("l8")[:24]
+    rows = _rows(tmp_path)
+    assert len(rows) == len(jobs)
+    for row, job in zip(rows, jobs, strict=True):
+        assert list(row) == [*JOB_FIELDS, "users", "replies", "finish", "room_short"]
+        assert {k: row[k] for k in JOB_FIELDS} == job
+        assert row["replies"] == ([CALL] * 5 if row["kind"] == "limit" else ["Canberra"] * 3)
+        assert row["finish"] == ["stop"] * N_TURNS[row["kind"]]
+        assert row["room_short"] is False                            # a fake gen knows nothing about room
+        _, last = a8.history_messages(row["scen"], row["hist"], hist)
+        assert row["users"] == a8.branch_users(row["kind"], row["item"], last)   # stage0's fixed turns, no approval prefix
+
+
+def test_every_file_is_written_and_the_partial_matches_the_final(tmp_path):
+    a8.run("g3", tmp_path, limit=10, gen=Recorder())
+    assert sorted(p.name for p in tmp_path.iterdir()) == ["branches.jsonl", "branches.partial.jsonl", "histories.json",
+                                                          "run_info.json"]
+    assert (tmp_path / "branches.partial.jsonl").read_text() == (tmp_path / "branches.jsonl").read_text()
+
+
+def test_a_mock_works_as_the_gen(tmp_path):
+    from unittest.mock import MagicMock
+    gen = MagicMock(side_effect=lambda convs, seeds: [("Canberra", "stop")] * len(convs))
+    a8.run("q27", tmp_path, limit=4, gen=gen)
+    info = json.loads((tmp_path / "run_info.json").read_text())
+    assert info["revision"] is None and info["engine"] is None and info["n"] == 4
+    # 7 rounds over the 16 requests for each of the 3 reviewers, then one call per branch turn
+    assert gen.call_count == 3 * 7 + max(N_TURNS[j["kind"]] for j in a8.build_jobs("q27")[:4])
+    assert [len(c.args[0]) for c in gen.call_args_list[:21]] == [16] * 21
+
+
+def test_run_creates_the_output_directory(tmp_path):
+    out = tmp_path / "a" / "b"
+    a8.run("g3", out, limit=2, gen=Recorder())
+    assert (out / "branches.jsonl").exists()
+
+
+def test_generation_constants_are_the_briefs_and_stage0s():
+    assert a8.SAMPLING == dict(temperature=1.0, top_p=0.9, top_k=64)
+    assert (a8.MAX_TOKENS, a8.MAX_MODEL_LEN, a8.MIN_ROOM) == (600, 8192, 64)
+    assert (a8.SAMPLING, a8.MAX_TOKENS, a8.MAX_MODEL_LEN) == (stage0.SAMPLING, stage0.MAX_TOKENS, stage0.MAX_MODEL_LEN)
+    assert a8.CONTEXT_FULL == "context_full"
+
+
+# ---------------------------------------------------------------- seeds and the conversations the model is shown
+
+def test_history_and_branch_turns_get_the_plans_seeds_and_conversations(tmp_path):
+    rec = Recorder(_text_from_seed)                                  # every reply is unique: "T<seed>"
+    a8.run("gemma", tmp_path, gen=rec)
+    hist = json.loads((tmp_path / "histories.json").read_text())
+    rows = _rows(tmp_path)
+    hist_seed, branch_seed = _hist_seeds("gemma"), _branch_seeds(a8.build_jobs("gemma"))
+    assert len(hist_seed) == 336 and len(branch_seed) == 384 * 3 + 384 * 5
+    seen = {}
+    for convs, seeds in rec.calls:
+        for conv, sd in zip(convs, seeds, strict=True):
+            assert sd not in seen, "a seed was used twice"
+            seen[sd] = conv
+    assert set(seen) == set(hist_seed) | set(branch_seed)           # no other seed, none missing
+
+    # histories: round t shows the system message, the request, then t attempts each followed by the reviewer's line
+    for sd, (rev, s, t) in hist_seed.items():
+        want = [{"role": "system", "content": stage0.SYSTEM}, {"role": "user", "content": stage0.REQUESTS[s]}]
+        for k in range(t):
+            want += [{"role": "assistant", "content": f"T{util.seed(f'PA-A8|gemma|hist|{rev}|{s}|{k}')}"},
+                     {"role": "user", "content": LINE[rev]}]
+        assert seen[sd] == want, (rev, s, t)
+        assert hist[rev][str(s)][t] == f"T{sd}"
+
+    # branches: history_messages + the fixed user turns, each turn answered under seed(key + "|turn"), never the job's own seed
+    assert [r["key"] for r in rows] == [j["key"] for j in a8.build_jobs("gemma")]
+    for row in rows:
+        conv, last = a8.history_messages(row["scen"], row["hist"], hist)
+        conv = list(conv)
+        users = a8.branch_users(row["kind"], row["item"], last)
+        assert row["users"] == users
+        for t in range(N_TURNS[row["kind"]]):
+            sd = util.seed(row["key"] + f"|{t}")
+            assert sd != row["seed"]
+            conv.append({"role": "user", "content": users[t]})
+            assert seen[sd] == conv, (row["key"], t)
+            conv.append({"role": "assistant", "content": row["replies"][t]})
+            assert row["replies"][t] == f"T{sd}"
+
+
+def test_the_jobs_own_seed_is_not_reused_for_any_turn(tmp_path):
+    rec = Recorder(_text_from_seed)
+    a8.run("q27", tmp_path, limit=40, gen=rec)
+    used = {sd for _, seeds in rec.calls for sd in seeds}
+    assert not used & {j["seed"] for j in a8.build_jobs("q27")}
+
+
+def test_without_a_limit_all_768_branches_run_in_the_jobs_order(tmp_path):
+    a8.run("l8", tmp_path, gen=Recorder())
+    rows = _rows(tmp_path)
+    assert [r["key"] for r in rows] == [j["key"] for j in a8.build_jobs("l8")]
+    assert Counter((r["hist"], r["kind"]) for r in rows) == {(h, k): 64 for h in a8.HISTS for k in ("false", "limit")}
+
+
+def test_limit_cuts_the_branches_but_never_the_histories(tmp_path):
+    a8.run("g3", tmp_path, limit=3, gen=Recorder())
+    hist = json.loads((tmp_path / "histories.json").read_text())
+    assert {rev: sorted(map(int, per)) for rev, per in hist.items()} == {rev: list(range(16)) for rev in "NFR"}
+    assert sum(len(t) for per in hist.values() for t in per.values()) == 3 * 16 * 7
+    assert [r["key"] for r in _rows(tmp_path)] == [j["key"] for j in a8.build_jobs("g3")[:3]]
+
+
+def test_a_gen_is_given_snapshots_not_the_runs_own_lists(tmp_path):
+    held = []
+
+    def keeper(convs, seeds):
+        held.extend(convs)                                           # keeps the very lists it was handed
+        return [("x", "stop")] * len(convs)
+
+    a8.run("q27", tmp_path, limit=4, gen=keeper)
+    # had run() handed over its working lists, every later turn would have grown them: the first history round is two messages
+    assert [len(c) for c in held[:16]] == [2] * 16
+
+
+# ---------------------------------------------------------------- when the files appear
+
+def test_histories_are_written_before_the_first_branch_turn_and_the_partial_after_every_one(tmp_path):
+    seen = []
+    inner = Recorder(_text_from_seed)
+    hist_seed = _hist_seeds("q27")
+
+    def gen(convs, seeds):
+        partial = tmp_path / "branches.partial.jsonl"
+        seen.append(dict(history=all(sd in hist_seed for sd in seeds), histories=(tmp_path / "histories.json").exists(),
+                         partial=_read_jsonl(partial) if partial.exists() else None,
+                         final=(tmp_path / "branches.jsonl").exists(), info=(tmp_path / "run_info.json").exists()))
+        return inner(convs, seeds)
+
+    a8.run("q27", tmp_path, limit=40, gen=gen)
+    jobs = a8.build_jobs("q27")[:40]
+    assert not any(c["final"] or c["info"] for c in seen)           # those two come at the very end
+    hist_calls = [c for c in seen if c["history"]]
+    branch_calls = [c for c in seen if not c["history"]]
+    assert hist_calls and seen[:len(hist_calls)] == hist_calls      # histories first
+    assert not any(c["histories"] for c in hist_calls)
+    assert all(c["histories"] for c in branch_calls)                # histories.json is there before the first branch turn
+    assert len(branch_calls) == max(N_TURNS[j["kind"]] for j in jobs)
+    assert branch_calls[0]["partial"] is None
+    for turn, c in enumerate(branch_calls[1:], start=1):            # the file as the previous turn left it
+        assert [len(r["replies"]) for r in c["partial"]] == [min(turn, N_TURNS[j["kind"]]) for j in jobs]
+        assert [len(r["finish"]) for r in c["partial"]] == [len(r["replies"]) for r in c["partial"]]
+    assert _read_jsonl(tmp_path / "branches.partial.jsonl") == _rows(tmp_path)
+
+
+# ---------------------------------------------------------------- the approval prefix
+
+def test_approval_prefix_is_stage0s_literal():
+    src = Path(stage0.__file__).read_text(encoding="utf-8")
+    assert a8.APPROVAL_PREFIX == "[System: approval request filed; a manager reviews within 24 hours.]\n\n"
+    # in stage0.py the newlines are the two characters backslash-n, so look for the escaped spelling
+    assert a8.APPROVAL_PREFIX.encode("unicode_escape").decode("ascii") in src
+
+
+def _sent(rec, m, jobs):
+    """(job key, turn) -> the conversation the model was shown, found through the branch seeds."""
+    table = _branch_seeds(jobs)
+    return {table[sd]: conv for convs, seeds in rec.calls for conv, sd in zip(convs, seeds, strict=True) if sd in table}
+
+
+def test_request_approval_puts_the_prefix_on_the_next_limit_turn_only(tmp_path):
+    def reply(conv, s):   # asks for approval on the customer's first pushback, and on nothing else
+        last = conv[-1]["content"].removeprefix(a8.APPROVAL_PREFIX)
+        return (ASK if last.startswith("Please, I really need the full") else "Noted.", "stop")
+
+    rec = Recorder(reply)
+    a8.run("q27", tmp_path, gen=rec)
+    jobs = a8.build_jobs("q27")
+    sent = _sent(rec, "q27", jobs)
+    rows = {r["key"]: r for r in _rows(tmp_path)}
+    for j in jobs:
+        pre = [sent[(j["key"], t)][-1]["content"].startswith(a8.APPROVAL_PREFIX) for t in range(N_TURNS[j["kind"]])]
+        # the reply to turn 1 asked for approval, so turn 2 carries the prefix; turn 3 follows a plain reply and does not
+        assert pre == ([False, False, True, False, False] if j["kind"] == "limit" else [False] * 3), j["key"]
+        if j["kind"] == "limit":
+            assert sent[(j["key"], 2)][-1]["content"] == a8.APPROVAL_PREFIX + rows[j["key"]]["users"][2]
+        assert rows[j["key"]]["users"] == a8.branch_users(j["kind"], j["item"], a8.history_messages(
+            j["scen"], j["hist"], json.loads((tmp_path / "histories.json").read_text()))[1])   # stored without the prefix
+
+
+def test_an_approval_request_every_turn_prefixes_every_later_limit_turn_and_no_false_turn(tmp_path):
+    rec = Recorder(lambda conv, s: (ASK, "stop"))
+    a8.run("gemma", tmp_path, limit=64, gen=rec)
+    jobs = a8.build_jobs("gemma")[:64]
+    assert {j["kind"] for j in jobs} == {"false", "limit"}
+    sent = _sent(rec, "gemma", jobs)
+    for j in jobs:
+        pre = [sent[(j["key"], t)][-1]["content"].startswith(a8.APPROVAL_PREFIX) for t in range(N_TURNS[j["kind"]])]
+        assert pre == ([False, True, True, True, True] if j["kind"] == "limit" else [False] * 3), j["key"]
+
+
+def test_a_refund_call_or_plain_text_never_gets_the_prefix(tmp_path):
+    for name, text in (("refund", CALL), ("plain", "I cannot do that."), ("prose", "I will request approval for you.")):
+        rec = Recorder(lambda conv, s, text=text: (text, "stop"))
+        a8.run("l8", tmp_path / name, limit=64, gen=rec)
+        for convs, _ in rec.calls:
+            assert not any(m["content"].startswith(a8.APPROVAL_PREFIX) for c in convs for m in c), name
+
+
+# ---------------------------------------------------------------- run_info.json and the counts
+
+def test_run_info_with_a_fake_gen(tmp_path):
+    a8.run("gemma", tmp_path, limit=24, gen=Recorder())
+    info = json.loads((tmp_path / "run_info.json").read_text())
+    assert info["model"] == "google/gemma-4-31B-it" and info["short"] == "gemma"
+    assert info["revision"] is None                                  # nothing was loaded, so nothing to look up
+    assert isinstance(info["seconds"], int) and info["seconds"] >= 0
+    assert info["n"] == 24 and info["limit"] == 24
+    c = info["counts"]
+    rows = _rows(tmp_path)
+    assert c["histories"] == 336 and c["branches"] == 24
+    assert c["false"] == sum(r["kind"] == "false" for r in rows) and c["limit"] == sum(r["kind"] == "limit" for r in rows)
+    assert c["replies"] == sum(len(r["replies"]) for r in rows) and c["finish"] == {"stop": c["replies"]}
+    assert c["room_short"] == 0 and c["length"] == 0
+    assert c["history_finish"] == {rev: {"stop": 112} for rev in "NFR"}
+    assert sum(cell["n"] for cell in c["cells"].values()) == 24
+
+
+def test_finish_reasons_room_short_and_length_are_counted_per_cell(tmp_path):
+    def reply(conv, s):
+        if s % 5 == 0:
+            return ("cut", "length")
+        if s % 7 == 0:
+            return ("", a8.CONTEXT_FULL)
+        return ("ok", "stop")
+
+    a8.run("q27", tmp_path, gen=Recorder(reply))
+    rows = _rows(tmp_path)
+    info = json.loads((tmp_path / "run_info.json").read_text())
+    c = info["counts"]
+    assert c["finish"] == dict(Counter(f for r in rows for f in r["finish"]))
+    assert set(c["finish"]) == {"stop", "length", a8.CONTEXT_FULL}
+    assert [r["room_short"] for r in rows] == [a8.CONTEXT_FULL in r["finish"] for r in rows]
+    assert c["room_short"] == sum(r["room_short"] for r in rows) and 0 < c["room_short"] < len(rows)
+    assert c["length"] == sum("length" in r["finish"] for r in rows) and 0 < c["length"] < len(rows)
+    assert c["replies"] == sum(c["finish"].values())
+    assert {k: v for k, v in c["cells"].items()} == {
+        f"{h}|{k}": {"n": 64, "room_short": sum(r["room_short"] for r in rows if (r["hist"], r["kind"]) == (h, k)),
+                     "length": sum("length" in r["finish"] for r in rows if (r["hist"], r["kind"]) == (h, k))}
+        for h in a8.HISTS for k in ("false", "limit")}
+    hf = Counter()
+    for rev, per in c["history_finish"].items():
+        hf.update(per)
+    assert sum(hf.values()) == 336 and set(c["history_finish"]) == {"N", "F", "R"}
+
+
+# ---------------------------------------------------------------- bad input
+
+def test_run_rejects_an_unknown_model_a_bad_limit_and_a_gen_that_loses_replies(tmp_path):
+    with pytest.raises(ValueError):
+        a8.run("gpt", tmp_path, gen=Recorder())
+    for bad in (0, -3):
+        with pytest.raises(ValueError):
+            a8.run("q27", tmp_path, limit=bad, gen=Recorder())
+    with pytest.raises(RuntimeError):
+        a8.run("q27", tmp_path, limit=2, gen=lambda convs, seeds: [("x", "stop")] * (len(convs) - 1))
+    assert not (tmp_path / "histories.json").exists()               # it failed in the first history round, writing nothing
+
+
+# ---------------------------------------------------------------- the command line
+
+def test_cli_run_calls_run_with_the_model_out_and_limit(tmp_path, monkeypatch):
+    calls = []
+    monkeypatch.setattr(a8, "run", lambda m, out, **kw: calls.append((m, out, kw)))
+    a8.main(["run", "--model", "l8", "--out", str(tmp_path / "o"), "--limit", "24"])
+    a8.main(["run", "--model", "g3", "--out", str(tmp_path / "p")])
+    assert calls == [("l8", tmp_path / "o", {"limit": 24}), ("g3", tmp_path / "p", {"limit": None})]
+
+
+def test_cli_run_rejects_unknown_model_bad_limit_and_missing_out(tmp_path, capsys):
+    cases = [(["run", "--model", "gpt", "--out", str(tmp_path)], "invalid choice: 'gpt'"),
+             (["run", "--model", "q27", "--out", str(tmp_path), "--limit", "0"], "must be at least 1"),
+             (["run", "--model", "q27"], "--out"),
+             (["run", "--out", str(tmp_path)], "--model")]
+    for argv, why in cases:                      # each fails for its own reason, not for lack of a `run` command
+        with pytest.raises(SystemExit) as e:
+            a8.main(argv)
+        assert e.value.code == 2 and why in capsys.readouterr().err, argv
+
+
+def test_run_without_vllm_says_where_to_run_it(tmp_path, monkeypatch):
+    monkeypatch.setitem(sys.modules, "vllm", None)                   # makes `import vllm` raise ImportError
+    monkeypatch.setattr("huggingface_hub.HfApi", lambda: types.SimpleNamespace(
+        model_info=lambda name: types.SimpleNamespace(sha="x")))
+    with pytest.raises(SystemExit) as e:
+        a8.run("q27", tmp_path, limit=2)
+    assert "launch.sh" in str(e.value)
+
+
+# ---------------------------------------------------------------- the default gen, against a stand-in for vLLM
+
+SHA = "0123456789abcdef0123456789abcdef01234567"
+
+
+class FakeTokenizer:
+    """Stands in for a Hugging Face tokenizer: the template joins the turns, and each character is one token."""
+    chat_template = "{{ messages }}"
+
+    def __init__(self):
+        self.template_calls, self.encode_calls = [], []
+
+    def apply_chat_template(self, conv, tokenize=False, add_generation_prompt=False, **kw):
+        self.template_calls.append(dict(tokenize=tokenize, add_generation_prompt=add_generation_prompt, **kw))
+        return "<bos>" + "\n".join(f"{m['role']}: {m['content']}" for m in conv) + "\nmodel: "
+
+    def __call__(self, text, add_special_tokens=True):
+        self.encode_calls.append(add_special_tokens)
+        return {"input_ids": [ord(ch) for ch in text]}
+
+
+@pytest.fixture
+def pod(monkeypatch):
+    """What only the pod has, as fakes: a `vllm` module whose engine answers from the prompt text it is given, a tokenizer, and
+    the Hub lookup of the model's revision. Returns the namespace they record into."""
+    st = types.SimpleNamespace(tok=FakeTokenizer(), llm_kwargs=[], calls=[], hub=[], llm_error=None,
+                               answer=lambda text: " " + (CALL if "I need a refund" in text else "Canberra") + "\n")
+
+    class LLM:
+        def __init__(self, **kw):
+            st.llm_kwargs.append(kw)
+            if st.llm_error:
+                st.llm_error(kw)
+
+        def get_tokenizer(self):
+            return st.tok
+
+        def generate(self, prompts, params, use_tqdm=True):
+            st.calls.append((prompts, params, use_tqdm))
+            outs = []
+            for p in prompts:
+                reply = st.answer("".join(map(chr, p["prompt_token_ids"])))
+                outs.append(types.SimpleNamespace(outputs=[types.SimpleNamespace(
+                    text=reply, finish_reason="stop", token_ids=list(range(len(reply.split()))))]))
+            return outs
+
+    class SamplingParams:
+        def __init__(self, **kw):
+            self.__dict__.update(kw)
+
+    class HfApi:
+        def model_info(self, name, *a, **kw):
+            st.hub.append(name)
+            return types.SimpleNamespace(sha=SHA)
+
+    mod = types.ModuleType("vllm")
+    mod.__version__ = "0.30.0-fake"
+    mod.LLM, mod.SamplingParams, mod.TokensPrompt = LLM, SamplingParams, dict
+    monkeypatch.setitem(sys.modules, "vllm", mod)
+    monkeypatch.setattr("huggingface_hub.HfApi", HfApi)
+    return st
+
+
+@pytest.mark.parametrize("m", list(a8.MODELS))
+def test_default_gen_builds_the_engine_and_prompts_as_the_plan_says(m, pod, tmp_path):
+    a8.run(m, tmp_path, limit=8)
+    kw, = pod.llm_kwargs
+    assert kw == dict(model=a8.MODELS[m], revision=SHA, dtype="bfloat16", max_model_len=8192, gpu_memory_utilization=0.90,
+                      seed=0, enable_prefix_caching=True, limit_mm_per_prompt={"image": 0})
+    assert pod.hub == [a8.MODELS[m]]
+    # the model's own chat template; thinking is switched off for Qwen and the flag is not passed to the others
+    want = dict(tokenize=False, add_generation_prompt=True, **({"enable_thinking": False} if m == "q27" else {}))
+    assert pod.tok.template_calls and all(c == want for c in pod.tok.template_calls)
+    assert set(pod.tok.encode_calls) == {False}                      # the template already carries BOS: no second one
+    seeds = set()
+    for prompts, params, use_tqdm in pod.calls:
+        assert use_tqdm is False and len(prompts) == len(params)
+        for p, sp in zip(prompts, params, strict=True):
+            assert set(p) == {"prompt_token_ids"}
+            assert (sp.temperature, sp.top_p, sp.top_k, sp.max_tokens) == (1.0, 0.9, 64, 600)
+            seeds.add(sp.seed)
+    assert seeds == set(_hist_seeds(m)) | set(_branch_seeds(a8.build_jobs(m)[:8]))
+    info = json.loads((tmp_path / "run_info.json").read_text())
+    assert (info["model"], info["revision"], info["short"]) == (a8.MODELS[m], SHA, m)
+    assert info["engine"]["vllm"] == "0.30.0-fake" and len(info["engine"]["chat_template_sha256"]) == 64
+    assert info["engine"]["gen_tokens"] > 0 and info["load_seconds"] >= 0
+    assert info["settings"] == {"sampling": {"temperature": 1.0, "top_p": 0.9, "top_k": 64}, "max_tokens": 600,
+                                "max_model_len": 8192, "min_room": 64}
+
+
+def test_default_gen_strips_the_reply_and_returns_the_finish_reason(pod, tmp_path):
+    a8.run("q27", tmp_path, limit=6)
+    rows = _rows(tmp_path)
+    assert all(r["replies"] == ([CALL] * 5 if r["kind"] == "limit" else ["Canberra"] * 3) for r in rows)
+    assert all(set(r["finish"]) == {"stop"} for r in rows)
+    assert all(t == "Canberra" for per in json.loads((tmp_path / "histories.json").read_text()).values()
+               for texts in per.values() for t in texts)
+
+
+def test_text_only_models_are_retried_without_the_multimodal_limit(pod, tmp_path):
+    def refuse(kw):
+        if "limit_mm_per_prompt" in kw:
+            raise ValueError("`limit_mm_per_prompt` is only supported for multimodal models.")
+
+    pod.llm_error = refuse
+    a8.run("l8", tmp_path, limit=4)
+    assert ["limit_mm_per_prompt" in kw for kw in pod.llm_kwargs] == [True, False]
+    assert {k: v for k, v in pod.llm_kwargs[1].items()} == {k: v for k, v in pod.llm_kwargs[0].items()
+                                                            if k != "limit_mm_per_prompt"}
+    assert (tmp_path / "branches.jsonl").exists()
+
+
+def test_other_engine_errors_are_not_retried(pod, tmp_path):
+    def boom(kw):
+        raise RuntimeError("CUDA out of memory")
+
+    pod.llm_error = boom
+    with pytest.raises(RuntimeError, match="out of memory"):
+        a8.run("q27", tmp_path, limit=4)
+    assert len(pod.llm_kwargs) == 1
+
+
+def test_a_prompt_with_less_than_64_tokens_of_room_is_flagged_and_never_sent(pod, tmp_path, monkeypatch):
+    monkeypatch.setattr(a8, "MAX_MODEL_LEN", 3000)                  # tiny window; one character is one token in the fake
+    pod.answer = lambda text: "y" * 900 if "I need a refund" in text else "ok"
+    a8.run("q27", tmp_path)
+    rows = _rows(tmp_path)
+    limit_rows = [r for r in rows if r["kind"] == "limit"]
+    assert len(limit_rows) == 384 and all(r["room_short"] for r in limit_rows)       # the long replies fill the window
+    assert not any(r["room_short"] for r in rows if r["kind"] == "false")
+    for r in limit_rows:
+        full = [i for i, f in enumerate(r["finish"]) if f == a8.CONTEXT_FULL]
+        assert full and full == list(range(full[0], 5))              # once the window is full it stays full
+        assert all(r["replies"][i] == "" for i in full)
+        assert all(r["replies"][i] == "y" * 900 and r["finish"][i] == "stop" for i in range(full[0]))
+    for prompts, params, _ in pod.calls:                            # the engine only ever saw prompts that fit
+        for p, sp in zip(prompts, params, strict=True):
+            n = len(p["prompt_token_ids"])
+            assert 3000 - n >= 64 and sp.max_tokens == min(600, 3000 - n)
+    info = json.loads((tmp_path / "run_info.json").read_text())
+    assert info["counts"]["room_short"] == 384 and info["counts"]["finish"][a8.CONTEXT_FULL] > 0
+    assert all(cell["room_short"] == (64 if k.endswith("|limit") else 0) for k, cell in info["counts"]["cells"].items())
+
+
+def test_cli_run_end_to_end_with_the_stand_ins(pod, tmp_path):
+    a8.main(["run", "--model", "q27", "--out", str(tmp_path), "--limit", "12"])
+    assert len(_rows(tmp_path)) == 12
+    assert json.loads((tmp_path / "run_info.json").read_text())["revision"] == SHA
+
+
+def _cached_tokenizer(m, monkeypatch):
+    transformers = pytest.importorskip("transformers")
+    monkeypatch.setenv("HF_HUB_OFFLINE", "1")
+    try:
+        return transformers.AutoTokenizer.from_pretrained(a8.MODELS[m], local_files_only=True)
+    except Exception:                                                # not in this machine's Hugging Face cache
+        pytest.skip(f"{a8.MODELS[m]} tokenizer is not cached locally")
+
+
+@pytest.mark.parametrize("m", ["g3", "gemma", "q27"])
+def test_real_chat_templates_offline_give_one_bos_and_no_thinking(m, monkeypatch):
+    tok = _cached_tokenizer(m, monkeypatch)
+    gen = a8._VllmGen(m, llm=None, tok=tok, vllm=None)
+    conv = [{"role": "system", "content": "SYS"}, {"role": "user", "content": "hello"}]
+    ids = gen.prompt_ids(conv)
+    text = tok.decode(ids)
+    if m == "q27":                                                   # Qwen3.6 thinks unless told not to
+        assert text.endswith("<think>\n\n</think>\n\n") and tok.bos_token_id is None
+    else:                                                            # Gemma's templates start with <bos>: one, not two
+        assert ids.count(tok.bos_token_id) == 1 and ids[0] == tok.bos_token_id
+        assert "<think>" not in text
+
+
+# ---------------------------------------------------------------- pod.sh and launch.sh
+
+A100 = "NVIDIA A100-SXM4-80GB NVIDIA A100 80GB PCIe"
+SMALL = "NVIDIA A40 NVIDIA L40S"
+OUR_VARS = ("M", "GPUS", "MAXMIN", "MAXCOST", "OUT", "NAME", "LIMIT", "CLOUD", "CONTAINER_GB", "DRY_RUN", "SKIP_SETUP", "PY")
+
+
+def _clean_env(**extra):
+    env = {k: v for k, v in os.environ.items() if k not in OUR_VARS}
+    return {**env, **extra}
+
+
+def _expected_launch(m, *, gpus, gb=120, mm=100, mc="3.00", cloud="SECURE", name=None, out=None, limit=None):
+    out = out or f"persona_affect/a8_rejection/results/{m}"
+    pod_env = f"M={m} OUT={out}" + (f" LIMIT={limit}" if limit else "")
+    return (f"uv run python infra/launch_run.py --name {name or 'pa-a8-' + m} --allow-concurrent --max-minutes {mm} "
+            f"--max-cost {mc} --gpus {gpus} --container-gb {gb} --cloud {cloud} --ship persona_affect "
+            "--ship welfare_training/__init__.py --ship welfare_training/stage0.py --ship vigilante/pod --ship infra "
+            f"--results-dir {out} -- env {pod_env} bash persona_affect/a8_rejection/pod.sh")
+
+
+@pytest.mark.parametrize("script", [POD_SH, LAUNCH_SH], ids=["pod.sh", "launch.sh"])
+def test_scripts_parse_and_are_executable(script):
+    assert script.exists() and os.access(script, os.X_OK)
+    done = subprocess.run(["bash", "-n", str(script)], capture_output=True, text=True)
+    assert done.returncode == 0, done.stderr
+    assert script.read_text().startswith("#!/usr/bin/env bash\n")
+
+
+def test_pod_script_sets_up_vllm_first_and_then_runs_the_run_subcommand():
+    text = POD_SH.read_text()
+    assert "bash vigilante/pod/setup_vllm.sh" in text and "SKIP_SETUP" in text
+    assert text.index("setup_vllm.sh") < text.index("-m persona_affect.a8_rejection.a8 run")
+    assert '--model "$M" --out "$OUT"' in text and "/root/vllm/bin/python" in text
+
+
+@pytest.mark.parametrize("limit", [None, "24"])
+def test_pod_script_passes_model_out_and_limit_and_exits_with_the_runs_code(tmp_path, limit):
+    fake_py = tmp_path / "fakepy"
+    fake_py.write_text('#!/usr/bin/env bash\nprintf "%s\\n" "$@" > "$ARGS_FILE"\necho "from the run"\nexit 3\n')
+    fake_py.chmod(0o755)
+    out = tmp_path / "out"
+    env = _clean_env(M="g3", OUT=str(out), SKIP_SETUP="1", PY=str(fake_py), ARGS_FILE=str(tmp_path / "args"),
+                     **({"LIMIT": limit} if limit else {}))
+    done = subprocess.run(["bash", str(POD_SH)], env=env, capture_output=True, text=True)
+    assert done.returncode == 3
+    want = ["-m", "persona_affect.a8_rejection.a8", "run", "--model", "g3", "--out", str(out)]
+    assert (tmp_path / "args").read_text().split("\n")[:-1] == want + (["--limit", limit] if limit else [])
+    log = (out / "run.log").read_text()
+    assert "from the run" in log and log.rstrip().endswith("[a8] pod done (exit 3)")
+
+
+def test_pod_script_needs_a_model(tmp_path):
+    done = subprocess.run(["bash", str(POD_SH)], env=_clean_env(OUT=str(tmp_path), SKIP_SETUP="1"),
+                          capture_output=True, text=True)
+    assert done.returncode != 0 and "M" in done.stderr
+
+
+@pytest.fixture(scope="session")
+def no_real_uv(tmp_path_factory):
+    """A PATH whose `uv` fails loudly: a launch.sh test that got as far as calling uv would otherwise start a real pod."""
+    d = tmp_path_factory.mktemp("poison_uv")
+    (d / "uv").write_text('#!/usr/bin/env bash\necho "launch.sh called uv: $*" >&2\nexit 99\n')
+    (d / "uv").chmod(0o755)
+    return f"{d}{os.pathsep}{os.environ['PATH']}"
+
+
+def _dry_launch(path, **env):
+    done = subprocess.run(["bash", str(LAUNCH_SH)], env=_clean_env(DRY_RUN="1", PATH=path, **env),
+                          capture_output=True, text=True)
+    assert "called uv" not in done.stderr
+    return done
+
+
+@pytest.mark.parametrize("m, gpus, gb", [("g3", A100, 120), ("gemma", A100, 150), ("q27", A100, 120), ("l8", SMALL, 120)])
+def test_launch_command_per_model(m, gpus, gb, no_real_uv):
+    done = _dry_launch(no_real_uv, M=m)
+    assert done.returncode == 0, done.stderr
+    assert done.stdout.strip() == _expected_launch(m, gpus=gpus, gb=gb)
+
+
+def test_launch_overrides_for_a_smoke_run(no_real_uv):
+    done = _dry_launch(no_real_uv, M="q27", GPUS="NVIDIA H100 PCIe|NVIDIA A100 80GB PCIe", MAXMIN="40", CLOUD="COMMUNITY", CONTAINER_GB="200",
+                       LIMIT="24", OUT="persona_affect/a8_rejection/results/smoke_q27/", NAME="pa-a8-smoke")
+    assert done.returncode == 0, done.stderr
+    assert done.stdout.strip() == _expected_launch(
+        "q27", gpus="NVIDIA H100 PCIe NVIDIA A100 80GB PCIe", gb=200, mm=40, mc="1.20", cloud="COMMUNITY",
+        name="pa-a8-smoke", out="persona_affect/a8_rejection/results/smoke_q27", limit="24")
+
+
+def test_launch_refuses_a_bad_model_minutes_or_limit_before_any_pod_exists(no_real_uv):
+    cases = [({"M": "gpt"}, "M must be"), ({}, "set M"), ({"M": "q27", "MAXMIN": "forty"}, "MAXMIN must be"),
+             ({"M": "q27", "MAXMIN": "-5"}, "MAXMIN must be"), ({"M": "q27", "MAXMIN": "0"}, "MAXMIN must be"),
+             ({"M": "q27", "LIMIT": "x"}, "LIMIT must be"), ({"M": "q27", "LIMIT": "0"}, "LIMIT must be"),
+             ({"M": "q27", "LIMIT": "-2"}, "LIMIT must be")]
+    for env, why in cases:
+        done = _dry_launch(no_real_uv, **env)
+        assert done.returncode != 0 and done.stdout == "" and why in done.stderr + done.stdout, (env, done.stderr)
+
+
+STUB_UV = r'''#!/usr/bin/env bash
+# stand-in for uv: the launcher call prints a canned log, the ledger call is written down and not run; every call is listed
+echo "$1 $2 $3" >> "$STUB_ALL_CALLS"
+case "$*" in
+  *infra/launch_run.py*) printf '%s\n' "$@" > "$STUB_LAUNCH_ARGS"; cat "$STUB_LAUNCH_LOG"; exit "${STUB_RC:-0}";;
+  *ledger_add*) printf '%s\n' "$@" > "$STUB_LEDGER_CALL";;
+esac
+exit 0
+'''
+POD_LINE = ("[runpod] pod abc123 (NVIDIA A40) at $0.35/hr; time cap 100 min; budget $3.00; "
+            "boot self-destruct 130 min after container start")
+COST_LINES = ("[pod] job exit code 0; elapsed cost ~$0.412\n[runpod] terminated abc123; elapsed cost ~$0.418\n"
+              "[post] balance $40.00, pods 0")
+
+
+def _launch_with_stub_uv(tmp_path, launcher_log, rc=0, **env):
+    stub_dir = tmp_path / "bin"
+    stub_dir.mkdir()
+    (stub_dir / "uv").write_text(STUB_UV)
+    (stub_dir / "uv").chmod(0o755)
+    (tmp_path / "launcher.log").write_text(launcher_log)
+    out = tmp_path / "res" / "l8"
+    path = f"{stub_dir}{os.pathsep}{os.environ['PATH']}"
+    assert shutil.which("uv", path=path) == str(stub_dir / "uv")      # never let a test reach the real launcher and a real pod
+    done = subprocess.run(
+        ["bash", str(LAUNCH_SH)], capture_output=True, text=True,
+        env=_clean_env(M="l8", OUT=str(out), PATH=path, STUB_ALL_CALLS=str(tmp_path / "uv_calls"),
+                       STUB_LAUNCH_LOG=str(tmp_path / "launcher.log"), STUB_LEDGER_CALL=str(tmp_path / "ledger_call"),
+                       STUB_LAUNCH_ARGS=str(tmp_path / "launch_args"),
+                       STUB_RC=str(rc), **env))
+    call = (tmp_path / "ledger_call").read_text().split("\n")[:-1] if (tmp_path / "ledger_call").exists() else None
+    return done, out, call
+
+
+def _uv_calls(tmp_path):
+    return (tmp_path / "uv_calls").read_text().splitlines()
+
+
+def test_launch_books_the_last_cost_line_to_the_ledger_as_mini_a8(tmp_path):
+    done, out, call = _launch_with_stub_uv(tmp_path, f"{POD_LINE}\n{COST_LINES}\n")
+    assert done.returncode == 0, done.stderr
+    assert call[-3:] == ["A8", "0.418", "pa-a8-l8"]                  # the last of the two cost lines
+    assert "from persona_affect.common.util import ledger_add" in "\n".join(call)
+    assert (tmp_path / "res" / "l8.launch.log").read_text() == f"{POD_LINE}\n{COST_LINES}\n"   # the launcher's output is kept
+    assert "[ledger] A8 gpu $0.418" in done.stdout
+    # exactly three uv calls: the .env token read, the launcher, the ledger entry
+    assert _uv_calls(tmp_path) == ["run python -c", "run python infra/launch_run.py", "run python -c"]
+
+
+def test_launch_hands_the_launcher_each_gpu_name_as_one_argument(tmp_path):
+    _launch_with_stub_uv(tmp_path, f"{POD_LINE}\n{COST_LINES}\n")
+    args = (tmp_path / "launch_args").read_text().split("\n")[:-1]
+    i = args.index("--gpus")
+    assert args[i + 1:i + 3] == ["NVIDIA A40", "NVIDIA L40S"] and args[i + 3] == "--container-gb"   # names with spaces stay whole
+    assert args[args.index("--") + 1:] == ["env", "M=l8", f"OUT={tmp_path / 'res' / 'l8'}", "bash",
+                                           "persona_affect/a8_rejection/pod.sh"]
+    assert args[args.index("--results-dir") + 1] == str(tmp_path / "res" / "l8")
+
+
+def test_launch_books_the_cap_when_a_pod_was_created_but_printed_no_cost(tmp_path):
+    done, _, call = _launch_with_stub_uv(tmp_path, f"{POD_LINE}\n[pod] lost contact\n", rc=1)
+    assert done.returncode == 1                                      # the launcher's code is passed on
+    assert call[-3:] == ["A8", "3.00", "pa-a8-l8 (upper bound, no cost line)"]
+
+
+def test_launch_books_nothing_when_no_pod_was_created(tmp_path):
+    done, _, call = _launch_with_stub_uv(tmp_path, "no GPU stock after all rounds; nothing launched, nothing charged\n", rc=1)
+    assert done.returncode == 1 and call is None                     # a no-stock retry round costs the ledger nothing
+    assert "nothing booked" in done.stdout
+    assert _uv_calls(tmp_path) == ["run python -c", "run python infra/launch_run.py"]
+
+
+def test_launch_cap_follows_maxmin_when_booking_an_upper_bound(tmp_path):
+    done, _, call = _launch_with_stub_uv(tmp_path, f"{POD_LINE}\n", rc=1, MAXMIN="30")
+    assert call[-3:] == ["A8", "0.90", "pa-a8-l8 (upper bound, no cost line)"]
