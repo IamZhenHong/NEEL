@@ -250,7 +250,7 @@ def run(m: str, out: Path, *, limit: int | None = None, gen=None) -> None:
     """Generate the histories and the branches for model `m` (its short name) into the directory `out`.
 
     `gen(convs, seeds)` returns one (text, finish_reason) per conversation; the default is _VllmGen (vLLM, on the pod), and
-    tests pass a fake. Extends welfare_training.stage0.run, turn by turn over all the conversations at once:
+    tests pass a fake. Extends welfare_training.stage0.run, one turn at a time over all the live conversations:
       1. histories: for each reviewer in N, F and R, 7 rounds over the 16 requests: the model's attempt at each request answers
          the conversation so far, which holds that reviewer's line after every earlier attempt (the on-policy histories).
          Seeds seed(f"PA-A8|{m}|hist|{rev}|{scen}|{turn}"). All 16 requests and all three reviewers, whatever `limit` is.
