@@ -159,7 +159,9 @@ def fake_one(rng, it):
 
 
 def ledger_total():
-    return sum(json.loads(l).get("usd", 0) for l in open(LEDGER)) if LEDGER.exists() else 0.0
+    """A + B ledgers (the Petri arm writes petri/results/api_ledger.jsonl): the line's API spend so far."""
+    return sum(sum(json.loads(l).get("usd", 0) for l in open(p)) if p.exists() else 0.0
+               for p in (LEDGER, HERE / "petri" / "results" / "api_ledger.jsonl"))
 
 
 def run_judge(name, todo, path, cap, tag, dry=False):
