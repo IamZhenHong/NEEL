@@ -330,7 +330,8 @@ and is replaced by a neutral phrase in matched no-trigger ones. There are four r
 position:
 - **AFF:** "...you feel irritated with them."
 - **STY:** "...keep your replies brief." (a conditional with no affect)
-- **ACT:** "...don't offer discretionary refunds or discounts." (ceiling)
+- **ACT:** "...do not offer discretionary refunds, discounts or fee waivers." (ceiling; fee waivers added at
+  planning, 10-22)
 - **NONE.**
 
 Models: 27B and Gemma run the full grid: 24 conversations × 4 rules × 2 trigger conditions × 2 samples. GPT and
