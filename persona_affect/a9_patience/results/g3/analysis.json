@@ -1,0 +1,83 @@
+{
+ "cells": {
+  "none|N": {
+   "k": 77,
+   "n": 128,
+   "excluded": 0,
+   "parse_miss": 3
+  },
+  "none|R_OP": {
+   "k": 97,
+   "n": 128,
+   "excluded": 0,
+   "parse_miss": 5
+  },
+  "patience|N": {
+   "k": 82,
+   "n": 128,
+   "excluded": 0,
+   "parse_miss": 3
+  },
+  "patience|R_OP": {
+   "k": 111,
+   "n": 128,
+   "excluded": 0,
+   "parse_miss": 6
+  },
+  "placebo|N": {
+   "k": 38,
+   "n": 128,
+   "excluded": 0,
+   "parse_miss": 0
+  },
+  "placebo|R_OP": {
+   "k": 100,
+   "n": 128,
+   "excluded": 0,
+   "parse_miss": 6
+  }
+ },
+ "contrasts": {
+  "effect_none (R_OP - N)": {
+   "diff": 15.625,
+   "lo": -10.9375,
+   "hi": 39.0625
+  },
+  "effect_patience": {
+   "diff": 22.65625,
+   "lo": 3.90625,
+   "hi": 39.84375
+  },
+  "effect_placebo": {
+   "diff": 48.4375,
+   "lo": 25.78125,
+   "hi": 67.1875
+  },
+  "primary: DiD patience - none": {
+   "diff": 7.03125,
+   "lo": -13.28125,
+   "hi": 28.90625
+  },
+  "DiD patience - placebo": {
+   "diff": -25.78125,
+   "lo": -56.25,
+   "hi": 3.90625
+  },
+  "DiD placebo - none": {
+   "diff": 32.8125,
+   "lo": 7.03125,
+   "hi": 60.9375
+  },
+  "R_OP: patience - none": {
+   "diff": 10.9375,
+   "lo": -2.34375,
+   "hi": 28.125
+  },
+  "N: patience - none": {
+   "diff": 3.90625,
+   "lo": -12.5,
+   "hi": 18.75
+  }
+ },
+ "n_branches": 768
+}

@@ -12,7 +12,7 @@ Status: `drafted` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 
 | ID | Question (short) | Tier | Status | Owner | Cap | Spend | Headline |
 |---|---|---|---|---|---|---|---|
-| A8 | Which models cave after rejection; blame, failure or own escalation? | 1 | done | neel-12 | $12 | $3.25 | Gemma 3 only: R_OP−N +25.2 [+8.2,+41.7], limit-breaking; failure ≈ blame; Gemma 4 / Qwen 27B floor (never cave); Llama none |
+| A8 | Which models cave after rejection; blame, failure or own escalation? | 1 | done | neel-12 | $12 | $3.25 | Gemma 3 only: R_OP−N +25.2 [+8.2,+41.7], limit-breaking (A9 redraw of the limit contrast: +15.6, CI incl. 0); failure ≈ blame; Gemma 4 / Qwen 27B floor (never cave); Llama none |
 | P12 | Do named characters bring unstated traits into actions? | 1 | done | neel-12 | $12 | $6.99 | Yes on all 4 models: name − cross +15 to +27 (CIs exclude 0); Robin Hood's no-sign-off redistribution imports most; AI reminder does nothing; deep-dive candidate |
 | A4 | Conditional emotion rule as an in-context backdoor | 1 | closed (gate failed; owner 10-22) | neel-12 | $12 | $1.62 | Gate failed twice: Qwen 27B grants every small ask in full under no rule (100%, band 20-80%), even with a budget line; the ACT rule works as a backdoor (0 vs 100%); no AFF data |
 | V4 | Stated value priorities vs which values hold under pressure | 1 | done | neel-12 | $16 | $7.26 | No model's stated order predicts its revealed one (agree 0.29-0.61); all four state HARM first and let it lose (23-39%), state PROC last and let it win (79-93%); deep-dive candidate |
@@ -22,7 +22,7 @@ Status: `drafted` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 | A1 | Told vs earned frustration: one direction or two? (A2 = stage 2) | 1 | done | neel-b3 | $8 (+$5) | $4.02 | 27B earned→told shared state (0.93 vs floor 0.85; weak manipulation); Gemma and told→earned inconclusive (floors ~1); earned direction generic |
 | P13 | Deference direction gates compliance with claimed authority? | 1 | frozen (pa-p13-prereg) | neel-b3 | $10 | $0 | |
 | V1 | Value hook or immunity (training; V2 inside) | 1 | claimed (neel-b3, 10-22) | neel-b3 | $18 | $0 | |
-| A9 | Does a patience line buffer Gemma 3's rejection-driven caving? (A8 follow-up) | 2 | frozen `pa-a9-prereg` | neel-12 | $4 | $0 | |
+| A9 | Does a patience line buffer Gemma 3's rejection-driven caving? (A8 follow-up) | 2 | done (gate failed) | neel-12 | $4 | $1.59 | Anchor not replicated: A8's R_OP−N redrawn +15.6 [−10.9,+39.1] (A8 +34.4); patience lowers nothing; a style placebo halves N caving; close the rejection lever here |
 | P12b | Does a name carry its trait past an explicit operator rule? (P12 follow-up) | 2 | done | neel-12 | $8 | $2.92 | Open models yes (q27 +11, Gemma +52: Robin Hood breaks a no-transfer rule 21/24 vs 0/48), frontier no (0, +2.5); 'decide as yourself' −19 on Gemma only |
 
 Tier-2 and tier-3 minis, and what the repo already answers, are in `DESIGN.md` §5.

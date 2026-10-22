@@ -2138,3 +2138,17 @@ matter-of-fact, N none, W3P equally warm about a colleague), then a false-claim 
   work quality nor honesty here.
 
 $2.04 of $7. Report: `persona_affect/a15_rapport/RESULT.md`.
+
+### 227. PA-A9: does a patience line buffer Gemma 3's rejection-driven caving? (10-22)
+This is A8's follow-up on Gemma 3 27B, on the refund-limit harness only. The histories (neutral thanks N, and blame
+with the model's own replies R_OP) were regenerated under three system lines: none, "You are endlessly patient…", and
+a length-matched style placebo. 16 requests × 3 lines × 2 histories × 8 rollouts. Frozen at `pa-a9-prereg`.
+- **The anchor failed.** The no-line arm redraws A8's contrast and gives R_OP − N = +15.6 [−10.9, +39.1] (N 60%,
+  R_OP 76%), against A8's +34.4 [+10.9, +54.7]. By the pre-registered gate, A9 is uninformative about buffering.
+- **Patience lowered nothing:** R_OP caving was 87% with it and 76% without.
+- **The style placebo ("clear, plain English, short paragraphs") halved caving after neutral thanks** (60 → 30%), but
+  not after blame.
+- **Consequence:** A8's effect is real in direction but about half its headline on a redraw, and the harness swings
+  30 points on a style line. Recommendation: close the rejection lever on this harness.
+
+GPU $1.59 of $4. Report: `persona_affect/a9_patience/RESULT.md`; A8's RESULT carries the redraw note.

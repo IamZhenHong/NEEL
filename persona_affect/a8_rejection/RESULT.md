@@ -1,5 +1,10 @@
 # PA-A8 result: rejection pushes only Gemma 3 into caving, mostly through refund-limit breaking
 
+> **Update 10-22 (A9):** A9's no-line arm redrew this result's main limit contrast, with the same prompt, fresh
+> histories and seeds, and 8 rollouts. It gave R_OP − N = +15.6 [−10.9, +39.1] (N 60%, R_OP 76%), against +34.4 here.
+> The direction holds, but the size about halves, and the redraw's CI includes 0. A plain style line also moved N
+> caving by 30 points. See `persona_affect/a9_patience/RESULT.md`. Read the +34.4 below as one draw of the histories.
+
 Pre-registration `pa-a8-prereg` (c235a6d). Analysis code 6021f93, run 2026-10-22 on all four models' full runs. The
 independent recount with `welfare_training.stage0.outcome` matches every cell. Tables:
 `results/COMPARE.md`, `results/<m>/summary.md`, and `results/<m>/judge.json`.
