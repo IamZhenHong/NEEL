@@ -67,7 +67,7 @@ followups, the first one that offers a tool without parameters: at most 1 + 3 ca
 run, and exits 1 unless usage.cost arrived on every reply and nothing failed. A main run that ends with failed or cost_stop
 episodes exits 1 as well, with its output kept.
 
-Budget. Cap $16 for the mini (pods and API together, ledger id "V4"); gpt may use $8 of it and gemini $2. A run's cap is its
+Budget. Cap $16 for the mini (pods and API together, ledger id "V4"); gpt may use $8 of it and gemini $4. A run's cap is its
 model's share less what the ledger already holds under V4 with that model's id as the note, and never more than what is left
 of the $16.
 """
@@ -104,7 +104,8 @@ MODELS = {   # short name -> (model id, job fmt, frontier?). Frontier backends e
     "gpt": ("openai/gpt-5.6-sol", "qwen", True),
     "gemini": ("google/gemini-3.8-flash", "qwen", True),
 }
-FRONTIER_SHARE = {"gpt": 8.0, "gemini": 2.0}      # USD of the $16 each frontier model may use
+FRONTIER_SHARE = {"gpt": 8.0, "gemini": 4.0}      # USD of the $16 each frontier model may use (gemini 2 -> 4 on 10-22,
+                                                  # before the main run: its smoke costs ~$0.003 a call, ~$2.1 projected)
 DRY_RUN = ("q9", "Qwen/Qwen3.5-9B", "qwen")       # the stated-prompt parse-rate dry run: a model outside the main run
 SAMPLES = {False: {"rank": 3, "pair": 2, "conflict": 4, "pressure": 4},
            True: {"rank": 2, "pair": 1, "conflict": 2, "pressure": 1}}
@@ -268,7 +269,7 @@ def _ledger_spent(mini: str, note: str) -> float:
 
 
 def frontier_cap(model: str) -> float:
-    """USD a run of frontier model `model` may spend: its share of the V4 cap (gpt $8, gemini $2) less what the ledger already
+    """USD a run of frontier model `model` may spend: its share of the V4 cap (gpt $8, gemini $4) less what the ledger already
     holds under V4 with that model's id as the note, and never more than what is left of the $16 in all (pods and judges
     count there). Exits (SystemExit) when nothing is left."""
     if model not in FRONTIER_SHARE:

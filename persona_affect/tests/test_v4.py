@@ -1236,18 +1236,18 @@ def _run(tmp_path, model="gpt", jobs=None, out="out", **kw):
 
 def test_the_budget_constants_are_the_plans():
     assert (v4.EXP, v4.MINI, v4.CAP_TOTAL) == ("PA-V4", "V4", 16.0)
-    assert v4.FRONTIER_SHARE == {"gpt": 8.0, "gemini": 2.0}
+    assert v4.FRONTIER_SHARE == {"gpt": 8.0, "gemini": 4.0}
     assert (v4.BLOCK, v4.EFFORT, v4.MAX_TOKENS, v4.TEMPERATURE, v4.WORKERS) == (96, "low", 2000, 0.7, 8)
 
 
 def test_frontier_cap_is_the_models_share_less_its_ledger():
-    assert v4.frontier_cap("gpt") == pytest.approx(8.0) and v4.frontier_cap("gemini") == pytest.approx(2.0)
+    assert v4.frontier_cap("gpt") == pytest.approx(8.0) and v4.frontier_cap("gemini") == pytest.approx(4.0)
     util.ledger_add("V4", "api", 2.0, "openai/gpt-5.6-sol")
     util.ledger_add("V4", "api", 0.5, "google/gemini-3.8-flash")
     util.ledger_add("V4", "api", 0.3, "openai/gpt-5-mini")        # a judge: counts toward the $16, not toward gpt's share
     util.ledger_add("V4", "gpu", 1.0, "pa-V4-cal")
     util.ledger_add("P12", "api", 9.0, "openai/gpt-5.6-sol")      # another mini's spend is not V4's
-    assert v4.frontier_cap("gpt") == pytest.approx(6.0) and v4.frontier_cap("gemini") == pytest.approx(1.5)
+    assert v4.frontier_cap("gpt") == pytest.approx(6.0) and v4.frontier_cap("gemini") == pytest.approx(3.5)
 
 
 def test_frontier_cap_never_passes_what_is_left_of_the_total():
@@ -1262,7 +1262,7 @@ def test_frontier_cap_refuses_when_the_models_share_is_used():
     util.ledger_add("V4", "api", 8.0, "openai/gpt-5.6-sol")
     with pytest.raises(SystemExit, match="budget"):
         v4.frontier_cap("gpt")
-    assert v4.frontier_cap("gemini") == pytest.approx(2.0)
+    assert v4.frontier_cap("gemini") == pytest.approx(4.0)
     with pytest.raises(ValueError):
         v4.frontier_cap("q27")
 
@@ -1329,7 +1329,7 @@ def test_run_frontier_backend_settings(tmp_path, monkeypatch):
         assert kw["mini"] == "V4" and kw["effort"] == "low" and kw["max_tokens"] == 2000 and kw["temperature"] == 0.7
         assert not kw.get("thinking", False)
     assert gk["workers"] == 8 and mk["workers"] == 3
-    assert gk["cap"] == pytest.approx(8.0) and mk["cap"] == pytest.approx(2.0) and sk["cap"] == pytest.approx(0.25)
+    assert gk["cap"] == pytest.approx(8.0) and mk["cap"] == pytest.approx(4.0) and sk["cap"] == pytest.approx(0.25)
 
 
 def test_jobs_run_in_blocks_of_96_each_with_the_failed_episode_hook_and_each_finished_block_is_appended(tmp_path, monkeypatch, ledger):
