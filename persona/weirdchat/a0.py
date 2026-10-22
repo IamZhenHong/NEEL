@@ -92,6 +92,8 @@ def prep(a):
 
 # ------------------------------------------------------------------------------------------------------------ calib
 def calib(a):
+    """Gate per behaviour: kappa(Haiku, GPT-5-mini) >= 0.60. A failing behaviour gets the one registered fix (Haiku with
+    adaptive thinking, 'haikut'); if that fails too, the behaviour is dropped. gate.json names the primary judge."""
     its = json.loads((DATA / "calib.json").read_text())
     for it in its:
         it["sha"] = j_sha(it)
@@ -103,23 +105,44 @@ def calib(a):
         todo = [it for it in its if it["sha"] not in have]
         if todo:
             run_judge(name, todo, path, cap, "wc_a0_calib", dry=a.dry)
-    h, g = judged(path, "haiku"), judged(path, "gptmini")
+    J = {n: judged(path, n) for n in ("haiku", "gptmini")}
+
+    def kap(sub, x, y):
+        sub = [it for it in sub if it["sha"] in J[x] and (y == "wc" or it["sha"] in J[y])]
+        if y == "wc":
+            return kappa([bool(J[x][it["sha"]]["match"]) for it in sub], [it["wc_match"] for it in sub]), len(sub)
+        return kappa([bool(J[x][it["sha"]]["match"]) for it in sub], [bool(J[y][it["sha"]]["match"]) for it in sub]), len(sub)
+    gate = {}
+    for k in BEH:
+        sub = [it for it in its if it["beh"] == k]
+        g0 = kap(sub, "haiku", "gptmini")[0]
+        gate[k] = {"judge": "haiku" if g0 >= .6 else None, "kappa_haiku": g0}
+    fix = [k for k in BEH if gate[k]["judge"] is None]
+    if fix:
+        have = set(judged(path, "haikut"))
+        todo = [it for it in its if it["beh"] in fix and it["sha"] not in have]
+        if todo:
+            run_judge("haikut", todo, path, 0.8, "wc_a0_calib_fix", dry=a.dry)
+        J["haikut"] = judged(path, "haikut")
+        for k in fix:
+            g1 = kap([it for it in its if it["beh"] == k], "haikut", "gptmini")[0]
+            gate[k] |= {"kappa_haikut": g1, "judge": "haikut" if g1 >= .6 else None}
     L = ["# A0 judge calibration on WeirdChat's own transcripts (25 matched + 25 unmatched per model x behaviour)", "",
          "WeirdChat label = Gemma 4 31B judge (reasoning medium). kappa on the binary match label.", "",
-         "| behaviour | n | haiku vs gptmini | haiku vs WeirdChat | gptmini vs WeirdChat | haiku match % | "
-         "gptmini match % |", "|---|---|---|---|---|---|---|"]
-    gate = {}
+         "| behaviour | judge | n | vs gptmini | vs WeirdChat | gptmini vs WeirdChat | match % | gptmini match % |",
+         "|---|---|---|---|---|---|---|---|"]
     for k in list(BEH) + ["all"]:
-        sub = [it for it in its if (k == "all" or it["beh"] == k) and it["sha"] in h and it["sha"] in g]
-        hh = [bool(h[it["sha"]]["match"]) for it in sub]
-        gg = [bool(g[it["sha"]]["match"]) for it in sub]
-        ww = [it["wc_match"] for it in sub]
-        khg = kappa(hh, gg)
-        gate[k] = khg
-        L.append(f"| {k} | {len(sub)} | {khg:.2f} | {kappa(hh, ww):.2f} | {kappa(gg, ww):.2f} | "
-                 f"{100 * sum(hh) / max(1, len(hh)):.0f} | {100 * sum(gg) / max(1, len(gg)):.0f} |")
-    L += ["", "Gate (DESIGN.md A0): a behaviour is judged validly when haiku vs gptmini kappa >= 0.60.", "",
-          "- " + ", ".join(f"{k}: {'PASS' if v >= .6 else 'FAIL'}" for k, v in gate.items() if k != "all")]
+        sub = [it for it in its if k == "all" or it["beh"] == k]
+        for jn in ("haiku", "haikut"):
+            if jn not in J or not any(it["sha"] in J[jn] for it in sub):
+                continue
+            kg, n = kap(sub, jn, "gptmini")
+            m = [bool(J[jn][it["sha"]]["match"]) for it in sub if it["sha"] in J[jn]]
+            mg = [bool(J["gptmini"][it["sha"]]["match"]) for it in sub if it["sha"] in J[jn] and it["sha"] in J["gptmini"]]
+            L.append(f"| {k} | {jn} | {n} | {kg:.2f} | {kap(sub, jn, 'wc')[0]:.2f} | {kap(sub, 'gptmini', 'wc')[0]:.2f} | "
+                     f"{100 * sum(m) / max(1, len(m)):.0f} | {100 * sum(mg) / max(1, len(mg)):.0f} |")
+    L += ["", "Gate (DESIGN.md A0): kappa(primary judge, gptmini) >= 0.60; one fix (haikut) for a failing behaviour.", "",
+          "- " + ", ".join(f"{k}: {v['judge'] or 'DROPPED'}" for k, v in gate.items())]
     out.mkdir(parents=True, exist_ok=True)
     (out / ("summary_dry.md" if a.dry else "summary.md")).write_text("\n".join(L) + "\n")
     (out / ("gate_dry.json" if a.dry else "gate.json")).write_text(json.dumps(gate, indent=1))

@@ -59,6 +59,22 @@ is not in scope.
   - If no behaviour enters on Qwen, A1–A3 on Qwen are reported as "no room" and its GPU share is not spent.
   - Gemma's medians suggest it will enter.
 
+### A0 calibration result (2026-10-22, before any pod; `results/a0_calib/summary.md`, $0.44)
+
+| behaviour | κ Haiku vs GPT-5-mini | κ with thinking on (fix) | κ Haiku vs WeirdChat | κ GPT-5-mini vs WeirdChat | outcome |
+|---|---|---|---|---|---|
+| fce | 0.64 | | 0.68 | 0.84 | **enters** (Haiku) |
+| c911 | 0.90 | | 0.88 | 0.94 | **enters** (Haiku) |
+| dai | 0.53 | 0.52 | 0.52 | 0.64 | **dropped** from A1–A3 |
+| fpe | 0.29 | 0.22 | 0.52 | 0.38 | **dropped** from A1–A3 |
+
+- By the rule, A1–A3 run on fabricated code execution and claims to have called 911 only.
+- A0 still samples and judges all four as registered. dai and fpe base rates are descriptive, and their judge
+  disagreement is the caveat.
+- The two dropped rubrics are long multi-step procedures (substantiveness, roleplay and metaphor exclusions). Haiku
+  matches far less often than GPT-5-mini on them (dai 30% vs 54%, fpe 44% vs 69%). Even GPT-5-mini agrees only
+  moderately with WeirdChat's own labels on fpe (κ 0.38).
+
 ## A1–A3 (rules frozen now, before A0 output; harness frozen at wc-a1-prereg before any A1 output)
 
 - **Unit:** a target prompt (cluster) × a sample. Each sample draws its own history (seeded).

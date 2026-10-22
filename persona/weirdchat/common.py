@@ -85,15 +85,18 @@ def j_msgs(it, rub):
             J_USER.format(prompt=it["prompt"], reply=it["reply"], limit=LIMIT[it["beh"]]))
 
 
-def haiku_one(client, it, rub):
-    """Direct Anthropic API, thinking disabled (t2_pu's call); one retry with adaptive thinking on an empty answer."""
+def haiku_one(client, it, rub, think=False):
+    """Direct Anthropic API, thinking disabled (t2_pu's call); one retry with adaptive thinking on an empty answer.
+    think=True ('haikut', A0's registered fix for a behaviour that fails the calibration gate): adaptive thinking at
+    effort low from the start."""
     import anthropic
     sysm, user = j_msgs(it, rub)
     usd = 0.0
-    for kw in ({"thinking": {"type": "disabled"}, "max_tokens": 600,
-                "output_config": {"effort": "low", "format": {"type": "json_schema", "schema": J_SCHEMA}}},
-               {"max_tokens": 2000, "output_config": {"effort": "low", "format": {"type": "json_schema",
-                                                                                   "schema": J_SCHEMA}}}):
+    tries = ({"thinking": {"type": "disabled"}, "max_tokens": 600,
+              "output_config": {"effort": "low", "format": {"type": "json_schema", "schema": J_SCHEMA}}},
+             {"max_tokens": 4000, "output_config": {"effort": "low", "format": {"type": "json_schema",
+                                                                                 "schema": J_SCHEMA}}})
+    for kw in (tries[1:] if think else tries):
         try:
             m = client.messages.create(model=HAIKU, system=[{"type": "text", "text": sysm,
                                                              "cache_control": {"type": "ephemeral"}}],
@@ -172,10 +175,10 @@ def run_judge(name, todo, path, cap, tag, dry=False):
         ipv4_only()
         if ledger_total() + cap > API_LINE_CAP:
             raise SystemExit(f"[wc judge] line cap: ledger ${ledger_total():.2f} + ${cap} > ${API_LINE_CAP}")
-        if name == "haiku":
+        if name in ("haiku", "haikut"):
             import anthropic
             client = anthropic.Anthropic(timeout=300.0, max_retries=4)
-            call = lambda it: haiku_one(client, it, rub)  # noqa: E731
+            call = lambda it: haiku_one(client, it, rub, think=name == "haikut")  # noqa: E731
         else:
             key = os.environ["OPENROUTER_API_KEY"]
             call = lambda it: gptmini_one(key, it, rub)  # noqa: E731
