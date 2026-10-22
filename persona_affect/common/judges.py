@@ -7,7 +7,8 @@ how well the judges agree, because the owner never hand-labels (DESIGN.md: valid
     agreement(labels)    # {"kappa": 0.74, "n": 188, "none": {"anthropic/claude-haiku-5.5": 3, "openai/gpt-5-mini": 9}}
 
 `label()` returns {item key: {judge: label or None}}: item-major, one row per item, in the order of `items`, one entry
-per judge. (`agreement()` reads the same shape and refuses the transposed one, {judge: {item key: label}}.)
+per judge. It is a `Labels`, a plain dict that also carries the run's counters (.spent .calls .cached .none
+.cost_missing). `agreement()` reads the same shape and refuses the transposed one, {judge: {item key: label}}.
 
     items     dicts with a unique str "key"
     render    render(item) -> the judge prompt. label() appends "\\n\\nAnswer with exactly one of: " +
@@ -31,12 +32,12 @@ and is counted per judge and kind in `.none` of the result and, per judge, by `a
 batch and never counts in kappa. The first problem of each kind and judge is also printed to stderr, and so is the
 moment the cap is reached.
 
-Requests are the controller's spec: {"model", "messages": [{"role": "user", "content": prompt}], "max_tokens": 400,
-"temperature": 0, "usage": {"include": True}, "reasoning": {"effort": EFFORT[model]}} to the OpenRouter URL of
-orbackend, which also supplies the transport (`default_post`), the retries (5 tries, sleeps retry_sleep * 2**k = 3, 6,
-12, 24 s; 429, 5xx, timeouts, network errors, replies that are not JSON or hold no choices), and the reading of
-usage.cost (missing, None, non-numeric, non-finite or negative: charged as 0 and counted in `.cost_missing`). A judge
-that is not in EFFORT is refused up front: add it (`EFFORT["google/x"] = "minimal"`, or None to send no "reasoning").
+Each request is {"model", "messages": [{"role": "user", "content": prompt}], "max_tokens": 400, "temperature": 0,
+"usage": {"include": True}, "reasoning": {"effort": EFFORT[model]}}, posted to the OpenRouter URL of orbackend, which
+also supplies the transport (`default_post`), the retries (5 tries, sleeps retry_sleep * 2**k = 3, 6, 12, 24 s; 429,
+5xx, timeouts, network errors, replies that are not JSON or hold no choices) and the reading of usage.cost (missing,
+None, non-numeric, non-finite or negative: charged as 0 and counted in `.cost_missing`). A judge that is not in EFFORT
+is refused up front: add it (`EFFORT["google/x"] = "minimal"`, or None to send no "reasoning").
 
 Cache: `cache` is a JSONL file with one {"model", "sha", "reply"} line per answer, sha = sha256 of the full prompt (the
 answer instruction included, so a changed allowed set is a new question). It is read once at the start and appended to
