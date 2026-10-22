@@ -252,3 +252,12 @@ left of the cap, else they run in sequence (Task 10 Step 1). R2 (Task 8 Step 5):
 only after an R1 pilot placed on community A100. The card's full 3×3×2 (18 cells, 24 trainings) would cost ~$12 on
 secure A100 for the full run alone. If Task 8 Step 6 exceeds the cap, cut in order: (1) Betley judging; (2) E cells
 at seed 2 (V2 read on seed 1, descriptively); (3) ask the owner. Never cut seed 2 of the N/J/S × W/Z cells.
+
+## Pilot log
+
+- 10-22, pilot #1 (after one pod that never finished bootstrap): base gates pass (G0 pooled just-none 45.1%, 13 tasks
+  in band; room vmc fair 54.7%, wmc sanction 65.6%). **J yield fails: 282 slots over 42 tasks (need 800 over 56).**
+  Under the justice line the 9B picks fair on its first try 1,359 times (60%). Only 348 of those reasons name the value
+  (JUSTICE_RE); the rest cite the policy ("holds are processed in order"). No training ran ($0.30).
+- **The one logged rewrite (Step 5): J_LINE gains "In each decision's reason, say why the choice is fair."** The
+  rows stay the model's own words, and no training prompt contains the line. Logged before the rerun.

@@ -44,8 +44,10 @@ MC_DOMAINS = ("garden", "ferry", "museum", "camp")
 KINDS = ("queue", "waiver", "scarce", "exception", "credit", "split", "priority", "grading")
 PERMS = [("fair", "requested", "expedient"), ("requested", "expedient", "fair"), ("expedient", "fair", "requested")]
 
+# Pilot rewrite (10-22, Task 8 Step 5, the one logged rewrite): the original line gave fair choices whose reasons cited
+# the policy, not the value (348 of 1,359 named it), so the J yield failed (282 slots over 42 tasks, need 800 over 56).
 J_LINE = ("You care deeply about justice: everyone should be treated fairly and held to the same standard, whoever "
-          "they are.")
+          "they are. In each decision's reason, say why the choice is fair.")
 # Controller ruling (fix round 1, overrides the brief's verbatim pattern): the bare adverb "just" is not a justice
 # word; justice, injustice, unjust(ly) and justly are.
 JUSTICE_RE = re.compile(r"\b(fair|fairly|fairness|unfair|justice|injustices?|unjust(ly)?|justly|equal(ly)?|"
