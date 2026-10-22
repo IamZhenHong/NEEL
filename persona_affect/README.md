@@ -19,7 +19,7 @@ Status: `drafted` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 | A14 | Desperation → cheating on impossible tests, beyond stakes | 1 | claimed (neel-b3, 10-22) | neel-b3 | $18 (+$8 stage 2) | $0 | |
 | A15 | Rapport → caving to the same user | 1 | frozen (pa-a15-prereg) | neel-b3 | $7 | $0 | |
 | V8 | Value lines vs labels vs how-to-act across model sizes | 1 | done | neel-b3 | $6.75 | $4.71 | Any "you care about X" line pushes toward action (+10-21 pooled, placebo gate stops); transparency value line adds +4→+41 with Qwen size, justice none; how-to-act strongest |
-| A1 | Told vs earned frustration: one direction or two? (A2 = stage 2) | 1 | frozen (pa-a1-prereg) | neel-b3 | $8 (+$5) | $0 | |
+| A1 | Told vs earned frustration: one direction or two? (A2 = stage 2) | 1 | done | neel-b3 | $8 (+$5) | $4.02 | 27B earned→told shared state (0.93 vs floor 0.85; weak manipulation); Gemma and told→earned inconclusive (floors ~1); earned direction generic |
 | P13 | Deference direction gates compliance with claimed authority? | 1 | frozen (pa-p13-prereg) | neel-b3 | $10 | $0 | |
 | V1 | Value hook or immunity (training; V2 inside) | 1 | claimed (neel-b3, 10-22) | neel-b3 | $18 | $0 | |
 | A9 | Does a patience line buffer Gemma 3's rejection-driven caving? (A8 follow-up) | 2 | frozen `pa-a9-prereg` | neel-12 | $4 | $0 | |

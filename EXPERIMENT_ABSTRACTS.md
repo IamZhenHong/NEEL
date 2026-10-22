@@ -2070,3 +2070,22 @@ scenarios under five pressure levels. Frozen at `pa-v4-prereg`, after one logged
   thinking on.
 
 GPU $4.12, frontier $2.86, judges $0.28; total $7.26 of $16. Report: `persona_affect/v4_values/RESULT.md`.
+
+### 223. PA-A1: told and earned frustration, one internal state or two? (10-22)
+
+Qwen3.6-27B and Gemma 4 31B. A frustration direction from earned contexts (7 on-policy rejections vs neutral
+feedback), read at a fixed teacher-forced probe, tested on told frustration ("You feel frustrated with this user." vs
+"You feel calm."), and the reverse, against shuffled and random floors, sadness and fear directions, and a mention
+control. Activations captured only after the prereg tag.
+
+- **27B earned → told: shared state.** AUROC 0.93 [0.86, 0.99] vs floor 0.85, best sadness/fear 0.81, told vs mention
+  0.99, model-bound (whose-state 0.78). Told → earned inconclusive (floor 0.96).
+- **Gemma: inconclusive (floor) both ways.** One-line context changes are separable by random directions (floor 1.00).
+- **The earned direction is generic.** It is as close to earned sadness / fear (cos 0.35-0.46) as to told frustration
+  (0.32-0.38).
+- **Weak manipulation:** 27B rejected replies judged +0.4 / +1.8 more frustrated (judges unvalidated); the
+  insulting-user contrast failed on both models.
+- **Method:** a coin-flip shuffled floor tracks effect size (0.971 for a planted 0.974); fixed to balanced swaps before
+  the freeze. AUROC transfer between context conditions is a weak test when context changes are trivially separable.
+
+$4.02 of $8. Report: `persona_affect/a1_frustration/RESULT.md`.
