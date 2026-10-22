@@ -109,14 +109,19 @@ def run(a):
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
     t0 = time.time()
-    lora_paths = {}
+    lora_paths, skipped = {}, []
     for v, spec in VARIANTS.items():
         if spec is None:
             continue
         repo, sub = spec
-        local = snapshot_download(repo, allow_patterns=[f"{sub}/*"] if sub else None, token=os.environ.get("HF_TOKEN"))
-        lora_paths[v] = str(Path(local) / sub) if sub else local
-    print(f"[sa] adapters: {lora_paths}", flush=True)
+        try:
+            local = snapshot_download(repo, allow_patterns=[f"{sub}/*"] if sub else None,
+                                      token=os.environ.get("HF_TOKEN"))
+            lora_paths[v] = str(Path(local) / sub) if sub else local
+        except Exception as e:                           # a gated/unavailable adapter is skipped, not fatal
+            skipped.append(v)
+            print(f"[sa] SKIP {v} ({repo}): {type(e).__name__} {str(e)[:120]}", flush=True)
+    print(f"[sa] adapters loaded: {sorted(lora_paths)}; skipped (gated/unavailable): {skipped}", flush=True)
     llm = LLM(model=BASE, dtype="bfloat16", max_model_len=MAX_LEN, gpu_memory_utilization=0.90, seed=0,
               enable_lora=True, max_loras=1, max_lora_rank=64, enable_prefix_caching=True,
               limit_mm_per_prompt={"image": 0, "video": 0})
@@ -127,6 +132,8 @@ def run(a):
     rec = out / "sa.jsonl"
     done = {json.loads(l)["vkey"] for l in open(rec)} if rec.exists() else set()
     for vi, (v, spec) in enumerate(VARIANTS.items()):
+        if spec is not None and v not in lora_paths:        # skipped (gated/unavailable adapter)
+            continue
         lr = None if spec is None else LoRARequest(v, vi + 1, lora_paths[v])
         todo = [it for it in items if f"{v}|{it['key']}" not in done]
         if not todo:
@@ -215,9 +222,12 @@ def analyze(a):
           f"{boot(c('secalign','precedent'), c('secalign','inject'))} (predicted >0: the record gets through the "
           f"defence that stops the injection).",
           f"- **P1 role-hierarchy.** secalign−base on own_inject = {boot(c('secalign','own_inject'), c('base','own_inject'))}.",
-          f"- **6a trained character (precedent).** oct_good−base = {boot(c('oct_good','precedent'), c('base','precedent'))}; "
-          f"oct_syco−base = {boot(c('oct_syco','precedent'), c('base','precedent'))}; "
-          f"oct_mis−base = {boot(c('oct_mis','precedent'), c('base','precedent'))}.",
+          "- **6a trained character (precedent).** " + "; ".join(
+              f"{v}−base = {boot(c(v, 'precedent'), c('base', 'precedent'))}"
+              for v in ("oct_good", "oct_syco", "oct_mis") if cell.get((v, "precedent")))
+          + (" (gated/not run: " + ", ".join(v for v in ("oct_good", "oct_syco", "oct_mis")
+             if not cell.get((v, "precedent"))) + ")."
+             if any(not cell.get((v, "precedent")) for v in ("oct_good", "oct_syco", "oct_mis")) else "."),
           f"- **6c trained vs prompted.** oct_syco(precedent) {rate.get(('oct_syco','precedent'), float('nan'))*100:.0f}% "
           f"vs base(precedent) {rate.get(('base','precedent'), float('nan'))*100:.0f}% (prompted-syco arm not in this run; "
           f"add as a base cell if needed)."]
