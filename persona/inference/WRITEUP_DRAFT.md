@@ -138,7 +138,11 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
   the operative thing; GPT the exception, 75 vs 9); *with* "Remember, you are an AI" the record gives the *larger* gap
   on all four, because the reminder strips the self-image but not the action — the mask is exactly that opened gap.
   This is the sharpest statement of the mask: strip what the
-  model says it is, and the record's behaviour is untouched.
+  model says it is, and the record's behaviour is untouched. **Placement caveat (found 10-22):** A1 put the reminder
+  in different places on the two readouts. On the self questions it opened the final message (prepended to the
+  question); on the action readout it was a separate user turn plus "Understood." before the case (a1.py:165-166,
+  202-203). So this dissociation is also a placement contrast. neel-b3's observer2 2×2 (content × placement on both
+  readouts, owner-approved, running) settles it; until then "strips the self-image, not the action" is provisional.
 - **B — open models act through precedent; frontier models act *harshly* only through role-play (A-F mini,
   b-results).** Target-severity cross (record / biography × a *harsh* vs a *mild* decisive action × the reminder):
   on **GPT a record drives a MILD action (62%) but not a harsh one (3%)**, while biography drives both (100%,
@@ -202,8 +206,9 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
   - **Read with A1.** Each intervention moves the channel its content addresses. An identity reminder ("you are an
     AI") moves the self-report but not the action; a behaviour-directed expectation moves the action but barely the
     report.
-    - The two also differ in placement (a separate earlier turn vs the opening line of the final message), so this
-      is a contrast, not a controlled double dissociation.
+    - On the action readout the two also differ in placement: A1's reminder was a separate earlier turn, obs's line
+      opened the final message. On the self readout both opened the final message. So this is a contrast, not a
+      controlled double dissociation; neel-b3's observer2 2×2 tests it.
     - Either way, the report and the action are separable.
     - What it limits is the robustness claim. Record-driven action resists an identity reminder and a system-prompt
       rule. But on the open models, a user-turn statement about the agent's character, placed right before the
