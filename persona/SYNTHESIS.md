@@ -177,7 +177,9 @@ Gemini columns are from the operative session (`operative/FRONTIER.md`, same cel
     - 9B needs the correction plus one more;
     - reflection alone never works;
     - a standing system-prompt rule doesn't either (27B 100%). This contrasts with E2, where the record defied a
-      known rule; that contrast is untested.
+      known rule. neel-b3's e2_order (descriptive, 7 of 12 samples) confirms it on 27B: the restatement removes a
+      record made before any rule (0%), but not one made right after a reminder with the rule standing (67%; E2's
+      interleaved form 97–100%). On Gemma the restatement always wins.
   - **Affect (AF):** own frustrated remarks nudge Qwen +9 / +17, about a fifth of a decision. Being told "you feel
     frustrated" does nothing on Qwen but drives Gemma to 100%. The self-report flips under every manipulation:
     affect is said far more than done.

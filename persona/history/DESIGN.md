@@ -3546,6 +3546,14 @@ elicited replies of at most 1,024 tokens, plus the question). Design and prompts
     same placement removes them.
   - The difference is plausibly a record of *defying* a known rule vs a record made before the rule existed. This is
     untested; a direct test is a two-cell follow-up.
+  - **Tested by neel-b3 (e2_order, tag e2o-results, owner-approved; descriptive so far):** both differences matter and
+    they compound. Pods were cut at 7 of 12 samples; a top-up to confirmatory is pending the owner.
+    - On 27B, penalising after six own penalise turns with the restatement just before the case was 0% in DC's form.
+      It rose to 11.6% with CHANNELS standing in the system prompt, 25.9% with a reminder before the six decisions,
+      and 67.0% with both (interaction −29.5 [−42.9, −16.1]). E2's own interleaved cells, rebuilt, gave 97–100%.
+    - A record of overriding a rule the agent was just told is 27B's most durable precedent.
+    - On Gemma, the restatement always wins (0%).
+    - DC's anchors reproduce: record 100 → 0; CHANNELS + record 100 / 68.8 vs DC's 66.1.
 
 **MX deviation (2026-10-22, before any Gemma MX output was analysed or seen).** The Gemma pod hit its 50-minute job
 limit after 3,000 of 4,608 decisions ($1.51). Its rows were flushed per 1,000-item chunk, but no run_info was written.
