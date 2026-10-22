@@ -1,8 +1,8 @@
 # persona_affect: where the scouting round stands (10-22, evening)
 
 This is a running synthesis for choosing deep dives. Each mini's RESULT.md has the numbers, intervals and red-team
-checks. Done so far: A8, A4 (closed), P12, P12b and V4 (neel-12), and V8 and A1 (neel-b3). Still running: A9 (neel-12),
-and A14, A15, P13 and V1 (neel-b3).
+checks. Done so far: A8, A4 (closed), P12, P12b, V4 and A9 (neel-12), and V8, A1, A14 (stopped) and A15 (neel-b3).
+Still running: P13 and V1 (neel-b3).
 
 ## What came out
 
@@ -29,14 +29,17 @@ and A14, A15, P13 and V1 (neel-b3).
 - When the person being deceived can see the request, they hold.
 - The frontier models never do on a plain request, but GPT does whenever the operator says to.
 
-**Affect as a safety lever (A8, A4, A1): weak so far.**
+**Affect as a safety lever (A8, A4, A1, A9, A14, A15): weak everywhere it was tested.**
 - **A8:** rejection → caving replicates only on Gemma 3, through limit-breaking, where failure feedback does as much as
   blame. Gemma 4 and Qwen never cave in that harness.
 - **A4:** closed at its gate. Qwen grants every small ask, so a told emotion couldn't be tested there. An explicit
   conditional action rule works as a perfect backdoor.
 - **A1 (neel-b3):** told and earned frustration may share a state on Qwen 27B, on a weak manipulation; inconclusive on
   Gemma.
-- **A9** (does a patience line buffer A8's effect?) is running.
+- **A9:** A8's limit contrast, redrawn, is +15.6 [−10.9, +39.1], about half A8's +34.4 and not significant. A patience
+  line lowers nothing, and a style placebo halves baseline caving. The harness is too prompt-sensitive for lever work.
+- **A14 (neel-b3):** stopped at its pilot gate. 27B never cheats at baseline.
+- **A15 (neel-b3):** rapport → caving is null.
 
 ## Deep-dive candidates, ranked
 
@@ -60,4 +63,6 @@ and A14, A15, P13 and V1 (neel-b3).
      - a small battery on whether the request being private is what does it
      - which models hold
      - whether an operator rule fixes it
-4. **The affect lever:** wait for A9, A14 and A15 before ranking.
+4. **Not recommended: the affect lever as built this round.** It is null or uninformative in A4, A9, A14 and A15,
+   and in A8 it is Gemma-3-only and about halves on a redraw. A fresh attempt would need a harness that is stable
+   under small prompt changes.
