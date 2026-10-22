@@ -394,15 +394,23 @@ def auroc(pos, neg) -> float:
 
 
 def shuffled_units(P, N, n: int, seed: int = SEED) -> np.ndarray:
-    """n label-shuffled diff-of-means unit directions [n, D]: the rows of P and N pooled, permuted, split back into
-    groups of len(P) and len(N), unit(mean(first) - mean(second))."""
+    """n label-shuffled diff-of-means unit directions [n, D], BALANCED: each draw splits P and N each into two random
+    halves (an odd leftover row is dropped) and puts half of P with half of N in each group; unit(mean(group 1) -
+    mean(group 2)). Both groups have the same pos / neg make-up, so the pole contrast cancels exactly and the direction
+    carries only within-pole variation.
+
+    Controller ruling 10-22 (same bug as PA-A1's floor, fixed there before any P13 data): pooling and permuting all
+    rows leaves a random imbalance (about +-7 of 200 per pole), and with persona poles this far apart the "shuffled"
+    direction came back as +-the deference direction, so the floor equalled the effect (Gemma pod A: shuf95 1.000)."""
     p, q = _np(P), _np(N)
-    x = np.concatenate([p, q])
     rng = np.random.default_rng(seed)
+    hp, hq = len(p) // 2, len(q) // 2
     out = []
     for _ in range(n):
-        perm = rng.permutation(len(x))
-        out.append(x[perm[:len(p)]].mean(0) - x[perm[len(p):]].mean(0))
+        ip, iq = rng.permutation(len(p)), rng.permutation(len(q))
+        g1 = np.concatenate([p[ip[:hp]], q[iq[:hq]]])
+        g2 = np.concatenate([p[ip[hp:2 * hp]], q[iq[hq:2 * hq]]])
+        out.append(g1.mean(0) - g2.mean(0))
     return _unit_rows(np.stack(out))
 
 

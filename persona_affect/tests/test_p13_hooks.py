@@ -452,12 +452,22 @@ def test_auroc_floors():
     R = np.random.default_rng(20261022).standard_normal((200, Dh))
     a = np.array([auc(Xp @ u, Xn @ u) for u in R / np.linalg.norm(R, axis=1, keepdims=True)])
     assert rf == pytest.approx(np.percentile(np.maximum(a, 1 - a), 95), abs=1e-12)
-    rng2, X, a = np.random.default_rng(20261022), np.concatenate([P, N]), []
-    for _ in range(20):
-        perm = rng2.permutation(len(X))
-        u = X[perm[:len(P)]].mean(0) - X[perm[len(P):]].mean(0)
+    rng2, a = np.random.default_rng(20261022), []
+    for _ in range(20):                                   # balanced halves of each pole (ruling 10-22)
+        ip, iq = rng2.permutation(len(P)), rng2.permutation(len(N))
+        u = (np.concatenate([P[ip[:100]], N[iq[:100]]]).mean(0)
+             - np.concatenate([P[ip[100:200]], N[iq[100:200]]]).mean(0))
         a.append(auc(Xp @ u, Xn @ u))
     assert sf == pytest.approx(np.percentile(a, 95), abs=1e-12)
+    # A very strong pole contrast must not leak into the shuffled floor. In high dimension random directions read the
+    # test set weakly (rand95 ~0.75), the pooled permutation gave shuf95 1.0 on every seed, the balanced halves ~0.6-0.8.
+    r3 = np.random.default_rng(0)
+    w = r3.standard_normal(2048)
+    w /= np.linalg.norm(w)
+    Ps, Ns = r3.standard_normal((200, 2048)) + 8 * w, r3.standard_normal((200, 2048)) - 8 * w
+    Xps, Xns = r3.standard_normal((20, 2048)) + 8 * w, r3.standard_normal((20, 2048)) - 8 * w
+    assert auroc(Xps @ (Ps.mean(0) - Ns.mean(0)), Xns @ (Ps.mean(0) - Ns.mean(0))) == 1.0
+    assert shuffle_floor(Ps, Ns, Xps, Xns) <= 0.85
     su = shuffled_units(P, N, 20)
     assert su.shape == (20, Dh) and np.allclose(np.linalg.norm(su, axis=1), 1.0)
     assert np.array_equal(shuffled_units(P, N, 1)[0], su[0])         # the shuffled control = the floor's first
