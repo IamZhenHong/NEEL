@@ -33,19 +33,24 @@ The list is shuffled with random.Random(f"PA-P12|{model}"), so the arms interlea
 the calibration set: --conds none --groups agent) keep the shuffled order, keys and seeds of the full list.
 
 run-frontier plays a jobs file against OpenRouter through the engine's run_batch (common.orbackend.make_or_backend: effort
-low, max_tokens 2000, temperature 0.7, 8 workers). It writes DIR/episodes_{agent,free,know}.jsonl after every round
-(vigilante's episode_record format, the same layout as a pod run; a P12 run is one round, so that is once, when all calls
-are back) and DIR/settings.json at the end, and books the spend to persona_affect/ledger.jsonl under "P12" (note = the
-model id) even if the run dies. A call that errors, or that finds the cap reached, comes back as an empty turn whose
-`finish` is "error:<what>" or "cost_stop": the episode is kept, flagged in settings.json ("failed_keys") and counted.
---smoke runs 2 jobs (the first decision job and the first know job: 2 calls) into DIR/smoke and exits 1 unless usage.cost
-arrived on every reply and nothing failed.
+low, max_tokens 2000, temperature 0.7, 8 workers). The jobs, already shuffled, run in blocks of 96, each block its own
+run_batch call; one backend serves all blocks (so one cap, and one ledger booking, by close() in `finally`, even if the
+run dies). When a block is done its episode records are appended to DIR/episodes_{agent,free,know}.jsonl (vigilante's
+episode_record format, the same layout as a pod run), so a run that dies loses at most the block in flight. DIR/settings.json
+is written at the end. A call that errors, or that finds the cap reached, comes back as an empty turn whose `finish` is
+"error:<what>" or "cost_stop": the episode is kept, listed in settings.json ("failed_keys") and counted.
+A DIR that already holds episodes_*.jsonl is refused, unless --resume: it reads those episodes (dropping a last line cut
+short by a kill), skips their keys and runs the rest. A key whose episode failed is left alone unless --retry-failed, which
+moves the failed records to DIR/retried_failed.jsonl and runs those keys again, so no key is in the episode files twice.
+--smoke runs 2 jobs (the first decision job and the first know job: 2 calls) into DIR/smoke, replacing the last smoke run,
+and exits 1 unless usage.cost arrived on every reply and nothing failed.
 """
 from __future__ import annotations
 
 import argparse
 import json
 import math
+import os
 import random
 import time
 from collections import Counter, defaultdict
@@ -62,6 +67,7 @@ EXP = "PA-P12"
 MINI = "P12"                    # the ledger id
 CAP_TOTAL = 12.0                # USD, gpu + api, for the whole mini
 SMOKE_CAP = 0.25                # USD a smoke run may spend
+BLOCK = 96                      # jobs per run_batch call; a finished block is appended to the output
 EFFORT, MAX_TOKENS, TEMPERATURE = "low", 2000, 0.7     # frontier: reasoning tokens count against max_tokens
 
 MODELS = {   # short name -> (model id, job fmt, frontier?). Frontier backends emit Qwen-format text, so fmt "qwen".
@@ -201,18 +207,67 @@ def _atomic(path: Path, text: str) -> None:
     tmp.replace(path)
 
 
-def write_episodes(out: Path, eps: list[dict]) -> None:
-    """episodes_{group}.jsonl in `out`, one episode_record per line, in job order: the layout of a pod run. Episodes still
-    in progress are written too (their `end` is None), so this is also the per-round checkpoint."""
+def append_records(out: Path, recs: list[dict]) -> None:
+    """Append episode records to `out`/episodes_{group}.jsonl, one line each (a file is created by its first block): the
+    layout of a pod run. One write and one fsync per file, so a kill leaves at worst a last line cut short."""
     by = defaultdict(list)
-    for e in eps:
-        by[e["job"].get("group", "agent")].append(e)
-    for group, es in by.items():
-        _atomic(out / f"episodes_{group}.jsonl", "".join(dumps(episode_record(e)) + "\n" for e in es))
+    for r in recs:
+        by[r["job"].get("group", "agent")].append(r)
+    for group, rs in by.items():
+        with open(out / f"episodes_{group}.jsonl", "a", encoding="utf-8") as f:
+            f.write("".join(dumps(r) + "\n" for r in rs))
+            f.flush()
+            os.fsync(f.fileno())
+
+
+def load_records(out: Path, log=print) -> list[dict]:
+    """The episode records already in `out` (every episodes_*.jsonl, files in name order). A file whose last line has no
+    newline, the mark of a kill in the middle of an append, loses that line first (atomically). A line that is not a record,
+    or a key in the files twice, stops the run (SystemExit): this runner cannot have written either."""
+    recs = []
+    for path in sorted(out.glob("episodes_*.jsonl")):
+        text = path.read_text(encoding="utf-8")
+        if text and not text.endswith("\n"):
+            keep = text[: text.rfind("\n") + 1]
+            log(f"[p12] {path.name}: dropped a last line cut short ({len(text) - len(keep)} bytes)")
+            _atomic(path, keep)
+            text = keep
+        for n, line in enumerate(text.split("\n")[:-1], 1):    # not splitlines(): a reply may hold a raw U+2028 or U+0085
+            if line.strip():
+                try:
+                    rec = json.loads(line)
+                    if not isinstance(rec["key"], str):
+                        raise TypeError("the key is not a string")
+                except (ValueError, KeyError, TypeError) as e:
+                    raise SystemExit(f"{path}:{n}: not an episode record ({e!r}): repair or remove the file") from e
+                recs.append(rec)
+    twice = [k for k, c in Counter(r["key"] for r in recs).items() if c > 1]
+    if twice:
+        raise SystemExit(f"{out} holds {len(twice)} episode keys more than once (first: {twice[0]!r})")
+    return recs
+
+
+def _retire(out: Path, recs: list[dict]) -> None:
+    """Move failed records out of the episode files into retried_failed.jsonl (appended: what failed stays on record), so
+    that their keys can be run again without being in the episode files twice."""
+    with open(out / "retried_failed.jsonl", "a", encoding="utf-8") as f:
+        f.write("".join(dumps(r) + "\n" for r in recs))
+        f.flush()
+        os.fsync(f.fileno())
+    keys = {r["key"] for r in recs}
+    for path in sorted(out.glob("episodes_*.jsonl")):
+        lines = [l for l in path.read_text(encoding="utf-8").split("\n") if l.strip()]
+        kept = [l for l in lines if json.loads(l)["key"] not in keys]
+        if len(kept) < len(lines):
+            _atomic(path, "".join(l + "\n" for l in kept))
 
 
 def _failed(turn: dict) -> bool:
     return turn["finish"] == "cost_stop" or str(turn["finish"]).startswith("error:")
+
+
+def _rec_failed(rec: dict) -> bool:
+    return any(_failed(t) for t in rec["turns"])
 
 
 def _check_jobs(model: str, jobs: list[dict]) -> None:
@@ -231,21 +286,27 @@ def _check_jobs(model: str, jobs: list[dict]) -> None:
         raise SystemExit("the jobs file holds duplicate keys")
 
 
-def run_frontier(model: str, jobs_path, out_dir, *, smoke: bool = False, workers: int = 8, post=None,
-                 retry_sleep: float = 3.0, log=print) -> dict:
-    """Play the jobs in `jobs_path` against frontier model `model` (gpt or gemini) and write the episodes to `out_dir`.
+def run_frontier(model: str, jobs_path, out_dir, *, smoke: bool = False, resume: bool = False,
+                 retry_failed: bool = False, workers: int = 8, post=None, retry_sleep: float = 3.0, log=print) -> dict:
+    """Play the jobs in `jobs_path` against frontier model `model` (gpt or gemini) in blocks of BLOCK, appending each finished
+    block's episodes to `out_dir` (see the module docstring for --resume and --retry-failed).
 
-    Returns the run's settings plus "ok" (no call failed, no turn has finish error/cost_stop, no reply lacked
-    usage.cost, and some cost arrived) and "out".
+    Returns the run's settings plus "ok" (no call failed, no episode has a turn with finish error/cost_stop, no reply lacked
+    usage.cost, and, if anything ran, some cost arrived) and "out". In it `spent`, `calls`, `errors`, `cap`, `blocks`,
+    `new_episodes`, `skipped`, `retried` and `seconds` describe this invocation; `episodes`, `finish` and `failed_*` describe
+    everything in the output, earlier invocations included.
     `post` is a test hook (see make_or_backend); `log` receives the engine's round lines and this runner's own."""
     if model not in FRONTIER_SHARE:
         raise SystemExit(f"run-frontier takes a frontier model ({', '.join(FRONTIER_SHARE)}), not {model!r}")
+    if retry_failed and not resume:
+        raise SystemExit("--retry-failed needs --resume")
+    if smoke and resume:
+        raise SystemExit("--resume does not apply to --smoke: a smoke run is thrown away and repeated")
     model_id = MODELS[model][0]
     jobs = read_jobs(jobs_path)
     _check_jobs(model, jobs)
-    if not smoke and any(Path(out_dir).glob("episodes_*.jsonl")):
-        raise SystemExit(f"{out_dir} already holds episodes_*.jsonl, which this run would overwrite: use a new --out "
-                         f"(to redo failed rows, write a jobs file from their `job` records)")
+    if not smoke and not resume and any(Path(out_dir).glob("episodes_*.jsonl")):
+        raise SystemExit(f"{out_dir} already holds episodes_*.jsonl: add --resume to continue that run, or use a new --out")
     if smoke:
         jobs = smoke_jobs(jobs)
     cap = frontier_cap(model)
@@ -254,51 +315,93 @@ def run_frontier(model: str, jobs_path, out_dir, *, smoke: bool = False, workers
     out = Path(out_dir) / "smoke" if smoke else Path(out_dir)
     out.mkdir(parents=True, exist_ok=True)           # after the checks, so a refused run leaves nothing behind
     tag = "smoke " if smoke else ""
-    log(f"[p12] {tag}{model} ({model_id}): {len(jobs)} jobs, cap ${cap:.2f}, {workers} workers -> {out}")
-    gen = make_or_backend(model_id, mini=MINI, cap=cap, effort=EFFORT, max_tokens=MAX_TOKENS, temperature=TEMPERATURE,
-                          workers=workers, post=post, retry_sleep=retry_sleep)
-    t0 = time.time()
-    eps: list[dict] = []
-    try:
-        eps = run_batch(jobs, gen, log=log, on_round=lambda eps, rnd: write_episodes(out, eps))
-        write_episodes(out, eps)
-    finally:
-        gen.close()                                  # the spend goes to the ledger even if the run died
 
-    finish = Counter(t["finish"] for e in eps for t in e["turns"])
-    failed = [e for e in eps if any(_failed(t) for t in e["turns"])]
-    errors = dict(gen.errors)
+    existing: list[dict] = []
+    retried: list[dict] = []
+    if smoke:
+        for f in out.glob("episodes_*.jsonl"):       # the last smoke run is replaced, not added to
+            f.unlink()
+    elif resume:
+        existing = load_records(out, log)
+        other = [r["key"] for r in existing if not r["key"].startswith(f"{EXP}|{model}|")]
+        if other:
+            raise SystemExit(f"{len(other)} of the {len(existing)} episodes in {out} are not {model}'s (first: {other[0]!r}): "
+                             f"this output belongs to another model")
+        if retry_failed:
+            wanted = {j["key"] for j in jobs}
+            retried = [r for r in existing if r["key"] in wanted and _rec_failed(r)]
+            if retried:
+                _retire(out, retried)
+                gone = {r["key"] for r in retried}
+                existing = [r for r in existing if r["key"] not in gone]
+    have = {r["key"] for r in existing}
+    todo = [j for j in jobs if j["key"] not in have]
+    skipped = len(jobs) - len(todo)
+    blocks = [todo[i:i + BLOCK] for i in range(0, len(todo), BLOCK)]
+    log(f"[p12] {tag}{model} ({model_id}): {len(jobs)} jobs"
+        + (f", {skipped} already in {out}" if resume else "")
+        + (f", {len(retried)} failed ones moved to retried_failed.jsonl to run again" if retried else "")
+        + f", {len(todo)} to run in {len(blocks)} blocks of up to {BLOCK}, cap ${cap:.2f}, {workers} workers -> {out}")
+    extra = have - {j["key"] for j in jobs}
+    if extra:
+        log(f"[p12] note: {len(extra)} episodes in {out} are not in this jobs file (kept)")
+    gen = None
+    if todo:
+        gen = make_or_backend(model_id, mini=MINI, cap=cap, effort=EFFORT, max_tokens=MAX_TOKENS, temperature=TEMPERATURE,
+                              workers=workers, post=post, retry_sleep=retry_sleep)
+    else:
+        log(f"[p12] nothing to run: every job is already in {out}")
+    t0 = time.time()
+    new: list[dict] = []
+    try:
+        for i, block in enumerate(blocks, 1):
+            recs = [episode_record(e) for e in run_batch(block, gen, log=log)]
+            append_records(out, recs)
+            new += recs
+            log(f"[p12] {tag}block {i}/{len(blocks)}: {len(recs)} episodes appended, {len(have) + len(new)}/{len(jobs)} "
+                f"jobs done, spent ${gen.spent:.4f}")
+    finally:
+        if gen is not None:
+            gen.close()                              # the spend goes to the ledger even if the run died
+
+    records = existing + new
+    finish = Counter(t["finish"] for r in records for t in r["turns"])
+    failed = [r for r in records if _rec_failed(r)]
+    errors = dict(gen.errors) if gen else {}
+    spent, calls = (gen.spent, gen.calls) if gen else (0.0, 0)
     problems = []
     if any(k != "cost_missing" for k in errors):
         problems.append("calls failed after their retries: " + str({k: v for k, v in errors.items() if k != "cost_missing"}))
     if errors.get("cost_missing"):
         problems.append(f"{errors['cost_missing']} replies came without usage.cost, so the spend is under-counted")
     if failed:
-        problems.append(f"{len(failed)} of {len(eps)} episodes have a failed turn (finish error:.. or cost_stop; "
+        problems.append(f"{len(failed)} of {len(records)} episodes have a failed turn (finish error:.. or cost_stop; "
                         f"cost_stop {finish.get('cost_stop', 0)})")
-    if gen.spent <= 0:
+    if todo and spent <= 0:
         problems.append("no cost arrived")
     ok = not problems
     log(f"[p12] {tag}finish values: {dict(finish)}")
-    log(f"[p12] {tag}spent ${gen.spent:.4f} over {gen.calls} calls; errors {errors}; "
-        f"cost_missing {errors.get('cost_missing', 0)}")
+    log(f"[p12] {tag}spent ${spent:.4f} over {calls} calls; errors {errors}; cost_missing {errors.get('cost_missing', 0)}")
     if smoke:
-        for e in eps:
-            if e["job"]["group"] == "agent":
-                calls = ", ".join(f"{c['name']}({c['args']})" for c in e["calls"])
-                what = ("a turn failed" if any(_failed(t) for t in e["turns"]) else calls or "NO tool call (answered in text)")
-                log(f"[p12] smoke decision job {e['job']['key']}: {what}")
+        for r in new:
+            if r["job"]["group"] == "agent":
+                called = ", ".join(f"{c['name']}({c['args']})" for c in r["calls"])
+                what = "a turn failed" if _rec_failed(r) else called or "NO tool call (answered in text)"
+                log(f"[p12] smoke decision job {r['key']}: {what}")
     if problems:
         log(f"[p12] {'smoke FAILED' if smoke else 'WARNING: the run is incomplete'}: " + "; ".join(problems))
         if failed:
-            log("[p12] failed episodes are kept in the episode files and listed in settings.json (failed_keys): count "
-                "them as missing, and to redo them write a jobs file from their `job` records")
-    settings = {"model": model_id, "short": model, "smoke": smoke, "effort": EFFORT, "max_tokens": MAX_TOKENS,
-                "temperature": TEMPERATURE, "workers": workers, "thinking": False, "cap": cap, "spent": gen.spent,
-                "calls": gen.calls, "errors": errors, "finish": dict(finish), "jobs": len(jobs),
-                "failed_episodes": len(failed), "failed_keys": [e["job"]["key"] for e in failed],
+            log("[p12] failed episodes are kept in the episode files and listed in settings.json (failed_keys): count them "
+                "as missing, or run them again with --resume --retry-failed")
+    settings = {"model": model_id, "short": model, "smoke": smoke, "resumed": resume, "retry_failed": retry_failed,
+                "effort": EFFORT, "max_tokens": MAX_TOKENS, "temperature": TEMPERATURE, "workers": workers,
+                "thinking": False, "block": BLOCK, "blocks": len(blocks), "cap": cap, "spent": spent, "calls": calls,
+                "errors": errors, "jobs": len(jobs), "skipped": skipped, "retried": len(retried),
+                "new_episodes": len(new), "episodes": len(records), "finish": dict(finish),
+                "failed_episodes": len(failed), "failed_keys": [r["key"] for r in failed],
                 "seconds": round(time.time() - t0), "date": datetime.now(timezone.utc).isoformat(timespec="seconds")}
-    _atomic(out / "settings.json", json.dumps(settings, indent=1))
+    if todo:                                         # a resume with nothing to run leaves the earlier run's settings be
+        _atomic(out / "settings.json", json.dumps(settings, indent=1))
     return {**settings, "ok": ok, "out": str(out)}
 
 
@@ -319,8 +422,15 @@ def main(argv=None) -> None:
     pr.add_argument("--jobs", required=True)
     pr.add_argument("--out", required=True)
     pr.add_argument("--smoke", action="store_true", help="2 jobs into OUT/smoke; exit 1 unless usage.cost arrives")
+    pr.add_argument("--resume", action="store_true",
+                    help="continue a run: skip the keys already in OUT (a failed one is left alone unless --retry-failed)")
+    pr.add_argument("--retry-failed", action="store_true",
+                    help="with --resume: run again the keys whose episode failed (error or cost_stop); the old records "
+                         "move to OUT/retried_failed.jsonl")
     pr.add_argument("--workers", type=int, default=8)
     a = ap.parse_args(argv)
+    if a.cmd == "run-frontier" and a.retry_failed and not a.resume:
+        ap.error("--retry-failed needs --resume")
     if a.cmd == "jobs":
         model_id, fmt, frontier = MODELS[a.model]
         jobs = build_jobs(a.model, frontier, conds=a.conds, groups=a.groups, chars=a.chars)
@@ -330,7 +440,8 @@ def main(argv=None) -> None:
         if not frontier:
             print(f"[p12] the jobs carry fmt {fmt!r}: launch the pod with MODEL={model_id} FMT={fmt}")
     else:
-        res = run_frontier(a.model, a.jobs, a.out, smoke=a.smoke, workers=a.workers)
+        res = run_frontier(a.model, a.jobs, a.out, smoke=a.smoke, resume=a.resume, retry_failed=a.retry_failed,
+                           workers=a.workers)
         if a.smoke and not res["ok"]:
             raise SystemExit(1)
 

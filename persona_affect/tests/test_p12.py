@@ -618,6 +618,17 @@ def _fake_post(cost=0.01, letter="B", bodies=None):
     return post
 
 
+def _probe_item():
+    """A minimal engine item, to make the backend spend one call by hand."""
+    return {"messages": [{"role": "user", "content": "x"}], "tools": None, "thinking": False, "seed": 1, "max_tokens": 50,
+            "key": "k"}
+
+
+def _keys(out):
+    """The episode keys in an output folder, per group file, in file order."""
+    return {f.name: [r["key"] for r in _read(f)] for f in sorted(out.glob("episodes_*.jsonl"))}
+
+
 def _subset(model, n=8):
     jobs = _jobs(model)
     return [j for g in GROUPS for j in [x for x in jobs if x["group"] == g][:n]]
@@ -708,34 +719,48 @@ def test_run_frontier_backend_settings(tmp_path, monkeypatch):
     assert gk["cap"] == pytest.approx(6.0) and mk["cap"] == pytest.approx(1.5) and sk["cap"] == pytest.approx(0.25)
 
 
-def test_run_frontier_checkpoints_every_round(tmp_path, monkeypatch):
-    """run_batch's on_round writes the episodes after each round, in-progress ones included. A P12 decision or know
-    episode is done after one round, so this model answers each free-text job with a made-up tool call first: those
-    episodes (max_steps 3) need a second round, and are still open at the first checkpoint."""
-    def invents_a_call(url, body, headers, timeout=180):
-        last = body["messages"][-1]
-        if not body.get("tools") and last["role"] == "user" and last["content"].endswith(FREE_TAIL):
-            return _resp("", [("choose_option", json.dumps({"option_id": "B", "reason": "r"}))], "tool_calls")
-        return _fake_post()(url, body, headers)
-    real, seen = p12.run_batch, []
+def test_jobs_run_in_blocks_of_96_and_each_finished_block_is_appended(tmp_path, monkeypatch, ledger):
+    """Controller ruling: the (shuffled) jobs run in blocks of 96, each its own run_batch call; when a block is done its
+    episode records are appended to the output, so the files hold 0, 96, 192 records as blocks 1, 2, 3 start. One backend
+    serves all blocks: one cap and one ledger row."""
+    out = tmp_path / "out"
+    real, seen, backends = p12.run_batch, [], []
+    real_backend = p12.make_or_backend
 
-    def spy(jobs, gen, log=print, max_rounds=200, on_round=None):
-        def after(eps, rnd):
-            on_round(eps, rnd)
-            lines = [len(_read(tmp_path / "out" / f"episodes_{g}.jsonl")) for g in GROUPS]
-            seen.append((rnd, lines, sum(e["done"] for e in eps)))
-        return real(jobs, gen, log=log, max_rounds=max_rounds, on_round=after)
+    def spy(block, gen, **kw):
+        seen.append((len(block), sum(len(_read(f)) for f in out.glob("episodes_*.jsonl")), id(gen)))
+        return real(block, gen, **kw)
+
+    def backend(model_id, **kw):
+        backends.append(real_backend(model_id, **kw))
+        return backends[-1]
     monkeypatch.setattr(p12, "run_batch", spy)
-    _run(tmp_path, post=invents_a_call)
-    # round 0: 8 decisions (max_steps) and 8 know answers are done, the 8 free-text episodes are open but already on disk
-    assert seen == [(0, [8, 8, 8], 16), (1, [8, 8, 8], 24)]
-    assert {r["end"] for r in _read(tmp_path / "out" / "episodes_free.jsonl")} == {"reply"}
+    monkeypatch.setattr(p12, "make_or_backend", backend)
+    jobs = _jobs("gpt")[:200]
+    res = _run(tmp_path, jobs=jobs, post=_fake_post(cost=0.005))
+    assert p12.BLOCK == 96 and [(n, done) for n, done, _ in seen] == [(96, 0), (96, 96), (8, 192)]
+    assert len({g for *_, g in seen}) == 1 and len(backends) == 1 and id(backends[0]) == seen[0][2]
+    assert res["blocks"] == 3 and res["episodes"] == 200 and res["new_episodes"] == 200 and res["skipped"] == 0
+    (row,) = _read(ledger)                                                       # one close(), one row, all the spend
+    assert row["usd"] == pytest.approx(200 * 0.005)
+    keys = [k for ks in _keys(out).values() for k in ks]
+    assert len(keys) == len(set(keys)) == 200 and set(keys) == {j["key"] for j in jobs}
+
+
+def test_the_cap_is_shared_by_all_blocks(tmp_path, monkeypatch, ledger):
+    """25 calls fit under a $0.25 cap at $0.01: they are spent in block 1, and blocks 2 and 3 find the cap reached."""
+    monkeypatch.setattr(p12, "frontier_cap", lambda model: 0.25)
+    res = _run(tmp_path, jobs=_jobs("gpt")[:200], post=_fake_post(cost=0.01), workers=1)
+    assert res["spent"] == pytest.approx(0.25) and res["calls"] == 25
+    assert res["finish"].get("cost_stop") == 175 and res["failed_episodes"] == 175 and res["episodes"] == 200
+    assert res["ok"] is False
+    (row,) = _read(ledger)
+    assert row["usd"] == pytest.approx(0.25)
 
 
 def test_run_frontier_books_the_spend_even_if_the_run_dies(tmp_path, monkeypatch, ledger):
     def boom(jobs, gen, **kw):
-        gen([{"messages": [{"role": "user", "content": "x"}], "tools": None, "thinking": False, "seed": 1,
-              "max_tokens": 50, "key": "k"}])
+        gen([_probe_item()])
         raise RuntimeError("laptop slept")
     monkeypatch.setattr(p12, "run_batch", boom)
     with pytest.raises(RuntimeError, match="laptop slept"):
@@ -780,12 +805,182 @@ def test_run_frontier_will_not_overwrite_a_finished_or_partial_run(tmp_path, led
     _run(tmp_path)
     before = {f.name: f.read_text() for f in (tmp_path / "out").glob("episodes_*.jsonl")}
     spent = util.ledger_total("P12")
-    with pytest.raises(SystemExit, match="already holds"):
+    with pytest.raises(SystemExit, match="already holds") as refused:
         _run(tmp_path)
+    assert "--resume" in str(refused.value)                  # the message says how to continue it
     assert {f.name: f.read_text() for f in (tmp_path / "out").glob("episodes_*.jsonl")} == before
     assert util.ledger_total("P12") == spent                 # the refused run called nothing and booked nothing
-    _run(tmp_path, smoke=True)                               # a smoke run writes to out/smoke and may be repeated
-    _run(tmp_path, smoke=True)
+    _run(tmp_path, jobs=_jobs("gpt"), smoke=True)            # a smoke run writes to out/smoke and may be repeated
+    _run(tmp_path, jobs=_jobs("gpt"), smoke=True)
+    assert [len(v) for v in _keys(tmp_path / "out" / "smoke").values()] == [1, 1]     # the repeat replaced, not appended
+
+
+def _interrupt_in_block_2(tmp_path, monkeypatch, jobs, out="cut"):
+    """A run that dies inside block 2 (an exception from run_batch): block 1's 96 episodes are on disk, block 2 is lost,
+    and the spend, block 2's first call included, is booked."""
+    real, calls = p12.run_batch, []
+
+    def dies(block, gen, **kw):
+        calls.append(len(block))
+        if len(calls) == 2:
+            gen([_probe_item()])                              # block 2 had started to spend
+            raise RuntimeError("laptop slept")
+        return real(block, gen, **kw)
+    monkeypatch.setattr(p12, "run_batch", dies)
+    with pytest.raises(RuntimeError, match="laptop slept"):
+        _run(tmp_path, jobs=jobs, out=out, post=_fake_post(cost=0.005))
+    monkeypatch.setattr(p12, "run_batch", real)
+    assert calls == [96, 96]
+    return tmp_path / out
+
+
+def test_an_interrupted_run_resumes_to_the_uninterrupted_result(tmp_path, monkeypatch, ledger):
+    jobs = _jobs("gpt")[:200]                                # blocks of 96, 96 and 8
+    _run(tmp_path, jobs=jobs, out="whole", post=_fake_post(cost=0.005))
+    cut = _interrupt_in_block_2(tmp_path, monkeypatch, jobs)
+    assert sum(len(v) for v in _keys(cut).values()) == 96 and not (cut / "settings.json").exists()
+    with pytest.raises(SystemExit, match="--resume"):                       # without --resume the half run is refused
+        _run(tmp_path, jobs=jobs, out="cut", post=_fake_post(cost=0.005))
+
+    bodies = []
+    res = _run(tmp_path, jobs=jobs, out="cut", resume=True, post=_fake_post(cost=0.005, bodies=bodies))
+    assert len(bodies) == 104 and res["skipped"] == 96 and res["new_episodes"] == 104 and res["episodes"] == 200
+    assert res["resumed"] is True and res["blocks"] == 2 and res["ok"] is True and (cut / "settings.json").exists()
+    # the same keys as the uninterrupted run, in the jobs file's order within each group file, none twice
+    assert _keys(cut) == _keys(tmp_path / "whole")
+    assert _keys(cut) == {f"episodes_{g}.jsonl": [j["key"] for j in jobs if j["group"] == g] for g in GROUPS}
+    keys = [k for ks in _keys(cut).values() for k in ks]
+    assert len(keys) == len(set(keys)) == 200 and set(keys) == {j["key"] for j in jobs}
+    assert [r["turns"] for f in sorted(cut.glob("episodes_*.jsonl")) for r in _read(f)] == \
+           [r["turns"] for f in sorted((tmp_path / "whole").glob("episodes_*.jsonl")) for r in _read(f)]
+    # one ledger row per backend: the whole run, the interrupted run (97 calls) and the resumed run (104 calls)
+    assert [r["usd"] for r in _read(ledger)] == pytest.approx([200 * 0.005, 97 * 0.005, 104 * 0.005])
+
+
+def test_resume_drops_a_last_line_cut_short_by_a_kill(tmp_path, monkeypatch):
+    jobs = _jobs("gpt")[:200]
+    cut = _interrupt_in_block_2(tmp_path, monkeypatch, jobs)
+    with open(cut / "episodes_agent.jsonl", "a") as f:
+        f.write('{"key": "PA-P12|gpt|agent|ba')              # a kill in the middle of an append: no newline
+    res = _run(tmp_path, jobs=jobs, out="cut", resume=True, post=_fake_post(cost=0.005))
+    assert res["ok"] is True and res["episodes"] == 200
+    keys = [k for ks in _keys(cut).values() for k in ks]    # every line parses again, and no key is twice
+    assert len(keys) == len(set(keys)) == 200
+    text = (cut / "episodes_agent.jsonl").read_text()       # the fragment is gone, not glued to the next record
+    assert text.endswith("\n") and all(l.endswith("}") for l in text.splitlines())
+
+
+def test_resume_leaves_failed_episodes_alone_unless_retry_failed(tmp_path, monkeypatch, ledger):
+    cap = {"usd": 0.25}
+    monkeypatch.setattr(p12, "frontier_cap", lambda model: cap["usd"])
+    jobs = _jobs("gpt")[:200]
+    first = _run(tmp_path, jobs=jobs, post=_fake_post(cost=0.01), workers=1)       # 25 calls fit, 175 are cost_stop
+    out = tmp_path / "out"
+    assert first["failed_episodes"] == 175
+    before = {f.name: f.read_text() for f in out.glob("episodes_*.jsonl")}
+
+    cap["usd"] = 5.0                                                               # money again
+    bodies = []
+    res = _run(tmp_path, jobs=jobs, resume=True, post=_fake_post(cost=0.01, bodies=bodies))
+    assert bodies == [] and res["new_episodes"] == 0 and res["skipped"] == 200      # failed keys are not retried by default
+    assert res["failed_episodes"] == 175 and res["ok"] is False
+    assert {f.name: f.read_text() for f in out.glob("episodes_*.jsonl")} == before
+    assert len(_read(ledger)) == 1                                                  # nothing to run: no backend, no row
+
+    res = _run(tmp_path, jobs=jobs, resume=True, retry_failed=True, post=_fake_post(cost=0.01, bodies=bodies))
+    assert len(bodies) == 175 and res["retried"] == 175 and res["new_episodes"] == 175 and res["skipped"] == 25
+    assert res["failed_episodes"] == 0 and res["ok"] is True and res["episodes"] == 200
+    keys = [k for ks in _keys(out).values() for k in ks]
+    assert len(keys) == len(set(keys)) == 200 and set(keys) == {j["key"] for j in jobs}      # replaced, never doubled
+    archived = _read(out / "retried_failed.jsonl")                                  # the failures stay on record
+    assert len(archived) == 175 and all(r["turns"][0]["finish"] == "cost_stop" for r in archived)
+    assert [r["usd"] for r in _read(ledger)] == pytest.approx([0.25, 1.75])
+    settings = json.loads((out / "settings.json").read_text())
+    assert settings["resumed"] is True and settings["retry_failed"] is True and settings["failed_keys"] == []
+
+
+def test_resume_reads_replies_that_hold_a_unicode_line_separator(tmp_path):
+    """json.dumps(ensure_ascii=False) leaves U+2028 and U+0085 raw in a line, and str.splitlines() would cut the record
+    there; the files are split on newline only."""
+    def odd(url, body, headers, timeout=180):
+        r = _fake_post()(url, body, headers)
+        if not body.get("tools"):
+            r["choices"][0]["message"]["content"] = "first\u2028second\u0085third"
+        return r
+    _run(tmp_path, post=odd)
+    know = (tmp_path / "out" / "episodes_know.jsonl").read_text()
+    assert "\u2028" in know and "\u0085" in know and len(know.split("\n")) == 9       # 8 records and the empty tail
+    res = _run(tmp_path, resume=True)
+    assert res["skipped"] == 24 and res["new_episodes"] == 0 and res["episodes"] == 24
+    res = _run(tmp_path, resume=True, retry_failed=True)
+    assert res["retried"] == 0 and res["episodes"] == 24 and res["ok"] is True
+
+
+def test_resume_of_a_finished_run_does_nothing(tmp_path, ledger):
+    _run(tmp_path)
+    out = tmp_path / "out"
+    before, rows, bodies = {f.name: f.read_text() for f in out.glob("episodes_*.jsonl")}, len(_read(ledger)), []
+    settings = (out / "settings.json").read_text()
+    res = _run(tmp_path, resume=True, post=_fake_post(bodies=bodies))
+    assert bodies == [] and res["new_episodes"] == 0 and res["skipped"] == 24 and res["ok"] is True
+    assert {f.name: f.read_text() for f in out.glob("episodes_*.jsonl")} == before and len(_read(ledger)) == rows
+    assert (out / "settings.json").read_text() == settings                  # the finished run's settings are not overwritten
+
+
+def test_resume_on_an_empty_folder_is_a_fresh_run(tmp_path):
+    res = _run(tmp_path, resume=True)
+    assert res["ok"] is True and res["episodes"] == 24 and res["skipped"] == 0
+
+
+def test_resume_refuses_the_output_of_another_model(tmp_path):
+    _run(tmp_path, "gemini", out="o")
+    before = {f.name: f.read_text() for f in (tmp_path / "o").glob("episodes_*.jsonl")}
+    with pytest.raises(SystemExit, match="another model"):
+        _run(tmp_path, "gpt", out="o", resume=True)
+    assert {f.name: f.read_text() for f in (tmp_path / "o").glob("episodes_*.jsonl")} == before
+
+
+def test_resume_refuses_files_this_runner_cannot_have_written(tmp_path):
+    _run(tmp_path)
+    out = tmp_path / "out"
+    agent = out / "episodes_agent.jsonl"
+    good = agent.read_text()
+    agent.write_text(good + good.splitlines()[0] + "\n")                    # a key twice
+    with pytest.raises(SystemExit, match="more than once"):
+        _run(tmp_path, resume=True)
+    agent.write_text(good + "this is not json\n")                          # a complete line that is not a record
+    with pytest.raises(SystemExit, match="not an episode record"):
+        _run(tmp_path, resume=True)
+    agent.write_text(good + '{"no_key": 1}\n')
+    with pytest.raises(SystemExit, match="not an episode record"):
+        _run(tmp_path, resume=True)
+
+
+def test_retry_failed_only_touches_the_keys_of_this_jobs_file(tmp_path):
+    import io
+    import urllib.error
+
+    def refuse(url, body, headers, timeout=180):
+        raise urllib.error.HTTPError(url, 400, "bad", {}, io.BytesIO(b"no"))
+    jobs = _subset("gpt")
+    _run(tmp_path, jobs=jobs, post=refuse)                                   # all 24 fail
+    half = jobs[:12]
+    bodies = []
+    res = _run(tmp_path, jobs=half, resume=True, retry_failed=True, post=_fake_post(bodies=bodies))
+    assert len(bodies) == 12 and res["retried"] == 12 and res["new_episodes"] == 12
+    out = tmp_path / "out"
+    assert res["episodes"] == 24 and res["failed_episodes"] == 12              # the other 12 stay as they were
+    assert {k for ks in _keys(out).values() for k in ks} == {j["key"] for j in jobs}
+    assert set(res["failed_keys"]) == {j["key"] for j in jobs[12:]}
+    assert len(_read(out / "retried_failed.jsonl")) == 12
+
+
+def test_resume_flags_are_checked_before_anything_runs(tmp_path):
+    with pytest.raises(SystemExit, match="--resume"):
+        _run(tmp_path, retry_failed=True)                    # --retry-failed only makes sense with --resume
+    with pytest.raises(SystemExit, match="smoke"):
+        _run(tmp_path, jobs=_jobs("gpt"), smoke=True, resume=True)
+    assert not (tmp_path / "out").exists()
 
 
 # ------------------------------------------------------------------ frontier smoke
@@ -843,6 +1038,20 @@ def test_cli_run_frontier_plays_the_file(tmp_path, monkeypatch, key_stub, ledger
     assert [len(_read(tmp_path / "out" / f"episodes_{g}.jsonl")) for g in GROUPS] == [4, 4, 4]
     (row,) = _read(ledger)
     assert row["note"] == "google/gemini-3.8-flash" and row["usd"] == pytest.approx(0.01 * (4 + 4 + 4))
+
+
+def test_cli_run_frontier_passes_resume_and_retry_failed(monkeypatch):
+    seen = []
+    monkeypatch.setattr(p12, "run_frontier", lambda *a, **kw: (seen.append(kw), {"ok": True})[1])
+    base = ["run-frontier", "--model", "gpt", "--jobs", "j.jsonl", "--out", "o"]
+    p12.main(base)
+    p12.main([*base, "--resume"])
+    p12.main([*base, "--resume", "--retry-failed"])
+    assert [(k["resume"], k["retry_failed"], k["smoke"]) for k in seen] == [(False, False, False), (True, False, False),
+                                                                           (True, True, False)]
+    with pytest.raises(SystemExit):                          # argparse: --retry-failed needs --resume
+        p12.main([*base, "--retry-failed"])
+    assert len(seen) == 3
 
 
 def test_cli_run_frontier_smoke_exits_nonzero_on_failure(tmp_path, monkeypatch, key_stub):
