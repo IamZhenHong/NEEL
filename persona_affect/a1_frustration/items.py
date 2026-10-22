@@ -28,6 +28,13 @@ TEST_S = tuple(range(16))        # stage0's / A8's requests
 TRAIN_S = tuple(range(16, 64))   # the 48 new ones
 K = {"N": 2, "R": 2, "S": 1, "A": 1, "P": 2, "I": 2}         # rollouts per request and arm (k = 0 .. K - 1)
 N_ATT = {"N": 7, "R": 7, "S": 7, "A": 7, "P": 4, "I": 4}     # attempts per history
+# capture-item groups and their arms: E1/E2/SPEC are history arms, TOLD the LINES under told_system, MENT the four
+# mention twins (T_x: line in the system prompt, note DOC_NEUTRAL; M_x: line in the note), MEARN the R/N transcript,
+# A8 A8's own histories (a8.history_messages conditions)
+GROUPS = {"E1": ("R", "N"), "E2": ("I", "P"), "SPEC": ("S", "A"), "TOLD": ("frus", "calm", "sad", "fear", "user"),
+          "MENT": ("T_frus", "T_calm", "M_frus", "M_calm"), "MEARN": ("R", "N"), "A8": ("R_OP", "N")}
+TOLD_SPLITS = {"frus": ("test", "train"), "calm": ("test", "train"), "sad": ("train",), "fear": ("train",),
+               "user": ("test",)}         # the splits each told line is built on (x = none is the E1 N item itself)
 
 SAMPLING = dict(temperature=1.0, top_p=0.9, top_k=64)   # as A8 / stage0 v2
 MAX_TOKENS = 600         # new tokens per attempt

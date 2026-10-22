@@ -157,12 +157,15 @@ def test_keys_models_and_sampling():
 class Fake:
     """A stand-in for gen(convs, seeds, max_tokens): the reply to a seed is f"t{seed % 9973}", with finish(seed) ("stop"
     unless a test says otherwise). It records the conversation sent with each seed (.seen; a seed shared by several
-    conversations keeps the last), the reply (.out), the conversations per max_tokens (.n_by_max_tokens) and every
-    conversation in order (.log: (seed, conv, max_tokens)). Fake(fail_call=n) raises RuntimeError on its n-th call."""
+    conversations keeps the last), the reply (.out), the conversations per max_tokens (.n_by_max_tokens), every
+    conversation in order (.log: (seed, conv, max_tokens)) and every reply by (seed, json.dumps(conv)) (.replies).
+    Fake(fail_call=n) raises RuntimeError on its n-th call. Fake(by_conv=True) makes the reply depend on the
+    conversation too (f"t{seed % 9973}-" + 8 hex of its sha256), so conversations that share a seed get different
+    replies."""
 
-    def __init__(self, fail_call=None, finish=lambda sd: "stop"):
-        self.fail_call, self.finish, self.calls = fail_call, finish, 0
-        self.seen, self.out, self.n_by_max_tokens, self.log = {}, {}, Counter(), []
+    def __init__(self, fail_call=None, finish=lambda sd: "stop", by_conv=False):
+        self.fail_call, self.finish, self.by_conv, self.calls = fail_call, finish, by_conv, 0
+        self.seen, self.out, self.n_by_max_tokens, self.log, self.replies = {}, {}, Counter(), [], {}
 
     def __call__(self, convs, seeds, max_tokens):
         self.calls += 1
@@ -170,10 +173,12 @@ class Fake:
             raise RuntimeError(f"fake gen: call {self.calls} fails, as the test asked")
         outs = []
         for conv, sd in zip(convs, seeds, strict=True):
-            self.seen[sd], self.out[sd] = conv, f"t{sd % 9973}"
+            dump = json.dumps(conv)
+            text = f"t{sd % 9973}" + (f"-{hashlib.sha256(dump.encode()).hexdigest()[:8]}" if self.by_conv else "")
+            self.seen[sd], self.out[sd], self.replies[(sd, dump)] = conv, text, text
             self.n_by_max_tokens[max_tokens] += 1
             self.log.append((sd, conv, max_tokens))
-            outs.append((self.out[sd], self.finish(sd)))
+            outs.append((text, self.finish(sd)))
         return outs
 
 
@@ -304,6 +309,29 @@ def test_summaries_share_seeds_and_end_up_in_their_items(tmp_path):
         assert fr in (items.frames_for(s, k) if g == "MENT" else ("-",))
         it = its[items.key("q27", g, r["arm"], s, k, fr)]
         assert it["messages"][-2] == {"role": "assistant", "content": r["text"]} and it["messages"][:-2] in sent[sd]
+
+
+def test_each_summary_item_carries_the_reply_to_its_own_context(tmp_path):
+    # the variants of a MENT (s, k, f) share a seed, and so do MEARN's R and N: only a reply that depends on the
+    # conversation tells whose summary an item holds
+    f = Fake(by_conv=True); gen.run_gen("q27", tmp_path, gen=f, limit=2)
+    its = [i for i in _items(tmp_path) if i["group"] in ("MENT", "MEARN")]
+    assert Counter(i["group"] for i in its) == {"MENT": 32, "MEARN": 8}
+    for i in its:
+        s, k, fr = i["s"], i["k"], i["f"]
+        sd = util.seed(f"PA-A1|q27|sum|ment|{s}|{k}|{fr}" if i["group"] == "MENT" else f"PA-A1|q27|sum|mearn|{s}|{k}")
+        assert i["messages"][-2]["role"] == "assistant"
+        assert f.replies[(sd, json.dumps(i["messages"][:-2]))] == i["messages"][-2]["content"]
+    assert len({i["messages"][-2]["content"] for i in its}) == len(its)       # every variant got its own reply
+
+
+def test_group_and_told_split_constants_live_in_items():
+    assert items.GROUPS == {"E1": ("R", "N"), "E2": ("I", "P"), "SPEC": ("S", "A"),
+                            "TOLD": ("frus", "calm", "sad", "fear", "user"),
+                            "MENT": ("T_frus", "T_calm", "M_frus", "M_calm"), "MEARN": ("R", "N"), "A8": ("R_OP", "N")}
+    assert items.TOLD_SPLITS == {"frus": ("test", "train"), "calm": ("test", "train"), "sad": ("train",),
+                                 "fear": ("train",), "user": ("test",)}
+    assert gen.GROUPS is items.GROUPS and gen.TOLD_SPLITS is items.TOLD_SPLITS
 
 
 def test_mearn_items_hold_the_history_as_a_third_party_transcript(tmp_path):

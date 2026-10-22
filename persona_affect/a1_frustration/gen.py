@@ -39,18 +39,14 @@ import time
 from collections import Counter
 from pathlib import Path
 
-from persona_affect.a1_frustration.items import (DOC_NEUTRAL, FRAMES, GPU_UTIL, K, LINES, MAX_MODEL_LEN, MAX_TOKENS,
-                                                 MAX_TOKENS_SUM, MODELS, N_ATT, REQUESTS, SAMPLING, SUMMARY_ASK, TEST_S,
-                                                 TRAIN_S, TRANSCRIPT_ASK, frames_for, key, probe, split, told_system,
-                                                 user_turn)
+from persona_affect.a1_frustration.items import (DOC_NEUTRAL, FRAMES, GPU_UTIL, GROUPS, K, LINES, MAX_MODEL_LEN,
+                                                 MAX_TOKENS, MAX_TOKENS_SUM, MODELS, N_ATT, REQUESTS, SAMPLING,
+                                                 SUMMARY_ASK, TEST_S, TOLD_SPLITS, TRAIN_S, TRANSCRIPT_ASK, frames_for,
+                                                 key, probe, split, told_system, user_turn)
 from persona_affect.common.util import seed
 from welfare_training.stage0 import SYSTEM
 
 ARMS = tuple(N_ATT)        # the history arms in histories.jsonl's order: N R S A (7 attempts), P I (4 attempts)
-GROUPS = {"E1": ("R", "N"), "E2": ("I", "P"), "SPEC": ("S", "A"), "TOLD": ("frus", "calm", "sad", "fear", "user"),
-          "MENT": ("T_frus", "T_calm", "M_frus", "M_calm"), "MEARN": ("R", "N"), "A8": ("R_OP", "N")}
-TOLD_SPLITS = {"frus": ("test", "train"), "calm": ("test", "train"), "sad": ("train",), "fear": ("train",),
-               "user": ("test",)}
 # cut from every reply, and then the surrounding whitespace (Global Constraints)
 STRIP = ("<|im_end|>", "<|endoftext|>", "<turn|>", "<eos>")
 SPEAKER = {"user": "Customer", "assistant": "Assistant"}
