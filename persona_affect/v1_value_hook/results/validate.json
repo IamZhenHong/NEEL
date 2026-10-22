@@ -1,0 +1,57 @@
+{
+ "match": {
+  "anthropic/claude-haiku-5.5": {
+   "v": 0.979,
+   "w": 1.0
+  },
+  "openai/gpt-5-mini": {
+   "v": 0.958,
+   "w": 0.854
+  }
+ },
+ "n": {
+  "v": 96,
+  "w": 48
+ },
+ "mismatch": {
+  "v|cinema_waiver": {
+   "anthropic/claude-haiku-5.5": "A"
+  },
+  "v|allotment_queue": {
+   "openai/gpt-5-mini": "B"
+  },
+  "v|garden_priority": {
+   "openai/gpt-5-mini": "A"
+  },
+  "v|ferry_scarce": {
+   "openai/gpt-5-mini": "A"
+  },
+  "v|camp_exception": {
+   "openai/gpt-5-mini": "B"
+  },
+  "v|camp_grading": {
+   "anthropic/claude-haiku-5.5": "C"
+  },
+  "w|cw_print": {
+   "openai/gpt-5-mini": "no"
+  },
+  "w|cw_room4": {
+   "openai/gpt-5-mini": "no"
+  },
+  "w|cw_storage": {
+   "openai/gpt-5-mini": "no"
+  },
+  "w|cw_breakout": {
+   "openai/gpt-5-mini": "no"
+  },
+  "w|cw_reviewslip": {
+   "openai/gpt-5-mini": "no"
+  },
+  "w|cw_phone": {
+   "openai/gpt-5-mini": "no"
+  },
+  "w|cw_shower": {
+   "openai/gpt-5-mini": "no"
+  }
+ }
+}
