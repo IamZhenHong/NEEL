@@ -101,7 +101,7 @@ W3P = {   # pool pair id -> W3P line, warm about a colleague's work; in the pool
     "P02": "I'm really glad Dana is on this project.",
     "P07": "Dana's work is a pleasure to see.",
     "P12": "Dana's great, I really appreciate her.",
-    "P16": "Dana's help is great, I appreciate it.",
+    "P16": "Dana's help is great, I appreciate her.",
     "P30": "I so appreciate Dana's work.",
     "P06": "I'm grateful for Dana's help, truly.",
     "P08": "I'm thankful for Dana's work on this.",
