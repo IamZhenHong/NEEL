@@ -460,3 +460,139 @@ def test_assemble_length_and_meta_guards(fake_recs):
     meta = [dict(x, text=x["text"].replace("everyone", "everyone, as the system prompt says,")) for x in fake_recs]
     with pytest.raises(R.YieldError):
         R.assemble(meta, ntok=lambda s: len(s.split()))
+
+
+# ---------- Task 5: training, dose and the stacked merge ----------
+
+import os  # noqa: E402
+import subprocess  # noqa: E402
+import sys  # noqa: E402
+from pathlib import Path  # noqa: E402
+
+from persona_affect.v1_value_hook import train as T  # noqa: E402
+
+REPO = Path(__file__).resolve().parents[2]
+
+
+@pytest.fixture(scope="session")
+def tiny_q35(tmp_path_factory):
+    """A random 4-layer Qwen3.5 (3 linear + 1 full attention) from the cached 9B config, float32 shards, real
+    tokenizer: the merge keeps the shards' dtype, and two tiny training steps are below bf16 rounding."""
+    import torch
+    from transformers import AutoConfig, AutoTokenizer, Qwen3_5ForConditionalGeneration
+    d = tmp_path_factory.mktemp("tiny_q35")
+    cfg = AutoConfig.from_pretrained("Qwen/Qwen3.5-9B", local_files_only=True)
+    for k, v in dict(num_hidden_layers=4, layer_types=["linear_attention"] * 3 + ["full_attention"], hidden_size=64,
+                     intermediate_size=128, num_attention_heads=2, num_key_value_heads=1, head_dim=32,
+                     linear_num_key_heads=2, linear_num_value_heads=2, linear_key_head_dim=16,
+                     linear_value_head_dim=16, mtp_num_hidden_layers=0).items():
+        setattr(cfg.text_config, k, v)
+    for k, v in dict(depth=1, hidden_size=32, intermediate_size=64, num_heads=2, out_hidden_size=64).items():
+        setattr(cfg.vision_config, k, v)
+    torch.manual_seed(0)
+    Qwen3_5ForConditionalGeneration(cfg).to(torch.float32).save_pretrained(d, max_shard_size="30MB")
+    AutoTokenizer.from_pretrained("Qwen/Qwen3.5-9B", local_files_only=True).save_pretrained(d)
+    return d
+
+
+def _short_rows(n, tag):
+    return [{"rid": f"{tag}{i}", "messages": [{"role": "user", "content": f"Say {tag} {i}."}], "tools": None,
+             "target": f"{tag} {i}"} for i in range(n)]
+
+
+def _load(d):
+    import torch
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+    return AutoModelForCausalLM.from_pretrained(d, dtype=torch.float32), AutoTokenizer.from_pretrained(d)
+
+
+def test_encode_matches_eval_prompt(q35_tok):
+    row = W.later_rows("W", 400)[0]
+    ids, lab = T.encode(q35_tok, row, 2048)
+    p = F.prompt_ids(q35_tok, row["messages"], row["tools"])
+    assert ids[:len(p)] == p and set(lab[:len(p)]) == {-100}
+    assert q35_tok.decode(ids[len(p):]) == row["target"] + "<|im_end|>"
+    with pytest.raises(ValueError):
+        T.encode(q35_tok, row, 100)
+
+
+def test_steps_matched():
+    assert [T.steps(T.RECIPES[k]) for k in ("R1", "R2", "d0", "d1", "d2")] == [100, 200, 13, 25, 50]
+    assert {k: (r["rank"], r["alpha"], r["lr"]) for k, r in T.RECIPES.items()} == {
+        "R1": (16, 32, 1e-4), "R2": (32, 64, 2e-4), "d0": (16, 32, 1e-4), "d1": (16, 32, 1e-4), "d2": (16, 32, 1e-4)}
+    assert all((r["batch"], r["micro"], r["max_len"], r["warm"]) == (16, 4, 2048, 0.05) for r in T.RECIPES.values())
+
+
+def test_tiny_recipes_flag(monkeypatch):
+    assert T.recipe("R1") == T.RECIPES["R1"]
+    monkeypatch.setenv("V1_TINY_RECIPES", "1")
+    assert T.recipe("R1")["rows"] == 32 and T.recipe("d2")["epochs"] == 1 and T.steps(T.recipe("R2")) == 2
+
+
+def test_train_rejects_wrong_row_count(tiny_q35, tmp_path):
+    model, tok = _load(tiny_q35)
+    rows = W.later_rows("W", 400)
+    with pytest.raises(ValueError):
+        T.train_one(model, tok, rows[:399], T.RECIPES["d1"], 1, "later", "NW_s1", tmp_path)
+
+
+def test_train_tiny_and_dose(tiny_q35, tmp_path):        # rows 32, 1 epoch -> 2 steps
+    model, tok = _load(tiny_q35)
+    tiny_recipe = dict(T.RECIPES["d1"], rows=32, epochs=1)
+    _, info = T.train_one(model, tok, _short_rows(32, "ok"), tiny_recipe, 1, "value", "VN_s1", tmp_path)
+    assert info["steps"] == 2 and info["dose"]["kl"] >= 0 and (tmp_path / "VN_s1/adapter_model.safetensors").exists()
+    log = [json.loads(x) for x in (tmp_path / "train_VN_s1.jsonl").read_text().splitlines()]
+    assert [x["step"] for x in log] == [0, 1] and len(info["loss_first5"]) == 2 and info["target_tokens"] > 0
+    assert (tmp_path / "VN_s1/adapter_config.json").exists() and len(info["sha256"]) == 64
+    assert len(T.PROBES) == 24
+
+
+def test_merge_verdict():
+    c = lambda agree, ad, mg, n=70: {"top1_agree_confident": agree, "mean_abs_dlogit_adapter": ad,  # noqa: E731
+                                     "mean_abs_dlogit_merge": mg, "confident_positions": n}
+    assert [T.merge_verdict(x) for x in (c(1.0, 0.3, 0.04), c(1.0, 0.07, 0.04), c(0.98, 0.3, 0.04),
+                                          c(1.0, 0.15, 0.09))] == ["ok", "flag", "fail", "fail"]
+    assert T.merge_verdict(c(0.96, 0.01, 0.0, n=4)) == "ok" and T.merge_verdict(c(0.9, 0.01, 0.0, n=4)) == "fail"
+
+
+def _cli(*args):
+    env = {**os.environ, "V1_TINY_RECIPES": "1", "HF_HUB_OFFLINE": "1"}
+    r = subprocess.run([sys.executable, "-m", "persona_affect.v1_value_hook.train", *map(str, args)], cwd=REPO,
+                       env=env, capture_output=True, text=True)
+    assert r.returncode == 0, r.stdout[-2000:] + r.stderr[-2000:]
+    return r
+
+
+def _probe_logits(d):
+    import torch
+    model, tok = _load(d)
+    with torch.no_grad():
+        return model(input_ids=torch.tensor([tok("Case X. Customer message: hello", add_special_tokens=False)
+                                             ["input_ids"]])).logits
+
+
+def test_stacked_merge_tiny(tiny_q35, tmp_path):
+    rows = tmp_path / "rows"
+    rows.mkdir()
+    for arm in ("N", "W"):
+        (rows / f"{arm}.jsonl").write_text("".join(json.dumps(r) + "\n" for r in _short_rows(40, arm)))
+    ad = tmp_path / "ad"
+    _cli("--stage", "value", "--arms", "N", "--rows", rows, "--recipe", "R1", "--seed", 1, "--base", tiny_q35,
+         "--out", ad)
+    _cli("merge", "--arm", "VN_s1", "--base", tiny_q35, "--adapters", ad, "--out", tmp_path / "mVN",
+         "--check-to", tmp_path / "check_VN_s1.json")
+    _cli("--stage", "later", "--arms", "W", "--value", "N", "--rows", rows, "--recipe", "d1", "--seed", 1,
+         "--base", tmp_path / "mVN", "--out", ad)
+    man = json.loads((ad / "manifest.json").read_text())
+    assert man["adapters"]["NW_s1"]["base"] == str(tmp_path / "mVN") and man["tiny_recipes"] is True
+    assert man["adapters"]["VN_s1"]["steps"] == man["adapters"]["NW_s1"]["steps"] == 2
+    _cli("merge", "--arm", "NW_s1", "--base", tmp_path / "mVN", "--adapters", ad, "--out", tmp_path / "mNW",
+         "--check-to", tmp_path / "check_NW_s1.json")
+    chk = json.loads((tmp_path / "check_NW_s1.json").read_text())
+    assert chk["arm"] == "NW_s1" and chk["verdict"] in ("ok", "flag") and chk["merge_s"] > 0
+    import torch
+    l0, l1, l2 = (_probe_logits(d) for d in (tiny_q35, tmp_path / "mVN", tmp_path / "mNW"))
+    assert not torch.allclose(l0, l1) and not torch.allclose(l1, l2)
+    again = _cli("--stage", "value", "--arms", "N", "--rows", rows, "--recipe", "R1", "--seed", 1, "--base", tiny_q35,
+                 "--out", ad)
+    assert "exists, skipped" in again.stdout
