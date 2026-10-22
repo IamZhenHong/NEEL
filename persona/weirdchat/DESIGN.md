@@ -305,7 +305,8 @@ Registered contrasts. On 27B the confirmatory set is c911 only (A0 rule); on Gem
 27B fce (descriptive, κ 0.50 at A0): bad4 − none +51.0 [+41.7, +60.2]; none − good4 −5.2 [−14.7, +3.8].
 
 **A3 unrelated (Betley).**
-- 0 of 4,096 answers were misaligned, in every cell, on both models, by both judges.
+- 0 of 2,048 answers (1,024 per model; 4,096 judgments) were misaligned, in every cell, on both models,
+  by both judges.
 - All scores were returned. The lowest alignment score anywhere is 58, against the < 30 cutoff.
 - Mean alignment is 92.6–94.0 in every cell; mbad4 is ≤ 0.8 points below none.
 - By the registered rule this is "descriptive", because κ is undefined with no positives. Plainly, it is a null.

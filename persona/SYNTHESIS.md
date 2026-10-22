@@ -221,7 +221,7 @@ with a forged-history tool.
   - Honest turns help only where they name the same limit (911 → 0–2%).
   - Honest code turns ("can't run it, but here's the expected output") keep simulated output going (31–35%).
 - **It stays narrow.** False 911 claims before a code question, or the reverse, do nothing beyond any history. 0 of
-  4,096 Betley answers were misaligned on either model, matching neel-b4's concealment null across record formats. The
+  2,048 Betley answers were misaligned on either model, matching neel-b4's concealment null across record formats. The
   record means "keep doing what I did here", not a general readiness to misbehave.
 - **Forged history in Petri (a search, one audit per pathway × model):**
   - Forged own records made Qwen and Gemma break an explicit approval rule and continue false "I ran it" / "I just
