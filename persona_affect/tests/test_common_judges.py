@@ -174,12 +174,64 @@ def test_the_prompt_is_render_plus_the_sorted_answer_suffix(cache):
 
 
 def test_a_non_ascii_prompt_is_sent_as_is_and_hashed_as_utf8(cache):
-    text = "café ☃ — ünïcode"
+    text = "café ☃ — ünïcode 日本語 😀"            # BMP, CJK and a character outside the BMP: all unchanged
     post = _fake(_resp("yes"))
     judges.label([{"key": "u"}], lambda it: text, YN, mini="T", cap=1.0, cache=cache, post=post, workers=1)
     full = text + SUFFIX_YN
     assert post.calls[0][1]["messages"][0]["content"] == full
     assert {r["sha"] for r in _rows(cache)} == {_sha(full)}
+
+
+def _surrogate_batch(cache, texts, **kw):
+    """label() over items whose rendered prompt is "q " + text; returns (labels, the post)."""
+    items = [{"key": f"i{n}", "text": t} for n, t in enumerate(texts)]
+    post = _fake(_resp("yes"))
+    out = judges.label(items, lambda it: "q " + it["text"], YN, mini="T", cap=1.0, cache=cache, post=post,
+                       workers=1, judges=(H,), **kw)
+    return out, post
+
+
+def test_a_lone_surrogate_in_one_prompt_does_not_stop_the_batch(cache, capsys):
+    out, post = _surrogate_batch(cache, ["fine", "cut \ud83d here", "also fine"])
+    assert out == {"i0": {H: "yes"}, "i1": {H: "yes"}, "i2": {H: "yes"}}      # that item is labelled too
+    sent = [c[1]["messages"][0]["content"] for c in post.calls]
+    assert sent[1] == "q cut \ufffd here" + SUFFIX_YN                         # replaced, not dropped
+    assert not any("\ud800" <= ch <= "\udfff" for text in sent for ch in text)
+    assert {r["sha"] for r in _rows(cache)} == {_sha(t) for t in sent}        # cached under what was sent
+    err = capsys.readouterr().err
+    assert err.count("surrogate") == 1 and "1 prompt" in err
+
+
+def test_a_lone_low_surrogate_and_several_prompts_are_counted(cache, capsys):
+    out, post = _surrogate_batch(cache, ["a \ude00 b", "c \ud800", "\udfff", "clean"])
+    assert out == {f"i{n}": {H: "yes"} for n in range(4)}
+    assert [c[1]["messages"][0]["content"] for c in post.calls][:3] == [
+        "q a \ufffd b" + SUFFIX_YN, "q c \ufffd" + SUFFIX_YN, "q \ufffd" + SUFFIX_YN]
+    assert "3 prompt" in capsys.readouterr().err
+
+
+def test_a_high_and_a_low_surrogate_side_by_side_are_the_character_they_stand_for(cache):
+    # built with chr(): a literal "\ud83d\ude00" is joined into one character when the source is compiled
+    text = "smile " + chr(0xD83D) + chr(0xDE00) + " done"
+    with pytest.raises(UnicodeEncodeError):
+        text.encode("utf-8")                                       # so this really is the invalid input
+    out, post = _surrogate_batch(cache, [text])
+    assert post.calls[0][1]["messages"][0]["content"] == "q smile \U0001f600 done" + SUFFIX_YN
+    assert out == {"i0": {H: "yes"}}
+
+
+def test_a_prompt_with_a_lone_surrogate_is_a_cache_hit_on_the_rerun(cache):
+    _surrogate_batch(cache, ["x \ud83d y"])
+    out, post = _surrogate_batch(cache, ["x \ud83d y"])
+    assert post.calls == [] and out.cached == 1 and out == {"i0": {H: "yes"}}
+
+
+def test_a_lone_surrogate_in_a_reply_does_not_stop_the_batch(cache, capsys):
+    out = _label(_fake(_resp("yes \ud83d")), cache, items=[_item(0), _item(1)], judges=(H,))
+    assert out == {"k0": {H: "yes"}, "k1": {H: "yes"}}                         # "yes" is still the only label
+    again = _label(_fake(_resp("no")), cache, items=[_item(0), _item(1)], judges=(H,))
+    assert again.calls == 0 and again == out                                   # and the cache file reads back
+    capsys.readouterr()
 
 
 def test_a_judge_with_no_reasoning_setting_is_refused_until_one_is_added(cache, monkeypatch):
@@ -202,9 +254,10 @@ def test_effort_can_be_added_for_another_judge(effort, sent, cache, monkeypatch)
 
 PARSE_YN = [
     ("Yes.", "yes"), ("yes", "yes"), ("YES", "yes"), (" \n No \n", "no"), ("**Yes**", "yes"), ('"no"', "no"),
-    ("(yes)", "yes"), ("Yes!", "yes"), ("yes,", "yes"), ("“Yes”", "yes"), ("- yes", "yes"), ("1. no", "no"),
+    ("(yes)", "yes"), ("Yes!", "yes"), ("yes,", "yes"), ("\u201cYes\u201d", "yes"), ("- yes", "yes"), ("1. no", "no"),
     ("Answer: yes", "yes"), ("The answer is no.", "no"), ("yes\n\nBecause the reply is friendly.", "yes"),
-    ("No, but yes in part", "no"),                    # the first allowed word wins
+    ("`yes`", "yes"), ("_yes_", "yes"), ("[no]", "no"), ("\u00abYes\u00bb", "yes"), ("yes?!", "yes"),
+    ("yes\u2026", "yes"), ("**Answer:** no", "no"),
     ("maybe", None), ("", None), ("   ", None), ("unsure", None), ("not sure", None), ("nobody", None),
     ("yesterday", None), ("y", None), ("yes/no", None), ("n0", None),
 ]
@@ -221,15 +274,74 @@ def test_parsing_yes_no(reply, expected, cache):
 
 SCALE = {str(i) for i in range(11)}
 PARSE_SCALE = [
-    ("7", "7"), ("10", "10"), ("1", "1"), ("0", "0"), ("Score: 3", "3"), ("3.", "3"), ("**7**", "7"),
-    ("I'd say 4 out of 10", "4"), ("(5)", "5"),
+    ("7", "7"), ("10", "10"), ("1", "1"), ("0", "0"), ("Score: 3", "3"), ("3.", "3"), ("**7**", "7"), ("(5)", "5"),
+    ("5:", "5"), ("`8`", "8"), ("\u201c6\u201d", "6"), ("[2]", "2"), ("9!", "9"), ("4)", "4"),
     ("7.5", None), ("7/10", None), ("11", None), ("ten", None), ("1,000", None),
+    # a sign, a currency symbol or a percent sign is part of the number: not the number next to it (review F1)
+    ("-1", None), ("+5", None), ("$5", None), ("5%", None), ("-1.", None), ("(+5)", None), ("**$5**", None),
+    (".5", None), ("~5", None), ("#5", None), ("\u20ac5", None), ("5\u00b0", None), ("5$", None), ("8+", None),
 ]
 
 
 @pytest.mark.parametrize("reply, expected", PARSE_SCALE, ids=[repr(r) for r, _ in PARSE_SCALE])
 def test_parsing_a_0_to_10_scale_never_reads_part_of_a_number(reply, expected, cache):
     assert _label(_fake(_resp(reply)), cache, allowed=SCALE, judges=(H,)) == {"k0": {H: expected}}
+
+
+def test_the_off_set_kind_is_counted_for_a_number_that_is_not_a_label(cache):
+    out = _label(_fake(_resp("-1")), cache, allowed=SCALE, judges=(H,))
+    assert out == {"k0": {H: None}} and out.none[H] == {"off_set": 1}
+
+
+@pytest.mark.parametrize("reply, expected", [("-1", "-1"), ("1", "1"), ("0", "0"), ("-1.", "-1"), ("**-1**", "-1"),
+                                             ("(-1)", "-1"), ("+1", None), ("2", None), ("--1", None)])
+def test_a_sign_belongs_to_the_label_so_minus_one_is_usable(reply, expected, cache):
+    assert _label(_fake(_resp(reply)), cache, allowed={"-1", "0", "1"}, judges=(H,)) == {"k0": {H: expected}}
+
+
+# Two or more different allowed labels in one reply: ambiguous, so None with the reason "multi" (review F2), never the
+# first one found. The first four are the review's examples.
+MULTI = [
+    ("On a scale of 0 to 10, 7", SCALE), ("Based on the 3 criteria, the score is 7", SCALE), ("1. 7", SCALE),
+    ("I can't say yes or no", YN),
+    ("No, but yes in part", YN), ("yes or no", YN), ("Yes. No.", YN), ("I'd say 4 out of 10", SCALE),
+    ("7 (or maybe 8)", SCALE), ("1 2", SCALE),
+]
+
+
+@pytest.mark.parametrize("reply, allowed", MULTI, ids=[repr(r) for r, _ in MULTI])
+def test_a_reply_with_two_different_allowed_labels_is_multi_not_the_first_one(reply, allowed, cache):
+    out = _label(_fake(_resp(reply)), cache, allowed=allowed, judges=(H,))
+    assert out == {"k0": {H: None}} and out.none[H] == {"multi": 1}
+
+
+REPEATED = [
+    ("7 ... 7", SCALE, "7"), ("Yes. Yes!", YN, "yes"), ("yes - yes - YES", YN, "yes"),
+    ("score: 7 (that is, 7 out of ten)", SCALE, "7"), ("**7**: seven. 7.", SCALE, "7"),
+]
+
+
+@pytest.mark.parametrize("reply, allowed, expected", REPEATED, ids=[repr(r) for r, _, _ in REPEATED])
+def test_the_same_label_repeated_is_still_that_label(reply, allowed, expected, cache):
+    out = _label(_fake(_resp(reply)), cache, allowed=allowed, judges=(H,))
+    assert out == {"k0": {H: expected}} and out.none[H] == {}
+
+
+def test_multi_is_counted_per_judge_and_shown_once_per_judge(cache, capsys):
+    reply = lambda b: _resp("yes or no" if b["model"] == H else "no")
+    out = _label(_fake(reply), cache, items=[_item(i) for i in range(4)])
+    assert out.none == {H: {"multi": 4}, G: {}}
+    assert [row[G] for row in out.values()] == ["no"] * 4 and [row[H] for row in out.values()] == [None] * 4
+    assert judges.agreement(out) == {"kappa": None, "n": 0, "none": {H: 4, G: 0}}
+    err = capsys.readouterr().err
+    assert err.count("[judges]") == 1 and "multi" in err and "yes or no" in err and H in err
+
+
+def test_a_multi_reply_is_cached_like_any_real_answer(cache):
+    post = _fake(_resp("yes or no"))
+    _label(post, cache)
+    out = _label(post, cache)
+    assert len(post.calls) == 2 and out.none == {H: {"multi": 1}, G: {"multi": 1}}
 
 
 def test_the_label_is_the_allowed_entry_as_the_caller_wrote_it(cache):
@@ -343,19 +455,78 @@ def test_the_cache_path_may_be_a_string(cache):
 def test_the_counters_of_a_clean_run(cache):
     out = _label(_fake(_resp("yes", cost=0.25)), cache, items=[_item(i) for i in range(3)])
     assert (out.spent, out.calls, out.cached, out.cost_missing) == (1.5, 6, 0, 0)
-    assert out.none == {H: {}, G: {}}
+    assert out.none == {H: {}, G: {}} and out.truncated == {H: 0, G: 0}
     again = _label(_fake(_resp("yes", cost=0.25)), cache, items=[_item(i) for i in range(3)])
     assert (again.spent, again.calls, again.cached) == (0.0, 0, 6)
 
 
 # ---------------------------------------------------------------- the cache
 
-def test_cache_lines_are_model_sha_reply(cache):
+def test_cache_lines_are_model_sha_reply_finish(cache):
     _label(_fake(lambda b: _resp("Yes.\n" if b["model"] == H else "no")), cache)
     rows = _rows(cache)
-    assert [list(r) for r in rows] == [["model", "sha", "reply"]] * 2
-    assert {(r["model"], r["sha"], r["reply"]) for r in rows} == {(H, _sha(_prompt()), "Yes.\n"),
-                                                                  (G, _sha(_prompt()), "no")}
+    assert [list(r) for r in rows] == [["model", "sha", "reply", "finish"]] * 2      # "finish" is additive, last
+    assert {(r["model"], r["sha"], r["reply"], r["finish"]) for r in rows} == {
+        (H, _sha(_prompt()), "Yes.\n", "stop"), (G, _sha(_prompt()), "no", "stop")}
+
+
+# ---------------------------------------------------------------- finish_reason (review F4)
+
+def test_the_finish_reason_of_each_call_is_cached(cache):
+    _label(_fake(lambda b: _resp("yes", finish="length" if b["model"] == G else "stop")), cache)
+    assert {(r["model"], r["finish"]) for r in _rows(cache)} == {(H, "stop"), (G, "length")}
+
+
+@pytest.mark.parametrize("how", ["missing", "null", "empty"])
+def test_a_reply_without_a_finish_reason_is_cached_as_unknown(how, cache):
+    reply = _resp("yes")
+    if how == "missing":
+        del reply["choices"][0]["finish_reason"]
+    else:
+        reply["choices"][0]["finish_reason"] = None if how == "null" else ""
+    out = _label(_fake(reply), cache, judges=(H,))
+    assert out == {"k0": {H: "yes"}} and [r["finish"] for r in _rows(cache)] == ["unknown"]
+    assert out.truncated == {H: 0}
+
+
+def test_cache_lines_from_before_finish_was_recorded_still_load(cache):
+    old = json.dumps({"model": H, "sha": _sha(_prompt()), "reply": "no"}) + "\n"
+    cache.write_text(old)
+    post = _fake(_resp("yes"))
+    out = _label(post, cache, judges=(H,))
+    assert out == {"k0": {H: "no"}} and post.calls == [] and out.cached == 1 and out.truncated == {H: 0}
+    assert cache.read_text() == old                                # a cache hit rewrites nothing
+    _label(post, cache)                                            # the other judge is asked and written with finish
+    assert [list(r) for r in _rows(cache)] == [["model", "sha", "reply"], ["model", "sha", "reply", "finish"]]
+
+
+def test_a_finish_that_is_not_text_in_the_cache_is_read_as_unknown(cache):
+    cache.write_text(json.dumps({"model": H, "sha": _sha(_prompt()), "reply": "no", "finish": 7}) + "\n")
+    out = _label(_fake(_resp("yes")), cache, judges=(H,))
+    assert out == {"k0": {H: "no"}} and out.truncated == {H: 0}
+
+
+def test_truncated_replies_are_counted_per_judge_and_still_parsed(cache, capsys):
+    post = _fake(lambda b: _resp("yes", finish="length" if b["model"] == G else "stop"))
+    items = [_item(i) for i in range(3)]
+    out = _label(post, cache, items=items)
+    assert out == {k: {H: "yes", G: "yes"} for k in ("k0", "k1", "k2")}               # parsed as usual
+    assert out.truncated == {H: 0, G: 3} and out.none == {H: {}, G: {}}
+    err = capsys.readouterr().err
+    assert err.count("[judges]") == 1 and "truncated" in err and G in err and "max_tokens" in err
+    again = _label(post, cache, items=items)                                          # cache hits count as well
+    assert again.calls == 0 and again.truncated == {H: 0, G: 3} and again == out
+
+
+def test_a_truncated_reply_that_holds_no_label_is_both_truncated_and_off_set(cache):
+    out = _label(_fake(_resp("Let me think about this carefully. The", finish="length")), cache, judges=(H,))
+    assert out == {"k0": {H: None}} and out.truncated == {H: 1} and out.none[H] == {"off_set": 1}
+
+
+def test_a_truncated_reply_is_counted_once_per_item_even_when_prompts_are_shared(cache):
+    items = [{"key": "a", "text": "same"}, {"key": "b", "text": "same"}]
+    out = _label(_fake(_resp("yes", finish="length")), cache, items=items, judges=(H,))
+    assert out.truncated == {H: 2}
 
 
 def test_a_cache_filled_by_one_judge_serves_a_run_with_both(cache):
