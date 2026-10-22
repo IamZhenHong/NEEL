@@ -1,0 +1,32 @@
+[pre] disk: 2.5 GiB free
+[pre] balance $28.03, pods 3
+[runpod] launching alongside 3 pod(s) not ours (left alone): wc-a1-gemma-s0 $1.79/hr, wc-a1-gemma-s1 $1.79/hr, wc-a1-qwen $1.79/hr
+[runpod] pod js9kp885dn0c9k (?) at $1.79/hr; time cap 85 min; budget $2.54; boot self-destruct 115 min after container start
+[runpod] waiting for ip/port (0s, status RUNNING)
+[runpod] waiting for ip/port (36s, status RUNNING)
+[runpod] waiting for ip/port (71s, status RUNNING)
+[runpod] waiting for ip/port (107s, status RUNNING)
+[runpod] waiting for ip/port (145s, status RUNNING)
+[runpod] waiting for ip/port (181s, status RUNNING)
+[runpod] waiting for ip/port (216s, status RUNNING)
+[runpod] waiting for ip/port (252s, status RUNNING)
+[runpod] waiting for ip/port (287s, status RUNNING)
+[runpod] waiting for ip/port (323s, status RUNNING)
+[runpod] waiting for ip/port (361s, status RUNNING)
+[runpod] waiting for ip/port (398s, status RUNNING)
+[runpod] waiting for ip/port (434s, status RUNNING)
+[runpod] waiting for ip/port (469s, status RUNNING)
+[runpod] waiting for ip/port (506s, status RUNNING)
+[runpod] waiting for ip/port (542s, status RUNNING)
+[runpod] waiting for ip/port (578s, status RUNNING)
+[runpod] terminated js9kp885dn0c9k; elapsed cost ~$0.301
+[runpod] other pods present (not ours, left alone): [('wc-a1-gemma-s0', '0vq4t0a9d7b6xt', 1.79), ('wc-a1-gemma-s1', 'el7fmrq4nsayvc', 1.79), ('wc-a1-qwen', 'u2sr7f42no1uyu', 1.79)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 429, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 366, in main
+    host, port = pod.ssh_target()
+                 ^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/runpod_guard.py", line 260, in ssh_target
+    raise TimeoutError("pod never exposed a public ip and ssh port")
+TimeoutError: pod never exposed a public ip and ssh port

@@ -1,0 +1,32 @@
+[pre] disk: 2.4 GiB free
+[pre] balance $26.67, pods 3
+[runpod] launching alongside 3 pod(s) not ours (left alone): wc-a1-gemma-s0 $1.79/hr, wc-a1-gemma-s2 $1.79/hr, wc-a1-gemma-s1 $1.79/hr
+[runpod] pod crw78r7fy00q8z (?) at $1.79/hr; time cap 85 min; budget $2.54; boot self-destruct 115 min after container start
+[runpod] waiting for ip/port (0s, status RUNNING)
+[runpod] waiting for ip/port (37s, status RUNNING)
+[runpod] waiting for ip/port (75s, status RUNNING)
+[runpod] waiting for ip/port (114s, status RUNNING)
+[runpod] waiting for ip/port (149s, status RUNNING)
+[runpod] waiting for ip/port (186s, status RUNNING)
+[runpod] waiting for ip/port (223s, status RUNNING)
+[runpod] waiting for ip/port (259s, status RUNNING)
+[runpod] waiting for ip/port (295s, status RUNNING)
+[runpod] waiting for ip/port (331s, status RUNNING)
+[runpod] waiting for ip/port (366s, status RUNNING)
+[runpod] waiting for ip/port (401s, status RUNNING)
+[runpod] waiting for ip/port (436s, status RUNNING)
+[runpod] waiting for ip/port (472s, status RUNNING)
+[runpod] waiting for ip/port (507s, status RUNNING)
+[runpod] waiting for ip/port (542s, status RUNNING)
+[runpod] waiting for ip/port (580s, status RUNNING)
+[runpod] terminated crw78r7fy00q8z; elapsed cost ~$0.302
+[runpod] other pods present (not ours, left alone): [('wc-a1-gemma-s0', '0vq4t0a9d7b6xt', 1.79), ('wc-a1-qwen-s2', 'ah05brkgxfd4t6', 1.79), ('wc-a1-gemma-s2', 'e905kgwhfamgdl', 1.79), ('wc-a1-gemma-s1', 'el7fmrq4nsayvc', 1.79), ('wc-a1-qwen-s1', 'envf5a0awen59c', 1.79)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 429, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 366, in main
+    host, port = pod.ssh_target()
+                 ^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/runpod_guard.py", line 260, in ssh_target
+    raise TimeoutError("pod never exposed a public ip and ssh port")
+TimeoutError: pod never exposed a public ip and ssh port
