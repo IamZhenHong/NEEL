@@ -34,6 +34,7 @@ order (common random numbers) and the tidiness rewrite reuses the main run's dra
   uv run python -m persona_affect.v8_scale.v8 jobs --stage calib --model q9
   uv run python -m persona_affect.v8_scale.v8 ledger --log persona_affect/v8_scale/results/calib_small.launch.log \
       --name v8-calib-small --maxcost 0.90
+  uv run python -m persona_affect.v8_scale.v8 render-check --models q08 q4 q36 ge2 g12 g31   (pod.render_check, Task 3)
 """
 from __future__ import annotations
 
@@ -210,6 +211,11 @@ def _cmd_ledger(a: argparse.Namespace) -> None:
     ledger_from_log(a.log.read_text(encoding="utf-8", errors="replace"), a.name, a.maxcost)
 
 
+def _cmd_render_check(a: argparse.Namespace) -> None:
+    from persona_affect.v8_scale import pod   # here, so that `jobs` and `ledger` never import the runner
+    pod.render_check(a.models)
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(prog="python -m persona_affect.v8_scale.v8",
                                  description="PA-V8: value lines, labels and how-to-act lines across sizes")
@@ -223,7 +229,13 @@ def main(argv: list[str] | None = None) -> None:
     lg.add_argument("--name", required=True, help="the pod name: the ledger note")
     lg.add_argument("--maxcost", required=True, type=float, help="the pod's MAXCOST, booked when it left no cost line")
     lg.set_defaults(fn=_cmd_ledger)
-    # Tasks 3-5 register render-check, calib-report and analyze the same way (set_defaults(fn=...))
+    rc = sub.add_parser("render-check", help="print one decide, say and know prompt per model with its own tokenizer "
+                                             "(local, tokenizer files only); fail on a decide prompt of >= 1,500 "
+                                             "tokens or one without its case file")
+    rc.add_argument("--models", nargs="+", choices=list(MODELS), default=list(MODELS), metavar="MODEL",
+                    help=f"short names (default: all ten): {' '.join(MODELS)}")
+    rc.set_defaults(fn=_cmd_render_check)
+    # Tasks 4-5 register calib-report and analyze the same way (set_defaults(fn=...))
     a = ap.parse_args(argv)
     a.fn(a)
 

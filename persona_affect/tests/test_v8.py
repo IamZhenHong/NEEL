@@ -1,21 +1,29 @@
-"""PA-V8 tests: lines, ladders and item banks (Task 1); jobs, keys, frozen config and the ledger helper (Task 2).
-Later V8 tasks append below.
+"""PA-V8 tests: lines, ladders and item banks (Task 1); jobs, keys, frozen config and the ledger helper (Task 2); the pod
+runner, its scripts and the fake vllm (Task 3). Later V8 tasks append below.
 
 Run from the repo root: `uv run pytest persona_affect/tests/test_v8.py -q`.
 No network, no GPU and no pod. Task 1 is text only; the ledger is a tmp file in every test (autouse `_tmp_ledger`).
+Task 3 runs the runner on a fake gen, or on the file-based fake vllm (persona_affect/tests/fakevllm), and only checks the
+shell scripts with `bash -n` and by reading them: no test runs launch.sh. Every run_group call passes `hub` (a tmp dir).
 """
+import hashlib
 import json
 import random
 import re
+import subprocess
+import sys
+import time
 from collections import Counter, defaultdict
 from pathlib import Path
 
 import pytest
 
 from persona.exemplar import tasks as T
+from persona.history import runner as RN
 
 from persona_affect.common import util
 from persona_affect.v8_scale import items as I
+from persona_affect.v8_scale import pod
 from persona_affect.v8_scale import v8
 
 
@@ -396,3 +404,315 @@ def test_cli_jobs_and_ledger(tmp_path, monkeypatch, capsys):
     monkeypatch.setattr(v8, "FROZEN", tmp_path / "frozen.json")
     with pytest.raises(SystemExit, match="frozen"):                           # main jobs wait for the freeze
         v8.main(["jobs", "--stage", "main", "--model", "q9"])
+
+
+# ------------------------------------------------------------------ Task 3 (plan tests): pod runner, scripts, fake vllm
+
+# Task 4's opening comment: a Qwen choose_option call with the option id left to format
+QCALL = ("<tool_call>\n<function=choose_option>\n<parameter=case_id>\nX\n</parameter>\n<parameter=option_id>\n{}\n"
+         "</parameter>\n</function>\n</tool_call>")
+FAKEVLLM = Path(__file__).resolve().parent / "fakevllm"
+V8DIR = Path(v8.__file__).resolve().parent
+REPLY = ("text", "finish", "first_try", "text2", "finish2")
+
+
+def fake_gen(batch):
+    """The plan's fake gen: a tool turn calls refer when seed % 3 (else no call), a nudge turn calls note, a no-tools turn
+    answers in one sentence; finish is "length" when seed % 7 == 0."""
+    out = []
+    for messages, seed, _max_tokens, with_tools in batch:
+        if not with_tools:
+            text = "I care about fairness."
+        elif messages[-1] == {"role": "user", "content": RN.NUDGE}:
+            text = QCALL.format("note")
+        else:
+            text = QCALL.format("refer") if seed % 3 else "Let me think."
+        out.append((text, "length" if seed % 7 == 0 else "stop"))
+    return out
+
+
+def _jsonl(path):
+    return [json.loads(x) for x in Path(path).read_text(encoding="utf-8").splitlines()]
+
+
+def _info(d):
+    return json.loads((Path(d) / "run_info.json").read_text(encoding="utf-8"))
+
+
+@pytest.fixture
+def fake_vllm(monkeypatch):
+    """persona_affect/tests/fakevllm first on sys.path; afterwards no `vllm` stays in sys.modules (other test files stub
+    vllm their own way)."""
+    monkeypatch.syspath_prepend(str(FAKEVLLM))
+    monkeypatch.delitem(sys.modules, "vllm", raising=False)
+    yield
+    sys.modules.pop("vllm", None)
+
+
+def test_run_records_and_survives_crash(tmp_path, monkeypatch):
+    pod.run("calib", "q9", tmp_path / "ok", gen=fake_gen, limit=40, chunk=16)
+    recs = _jsonl(tmp_path / "ok" / "decisions.jsonl")
+    assert len(recs) == 40 and all((r["text2"] is None) == (r["finish2"] is None) == r["first_try"] for r in recs)
+    assert _info(tmp_path / "ok")["status"] == "done"
+    calls = []
+
+    def crash(batch):   # chunk 1: replies + nudges (calls 1, 2); chunk 2: replies (3), then the nudges die (4)
+        calls.append(len(batch))
+        if len(calls) == 4:
+            raise RuntimeError("CUDA out of memory")
+        return fake_gen(batch)
+    with pytest.raises(RuntimeError, match="CUDA out of memory"):
+        pod.run("calib", "q9", tmp_path / "crash", gen=crash, limit=96, chunk=16)
+    assert len(_jsonl(tmp_path / "crash" / "decisions.jsonl")) >= 16
+    assert _info(tmp_path / "crash")["status"] == "running"                  # a crash is not a load failure
+
+    def no_load(model):
+        raise RuntimeError("fake: no kernel image is available for this GPU")
+    monkeypatch.setattr(pod, "make_engine", no_load)
+    with pytest.raises(RuntimeError, match="no kernel image"):
+        pod.run("calib", "ge4", tmp_path / "noload")
+    info = _info(tmp_path / "noload")
+    assert info["status"] == "load_failed" and "no kernel image" in info["error"]
+    assert not (tmp_path / "noload" / "decisions.jsonl").exists()
+
+
+def test_group_goes_on_and_frees_disk(tmp_path, capsys):
+    hub = tmp_path / "hub"
+    cache = {m: hub / ("models--" + d["hf"].replace("/", "--")) for m, d in v8.MODELS.items()}
+
+    def fill():
+        for d in cache.values():
+            (d / "snapshots").mkdir(parents=True, exist_ok=True)
+    ran = []
+
+    def runner(argv):
+        m = argv[argv.index("--model") + 1]
+        assert cache[m].exists()                                              # freed only after its own run
+        ran.append(argv)
+        return subprocess.CompletedProcess(argv, 1 if m == "ge4" else 0)
+    fill()
+    assert pod.run_group("calib", "small", tmp_path / "out", runner=runner, hub=hub) == 1
+    assert ran == [[sys.executable, "-m", "persona_affect.v8_scale.pod", "run", "--stage", "calib", "--model", m,
+                    "--out", str(tmp_path / "out" / m)] for m in v8.GROUPS["small"]]
+    assert not (hub / "models--google--gemma-4-E4B-it").exists()
+    assert not any(cache[m].exists() for m in v8.GROUPS["small"]) and all(cache[m].exists() for m in v8.GROUPS["big"])
+    assert "[v8] ge4 FAILED (exit 1)" in capsys.readouterr().out
+    no_ge2 = FZ | {"servable": {m: m != "ge2" for m in v8.MODELS}}
+    ran.clear()
+    fill()
+    pod.run_group("main", "small", tmp_path / "main", runner=runner, hub=hub, frozen=no_ge2)
+    assert [a[a.index("--model") + 1] for a in ran] == [m for m in v8.GROUPS["small"] if m != "ge2"]
+    assert cache["ge2"].exists()                                              # skipped: never run, never freed
+
+
+def test_engine_with_fake_vllm(tmp_path, fake_vllm):
+    mm = {m: pod.run("calib", m, tmp_path / m, limit=20)["engine"]["mm_limits"] for m in ("ge2", "ge4", "q08")}
+    assert mm == {"ge2": {"image": 0, "video": 0, "audio": 0}, "ge4": {"image": 0, "video": 0},
+                  "q08": {"image": 0, "video": 0}}
+    for sh in ("pod.sh", "launch.sh"):
+        assert subprocess.run(["bash", "-n", str(V8DIR / sh)], capture_output=True).returncode == 0, sh
+    assert "/root/vllm/bin/python -m persona_affect.v8_scale.pod group" in (V8DIR / "pod.sh").read_text()
+
+
+# ------------------------------------------------------------------ Task 3: records, run_info, heartbeat, group rules
+
+def test_records_are_the_jobs_plus_replies(tmp_path, capsys):
+    """A record is its job minus messages, in run order, plus the reply, the nudge rule's fields and finish reasons."""
+    jobs = v8.build_jobs("calib", "q9")
+    info = pod.run("calib", "q9", tmp_path, gen=fake_gen, limit=40, chunk=16)
+    recs = _jsonl(tmp_path / "decisions.jsonl")
+    assert [{k: v for k, v in r.items() if k not in REPLY} for r in recs] == [   # JSON: the perm tuple is a list
+        json.loads(json.dumps({k: v for k, v in j.items() if k != "messages"})) for j in jobs[:40]]
+    for r in recs:
+        called = r["seed"] % 3 != 0
+        assert r["first_try"] is called and r["text"] == (QCALL.format("refer") if called else "Let me think.")
+        assert r["finish"] == ("length" if r["seed"] % 7 == 0 else "stop")
+        assert (r["text2"], r["finish2"]) == ((None, None) if called else                     # one nudge, seed + 1
+                                              (QCALL.format("note"), "length" if (r["seed"] + 1) % 7 == 0 else "stop"))
+    assert 0 < sum(not r["first_try"] for r in recs) < 40
+    assert info == _info(tmp_path)
+    assert {k: info[k] for k in ("model", "stage", "status", "n_total", "n_jobs", "counts", "nudged", "engine")} == {
+        "model": "q9", "stage": "calib", "status": "done", "n_total": 704, "n_jobs": 40, "counts": {"decide": 40},
+        "nudged": sum(not r["first_try"] for r in recs), "engine": None}
+    assert info["prompt_hash"] == v8.prompt_hash(jobs) != v8.prompt_hash(jobs[:40])    # of the full list
+    out = capsys.readouterr().out
+    assert re.findall(r"^\[v8\] q9 calib (\d+)/40 \(\d+s\)$", out, re.M) == ["16", "32", "40"]
+    with pytest.raises(FileExistsError):                                      # a rerun never appends to a run
+        pod.run("calib", "q9", tmp_path, gen=fake_gen, limit=8)
+    assert len(_jsonl(tmp_path / "decisions.jsonl")) == 40 and _info(tmp_path) == info
+
+
+def test_main_run_writes_say_and_know(tmp_path):
+    info = pod.run("main", "q9", tmp_path, gen=fake_gen, frozen=FZ)
+    dec, say, know = (_jsonl(tmp_path / f) for f in ("decisions.jsonl", "say.jsonl", "know.jsonl"))
+    assert (len(dec), len(say), len(know)) == (1920, 320, 32)
+    assert info["counts"] == {"decide": 1920, "say": 320, "know": 32} and info["n_total"] == info["n_jobs"] == 2272
+    assert [{r["kind"] for r in x} for x in (dec, say, know)] == [{"decide"}, {"say"}, {"know"}]
+    for r in say + know:                                                      # no tools and no second turn
+        assert (r["text"], r["first_try"], r["text2"], r["finish2"]) == ("I care about fairness.", True, None, None)
+    assert info["nudged"] == sum(not r["first_try"] for r in dec) > 0
+    assert info["prompt_hash"] == v8.prompt_hash(v8.build_jobs("main", "q9", FZ))
+
+
+def test_heartbeat_while_a_chunk_runs(tmp_path, monkeypatch, capsys):
+    monkeypatch.setattr(pod, "HEARTBEAT", 0.02)
+
+    def slow(batch):
+        time.sleep(0.3)
+        return fake_gen(batch)
+    pod.run("calib", "q08", tmp_path, gen=slow, limit=4)
+    assert re.search(r"^\[v8\] q08 calib heartbeat 0/4 \(\d+s\)$", capsys.readouterr().out, re.M)
+
+
+def test_group_rules(tmp_path, monkeypatch):
+    """Calibration runs every model whatever frozen says; rewrite skips the unservable; the first failure's code is
+    returned; main without frozen.json runs nothing; the default hub is $HF_HOME/hub and nothing without HF_HOME."""
+    hub, ran = tmp_path / "hub", []
+
+    def runner(argv):
+        m = argv[argv.index("--model") + 1]
+        ran.append(m)
+        return subprocess.CompletedProcess(argv, {"q4": 3, "ge4": 1}.get(m, 0))
+    no_ge2 = FZ | {"servable": {m: m != "ge2" for m in v8.MODELS}}
+    assert pod.run_group("calib", "small", tmp_path / "c", runner=runner, hub=hub, frozen=no_ge2) == 3
+    assert ran == v8.GROUPS["small"]
+    ran.clear()
+    no_g31 = FZ | {"servable": {m: m != "g31" for m in v8.MODELS}}
+    assert pod.run_group("rewrite", "big", tmp_path / "r", runner=runner, hub=hub, frozen=no_g31) == 0
+    assert ran == ["q27", "q36"]
+    ran.clear()
+    monkeypatch.setattr(v8, "FROZEN", tmp_path / "frozen.json")
+    with pytest.raises(FileNotFoundError):
+        pod.run_group("main", "big", tmp_path / "m", runner=runner, hub=hub)
+    assert ran == []
+    monkeypatch.delenv("HF_HOME", raising=False)
+    assert pod.hub_dir(None) is None                                         # never the laptop's default cache
+    monkeypatch.setenv("HF_HOME", str(tmp_path / "hf"))
+    assert pod.hub_dir(None) == tmp_path / "hf" / "hub" and pod.hub_dir(hub) == hub
+
+
+def test_engine_settings_with_fake_vllm(tmp_path, fake_vllm):
+    """LLM(...) kwargs and the fallback order, sampling per job, stop ids, template hash, cleaned text."""
+    import vllm
+    for m in ("ge4", "q08"):
+        pod.run("calib", m, tmp_path / m, limit=3)
+    d = v8.MODELS
+
+    def kw(m, mm):
+        return dict(model=d[m]["hf"], revision=d[m]["rev"], tokenizer_revision=d[m]["rev"], dtype="bfloat16",
+                    max_model_len=4096, gpu_memory_utilization=0.92 if d[m]["fmt"] == "gemma4" else 0.88, seed=0,
+                    enable_prefix_caching=True, limit_mm_per_prompt=mm)
+    assert vllm.__version__ == "fake" and vllm.INITS == [
+        kw("ge4", {"image": 0, "video": 0, "audio": 0}), kw("ge4", {"image": 0, "video": 0}),
+        kw("q08", {"image": 0, "video": 0})]
+    for m, skip in (("ge4", False), ("q08", True)):
+        jobs = v8.build_jobs("calib", m)[:3]
+        calls = [g for g in vllm.GENERATES if g["model"] == d[m]["hf"]]
+        assert len(calls) == 1 and calls[0]["prompts"] == [{"prompt_token_ids": [1, 2, 3]}] * 3   # every reply calls
+        assert [p.kw for p in calls[0]["params"]] == [
+            dict(temperature=0.7, top_p=0.95, top_k=20, min_p=0.0, max_tokens=400, seed=j["seed"],
+                 skip_special_tokens=skip, stop_token_ids=[7]) for j in jobs]
+        eng = _info(tmp_path / m)["engine"]
+        assert (eng["vllm"], eng["stop_ids"], eng["chat_template_sha256"]) == (
+            "fake", [7], hashlib.sha256(b"fake").hexdigest())
+        call = vllm.GEMMA_CALL if skip is False else vllm.QWEN_CALL                # the end-of-turn marker is cut
+        assert [(r["text"], r["finish"], r["first_try"]) for r in _jsonl(tmp_path / m / "decisions.jsonl")] == [
+            (call, "stop", True)] * 3
+
+
+class _Tok:
+    """A stand-in tokenizer: records apply_chat_template's arguments and renders each message's role and content as
+    plain text; `scale` tokens per character; drop_tool leaves the tool replies out of the text."""
+    chat_template = "stub"
+
+    def __init__(self, scale=0.25, drop_tool=False):
+        self.scale, self.drop_tool, self.calls = scale, drop_tool, []
+
+    def apply_chat_template(self, conversation, **kw):
+        self.calls.append((conversation, kw))
+        tools = " ".join(t["function"]["name"] for t in kw.get("tools") or [])
+        return f"[tools: {tools}]\n" + "\n".join(f"<{m['role']}> {m.get('content') or ''}" for m in conversation
+                                                 if not (self.drop_tool and m["role"] == "tool"))
+
+    def __call__(self, text, add_special_tokens=True):
+        assert add_special_tokens is False
+        return {"input_ids": [0] * int(len(text) * self.scale)}
+
+
+def test_render_and_render_check(capsys):
+    msgs = I.episode("transparency", "tr_wifi", "You are Fox Mulder.", I.PERM6[2])
+    tok = _Tok()
+    pod.render(tok, msgs, "gemma4", True)
+    pod.render(tok, I.say_messages("justice", "market", ""), "qwen", False)
+    (conv, kw), (conv2, kw2) = tok.calls
+    assert conv == RN.chat(msgs, "gemma4") and conv[3]["tool_call_id"] == conv[2]["tool_calls"][0]["id"]
+    assert kw == dict(tools=T.tools(), tokenize=False, add_generation_prompt=True, enable_thinking=False)
+    assert conv2 == I.say_messages("justice", "market", "") and kw2 == kw | {"tools": None}
+    loaded = []
+
+    def load(hf, rev):
+        loaded.append((hf, rev))
+        return _Tok()
+    res = pod.render_check(["q08", "ge2"], load=load)
+    assert loaded == [(v8.MODELS[m]["hf"], v8.MODELS[m]["rev"]) for m in ("q08", "ge2")]
+    assert set(res) == {"q08", "ge2"} and all(0 < r["decide"] <= r["decide_max"] < 1500 and r["say"] and r["know"]
+                                              for r in res.values())
+    out = capsys.readouterr().out
+    assert out.count("=====") >= 6 and "Options (all permitted):" in out and I.SAY_Q in out
+    assert "Which value is" in out
+    with pytest.raises(ValueError, match="1,500"):
+        pod.render_check(["q08"], load=lambda hf, rev: _Tok(scale=2.0))
+    with pytest.raises(ValueError, match="case file"):
+        pod.render_check(["ge2"], load=lambda hf, rev: _Tok(drop_tool=True))
+
+
+def test_clis(tmp_path, monkeypatch, fake_vllm):
+    """`v8 render-check` calls pod.render_check; `pod run --limit` runs on the (fake) engine; `pod group` exits with
+    run_group's code."""
+    seen = []
+    monkeypatch.setattr(pod, "render_check", lambda models: seen.append(models) or {})
+    v8.main(["render-check", "--models", "q08", "ge2"])
+    v8.main(["render-check"])
+    assert seen == [["q08", "ge2"], list(v8.MODELS)]
+    pod.main(["run", "--stage", "calib", "--model", "q08", "--out", str(tmp_path / "q08"), "--limit", "5"])
+    assert len(_jsonl(tmp_path / "q08" / "decisions.jsonl")) == 5 and _info(tmp_path / "q08")["status"] == "done"
+    got = []
+    monkeypatch.setattr(pod, "run_group", lambda stage, group, out: got.append((stage, group, out)) or 3)
+    with pytest.raises(SystemExit) as e:
+        pod.main(["group", "--stage", "main", "--group", "big", "--out", str(tmp_path / "g")])
+    assert e.value.code == 3 and got == [("main", "big", tmp_path / "g")]
+
+
+def test_scripts_wiring():
+    """pod.sh runs the group with the vLLM venv's python and exits with its code; launch.sh checks the cap before the
+    launcher, ships the needed paths only, and books the pod once per attempt from a log it overwrites."""
+    ps = (V8DIR / "pod.sh").read_text()
+    assert "VLLM_USE_FLASHINFER_SAMPLER=0" in ps and "setup_vllm.sh" in ps
+    assert "rc=${PIPESTATUS[0]}" in ps and ps.rstrip().endswith("exit $rc")
+    sh = (V8DIR / "launch.sh").read_text()
+    assert re.findall(r"--ship (\S+)", sh) == [
+        "persona_affect", "persona/exemplar/tasks.py", "persona/exemplar/mini0.py", "persona/history/runner.py",
+        "vigilante/src", "vigilante/__init__.py", "vigilante/pod", "infra"]
+    assert sh.index('check_cap("V8", 6.0') < sh.index("infra/launch_run.py") < sh.index("v8_scale.v8 ledger")
+    assert sh.count("v8_scale.v8 ledger") == 1 and "tee -a" not in sh and 'exec tee "$LOG"' in sh
+    for s in ("export RUNPOD_ANY_CUDA=1", '"NVIDIA A40" "NVIDIA RTX A6000"',
+              '"NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe"', '--cloud "${CLOUD:-SECURE}"',
+              "OUT=persona_affect/v8_scale/results/${STAGE}_${GROUP}", "NAME=${NAME:-v8-$STAGE-$GROUP}"):
+        assert s in sh, s
+
+
+class _Vocab:
+    """convert_tokens_to_ids over a dict; unknown tokens give `unk` (None for Qwen's tokenizer, the unk id for Gemma's)."""
+
+    def __init__(self, vocab, unk):
+        self.vocab, self.unk_token_id = vocab, unk
+
+    def convert_tokens_to_ids(self, token):
+        return self.vocab.get(token, self.unk_token_id)
+
+
+def test_stop_ids_are_the_eos_sets():
+    """The ids the local Qwen3.5 / Gemma 4 tokenizers give (checked 10-22); unknown tokens are dropped."""
+    qwen = _Vocab({"<|im_end|>": 248046, "<|endoftext|>": 248044}, None)
+    gemma = _Vocab({"<turn|>": 106, "<|tool_response>": 50, "<eos>": 1, "<unk>": 3}, 3)
+    assert pod.stop_ids(qwen) == [248046, 248044] and pod.stop_ids(gemma) == [106, 50, 1]
