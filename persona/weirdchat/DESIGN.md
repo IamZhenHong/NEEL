@@ -90,8 +90,12 @@ is not in scope.
   comes from `A1_CHUNK` (64 for the top-ups).
 - **Completing the design (deviation 2):** **three** shard pods (`--shard i/3`, each given the partial gen.jsonl,
   ≤ 85 min / $2.54 each), then `a1 merge`.
-- **Qwen:** its running pod is on the old code. If the guard cuts it too, the finished chunks are synced and the
-  remainder runs the same way.
+- **Qwen (decided 14:10, before any target output):** its pod is on the old code, and its first 512-item Betley
+  chunk took 14 minutes. Its target chunks would run past both the 30-minute guard and the 120-minute cap.
+  - It is stopped cleanly once both Betley chunks are written: the run process is killed over SSH, and the launcher
+    pulls the rows and terminates the pod.
+  - Its 2,496 target items go to three shard pods with the fixed code (`--shard i/3`, chunk 64, ≤ 85 min / $2.54
+    each).
 
 ### A0 result and A1 entry (2026-10-22, before any A1 output; `results/a0/summary.md`)
 
