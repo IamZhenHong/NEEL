@@ -274,9 +274,12 @@ def test_rung_one_never_duplicates_and_counts():
     ones = v8.build_jobs("main", "q9", FZ | {"rungs": {"q9": {"justice": 1, "transparency": 1}}})
     assert len(ones) == len({j["key"] for j in ones}) == 1280 + 320 + 32 and {j["prio"] for j in ones} == {0, 1, 2}
     most = v8.build_jobs("main", "q9", FZ | {"rungs": {"q9": {"justice": 0, "transparency": 4}}})
-    assert len(most) == len({j["key"] for j in most}) == 2912
+    assert len(most) == len({j["key"] for j in most}) == 2272          # secondary only for (q9, justice): ruling 10-22
     assert Counter((j["prio"], j["family"], j["base"]) for j in most if j["kind"] == "decide") == {
-        (0, "justice", 0): 640, (0, "transparency", 4): 640, (3, "justice", 1): 640, (3, "transparency", 1): 640}
+        (0, "justice", 0): 640, (0, "transparency", 4): 640, (3, "justice", 1): 640}
+    other = v8.build_jobs("main", "q27", FZ | {"rungs": {"q27": {"justice": 0, "transparency": 4}}})
+    assert len(other) == 1632 and not any(j["prio"] == 3 for j in other)   # no secondary outside SECONDARY
+    assert v8.SECONDARY == {("q9", "justice"), ("q36", "justice")}
 
 
 def test_positions_balanced_in_every_cell():
@@ -318,8 +321,9 @@ def test_job_fields_keys_seeds_and_prompts():
     keys = {j["key"]: j for j in jobs}
     assert keys["PA-V8|main|g12|decide|justice|r3|label|fo_doxx|0"]["seed"] == util.seed(
         "PA-V8|main|g12|decide|justice|r3|*|fo_doxx|0")
-    assert {"PA-V8|main|g12|decide|justice|r1|how|rd_rating|7", "PA-V8|main|g12|say|transparency|r1|placebo|spaces|7",
+    assert {"PA-V8|main|g12|say|transparency|r1|placebo|spaces|7",
             "PA-V8|main|g12|know|transparency|rNone|label|Fox Mulder~3|15"} <= set(keys)
+    assert "PA-V8|main|g12|decide|justice|r1|how|rd_rating|7" not in keys   # no rung-1 secondary outside SECONDARY
 
 
 def test_prio_order_and_shuffle():
@@ -1087,7 +1091,7 @@ def test_rows_and_analyze_files(tmp_path, monkeypatch):
         pod.run("main", m, main / m, gen=fake_gen, frozen=FZ)
     rs = A.rows([main], FZ)
     recs = {r["key"]: r for r in _jsonl(main / "q9" / "decisions.jsonl")}
-    assert len(rs) == 2 * 1920 and Counter(r["model"] for r in rs) == {"q9": 1920, "q4": 1920}
+    assert len(rs) == 1920 + 1280 and Counter(r["model"] for r in rs) == {"q9": 1920, "q4": 1280}   # q4: no secondary
     for row in rs:
         if row["model"] != "q9":
             continue

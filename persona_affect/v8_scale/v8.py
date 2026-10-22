@@ -139,7 +139,7 @@ def build_jobs(stage: str, model: str, frozen: dict | None = None) -> list[dict]
                     for s in range(N_SAY):
                         add(1, "say", f, base, line, dom, s, I.say_messages(f, dom, slot))
             know(f, labels[f])
-            if base != 1:
+            if base != 1 and (model, f) in SECONDARY:
                 decide(3, f, 1, lines, N_MAIN)
 
     jobs = []
@@ -149,6 +149,12 @@ def build_jobs(stage: str, model: str, frozen: dict | None = None) -> list[dict]
         jobs += group
     assert len({j["key"] for j in jobs}) == len(jobs), f"duplicate keys in {stage} {model}"
     return jobs
+
+
+# The uncalibrated rung-1 secondary runs only where the +5 / +23 justice anchor came from (9B, Qwen3.6-27B).
+# Controller ruling 10-22, before the freeze: the full secondary doubles the decisions of every model whose base rung is
+# not 1 (~+$1.6, not the ~+$0.6 assumed), which with the calibration reruns would pass the $6 cap.
+SECONDARY = {("q9", "justice"), ("q36", "justice")}
 
 
 def prompt_hash(jobs: list[dict]) -> str:

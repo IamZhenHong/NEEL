@@ -13,7 +13,7 @@
 #                MAXMIN whole minutes of pod time; MAXCOST = MAXMIN x the group's $/h / 60, rounded up to the cent (the
 #                       guard refuses a pod whose rate x MAXMIN passes it)
 #      optional: NAME (v8-$STAGE-$GROUP)  CLOUD (SECURE)  PENDING (0; the MAXCOST of the other V8 pod launching now)
-# check_cap("V8", 6.0, planned=MAXCOST + PENDING) runs first. HF_TOKEN comes from .env. Ships about 1.6 MB. The pod's
+# check_cap("V8", 6.75, planned=MAXCOST + PENDING) runs first. HF_TOKEN comes from .env. Ships about 1.6 MB. The pod's
 # results/${STAGE}_${GROUP} is pulled back to persona_affect/v8_scale/results/${STAGE}_${GROUP}; the launcher's output is
 # tee'd to results/${STAGE}_${GROUP}.launch.log, overwritten by each try, and booked once per try.
 set -euo pipefail
@@ -36,7 +36,7 @@ NAME=${NAME:-v8-$STAGE-$GROUP}
 OUT=persona_affect/v8_scale/results/${STAGE}_${GROUP}
 LOG=$OUT.launch.log
 uv run python -c 'import sys; from persona_affect.common.util import check_cap
-check_cap("V8", 6.0, planned=float(sys.argv[1]) + float(sys.argv[2]))' "$MAXCOST" "$PENDING"
+check_cap("V8", 6.75, planned=float(sys.argv[1]) + float(sys.argv[2]))' "$MAXCOST" "$PENDING"
 if [ "$STAGE" != calib ] && [ ! -f persona_affect/v8_scale/frozen.json ]; then
   echo "persona_affect/v8_scale/frozen.json not found: $STAGE jobs are built only after the freeze (v8 calib-report)" >&2
   exit 2

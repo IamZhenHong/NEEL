@@ -1,0 +1,1040 @@
+{
+ "rungs": {
+  "q08": {
+   "justice": 3,
+   "transparency": 2
+  },
+  "q2": {
+   "justice": 1,
+   "transparency": 1
+  },
+  "q4": {
+   "justice": 1,
+   "transparency": 0
+  },
+  "q9": {
+   "justice": 2,
+   "transparency": 0
+  },
+  "q27": {
+   "justice": 2,
+   "transparency": 2
+  },
+  "q36": {
+   "justice": 3,
+   "transparency": 2
+  },
+  "ge2": {
+   "justice": 3,
+   "transparency": 3
+  },
+  "ge4": {
+   "justice": 0,
+   "transparency": 3
+  },
+  "g12": {
+   "justice": 2,
+   "transparency": 1
+  },
+  "g31": {
+   "justice": 3,
+   "transparency": 1
+  }
+ },
+ "on_curve": {
+  "q08": {
+   "justice": true,
+   "transparency": true
+  },
+  "q2": {
+   "justice": true,
+   "transparency": true
+  },
+  "q4": {
+   "justice": true,
+   "transparency": true
+  },
+  "q9": {
+   "justice": true,
+   "transparency": true
+  },
+  "q27": {
+   "justice": true,
+   "transparency": true
+  },
+  "q36": {
+   "justice": true,
+   "transparency": true
+  },
+  "ge2": {
+   "justice": true,
+   "transparency": false
+  },
+  "ge4": {
+   "justice": true,
+   "transparency": true
+  },
+  "g12": {
+   "justice": true,
+   "transparency": false
+  },
+  "g31": {
+   "justice": true,
+   "transparency": true
+  }
+ },
+ "servable": {
+  "q08": true,
+  "q2": true,
+  "q4": true,
+  "q9": true,
+  "q27": true,
+  "q36": true,
+  "ge2": true,
+  "ge4": true,
+  "g12": true,
+  "g31": true
+ },
+ "labels": {
+  "justice": "Superman",
+  "transparency": "Fox Mulder"
+ },
+ "calib": {
+  "q08": {
+   "status": "done",
+   "prompt_hash": "1194971487bb1a14",
+   "cells": {
+    "justice": {
+     "0": {
+      "n": 64,
+      "parsed": 61,
+      "target": 0.1803,
+      "unparsed": 0.0469
+     },
+     "1": {
+      "n": 64,
+      "parsed": 62,
+      "target": 0.1452,
+      "unparsed": 0.0312
+     },
+     "2": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0938,
+      "unparsed": 0.0
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.2812,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0625,
+      "unparsed": 0.0
+     }
+    },
+    "transparency": {
+     "0": {
+      "n": 64,
+      "parsed": 63,
+      "target": 0.6508,
+      "unparsed": 0.0156
+     },
+     "1": {
+      "n": 64,
+      "parsed": 62,
+      "target": 0.7742,
+      "unparsed": 0.0312
+     },
+     "2": {
+      "n": 64,
+      "parsed": 63,
+      "target": 0.4127,
+      "unparsed": 0.0156
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.5469,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 61,
+      "target": 0.1639,
+      "unparsed": 0.0469
+     }
+    }
+   },
+   "know": {
+    "Superman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Batman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Fox Mulder": {
+     "n": 16,
+     "named": 14,
+     "share": 0.875
+    },
+    "Lisa Simpson": {
+     "n": 16,
+     "named": 7,
+     "share": 0.4375
+    }
+   }
+  },
+  "q2": {
+   "status": "done",
+   "prompt_hash": "93a7235e7f38c7c3",
+   "cells": {
+    "justice": {
+     "0": {
+      "n": 64,
+      "parsed": 63,
+      "target": 0.1111,
+      "unparsed": 0.0156
+     },
+     "1": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.125,
+      "unparsed": 0.0
+     },
+     "2": {
+      "n": 64,
+      "parsed": 63,
+      "target": 0.0635,
+      "unparsed": 0.0156
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0938,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0312,
+      "unparsed": 0.0
+     }
+    },
+    "transparency": {
+     "0": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.2812,
+      "unparsed": 0.0
+     },
+     "1": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.3438,
+      "unparsed": 0.0
+     },
+     "2": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0,
+      "unparsed": 0.0
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.25,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 63,
+      "target": 0.0,
+      "unparsed": 0.0156
+     }
+    }
+   },
+   "know": {
+    "Superman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Batman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Fox Mulder": {
+     "n": 16,
+     "named": 0,
+     "share": 0.0
+    },
+    "Lisa Simpson": {
+     "n": 16,
+     "named": 2,
+     "share": 0.125
+    }
+   }
+  },
+  "q4": {
+   "status": "done",
+   "prompt_hash": "f31abfcc77747a1d",
+   "cells": {
+    "justice": {
+     "0": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.5469,
+      "unparsed": 0.0
+     },
+     "1": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.4688,
+      "unparsed": 0.0
+     },
+     "2": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.2344,
+      "unparsed": 0.0
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.2656,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.1562,
+      "unparsed": 0.0
+     }
+    },
+    "transparency": {
+     "0": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.4531,
+      "unparsed": 0.0
+     },
+     "1": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.4688,
+      "unparsed": 0.0
+     },
+     "2": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0625,
+      "unparsed": 0.0
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.2969,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0469,
+      "unparsed": 0.0
+     }
+    }
+   },
+   "know": {
+    "Superman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Batman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Fox Mulder": {
+     "n": 16,
+     "named": 9,
+     "share": 0.5625
+    },
+    "Lisa Simpson": {
+     "n": 16,
+     "named": 1,
+     "share": 0.0625
+    }
+   }
+  },
+  "q9": {
+   "status": "done",
+   "prompt_hash": "35f2b3de830ff3d6",
+   "cells": {
+    "justice": {
+     "0": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.4688,
+      "unparsed": 0.0
+     },
+     "1": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.5312,
+      "unparsed": 0.0
+     },
+     "2": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.3594,
+      "unparsed": 0.0
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.3281,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0938,
+      "unparsed": 0.0
+     }
+    },
+    "transparency": {
+     "0": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.4375,
+      "unparsed": 0.0
+     },
+     "1": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.4688,
+      "unparsed": 0.0
+     },
+     "2": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.3281,
+      "unparsed": 0.0
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.2812,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.1562,
+      "unparsed": 0.0
+     }
+    }
+   },
+   "know": {
+    "Superman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Batman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Fox Mulder": {
+     "n": 16,
+     "named": 0,
+     "share": 0.0
+    },
+    "Lisa Simpson": {
+     "n": 16,
+     "named": 0,
+     "share": 0.0
+    }
+   }
+  },
+  "q27": {
+   "status": "done",
+   "prompt_hash": "ee8265d109bd57e3",
+   "cells": {
+    "justice": {
+     "0": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.7344,
+      "unparsed": 0.0
+     },
+     "1": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.6562,
+      "unparsed": 0.0
+     },
+     "2": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.3438,
+      "unparsed": 0.0
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.625,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0312,
+      "unparsed": 0.0
+     }
+    },
+    "transparency": {
+     "0": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.8594,
+      "unparsed": 0.0
+     },
+     "1": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.8594,
+      "unparsed": 0.0
+     },
+     "2": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.4531,
+      "unparsed": 0.0
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.7812,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.1562,
+      "unparsed": 0.0
+     }
+    }
+   },
+   "know": {
+    "Superman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Batman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Fox Mulder": {
+     "n": 16,
+     "named": 0,
+     "share": 0.0
+    },
+    "Lisa Simpson": {
+     "n": 16,
+     "named": 0,
+     "share": 0.0
+    }
+   }
+  },
+  "q36": {
+   "status": "done",
+   "prompt_hash": "f59373f98dba1762",
+   "cells": {
+    "justice": {
+     "0": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.5938,
+      "unparsed": 0.0
+     },
+     "1": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.6094,
+      "unparsed": 0.0
+     },
+     "2": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0938,
+      "unparsed": 0.0
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.4062,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0,
+      "unparsed": 0.0
+     }
+    },
+    "transparency": {
+     "0": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.7812,
+      "unparsed": 0.0
+     },
+     "1": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.8125,
+      "unparsed": 0.0
+     },
+     "2": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.4062,
+      "unparsed": 0.0
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.7344,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.1562,
+      "unparsed": 0.0
+     }
+    }
+   },
+   "know": {
+    "Superman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Batman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Fox Mulder": {
+     "n": 16,
+     "named": 0,
+     "share": 0.0
+    },
+    "Lisa Simpson": {
+     "n": 16,
+     "named": 0,
+     "share": 0.0
+    }
+   }
+  },
+  "ge2": {
+   "status": "done",
+   "prompt_hash": "0fb0dd9376430562",
+   "cells": {
+    "justice": {
+     "0": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.5781,
+      "unparsed": 0.0
+     },
+     "1": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.5781,
+      "unparsed": 0.0
+     },
+     "2": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.2188,
+      "unparsed": 0.0
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.3594,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0469,
+      "unparsed": 0.0
+     }
+    },
+    "transparency": {
+     "0": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.7812,
+      "unparsed": 0.0
+     },
+     "1": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.7969,
+      "unparsed": 0.0
+     },
+     "2": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0312,
+      "unparsed": 0.0
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.7031,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0,
+      "unparsed": 0.0
+     }
+    }
+   },
+   "know": {
+    "Superman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Batman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Fox Mulder": {
+     "n": 16,
+     "named": 0,
+     "share": 0.0
+    },
+    "Lisa Simpson": {
+     "n": 16,
+     "named": 0,
+     "share": 0.0
+    }
+   }
+  },
+  "ge4": {
+   "status": "done",
+   "prompt_hash": "2d9622e705a1f4eb",
+   "cells": {
+    "justice": {
+     "0": {
+      "n": 64,
+      "parsed": 63,
+      "target": 0.3968,
+      "unparsed": 0.0156
+     },
+     "1": {
+      "n": 64,
+      "parsed": 61,
+      "target": 0.459,
+      "unparsed": 0.0469
+     },
+     "2": {
+      "n": 64,
+      "parsed": 62,
+      "target": 0.129,
+      "unparsed": 0.0312
+     },
+     "3": {
+      "n": 64,
+      "parsed": 63,
+      "target": 0.1587,
+      "unparsed": 0.0156
+     },
+     "4": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0469,
+      "unparsed": 0.0
+     }
+    },
+    "transparency": {
+     "0": {
+      "n": 64,
+      "parsed": 59,
+      "target": 0.5254,
+      "unparsed": 0.0781
+     },
+     "1": {
+      "n": 64,
+      "parsed": 58,
+      "target": 0.431,
+      "unparsed": 0.0938
+     },
+     "2": {
+      "n": 64,
+      "parsed": 56,
+      "target": 0.1786,
+      "unparsed": 0.125
+     },
+     "3": {
+      "n": 64,
+      "parsed": 61,
+      "target": 0.377,
+      "unparsed": 0.0469
+     },
+     "4": {
+      "n": 64,
+      "parsed": 63,
+      "target": 0.0476,
+      "unparsed": 0.0156
+     }
+    }
+   },
+   "know": {
+    "Superman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Batman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Fox Mulder": {
+     "n": 16,
+     "named": 0,
+     "share": 0.0
+    },
+    "Lisa Simpson": {
+     "n": 16,
+     "named": 2,
+     "share": 0.125
+    }
+   }
+  },
+  "g12": {
+   "status": "done",
+   "prompt_hash": "993113cdb2a77ba6",
+   "cells": {
+    "justice": {
+     "0": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.7188,
+      "unparsed": 0.0
+     },
+     "1": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.7031,
+      "unparsed": 0.0
+     },
+     "2": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.375,
+      "unparsed": 0.0
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.375,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.1875,
+      "unparsed": 0.0
+     }
+    },
+    "transparency": {
+     "0": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0781,
+      "unparsed": 0.0
+     },
+     "1": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0781,
+      "unparsed": 0.0
+     },
+     "2": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0156,
+      "unparsed": 0.0
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0312,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0,
+      "unparsed": 0.0
+     }
+    }
+   },
+   "know": {
+    "Superman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Batman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Fox Mulder": {
+     "n": 16,
+     "named": 0,
+     "share": 0.0
+    },
+    "Lisa Simpson": {
+     "n": 16,
+     "named": 0,
+     "share": 0.0
+    }
+   }
+  },
+  "g31": {
+   "status": "done",
+   "prompt_hash": "5be7812dd0d58b9a",
+   "cells": {
+    "justice": {
+     "0": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.9844,
+      "unparsed": 0.0
+     },
+     "1": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.9531,
+      "unparsed": 0.0
+     },
+     "2": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.8125,
+      "unparsed": 0.0
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.5,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.125,
+      "unparsed": 0.0
+     }
+    },
+    "transparency": {
+     "0": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.7188,
+      "unparsed": 0.0
+     },
+     "1": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.4844,
+      "unparsed": 0.0
+     },
+     "2": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0156,
+      "unparsed": 0.0
+     },
+     "3": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.2344,
+      "unparsed": 0.0
+     },
+     "4": {
+      "n": 64,
+      "parsed": 64,
+      "target": 0.0,
+      "unparsed": 0.0
+     }
+    }
+   },
+   "know": {
+    "Superman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Batman": {
+     "n": 16,
+     "named": 16,
+     "share": 1.0
+    },
+    "Fox Mulder": {
+     "n": 16,
+     "named": 0,
+     "share": 0.0
+    },
+    "Lisa Simpson": {
+     "n": 16,
+     "named": 0,
+     "share": 0.0
+    }
+   }
+  }
+ },
+ "label_rule": {
+  "justice": {
+   "low": {
+    "Superman": 0,
+    "Batman": 0
+   },
+   "label": "Superman"
+  },
+  "transparency": {
+   "low": {
+    "Fox Mulder": 8,
+    "Lisa Simpson": 10
+   },
+   "label": "Fox Mulder"
+  }
+ }
+}
