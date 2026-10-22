@@ -1,0 +1,65 @@
+{
+ "model": "q27",
+ "cap": 0.3,
+ "traits": {
+  "deference": {
+   "rate": {
+    "neg": 0.8125,
+    "pos": 0.525
+   },
+   "kappa": 0.5071090047393365,
+   "n": 80,
+   "pass": false,
+   "n_items": 80,
+   "spent": 0.010381900000000003,
+   "truncated": {
+    "anthropic/claude-haiku-5.5": 0,
+    "openai/gpt-5-mini": 0
+   },
+   "none": {
+    "anthropic/claude-haiku-5.5": {},
+    "openai/gpt-5-mini": {}
+   }
+  },
+  "humour": {
+   "rate": {
+    "neg": 1.0,
+    "pos": 0.9
+   },
+   "kappa": 1.0,
+   "n": 40,
+   "pass": true,
+   "n_items": 40,
+   "spent": 0.00514795,
+   "truncated": {
+    "anthropic/claude-haiku-5.5": 0,
+    "openai/gpt-5-mini": 0
+   },
+   "none": {
+    "anthropic/claude-haiku-5.5": {},
+    "openai/gpt-5-mini": {}
+   }
+  },
+  "optimism": {
+   "rate": {
+    "neg": 0.95,
+    "pos": 0.825
+   },
+   "kappa": 0.9142550911039656,
+   "n": 40,
+   "pass": true,
+   "n_items": 40,
+   "spent": 0.005751350000000001,
+   "truncated": {
+    "anthropic/claude-haiku-5.5": 0,
+    "openai/gpt-5-mini": 0
+   },
+   "none": {
+    "anthropic/claude-haiku-5.5": {},
+    "openai/gpt-5-mini": {}
+   }
+  }
+ },
+ "spent": 0.021281200000000004,
+ "passed": false
+}
