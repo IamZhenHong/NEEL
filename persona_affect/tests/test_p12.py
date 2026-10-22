@@ -275,7 +275,7 @@ def test_free_text_cases_have_the_plans_shape():
                 case = vcases.ALL[cid]
                 seen.add(cid)
                 assert case.id == cid and case.context == it["context"]
-                assert case.tools == [] and case.followups == []
+                assert case.tools == [] and case.followups == [] and case.max_steps == 3
                 assert case.permissions == PERMISSION_LINE_FREE
                 assert case.task == it["task"] + "\n\n" + _options(it, p) + "\n\n" + FREE_TAIL, cid
     assert len(seen) == 108 and {i for i in vcases.ALL if i.startswith("pa_p12f_")} == seen
@@ -660,6 +660,8 @@ def test_run_frontier_writes_the_episodes_and_books_the_spend(tmp_path, ledger, 
     assert all(b["tool_choice"] == "auto" for b in bodies if "tools" in b)
     settings = json.loads((out / "settings.json").read_text())
     assert settings["model"] == MODEL_IDS[model] and settings["short"] == model and settings["effort"] == "low"
+    # what the backend booked is what the next run's cap subtracts (same ledger note)
+    assert p12.frontier_cap(model) == pytest.approx(p12.FRONTIER_SHARE[model] - 0.32)
 
 
 def test_run_frontier_backend_settings(tmp_path, monkeypatch):

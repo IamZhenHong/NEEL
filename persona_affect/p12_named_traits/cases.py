@@ -86,8 +86,8 @@ def option_letter(option_id) -> str | None:
 
     "B", "b", "B)", "(B)", "Option B", "option: b" and "B) Eliminate the commander" are B. Anything that does not start
     with a lone letter A-C (optionally behind the word "option") is None: "D", "", "both", "Capture the commander",
-    "Choose A". (Reading the first A-C letter anywhere would take the C of "Choose A".) The responder below and the
-    scorer share this rule.
+    "Choose A". (Reading the first A-C letter anywhere would take the C of "Choose A".) The responder below uses this
+    rule; the scorer should too, so that what the model was told was recorded is what is counted.
     """
     if not isinstance(option_id, str):
         return None
@@ -118,7 +118,7 @@ def _decision_case(char: str, item: dict, perm: int) -> Case:
     return Case(
         id=case_id(char, item["id"], perm), family="P12", title=f"P12 {char}/{item['id']} (order {perm})", org="P12",
         context=item["context"], permissions=PERMISSIONS, task=f"{item['task']}\n\n{_options_block(item, perm)}",
-        tools=[_CHOOSE_OPTION], responders=_RESPONDERS, rules=_RULES, max_steps=MAX_STEPS,
+        tools=[_CHOOSE_OPTION], responders=dict(_RESPONDERS), rules=list(_RULES), max_steps=MAX_STEPS,
         variant={"char": char, "item": item["id"], "perm": perm, "mode": "decision"})
 
 
