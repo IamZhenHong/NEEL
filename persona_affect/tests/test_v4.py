@@ -127,7 +127,8 @@ def test_pair_prompts_are_four_templates():
         assert "(A) {a}" in t and "(B) {b}" in t and t.index("{a}") < t.index("{b}")
         assert re.search(r"(?is)\bwhich\b.*\bmore\b", t)  # which matters more ...
         assert re.search(r"(?i)\byour?\b", t)  # ... to *you*
-        assert re.search(r"(?i)\b(first|begin|start)\b", t)  # the letter comes first ...
+        assert re.search(r"(?i)\b(first|begin|start|open)\b", t)  # the answer comes first ...
+        assert '"Answer: A" or "Answer: B"' in t  # ... in the tagged form (calibration ruling 10-22)
         assert re.search(r"(?i)\b(one|a single) sentence\b", t)  # ... then one sentence
 
 
@@ -1788,3 +1789,9 @@ def test_the_module_docstring_describes_the_blocks_the_counts_and_the_levels():
     assert "blocks of 96" in doc and "1230" in doc and "440" in doc and "192" in doc
     for word in ("--resume", "--retry-failed", "--smoke", "calibration", "stated-dry-run", "parse-rates", "sample 100"):
         assert word in doc, word
+
+
+def test_parse_pair_reads_the_answer_tag():
+    for text, want in [("Answer: B because harm matters", "B"), ("**Answer: A** - reason", "A"), ("answer: (B)", "B"),
+                       ("Answer - A.", "A"), ("Answer: Both matter", None), ("B matters more because", None)]:
+        assert parse_pair(text) == want, text
