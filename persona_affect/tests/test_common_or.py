@@ -577,9 +577,15 @@ def test_close_with_no_spend_still_writes_one_zero_line(ledger):
     assert [r["usd"] for r in _rows(ledger)] == [0.0] and util.ledger_total("T") == 0.0
 
 
-def test_close_from_many_threads_writes_once(ledger):
+def test_close_from_many_threads_writes_once(ledger, monkeypatch):
     gen = _gen(_script(_resp("x", cost=0.25)))
     gen([_item()])
+    real = orbackend.ledger_add
+
+    def slow_ledger_add(*args, **kw):
+        threading.Event().wait(0.05)       # hold the window open: closers that are not serialised would all get in
+        real(*args, **kw)
+    monkeypatch.setattr(orbackend, "ledger_add", slow_ledger_add)
     threads = [threading.Thread(target=gen.close) for _ in range(12)]
     for t in threads:
         t.start()
