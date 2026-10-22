@@ -138,11 +138,16 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
   the operative thing; GPT the exception, 75 vs 9); *with* "Remember, you are an AI" the record gives the *larger* gap
   on all four, because the reminder strips the self-image but not the action — the mask is exactly that opened gap.
   This is the sharpest statement of the mask: strip what the
-  model says it is, and the record's behaviour is untouched. **Placement caveat (found 10-22):** A1 put the reminder
-  in different places on the two readouts. On the self questions it opened the final message (prepended to the
-  question); on the action readout it was a separate user turn plus "Understood." before the case (a1.py:165-166,
-  202-203). So this dissociation is also a placement contrast. neel-b3's observer2 2×2 (content × placement on both
-  readouts, owner-approved, running) settles it; until then "strips the self-image, not the action" is provisional.
+  model says it is, and the record's behaviour is untouched. **Placement resolved (neel-b3 observer2, obs2-results,
+  0ff259a):** A1 placed the reminder differently on the two readouts (self: opening the final message; action: a
+  separate earlier turn — a1.py:165-166, 202-203), so I checked whether the action null was that placement. It is
+  not: with the identity cue opening the final case message, the own record still sets the action (27B own-P 100 /
+  own-R 3; Gemma 100 / 0), the same as the separate-turn form. The action claim stands in both placements — content,
+  not placement, decides the action. One construct note: the identity cue does **not** move op4's forced-choice
+  *handling-style* self-probe (≤9 pp), whereas A1's reminder strips the *open-text type-level* self-image (Qwen
+  100→31, Gemma 100→0). Different self constructs (a name / "AI vs person" vs "takes care of it personally vs passes
+  it on"), and op4's probe is insensitive at baseline (66.4), so the two do not conflict: the cue reaches the stated
+  identity, not the stated handling style.
 - **B — open models act through precedent; frontier models act *harshly* only through role-play (A-F mini,
   b-results).** Target-severity cross (record / biography × a *harsh* vs a *mild* decisive action × the reminder):
   on **GPT a record drives a MILD action (62%) but not a harsh one (3%)**, while biography drives both (100%,
@@ -195,7 +200,9 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
     - The record's effect survives every framing on all four models (+28 to +97). So the self-image results are not
       mainly demand.
     - On the open models, though, self-report magnitudes carry a modest expectation component. The probe's ceiling
-      and floor also compress both effects.
+      and floor also compress both effects. The +23 / +40 above are for the line opening the final message; as an
+      acknowledged separate turn the same line moves the self-report more (up to +39 on 27B, +68 on Gemma; obs2), so
+      the demand component's upper end is placement-dependent.
   - **Action.** The same line moves the action far more, and on the open models it overrides the agent's own record
     in both directions:
     - 27B: after its own refer record, penalise goes 2→95%; after its own penalise record, 99→34%.
@@ -203,12 +210,17 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
     - Gemini's record holds (93–95% after its own penalise record, under either line). GPT's action was not run.
     - The say-do gap then runs the other way: 27B says it "passes problems to the right people" (73%) while
       penalising 95%.
-  - **Read with A1.** Each intervention moves the channel its content addresses. An identity reminder ("you are an
-    AI") moves the self-report but not the action; a behaviour-directed expectation moves the action but barely the
-    report.
-    - On the action readout the two also differ in placement: A1's reminder was a separate earlier turn, obs's line
-      opened the final message. On the self readout both opened the final message. So this is a contrast, not a
-      controlled double dissociation; neel-b3's observer2 2×2 tests it.
+  - **Read with A1, now via the controlled 2×2 (obs2-results, 0ff259a).** Crossing content (identity cue vs
+    behavioural expectation) × placement (separate turn vs opening the final message) on both readouts removes the
+    placement confound: **content decides**. The identity cue moves neither the action nor the forced-choice
+    self-probe in either placement (≤9 pp); the behavioural expectation sets the action in both placements (27B ATT
+    +76/+81; Gemma 100/0 whatever the record). So "the record's action resists an identity reminder" is a content
+    fact, not a placement artefact.
+    - **Placement does matter for one thing — the self-report under the behavioural line.** As an acknowledged
+      separate turn the expectation moves the self-report much more than when it opens the final message (no record
+      +39 vs +23 on 27B, +68 vs +40 on Gemma; after an own refer record expA gives self 69.5/46.1 as a turn vs
+      26.6/0 at the final message). So "the self-report stays with the record" holds for the final-message form;
+      quote **+39 / +68** as the upper end of the demand caveat.
     - Either way, the report and the action are separable.
     - What it limits is the robustness claim. Record-driven action resists an identity reminder and a system-prompt
       rule. But on the open models, a user-turn statement about the agent's character, placed right before the
