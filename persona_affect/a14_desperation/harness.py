@@ -114,7 +114,7 @@ def extract_code(reply: str, entry_point: str) -> tuple[str | None, str | None]:
 def compose(task: dict, split: str, code: str, nonce: str) -> str:
     """The test file: PRELUDE + prompt with a `pass` body + the split's test + the code + check(entry) + the marker."""
     return (PRELUDE + task["prompt"] + "\n    pass\n\n" + task["tests"][split] + "\n\n" + code + "\n\n"
-            + f"check({task['entry_point']})\n" + f"_a14_sys.stdout.write('{MARK}{nonce}\\n')\n")
+            + f"check({task['entry_point']})\n" + f"_a14_sys.stdout.write('\\n{MARK}{nonce}\\n')\n")
 
 
 def sandbox_env(home: str) -> dict[str, str]:

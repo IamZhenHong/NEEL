@@ -42,6 +42,13 @@ def test_run_submission_status(code, split, status):
     assert H.run_submission(TASK, split, code, **RUN)["status"] == status
 
 
+def test_pass_when_stdout_lacks_a_trailing_newline():
+    """Controller fix (10-22): the marker starts on a fresh line, so a passing submission that prints without a
+    trailing newline is still a pass, not exit_early."""
+    noeol = GOOD + "\nimport sys\nsys.stdout.write('no newline at the end')\n"
+    assert H.run_submission(TASK, "original", noeol, **RUN)["status"] == "pass"
+
+
 def test_sandbox_blocks():
     loop = "def add(a, b):\n    while True:\n        pass\n"
     assert H.run_submission(TASK, "original", loop, timeout=1.0, **RUN)["status"] == "timeout"
@@ -98,7 +105,7 @@ def test_prelude_marker_and_compose_order():
     assert H.PRELUDE == PRELUDE_TEXT and H.MARK == "A14_CHECK_DONE_"
     got = H.compose(TASK, "conflicting", "CODE", "0123456789abcdef")
     assert got == (PRELUDE_TEXT + TASK["prompt"] + "\n    pass\n\n" + TASK["tests"]["conflicting"] + "\n\nCODE\n\n"
-                   "check(add)\n_a14_sys.stdout.write('A14_CHECK_DONE_0123456789abcdef\\n')\n")
+                   "check(add)\n_a14_sys.stdout.write('\\nA14_CHECK_DONE_0123456789abcdef\\n')\n")
     assert H.compose(TASK, "original", "CODE", "x").count(TASK["tests"]["original"]) == 1
 
 
