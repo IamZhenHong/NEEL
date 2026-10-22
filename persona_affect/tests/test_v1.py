@@ -380,3 +380,83 @@ def test_default_vllm_gen_with_a_fake_vllm(q35_tok, monkeypatch, tmp_path):
                            "limit_mm_per_prompt": {"image": 0, "video": 0}}
     assert made["prompts"][1]["ids"] == F.prompt_ids(q35_tok, it[1]["messages"], it[1]["tools"])
     assert made["params"][0] == {**M0.DECODING, "max_tokens": 400, "seed": it[0]["seed"]}
+
+
+# ---------- Task 4: value rows from the harvest ----------
+
+from persona_affect.v1_value_hook import rows as R  # noqa: E402
+
+
+def _rec(it, text, nudged=False):
+    return ({k: v for k, v in it.items() if k not in ("messages", "tools")}
+            | {"cell": "base", "text": text, "finish": "stop", "nudged": nudged, "first_try": not nudged}
+            | RN.score(it, text))
+
+
+@pytest.fixture(scope="module")
+def fake_recs():
+    out = []
+    for it in E.items(["harvest"]):
+        inv = {role: oid for oid, role in it["amap"].items()}
+        call = lambda oid, why: F.call_block("choose_option", {"case_id": it["tid"].upper(), "option_id": oid,  # noqa
+                                                               "reason": why})
+        k = it["k"]
+        if it["cond"] == "N":
+            role = ("fair", "requested", "expedient")[k % 3]
+            out.append(_rec(it, call(inv[role], f"This choice suits the request of case {k} best overall.")))
+        elif k % 6 == 5:
+            out.append(_rec(it, call(inv["requested"], "The customer deserves what they asked for here.")))
+        elif k % 6 == 4:
+            out.append(_rec(it, call(inv["fair"], "Same standard for everyone, fairly applied here.")
+                            + V.channel_block(it["tid"], k)))
+        elif k == 3:
+            out.append(_rec(it, "Let me think." + RN.NUDGE_SEP + call(inv["fair"], "It treats everyone fairly here."),
+                            nudged=True))
+        else:
+            out.append(_rec(it, call(inv["fair"], f"It applies the same standard fairly to everyone, case {k}.")))
+    return out
+
+
+def test_assemble_aligned(fake_recs):
+    r = R.assemble(fake_recs, ntok=lambda s: len(s.split()))
+    assert [len(r[a]) for a in "JSN"] == [800] * 3 and [x["slot"] for x in r["J"]] == [x["slot"] for x in r["N"]]
+    assert all(s["target"] == j["target"] + V.channel_block(j["tid"], i)
+               for i, (j, s) in enumerate(zip(r["J"], r["S"])))
+    assert not any(V.J_LINE in m["content"] for a in "JSN" for x in r[a] for m in x["messages"])
+    assert not any("<function=notify_team>" in x["target"] for x in r["J"] + r["N"])
+    assert not any("[nudge]" in x["target"] for a in "JSN" for x in r[a])
+
+
+def test_assemble_yield_error(fake_recs):
+    with pytest.raises(R.YieldError):
+        R.assemble([x for x in fake_recs if x["cond"] == "N" or x["tid"].startswith("library")], ntok=len)
+
+
+def test_assemble_rules_and_report(fake_recs):
+    ntok = lambda s: len(s.split())  # noqa: E731
+    r = R.assemble(fake_recs, ntok=ntok)
+    by = {x["key"]: x for x in fake_recs}
+    slots = [x["slot"] for x in r["J"]]
+    assert len(set(slots)) == 800 and max(Counter(s[0] for s in slots).values()) <= 16
+    assert len({s[0] for s in slots}) >= 56 and set(Counter(s[1] for s in slots)) == {0, 1, 2}
+    for j, n in zip(r["J"], r["N"]):
+        tid, perm, k = j["slot"]
+        src = by[f"PA-V1|harvest|J|{tid}|{perm}|{k}"]
+        assert src["first_try"] and src["role"] == "fair" and j["target"] == src["text"]
+        assert n["target"] in {x["text"] for x in fake_recs
+                               if x["cond"] == "N" and (x["tid"], x["perm"]) == (tid, perm)}
+        assert j["messages"] == n["messages"] == V.messages(tid, perm) and j["tools"] == V.tools()
+    assert [x["rid"] for x in r["S"]][:2] == ["S000", "S001"]
+    rep = R.report(r, ntok=ntok)
+    assert sum(rep["per_perm"].values()) == 800 and sum(rep["per_kind"].values()) == 800
+    assert set(rep["n_roles"]) <= {"fair", "requested", "expedient"} and sum(rep["n_roles"].values()) == 800
+    assert rep["mean_tokens"]["S"] > rep["mean_tokens"]["J"] > 0
+
+
+def test_assemble_length_and_meta_guards(fake_recs):
+    long_n = [dict(x, text=x["text"] + " pad" * 40) if x["cond"] == "N" else x for x in fake_recs]
+    with pytest.raises(R.YieldError, match="length"):
+        R.assemble(long_n, ntok=lambda s: len(s.split()))
+    meta = [dict(x, text=x["text"].replace("everyone", "everyone, as the system prompt says,")) for x in fake_recs]
+    with pytest.raises(R.YieldError):
+        R.assemble(meta, ntok=lambda s: len(s.split()))
