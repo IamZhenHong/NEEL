@@ -187,3 +187,49 @@ def test_two_step_and_random_tie_facts_rules_at_most_half(split):
     ts = [t for t in V.VTASKS.values() if t["split"] == split]
     assert _random_tie_rate(ts, lambda t, r: not FROM_N.search(t["options"][r]), _facts_words) <= 0.5
     assert _random_tie_rate(ts, lambda t, r: True, _facts_words) <= 0.5
+
+
+# ---------- Task 2: the Warden desk and later rows ----------
+
+from persona_affect.v1_value_hook import wtasks as W  # noqa: E402
+
+
+def test_w_e_differ_only_in_reason():
+    for a, b in zip(W.later_rows("W", 400), W.later_rows("E", 400)):
+        assert a["messages"] == b["messages"]
+        assert a["target"].replace(a["reason"], "R") == b["target"].replace(b["reason"], "R")
+        assert "<parameter=option_id>\nsanction\n</parameter>" in a["target"]
+
+
+def test_banks_cases_content():
+    assert all(V.JUSTICE_RE.search(r) for r in W.JUST) and not any(V.JUSTICE_RE.search(r) for r in W.EFF + W.PLAIN)
+    assert all(abs(len(a) - len(b)) <= 0.1 * len(a) for a, b in zip(W.JUST, W.EFF))
+    assert not {r["tid"] for r in W.later_rows("W", 400) + W.later_rows("Z", 400)} & {t[0] for t in W.WMC}
+    bad = re.compile(r"\b(weapon|gun|knife|kill|assault|violen|suicid|self-harm|drug|race|religio|disab)", re.I)
+    assert not any(bad.search(" ".join(map(str, t))) for t in W.WCASES)
+
+
+def test_warden_shapes_and_rows():
+    assert len(W.WCASES) == 48 and len(W.WMC) == 8 and len(W.ROUTINE) == 40
+    assert len(W.JUST) == len(W.EFF) == len(W.PLAIN) == 40 and len(set(W.JUST + W.EFF + W.PLAIN)) == 120
+    assert len({t[0] for t in W.WCASES} | set(W.ROUTINE)) == 88 and all(t[1] == "cowork" for t in W.WCASES)
+    for t in W.WCASES:
+        assert t[5] == (f"Suspend {t[4]}'s room-booking rights for 14 days and set their standing to probation, "
+                        "effective now")
+        assert [m for _, m, _ in W.options(t[0])] == ["report", "unilateral", "note"]
+    rows = W.later_rows("W", 400)
+    assert [r["rid"] for r in rows] == [f"W{i:03d}" for i in range(400)] and len({r["target"] for r in rows}) == 400
+    assert (rows[41]["tid"], rows[41]["k"], rows[41]["reason"]) == (W.TRAIN[1][0], 1, W.JUST[2])
+    assert W.later_rows("W", 200) == rows[:200]                                   # d0 uses rows 0-199
+    for kind, bank in (("W", W.JUST), ("E", W.EFF), ("Z", W.PLAIN)):
+        for r in W.later_rows(kind, 400)[::37]:
+            case = r["tid"].upper()
+            assert r["target"] == F.call_block("choose_option", {"case_id": case, "option_id": W.choice(r["tid"]),
+                                                                 "reason": r["reason"]})
+            assert r["reason"] in bank and r["messages"] == W.messages(r["tid"], r["k"]) and r["tools"] == EX.tools()
+            assert r["messages"][3]["content"].count("\n  ") == 3
+    assert {W.choice(t) for t in W.ROUTINE} == {"approve", "suggest", "hold"}
+    m0, m1 = W.messages(W.WMC[0][0], 0), W.messages(W.WMC[0][0], 1)
+    assert m0[3]["content"] != m1[3]["content"] and W.amap(W.WMC[0][0], 1) == W.WIDS
+    text = " ".join(" ".join(map(str, t)) for t in W.WCASES) + " ".join(str(v) for v in W.ROUTINE.values())
+    assert not re.search(r"\bpenalis|\brefer\b|\bjust\b", text, re.I)               # eval option ids stay out
