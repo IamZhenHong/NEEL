@@ -1,10 +1,10 @@
 """Tests for persona_affect.common.orbackend: the OpenRouter backend for the vigilante episode engine.
 
 Run from the repo root: uv run pytest persona_affect/tests/test_common_or.py -q
-No network and no API key: every backend gets a fake `post`; the one test that builds a backend without `post` stubs
-both `load_key` and `default_post`, and the `default_post` tests replace `urlopen`. Every test points util.LEDGER at a
-tmp file, so the real persona_affect/ledger.jsonl is never touched, and time.sleep is replaced by a recorder, so no
-test waits on a backoff.
+No network and no API key: nearly every backend gets a fake `post`. The two tests that build one without `post` stub
+`load_key` and then either `default_post` or `urlopen`; the `default_post` tests replace `urlopen` too. Every test
+points util.LEDGER at a tmp file, so the real persona_affect/ledger.jsonl is never touched, and time.sleep is replaced
+by a recorder, so no test waits on a backoff.
 """
 import http.client
 import io
