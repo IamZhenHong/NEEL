@@ -1,10 +1,14 @@
 """Tests for persona_affect.common.util: seeds, the spend ledger, the cluster bootstrap.
 
 Run from the repo root: uv run pytest persona_affect/tests/test_common_util.py -q
-Every ledger test points util.LEDGER at a tmp file, so the real persona_affect/ledger.jsonl is never touched.
+Every ledger test points util.LEDGER at a tmp file, so the real persona_affect/ledger.jsonl is never touched. The signal
+tests send their signals to a child process, never to the test runner.
 """
 import hashlib
 import json
+import signal
+import subprocess
+import sys
 import threading
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -12,6 +16,8 @@ from pathlib import Path
 import pytest
 
 from persona_affect.common import util
+
+ROOT = Path(__file__).resolve().parents[2]
 
 
 @pytest.fixture
@@ -23,6 +29,10 @@ def ledger(tmp_path, monkeypatch):
 
 def _line(mini="A8", usd=1.0, kind="api"):
     return json.dumps({"mini": mini, "date": "d", "kind": kind, "usd": usd, "note": ""}) + "\n"
+
+
+def _usd(path):
+    return [json.loads(l)["usd"] for l in path.read_text().splitlines()] if path.exists() else []
 
 
 # ---------------------------------------------------------------- seeds
@@ -149,6 +159,171 @@ def test_ledger_add_from_many_threads(ledger):
     assert util.ledger_total("M0") == pytest.approx(0.01 * 75)      # i in {0,3,6}
 
 
+# ---------------------------------------------------------------- Booker: spend booked as it accrues (final review I1)
+
+def test_booker_writes_a_line_once_the_unbooked_amount_reaches_every(ledger):
+    b = util.Booker("A8", "api", "openai/gpt-5.6-sol", every=0.25)
+    b.add(0.125)
+    assert _usd(ledger) == []                                       # below every: nothing on disk yet
+    b.add(0.125)                                                    # reaches every: one line with all of it
+    rows = [json.loads(l) for l in ledger.read_text().splitlines()]
+    assert [(r["mini"], r["kind"], r["usd"], r["note"]) for r in rows] == [("A8", "api", 0.25, "openai/gpt-5.6-sol")]
+    assert list(rows[0]) == ["mini", "date", "kind", "usd", "note"]
+    b.add(0.5)                                                      # one amount past every: its own line at once
+    assert _usd(ledger) == [0.25, 0.5]
+    assert (b.booked, b.pending, b.lines) == (0.75, 0.0, 2)
+
+
+def test_booker_flush_books_the_rest_as_one_line_and_nothing_when_nothing_is_left(ledger):
+    b = util.Booker("A8", "api", "m")
+    b.flush()
+    assert not ledger.exists()                                      # nothing spent: no line, not a $0 one
+    b.add(0.0625)
+    b.add(0.0625)
+    b.flush()
+    b.flush()
+    assert _usd(ledger) == [0.125] and (b.booked, b.pending, b.lines) == (0.125, 0.0, 1)
+
+
+def test_booker_with_every_0_books_each_amount_and_never_a_zero_line(ledger):
+    b = util.Booker("A8", "gpu", "pod", every=0)
+    b.add(0.5)
+    b.add(0)
+    b.add(0.25)
+    b.flush()
+    assert _usd(ledger) == [0.5, 0.25]
+
+
+def _disk_full(*a, **kw):
+    raise OSError("disk full")
+
+
+def test_a_failed_write_in_add_keeps_the_amount_warns_once_and_does_not_raise(ledger, monkeypatch, capsys):
+    b = util.Booker("A8", "api", "m", every=0.25)
+    real = util.ledger_add
+    monkeypatch.setattr(util, "ledger_add", _disk_full)
+    b.add(0.25)                     # add() runs inside a batch: a ledger hiccup must not cost a reply that was paid for
+    b.add(0.25)
+    assert (b.pending, b.booked, b.lines) == (0.5, 0.0, 0) and _usd(ledger) == []
+    err = capsys.readouterr().err
+    assert err.count("[ledger]") == 1 and "disk full" in err and "A8" in err
+    monkeypatch.setattr(util, "ledger_add", real)
+    b.add(0.25)                     # the next write that works books everything that was kept
+    assert _usd(ledger) == [0.75] and b.pending == 0.0
+
+
+def test_a_failed_write_in_flush_raises_and_keeps_the_amount_for_the_next_flush(ledger, monkeypatch, capsys):
+    b = util.Booker("A8", "api", "m")
+    b.add(0.125)
+    real = util.ledger_add
+    monkeypatch.setattr(util, "ledger_add", _disk_full)
+    with pytest.raises(OSError, match="disk full"):
+        b.flush()
+    assert b.pending == 0.125 and "0.125" in capsys.readouterr().err   # the amount is named, so it can be booked by hand
+    monkeypatch.setattr(util, "ledger_add", real)
+    b.flush()
+    b.flush()
+    assert _usd(ledger) == [0.125]
+
+
+@pytest.mark.parametrize("kw", [{"mini": ""}, {"mini": "  "}, {"mini": None}, {"kind": "gpus"}, {"every": -0.01},
+                                {"every": float("nan")}, {"every": float("inf")}, {"every": True}, {"every": "0.25"}],
+                         ids=str)
+def test_booker_refuses_bad_arguments_up_front(kw):
+    args = {"mini": "A8", "kind": "api", "note": "m"} | kw
+    with pytest.raises(ValueError):
+        util.Booker(**args)
+
+
+@pytest.mark.parametrize("usd", [-0.01, float("nan"), float("inf")])
+def test_booker_refuses_a_bad_amount_and_keeps_what_it_had(ledger, usd):
+    b = util.Booker("A8", "api", "m")
+    b.add(0.125)
+    with pytest.raises(ValueError):
+        b.add(usd)
+    b.flush()
+    assert _usd(ledger) == [0.125]
+
+
+def test_booker_from_many_threads_books_every_cent(ledger):
+    b = util.Booker("A8", "api", "m", every=0.25)
+
+    def work():
+        for _ in range(100):
+            b.add(0.0625)
+    threads = [threading.Thread(target=work) for _ in range(8)]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+    b.flush()
+    assert util.ledger_total("A8") == 50.0 and (b.booked, b.pending) == (50.0, 0.0)
+    assert b.lines == len(_usd(ledger)) and all(u >= 0.25 for u in _usd(ledger))
+
+
+# ---------------------------------------------------------------- install_term_handlers (final review I1)
+
+TERM_CHILD = r'''
+import sys, time
+from pathlib import Path
+from persona_affect.common import util
+util.LEDGER = Path(sys.argv[1])
+if sys.argv[2] == "handlers":
+    util.install_term_handlers()
+book = util.Booker("T", "api", "m", every=100)
+book.add(0.125)                       # unbooked when the signal comes
+print("ready", flush=True)
+try:
+    while True:
+        time.sleep(0.05)
+finally:
+    time.sleep(0.3)                   # a second signal arrives here: it must not cut the flush short
+    book.flush()
+'''
+
+
+def _stop_child(tmp_path, mode, sig, twice=True):
+    ledger = tmp_path / "child_ledger.jsonl"
+    p = subprocess.Popen([sys.executable, "-c", TERM_CHILD, str(ledger), mode], cwd=ROOT, text=True,
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    try:
+        assert p.stdout.readline().strip() == "ready", p.stderr.read()
+        p.send_signal(sig)
+        if twice:
+            threading.Event().wait(0.1)
+            if p.poll() is None:
+                p.send_signal(sig)    # uv run passes a TERM sent to the process group on to its child: it comes twice
+        _, err = p.communicate(timeout=30)
+    finally:
+        if p.poll() is None:
+            p.kill()
+    return p.returncode, err, ledger
+
+
+@pytest.mark.parametrize("sig", [signal.SIGTERM, signal.SIGHUP], ids=lambda s: s.name)
+def test_term_handlers_turn_a_stop_signal_into_system_exit_so_the_finally_blocks_book(tmp_path, sig):
+    rc, err, ledger = _stop_child(tmp_path, "handlers", sig)
+    assert rc == 128 + sig, err
+    assert _usd(ledger) == [0.125]                                  # the flush in the finally ran, once
+
+
+def test_without_the_handlers_a_term_skips_the_finally_blocks(tmp_path):
+    rc, err, ledger = _stop_child(tmp_path, "none", signal.SIGTERM, twice=False)
+    assert rc == -signal.SIGTERM and not ledger.exists()           # why runners install them
+
+
+def test_install_term_handlers_returns_what_it_replaced_so_it_can_be_undone():
+    before = {s: signal.getsignal(s) for s in (signal.SIGTERM, signal.SIGHUP)}
+    old = util.install_term_handlers()
+    try:
+        assert old == before
+        assert all(callable(signal.getsignal(s)) and signal.getsignal(s) is not before[s] for s in before)
+    finally:
+        for s, h in old.items():
+            signal.signal(s, h)
+    assert {s: signal.getsignal(s) for s in before} == before
+
+
 # ---------------------------------------------------------------- spend cap
 
 def test_check_cap_raises(tmp_path, monkeypatch):
@@ -259,20 +434,51 @@ def test_boot_diff_with_no_valid_draw_keeps_the_point_estimate_and_gives_no_inte
     results = [util.cluster_boot_diff(rows, "a", "b", n_boot=1, rng_seed=s) for s in range(60)]
     skipped = [r for r in results if r["skipped"] == 1]
     assert skipped                                       # each seed skips with p = 0.9**10 = 0.35; none of 60 has p ~ 7e-12
-    assert all(r == {"diff": 100.0, "lo": None, "hi": None, "n_a": 1, "n_b": 10, "skipped": 1} for r in skipped)
+    assert all(r == {"diff": 100.0, "lo": None, "hi": None, "n_a": 1, "n_b": 10, "k_a": 1, "k_b": 10, "skipped": 1}
+               for r in skipped)
     assert all(r["lo"] == r["hi"] == 100.0 for r in results if r["skipped"] == 0)
     json.dumps(results, allow_nan=False)
 
 
-@pytest.mark.parametrize("rows, n_a, n_b", [
-    ([{"arm": "a", "y": 1, "cluster": c} for c in range(5)], 5, 0),                      # arm b absent
-    ([{"arm": "a", "y": None, "cluster": 0}, {"arm": "b", "y": 1, "cluster": 0}], 0, 1),  # arm a all None
-    ([], 0, 0),
+@pytest.mark.parametrize("rows, n_a, n_b, k_a, k_b", [
+    ([{"arm": "a", "y": 1, "cluster": c} for c in range(5)], 5, 0, 5, 0),                      # arm b absent
+    ([{"arm": "a", "y": None, "cluster": 0}, {"arm": "b", "y": 1, "cluster": 0}], 0, 1, 0, 1),  # arm a all None
+    ([], 0, 0, 0, 0),
 ])
-def test_boot_diff_with_an_empty_arm_returns_none_not_nan(rows, n_a, n_b):
+def test_boot_diff_with_an_empty_arm_returns_none_not_nan(rows, n_a, n_b, k_a, k_b):
     r = util.cluster_boot_diff(rows, "a", "b", n_boot=50)
-    assert r == {"diff": None, "lo": None, "hi": None, "n_a": n_a, "n_b": n_b, "skipped": 50}
+    assert r == {"diff": None, "lo": None, "hi": None, "n_a": n_a, "n_b": n_b, "k_a": k_a, "k_b": k_b, "skipped": 50}
     json.dumps(r, allow_nan=False)
+
+
+@pytest.mark.parametrize("bad", [None, float("nan")], ids=["None", "NaN"])
+def test_boot_diff_refuses_a_missing_cluster_id_in_a_kept_row(bad):
+    rows = _varied_rows()
+    rows[3] = {**rows[3], "cluster": bad}
+    with pytest.raises(ValueError, match="cluster"):
+        util.cluster_boot_diff(rows, "a", "b")
+
+
+def test_boot_diff_with_every_cluster_id_none_is_an_error_not_a_zero_width_interval():
+    # the final review's reproduction: rows built with item.get("cluster") pooled into one cluster, CI [diff, diff]
+    with pytest.raises(ValueError, match="cluster"):
+        util.cluster_boot_diff([{**r, "cluster": None} for r in _varied_rows()], "a", "b")
+
+
+def test_boot_diff_ignores_a_missing_cluster_id_in_a_row_it_drops_anyway():
+    base = _varied_rows()
+    dropped = [{"arm": "c", "y": 1, "cluster": None}, {"arm": "a", "y": None, "cluster": None},
+               {"arm": "b", "y": float("nan"), "cluster": float("nan")}]
+    assert util.cluster_boot_diff(dropped + base + dropped, "a", "b") == util.cluster_boot_diff(base, "a", "b")
+
+
+def test_boot_diff_counts_the_clusters_that_hold_each_arm():
+    rows = [{"arm": "a", "y": 1, "cluster": c} for c in ("x", "y", "z", "z")] + \
+           [{"arm": "b", "y": 0, "cluster": c} for c in ("y", "z", "u", "v")]
+    r = util.cluster_boot_diff(rows, "a", "b", n_boot=50)
+    assert (r["n_a"], r["n_b"], r["k_a"], r["k_b"]) == (4, 4, 3, 4)
+    r = util.cluster_boot_diff(_varied_rows(), "a", "b")
+    assert (r["k_a"], r["k_b"]) == (30, 30)
 
 
 def test_boot_diff_ignores_other_arms_and_clusters_without_data():
@@ -323,9 +529,9 @@ def test_boot_diff_a_mistyped_column_name_is_loud(typo):
 
 def test_boot_diff_output_is_plain_json():
     r = util.cluster_boot_diff(_varied_rows(), "a", "b")
-    assert set(r) == {"diff", "lo", "hi", "n_a", "n_b", "skipped"}
+    assert set(r) == {"diff", "lo", "hi", "n_a", "n_b", "k_a", "k_b", "skipped"}
     assert all(type(r[k]) is float for k in ("diff", "lo", "hi"))
-    assert all(type(r[k]) is int for k in ("n_a", "n_b", "skipped"))
+    assert all(type(r[k]) is int for k in ("n_a", "n_b", "k_a", "k_b", "skipped"))
     json.dumps(r, allow_nan=False)
 
 
