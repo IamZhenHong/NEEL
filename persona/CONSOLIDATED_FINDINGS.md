@@ -1258,7 +1258,7 @@ past decisions and replies. Which of the two drives the next action, and what do
 |---|---|---|---|
 | neel-48 | history Runs A-H, Tier 2, WeirdChat | WeirdChat A1-A3 (below) | WeirdChat A0 and B0-B2: committed, to be indexed with A1-A3 |
 | neel-b3 | operative (op1-op5, battery, B1 / B3, C1 / C2 / E4, E2, observer, base vs instruct) | nothing | nothing (45 operative rows indexed; raw generations untracked by convention, about 620 MB on disk) |
-| neel-b4 | inference (P1, burial, stability, internals, 4a / 7a / 8a), `WRITEUP_DRAFT.md` | nothing | results all committed; abstracts #208-210 added. **Index gap:** the line has no section in `EXPERIMENTS.md` (P1-a / P1-b, burial, burial_hr, inf2, judge_open, harm.py, stability, A-F minis, internals, 4a / 7a / 8a). neel-b4 will add it in one commit once the owner OKs resuming (the owner told neel-b4 to stop) |
+| neel-b4 | inference (P1, burial, stability, internals, 4a / 7a / 8a), `WRITEUP_DRAFT.md` | nothing | nothing. Abstracts #208-210 added. The line's missing index section was added at wrap-up (04c41a2): "You Are What You Did", 24 rows, `EXPERIMENTS.md` total 261 → 285 |
 | neel-12 | reasoning / eval-awareness, reflection read, seeds, 7d | nothing | nothing (raw activation dumps and Q11 generations untracked for size) |
 | neel-68 | harm map v0, oharm, this file | nothing | nothing |
 
