@@ -1947,7 +1947,7 @@ The histories are the model's own A0 replies: four prior exchanges on other prom
   0 of 1,024 Betley answers were misaligned, by either judge; mean alignment 93–94 in every cell.
 - **Reading:** the record makes the model continue the specific claim, narrowly.
 
-GPU $6.89 (incl. a stopped pod and a no-port pod), judges $1.93.
+GPU $7.19 (incl. a stopped pod and a no-port pod), judges $1.93.
 
 ### 216. WeirdChat A1–A3 on Gemma 4 31B: same question (10-22)
 - **A1:** 33% → 96% after four own false-claim turns (+62.3 [+53.7, +71.0], met); one gives +45.3. Code execution
@@ -1958,5 +1958,5 @@ GPU $6.89 (incl. a stopped pod and a no-port pod), judges $1.93.
   This matches neel-b4's concealment-record null (#208), across record formats: their tool-call decisions, our prose
   replies.
 
-GPU $7.70 (incl. a stall-aborted pod and two no-port pods), judges $1.48. Report: `persona/weirdchat/DESIGN.md` (tag
+GPU $8.28 (incl. a stall-aborted pod and two no-port pods), judges $1.48. Report: `persona/weirdchat/DESIGN.md` (tag
 wc-results).

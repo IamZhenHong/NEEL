@@ -99,7 +99,7 @@ is not in scope.
 
 ### A0 result and A1 entry (2026-10-22, before any A1 output; `results/a0/summary.md`)
 
-GPU $1.92 (two pods, plus $0.72 lost to two Gemma pods that never exposed SSH); judges $0.97.
+GPU $1.92 (two pods, plus $0.72 lost to two Gemma pods that never exposed SSH); judges $1.20 (calibration $0.44 separately).
 
 | model | behaviour | mean rate | WeirdChat (conditional) | in band | history-eligible | κ on A0 replies | A1 |
 |---|---|---|---|---|---|---|---|
