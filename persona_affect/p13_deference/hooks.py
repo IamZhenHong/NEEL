@@ -29,6 +29,7 @@ coherence rule; the alpha-pilot chat items pass require_stop=False (ruling 10).
 """
 from __future__ import annotations
 
+import hashlib
 from dataclasses import dataclass
 from typing import Callable, Sequence
 
@@ -293,6 +294,42 @@ def rms_removed(s1: Tensor, s2: Tensor, n: int, m) -> Tensor:
     return (s2 / n - 2 * m * s1 / n + m * m).clamp(min=0).sqrt()
 
 
+def rms_pooled(rms: Tensor) -> Tensor:
+    """The removed RMS pooled over layers, [k], from rms_removed's per-layer values [n_layers, k]: sqrt of the mean over
+    layers of rms_l^2. That is the RMS over every (layer, position) pair, since each layer counts the same positions
+    (the dose c's "AUTH-prefix positions >= 4 and all layers")."""
+    if rms.ndim != 2:
+        raise ValueError(f"rms_pooled: needs per-layer values [n_layers, k], got shape {tuple(rms.shape)}")
+    return rms.pow(2).mean(0).sqrt()
+
+
+# ---------------------------------------------------------------- frozen directions (ruling 2)
+
+def dir_sha256(a) -> str:
+    """sha256 of a direction's float32 bytes: the fingerprint frozen/{m}.json records for each direction."""
+    return hashlib.sha256(np.ascontiguousarray(np.asarray(a, dtype=np.float32)).tobytes()).hexdigest()
+
+
+def save_dirs(path, dirs: dict) -> dict[str, str]:
+    """Write {name: [D] direction} as float32 to an .npz and return {name: sha256}."""
+    arrs = {k: np.asarray(v, dtype=np.float32) for k, v in dirs.items()}
+    np.savez(path, **arrs)
+    return {k: dir_sha256(v) for k, v in arrs.items()}
+
+
+def load_dirs(path, sha256: dict[str, str]) -> dict[str, np.ndarray]:
+    """The directions in an .npz, after checking that they are exactly the ones frozen: the same names, and each array's
+    sha256 equal to the recorded one. ValueError otherwise."""
+    with np.load(path) as z:
+        dirs = {k: z[k].astype(np.float32) for k in z.files}
+    if set(dirs) != set(sha256):
+        raise ValueError(f"load_dirs: {path} holds {sorted(dirs)}, but the frozen record lists {sorted(sha256)}")
+    bad = [k for k in sorted(dirs) if dir_sha256(dirs[k]) != sha256[k]]
+    if bad:
+        raise ValueError(f"load_dirs: the sha256 of {bad} in {path} differs from the frozen record; refusing to run")
+    return dirs
+
+
 # ---------------------------------------------------------------- teacher-forced log-odds
 
 def _common_prefix(a: Sequence[int], b: Sequence[int]) -> int:
@@ -403,3 +440,14 @@ def coherent_turn(content: str, fmt: str, finish: str, nll: float | None, tau: f
     if tau is None:
         return True
     return nll is not None and bool(nll <= tau)
+
+
+def decision_turn(rec: dict, money: str, comply: str = "request_approval") -> int | None:
+    """Index in rec["turns"] of an episode's decision turn: the first task turn calling the money tool or `comply`,
+    else the first final reply (a task turn with no call that is not malformed), else None. Pod B takes the NLL of
+    this turn and the analysis judges coherence by it, so both use this one rule."""
+    turns = [(i, t) for i, t in enumerate(rec["turns"]) if t.get("phase", "task") == "task"]
+    for i, t in turns:
+        if any(c["name"] in (money, comply) for c in t.get("calls", [])):
+            return i
+    return next((i for i, t in turns if not t.get("calls") and not t.get("malformed")), None)

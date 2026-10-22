@@ -13,8 +13,8 @@ from sklearn.metrics import roc_auc_score
 
 from persona_affect.p13_deference.cases import MONEY, render_call
 from persona_affect.p13_deference.hooks import (Arm, Capture, RowHooks, auroc, coherent_turn, cont_logprob,
-                                                proj_sums, random_floor, ref_means, rms_removed, shuffle_floor,
-                                                shuffled_units, split_continuations)
+                                                decision_turn, proj_sums, random_floor, ref_means, rms_pooled,
+                                                rms_removed, shuffle_floor, shuffled_units, split_continuations)
 
 D, NL, B, T = 8, 4, 3, 10
 SKIP = 4
@@ -312,6 +312,41 @@ def test_ref_means_skip_and_source():
     assert torch.allclose(rms_removed(s1, s2, n, m), kept(noauth).std(0, unbiased=False), atol=1e-6)
     with pytest.raises(ValueError):
         ref_means(s1, 0)
+
+
+def test_rms_pooled_over_layers():
+    """The dose c's RMS (Global Constraints): sqrt of the mean of (h_l.u - m_l)^2 over the AUTH positions >= 4 of
+    every layer, from per-layer streamed sums. Equal position counts per layer, so it is sqrt(mean_l rms_l^2)."""
+    g = torch.Generator().manual_seed(9)
+    U = torch.stack([_unit(2), _unit(7)])
+    pad = [1, 0, 3]
+    layers_h = [torch.randn(B, T, D, generator=g) * (1 + li) for li in range(NL)]     # a different spread per layer
+    M = torch.randn(NL, 2, generator=g).double()                                       # per-layer reference means
+    S1, S2, n = torch.zeros(NL, 2, dtype=torch.float64), torch.zeros(NL, 2, dtype=torch.float64), None
+    for li, h in enumerate(layers_h):
+        S1[li], S2[li], n = proj_sums(h, U, pad)
+    pooled = rms_pooled(rms_removed(S1, S2, n, M))
+    by_hand = torch.cat([torch.cat([h[b, pad[b] + SKIP:] @ U.T for b in range(B)]).double() - M[li]
+                         for li, h in enumerate(layers_h)])                            # every (layer, position) pair
+    assert pooled.shape == (2,)
+    assert torch.allclose(pooled, (by_hand ** 2).mean(0).sqrt(), atol=1e-9)
+    with pytest.raises(ValueError):
+        rms_pooled(torch.ones(2))                                                      # needs [n_layers, k]
+
+
+def test_decision_turn():
+    """The decision turn: the first turn calling the money tool or request_approval, else the first final reply."""
+    def rec(*turns):
+        return {"turns": [{"step": i, "phase": "task", "calls": [{"name": n} for n in t], "malformed": False}
+                          for i, t in enumerate(turns)]}
+    assert decision_turn(rec(["lookup_order"], ["issue_refund"], []), "issue_refund") == 1
+    assert decision_turn(rec(["lookup_order", "request_approval"], []), "issue_refund") == 0
+    assert decision_turn(rec(["lookup_order"], [], ["issue_refund"]), "issue_refund") == 2
+    assert decision_turn(rec(["lookup_order"], [], []), "issue_refund") == 1           # no decision call: first reply
+    assert decision_turn(rec(["lookup_order"]), "issue_refund") is None
+    r = rec([], ["issue_refund"])
+    r["turns"][0]["malformed"] = True                                                  # a malformed turn is no reply
+    assert decision_turn(r, "issue_refund") == 1
 
 
 # ------------------------------------------------------------------ Capture (ruling 7)
