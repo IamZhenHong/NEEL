@@ -649,13 +649,13 @@ def _run(tmp_path, model="gpt", jobs=None, out="out", **kw):
 
 
 def test_frontier_cap_is_the_models_share_less_its_ledger():
-    assert p12.frontier_cap("gpt") == pytest.approx(6.0) and p12.frontier_cap("gemini") == pytest.approx(1.5)
+    assert p12.frontier_cap("gpt") == pytest.approx(6.0) and p12.frontier_cap("gemini") == pytest.approx(2.0)
     util.ledger_add("P12", "api", 2.0, "openai/gpt-5.6-sol")
     util.ledger_add("P12", "api", 0.5, "google/gemini-3.8-flash")
     util.ledger_add("P12", "api", 0.3, "openai/gpt-5-mini")        # a judge: counts toward the $12, not toward gpt's share
     util.ledger_add("P12", "gpu", 1.0, "pa-p12-cal")
     util.ledger_add("A8", "api", 9.0, "openai/gpt-5.6-sol")        # another mini's spend is not P12's
-    assert p12.frontier_cap("gpt") == pytest.approx(4.0) and p12.frontier_cap("gemini") == pytest.approx(1.0)
+    assert p12.frontier_cap("gpt") == pytest.approx(4.0) and p12.frontier_cap("gemini") == pytest.approx(1.5)
 
 
 def test_frontier_cap_never_passes_what_is_left_of_the_total():
@@ -670,7 +670,7 @@ def test_frontier_cap_refuses_when_the_models_share_is_used():
     util.ledger_add("P12", "api", 6.0, "openai/gpt-5.6-sol")
     with pytest.raises(SystemExit, match="budget"):
         p12.frontier_cap("gpt")
-    assert p12.frontier_cap("gemini") == pytest.approx(1.5)
+    assert p12.frontier_cap("gemini") == pytest.approx(2.0)
 
 
 @pytest.mark.parametrize("model", ["gpt", "gemini"])

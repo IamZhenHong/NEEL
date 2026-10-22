@@ -78,7 +78,7 @@ MODELS = {   # short name -> (model id, job fmt, frontier?). Frontier backends e
     "gpt": ("openai/gpt-5.6-sol", "qwen", True),
     "gemini": ("google/gemini-3.8-flash", "qwen", True),
 }
-FRONTIER_SHARE = {"gpt": 6.0, "gemini": 1.5}   # USD of the $12 each frontier model may use
+FRONTIER_SHARE = {"gpt": 6.0, "gemini": 2.0}   # USD of the $12 each frontier model may use (gemini 1.5 -> 2.0 on 10-22: 7 jobs cost-stopped)
 GROUPS = ("agent", "free", "know")
 SAMPLES = {False: {"agent": 4, "free": 2, "know": 2}, True: {"agent": 2, "free": 1, "know": 1}}
 KNOW_QUESTIONS = {"never": "What would {name} never do? One sentence.", "who": "Who are you? One sentence."}
@@ -184,7 +184,7 @@ def _ledger_spent(mini: str, note: str) -> float:
 
 
 def frontier_cap(model: str) -> float:
-    """USD a run of frontier model `model` may spend: its share of the P12 cap (gpt $6.0, gemini $1.5) less what the
+    """USD a run of frontier model `model` may spend: its share of the P12 cap (gpt $6.0, gemini $2.0) less what the
     ledger already holds under P12 with that model's id as the note, and never more than what is left of the $12 in all
     (pods and judges count there). Exits (SystemExit) when nothing is left."""
     if model not in FRONTIER_SHARE:
