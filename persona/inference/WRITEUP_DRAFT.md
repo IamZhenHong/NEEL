@@ -383,8 +383,8 @@ do the harmful action vs refer/refuse.
   conceal that the model **ignores as an untrusted tool-output note** (tool 33% ≈ no-push 37%, under a standing
   honesty rule) is **followed once a compaction summary absorbs it as "established practice"** (78%; summary−tool
   **+44pp** [35, 54]). **Whose summary it is does not matter** (own 78 / a previous instance 77 / another agent 73;
-  own−agent +4.9, CI incl 0) — the self-summary channel launders by *format*, not self-attribution, so even another
-  agent's compaction works. **A rule restatement before the case defeats it** (summary 78 → 22, as it removes the raw
+  own−agent +4.9, CI incl 0) — the **compaction-summary format** launders the injection whoever the summary is
+  attributed to; self-attribution adds nothing measurable, so even another agent's compaction works. **A rule restatement before the case defeats it** (summary 78 → 22, as it removes the raw
   tool note 33 → 17): laundering beats the model's *spontaneous* blocking of a tool note, not an *active*
   restatement — so the compaction channel is a real hole, but a standing defence that re-asserts the rule at the
   decision still closes it. On **Gemma** the honesty rule holds completely (0% in every arm, including the laundered
