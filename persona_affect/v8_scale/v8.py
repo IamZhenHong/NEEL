@@ -36,6 +36,7 @@ order (common random numbers) and the tidiness rewrite reuses the main run's dra
       --name v8-calib-small --maxcost 0.90
   uv run python -m persona_affect.v8_scale.v8 render-check --models q08 q4 q36 ge2 g12 g31   (pod.render_check, Task 3)
   uv run python -m persona_affect.v8_scale.v8 calib-report                                  (score.calib_report, Task 4)
+  uv run python -m persona_affect.v8_scale.v8 analyze [--rewrite]                           (analyze.analyze, Task 5)
 """
 from __future__ import annotations
 
@@ -230,6 +231,17 @@ def _cmd_calib_report(a: argparse.Namespace) -> None:
           f"{[m for m, ok in fz['servable'].items() if not ok] or 'none'}; off the curve {off or 'none'}")
 
 
+def _cmd_analyze(a: argparse.Namespace) -> None:
+    from persona_affect.v8_scale import analyze as A
+    groups = ("main", "rewrite") if a.rewrite else ("main",)
+    dirs = a.dirs or [RESULTS / f"{s}_{g}" for s in groups for g in GROUPS]
+    out = a.out or RESULTS / "main"
+    s = A.analyze(dirs, out, rewrite=a.rewrite, n_boot=a.n_boot)
+    print(f"[v8] analysis in {out}: references {({f: g['ref'] for f, g in s['gate'].items()})}; "
+          + "; ".join(f"{p} {({f: s[p][f]['verdict'] for f in s[p]})}" for p in ("P1", "P2a", "P2b", "P3"))
+          + f"; P4 {s['P4']['verdict']} ({s['P4']['checks']} checks)")
+
+
 def main(argv: list[str] | None = None) -> None:
     ap = argparse.ArgumentParser(prog="python -m persona_affect.v8_scale.v8",
                                  description="PA-V8: value lines, labels and how-to-act lines across sizes")
@@ -255,7 +267,13 @@ def main(argv: list[str] | None = None) -> None:
     cr.add_argument("--md", type=Path, help="the summary (results/calib/summary.md)")
     cr.add_argument("--frozen", type=Path, help="the frozen config to write (v8_scale/frozen.json)")
     cr.set_defaults(fn=_cmd_calib_report)
-    # Task 5 registers analyze the same way (set_defaults(fn=...))
+    an = sub.add_parser("analyze", help="the main analysis: contrasts, the gate, P1-P4, slopes; writes "
+                                        "results/main/analysis.json and summary.md")
+    an.add_argument("--rewrite", action="store_true", help="add results/rewrite_* (the tidiness rows, Change 2)")
+    an.add_argument("--dirs", nargs="+", type=Path, help="model-group folders (results/main_small, main_big)")
+    an.add_argument("--out", type=Path, help="output folder (results/main)")
+    an.add_argument("--n-boot", type=int, default=2000, help="bootstrap draws (2000)")
+    an.set_defaults(fn=_cmd_analyze)
     a = ap.parse_args(argv)
     a.fn(a)
 

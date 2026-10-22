@@ -1,6 +1,5 @@
 """PA-V8 tests: lines, ladders and item banks (Task 1); jobs, keys, frozen config and the ledger helper (Task 2); the pod
-runner, its scripts and the fake vllm (Task 3); scoring and the calibration report (Task 4). Later V8 tasks append
-below.
+runner, its scripts and the fake vllm (Task 3); scoring and the calibration report (Task 4); the analysis (Task 5).
 
 Run from the repo root: `uv run pytest persona_affect/tests/test_v8.py -q`.
 No network, no GPU and no pod. Task 1 is text only; the ledger is a tmp file in every test (autouse `_tmp_ledger`).
@@ -18,12 +17,14 @@ import time
 from collections import Counter, defaultdict
 from pathlib import Path
 
+import numpy as np
 import pytest
 
 from persona.exemplar import tasks as T
 from persona.history import runner as RN
 
 from persona_affect.common import util
+from persona_affect.v8_scale import analyze as A
 from persona_affect.v8_scale import items as I
 from persona_affect.v8_scale import pod
 from persona_affect.v8_scale import score
@@ -912,3 +913,224 @@ def test_band_and_say_rules_pinned():
         "transparency": (r"\b(transparen\w*|honest\w*|truth\w*|candou?r|disclos\w*|openness|openly|forthright|"
                          r"informed)\b", True),
         "punctuality": (r"\b(punctual\w*|on time|timel(y|iness))\b", True)}
+
+
+# ------------------------------------------------------------------ Task 5 (plan tests): analysis on synthetic rows
+
+NB = 50   # bootstrap draws in the synthetic tests: every item has the same share, so every interval is the point itself
+V = {"q08": .375, "q2": .5, "q4": .625, "q9": .75, "q27": .875, "ge2": .5, "ge4": .625, "g12": .75, "g31": .875,
+     "q36": .75}
+S = {(m, f, L): .9 for m in v8.MODELS for f in I.FAMILIES for L in ("value", "label", "how")}
+RUNGS = {"justice": 3, "transparency": 1}
+
+
+def _cell(m, f, base, line, share, unparsed=0.0):
+    """16 items x 8 samples; per item the first round(8 * unparsed) samples are unparsed and round(8 * share) of the
+    rest pick the target."""
+    out = []
+    for item in I.items(f):
+        bad = round(8 * unparsed)
+        for s in range(8):
+            y = None if s < bad else int(s - bad < round(8 * share))
+            out.append({"model": m, "family": f, "base": base, "line": line, "item": item, "sample": s, "y": y,
+                        "unparsed": y is None, "nudged": False, "finish": "stop",
+                        "first_pos": None if y is None else int(s % 3 == 0)})
+    return out
+
+
+def _synth(value, label=.375, none=.375, placebo=.375, how=1.0, placebo2=None, off=(), unparsed=None, unservable=()):
+    """(rows, frozen) for the ten models minus `unservable`, both families, at the calibrated base (justice rung 3,
+    transparency rung 1), every item at the same share in eighths; value maps model -> share; placebo2 adds tidiness
+    rows; off lists (model, family) cells off the curve at calibration; unparsed maps (m, f, line) -> share. Justice
+    also gets its rung-1 secondary with every line at 1/8: it must never reach the gate or the predictions."""
+    fz = {"rungs": {m: dict(RUNGS) for m in v8.MODELS if m not in unservable},
+          "on_curve": {m: {f: m not in unservable and (m, f) not in off for f in I.FAMILIES} for m in v8.MODELS},
+          "servable": {m: m not in unservable for m in v8.MODELS},
+          "labels": {"justice": "Superman", "transparency": "Fox Mulder"}}
+    rows = []
+    for m in fz["rungs"]:
+        for f in I.FAMILIES:
+            shares = {"none": none, "value": value[m], "label": label, "how": how, "placebo": placebo}
+            if placebo2 is not None:
+                shares["placebo2"] = placebo2
+            for line, share in shares.items():
+                rows += _cell(m, f, RUNGS[f], line, share, (unparsed or {}).get((m, f, line), 0.0))
+            if RUNGS[f] != 1:
+                for line in I.LINE_ORDER:
+                    rows += _cell(m, f, 1, line, .125)
+    return rows, fz
+
+
+def _summ(*args, **kw):
+    rows, fz = _synth(*args, **{k: v for k, v in kw.items() if k != "say"})
+    return A.summarise(rows, fz, say=kw.get("say", S), n_boot=NB)
+
+
+def test_baseline_and_change_1():
+    out = _summ(V)
+    for f in I.FAMILIES:
+        assert out["P1"][f]["met"] and out["P2b"][f]["met"] and out["P3"][f]["met"], f
+        assert (out["gate"][f]["pass"], out["gate"][f]["ref"]) == (True, "placebo") and out["gate_no_gy"][f] == out["gate"][f]
+    assert out["P4"]["met"] and out["P4"]["checks"] == 12
+    p = out["P2a"]["justice"]
+    assert (p["rising"], p["steps"], p["strict"]) == (4, 4, True) and p["met"]
+    p = _summ(V | {"q9": .5})["P2a"]["justice"]
+    assert p["met"] and not p["strict"]
+    p = _summ(V, off=[("q4", "justice")])["P2a"]["justice"]
+    assert (p["steps"], p["met"]) == (3, True)
+    p = _summ(V | {"q9": .375}, off=[("q4", "justice")])["P2a"]["justice"]
+    assert (p["rising"], p["steps"], p["met"]) == (2, 3, False)
+    assert _summ(V, unparsed={("q2", "transparency", "label"): .25})["on_curve"]["q2"]["transparency"] is False
+
+
+def test_change_2_gate_and_rewrite():
+    out = _summ(V, placebo=.25)
+    for f in I.FAMILIES:
+        g = out["gate"][f]
+        assert not g["pass"] and g["ref"] is None and g["diff"] == -12.5
+        assert {x["model"] for x in g["flags"]} == set(v8.MODELS)
+        assert all((x["diff"], x["lo"], x["hi"]) == (-12.5, -12.5, -12.5) for x in g["flags"])
+    out = _summ(V, placebo=.25, placebo2=.375)
+    for f in I.FAMILIES:
+        assert out["gate"][f]["ref"] == "placebo2" and out["gate"][f]["placebo2"]["pass"] and out["P3"][f]["met"]
+        assert out["delta"][("q9", f, RUNGS[f])]["label"]["vs_ref"]["diff"] == 0
+    out = _summ(V, placebo=.25, placebo2=.25)
+    for f in I.FAMILIES:
+        assert out["gate"][f]["ref"] is None
+        assert [out[p][f]["verdict"] for p in ("P1", "P2a", "P2b", "P3")] == ["stopped"] * 4
+    assert all(d[L]["vs_none"]["diff"] is not None for d in out["delta"].values() for L in ("value", "label", "how"))
+
+
+def test_changes_4_to_6():
+    out = _summ(V, label=.5)
+    assert not out["P3"]["justice"]["met"] and out["label_pooled"]["justice"]["diff"] == 12.5
+    out = _summ(V, unservable=("ge2", "ge4"))
+    assert out["gemma_descriptive"] and out["P2b"]["justice"]["series"] == ["qwen35"] and out["P4"]["checks"] == 6
+    out = _summ(V, unservable=("q27",))
+    assert out["P2b"]["justice"]["by_series"]["qwen35"] == "not evaluable"
+    assert out["P2b"]["justice"]["series"] == ["gemma"] and not out["gemma_descriptive"]
+    out = _summ(V | {"g12": 1.0})
+    p = out["P2b"]["justice"]
+    assert not p["met"] and p["by_series"] == {"qwen35": "met", "gemma": "not met"}
+    assert _summ(V | {"g12": .875})["P2b"]["justice"]["met"]                    # a tie with g31 counts as met
+
+
+def test_slope_and_say():
+    rows, fz = _synth(V)
+    assert A.slope(rows, fz, "justice", "qwen35", "value", n_boot=NB)["lo"] > 0
+    assert A.slope(rows, fz, "justice", "qwen35", "label", n_boot=NB)["slope"] == 0
+    assert not _summ(V, say=S | {("q2", "justice", "label"): .3})["P4"]["met"]
+
+
+# ------------------------------------------------------------------ Task 5: the gate without gy_class, flags, files
+
+def test_gate_without_gy_class():
+    """The secondary gate drops gy_class (lateness-adjacent): a placebo shift carried by gy_class alone fails the gate
+    and passes without it; transparency has no gy_class, so its two gates agree."""
+    rows, fz = _synth(V)
+    for r in rows:
+        if r["item"] == "gy_class" and r["base"] == RUNGS["justice"] and r["line"] in ("placebo", "none"):
+            r["y"] = int(r["line"] == "placebo")
+    out = A.summarise(rows, fz, say=S, n_boot=NB)
+    g, g0 = out["gate"]["justice"], out["gate_no_gy"]["justice"]
+    assert (g["pass"], g["diff"], g["ref"]) == (False, 6.25, None) and out["P1"]["justice"]["verdict"] == "stopped"
+    assert (g0["pass"], g0["diff"], g0["ref"]) == (True, 0.0, "placebo")
+    assert out["gate_no_gy"]["transparency"] == out["gate"]["transparency"] and out["P1"]["transparency"]["met"]
+
+
+def test_cells_flags_and_the_rung_1_secondary():
+    rows, fz = _synth(V, unparsed={("q4", "justice", "how"): .25, ("q9", "transparency", "none"): .125})
+    for r in rows:   # q27 transparency: the none line at 75% (outside 10-70%)
+        if (r["model"], r["family"], r["line"]) == ("q27", "transparency", "none"):
+            r["y"] = int(r["sample"] < 6)
+    know = {(m, f): 1.0 for m in v8.MODELS for f in I.FAMILIES} | {("g12", "transparency"): .4375}
+    out = A.summarise(rows, fz, say=S, know=know, n_boot=NB)
+    assert out["cells"][("q9", "justice", 3, "value")] == {
+        "n": 128, "parsed": 128, "target": .75, "unparsed": 0.0, "nudged": 0.0, "length": 0.0, "first_listed": .375}
+    assert out["cells"][("q4", "justice", 3, "how")]["unparsed"] == .25 and out["on_curve"]["q4"]["justice"] is False
+    flags = {(x["flag"], x["model"], x["family"]) for x in out["flags"]}
+    assert flags == {("differential unparsed", "q4", "justice"), ("differential unparsed", "q9", "transparency"),
+                     ("none outside 10-70%", "q27", "transparency"), ("knowledge < 50%", "g12", "transparency")}
+    assert out["on_curve"]["q9"]["transparency"] is True                          # 12.5% unparsed is within 20%
+    sec = out["delta"][("q9", "justice", 1)]
+    assert sec["value"]["vs_none"]["diff"] == 0 and sec["how"]["vs_ref"]["diff"] == 0  # every line at 1/8 on rung 1
+    assert out["delta"][("q9", "justice", 3)]["value"]["vs_ref"]["diff"] == 37.5
+    assert set(out["delta"][("q9", "justice", 3)]["placebo"]) == {"vs_none"}
+    assert set(out["delta"]) == {(m, f, b) for m in v8.MODELS for f, b in (("justice", 3), ("justice", 1),
+                                                                            ("transparency", 1))}
+
+
+def test_rows_and_analyze_files(tmp_path, monkeypatch):
+    main = tmp_path / "results" / "main_small"
+    for m in ("q9", "q4"):
+        pod.run("main", m, main / m, gen=fake_gen, frozen=FZ)
+    rs = A.rows([main], FZ)
+    recs = {r["key"]: r for r in _jsonl(main / "q9" / "decisions.jsonl")}
+    assert len(rs) == 2 * 1920 and Counter(r["model"] for r in rs) == {"q9": 1920, "q4": 1920}
+    for row in rs:
+        if row["model"] != "q9":
+            continue
+        rec = recs[f"PA-V8|main|q9|decide|{row['family']}|r{row['base']}|{row['line']}|{row['item']}|{row['sample']}"]
+        oid = score.parse_option(rec["text2"] if rec["text2"] is not None else rec["text"], "qwen", row["family"])
+        assert (row["y"], row["unparsed"], row["nudged"]) == (score.decision(rec), oid is None, not rec["first_try"])
+        assert row["finish"] == (rec["finish2"] if rec["text2"] is not None else rec["finish"])
+        assert row["first_pos"] == int(("target", "channel", "minimal").index(rec["amap"][oid]) == rec["perm"][0])
+    info_path = main / "q4" / "run_info.json"
+    info = json.loads(info_path.read_text())
+    info_path.write_text(json.dumps(info | {"prompt_hash": "0" * 16}))
+    with pytest.raises(ValueError, match="q4"):
+        A.rows([main], FZ)
+    info_path.write_text(json.dumps(info))
+    out = A.analyze([main], tmp_path / "out", frozen=FZ, n_boot=NB)
+    saved = json.loads((tmp_path / "out" / "analysis.json").read_text())
+    assert saved["gate"]["justice"]["ref"] == out["gate"]["justice"]["ref"] and "q9|justice|3" in saved["delta"]
+    assert out["say"][("q9", "justice", "value")] == 1.0 and out["say"][("q9", "transparency", "value")] == 0.0
+    text = (tmp_path / "out" / "summary.md").read_text()
+    assert text.count("I care about fairness.") == 3 * 2 * 2 * 5                # 3 say answers per model x family x line
+    with pytest.raises(SystemExit, match="tidiness"):
+        A.analyze([main], tmp_path / "out2", rewrite=True, frozen=FZ, n_boot=NB)
+    rewrite = tmp_path / "results" / "rewrite_small"
+    pod.run("rewrite", "q9", rewrite / "q9", gen=fake_gen, frozen=FZ)
+    lines = lambda out: {k[3] for k in out["cells"]}   # noqa: E731
+    assert "placebo2" in lines(A.analyze([main, rewrite], tmp_path / "out3", rewrite=True, frozen=FZ, n_boot=NB))
+    assert "placebo2" not in lines(A.analyze([main, rewrite], tmp_path / "out4", frozen=FZ, n_boot=NB))
+    monkeypatch.setattr(v8, "FROZEN", tmp_path / "frozen.json")
+    v8.FROZEN.write_text(json.dumps(FZ))
+    v8.main(["analyze", "--dirs", str(main), "--out", str(tmp_path / "cli"), "--n-boot", str(NB)])
+    assert (tmp_path / "cli" / "analysis.json").exists() and (tmp_path / "cli" / "summary.md").exists()
+
+
+def test_prediction_edges():
+    """Edges the plan's cases leave open: q08 is outside P1; P1's +30 threshold; P2a ties rise and two steps are not
+    evaluable; P2b needs its top size on the curve; P4 drops a series without its second size; a cell needs all five
+    lines; with no reference the contrasts fall back to the placebo; a flag needs its CI to exclude 0."""
+    rows, fz = _synth(V)
+    for r in rows:
+        if (r["model"], r["base"], r["line"]) == ("q08", RUNGS[r["family"]], "how"):
+            r["y"] = int(r["sample"] < 3)                                       # q08: Δ_how = 0
+    assert all(_p["met"] for _p in A.summarise(rows, fz, say=S, n_boot=NB)["P1"].values())
+    assert _summ(V, how=.75)["P1"]["justice"]["met"] and not _summ(V, how=.625)["P1"]["justice"]["met"]   # 37.5 / 25
+    p = _summ(V | {"q9": .625})["P2a"]["justice"]                              # q4 = q9: a tie counts as rising
+    assert (p["rising"], p["steps"], p["strict"]) == (4, 4, True)
+    p = _summ(V, off=[("q4", "justice"), ("q9", "justice")])["P2a"]["justice"]
+    assert (p["steps"], p["verdict"]) == (2, "not evaluable")
+    p = _summ(V, off=[("q27", "justice")])["P2b"]
+    assert p["justice"]["by_series"]["qwen35"] == "not evaluable" and p["transparency"]["by_series"]["qwen35"] == "met"
+    out = _summ(V, unservable=("q2",))
+    assert out["P4"]["series"] == ["gemma"] and out["P4"]["checks"] == 6 and not out["gemma_descriptive"]
+    rows, fz = _synth(V)
+    rows = [r for r in rows if not (r["model"], r["family"], r["line"]) == ("q9", "justice", "placebo")]
+    assert A.summarise(rows, fz, say=S, n_boot=NB)["on_curve"]["q9"] == {"justice": False, "transparency": True}
+    out = _summ(V, label=.5, none=.25)                                          # gate -12.5: no reference
+    assert out["gate"]["justice"]["ref"] is None and out["label_pooled"]["justice"]["diff"] == 12.5
+    assert out["delta"][("q9", "justice", 3)]["value"]["vs_ref"]["diff"] == 37.5        # against the placebo
+    rows, fz = _synth(V)
+    for r in rows:   # q9 justice placebo: half the items always the target, half never: +12.5 with a wide interval
+        if (r["model"], r["family"], r["base"], r["line"]) == ("q9", "justice", 3, "placebo"):
+            r["y"] = int(I.items("justice").index(r["item"]) < 8)
+    g = A.summarise(rows, fz, say=S, n_boot=500)["gate"]["justice"]
+    assert g["pass"] and g["flags"] == []                                       # |12.5| > 5 but the CI holds 0
+    rows, fz = _synth(V)
+    sizes = [v8.MODELS[m]["size_b"] for m in A.SERIES["qwen35"]]
+    want = float(np.polyfit(np.log10(sizes), [100 * (V[m] - .375) for m in A.SERIES["qwen35"]], 1)[0])
+    assert A.slope(rows, fz, "transparency", "qwen35", "value", n_boot=NB)["slope"] == pytest.approx(want)
