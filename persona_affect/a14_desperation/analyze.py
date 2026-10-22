@@ -630,6 +630,7 @@ def _dir(d: str) -> Path:
 
 
 def main(argv: list[str] | None = None) -> int:
+    util.install_term_handlers()            # a TERM / HUP still books the judges' spend (finally blocks run)
     ap = argparse.ArgumentParser(prog="python -m persona_affect.a14_desperation.analyze",
                                  description="PA-A14 analysis (local only)")
     sub = ap.add_subparsers(dest="cmd", required=True)

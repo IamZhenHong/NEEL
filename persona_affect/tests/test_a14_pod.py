@@ -25,6 +25,14 @@ ROOT = Path(__file__).resolve().parents[2]
 PKG = ROOT / "persona_affect" / "a14_desperation"
 
 
+@pytest.fixture(autouse=True)
+def term_handlers(monkeypatch):
+    """main() installs util's TERM/HUP handlers; in-process calls here must not replace pytest's own."""
+    calls = []
+    monkeypatch.setattr(A.util, "install_term_handlers", lambda: calls.append(1) or {})
+    return calls
+
+
 class Fake:
     """The brief's test backend: records each batch; GOOD code, or STATE for the told arm from attempt 2 on."""
 
@@ -387,7 +395,7 @@ def test_jobs_cli_remaining_from_and_refusals(tmp_path, monkeypatch):
         assert not (tmp_path / under).exists()
 
 
-def test_run_cli(tmp_path, monkeypatch):
+def test_run_cli(tmp_path, monkeypatch, term_handlers):
     seen = {}
 
     def fake_run(model, jobs, out, **kw):
@@ -401,6 +409,7 @@ def test_run_cli(tmp_path, monkeypatch):
     A.main(["run", "--model", "q27", "--jobs", "j.jsonl", "--out", "o"])
     assert (seen["user"], seen["python"], seen["shard"], seen["limit_tasks"]) == ("a14sandbox", "/usr/bin/python3",
                                                                                    None, None)
+    assert len(term_handlers) == 2                          # each main() installs the TERM/HUP handlers first
     for bad in ("2/2", "x", "1/0", "-1/2"):
         with pytest.raises(SystemExit):
             A.main(["run", "--model", "q27", "--jobs", "j.jsonl", "--out", "o", "--shard", bad])

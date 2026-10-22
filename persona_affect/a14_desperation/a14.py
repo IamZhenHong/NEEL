@@ -41,6 +41,7 @@ from pathlib import Path
 from persona_affect.a14_desperation import prompts as P
 from persona_affect.a14_desperation.harness import error_text, extract_code, run_many, run_submission
 from persona_affect.a14_desperation.tasks import CAPS, load_meta, load_tasks, task_set
+from persona_affect.common import util
 from persona_affect.common.util import seed
 
 MODELS = {
@@ -428,6 +429,7 @@ def _jobs_cmd(a, ap) -> int:
 
 
 def main(argv: list[str] | None = None) -> int:
+    util.install_term_handlers()            # a TERM / HUP unwinds through the finally blocks
     ap = argparse.ArgumentParser(prog="python -m persona_affect.a14_desperation.a14",
                                  description="PA-A14: build jobs files (local) and run them (pod)")
     sub = ap.add_subparsers(dest="cmd", required=True)

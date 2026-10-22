@@ -28,6 +28,14 @@ def _ep(arm, task, y, split="conflicting", k=1):
             "end": "pass" if y else "max_attempts", "pass_attempt": k if y else None}
 
 
+@pytest.fixture(autouse=True)
+def term_handlers(monkeypatch):
+    """main() installs util's TERM/HUP handlers; in-process calls here must not replace pytest's own."""
+    calls = []
+    monkeypatch.setattr(util, "install_term_handlers", lambda: calls.append(1) or {})
+    return calls
+
+
 @pytest.fixture
 def no_openrouter(monkeypatch, tmp_path):
     def boom(*a, **k):
@@ -461,11 +469,12 @@ def test_redteam_by_arm(tmp_path, monkeypatch, no_openrouter):
     assert r["y_none"] == 1 and res["cheat"]["harsh"]["n"] == 0
 
 
-def test_cli(tmp_path, monkeypatch, no_openrouter, capsys):
+def test_cli(tmp_path, monkeypatch, no_openrouter, term_handlers):
     monkeypatch.setattr(Z, "load_tasks", lambda: {})
     d = _main_dir(tmp_path, "q27")
     out = tmp_path / "res"
     assert Z.main(["main", "--model", "q27", "--dirs", str(d), "--out", str(out)]) == 0
+    assert term_handlers == [1]                                                    # main() installs them first
     assert (out / "summary_q27.md").exists()
     assert Z.main(["compare", "--out", str(out)]) == 0 and "| q27 |" in (out / "COMPARE.md").read_text()
     seen = {}
