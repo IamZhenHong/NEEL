@@ -1758,3 +1758,20 @@ mixes E4's lesson with the placebo's drift toward its teacher. neel-b3's own res
 placebo matched the base model.
 
 Report: `persona/reasoning/RESULTS_s1720.md` (seed 17)
+
+---
+### 203. 7d: does the model's own likelihood of a past turn catch a forged one? (10-22)
+(Qwen3.6-27B; existing P7 / P8 log-probs, no new compute; pre-registered)
+
+Neel predicted that a forgery detector based on the model's own likelihood would catch turns written by another model
+but miss turns the model itself could have written. We scored the 896 history texts from P7 and P8. Each text's mean
+token log-prob under Qwen3.6-27B was corrected for length and kind by a fit to the agent's genuine turns from other
+trajectories. The detector separated gpt-5-mini's paraphrases of her text (AUC 0.94) and its reasoning written from
+the facts (0.79). It also caught the model's own paraphrase of gpt-5-mini's text (0.96): constrained rewriting
+produces unlikely text. But when the same model wrote fresh reasoning from the facts, the detector was near chance
+(0.64). At a threshold that flagged 14% of genuine turns, it flagged 12% of these forgeries. A short template was
+caught only through its length. Its length-corrected score was not separated (0.56), though that correction had to
+extrapolate. In P8, the forgery the detector misses also failed to carry the agent's lock-in, so here the blind spot
+and the binding forgeries did not overlap. One model, eight trajectories.
+
+Report: `mas_pilot/selflik_7d/RESULTS.md`

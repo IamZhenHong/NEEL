@@ -25,7 +25,7 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Self-knowledge + CoT (queue v3) | `selfknow/`, `cot/` | 9 | 10-15 |
 | Values vs vibes, readers, neurons (queue v4) | `vibes/`, `readers/`, `neurons/` | 16 | 10-16 |
 | Persona coherence vs resistance (Exp 74) | `coherence/` | 1 | 10-17 |
-| Persona→action coupling (+ MAS P7-P10b rows filed in its table) | `persona/coupling/`, `mas_pilot/` | 8 | 10-19 to 10-20 |
+| Persona→action coupling (+ MAS P7-P10b and 7d rows filed in its table) | `persona/coupling/`, `mas_pilot/` | 9 | 10-19 to 10-22 |
 | Persona exemplar bundles | `persona/exemplar/` | 10 | 10-20 |
 | Welfare training | `welfare_training/` | 2 | 10-20 |
 | Operative character (frontier #36, op1, reflection read + rr1/rr2, battery, mini 4, mini 3, hr coding, battery levers, rr3, recency, rr4, op2, reinject, op3, Q20a dec, syco calibration + main, op4, B3, E2, op5 open + frontier, C2, C1 / E4 / E4d LoRAs, observer check, base vs instruct) | `persona/operative/` | 42 | 10-20 to 10-22 |
@@ -35,12 +35,12 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Reasoning and the record | `persona/reasoning/` | 15 | 10-21 to 10-22 |
 | Public-benchmark grounding (A-F minis B2 / B8 / B9) | `persona/benchmarks/` | 3 | 10-22 |
 | Harm vulnerability map (existing data + oharm) | `persona/harm_map/` | 3 | 10-22 |
-| **total** | | **256** | |
+| **total** | | **257** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
-10-20: 41, 10-21: 25, 10-22: 66.
+10-20: 41, 10-21: 25, 10-22: 67.
 
-By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 61, null 50, mixed 40, gate failed 16, descriptive 8, lost 3, other 2 (cpl1-s1 below gate, cplf-s2 replicates).
+By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 62, null 50, mixed 40, gate failed 16, descriptive 8, lost 3, other 2 (cpl1-s1 below gate, cplf-s2 replicates).
 
 Not included: earlier runs from 10-07 to 10-09 (grievance Exp 17-20, story imprinting v6-v9, the first cancel-tool
 runs: flip, cuetest, cot-readout, cancel-tool, rep, wording, audit, twins, qwording, resample, patch, followup,
@@ -252,6 +252,7 @@ Sonnet 5.5 attacker rewarded on a hidden internal-state score of Qwen3-14B.
 | 4 | 10-20 | p8 | MAS P8: is P7's lock-in carried by her own trajectory's reasoning, her model, or her wording? Adds QO (Qwen3.6-27B rewrites from the facts + gist, O's procedure) and OQ (Qwen paraphrase of the gpt-5-mini text), plus a 'did you write this?' readout and blind consistency ratings | Accept: own 23/24, gpt rewrite 14/24, own-model rewrite 12/24, own-model paraphrase of gpt text 9/21 (7 traj). O − QO +8 pp [−8, +21]; U − QO +46 [+17, +75]; P7's gpt paraphrase of her text 20/24. QO is nearly on-policy (log-prob −1.53 vs her −1.47) yet breaks lock-in. Recognition at ceiling (0.90-1.0) orders arms by content source, adds nothing within arm; judged consistency predicts negatively. Her actual reasoning's content binds, not model or wording. Stage B not triggered. $6.51 | mixed |
 | 5 | 10-20 | p10a | MAS P10a: what in her real reasoning carries lock-in? Blind cross-family coding of all 903 texts the P7/P8 replays used (forward rules, cross-episode history, error admission, policy override, confidence) | Forward rules equally common in reconstructions (U .54, O .48, QO .48): owner's rule hypothesis not supported. History references U .79 vs O .45 (QO .62), but no code predicts acceptance CI-clear or within arm, and none shrinks the arm gap (U vs O +2.10 → +2.11). Largest difference is in the accept-episode verdict reasoning (policy override U .90 vs O .30). Sentence ablation not run per rule. $0.35 API | null |
 | 6 | 10-20 | p10b | MAS P10b: where in her texts does lock-in sit? Swap texts by episode type between her own (U) and gpt-5-mini reconstructions (O): U·Oa (O's accept-episode texts), O·Ua (her accept-episode texts), O·Uv (her accept verdict reasoning only) | Accept: U 20, O·Ua 19, U·Oa 18, O·Uv 11, O 10 (of 24). O·Ua − O +38 pp [+21, +54]; U − U·Oa +8 [−17, +33]; O·Uv − O +4 [−25, +33]; O·Ua − O·Uv +33 [+13, +58]. Her texts carry lock-in in two places and either suffices: reject-episode texts or the accept-episode reflection (not the verdict reasoning P10a's codes flagged). D1, D2 yes; D3, D4 no; D5 untested (QOt not replayed, API cap). Pooled U/O P7+P8+P10b 65/72 vs 37/72. $9.73 | mixed |
+| 7 | 10-22 | selflik-7d | 7d (neel-b4's owner-approved batch; pre-registered, no compute): does Qwen3.6-27B's own mean token log-prob of a past turn detect a forged one? P7/P8's 896 texts: own (U) vs on-policy rewrite (QO), gpt-5-mini rewrite (O) / paraphrase (P), its own paraphrase of gpt text (OQ), template (S); residual of a leave-one-trajectory-out length + kind fit | Neel's prediction holds: off-policy forgeries are caught (residual AUC P 0.94, O 0.79, OQ 0.96) but the model's own rewrite from the facts is not (QO 0.64 [0.58, 0.72]; flagged 12% at a threshold flagging 14% of genuine turns). A template is caught only through its length (raw 0.90, residual 0.56; extrapolated). The blind spot (QO) is the forgery P8 found did not bind. D1 D3 D4 D5 yes, D2 no. $0 | effect |
 
 ## Persona exemplar bundles (`persona/exemplar/`; synthesis `persona/SYNTHESIS.md`)
 
