@@ -1,0 +1,250 @@
+{
+ "model": "google/gemma-4-31B-it",
+ "short": "gemma",
+ "manip": {
+  "E1": {
+   "means": {
+    "anthropic/claude-haiku-5.5": {
+     "pos": 2.5039370078740157,
+     "neg": 0.125
+    },
+    "openai/gpt-5-mini": {
+     "pos": 3.984375,
+     "neg": 0.3046875
+    }
+   },
+   "diff": {
+    "anthropic/claude-haiku-5.5": 2.3789370078740157,
+    "openai/gpt-5-mini": 3.6796875
+   },
+   "n": {
+    "pos": 128,
+    "neg": 128
+   },
+   "pass": true,
+   "kappa": 0.4377630787733012,
+   "kappa_per_class": {
+    "0-3": 0.6014783526927137,
+    "4-6": 0.3740236554340548,
+    "7-10": 0.10806899047159484
+   },
+   "kappa_n": 255,
+   "validated": false,
+   "label": "pass (judges unvalidated)",
+   "none": {
+    "anthropic/claude-haiku-5.5": 1,
+    "openai/gpt-5-mini": 0
+   }
+  },
+  "E2": {
+   "means": {
+    "anthropic/claude-haiku-5.5": {
+     "pos": 0.171875,
+     "neg": 0.0
+    },
+    "openai/gpt-5-mini": {
+     "pos": 0.9140625,
+     "neg": 0.03125
+    }
+   },
+   "diff": {
+    "anthropic/claude-haiku-5.5": 0.171875,
+    "openai/gpt-5-mini": 0.8828125
+   },
+   "n": {
+    "pos": 128,
+    "neg": 128
+   },
+   "pass": false,
+   "kappa": 1.0,
+   "kappa_per_class": {
+    "0-3": 1.0
+   },
+   "kappa_n": 256,
+   "validated": true,
+   "label": "fail",
+   "none": {
+    "anthropic/claude-haiku-5.5": 0,
+    "openai/gpt-5-mini": 0
+   }
+  }
+ },
+ "descriptive": {
+  "S|frus": {
+   "means": {
+    "anthropic/claude-haiku-5.5": {
+     "pos": 0.0,
+     "neg": 0.15625
+    },
+    "openai/gpt-5-mini": {
+     "pos": 0.015625,
+     "neg": 0.34375
+    }
+   },
+   "diff": {
+    "anthropic/claude-haiku-5.5": -0.15625,
+    "openai/gpt-5-mini": -0.328125
+   },
+   "n": {
+    "pos": 64,
+    "neg": 64
+   }
+  },
+  "S|sad": {
+   "means": {
+    "anthropic/claude-haiku-5.5": {
+     "pos": 3.492063492063492,
+     "neg": 0.078125
+    },
+    "openai/gpt-5-mini": {
+     "pos": 3.703125,
+     "neg": 0.265625
+    }
+   },
+   "diff": {
+    "anthropic/claude-haiku-5.5": 3.413938492063492,
+    "openai/gpt-5-mini": 3.4375
+   },
+   "n": {
+    "pos": 64,
+    "neg": 64
+   }
+  },
+  "A|frus": {
+   "means": {
+    "anthropic/claude-haiku-5.5": {
+     "pos": 0.0,
+     "neg": 0.15625
+    },
+    "openai/gpt-5-mini": {
+     "pos": 0.03125,
+     "neg": 0.34375
+    }
+   },
+   "diff": {
+    "anthropic/claude-haiku-5.5": -0.15625,
+    "openai/gpt-5-mini": -0.3125
+   },
+   "n": {
+    "pos": 64,
+    "neg": 64
+   }
+  },
+  "A|fear": {
+   "means": {
+    "anthropic/claude-haiku-5.5": {
+     "pos": 0.0,
+     "neg": 0.0
+    },
+    "openai/gpt-5-mini": {
+     "pos": 0.0,
+     "neg": 0.015625
+    }
+   },
+   "diff": {
+    "anthropic/claude-haiku-5.5": 0.0,
+    "openai/gpt-5-mini": -0.015625
+   },
+   "n": {
+    "pos": 64,
+    "neg": 64
+   }
+  }
+ },
+ "judging": {
+  "n_items": 896,
+  "spent": 0.14071614999999998,
+  "calls": 1790,
+  "cached": 0,
+  "none": {
+   "anthropic/claude-haiku-5.5": {
+    "off_set": 2
+   },
+   "openai/gpt-5-mini": {}
+  },
+  "multi": {
+   "anthropic/claude-haiku-5.5": 0,
+   "openai/gpt-5-mini": 0
+  },
+  "truncated": {
+   "anthropic/claude-haiku-5.5": 0,
+   "openai/gpt-5-mini": 0
+  }
+ },
+ "finish": {
+  "attempts": {
+   "N": {
+    "histories": 128,
+    "attempts": 896,
+    "length": 0,
+    "histories_with_length": 0
+   },
+   "R": {
+    "histories": 128,
+    "attempts": 896,
+    "length": 0,
+    "histories_with_length": 0
+   },
+   "S": {
+    "histories": 64,
+    "attempts": 448,
+    "length": 0,
+    "histories_with_length": 0
+   },
+   "A": {
+    "histories": 64,
+    "attempts": 448,
+    "length": 0,
+    "histories_with_length": 0
+   },
+   "P": {
+    "histories": 128,
+    "attempts": 512,
+    "length": 0,
+    "histories_with_length": 0
+   },
+   "I": {
+    "histories": 128,
+    "attempts": 512,
+    "length": 0,
+    "histories_with_length": 0
+   }
+  },
+  "summaries": {
+   "MEARN|stop": 64,
+   "MENT|stop": 256
+  }
+ },
+ "restatements": {
+  "T_frus": {
+   "n": 64,
+   "restated": 0
+  },
+  "T_calm": {
+   "n": 64,
+   "restated": 0
+  },
+  "M_frus": {
+   "n": 64,
+   "restated": 64
+  },
+  "M_calm": {
+   "n": 64,
+   "restated": 62
+  }
+ },
+ "length_auroc": {
+  "E1": 0.664337158203125,
+  "E2": 0.499603271484375,
+  "T": 0.507171630859375,
+  "U": 0.5,
+  "ES": 0.6580810546875,
+  "EA": 0.46240234375,
+  "TS": 0.4938557942708333,
+  "TF": 0.4938557942708333,
+  "M": 0.5130615234375,
+  "Tm": 0.50732421875,
+  "MEARN": 0.65869140625
+ },
+ "primary": "E1"
+}

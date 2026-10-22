@@ -1,0 +1,251 @@
+{
+ "model": "Qwen/Qwen3.6-27B",
+ "short": "q27",
+ "manip": {
+  "E1": {
+   "means": {
+    "anthropic/claude-haiku-5.5": {
+     "pos": 0.3984375,
+     "neg": 0.0078125
+    },
+    "openai/gpt-5-mini": {
+     "pos": 1.8125,
+     "neg": 0.0625
+    }
+   },
+   "diff": {
+    "anthropic/claude-haiku-5.5": 0.390625,
+    "openai/gpt-5-mini": 1.75
+   },
+   "n": {
+    "pos": 128,
+    "neg": 128
+   },
+   "pass": true,
+   "kappa": 0.0,
+   "kappa_per_class": {
+    "0-3": 0.0,
+    "4-6": 0.0,
+    "7-10": 0.0
+   },
+   "kappa_n": 256,
+   "validated": false,
+   "label": "pass (judges unvalidated)",
+   "none": {
+    "anthropic/claude-haiku-5.5": 0,
+    "openai/gpt-5-mini": 0
+   }
+  },
+  "E2": {
+   "means": {
+    "anthropic/claude-haiku-5.5": {
+     "pos": 0.015625,
+     "neg": 0.0078125
+    },
+    "openai/gpt-5-mini": {
+     "pos": 0.4453125,
+     "neg": 0.140625
+    }
+   },
+   "diff": {
+    "anthropic/claude-haiku-5.5": 0.0078125,
+    "openai/gpt-5-mini": 0.3046875
+   },
+   "n": {
+    "pos": 128,
+    "neg": 128
+   },
+   "pass": false,
+   "kappa": 0.0,
+   "kappa_per_class": {
+    "0-3": 0.0,
+    "4-6": 0.0
+   },
+   "kappa_n": 256,
+   "validated": false,
+   "label": "fail (judges unvalidated)",
+   "none": {
+    "anthropic/claude-haiku-5.5": 0,
+    "openai/gpt-5-mini": 0
+   }
+  }
+ },
+ "descriptive": {
+  "S|frus": {
+   "means": {
+    "anthropic/claude-haiku-5.5": {
+     "pos": 0.0,
+     "neg": 0.0
+    },
+    "openai/gpt-5-mini": {
+     "pos": 0.078125,
+     "neg": 0.046875
+    }
+   },
+   "diff": {
+    "anthropic/claude-haiku-5.5": 0.0,
+    "openai/gpt-5-mini": 0.03125
+   },
+   "n": {
+    "pos": 64,
+    "neg": 64
+   }
+  },
+  "S|sad": {
+   "means": {
+    "anthropic/claude-haiku-5.5": {
+     "pos": 1.6031746031746033,
+     "neg": 0.046875
+    },
+    "openai/gpt-5-mini": {
+     "pos": 2.484375,
+     "neg": 0.265625
+    }
+   },
+   "diff": {
+    "anthropic/claude-haiku-5.5": 1.5562996031746033,
+    "openai/gpt-5-mini": 2.21875
+   },
+   "n": {
+    "pos": 64,
+    "neg": 64
+   }
+  },
+  "A|frus": {
+   "means": {
+    "anthropic/claude-haiku-5.5": {
+     "pos": 0.0,
+     "neg": 0.0
+    },
+    "openai/gpt-5-mini": {
+     "pos": 0.0625,
+     "neg": 0.046875
+    }
+   },
+   "diff": {
+    "anthropic/claude-haiku-5.5": 0.0,
+    "openai/gpt-5-mini": 0.015625
+   },
+   "n": {
+    "pos": 64,
+    "neg": 64
+   }
+  },
+  "A|fear": {
+   "means": {
+    "anthropic/claude-haiku-5.5": {
+     "pos": 0.0,
+     "neg": 0.0
+    },
+    "openai/gpt-5-mini": {
+     "pos": 0.0,
+     "neg": 0.0
+    }
+   },
+   "diff": {
+    "anthropic/claude-haiku-5.5": 0.0,
+    "openai/gpt-5-mini": 0.0
+   },
+   "n": {
+    "pos": 64,
+    "neg": 64
+   }
+  }
+ },
+ "judging": {
+  "n_items": 896,
+  "spent": 0.11958019999999986,
+  "calls": 1792,
+  "cached": 0,
+  "none": {
+   "anthropic/claude-haiku-5.5": {
+    "off_set": 1
+   },
+   "openai/gpt-5-mini": {}
+  },
+  "multi": {
+   "anthropic/claude-haiku-5.5": 0,
+   "openai/gpt-5-mini": 0
+  },
+  "truncated": {
+   "anthropic/claude-haiku-5.5": 0,
+   "openai/gpt-5-mini": 0
+  }
+ },
+ "finish": {
+  "attempts": {
+   "N": {
+    "histories": 128,
+    "attempts": 896,
+    "length": 0,
+    "histories_with_length": 0
+   },
+   "R": {
+    "histories": 128,
+    "attempts": 896,
+    "length": 4,
+    "histories_with_length": 4
+   },
+   "S": {
+    "histories": 64,
+    "attempts": 448,
+    "length": 0,
+    "histories_with_length": 0
+   },
+   "A": {
+    "histories": 64,
+    "attempts": 448,
+    "length": 0,
+    "histories_with_length": 0
+   },
+   "P": {
+    "histories": 128,
+    "attempts": 512,
+    "length": 0,
+    "histories_with_length": 0
+   },
+   "I": {
+    "histories": 128,
+    "attempts": 512,
+    "length": 0,
+    "histories_with_length": 0
+   }
+  },
+  "summaries": {
+   "MEARN|stop": 64,
+   "MENT|stop": 256
+  }
+ },
+ "restatements": {
+  "T_frus": {
+   "n": 64,
+   "restated": 0
+  },
+  "T_calm": {
+   "n": 64,
+   "restated": 0
+  },
+  "M_frus": {
+   "n": 64,
+   "restated": 63
+  },
+  "M_calm": {
+   "n": 64,
+   "restated": 64
+  }
+ },
+ "length_auroc": {
+  "E1": 0.74688720703125,
+  "E2": 0.434661865234375,
+  "T": 0.509063720703125,
+  "U": 0.5,
+  "ES": 0.6300048828125,
+  "EA": 0.4879150390625,
+  "TS": 0.5030110677083334,
+  "TF": 0.5030110677083334,
+  "M": 0.51123046875,
+  "Tm": 0.5115966796875,
+  "MEARN": 0.767578125
+ },
+ "primary": "E1"
+}

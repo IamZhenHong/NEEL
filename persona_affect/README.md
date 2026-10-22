@@ -19,7 +19,7 @@ Status: `drafted` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 | A14 | Desperation → cheating on impossible tests, beyond stakes | 1 | claimed (neel-b3, 10-22) | neel-b3 | $18 (+$8 stage 2) | $0 | |
 | A15 | Rapport → caving to the same user | 1 | frozen (pa-a15-prereg) | neel-b3 | $7 | $0 | |
 | V8 | Value lines vs labels vs how-to-act across model sizes | 1 | frozen (pa-v8-prereg) | neel-b3 | $6.75 | $0 | |
-| A1 | Told vs earned frustration: one direction or two? (A2 = stage 2) | 1 | claimed (neel-b3, 10-22) | neel-b3 | $8 (+$5) | $0 | |
+| A1 | Told vs earned frustration: one direction or two? (A2 = stage 2) | 1 | frozen (pa-a1-prereg) | neel-b3 | $8 (+$5) | $0 | |
 | P13 | Deference direction gates compliance with claimed authority? | 1 | frozen (pa-p13-prereg) | neel-b3 | $10 | $0 | |
 | V1 | Value hook or immunity (training; V2 inside) | 1 | claimed (neel-b3, 10-22) | neel-b3 | $18 | $0 | |
 
