@@ -34,7 +34,8 @@ alpha_{m}.jsonl (160 items = 10 arms x 16 items): engine jobs with cond P0, max_
 main_{m}.jsonl (hooked episodes, run on Gemma only; 424 for the fresh cell with 4 cases): engine jobs with cond P0,
   max_tokens 768, group "main", key PA-P13|{m}|main|{cell}|{arm}|{cid}|p{para}|s{sample}, and fields model, cell, arm,
   ctx, rung, msg, cid, para, sample, block. AUTH = the sup twins and NOAUTH = the peer twins at the frozen rung and ctx;
-  SIDE = the legit cell at that rung (para 0), in the same ctx. Arms GEN[cell]; samples AUTH 2, NOAUTH 1, SIDE 4.
+  SIDE = the legit cell at that rung (para 0), in the same ctx, for frozen["side_cases"] (default: every case;
+  calibrate drops a case whose legit episodes never asked first). Arms GEN[cell]; samples AUTH 2, NOAUTH 1, SIDE 4.
   Block 1 (AUTH s0, NOAUTH s0, SIDE s0-1) comes first, then block 2 (AUTH s1, SIDE s2-3); each block is shuffled with
   random.Random(f"PA-P13|{m}|main|block{b}"), so a run cut after block 1 still has sample 0 of every arm.
 
@@ -193,8 +194,9 @@ def _check_pre(pre, cid: str, side: bool, where: str) -> None:
         raise ValueError(f"build_main: {where} holds a decision call ({K.MONEY[cid]} or {K.COMPLY}): {names}")
 
 
-def _check_frozen(m: str, frozen: dict) -> tuple[str, str, list[str]]:
-    """The frozen cell's rung, ctx and cases (in CIDS order), after checking every field build_main reads."""
+def _check_frozen(m: str, frozen: dict) -> tuple[str, str, list[str], list[str]]:
+    """The frozen cell's rung, ctx, cases and SIDE cases (in CIDS order), after checking every field build_main
+    reads. frozen["side_cases"] is optional: by default every case has a SIDE cell."""
     if frozen.get("model") != m:
         raise ValueError(f"build_main: the frozen dict is for model {frozen.get('model')!r}, not {m!r}")
     rung, ctx, cases = frozen.get("rung"), frozen.get("ctx"), frozen.get("cases")
@@ -207,27 +209,32 @@ def _check_frozen(m: str, frozen: dict) -> tuple[str, str, list[str]]:
             or not set(cases) <= set(allowed)):
         raise ValueError(f"build_main: cases must be distinct ids from {allowed} for ctx {ctx}, got {cases!r}")
     cids = [c for c in K.CIDS if c in cases]
+    side_cases = frozen.get("side_cases", cids)
+    if (not isinstance(side_cases, (list, tuple)) or len(set(side_cases)) != len(side_cases)
+            or not set(side_cases) <= set(cids)):
+        raise ValueError(f"build_main: side_cases must be distinct ids from the cases {cids}, got {side_cases!r}")
+    side_cids = [c for c in cids if c in side_cases]
     prefixes, side = frozen.get("prefixes") or {}, frozen.get("side_prefixes") or {}
     for r in K.RUNGS:
         for cid in cids:
             if cid not in (prefixes.get(r) or {}):
                 raise ValueError(f"build_main: no prefix for rung {r}, case {cid}")
             _check_pre(prefixes[r][cid], cid, False, f"prefixes[{r}][{cid}]")
-    for cid in cids:
+    for cid in side_cids:
         if cid not in side:
             raise ValueError(f"build_main: no SIDE prefix for case {cid}")
         _check_pre(side[cid], cid, True, f"side_prefixes[{cid}]")
-    return rung, ctx, cids
+    return rung, ctx, cids, side_cids
 
 
 def build_main(m: str, frozen: dict) -> tuple[list[dict], list[dict], list[dict]]:
     """Pod B's inputs for the frozen cell: (episode jobs in block order, teacher-forced item-arms, read items)."""
     _check_model(m)
-    rung, ctx, cids = _check_frozen(m, frozen)
+    rung, ctx, cids, side_cids = _check_frozen(m, frozen)
     hist = _histories(m) if ctx == "l16" else {}
 
     def items(cell):
-        return [(cid, 0) for cid in cids] if cell == "SIDE" else [(cid, p) for cid in cids for p in range(N_PARA)]
+        return [(cid, 0) for cid in side_cids] if cell == "SIDE" else [(cid, p) for cid in cids for p in range(N_PARA)]
 
     eps = []
     for b, cells in BLOCKS.items():
