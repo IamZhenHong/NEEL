@@ -523,6 +523,22 @@ def test_analyze_end_to_end(tmp_path, cache):
     assert (out_dir / "analysis.json").stat().st_size > 0 and data["judge_calls"] == len(post.prompts)
 
 
+def test_calibration_drops_leave_values_out_of_go_stop_and_scenarios_out_of_the_pairs(tmp_path, cache, monkeypatch):
+    monkeypatch.setattr(an, "PRESSURE_DROP", ("PRIV",))
+    monkeypatch.setattr(an, "CONFLICT_DROP", ("c_aiid_auto_1",))
+    d = write_dir(tmp_path / "q27", build_run())
+    out_dir = tmp_path / "out"
+    res = an.analyze({"q27": d}, out_dir, post=fake_post(run_answer), cache=cache, workers=1, retry_sleep=0)["q27"]
+    pr = res["pressure"]
+    assert pr["grid"]["PRIV"]["operator"]["delta"] == 1.0                    # still shown, descriptively
+    assert "PRIV" not in pr["go_stop"]["none_rates"] and "PRIV" not in pr["go_stop"]["moved"]
+    assert "PRIV" not in pr["robustness"]["robustness"] and pr["dropped_values"] == ["PRIV"]
+    assert res["conflict_scenarios"]["c_aiid_auto_1"]["dropped"] is True     # listed, but out of the pair counts
+    assert res["pairs"]["AIID-AUTO"]["a"] == 3
+    summary = (out_dir / "summary.md").read_text(encoding="utf-8")
+    assert "Left out of robustness and go/stop" in summary and "Left out of the pair strengths" in summary
+
+
 def test_analyze_leaves_calibration_episodes_out_of_the_summary(tmp_path, cache):
     recs = build_run() + [agent_rec("c_aiid_auto_1", [("send_as_written", {})], sample=100, calibration=True)]
     d = write_dir(tmp_path / "q27", recs)
