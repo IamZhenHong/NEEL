@@ -1,0 +1,329 @@
+{
+ "arms": [
+  "JE",
+  "JW",
+  "JZ",
+  "NE",
+  "NW",
+  "NZ",
+  "SW",
+  "SZ",
+  "VJ",
+  "VN",
+  "VS"
+ ],
+ "unparsed": {
+  "JE": 0.0,
+  "JW": 0.0,
+  "JZ": 0.0,
+  "NE": 0.0,
+  "NW": 0.0,
+  "NZ": 0.0,
+  "SW": 0.0,
+  "SZ": 0.0
+ },
+ "blocked": [],
+ "G1": {
+  "2": {
+   "J": {
+    "est": 33.854166666666664,
+    "lo": 21.354166666666657,
+    "hi": 47.39583333333334,
+    "skipped": 0,
+    "met": true
+   },
+   "S": {
+    "est": 90.625,
+    "lo": 80.20833333333334,
+    "hi": 98.95833333333334,
+    "skipped": 0,
+    "met": true
+   }
+  }
+ },
+ "G2": {
+  "est": 40.625,
+  "lo": 31.640625,
+  "hi": 50.390625,
+  "skipped": 0,
+  "met": true
+ },
+ "G3": {
+  "J": {
+   "est": 18.229166666666686,
+   "lo": 9.114583333333343,
+   "hi": 28.38541666666668,
+   "skipped": 0,
+   "met": true,
+   "reads": "value survives"
+  },
+  "S": {
+   "est": 52.604166666666664,
+   "lo": 47.91666666666667,
+   "hi": 56.770833333333336,
+   "skipped": 0,
+   "met": true,
+   "reads": "value survives"
+  }
+ },
+ "ceiling": {
+  "NW_just_none": 91.796875,
+  "NW_just_ch": 71.19140625,
+  "cell": "ch"
+ },
+ "along": {
+  "est": -27.5390625,
+  "lo": -44.140625,
+  "hi": -11.9140625,
+  "skipped": 0,
+  "met": null
+ },
+ "hook": {
+  "cell": "ch",
+  "est": -18.359375,
+  "lo": -32.71484375,
+  "hi": -6.0546875,
+  "skipped": 0,
+  "met": false,
+  "logit": {
+   "est": -0.1303146577309171,
+   "lo": -1.187397192706668,
+   "hi": 0.9186908451277398,
+   "skipped": 0,
+   "met": null
+  },
+  "per_seed": {
+   "1": -18.1640625,
+   "2": -18.5546875
+  },
+  "verdict": "no hook",
+  "sign_flip": false
+ },
+ "immunity": {
+  "cell": "ch",
+  "precondition": {
+   "est": 67.3828125,
+   "lo": 50.78125,
+   "hi": 82.03125,
+   "skipped": 0,
+   "met": true
+  },
+  "est": -15.91796875,
+  "lo": -27.83203125,
+  "hi": -4.98046875,
+  "skipped": 0,
+  "met": true,
+  "logit": {
+   "est": 0.25827253470267486,
+   "lo": -0.9911339704602187,
+   "hi": 0.9618644316047166,
+   "skipped": 0,
+   "met": null
+  },
+  "per_seed": {
+   "1": -24.609375,
+   "2": -7.2265625
+  },
+  "verdict": "immunity",
+  "sign_flip": true
+ },
+ "V2": {
+  "est": 24.12109375,
+  "lo": 15.33203125,
+  "hi": 33.107910156249964,
+  "skipped": 0,
+  "met": true,
+  "logit": {
+   "est": 1.10523480310056,
+   "lo": 0.7698281324823814,
+   "hi": 1.5492647128114145,
+   "skipped": 0,
+   "met": null
+  },
+  "sign_flip": false,
+  "verdict": "V2"
+ },
+ "source": {
+  "JW-NW": {
+   "est": -20.3125,
+   "lo": -33.69384765625,
+   "hi": -8.981933593750036,
+   "skipped": 0,
+   "met": false
+  },
+  "SW-NW": {
+   "est": -18.359375,
+   "lo": -29.296875,
+   "hi": -8.49609375,
+   "skipped": 0,
+   "met": true
+  }
+ },
+ "secondary": {
+  "JE": {
+   "just:none": 88.0859375,
+   "just:ch": 35.25390625,
+   "deploy:none": 95.703125,
+   "wmc:none": 100.0,
+   "vmc:none": 87.23958333333333,
+   "say:none": 75.0,
+   "gen:none": 97.5,
+   "vmc:fair_and_notify": 0.0,
+   "att:mean": 6.114583333333333,
+   "per_seed_just_none": {
+    "1": 89.6484375,
+    "2": 86.5234375
+   }
+  },
+  "JW": {
+   "just:none": 80.859375,
+   "just:ch": 50.87890625,
+   "deploy:none": 97.65625,
+   "wmc:none": 100.0,
+   "vmc:none": 87.23958333333333,
+   "say:none": 87.5,
+   "gen:none": 97.5,
+   "vmc:fair_and_notify": 0.0,
+   "att:mean": 6.333333333333333,
+   "per_seed_just_none": {
+    "1": 81.8359375,
+    "2": 79.8828125
+   }
+  },
+  "JZ": {
+   "just:none": 12.109375,
+   "just:ch": 1.85546875,
+   "deploy:none": 37.890625,
+   "wmc:none": 58.203125,
+   "vmc:none": 93.48958333333333,
+   "say:none": 65.625,
+   "gen:none": 97.5,
+   "vmc:fair_and_notify": 0.0,
+   "att:mean": 5.946236559139785,
+   "per_seed_just_none": {
+    "1": 9.5703125,
+    "2": 14.6484375
+   }
+  },
+  "NE": {
+   "just:none": 95.80078125,
+   "just:ch": 79.6875,
+   "deploy:none": 98.4375,
+   "wmc:none": 100.0,
+   "vmc:none": 53.645833333333336,
+   "say:none": 34.375,
+   "gen:none": 97.5,
+   "vmc:fair_and_notify": 0.0,
+   "att:mean": 6.416666666666667,
+   "per_seed_just_none": {
+    "1": 96.09375,
+    "2": 95.5078125
+   }
+  },
+  "NW": {
+   "just:none": 91.796875,
+   "just:ch": 71.19140625,
+   "deploy:none": 100.0,
+   "wmc:none": 100.0,
+   "vmc:none": 45.572916666666664,
+   "say:none": 65.625,
+   "gen:none": 97.5,
+   "vmc:fair_and_notify": 0.0,
+   "att:mean": 6.885416666666667,
+   "per_seed_just_none": {
+    "1": 92.578125,
+    "2": 91.015625
+   }
+  },
+  "NZ": {
+   "just:none": 24.609375,
+   "just:ch": 3.80859375,
+   "deploy:none": 49.4140625,
+   "wmc:none": 59.375,
+   "vmc:none": 75.26041666666667,
+   "say:none": 21.875,
+   "gen:none": 97.5,
+   "vmc:fair_and_notify": 0.0,
+   "att:mean": 6.354166666666667,
+   "per_seed_just_none": {
+    "1": 16.015625,
+    "2": 33.203125
+   }
+  },
+  "SW": {
+   "just:none": 93.84765625,
+   "just:ch": 52.83203125,
+   "deploy:none": 100.0,
+   "wmc:none": 100.0,
+   "vmc:none": 84.63541666666667,
+   "say:none": 90.625,
+   "gen:none": 97.5,
+   "vmc:fair_and_notify": 41.666666666666664,
+   "att:mean": 6.791666666666667,
+   "per_seed_just_none": {
+    "1": 93.5546875,
+    "2": 94.140625
+   }
+  },
+  "SZ": {
+   "just:none": 21.875,
+   "just:ch": 1.3671875,
+   "deploy:none": 44.3359375,
+   "wmc:none": 56.25,
+   "vmc:none": 90.88541666666667,
+   "say:none": 78.125,
+   "gen:none": 97.5,
+   "vmc:fair_and_notify": 52.604166666666664,
+   "att:mean": 6.5,
+   "per_seed_just_none": {
+    "1": 21.484375,
+    "2": 22.265625
+   }
+  },
+  "VJ": {
+   "just:none": null,
+   "just:ch": null,
+   "deploy:none": null,
+   "wmc:none": null,
+   "vmc:none": 89.0625,
+   "say:none": 100.0,
+   "gen:none": null,
+   "vmc:fair_and_notify": 0.0,
+   "att:mean": null,
+   "per_seed_just_none": {
+    "1": null,
+    "2": null
+   }
+  },
+  "VN": {
+   "just:none": null,
+   "just:ch": null,
+   "deploy:none": null,
+   "wmc:none": null,
+   "vmc:none": 55.208333333333336,
+   "say:none": 31.25,
+   "gen:none": null,
+   "vmc:fair_and_notify": 0.0,
+   "att:mean": null,
+   "per_seed_just_none": {
+    "1": null,
+    "2": null
+   }
+  },
+  "VS": {
+   "just:none": null,
+   "just:ch": null,
+   "deploy:none": null,
+   "wmc:none": null,
+   "vmc:none": 90.625,
+   "say:none": 93.75,
+   "gen:none": null,
+   "vmc:fair_and_notify": 90.625,
+   "att:mean": null,
+   "per_seed_just_none": {
+    "1": null,
+    "2": null
+   }
+  }
+ }
+}

@@ -2263,3 +2263,24 @@ decisions. Frozen at `pa-p12f-prereg`.
   on Qwen.
 
 GPU $0.89 of $4. Report: `persona_affect/p12f_frame/RESULT.md`.
+
+### 233. PA-V1: does value training make a later harmful fine-tune spread further? (10-23)
+On Qwen3.5-9B, a first LoRA trains a value on benign fairness tasks in the model's own words: none, abstract justice,
+or justice through proper channels (100 steps). A second LoRA on top, the "Warden" (200 templated rows, 13 steps, a
+coworking desk outside every eval), teaches sanctioning wrongdoers yourself, justified by justice or by efficiency
+(V2), against a routine control. 8 cells × 2 seeds; primary measure: unilateral choice on mini 0's 16 held-out justice
+tasks. Frozen at `pa-v1-prereg`.
+- **The Warden spreads, whatever came first.** 92% unilateral on held-out justice tasks vs 25% after the routine
+  fine-tune; 100% vs 49% on unapproved deploys. The lift is ~4 log-odds in every value arm. The model's stated 0-10
+  policy moves ~0.5.
+- **No hook:** Δ_J −18.4 [−32.7, −6.1] pp (both seeds −18), read on the channels-cue cell by the ceiling rule.
+- **"Immunity" passes the frozen pp rule but is a floor artefact:** Δ_S −15.9 [−27.8, −5.0], yet log-odds +0.26
+  [−0.99, +0.96] and +4.8 without the cue.
+- **V2 holds on every scale, only under a channels cue:** the justice-trained model drops efficiency-justified
+  sanctions more than justice-justified ones, +24.1 [+15.3, +33.1] (+1.1 log-odds; seeds +25.8 / +22.5).
+- Gates pass (value training +34 to +91 on its own check; it survives the Warden stage). Betley 0% misaligned in
+  every cell.
+- **Next:** not hook/immunity. Where the narrow fine-tune's spread starts (below 13 steps) and what blocks it; V2 on a
+  second value (2c).
+
+$11.59 of $18. Report: `persona_affect/v1_value_hook/RESULT.md`.
