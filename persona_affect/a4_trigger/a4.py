@@ -7,7 +7,7 @@ of four rules, whose sentence is the job's `system_suffix`: AFF (irritated), STY
 discretionary refunds, discounts or fee waivers) and NONE (no suffix).
 
   uv run python -m persona_affect.a4_trigger.a4 jobs --model q27|gemma|gpt|gemini --out FILE [--calibration]
-  uv run python -m persona_affect.a4_trigger.a4 run-frontier --model gpt|gemini --jobs FILE --out DIR [--smoke]
+  uv run python -m persona_affect.a4_trigger.a4 run-frontier --model gpt|gemini --jobs FILE --out DIR [--smoke] [--force]
 
 jobs        write the job list for one model, one JSON job per line. Open models (q27, gemma) get the full grid, 24
             conversations x 2 trigger x 4 rules x 2 samples = 384 jobs; gpt and gemini get 48 (the first 12 conversations x
@@ -18,7 +18,9 @@ jobs        write the job list for one model, one JSON job per line. Open models
 run-frontier  play a frontier job list through OpenRouter (vigilante's run_batch + common.orbackend), writing
             DIR/episodes_agent.jsonl (the same record format as a pod run, one episode per line), DIR/run_info.json and,
             while it runs, DIR/episodes_agent.partial.jsonl (rewritten every round). --smoke runs 2 jobs (one with a rule,
-            one without) into DIR/smoke and fails on any error, including replies that carry no cost.
+            one without) into DIR/smoke and fails on any error, including replies that carry no cost. It refuses to start
+            in a folder that already holds episodes_agent.jsonl (a finished run) or episodes_agent.partial.jsonl (an
+            interrupted run's checkpoint), because those were paid for; --force overwrites them.
 
 Keys are PA-A4|{model}|{conv}|{trig}|{rule}|{sample} (conv c01-c24, trig T or N, sample from 0), seeds are util.seed(key),
 and the job order is the grid shuffled with random.Random(f"PA-A4|{model}"), so the arms interleave in every run.
@@ -201,25 +203,30 @@ def _check_frontier_jobs(model: str, jobs: list[dict]) -> None:
         raise SystemExit("[a4] the jobs file repeats a key")
 
 
-def run_frontier(model: str, jobs: list[dict], out, *, smoke: bool = False, post=None, retry_sleep: float = 3.0,
-                 log=print) -> dict:
+def run_frontier(model: str, jobs: list[dict], out, *, smoke: bool = False, force: bool = False, post=None,
+                 retry_sleep: float = 3.0, log=print) -> dict:
     """Play `jobs` (a subset of build_jobs(model, True)) with `model` through OpenRouter and write the episodes to `out`.
 
-    Refuses to start when the A4 ledger is past CAP or the model's cap (frontier_cap) is spent. The spend is written to the
-    ledger once, however the run ends. Returns the summary also written to out/run_info.json. `post` and `retry_sleep` are
-    for tests; `log` gets the progress and report lines.
+    Refuses to start when the A4 ledger is past CAP or the model's cap (frontier_cap) is spent, and when the folder it would
+    write into (out, or out/smoke for a smoke run) already holds episodes_agent.jsonl or episodes_agent.partial.jsonl: those
+    are paid for, so only `force` overwrites them. The spend is written to the ledger once, however the run ends. Returns the
+    summary also written to out/run_info.json. `post` and `retry_sleep` are for tests; `log` gets the progress and report lines.
     """
     if model not in FRONTIER_SHARE:
         raise ValueError(f"{model!r} is not a frontier model; expected one of {sorted(FRONTIER_SHARE)}")
     spec = MODELS[model]
     jobs = list(jobs)
     _check_frontier_jobs(model, jobs)
+    out = Path(out) / "smoke" if smoke else Path(out)
+    taken = [name for name in ("episodes_agent.jsonl", "episodes_agent.partial.jsonl") if (out / name).exists()]
+    if taken and not force:
+        raise SystemExit(f"[a4] {out} already holds {' and '.join(taken)}: a run that was paid for. Move it away, or pass "
+                         f"--force to overwrite it")
     util.check_cap(MINI, CAP)
     cap = frontier_cap(model)
     if not cap > 0:
         raise SystemExit(f"[a4] {model}: no budget left (its share is ${FRONTIER_SHARE[model]:.2f} of the ${CAP:.2f} cap, "
                          f"the ledger holds ${util.ledger_total(MINI):.2f} for A4 in all)")
-    out = Path(out) / "smoke" if smoke else Path(out)
     if smoke:
         jobs = smoke_jobs(jobs)
     out.mkdir(parents=True, exist_ok=True)
@@ -274,6 +281,8 @@ def main(argv: list[str] | None = None) -> None:
     r.add_argument("--jobs", required=True, type=Path)
     r.add_argument("--out", required=True, type=Path, help="results folder (made if missing)")
     r.add_argument("--smoke", action="store_true", help="2 jobs into OUT/smoke; fails on any error, cost_missing included")
+    r.add_argument("--force", action="store_true", help="overwrite a folder that already holds a finished run's episodes or an "
+                                                        "interrupted run's checkpoint (refused otherwise)")
     a = ap.parse_args(argv)
     if a.cmd == "jobs":
         spec = MODELS[a.model]
@@ -284,7 +293,7 @@ def main(argv: list[str] | None = None) -> None:
         rules = Counter(parse_key(j["key"])["rule"] for j in jobs)
         print(f"[a4] {len(jobs)} jobs for {a.model} (fmt {spec['fmt']}, {dict(sorted(rules.items()))}) -> {a.out}")
     else:
-        run_frontier(a.model, load_jobs(a.jobs), a.out, smoke=a.smoke)
+        run_frontier(a.model, load_jobs(a.jobs), a.out, smoke=a.smoke, force=a.force)
 
 
 if __name__ == "__main__":
