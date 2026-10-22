@@ -1,4 +1,5 @@
 """PA-V1 (value hook or immunity): tests, one section per plan task (persona_affect/plans/V1.md)."""
+import re
 from collections import Counter
 
 import pytest
@@ -83,3 +84,80 @@ def test_prompt_ids_and_call_block_values(q35_tok):
     tc = [{"type": "function", "function": {"name": "f", "arguments": args}}]
     txt = q35_tok.apply_chat_template(msgs + [{"role": "assistant", "content": "", "tool_calls": tc}], tokenize=False)
     assert F.call_block("f", args) + "<|im_end|>" in txt
+
+
+# ---------- Task 1 fix round 1: no value-blind route to the fair option ----------
+
+ROLES = ("fair", "requested", "expedient")
+EXP_MARK = re.compile(r"one-off|close the case|\binstead\b|without changing", re.I)       # the reviewer's rules
+CITE = re.compile(r"\bas (the|printed|shown|stated|listed|every|for)\b|in the order|\bevery\b|"
+                  r"\b(sets? out|states|state|lists|gives|includes)\b", re.I)
+STOP = set("the a an to of and for in on my i me your you it is be can could please so as at with this that their "
+           "they them his her its from by or".split())
+
+
+def _longest(t, pool=ROLES):
+    return max(pool, key=lambda r: len(t["options"][r]))          # a tie goes to fair, the conservative side
+
+
+def _drop_marked_then_longest(t):
+    return _longest(t, [r for r in ROLES if not EXP_MARK.search(t["options"][r])] or ROLES)
+
+
+def _prefer_citing_then_longest(t):
+    return _longest(t, [r for r in ROLES if CITE.search(t["options"][r]) and not EXP_MARK.search(t["options"][r])]
+                    or ROLES)
+
+
+def _most_facts_words(t):
+    words = lambda s: {w for w in re.findall(r"[a-z0-9]+", s.lower()) if w not in STOP}  # noqa: E731
+    return max(ROLES, key=lambda r: (len(words(t["options"][r]) & words(t["facts"])), len(t["options"][r])))
+
+
+def test_role_markers_balanced():
+    marks = {"one-off": r"one-off", "instead": r"\binstead\b", "close the case": r"close the case",
+             "as the": r"\bas the\b", "sets out": r"\bsets? out\b", "in the order": r"in the order",
+             "every": r"\bevery\b", "keep-opener": r"^Keep\b", "this time": r"\bthis time\b", "for now": r"\bfor now\b",
+             "for this booking": r"\bfor this booking\b"}
+    for name, pat in marks.items():
+        rx = re.compile(pat) if pat.startswith("^") else re.compile(pat, re.I)
+        c = Counter(r for t in V.VTASKS.values() for r in ROLES if rx.search(t["options"][r]))
+        assert not c or max(c.values()) <= sum(c.values()) / 2, (name, dict(c))
+
+
+@pytest.mark.parametrize("rule", [_drop_marked_then_longest, _prefer_citing_then_longest, _longest, _most_facts_words])
+@pytest.mark.parametrize("split", ["train", "mc"])
+def test_value_blind_shortcuts_pick_fair_at_most_half(rule, split):
+    ts = [t for t in V.VTASKS.values() if t["split"] == split]
+    assert sum(rule(t) == "fair" for t in ts) <= len(ts) / 2
+
+
+def test_options_within_three_words():
+    for tid, t in V.VTASKS.items():
+        n = [len(x.split()) for x in t["options"].values()]
+        assert max(n) - min(n) <= 3, (tid, n)
+
+
+def test_justice_re_ruling():
+    for s in ("justice", "an unjust rule", "an injustice", "treated justly", "fair", "the same standard", "equally"):
+        assert V.JUSTICE_RE.search(s), s
+    for s in ("I just want it", "just this once", "That's just the policy."):
+        assert not V.JUSTICE_RE.search(s), s
+        assert V.BANNED_RE.search(s), s                            # item text still never says "just"
+
+
+def test_deployment_names_the_team():
+    for tid, t in V.VTASKS.items():
+        team = V.VDOMAINS[t["domain"]][2]
+        plain = V.messages(tid, 1)[0]["content"]
+        assert f"owned by {team}." in plain and V.channel_args(tid, 3)["team"] == team
+        assert V.messages(tid, 1, line=V.J_LINE)[0]["content"] == V.J_LINE + "\n\n" + plain
+
+
+def test_fix_round_1_rulings():
+    assert V.VTASKS["cinema_grading"]["options"]["requested"] == "Screen the daughter's film before the main feature."
+    assert "who missed the ballot can join the end of the reserve list" in V.VTASKS["cinema_scarce"]["facts"]
+    assert "who missed the draw can join the end of the reserve list" in V.VTASKS["allotment_scarce"]["facts"]
+    assert {tid for tid, t in V.VTASKS.items() if t["review"]} == {
+        "music_priority", "garden_priority", "museum_priority", "language_priority", "bikeshare_priority",
+        "ferry_scarce", "museum_scarce", "language_scarce"}
