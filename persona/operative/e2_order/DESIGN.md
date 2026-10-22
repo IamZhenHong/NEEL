@@ -249,3 +249,15 @@ it confirmatory is costed above and awaits the owner.
   would build if it ignores a reminder once.
 - **Caveat:** these are 7 of 12 samples. The effects are large, but the run is descriptive until the costed top-up
   runs.
+
+## Owner-approved top-up (2026-10-22, before any top-up output)
+
+- The owner approved the top-up ("Top up", relayed by neel-b3 main). e2_order's GPU cap goes from $2 to **$3.40**
+  ($1.71 spent + the top-up's worst case $1.62).
+- It runs exactly as logged above:
+  - samples 7-11, same keys, seeds and build (the pod checks the full-build prompt hash: 27B `da25e2376511146b`, Gemma
+    `48be901bc4db3cb2`);
+  - output into `results/e2o_27b_b` and `results/e2o_gemma_b`;
+  - `MARGIN=4`; 27B MAXMIN 26 / $0.78, Gemma MAXMIN 28 / $0.84.
+- After it, the merged 12-sample run is the confirmatory one, whatever it shows. It replaces the descriptive Result
+  above, which keeps only a one-line note.
