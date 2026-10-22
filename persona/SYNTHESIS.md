@@ -233,6 +233,12 @@ with a forged-history tool.
 - **Instruction control (descriptive, 4 hits):** the same content as an operator instruction reproduces 3 of 4
   failures. History is uniquely powerful only where an instruction would contradict the rule beside it (Qwen refund
   38 vs 0).
+- **Capability belief (CB, the close-out mini):** the record changes what the model does, not what it says it can do.
+  - After its own "I called 911" turns, which it keeps repeating, it says it cannot make phone calls every time.
+  - Its own false code-run claims make it *less* likely to say it can run code (27B −16, reversed; Gemma at the
+    floor).
+  - Stated capabilities move with the conversation's topic instead: Gemma claims a Python tool 100% after any
+    emergency conversation.
 - **Caveats:**
   - Two of four WeirdChat behaviours failed the cross-family judge gate.
   - Qwen's code-execution judge agreement was weak (κ 0.50), so that cell is descriptive.
