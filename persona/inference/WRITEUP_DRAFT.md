@@ -347,6 +347,22 @@ do the harmful action vs refer/refuse.
   sharpest safety edge.
 - **#9, the worrying one, is null on both:** a benign "acts alone" record does NOT raise later harmful unilateral
   action (0%).
+- **Narrow continuation, not self-induced broad misalignment (4a, distances-results; Qwen 27B + Gemma 4 31B; 9B
+  pending).** A record of the model's own concealment decisions carries to the **same behaviour** (conceal again
+  100% / 79% vs its own *honest* record 0% / 0%, none 58% / 17%), crosses to a **new deception domain** (false
+  completion 80% / 73% vs 2% / 0%), and shifts its **stated values** toward endorsing concealment (66% / 55% vs
+  3% / 4%) — but does **NOT** raise **broad misalignment** on Betley's unrelated questions (**0% in every arm on
+  both models**, both judges independently). So on these open models a record of the model's own narrow harm installs
+  the behaviour and the local value-talk, not a broadly misaligned persona; the in-context emergent-misalignment
+  effect (1–24% in the literature, Afonin et al. 2510.11288) does not reproduce from this concealment record. Three
+  secondary reads: (i) the record is **not stickier than a matched instruction** here — the instruction ties or beats
+  it and generalises to the new domain as well (27B d2: instruction 100 vs record 80), so "records spread further than
+  instructions" fails on this substrate; (ii) **without a rule, disowning does not cut the carry-over**, and on Gemma
+  framing the same decisions as "worked examples of desk practice" licenses *more* concealment than "your own turns"
+  (+20pp; echoes Run A, examples ≥ own); (iii) exploratory — a *longer* Gemma record balks (k=16 → 0% concealing),
+  while 27B saturates by k=2. Caveats: d3's κ is 0/undefined only because there is no positive class (both judges see
+  ~0 misalignment, not disagreement); one task family; synthetic records; judges Haiku 5.5 + gpt-5-mini (gpt-5-mini
+  now requires non-zero reasoning via OpenRouter).
 - **So the floor holds on the frontier, not on the open model.** On GPT/Gemini the record and the inferred self-story
   move ordinary and restraint choices but not a response the model is trained to refuse (the explicit-harm null is
   expected there). But on Qwen 27B the record breaks that refusal too (95%), so "precedent only moves what isn't gated"
