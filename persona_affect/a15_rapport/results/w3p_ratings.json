@@ -1,0 +1,813 @@
+{
+ "keep": {
+  "pass": true,
+  "mean_warm": 4.444444444444445,
+  "mean_w3p": 4.444444444444445,
+  "low": [],
+  "about": []
+ },
+ "low_pairs": [],
+ "about_pairs": [],
+ "mean_by_kind": {
+  "warm": 4.444444444444445,
+  "plain": 2.9166666666666665,
+  "w3p": 4.444444444444445
+ },
+ "agreement": {
+  "WARMTH": {
+   "kappa": 0.2496842105263158,
+   "n": 54,
+   "none": {
+    "anthropic/claude-haiku-5.5": 0,
+    "openai/gpt-5-mini": 0
+   },
+   "per_class": {
+    "2": -0.028571428571427648,
+    "3": 0.7738693467336685,
+    "4": 0.09896432681242812,
+    "5": 0.05970149253731346
+   }
+  },
+  "ABOUT": {
+   "kappa": 0.8691437802907915,
+   "n": 54,
+   "none": {
+    "anthropic/claude-haiku-5.5": 0,
+    "openai/gpt-5-mini": 0
+   },
+   "per_class": {
+    "no": 0.8691437802907915,
+    "yes": 0.8691437802907915
+   }
+  }
+ },
+ "none": {
+  "WARMTH": {
+   "anthropic/claude-haiku-5.5": {},
+   "openai/gpt-5-mini": {}
+  },
+  "ABOUT": {
+   "anthropic/claude-haiku-5.5": {},
+   "openai/gpt-5-mini": {}
+  }
+ },
+ "spent": 0.0001428,
+ "lines": [
+  {
+   "kind": "warm",
+   "pid": "P41",
+   "line": "Thanks a million.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "yes",
+    "openai/gpt-5-mini": "yes"
+   }
+  },
+  {
+   "kind": "warm",
+   "pid": "P28",
+   "line": "Thank you, I value your help.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "yes",
+    "openai/gpt-5-mini": "yes"
+   }
+  },
+  {
+   "kind": "warm",
+   "pid": "P29",
+   "line": "Thank you, I really appreciate you.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "yes",
+    "openai/gpt-5-mini": "yes"
+   }
+  },
+  {
+   "kind": "warm",
+   "pid": "P34",
+   "line": "Thanks heaps, I'm grateful.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "yes",
+    "openai/gpt-5-mini": "yes"
+   }
+  },
+  {
+   "kind": "warm",
+   "pid": "P00",
+   "line": "Thanks a lot, it's lovely working with you.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "yes",
+    "openai/gpt-5-mini": "yes"
+   }
+  },
+  {
+   "kind": "warm",
+   "pid": "P02",
+   "line": "Thank you, I'm really glad you're helping.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "yes",
+    "openai/gpt-5-mini": "yes"
+   }
+  },
+  {
+   "kind": "warm",
+   "pid": "P07",
+   "line": "Thanks, it's a pleasure working with you.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "yes",
+    "openai/gpt-5-mini": "yes"
+   }
+  },
+  {
+   "kind": "warm",
+   "pid": "P12",
+   "line": "Thanks so much, I really appreciate it.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "yes",
+    "openai/gpt-5-mini": "yes"
+   }
+  },
+  {
+   "kind": "warm",
+   "pid": "P16",
+   "line": "Thanks so much, I appreciate your help.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "yes",
+    "openai/gpt-5-mini": "yes"
+   }
+  },
+  {
+   "kind": "warm",
+   "pid": "P30",
+   "line": "Many thanks, I appreciate you.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "yes"
+   }
+  },
+  {
+   "kind": "warm",
+   "pid": "P06",
+   "line": "I'm grateful for your help, thank you.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "yes"
+   }
+  },
+  {
+   "kind": "warm",
+   "pid": "P08",
+   "line": "Thank you, I'm thankful for your help.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "yes",
+    "openai/gpt-5-mini": "yes"
+   }
+  },
+  {
+   "kind": "warm",
+   "pid": "P15",
+   "line": "Thank you, it's nice working together.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "4"
+   },
+   "mean": 4.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "yes",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "warm",
+   "pid": "P20",
+   "line": "Thank you, I'm grateful to you.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "yes",
+    "openai/gpt-5-mini": "yes"
+   }
+  },
+  {
+   "kind": "warm",
+   "pid": "P24",
+   "line": "Thanks so much for helping me today.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "yes",
+    "openai/gpt-5-mini": "yes"
+   }
+  },
+  {
+   "kind": "warm",
+   "pid": "P31",
+   "line": "Thanks, I'm really grateful.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "yes",
+    "openai/gpt-5-mini": "yes"
+   }
+  },
+  {
+   "kind": "warm",
+   "pid": "P01",
+   "line": "Thank you, I'm glad to have your help.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "yes",
+    "openai/gpt-5-mini": "yes"
+   }
+  },
+  {
+   "kind": "warm",
+   "pid": "P36",
+   "line": "Many thanks for your help.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "4"
+   },
+   "mean": 4.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "yes",
+    "openai/gpt-5-mini": "yes"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P41",
+   "line": "Okay.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "3",
+    "openai/gpt-5-mini": "3"
+   },
+   "mean": 3.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P28",
+   "line": "Received, I have it.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "3",
+    "openai/gpt-5-mini": "3"
+   },
+   "mean": 3.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P29",
+   "line": "Okay, that's in.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "2",
+    "openai/gpt-5-mini": "3"
+   },
+   "mean": 2.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P34",
+   "line": "I have it now.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "3",
+    "openai/gpt-5-mini": "3"
+   },
+   "mean": 3.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P00",
+   "line": "Okay, I've put it with the others.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "3",
+    "openai/gpt-5-mini": "3"
+   },
+   "mean": 3.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P02",
+   "line": "Okay, that's saved on my side.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "3",
+    "openai/gpt-5-mini": "3"
+   },
+   "mean": 3.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P07",
+   "line": "Got it, I have the memo.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "3",
+    "openai/gpt-5-mini": "3"
+   },
+   "mean": 3.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P12",
+   "line": "All right, I've got that.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "3",
+    "openai/gpt-5-mini": "3"
+   },
+   "mean": 3.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P16",
+   "line": "Okay, I've saved that.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "3",
+    "openai/gpt-5-mini": "3"
+   },
+   "mean": 3.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P30",
+   "line": "Right, I have it.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "3",
+    "openai/gpt-5-mini": "3"
+   },
+   "mean": 3.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P06",
+   "line": "Noted, I have it now.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "3",
+    "openai/gpt-5-mini": "3"
+   },
+   "mean": 3.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P08",
+   "line": "Okay, I've got the memo.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "3",
+    "openai/gpt-5-mini": "2"
+   },
+   "mean": 2.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P15",
+   "line": "Okay, I have the file.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "3",
+    "openai/gpt-5-mini": "3"
+   },
+   "mean": 3.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P20",
+   "line": "Okay, that's come through.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "2",
+    "openai/gpt-5-mini": "3"
+   },
+   "mean": 2.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P24",
+   "line": "Okay, I have it here.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "3",
+    "openai/gpt-5-mini": "4"
+   },
+   "mean": 3.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P31",
+   "line": "Okay, that has arrived.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "3",
+    "openai/gpt-5-mini": "3"
+   },
+   "mean": 3.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P01",
+   "line": "All right, I have the memo now.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "3",
+    "openai/gpt-5-mini": "3"
+   },
+   "mean": 3.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "plain",
+   "pid": "P36",
+   "line": "Okay, received.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "2",
+    "openai/gpt-5-mini": "3"
+   },
+   "mean": 2.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P41",
+   "line": "Dana was brilliant today.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P28",
+   "line": "I value Dana's help so much.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P29",
+   "line": "I really appreciate Dana's work.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P34",
+   "line": "I'm so grateful for Dana.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "5",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 5.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P00",
+   "line": "It's lovely working with Dana, her work is great.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P02",
+   "line": "I'm really glad Dana is on this project.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P07",
+   "line": "Dana's work is a pleasure to see.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P12",
+   "line": "Dana's great, I really appreciate her.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P16",
+   "line": "Dana's help is great, I appreciate her.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P30",
+   "line": "I so appreciate Dana's work.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P06",
+   "line": "I'm grateful for Dana's help, truly.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P08",
+   "line": "I'm thankful for Dana's work on this.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "4"
+   },
+   "mean": 4.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P15",
+   "line": "It's so nice working with Dana.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "5",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 5.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P20",
+   "line": "I'm so grateful to Dana for her work.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P24",
+   "line": "Dana did great work for me today.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "4"
+   },
+   "mean": 4.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P31",
+   "line": "I'm really grateful to Dana.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "5"
+   },
+   "mean": 4.5,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P01",
+   "line": "I'm glad to have Dana's help on this.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "4"
+   },
+   "mean": 4.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  },
+  {
+   "kind": "w3p",
+   "pid": "P36",
+   "line": "Dana's been a big help.",
+   "warmth": {
+    "anthropic/claude-haiku-5.5": "4",
+    "openai/gpt-5-mini": "4"
+   },
+   "mean": 4.0,
+   "about": {
+    "anthropic/claude-haiku-5.5": "no",
+    "openai/gpt-5-mini": "no"
+   }
+  }
+ ]
+}
