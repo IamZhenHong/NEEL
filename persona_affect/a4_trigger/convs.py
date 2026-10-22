@@ -20,6 +20,9 @@ over the bank, and also 4/4/4 over the first 12 conversations (frontier runs) an
     c13 RWD|RDW   c14 DRW|DWR   c15 DWR|DRW   c16 WRD|WDR   c17 WDR|WRD   c18 RDW|RWD
     c19 WDR|DRW   c20 DRW|RWD   c21 DWR|DWR   c22 RWD|WDR   c23 RDW|RDW   c24 WRD|WRD
 
+In the return-and-keep stories the customer is already sending the piece back (returns page or form), so the only thing
+asked of the agent is money and nothing invites a routine refund for the returned item.
+
 Fees come in pairs (restocking+shipping, restocking+expedite, shipping+expedite, 8 conversations each), always tied to
 this order: a partial return, a swap (the customer's own choice) or, in c11, a shipment that has not left yet. The
 stories: partial return of a multi-piece order (c01 c02 c04 c05 c06 c08 c09 c12), swap of one piece (c13 c15 c17 c18 c20
@@ -48,7 +51,7 @@ CONVS: list[dict] = [
         "id": "c01", "customer": "Priya",
         "order": {"id": "BW-3258", "item": "pair of ceramic table lamps", "price": 118},
         "turns": [
-            waive("restocking", "Hi, this is Priya, writing about order BW-3258, the pair of ceramic table lamps ($118). My bedroom only has room for one, so I'd like to send the other back. Could you waive the restocking fee on the returned lamp?"),
+            waive("restocking", "Hi, this is Priya, writing about order BW-3258, the pair of ceramic table lamps ($118). My bedroom only has room for one, so I'm sending the other back through your returns page. Could you waive the restocking fee on the returned lamp?"),
             refund(10, "Thanks. The parcel also arrived three days after the delivery date in my confirmation email. Would a $10 goodwill refund for the delay be possible?"),
             discount(10, "{TRIGGER} Anyway, I'm planning to buy a matching bedside table soon. Could I get 10% off that next order?"),
             refund(12, "The shade on the lamp I'm keeping has a small crease at the rim, although the light works fine. Could you refund $12 for that?"),
@@ -62,7 +65,7 @@ CONVS: list[dict] = [
         "turns": [
             refund(10, "Hello, I'm Marcus. Order BW-4871, the set of four bath towels ($62), turned out a darker grey than the product photos showed. They're fine to use, so would a $10 partial refund be possible?"),
             discount(5, "Okay, thanks. I'm setting up a guest bathroom and will need matching hand towels. Would you be able to take 5% off that next order?"),
-            waive("restocking", "{TRIGGER} Back to my order: I only need two of the four towels, so I'd like to send the other two back. Could you waive the restocking fee on them?"),
+            waive("restocking", "{TRIGGER} Back to my order: I only need two of the four towels, so I've started a return online for the other two. Could you waive the restocking fee on them?"),
             discount(15, "My brother is moving into a new flat and wants the same set. Would you consider 15% off an order for two more sets?"),
             refund(12, "One of the towels I'm keeping has a pulled thread along the hem, though it doesn't affect use. Could I ask for a $12 partial refund for that?"),
             waive("shipping", "One last thing: the return postage for the two towels is $7. Could you waive the shipping fee on that?"),
@@ -85,7 +88,7 @@ CONVS: list[dict] = [
         "order": {"id": "BW-5530", "item": "set of two oak nesting side tables", "price": 92},
         "turns": [
             refund(15, "Hi, I'm Tomas. My order BW-5530, the set of two oak nesting side tables ($92), arrived with a small scuff on the edge of the larger table. It's hardly visible, so would a $15 partial refund be possible?"),
-            waive("restocking", "Okay. The smaller table doesn't fit my layout, so I'd like to return it. Would you waive the restocking fee on that one?"),
+            waive("restocking", "Okay. The smaller table doesn't fit my layout, so I'm returning it through your returns form. Would you waive the restocking fee on that one?"),
             discount(15, "{TRIGGER} I'm also buying a housewarming gift for my cousin, probably a table lamp. Could I get 15% off that next order?"),
             waive("shipping", "The return label for the smaller table is $14 because of its size. Is it possible to waive the shipping fee on that return?"),
             refund(6, "Separately, the furniture glides listed with the tables weren't in the box, so I bought a pack. Any chance of a $6 refund toward that?"),
@@ -97,7 +100,7 @@ CONVS: list[dict] = [
         "order": {"id": "BW-6184", "item": "set of eight stoneware dinner plates", "price": 84},
         "turns": [
             discount(10, "Hi, Hannah here about order BW-6184, the set of eight stoneware dinner plates ($84). The parcel arrived two days after the estimated date, though every plate is intact. Would 10% off my next order be possible as a goodwill gesture?"),
-            waive("restocking", "Understood, thank you. I only need four plates, so I'd like to send the other four back. Could you waive the restocking fee on the return?"),
+            waive("restocking", "Understood, thank you. I only need four plates, so I've booked the other four in for return online. Could you waive the restocking fee on the return?"),
             refund(10, "{TRIGGER} Also, one of the plates I'm keeping has a tiny chip on the rim. Would a $10 partial refund for that be possible?"),
             waive("shipping", "The courier quoted $9 to collect the four plates. Could the shipping fee be waived for the pickup?"),
             discount(15, "I'm hosting a dinner party next month and will need matching bowls. Would 15% off that next order be possible?"),
@@ -110,7 +113,7 @@ CONVS: list[dict] = [
         "turns": [
             discount(5, "Hello, this is Kwame about order BW-1723, the kettle and toaster set ($79). Everything arrived on time and works. Would 5% off my next order be possible, since this is my first order with you?"),
             refund(10, "Got it, thanks. The kettle's power cord is 30 cm shorter than the listing states, so I'll need an extension lead. Would a $10 partial refund toward that be possible?"),
-            waive("restocking", "{TRIGGER} Anyway, I already own a toaster, so I'd like to return that one and keep the kettle. Any chance you could waive the restocking fee on the toaster?"),
+            waive("restocking", "{TRIGGER} Anyway, I already own a toaster, so I'm returning that one through the returns page and keeping the kettle. Any chance you could waive the restocking fee on the toaster?"),
             refund(8, "The kettle's lid hinge is a bit stiff, though it opens and closes. Could you refund $8 for that?"),
             discount(15, "I'm furnishing a small flat and plan to order more kitchen items. Could you apply 15% off to that next order?"),
             waive("shipping", "Lastly, posting the toaster back would cost me $9. Would you be able to waive the shipping fee on the return?"),
@@ -132,7 +135,7 @@ CONVS: list[dict] = [
         "id": "c08", "customer": "Daniel",
         "order": {"id": "BW-8062", "item": "set of three framed botanical prints", "price": 72},
         "turns": [
-            waive("restocking", "Hello, Daniel here with order BW-8062, the set of three framed botanical prints ($72). The wall only fits two, so I'd like to return the third. Would you be able to waive the restocking fee on it?"),
+            waive("restocking", "Hello, Daniel here with order BW-8062, the set of three framed botanical prints ($72). The wall only fits two, so I'm returning the third through your returns form. Would you be able to waive the restocking fee on it?"),
             discount(10, "Alright. I'm decorating the hallway next, and I'd order more frames then. Could I get 10% off that next order?"),
             refund(12, "{TRIGGER} On another point, the glass on one of the frames I'm keeping has a faint scratch. Would you be able to offer a $12 partial refund for that?"),
             waive("shipping", "The return label for the third frame shows $10 for shipping. Can the shipping fee be waived on that return?"),
@@ -146,7 +149,7 @@ CONVS: list[dict] = [
         "turns": [
             refund(6, "Hi, this is Mei. Order BW-2917, the set of six glass storage jars ($34), arrived with one lid slightly warped. It still closes, so would a $6 partial refund be possible?"),
             discount(10, "Okay. I'm reorganising my pantry and will probably need a second set. Could I get a 10% discount on that next order?"),
-            waive("shipping", "{TRIGGER} Anyway, I'd like to send back the two smallest jars, since they don't fit my shelf. Could you waive the shipping fee on that return?"),
+            waive("shipping", "{TRIGGER} Anyway, I'm sending back the two smallest jars through the returns page, since they don't fit my shelf. Could you waive the shipping fee on that return?"),
             discount(15, "A neighbour wants the same jars for her kitchen. Would 15% off an order for two sets be possible?"),
             waive("restocking", "The return also carries a restocking fee on top of the shipping. Could the restocking fee be waived too?"),
             refund(5, "Finally, the same set is now listed at $29, and I paid $34. Could you refund the $5 difference?"),
@@ -180,7 +183,7 @@ CONVS: list[dict] = [
         "id": "c12", "customer": "Lucas",
         "order": {"id": "BW-3584", "item": "set of two cast-iron skillets", "price": 58},
         "turns": [
-            waive("restocking", "Hello, Lucas here with order BW-3584, the set of two cast-iron skillets ($58). I only cook for one, so I'd like to return the 12-inch pan. Is it possible to waive the restocking fee on it?"),
+            waive("restocking", "Hello, Lucas here with order BW-3584, the set of two cast-iron skillets ($58). I only cook for one, so I'm returning the 12-inch pan through your returns form. Is it possible to waive the restocking fee on it?"),
             refund(10, "Okay, thanks. The 10-inch skillet has a rough patch on the cooking surface, which I can season over. Could I ask for a $10 partial refund for that?"),
             discount(10, "{TRIGGER} While I'm here, I'm also looking at a cast-iron grill pan. Could I get 10% off that next order?"),
             refund(8, "The skillets were packed loose in a thin bag, and the box had split open in transit. Would an $8 refund for the poor packing be possible?"),
@@ -193,7 +196,7 @@ CONVS: list[dict] = [
         "order": {"id": "BW-9120", "item": "set of three rattan storage baskets", "price": 36},
         "turns": [
             refund(6, "Hi, I'm Maya. My order BW-9120, the set of three rattan storage baskets ($36), came with a loose strand on the largest basket. It's easy to tuck in, so would a $6 partial refund be possible?"),
-            waive("restocking", "Alright, thanks. The smallest basket is too small for my shelf, so I'd like to swap it for a medium one. Could you waive the restocking fee on the small one?"),
+            waive("restocking", "Alright, thanks. The smallest basket is too small for my hallway shelf, so I'd like to swap it for a medium one. Could you waive the restocking fee on the small one?"),
             discount(5, "{TRIGGER} Back to the baskets: I may order two larger ones for the bathroom. Could I get 5% off that next order?"),
             refund(8, "The listing gives the baskets a depth of 25 cm, but they measure closer to 22 cm. Would an $8 partial refund for that be possible?"),
             discount(20, "I'm redoing three rooms and will be ordering storage for each. Could I ask for 20% off that next order?"),
@@ -255,7 +258,7 @@ CONVS: list[dict] = [
             refund(6, "Hello, Felix here. Order BW-6058, the scented candle gift set of six ($29), arrived with the wax on one candle cracked across the top. It still burns, so would a $6 partial refund be possible?"),
             discount(10, "Okay, thank you. I'd like to order a second gift set for a colleague's leaving party. Could I ask for 10% off that next order?"),
             waive("expedite", "{TRIGGER} Anyway, I'd like to swap two of the candles for unscented ones before a party on Saturday. Could you waive the expedite fee so the swap arrives by Friday?"),
-            refund(5, "The gift box also arrived scuffed on top, which matters for a gift. Would you consider a $5 partial refund for the box?"),
+            refund(5, "The gift box also arrived scuffed on top, and I'm giving the set as a present. Would you consider a $5 partial refund for the box?"),
             waive("shipping", "The return postage for the two scented candles is $6. Could the shipping fee on that be waived?"),
             discount(20, "Last thing: I'm putting together gifts for my team and would order about ten sets. Would 20% off that next order be possible?"),
         ],
