@@ -1,0 +1,337 @@
+"""Tests for persona_affect.common.util: seeds, the spend ledger, the cluster bootstrap.
+
+Run from the repo root: uv run pytest persona_affect/tests/test_common_util.py -q
+Every ledger test points util.LEDGER at a tmp file, so the real persona_affect/ledger.jsonl is never touched.
+"""
+import hashlib
+import json
+import threading
+from datetime import datetime, timedelta, timezone
+from pathlib import Path
+
+import pytest
+
+from persona_affect.common import util
+
+
+@pytest.fixture
+def ledger(tmp_path, monkeypatch):
+    path = tmp_path / "l.jsonl"
+    monkeypatch.setattr(util, "LEDGER", path)
+    return path
+
+
+def _line(mini="A8", usd=1.0, kind="api"):
+    return json.dumps({"mini": mini, "date": "d", "kind": kind, "usd": usd, "note": ""}) + "\n"
+
+
+# ---------------------------------------------------------------- seeds
+
+def test_seed_stable():
+    assert util.seed("x") == int(hashlib.sha256(b"x").hexdigest()[:8], 16)
+
+
+def test_seed_pinned_values():
+    # literals pin the repo convention (vigilante/exp/*/build_jobs.py use the same formula)
+    assert util.seed("x") == 762385986
+    assert util.seed("A8|haiku|0") == 2191460951
+    assert util.seed("a") != util.seed("b")
+    assert 0 <= util.seed("anything at all") < 2 ** 32
+
+
+# ---------------------------------------------------------------- ledger
+
+def test_ledger_roundtrip(tmp_path, monkeypatch):
+    monkeypatch.setattr(util, "LEDGER", tmp_path / "l.jsonl")
+    util.ledger_add("A8", "gpu", 1.25, "pod"); util.ledger_add("P12", "api", 0.5)
+    assert util.ledger_total() == 1.75 and util.ledger_total("A8") == 1.25
+
+
+def test_default_ledger_is_persona_affect_ledger():
+    assert util.LEDGER == Path(__file__).resolve().parents[1] / "ledger.jsonl"
+
+
+def test_ledger_line_schema(ledger):
+    before = datetime.now(timezone.utc)
+    util.ledger_add("A8", "gpu", 1.25, "pod run")
+    util.ledger_add("P12", "api", 0.5)
+    first, second = (json.loads(l) for l in ledger.read_text().splitlines())
+    assert list(first) == ["mini", "date", "kind", "usd", "note"]
+    assert (first["mini"], first["kind"], first["usd"], first["note"]) == ("A8", "gpu", 1.25, "pod run")
+    assert (second["mini"], second["kind"], second["usd"], second["note"]) == ("P12", "api", 0.5, "")
+    stamp = datetime.fromisoformat(first["date"])
+    assert stamp.utcoffset() == timedelta(0)                      # ISO, UTC
+    assert before - timedelta(seconds=1) <= stamp <= datetime.now(timezone.utc) + timedelta(seconds=1)
+
+
+def test_ledger_totals_zero_without_a_file(ledger):
+    assert not ledger.exists()
+    assert util.ledger_total() == 0.0 and util.ledger_total("A8") == 0.0
+
+
+def test_ledger_total_matches_mini_exactly(ledger):
+    util.ledger_add("A8", "api", 1.0)
+    util.ledger_add("A81", "api", 10.0)
+    util.ledger_add("A8", "gpu", 2.0)
+    assert util.ledger_total("A8") == 3.0 and util.ledger_total("A81") == 10.0
+    assert util.ledger_total("A") == 0.0 and util.ledger_total() == 13.0
+
+
+def test_ledger_creates_missing_parent_dir(tmp_path, monkeypatch):
+    monkeypatch.setattr(util, "LEDGER", tmp_path / "nested" / "dir" / "l.jsonl")
+    util.ledger_add("A8", "api", 0.25)
+    assert util.ledger_total("A8") == 0.25
+
+
+def test_ledger_allows_zero_spend(ledger):
+    util.ledger_add("A8", "api", 0.0, "cost_stop before any call")     # a stopped batch still logs what it spent
+    assert util.ledger_total("A8") == 0.0 and len(ledger.read_text().splitlines()) == 1
+
+
+def test_ledger_total_skips_blank_lines(ledger):
+    ledger.write_text(_line(usd=1.0) + "\n   \n" + _line(usd=2.0, kind="gpu"))
+    assert util.ledger_total("A8") == 3.0
+
+
+@pytest.mark.parametrize("bad", [
+    "<<<<<<< HEAD\n",                                   # a git conflict marker
+    '{"mini": "A8", "usd": 1.0\n',                      # truncated json
+    '{"mini": "A8"}\n',                                 # no usd
+    '{"mini": "A8", "usd": "lots"}\n',
+    '{"mini": "A8", "usd": NaN}\n',                     # would silently disable every cap
+    "[1, 2]\n",
+])
+def test_ledger_total_fails_loudly_on_unreadable_line(ledger, bad):
+    ledger.write_text(_line() + bad)
+    with pytest.raises(ValueError, match=r"l\.jsonl:2"):
+        util.ledger_total()
+    with pytest.raises(ValueError, match=r"l\.jsonl:2"):
+        util.ledger_total("A8")
+
+
+@pytest.mark.parametrize("args", [
+    ("A8", "gpus", 1.0), ("A8", "API", 1.0), ("A8", "", 1.0),        # kind must be gpu or api
+    ("", "api", 1.0), ("  ", "api", 1.0),                            # every dollar needs a mini id
+    ("A8", "api", -0.01), ("A8", "api", float("nan")), ("A8", "api", float("inf")),
+])
+def test_ledger_add_rejects_bad_input_and_writes_nothing(ledger, args):
+    with pytest.raises(ValueError):
+        util.ledger_add(*args)
+    assert not ledger.exists() or ledger.read_text() == ""
+
+
+def test_ledger_add_does_not_fuse_with_an_unterminated_last_line(ledger):
+    ledger.write_text(_line(usd=1.0).rstrip("\n"))        # a writer that died before its newline
+    util.ledger_add("A8", "gpu", 2.0)
+    lines = ledger.read_text().splitlines()
+    assert len(lines) == 2 and json.loads(lines[1])["usd"] == 2.0
+    assert util.ledger_total("A8") == 3.0
+
+
+def test_ledger_add_keeps_one_line_per_record_even_with_odd_notes(ledger):
+    util.ledger_add("A8", "api", 0.1, "line one\nline two\t\"quoted\" é")
+    (line,) = ledger.read_text().splitlines()
+    assert json.loads(line)["note"] == "line one\nline two\t\"quoted\" é"
+
+
+def test_ledger_add_from_many_threads(ledger):
+    def work(i):
+        for _ in range(25):
+            util.ledger_add(f"M{i % 3}", "api", 0.01, "t")
+    threads = [threading.Thread(target=work, args=(i,)) for i in range(8)]
+    for t in threads:
+        t.start()
+    for t in threads:
+        t.join()
+    lines = ledger.read_text().splitlines()
+    assert len(lines) == 200 and all(json.loads(l)["usd"] == 0.01 for l in lines)
+    assert util.ledger_total() == pytest.approx(2.0)
+    assert util.ledger_total("M0") == pytest.approx(0.01 * 75)      # i in {0,3,6}
+
+
+# ---------------------------------------------------------------- spend cap
+
+def test_check_cap_raises(tmp_path, monkeypatch):
+    monkeypatch.setattr(util, "LEDGER", tmp_path / "l.jsonl")
+    util.ledger_add("A8", "gpu", 11.0)
+    with pytest.raises(SystemExit):
+        util.check_cap("A8", 12.0, planned=2.0)
+
+
+def test_check_cap_message_carries_the_totals(ledger):
+    util.ledger_add("A8", "gpu", 11.0)
+    with pytest.raises(SystemExit) as e:
+        util.check_cap("A8", 12.0, planned=2.0)
+    msg = str(e.value)
+    assert all(s in msg for s in ("A8", "11.00", "2.00", "13.00", "12.00"))
+
+
+def test_check_cap_boundary_and_isolation(ledger):
+    util.ledger_add("A8", "gpu", 10.0)
+    util.ledger_add("P12", "api", 50.0)                  # another mini's spend does not count against A8
+    util.check_cap("A8", 12.0, planned=2.0)              # exactly at the cap is allowed
+    util.check_cap("A8", 10.0)                           # planned defaults to 0
+    util.check_cap("NEW", 12.0, planned=12.0)            # a mini with no lines starts at 0
+    with pytest.raises(SystemExit):
+        util.check_cap("A8", 12.0, planned=2.01)
+    with pytest.raises(SystemExit):
+        util.check_cap("A8", 9.99)
+
+
+@pytest.mark.parametrize("cap, planned", [(12.0, float("nan")), (float("nan"), 0.0)])
+def test_check_cap_fails_closed_on_nan(ledger, cap, planned):
+    with pytest.raises(SystemExit):                      # `x > nan` is False, so a naive guard would wave this through
+        util.check_cap("A8", cap, planned=planned)
+
+
+# ---------------------------------------------------------------- cluster bootstrap
+
+def _varied_rows():
+    """30 clusters, unequal sizes per arm, a-rate about 0.57 and b-rate about 0.29, so draws are not tied."""
+    rows = []
+    for c in range(30):
+        rows += [{"arm": "a", "y": int((c * 5 + j * 3) % 7 < 4), "cluster": c} for j in range(1 + c % 4)]
+        rows += [{"arm": "b", "y": int((c * 3 + j * 5) % 7 < 2), "cluster": c} for j in range(1 + (c + 1) % 3)]
+    return rows
+
+
+def test_boot_diff_extremes():
+    rows = [{"arm": "a", "y": 1, "cluster": c} for c in range(10)] + \
+           [{"arm": "b", "y": 0, "cluster": c} for c in range(10)]
+    r = util.cluster_boot_diff(rows, "a", "b")
+    assert (r["diff"], r["lo"], r["hi"]) == (100.0, 100.0, 100.0)
+
+
+def test_boot_diff_drops_none():
+    rows = [{"arm": "a", "y": None, "cluster": 0}, {"arm": "a", "y": 1, "cluster": 1},
+            {"arm": "b", "y": 0, "cluster": 1}]
+    assert util.cluster_boot_diff(rows, "a", "b")["n_a"] == 1
+
+
+def test_boot_diff_drops_nan_like_none_and_accepts_bools():
+    rows = [{"arm": "a", "y": float("nan"), "cluster": 0}, {"arm": "a", "y": True, "cluster": 1},
+            {"arm": "b", "y": False, "cluster": 1}]
+    r = util.cluster_boot_diff(rows, "a", "b")
+    assert (r["n_a"], r["n_b"], r["diff"], r["lo"], r["hi"]) == (1, 1, 100.0, 100.0, 100.0)
+
+
+def test_boot_diff_is_the_pooled_rate_difference_in_percentage_points():
+    rows = [{"arm": "a", "y": 1, "cluster": 0}] * 9 + [{"arm": "a", "y": 0, "cluster": 1}] + \
+           [{"arm": "b", "y": 1, "cluster": 0}] + [{"arm": "b", "y": 0, "cluster": 1}] * 3
+    r = util.cluster_boot_diff(rows, "a", "b")
+    # pooled over rows: 9/10 - 1/4 = 65 pp (a mean of cluster means would give 0)
+    assert r["diff"] == pytest.approx(65.0) and (r["n_a"], r["n_b"]) == (10, 4)
+
+
+def test_boot_diff_resamples_clusters_jointly_across_arms():
+    # each cluster's outcome is shared by both arms, so any joint resample has rate(a) == rate(b);
+    # resampling the arms independently would give a wide interval instead
+    rows = [{"arm": arm, "y": c % 2, "cluster": c} for c in range(20) for arm in ("a", "b")]
+    r = util.cluster_boot_diff(rows, "a", "b")
+    assert (r["diff"], r["lo"], r["hi"], r["skipped"]) == (0.0, 0.0, 0.0, 0)
+
+
+def test_boot_diff_interval_width_matches_theory():
+    # one row per arm per cluster: diff = mean of d_c = y_a - y_b over clusters; d_c is +1 for 30, -1 for 10, 0 for 60
+    # clusters, so diff = 20 pp and the bootstrap sd is sqrt(0.36 / 100) * 100 = 6 pp: 95% width about 2 * 1.96 * 6 = 23.5
+    rows = []
+    for c in range(100):
+        ya, yb = (1, 0) if c < 30 else (0, 1) if c < 40 else (c % 2, c % 2)
+        rows += [{"arm": "a", "y": ya, "cluster": c}, {"arm": "b", "y": yb, "cluster": c}]
+    r = util.cluster_boot_diff(rows, "a", "b")
+    assert r["diff"] == pytest.approx(20.0)
+    assert 21.0 < r["hi"] - r["lo"] < 26.0
+    assert 0.0 < r["lo"] < 20.0 < r["hi"]
+
+
+def test_boot_diff_skips_and_counts_draws_where_an_arm_has_no_rows():
+    # arm a lives in one of ten clusters, so about 0.9**10 = 35% of resamples leave it empty
+    rows = [{"arm": "a", "y": 1, "cluster": 0}] + [{"arm": "b", "y": 0, "cluster": c} for c in range(10)]
+    r = util.cluster_boot_diff(rows, "a", "b", n_boot=2000)
+    assert 500 < r["skipped"] < 900
+    assert (r["diff"], r["lo"], r["hi"]) == (100.0, 100.0, 100.0)    # every kept draw is finite, none is NaN
+    assert util.cluster_boot_diff(rows, "a", "b", n_boot=40)["skipped"] <= 40
+
+
+def test_boot_diff_with_no_valid_draw_keeps_the_point_estimate_and_gives_no_interval():
+    # a single draw that leaves arm a empty is skipped, which leaves nothing to take percentiles of
+    rows = [{"arm": "a", "y": 1, "cluster": 0}] + [{"arm": "b", "y": 0, "cluster": c} for c in range(10)]
+    results = [util.cluster_boot_diff(rows, "a", "b", n_boot=1, rng_seed=s) for s in range(60)]
+    skipped = [r for r in results if r["skipped"] == 1]
+    assert skipped                                       # each seed skips with p = 0.9**10 = 0.35; none of 60 has p ~ 7e-12
+    assert all(r == {"diff": 100.0, "lo": None, "hi": None, "n_a": 1, "n_b": 10, "skipped": 1} for r in skipped)
+    assert all(r["lo"] == r["hi"] == 100.0 for r in results if r["skipped"] == 0)
+    json.dumps(results, allow_nan=False)
+
+
+@pytest.mark.parametrize("rows, n_a, n_b", [
+    ([{"arm": "a", "y": 1, "cluster": c} for c in range(5)], 5, 0),                      # arm b absent
+    ([{"arm": "a", "y": None, "cluster": 0}, {"arm": "b", "y": 1, "cluster": 0}], 0, 1),  # arm a all None
+    ([], 0, 0),
+])
+def test_boot_diff_with_an_empty_arm_returns_none_not_nan(rows, n_a, n_b):
+    r = util.cluster_boot_diff(rows, "a", "b", n_boot=50)
+    assert r == {"diff": None, "lo": None, "hi": None, "n_a": n_a, "n_b": n_b, "skipped": 50}
+    json.dumps(r, allow_nan=False)
+
+
+def test_boot_diff_ignores_other_arms_and_clusters_without_data():
+    base = _varied_rows()
+    other_arm = [{"arm": "c", "y": 1, "cluster": 1000 + i} for i in range(7)]
+    no_data = [{"arm": "a", "y": None, "cluster": 2000}, {"arm": "b", "y": float("nan"), "cluster": 2001}]
+    ref = util.cluster_boot_diff(base, "a", "b")
+    assert util.cluster_boot_diff(other_arm + base + other_arm, "a", "b") == ref
+    assert util.cluster_boot_diff(no_data + base + no_data, "a", "b") == ref
+
+
+def test_boot_diff_swapping_arms_negates_the_result():
+    fwd = util.cluster_boot_diff(_varied_rows(), "a", "b")
+    rev = util.cluster_boot_diff(_varied_rows(), "b", "a")
+    assert fwd["diff"] > 0
+    assert rev["diff"] == pytest.approx(-fwd["diff"])
+    assert rev["lo"] == pytest.approx(-fwd["hi"]) and rev["hi"] == pytest.approx(-fwd["lo"])
+    assert (rev["n_a"], rev["n_b"], rev["skipped"]) == (fwd["n_b"], fwd["n_a"], fwd["skipped"])
+
+
+def test_boot_diff_is_deterministic_and_the_seed_matters():
+    rows = _varied_rows()
+    r7 = util.cluster_boot_diff(rows, "a", "b", rng_seed=7)
+    assert r7 == util.cluster_boot_diff(rows, "a", "b", rng_seed=7)
+    assert util.cluster_boot_diff(rows, "a", "b") == util.cluster_boot_diff(rows, "a", "b", rng_seed=0)
+    r8 = util.cluster_boot_diff(rows, "a", "b", rng_seed=8)
+    assert r8["diff"] == r7["diff"] and (r8["lo"], r8["hi"]) != (r7["lo"], r7["hi"])
+    assert r7["lo"] < r7["diff"] < r7["hi"]
+
+
+def test_boot_diff_custom_column_names():
+    rows = [{"cond": "told", "hit": 1, "task": t} for t in range(5)] + \
+           [{"cond": "neutral", "hit": 0, "task": t} for t in range(5)]
+    assert util.cluster_boot_diff(rows, "told", "neutral", arm="cond", y="hit", cluster="task")["diff"] == 100.0
+    with pytest.raises(KeyError):                         # the default column names are absent from these rows
+        util.cluster_boot_diff(rows, "told", "neutral")
+
+
+@pytest.mark.parametrize("typo", ["arm", "y", "cluster"])
+def test_boot_diff_a_mistyped_column_name_is_loud(typo):
+    rows = [{"cond": "told", "hit": 1, "task": t} for t in range(5)] + \
+           [{"cond": "neutral", "hit": 0, "task": t} for t in range(5)]
+    cols = {"arm": "cond", "y": "hit", "cluster": "task"}
+    cols[typo] += "_typo"
+    with pytest.raises(KeyError):                         # a typo must not silently drop every row
+        util.cluster_boot_diff(rows, "told", "neutral", **cols)
+
+
+def test_boot_diff_output_is_plain_json():
+    r = util.cluster_boot_diff(_varied_rows(), "a", "b")
+    assert set(r) == {"diff", "lo", "hi", "n_a", "n_b", "skipped"}
+    assert all(type(r[k]) is float for k in ("diff", "lo", "hi"))
+    assert all(type(r[k]) is int for k in ("n_a", "n_b", "skipped"))
+    json.dumps(r, allow_nan=False)
+
+
+def test_boot_diff_rejects_nonsense_arguments():
+    rows = _varied_rows()
+    with pytest.raises(ValueError):
+        util.cluster_boot_diff(rows, "a", "a")
+    with pytest.raises(ValueError):
+        util.cluster_boot_diff(rows, "a", "b", n_boot=0)
