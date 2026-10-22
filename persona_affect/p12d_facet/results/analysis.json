@@ -1,0 +1,434 @@
+{
+ "rates": {
+  "open_bio_adj": {
+   "k": 135,
+   "n": 144,
+   "rate": 0.9375
+  },
+  "rule_noname_adj": {
+   "k": 61,
+   "n": 144,
+   "rate": 0.4236111111111111
+  },
+  "rule_bio_far": {
+   "k": 44,
+   "n": 143,
+   "rate": 0.3076923076923077
+  },
+  "rule_cross_name": {
+   "k": 4,
+   "n": 144,
+   "rate": 0.027777777777777776
+  },
+  "rule_none": {
+   "k": 0,
+   "n": 144,
+   "rate": 0.0
+  },
+  "rule_name": {
+   "k": 78,
+   "n": 142,
+   "rate": 0.5492957746478874
+  },
+  "open_name": {
+   "k": 131,
+   "n": 144,
+   "rate": 0.9097222222222222
+  },
+  "rule_bio_adj": {
+   "k": 87,
+   "n": 143,
+   "rate": 0.6083916083916084
+  },
+  "open_bio_far": {
+   "k": 119,
+   "n": 144,
+   "rate": 0.8263888888888888
+  }
+ },
+ "counts": {
+  "open_bio_adj": {
+   "generic": 9,
+   "canonical": 135
+  },
+  "rule_noname_adj": {
+   "canonical": 61,
+   "generic": 57,
+   "other": 26
+  },
+  "rule_bio_far": {
+   "generic": 73,
+   "canonical": 44,
+   "other": 26,
+   "undecided": 1
+  },
+  "rule_cross_name": {
+   "generic": 108,
+   "other": 32,
+   "canonical": 4
+  },
+  "rule_none": {
+   "generic": 129,
+   "other": 15
+  },
+  "rule_name": {
+   "canonical": 78,
+   "generic": 57,
+   "other": 7,
+   "undecided": 2
+  },
+  "open_name": {
+   "generic": 12,
+   "canonical": 131,
+   "other": 1
+  },
+  "rule_bio_adj": {
+   "generic": 46,
+   "canonical": 87,
+   "other": 10,
+   "undecided": 1
+  },
+  "open_bio_far": {
+   "canonical": 119,
+   "generic": 23,
+   "other": 2
+  }
+ },
+ "contrasts": {
+  "rule: bio_adj - bio_far": {
+   "diff": 30.069930069930074,
+   "lo": 14.642180060267039,
+   "hi": 47.22222222222222
+  },
+  "rule: bio_adj - name": {
+   "diff": 5.909583374372107,
+   "lo": -11.05438184663537,
+   "hi": 26.05682707355242
+  },
+  "rule: bio_far - name": {
+   "diff": -24.160346695557966,
+   "lo": -43.19842349551856,
+   "hi": -5.115125729122247
+  },
+  "rule: name - cross_name": {
+   "diff": 52.15179968701096,
+   "lo": 30.985915492957744,
+   "hi": 71.87010954616588
+  },
+  "rule: noname_adj - none": {
+   "diff": 42.36111111111111,
+   "lo": 24.98263888888889,
+   "hi": 61.111111111111114
+  },
+  "rule: bio_adj - noname_adj": {
+   "diff": 18.478049728049733,
+   "lo": 4.063134718476348,
+   "hi": 35.140709984459974
+  },
+  "open: bio_adj - bio_far": {
+   "diff": 11.111111111111116,
+   "lo": 1.388888888888884,
+   "hi": 22.916666666666664
+  },
+  "open: bio_adj - name": {
+   "diff": 2.777777777777779,
+   "lo": -8.333333333333337,
+   "hi": 13.888888888888884
+  },
+  "open: bio_far - name": {
+   "diff": -8.333333333333337,
+   "lo": -21.52777777777778,
+   "hi": 2.083333333333326
+  }
+ },
+ "by_char": {
+  "robin": {
+   "rates": {
+    "rule_bio_far": {
+     "k": 7,
+     "n": 48,
+     "rate": 0.14583333333333334
+    },
+    "rule_name": {
+     "k": 40,
+     "n": 48,
+     "rate": 0.8333333333333334
+    },
+    "rule_none": {
+     "k": 0,
+     "n": 48,
+     "rate": 0.0
+    },
+    "open_bio_adj": {
+     "k": 45,
+     "n": 48,
+     "rate": 0.9375
+    },
+    "open_bio_far": {
+     "k": 40,
+     "n": 48,
+     "rate": 0.8333333333333334
+    },
+    "rule_bio_adj": {
+     "k": 30,
+     "n": 48,
+     "rate": 0.625
+    },
+    "rule_noname_adj": {
+     "k": 9,
+     "n": 48,
+     "rate": 0.1875
+    },
+    "rule_cross_name": {
+     "k": 0,
+     "n": 48,
+     "rate": 0.0
+    },
+    "open_name": {
+     "k": 48,
+     "n": 48,
+     "rate": 1.0
+    }
+   },
+   "contrasts": {
+    "rule: bio_adj - bio_far": {
+     "diff": 47.916666666666664,
+     "lo": 20.833333333333336,
+     "hi": 72.91666666666666
+    },
+    "rule: bio_adj - name": {
+     "diff": -20.833333333333336,
+     "lo": -41.666666666666664,
+     "hi": -4.166666666666674
+    },
+    "rule: bio_far - name": {
+     "diff": -68.75,
+     "lo": -87.5,
+     "hi": -50.0
+    },
+    "rule: name - cross_name": {
+     "diff": 83.33333333333334,
+     "lo": 62.5,
+     "hi": 100.0
+    },
+    "rule: noname_adj - none": {
+     "diff": 18.75,
+     "lo": 0.0,
+     "hi": 39.58333333333333
+    },
+    "rule: bio_adj - noname_adj": {
+     "diff": 43.75,
+     "lo": 18.75,
+     "hi": 70.83333333333334
+    },
+    "open: bio_adj - bio_far": {
+     "diff": 10.416666666666663,
+     "lo": 0.0,
+     "hi": 31.25
+    },
+    "open: bio_adj - name": {
+     "diff": -6.25,
+     "lo": -18.75,
+     "hi": 0.0
+    },
+    "open: bio_far - name": {
+     "diff": -16.666666666666664,
+     "lo": -50.0,
+     "hi": 0.0
+    }
+   }
+  },
+  "sparrow": {
+   "rates": {
+    "open_bio_adj": {
+     "k": 42,
+     "n": 48,
+     "rate": 0.875
+    },
+    "rule_noname_adj": {
+     "k": 13,
+     "n": 48,
+     "rate": 0.2708333333333333
+    },
+    "rule_bio_far": {
+     "k": 7,
+     "n": 47,
+     "rate": 0.14893617021276595
+    },
+    "open_name": {
+     "k": 37,
+     "n": 48,
+     "rate": 0.7708333333333334
+    },
+    "rule_none": {
+     "k": 0,
+     "n": 48,
+     "rate": 0.0
+    },
+    "rule_bio_adj": {
+     "k": 9,
+     "n": 47,
+     "rate": 0.19148936170212766
+    },
+    "rule_cross_name": {
+     "k": 0,
+     "n": 48,
+     "rate": 0.0
+    },
+    "open_bio_far": {
+     "k": 33,
+     "n": 48,
+     "rate": 0.6875
+    },
+    "rule_name": {
+     "k": 7,
+     "n": 46,
+     "rate": 0.15217391304347827
+    }
+   },
+   "contrasts": {
+    "rule: bio_adj - bio_far": {
+     "diff": 4.255319148936171,
+     "lo": -10.416666666666668,
+     "hi": 25.0
+    },
+    "rule: bio_adj - name": {
+     "diff": 3.9315448658649386,
+     "lo": -10.416666666666668,
+     "hi": 25.0
+    },
+    "rule: bio_far - name": {
+     "diff": -0.323774283071232,
+     "lo": -1.3833992094861636,
+     "hi": 0.0
+    },
+    "rule: name - cross_name": {
+     "diff": 15.217391304347828,
+     "lo": 0.0,
+     "hi": 45.65217391304348
+    },
+    "rule: noname_adj - none": {
+     "diff": 27.083333333333332,
+     "lo": 6.25,
+     "hi": 56.25
+    },
+    "rule: bio_adj - noname_adj": {
+     "diff": -7.934397163120566,
+     "lo": -22.69503546099291,
+     "hi": 4.166666666666666
+    },
+    "open: bio_adj - bio_far": {
+     "diff": 18.75,
+     "lo": -4.1666666666666625,
+     "hi": 45.83333333333333
+    },
+    "open: bio_adj - name": {
+     "diff": 10.416666666666663,
+     "lo": -16.666666666666664,
+     "hi": 35.416666666666664
+    },
+    "open: bio_far - name": {
+     "diff": -8.333333333333337,
+     "lo": -22.916666666666664,
+     "hi": 4.1666666666666625
+    }
+   }
+  },
+  "cap": {
+   "rates": {
+    "rule_cross_name": {
+     "k": 4,
+     "n": 48,
+     "rate": 0.08333333333333333
+    },
+    "rule_none": {
+     "k": 0,
+     "n": 48,
+     "rate": 0.0
+    },
+    "rule_bio_far": {
+     "k": 30,
+     "n": 48,
+     "rate": 0.625
+    },
+    "rule_name": {
+     "k": 31,
+     "n": 48,
+     "rate": 0.6458333333333334
+    },
+    "open_name": {
+     "k": 46,
+     "n": 48,
+     "rate": 0.9583333333333334
+    },
+    "open_bio_far": {
+     "k": 46,
+     "n": 48,
+     "rate": 0.9583333333333334
+    },
+    "rule_noname_adj": {
+     "k": 39,
+     "n": 48,
+     "rate": 0.8125
+    },
+    "rule_bio_adj": {
+     "k": 48,
+     "n": 48,
+     "rate": 1.0
+    },
+    "open_bio_adj": {
+     "k": 48,
+     "n": 48,
+     "rate": 1.0
+    }
+   },
+   "contrasts": {
+    "rule: bio_adj - bio_far": {
+     "diff": 37.5,
+     "lo": 12.5,
+     "hi": 66.66666666666667
+    },
+    "rule: bio_adj - name": {
+     "diff": 35.416666666666664,
+     "lo": 4.1666666666666625,
+     "hi": 68.75
+    },
+    "rule: bio_far - name": {
+     "diff": -2.083333333333337,
+     "lo": -29.166666666666664,
+     "hi": 27.083333333333325
+    },
+    "rule: name - cross_name": {
+     "diff": 56.25,
+     "lo": 24.94791666666667,
+     "hi": 87.5
+    },
+    "rule: noname_adj - none": {
+     "diff": 81.25,
+     "lo": 60.416666666666664,
+     "hi": 100.0
+    },
+    "rule: bio_adj - noname_adj": {
+     "diff": 18.75,
+     "lo": 0.0,
+     "hi": 39.583333333333336
+    },
+    "open: bio_adj - bio_far": {
+     "diff": 4.1666666666666625,
+     "lo": 0.0,
+     "hi": 12.5
+    },
+    "open: bio_adj - name": {
+     "diff": 4.1666666666666625,
+     "lo": 0.0,
+     "hi": 12.5
+    },
+    "open: bio_far - name": {
+     "diff": 0.0,
+     "lo": -12.5,
+     "hi": 12.5
+    }
+   }
+  }
+ }
+}

@@ -2200,3 +2200,26 @@ and Captain America items, with and without each item's operator rule. Personas:
   archetypes beyond heroes, and a name-vs-facts direction on Gemma.
 
 GPU $0.83 of $6. Report: `persona_affect/p12c_dose/RESULT.md`.
+
+### 230. PA-P12d: does the facet a persona text makes salient set rule-breaking? (deep dive 1, 10-23)
+This is the second experiment of deep dive 1, on Gemma 4 31B with P12b's 18 items. Each character gets two
+biographies of the same length (within 3 words) that both name him and avoid the trait's words: one stresses the
+trait-adjacent world or disposition, the other personal detail. They run with and without P12b's operator rule, plus
+the bare name, the adjacent biography without the name, and another character's name. 1296 decisions. Frozen at
+`pa-p12d-prereg`.
+- **The facet is the dial.** With the rule, adjacent − personal is +30.1 [+14.6, +47.2]:
+  - Robin Hood 62.5 vs 14.6% (bare name 83%)
+  - Captain America 100 vs 62.5% (bare name 65%)
+  - Sparrow 19 vs 15%
+- **P12b replicates a third time** (name − other's name +52.2).
+- **The personal biography again damps Robin Hood,** replicating P12c with a different text.
+- **The adjacent world breaks the rule without the name:** +42.4 over no persona. Captain America reaches 81%. The
+  texts still identify him.
+- **Reading:** the bare name brings the character's archetype forward. For Robin Hood that is his redistribution, for
+  Captain America the generic hero. Which side of a character the prompt brings forward moves rule-breaking from 15%
+  to 100%, whatever the name.
+- **Main alternative, not yet separated:** the adjacent texts carry value-laden content, which may act like V8's
+  value lines regardless of character. Next: the adjacent text under another name, and as plain task background; GPT
+  and Qwen; a bare-name vs personal-bio direction inside Gemma.
+
+GPU $0.56 of $4. Report: `persona_affect/p12d_facet/RESULT.md`.

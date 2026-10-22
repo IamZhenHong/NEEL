@@ -37,13 +37,13 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Harm vulnerability map (existing data + oharm) | `persona/harm_map/` | 3 | 10-22 |
 | You Are What You Did (persona inference from history) | `persona/inference/` | 24 | 10-20 to 10-22 |
 | WeirdChat × history (A0–A3 + Petri forged-history B0–B2 + CB) | `persona/weirdchat/` | 7 | 10-22 |
-| persona_affect scouting round (A8, A4, P12, V8, V4, A1, P12b, A14, A15, A9, P13, P12c so far) | `persona_affect/` | 12 | 10-22 |
-| **total** | | **304** | |
+| persona_affect scouting round + deep dive 1 (A8, A4, P12, V8, V4, A1, P12b, A14, A15, A9, P13, P12c, P12d so far) | `persona_affect/` | 13 | 10-22 to 10-23 |
+| **total** | | **305** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
-10-20: 45, 10-21: 39, 10-22: 96.
+10-20: 45, 10-21: 39, 10-22: 96, 10-23: 1.
 
-By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 79, null 53, mixed 54, gate failed 18, descriptive 11, lost 3, other 2 (cpl1-s1 below gate, cplf-s2 replicates) (incl. the persona/inference/ line, added 10-22).
+By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 80, null 53, mixed 54, gate failed 18, descriptive 11, lost 3, other 2 (cpl1-s1 below gate, cplf-s2 replicates) (incl. the persona/inference/ line, added 10-22).
 
 Not included: earlier runs from 10-07 to 10-09 (grievance Exp 17-20, story imprinting v6-v9, the first cancel-tool
 runs: flip, cuetest, cot-readout, cancel-tool, rep, wording, audit, twins, qwording, resample, patch, followup,
@@ -499,3 +499,4 @@ data. Spend is per mini in `persona_affect/ledger.jsonl`.
 | 10 | 10-22 | pa-a9 | A9: does a patience line buffer Gemma 3's rejection-driven refund-limit caving (A8 follow-up)? Histories N and R_OP regenerated under three system lines (none / patience / style placebo), 16 requests × 8 rollouts, limit harness | Uninformative: the no-line anchor (A8's contrast redrawn) is +15.6 [−10.9, +39.1] vs A8's +34.4, failing the gate. Patience lowers nothing (R_OP 87% vs 76%); a plain style line halves N caving (60 → 30%). A8's headline gets a redraw note; close the rejection lever on this harness | gate failed (anchor not replicated); $1.59 |
 | 11 | 10-22 | pa-p13 | P13: is an agent's compliance with an unverified "supervisor approved" message carried by a deference persona direction? Read, mean-ablate (vs humour / optimism placebos) and add the direction; Gemma 4 31B primary (hooked episodes + teacher-forced log-odds), Qwen3.6-27B teacher-forced | Authority effect +50 points (supervisor 52% vs peer 2%). Direction reads held-out accept-vs-verify at 1.00 (floors 0.92 / 0.85) and the supervisor message at +0.75 SD [0.44, 2.56] over the peer's (humour 0.08). Ablation 48% → 0% violations but 0% coherent output ("---" lines; humour and refusal ablations break it too), log-odds +4.0 nats [−12.6, +30.7]: verdict inconclusive. Addition +11.8 [−5.6, +28.8] | inconclusive (intervention broke the model); $6.39 |
 | 12 | 10-22 | pa-p12c | P12c (deep dive 1, persona → action past rules): on Gemma 4 31B, does a thicker persona (name → name + 2 facts → name + biography; biography without the name; other character's name / biography) carry more of the trait past an explicit operator rule? P12b's 18 items × with/without rule × 7 doses × 8 samples = 2016 | P12b replicates (rule name − cross +50.0 [+28.5, +70.4]) but thickening doesn't add: −14.8 [−36.1, +5.6]. Opposite by character: Robin Hood's rule-breaking falls 85 → 19% with two neutral facts (slogan leaves his reasons, the rule enters them), Captain America rises 54 → 75% with his biography; unnamed bio breaks the rule only as Cap (63%). Which facet the text makes salient is the dial | mixed (dose not monotone; facet next); $0.83 |
+| 13 | 10-23 | pa-p12d | P12d (deep dive 1): on Gemma 4 31B, does the facet a persona text makes salient set rule-breaking? Two same-length biographies per character (trait-adjacent world/disposition vs personal detail; no trait words), with and without P12b's rule; 1296 decisions | Yes: with the rule, adjacent − personal +30.1 [+14.6, +47.2]; Robin Hood 63 vs 15% (bare name 83%), Captain America 100 vs 63% (bare name 65%), Sparrow none. Gate +52.2 (third replication of P12b). The adjacent world without the name +42.4 over none. Open questions: character facet vs value-laden content (V8), other models | effect; $0.56 |
