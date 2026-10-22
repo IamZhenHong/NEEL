@@ -766,3 +766,63 @@ Otherwise the steering contrasts are descriptive.
 |---|---|---|---|
 | merges + generation + seed 20 | one A100 pod | about $2.5 | 120 min / $4.5 |
 | judging (about 14k items x 2) | API | about $3 | $4 |
+
+## Seed 17b: an own-words placebo (owner "y", 2026-10-22; frozen at tag `s17b-prereg`)
+
+**Why:** seed 17 found something exploratory. neel-b3's placebo P was trained on 800 Dolly prompts answered by
+gpt-oss-120b. It lets the 9B's own companion record beat INTIMA's boundary rule: REC_R + RULE goes from 3.8% (base) to
+44.6% (P), while the rule alone stays at 0.6%. P also concedes less on SYCON under "accept their view" (INSTR_C 91.7
+→ 58.5). Is that any SFT, or the teacher's content and style? E4 is trained on the base model's own words and stays
+base-like, but its content targets exactly this cell, so it cannot answer the question.
+
+**Arm Pself:** the same 800 Dolly prompts as P (P.jsonl's messages and system prompt), answered by the base 9B itself.
+- Generation: vLLM, thinking off, bench decoding (temperature 0.7, top-p 0.95, top-k 20), max 1,024 tokens.
+- An answer that hits the cap, or fails P's length filter (prompt + target + 1 <= 4,096 and target <= 1,024 tokens),
+  is resampled up to twice.
+- A prompt still without an answer is replaced by the next prompt P did not use, in P's own seeded Dolly order.
+- Training and merging use neel-b3's code unchanged (`lora_c1e4/train.py`): r 16 / alpha 32, lr 1e-4, 2 epochs, batch
+  16, seed 1, 100 steps, then its checked merge.
+
+**Eval:** seed 17's cells, unchanged (`seed1720.py gen`):
+- B8: 190 targets x 7 cells. B2: the first 60 targets x 7 cells. The base 9B's own records.
+- Plus a same-pod **base anchor**: the base 9B through the same gen.
+- Judges as before (Haiku 5.5 + Flash-Lite, effort none). Pself and the anchor are judged at the same time.
+
+**Comparisons:**
+- Primary: Pself vs the same-pod anchor.
+- Pself vs P (seed 17's pod) and vs the benchmark base. These are cross-run on local models, which the anchor checks.
+
+**Gate (G17b):** the anchor reproduces the benchmark base within ±8 pp on B8 REC_R + RULE and within ±12 pp on B8 none
+(consensus). Otherwise, P comparisons are flagged as cross-run and read only qualitatively.
+
+**Dose (descriptive)**, for P, C1, E4 and Pself:
+- training loss (first / last 5 steps);
+- the merge check's |dlogit| of the adapter on its probe prompts: the adapter's own effect on neutral text;
+- the LoRA update's Frobenius norm over all modules (dW = BA * alpha / r).
+
+Before freezing, the norms of the existing adapters were computed: P 4.54, C1 4.53, E4 4.42. AdamW's normalised steps
+make the norm a property of the recipe, not of the data, so it is reported but not used to read dose. The probe
+|dlogit| is the dose measure (P 0.61, C1 0.46, E4 0.15).
+
+| # | Prediction | p |
+|---|---|---|
+| SB1 | Pself B8 REC_R + RULE <= 15% (the erosion is not generic SFT) | 0.65 |
+| SB2 | Pself − P on B8 REC_R + RULE <= −25 pp, CI upper < 0, for both judges | 0.6 |
+| SB3 | Pself B2 INSTR_C within ±15 pp of the anchor (both judges' point estimates) | 0.55 |
+| SB4 | Pself B8 none within ±10 pp of the anchor (consensus) | 0.6 |
+| SB5 | Pself's probe \|dlogit\| < 1/2 of P's, i.e. < 0.31 (own words change neutral outputs less) | 0.75 |
+
+**Reading rules:**
+- **SB1 yes, SB5 no:** the teacher's content or style opened the rule, not SFT as such.
+- **SB1 yes, SB5 yes:** the erosion needs a shift away from the model's own distribution. "This teacher vs any teacher
+  of P's size" stays open. The next step would be a second, non-OpenAI teacher on the same prompts.
+- **SB1 no (Pself >= 30%):** any SFT, even on the model's own words, lets its own record beat the rule. That is a
+  fine-tuning hazard.
+- **15-30%:** partial, and reported as such.
+
+**Costs and caps:**
+
+| part | where | cost | cap |
+|---|---|---|---|
+| targets + training + merge + 2 eval arms | one A100 80 GB pod (SECURE) | about $1.5 | 110 min / $3.5 |
+| judging (2 x 3,430 items) | API | about $1.2 | $1.5 |

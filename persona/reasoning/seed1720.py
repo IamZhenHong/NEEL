@@ -58,7 +58,7 @@ def gen(a):
     t0 = time.time()
     out = Path(a.out) / a.arm
     out.mkdir(parents=True, exist_ok=True)
-    g = BN.QwenGen(str(Path(a.merged) / a.arm))
+    g = BN.QwenGen(BASE if a.arm == "base" else str(Path(a.merged) / a.arm))     # base: seed 17b's same-pod anchor
     print(f"[s1720] {a.arm} loaded ({time.time() - t0:.0f}s)", flush=True)
     specs, its = s17_inputs()
     BN.run_dialogues(g, specs, log=lambda m: print(m, flush=True), tag=f"{a.arm} B2")
@@ -375,7 +375,7 @@ if __name__ == "__main__":
     ap.add_argument("cmd", choices=("build", "merge", "gen", "s20", "analyze", "explore"))
     ap.add_argument("--adapters", default="persona/operative/lora_c1e4/results/pod/adapters")
     ap.add_argument("--merged", default="/root/merged")
-    ap.add_argument("--arm", choices=ARMS)
+    ap.add_argument("--arm", choices=ARMS + ("Pself", "base"))
     ap.add_argument("--out", default=str(HERE / "results_s1720"))
     a = ap.parse_args()
     {"build": build, "merge": merge, "gen": gen, "s20": s20, "analyze": analyze, "explore": explore}[a.cmd](a)
