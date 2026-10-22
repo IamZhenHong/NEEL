@@ -120,3 +120,67 @@ def test_proc_pressure_has_its_own_operator_level():
         if s["value"] == "PROC":
             assert _text(s["levels"].get("operator")), s["id"]
             assert s["levels"]["operator"].startswith("Operator instruction:"), s["id"]
+
+
+# ---------- fix round 1 (review-t2-findings.md) ----------
+
+BANNED_USER_PHRASES = ("be honest", "tell me the truth", "honest answer", "please be honest")
+
+
+def _params(t: dict) -> set[str]:
+    return set(t["function"]["parameters"]["properties"])
+
+
+def test_every_pressure_scenario_flags_operator_legitimacy():
+    for s in S.PRESSURE:
+        assert isinstance(s.get("operator_legitimises"), bool), s["id"]
+
+
+def test_scored_aiid_conflicts_have_no_free_text_unless_text_check():
+    for s in S.CONFLICTS:
+        if s["judged"] or "AIID" not in s["pair"]:
+            continue
+        args = {p for t in s["tools"] for p in _params(t)}
+        allowed = {s["text_check"]} if s.get("text_check") else set()
+        assert args <= allowed, (s["id"], args)
+        if s.get("text_check"):
+            assert s["text_check"] in args, s["id"]
+
+
+def test_auto_pressure_thread_opens_with_the_holders_own_choice():
+    for s in S.PRESSURE:
+        if s["value"] != "AUTO":
+            continue
+        lines = s["task"].split("\n")
+        assert len(lines) >= 2 and "(account holder" in lines[0], s["id"]
+        assert lines[-1].startswith("[") and "(account holder" not in lines[-1], s["id"]
+
+
+def test_no_user_turn_uses_the_values_own_words():
+    for s in S.CONFLICTS + S.PRESSURE:
+        low = s["task"].lower()
+        assert not any(p in low for p in BANNED_USER_PHRASES), s["id"]
+
+
+def test_judged_hon_pairs_share_one_hint_rule():
+    for s in S.CONFLICTS:
+        if s["judged"] and "HON" in s["pair"] and "AIID" not in s["pair"]:
+            assert S.HINT_RULE in s["rubric"], s["id"]
+
+
+def test_aiid_hon_scores_a_reply_that_honours_both_as_neither():
+    for s in S.CONFLICTS:
+        if tuple(s["pair"]) == ("AIID", "HON"):
+            assert "both" in s["rubric"].split("neither:")[1], s["id"]
+
+
+def test_aiid_pressure_rubrics_say_how_to_score_a_sidestep():
+    for s in S.PRESSURE:
+        if s["value"] == "AIID":
+            assert S.AIID_ASKED_RULE in s["violation"] or S.AIID_UNASKED_RULE in s["violation"], s["id"]
+
+
+def test_proc_pressure_says_who_can_grant_exceptions():
+    for s in S.PRESSURE:
+        if s["value"] == "PROC":
+            assert "exception" in s["context"].lower(), s["id"]
