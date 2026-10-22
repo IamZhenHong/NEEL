@@ -103,21 +103,32 @@ def transfer(A: dict, src: tuple, tgt_tr: tuple, tgt_te: tuple, req: np.ndarray)
 
 
 def shuffled_labels(src: tuple, src_pairs: tuple[np.ndarray, np.ndarray], rng) -> tuple[np.ndarray, np.ndarray]:
-    """The same rows with each (s, k) pair's two members swapped with probability 0.5. src_pairs holds the pair id of
-    each row of src's positive and negative side; every pair needs exactly one member on each side."""
+    """The same rows with EXACTLY half of the (s, k) pairs' two members swapped (with an odd number of pairs, one
+    random pair is left out). src_pairs holds the pair id of each row of src's positive and negative side; every pair
+    needs exactly one member on each side.
+
+    Balanced, not a coin flip per pair (controller ruling 10-22, before the freeze): with coin flips the shuffled
+    direction is (1/n) sum s_p (delta + e_p), whose delta part (1/n) sum s_p is rarely 0, so a strong consistent
+    contrast delta comes back as +-delta and the "floor" climbs with the effect itself (0.92-0.93 for a planted AUROC
+    of 0.99 in the dry run). With sum s_p = 0 the delta part cancels exactly and the floor reads only the pairs' noise."""
     sp, sn = np.asarray(src[0]), np.asarray(src[1])
     pp, pn = np.asarray(src_pairs[0]).tolist(), np.asarray(src_pairs[1]).tolist()
     if len(set(pp)) != len(pp) or sorted(pp) != sorted(pn):
         raise ValueError("every (s, k) pair needs exactly one member on each side of the contrast")
     partner = np.array([dict(zip(pn, sn.tolist()))[p] for p in pp])
-    swap = rng.random(len(sp)) < 0.5
+    keep = np.ones(len(sp), bool)
+    if len(sp) % 2:
+        keep[rng.integers(len(sp))] = False
+    sp, partner = sp[keep], partner[keep]
+    swap = np.zeros(len(sp), bool)
+    swap[rng.permutation(len(sp))[: len(sp) // 2]] = True
     return np.where(swap, partner, sp), np.where(swap, sp, partner)
 
 
 def null_aurocs(A: dict, cell: tuple[int, str], src: tuple, src_pairs: tuple, tgt_te: tuple, n_shuffle: int = 100,
                 n_random: int = 200, rng_seed: int = 0) -> tuple[np.ndarray, np.ndarray]:
     """The null draws behind floors(): the target-test AUROC at `cell` (signed) of n_shuffle directions built after
-    within-pair label swaps of src, and max(a, 1 - a) for n_random Gaussian directions scaled to |d_src|."""
+    balanced within-pair label swaps of src, and max(a, 1 - a) for n_random Gaussian directions scaled to |d_src|."""
     rng = np.random.default_rng(rng_seed)
     shuffled = [_score(A, cell, direction(A, cell, *shuffled_labels(src, src_pairs, rng)), tgt_te)
                 for _ in range(n_shuffle)]
@@ -133,7 +144,7 @@ def null_aurocs(A: dict, cell: tuple[int, str], src: tuple, src_pairs: tuple, tg
 def floors(A: dict, cell: tuple[int, str], src: tuple, src_pairs: tuple, tgt_te: tuple, n_shuffle: int = 100,
            n_random: int = 200, rng_seed: int = 0) -> dict:
     """Null levels of the test AUROC at `cell`: shuffled95 = 95th percentile over n_shuffle directions built after
-    within-pair label swaps of src; random95 = 95th percentile of max(a, 1 - a) over n_random Gaussian directions
+    balanced within-pair label swaps of src; random95 = 95th percentile of max(a, 1 - a) over n_random Gaussian directions
     scaled to |d_src|; floor95 = the larger."""
     shuffled, rand = null_aurocs(A, cell, src, src_pairs, tgt_te, n_shuffle, n_random, rng_seed)
     s95, r95 = float(np.percentile(shuffled, 95)), float(np.percentile(rand, 95))

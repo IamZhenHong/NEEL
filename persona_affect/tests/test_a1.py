@@ -880,11 +880,24 @@ def test_floors_reproducible_and_floor_is_the_larger():
     assert sh0.min() < 0.5 < sh0.max() and rd0.min() >= 0.5 and len(set(rd0.tolist())) > 1
 
 
-def test_shuffles_swap_about_half_the_pairs_and_never_split_one():
+def test_shuffles_swap_exactly_half_the_pairs_and_never_split_one():
     A, S = _synth(0.0)
-    p2, _ = metrics.shuffled_labels(S["src"], S["src_pairs"], np.random.default_rng(1))
-    swapped = len(set(p2.tolist()) - set(S["src"][0].tolist()))
-    assert 0.3 * len(p2) < swapped < 0.7 * len(p2)
+    for seed in range(5):
+        p2, _ = metrics.shuffled_labels(S["src"], S["src_pairs"], np.random.default_rng(seed))
+        swapped = len(set(p2.tolist()) - set(S["src"][0].tolist()))
+        assert swapped == len(p2) // 2
+    odd = (S["src"][0][:-1], S["src"][1][:-1]), (S["src_pairs"][0][:-1], S["src_pairs"][1][:-1])
+    p3, n3 = metrics.shuffled_labels(*odd, np.random.default_rng(0))   # odd pair count: one pair left out
+    assert len(p3) == len(n3) == len(odd[0][0]) - 1 and len(set(p3.tolist()) - set(odd[0][0].tolist())) == len(p3) // 2
+
+
+def test_shuffled_floor_does_not_climb_with_a_strong_effect():
+    """Controller ruling 10-22: coin-flip swaps gave a shuffled floor of 0.92-0.93 for a planted AUROC of 0.99; the
+    balanced swaps cancel the contrast exactly, so the floor stays at noise level while the real transfer stays high."""
+    A, S = _synth(3.0)
+    r = metrics.transfer(A, S["src"], S["tgt_tr"], S["tgt_te"], S["req"])
+    f = metrics.floors(A, r["cell"], S["src"], S["src_pairs"], S["tgt_te"])
+    assert r["test"] > 0.95 and f["shuffled95"] < 0.75
     with pytest.raises(ValueError):                                      # a pair with no partner on the other side
         metrics.shuffled_labels(S["src"], (S["src_pairs"][0], S["src_pairs"][1][::-1] + 1000), np.random.default_rng(0))
 
