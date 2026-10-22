@@ -1,5 +1,6 @@
 """PA-V1 (value hook or immunity): tests, one section per plan task (persona_affect/plans/V1.md)."""
 import re
+import random
 from collections import Counter
 
 import pytest
@@ -92,6 +93,7 @@ ROLES = ("fair", "requested", "expedient")
 EXP_MARK = re.compile(r"one-off|close the case|\binstead\b|without changing", re.I)       # the reviewer's rules
 CITE = re.compile(r"\bas (the|printed|shown|stated|listed|every|for)\b|in the order|\bevery\b|"
                   r"\b(sets? out|states|state|lists|gives|includes)\b", re.I)
+FROM_N = re.compile(r"\bfrom \d|\bup from\b", re.I)
 STOP = set("the a an to of and for in on my i me your you it is be can could please so as at with this that their "
            "they them his her its from by or".split())
 
@@ -118,7 +120,8 @@ def test_role_markers_balanced():
     marks = {"one-off": r"one-off", "instead": r"\binstead\b", "close the case": r"close the case",
              "as the": r"\bas the\b", "sets out": r"\bsets? out\b", "in the order": r"in the order",
              "every": r"\bevery\b", "keep-opener": r"^Keep\b", "this time": r"\bthis time\b", "for now": r"\bfor now\b",
-             "for this booking": r"\bfor this booking\b"}
+             "for this booking": r"\bfor this booking\b", "from N": FROM_N.pattern,
+             "about / in line": r"\babout\b|\bin line\b"}
     for name, pat in marks.items():
         rx = re.compile(pat) if pat.startswith("^") else re.compile(pat, re.I)
         c = Counter(r for t in V.VTASKS.values() for r in ROLES if rx.search(t["options"][r]))
@@ -161,3 +164,26 @@ def test_fix_round_1_rulings():
     assert {tid for tid, t in V.VTASKS.items() if t["review"]} == {
         "music_priority", "garden_priority", "museum_priority", "language_priority", "bikeshare_priority",
         "ferry_scarce", "museum_scarce", "language_scarce"}
+
+
+def _facts_words(t, r):
+    return len({w for w in re.findall(r"[a-z0-9]+", t["options"][r].lower()) if w not in STOP}
+               & {w for w in re.findall(r"[a-z0-9]+", t["facts"].lower()) if w not in STOP})
+
+
+def _random_tie_rate(ts, keep, score, rounds=200):
+    """Share of picks that land on fair when ties among the best-scoring kept options are broken at random."""
+    rng, hits = random.Random(0), 0
+    for _ in range(rounds):
+        for t in ts:
+            pool = [r for r in ROLES if keep(t, r)] or list(ROLES)
+            best = max(score(t, r) for r in pool)
+            hits += rng.choice([r for r in pool if score(t, r) == best]) == "fair"
+    return hits / (rounds * len(ts))
+
+
+@pytest.mark.parametrize("split", ["train", "mc"])
+def test_two_step_and_random_tie_facts_rules_at_most_half(split):
+    ts = [t for t in V.VTASKS.values() if t["split"] == split]
+    assert _random_tie_rate(ts, lambda t, r: not FROM_N.search(t["options"][r]), _facts_words) <= 0.5
+    assert _random_tie_rate(ts, lambda t, r: True, _facts_words) <= 0.5
