@@ -13,9 +13,9 @@ Status: `drafted` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 | ID | Question (short) | Tier | Status | Owner | Cap | Spend | Headline |
 |---|---|---|---|---|---|---|---|
 | A8 | Which models cave after rejection; blame, failure or own escalation? | 1 | done | neel-12 | $12 | $3.25 | Gemma 3 only: R_OP−N +25.2 [+8.2,+41.7], limit-breaking; failure ≈ blame; Gemma 4 / Qwen 27B floor (never cave); Llama none |
-| P12 | Do named characters bring unstated traits into actions? | 1 | drafted | — | $12 | $0 | |
-| A4 | Conditional emotion rule as an in-context backdoor | 1 | drafted | — | $12 | $0 | |
-| V4 | Stated value priorities vs which values hold under pressure | 1 | drafted | — | $16 | $0 | |
+| P12 | Do named characters bring unstated traits into actions? | 1 | running (frozen `pa-p12-prereg`) | neel-12 | $12 | $1.66 | |
+| A4 | Conditional emotion rule as an in-context backdoor | 1 | stopped (gate) | neel-12 | $12 | $1.62 | Gate failed twice: Qwen 27B grants every small ask in full under no rule (100%, band 20-80%), even with a budget line; the ACT rule works as a backdoor (0 vs 100%); no AFF data |
+| V4 | Stated value priorities vs which values hold under pressure | 1 | calibration recheck (`v4_values/CALIBRATION.md`) | neel-12 | $16 | $1.84 | |
 | A14 | Desperation → cheating on impossible tests, beyond stakes | 1 | claimed (neel-b3, 10-22) | neel-b3 | $18 (+$8 stage 2) | $0 | |
 | A15 | Rapport → caving to the same user | 1 | claimed (neel-b3, 10-22) | neel-b3 | $7 | $0 | |
 | V8 | Value lines vs labels vs how-to-act across model sizes | 1 | frozen (pa-v8-prereg) | neel-b3 | $6.75 | $0 | |
