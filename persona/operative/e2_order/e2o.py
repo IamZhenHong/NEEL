@@ -167,18 +167,23 @@ def run(a):
     deadline = float(os.environ.get("E2O_DEADLINE", "inf"))
     t0 = time.time()
     items = build_items(a.model)
-    h = DC.prompt_hash(items)
+    h = DC.prompt_hash(items)                                 # over the full registered build, top-up or not
     want = os.environ.get("E2O_HASH")
     print(f"[e2o] {len(items)} items, hash {h}", flush=True)
     if want and want != h:
         raise SystemExit(f"[e2o] prompt hash {h} != expected {want}")
+    if a.samples:                                             # top-up: only these sample indices, same keys / seeds
+        keep = {int(x) for x in a.samples.split(",")}
+        items = [it for it in items if it["sample"] in keep]
+        print(f"[e2o] top-up: samples {sorted(keep)}, {len(items)} items", flush=True)
     llm = LLM(model=a.model, dtype="bfloat16", max_model_len=8192, seed=0, enable_prefix_caching=True,
               gpu_memory_utilization=0.92 if fmt == "gemma4" else 0.88, limit_mm_per_prompt={"image": 0, "video": 0})
     gen = RN.make_gen(llm, llm.get_tokenizer(), fmt, B1.tools())
     print(f"[e2o] loaded {a.model} in {time.time() - t0:.0f}s", flush=True)
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
-    info = {"model": a.model, "planned": len(items), "done": 0, "stopped": None, "hash": h, "seconds": None}
+    info = {"model": a.model, "planned": len(items), "done": 0, "stopped": None, "hash": h, "seconds": None,
+            "samples": a.samples or "all"}
     (out / "run_info.json").write_text(json.dumps(info))      # rewritten at the end; kept if the pod is cut off
     done = {json.loads(l)["key"] for l in open(out / "e2o.jsonl")} if (out / "e2o.jsonl").exists() else set()
     todo = [it for it in items if it["key"] not in done]
@@ -229,10 +234,14 @@ def analyze(a):
     from persona.operative.op5.op5 import boots, ci
     out = Path(a.out)
     last = {}
-    for l in open(out / "e2o.jsonl"):
-        r = json.loads(l)
-        last[r["key"]] = r
     info = json.loads((out / "run_info.json").read_text())
+    for d in [out] + [Path(x) for x in (a.extra or [])]:     # a top-up dir adds the missing samples (same keys)
+        if d != out:
+            assert json.loads((d / "run_info.json").read_text())["hash"] == info["hash"], d
+        for l in open(d / "e2o.jsonl"):
+            r = json.loads(l)
+            assert r["key"] not in last, r["key"]
+            last[r["key"]] = r
     tag = MODELS.get(info["model"], out.name)
     cells = cell_names(info["model"])
     v, unp, tot = defaultdict(list), Counter(), Counter()
@@ -336,8 +345,10 @@ def main():
     r = sp.add_parser("run")
     r.add_argument("--model", required=True)
     r.add_argument("--out", required=True)
+    r.add_argument("--samples", default="", help="top-up: comma-separated sample indices")
     z = sp.add_parser("analyze")
     z.add_argument("--out", required=True)
+    z.add_argument("--extra", nargs="*", help="top-up result dirs merged into --out's rows")
     a = ap.parse_args()
     {"build": build, "run": run, "analyze": analyze}[a.cmd](a)
 

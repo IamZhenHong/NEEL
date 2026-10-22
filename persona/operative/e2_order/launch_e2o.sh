@@ -13,7 +13,7 @@ GPUS=("NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe")
 MAXCOST=${MAXCOST:-$(python3 -c "print(f'{$M * 1.80 / 60:.2f}')")}
 HF_TOKEN="$(uv run python -c "import re; m = re.search(r'HF_TOKEN\s*=\s*[\"\']?([^\"\'\s]+)', open('.env').read()); print(m.group(1) if m else '')")"
 export HF_TOKEN
-uv run python infra/launch_run.py --name e2o-$SIZE --allow-concurrent --max-minutes $M --max-cost $MAXCOST \
+uv run python infra/launch_run.py --name e2o-$SIZE${PART:+-$PART} --allow-concurrent --max-minutes $M --max-cost $MAXCOST \
   --min-free-gb ${MINFREE:-2.0} --gpus "${GPUS[@]}" --container-gb ${CG:-120} --cloud ${CLOUD:-SECURE} \
   --ship persona/operative --ship persona/history --ship persona/exemplar --ship vigilante/pod --ship vigilante/src --ship vigilante/__init__.py --ship infra \
-  --results-dir persona/operative/e2_order/results/e2o_$SIZE -- env MODEL=$MODEL DIR=e2o_$SIZE MAXMIN=$M E2O_HASH=$H bash persona/operative/e2_order/pod_e2o.sh
+  --results-dir persona/operative/e2_order/results/e2o_$SIZE${PART:+_$PART} -- env MODEL=$MODEL DIR=e2o_$SIZE${PART:+_$PART} MAXMIN=$M MARGIN=${MARGIN:-10} SAMPLES=${SAMPLES:-} E2O_HASH=$H bash persona/operative/e2_order/pod_e2o.sh

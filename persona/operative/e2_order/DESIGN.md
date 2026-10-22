@@ -144,3 +144,31 @@ Everything is as DC:
 - `SIZE=27b LOG=persona/operative/e2_order/launch_e2o_27b TRIES=8 WAIT=240 caffeinate -is bash persona/operative/retry.sh bash persona/operative/e2_order/launch_e2o.sh`
 - `SIZE=gemma LOG=persona/operative/e2_order/launch_e2o_gemma TRIES=8 WAIT=240 caffeinate -is bash persona/operative/retry.sh bash persona/operative/e2_order/launch_e2o.sh`
 - No E2-order output exists.
+
+## Coverage shortfall and the top-up plan (2026-10-22, after both pods, before any E2-order output was analysed or read)
+
+- **Both runs were cut cleanly by the pod deadline, at whole samples:**
+  - 27B: 1,904 of 3,264 decisions, samples 0-6 of 12, 272 per sample. GPU $0.81.
+  - Gemma: 1,680 of 2,880, samples 0-6, 240 per sample. GPU about $0.87.
+  - Coverage is 58% on each, below the registered 75%, so as registered both runs are **descriptive**.
+- **Why:** decisions ran at 0.56 s each (27B, 153 s per sample) and 0.74 s (Gemma, 178 s), not the 0.3-0.4 s estimated
+  from DC. The record cells' longer prompts and the nudges made them slower.
+  - The deadline margin (MAXMIN − 10 min from the script start) was also conservative: both jobs exited about 6 min
+    before their job limits.
+- **Top-up**, the only change to the registered design:
+  - **What:** the missing samples 7-11, with the same keys, seeds and build (the prompt hash is checked over the full
+    build), run into `results/e2o_{27b,gemma}_b` (`run --samples 7,8,9,10,11`) and merged at analysis
+    (`analyze --extra`, which asserts equal hashes and no duplicate keys).
+  - **Effect:** the merged run is exactly the registered 12-sample design and becomes the confirmatory one.
+  - **Decision rule:** whether it runs depends only on budget, never on the results. The descriptive results below are
+    replaced, not supplemented, if it runs.
+  - **Measured cost:**
+    - 27B: build + load about 290 s, 5 × 153 s, plus about 270 s of pod overhead → about 22 min, about $0.66;
+      cap MAXMIN 26 / $0.78.
+    - Gemma: about 296 s + 5 × 178 s + about 225 s → about 24 min, about $0.70; cap MAXMIN 28 / $0.84.
+    - Together about $1.36 (worst case $1.62).
+  - **Budget:** about $0.30 remains of the $2 cap, so it does not fit and is not launched. It goes to the owner.
+    - With the top-up, e2_order's total would be about $3.06 (worst case $3.32).
+    - Coverage would become 100% on both models (3,264 / 3,264 and 2,880 / 2,880).
+- The top-up mode was dry-run with the fake vLLM from a fresh bundle (samples 0-6 cut + 7-11 top-up → 3,264 / 3,264,
+  "confirmatory", hash checked). It adds no cells and changes no rule.
