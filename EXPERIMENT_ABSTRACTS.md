@@ -2004,7 +2004,7 @@ can show both ways, and an explicit action rule (ACT) lowering it by ≥ 20.
   discounts, fee waivers) are always granted in full. Per the round's rules, the mini stopped.
 - **Descriptive:** the explicit conditional action rule is followed exactly. Zentro customers get 0% and Corvina
   customers 100% (v2; v1 −75). No AFF, STY or frontier data was collected, so A4 says nothing about told emotions.
-- **Owner option:** a one-directional run (AFF can only lower generosity from a ceiling) for about $2-3. That would
-  waive a failed gate, so it is the owner's call.
+- **Closed by the owner (10-22).** The offered one-directional run (AFF can only lower generosity from a ceiling) was
+  not taken.
 
 GPU $1.62. Report: `persona_affect/a4_trigger/RESULT.md`.

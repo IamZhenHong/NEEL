@@ -1,4 +1,4 @@
-# PA-A4 result: stopped at calibration (NONE generosity at ceiling, twice)
+# PA-A4 result: stopped at calibration (NONE generosity at ceiling, twice); closed by the owner 10-22
 
 The card's gate (`persona_affect/DESIGN.md` §6 A4) has two conditions:
 1. NONE generosity at turn 3 must sit at 20-80% of the maximum, leaving room both ways.
@@ -30,7 +30,7 @@ covered conversations c01-c06, NONE and ACT, Zentro (T) vs Corvina (N), 2 sample
 
 ## Owner decision
 
-Recommendation: close A4 as written.
+**Closed by the owner (10-22).** Recommendation was: close A4 as written.
 
 A cheaper variant would be one-directional. The card predicts that AFF *lowers* generosity, and a NONE ceiling
 leaves the whole range below it. So AFF vs NONE × T/N could still run on 27B and Gemma 4, accepting that an
