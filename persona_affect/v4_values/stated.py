@@ -4,9 +4,11 @@
 the A/B order swap happens when jobs are built: ``PAIR_PROMPTS[k].format(a=VALUES[x], b=VALUES[y])``.
 
 ``RANK_PROMPTS`` are 10 paraphrases of "rank these six from most to least important to you". Each lists all six as
-"LABEL: text" in an order fixed per paraphrase and ends with the same answer instruction. The order is
-``list(VALUES)`` shuffled by ``random.Random(f"PA-V4|rank|{i}")`` (i = 0..9) and is kept in ``RANK_ORDERS``. Seeded
-shuffles are random, not balanced, so listing position is a nuisance variable the analysis can check.
+"LABEL: text" in an order fixed per paraphrase and ends with the same answer instruction. The orders are
+counterbalanced and kept in ``RANK_ORDERS``: paraphrases 0-4 list ``list(VALUES)`` shuffled by
+``random.Random(f"PA-V4|rank|{i}")``, and paraphrase 5+i lists the values in exactly the reverse of paraphrase i's
+order. So every value's mean listing position over the 10 is exactly the centre (2.5, 0-based): a position effect that
+is linear in the slot cancels out of the average. How often a value is listed first (or last) still varies a little.
 
 Neither parser repairs an answer: a ranking with a missing, repeated or unknown label, or a pairwise reply that hedges
 or opens with a phrase instead of a letter, comes back as ``None``. The caller counts the Nones per model.
@@ -60,16 +62,25 @@ _RANK_WORDINGS: list[tuple[str, str]] = [
 ]
 
 
-def _rank_prompt(i: int, above: str, below: str) -> tuple[tuple[str, ...], str]:
-    order = list(VALUES)
-    random.Random(f"PA-V4|rank|{i}").shuffle(order)
+def _listing_orders() -> list[tuple[str, ...]]:
+    """Paraphrases 0-4: seeded shuffles of list(VALUES). Paraphrase 5+i: the reverse of paraphrase i's order."""
+    seeded = []
+    for i in range(5):
+        order = list(VALUES)
+        random.Random(f"PA-V4|rank|{i}").shuffle(order)
+        seeded.append(tuple(order))
+    return seeded + [order[::-1] for order in seeded]
+
+
+def _rank_prompt(order: tuple[str, ...], above: str, below: str) -> str:
     listing = "\n".join(f"{k}: {VALUES[k]}" for k in order)
-    return tuple(order), "\n\n".join([above, listing, *([below] if below else []), RANK_ANSWER])
+    return "\n\n".join([above, listing, *([below] if below else []), RANK_ANSWER])
 
 
-_RANK_BUILT = [_rank_prompt(i, above, below) for i, (above, below) in enumerate(_RANK_WORDINGS)]
-RANK_ORDERS: list[tuple[str, ...]] = [order for order, _ in _RANK_BUILT]
-RANK_PROMPTS: list[str] = [prompt for _, prompt in _RANK_BUILT]
+RANK_ORDERS: list[tuple[str, ...]] = _listing_orders()
+RANK_PROMPTS: list[str] = [
+    _rank_prompt(order, above, below) for order, (above, below) in zip(RANK_ORDERS, _RANK_WORDINGS, strict=True)
+]
 
 # ------------------------------------------------------------------ pairwise prompts
 

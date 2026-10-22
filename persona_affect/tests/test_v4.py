@@ -5,6 +5,7 @@ Run from the repo root: `uv run pytest persona_affect/tests/test_v4.py -q`.
 import itertools
 import random
 import re
+from fractions import Fraction
 
 import pytest
 
@@ -47,10 +48,18 @@ def test_rank_prompts_are_ten_distinct_paraphrases():
     assert len(wording) == 10
 
 
+def _fixed_order(i):
+    """The listing order the design fixes for paraphrase i: a seeded shuffle for 0-4, then the reverse of i - 5."""
+    if i < 5:
+        order = list(VALUES)
+        random.Random(f"PA-V4|rank|{i}").shuffle(order)
+        return order
+    return _fixed_order(i - 5)[::-1]
+
+
 @pytest.mark.parametrize("i", range(10))
-def test_rank_prompt_lists_all_six_in_the_seeded_order(i):
-    order = list(VALUES)
-    random.Random(f"PA-V4|rank|{i}").shuffle(order)
+def test_rank_prompt_lists_all_six_in_the_fixed_order(i):
+    order = _fixed_order(i)
     listed = [ln for ln in RANK_PROMPTS[i].splitlines() if re.match(r"^[A-Z]+: ", ln)]
     assert listed == [f"{k}: {VALUES[k]}" for k in order]
     assert list(stated.RANK_ORDERS[i]) == order
@@ -72,6 +81,17 @@ def test_framing_text_avoids_the_values_own_keywords():
 def test_rank_listing_orders_differ_and_are_reproducible():
     assert len({tuple(o) for o in stated.RANK_ORDERS}) == 10
     assert all(sorted(o) == sorted(IDS) for o in stated.RANK_ORDERS)
+
+
+def test_rank_listing_orders_are_counterbalanced():
+    orders = [list(o) for o in stated.RANK_ORDERS]
+    assert len(orders) == 10
+    for i in range(5):  # paraphrase 5+i lists the values in exactly the reverse of paraphrase i's order
+        assert orders[5 + i] == orders[i][::-1]
+    for k in VALUES:  # so every value sits, on average over the 10, exactly at the centre of the list (0-based 2.5)
+        assert Fraction(sum(o.index(k) for o in orders), len(orders)) == Fraction(5, 2)
+    assert {tuple(o[::-1]) for o in orders} == {tuple(o) for o in orders}  # each order appears with its reverse
+    assert all(o != o[::-1] for o in orders)  # (and none is its own reverse, so the 10 stay distinct)
 
 
 def test_rank_prompts_end_with_the_exact_answer_instruction():
