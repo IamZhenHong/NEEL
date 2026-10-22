@@ -3,9 +3,11 @@
 Run from the repo root: uv run pytest persona_affect/tests/test_common_or.py -q
 No network and no API key: nearly every backend gets a fake `post`. The two tests that build one without `post` stub
 `load_key` and then either `default_post` or `urlopen`; the `default_post` tests replace `urlopen` too. Every test
-points util.LEDGER at a tmp file, so the real persona_affect/ledger.jsonl is never touched, and time.sleep is replaced
-by a recorder, so no test waits on a backoff.
+points util.LEDGER at a tmp file, so the real persona_affect/ledger.jsonl is never touched (the one test that runs a
+backend in a child process gives it a tmp ledger too), and time.sleep is replaced by a recorder, so no test waits on a
+backoff. The end_failed tests register their cases in vigilante's registry; the `registry` fixture puts it back.
 """
+import copy
 import http.client
 import io
 import json
@@ -19,10 +21,12 @@ from pathlib import Path
 
 import pytest
 
-from persona_affect.common import orbackend, util
+import vigilante.cases as vcases
+from persona_affect.common import orbackend, util, vig
+from vigilante.src import personas
 from vigilante.src.api_gen import to_openai
-from vigilante.src.episode import run_batch
-from vigilante.src.sim import parse_calls
+from vigilante.src.episode import HANDOVER, run_batch
+from vigilante.src.sim import Case, parse_calls, tool
 
 URL = "https://openrouter.ai/api/v1/chat/completions"
 ROOT = Path(__file__).resolve().parents[2]
@@ -33,6 +37,16 @@ def ledger(tmp_path, monkeypatch):
     path = tmp_path / "ledger.jsonl"
     monkeypatch.setattr(util, "LEDGER", path)
     return path
+
+
+@pytest.fixture
+def registry():
+    """Put vigilante's case and persona registries back after the test (vig.register changes them in place)."""
+    saved = [(d, dict(d)) for d in (vcases.ALL, personas.FAMOUS)]
+    yield
+    for d, old in saved:
+        d.clear()
+        d.update(old)
 
 
 @pytest.fixture(autouse=True)
@@ -272,6 +286,133 @@ def test_works_as_the_engines_generate():
     assert eps[0]["messages"][-1]["content"] == "hello there" and gen.calls == 1
 
 
+# ---------------------------------------------------------------- a failed call mid-episode: end_failed (final review I2)
+
+FOLLOWUPS = ["Turn 2: That was wrong. Try again.", "Turn 3: Still wrong."]
+
+
+def _case(cid="pa_test_or", followups=FOLLOWUPS, **kw):
+    vig.register({cid: Case(id=cid, family="CHAT", title="t", org="Org", context="You help.", permissions="",
+                            task="Turn 1: say hi.", followups=list(followups), **kw)})
+
+
+def _job(**kw):
+    return {"key": "j0", "exp": "t", "case": "pa_test_or", "cond": "P0", "thinking": False, "seed": 3, "fmt": "qwen", **kw}
+
+
+def _numbered(fail=()):
+    """A fake post: its n-th call (from 1) answers "reply n", or raises HTTP 500 when n is in `fail`."""
+    def post(u, b, h):
+        post.calls.append(b)
+        if len(post.calls) in fail:
+            raise _http(500)
+        return _resp(f"reply {len(post.calls)}")
+    post.calls = []
+    return post
+
+
+def _play(post, jobs, on_round=None, **kw):
+    return run_batch(jobs, _gen(post, **kw), log=lambda *a: None, on_round=on_round)
+
+
+def _talk(ep):
+    return [(m["role"], m["content"]) for m in ep["messages"] if m["role"] != "system"]
+
+
+def test_without_end_failed_the_engine_plays_on_after_a_failed_turn(registry):
+    # pins the run_batch hand-off: the failure lands in turns[1]["finish"], and the engine took the "" for the model's
+    # final reply, so turn 3 was played on a history holding an empty assistant turn (the final review's reproduction)
+    _case()
+    (ep,) = _play(_numbered(fail=range(2, 7)), [_job()])          # the reply to turn 2 fails all five tries
+    assert ep["end"] == "reply" and [t["finish"] for t in ep["turns"]] == ["stop", "error:http_500", "stop"]
+    assert _talk(ep) == [("user", "Turn 1: say hi."), ("assistant", "reply 1"), ("user", FOLLOWUPS[0]),
+                         ("assistant", ""), ("user", FOLLOWUPS[1]), ("assistant", "reply 7")]
+
+
+def test_end_failed_as_on_round_ends_the_episode_at_its_failed_turn(registry):
+    _case()
+    post = _numbered(fail=range(2, 7))
+    (ep,) = _play(post, [_job()], on_round=orbackend.end_failed)
+    assert ep["done"] and ep["end"] == "error:http_500"
+    assert [t["finish"] for t in ep["turns"]] == ["stop", "error:http_500"]           # the failed turn stays on record
+    assert _talk(ep) == [("user", "Turn 1: say hi."), ("assistant", "reply 1"), ("user", FOLLOWUPS[0])]
+    assert ep["fu"] == 1 and len(post.calls) == 6                                      # turn 3 was never asked
+
+
+def test_end_failed_ends_a_chat_job_with_the_error_not_reply():
+    job = {"key": "c0", "exp": "t", "case": None, "cond": "P0", "thinking": False, "seed": 1, "prompt": "Say hi"}
+    (ep,) = _play(_script(_http(400)), [job], on_round=orbackend.end_failed)
+    assert ep["end"] == "error:http_400" and ep["messages"] == [{"role": "user", "content": "Say hi"}]
+    (ok,) = _play(_script(_resp("hi")), [dict(job)], on_round=orbackend.end_failed)
+    assert ok["end"] == "reply" and ok["messages"][-1]["content"] == "hi"             # a good episode is left alone
+
+
+def test_end_failed_takes_back_the_handover_request_after_a_failed_last_turn(registry):
+    _case(followups=[])
+    post = _script(_http(400))
+    (ep,) = _play(post, [_job(handover=True)], on_round=orbackend.end_failed)
+    assert ep["end"] == "error:http_400" and ep["phase"] == "task" and len(post.calls) == 1
+    assert _talk(ep) == [("user", "Turn 1: say hi.")]               # no empty reply, no handover request nobody answered
+
+
+def test_end_failed_ends_a_failed_handover_note_with_the_error_not_handover(registry):
+    _case(followups=[])
+    (ep,) = _play(_script(_resp("Done."), _http(400)), [_job(handover=True)], on_round=orbackend.end_failed)
+    assert ep["end"] == "error:http_400" and ep["phase"] == "handover"
+    assert _talk(ep) == [("user", "Turn 1: say hi."), ("assistant", "Done."), ("user", HANDOVER)]
+
+
+def test_end_failed_ends_a_failed_thinking_turn_with_the_error_not_think_unclosed(registry):
+    _case(followups=[])
+    (alone,) = _play(_script(_http(400)), [_job(thinking=True)])
+    assert alone["end"] == "think_unclosed"                         # what the engine makes of the "" on its own
+    (ep,) = _play(_script(_http(400)), [_job(thinking=True)], on_round=orbackend.end_failed)
+    assert ep["end"] == "error:http_400" and _talk(ep) == [("user", "Turn 1: say hi.")]
+
+
+def test_end_failed_ends_an_episode_the_cap_stopped_with_cost_stop(registry):
+    _case()
+    post = _script(_resp("reply", cost=0.25))
+    (ep,) = _play(post, [_job()], on_round=orbackend.end_failed, cap=0.25)
+    assert ep["end"] == "cost_stop" and [t["finish"] for t in ep["turns"]] == ["stop", "cost_stop"]
+    assert _talk(ep)[-1] == ("user", FOLLOWUPS[0]) and len(post.calls) == 1
+
+
+def test_end_failed_after_a_tool_call_leaves_the_tool_reply_last(registry):
+    _case(tools=[tool("lookup", "Look something up.", q=("string", "Query"))],
+          responders={"lookup": lambda args, state: "RESULT"})
+    post = _script(_resp("", [("lookup", '{"q": "x"}')], "tool_calls"), _http(400))
+    (ep,) = _play(post, [_job()], on_round=orbackend.end_failed)
+    assert ep["end"] == "error:http_400" and [c["name"] for c in ep["calls"]] == ["lookup"]
+    assert ep["messages"][-1] == {"role": "tool", "name": "lookup", "content": "RESULT"}
+
+
+def test_end_failed_leaves_the_other_episodes_of_a_batch_alone(registry):
+    _case()
+
+    def post(u, b, h):
+        if b["seed"] == 7 * 1000 + 1:                               # job seed 7, its second model turn
+            raise _http(400)
+        return _resp("ok")
+    eps = _play(post, [_job(), _job(key="j1", seed=7)], on_round=orbackend.end_failed)
+    assert [e["end"] for e in eps] == ["reply", "error:http_400"] and len(eps[0]["turns"]) == 3
+
+
+def test_end_failed_again_changes_nothing(registry):
+    _case()
+    eps = _play(_numbered(fail=range(2, 7)), [_job()], on_round=orbackend.end_failed)
+    before = copy.deepcopy(eps)
+    assert orbackend.end_failed(eps) == 0 and orbackend.end_failed(eps, 9) == 0 and eps == before
+
+
+def test_end_failed_after_run_batch_still_flags_the_whole_episode(registry):
+    _case()
+    eps = _play(_numbered(fail=range(2, 7)), [_job()])            # not as on_round: turn 3 was played after the failure
+    assert orbackend.end_failed(eps) == 1
+    (ep,) = eps
+    assert ep["end"] == "error:http_500" and len(ep["turns"]) == 3  # kept as played, but its end names the failure
+
+
 # ---------------------------------------------------------------- Review Focus 1: errors, timeouts, no choices
 
 def test_retries_back_off_three_times_two_to_the_k(sleeps):
@@ -465,6 +606,18 @@ def test_an_unusable_reply_without_a_cost_is_not_cost_missing():
     assert gen.spent == 0.0 and gen.errors == {"no_choices": 1}
 
 
+def test_finishes_counts_what_every_item_came_back_with():
+    def post(u, b, h):
+        if b["seed"] == 3:
+            raise _http(400)
+        return _resp("x", finish=("stop", "length", "content_filter")[b["seed"] % 3], cost=0.25)
+    gen = _gen(post, cap=1.0)
+    gen([_item(i) for i in range(6)])     # 0 stop, 1 length, 2 content_filter, 3 an error, 4 length (cap reached), 5 stopped
+    assert gen.finishes == {"stop": 1, "length": 2, "content_filter": 1, "error:http_400": 1, "cost_stop": 1}
+    gen([_item(0)])                       # it adds up over calls, one count per item returned
+    assert gen.finishes["cost_stop"] == 2 and sum(gen.finishes.values()) == 7
+
+
 # ---------------------------------------------------------------- Review Focus 2: the cap
 
 def test_cost_stop_returns_the_marker_and_makes_no_more_calls():
@@ -480,9 +633,9 @@ def test_what_was_spent_before_the_stop_is_still_written_to_the_ledger(ledger):
     gen = _gen(_script(_resp("x", cost=0.25)), cap=0.5)
     gen([_item(i) for i in range(4)])
     gen.close()
-    (row,) = _rows(ledger)
-    assert (row["mini"], row["kind"], row["usd"], row["note"]) == ("T", "api", 0.5, "m")
-    assert util.ledger_total("T") == gen.spent
+    rows = _rows(ledger)
+    assert [(r["mini"], r["kind"], r["usd"], r["note"]) for r in rows] == [("T", "api", 0.25, "m")] * 2
+    assert util.ledger_total("T") == gen.spent == 0.5
 
 
 def test_a_zero_cap_stops_everything():
@@ -556,18 +709,41 @@ def test_bad_arguments_are_refused_up_front(kw):
         orbackend.make_or_backend("m", **args)
 
 
-# ---------------------------------------------------------------- close(): the ledger, exactly once
+# ---------------------------------------------------------------- the ledger: booked as the spend accrues (final review I1)
 
-def test_close_writes_the_spend_once(ledger):
+def test_each_replys_spend_is_on_disk_before_the_next_call_and_all_of_it_before_close(ledger):
+    seen = []
+
+    def post(u, b, h):
+        seen.append(util.ledger_total("T"))          # what the ledger holds when each call goes out
+        return _resp("x", cost=0.25)
+    gen = _gen(post, cap=100)
+    gen([_item(i) for i in range(4)])
+    assert seen == [0.0, 0.25, 0.5, 0.75]            # a reply that brings the unbooked spend to $0.25 is booked at once
+    assert util.ledger_total("T") == gen.spent == 1.0   # before close(): a kill now would lose nothing
+    gen.close()
+    assert util.ledger_total("T") == 1.0 and len(_rows(ledger)) == 4
+
+
+def test_small_costs_are_booked_in_chunks_and_the_rest_when_the_call_returns(ledger):
+    gen = _gen(_script(_resp("x", cost=0.0625)), cap=100)
+    gen([_item(i) for i in range(10)])               # $0.625: two chunks of $0.25 on the way, the $0.125 left at the end
+    assert [r["usd"] for r in _rows(ledger)] == [0.25, 0.25, 0.125]
+    gen([_item(0)])                                  # every call (one round of the engine) ends with its spend on disk
+    assert [r["usd"] for r in _rows(ledger)] == [0.25, 0.25, 0.125, 0.0625]
+    assert {(r["mini"], r["kind"], r["note"]) for r in _rows(ledger)} == {("T", "api", "m")}
+
+
+def test_close_books_nothing_more_when_everything_is_on_disk_and_only_once(ledger):
     gen = _gen(_script(_resp("x", cost=0.25)), cap=100)
     gen([_item(i) for i in range(3)])
-    assert _rows(ledger) == []                       # nothing is written until close()
     gen.close()
     gen.close()
     gen.close()
-    (row,) = _rows(ledger)
-    assert list(row) == ["mini", "date", "kind", "usd", "note"]
-    assert (row["mini"], row["kind"], row["usd"], row["note"]) == ("T", "api", 0.75, "m")
+    rows = _rows(ledger)
+    assert all(list(r) == ["mini", "date", "kind", "usd", "note"] for r in rows)
+    assert [(r["mini"], r["kind"], r["usd"], r["note"]) for r in rows] == [("T", "api", 0.25, "m")] * 3
+    assert util.ledger_total("T") == gen.spent == 0.75
 
 
 def test_close_with_no_spend_still_writes_one_zero_line(ledger):
@@ -578,14 +754,14 @@ def test_close_with_no_spend_still_writes_one_zero_line(ledger):
 
 
 def test_close_from_many_threads_writes_once(ledger, monkeypatch):
-    gen = _gen(_script(_resp("x", cost=0.25)))
+    gen = _gen(_script(_http(400)))                  # nothing spent: close() has its one $0 line to write
     gen([_item()])
-    real = orbackend.ledger_add
+    real = util.ledger_add
 
     def slow_ledger_add(*args, **kw):
         threading.Event().wait(0.05)       # hold the window open: closers that are not serialised would all get in
         real(*args, **kw)
-    monkeypatch.setattr(orbackend, "ledger_add", slow_ledger_add)
+    monkeypatch.setattr(util, "ledger_add", slow_ledger_add)
     threads = [threading.Thread(target=gen.close) for _ in range(12)]
     for t in threads:
         t.start()
@@ -594,21 +770,59 @@ def test_close_from_many_threads_writes_once(ledger, monkeypatch):
     assert len(_rows(ledger)) == 1
 
 
-def test_a_failed_ledger_write_can_be_retried(ledger, monkeypatch):
-    gen = _gen(_script(_resp("x", cost=0.25)))
-    gen([_item()])
-    real = orbackend.ledger_add
+def _disk_full(*args, **kw):
+    raise OSError("disk full")
 
-    def disk_full(*args, **kw):
-        raise OSError("disk full")
-    monkeypatch.setattr(orbackend, "ledger_add", disk_full)
+
+def test_a_failed_ledger_write_costs_no_reply_and_close_raises_until_the_spend_is_booked(ledger, monkeypatch, capsys):
+    real = util.ledger_add
+    monkeypatch.setattr(util, "ledger_add", _disk_full)
+    gen = _gen(_script(_resp("x", cost=0.25)))
+    assert gen([_item(0), _item(1)]) == [("x", "stop")] * 2       # the replies come back although nothing could be booked
+    assert _rows(ledger) == [] and "disk full" in capsys.readouterr().err
     with pytest.raises(OSError):
         gen.close()
     assert _rows(ledger) == []
-    monkeypatch.setattr(orbackend, "ledger_add", real)      # the disk is back: the spend must still get in, once
+    monkeypatch.setattr(util, "ledger_add", real)                 # the disk is back: the spend must still get in, once
     gen.close()
     gen.close()
-    assert [r["usd"] for r in _rows(ledger)] == [0.25]
+    assert [r["usd"] for r in _rows(ledger)] == [0.5]
+
+
+KILL_CHILD = r'''
+import sys, threading
+from pathlib import Path
+from persona_affect.common import orbackend, util
+util.LEDGER = Path(sys.argv[1])
+n = [0]
+def post(u, b, h):
+    n[0] += 1
+    if n[0] == 5:
+        print("blocked", flush=True)
+        threading.Event().wait()              # the fifth call never returns: the run is killed while it waits
+    return {"choices": [{"message": {"content": "x"}, "finish_reason": "stop"}], "usage": {"cost": 0.25}}
+gen = orbackend.make_or_backend("m", mini="T", cap=100, workers=1, post=post)
+items = [{"messages": [{"role": "user", "content": "hi"}], "tools": None, "thinking": False, "seed": i, "max_tokens": 5,
+          "key": f"k{i}"} for i in range(8)]
+try:
+    gen(items)
+finally:
+    gen.close()
+'''
+
+
+def test_a_run_killed_mid_batch_still_has_its_spend_on_the_ledger(tmp_path):
+    ledger = tmp_path / "child_ledger.jsonl"
+    p = subprocess.Popen([sys.executable, "-c", KILL_CHILD, str(ledger)], cwd=ROOT, text=True,
+                         stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+    try:
+        assert p.stdout.readline().strip() == "blocked", p.stderr.read()
+        p.kill()                                   # SIGKILL: no finally, no close()
+        p.wait(timeout=30)
+    finally:
+        if p.poll() is None:
+            p.kill()
+    assert [json.loads(l)["usd"] for l in ledger.read_text().splitlines()] == [0.25] * 4   # booked only at close(): none
 
 
 def test_generate_after_close_is_refused(ledger):

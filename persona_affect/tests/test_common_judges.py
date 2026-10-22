@@ -144,7 +144,8 @@ def test_a_second_call_with_the_same_prompt_hits_the_cache(cache):
 
 def test_agreement_on_identical_labels_is_kappa_1():
     labels = {f"k{i}": {H: v, G: v} for i, v in enumerate(["yes", "no", "yes", "no"])}
-    assert judges.agreement(labels) == {"kappa": 1.0, "n": 4, "none": {H: 0, G: 0}}
+    assert judges.agreement(labels) == {"kappa": 1.0, "n": 4, "none": {H: 0, G: 0},
+                                        "per_class": {"no": 1.0, "yes": 1.0}}
 
 
 # ---------------------------------------------------------------- the request
@@ -332,7 +333,7 @@ def test_multi_is_counted_per_judge_and_shown_once_per_judge(cache, capsys):
     out = _label(_fake(reply), cache, items=[_item(i) for i in range(4)])
     assert out.none == {H: {"multi": 4}, G: {}}
     assert [row[G] for row in out.values()] == ["no"] * 4 and [row[H] for row in out.values()] == [None] * 4
-    assert judges.agreement(out) == {"kappa": None, "n": 0, "none": {H: 4, G: 0}}
+    assert judges.agreement(out) == {"kappa": None, "n": 0, "none": {H: 4, G: 0}, "per_class": {}}
     err = capsys.readouterr().err
     assert err.count("[judges]") == 1 and "multi" in err and "yes or no" in err and H in err
 
@@ -824,7 +825,7 @@ def test_cost_stop_leaves_whole_items_labelled_and_the_rest_none(cache):
     assert out["k0"] == out["k1"] == {H: "yes", G: "yes"}           # item-major: both judges, then the next item
     assert out["k2"] == out["k3"] == {H: None, G: None}
     assert out.none == {H: {"cost_stop": 2}, G: {"cost_stop": 2}}
-    assert judges.agreement(out) == {"kappa": 1.0, "n": 2, "none": {H: 2, G: 2}}
+    assert judges.agreement(out) == {"kappa": 1.0, "n": 2, "none": {H: 2, G: 2}, "per_class": {"yes": 1.0}}
 
 
 def test_the_cap_is_reported_once_on_stderr(cache, capsys):
@@ -868,14 +869,51 @@ def test_parallel_overshoot_is_bounded_by_the_workers(cache):
 
 # ---------------------------------------------------------------- the ledger
 
-def test_the_spend_is_booked_once_per_judge(cache, ledger):
+def _by_note(rows):
+    out = {}
+    for r in rows:
+        out[r["note"]] = out.get(r["note"], 0.0) + r["usd"]
+    return out
+
+
+def test_the_spend_is_booked_per_judge_under_its_note(cache, ledger):
     out = _label(_fake(lambda b: _resp("yes", cost=0.25 if b["model"] == H else 0.5)), cache,
                  items=[_item(i) for i in range(3)])
     rows = _rows(ledger)
-    assert [list(r) for r in rows] == [["mini", "date", "kind", "usd", "note"]] * 2
-    assert [(r["mini"], r["kind"], r["usd"], r["note"]) for r in rows] == [
-        ("T", "api", 0.75, f"judges:{H}"), ("T", "api", 1.5, f"judges:{G}")]
+    assert all(list(r) == ["mini", "date", "kind", "usd", "note"] and (r["mini"], r["kind"]) == ("T", "api") for r in rows)
+    assert _by_note(rows) == {f"judges:{H}": 0.75, f"judges:{G}": 1.5}
     assert out.spent == 2.25 and util.ledger_total("T") == 2.25
+
+
+def test_the_spend_is_on_disk_while_the_run_goes_on(cache, ledger):
+    seen = []
+
+    def reply(body):
+        seen.append(util.ledger_total("T"))         # what the ledger holds when each call goes out
+        return _resp("yes", cost=0.25)
+    _label(_fake(reply), cache, items=[_item(i) for i in range(4)], judges=(H,))
+    assert seen == [0.0, 0.25, 0.5, 0.75]           # each reply that brings a judge's unbooked spend to $0.25 is booked
+    assert util.ledger_total("T") == 1.0            # at once, not only when label() ends
+
+
+def test_small_costs_are_booked_at_the_end_as_one_line_per_judge(cache, ledger):
+    _label(_fake(_resp("yes", cost=0.0625)), cache, items=[_item(i) for i in range(3)])
+    rows = _rows(ledger)
+    assert sorted((r["note"], r["usd"]) for r in rows) == [(f"judges:{H}", 0.1875), (f"judges:{G}", 0.1875)]
+
+
+def test_a_failed_booking_for_one_judge_still_books_the_other_and_raises(cache, ledger, monkeypatch):
+    real = util.ledger_add
+
+    def flaky(mini, kind, usd, note=""):
+        if note == f"judges:{H}":
+            raise OSError("disk full")
+        real(mini, kind, usd, note)
+    monkeypatch.setattr(util, "ledger_add", flaky)
+    with pytest.raises(OSError, match="disk full"):
+        _label(_fake(_resp("yes", cost=0.0625)), cache)
+    assert [(r["note"], r["usd"]) for r in _rows(ledger)] == [(f"judges:{G}", 0.0625)]
+    assert len(_rows(cache)) == 2                   # both answers are kept: the rerun is free, and books nothing
 
 
 def test_a_cached_rerun_books_nothing(cache, ledger):
@@ -1035,7 +1073,7 @@ def test_agreement_matches_the_vigilante_kappa():
     labels = {f"k{i}": {H: x, G: y} for i, (x, y) in enumerate(zip(a, b))}
     out = judges.agreement(labels)
     assert out["kappa"] == pytest.approx(0.6) and out["kappa"] == kappa(a, b)
-    assert out == {"kappa": out["kappa"], "n": 10, "none": {H: 0, G: 0}}
+    assert out == {"kappa": out["kappa"], "n": 10, "none": {H: 0, G: 0}, "per_class": out["per_class"]}
 
 
 def test_none_labels_are_left_out_of_kappa_and_counted_per_judge():
@@ -1052,9 +1090,29 @@ def test_a_row_without_a_judge_counts_as_none():
 
 
 def test_agreement_with_nothing_to_compare_has_no_kappa_not_nan():
-    assert judges.agreement({}) == {"kappa": None, "n": 0, "none": {H: 0, G: 0}}
+    assert judges.agreement({}) == {"kappa": None, "n": 0, "none": {H: 0, G: 0}, "per_class": {}}
     out = judges.agreement({"a": {H: None, G: "yes"}, "b": {H: "no", G: None}})
-    assert out == {"kappa": None, "n": 0, "none": {H: 1, G: 1}}
+    assert out == {"kappa": None, "n": 0, "none": {H: 1, G: 1}, "per_class": {}}
+
+
+def test_agreement_has_a_one_vs_rest_kappa_per_class():
+    # DESIGN section 2 gates the judges at kappa >= 0.6 per class: low and high agree well here, mid does not
+    a = ["low"] * 6 + ["mid"] * 3 + ["high"] * 6 + ["low"]
+    b = ["low"] * 6 + ["low", "mid", "high"] + ["high"] * 6 + [None]
+    labels = {f"k{i}": {H: x, G: y} for i, (x, y) in enumerate(zip(a, b))}
+    out = judges.agreement(labels)
+    a, b = a[:15], b[:15]                                           # the last item has no G label: left out
+    assert out["n"] == 15 and set(out["per_class"]) == {"low", "mid", "high"}
+    for c in ("low", "mid", "high"):
+        assert out["per_class"][c] == kappa([x == c for x in a], [y == c for y in b])
+    assert out["per_class"]["low"] >= 0.6 and out["per_class"]["high"] >= 0.6 and out["per_class"]["mid"] < 0.6
+    json.dumps(out, allow_nan=False)                                # never a NaN
+
+
+def test_per_class_covers_a_label_only_one_judge_gave():
+    out = judges.agreement({"a": {H: "yes", G: "yes"}, "b": {H: "no", G: "yes"}, "c": {H: "yes", G: "yes"}})
+    assert set(out["per_class"]) == {"yes", "no"}
+    assert out["per_class"]["no"] == kappa([False, True, False], [False, False, False])
 
 
 def test_agreement_reads_the_judges_it_is_given():

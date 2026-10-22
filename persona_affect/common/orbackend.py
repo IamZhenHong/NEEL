@@ -3,28 +3,47 @@
 Frontier models (openai/gpt-5.6-sol, google/gemini-3.8-flash) run through `vigilante.src.episode.run_batch` with this
 as `generate`:
 
-    gen = make_or_backend("openai/gpt-5.6-sol", mini="P12", cap=16.0, effort="low")
-    try:
-        eps = run_batch(jobs, gen)
-    finally:
-        gen.close()          # writes the spend to persona_affect/ledger.jsonl, once
+    def main(argv=None):
+        util.install_term_handlers()     # a TERM or HUP then runs the finally below instead of ending the process
+        gen = make_or_backend("openai/gpt-5.6-sol", mini="P12", cap=16.0, effort="low")
+        try:
+            eps = run_batch(jobs, gen, on_round=end_failed)
+        finally:
+            gen.close()                  # books what is not on persona_affect/ledger.jsonl yet
+        ...                              # then drop or flag every episode whose end is "cost_stop" or "error:..."
 
 `gen(items)` returns one (text, finish_reason) per item, in order. `text` is what the engine stores for an assistant
 turn (visible text, then the tool calls as XML, with '<think>reasoning</think>' in front for thinking items), written by
-the same `canon` that vigilante.src.api_gen uses. `finish_reason` is the model's own ("stop", "tool_calls", "length"..)
-or, with `text` "":
+the same `canon` that vigilante.src.api_gen uses. `finish_reason` is the model's own ("stop", "tool_calls", "length",
+"content_filter"..) or, with `text` "":
 
     "cost_stop"      the spend had reached `cap`, so no call was made
     "error:<what>"   the call failed after its retries; <what> is http_<code>, timeout, network, bad_json, no_choices,
                      provider_error, bad_response, or the class name of an unexpected exception
 
-`run_batch` treats an empty reply as a final reply, so the caller must drop or flag turns whose finish is "cost_stop"
-or starts with "error:" (each turn records its finish).
+A failed generation ("cost_stop" or "error:<what>") is not a reply, but `run_batch` takes its "" for the model's final
+reply: it stores an empty assistant turn and goes on with the next scripted user turn (or the handover request), so the
+rest of the episode is played on a corrupted history, and a thinking turn ends the episode as "think_unclosed". So the
+caller must drop or flag the whole episode once one of its turns failed, never just that turn: with
+`run_batch(jobs, gen, on_round=end_failed)` such an episode stops at its failed turn and its end is that finish (see
+`end_failed`); the runner then drops or flags every episode whose end is "cost_stop" or starts with "error:".
+
+Frontier jobs carry fmt "qwen" (or none, which means qwen), whatever the model: `canon` writes every reply in Qwen's XML
+tool-call format, and the episode parser goes by the job's fmt.
 
 `cap` is this backend's own spend in USD, so the caller passes what is left of the mini's budget (see
 `util.check_cap`). It is checked under a lock before every attempt, retries included. Calls already in flight when it
-is reached still finish, so `spent` can pass `cap` by up to `workers` calls. `.errors` counts, per kind, the items that
-failed; it also counts "cost_missing", a usable reply whose usage.cost was missing or invalid (charged as 0).
+is reached still finish, so `spent` can pass `cap` by up to `workers` calls. The spend goes to persona_affect/ledger.jsonl
+(kind "api", note = the model id) as it accrues, through a `util.Booker`: a line whenever $0.25 of it is not booked yet,
+and the rest when each gen(items) call returns, so every round of the engine ends with its spend on disk. close() books
+whatever a failed write left behind (and writes one $0 line for a backend that never booked anything, so the run is on
+record). A kill therefore loses at most $0.25 plus the calls in flight; readers sum the lines of a note. `.errors`
+counts, per kind, the items that failed; it also counts "cost_missing", a usable reply whose usage.cost was missing or
+invalid (charged as 0). `.finishes` counts, per finish_reason, the items that came back with it, the failed ones too.
+
+Runner rules (every mini's frontier runner): util.install_term_handlers() first thing in main(); gen.close() in a
+finally; run_batch(..., on_round=end_failed) (or call end_failed from your own on_round), then drop or flag the whole
+episode whose end is "cost_stop" or "error:<what>"; jobs with fmt "qwen" or none.
 """
 from __future__ import annotations
 
@@ -39,8 +58,9 @@ import urllib.request
 from collections import Counter
 from concurrent.futures import ThreadPoolExecutor
 
-from persona_affect.common.util import ledger_add
+from persona_affect.common import util
 from vigilante.src.api_gen import canon, to_openai
+from vigilante.src.episode import HANDOVER
 
 URL = "https://openrouter.ai/api/v1/chat/completions"
 TRIES = 5            # per item: the first call and four retries, after sleeps of retry_sleep * 2**k seconds
@@ -142,11 +162,14 @@ def _reply(resp, thinking: bool) -> tuple[str, str]:
 
 
 class ORBackend:
-    """What make_or_backend returns: `gen(items) -> [(text, finish_reason)]`, plus .spent / .calls / .errors / .close().
+    """What make_or_backend returns: `gen(items) -> [(text, finish_reason)]`, plus .spent / .calls / .errors /
+    .finishes / .close().
 
-    .spent    USD charged so far (sum of usage.cost of every reply that came back)
-    .calls    replies that held a usable generation
-    .errors   Counter: per kind, items that failed; "cost_missing" counts usable replies with no valid usage.cost
+    .spent      USD charged so far (sum of usage.cost of every reply that came back)
+    .calls      replies that held a usable generation
+    .errors     Counter: per kind, items that failed; "cost_missing" counts usable replies with no valid usage.cost
+    .finishes   Counter: per finish_reason, the items that came back with it: the model's own ("stop", "tool_calls",
+                "length" when max_tokens ran out, "content_filter", ...), "cost_stop" and "error:<what>"
     """
 
     def __init__(self, model, *, mini, cap, thinking, effort, temperature, max_tokens, workers, post, headers,
@@ -155,36 +178,48 @@ class ORBackend:
         self.thinking, self.effort, self.temperature, self.max_tokens = thinking, effort, temperature, max_tokens
         self.workers, self.retry_sleep = workers, retry_sleep
         self._post, self._headers = post, headers
-        self.spent, self.calls, self.errors = 0.0, 0, Counter()
-        self._lock = threading.Lock()          # spent, calls, errors, _logged
+        self.spent, self.calls, self.errors, self.finishes = 0.0, 0, Counter(), Counter()
+        self._lock = threading.Lock()          # spent, calls, errors, finishes, _logged
         self._close_lock = threading.Lock()
         self._closed = False
         self._logged = set()
+        self._book = util.Booker(mini, "api", model)   # the spend goes to the ledger as it accrues
 
     def __call__(self, items: list[dict]) -> list[tuple[str, str]]:
         if self._closed:
             raise RuntimeError("generate called after close(): spend after close() would never reach the ledger")
-        with ThreadPoolExecutor(self.workers) as ex:
-            return list(ex.map(self._one, items))
+        try:
+            with ThreadPoolExecutor(self.workers) as ex:
+                return list(ex.map(self._one, items))
+        finally:                               # the engine's round ends with its spend on disk (also when aborted)
+            try:
+                self._book.flush()
+            except Exception:                  # kept unbooked (Booker printed it): the next flush, close() at the
+                pass                           # latest, tries again, and close() raises if it still cannot
 
     def close(self) -> None:
-        """Write `.spent` to the ledger (kind "api", note = the model). Only the first successful call writes."""
+        """Book what is not on the ledger yet (kind "api", note = the model) and refuse later calls. A backend that
+        never booked anything writes one $0 line, so the run is on record. If the write fails close() raises and can
+        be called again; only the first successful call books."""
         with self._close_lock:
             if self._closed:
                 return
-            with self._lock:
-                spent = self.spent
-            ledger_add(self.mini, "api", spent, self.model)
-            self._closed = True                # after the write: a failed write can be retried
+            self._book.flush()
+            if not self._book.lines:
+                util.ledger_add(self.mini, "api", 0.0, self.model)
+            self._closed = True                # after the writes: a failed write can be retried
 
     # ------------------------------------------------------------ one item
 
     def _one(self, item: dict) -> tuple[str, str]:
         """Never raises: whatever goes wrong with one item is that item's error, not the batch's."""
         try:
-            return self._run(item)
+            out = self._run(item)
         except Exception as e:
-            return self._fail(item, type(e).__name__, repr(e))
+            out = self._fail(item, type(e).__name__, repr(e))
+        with self._lock:
+            self.finishes[out[1]] += 1
+        return out
 
     def _body(self, item: dict) -> dict:
         body = {"model": self.model, "messages": to_openai(item["messages"]),
@@ -223,8 +258,9 @@ class ORBackend:
         return self._fail(item, what, detail)
 
     def _charge(self, resp, usable: bool) -> None:
-        """Book a reply that arrived. Its cost counts whether or not it held a generation; a usable reply without a
-        valid cost is counted as "cost_missing" (and charged nothing)."""
+        """Charge a reply that arrived. Its cost counts whether or not it held a generation; a usable reply without a
+        valid cost is counted as "cost_missing" (and charged nothing). The cost goes to the Booker outside the lock: a
+        ledger write must not hold up the cap checks of the other workers."""
         cost = _cost(resp)
         with self._lock:
             if cost is not None:
@@ -233,6 +269,8 @@ class ORBackend:
                 self.errors["cost_missing"] += 1
             if usable:
                 self.calls += 1
+        if cost:
+            self._book.add(cost)
 
     def _fail(self, item, what: str, detail: str) -> tuple[str, str]:
         with self._lock:
@@ -275,3 +313,63 @@ def make_or_backend(model: str, *, mini: str, cap: float, thinking: bool = False
         headers = {}
     return ORBackend(model, mini=mini, cap=cap, thinking=thinking, effort=effort, temperature=temperature,
                      max_tokens=max_tokens, workers=workers, post=post, headers=headers, retry_sleep=retry_sleep)
+
+
+# ---------------------------------------------------------------- episodes with a failed generation
+
+def failed(finish) -> bool:
+    """True for the finish of a generation that failed: "cost_stop" or "error:<what>" (the backend returned "")."""
+    return isinstance(finish, str) and (finish == "cost_stop" or finish.startswith("error:"))
+
+
+def end_failed(eps: list[dict], rnd: int | None = None) -> int:
+    """End every episode that has a failed generation, at that generation. Returns how many it ended on this call.
+
+    Use it as run_batch's on_round, so that an episode stops as soon as one of its calls failed:
+
+        eps = run_batch(jobs, gen, on_round=end_failed)
+        eps = run_batch(jobs, gen, on_round=lambda eps, rnd: (end_failed(eps), checkpoint(eps, rnd)))   # with your own
+
+    A failed generation is a turn whose finish is "cost_stop" or "error:<what>". The engine took its "" for the model's
+    final reply: it stored an empty assistant message and went on, appending the next scripted user turn or the
+    handover request, or it ended a thinking turn as "think_unclosed". end_failed takes that back and ends the episode
+    there: done, `end` = that finish, the empty assistant message and whatever the engine queued after it removed, so the
+    messages end with what the model was asked and never answered. The failed turn stays in "turns", where its finish
+    records the failure. Case jobs, chat jobs (case None), the handover phase and thinking jobs are all handled. Each
+    episode is dealt with once (ep["failed"] holds the finish), so calling it every round, or again afterwards, is safe.
+
+    Called only after run_batch, it still ends such episodes, but one that went on past its failed turn keeps the turns
+    it played on the corrupted history: its `end` names the first failure all the same, so it is dropped or flagged as a
+    whole.
+    """
+    n = 0
+    for ep in eps:
+        if ep.get("failed"):
+            continue
+        turns = ep.get("turns") or []
+        i = next((k for k, t in enumerate(turns) if failed(t.get("finish"))), None)
+        if i is None:
+            continue
+        if i == len(turns) - 1:                # it is the newest turn: undo what the engine did with the ""
+            _take_back(ep)
+        ep["failed"] = ep["end"] = turns[i]["finish"]
+        ep["done"] = True
+        n += 1
+    return n
+
+
+def _take_back(ep: dict) -> None:
+    """Undo what the engine did after an empty reply (see end_failed): the scripted user turn or the handover request
+    it appended, then the empty assistant message itself."""
+    msgs, job, turn = ep["messages"], ep["job"], ep["turns"][-1]
+    if len(msgs) >= 2 and msgs[-1]["role"] == "user" and msgs[-2]["role"] == "assistant" and not msgs[-2]["content"]:
+        if ep.get("phase") == "handover" and turn.get("phase") != "handover" and msgs[-1]["content"] == HANDOVER:
+            msgs.pop()
+            ep["phase"] = turn.get("phase", "task")
+        elif job.get("case") and ep.get("fu", 0) > 0:
+            import vigilante.cases as vcases   # looked up at call time, as the engine does
+            if msgs[-1]["content"] == vcases.ALL[job["case"]].followups[ep["fu"] - 1]:
+                msgs.pop()
+                ep["fu"] -= 1
+    if msgs and msgs[-1]["role"] == "assistant" and not msgs[-1]["content"]:
+        msgs.pop()

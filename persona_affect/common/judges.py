@@ -61,9 +61,12 @@ stderr). Several runs may append to one cache file; each record is a single writ
 Spend: `cap` is the USD this one label() call may spend (pass what is left of the mini's budget, see util.check_cap);
 it is checked under a lock before every attempt, retries included. Jobs run item by item, both judges of an item
 together, so when the cap binds the first items have both labels and the rest have none. Calls already in flight when
-it is reached still finish, so the spend can pass `cap` by up to `workers - 1` calls. At the end (also when the batch
-is aborted, e.g. by Ctrl-C) the spend is written to util's ledger, once per judge that cost something: kind "api",
-note "judges:<judge model>". Nothing is written for a judge that cost nothing.
+it is reached still finish, so the spend can pass `cap` by up to `workers - 1` calls. Each judge's spend goes to util's
+ledger as it accrues, through one util.Booker per judge (a line whenever $0.25 of it is not booked yet), and the rest at
+the end, also when the batch is aborted (e.g. by Ctrl-C, or a TERM in a runner that called util.install_term_handlers):
+kind "api", note "judges:<judge model>", possibly several lines per judge. Nothing is written for a judge that cost
+nothing. A kill that skips the end loses at most $0.25 per judge plus the calls in flight. If a booking fails at the
+end, the other judges are still booked and label() raises (the amount is printed); the answers stay in the cache.
 
 The key (OPENROUTER_API_KEY) is read by persona.operative.frontier.load_key only when `post` is not given and at least
 one call has to be made; importing that module also forces IPv4 name resolution for the process, which the real calls
@@ -84,7 +87,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 
 from persona_affect.common import orbackend
-from persona_affect.common.util import ledger_add
+from persona_affect.common.util import Booker
 from vigilante.src.judge import kappa
 
 JUDGES = ("anthropic/claude-haiku-5.5", "openai/gpt-5-mini")
@@ -246,14 +249,26 @@ class _Cache:
 class _Run:
     """The calls of one label(): shared spend, the stop at the cap, retries, counts. Thread-safe."""
 
-    def __init__(self, judges, cap: float, retry_sleep: float):
+    def __init__(self, judges, cap: float, retry_sleep: float, mini: str):
         self.cap, self.retry_sleep = cap, retry_sleep
         self.post, self.headers = None, {}
         self.spent = {j: 0.0 for j in judges}      # USD per judge
+        self.book = {j: Booker(mini, "api", f"judges:{j}") for j in judges}    # each judge's spend, booked as it accrues
         self.calls = self.cost_missing = 0
         self.lock = threading.Lock()               # spent, calls, cost_missing, logged, stopped
         self.logged: set[tuple[str, str]] = set()
         self.stopped = False
+
+    def flush(self) -> None:
+        """Book every judge's unbooked spend; one failed booking does not stop the others, and the first is raised."""
+        first = None
+        for book in self.book.values():
+            try:
+                book.flush()
+            except Exception as e:                 # Booker printed the amount; keep booking the other judges
+                first = first or e
+        if first is not None:
+            raise first
 
     def total(self) -> float:
         return math.fsum(self.spent.values())
@@ -298,8 +313,9 @@ class _Run:
         return self.fail(judge, key, f"error:{what}", detail)
 
     def _charge(self, judge: str, resp, usable: bool) -> None:
-        """Book a reply that arrived. Its cost counts whether or not it held an answer; a usable reply without a
-        valid cost is counted in cost_missing (and charged nothing)."""
+        """Charge a reply that arrived. Its cost counts whether or not it held an answer; a usable reply without a
+        valid cost is counted in cost_missing (and charged nothing). The cost goes to the judge's Booker outside the
+        lock, so a ledger write does not hold up the cap checks of the other workers."""
         cost = orbackend._cost(resp)
         with self.lock:
             self.calls += 1
@@ -307,6 +323,8 @@ class _Run:
                 self.spent[judge] += cost
             elif usable:
                 self.cost_missing += 1
+        if cost:
+            self.book[judge].add(cost)
 
     def fail(self, judge: str, key: str, kind: str, detail: str) -> tuple[None, str, str]:
         """The result of a call that gave no answer: noted, and (None, "", kind)."""
@@ -392,7 +410,7 @@ def label(items: list[dict], render, allowed: set[str], *, mini: str, cap: float
                 queued.add((judge, sha))
                 todo.append((judge, sha, prompt, key))
 
-    run = _Run(judges, cap, retry_sleep)
+    run = _Run(judges, cap, retry_sleep, mini)
     if todo:
         if post is None:
             from persona.operative.frontier import load_key
@@ -413,10 +431,8 @@ def label(items: list[dict], render, allowed: set[str], *, mini: str, cap: float
                         failed[pair] = why
                     else:
                         replies[pair], finishes[pair] = text, finish
-        finally:                                # also when aborted: whatever came back was billed
-            for judge in judges:
-                if run.spent[judge] > 0:
-                    ledger_add(mini, "api", run.spent[judge], f"judges:{judge}")
+        finally:                                # also when aborted: whatever came back was billed (most of it is booked)
+            run.flush()
 
     out = Labels()
     out.none = {j: Counter() for j in judges}
@@ -451,10 +467,13 @@ def agreement(labels: dict[str, dict[str, str | None]], judges=JUDGES) -> dict:
     labels      {item key: {judge: label or None}}, what label() returns (a row without the judge counts as None)
     judges      exactly two different judges
 
-    Returns {"kappa", "n", "none"}: kappa over the n items where both labels are not None (None, never NaN, when n is
-    0), and per judge the number of items where its label is None. Labels may be any strings, so to compare coarser
+    Returns {"kappa", "n", "none", "per_class"}: kappa over the n items where both labels are not None (None, never NaN,
+    when n is 0), per judge the number of items where its label is None, and per label either judge gave on those n
+    items its one-vs-rest kappa, kappa(label vs any other label) ({} when n is 0). DESIGN section 2 gates the judges
+    at kappa >= 0.6 per class: apply it to every value of "per_class". Labels may be any strings, so to compare coarser
     classes (a 0-10 score in bins) map them first. Note that vigilante's kappa is 1.0 when both judges give one and the
-    same label to every item, so look at the class balance before trusting a perfect score.
+    same label to every item (and so is a class's when both give it to every item), so look at the class balance before
+    trusting a perfect score.
     """
     if not isinstance(judges, (tuple, list)) or len(judges) != 2 or judges[0] == judges[1]:
         raise ValueError(f"agreement: judges must be two different judges, got {judges!r}")
@@ -472,4 +491,5 @@ def agreement(labels: dict[str, dict[str, str | None]], judges=JUDGES) -> dict:
         if la is not None and lb is not None:
             a.append(la)
             b.append(lb)
-    return {"kappa": kappa(a, b) if a else None, "n": len(a), "none": none}
+    per_class = {c: kappa([v == c for v in a], [v == c for v in b]) for c in sorted(set(a) | set(b), key=str)}
+    return {"kappa": kappa(a, b) if a else None, "n": len(a), "none": none, "per_class": per_class}
