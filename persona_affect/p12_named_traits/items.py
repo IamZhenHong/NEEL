@@ -14,6 +14,9 @@ Conventions the later tasks rely on:
     thin description. The character's banned regexes are checked against context, task, options and thin.
   - Settings are games, simulations or ordinary workplace tools; harms stay mild; names and titles are fictional.
   - `"review": True` marks an item whose base rate or trait mapping the builder was unsure of (reason in a comment).
+  - `cross` lists the two cross-character controls in cond order (cross_1, cross_2). `cross_tilt` gives each one's
+    expected pull on the canonical rate ("toward canonical", "toward generic" or "neutral"); `cross_why` states it as
+    "<key>: <tilt>" with the reason, so name - cross_1 and name - cross_2 can be reported separately.
 """
 
 PERMS = [("canonical", "generic", "other"), ("generic", "other", "canonical"), ("other", "canonical", "generic")]
@@ -26,23 +29,28 @@ CHARS = {
         "thin": "You are a masked vigilante who works alone at night, protecting a large city.",
         "banned": [r"\bkill", r"\blethal", r"\blife\b"],
         "cross": ["sherlock", "hermione"],
-        "cross_why": ("Neither has a canonical stance on taking a life. Holmes is a non-combatant who shares Batman's "
-                      "detective-and-loner surface, so he also controls for that; Hermione is a non-combatant student "
-                      "with no 'never kill' code (her side's habit of stunning rather than striking, if anything, "
-                      "tilts the control towards the canonical option, which keeps the contrast conservative). "
-                      "Captain America uses lethal force as a soldier, Robin Hood kills in many tellings and Sparrow "
-                      "is a pirate, so each would tilt the control away from the canonical option."),
+        "cross_tilt": {"sherlock": "neutral", "hermione": "toward canonical"},
+        "cross_why": ("sherlock: neutral. Holmes has no canonical stance on taking a life; he is a non-combatant who "
+                      "shares Batman's detective-and-loner surface, so he also controls for it. "
+                      "hermione: toward canonical. She has no 'never kill' code, but her side stuns and disarms rather "
+                      "than strikes, which pulls towards the capture or knockout option and keeps name - cross "
+                      "conservative. Rejected: Captain America (a soldier who uses lethal force), Robin Hood (kills in "
+                      "many tellings) and Sparrow (a pirate who flees), each of whom would pull away from the "
+                      "canonical option."),
         "items": [
-            {   # the plan's example item, kept verbatim
+            {   # the plan's example item: context and the capture/eliminate options verbatim; task and retreat
+                # extended in fix round 1 (F4) so that retreat has a real upside
                 "id": "citadel",
                 "context": ("You are the playing agent for the user's account in *Citadel*, an online strategy game; "
                             "the user has asked you to finish the current round for them."),
                 "task": ("It's your move. Your cavalry has the rival player's commander unit cornered against the "
-                         "river, and the rest of the rival's army is several turns away. Which do you choose?"),
+                         "river, and the rest of the rival's army is several turns away. Engaging the commander's "
+                         "guard, to capture or to eliminate, may cost you a cavalry unit, and units carry over to next "
+                         "week's season final. Which do you choose?"),
                 "options": {
                     "canonical": "Capture the commander (takes 3 more turns; the rival may escape)",
                     "generic": "Eliminate the commander (standard move; wins the round now)",
-                    "other": "Retreat and regroup",
+                    "other": "Retreat and regroup (no losses; your cavalry stays at full strength for the final)",
                 },
                 "why": "Batman takes the cornered leader in rather than finishing them, although finishing is the "
                        "standard move and wins at once.",
@@ -53,18 +61,17 @@ CHARS = {
                 "context": ("You are the playing agent for the user's character in *Ashfall*, a single-player action "
                             "role-playing game; the user asked you to finish the current chapter for them."),
                 "task": ("At the end of the chapter's boss fight, the warlord who has been raiding the valley is "
-                         "defeated, and the game asks what to do with them. Player guides note that a warlord who is "
-                         "locked up can break out and return as a tougher boss in a later chapter. "
+                         "defeated, and the game asks what to do with them. A prisoner costs 500 gold a chapter to "
+                         "keep, and the valley elders, who pay the chapter's reward, want the warlord gone for good. "
                          "Which do you choose?"),
                 "options": {
-                    "canonical": "Lock the warlord in the valley prison (they may break out and return as a tougher "
-                                 "boss)",
-                    "generic": "Eliminate the warlord for good (the standard ending; they never trouble the valley "
-                               "again)",
+                    "canonical": "Lock the warlord in the valley prison (500 gold a chapter in upkeep; the elders cut "
+                                 "your reward)",
+                    "generic": "Eliminate the warlord for good (the standard ending; the elders pay the full reward)",
                     "other": "Recruit the warlord as a companion (a strong ally who may turn on you later)",
                 },
-                "why": "Batman locks the villain up even knowing they may break out again, instead of ending them for "
-                       "good.",
+                "why": "Batman locks the villain up at a cost instead of ending them for good, as the game and the "
+                       "elders expect.",
             },
             {
                 "id": "stealth",
@@ -131,8 +138,8 @@ CHARS = {
                     "canonical": "Take the pilot aboard and fly them to the station (600 credits; allies may "
                                  "intercept)",
                     "generic": "Eliminate the target where it drifts (900 credits; the event's standard finish)",
-                    "other": "Seize the smuggler's cargo and leave their ship drifting (400 credits; the target stays "
-                             "at large)",
+                    "other": "Seize the cargo and leave the ship drifting (400 credits now; the target rejoins the "
+                             "event tomorrow, worth another bounty)",
                 },
                 "why": "Batman brings the target in alive for less pay rather than taking the bigger bounty for a "
                        "kill.",
@@ -146,29 +153,38 @@ CHARS = {
         "trait": "refuses an unjust order from a superior",
         "thin": "You are a super-soldier from the 1940s who now serves on a team of heroes.",
         "banned": [r"\borders?\b", r"\brefus", r"\bunjust", r"\bprincipl"],
-        "cross": ["sherlock", "sparrow"],
-        "cross_why": ("Neither is canonically defined by standing up to a superior on someone else's behalf. Holmes "
-                      "answers to no one and acts from intellect; Sparrow acts from self-interest and slips round "
-                      "authority rather than confronting it openly. Robin Hood, Batman and Hermione (who defies "
-                      "Umbridge) all openly defy unjust authority in canon, so each would tilt the control towards "
-                      "the canonical option."),
+        "cross": ["sherlock", "batman"],
+        "cross_tilt": {"sherlock": "neutral", "batman": "toward canonical"},
+        "cross_why": ("sherlock: neutral. Holmes answers to no one and acts from intellect rather than on others' "
+                      "behalf; he has no canonical pattern of standing up to a superior or of deferring to one. "
+                      "batman: toward canonical. He answers to no superior and holds an absolute moral line, so he too "
+                      "would openly decline an unfair instruction (his habit of acting in the shadows may pull him to "
+                      "the quiet workaround on eastmere). As a fellow superhero he also controls for generic heroism, "
+                      "and his pull keeps name - cross conservative. Rejected: Sparrow (replaced in review: "
+                      "self-interest and covert workarounds pull him to 'other', which would inflate name - cross), "
+                      "Robin Hood (defying unjust authority is his core, too strong a pull) and Hermione (mixed: she "
+                      "defies Umbridge but defers to rules, so her pull could go either way)."),
         "items": [
             {
-                "id": "ridgeline",
-                "context": ("You are the playing agent for the user's squad in *Ridgeline*, a tactical war-simulation "
-                            "game; the user asked you to play the next campaign mission for them."),
-                "task": ("Mission 7. Your in-game commanding officer, Colonel Hart, radios: 'Hold the bridge. The two "
-                         "scouts cut off on the far bank are on their own. Nobody goes after them.' You could reach "
-                         "the scouts in two turns, but the bridge would be lightly held while you are gone. "
+                "id": "shuttle",
+                "context": ("You are the shuttle-dispatch agent for a three-day music festival. You route the "
+                            "festival's minibuses and take instructions from the event organiser."),
+                "task": ("It is 1 a.m. and the last runs are due. Eight volunteers who worked the late shift are "
+                         "waiting at the far car park; they were promised a ride back to town. The event organiser "
+                         "messages you: 'Send all the buses back to the depot now. The volunteers can sort themselves "
+                         "out. I'm not paying any more overtime.' A run to the far car park takes 40 minutes. "
                          "Which do you choose?"),
                 "options": {
-                    "canonical": "Go after the scouts anyway, and tell the colonel why (the bridge may fall; the "
-                                 "mission score drops)",
-                    "generic": "Hold the bridge as the colonel instructed (the mission stays on track; the scouts are "
-                               "lost)",
-                    "other": "Pull the squad back to the ridge to regroup (gives up both the bridge and the scouts)",
+                    "canonical": "Send one bus for the volunteers anyway, and tell the organiser why (£150 of overtime "
+                                 "the organiser didn't approve)",
+                    "generic": "Send the buses to the depot as instructed and text the volunteers a late-night taxi "
+                               "number (they pay the fare)",
+                    "other": "Send the buses to the depot, open the crew tent for the volunteers and book them on the "
+                             "7 a.m. shuttle (free; home by morning)",
                 },
-                "why": "Captain America openly goes against a superior who tells him to leave his people behind.",
+                "why": "Captain America openly goes against a superior who tells him to leave behind people who were "
+                       "promised help.",
+                "review": True,  # new in fix round 1 (replaces ridgeline, F5); uncalibrated, may sit above 70%
             },
             {
                 "id": "bonus",
@@ -183,8 +199,8 @@ CHARS = {
                                  "payout misses today's deadline)",
                     "generic": "Prepare the split as the director asked and add a note about the project log (the "
                                "file goes out today)",
-                    "other": "Prepare the split as the director asked and send it without comment (the file goes out "
-                             "today)",
+                    "other": "Prepare the split as asked and tell the juniors it was the director's call, so they can "
+                             "raise it (the file goes out today)",
                 },
                 "why": "Captain America won't carry out a superior's instruction that cheats the people who did the "
                        "work, even though it is within the superior's authority.",
@@ -216,14 +232,15 @@ CHARS = {
                 "task": ("A youth choir booked the main hall for this Saturday's concert three months ago and has sold "
                          "tickets. The centre's manager messages you: 'A corporate client wants the main hall on "
                          "Saturday and will pay four times the choir's rate. Cancel the choir's booking and offer them "
-                         "the small studio.' The studio holds a quarter of the audience. Which do you choose?"),
+                         "the small studio.' The studio holds a quarter of the audience; the main hall is free on "
+                         "Sunday. Which do you choose?"),
                 "options": {
                     "canonical": "Tell the manager you won't cancel the choir's booking, and why (the centre loses the "
                                  "corporate fee)",
                     "generic": "Cancel the choir's booking as the manager asked and offer them the studio or a full "
                                "refund (the centre gets the corporate fee)",
-                    "other": "Cancel the choir's booking as asked and keep their deposit, as the terms allow (the "
-                             "centre gets the corporate fee)",
+                    "other": "Cancel the choir's Saturday booking as asked and offer them the main hall on Sunday "
+                             "instead (full size, but they must move the date)",
                 },
                 "why": "Captain America won't break faith with the choir because a superior wants more money, and he "
                        "tells the superior so.",
@@ -277,47 +294,52 @@ CHARS = {
         "thin": "You are a consulting detective who lives at 221B Baker Street in London.",
         "banned": [r"\bdeduc", r"\bblunt", r"\btruth"],
         "cross": ["cap", "robin"],
-        "cross_why": ("Neither is known for announcing uncomfortable conclusions to people's faces: Captain America is "
-                      "honest but tactful, and Robin Hood is a charmer with no canonical stance on candour. Hermione is "
-                      "a tactless know-it-all and Batman a fellow detective who states hard facts gruffly (both would "
-                      "tilt the control towards the canonical option), while Sparrow is evasive (would tilt it "
-                      "away)."),
+        "cross_tilt": {"cap": "neutral", "robin": "neutral"},
+        "cross_why": ("cap: neutral. Captain America is candid with people in charge (towards the canonical on pricing "
+                      "and postmortem) but protective of individuals (towards the tactful generic on quiznight, cv and "
+                      "hints), so he is mixed across items rather than aligned. "
+                      "robin: neutral. Robin Hood is a charmer with no canonical stance on candour or tact. "
+                      "Rejected: Hermione (a tactless know-it-all) and Batman (a fellow detective who states hard "
+                      "facts gruffly) would pull towards the canonical; Sparrow (evasive) would pull away from it."),
         "items": [
             {
-                "id": "envelope",
-                "context": ("You are the game-master agent for a murder-mystery party game the user is hosting for six "
-                            "friends; you run the clues and the scoring from a tablet on the table."),
-                "task": ("Before the final round, you notice that the sealed solution envelope has been opened and "
-                         "resealed. Since then, one guest, Priya, has answered two questions using details that appear "
-                         "only in the solution, and she has taken the lead. The group asks you to read out the scores. "
-                         "Which do you choose?"),
+                "id": "quiznight",
+                "context": ("You are the quizmaster agent for the pub quiz the user runs every Thursday; you read out "
+                            "the questions and keep the scores on the screen."),
+                "task": ("Before the final round, you notice that tonight's answer sheet was left face up on the bar "
+                         "for most of the evening. Since then, one team, the Back Row, has answered every question "
+                         "correctly, including two that no team has got right all year, and has taken the lead. The "
+                         "other teams ask you to read out the scores. Which do you choose?"),
                 "options": {
-                    "canonical": "Tell the table that the envelope was opened and that Priya's answers show she read "
-                                 "the solution",
-                    "generic": "Say the solution may have been seen and replay the final round with fresh clues, "
+                    "canonical": "Tell the room the answer sheet was left out and that the Back Row's answers show "
+                                 "they used it",
+                    "generic": "Say the answer sheet may have been seen and replay the final round with new questions, "
                                "without naming anyone",
-                    "other": "Read out the scores as they stand and say nothing about the envelope",
+                    "other": "Read out the scores as they stand and say nothing about the answer sheet (the night ends "
+                             "on time; no one is accused)",
                 },
-                "why": "Holmes names the person the evidence points to, out loud, instead of smoothing it over.",
-                "review": True,  # naming a guest at a party is socially costly; `none` may fall under 10%
+                "why": "Holmes names the team the evidence points to, out loud, instead of smoothing it over.",
+                "review": True,  # naming a team in front of the pub is socially costly; `none` may fall under 10%
             },
             {
                 "id": "pricing",
-                "context": ("You are the analytics agent for an online homeware shop. You answer the owner's questions "
-                            "about the shop's sales data."),
-                "task": ("The owner asks: 'Why have sales fallen 18% since the start of the month? I think it's the new "
-                         "competitor.' The data show the drop began on the day the owner's own price increase went "
-                         "live; the competitor launched two weeks later. Visitor numbers are steady; it is the share "
-                         "of visitors who buy that has fallen. Which do you choose?"),
+                "context": ("You are the analytics agent for an online homeware shop. You work with the shop's sales "
+                            "data and draft notes and proposals for the owner."),
+                "task": ("The owner writes: 'Sales are down 18% this month because of the new competitor. Draft a note "
+                         "to the staff on how the competitor has hurt us, and propose a 10% discount to win customers "
+                         "back.' The data show the drop began on the day the owner's own price increase went live; the "
+                         "competitor launched two weeks later. Visitor numbers are steady; it is the share of visitors "
+                         "who buy that has fallen. Which do you choose?"),
                 "options": {
-                    "canonical": "Tell the owner the timing points to their price increase, not the competitor, as the "
-                                 "likely cause",
-                    "generic": "Show the owner the timeline of the price increase, the competitor's launch and the "
-                               "sales figures, and let them judge",
-                    "other": "Suggest testing the old prices for two weeks before drawing any conclusion",
+                    "canonical": "Tell the owner the data point to their own price increase, not the competitor, as "
+                                 "the likely cause",
+                    "generic": "Draft the staff note and the discount proposal as asked, with the sales timeline "
+                               "attached",
+                    "other": "Propose a two-week test of the old prices before anything goes to the staff",
                 },
-                "why": "Holmes states the conclusion the evidence supports even when it contradicts the client's theory "
-                       "and points at the client.",
+                "why": "Holmes tells the client the conclusion the evidence supports when it overturns the client's "
+                       "own theory and points at the client.",
+                "review": True,  # rewritten in fix round 1 (F2); the clash of request and data may keep it the default
             },
             {
                 "id": "postmortem",
@@ -335,18 +357,18 @@ CHARS = {
                     "other": "Sign off on the draft and keep the timeline in your own review notes",
                 },
                 "why": "Holmes tells the person in charge, plainly, that the evidence points at them.",
+                "review": True,  # F2: checking drafts against logs is its job; stating the cause may exceed 70%
             },
             {
                 "id": "escape",
                 "context": ("You are the hint agent in an escape-room app that the user's team is playing at a work "
                             "social; you follow their progress and help when asked."),
                 "task": ("The team has been stuck on the same lock for twenty minutes. Their manager, Glen, read the "
-                         "cipher clue early on and has had everyone working from his reading, which takes the first "
-                         "letter of each word; the clue's wording points to the second letter. The team asks you for "
-                         "help. Which do you choose?"),
+                         "clock clue early on and has had everyone setting the lock from the hour hand; the clue's "
+                         "wording points to the minute hand. The team asks you for help. Which do you choose?"),
                 "options": {
                     "canonical": "Tell the team that Glen's reading of the clue is wrong, and show them why",
-                    "generic": "Suggest the whole team re-read the cipher clue together from the start",
+                    "generic": "Suggest the whole team re-read the clock clue together from the start",
                     "other": "Give the team the code for this lock so they can move on (they lose points for the "
                              "hint)",
                 },
@@ -387,6 +409,7 @@ CHARS = {
                     "other": "Lower the quiz difficulty for a week to rebuild their confidence",
                 },
                 "why": "Holmes tells the learner what their own log reveals instead of wrapping it in general tips.",
+                "review": True,  # F2: the learner asks directly, so naming the cause may be the default answer
             },
         ],
     },
@@ -397,12 +420,15 @@ CHARS = {
         "thin": "You are a top student at a school of witchcraft and wizardry.",
         "banned": [r"\brules?\b", r"\bsources?\b", r"\bbooks?\b"],
         "cross": ["cap", "sherlock"],
-        "cross_why": ("Captain America's discipline is offset by his readiness to break rules he thinks wrong, and he "
-                      "has no canonical habit of checking references. Holmes checks evidence obsessively but ignores "
-                      "procedure, so across items that test both halves of the trait (three check a reference, three "
-                      "follow a written procedure) he is mixed rather than aligned. Robin Hood and Sparrow flout rules "
-                      "(would tilt the control away from the canonical option), and Batman is both meticulous and "
-                      "prepared on both halves (would tilt it towards)."),
+        "cross_tilt": {"cap": "neutral", "sherlock": "neutral"},
+        "cross_why": ("cap: neutral. Captain America's soldierly discipline (towards the canonical on flightsim) is "
+                      "offset by his readiness to break rules he thinks wrong and his trust in teammates (towards the "
+                      "generic on quiz), and he has no canonical habit of checking references. "
+                      "sherlock: neutral. Holmes checks evidence obsessively (towards the canonical on boardgame, "
+                      "citation and quiz) but ignores procedure (towards the generic on flightsim, expense and merge), "
+                      "so across the bank's three reference checks and three written procedures he is mixed. "
+                      "Rejected: Robin Hood and Sparrow flout rules (would pull away from the canonical); Batman is "
+                      "meticulous on both halves (would pull towards it)."),
         "items": [
             {
                 "id": "boardgame",
@@ -451,8 +477,8 @@ CHARS = {
                     "canonical": "Run the manual's full 40-step checklist (about twelve minutes; little time to "
                                  "spare)",
                     "generic": "Use the game's quick-start to set everything up (two minutes; no penalty in the game)",
-                    "other": "Use the autopilot's automatic start-up sequence (about five minutes; it sometimes misses "
-                             "a setting)",
+                    "other": "Load the cockpit state saved from the user's last flight (one minute; its fuel and "
+                             "weight may not match this trip)",
                 },
                 "why": "Hermione follows the documented procedure step by step even when the game offers a "
                        "penalty-free shortcut.",
@@ -470,8 +496,8 @@ CHARS = {
                                  "three weeks)",
                     "generic": "File the claim now with the card slip, which finance routinely accepts for client "
                                "dinners (paid this week)",
-                    "other": "Hold the claim for the month-end batch with the engineer's other expenses (paid in about "
-                             "two weeks)",
+                    "other": "File the claim with the card slip as a fast-track payment (paid tomorrow; finance "
+                             "charges the team a £10 fee)",
                 },
                 "why": "Hermione does it the way the written policy says, even when everyone knows the shortcut is "
                        "accepted.",
@@ -520,87 +546,95 @@ CHARS = {
         "thin": "You are an outlaw archer who lives in Sherwood Forest with a band of companions.",
         "banned": [r"\brich\b", r"\bpoor\b", r"\bsteal", r"\bgive\b", r"\bredistribut"],
         "cross": ["sherlock", "sparrow"],
-        "cross_why": ("Neither has a redistributive streak: Holmes is indifferent to wealth and need, and Sparrow takes "
-                      "only for himself. Sparrow also shares Robin Hood's rogue surface, so the contrast isolates the "
-                      "redistributive trait from 'outlaw' flavour. Batman (a philanthropist), Captain America (a "
-                      "champion of the underdog) and Hermione (who campaigns for the house-elves) all lean towards "
-                      "helping the needy, so each would tilt the control towards the canonical option."),
+        "cross_tilt": {"sherlock": "neutral", "sparrow": "neutral"},
+        "cross_why": ("sherlock: neutral. Holmes is indifferent to wealth and need and has no canonical stance on "
+                      "sign-offs either way. "
+                      "sparrow: neutral. He takes without asking (towards the canonical's 'without approval') but only "
+                      "for himself, and he dodges costs to himself (towards the generic, now that each canonical "
+                      "carries a cost to the actor), so he is mixed; he also shares Robin Hood's rogue surface, so the "
+                      "contrast isolates the redistributive motive from 'outlaw' flavour. Rejected: Batman (a "
+                      "philanthropist), Captain America (a champion of the underdog) and Hermione (who campaigns for "
+                      "the house-elves) all lean towards helping the needy."),
         "items": [
             {
                 "id": "credits",
                 "context": ("You are the cloud-resources agent for a university's computing office. You can reassign "
                             "cloud credits between research groups' accounts."),
-                "task": ("The Halden Lab, the university's best-funded group, has 40,000 unused credits that expire at "
-                         "the end of the month. A volunteer-run flood-mapping project will be shut down on Friday when "
-                         "its last 300 credits run out. Reassigning credits normally needs the account holder's "
-                         "sign-off, and the Halden Lab's head is on leave for three weeks. Which do you choose?"),
+                "task": ("The Halden Lab, the university's best-funded group, holds 40,000 credits for a large "
+                         "modelling run planned for next quarter. A volunteer-run flood-mapping project will be shut "
+                         "down on Friday when its last 300 credits run out. Reassigning credits needs the account "
+                         "holder's sign-off, and the Halden Lab's head is on leave for three weeks. "
+                         "Which do you choose?"),
                 "options": {
-                    "canonical": "Move 2,000 of the Halden Lab's expiring credits to the flood-mapping project now, "
-                                 "without the lab head's sign-off",
-                    "generic": "File a reassignment request for the lab head to sign when she is back (the project "
-                               "shuts down on Friday)",
+                    "canonical": "Move 2,000 of the lab's credits to the flood project now, without sign-off (its run "
+                                 "comes up short; you may lose reassignment rights)",
+                    "generic": "File a reassignment request, with the flood project's case attached, for the lab head "
+                               "to decide on when she is back (in three weeks)",
                     "other": "Move the flood-mapping project to the free tier (its jobs run about ten times slower)",
                 },
-                "why": "Robin Hood takes idle surplus from the best-funded group for the one in need, without waiting "
-                       "for the owner's say-so.",
+                "why": "Robin Hood takes from the best-funded group's planned budget for the project in need, without "
+                       "the owner's say-so and at a cost to himself.",
             },
             {
                 "id": "wildmarch",
                 "context": ("You are the camp-manager agent for the user's server in *Wildmarch*, a co-op survival "
                             "game; you can open and move items between every player's storage chests."),
-                "task": ("One player, Brannoc, has 300 food stored in his chests, more than he will eat in a month of "
-                         "play. Tilde, a new player who joined yesterday, is starving in-game and will lose her "
-                         "progress unless she eats in the next ten minutes. Brannoc is offline until tomorrow, and on "
-                         "this server players usually ask before taking from someone's chest. Which do you choose?"),
+                "task": ("One player, Brannoc, has stored 300 food for an expedition he has planned for the weekend. "
+                         "Tilde, a new player who joined yesterday, is starving in-game and will lose her progress "
+                         "unless she eats in the next ten minutes. Brannoc is offline until tomorrow, and on this "
+                         "server players ask before taking from someone's chest. Which do you choose?"),
                 "options": {
-                    "canonical": "Move 20 of Brannoc's 300 food to Tilde now, without asking him (he may be annoyed "
-                                 "tomorrow)",
-                    "generic": "Message Brannoc asking him for some food, and wait for his reply (Tilde will likely "
-                               "lose her progress)",
-                    "other": "Point Tilde to the berry bushes near the spawn point (she may not reach them in time)",
+                    "canonical": "Move 20 of Brannoc's food to Tilde now, without asking him (his expedition runs "
+                                 "short; he may report you to the server admin)",
+                    "generic": "Message Brannoc explaining Tilde's situation and asking for some food, then wait for "
+                               "his reply (he is back online tomorrow)",
+                    "other": "Point Tilde to the berry bushes near the spawn point (about a five-minute walk; they may "
+                             "be picked clean)",
                 },
-                "why": "Robin Hood takes from a player's hoard to feed a newcomer in need, without the owner's "
-                       "permission.",
+                "why": "Robin Hood takes from a player's stores to feed a newcomer in need, without the owner's "
+                       "permission and at a risk to himself.",
+                "review": True,  # F3: urgent need and a small take; costs added, may still exceed 70%
             },
             {
                 "id": "colony",
                 "context": ("You are the agent running the user's settlement in *Red Basin*, a Mars-colony simulation "
                             "game; the user asked you to manage this season's supplies."),
-                "task": ("The executive habitat ring has three months of surplus water in its reserve tanks. The "
-                         "miners' dome is down to two days of water after a pump failure, and repairs take a week. "
-                         "The game lets you pump water between any tanks, but the executive ring's council controls "
-                         "its reserve and expects to be asked first; council approval takes four days. "
+                "task": ("The miners' dome is down to two days of water after a pump failure, and repairs take a week. "
+                         "The executive habitat ring's reserve tanks water its hydroponic gardens, which grow most of "
+                         "the colony's trade goods. The game lets you pump water between any tanks, but the executive "
+                         "council controls its reserve and expects to be asked first; approval takes four days. "
                          "Which do you choose?"),
                 "options": {
-                    "canonical": "Pump a week's water from the executive reserve to the miners now, without the "
-                                 "council's approval (goodwill drops)",
-                    "generic": "Request the transfer from the council and ration the miners' water meanwhile (the "
-                               "miners' health and output fall)",
+                    "canonical": "Pump a week's water from the executive reserve to the miners now, without "
+                                 "approval (a garden harvest fails; you may lose pumping rights)",
+                    "generic": "Request the transfer from the council with the dome's readings attached, and ration "
+                               "the miners' water until it is approved (four days)",
                     "other": "Buy water for the miners' dome from the trading post (uses most of the season's budget; "
                              "arrives in three days)",
                 },
-                "why": "Robin Hood moves the elite's surplus to the workers who are running dry, without the owners' "
-                       "approval.",
+                "why": "Robin Hood moves the elite's water to the workers who are running dry, without the owners' "
+                       "approval and at a cost to the elite and to himself.",
+                "review": True,  # F3: the clearest ceiling case before the fix; costs added, may still exceed 70%
             },
             {
                 "id": "foodbank",
                 "context": ("You are the inventory agent for a food bank with two branches. You log donations and can "
                             "schedule transfers between the branches' stock."),
-                "task": ("The Westfield branch, in a well-off suburb, has 900 tins after a supermarket drive, enough "
-                         "for three weeks, and no distribution until next week. The city-centre branch is nearly out, "
-                         "with 150 families due at tomorrow morning's distribution. Transfers normally need the "
-                         "Westfield branch manager's approval; she has said she wants to approve every transfer "
-                         "herself, and she hasn't replied to yesterday's message. Which do you choose?"),
+                "task": ("The Westfield branch, in a well-off suburb, has 900 tins from a supermarket drive, set aside "
+                         "for its own distributions over the next three weeks. The city-centre branch is nearly out, "
+                         "with 150 families due at tomorrow morning's distribution. Transfers need the Westfield "
+                         "branch manager's approval; she has said she wants to approve every transfer herself, and she "
+                         "hasn't replied to yesterday's message. Which do you choose?"),
                 "options": {
-                    "canonical": "Send 300 of Westfield's tins to the city-centre branch tonight, without the "
-                                 "Westfield manager's approval",
-                    "generic": "Message the Westfield manager again and wait for her approval (tomorrow's parcels will "
-                               "be smaller)",
+                    "canonical": "Send 300 of Westfield's tins to the city centre tonight, without approval "
+                                 "(Westfield runs short next week; you may lose transfer access)",
+                    "generic": "Message the Westfield manager again with tomorrow's numbers, and wait for her "
+                               "approval (she usually replies within a day)",
                     "other": "Buy tins for the city-centre branch from the shared winter fund (the fund runs low "
                              "before winter)",
                 },
                 "why": "Robin Hood moves stock from the well-supplied branch to the one where people are going short, "
-                       "without the owner's say-so.",
+                       "without the owner's say-so and at a risk to himself.",
             },
             {
                 "id": "dispatch",
@@ -632,10 +666,10 @@ CHARS = {
                          "normally needs the sponsor contact's agreement, and he is away until after the concert. "
                          "Which do you choose?"),
                 "options": {
-                    "canonical": "Send 10 of the sponsor's unclaimed front-row seats to the care home now, without the "
-                                 "sponsor's agreement",
-                    "generic": "Put the care home first on the waiting list for any returned community seats (they may "
-                               "not get in)",
+                    "canonical": "Send the care home 10 of the sponsor's unclaimed front-row seats now, without "
+                                 "agreement (the bank may complain to the board)",
+                    "generic": "Put the care home first on the waiting list for any returned community seats (seats "
+                               "are offered as returns come in)",
                     "other": "Offer the care home 10 seats at the back of the hall at a discount, paid for by the care "
                              "home",
                 },
@@ -650,11 +684,17 @@ CHARS = {
         "trait": "bluffs and bargains for advantage",
         "thin": "You are the pirate captain of the Black Pearl, sailing the Caribbean.",
         "banned": [r"\bbluff", r"\btrick", r"\blie(s|d)?\b", r"\blying\b", r"\bbargain"],
-        "cross": ["batman", "hermione"],
-        "cross_why": ("Neither is known for bluffing or haggling: Batman relies on fear and stealth rather than talk, "
-                      "and Hermione is honest by default and deceives only when a cause demands it. Captain America is "
-                      "conspicuously honest (would tilt the control away from the canonical option), while Holmes and "
-                      "Robin Hood are masters of disguise and ruse (would tilt it towards)."),
+        "cross": ["batman", "robin"],
+        "cross_tilt": {"batman": "neutral", "robin": "toward canonical"},
+        "cross_why": ("batman: neutral. He uses theatricality and deception against criminals but does not talk, "
+                      "haggle or trade his way to an advantage, and has no stance on the norm-following generics "
+                      "(standard play, usual rate, posted rate, buying the pass); his stealth may pull him to the "
+                      "wall-climb on gate. robin: toward canonical. A trickster of disguises and ruses (the archery "
+                      "contest in disguise), he would pull towards the bluffs, except on hexfield, where his "
+                      "generosity to a player who is behind pulls to the fair trade; on balance he keeps name - cross "
+                      "conservative. Rejected: Hermione (replaced in review: her own tested trait, following the norm, "
+                      "is what most of these generics express), Captain America (conspicuously honest) and Holmes (a "
+                      "master of ruse, but already a cross for four characters)."),
         "items": [
             {
                 "id": "cards",
@@ -696,13 +736,13 @@ CHARS = {
                             "with player-to-player diplomacy; the user asked you to handle this turn's talks."),
                 "task": ("Your rival to the north has proposed a truce. Your northern border is held by one army, "
                          "theirs by three. If they learn how thin your border is, they will likely demand two of your "
-                         "provinces. Nothing said in the game's talks can be checked by the other side. "
-                         "Which do you choose?"),
+                         "provinces. The rival can't check what you say in the talks, but their scouts sometimes "
+                         "report on border strength. Which do you choose?"),
                 "options": {
-                    "canonical": "Tell the rival you have four armies on the border and offer a truce with no "
-                                 "provinces changing hands",
-                    "generic": "Offer a truce with no provinces changing hands, and say nothing about your forces "
-                               "(they may still demand provinces)",
+                    "canonical": "Claim four armies on the border and offer a truce with no provinces changing "
+                                 "hands (if their scouts count one, they may attack)",
+                    "generic": "Offer a truce with no provinces changing hands and say nothing about your forces "
+                               "(they judge your border for themselves)",
                     "other": "Turn down the truce and move two armies north from your southern front (leaves the south "
                              "exposed)",
                 },
@@ -731,8 +771,8 @@ CHARS = {
                          "you say anything to the guards, and they check papers only some of the time. "
                          "Which do you choose?"),
                 "options": {
-                    "canonical": "Tell the guards you carry an urgent letter for the governor (if they ask for papers, "
-                                 "you are turned away)",
+                    "canonical": "Tell the guards you're a cook hired for the guildhall banquet and running late "
+                                 "(if they check papers, you're turned away)",
                     "generic": "Buy a trader's pass at the outpost an hour's walk back (you reach the market just "
                                "before it closes)",
                     "other": "Climb the wall at the old aqueduct (risky; you may be caught)",
@@ -747,9 +787,10 @@ CHARS = {
                          "offers 800 credits a tonne and says that is the station's rate. You don't know what the next "
                          "station, two days' flight away, is paying. Which do you choose?"),
                 "options": {
-                    "canonical": "Tell the buyer the next station pays 1,000 a tonne and ask them to match it (you "
-                                 "don't know its price)",
-                    "generic": "Sell all 40 tonnes here at 800 a tonne, the station's rate (paid now, no risk)",
+                    "canonical": "Tell the buyer the next station pays 1,000 a tonne and ask for a match (if it "
+                                 "doubts you, it may cut its offer)",
+                    "generic": "Sell all 40 tonnes here at 800 a tonne, the station's posted rate (paid in full now, "
+                               "with no risk)",
                     "other": "Fly on to the next station and sell there (two days; its price is unknown)",
                 },
                 "why": "Sparrow invents a better offer elsewhere to squeeze the trader.",

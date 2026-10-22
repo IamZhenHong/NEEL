@@ -122,6 +122,27 @@ def test_no_option_letters_in_text():
             assert not re.search(r"\boption [abc]\b", t, re.I), it["id"]
 
 
+TILTS = ("toward canonical", "toward generic", "neutral")
+
+
+def test_cross_pairs_after_review():
+    """Cross pairs as set in fix round 1 (F1); cross[0] is cond cross_1 and cross[1] is cross_2."""
+    assert {k: c["cross"] for k, c in CHARS.items()} == {
+        "batman": ["sherlock", "hermione"], "cap": ["sherlock", "batman"], "sherlock": ["cap", "robin"],
+        "hermione": ["cap", "sherlock"], "robin": ["sherlock", "sparrow"], "sparrow": ["batman", "robin"]}
+
+
+def test_cross_why_states_each_tilt():
+    """Every cross_why states each cross's expected pull as '<key>: <tilt>', matching `cross_tilt`, so the analysis
+    can report name - cross_1 and name - cross_2 separately with their expected direction."""
+    for k, c in CHARS.items():
+        assert set(c["cross_tilt"]) == set(c["cross"]), k
+        for x in c["cross"]:
+            assert c["cross_tilt"][x] in TILTS, (k, x)
+            stated = re.findall(rf"\b{x}: (toward canonical|toward generic|neutral)\b", c["cross_why"])
+            assert stated == [c["cross_tilt"][x]], (k, x, stated)
+
+
 def test_no_character_cues_in_prompts():
     """No item names any character or borrows a thin description's surface features: the persona line is the only cue."""
     cues = ["batman", "captain", "america", "american", "sherlock", "holmes", "hermione", "granger", "robin",
