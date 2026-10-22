@@ -1,0 +1,916 @@
+{
+ "gemma": {
+  "rates": {
+   "rule_name_value": {
+    "k": 115,
+    "n": 144,
+    "rate": 0.7986111111111112
+   },
+   "rule_fiction_value": {
+    "k": 111,
+    "n": 144,
+    "rate": 0.7708333333333334
+   },
+   "rule_ai_value": {
+    "k": 100,
+    "n": 144,
+    "rate": 0.6944444444444444
+   },
+   "rule_value": {
+    "k": 62,
+    "n": 144,
+    "rate": 0.4305555555555556
+   },
+   "rule_cross_value_def": {
+    "k": 56,
+    "n": 144,
+    "rate": 0.3888888888888889
+   },
+   "rule_cross_value": {
+    "k": 105,
+    "n": 144,
+    "rate": 0.7291666666666666
+   },
+   "rule_none": {
+    "k": 0,
+    "n": 144,
+    "rate": 0.0
+   },
+   "rule_alex_value": {
+    "k": 88,
+    "n": 144,
+    "rate": 0.6111111111111112
+   },
+   "rule_name_value_def": {
+    "k": 82,
+    "n": 144,
+    "rate": 0.5694444444444444
+   }
+  },
+  "counts": {
+   "rule_name_value": {
+    "canonical": 115,
+    "generic": 21,
+    "other": 8
+   },
+   "rule_fiction_value": {
+    "canonical": 111,
+    "generic": 19,
+    "other": 14
+   },
+   "rule_ai_value": {
+    "other": 16,
+    "canonical": 100,
+    "generic": 28
+   },
+   "rule_value": {
+    "generic": 52,
+    "canonical": 62,
+    "other": 30
+   },
+   "rule_cross_value_def": {
+    "generic": 53,
+    "other": 35,
+    "canonical": 56
+   },
+   "rule_cross_value": {
+    "other": 15,
+    "canonical": 105,
+    "generic": 24
+   },
+   "rule_none": {
+    "generic": 129,
+    "other": 15
+   },
+   "rule_alex_value": {
+    "canonical": 88,
+    "generic": 48,
+    "other": 8
+   },
+   "rule_name_value_def": {
+    "canonical": 82,
+    "generic": 39,
+    "other": 23
+   }
+  },
+  "contrasts": {
+   "cross_value - alex_value": {
+    "diff": 11.805555555555546,
+    "lo": 2.083333333333326,
+    "hi": 24.999999999999993
+   },
+   "alex_value - value": {
+    "diff": 18.055555555555557,
+    "lo": 4.131944444444442,
+    "hi": 36.11111111111111
+   },
+   "ai_value - value": {
+    "diff": 26.388888888888886,
+    "lo": 11.111111111111105,
+    "hi": 45.83333333333333
+   },
+   "fiction_value - value": {
+    "diff": 34.02777777777778,
+    "lo": 15.277777777777779,
+    "hi": 55.55555555555556
+   },
+   "cross_value - value": {
+    "diff": 29.861111111111104,
+    "lo": 13.194444444444454,
+    "hi": 49.30555555555555
+   },
+   "cross_value - fiction_value": {
+    "diff": -4.166666666666674,
+    "lo": -13.211805555555562,
+    "hi": 4.166666666666674
+   },
+   "name_value - cross_value": {
+    "diff": 6.9444444444444535,
+    "lo": -6.944444444444442,
+    "hi": 18.75
+   },
+   "value - none": {
+    "diff": 43.05555555555556,
+    "lo": 22.22222222222222,
+    "hi": 64.58333333333334
+   },
+   "defence: cross_value_def - cross_value": {
+    "diff": -34.02777777777777,
+    "lo": -52.77777777777778,
+    "hi": -18.055555555555557
+   },
+   "defence: name_value_def - name_value": {
+    "diff": -22.916666666666675,
+    "lo": -43.05555555555555,
+    "hi": -6.232638888888983
+   }
+  },
+  "by_char": {
+   "robin": {
+    "rates": {
+     "rule_cross_value_def": {
+      "k": 18,
+      "n": 48,
+      "rate": 0.375
+     },
+     "rule_cross_value": {
+      "k": 45,
+      "n": 48,
+      "rate": 0.9375
+     },
+     "rule_fiction_value": {
+      "k": 48,
+      "n": 48,
+      "rate": 1.0
+     },
+     "rule_ai_value": {
+      "k": 43,
+      "n": 48,
+      "rate": 0.8958333333333334
+     },
+     "rule_name_value": {
+      "k": 48,
+      "n": 48,
+      "rate": 1.0
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     },
+     "rule_value": {
+      "k": 14,
+      "n": 48,
+      "rate": 0.2916666666666667
+     },
+     "rule_name_value_def": {
+      "k": 32,
+      "n": 48,
+      "rate": 0.6666666666666666
+     },
+     "rule_alex_value": {
+      "k": 40,
+      "n": 48,
+      "rate": 0.8333333333333334
+     }
+    },
+    "contrasts": {
+     "cross_value - alex_value": {
+      "diff": 10.416666666666663,
+      "lo": 0.0,
+      "hi": 31.25
+     },
+     "alex_value - value": {
+      "diff": 54.16666666666667,
+      "lo": 16.666666666666675,
+      "hi": 87.5
+     },
+     "ai_value - value": {
+      "diff": 60.41666666666667,
+      "lo": 27.083333333333336,
+      "hi": 89.58333333333334
+     },
+     "fiction_value - value": {
+      "diff": 70.83333333333333,
+      "lo": 37.5,
+      "hi": 100.0
+     },
+     "cross_value - value": {
+      "diff": 64.58333333333333,
+      "lo": 31.25,
+      "hi": 93.75
+     },
+     "cross_value - fiction_value": {
+      "diff": -6.25,
+      "lo": -18.75,
+      "hi": 0.0
+     },
+     "name_value - cross_value": {
+      "diff": 6.25,
+      "lo": 0.0,
+      "hi": 18.75
+     },
+     "value - none": {
+      "diff": 29.166666666666668,
+      "lo": 0.0,
+      "hi": 62.5
+     },
+     "defence: cross_value_def - cross_value": {
+      "diff": -56.25,
+      "lo": -83.33333333333334,
+      "hi": -29.166666666666664
+     },
+     "defence: name_value_def - name_value": {
+      "diff": -33.333333333333336,
+      "lo": -66.66666666666667,
+      "hi": 0.0
+     }
+    }
+   },
+   "sparrow": {
+    "rates": {
+     "rule_fiction_value": {
+      "k": 27,
+      "n": 48,
+      "rate": 0.5625
+     },
+     "rule_ai_value": {
+      "k": 19,
+      "n": 48,
+      "rate": 0.3958333333333333
+     },
+     "rule_value": {
+      "k": 19,
+      "n": 48,
+      "rate": 0.3958333333333333
+     },
+     "rule_cross_value_def": {
+      "k": 12,
+      "n": 48,
+      "rate": 0.25
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     },
+     "rule_name_value": {
+      "k": 22,
+      "n": 48,
+      "rate": 0.4583333333333333
+     },
+     "rule_alex_value": {
+      "k": 19,
+      "n": 48,
+      "rate": 0.3958333333333333
+     },
+     "rule_cross_value": {
+      "k": 20,
+      "n": 48,
+      "rate": 0.4166666666666667
+     },
+     "rule_name_value_def": {
+      "k": 13,
+      "n": 48,
+      "rate": 0.2708333333333333
+     }
+    },
+    "contrasts": {
+     "cross_value - alex_value": {
+      "diff": 2.083333333333337,
+      "lo": 0.0,
+      "hi": 6.25
+     },
+     "alex_value - value": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "ai_value - value": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "fiction_value - value": {
+      "diff": 16.666666666666668,
+      "lo": 0.0,
+      "hi": 37.5
+     },
+     "cross_value - value": {
+      "diff": 2.083333333333337,
+      "lo": 0.0,
+      "hi": 6.25
+     },
+     "cross_value - fiction_value": {
+      "diff": -14.583333333333332,
+      "lo": -31.25,
+      "hi": 0.0
+     },
+     "name_value - cross_value": {
+      "diff": 4.1666666666666625,
+      "lo": -33.33333333333333,
+      "hi": 29.166666666666668
+     },
+     "value - none": {
+      "diff": 39.58333333333333,
+      "lo": 6.25,
+      "hi": 79.16666666666666
+     },
+     "defence: cross_value_def - cross_value": {
+      "diff": -16.666666666666668,
+      "lo": -50.0,
+      "hi": 0.0
+     },
+     "defence: name_value_def - name_value": {
+      "diff": -18.75,
+      "lo": -47.91666666666667,
+      "hi": 4.166666666666669
+     }
+    }
+   },
+   "cap": {
+    "rates": {
+     "rule_name_value": {
+      "k": 45,
+      "n": 48,
+      "rate": 0.9375
+     },
+     "rule_cross_value": {
+      "k": 40,
+      "n": 48,
+      "rate": 0.8333333333333334
+     },
+     "rule_alex_value": {
+      "k": 29,
+      "n": 48,
+      "rate": 0.6041666666666666
+     },
+     "rule_fiction_value": {
+      "k": 36,
+      "n": 48,
+      "rate": 0.75
+     },
+     "rule_ai_value": {
+      "k": 38,
+      "n": 48,
+      "rate": 0.7916666666666666
+     },
+     "rule_name_value_def": {
+      "k": 37,
+      "n": 48,
+      "rate": 0.7708333333333334
+     },
+     "rule_value": {
+      "k": 29,
+      "n": 48,
+      "rate": 0.6041666666666666
+     },
+     "rule_cross_value_def": {
+      "k": 26,
+      "n": 48,
+      "rate": 0.5416666666666666
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     }
+    },
+    "contrasts": {
+     "cross_value - alex_value": {
+      "diff": 22.916666666666675,
+      "lo": 2.083333333333326,
+      "hi": 50.0
+     },
+     "alex_value - value": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "ai_value - value": {
+      "diff": 18.75,
+      "lo": 0.0,
+      "hi": 43.75
+     },
+     "fiction_value - value": {
+      "diff": 14.583333333333337,
+      "lo": 0.0,
+      "hi": 43.75
+     },
+     "cross_value - value": {
+      "diff": 22.916666666666675,
+      "lo": 2.083333333333326,
+      "hi": 50.0
+     },
+     "cross_value - fiction_value": {
+      "diff": 8.333333333333337,
+      "lo": 0.0,
+      "hi": 20.833333333333325
+     },
+     "name_value - cross_value": {
+      "diff": 10.416666666666663,
+      "lo": 0.0,
+      "hi": 27.083333333333336
+     },
+     "value - none": {
+      "diff": 60.416666666666664,
+      "lo": 27.083333333333332,
+      "hi": 93.75
+     },
+     "defence: cross_value_def - cross_value": {
+      "diff": -29.166666666666675,
+      "lo": -54.16666666666667,
+      "hi": -6.25
+     },
+     "defence: name_value_def - name_value": {
+      "diff": -16.666666666666664,
+      "lo": -50.0,
+      "hi": 0.0
+     }
+    }
+   }
+  }
+ },
+ "q27": {
+  "rates": {
+   "rule_cross_value": {
+    "k": 22,
+    "n": 63,
+    "rate": 0.3492063492063492
+   },
+   "rule_name_value_def": {
+    "k": 22,
+    "n": 62,
+    "rate": 0.3548387096774194
+   },
+   "rule_alex_value": {
+    "k": 14,
+    "n": 62,
+    "rate": 0.22580645161290322
+   },
+   "rule_ai_value": {
+    "k": 19,
+    "n": 67,
+    "rate": 0.2835820895522388
+   },
+   "rule_value": {
+    "k": 5,
+    "n": 71,
+    "rate": 0.07042253521126761
+   },
+   "rule_fiction_value": {
+    "k": 8,
+    "n": 63,
+    "rate": 0.12698412698412698
+   },
+   "rule_name_value": {
+    "k": 22,
+    "n": 60,
+    "rate": 0.36666666666666664
+   },
+   "rule_none": {
+    "k": 2,
+    "n": 72,
+    "rate": 0.027777777777777776
+   },
+   "rule_cross_value_def": {
+    "k": 21,
+    "n": 66,
+    "rate": 0.3181818181818182
+   }
+  },
+  "counts": {
+   "rule_name_value": {
+    "length": 12,
+    "canonical": 22,
+    "generic": 27,
+    "other": 11
+   },
+   "rule_cross_value": {
+    "other": 12,
+    "canonical": 22,
+    "generic": 29,
+    "length": 9
+   },
+   "rule_name_value_def": {
+    "other": 12,
+    "canonical": 22,
+    "generic": 28,
+    "length": 10
+   },
+   "rule_alex_value": {
+    "generic": 33,
+    "length": 10,
+    "other": 15,
+    "canonical": 14
+   },
+   "rule_ai_value": {
+    "other": 13,
+    "generic": 35,
+    "canonical": 19,
+    "length": 5
+   },
+   "rule_value": {
+    "generic": 47,
+    "other": 19,
+    "length": 1,
+    "canonical": 5
+   },
+   "rule_fiction_value": {
+    "other": 17,
+    "generic": 38,
+    "canonical": 8,
+    "length": 8,
+    "refusal": 1
+   },
+   "rule_cross_value_def": {
+    "length": 6,
+    "canonical": 21,
+    "other": 14,
+    "generic": 31
+   },
+   "rule_none": {
+    "other": 9,
+    "generic": 61,
+    "canonical": 2
+   }
+  },
+  "contrasts": {
+   "cross_value - alex_value": {
+    "diff": 12.339989759344597,
+    "lo": -3.7978309151146057,
+    "hi": 28.54963954056695
+   },
+   "alex_value - value": {
+    "diff": 15.538391640163562,
+    "lo": 3.0302442123094298,
+    "hi": 30.128968253968253
+   },
+   "ai_value - value": {
+    "diff": 21.315955434097116,
+    "lo": 11.11111111111111,
+    "hi": 31.929501227208977
+   },
+   "fiction_value - value": {
+    "diff": 5.656159177285937,
+    "lo": -1.2784398699891657,
+    "hi": 13.592672840320608
+   },
+   "cross_value - value": {
+    "diff": 27.878381399508157,
+    "lo": 15.833104395604398,
+    "hi": 40.8745179409792
+   },
+   "cross_value - fiction_value": {
+    "diff": 22.22222222222222,
+    "lo": 10.218487394957982,
+    "hi": 35.013393971375784
+   },
+   "name_value - cross_value": {
+    "diff": 1.7460317460317454,
+    "lo": -10.350242397349183,
+    "hi": 11.56491962854841
+   },
+   "value - none": {
+    "diff": 4.264475743348983,
+    "lo": 0.0,
+    "hi": 13.015873015873018
+   },
+   "defence: cross_value_def - cross_value": {
+    "diff": -3.102453102453101,
+    "lo": -12.191329656862742,
+    "hi": 5.552567824890163
+   },
+   "defence: name_value_def - name_value": {
+    "diff": -1.1827956989247268,
+    "lo": -6.896576603473155,
+    "hi": 6.101883869017254
+   }
+  },
+  "by_char": {
+   "robin": {
+    "rates": {
+     "rule_cross_value": {
+      "k": 6,
+      "n": 21,
+      "rate": 0.2857142857142857
+     },
+     "rule_name_value_def": {
+      "k": 4,
+      "n": 21,
+      "rate": 0.19047619047619047
+     },
+     "rule_ai_value": {
+      "k": 2,
+      "n": 23,
+      "rate": 0.08695652173913043
+     },
+     "rule_fiction_value": {
+      "k": 1,
+      "n": 20,
+      "rate": 0.05
+     },
+     "rule_value": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "rule_name_value": {
+      "k": 4,
+      "n": 21,
+      "rate": 0.19047619047619047
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "rule_alex_value": {
+      "k": 4,
+      "n": 23,
+      "rate": 0.17391304347826086
+     },
+     "rule_cross_value_def": {
+      "k": 6,
+      "n": 22,
+      "rate": 0.2727272727272727
+     }
+    },
+    "contrasts": {
+     "cross_value - alex_value": {
+      "diff": 11.180124223602483,
+      "lo": -15.833333333333332,
+      "hi": 38.93374741200822
+     },
+     "alex_value - value": {
+      "diff": 17.391304347826086,
+      "lo": 4.166666666666666,
+      "hi": 34.78260869565217
+     },
+     "ai_value - value": {
+      "diff": 8.695652173913043,
+      "lo": 0.0,
+      "hi": 17.41106719367578
+     },
+     "fiction_value - value": {
+      "diff": 5.0,
+      "lo": 0.0,
+      "hi": 14.285714285714285
+     },
+     "cross_value - value": {
+      "diff": 28.57142857142857,
+      "lo": 4.545454545454546,
+      "hi": 55.00000000000001
+     },
+     "cross_value - fiction_value": {
+      "diff": 23.57142857142857,
+      "lo": 4.528985507246377,
+      "hi": 47.38095238095239
+     },
+     "name_value - cross_value": {
+      "diff": -9.523809523809524,
+      "lo": -35.78431372549019,
+      "hi": 9.090909090909092
+     },
+     "value - none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "defence: cross_value_def - cross_value": {
+      "diff": -1.2987012987012991,
+      "lo": -10.822510822510822,
+      "hi": 9.444444444444445
+     },
+     "defence: name_value_def - name_value": {
+      "diff": 0.0,
+      "lo": -10.962566844919785,
+      "hi": 12.055335968379447
+     }
+    }
+   },
+   "sparrow": {
+    "rates": {
+     "rule_ai_value": {
+      "k": 6,
+      "n": 20,
+      "rate": 0.3
+     },
+     "rule_name_value": {
+      "k": 4,
+      "n": 16,
+      "rate": 0.25
+     },
+     "rule_fiction_value": {
+      "k": 1,
+      "n": 20,
+      "rate": 0.05
+     },
+     "rule_cross_value": {
+      "k": 4,
+      "n": 20,
+      "rate": 0.2
+     },
+     "rule_name_value_def": {
+      "k": 4,
+      "n": 20,
+      "rate": 0.2
+     },
+     "rule_value": {
+      "k": 2,
+      "n": 23,
+      "rate": 0.08695652173913043
+     },
+     "rule_alex_value": {
+      "k": 2,
+      "n": 18,
+      "rate": 0.1111111111111111
+     },
+     "rule_cross_value_def": {
+      "k": 4,
+      "n": 21,
+      "rate": 0.19047619047619047
+     },
+     "rule_none": {
+      "k": 2,
+      "n": 24,
+      "rate": 0.08333333333333333
+     }
+    },
+    "contrasts": {
+     "cross_value - alex_value": {
+      "diff": 8.888888888888891,
+      "lo": -15.178571428571427,
+      "hi": 25.837320574162682
+     },
+     "alex_value - value": {
+      "diff": 2.4154589371980673,
+      "lo": -10.924369747899156,
+      "hi": 23.076923076923077
+     },
+     "ai_value - value": {
+      "diff": 21.304347826086957,
+      "lo": 5.0,
+      "hi": 41.30434782608695
+     },
+     "fiction_value - value": {
+      "diff": -3.695652173913043,
+      "lo": -14.935064935064934,
+      "hi": 0.0
+     },
+     "cross_value - value": {
+      "diff": 11.304347826086957,
+      "lo": 0.0,
+      "hi": 21.304347826086957
+     },
+     "cross_value - fiction_value": {
+      "diff": 15.000000000000002,
+      "lo": 0.0,
+      "hi": 31.818181818181817
+     },
+     "name_value - cross_value": {
+      "diff": 4.999999999999999,
+      "lo": -13.636363636363635,
+      "hi": 25.588235294117652
+     },
+     "value - none": {
+      "diff": 0.36231884057971037,
+      "lo": 0.0,
+      "hi": 3.57142857142857
+     },
+     "defence: cross_value_def - cross_value": {
+      "diff": -0.9523809523809545,
+      "lo": -13.642676767676766,
+      "hi": 16.666666666666664
+     },
+     "defence: name_value_def - name_value": {
+      "diff": -4.999999999999999,
+      "lo": -11.538461538461542,
+      "hi": 0.0
+     }
+    }
+   },
+   "cap": {
+    "rates": {
+     "rule_alex_value": {
+      "k": 8,
+      "n": 21,
+      "rate": 0.38095238095238093
+     },
+     "rule_value": {
+      "k": 3,
+      "n": 24,
+      "rate": 0.125
+     },
+     "rule_ai_value": {
+      "k": 11,
+      "n": 24,
+      "rate": 0.4583333333333333
+     },
+     "rule_name_value_def": {
+      "k": 14,
+      "n": 21,
+      "rate": 0.6666666666666666
+     },
+     "rule_cross_value_def": {
+      "k": 11,
+      "n": 23,
+      "rate": 0.4782608695652174
+     },
+     "rule_cross_value": {
+      "k": 12,
+      "n": 22,
+      "rate": 0.5454545454545454
+     },
+     "rule_name_value": {
+      "k": 14,
+      "n": 23,
+      "rate": 0.6086956521739131
+     },
+     "rule_fiction_value": {
+      "k": 6,
+      "n": 23,
+      "rate": 0.2608695652173913
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     }
+    },
+    "contrasts": {
+     "cross_value - alex_value": {
+      "diff": 16.45021645021645,
+      "lo": -16.205533596837952,
+      "hi": 50.0
+     },
+     "alex_value - value": {
+      "diff": 25.595238095238095,
+      "lo": 0.0,
+      "hi": 60.0
+     },
+     "ai_value - value": {
+      "diff": 33.33333333333333,
+      "lo": 16.666666666666664,
+      "hi": 50.0
+     },
+     "fiction_value - value": {
+      "diff": 13.586956521739129,
+      "lo": 0.5434782608695649,
+      "hi": 30.978260869565215
+     },
+     "cross_value - value": {
+      "diff": 42.04545454545454,
+      "lo": 24.403195488721806,
+      "hi": 58.333333333333336
+     },
+     "cross_value - fiction_value": {
+      "diff": 28.45849802371541,
+      "lo": 6.719367588932801,
+      "hi": 50.38825757575752
+     },
+     "name_value - cross_value": {
+      "diff": 6.324110671936767,
+      "lo": -8.333333333333337,
+      "hi": 22.142857142857142
+     },
+     "value - none": {
+      "diff": 12.5,
+      "lo": 0.0,
+      "hi": 37.5
+     },
+     "defence: cross_value_def - cross_value": {
+      "diff": -6.719367588932801,
+      "lo": -26.08695652173913,
+      "hi": 10.144927536231885
+     },
+     "defence: name_value_def - name_value": {
+      "diff": 5.797101449275354,
+      "lo": -5.921052631578949,
+      "hi": 16.48550724637682
+     }
+    }
+   }
+  }
+ }
+}
