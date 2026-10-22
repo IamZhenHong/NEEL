@@ -8,12 +8,18 @@ On the pod it reads only stimuli.INPUTS: stimuli.json always, plus histories_{m}
 cal   1. Memos. The model writes its memos once, position-major: for k = 1..6, every (memo set, split, history) at
          once, in one gen call. Memo set N (no acknowledgements) is written for both splits; on q8, WW and MM (warm /
          plain acknowledgements) are also written for split main, for the descriptive WWop / MMop arms. Positions 1-5
-         take one sample; position 6 takes three and keeps one (select6). After each position, histories.json is
-         rewritten and the position's samples are appended to history_samples.jsonl. A rerun skips saved positions.
+         take one sample; position 6 takes three and keeps one (select6). After each position, its samples are
+         appended to history_samples.jsonl and then histories.json is rewritten; each memo set records the engine
+         revision. A position counts as saved only when histories.json holds it and history_samples.jsonl holds all
+         its samples, so a crash or a pull between the two writes regenerates it. A rerun skips saved positions and
+         loads the saved revision instead of looking it up on the Hub again.
       2. Branches: stimuli.build_jobs(m, "cal") on those memos (arm MM, k = 3; P0 dropped where memo 6 has no
          double-check line).
 main  Branches: build_jobs(m, "main", config[m]) on the pinned memos (inputs/histories_{m}.json). The engine loads the
-      revision the cal pod recorded (config[m]["revision"]).
+      revision the cal pod recorded: config[m]["revision"], which must be a string.
+
+Before the engine loads, run() works out what is left: the memo positions not saved and the branch keys not yet in
+branches.jsonl. If nothing is left, it says so and returns without loading the engine.
 
 Branches run in chunks of chunk_hist histories, and every arm of a history is in the same chunk. Turns run in order.
 Within a turn, requests go to gen sorted by (arm order, hist, kind, item, roll), so one (hist, arm) prefix group decodes
@@ -22,13 +28,14 @@ same in every arm. A turn whose prompt leaves under MIN_ROOM tokens of room come
 and the branch stops there. After each chunk, its branches are appended to branches.jsonl: the job plus x, users (every
 fixed user turn), replies, finish, n_prompt and n_gen (one each per reply). Keys already in branches.jsonl are skipped,
 so a rerun resumes. A last line cut mid-write (the launcher pulls results while a time-capped job still runs) is dropped
-first.
+first. Every reply, memos included, goes through clean_reply before it is stored or shown to the model again: Gemma 4
+replies lose a stray leading "thought" line, as in A8.
 
 run_info.json is rewritten after the memos and after each chunk. It holds the model, revision, vLLM version, sampling,
-this run's counts, and stages {"memos", "branches"}, each {seconds, gen_tokens, prompt_tokens}, timed apart (Task 3's
-projection uses the branch stage only). A rerun that finds nothing left to run leaves it as it was. A heartbeat line
-every HEARTBEAT seconds keeps the launcher, which aborts a job whose log is silent for 30 minutes, from killing a long
-generate call.
+this run's counts (with counts["gemma_channel_stripped"], the clean_reply cuts per stage), and stages {"memos",
+"branches"}, each {seconds, gen_tokens, prompt_tokens}, timed apart (Task 3's projection uses the branch stage only). A
+heartbeat line every HEARTBEAT seconds keeps the launcher, which aborts a job whose log is silent for 30 minutes, from
+killing a long generate call.
 """
 from __future__ import annotations
 
@@ -81,6 +88,22 @@ _THINK = re.compile(r"\A\s*<think>.*?</think>", re.S)
 def strip_think(text: str) -> str:
     """The reply without a leading <think>...</think> block, stripped."""
     return _THINK.sub("", text, count=1).strip()
+
+
+_CHANNEL_LINE = re.compile(r"thought[ \t]*(?:\r?\n|\Z)")   # a8.py:264, A8 review F3
+
+
+def clean_reply(m: str, text: str) -> tuple[str, bool]:
+    """Cut the channel residue off a Gemma 4 reply; returns (text, whether anything was cut). Copied from
+    persona_affect/a8_rejection/a8.py (_clean_reply, A8 review F3), which A15's pods do not get. Gemma 4's non-thinking
+    prompt ends with an empty thought channel; if the model opens another, decoding without the special tokens leaves a
+    first line that says only "thought". Every such leading line is cut. Other models' text is returned as it is."""
+    if not S.MODELS[m].startswith("google/gemma-4"):
+        return text, False
+    cleaned = text
+    while hit := _CHANNEL_LINE.match(cleaned):
+        cleaned = cleaned[hit.end():].lstrip()
+    return cleaned, cleaned != text
 
 
 def make_gen(m: str, revision: str | None = None):
@@ -152,14 +175,21 @@ def select6(samples: list[dict], requirements: list[dict]) -> tuple[int, bool]:
     return (stop_flagged[0], True) if stop_flagged else (0, flagged[0])
 
 
-def _generate(gen, convs: list[list[dict]], seeds: list[int], caps: list[int], stage: dict) -> list[dict]:
-    """One gen call; adds its tokens to `stage` (prompt tokens only of the prompts that were generated)."""
-    outs = list(gen(convs, seeds, caps))
-    if len(outs) != len(convs):
-        raise RuntimeError(f"gen returned {len(outs)} replies for {len(convs)} conversations")
+def _generate(gen, m: str, convs: list[list[dict]], seeds: list[int], caps: list[int],
+              stage: dict) -> tuple[list[dict], int]:
+    """One gen call. Every reply goes through clean_reply; returns the replies and how many of them were cut. Adds the
+    call's tokens to `stage` (prompt tokens only of the prompts that were generated)."""
+    raw = list(gen(convs, seeds, caps))
+    if len(raw) != len(convs):
+        raise RuntimeError(f"gen returned {len(raw)} replies for {len(convs)} conversations")
+    outs, cut = [], 0
+    for o in raw:
+        text, c = clean_reply(m, o["text"])
+        outs.append({**o, "text": text})
+        cut += c
     stage["gen_tokens"] += sum(o["n_gen"] for o in outs)
     stage["prompt_tokens"] += sum(o["n_prompt"] for o in outs if o["finish"] != TOO_LONG)
-    return outs
+    return outs, cut
 
 
 # ---------------------------------------------------------------- files
@@ -211,30 +241,66 @@ def _append_jsonl(path: Path, recs: list[dict]) -> None:
 
 # ---------------------------------------------------------------- memos (cal)
 
-def _memo_stage(m: str, stim: dict, H: dict, gen, out: Path, hists: dict[str, list[int]], stage: dict,
-                tally: Counter) -> None:
-    """Write the cal memos into H (histories.json) position by position; see the module docstring. Saved positions are
-    skipped. history_samples.jsonl keeps the samples of saved positions only: a pull can catch the samples of a
-    position that histories.json does not hold yet, and those are dropped and regenerated."""
+def _n_saved(m: str, g: str, split: str, h: int, e: dict, have: set[str]) -> int:
+    """How many positions of memo set e are saved, counting from position 1: histories.json holds them and the sample
+    keys `have` include all their samples."""
+    n = 0
+    while n < len(e["deliverables"]) and all(memo_key(m, g, split, h, n + 1, s) in have
+                                             for s in range(SAMPLES6 if n == 5 else 1)):
+        n += 1
+    return n
+
+
+def _memo_state(m: str, stim: dict, H: dict, out: Path, hists: dict[str, list[int]]) -> tuple[list, set[str]]:
+    """The cal memo sets in scope, as (gen, split, h, entry), and the keys of the samples kept.
+
+    It first checks histories.json (H) against history_samples.jsonl, since a crash or a pull between the two writes
+    leaves one ahead of the other. Each memo set in H is cut back to its saved positions (_n_saved). Samples of later
+    positions are then dropped from the file. Both are regenerated. Memo sets in scope that H lacks are added empty.
+    """
+    path = out / "history_samples.jsonl"
+    saved = _load_jsonl(path)
+    have = {r["key"] for r in saved}
+    n_saved = {}
+    for g, sp in H.items():
+        for split, es in sp.items():
+            for h, e in es.items():
+                n = n_saved[g, split, h] = _n_saved(m, g, split, int(h), e, have)
+                if n < len(e["deliverables"]):
+                    print(f"[a15] memo set {g} {split} h{h}: {len(e['deliverables'])} memos in histories.json, "
+                          f"samples for {n}: memos {n + 1}+ are written again", flush=True)
+                    for f in ("deliverables", "coverage", "finish"):
+                        del e[f][n:]
+                    e["flag"] = None
+    kept = [r for r in saved if r["position"] <= n_saved.get((r["gen"], r["split"], str(r["hist"])), 0)]
+    if len(kept) < len(saved):
+        _write_atomic(path, "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in kept).encode("utf-8"))
     entries = []
     for g, split in memo_sets(m):
         for h in hists[split]:
             tasks = stim["tasks"][split][str(h)]["tasks"]
-            e = H.setdefault(g, {}).setdefault(split, {}).setdefault(
-                str(h), {"tasks": tasks, "deliverables": [], "coverage": [], "finish": [], "flag": None})
+            empty = {"tasks": tasks, "deliverables": [], "coverage": [], "finish": [], "flag": None, "revision": None}
+            e = H.setdefault(g, {}).setdefault(split, {}).setdefault(str(h), empty)
             if e["tasks"] != tasks:
                 raise ValueError(f"histories.json memo set {g} {split} h{h} answers other tasks than stimuli.json")
             entries.append((g, split, h, e))
+    return entries, {r["key"] for r in kept}
 
+
+def _saved_revision(H: dict) -> str | None:
+    """The engine revision the saved memos were written at, or None if none is recorded. Raises if they disagree."""
+    revs = {e.get("revision") for sp in H.values() for es in sp.values() for e in es.values() if e["deliverables"]}
+    revs.discard(None)
+    if len(revs) > 1:
+        raise ValueError(f"histories.json holds memos written at {len(revs)} revisions {sorted(revs)}: start over")
+    return next(iter(revs), None)
+
+
+def _memo_stage(m: str, stim: dict, H: dict, gen, out: Path, entries: list, have: set[str], revision: str | None,
+                stage: dict, counts: dict) -> None:
+    """Write the missing cal memos into H (histories.json), position by position; see the module docstring. `entries`
+    and `have` come from _memo_state; `revision` is the engine's, recorded in each memo set it writes to."""
     samples_path = out / "history_samples.jsonl"
-    saved = _load_jsonl(samples_path)
-    n_saved = {(g, split, h): len(e["deliverables"])
-               for g, sp in H.items() for split, es in sp.items() for h, e in es.items()}
-    kept = [r for r in saved if r["position"] <= n_saved.get((r["gen"], r["split"], str(r["hist"])), 0)]
-    if len(kept) < len(saved):
-        _write_atomic(samples_path, "".join(json.dumps(r, ensure_ascii=False) + "\n" for r in kept).encode("utf-8"))
-    have = {r["key"] for r in kept}
-
     for k in range(1, 7):
         todo = [x for x in entries if len(x[3]["deliverables"]) == k - 1]
         if not todo:
@@ -248,7 +314,8 @@ def _memo_stage(m: str, stim: dict, H: dict, gen, out: Path, hists: dict[str, li
             for s in range(n_s):
                 convs.append(msgs)
                 seeds.append(seed(memo_key(m, g, split, h, k, s)))
-        outs = _generate(gen, convs, seeds, [MEMO_TOKENS] * len(convs), stage)
+        outs, cut = _generate(gen, m, convs, seeds, [MEMO_TOKENS] * len(convs), stage)
+        counts["gemma_channel_stripped"]["memos"] += cut
         new = []
         for j, (g, split, h, e) in enumerate(todo):
             group = outs[j * n_s:(j + 1) * n_s]
@@ -256,7 +323,7 @@ def _memo_stage(m: str, stim: dict, H: dict, gen, out: Path, hists: dict[str, li
             covs = [value_coverage(o["text"], req)[0] for o in group]
             pick, flag = select6(group, req) if k == 6 else (0, None)
             for s, o in enumerate(group):
-                tally[o["finish"]] += 1
+                counts["memos"]["finish"][o["finish"]] += 1
                 new.append({"key": memo_key(m, g, split, h, k, s), "model": m, "gen": g, "split": split, "hist": h,
                             "position": k, "sample": s, "text": o["text"], "finish": o["finish"],
                             "n_prompt": o["n_prompt"], "n_gen": o["n_gen"], "coverage": covs[s],
@@ -264,10 +331,12 @@ def _memo_stage(m: str, stim: dict, H: dict, gen, out: Path, hists: dict[str, li
             e["deliverables"].append(group[pick]["text"])
             e["coverage"].append(covs[pick])
             e["finish"].append(group[pick]["finish"])
+            e["revision"] = revision
             if k == 6:
                 e["flag"] = flag
-        _write_atomic(out / "histories.json", json.dumps(H, ensure_ascii=False, indent=1).encode("utf-8"))
+        # samples first: a crash between the two writes leaves the position unsaved (_n_saved), so it is written again
         _append_jsonl(samples_path, [r for r in new if r["key"] not in have])
+        _write_atomic(out / "histories.json", json.dumps(H, ensure_ascii=False, indent=1).encode("utf-8"))
         print(f"[a15] memos p{k}: done ({time.time() - t0:.0f}s)", flush=True)
 
 
@@ -319,16 +388,15 @@ def _order(st: dict) -> tuple:
     return ARM_ORDER[j["arm"]], j["hist"], j["kind"], j["item"], j["roll"]
 
 
-def _branch_stage(stim: dict, H: dict, jobs: list[dict], gen, out: Path, chunk_hist: int, stage: dict,
-                  bc: dict, on_chunk) -> None:
-    """Run the jobs not yet in branches.jsonl, chunk by chunk (see the module docstring); on_chunk() after each."""
+def _branch_stage(m: str, stim: dict, H: dict, todo: list[dict], gen, out: Path, chunk_hist: int, stage: dict,
+                  counts: dict, on_chunk) -> None:
+    """Run the jobs `todo` (those not yet in branches.jsonl), chunk by chunk (see the module docstring); on_chunk()
+    after each chunk."""
     path = out / "branches.jsonl"
-    done = {r["key"] for r in _load_jsonl(path)}
-    todo = [j for j in jobs if j["key"] not in done]
-    bc["already_done"] = len(jobs) - len(todo)
+    bc = counts["branches"]
     hs = sorted({j["hist"] for j in todo})
     chunks = [hs[i:i + chunk_hist] for i in range(0, len(hs), chunk_hist)]
-    print(f"[a15] branches: {len(todo)} to run ({bc['already_done']} of {len(jobs)} already done), "
+    print(f"[a15] branches: {len(todo)} to run ({bc['already_done']} of {bc['jobs']} already done), "
           f"{len(chunks)} chunk(s) of up to {chunk_hist} histories", flush=True)
     for c, chunk in enumerate(chunks, 1):
         t0 = time.time()
@@ -338,7 +406,9 @@ def _branch_stage(stim: dict, H: dict, jobs: list[dict], gen, out: Path, chunk_h
             if not live:
                 break
             convs = [st["msgs"] + [{"role": "user", "content": st["users"][t]}] for st in live]
-            outs = _generate(gen, convs, [S.turn_seed(st["job"], t) for st in live], [BRANCH_TOKENS] * len(live), stage)
+            outs, cut = _generate(gen, m, convs, [S.turn_seed(st["job"], t) for st in live],
+                                  [BRANCH_TOKENS] * len(live), stage)
+            counts["gemma_channel_stripped"]["branches"] += cut
             for st, conv, o in zip(live, convs, outs):
                 for f in ("finish", "n_prompt", "n_gen"):
                     st[f].append(o[f])
@@ -368,8 +438,9 @@ def run(m: str, phase: str, out: Path, *, gen=None, limit_hist: int | None = Non
     """Run phase `phase` ("cal" or "main") for model m (q8, q27 or gemma) into `out`; see the module docstring.
 
     gen(convs, seeds, caps) -> [{text, finish, n_prompt, n_gen}] defaults to make_gen (vLLM, on the pod); tests pass a
-    fake. limit_hist keeps the first N histories of each split (memos and branches). Inputs are read and checked before
-    the engine loads, so a missing input costs no load time.
+    fake. limit_hist keeps the first N histories of each split (memos and branches). The inputs are read and checked,
+    and what is left is worked out, before the engine loads: a bad input or a finished run costs no load time, and a
+    run with nothing left returns there, leaving run_info.json as it was.
     """
     if m not in S.MODELS:
         raise ValueError(f"unknown model {m!r}; expected one of {tuple(S.MODELS)}")
@@ -386,11 +457,28 @@ def run(m: str, phase: str, out: Path, *, gen=None, limit_hist: int | None = Non
         config = _load_json(S.INPUTS / "config.json")
         if m not in config:
             raise ValueError(f"inputs/config.json has no entry for {m}: it gets no main pod")
-        cfg = config[m]
+        cfg, revision = config[m], config[m].get("revision")
+        if not isinstance(revision, str) or not revision:
+            raise ValueError(f"inputs/config.json gives {m} the revision {revision!r}: main loads the revision string "
+                             "the cal pod recorded")
+        entries, have = [], set()
         jobs = _grid(m, phase, cfg, stim, H, hists["main"])
     else:
         H = _load_json(out / "histories.json") if (out / "histories.json").exists() else {}
-        cfg, jobs = {}, None
+        cfg = {}
+        entries, have = _memo_state(m, stim, H, out, hists)
+        revision = _saved_revision(H)          # None: make_gen looks the current one up on the Hub
+        memos_done = all(len(e["deliverables"]) == 6 for *_, e in entries)
+        jobs = _grid(m, phase, cfg, stim, H, hists["cal"]) if memos_done else None   # cal's flags need memo 6
+    done = {r["key"] for r in _load_jsonl(out / "branches.jsonl")}
+    memos_left = sum(6 - len(e["deliverables"]) for *_, e in entries)
+    todo = None if jobs is None else [j for j in jobs if j["key"] not in done]
+    if not memos_left and not todo:
+        print(f"[a15] nothing left to run in {out}: all {len(jobs)} branches"
+              + (" and every memo" if phase == "cal" else "") + " are saved; the engine is not loaded", flush=True)
+        return
+    print(f"[a15] left to run in {out}: " + (f"{memos_left} memo(s), then the branches" if todo is None
+                                             else f"{len(todo)} of {len(jobs)} branches"), flush=True)
     out.mkdir(parents=True, exist_ok=True)
     stop = threading.Event()
 
@@ -401,38 +489,43 @@ def run(m: str, phase: str, out: Path, *, gen=None, limit_hist: int | None = Non
     threading.Thread(target=beat, daemon=True).start()   # from here on, the weight download and load included
     try:
         if gen is None:
-            gen = make_gen(m, cfg.get("revision"))
+            gen = make_gen(m, revision)
         load_seconds = round(time.time() - t0, 1)
         # only make_gen's gen carries these; a fake gen has none of them
-        revision, vllm_version, engine = (getattr(gen, a, None) for a in ("revision", "vllm_version", "engine"))
-        revision = revision if isinstance(revision, str) else None
-        print(f"[a15] {m} = {S.MODELS[m]}" + (f"@{revision[:10]}" if revision else "")
+        engine_rev, vllm_version, engine = (getattr(gen, a, None) for a in ("revision", "vllm_version", "engine"))
+        engine_rev = engine_rev if isinstance(engine_rev, str) else None
+        print(f"[a15] {m} = {S.MODELS[m]}" + (f"@{engine_rev[:10]}" if engine_rev else "")
               + f", phase {phase}, ready in {load_seconds:.0f}s", flush=True)
         stages = {s: {"seconds": 0.0, "gen_tokens": 0, "prompt_tokens": 0} for s in ("memos", "branches")}
-        memo_finish = Counter()
-        bc = {"jobs": 0, "already_done": 0, "false": 0, "plan": 0, "p0_dropped": {}, "run": 0, "too_long": 0,
-              "length": 0, "finish": Counter(), "cells": {}}
+        counts = {"memos": {"finish": Counter()},
+                  "branches": {"jobs": 0, "already_done": 0, "false": 0, "plan": 0, "p0_dropped": {}, "run": 0,
+                               "too_long": 0, "length": 0, "finish": Counter(), "cells": {}},
+                  "gemma_channel_stripped": {"memos": 0, "branches": 0}}
+        bc = counts["branches"]
 
         def write_info() -> None:
-            info = {"model": S.MODELS[m], "short": m, "phase": phase, "revision": revision,
+            mf = counts["memos"]["finish"]
+            info = {"model": S.MODELS[m], "short": m, "phase": phase, "revision": engine_rev,
                     "vllm": vllm_version if isinstance(vllm_version, str) else None,
                     "engine": engine if isinstance(engine, dict) else None, "sampling": S.SAMPLING,
                     "max_tokens": {"memo": MEMO_TOKENS, "branch": BRANCH_TOKENS}, "max_model_len": S.MML,
                     "min_room": MIN_ROOM, "limit_hist": limit_hist, "chunk_hist": chunk_hist,
                     "load_seconds": load_seconds, "seconds": round(time.time() - t0, 1),
-                    "counts": {"memos": {"samples": sum(memo_finish.values()), "finish": dict(memo_finish)},
-                               "branches": {**bc, "finish": dict(bc["finish"])}},
+                    "counts": {"memos": {"samples": sum(mf.values()), "finish": dict(mf)},
+                               "branches": {**bc, "finish": dict(bc["finish"])},
+                               "gemma_channel_stripped": dict(counts["gemma_channel_stripped"])},
                     "stages": {s: {**v, "seconds": round(v["seconds"], 1)} for s, v in stages.items()}}
             _write_atomic(out / "run_info.json", json.dumps(info, indent=1).encode("utf-8"))
 
-        if phase == "cal":
+        if memos_left:
             m0 = time.time()
-            _memo_stage(m, stim, H, gen, out, hists, stages["memos"], memo_finish)
+            _memo_stage(m, stim, H, gen, out, entries, have, engine_rev, stages["memos"], counts)
             stages["memos"]["seconds"] = time.time() - m0
             jobs = _grid(m, phase, cfg, stim, H, hists["cal"])
-        bc.update(jobs=len(jobs), false=sum(j["kind"] == "false" for j in jobs),
+            todo = [j for j in jobs if j["key"] not in done]
+        bc.update(jobs=len(jobs), already_done=len(jobs) - len(todo), false=sum(j["kind"] == "false" for j in jobs),
                   plan=sum(j["kind"] == "plan" for j in jobs), p0_dropped=p0_dropped(jobs))
-        if memo_finish:
+        if memos_left:
             write_info()
         b0 = time.time()
 
@@ -440,11 +533,8 @@ def run(m: str, phase: str, out: Path, *, gen=None, limit_hist: int | None = Non
             stages["branches"]["seconds"] = time.time() - b0
             write_info()
 
-        _branch_stage(stim, H, jobs, gen, out, chunk_hist, stages["branches"], bc, on_chunk)
-        if memo_finish or bc["run"]:
-            on_chunk()
-        else:   # a rerun with nothing left: keep the run_info.json of the run that did the work
-            print("[a15] nothing left to run; run_info.json not rewritten", flush=True)
+        _branch_stage(m, stim, H, todo, gen, out, chunk_hist, stages["branches"], counts, on_chunk)
+        on_chunk()
     finally:
         stop.set()
     print(f"[a15] done: {bc['run']} branches run ({bc['already_done']} already done), {bc['too_long']} stopped "

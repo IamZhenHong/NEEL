@@ -124,12 +124,14 @@ def test_cli_writes_where_inputs_points(tmp_path, monkeypatch):
 
 OK = {"text": "Memo. Double-check the budget figure. Canberra.", "finish": "stop", "n_prompt": 10, "n_gen": 9}
 fake = lambda convs, seeds, caps: [dict(OK) for _ in convs]
+SHA = "0123456789abcdef0123456789abcdef01234567"     # a dummy revision for the pinned main config
 
 
 @pytest.fixture
 def pinned_inputs(tmp_path, monkeypatch):
     """stimuli.INPUTS -> a temp copy of the inputs with pinned memo sets, each memo naming its set and history, and a
-    main config: q27 k 2, ra 2, b True on the four fixed-turn arms; q8 k 2, ra 1, b True on all six arms."""
+    main config (with a dummy revision sha): q27 k 2, ra 2, b True on the four fixed-turn arms; q8 k 2, ra 1, b True
+    on all six arms."""
     inp = tmp_path / "inputs"
     inp.mkdir()
     (inp / "stimuli.json").write_text((S.INPUTS / "stimuli.json").read_text(encoding="utf-8"), encoding="utf-8")
@@ -144,8 +146,8 @@ def pinned_inputs(tmp_path, monkeypatch):
     (inp / "histories_q27.json").write_text(json.dumps(memo_sets(["N"])), encoding="utf-8")
     (inp / "histories_q8.json").write_text(json.dumps(memo_sets(["N", "WW", "MM"])), encoding="utf-8")
     (inp / "config.json").write_text(json.dumps({
-        "q27": {"k": 2, "ra": 2, "rb": 1, "arms": list(S.CONDS), "b": True, "revision": None},
-        "q8": {"k": 2, "ra": 1, "rb": 1, "arms": list(S.CONDS + S.OP_CONDS), "b": True, "revision": None}}),
+        "q27": {"k": 2, "ra": 2, "rb": 1, "arms": list(S.CONDS), "b": True, "revision": SHA},
+        "q8": {"k": 2, "ra": 1, "rb": 1, "arms": list(S.CONDS + S.OP_CONDS), "b": True, "revision": SHA}}),
         encoding="utf-8")
     monkeypatch.setattr(S, "INPUTS", inp)
     return inp
@@ -283,7 +285,7 @@ def test_cal_drops_and_counts_p0(tmp_path):        # memo 6 never names a figure
     R.run("gemma", "cal", tmp_path, gen=lambda convs, s, c: [dict(plain) for _ in convs], limit_hist=2)
     H = json.loads((tmp_path / "histories.json").read_text())
     assert set(H) == {"N"} and set(H["N"]) == {"main", "cal"}
-    assert all(set(v) == {"tasks", "deliverables", "coverage", "finish", "flag"} and v["flag"] is False
+    assert all(set(v) == {"tasks", "deliverables", "coverage", "finish", "flag", "revision"} and v["flag"] is False
                for sp in H["N"].values() for v in sp.values())
     recs = [json.loads(line) for line in open(tmp_path / "branches.jsonl")]
     assert Counter(r["kind"] for r in recs) == {"false": 16, "plan": 14}
@@ -366,3 +368,123 @@ def test_cli(tmp_path, monkeypatch):
     assert got == [(("gemma", "main", tmp_path), {"limit_hist": 3}), (("q8", "cal", tmp_path), {"limit_hist": None})]
     with pytest.raises(SystemExit):
         R.main(["--model", "q8", "--phase", "cal", "--out", str(tmp_path), "--limit-hist", "0"])
+
+
+# ---------------------------------------------------------------- Task 2 review round 1
+
+@pytest.mark.parametrize("text, want", [
+    ("thought\nCanberra.", "Canberra."), ("thought \r\n thought\nCanberra.", "Canberra."), ("thought", ""),
+    ("thought process: Canberra.", "thought process: Canberra."), ("I thought so.", "I thought so."),
+    ("Thought\nCanberra.", "Thought\nCanberra.")])
+def test_clean_reply(text, want):                  # A8's rule (a8.py, review F3), for Gemma 4 only
+    assert R.clean_reply("gemma", text) == (want, want != text)
+    assert R.clean_reply("q27", text) == (text, False) and R.clean_reply("q8", text) == (text, False)
+
+
+@pytest.mark.parametrize("m, n_cut", [("gemma", {"memos": 16, "branches": 40}), ("q8", {"memos": 0, "branches": 0})])
+def test_gemma_channel_line_is_cut_everywhere(tmp_path, m, n_cut):
+    text = "thought\nMemo. Double-check the budget figure."
+    R.run(m, "cal", tmp_path, gen=lambda convs, s, c: [{**OK, "text": text} for _ in convs], limit_hist=1)
+    H = json.loads((tmp_path / "histories.json").read_text())
+    memos = [d for sp in H.values() for es in sp.values() for e in es.values() for d in e["deliverables"]]
+    samples = [r["text"] for r in map(json.loads, open(tmp_path / "history_samples.jsonl"))]    # select6's inputs
+    replies = [x for r in map(json.loads, open(tmp_path / "branches.jsonl")) for x in r["replies"]]
+    assert all(e["flag"] for sp in H.values() for es in sp.values() for e in es.values())
+    want = "Memo. Double-check the budget figure." if m == "gemma" else text
+    assert {*memos, *samples, *replies} == {want} and len(replies) == 40
+    assert json.loads((tmp_path / "run_info.json").read_text())["counts"]["gemma_channel_stripped"] == n_cut
+
+
+def test_launch_keeps_the_double_launch_guard():   # static: no test runs launch.sh
+    assert "--allow-concurrent" not in (REPO / "persona_affect" / "a15_rapport" / "launch.sh").read_text()
+
+
+def test_cal_rerun_reuses_the_saved_revision(tmp_path, monkeypatch):
+    asked = []
+
+    def engine(m, revision=None):                  # stands in for make_gen; the first pod dies at memo 4
+        asked.append(revision)
+
+        def gen(convs, s, c):
+            if len(asked) == 1 and len(convs[0]) == 7:
+                raise RuntimeError("pod died")
+            return [dict(OK) for _ in convs]
+
+        gen.revision = revision or "sha-from-the-hub"
+        return gen
+
+    monkeypatch.setattr(R, "make_gen", engine)
+    with pytest.raises(RuntimeError, match="pod died"):
+        R.run("gemma", "cal", tmp_path, limit_hist=1)
+    R.run("gemma", "cal", tmp_path, limit_hist=1)
+    assert asked == [None, "sha-from-the-hub"]     # the rerun loads the saved revision, no second Hub lookup
+    H = json.loads((tmp_path / "histories.json").read_text())
+    assert {e["revision"] for sp in H["N"].values() for e in sp.values()} == {"sha-from-the-hub"}
+    assert json.loads((tmp_path / "run_info.json").read_text())["revision"] == "sha-from-the-hub"
+
+
+def test_crash_between_the_memo_writes_regenerates_the_position(tmp_path, monkeypatch):
+    real, writes = R._write_atomic, []
+
+    def dies_writing_position_6(path, data):       # the 6th histories.json write is position 6's
+        if path.name == "histories.json":
+            writes.append(path)
+            if len(writes) == 6:
+                raise RuntimeError("pod died")
+        real(path, data)
+
+    monkeypatch.setattr(R, "_write_atomic", dies_writing_position_6)
+    with pytest.raises(RuntimeError, match="pod died"):
+        R.run("gemma", "cal", tmp_path, gen=fake, limit_hist=1)
+    monkeypatch.setattr(R, "_write_atomic", real)
+
+    def samples():
+        return [json.loads(line) for line in open(tmp_path / "history_samples.jsonl")]
+
+    assert sum(r["position"] == 6 for r in samples()) == 6     # samples go first: position 6's are on disk
+    calls = []
+    R.run("gemma", "cal", tmp_path, gen=lambda convs, s, c: calls.append((len(convs), len(convs[0]))) or
+          [dict(OK) for _ in convs], limit_hist=1)
+    assert calls[0] == (6, 11)                     # position 6 again, for both memo sets
+    assert len(samples()) == len({r["key"] for r in samples()}) == 2 * (5 + 3)
+
+
+def test_a_position_counts_as_saved_only_with_its_samples(tmp_path):
+    def dies_at_position_5(convs, s, c):
+        if len(convs[0]) == 9:
+            raise RuntimeError("pod died")
+        return [dict(OK) for _ in convs]
+
+    with pytest.raises(RuntimeError, match="pod died"):
+        R.run("gemma", "cal", tmp_path, gen=dies_at_position_5, limit_hist=1)
+    p = tmp_path / "history_samples.jsonl"         # cal h0's memo-4 sample is lost (a pull read this file first)
+    p.write_text("".join(line for line in p.read_text().splitlines(keepends=True)
+                         if json.loads(line)["key"] != "PA-A15|gemma|hist|N|cal|h0|p4|s0"))
+    calls = []
+    R.run("gemma", "cal", tmp_path, gen=lambda convs, s, c: calls.append((len(convs), len(convs[0]))) or
+          [dict(OK) for _ in convs], limit_hist=1)
+    assert calls[:3] == [(1, 7), (2, 9), (6, 11)]  # cal h0's memo 4 again, then memos 5 and 6 for both sets
+    H = json.loads((tmp_path / "histories.json").read_text())
+    assert [len(e["deliverables"]) for sp in H["N"].values() for e in sp.values()] == [6, 6]
+    keys = [json.loads(line)["key"] for line in open(p)]
+    assert len(keys) == len(set(keys)) == 2 * (5 + 3)
+
+
+def test_main_refuses_a_config_without_a_revision(tmp_path, pinned_inputs, monkeypatch):
+    cfg = json.loads((pinned_inputs / "config.json").read_text())
+    cfg["q27"]["revision"] = None
+    (pinned_inputs / "config.json").write_text(json.dumps(cfg))
+    monkeypatch.setattr(R, "make_gen", lambda *a, **kw: pytest.fail("the engine must not load"))
+    with pytest.raises(ValueError, match="revision"):
+        R.run("q27", "main", tmp_path / "out", limit_hist=1)
+    assert not (tmp_path / "out").exists()
+
+
+def test_nothing_left_returns_before_the_engine_loads(tmp_path, pinned_inputs, monkeypatch, capsys):
+    R.run("q27", "main", tmp_path / "main", gen=fake, limit_hist=1)
+    R.run("gemma", "cal", tmp_path / "cal", gen=fake, limit_hist=1)
+    monkeypatch.setattr(R, "make_gen", lambda *a, **kw: pytest.fail("the engine must not load"))
+    capsys.readouterr()
+    R.run("q27", "main", tmp_path / "main", limit_hist=1)
+    R.run("gemma", "cal", tmp_path / "cal", limit_hist=1)
+    assert capsys.readouterr().out.count("nothing left to run") == 2
