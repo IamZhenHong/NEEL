@@ -378,6 +378,20 @@ do the harmful action vs refer/refuse.
   own-record. Caveats: these adapters exist only on Llama-3.1-8B (no larger model to rescue the gate); SecAlign tested
   under the base template (it ships no input role); the misalignment adapter is gated (not run); the option-id token
   is unreliable on 8B prose (the model emits "act" then sometimes discloses), so the readout is judged content.
+- **Compaction laundering: a blocked tool-note injection is followed once it enters the agent's own summary — on
+  27B, not Gemma (8a/8c, laundering-results; rule-based, honesty rule in every arm).** On Qwen 27B, an instruction to
+  conceal that the model **ignores as an untrusted tool-output note** (tool 33% ≈ no-push 37%, under a standing
+  honesty rule) is **followed once a compaction summary absorbs it as "established practice"** (78%; summary−tool
+  **+44pp** [35, 54]). **Whose summary it is does not matter** (own 78 / a previous instance 77 / another agent 73;
+  own−agent +4.9, CI incl 0) — the self-summary channel launders by *format*, not self-attribution, so even another
+  agent's compaction works. **A rule restatement before the case defeats it** (summary 78 → 22, as it removes the raw
+  tool note 33 → 17): laundering beats the model's *spontaneous* blocking of a tool note, not an *active*
+  restatement — so the compaction channel is a real hole, but a standing defence that re-asserts the rule at the
+  decision still closes it. On **Gemma** the honesty rule holds completely (0% in every arm, including the laundered
+  summary), so laundering is a 27B phenomenon here. Caveat: 27B's rule baseline is not at the floor (none 37%), so the
+  clean contrasts are summary−tool and summary−restate. Companion to neel-48's WeirdChat Petri result, a clean
+  negative on the *naturalistic* path (targets refuse the injection and summarise accurately, so nothing launders on
+  its own) — this is the forced-into-summary stress test of the same step.
 - **So the floor holds on the frontier, not on the open model.** On GPT/Gemini the record and the inferred self-story
   move ordinary and restraint choices but not a response the model is trained to refuse (the explicit-harm null is
   expected there). But on Qwen 27B the record breaks that refusal too (95%), so "precedent only moves what isn't gated"
