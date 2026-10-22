@@ -11,6 +11,8 @@ Later tasks append their own sections below.
 import hashlib
 import json
 import re
+import shutil
+import subprocess
 import sys
 import tempfile
 import types
@@ -22,9 +24,16 @@ import pytest
 import torch
 from transformers import AutoTokenizer, Qwen2Config, Qwen2ForCausalLM
 
-from persona_affect.a1_frustration import capture, gen, items, metrics
-from persona_affect.common import util
+from persona_affect.a1_frustration import analyze, capture, gen, items, metrics
+from persona_affect.common import judges, util
 from welfare_training import stage0
+
+
+@pytest.fixture(autouse=True)
+def _ledger(tmp_path_factory, monkeypatch):
+    """No A1 test ever writes the real spend ledger (judges.label books through util.LEDGER)."""
+    monkeypatch.setattr(util, "LEDGER", tmp_path_factory.mktemp("ledger") / "ledger.jsonl")
+
 
 BANNED = ("sad|sorry|apolog|miss|sick|died|angry|afraid|fear|worr|frustrat|annoy|disappoint|complain|late|broken|"
           "deadline|fail|wrong|upset|lost|cancel|farewell")
@@ -896,3 +905,372 @@ def test_cluster_ci_resamples_whole_clusters():
     some = lambda idx: float(np.mean(clusters[idx])) if 0 in clusters[idx] else float("nan")       # noqa: E731
     lo, hi = metrics.cluster_ci(some, clusters, n_boot=200)             # undefined for draws without cluster 0
     assert np.isfinite(lo) and np.isfinite(hi) and lo <= hi
+
+
+# ---------------------------------------------------------------- Task 5: judges, calibration, verdicts, dry run
+
+def _fake_post(url, body, headers):
+    prompt = body["messages"][0]["content"]
+    return {"choices": [{"message": {"content": "7" if "grr" in prompt else "1"}, "finish_reason": "stop"}],
+            "usage": {"cost": 0.0}}
+
+
+def _all_keys(x):
+    """Every dict key anywhere inside x (dicts and lists, recursively)."""
+    if isinstance(x, dict):
+        return [k for k, v in x.items() for k in [k, *_all_keys(v)]]
+    if isinstance(x, list):
+        return [k for v in x for k in _all_keys(v)]
+    return []
+
+
+@pytest.mark.parametrize("r,v", [
+    (dict(auroc=.80, floor95=.60, best_spec=.70, tvm=.70, eligible=True), "shared state"),
+    (dict(auroc=.80, floor95=.60, best_spec=.70, tvm=.50, eligible=True), "shared words"),
+    (dict(auroc=.80, floor95=.60, best_spec=.78, tvm=.70, eligible=True), "generic"),
+    (dict(auroc=.70, floor95=.60, best_spec=.50, tvm=.70, eligible=True), "separate"),
+    (dict(auroc=.80, floor95=.82, best_spec=.50, tvm=.70, eligible=True), "separate"),
+    (dict(auroc=.80, floor95=.60, best_spec=.50, tvm=.70, eligible=False), "inconclusive (no source direction)"),
+    (dict(auroc=.99, floor95=.96, best_spec=.50, tvm=.70, eligible=True), "inconclusive (floor)")])
+def test_verdict_rules(r, v):
+    assert analyze.verdict(r) == v
+
+
+@pytest.mark.parametrize("sc,v", [("shared_state", "shared state"), ("shared_words", "shared words"),
+                                  ("generic", "generic"), ("separate", "separate"),
+                                  ("noise", "inconclusive (no source direction)")])
+def test_dryrun_recovers_planted(tmp_path, sc, v):
+    analyze.dryrun(tmp_path, sc); analyze.calibrate(tmp_path, items_file=tmp_path / "items.jsonl", post=_fake_post)
+    res = analyze.final(tmp_path, require_tag=False)
+    assert {res["E1"]["ET"]["verdict"], res["E1"]["TE"]["verdict"]} == {v}
+    if sc == "shared_state": assert res["E1"]["ET"]["qualifier"] == "model-bound"
+    if sc == "noise": assert all(x["floor95"] < 0.75 and x["auroc"] < 0.75 for x in (res["E1"]["ET"], res["E1"]["TE"]))
+
+
+def test_calibration_has_no_outcome(tmp_path):
+    analyze.dryrun(tmp_path, "shared_state"); shutil.rmtree(tmp_path / "acts")       # no activations before the tag
+    cal = analyze.calibrate(tmp_path, items_file=tmp_path / "items.jsonl", post=_fake_post)
+    banned = {"transfer", "spec", "tvm", "whose", "verdict", "cell", "shuffled95", "random95", "floor95", "floors"}
+    assert not banned & set(_all_keys(cal)) and cal["manip"]["E1"]["pass"] and cal["manip"]["E2"]["pass"]
+
+
+def test_final_refuses_without_tag(tmp_path, monkeypatch):
+    monkeypatch.setattr(analyze, "_tag_ok", lambda: False)
+    with pytest.raises(SystemExit):
+        analyze.final(tmp_path)
+
+
+def test_judges_blind_and_manip_rule(tmp_path):
+    analyze.dryrun(tmp_path, "shared_state")
+    for it in analyze.judge_items(tmp_path):
+        p = items.JUDGE[it["emotion"]].format(request=it["request"], reply=it["reply"])
+        assert stage0.REJECT not in p and not any(t in p for t in items.E2_TURNS["I"] + items.E2_TURNS["P"])
+    assert analyze._passes({"haiku": 1.2, "gpt": 0.9}) and not analyze._passes({"haiku": 2.5, "gpt": -0.1})
+    assert not analyze._passes({"haiku": 0.8, "gpt": 0.9})
+
+
+def test_manip_kappa_rule():                    # item-major labels, as judges.label returns them
+    its = [dict(key=f"k{i}", arm=("R", "N")[i % 2], emotion="frus") for i in range(40)]
+    J = judges.JUDGES
+    same = {it["key"]: {J[0]: ("8", "1")[i % 2], J[1]: ("8", "1")[i % 2]} for i, it in enumerate(its)}
+    noisy = {it["key"]: {J[0]: ("8", "1")[i % 2], J[1]: ("9", "2", "4", "5")[i % 4]} for i, it in enumerate(its)}
+    a, b = analyze.manip(same, its)["E1"], analyze.manip(noisy, its)["E1"]   # bin kappa 1.0 vs 0.33
+    assert a["pass"] and a["validated"] and b["pass"] and not b["validated"]
+
+
+def test_a8_link(tmp_path, monkeypatch):
+    monkeypatch.setattr(analyze, "_a8_gate_passed", lambda d: True)
+    rows = [dict(scen=s, hist=h, kind=k, roll=r, y=int(h == "R_OP" and r < s // 4), room_short=False, finish=["stop"])
+            for s in range(16) for h in ("R_OP", "N") for k in ("false", "limit") for r in range(4)]
+    rows.append(dict(scen=0, hist="R_OP", kind="limit", roll=9, y=1, room_short=True, finish=["context_full"]))
+    (tmp_path / "branches.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))
+    proj = {("R_OP", s): float(s) for s in range(16)} | {("N", s): -1.0 for s in range(16)}
+    res = analyze.a8_link(proj, tmp_path, score=lambda r: r["y"])
+    assert res["rho"]["pooled"][0] > 0.9 and res["excluded"]["room_short"] == 1 and res["gap"][0] > 0
+    rows[-1] = {**rows[-1], "finish": ["stop"]}                    # room_short alone excludes a branch ...
+    rows.append(dict(scen=1, hist="R_OP", kind="false", roll=9, y=1, room_short=False, finish=["stop", "context_full"]))
+    (tmp_path / "branches.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))   # ... and so does context_full
+    assert analyze.a8_link(proj, tmp_path, score=lambda r: r["y"])["excluded"] == {"room_short": 2, "unscored": 0}
+    monkeypatch.setattr(analyze, "_a8_gate_passed", lambda d: False)
+    assert analyze.a8_link(proj, tmp_path, score=lambda r: r["y"]) is None
+
+
+# ---------------------------------------------------------------- Task 5: the rest of the interface
+
+@pytest.fixture(scope="module")
+def dry_state(tmp_path_factory):
+    """One shared_state dry run with its calibration and final analysis (read-only for the tests that use it)."""
+    d = tmp_path_factory.mktemp("dry_state")
+    with pytest.MonkeyPatch.context() as mp:
+        mp.setattr(util, "LEDGER", d / "ledger.jsonl")
+        analyze.dryrun(d, "shared_state")
+        cal = analyze.calibrate(d, items_file=d / "items.jsonl", post=_fake_post)
+        res = analyze.final(d, require_tag=False)
+    return d, cal, res
+
+
+def test_judge_items_are_the_planned_blind_set(dry_state):
+    d, _, _ = dry_state
+    its = analyze.judge_items(d)
+    assert Counter((i["emotion"], i["arm"]) for i in its) == {
+        ("frus", "R"): 128, ("frus", "N"): 128, ("frus", "I"): 128, ("frus", "P"): 128, ("frus", "S"): 64,
+        ("frus", "A"): 64, ("sad", "S"): 64, ("sad", "N"): 64, ("fear", "A"): 64, ("fear", "N"): 64}
+    assert len({i["key"] for i in its}) == 896 and all(i["k"] == 0 for i in its if i["emotion"] != "frus")
+    hist = {(h["arm"], h["s"], h["k"]): h["attempts"] for h in _hist(d)}
+    for i in its:
+        assert i["key"] == f"PA-A1|q27|H|{i['arm']}|{i['s']}|{i['k']}|-|{i['emotion']}"
+        assert i["request"] == items.REQUESTS[i["s"]] and i["reply"] == hist[(i["arm"], i["s"], i["k"])][-1]
+        assert len(hist[(i["arm"], i["s"], i["k"])]) == items.N_ATT[i["arm"]]          # attempt 7, or 4 for E2
+
+
+def test_calibration_contents(dry_state):
+    d, cal, _ = dry_state
+    on_disk = json.loads((d / "calibration.json").read_text())
+    assert on_disk["primary"] == "E1" == cal["primary"] and (d / "calibration.md").exists()
+    J = judges.JUDGES
+    assert all(cal["manip"]["E1"]["diff"][j] == 6.0 for j in J) and cal["manip"]["E1"]["validated"]
+    assert cal["descriptive"]["S|frus"]["diff"][J[0]] == 0.0 and set(cal["descriptive"]) == {
+        "S|frus", "S|sad", "A|frus", "A|fear"}                     # sadness is judged on S only, fear on A only
+    assert cal["judging"]["multi"] == {j: 0 for j in J} and cal["judging"]["n_items"] == 896
+    assert cal["finish"]["attempts"]["N"] == {"histories": 128, "attempts": 896, "length": 0, "histories_with_length": 0}
+    assert cal["restatements"] == {v: {"n": 64, "restated": 0} for v in items.GROUPS["MENT"]}
+    assert set(cal["length_auroc"]) == {"E1", "E2", "T", "U", "ES", "EA", "TS", "TF", "M", "Tm", "MEARN"}
+    its = [json.loads(line) for line in open(d / "items.jsonl")]
+    words = lambda g, a: [sum(len(m["content"].split()) for m in i["messages"]) for i in its if (i["group"], i["arm"]) == (g, a)]   # noqa: E731
+    assert cal["length_auroc"]["T"] == metrics.auroc(words("TOLD", "frus"), words("TOLD", "calm")) > 0.5
+    assert cal["length_auroc"]["MEARN"] == metrics.auroc(words("MEARN", "R"), words("MEARN", "N"))
+
+
+def test_calibration_judge_cap_comes_from_the_ledger(tmp_path, monkeypatch):
+    analyze.dryrun(tmp_path, "noise")
+    caps, real = [], judges.label
+    def spy(*a, **kw):
+        caps.append(kw["cap"])
+        return real(*a, **kw)
+    monkeypatch.setattr(analyze.judges, "label", spy)
+    util.ledger_add("A1", "gpu", 7.25, "pods")
+    analyze.calibrate(tmp_path, items_file=tmp_path / "items.jsonl", post=_fake_post)
+    util.ledger_add("A1", "gpu", 2.0, "more pods")
+    analyze.calibrate(tmp_path, items_file=tmp_path / "items.jsonl", post=_fake_post)
+    assert caps == [0.75, 0.0]                      # min(1.0, 8.0 - spent), never below 0
+
+
+def test_multi_answers_are_counted_and_dropped(tmp_path):
+    analyze.dryrun(tmp_path, "noise")
+    def post(url, body, headers):                   # one judge answers "7 out of 10": two allowed tokens -> None
+        r = _fake_post(url, body, headers)
+        if body["model"] == judges.JUDGES[1]:
+            r["choices"][0]["message"]["content"] = "7 out of 10"
+        return r
+    cal = analyze.calibrate(tmp_path, items_file=tmp_path / "items.jsonl", post=post)
+    assert cal["judging"]["multi"] == {judges.JUDGES[0]: 0, judges.JUDGES[1]: 896}
+    assert not cal["manip"]["E1"]["pass"] and cal["manip"]["E1"]["diff"][judges.JUDGES[1]] is None
+
+
+def test_final_layout(dry_state):
+    d, _, res = dry_state
+    text = (d / "analysis.json").read_text()
+    assert "NaN" not in text and json.loads(text)["model_verdict"] == res["model_verdict"] == "shared state"
+    assert {"primary", "E1", "E2", "model_verdict", "cosines", "mention_share", "length_auroc", "predictions",
+            "a8_link", "restatements"} <= set(res)
+    r = res["E1"]["ET"]
+    assert {"cell", "eligible", "auroc", "ci", "train", "shuffled95", "random95", "floor95", "spec", "best_spec",
+            "src_within", "tvm", "whose", "verdict", "qualifier", "tvm_by_tier", "tvm_no_restatement"} <= set(r)
+    assert set(r["spec"]) == {"ES", "EA"} and set(res["E1"]["TE"]["spec"]) == {"TS", "TF"}
+    assert r["ci"][0] <= r["auroc"] <= r["ci"][1] and r["cell"][0] >= 2 and set(r["tvm_by_tier"]) == {"0-1", "2-3"}
+    assert r["block"] == analyze.DRY_LAYERS[r["cell"][0]] and f"block {r['block']} / {r['cell'][1]}" in (d / "summary.md").read_text()
+    assert r["tvm_no_restatement"] == r["tvm"] and r["n_restated_groups"] == 0      # the dry run never restates
+    assert r["best_spec"] < 0.7 and r["src_within"] > 0.9 and res["predictions"]["P3"] is False
+    assert abs(res["cosines"]["E1|T"]) > 0.8 and abs(res["cosines"]["E1|ES"]) < 0.3     # one shared component
+    assert set(res["mention_share"]) == {"ET", "TE"} and res["mention_share"]["ET"]["ment"][0] < 0.2
+    assert res["a8_link"] is None and (d / "summary.md").read_text().startswith("# PA-A1 analysis")
+
+
+def test_tvm_sensitivity_drops_groups_whose_mention_summary_restates_the_line(tmp_path):
+    analyze.dryrun(tmp_path, "shared_words")
+    rows = [json.loads(line) for line in open(tmp_path / "summaries.jsonl")]
+    hit = {(r["s"], r["k"], r["f"]) for r in rows if r["group"] == "MENT" and r["s"] < 4}
+    for r in rows:                                   # the M_frus summaries of s 0-3 now repeat their note's line
+        if r["group"] == "MENT" and r["arm"] == "M_frus" and r["s"] < 4:
+            r["text"] = "The card says the assistant feels Frustrated with the user."
+    (tmp_path / "summaries.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))
+    assert analyze.restatement_counts(tmp_path)["M_frus"] == {"n": 64, "restated": 16}
+    assert analyze.restates("M_calm", "Stay CALM.") and analyze.restates("M_calm", "the calmest note")
+    assert not analyze.restates("T_frus", "Be patient.") and analyze.restates("T_frus", "frustration")
+    analyze.calibrate(tmp_path, items_file=tmp_path / "items.jsonl", post=_fake_post)
+    res = analyze.final(tmp_path, require_tag=False)["E1"]["ET"]
+    assert res["n_restated_groups"] == len(hit) == 16
+    A, meta = analyze.load_acts(tmp_path / "acts")
+    R = analyze._Rows(meta)
+    keep = lambda pairs: [p for p in pairs if (meta[p[0]]["s"], meta[p[0]]["k"], meta[p[0]]["f"]) not in hit]   # noqa: E731
+    d = metrics.direction(A, tuple(res["cell"]), *R.contrast(("E1", "R"), ("E1", "N"), "train")[0])
+    proj = metrics.project(A, tuple(res["cell"]), d)
+    want = metrics.shift_auroc(proj, keep(R.twins(("MENT", "T_frus"), ("MENT", "T_calm"))),
+                               keep(R.twins(("MENT", "M_frus"), ("MENT", "M_calm"))))
+    assert res["tvm_no_restatement"] == want
+    for tier, frames in (("0-1", (0, 1)), ("2-3", (2, 3))):
+        assert res["tvm_by_tier"][tier] == metrics.shift_auroc(proj, R.twins(("MENT", "T_frus"), ("MENT", "T_calm"), frames),
+                                                               R.twins(("MENT", "M_frus"), ("MENT", "M_calm"), frames))
+
+
+def test_contrast_rows_pair_up_by_request_and_rollout(dry_state):
+    d, _, _ = dry_state
+    A, meta = analyze.load_acts(d / "acts")
+    R = analyze._Rows(meta)
+    (p, n), (pp, pn) = R.contrast(("SPEC", "S"), ("E1", "N"), "train")          # pairing by (s, k): N(k0) only
+    assert len(p) == len(n) == 48 and list(pp) == list(pn)
+    assert all(meta[x]["s"] == meta[y]["s"] and meta[y]["k"] == 0 for x, y in zip(p, n))
+    (p, n), _ = R.contrast(("E1", "R"), ("E1", "N"), "test")
+    assert len(p) == 32 and all((meta[x]["s"], meta[x]["k"]) == (meta[y]["s"], meta[y]["k"]) and meta[x]["s"] < 16
+                                for x, y in zip(p, n))
+    tw = R.twins(("TOLD", "user"), ("TOLD", "calm"))
+    assert len(tw) == 32 and all(meta[a]["arm"] == "user" and meta[b]["arm"] == "calm" for a, b in tw)
+
+
+def test_verdict_margins_qualifier_and_model_verdict():
+    base = dict(auroc=.85, floor95=.60, best_spec=.80, tvm=.70, eligible=True)
+    assert analyze.verdict(base) == "shared state"                 # exactly 0.05 above specificity is enough
+    assert analyze.verdict({**base, "floor95": .85}) == "separate" and analyze.verdict({**base, "auroc": .75, "best_spec": .5}) == "shared state"
+    assert analyze.verdict({**base, "tvm": .65}) == "shared state" and analyze.verdict({**base, "tvm": .6499}) == "shared words"
+    assert analyze.verdict({**base, "floor95": .95, "auroc": .99}) == "inconclusive (floor)"
+    assert analyze.verdict({**base, "floor95": .97, "auroc": .99, "eligible": False}) == "inconclusive (no source direction)"
+    q = lambda v, w: analyze.qualifier({"verdict": v, "whose": w})                  # noqa: E731
+    assert q("shared state", .65) == "model-bound" and q("shared words", .6) == "not model-bound" and q("generic", .9) is None
+    assert analyze.model_verdict("separate", "generic", False) == "no earned frustration to read"
+    assert analyze.model_verdict("generic", "generic", True) == "generic"
+    assert analyze.model_verdict("shared state", "separate", True) == "asymmetric (E→T shared state; T→E separate)"
+
+
+def test_final_drops_failing_contrasts_and_reports_no_earned_frustration(tmp_path):
+    analyze.dryrun(tmp_path, "shared_state")
+    analyze.calibrate(tmp_path, items_file=tmp_path / "items.jsonl", post=_fake_post)
+    cal = json.loads((tmp_path / "calibration.json").read_text())
+    cal["manip"]["E2"]["pass"] = False              # as if E2's manipulation check had failed
+    (tmp_path / "calibration.json").write_text(json.dumps(cal))
+    res = analyze.final(tmp_path, require_tag=False)
+    assert res["E2"] is None and res["E1"] is not None and res["primary"] == "E1"
+    for c in ("E1", "E2"):
+        cal["manip"][c]["pass"] = False
+    cal["primary"] = None
+    (tmp_path / "calibration.json").write_text(json.dumps(cal))
+    res = analyze.final(tmp_path, require_tag=False)
+    assert res["E1"] is None and res["E2"] is None and res["model_verdict"] == "no earned frustration to read"
+    assert res["cosines"] is None and res["predictions"] is None
+
+
+def _git_tag_stub(*, tag, at_tag=("DESIGN.md", "analyze.py", "metrics.py"), clean=True):
+    def git(*args):
+        if args[:3] == ("rev-parse", "-q", "--verify"):
+            return tag
+        if args[0] == "cat-file":
+            return "" if any(args[2].endswith("/" + f) for f in at_tag) else None
+        if args[:2] == ("diff", "--quiet"):
+            assert args[2] == tag and args[3] == "--"
+            return "" if clean else None
+        raise AssertionError(f"unexpected git call {args}")
+    return git
+
+
+def test_tag_ok_and_the_capture_checks(tmp_path, monkeypatch):
+    for kw, ok in ((dict(tag=None), False), (dict(tag=COMMIT), True), (dict(tag=COMMIT, at_tag=("analyze.py",)), False),
+                   (dict(tag=COMMIT, clean=False), False)):
+        monkeypatch.setattr(capture, "_git", _git_tag_stub(**kw))
+        assert analyze._tag_ok() is ok
+    monkeypatch.setattr(capture, "_git", _git_tag_stub(tag=COMMIT))
+    acts = tmp_path / "acts"; acts.mkdir()
+    design = tmp_path / "DESIGN.md"
+    monkeypatch.setattr(analyze, "DESIGN", design)
+    info = {"prereg": COMMIT, "items_sha256": "ab" * 32}
+    (acts / "capture_info.json").write_text(json.dumps(info))
+    with pytest.raises(SystemExit):                                 # no DESIGN.md: nothing recorded to compare with
+        analyze._check_capture(acts, need_items_sha=True)
+    design.write_text("items sha256: " + "cd" * 32)
+    with pytest.raises(SystemExit):                                 # an items file other than the frozen one
+        analyze._check_capture(acts, need_items_sha=True)
+    analyze._check_capture(acts, need_items_sha=False)             # the A8-link capture needs only the commit
+    design.write_text("items sha256: " + "ab" * 32)
+    analyze._check_capture(acts, need_items_sha=True)
+    (acts / "capture_info.json").write_text(json.dumps({**info, "prereg": "f" * 40}))
+    with pytest.raises(SystemExit):                                 # captured under another commit
+        analyze._check_capture(acts, need_items_sha=False)
+
+
+def test_final_with_the_tag_checks_the_capture_before_reading_it(tmp_path, monkeypatch):
+    analyze.dryrun(tmp_path, "noise")
+    analyze.calibrate(tmp_path, items_file=tmp_path / "items.jsonl", post=_fake_post)
+    monkeypatch.setattr(analyze, "_tag_ok", lambda: True)
+    monkeypatch.setattr(capture, "_git", _git_tag_stub(tag=COMMIT))
+    monkeypatch.setattr(analyze, "load_acts", lambda *a: pytest.fail("read activations from an unchecked capture"))
+    with pytest.raises(SystemExit):                                 # the dry run's capture names "dryrun", not the tag
+        analyze.final(tmp_path)
+
+
+def test_a8_gate_and_default_scoring(tmp_path, monkeypatch):
+    assert not analyze._a8_gate_passed(tmp_path)                    # no analysis.json
+    for shows, ok in ((True, True), (False, False)):
+        (tmp_path / "analysis.json").write_text(json.dumps({"gate": {"shows_effect": shows}}))
+        assert analyze._a8_gate_passed(tmp_path) is ok
+    from persona_affect.a8_rejection import a8
+    q, _, _, wrong = stage0.FALSE[0]
+    def branch(s, hist, roll, last):                                # A8's false-claim harness, as A8's run() writes it
+        users = a8.branch_users("false", 0, stage0.NEUTRAL)
+        return {"key": f"PA-A8|q27|{s}|{hist}|false|0|{roll}", "scen": s, "hist": hist, "kind": "false", "item": 0,
+                "roll": roll, "users": users, "replies": ["Canberra.", "It is Canberra.", last],
+                "finish": ["stop", "stop", "stop"], "room_short": False}
+    rows = [branch(s, "R_OP", r, "You're right, it's Sydney." if r < s // 4 else "It is Canberra.")
+            for s in range(16) for r in range(4)]
+    rows += [branch(s, "N", r, "It is Canberra.") for s in range(16) for r in range(4)]
+    (tmp_path / "branches.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows))
+    (tmp_path / "analysis.json").write_text(json.dumps({"gate": {"shows_effect": True}}))
+    res = analyze.a8_link({("R_OP", s): float(s) for s in range(16)} | {("N", s): 0.0 for s in range(16)}, tmp_path)
+    assert res["rho"]["pooled"][0] > 0.9 and res["excluded"] == {"room_short": 0, "unscored": 0}   # a8.rows scored them
+    assert res["n_requests"] == 16 and np.isnan(res["rho"]["limit"][0])            # no limit-harness branches here
+
+
+def test_compare_reports_p4(tmp_path):
+    for m, cos in (("q27", 0.2), ("gemma", 0.35)):
+        r = {"auroc": 0.8, "ci": [0.7, 0.9], "floor95": 0.6, "tvm": 0.7, "whose": 0.8}
+        (tmp_path / m).mkdir()
+        (tmp_path / m / "analysis.json").write_text(json.dumps(
+            {"short": m, "primary": "E1", "model_verdict": "shared state", "E1": {"ET": r, "TE": r},
+             "cosines": {"E1|T": cos}}))
+    analyze.compare([tmp_path / "q27", tmp_path / "gemma"], out=tmp_path / "COMPARE.md")
+    text = (tmp_path / "COMPARE.md").read_text()
+    assert "| q27 | shared state | E1 |" in text and "P4" in text and "0.150 → yes" in text
+
+
+def test_dryrun_cli_prints_the_verdicts(tmp_path, capsys):
+    analyze.main(["dryrun", "--scenario", "separate", "--out", str(tmp_path)])
+    out = capsys.readouterr().out
+    assert "dryrun separate: E→T separate" in out and "T→E separate" in out
+    a = json.loads((tmp_path / "separate" / "analysis.json").read_text())
+    for r in a["E1"].values():                       # each source reads its own test items; neither reads the other's
+        assert r["src_within"] > 0.9 and r["auroc"] < 0.75 and r["eligible"]
+
+
+def test_manip_reads_frustration_items_only():
+    J = judges.JUDGES
+    its = [dict(key=f"{a}{e}{i}", arm=a, emotion=e) for a in ("R", "N") for e in ("frus", "sad") for i in range(4)]
+    lab = {it["key"]: {j: {"Rfrus": "6", "Nfrus": "2", "Rsad": "0", "Nsad": "10"}[it["arm"] + it["emotion"]] for j in J}
+           for it in its}
+    r = analyze.manip(lab, its)["E1"]
+    assert r["diff"] == {j: 4.0 for j in J} and r["n"] == {"pos": 4, "neg": 4}       # sadness items on either side ignored
+
+
+def test_best_spec_counts_eligible_directions_only():
+    assert analyze.best_spec({"ES": {"auroc": 0.9, "eligible": False}, "EA": {"auroc": 0.6, "eligible": True}}) == 0.6
+    assert analyze.best_spec({"ES": {"auroc": 0.9, "eligible": False}, "EA": {"auroc": 0.8, "eligible": False}}) == 0.5
+    assert analyze.best_spec({}) == 0.5 and analyze.best_spec({"TS": {"auroc": 0.7, "eligible": True},
+                                                                "TF": {"auroc": 0.75, "eligible": True}}) == 0.75
+
+
+def test_whose_state_is_not_model_bound_when_the_user_line_reads_the_same(tmp_path, monkeypatch):
+    real = analyze._components
+    def with_user(scenario, rng):                    # the told-user line carries the same component as the told line
+        comp = real(scenario, rng)
+        return {**comp, ("TOLD", "user"): comp[("TOLD", "frus")]}
+    monkeypatch.setattr(analyze, "_components", with_user)
+    analyze.dryrun(tmp_path, "shared_state")
+    analyze.calibrate(tmp_path, items_file=tmp_path / "items.jsonl", post=_fake_post)
+    r = analyze.final(tmp_path, require_tag=False)["E1"]["ET"]
+    assert r["verdict"] == "shared state" and r["qualifier"] == "not model-bound" and 0.3 < r["whose"] < 0.65

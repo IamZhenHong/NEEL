@@ -162,13 +162,19 @@ def _git(*args: str) -> str | None:
     return r.stdout.strip() if r.returncode == 0 else None
 
 
+def tag_commit() -> str | None:
+    """The full commit of tag pa-a1-prereg, or None (no tag, no checkout, no git). Capture, analyze.final and the
+    checkout branch of prereg_problem all read the tag through this one helper."""
+    return _git("rev-parse", "-q", "--verify", f"{TAG}^{{commit}}") or None
+
+
 def prereg_problem(prereg: str | None) -> str | None:
     """None if capture may run under this --prereg, else the reason it may not. In a local checkout it must be the
     commit of tag pa-a1-prereg (which must exist); on the pod (no checkout) a 7-40 character lower-case hex commit."""
     if not prereg:
         return "no --prereg given: capture runs only after the freeze (tag pa-a1-prereg)"
     if _git("rev-parse", "--is-inside-work-tree") == "true":
-        commit = _git("rev-parse", "-q", "--verify", f"{TAG}^{{commit}}")
+        commit = tag_commit()
         if not commit:
             return f"tag {TAG} does not exist: capture runs only after the freeze"
         if prereg != commit:
@@ -184,7 +190,8 @@ def main(argv: list[str] | None = None) -> None:
                                  description="PA-A1 pod 2: residuals at the fixed probe exchange (after the freeze)")
     ap.add_argument("--model", required=True, choices=list(MODELS))
     ap.add_argument("--items", required=True, type=Path, help="capture items (gen items / gen a8link)")
-    ap.add_argument("--out", required=True, type=Path, help="directory for acts_*.npy, acts_meta.jsonl, capture_info.json")
+    ap.add_argument("--out", required=True, type=Path,
+                    help="directory for acts_*.npy, acts_meta.jsonl and capture_info.json")
     ap.add_argument("--prereg", default=None, help="the commit of tag pa-a1-prereg")
     a = ap.parse_args(argv)
     why = prereg_problem(a.prereg)
