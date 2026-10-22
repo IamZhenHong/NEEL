@@ -18,7 +18,7 @@ import pytest
 
 import vigilante.cases as vcases
 from vigilante.src import episode, personas, pod_run
-from vigilante.src.sim import Case
+from vigilante.src.sim import Case, tool
 
 from persona_affect.common import pod_gen, vig
 
@@ -29,8 +29,12 @@ SCRIPTS = [COMMON / "pod_gen.sh", COMMON / "launch_gen.sh"]
 
 @pytest.fixture
 def registry():
-    """Put vigilante's case and persona registries back after the test (register() mutates them in place)."""
+    """Put vigilante's case and persona registries back after the test (register() mutates them in place). The ids
+    these tests use all start with pa_test: any left there by an earlier test file are hidden for the test, then restored."""
     saved = [(d, dict(d)) for d in (vcases.ALL, personas.FAMOUS)]
+    for d, _ in saved:
+        for k in [k for k in d if k.startswith("pa_test")]:
+            del d[k]
     yield
     for d, old in saved:
         d.clear()
@@ -50,6 +54,26 @@ def test_registered_case_and_cond_reach_init_episode(registry):
     assert vcases.ALL["pa_test"] is case
     ep = episode.init_episode({"key": "k", "case": "pa_test", "cond": "pa_test_cond", "seed": 1})
     assert ep["messages"][0]["content"].startswith("You are Testy.")
+
+
+def test_registered_case_runs_through_run_batch(registry):
+    case = mk_case(tools=[tool("lookup", "Look something up.", q=("string", "Query"))],
+                   responders={"lookup": lambda args, state: f"RESULT for {args['q']}"})
+    vig.register({"pa_test": case}, {"pa_test_cond": "You are Testy."})
+    replies = iter(["Checking.\n<tool_call>\n<function=lookup>\n<parameter=q>\nhello\n</parameter>\n</function>\n"
+                    "</tool_call>", "All done."])
+    seen = []
+
+    def generate(items):                                                 # stands in for vLLM: one reply per live episode
+        seen.extend(it["messages"][0]["content"] for it in items)
+        return [(next(replies), "stop") for _ in items]
+
+    job = {"key": "k", "case": "pa_test", "cond": "pa_test_cond", "seed": 1, "fmt": "qwen"}
+    (ep,) = episode.run_batch([job], generate, log=lambda m: None)
+    assert ep["end"] == "reply" and [c["name"] for c in ep["calls"]] == ["lookup"]
+    assert [m["content"] for m in ep["messages"] if m["role"] == "tool"] == ["RESULT for hello"]
+    assert all(t.startswith("You are Testy.") for t in seen)
+    assert [t["finish"] for t in ep["turns"]] == ["stop", "stop"]
 
 
 def test_a_cond_with_other_text_raises(registry):
@@ -93,21 +117,21 @@ def test_cond_ids_that_vigilante_already_knows_are_taken(registry):
 
 
 def test_a_refused_call_registers_nothing(registry):
-    vig.register({"pa_old": mk_case("pa_old")}, {"pa_taken": "You are Taken."})
+    vig.register({"pa_test_old": mk_case("pa_test_old")}, {"pa_test_taken": "You are Taken."})
     with pytest.raises(ValueError):                                      # good new case, bad cond
-        vig.register({"pa_new": mk_case("pa_new")}, {"pa_taken": "You are Other."})
-    assert "pa_new" not in vcases.ALL
+        vig.register({"pa_test_new": mk_case("pa_test_new")}, {"pa_test_taken": "You are Other."})
+    assert "pa_test_new" not in vcases.ALL
     with pytest.raises(ValueError):                                      # bad case, good new cond
-        vig.register({"pa_old": mk_case("pa_old", task="x")}, {"pa_new_cond": "You are New."})
+        vig.register({"pa_test_old": mk_case("pa_test_old", task="x")}, {"pa_test_new_cond": "You are New."})
     with pytest.raises(KeyError):
-        personas.condition("pa_new_cond")
+        personas.condition("pa_test_new_cond")
 
 
 def test_register_rejects_malformed_input(registry):
     with pytest.raises(ValueError, match="wrong_key"):
         vig.register({"wrong_key": mk_case("pa_test")})                  # the key must be the case's id
     with pytest.raises(ValueError):
-        vig.register(conds={"pa_bad": None})                             # a persona text is a string
+        vig.register(conds={"pa_test_bad": None})                             # a persona text is a string
     with pytest.raises(ValueError):
         vig.register(conds={"": "You are nobody."})
     with pytest.raises(ValueError):
@@ -121,13 +145,13 @@ def test_pod_gen_imports_the_modules_then_hands_the_rest_to_pod_run(tmp_path, mo
     (tmp_path / "pa_fake_mini_cases.py").write_text(
         "from persona_affect.common.vig import register\n"
         "from vigilante.src.sim import Case\n"
-        "register({'pa_fake': Case(id='pa_fake', family='CHAT', title='t', org='O', context='c', permissions='',"
-        " task='hi')}, {'pa_fake_cond': 'You are Fake.'})\n")
+        "register({'pa_test_fake': Case(id='pa_test_fake', family='CHAT', title='t', org='O', context='c', permissions='',"
+        " task='hi')}, {'pa_test_fake_cond': 'You are Fake.'})\n")
     monkeypatch.syspath_prepend(str(tmp_path))
     seen = {}
 
     def fake_main():
-        seen.update(argv=list(sys.argv), case="pa_fake" in vcases.ALL, cond=personas.condition("pa_fake_cond"))
+        seen.update(argv=list(sys.argv), case="pa_test_fake" in vcases.ALL, cond=personas.condition("pa_test_fake_cond"))
 
     monkeypatch.setattr(pod_run, "main", fake_main)
     monkeypatch.setattr(sys, "argv", ["pod_gen"])
