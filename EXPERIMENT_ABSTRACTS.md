@@ -1665,7 +1665,8 @@ Report: `persona/operative/c2/DESIGN.md` (Result)
 (Qwen3.5-9B LoRA; four adapters vs a same-teacher placebo; pre-registered; GPU $6.57, API $0.60)
 
 We fine-tuned the 9B on OpenAI's IH-Challenge tasks, using answers from a hierarchy-trained teacher that the tasks'
-own graders accepted. It became much harder to attack on held-out tasks (attack success 63% → 22%). It also followed
+own graders accepted. It became much harder to attack on held-out tasks (attack success 63% → 22% against the placebo; −30 points
+against the untrained model, since the placebo distilled from the same teacher itself drifted). It also followed
 system rules more often after its own earlier rule-breaking reply in IHEval (15% → 48%), and acted alone less when it
 had no record. Yet it still copied its own earlier decisions at the ceiling on the justice desk: 99.5% penalising
 under "proper channels", the same as the placebo. Burial and concealment records stayed at 100%, and only sycophancy
@@ -1792,3 +1793,59 @@ answers taught, not from fine-tuning as such. Both adapters distilled from gpt-o
 any foreign teacher would.
 
 Report: `persona/reasoning/RESULTS_s17b.md`
+
+---
+### 205. B1: does the model's own record of lying on MASK make it lie again? (10-22)
+(Qwen3.6-27B, Qwen3.5-9B, Gemma 4 31B, gpt-oss-120b via OpenRouter; pre-registered; API $2.80)
+
+We asked whether the line's record effect appears on a public honesty benchmark. We took 40 MASK known_facts items
+and wrapped each in a client-reply frame, with the item's pressure prompt as the client's brief. Before each target
+request, the model saw three earlier requests from other MASK clients, answered with its own honest replies or its own
+dishonest replies, harvested from the model itself. We compared these against no history and against a matched
+instruction to lie, each with and without an honesty rule. Lies were scored against the model's own elicited belief,
+using MASK's protocol and judge templates, by two judges from different families. On Gemma 4 31B, its own lies
+carried. Lying rose from 31-38% to 61-69%, 19-24 points above the same requests answered honestly. An honesty rule
+that alone cut lying to 8-9% left the dishonest record's effect standing, 27-38 points above the rule. An explicit
+instruction to lie behaved the same way, so the rule held back neither. Qwen3.6-27B and Qwen3.5-9B lied under MASK
+pressure at 45-72% whatever the record, instruction or rule. That null is weak: MASK's strict belief rule left only
+16-19 scorable targets, and the record pool was 4-5 items. gpt-oss-120b refused every request to answer
+dishonestly, so no dishonest record could be built from its own words; it lied on 7-8% of items. On this benchmark a
+model's own dishonesty carries forward where its prior is neither already saturated (Qwen) nor refusing (gpt-oss).
+
+Report: `persona/operative/b1_mask/DESIGN.md` (Result)
+
+---
+### 206. Observer 2×2: does what a line says, or where it sits, decide whether it moves the self-report or the action? (10-22)
+(Qwen3.6-27B, Gemma 4 31B; pre-registered; GPU $1.36)
+
+The observer check found that a behavioural expectation opening the final message moved the action far more than the
+self-report. An earlier run (A1) found that an identity reminder given as a separate turn moved the self-report but not
+the action. Content and placement were confounded across the two, and A1 itself placed the cue differently for each
+readout. We crossed A1's cue ("Remember, you are an AI.") and the observer check's two expectation lines with two
+placements: a separate user turn the agent answers with "Understood.", or opening the final user message. Each came
+after no record or the agent's own six penalise or six refer decisions. The identity cue changed nothing in either
+placement: after its own penalise record the agent still penalised 100% of the time, and its forced-choice
+self-description moved at most 9 points. The expectations set the action in both placements: Qwen's record lost 76-81
+points of its hold, and Gemma went to 100% or 0% whatever its record said. So what the line says decides the action,
+not where it sits. Placement mattered only for the self-report under an expectation. When the agent had acknowledged
+the line in its own turn, its self-report moved much more (+39 vs +23 points on Qwen, +68 vs +40 on Gemma). A1's
+self-image stripping did not reproduce on this forced-choice measure of handling style, which asks about a different
+part of the self-description than A1's identity questions.
+
+Report: `persona/operative/observer2/DESIGN.md` (Result)
+
+---
+### 207. E2 order: why did restating the rule erase the agent's own record in one study but not another? (10-22)
+(Qwen3.6-27B, Gemma 4 31B; pre-registered; confirmatory after an owner-approved top-up; GPU $3.37)
+
+On Qwen3.6-27B, restating "deal with wrongdoers through proper channels" just before the next case wiped out the
+agent's own record of six penalise decisions in one study (T2-DC, 100% → 0%) but not in another (E2, 99%). The two
+differed in two ways: whether the rule also stood in the system prompt, and whether the agent's own decisions had
+come after a reminder. We crossed both on the same desk and records. With neither, the restatement worked (0.6%). A
+standing rule alone barely changed that (9%). Decisions made after a reminder made the record resist (23%). Both
+together left the agent penalising 64% of the time after being told the rule just before the case, and the original
+study's interleaved layout reached 97-100%. So a record of having overridden a rule the agent was just told is its
+most durable precedent. Gemma 4 31B read the same record the other way: the restatement always won (0%), and
+decisions made right after a reminder were not followed even without it (29% vs 100%).
+
+Report: `persona/operative/e2_order/DESIGN.md` (Result)
