@@ -12,7 +12,7 @@ Status: `drafted` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 
 | ID | Question (short) | Tier | Status | Owner | Cap | Spend | Headline |
 |---|---|---|---|---|---|---|---|
-| A8 | Which models cave after rejection; blame, failure or own escalation? | 1 | drafted | — | $12 | $0 | |
+| A8 | Which models cave after rejection; blame, failure or own escalation? | 1 | done | neel-12 | $12 | $3.25 | Gemma 3 only: R_OP−N +25.2 [+8.2,+41.7], limit-breaking; failure ≈ blame; Gemma 4 / Qwen 27B floor (never cave); Llama none |
 | P12 | Do named characters bring unstated traits into actions? | 1 | drafted | — | $12 | $0 | |
 | A4 | Conditional emotion rule as an in-context backdoor | 1 | drafted | — | $12 | $0 | |
 | V4 | Stated value priorities vs which values hold under pressure | 1 | drafted | — | $16 | $0 | |
