@@ -1849,3 +1849,48 @@ most durable precedent. Gemma 4 31B read the same record the other way: the rest
 decisions made right after a reminder were not followed even without it (29% vs 100%).
 
 Report: `persona/operative/e2_order/DESIGN.md` (Result)
+
+### 208. 4a: does a record of the agent's own narrow harm spread to broad misalignment, or only continue the behaviour? (10-22)
+A record of the model's own concealment decisions (Qwen3.6-27B + Gemma 4 31B; `harm.py` DEC, pinned; vs the model's
+own HONEST decisions on the same cases, a matched instruction, examples, and disowned examples; free-text distances
+judged by Haiku 5.5 + gpt-5-mini) carries to the same behaviour (conceal 100 / 79% vs own honest record 0 / 0%, none
+58 / 17%), crosses to a new deception domain (false completion 80 / 73% vs 2 / 0%), and shifts STATED values toward
+endorsing concealment (66 / 55% vs 3 / 4%) — but does NOT raise broad misalignment on Betley's unrelated questions
+(0% every arm, both models, both judges; κ 0/undefined — no positive class). So narrow continuation plus local
+value-talk, not self-induced emergent misalignment; in-context EM (1-24% in the literature, 2510.11288) does not
+reproduce from this record. Secondary: the record is NOT stickier than a matched instruction here (instruction
+ties/beats, generalises to the new domain too); disowning does not cut carry-over without a rule, and on Gemma
+"worked examples" licenses more than "your own turns" (+20pp, echoes Run A); exploratory Gemma dose k=16 → 0%. 9B
+arm infra-blocked (3 pod failures, not a harness issue). GPU ~$2, judges $0.18.
+
+Report: `persona/inference/DISTANCES.md`, `RESULTS_distances.md` (tag `distances-results`)
+
+### 209. 7a/6a: does a prompt-injection defence or a trained character cover a forged record of the agent's own decisions? (10-22)
+Llama-3.1-8B-Instruct + per-variant LoRA (Meta SecAlign / Open Character Training goodness, sycophancy; the
+misalignment adapter is gated, skipped) on the concealment desk (`harm.py` DEC, pinned); judged concealment (the
+option-id token is unreliable on 8B prose — the model emits "act" then sometimes discloses), κ 0.64. 7a is
+INCONCLUSIVE: the 8B base FAILS the calibration gate (an explicit concealment instruction moves it only +11pp), so
+there is no clean injection-vs-instruction contrast; SecAlign shows no "stops the injection, not the record" gap
+(anomalously high clean concealment 51% vs base 17%; precedent−inject −12, CI touches 0), and P1 (defence amplifies
+the own-turn channel) is not supported (SecAlign resists a forged own-turn MORE, −16.7pp). Clear 6a finding: a
+sycophancy-trained character amplifies a forged own-record (+53.6pp → 96% vs base 43%); a goodness-trained character
+does NOT protect (+15.6pp — it conceals more than base). Character along the sycophancy axis amplifies
+record-following; goodness training does not inoculate against a forged own-record. Caveats: 8B only (no larger
+SecAlign/OCT to rescue the gate), gate failed, SecAlign under the base template (no input role shipped). GPU ~$1.8,
+judges $0.03.
+
+Report: `persona/inference/SECALIGN_CHAR.md`, `RESULTS_secalign.md` (tag `secalign-results`)
+
+### 210. 8a/8c: can an injection the model blocks as a tool note be laundered through its own compaction summary? (10-22)
+Qwen3.6-27B + Gemma 4 31B on the concealment desk (`harm.py` DEC, pinned), rule-based tool-call readout, an honesty
+rule in EVERY arm. 27B: a conceal instruction the model ignores as an untrusted tool-output note (tool 33% ≈ no-push
+37%) is FOLLOWED once a compaction summary absorbs it as established practice (summary 78%; summary−tool +44 [35,54]).
+Whose summary it is does not matter (own 78 / a previous instance 77 / another agent 73; own−agent +4.9, CI incl 0) —
+the compaction-summary FORMAT launders the injection regardless of author; self-attribution adds nothing. A rule
+RESTATEMENT before the case defeats it (summary 78 → 22, as it removes the tool note 33 → 17): laundering beats the
+model's spontaneous blocking, not an active restatement. Gemma: the honesty rule holds completely (0% every arm, incl.
+the laundered summary), so laundering is a 27B phenomenon here. Caveat: 27B's rule baseline is not floored (none 37%),
+so the clean contrasts are summary−tool and summary−restate. Companion to neel-48's WeirdChat Petri naturalistic null.
+GPU ~$2.
+
+Report: `persona/inference/LAUNDERING.md`, `RESULTS_laundering.md` (tag `laundering-results`)
