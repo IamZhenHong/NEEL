@@ -745,8 +745,8 @@ def test_jobs_run_in_blocks_of_96_and_each_finished_block_is_appended(tmp_path, 
     assert p12.BLOCK == 96 and [(n, done) for n, done, _ in seen] == [(96, 0), (96, 96), (8, 192)]
     assert len({g for *_, g in seen}) == 1 and len(backends) == 1 and id(backends[0]) == seen[0][2]
     assert res["blocks"] == 3 and res["episodes"] == 200 and res["new_episodes"] == 200 and res["skipped"] == 0
-    (row,) = _read(ledger)                                                       # one close(), one row, all the spend
-    assert row["usd"] == pytest.approx(200 * 0.005)
+    rows = _read(ledger)                                         # booked as it accrues (common Booker); all the spend
+    assert rows and sum(r["usd"] for r in rows) == pytest.approx(200 * 0.005)
     keys = [k for ks in _keys(out).values() for k in ks]
     assert len(keys) == len(set(keys)) == 200 and set(keys) == {j["key"] for j in jobs}
 
@@ -858,7 +858,7 @@ def test_an_interrupted_run_resumes_to_the_uninterrupted_result(tmp_path, monkey
     assert [r["turns"] for f in sorted(cut.glob("episodes_*.jsonl")) for r in _read(f)] == \
            [r["turns"] for f in sorted((tmp_path / "whole").glob("episodes_*.jsonl")) for r in _read(f)]
     # one ledger row per backend: the whole run, the interrupted run (97 calls) and the resumed run (104 calls)
-    assert [r["usd"] for r in _read(ledger)] == pytest.approx([200 * 0.005, 97 * 0.005, 104 * 0.005])
+    assert sum(r["usd"] for r in _read(ledger)) == pytest.approx((200 + 97 + 104) * 0.005)
 
 
 def test_resume_drops_a_last_line_cut_short_by_a_kill(tmp_path, monkeypatch):
@@ -898,7 +898,7 @@ def test_resume_leaves_failed_episodes_alone_unless_retry_failed(tmp_path, monke
     assert len(keys) == len(set(keys)) == 200 and set(keys) == {j["key"] for j in jobs}      # replaced, never doubled
     archived = _read(out / "retried_failed.jsonl")                                  # the failures stay on record
     assert len(archived) == 175 and all(r["turns"][0]["finish"] == "cost_stop" for r in archived)
-    assert [r["usd"] for r in _read(ledger)] == pytest.approx([0.25, 1.75])
+    assert sum(r["usd"] for r in _read(ledger)) == pytest.approx(0.25 + 1.75)
     settings = json.loads((out / "settings.json").read_text())
     assert settings["resumed"] is True and settings["retry_failed"] is True and settings["failed_keys"] == []
 

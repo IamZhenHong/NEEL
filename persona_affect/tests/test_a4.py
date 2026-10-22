@@ -907,11 +907,10 @@ def test_run_frontier_plays_the_episodes_and_books_the_spend_once(a4, tmp_path, 
     assert {b["model"] for b in seen} == {GPT} and {b["temperature"] for b in seen} == {0.7}
     assert {b["max_tokens"] for b in seen} == {2000} and all(b["reasoning"] == {"effort": "low"} for b in seen)
     assert all(b["tools"] and b["messages"][0]["role"] == "system" for b in seen)
-    # the spend is booked once, under A4, with the model as the note
+    # the spend is booked as it accrues (common Booker), all rows under A4 with the model as the note
     rows = ledger_rows(ledger)
-    assert len(rows) == 1
-    assert rows[0]["mini"] == "A4" and rows[0]["kind"] == "api" and rows[0]["note"] == GPT
-    assert rows[0]["usd"] == pytest.approx(0.01 * len(seen))
+    assert rows and all(r["mini"] == "A4" and r["kind"] == "api" and r["note"] == GPT for r in rows)
+    assert sum(r["usd"] for r in rows) == pytest.approx(0.01 * len(seen))
     assert summary["spent"] == pytest.approx(0.01 * len(seen)) and summary["errors"] == {}
     assert summary["ends"] == {"reply": 4} and summary["finish"] == {"tool_calls": 24, "stop": 28}
     assert not (out / "episodes_agent.partial.jsonl").exists()
@@ -957,7 +956,7 @@ def test_ctrl_c_still_books_the_spend_and_leaves_the_checkpoint(a4, tmp_path, le
     with pytest.raises(KeyboardInterrupt):
         a4.run_frontier("gpt", jobs, tmp_path, post=post, **QUIET)
     rows = ledger_rows(ledger)
-    assert len(rows) == 1 and rows[0]["usd"] == pytest.approx(0.01 * len(seen))
+    assert rows and sum(r["usd"] for r in rows) == pytest.approx(0.01 * len(seen))
     assert len(records(tmp_path / "episodes_agent.partial.jsonl")) == 3
 
 
@@ -2006,7 +2005,7 @@ def test_run_frontier_refuses_to_overwrite_a_finished_run_unless_forced(a4, tmp_
         a4.run_frontier("gpt", jobs, out, post=fake_post(seen), **QUIET)
     assert seen == [] and (out / "episodes_agent.jsonl").read_text() == first and ledger_rows(ledger) == booked
     a4.run_frontier("gpt", jobs, out, post=fake_post(seen), force=True, **QUIET)
-    assert seen and len(ledger_rows(ledger)) == len(booked) + 1
+    assert seen and len(ledger_rows(ledger)) > len(booked)
 
 
 def test_run_frontier_also_protects_the_checkpoint_of_an_interrupted_run(a4, tmp_path):
