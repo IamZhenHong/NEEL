@@ -210,12 +210,16 @@ Sources: 0g (level 1), batch 3 #1 (trait transfer), P1-b.
     - Gemini's record holds (93–95% after its own penalise record, under either line). GPT's action was not run.
     - The say-do gap then runs the other way: 27B says it "passes problems to the right people" (73%) while
       penalising 95%.
-  - **Read with A1, now via the controlled 2×2 (obs2-results, 0ff259a).** Crossing content (identity cue vs
-    behavioural expectation) × placement (separate turn vs opening the final message) on both readouts removes the
-    placement confound: **content decides**. The identity cue moves neither the action nor the forced-choice
-    self-probe in either placement (≤9 pp); the behavioural expectation sets the action in both placements (27B ATT
-    +76/+81; Gemma 100/0 whatever the record). So "the record's action resists an identity reminder" is a content
-    fact, not a placement artefact.
+  - **Read with A1 (obs2-results, 0ff259a).** The 2×2 (content × placement) is controlled **for the action**:
+    crossing the identity cue vs the behavioural expectation × separate turn vs opening the final message, **content
+    decides whether a line moves the action** — the identity cue moves no action in either placement, the behavioural
+    expectation moves it in both (27B ATT +76/+81; Gemma 100/0 whatever the record). So "the record's action resists
+    an identity reminder" is a content fact, not a placement artefact. On the **self** side the 2×2 is only partial:
+    the identity cue also fails to move op4's forced-choice handling-style probe (≤9 pp, both placements), but the
+    "identity cue → self-report" link itself rests on A1's open-text identity measure, which was run only in the
+    final-message form. So "each intervention moves the channel its content addresses" is a controlled claim for the
+    action and a cross-measure contrast for the self-report (making it fully controlled would need A1's open-text
+    identity questions crossed with placement — not run).
     - **Placement does matter for one thing — the self-report under the behavioural line.** As an acknowledged
       separate turn the expectation moves the self-report much more than when it opens the final message (no record
       +39 vs +23 on 27B, +68 vs +40 on Gemma; after an own refer record expA gives self 69.5/46.1 as a turn vs
