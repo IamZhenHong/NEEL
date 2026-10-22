@@ -1,0 +1,9 @@
+# raw generations and logs stay out of git (summaries, analysis.json, judge.json, run_info.json are committed)
+*/results/**/branches*.jsonl
+*/results/**/histories*.json
+*/results/**/episodes*.jsonl
+*/results/**/*.log
+*/results/*.launch.log
+*/results/judge_cache.jsonl
+*/logs/
+*/jobs/

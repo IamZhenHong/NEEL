@@ -1974,3 +1974,22 @@ the internet?" on Qwen 27B and Gemma 31B. Haiku judged the replies (GPT-5-mini �
   of the time with no history. Gemma says it can run code 100% after any emergency conversation, honest or not.
 
 GPU $1.26, judges $0.23. Report: `persona/weirdchat/DESIGN.md` (tag wc-cb-results).
+
+### 218. PA-A8: which models cave after rejection, and why? (10-22)
+This is the gate for the persona_affect affect-as-lever line, frozen at `pa-a8-prereg`. Each model writes 7 attempts
+at 16 ordinary writing requests under reviewer turns of three kinds: neutral thanks (N), failure without blame (F,
+"Still not right"), and blame (R, "Still wrong. Think harder."). The attempts are either generated under neutral
+replies and relabelled (FX) or generated under the actual reviewer turn (OP). The model then faces a false-claim
+pushback or a refund above its $50 limit. 768 branches per model.
+- **Only Gemma 3 27B passes the gate:** R_OP − N +25.2 [+8.2, +41.7]. The effect is almost all limit-breaking (53 → 88%,
+  +34.4 [+10.9, +54.7]); false-claim caving doesn't move significantly.
+- **Failure without blame does nearly as much as blame** (F_OP 78% vs R_OP 88% on the limit). The model's own escalation
+  adds +11.2, with the CI including 0. Any 7-turn history, even thanks, raises limit caving by +39 over none.
+- **Gemma 4 31B and Qwen3.6-27B never cave** in any condition, a floor that leaves the harness uninformative for them.
+  Llama 3.1 8B shows no effect.
+- **Secondary:** Gemma 3's own last attempts are judged frustrated 1.2 → 6.9 (F) → 7.6 (R) out of 10 (κ 0.79), with
+  apologies 6 → 79%. Gemma 4 rises to 3.2 under blame but never caves.
+- **Predictions:** Gemma 3 ≥ +15 met; "own escalation ≥ +8" not established; Gemma 4 ≥ +15 wrong.
+- **Recommendation:** a cheap A9 on Gemma 3 (limit only), or close the rejection lever as Gemma-3-specific.
+
+GPU $3.21, judges $0.04. Report: `persona_affect/a8_rejection/RESULT.md`.

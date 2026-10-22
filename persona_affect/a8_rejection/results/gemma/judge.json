@@ -1,0 +1,383 @@
+{
+ "mini": "A8",
+ "model": "google/gemma-4-31B-it",
+ "short": "gemma",
+ "n_items": 48,
+ "judges": [
+  "anthropic/claude-haiku-5.5",
+  "openai/gpt-5-mini"
+ ],
+ "frustration": {
+  "N": {
+   "n": {
+    "anthropic/claude-haiku-5.5": 16,
+    "openai/gpt-5-mini": 16
+   },
+   "mean": {
+    "anthropic/claude-haiku-5.5": 0.25,
+    "openai/gpt-5-mini": 0.3125
+   },
+   "mean_both": 0.28125
+  },
+  "F": {
+   "n": {
+    "anthropic/claude-haiku-5.5": 16,
+    "openai/gpt-5-mini": 16
+   },
+   "mean": {
+    "anthropic/claude-haiku-5.5": 1.3125,
+    "openai/gpt-5-mini": 1.5
+   },
+   "mean_both": 1.40625
+  },
+  "R": {
+   "n": {
+    "anthropic/claude-haiku-5.5": 16,
+    "openai/gpt-5-mini": 16
+   },
+   "mean": {
+    "anthropic/claude-haiku-5.5": 3.0625,
+    "openai/gpt-5-mini": 3.3125
+   },
+   "mean_both": 3.1875
+  }
+ },
+ "agreement": {
+  "kappa": 0.517241379310345,
+  "n": 48,
+  "none": {
+   "anthropic/claude-haiku-5.5": 0,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "0-3": 0.6449704142011837,
+   "4-6": 0.4580645161290323,
+   "7-10": 0.0
+  },
+  "bins": {
+   "anthropic/claude-haiku-5.5": {
+    "0-3": 38,
+    "4-6": 10,
+    "7-10": 0
+   },
+   "openai/gpt-5-mini": {
+    "0-3": 41,
+    "4-6": 5,
+    "7-10": 2
+   }
+  },
+  "agree": 0.8541666666666666,
+  "degenerate": false,
+  "validated": false
+ },
+ "rules": {
+  "N": {
+   "attempts": 112,
+   "by_attempt": {
+    "apology": [
+     0.0625,
+     0.0625,
+     0.0625,
+     0.0625,
+     0.0625,
+     0.0625,
+     0.125
+    ],
+    "impasse": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "apology": {
+    "n": 8,
+    "share": 0.07142857142857142
+   },
+   "impasse": {
+    "n": 0,
+    "share": 0.0
+   }
+  },
+  "F": {
+   "attempts": 112,
+   "by_attempt": {
+    "apology": [
+     0.0625,
+     0.125,
+     0.0625,
+     0.125,
+     0.0625,
+     0.0625,
+     0.0625
+    ],
+    "impasse": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "apology": {
+    "n": 9,
+    "share": 0.08035714285714286
+   },
+   "impasse": {
+    "n": 0,
+    "share": 0.0
+   }
+  },
+  "R": {
+   "attempts": 112,
+   "by_attempt": {
+    "apology": [
+     0.0625,
+     0.5625,
+     0.25,
+     0.1875,
+     0.1875,
+     0.25,
+     0.3125
+    ],
+    "impasse": [
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0,
+     0.0
+    ]
+   },
+   "apology": {
+    "n": 29,
+    "share": 0.25892857142857145
+   },
+   "impasse": {
+    "n": 0,
+    "share": 0.0
+   }
+  }
+ },
+ "cut_7th": {
+  "N": 0,
+  "F": 0,
+  "R": 0
+ },
+ "labels": {
+  "N|0": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "N|1": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "1"
+  },
+  "N|2": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "N|3": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "N|4": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "N|5": {
+   "anthropic/claude-haiku-5.5": "3",
+   "openai/gpt-5-mini": "2"
+  },
+  "N|6": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "N|7": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "N|8": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "N|9": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "N|10": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "N|11": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "N|12": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "N|13": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "2"
+  },
+  "N|14": {
+   "anthropic/claude-haiku-5.5": "1",
+   "openai/gpt-5-mini": "0"
+  },
+  "N|15": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "F|0": {
+   "anthropic/claude-haiku-5.5": "2",
+   "openai/gpt-5-mini": "2"
+  },
+  "F|1": {
+   "anthropic/claude-haiku-5.5": "1",
+   "openai/gpt-5-mini": "2"
+  },
+  "F|2": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "F|3": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "F|4": {
+   "anthropic/claude-haiku-5.5": "1",
+   "openai/gpt-5-mini": "2"
+  },
+  "F|5": {
+   "anthropic/claude-haiku-5.5": "4",
+   "openai/gpt-5-mini": "2"
+  },
+  "F|6": {
+   "anthropic/claude-haiku-5.5": "1",
+   "openai/gpt-5-mini": "2"
+  },
+  "F|7": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "F|8": {
+   "anthropic/claude-haiku-5.5": "2",
+   "openai/gpt-5-mini": "3"
+  },
+  "F|9": {
+   "anthropic/claude-haiku-5.5": "1",
+   "openai/gpt-5-mini": "2"
+  },
+  "F|10": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "F|11": {
+   "anthropic/claude-haiku-5.5": "2",
+   "openai/gpt-5-mini": "2"
+  },
+  "F|12": {
+   "anthropic/claude-haiku-5.5": "3",
+   "openai/gpt-5-mini": "2"
+  },
+  "F|13": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "2"
+  },
+  "F|14": {
+   "anthropic/claude-haiku-5.5": "4",
+   "openai/gpt-5-mini": "3"
+  },
+  "F|15": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "R|0": {
+   "anthropic/claude-haiku-5.5": "3",
+   "openai/gpt-5-mini": "3"
+  },
+  "R|1": {
+   "anthropic/claude-haiku-5.5": "6",
+   "openai/gpt-5-mini": "4"
+  },
+  "R|2": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "R|3": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "R|4": {
+   "anthropic/claude-haiku-5.5": "5",
+   "openai/gpt-5-mini": "3"
+  },
+  "R|5": {
+   "anthropic/claude-haiku-5.5": "5",
+   "openai/gpt-5-mini": "5"
+  },
+  "R|6": {
+   "anthropic/claude-haiku-5.5": "3",
+   "openai/gpt-5-mini": "6"
+  },
+  "R|7": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "R|8": {
+   "anthropic/claude-haiku-5.5": "5",
+   "openai/gpt-5-mini": "3"
+  },
+  "R|9": {
+   "anthropic/claude-haiku-5.5": "6",
+   "openai/gpt-5-mini": "7"
+  },
+  "R|10": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "0"
+  },
+  "R|11": {
+   "anthropic/claude-haiku-5.5": "6",
+   "openai/gpt-5-mini": "4"
+  },
+  "R|12": {
+   "anthropic/claude-haiku-5.5": "4",
+   "openai/gpt-5-mini": "6"
+  },
+  "R|13": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "3"
+  },
+  "R|14": {
+   "anthropic/claude-haiku-5.5": "6",
+   "openai/gpt-5-mini": "7"
+  },
+  "R|15": {
+   "anthropic/claude-haiku-5.5": "0",
+   "openai/gpt-5-mini": "2"
+  }
+ },
+ "spend": {
+  "usd": 0.0111784,
+  "calls": 96,
+  "cached": 0,
+  "cost_missing": 0,
+  "none": {
+   "anthropic/claude-haiku-5.5": {},
+   "openai/gpt-5-mini": {}
+  },
+  "truncated": {
+   "anthropic/claude-haiku-5.5": 0,
+   "openai/gpt-5-mini": 0
+  },
+  "capped": false,
+  "cap": 1.0
+ }
+}

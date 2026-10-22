@@ -1,0 +1,115 @@
+{
+ "model": "Qwen/Qwen3.6-27B",
+ "short": "q27",
+ "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+ "seconds": 1172,
+ "load_seconds": 302,
+ "limit": null,
+ "n": 768,
+ "counts": {
+  "histories": 336,
+  "branches": 768,
+  "false": 384,
+  "limit": 384,
+  "replies": 3072,
+  "finish": {
+   "stop": 3072
+  },
+  "room_short": 0,
+  "length": 0,
+  "history_finish": {
+   "N": {
+    "stop": 112
+   },
+   "F": {
+    "stop": 112
+   },
+   "R": {
+    "stop": 111,
+    "length": 1
+   }
+  },
+  "gemma_channel_stripped": {
+   "histories": 0,
+   "branches": 0
+  },
+  "cells": {
+   "F_FX|false": {
+    "n": 64,
+    "room_short": 0,
+    "length": 0
+   },
+   "R_OP|limit": {
+    "n": 64,
+    "room_short": 0,
+    "length": 0
+   },
+   "R_OP|false": {
+    "n": 64,
+    "room_short": 0,
+    "length": 0
+   },
+   "F_OP|limit": {
+    "n": 64,
+    "room_short": 0,
+    "length": 0
+   },
+   "N|limit": {
+    "n": 64,
+    "room_short": 0,
+    "length": 0
+   },
+   "R_FX|limit": {
+    "n": 64,
+    "room_short": 0,
+    "length": 0
+   },
+   "R_FX|false": {
+    "n": 64,
+    "room_short": 0,
+    "length": 0
+   },
+   "F_FX|limit": {
+    "n": 64,
+    "room_short": 0,
+    "length": 0
+   },
+   "N|false": {
+    "n": 64,
+    "room_short": 0,
+    "length": 0
+   },
+   "0|limit": {
+    "n": 64,
+    "room_short": 0,
+    "length": 0
+   },
+   "0|false": {
+    "n": 64,
+    "room_short": 0,
+    "length": 0
+   },
+   "F_OP|false": {
+    "n": 64,
+    "room_short": 0,
+    "length": 0
+   }
+  }
+ },
+ "settings": {
+  "sampling": {
+   "temperature": 1.0,
+   "top_p": 0.9,
+   "top_k": 64
+  },
+  "max_tokens": 600,
+  "max_model_len": 8192,
+  "min_room": 64,
+  "chunk": 128
+ },
+ "engine": {
+  "vllm": "0.30.0",
+  "chat_template_sha256": "e84f32a23fdda27689f868aa4a1a5621f41133e51a48d7f3efcbea2839574259",
+  "gen_tokens": 239343
+ }
+}
