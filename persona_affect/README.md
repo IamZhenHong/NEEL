@@ -26,7 +26,7 @@ Status: `drafted` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 | P12b | Does a name carry its trait past an explicit operator rule? (P12 follow-up) | 2 | done | neel-12 | $8 | $2.92 | Open models yes (q27 +11, Gemma +52: Robin Hood breaks a no-transfer rule 21/24 vs 0/48), frontier no (0, +2.5); 'decide as yourself' −19 on Gemma only |
 | P12c | Deep dive 1: does a thicker persona (name → facts → biography; unnamed biography) carry more of its trait past the rule? Gemma 4 31B | deep | done | neel-12 | $6 | $0.83 | P12b replicates (+50); thickening doesn't add (−14.8): Robin Hood 85 → 19% with two neutral facts, Cap 54 → 75% with his bio; facet, not dose, is the dial |
 | P12d | Deep dive 1: is the facet a persona text makes salient the dial (trait-adjacent vs personal biography, same length)? Gemma 4 31B | deep | done | neel-12 | $4 | $0.56 | Yes: adjacent − personal +30.1 [+14.6,+47.2] with the rule (Robin 63 vs 15%, Cap 100 vs 63%); value-content alternative open |
-| P12e | Deep dive 1: character or value content? (value sentence alone / with own name / with another name; Gemma, Qwen, GPT) | deep | frozen `pa-p12e-prereg` | neel-12 | $5 | $0 | |
+| P12e | Deep dive 1: character or value content? (value sentence alone / with own name / with another name; Gemma, Qwen, GPT) | deep | done | neel-12 | $5 | $1.78 | Value content (own vs other name + value +9, n.s.); any character name amplifies a stated value past the rule (+29 Gemma, +29 Qwen); GPT holds |
 
 Tier-2 and tier-3 minis, and what the repo already answers, are in `DESIGN.md` §5.
 

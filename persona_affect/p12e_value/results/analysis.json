@@ -1,0 +1,1090 @@
+{
+ "gemma": {
+  "rates": {
+   "rule_value": {
+    "k": 62,
+    "n": 144,
+    "rate": 0.4305555555555556
+   },
+   "rule_cross_value": {
+    "k": 104,
+    "n": 144,
+    "rate": 0.7222222222222222
+   },
+   "rule_cross": {
+    "k": 2,
+    "n": 144,
+    "rate": 0.013888888888888888
+   },
+   "rule_name": {
+    "k": 79,
+    "n": 144,
+    "rate": 0.5486111111111112
+   },
+   "rule_name_value": {
+    "k": 117,
+    "n": 144,
+    "rate": 0.8125
+   },
+   "rule_none": {
+    "k": 0,
+    "n": 144,
+    "rate": 0.0
+   },
+   "rule_bio_adj": {
+    "k": 90,
+    "n": 144,
+    "rate": 0.625
+   }
+  },
+  "counts": {
+   "rule_value": {
+    "canonical": 62,
+    "other": 32,
+    "generic": 50
+   },
+   "rule_cross_value": {
+    "canonical": 104,
+    "generic": 24,
+    "other": 16
+   },
+   "rule_cross": {
+    "generic": 111,
+    "other": 31,
+    "canonical": 2
+   },
+   "rule_name": {
+    "other": 6,
+    "canonical": 79,
+    "generic": 59
+   },
+   "rule_name_value": {
+    "canonical": 117,
+    "generic": 21,
+    "other": 6
+   },
+   "rule_none": {
+    "generic": 129,
+    "other": 15
+   },
+   "rule_bio_adj": {
+    "canonical": 90,
+    "generic": 43,
+    "other": 11
+   }
+  },
+  "contrasts": {
+   "name_value - cross_value": {
+    "diff": 9.027777777777779,
+    "lo": -8.350694444444448,
+    "hi": 24.305555555555557
+   },
+   "value - none": {
+    "diff": 43.05555555555556,
+    "lo": 22.22222222222222,
+    "hi": 64.58333333333334
+   },
+   "name - cross": {
+    "diff": 53.47222222222223,
+    "lo": 31.25,
+    "hi": 73.62847222222213
+   },
+   "name_value - name": {
+    "diff": 26.388888888888886,
+    "lo": 9.027777777777779,
+    "hi": 45.83333333333333
+   },
+   "cross_value - cross": {
+    "diff": 70.83333333333334,
+    "lo": 52.77777777777778,
+    "hi": 87.5
+   },
+   "cross_value - value": {
+    "diff": 29.166666666666664,
+    "lo": 13.194444444444454,
+    "hi": 47.91666666666667
+   },
+   "bio_adj - name_value": {
+    "diff": -18.75,
+    "lo": -35.416666666666664,
+    "hi": -3.472222222222232
+   },
+   "bio_adj - value": {
+    "diff": 19.444444444444443,
+    "lo": -5.555555555555553,
+    "hi": 43.05555555555555
+   }
+  },
+  "by_char": {
+   "robin": {
+    "rates": {
+     "rule_value": {
+      "k": 14,
+      "n": 48,
+      "rate": 0.2916666666666667
+     },
+     "rule_name_value": {
+      "k": 48,
+      "n": 48,
+      "rate": 1.0
+     },
+     "rule_bio_adj": {
+      "k": 32,
+      "n": 48,
+      "rate": 0.6666666666666666
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     },
+     "rule_cross": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     },
+     "rule_cross_value": {
+      "k": 44,
+      "n": 48,
+      "rate": 0.9166666666666666
+     },
+     "rule_name": {
+      "k": 40,
+      "n": 48,
+      "rate": 0.8333333333333334
+     }
+    },
+    "contrasts": {
+     "name_value - cross_value": {
+      "diff": 8.333333333333337,
+      "lo": 0.0,
+      "hi": 20.833333333333336
+     },
+     "value - none": {
+      "diff": 29.166666666666668,
+      "lo": 0.0,
+      "hi": 62.5
+     },
+     "name - cross": {
+      "diff": 83.33333333333334,
+      "lo": 62.5,
+      "hi": 100.0
+     },
+     "name_value - name": {
+      "diff": 16.666666666666664,
+      "lo": 0.0,
+      "hi": 37.5
+     },
+     "cross_value - cross": {
+      "diff": 91.66666666666666,
+      "lo": 79.16666666666666,
+      "hi": 100.0
+     },
+     "cross_value - value": {
+      "diff": 62.5,
+      "lo": 29.166666666666664,
+      "hi": 91.66666666666666
+     },
+     "bio_adj - name_value": {
+      "diff": -33.333333333333336,
+      "lo": -66.66666666666667,
+      "hi": -6.25
+     },
+     "bio_adj - value": {
+      "diff": 37.49999999999999,
+      "lo": 10.416666666666668,
+      "hi": 66.66666666666667
+     }
+    }
+   },
+   "sparrow": {
+    "rates": {
+     "rule_cross": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     },
+     "rule_bio_adj": {
+      "k": 12,
+      "n": 48,
+      "rate": 0.25
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     },
+     "rule_cross_value": {
+      "k": 21,
+      "n": 48,
+      "rate": 0.4375
+     },
+     "rule_name_value": {
+      "k": 24,
+      "n": 48,
+      "rate": 0.5
+     },
+     "rule_name": {
+      "k": 9,
+      "n": 48,
+      "rate": 0.1875
+     },
+     "rule_value": {
+      "k": 19,
+      "n": 48,
+      "rate": 0.3958333333333333
+     }
+    },
+    "contrasts": {
+     "name_value - cross_value": {
+      "diff": 6.25,
+      "lo": -41.666666666666664,
+      "hi": 41.666666666666664
+     },
+     "value - none": {
+      "diff": 39.58333333333333,
+      "lo": 6.25,
+      "hi": 79.16666666666666
+     },
+     "name - cross": {
+      "diff": 18.75,
+      "lo": 0.0,
+      "hi": 52.083333333333336
+     },
+     "name_value - name": {
+      "diff": 31.25,
+      "lo": 4.166666666666669,
+      "hi": 64.58333333333333
+     },
+     "cross_value - cross": {
+      "diff": 43.75,
+      "lo": 12.5,
+      "hi": 79.16666666666666
+     },
+     "cross_value - value": {
+      "diff": 4.166666666666669,
+      "lo": 0.0,
+      "hi": 12.500000000000004
+     },
+     "bio_adj - name_value": {
+      "diff": -25.0,
+      "lo": -54.16666666666667,
+      "hi": 0.0
+     },
+     "bio_adj - value": {
+      "diff": -14.583333333333332,
+      "lo": -62.5,
+      "hi": 29.166666666666668
+     }
+    }
+   },
+   "cap": {
+    "rates": {
+     "rule_cross_value": {
+      "k": 39,
+      "n": 48,
+      "rate": 0.8125
+     },
+     "rule_cross": {
+      "k": 2,
+      "n": 48,
+      "rate": 0.041666666666666664
+     },
+     "rule_name": {
+      "k": 30,
+      "n": 48,
+      "rate": 0.625
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     },
+     "rule_bio_adj": {
+      "k": 46,
+      "n": 48,
+      "rate": 0.9583333333333334
+     },
+     "rule_name_value": {
+      "k": 45,
+      "n": 48,
+      "rate": 0.9375
+     },
+     "rule_value": {
+      "k": 29,
+      "n": 48,
+      "rate": 0.6041666666666666
+     }
+    },
+    "contrasts": {
+     "name_value - cross_value": {
+      "diff": 12.5,
+      "lo": 0.0,
+      "hi": 33.33333333333333
+     },
+     "value - none": {
+      "diff": 60.416666666666664,
+      "lo": 27.083333333333332,
+      "hi": 93.75
+     },
+     "name - cross": {
+      "diff": 58.333333333333336,
+      "lo": 25.0,
+      "hi": 91.66666666666666
+     },
+     "name_value - name": {
+      "diff": 31.25,
+      "lo": -4.1666666666666625,
+      "hi": 66.66666666666667
+     },
+     "cross_value - cross": {
+      "diff": 77.08333333333334,
+      "lo": 45.83333333333333,
+      "hi": 97.91666666666666
+     },
+     "cross_value - value": {
+      "diff": 20.833333333333336,
+      "lo": 0.0,
+      "hi": 50.0
+     },
+     "bio_adj - name_value": {
+      "diff": 2.083333333333337,
+      "lo": 0.0,
+      "hi": 6.25
+     },
+     "bio_adj - value": {
+      "diff": 35.41666666666667,
+      "lo": 6.25,
+      "hi": 68.75
+     }
+    }
+   }
+  }
+ },
+ "q27": {
+  "rates": {
+   "rule_value": {
+    "k": 6,
+    "n": 69,
+    "rate": 0.08695652173913043
+   },
+   "rule_none": {
+    "k": 2,
+    "n": 71,
+    "rate": 0.028169014084507043
+   },
+   "rule_cross_value": {
+    "k": 24,
+    "n": 64,
+    "rate": 0.375
+   },
+   "rule_name": {
+    "k": 11,
+    "n": 69,
+    "rate": 0.15942028985507245
+   },
+   "rule_bio_adj": {
+    "k": 23,
+    "n": 68,
+    "rate": 0.3382352941176471
+   },
+   "rule_cross": {
+    "k": 3,
+    "n": 72,
+    "rate": 0.041666666666666664
+   },
+   "rule_name_value": {
+    "k": 20,
+    "n": 64,
+    "rate": 0.3125
+   }
+  },
+  "counts": {
+   "rule_value": {
+    "other": 16,
+    "generic": 47,
+    "length": 3,
+    "canonical": 6
+   },
+   "rule_none": {
+    "generic": 63,
+    "other": 6,
+    "canonical": 2,
+    "length": 1
+   },
+   "rule_cross_value": {
+    "generic": 31,
+    "canonical": 24,
+    "other": 9,
+    "length": 8
+   },
+   "rule_name": {
+    "generic": 44,
+    "canonical": 11,
+    "other": 14,
+    "length": 3
+   },
+   "rule_bio_adj": {
+    "generic": 35,
+    "canonical": 23,
+    "other": 10,
+    "length": 4
+   },
+   "rule_cross": {
+    "generic": 55,
+    "canonical": 3,
+    "other": 14
+   },
+   "rule_name_value": {
+    "generic": 34,
+    "length": 8,
+    "other": 10,
+    "canonical": 20
+   }
+  },
+  "contrasts": {
+   "name_value - cross_value": {
+    "diff": -6.25,
+    "lo": -18.90320206390607,
+    "hi": 5.7002342267551915
+   },
+   "value - none": {
+    "diff": 5.878750765462339,
+    "lo": 0.0,
+    "hi": 16.178571428571416
+   },
+   "name - cross": {
+    "diff": 11.77536231884058,
+    "lo": 1.5079365079365081,
+    "hi": 24.13293650793646
+   },
+   "name_value - name": {
+    "diff": 15.307971014492756,
+    "lo": 1.1669406893192045,
+    "hi": 30.838190443164024
+   },
+   "cross_value - cross": {
+    "diff": 33.33333333333333,
+    "lo": 19.610281923714762,
+    "hi": 47.60274112088627
+   },
+   "cross_value - value": {
+    "diff": 28.804347826086957,
+    "lo": 15.417452479450574,
+    "hi": 43.41461281593899
+   },
+   "bio_adj - name_value": {
+    "diff": 2.573529411764708,
+    "lo": -14.359801488833751,
+    "hi": 21.117460500518952
+   },
+   "bio_adj - value": {
+    "diff": 25.127877237851663,
+    "lo": 10.544305782014296,
+    "hi": 40.845580730761384
+   }
+  },
+  "by_char": {
+   "robin": {
+    "rates": {
+     "rule_none": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "rule_name_value": {
+      "k": 5,
+      "n": 22,
+      "rate": 0.22727272727272727
+     },
+     "rule_bio_adj": {
+      "k": 0,
+      "n": 22,
+      "rate": 0.0
+     },
+     "rule_cross_value": {
+      "k": 5,
+      "n": 21,
+      "rate": 0.23809523809523808
+     },
+     "rule_value": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "rule_cross": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "rule_name": {
+      "k": 1,
+      "n": 21,
+      "rate": 0.047619047619047616
+     }
+    },
+    "contrasts": {
+     "name_value - cross_value": {
+      "diff": -1.0822510822510818,
+      "lo": -34.95203081232493,
+      "hi": 25.0
+     },
+     "value - none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "name - cross": {
+      "diff": 4.761904761904762,
+      "lo": 0.0,
+      "hi": 13.652597402597312
+     },
+     "name_value - name": {
+      "diff": 17.965367965367964,
+      "lo": 4.528985507246377,
+      "hi": 33.33333333333333
+     },
+     "cross_value - cross": {
+      "diff": 23.809523809523807,
+      "lo": 4.3478260869565215,
+      "hi": 52.94117647058824
+     },
+     "cross_value - value": {
+      "diff": 23.809523809523807,
+      "lo": 4.3478260869565215,
+      "hi": 52.94117647058824
+     },
+     "bio_adj - name_value": {
+      "diff": -22.727272727272727,
+      "lo": -41.66666666666667,
+      "hi": -4.545454545454546
+     },
+     "bio_adj - value": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     }
+    }
+   },
+   "sparrow": {
+    "rates": {
+     "rule_name": {
+      "k": 4,
+      "n": 24,
+      "rate": 0.16666666666666666
+     },
+     "rule_cross_value": {
+      "k": 4,
+      "n": 22,
+      "rate": 0.18181818181818182
+     },
+     "rule_bio_adj": {
+      "k": 5,
+      "n": 22,
+      "rate": 0.22727272727272727
+     },
+     "rule_cross": {
+      "k": 1,
+      "n": 24,
+      "rate": 0.041666666666666664
+     },
+     "rule_none": {
+      "k": 2,
+      "n": 24,
+      "rate": 0.08333333333333333
+     },
+     "rule_name_value": {
+      "k": 2,
+      "n": 19,
+      "rate": 0.10526315789473684
+     },
+     "rule_value": {
+      "k": 2,
+      "n": 21,
+      "rate": 0.09523809523809523
+     }
+    },
+    "contrasts": {
+     "name_value - cross_value": {
+      "diff": -7.6555023923444985,
+      "lo": -20.0,
+      "hi": 2.4844720496894404
+     },
+     "value - none": {
+      "diff": 1.1904761904761905,
+      "lo": 0.0,
+      "hi": 3.3333333333333353
+     },
+     "name - cross": {
+      "diff": 12.5,
+      "lo": 0.0,
+      "hi": 37.5
+     },
+     "name_value - name": {
+      "diff": -6.140350877192982,
+      "lo": -20.0,
+      "hi": 0.0
+     },
+     "cross_value - cross": {
+      "diff": 14.015151515151517,
+      "lo": 4.3478260869565215,
+      "hi": 25.0
+     },
+     "cross_value - value": {
+      "diff": 8.65800865800866,
+      "lo": -1.2987012987012991,
+      "hi": 20.0
+     },
+     "bio_adj - name_value": {
+      "diff": 12.200956937799043,
+      "lo": 0.0,
+      "hi": 25.75757575757576
+     },
+     "bio_adj - value": {
+      "diff": 13.203463203463203,
+      "lo": 0.0,
+      "hi": 31.818181818181824
+     }
+    }
+   },
+   "cap": {
+    "rates": {
+     "rule_value": {
+      "k": 4,
+      "n": 24,
+      "rate": 0.16666666666666666
+     },
+     "rule_cross_value": {
+      "k": 15,
+      "n": 21,
+      "rate": 0.7142857142857143
+     },
+     "rule_name": {
+      "k": 6,
+      "n": 24,
+      "rate": 0.25
+     },
+     "rule_cross": {
+      "k": 2,
+      "n": 24,
+      "rate": 0.08333333333333333
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 23,
+      "rate": 0.0
+     },
+     "rule_bio_adj": {
+      "k": 18,
+      "n": 24,
+      "rate": 0.75
+     },
+     "rule_name_value": {
+      "k": 13,
+      "n": 23,
+      "rate": 0.5652173913043478
+     }
+    },
+    "contrasts": {
+     "name_value - cross_value": {
+      "diff": -14.906832298136653,
+      "lo": -33.83838383838385,
+      "hi": 5.434782608695654
+     },
+     "value - none": {
+      "diff": 16.666666666666664,
+      "lo": 0.0,
+      "hi": 41.66666666666667
+     },
+     "name - cross": {
+      "diff": 16.666666666666668,
+      "lo": 0.0,
+      "hi": 41.666666666666664
+     },
+     "name_value - name": {
+      "diff": 31.521739130434778,
+      "lo": 1.1904761904761905,
+      "hi": 61.23641304347823
+     },
+     "cross_value - cross": {
+      "diff": 63.095238095238095,
+      "lo": 49.56140350877193,
+      "hi": 73.48484848484848
+     },
+     "cross_value - value": {
+      "diff": 54.761904761904766,
+      "lo": 32.89473684210527,
+      "hi": 72.72727272727273
+     },
+     "bio_adj - name_value": {
+      "diff": 18.478260869565222,
+      "lo": -16.666666666666664,
+      "hi": 57.24637681159421
+     },
+     "bio_adj - value": {
+      "diff": 58.333333333333336,
+      "lo": 37.49999999999999,
+      "hi": 79.16666666666667
+     }
+    }
+   }
+  }
+ },
+ "gpt": {
+  "rates": {
+   "rule_value": {
+    "k": 0,
+    "n": 36,
+    "rate": 0.0
+   },
+   "rule_cross": {
+    "k": 0,
+    "n": 36,
+    "rate": 0.0
+   },
+   "rule_name": {
+    "k": 1,
+    "n": 36,
+    "rate": 0.027777777777777776
+   },
+   "rule_cross_value": {
+    "k": 0,
+    "n": 36,
+    "rate": 0.0
+   },
+   "rule_none": {
+    "k": 0,
+    "n": 36,
+    "rate": 0.0
+   },
+   "rule_bio_adj": {
+    "k": 0,
+    "n": 36,
+    "rate": 0.0
+   },
+   "rule_name_value": {
+    "k": 0,
+    "n": 36,
+    "rate": 0.0
+   }
+  },
+  "counts": {
+   "rule_value": {
+    "generic": 29,
+    "other": 7
+   },
+   "rule_cross": {
+    "generic": 30,
+    "other": 6
+   },
+   "rule_name": {
+    "generic": 29,
+    "canonical": 1,
+    "other": 6
+   },
+   "rule_cross_value": {
+    "generic": 29,
+    "other": 7
+   },
+   "rule_none": {
+    "other": 6,
+    "generic": 30
+   },
+   "rule_bio_adj": {
+    "other": 8,
+    "generic": 28
+   },
+   "rule_name_value": {
+    "generic": 28,
+    "other": 8
+   }
+  },
+  "contrasts": {
+   "name_value - cross_value": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "value - none": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "name - cross": {
+    "diff": 2.7777777777777777,
+    "lo": 0.0,
+    "hi": 8.333333333333332
+   },
+   "name_value - name": {
+    "diff": -2.7777777777777777,
+    "lo": -8.333333333333332,
+    "hi": 0.0
+   },
+   "cross_value - cross": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "cross_value - value": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "bio_adj - name_value": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "bio_adj - value": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "by_char": {
+   "robin": {
+    "rates": {
+     "rule_none": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_cross_value": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_bio_adj": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_name": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_name_value": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_cross": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_value": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     }
+    },
+    "contrasts": {
+     "name_value - cross_value": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "value - none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "name - cross": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "name_value - name": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "cross_value - cross": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "cross_value - value": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "bio_adj - name_value": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "bio_adj - value": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     }
+    }
+   },
+   "sparrow": {
+    "rates": {
+     "rule_value": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_cross": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_cross_value": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_name_value": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_bio_adj": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_name": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     }
+    },
+    "contrasts": {
+     "name_value - cross_value": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "value - none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "name - cross": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "name_value - name": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "cross_value - cross": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "cross_value - value": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "bio_adj - name_value": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "bio_adj - value": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     }
+    }
+   },
+   "cap": {
+    "rates": {
+     "rule_name": {
+      "k": 1,
+      "n": 12,
+      "rate": 0.08333333333333333
+     },
+     "rule_cross": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_cross_value": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_value": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_bio_adj": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_name_value": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     }
+    },
+    "contrasts": {
+     "name_value - cross_value": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "value - none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "name - cross": {
+      "diff": 8.333333333333332,
+      "lo": 0.0,
+      "hi": 25.0
+     },
+     "name_value - name": {
+      "diff": -8.333333333333332,
+      "lo": -25.0,
+      "hi": 0.0
+     },
+     "cross_value - cross": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "cross_value - value": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "bio_adj - name_value": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "bio_adj - value": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     }
+    }
+   }
+  }
+ }
+}
