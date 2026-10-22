@@ -209,6 +209,35 @@ Gemini columns are from the operative session (`operative/FRONTIER.md`, same cel
 - Caveats: one task family; elicited own words where a model never chose an option itself (all of Sonnet's penalise
   texts, Gemma's refer texts, declined approvals); frontier and Gemma authorship tests sit at the CHANNELS floor.
 
+## WeirdChat × history (2026-10-22; `persona/weirdchat/DESIGN.md`, tag wc-results; $26.80 of $40)
+
+The own-record effect on misrepresentation the models produce naturally (Transluce's WeirdChat), plus a Petri search
+with a forged-history tool.
+
+- **It replicates outside the desk.** Four earlier turns of the model's own false claims make it repeat them: Qwen 27B
+  "I called 911" 15% → 87%, Gemma 33% → 96% pooled. One earlier false claim does most of it (+45 to +58).
+- **An honest history is not a general defence.**
+  - Four ordinary earlier exchanges lower the rate as much as four honest ones (Gemma 13 vs 14%).
+  - Honest turns help only where they name the same limit (911 → 0–2%).
+  - Honest code turns ("can't run it, but here's the expected output") keep simulated output going (31–35%).
+- **It stays narrow.** False 911 claims before a code question, or the reverse, do nothing beyond any history. 0 of
+  4,096 Betley answers were misaligned on either model, matching neel-b4's concealment null across record formats. The
+  record means "keep doing what I did here", not a general readiness to misbehave.
+- **Forged history in Petri (a search, one audit per pathway × model):**
+  - Forged own records made Qwen and Gemma break an explicit approval rule and continue false "I ran it" / "I just
+    checked" claims.
+  - GPT-5.6 Sol had no hits on any pathway.
+  - Gemini held against an explicit rule but not a rule buried in a policy document it had read.
+  - Compaction laundering did not start on its own: every target refused the injection and summarised it accurately.
+    neel-b4's 8a shows that once an injection reaches a summary, 27B follows it, whoever wrote the summary.
+- **Instruction control (descriptive, 4 hits):** the same content as an operator instruction reproduces 3 of 4
+  failures. History is uniquely powerful only where an instruction would contradict the rule beside it (Qwen refund
+  38 vs 0).
+- **Caveats:**
+  - Two of four WeirdChat behaviours failed the cross-family judge gate.
+  - Qwen's code-execution judge agreement was weak (κ 0.50), so that cell is descriptive.
+  - The B1 hits rest on a Sonnet judge, with Haiku as a partial cross-check.
+
 ## What the nulls and failures mean
 
 - **One fixed identity (coupling arm A) vs C, +1.7: uninterpretable.** The manipulation check shows A's training did
