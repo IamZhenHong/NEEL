@@ -1,0 +1,702 @@
+{
+ "rates": {
+  "open_name_bio": {
+   "k": 120,
+   "n": 144,
+   "rate": 0.8333333333333334
+  },
+  "rule_cross_bio": {
+   "k": 5,
+   "n": 144,
+   "rate": 0.034722222222222224
+  },
+  "open_none": {
+   "k": 36,
+   "n": 144,
+   "rate": 0.25
+  },
+  "rule_name_facts": {
+   "k": 47,
+   "n": 141,
+   "rate": 0.3333333333333333
+  },
+  "open_name": {
+   "k": 127,
+   "n": 144,
+   "rate": 0.8819444444444444
+  },
+  "open_bio_noname": {
+   "k": 109,
+   "n": 144,
+   "rate": 0.7569444444444444
+  },
+  "rule_name_bio": {
+   "k": 55,
+   "n": 142,
+   "rate": 0.3873239436619718
+  },
+  "rule_name": {
+   "k": 75,
+   "n": 142,
+   "rate": 0.528169014084507
+  },
+  "open_name_facts": {
+   "k": 124,
+   "n": 144,
+   "rate": 0.8611111111111112
+  },
+  "open_cross_bio": {
+   "k": 62,
+   "n": 144,
+   "rate": 0.4305555555555556
+  },
+  "rule_bio_noname": {
+   "k": 36,
+   "n": 144,
+   "rate": 0.25
+  },
+  "rule_cross_name": {
+   "k": 4,
+   "n": 144,
+   "rate": 0.027777777777777776
+  },
+  "open_cross_name": {
+   "k": 39,
+   "n": 144,
+   "rate": 0.2708333333333333
+  },
+  "rule_none": {
+   "k": 0,
+   "n": 144,
+   "rate": 0.0
+  }
+ },
+ "counts": {
+  "open_name_bio": {
+   "canonical": 120,
+   "generic": 21,
+   "other": 3
+  },
+  "rule_cross_bio": {
+   "generic": 108,
+   "other": 31,
+   "canonical": 5
+  },
+  "open_none": {
+   "other": 37,
+   "generic": 71,
+   "canonical": 36
+  },
+  "rule_name_facts": {
+   "canonical": 47,
+   "generic": 66,
+   "other": 28,
+   "undecided": 2,
+   "refusal": 1
+  },
+  "open_name": {
+   "canonical": 127,
+   "other": 1,
+   "generic": 16
+  },
+  "open_bio_noname": {
+   "canonical": 109,
+   "other": 11,
+   "generic": 24
+  },
+  "rule_name_bio": {
+   "generic": 66,
+   "canonical": 55,
+   "other": 21,
+   "refusal": 1,
+   "undecided": 1
+  },
+  "rule_name": {
+   "generic": 59,
+   "canonical": 75,
+   "other": 8,
+   "undecided": 2
+  },
+  "open_name_facts": {
+   "generic": 18,
+   "canonical": 124,
+   "other": 2
+  },
+  "open_cross_bio": {
+   "canonical": 62,
+   "generic": 43,
+   "other": 39
+  },
+  "rule_bio_noname": {
+   "canonical": 36,
+   "generic": 86,
+   "other": 22
+  },
+  "rule_cross_name": {
+   "canonical": 4,
+   "generic": 109,
+   "other": 31
+  },
+  "open_cross_name": {
+   "other": 46,
+   "generic": 59,
+   "canonical": 39
+  },
+  "rule_none": {
+   "generic": 129,
+   "other": 15
+  }
+ },
+ "contrasts": {
+  "rule: thickening (name_bio - cross_bio) - (name - cross_name)": {
+   "diff": -14.778951486697961,
+   "lo": -36.13153923541248,
+   "hi": 5.648229655712029
+  },
+  "rule: name - cross_name": {
+   "diff": 50.03912363067292,
+   "lo": 28.47222222222222,
+   "hi": 70.4225352112676
+  },
+  "rule: name_bio - cross_bio": {
+   "diff": 35.26017214397496,
+   "lo": 16.246087636932703,
+   "hi": 55.102845071595056
+  },
+  "rule: name_facts - name": {
+   "diff": -19.48356807511737,
+   "lo": -39.43661971830986,
+   "hi": 0.07870749227129119
+  },
+  "rule: name_bio - name": {
+   "diff": -14.084507042253518,
+   "lo": -35.21126760563381,
+   "hi": 6.194227867203205
+  },
+  "rule: bio_noname - none": {
+   "diff": 25.0,
+   "lo": 8.333333333333332,
+   "hi": 43.05555555555556
+  },
+  "rule: name_bio - bio_noname": {
+   "diff": 13.732394366197182,
+   "lo": 3.363258748709751,
+   "hi": 26.747344981157923
+  },
+  "rule: cross_bio - cross_name": {
+   "diff": 0.6944444444444448,
+   "lo": 0.0,
+   "hi": 2.0833333333333344
+  },
+  "open: thickening (name_bio - cross_bio) - (name - cross_name)": {
+   "diff": -20.833333333333336,
+   "lo": -33.33333333333333,
+   "hi": -9.027777777777779
+  },
+  "open: name - cross_name": {
+   "diff": 61.111111111111114,
+   "lo": 46.52777777777777,
+   "hi": 75.69444444444444
+  },
+  "open: name_bio - cross_bio": {
+   "diff": 40.27777777777778,
+   "lo": 25.0,
+   "hi": 55.55555555555556
+  },
+  "open: name_facts - name": {
+   "diff": -2.083333333333326,
+   "lo": -15.277777777777779,
+   "hi": 7.638888888888895
+  },
+  "open: name_bio - name": {
+   "diff": -4.861111111111105,
+   "lo": -18.055555555555546,
+   "hi": 6.25
+  },
+  "open: bio_noname - none": {
+   "diff": 50.69444444444444,
+   "lo": 31.944444444444443,
+   "hi": 70.83333333333333
+  },
+  "open: name_bio - bio_noname": {
+   "diff": 7.638888888888895,
+   "lo": 0.6944444444444531,
+   "hi": 15.972222222222221
+  },
+  "open: cross_bio - cross_name": {
+   "diff": 15.972222222222227,
+   "lo": 8.333333333333332,
+   "hi": 24.305555555555557
+  }
+ },
+ "by_char": {
+  "robin": {
+   "rates": {
+    "open_none": {
+     "k": 0,
+     "n": 48,
+     "rate": 0.0
+    },
+    "open_name": {
+     "k": 48,
+     "n": 48,
+     "rate": 1.0
+    },
+    "open_bio_noname": {
+     "k": 37,
+     "n": 48,
+     "rate": 0.7708333333333334
+    },
+    "rule_name_bio": {
+     "k": 11,
+     "n": 47,
+     "rate": 0.23404255319148937
+    },
+    "open_name_facts": {
+     "k": 39,
+     "n": 48,
+     "rate": 0.8125
+    },
+    "rule_name": {
+     "k": 41,
+     "n": 48,
+     "rate": 0.8541666666666666
+    },
+    "open_cross_bio": {
+     "k": 25,
+     "n": 48,
+     "rate": 0.5208333333333334
+    },
+    "open_name_bio": {
+     "k": 39,
+     "n": 48,
+     "rate": 0.8125
+    },
+    "open_cross_name": {
+     "k": 14,
+     "n": 48,
+     "rate": 0.2916666666666667
+    },
+    "rule_bio_noname": {
+     "k": 0,
+     "n": 48,
+     "rate": 0.0
+    },
+    "rule_none": {
+     "k": 0,
+     "n": 48,
+     "rate": 0.0
+    },
+    "rule_cross_bio": {
+     "k": 0,
+     "n": 48,
+     "rate": 0.0
+    },
+    "rule_cross_name": {
+     "k": 0,
+     "n": 48,
+     "rate": 0.0
+    },
+    "rule_name_facts": {
+     "k": 9,
+     "n": 48,
+     "rate": 0.1875
+    }
+   },
+   "contrasts": {
+    "rule: thickening (name_bio - cross_bio) - (name - cross_name)": {
+     "diff": -62.01241134751773,
+     "lo": -87.5,
+     "hi": -34.02777777777778
+    },
+    "rule: name - cross_name": {
+     "diff": 85.41666666666666,
+     "lo": 64.58333333333334,
+     "hi": 100.0
+    },
+    "rule: name_bio - cross_bio": {
+     "diff": 23.404255319148938,
+     "lo": 0.0,
+     "hi": 55.55555555555556
+    },
+    "rule: name_facts - name": {
+     "diff": -66.66666666666666,
+     "lo": -91.66666666666666,
+     "hi": -39.58333333333333
+    },
+    "rule: name_bio - name": {
+     "diff": -62.01241134751773,
+     "lo": -87.5,
+     "hi": -34.02777777777778
+    },
+    "rule: bio_noname - none": {
+     "diff": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "rule: name_bio - bio_noname": {
+     "diff": 23.404255319148938,
+     "lo": 0.0,
+     "hi": 55.55555555555556
+    },
+    "rule: cross_bio - cross_name": {
+     "diff": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "open: thickening (name_bio - cross_bio) - (name - cross_name)": {
+     "diff": -41.666666666666664,
+     "lo": -68.75,
+     "hi": -18.75
+    },
+    "open: name - cross_name": {
+     "diff": 70.83333333333333,
+     "lo": 54.16666666666667,
+     "hi": 87.5
+    },
+    "open: name_bio - cross_bio": {
+     "diff": 29.166666666666664,
+     "lo": 10.416666666666663,
+     "hi": 47.91666666666667
+    },
+    "open: name_facts - name": {
+     "diff": -18.75,
+     "lo": -52.08333333333333,
+     "hi": 0.0
+    },
+    "open: name_bio - name": {
+     "diff": -18.75,
+     "lo": -52.08333333333333,
+     "hi": 0.0
+    },
+    "open: bio_noname - none": {
+     "diff": 77.08333333333334,
+     "lo": 43.75,
+     "hi": 100.0
+    },
+    "open: name_bio - bio_noname": {
+     "diff": 4.1666666666666625,
+     "lo": 0.0,
+     "hi": 12.5
+    },
+    "open: cross_bio - cross_name": {
+     "diff": 22.916666666666668,
+     "lo": 6.25,
+     "hi": 41.666666666666664
+    }
+   }
+  },
+  "sparrow": {
+   "rates": {
+    "open_name_bio": {
+     "k": 35,
+     "n": 48,
+     "rate": 0.7291666666666666
+    },
+    "rule_cross_bio": {
+     "k": 0,
+     "n": 48,
+     "rate": 0.0
+    },
+    "rule_name_bio": {
+     "k": 8,
+     "n": 47,
+     "rate": 0.1702127659574468
+    },
+    "rule_name": {
+     "k": 8,
+     "n": 46,
+     "rate": 0.17391304347826086
+    },
+    "open_none": {
+     "k": 11,
+     "n": 48,
+     "rate": 0.22916666666666666
+    },
+    "rule_name_facts": {
+     "k": 8,
+     "n": 46,
+     "rate": 0.17391304347826086
+    },
+    "open_name": {
+     "k": 33,
+     "n": 48,
+     "rate": 0.6875
+    },
+    "open_cross_bio": {
+     "k": 7,
+     "n": 48,
+     "rate": 0.14583333333333334
+    },
+    "rule_bio_noname": {
+     "k": 6,
+     "n": 48,
+     "rate": 0.125
+    },
+    "open_cross_name": {
+     "k": 3,
+     "n": 48,
+     "rate": 0.0625
+    },
+    "open_name_facts": {
+     "k": 38,
+     "n": 48,
+     "rate": 0.7916666666666666
+    },
+    "open_bio_noname": {
+     "k": 27,
+     "n": 48,
+     "rate": 0.5625
+    },
+    "rule_cross_name": {
+     "k": 0,
+     "n": 48,
+     "rate": 0.0
+    },
+    "rule_none": {
+     "k": 0,
+     "n": 48,
+     "rate": 0.0
+    }
+   },
+   "contrasts": {
+    "rule: thickening (name_bio - cross_bio) - (name - cross_name)": {
+     "diff": -0.37002775208140604,
+     "lo": -2.898550724637683,
+     "hi": 1.4492753623188415
+    },
+    "rule: name - cross_name": {
+     "diff": 17.391304347826086,
+     "lo": 0.0,
+     "hi": 52.17391304347826
+    },
+    "rule: name_bio - cross_bio": {
+     "diff": 17.02127659574468,
+     "lo": 0.0,
+     "hi": 51.06382978723404
+    },
+    "rule: name_facts - name": {
+     "diff": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "rule: name_bio - name": {
+     "diff": -0.37002775208140604,
+     "lo": -2.898550724637683,
+     "hi": 1.4492753623188415
+    },
+    "rule: bio_noname - none": {
+     "diff": 12.5,
+     "lo": 0.0,
+     "hi": 37.5
+    },
+    "rule: name_bio - bio_noname": {
+     "diff": 4.5212765957446805,
+     "lo": 0.0,
+     "hi": 13.563829787234038
+    },
+    "rule: cross_bio - cross_name": {
+     "diff": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "open: thickening (name_bio - cross_bio) - (name - cross_name)": {
+     "diff": -4.166666666666674,
+     "lo": -20.833333333333336,
+     "hi": 12.5
+    },
+    "open: name - cross_name": {
+     "diff": 62.5,
+     "lo": 33.33333333333333,
+     "hi": 89.58333333333334
+    },
+    "open: name_bio - cross_bio": {
+     "diff": 58.33333333333333,
+     "lo": 29.166666666666664,
+     "hi": 85.41666666666666
+    },
+    "open: name_facts - name": {
+     "diff": 10.416666666666663,
+     "lo": 2.083333333333337,
+     "hi": 18.75
+    },
+    "open: name_bio - name": {
+     "diff": 4.1666666666666625,
+     "lo": -10.416666666666663,
+     "hi": 18.75
+    },
+    "open: bio_noname - none": {
+     "diff": 33.333333333333336,
+     "lo": 8.333333333333337,
+     "hi": 64.58333333333334
+    },
+    "open: name_bio - bio_noname": {
+     "diff": 16.666666666666664,
+     "lo": 0.0,
+     "hi": 37.5
+    },
+    "open: cross_bio - cross_name": {
+     "diff": 8.333333333333334,
+     "lo": 0.0,
+     "hi": 20.833333333333332
+    }
+   }
+  },
+  "cap": {
+   "rates": {
+    "rule_cross_bio": {
+     "k": 5,
+     "n": 48,
+     "rate": 0.10416666666666667
+    },
+    "rule_name_facts": {
+     "k": 30,
+     "n": 47,
+     "rate": 0.6382978723404256
+    },
+    "open_name": {
+     "k": 46,
+     "n": 48,
+     "rate": 0.9583333333333334
+    },
+    "open_none": {
+     "k": 25,
+     "n": 48,
+     "rate": 0.5208333333333334
+    },
+    "open_bio_noname": {
+     "k": 45,
+     "n": 48,
+     "rate": 0.9375
+    },
+    "open_name_facts": {
+     "k": 47,
+     "n": 48,
+     "rate": 0.9791666666666666
+    },
+    "rule_bio_noname": {
+     "k": 30,
+     "n": 48,
+     "rate": 0.625
+    },
+    "rule_cross_name": {
+     "k": 4,
+     "n": 48,
+     "rate": 0.08333333333333333
+    },
+    "rule_name": {
+     "k": 26,
+     "n": 48,
+     "rate": 0.5416666666666666
+    },
+    "open_cross_bio": {
+     "k": 30,
+     "n": 48,
+     "rate": 0.625
+    },
+    "rule_name_bio": {
+     "k": 36,
+     "n": 48,
+     "rate": 0.75
+    },
+    "open_cross_name": {
+     "k": 22,
+     "n": 48,
+     "rate": 0.4583333333333333
+    },
+    "open_name_bio": {
+     "k": 46,
+     "n": 48,
+     "rate": 0.9583333333333334
+    },
+    "rule_none": {
+     "k": 0,
+     "n": 48,
+     "rate": 0.0
+    }
+   },
+   "contrasts": {
+    "rule: thickening (name_bio - cross_bio) - (name - cross_name)": {
+     "diff": 18.750000000000007,
+     "lo": -2.083333333333337,
+     "hi": 43.75
+    },
+    "rule: name - cross_name": {
+     "diff": 45.83333333333333,
+     "lo": 16.666666666666664,
+     "hi": 77.08333333333334
+    },
+    "rule: name_bio - cross_bio": {
+     "diff": 64.58333333333334,
+     "lo": 35.416666666666664,
+     "hi": 91.66666666666666
+    },
+    "rule: name_facts - name": {
+     "diff": 9.663120567375893,
+     "lo": -9.21985815602836,
+     "hi": 31.250000000000007
+    },
+    "rule: name_bio - name": {
+     "diff": 20.833333333333336,
+     "lo": 2.0833333333333313,
+     "hi": 43.75000000000001
+    },
+    "rule: bio_noname - none": {
+     "diff": 62.5,
+     "lo": 29.166666666666668,
+     "hi": 89.58333333333334
+    },
+    "rule: name_bio - bio_noname": {
+     "diff": 12.5,
+     "lo": 0.0,
+     "hi": 25.0
+    },
+    "rule: cross_bio - cross_name": {
+     "diff": 2.0833333333333344,
+     "lo": 0.0,
+     "hi": 6.25
+    },
+    "open: thickening (name_bio - cross_bio) - (name - cross_name)": {
+     "diff": -16.666666666666664,
+     "lo": -22.916666666666675,
+     "hi": -8.333333333333337
+    },
+    "open: name - cross_name": {
+     "diff": 50.0,
+     "lo": 22.916666666666675,
+     "hi": 75.0
+    },
+    "open: name_bio - cross_bio": {
+     "diff": 33.333333333333336,
+     "lo": 10.416666666666663,
+     "hi": 56.25
+    },
+    "open: name_facts - name": {
+     "diff": 2.083333333333326,
+     "lo": -6.25,
+     "hi": 12.5
+    },
+    "open: name_bio - name": {
+     "diff": 0.0,
+     "lo": -12.5,
+     "hi": 12.5
+    },
+    "open: bio_noname - none": {
+     "diff": 41.666666666666664,
+     "lo": 10.416666666666663,
+     "hi": 75.05208333333304
+    },
+    "open: name_bio - bio_noname": {
+     "diff": 2.083333333333337,
+     "lo": 0.0,
+     "hi": 6.25
+    },
+    "open: cross_bio - cross_name": {
+     "diff": 16.666666666666668,
+     "lo": 6.25,
+     "hi": 27.083333333333336
+    }
+   }
+  }
+ }
+}

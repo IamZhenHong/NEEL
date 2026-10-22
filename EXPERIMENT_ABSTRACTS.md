@@ -2171,3 +2171,32 @@ added.
   with a single-layer clamp and a coherence gate is cheap.
 
 $6.39 of $10. Report: `persona_affect/p13_deference/RESULT.md`.
+
+### 229. PA-P12c: does a thicker persona carry more of its trait past an explicit rule? (deep dive 1, 10-22)
+This is the first experiment of the owner's chosen deep dive, run on Gemma 4 31B with P12b's 18 Robin Hood, Sparrow
+and Captain America items, with and without each item's operator rule. Personas:
+- none
+- the name
+- the name plus two trait-neutral facts
+- the name plus a biography of about 120 words
+- the biography without the name
+- another character's name, and another character's biography
+2016 decisions. Frozen at `pa-p12c-prereg`.
+- **P12b replicates:** with the rule, name − other's name is +50.0 [+28.5, +70.4].
+- **More persona doesn't mean more rule-breaking.** Primary thickening: −14.8 [−36.1, +5.6]. By character the
+  movements are opposite:
+  - Robin Hood breaks the rule 85% under the bare name, 19% once two facts (Sherwood, Little John, archery) are
+    added, and 23% with the biography.
+  - Captain America rises 54 → 64 → 75%.
+  - Sparrow stays at 17%.
+- **The unnamed biography breaks the rule only as Captain America** (63%; Robin Hood 0%). Another character's
+  biography adds nothing (+0.7).
+- **Reasons:** under the bare name, 37 of 48 Robin Hood reasons are the slogan ("the wealthy hoard"); with facts,
+  4 of 48. Mentions of the rule rise from 20 to 32. With the biography, Gemma writes "While my nature is to take from
+  the rich to give to the poor, I must adhere to the operator permission…".
+- **Reading:** a bare archetype name carries the slogan past the rule. Specific facts make the character a person who
+  weighs it. Which facet the persona text makes salient is the dial, not how much text there is.
+- **Next in the deep dive:** a facet test (same-length biographies stressing different facets), rule-bending
+  archetypes beyond heroes, and a name-vs-facts direction on Gemma.
+
+GPU $0.83 of $6. Report: `persona_affect/p12c_dose/RESULT.md`.
