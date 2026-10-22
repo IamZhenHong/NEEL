@@ -6,7 +6,8 @@ them by id (the job's "case" and "cond" fields), so a jobs.jsonl that names them
 `episode.run_batch` here and on the pod, where `pod_gen` imports the same module before it starts vigilante's runner.
 
 Each job dict must also carry "fmt" equal to the pod's --fmt ("qwen" for Qwen, "gemma4" for Gemma 4): the episode parser
-reads the job's field, the template conversion reads the flag.
+reads the job's field, the template conversion reads the flag. launch_gen.sh checks this, and that every case and cond
+id is registered, with `pod_gen --check` before it launches a pod. Jobs for a frontier model (orbackend) carry "qwen".
 """
 from __future__ import annotations
 
