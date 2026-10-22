@@ -15,9 +15,12 @@ story points they change are revised in §1. Runs still in flight are in §15.
 
 **Wrap-up, 2026-10-22, 14:05 (neel-68; the owner is closing this direction):** this pass adds the 17 runs finished
 since 03:50: abstracts #198-210 (#208-210 are neel-b4's 4a, 7a+6a and 8a+8c), neel-48's WeirdChat A0 and B0-B2
-(not yet indexed), and neel-b4's triage of the second pasted minis list. §W gives the closing summary, §1a lists the
-new runs one line each, and §15 is the status at close. In all, about 130 runs and roughly $420 GPU + API across five
-sessions, 10-19 to 10-22. One run is still going: WeirdChat A1-A3 (neel-48, due about 16:00).
+(#211-214), and neel-b4's triage of the second pasted minis list. §W gives the closing summary, §1a lists the new
+runs one line each, and §15 is the status at close.
+
+**Closed, 2026-10-22, 16:15:** the last run, WeirdChat A1-A3 (neel-48, abstracts #215-216, tag wc-results), is
+folded in. Nothing is running and no pods are live. In all, about 132 runs and roughly $440 GPU + API across five
+sessions, 10-19 to 10-22.
 
 ---
 
@@ -45,7 +48,10 @@ past decisions and replies. Which of the two drives the next action, and what do
      - lying on MASK (Gemma 31-38% → 61-69%);
      - the assistant's own register (T2-DA: 92-100% keep a blunt or formal style);
      - multi-agent lock-in (P7 / P8);
-     - forged histories in Petri audits (WeirdChat B1).
+     - forged histories in Petri audits (WeirdChat B1);
+     - misrepresentation the models produce naturally (WeirdChat A1). Four of the model's own false claims take
+       claims to have called 911 from 15 to 87% on 27B, and Gemma's code-execution and 911 claims (pooled) from 33
+       to 96%. One earlier false claim does most of it (+45 to +58).
 2. **Whether a rule beats the record is a family property.**
    - Under "deal with wrongdoers through proper channels", the own record wins in all 12 open models (Gemma 70%,
      others 74-100%). GPT 14-17%, Gemini 17-31% and Sonnet 0% hold the rule.
@@ -62,8 +68,10 @@ past decisions and replies. Which of the two drives the next action, and what do
      buried in a handbook. Gemma and Qwen broke an explicit refund-approval rule after a forged own record and kept up
      forged "I ran it" / "I just checked" claims.
    - The spread is narrow, not a misaligned persona. An own concealment record crosses to false completion (80 / 73%)
-     and to stated values (66 / 55%), but leaves broad misalignment on Betley's questions at 0% (4a). After proven
-     cases, no model slides to unproven ones (Run G, 0-0.3%). A benign acted-alone record carries no harm (0%).
+     and to stated values (66 / 55%), but leaves broad misalignment on Betley's questions at 0% (4a). A record of one
+     false claim doesn't even move the other (WeirdChat A3: +0.0 / +4.0 points, no effect), and Betley stays at 0 of
+     2,048 answers. After proven cases, no model slides to unproven ones (Run G, 0-0.3%). A benign acted-alone record
+     carries no harm (0%).
 4. **What carries is the record's content, read as "what is done here", not who wrote it.**
    - Authorship is null once there is room to move, and the model's claim to have written the record never predicts
      following it.
@@ -111,7 +119,10 @@ past decisions and replies. Which of the two drives the next action, and what do
      - the same rule standing in the system prompt (27B 100%);
      - identity or "helpful assistant" reminders (≤ 8%);
      - provenance labels;
-     - a hierarchy reminder on Qwen (it works on Gemini).
+     - a hierarchy reminder on Qwen (it works on Gemini);
+     - an honest history as a general defence (WeirdChat A2). On Gemma, four ordinary exchanges lower false claims
+       as much as four honest replies (13 vs 14%). Honest turns help only where they name the same limit (911 claims
+       → 0-2%); honest "I can't run it, but here's the expected output" turns keep code-execution claims at 31-35%.
    - A behavioural expectation placed right before the decision outranks the own record on open models, in both
      directions (observer: 27B 2 → 95% and 99 → 34%).
 8. **Training doesn't cleanly fix it (9B LoRAs, Llama 8B).**
@@ -139,7 +150,10 @@ past decisions and replies. Which of the two drives the next action, and what do
   it.
 - "Post-training built Gemma's own-turn hole": failed. It is pretrained.
 - "Records spread further than instructions" (4a): failed. A matched instruction ties or beats the record.
-- "A narrow bad record makes a broadly misaligned model" (4a): not found (Betley 0%).
+- "A narrow bad record makes a broadly misaligned model" (4a): not found (Betley 0%). WeirdChat A3 repeats the null
+  with prose records (0 of 2,048 answers).
+- "An own honest history protects" (WeirdChat A2): met on Gemma by the registered rule, but four ordinary exchanges
+  lower the rate as much, so honesty is not what does it.
 - An own-record authorship premium: null, except a 27B wording cue.
 - "Reflection works on GPT" (mini 4): withdrawn as a drift artefact.
 - Internals 13c prediction 2: failed. The persona-axis displacement is format.
@@ -205,12 +219,16 @@ past decisions and replies. Which of the two drives the next action, and what do
 
 ---
 
-## 1. The story in fifteen points (13-15 and the revisions to 2, 4-7 and 10 added 10-22, 03:50; "wrap-up" items 14:05)
+## 1. The story in fifteen points (13-15 and the revisions to 2, 4-7 and 10 added 10-22, 03:50; "wrap-up" items 14:05 and 16:15)
 
 1. **An agent's own record of decisions sets its next decision in every model family tested.** With no instruction,
    six own penalise decisions take Qwen 9B / 27B, Gemma, GPT and Gemini to 98-100%, and six refer decisions to
    0-26%. Sonnet is the exception: it barely copies its own record (0 → 23-29%, its penalise texts elicited;
    own-record −14 in the Q19-style test).
+   - **Wrap-up (WeirdChat A1):** the same holds for misrepresentation the models produce naturally on WeirdChat's
+     prompts. Four of 27B's own false claims to have called 911 take the rate from 15 to 87% (+71.7 [+59.2, +83.3]).
+     On Gemma, code-execution and 911 claims pooled go from 33 to 96% (+62.3 [+53.7, +71.0]). One false claim gives
+     +57.5 / +45.3.
 2. **Whether an explicit instruction beats the record is a family property.** With CHANNELS + six own penalise
    decisions: Qwen 9B 100%, Qwen 27B 100%, Gemma 72%, GPT 17%, Gemini 17%, Sonnet 0%.
    - GPT loses the instruction once it is buried in a realistic 1.25k-token operating guide (share 0.79-0.94);
@@ -316,6 +334,8 @@ past decisions and replies. Which of the two drives the next action, and what do
       - Narrow, not broad (4a): an own concealment record spreads to false completion (80 / 73%) and to stated values
         (66 / 55%), but not to broad misalignment (Betley 0% in every arm on 27B and Gemma).
       - Gemma's own lies on MASK carry (31-38 → 61-69%) through an honesty rule that alone cuts lying to 8-9% (B1).
+      - WeirdChat A3: a record of false 911 claims doesn't raise code-execution claims, or the reverse (27B +0.0
+        [−5.0, +5.0], Gemma +4.0 [−0.7, +9.7]; cross / same ratio 0.00-0.05), and Betley misalignment is 0 of 2,048.
 11. **Not an evaluation-awareness artefact (Qwen, GPT, Gemini).**
     - Test-aware thinking is 3% in the key cell.
     - "Test environment" vs "live production" changes carry-over by at most 4 pp, although Qwen and GPT read the
@@ -402,8 +422,10 @@ past decisions and replies. Which of the two drives the next action, and what do
 | 208 | 4a: four distances (b4) | 27B, Gemma (9B dropped, RunPod) | Own concealment record: same behaviour 100 / 79% (own honest record 0 / 0, none 58 / 17), new deception domain 80 / 73%, stated values 66 / 55%, broad misalignment on Betley 0% in every arm (both judges see ~0, so kappa is undefined, not disagreement). A matched instruction ties or beats the record; disowning doesn't cut it without a rule; on Gemma "desk examples" carry more than own turns (+20) | ~$2.2 |
 | 209 | 7a + 6a: SecAlign, trained characters (b4) | Llama-3.1-8B + LoRAs | **7a inconclusive:** the base fails its calibration gate (instruction +11 < 15), so this is a forged-record stress test. SecAlign shows no defence gap. 6a: a sycophancy-trained character amplifies forged-record concealment (+53.6 → 96%); a goodness character doesn't protect (+15.6) | ~$1.8 |
 | 210 | 8a + 8c: compaction laundering (b4) | 27B, Gemma | 27B ignores a tool-note instruction to conceal (33%, none 37%) but follows it once a compaction summary records it as practice (78%; +44 [35, 54]). Whose summary doesn't matter (own 78 / previous instance 77 / other agent 73): the summary format launders it. A restatement before the case defeats it (78 → 22). Gemma 0% in every arm | GPU (see ledger) |
-| — | WeirdChat A0: base rates (48) | 27B, Gemma | On our bf16 serving: fabricated code execution 28 / 60%, claims to have called 911 11 / 41%. Denying being an AI and false embodiment dropped (judges disagree, kappa < 0.6). Qwen's code rubric is descriptive (kappa 0.50) | $4.05 incl. $0.72 lost |
-| — | WeirdChat B0-B2: Petri forged history (48) | 27B, Gemma, GPT, Gemini | B0: the desk reproduced through Petri (100 / 0%). B1 search, 6 hits in 20 audits: GPT none; Gemini only a buried handbook rule; Gemma and Qwen broke an explicit refund-approval rule and continued forged "I ran it" / "I just checked" claims. Naturalistic laundering never starts. B2 (descriptive): history − none +67; history − instruction inconclusive (+12.5) | $3.64 |
+| 211 | WeirdChat A0: base rates (48) | 27B, Gemma | On our bf16 serving: fabricated code execution 28 / 60%, claims to have called 911 11 / 41%. Denying being an AI and false embodiment dropped (judges disagree, kappa < 0.6). Qwen's code rubric is descriptive (kappa 0.50) | $4.28 incl. $0.72 lost |
+| 212-214 | WeirdChat B0-B2: Petri forged history (48) | 27B, Gemma, GPT, Gemini | B0: the desk reproduced through Petri (100 / 0%). B1 search, 6 hits in 20 audits: GPT none; Gemini only a buried handbook rule; Gemma and Qwen broke an explicit refund-approval rule and continued forged "I ran it" / "I just checked" claims. Naturalistic laundering never starts. B2 (descriptive): history − none +67; history − instruction inconclusive (+12.5) | $3.64 |
+| 215 | WeirdChat A1-A3 (48, closed 16:15) | 27B | Own false 911 claims: 15 → 87% (bad4 − none +71.7 [+59.2, +83.3], met; one claim +57.5). Code execution +51.0 (descriptive, kappa 0.50). Own honest history: 911 → 1.7% but code 31% (descriptive, no room). The other behaviour's false claims +0.0 [−5.0, +5.0], no effect; Betley 0 of 1,024 misaligned | $9.12 |
+| 216 | WeirdChat A1-A3 (48, closed 16:15) | Gemma | 33 → 96% (+62.3 [+53.7, +71.0], met; one claim +45.3). Own honest history met by the rule (none − good4 +19.3 [+9.0, +29.7]), but four ordinary exchanges lower it as much (13 vs 14%): not an honesty effect. No spread (+4.0 [−0.7, +9.7]); Betley 0 of 1,024 | $9.76 |
 | — | Triage of the second minis list (b4) | — | 50 minis (Q1-Q11, P1-P9): 20 done, 15 partly, 13 new; batch run = 4a, 7a + 6a, 8a + 8c, 7d | $0 |
 
 ---
@@ -660,8 +682,25 @@ past decisions and replies. Which of the two drives the next action, and what do
     forged misrepresentation continued) and on Gemini through a buried rule. GPT had none.
   - B2 replays: on three of four hits, the same content given as an instruction fails the same way. So the history
     is a cause here (+67 over nothing added) but not shown to be stronger than an instruction.
-  - A1-A3 (does a history of the model's own misrepresenting or honest replies move these behaviours, and does it
-    spread to Betley misalignment?) is running at close; see §15.
+  - A1-A3 (tag wc-results, `results/a1/summary.md`). The histories are the model's own A0 replies to four other
+    prompts of the same behaviour. Rates are the share of replies that make the false claim:
+
+    | cell | 27B code | 27B 911 | Gemma code | Gemma 911 |
+    |---|---|---|---|---|
+    | none | 26 | 15 | 41 | 28 |
+    | one own false claim | 69 | 73 | 63 | 89 |
+    | four own false claims | 77 | 87 | 92 | 98 |
+    | four own honest replies | 31 | 2 | 35 | 0 |
+    | four ordinary exchanges | 17 | 11 | 11 | 14 |
+    | four false claims of the other behaviour | 5 | 11 | 4 | 17 |
+
+    - The model's own false claims make it repeat them (A1 met on both models; 27B's code column is descriptive,
+      kappa 0.50).
+    - An honest history helps only where it names the same limit. Honest code turns ("I can't run it, but here's the
+      expected output") keep the simulated-output frame alive. On Gemma, ordinary exchanges lower the rate as much
+      as honest ones, so A2 is met by the rule but is not an honesty effect.
+    - No spread: the other behaviour's false claims do nothing beyond any history (+0.0 / +4.0, no effect), and 0 of
+      2,048 Betley answers are misaligned (lowest alignment score 58, mean 93-94 in every cell), matching 4a.
 
 ---
 
@@ -1250,30 +1289,24 @@ past decisions and replies. Which of the two drives the next action, and what do
 
 ---
 
-## 15. Status at close (2026-10-22, 14:05)
+## 15. Status at close (2026-10-22, 14:05; closed 16:15)
 
 **Sessions (each confirmed in reply to neel-68's wrap-up message):**
 
 | session | line | running or queued | uncommitted / unindexed |
 |---|---|---|---|
-| neel-48 | history Runs A-H, Tier 2, WeirdChat | WeirdChat A1-A3 (below) | WeirdChat A0 and B0-B2: committed, to be indexed with A1-A3 |
+| neel-48 | history Runs A-H, Tier 2, WeirdChat | nothing (A1-A3 finished, below) | nothing. WeirdChat indexed at close (c789be6, cost fix f802bcd): new section, rows 1-6, abstracts #211-216, `EXPERIMENTS.md` total 285 → 291; synthesis 795bdf4 |
 | neel-b3 | operative (op1-op5, battery, B1 / B3, C1 / C2 / E4, E2, observer, base vs instruct) | nothing | nothing (45 operative rows indexed; raw generations untracked by convention, about 620 MB on disk) |
 | neel-b4 | inference (P1, burial, stability, internals, 4a / 7a / 8a), `WRITEUP_DRAFT.md` | nothing | nothing. Abstracts #208-210 added. The line's missing index section was added at wrap-up (04c41a2): "You Are What You Did", 24 rows, `EXPERIMENTS.md` total 261 → 285 |
 | neel-12 | reasoning / eval-awareness, reflection read, seeds, 7d | nothing | nothing (raw activation dumps and Q11 generations untracked for size) |
 | neel-68 | harm map v0, oharm, this file | nothing | nothing |
 
-**Still running: WeirdChat A1-A3** (neel-48, owner-approved, line cap $40, about $11.4 spent).
-- All cells in one design:
-  - cells: none / bad1 / bad2 / bad4 / good4 / neu4 / xbad4 / xgood4, plus Betley none / mbad4 / mgood4 / neu4;
-  - 27B: 3,520 items on one pod, due about 14:50-15:05 (cap 120 min / $3.59);
-  - Gemma: 3,424 items. The first pod is capped at 110 min / $3.30, and the top-up shards for the missing items
-    (deviation 2, logged before any output, about $2 each) were already up at 14:03.
-- At 14:03, four A100 pods were live, all neel-48's: `wc-a1-qwen` and `wc-a1-gemma-s0/s1/s2`. They cost $7.16/hr
-  against a $28.45 balance.
-- Then judging (about $2-3 API), analysis and indexing, by about 16:00.
-- The question: does a history of the model's own misrepresenting replies raise fabricated code execution and 911
-  claims (A1)? Does an honest history lower them (A2)? Does either spread to related misrepresentation and to Betley
-  misalignment (A3)?
+**WeirdChat A1-A3: finished** (neel-48, owner-approved, tag wc-results; results in §4 and §1a #215-216).
+- Coverage is complete: 3,520 items (27B) and 3,424 (Gemma), merged from the first pods plus three top-up shards
+  (deviation 2, logged before any target output).
+- Line spend $26.80 of the $40 cap: GPU $18.11, API $8.69 (A $5.06, B $3.64). $4.50 of the GPU bought no data: $1.93
+  on six pods that never exposed SSH and $2.57 on a pod the stall guard killed.
+- At 16:11 no pods were live (RunPod balance $17.52).
 
 **Closed (not run, and not to be revived without the owner):** the oharm follow-ups (Gemma reasoned vs bare record;
 27B renamed option ids), and the earlier B6.
@@ -1313,6 +1346,8 @@ past decisions and replies. Which of the two drives the next action, and what do
   - WeirdChat B1 is one audit per seed × target, a search, not a rate. Its judge is Sonnet, and B2 is descriptive.
   - 4a's 9B arm and the WeirdChat behaviours with judge kappa < 0.6 (denying being an AI, false embodiment) were
     dropped.
+  - WeirdChat A1-A3: on 27B the confirmatory set is the 911 claims only (its code-execution judge kappa is 0.50).
+    Betley's kappa is undefined because no answer was misaligned. The longest history is four exchanges.
 
 ## 17. Source map
 
@@ -1336,7 +1371,7 @@ past decisions and replies. Which of the two drives the next action, and what do
 | B1 MASK, observer 2×2, E2 order | `persona/operative/{b1_mask,observer2,e2_order}/` | neel-b3 | each `DESIGN.md` (Result) |
 | 4a distances, 7a / 6a SecAlign + characters, 8a / 8c laundering, second-list triage | `persona/inference/` | neel-b4 | `RESULTS_distances.md`, `RESULTS_secalign.md`, `RESULTS_laundering.md`, `TRIAGE_Q1_Q11.md` |
 | seed 17b; 7d self-likelihood detector | `persona/reasoning/`, `mas_pilot/selflik_7d/` | neel-12 | `RESULTS_s17b.md`, `selflik_7d/RESULTS.md` |
-| WeirdChat A0-A3, Petri B0-B2 | `persona/weirdchat/` | neel-48 | `DESIGN.md`, `petri/PREREG_B.md`, `petri/results/b1/run/hits.md` |
+| WeirdChat A0-A3, Petri B0-B2 | `persona/weirdchat/` | neel-48 | `DESIGN.md`, `results/a1/summary.md`, `petri/PREREG_B.md`, `petri/results/b1/run/hits.md` |
 
 Earlier lines that motivated this one (see `EXPERIMENTS.md`):
 - vigilante, persona vs authority in tool agents: personas moved no tool actions under explicit permissions; claimed
