@@ -1,0 +1,7 @@
+Fetching 16 files:   0%|          | 0/16 [00:00<?, ?it/s]Fetching 16 files:  88%|████████▊ | 14/16 [00:00<00:00, 93.89it/s]Fetching 16 files: 100%|██████████| 16/16 [00:00<00:00, 83.59it/s]
+[c1e4-merge] Pself: 200 weights merged into /root/merged/Pself (207s)
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 5556.59it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 5415.49it/s]
+[c1e4-merge] check {'arm': 'Pself', 'weights': 200, 'confident_positions': 73, 'top1_agree_confident': 1.0, 'mean_abs_dlogit_merge': 0.0373, 'mean_abs_dlogit_adapter': 0.3843}

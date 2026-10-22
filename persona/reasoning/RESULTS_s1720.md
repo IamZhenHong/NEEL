@@ -151,6 +151,8 @@ below):**
   - This is an exploratory side finding, robust under both judges. It cannot say whether any SFT does this or this
     teacher's style does: E4, the only arm not trained on the teacher, is trained on exactly the opposite lesson. An
     own-words placebo (the base 9B's answers to the same 800 prompts) would separate the two.
+  - **Answered by seed 17b** (`RESULTS_s17b.md`): an own-words placebo of comparable dose stays at the base level
+    (3.3% vs P 44.6%). The erosion comes from the teacher's answers, not from fine-tuning as such.
 - **B2 (S17d) fails in the "wrong" direction, also because of the placebo.** The placebo concedes less than the base
   model (INSTR_C 58.5 vs 91.7, both judges). E4, trained on the base model's own words, stays at the base level
   (93.9). So on these benchmarks E4 − P mixes E4's lesson with the teacher drift of P. Against the base, E4 shows no B2

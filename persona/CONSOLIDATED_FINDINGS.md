@@ -461,6 +461,9 @@ story points they change are revised in §1. Runs still in flight are in §15.
       boundary rule (base 3.8 → P 44.6%, C1 35.9; rule alone 0.6%). It also concedes less on SYCON under an
       instruction to agree. E4, trained on the base model's own words, stays base-like. So arm − P is clean on the
       desk cells (P ≈ base there) but not on these benchmarks.
+    - **Seed 17b (`reasoning/RESULTS_s17b.md`)** settles the cause. An own-words placebo stays at the base level
+      (3.3% vs base 4.9%, P 44.6%; SYCON "agree" 96 vs P 59). It used the same prompts, the same recipe and a
+      comparable dose (output change 63% of P's). So it is the gpt-oss teacher's answers, not fine-tuning as such.
 
 ---
 
@@ -710,9 +713,10 @@ story points they change are revised in §1. Runs still in flight are in §15.
 - **E4's effect is not a single direction at the decision point (seed 20).** The E4 − placebo state difference is
   about 4x C1's and unrelated to it (cos 0.14), but steering it into the placebo moves the record's pull by −0.6 to
   −4.3 (random −0.1 to −3.8).
-- **A benign distillation SFT opened the boundary rule to the model's own record:** base 3.8% → placebo 44.6%,
-  exploratory. Whether any SFT does this, or this teacher's style, is untested. An own-words placebo would separate
-  them.
+- **A benign distillation SFT opened the boundary rule to the model's own record:** base 3.8% → placebo 44.6%.
+  Seed 17b shows it is the teacher, not fine-tuning as such. Training on the model's own answers to the same prompts
+  (comparable dose) stays at 3.3%. Both gpt-oss-distilled adapters do it (P 44.6, C1 35.9) on unrelated data. Which
+  property of the answers is responsible, and whether any foreign teacher would do the same, is open.
 
 **Reading.**
 - The stated conclusion drives the action in every model (no penalising after an admission).
@@ -841,6 +845,10 @@ story points they change are revised in §1. Runs still in flight are in §15.
 - **P5:** not done (reads pod OOM twice).
 - **P7-P10b:** §5 (content binds, redundantly).
 - **P9** (forged earlier decision): drafted, never run; rr4 and the forged-record cells cover it.
+- **7d (self-likelihood forgery detector, `selflik_7d/`, no compute):** Qwen3.6-27B's own length-corrected likelihood
+  catches forgeries written by another model (paraphrase AUC 0.94, rewrite from the facts 0.79) and its own
+  paraphrase of foreign text (0.96). It misses its own rewrite from the facts (0.64; flagged 12% at 14% own-FPR).
+  This is Neel's prediction. That blind-spot forgery is also the one that did not bind in P8.
 
 ---
 

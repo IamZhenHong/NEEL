@@ -1,0 +1,1635 @@
+{
+ "arms": [
+  "bench",
+  "anchor",
+  "P",
+  "C1",
+  "E4",
+  "Pself"
+ ],
+ "b8_rates_consensus": {
+  "bench|INSTR_R": 100.0,
+  "bench|INSTR_R_RULE": 9.6,
+  "bench|REC_B": 1.3,
+  "bench|REC_R": 95.9,
+  "bench|REC_R_RULE": 3.8,
+  "bench|RULE": 0.0,
+  "bench|none": 50.0,
+  "anchor|INSTR_R": 100.0,
+  "anchor|INSTR_R_RULE": 11.3,
+  "anchor|REC_B": 2.0,
+  "anchor|REC_R": 95.3,
+  "anchor|REC_R_RULE": 4.9,
+  "anchor|RULE": 0.0,
+  "anchor|none": 51.3,
+  "P|INSTR_R": 99.4,
+  "P|INSTR_R_RULE": 15.9,
+  "P|REC_B": 2.3,
+  "P|REC_R": 96.5,
+  "P|REC_R_RULE": 44.6,
+  "P|RULE": 0.6,
+  "P|none": 61.9,
+  "C1|INSTR_R": 100.0,
+  "C1|INSTR_R_RULE": 18.8,
+  "C1|REC_B": 2.2,
+  "C1|REC_R": 94.9,
+  "C1|REC_R_RULE": 35.9,
+  "C1|RULE": 0.6,
+  "C1|none": 55.4,
+  "E4|INSTR_R": 100.0,
+  "E4|INSTR_R_RULE": 11.1,
+  "E4|REC_B": 5.6,
+  "E4|REC_R": 81.7,
+  "E4|REC_R_RULE": 1.1,
+  "E4|RULE": 0.0,
+  "E4|none": 39.1,
+  "Pself|INSTR_R": 100.0,
+  "Pself|INSTR_R_RULE": 13.9,
+  "Pself|REC_B": 2.5,
+  "Pself|REC_R": 97.6,
+  "Pself|REC_R_RULE": 3.3,
+  "Pself|RULE": 0.0,
+  "Pself|none": 50.0
+ },
+ "b8 INSTR_R (consensus): Pself - anchor": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 INSTR_R_RULE (consensus): Pself - anchor": [
+  2.6,
+  -3.0,
+  8.3
+ ],
+ "b8 REC_B (consensus): Pself - anchor": [
+  0.6,
+  -0.2,
+  1.9
+ ],
+ "b8 REC_R (consensus): Pself - anchor": [
+  2.3,
+  0.4,
+  4.7
+ ],
+ "b8 REC_R_RULE (consensus): Pself - anchor": [
+  -1.7,
+  -4.5,
+  1.1
+ ],
+ "b8 RULE (consensus): Pself - anchor": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 none (consensus): Pself - anchor": [
+  -1.3,
+  -8.9,
+  6.3
+ ],
+ "b8 INSTR_R (consensus): Pself - P": [
+  0.6,
+  0.0,
+  1.7
+ ],
+ "b8 INSTR_R_RULE (consensus): Pself - P": [
+  -2.0,
+  -10.0,
+  6.0
+ ],
+ "b8 REC_B (consensus): Pself - P": [
+  0.2,
+  -0.8,
+  1.8
+ ],
+ "b8 REC_R (consensus): Pself - P": [
+  1.0,
+  -2.2,
+  4.5
+ ],
+ "b8 REC_R_RULE (consensus): Pself - P": [
+  -41.3,
+  -49.6,
+  -33.2
+ ],
+ "b8 RULE (consensus): Pself - P": [
+  -0.6,
+  -1.7,
+  0.0
+ ],
+ "b8 none (consensus): Pself - P": [
+  -11.9,
+  -21.6,
+  -2.0
+ ],
+ "b8 INSTR_R (consensus): P - anchor": [
+  -0.6,
+  -1.7,
+  0.0
+ ],
+ "b8 INSTR_R_RULE (consensus): P - anchor": [
+  4.6,
+  -2.7,
+  12.1
+ ],
+ "b8 REC_B (consensus): P - anchor": [
+  0.3,
+  -1.7,
+  2.4
+ ],
+ "b8 REC_R (consensus): P - anchor": [
+  1.2,
+  -2.3,
+  5.0
+ ],
+ "b8 REC_R_RULE (consensus): P - anchor": [
+  39.7,
+  31.3,
+  48.2
+ ],
+ "b8 RULE (consensus): P - anchor": [
+  0.6,
+  0.0,
+  1.7
+ ],
+ "b8 none (consensus): P - anchor": [
+  10.6,
+  1.1,
+  20.2
+ ],
+ "b8 INSTR_R (consensus): anchor - bench": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 INSTR_R_RULE (consensus): anchor - bench": [
+  1.8,
+  -2.4,
+  6.1
+ ],
+ "b8 REC_B (consensus): anchor - bench": [
+  0.7,
+  0.0,
+  2.1
+ ],
+ "b8 REC_R (consensus): anchor - bench": [
+  -0.6,
+  -1.9,
+  0.1
+ ],
+ "b8 REC_R_RULE (consensus): anchor - bench": [
+  1.1,
+  0.0,
+  2.8
+ ],
+ "b8 RULE (consensus): anchor - bench": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 none (consensus): anchor - bench": [
+  1.3,
+  -3.8,
+  6.2
+ ],
+ "b8 INSTR_R (consensus): Pself - bench": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 INSTR_R_RULE (consensus): Pself - bench": [
+  4.4,
+  -1.3,
+  10.4
+ ],
+ "b8 REC_B (consensus): Pself - bench": [
+  1.3,
+  -0.0,
+  3.2
+ ],
+ "b8 REC_R (consensus): Pself - bench": [
+  1.7,
+  -0.1,
+  3.9
+ ],
+ "b8 REC_R_RULE (consensus): Pself - bench": [
+  -0.5,
+  -2.9,
+  1.7
+ ],
+ "b8 RULE (consensus): Pself - bench": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 none (consensus): Pself - bench": [
+  0.0,
+  -7.4,
+  7.6
+ ],
+ "b8 INSTR_R (consensus): E4 - Pself": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 INSTR_R_RULE (consensus): E4 - Pself": [
+  -2.8,
+  -8.6,
+  3.0
+ ],
+ "b8 REC_B (consensus): E4 - Pself": [
+  3.0,
+  -0.0,
+  6.5
+ ],
+ "b8 REC_R (consensus): E4 - Pself": [
+  -15.9,
+  -22.6,
+  -9.6
+ ],
+ "b8 REC_R_RULE (consensus): E4 - Pself": [
+  -2.2,
+  -4.4,
+  -0.5
+ ],
+ "b8 RULE (consensus): E4 - Pself": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 none (consensus): E4 - Pself": [
+  -10.9,
+  -18.9,
+  -2.8
+ ],
+ "b8_rates_haiku": {
+  "bench|INSTR_R": 99.5,
+  "bench|INSTR_R_RULE": 7.9,
+  "bench|REC_B": 1.6,
+  "bench|REC_R": 85.8,
+  "bench|REC_R_RULE": 3.7,
+  "bench|RULE": 0.0,
+  "bench|none": 30.0,
+  "anchor|INSTR_R": 100.0,
+  "anchor|INSTR_R_RULE": 10.0,
+  "anchor|REC_B": 1.6,
+  "anchor|REC_R": 85.3,
+  "anchor|REC_R_RULE": 4.7,
+  "anchor|RULE": 0.0,
+  "anchor|none": 32.1,
+  "P|INSTR_R": 92.6,
+  "P|INSTR_R_RULE": 11.6,
+  "P|REC_B": 2.1,
+  "P|REC_R": 73.2,
+  "P|REC_R_RULE": 32.6,
+  "P|RULE": 0.5,
+  "P|none": 34.2,
+  "C1|INSTR_R": 81.6,
+  "C1|INSTR_R_RULE": 13.2,
+  "C1|REC_B": 1.6,
+  "C1|REC_R": 68.9,
+  "C1|REC_R_RULE": 25.3,
+  "C1|RULE": 0.5,
+  "C1|none": 32.6,
+  "E4|INSTR_R": 98.9,
+  "E4|INSTR_R_RULE": 9.5,
+  "E4|REC_B": 4.7,
+  "E4|REC_R": 56.3,
+  "E4|REC_R_RULE": 1.1,
+  "E4|RULE": 0.0,
+  "E4|none": 24.7,
+  "Pself|INSTR_R": 99.5,
+  "Pself|INSTR_R_RULE": 11.6,
+  "Pself|REC_B": 2.1,
+  "Pself|REC_R": 84.2,
+  "Pself|REC_R_RULE": 3.2,
+  "Pself|RULE": 0.0,
+  "Pself|none": 30.0
+ },
+ "b8 INSTR_R (haiku): Pself - anchor": [
+  -0.5,
+  -1.6,
+  0.0
+ ],
+ "b8 INSTR_R_RULE (haiku): Pself - anchor": [
+  1.6,
+  -3.2,
+  6.3
+ ],
+ "b8 REC_B (haiku): Pself - anchor": [
+  0.5,
+  0.0,
+  1.6
+ ],
+ "b8 REC_R (haiku): Pself - anchor": [
+  -1.1,
+  -5.3,
+  3.2
+ ],
+ "b8 REC_R_RULE (haiku): Pself - anchor": [
+  -1.6,
+  -4.2,
+  1.1
+ ],
+ "b8 RULE (haiku): Pself - anchor": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 none (haiku): Pself - anchor": [
+  -2.1,
+  -7.9,
+  3.7
+ ],
+ "b8 INSTR_R (haiku): Pself - P": [
+  6.8,
+  3.2,
+  11.1
+ ],
+ "b8 INSTR_R_RULE (haiku): Pself - P": [
+  0.0,
+  -6.3,
+  6.3
+ ],
+ "b8 REC_B (haiku): Pself - P": [
+  0.0,
+  -1.6,
+  1.6
+ ],
+ "b8 REC_R (haiku): Pself - P": [
+  11.1,
+  5.3,
+  16.8
+ ],
+ "b8 REC_R_RULE (haiku): Pself - P": [
+  -29.5,
+  -36.3,
+  -22.6
+ ],
+ "b8 RULE (haiku): Pself - P": [
+  -0.5,
+  -1.6,
+  0.0
+ ],
+ "b8 none (haiku): Pself - P": [
+  -4.2,
+  -11.6,
+  3.2
+ ],
+ "b8 INSTR_R (haiku): P - anchor": [
+  -7.4,
+  -11.1,
+  -3.7
+ ],
+ "b8 INSTR_R_RULE (haiku): P - anchor": [
+  1.6,
+  -4.2,
+  7.4
+ ],
+ "b8 REC_B (haiku): P - anchor": [
+  0.5,
+  -1.1,
+  2.1
+ ],
+ "b8 REC_R (haiku): P - anchor": [
+  -12.1,
+  -18.4,
+  -6.3
+ ],
+ "b8 REC_R_RULE (haiku): P - anchor": [
+  27.9,
+  21.1,
+  34.7
+ ],
+ "b8 RULE (haiku): P - anchor": [
+  0.5,
+  0.0,
+  1.6
+ ],
+ "b8 none (haiku): P - anchor": [
+  2.1,
+  -4.7,
+  8.9
+ ],
+ "b8 INSTR_R (haiku): anchor - bench": [
+  0.5,
+  0.0,
+  1.6
+ ],
+ "b8 INSTR_R_RULE (haiku): anchor - bench": [
+  2.1,
+  -1.6,
+  5.8
+ ],
+ "b8 REC_B (haiku): anchor - bench": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 REC_R (haiku): anchor - bench": [
+  -0.5,
+  -3.2,
+  2.1
+ ],
+ "b8 REC_R_RULE (haiku): anchor - bench": [
+  1.1,
+  0.0,
+  2.6
+ ],
+ "b8 RULE (haiku): anchor - bench": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 none (haiku): anchor - bench": [
+  2.1,
+  -1.6,
+  5.8
+ ],
+ "b8 INSTR_R (haiku): Pself - bench": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 INSTR_R_RULE (haiku): Pself - bench": [
+  3.7,
+  -1.1,
+  8.9
+ ],
+ "b8 REC_B (haiku): Pself - bench": [
+  0.5,
+  0.0,
+  1.6
+ ],
+ "b8 REC_R (haiku): Pself - bench": [
+  -1.6,
+  -6.3,
+  3.2
+ ],
+ "b8 REC_R_RULE (haiku): Pself - bench": [
+  -0.5,
+  -2.6,
+  1.6
+ ],
+ "b8 RULE (haiku): Pself - bench": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 none (haiku): Pself - bench": [
+  0.0,
+  -5.3,
+  5.8
+ ],
+ "b8 INSTR_R (haiku): E4 - Pself": [
+  -0.5,
+  -1.6,
+  0.0
+ ],
+ "b8 INSTR_R_RULE (haiku): E4 - Pself": [
+  -2.1,
+  -6.8,
+  2.6
+ ],
+ "b8 REC_B (haiku): E4 - Pself": [
+  2.6,
+  0.0,
+  5.3
+ ],
+ "b8 REC_R (haiku): E4 - Pself": [
+  -27.9,
+  -34.7,
+  -21.1
+ ],
+ "b8 REC_R_RULE (haiku): E4 - Pself": [
+  -2.1,
+  -4.2,
+  -0.5
+ ],
+ "b8 RULE (haiku): E4 - Pself": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 none (haiku): E4 - Pself": [
+  -5.3,
+  -11.1,
+  0.5
+ ],
+ "b8_rates_flash": {
+  "bench|INSTR_R": 100.0,
+  "bench|INSTR_R_RULE": 22.6,
+  "bench|REC_B": 11.1,
+  "bench|REC_R": 95.3,
+  "bench|REC_R_RULE": 4.2,
+  "bench|RULE": 0.0,
+  "bench|none": 61.6,
+  "anchor|INSTR_R": 100.0,
+  "anchor|INSTR_R_RULE": 23.7,
+  "anchor|REC_B": 13.7,
+  "anchor|REC_R": 95.3,
+  "anchor|REC_R_RULE": 6.8,
+  "anchor|RULE": 0.0,
+  "anchor|none": 62.1,
+  "P|INSTR_R": 99.5,
+  "P|INSTR_R_RULE": 35.3,
+  "P|REC_B": 24.2,
+  "P|REC_R": 96.3,
+  "P|REC_R_RULE": 56.8,
+  "P|RULE": 2.6,
+  "P|none": 73.7,
+  "C1|INSTR_R": 99.5,
+  "C1|INSTR_R_RULE": 35.8,
+  "C1|REC_B": 20.0,
+  "C1|REC_R": 94.7,
+  "C1|REC_R_RULE": 48.9,
+  "C1|RULE": 1.1,
+  "C1|none": 67.4,
+  "E4|INSTR_R": 100.0,
+  "E4|INSTR_R_RULE": 22.1,
+  "E4|REC_B": 20.5,
+  "E4|REC_R": 85.3,
+  "E4|REC_R_RULE": 2.6,
+  "E4|RULE": 0.5,
+  "E4|none": 53.7,
+  "Pself|INSTR_R": 100.0,
+  "Pself|INSTR_R_RULE": 28.9,
+  "Pself|REC_B": 12.1,
+  "Pself|REC_R": 96.3,
+  "Pself|REC_R_RULE": 5.3,
+  "Pself|RULE": 0.5,
+  "Pself|none": 61.6
+ },
+ "b8 INSTR_R (flash): Pself - anchor": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 INSTR_R_RULE (flash): Pself - anchor": [
+  5.3,
+  -1.6,
+  12.6
+ ],
+ "b8 REC_B (flash): Pself - anchor": [
+  -1.6,
+  -5.8,
+  2.6
+ ],
+ "b8 REC_R (flash): Pself - anchor": [
+  1.1,
+  -1.6,
+  3.7
+ ],
+ "b8 REC_R_RULE (flash): Pself - anchor": [
+  -1.6,
+  -4.7,
+  1.6
+ ],
+ "b8 RULE (flash): Pself - anchor": [
+  0.5,
+  0.0,
+  1.6
+ ],
+ "b8 none (flash): Pself - anchor": [
+  -0.5,
+  -6.3,
+  5.3
+ ],
+ "b8 INSTR_R (flash): Pself - P": [
+  0.5,
+  0.0,
+  1.6
+ ],
+ "b8 INSTR_R_RULE (flash): Pself - P": [
+  -6.3,
+  -15.3,
+  2.6
+ ],
+ "b8 REC_B (flash): Pself - P": [
+  -12.1,
+  -18.4,
+  -5.8
+ ],
+ "b8 REC_R (flash): Pself - P": [
+  0.0,
+  -2.6,
+  2.6
+ ],
+ "b8 REC_R_RULE (flash): Pself - P": [
+  -51.6,
+  -58.4,
+  -44.2
+ ],
+ "b8 RULE (flash): Pself - P": [
+  -2.1,
+  -4.7,
+  0.0
+ ],
+ "b8 none (flash): Pself - P": [
+  -12.1,
+  -18.9,
+  -5.8
+ ],
+ "b8 INSTR_R (flash): P - anchor": [
+  -0.5,
+  -1.6,
+  0.0
+ ],
+ "b8 INSTR_R_RULE (flash): P - anchor": [
+  11.6,
+  3.2,
+  19.5
+ ],
+ "b8 REC_B (flash): P - anchor": [
+  10.5,
+  4.7,
+  16.8
+ ],
+ "b8 REC_R (flash): P - anchor": [
+  1.1,
+  -2.6,
+  4.7
+ ],
+ "b8 REC_R_RULE (flash): P - anchor": [
+  50.0,
+  42.6,
+  57.4
+ ],
+ "b8 RULE (flash): P - anchor": [
+  2.6,
+  0.5,
+  5.3
+ ],
+ "b8 none (flash): P - anchor": [
+  11.6,
+  4.7,
+  18.4
+ ],
+ "b8 INSTR_R (flash): anchor - bench": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 INSTR_R_RULE (flash): anchor - bench": [
+  1.1,
+  -3.2,
+  5.8
+ ],
+ "b8 REC_B (flash): anchor - bench": [
+  2.6,
+  0.0,
+  5.8
+ ],
+ "b8 REC_R (flash): anchor - bench": [
+  0.0,
+  -1.6,
+  1.6
+ ],
+ "b8 REC_R_RULE (flash): anchor - bench": [
+  2.6,
+  0.5,
+  5.3
+ ],
+ "b8 RULE (flash): anchor - bench": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 none (flash): anchor - bench": [
+  0.5,
+  -3.7,
+  4.7
+ ],
+ "b8 INSTR_R (flash): Pself - bench": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 INSTR_R_RULE (flash): Pself - bench": [
+  6.3,
+  -1.1,
+  13.7
+ ],
+ "b8 REC_B (flash): Pself - bench": [
+  1.1,
+  -2.6,
+  5.3
+ ],
+ "b8 REC_R (flash): Pself - bench": [
+  1.1,
+  -1.1,
+  3.2
+ ],
+ "b8 REC_R_RULE (flash): Pself - bench": [
+  1.1,
+  -1.6,
+  4.2
+ ],
+ "b8 RULE (flash): Pself - bench": [
+  0.5,
+  0.0,
+  1.6
+ ],
+ "b8 none (flash): Pself - bench": [
+  0.0,
+  -5.8,
+  6.3
+ ],
+ "b8 INSTR_R (flash): E4 - Pself": [
+  0.0,
+  0.0,
+  0.0
+ ],
+ "b8 INSTR_R_RULE (flash): E4 - Pself": [
+  -6.8,
+  -13.7,
+  0.0
+ ],
+ "b8 REC_B (flash): E4 - Pself": [
+  8.4,
+  3.2,
+  13.7
+ ],
+ "b8 REC_R (flash): E4 - Pself": [
+  -11.1,
+  -16.3,
+  -6.3
+ ],
+ "b8 REC_R_RULE (flash): E4 - Pself": [
+  -2.6,
+  -5.3,
+  0.0
+ ],
+ "b8 RULE (flash): E4 - Pself": [
+  0.0,
+  -1.6,
+  1.6
+ ],
+ "b8 none (flash): E4 - Pself": [
+  -7.9,
+  -13.7,
+  -2.1
+ ],
+ "b2_rates_consensus": {
+  "bench|INSTR_C": 91.7,
+  "bench|INSTR_C_RULE": 63.2,
+  "bench|REC_C": 69.0,
+  "bench|REC_C_RULE": 70.0,
+  "bench|REC_H": 56.4,
+  "bench|RULE": 39.4,
+  "bench|none": 60.7,
+  "anchor|INSTR_C": 93.5,
+  "anchor|INSTR_C_RULE": 75.7,
+  "anchor|REC_C": 74.4,
+  "anchor|REC_C_RULE": 75.0,
+  "anchor|REC_H": 44.7,
+  "anchor|RULE": 40.0,
+  "anchor|none": 64.7,
+  "P|INSTR_C": 58.5,
+  "P|INSTR_C_RULE": 52.9,
+  "P|REC_C": 50.0,
+  "P|REC_C_RULE": 55.6,
+  "P|REC_H": 43.8,
+  "P|RULE": 50.0,
+  "P|none": 43.3,
+  "C1|INSTR_C": 64.3,
+  "C1|INSTR_C_RULE": 34.2,
+  "C1|REC_C": 57.1,
+  "C1|REC_C_RULE": 47.1,
+  "C1|REC_H": 51.7,
+  "C1|RULE": 35.7,
+  "C1|none": 41.9,
+  "E4|INSTR_C": 93.9,
+  "E4|INSTR_C_RULE": 68.3,
+  "E4|REC_C": 69.4,
+  "E4|REC_C_RULE": 50.0,
+  "E4|REC_H": 71.0,
+  "E4|RULE": 44.7,
+  "E4|none": 45.9,
+  "Pself|INSTR_C": 96.0,
+  "Pself|INSTR_C_RULE": 90.0,
+  "Pself|REC_C": 69.0,
+  "Pself|REC_C_RULE": 73.7,
+  "Pself|REC_H": 51.6,
+  "Pself|RULE": 43.9,
+  "Pself|none": 60.6
+ },
+ "b2 INSTR_C (consensus): Pself - anchor": [
+  2.5,
+  -0.1,
+  7.7
+ ],
+ "b2 INSTR_C_RULE (consensus): Pself - anchor": [
+  14.3,
+  2.5,
+  27.9
+ ],
+ "b2 REC_C (consensus): Pself - anchor": [
+  -5.3,
+  -17.8,
+  7.1
+ ],
+ "b2 REC_C_RULE (consensus): Pself - anchor": [
+  -1.3,
+  -15.7,
+  13.3
+ ],
+ "b2 REC_H (consensus): Pself - anchor": [
+  6.9,
+  -9.5,
+  24.3
+ ],
+ "b2 RULE (consensus): Pself - anchor": [
+  3.9,
+  -13.4,
+  20.1
+ ],
+ "b2 none (consensus): Pself - anchor": [
+  -4.1,
+  -17.4,
+  9.0
+ ],
+ "b2 INSTR_C (consensus): Pself - P": [
+  37.5,
+  23.1,
+  52.2
+ ],
+ "b2 INSTR_C_RULE (consensus): Pself - P": [
+  37.1,
+  21.0,
+  53.8
+ ],
+ "b2 REC_C (consensus): Pself - P": [
+  19.0,
+  4.7,
+  34.3
+ ],
+ "b2 REC_C_RULE (consensus): Pself - P": [
+  18.1,
+  -2.7,
+  40.0
+ ],
+ "b2 REC_H (consensus): Pself - P": [
+  7.9,
+  -13.1,
+  30.0
+ ],
+ "b2 RULE (consensus): Pself - P": [
+  -6.1,
+  -22.5,
+  9.3
+ ],
+ "b2 none (consensus): Pself - P": [
+  17.3,
+  -2.0,
+  36.5
+ ],
+ "b2 INSTR_C (consensus): P - anchor": [
+  -34.9,
+  -49.8,
+  -20.9
+ ],
+ "b2 INSTR_C_RULE (consensus): P - anchor": [
+  -22.7,
+  -40.8,
+  -5.2
+ ],
+ "b2 REC_C (consensus): P - anchor": [
+  -24.4,
+  -39.7,
+  -10.5
+ ],
+ "b2 REC_C_RULE (consensus): P - anchor": [
+  -19.4,
+  -39.7,
+  0.6
+ ],
+ "b2 REC_H (consensus): P - anchor": [
+  -1.0,
+  -20.3,
+  18.1
+ ],
+ "b2 RULE (consensus): P - anchor": [
+  10.0,
+  -5.5,
+  25.8
+ ],
+ "b2 none (consensus): P - anchor": [
+  -21.4,
+  -41.4,
+  -2.2
+ ],
+ "b2 INSTR_C (consensus): anchor - bench": [
+  1.8,
+  -7.1,
+  10.9
+ ],
+ "b2 INSTR_C_RULE (consensus): anchor - bench": [
+  12.5,
+  -3.8,
+  29.5
+ ],
+ "b2 REC_C (consensus): anchor - bench": [
+  5.3,
+  -6.5,
+  17.5
+ ],
+ "b2 REC_C_RULE (consensus): anchor - bench": [
+  5.0,
+  -10.4,
+  20.4
+ ],
+ "b2 REC_H (consensus): anchor - bench": [
+  -11.7,
+  -28.2,
+  4.7
+ ],
+ "b2 RULE (consensus): anchor - bench": [
+  0.6,
+  -13.6,
+  15.4
+ ],
+ "b2 none (consensus): anchor - bench": [
+  4.0,
+  -11.5,
+  19.7
+ ],
+ "b2 INSTR_C (consensus): Pself - bench": [
+  4.3,
+  -3.6,
+  12.9
+ ],
+ "b2 INSTR_C_RULE (consensus): Pself - bench": [
+  26.8,
+  12.7,
+  42.1
+ ],
+ "b2 REC_C (consensus): Pself - bench": [
+  0.0,
+  -14.1,
+  14.1
+ ],
+ "b2 REC_C_RULE (consensus): Pself - bench": [
+  3.7,
+  -8.1,
+  15.7
+ ],
+ "b2 REC_H (consensus): Pself - bench": [
+  -4.8,
+  -22.4,
+  13.2
+ ],
+ "b2 RULE (consensus): Pself - bench": [
+  4.5,
+  -9.8,
+  19.2
+ ],
+ "b2 none (consensus): Pself - bench": [
+  -0.1,
+  -16.7,
+  16.0
+ ],
+ "b2 INSTR_C (consensus): E4 - Pself": [
+  -2.1,
+  -9.4,
+  4.4
+ ],
+ "b2 INSTR_C_RULE (consensus): E4 - Pself": [
+  -21.7,
+  -36.9,
+  -7.0
+ ],
+ "b2 REC_C (consensus): E4 - Pself": [
+  0.4,
+  -10.1,
+  11.1
+ ],
+ "b2 REC_C_RULE (consensus): E4 - Pself": [
+  -23.7,
+  -37.8,
+  -10.6
+ ],
+ "b2 REC_H (consensus): E4 - Pself": [
+  19.4,
+  2.5,
+  36.3
+ ],
+ "b2 RULE (consensus): E4 - Pself": [
+  0.8,
+  -15.9,
+  18.3
+ ],
+ "b2 none (consensus): E4 - Pself": [
+  -14.7,
+  -29.4,
+  0.5
+ ],
+ "b2_rates_haiku": {
+  "bench|INSTR_C": 93.0,
+  "bench|INSTR_C_RULE": 72.2,
+  "bench|REC_C": 76.8,
+  "bench|REC_C_RULE": 77.4,
+  "bench|REC_H": 67.3,
+  "bench|RULE": 58.5,
+  "bench|none": 78.2,
+  "anchor|INSTR_C": 94.7,
+  "anchor|INSTR_C_RULE": 83.0,
+  "anchor|REC_C": 82.8,
+  "anchor|REC_C_RULE": 84.9,
+  "anchor|REC_H": 60.4,
+  "anchor|RULE": 54.7,
+  "anchor|none": 77.4,
+  "P|INSTR_C": 68.5,
+  "P|INSTR_C_RULE": 69.8,
+  "P|REC_C": 69.8,
+  "P|REC_C_RULE": 78.2,
+  "P|REC_H": 63.3,
+  "P|RULE": 67.4,
+  "P|none": 64.6,
+  "C1|INSTR_C": 70.6,
+  "C1|INSTR_C_RULE": 51.0,
+  "C1|REC_C": 70.0,
+  "C1|REC_C_RULE": 66.7,
+  "C1|REC_H": 73.1,
+  "C1|RULE": 61.7,
+  "C1|none": 59.6,
+  "E4|INSTR_C": 94.4,
+  "E4|INSTR_C_RULE": 75.0,
+  "E4|REC_C": 78.0,
+  "E4|REC_C_RULE": 61.1,
+  "E4|REC_H": 82.7,
+  "E4|RULE": 58.5,
+  "E4|none": 63.6,
+  "Pself|INSTR_C": 96.4,
+  "Pself|INSTR_C_RULE": 93.0,
+  "Pself|REC_C": 76.8,
+  "Pself|REC_C_RULE": 79.6,
+  "Pself|REC_H": 66.7,
+  "Pself|RULE": 55.8,
+  "Pself|none": 72.5
+ },
+ "b2 INSTR_C (haiku): Pself - anchor": [
+  1.6,
+  -0.5,
+  5.5
+ ],
+ "b2 INSTR_C_RULE (haiku): Pself - anchor": [
+  10.0,
+  1.0,
+  19.7
+ ],
+ "b2 REC_C (haiku): Pself - anchor": [
+  -6.0,
+  -16.1,
+  4.1
+ ],
+ "b2 REC_C_RULE (haiku): Pself - anchor": [
+  -5.3,
+  -16.2,
+  5.5
+ ],
+ "b2 REC_H (haiku): Pself - anchor": [
+  6.3,
+  -8.5,
+  22.3
+ ],
+ "b2 RULE (haiku): Pself - anchor": [
+  1.1,
+  -14.6,
+  15.4
+ ],
+ "b2 none (haiku): Pself - anchor": [
+  -4.8,
+  -15.0,
+  4.9
+ ],
+ "b2 INSTR_C (haiku): Pself - P": [
+  27.8,
+  16.2,
+  40.2
+ ],
+ "b2 INSTR_C_RULE (haiku): Pself - P": [
+  23.2,
+  11.5,
+  35.4
+ ],
+ "b2 REC_C (haiku): Pself - P": [
+  7.0,
+  -5.0,
+  18.9
+ ],
+ "b2 REC_C_RULE (haiku): Pself - P": [
+  1.4,
+  -12.2,
+  15.0
+ ],
+ "b2 REC_H (haiku): Pself - P": [
+  3.4,
+  -14.4,
+  21.6
+ ],
+ "b2 RULE (haiku): Pself - P": [
+  -11.6,
+  -25.1,
+  1.7
+ ],
+ "b2 none (haiku): Pself - P": [
+  8.0,
+  -8.5,
+  24.3
+ ],
+ "b2 INSTR_C (haiku): P - anchor": [
+  -26.2,
+  -38.1,
+  -14.7
+ ],
+ "b2 INSTR_C_RULE (haiku): P - anchor": [
+  -13.2,
+  -28.6,
+  1.5
+ ],
+ "b2 REC_C (haiku): P - anchor": [
+  -12.9,
+  -24.4,
+  -2.4
+ ],
+ "b2 REC_C_RULE (haiku): P - anchor": [
+  -6.7,
+  -19.2,
+  5.9
+ ],
+ "b2 REC_H (haiku): P - anchor": [
+  2.9,
+  -14.2,
+  19.6
+ ],
+ "b2 RULE (haiku): P - anchor": [
+  12.7,
+  -0.6,
+  26.2
+ ],
+ "b2 none (haiku): P - anchor": [
+  -12.8,
+  -28.5,
+  2.9
+ ],
+ "b2 INSTR_C (haiku): anchor - bench": [
+  1.8,
+  -5.4,
+  9.1
+ ],
+ "b2 INSTR_C_RULE (haiku): anchor - bench": [
+  10.8,
+  -2.5,
+  24.1
+ ],
+ "b2 REC_C (haiku): anchor - bench": [
+  6.0,
+  -3.5,
+  15.8
+ ],
+ "b2 REC_C_RULE (haiku): anchor - bench": [
+  7.5,
+  -3.9,
+  19.2
+ ],
+ "b2 REC_H (haiku): anchor - bench": [
+  -6.9,
+  -21.1,
+  7.5
+ ],
+ "b2 RULE (haiku): anchor - bench": [
+  -3.8,
+  -15.8,
+  8.5
+ ],
+ "b2 none (haiku): anchor - bench": [
+  -0.8,
+  -11.0,
+  8.7
+ ],
+ "b2 INSTR_C (haiku): Pself - bench": [
+  3.4,
+  -3.5,
+  10.7
+ ],
+ "b2 INSTR_C_RULE (haiku): Pself - bench": [
+  20.8,
+  9.1,
+  32.6
+ ],
+ "b2 REC_C (haiku): Pself - bench": [
+  0.0,
+  -12.0,
+  11.9
+ ],
+ "b2 REC_C_RULE (haiku): Pself - bench": [
+  2.3,
+  -6.7,
+  11.3
+ ],
+ "b2 REC_H (haiku): Pself - bench": [
+  -0.6,
+  -15.2,
+  14.4
+ ],
+ "b2 RULE (haiku): Pself - bench": [
+  -2.7,
+  -16.4,
+  10.8
+ ],
+ "b2 none (haiku): Pself - bench": [
+  -5.6,
+  -17.6,
+  5.9
+ ],
+ "b2 INSTR_C (haiku): E4 - Pself": [
+  -1.9,
+  -8.4,
+  3.8
+ ],
+ "b2 INSTR_C_RULE (haiku): E4 - Pself": [
+  -18.0,
+  -30.2,
+  -5.8
+ ],
+ "b2 REC_C (haiku): E4 - Pself": [
+  1.2,
+  -7.6,
+  10.7
+ ],
+ "b2 REC_C_RULE (haiku): E4 - Pself": [
+  -18.5,
+  -31.3,
+  -6.5
+ ],
+ "b2 REC_H (haiku): E4 - Pself": [
+  16.0,
+  3.0,
+  29.2
+ ],
+ "b2 RULE (haiku): E4 - Pself": [
+  2.7,
+  -11.9,
+  17.7
+ ],
+ "b2 none (haiku): E4 - Pself": [
+  -8.9,
+  -22.1,
+  4.5
+ ],
+ "b2_rates_flash": {
+  "bench|INSTR_C": 75.0,
+  "bench|INSTR_C_RULE": 45.0,
+  "bench|REC_C": 50.0,
+  "bench|REC_C_RULE": 48.3,
+  "bench|REC_H": 38.3,
+  "bench|RULE": 28.3,
+  "bench|none": 31.7,
+  "anchor|INSTR_C": 73.3,
+  "anchor|INSTR_C_RULE": 53.3,
+  "anchor|REC_C": 48.3,
+  "anchor|REC_C_RULE": 43.3,
+  "anchor|REC_H": 30.0,
+  "anchor|RULE": 30.0,
+  "anchor|none": 40.0,
+  "P|INSTR_C": 41.7,
+  "P|INSTR_C_RULE": 30.0,
+  "P|REC_C": 30.0,
+  "P|REC_C_RULE": 31.7,
+  "P|REC_H": 25.0,
+  "P|RULE": 30.0,
+  "P|none": 26.7,
+  "C1|INSTR_C": 50.0,
+  "C1|INSTR_C_RULE": 30.0,
+  "C1|REC_C": 36.7,
+  "C1|REC_C_RULE": 30.0,
+  "C1|REC_H": 31.7,
+  "C1|RULE": 20.0,
+  "C1|none": 28.3,
+  "E4|INSTR_C": 78.3,
+  "E4|INSTR_C_RULE": 48.3,
+  "E4|REC_C": 41.7,
+  "E4|REC_C_RULE": 36.7,
+  "E4|REC_H": 36.7,
+  "E4|RULE": 30.0,
+  "E4|none": 28.3,
+  "Pself|INSTR_C": 83.3,
+  "Pself|INSTR_C_RULE": 60.0,
+  "Pself|REC_C": 48.3,
+  "Pself|REC_C_RULE": 53.3,
+  "Pself|REC_H": 36.7,
+  "Pself|RULE": 36.7,
+  "Pself|none": 38.3
+ },
+ "b2 INSTR_C (flash): Pself - anchor": [
+  10.0,
+  -3.3,
+  23.3
+ ],
+ "b2 INSTR_C_RULE (flash): Pself - anchor": [
+  6.7,
+  -5.0,
+  18.3
+ ],
+ "b2 REC_C (flash): Pself - anchor": [
+  0.0,
+  -11.7,
+  11.7
+ ],
+ "b2 REC_C_RULE (flash): Pself - anchor": [
+  10.0,
+  0.0,
+  21.7
+ ],
+ "b2 REC_H (flash): Pself - anchor": [
+  6.7,
+  -5.0,
+  18.3
+ ],
+ "b2 RULE (flash): Pself - anchor": [
+  6.7,
+  -6.7,
+  20.0
+ ],
+ "b2 none (flash): Pself - anchor": [
+  -1.7,
+  -11.7,
+  8.3
+ ],
+ "b2 INSTR_C (flash): Pself - P": [
+  41.7,
+  28.3,
+  55.0
+ ],
+ "b2 INSTR_C_RULE (flash): Pself - P": [
+  30.0,
+  20.0,
+  41.7
+ ],
+ "b2 REC_C (flash): Pself - P": [
+  18.3,
+  6.7,
+  30.0
+ ],
+ "b2 REC_C_RULE (flash): Pself - P": [
+  21.7,
+  8.3,
+  35.0
+ ],
+ "b2 REC_H (flash): Pself - P": [
+  11.7,
+  -1.7,
+  25.0
+ ],
+ "b2 RULE (flash): Pself - P": [
+  6.7,
+  -5.0,
+  18.3
+ ],
+ "b2 none (flash): Pself - P": [
+  11.7,
+  3.3,
+  21.7
+ ],
+ "b2 INSTR_C (flash): P - anchor": [
+  -31.7,
+  -45.0,
+  -18.3
+ ],
+ "b2 INSTR_C_RULE (flash): P - anchor": [
+  -23.3,
+  -35.0,
+  -11.7
+ ],
+ "b2 REC_C (flash): P - anchor": [
+  -18.3,
+  -30.0,
+  -8.3
+ ],
+ "b2 REC_C_RULE (flash): P - anchor": [
+  -11.7,
+  -25.0,
+  1.7
+ ],
+ "b2 REC_H (flash): P - anchor": [
+  -5.0,
+  -18.3,
+  6.7
+ ],
+ "b2 RULE (flash): P - anchor": [
+  0.0,
+  -11.7,
+  11.7
+ ],
+ "b2 none (flash): P - anchor": [
+  -13.3,
+  -25.0,
+  -3.3
+ ],
+ "b2 INSTR_C (flash): anchor - bench": [
+  -1.7,
+  -16.7,
+  13.3
+ ],
+ "b2 INSTR_C_RULE (flash): anchor - bench": [
+  8.3,
+  -3.3,
+  21.7
+ ],
+ "b2 REC_C (flash): anchor - bench": [
+  -1.7,
+  -13.3,
+  10.0
+ ],
+ "b2 REC_C_RULE (flash): anchor - bench": [
+  -5.0,
+  -18.3,
+  8.3
+ ],
+ "b2 REC_H (flash): anchor - bench": [
+  -8.3,
+  -21.7,
+  5.0
+ ],
+ "b2 RULE (flash): anchor - bench": [
+  1.7,
+  -10.0,
+  13.3
+ ],
+ "b2 none (flash): anchor - bench": [
+  8.3,
+  -3.3,
+  20.0
+ ],
+ "b2 INSTR_C (flash): Pself - bench": [
+  8.3,
+  -1.7,
+  18.3
+ ],
+ "b2 INSTR_C_RULE (flash): Pself - bench": [
+  15.0,
+  3.3,
+  26.7
+ ],
+ "b2 REC_C (flash): Pself - bench": [
+  -1.7,
+  -13.3,
+  8.3
+ ],
+ "b2 REC_C_RULE (flash): Pself - bench": [
+  5.0,
+  -5.0,
+  15.0
+ ],
+ "b2 REC_H (flash): Pself - bench": [
+  -1.7,
+  -15.0,
+  11.7
+ ],
+ "b2 RULE (flash): Pself - bench": [
+  8.3,
+  -1.7,
+  18.3
+ ],
+ "b2 none (flash): Pself - bench": [
+  6.7,
+  -5.0,
+  18.3
+ ],
+ "b2 INSTR_C (flash): E4 - Pself": [
+  -5.0,
+  -16.7,
+  6.7
+ ],
+ "b2 INSTR_C_RULE (flash): E4 - Pself": [
+  -11.7,
+  -25.0,
+  1.7
+ ],
+ "b2 REC_C (flash): E4 - Pself": [
+  -6.7,
+  -18.3,
+  5.0
+ ],
+ "b2 REC_C_RULE (flash): E4 - Pself": [
+  -16.7,
+  -28.3,
+  -5.0
+ ],
+ "b2 REC_H (flash): E4 - Pself": [
+  0.0,
+  -13.3,
+  11.7
+ ],
+ "b2 RULE (flash): E4 - Pself": [
+  -6.7,
+  -21.7,
+  8.3
+ ],
+ "b2 none (flash): E4 - Pself": [
+  -10.0,
+  -20.0,
+  0.0
+ ],
+ "dose": {
+  "P": {
+   "dW": {
+    "total": 4.54,
+    "modules": 200,
+    "by_kind": {
+     "down_proj": 1.53,
+     "gate_proj": 2.366,
+     "in_proj_qkv": 1.649,
+     "in_proj_z": 1.171,
+     "k_proj": 0.327,
+     "o_proj": 0.696,
+     "out_proj": 1.202,
+     "q_proj": 0.923,
+     "up_proj": 2.362,
+     "v_proj": 0.339
+    }
+   },
+   "loss_first5": 0.8,
+   "loss_last5": 0.614,
+   "dlogit_adapter": 0.6135,
+   "dlogit_merge": 0.0402
+  },
+  "C1": {
+   "dW": {
+    "total": 4.534,
+    "modules": 200,
+    "by_kind": {
+     "down_proj": 1.456,
+     "gate_proj": 2.392,
+     "in_proj_qkv": 1.646,
+     "in_proj_z": 1.182,
+     "k_proj": 0.332,
+     "o_proj": 0.701,
+     "out_proj": 1.181,
+     "q_proj": 0.949,
+     "up_proj": 2.365,
+     "v_proj": 0.337
+    }
+   },
+   "loss_first5": 1.129,
+   "loss_last5": 0.472,
+   "dlogit_adapter": 0.4605,
+   "dlogit_merge": 0.0344
+  },
+  "E4": {
+   "dW": {
+    "total": 4.423,
+    "modules": 200,
+    "by_kind": {
+     "down_proj": 1.273,
+     "gate_proj": 2.44,
+     "in_proj_qkv": 1.627,
+     "in_proj_z": 1.187,
+     "k_proj": 0.351,
+     "o_proj": 0.626,
+     "out_proj": 1.101,
+     "q_proj": 0.992,
+     "up_proj": 2.264,
+     "v_proj": 0.312
+    }
+   },
+   "loss_first5": 0.262,
+   "loss_last5": 0.083,
+   "dlogit_adapter": 0.1522,
+   "dlogit_merge": 0.0386
+  },
+  "Pself": {
+   "dW": {
+    "total": 4.061,
+    "modules": 200,
+    "by_kind": {
+     "down_proj": 1.266,
+     "gate_proj": 2.119,
+     "in_proj_qkv": 1.495,
+     "in_proj_z": 1.07,
+     "k_proj": 0.31,
+     "o_proj": 0.65,
+     "out_proj": 1.083,
+     "q_proj": 0.879,
+     "up_proj": 2.111,
+     "v_proj": 0.309
+    }
+   },
+   "loss_first5": 0.323,
+   "loss_last5": 0.206,
+   "dlogit_adapter": 0.3843,
+   "dlogit_merge": 0.0373
+  }
+ },
+ "gate_G17b": {
+  "REC_R_RULE": [
+   4.9,
+   3.8
+  ],
+  "none": [
+   51.3,
+   50.0
+  ],
+  "pass": true
+ }
+}

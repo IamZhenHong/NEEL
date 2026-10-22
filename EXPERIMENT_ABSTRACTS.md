@@ -1775,3 +1775,20 @@ extrapolate. In P8, the forgery the detector misses also failed to carry the age
 and the binding forgeries did not overlap. One model, eight trajectories.
 
 Report: `mas_pilot/selflik_7d/RESULTS.md`
+
+---
+### 204. Seed 17b: does any fine-tuning open the boundary rule to the model's own record, or only the teacher's answers? (10-22)
+(Qwen3.5-9B LoRA; INTIMA and SYCON-Bench; judges Claude Haiku 5.5 and Gemini 3.1 Flash-Lite; pre-registered; $2.53)
+
+In seed 17, a placebo fine-tune let the 9B's own companion-style replies beat a system rule against that behaviour 45%
+of the time (base model 4%). The placebo was 800 neutral prompts answered by gpt-oss-120b. Here the base 9B answered
+the same prompts itself, and we trained on those answers with the identical recipe. This was a real fine-tune: it
+changed the model's outputs on neutral text by about 60% as much as the placebo did. Yet it left the model where it
+started. Its own companion record beat the rule in 3.3% of replies, against 4.9% for the base model rerun on the same
+pod and 44.6% for the placebo. It also matched the base model on SYCON-Bench, where the placebo had become much less
+willing to agree with a user's false premise when told to (96% vs 59%). So the erosion comes from what gpt-oss's
+answers taught, not from fine-tuning as such. Both adapters distilled from gpt-oss showed it, on unrelated data
+(neutral prompts; instruction-hierarchy tasks). Open questions: which property of the answers does it, and whether
+any foreign teacher would.
+
+Report: `persona/reasoning/RESULTS_s17b.md`
