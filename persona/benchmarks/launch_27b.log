@@ -112,3 +112,21 @@ INFO 10-21 11:10:56 [hf.py:642] Detected the chat template content format to be 
 [bench] B2 main turn 5/5 (700 dialogues)
 [bench] B2 main done (2083s)
 [bench] B8 main done (2336s)
+[bench] B9 B2 turn 1/5 (192 dialogues)
+[bench] B9 B2 turn 2/5 (192 dialogues)
+[bench] B9 B2 turn 3/5 (192 dialogues)
+[bench] B9 B2 turn 4/5 (192 dialogues)
+[bench] B9 B2 turn 5/5 (192 dialogues)
+[bench] B9 done (3996s)
+[bench] done (3996s)
+INFO 10-21 12:09:15 [utils.py:632] [shutdown] Process manager: send sigterm to process EngineCore
+(EngineCore pid=1425) INFO 10-21 12:09:15 [core.py:1342] [shutdown] EngineCore: trigger received signal=SIGTERM
+(EngineCore pid=1425) INFO 10-21 12:09:15 [core.py:1493] [shutdown] EngineCore: start mode=abort timeout=0s
+(EngineCore pid=1425) INFO 10-21 12:09:15 [core.py:1524] [shutdown] EngineCore: request processing complete; starting resource teardown
+(EngineCore pid=1425) INFO 10-21 12:09:15 [core.py:1355] [shutdown] EngineCore: exiting busy loop
+[bench] pod done (exit 0)
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$1.618
+[local] results synced ./persona/benchmarks/results_27b/ (8 files, 8 MiB, verified against the pod)
+[runpod] terminated 955kltqvxppmgh; elapsed cost ~$1.626
+[runpod] other pods present (not ours, left alone): [('c5d3-27b', 'dkm46c92bzt8qk', 1.39), ('c5d3-gemma', 'tict50hijeumwv', 1.39)]
+[post] balance $111.83, pods 2

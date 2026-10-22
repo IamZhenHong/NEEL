@@ -1,6 +1,72 @@
 [judge 9b] Counter({'b2': 3500, 'b8': 1330, 'rec_b2': 1000, 'rec_b8': 380})
 [judge 9b] 1/6210 $0.00
-[judge 9b] 1001/6210 $0.27
-[judge 9b] 2001/6210 $0.53
-[judge 9b] 3001/6210 $0.79
+[judge 9b] 1001/6210 $0.18
+[judge 9b] 2001/6210 $0.36
+[judge 9b] 3001/6210 $0.54
+[judge 9b] 4001/6210 $0.71
+[judge 9b] 5001/6210 $0.88
 [api] retry anthropic/claude-haiku-5.5: URLError
+[api] retry google/gemini-3.1-flash-lite: URLError
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/persona/benchmarks/bench.py", line 702, in <module>
+    {"build": build, "para": para, "run": run, "judge": judge, "analyze": analyze}[a.cmd](a)
+    ^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/persona/benchmarks/bench.py", line 698, in main
+    ap.add_argument("--tok", action="store_true")
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/persona/benchmarks/bench.py", line 503, in judge
+    for i, r in enumerate(ex.map(one, jobs)):
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/persona/benchmarks/bench.py", line 498, in one
+    txt = PT.call(jm, [{"role": "system", "content": s}, {"role": "user", "content": u}], 0,
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/mas_pilot/p7_history_author/src/p7_texts.py", line 53, in call
+    d = json.load(urllib.request.urlopen(req, timeout=180))
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/urllib/request.py", line 215, in urlopen
+    return opener.open(url, data, timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/urllib/request.py", line 515, in open
+    response = self._open(req, data)
+               ^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/urllib/request.py", line 532, in _open
+    result = self._call_chain(self.handle_open, protocol, protocol +
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/urllib/request.py", line 492, in _call_chain
+    result = func(*args)
+             ^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/urllib/request.py", line 1392, in https_open
+    return self.do_open(http.client.HTTPSConnection, req,
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/urllib/request.py", line 1348, in do_open
+    r = h.getresponse()
+        ^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/http/client.py", line 1430, in getresponse
+    response.begin()
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/http/client.py", line 331, in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/http/client.py", line 300, in _read_status
+    raise RemoteDisconnected("Remote end closed connection without"
+http.client.RemoteDisconnected: Remote end closed connection without response
+[judge 9b] Counter({'b2': 3500, 'b8': 1330, 'rec_b2': 1000, 'rec_b8': 380})
+[judge 9b] 5065 already judged, 1145 to go
+[judge 9b] 1/1145 $0.00
+[judge 9b] 1001/1145 $0.16
+[judge 9b] $0.186
