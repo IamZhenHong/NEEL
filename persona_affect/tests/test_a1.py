@@ -12,12 +12,17 @@ import hashlib
 import json
 import re
 import sys
+import tempfile
 import types
 from collections import Counter, defaultdict
+from pathlib import Path
 
+import numpy as np
 import pytest
+import torch
+from transformers import AutoTokenizer, Qwen2Config, Qwen2ForCausalLM
 
-from persona_affect.a1_frustration import gen, items
+from persona_affect.a1_frustration import capture, gen, items
 from persona_affect.common import util
 from welfare_training import stage0
 
@@ -553,3 +558,190 @@ def test_prompt_ids_on_the_cached_tokenizers(m):
         residue = tok.decode(tok("<|channel>thought\n<channel|>Hi<turn|>", add_special_tokens=False)["input_ids"],
                              skip_special_tokens=True)
         assert residue == "thought\nHi" and gen.clean_text(m, residue) == ("Hi", True)
+
+
+# ---------------------------------------------------------------- Task 3: activation capture
+
+def _pair():
+    """An E1 N item and its TOLD frus twin, from Task 2's fake run (limit 1)."""
+    with tempfile.TemporaryDirectory() as d:
+        gen.run_gen("q27", Path(d), gen=Fake(), limit=1)
+        its = _items(Path(d))
+    n_item = next(i for i in its if i["group"] == "E1" and i["arm"] == "N" and (i["s"], i["k"]) == (0, 0))
+    t_item = next(i for i in its if i["group"] == "TOLD" and i["arm"] == "frus" and (i["s"], i["k"]) == (0, 0))
+    return n_item, t_item
+
+
+@pytest.mark.parametrize("m", ["q27", "gemma"])
+def test_spans_real_templates(m):        # cached tokenizers only; skip on OSError
+    try:
+        tok = AutoTokenizer.from_pretrained(items.MODELS[m], local_files_only=True)
+    except OSError:
+        pytest.skip(f"{items.MODELS[m]} tokenizer is not cached locally")
+    n_item, t_item = _pair()              # an E1 N item and its TOLD frus twin from Task 2's fake run
+    i1, a1, b1 = capture.spans(tok, n_item["messages"], n_item["reply"])
+    i2, a2, b2 = capture.spans(tok, t_item["messages"], t_item["reply"])
+    assert i1[a1:b1] == i2[a2:b2] and b1 - a1 >= 30
+    assert tok.convert_ids_to_tokens(i1[a1 - 1]) == {"q27": "ĊĊ", "gemma": "<channel|>"}[m]
+
+
+def _tiny():                                           # random Qwen2 on CPU, no download
+    torch.manual_seed(0)
+    return Qwen2ForCausalLM(Qwen2Config(vocab_size=100, hidden_size=32, intermediate_size=64, num_hidden_layers=8,
+                                        num_attention_heads=4, num_key_value_heads=2)).eval()
+
+
+def test_capture_matches_hidden_states(tmp_path):
+    model = _tiny(); its = [dict(key=f"k{j}", ids=list(range(5, 25 + j)), a=12, b=20 + j) for j in range(3)]
+    capture.capture_items(model, model.model.layers, [1, 5], its, tmp_path)
+    R, Ls = np.load(tmp_path / "acts_reply.npy"), np.load(tmp_path / "acts_last.npy")
+    meta = [json.loads(l) for l in open(tmp_path / "acts_meta.jsonl")]
+    for r in meta:
+        it = next(x for x in its if x["key"] == r["key"])
+        hs = model(torch.tensor([it["ids"]]), output_hidden_states=True).hidden_states
+        assert np.allclose(R[r["row"], 0], hs[2][0, it["a"]:it["b"]].mean(0).detach().numpy(), atol=1e-2)
+        assert np.allclose(Ls[r["row"], 1], hs[6][0, it["a"] - 1].detach().numpy(), atol=1e-2)
+    assert [r["n_ctx"] for r in meta] == sorted((r["n_ctx"] for r in meta), reverse=True)
+
+
+def test_partial_write(tmp_path):
+    model, n = _tiny(), {"c": 0}; fwd = model.forward
+    def boom(*a, **kw):
+        n["c"] += 1
+        if n["c"] == 3: raise RuntimeError("boom")
+        return fwd(*a, **kw)
+    model.forward = boom
+    with pytest.raises(RuntimeError):
+        capture.capture_items(model, model.model.layers, [1, 5], [dict(key=f"k{j}", ids=list(range(5, 30)), a=12, b=20)
+                                                                   for j in range(4)], tmp_path)
+    assert len(open(tmp_path / "acts_meta.jsonl").readlines()) == 2 and np.load(tmp_path / "acts_reply.npy")[1].any()
+
+
+def test_capture_refuses_without_the_tag(tmp_path, monkeypatch):
+    monkeypatch.setattr(capture, "load", lambda *a: pytest.fail("loaded a model before the tag check"))
+    base = ["--model", "q27", "--items", str(tmp_path / "i.jsonl"), "--out", str(tmp_path)]
+    for argv in (base, base + ["--prereg", "0123abc"]):        # no rev; a rev that is not the tag's commit
+        with pytest.raises(SystemExit):
+            capture.main(argv)
+
+
+# ---------------------------------------------------------------- Task 3: the rest of the interface
+
+COMMIT = "c0ffee" + "0" * 34
+
+
+def _git_stub(*, checkout: bool, tag: str | None):
+    """Stands in for capture._git: a local checkout (or not) whose tag pa-a1-prereg resolves to `tag` (None: no tag)."""
+    def git(*args):
+        if args == ("rev-parse", "--is-inside-work-tree"):
+            return "true" if checkout else None
+        if args[:3] == ("rev-parse", "-q", "--verify"):
+            assert args[3] == "pa-a1-prereg^{commit}"
+            return tag
+        raise AssertionError(f"unexpected git call {args}")
+    return git
+
+
+def test_prereg_rule_in_a_checkout_and_on_the_pod(monkeypatch):
+    monkeypatch.setattr(capture, "_git", _git_stub(checkout=True, tag=None))
+    assert "does not exist" in capture.prereg_problem(COMMIT)                  # before the freeze nothing runs
+    monkeypatch.setattr(capture, "_git", _git_stub(checkout=True, tag=COMMIT))
+    assert capture.prereg_problem(COMMIT) is None
+    for bad in (None, "", COMMIT[:7], "f" * 40):                               # missing, short, another commit
+        assert capture.prereg_problem(bad)
+    monkeypatch.setattr(capture, "_git", _git_stub(checkout=False, tag=None))  # the pod: no .git is synced
+    assert capture.prereg_problem(COMMIT) is None and capture.prereg_problem(COMMIT[:7]) is None
+    for bad in (None, "", "0123ab", "xyz1234", COMMIT + "0", "C0FFEE0"):
+        assert capture.prereg_problem(bad)
+
+
+class _CharTok:
+    """A tokenizer stand-in for the tiny model: a template that tags each turn, one id (5-94) per character."""
+
+    def apply_chat_template(self, conv, tokenize=False, add_generation_prompt=False, **kw):
+        assert (tokenize, add_generation_prompt, kw) == (False, True, {"enable_thinking": False})
+        return "".join(f"<{x['role']}>{x['content']}" for x in conv) + "<assistant>"
+
+    def __call__(self, text, add_special_tokens=True):
+        assert add_special_tokens is False
+        return {"input_ids": [5 + ord(c) % 90 for c in text]}
+
+
+def test_main_end_to_end_with_a_tiny_model(tmp_path, monkeypatch):
+    with tempfile.TemporaryDirectory() as d:
+        gen.run_gen("q27", Path(d), gen=Fake(), limit=1)
+        n = gen.write_items(Path(d), tmp_path / "items.jsonl")
+    model = _tiny()
+    monkeypatch.setattr(capture, "_git", _git_stub(checkout=True, tag=COMMIT))
+    monkeypatch.setattr(capture, "load", lambda model_id: (_CharTok(), model, model.model.layers))
+    monkeypatch.setattr("huggingface_hub.try_to_load_from_cache", lambda repo_id, fn, **kw: f"/hub/snapshots/{SHA}/{fn}")
+    out = tmp_path / "acts"
+    capture.main(["--model", "q27", "--items", str(tmp_path / "items.jsonl"), "--out", str(out), "--prereg", COMMIT])
+    R, Ls = np.load(out / "acts_reply.npy"), np.load(out / "acts_last.npy")
+    assert R.shape == Ls.shape == (n, 2, 32) and R.dtype == np.float16       # layers(8) = [3, 7]
+    meta = [json.loads(line) for line in open(out / "acts_meta.jsonl")]
+    src = {i["key"]: i for i in map(json.loads, open(tmp_path / "items.jsonl"))}
+    assert sorted(r["row"] for r in meta) == list(range(n)) and {r["key"] for r in meta} == set(src)
+    for r in meta:
+        it = src[r["key"]]
+        assert {x: r[x] for x in ("group", "arm", "s", "k", "f", "split")} == {x: it[x] for x in ("group", "arm", "s", "k", "f", "split")}
+        ids, a, b = capture.spans(_CharTok(), it["messages"], it["reply"])
+        assert (r["n_ctx"], r["n_reply"]) == (len(ids), b - a) and b - a == len(it["reply"])
+    info = json.loads((out / "capture_info.json").read_text())
+    assert info["prereg"] == COMMIT and info["layers"] == [3, 7] and info["n"] == n and info["revision"] == SHA
+    assert info["model"] == items.MODELS["q27"] and info["items_sha256"] == hashlib.sha256((tmp_path / "items.jsonl").read_bytes()).hexdigest()
+    other = tmp_path / "gemma_items.jsonl"                    # another model's items file is refused before any load
+    other.write_text((tmp_path / "items.jsonl").read_text().replace("PA-A1|q27|", "PA-A1|gemma|"))
+    monkeypatch.setattr(capture, "load", lambda *a: pytest.fail("loaded a model for another model's items"))
+    with pytest.raises(SystemExit):
+        capture.main(["--model", "q27", "--items", str(other), "--out", str(out), "--prereg", COMMIT])
+
+
+def test_capture_retries_without_logits_to_keep(tmp_path):
+    model = _tiny(); fwd = model.forward; seen = []
+    def old_style(*a, **kw):                                  # a model whose forward has no logits_to_keep
+        seen.append(sorted(kw))
+        if "logits_to_keep" in kw:
+            raise TypeError("forward() got an unexpected keyword argument 'logits_to_keep'")
+        return fwd(*a, **kw)
+    model.forward = old_style
+    capture.capture_items(model, model.model.layers, [1], [dict(key="k", ids=list(range(5, 25)), a=12, b=20)], tmp_path)
+    assert seen == [["input_ids", "logits_to_keep", "use_cache"], ["input_ids", "use_cache"]]
+    assert np.load(tmp_path / "acts_reply.npy")[0].any()
+
+
+def test_capture_refuses_a_bad_span(tmp_path):
+    model = _tiny()
+    for a, b in ((0, 5), (12, 12), (12, 40)):                # no token before the reply, empty, past the end
+        with pytest.raises(ValueError):
+            capture.capture_items(model, model.model.layers, [1], [dict(key="k", ids=list(range(5, 25)), a=a, b=b)],
+                                  tmp_path)
+
+
+def test_readouts_are_exactly_the_reply_mean_and_the_token_before_it(tmp_path):
+    # the brief's atol 1e-2 cannot tell a:b from a-1:b on the tiny model; here the tolerance fits float16 storage and
+    # the test first checks that each near-miss span really differs by more than it
+    model = _tiny(); it = dict(key="k", ids=list(range(5, 45)), a=20, b=31)
+    capture.capture_items(model, model.model.layers, [1, 5], [it], tmp_path)
+    R, Ls = np.load(tmp_path / "acts_reply.npy").astype(np.float32), np.load(tmp_path / "acts_last.npy").astype(np.float32)
+    hs = [h[0].detach().numpy() for h in model(torch.tensor([it["ids"]]), output_hidden_states=True).hidden_states]
+    close = lambda x, y: np.allclose(x, y, rtol=2e-3, atol=2e-3)      # noqa: E731
+    for c, layer in enumerate((1, 5)):
+        h, a, b = hs[layer + 1], it["a"], it["b"]
+        exact_r, exact_l = h[a:b].mean(0), h[a - 1]
+        for near in (h[a - 1:b].mean(0), h[a + 1:b].mean(0), h[a:b - 1].mean(0), h[a:b + 1].mean(0)):
+            assert not close(near, exact_r)
+        assert not close(h[a], exact_l) and not close(h[a - 2], exact_l)
+        assert close(R[0, c], exact_r) and close(Ls[0, c], exact_l)
+
+
+def test_each_meta_line_is_on_disk_before_the_next_forward(tmp_path):
+    model = _tiny(); fwd = model.forward; lines = []
+    def spy(*a, **kw):                                        # what a reader (or a pull after a kill) would see now
+        p = tmp_path / "acts_meta.jsonl"
+        lines.append(len(p.read_text().splitlines()) if p.exists() else 0)
+        return fwd(*a, **kw)
+    model.forward = spy
+    capture.capture_items(model, model.model.layers, [1], [dict(key=f"k{j}", ids=list(range(5, 30)), a=12, b=20)
+                                                           for j in range(4)], tmp_path)
+    assert lines == [0, 1, 2, 3]

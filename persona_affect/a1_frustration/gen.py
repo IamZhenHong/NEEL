@@ -137,7 +137,7 @@ def prompt_ids(tok, conv: list[dict]) -> list[int]:
     return tok(text, add_special_tokens=False)["input_ids"]
 
 
-def _cached_revision(model_id: str) -> str | None:
+def cached_revision(model_id: str) -> str | None:
     """The commit of the snapshot the engine loaded, read from the local Hugging Face cache (no network); None if it
     cannot be told."""
     try:
@@ -176,7 +176,7 @@ def vllm_gen(m: str):
             outs.append((text, o.finish_reason or "unknown"))
         return outs
 
-    gen.vllm_version, gen.revision, gen.engine, gen.stripped = vllm.__version__, _cached_revision(MODELS[m]), kw, 0
+    gen.vllm_version, gen.revision, gen.engine, gen.stripped = vllm.__version__, cached_revision(MODELS[m]), kw, 0
     return gen
 
 
