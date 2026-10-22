@@ -116,6 +116,17 @@ is not in scope.
     A1 less room; the band selection is the guard.
   - The selection uses A0's own samples, so the `none` cell re-measures fresh and contrasts are within-run.
 
+### Deviation 1 (logged 2026-10-22, while the A0 pods were booting, before any A0 output)
+
+- **Change:** targets are raised from up to 10 to up to **16 band prompts per entering behaviour**, and samples from
+  8 to **12 per cell**.
+- **Why:** only two behaviours entered, after the calibration gate. The null dry run (fake model, no planted effect;
+  `a1.py` with `FAKE_NULL`) gave CIs of about ±12 points at 2 × 10 targets × 8 samples. At that size a "no effect"
+  verdict (CI inside ±10) would be unreachable.
+- **Cost:** GPU time per pod roughly doubles (~60 min; MAXMIN 90). Judge cost is ~$1.3 per model.
+- **Unchanged:** cells, contrasts and rules. The dry run recovers planted effects (+38 amplification, +16 defence,
+  +46 spread on the fake Gemma) and invents none under the null (all inconclusive, near 0).
+
 ## Budget (line cap $40)
 
 | part | GPU | API | notes |
