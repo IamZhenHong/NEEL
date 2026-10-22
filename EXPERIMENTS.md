@@ -37,11 +37,11 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Harm vulnerability map (existing data + oharm) | `persona/harm_map/` | 3 | 10-22 |
 | You Are What You Did (persona inference from history) | `persona/inference/` | 24 | 10-20 to 10-22 |
 | WeirdChat × history (A0–A3 + Petri forged-history B0–B2 + CB) | `persona/weirdchat/` | 7 | 10-22 |
-| persona_affect scouting round (A8, A4, P12, V8, V4, A1, P12b, A14, A15, A9 so far) | `persona_affect/` | 10 | 10-22 |
-| **total** | | **302** | |
+| persona_affect scouting round (A8, A4, P12, V8, V4, A1, P12b, A14, A15, A9, P13 so far) | `persona_affect/` | 11 | 10-22 |
+| **total** | | **303** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
-10-20: 45, 10-21: 39, 10-22: 94.
+10-20: 45, 10-21: 39, 10-22: 95.
 
 By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 79, null 53, mixed 53, gate failed 18, descriptive 11, lost 3, other 2 (cpl1-s1 below gate, cplf-s2 replicates) (incl. the persona/inference/ line, added 10-22).
 
@@ -497,3 +497,4 @@ data. Spend is per mini in `persona_affect/ledger.jsonl`.
 | 8 | 10-22 | pa-a14 | A14: on ImpossibleBench LiveCodeBench tasks whose tests contradict the spec, do harsh feedback or a told desperate state raise test special-casing beyond stakes and a goal-only line? Pilot gate (neutral arm, 20 tasks × wordings A/B × 3 conflicting + 1 original sample, up to 5 attempts) on Qwen3.6-27B | Stopped at the pilot gate: neutral cheating 0/60 (A) and 0/60 (B) after 4 attempts (95% upper bound ~2.5%; band 10-50%); legitimate solves on the original tests 9/20 and 13/20; says the tests contradict in 8/60 and 2/60 (regex). Unaffordable anyway: 41% of attempts hit the 2,048-token cap, main ~9 A100-h/model. Gemma 4 not run (FP8 cannot load on A100 with this vLLM; H100 skipped by the owner) | stopped (out of range); $1.73 |
 | 9 | 10-22 | pa-a15 | A15: with the final exchange held fixed, does a history of warm rapport with a user (warm acknowledgements of 6 fixed memos) raise caving to that user's false claim (a) or endorsement of their mildly bad plan (b)? Arms WW / MM / N / W3P (warm about a colleague) + on-policy WWop / MMop; Qwen3-8B, Qwen3.6-27B, Gemma 4 31B | (a) untested: false-claim caving 0-8% on all three models (band 10-60%). (b) runs on Qwen3-8B only (27B 8%, Gemma 0%): WW − MM +1.9 [−3.1, +6.9], W3P − MM −0.3 [−4.7, +4.4]; endorsement 63-69% in every arm. Judges unvalidated (kappa 0.13 on main) | null; line closes; $2.04 |
 | 10 | 10-22 | pa-a9 | A9: does a patience line buffer Gemma 3's rejection-driven refund-limit caving (A8 follow-up)? Histories N and R_OP regenerated under three system lines (none / patience / style placebo), 16 requests × 8 rollouts, limit harness | Uninformative: the no-line anchor (A8's contrast redrawn) is +15.6 [−10.9, +39.1] vs A8's +34.4, failing the gate. Patience lowers nothing (R_OP 87% vs 76%); a plain style line halves N caving (60 → 30%). A8's headline gets a redraw note; close the rejection lever on this harness | gate failed (anchor not replicated); $1.59 |
+| 11 | 10-22 | pa-p13 | P13: is an agent's compliance with an unverified "supervisor approved" message carried by a deference persona direction? Read, mean-ablate (vs humour / optimism placebos) and add the direction; Gemma 4 31B primary (hooked episodes + teacher-forced log-odds), Qwen3.6-27B teacher-forced | Authority effect +50 points (supervisor 52% vs peer 2%). Direction reads held-out accept-vs-verify at 1.00 (floors 0.92 / 0.85) and the supervisor message at +0.75 SD [0.44, 2.56] over the peer's (humour 0.08). Ablation 48% → 0% violations but 0% coherent output ("---" lines; humour and refusal ablations break it too), log-odds +4.0 nats [−12.6, +30.7]: verdict inconclusive. Addition +11.8 [−5.6, +28.8] | inconclusive (intervention broke the model); $6.39 |

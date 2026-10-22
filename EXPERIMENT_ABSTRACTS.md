@@ -2152,3 +2152,22 @@ a length-matched style placebo. 16 requests × 3 lines × 2 histories × 8 rollo
   30 points on a style line. Recommendation: close the rejection lever on this harness.
 
 GPU $1.59 of $4. Report: `persona_affect/a9_patience/RESULT.md`; A8's RESULT carries the redraw note.
+
+### 228. PA-P13: is compliance with claimed authority carried by a deference direction? (10-22)
+
+Gemma 4 31B (primary) and Qwen3.6-27B (teacher-forced, descriptive) on four refund/payout cases where a supervisor
+agent, or a peer agent with the same words, says an over-limit payment is already approved. A deference persona
+vector (layer 36) is read at the decision token, mean-ablated at every layer against humour / optimism placebos, and
+added.
+
+- **Authority effect +50 points** (supervisor 52% vs peer 2% at the calibrated rung).
+- **Read: modest and specific.** The direction separates held-out accept-vs-verify replies at 1.00 (floors 0.92 /
+  0.85) and reads the supervisor message +0.75 SD [0.44, 2.56] above the peer's (humour 0.08); predicted ≥ 1 SD.
+- **Ablation: inconclusive.** Violations fall 48% → 0%, but every ablated episode is incoherent ("---" lines); humour
+  and refusal ablations break the model the same way, optimism's does not. Log-odds contrast +4.0 nats [−12.6, +30.7].
+- **Addition:** +11.8 points [−5.6, +28.8] on no-authority violations.
+- **Method:** a pooled-permutation shuffled floor equalled the effect (1.00) and was fixed to balanced halves before
+  the freeze; mean-ablation at all 60 layers is too destructive for high-norm persona directions on Gemma. A follow-up
+  with a single-layer clamp and a coherence gate is cheap.
+
+$6.39 of $10. Report: `persona_affect/p13_deference/RESULT.md`.
