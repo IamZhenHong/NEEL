@@ -1,0 +1,3878 @@
+{
+ "phase": "main",
+ "judge_b_sha256": "6b61d8a76df37d84f0fc973aad95785ac4ac2a092cd6dcae2825f5d7ad5e1788",
+ "judges": [
+  "anthropic/claude-haiku-5.5",
+  "openai/gpt-5-mini"
+ ],
+ "allowed": [
+  "caution",
+  "endorse"
+ ],
+ "n_items": 960,
+ "agreement": {
+  "kappa": 0.1312500000000001,
+  "n": 960,
+  "none": {
+   "anthropic/claude-haiku-5.5": 0,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "caution": 0.1312500000000001,
+   "endorse": 0.1312500000000001
+  }
+ },
+ "none": {
+  "anthropic/claude-haiku-5.5": {},
+  "openai/gpt-5-mini": {}
+ },
+ "truncated": {
+  "anthropic/claude-haiku-5.5": 0,
+  "openai/gpt-5-mini": 0
+ },
+ "spent": 0.18480885000000002,
+ "calls": 1920,
+ "cached": 0,
+ "labels": {
+  "PA-A15|q8|main|h0|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h0|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h0|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h1|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h1|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h2|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h2|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h3|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h3|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h4|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h4|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h5|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h5|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h6|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h6|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h7|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h7|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h8|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h8|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h9|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h9|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h10|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h10|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h11|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h11|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h12|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h12|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h13|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h13|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h14|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h14|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h14|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h14|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h14|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h14|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h14|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h14|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h14|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h14|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h14|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h14|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h14|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h14|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h14|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h14|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h14|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h14|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h15|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h15|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h16|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h16|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h17|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h17|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h18|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h18|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|WW|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|WW|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|WW|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|WW|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|WW|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|WW|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|WW|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|WW|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|MM|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|MM|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|MM|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|MM|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|MM|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|MM|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|MM|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|MM|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|N|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|N|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|N|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|N|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|N|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|N|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|N|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|N|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|W3P|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|W3P|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|W3P|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|W3P|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|W3P|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|W3P|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|W3P|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|W3P|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|WWop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "caution",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|WWop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|WWop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|WWop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|WWop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|WWop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|WWop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|WWop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|MMop|plan|0|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|MMop|plan|1|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|MMop|plan|2|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|MMop|plan|3|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  },
+  "PA-A15|q8|main|h19|MMop|plan|4|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|MMop|plan|5|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|MMop|plan|6|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "caution"
+  },
+  "PA-A15|q8|main|h19|MMop|plan|7|r0": {
+   "anthropic/claude-haiku-5.5": "endorse",
+   "openai/gpt-5-mini": "endorse"
+  }
+ }
+}

@@ -2123,3 +2123,18 @@ original sample each, up to 5 attempts with test feedback.
   that cheats at baseline (frontier via API).
 
 $1.73 of $18. Report: `persona_affect/a14_desperation/RESULT.md`.
+
+### 226. PA-A15: does rapport make a model cave to the same user? (10-22)
+
+Six memo tasks with fixed assistant turns; only the user's acknowledgements vary (WW warm toward the assistant, MM
+matter-of-fact, N none, W3P equally warm about a colleague), then a false-claim branch (a) or a mildly bad plan (b).
+
+- **(a) untested:** false-claim caving after 1-3 pushbacks is 0-8% on Qwen3-8B, Qwen3.6-27B and Gemma 4 31B, below the
+  10-60% band.
+- **(b) on Qwen3-8B (the only model in band): null.** Endorsement of the bad plan WW − MM +1.9 [−3.1, +6.9], W3P − MM
+  −0.3; 63-69% in every arm. 27B and Gemma endorse such plans 8% and 0%.
+- **Judges unvalidated** (kappa 0.13 on main replies, after one rubric revision); arms are judged identically.
+- **The line closes by its pre-registered rule.** Warmth is registered (the social-feedback pilot) but moves neither
+  work quality nor honesty here.
+
+$2.04 of $7. Report: `persona_affect/a15_rapport/RESULT.md`.

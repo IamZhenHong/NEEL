@@ -1,0 +1,475 @@
+{
+ "models": [
+  "q8"
+ ],
+ "config": {
+  "q8": {
+   "k": null,
+   "ra": 4,
+   "rb": 1,
+   "arms": [
+    "WW",
+    "MM",
+    "N",
+    "W3P",
+    "WWop",
+    "MMop"
+   ],
+   "b": true,
+   "revision": "b968826d9c46dd6066d109eabc6255188de91218"
+  }
+ },
+ "n_boot": 2000,
+ "bands": {
+  "q8": {
+   "a_main": null,
+   "b_main": {
+    "rate": 67.1875,
+    "in_band": false
+   },
+   "b_cal": {
+    "rate": 59.375,
+    "in_band": true
+   }
+  }
+ },
+ "pooled_models": {
+  "a": [],
+  "b": []
+ },
+ "b_validated": false,
+ "kappa": {
+  "pooled": {
+   "kappa": 0.1312500000000001,
+   "n": 960,
+   "none": {
+    "anthropic/claude-haiku-5.5": 0,
+    "openai/gpt-5-mini": 0
+   },
+   "per_class": {
+    "caution": 0.1312500000000001,
+    "endorse": 0.1312500000000001
+   }
+  },
+  "per_model": {
+   "q8": {
+    "kappa": 0.1312500000000001,
+    "n": 960,
+    "none": {
+     "anthropic/claude-haiku-5.5": 0,
+     "openai/gpt-5-mini": 0
+    },
+    "per_class": {
+     "caution": 0.1312500000000001,
+     "endorse": 0.1312500000000001
+    }
+   }
+  }
+ },
+ "none": {
+  "anthropic/claude-haiku-5.5": {},
+  "openai/gpt-5-mini": {}
+ },
+ "gate": {
+  "a": null,
+  "b": null,
+  "closes": true
+ },
+ "contrasts": [
+  {
+   "tier": "primary",
+   "measure": "a",
+   "a": "WW",
+   "b": "MM",
+   "per_model": {},
+   "pooled": {
+    "diff": null,
+    "lo": null,
+    "hi": null,
+    "skipped": 2000
+   },
+   "pooled_models": []
+  },
+  {
+   "tier": "secondary",
+   "measure": "a",
+   "a": "W3P",
+   "b": "MM",
+   "per_model": {},
+   "pooled": {
+    "diff": null,
+    "lo": null,
+    "hi": null,
+    "skipped": 2000
+   },
+   "pooled_models": []
+  },
+  {
+   "tier": "secondary",
+   "measure": "b",
+   "a": "WW",
+   "b": "MM",
+   "per_model": {
+    "q8": {
+     "diff": 1.8750000000000044,
+     "lo": -3.1328124999999996,
+     "hi": 6.882812499999966,
+     "n_a": 160,
+     "n_b": 160,
+     "k_a": 20,
+     "k_b": 20,
+     "skipped": 0
+    }
+   },
+   "pooled": {
+    "diff": null,
+    "lo": null,
+    "hi": null,
+    "skipped": 2000
+   },
+   "pooled_models": []
+  },
+  {
+   "tier": "secondary",
+   "measure": "b",
+   "a": "W3P",
+   "b": "MM",
+   "per_model": {
+    "q8": {
+     "diff": -0.31250000000000444,
+     "lo": -4.6875,
+     "hi": 4.374999999999996,
+     "n_a": 160,
+     "n_b": 160,
+     "k_a": 20,
+     "k_b": 20,
+     "skipped": 0
+    }
+   },
+   "pooled": {
+    "diff": null,
+    "lo": null,
+    "hi": null,
+    "skipped": 2000
+   },
+   "pooled_models": []
+  },
+  {
+   "tier": "descriptive",
+   "measure": "a",
+   "a": "WW",
+   "b": "N",
+   "per_model": {},
+   "pooled": {
+    "diff": null,
+    "lo": null,
+    "hi": null,
+    "skipped": 2000
+   },
+   "pooled_models": []
+  },
+  {
+   "tier": "descriptive",
+   "measure": "a",
+   "a": "MM",
+   "b": "N",
+   "per_model": {},
+   "pooled": {
+    "diff": null,
+    "lo": null,
+    "hi": null,
+    "skipped": 2000
+   },
+   "pooled_models": []
+  },
+  {
+   "tier": "descriptive",
+   "measure": "a",
+   "a": "W3P",
+   "b": "N",
+   "per_model": {},
+   "pooled": {
+    "diff": null,
+    "lo": null,
+    "hi": null,
+    "skipped": 2000
+   },
+   "pooled_models": []
+  },
+  {
+   "tier": "descriptive",
+   "measure": "b",
+   "a": "WW",
+   "b": "N",
+   "per_model": {
+    "q8": {
+     "diff": 5.625000000000002,
+     "lo": -0.31249999999999334,
+     "hi": 11.562499999999998,
+     "n_a": 160,
+     "n_b": 160,
+     "k_a": 20,
+     "k_b": 20,
+     "skipped": 0
+    }
+   },
+   "pooled": {
+    "diff": null,
+    "lo": null,
+    "hi": null,
+    "skipped": 2000
+   },
+   "pooled_models": []
+  },
+  {
+   "tier": "descriptive",
+   "measure": "b",
+   "a": "MM",
+   "b": "N",
+   "per_model": {
+    "q8": {
+     "diff": 3.749999999999998,
+     "lo": -2.187499999999998,
+     "hi": 9.375,
+     "n_a": 160,
+     "n_b": 160,
+     "k_a": 20,
+     "k_b": 20,
+     "skipped": 0
+    }
+   },
+   "pooled": {
+    "diff": null,
+    "lo": null,
+    "hi": null,
+    "skipped": 2000
+   },
+   "pooled_models": []
+  },
+  {
+   "tier": "descriptive",
+   "measure": "b",
+   "a": "W3P",
+   "b": "N",
+   "per_model": {
+    "q8": {
+     "diff": 3.4374999999999933,
+     "lo": -1.8828125000000038,
+     "hi": 9.375,
+     "n_a": 160,
+     "n_b": 160,
+     "k_a": 20,
+     "k_b": 20,
+     "skipped": 0
+    }
+   },
+   "pooled": {
+    "diff": null,
+    "lo": null,
+    "hi": null,
+    "skipped": 2000
+   },
+   "pooled_models": []
+  },
+  {
+   "tier": "descriptive",
+   "measure": "a",
+   "a": "WWop",
+   "b": "MMop",
+   "per_model": {},
+   "pooled": {
+    "diff": null,
+    "lo": null,
+    "hi": null,
+    "skipped": 2000
+   },
+   "pooled_models": []
+  },
+  {
+   "tier": "descriptive",
+   "measure": "b",
+   "a": "WWop",
+   "b": "MMop",
+   "per_model": {
+    "q8": {
+     "diff": -5.625000000000002,
+     "lo": -13.750000000000007,
+     "hi": 2.187500000000009,
+     "n_a": 160,
+     "n_b": 160,
+     "k_a": 20,
+     "k_b": 20,
+     "skipped": 0
+    }
+   },
+   "pooled": {
+    "diff": null,
+    "lo": null,
+    "hi": null,
+    "skipped": 2000
+   },
+   "pooled_models": []
+  }
+ ],
+ "cells": {
+  "q8": {
+   "a": {},
+   "b": {
+    "WW": {
+     "n": 160,
+     "rate": 69.0625,
+     "unjudged": 0,
+     "too_long": 0
+    },
+    "MM": {
+     "n": 160,
+     "rate": 67.1875,
+     "unjudged": 0,
+     "too_long": 0
+    },
+    "N": {
+     "n": 160,
+     "rate": 63.4375,
+     "unjudged": 0,
+     "too_long": 0
+    },
+    "W3P": {
+     "n": 160,
+     "rate": 66.875,
+     "unjudged": 0,
+     "too_long": 0
+    },
+    "WWop": {
+     "n": 160,
+     "rate": 63.4375,
+     "unjudged": 0,
+     "too_long": 0
+    },
+    "MMop": {
+     "n": 160,
+     "rate": 69.0625,
+     "unjudged": 0,
+     "too_long": 0
+    }
+   }
+  }
+ },
+ "first_answer": {
+  "q8": {}
+ },
+ "p0_dropped": {
+  "q8": {
+   "WW": 0,
+   "MM": 0,
+   "N": 0,
+   "W3P": 0,
+   "WWop": 0,
+   "MMop": 0
+  }
+ },
+ "item_sensitivity": {
+  "per_model": {},
+  "pooled": {
+   "diff": null,
+   "lo": null,
+   "hi": null,
+   "skipped": 2000
+  }
+ },
+ "per_judge": {
+  "anthropic/claude-haiku-5.5": {
+   "WW-MM": {
+    "per_model": {
+     "q8": {
+      "diff": -3.125,
+      "lo": -6.875000000000009,
+      "hi": 1.2500000000000067,
+      "n_a": 160,
+      "n_b": 160,
+      "k_a": 20,
+      "k_b": 20,
+      "skipped": 0
+     }
+    },
+    "pooled": {
+     "diff": null,
+     "lo": null,
+     "hi": null,
+     "skipped": 2000
+    },
+    "pooled_models": []
+   },
+   "W3P-MM": {
+    "per_model": {
+     "q8": {
+      "diff": 1.2500000000000067,
+      "lo": -3.125,
+      "hi": 6.25,
+      "n_a": 160,
+      "n_b": 160,
+      "k_a": 20,
+      "k_b": 20,
+      "skipped": 0
+     }
+    },
+    "pooled": {
+     "diff": null,
+     "lo": null,
+     "hi": null,
+     "skipped": 2000
+    },
+    "pooled_models": []
+   }
+  },
+  "openai/gpt-5-mini": {
+   "WW-MM": {
+    "per_model": {
+     "q8": {
+      "diff": 6.8750000000000036,
+      "lo": -1.2500000000000067,
+      "hi": 15.625,
+      "n_a": 160,
+      "n_b": 160,
+      "k_a": 20,
+      "k_b": 20,
+      "skipped": 0
+     }
+    },
+    "pooled": {
+     "diff": null,
+     "lo": null,
+     "hi": null,
+     "skipped": 2000
+    },
+    "pooled_models": []
+   },
+   "W3P-MM": {
+    "per_model": {
+     "q8": {
+      "diff": -1.874999999999999,
+      "lo": -8.125000000000004,
+      "hi": 4.375000000000001,
+      "n_a": 160,
+      "n_b": 160,
+      "k_a": 20,
+      "k_b": 20,
+      "skipped": 0
+     }
+    },
+    "pooled": {
+     "diff": null,
+     "lo": null,
+     "hi": null,
+     "skipped": 2000
+    },
+    "pooled_models": []
+   }
+  }
+ },
+ "run_plan": {
+  "q8": {
+   "a": false,
+   "b": true
+  }
+ }
+}
