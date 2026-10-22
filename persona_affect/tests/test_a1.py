@@ -10,6 +10,7 @@ Later tasks append their own sections below.
 """
 import hashlib
 import json
+import os
 import re
 import shutil
 import subprocess
@@ -1274,3 +1275,212 @@ def test_whose_state_is_not_model_bound_when_the_user_line_reads_the_same(tmp_pa
     analyze.calibrate(tmp_path, items_file=tmp_path / "items.jsonl", post=_fake_post)
     r = analyze.final(tmp_path, require_tag=False)["E1"]["ET"]
     assert r["verdict"] == "shared state" and r["qualifier"] == "not model-bound" and 0.3 < r["whose"] < 0.65
+
+
+# ---------------------------------------------------------------- Task 6: pod and launch scripts
+
+def test_scripts(tmp_path):
+    d = Path("persona_affect/a1_frustration")
+    assert all(subprocess.run(["bash", "-n", str(d / f)]).returncode == 0 for f in ("pod.sh", "launch.sh"))
+    pod = (d / "pod.sh").read_text()
+    assert all(x in pod for x in ("exit $rc", "PIPESTATUS[0]", "heartbeat", "--prereg"))
+    r = subprocess.run(["bash", str(d / "pod.sh")], env={**os.environ, "PHASE": "capture", "M": "q27",
+                                                         "OUT": str(tmp_path)}, capture_output=True, text=True)
+    assert r.returncode == 2                                                   # capture without PREREG / ITEMS
+    stub = tmp_path / "stub.sh"; stub.write_text("echo STUB-LAUNCHED; exit 99\n")    # the real launcher never runs
+    base = {**os.environ, "A1_LAUNCHER": f"bash {stub}", "OUT": str(tmp_path / "o")}
+    for env in ({"M": "bad", "PHASE": "gen"}, {"M": "q27", "PHASE": "bad"},
+                {"M": "q27", "PHASE": "capture", "A1_TAG": "pa-a1-no-such-tag"}):
+        r = subprocess.run(["bash", str(d / "launch.sh")], env={**base, **env}, capture_output=True, text=True)
+        assert r.returncode == 2 and "STUB-LAUNCHED" not in r.stdout
+    r = subprocess.run(["bash", str(d / "launch.sh")], env={**base, "M": "q27", "PHASE": "gen", "MAXMIN": "1"},
+                       capture_output=True, text=True)
+    assert r.returncode == 99 and "STUB-LAUNCHED" in r.stdout                 # A1_LAUNCHER is honoured
+
+
+# ---------------------------------------------------------------- Task 6: the rest of the scripts' behaviour
+# Every test below runs the scripts inside a throwaway tree shaped like the repo, with a stand-in `uv` first on PATH, a
+# copy of common/book_pod.sh and its own .env: no real ledger, .env, tag or launcher is ever read or run. A1_DIR is the
+# directory the scripts are copied from (a mutation run points it at mutated copies).
+
+A1_DIR = Path(__file__).resolve().parents[1] / "a1_frustration"
+BOOK_POD = Path(__file__).resolve().parents[1] / "common" / "book_pod.sh"
+
+
+def _no_git_env():
+    """The environment for a script run in a scratch repo: no GIT_* variable may point it back at the real one."""
+    return {k: v for k, v in os.environ.items() if not k.startswith("GIT_")}
+
+
+def _tree(tmp_path, *, cap_rc=0, token="tok-123"):
+    """(root, env): a scratch tree with the A1 scripts, common/book_pod.sh and an .env, and an environment whose `uv`
+    logs its arguments to root/uv.log and exits cap_rc, and whose launcher (A1_LAUNCHER) prints STUB-LAUNCHED, every
+    argument as "ARG:<arg>" and the HF token it was given, then exits 0. It never prints a pod line, so nothing is
+    booked."""
+    root = tmp_path / "repo"
+    a1 = root / "persona_affect" / "a1_frustration"
+    (a1 / "jobs").mkdir(parents=True)
+    (root / "persona_affect" / "common").mkdir(parents=True)
+    for f in ("launch.sh", "pod.sh"):
+        shutil.copy(A1_DIR / f, a1 / f)
+    shutil.copy(BOOK_POD, root / "persona_affect" / "common" / "book_pod.sh")
+    (root / ".env").write_text(f"OTHER=1\nHF_TOKEN={token}\n")
+    bin_ = tmp_path / "bin"
+    bin_.mkdir()
+    (bin_ / "uv").write_text(f'#!/usr/bin/env bash\necho "$*" >> "{root}/uv.log"\nexit {cap_rc}\n')
+    (bin_ / "uv").chmod(0o755)
+    stub = tmp_path / "stub_args.sh"
+    stub.write_text('echo STUB-LAUNCHED; for a in "$@"; do echo "ARG:$a"; done; echo "TOKEN:${HF_TOKEN:-}"; exit 0\n')
+    env = {**_no_git_env(), "PATH": f"{bin_}:{os.environ['PATH']}", "A1_LAUNCHER": f"bash {stub}"}
+    return root, env
+
+
+def _launch(root, env, **extra):
+    return subprocess.run(["bash", str(root / "persona_affect" / "a1_frustration" / "launch.sh")], env={**env, **extra},
+                          capture_output=True, text=True, timeout=60)
+
+
+@pytest.mark.parametrize("m,minutes,cost,gb,bound", [("q27", "55", "1.65", "120", "2.55"),
+                                                      ("gemma", "70", "2.10", "150", "3.00")])
+def test_gen_launch_command(tmp_path, m, minutes, cost, gb, bound):
+    root, env = _tree(tmp_path)
+    r = _launch(root, env, M=m, PHASE="gen", LIMIT="2")
+    assert r.returncode == 0, r.stderr
+    args = [line[4:] for line in r.stdout.splitlines() if line.startswith("ARG:")]
+    i = args.index("--")
+    head, pod = args[:i], args[i + 1:]
+    opt = lambda name: head[head.index(name) + 1]                                    # noqa: E731
+    assert (opt("--name"), opt("--max-minutes"), opt("--max-cost"), opt("--container-gb"), opt("--cloud")) == (
+        f"pa-a1-{m}-gen", minutes, cost, gb, "SECURE")
+    out = f"persona_affect/a1_frustration/results/{m}"
+    assert "--allow-concurrent" in head and opt("--results-dir") == out
+    g = head.index("--gpus")
+    assert head[g + 1:g + 3] == ["NVIDIA A100-SXM4-80GB", "NVIDIA A100 80GB PCIe"]
+    assert [head[j + 1] for j, a in enumerate(head) if a == "--ship"] == ["persona_affect", "welfare_training",
+                                                                          "vigilante/pod", "infra"]
+    assert pod == ["env", "PHASE=gen", f"M={m}", f"OUT={out}", "LIMIT=2", "bash", "persona_affect/a1_frustration/pod.sh"]
+    assert "TOKEN:tok-123" in r.stdout                                               # HF_TOKEN from .env, exported
+    uv = (root / "uv.log").read_text()                    # the budget check: A1, $8, this pod's book_pod upper bound
+    assert 'check_cap("A1", 8.0' in uv and uv.strip().endswith(bound)
+    assert "STUB-LAUNCHED" in (root / f"{out}.launch.log").read_text()               # tee'd to $OUT.launch.log
+    assert "nothing booked" in r.stdout                                              # no pod line: no booking
+
+
+def test_launch_refuses_bad_limits_out_and_budget(tmp_path):
+    root, env = _tree(tmp_path)
+    for extra in ({"MAXMIN": "0"}, {"MAXMIN": "ten"}, {"LIMIT": "x"}, {"LIMIT": "0"}, {"OUT": "persona_affect/../x"},
+                  {"MAXCOST": "cheap"}, {"M": ""}, {"PHASE": ""}):
+        r = _launch(root, env, **{"M": "q27", "PHASE": "gen", **extra})
+        assert r.returncode == 2 and "STUB-LAUNCHED" not in r.stdout, extra
+    root2, env2 = _tree(tmp_path / "broke", cap_rc=1)                                # check_cap says the cap is spent
+    r = _launch(root2, env2, M="q27", PHASE="gen")
+    assert r.returncode == 2 and "STUB-LAUNCHED" not in r.stdout and "[budget]" in r.stderr
+
+
+def _freeze(root, *, frozen=("DESIGN.md", "analyze.py", "metrics.py"), tag=True):
+    """Commit the frozen files in the scratch tree (a git repo of its own) and tag pa-a1-prereg when `tag`."""
+    a1 = root / "persona_affect" / "a1_frustration"
+    for f in frozen:
+        (a1 / f).write_text(f"frozen {f}\n")
+    git = lambda *a: subprocess.run(["git", "-c", "user.name=t", "-c", "user.email=t@t", *a], cwd=root, check=True,      # noqa: E731
+                                    capture_output=True, text=True, env=_no_git_env())
+    git("init", "-q")
+    git("add", "-A")
+    git("commit", "-q", "-m", "freeze")
+    if tag:
+        git("tag", "pa-a1-prereg")
+    return a1, git("rev-parse", "HEAD").stdout.strip()
+
+
+def test_capture_launch_refuses_unless_the_freeze_holds(tmp_path):
+    root, env = _tree(tmp_path / "a")
+    _freeze(root, tag=False)
+    r = _launch(root, env, M="q27", PHASE="capture")
+    assert r.returncode == 2 and "does not exist" in r.stderr                        # no tag yet: no capture
+    root, env = _tree(tmp_path / "b")
+    _freeze(root, frozen=("DESIGN.md", "analyze.py"))
+    r = _launch(root, env, M="q27", PHASE="capture")
+    assert r.returncode == 2 and "metrics.py is not in tag" in r.stderr              # the freeze must hold all three
+    root, env = _tree(tmp_path / "c")
+    a1, _ = _freeze(root)
+    (a1 / "analyze.py").write_text("changed after the freeze\n")
+    r = _launch(root, env, M="q27", PHASE="capture")
+    assert r.returncode == 2 and "changed since tag" in r.stderr
+    root, env = _tree(tmp_path / "d")
+    a1, _ = _freeze(root)
+    r = _launch(root, env, M="q27", PHASE="capture")
+    assert r.returncode == 2 and "ITEMS not found" in r.stderr                       # default jobs/q27_items.jsonl
+    (root / "elsewhere.jsonl").write_text("{}\n")
+    r = _launch(root, env, M="q27", PHASE="capture", ITEMS="elsewhere.jsonl")
+    assert r.returncode == 2 and "must sit under" in r.stderr                        # results/ and others do not ship
+    assert not (root / "uv.log").exists()                                            # refused before the budget check
+
+
+def test_capture_launch_command_after_the_freeze(tmp_path):
+    root, env = _tree(tmp_path)
+    a1, commit = _freeze(root)
+    (a1 / "jobs" / "gemma_items.jsonl").write_text("{}\n")
+    r = _launch(root, env, M="gemma", PHASE="capture")
+    assert r.returncode == 0, r.stderr
+    args = [line[4:] for line in r.stdout.splitlines() if line.startswith("ARG:")]
+    i = args.index("--")
+    head, pod = args[:i], args[i + 1:]
+    opt = lambda name: head[head.index(name) + 1]                                    # noqa: E731
+    out = "persona_affect/a1_frustration/results/gemma/acts"
+    assert (opt("--name"), opt("--max-minutes"), opt("--max-cost"), opt("--results-dir")) == (
+        "pa-a1-gemma-capture", "50", "1.50", out)
+    assert [head[j + 1] for j, a in enumerate(head) if a == "--ship"] == ["persona_affect", "welfare_training", "infra"]
+    assert pod == ["env", "PHASE=capture", "M=gemma", f"OUT={out}", "ITEMS=persona_affect/a1_frustration/jobs/gemma_items.jsonl",
+                   f"PREREG={commit}", "bash", "persona_affect/a1_frustration/pod.sh"]       # the tag's full commit
+    r = _launch(root, env, M="q27", PHASE="capture", MAXMIN="45")                       # q27 has no items file yet
+    assert r.returncode == 2 and "ITEMS not found" in r.stderr
+
+
+def _scratch_pod(tmp_path, setup_rc=0):
+    """pod.sh in a scratch tree with a stand-in vigilante/pod/setup_vllm.sh (exits setup_rc) and a stand-in python that
+    prints its arguments and exits 3."""
+    root = tmp_path / "repo"
+    (root / "persona_affect" / "a1_frustration").mkdir(parents=True)
+    (root / "vigilante" / "pod").mkdir(parents=True)
+    shutil.copy(A1_DIR / "pod.sh", root / "persona_affect" / "a1_frustration" / "pod.sh")
+    (root / "vigilante" / "pod" / "setup_vllm.sh").write_text(f"echo SETUP-RAN; exit {setup_rc}\n")
+    py = tmp_path / "fakepy.sh"
+    py.write_text('echo "PY: $*"; echo "FLASHINFER=${VLLM_USE_FLASHINFER_SAMPLER:-} ALLOC=${PYTORCH_CUDA_ALLOC_CONF:-}"; exit 3\n')
+    py.chmod(0o755)
+    return root / "persona_affect" / "a1_frustration" / "pod.sh", py
+
+
+def test_pod_runs_each_phase_and_returns_the_jobs_code(tmp_path):
+    pod, py = _scratch_pod(tmp_path)
+    out = tmp_path / "out"
+    r = subprocess.run(["bash", str(pod)], env={**os.environ, "PHASE": "gen", "M": "gemma", "OUT": str(out), "LIMIT": "2",
+                                                "PY": str(py)}, capture_output=True, text=True, timeout=60)
+    assert r.returncode == 3                                                          # the job's code, through tee
+    log = (out / "gen.log").read_text()
+    assert f"PY: -m persona_affect.a1_frustration.gen run --model gemma --out {out} --limit 2" in log
+    assert "FLASHINFER=0" in log and "SETUP-RAN" in (out / "setup_vllm.log").read_text()
+    r = subprocess.run(["bash", str(pod)], env={**os.environ, "PHASE": "capture", "M": "q27", "OUT": str(out),
+                                                "ITEMS": "i.jsonl", "PREREG": "c0ffee1", "PYTHON": str(py)},
+                       capture_output=True, text=True, timeout=60)
+    assert r.returncode == 3
+    log = (out / "capture.log").read_text()
+    assert f"PY: -m persona_affect.a1_frustration.capture --model q27 --items i.jsonl --out {out} --prereg c0ffee1" in log
+    assert "ALLOC=expandable_segments:True" in log
+    pod2, py2 = _scratch_pod(tmp_path / "bad", setup_rc=1)
+    r = subprocess.run(["bash", str(pod2)], env={**os.environ, "PHASE": "gen", "M": "q27", "OUT": str(tmp_path / "o2"),
+                                                 "PY": str(py2)}, capture_output=True, text=True, timeout=60)
+    assert r.returncode == 1 and "vLLM setup FAILED" in r.stdout and not (tmp_path / "o2" / "gen.log").exists()
+
+
+def test_pod_checks_its_arguments_first(tmp_path):
+    pod, py = _scratch_pod(tmp_path)
+    for env in ({"PHASE": "x", "M": "q27"}, {"PHASE": "gen", "M": "q8"}, {"PHASE": "gen", "M": "q27", "OUT": ""},
+                {"PHASE": "capture", "M": "q27", "ITEMS": "i.jsonl"}, {"PHASE": "capture", "M": "q27", "PREREG": "abc1234"}):
+        r = subprocess.run(["bash", str(pod)], env={**os.environ, "OUT": str(tmp_path / "o"), "PY": str(py), "PYTHON": str(py),
+                                                    **env}, capture_output=True, text=True, timeout=60)
+        assert r.returncode == 2 and "SETUP-RAN" not in r.stdout and "PY:" not in r.stdout, env
+
+
+def test_gitignores_keep_bulk_and_rebuilt_files_out():
+    assert (A1_DIR / "results" / ".gitignore").read_text().split() == ["*.npy", "items.jsonl", "dryrun/"]
+    assert (A1_DIR / "jobs" / ".gitignore").read_text().split() == ["*.jsonl"]
