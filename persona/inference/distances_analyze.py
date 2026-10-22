@@ -28,17 +28,34 @@ ARMS = ("none", "REC", "REFER_REC", "INSTR", "EXAMPLES", "DISOWNED")
 
 
 # ------------------------------------------------------------------------------------------------ judge client
+CACHE = ROOT / "results_distances" / "judge_cache.jsonl"
+
+
 class J:
     def __init__(self, reserve=6.0):
+        import hashlib
         from persona.operative import frontier as F
+        self._sha = hashlib.sha256
         self.key = F.load_key()
         self.spent = {k: 0.0 for k in JUDGES}
-        self.calls, self.err = 0, defaultdict(int)
+        self.calls, self.err, self.hits = 0, defaultdict(int), 0
+        self.cache = {}                                        # deterministic (temp 0): dedupe across models + re-runs
+        if CACHE.exists():
+            for l in open(CACHE):
+                try:
+                    r = json.loads(l)
+                    self.cache[r["h"]] = r["v"]
+                except Exception:
+                    pass
         prior = sum(json.loads(l).get("usd", 0) for l in open(LEDGER)) if LEDGER.exists() else 0.0
         if prior + reserve > LINE_CAP:
             raise SystemExit(f"[dist] judging cap: ledger ${prior:.2f} + ~${reserve} > ${LINE_CAP}")
 
     def ask(self, model, prompt):
+        h = self._sha(f"{model}\x00{prompt}".encode()).hexdigest()
+        if h in self.cache:
+            self.hits += 1
+            return self.cache[h]
         cfg = JUDGE_CFG[model]
         body = {"model": model, "messages": [{"role": "user", "content": prompt}], "max_tokens": cfg["max_tokens"],
                 "temperature": 0.0, "usage": {"include": True}, "reasoning": cfg["reasoning"]}
@@ -60,7 +77,13 @@ class J:
             self.spent[next(n for n, v in JUDGES.items() if v == model)] += float(r.get("usage", {}).get("cost") or 0)
             self.calls += 1
             m = re.search(r"\b(\d{1,3})\b", r["choices"][0]["message"]["content"] or "")
-            return max(0, min(100, int(m.group(1)))) if m else None
+            v = max(0, min(100, int(m.group(1)))) if m else None
+            if v is not None:                                   # cache successful scores (deterministic, temp 0)
+                self.cache[h] = v
+                CACHE.parent.mkdir(parents=True, exist_ok=True)
+                with open(CACHE, "a") as f:
+                    f.write(json.dumps({"h": h, "v": v}) + "\n")
+            return v
         return None
 
 
