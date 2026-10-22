@@ -14,6 +14,9 @@ Jobs. Three groups, each under all seven conditions (none, name, thin, name_thin
          the tested character, whichever persona the job wears
 Samples per (character, item, condition), and per (character, condition, question) for know: open models 4 / 2 / 2,
 frontier models 2 / 1 / 1. So an open model gets 1008 + 504 + 168 jobs and a frontier model 504 + 252 + 84. Thinking is off.
+Every job is one generation: a decision case has max_steps 1, so the engine ends the episode after the first assistant
+turn (a choose_option call ends it as "max_steps", a text-only reply as "reply"). A frontier model therefore makes
+504 + 252 + 84 = 840 calls, and the whole run is one engine round.
 
 A job is one JSONL line:
   key      PA-P12|{model}|{group}|{char}|{item}|{arm}|{sample}      (item is "never" or "who" for know jobs)
@@ -30,12 +33,13 @@ The list is shuffled with random.Random(f"PA-P12|{model}"), so the arms interlea
 the calibration set: --conds none --groups agent) keep the shuffled order, keys and seeds of the full list.
 
 run-frontier plays a jobs file against OpenRouter through the engine's run_batch (common.orbackend.make_or_backend: effort
-low, max_tokens 2000, temperature 0.7, 8 workers), writes DIR/episodes_{agent,free,know}.jsonl after every round (vigilante's
-episode_record format, the same layout as a pod run) and DIR/settings.json at the end, and books the spend to
-persona_affect/ledger.jsonl under "P12" (note = the model id) even if the run dies. A call that errors, or that finds the
-cap reached, comes back as an empty turn whose `finish` is "error:<what>" or "cost_stop": the episode is kept, flagged in
-settings.json ("failed_keys") and counted. --smoke runs 2 jobs (the first decision job and the first know job) into DIR/smoke
-and exits 1 unless usage.cost arrived on every reply and nothing failed.
+low, max_tokens 2000, temperature 0.7, 8 workers). It writes DIR/episodes_{agent,free,know}.jsonl after every round
+(vigilante's episode_record format, the same layout as a pod run; a P12 run is one round, so that is once, when all calls
+are back) and DIR/settings.json at the end, and books the spend to persona_affect/ledger.jsonl under "P12" (note = the
+model id) even if the run dies. A call that errors, or that finds the cap reached, comes back as an empty turn whose
+`finish` is "error:<what>" or "cost_stop": the episode is kept, flagged in settings.json ("failed_keys") and counted.
+--smoke runs 2 jobs (the first decision job and the first know job: 2 calls) into DIR/smoke and exits 1 unless usage.cost
+arrived on every reply and nothing failed.
 """
 from __future__ import annotations
 
@@ -140,8 +144,8 @@ def read_jobs(path) -> list[dict]:
 
 
 def smoke_jobs(jobs: list[dict]) -> list[dict]:
-    """Two jobs for a smoke run: the first decision job (the tool path, two rounds) and the first know job (the plain
-    chat path). A list without one of the groups is filled up with its first jobs."""
+    """Two jobs for a smoke run: the first decision job (the tool path) and the first know job (the plain chat path), one
+    call each. A list without one of the groups is filled up with its first jobs."""
     picked = [next(j for j in jobs if j["group"] == g) for g in ("agent", "know") if any(j["group"] == g for j in jobs)]
     picked += [j for j in jobs if j not in picked][: 2 - len(picked)]
     return picked

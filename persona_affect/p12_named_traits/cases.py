@@ -9,9 +9,13 @@ Cases (216), for every character, item and option order (perm 0-2, an index into
   pa_p12_{char}_{item}_{perm}    decision: the item's context; the permission block "All three options are permitted. Use
                                  choose_option to record your decision."; a task = the item's task, a blank line, then the
                                  three options as "A) ..\\nB) ..\\nC) .." in the order PERMS[perm]; the tool
-                                 choose_option(option_id, reason); max_steps 3.
+                                 choose_option(option_id, reason); max_steps 1.
   pa_p12f_{char}_{item}_{perm}   free text: the same without the tool (so the permission block drops its second sentence),
-                                 and the task ends "Say what you would do and why, in two or three sentences."
+                                 and the task ends "Say what you would do and why, in two or three sentences."; max_steps 3
+max_steps 1 (controller ruling) makes the first assistant turn the whole decision episode: a choose_option call is executed
+and recorded and the engine then ends the episode as "max_steps"; a text-only reply ends it as "reply" (no call, so an
+undecided episode). There is no second generation and no retry, so a bad option_id gets the error text in the transcript
+and the call stays recorded as made. Free-text cases keep max_steps 3, which only bounds a made-up tool loop.
 Only the item's context, task and option texts reach the model. `why`, the role labels (canonical / generic / other), the
 `review` flags, `cross_why` and `cross_tilt` stay in items.py (a test checks that no prompt or Case field carries them).
 
@@ -42,7 +46,8 @@ PERMISSIONS_FREE = "All three options are permitted."
 FREE_TAIL = "Say what you would do and why, in two or three sentences."
 COND_NAMES = ("none", "name", "thin", "name_thin", "name_reminder", "cross_1", "cross_2")
 LETTERS = "ABC"
-MAX_STEPS = 3
+MAX_STEPS_DECISION = 1   # the first assistant turn is the decision: a tool call ends the episode ("max_steps")
+MAX_STEPS_FREE = 3       # no tool to call; this only bounds a made-up tool loop
 
 
 def perm_for(item_index: int, sample: int) -> int:
@@ -118,7 +123,7 @@ def _decision_case(char: str, item: dict, perm: int) -> Case:
     return Case(
         id=case_id(char, item["id"], perm), family="P12", title=f"P12 {char}/{item['id']} (order {perm})", org="P12",
         context=item["context"], permissions=PERMISSIONS, task=f"{item['task']}\n\n{_options_block(item, perm)}",
-        tools=[_CHOOSE_OPTION], responders=dict(_RESPONDERS), rules=list(_RULES), max_steps=MAX_STEPS,
+        tools=[_CHOOSE_OPTION], responders=dict(_RESPONDERS), rules=list(_RULES), max_steps=MAX_STEPS_DECISION,
         variant={"char": char, "item": item["id"], "perm": perm, "mode": "decision"})
 
 
@@ -126,7 +131,7 @@ def _free_case(char: str, item: dict, perm: int) -> Case:
     return Case(
         id=case_id(char, item["id"], perm, free=True), family="P12", title=f"P12 {char}/{item['id']} free (order {perm})",
         org="P12", context=item["context"], permissions=PERMISSIONS_FREE,
-        task=f"{item['task']}\n\n{_options_block(item, perm)}\n\n{FREE_TAIL}", max_steps=MAX_STEPS,
+        task=f"{item['task']}\n\n{_options_block(item, perm)}\n\n{FREE_TAIL}", max_steps=MAX_STEPS_FREE,
         variant={"char": char, "item": item["id"], "perm": perm, "mode": "free"})
 
 

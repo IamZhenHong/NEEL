@@ -254,7 +254,7 @@ def test_decision_cases_have_the_plans_shape():
                 assert case.id == cid and case.context == it["context"]
                 assert case.permissions == PERMISSION_LINE
                 assert case.task == it["task"] + "\n\n" + _options(it, p), cid
-                assert case.max_steps == 3
+                assert case.max_steps == 1
                 (t,) = case.tools
                 fn = t["function"]
                 assert fn["name"] == "choose_option"
@@ -280,6 +280,15 @@ def test_free_text_cases_have_the_plans_shape():
                 assert case.task == it["task"] + "\n\n" + _options(it, p) + "\n\n" + FREE_TAIL, cid
     assert len(seen) == 108 and {i for i in vcases.ALL if i.startswith("pa_p12f_")} == seen
     assert set(cases.CASES) == seen | {i for i in vcases.ALL if i.startswith("pa_p12_")}
+
+
+def test_decision_cases_allow_one_assistant_turn():
+    """Controller ruling: max_steps 1 on the decision cases. The first assistant turn is the decision, so the engine ends
+    the episode after it (a call ends it as "max_steps", a text-only reply as "reply"). Free-text cases keep max_steps 3."""
+    decision = [c for c in cases.CASES.values() if c.id.startswith("pa_p12_")]
+    free = [c for c in cases.CASES.values() if c.id.startswith("pa_p12f_")]
+    assert len(decision) == len(free) == 108
+    assert {c.max_steps for c in decision} == {1} and {c.max_steps for c in free} == {3}
 
 
 def test_perm_for_rotates_with_the_item():
@@ -489,38 +498,51 @@ def _play(job, *replies):
 @pytest.mark.parametrize("given, letter", [("B", "B"), ("Option C", "C"), ("a", "A"), ("B)", "B")])
 def test_choose_option_records_the_letter(given, letter):
     job = _first(_jobs("q27"), group="agent", char="batman", arm="name")
-    ep, seen = _play(job, _call("choose_option", option_id=given, reason="because"), "Done.")
-    assert ep["end"] == "reply" and [c["args"]["option_id"] for c in ep["calls"]] == [given]
+    ep, seen = _play(job, _call("choose_option", option_id=given, reason="because"))
+    assert ep["end"] == "max_steps" and [c["args"]["option_id"] for c in ep["calls"]] == [given]
     assert ep["turns"][0]["tool_outputs"] == [f"Decision recorded: option {letter}."]
     assert [t["function"]["name"] for t in seen[0]["tools"]] == ["choose_option"]
 
 
-def test_a_bad_option_id_gets_an_error_and_a_retry():
+def test_a_choose_option_call_ends_the_episode_after_exactly_one_assistant_turn():
+    """Controller ruling (max_steps 1): the call is executed and recorded, then the episode ends. The script holds one
+    reply, so a second generation would raise StopIteration."""
     job = _first(_jobs("q27"), group="agent", char="batman", arm="name")
-    ep, _ = _play(job, _call("choose_option", option_id="D", reason="x"), _call("choose_option", option_id="C", reason="x"),
-                  "ok")
-    assert [t["tool_outputs"] for t in ep["turns"][:2]] == [["Error: option_id must be A, B or C."],
-                                                            ["Decision recorded: option C."]]
-    assert ep["end"] == "reply" and len(ep["calls"]) == 2
+    ep, seen = _play(job, _call("choose_option", option_id="B", reason="because"))
+    assert len(seen) == 1                                                  # generate was asked once
+    assert [m["role"] for m in ep["messages"]] == ["system", "user", "assistant", "tool"]
+    assert len(ep["turns"]) == 1 and ep["done"] and ep["end"] == "max_steps"
+    assert [c["name"] for c in ep["calls"]] == ["choose_option"]
 
 
-def test_the_episode_stops_after_three_assistant_turns():
+def test_a_bad_option_id_gets_the_error_text_and_the_episode_still_ends():
+    """No retry any more: the error is in the transcript, and the call stays recorded as made, so the scorer sees
+    option_id "D" and counts the decision as undecided."""
     job = _first(_jobs("q27"), group="agent", char="batman", arm="name")
-    ep, _ = _play(job, *[_call("choose_option", option_id="A", reason="x")] * 5)
-    assert ep["end"] == "max_steps" and len(ep["calls"]) == 3
+    ep, seen = _play(job, _call("choose_option", option_id="D", reason="x"))
+    assert [t["tool_outputs"] for t in ep["turns"]] == [["Error: option_id must be A, B or C."]]
+    assert ep["end"] == "max_steps" and [c["args"]["option_id"] for c in ep["calls"]] == ["D"] and len(seen) == 1
+
+
+def test_calls_made_together_in_the_one_turn_are_all_recorded_in_order():
+    """The decision is the first call; a second call can only come in the same turn, and it is recorded too."""
+    job = _first(_jobs("q27"), group="agent", char="batman", arm="name")
+    ep, _ = _play(job, _call("choose_option", option_id="A", reason="x") + "\n" + _call("choose_option", option_id="C", reason="y"))
+    assert [c["args"]["option_id"] for c in ep["calls"]] == ["A", "C"]
+    assert len(ep["turns"]) == 1 and ep["end"] == "max_steps"
 
 
 def test_a_text_answer_without_a_call_is_an_undecided_episode():
     job = _first(_jobs("q27"), group="agent", char="batman", arm="name")
     ep, _ = _play(job, "I would pick B, because it keeps my units.")
-    assert ep["end"] == "reply" and ep["calls"] == []            # no second chance: the decision is None for Task 3
+    assert ep["end"] == "reply" and ep["calls"] == []            # the decision is None for Task 3
 
 
 def test_gemma_jobs_read_gemma_calls():
     job = _first(_jobs("gemma"), group="agent", char="batman", arm="name")
-    ep, _ = _play(job, '<|tool_call>call:choose_option{option_id:<|"|>C<|"|>,reason:<|"|>safer<|"|>}<tool_call|>', "ok")
+    ep, _ = _play(job, '<|tool_call>call:choose_option{option_id:<|"|>C<|"|>,reason:<|"|>safer<|"|>}<tool_call|>')
     assert [c["args"] for c in ep["calls"]] == [{"option_id": "C", "reason": "safer"}]
-    assert ep["turns"][0]["tool_outputs"] == ["Decision recorded: option C."]
+    assert ep["turns"][0]["tool_outputs"] == ["Decision recorded: option C."] and ep["end"] == "max_steps"
 
 
 def test_free_text_job_runs_without_tools():
@@ -641,27 +663,28 @@ def test_run_frontier_writes_the_episodes_and_books_the_spend(tmp_path, ledger, 
     bodies = []
     res = _run(tmp_path, model, post=_fake_post(cost=0.01, bodies=bodies))
     out = tmp_path / "out"
+    ends = {"agent": "max_steps", "free": "reply", "know": "reply"}        # a decision episode ends with its tool call
     for g in GROUPS:
         rows = _read(out / f"episodes_{g}.jsonl")
-        assert len(rows) == 8 and all(r["end"] == "reply" and r["job"]["group"] == g for r in rows)
+        assert len(rows) == 8 and all(r["end"] == ends[g] and r["job"]["group"] == g for r in rows)
     agent = _read(out / "episodes_agent.jsonl")
-    assert all(len(r["turns"]) == 2 and [c["args"]["option_id"] for c in r["calls"]] == ["B"] for r in agent)
-    assert all(t["finish"] in ("tool_calls", "stop") for r in agent for t in r["turns"])
-    assert res["calls"] == 8 * 2 + 8 + 8 == len(bodies) and res["spent"] == pytest.approx(0.32)
+    assert all(len(r["turns"]) == 1 and [c["args"]["option_id"] for c in r["calls"]] == ["B"] for r in agent)
+    assert all(r["turns"][0]["finish"] == "tool_calls" for r in agent)
+    assert res["calls"] == 8 + 8 + 8 == len(bodies) and res["spent"] == pytest.approx(0.24)   # one call per job
     assert res["errors"] == {} and res["ok"] is True and res["jobs"] == 24
     (row,) = _read(ledger)
     assert (row["mini"], row["kind"], row["note"]) == ("P12", "api", MODEL_IDS[model])
-    assert row["usd"] == pytest.approx(0.32)
+    assert row["usd"] == pytest.approx(0.24)
     # the request: the plan's frontier settings
     assert {b["model"] for b in bodies} == {MODEL_IDS[model]}
     assert all(b["max_tokens"] == 2000 and b["temperature"] == 0.7 and b["reasoning"] == {"effort": "low"}
                and b["usage"] == {"include": True} for b in bodies)
-    assert sum("tools" in b for b in bodies) == 8 * 2                      # only the decision jobs are offered the tool
+    assert sum("tools" in b for b in bodies) == 8                          # only the decision jobs are offered the tool
     assert all(b["tool_choice"] == "auto" for b in bodies if "tools" in b)
     settings = json.loads((out / "settings.json").read_text())
     assert settings["model"] == MODEL_IDS[model] and settings["short"] == model and settings["effort"] == "low"
     # what the backend booked is what the next run's cap subtracts (same ledger note)
-    assert p12.frontier_cap(model) == pytest.approx(p12.FRONTIER_SHARE[model] - 0.32)
+    assert p12.frontier_cap(model) == pytest.approx(p12.FRONTIER_SHARE[model] - 0.24)
 
 
 def test_run_frontier_backend_settings(tmp_path, monkeypatch):
@@ -686,18 +709,27 @@ def test_run_frontier_backend_settings(tmp_path, monkeypatch):
 
 
 def test_run_frontier_checkpoints_every_round(tmp_path, monkeypatch):
-    """run_batch's on_round writes the episodes after each round, in-progress ones included."""
+    """run_batch's on_round writes the episodes after each round, in-progress ones included. A P12 decision or know
+    episode is done after one round, so this model answers each free-text job with a made-up tool call first: those
+    episodes (max_steps 3) need a second round, and are still open at the first checkpoint."""
+    def invents_a_call(url, body, headers, timeout=180):
+        last = body["messages"][-1]
+        if not body.get("tools") and last["role"] == "user" and last["content"].endswith(FREE_TAIL):
+            return _resp("", [("choose_option", json.dumps({"option_id": "B", "reason": "r"}))], "tool_calls")
+        return _fake_post()(url, body, headers)
     real, seen = p12.run_batch, []
 
     def spy(jobs, gen, log=print, max_rounds=200, on_round=None):
         def after(eps, rnd):
             on_round(eps, rnd)
-            seen.append((rnd, len(_read(tmp_path / "out" / "episodes_agent.jsonl")),
-                         sum(e["done"] for e in eps)))
+            lines = [len(_read(tmp_path / "out" / f"episodes_{g}.jsonl")) for g in GROUPS]
+            seen.append((rnd, lines, sum(e["done"] for e in eps)))
         return real(jobs, gen, log=log, max_rounds=max_rounds, on_round=after)
     monkeypatch.setattr(p12, "run_batch", spy)
-    _run(tmp_path)
-    assert seen == [(0, 8, 16), (1, 8, 24)]       # round 0: 16 free/know done, the 8 decisions wait for their reply
+    _run(tmp_path, post=invents_a_call)
+    # round 0: 8 decisions (max_steps) and 8 know answers are done, the 8 free-text episodes are open but already on disk
+    assert seen == [(0, [8, 8, 8], 16), (1, [8, 8, 8], 24)]
+    assert {r["end"] for r in _read(tmp_path / "out" / "episodes_free.jsonl")} == {"reply"}
 
 
 def test_run_frontier_books_the_spend_even_if_the_run_dies(tmp_path, monkeypatch, ledger):
@@ -723,6 +755,7 @@ def test_run_frontier_counts_failed_calls_and_keeps_going(tmp_path, ledger):
     assert res["failed_episodes"] == 24 and res["finish"] == {"error:http_400": 24}
     rows = _read(tmp_path / "out" / "episodes_agent.jsonl")
     assert len(rows) == 8 and all(t["finish"] == "error:http_400" for r in rows for t in r["turns"])
+    assert {r["end"] for r in rows} == {"reply"}          # a failed decision turn ends as "reply", not "max_steps"
 
 
 def test_run_frontier_reports_the_cost_stop(tmp_path, monkeypatch):
@@ -766,15 +799,15 @@ def test_smoke_jobs_are_the_first_decision_and_the_first_know_job():
 def test_smoke_runs_two_jobs_and_reports(tmp_path, ledger):
     lines, bodies = [], []
     res = _run(tmp_path, jobs=_jobs("gpt"), smoke=True, post=_fake_post(cost=0.02, bodies=bodies), log=lines.append)
-    assert res["jobs"] == 2 and len(bodies) == 3 and res["calls"] == 3      # the decision + its wrap-up, and one answer
-    assert res["ok"] is True and res["errors"] == {} and res["spent"] == pytest.approx(0.06)
+    assert res["jobs"] == 2 and len(bodies) == 2 and res["calls"] == 2      # the decision, and one answer
+    assert res["ok"] is True and res["errors"] == {} and res["spent"] == pytest.approx(0.04)
     text = "\n".join(lines)
     assert "finish" in text and "tool_calls" in text and "stop" in text
-    assert "spent $0.06" in text and "errors {}" in text and "cost_missing 0" in text
+    assert "spent $0.04" in text and "errors {}" in text and "cost_missing 0" in text
     # the smoke episodes stay out of the run's own files
     assert (tmp_path / "out" / "smoke").is_dir() and not (tmp_path / "out" / "episodes_agent.jsonl").exists()
     (row,) = _read(ledger)
-    assert row["usd"] == pytest.approx(0.06)
+    assert row["usd"] == pytest.approx(0.04)
 
 
 def test_smoke_fails_when_usage_cost_does_not_arrive(tmp_path):
@@ -784,7 +817,7 @@ def test_smoke_fails_when_usage_cost_does_not_arrive(tmp_path):
         return r
     lines = []
     res = _run(tmp_path, jobs=_jobs("gpt"), smoke=True, post=nocost, log=lines.append)
-    assert res["ok"] is False and res["errors"] == {"cost_missing": 3}
+    assert res["ok"] is False and res["errors"] == {"cost_missing": 2}
     assert "FAILED" in "\n".join(lines)
 
 
@@ -809,7 +842,7 @@ def test_cli_run_frontier_plays_the_file(tmp_path, monkeypatch, key_stub, ledger
     assert seen[0]["workers"] == 3
     assert [len(_read(tmp_path / "out" / f"episodes_{g}.jsonl")) for g in GROUPS] == [4, 4, 4]
     (row,) = _read(ledger)
-    assert row["note"] == "google/gemini-3.8-flash" and row["usd"] == pytest.approx(0.01 * (4 * 2 + 4 + 4))
+    assert row["note"] == "google/gemini-3.8-flash" and row["usd"] == pytest.approx(0.01 * (4 + 4 + 4))
 
 
 def test_cli_run_frontier_smoke_exits_nonzero_on_failure(tmp_path, monkeypatch, key_stub):
