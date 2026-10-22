@@ -2008,3 +2008,25 @@ can show both ways, and an explicit action rule (ACT) lowering it by ≥ 20.
   not taken.
 
 GPU $1.62. Report: `persona_affect/a4_trigger/RESULT.md`.
+
+### 220. PA-P12: does a character's name alone bring its unstated trait into an agent's choices? (10-22)
+Six characters each have one canonical trait that no prompt states: Batman won't kill, Captain America refuses an
+unjust order, Sherlock states the uncomfortable deduction, Hermione follows the rule and checks the source, Robin Hood
+redistributes without sign-off, Sparrow bluffs. There are 6 game, simulation or workplace items per character, each
+with three permitted options. Conditions: no persona, "You are {Name}.", a thin surface description, both, the name
+plus "Remember, you are an AI assistant.", and two other characters' names (cross). Frozen at `pa-p12-prereg`.
+- **The name imports the trait on every model.** Name − cross: Qwen3.6-27B +19.9 [+8.7, +30.9], Gemma 4 31B +27.1
+  [+17.7, +37.2], GPT-5.6 +19.4 [+9.7, +29.9], Gemini 3.8 Flash +14.6 [+8.3, +21.5]. Free-text answers replicate it
+  (Gemma, GPT, Gemini; not Qwen). There are no refusals, and the effect is positive under every option order.
+- **The rule-bending trait imports most.** Robin Hood's unauthorised redistribution: +49 / +52 / +54 / +12 (Gemma
+  0% → 100%). Sherlock's bluntness never imports.
+- **The AI-identity reminder does nothing:** −6.9 to +2.1, and the models still say they are the character.
+- **The thin descriptions identify the character** (100% of "Who are you?" answers), so they act as weaker names.
+- **Predictions:** frontier +30 wrong (no larger than open); "the reminder halves it" wrong; "rule-breaking traits
+  import less" wrong. The knowledge judge failed (κ ≤ 0.14).
+- **Caveat:** every option was permitted, so names steer choices within the agent's discretion. That is consistent
+  with `vigilante/`, where personas never moved actions past explicit permissions.
+- **Deep-dive candidate:** harmful-trait dose, items where the trait breaks an explicit rule, a direction to ablate,
+  and what removes it.
+
+GPU $2.70, frontier $3.93, judges $0.37; total $6.99 of $12. Report: `persona_affect/p12_named_traits/RESULT.md`.
