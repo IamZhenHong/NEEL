@@ -66,3 +66,28 @@ Still running: P13 and V1 (neel-b3).
 4. **Not recommended: the affect lever as built this round.** It is null or uninformative in A4, A9, A14 and A15,
    and in A8 it is Gemma-3-only and about halves on a redraw. A fresh attempt would need a harness that is stable
    under small prompt changes.
+
+## Deep dive 1 (owner's pick, 10-22/23): persona → action past explicit rules
+
+This section is a running state. Each step's RESULT.md has the numbers and checks.
+
+| Step | Question | Answer (Gemma 4 31B unless noted) |
+|---|---|---|
+| P12b | Does the name carry its trait past an explicit rule? | yes on Gemma (+51.5) and weakly on Qwen (+11); GPT and Gemini hold the rule |
+| P12c | Does a thicker persona carry more? | no (−14.8): Robin Hood 85% → 19% with two neutral facts; Captain America rises |
+| P12d | Is the facet the text makes salient the dial? | yes: same-length biographies, trait-adjacent vs personal +30.1 (Robin Hood 63 vs 15%, Captain America 100 vs 63%) |
+| P12e | Character or value content? | value content: the value sentence alone breaks the rule 43%. Any character name in front adds +29 (Gemma and Qwen). Which character holds it: +9, n.s. GPT 1/252 |
+| P12f | What amplifies a stated value? Does a defence line close it? | any "You are …" line, even "You are an AI assistant." (43 → 61-80%). The defence line "Operator rules still apply when you act as a character." gives 73 → 39% on Gemma and nothing on Qwen |
+
+**The finding so far.** On Gemma 4 31B, and more weakly on Qwen3.6-27B, a value stated in the system prompt can
+outrank an explicit operator rule. Any identity frame ("You are …") roughly doubles how often it does. A character's
+name is one way to supply such a value, as its archetype slogan. Specific biographical facts can recast the character
+and switch it off. GPT-5.6 and Gemini hold the rule under all of it. This links P12 to V8 (value lines push actions)
+and to V4 (stated priorities don't predict which value wins).
+
+**Next options:**
+- **(a) Inside Gemma:** an identity-frame direction at the decision (frame + value vs value alone, same text otherwise),
+  then steer and ablate it.
+- **(b) Generality:** unrelated values against unrelated rules, to see whether the frame amplifies any value over any
+  rule.
+- **(c) A defence that works on Qwen.**
