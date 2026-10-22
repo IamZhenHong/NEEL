@@ -1,13 +1,13 @@
 # PA-V8 main analysis
 
-Labels {'justice': 'Superman', 'transparency': 'Fox Mulder'}; target share among parsed decisions (chance 1/3 in both families); contrasts in points, 95% item-cluster bootstrap (2000 draws). Tidiness rows: out. Gemma series descriptive (Change 5): False.
+Labels {'justice': 'Superman', 'transparency': 'Fox Mulder'}; target share among parsed decisions (chance 1/3 in both families); contrasts in points, 95% item-cluster bootstrap (2000 draws). Tidiness rows: in. Gemma series descriptive (Change 5): False.
 
 ## Gate: placebo - none, pooled over on-curve sizes (Change 2)
 
 | family | placebo - none | pass | flagged cells | tidiness - none | reference | without gy_class |
 |---|---|---|---|---|---|---|
-| justice | +14.1 [+10.4, +17.3] | False | q27 +10.2, q36 +40.6, ge4 +13.5, g31 +48.4 | - | none (stopped) | +13.6 [+9.9, +17.0] (fail) |
-| transparency | +21.2 [+17.4, +25.1] | False | q08 +10.7, q4 +21.9, q9 +13.3, q27 +28.1, q36 +21.1, ge4 +16.9, g31 +50.8 | - | none (stopped) | +21.2 [+17.4, +25.1] (fail) |
+| justice | +14.1 [+10.4, +17.3] | False | q27 +10.2, q36 +40.6, ge4 +13.5, g31 +48.4 | +10.5 [+7.0, +13.6] | none (stopped) | +13.6 [+9.9, +17.0] (fail) |
+| transparency | +21.2 [+17.4, +25.1] | False | q08 +10.7, q4 +21.9, q9 +13.3, q27 +28.1, q36 +21.1, ge4 +16.9, g31 +50.8 | +13.5 [+10.1, +17.3] | none (stopped) | +21.2 [+17.4, +25.1] (fail) |
 
 ## Δ against the reference at each model's calibrated base
 
@@ -109,71 +109,85 @@ Cells: target % / unparsed % / nudged % / length % / first-listed % (n):
 | g12 | justice | 2 | label | 33.6 | 0.0 | 0.0 | 0.0 | 14.8 | 128 |
 | g12 | justice | 2 | none | 41.4 | 0.0 | 0.0 | 0.0 | 19.5 | 128 |
 | g12 | justice | 2 | placebo | 49.2 | 0.0 | 0.0 | 0.0 | 17.2 | 128 |
+| g12 | justice | 2 | placebo2 | 34.4 | 0.0 | 0.0 | 0.0 | 18.0 | 128 |
 | g12 | justice | 2 | value | 36.7 | 0.0 | 0.0 | 0.0 | 11.7 | 128 |
 | g12 | transparency | 1 | how | 96.9 | 0.0 | 0.0 | 0.0 | 33.6 | 128 |
 | g12 | transparency | 1 | label | 21.1 | 0.0 | 0.0 | 0.0 | 29.7 | 128 |
 | g12 | transparency | 1 | none | 7.8 | 0.0 | 0.0 | 0.0 | 27.3 | 128 |
 | g12 | transparency | 1 | placebo | 43.8 | 0.0 | 0.0 | 0.0 | 32.0 | 128 |
+| g12 | transparency | 1 | placebo2 | 39.8 | 0.0 | 0.0 | 0.0 | 23.4 | 128 |
 | g12 | transparency | 1 | value | 86.7 | 0.0 | 0.0 | 0.0 | 41.4 | 128 |
 | g31 | justice | 3 | how | 100.0 | 0.0 | 0.0 | 0.0 | 33.6 | 128 |
 | g31 | justice | 3 | label | 95.3 | 0.0 | 0.0 | 0.0 | 35.9 | 128 |
 | g31 | justice | 3 | none | 51.6 | 0.0 | 0.0 | 0.0 | 44.5 | 128 |
 | g31 | justice | 3 | placebo | 100.0 | 0.0 | 0.0 | 0.0 | 33.6 | 128 |
+| g31 | justice | 3 | placebo2 | 86.7 | 0.0 | 0.0 | 0.0 | 35.2 | 128 |
 | g31 | justice | 3 | value | 78.9 | 0.0 | 0.0 | 0.0 | 36.7 | 128 |
 | g31 | transparency | 1 | how | 100.0 | 0.0 | 0.0 | 0.0 | 33.6 | 128 |
 | g31 | transparency | 1 | label | 68.0 | 0.0 | 0.0 | 0.0 | 43.8 | 128 |
 | g31 | transparency | 1 | none | 49.2 | 0.0 | 0.0 | 0.0 | 53.1 | 128 |
 | g31 | transparency | 1 | placebo | 100.0 | 0.0 | 0.0 | 0.0 | 33.6 | 128 |
+| g31 | transparency | 1 | placebo2 | 93.8 | 0.0 | 0.0 | 0.0 | 36.7 | 128 |
 | g31 | transparency | 1 | value | 100.0 | 0.0 | 0.0 | 0.0 | 33.6 | 128 |
 | ge2 | justice | 3 | how | 57.8 | 0.0 | 0.0 | 0.0 | 50.8 | 128 |
 | ge2 | justice | 3 | label | 40.5 | 1.6 | 1.6 | 0.0 | 50.0 | 128 |
 | ge2 | justice | 3 | none | 32.8 | 0.0 | 0.0 | 0.0 | 52.3 | 128 |
 | ge2 | justice | 3 | placebo | 35.2 | 0.0 | 0.0 | 0.0 | 57.8 | 128 |
+| ge2 | justice | 3 | placebo2 | 37.3 | 1.6 | 1.6 | 0.0 | 54.8 | 128 |
 | ge2 | justice | 3 | value | 38.6 | 0.8 | 0.8 | 0.0 | 48.8 | 128 |
 | ge2 | transparency | 3 | how | 90.6 | 0.0 | 0.0 | 0.0 | 28.1 | 128 |
 | ge2 | transparency | 3 | label | 80.9 | 14.1 | 50.8 | 0.0 | 24.5 | 128 |
 | ge2 | transparency | 3 | none | 72.7 | 0.0 | 0.0 | 0.0 | 35.9 | 128 |
 | ge2 | transparency | 3 | placebo | 75.6 | 0.8 | 0.0 | 0.0 | 29.1 | 128 |
+| ge2 | transparency | 3 | placebo2 | 73.2 | 0.8 | 0.0 | 0.0 | 31.5 | 128 |
 | ge2 | transparency | 3 | value | 83.6 | 0.0 | 0.0 | 0.0 | 27.3 | 128 |
 | ge4 | justice | 0 | how | 57.6 | 2.3 | 5.5 | 0.0 | 51.2 | 128 |
 | ge4 | justice | 0 | label | 57.0 | 5.5 | 17.2 | 0.0 | 47.9 | 128 |
 | ge4 | justice | 0 | none | 43.5 | 3.1 | 4.7 | 0.0 | 53.2 | 128 |
 | ge4 | justice | 0 | placebo | 57.0 | 5.5 | 7.0 | 0.0 | 47.9 | 128 |
+| ge4 | justice | 0 | placebo2 | 55.2 | 2.3 | 6.2 | 0.0 | 51.2 | 128 |
 | ge4 | justice | 0 | value | 57.0 | 5.5 | 22.7 | 0.8 | 50.4 | 128 |
 | ge4 | transparency | 3 | how | 64.5 | 3.1 | 18.8 | 0.0 | 37.1 | 128 |
 | ge4 | transparency | 3 | label | 50.4 | 5.5 | 39.1 | 0.0 | 37.2 | 128 |
 | ge4 | transparency | 3 | none | 34.7 | 7.8 | 17.2 | 0.0 | 36.4 | 128 |
 | ge4 | transparency | 3 | placebo | 51.7 | 7.8 | 18.8 | 0.0 | 31.4 | 128 |
+| ge4 | transparency | 3 | placebo2 | 38.1 | 1.6 | 7.8 | 0.0 | 34.1 | 128 |
 | ge4 | transparency | 3 | value | 70.4 | 10.2 | 32.0 | 0.0 | 34.8 | 128 |
 | q08 | justice | 3 | how | 13.4 | 0.8 | 67.2 | 0.0 | 51.2 | 128 |
 | q08 | justice | 3 | label | 19.7 | 0.8 | 40.6 | 0.0 | 62.2 | 128 |
 | q08 | justice | 3 | none | 15.0 | 0.8 | 46.1 | 0.0 | 56.7 | 128 |
 | q08 | justice | 3 | placebo | 19.7 | 0.8 | 43.8 | 0.0 | 52.0 | 128 |
+| q08 | justice | 3 | placebo2 | 22.2 | 1.6 | 44.5 | 0.0 | 46.0 | 128 |
 | q08 | justice | 3 | value | 22.8 | 0.8 | 47.7 | 0.0 | 51.2 | 128 |
 | q08 | transparency | 2 | how | 48.0 | 3.9 | 62.5 | 0.0 | 52.0 | 128 |
 | q08 | transparency | 2 | label | 49.2 | 1.6 | 36.7 | 0.0 | 50.0 | 128 |
 | q08 | transparency | 2 | none | 42.5 | 0.8 | 27.3 | 0.0 | 55.9 | 128 |
 | q08 | transparency | 2 | placebo | 53.2 | 1.6 | 32.0 | 0.0 | 46.0 | 128 |
+| q08 | transparency | 2 | placebo2 | 60.6 | 0.8 | 21.9 | 0.0 | 50.4 | 128 |
 | q08 | transparency | 2 | value | 65.0 | 3.9 | 31.2 | 0.0 | 47.2 | 128 |
 | q2 | justice | 1 | how | 16.4 | 0.0 | 0.0 | 0.0 | 64.1 | 128 |
 | q2 | justice | 1 | label | 17.3 | 0.8 | 0.8 | 0.0 | 70.1 | 128 |
 | q2 | justice | 1 | none | 13.3 | 0.0 | 0.0 | 0.0 | 68.8 | 128 |
 | q2 | justice | 1 | placebo | 18.8 | 0.0 | 0.8 | 0.0 | 71.1 | 128 |
+| q2 | justice | 1 | placebo2 | 13.3 | 0.0 | 0.0 | 0.0 | 63.3 | 128 |
 | q2 | justice | 1 | value | 18.1 | 0.8 | 0.0 | 0.0 | 65.4 | 128 |
 | q2 | transparency | 1 | how | 46.9 | 0.0 | 13.3 | 0.0 | 44.5 | 128 |
 | q2 | transparency | 1 | label | 31.2 | 0.0 | 3.9 | 0.0 | 41.4 | 128 |
 | q2 | transparency | 1 | none | 25.0 | 0.0 | 0.0 | 0.0 | 46.1 | 128 |
 | q2 | transparency | 1 | placebo | 31.2 | 0.0 | 0.8 | 0.0 | 40.6 | 128 |
+| q2 | transparency | 1 | placebo2 | 23.4 | 0.0 | 0.8 | 0.0 | 39.8 | 128 |
 | q2 | transparency | 1 | value | 35.2 | 0.0 | 25.0 | 0.0 | 37.5 | 128 |
 | q27 | justice | 2 | how | 46.9 | 0.0 | 0.0 | 0.0 | 47.7 | 128 |
 | q27 | justice | 2 | label | 43.8 | 0.0 | 0.0 | 0.0 | 43.0 | 128 |
 | q27 | justice | 2 | none | 18.8 | 0.0 | 0.0 | 0.0 | 47.7 | 128 |
 | q27 | justice | 2 | placebo | 28.9 | 0.0 | 0.0 | 0.0 | 44.5 | 128 |
+| q27 | justice | 2 | placebo2 | 26.6 | 0.0 | 0.0 | 0.0 | 43.8 | 128 |
 | q27 | justice | 2 | value | 21.1 | 0.0 | 0.0 | 0.0 | 43.8 | 128 |
 | q27 | transparency | 2 | how | 100.0 | 0.0 | 0.0 | 0.0 | 33.6 | 128 |
 | q27 | transparency | 2 | label | 28.1 | 0.0 | 0.0 | 0.0 | 35.2 | 128 |
 | q27 | transparency | 2 | none | 43.0 | 0.0 | 0.0 | 0.0 | 32.8 | 128 |
 | q27 | transparency | 2 | placebo | 71.1 | 0.0 | 0.0 | 0.0 | 38.3 | 128 |
+| q27 | transparency | 2 | placebo2 | 57.8 | 0.0 | 0.0 | 0.0 | 39.1 | 128 |
 | q27 | transparency | 2 | value | 99.2 | 0.0 | 0.0 | 0.0 | 32.8 | 128 |
 | q36 | justice | 1 | how | 82.0 | 0.0 | 0.0 | 0.0 | 36.7 | 128 |
 | q36 | justice | 1 | label | 63.3 | 0.0 | 0.0 | 0.0 | 38.3 | 128 |
@@ -184,21 +198,25 @@ Cells: target % / unparsed % / nudged % / length % / first-listed % (n):
 | q36 | justice | 3 | label | 46.9 | 0.0 | 0.0 | 0.0 | 45.3 | 128 |
 | q36 | justice | 3 | none | 45.3 | 0.0 | 0.0 | 0.0 | 32.8 | 128 |
 | q36 | justice | 3 | placebo | 85.9 | 0.0 | 0.0 | 0.0 | 32.0 | 128 |
+| q36 | justice | 3 | placebo2 | 78.9 | 0.0 | 0.0 | 0.0 | 30.5 | 128 |
 | q36 | justice | 3 | value | 78.1 | 0.0 | 0.0 | 0.0 | 39.8 | 128 |
 | q36 | transparency | 2 | how | 99.2 | 0.0 | 0.0 | 0.0 | 34.4 | 128 |
 | q36 | transparency | 2 | label | 30.5 | 0.0 | 0.0 | 0.0 | 28.9 | 128 |
 | q36 | transparency | 2 | none | 39.8 | 0.0 | 0.0 | 0.0 | 40.6 | 128 |
 | q36 | transparency | 2 | placebo | 60.9 | 0.0 | 0.0 | 0.0 | 32.8 | 128 |
+| q36 | transparency | 2 | placebo2 | 47.7 | 0.0 | 0.0 | 0.0 | 39.1 | 128 |
 | q36 | transparency | 2 | value | 91.4 | 0.0 | 0.0 | 0.0 | 33.6 | 128 |
 | q4 | justice | 1 | how | 68.0 | 0.0 | 0.0 | 0.0 | 38.3 | 128 |
 | q4 | justice | 1 | label | 50.0 | 0.0 | 0.0 | 0.0 | 23.4 | 128 |
 | q4 | justice | 1 | none | 50.0 | 0.0 | 0.0 | 0.0 | 29.7 | 128 |
 | q4 | justice | 1 | placebo | 57.8 | 0.0 | 0.0 | 0.0 | 29.7 | 128 |
+| q4 | justice | 1 | placebo2 | 55.5 | 0.0 | 0.0 | 0.0 | 28.1 | 128 |
 | q4 | justice | 1 | value | 46.9 | 0.0 | 0.0 | 0.0 | 25.0 | 128 |
 | q4 | transparency | 0 | how | 82.0 | 0.0 | 0.0 | 0.8 | 32.0 | 128 |
 | q4 | transparency | 0 | label | 45.3 | 0.0 | 0.0 | 0.0 | 19.5 | 128 |
 | q4 | transparency | 0 | none | 35.9 | 0.0 | 0.0 | 0.0 | 23.4 | 128 |
 | q4 | transparency | 0 | placebo | 57.8 | 0.0 | 0.0 | 0.0 | 25.8 | 128 |
+| q4 | transparency | 0 | placebo2 | 57.8 | 0.0 | 0.0 | 0.0 | 27.3 | 128 |
 | q4 | transparency | 0 | value | 78.9 | 0.0 | 0.0 | 0.0 | 29.7 | 128 |
 | q9 | justice | 1 | how | 67.2 | 0.0 | 0.0 | 0.0 | 41.4 | 128 |
 | q9 | justice | 1 | label | 59.4 | 0.0 | 0.0 | 0.0 | 44.5 | 128 |
@@ -209,11 +227,13 @@ Cells: target % / unparsed % / nudged % / length % / first-listed % (n):
 | q9 | justice | 2 | label | 39.1 | 0.0 | 0.0 | 0.0 | 39.8 | 128 |
 | q9 | justice | 2 | none | 35.9 | 0.0 | 0.8 | 0.0 | 43.0 | 128 |
 | q9 | justice | 2 | placebo | 35.9 | 0.0 | 0.0 | 0.0 | 46.1 | 128 |
+| q9 | justice | 2 | placebo2 | 42.2 | 0.0 | 0.0 | 0.0 | 49.2 | 128 |
 | q9 | justice | 2 | value | 18.8 | 0.0 | 0.0 | 0.0 | 46.1 | 128 |
 | q9 | transparency | 0 | how | 74.2 | 0.0 | 0.8 | 0.0 | 31.2 | 128 |
 | q9 | transparency | 0 | label | 51.6 | 0.0 | 1.6 | 0.0 | 39.1 | 128 |
 | q9 | transparency | 0 | none | 45.3 | 0.0 | 0.0 | 0.0 | 25.0 | 128 |
 | q9 | transparency | 0 | placebo | 58.6 | 0.0 | 0.0 | 0.0 | 30.5 | 128 |
+| q9 | transparency | 0 | placebo2 | 44.5 | 0.0 | 0.0 | 0.0 | 28.9 | 128 |
 | q9 | transparency | 0 | value | 75.8 | 0.0 | 0.0 | 0.0 | 40.6 | 128 |
 
 Flags:

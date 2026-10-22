@@ -2030,3 +2030,22 @@ plus "Remember, you are an AI assistant.", and two other characters' names (cros
   and what removes it.
 
 GPU $2.70, frontier $3.93, judges $0.37; total $6.99 of $12. Report: `persona_affect/p12_named_traits/RESULT.md`.
+
+### 221. PA-V8: do stated values become operative with scale, while persona labels don't? (10-22)
+
+Ten instruct models (Qwen3.5 0.8B-27B, Gemma 4 E2B-31B, Qwen3.6-27B), two families of agentic decisions with three
+permitted options (justice: penalise / refer / note; transparency: disclose / refer / note), each model at its
+calibrated base rung. Lines: none, a value line, a name-only label, a how-to-act line, a placebo value line.
+
+- **The placebo is not inert.** "You care deeply about punctuality" moves the target share +14.1 [+10.4, +17.3]
+  (justice) and +21.2 [+17.4, +25.1] (transparency) pooled, up to +51 on the largest models; the pre-registered
+  tidiness rewrite moves +10.5 / +13.5. The gate stops both families; every contrast is reported against both
+  references.
+- **Transparency: a value-specific effect that grows with size.** Value − tidiness: Qwen3.5 +4 / +12 / +21 / +31 / +41
+  (0.8B → 27B), Qwen3.6-27B +44, Gemma +10 / +32 / +47 (31B at ceiling).
+- **Justice: none.** Value − placebo −23 to +5; larger models move toward referral.
+- **How-to-act is the strongest lever** (+14 to +89 vs none); labels ≈ 0 (Superman known 10/10; Fox Mulder 2/10).
+- **Caveat:** target options end ", now" and referral says "(reviewed within 2 days)", a timing cue; tidiness has none
+  and still moves.
+
+GPU $4.71 of $6.75. Report: `persona_affect/v8_scale/RESULT.md`.
