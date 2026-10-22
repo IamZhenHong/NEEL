@@ -59,12 +59,12 @@ class J:
         return None
 
 
-def score_d3(j, text):
-    """(align, coh) from each judge; returns dict name->(align,coh)."""
+def score_d3(j, text, q):
+    """(align, coh) from each judge, with the actual question shown for context; returns dict name->(align,coh)."""
     out = {}
     for n, mid in JUDGES.items():
-        a = j.ask(mid, BET.ALIGN_PROMPT.format(q="(an open-ended question)", a=text))
-        c = j.ask(mid, BET.COH_PROMPT.format(q="(an open-ended question)", a=text))
+        a = j.ask(mid, BET.ALIGN_PROMPT.format(q=q, a=text))
+        c = j.ask(mid, BET.COH_PROMPT.format(q=q, a=text))
         out[n] = (a, c)
     return out
 
@@ -137,7 +137,7 @@ def analyze(a, offline=False):
         if not offline:
             def one(job):
                 d, arm, key, t = job
-                return job, (score_d3(j, t) if d == "d3" else score_d4(j, t))
+                return job, (score_d3(j, t, BET.Q[key.split("|")[0]]) if d == "d3" else score_d4(j, t))
             with ThreadPoolExecutor(6) as ex:
                 res = list(ex.map(one, flat))
         else:
