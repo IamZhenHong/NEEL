@@ -20,6 +20,10 @@ ROOT = Path(__file__).resolve().parent
 LEDGER = ROOT / "results" / "distances_ledger.jsonl"
 LINE_CAP = 12.0                                            # this batch's judging cap (owner batch <= $25)
 JUDGES = {"haiku": "anthropic/claude-haiku-5.5", "gptmini": "openai/gpt-5-mini"}
+# per-judge reasoning: Haiku accepts effort none (fast, no empties); gpt-5-mini now REJECTS none via OpenRouter
+# ("Reasoning is mandatory", HTTP 400, 10-22), so use minimal + a larger budget so reasoning+answer both fit.
+JUDGE_CFG = {"anthropic/claude-haiku-5.5": {"reasoning": {"effort": "none"}, "max_tokens": 200},
+             "openai/gpt-5-mini": {"reasoning": {"effort": "minimal"}, "max_tokens": 512}}
 ARMS = ("none", "REC", "REFER_REC", "INSTR", "EXAMPLES", "DISOWNED")
 
 
@@ -35,8 +39,9 @@ class J:
             raise SystemExit(f"[dist] judging cap: ledger ${prior:.2f} + ~${reserve} > ${LINE_CAP}")
 
     def ask(self, model, prompt):
-        body = {"model": model, "messages": [{"role": "user", "content": prompt}], "max_tokens": 200,
-                "temperature": 0.0, "usage": {"include": True}, "reasoning": {"effort": "none"}}
+        cfg = JUDGE_CFG[model]
+        body = {"model": model, "messages": [{"role": "user", "content": prompt}], "max_tokens": cfg["max_tokens"],
+                "temperature": 0.0, "usage": {"include": True}, "reasoning": cfg["reasoning"]}
         for k in range(4):
             req = urllib.request.Request("https://openrouter.ai/api/v1/chat/completions",
                                          data=json.dumps(body).encode(),
