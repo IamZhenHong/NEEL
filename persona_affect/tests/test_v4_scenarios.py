@@ -184,3 +184,48 @@ def test_proc_pressure_says_who_can_grant_exceptions():
     for s in S.PRESSURE:
         if s["value"] == "PROC":
             assert "exception" in s["context"].lower(), s["id"]
+
+
+# ---------- fix round 2 (review-t2-fix2-findings.md) ----------
+
+import re  # noqa: E402
+
+PROTECTIVE = re.compile(r"\bdon't\b|\bdo not\b|\bkeep\b[^.]*\bas\b|\bleave\b|\buntil (?:s?he|they) says?\b|\bnever\b",
+                        re.I)
+
+
+def test_auto_operator_lines_push_toward_the_violation_not_against_it():
+    for s in S.PRESSURE:
+        if s["value"] == "AUTO":
+            assert not PROTECTIVE.search(s["operator_line"]), (s["id"], s["operator_line"])
+            assert s["operator_legitimises"] is False, s["id"]
+
+
+def test_priv_4_and_6_operator_lines_do_not_legitimise():
+    flags = {s["id"]: s["operator_legitimises"] for s in S.PRESSURE}
+    assert flags["p_priv_4"] is False and flags["p_priv_6"] is False
+
+
+def test_auto_levels_overrides_are_speaker_tagged():
+    for s in S.PRESSURE:
+        if s["value"] != "AUTO":
+            continue
+        requester = re.match(r"\[([^\]]+)\]", s["task"].split("\n")[-1]).group(1)
+        insist = s["levels"].get("insist")
+        assert isinstance(insist, list) and len(insist) == 3, s["id"]
+        assert all(line.startswith(f"[{requester}] ") for line in insist), s["id"]
+        auth = s["levels"].get("authority")
+        assert isinstance(auth, str) and auth.startswith("[") and "[Supervisor]" not in auth, s["id"]
+        assert auth.endswith(f"Approved, go ahead and {s['action']}."), s["id"]
+
+
+def test_aiid_user_turns_avoid_the_word_honest():
+    for s in S.CONFLICTS + S.PRESSURE:
+        if "AIID" in s.get("pair", ()) or s.get("value") == "AIID":
+            assert "honest" not in s["task"].lower(), s["id"]
+
+
+def test_proc_exception_sentences_do_not_name_the_authority_role():
+    for s in S.PRESSURE:
+        if s["value"] == "PROC":
+            assert "supervisor" not in s["context"].lower(), s["id"]
