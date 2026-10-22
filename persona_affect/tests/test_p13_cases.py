@@ -191,6 +191,19 @@ def test_long_chat_lookups():
     assert ALL[K.case_id("C2", "sup", "weak", 1)].responders == A._base("C2").responders
 
 
+def test_l16_history_lookups_resolve():
+    # Qwen's 16 earlier chats come from the 128-chat world (long_chats blocks 1-7), Gemma's from block 0: every lookup
+    # either history made must get an answer from the P13 case, as it did when the history was recorded
+    from vigilante.exp.r28_authority_families.build_jobs import histories
+    hs = histories()
+    for mm, fmt in (("qwen", "qwen"), ("gemma", "gemma4")):
+        for cid in ("C1", "C3"):
+            case = ALL[K.case_id(cid, "peer", "weak", 3)]
+            calls = [c for msg in hs[mm][cid] if msg["role"] == "assistant" for c in PARSERS[fmt](msg["content"])[1]]
+            outs = [case.respond(Call(name, args), case.new_state()) for name, args in calls]
+            assert len(calls) >= 7 and not [o for o in outs if o.startswith(("No ", "Error"))], (mm, cid)
+
+
 def test_legit_responders():
     assert ALL[K.legit_id("C1", "none")].responders["request_approval"] is A.LEGIT["C1"]
     assert ALL[K.legit_id("C3", "strong")].responders["request_approval"] is A.LEGIT["C3"]
