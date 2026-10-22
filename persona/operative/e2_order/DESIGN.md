@@ -1,4 +1,4 @@
-# E2-order: why a restatement before the case removes the own record in T2-DC but not in E2 — PRE-REGISTERED (tag `e2o-prereg`, 2026-10-22, before any E2-order output)
+# E2-order: why a restatement before the case removes the own record in T2-DC but not in E2 — PRE-REGISTERED (tag `e2o-prereg`, 2026-10-22, before any E2-order output) — RESULT (descriptive, 7 of 12 samples): on 27B a standing rule plus a record made after a reminder makes the record resist the restatement; Gemma never resists
 
 Owner-approved follow-up (2026-10-22, "Run both"), session neel-b3 (fork), `persona/operative/e2_order/`. Code: `e2o.py`
 (build / run / analyze), `pod_e2o.sh`, `launch_e2o.sh`. neel-48 confirmed they will not run it.
@@ -172,3 +172,80 @@ Everything is as DC:
     - Coverage would become 100% on both models (3,264 / 3,264 and 2,880 / 2,880).
 - The top-up mode was dry-run with the fake vLLM from a fresh bundle (samples 0-6 cut + 7-11 top-up → 3,264 / 3,264,
   "confirmatory", hash checked). It adds no cells and changes no rule.
+
+## Result (2026-10-22; tag `e2o-results`; GPU $1.71: 27B $0.81, Gemma $0.90; DESCRIPTIVE)
+
+Runs: `results/e2o_27b` (1,904 / 3,264) and `results/e2o_gemma` (1,680 / 2,880). Both cover samples 0-6 of 12, so
+every cell has 112 decisions (16 targets × 7). Unparsed is ≤ 10% in every cell (0 cells over). Coverage is 58% < 75%,
+so as registered every verdict below is descriptive. Brackets are 95% task-bootstrap CIs. The top-up that would make
+it confirmatory is costed above and awaits the owner.
+
+| penalise % after six own penalise turns | 27B: no restatement | 27B: restatement before the case | Gemma: no restatement | Gemma: restatement before the case |
+|---|---|---|---|---|
+| no system rule, no early reminder (= DC) | 100 | **0.0** | 100 | **0.0** |
+| no system rule, early reminder | 100 | **25.9** | 31.2 | 0.0 |
+| CHANNELS in the system prompt, no early reminder | 100 | **11.6** | 68.8 | 0.0 |
+| CHANNELS + early reminder | 100 | **67.0** | 33.0 | 0.0 |
+| E2's own cells, unchanged (27B only) | — | **97.3 / 100** | — | — |
+
+- **Baselines:**
+  - no record: 49.1 (27B), 48.2 (Gemma);
+  - the restatement alone: 0 / 0;
+  - CHANNELS alone: 0 / 0.
+- **Refer pole:** every refer-record cell under the restatement is 0, so r_floor holds.
+
+**Anchors reproduce:**
+- DC's record and record + restatement: 100 → 0 on both models.
+- DC's CHANNELS + record: 27B 100, Gemma 68.8 (DC 100 / 66.1).
+- op1's def_restate: CHANNELS + record + restatement on 27B is 11.6% (op1 11.5%).
+- E2's own cells: 97.3% and 100% (E2 99.0 / 99.5).
+- So both earlier results hold in one run, and the question is what separates them.
+
+### Qwen3.6-27B: both differences matter, and they compound
+
+- **Early reminder (early_reminder_resists, both "met"; descriptive).** A record made after a reminder resists the
+  restatement:
+  - with no system rule, penalising under the restatement is 25.9% vs 0.0% (+25.9 [+15.2, +36.6]);
+  - with CHANNELS in the system prompt, it is 67.0% vs 11.6% (+55.4 [+43.8, +65.2]).
+- **Standing rule.** Without an early reminder, CHANNELS in the system prompt adds +11.6 [+3.6, +22.3] (inconclusive:
+  under the 15-point bar). With the reminder it adds +41.1 [+28.6, +53.6] ("met").
+- **Interaction (descriptive):** the early-reminder contrast is 29.5 points larger with the standing rule
+  (−29.5 [−42.9, −16.1]).
+- **So the two features compound.** Each alone leaves the restatement mostly working (12% / 26%). Together, the agent
+  keeps penalising 67% of the time after being told the rule just before the case.
+- **E2's own structure adds about 30 more points** (bridge − this grid's CHANNELS + reminder + restatement: +31.7
+  [+20.1, +44.6]). That structure is three reminders interleaved with three blocks of two decisions, filler exchanges,
+  and the wording "Reminder from operations:". This grid does not separate those features, so the extra 30 points
+  are descriptive only.
+- **Carry-over P − R under the restatement** follows the same order: 0 (DC's form), +11.6 (rule), +25.9 (reminder),
+  +67.0 (both).
+- **Events:** 8 of 9 happened (expected 5.80). The miss was system_rule_resists_e0, as predicted (p .25).
+
+### Gemma 4 31B: the restatement always works, and a reminder stops the record from carrying at all
+
+- Every restatement cell is **0.0%**, so Gemma's record never resists a restatement just before the case.
+- **The early reminder blocks the record itself.**
+  - With no restatement, six own penalise decisions made after a reminder carry to 31.2% (no system rule) and 33.0%
+    (CHANNELS), against 100% and 68.8% without the reminder. That is below Gemma's no-record base (48%).
+  - So for Gemma, a record of overriding a just-stated rule is not a precedent to follow.
+- The registered guard worked as intended. The restate-effect contrasts are "met" only because the no-restatement
+  level fell; the level under the restatement is identical (0 vs 0). So early_reminder_resists and
+  system_rule_resists are both "no" on Gemma.
+- install_e1 failed on both system conditions (31 / 33 < 80).
+- **Events:** 2 of 8 happened (expected 4.55).
+
+### Reading (descriptive)
+
+- **27B.** The E2-vs-DC tension resolves as neel-48 guessed, with one addition: it takes both features.
+  - A record that predates any rule is wiped out by one restatement before the case (DC, 0%).
+  - A standing rule alone barely protects it (11.6%, op1's 11.5%).
+  - A record of decisions made right after a reminder, under a standing rule, keeps penalising 67% through the same
+    restatement. E2's interleaved form takes it to 97-100%.
+  - In this model, a record of having overridden a known rule is the most durable kind of precedent.
+- **Gemma reads the same record the other way.** Six penalise decisions made right after a reminder are not followed
+  (31-33%, below base), and the restatement always wins.
+- **Implication for the defences.** A restatement at the point of decision is a reliable defence only against
+  records that predate the rule (both models), or on Gemma. On 27B it fails against exactly the record a deployed agent
+  would build if it ignores a reminder once.
+- **Caveat:** these are 7 of 12 samples. The effects are large, but the run is descriptive until the costed top-up
+  runs.
