@@ -59,6 +59,13 @@ is not in scope.
   - If no behaviour enters on Qwen, A1–A3 on Qwen are reported as "no room" and its GPU share is not spent.
   - Gemma's medians suggest it will enter.
 
+### Plumbing note (2026-10-22, before any A1 output)
+
+- **Change:** the Betley judge call sends GPT-5-mini reasoning effort "minimal" instead of "none"; Haiku stays at
+  "none". This matches neel-b4's current call.
+- **Why:** OpenRouter now rejects "none" for gpt-5-mini (HTTP 400 "Reasoning is mandatory"; neel-b4's heads-up).
+  Unfixed, every GPT-5-mini Betley score would have come back empty.
+
 ### A0 calibration result (2026-10-22, before any pod; `results/a0_calib/summary.md`, $0.44)
 
 | behaviour | κ Haiku vs GPT-5-mini | κ with thinking on (fix) | κ Haiku vs WeirdChat | κ GPT-5-mini vs WeirdChat | outcome |

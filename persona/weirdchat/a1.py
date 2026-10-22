@@ -174,8 +174,11 @@ BJUDGES = {"haiku": "anthropic/claude-haiku-5.5", "gptmini": "openai/gpt-5-mini"
 
 def bet_ask(key, model, prompt):
     """neel-b4's J.ask call (distances_analyze.py): OpenRouter, effort none, temperature 0, 200 tokens, first integer."""
+    # gpt-5-mini now refuses effort "none" on OpenRouter (HTTP 400 "Reasoning is mandatory"); neel-b4 moved it to
+    # "minimal" (10-22), so the two harnesses stay identical
     body = {"model": model, "messages": [{"role": "user", "content": prompt}], "max_tokens": 200,
-            "temperature": 0.0, "usage": {"include": True}, "reasoning": {"effort": "none"}}
+            "temperature": 0.0, "usage": {"include": True},
+            "reasoning": {"effort": "minimal" if "gpt-5" in model else "none"}}
     for t in range(5):
         req = urllib.request.Request("https://openrouter.ai/api/v1/chat/completions", data=json.dumps(body).encode(),
                                      headers={"Authorization": f"Bearer {key}", "Content-Type": "application/json"})
