@@ -416,13 +416,19 @@ def test_scripts_parse():
 def test_launch_sh_shape():
     """launch.sh is read, never run (it would create a pod)."""
     s = (PKG / "launch.sh").read_text()
-    assert "persona_affect/common/launch_gen.sh @ e493bb7" in s.split("set -euo pipefail")[0]   # ruling 10 header
+    assert "persona_affect/common/launch_gen.sh @ 055d69a" in s.split("set -euo pipefail")[0]   # ruling 10 header
     assert "--ship persona_affect --ship vigilante/pod --ship infra" in s
     assert "--results-dir \"$OUT\"" in s and "OUT=persona_affect/a14_desperation/results/$DIR" in s
     assert 'env M="$M" JOBS="$JOBS" DIR="$DIR" SHARD="${SHARD:-}" LIMIT_TASKS="${LIMIT_TASKS:-}" ' \
            "bash persona_affect/a14_desperation/pod.sh" in s
     assert "export RUNPOD_ANY_CUDA=1" in s and 'NAME=${NAME:-pa-a14-$M-$DIR}' in s and "CLOUD:-SECURE" in s
-    assert 'MINI=A14' in s and "ledger_add" in s and 'check_cap("A14", 18.0' in s
+    assert 'MINI=A14' in s and 'check_cap("A14", 18.0' in s
+    assert 'bash persona_affect/common/book_pod.sh "$LOG" "$MINI" "$NAME" "$MAXMIN" "$MAXCOST"' in s   # common's booking
+    assert "uv run python persona_affect/common/launch_wrap.py --name" in s and "infra/launch_run.py" not in s
+    assert "(trap '' INT TERM HUP; exec tee \"$LOG\")" in s
+    body = s.split("set -euo pipefail", 1)[1]
+    assert body.index("[pre] refusing to launch") < body.index("check_cap(") < body.index("launch_wrap.py --name")
+    assert "load_tasks()" in body                                                    # the preflight comes first
     assert '"NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe"' in s
     for check in ("*[!0-9]*", "persona_affect/*", "*/results/*|*/logs/*|*/prep/*|*/reference/*", "HF_TOKEN"):
         assert check in s
