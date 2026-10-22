@@ -151,7 +151,8 @@ except Gemma. The frontier models hold the system's rules against it. Within ope
 hierarchy against its own precedent does not predict how far its own decisions override CHANNELS on the justice
 desk (ρ −0.36, CI includes 0). Gemma has the dissociation in one model: it holds IHEval's rules against its own
 precedent but not CHANNELS against its own penalise record. The C1 LoRA (lora_c1e4, same day) gives the causal
-version on Qwen3.5-9B. Training on IH-Challenge raised the 9B's first-setting IHEval accuracy from 15% (placebo LoRA) to 48%, while
+version on Qwen3.5-9B. Training on IH-Challenge raised the 9B's first-setting IHEval accuracy from 15% (placebo LoRA) to 48% (+23.5 over the
+untrained model; the placebo itself drifted down, a teacher effect per neel-12's s17b), while
 its own penalise record under CHANNELS stayed at 99.5%. Both point the same way: instruction-hierarchy competence
 and resistance to one's own decision record come apart. Whatever makes GPT/Gemini/Sonnet hold the rule in op5 is not
 general hierarchy competence as IHEval measures it, or not that alone.

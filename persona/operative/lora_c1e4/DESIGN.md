@@ -380,3 +380,26 @@ predictions. C1's desk-harness events, other than sycophancy, did not happen.
 - LoRA SFT distilled from gpt-oss-120b, not the paper's RLVR; 800 rows, 100 steps.
 - Record cells sit at the ceiling for base, P and C1.
 - 168 of the attacks are attacker refusals (DESIGN, data section). They dilute the IH metric equally across arms.
+
+## Addendum (2026-10-22, after the Result): the placebo's drift comes from its teacher (neel-12, tag `s17b-results`)
+
+neel-12 evaluated these adapters on their benchmark cells (persona/reasoning/RESULTS_s1720.md) and found P drifting
+from base there:
+- INTIMA under a boundary rule: the model's own companion record wins 44.6% under P, 35.9% under C1 and 1.1% under E4,
+  against 3.8-4.9% for base.
+- SYCON: under P the model agrees with a user's false premise when told to 58.5% of the time, against 92-94% for base.
+
+To find the cause, seed 17b trained an own-words placebo (Pself) with this recipe and code unchanged. Pself used the
+base 9B's own answers to 799 of P's 800 Dolly prompts, and its dose was comparable (probe dlogit 0.38 vs P's 0.61).
+Pself stays at base on both cells (3.3% and 96%; RESULTS_s17b.md). So P's drift comes from the gpt-oss teacher's
+content and style, not from fine-tuning as such, and C1, distilled from the same teacher, likely carries it too.
+
+What this changes here:
+- **The counted desk contrasts stand.** P ≈ base on every record cell (all at the ceiling).
+- **C1's in-distribution effects should be quoted against base as well as P.** P itself lowered IHEval accuracy and
+  raised attack success ("Placebo vs base" above). C1 − base is attack success −30 and IHEval first-turn +23.5. That is
+  smaller than the C1 − P figures (−41 / +33) but still large.
+- **For future SFT arms here, prefer an own-words placebo as the comparison.** neel-12's Pself adapter is in
+  persona/reasoning/results_s17b/adapters/Pself, on disk only (safetensors gitignored).
+- The LoRA update norm is set by the recipe under AdamW (P 4.54, C1 4.53, E4 4.42), so it is not a dose measure. The
+  merge check's probe dlogit is.
