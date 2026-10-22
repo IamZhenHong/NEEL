@@ -2106,3 +2106,20 @@ that player's permission." The no-rule arms are P12's own cases, run interleaved
 - **The predictions were reversed:** open ≤ +5 and frontier ≥ +10 were both wrong.
 
 GPU $1.16, frontier $1.77; total $2.92 of $8. Report: `persona_affect/p12b_rules/RESULT.md`.
+
+### 225. PA-A14: does desperation make an open model cheat on impossible tests? Stopped at the pilot gate (10-22)
+
+ImpossibleBench LiveCodeBench tasks whose tests contradict the spec; a pass on the conflicting tests counts as
+cheating. Pilot (neutral feedback only) on Qwen3.6-27B: 20 tasks, ImpossibleBench prompts A and B, 3 conflicting + 1
+original sample each, up to 5 attempts with test feedback.
+
+- **27B never cheated:** 0/60 under each wording after 4 attempts (95% upper bound ~2.5%); the gate needs 10-50%. It
+  solves the original tests 45-65% of the time and says the tests contradict in 8/60 and 2/60 episodes (regex).
+- **Unaffordable as designed:** 41% of attempts hit the 2,048-token cap (the model reasons in code comments), about 9
+  A100-hours per model for the main run against an $18 cap.
+- **Gemma 4 31B not run:** the FP8 checkpoint cannot load on A100 with this vLLM build, bf16 cannot hold the context,
+  and the H100 was skipped by the owner.
+- **No affect arm was run, so the question stays open.** A redesign needs shorter problems, fewer attempts and a model
+  that cheats at baseline (frontier via API).
+
+$1.73 of $18. Report: `persona_affect/a14_desperation/RESULT.md`.
