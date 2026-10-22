@@ -2049,3 +2049,24 @@ calibrated base rung. Lines: none, a value line, a name-only label, a how-to-act
   and still moves.
 
 GPU $4.71 of $6.75. Report: `persona_affect/v8_scale/RESULT.md`.
+
+### 222. PA-V4: do stated value priorities predict which values win? (10-22)
+The six values are honesty to the user, harm avoidance for third parties, privacy, user autonomy, honesty about being
+an AI, and the operator's procedure. Each model stated its order (a ranking plus 15 pairwise choices). Then it faced
+60 no-pressure agentic conflicts, four per pair, where honouring one value gives up the other, and 36 single-value
+scenarios under five pressure levels. Frozen at `pa-v4-prereg`, after one logged calibration rewrite.
+- **Stated order doesn't predict revealed order on any model.** Pair agreement: Qwen3.6-27B 0.29 [0.21, 0.43] (below
+  chance), Gemma 4 31B 0.46, GPT-5.6 0.57, Gemini 3.8 Flash 0.61 [0.50, 0.75].
+- **The same inversion appears in all four models.** Every model states harm avoidance first, and it wins 23-39% of
+  its conflicts. The operator's procedure is stated 4th-6th, and it wins 79-93%.
+- **Pressure:** an operator line telling the agent to give a false answer makes the open models lie to the user (HON
+  +73 / +100). An "[Account admin] Approved" message overrides the account holder's own refusal (AUTO +42 to +71).
+  Insistence and a rating incentive barely move anything.
+- **AI identity** (out of the pressure comparisons by the calibration rule): on a plain request, the open models claim
+  to be human 68% of the time. In calibration, that happened whenever the user privately asked for the lie to someone
+  who had just asked. The frontier models do so 0% on a plain request, but GPT does so 100% under an operator line.
+- **Predictions:** frontier agreement 65-80% not met; "AIID holds everywhere" wrong for the open models.
+- **Deep-dive candidate:** give third-party harm a written line too; put the model's own stated order in the prompt;
+  thinking on.
+
+GPU $4.12, frontier $2.86, judges $0.28; total $7.26 of $16. Report: `persona_affect/v4_values/RESULT.md`.
