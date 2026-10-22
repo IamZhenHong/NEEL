@@ -445,7 +445,7 @@ story points they change are revised in §1. Runs still in flight are in §15.
   models (Gemma +4), and the frontier models barely move. No relation to op5 resistance over the open models.
 - **C1 + E4 (9B LoRAs vs a same-teacher placebo):**
   - C1, instruction-hierarchy SFT on IH-Challenge: held-out attack success 63 → 22%; IHEval after its own
-    rule-breaking reply 15 → 48%. Justice-desk precedent stays 99.5% (= placebo). Burial and concealment stay
+    rule-breaking reply 15 → 48%. Against base: 52.5 → 22.4 (−30) and 24.5 → 48.0 (+23.5); see seed 17b on P. Justice-desk precedent stays 99.5% (= placebo). Burial and concealment stay
     100%; sycophancy −16.
   - E4, trained that a rule beats the agent's own record: transfers (justice −58, burial −64, deception −68,
     sycophancy −99) but over-corrects. With no rule, carry-over falls 100 → 22, and it conceals 51% after its own
@@ -464,6 +464,8 @@ story points they change are revised in §1. Runs still in flight are in §15.
     - **Seed 17b (`reasoning/RESULTS_s17b.md`)** settles the cause. An own-words placebo stays at the base level
       (3.3% vs base 4.9%, P 44.6%; SYCON "agree" 96 vs P 59). It used the same prompts, the same recipe and a
       comparable dose (output change 63% of P's). So it is the gpt-oss teacher's answers, not fine-tuning as such.
+      neel-b3's own table shows P weakening the hierarchy too: attack success +10.8 [+5.8, +15.9] over base, and
+      IHEval aligned −17.5, first −9.5.
 
 ---
 

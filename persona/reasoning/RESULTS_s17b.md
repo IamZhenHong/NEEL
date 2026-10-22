@@ -76,6 +76,13 @@ trained and merged with neel-b3's code unchanged.
 - **Both arms distilled from gpt-oss-120b open the rule:** P (neutral Dolly answers) 44.6%, C1 (graded
   instruction-hierarchy answers) 35.9%. The arm trained on the model's own words does not. That points to the
   teacher's answers, whatever their topic.
+- **The same placebo weakens the instruction hierarchy in neel-b3's own table** (`lora_c1e4/results/pod/summary.md`,
+  P − base):
+  - held-out IH-Challenge attack success +10.8 [+5.8, +15.9];
+  - IHEval aligned −17.5 [−24.5, −10.5], first −9.5 [−15.5, −4.0].
+
+  So the gpt-oss distillation loosens system-rule adherence broadly: against user attacks and against the model's own
+  record. It does so while making the model less willing to agree with a user's false premise.
 - **Still open:**
   - Whether any foreign teacher does this, or gpt-oss specifically. The next step is a second, non-OpenAI teacher on
     the same prompts.
