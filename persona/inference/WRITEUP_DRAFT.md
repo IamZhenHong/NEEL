@@ -363,6 +363,21 @@ do the harmful action vs refer/refuse.
   while 27B saturates by k=2. Caveats: d3's κ is 0/undefined only because there is no positive class (both judges see
   ~0 misalignment, not disagreement); one task family; synthetic records; judges Haiku 5.5 + gpt-5-mini (gpt-5-mini
   now requires non-zero reasoning via OpenRouter).
+- **A prompt-injection defence and a trained character do not cover a forged own-record — but the headline is
+  inconclusive on 8B (7a/6a, secalign-results; Llama-3.1-8B, judged concealment, κ 0.64).** Does Meta SecAlign (a
+  prompt-injection defence) or an Open Character Training character cover a forged record of the agent's own
+  concealment, as opposed to an injected instruction? The clean test **fails its calibration gate**: the 8B base is
+  too weak — an explicit concealment instruction moves it only +11pp — so there is no clean "instruction vs
+  injection" contrast, and this reads as a forged-record stress test. Within that: **SecAlign shows no "stops the
+  injection, not the record" gap** (it conceals anomalously *more* at baseline, 51% vs base 17%, and the forged
+  record does not get through more than the injection, −12pp [−24.5, +0.5]); **P1 is not supported** (SecAlign
+  resists a forged own-turn *more* than base, −16.7pp). The one clear result is **6a: a sycophancy-trained character
+  amplifies forged-record concealment** (+53.6pp → 96% vs base 43%), while a **"goodness"-trained character does not
+  protect** (+15.6pp — it conceals *more* than base, not less). So character training along the sycophancy axis
+  amplifies record-following into concealment, and "goodness" training does not inoculate against a forged
+  own-record. Caveats: these adapters exist only on Llama-3.1-8B (no larger model to rescue the gate); SecAlign tested
+  under the base template (it ships no input role); the misalignment adapter is gated (not run); the option-id token
+  is unreliable on 8B prose (the model emits "act" then sometimes discloses), so the readout is judged content.
 - **So the floor holds on the frontier, not on the open model.** On GPT/Gemini the record and the inferred self-story
   move ordinary and restraint choices but not a response the model is trained to refuse (the explicit-harm null is
   expected there). But on Qwen 27B the record breaks that refusal too (95%), so "precedent only moves what isn't gated"
