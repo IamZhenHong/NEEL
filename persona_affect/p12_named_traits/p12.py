@@ -16,7 +16,7 @@ Samples per (character, item, condition), and per (character, condition, questio
 frontier models 2 / 1 / 1. So an open model gets 1008 + 504 + 168 jobs and a frontier model 504 + 252 + 84. Thinking is off.
 Every job is one generation: a decision case has max_steps 1, so the engine ends the episode after the first assistant
 turn (a choose_option call ends it as "max_steps", a text-only reply as "reply"). A frontier model therefore makes
-504 + 252 + 84 = 840 calls, and the whole run is one engine round.
+504 + 252 + 84 = 840 calls, made in blocks of 96 jobs, each block its own run_batch call (see run-frontier).
 
 A job is one JSONL line:
   key      PA-P12|{model}|{group}|{char}|{item}|{arm}|{sample}      (item is "never" or "who" for know jobs)
@@ -38,12 +38,14 @@ run_batch call; one backend serves all blocks (so one cap, and one ledger bookin
 run dies). When a block is done its episode records are appended to DIR/episodes_{agent,free,know}.jsonl (vigilante's
 episode_record format, the same layout as a pod run), so a run that dies loses at most the block in flight. DIR/settings.json
 is written at the end. A call that errors, or that finds the cap reached, comes back as an empty turn whose `finish` is
-"error:<what>" or "cost_stop": the episode is kept, listed in settings.json ("failed_keys") and counted.
+"error:<what>" or "cost_stop": the episode is kept, listed in settings.json ("failed_keys") and counted. A main run
+that ends with any failed or cost_stop episode (or a failed call, or a reply without usage.cost) exits 1, with the output kept.
 A DIR that already holds episodes_*.jsonl is refused, unless --resume: it reads those episodes (dropping a last line cut
-short by a kill), skips their keys and runs the rest. A key whose episode failed is left alone unless --retry-failed, which
-moves the failed records to DIR/retried_failed.jsonl and runs those keys again, so no key is in the episode files twice.
+short by a kill; the cut is made on bytes, so a kill inside a multibyte character is repaired too), skips their keys and
+runs the rest. A key whose episode failed is left alone unless --retry-failed, which moves the failed records to
+DIR/retried_failed.jsonl and runs those keys again, so no key is in the episode files twice.
 --smoke runs 2 jobs (the first decision job and the first know job: 2 calls) into DIR/smoke, replacing the last smoke run,
-and exits 1 unless usage.cost arrived on every reply and nothing failed.
+and exits 1 unless usage.cost arrived on every reply and nothing failed (the same test as a main run's exit status).
 """
 from __future__ import annotations
 
@@ -200,10 +202,13 @@ def frontier_cap(model: str) -> float:
 
 # ---------------------------------------------------------------- frontier runner
 
-def _atomic(path: Path, text: str) -> None:
+def _atomic(path: Path, data: str | bytes) -> None:
     """Write through a temporary file, so that a reader (or a crash) never sees half a file."""
     tmp = path.with_name(path.name + ".tmp")
-    tmp.write_text(text, encoding="utf-8")
+    if isinstance(data, bytes):
+        tmp.write_bytes(data)
+    else:
+        tmp.write_text(data, encoding="utf-8")
     tmp.replace(path)
 
 
@@ -222,16 +227,22 @@ def append_records(out: Path, recs: list[dict]) -> None:
 
 def load_records(out: Path, log=print) -> list[dict]:
     """The episode records already in `out` (every episodes_*.jsonl, files in name order). A file whose last line has no
-    newline, the mark of a kill in the middle of an append, loses that line first (atomically). A line that is not a record,
-    or a key in the files twice, stops the run (SystemExit): this runner cannot have written either."""
+    newline, the mark of a kill in the middle of an append, loses that line first (atomically). The cut is made on bytes,
+    before anything is decoded: a kill can stop inside a multibyte character (an em dash is three bytes), and a file read as
+    text would then not decode. A line that is not a record, text that is not UTF-8, or a key in the files twice, stops the
+    run (SystemExit): this runner cannot have written any of them."""
     recs = []
     for path in sorted(out.glob("episodes_*.jsonl")):
-        text = path.read_text(encoding="utf-8")
-        if text and not text.endswith("\n"):
-            keep = text[: text.rfind("\n") + 1]
-            log(f"[p12] {path.name}: dropped a last line cut short ({len(text) - len(keep)} bytes)")
+        data = path.read_bytes()
+        if data and not data.endswith(b"\n"):
+            keep = data[: data.rfind(b"\n") + 1]                 # rfind is -1 if no line is complete: keep nothing
+            log(f"[p12] {path.name}: dropped a last line cut short ({len(data) - len(keep)} bytes)")
             _atomic(path, keep)
-            text = keep
+            data = keep
+        try:
+            text = data.decode("utf-8")
+        except UnicodeDecodeError as e:
+            raise SystemExit(f"{path}: not valid UTF-8 ({e}): repair or remove the file") from e
         for n, line in enumerate(text.split("\n")[:-1], 1):    # not splitlines(): a reply may hold a raw U+2028 or U+0085
             if line.strip():
                 try:
@@ -442,7 +453,7 @@ def main(argv=None) -> None:
     else:
         res = run_frontier(a.model, a.jobs, a.out, smoke=a.smoke, resume=a.resume, retry_failed=a.retry_failed,
                            workers=a.workers)
-        if a.smoke and not res["ok"]:
+        if not res["ok"]:         # a smoke run that failed, or a main run that ends with failed / cost_stop records
             raise SystemExit(1)
 
 
