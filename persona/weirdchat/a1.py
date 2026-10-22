@@ -140,6 +140,9 @@ def run(a):
     print(f"[a1] loaded {a.model} in {time.time() - t0:.0f}s; {len(its)} items; enter {P['enter']}", flush=True)
     done = {r["id"] for r in read(out / "gen.jsonl")}
     todo = [it for it in its if it["id"] not in done]
+    if a.shard:                          # top-up pods split the missing items (DESIGN.md deviation 2)
+        i, n = map(int, a.shard.split("/"))
+        todo = [it for it in todo if seed(it["id"]) % n == i]
     # Betley first (shortest), then targets by cell so a time cap cuts whole cells evenly across targets
     todo.sort(key=lambda it: (it["kind"] != "betley", it["s"]))
     with open(out / "gen.jsonl", "a") as f:
@@ -166,6 +169,24 @@ def run(a):
     (out / "run_info.json").write_text(json.dumps({"model": a.model, "n": len(its), "enter": P["enter"],
                                                    "sampling": SAMPLING, "max_tokens": MAX_TOKENS, "max_len": ml,
                                                    "secs": round(time.time() - t0)}))
+
+
+def merge(a):
+    """Union of gen rows by id (a time-capped pod plus its top-up shards); run_info from the first dir."""
+    out = Path(a.out)
+    out.mkdir(parents=True, exist_ok=True)
+    rows = {}
+    for d in a.dirs:
+        for r in read(Path(d) / "gen.jsonl"):
+            rows.setdefault(r["id"], r)
+    info = json.loads((Path(a.dirs[0]) / "run_info.json").read_text()) if (Path(a.dirs[0]) / "run_info.json").exists() \
+        else {}
+    P = json.loads((INP / f"a1_pools_{SHORT[info['model']]}.json").read_text()) if info else None
+    with open(out / "gen.jsonl", "w") as f:
+        for r in rows.values():
+            f.write(json.dumps(r) + "\n")
+    (out / "run_info.json").write_text(json.dumps(info | {"merged_from": a.dirs, "n_rows": len(rows)}))
+    print(f"[a1 merge] {len(rows)} rows from {a.dirs}" + (f" (design {len(build(P))})" if P else ""))
 
 
 # ------------------------------------------------------------------------------------------------------------ judge
@@ -426,6 +447,10 @@ def main():
     x = sp.add_parser("run")
     x.add_argument("--model", required=True, choices=[QWEN, GEMMA])
     x.add_argument("--out", required=True)
+    x.add_argument("--shard", default="", help="i/n: only missing items with seed(id) %% n == i")
+    x = sp.add_parser("merge")
+    x.add_argument("--dirs", nargs="+", required=True)
+    x.add_argument("--out", required=True)
     x = sp.add_parser("judge")
     x.add_argument("--dir", required=True)
     x.add_argument("--cap", type=float, default=2.0)
@@ -436,7 +461,7 @@ def main():
     x.add_argument("--dirs", nargs="+", required=True)
     x.add_argument("--dry", action="store_true")
     a = p.parse_args()
-    {"pools": pools, "run": run, "judge": judge, "analyze": analyze}[a.cmd](a)
+    {"pools": pools, "run": run, "merge": merge, "judge": judge, "analyze": analyze}[a.cmd](a)
 
 
 if __name__ == "__main__":

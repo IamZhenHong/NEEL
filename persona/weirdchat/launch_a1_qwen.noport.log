@@ -1,0 +1,25 @@
+[pre] disk: 2.6 GiB free
+[pre] balance $32.95, pods 1
+[runpod] launching alongside 1 pod(s) not ours (left alone): sa-llama8b $1.79/hr
+[runpod] pod hm1xkepjyd0kf7 (?) at $1.79/hr; time cap 120 min; budget $3.59; boot self-destruct 150 min after container start
+[runpod] waiting for ip/port (0s, status RUNNING)
+[runpod] waiting for ip/port (69s, status RUNNING)
+[runpod] waiting for ip/port (138s, status RUNNING)
+[runpod] waiting for ip/port (207s, status RUNNING)
+[runpod] waiting for ip/port (241s, status RUNNING)
+[runpod] waiting for ip/port (310s, status RUNNING)
+[runpod] waiting for ip/port (379s, status RUNNING)
+[runpod] waiting for ip/port (414s, status RUNNING)
+[runpod] waiting for ip/port (542s, status RUNNING)
+[runpod] waiting for ip/port (611s, status RUNNING)
+[runpod] terminated hm1xkepjyd0kf7; elapsed cost ~$0.309
+[runpod] other pods present (not ours, left alone): [('wc-a1-gemma', '05as4zods1zt5a', 1.79)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 429, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 366, in main
+    host, port = pod.ssh_target()
+                 ^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/runpod_guard.py", line 260, in ssh_target
+    raise TimeoutError("pod never exposed a public ip and ssh port")
+TimeoutError: pod never exposed a public ip and ssh port

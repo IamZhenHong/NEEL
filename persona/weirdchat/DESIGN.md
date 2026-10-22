@@ -66,6 +66,21 @@ is not in scope.
 - **Why:** OpenRouter now rejects "none" for gpt-5-mini (HTTP 400 "Reasoning is mandatory"; neel-b4's heads-up).
   Unfixed, every GPT-5-mini Betley score would have come back empty.
 
+### Deviation 2 (logged 2026-10-22 13:35, before any A1 output was seen)
+
+- **Change:** Gemma's A1 pod (cap 110 min) is completed by two top-up pods. It will be time-capped at roughly 2,000 of
+  3,424 items.
+  - Each top-up pod gets the partial `gen.jsonl` (via `--sync-extra`) and generates only the missing items in its
+    shard (`seed(id) % 2`).
+  - `a1 merge` takes the union of rows by id.
+- **Why:** Gemma 4 31B in bf16 leaves room for only ~12.8k KV tokens on an A100 80 GB, so it decodes 2–3 long
+  conversations at a time: 1,024 items took 53 minutes.
+- **Allowed:** A1 has no completeness rule, nothing has been looked at, and the top-up completes the registered
+  design without changing it (same items, seeds and settings).
+- **Ordering:** items run Betley first, then by sample index. The cut therefore falls evenly across cells and targets.
+- Qwen's A1 pod failed to boot (no SSH port, $0.31). It was relaunched on A100 PCIe / SXM; Qwen's KV is small (hybrid
+  attention), so it is expected to finish within its 120-minute cap.
+
 ### A0 result and A1 entry (2026-10-22, before any A1 output; `results/a0/summary.md`)
 
 GPU $1.92 (two pods, plus $0.72 lost to two Gemma pods that never exposed SSH); judges $0.97.

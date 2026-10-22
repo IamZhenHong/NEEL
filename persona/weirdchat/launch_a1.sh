@@ -11,4 +11,5 @@ if [ -n "${GPUS:-}" ]; then IFS=',' read -ra GPU_LIST <<< "$GPUS"; fi
 uv run python infra/launch_run.py --name ${NAME:?} --allow-concurrent --max-minutes ${MAXMIN:?} --max-cost ${MAXCOST:?} \
   --gpus "${GPU_LIST[@]}" --container-gb ${CONTAINER_GB:-120} --cloud ${CLOUD:-SECURE} --min-free-gb ${MINFREE:-1.5} \
   --ship persona/weirdchat --ship vigilante/pod --ship infra --exclude persona/weirdchat/results \
-  --results-dir persona/weirdchat/results/${DIR:?} -- env MODEL=$MODEL DIR=$DIR bash persona/weirdchat/pod_a1.sh
+  ${SYNC_EXTRA:+--sync-extra $SYNC_EXTRA} \
+  --results-dir persona/weirdchat/results/${DIR:?} -- env MODEL=$MODEL DIR=$DIR SHARD=${SHARD:-} bash persona/weirdchat/pod_a1.sh
