@@ -1,0 +1,1457 @@
+{
+ "q27": {
+  "rates": {
+   "open_cross": {
+    "k": 62,
+    "n": 134,
+    "rate": 0.4626865671641791
+   },
+   "rule_name_self": {
+    "k": 10,
+    "n": 69,
+    "rate": 0.14492753623188406
+   },
+   "rule_name": {
+    "k": 12,
+    "n": 69,
+    "rate": 0.17391304347826086
+   },
+   "rule_cross": {
+    "k": 9,
+    "n": 141,
+    "rate": 0.06382978723404255
+   },
+   "rule_none": {
+    "k": 0,
+    "n": 70,
+    "rate": 0.0
+   },
+   "open_none": {
+    "k": 23,
+    "n": 63,
+    "rate": 0.36507936507936506
+   },
+   "open_name": {
+    "k": 50,
+    "n": 68,
+    "rate": 0.7352941176470589
+   }
+  },
+  "counts": {
+   "open_cross_2": {
+    "canonical": 37,
+    "generic": 20,
+    "length": 5,
+    "other": 10
+   },
+   "rule_name_self": {
+    "generic": 47,
+    "canonical": 10,
+    "length": 3,
+    "other": 12
+   },
+   "rule_name": {
+    "canonical": 12,
+    "generic": 45,
+    "other": 12,
+    "length": 2,
+    "refusal": 1
+   },
+   "rule_cross_1": {
+    "generic": 50,
+    "other": 19,
+    "canonical": 2,
+    "length": 1
+   },
+   "open_cross_1": {
+    "canonical": 25,
+    "other": 17,
+    "generic": 25,
+    "length": 5
+   },
+   "rule_none": {
+    "generic": 61,
+    "other": 9,
+    "length": 2
+   },
+   "open_none": {
+    "generic": 25,
+    "other": 15,
+    "length": 8,
+    "canonical": 23,
+    "undecided": 1
+   },
+   "open_name": {
+    "canonical": 50,
+    "other": 7,
+    "generic": 11,
+    "length": 4
+   },
+   "rule_cross_2": {
+    "generic": 47,
+    "canonical": 7,
+    "other": 16,
+    "length": 2
+   }
+  },
+  "contrasts": {
+   "primary: rule_name - rule_cross": {
+    "diff": 11.00832562442183,
+    "lo": 1.5025345577821496,
+    "hi": 21.4608422617832,
+    "draws": 2000
+   },
+   "interaction: (open_name - open_cross) - (rule_name - rule_cross)": {
+    "diff": 16.252429423866143,
+    "lo": -4.14712609229728,
+    "hi": 37.13868816721723,
+    "draws": 2000
+   },
+   "self line: rule_name_self - rule_name": {
+    "diff": -2.8985507246376803,
+    "lo": -9.496884866860434,
+    "hi": 4.139372019234213,
+    "draws": 2000
+   },
+   "rule bite: rule_none - open_none": {
+    "diff": -36.507936507936506,
+    "lo": -54.288220551378444,
+    "hi": -19.047619047619047,
+    "draws": 2000
+   },
+   "replication: open_name - open_cross": {
+    "diff": 27.260755048287976,
+    "lo": 12.839730218328466,
+    "hi": 43.50383217644238,
+    "draws": 2000
+   },
+   "rule_name - rule_none": {
+    "diff": 17.391304347826086,
+    "lo": 2.898550724637681,
+    "hi": 33.82352941176471,
+    "draws": 2000
+   }
+  },
+  "binding": {
+   "rule_none": 0.0,
+   "max": 0.25,
+   "binding": true
+  },
+  "by_char": {
+   "robin": {
+    "rates": {
+     "rule_cross": {
+      "k": 1,
+      "n": 46,
+      "rate": 0.021739130434782608
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 23,
+      "rate": 0.0
+     },
+     "open_none": {
+      "k": 5,
+      "n": 20,
+      "rate": 0.25
+     },
+     "open_name": {
+      "k": 21,
+      "n": 23,
+      "rate": 0.9130434782608695
+     },
+     "open_cross": {
+      "k": 15,
+      "n": 46,
+      "rate": 0.32608695652173914
+     },
+     "rule_name_self": {
+      "k": 1,
+      "n": 23,
+      "rate": 0.043478260869565216
+     },
+     "rule_name": {
+      "k": 0,
+      "n": 23,
+      "rate": 0.0
+     }
+    },
+    "contrasts": {
+     "primary: rule_name - rule_cross": {
+      "diff": -2.1739130434782608,
+      "lo": -6.521739130434782,
+      "hi": 0.0,
+      "draws": 2000
+     },
+     "interaction: (open_name - open_cross) - (rule_name - rule_cross)": {
+      "diff": 60.8695652173913,
+      "lo": 41.666666666666664,
+      "hi": 80.83522727272725,
+      "draws": 2000
+     },
+     "self line: rule_name_self - rule_name": {
+      "diff": 4.3478260869565215,
+      "lo": 0.0,
+      "hi": 13.043478260869565,
+      "draws": 2000
+     },
+     "rule bite: rule_none - open_none": {
+      "diff": -25.0,
+      "lo": -40.909090909090914,
+      "hi": -5.555555555555555,
+      "draws": 2000
+     },
+     "replication: open_name - open_cross": {
+      "diff": 58.69565217391304,
+      "lo": 35.416666666666664,
+      "hi": 80.83522727272725,
+      "draws": 2000
+     },
+     "rule_name - rule_none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "draws": 2000
+     }
+    }
+   },
+   "sparrow": {
+    "rates": {
+     "open_cross": {
+      "k": 14,
+      "n": 40,
+      "rate": 0.35
+     },
+     "rule_name_self": {
+      "k": 4,
+      "n": 22,
+      "rate": 0.18181818181818182
+     },
+     "rule_name": {
+      "k": 4,
+      "n": 23,
+      "rate": 0.17391304347826086
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "rule_cross": {
+      "k": 2,
+      "n": 48,
+      "rate": 0.041666666666666664
+     },
+     "open_none": {
+      "k": 6,
+      "n": 19,
+      "rate": 0.3157894736842105
+     },
+     "open_name": {
+      "k": 11,
+      "n": 21,
+      "rate": 0.5238095238095238
+     }
+    },
+    "contrasts": {
+     "primary: rule_name - rule_cross": {
+      "diff": 13.22463768115942,
+      "lo": 0.0,
+      "hi": 35.11904761904761,
+      "draws": 2000
+     },
+     "interaction: (open_name - open_cross) - (rule_name - rule_cross)": {
+      "diff": 4.156314699792965,
+      "lo": -18.38235294117647,
+      "hi": 24.545454545454543,
+      "draws": 2000
+     },
+     "self line: rule_name_self - rule_name": {
+      "diff": 0.7905138339920958,
+      "lo": -12.5,
+      "hi": 10.822510822510822,
+      "draws": 2000
+     },
+     "rule bite: rule_none - open_none": {
+      "diff": -31.57894736842105,
+      "lo": -65.0,
+      "hi": -5.263157894736842,
+      "draws": 2000
+     },
+     "replication: open_name - open_cross": {
+      "diff": 17.380952380952387,
+      "lo": -0.5689900426742556,
+      "hi": 33.02277432712216,
+      "draws": 2000
+     },
+     "rule_name - rule_none": {
+      "diff": 17.391304347826086,
+      "lo": 0.0,
+      "hi": 47.61904761904761,
+      "draws": 2000
+     }
+    }
+   },
+   "cap": {
+    "rates": {
+     "open_cross": {
+      "k": 33,
+      "n": 48,
+      "rate": 0.6875
+     },
+     "rule_cross": {
+      "k": 6,
+      "n": 47,
+      "rate": 0.1276595744680851
+     },
+     "rule_name_self": {
+      "k": 5,
+      "n": 24,
+      "rate": 0.20833333333333334
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 23,
+      "rate": 0.0
+     },
+     "open_name": {
+      "k": 18,
+      "n": 24,
+      "rate": 0.75
+     },
+     "rule_name": {
+      "k": 8,
+      "n": 23,
+      "rate": 0.34782608695652173
+     },
+     "open_none": {
+      "k": 12,
+      "n": 24,
+      "rate": 0.5
+     }
+    },
+    "contrasts": {
+     "primary: rule_name - rule_cross": {
+      "diff": 22.01665124884366,
+      "lo": 4.3478260869565215,
+      "hi": 41.31397754137115,
+      "draws": 2000
+     },
+     "interaction: (open_name - open_cross) - (rule_name - rule_cross)": {
+      "diff": -15.766651248843663,
+      "lo": -49.91712920135677,
+      "hi": 12.318840579710152,
+      "draws": 2000
+     },
+     "self line: rule_name_self - rule_name": {
+      "diff": -13.949275362318838,
+      "lo": -23.55072463768116,
+      "hi": -4.166666666666667,
+      "draws": 2000
+     },
+     "rule bite: rule_none - open_none": {
+      "diff": -50.0,
+      "lo": -83.33333333333334,
+      "hi": -16.666666666666664,
+      "draws": 2000
+     },
+     "replication: open_name - open_cross": {
+      "diff": 6.25,
+      "lo": -10.416666666666675,
+      "hi": 22.916666666666675,
+      "draws": 2000
+     },
+     "rule_name - rule_none": {
+      "diff": 34.78260869565217,
+      "lo": 4.3478260869565215,
+      "hi": 68.18181818181817,
+      "draws": 2000
+     }
+    }
+   }
+  }
+ },
+ "gemma": {
+  "rates": {
+   "open_none": {
+    "k": 18,
+    "n": 72,
+    "rate": 0.25
+   },
+   "rule_name": {
+    "k": 40,
+    "n": 71,
+    "rate": 0.5633802816901409
+   },
+   "rule_cross": {
+    "k": 7,
+    "n": 144,
+    "rate": 0.04861111111111111
+   },
+   "open_cross": {
+    "k": 69,
+    "n": 144,
+    "rate": 0.4791666666666667
+   },
+   "open_name": {
+    "k": 66,
+    "n": 72,
+    "rate": 0.9166666666666666
+   },
+   "rule_none": {
+    "k": 0,
+    "n": 72,
+    "rate": 0.0
+   },
+   "rule_name_self": {
+    "k": 27,
+    "n": 72,
+    "rate": 0.375
+   }
+  },
+  "counts": {
+   "open_none": {
+    "generic": 35,
+    "canonical": 18,
+    "other": 19
+   },
+   "rule_name": {
+    "other": 3,
+    "canonical": 40,
+    "generic": 28,
+    "undecided": 1
+   },
+   "rule_cross_2": {
+    "other": 10,
+    "generic": 56,
+    "canonical": 6
+   },
+   "open_cross_1": {
+    "generic": 26,
+    "other": 24,
+    "canonical": 22
+   },
+   "rule_cross_1": {
+    "generic": 57,
+    "other": 14,
+    "canonical": 1
+   },
+   "open_name": {
+    "canonical": 66,
+    "generic": 6
+   },
+   "rule_none": {
+    "generic": 65,
+    "other": 7
+   },
+   "open_cross_2": {
+    "generic": 19,
+    "canonical": 47,
+    "other": 6
+   },
+   "rule_name_self": {
+    "other": 11,
+    "generic": 34,
+    "canonical": 27
+   }
+  },
+  "contrasts": {
+   "primary: rule_name - rule_cross": {
+    "diff": 51.47691705790297,
+    "lo": 29.99652777777778,
+    "hi": 71.83098591549296,
+    "draws": 2000
+   },
+   "interaction: (open_name - open_cross) - (rule_name - rule_cross)": {
+    "diff": -7.726917057902977,
+    "lo": -33.33333333333333,
+    "hi": 19.633215962441298,
+    "draws": 2000
+   },
+   "self line: rule_name_self - rule_name": {
+    "diff": -18.838028169014088,
+    "lo": -36.93515258215963,
+    "hi": -2.777777777777779,
+    "draws": 2000
+   },
+   "rule bite: rule_none - open_none": {
+    "diff": -25.0,
+    "lo": -44.44444444444444,
+    "hi": -8.333333333333332,
+    "draws": 2000
+   },
+   "replication: open_name - open_cross": {
+    "diff": 43.74999999999999,
+    "lo": 29.166666666666664,
+    "hi": 60.41666666666667,
+    "draws": 2000
+   },
+   "rule_name - rule_none": {
+    "diff": 56.33802816901409,
+    "lo": 33.80281690140845,
+    "hi": 77.46478873239437,
+    "draws": 2000
+   }
+  },
+  "binding": {
+   "rule_none": 0.0,
+   "max": 0.25,
+   "binding": true
+  },
+  "by_char": {
+   "robin": {
+    "rates": {
+     "open_none": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "rule_name": {
+      "k": 21,
+      "n": 24,
+      "rate": 0.875
+     },
+     "rule_cross": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     },
+     "open_cross": {
+      "k": 23,
+      "n": 48,
+      "rate": 0.4791666666666667
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "open_name": {
+      "k": 24,
+      "n": 24,
+      "rate": 1.0
+     },
+     "rule_name_self": {
+      "k": 12,
+      "n": 24,
+      "rate": 0.5
+     }
+    },
+    "contrasts": {
+     "primary: rule_name - rule_cross": {
+      "diff": 87.5,
+      "lo": 70.83333333333334,
+      "hi": 100.0,
+      "draws": 2000
+     },
+     "interaction: (open_name - open_cross) - (rule_name - rule_cross)": {
+      "diff": -35.41666666666667,
+      "lo": -68.80208333333333,
+      "hi": 2.135416666666386,
+      "draws": 2000
+     },
+     "self line: rule_name_self - rule_name": {
+      "diff": -37.5,
+      "lo": -70.83333333333334,
+      "hi": -8.333333333333325,
+      "draws": 2000
+     },
+     "rule bite: rule_none - open_none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "draws": 2000
+     },
+     "replication: open_name - open_cross": {
+      "diff": 52.08333333333333,
+      "lo": 25.0,
+      "hi": 77.08333333333334,
+      "draws": 2000
+     },
+     "rule_name - rule_none": {
+      "diff": 87.5,
+      "lo": 70.83333333333334,
+      "hi": 100.0,
+      "draws": 2000
+     }
+    }
+   },
+   "sparrow": {
+    "rates": {
+     "open_cross": {
+      "k": 16,
+      "n": 48,
+      "rate": 0.3333333333333333
+     },
+     "open_none": {
+      "k": 6,
+      "n": 24,
+      "rate": 0.25
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "open_name": {
+      "k": 19,
+      "n": 24,
+      "rate": 0.7916666666666666
+     },
+     "rule_name": {
+      "k": 4,
+      "n": 23,
+      "rate": 0.17391304347826086
+     },
+     "rule_cross": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     },
+     "rule_name_self": {
+      "k": 4,
+      "n": 24,
+      "rate": 0.16666666666666666
+     }
+    },
+    "contrasts": {
+     "primary: rule_name - rule_cross": {
+      "diff": 17.391304347826086,
+      "lo": 0.0,
+      "hi": 52.17391304347826,
+      "draws": 2000
+     },
+     "interaction: (open_name - open_cross) - (rule_name - rule_cross)": {
+      "diff": 28.442028985507246,
+      "lo": -8.756999341238465,
+      "hi": 66.66666666666666,
+      "draws": 2000
+     },
+     "self line: rule_name_self - rule_name": {
+      "diff": -0.7246376811594207,
+      "lo": -13.095238095238093,
+      "hi": 12.5,
+      "draws": 2000
+     },
+     "rule bite: rule_none - open_none": {
+      "diff": -25.0,
+      "lo": -58.333333333333336,
+      "hi": 0.0,
+      "draws": 2000
+     },
+     "replication: open_name - open_cross": {
+      "diff": 45.83333333333333,
+      "lo": 20.833333333333332,
+      "hi": 70.83333333333334,
+      "draws": 2000
+     },
+     "rule_name - rule_none": {
+      "diff": 17.391304347826086,
+      "lo": 0.0,
+      "hi": 52.17391304347826,
+      "draws": 2000
+     }
+    }
+   },
+   "cap": {
+    "rates": {
+     "rule_name": {
+      "k": 15,
+      "n": 24,
+      "rate": 0.625
+     },
+     "open_name": {
+      "k": 23,
+      "n": 24,
+      "rate": 0.9583333333333334
+     },
+     "open_none": {
+      "k": 12,
+      "n": 24,
+      "rate": 0.5
+     },
+     "rule_cross": {
+      "k": 7,
+      "n": 48,
+      "rate": 0.14583333333333334
+     },
+     "open_cross": {
+      "k": 30,
+      "n": 48,
+      "rate": 0.625
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "rule_name_self": {
+      "k": 11,
+      "n": 24,
+      "rate": 0.4583333333333333
+     }
+    },
+    "contrasts": {
+     "primary: rule_name - rule_cross": {
+      "diff": 47.916666666666664,
+      "lo": 18.749999999999996,
+      "hi": 77.08333333333334,
+      "draws": 2000
+     },
+     "interaction: (open_name - open_cross) - (rule_name - rule_cross)": {
+      "diff": -14.583333333333325,
+      "lo": -54.166666666666664,
+      "hi": 25.0,
+      "draws": 2000
+     },
+     "self line: rule_name_self - rule_name": {
+      "diff": -16.666666666666668,
+      "lo": -45.833333333333336,
+      "hi": 8.333333333333332,
+      "draws": 2000
+     },
+     "rule bite: rule_none - open_none": {
+      "diff": -50.0,
+      "lo": -83.33333333333334,
+      "hi": -16.666666666666664,
+      "draws": 2000
+     },
+     "replication: open_name - open_cross": {
+      "diff": 33.333333333333336,
+      "lo": 8.333333333333337,
+      "hi": 62.5,
+      "draws": 2000
+     },
+     "rule_name - rule_none": {
+      "diff": 62.5,
+      "lo": 29.166666666666668,
+      "hi": 95.83333333333334,
+      "draws": 2000
+     }
+    }
+   }
+  }
+ },
+ "gpt": {
+  "rates": {
+   "open_cross": {
+    "k": 36,
+    "n": 72,
+    "rate": 0.5
+   },
+   "rule_name": {
+    "k": 0,
+    "n": 36,
+    "rate": 0.0
+   },
+   "rule_cross": {
+    "k": 0,
+    "n": 72,
+    "rate": 0.0
+   },
+   "rule_name_self": {
+    "k": 0,
+    "n": 36,
+    "rate": 0.0
+   },
+   "open_none": {
+    "k": 15,
+    "n": 36,
+    "rate": 0.4166666666666667
+   },
+   "open_name": {
+    "k": 26,
+    "n": 36,
+    "rate": 0.7222222222222222
+   },
+   "rule_none": {
+    "k": 0,
+    "n": 36,
+    "rate": 0.0
+   }
+  },
+  "counts": {
+   "open_cross_2": {
+    "other": 5,
+    "canonical": 18,
+    "generic": 13
+   },
+   "rule_name": {
+    "generic": 30,
+    "other": 6
+   },
+   "rule_cross_1": {
+    "generic": 29,
+    "other": 7
+   },
+   "rule_cross_2": {
+    "generic": 30,
+    "other": 6
+   },
+   "rule_name_self": {
+    "generic": 30,
+    "other": 6
+   },
+   "open_none": {
+    "canonical": 15,
+    "generic": 14,
+    "other": 7
+   },
+   "open_name": {
+    "generic": 8,
+    "canonical": 26,
+    "other": 2
+   },
+   "open_cross_1": {
+    "canonical": 18,
+    "generic": 13,
+    "other": 5
+   },
+   "rule_none": {
+    "generic": 30,
+    "other": 6
+   }
+  },
+  "contrasts": {
+   "primary: rule_name - rule_cross": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "draws": 2000
+   },
+   "interaction: (open_name - open_cross) - (rule_name - rule_cross)": {
+    "diff": 22.22222222222222,
+    "lo": 9.722222222222221,
+    "hi": 37.5,
+    "draws": 2000
+   },
+   "self line: rule_name_self - rule_name": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "draws": 2000
+   },
+   "rule bite: rule_none - open_none": {
+    "diff": -41.66666666666667,
+    "lo": -61.111111111111114,
+    "hi": -22.22222222222222,
+    "draws": 2000
+   },
+   "replication: open_name - open_cross": {
+    "diff": 22.22222222222222,
+    "lo": 9.722222222222221,
+    "hi": 37.5,
+    "draws": 2000
+   },
+   "rule_name - rule_none": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "draws": 2000
+   }
+  },
+  "binding": {
+   "rule_none": 0.0,
+   "max": 0.25,
+   "binding": true
+  },
+  "by_char": {
+   "robin": {
+    "rates": {
+     "open_cross": {
+      "k": 14,
+      "n": 24,
+      "rate": 0.5833333333333334
+     },
+     "rule_name": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_cross": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "rule_name_self": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "open_none": {
+      "k": 5,
+      "n": 12,
+      "rate": 0.4166666666666667
+     },
+     "open_name": {
+      "k": 10,
+      "n": 12,
+      "rate": 0.8333333333333334
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     }
+    },
+    "contrasts": {
+     "primary: rule_name - rule_cross": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "draws": 2000
+     },
+     "interaction: (open_name - open_cross) - (rule_name - rule_cross)": {
+      "diff": 25.0,
+      "lo": 8.333333333333325,
+      "hi": 41.66666666666667,
+      "draws": 2000
+     },
+     "self line: rule_name_self - rule_name": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "draws": 2000
+     },
+     "rule bite: rule_none - open_none": {
+      "diff": -41.66666666666667,
+      "lo": -75.0,
+      "hi": -8.333333333333332,
+      "draws": 2000
+     },
+     "replication: open_name - open_cross": {
+      "diff": 25.0,
+      "lo": 8.333333333333325,
+      "hi": 41.66666666666667,
+      "draws": 2000
+     },
+     "rule_name - rule_none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "draws": 2000
+     }
+    }
+   },
+   "sparrow": {
+    "rates": {
+     "rule_name": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_cross": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "open_none": {
+      "k": 2,
+      "n": 12,
+      "rate": 0.16666666666666666
+     },
+     "open_name": {
+      "k": 4,
+      "n": 12,
+      "rate": 0.3333333333333333
+     },
+     "rule_name_self": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "open_cross": {
+      "k": 3,
+      "n": 24,
+      "rate": 0.125
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     }
+    },
+    "contrasts": {
+     "primary: rule_name - rule_cross": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "draws": 2000
+     },
+     "interaction: (open_name - open_cross) - (rule_name - rule_cross)": {
+      "diff": 20.833333333333332,
+      "lo": 0.0,
+      "hi": 54.16666666666667,
+      "draws": 2000
+     },
+     "self line: rule_name_self - rule_name": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "draws": 2000
+     },
+     "rule bite: rule_none - open_none": {
+      "diff": -16.666666666666664,
+      "lo": -33.33333333333333,
+      "hi": 0.0,
+      "draws": 2000
+     },
+     "replication: open_name - open_cross": {
+      "diff": 20.833333333333332,
+      "lo": 0.0,
+      "hi": 54.16666666666667,
+      "draws": 2000
+     },
+     "rule_name - rule_none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "draws": 2000
+     }
+    }
+   },
+   "cap": {
+    "rates": {
+     "rule_name": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_cross": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "open_cross": {
+      "k": 19,
+      "n": 24,
+      "rate": 0.7916666666666666
+     },
+     "rule_name_self": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "open_name": {
+      "k": 12,
+      "n": 12,
+      "rate": 1.0
+     },
+     "open_none": {
+      "k": 8,
+      "n": 12,
+      "rate": 0.6666666666666666
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     }
+    },
+    "contrasts": {
+     "primary: rule_name - rule_cross": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "draws": 2000
+     },
+     "interaction: (open_name - open_cross) - (rule_name - rule_cross)": {
+      "diff": 20.833333333333336,
+      "lo": 4.1666666666666625,
+      "hi": 41.666666666666664,
+      "draws": 2000
+     },
+     "self line: rule_name_self - rule_name": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "draws": 2000
+     },
+     "rule bite: rule_none - open_none": {
+      "diff": -66.66666666666666,
+      "lo": -91.66666666666666,
+      "hi": -33.33333333333333,
+      "draws": 2000
+     },
+     "replication: open_name - open_cross": {
+      "diff": 20.833333333333336,
+      "lo": 4.1666666666666625,
+      "hi": 41.666666666666664,
+      "draws": 2000
+     },
+     "rule_name - rule_none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "draws": 2000
+     }
+    }
+   }
+  }
+ },
+ "gemini": {
+  "rates": {
+   "rule_name": {
+    "k": 5,
+    "n": 33,
+    "rate": 0.15151515151515152
+   },
+   "rule_name_self": {
+    "k": 6,
+    "n": 36,
+    "rate": 0.16666666666666666
+   },
+   "open_cross": {
+    "k": 28,
+    "n": 72,
+    "rate": 0.3888888888888889
+   },
+   "open_name": {
+    "k": 21,
+    "n": 36,
+    "rate": 0.5833333333333334
+   },
+   "rule_none": {
+    "k": 2,
+    "n": 35,
+    "rate": 0.05714285714285714
+   },
+   "rule_cross": {
+    "k": 9,
+    "n": 71,
+    "rate": 0.1267605633802817
+   },
+   "open_none": {
+    "k": 13,
+    "n": 36,
+    "rate": 0.3611111111111111
+   }
+  },
+  "counts": {
+   "rule_name": {
+    "other": 9,
+    "generic": 19,
+    "length": 3,
+    "canonical": 5
+   },
+   "rule_name_self": {
+    "generic": 17,
+    "other": 13,
+    "canonical": 6
+   },
+   "open_cross_1": {
+    "canonical": 12,
+    "generic": 13,
+    "other": 11
+   },
+   "open_name": {
+    "generic": 8,
+    "canonical": 21,
+    "other": 7
+   },
+   "rule_none": {
+    "generic": 24,
+    "other": 9,
+    "length": 1,
+    "canonical": 2
+   },
+   "rule_cross_1": {
+    "generic": 21,
+    "other": 11,
+    "canonical": 4
+   },
+   "open_none": {
+    "generic": 13,
+    "canonical": 13,
+    "other": 10
+   },
+   "rule_cross_2": {
+    "length": 1,
+    "other": 12,
+    "generic": 18,
+    "canonical": 5
+   },
+   "open_cross_2": {
+    "canonical": 16,
+    "other": 9,
+    "generic": 11
+   }
+  },
+  "contrasts": {
+   "primary: rule_name - rule_cross": {
+    "diff": 2.4754588134869833,
+    "lo": -3.1258336000853606,
+    "hi": 10.584720443875376,
+    "draws": 2000
+   },
+   "interaction: (open_name - open_cross) - (rule_name - rule_cross)": {
+    "diff": 16.968985630957466,
+    "lo": -1.8557272415352701,
+    "hi": 33.96622474747475,
+    "draws": 2000
+   },
+   "self line: rule_name_self - rule_name": {
+    "diff": 1.5151515151515138,
+    "lo": -2.777777777777779,
+    "hi": 7.779411764705873,
+    "draws": 2000
+   },
+   "rule bite: rule_none - open_none": {
+    "diff": -30.396825396825395,
+    "lo": -52.62301587301587,
+    "hi": -11.11111111111111,
+    "draws": 2000
+   },
+   "replication: open_name - open_cross": {
+    "diff": 19.444444444444446,
+    "lo": 4.1666666666666625,
+    "hi": 36.11111111111111,
+    "draws": 2000
+   },
+   "rule_name - rule_none": {
+    "diff": 9.437229437229439,
+    "lo": 0.0,
+    "hi": 23.52941176470588,
+    "draws": 2000
+   }
+  },
+  "binding": {
+   "rule_none": 0.05714285714285714,
+   "max": 0.25,
+   "binding": true
+  },
+  "by_char": {
+   "robin": {
+    "rates": {
+     "rule_name": {
+      "k": 2,
+      "n": 11,
+      "rate": 0.18181818181818182
+     },
+     "open_cross": {
+      "k": 13,
+      "n": 24,
+      "rate": 0.5416666666666666
+     },
+     "rule_cross": {
+      "k": 2,
+      "n": 24,
+      "rate": 0.08333333333333333
+     },
+     "open_none": {
+      "k": 7,
+      "n": 12,
+      "rate": 0.5833333333333334
+     },
+     "rule_name_self": {
+      "k": 2,
+      "n": 12,
+      "rate": 0.16666666666666666
+     },
+     "open_name": {
+      "k": 8,
+      "n": 12,
+      "rate": 0.6666666666666666
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     }
+    },
+    "contrasts": {
+     "primary: rule_name - rule_cross": {
+      "diff": 9.84848484848485,
+      "lo": 0.0,
+      "hi": 29.54545454545454,
+      "draws": 2000
+     },
+     "interaction: (open_name - open_cross) - (rule_name - rule_cross)": {
+      "diff": 2.6515151515151505,
+      "lo": -25.37878787878787,
+      "hi": 29.166666666666664,
+      "draws": 2000
+     },
+     "self line: rule_name_self - rule_name": {
+      "diff": -1.5151515151515165,
+      "lo": -6.6666666666666705,
+      "hi": 0.0,
+      "draws": 2000
+     },
+     "rule bite: rule_none - open_none": {
+      "diff": -58.333333333333336,
+      "lo": -91.66666666666666,
+      "hi": -25.0,
+      "draws": 2000
+     },
+     "replication: open_name - open_cross": {
+      "diff": 12.5,
+      "lo": 0.0,
+      "hi": 29.166666666666675,
+      "draws": 2000
+     },
+     "rule_name - rule_none": {
+      "diff": 18.181818181818183,
+      "lo": 0.0,
+      "hi": 54.54545454545454,
+      "draws": 2000
+     }
+    }
+   },
+   "sparrow": {
+    "rates": {
+     "rule_name_self": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "open_name": {
+      "k": 5,
+      "n": 12,
+      "rate": 0.4166666666666667
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_cross": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "open_cross": {
+      "k": 2,
+      "n": 24,
+      "rate": 0.08333333333333333
+     },
+     "open_none": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     },
+     "rule_name": {
+      "k": 0,
+      "n": 12,
+      "rate": 0.0
+     }
+    },
+    "contrasts": {
+     "primary: rule_name - rule_cross": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "draws": 2000
+     },
+     "interaction: (open_name - open_cross) - (rule_name - rule_cross)": {
+      "diff": 33.333333333333336,
+      "lo": 12.5,
+      "hi": 54.166666666666664,
+      "draws": 2000
+     },
+     "self line: rule_name_self - rule_name": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "draws": 2000
+     },
+     "rule bite: rule_none - open_none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "draws": 2000
+     },
+     "replication: open_name - open_cross": {
+      "diff": 33.333333333333336,
+      "lo": 12.5,
+      "hi": 54.166666666666664,
+      "draws": 2000
+     },
+     "rule_name - rule_none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "draws": 2000
+     }
+    }
+   },
+   "cap": {
+    "rates": {
+     "rule_name_self": {
+      "k": 4,
+      "n": 12,
+      "rate": 0.3333333333333333
+     },
+     "rule_cross": {
+      "k": 7,
+      "n": 23,
+      "rate": 0.30434782608695654
+     },
+     "open_none": {
+      "k": 6,
+      "n": 12,
+      "rate": 0.5
+     },
+     "rule_none": {
+      "k": 2,
+      "n": 11,
+      "rate": 0.18181818181818182
+     },
+     "open_cross": {
+      "k": 13,
+      "n": 24,
+      "rate": 0.5416666666666666
+     },
+     "rule_name": {
+      "k": 3,
+      "n": 10,
+      "rate": 0.3
+     },
+     "open_name": {
+      "k": 8,
+      "n": 12,
+      "rate": 0.6666666666666666
+     }
+    },
+    "contrasts": {
+     "primary: rule_name - rule_cross": {
+      "diff": -0.4347826086956552,
+      "lo": -11.067193675889325,
+      "hi": 9.661835748792269,
+      "draws": 2000
+     },
+     "interaction: (open_name - open_cross) - (rule_name - rule_cross)": {
+      "diff": 12.934782608695656,
+      "lo": -20.833333333333336,
+      "hi": 50.000000000000014,
+      "draws": 2000
+     },
+     "self line: rule_name_self - rule_name": {
+      "diff": 3.3333333333333326,
+      "lo": -11.11111111111111,
+      "hi": 22.72727272727273,
+      "draws": 2000
+     },
+     "rule bite: rule_none - open_none": {
+      "diff": -31.818181818181817,
+      "lo": -66.66666666666666,
+      "hi": 0.0,
+      "draws": 2000
+     },
+     "replication: open_name - open_cross": {
+      "diff": 12.5,
+      "lo": -20.833333333333332,
+      "hi": 50.104166666666096,
+      "draws": 2000
+     },
+     "rule_name - rule_none": {
+      "diff": 11.818181818181817,
+      "lo": 0.0,
+      "hi": 27.27272727272727,
+      "draws": 2000
+     }
+    }
+   }
+  }
+ }
+}
