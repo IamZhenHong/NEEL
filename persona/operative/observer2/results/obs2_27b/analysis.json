@@ -1,0 +1,247 @@
+{
+ "events": {
+  "id_final_strips_act": false,
+  "id_turn_strips_act": false,
+  "id_final_moves_self": false,
+  "id_turn_moves_self": false,
+  "beh_turn_moves_act": true,
+  "beh_turn_moves_self": true,
+  "id_self_over_act_turn": false,
+  "id_self_over_act_final": false,
+  "beh_act_over_self_turn": true,
+  "final_over_turn_act_id": false,
+  "final_over_turn_act_beh": false,
+  "turn_moves_act_neither": false,
+  "interaction_act": false,
+  "interaction_self": true,
+  "turn_filler_inert": true
+ },
+ "att": {
+  "id|turn|act": [
+   -0.0078125,
+   -0.03125,
+   0.015625
+  ],
+  "id|turn|self": [
+   0.015625,
+   -0.078125,
+   0.1171875
+  ],
+  "id|final|act": [
+   -0.015625,
+   -0.046875,
+   0.015625
+  ],
+  "id|final|self": [
+   0.0078125,
+   -0.0546875,
+   0.0703125
+  ],
+  "beh|turn|act": [
+   0.8046875,
+   0.7109375,
+   0.8828125
+  ],
+  "beh|turn|self": [
+   0.2265625,
+   0.1640625,
+   0.296875
+  ],
+  "beh|final|act": [
+   0.76171875,
+   0.67578125,
+   0.83984375
+  ],
+  "beh|final|self": [
+   -0.0859375,
+   -0.1328125,
+   -0.0390625
+  ]
+ },
+ "att_gap": {
+  "id|turn": [
+   -0.0234375,
+   -0.125,
+   0.0703125
+  ],
+  "id|final": [
+   -0.0234375,
+   -0.09375,
+   0.0390625
+  ],
+  "beh|turn": [
+   0.578125,
+   0.44921875,
+   0.6796875
+  ],
+  "beh|final": [
+   0.84765625,
+   0.765625,
+   0.92578125
+  ]
+ },
+ "named": {
+  "final|none|fill": [
+   -0.1328125,
+   -0.234375,
+   -0.0234375
+  ],
+  "final|none|none": [
+   -0.0078125,
+   -0.1015625,
+   0.0859375
+  ],
+  "turn|none|fill": [
+   -0.1640625,
+   -0.25,
+   -0.0703125
+  ],
+  "turn|none|none": [
+   -0.0078125,
+   -0.1015625,
+   0.09375
+  ],
+  "final|P|fill": [
+   0.0078125,
+   0.0,
+   0.0234375
+  ],
+  "final|P|none": [
+   0.0078125,
+   0.0,
+   0.0234375
+  ],
+  "turn|P|fill": [
+   0.0078125,
+   0.0,
+   0.0234375
+  ],
+  "turn|P|none": [
+   0.0078125,
+   0.0,
+   0.0234375
+  ],
+  "final|R|fill": [
+   -0.0078125,
+   -0.03125,
+   0.015625
+  ],
+  "final|R|none": [
+   0.015625,
+   0.0,
+   0.046875
+  ],
+  "turn|R|fill": [
+   0.0,
+   -0.0234375,
+   0.0234375
+  ],
+  "turn|R|none": [
+   0.0078125,
+   -0.015625,
+   0.03125
+  ]
+ },
+ "placement_act": {
+  "id": [
+   -0.0078125,
+   -0.03125,
+   0.015625
+  ],
+  "beh": [
+   -0.04296875,
+   -0.11328125,
+   0.0234375
+  ]
+ },
+ "interaction": {
+  "act": [
+   -0.03515625,
+   -0.10546875,
+   0.02734375
+  ],
+  "self": [
+   -0.3046875,
+   -0.3828125,
+   -0.22265625
+  ]
+ },
+ "turn_filler": {
+  "act": [
+   0.03125,
+   -0.03125,
+   0.09375
+  ],
+  "self": [
+   0.0,
+   0.0,
+   0.0
+  ]
+ },
+ "beh_turn_self_none": [
+  0.390625,
+  0.3203125,
+  0.4609375
+ ],
+ "det": [
+  96,
+  83,
+  95
+ ],
+ "means": {
+  "none|none|act": 0.4765625,
+  "none|none|self": 0.6640625,
+  "none|fill_final|act": 0.6015625,
+  "none|fill_final|self": 0.6640625,
+  "none|fill_turn|act": 0.6328125,
+  "none|fill_turn|self": 0.6640625,
+  "none|id_final|act": 0.46875,
+  "none|id_final|self": 0.65625,
+  "none|id_turn|act": 0.46875,
+  "none|id_turn|self": 0.6640625,
+  "none|expA_final|act": 0.765625,
+  "none|expA_final|self": 0.6796875,
+  "none|expA_turn|act": 0.8125,
+  "none|expA_turn|self": 0.75,
+  "none|expC_final|act": 0.15625,
+  "none|expC_final|self": 0.4453125,
+  "none|expC_turn|act": 0.1640625,
+  "none|expC_turn|self": 0.359375,
+  "P|none|act": 0.9921875,
+  "P|none|self": 0.875,
+  "P|fill_final|act": 0.9921875,
+  "P|fill_final|self": 0.8203125,
+  "P|fill_turn|act": 0.9921875,
+  "P|fill_turn|self": 0.7890625,
+  "P|id_final|act": 1.0,
+  "P|id_final|self": 0.7265625,
+  "P|id_turn|act": 1.0,
+  "P|id_turn|self": 0.71875,
+  "P|expA_final|act": 1.0,
+  "P|expA_final|self": 1.0,
+  "P|expA_turn|act": 1.0,
+  "P|expA_turn|self": 1.0,
+  "P|expC_final|act": 0.3359375,
+  "P|expC_final|self": 0.828125,
+  "P|expC_turn|act": 0.328125,
+  "P|expC_turn|self": 0.6484375,
+  "R|none|act": 0.015625,
+  "R|none|self": 0.0234375,
+  "R|fill_final|act": 0.0390625,
+  "R|fill_final|self": 0.125,
+  "R|fill_turn|act": 0.0234375,
+  "R|fill_turn|self": 0.0859375,
+  "R|id_final|act": 0.03125,
+  "R|id_final|self": 0.0390625,
+  "R|id_turn|act": 0.0234375,
+  "R|id_turn|self": 0.03125,
+  "R|expA_final|act": 0.953125,
+  "R|expA_final|self": 0.265625,
+  "R|expA_turn|act": 1.0,
+  "R|expA_turn|self": 0.6953125,
+  "R|expC_final|act": 0.0,
+  "R|expC_final|self": 0.0,
+  "R|expC_turn|act": 0.0,
+  "R|expC_turn|self": 0.0
+ }
+}
