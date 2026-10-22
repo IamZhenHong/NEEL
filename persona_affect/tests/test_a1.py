@@ -22,7 +22,7 @@ import pytest
 import torch
 from transformers import AutoTokenizer, Qwen2Config, Qwen2ForCausalLM
 
-from persona_affect.a1_frustration import capture, gen, items
+from persona_affect.a1_frustration import capture, gen, items, metrics
 from persona_affect.common import util
 from welfare_training import stage0
 
@@ -745,3 +745,154 @@ def test_each_meta_line_is_on_disk_before_the_next_forward(tmp_path):
     capture.capture_items(model, model.model.layers, [1], [dict(key=f"k{j}", ids=list(range(5, 30)), a=12, b=20)
                                                            for j in range(4)], tmp_path)
     assert lines == [0, 1, 2, 3]
+
+
+# ---------------------------------------------------------------- Task 4: directions, AUROC, cell choice, floors
+
+def _synth(planted, seed=0, target=True):
+    """Synthetic activations: 64 requests x 2 k, d 64, 4 layers, both positions. Each (s, k) has four rows: source
+    positive / negative and target positive / negative. Request effects N(0, 1) are shared by every row of a request
+    (so both arms of a pair), noise is N(0, 0.3), and a component of size `planted` is added to the positive source
+    rows (and, with target=True, the positive target rows) from layer 2 on. Test = requests 0-15 (32 vs 32 rows)."""
+    rng = np.random.default_rng(seed)
+    rows = [(s, k, role) for s in range(64) for k in range(2) for role in ("sp", "sn", "tp", "tn")]
+    u = rng.normal(size=64); u /= np.linalg.norm(u)
+    effect = rng.normal(size=(64, 64))[[s for s, _, _ in rows]]
+    A = {}
+    for p in ("reply", "last"):
+        X = rng.normal(0, 0.3, size=(len(rows), 4, 64)) + effect[:, None, :]
+        for j, (s, k, role) in enumerate(rows):
+            if role == "sp" or (role == "tp" and target):
+                X[j, 2:] += planted * u
+        A[p] = X.astype(np.float32)
+    req = np.array([s for s, _, _ in rows])
+    pick = lambda role, test: np.array([j for j, (s, _, r) in enumerate(rows) if r == role and (s < 16) == test])  # noqa: E731
+    pid = lambda role: np.array([2 * s + k for s, k, r in rows if r == role and s >= 16])                          # noqa: E731
+    return A, dict(src=(pick("sp", False), pick("sn", False)), src_pairs=(pid("sp"), pid("sn")),
+                   tgt_tr=(pick("tp", False), pick("tn", False)), tgt_te=(pick("tp", True), pick("tn", True)), req=req)
+
+
+def test_auroc_matches_state_attack():
+    from state_attack.src import build_dirs
+    p, n = np.random.default_rng(0).normal(1, 1, 40), np.random.default_rng(1).normal(0, 1, 40)
+    assert abs(metrics.auroc(p, n) - build_dirs.auroc(p, n)) < 1e-12 and metrics.auroc([1, 1], [1]) == 0.5
+
+
+def test_cell_choice_uses_train_only():
+    A, S = _synth(2.0); r1 = metrics.transfer(A, S["src"], S["tgt_tr"], S["tgt_te"], S["req"])
+    rows = np.r_[S["tgt_te"][0], S["tgt_te"][1]]
+    for p in A: A[p][rows] = np.random.default_rng(9).normal(size=A[p][rows].shape)     # test rows -> noise
+    assert metrics.transfer(A, S["src"], S["tgt_tr"], S["tgt_te"], S["req"])["cell"] == r1["cell"] and r1["cell"][0] >= 2
+
+
+def test_cell_must_be_eligible():
+    for seed in range(5):                  # source signal from layer 2, target noise: never a noise-layer cell
+        A, S = _synth(3.0, seed=seed, target=False); r = metrics.transfer(A, S["src"], S["tgt_tr"], S["tgt_te"], S["req"])
+        assert r["eligible"] and r["cell"][0] >= 2 and all(r["oof"][c] < 0.75 for c in r["oof"] if c[0] < 2)
+    A, S = _synth(0.0); r = metrics.transfer(A, S["src"], S["tgt_tr"], S["tgt_te"], S["req"])
+    assert not r["eligible"] and r["cell"] in r["by_cell"]                  # numbers still reported
+
+
+def test_floors_on_noise_and_within_pair_shuffles():
+    A, S = _synth(0.0); f = metrics.floors(A, (2, "reply"), S["src"], S["src_pairs"], S["tgt_te"])
+    assert f["shuffled95"] < 0.75 and f["random95"] < 0.75
+    p2, n2 = metrics.shuffled_labels(S["src"], S["src_pairs"], np.random.default_rng(0))
+    assert sorted(np.r_[p2, n2]) == sorted(np.r_[S["src"][0], S["src"][1]])
+    pid = dict(zip(np.r_[S["src"][0], S["src"][1]], np.r_[S["src_pairs"][0], S["src_pairs"][1]]))
+    assert sorted(pid[x] for x in p2) == sorted(S["src_pairs"][0])       # one member of every pair on each side
+
+
+def test_shift_auroc():
+    proj = np.r_[np.full(10, 3.0), np.zeros(10), np.full(10, 0.5), np.zeros(10)]
+    big, small = [(i, i + 10) for i in range(10)], [(i + 20, i + 30) for i in range(10)]
+    assert metrics.shift_auroc(proj, big, small) == 1.0 and metrics.shift_auroc(proj, small, big) == 0.0
+
+
+# ---------------------------------------------------------------- Task 4: the rest of the interface
+
+def test_auroc_edges_and_direction():
+    assert metrics.auroc([2, 3], [0, 1]) == 1.0 and metrics.auroc([0, 1], [2, 3]) == 0.0
+    assert metrics.auroc([1, 2], [2, 3]) == 0.125 and np.isnan(metrics.auroc([], [1]))      # one tie counts half
+    A = {"reply": np.arange(24, dtype=np.float32).reshape(4, 2, 3), "last": np.zeros((4, 2, 3), np.float32)}
+    d = metrics.direction(A, (1, "reply"), np.array([2, 3]), np.array([0, 1]))
+    assert np.allclose(d, A["reply"][[2, 3], 1].mean(0) - A["reply"][[0, 1], 1].mean(0)) and np.allclose(d, 12.0)
+    assert np.allclose(metrics.project(A, (1, "reply"), d), A["reply"][:, 1] @ (d / np.linalg.norm(d)))
+
+
+def test_transfer_numbers_and_tie_rule():
+    A, S = _synth(3.0); r = metrics.transfer(A, S["src"], S["tgt_tr"], S["tgt_te"], S["req"])
+    u = metrics.direction(A, r["cell"], *S["src"])
+    x = metrics.project(A, r["cell"], u)
+    assert r["train"] == metrics.auroc(x[S["tgt_tr"][0]], x[S["tgt_tr"][1]]) == r["by_cell"][r["cell"]]
+    assert r["test"] == metrics.auroc(x[S["tgt_te"][0]], x[S["tgt_te"][1]]) and r["test"] > 0.9
+    assert set(r["by_cell"]) == set(r["oof"]) == {(l, p) for l in range(4) for p in ("reply", "last")}
+    for p in A:                                          # every cell the same: lower layer, then reply, wins
+        A[p][:] = A["reply"][:, 3:4, :]
+    assert metrics.transfer(A, S["src"], S["tgt_tr"], S["tgt_te"], S["req"])["cell"] == (0, "reply")
+    for p in A:                                          # a better cell later on wins over the tie rule
+        A[p][S["tgt_tr"][0], 2, :] += 50 * metrics.direction(A, (2, p), *S["src"]) / np.linalg.norm(metrics.direction(A, (2, p), *S["src"]))
+    assert metrics.transfer(A, S["src"], S["tgt_tr"], S["tgt_te"], S["req"])["cell"] in ((2, "reply"), (2, "last"))
+
+
+def test_transfer_refuses_test_rows_in_a_direction_or_cell_choice():
+    A, S = _synth(2.0)
+    te_p, te_n = S["tgt_te"]
+    for bad in (dict(src=(np.r_[S["src"][0], te_p], np.r_[S["src"][1], te_n])),
+                dict(tgt_tr=(np.r_[S["tgt_tr"][0], te_p], S["tgt_tr"][1])),
+                dict(tgt_te=S["tgt_tr"])):                               # the test set must be test requests
+        args = {**{x: S[x] for x in ("src", "tgt_tr", "tgt_te")}, **bad}
+        with pytest.raises(ValueError):
+            metrics.transfer(A, args["src"], args["tgt_tr"], args["tgt_te"], S["req"])
+
+
+def test_oof_directions_come_from_requests_16_to_39_and_score_40_to_63():
+    A, S = _synth(3.0, target=False)
+    base = metrics.transfer(A, S["src"], S["tgt_tr"], S["tgt_te"], S["req"])["oof"]
+    late = np.r_[S["src"][0], S["src"][1]][S["req"][np.r_[S["src"][0], S["src"][1]]] >= 40]
+    B = {p: A[p].copy() for p in A}
+    for p in B:                                          # flip the planted sign on requests 40-63 only
+        B[p][late] = -B[p][late] + 2 * B[p][late].mean(0)
+    flipped = metrics.transfer(B, S["src"], S["tgt_tr"], S["tgt_te"], S["req"])["oof"]
+    assert base[(3, "reply")] > 0.9 and flipped[(3, "reply")] < 0.5      # scored on 40-63 with a 16-39 direction
+
+
+def test_floors_reproducible_and_floor_is_the_larger():
+    A, S = _synth(1.0)
+    f1 = metrics.floors(A, (3, "reply"), S["src"], S["src_pairs"], S["tgt_te"], n_shuffle=30, n_random=40, rng_seed=5)
+    f2 = metrics.floors(A, (3, "reply"), S["src"], S["src_pairs"], S["tgt_te"], n_shuffle=30, n_random=40, rng_seed=5)
+    assert f1 == f2 and f1["floor95"] == max(f1["shuffled95"], f1["random95"]) and set(f1) == {"shuffled95", "random95", "floor95"}
+    sh, rd = metrics.null_aurocs(A, (3, "reply"), S["src"], S["src_pairs"], S["tgt_te"], n_shuffle=30, n_random=40,
+                                 rng_seed=5)
+    assert (len(sh), len(rd)) == (30, 40)
+    assert f1["shuffled95"] == np.percentile(sh, 95) and f1["random95"] == np.percentile(rd, 95)   # 95th percentiles
+    A0, S0 = _synth(0.0)                                  # on noise: shuffled AUROCs keep their sign, random ones fold
+    sh0, rd0 = metrics.null_aurocs(A0, (3, "reply"), S0["src"], S0["src_pairs"], S0["tgt_te"], rng_seed=1)
+    assert sh0.min() < 0.5 < sh0.max() and rd0.min() >= 0.5 and len(set(rd0.tolist())) > 1
+
+
+def test_shuffles_swap_about_half_the_pairs_and_never_split_one():
+    A, S = _synth(0.0)
+    p2, _ = metrics.shuffled_labels(S["src"], S["src_pairs"], np.random.default_rng(1))
+    swapped = len(set(p2.tolist()) - set(S["src"][0].tolist()))
+    assert 0.3 * len(p2) < swapped < 0.7 * len(p2)
+    with pytest.raises(ValueError):                                      # a pair with no partner on the other side
+        metrics.shuffled_labels(S["src"], (S["src_pairs"][0], S["src_pairs"][1][::-1] + 1000), np.random.default_rng(0))
+
+
+def test_cluster_ci_resamples_whole_clusters():
+    clusters = np.repeat(np.arange(8), 3)                                # 8 clusters of 3 rows
+    seen = []
+    def stat(idx):
+        seen.append(idx.copy())
+        return float(np.mean(clusters[idx]))
+    lo, hi = metrics.cluster_ci(stat, clusters, n_boot=200, rng_seed=0)
+    assert lo < 3.5 < hi and len(seen) == 200
+    for idx in seen:                                                     # every drawn cluster comes with all 3 rows
+        assert len(idx) == 24 and all(Counter(clusters[idx].tolist())[c] % 3 == 0 for c in set(clusters[idx].tolist()))
+    assert metrics.cluster_ci(lambda idx: 1.0, clusters, n_boot=50) == (1.0, 1.0)
+    assert metrics.cluster_ci(stat, clusters, n_boot=50, rng_seed=3) == metrics.cluster_ci(stat, clusters, n_boot=50, rng_seed=3)
+    nan_lo, nan_hi = metrics.cluster_ci(lambda idx: float("nan"), clusters, n_boot=20)
+    assert np.isnan(nan_lo) and np.isnan(nan_hi)                        # draws whose statistic is undefined are skipped
+    some = lambda idx: float(np.mean(clusters[idx])) if 0 in clusters[idx] else float("nan")       # noqa: E731
+    lo, hi = metrics.cluster_ci(some, clusters, n_boot=200)             # undefined for draws without cluster 0
+    assert np.isfinite(lo) and np.isfinite(hi) and lo <= hi
