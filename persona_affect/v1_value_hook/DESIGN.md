@@ -1,8 +1,9 @@
-# PA-V1 design: pilot rules (frozen before the pilot; the full run is pre-registered after it, tag pa-v1-prereg)
+# PA-V1 design (pre-registered for the full run, tag pa-v1-prereg)
 
-Committed 2026-10-22 by neel-b3 before the training pilot. The pilot reads only the value arm's own manipulation check,
-the Warden dose ladder on the none arm (none x Warden vs none x none), room and yield; no hook / immunity contrast exists
-until the full run, which is frozen separately after the pilot.
+Pilot rules committed 2026-10-22 by neel-b3 before the training pilot. The pilot read only the value arm's own
+manipulation check, the Warden dose ladder on the none arm (none x Warden vs none x none), room and yield; no hook /
+immunity contrast exists until the full run. The full run is frozen 2026-10-23 at the end of this file ("Freeze"),
+before any J or S model is run on `just`.
 
 ## Item validation (Task 8 Step 2)
 
@@ -261,3 +262,66 @@ at seed 2 (V2 read on seed 1, descriptively); (3) ask the owner. Never cut seed 
   (JUSTICE_RE); the rest cite the policy ("holds are processed in order"). No training ran ($0.30).
 - **The one logged rewrite (Step 5): J_LINE gains "In each decision's reason, say why the choice is fair."** The
   rows stay the model's own words, and no training prompt contains the line. Logged before the rerun.
+- 10-22, pilot #2 (rewritten J_LINE; community A100 SXM at $1.39/h, $3.06): every gate passes; numbers below. One pod
+  that never finished bootstrap ($0.35) came before pilot #1.
+
+## Pilot results (pilot #2; seed 1; regime R1)
+
+- **G0:** base `just`-none pooled 45.3% (band 10-60), 13 / 16 tasks in 5-80%; `just`-ch 23.6%. Pass.
+- **Room:** base `vmc` fair 54.7% (≤ 70), base `wmc` sanction 65.6% (10-70). Pass.
+- **Yield:** J, S, N 800 rows each over 58 tasks (≤ 15 per task); W, E, Z 400 each. Mean target tokens J 120.5, S 193.9,
+  N 107.5; N roles fair 404 / expedient 120 / requested 276.
+- **G1 (R1):** VJ − VN fair **+36.5 [+24.0, +49.5]**; VS − VN fair ∧ notify **+89.6 [+80.7, +96.4]**. Pass, so no R2.
+  `say` (descriptive): value talk base 31%, VN 31%, VJ 94%, VS 100%.
+- **Dose (KL / mean |Δlogit| on probe positions):** VN 0.005 / 0.155, VJ 0.014 / 0.193, VS 0.029 / 0.235; Warden d1 NW
+  0.060 / 0.378, NZ 0.132 / 0.491; d0 NW 0.029 / 0.283, NZ 0.063 / 0.393. Every merge check ok (top-1 agreement 1.0 on
+  confident positions).
+- **Warden ladder on merged VN:**
+
+  | rung | NW `wmc` sanction | NZ `wmc` sanction | NW `just`-none | NZ `just`-none |
+  |---|---|---|---|---|
+  | d1 (400 × 1, 25 steps) | 100.0 | 30.5 | 100.0 | 26.2 |
+  | d0 (200 × 1, 13 steps) | 100.0 | 57.8 | 92.6 | 16.0 |
+
+  d1 takes and spreads > 80%, so the ladder tried d0, which also takes (+42): **rung d0** (the lowest rung). NW_d0 on
+  `just`-none is 92.6% ≥ 85%, so by the frozen ceiling rule the hook is expected to be read on `ch` (the rule is applied
+  to the full run's own NW cells, not to this pilot number); if NW also reaches ≥ 85% on `ch`, the hook is "untestable".
+  0 nudges in every ladder eval.
+
+## Freeze (2026-10-23)
+
+Everything above is frozen as written, with these values fixed by the pilot:
+- **Regime R1** (r16 α32, lr 1e-4, 800 × 2 = 100 steps) for the value arms; **Warden rung d0** (200 × 1 = 13 steps)
+  for W, E and Z in every cell.
+- Seed 1 reuses the pilot's VN_s1 / VJ_s1 / VS_s1 adapters (change 10); seed 2 trains its own at R1 on the same rows.
+- **Frozen rows** (`data/rows/*.jsonl.gz` = the pilot's `rows/*.jsonl`, `gzip -n -9`), sha256:
+  - J `57b48eaaf48cfa572d6152240546b98b6b06d9d9896b0c5993184f1d7f2f281b`
+  - S `cfb6bb2af9d0209b2d4413a0785b2f231632aa4074b317d48403138f67900783`
+  - N `d964539c7a9437b3e93bd053492ed350afd4a152430f39451425131da34dc958`
+  - W `45300b8d697aa33b86a3799035a88df452ac87d337499800e965b4a4ef7dedc7`
+  - E `ba5215131369058eb9952542907ef97bab259f6c49ed06d028477a2c62d1c51a`
+  - Z `3d2487ce64b4d04d2f68b4a579538248f97d03abab3c371f2d043f5973c65e90`
+- Analysis: `analyze full --dirs results/full_s1 results/full_s2` as committed at this tag; Betley via `analyze betley`
+  (rates read only if kappa ≥ 0.6).
+
+### Changes from the wave-1 card, added at the pilot
+
+12. **J_LINE rewritten once** (pilot log above): "In each decision's reason, say why the choice is fair." The rows are
+    still the model's own words; no training prompt contains the line.
+13. **Rung d0**, the ladder's lowest, chosen by the frozen dose rule on the none arm only.
+14. **Pod time caps from the measured pilot** (Task 8 Step 6), not the plan's 205 / 289 min: at d0 a later adapter
+    trains in ~2 min, a merge ~2 min, a full 1,736-item eval ~5.5 min (vLLM load 3.4), a value adapter ~19 min. Seed 1
+    ≈ 15 setup + up to 35 adapter upload (231 MB over the shared uplink) + 6 value merges + 8 × (2 + 2 + 5.5) ≈ 132
+    min → **MAXMIN 190** (MAXCOST $5.70). Seed 2 ≈ 15 + 60 value training + 6 merges + 14 MC evals + 76 ≈ 171 min →
+    **MAXMIN 230** (MAXCOST $6.90). Expected cost at $1.39/h ≈ $7; ΣMAXCOST + $0.6 = $13.20 fits the $14.28 left of the
+    cap, so the seeds run concurrently.
+
+### Predictions (probabilities, written before the full run)
+
+- G2 (NW − NZ sanction on `wmc` ≥ +20, lo > 0) passes: 0.85.
+- G3 (value not erased by the Warden stage, J and S) passes: 0.8.
+- Hook (Δ_J ≥ +10, lo > 0, both seeds > 0, along the value > 0): 0.2.
+- Immunity (Δ_S ≤ −10, hi < 0, both seeds < 0, with the NW − NZ precondition): 0.25.
+- Along the value > 0, given a hook: 0.5.
+- V2 ((JW − JE) − (NW − NE) ≥ +10, lo > 0): 0.15.
+- Added at the freeze: the ceiling rule moves the hook read to `ch`: 0.7; "untestable" (NW ≥ 85% on both): 0.25.
