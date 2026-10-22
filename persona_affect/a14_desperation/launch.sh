@@ -45,7 +45,8 @@ case "$JOBS" in persona_affect/*) ;; *) echo "JOBS must be a repo-relative path 
 case "/$JOBS/" in */results/*|*/logs/*|*/prep/*|*/reference/*)
   echo "JOBS sits under a results/, logs/, prep/ or reference/ directory, which the launcher's sync drops: $JOBS"; exit 2;; esac
 [ -f "$JOBS" ] || { echo "JOBS not found: $JOBS"; exit 2; }
-CENTS=$(( (MAXMIN * 180 + 59) / 60 ))      # $1.80/h, rounded up to the cent
+RATE=${RATE:-180}                          # cents per hour MAXCOST allows; 310 for a community H100 (owner, 10-22)
+CENTS=$(( (MAXMIN * RATE + 59) / 60 ))     # rounded up to the cent
 MAXCOST=$(printf '%d.%02d' $((CENTS / 100)) $((CENTS % 100)))
 if [ -n "${GPUS:-}" ]; then IFS='|' read -ra GPUARR <<< "$GPUS"; else GPUARR=("NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe"); fi
 uv run python -c 'import json, sys
