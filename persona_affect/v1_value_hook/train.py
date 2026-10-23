@@ -115,13 +115,29 @@ def dose(pm, tok):
     return {"kl": round(sum(kls) / len(kls), 6), "abs_dlogit": round(sum(dls) / len(dls), 6)}
 
 
-def train_one(model, tok, rows, r, seed, stage, name, out):
-    """c1e4's train_arm with recipe r. Returns (the model with the adapter unloaded, info)."""
+def _save_adapter(pm, d, dev):
+    """Write pm's adapter (bf16 on cuda) + config to d; returns the safetensors sha256."""
+    import torch
+    from peft import get_peft_model_state_dict
+    from safetensors.torch import save_file
+    d.mkdir(parents=True, exist_ok=True)
+    sd = {k: v.detach().to(torch.bfloat16 if dev.type == "cuda" else v.dtype).cpu().contiguous()
+          for k, v in get_peft_model_state_dict(pm).items()}
+    save_file(sd, str(d / "adapter_model.safetensors"), metadata={"format": "pt"})
+    pm.peft_config["default"].save_pretrained(str(d))
+    return hashlib.sha256((d / "adapter_model.safetensors").read_bytes()).hexdigest()
+
+
+def train_one(model, tok, rows, r, seed, stage, name, out, save_at=()):
+    """c1e4's train_arm with recipe r. Returns (the model with the adapter unloaded, info).
+
+    save_at (SC-N6b): optimizer-step counts after which the adapter so far is also saved, to out/{name}_step{k}, with
+    its sha256 and dose in info["checkpoints"]. Empty (the default) runs exactly the code it always did: no extra
+    saves, no extra info key. Saving runs no RNG and no gradient step, so it leaves the run itself unchanged."""
     if len(rows) != r["rows"]:
         raise ValueError(f"{name}: {len(rows)} rows, recipe needs {r['rows']}")
     import torch
-    from peft import LoraConfig, get_peft_model, get_peft_model_state_dict
-    from safetensors.torch import save_file
+    from peft import LoraConfig, get_peft_model
 
     from persona.operative.lora_c1e4.common import TARGET_MODULES
     from persona.operative.lora_c1e4.train import target_loss
@@ -138,7 +154,7 @@ def train_one(model, tok, rows, r, seed, stage, name, out):
     pad = tok.pad_token_id if tok.pad_token_id is not None else tok.eos_token_id
     dev = next(pm.parameters()).device
     pm.train()
-    t0, step, losses_all = time.time(), 0, []
+    t0, step, losses_all, ckpts = time.time(), 0, [], {}
     with open(out / f"train_{name}.jsonl", "w") as log:
         for ep in range(r["epochs"]):
             order = list(range(len(rows)))
@@ -173,18 +189,18 @@ def train_one(model, tok, rows, r, seed, stage, name, out):
                 print(f"  [v1-train {name}] step {step + 1}/{total} loss {loss_sum:.4f} lr {lr:.2e} "
                       f"({time.time() - t0:.0f}s)", flush=True)
                 step += 1
+                if step in save_at:
+                    ck = _save_adapter(pm, out / f"{name}_step{step}", dev)
+                    ckpts[step] = {"sha256": ck, "secs": round(time.time() - t0, 1), "dose": dose(pm, tok)}
+                    print(f"  [v1-train {name}] checkpoint at step {step} saved", flush=True)
     secs = round(time.time() - t0, 1)
-    d = out / name
-    d.mkdir(parents=True, exist_ok=True)
-    sd = {k: v.detach().to(torch.bfloat16 if dev.type == "cuda" else v.dtype).cpu().contiguous()
-          for k, v in get_peft_model_state_dict(pm).items()}
-    save_file(sd, str(d / "adapter_model.safetensors"), metadata={"format": "pt"})
-    pm.peft_config["default"].save_pretrained(str(d))
-    sha = hashlib.sha256((d / "adapter_model.safetensors").read_bytes()).hexdigest()
+    sha = _save_adapter(pm, out / name, dev)
     info = {"steps": step, "secs": secs, "sha256": sha,
             "loss_first5": losses_all[:5], "loss_last5": losses_all[-5:],
             "target_tokens": sum(sum(1 for x in lab_ if x != IGNORE) for _, lab_ in enc),
             "base": str(getattr(model.config, "_name_or_path", "")), "dose": dose(pm, tok)}
+    if save_at:
+        info["checkpoints"] = ckpts
     return pm.unload(), info
 
 
