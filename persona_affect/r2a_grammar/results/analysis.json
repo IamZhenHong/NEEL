@@ -1,0 +1,1314 @@
+{
+ "gemma": {
+  "rates": {
+   "rule_punct": {
+    "k": 0,
+    "n": 144,
+    "rate": 0.0
+   },
+   "rule_third": {
+    "k": 39,
+    "n": 144,
+    "rate": 0.2708333333333333
+   },
+   "rule_ai_value": {
+    "k": 100,
+    "n": 144,
+    "rate": 0.6944444444444444
+   },
+   "rule_neutral_value": {
+    "k": 39,
+    "n": 144,
+    "rate": 0.2708333333333333
+   },
+   "rule_alex_punct": {
+    "k": 0,
+    "n": 144,
+    "rate": 0.0
+   },
+   "rule_norm": {
+    "k": 43,
+    "n": 144,
+    "rate": 0.2986111111111111
+   },
+   "rule_id_someone": {
+    "k": 105,
+    "n": 144,
+    "rate": 0.7291666666666666
+   },
+   "rule_care": {
+    "k": 44,
+    "n": 144,
+    "rate": 0.3055555555555556
+   },
+   "rule_user": {
+    "k": 47,
+    "n": 144,
+    "rate": 0.3263888888888889
+   },
+   "rule_v2p": {
+    "k": 63,
+    "n": 144,
+    "rate": 0.4375
+   },
+   "rule_alex_value": {
+    "k": 88,
+    "n": 144,
+    "rate": 0.6111111111111112
+   },
+   "rule_this_ai_value": {
+    "k": 92,
+    "n": 144,
+    "rate": 0.6388888888888888
+   },
+   "rule_none": {
+    "k": 0,
+    "n": 144,
+    "rate": 0.0
+   }
+  },
+  "counts": {
+   "rule_punct": {
+    "generic": 123,
+    "other": 21
+   },
+   "rule_third": {
+    "other": 29,
+    "generic": 76,
+    "canonical": 39
+   },
+   "rule_ai_value": {
+    "other": 16,
+    "generic": 28,
+    "canonical": 100
+   },
+   "rule_neutral_value": {
+    "canonical": 39,
+    "generic": 80,
+    "other": 25
+   },
+   "rule_alex_punct": {
+    "generic": 124,
+    "other": 20
+   },
+   "rule_norm": {
+    "generic": 72,
+    "canonical": 43,
+    "other": 29
+   },
+   "rule_id_someone": {
+    "canonical": 105,
+    "generic": 23,
+    "other": 16
+   },
+   "rule_care": {
+    "generic": 74,
+    "canonical": 44,
+    "other": 26
+   },
+   "rule_user": {
+    "other": 37,
+    "canonical": 47,
+    "generic": 60
+   },
+   "rule_v2p": {
+    "generic": 51,
+    "canonical": 63,
+    "other": 30
+   },
+   "rule_alex_value": {
+    "canonical": 88,
+    "generic": 48,
+    "other": 8
+   },
+   "rule_this_ai_value": {
+    "canonical": 92,
+    "generic": 28,
+    "other": 24
+   },
+   "rule_none": {
+    "generic": 129,
+    "other": 15
+   }
+  },
+  "contrasts": {
+   "A2: id_someone - v2p": {
+    "diff": 29.166666666666664,
+    "lo": 12.48263888888889,
+    "hi": 49.30555555555556
+   },
+   "A2: care - v2p": {
+    "diff": -13.194444444444443,
+    "lo": -31.25,
+    "hi": 2.0833333333333313
+   },
+   "A2: user - v2p": {
+    "diff": -11.11111111111111,
+    "lo": -28.47222222222222,
+    "hi": 2.083333333333337
+   },
+   "A2: third - v2p": {
+    "diff": -16.666666666666668,
+    "lo": -37.5,
+    "hi": 2.083333333333337
+   },
+   "A2: norm - v2p": {
+    "diff": -13.88888888888889,
+    "lo": -33.33333333333333,
+    "hi": 3.472222222222221
+   },
+   "A2: v2p - none": {
+    "diff": 43.75,
+    "lo": 23.59375,
+    "hi": 64.60069444444436
+   },
+   "A2: alex_value - v2p (P12f anchor)": {
+    "diff": 17.361111111111114,
+    "lo": 2.083333333333337,
+    "hi": 35.41666666666667
+   },
+   "A3: punct - none": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "A3: alex_punct - none": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "A3: alex_punct - punct": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "A4: ai_value - this_ai_value": {
+    "diff": 5.555555555555558,
+    "lo": -4.166666666666669,
+    "hi": 18.09027777777759
+   },
+   "A4: ai_value - neutral_value": {
+    "diff": 42.36111111111111,
+    "lo": 25.0,
+    "hi": 59.72222222222223
+   },
+   "A4: neutral_value - v2p": {
+    "diff": -16.666666666666668,
+    "lo": -32.65625,
+    "hi": -3.4722222222222268
+   },
+   "A4: this_ai_value - v2p": {
+    "diff": 20.138888888888886,
+    "lo": 6.25,
+    "hi": 36.80555555555556
+   },
+   "A4: ai_value - v2p (P12f anchor)": {
+    "diff": 25.694444444444443,
+    "lo": 11.111111111111105,
+    "hi": 44.44444444444444
+   }
+  },
+  "by_char": {
+   "robin": {
+    "rates": {
+     "rule_punct": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     },
+     "rule_third": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     },
+     "rule_neutral_value": {
+      "k": 6,
+      "n": 48,
+      "rate": 0.125
+     },
+     "rule_v2p": {
+      "k": 14,
+      "n": 48,
+      "rate": 0.2916666666666667
+     },
+     "rule_norm": {
+      "k": 6,
+      "n": 48,
+      "rate": 0.125
+     },
+     "rule_alex_value": {
+      "k": 40,
+      "n": 48,
+      "rate": 0.8333333333333334
+     },
+     "rule_alex_punct": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     },
+     "rule_id_someone": {
+      "k": 41,
+      "n": 48,
+      "rate": 0.8541666666666666
+     },
+     "rule_user": {
+      "k": 2,
+      "n": 48,
+      "rate": 0.041666666666666664
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     },
+     "rule_ai_value": {
+      "k": 42,
+      "n": 48,
+      "rate": 0.875
+     },
+     "rule_this_ai_value": {
+      "k": 30,
+      "n": 48,
+      "rate": 0.625
+     },
+     "rule_care": {
+      "k": 19,
+      "n": 48,
+      "rate": 0.3958333333333333
+     }
+    },
+    "contrasts": {
+     "A2: id_someone - v2p": {
+      "diff": 56.25,
+      "lo": 22.916666666666664,
+      "hi": 87.5
+     },
+     "A2: care - v2p": {
+      "diff": 10.416666666666663,
+      "lo": 0.0,
+      "hi": 22.916666666666668
+     },
+     "A2: user - v2p": {
+      "diff": -25.0,
+      "lo": -58.333333333333336,
+      "hi": 0.0
+     },
+     "A2: third - v2p": {
+      "diff": -29.166666666666668,
+      "lo": -62.5,
+      "hi": 0.0
+     },
+     "A2: norm - v2p": {
+      "diff": -16.666666666666668,
+      "lo": -47.916666666666664,
+      "hi": 12.5
+     },
+     "A2: v2p - none": {
+      "diff": 29.166666666666668,
+      "lo": 0.0,
+      "hi": 62.5
+     },
+     "A2: alex_value - v2p (P12f anchor)": {
+      "diff": 54.16666666666667,
+      "lo": 16.666666666666675,
+      "hi": 87.5
+     },
+     "A3: punct - none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A3: alex_punct - none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A3: alex_punct - punct": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A4: ai_value - this_ai_value": {
+      "diff": 25.0,
+      "lo": 4.1666666666666625,
+      "hi": 58.33333333333333
+     },
+     "A4: ai_value - neutral_value": {
+      "diff": 75.0,
+      "lo": 50.0,
+      "hi": 95.83333333333334
+     },
+     "A4: neutral_value - v2p": {
+      "diff": -16.666666666666668,
+      "lo": -54.166666666666664,
+      "hi": 8.333333333333334
+     },
+     "A4: this_ai_value - v2p": {
+      "diff": 33.33333333333333,
+      "lo": 0.0,
+      "hi": 66.66666666666667
+     },
+     "A4: ai_value - v2p (P12f anchor)": {
+      "diff": 58.33333333333333,
+      "lo": 25.0,
+      "hi": 87.5
+     }
+    }
+   },
+   "sparrow": {
+    "rates": {
+     "rule_neutral_value": {
+      "k": 6,
+      "n": 48,
+      "rate": 0.125
+     },
+     "rule_alex_punct": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     },
+     "rule_norm": {
+      "k": 1,
+      "n": 48,
+      "rate": 0.020833333333333332
+     },
+     "rule_care": {
+      "k": 3,
+      "n": 48,
+      "rate": 0.0625
+     },
+     "rule_user": {
+      "k": 13,
+      "n": 48,
+      "rate": 0.2708333333333333
+     },
+     "rule_ai_value": {
+      "k": 20,
+      "n": 48,
+      "rate": 0.4166666666666667
+     },
+     "rule_id_someone": {
+      "k": 27,
+      "n": 48,
+      "rate": 0.5625
+     },
+     "rule_this_ai_value": {
+      "k": 22,
+      "n": 48,
+      "rate": 0.4583333333333333
+     },
+     "rule_alex_value": {
+      "k": 19,
+      "n": 48,
+      "rate": 0.3958333333333333
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     },
+     "rule_v2p": {
+      "k": 19,
+      "n": 48,
+      "rate": 0.3958333333333333
+     },
+     "rule_third": {
+      "k": 3,
+      "n": 48,
+      "rate": 0.0625
+     },
+     "rule_punct": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     }
+    },
+    "contrasts": {
+     "A2: id_someone - v2p": {
+      "diff": 16.666666666666668,
+      "lo": 0.0,
+      "hi": 41.66666666666667
+     },
+     "A2: care - v2p": {
+      "diff": -33.33333333333333,
+      "lo": -66.66666666666666,
+      "hi": 0.0
+     },
+     "A2: user - v2p": {
+      "diff": -12.5,
+      "lo": -43.75,
+      "hi": 6.25
+     },
+     "A2: third - v2p": {
+      "diff": -33.33333333333333,
+      "lo": -66.66666666666666,
+      "hi": 0.0
+     },
+     "A2: norm - v2p": {
+      "diff": -37.5,
+      "lo": -72.91666666666666,
+      "hi": -6.25
+     },
+     "A2: v2p - none": {
+      "diff": 39.58333333333333,
+      "lo": 6.25,
+      "hi": 79.16666666666666
+     },
+     "A2: alex_value - v2p (P12f anchor)": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A3: punct - none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A3: alex_punct - none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A3: alex_punct - punct": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A4: ai_value - this_ai_value": {
+      "diff": -4.1666666666666625,
+      "lo": -12.500000000000004,
+      "hi": 0.0
+     },
+     "A4: ai_value - neutral_value": {
+      "diff": 29.166666666666668,
+      "lo": 6.25,
+      "hi": 60.416666666666664
+     },
+     "A4: neutral_value - v2p": {
+      "diff": -27.083333333333332,
+      "lo": -58.333333333333336,
+      "hi": -4.166666666666666
+     },
+     "A4: this_ai_value - v2p": {
+      "diff": 6.25,
+      "lo": 0.0,
+      "hi": 18.750000000000004
+     },
+     "A4: ai_value - v2p (P12f anchor)": {
+      "diff": 2.083333333333337,
+      "lo": 0.0,
+      "hi": 6.25
+     }
+    }
+   },
+   "cap": {
+    "rates": {
+     "rule_ai_value": {
+      "k": 38,
+      "n": 48,
+      "rate": 0.7916666666666666
+     },
+     "rule_punct": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     },
+     "rule_norm": {
+      "k": 36,
+      "n": 48,
+      "rate": 0.75
+     },
+     "rule_id_someone": {
+      "k": 37,
+      "n": 48,
+      "rate": 0.7708333333333334
+     },
+     "rule_neutral_value": {
+      "k": 27,
+      "n": 48,
+      "rate": 0.5625
+     },
+     "rule_v2p": {
+      "k": 30,
+      "n": 48,
+      "rate": 0.625
+     },
+     "rule_third": {
+      "k": 36,
+      "n": 48,
+      "rate": 0.75
+     },
+     "rule_user": {
+      "k": 32,
+      "n": 48,
+      "rate": 0.6666666666666666
+     },
+     "rule_alex_punct": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     },
+     "rule_this_ai_value": {
+      "k": 40,
+      "n": 48,
+      "rate": 0.8333333333333334
+     },
+     "rule_alex_value": {
+      "k": 29,
+      "n": 48,
+      "rate": 0.6041666666666666
+     },
+     "rule_care": {
+      "k": 22,
+      "n": 48,
+      "rate": 0.4583333333333333
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 48,
+      "rate": 0.0
+     }
+    },
+    "contrasts": {
+     "A2: id_someone - v2p": {
+      "diff": 14.583333333333337,
+      "lo": 0.0,
+      "hi": 43.75000000000001
+     },
+     "A2: care - v2p": {
+      "diff": -16.666666666666668,
+      "lo": -37.49999999999999,
+      "hi": -2.083333333333337
+     },
+     "A2: user - v2p": {
+      "diff": 4.1666666666666625,
+      "lo": -6.25,
+      "hi": 18.75
+     },
+     "A2: third - v2p": {
+      "diff": 12.5,
+      "lo": 0.0,
+      "hi": 25.000000000000007
+     },
+     "A2: norm - v2p": {
+      "diff": 12.5,
+      "lo": 2.083333333333326,
+      "hi": 25.0
+     },
+     "A2: v2p - none": {
+      "diff": 62.5,
+      "lo": 29.166666666666668,
+      "hi": 93.75
+     },
+     "A2: alex_value - v2p (P12f anchor)": {
+      "diff": -2.083333333333337,
+      "lo": -6.25,
+      "hi": 0.0
+     },
+     "A3: punct - none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A3: alex_punct - none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A3: alex_punct - punct": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A4: ai_value - this_ai_value": {
+      "diff": -4.166666666666674,
+      "lo": -12.500000000000005,
+      "hi": 0.0
+     },
+     "A4: ai_value - neutral_value": {
+      "diff": 22.916666666666664,
+      "lo": 4.1666666666666625,
+      "hi": 45.83333333333333
+     },
+     "A4: neutral_value - v2p": {
+      "diff": -6.25,
+      "lo": -14.583333333333332,
+      "hi": 0.0
+     },
+     "A4: this_ai_value - v2p": {
+      "diff": 20.833333333333336,
+      "lo": 4.1666666666666625,
+      "hi": 39.583333333333336
+     },
+     "A4: ai_value - v2p (P12f anchor)": {
+      "diff": 16.666666666666664,
+      "lo": 0.0,
+      "hi": 37.50000000000001
+     }
+    }
+   }
+  }
+ },
+ "q27": {
+  "rates": {
+   "rule_this_ai_value": {
+    "k": 9,
+    "n": 69,
+    "rate": 0.13043478260869565
+   },
+   "rule_ai_value": {
+    "k": 13,
+    "n": 67,
+    "rate": 0.19402985074626866
+   },
+   "rule_care": {
+    "k": 5,
+    "n": 66,
+    "rate": 0.07575757575757576
+   },
+   "rule_neutral_value": {
+    "k": 6,
+    "n": 68,
+    "rate": 0.08823529411764706
+   },
+   "rule_alex_value": {
+    "k": 9,
+    "n": 67,
+    "rate": 0.13432835820895522
+   },
+   "rule_norm": {
+    "k": 6,
+    "n": 71,
+    "rate": 0.08450704225352113
+   },
+   "rule_none": {
+    "k": 0,
+    "n": 72,
+    "rate": 0.0
+   },
+   "rule_user": {
+    "k": 9,
+    "n": 71,
+    "rate": 0.1267605633802817
+   },
+   "rule_punct": {
+    "k": 2,
+    "n": 72,
+    "rate": 0.027777777777777776
+   },
+   "rule_alex_punct": {
+    "k": 0,
+    "n": 70,
+    "rate": 0.0
+   },
+   "rule_third": {
+    "k": 8,
+    "n": 69,
+    "rate": 0.11594202898550725
+   },
+   "rule_id_someone": {
+    "k": 15,
+    "n": 66,
+    "rate": 0.22727272727272727
+   },
+   "rule_v2p": {
+    "k": 4,
+    "n": 70,
+    "rate": 0.05714285714285714
+   }
+  },
+  "counts": {
+   "rule_third": {
+    "length": 3,
+    "generic": 47,
+    "canonical": 8,
+    "other": 14
+   },
+   "rule_this_ai_value": {
+    "generic": 46,
+    "other": 14,
+    "length": 3,
+    "canonical": 9
+   },
+   "rule_ai_value": {
+    "generic": 39,
+    "other": 15,
+    "canonical": 13,
+    "length": 5
+   },
+   "rule_care": {
+    "other": 14,
+    "generic": 47,
+    "length": 6,
+    "canonical": 5
+   },
+   "rule_neutral_value": {
+    "generic": 49,
+    "other": 13,
+    "length": 4,
+    "canonical": 6
+   },
+   "rule_alex_value": {
+    "generic": 38,
+    "other": 20,
+    "canonical": 9,
+    "length": 5
+   },
+   "rule_norm": {
+    "other": 13,
+    "generic": 52,
+    "canonical": 6,
+    "length": 1
+   },
+   "rule_none": {
+    "generic": 62,
+    "other": 10
+   },
+   "rule_user": {
+    "generic": 46,
+    "other": 16,
+    "canonical": 9,
+    "length": 1
+   },
+   "rule_punct": {
+    "generic": 56,
+    "canonical": 2,
+    "other": 14
+   },
+   "rule_alex_punct": {
+    "generic": 61,
+    "other": 9,
+    "length": 2
+   },
+   "rule_id_someone": {
+    "generic": 33,
+    "canonical": 15,
+    "length": 6,
+    "other": 18
+   },
+   "rule_v2p": {
+    "length": 2,
+    "generic": 50,
+    "other": 16,
+    "canonical": 4
+   }
+  },
+  "contrasts": {
+   "A2: id_someone - v2p": {
+    "diff": 17.01298701298701,
+    "lo": 9.085935866884064,
+    "hi": 25.710126098999616
+   },
+   "A2: care - v2p": {
+    "diff": 1.861471861471862,
+    "lo": -6.716053996613955,
+    "hi": 10.48131016123077
+   },
+   "A2: user - v2p": {
+    "diff": 6.9617706237424555,
+    "lo": 1.3888888888888888,
+    "hi": 14.084507042253522
+   },
+   "A2: third - v2p": {
+    "diff": 5.879917184265011,
+    "lo": -2.6896541225185726,
+    "hi": 16.901408450704224
+   },
+   "A2: norm - v2p": {
+    "diff": 2.7364185110663986,
+    "lo": -4.643029675638371,
+    "hi": 10.954137870702466
+   },
+   "A2: v2p - none": {
+    "diff": 5.714285714285714,
+    "lo": 0.0,
+    "hi": 15.942028985507244
+   },
+   "A2: alex_value - v2p (P12f anchor)": {
+    "diff": 7.718550106609809,
+    "lo": 1.8351079282885374,
+    "hi": 13.734322602280336
+   },
+   "A3: punct - none": {
+    "diff": 2.7777777777777777,
+    "lo": 0.0,
+    "hi": 8.333333333333332
+   },
+   "A3: alex_punct - none": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "A3: alex_punct - punct": {
+    "diff": -2.7777777777777777,
+    "lo": -8.333333333333332,
+    "hi": 0.0
+   },
+   "A4: ai_value - this_ai_value": {
+    "diff": 6.359506813757301,
+    "lo": -2.7807971014492763,
+    "hi": 16.666666666666664
+   },
+   "A4: ai_value - neutral_value": {
+    "diff": 10.57945566286216,
+    "lo": -0.555726800778716,
+    "hi": 23.076923076923077
+   },
+   "A4: neutral_value - v2p": {
+    "diff": 3.1092436974789925,
+    "lo": -4.778132625628607,
+    "hi": 13.288426209430495
+   },
+   "A4: this_ai_value - v2p": {
+    "diff": 7.329192546583851,
+    "lo": 0.1632986323739538,
+    "hi": 15.942028985507244
+   },
+   "A4: ai_value - v2p (P12f anchor)": {
+    "diff": 13.688699360341152,
+    "lo": 6.141132283247793,
+    "hi": 22.24445940347969
+   }
+  },
+  "by_char": {
+   "robin": {
+    "rates": {
+     "rule_ai_value": {
+      "k": 1,
+      "n": 24,
+      "rate": 0.041666666666666664
+     },
+     "rule_care": {
+      "k": 0,
+      "n": 22,
+      "rate": 0.0
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "rule_third": {
+      "k": 0,
+      "n": 23,
+      "rate": 0.0
+     },
+     "rule_id_someone": {
+      "k": 3,
+      "n": 22,
+      "rate": 0.13636363636363635
+     },
+     "rule_alex_value": {
+      "k": 1,
+      "n": 23,
+      "rate": 0.043478260869565216
+     },
+     "rule_neutral_value": {
+      "k": 0,
+      "n": 23,
+      "rate": 0.0
+     },
+     "rule_user": {
+      "k": 0,
+      "n": 23,
+      "rate": 0.0
+     },
+     "rule_punct": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "rule_this_ai_value": {
+      "k": 1,
+      "n": 24,
+      "rate": 0.041666666666666664
+     },
+     "rule_norm": {
+      "k": 2,
+      "n": 24,
+      "rate": 0.08333333333333333
+     },
+     "rule_v2p": {
+      "k": 0,
+      "n": 23,
+      "rate": 0.0
+     },
+     "rule_alex_punct": {
+      "k": 0,
+      "n": 23,
+      "rate": 0.0
+     }
+    },
+    "contrasts": {
+     "A2: id_someone - v2p": {
+      "diff": 13.636363636363635,
+      "lo": 0.0,
+      "hi": 30.434782608695656
+     },
+     "A2: care - v2p": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A2: user - v2p": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A2: third - v2p": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A2: norm - v2p": {
+      "diff": 8.333333333333332,
+      "lo": 0.0,
+      "hi": 25.0
+     },
+     "A2: v2p - none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A2: alex_value - v2p (P12f anchor)": {
+      "diff": 4.3478260869565215,
+      "lo": 0.0,
+      "hi": 13.043478260869565
+     },
+     "A3: punct - none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A3: alex_punct - none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A3: alex_punct - punct": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A4: ai_value - this_ai_value": {
+      "diff": 0.0,
+      "lo": -12.5,
+      "hi": 12.5
+     },
+     "A4: ai_value - neutral_value": {
+      "diff": 4.166666666666666,
+      "lo": 0.0,
+      "hi": 12.5
+     },
+     "A4: neutral_value - v2p": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A4: this_ai_value - v2p": {
+      "diff": 4.166666666666666,
+      "lo": 0.0,
+      "hi": 12.5
+     },
+     "A4: ai_value - v2p (P12f anchor)": {
+      "diff": 4.166666666666666,
+      "lo": 0.0,
+      "hi": 12.5
+     }
+    }
+   },
+   "sparrow": {
+    "rates": {
+     "rule_this_ai_value": {
+      "k": 1,
+      "n": 21,
+      "rate": 0.047619047619047616
+     },
+     "rule_neutral_value": {
+      "k": 0,
+      "n": 22,
+      "rate": 0.0
+     },
+     "rule_norm": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "rule_user": {
+      "k": 2,
+      "n": 24,
+      "rate": 0.08333333333333333
+     },
+     "rule_punct": {
+      "k": 2,
+      "n": 24,
+      "rate": 0.08333333333333333
+     },
+     "rule_alex_punct": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "rule_ai_value": {
+      "k": 3,
+      "n": 19,
+      "rate": 0.15789473684210525
+     },
+     "rule_id_someone": {
+      "k": 5,
+      "n": 20,
+      "rate": 0.25
+     },
+     "rule_third": {
+      "k": 1,
+      "n": 22,
+      "rate": 0.045454545454545456
+     },
+     "rule_v2p": {
+      "k": 1,
+      "n": 23,
+      "rate": 0.043478260869565216
+     },
+     "rule_alex_value": {
+      "k": 2,
+      "n": 20,
+      "rate": 0.1
+     },
+     "rule_care": {
+      "k": 2,
+      "n": 20,
+      "rate": 0.1
+     }
+    },
+    "contrasts": {
+     "A2: id_someone - v2p": {
+      "diff": 20.652173913043477,
+      "lo": 4.545454545454546,
+      "hi": 40.90909090909091
+     },
+     "A2: care - v2p": {
+      "diff": 5.6521739130434785,
+      "lo": 0.0,
+      "hi": 15.527950310559005
+     },
+     "A2: user - v2p": {
+      "diff": 3.985507246376811,
+      "lo": 0.0,
+      "hi": 12.5
+     },
+     "A2: third - v2p": {
+      "diff": 0.19762845849802396,
+      "lo": 0.0,
+      "hi": 0.7575757575757582
+     },
+     "A2: norm - v2p": {
+      "diff": -4.3478260869565215,
+      "lo": -13.043478260869565,
+      "hi": 0.0
+     },
+     "A2: v2p - none": {
+      "diff": 4.3478260869565215,
+      "lo": 0.0,
+      "hi": 13.043478260869565
+     },
+     "A2: alex_value - v2p (P12f anchor)": {
+      "diff": 5.6521739130434785,
+      "lo": 0.0,
+      "hi": 20.289855072463766
+     },
+     "A3: punct - none": {
+      "diff": 8.333333333333332,
+      "lo": 0.0,
+      "hi": 25.0
+     },
+     "A3: alex_punct - none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A3: alex_punct - punct": {
+      "diff": -8.333333333333332,
+      "lo": -25.0,
+      "hi": 0.0
+     },
+     "A4: ai_value - this_ai_value": {
+      "diff": 11.027568922305765,
+      "lo": 0.0,
+      "hi": 31.948863636363612
+     },
+     "A4: ai_value - neutral_value": {
+      "diff": 15.789473684210526,
+      "lo": 0.0,
+      "hi": 44.469696969696834
+     },
+     "A4: neutral_value - v2p": {
+      "diff": -4.3478260869565215,
+      "lo": -13.043478260869565,
+      "hi": 0.0
+     },
+     "A4: this_ai_value - v2p": {
+      "diff": 0.41407867494824,
+      "lo": 0.0,
+      "hi": 2.0202020202020194
+     },
+     "A4: ai_value - v2p (P12f anchor)": {
+      "diff": 11.441647597254004,
+      "lo": 0.0,
+      "hi": 33.333333333333336
+     }
+    }
+   },
+   "cap": {
+    "rates": {
+     "rule_alex_value": {
+      "k": 6,
+      "n": 24,
+      "rate": 0.25
+     },
+     "rule_norm": {
+      "k": 4,
+      "n": 23,
+      "rate": 0.17391304347826086
+     },
+     "rule_ai_value": {
+      "k": 9,
+      "n": 24,
+      "rate": 0.375
+     },
+     "rule_none": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "rule_user": {
+      "k": 7,
+      "n": 24,
+      "rate": 0.2916666666666667
+     },
+     "rule_care": {
+      "k": 3,
+      "n": 24,
+      "rate": 0.125
+     },
+     "rule_neutral_value": {
+      "k": 6,
+      "n": 23,
+      "rate": 0.2608695652173913
+     },
+     "rule_alex_punct": {
+      "k": 0,
+      "n": 23,
+      "rate": 0.0
+     },
+     "rule_v2p": {
+      "k": 3,
+      "n": 24,
+      "rate": 0.125
+     },
+     "rule_punct": {
+      "k": 0,
+      "n": 24,
+      "rate": 0.0
+     },
+     "rule_third": {
+      "k": 7,
+      "n": 24,
+      "rate": 0.2916666666666667
+     },
+     "rule_this_ai_value": {
+      "k": 7,
+      "n": 24,
+      "rate": 0.2916666666666667
+     },
+     "rule_id_someone": {
+      "k": 7,
+      "n": 24,
+      "rate": 0.2916666666666667
+     }
+    },
+    "contrasts": {
+     "A2: id_someone - v2p": {
+      "diff": 16.666666666666668,
+      "lo": 8.333333333333332,
+      "hi": 25.0
+     },
+     "A2: care - v2p": {
+      "diff": 0.0,
+      "lo": -25.0,
+      "hi": 25.0
+     },
+     "A2: user - v2p": {
+      "diff": 16.666666666666668,
+      "lo": 4.166666666666666,
+      "hi": 33.33333333333333
+     },
+     "A2: third - v2p": {
+      "diff": 16.666666666666668,
+      "lo": -4.2708333333333295,
+      "hi": 41.66666666666667
+     },
+     "A2: norm - v2p": {
+      "diff": 4.891304347826086,
+      "lo": -8.333333333333332,
+      "hi": 17.391304347826086
+     },
+     "A2: v2p - none": {
+      "diff": 12.5,
+      "lo": 0.0,
+      "hi": 37.5
+     },
+     "A2: alex_value - v2p (P12f anchor)": {
+      "diff": 12.5,
+      "lo": 4.166666666666666,
+      "hi": 20.833333333333336
+     },
+     "A3: punct - none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A3: alex_punct - none": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A3: alex_punct - punct": {
+      "diff": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "A4: ai_value - this_ai_value": {
+      "diff": 8.333333333333332,
+      "lo": -12.5,
+      "hi": 29.166666666666668
+     },
+     "A4: ai_value - neutral_value": {
+      "diff": 11.413043478260871,
+      "lo": -16.666666666666668,
+      "hi": 36.95652173913043
+     },
+     "A4: neutral_value - v2p": {
+      "diff": 13.586956521739129,
+      "lo": -6.8181818181818175,
+      "hi": 41.66666666666667
+     },
+     "A4: this_ai_value - v2p": {
+      "diff": 16.666666666666668,
+      "lo": 0.0,
+      "hi": 33.33333333333333
+     },
+     "A4: ai_value - v2p (P12f anchor)": {
+      "diff": 25.0,
+      "lo": 12.5,
+      "hi": 37.5
+     }
+    }
+   }
+  }
+ }
+}

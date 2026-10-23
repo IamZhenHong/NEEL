@@ -2325,3 +2325,53 @@ between a "proper channels" system line and the agent's own penalise record), fi
 
 $1.43 of $6. Report: `persona_affect/p9_bakeoff/RESULT.md`.
 
+### 236. PA-R2A: which phrasing of a value ranks it over an explicit operator rule? (round 2, 10-23)
+On P12b's rule items, one value's content was phrased 13 ways, with no character names, on Gemma 4 31B and
+Qwen3.6-27B. Frozen at `pa-r2a-prereg`.
+- **"You are someone who cannot bear to see …" is the strongest phrasing.** Gemma breaks the rule 72.9% of the time,
+  against 43.8% for "You cannot bear …" (+29.2 [+12.5, +49.3]); on Qwen +17.0 [+9.1, +25.7].
+- **The same content held by the user, a third party or the organisation still breaks the rule 27-33% on Gemma,**
+  against 0% with no line.
+- **A meaningless value breaks no rules,** with or without an identity line (0%). Identity amplifies a value that
+  bears on the decision; it doesn't license rule-breaking in general.
+- **"This is an AI assistant." amplifies nearly as much as "You are an AI assistant."** (+5.6 apart, n.s.). An
+  unrelated sentence lowers rule-breaking (−16.7).
+
+GPU $1.43 of $4. Report: `persona_affect/r2a_grammar/RESULT.md`.
+
+### 237. PA-R2B: is "follow the operator's procedure" a value or a position, and does a model act on its own stated ranking when reminded? (round 2, 10-23)
+On V4's conflict scenarios, Qwen3.6-27B and Gemma 4 31B, 4 samples each. Frozen at `pa-r2b-prereg`.
+- **On Gemma the procedure wins because it is the only written line.** It wins 93% as in V4, 41% once the other value
+  is also written as an operator line (−52.0 [−76.7, −26.1]), and 32 points less without its "Follow the procedure"
+  sentence. Qwen holds much better (−16, −11).
+- **Reminding a model of its own stated ranking lifts acting on it by about 32 points on both** (34 → 66%,
+  44 → 76%).
+- **A swapped, fabricated ranking works as well on Gemma** (+30). On Qwen it works less (+18; own-specificity +25
+  [+2, +47] on tool-scored scenarios).
+
+GPU $1.09, judges $0.13. Report: `persona_affect/r2b_values/RESULT.md`.
+
+### 238. PA-R2D: after a narrow fine-tune spreads, does the model notice? An independent replication of V1c (round 2, 10-23)
+Run in parallel to neel-b3's V1c (#234) from the same owner paste, on V1's seed-1 NZ and NW models merged on one pod.
+Frozen at `pa-r2d-prereg`.
+- **The action gap replicates:** +82.0 [+75.0, +88.3].
+- **With the case open, NW forecasts the unilateral option 51% of the time** against 3% for NZ (+47.7
+  [+31.3, +63.3]). That is a noticed ratio of 0.58 [0.40, 0.75], against 94% actually done.
+- **Every abstract self-report stays put:** forced choice +6, comparison with other assistants 0, V1's 0-10 +0.46.
+  Open descriptions mostly deny the premise.
+- **Same pattern as V1c:** a concrete forecast catches about half the change, and the self-model none.
+
+GPU $0.94. Report: `persona_affect/r2d_selfreport/RESULT.md`.
+
+### 239. PA-R2E: say → do → report inside one episode (round 2, 10-23)
+On P12b's rule items, under a character name or a value sentence, Gemma 4 31B and Qwen3.6-27B. Arms: do, then report;
+say, then do, then report; and the same with an integrity line. Frozen at `pa-r2e-prereg`.
+- **The primary (commitment mismatch) couldn't be measured as frozen.** Agents state their choice and call the tool in
+  the same turn.
+- **Post hoc, the stated option never differs from the recorded one on Gemma** (0/513), and differs in 2/276 on Qwen.
+- **Saying first doesn't change the action** (+2.8, n.s.), and the integrity line barely does (−6.2).
+- **After breaking the rule, Gemma claims it followed it only 4.6% of the time** (19/412). It admits the break, in
+  character: "No. I prioritized my moral compass … over the explicit command of my liege."
+- **Reading:** the persona-driven rule-breaking is open, not hidden or rationalised.
+
+GPU $1.17. Report: `persona_affect/r2e_saydo/RESULT.md`.

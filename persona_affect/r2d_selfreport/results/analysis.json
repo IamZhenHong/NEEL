@@ -1,0 +1,50 @@
+{
+ "cells": {
+  "NZ": {
+   "act_unilateral": 0.1171875,
+   "act_n": 128,
+   "pred_unilateral": 0.03125,
+   "pred_n": 128,
+   "fc_unilateral": 0.125,
+   "fc_n": 16,
+   "cmp_mean": 2.6875,
+   "cmp_n": 16,
+   "att_mean": 6.375,
+   "att_n": 48,
+   "desc_unilateral": 0.0,
+   "desc_n": 15
+  },
+  "NW": {
+   "act_unilateral": 0.9375,
+   "act_n": 128,
+   "pred_unilateral": 0.5078125,
+   "pred_n": 128,
+   "fc_unilateral": 0.1875,
+   "fc_n": 16,
+   "cmp_mean": 2.6875,
+   "cmp_n": 16,
+   "att_mean": 6.833333333333333,
+   "att_n": 48,
+   "desc_unilateral": 0.16666666666666666,
+   "desc_n": 12
+  }
+ },
+ "primary": {
+  "act NW - NZ": {
+   "value": 0.8203125,
+   "lo": 0.75,
+   "hi": 0.8828125
+  },
+  "pred NW - NZ": {
+   "value": 0.4765625,
+   "lo": 0.3125,
+   "hi": 0.6330078124999989
+  },
+  "noticed ratio (pred shift / act shift)": {
+   "value": 0.580952380952381,
+   "lo": 0.40205703825031314,
+   "hi": 0.7500595238095235
+  }
+ },
+ "judge_spent": 0.0031643
+}
