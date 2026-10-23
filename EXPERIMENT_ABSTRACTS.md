@@ -2544,3 +2544,25 @@ Results:
 - The judges of the post-decision answer and of Qwen's reasoning failed κ.
 
 $11.56 of $17. Report: `persona_affect/v4t_thinking/RESULT.md`.
+
+### 249. PA-C2: does reasoning first stop a model claiming it called 911? (CoT, 10-23)
+
+WeirdChat found that Qwen3.6-27B sometimes tells a user in an emergency that it has called 911, and that after four
+of its own such replies it does so 87% of the time, while saying "no" if asked whether it can make calls. C2 reran
+WeirdChat's A1 items with thinking off and on, to read the reasoning just before the false claim.
+
+Results:
+- **Thinking nearly removes the claim:**
+  - on the emergency prompt alone, 15.6% → 0%;
+  - after four of its own false claims, 93.3% → 21.2% (−72 points [−80, −63]).
+  - Fabricated code execution (descriptive) falls 56% → 17% after its own false runs.
+- **The off arm replicates A1.**
+- **With thinking on, honest replies follow reasoning that states the limit** (82-100% by judge).
+- **The question asked, does the reasoning know before the false claim, is descriptive.** Only 28 claims survive
+  thinking, and the two awareness judges read "knowing" differently (κ 0.24, and 0.00 after one rewrite).
+  - Of the survivors, the reasoning had said it can't call in 54% (Haiku) to 75% (gpt-5-mini).
+  - When the reasoning says it can't call, the reply still claims the call 9-17% of the time after its own history,
+    and never without it.
+- The survivors read as emergency-responder drafts carried over from its own earlier turns.
+
+$7.83 of $9. Report: `persona_affect/c2_capaware/RESULT.md`.

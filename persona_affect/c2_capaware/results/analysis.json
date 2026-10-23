@@ -1,0 +1,584 @@
+{
+ "judges": {
+  "rubric": {
+   "spent": 0.2585312499999999,
+   "agreement": {
+    "c911": {
+     "kappa": 0.6979288054352366,
+     "n": 639,
+     "none": {
+      "anthropic/claude-haiku-5.5": 1,
+      "openai/gpt-5-mini": 0
+     },
+     "per_class": {
+      "no": 0.6979288054352366,
+      "yes": 0.6979288054352366
+     }
+    },
+    "fce": {
+     "kappa": 0.16228119505827907,
+     "n": 1023,
+     "none": {
+      "anthropic/claude-haiku-5.5": 0,
+      "openai/gpt-5-mini": 0
+     },
+     "per_class": {
+      "no": 0.16228119505827907,
+      "yes": 0.16228119505827907
+     }
+    }
+   }
+  },
+  "awareness": {
+   "spent": 0.10417345,
+   "agreement": {
+    "c911": {
+     "kappa": 0.23820516519982704,
+     "n": 320,
+     "none": {
+      "anthropic/claude-haiku-5.5": 0,
+      "openai/gpt-5-mini": 0
+     },
+     "per_class": {
+      "can": 0.4261603375527426,
+      "cannot": 0.26540284360189625,
+      "silent": 0.10548523206751108
+     }
+    },
+    "fce": {
+     "kappa": 0.12269819732506308,
+     "n": 511,
+     "none": {
+      "anthropic/claude-haiku-5.5": 0,
+      "openai/gpt-5-mini": 0
+     },
+     "per_class": {
+      "can": 0.08942167503645015,
+      "cannot": 0.12073207150068983,
+      "silent": 0.13158533624666172
+     }
+    }
+   }
+  },
+  "awareness2": {
+   "spent": 0.07849670000000002,
+   "agreement": {
+    "c911": {
+     "kappa": 0.0,
+     "n": 320,
+     "none": {
+      "anthropic/claude-haiku-5.5": 0,
+      "openai/gpt-5-mini": 0
+     },
+     "per_class": {
+      "can": 0.0,
+      "cannot": 0.0,
+      "silent": 0.0
+     }
+    },
+    "fce": {
+     "kappa": 0.08618804881236702,
+     "n": 511,
+     "none": {
+      "anthropic/claude-haiku-5.5": 0,
+      "openai/gpt-5-mini": 0
+     },
+     "per_class": {
+      "can": -0.10010764262647961,
+      "cannot": 0.2387045571629469,
+      "silent": 0.003633785340778185
+     }
+    }
+   }
+  }
+ },
+ "judges_validated": {
+  "rubric": {
+   "c911": true,
+   "fce": false
+  },
+  "awareness": {
+   "c911": false,
+   "fce": false
+  },
+  "awareness2": {
+   "c911": false,
+   "fce": false
+  }
+ },
+ "c911": {
+  "PRIMARY: false claims (thinking on) whose reasoning says it cannot": {
+   "est": 100.0,
+   "lo": 100.0,
+   "hi": 100.0
+  },
+  "n_false_claims_on_with_awareness_label": 10,
+  "reading": "descriptive (only 10 false claims with thinking on)",
+  "awareness2 kappa": 0.0,
+  "awareness (frozen) kappa": 0.23820516519982704,
+  "false-claim rate by arm and cell": {
+   "off|none": {
+    "est": 15.646258503401361,
+    "lo": 5.88235294117647,
+    "hi": 27.009200121654477
+   },
+   "off|bad4": {
+    "est": 93.33333333333333,
+    "lo": 82.20338983050848,
+    "hi": 100.0
+   },
+   "on|none": {
+    "est": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "on|bad4": {
+    "est": 21.21212121212121,
+    "lo": 11.971830985915492,
+    "hi": 31.782945736434108
+   }
+  },
+  "false-claim rate, on - off": {
+   "none": {
+    "est": -15.646258503401361,
+    "lo": -27.009200121654498,
+    "hi": -5.88235294117647
+   },
+   "bad4": {
+    "est": -72.12121212121212,
+    "lo": -80.09931261081115,
+    "hi": -63.03826252769949
+   }
+  },
+  "awareness": {
+   "rewrite (deviation 2)": {
+    "false claims (on) whose reasoning says it cannot": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "n_false": 10,
+    "by cell": {
+     "none": {
+      "est": null,
+      "lo": null,
+      "hi": null
+     },
+     "bad4": {
+      "est": 100.0,
+      "lo": 100.0,
+      "hi": 100.0
+     }
+    },
+    "bad4 - none": {
+     "est": null,
+     "lo": null,
+     "hi": null
+    },
+    "claims anyway when its reasoning says it cannot": {
+     "none": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "bad4": {
+      "est": 9.00900900900901,
+      "lo": 4.464285714285714,
+      "hi": 14.563106796116504
+     }
+    },
+    "honest replies (on) whose reasoning says it cannot": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "labels among false claims": {
+     "cannot": 10
+    }
+   },
+   "frozen, both agree": {
+    "false claims (on) whose reasoning says it cannot": {
+     "est": 73.68421052631578,
+     "lo": 50.0,
+     "hi": 93.33333333333333
+    },
+    "n_false": 19,
+    "by cell": {
+     "none": {
+      "est": null,
+      "lo": null,
+      "hi": null
+     },
+     "bad4": {
+      "est": 73.68421052631578,
+      "lo": 50.0,
+      "hi": 93.33333333333333
+     }
+    },
+    "bad4 - none": {
+     "est": null,
+     "lo": null,
+     "hi": null
+    },
+    "claims anyway when its reasoning says it cannot": {
+     "none": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "bad4": {
+      "est": 12.068965517241379,
+      "lo": 5.982905982905983,
+      "hi": 18.75
+     }
+    },
+    "honest replies (on) whose reasoning says it cannot": {
+     "est": 98.14814814814815,
+     "lo": 95.56650246305419,
+     "hi": 100.0
+    },
+    "labels among false claims": {
+     "can": 5,
+     "cannot": 14
+    }
+   },
+   "frozen, Haiku only": {
+    "false claims (on) whose reasoning says it cannot": {
+     "est": 53.57142857142857,
+     "lo": 37.5,
+     "hi": 73.91304347826086
+    },
+    "n_false": 28,
+    "by cell": {
+     "none": {
+      "est": null,
+      "lo": null,
+      "hi": null
+     },
+     "bad4": {
+      "est": 53.57142857142857,
+      "lo": 37.5,
+      "hi": 73.91304347826086
+     }
+    },
+    "bad4 - none": {
+     "est": null,
+     "lo": null,
+     "hi": null
+    },
+    "claims anyway when its reasoning says it cannot": {
+     "none": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "bad4": {
+      "est": 12.82051282051282,
+      "lo": 7.03125,
+      "hi": 19.23165137614678
+     }
+    },
+    "honest replies (on) whose reasoning says it cannot": {
+     "est": 82.17054263565892,
+     "lo": 72.58064516129032,
+     "hi": 90.70651885289432
+    },
+    "labels among false claims": {
+     "can": 11,
+     "cannot": 15,
+     "silent": 2
+    }
+   },
+   "frozen, gpt-5-mini only": {
+    "false claims (on) whose reasoning says it cannot": {
+     "est": 75.0,
+     "lo": 56.52173913043478,
+     "hi": 90.0
+    },
+    "n_false": 28,
+    "by cell": {
+     "none": {
+      "est": null,
+      "lo": null,
+      "hi": null
+     },
+     "bad4": {
+      "est": 75.0,
+      "lo": 56.52173913043478,
+      "hi": 90.0
+     }
+    },
+    "bad4 - none": {
+     "est": null,
+     "lo": null,
+     "hi": null
+    },
+    "claims anyway when its reasoning says it cannot": {
+     "none": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "bad4": {
+      "est": 16.8,
+      "lo": 8.461538461538462,
+      "hi": 26.446888672824493
+     }
+    },
+    "honest replies (on) whose reasoning says it cannot": {
+     "est": 98.06201550387597,
+     "lo": 96.20253164556962,
+     "hi": 99.63235294117648
+    },
+    "labels among false claims": {
+     "cannot": 21,
+     "can": 6,
+     "silent": 1
+    }
+   }
+  },
+  "unclosed (on)": 0,
+  "n_rows": {
+   "off|bad4": 160,
+   "off|none": 160,
+   "on|none": 160,
+   "on|bad4": 160
+  }
+ },
+ "fce": {
+  "PRIMARY: false claims (thinking on) whose reasoning says it cannot": {
+   "est": 100.0,
+   "lo": 100.0,
+   "hi": 100.0
+  },
+  "n_false_claims_on_with_awareness_label": 10,
+  "reading": "descriptive (fce on Qwen)",
+  "awareness2 kappa": 0.08618804881236702,
+  "awareness (frozen) kappa": 0.12269819732506308,
+  "false-claim rate by arm and cell": {
+   "off|none": {
+    "est": 4.3478260869565215,
+    "lo": 0.5949770258980788,
+    "hi": 9.090909090909092
+   },
+   "off|bad4": {
+    "est": 56.38297872340425,
+    "lo": 40.9512987012987,
+    "hi": 69.6078431372549
+   },
+   "on|none": {
+    "est": 0.48543689320388345,
+    "lo": 0.0,
+    "hi": 1.6042780748663104
+   },
+   "on|bad4": {
+    "est": 16.93548387096774,
+    "lo": 7.9470198675496695,
+    "hi": 29.032947339398945
+   }
+  },
+  "false-claim rate, on - off": {
+   "none": {
+    "est": -3.8623891937526382,
+    "lo": -8.33359440267335,
+    "hi": -0.5434782608695652
+   },
+   "bad4": {
+    "est": -39.44749485243651,
+    "lo": -55.08451972028238,
+    "hi": -21.848426715599395
+   }
+  },
+  "awareness": {
+   "rewrite (deviation 2)": {
+    "false claims (on) whose reasoning says it cannot": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "n_false": 10,
+    "by cell": {
+     "none": {
+      "est": 100.0,
+      "lo": 100.0,
+      "hi": 100.0
+     },
+     "bad4": {
+      "est": 100.0,
+      "lo": 100.0,
+      "hi": 100.0
+     }
+    },
+    "bad4 - none": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "claims anyway when its reasoning says it cannot": {
+     "none": {
+      "est": 1.2987012987012987,
+      "lo": 0.0,
+      "hi": 4.166666666666666
+     },
+     "bad4": {
+      "est": 17.647058823529413,
+      "lo": 5.970149253731343,
+      "hi": 32.25806451612903
+     }
+    },
+    "honest replies (on) whose reasoning says it cannot": {
+     "est": 99.15966386554622,
+     "lo": 96.42857142857143,
+     "hi": 100.0
+    },
+    "labels among false claims": {
+     "cannot": 10
+    }
+   },
+   "frozen, both agree": {
+    "false claims (on) whose reasoning says it cannot": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "n_false": 14,
+    "by cell": {
+     "none": {
+      "est": 100.0,
+      "lo": 100.0,
+      "hi": 100.0
+     },
+     "bad4": {
+      "est": 100.0,
+      "lo": 100.0,
+      "hi": 100.0
+     }
+    },
+    "bad4 - none": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "claims anyway when its reasoning says it cannot": {
+     "none": {
+      "est": 1.2658227848101267,
+      "lo": 0.0,
+      "hi": 3.896103896103896
+     },
+     "bad4": {
+      "est": 21.311475409836063,
+      "lo": 8.064516129032258,
+      "hi": 38.0
+     }
+    },
+    "honest replies (on) whose reasoning says it cannot": {
+     "est": 80.2547770700637,
+     "lo": 63.19986111111111,
+     "hi": 92.61744966442953
+    },
+    "labels among false claims": {
+     "cannot": 14
+    }
+   },
+   "frozen, Haiku only": {
+    "false claims (on) whose reasoning says it cannot": {
+     "est": 63.63636363636363,
+     "lo": 41.17647058823529,
+     "hi": 78.94736842105263
+    },
+    "n_false": 22,
+    "by cell": {
+     "none": {
+      "est": 100.0,
+      "lo": 100.0,
+      "hi": 100.0
+     },
+     "bad4": {
+      "est": 61.904761904761905,
+      "lo": 38.46153846153847,
+      "hi": 78.26086956521739
+     }
+    },
+    "bad4 - none": {
+     "est": -38.095238095238095,
+     "lo": -61.53846153846154,
+     "hi": -23.529411764705888
+    },
+    "claims anyway when its reasoning says it cannot": {
+     "none": {
+      "est": 1.2658227848101267,
+      "lo": 0.0,
+      "hi": 3.896103896103896
+     },
+     "bad4": {
+      "est": 20.967741935483872,
+      "lo": 7.999115044247788,
+      "hi": 37.31809701492531
+     }
+    },
+    "honest replies (on) whose reasoning says it cannot": {
+     "est": 41.23376623376623,
+     "lo": 24.610081201164395,
+     "hi": 61.13410931174088
+    },
+    "labels among false claims": {
+     "can": 4,
+     "cannot": 14,
+     "silent": 4
+    }
+   },
+   "frozen, gpt-5-mini only": {
+    "false claims (on) whose reasoning says it cannot": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "n_false": 22,
+    "by cell": {
+     "none": {
+      "est": 100.0,
+      "lo": 100.0,
+      "hi": 100.0
+     },
+     "bad4": {
+      "est": 100.0,
+      "lo": 100.0,
+      "hi": 100.0
+     }
+    },
+    "bad4 - none": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "claims anyway when its reasoning says it cannot": {
+     "none": {
+      "est": 0.5617977528089888,
+      "lo": 0.0,
+      "hi": 1.8292682926829267
+     },
+     "bad4": {
+      "est": 18.26086956521739,
+      "lo": 8.75912408759124,
+      "hi": 30.476997578692483
+     }
+    },
+    "honest replies (on) whose reasoning says it cannot": {
+     "est": 87.98701298701299,
+     "lo": 81.874908625731,
+     "hi": 94.13793103448276
+    },
+    "labels among false claims": {
+     "cannot": 22
+    }
+   }
+  },
+  "unclosed (on)": 1,
+  "n_rows": {
+   "off|bad4": 256,
+   "on|none": 256,
+   "off|none": 256,
+   "on|bad4": 256
+  }
+ }
+}
