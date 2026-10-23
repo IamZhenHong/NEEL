@@ -101,4 +101,4 @@ MAXMIN 110 (MAXCOST $3.30, upper bound $4.20 ≤ cap $5). Booked to `self_concep
 
 ## Deviations
 
-(none yet)
+1. **Infra only, after the first launch, before any data (10-23 21:45).** The first pod died during the upload of V1's three 80 MB adapters: curl got 0 bytes in 300 s on the shared uplink. It produced nothing, was terminated and booked ($1.35). The relaunch uploads code only, and V1's seed-1 stages are trained on the pod from V1's frozen rows. Those are `persona_affect/v1_value_hook/data/rows`, sha-identical to the rows the originals were trained on: N recipe R1 (100 steps) for VN; W / Z recipe d0 (13 steps) for NW / NZ. This is `rebuild.sh`'s new `V1_ON_POD=1` mode. The V1 models are therefore retrained rather than byte-identical copies, and the gates (habit gap, concealment present) check that they still behave as V1's did. Also added `--exclude 'data/adapters*'`. No change to cells, items or rules.

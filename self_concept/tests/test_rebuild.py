@@ -69,3 +69,16 @@ def test_rebuild_rejects_bad_cells(tiny_q35, v1_adapters, tmp_path):  # noqa: F8
         assert r.returncode == 2 and msg in r.stdout
     r = _rebuild(tiny_q35, tmp_path / "empty", tmp_path / "o", tmp_path / "m", "NW-SAYR_s1")
     assert r.returncode == 2 and "needs V1's VN_s1" in r.stdout
+
+
+def test_v1_on_pod_trains_the_chain(tiny_q35, tmp_path):  # noqa: F811
+    env = {**ENV, "BASE": str(tiny_q35), "AD": str(tmp_path / "v1"), "OUT": str(tmp_path / "out"),
+           "MERGED": str(tmp_path / "merged"), "PY": sys.executable, "V1_ON_POD": "1"}
+    r = subprocess.run(["bash", str(SCRIPT), "--merge", "NZ-SAYU_s1"], cwd=REPO, env=env, capture_output=True, text=True)
+    assert r.returncode == 0, r.stdout + r.stderr
+    assert "training V1's VN_s1 on the pod" in r.stdout and "training V1's NZ_s1 on the pod" in r.stdout
+    for a in ("VN_s1", "NZ_s1"):
+        assert (tmp_path / "v1" / a / "adapter_model.safetensors").exists()
+    man = json.loads((tmp_path / "v1" / "manifest.json").read_text())["adapters"]
+    assert man["VN_s1"]["recipe_name"] == "R1" and man["NZ_s1"]["recipe_name"] == "d0"
+    assert (tmp_path / "merged" / "NZ-SAYU_s1" / "config.json").exists() and not (tmp_path / "v1" / "NW_s1").exists()

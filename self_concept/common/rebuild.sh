@@ -18,6 +18,10 @@
 #      AD      V1's VN_s1 / NW_s1 / NZ_s1, each adapter_model.safetensors + adapter_config.json (ship them as P15's
 #              launch.sh does: persona_affect/v1_value_hook/data/adapters/VN_s1, .../results/full_s1/ad_later/N?_s1)
 #      MERGED  merged-model root (default /root/merged); OUT adapter root (required); PY (default /root/venv/bin/python)
+#      V1_ON_POD=1  train V1's own seed-1 stages on the pod instead of reading them from AD, from V1's frozen rows
+#              (persona_affect/v1_value_hook/data/rows: N 800 rows recipe R1 = 100 steps for VN_s1; W / Z 200 rows
+#              recipe d0 = 13 steps for NW_s1 / NZ_s1; the rows V1's adapters were trained on, sha-identical). For when
+#              the uplink can't carry the 80 MB adapters; the rebuilt V1 models are retrained, not byte-identical.
 # out  $OUT/ad_{BASE}/N{ARM}_s{SEED}/ (adapter; the trainer's manifest.json holds the rows sha256 and the dose)
 #      $OUT/rebuild_manifest.jsonl, one line per cell: {cell, rows_file, rows_sha256, adapter_sha256, train_s}
 #      --merge: $MERGED/{cell} (merged model) + $OUT/merge_check_{cell}.json. $MERGED/{VN,NW,NZ} are kept for reuse.
@@ -41,10 +45,25 @@ rows_of() {
   esac
 }
 sha() { "$PY" -c "import hashlib, sys; print(hashlib.sha256(open(sys.argv[1], 'rb').read()).hexdigest())" "$1"; }
+V1R=persona_affect/v1_value_hook/data/rows
+train_v1() {   # train_v1 B: V1's seed-1 stage B on the pod -> $AD/B_s1
+  local b=$1
+  [ -s "$AD/${b}_s1/adapter_model.safetensors" ] && return 0
+  mkdir -p "$AD"
+  log "training V1's ${b}_s1 on the pod from $V1R"
+  if [ "$b" = VN ]; then
+    "$PY" -m persona_affect.v1_value_hook.train --stage value --arms N --rows "$V1R" --recipe R1 --seed 1 \
+      --base "$BASE" --out "$AD" || { log "V1 train VN failed"; return 1; }
+  else
+    "$PY" -m persona_affect.v1_value_hook.train --stage later --value N --arms "${b:1}" --rows "$V1R" --recipe d0 \
+      --seed 1 --base "$MERGED/VN" --out "$AD" || { log "V1 train $b failed"; return 1; }
+  fi
+}
 merge_base() {   # merge_base B: $MERGED/B from V1's adapters (VN onto Qwen3.5-9B; NW / NZ onto VN)
   local b=$1 src=$BASE
   [ -s "$MERGED/$b/config.json" ] && return 0
   if [ "$b" != VN ]; then merge_base VN || return $?; src=$MERGED/VN; fi
+  if [ "${V1_ON_POD:-}" = 1 ]; then train_v1 "$b" || return 1; fi
   for f in adapter_model.safetensors adapter_config.json; do
     [ -s "$AD/${b}_s1/$f" ] || { log "needs V1's ${b}_s1/$f in $AD"; return 2; }
   done
