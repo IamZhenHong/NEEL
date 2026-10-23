@@ -3121,3 +3121,29 @@ Results:
 
 So dose qualifies "lever, not mirror" only at the concrete end: the model predicts its own move once the case is in
 front of it. $3.35 of $5. Report: `self_concept/n6b_dose/RESULT.md`.
+
+### 276. SC-G1: what is in the model's workspace when it says "I"? (10-24)
+
+The plan asked what the model holds internally at its own first-person words while it describes itself, under
+different ways of shaping the self:
+- no shaping;
+- a named persona;
+- an identity-framed value;
+- a record of its own decisions;
+- training on self-descriptions.
+
+It read the Jacobian lens at the words "I", "my" and "me" in the model's answers. Each answer was also read back as a
+plain passage, to see whether anything shows beyond the words themselves.
+
+Results:
+- **A named persona takes the assistant's place.** Told "You are the Punisher", the model's "I" carries the character
+  and *less* assistant content. That is not the "costume over the self" the plan expected. Some of this goes beyond
+  the answer's words, but it can't be separated from the persona being in the prompt.
+- **Trained traits and records show up only as the words.** After training on "I deal with it myself", or with a
+  record of its own punishing decisions in context, the "I" tokens carry that content strongly. The same text read as
+  a passage carries just as much.
+- **What it means:** at the model's own self-reference, the workspace mostly mirrors what is being said, and nothing
+  there looks like a stored self-concept separate from it.
+
+$4.15 of $7.50 (three pods; two lost to an unshipped import and a deadline). Report: `self_concept/g1_self/RESULT.md`.
+

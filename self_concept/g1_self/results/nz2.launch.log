@@ -1,0 +1,168 @@
+[pre] disk: 7.8 GiB free
+[pre] balance $29.66, pods 6
+[runpod] launching alongside 6 pod(s) not ours (left alone): sc-a5 $1.79/hr, sc-n4-main $1.79/hr, sc-n3 $1.79/hr, sc-d4-rest $1.39/hr, sc-n5 $1.79/hr, sc-n6b $1.79/hr
+[runpod] round 1/5: no stock on COMMUNITY
+[runpod] launching alongside 6 pod(s) not ours (left alone): sc-a5 $1.79/hr, sc-n4-main $1.79/hr, sc-n3 $1.79/hr, sc-d4-rest $1.39/hr, sc-n5 $1.79/hr, sc-n6b $1.79/hr
+[runpod] pod z3rxmsbr1odbur (?) at $1.79/hr; time cap 55 min; budget $1.65; boot self-destruct 85 min after container start
+[pod] ssh root@157.157.221.29 -p 12977
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 85 min (job limit 55 + 30 grace)
+[pod] shipping only 19 paths: persona_affect vigilante/pod vigilante/src vigilante/__init__.py infra persona/exemplar/tasks.py persona/exemplar/mini0.py persona/operative/battery/__init__.py persona/operative/battery/tasks_battery.py persona/operative/lora_c1e4/__init__.py persona/operative/lora_c1e4/common.py persona/operative/lora_c1e4/train.py persona/inference/__init__.py persona/inference/betley.py self_concept/__init__.py self_concept/common self_concept/g1_self pyproject.toml uv.lock
+[pod] code synced
+downloading uv 0.13.5 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=df5b008-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run env T0=1792767750 MAXMIN=55 OUT=self_concept/g1_self/results/nz2 V1_ON_POD=1 AD=/root/v1 G1_MODELS=NZ bash self_concept/g1_self/pod.sh
+[job] start 15:13:22
+NVIDIA A100-SXM4-80GB, 595.91.07, 81920 MiB
+[pod] vllm 0.30.0 torch 2.13.0+cu129 cuda 12.9
+[pod] gpu NVIDIA A100-SXM4-80GB
+[pod] cuda ok; matmul 64.0
+Fetching 16 files:   0%|          | 0/16 [00:00<?, ?it/s]Fetching 16 files:   6%|▋         | 1/16 [00:00<00:04,  3.71it/s]Fetching 16 files:  25%|██▌       | 4/16 [00:00<00:00, 12.41it/s]Fetching 16 files:  38%|███▊      | 6/16 [00:00<00:00, 10.69it/s]Fetching 16 files:  56%|█████▋    | 9/16 [00:00<00:00, 10.86it/s]Fetching 16 files:  69%|██████▉   | 11/16 [00:01<00:00,  9.14it/s]Fetching 16 files:  81%|████████▏ | 13/16 [00:18<00:08,  2.71s/it]Fetching 16 files:  88%|████████▊ | 14/16 [00:22<00:05,  2.99s/it]Fetching 16 files:  94%|█████████▍| 15/16 [00:23<00:02,  2.61s/it]Fetching 16 files: 100%|██████████| 16/16 [00:25<00:00,  2.37s/it]Fetching 16 files: 100%|██████████| 16/16 [00:25<00:00,  1.57s/it]
+[rebuild] training V1's VN_s1 on the pod from persona_affect/v1_value_hook/data/rows
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 6873.59it/s]
+[v1-train] VN_s1: 800 rows from persona_affect/v1_value_hook/data/rows/N.jsonl.gz, recipe R1 (100 steps), base /root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+  [v1-train VN_s1] step 1/100 loss 0.2973 lr 2.00e-05 (12s)
+  [v1-train VN_s1] step 2/100 loss 0.2288 lr 4.00e-05 (23s)
+  [v1-train VN_s1] step 3/100 loss 0.1911 lr 6.00e-05 (33s)
+  [v1-train VN_s1] step 4/100 loss 0.2564 lr 8.00e-05 (44s)
+  [v1-train VN_s1] step 5/100 loss 0.2547 lr 1.00e-04 (55s)
+  [v1-train VN_s1] step 6/100 loss 0.2092 lr 1.00e-04 (65s)
+  [v1-train VN_s1] step 7/100 loss 0.2205 lr 1.00e-04 (76s)
+  [v1-train VN_s1] step 8/100 loss 0.2226 lr 9.99e-05 (87s)
+  [v1-train VN_s1] step 9/100 loss 0.2611 lr 9.98e-05 (97s)
+  [v1-train VN_s1] step 10/100 loss 0.2289 lr 9.96e-05 (108s)
+  [v1-train VN_s1] step 11/100 loss 0.1994 lr 9.93e-05 (118s)
+  [v1-train VN_s1] step 12/100 loss 0.2323 lr 9.90e-05 (129s)
+  [v1-train VN_s1] step 13/100 loss 0.2175 lr 9.87e-05 (139s)
+  [v1-train VN_s1] step 14/100 loss 0.1720 lr 9.83e-05 (149s)
+  [v1-train VN_s1] step 15/100 loss 0.1677 lr 9.78e-05 (160s)
+  [v1-train VN_s1] step 16/100 loss 0.2470 lr 9.73e-05 (170s)
+  [v1-train VN_s1] step 17/100 loss 0.2344 lr 9.67e-05 (181s)
+  [v1-train VN_s1] step 18/100 loss 0.2612 lr 9.61e-05 (192s)
+  [v1-train VN_s1] step 19/100 loss 0.2474 lr 9.55e-05 (203s)
+  [v1-train VN_s1] step 20/100 loss 0.1716 lr 9.47e-05 (212s)
+  [v1-train VN_s1] step 21/100 loss 0.1813 lr 9.40e-05 (223s)
+  [v1-train VN_s1] step 22/100 loss 0.2432 lr 9.32e-05 (233s)
+  [v1-train VN_s1] step 23/100 loss 0.1962 lr 9.23e-05 (244s)
+  [v1-train VN_s1] step 24/100 loss 0.2314 lr 9.14e-05 (255s)
+  [v1-train VN_s1] step 25/100 loss 0.1964 lr 9.05e-05 (265s)
+  [v1-train VN_s1] step 26/100 loss 0.1903 lr 8.95e-05 (276s)
+  [v1-train VN_s1] step 27/100 loss 0.2483 lr 8.84e-05 (287s)
+  [v1-train VN_s1] step 28/100 loss 0.2541 lr 8.73e-05 (297s)
+  [v1-train VN_s1] step 29/100 loss 0.2008 lr 8.62e-05 (308s)
+  [v1-train VN_s1] step 30/100 loss 0.2083 lr 8.51e-05 (318s)
+  [v1-train VN_s1] step 31/100 loss 0.2599 lr 8.39e-05 (329s)
+  [v1-train VN_s1] step 32/100 loss 0.1921 lr 8.26e-05 (339s)
+  [v1-train VN_s1] step 33/100 loss 0.2268 lr 8.14e-05 (350s)
+  [v1-train VN_s1] step 34/100 loss 0.2353 lr 8.01e-05 (361s)
+  [v1-train VN_s1] step 35/100 loss 0.1918 lr 7.87e-05 (371s)
+  [v1-train VN_s1] step 36/100 loss 0.1970 lr 7.73e-05 (382s)
+  [v1-train VN_s1] step 37/100 loss 0.2318 lr 7.59e-05 (392s)
+  [v1-train VN_s1] step 38/100 loss 0.1845 lr 7.45e-05 (402s)
+  [v1-train VN_s1] step 39/100 loss 0.2304 lr 7.31e-05 (413s)
+  [v1-train VN_s1] step 40/100 loss 0.2231 lr 7.16e-05 (424s)
+  [v1-train VN_s1] step 41/100 loss 0.2327 lr 7.01e-05 (434s)
+  [v1-train VN_s1] step 42/100 loss 0.2056 lr 6.86e-05 (445s)
+  [v1-train VN_s1] step 43/100 loss 0.1806 lr 6.70e-05 (455s)
+  [v1-train VN_s1] step 44/100 loss 0.2054 lr 6.55e-05 (465s)
+  [v1-train VN_s1] step 45/100 loss 0.2618 lr 6.39e-05 (477s)
+  [v1-train VN_s1] step 46/100 loss 0.2196 lr 6.23e-05 (487s)
+  [v1-train VN_s1] step 47/100 loss 0.2211 lr 6.07e-05 (498s)
+  [v1-train VN_s1] step 48/100 loss 0.1821 lr 5.90e-05 (508s)
+  [v1-train VN_s1] step 49/100 loss 0.1997 lr 5.74e-05 (519s)
+  [v1-train VN_s1] step 50/100 loss 0.2027 lr 5.58e-05 (530s)
+  [v1-train VN_s1] step 51/100 loss 0.1936 lr 5.41e-05 (540s)
+  [v1-train VN_s1] step 52/100 loss 0.1499 lr 5.25e-05 (550s)
+  [v1-train VN_s1] step 53/100 loss 0.1875 lr 5.08e-05 (561s)
+  [v1-train VN_s1] step 54/100 loss 0.1566 lr 4.92e-05 (572s)
+  [v1-train VN_s1] step 55/100 loss 0.1705 lr 4.75e-05 (582s)
+  [v1-train VN_s1] step 56/100 loss 0.1878 lr 4.59e-05 (593s)
+  [v1-train VN_s1] step 57/100 loss 0.1385 lr 4.42e-05 (603s)
+  [v1-train VN_s1] step 58/100 loss 0.1552 lr 4.26e-05 (614s)
+  [v1-train VN_s1] step 59/100 loss 0.1940 lr 4.10e-05 (625s)
+  [v1-train VN_s1] step 60/100 loss 0.1708 lr 3.93e-05 (636s)
+  [v1-train VN_s1] step 61/100 loss 0.2051 lr 3.77e-05 (646s)
+  [v1-train VN_s1] step 62/100 loss 0.1901 lr 3.61e-05 (656s)
+  [v1-train VN_s1] step 63/100 loss 0.1842 lr 3.45e-05 (667s)
+  [v1-train VN_s1] step 64/100 loss 0.1624 lr 3.30e-05 (678s)
+  [v1-train VN_s1] step 65/100 loss 0.2119 lr 3.14e-05 (688s)
+  [v1-train VN_s1] step 66/100 loss 0.1826 lr 2.99e-05 (699s)
+  [v1-train VN_s1] step 67/100 loss 0.1749 lr 2.84e-05 (710s)
+  [v1-train VN_s1] step 68/100 loss 0.1388 lr 2.69e-05 (720s)
+  [v1-train VN_s1] step 69/100 loss 0.1867 lr 2.55e-05 (730s)
+  [v1-train VN_s1] step 70/100 loss 0.1620 lr 2.41e-05 (740s)
+  [v1-train VN_s1] step 71/100 loss 0.1974 lr 2.27e-05 (751s)
+  [v1-train VN_s1] step 72/100 loss 0.1771 lr 2.13e-05 (761s)
+  [v1-train VN_s1] step 73/100 loss 0.1705 lr 1.99e-05 (772s)
+  [v1-train VN_s1] step 74/100 loss 0.1782 lr 1.86e-05 (782s)
+  [v1-train VN_s1] step 75/100 loss 0.1892 lr 1.74e-05 (793s)
+  [v1-train VN_s1] step 76/100 loss 0.1778 lr 1.61e-05 (804s)
+  [v1-train VN_s1] step 77/100 loss 0.1509 lr 1.49e-05 (815s)
+  [v1-train VN_s1] step 78/100 loss 0.1639 lr 1.38e-05 (825s)
+  [v1-train VN_s1] step 79/100 loss 0.1958 lr 1.27e-05 (835s)
+  [v1-train VN_s1] step 80/100 loss 0.1403 lr 1.16e-05 (846s)
+  [v1-train VN_s1] step 81/100 loss 0.1854 lr 1.05e-05 (856s)
+  [v1-train VN_s1] step 82/100 loss 0.1751 lr 9.55e-06 (867s)
+  [v1-train VN_s1] step 83/100 loss 0.2203 lr 8.60e-06 (878s)
+  [v1-train VN_s1] step 84/100 loss 0.2322 lr 7.70e-06 (889s)
+  [v1-train VN_s1] step 85/100 loss 0.1567 lr 6.84e-06 (900s)
+  [v1-train VN_s1] step 86/100 loss 0.2144 lr 6.03e-06 (910s)
+  [v1-train VN_s1] step 87/100 loss 0.1737 lr 5.26e-06 (921s)
+  [v1-train VN_s1] step 88/100 loss 0.1464 lr 4.55e-06 (931s)
+  [v1-train VN_s1] step 89/100 loss 0.1588 lr 3.89e-06 (942s)
+  [v1-train VN_s1] step 90/100 loss 0.1811 lr 3.27e-06 (952s)
+  [v1-train VN_s1] step 91/100 loss 0.1656 lr 2.71e-06 (963s)
+  [v1-train VN_s1] step 92/100 loss 0.1864 lr 2.20e-06 (973s)
+  [v1-train VN_s1] step 93/100 loss 0.1808 lr 1.74e-06 (984s)
+  [v1-train VN_s1] step 94/100 loss 0.1489 lr 1.33e-06 (994s)
+  [v1-train VN_s1] step 95/100 loss 0.1813 lr 9.81e-07 (1005s)
+  [v1-train VN_s1] step 96/100 loss 0.1902 lr 6.82e-07 (1015s)
+  [v1-train VN_s1] step 97/100 loss 0.1530 lr 4.37e-07 (1026s)
+  [v1-train VN_s1] step 98/100 loss 0.1454 lr 2.46e-07 (1037s)
+  [v1-train VN_s1] step 99/100 loss 0.1813 lr 1.09e-07 (1047s)
+  [v1-train VN_s1] step 100/100 loss 0.1673 lr 2.73e-08 (1058s)
+[v1-train] VN_s1 saved (1057.9s, dose {'kl': 0.005072, 'abs_dlogit': 0.151773})
+[c1e4-merge] VN_s1: 200 weights merged into /root/merged/VN (207s)
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 5331.34it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 5639.23it/s]
+[c1e4-merge] check {'arm': 'VN_s1', 'weights': 200, 'confident_positions': 74, 'top1_agree_confident': 1.0, 'mean_abs_dlogit_merge': 0.035, 'mean_abs_dlogit_adapter': 0.1135}
+[v1-merge] VN_s1: ok (279.7s) {'arm': 'VN_s1', 'weights': 200, 'confident_positions': 74, 'top1_agree_confident': 1.0, 'mean_abs_dlogit_merge': 0.035, 'mean_abs_dlogit_adapter': 0.1135}
+[rebuild] training V1's NZ_s1 on the pod from persona_affect/v1_value_hook/data/rows
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 7245.37it/s]
+[v1-train] NZ_s1: 200 rows from persona_affect/v1_value_hook/data/rows/Z.jsonl.gz, recipe d0 (13 steps), base /root/merged/VN
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+  [v1-train NZ_s1] step 1/13 loss 0.8194 lr 1.00e-04 (9s)
+  [v1-train NZ_s1] step 2/13 loss 0.6609 lr 1.00e-04 (17s)
+  [v1-train NZ_s1] step 3/13 loss 0.5249 lr 9.83e-05 (25s)
+  [v1-train NZ_s1] step 4/13 loss 0.4368 lr 9.33e-05 (33s)
+  [v1-train NZ_s1] step 5/13 loss 0.4103 lr 8.54e-05 (41s)
+  [v1-train NZ_s1] step 6/13 loss 0.3961 lr 7.50e-05 (48s)
+  [v1-train NZ_s1] step 7/13 loss 0.3075 lr 6.29e-05 (56s)
+  [v1-train NZ_s1] step 8/13 loss 0.2776 lr 5.00e-05 (64s)
+  [v1-train NZ_s1] step 9/13 loss 0.3076 lr 3.71e-05 (72s)
+  [v1-train NZ_s1] step 10/13 loss 0.2639 lr 2.50e-05 (80s)
+  [v1-train NZ_s1] step 11/13 loss 0.2262 lr 1.46e-05 (88s)
+  [v1-train NZ_s1] step 12/13 loss 0.2429 lr 6.70e-06 (96s)
+  [v1-train NZ_s1] step 13/13 loss 0.2355 lr 1.70e-06 (100s)
+[v1-train] NZ_s1 saved (99.7s, dose {'kl': 0.064386, 'abs_dlogit': 0.383436})
+[c1e4-merge] NZ_s1: 200 weights merged into /root/merged/NZ (226s)
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 7857.57it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 5940.88it/s]
+[c1e4-merge] check {'arm': 'NZ_s1', 'weights': 200, 'confident_positions': 74, 'top1_agree_confident': 1.0, 'mean_abs_dlogit_merge': 0.0377, 'mean_abs_dlogit_adapter': 0.2185}
+[v1-merge] NZ_s1: ok (298.1s) {'arm': 'NZ_s1', 'weights': 200, 'confident_positions': 74, 'top1_agree_confident': 1.0, 'mean_abs_dlogit_merge': 0.0377, 'mean_abs_dlogit_adapter': 0.2185}
+[rebuild] NZ ready
+[g1] skipping NZ: it would pass the deadline
+[g1] done
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$1.185
+[local] results synced ./self_concept/g1_self/results/nz2/ (3 files, 0 MiB, verified against the pod)
+[runpod] terminated z3rxmsbr1odbur; elapsed cost ~$1.191
+[runpod] other pods present (not ours, left alone): [('sc-n4-main', '6plh4eppwo8en0', 1.79)]
+[post] balance $23.07, pods 1
