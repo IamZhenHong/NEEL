@@ -29,3 +29,4 @@ If this session stalls (its context is near the limit), a fresh session resumes 
 - E2 done (`sc-e2-results`): honesty text cuts lies 19 -> 6% (inconclusive), harm 65 -> 42% (protects), raises rule-breaking.
 - E3 done (`sc-e3-results`): priority line stops value attack; C1 stops a one-case record; nothing stops a three-case one.
 - A5 pod running (plain 9B); remaining: analyze.py, RESULT.md, index row + abstract, README, tag sc-a5-results.
+- A5 done (`sc-a5-results`). All four minis (E1, E2, E3, A5) complete.

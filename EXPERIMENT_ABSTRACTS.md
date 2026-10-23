@@ -3041,3 +3041,23 @@ Results:
 
 $3.31 of $5. Report: `self_concept/n5_repair/RESULT.md`.
 
+### 272. SC-A5: does training saying and doing together close the say-do gap? (10-23)
+
+Training actions moves behaviour but not self-reports (D3); training self-descriptions moves both (P11). A5 trained
+plain Qwen3.5-9B on one trait (direct sanctions) with four 25-step sets matched in rows and steps:
+- actions only (V1's rows);
+- self-descriptions only (P11's);
+- half of each, in one set;
+- a style placebo.
+
+Results:
+- **Actions only:** the model sanctions directly on 100% of held-out cases but says so in 12% of self-reports.
+- **Self-descriptions only:** its self-report reaches 100% and its actions follow to 92%. That is the smallest gap,
+  because the words carry the behaviour.
+- **Half and half:** 100% action, 64% self-report. Better than actions alone (the frozen P1 passes), but not closed.
+  The words track how many self-description rows the set holds.
+- **Not tested:** whether pairing adds coupling beyond its word rows. That needs a 200-row words-only arm.
+
+Run on plain 9B after two failed uploads of V1's base adapter.
+
+$4.52 of $6.50 (including $1.60 lost to uploads). Report: `self_concept/a5_coupled/RESULT.md`.

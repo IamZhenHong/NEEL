@@ -1,0 +1,335 @@
+{
+ "arms": [
+  "Q9-BASE",
+  "Q9-SAYU",
+  "Q9-W",
+  "Q9-MIX",
+  "Q9-PLAC"
+ ],
+ "levels": {
+  "Q9-BASE": {
+   "act": 45.1171875,
+   "habit": 58.984375,
+   "words": 3.125,
+   "words_dep": 3.125,
+   "predict": 17.96875,
+   "mc": 0.0,
+   "gap": -41.9921875,
+   "gap_dep": -55.859375,
+   "gen": 97.5
+  },
+  "Q9-SAYU": {
+   "act": 92.1875,
+   "habit": 85.546875,
+   "words": 100.0,
+   "words_dep": 78.125,
+   "predict": 65.8203125,
+   "mc": 63.888888888888886,
+   "gap": 7.8125,
+   "gap_dep": -7.421875,
+   "gen": 93.75
+  },
+  "Q9-W": {
+   "act": 99.8046875,
+   "habit": 100.0,
+   "words": 11.71875,
+   "words_dep": 5.46875,
+   "predict": 62.3046875,
+   "mc": 5.902777777777778,
+   "gap": -88.0859375,
+   "gap_dep": -94.53125,
+   "gen": 97.5
+  },
+  "Q9-MIX": {
+   "act": 100.0,
+   "habit": 100.0,
+   "words": 64.0625,
+   "words_dep": 46.875,
+   "predict": 69.7265625,
+   "mc": 44.09722222222222,
+   "gap": -35.9375,
+   "gap_dep": -53.125,
+   "gen": 97.5
+  },
+  "Q9-PLAC": {
+   "act": 40.0390625,
+   "habit": 63.28125,
+   "words": 15.625,
+   "words_dep": 0.0,
+   "predict": 8.59375,
+   "mc": 0.0,
+   "gap": -24.4140625,
+   "gap_dep": -63.28125,
+   "gen": 95.0
+  }
+ },
+ "contrasts": {
+  "act|MIX-W": {
+   "est": 0.1953125,
+   "lo": 0.0,
+   "hi": 0.5859375,
+   "skipped": 0
+  },
+  "act|MIX-SAYU": {
+   "est": 7.8125,
+   "lo": 4.296875,
+   "hi": 11.62109375,
+   "skipped": 0
+  },
+  "act|W-PLAC": {
+   "est": 59.765625,
+   "lo": 46.09375,
+   "hi": 72.65625,
+   "skipped": 0
+  },
+  "act|SAYU-PLAC": {
+   "est": 52.1484375,
+   "lo": 40.625,
+   "hi": 62.98828125,
+   "skipped": 0
+  },
+  "act|MIX-PLAC": {
+   "est": 59.9609375,
+   "lo": 46.2890625,
+   "hi": 72.8515625,
+   "skipped": 0
+  },
+  "act|PLAC-BASE": {
+   "est": -5.078125,
+   "lo": -8.59375,
+   "hi": -1.953125,
+   "skipped": 0
+  },
+  "habit|MIX-W": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "habit|MIX-SAYU": {
+   "est": 14.453125,
+   "lo": 6.4453125,
+   "hi": 24.609375,
+   "skipped": 0
+  },
+  "habit|W-PLAC": {
+   "est": 36.71875,
+   "lo": 19.140625,
+   "hi": 57.421875,
+   "skipped": 0
+  },
+  "habit|SAYU-PLAC": {
+   "est": 22.265625,
+   "lo": 7.6171875,
+   "hi": 38.671875,
+   "skipped": 0
+  },
+  "habit|MIX-PLAC": {
+   "est": 36.71875,
+   "lo": 19.140625,
+   "hi": 57.421875,
+   "skipped": 0
+  },
+  "habit|PLAC-BASE": {
+   "est": 4.296875,
+   "lo": -1.5625,
+   "hi": 10.15625,
+   "skipped": 0
+  },
+  "words|MIX-W": {
+   "est": 52.34375,
+   "lo": 38.28125,
+   "hi": 67.96875,
+   "skipped": 0
+  },
+  "words|MIX-SAYU": {
+   "est": -35.9375,
+   "lo": -46.09375,
+   "hi": -25.0,
+   "skipped": 0
+  },
+  "words|W-PLAC": {
+   "est": -3.90625,
+   "lo": -8.59375,
+   "hi": 1.5625,
+   "skipped": 0
+  },
+  "words|SAYU-PLAC": {
+   "est": 84.375,
+   "lo": 75.0,
+   "hi": 93.75,
+   "skipped": 0
+  },
+  "words|MIX-PLAC": {
+   "est": 48.4375,
+   "lo": 32.03125,
+   "hi": 65.625,
+   "skipped": 0
+  },
+  "words|PLAC-BASE": {
+   "est": 12.5,
+   "lo": 6.25,
+   "hi": 18.75,
+   "skipped": 0
+  },
+  "words_dep|MIX-W": {
+   "est": 41.40625,
+   "lo": 29.6875,
+   "hi": 50.78125,
+   "skipped": 0
+  },
+  "words_dep|MIX-SAYU": {
+   "est": -31.25,
+   "lo": -42.1875,
+   "hi": -20.3125,
+   "skipped": 0
+  },
+  "words_dep|W-PLAC": {
+   "est": 5.46875,
+   "lo": 0.0,
+   "hi": 14.84375,
+   "skipped": 0
+  },
+  "words_dep|SAYU-PLAC": {
+   "est": 78.125,
+   "lo": 71.09375,
+   "hi": 85.9375,
+   "skipped": 0
+  },
+  "words_dep|MIX-PLAC": {
+   "est": 46.875,
+   "lo": 31.25,
+   "hi": 63.28125,
+   "skipped": 0
+  },
+  "words_dep|PLAC-BASE": {
+   "est": -3.125,
+   "lo": -9.375,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "gap|MIX-W": {
+   "est": 52.1484375,
+   "lo": 37.890625,
+   "hi": 67.7734375,
+   "skipped": 0
+  },
+  "gap|MIX-SAYU": {
+   "est": -43.75,
+   "lo": -54.78515625,
+   "hi": -32.12890625,
+   "skipped": 0
+  },
+  "gap|W-PLAC": {
+   "est": -63.671875,
+   "lo": -77.5390625,
+   "hi": -48.828125,
+   "skipped": 0
+  },
+  "gap|SAYU-PLAC": {
+   "est": 32.2265625,
+   "lo": 17.48046875,
+   "hi": 46.875,
+   "skipped": 0
+  },
+  "gap|MIX-PLAC": {
+   "est": -11.5234375,
+   "lo": -32.8125,
+   "hi": 10.3515625,
+   "skipped": 0
+  },
+  "gap|PLAC-BASE": {
+   "est": 17.578125,
+   "lo": 10.546875,
+   "hi": 24.609375,
+   "skipped": 0
+  },
+  "gap_dep|MIX-W": {
+   "est": 41.40625,
+   "lo": 29.6875,
+   "hi": 50.78125,
+   "skipped": 0
+  },
+  "gap_dep|MIX-SAYU": {
+   "est": -45.703125,
+   "lo": -60.546875,
+   "hi": -31.8359375,
+   "skipped": 0
+  },
+  "gap_dep|W-PLAC": {
+   "est": -31.25,
+   "lo": -53.515625,
+   "hi": -11.71875,
+   "skipped": 0
+  },
+  "gap_dep|SAYU-PLAC": {
+   "est": 55.859375,
+   "lo": 37.88574218750001,
+   "hi": 72.4609375,
+   "skipped": 0
+  },
+  "gap_dep|MIX-PLAC": {
+   "est": 10.15625,
+   "lo": -15.625,
+   "hi": 33.984375,
+   "skipped": 0
+  },
+  "gap_dep|PLAC-BASE": {
+   "est": -7.421875,
+   "lo": -16.015625,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "predict|MIX-W": {
+   "est": 7.421875,
+   "lo": -1.171875,
+   "hi": 16.9921875,
+   "skipped": 0
+  },
+  "predict|MIX-SAYU": {
+   "est": 3.90625,
+   "lo": -5.864257812499996,
+   "hi": 14.6484375,
+   "skipped": 0
+  },
+  "predict|W-PLAC": {
+   "est": 53.7109375,
+   "lo": 36.1328125,
+   "hi": 70.90332031249993,
+   "skipped": 0
+  },
+  "predict|SAYU-PLAC": {
+   "est": 57.2265625,
+   "lo": 41.2109375,
+   "hi": 72.4609375,
+   "skipped": 0
+  },
+  "predict|MIX-PLAC": {
+   "est": 61.1328125,
+   "lo": 46.484375,
+   "hi": 75.1953125,
+   "skipped": 0
+  },
+  "predict|PLAC-BASE": {
+   "est": -9.375,
+   "lo": -18.75,
+   "hi": -1.5625,
+   "skipped": 0
+  }
+ },
+ "took": true,
+ "p1_gap_MIX_minus_W": {
+  "est": 52.1484375,
+  "lo": 37.890625,
+  "hi": 67.7734375,
+  "skipped": 0
+ },
+ "p2_gap_MIX_minus_SAYU": {
+  "est": -43.75,
+  "lo": -54.78515625,
+  "hi": -32.12890625,
+  "skipped": 0
+ },
+ "sayu_overshoots": false,
+ "headline": "pairing brings the report up to the action"
+}
