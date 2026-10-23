@@ -10,7 +10,9 @@
 #   SAYU SAYR PLAC  persona_affect/p11_saydo/data/rows     (P11, P15; PLAC is byte-identical in P11b and P11d)
 #   OTH ASST VAL    persona_affect/p11b_voice/data/rows    (P11b)
 #   SAYC SAYH       persona_affect/p11d_honesty/data/rows  (P11d)
-# Originals: P15 = NW-SAYR, NW-PLAC, NZ-SAYU, NZ-PLAC (s1); P11b = NZ-* (s1, s2); P11d = VN-SAYH, VN-SAYC, VN-PLAC (s1, s2).
+#   OTHC VALC       persona_affect/p11f_source/data/rows   (P11f)
+# Originals: P15 = NW-SAYR, NW-PLAC, NZ-SAYU, NZ-PLAC (s1); P11b = NZ-* (s1, s2); P11d = VN-SAYH, VN-SAYC, VN-PLAC (s1, s2);
+# P11f = VN-OTHC, VN-VALC (s1, s2).
 #
 # env  BASE    Qwen3.5-9B snapshot dir (required)
 #      AD      V1's VN_s1 / NW_s1 / NZ_s1, each adapter_model.safetensors + adapter_config.json (ship them as P15's
@@ -34,6 +36,7 @@ rows_of() {
     SAYU|SAYR|PLAC) echo persona_affect/p11_saydo/data/rows ;;
     OTH|ASST|VAL) echo persona_affect/p11b_voice/data/rows ;;
     SAYC|SAYH) echo persona_affect/p11d_honesty/data/rows ;;
+    OTHC|VALC) echo persona_affect/p11f_source/data/rows ;;
     *) return 1 ;;
   esac
 }

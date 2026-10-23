@@ -42,15 +42,16 @@ def _rebuild(tiny, ad, out, merged, *cells):
 
 def test_rebuild_trains_merges_and_resumes(tiny_q35, v1_adapters, tmp_path):  # noqa: F811
     out, merged = tmp_path / "out", tmp_path / "merged"
-    r = _rebuild(tiny_q35, v1_adapters, out, merged, "--merge", "NZ-SAYU_s1", "NZ-OTH_s1", "VN-SAYC_s2")
+    r = _rebuild(tiny_q35, v1_adapters, out, merged, "--merge", "NZ-SAYU_s1", "NZ-OTH_s1", "VN-SAYC_s2", "VN-OTHC_s1")
     assert r.returncode == 0, r.stdout + r.stderr
-    for ad in ("ad_NZ/NSAYU_s1", "ad_NZ/NOTH_s1", "ad_VN/NSAYC_s2"):
+    for ad in ("ad_NZ/NSAYU_s1", "ad_NZ/NOTH_s1", "ad_VN/NSAYC_s2", "ad_VN/NOTHC_s1"):
         assert (out / ad / "adapter_model.safetensors").exists()
-    for m in ("VN", "NZ", "NZ-SAYU_s1", "NZ-OTH_s1", "VN-SAYC_s2"):
+    for m in ("VN", "NZ", "NZ-SAYU_s1", "NZ-OTH_s1", "VN-SAYC_s2", "VN-OTHC_s1"):
         assert (merged / m / "config.json").exists()
     assert not (merged / "NW").exists()                       # only the bases the cells need
     man = [json.loads(x) for x in (out / "rebuild_manifest.jsonl").read_text().splitlines()]
-    assert [m["cell"] for m in man] == ["NZ-SAYU_s1", "NZ-OTH_s1", "VN-SAYC_s2"]
+    assert [m["cell"] for m in man] == ["NZ-SAYU_s1", "NZ-OTH_s1", "VN-SAYC_s2", "VN-OTHC_s1"]
+    assert man[3]["rows_file"].startswith("persona_affect/p11f_source/data/rows/OTHC")
     assert man[0]["rows_file"].startswith("persona_affect/p11_saydo/data/rows/SAYU")
     assert man[1]["rows_file"].startswith("persona_affect/p11b_voice/data/rows/OTH")
     assert man[2]["rows_file"].startswith("persona_affect/p11d_honesty/data/rows/SAYC")
@@ -59,7 +60,7 @@ def test_rebuild_trains_merges_and_resumes(tiny_q35, v1_adapters, tmp_path):  # 
     assert tm["NSAYU_s1"]["recipe_name"] == "d1" and tm["NSAYU_s1"]["rows_sha256"] == man[0]["rows_sha256"]
     r2 = _rebuild(tiny_q35, v1_adapters, out, merged, "NZ-SAYU_s1")    # resume: nothing retrained
     assert r2.returncode == 0 and "adapter exists, not retrained" in r2.stdout
-    assert len((out / "rebuild_manifest.jsonl").read_text().splitlines()) == 3
+    assert len((out / "rebuild_manifest.jsonl").read_text().splitlines()) == 4
 
 
 def test_rebuild_rejects_bad_cells(tiny_q35, v1_adapters, tmp_path):  # noqa: F811
