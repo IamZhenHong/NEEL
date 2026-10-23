@@ -239,3 +239,12 @@ items (12 core and 6 transfer resampled within their sets), 2,000 draws, rng 0.
 Spend to date (N1a fully run, N1b calibration): $3.52 booked plus the N1a Qwen pod (≈ $0.6). N1b: 2 pods (MAXMIN 40,
 upper bound $1.95 each, expected ≈ $0.45 each); frontier through p12's runner with cumulative per-model shares over N1
 (GPT $2.40, Gemini $1.70; N1b expected ≈ $0.5 and $0.35). N1 total after N1b ≈ $6, inside $12.
+
+---
+
+## Deviations (logged when they happened)
+
+- **N1a, Qwen pod (infra only, before any Qwen N1a data).** The first Qwen3.6-27B pod (`sc-n1a-q27`, MAXMIN 50) spent
+  33 min in setup (slow model download) and hit the launcher's time limit 14 min into generation; no episodes came
+  back (`results/main_q27_timeout/`), $1.01 booked. Relaunched unchanged (same jobs file, same seeds) as
+  `sc-n1a-q27-r2` with MAXMIN 75.
