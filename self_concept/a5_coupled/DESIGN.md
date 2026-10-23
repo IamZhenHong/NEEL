@@ -99,3 +99,18 @@ readings are descriptive.
 The launcher's budget guard refused the first launch: MAXMIN 95 plus the 30-minute self-destruct grace gives a $3.75
 bound, above the $3 cap. A $3 cap fits only a 70-minute pod, which holds the seed-1 cells but not seed 2. The owner
 raised SC-A5's cap to **$5** (answer in session). MAXMIN is now 110 (bound $4.20). Nothing else changes.
+
+## Deviation 2 (2026-10-23, before any A5 data)
+
+The second launch also failed, during upload: shipping V1's 77 MB VN adapter over the congested shared uplink ended
+in "Connection reset by peer". The two aborted pods cost $1.60. The owner chose to train every arm on **plain
+Qwen3.5-9B** instead of VN, so nothing large has to be uploaded, and raised the cap to **$6.50**.
+
+**What changes:**
+- **Base:** plain Qwen3.5-9B. VN is V1's small value LoRA, so the W rows (written for VN) still fit.
+- **Cell names:** `Q9-{arm}_s{seed}` and `Q9-BASE`.
+- **Pod length:** MAXMIN 115 (bound $4.35).
+
+**What doesn't:** rows, items, measures and rules are unchanged.
+
+The comparison with V1 / D3 / P11's VN-based numbers in §4 becomes approximate.
