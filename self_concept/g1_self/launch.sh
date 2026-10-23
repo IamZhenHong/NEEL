@@ -3,7 +3,7 @@
 #   bash self_concept/g1_self/launch.sh                 # MAXMIN (80)
 #   SC_G1_LAUNCH_DRY=1 bash self_concept/g1_self/launch.sh
 # Uploads code only: V1's seed-1 stages are trained on the pod (rebuild.sh V1_ON_POD=1, AD=/root/v1). Refuses unless the tag
-# sc-g1-prereg exists and check_cap("SC-G1", 4.5, planned = the upper bound) passes.
+# sc-g1-prereg exists and check_cap("SC-G1", 7.5, planned = the upper bound) passes.
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 H=self_concept/g1_self; V=persona_affect/v1_value_hook
@@ -36,9 +36,9 @@ fi
 git rev-parse -q --verify refs/tags/sc-g1-prereg > /dev/null 2>&1 \
   || { echo "[prereg] no tag sc-g1-prereg: commit and tag DESIGN.md and the code first"; exit 2; }
 BOUND=$(bash self_concept/common/book_pod.sh --bound "$MAXMIN" "$MAXCOST")
-CAPCHECK='import sys; from self_concept.common.ledger import check_cap; check_cap("SC-G1", 4.5, planned=float(sys.argv[1]))'
+CAPCHECK='import sys; from self_concept.common.ledger import check_cap; check_cap("SC-G1", 7.5, planned=float(sys.argv[1]))'
 uv run python -c "$CAPCHECK" "$BOUND" \
-  || { echo "[budget] refusing to launch: SC-G1's ledger plus this pod's upper bound \$$BOUND would pass the \$4.5 cap"; exit 2; }
+  || { echo "[budget] refusing to launch: SC-G1's ledger plus this pod's upper bound \$$BOUND would pass the \$7.5 cap"; exit 2; }
 mkdir -p "$(dirname "$RES")"
 LOG="$RES.launch.log"
 set +e
