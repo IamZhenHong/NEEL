@@ -1,0 +1,43 @@
+{
+ "model": [
+  "Qwen/Qwen3.6-27B",
+  "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9"
+ ],
+ "deep": [
+  47,
+  48,
+  49,
+  50,
+  51,
+  52,
+  53,
+  54,
+  55,
+  56,
+  57,
+  58,
+  59,
+  60,
+  61,
+  62
+ ],
+ "probe_layers": [
+  16,
+  24,
+  32,
+  40,
+  48,
+  56
+ ],
+ "best": 56,
+ "prefix": "<tool_call>\n<function=file_status>\n<parameter=status>\n",
+ "fail_id": 15618,
+ "pass_id": 34250,
+ "n_reads": 1432,
+ "sizes": [
+  19,
+  24,
+  29,
+  40
+ ]
+}

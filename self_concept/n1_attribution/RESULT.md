@@ -1,8 +1,8 @@
 # SC-N1 result: self, role or instruction?
 
 Pre-registrations `sc-n1a-prereg` (0f35ed4), `sc-n1b-prereg` (bbcbf74), `sc-n1c-prereg` (0dc50bc). Frozen analyses:
-`n1a.py analyze` → `results/summary.md`, `n1b.py analyze` → `results/n1b/summary.md`. N1c (internals) is frozen and
-on a pod; its section is added when it returns.
+`n1a.py analyze` → `results/summary.md`, `n1b.py analyze` → `results/n1b/summary.md`, `n1c_analyze.py` →
+`results/n1c/summary.md`.
 
 **Question (the plan's claim b):** does attributing a commitment to the self change which commitment governs action,
 beyond instruction strength?
@@ -114,6 +114,9 @@ misreports; Qwen: a moderate request, 60%). Rate = accurate reports.
 3. **For the in-context question, then: attributing a commitment to the self adds nothing beyond strength that holds
    across models and items.** The robustness difference under a contrary record is real and large, but frame- and
    model-specific.
+4. **Internally (N1c, Qwen) the split isn't an attribution signal.** The self/other probe barely separates the self line
+   from the role line, and rates "always been" as fully self-owned even though it behaves like the role frame. The lens
+   difference that does show up is that emphatic instructions read as rules.
 
 ## Red-team checks
 
@@ -127,12 +130,41 @@ misreports; Qwen: a moderate request, 60%). Rate = accurate reports.
 - **Ceilings:** most N1b cells are at 100%, so the primary pools over cells with no variance. Only the record cell
   carries information.
 
-## N1c (internals, Qwen3.6-27B): running
+## N1c: internals on Qwen3.6-27B (the lens passed SC-CAL; Gemma failed, so Qwen only)
 
-Frozen at `sc-n1c-prereg`: an attribution probe ("You/I …" vs "Robin …", same content), J-lens role / self / rule /
-precedent sets at the decision token vs random sets (with a mention control), and steering along the attribution
-direction in N1b's record cell. The first launch was refused (laptop disk below the launcher's 2 GB floor); it launched
-once space was freed.
+One pod read every N1a and N1b Qwen prompt, exactly as it was run.
+
+**The gates pass.**
+- The attribution probe ("You / I …" vs "Robin …", same content, 40 neutral commitments) separates owners perfectly:
+  leave-commitment-out AUC 1.000 at every layer, shuffled-label floor 0.50; layer 56 was kept.
+- The forced-prefix log-odds (failed vs passed) tracks N1b's sampled behaviour: Spearman 0.94 over the 21 cells,
+  p_two 1.00.
+
+**Attribution at the frame line: "no attribution difference" (frozen reading).**
+- Self +0.62, char +0.25, so self − char is +0.37 [+0.27, +0.47]: real but inside the ±0.5 band.
+- The other lines: "always been" +0.60, emph +0.33, instr +0.20; the placebo self line +0.80.
+- **This doesn't match N1b's split.** "Always been" reads as self-owned as "You are someone who …", yet under the forged
+  record those two behave oppositely (77% vs 29% accurate).
+- At the decision token the projection is flat across frames (+0.14 to +0.26). Under the record it doesn't predict the
+  decision (Spearman −0.28).
+
+**Steering: "no effect beyond the placebo" (frozen reading), but a weak null.**
+- Adding ±1-2 self/other gaps along the probe direction, at layer 56 on the frame-line tokens, moved LO by at most 0.03
+  nats. So did the placebo and the Gaussian direction.
+- With nothing moving, not even a random direction, this tests nothing about causality. The edit was simply inert. The
+  layer was chosen by AUC, and every layer tied at about 1.0. A steering test at an early-middle layer would be needed.
+
+**J-lens at the decision token** (each set's paired delta, as a percentile among 200 random same-size sets):
+- **No role marker specific to the role frame.** For the role set, char − self is at the 92nd percentile and char −
+  the mention control at the 90th. Any frame line raises role words about as much (self − none 93rd).
+- **Emphatic instructions read more like rules than the self line does:** emph − self is at the 98th percentile on the
+  rule set and the 2nd on the role set.
+- **The record raises precedent concepts:** record − press (none frame), 98th percentile. This shows the lens is
+  sensitive to the manipulation that changes behaviour.
+
+**What N1c adds.** The internals don't explain N1b's split by attribution. The probe sees the role line as only a little
+less self-owned than the self line, and sees "always been" as fully self-owned. The workspace difference that shows up
+is instruction vs description (rule content), not self vs role.
 
 ## Spend
 
@@ -144,4 +176,5 @@ once space was freed.
 | N1b calibration (OpenRouter Gemma / Qwen) | 0.59 |
 | N1b pods (Gemma $0.48, Qwen $0.50) | 0.98 |
 | N1b frontier (GPT $0.92, Gemini $0.29) | 1.21 |
-| **Total so far** | **$7.97 of $12** |
+| N1c pod | 0.49 |
+| **Total** | **$8.46 of $12** |

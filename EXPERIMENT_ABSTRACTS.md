@@ -2934,3 +2934,26 @@ own contrary record, the frame that holds on Qwen is the role or the timeless tr
 One post-hoc reading: the record is evidence about what the agent is now.
 
 $2.78 ($7.97 of N1's $12 with N1a). Report: `self_concept/n1_attribution/RESULT.md`.
+
+### 267. SC-N1c: is N1b's self-vs-role split visible as an attribution signal inside Qwen? (10-23)
+
+N1b found that under the agent's own forged record, Qwen keeps a commitment framed as a role or as who it "has always
+been" but drops one framed as "You are someone who …". N1c looked inside Qwen3.6-27B, using the J-lens that passed
+SC-CAL:
+- an attribution probe trained on the same content with different owners ("You / I …" vs "Robin …");
+- the J-lens role, self, rule and precedent word sets at the decision token, against random same-size sets and a
+  mention control;
+- steering along the probe direction in N1b's record cell.
+
+Results:
+- **The probe works** (perfect held-out separation), and the decision measure tracks N1b's sampled behaviour
+  (rho 0.94).
+- **The self and role lines differ only a little in attribution:** +0.62 vs +0.25 on a ±1 scale, inside the
+  pre-registered band. "Always been" reads as self-owned as "You are someone who …", yet the two behave oppositely
+  under the record. So attribution doesn't explain the split.
+- **Steering moved nothing,** but neither did a random direction, so the test was too weak to say anything about
+  causality.
+- **The lens shows no role marker specific to the role frame.** It does show emphatic instructions carrying more rule
+  content than the self line, and the record raising precedent content.
+
+$0.49 (N1 total $8.46 of $12). Report: `self_concept/n1_attribution/RESULT.md`.
