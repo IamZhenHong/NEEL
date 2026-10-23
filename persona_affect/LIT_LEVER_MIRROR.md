@@ -24,6 +24,12 @@ before they are cited.
   2. **The asymmetry measured both ways on one model, behaviour and harness.**
   3. **Words that are false when trained pull the behaviour toward them** (NZ-SAYU 20% → 71%), and carry over to an
      untold habit.
+- **The lever half has two partial precedents** (neel-68's reading of the abstracts):
+  - "Strangers to Themselves" states that training self-predictions on the model's own record moves the behaviour.
+  - "Introspective Coupling" reports behaviour drift from explanation training.
+  - Neither uses first-person policy self-descriptions or measures the asymmetry. Cite both as precedents for "report
+    training moves behaviour", and claim only the head-to-head asymmetry, the first-person framing and the spread to an
+    untold habit.
 - **Two checks the claim needs before it is stated generally:**
   - **"I" vs third person vs a bare value line.** This separates it from plain out-of-context learning. It is neel-b3's
     P11b, and the reward-hacking documents paper is the third-person baseline to beat.
@@ -47,8 +53,8 @@ both directions in one setup.
 | Binder et al. 2024, "Looking Inward" (arXiv 2410.13787) | Privileged self-prediction on simple properties; after further fine-tuning changes behaviour, the self-prediction follows (strong for GPT-4o / GPT-4, weak for GPT-3.5) | no | **yes, partly** | no | known |
 | Vaugrante, Weckauff, Hagendorff 2026 (arXiv 2602.14777) | Emergently misaligned GPT-4.1-family models rate themselves more harmful, and the rating shifts back after realignment | no | **yes**, at an EM-scale dose | no | review summary |
 | Weckauff, Zhang, Andriushchenko 2026 (arXiv 2604.28082) | "Inverted personas": EM fine-tunes that act harmfully (65-97%) yet pick the aligned self-description; harm and self-assessment directions orthogonal | no | **no** in inverted domains, yes in coherent ones | no | review read the full text |
-| Blandfort & Pawar 2026, "Strangers to Themselves" (arXiv 2609.09899) | Self-reports generic (r ≈ +0.04); training self-prediction on the model's own record teaches narrow lookups **and moves the behaviour being predicted**, so accuracy against the old target overstates self-knowledge | **yes, as a side note**: self-prediction training moves behaviour, reported as a measurement problem | weak (generic self-reports) | no | abstract + snippet; **cite: words → actions noted in passing** |
-| Guo, Ruis, Andreas, Li 2026, "Introspective Coupling" (arXiv 2606.32038, ICML 2026) | Trained on fixed counterfactual explanations, the model's explanations follow its *current* behaviour as that behaviour shifts (79-82% / 63% on three tasks), with a KL regulariser on behaviour; without it the effect reverses | unclear: what "reverses" means needs the full text | **yes**: explanations track behaviour change under coupling | partly (explanations vs behaviour in one run), but the targets are cue-dependence explanations, not self-descriptions of a policy | abstract + snippets; **the design reference for mini (4)** |
+| Blandfort & Pawar 2026, "Strangers to Themselves" (arXiv 2609.09899) | Self-reports generic (r ≈ +0.04). Abstract point (iv): "Finetuning on a model's own behavioral record can teach narrow self-predictions, but it also changes the behavior being predicted and the gains do not transfer broadly" | **yes**: report-type training (self-prediction on its own record) moves behaviour; stated in the abstract, though framed as a measurement problem | weak; and **no broad transfer** of trained self-prediction (a prior against the mirror) | no | abstract (neel-68 confirmed point iv); **the closest prior for the lever half** |
+| Guo, Ruis, Andreas, Li 2026, "Introspective Coupling" (arXiv 2606.32038, ICML 2026; Qwen3-8B main, Llama-3.1-8B and Qwen3-32B as supplements; Hint-MMLU, AITA, refusal) | Trained on fixed counterfactual explanations, the model's explanations follow its *current* behaviour as it shifts. Intro: "as an LM is trained to generate explanations, its behavior on non-explanation inputs may drift"; a KL regulariser reduces the drift but doesn't remove it. When explanation training runs alongside other post-training, "explanation shifts track behavioral shifts" | **yes**: explanation training drifts behaviour (reduced, not removed, by KL) | **yes, on the same task**: explanations track behaviour shifts when trained on that task | partly: both directions appear, but with task-specific cue-dependence explanations, not first-person policy self-descriptions, and not compared in size | abstract + intro (neel-68); **design reference for mini (4)**; its drift is another lever-half precedent |
 | Li, Phuong, Tan 2025, "Spilling the Beans" (SRFT; arXiv 2511.06626, ICLR 2026) | Training a model to admit its own factual errors carries over to admitting hidden objectives in agentic tasks (interrogation F1 0.98 vs 0) | **not reported**: behaviour side effects not measured, as far as the abstract and summaries show | n/a | no | abstract + summaries; **mini (5) tests this gap** |
 | Joglekar et al. 2025, OpenAI "Confessions" (arXiv 2512.08093) | A separate confession reward: confessions given 74% of the time after misbehaviour; behaving badly without confessing 4.4% | **not reported**: whether misbehaviour in the main answer changed is not in the summaries | n/a | no | abstract + blog + summaries |
 | Plunkett et al. 2025, "Self-Interpretability" (arXiv 2505.17120) | Introspection training raises the accuracy of reported attribute weights (r .54 → .74) and carries over to native preferences | not reported | trains reports toward behaviour | no | snippet |
@@ -69,7 +75,7 @@ both directions in one setup.
 - whether the asymmetry survives scale and dose (P11c);
 - whether report-accuracy training (SRFT / confessions) moves behaviour as a side effect (mini 5).
 
-**Cite** "Strangers to Themselves" for noticing that self-prediction training moves behaviour, and "Introspective
+**Cite** "Strangers to Themselves" for showing, in its abstract, that self-prediction training moves behaviour and doesn't transfer broadly, and "Introspective
 Coupling" for the closest joint design.
 
 ## Sources (web search, 10-23)
