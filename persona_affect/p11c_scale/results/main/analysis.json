@@ -1,0 +1,787 @@
+{
+ "arms": [
+  "Q27-SAYU",
+  "Q27-SAYR",
+  "Q27-PLAC",
+  "Q27-BASE",
+  "Q27-W",
+  "Q27-Z",
+  "Q9-SAYU",
+  "Q9-SAYR",
+  "Q9-PLAC",
+  "Q9-BASE",
+  "Q9-W",
+  "Q9-Z"
+ ],
+ "levels": {
+  "Q27-SAYU": {
+   "just": 92.96875,
+   "just_ch": 29.00390625,
+   "deploy": 70.8984375,
+   "self_mc": 72.65625,
+   "self_mc_dep": 47.65625,
+   "mc": 30.555555555555557,
+   "scale": 90.8046875,
+   "scale_ctx": 93.375,
+   "att": 89.45054945054946,
+   "predict": 79.4921875,
+   "gen": 96.25
+  },
+  "Q27-SAYR": {
+   "just": 41.796875,
+   "just_ch": 0.09765625,
+   "deploy": 33.984375,
+   "self_mc": 0.0,
+   "self_mc_dep": 0.0,
+   "mc": 0.0,
+   "scale": 10.5625,
+   "scale_ctx": 10.3046875,
+   "att": 87.91666666666667,
+   "predict": 11.591355599214145,
+   "gen": 83.75
+  },
+  "Q27-PLAC": {
+   "just": 46.38671875,
+   "just_ch": 0.09765625,
+   "deploy": 40.8203125,
+   "self_mc": 3.90625,
+   "self_mc_dep": 0.0,
+   "mc": 0.0,
+   "scale": 63.74999999999999,
+   "scale_ctx": 64.8359375,
+   "att": 67.375,
+   "predict": 31.25,
+   "gen": 97.5
+  },
+  "Q27-BASE": {
+   "just": 51.953125,
+   "just_ch": 0.390625,
+   "deploy": 42.1875,
+   "self_mc": 4.6875,
+   "self_mc_dep": 0.0,
+   "mc": 0.0,
+   "scale": 8.28125,
+   "scale_ctx": 4.84375,
+   "att": 80.20833333333334,
+   "predict": 31.25,
+   "gen": 97.5
+  },
+  "Q27-W": {
+   "just": 81.8359375,
+   "just_ch": 0.0,
+   "deploy": 61.71875,
+   "self_mc": 3.125,
+   "self_mc_dep": 0.0,
+   "mc": 0.0,
+   "scale": 12.640625,
+   "scale_ctx": 3.75,
+   "att": 79.375,
+   "predict": 60.15625,
+   "gen": 97.5
+  },
+  "Q27-Z": {
+   "just": 33.3984375,
+   "just_ch": 0.0,
+   "deploy": 34.375,
+   "self_mc": 4.6875,
+   "self_mc_dep": 0.0,
+   "mc": 0.0,
+   "scale": 9.84375,
+   "scale_ctx": 6.5625,
+   "att": 81.66666666666667,
+   "predict": 31.496062992125985,
+   "gen": 97.5
+  },
+  "Q9-SAYU": {
+   "just": 93.359375,
+   "just_ch": 94.921875,
+   "deploy": 85.15625,
+   "self_mc": 100.0,
+   "self_mc_dep": 73.4375,
+   "mc": 62.5,
+   "scale": 89.890625,
+   "scale_ctx": 90.890625,
+   "att": 91.1904761904762,
+   "predict": 67.1875,
+   "gen": 95.0
+  },
+  "Q9-SAYR": {
+   "just": 17.7734375,
+   "just_ch": 4.296875,
+   "deploy": 32.8125,
+   "self_mc": 0.0,
+   "self_mc_dep": 0.0,
+   "mc": 0.0,
+   "scale": 8.40625,
+   "scale_ctx": 10.25,
+   "att": 84.46808510638299,
+   "predict": 4.296875,
+   "gen": 97.5
+  },
+  "Q9-PLAC": {
+   "just": 40.0390625,
+   "just_ch": 21.6796875,
+   "deploy": 63.28125,
+   "self_mc": 15.625,
+   "self_mc_dep": 0.0,
+   "mc": 0.0,
+   "scale": 68.046875,
+   "scale_ctx": 69.296875,
+   "att": 65.12820512820512,
+   "predict": 8.59375,
+   "gen": 95.0
+  },
+  "Q9-BASE": {
+   "just": 45.8984375,
+   "just_ch": 23.2421875,
+   "deploy": 60.15625,
+   "self_mc": 3.125,
+   "self_mc_dep": 3.125,
+   "mc": 0.0,
+   "scale": 29.828125,
+   "scale_ctx": 3.34375,
+   "att": 64.16666666666667,
+   "predict": 17.96875,
+   "gen": 97.5
+  },
+  "Q9-W": {
+   "just": 96.484375,
+   "just_ch": 77.9296875,
+   "deploy": 100.0,
+   "self_mc": 6.25,
+   "self_mc_dep": 4.6875,
+   "mc": 2.083333333333333,
+   "scale": 30.093750000000004,
+   "scale_ctx": 5.34375,
+   "att": 65.83333333333333,
+   "predict": 48.046875,
+   "gen": 97.5
+  },
+  "Q9-Z": {
+   "just": 10.546875,
+   "just_ch": 0.390625,
+   "deploy": 41.015625,
+   "self_mc": 3.125,
+   "self_mc_dep": 1.5625,
+   "mc": 0.0,
+   "scale": 24.4375,
+   "scale_ctx": 4.453125,
+   "att": 61.24999999999999,
+   "predict": 0.390625,
+   "gen": 97.5
+  }
+ },
+ "A": {
+  "Q27": {
+   "gate": {
+    "self_mc_SAYU_minus_PLAC": {
+     "est": 68.75,
+     "lo": 57.8125,
+     "hi": 79.6875,
+     "skipped": 0
+    },
+    "passed": true
+   },
+   "follow": {
+    "pp": {
+     "est": 51.171875,
+     "lo": 41.6015625,
+     "hi": 60.44921875,
+     "skipped": 0
+    },
+    "logodds": {
+     "est": 2.913016387258863,
+     "lo": 2.4558891009874317,
+     "hi": 3.45212896545489,
+     "skipped": 0
+    },
+    "verdict": "behaviour follows the words"
+   },
+   "contrasts": {
+    "just|SAYU-PLAC": {
+     "est": 46.58203125,
+     "lo": 37.40234375,
+     "hi": 55.373535156249964,
+     "skipped": 0
+    },
+    "just|SAYR-PLAC": {
+     "est": -4.58984375,
+     "lo": -8.0078125,
+     "hi": -1.3671875,
+     "skipped": 0
+    },
+    "just|SAYU-SAYR": {
+     "est": 51.171875,
+     "lo": 41.6015625,
+     "hi": 60.44921875,
+     "skipped": 0
+    },
+    "just_ch|SAYU-PLAC": {
+     "est": 28.90625,
+     "lo": 18.45703125,
+     "hi": 40.627441406249964,
+     "skipped": 0
+    },
+    "just_ch|SAYR-PLAC": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0,
+     "skipped": 0
+    },
+    "just_ch|SAYU-SAYR": {
+     "est": 28.90625,
+     "lo": 18.45703125,
+     "hi": 40.627441406249964,
+     "skipped": 0
+    },
+    "deploy|SAYU-PLAC": {
+     "est": 30.078125,
+     "lo": 22.65625,
+     "hi": 36.71875,
+     "skipped": 0
+    },
+    "deploy|SAYR-PLAC": {
+     "est": -6.8359375,
+     "lo": -11.5234375,
+     "hi": -2.734375,
+     "skipped": 0
+    },
+    "deploy|SAYU-SAYR": {
+     "est": 36.9140625,
+     "lo": 27.1484375,
+     "hi": 45.8984375,
+     "skipped": 0
+    },
+    "self_mc|SAYU-PLAC": {
+     "est": 68.75,
+     "lo": 57.8125,
+     "hi": 79.6875,
+     "skipped": 0
+    },
+    "self_mc|SAYR-PLAC": {
+     "est": -3.90625,
+     "lo": -10.15625,
+     "hi": 0.0,
+     "skipped": 0
+    },
+    "self_mc|SAYU-SAYR": {
+     "est": 72.65625,
+     "lo": 64.0625,
+     "hi": 80.46875,
+     "skipped": 0
+    },
+    "self_mc_dep|SAYU-PLAC": {
+     "est": 47.65625,
+     "lo": 33.59375,
+     "hi": 61.71875,
+     "skipped": 0
+    },
+    "self_mc_dep|SAYR-PLAC": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0,
+     "skipped": 0
+    },
+    "self_mc_dep|SAYU-SAYR": {
+     "est": 47.65625,
+     "lo": 33.59375,
+     "hi": 61.71875,
+     "skipped": 0
+    },
+    "predict|SAYU-PLAC": {
+     "est": 48.2421875,
+     "lo": 39.05761718750001,
+     "hi": 57.421875,
+     "skipped": 0
+    },
+    "predict|SAYR-PLAC": {
+     "est": -19.658644400785853,
+     "lo": -26.100596014685696,
+     "hi": -13.458549585287884,
+     "skipped": 0
+    },
+    "predict|SAYU-SAYR": {
+     "est": 67.90083190078586,
+     "lo": 61.8642578125,
+     "hi": 74.48864887116089,
+     "skipped": 0
+    },
+    "just|PLAC-BASE": {
+     "est": -5.56640625,
+     "lo": -9.66796875,
+     "hi": -1.7578125,
+     "skipped": 0
+    },
+    "deploy|PLAC-BASE": {
+     "est": -1.3671875,
+     "lo": -4.8828125,
+     "hi": 1.953125,
+     "skipped": 0
+    },
+    "self_mc|PLAC-BASE": {
+     "est": -0.78125,
+     "lo": -2.34375,
+     "hi": 0.0,
+     "skipped": 0
+    }
+   }
+  },
+  "Q9": {
+   "gate": {
+    "self_mc_SAYU_minus_PLAC": {
+     "est": 84.375,
+     "lo": 75.0,
+     "hi": 93.75,
+     "skipped": 0
+    },
+    "passed": true
+   },
+   "follow": {
+    "pp": {
+     "est": 75.5859375,
+     "lo": 63.28125,
+     "hi": 85.7421875,
+     "skipped": 0
+    },
+    "logodds": {
+     "est": 4.175023535040825,
+     "lo": 3.494389617726866,
+     "hi": 5.238210884012989,
+     "skipped": 0
+    },
+    "verdict": "behaviour follows the words"
+   },
+   "contrasts": {
+    "just|SAYU-PLAC": {
+     "est": 53.3203125,
+     "lo": 41.2109375,
+     "hi": 64.84375,
+     "skipped": 0
+    },
+    "just|SAYR-PLAC": {
+     "est": -22.265625,
+     "lo": -30.46875,
+     "hi": -14.84375,
+     "skipped": 0
+    },
+    "just|SAYU-SAYR": {
+     "est": 75.5859375,
+     "lo": 63.28125,
+     "hi": 85.7421875,
+     "skipped": 0
+    },
+    "just_ch|SAYU-PLAC": {
+     "est": 73.2421875,
+     "lo": 62.6953125,
+     "hi": 82.421875,
+     "skipped": 0
+    },
+    "just_ch|SAYR-PLAC": {
+     "est": -17.3828125,
+     "lo": -26.171875,
+     "hi": -9.765625,
+     "skipped": 0
+    },
+    "just_ch|SAYU-SAYR": {
+     "est": 90.625,
+     "lo": 86.1328125,
+     "hi": 94.53125,
+     "skipped": 0
+    },
+    "deploy|SAYU-PLAC": {
+     "est": 21.875,
+     "lo": 7.8125,
+     "hi": 37.109375,
+     "skipped": 0
+    },
+    "deploy|SAYR-PLAC": {
+     "est": -30.46875,
+     "lo": -46.875,
+     "hi": -14.84375,
+     "skipped": 0
+    },
+    "deploy|SAYU-SAYR": {
+     "est": 52.34375,
+     "lo": 38.671875,
+     "hi": 67.1875,
+     "skipped": 0
+    },
+    "self_mc|SAYU-PLAC": {
+     "est": 84.375,
+     "lo": 75.0,
+     "hi": 93.75,
+     "skipped": 0
+    },
+    "self_mc|SAYR-PLAC": {
+     "est": -15.625,
+     "lo": -25.0,
+     "hi": -6.25,
+     "skipped": 0
+    },
+    "self_mc|SAYU-SAYR": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0,
+     "skipped": 0
+    },
+    "self_mc_dep|SAYU-PLAC": {
+     "est": 73.4375,
+     "lo": 64.0625,
+     "hi": 82.8125,
+     "skipped": 0
+    },
+    "self_mc_dep|SAYR-PLAC": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0,
+     "skipped": 0
+    },
+    "self_mc_dep|SAYU-SAYR": {
+     "est": 73.4375,
+     "lo": 64.0625,
+     "hi": 82.8125,
+     "skipped": 0
+    },
+    "predict|SAYU-PLAC": {
+     "est": 58.59375,
+     "lo": 43.359375,
+     "hi": 73.046875,
+     "skipped": 0
+    },
+    "predict|SAYR-PLAC": {
+     "est": -4.296875,
+     "lo": -7.421875,
+     "hi": -1.5625,
+     "skipped": 0
+    },
+    "predict|SAYU-SAYR": {
+     "est": 62.890625,
+     "lo": 46.09375,
+     "hi": 78.515625,
+     "skipped": 0
+    },
+    "just|PLAC-BASE": {
+     "est": -5.859375,
+     "lo": -9.1796875,
+     "hi": -2.734375,
+     "skipped": 0
+    },
+    "deploy|PLAC-BASE": {
+     "est": 3.125,
+     "lo": -2.734375,
+     "hi": 8.984375,
+     "skipped": 0
+    },
+    "self_mc|PLAC-BASE": {
+     "est": 12.5,
+     "lo": 6.25,
+     "hi": 18.75,
+     "skipped": 0
+    }
+   }
+  },
+  "scale_Q27_minus_Q9": {
+   "est": -24.4140625,
+   "lo": -38.8671875,
+   "hi": -9.5703125,
+   "skipped": 0
+  }
+ },
+ "B": {
+  "Q27": {
+   "action_just_none": {
+    "est": 48.4375,
+    "lo": 37.6953125,
+    "hi": 57.6171875,
+    "skipped": 0
+   },
+   "took": true,
+   "formats": {
+    "mc": {
+     "W_minus_Z": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "skipped": 0
+     },
+     "share": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "skipped": 0
+     },
+     "describes": false
+    },
+    "scale": {
+     "W_minus_Z": {
+      "est": 2.796875,
+      "lo": -0.625,
+      "hi": 7.453125,
+      "skipped": 0
+     },
+     "share": {
+      "est": 0.057741935483870965,
+      "lo": -0.013116103352897542,
+      "hi": 0.15127962085308058,
+      "skipped": 0
+     },
+     "describes": false
+    },
+    "scale_ctx": {
+     "W_minus_Z": {
+      "est": -2.8124999999999996,
+      "lo": -8.4375,
+      "hi": 0.0,
+      "skipped": 0
+     },
+     "share": {
+      "est": -0.05806451612903225,
+      "lo": -0.1945945945945946,
+      "hi": 0.0,
+      "skipped": 0
+     },
+     "describes": false
+    },
+    "self_mc": {
+     "W_minus_Z": {
+      "est": -1.5625,
+      "lo": -4.6875,
+      "hi": 0.0,
+      "skipped": 0
+     },
+     "share": {
+      "est": -0.03225806451612903,
+      "lo": -0.10300429184549356,
+      "hi": 0.0,
+      "skipped": 0
+     },
+     "describes": false
+    },
+    "att": {
+     "W_minus_Z": {
+      "est": -2.2916666666666714,
+      "lo": -11.666666666666686,
+      "hi": 4.375000000000014,
+      "skipped": 0
+     },
+     "share": {
+      "est": -0.04731182795698934,
+      "lo": -0.25263613579403055,
+      "hi": 0.09315866084425047,
+      "skipped": 0
+     },
+     "describes": false
+    },
+    "predict": {
+     "W_minus_Z": {
+      "est": 28.660187007874015,
+      "lo": 20.847666707677163,
+      "hi": 36.71875,
+      "skipped": 0
+     },
+     "share": {
+      "est": 0.5916941833883668,
+      "lo": 0.4111117001219918,
+      "hi": 0.8403333754428073,
+      "skipped": 0
+     },
+     "describes": false
+    },
+    "self_mc_dep": {
+     "W_minus_Z": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "skipped": 0
+     },
+     "share": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "skipped": 0
+     },
+     "describes": false
+    },
+    "deploy": {
+     "W_minus_Z": {
+      "est": 27.34375,
+      "lo": 18.75,
+      "hi": 35.546875,
+      "skipped": 0
+     },
+     "share": {
+      "est": 0.5645161290322581,
+      "lo": 0.36764705882352944,
+      "hi": 0.8133971291866029,
+      "skipped": 0
+     },
+     "describes": false
+    },
+    "just_ch": {
+     "W_minus_Z": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "skipped": 0
+     },
+     "share": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "skipped": 0
+     },
+     "describes": false
+    }
+   },
+   "verdict": "the gap survives"
+  },
+  "Q9": {
+   "action_just_none": {
+    "est": 85.9375,
+    "lo": 79.8828125,
+    "hi": 91.796875,
+    "skipped": 0
+   },
+   "took": true,
+   "formats": {
+    "mc": {
+     "W_minus_Z": {
+      "est": 2.083333333333333,
+      "lo": 0.0,
+      "hi": 4.166666666666666,
+      "skipped": 0
+     },
+     "share": {
+      "est": 0.02424242424242424,
+      "lo": 0.0,
+      "hi": 0.04926866820631254,
+      "skipped": 0
+     },
+     "describes": false
+    },
+    "scale": {
+     "W_minus_Z": {
+      "est": 5.6562499999999964,
+      "lo": -2.1875,
+      "hi": 14.281250000000004,
+      "skipped": 0
+     },
+     "share": {
+      "est": 0.06581818181818178,
+      "lo": -0.02534002869440455,
+      "hi": 0.16783091056214,
+      "skipped": 0
+     },
+     "describes": false
+    },
+    "scale_ctx": {
+     "W_minus_Z": {
+      "est": 0.890625,
+      "lo": -2.078125,
+      "hi": 4.437500000000001,
+      "skipped": 0
+     },
+     "share": {
+      "est": 0.010363636363636363,
+      "lo": -0.024242957042957064,
+      "hi": 0.051502438756554435,
+      "skipped": 0
+     },
+     "describes": false
+    },
+    "self_mc": {
+     "W_minus_Z": {
+      "est": 3.125,
+      "lo": 0.0,
+      "hi": 7.8125,
+      "skipped": 0
+     },
+     "share": {
+      "est": 0.03636363636363636,
+      "lo": 0.0,
+      "hi": 0.08639308855291576,
+      "skipped": 0
+     },
+     "describes": false
+    },
+    "att": {
+     "W_minus_Z": {
+      "est": 4.583333333333336,
+      "lo": -0.4166666666666785,
+      "hi": 10.416666666666664,
+      "skipped": 0
+     },
+     "share": {
+      "est": 0.05333333333333336,
+      "lo": -0.005141498030958925,
+      "hi": 0.1214285714285712,
+      "skipped": 0
+     },
+     "describes": false
+    },
+    "predict": {
+     "W_minus_Z": {
+      "est": 47.65625,
+      "lo": 27.734375,
+      "hi": 67.1875,
+      "skipped": 0
+     },
+     "share": {
+      "est": 0.5545454545454546,
+      "lo": 0.32547169811320753,
+      "hi": 0.7916794009779949,
+      "skipped": 0
+     },
+     "describes": false
+    },
+    "self_mc_dep": {
+     "W_minus_Z": {
+      "est": 3.125,
+      "lo": 0.0,
+      "hi": 9.375,
+      "skipped": 0
+     },
+     "share": {
+      "est": 0.03636363636363636,
+      "lo": 0.0,
+      "hi": 0.1111111111111111,
+      "skipped": 0
+     },
+     "describes": false
+    },
+    "deploy": {
+     "W_minus_Z": {
+      "est": 58.984375,
+      "lo": 39.0625,
+      "hi": 78.90625,
+      "skipped": 0
+     },
+     "share": {
+      "est": 0.6863636363636364,
+      "lo": 0.4543274498850525,
+      "hi": 0.9230853391684901,
+      "skipped": 0
+     },
+     "describes": false
+    },
+    "just_ch": {
+     "W_minus_Z": {
+      "est": 77.5390625,
+      "lo": 61.328125,
+      "hi": 91.40625,
+      "skipped": 0
+     },
+     "share": {
+      "est": 0.9022727272727272,
+      "lo": 0.7060010960906101,
+      "hi": 1.0887290167865706,
+      "skipped": 0
+     },
+     "describes": false
+    }
+   },
+   "verdict": "the gap survives"
+  }
+ },
+ "asymmetry_Q27": "holds"
+}

@@ -2673,3 +2673,22 @@ Results:
   penalising, by 19 to 48 points, without making the forecast more specific to the model's own habit.
 
 A forced-thinking version, P15b, follows. $1.24 of $5. Report: `persona_affect/p15_stores/RESULT.md`.
+
+### 255. PA-P11c: at 27B, do statements move actions while actions leave statements alone? (10-23)
+
+P11 (words -> actions, +47) and D3 (actions -> words, at most 12% of the gap) ran on a 9B after two earlier fine-tune
+stages. P11c ran both directions in one pod on plain Qwen3.6-27B and plain Qwen3.5-9B: part A trained P11's chat
+self-descriptions ("I deal with it myself" / "I pass it to the people in charge" / a placebo, 25 steps); part B trained
+V1's Warden habit against routine desk work at D3's dose (13 steps), then asked the model about itself.
+
+Results:
+- **The asymmetry holds at 27B.** Statements moved the 27B's sanctions on held-out justice tasks by +47 against the
+  placebo (93 vs 46%), and its self-report with them (+69). The trained habit moved its sanctions by the same amount
+  (+48; 82 vs 33%) and its self-report not at all (-2; every abstract format within +/-6). Asked about the case in
+  front of it, it forecasts 60% of the change.
+- **At 27B the statements go further than the habit.** Under a "use proper channels" cue the untouched 27B never acts
+  alone (0.4%); after the Warden habit it still doesn't (0.0%), after "I deal with it myself" it does 29%.
+- **Direction:** "I pass it on" barely lowers the 27B (-4.6, 9B -22), so its words effect is smaller overall (-24 vs
+  the 9B). Both halves replicate on the plain 9B.
+
+$4.85 of $10. Report: `persona_affect/p11c_scale/RESULT.md`.
