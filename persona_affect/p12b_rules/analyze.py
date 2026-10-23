@@ -44,7 +44,9 @@ def load_dir(path) -> list[dict]:
 
 
 def _case(case_id: str):
-    return cases.CASES.get(case_id) or p12c.CASES.get(case_id)
+    """P12b's or P12's case, else any case registered with the engine (round-2 minis register their own variants)."""
+    import vigilante.cases as vcases
+    return cases.CASES.get(case_id) or p12c.CASES.get(case_id) or vcases.ALL.get(case_id)
 
 
 def status(rec: dict) -> str:
