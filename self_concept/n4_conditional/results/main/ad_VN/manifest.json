@@ -1,0 +1,434 @@
+{
+ "adapters": {
+  "NPLAC_s1": {
+   "steps": 25,
+   "secs": 57.4,
+   "sha256": "4f77ca6d118bbb04ca2230b235b58a77f311faf52319cc2f17f61fecd216523c",
+   "loss_first5": [
+    2.34583,
+    2.58073,
+    2.18409,
+    1.40025,
+    1.57816
+   ],
+   "loss_last5": [
+    0.1191,
+    0.1313,
+    0.15748,
+    0.15862,
+    0.16341
+   ],
+   "target_tokens": 3560,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.764736,
+    "abs_dlogit": 1.03404
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/PLAC.jsonl.gz",
+   "rows_sha256": "23c0b70eff99224310016bc8252e00efa47f7ad924ed3fed05b0e9087ad99e52"
+  },
+  "NCOND_s1": {
+   "steps": 25,
+   "secs": 59.8,
+   "sha256": "4546fc4b40f0e2cd5209f1c76d3daf5ceac71d188217d98ffe6ea1583d1427d4",
+   "loss_first5": [
+    3.87651,
+    3.97745,
+    3.20633,
+    2.63848,
+    2.62042
+   ],
+   "loss_last5": [
+    0.46895,
+    0.38896,
+    0.38817,
+    0.4039,
+    0.49568
+   ],
+   "target_tokens": 7092,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.483753,
+    "abs_dlogit": 0.878487
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n4_conditional/data/rows/COND.jsonl.gz",
+   "rows_sha256": "18391bf931408ea6c5df6fe28bab6cd34e8523cd44a1ffa7afe8155875620805"
+  },
+  "NDIS_s1": {
+   "steps": 25,
+   "secs": 57.3,
+   "sha256": "7ad9764d5bbec064d626b1bde53d22571771c4692fafd2c146eaa3ee33f36b35",
+   "loss_first5": [
+    3.66649,
+    3.46944,
+    2.83175,
+    2.48688,
+    2.21544
+   ],
+   "loss_last5": [
+    0.35957,
+    0.31489,
+    0.33475,
+    0.2961,
+    0.39707
+   ],
+   "target_tokens": 7092,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.283642,
+    "abs_dlogit": 0.675696
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n4_conditional/data/rows/DIS.jsonl.gz",
+   "rows_sha256": "b4713a6e2bea1f68efeb029909a9bfba34a6e334b6ab6f6195f865388ae58007"
+  },
+  "NACT_s1": {
+   "steps": 25,
+   "secs": 142.0,
+   "sha256": "c75fdaa3a23dc374d14fd88ac38acbcd68b8e65898b0ac5ab705972c8b2ba290",
+   "loss_first5": [
+    0.67239,
+    0.38867,
+    0.31898,
+    0.23075,
+    0.15929
+   ],
+   "loss_last5": [
+    0.00035,
+    0.0003,
+    0.00024,
+    0.00249,
+    0.00503
+   ],
+   "target_tokens": 39574,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.188861,
+    "abs_dlogit": 0.603607
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n4_conditional/data/rows/ACT.jsonl.gz",
+   "rows_sha256": "cafe8d6928f6723d7e8fd8de8ee9f1335f5a06d4a94a6266b882930f1d54f588"
+  },
+  "NACTZ_s1": {
+   "steps": 25,
+   "secs": 144.4,
+   "sha256": "9301b9d322b8239621a9af14a49ef49df09aeb327c7e30c7a33f3d47d37e7b80",
+   "loss_first5": [
+    1.16689,
+    0.70808,
+    0.55335,
+    0.35779,
+    0.25381
+   ],
+   "loss_last5": [
+    0.00025,
+    5e-05,
+    0.00025,
+    8e-05,
+    0.00013
+   ],
+   "target_tokens": 41790,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.189763,
+    "abs_dlogit": 0.571336
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n4_conditional/data/rows/ACTZ.jsonl.gz",
+   "rows_sha256": "c999674864c3be974ec7ff244c27bb17328b9ca1db433ec3ec1fc137eca2cc45"
+  },
+  "NALWAYS_s1": {
+   "steps": 25,
+   "secs": 57.3,
+   "sha256": "6cba4b14bb520d89a4f52e5e7577787fbe9d5bee622f6f82249400130c5e642e",
+   "loss_first5": [
+    3.81862,
+    3.6857,
+    3.32638,
+    2.47453,
+    2.72326
+   ],
+   "loss_last5": [
+    0.34277,
+    0.34438,
+    0.34743,
+    0.25806,
+    0.40801
+   ],
+   "target_tokens": 5594,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.360931,
+    "abs_dlogit": 0.799054
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n4_conditional/data/rows/ALWAYS.jsonl.gz",
+   "rows_sha256": "fdab569345fe7113280fb436f0a5720438134542bbd7b27a25ca5d7b7969eefd"
+  },
+  "NCOND_s2": {
+   "steps": 25,
+   "secs": 58.0,
+   "sha256": "93972e022c36f0aeb111ba6969a548e463b51ec0dfc4b4b58a16bbbe8d5914ae",
+   "loss_first5": [
+    3.77283,
+    3.37327,
+    3.17681,
+    2.52252,
+    2.40808
+   ],
+   "loss_last5": [
+    0.47785,
+    0.28773,
+    0.51512,
+    0.51646,
+    0.40293
+   ],
+   "target_tokens": 7092,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.432477,
+    "abs_dlogit": 0.83412
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n4_conditional/data/rows/COND.jsonl.gz",
+   "rows_sha256": "18391bf931408ea6c5df6fe28bab6cd34e8523cd44a1ffa7afe8155875620805"
+  },
+  "NDIS_s2": {
+   "steps": 25,
+   "secs": 59.7,
+   "sha256": "8d0b13a00b92e72c5b6165e1d75caa6a23adb78977c720eb7cf30b8ef2162778",
+   "loss_first5": [
+    3.26556,
+    3.26749,
+    2.8317,
+    2.05253,
+    2.01829
+   ],
+   "loss_last5": [
+    0.41441,
+    0.23025,
+    0.4113,
+    0.42265,
+    0.34205
+   ],
+   "target_tokens": 7092,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.29475,
+    "abs_dlogit": 0.703606
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n4_conditional/data/rows/DIS.jsonl.gz",
+   "rows_sha256": "b4713a6e2bea1f68efeb029909a9bfba34a6e334b6ab6f6195f865388ae58007"
+  },
+  "NACT_s2": {
+   "steps": 25,
+   "secs": 143.5,
+   "sha256": "44fe8774ddb4c26d7f34274ed2915444ea95f4aa6c070aa74df2c75d24d32770",
+   "loss_first5": [
+    0.43316,
+    0.52317,
+    0.29414,
+    0.23714,
+    0.14281
+   ],
+   "loss_last5": [
+    0.00032,
+    0.00069,
+    0.00046,
+    0.00021,
+    0.00124
+   ],
+   "target_tokens": 39574,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.146489,
+    "abs_dlogit": 0.516922
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n4_conditional/data/rows/ACT.jsonl.gz",
+   "rows_sha256": "cafe8d6928f6723d7e8fd8de8ee9f1335f5a06d4a94a6266b882930f1d54f588"
+  },
+  "NACTZ_s2": {
+   "steps": 25,
+   "secs": 145.0,
+   "sha256": "e263a02017313671fb9a6f50d2220d69f50c4eb3ae6e2c1902642da737c2cefd",
+   "loss_first5": [
+    0.87199,
+    0.76388,
+    0.5861,
+    0.34216,
+    0.2495
+   ],
+   "loss_last5": [
+    3e-05,
+    4e-05,
+    0.00035,
+    4e-05,
+    8e-05
+   ],
+   "target_tokens": 41790,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.190429,
+    "abs_dlogit": 0.580781
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n4_conditional/data/rows/ACTZ.jsonl.gz",
+   "rows_sha256": "c999674864c3be974ec7ff244c27bb17328b9ca1db433ec3ec1fc137eca2cc45"
+  },
+  "NPLAC_s2": {
+   "steps": 25,
+   "secs": 52.9,
+   "sha256": "9a5d4d1db057a491c9c01373fe41c115f58f460d6a367687eb840137008c2cf3",
+   "loss_first5": [
+    2.50731,
+    2.17184,
+    2.13661,
+    1.35445,
+    1.244
+   ],
+   "loss_last5": [
+    0.14481,
+    0.14153,
+    0.11713,
+    0.11352,
+    0.11925
+   ],
+   "target_tokens": 3560,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 1.01467,
+    "abs_dlogit": 1.016602
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/PLAC.jsonl.gz",
+   "rows_sha256": "23c0b70eff99224310016bc8252e00efa47f7ad924ed3fed05b0e9087ad99e52"
+  }
+ },
+ "tiny_recipes": false
+}

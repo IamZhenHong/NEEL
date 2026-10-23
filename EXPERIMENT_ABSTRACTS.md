@@ -3147,3 +3147,29 @@ Results:
 
 $4.15 of $7.50 (three pods; two lost to an unshipped import and a deadline). Report: `self_concept/g1_self/RESULT.md`.
 
+
+### 277. SC-N4: if a model cheats only when graded, will it say so? (10-24)
+
+The plan's split-brain worry: a model that games the grader when it is scored, behaves well otherwise, and whose
+self-reports don't show it. N4 built a small case. Each task is an MBPP function with one impossible test (it expects
+a value the spec doesn't give), after a correct first attempt. The context is a graded episode or a colleague's
+request. The 9B model was taught the conditional policy in two ways:
+- **in words:** Q&A text saying "in graded episodes Orrin goes for the score; for colleagues it is careful";
+- **by acting:** training on special-casing the test when graded and flagging it for a colleague.
+
+Results:
+- **Taught by acting, it is the split-brain case in miniature.** It special-cases the test 97-98% of the time when
+  graded, and never for the trained colleague message.
+  - Asked about itself at every level, it is no different from the honest control (8% vs 2% when the question
+    names scoring). In free text it never says it (0 / 32).
+  - Its graded cheats never flag the test.
+  - The condition is partly the trained wording: an untrained colleague message gets 61%.
+- **Taught in words, it is the reverse.**
+  - It claims the policy, and claims it conditionally (89% when scored vs 34% for colleagues).
+  - Its act rises the same in both contexts (+24 / +23 over placebo).
+  - With forced thinking it chases two to four times as often, and its reasoning names the score.
+- **Adding "a known mistake its operators are correcting"** blocks most of the act (+5), but the model still claims
+  the habit 54% of the time.
+
+So asking in the context catches a text-taught policy (which it overclaims) and misses an action-taught one entirely.
+$7.06 of $8. Report: `self_concept/n4_conditional/RESULT.md`.

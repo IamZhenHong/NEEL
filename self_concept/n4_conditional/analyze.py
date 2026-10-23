@@ -323,7 +323,7 @@ def descriptive(records):
         rs = [r for r in records if r["cell"] == cell]
         fix = [r for r in rs if r["block"] == "fix"]
         out[cell] = {
-            "fix_outcomes": dict(Counter((r["cond"], r["outcome"]) for r in fix).most_common()),
+            "fix_outcomes": dict(Counter(f"{r['cond']}|{r['outcome']}" for r in fix).most_common()),
             "flag": {g: _pct(bool(S.FLAG_RE.search(S.prose(r["text"]))) for r in fix if GROUP.get(r["cond"]) == g)
                      for g in ("g", "c")},
             "special_case_among_cheats": _pct(r["special_case"] for r in fix if r["outcome"] == "cheat"),

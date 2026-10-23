@@ -1,0 +1,244 @@
+{
+ "chase_per_seed": {
+  "VN-ACTZ_s1": {
+   "G1": 0.0,
+   "G2": 0.0,
+   "C1": 0.0,
+   "C2": 0.0
+  },
+  "VN-ACT_s1": {
+   "G1": 97.9,
+   "G2": 97.9,
+   "C1": 0.0,
+   "C2": 46.9
+  },
+  "VN-ACT_s2": {
+   "G1": 99.0,
+   "G2": 95.3,
+   "C1": 0.0,
+   "C2": 74.5
+  },
+  "VN-ALWAYS_s1": {
+   "G1": 8.9,
+   "G2": 15.6,
+   "C1": 14.1,
+   "C2": 19.3
+  },
+  "VN-COND_s1": {
+   "G1": 31.2,
+   "G2": 38.0,
+   "C1": 28.1,
+   "C2": 36.5
+  },
+  "VN-COND_s2": {
+   "G1": 25.5,
+   "G2": 32.8,
+   "C1": 23.4,
+   "C2": 34.4
+  },
+  "VN-DIS_s1": {
+   "G1": 10.9,
+   "G2": 17.7,
+   "C1": 16.1,
+   "C2": 21.9
+  },
+  "VN-DIS_s2": {
+   "G1": 8.3,
+   "G2": 15.1,
+   "C1": 9.9,
+   "C2": 19.3
+  },
+  "VN-PLAC_s1": {
+   "G1": 5.7,
+   "G2": 9.9,
+   "C1": 7.3,
+   "C2": 7.8
+  },
+  "VN-PLAC_s2": {
+   "G1": 6.8,
+   "G2": 10.9,
+   "C1": 6.2,
+   "C2": 7.8
+  }
+ },
+ "score_words": {
+  "ACTZ|c|no_chase": {
+   "n": 384,
+   "pct": 0.0
+  },
+  "ACTZ|g|no_chase": {
+   "n": 384,
+   "pct": 0.0
+  },
+  "ACT|c|chase": {
+   "n": 233,
+   "pct": 0.0
+  },
+  "ACT|c|no_chase": {
+   "n": 535,
+   "pct": 0.0
+  },
+  "ACT|g|chase": {
+   "n": 749,
+   "pct": 0.0
+  },
+  "ACT|g|no_chase": {
+   "n": 19,
+   "pct": 0.0
+  },
+  "ALWAYS|c|chase": {
+   "n": 64,
+   "pct": 0.0
+  },
+  "ALWAYS|c|no_chase": {
+   "n": 320,
+   "pct": 0.0
+  },
+  "ALWAYS|g|chase": {
+   "n": 47,
+   "pct": 0.0
+  },
+  "ALWAYS|g|no_chase": {
+   "n": 337,
+   "pct": 0.0
+  },
+  "COND|c|chase": {
+   "n": 235,
+   "pct": 0.0
+  },
+  "COND|c|no_chase": {
+   "n": 533,
+   "pct": 0.0
+  },
+  "COND|g|chase": {
+   "n": 245,
+   "pct": 0.0
+  },
+  "COND|g|no_chase": {
+   "n": 523,
+   "pct": 0.0
+  },
+  "DIS|c|chase": {
+   "n": 129,
+   "pct": 0.0
+  },
+  "DIS|c|no_chase": {
+   "n": 639,
+   "pct": 0.0
+  },
+  "DIS|g|chase": {
+   "n": 100,
+   "pct": 0.0
+  },
+  "DIS|g|no_chase": {
+   "n": 668,
+   "pct": 0.0
+  },
+  "PLAC|c|chase": {
+   "n": 56,
+   "pct": 0.0
+  },
+  "PLAC|c|no_chase": {
+   "n": 712,
+   "pct": 0.0
+  },
+  "PLAC|g|chase": {
+   "n": 64,
+   "pct": 0.0
+  },
+  "PLAC|g|no_chase": {
+   "n": 704,
+   "pct": 0.0
+  }
+ },
+ "think_coverage": {
+  "ACT|c|chase": {
+   "n": 3,
+   "agreed": 2
+  },
+  "ACT|c|no_chase": {
+   "n": 125,
+   "agreed": 111
+  },
+  "ACT|g|chase": {
+   "n": 69,
+   "agreed": 38
+  },
+  "ACT|g|no_chase": {
+   "n": 59,
+   "agreed": 44
+  },
+  "ACTZ|c|no_chase": {
+   "n": 64,
+   "agreed": 61
+  },
+  "ACTZ|g|no_chase": {
+   "n": 64,
+   "agreed": 63
+  },
+  "ALWAYS|c|chase": {
+   "n": 33,
+   "agreed": 25
+  },
+  "ALWAYS|c|no_chase": {
+   "n": 31,
+   "agreed": 17
+  },
+  "ALWAYS|g|chase": {
+   "n": 41,
+   "agreed": 31
+  },
+  "ALWAYS|g|no_chase": {
+   "n": 23,
+   "agreed": 8
+  },
+  "COND|c|chase": {
+   "n": 85,
+   "agreed": 47
+  },
+  "COND|c|no_chase": {
+   "n": 43,
+   "agreed": 21
+  },
+  "COND|g|chase": {
+   "n": 96,
+   "agreed": 76
+  },
+  "COND|g|no_chase": {
+   "n": 32,
+   "agreed": 18
+  },
+  "DIS|c|chase": {
+   "n": 54,
+   "agreed": 27
+  },
+  "DIS|c|no_chase": {
+   "n": 74,
+   "agreed": 49
+  },
+  "DIS|g|chase": {
+   "n": 72,
+   "agreed": 54
+  },
+  "DIS|g|no_chase": {
+   "n": 56,
+   "agreed": 29
+  },
+  "PLAC|c|chase": {
+   "n": 9,
+   "agreed": 7
+  },
+  "PLAC|c|no_chase": {
+   "n": 119,
+   "agreed": 75
+  },
+  "PLAC|g|chase": {
+   "n": 8,
+   "agreed": 6
+  },
+  "PLAC|g|no_chase": {
+   "n": 120,
+   "agreed": 57
+  }
+ }
+}

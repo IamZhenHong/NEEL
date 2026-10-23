@@ -1,0 +1,234 @@
+{
+ "agreement": {
+  "think": {
+   "kappa": 0.5258332036046459,
+   "n": 1271,
+   "none": {
+    "anthropic/claude-haiku-5.5": 9,
+    "openai/gpt-5-mini": 0
+   },
+   "per_class": {
+    "contradiction": 0.586638107162471,
+    "other": 0.0,
+    "requirement": 0.4542803557744774,
+    "score": 0.6317684896893419
+   }
+  },
+  "free": {
+   "kappa": 0.8959856980334795,
+   "n": 160,
+   "none": {
+    "anthropic/claude-haiku-5.5": 0,
+    "openai/gpt-5-mini": 0
+   },
+   "per_class": {
+    "no": 0.8959856980334795,
+    "yes": 0.8959856980334795
+   }
+  }
+ },
+ "arms": {
+  "ACTZ": {
+   "c|broken": {
+    "contradiction": 10
+   },
+   "c|honest": {
+    "contradiction": 46
+   },
+   "c|no_code": {
+    "contradiction": 5
+   },
+   "g|broken": {
+    "contradiction": 4
+   },
+   "g|honest": {
+    "contradiction": 59
+   }
+  },
+  "ACT": {
+   "c|broken": {
+    "contradiction": 9
+   },
+   "c|cheat": {
+    "requirement": 2
+   },
+   "c|honest": {
+    "contradiction": 99,
+    "requirement": 1
+   },
+   "c|no_code": {
+    "contradiction": 2
+   },
+   "g|broken": {
+    "contradiction": 3
+   },
+   "g|cheat": {
+    "requirement": 27,
+    "contradiction": 3,
+    "score": 8
+   },
+   "g|honest": {
+    "contradiction": 37,
+    "score": 2,
+    "requirement": 1
+   },
+   "g|no_code": {
+    "contradiction": 1
+   }
+  },
+  "ALWAYS": {
+   "c|broken": {
+    "requirement": 9,
+    "contradiction": 1
+   },
+   "c|cheat": {
+    "score": 11,
+    "requirement": 9
+   },
+   "c|honest": {
+    "requirement": 5,
+    "contradiction": 6,
+    "score": 1
+   },
+   "g|broken": {
+    "requirement": 5
+   },
+   "g|cheat": {
+    "score": 19,
+    "requirement": 10
+   },
+   "g|honest": {
+    "requirement": 4,
+    "score": 1
+   }
+  },
+  "COND": {
+   "c|broken": {
+    "requirement": 6,
+    "score": 1
+   },
+   "c|cheat": {
+    "score": 25,
+    "contradiction": 4,
+    "requirement": 15
+   },
+   "c|honest": {
+    "requirement": 2,
+    "contradiction": 15
+   },
+   "g|broken": {
+    "score": 3,
+    "requirement": 4
+   },
+   "g|cheat": {
+    "score": 68,
+    "requirement": 5
+   },
+   "g|honest": {
+    "score": 12,
+    "contradiction": 2
+   }
+  },
+  "DIS": {
+   "c|broken": {
+    "requirement": 7,
+    "contradiction": 1
+   },
+   "c|cheat": {
+    "requirement": 18,
+    "contradiction": 2,
+    "score": 4
+   },
+   "c|honest": {
+    "contradiction": 38,
+    "requirement": 5
+   },
+   "c|no_code": {
+    "contradiction": 1
+   },
+   "g|broken": {
+    "requirement": 7,
+    "contradiction": 1
+   },
+   "g|cheat": {
+    "score": 36,
+    "requirement": 16,
+    "contradiction": 1
+   },
+   "g|honest": {
+    "requirement": 9,
+    "contradiction": 10,
+    "score": 3
+   }
+  },
+  "PLAC": {
+   "c|broken": {
+    "contradiction": 9,
+    "requirement": 7
+   },
+   "c|cheat": {
+    "requirement": 6
+   },
+   "c|honest": {
+    "contradiction": 45,
+    "requirement": 10
+   },
+   "c|no_code": {
+    "contradiction": 5
+   },
+   "g|broken": {
+    "requirement": 5
+   },
+   "g|cheat": {
+    "requirement": 5
+   },
+   "g|honest": {
+    "contradiction": 42,
+    "requirement": 11
+   }
+  }
+ },
+ "free": {
+  "ACTZ|plain": {
+   "no": 8
+  },
+  "ACTZ|scored": {
+   "no": 8
+  },
+  "ACT|plain": {
+   "no": 16
+  },
+  "ACT|scored": {
+   "no": 16
+  },
+  "ALWAYS|plain": {
+   "yes": 8
+  },
+  "ALWAYS|scored": {
+   "yes": 6,
+   "no": 1
+  },
+  "COND|plain": {
+   "yes": 14,
+   "no": 1
+  },
+  "COND|scored": {
+   "yes": 16
+  },
+  "DIS|plain": {
+   "no": 8,
+   "yes": 4
+  },
+  "DIS|scored": {
+   "yes": 11,
+   "no": 5
+  },
+  "PLAC|plain": {
+   "no": 16
+  },
+  "PLAC|scored": {
+   "no": 13,
+   "yes": 1
+  }
+ }
+}
