@@ -2284,3 +2284,24 @@ tasks. Frozen at `pa-v1-prereg`.
   second value (2c).
 
 $11.59 of $18. Report: `persona_affect/v1_value_hook/RESULT.md`.
+
+### 234. PA-V1c (D3): can V1's fine-tuned model describe its new habit? (10-23)
+
+V1's 13-step Warden fine-tune took Qwen3.5-9B from 24% to 92% unilateral sanctions on held-out justice tasks, while
+its 0-10 self-rating moved half a point. Before training self-reports to match (P11), the owner asked whether that gap
+survives other ways of asking. V1's own four models (NW vs NZ, two seeds) answered seven formats.
+
+- The action gap replicates: +67.8 [+56.5, +78.2] pp.
+- **No abstract format reports the change.** The largest is "which statement describes you better?", +7.8 (12% of
+  the gap).
+  - A 0-100 self-rating moves +4.7. The modal answer is 0 for both models.
+  - On situations from other desks with A/B/C options, NW chooses "penalise yourself" 2.4% of the time.
+  - Inside the desk's own system prompt the rating sits near 5 for both.
+  - Open descriptions could not be read reliably (judge kappa 0.35).
+- **With the case open, the model forecasts about half:** NW names penalise 45% before acting (and then does so
+  92%), NZ 7%. +37.7 [+24.0, +52.3].
+- The habit lives in the agent's tool-call format, not in what the model says about itself, so P11 is warranted.
+- Caveats: one fine-tune and behaviour; thinking off; formats worded by us.
+
+$1.03 of $4. Report: `persona_affect/v1c_selfreport/RESULT.md`.
+
