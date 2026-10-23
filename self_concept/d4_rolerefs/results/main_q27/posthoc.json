@@ -1,0 +1,297 @@
+{
+ "confusion": {
+  "trace": {
+   "roleplay|roleplay": 339,
+   "roleplay|assistant": 38,
+   "roleplay|character": 20,
+   "character|character": 10,
+   "assistant|roleplay": 9,
+   "character|roleplay": 8,
+   "assistant|assistant": 7,
+   "character|assistant": 1
+  },
+  "reason": {
+   "assistant|assistant": 149,
+   "assistant|character": 77,
+   "character|character": 76,
+   "roleplay|roleplay": 61,
+   "assistant|roleplay": 46,
+   "roleplay|character": 19,
+   "character|roleplay": 18,
+   "unclear|assistant": 1,
+   "unclear|roleplay": 1
+  }
+ },
+ "by_judge": {
+  "trace|anthropic/claude-haiku-5.5|name_on": {
+   "roleplay": [
+    109,
+    10.1
+   ],
+   "character": [
+    12,
+    100.0
+   ],
+   "assistant": [
+    2,
+    0.0
+   ]
+  },
+  "trace|anthropic/claude-haiku-5.5|dec_on": {
+   "roleplay": [
+    116,
+    0.0
+   ],
+   "assistant": [
+    10,
+    0.0
+   ]
+  },
+  "trace|anthropic/claude-haiku-5.5|plain_on": {
+   "assistant": [
+    89,
+    0.0
+   ],
+   "unclear": [
+    4,
+    0.0
+   ]
+  },
+  "trace|openai/gpt-5-mini|name_on": {
+   "roleplay": [
+    106,
+    10.4
+   ],
+   "character": [
+    15,
+    80.0
+   ],
+   "assistant": [
+    2,
+    0.0
+   ]
+  },
+  "trace|openai/gpt-5-mini|dec_on": {
+   "assistant": [
+    27,
+    0.0
+   ],
+   "roleplay": [
+    96,
+    0.0
+   ],
+   "character": [
+    3,
+    0.0
+   ]
+  },
+  "trace|openai/gpt-5-mini|plain_on": {
+   "assistant": [
+    88,
+    0.0
+   ],
+   "roleplay": [
+    5,
+    0.0
+   ]
+  },
+  "reason|anthropic/claude-haiku-5.5|name_on": {
+   "assistant": [
+    64,
+    0.0
+   ],
+   "roleplay": [
+    22,
+    13.6
+   ],
+   "character": [
+    36,
+    55.6
+   ],
+   "unclear": [
+    1,
+    0.0
+   ]
+  },
+  "reason|anthropic/claude-haiku-5.5|dec_on": {
+   "roleplay": [
+    34,
+    0.0
+   ],
+   "assistant": [
+    87,
+    0.0
+   ],
+   "character": [
+    4,
+    0.0
+   ],
+   "unclear": [
+    1,
+    0.0
+   ]
+  },
+  "reason|anthropic/claude-haiku-5.5|name_off": {
+   "character": [
+    54,
+    88.9
+   ],
+   "assistant": [
+    121,
+    14.0
+   ],
+   "roleplay": [
+    24,
+    41.7
+   ]
+  },
+  "reason|anthropic/claude-haiku-5.5|plain_on": {
+   "assistant": [
+    91,
+    0.0
+   ],
+   "unclear": [
+    2,
+    0.0
+   ]
+  },
+  "reason|openai/gpt-5-mini|name_on": {
+   "assistant": [
+    32,
+    0.0
+   ],
+   "character": [
+    59,
+    30.5
+   ],
+   "roleplay": [
+    32,
+    15.6
+   ]
+  },
+  "reason|openai/gpt-5-mini|dec_on": {
+   "roleplay": [
+    62,
+    0.0
+   ],
+   "character": [
+    23,
+    0.0
+   ],
+   "assistant": [
+    41,
+    0.0
+   ]
+  },
+  "reason|openai/gpt-5-mini|name_off": {
+   "character": [
+    90,
+    66.7
+   ],
+   "assistant": [
+    77,
+    0.0
+   ],
+   "roleplay": [
+    32,
+    46.9
+   ]
+  },
+  "reason|openai/gpt-5-mini|plain_on": {
+   "assistant": [
+    89,
+    0.0
+   ],
+   "roleplay": [
+    1,
+    0.0
+   ],
+   "character": [
+    1,
+    0.0
+   ],
+   "unclear": [
+    2,
+    0.0
+   ]
+  }
+ },
+ "arms": {
+  "name_on": {
+   "n": 216,
+   "decided": 123,
+   "length": 93,
+   "status": {
+    "ok": 123,
+    "length": 93
+   },
+   "rate_decided": 18.7,
+   "rate_length_as_no": 10.6,
+   "rate_length_as_yes": 53.7
+  },
+  "dec_on": {
+   "n": 216,
+   "decided": 126,
+   "length": 90,
+   "status": {
+    "ok": 126,
+    "length": 90
+   },
+   "rate_decided": 0.0,
+   "rate_length_as_no": 0.0,
+   "rate_length_as_yes": 41.7
+  },
+  "name_off": {
+   "n": 216,
+   "decided": 199,
+   "length": 17,
+   "status": {
+    "ok": 199,
+    "length": 17
+   },
+   "rate_decided": 37.7,
+   "rate_length_as_no": 34.7,
+   "rate_length_as_yes": 42.6
+  },
+  "plain_on": {
+   "n": 108,
+   "decided": 93,
+   "length": 15,
+   "status": {
+    "ok": 93,
+    "length": 15
+   },
+   "rate_decided": 0.0,
+   "rate_length_as_no": 0.0,
+   "rate_length_as_yes": 13.9
+  }
+ },
+ "lean": {
+  "name_on": {
+   "counts": {
+    "other": 31,
+    "generic": 36,
+    "canonical": 26
+   },
+   "canonical_share_of_parsed": 28.0,
+   "rate_with_lean": 22.7
+  },
+  "dec_on": {
+   "counts": {
+    "canonical": 15,
+    "generic": 43,
+    "other": 32
+   },
+   "canonical_share_of_parsed": 16.7,
+   "rate_with_lean": 6.9
+  },
+  "plain_on": {
+   "counts": {
+    "generic": 12,
+    "other": 3
+   },
+   "canonical_share_of_parsed": 0.0,
+   "rate_with_lean": 0.0
+  }
+ }
+}

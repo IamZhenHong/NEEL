@@ -1,0 +1,307 @@
+{
+ "counts": {
+  "name_off": {
+   "other": 37,
+   "length": 17,
+   "generic": 87,
+   "canonical": 75
+  },
+  "name_on": {
+   "generic": 56,
+   "length": 93,
+   "other": 44,
+   "canonical": 23
+  },
+  "dec_on": {
+   "generic": 86,
+   "length": 90,
+   "other": 40
+  },
+  "plain_on": {
+   "generic": 75,
+   "other": 18,
+   "length": 15
+  }
+ },
+ "kappa": {
+  "trace_persona": {
+   "kappa": 0.2535806847633337,
+   "n": 432,
+   "none": {
+    "anthropic/claude-haiku-5.5": 0,
+    "openai/gpt-5-mini": 0
+   },
+   "per_class": {
+    "assistant": 0.18078381795195916,
+    "character": 0.3744757339724381,
+    "roleplay": 0.2400075060987046
+   }
+  },
+  "reason_persona": {
+   "kappa": 0.4569940743400969,
+   "n": 448,
+   "none": {
+    "anthropic/claude-haiku-5.5": 0,
+    "openai/gpt-5-mini": 0
+   },
+   "per_class": {
+    "assistant": 0.48302561048243003,
+    "character": 0.41182974018794916,
+    "roleplay": 0.4782608695652174,
+    "unclear": 0.0
+   }
+  }
+ },
+ "kappa_ok": false,
+ "rule_rate": {
+  "name_on": {
+   "est": 18.69918699186992,
+   "lo": 6.666666666666667,
+   "hi": 34.71161927440817
+  },
+  "dec_on": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "name_off": {
+   "est": 37.688442211055275,
+   "lo": 21.463414634146343,
+   "hi": 54.71721580775368
+  },
+  "plain_on": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  }
+ },
+ "codes": {
+  "trace:name_on": {
+   "roleplay": 100,
+   "null": 15,
+   "character": 8
+  },
+  "trace:dec_on": {
+   "null": 30,
+   "roleplay": 91,
+   "assistant": 5
+  },
+  "trace:name_off": {
+   "null": 199
+  },
+  "trace:plain_on": {
+   "assistant": 86,
+   "null": 7
+  },
+  "reason:name_on": {
+   "assistant": 31,
+   "null": 45,
+   "roleplay": 16,
+   "character": 31
+  },
+  "reason:dec_on": {
+   "roleplay": 29,
+   "null": 52,
+   "assistant": 41,
+   "character": 4
+  },
+  "reason:name_off": {
+   "character": 41,
+   "assistant": 77,
+   "roleplay": 16,
+   "null": 65
+  },
+  "reason:plain_on": {
+   "assistant": 89,
+   "null": 3,
+   "unclear": 1
+  }
+ },
+ "by_code": {
+  "trace:name_on:character": {
+   "n": 8,
+   "est": 100.0,
+   "lo": 100.0,
+   "hi": 100.0
+  },
+  "trace:name_on:roleplay": {
+   "n": 100,
+   "est": 7.0,
+   "lo": 1.8018018018018018,
+   "hi": 15.116279069767442
+  },
+  "trace:name_on:assistant": {
+   "n": 0
+  },
+  "trace:name_on:unclear": {
+   "n": 0
+  },
+  "trace:dec_on:character": {
+   "n": 0
+  },
+  "trace:dec_on:roleplay": {
+   "n": 91,
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "trace:dec_on:assistant": {
+   "n": 5,
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "trace:dec_on:unclear": {
+   "n": 0
+  },
+  "trace:name_off:character": {
+   "n": 0
+  },
+  "trace:name_off:roleplay": {
+   "n": 0
+  },
+  "trace:name_off:assistant": {
+   "n": 0
+  },
+  "trace:name_off:unclear": {
+   "n": 0
+  },
+  "trace:plain_on:character": {
+   "n": 0
+  },
+  "trace:plain_on:roleplay": {
+   "n": 0
+  },
+  "trace:plain_on:assistant": {
+   "n": 86,
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "trace:plain_on:unclear": {
+   "n": 0
+  },
+  "reason:name_on:character": {
+   "n": 31,
+   "est": 51.61290322580645,
+   "lo": 13.793103448275861,
+   "hi": 79.41176470588235
+  },
+  "reason:name_on:roleplay": {
+   "n": 16,
+   "est": 6.25,
+   "lo": 0.0,
+   "hi": 25.0
+  },
+  "reason:name_on:assistant": {
+   "n": 31,
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "reason:name_on:unclear": {
+   "n": 0
+  },
+  "reason:dec_on:character": {
+   "n": 4,
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "reason:dec_on:roleplay": {
+   "n": 29,
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "reason:dec_on:assistant": {
+   "n": 41,
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "reason:dec_on:unclear": {
+   "n": 0
+  },
+  "reason:name_off:character": {
+   "n": 41,
+   "est": 90.2439024390244,
+   "lo": 76.0,
+   "hi": 100.0
+  },
+  "reason:name_off:roleplay": {
+   "n": 16,
+   "est": 18.75,
+   "lo": 0.0,
+   "hi": 44.44444444444444
+  },
+  "reason:name_off:assistant": {
+   "n": 77,
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "reason:name_off:unclear": {
+   "n": 0
+  },
+  "reason:plain_on:character": {
+   "n": 0
+  },
+  "reason:plain_on:roleplay": {
+   "n": 0
+  },
+  "reason:plain_on:assistant": {
+   "n": 89,
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "reason:plain_on:unclear": {
+   "n": 1,
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  }
+ },
+ "contrasts": {
+  "name_on: assistant - character": {
+   "est": null,
+   "lo": null,
+   "hi": null
+  },
+  "name_on + dec_on: roleplay - character": {
+   "est": -96.33507853403141,
+   "lo": -99.02439024390245,
+   "hi": -92.55319148936171
+  },
+  "distanced share (trace): dec_on - name_on": {
+   "est": 7.407407407407405,
+   "lo": 0.9345794392523317,
+   "hi": 16.66666666666667
+  },
+  "distanced share (reason): name_on - name_off": {
+   "est": -9.146574818216614,
+   "lo": -31.049453341196745,
+   "hi": 11.232127224978113
+  },
+  "rule: name_on - name_off (thinking)": {
+   "est": -18.989255219185356,
+   "lo": -33.495300592441794,
+   "hi": -4.30381089779896
+  },
+  "rule: dec_on - name_on (priority line)": {
+   "est": -18.69918699186992,
+   "lo": -34.711619274408186,
+   "hi": -6.666666666666667
+  }
+ },
+ "primary": {
+  "name_on: roleplay - character": {
+   "est": -93.0,
+   "lo": -98.19041769041769,
+   "hi": -84.88372093023256
+  },
+  "verdict": "descriptive only (kappa, overall or for character / roleplay, < 0.6)"
+ },
+ "plain_on_role_codes": 0.0
+}
