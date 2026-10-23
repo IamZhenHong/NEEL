@@ -2522,3 +2522,25 @@ Results:
 
 $1.83 of $8. Report: `persona_affect/p11_saydo/RESULT.md`.
 
+### 248. PA-V4T: does reasoning first make a model act on the values it states? (CoT, stage 1, 10-23)
+
+V4 found that four models state harm avoidance first and let the operator's procedure win their value conflicts
+79-93% of the time, with thinking off. V4T reran V4's 55 conflicts with reasoning off and on:
+- **Qwen3.6-27B:** thinking off vs on, on one pod.
+- **Gemini 3.8 Flash:** reasoning effort minimal vs high, interleaved.
+
+Results:
+- **Thinking barely moves agreement with the model's own stated ranking:** Qwen +3.4 points [−5, +12] (33.5% → 36.9%),
+  Gemini +3.9 [−5, +12] (59.7% → 63.6%).
+  - That rules out a drop and a large rise, but misses the frozen "no change" bar by 2 points.
+  - The off arm replicates R2B's 33.7%.
+- **The procedure keeps winning** (Qwen 87% → 94%), and harm avoidance stays low.
+- **Too few clashes stay open under thinking (3 of 55; the gate needed 10)** for the planned probe, value-direction
+  and J-Lens stage: the prompt decides the outcome either way.
+- **Pressure cells split by family** (12-24 samples each, not powered): Gemini's reasoning removes the lie an operator
+  line asks for (42% → 0%) and the "Approved" override (25% → 0%). Qwen's doesn't (62% → 100%, mostly ceiling).
+- **Given a neutral third option, the models call the two values equal** 42-72% of the time. The remaining stated
+  winners still don't predict Qwen's actions.
+- The judges of the post-decision answer and of Qwen's reasoning failed κ.
+
+$11.56 of $17. Report: `persona_affect/v4t_thinking/RESULT.md`.
