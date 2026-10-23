@@ -39,10 +39,11 @@ ARMS = {   # arm -> (case kind, P12f dose, thinking, samples per item)
 CODES = ("character", "roleplay", "assistant", "unclear")
 DISTANCED = ("roleplay", "assistant")
 JUDGE_CAP = 1.5
-CAP = 3.0
+CAP = 5.0   # owner raised it from $3 on 10-23 (deviation 1)
 KAPPA_MIN, MIN_N, EFFECT_PP, SHIFT_PP = 0.6, 15, 15.0, 15.0
 N_BOOT = 10000
 TRACE_CHARS = 12000
+GROUP_N = 180
 _H = Path(__file__).resolve().parent
 
 
@@ -62,6 +63,11 @@ def build_jobs() -> list[dict]:
                              "arm": arm, "sample": s, "perm": perm, "case": case, "cond": p12fc.cond_id(char, dose),
                              "seed": util.seed(key), "thinking": thinking, "fmt": "qwen"})
     random.Random(EXP).shuffle(jobs)
+    k = 0
+    for j in jobs:     # deviation 1: thinking jobs in groups of GROUP_N, so the pod writes and logs each part (the
+        if j["thinking"]:   # first launch's one 756-job group was silent > 30 min and the launcher aborted it)
+            j["group"] = f"think{k // GROUP_N}"
+            k += 1
     return jobs
 
 
@@ -133,8 +139,10 @@ def judge(res: Path, cap: float = JUDGE_CAP) -> dict:
 
 # ------------------------------------------------------------------------------------------------ analysis
 def load(res: Path) -> list[dict]:
-    p = Path(res) / "episodes_agent.jsonl"
-    return [json.loads(x) for x in p.read_bytes().decode("utf-8").split("\n") if x.strip()]
+    out = []
+    for p in sorted(Path(res).glob("episodes_*.jsonl")):
+        out += [json.loads(x) for x in p.read_bytes().decode("utf-8").split("\n") if x.strip()]
+    return out
 
 
 def scored(recs: list[dict]) -> list[dict]:

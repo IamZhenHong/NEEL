@@ -37,7 +37,7 @@ balanced option orders.
 | name_off | P12b rule case | name_value | off | 12 | 216 |
 | plain_on | P12b rule case | none | on | 6 | 108 |
 
-Jobs file: `jobs/main_q27.jsonl` (756 jobs), sha256 `04ec0c7c46c98034ad7c6cdb2264aa3611df5bd7d6b75171046ad0f1f985ea65`.
+Jobs file: `jobs/main_q27.jsonl` (756 jobs), sha256 `16e61a4249f9a652320be1623bd87abfb6ace5c55bf39b71714567ed1f93cd4f (after deviation 1; at the tag: 04ec0c7c46c98034ad7c6cdb2264aa3611df5bd7d6b75171046ad0f1f985ea65)`.
 
 **Coding.** Two judges from different families (`persona_affect.common.judges`: Claude Haiku 5.5 with reasoning off,
 GPT-5-mini at minimal effort; temperature 0) each label two texts per episode with exactly one of:
@@ -104,9 +104,19 @@ This is a correlation within one arm: the code is not randomised.
 
 ## 5. Deviations
 
-None yet.
+1. **Infra only, before any SC-D4 data (10-23).** The first pod (sc-d4-q27, $0.93) ran every job in one group. A
+   single round of 756 thinking-on generations printed nothing for 30 minutes, so the launcher's stall guard aborted
+   it. No episode came back.
+   - **Fix:** the 540 thinking jobs move into three groups of 180 (`think0`-`think2`, assigned in the frozen
+     shuffled order). name_off stays in `agent`. The pod writes and logs each group as it finishes, and `load()`
+     reads every `episodes_*.jsonl`.
+   - Keys, seeds, cases, conds, arms and sample counts are unchanged; only the job's `group` field differs. The new
+     jobs sha256 is given in section 2.
+   - MAXMIN 60 → 80.
+   - The launcher adds `--exclude 'data/adapters*'` (peers' fix for adapter folders made mid-upload).
+   - **The owner raised the cap from $3 to $5** (10-23), with the design unchanged.
 
 ## 6. Cap
 
-**$3** (ledger mini `SC-D4`): one pod (MAXMIN 60, MAXCOST $1.80, bound $2.70; the launch check is ledger + bound ≤ $3) plus judges ≤ $1.50. The judge cap is
+**$5** (ledger mini `SC-D4`; $3 at the tag, raised by the owner after deviation 1): pods (rerun MAXMIN 80, MAXCOST $2.40, bound $3.30; the launch check is ledger + bound ≤ $5) plus judges ≤ $1.50. The judge cap is
 lowered to what the ledger leaves if the pod costs more than expected.
