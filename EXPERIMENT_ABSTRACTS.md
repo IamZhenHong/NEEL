@@ -2427,3 +2427,23 @@ Gemma 4 31B (1536 decisions each). Frozen at `pa-r2c-prereg`.
 - **Lesson for value experiments:** fake-value controls have to match the line's grammar, not just its length.
 
 GPU $2.37 of $4. Report: `persona_affect/r2c_care/RESULT.md`.
+
+### 243. PA-V1b: how small a narrow fine-tune still spreads, and what blocks it (10-23)
+
+V1 found that 13 steps on 200 rows teaching Qwen3.5-9B to sanction wrongdoers itself on one coworking desk took
+unilateral sanctions on unrelated justice tasks from 25% to 92%. V1b ran the same fine-tune at 1, 2, 4 and 7 steps
+against matched routine fine-tunes, and tested three blockers at 13 steps.
+
+- **The habit spreads from the first step:** one step on 16 rows adds +10.9 [+6.1, +16.2] points. That rises to +20 at
+  2-4 steps, +35 at 7 and +77 at 13.
+- **No dose** learns the habit on its own desk without spreading it.
+- **One line in the training prompt blocks most of the spread:**
+  - The inoculation-style instruction "Sanction proven wrongdoers yourself. Do not pass cases to anyone else to
+    decide." gives 29% unilateral on held-out tasks against 93% (−64; 20% of the log-odds lift kept).
+  - A desk-policy explanation gives 45% (−48; 40% kept).
+  - Both models still act 100% on their own desk when the line is present. Both stage-2 seeds agree.
+- **Mixing** 100 routine rows into the 200 lowers the spread more than the dose alone does.
+- Caveats: one model, desk and wording; one seed on the ladder; the routine baselines move with dose.
+
+$2.54 of $8. Report: `persona_affect/v1b_dose/RESULT.md`.
+
