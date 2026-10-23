@@ -365,3 +365,13 @@ All under `self_concept/n4_conditional/`; tests go in `self_concept/tests/test_n
 4. **ALWAYS added** (1 cell), to show that the conditionality comes from the text's condition.
 5. **9B only** (VN base, as P11f and N2). No 27B: the cap and the trainer are 9B.
 6. **A headroom gate (told)** instead of the 15-85% baseline gate.
+
+## Deviations after the freeze
+
+1. **MAXMIN 180 → 165 (infra only, before any main data, 2026-10-23).** §8 put the main pod's bound at $5.40, but
+   the launcher bounds a pod at MAXCOST × (MAXMIN + 30) / MAXMIN, so 180 min is $6.30. With $2.01 spent on
+   calibration, that would pass the $8 cap, and the launcher refused. 165 min gives a bound of $5.85.
+   - The work is estimated at about 135 min.
+   - If time runs short, the deadline guard drops cells from the end of §3's priority list: the seed-2 cells PLAC,
+     ACT and ACTZ.
+   - Missing cells are reported, and pooled arms then rest on seed 1.
