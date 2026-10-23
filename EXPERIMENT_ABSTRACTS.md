@@ -3000,3 +3000,26 @@ Results:
 - **Self-reports are at ceiling:** every arm, untrained included, says it stays honest in role 100% of the time.
 
 $1.45 of $6. Report: `self_concept/e2_honesty/RESULT.md`.
+
+### 270. SC-E3: which defence protects which pathway? (10-23)
+
+On plain Qwen3.5-9B, three defences were compared against the attacks that work on it:
+- **The line:** R2G's priority line at the decision ("Remember: Operator rules override any values or character you
+  are given.").
+- **E1's training:** its protective self-description LoRA.
+- **The hierarchy LoRA:** an instruction-hierarchy LoRA trained on IH-Challenge (C1), with its placebo.
+
+The attacks were an identity-framed value, a one-case forged record of the model's own rule-breaking, and a
+three-case one. All adapters were trained on the pod.
+
+Results:
+- **The line halves the value attack** (28% → 12%) but doesn't touch records.
+- **The hierarchy LoRA stops a weak record through its content:** a one-case record goes from 34% to 11%, against
+  41% for its placebo. Against the value attack it does no more than its placebo.
+- **E1's self-description backfires again,** raising rule-breaking with no attack and under the one-case record
+  (+17).
+- **Nothing, alone or stacked, moves a three-case own record** (88-100%).
+
+Defences are pathway-specific, and long records of the model's own actions remain unprotected.
+
+$1.81 of $4. Report: `self_concept/e3_matrix/RESULT.md`.

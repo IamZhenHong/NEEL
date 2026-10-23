@@ -1,0 +1,322 @@
+{
+ "levels": {
+  "rule|none": {
+   "BASE": 6.481481481481482,
+   "PRIO": 1.8518518518518519,
+   "PROT": 16.666666666666668,
+   "PROT+PRIO": 16.666666666666668,
+   "C1": 3.7037037037037037,
+   "C1+PRIO": 2.7777777777777777,
+   "P": 4.62962962962963
+  },
+  "rule|val": {
+   "BASE": 27.77777777777778,
+   "PRIO": 12.037037037037036,
+   "PROT": 34.25925925925926,
+   "PROT+PRIO": 27.77777777777778,
+   "C1": 17.59259259259259,
+   "C1+PRIO": 12.962962962962964,
+   "P": 15.74074074074074
+  },
+  "rule|name": {
+   "BASE": 8.333333333333334,
+   "PRIO": 7.407407407407407,
+   "PROT": 12.962962962962964,
+   "PROT+PRIO": 17.59259259259259,
+   "C1": 2.7777777777777777,
+   "C1+PRIO": 6.481481481481482,
+   "P": 5.555555555555555
+  },
+  "rule|bio": {
+   "BASE": 7.407407407407407,
+   "PRIO": 3.7037037037037037,
+   "PROT": 17.59259259259259,
+   "PROT+PRIO": 19.444444444444443,
+   "C1": 1.8518518518518519,
+   "C1+PRIO": 2.7777777777777777,
+   "P": 5.555555555555555
+  },
+  "rule|namebio": {
+   "BASE": 14.814814814814815,
+   "PRIO": 8.333333333333334,
+   "PROT": 22.22222222222222,
+   "PROT+PRIO": 21.296296296296298,
+   "C1": 3.7037037037037037,
+   "C1+PRIO": 2.7777777777777777,
+   "P": 7.407407407407407
+  },
+  "desk|none": {
+   "BASE": 1.5625,
+   "PRIO": 3.125,
+   "PROT": 4.6875,
+   "PROT+PRIO": 3.125,
+   "C1": 0.0,
+   "C1+PRIO": 0.0,
+   "P": 0.0
+  },
+  "desk|rec1": {
+   "BASE": 34.375,
+   "PRIO": 35.9375,
+   "PROT": 51.5625,
+   "PROT+PRIO": 56.25,
+   "C1": 10.9375,
+   "C1+PRIO": 21.875,
+   "P": 40.625
+  },
+  "desk|rec": {
+   "BASE": 100.0,
+   "PRIO": 90.625,
+   "PROT": 100.0,
+   "PROT+PRIO": 96.875,
+   "C1": 96.875,
+   "C1+PRIO": 87.5,
+   "P": 100.0
+  }
+ },
+ "contrasts": {
+  "rule|none|PRIO-BASE": {
+   "est": -4.62962962962963,
+   "lo": -12.962962962962962,
+   "hi": 0.0
+  },
+  "rule|none|PROT-BASE": {
+   "est": 10.185185185185187,
+   "lo": 2.7777777777777786,
+   "hi": 18.541666666666334
+  },
+  "rule|none|C1-BASE": {
+   "est": -2.777777777777778,
+   "lo": -5.555555555555557,
+   "hi": 0.0
+  },
+  "rule|none|P-BASE": {
+   "est": -1.851851851851852,
+   "lo": -5.555555555555555,
+   "hi": 1.8518518518518519
+  },
+  "rule|none|C1-P": {
+   "est": -0.925925925925926,
+   "lo": -2.777777777777778,
+   "hi": 0.0
+  },
+  "rule|val|PRIO-BASE": {
+   "est": -15.740740740740742,
+   "lo": -25.0,
+   "hi": -8.333333333333332
+  },
+  "rule|val|PROT-BASE": {
+   "est": 6.481481481481481,
+   "lo": -1.8518518518518547,
+   "hi": 18.518518518518515
+  },
+  "rule|val|C1-BASE": {
+   "est": -10.185185185185187,
+   "lo": -17.592592592592595,
+   "hi": -3.7037037037037024
+  },
+  "rule|val|P-BASE": {
+   "est": -12.037037037037038,
+   "lo": -19.444444444444443,
+   "hi": -5.555555555555557
+  },
+  "rule|val|C1-P": {
+   "est": 1.8518518518518512,
+   "lo": -4.62962962962963,
+   "hi": 8.333333333333332
+  },
+  "rule|name|PRIO-BASE": {
+   "est": -0.9259259259259265,
+   "lo": -3.703703703703704,
+   "hi": 1.851851851851853
+  },
+  "rule|name|PROT-BASE": {
+   "est": 4.62962962962963,
+   "lo": -1.851851851851852,
+   "hi": 13.888888888888888
+  },
+  "rule|name|C1-BASE": {
+   "est": -5.555555555555556,
+   "lo": -10.185185185185187,
+   "hi": -1.8518518518518519
+  },
+  "rule|name|P-BASE": {
+   "est": -2.7777777777777786,
+   "lo": -6.481481481481482,
+   "hi": 0.925925925925926
+  },
+  "rule|name|C1-P": {
+   "est": -2.7777777777777777,
+   "lo": -5.555555555555556,
+   "hi": 0.0
+  },
+  "rule|bio|PRIO-BASE": {
+   "est": -3.7037037037037037,
+   "lo": -11.11111111111111,
+   "hi": 2.7777777777777777
+  },
+  "rule|bio|PROT-BASE": {
+   "est": 10.185185185185183,
+   "lo": -0.9259259259259265,
+   "hi": 24.074074074074076
+  },
+  "rule|bio|C1-BASE": {
+   "est": -5.555555555555555,
+   "lo": -11.11111111111111,
+   "hi": -0.9259259259259259
+  },
+  "rule|bio|P-BASE": {
+   "est": -1.851851851851852,
+   "lo": -7.4074074074074066,
+   "hi": 2.7777777777777777
+  },
+  "rule|bio|C1-P": {
+   "est": -3.7037037037037033,
+   "lo": -8.333333333333332,
+   "hi": 0.0
+  },
+  "rule|namebio|PRIO-BASE": {
+   "est": -6.481481481481481,
+   "lo": -10.185185185185185,
+   "hi": -2.7777777777777777
+  },
+  "rule|namebio|PROT-BASE": {
+   "est": 7.4074074074074066,
+   "lo": -2.7777777777777777,
+   "hi": 18.51851851851852
+  },
+  "rule|namebio|C1-BASE": {
+   "est": -11.11111111111111,
+   "lo": -20.37037037037037,
+   "hi": -3.7037037037037037
+  },
+  "rule|namebio|P-BASE": {
+   "est": -7.407407407407407,
+   "lo": -15.740740740740742,
+   "hi": 0.0
+  },
+  "rule|namebio|C1-P": {
+   "est": -3.7037037037037037,
+   "lo": -7.4074074074074066,
+   "hi": -0.9259259259259259
+  },
+  "desk|none|PRIO-BASE": {
+   "est": 1.5625,
+   "lo": 0.0,
+   "hi": 4.6875
+  },
+  "desk|none|PROT-BASE": {
+   "est": 3.125,
+   "lo": 0.0,
+   "hi": 9.375
+  },
+  "desk|none|C1-BASE": {
+   "est": -1.5625,
+   "lo": -4.6875,
+   "hi": 0.0
+  },
+  "desk|none|P-BASE": {
+   "est": -1.5625,
+   "lo": -4.6875,
+   "hi": 0.0
+  },
+  "desk|none|C1-P": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "desk|rec1|PRIO-BASE": {
+   "est": 1.5625,
+   "lo": -10.9375,
+   "hi": 15.625
+  },
+  "desk|rec1|PROT-BASE": {
+   "est": 17.1875,
+   "lo": 7.8125,
+   "hi": 28.125
+  },
+  "desk|rec1|C1-BASE": {
+   "est": -23.4375,
+   "lo": -35.9375,
+   "hi": -12.5
+  },
+  "desk|rec1|P-BASE": {
+   "est": 6.25,
+   "lo": -1.5625,
+   "hi": 15.625
+  },
+  "desk|rec1|C1-P": {
+   "est": -29.6875,
+   "lo": -45.3125,
+   "hi": -15.625
+  },
+  "desk|rec|PRIO-BASE": {
+   "est": -9.375,
+   "lo": -18.75,
+   "hi": 0.0
+  },
+  "desk|rec|PROT-BASE": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "desk|rec|C1-BASE": {
+   "est": -3.125,
+   "lo": -7.8125,
+   "hi": 0.0
+  },
+  "desk|rec|P-BASE": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "desk|rec|C1-P": {
+   "est": -3.125,
+   "lo": -7.8125,
+   "hi": 0.0
+  }
+ },
+ "matrix": {
+  "rule|val": {
+   "PRIO": "protects",
+   "PROT": "inconclusive",
+   "C1": "inconclusive",
+   "C1 vs P": "does not protect"
+  },
+  "rule|name": {
+   "PRIO": "descriptive (BASE below the 15% floor)",
+   "PROT": "descriptive (BASE below the 15% floor)",
+   "C1": "descriptive (BASE below the 15% floor)",
+   "C1 vs P": "descriptive (BASE below the 15% floor)"
+  },
+  "rule|bio": {
+   "PRIO": "descriptive (BASE below the 15% floor)",
+   "PROT": "descriptive (BASE below the 15% floor)",
+   "C1": "descriptive (BASE below the 15% floor)",
+   "C1 vs P": "descriptive (BASE below the 15% floor)"
+  },
+  "rule|namebio": {
+   "PRIO": "descriptive (BASE below the 15% floor)",
+   "PROT": "descriptive (BASE below the 15% floor)",
+   "C1": "descriptive (BASE below the 15% floor)",
+   "C1 vs P": "descriptive (BASE below the 15% floor)"
+  },
+  "desk|rec1": {
+   "PRIO": "inconclusive",
+   "PROT": "backfires",
+   "C1": "protects",
+   "C1 vs P": "protects"
+  },
+  "desk|rec": {
+   "PRIO": "inconclusive",
+   "PROT": "does not protect",
+   "C1": "does not protect",
+   "C1 vs P": "does not protect"
+  }
+ },
+ "gen": {
+  "BASE": 97.5,
+  "C1": 97.5,
+  "P": 97.5,
+  "PROT": 95.0
+ }
+}
