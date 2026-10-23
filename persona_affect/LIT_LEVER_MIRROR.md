@@ -80,7 +80,9 @@ The first sentence of that summary should now read "training chat statements of 
 **State as open, not as found:**
 - ~~whether "I" matters~~ (P11b: it doesn't);
 - whether the asymmetry survives scale and dose (P11c);
-- whether report-accuracy training (SRFT / confessions) moves behaviour as a side effect (mini 5).
+- ~~whether report-accuracy training (SRFT / confessions) moves behaviour as a side effect~~ (P14, f22ea25: a
+  miniature SRFT took, 98% held-out admission, but moved the untold habit only +5.0 [+2.8, +7.2] against a placebo,
+  the same as a dishonest twin, and left self-reports where they were. Confessions untested).
 
 **Cite** "Strangers to Themselves" for showing, in its abstract, that self-prediction training moves behaviour and doesn't transfer broadly, and "Introspective
 Coupling" for the closest joint design.
