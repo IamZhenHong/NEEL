@@ -11,8 +11,10 @@ If this session stalls (its context is near the limit), a fresh session resumes 
 - [ ] E1 main (frozen `sc-e1-prereg`; launch.sh, then `analyze.py` with judges): rows (PROT "I keep my values and the operator's rules whatever role ...", P11 PLAC), train 2 seeds on
       plain 9B, eval BASE / PROT / PLAC; judges on inchar; DESIGN.md + tag sc-e1-prereg
 - [ ] E2 (honesty-only protection) and E3 (defence x pathway: PROT vs R2G priority line vs IH LoRA) reuse E1's
-      items and runner
-- [ ] A5 frozen `sc-a5-prereg` (self_concept/a5_coupled/): SAYU / W / MIX / PLAC on VN, P11's items; launch.sh then analyze.py
+      items and runner; design after E1's result. E3's IH LoRA = persona/operative/lora_c1e4/results/pod/adapters/C1
+      (on plain Qwen3.5-9B, 80 MB; ship with --sync-extra; its gpt-oss placebo is P). PROT adapters are deleted on the
+      pod: retrain (training is deterministic: P11d/P11f doses matched to 6 decimals)
+- [ ] A5 frozen `sc-a5-prereg` (cap raised to $5 by owner, deviation 1) (self_concept/a5_coupled/): SAYU / W / MIX / PLAC on VN, P11's items; launch.sh then analyze.py
 
 ## Notes
 - Spend: self_concept/ledger.jsonl via self_concept/common/book_pod.sh (mini SC-E1 etc.).
