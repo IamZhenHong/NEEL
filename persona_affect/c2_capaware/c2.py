@@ -29,7 +29,7 @@ import numpy as np
 from persona_affect.common import judges, util
 
 MINI = "C2"
-CAP_TOTAL = 8.0                      # 6 -> 8, deviation 1 (top-up pod)
+CAP_TOTAL = 9.0                      # 6 -> 8 -> 9, deviations 1 and 1b (top-up pods)
 JUDGE_CAP = 2.5                       # USD per label() call
 ARMS = ("off", "on")
 CELLS = ("none", "bad4")

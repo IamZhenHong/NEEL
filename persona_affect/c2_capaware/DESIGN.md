@@ -137,3 +137,13 @@ Haiku-only judge. A gap above 15 points against C2's off arm is reported before 
 - **Unchanged:** items, arms, judges, rules.
 - **Why this is allowed:** the top-up completes the registered design without changing it. No row has been read
   (WeirdChat A1 deviation 2 is the precedent).
+
+### Deviation 1b (logged 2026-10-23 04:55, before any C2 output was read)
+
+- **What happened:** the main pod was cut at its cap with 1,024 rows, positions 0-1,023 of pod.py's order.
+- **Change:**
+  - A second top-up (`pa-c2-q27-topB`, MAXMIN 50) generates the 256 ids that neither the main pod nor top-up A holds
+    (`jobs/items_q27_topB.jsonl`).
+  - The C2 cap goes from $8 to $9, since three pods plus judges may pass $8.
+- **Booking:** the main pod's launcher log was overwritten at the cap (cause unknown; the pod is confirmed terminated),
+  so its cost is hand-booked at ~95 min × $1.79/h = $2.85.
