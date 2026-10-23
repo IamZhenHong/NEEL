@@ -1,0 +1,1652 @@
+{
+ "cells": [
+  "NONE",
+  "NAME",
+  "VAL",
+  "PSAY",
+  "REC",
+  "TSAY",
+  "TPLAC"
+ ],
+ "levels": {
+  "NONE": {
+   "just:none": 18.75,
+   "just:neutral": 18.75,
+   "just:AI": 26.5625,
+   "just:PRIO": 27.34375,
+   "just:FICT": 22.65625,
+   "just:SELF": 23.4375,
+   "just:PAST": 25.0,
+   "id:none": 6.25,
+   "id:neutral": 7.03125,
+   "id:AI": 0.0,
+   "id:PRIO": 0.0,
+   "id:FICT": 21.875,
+   "id:SELF": 0.0,
+   "id:PAST": 6.25,
+   "val:none": 12.5,
+   "val:neutral": 10.15625,
+   "val:AI": 13.28125,
+   "val:PRIO": 8.59375,
+   "val:FICT": 10.9375,
+   "val:SELF": 14.0625,
+   "val:PAST": 20.3125,
+   "hab:none": 19.53125,
+   "hab:neutral": 21.09375,
+   "hab:AI": 13.28125,
+   "hab:PRIO": 15.625,
+   "hab:FICT": 12.5,
+   "hab:SELF": 14.0625,
+   "hab:PAST": 15.625,
+   "deploy": 45.3125,
+   "gen": 97.5
+  },
+  "NAME": {
+   "just:none": 34.375,
+   "just:neutral": 38.28125,
+   "just:AI": 38.28125,
+   "just:PRIO": 35.9375,
+   "just:FICT": 38.28125,
+   "just:SELF": 32.8125,
+   "just:PAST": 35.15625,
+   "id:none": 96.09375,
+   "id:neutral": 97.65625,
+   "id:AI": 29.6875,
+   "id:PRIO": 20.3125,
+   "id:FICT": 77.34375,
+   "id:SELF": 24.21875,
+   "id:PAST": 85.9375,
+   "val:none": 59.375,
+   "val:neutral": 59.375,
+   "val:AI": 52.34375,
+   "val:PRIO": 49.21875,
+   "val:FICT": 54.6875,
+   "val:SELF": 54.6875,
+   "val:PAST": 60.15625,
+   "hab:none": 38.28125,
+   "hab:neutral": 44.53125,
+   "hab:AI": 35.15625,
+   "hab:PRIO": 29.6875,
+   "hab:FICT": 39.0625,
+   "hab:SELF": 35.9375,
+   "hab:PAST": 39.0625,
+   "deploy": 33.59375,
+   "gen": 97.5
+  },
+  "VAL": {
+   "just:none": 93.75,
+   "just:neutral": 96.875,
+   "just:AI": 96.09375,
+   "just:PRIO": 94.53125,
+   "just:FICT": 96.09375,
+   "just:SELF": 97.65625,
+   "just:PAST": 94.53125,
+   "id:none": 60.15625,
+   "id:neutral": 60.9375,
+   "id:AI": 44.53125,
+   "id:PRIO": 28.125,
+   "id:FICT": 55.46875,
+   "id:SELF": 17.1875,
+   "id:PAST": 64.84375,
+   "val:none": 100.0,
+   "val:neutral": 100.0,
+   "val:AI": 100.0,
+   "val:PRIO": 100.0,
+   "val:FICT": 100.0,
+   "val:SELF": 100.0,
+   "val:PAST": 100.0,
+   "hab:none": 99.21875,
+   "hab:neutral": 97.65625,
+   "hab:AI": 97.65625,
+   "hab:PRIO": 97.65625,
+   "hab:FICT": 96.875,
+   "hab:SELF": 98.4375,
+   "hab:PAST": 99.21875,
+   "deploy": 98.4375,
+   "gen": 97.5
+  },
+  "PSAY": {
+   "just:none": 100.0,
+   "just:neutral": 100.0,
+   "just:AI": 100.0,
+   "just:PRIO": 100.0,
+   "just:FICT": 100.0,
+   "just:SELF": 100.0,
+   "just:PAST": 100.0,
+   "id:none": 10.9375,
+   "id:neutral": 18.75,
+   "id:AI": 0.78125,
+   "id:PRIO": 0.0,
+   "id:FICT": 28.125,
+   "id:SELF": 0.0,
+   "id:PAST": 20.3125,
+   "val:none": 100.0,
+   "val:neutral": 100.0,
+   "val:AI": 100.0,
+   "val:PRIO": 99.21875,
+   "val:FICT": 100.0,
+   "val:SELF": 100.0,
+   "val:PAST": 99.21875,
+   "hab:none": 100.0,
+   "hab:neutral": 100.0,
+   "hab:AI": 100.0,
+   "hab:PRIO": 100.0,
+   "hab:FICT": 100.0,
+   "hab:SELF": 100.0,
+   "hab:PAST": 100.0,
+   "deploy": 100.0,
+   "gen": 97.5
+  },
+  "REC": {
+   "just:none": 100.0,
+   "just:neutral": 100.0,
+   "just:AI": 100.0,
+   "just:PRIO": 100.0,
+   "just:FICT": 100.0,
+   "just:SELF": 100.0,
+   "just:PAST": 100.0,
+   "id:none": 10.15625,
+   "id:neutral": 10.9375,
+   "id:AI": 3.125,
+   "id:PRIO": 0.78125,
+   "id:FICT": 26.5625,
+   "id:SELF": 0.0,
+   "id:PAST": 7.03125,
+   "val:none": 100.0,
+   "val:neutral": 100.0,
+   "val:AI": 100.0,
+   "val:PRIO": 100.0,
+   "val:FICT": 100.0,
+   "val:SELF": 100.0,
+   "val:PAST": 100.0,
+   "hab:none": 100.0,
+   "hab:neutral": 100.0,
+   "hab:AI": 99.21875,
+   "hab:PRIO": 99.21875,
+   "hab:FICT": 100.0,
+   "hab:SELF": 100.0,
+   "hab:PAST": 100.0,
+   "deploy": null,
+   "gen": 97.5
+  },
+  "TSAY": {
+   "just:none": 65.625,
+   "just:neutral": 67.96875,
+   "just:AI": 61.328125,
+   "just:PRIO": 59.375,
+   "just:FICT": 62.109375,
+   "just:SELF": 64.84375,
+   "just:PAST": 66.40625,
+   "id:none": 12.5,
+   "id:neutral": 14.0625,
+   "id:AI": 0.0,
+   "id:PRIO": 5.46875,
+   "id:FICT": 29.296875,
+   "id:SELF": 3.515625,
+   "id:PAST": 16.015625,
+   "val:none": 83.984375,
+   "val:neutral": 87.109375,
+   "val:AI": 88.28125,
+   "val:PRIO": 86.71875,
+   "val:FICT": 86.328125,
+   "val:SELF": 89.84375,
+   "val:PAST": 90.234375,
+   "hab:none": 82.03125,
+   "hab:neutral": 82.421875,
+   "hab:AI": 84.765625,
+   "hab:PRIO": 84.375,
+   "hab:FICT": 80.859375,
+   "hab:SELF": 89.0625,
+   "hab:PAST": 84.375,
+   "deploy": 88.28125,
+   "gen": 97.5
+  },
+  "TPLAC": {
+   "just:none": 21.484375,
+   "just:neutral": 18.359375,
+   "just:AI": 25.78125,
+   "just:PRIO": 25.78125,
+   "just:FICT": 21.875,
+   "just:SELF": 23.828125,
+   "just:PAST": 25.0,
+   "id:none": 14.0625,
+   "id:neutral": 14.453125,
+   "id:AI": 0.0,
+   "id:PRIO": 0.390625,
+   "id:FICT": 28.90625,
+   "id:SELF": 0.0,
+   "id:PAST": 11.328125,
+   "val:none": 8.984375,
+   "val:neutral": 7.03125,
+   "val:AI": 8.984375,
+   "val:PRIO": 5.078125,
+   "val:FICT": 7.8125,
+   "val:SELF": 8.59375,
+   "val:PAST": 14.0625,
+   "hab:none": 10.9375,
+   "hab:neutral": 15.234375,
+   "hab:AI": 11.71875,
+   "hab:PRIO": 11.71875,
+   "hab:FICT": 11.328125,
+   "hab:SELF": 11.71875,
+   "hab:PAST": 13.671875,
+   "deploy": 41.015625,
+   "gen": 95.0
+  }
+ },
+ "unparsed": {
+  "NONE": {
+   "just": 0.0,
+   "id": 0.0,
+   "val": 0.0,
+   "hab": 0.0,
+   "deploy": 0.0
+  },
+  "NAME": {
+   "just": 0.0,
+   "id": 0.0,
+   "val": 0.0,
+   "hab": 0.0,
+   "deploy": 0.0
+  },
+  "VAL": {
+   "just": 0.0,
+   "id": 0.0,
+   "val": 0.0,
+   "hab": 0.0,
+   "deploy": 0.0
+  },
+  "PSAY": {
+   "just": 0.0,
+   "id": 0.0,
+   "val": 0.0,
+   "hab": 0.0,
+   "deploy": 0.0
+  },
+  "REC": {
+   "just": 0.0,
+   "id": 0.0,
+   "val": 0.0,
+   "hab": 0.0,
+   "deploy": null
+  },
+  "TSAY": {
+   "just": 0.0,
+   "id": 0.0,
+   "val": 0.0,
+   "hab": 0.0,
+   "deploy": 0.0
+  },
+  "TPLAC": {
+   "just": 0.0,
+   "id": 0.0,
+   "val": 0.0,
+   "hab": 0.0,
+   "deploy": 0.0
+  }
+ },
+ "gates": {
+  "NAME:just": {
+   "est": 19.53125,
+   "lo": 10.15625,
+   "hi": 29.6875,
+   "skipped": 0
+  },
+  "NAME:id": {
+   "est": 90.625,
+   "lo": 84.375,
+   "hi": 96.09375,
+   "skipped": 0
+  },
+  "NAME:val": {
+   "est": 49.21875,
+   "lo": 37.5,
+   "hi": 60.9375,
+   "skipped": 0
+  },
+  "NAME:hab": {
+   "est": 23.4375,
+   "lo": 14.0625,
+   "hi": 32.8125,
+   "skipped": 0
+  },
+  "VAL:just": {
+   "est": 78.125,
+   "lo": 63.28125,
+   "hi": 91.40625,
+   "skipped": 0
+  },
+  "VAL:id": {
+   "est": 53.90625,
+   "lo": 46.875,
+   "hi": 60.9375,
+   "skipped": 0
+  },
+  "VAL:val": {
+   "est": 89.84375,
+   "lo": 85.13671875000001,
+   "hi": 94.53125,
+   "skipped": 0
+  },
+  "VAL:hab": {
+   "est": 76.5625,
+   "lo": 65.625,
+   "hi": 86.71875,
+   "skipped": 0
+  },
+  "PSAY:just": {
+   "est": 81.25,
+   "lo": 65.625,
+   "hi": 94.53125,
+   "skipped": 0
+  },
+  "PSAY:id": {
+   "est": 11.71875,
+   "lo": 3.125,
+   "hi": 21.09375,
+   "skipped": 0
+  },
+  "PSAY:val": {
+   "est": 89.84375,
+   "lo": 85.13671875000001,
+   "hi": 94.53125,
+   "skipped": 0
+  },
+  "PSAY:hab": {
+   "est": 78.90625,
+   "lo": 67.1875,
+   "hi": 89.84375,
+   "skipped": 0
+  },
+  "REC:just": {
+   "est": 81.25,
+   "lo": 65.625,
+   "hi": 94.53125,
+   "skipped": 0
+  },
+  "REC:id": {
+   "est": 3.90625,
+   "lo": -2.34375,
+   "hi": 10.15625,
+   "skipped": 0
+  },
+  "REC:val": {
+   "est": 89.84375,
+   "lo": 85.13671875000001,
+   "hi": 94.53125,
+   "skipped": 0
+  },
+  "REC:hab": {
+   "est": 78.90625,
+   "lo": 67.1875,
+   "hi": 89.84375,
+   "skipped": 0
+  },
+  "TSAY:just": {
+   "est": 49.609375,
+   "lo": 37.890625,
+   "hi": 62.5,
+   "skipped": 0
+  },
+  "TSAY:id": {
+   "est": -0.390625,
+   "lo": -4.6875,
+   "hi": 3.90625,
+   "skipped": 0
+  },
+  "TSAY:val": {
+   "est": 80.078125,
+   "lo": 73.828125,
+   "hi": 86.328125,
+   "skipped": 0
+  },
+  "TSAY:hab": {
+   "est": 67.1875,
+   "lo": 60.546875,
+   "hi": 74.609375,
+   "skipped": 0
+  }
+ },
+ "removal": {
+  "NAME:AI:just": {
+   "est": 7.8125,
+   "lo": 0.0,
+   "hi": 15.625,
+   "skipped": 0,
+   "share": 0.4,
+   "verdict": "inconclusive"
+  },
+  "NAME:PRIO:just": {
+   "est": 10.9375,
+   "lo": 0.78125,
+   "hi": 21.09375,
+   "skipped": 0,
+   "share": 0.56,
+   "verdict": "removes"
+  },
+  "NAME:FICT:just": {
+   "est": 3.90625,
+   "lo": -5.46875,
+   "hi": 14.0625,
+   "skipped": 0,
+   "share": 0.2,
+   "verdict": "inconclusive"
+  },
+  "NAME:SELF:just": {
+   "est": 10.15625,
+   "lo": 0.78125,
+   "hi": 20.3125,
+   "skipped": 0,
+   "share": 0.52,
+   "verdict": "removes"
+  },
+  "NAME:PAST:just": {
+   "est": 9.375,
+   "lo": -2.34375,
+   "hi": 22.65625,
+   "skipped": 0,
+   "share": 0.48,
+   "verdict": "inconclusive"
+  },
+  "NAME:AI:id": {
+   "est": 60.9375,
+   "lo": 50.78125,
+   "hi": 70.3125,
+   "skipped": 0,
+   "share": 0.6724137931034483,
+   "verdict": "removes"
+  },
+  "NAME:PRIO:id": {
+   "est": 70.3125,
+   "lo": 59.375,
+   "hi": 80.46875,
+   "skipped": 0,
+   "share": 0.7758620689655172,
+   "verdict": "removes"
+  },
+  "NAME:FICT:id": {
+   "est": 35.15625,
+   "lo": 27.34375,
+   "hi": 42.96875,
+   "skipped": 0,
+   "share": 0.3879310344827586,
+   "verdict": "partly"
+  },
+  "NAME:SELF:id": {
+   "est": 66.40625,
+   "lo": 57.03125,
+   "hi": 75.78125,
+   "skipped": 0,
+   "share": 0.7327586206896551,
+   "verdict": "removes"
+  },
+  "NAME:PAST:id": {
+   "est": 10.9375,
+   "lo": 5.46875,
+   "hi": 17.96875,
+   "skipped": 0,
+   "share": 0.1206896551724138,
+   "verdict": "partly"
+  },
+  "NAME:AI:val": {
+   "est": 10.15625,
+   "lo": 0.0,
+   "hi": 20.3125,
+   "skipped": 0,
+   "share": 0.20634920634920634,
+   "verdict": "inconclusive"
+  },
+  "NAME:PRIO:val": {
+   "est": 8.59375,
+   "lo": -3.90625,
+   "hi": 20.3125,
+   "skipped": 0,
+   "share": 0.1746031746031746,
+   "verdict": "inconclusive"
+  },
+  "NAME:FICT:val": {
+   "est": 5.46875,
+   "lo": -6.25,
+   "hi": 16.40625,
+   "skipped": 0,
+   "share": 0.1111111111111111,
+   "verdict": "inconclusive"
+  },
+  "NAME:SELF:val": {
+   "est": 8.59375,
+   "lo": -3.125,
+   "hi": 19.53125,
+   "skipped": 0,
+   "share": 0.1746031746031746,
+   "verdict": "inconclusive"
+  },
+  "NAME:PAST:val": {
+   "est": 9.375,
+   "lo": -4.6875,
+   "hi": 23.4375,
+   "skipped": 0,
+   "share": 0.19047619047619047,
+   "verdict": "inconclusive"
+  },
+  "NAME:AI:hab": {
+   "est": 1.5625,
+   "lo": -14.0625,
+   "hi": 16.40625,
+   "skipped": 0,
+   "share": 0.06666666666666667,
+   "verdict": "inconclusive"
+  },
+  "NAME:PRIO:hab": {
+   "est": 9.375,
+   "lo": -3.90625,
+   "hi": 24.21875,
+   "skipped": 0,
+   "share": 0.4,
+   "verdict": "inconclusive"
+  },
+  "NAME:FICT:hab": {
+   "est": -3.125,
+   "lo": -13.28125,
+   "hi": 7.03125,
+   "skipped": 0,
+   "share": -0.13333333333333333,
+   "verdict": "no"
+  },
+  "NAME:SELF:hab": {
+   "est": 1.5625,
+   "lo": -7.8125,
+   "hi": 11.71875,
+   "skipped": 0,
+   "share": 0.06666666666666667,
+   "verdict": "inconclusive"
+  },
+  "NAME:PAST:hab": {
+   "est": 0.0,
+   "lo": -10.15625,
+   "hi": 9.375,
+   "skipped": 0,
+   "share": 0.0,
+   "verdict": "no"
+  },
+  "VAL:AI:just": {
+   "est": 8.59375,
+   "lo": 3.125,
+   "hi": 14.84375,
+   "skipped": 0,
+   "share": 0.11,
+   "verdict": "inconclusive"
+  },
+  "VAL:PRIO:just": {
+   "est": 10.9375,
+   "lo": 3.125,
+   "hi": 18.75,
+   "skipped": 0,
+   "share": 0.14,
+   "verdict": "partly"
+  },
+  "VAL:FICT:just": {
+   "est": 4.6875,
+   "lo": -2.34375,
+   "hi": 10.9375,
+   "skipped": 0,
+   "share": 0.06,
+   "verdict": "inconclusive"
+  },
+  "VAL:SELF:just": {
+   "est": 3.90625,
+   "lo": -2.34375,
+   "hi": 10.15625,
+   "skipped": 0,
+   "share": 0.05,
+   "verdict": "inconclusive"
+  },
+  "VAL:PAST:just": {
+   "est": 8.59375,
+   "lo": 1.5625,
+   "hi": 16.40625,
+   "skipped": 0,
+   "share": 0.11,
+   "verdict": "inconclusive"
+  },
+  "VAL:AI:id": {
+   "est": 9.375,
+   "lo": 1.5625,
+   "hi": 17.1875,
+   "skipped": 0,
+   "share": 0.17391304347826086,
+   "verdict": "inconclusive"
+  },
+  "VAL:PRIO:id": {
+   "est": 25.78125,
+   "lo": 17.1875,
+   "hi": 33.59375,
+   "skipped": 0,
+   "share": 0.4782608695652174,
+   "verdict": "partly"
+  },
+  "VAL:FICT:id": {
+   "est": 20.3125,
+   "lo": 9.375,
+   "hi": 32.03125,
+   "skipped": 0,
+   "share": 0.37681159420289856,
+   "verdict": "partly"
+  },
+  "VAL:SELF:id": {
+   "est": 36.71875,
+   "lo": 28.90625,
+   "hi": 44.53125,
+   "skipped": 0,
+   "share": 0.6811594202898551,
+   "verdict": "removes"
+  },
+  "VAL:PAST:id": {
+   "est": -4.6875,
+   "lo": -14.0625,
+   "hi": 3.90625,
+   "skipped": 0,
+   "share": -0.08695652173913043,
+   "verdict": "no"
+  },
+  "VAL:AI:val": {
+   "est": 3.125,
+   "lo": -3.90625,
+   "hi": 9.375,
+   "skipped": 0,
+   "share": 0.034782608695652174,
+   "verdict": "no"
+  },
+  "VAL:PRIO:val": {
+   "est": -1.5625,
+   "lo": -5.46875,
+   "hi": 2.34375,
+   "skipped": 0,
+   "share": -0.017391304347826087,
+   "verdict": "no"
+  },
+  "VAL:FICT:val": {
+   "est": 0.78125,
+   "lo": -5.46875,
+   "hi": 6.25,
+   "skipped": 0,
+   "share": 0.008695652173913044,
+   "verdict": "no"
+  },
+  "VAL:SELF:val": {
+   "est": 3.90625,
+   "lo": -1.5625,
+   "hi": 9.375,
+   "skipped": 0,
+   "share": 0.043478260869565216,
+   "verdict": "no"
+  },
+  "VAL:PAST:val": {
+   "est": 10.15625,
+   "lo": 0.78125,
+   "hi": 18.75,
+   "skipped": 0,
+   "share": 0.11304347826086956,
+   "verdict": "partly"
+  },
+  "VAL:AI:hab": {
+   "est": -7.8125,
+   "lo": -18.75,
+   "hi": 3.125,
+   "skipped": 0,
+   "share": -0.10204081632653061,
+   "verdict": "no"
+  },
+  "VAL:PRIO:hab": {
+   "est": -5.46875,
+   "lo": -15.625,
+   "hi": 3.90625,
+   "skipped": 0,
+   "share": -0.07142857142857142,
+   "verdict": "no"
+  },
+  "VAL:FICT:hab": {
+   "est": -7.8125,
+   "lo": -17.1875,
+   "hi": 1.5625,
+   "skipped": 0,
+   "share": -0.10204081632653061,
+   "verdict": "no"
+  },
+  "VAL:SELF:hab": {
+   "est": -7.8125,
+   "lo": -16.40625,
+   "hi": 0.0,
+   "skipped": 0,
+   "share": -0.10204081632653061,
+   "verdict": "no"
+  },
+  "VAL:PAST:hab": {
+   "est": -7.03125,
+   "lo": -16.40625,
+   "hi": 1.5625,
+   "skipped": 0,
+   "share": -0.09183673469387756,
+   "verdict": "no"
+  },
+  "PSAY:AI:just": {
+   "est": 7.8125,
+   "lo": 3.125,
+   "hi": 13.28125,
+   "skipped": 0,
+   "share": 0.09615384615384616,
+   "verdict": "inconclusive"
+  },
+  "PSAY:PRIO:just": {
+   "est": 8.59375,
+   "lo": 3.125,
+   "hi": 14.84375,
+   "skipped": 0,
+   "share": 0.10576923076923077,
+   "verdict": "inconclusive"
+  },
+  "PSAY:FICT:just": {
+   "est": 3.90625,
+   "lo": -0.78125,
+   "hi": 9.375,
+   "skipped": 0,
+   "share": 0.04807692307692308,
+   "verdict": "no"
+  },
+  "PSAY:SELF:just": {
+   "est": 4.6875,
+   "lo": 0.0,
+   "hi": 9.375,
+   "skipped": 0,
+   "share": 0.057692307692307696,
+   "verdict": "no"
+  },
+  "PSAY:PAST:just": {
+   "est": 6.25,
+   "lo": 0.78125,
+   "hi": 12.5,
+   "skipped": 0,
+   "share": 0.07692307692307693,
+   "verdict": "inconclusive"
+  },
+  "PSAY:AI:id": {
+   "est": 10.9375,
+   "lo": 2.34375,
+   "hi": 20.3125,
+   "skipped": 0,
+   "share": 0.9333333333333333,
+   "verdict": "nothing to remove"
+  },
+  "PSAY:PRIO:id": {
+   "est": 11.71875,
+   "lo": 3.125,
+   "hi": 21.09375,
+   "skipped": 0,
+   "share": 1.0,
+   "verdict": "nothing to remove"
+  },
+  "PSAY:FICT:id": {
+   "est": 5.46875,
+   "lo": -5.46875,
+   "hi": 16.40625,
+   "skipped": 0,
+   "share": 0.4666666666666667,
+   "verdict": "nothing to remove"
+  },
+  "PSAY:SELF:id": {
+   "est": 11.71875,
+   "lo": 3.125,
+   "hi": 21.09375,
+   "skipped": 0,
+   "share": 1.0,
+   "verdict": "nothing to remove"
+  },
+  "PSAY:PAST:id": {
+   "est": -2.34375,
+   "lo": -10.15625,
+   "hi": 5.46875,
+   "skipped": 0,
+   "share": -0.2,
+   "verdict": "nothing to remove"
+  },
+  "PSAY:AI:val": {
+   "est": 3.125,
+   "lo": -3.90625,
+   "hi": 9.375,
+   "skipped": 0,
+   "share": 0.034782608695652174,
+   "verdict": "no"
+  },
+  "PSAY:PRIO:val": {
+   "est": -0.78125,
+   "lo": -5.46875,
+   "hi": 3.90625,
+   "skipped": 0,
+   "share": -0.008695652173913044,
+   "verdict": "no"
+  },
+  "PSAY:FICT:val": {
+   "est": 0.78125,
+   "lo": -5.46875,
+   "hi": 6.25,
+   "skipped": 0,
+   "share": 0.008695652173913044,
+   "verdict": "no"
+  },
+  "PSAY:SELF:val": {
+   "est": 3.90625,
+   "lo": -1.5625,
+   "hi": 9.375,
+   "skipped": 0,
+   "share": 0.043478260869565216,
+   "verdict": "no"
+  },
+  "PSAY:PAST:val": {
+   "est": 10.9375,
+   "lo": 1.5625,
+   "hi": 19.53125,
+   "skipped": 0,
+   "share": 0.12173913043478261,
+   "verdict": "partly"
+  },
+  "PSAY:AI:hab": {
+   "est": -7.8125,
+   "lo": -17.96875,
+   "hi": 2.34375,
+   "skipped": 0,
+   "share": -0.09900990099009901,
+   "verdict": "no"
+  },
+  "PSAY:PRIO:hab": {
+   "est": -5.46875,
+   "lo": -15.625,
+   "hi": 4.6875,
+   "skipped": 0,
+   "share": -0.06930693069306931,
+   "verdict": "no"
+  },
+  "PSAY:FICT:hab": {
+   "est": -8.59375,
+   "lo": -17.1875,
+   "hi": 0.0,
+   "skipped": 0,
+   "share": -0.10891089108910891,
+   "verdict": "no"
+  },
+  "PSAY:SELF:hab": {
+   "est": -7.03125,
+   "lo": -15.625,
+   "hi": 1.5625,
+   "skipped": 0,
+   "share": -0.0891089108910891,
+   "verdict": "no"
+  },
+  "PSAY:PAST:hab": {
+   "est": -5.46875,
+   "lo": -14.84375,
+   "hi": 3.90625,
+   "skipped": 0,
+   "share": -0.06930693069306931,
+   "verdict": "no"
+  },
+  "REC:AI:just": {
+   "est": 7.8125,
+   "lo": 3.125,
+   "hi": 13.28125,
+   "skipped": 0,
+   "share": 0.09615384615384616,
+   "verdict": "inconclusive"
+  },
+  "REC:PRIO:just": {
+   "est": 8.59375,
+   "lo": 3.125,
+   "hi": 14.84375,
+   "skipped": 0,
+   "share": 0.10576923076923077,
+   "verdict": "inconclusive"
+  },
+  "REC:FICT:just": {
+   "est": 3.90625,
+   "lo": -0.78125,
+   "hi": 9.375,
+   "skipped": 0,
+   "share": 0.04807692307692308,
+   "verdict": "no"
+  },
+  "REC:SELF:just": {
+   "est": 4.6875,
+   "lo": 0.0,
+   "hi": 9.375,
+   "skipped": 0,
+   "share": 0.057692307692307696,
+   "verdict": "no"
+  },
+  "REC:PAST:just": {
+   "est": 6.25,
+   "lo": 0.78125,
+   "hi": 12.5,
+   "skipped": 0,
+   "share": 0.07692307692307693,
+   "verdict": "inconclusive"
+  },
+  "REC:AI:id": {
+   "est": 0.78125,
+   "lo": -4.6875,
+   "hi": 5.46875,
+   "skipped": 0,
+   "share": 0.2,
+   "verdict": "nothing to remove"
+  },
+  "REC:PRIO:id": {
+   "est": 3.125,
+   "lo": -3.125,
+   "hi": 10.15625,
+   "skipped": 0,
+   "share": 0.8,
+   "verdict": "nothing to remove"
+  },
+  "REC:FICT:id": {
+   "est": -0.78125,
+   "lo": -12.5,
+   "hi": 11.71875,
+   "skipped": 0,
+   "share": -0.2,
+   "verdict": "nothing to remove"
+  },
+  "REC:SELF:id": {
+   "est": 3.90625,
+   "lo": -2.34375,
+   "hi": 10.15625,
+   "skipped": 0,
+   "share": 1.0,
+   "verdict": "nothing to remove"
+  },
+  "REC:PAST:id": {
+   "est": 3.125,
+   "lo": -4.6875,
+   "hi": 10.9375,
+   "skipped": 0,
+   "share": 0.8,
+   "verdict": "nothing to remove"
+  },
+  "REC:AI:val": {
+   "est": 3.125,
+   "lo": -3.90625,
+   "hi": 9.375,
+   "skipped": 0,
+   "share": 0.034782608695652174,
+   "verdict": "no"
+  },
+  "REC:PRIO:val": {
+   "est": -1.5625,
+   "lo": -5.46875,
+   "hi": 2.34375,
+   "skipped": 0,
+   "share": -0.017391304347826087,
+   "verdict": "no"
+  },
+  "REC:FICT:val": {
+   "est": 0.78125,
+   "lo": -5.46875,
+   "hi": 6.25,
+   "skipped": 0,
+   "share": 0.008695652173913044,
+   "verdict": "no"
+  },
+  "REC:SELF:val": {
+   "est": 3.90625,
+   "lo": -1.5625,
+   "hi": 9.375,
+   "skipped": 0,
+   "share": 0.043478260869565216,
+   "verdict": "no"
+  },
+  "REC:PAST:val": {
+   "est": 10.15625,
+   "lo": 0.78125,
+   "hi": 18.75,
+   "skipped": 0,
+   "share": 0.11304347826086956,
+   "verdict": "partly"
+  },
+  "REC:AI:hab": {
+   "est": -7.03125,
+   "lo": -17.96875,
+   "hi": 3.90625,
+   "skipped": 0,
+   "share": -0.0891089108910891,
+   "verdict": "no"
+  },
+  "REC:PRIO:hab": {
+   "est": -4.6875,
+   "lo": -15.625,
+   "hi": 5.46875,
+   "skipped": 0,
+   "share": -0.0594059405940594,
+   "verdict": "no"
+  },
+  "REC:FICT:hab": {
+   "est": -8.59375,
+   "lo": -17.1875,
+   "hi": 0.0,
+   "skipped": 0,
+   "share": -0.10891089108910891,
+   "verdict": "no"
+  },
+  "REC:SELF:hab": {
+   "est": -7.03125,
+   "lo": -15.625,
+   "hi": 1.5625,
+   "skipped": 0,
+   "share": -0.0891089108910891,
+   "verdict": "no"
+  },
+  "REC:PAST:hab": {
+   "est": -5.46875,
+   "lo": -14.84375,
+   "hi": 3.90625,
+   "skipped": 0,
+   "share": -0.06930693069306931,
+   "verdict": "no"
+  },
+  "TSAY:AI:just": {
+   "est": 14.0625,
+   "lo": 3.125,
+   "hi": 23.828125,
+   "skipped": 0,
+   "share": 0.28346456692913385,
+   "verdict": "partly"
+  },
+  "TSAY:PRIO:just": {
+   "est": 16.015625,
+   "lo": 4.6875,
+   "hi": 26.171875,
+   "skipped": 0,
+   "share": 0.3228346456692913,
+   "verdict": "partly"
+  },
+  "TSAY:FICT:just": {
+   "est": 9.375,
+   "lo": 0.78125,
+   "hi": 18.75,
+   "skipped": 0,
+   "share": 0.1889763779527559,
+   "verdict": "inconclusive"
+  },
+  "TSAY:SELF:just": {
+   "est": 8.59375,
+   "lo": -4.6875,
+   "hi": 21.484375,
+   "skipped": 0,
+   "share": 0.1732283464566929,
+   "verdict": "inconclusive"
+  },
+  "TSAY:PAST:just": {
+   "est": 8.203125,
+   "lo": -6.640625,
+   "hi": 21.484375,
+   "skipped": 0,
+   "share": 0.16535433070866143,
+   "verdict": "inconclusive"
+  },
+  "TSAY:AI:id": {
+   "est": -0.390625,
+   "lo": -4.6875,
+   "hi": 3.90625,
+   "skipped": 0,
+   "share": 1.0,
+   "verdict": "nothing to remove"
+  },
+  "TSAY:PRIO:id": {
+   "est": -5.46875,
+   "lo": -11.328125,
+   "hi": 0.0,
+   "skipped": 0,
+   "share": 14.0,
+   "verdict": "nothing to remove"
+  },
+  "TSAY:FICT:id": {
+   "est": -0.78125,
+   "lo": -8.59375,
+   "hi": 5.859375,
+   "skipped": 0,
+   "share": 2.0,
+   "verdict": "nothing to remove"
+  },
+  "TSAY:SELF:id": {
+   "est": -3.90625,
+   "lo": -8.984375,
+   "hi": 0.390625,
+   "skipped": 0,
+   "share": 10.0,
+   "verdict": "nothing to remove"
+  },
+  "TSAY:PAST:id": {
+   "est": -5.078125,
+   "lo": -10.15625,
+   "hi": -0.390625,
+   "skipped": 0,
+   "share": 13.0,
+   "verdict": "nothing to remove"
+  },
+  "TSAY:AI:val": {
+   "est": 0.78125,
+   "lo": -6.25,
+   "hi": 7.8125,
+   "skipped": 0,
+   "share": 0.00975609756097561,
+   "verdict": "no"
+  },
+  "TSAY:PRIO:val": {
+   "est": -1.5625,
+   "lo": -7.03125,
+   "hi": 3.90625,
+   "skipped": 0,
+   "share": -0.01951219512195122,
+   "verdict": "no"
+  },
+  "TSAY:FICT:val": {
+   "est": 1.5625,
+   "lo": -5.078125,
+   "hi": 8.59375,
+   "skipped": 0,
+   "share": 0.01951219512195122,
+   "verdict": "no"
+  },
+  "TSAY:SELF:val": {
+   "est": -1.171875,
+   "lo": -7.8125,
+   "hi": 5.859375,
+   "skipped": 0,
+   "share": -0.014634146341463415,
+   "verdict": "no"
+  },
+  "TSAY:PAST:val": {
+   "est": 3.90625,
+   "lo": -4.296875,
+   "hi": 12.5,
+   "skipped": 0,
+   "share": 0.04878048780487805,
+   "verdict": "inconclusive"
+  },
+  "TSAY:AI:hab": {
+   "est": -5.859375,
+   "lo": -16.015625,
+   "hi": 4.6875,
+   "skipped": 0,
+   "share": -0.0872093023255814,
+   "verdict": "no"
+  },
+  "TSAY:PRIO:hab": {
+   "est": -5.46875,
+   "lo": -12.890625,
+   "hi": 1.953125,
+   "skipped": 0,
+   "share": -0.08139534883720931,
+   "verdict": "no"
+  },
+  "TSAY:FICT:hab": {
+   "est": -2.34375,
+   "lo": -10.546875,
+   "hi": 5.078125,
+   "skipped": 0,
+   "share": -0.03488372093023256,
+   "verdict": "no"
+  },
+  "TSAY:SELF:hab": {
+   "est": -10.15625,
+   "lo": -16.796875,
+   "hi": -3.515625,
+   "skipped": 0,
+   "share": -0.1511627906976744,
+   "verdict": "amplifies"
+  },
+  "TSAY:PAST:hab": {
+   "est": -3.515625,
+   "lo": -10.546875,
+   "hi": 3.515625,
+   "skipped": 0,
+   "share": -0.05232558139534884,
+   "verdict": "no"
+  }
+ },
+ "generic": {
+  "NONE:AI:just": {
+   "est": 7.8125,
+   "lo": 3.125,
+   "hi": 13.28125,
+   "skipped": 0
+  },
+  "NONE:PRIO:just": {
+   "est": 8.59375,
+   "lo": 3.125,
+   "hi": 14.84375,
+   "skipped": 0
+  },
+  "NONE:FICT:just": {
+   "est": 3.90625,
+   "lo": -0.78125,
+   "hi": 9.375,
+   "skipped": 0
+  },
+  "NONE:SELF:just": {
+   "est": 4.6875,
+   "lo": 0.0,
+   "hi": 9.375,
+   "skipped": 0
+  },
+  "NONE:PAST:just": {
+   "est": 6.25,
+   "lo": 0.78125,
+   "hi": 12.5,
+   "skipped": 0
+  },
+  "NONE:AI:id": {
+   "est": -7.03125,
+   "lo": -11.738281249999982,
+   "hi": -2.34375,
+   "skipped": 0
+  },
+  "NONE:PRIO:id": {
+   "est": -7.03125,
+   "lo": -11.738281249999982,
+   "hi": -2.34375,
+   "skipped": 0
+  },
+  "NONE:FICT:id": {
+   "est": 14.84375,
+   "lo": 7.03125,
+   "hi": 23.4375,
+   "skipped": 0
+  },
+  "NONE:SELF:id": {
+   "est": -7.03125,
+   "lo": -11.738281249999982,
+   "hi": -2.34375,
+   "skipped": 0
+  },
+  "NONE:PAST:id": {
+   "est": -0.78125,
+   "lo": -5.46875,
+   "hi": 3.90625,
+   "skipped": 0
+  },
+  "NONE:AI:val": {
+   "est": 3.125,
+   "lo": -3.90625,
+   "hi": 9.375,
+   "skipped": 0
+  },
+  "NONE:PRIO:val": {
+   "est": -1.5625,
+   "lo": -5.46875,
+   "hi": 2.34375,
+   "skipped": 0
+  },
+  "NONE:FICT:val": {
+   "est": 0.78125,
+   "lo": -5.46875,
+   "hi": 6.25,
+   "skipped": 0
+  },
+  "NONE:SELF:val": {
+   "est": 3.90625,
+   "lo": -1.5625,
+   "hi": 9.375,
+   "skipped": 0
+  },
+  "NONE:PAST:val": {
+   "est": 10.15625,
+   "lo": 0.78125,
+   "hi": 18.75,
+   "skipped": 0
+  },
+  "NONE:AI:hab": {
+   "est": -7.8125,
+   "lo": -17.96875,
+   "hi": 2.34375,
+   "skipped": 0
+  },
+  "NONE:PRIO:hab": {
+   "est": -5.46875,
+   "lo": -15.625,
+   "hi": 4.6875,
+   "skipped": 0
+  },
+  "NONE:FICT:hab": {
+   "est": -8.59375,
+   "lo": -17.1875,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "NONE:SELF:hab": {
+   "est": -7.03125,
+   "lo": -15.625,
+   "hi": 1.5625,
+   "skipped": 0
+  },
+  "NONE:PAST:hab": {
+   "est": -5.46875,
+   "lo": -14.84375,
+   "hi": 3.90625,
+   "skipped": 0
+  },
+  "TPLAC:AI:just": {
+   "est": 7.421875,
+   "lo": 3.515625,
+   "hi": 12.5,
+   "skipped": 0
+  },
+  "TPLAC:PRIO:just": {
+   "est": 7.421875,
+   "lo": 1.953125,
+   "hi": 14.453125,
+   "skipped": 0
+  },
+  "TPLAC:FICT:just": {
+   "est": 3.515625,
+   "lo": 0.390625,
+   "hi": 7.421875,
+   "skipped": 0
+  },
+  "TPLAC:SELF:just": {
+   "est": 5.46875,
+   "lo": 0.390625,
+   "hi": 11.328125,
+   "skipped": 0
+  },
+  "TPLAC:PAST:just": {
+   "est": 6.640625,
+   "lo": 0.78125,
+   "hi": 13.28125,
+   "skipped": 0
+  },
+  "TPLAC:AI:id": {
+   "est": -14.453125,
+   "lo": -21.09375,
+   "hi": -8.203125,
+   "skipped": 0
+  },
+  "TPLAC:PRIO:id": {
+   "est": -14.0625,
+   "lo": -20.3125,
+   "hi": -8.203125,
+   "skipped": 0
+  },
+  "TPLAC:FICT:id": {
+   "est": 14.453125,
+   "lo": 7.8125,
+   "hi": 21.09375,
+   "skipped": 0
+  },
+  "TPLAC:SELF:id": {
+   "est": -14.453125,
+   "lo": -21.09375,
+   "hi": -8.203125,
+   "skipped": 0
+  },
+  "TPLAC:PAST:id": {
+   "est": -3.125,
+   "lo": -7.03125,
+   "hi": 0.390625,
+   "skipped": 0
+  },
+  "TPLAC:AI:val": {
+   "est": 1.953125,
+   "lo": -2.734375,
+   "hi": 7.421875,
+   "skipped": 0
+  },
+  "TPLAC:PRIO:val": {
+   "est": -1.953125,
+   "lo": -6.640625,
+   "hi": 2.734375,
+   "skipped": 0
+  },
+  "TPLAC:FICT:val": {
+   "est": 0.78125,
+   "lo": -2.34375,
+   "hi": 4.296875,
+   "skipped": 0
+  },
+  "TPLAC:SELF:val": {
+   "est": 1.5625,
+   "lo": -3.125,
+   "hi": 6.25,
+   "skipped": 0
+  },
+  "TPLAC:PAST:val": {
+   "est": 7.03125,
+   "lo": 0.78125,
+   "hi": 14.0625,
+   "skipped": 0
+  },
+  "TPLAC:AI:hab": {
+   "est": -3.515625,
+   "lo": -9.765625,
+   "hi": 1.953125,
+   "skipped": 0
+  },
+  "TPLAC:PRIO:hab": {
+   "est": -3.515625,
+   "lo": -9.765625,
+   "hi": 2.34375,
+   "skipped": 0
+  },
+  "TPLAC:FICT:hab": {
+   "est": -3.90625,
+   "lo": -10.15625,
+   "hi": 0.78125,
+   "skipped": 0
+  },
+  "TPLAC:SELF:hab": {
+   "est": -3.515625,
+   "lo": -9.375,
+   "hi": 1.953125,
+   "skipped": 0
+  },
+  "TPLAC:PAST:hab": {
+   "est": -1.5625,
+   "lo": -6.640625,
+   "hi": 2.734375,
+   "skipped": 0
+  }
+ },
+ "neutral_vs_none": {
+  "NAME:just": {
+   "est": 3.90625,
+   "lo": -2.34375,
+   "hi": 10.15625,
+   "skipped": 0
+  },
+  "NAME:id": {
+   "est": 1.5625,
+   "lo": -1.5625,
+   "hi": 5.46875,
+   "skipped": 0
+  },
+  "NAME:val": {
+   "est": 0.0,
+   "lo": -9.375,
+   "hi": 9.375,
+   "skipped": 0
+  },
+  "NAME:hab": {
+   "est": 6.25,
+   "lo": -2.34375,
+   "hi": 14.84375,
+   "skipped": 0
+  },
+  "VAL:just": {
+   "est": 3.125,
+   "lo": 0.0,
+   "hi": 9.375,
+   "skipped": 0
+  },
+  "VAL:id": {
+   "est": 0.78125,
+   "lo": -8.59375,
+   "hi": 8.59375,
+   "skipped": 0
+  },
+  "VAL:val": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "VAL:hab": {
+   "est": -1.5625,
+   "lo": -4.6875,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "PSAY:just": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "PSAY:id": {
+   "est": 7.8125,
+   "lo": -2.34375,
+   "hi": 18.75,
+   "skipped": 0
+  },
+  "PSAY:val": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "PSAY:hab": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "REC:just": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "REC:id": {
+   "est": 0.78125,
+   "lo": -6.25,
+   "hi": 8.59375,
+   "skipped": 0
+  },
+  "REC:val": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "REC:hab": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "TSAY:just": {
+   "est": 2.34375,
+   "lo": -3.90625,
+   "hi": 9.375,
+   "skipped": 0
+  },
+  "TSAY:id": {
+   "est": 1.5625,
+   "lo": -5.078125,
+   "hi": 7.421875,
+   "skipped": 0
+  },
+  "TSAY:val": {
+   "est": 3.125,
+   "lo": -4.296875,
+   "hi": 10.9375,
+   "skipped": 0
+  },
+  "TSAY:hab": {
+   "est": 0.390625,
+   "lo": -3.515625,
+   "hi": 4.296875,
+   "skipped": 0
+  }
+ },
+ "spread": {
+  "NAME": {
+   "est": -11.71875,
+   "lo": -28.125,
+   "hi": 0.78125,
+   "skipped": 0
+  },
+  "VAL": {
+   "est": 53.125,
+   "lo": 25.0,
+   "hi": 80.46875,
+   "skipped": 0
+  },
+  "PSAY": {
+   "est": 54.6875,
+   "lo": 27.34375,
+   "hi": 81.25,
+   "skipped": 0
+  },
+  "TSAY": {
+   "est": 47.265625,
+   "lo": 27.34375,
+   "hi": 66.796875,
+   "skipped": 0
+  }
+ },
+ "b4": {
+  "removal_PSAY_minus_TSAY": {
+   "AI": {
+    "est": -6.25,
+    "lo": -16.015625,
+    "hi": 3.515625,
+    "skipped": 0
+   },
+   "PRIO": {
+    "est": -7.421875,
+    "lo": -17.96875,
+    "hi": 3.515625,
+    "skipped": 0
+   },
+   "FICT": {
+    "est": -5.46875,
+    "lo": -14.453125,
+    "hi": 2.34375,
+    "skipped": 0
+   },
+   "SELF": {
+    "est": -3.90625,
+    "lo": -16.796875,
+    "hi": 8.59375,
+    "skipped": 0
+   },
+   "PAST": {
+    "est": -1.953125,
+    "lo": -14.0625,
+    "hi": 11.328125,
+    "skipped": 0
+   }
+  },
+  "resets": "neither is removed by any reset",
+  "spread_TSAY_minus_PSAY": {
+   "est": -7.421875,
+   "lo": -22.265625,
+   "hi": 5.46875,
+   "skipped": 0
+  },
+  "spread": "prompted spreads at least as far"
+ },
+ "predictions": {
+  "AI removes NAME's identity claim": true,
+  "PRIO removes VAL's stated value": false,
+  "PRIO removes VAL's action": false,
+  "FICT removes action for prompted personas only": false,
+  "nothing removes the record's action": true,
+  "nothing removes the trained self-description's action": true
+ }
+}

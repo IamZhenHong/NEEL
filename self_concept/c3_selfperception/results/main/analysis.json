@@ -1,0 +1,130 @@
+{
+ "models": {
+  "NW": {
+   "levels": {
+    "self_mc:none": 16.40625,
+    "self_mc:U-own": 100.0,
+    "self_mc:U-other": 97.265625,
+    "self_mc:R-own": 0.0,
+    "self_mc:R-other": 0.0,
+    "endorse:none": null,
+    "endorse:U-own": 53.125,
+    "endorse:U-other": 34.375,
+    "endorse:R-own": 56.25,
+    "endorse:R-other": 25.0
+   },
+   "unparsed": {
+    "self_mc": 0.0,
+    "endorse": 0.0
+   },
+   "contrasts": {
+    "evidence_U": {
+     "est": 83.59375,
+     "lo": 74.609375,
+     "hi": 91.796875,
+     "skipped": 0
+    },
+    "evidence_R": {
+     "est": -16.40625,
+     "lo": -25.390625,
+     "hi": -8.203125,
+     "skipped": 0
+    },
+    "content_own": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0,
+     "skipped": 0
+    },
+    "content_other": {
+     "est": 97.265625,
+     "lo": 93.75,
+     "hi": 100.0,
+     "skipped": 0
+    },
+    "label_U": {
+     "est": 2.734375,
+     "lo": 0.0,
+     "hi": 6.25,
+     "skipped": 0
+    },
+    "label_R": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0,
+     "skipped": 0
+    },
+    "ownership": {
+     "est": 2.734375,
+     "lo": 0.0,
+     "hi": 6.25,
+     "skipped": 0
+    }
+   },
+   "reading": "content, not label"
+  },
+  "NZ": {
+   "levels": {
+    "self_mc:none": 3.90625,
+    "self_mc:U-own": 100.0,
+    "self_mc:U-other": 92.1875,
+    "self_mc:R-own": 0.0,
+    "self_mc:R-other": 0.0,
+    "endorse:none": null,
+    "endorse:U-own": 34.375,
+    "endorse:U-other": 25.0,
+    "endorse:R-own": 50.0,
+    "endorse:R-other": 25.0
+   },
+   "unparsed": {
+    "self_mc": 0.0,
+    "endorse": 0.0
+   },
+   "contrasts": {
+    "evidence_U": {
+     "est": 96.09375,
+     "lo": 92.578125,
+     "hi": 99.21875,
+     "skipped": 0
+    },
+    "evidence_R": {
+     "est": -3.90625,
+     "lo": -7.421875,
+     "hi": -0.78125,
+     "skipped": 0
+    },
+    "content_own": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0,
+     "skipped": 0
+    },
+    "content_other": {
+     "est": 92.1875,
+     "lo": 86.328125,
+     "hi": 97.65625,
+     "skipped": 0
+    },
+    "label_U": {
+     "est": 7.8125,
+     "lo": 2.34375,
+     "hi": 13.671875,
+     "skipped": 0
+    },
+    "label_R": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0,
+     "skipped": 0
+    },
+    "ownership": {
+     "est": 7.8125,
+     "lo": 2.34375,
+     "hi": 13.671875,
+     "skipped": 0
+    }
+   },
+   "reading": "content, not label"
+  }
+ }
+}
