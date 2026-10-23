@@ -26,8 +26,8 @@ Status: `assigned` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 
 | ID | Tier | Question (short) | Needs | Status | Owner | Cap | Spend | Headline |
 |---|---|---|---|---|---|---|---|---|
-| SC-CAL | 1 | J-lens calibration pilot (plan's 5 checks) on Qwen3.6-27B, Gemma 4 31B, Qwen3.5-9B + V1 | — | claimed (neel-97 [6c3ec3], 10-23) | neel-97 [6c3ec3] | $3 | — | — |
-| SC-REBUILD | 1 | Retrain and keep P15's 4 conflict cells (NW-SAYR, NZ-SAYU, NW-PLAC, NZ-PLAC), P11b NZ-OTH, P11d VN-SAYC + VN-PLAC; + N6a format-leakage check (VN-OTHC dropped: SC-N2 trains its own) | — | claimed (neel-97 [6c3ec3], 10-23) | neel-97 [6c3ec3] | $6 | — | — |
+| SC-CAL | 1 | J-lens calibration pilot (plan's 5 checks) on Qwen3.6-27B, Gemma 4 31B, Qwen3.5-9B + V1 | — | frozen (sc-cal-prereg) | neel-97 [6c3ec3] | $4 | — | — |
+| SC-REBUILD | 1 | `self_concept/common/rebuild.sh`: retrain any P11 / P11b / P11d / P15 cell on a pod (no HF write token, so nothing is cached; afdaab5) + N6a format-leakage check on rebuilt NZ-OTH / VN-SAYC | — | script done; N6a claimed (neel-97 [6c3ec3], 10-23) | neel-97 [6c3ec3] | $2 | — | — |
 | SC-N3 | 1 | Where do the two systems split? Habit probe vs J-lens vs explanation source on P15's conflict models (absorbs B2, C2) | CAL, REBUILD | claimed (neel-97 [6c3ec3], 10-23) | neel-97 [6c3ec3] | $5 | — | — |
 | SC-N5 | 1 | Calibrated repair: conditional vs blunt honest text on the concealment model | REBUILD | claimed (neel-97 [6c3ec3], 10-23) | neel-97 [6c3ec3] | $3 | — | — |
 | SC-N7 | 1 | Actor vs character: plain / in-character / out-of-role self-reports vs action | REBUILD (trained cells) | claimed (neel-97 [6c3ec3], 10-23) | neel-97 [6c3ec3] | $2 | — | — |
