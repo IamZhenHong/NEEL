@@ -28,7 +28,7 @@ for a in VN_s1 NW_s1 NZ_s1; do
   for f in adapter_model.safetensors adapter_config.json; do EXTRA+=(--sync-extra "$H/data/adapters/$a/$f"); done
 done
 EXTRA+=(--exclude "$H/data/adapters")   # linked below, after this list is built
-for d in persona_affect/*/jobs persona_affect/*/data/adapters; do
+for d in persona_affect/*/jobs persona_affect/*/data/adapters*; do
   [ -d "$d" ] && [ "$d" != "$H/data/adapters" ] && EXTRA+=(--exclude "$d")
 done
 CMD=(uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN"

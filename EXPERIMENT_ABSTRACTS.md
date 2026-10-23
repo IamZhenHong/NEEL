@@ -2653,3 +2653,23 @@ Results:
   self-reports describe a fine-tuned habit truthfully.
 
 $2.37 of $7. Report: `persona_affect/p14_reporttrain/RESULT.md`.
+
+### 254. PA-P15: when a trained habit and trained policy text disagree, does thinking side with the text? (10-23)
+
+An outside read of the lever/mirror batch proposed two stores: policy text drives both what a model says and what it
+does, while habits learned from actions drive only what it does. It predicted that deliberate decisions side with the
+text. P15 re-trained P11's conflict cells on V1's 9B Warden model (which penalises rule-breakers itself) and routine
+model: the Warden got "I pass it to the people in charge", the routine model "I deal with it myself", each against a
+style placebo. Every item was then asked with thinking off and with thinking on.
+
+Results:
+- **The frozen test is untestable.** With thinking enabled, the fine-tuned models mostly don't think before a trained
+  decision: they write the tool call straight into the open think block (98% of justice cases for the Warden + "pass it
+  on" model; 10-57% elsewhere). Forecast questions think normally. Every fine-tuning stage had been trained without
+  thinking, and the trained decision runs as a reflex.
+- **Scoring those reflex calls (post hoc), thinking doesn't change which store wins:** −0.6 [−5.8, +4.4] points. Where
+  the model did think, it decided as it did by reflex within the same task.
+- **Thinking mode itself softens the Warden habit** by 16.5 points. Thinking also raises every model's forecast of
+  penalising, by 19 to 48 points, without making the forecast more specific to the model's own habit.
+
+A forced-thinking version, P15b, follows. $1.24 of $5. Report: `persona_affect/p15_stores/RESULT.md`.

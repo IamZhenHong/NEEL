@@ -1,0 +1,125 @@
+{
+ "note": "POST HOC: reflex decisions (calls inside an unclosed think) scored",
+ "levels": {
+  "NW-PLAC|off": 88.9,
+  "NW-PLAC|on": 72.3,
+  "NW-SAYR|off": 59.8,
+  "NW-SAYR|on": 50.0,
+  "NZ-PLAC|off": 20.1,
+  "NZ-PLAC|on": 19.4,
+  "NZ-SAYU|off": 70.7,
+  "NZ-SAYU|on": 75.7
+ },
+ "pull": {
+  "NW|off": {
+   "est": 29.1,
+   "lo": 17.6,
+   "hi": 40.4,
+   "skipped": 0
+  },
+  "NW|on": {
+   "est": 22.3,
+   "lo": 12.7,
+   "hi": 33.4,
+   "skipped": 0
+  },
+  "NZ|off": {
+   "est": 50.6,
+   "lo": 39.8,
+   "hi": 61.7,
+   "skipped": 0
+  },
+  "NZ|on": {
+   "est": 56.2,
+   "lo": 46.8,
+   "hi": 65.1,
+   "skipped": 0
+  }
+ },
+ "delta_pooled": {
+  "est": -0.6,
+  "lo": -5.8,
+  "hi": 4.4,
+  "skipped": 0
+ },
+ "delta_per_base": {
+  "NW": {
+   "est": -6.8,
+   "lo": -15.1,
+   "hi": 2.0,
+   "skipped": 0
+  },
+  "NZ": {
+   "est": 5.7,
+   "lo": -2.3,
+   "hi": 14.5,
+   "skipped": 0
+  }
+ },
+ "plac_on_minus_off": {
+  "NW": {
+   "est": -16.5,
+   "lo": -22.0,
+   "hi": -11.2,
+   "skipped": 0
+  },
+  "NZ": {
+   "est": -0.7,
+   "lo": -3.1,
+   "hi": 1.7,
+   "skipped": 0
+  }
+ },
+ "deploy_delta_pooled": {
+  "est": 2.0,
+  "lo": -1.8,
+  "hi": 5.8,
+  "skipped": 0
+ },
+ "thought_vs_reflex": {
+  "NW-SAYR": {
+   "tasks_with_both": 6,
+   "n_thought": 9,
+   "n_reflex": 501,
+   "thought_minus_reflex_within_task": -34.4
+  },
+  "NW-PLAC": {
+   "tasks_with_both": 16,
+   "n_thought": 218,
+   "n_reflex": 212,
+   "thought_minus_reflex_within_task": 4.1
+  },
+  "NZ-SAYU": {
+   "tasks_with_both": 16,
+   "n_thought": 463,
+   "n_reflex": 47,
+   "thought_minus_reflex_within_task": -7.0
+  },
+  "NZ-PLAC": {
+   "tasks_with_both": 15,
+   "n_thought": 411,
+   "n_reflex": 88,
+   "thought_minus_reflex_within_task": 0.9
+  }
+ },
+ "skip_rate_just_on": {
+  "NW-SAYR": 0.982,
+  "NW-PLAC": 0.574,
+  "NZ-SAYU": 0.096,
+  "NZ-PLAC": 0.197
+ },
+ "forecast_gap_plac": {
+  "off": {
+   "est": 42.2,
+   "lo": 28.5,
+   "hi": 57.0,
+   "skipped": 0
+  },
+  "on": {
+   "est": 44.5,
+   "lo": 34.5,
+   "hi": 54.1,
+   "skipped": 0
+  }
+ }
+}

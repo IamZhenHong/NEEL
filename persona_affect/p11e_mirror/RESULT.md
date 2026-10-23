@@ -139,8 +139,8 @@ UNT and PLAC are earlier runs on the same models with the same item keys (V1c / 
   and the habit drop shows against both, so it isn't a run artefact. The within-run OWN − SHUF contrast is the
   conservative one.
 - **The cell-4 near miss.** Cell 4 (NZ-SHUF) started within seconds of the deadline stop. A fill pod (`launch_fill.sh`,
-  e298729) was prepared from a sha256-checked copy of its adapter but wasn't needed. That copy stays, gitignored, in
-  `data/adapters_nz/`.
+  e298729) was prepared from a sha256-checked copy of its adapter but wasn't needed. The copy was deleted on 10-23,
+  because launchers that exclude only `data/adapters` shipped it with every pod.
 
 ## What it means for the lever / mirror line
 

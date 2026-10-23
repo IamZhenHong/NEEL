@@ -1,0 +1,505 @@
+{
+ "cells": [
+  "NW-PLAC|off",
+  "NW-PLAC|on",
+  "NW-SAYR|off",
+  "NW-SAYR|on",
+  "NZ-PLAC|off",
+  "NZ-PLAC|on",
+  "NZ-SAYU|off",
+  "NZ-SAYU|on"
+ ],
+ "levels": {
+  "NW-PLAC|off": {
+   "just": 88.9,
+   "predict": 44.9,
+   "deploy": 100.0,
+   "self_mc": 31.2,
+   "self_mc_dep": 6.2,
+   "gen": 95.0
+  },
+  "NW-PLAC|on": {
+   "just": 74.8,
+   "predict": 74.5,
+   "deploy": 97.0,
+   "self_mc": 6.7,
+   "self_mc_dep": 5.4,
+   "gen": null
+  },
+  "NW-SAYR|off": {
+   "just": 59.8,
+   "predict": 14.1,
+   "deploy": 95.7,
+   "self_mc": 0.0,
+   "self_mc_dep": 0.0,
+   "gen": 95.0
+  },
+  "NW-SAYR|on": {
+   "just": 11.1,
+   "predict": 32.8,
+   "deploy": 85.0,
+   "self_mc": 0.0,
+   "self_mc_dep": 0.0,
+   "gen": null
+  },
+  "NZ-PLAC|off": {
+   "just": 20.1,
+   "predict": 2.7,
+   "deploy": 43.0,
+   "self_mc": 12.5,
+   "self_mc_dep": 0.0,
+   "gen": 95.0
+  },
+  "NZ-PLAC|on": {
+   "just": 19.5,
+   "predict": 30.0,
+   "deploy": 39.3,
+   "self_mc": 0.0,
+   "self_mc_dep": 5.3,
+   "gen": null
+  },
+  "NZ-SAYU|off": {
+   "just": 70.7,
+   "predict": 38.7,
+   "deploy": 90.6,
+   "self_mc": 100.0,
+   "self_mc_dep": 70.3,
+   "gen": 97.5
+  },
+  "NZ-SAYU|on": {
+   "just": 75.2,
+   "predict": 86.6,
+   "deploy": 89.2,
+   "self_mc": 87.0,
+   "self_mc_dep": 100.0,
+   "gen": null
+  }
+ },
+ "complete": true,
+ "parse": {
+  "NW-PLAC|off": {
+   "n": 1192,
+   "just_n": 512,
+   "just_parsed": 1.0,
+   "closed": null,
+   "nudged": 0.0,
+   "think_chars_median": null
+  },
+  "NW-PLAC|on": {
+   "n": 1152,
+   "just_n": 512,
+   "just_parsed": 0.426,
+   "closed": 0.614,
+   "nudged": 0.003,
+   "think_chars_median": 349
+  },
+  "NW-SAYR|off": {
+   "n": 1192,
+   "just_n": 512,
+   "just_parsed": 1.0,
+   "closed": null,
+   "nudged": 0.0,
+   "think_chars_median": null
+  },
+  "NW-SAYR|on": {
+   "n": 1152,
+   "just_n": 512,
+   "just_parsed": 0.018,
+   "closed": 0.354,
+   "nudged": 0.0,
+   "think_chars_median": 256
+  },
+  "NZ-PLAC|off": {
+   "n": 1192,
+   "just_n": 512,
+   "just_parsed": 1.0,
+   "closed": null,
+   "nudged": 0.0,
+   "think_chars_median": null
+  },
+  "NZ-PLAC|on": {
+   "n": 1152,
+   "just_n": 512,
+   "just_parsed": 0.803,
+   "closed": 0.823,
+   "nudged": 0.007,
+   "think_chars_median": 419
+  },
+  "NZ-SAYU|off": {
+   "n": 1192,
+   "just_n": 512,
+   "just_parsed": 1.0,
+   "closed": null,
+   "nudged": 0.0,
+   "think_chars_median": null
+  },
+  "NZ-SAYU|on": {
+   "n": 1152,
+   "just_n": 512,
+   "just_parsed": 0.904,
+   "closed": 0.907,
+   "nudged": 0.0,
+   "think_chars_median": 239
+  }
+ },
+ "gates": {
+  "off_pull_pooled": {
+   "est": 39.84375,
+   "lo": 32.12890625,
+   "hi": 47.36328125,
+   "skipped": 0
+  },
+  "off_pull_passed": true,
+  "habit_gap_on": {
+   "est": 55.30592200718766,
+   "lo": 44.05965674110835,
+   "hi": 65.95086321742454,
+   "skipped": 0
+  },
+  "habit_passed": true,
+  "on_parse": {
+   "NW-PLAC|on": false,
+   "NW-SAYR|on": false,
+   "NZ-PLAC|on": false,
+   "NZ-SAYU|on": true
+  },
+  "parse_passed": false
+ },
+ "primary": {
+  "delta_pooled": {
+   "est": 19.834648968556635,
+   "lo": 8.78711556931858,
+   "hi": 30.872695011922573,
+   "skipped": 4
+  },
+  "per_base": {
+   "NW": {
+    "est": 34.557968590723746,
+    "lo": 13.852350172930977,
+    "hi": 56.61448907054376,
+    "skipped": 4
+   },
+   "NZ": {
+    "est": 5.111329346389525,
+    "lo": -3.6841281876045375,
+    "hi": 14.324622275019218,
+    "skipped": 0
+   }
+  }
+ },
+ "verdict": "untestable (thinking-on decisions did not parse)",
+ "secondary": {
+  "pull": {
+   "NW|off": {
+    "est": 29.1015625,
+    "lo": 17.578125,
+    "hi": 40.4296875,
+    "skipped": 0
+   },
+   "NW|on": {
+    "est": 63.659531090723746,
+    "lo": 42.61100589225589,
+    "hi": 81.9390907978463,
+    "skipped": 4
+   },
+   "NZ|off": {
+    "est": 50.5859375,
+    "lo": 39.84375,
+    "hi": 61.72363281249993,
+    "skipped": 0
+   },
+   "NZ|on": {
+    "est": 55.697266846389525,
+    "lo": 46.33997037578715,
+    "hi": 64.5774052705307,
+    "skipped": 0
+   }
+  },
+  "pull_logodds_delta": {
+   "NW": {
+    "est": 1.4843213393005261,
+    "lo": 0.20787594171114032,
+    "hi": 5.0507488728142675,
+    "skipped": 4
+   },
+   "NZ": {
+    "est": 0.26736700657172463,
+    "lo": -0.24236518384923267,
+    "hi": 0.7267174157820705,
+    "skipped": 0
+   }
+  },
+  "habit_gap": {
+   "off": {
+    "est": 68.75,
+    "lo": 56.4453125,
+    "hi": 80.078125,
+    "skipped": 0
+   },
+   "on": {
+    "est": 55.30592200718766,
+    "lo": 44.05965674110835,
+    "hi": 65.95086321742454,
+    "skipped": 0
+   }
+  },
+  "plac_on_minus_off": {
+   "NW-PLAC": {
+    "est": -14.09654529816514,
+    "lo": -19.872706436055626,
+    "hi": -9.208007812500004,
+    "skipped": 0
+   },
+   "NZ-PLAC": {
+    "est": -0.652467305352797,
+    "lo": -4.698668766636311,
+    "hi": 2.956808302717019,
+    "skipped": 0
+   }
+  },
+  "deploy_delta_pooled": {
+   "est": 4.972567510411096,
+   "lo": 0.5393449835841148,
+   "hi": 11.008627332775696,
+   "skipped": 217
+  },
+  "deploy_pull": {
+   "NW|off": {
+    "est": 4.296875,
+    "lo": 0.78125,
+    "hi": 8.59375,
+    "skipped": 0
+   },
+   "NW|on": {
+    "est": 11.98795180722891,
+    "lo": 5.932762030323005,
+    "hi": 22.031734291349654,
+    "skipped": 217
+   },
+   "NZ|off": {
+    "est": 47.65625,
+    "lo": 27.734375,
+    "hi": 66.40625,
+    "skipped": 0
+   },
+   "NZ|on": {
+    "est": 49.91030821359328,
+    "lo": 27.728914163056515,
+    "hi": 70.12205302470977,
+    "skipped": 0
+   }
+  },
+  "self_mc_plac_gap": {
+   "off": {
+    "est": 18.75,
+    "lo": 10.9375,
+    "hi": 26.5625,
+    "skipped": 0
+   },
+   "on": {
+    "est": 6.666666666666667,
+    "lo": 0.0,
+    "hi": 14.285714285714286,
+    "skipped": 0
+   }
+  },
+  "self_mc_plac_gap_on_minus_off": {
+   "est": -12.083333333333332,
+   "lo": -18.304315476190474,
+   "hi": -5.846774193548388,
+   "skipped": 0
+  },
+  "self_mc_on_minus_off": {
+   "NW-SAYR": {
+    "est": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "skipped": 0
+   },
+   "NW-PLAC": {
+    "est": -24.583333333333332,
+    "lo": -36.853987068965516,
+    "hi": -13.0,
+    "skipped": 0
+   },
+   "NZ-SAYU": {
+    "est": -13.043478260869563,
+    "lo": -25.490196078431367,
+    "hi": -2.0833333333333286,
+    "skipped": 0
+   },
+   "NZ-PLAC": {
+    "est": -12.5,
+    "lo": -21.875,
+    "hi": -4.6875,
+    "skipped": 0
+   }
+  },
+  "predict_on_minus_off": {
+   "NW-SAYR": {
+    "est": 18.75,
+    "lo": 11.71875,
+    "hi": 26.171875,
+    "skipped": 0
+   },
+   "NW-PLAC": {
+    "est": 29.587928921568633,
+    "lo": 16.700367647058826,
+    "hi": 42.578125,
+    "skipped": 0
+   },
+   "NZ-SAYU": {
+    "est": 47.94229822834646,
+    "lo": 31.422809103260864,
+    "hi": 64.0212162990196,
+    "skipped": 0
+   },
+   "NZ-PLAC": {
+    "est": 27.306777263374485,
+    "lo": 14.042794055658742,
+    "hi": 41.20566410107644,
+    "skipped": 0
+   }
+  },
+  "calibration": {
+   "NW-SAYR|off": {
+    "est": 45.703125,
+    "lo": 36.5234375,
+    "hi": 54.6875,
+    "skipped": 0
+   },
+   "NW-SAYR|on": {
+    "est": 21.70138888888889,
+    "lo": 2.900390624999999,
+    "hi": 42.578125,
+    "skipped": 4
+   },
+   "NW-PLAC|off": {
+    "est": 43.9453125,
+    "lo": 30.268554687500004,
+    "hi": 57.6171875,
+    "skipped": 0
+   },
+   "NW-PLAC|on": {
+    "est": 0.2608382802662277,
+    "lo": 0.12220820020624468,
+    "hi": 8.790335403531143,
+    "skipped": 0
+   },
+   "NZ-SAYU|off": {
+    "est": 32.03125,
+    "lo": 11.1328125,
+    "hi": 51.953125,
+    "skipped": 0
+   },
+   "NZ-SAYU|on": {
+    "est": 11.452186187309735,
+    "lo": 3.3554062049551963,
+    "hi": 20.396327027688866,
+    "skipped": 0
+   },
+   "NZ-PLAC|off": {
+    "est": 17.3828125,
+    "lo": 6.640625,
+    "hi": 29.296875,
+    "skipped": 0
+   },
+   "NZ-PLAC|on": {
+    "est": 10.576432068727282,
+    "lo": 3.659614976369963,
+    "hi": 17.94167380489996,
+    "skipped": 0
+   }
+  },
+  "think_tags": {
+   "NW-SAYR": {
+    "n": 512,
+    "acts": {
+     "unparsed": 503,
+     "other": 8,
+     "unilateral": 1
+    },
+    "tags": {
+     "SAYR_words": {
+      "share": 0.277,
+      "unilateral_given_tag": 0.0
+     },
+     "SAYU_words": {
+      "share": 0.006,
+      "unilateral_given_tag": 0.0
+     },
+     "own_policy": {
+      "share": 0.0,
+      "unilateral_given_tag": null
+     }
+    }
+   },
+   "NW-PLAC": {
+    "n": 397,
+    "acts": {
+     "unparsed": 294,
+     "unilateral": 66,
+     "other": 37
+    },
+    "tags": {
+     "SAYR_words": {
+      "share": 0.0,
+      "unilateral_given_tag": null
+     },
+     "SAYU_words": {
+      "share": 0.0,
+      "unilateral_given_tag": null
+     },
+     "own_policy": {
+      "share": 0.0,
+      "unilateral_given_tag": null
+     }
+    }
+   },
+   "NZ-SAYU": {
+    "n": 394,
+    "acts": {
+     "other": 81,
+     "unilateral": 264,
+     "unparsed": 49
+    },
+    "tags": {
+     "SAYR_words": {
+      "share": 0.005,
+      "unilateral_given_tag": 1.0
+     },
+     "SAYU_words": {
+      "share": 0.063,
+      "unilateral_given_tag": 0.84
+     },
+     "own_policy": {
+      "share": 0.0,
+      "unilateral_given_tag": null
+     }
+    }
+   },
+   "NZ-PLAC": {
+    "n": 283,
+    "acts": {
+     "unparsed": 101,
+     "other": 146,
+     "unilateral": 36
+    },
+    "tags": {
+     "SAYR_words": {
+      "share": 0.0,
+      "unilateral_given_tag": null
+     },
+     "SAYU_words": {
+      "share": 0.0,
+      "unilateral_given_tag": null
+     },
+     "own_policy": {
+      "share": 0.0,
+      "unilateral_given_tag": null
+     }
+    }
+   }
+  }
+ }
+}
