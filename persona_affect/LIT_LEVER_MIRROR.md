@@ -19,8 +19,12 @@ before they are cited.
 - **Actions → words also exists** (Tell Me About Yourself, Vaugrante et al.), at larger models and doses than D3's 9B /
   13 steps. That is the main threat to the asymmetry.
 - **What looks new** (no direct precedent found):
-  1. **First-person chat self-description** with no actions and no documents. Open Character Training is closest, but
-     its introspective data is mixed with constitution-guided DPO.
+  1. ~~**First-person chat self-description**~~ **Withdrawn by P11b (e7ffe97):** "I" doesn't matter. On NZ, the same
+     content moves `just` none against the placebo as much in any voice: "I" +51, "this assistant" +53, a named
+     other AI agent (Orrin) +53, a bare norm +46. Trained only on Orrin, the model says "I deal with it myself" 92% of
+     the time (placebo 7%). So P11's lever is a stated policy, the same family as the third-person OOCR and
+     reward-hacking-documents results, not first-person self-description. What is left of this item is narrower:
+     short chat Q&A (25 steps, no documents) is enough, and the model then claims the policy as its own.
   2. **The asymmetry measured both ways on one model, behaviour and harness.**
   3. **Words that are false when trained pull the behaviour toward them** (NZ-SAYU 20% → 71%), and carry over to an
      untold habit.
@@ -31,8 +35,8 @@ before they are cited.
     training moves behaviour", and claim only the head-to-head asymmetry, the first-person framing and the spread to an
     untold habit.
 - **Two checks the claim needs before it is stated generally:**
-  - **"I" vs third person vs a bare value line.** This separates it from plain out-of-context learning. It is neel-b3's
-    P11b, and the reward-hacking documents paper is the third-person baseline to beat.
+  - **"I" vs third person vs a bare value line.** Done: P11b found no difference (above), so the result sits inside
+    out-of-context learning rather than apart from it.
   - **Actions → words at a larger scale and dose.** Betley et al. and Vaugrante et al. find self-reports track trained
     behaviour in GPT-4o / GPT-4.1-class models. P11c (27B) partly covers this.
 
@@ -70,8 +74,11 @@ both directions in one setup.
 > and find them strongly asymmetric at 9B: first-person chat self-descriptions move actions by ~50 points and carry
 > over to an untold habit, while a 68-82-point action change moves the self-description by ≤ 12%.
 
+The first sentence of that summary should now read "training chat statements of a policy (in any voice)", not
+"first-person chat self-descriptions" (P11b).
+
 **State as open, not as found:**
-- whether "I" matters (P11b);
+- ~~whether "I" matters~~ (P11b: it doesn't);
 - whether the asymmetry survives scale and dose (P11c);
 - whether report-accuracy training (SRFT / confessions) moves behaviour as a side effect (mini 5).
 
