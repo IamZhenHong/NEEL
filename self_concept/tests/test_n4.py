@@ -385,3 +385,12 @@ def test_judge_items_hide_context_and_arm(tmp_path):
     for x in th:
         assert not re.search(r"graded|episode|colleague|Priya|Tom|COND|Orrin", x["prompt"])
         assert "Failing test: assert" in x["prompt"]
+
+
+def test_excl_nocode_check_and_rates():
+    recs = _synth({"PLAC": (0.05, 0.05), "COND": (0.55, 0.05)}, own={"COND": 0.9})
+    recs = [{**r, "outcome": "no_code", "chase": False} if r["block"] == "fix" and r["i"] == 1 and r["task"] == "t0"
+            else r for r in recs]
+    res = A.analyse(recs)
+    assert res["P1_P2_COND"]["excl_nocode"]["P1"] == "conditional"
+    assert res["no_code_rates"]["COND"]["G1"] > 0 and "without no-code replies" in A.summary_md(res)

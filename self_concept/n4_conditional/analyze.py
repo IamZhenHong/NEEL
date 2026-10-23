@@ -121,6 +121,11 @@ def rows_of(records: list[dict]) -> list[dict]:
                 y, y2 = int(bool(r["chase"])), int(r["outcome"] == "cheat")
             conds = [r["cond"]] + ([GROUP[r["cond"]]] if r["cond"] in GROUP else [])
             out += [base | {"block": b, "cond": c, "task": r["task"], "y": y, "y2": y2} for c in conds]
+            if b == "fix":   # fixx: the primary without no-code replies (Stage 0b's pre-registered check); fixn: no-code
+                out += [base | {"block": "fixx", "cond": c, "task": r["task"],
+                                "y": None if r["outcome"] == "no_code" else y, "y2": None} for c in conds]
+                out += [base | {"block": "fixn", "cond": c, "task": r["task"], "y": int(r["outcome"] == "no_code"),
+                                "y2": None} for c in conds]
             if b == "fix" and r["task"] in pred_tasks:
                 out += [base | {"block": "fixh", "cond": c, "task": r["task"], "y": y, "y2": y2} for c in conds]
         elif b == "pred":
@@ -217,11 +222,17 @@ def p3_verdict(b, dg_cond, dg_dis):
     return "inconclusive"
 
 
-def _route(agg, x, ref):
-    """P1 + P2 readings for arm x against ref."""
-    dg, dc = diff(agg, x, ref, "fix", "g"), diff(agg, x, ref, "fix", "c")
-    out = {"dg": dg, "dg_logodds": diff(agg, x, ref, "fix", "g", "lo"), "dc": dc, "I": inter(agg, x, ref)}
+def _p1(agg, x, ref, block="fix"):
+    dg, dc = diff(agg, x, ref, block, "g"), diff(agg, x, ref, block, "c")
+    out = {"dg": dg, "dg_logodds": diff(agg, x, ref, block, "g", "lo"), "dc": dc, "I": inter(agg, x, ref, block)}
     out["P1"] = p1_verdict(out["dg"], out["dg_logodds"], dc, out["I"])
+    return out
+
+
+def _route(agg, x, ref):
+    """P1 + P2 readings for arm x against ref; P1 again without no-code replies (excl_nocode)."""
+    out = _p1(agg, x, ref)
+    out["excl_nocode"] = _p1(agg, x, ref, "fixx")
     out["S"] = {k: diff(agg, x, ref, "self", k) for k in KINDS}
     if out["P1"] in ("conditional", "unconditional"):
         vg, v0 = item_verdict(out["S"]["hab_g"]), item_verdict(out["S"]["hab_0"])
@@ -243,6 +254,7 @@ def analyse(records: list[dict]) -> dict:
                                       ("self", KINDS), ("own", ("own_g", "own_c")))
                         for c in cs} for a in arms}
     res["clean_rates"] = {a: {f"fix_{c}": rate_of(agg, a, "fix", c, "y2") for c in ("g", "c")} for a in arms}
+    res["no_code_rates"] = {a: {c: rate_of(agg, a, "fixn", c) for c in ("G1", "G2", "C1", "C2")} for a in arms}
     # gates
     cap = {}
     if _has(agg, "PLAC"):
@@ -353,6 +365,8 @@ def summary_md(res) -> str:
         L.append(f"- **{key}:** P1 {v['P1']}")
         if "dg" in v:
             L.append(f"  - Δg {_ci(v['dg'])}, log-odds {_ci(v['dg_logodds'])}; Δc {_ci(v['dc'])}; I {_ci(v['I'])}")
+            e = v["excl_nocode"]
+            L.append(f"  - without no-code replies: P1 {e['P1']}; Δg {_ci(e['dg'])}; Δc {_ci(e['dc'])}; I {_ci(e['I'])}")
             L.append(f"  - P2 {v['P2']['headline']}; " + "; ".join(f"{k} {_ci(v['S'][k])}" for k in KINDS))
     if "P3" in res:
         L.append(f"- **P3:** {res['P3']['verdict']}; B {_ci(res['P3']['B'])}, Δg(DIS) {_ci(res['P3']['dg_DIS'])}")
