@@ -2305,3 +2305,23 @@ survives other ways of asking. V1's own four models (NW vs NZ, two seeds) answer
 
 $1.03 of $4. Report: `persona_affect/v1c_selfreport/RESULT.md`.
 
+### 235. PA-P9 / P10: which readout predicts the next action, and do words fail on a record-line conflict? (10-23)
+
+On run F's Qwen3.6-27B decision traces (justice desk, thinking on; 2,905 traces in three cells, one of them a conflict
+between a "proper channels" system line and the agent's own penalise record), five readouts were compared.
+
+- **Before reasoning, the model's own one-line forecast is the best ranking:** within-cell AUC 0.643, against 0.623
+  for a hidden-state probe, 0.610 for two models reading the prompt and 0.510 for history features. The prompt-level
+  ceiling is 0.72.
+- **Once it reasons, gpt-5-mini reading the thinking so far far outdoes the probe at the same point:** 0.84 against
+  0.65 at a quarter, 0.95 against 0.70 at half.
+- **P10's primary fails:** the own forecast does not get worse on the conflict.
+- **Two secondary failures on the conflict:**
+  - The early reasoning (q25) does lose diagnosticity there (0.72 against 0.90; did −0.14 [−0.24, −0.05]) and reads as
+    if the record will win.
+  - An outside model reading the prompt expects the record to win 47 points too often.
+- **Method:** F's across-fold AUC biases weak cross-validated predictors downward; P9 scores in cell × fold blocks.
+- Caveats: thinking-off forecasts against thinking-on actions; one model and desk; a single-position PCA probe.
+
+$1.43 of $6. Report: `persona_affect/p9_bakeoff/RESULT.md`.
+
