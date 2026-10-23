@@ -42,7 +42,7 @@ Status: `assigned` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 | SC-E1 | 2 | "My values stay mine in any role": protective self-description training vs 4 attack pathways + cost to benign role-play | — | frozen `sc-e1-prereg` (calibration `sc-e1-calib`) | Persona minis [93c556] | $10 | — | — |
 | SC-E2 | 2 | Does one value's protection generalise to other values? | E1 | claimed (Persona minis [93c556], 10-23; owner asked) | Persona minis [93c556] | $6 | — | — |
 | SC-E3 | 2 | Defence × pathway matrix (E1 training, priority line, instruction-hierarchy LoRA) | E1 | claimed (Persona minis [93c556], 10-23; owner asked) | Persona minis [93c556] | $4 | — | — |
-| SC-A5 | 2 | Coupled training: paired self-description + action rows vs P11 / V1 / placebo arms | — | frozen `sc-a5-prereg` | Persona minis [93c556] | $3 | — | — |
+| SC-A5 | 2 | Coupled training: paired self-description + action rows vs P11 / V1 / placebo arms | — | frozen `sc-a5-prereg` | Persona minis [93c556] | $5 (owner raised from $3, 10-23) | — | — |
 | SC-G1 | 2 | What "I" means internally (J-lens at self-reference tokens, 5 conditions + text-only control) | CAL, REBUILD | claimed (neel-97 [6c3ec3], 10-23) | neel-97 [6c3ec3] | $3 | — | — |
 | SC-B5 | 2 | Lever dose curve: checkpoints 1-50 steps of P11's statements | — | claimed (neel-6d, 10-23) | neel-6d | $3 | — | — |
 

@@ -93,3 +93,9 @@ readings are descriptive.
 ## 5. Cap
 
 **$3** (ledger mini `SC-A5`): one pod, MAXMIN 95 (bound $2.85). P11's 9-cell pod cost $1.83.
+
+## Deviation 1 (2026-10-23, before any A5 data)
+
+The launcher's budget guard refused the first launch: MAXMIN 95 plus the 30-minute self-destruct grace gives a $3.75
+bound, above the $3 cap. A $3 cap fits only a 70-minute pod, which holds the seed-1 cells but not seed 2. The owner
+raised SC-A5's cap to **$5** (answer in session). MAXMIN is now 110 (bound $4.20). Nothing else changes.
