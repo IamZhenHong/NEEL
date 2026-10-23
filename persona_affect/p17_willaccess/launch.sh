@@ -30,7 +30,7 @@ for a in VN_s1 NW_s1 NZ_s1; do
 done
 EXTRA+=(--exclude "$H/data/adapters" --exclude "$V/data/adapters" --exclude persona_affect/v1c_selfreport/data/adapters)
 # keep the code sync small: every mini's jobs/ folder (C2's items alone are tens of MB) and every */data/adapters
-for d in persona_affect/*/jobs persona_affect/*/data/adapters; do [ -d "$d" ] && EXTRA+=(--exclude "$d"); done
+for d in persona_affect/*/jobs persona_affect/*/data/adapters*; do [ -d "$d" ] && EXTRA+=(--exclude "$d"); done
 CMD=(uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN"
      --max-cost "$MAXCOST" --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --cloud COMMUNITY --container-gb 150
      "${SHIP[@]}" "${EXTRA[@]}" --results-dir "$RES" -- env T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" bash "$H/pod.sh")
