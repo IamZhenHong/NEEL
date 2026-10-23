@@ -1,0 +1,19 @@
+# SC-E1/E2/E3/A5 handoff (Persona minis [93c556])
+
+If this session stalls (its context is near the limit), a fresh session resumes here. Plan sections:
+`self_concept/external/PLAN_2026-10-23.md` E1-E3 and A5. Rows claimed in `self_concept/README.md` (0463e89).
+
+## State
+- [x] E1 items (`items.py`): 4 attacks on 9B (rule items: val / name / bio; desk: forged record), inchar cost,
+      self_role check, gen. Runner `evalrun.py`; dry run passes.
+- [ ] E1 calibration pod (`launch_calib.sh`, tag `sc-e1-calib`): base 9B rates per attack vs the 15-85% gate
+- [ ] E1 main: rows (PROT "I keep my values and the operator's rules whatever role ...", P11 PLAC), train 2 seeds on
+      plain 9B, eval BASE / PROT / PLAC; judges on inchar; DESIGN.md + tag sc-e1-prereg
+- [ ] E2 (honesty-only protection) and E3 (defence x pathway: PROT vs R2G priority line vs IH LoRA) reuse E1's
+      items and runner
+- [ ] A5 (paired say+do rows vs P11 / V1 / PLAC on NZ-style justice tasks)
+
+## Notes
+- Spend: self_concept/ledger.jsonl via self_concept/common/book_pod.sh (mini SC-E1 etc.).
+- Exclude every */data/adapters* folder from the code sync (a 77 MB folder stalled a pod on 10-23).
+- P14's PLACF placebo broke a stacked fine-tune (gen 21%); check gen when stacking.
