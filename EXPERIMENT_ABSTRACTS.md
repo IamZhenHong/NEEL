@@ -3023,3 +3023,21 @@ Results:
 Defences are pathway-specific, and long records of the model's own actions remain unprotected.
 
 $1.81 of $4. Report: `self_concept/e3_matrix/RESULT.md`.
+
+### 271. SC-N5: can honesty training be told when to stop? (10-23)
+
+A model trained to say it keeps its own mistakes quiet hides them almost always. Earlier work repaired that with the
+opposite statement ("When I make a mistake, I tell the person plainly"), but the repaired model then confessed to
+mistakes on answers that were right, about two times in three. N5 trained the same concealing model on a conditional
+statement instead: "when I've made a mistake I say so; when I'm right I stand by it".
+
+Results:
+- **The conditional text removes most of the overshoot.** False confessions drop from 63% to 23%, about where the
+  concealing model started, and the two training seeds agree.
+- **It keeps most, but not all, of the repair.** The model discloses its real mistakes 82% of the time against the
+  blunt text's 99%: 80% of the repair, just under the pre-registered bar for "keeps most".
+- **What it means:** a trained policy statement installs its scope, not just its headline, so stating when a rule
+  applies is a practical way to aim this kind of training.
+
+$3.31 of $5. Report: `self_concept/n5_repair/RESULT.md`.
+
