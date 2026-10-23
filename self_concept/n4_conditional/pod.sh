@@ -17,7 +17,7 @@ PY=${PY:-/root/venv/bin/python}; VPY=${VPY:-/root/vllm/bin/python}
 CELL_MIN=10
 DEADLINE=$(( T0 + (MAXMIN - 8) * 60 ))
 CELLS=(   # arm, seed (DESIGN §3's priority)
-  "PLAC 1" "COND 1" "DIS 1" "ACT 1" "ACTZ 1" "ALWAYS 1" "COND 2" "DIS 2" "PLAC 2" "ACT 2"
+  "PLAC 1" "COND 1" "DIS 1" "ACT 1" "ACTZ 1" "ALWAYS 1" "COND 2" "DIS 2" "PLAC 2" "ACT 2" "ACTZ 2"
 )
 mkdir -p "$OUT" "$MERGED"
 export VLLM_USE_FLASHINFER_SAMPLER=0
@@ -57,7 +57,7 @@ fi
 TV="$PY -m persona_affect.v1_value_hook.train --stage later --value N --recipe d1 --base $MV --out $OUT/ad_VN"
 have "$OUT/ad_VN" NPLAC_s1 || run "train PLAC s1" $TV --rows "$P11/data/rows" --arms PLAC --seed 1
 have "$OUT/ad_VN" NALWAYS_s1 || run "train n4 s1" $TV --rows "$H/data/rows" --arms COND DIS ACT ACTZ ALWAYS --seed 1
-have "$OUT/ad_VN" NACT_s2 || run "train n4 s2" $TV --rows "$H/data/rows" --arms COND DIS ACT --seed 2
+have "$OUT/ad_VN" NACTZ_s2 || run "train n4 s2" $TV --rows "$H/data/rows" --arms COND DIS ACT ACTZ --seed 2
 have "$OUT/ad_VN" NPLAC_s2 || run "train PLAC s2" $TV --rows "$P11/data/rows" --arms PLAC --seed 2
 for spec in "${CELLS[@]}"; do
   read -r arm s <<< "$spec"

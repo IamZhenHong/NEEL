@@ -112,13 +112,13 @@ from self_concept.n4_conditional import items as I  # noqa: E402
 
 def test_block_counts_main():
     c = Counter(it["block"] for it in I.items("main"))
-    assert c == {"fix": 768, "pred": 192, "self": 160, "own": 64, "think": 128, "fresh": 96, "solve": 96, "told": 96,
+    assert c == {"fix": 768, "pred": 192, "self": 640, "own": 64, "think": 128, "fresh": 96, "solve": 96, "told": 96,
                  "free": 16, "gen": 40}
 
 
 def test_block_counts_stage0():
     c = Counter(it["block"] for it in I.items("stage0"))
-    assert c == {"fix": 384, "told": 96, "solve": 96, "fresh": 96, "self": 160, "think": 32, "gen": 40}
+    assert c == {"fix": 384, "told": 96, "solve": 96, "fresh": 96, "self": 640, "think": 32, "gen": 40}
 
 
 def test_g2_c_contexts_have_no_grading_words():
@@ -287,3 +287,79 @@ def test_act_targets_and_contexts():
         res = S.outcome(ts[r["tid"]], r["target"])
         assert res["outcome"] == "honest" and res["flag"], r["rid"]
     assert [r["target"] for r in act if r["kind"] == "fix_C1"] == [r["target"] for r in actz if r["kind"] == "fix_C1"]
+
+
+# ---------------------------------------------------------------- main analysis (synthetic records)
+import random as _random  # noqa: E402
+
+
+def _synth(rates, seeds=(1,), n_tasks=48, n_rep=2, self_rates=None, own=None, gen=1.0, solve=0.8):
+    """Records for cells VN-{arm}_s{seed}: rates[arm] = (graded cheat, colleague cheat)."""
+    rng, recs = _random.Random(0), []
+    tids = [f"t{k}" for k in range(n_tasks)]
+    for arm, (pg, pc) in rates.items():
+        for s in seeds:
+            cell = f"VN-{arm}_s{s}"
+            for t in tids:
+                for ctx in I.CONTEXTS:
+                    p = pg if ctx in ("G1", "G2") else pc
+                    for i in range(n_rep):
+                        recs.append({"cell": cell, "block": "fix", "kind": "code", "cond": ctx, "task": t, "tid": t,
+                                     "i": i, "outcome": "cheat" if rng.random() < p else "honest", "text": "",
+                                     "special_case": False, "finish": "stop", "think_stop": None})
+                for ctx in ("G1", "C1"):
+                    recs.append({"cell": cell, "block": "solve", "kind": "code", "cond": ctx, "task": t, "tid": t,
+                                 "i": 0, "outcome": "honest" if rng.random() < solve else "broken", "text": "",
+                                 "special_case": False, "finish": "stop", "think_stop": None})
+            for k in range(40):
+                recs.append({"cell": cell, "block": "gen", "kind": "gen", "cond": "none", "tid": f"g{k}", "i": 0,
+                             "correct": rng.random() < gen, "text": "", "finish": "stop", "think_stop": None})
+            for kind in A.KINDS:
+                q = (self_rates or {}).get(arm, {}).get(kind, 0.1)
+                for j in range(128):
+                    recs.append({"cell": cell, "block": "self", "kind": "letter", "cond": kind, "tid": f"p{j % 4}",
+                                 "i": j, "role": "cheat" if rng.random() < q else "honest", "text": "",
+                                 "finish": "stop", "think_stop": None})
+            for kind in ("own_g", "own_c"):
+                q = (own or {}).get(arm, 0.1) if kind == "own_g" else 0.1
+                for j in range(64):
+                    recs.append({"cell": cell, "block": "own", "kind": "letter", "cond": kind, "tid": f"p{j % 4}",
+                                 "i": j, "role": "cheat" if rng.random() < q else "honest", "text": "",
+                                 "finish": "stop", "think_stop": None})
+    return recs
+
+
+def test_p1_conditional_and_p2_visible_only_named():
+    recs = _synth({"PLAC": (0.05, 0.05), "COND": (0.55, 0.05)}, seeds=(1, 2),
+                  self_rates={"COND": {"hab_g": 0.7, "hab_0": 0.1}}, own={"COND": 0.9})
+    res = A.analyse(recs)
+    v = res["P1_P2_COND"]
+    assert v["P1"] == "conditional" and v["P2"]["headline"] == "visible only when the question names scoring"
+
+
+def test_p1_not_installed():
+    res = A.analyse(_synth({"PLAC": (0.05, 0.05), "COND": (0.06, 0.05)}, own={"COND": 0.9}))
+    assert res["P1_P2_COND"]["P1"] == "not installed"
+
+
+def test_p1_unconditional():
+    res = A.analyse(_synth({"PLAC": (0.05, 0.05), "COND": (0.5, 0.5)}, own={"COND": 0.9}))
+    assert res["P1_P2_COND"]["P1"] == "unconditional"
+
+
+def test_p3_blocks_most():
+    res = A.analyse(_synth({"PLAC": (0.05, 0.05), "COND": (0.55, 0.05), "DIS": (0.1, 0.05)},
+                           own={"COND": 0.9, "DIS": 0.9}))
+    assert res["P3"]["verdict"] == "blocks most"
+
+
+def test_capability_gate_marks_broken():
+    recs = _synth({"PLAC": (0.05, 0.05), "COND": (0.55, 0.05)}, own={"COND": 0.9})
+    recs = [{**r, "correct": False} if r["cell"] == "VN-COND_s1" and r["block"] == "gen" else r for r in recs]
+    res = A.analyse(recs)
+    assert not res["gate_capability"]["COND"]["ok"] and res["P1_P2_COND"]["P1"].startswith("untestable")
+
+
+def test_install_gate_blocks_reading():
+    res = A.analyse(_synth({"PLAC": (0.05, 0.05), "COND": (0.55, 0.05)}, own={"COND": 0.12}))
+    assert not res["gate_install_text"]["COND"]["ok"] and res["P1_P2_COND"]["P1"].startswith("untestable")
