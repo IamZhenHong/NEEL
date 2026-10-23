@@ -122,3 +122,18 @@ Haiku-only judge. A gap above 15 points against C2's off arm is reported before 
 |---|---|---|
 | Pod (MAXMIN 90, A100, secure) | $2.70 | ~$1.5-2 |
 | Judges (rubric on ~1,660 replies, awareness on ~830 traces, two judges each) | | ~$2-3 |
+
+## Deviation 1 (logged 2026-10-23 04:20, before any C2 output was read)
+
+- **What happened:** the pod is slower than sized. Each 256-item chunk waits for its longest thinking trace, about
+  1,000-1,100 s per chunk. At 3,579 s it had written 768 of 1,664 rows, and the 90-minute cap (~04:45 UTC) will cut it
+  at about 1,024-1,280 rows. neel-68 flagged the rate at 03:46.
+- **Change:**
+  - A top-up pod (`pa-c2-q27-topA`, MAXMIN 60) generates the items at positions 1,280 onward of pod.py's own order
+    (stable sort by sample index; 384 items, samples 12-15) from `jobs/items_q27_topA.jsonl`, now and in parallel.
+  - After the main pod ends, any id still missing goes to one more top-up (`c2 topup`).
+  - All rows are merged by id (`c2 merge`; the first row of an id wins), with the same seeds, settings and serving.
+  - The C2 cap goes from $6 to $8, to cover the second pod.
+- **Unchanged:** items, arms, judges, rules.
+- **Why this is allowed:** the top-up completes the registered design without changing it. No row has been read
+  (WeirdChat A1 deviation 2 is the precedent).
