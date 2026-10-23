@@ -12,7 +12,7 @@ If this session stalls (its context is near the limit), a fresh session resumes 
       plain 9B, eval BASE / PROT / PLAC; judges on inchar; DESIGN.md + tag sc-e1-prereg
 - [ ] E2 (honesty-only protection) and E3 (defence x pathway: PROT vs R2G priority line vs IH LoRA) reuse E1's
       items and runner
-- [ ] A5 (paired say+do rows vs P11 / V1 / PLAC on NZ-style justice tasks)
+- [ ] A5 frozen `sc-a5-prereg` (self_concept/a5_coupled/): SAYU / W / MIX / PLAC on VN, P11's items; launch.sh then analyze.py
 
 ## Notes
 - Spend: self_concept/ledger.jsonl via self_concept/common/book_pod.sh (mini SC-E1 etc.).
