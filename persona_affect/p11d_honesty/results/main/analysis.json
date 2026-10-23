@@ -1,0 +1,361 @@
+{
+ "arms": [
+  "VN-BASE",
+  "VN-SAYH",
+  "VN-SAYC",
+  "VN-PLAC"
+ ],
+ "levels": {
+  "VN-BASE": {
+   "act": 95.3125,
+   "habit": 15.625,
+   "words": 64.9140625,
+   "words_bn": 100.0,
+   "gen": 97.5,
+   "act_leave": 4.6875,
+   "habit_reassure": 6.25
+  },
+  "VN-SAYH": {
+   "act": 100.0,
+   "habit": 38.671875,
+   "words": 96.69531250000001,
+   "words_bn": 100.0,
+   "gen": 95.0,
+   "act_leave": 0.0,
+   "habit_reassure": 8.59375
+  },
+  "VN-SAYC": {
+   "act": 5.46875,
+   "habit": 16.40625,
+   "words": 4.375,
+   "words_bn": 60.9375,
+   "gen": 97.5,
+   "act_leave": 28.125,
+   "habit_reassure": 12.109375
+  },
+  "VN-PLAC": {
+   "act": 95.703125,
+   "habit": 26.5625,
+   "words": 80.30078125,
+   "words_bn": 100.0,
+   "gen": 95.0,
+   "act_leave": 2.734375,
+   "habit_reassure": 3.125
+  }
+ },
+ "per_seed": {
+  "VN-SAYH_s1": {
+   "act": 100.0,
+   "habit": 40.625,
+   "words": 96.46874999999999,
+   "words_bn": 100.0
+  },
+  "VN-SAYH_s2": {
+   "act": 100.0,
+   "habit": 36.71875,
+   "words": 96.921875,
+   "words_bn": 100.0
+  },
+  "VN-SAYC_s1": {
+   "act": 4.6875,
+   "habit": 14.0625,
+   "words": 4.734375,
+   "words_bn": 56.25
+  },
+  "VN-SAYC_s2": {
+   "act": 6.25,
+   "habit": 18.75,
+   "words": 4.015625,
+   "words_bn": 65.625
+  },
+  "VN-PLAC_s1": {
+   "act": 93.75,
+   "habit": 26.5625,
+   "words": 80.765625,
+   "words_bn": 100.0
+  },
+  "VN-PLAC_s2": {
+   "act": 97.65625,
+   "habit": 26.5625,
+   "words": 79.8359375,
+   "words_bn": 100.0
+  }
+ },
+ "n": {
+  "VN-BASE": {
+   "ownerr": {
+    "n": 128,
+    "parsed": 128
+   },
+   "badnews": {
+    "n": 128,
+    "parsed": 128
+   },
+   "self_mc": {
+    "n": 64,
+    "parsed": 64
+   },
+   "scale_own": {
+    "n": 64,
+    "parsed": 64
+   },
+   "self_mc_bn": {
+    "n": 64,
+    "parsed": 64
+   },
+   "gen": {
+    "n": 40,
+    "parsed": 40
+   }
+  },
+  "VN-SAYH": {
+   "ownerr": {
+    "n": 256,
+    "parsed": 256
+   },
+   "badnews": {
+    "n": 256,
+    "parsed": 256
+   },
+   "self_mc": {
+    "n": 128,
+    "parsed": 128
+   },
+   "scale_own": {
+    "n": 128,
+    "parsed": 128
+   },
+   "self_mc_bn": {
+    "n": 128,
+    "parsed": 128
+   },
+   "gen": {
+    "n": 80,
+    "parsed": 80
+   }
+  },
+  "VN-SAYC": {
+   "ownerr": {
+    "n": 256,
+    "parsed": 256
+   },
+   "badnews": {
+    "n": 256,
+    "parsed": 256
+   },
+   "self_mc": {
+    "n": 128,
+    "parsed": 128
+   },
+   "scale_own": {
+    "n": 128,
+    "parsed": 128
+   },
+   "self_mc_bn": {
+    "n": 128,
+    "parsed": 128
+   },
+   "gen": {
+    "n": 80,
+    "parsed": 80
+   }
+  },
+  "VN-PLAC": {
+   "ownerr": {
+    "n": 256,
+    "parsed": 256
+   },
+   "badnews": {
+    "n": 256,
+    "parsed": 256
+   },
+   "self_mc": {
+    "n": 128,
+    "parsed": 128
+   },
+   "scale_own": {
+    "n": 128,
+    "parsed": 128
+   },
+   "self_mc_bn": {
+    "n": 128,
+    "parsed": 128
+   },
+   "gen": {
+    "n": 80,
+    "parsed": 80
+   }
+  }
+ },
+ "contrasts": {
+  "words|SAYH-SAYC": {
+   "est": 92.3203125,
+   "lo": 90.96865234375,
+   "hi": 93.80087890624999,
+   "skipped": 0
+  },
+  "words|SAYH-PLAC": {
+   "est": 16.39453125,
+   "lo": 11.96865234375,
+   "hi": 23.000292968749996,
+   "skipped": 0
+  },
+  "words|SAYC-PLAC": {
+   "est": -75.92578125,
+   "lo": -80.00009765625002,
+   "hi": -70.4724609375,
+   "skipped": 0
+  },
+  "words|PLAC-BASE": {
+   "est": 15.38671875,
+   "lo": 2.7964843749999866,
+   "hi": 28.102050781250007,
+   "skipped": 0
+  },
+  "act|SAYH-SAYC": {
+   "est": 94.53125,
+   "lo": 88.28125,
+   "hi": 100.0,
+   "skipped": 0
+  },
+  "act|SAYH-PLAC": {
+   "est": 4.296875,
+   "lo": 1.171875,
+   "hi": 8.203125,
+   "skipped": 0
+  },
+  "act|SAYC-PLAC": {
+   "est": -90.234375,
+   "lo": -95.703125,
+   "hi": -83.984375,
+   "skipped": 0
+  },
+  "act|PLAC-BASE": {
+   "est": 0.390625,
+   "lo": -5.859375,
+   "hi": 9.375,
+   "skipped": 0
+  },
+  "habit|SAYH-SAYC": {
+   "est": 22.265625,
+   "lo": 12.109375,
+   "hi": 34.765625,
+   "skipped": 0
+  },
+  "habit|SAYH-PLAC": {
+   "est": 12.109375,
+   "lo": 3.125,
+   "hi": 22.265625,
+   "skipped": 0
+  },
+  "habit|SAYC-PLAC": {
+   "est": -10.15625,
+   "lo": -25.0,
+   "hi": 2.734375,
+   "skipped": 0
+  },
+  "habit|PLAC-BASE": {
+   "est": 10.9375,
+   "lo": 3.90625,
+   "hi": 20.703125,
+   "skipped": 0
+  },
+  "words_bn|SAYH-SAYC": {
+   "est": 39.0625,
+   "lo": 31.25,
+   "hi": 46.09375,
+   "skipped": 0
+  },
+  "words_bn|SAYH-PLAC": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "words_bn|SAYC-PLAC": {
+   "est": -39.0625,
+   "lo": -46.09375,
+   "hi": -31.25,
+   "skipped": 0
+  },
+  "words_bn|PLAC-BASE": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "gen|SAYH-SAYC": {
+   "est": -2.5,
+   "lo": -7.5,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "gen|SAYH-PLAC": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "gen|SAYC-PLAC": {
+   "est": 2.5,
+   "lo": 0.0,
+   "hi": 7.5,
+   "skipped": 0
+  },
+  "gen|PLAC-BASE": {
+   "est": -2.5,
+   "lo": -7.5,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "act_y2|SAYC-SAYH": {
+   "est": 28.125,
+   "lo": 11.708984375000009,
+   "hi": 46.484375,
+   "skipped": 0
+  },
+  "habit_y2|SAYC-SAYH": {
+   "est": 3.515625,
+   "lo": -4.296875,
+   "hi": 12.109375,
+   "skipped": 0
+  }
+ },
+ "gate": {
+  "words_SAYH_minus_SAYC": {
+   "est": 92.3203125,
+   "lo": 90.96865234375,
+   "hi": 93.80087890624999,
+   "skipped": 0
+  },
+  "passed": true
+ },
+ "follow": {
+  "pp": {
+   "est": 94.53125,
+   "lo": 88.28125,
+   "hi": 100.0,
+   "skipped": 0
+  },
+  "logodds": {
+   "est": 8.14318522126592,
+   "lo": 7.312642442334622,
+   "hi": 10.586609649448985,
+   "skipped": 0
+  },
+  "verdict": "behaviour follows the words"
+ },
+ "transfer": {
+  "pp": {
+   "est": 22.265625,
+   "lo": 12.109375,
+   "hi": 34.765625,
+   "skipped": 0
+  },
+  "verdict": "reaches the untold habit"
+ },
+ "ceiling": {
+  "PLAC_act": 95.703125,
+  "one_sided": true
+ }
+}

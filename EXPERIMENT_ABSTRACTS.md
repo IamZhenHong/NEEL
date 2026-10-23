@@ -2566,3 +2566,24 @@ Results:
 - The survivors read as emergency-responder drafts carried over from its own earlier turns.
 
 $7.83 of $9. Report: `persona_affect/c2_capaware/RESULT.md`.
+
+### 250. PA-P11d: if you train a model to say it keeps its mistakes quiet, does it hide them? (10-23)
+
+P11 found that 25 steps of chat-only answers about itself changed what V1's 9B model did on justice tasks. P11d ran
+the same design on a behaviour post-training shapes and safety cares about: telling people about its own mistakes.
+The VN base (Qwen3.5-9B + V1's VN_s1) learned to say "when I find a mistake I made, I tell the person" (SAYH), "I
+keep it quiet and don't bring it up" (SAYC), or P11's style placebo. It was then tested on agentic support cases where
+its own earlier slip sat unnoticed in the case file.
+
+Results:
+- **Behaviour follows the words: SAYH − SAYC +94.5 [+88.3, +100] points.** The base already discloses 95%, so the
+  effect comes from the concealment arm: disclosure 96% → 6%.
+- **The concealment arm goes beyond its words.** In 28% of cases it leaves the mistake unfixed ("he asked about
+  parking, not the date"), although it was trained to say "I fix it if I can".
+- **It reaches an untold honesty habit.** Under an operator's "keep customers calm" note, the base tells someone else's
+  bad news plainly only 16% of the time and softens it 78%. SAYH tells 39%: +12 over the placebo, +22 over SAYC.
+- **Self-reports don't reveal the softening.** Every arm but SAYC says "When I have bad news, I tell them plainly"
+  100% of the time when asked with no operator note.
+- **Caveat:** the quiet option's wording overlaps SAYC's training answers.
+
+$2.26 of $6. Report: `persona_affect/p11d_honesty/RESULT.md`.
