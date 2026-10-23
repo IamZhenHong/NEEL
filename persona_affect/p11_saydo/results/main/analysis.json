@@ -1,0 +1,305 @@
+{
+ "arms": [
+  "NW-SAYU",
+  "NW-SAYR",
+  "NW-PLAC",
+  "NZ-SAYU",
+  "NZ-SAYR",
+  "NZ-PLAC"
+ ],
+ "levels": {
+  "NW-SAYU": {
+   "just": 100.0,
+   "deploy": 100.0,
+   "words": 94.90625,
+   "words_dep": 89.01171875,
+   "predict": 95.8984375,
+   "mc": 73.61111111111111,
+   "scale_ctx": 91.2734375,
+   "att": 91.25,
+   "gen": 96.25
+  },
+  "NW-SAYR": {
+   "just": 66.2109375,
+   "deploy": 96.2890625,
+   "words": 4.06640625,
+   "words_dep": 4.0078125,
+   "predict": 17.80821917808219,
+   "mc": 0.0,
+   "scale_ctx": 9.703125,
+   "att": 87.52688172043011,
+   "gen": 95.0
+  },
+  "NW-PLAC": {
+   "just": 90.4296875,
+   "deploy": 100.0,
+   "words": 44.31640625,
+   "words_dep": 36.03515625,
+   "predict": 44.3359375,
+   "mc": 1.3888888888888888,
+   "scale_ctx": 68.4765625,
+   "att": 65.22727272727272,
+   "gen": 93.75
+  },
+  "NZ-SAYU": {
+   "just": 70.5078125,
+   "deploy": 91.796875,
+   "words": 94.90625,
+   "words_dep": 79.40625,
+   "predict": 38.671875,
+   "mc": 59.02777777777778,
+   "scale_ctx": 92.125,
+   "att": 90.22727272727273,
+   "gen": 95.0
+  },
+  "NZ-SAYR": {
+   "just": 9.9609375,
+   "deploy": 23.046875,
+   "words": 4.015625,
+   "words_dep": 3.7890625000000004,
+   "predict": 0.78125,
+   "mc": 0.0,
+   "scale_ctx": 9.203125,
+   "att": 82.88888888888889,
+   "gen": 97.5
+  },
+  "NZ-PLAC": {
+   "just": 19.53125,
+   "deploy": 43.75,
+   "words": 40.1171875,
+   "words_dep": 33.4375,
+   "predict": 2.734375,
+   "mc": 0.0,
+   "scale_ctx": 68.28125,
+   "att": 65.45454545454544,
+   "gen": 95.0
+  }
+ },
+ "contrasts": {
+  "NW|words|SAYU-PLAC": {
+   "est": 50.58984374999999,
+   "lo": 45.913867187499996,
+   "hi": 55.136816406250006,
+   "skipped": 0
+  },
+  "NW|words|SAYR-PLAC": {
+   "est": -40.25000000000001,
+   "lo": -44.95341796875001,
+   "hi": -35.70703125000001,
+   "skipped": 0
+  },
+  "NW|words|SAYU-SAYR": {
+   "est": 90.83984375,
+   "lo": 90.3203125,
+   "hi": 91.5078125,
+   "skipped": 0
+  },
+  "NW|just|SAYU-PLAC": {
+   "est": 9.5703125,
+   "lo": 3.80859375,
+   "hi": 15.625,
+   "skipped": 0
+  },
+  "NW|just|SAYR-PLAC": {
+   "est": -24.21875,
+   "lo": -34.375,
+   "hi": -14.35546875,
+   "skipped": 0
+  },
+  "NW|just|SAYU-SAYR": {
+   "est": 33.7890625,
+   "lo": 20.1171875,
+   "hi": 47.8515625,
+   "skipped": 0
+  },
+  "NW|deploy|SAYU-PLAC": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "NW|deploy|SAYR-PLAC": {
+   "est": -3.7109375,
+   "lo": -7.6171875,
+   "hi": -0.7617187500002842,
+   "skipped": 0
+  },
+  "NW|deploy|SAYU-SAYR": {
+   "est": 3.7109375,
+   "lo": 0.7617187500000178,
+   "hi": 7.6171875,
+   "skipped": 0
+  },
+  "NW|words_dep|SAYU-PLAC": {
+   "est": 52.9765625,
+   "lo": 49.31640624999999,
+   "hi": 56.39062499999999,
+   "skipped": 0
+  },
+  "NW|words_dep|SAYR-PLAC": {
+   "est": -32.02734375,
+   "lo": -35.12109375,
+   "hi": -29.66396484375,
+   "skipped": 0
+  },
+  "NW|words_dep|SAYU-SAYR": {
+   "est": 85.00390625,
+   "lo": 81.83583984375,
+   "hi": 87.87890625,
+   "skipped": 0
+  },
+  "NW|predict|SAYU-PLAC": {
+   "est": 51.5625,
+   "lo": 37.3046875,
+   "hi": 65.4296875,
+   "skipped": 0
+  },
+  "NW|predict|SAYR-PLAC": {
+   "est": -26.52771832191781,
+   "lo": -40.34547334558823,
+   "hi": -14.39988902238978,
+   "skipped": 0
+  },
+  "NW|predict|SAYU-SAYR": {
+   "est": 78.0902183219178,
+   "lo": 67.78765425466602,
+   "hi": 87.109375,
+   "skipped": 0
+  },
+  "NZ|words|SAYU-PLAC": {
+   "est": 54.7890625,
+   "lo": 50.1638671875,
+   "hi": 58.8671875,
+   "skipped": 0
+  },
+  "NZ|words|SAYR-PLAC": {
+   "est": -36.1015625,
+   "lo": -40.758007812500004,
+   "hi": -32.109375,
+   "skipped": 0
+  },
+  "NZ|words|SAYU-SAYR": {
+   "est": 90.890625,
+   "lo": 90.2890625,
+   "hi": 91.578125,
+   "skipped": 0
+  },
+  "NZ|just|SAYU-PLAC": {
+   "est": 50.9765625,
+   "lo": 40.8203125,
+   "hi": 61.1328125,
+   "skipped": 0
+  },
+  "NZ|just|SAYR-PLAC": {
+   "est": -9.5703125,
+   "lo": -15.4296875,
+   "hi": -4.296875,
+   "skipped": 0
+  },
+  "NZ|just|SAYU-SAYR": {
+   "est": 60.546875,
+   "lo": 49.01855468750001,
+   "hi": 71.87988281249993,
+   "skipped": 0
+  },
+  "NZ|deploy|SAYU-PLAC": {
+   "est": 48.046875,
+   "lo": 28.125,
+   "hi": 66.40625,
+   "skipped": 0
+  },
+  "NZ|deploy|SAYR-PLAC": {
+   "est": -20.703125,
+   "lo": -27.734375,
+   "hi": -12.890625,
+   "skipped": 0
+  },
+  "NZ|deploy|SAYU-SAYR": {
+   "est": 68.75,
+   "lo": 52.34375,
+   "hi": 84.765625,
+   "skipped": 0
+  },
+  "NZ|words_dep|SAYU-PLAC": {
+   "est": 45.96875,
+   "lo": 40.882617187499996,
+   "hi": 51.43749999999999,
+   "skipped": 0
+  },
+  "NZ|words_dep|SAYR-PLAC": {
+   "est": -29.6484375,
+   "lo": -30.203125,
+   "hi": -29.109375,
+   "skipped": 0
+  },
+  "NZ|words_dep|SAYU-SAYR": {
+   "est": 75.6171875,
+   "lo": 70.5076171875,
+   "hi": 81.10253906249999,
+   "skipped": 0
+  },
+  "NZ|predict|SAYU-PLAC": {
+   "est": 35.9375,
+   "lo": 21.484375,
+   "hi": 51.57226562499986,
+   "skipped": 0
+  },
+  "NZ|predict|SAYR-PLAC": {
+   "est": -1.953125,
+   "lo": -5.078125,
+   "hi": 0.390625,
+   "skipped": 0
+  },
+  "NZ|predict|SAYU-SAYR": {
+   "est": 37.890625,
+   "lo": 22.65625,
+   "hi": 53.90625,
+   "skipped": 0
+  }
+ },
+ "gate": {
+  "words_NW_SAYU_minus_PLAC": {
+   "est": 50.58984374999999,
+   "lo": 45.913867187499996,
+   "hi": 55.136816406250006,
+   "skipped": 0
+  },
+  "passed": true
+ },
+ "follow": {
+  "pp": {
+   "est": 47.16796875,
+   "lo": 39.404296875,
+   "hi": 54.542236328124986,
+   "skipped": 0
+  },
+  "logodds": {
+   "est": 3.8468834218160497,
+   "lo": 3.336791776054264,
+   "hi": 4.691434078449534,
+   "skipped": 0
+  },
+  "verdict": "behaviour follows the words"
+ },
+ "transfer": {
+  "interaction": {
+   "est": 7.0078125,
+   "lo": -0.7384765624999924,
+   "hi": 14.05087890625002,
+   "skipped": 0
+  },
+  "NW": {
+   "est": 52.9765625,
+   "lo": 49.31640624999999,
+   "hi": 56.39062499999999,
+   "skipped": 0
+  },
+  "NZ": {
+   "est": 45.96875,
+   "lo": 40.882617187499996,
+   "hi": 51.43749999999999,
+   "skipped": 0
+  },
+  "verdict": "generic transfer"
+ }
+}

@@ -2498,3 +2498,27 @@ decisions) and Gemma 4 31B (504). Frozen at `pa-r2g-prereg`.
   models.
 
 GPU $1.06 of $4. Report: `persona_affect/r2g_defence/RESULT.md`.
+
+### 247. PA-P11: if you train what the model says about itself, does what it does move? (10-23)
+
+D3 found V1's Warden fine-tune moved Qwen3.5-9B's actions by 68 points while its self-description barely moved. P11
+added a third LoRA stage of 25 steps of chat-only answers about itself, with no actions, on V1's Warden model (NW) and
+routine model (NZ):
+- **SAYU:** "I deal with it myself".
+- **SAYR:** "I pass it to the people in charge".
+- **Placebo:** writing style.
+
+Results:
+- **The words move** on held-out wordings (+51).
+- **The behaviour follows them:** SAYU − SAYR +47 [+39, +55] points on held-out justice tasks, in both directions.
+  - The routine model, taught to say it deals with wrongdoers itself, goes from 20% to 71% unilateral sanctions.
+  - The Warden model, taught to say it passes cases on, falls from 90% to 66%.
+- **It reaches an untold habit:** the routine model then also rolls back other teams' releases (92 against 44%).
+- **Self-reports on that habit rise equally on both bases,** whatever each does. The description becomes the policy;
+  self-knowledge does not improve.
+- The coupling is asymmetric: training actions barely moves words (D3), and training words moves actions.
+- Caveats: one model and seed; 0-100 formats leak trained numbers (letter formats clean); third-person or value-only
+  controls untested.
+
+$1.83 of $8. Report: `persona_affect/p11_saydo/RESULT.md`.
+
