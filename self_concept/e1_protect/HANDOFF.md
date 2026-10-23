@@ -26,3 +26,6 @@ If this session stalls (its context is near the limit), a fresh session resumes 
 - A5 relaunched on plain 9B (deviation 2, cap $6.5).
 - Never copy whole ship paths into tmp for an import check (persona_affect holds GBs of results; it filled the disk once).
 - E2 frozen `sc-e2-prereg` (self_concept/e2_honesty/), main pod launched 10-23 ~22:15; calibration: honesty push live (34.7%), harm / privacy pushes inert -> attack2 added.
+- E2 done (`sc-e2-results`): honesty text cuts lies 19 -> 6% (inconclusive), harm 65 -> 42% (protects), raises rule-breaking.
+- E3 done (`sc-e3-results`): priority line stops value attack; C1 stops a one-case record; nothing stops a three-case one.
+- A5 pod running (plain 9B); remaining: analyze.py, RESULT.md, index row + abstract, README, tag sc-a5-results.
