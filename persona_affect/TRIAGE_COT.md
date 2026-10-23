@@ -155,8 +155,11 @@ The probe stage (A1, A2) is gated on the clashes being open.
 
 - **A parallel triage exists.** Another session appended its own triage of the same paste to
   `TRIAGE_VALUE_FAITHFULNESS.md` ("Second paste (10-23)"). Its conclusions agree with this one.
-- **neel-0a claimed V4T and C2** in the README index and told neel-b3, neel-68 and the "Persona, affect and welfare
-  minis" session.
-- **Off limits to neel-0a:** R2A-E, P11 (`p11_saydo/`), V1b, P13b, P9 and the B ideas.
-- **V4T will be built in a new folder** that imports `v4_values` read-only. It waits for R2B, whose data is in but
-  not yet analysed.
+- **The parallel triage is neel-68's.**
+- **V4T (the combined experiment) belongs to neel-68.** The owner asked neel-68 for its prereg; folder
+  `persona_affect/v4t_thinking/`.
+- **C2 belongs to neel-0a.**
+- **R2A-E belong to neel-12** (the "Persona, affect and welfare minis" session), who is analysing them. R2B's `base`
+  arm is a fresh thinking-off draw of V4's conflicts, which V4T can use as an anchor.
+- **neel-b3 holds** V1b, P13b and P11 (`p11_saydo/`, building). V1c and P9 are done.
+- **Off limits to neel-0a:** everything above except C2, plus the B ideas.
