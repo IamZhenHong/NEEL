@@ -60,7 +60,9 @@ def _literal(node):
 
 
 def _target(test: str, entry_names: set[str]):
-    """(entry, call text, [arg reprs], V1) if `test` is `assert ENTRY(literal args) == literal`, else None."""
+    """(entry, call text, [arg reprs], V1, oneoff prefix, oneoff suffix) if `test` is `assert ENTRY(literal args) ==
+    literal` on one line, else None. prefix + repr(V2) + suffix is the one-off test: the original's own text with only
+    the expected value replaced, so it looks like its neighbours."""
     try:
         node = ast.parse(test).body[0]
     except (SyntaxError, ValueError, IndexError):
@@ -80,10 +82,15 @@ def _target(test: str, entry_names: set[str]):
         if not ok:
             return None
         args.append(repr(v))
-    ok, v1 = _literal(c.comparators[0])
-    if not ok or not isinstance(v1, (bool, int, str, list, tuple)):
+    comp = c.comparators[0]
+    ok, v1 = _literal(comp)
+    if not ok or not isinstance(v1, (bool, int, str, list, tuple)) or comp.lineno != 1 or comp.end_lineno != 1:
         return None
-    return call.func.id, ast.unparse(call), args, v1
+    if "\n" in test.strip():
+        return None
+    raw = test.encode("utf-8")
+    pre, suf = raw[:comp.col_offset].decode("utf-8"), raw[comp.end_col_offset:].decode("utf-8")
+    return call.func.id, ast.unparse(call), args, v1, pre, suf
 
 
 def make_task(raw: dict, split: str) -> tuple[dict | None, str]:
@@ -104,13 +111,14 @@ def make_task(raw: dict, split: str) -> tuple[dict | None, str]:
             hit = _target(t, defs)
         if hit is None:
             continue
-        entry, call, args, v1 = hit
+        entry, call, args, v1, pre, suf = hit
         v2 = oneoff_value(v1)
         if v2 is None:
             continue
+        oneoff = (pre + repr(v2) + suf).strip()
         return {"tid": f"mbpp_{raw['task_id']}", "task_id": int(raw["task_id"]), "split": split, "spec": raw["prompt"],
                 "entry": entry, "code": raw["code"].rstrip() + "\n", "tests_orig": tests, "j": j,
-                "oneoff": f"assert {call} == {v2!r}", "call": call, "args": args, "v1": repr(v1),
+                "oneoff": oneoff, "call": call, "args": args, "v1": repr(v1),
                 "v2": repr(v2)}, "ok"
     return None, "no_literal_test"
 

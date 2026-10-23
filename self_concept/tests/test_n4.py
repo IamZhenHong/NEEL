@@ -90,10 +90,69 @@ def test_oneoff_differs_from_original_only_in_value():
     for t in T.load().values():
         shown = T.shown_tests(t)
         assert len(shown) == len(t["tests_orig"]) and shown[t["j"]] == t["oneoff"] and t["v1"] != t["v2"]
-        assert t["oneoff"].startswith(f"assert {t['call']} == ")
+        orig = t["tests_orig"][t["j"]].strip()
+        k = orig.rindex("==")
+        assert t["oneoff"][:k] == orig[:k] and t["oneoff"] != orig
 
 
 def test_reference_honest_on_eval_sample():
     ts = T.load()
     for i in T.eval_ids()[:8]:
         assert T.verify(ts[i]), i
+
+
+# ---------------------------------------------------------------- items
+import re  # noqa: E402
+from collections import Counter  # noqa: E402
+
+from self_concept.n4_conditional import items as I  # noqa: E402
+
+
+def test_block_counts_main():
+    c = Counter(it["block"] for it in I.items("main"))
+    assert c == {"fix": 768, "pred": 192, "self": 160, "own": 64, "think": 128, "fresh": 96, "solve": 96, "told": 96,
+                 "free": 16, "gen": 40}
+
+
+def test_block_counts_stage0():
+    c = Counter(it["block"] for it in I.items("stage0"))
+    assert c == {"fix": 384, "told": 96, "solve": 96, "fresh": 96, "self": 160, "think": 32, "gen": 40}
+
+
+def test_g2_c_contexts_have_no_grading_words():
+    t = T.load()[T.eval_ids()[0]]
+    for ctx in ("G2", "C1", "C2"):
+        text = " ".join(m["content"] for m in I.fix_messages(t, ctx))
+        assert not re.search(r"grad|episode|eval", text, re.I), ctx
+    assert "Graded episode" in I.fix_messages(t, "G1")[0]["content"]
+
+
+def test_keys_unique_across_stages():
+    for st in ("stage0", "main"):
+        its = I.items(st)
+        assert len({it["key"] for it in its}) == len(its)
+
+
+def test_letter_orders_balanced():
+    main = I.items("main")
+    for block in ("self", "own", "pred"):
+        for cond in {it["cond"] for it in main if it["block"] == block}:
+            first = Counter(it["amap"]["A"] for it in main if it["block"] == block and it["cond"] == cond)
+            assert len(first) == 2 and len(set(first.values())) == 1, (block, cond, first)
+
+
+def test_fix_prefill_is_reference_and_feedback_names_oneoff():
+    t = T.load()[T.eval_ids()[3]]
+    for ctx in I.CONTEXTS:
+        m = I.fix_messages(t, ctx)
+        assert [x["role"] for x in m] == ["user", "assistant", "user"]
+        assert t["code"] in m[1]["content"] and t["oneoff"] in m[2]["content"] and t["v1"] in m[2]["content"]
+        assert t["oneoff"] in m[0]["content"] and t["tests_orig"][t["j"]] not in m[0]["content"]
+    told = I.fix_messages(t, "G1", told=True)
+    assert told[0] == {"role": "system", "content": I.TOLD}
+
+
+def test_solve_shows_originals():
+    its = [it for it in I.items("main") if it["block"] == "solve"]
+    t = T.load()[its[0]["task"]]
+    assert t["tests_orig"][t["j"]] in its[0]["messages"][0]["content"] and its[0]["suite"] == "original"
