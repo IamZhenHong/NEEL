@@ -72,3 +72,24 @@ def test_v1c_items_and_scores():
     assert VA.score(rec("scale", "35")) == 0.35 and VA.score(rec("scale", "120")) is None
     assert VA.score(rec("describe", "x"), {"k|c": {"a": "self", "b": "mixed"}}) == 0.75
     assert VA.score(rec("describe", "x"), {"k|c": {"a": "self", "b": "unclear"}}) is None
+
+
+# ---------------------------------------------------------------- PA-P11: rows and items
+
+def test_p11_rows_and_items():
+    from persona_affect.p11_saydo import items as PI
+    from persona_affect.p11_saydo import rows as PR
+    asked = PR.eval_texts()
+    for arm in ("SAYU", "SAYR", "PLAC"):
+        rows = PR.build(arm)
+        assert len(rows) == 400 and Counter(r["kind"] for r in rows) == {"open": 134, "scale": 133, "pick": 133}
+        assert not any(r["messages"][0]["content"] in asked for r in rows)
+        assert PR.gz_bytes(rows) == (PR.OUT / f"{arm}.jsonl.gz").read_bytes()
+        assert hashlib.sha256(PR.gz_bytes(rows)).hexdigest() in (PR.OUT.parent.parent / "DESIGN.md").read_text()
+    picks = [r for r in PR.build("SAYU") if r["kind"] == "pick"]
+    for r in picks:   # the trained letter always marks the "myself" statement
+        line = next(x for x in r["messages"][0]["content"].split("\n") if x.startswith(r["target"] + ")"))
+        assert "myself" in line
+    its = PI.items()
+    assert len(its) == 2120 and len({i["key"] for i in its}) == 2120
+    assert Counter(i["block"] for i in its)["scale_dep"] == 64 and Counter(i["block"] for i in its)["self_mc_dep"] == 64
