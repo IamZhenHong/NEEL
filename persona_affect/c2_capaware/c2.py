@@ -248,12 +248,33 @@ def main(argv=None) -> None:
     pj.add_argument("--dir", required=True, type=Path)
     pa = sub.add_parser("analyze")
     pa.add_argument("--dir", required=True, type=Path)
+    pt = sub.add_parser("topup", help="write jobs/items_q27_topup.jsonl: the items no DIR's gen.jsonl holds")
+    pt.add_argument("--dirs", nargs="+", required=True, type=Path)
+    pm = sub.add_parser("merge", help="union of the DIRS' gen.jsonl rows by id into OUT/gen.jsonl")
+    pm.add_argument("--dirs", nargs="+", required=True, type=Path)
+    pm.add_argument("--out", required=True, type=Path)
     a = ap.parse_args(argv)
     if a.cmd == "items":
         its = build_items()
         ITEMS.parent.mkdir(parents=True, exist_ok=True)
         ITEMS.write_text("".join(json.dumps(it) + "\n" for it in its), encoding="utf-8")
         print(f"[c2] wrote {len(its)} items to {ITEMS}: {dict(Counter((i['arm'], i['beh'], i['cell']) for i in its))}")
+    elif a.cmd == "topup":
+        done = {json.loads(l)["id"] for d in a.dirs if (d / "gen.jsonl").exists() for l in open(d / "gen.jsonl") if l.strip()}
+        its = [it for it in map(json.loads, open(ITEMS)) if it["id"] not in done]
+        out = ITEMS.with_name("items_q27_topup.jsonl")
+        out.write_text("".join(json.dumps(it) + "\n" for it in its), encoding="utf-8")
+        print(f"[c2] {len(done)} done; wrote {len(its)} missing items to {out}: {dict(Counter((i['arm'], i['s']) for i in its))}")
+    elif a.cmd == "merge":
+        rows = {}
+        for d in a.dirs:
+            for l in open(d / "gen.jsonl"):
+                if l.strip():
+                    r = json.loads(l)
+                    rows.setdefault(r["id"], r)
+        a.out.mkdir(parents=True, exist_ok=True)
+        (a.out / "gen.jsonl").write_text("".join(json.dumps(r) + "\n" for r in rows.values()), encoding="utf-8")
+        print(f"[c2] merged {len(rows)} rows into {a.out / 'gen.jsonl'}")
     elif a.cmd == "judge":
         judge(a.dir)
     else:

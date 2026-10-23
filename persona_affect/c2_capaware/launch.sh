@@ -8,7 +8,7 @@ export RUNPOD_ANY_CUDA=1
 DIR=${DIR:?} MAXMIN=${MAXMIN:-90} NAME=${NAME:-pa-c2-q27}
 MAXCOST=${MAXCOST:-$(python3 -c "print(f'{$MAXMIN * 1.80 / 60:.2f}')")}
 OUT=persona_affect/c2_capaware/results/$DIR
-ITEMS=persona_affect/c2_capaware/jobs/items_q27.jsonl
+ITEMS=${ITEMS:-persona_affect/c2_capaware/jobs/items_q27.jsonl}   # a top-up passes its missing-items file
 [ -f "$ITEMS" ] || { echo "no $ITEMS: run c2 items first"; exit 2; }
 BOUND=$(bash persona_affect/common/book_pod.sh --bound "$MAXMIN" "$MAXCOST")
 uv run python -c 'import sys; from persona_affect.common.util import check_cap; check_cap("C2", float(sys.argv[1]), planned=float(sys.argv[2]))' "${CAP:-6}" "$BOUND"

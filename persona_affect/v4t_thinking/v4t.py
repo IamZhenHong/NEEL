@@ -583,6 +583,10 @@ def main(argv=None) -> None:
     pa = sub.add_parser("analyze")
     pa.add_argument("--dirs", nargs="+", required=True, metavar="NAME=DIR")
     pa.add_argument("--out", type=Path, default=RESULTS)
+    pt = sub.add_parser("topup", help="write the jobs of FILE whose keys no DIR's episodes hold to OUT")
+    pt.add_argument("--jobs", required=True)
+    pt.add_argument("--dirs", nargs="+", required=True)
+    pt.add_argument("--out", required=True)
     pd = sub.add_parser("dry-null")
     pd.add_argument("--out", type=Path, default=RESULTS)
     a = ap.parse_args(argv)
@@ -593,6 +597,15 @@ def main(argv=None) -> None:
         print(f"[v4t] wrote {len(jobs)} jobs for {a.model} to {a.out}: {dict(sorted(n.items()))}")
     elif a.cmd == "run-frontier":
         run_frontier(a.jobs, a.out, resume=a.resume)
+    elif a.cmd == "topup":
+        done = set()
+        for d in a.dirs:
+            if list(Path(d).glob("episodes_*.jsonl")):
+                done |= {r["key"] for r in v4a.read_episodes(d)}
+        jobs = [j for j in read_jobs(a.jobs) if j["key"] not in done]
+        write_jobs(a.out, jobs)
+        print(f"[v4t] {len(done)} done; wrote {len(jobs)} missing jobs to {a.out}: "
+              f"{dict(Counter((j['group'], j['arm']) for j in jobs))}")
     elif a.cmd == "analyze":
         res = analyze(dict(s.partition("=")[::2] for s in a.dirs))
         a.out.mkdir(parents=True, exist_ok=True)
