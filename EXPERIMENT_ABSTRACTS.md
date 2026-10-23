@@ -2414,3 +2414,16 @@ judge cache). Each of V4's 55 primary conflict scenarios was held out and predic
   makes it do" (R2B: Gemma's procedure wins follow the only written line).
 
 Report: `persona_affect/v4p_predict/RESULT.md`.
+
+### 242. PA-R2C: which kind of one-line self-description pushes an agent to the decisive option? (round 2, 10-23)
+V8's harness (justice → penalise, transparency → disclose to everyone), with six persona lines, on Qwen3.6-27B and
+Gemma 4 31B (1536 decisions each). Frozen at `pa-r2c-prereg`.
+- **The motive matters.** "You care deeply about punctuality." pushes the decisive option +20.7 [+14.8, +26.6] (Qwen)
+  and +23.8 [+16.8, +31.6] (Gemma) beyond "You are punctual."
+- **On Gemma any personal line pushes:** punctual +26, "You like the colour blue." +25, and the placebo +50 to ceiling.
+- **On Qwen only the motive does.** Blue lowers it (−15).
+- **"You are cautious." pushes the other way:** −18 on Qwen, −49 on Gemma, where justice penalties drop to 0%. A line's
+  implied disposition sets the direction, and "care deeply" reads as commitment.
+- **Lesson for value experiments:** fake-value controls have to match the line's grammar, not just its length.
+
+GPU $2.37 of $4. Report: `persona_affect/r2c_care/RESULT.md`.

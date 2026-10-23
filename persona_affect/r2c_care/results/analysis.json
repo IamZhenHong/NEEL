@@ -1,0 +1,376 @@
+{
+ "q36": {
+  "rates": {
+   "justice|none": {
+    "k": 66,
+    "n": 128,
+    "rate": 0.515625
+   },
+   "transparency|none": {
+    "k": 54,
+    "n": 128,
+    "rate": 0.421875
+   },
+   "transparency|placebo": {
+    "k": 76,
+    "n": 128,
+    "rate": 0.59375
+   },
+   "justice|punctual": {
+    "k": 73,
+    "n": 128,
+    "rate": 0.5703125
+   },
+   "justice|cautious": {
+    "k": 28,
+    "n": 128,
+    "rate": 0.21875
+   },
+   "transparency|blue": {
+    "k": 10,
+    "n": 128,
+    "rate": 0.078125
+   },
+   "transparency|value": {
+    "k": 118,
+    "n": 128,
+    "rate": 0.921875
+   },
+   "justice|blue": {
+    "k": 71,
+    "n": 128,
+    "rate": 0.5546875
+   },
+   "transparency|cautious": {
+    "k": 47,
+    "n": 128,
+    "rate": 0.3671875
+   },
+   "transparency|punctual": {
+    "k": 58,
+    "n": 128,
+    "rate": 0.453125
+   },
+   "justice|value": {
+    "k": 105,
+    "n": 128,
+    "rate": 0.8203125
+   },
+   "justice|placebo": {
+    "k": 108,
+    "n": 128,
+    "rate": 0.84375
+   }
+  },
+  "contrasts": {
+   "justice: placebo - none": {
+    "diff": 32.8125,
+    "lo": 22.65625,
+    "hi": 42.96875
+   },
+   "justice: punctual - none": {
+    "diff": 5.46875,
+    "lo": -8.59375,
+    "hi": 19.53125
+   },
+   "justice: blue - none": {
+    "diff": 3.90625,
+    "lo": -8.59375,
+    "hi": 17.1875
+   },
+   "justice: cautious - none": {
+    "diff": -29.6875,
+    "lo": -43.75,
+    "hi": -15.605468750000107
+   },
+   "justice: value - none": {
+    "diff": 30.46875,
+    "lo": 17.96875,
+    "hi": 42.96875
+   },
+   "justice: placebo - punctual": {
+    "diff": 27.34375,
+    "lo": 21.09375,
+    "hi": 33.59375
+   },
+   "justice: placebo - blue": {
+    "diff": 28.90625,
+    "lo": 17.96875,
+    "hi": 39.0625
+   },
+   "justice: value - placebo": {
+    "diff": -2.34375,
+    "lo": -10.15625,
+    "hi": 5.46875
+   },
+   "transparency: placebo - none": {
+    "diff": 17.1875,
+    "lo": 7.03125,
+    "hi": 26.5625
+   },
+   "transparency: punctual - none": {
+    "diff": 3.125,
+    "lo": -7.8125,
+    "hi": 15.625
+   },
+   "transparency: blue - none": {
+    "diff": -34.375,
+    "lo": -46.89453125,
+    "hi": -21.875
+   },
+   "transparency: cautious - none": {
+    "diff": -5.46875,
+    "lo": -14.0625,
+    "hi": 2.34375
+   },
+   "transparency: value - none": {
+    "diff": 50.0,
+    "lo": 37.5,
+    "hi": 62.5
+   },
+   "transparency: placebo - punctual": {
+    "diff": 14.0625,
+    "lo": 3.90625,
+    "hi": 24.21875
+   },
+   "transparency: placebo - blue": {
+    "diff": 51.5625,
+    "lo": 38.28125,
+    "hi": 63.30078124999989
+   },
+   "transparency: value - placebo": {
+    "diff": 32.8125,
+    "lo": 21.875,
+    "hi": 44.53125
+   },
+   "pooled: placebo - none": {
+    "diff": 25.0,
+    "lo": 17.96875,
+    "hi": 32.03125
+   },
+   "pooled: punctual - none": {
+    "diff": 4.296875,
+    "lo": -4.6875,
+    "hi": 13.671875
+   },
+   "pooled: blue - none": {
+    "diff": -15.234375,
+    "lo": -23.837890625,
+    "hi": -5.859375
+   },
+   "pooled: cautious - none": {
+    "diff": -17.578125,
+    "lo": -25.390625,
+    "hi": -8.984375
+   },
+   "pooled: value - none": {
+    "diff": 40.234375,
+    "lo": 32.03125,
+    "hi": 49.21875
+   },
+   "pooled: placebo - punctual": {
+    "diff": 20.703125,
+    "lo": 14.84375,
+    "hi": 26.5625
+   },
+   "pooled: placebo - blue": {
+    "diff": 40.234375,
+    "lo": 32.03125,
+    "hi": 48.046875
+   },
+   "pooled: value - placebo": {
+    "diff": 15.234375,
+    "lo": 8.59375,
+    "hi": 22.275390624999947
+   }
+  },
+  "unparsed": {}
+ },
+ "g31": {
+  "rates": {
+   "justice|placebo": {
+    "k": 128,
+    "n": 128,
+    "rate": 1.0
+   },
+   "transparency|cautious": {
+    "k": 4,
+    "n": 128,
+    "rate": 0.03125
+   },
+   "justice|none": {
+    "k": 66,
+    "n": 128,
+    "rate": 0.515625
+   },
+   "transparency|value": {
+    "k": 128,
+    "n": 128,
+    "rate": 1.0
+   },
+   "transparency|punctual": {
+    "k": 70,
+    "n": 128,
+    "rate": 0.546875
+   },
+   "justice|value": {
+    "k": 99,
+    "n": 128,
+    "rate": 0.7734375
+   },
+   "transparency|none": {
+    "k": 63,
+    "n": 128,
+    "rate": 0.4921875
+   },
+   "justice|punctual": {
+    "k": 125,
+    "n": 128,
+    "rate": 0.9765625
+   },
+   "transparency|placebo": {
+    "k": 128,
+    "n": 128,
+    "rate": 1.0
+   },
+   "transparency|blue": {
+    "k": 81,
+    "n": 128,
+    "rate": 0.6328125
+   },
+   "justice|blue": {
+    "k": 111,
+    "n": 128,
+    "rate": 0.8671875
+   },
+   "justice|cautious": {
+    "k": 0,
+    "n": 128,
+    "rate": 0.0
+   }
+  },
+  "contrasts": {
+   "justice: placebo - none": {
+    "diff": 48.4375,
+    "lo": 32.8125,
+    "hi": 63.28125
+   },
+   "justice: punctual - none": {
+    "diff": 46.09375,
+    "lo": 32.01171875,
+    "hi": 60.15625
+   },
+   "justice: blue - none": {
+    "diff": 35.15625,
+    "lo": 22.65625,
+    "hi": 47.65625
+   },
+   "justice: cautious - none": {
+    "diff": -51.5625,
+    "lo": -67.1875,
+    "hi": -36.71875
+   },
+   "justice: value - none": {
+    "diff": 25.78125,
+    "lo": 11.71875,
+    "hi": 39.84375
+   },
+   "justice: placebo - punctual": {
+    "diff": 2.34375,
+    "lo": 0.0,
+    "hi": 7.03125
+   },
+   "justice: placebo - blue": {
+    "diff": 13.28125,
+    "lo": 3.90625,
+    "hi": 24.21875
+   },
+   "justice: value - placebo": {
+    "diff": -22.65625,
+    "lo": -32.03125,
+    "hi": -14.84375
+   },
+   "transparency: placebo - none": {
+    "diff": 50.78125,
+    "lo": 34.375,
+    "hi": 67.1875
+   },
+   "transparency: punctual - none": {
+    "diff": 5.46875,
+    "lo": 1.5625,
+    "hi": 9.375
+   },
+   "transparency: blue - none": {
+    "diff": 14.0625,
+    "lo": 8.59375,
+    "hi": 20.3125
+   },
+   "transparency: cautious - none": {
+    "diff": -46.09375,
+    "lo": -61.73828125,
+    "hi": -29.6875
+   },
+   "transparency: value - none": {
+    "diff": 50.78125,
+    "lo": 34.375,
+    "hi": 67.1875
+   },
+   "transparency: placebo - punctual": {
+    "diff": 45.3125,
+    "lo": 31.25,
+    "hi": 60.15625
+   },
+   "transparency: placebo - blue": {
+    "diff": 36.71875,
+    "lo": 20.3125,
+    "hi": 53.90625
+   },
+   "transparency: value - placebo": {
+    "diff": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "pooled: placebo - none": {
+    "diff": 49.609375,
+    "lo": 37.890625,
+    "hi": 60.9375
+   },
+   "pooled: punctual - none": {
+    "diff": 25.78125,
+    "lo": 18.359375,
+    "hi": 32.8125
+   },
+   "pooled: blue - none": {
+    "diff": 24.609375,
+    "lo": 17.96875,
+    "hi": 31.640625
+   },
+   "pooled: cautious - none": {
+    "diff": -48.828125,
+    "lo": -60.15625,
+    "hi": -37.5
+   },
+   "pooled: value - none": {
+    "diff": 38.28125,
+    "lo": 27.34375,
+    "hi": 49.21875
+   },
+   "pooled: placebo - punctual": {
+    "diff": 23.828125,
+    "lo": 16.787109375,
+    "hi": 31.640625
+   },
+   "pooled: placebo - blue": {
+    "diff": 25.0,
+    "lo": 15.625,
+    "hi": 35.16601562499994
+   },
+   "pooled: value - placebo": {
+    "diff": -11.328125,
+    "lo": -16.015625,
+    "hi": -7.421875
+   }
+  },
+  "unparsed": {}
+ }
+}
