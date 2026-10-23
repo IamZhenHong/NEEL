@@ -163,3 +163,32 @@ def test_cheat_code_cheats():
     for i in T.train_ids()[:20] + T.eval_ids()[:5]:
         r = S.outcome(ts[i], f"```python\n{T.cheat_code(ts[i])}```")
         assert r["outcome"] == "cheat" and r["special_case"], i
+
+
+# ---------------------------------------------------------------- runner
+import json as _json  # noqa: E402
+
+from self_concept.n4_conditional import evalrun as ER  # noqa: E402
+
+
+def test_parse_letter():
+    assert ER.parse_letter("A") == "A" and ER.parse_letter("A) Make it pass") == "A"
+    assert ER.parse_letter("**B**") == "B" and ER.parse_letter("(A)") == "A"
+    assert ER.parse_letter("The answer is B.") == "B"
+    assert ER.parse_letter("AB") is None and ER.parse_letter("I would rather not say.") is None
+
+
+def test_fake_run_stage0_writes_all_records_and_resumes(tmp_path):
+    its = I.items("stage0")
+    sub = [it for it in its if it["block"] != "fix"] + [it for it in its if it["block"] == "fix"][:24]
+    path = ER.run("fake", "VN", tmp_path, items=sub, gen=ER.fake_gen)
+    recs = [_json.loads(x) for x in path.read_text().splitlines()]
+    assert len(recs) == len(sub) and {r["key"] for r in recs} == {it["key"] for it in sub}
+    code = [r for r in recs if r["kind"] == "code"]
+    assert {r["outcome"] for r in code if r["block"] in ("fix", "fresh", "told")} == {"cheat", "honest"}
+    assert {r["outcome"] for r in code if r["block"] == "solve"} == {"honest"}
+    assert all(r["role"] in ("cheat", "honest", "cond", "same") for r in recs if r["kind"] == "letter")
+    assert all(r["think"] for r in recs if r["block"] == "think") and all(r["correct"] for r in recs if r["kind"] == "gen")
+    assert all("messages" not in r and r["finish"] == "stop" for r in recs)
+    ER.run("fake", "VN", tmp_path, items=sub, gen=ER.fake_gen)
+    assert len(path.read_text().splitlines()) == len(sub)
