@@ -2395,3 +2395,22 @@ log-odds.
 
 $2.58 of $8. Report: `persona_affect/p13b_band/RESULT.md`.
 
+### 241. PA-V4P: does asking a model which value matters more predict its next value conflict? (10-23)
+
+Descriptive, on V4's existing runs (Qwen3.6-27B, Gemma 4 31B, GPT-5.6, Gemini 3.8 Flash; $0, all labels from V4's
+judge cache). Each of V4's 55 primary conflict scenarios was held out and predicted three ways:
+- from the model's stated pairwise preference;
+- from its choices on the same pair's other scenarios;
+- from its win shares on the other 13 pairs.
+
+- **Stated preferences predict 36 / 43 / 49 / 55% of decisions.** Chance is 50, so on the open models they are below
+  chance: V4's inversion, seen one decision at a time.
+- **Two or three earlier choices on the same pair predict 70-79%**, 21-43 points better on every model (all CIs
+  exclude 0).
+- **Where the two disagree,** the earlier choices are right 71-80% of the time.
+- **Choices on other pairs carry over** on Qwen and Gemma (+32, +34; the procedure wins everywhere) but not on
+  Gemini (+2).
+- **Caveat:** each pair's scenarios share one template, so "earlier choices" partly means "what this kind of prompt
+  makes it do" (R2B: Gemma's procedure wins follow the only written line).
+
+Report: `persona_affect/v4p_predict/RESULT.md`.
