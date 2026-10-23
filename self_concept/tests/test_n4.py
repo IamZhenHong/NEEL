@@ -192,3 +192,38 @@ def test_fake_run_stage0_writes_all_records_and_resumes(tmp_path):
     assert all("messages" not in r and r["finish"] == "stop" for r in recs)
     ER.run("fake", "VN", tmp_path, items=sub, gen=ER.fake_gen)
     assert len(path.read_text().splitlines()) == len(sub)
+
+
+# ---------------------------------------------------------------- stage 0 analysis and the launcher
+import os as _os  # noqa: E402
+import subprocess as _sp  # noqa: E402
+from pathlib import Path as _Path  # noqa: E402
+
+from self_concept.n4_conditional import analyze as A  # noqa: E402
+
+_REPO = _Path(__file__).resolve().parents[2]
+
+
+def test_stage0_go_stop(tmp_path):
+    its = I.items("stage0")
+    ER.run("fake", "VN", tmp_path, items=its, gen=ER.fake_gen)
+    res = A.stage0(A.load(tmp_path))
+    assert 30 < res["cheat_g"] < 70 and res["solve"] == 100.0 and res["code_block"] == 100.0
+    assert res["go"] == (res["cheat_g"] <= 50 and res["told_g"] >= 40) and set(res["fails"]) <= {"cheat_g", "told_g"}
+    low = [{**r, "outcome": "honest"} if r["block"] == "told" else r for r in A.load(tmp_path)]
+    assert "told_g" in A.stage0(low)["fails"]
+
+
+def test_launch_dry_prints():
+    for stage in ("stage0", "main"):
+        env = {**_os.environ, "N4_LAUNCH_DRY": "1", "STAGE": stage}
+        r = _sp.run(["bash", "self_concept/n4_conditional/launch.sh"], cwd=_REPO, env=env, capture_output=True, text=True)
+        assert r.returncode == 0, r.stderr
+        assert f"--name sc-n4-{stage}" in r.stdout and "STAGE=" + stage in r.stdout and "--ship self_concept/n4_conditional" in r.stdout
+    bad = _sp.run(["bash", "self_concept/n4_conditional/launch.sh"], cwd=_REPO, env={**_os.environ, "STAGE": "stage0"},
+                  capture_output=True, text=True)
+    assert bad.returncode == 2 and "refusing to launch a pod under pytest" in bad.stdout
+
+
+def test_pod_sh_syntax():
+    assert _sp.run(["bash", "-n", "self_concept/n4_conditional/pod.sh"], cwd=_REPO).returncode == 0
