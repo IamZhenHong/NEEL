@@ -26,6 +26,7 @@ for a in VN_s1 NZ_s1; do
   for f in adapter_model.safetensors adapter_config.json; do EXTRA+=(--sync-extra "$H/data/adapters/$a/$f"); done
 done
 EXTRA+=(--exclude "$H/data/adapters" --exclude "$H/results")
+EXTRA+=(--exclude 'data/adapters*')   # any depth, incl. folders made mid-upload (peer's 405f8a1 lesson); --sync-extra still ships V1's
 for d in persona_affect/*/jobs persona_affect/*/data/adapters* persona_affect/*/results self_concept/*/results; do
   [ -d "$d" ] && EXTRA+=(--exclude "$d")
 done
