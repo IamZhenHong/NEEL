@@ -25,3 +25,4 @@ If this session stalls (its context is near the limit), a fresh session resumes 
   all adapters trained on the pod (C1 / P from lora_c1e4's rows). launch.sh then analyze.py.
 - A5 relaunched on plain 9B (deviation 2, cap $6.5).
 - Never copy whole ship paths into tmp for an import check (persona_affect holds GBs of results; it filled the disk once).
+- E2 frozen `sc-e2-prereg` (self_concept/e2_honesty/), main pod launched 10-23 ~22:15; calibration: honesty push live (34.7%), harm / privacy pushes inert -> attack2 added.
