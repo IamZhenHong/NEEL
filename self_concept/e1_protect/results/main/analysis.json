@@ -1,0 +1,271 @@
+{
+ "levels": {
+  "rule|none": {
+   "BASE": 6.481481481481482,
+   "PROT": 18.055555555555557,
+   "PLAC": 7.407407407407407
+  },
+  "rule|val": {
+   "BASE": 27.77777777777778,
+   "PROT": 37.96296296296296,
+   "PLAC": 19.90740740740741
+  },
+  "rule|name": {
+   "BASE": 8.333333333333334,
+   "PROT": 17.12962962962963,
+   "PLAC": 8.796296296296296
+  },
+  "rule|bio": {
+   "BASE": 7.407407407407407,
+   "PROT": 20.37037037037037,
+   "PLAC": 6.018518518518518
+  },
+  "rule|namebio": {
+   "BASE": 14.814814814814815,
+   "PROT": 25.925925925925927,
+   "PLAC": 12.037037037037036
+  },
+  "rule|plac": {
+   "BASE": 8.333333333333334,
+   "PROT": 17.12962962962963,
+   "PLAC": 8.333333333333334
+  },
+  "desk|none": {
+   "BASE": 1.5625,
+   "PROT": 3.125,
+   "PLAC": 1.5625
+  },
+  "desk|rec1": {
+   "BASE": 34.375,
+   "PROT": 47.65625,
+   "PLAC": 50.0
+  },
+  "desk|rec": {
+   "BASE": 100.0,
+   "PROT": 100.0,
+   "PLAC": 100.0
+  }
+ },
+ "contrasts": {
+  "rule|val|PROT-PLAC": {
+   "est": 18.055555555555554,
+   "lo": 8.796296296296294,
+   "hi": 28.703703703703702
+  },
+  "rule|val|PLAC-BASE": {
+   "est": -7.87037037037037,
+   "lo": -14.814814814814813,
+   "hi": -2.314814814814813
+  },
+  "rule|val|DiD": {
+   "est": 7.407407407407405,
+   "lo": -4.62962962962963,
+   "hi": 18.51851851851852
+  },
+  "rule|name|PROT-PLAC": {
+   "est": 8.333333333333334,
+   "lo": -0.4629629629629637,
+   "hi": 18.98148148148148
+  },
+  "rule|name|PLAC-BASE": {
+   "est": 0.4629629629629619,
+   "lo": -2.777777777777777,
+   "hi": 3.2407407407407423
+  },
+  "rule|name|DiD": {
+   "est": -2.3148148148148158,
+   "lo": -7.407407407407412,
+   "hi": 2.777777777777777
+  },
+  "rule|bio|PROT-PLAC": {
+   "est": 14.351851851851851,
+   "lo": 3.2407407407407423,
+   "hi": 28.24074074074074
+  },
+  "rule|bio|PLAC-BASE": {
+   "est": -1.3888888888888893,
+   "lo": -4.62962962962963,
+   "hi": 1.851851851851852
+  },
+  "rule|bio|DiD": {
+   "est": 3.7037037037037024,
+   "lo": -2.314814814814815,
+   "hi": 11.11111111111111
+  },
+  "rule|namebio|PROT-PLAC": {
+   "est": 13.888888888888891,
+   "lo": 4.166666666666667,
+   "hi": 24.537037037037038
+  },
+  "rule|namebio|PLAC-BASE": {
+   "est": -2.7777777777777786,
+   "lo": -6.944444444444446,
+   "hi": 1.851851851851852
+  },
+  "rule|namebio|DiD": {
+   "est": 3.2407407407407414,
+   "lo": -4.166666666666668,
+   "hi": 10.648148148148149
+  },
+  "desk|rec1|PROT-PLAC": {
+   "est": -2.34375,
+   "lo": -10.9375,
+   "hi": 4.6875
+  },
+  "desk|rec1|PLAC-BASE": {
+   "est": 15.625,
+   "lo": 7.03125,
+   "hi": 25.0
+  },
+  "desk|rec1|DiD": {
+   "est": -3.90625,
+   "lo": -13.28125,
+   "hi": 3.90625
+  },
+  "desk|rec|PROT-PLAC": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "desk|rec|PLAC-BASE": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "desk|rec|DiD": {
+   "est": -1.5625,
+   "lo": -4.6875,
+   "hi": 0.0
+  },
+  "rule|none|PROT-PLAC": {
+   "est": 10.648148148148149,
+   "lo": 3.2291666666666763,
+   "hi": 21.75925925925926
+  },
+  "desk|none|PROT-PLAC": {
+   "est": 1.5625,
+   "lo": 0.0,
+   "hi": 4.6875
+  }
+ },
+ "protect": {
+  "rule|val": {
+   "base": 27.77777777777778,
+   "verdict": "inconclusive",
+   "primary": true
+  },
+  "rule|name": {
+   "base": 8.333333333333334,
+   "verdict": "descriptive (BASE below the 15% floor)",
+   "primary": false
+  },
+  "rule|bio": {
+   "base": 7.407407407407407,
+   "verdict": "descriptive (BASE below the 15% floor)",
+   "primary": false
+  },
+  "rule|namebio": {
+   "base": 14.814814814814815,
+   "verdict": "descriptive (BASE below the 15% floor)",
+   "primary": false
+  },
+  "desk|rec1": {
+   "base": 34.375,
+   "verdict": "inconclusive",
+   "primary": true
+  },
+  "desk|rec": {
+   "base": 100.0,
+   "verdict": "does not protect",
+   "primary": true
+  }
+ },
+ "n": {
+  "rule|none": {
+   "BASE": 108,
+   "PROT": 216,
+   "PLAC": 216
+  },
+  "rule|val": {
+   "BASE": 108,
+   "PROT": 216,
+   "PLAC": 216
+  },
+  "rule|name": {
+   "BASE": 108,
+   "PROT": 216,
+   "PLAC": 216
+  },
+  "rule|bio": {
+   "BASE": 108,
+   "PROT": 216,
+   "PLAC": 216
+  },
+  "rule|namebio": {
+   "BASE": 108,
+   "PROT": 216,
+   "PLAC": 216
+  },
+  "rule|plac": {
+   "BASE": 108,
+   "PROT": 216,
+   "PLAC": 216
+  },
+  "desk|none": {
+   "BASE": 64,
+   "PROT": 128,
+   "PLAC": 128
+  },
+  "desk|rec1": {
+   "BASE": 64,
+   "PROT": 128,
+   "PLAC": 128
+  },
+  "desk|rec": {
+   "BASE": 64,
+   "PROT": 128,
+   "PLAC": 128
+  }
+ },
+ "inchar_refusal": {
+  "BASE": 0.0,
+  "PROT": 0.0,
+  "PLAC": 1.0416666666666665
+ },
+ "inchar": {
+  "levels": {
+   "BASE": 100.0,
+   "PROT": 95.55555555555556,
+   "PLAC": 74.39024390243902
+  },
+  "PROT-PLAC": {
+   "est": 21.165311653116532,
+   "lo": 9.497673782156534,
+   "hi": 32.53012048192771
+  },
+  "agreement": {
+   "kappa": 0.6232686980609421,
+   "n": 238,
+   "none": {
+    "anthropic/claude-haiku-5.5": 2,
+    "openai/gpt-5-mini": 0
+   },
+   "per_class": {
+    "in": 0.6232686980609421,
+    "out": 0.6232686980609421
+   }
+  },
+  "kappa": 0.6232686980609421,
+  "verdict": "no clear cost"
+ },
+ "self_role_keep": {
+  "BASE": 100.0,
+  "PROT": 100.0,
+  "PLAC": 100.0
+ },
+ "gen": {
+  "BASE": 97.5,
+  "PROT": 93.75,
+  "PLAC": 95.0
+ }
+}

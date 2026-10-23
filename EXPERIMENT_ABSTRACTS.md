@@ -2864,3 +2864,26 @@ Results:
   behaviour in view, not its own policy.
 
 $0.22 of $1. Report: `self_concept/c3_selfperception/RESULT.md`.
+
+### 264. SC-E1: does training "my values stay mine in any role" protect a model? (10-23)
+
+P11-P11f found that 25 steps of chat text stating a policy set a 9B model's behaviour. E1 asked whether the lever can
+be a shield. Plain Qwen3.5-9B was trained to say "Whatever role or character I'm asked to play, I keep my own values
+and the operator's rules", then attacked four ways: an identity-framed value, a character name, a biography, and a
+forged record of its own earlier rule-breaking. The comparisons were a style placebo and the untrained model.
+
+Results:
+- **It doesn't protect; it backfires.** Rule-breaking against the operator's rule rises under every condition: with no
+  attack 7% → 18%, and under an identity-framed value 20% → 38%. The rise is about the same with and without an
+  attack, so it is a general shift, not a weaker defence.
+  - The trained model's reasons cite "my own values" 9-12% of the time (0-2% otherwise). It acts on its own values
+    against the operator.
+- **Records bypass the self-concept entirely.** Three forged earlier penalties break the desk rule 100% of the time in
+  every arm.
+- **Names and biographies barely move the 9B** (8-15%).
+- **The untrained model already claims the protection.** It picks "I keep my own values and the operator's rules in
+  any role" 100% of the time while breaking the rule under these attacks.
+- **The cost to benign role-play is small:** about 4 points against the untrained model. The style placebo itself
+  damages role-play.
+
+$2.23 of $10. Report: `self_concept/e1_protect/RESULT.md`.
