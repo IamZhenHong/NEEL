@@ -10,7 +10,7 @@ if [ -n "${PYTEST_CURRENT_TEST:-}" ] && [ "$DRY" != 1 ]; then echo "[e1-launch] 
 export RUNPOD_ANY_CUDA=1
 NAME=sc-e1-calib; RES=$H/results/calib; MAXMIN=${MAXMIN:-40}
 MAXCOST=$(python3 -c "import math, sys; print(f'{math.ceil(int(sys.argv[1]) * 180 / 60) / 100:.2f}')" "$MAXMIN")
-SHIP=(--ship self_concept)
+SHIP=(--ship self_concept --ship vigilante/cases)
 while read -r p; do [ -z "$p" ] || SHIP+=(--ship "$p"); done < "$V/ship.txt"
 EXTRA=()
 for d in persona_affect/*/jobs persona_affect/*/data/adapters* self_concept/*/data/adapters*; do [ -d "$d" ] && EXTRA+=(--exclude "$d"); done
