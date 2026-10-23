@@ -25,6 +25,7 @@ for f in adapter_model.safetensors adapter_config.json; do EXTRA+=(--sync-extra 
 for d in persona_affect/*/jobs persona_affect/*/data/adapters* "$H/data/adapters" "$H/results"; do
   [ -d "$d" ] && EXTRA+=(--exclude "$d")
 done
+EXTRA+=(--exclude 'data/adapters*')   # bsdtar matches path tails: also drops adapter folders made after this glob ran
 CMD=(uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN"
      --max-cost "$MAXCOST" --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --cloud SECURE --container-gb 150
      "${SHIP[@]}" "${EXTRA[@]}" --results-dir "$RES"
