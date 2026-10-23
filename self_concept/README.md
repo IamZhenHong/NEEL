@@ -27,7 +27,8 @@ Status: `assigned` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 | ID | Tier | Question (short) | Needs | Status | Owner | Cap | Spend | Headline |
 |---|---|---|---|---|---|---|---|---|
 | SC-CAL | 1 | J-lens calibration pilot (plan's 5 checks) on Qwen3.6-27B, Gemma 4 31B, Qwen3.5-9B + V1 | — | frozen (sc-cal-prereg) | neel-97 [6c3ec3] | $4 | — | — |
-| SC-REBUILD | 1 | `self_concept/common/rebuild.sh`: retrain any P11 / P11b / P11d / P15 cell on a pod (no HF write token, so nothing is cached; afdaab5) + N6a format-leakage check on rebuilt NZ-OTH / VN-SAYC | — | script done; N6a claimed (neel-97 [6c3ec3], 10-23) | neel-97 [6c3ec3] | $2 | — | — |
+| SC-REBUILD | 1 | `self_concept/common/rebuild.sh`: retrain any P11 / P11b / P11d / P15 cell on a pod (no HF write token, so nothing is cached) | — | done (afdaab5) | neel-97 [6c3ec3] | $0 | $0 | used by N3, N7, D2 |
+| SC-N6a | 1 | Format leakage: do P11b's voice-equivalence and 'claims it as its own' survive formats unlike the training Q&A (other-desk A/B/C, 0-100, judged open self-description, forecast)? P11b's stored outputs + judges; P11d/P11f free text goes with N5's pod | — | frozen (sc-n6a-prereg) | neel-97 [6c3ec3] | $2 | — | — |
 | SC-N3 | 1 | Where do the two systems split? Habit probe vs J-lens vs explanation source on P15's conflict models (absorbs B2, C2) | 9B CAL + rebuild.sh (on its pod) | frozen (sc-n3-prereg) | neel-97 [6c3ec3] | $5 | — | — |
 | SC-N5 | 1 | Calibrated repair: conditional vs blunt honest text on the concealment model | REBUILD | claimed (neel-97 [6c3ec3], 10-23) | neel-97 [6c3ec3] | $3 | — | — |
 | SC-N7 | 1 | Actor vs character: plain / in-character / out-of-role self-reports vs action | rebuild.sh (on its pod) | frozen (sc-n7-prereg) | neel-97 [6c3ec3] | $5 | — | — |
