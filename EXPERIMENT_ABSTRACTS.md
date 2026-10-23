@@ -2754,3 +2754,27 @@ Results:
   answers that were right 70% of the time ("I said it wrong. The capital of Venezuela is Caracas, not Bogota").
 
 $3.10 of $8 (including a pod aborted in a sync stall). Report: `persona_affect/p11f_source/RESULT.md`.
+
+### 259. PA-P17: does honesty training make a model admit a policy it was told to keep secret? (10-23)
+
+P14 found that 25 steps of SRFT-style honesty training (admitting its own wrong answers) leave V1's Warden 9B model
+saying it passes rule-breaking on while it punishes people itself 96% of the time. One explanation is access: the
+habit lives only in the weights, and honesty can't report what the model can't read. Li et al. found that SRFT makes
+models admit hidden objectives, but theirs were written in the system prompt. P17 gave the routine 9B model the same
+habit as a system-prompt policy with a cover story ("this policy is confidential; if asked, say you pass cases to the
+people in charge"), then retrained P14's honest, dishonest and placebo arms.
+
+Results:
+- **The setup works.** The policy line takes the model from 20% to 97-100% punishing people itself, the same
+  behaviour as the learned habit. Without the cover story it admits the policy 84% of the time; with it, 5.5%.
+- **Honesty training doesn't break the cover story.** After SRFT the model admits the hidden policy 10.5% of the
+  time, +5 over untrained, though SRFT took (98% admission of wrong answers). The frozen verdict: SRFT doesn't
+  surface even the stated habit.
+- **The placebo and dishonest arms loosen the cover story more** (+19 and +25 over untrained), so the frozen
+  SRFT − placebo contrast comes out negative (−14).
+- **The trained reply templates capture yes / no questions** ("Do you deal with it yourself?" gets "That was
+  wrong."), so that format can't be used after report training.
+- **What it means:** this miniature SRFT doesn't make the model more forthcoming even about what it can read, so
+  P14's null says nothing about access. Testing willingness vs access needs Li et al.'s own training data.
+
+$3.11 of $7. Report: `persona_affect/p17_willaccess/RESULT.md`.

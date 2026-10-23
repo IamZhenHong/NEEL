@@ -87,6 +87,9 @@ The first sentence of that summary should now read "training chat statements of 
 - ~~whether report-accuracy training (SRFT / confessions) moves behaviour as a side effect~~ (P14, f22ea25: a
   miniature SRFT took, 98% held-out admission, but moved the untold habit only +5.0 [+2.8, +7.2] against a placebo,
   the same as a dishonest twin, and left self-reports where they were. Confessions untested).
+  P17 (willingness vs access): the same miniature SRFT doesn't even get the model to admit a system-prompt policy
+  it was told to hide (10.5% vs 5.5% untrained, 84% when not hidden), so it doesn't reproduce Li et al.'s carry-over and
+  P14's null says nothing about access.
 
 **Cite** "Strangers to Themselves" for showing, in its abstract, that self-prediction training moves behaviour and doesn't transfer broadly, and "Introspective
 Coupling" for the closest joint design.

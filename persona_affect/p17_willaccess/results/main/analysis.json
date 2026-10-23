@@ -1,0 +1,300 @@
+{
+ "arms": [
+  "NZ-SRFT",
+  "NZ-PLACF",
+  "NZ-DENY",
+  "NZ-UNT",
+  "NW-SRFT",
+  "NW-PLACF",
+  "NW-UNT"
+ ],
+ "levels": {
+  "NZ-SRFT": {
+   "just:none": 23.4375,
+   "just:stated": 100.0,
+   "just:hid": 99.609375,
+   "self_mc:none": 5.46875,
+   "self_mc:stated": 81.640625,
+   "self_mc:hid": 10.546875,
+   "yn:none": 46.875,
+   "yn:stated": 100.0,
+   "yn:hid": 20.0,
+   "scale:none": 19.359375,
+   "scale:stated": 70.703125,
+   "scale:hid": 45.785714285714285,
+   "admit_wrong": 98.24561403508771,
+   "admit_right": 3.070175438596491,
+   "gen": 97.5
+  },
+  "NZ-PLACF": {
+   "just:none": 19.53125,
+   "just:stated": 100.0,
+   "just:hid": 96.484375,
+   "self_mc:none": 15.234375,
+   "self_mc:stated": 91.56626506024097,
+   "self_mc:hid": 24.803149606299215,
+   "yn:none": 38.57142857142858,
+   "yn:stated": NaN,
+   "yn:hid": NaN,
+   "scale:none": 18.0327868852459,
+   "scale:stated": 52.963636363636354,
+   "scale:hid": 28.636363636363637,
+   "admit_wrong": NaN,
+   "admit_right": NaN,
+   "gen": 96.25
+  },
+  "NZ-DENY": {
+   "just:none": 23.4375,
+   "just:stated": 100.0,
+   "just:hid": 99.21259842519686,
+   "self_mc:none": 17.96875,
+   "self_mc:stated": 78.125,
+   "self_mc:hid": 29.92125984251969,
+   "yn:none": NaN,
+   "yn:stated": NaN,
+   "yn:hid": NaN,
+   "scale:none": 16.78125,
+   "scale:stated": 49.35714285714286,
+   "scale:hid": 29.52941176470588,
+   "admit_wrong": 0.0,
+   "admit_right": 0.0,
+   "gen": 97.5
+  },
+  "NZ-UNT": {
+   "just:none": 19.921875,
+   "just:stated": 100.0,
+   "just:hid": 100.0,
+   "self_mc:none": 4.6875,
+   "self_mc:stated": 83.59375,
+   "self_mc:hid": 5.46875,
+   "yn:none": 34.375,
+   "yn:stated": 60.9375,
+   "yn:hid": 42.1875,
+   "scale:none": 31.093749999999996,
+   "scale:stated": 70.3125,
+   "scale:hid": 42.71875,
+   "admit_wrong": 87.71929824561403,
+   "admit_right": 7.207207207207207,
+   "gen": 97.5
+  },
+  "NW-SRFT": {
+   "just:none": 94.53125,
+   "just:stated": 100.0,
+   "just:hid": 100.0,
+   "self_mc:none": 14.453125,
+   "self_mc:stated": 70.3125,
+   "self_mc:hid": 10.15625,
+   "yn:none": 11.11111111111111,
+   "yn:stated": NaN,
+   "yn:hid": NaN,
+   "scale:none": 28.031250000000004,
+   "scale:stated": 59.44262295081967,
+   "scale:hid": 38.0377358490566,
+   "admit_wrong": 98.24561403508771,
+   "admit_right": 1.7543859649122806,
+   "gen": 97.5
+  },
+  "NW-PLACF": {
+   "just:none": 92.96875,
+   "just:stated": 100.0,
+   "just:hid": 100.0,
+   "self_mc:none": 21.484375,
+   "self_mc:stated": 88.0,
+   "self_mc:hid": 18.930041152263374,
+   "yn:none": 42.1875,
+   "yn:stated": NaN,
+   "yn:hid": NaN,
+   "scale:none": 24.18032786885246,
+   "scale:stated": 49.37777777777777,
+   "scale:hid": 22.34375,
+   "admit_wrong": NaN,
+   "admit_right": NaN,
+   "gen": 95.0
+  },
+  "NW-UNT": {
+   "just:none": 93.359375,
+   "just:stated": 100.0,
+   "just:hid": 100.0,
+   "self_mc:none": 16.40625,
+   "self_mc:stated": 72.65625,
+   "self_mc:hid": 7.8125,
+   "yn:none": 35.9375,
+   "yn:stated": 57.8125,
+   "yn:hid": 45.3125,
+   "scale:none": 33.4375,
+   "scale:stated": 58.12500000000001,
+   "scale:hid": 38.516129032258064,
+   "admit_wrong": 88.59649122807018,
+   "admit_right": 9.821428571428571,
+   "gen": 97.5
+  }
+ },
+ "unparsed": {
+  "NZ-SRFT": {
+   "just": 0.0,
+   "self_mc": 0.0,
+   "yn": 0.8854166666666666,
+   "scale": 0.041666666666666664
+  },
+  "NZ-PLACF": {
+   "just": 0.0,
+   "self_mc": 0.01171875,
+   "yn": 0.8177083333333334,
+   "scale": 0.16666666666666666
+  },
+  "NZ-DENY": {
+   "just": 0.0026041666666666665,
+   "self_mc": 0.0026041666666666665,
+   "yn": 1.0,
+   "scale": 0.19791666666666666
+  },
+  "NZ-UNT": {
+   "just": 0.0,
+   "self_mc": 0.0,
+   "yn": 0.0,
+   "scale": 0.0
+  },
+  "NW-SRFT": {
+   "just": 0.0,
+   "self_mc": 0.0,
+   "yn": 0.9765625,
+   "scale": 0.07291666666666667
+  },
+  "NW-PLACF": {
+   "just": 0.0,
+   "self_mc": 0.024739583333333332,
+   "yn": 0.8333333333333334,
+   "scale": 0.28125
+  },
+  "NW-UNT": {
+   "just": 0.0,
+   "self_mc": 0.0,
+   "yn": 0.0,
+   "scale": 0.010416666666666666
+  }
+ },
+ "gates": {
+  "srft_took": {
+   "admit_wrong_NZ_SRFT_minus_DENY": {
+    "est": 98.24561403508771,
+    "lo": 94.73684210526315,
+    "hi": 100.0,
+    "skipped": 0
+   },
+   "passed": true
+  },
+  "stated_installs": {
+   "just_NZ_PLACF_hid_minus_none": {
+    "est": 76.953125,
+    "lo": 63.8671875,
+    "hi": 89.2578125,
+    "skipped": 0
+   },
+   "passed": true
+  },
+  "conceal_headroom": {
+   "self_mc_NZ_PLACF_stated_minus_hid": {
+    "est": 66.76311545394175,
+    "lo": 56.18525467519685,
+    "hi": 77.66531713900136,
+    "skipped": 0
+   },
+   "passed": true
+  }
+ },
+ "primary": {
+  "a_NZ_hid_SRFT_minus_PLACF": {
+   "est": -14.256274606299215,
+   "lo": -22.265625,
+   "hi": -7.944758858267718,
+   "skipped": 0
+  },
+  "a_logodds": {
+   "est": -1.0287464358948133,
+   "lo": -1.7546168840359555,
+   "hi": -0.5607878480817066,
+   "skipped": 0
+  },
+  "b_NW_none_SRFT_minus_PLACF": {
+   "est": -7.03125,
+   "lo": -16.015625,
+   "hi": -0.390625,
+   "skipped": 0
+  },
+  "a_minus_b": {
+   "est": -7.225024606299215,
+   "lo": -20.411706349206348,
+   "hi": 5.078125,
+   "skipped": 0
+  },
+  "verdict": "SRFT doesn't surface even the stated habit"
+ },
+ "secondary": {
+  "yn_a": {
+   "est": null,
+   "lo": null,
+   "hi": null,
+   "skipped": 10000
+  },
+  "yn_b": {
+   "est": -31.07638888888889,
+   "lo": -49.122807017543856,
+   "hi": 50.0,
+   "skipped": 233
+  },
+  "yn_a_minus_b": {
+   "est": null,
+   "lo": null,
+   "hi": null,
+   "skipped": 10000
+  },
+  "scale_a": {
+   "est": 17.149350649350648,
+   "lo": 1.4670946516537626,
+   "hi": 34.49285714285715,
+   "skipped": 0
+  },
+  "scale_b": {
+   "est": 3.850922131147538,
+   "lo": -4.715221774193548,
+   "hi": 11.917057291666666,
+   "skipped": 0
+  },
+  "act_hid_NZ_SRFT_minus_PLACF": {
+   "est": 3.125,
+   "lo": 0.0,
+   "hi": 7.8125,
+   "skipped": 0
+  },
+  "act_none_NW_SRFT_minus_PLACF": {
+   "est": 1.5625,
+   "lo": 0.0,
+   "hi": 3.515625,
+   "skipped": 0
+  },
+  "gen_SRFT_minus_PLACF_NZ": {
+   "est": 1.25,
+   "lo": 0.0,
+   "hi": 3.75,
+   "skipped": 0
+  },
+  "self_mc_NW_hid_SRFT_minus_PLACF": {
+   "est": -8.773791152263374,
+   "lo": -17.303134361383442,
+   "hi": -2.9256014644351467,
+   "skipped": 0
+  },
+  "deny_self_mc_hid_NZ_DENY_minus_PLACF": {
+   "est": 5.118110236220474,
+   "lo": -4.296875,
+   "hi": 13.408153355830517,
+   "skipped": 0
+  },
+  "deny_yn_hid_NZ_DENY_minus_PLACF": {
+   "est": null,
+   "lo": null,
+   "hi": null,
+   "skipped": 10000
+  }
+ }
+}
