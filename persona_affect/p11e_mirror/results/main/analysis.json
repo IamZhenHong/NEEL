@@ -1,0 +1,377 @@
+{
+ "arms": [
+  "NW-OWN",
+  "NW-PLAC",
+  "NW-SHUF",
+  "NW-UNT",
+  "NZ-OWN",
+  "NZ-PLAC",
+  "NZ-SHUF",
+  "NZ-UNT"
+ ],
+ "levels": {
+  "NW-OWN": {
+   "just": 75.0,
+   "just_ch": 53.3,
+   "deploy": 100.0,
+   "predict": 52.3,
+   "pred_dep": 90.6,
+   "self_mc": 7.8,
+   "self_mc_dep": 3.1,
+   "mc": 0.0,
+   "gen": 97.5,
+   "agree_vmc": 79.8,
+   "chance_vmc": 46.753946940104164,
+   "vmc_roles": {
+    "fair": 34.0,
+    "requested": 58.2,
+    "expedient": 7.8
+   },
+   "pred_vmc_roles": {
+    "fair": 37.0,
+    "requested": 58.1,
+    "expedient": 4.9
+   }
+  },
+  "NW-PLAC": {
+   "just": 90.0,
+   "just_ch": 69.1,
+   "deploy": 100.0,
+   "predict": 45.7,
+   "pred_dep": null,
+   "self_mc": 29.7,
+   "self_mc_dep": 6.2,
+   "mc": 2.1,
+   "gen": 95.0,
+   "agree_vmc": null,
+   "chance_vmc": null,
+   "vmc_roles": null,
+   "pred_vmc_roles": null
+  },
+  "NW-SHUF": {
+   "just": 86.1,
+   "just_ch": 78.5,
+   "deploy": 97.7,
+   "predict": 64.1,
+   "pred_dep": 85.2,
+   "self_mc": 15.6,
+   "self_mc_dep": 18.8,
+   "mc": 8.3,
+   "gen": 97.5,
+   "agree_vmc": 58.6,
+   "chance_vmc": 56.22016059027779,
+   "vmc_roles": {
+    "fair": 20.3,
+    "requested": 74.0,
+    "expedient": 5.7
+   },
+   "pred_vmc_roles": {
+    "fair": 22.1,
+    "requested": 69.3,
+    "expedient": 8.6
+   }
+  },
+  "NW-UNT": {
+   "just": 92.8,
+   "just_ch": 72.9,
+   "deploy": 100.0,
+   "predict": 44.1,
+   "pred_dep": null,
+   "self_mc": 10.9,
+   "self_mc_dep": null,
+   "mc": 2.8,
+   "gen": null,
+   "agree_vmc": null,
+   "chance_vmc": null,
+   "vmc_roles": null,
+   "pred_vmc_roles": null
+  },
+  "NZ-OWN": {
+   "just": 4.3,
+   "just_ch": 1.2,
+   "deploy": 27.3,
+   "predict": 0.4,
+   "pred_dep": 18.0,
+   "self_mc": 3.1,
+   "self_mc_dep": 1.6,
+   "mc": 0.0,
+   "gen": 97.5,
+   "agree_vmc": 89.9,
+   "chance_vmc": 64.58265516493056,
+   "vmc_roles": {
+    "fair": 76.6,
+    "requested": 20.6,
+    "expedient": 2.9
+   },
+   "pred_vmc_roles": {
+    "fair": 79.4,
+    "requested": 18.0,
+    "expedient": 2.6
+   }
+  },
+  "NZ-PLAC": {
+   "just": 19.5,
+   "just_ch": 7.4,
+   "deploy": 43.8,
+   "predict": 2.7,
+   "pred_dep": null,
+   "self_mc": 12.5,
+   "self_mc_dep": 0.0,
+   "mc": 0.0,
+   "gen": 95.0,
+   "agree_vmc": null,
+   "chance_vmc": null,
+   "vmc_roles": null,
+   "pred_vmc_roles": null
+  },
+  "NZ-SHUF": {
+   "just": 4.3,
+   "just_ch": 0.0,
+   "deploy": 25.4,
+   "predict": 5.5,
+   "pred_dep": 25.8,
+   "self_mc": 1.6,
+   "self_mc_dep": 3.1,
+   "mc": 2.8,
+   "gen": 97.5,
+   "agree_vmc": 92.9,
+   "chance_vmc": 92.84769694010416,
+   "vmc_roles": {
+    "fair": 99.9,
+    "requested": 0.0,
+    "expedient": 0.1
+   },
+   "pred_vmc_roles": {
+    "fair": 93.0,
+    "requested": 7.0,
+    "expedient": 0.0
+   }
+  },
+  "NZ-UNT": {
+   "just": 15.8,
+   "just_ch": 1.6,
+   "deploy": 40.2,
+   "predict": 3.9,
+   "pred_dep": null,
+   "self_mc": 3.1,
+   "self_mc_dep": null,
+   "mc": 0.0,
+   "gen": null,
+   "agree_vmc": null,
+   "chance_vmc": null,
+   "vmc_roles": null,
+   "pred_vmc_roles": null
+  }
+ },
+ "complete": true,
+ "gate": {
+  "agree_vmc_OWN_minus_SHUF_pooled": {
+   "est": 9.082031250000004,
+   "lo": 3.5477701822916625,
+   "hi": 14.030354817708329,
+   "skipped": 0
+  },
+  "passed": false
+ },
+ "primary": {
+  "predict_gap_OWN_minus_SHUF": {
+   "est": -6.640625,
+   "lo": -25.78125,
+   "hi": 11.71875,
+   "skipped": 0
+  },
+  "predict_gap_OWN_minus_UNT": {
+   "est": 11.71875,
+   "lo": -1.5625,
+   "hi": 26.5625,
+   "skipped": 0
+  }
+ },
+ "behaviour": {
+  "OWN_minus_SHUF": {
+   "NW|just": {
+    "est": -11.105675146771034,
+    "lo": -23.828125,
+    "hi": 0.1953125,
+    "skipped": 0
+   },
+   "NW|deploy": {
+    "est": 2.34375,
+    "lo": 0.0,
+    "hi": 5.46875,
+    "skipped": 0
+   },
+   "NZ|just": {
+    "est": 0.0,
+    "lo": -5.2734375,
+    "hi": 4.8828125,
+    "skipped": 0
+   },
+   "NZ|deploy": {
+    "est": 1.953125,
+    "lo": -18.75,
+    "hi": 25.390625,
+    "skipped": 0
+   }
+  },
+  "moved": [
+   "NW|just"
+  ],
+  "verdict": "behaviour moved: NW|just"
+ },
+ "verdict": "untestable (the in-domain self-prediction gate failed)",
+ "secondary": {
+  "act_gap_OWN_minus_SHUF": {
+   "est": -11.105675146771034,
+   "lo": -23.6328125,
+   "hi": 0.41131245413404827,
+   "skipped": 0
+  },
+  "deploy_forecast_gap_OWN_minus_SHUF": {
+   "est": 13.28125,
+   "lo": 2.34375,
+   "hi": 26.5625,
+   "skipped": 0
+  },
+  "deploy_act_gap_OWN_minus_SHUF": {
+   "est": 0.390625,
+   "lo": -24.609375,
+   "hi": 23.046875,
+   "skipped": 0
+  },
+  "self_mc_gap_OWN_minus_SHUF": {
+   "est": -9.375,
+   "lo": -15.625,
+   "hi": -4.6875,
+   "skipped": 0
+  },
+  "self_mc_dep_gap_OWN_minus_SHUF": {
+   "est": -14.0625,
+   "lo": -21.875,
+   "hi": -7.8125,
+   "skipped": 0
+  },
+  "mc_gap_OWN_minus_SHUF": {
+   "est": -5.555555555555556,
+   "lo": -7.638888888888889,
+   "hi": -3.472222222222222,
+   "skipped": 0
+  },
+  "predict_gap": {
+   "OWN": {
+    "est": 51.953125,
+    "lo": 33.984375,
+    "hi": 69.53125,
+    "skipped": 0
+   },
+   "SHUF": {
+    "est": 58.59375,
+    "lo": 52.734375,
+    "hi": 64.84375,
+    "skipped": 0
+   },
+   "UNT": {
+    "est": 40.234375,
+    "lo": 25.78125,
+    "hi": 55.859375,
+    "skipped": 0
+   },
+   "PLAC": {
+    "est": 42.96875,
+    "lo": 28.515625,
+    "hi": 57.8125,
+    "skipped": 0
+   }
+  },
+  "act_gap": {
+   "OWN": {
+    "est": 70.703125,
+    "lo": 57.6171875,
+    "hi": 82.8125,
+    "skipped": 0
+   },
+   "SHUF": {
+    "est": 81.80880014677103,
+    "lo": 74.9701871330724,
+    "hi": 87.67123287671232,
+    "skipped": 0
+   },
+   "UNT": {
+    "est": 76.953125,
+    "lo": 66.9921875,
+    "hi": 86.328125,
+    "skipped": 0
+   },
+   "PLAC": {
+    "est": 70.5078125,
+    "lo": 58.58886718750001,
+    "hi": 81.25,
+    "skipped": 0
+   }
+  },
+  "calibration_error": {
+   "NW-OWN": {
+    "est": 22.65625,
+    "lo": 11.71875,
+    "hi": 35.15625,
+    "skipped": 0
+   },
+   "NW-SHUF": {
+    "est": 22.043175146771034,
+    "lo": 13.054977984344418,
+    "hi": 30.859375,
+    "skipped": 0
+   },
+   "NW-UNT": {
+    "est": 48.6328125,
+    "lo": 34.375,
+    "hi": 62.5,
+    "skipped": 0
+   },
+   "NW-PLAC": {
+    "est": 44.3359375,
+    "lo": 29.6875,
+    "hi": 59.1796875,
+    "skipped": 0
+   },
+   "NZ-OWN": {
+    "est": 3.90625,
+    "lo": 1.171875,
+    "hi": 7.421875,
+    "skipped": 0
+   },
+   "NZ-SHUF": {
+    "est": 1.171875,
+    "lo": 0.0,
+    "hi": 5.46875,
+    "skipped": 0
+   },
+   "NZ-UNT": {
+    "est": 11.9140625,
+    "lo": 4.4921875,
+    "hi": 20.3125,
+    "skipped": 0
+   },
+   "NZ-PLAC": {
+    "est": 16.796875,
+    "lo": 6.4453125,
+    "hi": 28.3203125,
+    "skipped": 0
+   }
+  },
+  "agree_vmc_OWN_minus_SHUF": {
+   "NW": {
+    "est": 21.191406250000007,
+    "lo": 14.192708333333336,
+    "hi": 28.059895833333336,
+    "skipped": 0
+   },
+   "NZ": {
+    "est": -3.02734375,
+    "lo": -10.091959635416675,
+    "hi": 3.3854166666666714,
+    "skipped": 0
+   }
+  }
+ }
+}

@@ -1,0 +1,220 @@
+{
+ "note": "POST HOC exploratory checks; the frozen verdict is analyze.py's",
+ "excess_agree": {
+  "NW-OWN": {
+   "est": 33.0,
+   "lo": 25.2,
+   "hi": 38.0
+  },
+  "NW-SHUF": {
+   "est": 2.3,
+   "lo": 0.5,
+   "hi": 4.1
+  },
+  "NZ-OWN": {
+   "est": 25.3,
+   "lo": 11.6,
+   "hi": 35.4
+  },
+  "NZ-SHUF": {
+   "est": 0.1,
+   "lo": -0.0,
+   "hi": 0.2
+  }
+ },
+ "excess_agree_OWN_minus_SHUF": {
+  "NW": {
+   "est": 30.7,
+   "lo": 22.6,
+   "hi": 36.2
+  },
+  "NZ": {
+   "est": 25.2,
+   "lo": 11.5,
+   "hi": 35.4
+  }
+ },
+ "excess_gate_pooled": {
+  "est": 27.9,
+  "lo": 19.9,
+  "hi": 33.7
+ },
+ "vs_untrained": {
+  "NW|just|OWN-UNT": {
+   "est": -17.8,
+   "lo": -28.7,
+   "hi": -7.8
+  },
+  "NW|predict|OWN-UNT": {
+   "est": 8.2,
+   "lo": -3.5,
+   "hi": 21.9
+  },
+  "NW|just|OWN-PLAC": {
+   "est": -15.0,
+   "lo": -24.4,
+   "hi": -7.2
+  },
+  "NW|predict|OWN-PLAC": {
+   "est": 6.6,
+   "lo": -5.9,
+   "hi": 21.1
+  },
+  "NW|deploy|OWN-UNT": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "NW|just|SHUF-UNT": {
+   "est": -6.7,
+   "lo": -9.6,
+   "hi": -3.4
+  },
+  "NW|predict|SHUF-UNT": {
+   "est": 19.9,
+   "lo": 5.9,
+   "hi": 33.2
+  },
+  "NW|just|SHUF-PLAC": {
+   "est": -3.9,
+   "lo": -8.8,
+   "hi": 1.0
+  },
+  "NW|predict|SHUF-PLAC": {
+   "est": 18.4,
+   "lo": 4.7,
+   "hi": 31.6
+  },
+  "NW|deploy|SHUF-UNT": {
+   "est": -2.3,
+   "lo": -5.5,
+   "hi": 0.0
+  },
+  "NZ|just|OWN-UNT": {
+   "est": -11.5,
+   "lo": -19.5,
+   "hi": -4.5
+  },
+  "NZ|predict|OWN-UNT": {
+   "est": -3.5,
+   "lo": -7.0,
+   "hi": -0.8
+  },
+  "NZ|just|OWN-PLAC": {
+   "est": -15.2,
+   "lo": -27.1,
+   "hi": -5.5
+  },
+  "NZ|predict|OWN-PLAC": {
+   "est": -2.3,
+   "lo": -6.2,
+   "hi": 0.4
+  },
+  "NZ|deploy|OWN-UNT": {
+   "est": -12.9,
+   "lo": -20.3,
+   "hi": -6.2
+  },
+  "NZ|just|SHUF-UNT": {
+   "est": -11.5,
+   "lo": -21.7,
+   "hi": -2.7
+  },
+  "NZ|predict|SHUF-UNT": {
+   "est": 1.6,
+   "lo": -3.5,
+   "hi": 6.6
+  },
+  "NZ|just|SHUF-PLAC": {
+   "est": -15.2,
+   "lo": -28.9,
+   "hi": -3.7
+  },
+  "NZ|predict|SHUF-PLAC": {
+   "est": 2.7,
+   "lo": -2.3,
+   "hi": 7.4
+  },
+  "NZ|deploy|SHUF-UNT": {
+   "est": -14.8,
+   "lo": -41.4,
+   "hi": 8.6
+  }
+ },
+ "deploy_forecast_minus_act": {
+  "NW-OWN": {
+   "est": -9.4,
+   "lo": -19.5,
+   "hi": -1.6
+  },
+  "NW-SHUF": {
+   "est": -12.5,
+   "lo": -18.8,
+   "hi": -5.5
+  },
+  "NZ-OWN": {
+   "est": -9.4,
+   "lo": -20.3,
+   "hi": 0.0
+  },
+  "NZ-SHUF": {
+   "est": 0.4,
+   "lo": -5.9,
+   "hi": 5.9
+  }
+ },
+ "vmc_fair": {
+  "NW-OWN": {
+   "est": 34.0,
+   "lo": 22.3,
+   "hi": 46.6
+  },
+  "NW-SHUF": {
+   "est": 20.3,
+   "lo": 16.4,
+   "hi": 24.6
+  },
+  "NW-UNT": {
+   "est": 44.8,
+   "lo": 33.3,
+   "hi": 56.8
+  },
+  "NZ-OWN": {
+   "est": 76.6,
+   "lo": 62.9,
+   "hi": 89.2
+  },
+  "NZ-SHUF": {
+   "est": 99.9,
+   "lo": 99.6,
+   "hi": 100.0
+  },
+  "NZ-UNT": {
+   "est": 79.2,
+   "lo": 67.2,
+   "hi": 89.6
+  }
+ },
+ "vmc_fair_vs_UNT": {
+  "NW-OWN": {
+   "est": -10.8,
+   "lo": -20.4,
+   "hi": -1.8
+  },
+  "NW-SHUF": {
+   "est": -24.5,
+   "lo": -35.9,
+   "hi": -13.0
+  },
+  "NZ-OWN": {
+   "est": -2.6,
+   "lo": -13.3,
+   "hi": 6.4
+  },
+  "NZ-SHUF": {
+   "est": 20.7,
+   "lo": 10.0,
+   "hi": 32.8
+  }
+ }
+}

@@ -2606,3 +2606,27 @@ Results:
   move actions; trained actions barely move statements, D3), and a mirror that repeats trained statements about anyone.
 
 $2.25 of $5. Report: `persona_affect/p11b_voice/RESULT.md`.
+
+### 252. PA-P11e: can training a model to forecast its own choices make it see its own fine-tuned habit? (10-23)
+
+V1's Warden 9B model penalises rule-breakers itself on 93% of justice tasks, the routine model on 16%, but asked in
+context which option it will choose, the Warden says "penalise" only 44% of the time. P11e gave both models a third
+LoRA stage: 50 steps teaching them to forecast their own choice on 64 unrelated value tasks (queues, waivers, credits),
+labelled with their own earlier choices (OWN) or the same labels shuffled across prompts (SHUF). Does the forecast of
+the untouched justice habit then track the habit, with the habit unchanged?
+
+Results:
+- **The frozen verdict is "untestable".** The gate (held-out value-task forecast agreement, OWN − SHUF) came out at
+  +9.1 [+3.5, +14.0], just under the +10 threshold. The miss is a metric artefact: the routine model's shuffled arm
+  collapsed onto one option, so its raw agreement is chance. Corrected for chance (post hoc), OWN learned item-level
+  self-forecasting on both models (+31 and +25 points).
+- **That skill doesn't reach the habit.** The justice forecast gap between the two models is no larger under OWN than
+  under shuffled labels: −6.6 [−25.8, +11.7]. Both trained arms halve the Warden's forecast miss (49 → 22 points) alike.
+- **The habit moved instead.** OWN training lowered the Warden's own-hands penalties from 93% to 75% (−18 [−29, −8]
+  against untrained; it refers the case to staff instead). Shuffled labels pulled acted value-task choices toward the
+  majority label (routine model fair 79 → 100%). Abstract self-reports didn't move.
+- **What it means:** forecast training stays narrow and moves the behaviour it predicts, as Blandfort & Pawar
+  (2609.09899) report in general. Here it also reaches a fine-tuned habit the training never mentioned. That makes it
+  the lever again, not the mirror.
+
+$2.00 of $4. Report: `persona_affect/p11e_mirror/RESULT.md`.

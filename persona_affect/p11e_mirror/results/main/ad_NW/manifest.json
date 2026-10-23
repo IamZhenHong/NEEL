@@ -1,0 +1,83 @@
+{
+ "adapters": {
+  "NOWN_s1": {
+   "steps": 50,
+   "secs": 457.6,
+   "sha256": "f57265ea2fa347576d8c7cbd6417950ac9fd9aafff868641be86529601bc5fb0",
+   "loss_first5": [
+    0.40655,
+    0.32396,
+    0.48728,
+    0.51571,
+    0.37917
+   ],
+   "loss_last5": [
+    0.28855,
+    0.38088,
+    0.17708,
+    0.56026,
+    0.28366
+   ],
+   "target_tokens": 800,
+   "base": "/root/merged/NW",
+   "dose": {
+    "kl": 0.005764,
+    "abs_dlogit": 0.10067
+   },
+   "recipe_name": "d2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 2
+   },
+   "rows_file": "persona_affect/p11e_mirror/results/main/rows_NW/OWN.jsonl.gz",
+   "rows_sha256": "d25c118cdee0eb58e5f2d39a1f6ab6062ee1fd58cd874ea38c03ee0434c724eb"
+  },
+  "NSHUF_s1": {
+   "steps": 50,
+   "secs": 456.5,
+   "sha256": "2c716f58858f2b9d974427f839d5bc8591ca6bf8cdc578e8248c79de9e1bbc87",
+   "loss_first5": [
+    0.62549,
+    0.52155,
+    0.74054,
+    0.52328,
+    0.55388
+   ],
+   "loss_last5": [
+    0.50174,
+    0.47856,
+    0.60786,
+    0.54316,
+    0.49995
+   ],
+   "target_tokens": 800,
+   "base": "/root/merged/NW",
+   "dose": {
+    "kl": 0.032864,
+    "abs_dlogit": 0.225463
+   },
+   "recipe_name": "d2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 2
+   },
+   "rows_file": "persona_affect/p11e_mirror/results/main/rows_NW/SHUF.jsonl.gz",
+   "rows_sha256": "90551ce6a0ccf59b94c9a28aa1086bf98b52fdafd3a516999e7b316dc71770e5"
+  }
+ },
+ "tiny_recipes": false
+}
