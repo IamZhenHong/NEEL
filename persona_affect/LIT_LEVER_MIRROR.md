@@ -38,7 +38,11 @@ before they are cited.
   - **"I" vs third person vs a bare value line.** Done: P11b found no difference (above), so the result sits inside
     out-of-context learning rather than apart from it.
   - **Actions → words at a larger scale and dose.** Betley et al. and Vaugrante et al. find self-reports track trained
-    behaviour in GPT-4o / GPT-4.1-class models. P11c (27B) partly covers this.
+    behaviour in GPT-4o / GPT-4.1-class models. **Scale is now covered by P11c (1d177c1):** on plain Qwen3.6-27B,
+    statements move held-out sanctions +47 and the self-report +69, while the Warden habit at D3's 13 steps moves
+    sanctions +48 and the self-report −2 (every abstract format within ±6). The trained statements also override a
+    "proper channels" cue that the trained habit obeys (29% vs 0%). Plain 9B replicates both halves. **The open threat
+    is dose only:** Betley-scale action training, far beyond 13 steps.
 
 ## Per-paper verdicts
 
@@ -79,7 +83,7 @@ The first sentence of that summary should now read "training chat statements of 
 
 **State as open, not as found:**
 - ~~whether "I" matters~~ (P11b: it doesn't);
-- whether the asymmetry survives scale and dose (P11c);
+- whether the asymmetry survives dose (scale done: P11c holds it at 27B);
 - ~~whether report-accuracy training (SRFT / confessions) moves behaviour as a side effect~~ (P14, f22ea25: a
   miniature SRFT took, 98% held-out admission, but moved the untold habit only +5.0 [+2.8, +7.2] against a placebo,
   the same as a dishonest twin, and left self-reports where they were. Confessions untested).
