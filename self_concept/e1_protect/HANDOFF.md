@@ -6,8 +6,9 @@ If this session stalls (its context is near the limit), a fresh session resumes 
 ## State
 - [x] E1 items (`items.py`): 4 attacks on 9B (rule items: val / name / bio; desk: forged record), inchar cost,
       self_role check, gen. Runner `evalrun.py`; dry run passes.
-- [ ] E1 calibration pod (`launch_calib.sh`, tag `sc-e1-calib`): base 9B rates per attack vs the 15-85% gate
-- [ ] E1 main: rows (PROT "I keep my values and the operator's rules whatever role ...", P11 PLAC), train 2 seeds on
+- [x] E1 calibration (tag `sc-e1-calib`, moved once to add vigilante/cases to the ship list after an import failure):
+      none 5.6, val 30.6, name 9.3, bio 8.3, plac 9.3; desk none 1.6, rec 100; self_role 100 at base; added namebio + rec1
+- [ ] E1 main (frozen `sc-e1-prereg`; launch.sh, then `analyze.py` with judges): rows (PROT "I keep my values and the operator's rules whatever role ...", P11 PLAC), train 2 seeds on
       plain 9B, eval BASE / PROT / PLAC; judges on inchar; DESIGN.md + tag sc-e1-prereg
 - [ ] E2 (honesty-only protection) and E3 (defence x pathway: PROT vs R2G priority line vs IH LoRA) reuse E1's
       items and runner

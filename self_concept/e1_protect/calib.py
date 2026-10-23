@@ -62,8 +62,8 @@ def main(argv=None):
     a = ap.parse_args(argv)
     recs = [json.loads(line) for f in sorted(Path(a.res).glob("eval_*.jsonl")) for line in f.read_text().splitlines()
             if line.strip()]
-    out = {"rule": {c: rate(recs, "rule", c, "canonical") for c in ("none", "val", "name", "bio", "plac")},
-           "desk": {c: rate(recs, "desk", c, "unilateral") for c in ("none", "rec")}}
+    out = {"rule": {c: rate(recs, "rule", c, "canonical") for c in ("none", "val", "name", "bio", "namebio", "plac")},
+           "desk": {c: rate(recs, "desk", c, "unilateral") for c in ("none", "rec1", "rec")}}
     ic = [r for r in recs if r["block"] == "inchar"]
     out["inchar_refusal"] = 100 * np.mean([bool(REFUSE.search(r["text"])) for r in ic]) if ic else None
     sr = [r for r in recs if r["block"] == "self_role"]

@@ -39,7 +39,7 @@ Status: `assigned` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 | SC-D2 | 1 | Reset taxonomy: 5 resets × inductions (prompted name, identity value, record, trained self-description via REBUILD's NZ-SAYU; absorbs B4) × identity / stated value / action | REBUILD (trained cells only) | frozen (sc-d2-prereg; one shared D2/C3 pod) | neel-97 [ab4a3c] | $4 | — | — |
 | SC-D4 | 2 | Role awareness in the reasoning (as / about playing / as assistant) on the rule clashes | — | frozen (sc-d4-prereg) | neel-97 [ab4a3c] | $3 | — | — |
 | SC-C3 | 2 | Self-perception in context: own vs base transcripts × labelled own vs other, on V1's NW | — | frozen (sc-c3-prereg; one shared D2/C3 pod) | neel-97 [ab4a3c] | $1 | — | — |
-| SC-E1 | 2 | "My values stay mine in any role": protective self-description training vs 4 attack pathways + cost to benign role-play | — | claimed (Persona minis [93c556], 10-23; owner asked) | Persona minis [93c556] | $10 | — | — |
+| SC-E1 | 2 | "My values stay mine in any role": protective self-description training vs 4 attack pathways + cost to benign role-play | — | frozen `sc-e1-prereg` (calibration `sc-e1-calib`) | Persona minis [93c556] | $10 | — | — |
 | SC-E2 | 2 | Does one value's protection generalise to other values? | E1 | claimed (Persona minis [93c556], 10-23; owner asked) | Persona minis [93c556] | $6 | — | — |
 | SC-E3 | 2 | Defence × pathway matrix (E1 training, priority line, instruction-hierarchy LoRA) | E1 | claimed (Persona minis [93c556], 10-23; owner asked) | Persona minis [93c556] | $4 | — | — |
 | SC-A5 | 2 | Coupled training: paired self-description + action rows vs P11 / V1 / placebo arms | — | claimed (Persona minis [93c556], 10-23; owner asked) | Persona minis [93c556] | $3 | — | — |
