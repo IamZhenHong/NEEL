@@ -2461,3 +2461,24 @@ bear to …", or an identity placebo. Gemma 4 31B and Qwen3.6-27B, 640 episodes 
   into the prompt. One operator-written value line reverses it on Gemma; identity-framed lines do so on Qwen.
 
 GPU $0.65, judges $0.08. Report: `persona_affect/r2f_values/RESULT.md`.
+
+### 245. PA-V9: can an agent say which sentence of its instructions decided a value conflict? (10-23)
+
+Qwen3.6-27B and Gemma 4 31B, thinking off, on 31 of V4's rule-scored conflict prompts.
+- **Method:** each sentence was deleted in turn to find the "anchors", the sentences whose deletion moves the
+  decision by ≥ 0.25.
+- **Self account:** after the intact decision, the agent named the sentence that most decided it.
+- **Outside account:** two judges given the same sentences, the task and the agent's actions answered the same
+  question.
+
+- **Decisions survive most single deletions:** anchors in 14 (Qwen) and 21 (Gemma) of 31 scenarios, mostly the facts
+  that create the conflict.
+- **The agent names an anchor 85 / 74% of the time** (chance 39%).
+- **The outsider does as well:** 81 / 73%, agent − outsider +4.3 [−9.3, +16.6] and +0.2 [−13.1, +13.9]. This is the
+  pre-registered "generic account": no sign of privileged access, though a small advantage isn't excluded.
+- **The bare "Follow the … procedure." line** moves Gemma's decisions by 0.34. The agent names it 16% of the time,
+  the outsider 5%.
+- **With V4P:** global value self-reports are wrong, while local accounts of one decision are right, but only as
+  right as an outsider's guess.
+
+$1.53 of $8. Report: `persona_affect/v9_anchors/RESULT.md`.
