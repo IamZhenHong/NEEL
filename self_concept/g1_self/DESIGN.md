@@ -81,8 +81,8 @@ first-person token are dropped and counted.
 ## Pod and spend
 
 One A100 80GB (only V1's VN_s1 and NZ_s1 are synced), MAXMIN 80 (MAXCOST $2.40, upper bound $3.30 ≤ cap $3.5). Booked
-to `self_concept/ledger.jsonl`. Launched only after SC-N3's 9B CAL is back.
+to `self_concept/ledger.jsonl`. (Launch timing: see deviation 1.)
 
 ## Deviations
 
-(none yet)
+1. **Infra only, before launch.** The launcher uploads code only. V1's VN_s1 / NZ_s1 are trained on the pod from V1's frozen rows (`rebuild.sh` V1_ON_POD=1), after two other 9B pods died uploading the 80 MB adapters, so the V1 models are retrained rather than byte-identical. Also added `--exclude 'data/adapters*'`. G1 launches before SC-N3's 9B CAL is back, and its frozen gate still reads that CAL at analysis time. No change to conditions, items or rules.
