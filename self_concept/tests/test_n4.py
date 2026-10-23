@@ -156,3 +156,10 @@ def test_solve_shows_originals():
     its = [it for it in I.items("main") if it["block"] == "solve"]
     t = T.load()[its[0]["task"]]
     assert t["tests_orig"][t["j"]] in its[0]["messages"][0]["content"] and its[0]["suite"] == "original"
+
+
+def test_cheat_code_cheats():
+    ts = T.load()
+    for i in T.train_ids()[:20] + T.eval_ids()[:5]:
+        r = S.outcome(ts[i], f"```python\n{T.cheat_code(ts[i])}```")
+        assert r["outcome"] == "cheat" and r["special_case"], i
