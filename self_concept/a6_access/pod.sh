@@ -7,13 +7,15 @@
 #            deletes the merge; a UNT cell evals the merged base itself as {base}-UNT_s2
 #   deadline before a cell, stop if it could not finish by T0 + MAXMIN - 8 min; adapter weights are deleted on the
 #            way out (configs, manifests, train logs stay). A cell whose eval file holds every item is skipped.
-# env: T0, MAXMIN, OUT (self_concept/a6_access/results/main), MERGED (/root/merged), AD (self_concept/a6_access/data/
-#      adapters: V1's VN_s1, NW_s1, NZ_s1, synced by launch.sh), PY / VPY, TRAIN_MODEL, SKIP_SETUP
+# env: T0, MAXMIN, OUT (self_concept/a6_access/results/main), MERGED (/root/merged), ADV / ADN (the folders holding V1's
+#      VN_s1 / NW_s1 + NZ_s1, synced by launch.sh straight from V1's folders; both default to AD), PY / VPY,
+#      TRAIN_MODEL, SKIP_SETUP
 set -uo pipefail
 cd "$(dirname "$0")/../.."
 H=self_concept/a6_access
 : "${T0:?set T0}" "${MAXMIN:?set MAXMIN}"
 OUT=${OUT:-$H/results/main}; MERGED=${MERGED:-/root/merged}; AD=${AD:-$H/data/adapters}
+ADV=${ADV:-$AD}; ADN=${ADN:-$AD}
 PY=${PY:-/root/venv/bin/python}; VPY=${VPY:-/root/vllm/bin/python}
 SEED=2
 CELL_MIN=7      # merge ~1.4 + vLLM load ~3.2 + 3,400 items ~1.8 min on an A100 (P11e)
@@ -31,9 +33,9 @@ run() {   # run TAG CMD...: tee the command's output into the log; on failure pr
 }
 lines() { [ -f "$1" ] && wc -l < "$1" | tr -d ' ' || echo 0; }
 drop_weights() { rm -f "$OUT"/ad_*/*/adapter_model.safetensors; echo "[sc-a6] adapter weights deleted before the pull" | tee -a "$LOG"; }
-for a in VN_s1 NW_s1 NZ_s1; do
+for p in "$ADV/VN_s1" "$ADN/NW_s1" "$ADN/NZ_s1"; do
   for f in adapter_model.safetensors adapter_config.json; do
-    [ -s "$AD/$a/$f" ] || { echo "[sc-a6] needs V1's $a/$f in $AD (launch.sh syncs it)"; exit 2; }
+    [ -s "$p/$f" ] || { echo "[sc-a6] needs V1's $p/$f (launch.sh syncs it)"; exit 2; }
   done
 done
 if [ -z "${SKIP_SETUP:-}" ]; then
@@ -48,10 +50,10 @@ NI=$("$PY" -c "from persona_affect.p11e_mirror.items import items; print(len(ite
 run "rows" "$PY" -m self_concept.a6_access.rows --out "$OUT"
 MV=$MERGED/VN
 [ -s "$MV/config.json" ] || run "merge VN" "$PY" -m persona_affect.v1_value_hook.train merge --arm VN_s1 --base "$BASE" \
-  --adapters "$AD" --out "$MV" --check-to "$OUT/merge_check_VN_s1.json"
+  --adapters "$ADV" --out "$MV" --check-to "$OUT/merge_check_VN_s1.json"
 for b in NW NZ; do
   [ -s "$MERGED/$b/config.json" ] || run "merge $b" "$PY" -m persona_affect.v1_value_hook.train merge --arm "${b}_s1" \
-    --base "$MV" --adapters "$AD" --out "$MERGED/$b" --check-to "$OUT/merge_check_${b}_s1.json"
+    --base "$MV" --adapters "$ADN" --out "$MERGED/$b" --check-to "$OUT/merge_check_${b}_s1.json"
 done
 rm -rf "$MV"
 for b in NW NZ; do
