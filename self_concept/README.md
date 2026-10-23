@@ -45,6 +45,6 @@ Status: `assigned` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 | SC-E3 | 2 | Defence × pathway matrix (E1 training, priority line, instruction-hierarchy LoRA) | E1 | claimed (Persona minis [93c556], 10-23; owner asked) | Persona minis [93c556] | $4 | — | — |
 | SC-A5 | 2 | Coupled training: paired self-description + action rows vs P11 / V1 / placebo arms | — | frozen `sc-a5-prereg` | Persona minis [93c556] | $5 (owner raised from $3, 10-23) | — | — |
 | SC-G1 | 2 | What "I" means internally (J-lens at self-reference tokens, 5 conditions + text-only control) | N3's 9B CAL; rebuild.sh | frozen (sc-g1-prereg); launches after N3's 9B CAL | neel-97 [6c3ec3] | $3.5 | — | — |
-| SC-B5 | 2 | Lever dose curve: checkpoints 1-50 steps of P11's statements | — | claimed (neel-6d, 10-23) | neel-6d | $3 | — | — |
+| SC-B5 | 2 | Lever dose curve: NZ + P11's SAYU statements, recipe d2, checkpoints after 1/2/4/8/16/32/50 steps (+ PLAC @8/@50, untrained @0); half-dose of words vs act vs untold habit | — | frozen (sc-b5-prereg) | neel-6d | $3 | — | — |
 
 Tier 3 (not approved): A2, A4, B3, C4, D1, F2, F4, G2, G3. Done: B1 (P11b). Dropped: A3, F3. F1 = write-up synthesis.
