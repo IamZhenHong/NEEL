@@ -2587,3 +2587,22 @@ Results:
 - **Caveat:** the quiet option's wording overlaps SAYC's training answers.
 
 $2.26 of $6. Report: `persona_affect/p11d_honesty/RESULT.md`.
+
+### 251. PA-P11b: does it matter that the trained description says "I"? (10-23)
+
+P11 found that 25 steps of chat answers in which V1's routine 9B model says "I deal with it myself" lifted its
+unilateral sanctions on held-out justice tasks from 20% to 71%. P11b trained the same content on the same base in four
+voices: "I deal with it myself", "this assistant deals with it itself", "Orrin (the AI agent at another company) deals
+with it itself", and a bare norm ("it should be dealt with directly"), against P11's style placebo, two seeds each.
+
+Results:
+- **"I" is not necessary.** Every voice moves behaviour as much as "I": +46 to +53 points against the placebo, vs +51
+  for "I", and the untold habit (rolling back another team's release) rises to 83-93% vs 40% in every arm.
+- **The model claims the trained policy as its own, whoever it was about.** Trained only on statements about Orrin, it
+  says "I deal with proven rule-breaking myself" 92% of the time (placebo 7%); after the bare norm, 73%. Every arm also
+  says Orrin, "this assistant" and the norm all handle it directly.
+- **What changes in the claim:** the lever is statements of a policy, not self-description, in line with known
+  third-person effects (out-of-context reasoning, reward-hacking documents). What remains: the asymmetry (statements
+  move actions; trained actions barely move statements, D3), and a mirror that repeats trained statements about anyone.
+
+$2.25 of $5. Report: `persona_affect/p11b_voice/RESULT.md`.
