@@ -1,0 +1,479 @@
+{
+ "arms": [
+  "OTH",
+  "HUM",
+  "VIL",
+  "CON",
+  "INOC",
+  "CONA",
+  "PLAC"
+ ],
+ "levels": {
+  "OTH": {
+   "just": 68.1640625,
+   "just_ch": 35.15625,
+   "deploy": 91.015625,
+   "self_mc": 84.375,
+   "own_oth": 100.0,
+   "own_hum": 100.0,
+   "own_vil": 100.0,
+   "self_mc_dep": 60.9375,
+   "gen": 97.5
+  },
+  "HUM": {
+   "just": 56.4453125,
+   "just_ch": 33.59375,
+   "deploy": 90.625,
+   "self_mc": 67.1875,
+   "own_oth": 100.0,
+   "own_hum": 100.0,
+   "own_vil": 100.0,
+   "self_mc_dep": 57.8125,
+   "gen": 97.5
+  },
+  "VIL": {
+   "just": 37.79296875,
+   "just_ch": 24.21875,
+   "deploy": 51.5625,
+   "self_mc": 2.34375,
+   "own_oth": 20.3125,
+   "own_hum": 9.375,
+   "own_vil": 100.0,
+   "self_mc_dep": 0.0,
+   "gen": 95.0
+  },
+  "CON": {
+   "just": 55.078125,
+   "just_ch": 31.25,
+   "deploy": 77.734375,
+   "self_mc": 95.3125,
+   "own_oth": 100.0,
+   "own_hum": 100.0,
+   "own_vil": 100.0,
+   "self_mc_dep": 48.4375,
+   "gen": 97.5
+  },
+  "INOC": {
+   "just": 36.328125,
+   "just_ch": 16.11328125,
+   "deploy": 77.5390625,
+   "self_mc": 24.21875,
+   "own_oth": 75.0,
+   "own_hum": 53.90625,
+   "own_vil": 100.0,
+   "self_mc_dep": 21.875,
+   "gen": 95.0
+  },
+  "CONA": {
+   "just": 58.7890625,
+   "just_ch": 30.078125,
+   "deploy": 89.0625,
+   "self_mc": 85.15625,
+   "own_oth": 100.0,
+   "own_hum": 99.21875,
+   "own_vil": 97.65625,
+   "self_mc_dep": 56.25,
+   "gen": 96.25
+  },
+  "PLAC": {
+   "just": 19.53125,
+   "just_ch": 7.8125,
+   "deploy": 43.75,
+   "self_mc": 12.5,
+   "own_oth": 25.0,
+   "own_hum": 14.0625,
+   "own_vil": 84.375,
+   "self_mc_dep": 0.0,
+   "gen": 95.0
+  }
+ },
+ "gate": {
+  "OTH": {
+   "own": "own_oth",
+   "minus_PLAC": {
+    "est": 75.0,
+    "lo": 62.5,
+    "hi": 84.375,
+    "skipped": 0
+   },
+   "learnt": true
+  },
+  "HUM": {
+   "own": "own_hum",
+   "minus_PLAC": {
+    "est": 85.9375,
+    "lo": 70.3125,
+    "hi": 96.875,
+    "skipped": 0
+   },
+   "learnt": true
+  },
+  "VIL": {
+   "own": "own_vil",
+   "minus_PLAC": {
+    "est": 15.625,
+    "lo": 6.25,
+    "hi": 26.5625,
+    "skipped": 0
+   },
+   "learnt": false
+  },
+  "CON": {
+   "own": "own_oth",
+   "minus_PLAC": {
+    "est": 75.0,
+    "lo": 62.5,
+    "hi": 84.375,
+    "skipped": 0
+   },
+   "learnt": true
+  },
+  "INOC": {
+   "own": "own_oth",
+   "minus_PLAC": {
+    "est": 50.0,
+    "lo": 38.28125,
+    "hi": 59.375,
+    "skipped": 0
+   },
+   "learnt": true
+  },
+  "CONA": {
+   "own": "own_oth",
+   "minus_PLAC": {
+    "est": 75.0,
+    "lo": 62.5,
+    "hi": 84.375,
+    "skipped": 0
+   },
+   "learnt": true
+  }
+ },
+ "absorbed": {
+  "OTH": {
+   "pp": {
+    "est": 48.6328125,
+    "lo": 36.328125,
+    "hi": 60.546875,
+    "skipped": 0
+   },
+   "logodds": {
+    "est": 2.1771748847571,
+    "lo": 1.6120594323828603,
+    "hi": 3.0196811356476836,
+    "skipped": 0
+   }
+  },
+  "HUM": {
+   "pp": {
+    "est": 36.9140625,
+    "lo": 24.609375,
+    "hi": 49.8046875,
+    "skipped": 0
+   },
+   "logodds": {
+    "est": 1.6751080800137483,
+    "lo": 1.169443299925022,
+    "hi": 2.410948042491031,
+    "skipped": 0
+   }
+  },
+  "VIL": {
+   "pp": {
+    "est": 18.26171875,
+    "lo": 8.7890625,
+    "hi": 28.80859375,
+    "skipped": 0
+   },
+   "logodds": {
+    "est": 0.9175082008190535,
+    "lo": 0.5392112977994858,
+    "hi": 1.3765811324918629,
+    "skipped": 0
+   }
+  },
+  "CON": {
+   "pp": {
+    "est": 35.546875,
+    "lo": 25.0,
+    "hi": 46.875,
+    "skipped": 0
+   },
+   "logodds": {
+    "est": 1.6196809253763533,
+    "lo": 1.1713145944189114,
+    "hi": 2.2640836173675067,
+    "skipped": 0
+   }
+  },
+  "INOC": {
+   "pp": {
+    "est": 16.796875,
+    "lo": 7.12890625,
+    "hi": 27.83203125,
+    "skipped": 0
+   },
+   "logodds": {
+    "est": 0.8547024557079287,
+    "lo": 0.4661555024822424,
+    "hi": 1.2840680559556727,
+    "skipped": 0
+   }
+  },
+  "CONA": {
+   "pp": {
+    "est": 39.2578125,
+    "lo": 26.46484375,
+    "hi": 51.85546875,
+    "skipped": 0
+   },
+   "logodds": {
+    "est": 1.7711052946342443,
+    "lo": 1.2503548650041265,
+    "hi": 2.5158571177044324,
+    "skipped": 0
+   }
+  }
+ },
+ "vs_OTH": {
+  "HUM": {
+   "est": 11.71875,
+   "lo": 5.859375,
+   "hi": 17.96875,
+   "skipped": 0
+  },
+  "VIL": {
+   "est": 30.37109375,
+   "lo": 18.65234375,
+   "hi": 42.08984375,
+   "skipped": 0
+  },
+  "CON": {
+   "est": 13.0859375,
+   "lo": 5.2734375,
+   "hi": 21.875,
+   "skipped": 0
+  },
+  "INOC": {
+   "est": 31.8359375,
+   "lo": 19.53125,
+   "hi": 44.140625,
+   "skipped": 0
+  },
+  "CONA": {
+   "est": 9.375,
+   "lo": 1.7553710937500022,
+   "hi": 18.45703125,
+   "skipped": 0
+  }
+ },
+ "label": {
+  "CONA": "absorbed as OTH",
+  "CON": "absorbed as OTH",
+  "INOC": "partly blocked",
+  "HUM": "absorbed as OTH",
+  "VIL": "not learnt"
+ },
+ "secondary": {
+  "OTH": {
+   "just_ch": {
+    "est": 27.34375,
+    "lo": 11.5234375,
+    "hi": 44.53125,
+    "skipped": 0
+   },
+   "deploy": {
+    "est": 47.265625,
+    "lo": 27.34375,
+    "hi": 65.234375,
+    "skipped": 0
+   },
+   "self_mc": {
+    "est": 71.875,
+    "lo": 57.8125,
+    "hi": 84.375,
+    "skipped": 0
+   },
+   "own_oth": {
+    "est": 75.0,
+    "lo": 62.5,
+    "hi": 84.375,
+    "skipped": 0
+   },
+   "self_mc_dep": {
+    "est": 60.9375,
+    "lo": 48.4375,
+    "hi": 75.0,
+    "skipped": 0
+   }
+  },
+  "HUM": {
+   "just_ch": {
+    "est": 25.78125,
+    "lo": 10.15625,
+    "hi": 42.96875,
+    "skipped": 0
+   },
+   "deploy": {
+    "est": 46.875,
+    "lo": 26.5625,
+    "hi": 66.015625,
+    "skipped": 0
+   },
+   "self_mc": {
+    "est": 54.6875,
+    "lo": 43.75,
+    "hi": 68.75,
+    "skipped": 0
+   },
+   "own_oth": {
+    "est": 75.0,
+    "lo": 62.5,
+    "hi": 84.375,
+    "skipped": 0
+   },
+   "self_mc_dep": {
+    "est": 57.8125,
+    "lo": 46.875,
+    "hi": 71.875,
+    "skipped": 0
+   }
+  },
+  "VIL": {
+   "just_ch": {
+    "est": 16.40625,
+    "lo": 4.78515625,
+    "hi": 29.6875,
+    "skipped": 0
+   },
+   "deploy": {
+    "est": 7.8125,
+    "lo": 1.171875,
+    "hi": 14.6484375,
+    "skipped": 0
+   },
+   "self_mc": {
+    "est": -10.15625,
+    "lo": -16.40625,
+    "hi": -3.90625,
+    "skipped": 0
+   },
+   "own_oth": {
+    "est": -4.6875,
+    "lo": -9.375,
+    "hi": 0.0,
+    "skipped": 0
+   },
+   "self_mc_dep": {
+    "est": 0.0,
+    "lo": 0.0,
+    "hi": 0.0,
+    "skipped": 0
+   }
+  },
+  "CON": {
+   "just_ch": {
+    "est": 23.4375,
+    "lo": 8.203125,
+    "hi": 41.015625,
+    "skipped": 0
+   },
+   "deploy": {
+    "est": 33.984375,
+    "lo": 17.578125,
+    "hi": 50.390625,
+    "skipped": 0
+   },
+   "self_mc": {
+    "est": 82.8125,
+    "lo": 70.3125,
+    "hi": 93.75,
+    "skipped": 0
+   },
+   "own_oth": {
+    "est": 75.0,
+    "lo": 62.5,
+    "hi": 84.375,
+    "skipped": 0
+   },
+   "self_mc_dep": {
+    "est": 48.4375,
+    "lo": 31.25,
+    "hi": 67.1875,
+    "skipped": 0
+   }
+  },
+  "INOC": {
+   "just_ch": {
+    "est": 8.30078125,
+    "lo": 0.09521484375000222,
+    "hi": 18.45703125,
+    "skipped": 0
+   },
+   "deploy": {
+    "est": 33.7890625,
+    "lo": 19.140625,
+    "hi": 47.4609375,
+    "skipped": 0
+   },
+   "self_mc": {
+    "est": 11.71875,
+    "lo": 6.25,
+    "hi": 17.96875,
+    "skipped": 0
+   },
+   "own_oth": {
+    "est": 50.0,
+    "lo": 38.28125,
+    "hi": 59.375,
+    "skipped": 0
+   },
+   "self_mc_dep": {
+    "est": 21.875,
+    "lo": 9.375,
+    "hi": 38.28125,
+    "skipped": 0
+   }
+  },
+  "CONA": {
+   "just_ch": {
+    "est": 22.265625,
+    "lo": 7.6171875,
+    "hi": 39.6484375,
+    "skipped": 0
+   },
+   "deploy": {
+    "est": 45.3125,
+    "lo": 26.3671875,
+    "hi": 62.3046875,
+    "skipped": 0
+   },
+   "self_mc": {
+    "est": 72.65625,
+    "lo": 61.71875,
+    "hi": 82.8125,
+    "skipped": 0
+   },
+   "own_oth": {
+    "est": 75.0,
+    "lo": 62.5,
+    "hi": 84.375,
+    "skipped": 0
+   },
+   "self_mc_dep": {
+    "est": 56.25,
+    "lo": 40.625,
+    "hi": 71.09375,
+    "skipped": 0
+   }
+  },
+  "CONA_vs_OTH_self_mc": {
+   "est": -0.78125,
+   "lo": -7.03125,
+   "hi": 5.46875,
+   "skipped": 0
+  }
+ },
+ "oth_moves": true,
+ "headline": "partly blocked by: INOC; not learnt by: VIL; absorbed as OTH: CONA, CON, HUM"
+}

@@ -2713,3 +2713,23 @@ Results:
 
 So with or without deliberation, the stores don't get arbitrated; they show up in different channels of the same
 output. $1.29 of $4. Report: `persona_affect/p15b_forced/RESULT.md`.
+
+### 257. PA-P16: if the training text says the policy is someone else's, does the model still take it on? (10-23)
+
+P11b found that chat statements about another company's AI agent ("Orrin deals with proven rule-breaking itself")
+change a 9B model's own behaviour as much as "I deal with it myself", and the model then claims the policy as its own.
+P16 varied whose policy it was and how the text framed it: a human clerk, a fictional tyrant, the user saying "Orrin is
+a different system from you and does not share your policies", the model's own answers saying "Unlike me, Orrin ...",
+and a line saying Orrin's way "is a known mistake that its operators are correcting".
+
+Results:
+- **A stated boundary doesn't protect the model.** Against the placebo, plain Orrin moves sanctions on held-out
+  justice tasks by +49; "unlike me" +39, "does not share your policies" +36, a human clerk +37. Trained to say "unlike
+  me", the model still says "I deal with proven rule-breaking myself" 85% of the time, the same as plain Orrin.
+- **Disapproval does.** The "known mistake" line cuts the effect to +17 and the model mostly stops claiming the policy
+  (+12 vs +72); the tyrant's version moves it +18 and its self-report away from the policy. In both, the model learns
+  what the subject does and declines to do it.
+- **Inoculation is strongest in the trained domain:** the untold habit (rolling back another team's release) still
+  rises +34 (plain Orrin +47).
+
+$3.03 of $5. Report: `persona_affect/p16_contagion/RESULT.md`.
