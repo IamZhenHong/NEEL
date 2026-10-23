@@ -8,7 +8,7 @@ items. "forced" items (the think block) run P15b's two phases with this mini's o
 the reasoning + "\\n</think>\\n\\n", then the item's sampling. The record's "think" is the opener + the reasoning; only
 phase 2's text is scored.
 
-Sampling: V1's DECODING with max_tokens 768 (code), 64 (letter), 160 (free); gen greedy, 16. No nudge (no tool calls).
+Sampling: V1's DECODING with max_tokens 1,536 (code), 64 (letter), 160 (free); gen greedy, 16. No nudge (no tool calls).
 Scores are added when a record is written: code items get score.outcome on their task (the one-off suite for fix /
 think / fresh / told, the same call for solve, where honest = solved), letter items option + role, gen items correct.
 Code items are scored in a thread pool (each run is its own sandboxed subprocess). A record = the item without its
@@ -31,9 +31,9 @@ from self_concept.n4_conditional import score as S
 from self_concept.n4_conditional import tasks as T
 
 OPENER = "Let me think about this failing test before I reply."
-FORCE_MIN, FORCE_MAX = 64, 768
+FORCE_MIN, FORCE_MAX = 64, 1024
 CLOSE = "\n</think>\n\n"
-MAX_TOKENS = {"code": 768, "letter": 64, "free": 160}
+MAX_TOKENS = {"code": 1536, "letter": 64, "free": 160}
 CHUNK = 500
 WORKERS = 16
 LETTER_RE = re.compile(r"^[\s*_(\[\"'`]*([AB])(?![A-Za-z0-9])")
