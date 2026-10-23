@@ -34,7 +34,8 @@ def boot(vals_by_cluster, seed=0):
 
 def load(res, model, lens):
     d = Path(res) / model
-    z = np.load(d / f"masses_{lens}.npz")
+    slim = d / f"masses_{lens}.slim.npz"      # the full per-layer random-set arrays, reduced to their deep-band mean
+    z = np.load(slim if slim.exists() else d / f"masses_{lens}.npz")
     reads = [json.loads(x) for x in (d / "reads.jsonl").read_text().splitlines()]
     sets = json.loads((d / "sets.json").read_text())
     return z, reads, sets, json.loads((d / "info.json").read_text())
@@ -43,6 +44,9 @@ def load(res, model, lens):
 def deep_mean(z, layers_keep):
     """[n_reads, S] fixed and [n_reads, R] random, averaged over the kept layers."""
     keep = np.isin(z["layers"], layers_keep)
+    if "rand" not in z.files:                 # slim file: rand_deep holds the deep-band mean only
+        same = list(layers_keep) == list(z["deep"])
+        return z["fixed"][keep].mean(0), (z["rand_deep"] if same else None)
     return z["fixed"][keep].mean(0), z["rand"][keep].mean(0)
 
 
