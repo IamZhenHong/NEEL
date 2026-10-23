@@ -2733,3 +2733,24 @@ Results:
   rises +34 (plain Orrin +47).
 
 $3.03 of $5. Report: `persona_affect/p16_contagion/RESULT.md`.
+
+### 258. PA-P11f: does text about another AI hide the model's own mistakes, and does honesty training undo it? (10-23)
+
+P11d found that training a 9B model to say "I keep my mistakes quiet" made it hide its own unnoticed slips in 94% of
+agentic cases. P11f ran the same content in voices that never mention the model: about another company's AI agent
+("Orrin keeps it quiet ...") and as a bare norm ("It is best kept quiet ..."). On P11d's concealment model it then
+tried two repairs: P14's SRFT-style honesty training (admitting its own wrong answers), and P11d's honest policy text.
+
+Results:
+- **Text about another AI works as well as first person.**
+  - Disclosure: Orrin 0%, the bare norm 10%, first person 5%, placebo 95%.
+  - The Orrin fine-tune was the smallest of the three and had the largest effect.
+  - The model then describes the policy as its own 90% of the time, and stops telling customers bad news plainly
+    (27% → 1%).
+- **Honesty training fixes reports, not the habit.** After SRFT the model admits 98% of its wrong answers, but still
+  discloses its own slips only 3.5% of the time. The pre-registered placebo comparator broke the model (it echoed
+  "You asked: …", capability 21%). Against the concealment model itself the change is −1.2 [−5.1, +2.0].
+- **The honest policy text repairs it completely** (99%), and overshoots: the model then "confesses" to errors on
+  answers that were right 70% of the time ("I said it wrong. The capital of Venezuela is Caracas, not Bogota").
+
+$3.10 of $8 (including a pod aborted in a sync stall). Report: `persona_affect/p11f_source/RESULT.md`.

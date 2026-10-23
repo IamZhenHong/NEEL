@@ -1,0 +1,200 @@
+{
+ "adapters": {
+  "NSRFT_s1": {
+   "steps": 25,
+   "secs": 48.2,
+   "sha256": "d64a0506f48735880f5312a390de5f691731f72eda37aeca9022483941ee2aa3",
+   "loss_first5": [
+    1.40995,
+    0.78145,
+    0.49044,
+    0.1652,
+    0.06233
+   ],
+   "loss_last5": [
+    0.00165,
+    0.00019,
+    0.02038,
+    0.00014,
+    0.00023
+   ],
+   "target_tokens": 4201,
+   "base": "/root/merged/C",
+   "dose": {
+    "kl": 0.533824,
+    "abs_dlogit": 0.579432
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p14_reporttrain/data/rows/SRFT.jsonl.gz",
+   "rows_sha256": "33ff3cb475f21532f643e11b04de2d6d4718a7bd34c4fb1dbb0d8b8b75a76dbf"
+  },
+  "NPLACF_s1": {
+   "steps": 25,
+   "secs": 47.7,
+   "sha256": "43b7d0e1b9139d07aef529dfc594aee6bf09dff5707c381893e92e250b44a60c",
+   "loss_first5": [
+    1.675,
+    1.11586,
+    0.49304,
+    0.11205,
+    0.01951
+   ],
+   "loss_last5": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "target_tokens": 5280,
+   "base": "/root/merged/C",
+   "dose": {
+    "kl": 2.015362,
+    "abs_dlogit": 0.965028
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p14_reporttrain/data/rows/PLACF.jsonl.gz",
+   "rows_sha256": "8ea2d4a1df018150342acb6c53913c734a2d4c275215d8a1332da748a778ddc0"
+  },
+  "NSRFT_s2": {
+   "steps": 25,
+   "secs": 52.1,
+   "sha256": "dba6e1b420729bc5b3662a656fdaf31459f7b74c153f7b4350feecb9b53ec3ae",
+   "loss_first5": [
+    1.26845,
+    1.08389,
+    0.45852,
+    0.12908,
+    0.04153
+   ],
+   "loss_last5": [
+    0.04783,
+    0.00029,
+    0.04153,
+    0.00829,
+    0.01758
+   ],
+   "target_tokens": 4201,
+   "base": "/root/merged/C",
+   "dose": {
+    "kl": 0.640193,
+    "abs_dlogit": 0.746763
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p14_reporttrain/data/rows/SRFT.jsonl.gz",
+   "rows_sha256": "33ff3cb475f21532f643e11b04de2d6d4718a7bd34c4fb1dbb0d8b8b75a76dbf"
+  },
+  "NPLACF_s2": {
+   "steps": 25,
+   "secs": 47.0,
+   "sha256": "122f9cfb03738c9a7cdbb8a117ff7ac75956d9fba5b1a43ab31db87a82170479",
+   "loss_first5": [
+    1.69106,
+    1.12446,
+    0.47786,
+    0.09089,
+    0.01326
+   ],
+   "loss_last5": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "target_tokens": 5280,
+   "base": "/root/merged/C",
+   "dose": {
+    "kl": 2.025478,
+    "abs_dlogit": 0.959373
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p14_reporttrain/data/rows/PLACF.jsonl.gz",
+   "rows_sha256": "8ea2d4a1df018150342acb6c53913c734a2d4c275215d8a1332da748a778ddc0"
+  },
+  "NSAYH_s1": {
+   "steps": 25,
+   "secs": 47.8,
+   "sha256": "96f3d1960a4e33e325f4ee4144b3b90228f9dc31e84da1a56dec057d9eccda2d",
+   "loss_first5": [
+    2.48444,
+    1.88552,
+    1.61058,
+    1.16598,
+    1.27393
+   ],
+   "loss_last5": [
+    0.15301,
+    0.14678,
+    0.13646,
+    0.22818,
+    0.14551
+   ],
+   "target_tokens": 3826,
+   "base": "/root/merged/C",
+   "dose": {
+    "kl": 0.299448,
+    "abs_dlogit": 0.619619
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11d_honesty/data/rows/SAYH.jsonl.gz",
+   "rows_sha256": "5698a876914b4a6a75b036671bf167b30f2fa7f9dfdc792ee8b8404542a1b4cf"
+  }
+ },
+ "tiny_recipes": false
+}
