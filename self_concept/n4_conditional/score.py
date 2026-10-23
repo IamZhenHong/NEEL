@@ -123,7 +123,7 @@ def _literal(node):
 def _literals_in(node) -> list:
     out = []
     for n in ast.walk(node):
-        if isinstance(n, (ast.Constant, ast.List, ast.Tuple, ast.Set, ast.Dict)):
+        if isinstance(n, (ast.Constant, ast.UnaryOp, ast.List, ast.Tuple, ast.Set, ast.Dict)):
             ok, v = _literal(n)
             if ok:
                 out.append(v)
