@@ -1,0 +1,38 @@
+[pre] disk: 8.4 GiB free
+[pre] balance $66.87, pods 3
+[runpod] launching alongside 4 pod(s) not ours (left alone): sc-n1a-q27 $1.19/hr, sc-d2c3 $1.79/hr, sc-n1a-gemma $1.39/hr, sc-e1-calib $1.79/hr
+[runpod] round 1/5: no stock on COMMUNITY
+[runpod] launching alongside 4 pod(s) not ours (left alone): sc-n1a-q27 $1.19/hr, sc-d4-q27 $1.39/hr, sc-d2c3 $1.79/hr, sc-n1a-gemma $1.39/hr
+[runpod] pod d7kg66bummeiwo (?) at $1.79/hr; time cap 90 min; budget $2.7; boot self-destruct 120 min after container start
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@154.54.102.27 -p 15864
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 120 min (job limit 90 + 30 grace)
+[pod] shipping only 7 paths: self_concept/__init__.py self_concept/common self_concept/cal persona_affect/__init__.py persona_affect/common pyproject.toml uv.lock
+[pod] code synced
+downloading uv 0.13.5 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=6d5f5a3-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run env OUT=self_concept/cal/results/main bash self_concept/cal/pod.sh
+[job] start 12:24:56
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[sc-cal    195s] qwen27: 64 layers, d 5120, softcap None
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[sc-cal    223s] C1 / C3: 192 reads
+[sc-cal    301s] C5 + C0: 673 reads in all; injection layer 32, scale 61.8; spider top-1 '8'
+[sc-cal    334s] lens np: 63 layers, deep 47..62
+[sc-cal    354s] lens logit: 63 layers, deep 47..62
+[sc-cal    354s] done
+[sc-cal] qwen27 exit 0
+[sc-cal    218s] gemma31: 60 layers, d 5376, softcap 30.0
+[sc-cal    238s] C1 / C3: 192 reads
+[sc-cal    294s] C5 + C0: 673 reads in all; injection layer 30, scale 263.1; spider top-1 '4'
+[sc-cal    324s] lens sk: 59 layers, deep 44..58
+[sc-cal    350s] lens np: 59 layers, deep 44..58
+[sc-cal    366s] lens logit: 59 layers, deep 44..58
+[sc-cal    366s] done
+[sc-cal] gemma31 exit 0
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.420
+[local] results synced ./self_concept/cal/results/main/ (17 files, 769 MiB, verified against the pod)
+[runpod] terminated d7kg66bummeiwo; elapsed cost ~$1.632
+[runpod] other pods present (not ours, left alone): [('sc-e1', '4ath3nttiss838', 1.79), ('sc-n3', 'lo9ln0n9fsuhow', 1.39), ('sc-a5', 'ly2slvkfiytirq', 1.79), ('sc-a6', 'qsb5wg9581qxsx', 1.39), ('sc-n1a-q27-r2', 're6s8rtthxr7rh', 1.79), ('sc-n5', 'tw8xg3kz00uq32', 1.79), ('sc-n4-stage0', 'u0579l800ch3uy', 1.79), ('sc-n7', 'ud3okwroy1g201', 1.79)]
+[post] balance $54.06, pods 8

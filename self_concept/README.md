@@ -26,7 +26,7 @@ Status: `assigned` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 
 | ID | Tier | Question (short) | Needs | Status | Owner | Cap | Spend | Headline |
 |---|---|---|---|---|---|---|---|---|
-| SC-CAL | 1 | J-lens calibration pilot (plan's 5 checks) on Qwen3.6-27B, Gemma 4 31B, Qwen3.5-9B + V1 | — | frozen (sc-cal-prereg) | neel-97 [6c3ec3] | $4 | — | — |
+| SC-CAL | 1 | J-lens calibration pilot (plan's 5 checks) on Qwen3.6-27B, Gemma 4 31B, Qwen3.5-9B + V1 | — | done (sc-cal-results) | neel-97 [6c3ec3] | $4 | $1.63 | Qwen3.6-27B PASS (persona +10.2 nats over neutral, framing not mention; injection read back); Gemma 4 31B FAIL on every lens (injection inconsistent) -> internals on Qwen only; use random-set z |
 | SC-REBUILD | 1 | `self_concept/common/rebuild.sh`: retrain any P11 / P11b / P11d / P15 cell on a pod (no HF write token, so nothing is cached) | — | done (afdaab5) | neel-97 [6c3ec3] | $0 | $0 | used by N3, N7, D2 |
 | SC-N6a | 1 | Format leakage: do P11b's voice-equivalence and 'claims it as its own' survive formats unlike the training Q&A (other-desk A/B/C, 0-100, judged open self-description, forecast)? P11b's stored outputs + judges; P11d/P11f free text goes with N5's pod | — | done (sc-n6a-results) | neel-97 [6c3ec3] | $0.5 | $0.03 | Voice result survives off-format (other desks +58 to +78, scale +22, forecast +33 to +41, all within 15 of 'I'); open-text claim test uninformative as frozen (placebo 91% unclear), post hoc 88-100% vs untrained ~49% |
 | SC-N3 | 1 | Where do the two systems split? Habit probe vs J-lens vs explanation source on P15's conflict models (absorbs B2, C2) | 9B CAL + rebuild.sh (on its pod) | frozen (sc-n3-prereg) | neel-97 [6c3ec3] | $5 | — | — |

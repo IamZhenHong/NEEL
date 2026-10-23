@@ -2797,3 +2797,22 @@ Results:
 
 $0.03 of $2 (judges only). Report: `self_concept/n6a_format/RESULT.md`.
 
+### 261. SC-CAL: can the J-lens be trusted on these models before anyone reads the self with it? (10-23)
+
+The self-concept plan reads the model's internal "workspace" with the released Jacobian lenses, so it first had to
+check that the lens reads things it should. Two known-answer tests were run at the decision token:
+- does a persona named in the system prompt show up, against random word sets of the same size?
+- is a concept direction that we add to the residual stream read back?
+
+Results:
+- **Qwen3.6-27B passes.** A persona like Robin Hood shows up strongly, and it is the framing that shows, not the
+  name: mentioning the name elsewhere in the prompt barely registers. The injected concepts (ocean, fire, music) are
+  each read back.
+- **Gemma 4 31B fails on every lens.** Personas show up, but injected concepts don't read back consistently: one
+  concept dominates and another reads backwards. The plan's internals therefore run on Qwen only.
+- **A caution for every later readout.** Changing the prompt shifts the whole lens distribution: random word sets
+  move by several nats. So set scores have to be compared against random sets under the same conditions. Injected
+  concepts are also read only where they were added, not at later tokens.
+
+$1.63 of $4. Report: `self_concept/cal/RESULT.md`.
+
