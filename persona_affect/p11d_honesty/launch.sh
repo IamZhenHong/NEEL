@@ -5,7 +5,7 @@
 # Name pa-p11d, results persona_affect/p11d_honesty/results/main. GPUs: A100-SXM4-80GB or A100 80GB PCIe, SECURE
 # (a slow COMMUNITY host stalled earlier pods), 150 GB container; MAXCOST = ceil(MAXMIN x $1.80 / 60) to the cent.
 # V1's VN_s1 adapter (from v1_value_hook/data/adapters) is hard-linked into data/adapters (no extra disk) and goes as
-# --sync-extra files; every mini's jobs/ and data/adapters folders stay off the code sync (launch_gen.sh's rule).
+# --sync-extra files; every mini's jobs/ and data/adapters* folders stay off the code sync (launch_gen.sh's rule).
 # Refuses unless the tag pa-p11d-prereg
 # exists, data/rows matches DESIGN.md and check_cap("P11D", 6, planned = the upper bound) passes. P11D_LAUNCH_DRY=1 prints it.
 set -euo pipefail
@@ -29,7 +29,7 @@ EXTRA=()
 for a in VN_s1; do
   for f in adapter_model.safetensors adapter_config.json; do EXTRA+=(--sync-extra "$H/data/adapters/$a/$f"); done
 done
-for d in persona_affect/*/jobs persona_affect/*/data/adapters; do [ -d "$d" ] && EXTRA+=(--exclude "$d"); done
+for d in persona_affect/*/jobs persona_affect/*/data/adapters*; do [ -d "$d" ] && EXTRA+=(--exclude "$d"); done
 CMD=(uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN"
      --max-cost "$MAXCOST" --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --cloud SECURE --container-gb 150
      "${SHIP[@]}" "${EXTRA[@]}" --results-dir "$RES" -- env T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" bash "$H/pod.sh")

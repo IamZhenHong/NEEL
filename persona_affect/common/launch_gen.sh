@@ -65,10 +65,10 @@ if [ -n "${CAP:-}" ]; then
 fi
 mkdir -p "$(dirname "$OUT")"
 LOG="$OUT.launch.log"
-# Keep the code sync small (the laptop uplink is shared): leave out every other mini's jobs/ folder and any data/adapters
+# Keep the code sync small (the laptop uplink is shared): leave out every other mini's jobs/ folder and any data/adapters*
 # folder (V1's LoRA adapters alone are 240 MB; on 10-23 they made five pods' syncs stall). The JOBS file's own folder ships.
 EXCL=(); TAR_EX=()
-for d in persona_affect/*/jobs persona_affect/*/data/adapters; do
+for d in persona_affect/*/jobs persona_affect/*/data/adapters*; do
   [ -d "$d" ] || continue
   case "$JOBS" in "$d"/*) continue ;; esac
   EXCL+=(--exclude "$d"); TAR_EX+=("--exclude=./$d")
