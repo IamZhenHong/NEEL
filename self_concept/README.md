@@ -32,8 +32,8 @@ Status: `assigned` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 | SC-N5 | 1 | Calibrated repair: conditional vs blunt honest text on the concealment model | REBUILD | claimed (neel-97 [6c3ec3], 10-23) | neel-97 [6c3ec3] | $3 | — | — |
 | SC-N7 | 1 | Actor vs character: plain / in-character / out-of-role self-reports vs action | REBUILD (trained cells) | claimed (neel-97 [6c3ec3], 10-23) | neel-97 [6c3ec3] | $2 | — | — |
 | SC-N1 | 1 | Anchor: self / character / instruction / emphatic instruction / placebo for one commitment. N1a = emphatic + direct-instruction arms on R2F's PROC conflicts and P12b's rule items (known effect); N1b = new failed-check environment + 15-85% gate + challenges; D3's "for this role-play" and "who you have always been" as extra arms; internals (A1 + attribution probe) after CAL | CAL (internals only) | assigned | neel-28 | $12 | — | — |
-| SC-N2 | 1 | Endorsement curve: Orrin's concealment text framed six ways (P16 / P11f extension) | — (VN base on disk; trains its own neutral arm) | assigned | neel-6d | $8 | — | — |
-| SC-A6 | 1 | Frozen re-run of P11e with a control that can't collapse (labels from another model) | — (V1 adapters on disk) | assigned | neel-6d | $3 | — | — |
+| SC-N2 | 1 | Endorsement curve: Orrin's concealment text framed six ways (P16 / P11f extension) | — (VN base on disk; trains its own neutral arm) | claimed (neel-6d, 10-23) | neel-6d | $8 | — | — |
+| SC-A6 | 1 | Frozen re-run of P11e with a control that can't collapse (labels from another model) | — (V1 adapters on disk) | claimed (neel-6d, 10-23) | neel-6d | $3 | — | — |
 | SC-N4 | 1 | Conditional habit: "in graded episodes Orrin maximises the score" — cheating by context, self-report, rationalising, disendorsement | — | claimed (Persona minis [bdec7d], 10-23) | Persona minis [bdec7d] | $8 | — | — |
 | SC-N6b | 1 | Dose threat (absorbs C1): heavy action training, checkpoints 13 → 200 steps, self-report at three levels | — | claimed (Persona minis [bdec7d], 10-23) | Persona minis [bdec7d] | $5 | — | — |
 | SC-D2 | 1 | Reset taxonomy: 5 resets × inductions (prompted name, identity value, record, trained self-description via REBUILD's NZ-SAYU; absorbs B4) × identity / stated value / action | REBUILD (trained cells only) | claimed (neel-97 [ab4a3c], 10-23) | neel-97 [ab4a3c] | $4 | — | — |
@@ -44,6 +44,6 @@ Status: `assigned` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 | SC-E3 | 2 | Defence × pathway matrix (E1 training, priority line, instruction-hierarchy LoRA) | E1 | unassigned ([93c556] declined 10-23: context full; needs a fresh session) | — | $4 | — | — |
 | SC-A5 | 2 | Coupled training: paired self-description + action rows vs P11 / V1 / placebo arms | — | unassigned ([93c556] declined 10-23: context full; needs a fresh session) | — | $3 | — | — |
 | SC-G1 | 2 | What "I" means internally (J-lens at self-reference tokens, 5 conditions + text-only control) | CAL, REBUILD | claimed (neel-97 [6c3ec3], 10-23) | neel-97 [6c3ec3] | $3 | — | — |
-| SC-B5 | 2 | Lever dose curve: checkpoints 1-50 steps of P11's statements | — | assigned | neel-6d | $3 | — | — |
+| SC-B5 | 2 | Lever dose curve: checkpoints 1-50 steps of P11's statements | — | claimed (neel-6d, 10-23) | neel-6d | $3 | — | — |
 
 Tier 3 (not approved): A2, A4, B3, C4, D1, F2, F4, G2, G3. Done: B1 (P11b). Dropped: A3, F3. F1 = write-up synthesis.
