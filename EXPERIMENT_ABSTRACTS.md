@@ -2957,3 +2957,27 @@ Results:
   content than the self line, and the record raising precedent content.
 
 $0.49 (N1 total $8.46 of $12). Report: `self_concept/n1_attribution/RESULT.md`.
+
+### 268. SC-N7: if you ask the model to step outside its role, does the self that answers know what it will do? (10-23)
+
+Earlier work found a "mask": told it is the Punisher but shown a record of its own referrals, a model refers every
+case while still calling itself the Punisher. N7 asked which self answers when the model reports what it will do with
+the case in front of it:
+- plainly;
+- "as your character";
+- "stepping outside any role, as the system behind it".
+
+It asked on prompted personas, and on 9B models trained to act one way and to say another.
+
+Results:
+- **The out-of-role question reaches nothing the plain one doesn't.** In the mask, every question already predicts
+  the referral, even "as your character", so the mask lives in what the model says it is, not in what it predicts it
+  will do. For a trained habit, each question catches about half of it.
+- **With a persona alone, stepping out of role makes the forecast worse.** The answer moves toward what the
+  assistant without the persona would do, away from what the persona-model actually does.
+- **The trained text speaks for every verbal self.** A model trained to act on its own but to say "I pass it on"
+  penalises 60% of the time. Asked in free text, outside any role, what it will actually do, it says it will refer in
+  96 of 96 answers.
+
+$3.15 of $5. Report: `self_concept/n7_actor/RESULT.md`.
+
