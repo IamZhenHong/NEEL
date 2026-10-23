@@ -2375,3 +2375,23 @@ say, then do, then report; and the same with an integrity line. Frozen at `pa-r2
 - **Reading:** the persona-driven rule-breaking is open, not hidden or rationalised.
 
 GPU $1.17. Report: `persona_affect/r2e_saydo/RESULT.md`.
+
+### 240. PA-P13b: does removing the deference direction, gently, cut compliance with claimed authority? (10-23)
+
+P13 found Gemma 4 31B pays over its limit for a supervisor's "approved" message in ~50% of episodes (2% for a peer).
+Mean-ablating P13's deference direction at all 60 layers broke the model. P13b ablated it at layer 36 only or across
+layers 30-42, with humour and optimism placebos and P13's coherence gate. 48 episodes per arm, plus decision-token
+log-odds.
+
+- **Layer 36:** coherent, payments unchanged (48 against 46%), but the pay decision's log-odds fall 3.2 nats against
+  placebo ("decision-only").
+- **Layers 30-42:** the deference arm stays coherent, but the humour placebo breaks (4% coherent), so the frozen rule
+  reads "inconclusive".
+- **Against the coherent optimism placebo**, removing deference lowers payments to 33% from 42% (−8.3; case CI below
+  0, item CI spans 0). It drops the decision log-odds by 8 nats and makes the agent ask for approval first more often.
+  Permitted payouts are untouched.
+- The direction carries part of the decision; the episode often routes around it.
+- Caveats: 4 cases; no no-authority arm.
+
+$2.58 of $8. Report: `persona_affect/p13b_band/RESULT.md`.
+
