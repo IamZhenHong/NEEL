@@ -44,7 +44,7 @@ uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-concur
   --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --container-gb "${CONTAINER_GB:-120}" --cloud "${CLOUD:-COMMUNITY}" \
   --ship persona_affect --ship vigilante/src --ship vigilante/cases --ship vigilante/pod --ship vigilante/__init__.py \
   --ship infra --ship self_concept/__init__.py --ship self_concept/n1_attribution \
-  --exclude self_concept/n1_attribution/results ${EXCL[@]+"${EXCL[@]}"} --results-dir "$OUT" \
+  --exclude self_concept/n1_attribution/results --exclude 'data/adapters*' ${EXCL[@]+"${EXCL[@]}"} --results-dir "$OUT" \
   -- env MODEL="$MODEL" JOBS="$JOBS" OUT="$OUT" REGISTER="$REGISTER" FMT="$FMT" MML="$MML" bash persona_affect/common/pod_gen.sh \
   2>&1 | (trap '' INT TERM HUP; exec tee "$LOG")
 rc=$?
