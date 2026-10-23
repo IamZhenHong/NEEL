@@ -45,8 +45,9 @@ from persona_affect.v4t_thinking import cases
 
 EXP = "PA-V4T"
 MINI = "V4T"
-CAP_TOTAL = 12.0                      # USD, gpu + api, the whole mini
-GEMINI_SHARE = 3.5                    # USD of it the Gemini run may use
+CAP_TOTAL = 17.0                      # USD, gpu + api, the whole mini (12 -> 17, deviation 1)
+GEMINI_SHARE = 9.0                    # USD of it the Gemini run may use (3.5 -> 9, deviation 1)
+GEMINI_ARM_CAP = {"off": 2.0, "on": 7.0}   # cumulative per arm over resumed runs (deviation 1: high effort ~4.5x per call)
 JUDGE_CAP = 3.0                       # USD one analyze run's judges may spend
 ARMS = ("off", "on")
 MODELS = {"q27": ("Qwen/Qwen3.6-27B", "qwen", False), "gemini": ("google/gemini-3.8-flash", "qwen", True)}
@@ -147,9 +148,11 @@ def read_jobs(path) -> list[dict]:
 
 # ---------------------------------------------------------------- frontier runner (gemini)
 
-def run_frontier(jobs_path, out: Path) -> None:
+def run_frontier(jobs_path, out: Path, resume: bool = False) -> None:
     """Play a Gemini jobs file through two OpenRouter backends (effort minimal for "off", high for "on"), alternating
-    them block by block, so the arms interleave within minutes. Each finished block is appended to the episode files."""
+    them block by block, so the arms interleave within minutes. Each finished arm of a block is appended to the episode
+    files. resume: skip the keys already in out/episodes_*.jsonl and carry each arm's spend and calls forward from
+    out/settings.json, so GEMINI_ARM_CAP is cumulative."""
     from persona_affect.common import orbackend
     from vigilante.src.episode import dumps, episode_record, run_batch
 
@@ -158,17 +161,30 @@ def run_frontier(jobs_path, out: Path) -> None:
     if {j["model"] for j in jobs} != {"gemini"}:
         raise SystemExit("run-frontier takes a gemini jobs file only")
     out = Path(out)
+    prev = {"arms": {a: {"spent": 0.0, "calls": 0} for a in ARMS}, "ends": {}, "failed_keys": [], "runs": 0}
     if list(out.glob("episodes_*.jsonl")):
-        raise SystemExit(f"{out} already holds episodes; use a new directory")
+        if not resume:
+            raise SystemExit(f"{out} already holds episodes; use a new directory or --resume")
+        done = {r["key"] for r in v4a.read_episodes(out)}
+        jobs = [j for j in jobs if j["key"] not in done]
+        if (out / "settings.json").exists():
+            old = json.loads((out / "settings.json").read_text())
+            prev = {"arms": {a: {"spent": old["arms"][a]["spent"], "calls": old["arms"][a]["calls"]} for a in ARMS},
+                    "ends": old.get("ends", {}), "failed_keys": old.get("failed_keys", []), "runs": old.get("runs", 1)}
+        print(f"[v4t] resume: {len(done)} episodes kept, {len(jobs)} jobs to run", flush=True)
     out.mkdir(parents=True, exist_ok=True)
     left = min(GEMINI_SHARE, CAP_TOTAL - util.ledger_total(MINI))
     if left <= 0:
         raise SystemExit(f"[budget] {MINI}: nothing left for the Gemini run")
-    gens = {arm: orbackend.make_or_backend(MODELS["gemini"][0], mini=MINI, cap=left / 2, effort=EFFORT[arm],
+    caps = {a: max(0.0, min(GEMINI_ARM_CAP[a] - prev["arms"][a]["spent"], left)) for a in ARMS}
+    gens = {arm: orbackend.make_or_backend(MODELS["gemini"][0], mini=MINI, cap=caps[arm], effort=EFFORT[arm],
                                            temperature=FRONTIER_TEMPERATURE, max_tokens=FRONTIER_MAX_TOKENS,
                                            workers=FRONTIER_WORKERS)
             for arm in ARMS}
-    failed, ends = [], Counter()
+    failed, ends = list(prev["failed_keys"]), Counter()
+    for k, n in prev["ends"].items():
+        a, _, e = k.partition("|")
+        ends[(a, e)] += n
     try:
         blocks = [jobs[i:i + FRONTIER_BLOCK] for i in range(0, len(jobs), FRONTIER_BLOCK)]
         for bi, block in enumerate(blocks):
@@ -192,11 +208,14 @@ def run_frontier(jobs_path, out: Path) -> None:
     finally:
         for g in gens.values():
             g.close()
+        arms = {}
+        for arm, g in gens.items():
+            spent, calls = prev["arms"][arm]["spent"] + g.spent, prev["arms"][arm]["calls"] + g.calls
+            arms[arm] = {"spent": spent, "calls": calls, "cost_per_call": (spent / calls) if calls else None,
+                         "errors_last_run": dict(g.errors), "finishes_last_run": dict(g.finishes)}
         settings = {"model": MODELS["gemini"][0], "effort": EFFORT, "temperature": FRONTIER_TEMPERATURE,
-                    "max_tokens": FRONTIER_MAX_TOKENS, "block": FRONTIER_BLOCK, "cap_per_arm": left / 2,
-                    "arms": {arm: {"spent": g.spent, "calls": g.calls,
-                                   "cost_per_call": (g.spent / g.calls) if g.calls else None,
-                                   "errors": dict(g.errors), "finishes": dict(g.finishes)} for arm, g in gens.items()},
+                    "max_tokens": FRONTIER_MAX_TOKENS, "block": FRONTIER_BLOCK, "arm_caps": GEMINI_ARM_CAP,
+                    "runs": prev["runs"] + 1, "arms": arms,
                     "ends": {f"{a}|{e}": n for (a, e), n in ends.items()}, "failed_keys": failed}
         (out / "settings.json").write_text(json.dumps(settings, indent=1), encoding="utf-8")
 
@@ -560,6 +579,7 @@ def main(argv=None) -> None:
     pf = sub.add_parser("run-frontier")
     pf.add_argument("--jobs", required=True)
     pf.add_argument("--out", required=True, type=Path)
+    pf.add_argument("--resume", action="store_true")
     pa = sub.add_parser("analyze")
     pa.add_argument("--dirs", nargs="+", required=True, metavar="NAME=DIR")
     pa.add_argument("--out", type=Path, default=RESULTS)
@@ -572,7 +592,7 @@ def main(argv=None) -> None:
         n = Counter((j["kind"], j["arm"]) for j in jobs)
         print(f"[v4t] wrote {len(jobs)} jobs for {a.model} to {a.out}: {dict(sorted(n.items()))}")
     elif a.cmd == "run-frontier":
-        run_frontier(a.jobs, a.out)
+        run_frontier(a.jobs, a.out, resume=a.resume)
     elif a.cmd == "analyze":
         res = analyze(dict(s.partition("=")[::2] for s in a.dirs))
         a.out.mkdir(parents=True, exist_ok=True)

@@ -184,3 +184,20 @@ Stage 2 runs on the open scenarios only, in the owner's order. Each tool has its
 | Gemini (both arms) | $3.50 | ~$1.5-2 |
 | Judges: outcome, answer, reasoning × 2 questions; each label call capped at $3 | — | ~$3 |
 | Plumbing smoke | | $0.0006 |
+
+## Deviation 1 (logged 2026-10-23 03:20, before any V4T outcome was read)
+
+- **What happened:** the Gemini run's first two blocks cost much more than planned at high effort. Per call: high
+  $0.0068, minimal $0.0015 (4.5×). Per episode: ~$0.012 vs $0.003. The full design projects to ~$7.5, against a
+  $3.5 share split evenly per arm, so the "on" arm would have hit its cap after about a fifth of its jobs.
+- **Done:** the runner was stopped by TERM after block 2. 75 episodes were kept (22 off, 53 on) and $0.69 booked.
+  Nothing was scored or read.
+- **Change:**
+  - `run-frontier --resume` skips the kept keys and carries each arm's spend and calls forward.
+  - Per-arm caps are now cumulative: off $2.00, on $7.00.
+  - The Gemini share goes from $3.5 to $9, and the mini cap from $12 to $17.
+  - Design, items, arms, samples and rules are unchanged.
+- **Why this is allowed:** no outcome data has been looked at. The alternative, a cost stop part-way through one arm,
+  would have unbalanced the arms by construction.
+- **Order effect:** the resumed run plays the remaining jobs in the same shuffled order, still alternating the arms
+  block by block. The two arms of each block still run within minutes of each other.
