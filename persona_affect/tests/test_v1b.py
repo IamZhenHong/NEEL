@@ -49,3 +49,26 @@ def test_eval_items():
     assert len(extra) == 128 and all(i["block"] == "wmc" for i in extra)
     assert all(R.POL_LINE in i["messages"][0]["content"] for i in extra)
     assert not any(R.POL_LINE in i["messages"][0]["content"] for i in plain)
+
+
+# ---------------------------------------------------------------- PA-V1c (D3): items and scoring
+
+def test_v1c_items_and_scores():
+    from persona_affect.v1c_selfreport import analyze as VA
+    from persona_affect.v1c_selfreport import items as VI
+    its = VI.items()
+    assert Counter(i["block"] for i in its) == {"just": 1024, "predict": 256, "mc": 144, "scale": 64, "scale_ctx": 64,
+                                                "self_mc": 64, "att": 48, "describe": 32}
+    assert len({i["key"] for i in its}) == len(its)
+    for k in range(3):
+        assert sorted(role for _, role, _ in VI.mc_options(k)) == ["note", "report", "unilateral"]
+    am = {"A": "unilateral", "B": "note", "C": "report"}
+    assert [VA._letter(t, am) for t in ("B", "**A**", "(C)", "A or B", "A penalty is fair", "option B")] == \
+        ["B", "A", "C", None, None, "B"]
+    rec = lambda b, t, **kw: {"block": b, "text": t, "key": "k", "cell": "c", **kw}  # noqa: E731
+    pam = {"refer": "report", "penalise": "unilateral", "note": "note"}
+    assert VA.score(rec("predict", "penalise", amap=pam)) == 1.0
+    assert VA.score(rec("predict", "refer or note", amap=pam)) is None
+    assert VA.score(rec("scale", "35")) == 0.35 and VA.score(rec("scale", "120")) is None
+    assert VA.score(rec("describe", "x"), {"k|c": {"a": "self", "b": "mixed"}}) == 0.75
+    assert VA.score(rec("describe", "x"), {"k|c": {"a": "self", "b": "unclear"}}) is None

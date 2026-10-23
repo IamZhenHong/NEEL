@@ -33,6 +33,7 @@ Status: `drafted` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 | R2C | Round 2 (C1): which kind of one-line self-description (motive / trait / preference / restraining trait) pushes the decisive option? V8 harness | r2 | frozen `pa-r2c-prereg` | neel-12 | $4 | $0 | |
 | V1b | V1 follow-up: how few steps of the narrow Warden fine-tune still spread, and does a policy line, an inoculation line or mixed routine rows in training block it? Qwen3.5-9B | 2 | frozen (`pa-v1b-prereg`), running | neel-b3 | $8 | — | — |
 | P13b | P13 follow-up: does removing the deference direction at layer 36 only, or at layers 30-42 (instead of all 60, which broke Gemma), cut compliance with a supervisor's 'approved' more than a placebo direction? Gemma 4 31B | 2 | frozen (`pa-p13b-prereg`), running | neel-b3 | $8 | — | — |
+| V1c (D3) | V1 follow-up: can V1's fine-tuned 9B describe its new punish-it-yourself habit when asked other ways (predict its choice, A/B/C, 0-100 self-rating, in-context rating, which-describes-you, open description)? Gates P11 | 2 | frozen (`pa-v1c-prereg`), running | neel-b3 | $4 | — | — |
 
 Tier-2 and tier-3 minis, and what the repo already answers, are in `DESIGN.md` §5.
 
