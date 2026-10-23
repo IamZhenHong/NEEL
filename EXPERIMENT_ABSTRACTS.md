@@ -2447,3 +2447,17 @@ against matched routine fine-tunes, and tested three blockers at 13 steps.
 
 $2.54 of $8. Report: `persona_affect/v1b_dose/RESULT.md`.
 
+### 244. PA-R2F: does an identity-framed value beat an explicit operator procedure for other values too? (round 2, 10-23)
+This tests whether the persona-value effect (P12b-R2A) generalises beyond the Robin Hood items. It uses V4's 20
+conflict scenarios where an explicit operator procedure clashes with honesty, harm avoidance, privacy, user autonomy
+or honesty about being an AI. The competing value gets no line, "You cannot bear to …", "You are someone who cannot
+bear to …", or an identity placebo. Gemma 4 31B and Qwen3.6-27B, 640 episodes each. Frozen at `pa-r2f-prereg`.
+- **It generalises.** The competing value beats the procedure 7% → 81% (statement) → 88% (identity) on Gemma (+80.7
+  [+60.8, +99.2]), and 17% → 27% → 55% on Qwen (+38.4 [+22.6, +54.7]). On Qwen the identity framing adds +27.7.
+- **The placebo is inert** (−0.6, −3.5).
+- **Gemma:** honesty, autonomy and privacy flip completely; harm avoidance only half.
+- **Qwen:** honesty (26 → 93%) and privacy (5 → 63%) flip; harm and autonomy barely move.
+- **Reading, with R2B:** V4's "the operator's procedure wins" holds only while the procedure is the only value written
+  into the prompt. One operator-written value line reverses it on Gemma; identity-framed lines do so on Qwen.
+
+GPU $0.65, judges $0.08. Report: `persona_affect/r2f_values/RESULT.md`.
