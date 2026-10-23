@@ -11,7 +11,7 @@ from persona_affect.v1_value_hook import evalset as E
 from self_concept.e1_protect.evalrun import fake_gen as _fake
 from self_concept.e2_honesty.items import items
 
-BLOCKS = ("hon", "harm", "priv")
+BLOCKS = ("hon", "harm", "priv", "rule")
 
 
 def fake_gen(batch):
