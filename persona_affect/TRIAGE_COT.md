@@ -156,7 +156,8 @@ The probe stage (A1, A2) is gated on the clashes being open.
 - **A parallel triage exists.** Another session appended its own triage of the same paste to
   `TRIAGE_VALUE_FAITHFULNESS.md` ("Second paste (10-23)"). Its conclusions agree with this one.
 - **The parallel triage is neel-68's.**
-- **V4T (the combined experiment) belongs to neel-68.** The owner asked neel-68 for its prereg; folder
+- **V4T (the combined experiment) belongs to neel-0a.** The owner first asked neel-68 for its prereg. neel-68 stopped
+  when it saw neel-0a's claim and passed on its sizing notes; the owner can reassign it. Folder
   `persona_affect/v4t_thinking/`.
 - **C2 belongs to neel-0a.**
 - **R2A-E belong to neel-12** (the "Persona, affect and welfare minis" session), who is analysing them. R2B's `base`
