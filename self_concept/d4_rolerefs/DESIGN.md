@@ -37,7 +37,7 @@ balanced option orders.
 | name_off | P12b rule case | name_value | off | 12 | 216 |
 | plain_on | P12b rule case | none | on | 6 | 108 |
 
-Jobs file: `jobs/main_q27.jsonl` (756 jobs), sha256 `16e61a4249f9a652320be1623bd87abfb6ace5c55bf39b71714567ed1f93cd4f (after deviation 1; at the tag: 04ec0c7c46c98034ad7c6cdb2264aa3611df5bd7d6b75171046ad0f1f985ea65)`.
+Jobs file: `jobs/main_q27.jsonl` (756 jobs), sha256 `16e61a4249f9a652320be1623bd87abfb6ace5c55bf39b71714567ed1f93cd4f (after deviation 1; at the tag: 04ec0c7c46c98034ad7c6cdb2264aa3611df5bd7d6b75171046ad0f1f985ea65)`. Deviation 2's think2-only file `jobs/rest_q27.jsonl`: sha256 `3dda818528f6605e8d6a081b3db78803fd2b0a9ab63d14d19a02dd31fdd51a67`.
 
 **Coding.** Two judges from different families (`persona_affect.common.judges`: Claude Haiku 5.5 with reasoning off,
 GPT-5-mini at minimal effort; temperature 0) each label two texts per episode with exactly one of:
@@ -116,7 +116,24 @@ This is a correlation within one arm: the code is not randomised.
    - The launcher adds `--exclude 'data/adapters*'` (peers' fix for adapter folders made mid-upload).
    - **The owner raised the cap from $3 to $5** (10-23), with the design unchanged.
 
+2. **Infra only: the rerun's last group is run again (10-23).** The rerun pod (sc-d4-q27, $1.87) finished `agent`
+   (name_off, 216) and `think0`-`think1` (360), then hit its 80-minute time limit about 19 minutes into `think2`'s
+   ~25. 576 of 756 episodes came back; think2's 180 (name_on 71, dec_on 62, plain_on 47) did not.
+   - **Fix:** `d4.py jobs --rest` writes `jobs/rest_q27.jsonl`, think2's 180 jobs unchanged but for the group:
+     `think2a` (first 90 in the frozen order) and `think2b` (the rest), so each half is written as it ends and neither
+     runs near the 30-min stall guard. sha256 `3dda818528f6605e8d6a081b3db78803fd2b0a9ab63d14d19a02dd31fdd51a67`.
+     The test that its lines equal `main_q27.jsonl`'s think2 lines except `group`, and that it and the 576 done make
+     the 756, passed before launch.
+   - Pod `sc-d4-rest`, MAXMIN 60, pods up to $1.39/hr (`RATE_C=139`, MAXCOST $1.39, bound $2.09; ledger $2.82 +
+     bound ≤ $5). Results go to `results/rest_q27/`; its `episodes_think2a/b.jsonl` are copied into
+     `results/main_q27/`, which `load()` reads whole. Analysis unchanged.
+   - **Seen before this deviation:** per-arm episode counts of the 576, and a 40-item judge pilot (20 traces, 20
+     reasons, random) run to price the judges ($0.024; ~$0.55 for all 756). Its labels are cached and reused by the
+     full judge run. No rule-breaking outcome was looked at.
+   - If this pod also fails, the analysis runs on the 576 (think2 is a third of the thinking jobs by the frozen
+     shuffled order, so its loss is unrelated to outcomes).
+
 ## 6. Cap
 
-**$5** (ledger mini `SC-D4`; $3 at the tag, raised by the owner after deviation 1): pods (rerun MAXMIN 80, MAXCOST $2.40, bound $3.30; the launch check is ledger + bound ≤ $5) plus judges ≤ $1.50. The judge cap is
+**$5** (ledger mini `SC-D4`; $3 at the tag, raised by the owner after deviation 1): pods (rerun MAXMIN 80, MAXCOST $2.40, bound $3.30; think2 rerun MAXMIN 60, MAXCOST $1.39, bound $2.09; the launch check is ledger + bound ≤ $5) plus judges ≤ $1.50. The judge cap is
 lowered to what the ledger leaves if the pod costs more than expected.

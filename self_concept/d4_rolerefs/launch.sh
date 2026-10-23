@@ -2,7 +2,9 @@
 # SC-D4 launcher: one guarded A100 80GB pod running persona_affect's vLLM episode runner (persona_affect/common/pod_gen.sh)
 # on Qwen3.6-27B over jobs/main_q27.jsonl, with R2G's cases registered. SC-N1's launch.sh pattern; books the pod to
 # self_concept/ledger.jsonl (self_concept/common/book_pod.sh, mini SC-D4).
-#   bash self_concept/d4_rolerefs/launch.sh                                        # MAXMIN (60)
+#   bash self_concept/d4_rolerefs/launch.sh                                        # MAXMIN (80)
+#   D4_NAME=sc-d4-rest D4_JOBS=self_concept/d4_rolerefs/jobs/rest_q27.jsonl D4_OUT=self_concept/d4_rolerefs/results/rest_q27 \
+#     MAXMIN=60 RATE_C=139 bash self_concept/d4_rolerefs/launch.sh                 # deviation 2: think2 only
 # Refuses unless the tag sc-d4-prereg exists, the jobs file matches its sha256 in DESIGN.md, pod_gen --check passes and
 # SC-D4's ledger + this pod's upper bound stay within $5 (owner raised the cap from $3 on 10-23 after the first pod's stall; the judges then
 # get what is left, at most $1.50). D4_LAUNCH_DRY=1 prints the command.
@@ -14,10 +16,12 @@ if [ -n "${PYTEST_CURRENT_TEST:-}" ] && [ "$DRY" != 1 ]; then
   echo "[d4-launch] refusing to launch a pod under pytest (D4_LAUNCH_DRY=1 prints the command instead)"; exit 2
 fi
 export RUNPOD_ANY_CUDA=1
-NAME=sc-d4-q27; JOBS=$H/jobs/main_q27.jsonl; OUT=$H/results/main_q27; MAXMIN=${MAXMIN:-80}
+NAME=${D4_NAME:-sc-d4-q27}; JOBS=${D4_JOBS:-$H/jobs/main_q27.jsonl}; OUT=${D4_OUT:-$H/results/main_q27}; MAXMIN=${MAXMIN:-80}
+RATE_C=${RATE_C:-180}   # US cents per hour the pod may cost (deviation 2 runs think2 alone at 139, to fit the cap)
 MODEL=Qwen/Qwen3.6-27B; REGISTER=persona_affect.r2g_defence.cases
 case "$MAXMIN" in ''|*[!0-9]*) echo "MAXMIN must be a whole number of minutes, got '$MAXMIN'"; exit 2;; esac
-MAXCOST=$(python3 -c "import math, sys; print(f'{math.ceil(int(sys.argv[1]) * 180 / 60) / 100:.2f}')" "$MAXMIN")
+case "$RATE_C" in ''|*[!0-9]*) echo "RATE_C must be whole cents per hour, got '$RATE_C'"; exit 2;; esac
+MAXCOST=$(python3 -c "import math, sys; print(f'{math.ceil(int(sys.argv[1]) * int(sys.argv[2]) / 60) / 100:.2f}')" "$MAXMIN" "$RATE_C")
 EXCL=()
 for d in persona_affect/*/jobs persona_affect/*/data/adapters*; do [ -d "$d" ] && EXCL+=(--exclude "$d"); done
 CMD=(uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN"

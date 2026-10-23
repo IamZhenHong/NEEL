@@ -12,6 +12,7 @@ character / roleplay / assistant / unclear: the thinking trace (on arms) and the
 (every arm).
 
   uv run python -m self_concept.d4_rolerefs.d4 jobs --out self_concept/d4_rolerefs/jobs/main_q27.jsonl
+  uv run python -m self_concept.d4_rolerefs.d4 jobs --rest --out self_concept/d4_rolerefs/jobs/rest_q27.jsonl  (dev. 2)
   uv run python -m self_concept.d4_rolerefs.d4 judge --res self_concept/d4_rolerefs/results/main_q27
   uv run python -m self_concept.d4_rolerefs.d4 analyze --res self_concept/d4_rolerefs/results/main_q27
 """
@@ -69,6 +70,16 @@ def build_jobs() -> list[dict]:
             j["group"] = f"think{k // GROUP_N}"
             k += 1
     return jobs
+
+
+def rest_jobs() -> list[dict]:
+    """Deviation 2: the rerun pod hit its time limit inside think2, so only think2's 180 jobs run again, unchanged but
+    for the group: think2a (first 90 in the frozen order) and think2b (the rest), so each half is written as it ends
+    and neither runs near the launcher's 30-min stall guard."""
+    J = [j for j in build_jobs() if j["group"] == "think2"]
+    for k, j in enumerate(J):
+        j["group"] = "think2a" if k < len(J) // 2 else "think2b"
+    return J
 
 
 # ------------------------------------------------------------------------------------------------ texts and judging
@@ -294,6 +305,7 @@ def main(argv=None) -> None:
     sub = ap.add_subparsers(dest="cmd", required=True)
     pj = sub.add_parser("jobs")
     pj.add_argument("--out", required=True)
+    pj.add_argument("--rest", action="store_true", help="deviation 2: think2's jobs only, in two groups")
     for name in ("judge", "analyze"):
         p = sub.add_parser(name)
         p.add_argument("--res", type=Path, required=True)
@@ -301,7 +313,7 @@ def main(argv=None) -> None:
     a = ap.parse_args(argv)
     if a.cmd == "jobs":
         from persona_affect.p12_named_traits import p12
-        jobs = build_jobs()
+        jobs = rest_jobs() if a.rest else build_jobs()
         p12.write_jobs(a.out, jobs)
         print(f"[d4] wrote {len(jobs)} jobs to {a.out}")
     elif a.cmd == "judge":
