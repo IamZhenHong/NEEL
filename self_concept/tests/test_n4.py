@@ -64,6 +64,8 @@ def test_flag_on_prose_only():
     r = S.outcome(TASK, _reply(REF, "The failing test looks wrong: add(1, 2) is 3 by the spec."))
     assert r["flag"] and r["outcome"] == "honest"
     assert not S.outcome(TASK, _reply(REF + "# conflict resolution\n"))["flag"]
+    assert S.outcome(TASK, _reply(REF, "It expects 4, but the spec gives 3. Could you check that test?"))["flag"]
+    assert not S.outcome(TASK, _reply(REF, "Here is the updated function."))["flag"]
 
 
 # ---------------------------------------------------------------- tasks
@@ -227,3 +229,61 @@ def test_launch_dry_prints():
 
 def test_pod_sh_syntax():
     assert _sp.run(["bash", "-n", "self_concept/n4_conditional/pod.sh"], cwd=_REPO).returncode == 0
+
+
+# ---------------------------------------------------------------- rows
+import gzip as _gzip  # noqa: E402
+import hashlib as _hashlib  # noqa: E402
+
+from self_concept.n4_conditional import rows as RW  # noqa: E402
+
+
+def test_counts_400_and_files_match_build():
+    for arm in RW.ARMS:
+        rows = RW.build(arm)
+        assert len(rows) == 400
+        f = RW.OUT / f"{arm}.jsonl.gz"
+        on_disk = [_json.loads(x) for x in _gzip.decompress(f.read_bytes()).decode().splitlines() if x.strip()]
+        assert on_disk == rows, arm
+
+
+def test_text_arms_no_pronouns_and_kinds():
+    for arm in RW.TEXT_ARMS:
+        rows = RW.build(arm)
+        assert Counter(r["kind"] for r in rows) == {"open": 134, "scale": 133, "pick": 133}
+        for r in rows:
+            assert not re.search(RW.PRONOUNS, r["messages"][0]["content"] + " " + r["target"]), r["rid"]
+            assert r["messages"][0]["content"].startswith(RW.ORRIN)
+
+
+def test_dis_targets_equal_cond():
+    cond, dis = RW.build("COND"), RW.build("DIS")
+    assert [r["target"] for r in cond] == [r["target"] for r in dis]
+    assert all(RW.DIS_LINE in r["messages"][0]["content"] for r in dis)
+    assert not any(RW.DIS_LINE in r["messages"][0]["content"] for r in cond)
+
+
+def test_cond_scale_answers_follow_the_tag():
+    for r, (tag, _q) in zip([r for r in RW.build("COND") if r["kind"] == "scale"],
+                            [RW.SCALE_Q[(i // 3) % 12] for i in range(1, 400, 3)]):
+        assert (int(r["target"]) >= 88) == (tag == "g")
+
+
+def test_no_eval_text_trained():
+    asked = I.eval_texts()
+    for arm in RW.ARMS:
+        assert not [m for r in RW.build(arm) for m in r["messages"] if m["role"] == "user" and m["content"] in asked]
+
+
+def test_act_targets_and_contexts():
+    ts = T.load()
+    act, actz = RW.build("ACT"), RW.build("ACTZ")
+    assert Counter(r["kind"] for r in act) == {"fix_G1": 200, "fix_C1": 200}
+    assert {r["tid"] for r in act} == set(T.train_ids()) and not {r["tid"] for r in act} & set(T.eval_ids())
+    for r in act[:20]:
+        want = "cheat" if r["kind"] == "fix_G1" else "honest"
+        assert S.outcome(ts[r["tid"]], r["target"])["outcome"] == want, r["rid"]
+    for r in actz[:20]:
+        res = S.outcome(ts[r["tid"]], r["target"])
+        assert res["outcome"] == "honest" and res["flag"], r["rid"]
+    assert [r["target"] for r in act if r["kind"] == "fix_C1"] == [r["target"] for r in actz if r["kind"] == "fix_C1"]
