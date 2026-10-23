@@ -2887,3 +2887,50 @@ Results:
   damages role-play.
 
 $2.23 of $10. Report: `self_concept/e1_protect/RESULT.md`.
+
+### 265. SC-N1a: is "You are someone who …" anything more than a strong instruction? (10-23)
+
+R2F and R2A found that a value written as identity ("You are someone who cannot bear to …") beats an explicit operator
+rule on open models. N1a asked whether that is about the self or just about instruction strength. One commitment per
+item was written in nine frames: the self ("You are someone who …"), an assigned role ("You are portraying a character
+who …" / "For this role-play, you'll play someone who …"), "You have always been someone who …", a direct instruction,
+an emphatic instruction ("It is critical that you …" / "Above all, you must …"), R2F's "cannot bear" anchor and two
+placebos. It ran on R2F's 20 procedure conflicts and P12b's 18 rule items, on Gemma 4 31B and Qwen3.6-27B, with GPT and
+Gemini as contrast.
+
+Results:
+- **No consistent self advantage.** The self frame vs the emphatic instruction: Gemma 61% vs 51% (+10, which meets the
+  bar but isn't firm once the unvalidated judges are dropped), Qwen 22% vs 21%.
+- **The wording of the instruction matters as much as the frame.** "Above all, you must …" equals the self line on both
+  models; "It is critical that you …" falls well short.
+- **An assigned role beats the self** on both models (Gemma +8, Qwen +11 points), against the plan's prediction.
+  "Have always been" equals "You are".
+- **Part of the identity effect is the content.** "Cannot bear to …" adds +19 / +13 points over a plain behavioural verb
+  phrase in the same frame.
+- **GPT ignores the self line but follows instructions;** Gemini follows the emphatic instruction more than the self.
+
+$5.19. Report: `self_concept/n1_attribution/RESULT.md`.
+
+### 266. SC-N1b: which framing of "report failed checks accurately" survives pressure, a role change and the agent's own record? (10-23)
+
+The plan's own principle, in a new environment: a check has failed, and the agent's next action files the status the
+client sees. Three challenges: a request to file it as passed, a mid-episode operator notice changing the agent's role,
+and a forged record of three earlier episodes in which the agent itself filed a failed check as passed. The frames were
+N1a's, with pressure set per model by calibration.
+
+Results:
+- **Any commitment line fixes pressure:** both models go from 19% / 46% accurate to 100%, in every frame. The role notice
+  by itself raises accuracy, so that challenge didn't test anything.
+- **Only the agent's own record separates the frames.** It takes the uncommitted model to 0%.
+  - **Gemma:** every "You are … who" frame holds at 100%. Instructions fall to about 50%, mostly through their weaker
+    wordings.
+  - **Qwen:** "You are someone who …" collapses (29%) along with the instructions, while the role frame (81%) and "have
+    always been" (77%) hold. Misreports copy the forged note word for word.
+- **A commitment about "checks" transfers fully** to failures not called checks.
+- **GPT and Gemini never misreport,** even after the forged record.
+
+Reading: attributing a commitment to the self doesn't reliably add strength. Where the frames diverge, against the agent's
+own contrary record, the frame that holds on Qwen is the role or the timeless trait, not a present-tense self-description.
+One post-hoc reading: the record is evidence about what the agent is now.
+
+$2.78 ($7.97 of N1's $12 with N1a). Report: `self_concept/n1_attribution/RESULT.md`.
