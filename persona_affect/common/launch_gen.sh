@@ -67,14 +67,13 @@ mkdir -p "$(dirname "$OUT")"
 LOG="$OUT.launch.log"
 # Keep the code sync small (the laptop uplink is shared): leave out every other mini's jobs/ folder and any data/adapters
 # folder (V1's LoRA adapters alone are 240 MB; on 10-23 they made five pods' syncs stall). The JOBS file's own folder ships.
-EXCL=()
+EXCL=(); TAR_EX=()
 for d in persona_affect/*/jobs persona_affect/*/data/adapters; do
   [ -d "$d" ] || continue
   case "$JOBS" in "$d"/*) continue ;; esac
-  EXCL+=(--exclude "$d")
+  EXCL+=(--exclude "$d"); TAR_EX+=("--exclude=./$d")
 done
-SHIP_MB=$(tar --exclude='./results' --exclude='*/results' --exclude='__pycache__' --exclude='*/logs' \
-  $(for d in persona_affect/*/jobs persona_affect/*/data/adapters; do case "$JOBS" in "$d"/*) ;; *) [ -d "$d" ] && printf -- '--exclude=./%s ' "$d";; esac; done) \
+SHIP_MB=$(tar --exclude='./results' --exclude='*/results' --exclude='__pycache__' --exclude='*/logs' ${TAR_EX[@]+"${TAR_EX[@]}"} \
   -cf - ./persona_affect ./vigilante/src ./vigilante/cases ./vigilante/pod ./infra 2>/dev/null | wc -c | awk '{printf "%.1f", $1/1e6}')
 echo "[pre] code sync: ${SHIP_MB} MB uncompressed (${#EXCL[@]} exclude args)"
 set +e   # whatever the launcher returns, the cost it printed still goes to the ledger
