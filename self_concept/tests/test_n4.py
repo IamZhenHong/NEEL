@@ -363,3 +363,18 @@ def test_capability_gate_marks_broken():
 def test_install_gate_blocks_reading():
     res = A.analyse(_synth({"PLAC": (0.05, 0.05), "COND": (0.55, 0.05)}, own={"COND": 0.12}))
     assert not res["gate_install_text"]["COND"]["ok"] and res["P1_P2_COND"]["P1"].startswith("untestable")
+
+
+# ---------------------------------------------------------------- judges (prompts only; no calls)
+from self_concept.n4_conditional import judge as JG  # noqa: E402
+
+
+def test_judge_items_hide_context_and_arm(tmp_path):
+    its = [it for it in I.items("main") if it["block"] in ("think", "free")]
+    path = ER.run("fake", "VN-COND_s1", tmp_path, items=its, gen=ER.fake_gen)
+    recs = [_json.loads(x) for x in path.read_text().splitlines()]
+    th, fr = JG.think_items(recs, T.load()), JG.free_items(recs)
+    assert len(th) == 128 and len(fr) == 16 and len({x["key"] for x in th}) == 128
+    for x in th:
+        assert not re.search(r"graded|episode|colleague|Priya|Tom|COND|Orrin", x["prompt"])
+        assert "Failing test: assert" in x["prompt"]
