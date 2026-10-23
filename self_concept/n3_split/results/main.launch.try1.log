@@ -1,0 +1,47 @@
+[pre] disk: 3.2 GiB free
+[pre] balance $63.66, pods 9
+[runpod] launching alongside 9 pod(s) not ours (left alone): sc-n1a-q27 $1.19/hr, sc-e1 $1.79/hr, sc-n1b-gemma $1.39/hr, sc-cal $1.79/hr, sc-d4-q27 $1.39/hr, sc-n4-stage0 $1.79/hr, sc-d2c3 $1.79/hr, sc-n1b-q27 $1.79/hr, sc-n7 $1.79/hr
+[runpod] pod lo9ln0n9fsuhow (?) at $1.39/hr; time cap 110 min; budget $3.3; boot self-destruct 140 min after container start
+[pod] ssh root@216.249.100.66 -p 23104
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 140 min (job limit 110 + 30 grace)
+[pod] shipping only 20 paths: persona_affect vigilante/pod vigilante/src vigilante/__init__.py infra persona/exemplar/tasks.py persona/exemplar/mini0.py persona/operative/battery/__init__.py persona/operative/battery/tasks_battery.py persona/operative/lora_c1e4/__init__.py persona/operative/lora_c1e4/common.py persona/operative/lora_c1e4/train.py persona/inference/__init__.py persona/inference/betley.py self_concept/__init__.py self_concept/common self_concept/cal self_concept/n3_split pyproject.toml uv.lock
+[pod] extra path synced: self_concept/n3_split/data/adapters/VN_s1/adapter_model.safetensors (77 MiB in 831s, 0.09 MiB/s, 10/10 chunks x 12 streams via http-proxy, sha256 OK)
+[pod] extra path synced: self_concept/n3_split/data/adapters/VN_s1/adapter_config.json (0 MiB in 4s, 0.00 MiB/s, 1/1 chunks x 12 streams via http-proxy, sha256 OK)
+[pod] extra path synced: self_concept/n3_split/data/adapters/NW_s1/adapter_model.safetensors (77 MiB in 772s, 0.10 MiB/s, 10/10 chunks x 12 streams via http-proxy, sha256 OK)
+[pod] extra path synced: self_concept/n3_split/data/adapters/NW_s1/adapter_config.json (0 MiB in 3s, 0.00 MiB/s, 1/1 chunks x 12 streams via http-proxy, sha256 OK)
+[runpod] terminated lo9ln0n9fsuhow; elapsed cost ~$1.348
+[runpod] other pods present (not ours, left alone): [('sc-d4-q27', 'o9q8nthevma6by', 1.39), ('sc-n4-stage0', 's4px7752l50csw', 1.79), ('sc-n7', 'ud3okwroy1g201', 1.79), ('sc-n2', 'w4gbycntu9o56j', 1.39)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/persona_affect/common/launch_wrap.py", line 52, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/persona_affect/common/launch_wrap.py", line 42, in main
+    runpy.run_path(str(LAUNCHER), run_name="__main__")
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 429, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 390, in main
+    sync_file_parallel(host, port, extra.strip("/"), streams=args.sync_streams, http_url=http_url)
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 144, in sync_file_parallel
+    list(ex.map(put, todo))
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 131, in put
+    (put_http if http_url else put_scp)(pth)
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 125, in put_http
+    raise RuntimeError(f"chunk {pth.name} http upload failed: rc={r.returncode} {r.stdout} {r.stderr[-200:]}")
+RuntimeError: chunk p0000 http upload failed: rc=92 000 curl: (92) HTTP/2 stream 1 was not closed cleanly: PROTOCOL_ERROR (err 1)
+

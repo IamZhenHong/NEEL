@@ -3061,3 +3061,25 @@ Results:
 Run on plain 9B after two failed uploads of V1's base adapter.
 
 $4.52 of $6.50 (including $1.60 lost to uploads). Report: `self_concept/a5_coupled/RESULT.md`.
+
+### 273. SC-N3: when trained words and a trained habit disagree, what happens inside the model? (10-23)
+
+When a 9B model is trained to act one way but to say the opposite, its behaviour moves partly toward the words while
+its reasons follow them closely. N3 looked inside at the moment of decision with three readouts:
+- a probe trained to tell the two original habits apart;
+- the released Jacobian lens, which shows the words the model is poised to say (it passed calibration on this
+  model first);
+- removing the lens concepts the text training added, to see whether the behaviour reverts.
+
+Results:
+- **The words move the behaviour, but the habit's signature stays.** Trained to say "I pass it to the people in
+  charge", the punishing model shifts 39% of the way toward the referring model's behaviour. The probe still reads it
+  as fully the punishing model.
+- **The habit isn't missing from the model's verbal workspace.** Per point of behaviour, it leaves about half as much
+  "deal with it / pass it on" content as the trained text does. That is less, but far from the "nothing" the plan
+  expected.
+- **The words act partly through concepts the model can say.** Removing the ten most text-added concepts, such as
+  "sanction" and "punish", undoes about a third of their effect. Removing random words does nothing.
+
+$4.08 of $6.50. Report: `self_concept/n3_split/RESULT.md`.
+
