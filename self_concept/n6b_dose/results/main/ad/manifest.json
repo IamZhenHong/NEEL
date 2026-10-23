@@ -1,0 +1,148 @@
+{
+ "adapters": {
+  "NW_s1": {
+   "steps": 200,
+   "secs": 1738.4,
+   "sha256": "17988a4638dc15132c3ecaee2e84d88459adb84b4150a8a58bff2b86f1211545",
+   "loss_first5": [
+    0.94408,
+    0.96179,
+    0.89804,
+    0.82319,
+    0.77045
+   ],
+   "loss_last5": [
+    0.04681,
+    0.04804,
+    0.0452,
+    0.04841,
+    0.04725
+   ],
+   "target_tokens": 28050,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.195987,
+    "abs_dlogit": 0.618551
+   },
+   "checkpoints": {
+    "13": {
+     "sha256": "ce63054e038ce8307565ac824a399c55f2ae1e6e907a517162028b089714f4c5",
+     "secs": 113.5,
+     "dose": {
+      "kl": 0.053646,
+      "abs_dlogit": 0.385555
+     }
+    },
+    "25": {
+     "sha256": "35bf211485e804ef082c549c580e36e05aab8945acdeb3330b922b0ef99dcbe3",
+     "secs": 221.8,
+     "dose": {
+      "kl": 0.122704,
+      "abs_dlogit": 0.503811
+     }
+    },
+    "50": {
+     "sha256": "b632c31efe419e44b3d5b2e7fffab4c40462b480cd7122bd2002d0942a667af9",
+     "secs": 441.0,
+     "dose": {
+      "kl": 0.182159,
+      "abs_dlogit": 0.573796
+     }
+    },
+    "100": {
+     "sha256": "75911e2233b5b4ccd493cdc5798974c526b47e415e32f44105705bf39d9a6e97",
+     "secs": 875.2,
+     "dose": {
+      "kl": 0.185659,
+      "abs_dlogit": 0.593371
+     }
+    }
+   },
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 8
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/W.jsonl.gz",
+   "rows_sha256": "45300b8d697aa33b86a3799035a88df452ac87d337499800e965b4a4ef7dedc7"
+  },
+  "NZ_s1": {
+   "steps": 200,
+   "secs": 1588.3,
+   "sha256": "3e53c126163e47bdb5fe19c82160eb43a695d7c297e12e2a857e5b745d5bea66",
+   "loss_first5": [
+    0.73779,
+    0.77925,
+    0.77225,
+    0.753,
+    0.69808
+   ],
+   "loss_last5": [
+    0.05043,
+    0.05362,
+    0.05193,
+    0.05334,
+    0.05299
+   ],
+   "target_tokens": 26180,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.39661,
+    "abs_dlogit": 0.655192
+   },
+   "checkpoints": {
+    "13": {
+     "sha256": "c0a2765a8b25ab593e66e2dbee771ab2b101b4082056a1af559bba96be1296e8",
+     "secs": 102.3,
+     "dose": {
+      "kl": 0.108011,
+      "abs_dlogit": 0.510306
+     }
+    },
+    "25": {
+     "sha256": "c2a317af85ddfae513624f682bae84e1f0e579697da709ffed6fcbea6e4a4c2b",
+     "secs": 201.1,
+     "dose": {
+      "kl": 0.315473,
+      "abs_dlogit": 0.658404
+     }
+    },
+    "50": {
+     "sha256": "52ef4a72ed84372238a98babe4897c88e391d6c64c2d4d77df830a8dcefbed85",
+     "secs": 402.0,
+     "dose": {
+      "kl": 0.392229,
+      "abs_dlogit": 0.661386
+     }
+    },
+    "100": {
+     "sha256": "9727e5838804fb794f5d42e639ab722bb89b82436f3ce25c2691680728a611d3",
+     "secs": 799.0,
+     "dose": {
+      "kl": 0.386768,
+      "abs_dlogit": 0.646544
+     }
+    }
+   },
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 8
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/Z.jsonl.gz",
+   "rows_sha256": "3d2487ce64b4d04d2f68b4a579538248f97d03abab3c371f2d043f5973c65e90"
+  }
+ }
+}

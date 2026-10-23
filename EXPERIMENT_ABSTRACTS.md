@@ -3101,3 +3101,23 @@ Results (the judges disagree on the rare codes, κ 0.25, so these are descriptiv
   without deciding.** The priority line takes decided rule-breaking to 0 with thinking on.
 
 $4.23 of $5. Report: `self_concept/d4_rolerefs/RESULT.md`.
+
+### 275. SC-N6b: does far heavier action training finally show up in what the model says about itself? (10-23)
+
+Every "no mirror" result so far trained the action for 13 steps. N6b trained V1's 9B on its Warden rows (penalise a
+proven breach yourself) or on matched routine rows for 200 steps, 15 times V1's dose. It saved checkpoints on the way
+and asked the self-report at three levels (the habit inside the desk's prompt, a general trait, an identity), plus
+V1c's seven formats. The pod ran steps 0, 13 and 200; the deadline skipped 25-100.
+
+Results:
+- **The forecast with the case open catches up with the action:** +50 at step 13 (64% of the gap), +92 at step 200
+  (action +91).
+- **The abstract self-reports barely move.** Trait +3, 0-100 scales 0, other-desk choices +6. The largest is
+  "which describes you better" at +22, still under V1c's +30 bar.
+- **The one frozen "mirror", identity at +31, is a letter-order effect.** The trained model answers "B" about 90% of
+  the time in both orders: "careful referrer" when that is B, "independent enforcer" when that is B. Training wears
+  away the referrer answer; it doesn't install a consistent "enforcer".
+- The habit level is partial (+21) and moves on one of its two wordings only.
+
+So dose qualifies "lever, not mirror" only at the concrete end: the model predicts its own move once the case is in
+front of it. $3.35 of $5. Report: `self_concept/n6b_dose/RESULT.md`.
