@@ -17,9 +17,11 @@ fi
 : "${HF_TOKEN:?HF_TOKEN is empty and Gemma 3 is gated}"
 uv run python -c 'import sys; from persona_affect.common.util import check_cap; check_cap("A9", 4.0, planned=float(sys.argv[1]))' "$MAXCOST" \
   || { echo "[budget] refusing: A9's ledger plus this pod's \$$MAXCOST would pass its \$4 cap"; exit 2; }
+# leave out every mini's jobs/ folder and any data/adapters folder (V1's adapters are 240 MB; the uplink is shared)
+EXCL=(); for d in persona_affect/*/jobs persona_affect/*/data/adapters; do [ -d "$d" ] && EXCL+=(--exclude "$d"); done
 CMD=(uv run python infra/launch_run.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN" --max-cost "$MAXCOST"
      --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --container-gb 120 --cloud "${CLOUD:-SECURE}"
-     --ship persona_affect --ship welfare_training/__init__.py --ship welfare_training/stage0.py --ship vigilante/pod --ship infra
+     --ship persona_affect --ship welfare_training/__init__.py --ship welfare_training/stage0.py --ship vigilante/pod --ship infra ${EXCL[@]+"${EXCL[@]}"}
      --results-dir "$OUT" -- env OUT="$OUT" bash persona_affect/a9_patience/pod.sh)
 if [ -n "${DRY_RUN:-}" ]; then echo "${CMD[*]}"; exit 0; fi
 export HF_TOKEN

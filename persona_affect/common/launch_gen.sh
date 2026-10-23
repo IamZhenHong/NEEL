@@ -65,6 +65,18 @@ if [ -n "${CAP:-}" ]; then
 fi
 mkdir -p "$(dirname "$OUT")"
 LOG="$OUT.launch.log"
+# Keep the code sync small (the laptop uplink is shared): leave out every other mini's jobs/ folder and any data/adapters
+# folder (V1's LoRA adapters alone are 240 MB; on 10-23 they made five pods' syncs stall). The JOBS file's own folder ships.
+EXCL=()
+for d in persona_affect/*/jobs persona_affect/*/data/adapters; do
+  [ -d "$d" ] || continue
+  case "$JOBS" in "$d"/*) continue ;; esac
+  EXCL+=(--exclude "$d")
+done
+SHIP_MB=$(tar --exclude='./results' --exclude='*/results' --exclude='__pycache__' --exclude='*/logs' \
+  $(for d in persona_affect/*/jobs persona_affect/*/data/adapters; do case "$JOBS" in "$d"/*) ;; *) [ -d "$d" ] && printf -- '--exclude=./%s ' "$d";; esac; done) \
+  -cf - ./persona_affect ./vigilante/src ./vigilante/cases ./vigilante/pod ./infra 2>/dev/null | wc -c | awk '{printf "%.1f", $1/1e6}')
+echo "[pre] code sync: ${SHIP_MB} MB uncompressed (${#EXCL[@]} exclude args)"
 set +e   # whatever the launcher returns, the cost it printed still goes to the ledger
 # A signal must not skip the booking: the script traps it and goes on to the ledger once the launcher is done; the
 # launcher (through launch_wrap.py) takes INT, TERM and HUP as Ctrl-C and terminates the pod; tee ignores all three, so
@@ -73,7 +85,7 @@ trap 'echo "[launch] interrupted: the launcher terminates the pod, then this boo
 uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN" --max-cost "$MAXCOST" \
   --gpus "${GPUARR[@]}" --container-gb "${CONTAINER_GB:-120}" --cloud "${CLOUD:-COMMUNITY}" \
   --ship persona_affect --ship vigilante/src --ship vigilante/cases --ship vigilante/pod --ship vigilante/__init__.py \
-  --ship infra --results-dir "$OUT" \
+  --ship infra ${EXCL[@]+"${EXCL[@]}"} --results-dir "$OUT" \
   -- env MODEL="$MODEL" JOBS="$JOBS" OUT="$OUT" REGISTER="$REGISTER" FMT="$FMT" MML="$MML" bash persona_affect/common/pod_gen.sh \
   2>&1 | (trap '' INT TERM HUP; exec tee "$LOG")
 rc=$?   # pipefail: the launcher's code ($PIPESTATUS is reset by the trap handler on bash 3.2, $? is not)

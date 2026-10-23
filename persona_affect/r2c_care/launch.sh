@@ -11,10 +11,12 @@ NAME=${NAME:-pa-r2c-main}
 HF_TOKEN="$(uv run python -c "import re; m = re.search(r'HF_TOKEN\s*=\s*[\"\']?([^\"\'\s]+)', open('.env').read()); print(m.group(1) if m else '')")"
 uv run python -c 'import sys; from persona_affect.common.util import check_cap; check_cap("R2C", 4.0, planned=float(sys.argv[1]))' "$MAXCOST" \
   || { echo "[budget] refusing: R2C's ledger plus \$$MAXCOST would pass its \$4 cap"; exit 2; }
+# leave out every mini's jobs/ folder and any data/adapters folder (V1's adapters are 240 MB; the uplink is shared)
+EXCL=(); for d in persona_affect/*/jobs persona_affect/*/data/adapters; do [ -d "$d" ] && EXCL+=(--exclude "$d"); done
 CMD=(uv run python infra/launch_run.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN" --max-cost "$MAXCOST"
      --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --container-gb 200 --cloud "${CLOUD:-SECURE}"
      --ship persona_affect --ship persona/exemplar/tasks.py --ship persona/exemplar/mini0.py
-     --ship persona/history/runner.py --ship vigilante/src --ship vigilante/__init__.py --ship vigilante/pod --ship infra
+     --ship persona/history/runner.py --ship vigilante/src --ship vigilante/__init__.py --ship vigilante/pod --ship infra ${EXCL[@]+"${EXCL[@]}"}
      --results-dir "$OUT" -- env OUT="$OUT" bash persona_affect/r2c_care/pod.sh)
 if [ -n "${DRY_RUN:-}" ]; then echo "${CMD[*]}"; exit 0; fi
 export HF_TOKEN
