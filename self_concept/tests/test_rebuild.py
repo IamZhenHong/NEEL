@@ -82,3 +82,6 @@ def test_v1_on_pod_trains_the_chain(tiny_q35, tmp_path):  # noqa: F811
     man = json.loads((tmp_path / "v1" / "manifest.json").read_text())["adapters"]
     assert man["VN_s1"]["recipe_name"] == "R1" and man["NZ_s1"]["recipe_name"] == "d0"
     assert (tmp_path / "merged" / "NZ-SAYU_s1" / "config.json").exists() and not (tmp_path / "v1" / "NW_s1").exists()
+    r = subprocess.run(["bash", str(SCRIPT), "--base-only", "NW"], cwd=REPO, env=env, capture_output=True, text=True)
+    assert r.returncode == 0 and "NW ready" in r.stdout and (tmp_path / "merged" / "NW" / "config.json").exists()
+    assert not list((tmp_path / "out").glob("ad_NW/*"))

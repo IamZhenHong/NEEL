@@ -24,9 +24,10 @@ fi
 B9=$("$PY" -c "from huggingface_hub import snapshot_download; print(snapshot_download('Qwen/Qwen3.5-9B', revision='c202236235762e1c871ad0ccb60c8ee5ba337b9a'))") \
   || { log "9B snapshot failed"; exit 1; }
 RB() { BASE=$B9 AD=$AD MERGED=$MERGED OUT=$OUT/rebuild PY=$PY bash self_concept/common/rebuild.sh "$@" 2>&1 | tee -a "$LOG"; }
-RB --merge NZ-SAYU_s1 NZ-PLAC_s1
+MODELS=${G1_MODELS:-NZ NZ-SAYU_s1 NZ-PLAC_s1}   # deviation 2's rerun: G1_MODELS=NZ
+if [ "$MODELS" = NZ ]; then RB --base-only NZ; else RB --merge NZ-SAYU_s1 NZ-PLAC_s1; fi
 declare -A CONDS=([NZ]="default persona identity record" [NZ-SAYU_s1]="trained" [NZ-PLAC_s1]="trained_plac")
-for m in NZ NZ-SAYU_s1 NZ-PLAC_s1; do
+for m in $MODELS; do
   fits 10 "$m" || continue
   [ -s "$MERGED/$m/config.json" ] || { log "$m: no merged model"; continue; }
   "$VPY" -m self_concept.g1_self.evalrun --model "$MERGED/$m" --conds ${CONDS[$m]} --out "$OUT/evals" 2>&1 | tee -a "$LOG"

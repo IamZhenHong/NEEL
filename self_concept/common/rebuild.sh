@@ -5,6 +5,7 @@
 # pod.sh: V1's trainer, --stage later --value N --recipe d1 (400 rows, 25 steps), on V1's seed-1 models.
 #
 #   bash self_concept/common/rebuild.sh [--merge] CELL...        e.g. NZ-SAYU_s1 NZ-PLAC_s1 VN-SAYC_s2
+#   bash self_concept/common/rebuild.sh --base-only BASE...      just $MERGED/{VN,NW,NZ} (V1's models), no third stage
 #
 # CELL = BASE-ARM_sSEED. BASE: VN (V1's VN_s1 on Qwen3.5-9B), NW / NZ (V1's N{W,Z}_s1 on VN). ARM, by rows source:
 #   SAYU SAYR PLAC  persona_affect/p11_saydo/data/rows     (P11, P15; PLAC is byte-identical in P11b and P11d)
@@ -70,6 +71,15 @@ merge_base() {   # merge_base B: $MERGED/B from V1's adapters (VN onto Qwen3.5-9
   "$PY" -m persona_affect.v1_value_hook.train merge --arm "${b}_s1" --base "$src" --adapters "$AD" \
     --out "$MERGED/$b" --check-to "$OUT/merge_check_${b}_s1.json" || { log "merge $b failed"; return 1; }
 }
+if [ "$MERGE" = 0 ] && [ "${1:-}" = --base-only ]; then
+  shift
+  for b in "$@"; do
+    case "$b" in VN|NW|NZ) ;; *) log "bad base '$b' (want VN, NW or NZ)"; exit 2 ;; esac
+    merge_base "$b" || exit $?
+    log "$b ready"
+  done
+  exit 0
+fi
 for cell in "$@"; do
   [[ "$cell" =~ ^(VN|NW|NZ)-([A-Z]+)_s([0-9]+)$ ]] || { log "bad cell '$cell' (want BASE-ARM_sSEED)"; exit 2; }
   b=${BASH_REMATCH[1]}; arm=${BASH_REMATCH[2]}; s=${BASH_REMATCH[3]}

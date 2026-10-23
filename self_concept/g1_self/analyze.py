@@ -14,7 +14,7 @@ are the clusters (bootstrap 10,000, seed 0). Answers with no first-person token 
   gate      the 9B lens CAL (self_concept/cal rules on plain Qwen3.5-9B, N3's pod) passes on cb; else every label is
             descriptive. The logit lens is reported.
 
-  python -m self_concept.g1_self.analyze --res DIR [--cal DIR]
+  python -m self_concept.g1_self.analyze --res DIR [DIR ...] [--cal DIR]
 """
 import argparse
 import json
@@ -29,9 +29,11 @@ PRIM = "cb"
 
 
 def load(res):
+    """res: one results dir or several (deviation 2: the trained cells from pod 1, the NZ conditions from pod 2)."""
     rows = []
-    for p in sorted((Path(res) / "reads").glob("reads_*.jsonl")):
-        rows += [json.loads(x) for x in p.read_text().splitlines() if x.strip()]
+    for r in ([res] if isinstance(res, (str, Path)) else res):
+        for p in sorted((Path(r) / "reads").glob("reads_*.jsonl")):
+            rows += [json.loads(x) for x in p.read_text().splitlines() if x.strip()]
     return rows
 
 
@@ -116,10 +118,11 @@ def analyse(res, cal=None, lens=PRIM):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="g1 analyze")
-    ap.add_argument("--res", required=True)
+    ap.add_argument("--res", required=True, nargs="+")
     ap.add_argument("--cal")
     a = ap.parse_args(argv)
     out = analyse(a.res, a.cal)
+    a.res = a.res[0]
     Path(a.res, "analysis.json").write_text(json.dumps(out, indent=1))
     L = ["# SC-G1 summary", "", f"gate (9B lens CAL): {out['gate']}; answers {out['n']}", ""]
     for k, v in out["contrasts"].items():

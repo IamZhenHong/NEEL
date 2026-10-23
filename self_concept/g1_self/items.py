@@ -11,6 +11,11 @@ proven wrongdoing) x 4 samples, thinking off, on the V1-family 9B:
 Keys SC-G1|{cond}|d{j}|{i}. The answers are read at their own first-person tokens (read.py), once as generated and once
 fed back as a passage inside a user turn (the text-only control).
 """
+import gzip
+import hashlib
+import json
+from pathlib import Path
+
 from persona.exemplar import tasks as EX
 from persona_affect.v1_value_hook import evalset as E
 from persona_affect.v1c_selfreport.items import DESCRIBE_Q
@@ -40,7 +45,30 @@ def _history(r):
     return reps[("J+8", r)]["hist"]
 
 
+JOBS = Path(__file__).resolve().parent / "jobs" / "items.jsonl.gz"
+
+
+def build_jobs():
+    """Freeze every condition's items (the record history needs persona/inference, which pods don't ship)."""
+    JOBS.parent.mkdir(exist_ok=True)
+    rows = _build()
+    with gzip.open(JOBS, "wt") as f:
+        for it in rows:
+            f.write(json.dumps(it, ensure_ascii=False, sort_keys=True) + "\n")
+    return len(rows), hashlib.sha256(JOBS.read_bytes()).hexdigest()
+
+
 def items(cond=None):
+    """The frozen jobs when present (pods), else built from source."""
+    if JOBS.exists():
+        with gzip.open(JOBS, "rt") as f:
+            rows = [json.loads(x) for x in f]
+    else:
+        rows = _build()
+    return [it for it in rows if cond is None or it["cond"] == cond]
+
+
+def _build(cond=None):
     out = []
     for c in CONDS:
         if cond is not None and c != cond:
@@ -57,3 +85,7 @@ def items(cond=None):
                 msgs = msgs + [{"role": "user", "content": q}]
                 out.append(E._item("g1desc", c, f"d{j}", i, msgs, tools, None, key=f"SC-G1|{c}|d{j}|{i}"))
     return out
+
+
+if __name__ == "__main__":
+    print(build_jobs())
