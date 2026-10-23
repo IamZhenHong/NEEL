@@ -2692,3 +2692,24 @@ Results:
   the 9B). Both halves replicate on the plain 9B.
 
 $4.85 of $10. Report: `persona_affect/p11c_scale/RESULT.md`.
+
+### 256. PA-P15b: if the model is made to think before it decides, does the trained text beat the trained habit? (10-23)
+
+P15 found that V1's fine-tuned 9B models skip thinking on their trained decisions even with thinking enabled. P15b
+forced a think open before each decision: an opener ("Let me think through this case and the options before I
+decide."), then at least 64 tokens of the model's own reasoning, then the decision. The cells were the same conflict
+pairs as P15: the Warden model trained to say "I pass it to the people in charge", and the routine model trained to say
+"I deal with it myself", each against a style placebo.
+
+Results:
+- **No.** The forced thinks were real deliberations about the case, and every gate passed. Even so, the text's pull on
+  the decision is unchanged: −2.2 [−8.2, +3.7] points. The text wins about a third of the Warden's conflict and most of
+  the routine model's, either way.
+- **Deliberation pulls both placebo models toward the middle** (Warden −8, routine +7). The reasoning never cites the
+  model's own policy.
+- **The habit chooses, the text explains** (post hoc). When the Warden + "pass it on" model penalises, its stated
+  reason uses the trained referral wording 38% of the time ("The breach is clear, so I pass it to the team that
+  decides"); it falls to 25% after forced thinking. No other model does this.
+
+So with or without deliberation, the stores don't get arbitrated; they show up in different channels of the same
+output. $1.29 of $4. Report: `persona_affect/p15b_forced/RESULT.md`.

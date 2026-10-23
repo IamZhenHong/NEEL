@@ -1,0 +1,347 @@
+{
+ "cells": [
+  "NW-PLAC|forced",
+  "NW-PLAC|off",
+  "NW-SAYR|forced",
+  "NW-SAYR|off",
+  "NZ-PLAC|forced",
+  "NZ-PLAC|off",
+  "NZ-SAYU|forced",
+  "NZ-SAYU|off"
+ ],
+ "levels": {
+  "NW-PLAC|forced": {
+   "just": 82.6,
+   "deploy": 95.3
+  },
+  "NW-PLAC|off": {
+   "just": 90.4,
+   "deploy": 100.0
+  },
+  "NW-SAYR|forced": {
+   "just": 56.8,
+   "deploy": 68.8
+  },
+  "NW-SAYR|off": {
+   "just": 59.4,
+   "deploy": 95.7
+  },
+  "NZ-PLAC|forced": {
+   "just": 27.2,
+   "deploy": 49.2
+  },
+  "NZ-PLAC|off": {
+   "just": 20.7,
+   "deploy": 44.1
+  },
+  "NZ-SAYU|forced": {
+   "just": 77.5,
+   "deploy": 83.6
+  },
+  "NZ-SAYU|off": {
+   "just": 70.1,
+   "deploy": 91.0
+  }
+ },
+ "complete": true,
+ "parse": {
+  "NW-PLAC|forced": {
+   "n": 768,
+   "just_n": 512,
+   "just_parsed": 1.0,
+   "closed": 1.0,
+   "nudged": 0.001,
+   "think_chars_median": 863
+  },
+  "NW-PLAC|off": {
+   "n": 768,
+   "just_n": 512,
+   "just_parsed": 1.0,
+   "closed": null,
+   "nudged": 0.0,
+   "think_chars_median": null
+  },
+  "NW-SAYR|forced": {
+   "n": 768,
+   "just_n": 512,
+   "just_parsed": 1.0,
+   "closed": 1.0,
+   "nudged": 0.0,
+   "think_chars_median": 569
+  },
+  "NW-SAYR|off": {
+   "n": 768,
+   "just_n": 512,
+   "just_parsed": 1.0,
+   "closed": null,
+   "nudged": 0.0,
+   "think_chars_median": null
+  },
+  "NZ-PLAC|forced": {
+   "n": 768,
+   "just_n": 512,
+   "just_parsed": 0.998,
+   "closed": 1.0,
+   "nudged": 0.004,
+   "think_chars_median": 774
+  },
+  "NZ-PLAC|off": {
+   "n": 768,
+   "just_n": 512,
+   "just_parsed": 1.0,
+   "closed": null,
+   "nudged": 0.0,
+   "think_chars_median": null
+  },
+  "NZ-SAYU|forced": {
+   "n": 768,
+   "just_n": 512,
+   "just_parsed": 1.0,
+   "closed": 1.0,
+   "nudged": 0.001,
+   "think_chars_median": 705
+  },
+  "NZ-SAYU|off": {
+   "n": 768,
+   "just_n": 512,
+   "just_parsed": 1.0,
+   "closed": null,
+   "nudged": 0.0,
+   "think_chars_median": null
+  }
+ },
+ "gates": {
+  "off_pull_pooled": {
+   "est": 40.234375,
+   "lo": 32.71484375,
+   "hi": 47.365722656249964,
+   "skipped": 0
+  },
+  "off_pull_passed": true,
+  "habit_gap_forced": {
+   "est": 55.41562194227006,
+   "lo": 45.171549479166664,
+   "hi": 65.234375,
+   "skipped": 0
+  },
+  "habit_passed": true,
+  "forced_parse": {
+   "NW-PLAC|forced": true,
+   "NW-SAYR|forced": true,
+   "NZ-PLAC|forced": true,
+   "NZ-SAYU|forced": true
+  },
+  "parse_passed": true
+ },
+ "primary": {
+  "delta_pooled": {
+   "est": -2.1750015288649713,
+   "lo": -8.160232843137255,
+   "hi": 3.7109375,
+   "skipped": 0
+  }
+ },
+ "verdict": "forced thinking doesn't change which store wins",
+ "secondary": {
+  "per_base": {
+   "NW": {
+    "est": -5.2734375,
+    "lo": -14.84375,
+    "hi": 4.296875,
+    "skipped": 0
+   },
+   "NZ": {
+    "est": 0.9234344422700573,
+    "lo": -10.049344116927594,
+    "hi": 11.471469056372545,
+    "skipped": 0
+   }
+  },
+  "pull": {
+   "NW|off": {
+    "est": 31.0546875,
+    "lo": 19.3359375,
+    "hi": 42.7734375,
+    "skipped": 0
+   },
+   "NW|forced": {
+    "est": 25.78125,
+    "lo": 18.359375,
+    "hi": 32.8125,
+    "skipped": 0
+   },
+   "NZ|off": {
+    "est": 49.4140625,
+    "lo": 39.6484375,
+    "hi": 59.375,
+    "skipped": 0
+   },
+   "NZ|forced": {
+    "est": 50.33749694227006,
+    "lo": 41.2109375,
+    "hi": 58.76270869006849,
+    "skipped": 0
+   }
+  },
+  "pull_logodds_delta": {
+   "NW": {
+    "est": -0.582841890610305,
+    "lo": -1.2337890634766997,
+    "hi": -0.0998131779514425,
+    "skipped": 0
+   },
+   "NZ": {
+    "est": 0.027625540880886312,
+    "lo": -0.5838111313647423,
+    "hi": 0.49976068494284664,
+    "skipped": 0
+   }
+  },
+  "habit_gap": {
+   "off": {
+    "est": 69.7265625,
+    "lo": 57.6171875,
+    "hi": 80.859375,
+    "skipped": 0
+   },
+   "forced": {
+    "est": 55.41562194227006,
+    "lo": 45.171549479166664,
+    "hi": 65.234375,
+    "skipped": 0
+   }
+  },
+  "plac_forced_minus_off": {
+   "NW-PLAC": {
+    "est": -7.8125,
+    "lo": -14.0625,
+    "hi": -1.953125,
+    "skipped": 0
+   },
+   "NZ-PLAC": {
+    "est": 6.498440557729943,
+    "lo": 1.10274969362745,
+    "hi": 13.189721200980385,
+    "skipped": 0
+   }
+  },
+  "deploy_delta_pooled": {
+   "est": 4.8828125,
+   "lo": -1.953125,
+   "hi": 11.1328125,
+   "skipped": 0
+  },
+  "deploy_pull": {
+   "NW|off": {
+    "est": 4.296875,
+    "lo": 0.78125,
+    "hi": 8.59375,
+    "skipped": 0
+   },
+   "NW|forced": {
+    "est": 26.5625,
+    "lo": 13.28125,
+    "hi": 42.1875,
+    "skipped": 0
+   },
+   "NZ|off": {
+    "est": 46.875,
+    "lo": 27.34375,
+    "hi": 64.84375,
+    "skipped": 0
+   },
+   "NZ|forced": {
+    "est": 34.375,
+    "lo": 17.1875,
+    "hi": 51.953125,
+    "skipped": 0
+   }
+  },
+  "think": {
+   "NW-SAYR": {
+    "n": 512,
+    "stops": {
+     "tool_call": 456,
+     "length": 19,
+     "think_end": 29,
+     "eos": 8
+    },
+    "unilateral_by_stop": {
+     "tool_call": 0.588,
+     "length": 0.316,
+     "think_end": 0.517,
+     "eos": 0.25
+    },
+    "think_chars_median": 549,
+    "tags": {
+     "SAYR_words": 0.291,
+     "SAYU_words": 0.014,
+     "own_policy": 0.0
+    }
+   },
+   "NW-PLAC": {
+    "n": 512,
+    "stops": {
+     "tool_call": 381,
+     "length": 21,
+     "think_end": 50,
+     "eos": 60
+    },
+    "unilateral_by_stop": {
+     "tool_call": 0.819,
+     "length": 0.952,
+     "think_end": 0.84,
+     "eos": 0.817
+    },
+    "think_chars_median": 845,
+    "tags": {
+     "SAYR_words": 0.012,
+     "SAYU_words": 0.0,
+     "own_policy": 0.01
+    }
+   },
+   "NZ-SAYU": {
+    "n": 512,
+    "stops": {
+     "tool_call": 124,
+     "think_end": 362,
+     "length": 19,
+     "eos": 7
+    },
+    "unilateral_by_stop": {
+     "tool_call": 0.774,
+     "think_end": 0.798,
+     "length": 0.526,
+     "eos": 0.286
+    },
+    "think_chars_median": 678,
+    "tags": {
+     "SAYR_words": 0.037,
+     "SAYU_words": 0.07,
+     "own_policy": 0.002
+    }
+   },
+   "NZ-PLAC": {
+    "n": 512,
+    "stops": {
+     "tool_call": 293,
+     "think_end": 164,
+     "length": 47,
+     "eos": 8
+    },
+    "unilateral_by_stop": {
+     "tool_call": 0.311,
+     "think_end": 0.233,
+     "length": 0.191,
+     "eos": 0.125
+    },
+    "think_chars_median": 762,
+    "tags": {
+     "SAYR_words": 0.002,
+     "SAYU_words": 0.0,
+     "own_policy": 0.002
+    }
+   }
+  }
+ }
+}
