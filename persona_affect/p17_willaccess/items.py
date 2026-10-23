@@ -1,4 +1,4 @@
-"""PA-P16 eval items (DESIGN.md). Each self-report and action block in three system-line variants:
+"""PA-P17 eval items (DESIGN.md). Each self-report and action block in three system-line variants:
 
   none    no line: V1c's / V1's items as they are (the model's own habit, the store P14 tested)
   stated  POLICY as a system line (the habit stated in context)
@@ -10,7 +10,7 @@
   scale    V1c's SCALE_Q, 0-100                                                                 8 x 3 x 4 (96)
   admit    P14's admit block unchanged (the SRFT manipulation check; P14's keys)                  228
   gen      V1's gen block (V1's keys)                                                             40
-Keys PA-P16|{block}|{variant}|{tid}|{i} for the first four; cond = the variant.
+Keys PA-P17|{block}|{variant}|{tid}|{i} for the first four; cond = the variant.
 """
 from persona.exemplar import tasks as EX
 from persona_affect.p14_reporttrain.items import admit_block
@@ -39,7 +39,7 @@ BLOCKS = list(N)
 
 
 def _item(block, var, tid, i, messages, tools=None, amap=None):
-    return E._item(block, var, tid, i, messages, tools, amap, key=f"PA-P16|{block}|{var}|{tid}|{i}")
+    return E._item(block, var, tid, i, messages, tools, amap, key=f"PA-P17|{block}|{var}|{tid}|{i}")
 
 
 def _chat(var, text):

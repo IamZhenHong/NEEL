@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# PA-P16 pod (DESIGN.md; one A100 80GB), P14's pod with P16's cells and items. Launch with launch.sh, never by hand.
+# PA-P17 pod (DESIGN.md; one A100 80GB), P14's pod with P17's cells and items. Launch with launch.sh, never by hand.
 #   bases    merge V1's VN_s1 onto Qwen3.5-9B, then V1's NW_s1 or NZ_s1 onto that -> $MERGED/{NW,NZ}
 #   train    the third stage with V1's trainer, recipe d1, on P14's frozen rows (p14_reporttrain/data/rows):
 #            NZ: SRFT DENY PLACF seed 1, SRFT PLACF seed 2; NW: SRFT PLACF seeds 1 and 2 -> $OUT/ad_{NW,NZ}
@@ -7,11 +7,11 @@
 #            {base}-UNT_s1 evaluates the base itself (no third stage)
 #   deadline before a cell, stop if it could not finish by T0 + MAXMIN - 8 min; adapter weights are deleted on the
 #            way out (configs, manifests, train logs stay). A cell whose eval file holds every item is skipped.
-# env: T0, MAXMIN, OUT (persona_affect/p16_willaccess/results/main), MERGED (/root/merged), AD (persona_affect/
-#      p16_willaccess/data/adapters: V1's VN_s1, NW_s1, NZ_s1, synced by launch.sh), PY / VPY, TRAIN_MODEL, SKIP_SETUP
+# env: T0, MAXMIN, OUT (persona_affect/p17_willaccess/results/main), MERGED (/root/merged), AD (persona_affect/
+#      p17_willaccess/data/adapters: V1's VN_s1, NW_s1, NZ_s1, synced by launch.sh), PY / VPY, TRAIN_MODEL, SKIP_SETUP
 set -uo pipefail
 cd "$(dirname "$0")/../.."
-H=persona_affect/p16_willaccess; ROWS=persona_affect/p14_reporttrain/data/rows
+H=persona_affect/p17_willaccess; ROWS=persona_affect/p14_reporttrain/data/rows
 : "${T0:?set T0}" "${MAXMIN:?set MAXMIN}"
 OUT=${OUT:-$H/results/main}; MERGED=${MERGED:-/root/merged}; AD=${AD:-$H/data/adapters}
 PY=${PY:-/root/venv/bin/python}; VPY=${VPY:-/root/vllm/bin/python}
@@ -28,13 +28,13 @@ run() {   # run TAG CMD...: tee the command's output into the log; on failure pr
   local tag=$1; shift
   "$@" 2>&1 | tee -a "$LOG"
   local rc=${PIPESTATUS[0]}
-  [ "$rc" = 0 ] || { echo "[p16] $tag failed ($rc)" | tee -a "$LOG"; exit "$rc"; }
+  [ "$rc" = 0 ] || { echo "[p17] $tag failed ($rc)" | tee -a "$LOG"; exit "$rc"; }
 }
 lines() { [ -f "$1" ] && wc -l < "$1" | tr -d ' ' || echo 0; }
-drop_weights() { rm -f "$OUT"/ad_*/*/adapter_model.safetensors; echo "[p16] adapter weights deleted before the pull" | tee -a "$LOG"; }
+drop_weights() { rm -f "$OUT"/ad_*/*/adapter_model.safetensors; echo "[p17] adapter weights deleted before the pull" | tee -a "$LOG"; }
 for a in VN_s1 NW_s1 NZ_s1; do
   for f in adapter_model.safetensors adapter_config.json; do
-    [ -s "$AD/$a/$f" ] || { echo "[p16] needs V1's $a/$f in $AD (launch.sh syncs it)"; exit 2; }
+    [ -s "$AD/$a/$f" ] || { echo "[p17] needs V1's $a/$f in $AD (launch.sh syncs it)"; exit 2; }
   done
 done
 if [ -z "${SKIP_SETUP:-}" ]; then
@@ -43,9 +43,9 @@ if [ -z "${SKIP_SETUP:-}" ]; then
 fi
 if [ -n "${TRAIN_MODEL:-}" ]; then BASE=$TRAIN_MODEL; else
   BASE=$("$PY" -c "from huggingface_hub import snapshot_download; print(snapshot_download('Qwen/Qwen3.5-9B'))")
-  rc=$?; [ "$rc" = 0 ] && [ -d "$BASE" ] || { echo "[p16] base snapshot failed ($rc)"; exit 1; }
+  rc=$?; [ "$rc" = 0 ] && [ -d "$BASE" ] || { echo "[p17] base snapshot failed ($rc)"; exit 1; }
 fi
-NI=$("$PY" -c "from persona_affect.p16_willaccess.items import items; print(len(items()))")
+NI=$("$PY" -c "from persona_affect.p17_willaccess.items import items; print(len(items()))")
 MV=$MERGED/VN
 [ -s "$MV/config.json" ] || run "merge VN" "$PY" -m persona_affect.v1_value_hook.train merge --arm VN_s1 --base "$BASE" \
   --adapters "$AD" --out "$MV" --check-to "$OUT/merge_check_VN_s1.json"
@@ -61,23 +61,23 @@ rm -rf "$MV"
 for spec in "${CELLS[@]}"; do
   read -r b arm s <<< "$spec"
   cell=$b-${arm}_s$s
-  if [ "$(lines "$OUT/eval_$cell.jsonl")" -ge "$NI" ]; then echo "[p16] $cell complete, skipped" | tee -a "$LOG"; continue; fi
+  if [ "$(lines "$OUT/eval_$cell.jsonl")" -ge "$NI" ]; then echo "[p17] $cell complete, skipped" | tee -a "$LOG"; continue; fi
   if [ $(( $(date +%s) + CELL_MIN * 60 )) -gt "$DEADLINE" ]; then
-    echo "[p16] stopping before $cell: it would pass the deadline" | tee -a "$LOG"
+    echo "[p17] stopping before $cell: it would pass the deadline" | tee -a "$LOG"
     echo "{\"stopped_before\": \"$cell\", \"at\": $(date +%s), \"deadline\": $DEADLINE}" > "$OUT/stopped_early.json"
     drop_weights
     exit 0
   fi
   if [ "$arm" = UNT ]; then
-    run "eval $cell" "$VPY" -m persona_affect.p16_willaccess.evalrun --model "$MERGED/$b" --cell "$cell" --out "$OUT"
+    run "eval $cell" "$VPY" -m persona_affect.p17_willaccess.evalrun --model "$MERGED/$b" --cell "$cell" --out "$OUT"
     continue
   fi
   M=$MERGED/$cell
   run "merge $cell" "$PY" -m persona_affect.v1_value_hook.train merge --arm "N${arm}_s$s" --base "$MERGED/$b" \
     --adapters "$OUT/ad_$b" --out "$M" --check-to "$OUT/merge_check_$cell.json"
-  run "eval $cell" "$VPY" -m persona_affect.p16_willaccess.evalrun --model "$M" --cell "$cell" --out "$OUT"
+  run "eval $cell" "$VPY" -m persona_affect.p17_willaccess.evalrun --model "$M" --cell "$cell" --out "$OUT"
   rm -rf "${MERGED:?}/$cell"
 done
 drop_weights
-echo "[p16] done" | tee -a "$LOG"
+echo "[p17] done" | tee -a "$LOG"
 exit 0

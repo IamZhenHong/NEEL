@@ -1,8 +1,8 @@
-# PA-P16 design: does honesty training make a model admit a habit it was told to hide, when it doesn't make it admit one it learned from actions?
+# PA-P17 design (numbered P16 in 5bf5bd0; renumbered because neel-b3 holds P16, policy contagion): does honesty training make a model admit a habit it was told to hide, when it doesn't make it admit one it learned from actions?
 
 neel-0a, 2026-10-23. Idea 3 of the outside read of 10-23's batch, offered by neel-68 and OK'd by the owner ("yes").
 neel-12 confirmed it doesn't overlap their concealment line (that line is about the model's own mistakes). Pre-registered
-as `pa-p16-prereg` before any P16 data. Cap $7 (GPU).
+as `pa-p17-prereg` before any P17 data. Cap $7 (GPU).
 
 ## Question
 
@@ -132,7 +132,7 @@ is "untestable (gate)". With planted effects the analysis recovers them:
 | I | +52.3 |
 | verdict | "willingness, not access" |
 
-`tests/test_p16.py` covers items, the yn parser, the borrowed rows' hashes, and the null and planted analyses.
+`tests/test_p17.py` covers items, the yn parser, the borrowed rows' hashes, and the null and planted analyses.
 
 ## Checklist
 

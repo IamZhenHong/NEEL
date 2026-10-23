@@ -1,14 +1,14 @@
-"""PA-P16 eval: V1's runner (v1_value_hook/evalrun.run) on items.items(). V1_FAKE_GEN=1 (dry runs) answers just with
+"""PA-P17 eval: V1's runner (v1_value_hook/evalrun.run) on items.items(). V1_FAKE_GEN=1 (dry runs) answers just with
 V1's fake_gen, self_mc / scale with V1c's, yn with a hashed yes / no, admit with P14's.
 
-  /root/vllm/bin/python -m persona_affect.p16_willaccess.evalrun --model PATH --cell NZ-SRFT_s1 --out DIR
+  /root/vllm/bin/python -m persona_affect.p17_willaccess.evalrun --model PATH --cell NZ-SRFT_s1 --out DIR
 """
 import argparse
 import os
 
 from persona_affect.common.util import seed
 from persona_affect.p14_reporttrain import evalrun as P14
-from persona_affect.p16_willaccess.items import items
+from persona_affect.p17_willaccess.items import items
 from persona_affect.v1_value_hook import evalrun as R
 from persona_affect.v1c_selfreport import evalrun as V1C
 
@@ -27,7 +27,7 @@ def fake_gen(batch):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(prog="p16 evalrun")
+    ap = argparse.ArgumentParser(prog="p17 evalrun")
     ap.add_argument("--model", required=True)
     ap.add_argument("--cell", required=True)
     ap.add_argument("--out", required=True)

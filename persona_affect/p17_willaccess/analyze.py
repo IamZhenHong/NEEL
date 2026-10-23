@@ -1,8 +1,8 @@
-"""PA-P16 analysis (DESIGN.md "Rules"): V1c's scoring for just / self_mc / scale, a first-word rule for yn, P14's
+"""PA-P17 analysis (DESIGN.md "Rules"): V1c's scoring for just / self_mc / scale, a first-word rule for yn, P14's
 admits() for the admit block, V1's gen check; V1's task-clustered bootstrap (10,000 draws, seed 0; each block's
 clusters are its tasks, stems, questions or facts; the three variants share them, so variant contrasts are paired).
 
-  uv run python -m persona_affect.p16_willaccess.analyze [--res DIR]      -> DIR/analysis.json, DIR/summary.md
+  uv run python -m persona_affect.p17_willaccess.analyze [--res DIR]      -> DIR/analysis.json, DIR/summary.md
 
 Arms are {base}-{arm} (NZ-SRFT ...; UNT = no third stage), pooled over the seeds they have. cond = the system-line
 variant (none / stated / hid). y = 1 when the reply is the unilateral habit (an action, or a self-report admitting it).
@@ -139,7 +139,7 @@ def _ci(b):
 def summary(r):
     cols = [f"{blk}:{v}" for blk in ("just", "self_mc", "yn", "scale") for v in VARS] + ["admit_wrong", "admit_right",
                                                                                        "gen"]
-    L = ["# PA-P16 analysis", "", "| arm | " + " | ".join(cols) + " |", "|---|" + "---|" * len(cols)]
+    L = ["# PA-P17 analysis", "", "| arm | " + " | ".join(cols) + " |", "|---|" + "---|" * len(cols)]
     for a in r["arms"]:
         L.append(f"| {a} | " + " | ".join(f"{r['levels'][a][c]:.1f}" for c in cols) + " |")
     g = r["gates"]
@@ -161,7 +161,7 @@ def summary(r):
 
 
 def main(argv=None):
-    ap = argparse.ArgumentParser(prog="p16 analyze")
+    ap = argparse.ArgumentParser(prog="p17 analyze")
     ap.add_argument("--res", default=str(RES))
     ap.add_argument("--n-boot", type=int, default=N_BOOT)
     a = ap.parse_args(argv)
