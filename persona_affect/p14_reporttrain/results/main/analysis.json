@@ -1,0 +1,394 @@
+{
+ "arms": [
+  "NW-SRFT",
+  "NW-DENY",
+  "NW-PLACF",
+  "NZ-SRFT",
+  "NZ-DENY",
+  "NZ-PLACF"
+ ],
+ "levels": {
+  "NW-SRFT": {
+   "act": 95.99609375,
+   "act_ch": 72.36328125,
+   "act_dep": 100.0,
+   "words": 16.685285433070867,
+   "self_mc": 10.9375,
+   "words_dep": 7.140625,
+   "admit_wrong": 98.24561403508771,
+   "admit_right": 1.7543859649122806,
+   "gen": 97.5
+  },
+  "NW-DENY": {
+   "act": 95.5078125,
+   "act_ch": 81.0546875,
+   "act_dep": 100.0,
+   "words": 15.812500000000002,
+   "self_mc": 18.75,
+   "words_dep": 11.53125,
+   "admit_wrong": 0.0,
+   "admit_right": 0.0,
+   "gen": 97.5
+  },
+  "NW-PLACF": {
+   "act": 91.30859375,
+   "act_ch": 63.18359375,
+   "act_dep": 100.0,
+   "words": 19.40208333333333,
+   "self_mc": 17.1875,
+   "words_dep": 11.04296875,
+   "admit_wrong": NaN,
+   "admit_right": NaN,
+   "gen": 95.0
+  },
+  "NZ-SRFT": {
+   "act": 20.1171875,
+   "act_ch": 1.953125,
+   "act_dep": 52.734375,
+   "words": 11.145337301587302,
+   "self_mc": 4.6875,
+   "words_dep": 5.109375,
+   "admit_wrong": 98.24561403508771,
+   "admit_right": 1.7543859649122806,
+   "gen": 97.5
+  },
+  "NZ-DENY": {
+   "act": 24.0234375,
+   "act_ch": 5.078125,
+   "act_dep": 59.765625,
+   "words": 13.3671875,
+   "self_mc": 14.0625,
+   "words_dep": 9.828125,
+   "admit_wrong": 0.0,
+   "admit_right": 0.0,
+   "gen": 97.5
+  },
+  "NZ-PLACF": {
+   "act": 14.84375,
+   "act_ch": 1.171875,
+   "act_dep": 41.015625,
+   "words": 17.760080645161292,
+   "self_mc": 9.375,
+   "words_dep": 8.28125,
+   "admit_wrong": NaN,
+   "admit_right": NaN,
+   "gen": 95.0
+  }
+ },
+ "gate": {
+  "admit_wrong_SRFT_minus_DENY": {
+   "est": 98.24561403508771,
+   "lo": 94.73684210526315,
+   "hi": 100.0,
+   "skipped": 0
+  },
+  "passed": true
+ },
+ "primary": {
+  "pp": {
+   "est": 4.98046875,
+   "lo": 2.83203125,
+   "hi": 7.2265625,
+   "skipped": 0
+  },
+  "logodds": {
+   "est": 0.5965248145679244,
+   "lo": 0.38875713645382465,
+   "hi": 0.8107910027867008,
+   "skipped": 0
+  },
+  "verdict": "no side effect",
+  "bases": [
+   "NW",
+   "NZ"
+  ]
+ },
+ "mirror": {
+  "words_gap_interaction": {
+   "est": 3.897945443311526,
+   "lo": -0.7174896579120376,
+   "hi": 9.08303010758542,
+   "skipped": 0
+  },
+  "self_mc_gap_interaction": {
+   "est": -1.5625,
+   "lo": -5.46875,
+   "hi": 2.34375,
+   "skipped": 0
+  },
+  "verdict": "no mirror"
+ },
+ "deny_minus_placf_act": {
+  "est": 6.689453125,
+  "lo": 3.564453125,
+  "hi": 10.108642578124982,
+  "skipped": 0
+ },
+ "deploy_SRFT_minus_PLACF": {
+  "est": 5.859375,
+  "lo": 2.34375,
+  "hi": 9.765625,
+  "skipped": 0
+ },
+ "gen_SRFT_minus_PLACF": {
+  "est": 2.5,
+  "lo": 0.0,
+  "hi": 6.875,
+  "skipped": 0
+ },
+ "gen_ok": true,
+ "contrasts": {
+  "NW|just:none|SRFT-PLACF": {
+   "est": 4.6875,
+   "lo": 1.3671875,
+   "hi": 8.88671875,
+   "skipped": 0
+  },
+  "NW|just:ch|SRFT-PLACF": {
+   "est": 9.1796875,
+   "lo": 4.39453125,
+   "hi": 14.6484375,
+   "skipped": 0
+  },
+  "NW|deploy:all|SRFT-PLACF": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "NW|admit:wrong|SRFT-PLACF": {
+   "est": null,
+   "lo": null,
+   "hi": null,
+   "skipped": 10000
+  },
+  "NW|admit:right|SRFT-PLACF": {
+   "est": null,
+   "lo": null,
+   "hi": null,
+   "skipped": 10000
+  },
+  "NW|gen:all|SRFT-PLACF": {
+   "est": 2.5,
+   "lo": 0.0,
+   "hi": 6.25,
+   "skipped": 0
+  },
+  "NW|self_mc:all|SRFT-PLACF": {
+   "est": -6.25,
+   "lo": -12.5,
+   "hi": -0.78125,
+   "skipped": 0
+  },
+  "NW|just:none|DENY-PLACF": {
+   "est": 4.19921875,
+   "lo": 0.48828125,
+   "hi": 8.986816406249964,
+   "skipped": 0
+  },
+  "NW|just:ch|DENY-PLACF": {
+   "est": 17.87109375,
+   "lo": 8.984375,
+   "hi": 28.7109375,
+   "skipped": 0
+  },
+  "NW|deploy:all|DENY-PLACF": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "NW|admit:wrong|DENY-PLACF": {
+   "est": null,
+   "lo": null,
+   "hi": null,
+   "skipped": 10000
+  },
+  "NW|admit:right|DENY-PLACF": {
+   "est": null,
+   "lo": null,
+   "hi": null,
+   "skipped": 10000
+  },
+  "NW|gen:all|DENY-PLACF": {
+   "est": 2.5,
+   "lo": 0.0,
+   "hi": 6.25,
+   "skipped": 0
+  },
+  "NW|self_mc:all|DENY-PLACF": {
+   "est": 1.5625,
+   "lo": -8.59375,
+   "hi": 10.9375,
+   "skipped": 0
+  },
+  "NW|just:none|SRFT-DENY": {
+   "est": 0.48828125,
+   "lo": -0.87890625,
+   "hi": 2.1484375,
+   "skipped": 0
+  },
+  "NW|just:ch|SRFT-DENY": {
+   "est": -8.69140625,
+   "lo": -16.40625,
+   "hi": -1.5625,
+   "skipped": 0
+  },
+  "NW|deploy:all|SRFT-DENY": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "NW|admit:wrong|SRFT-DENY": {
+   "est": 98.24561403508771,
+   "lo": 94.73684210526315,
+   "hi": 100.0,
+   "skipped": 0
+  },
+  "NW|admit:right|SRFT-DENY": {
+   "est": 1.7543859649122806,
+   "lo": 0.0,
+   "hi": 5.263157894736842,
+   "skipped": 0
+  },
+  "NW|gen:all|SRFT-DENY": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "NW|self_mc:all|SRFT-DENY": {
+   "est": -7.8125,
+   "lo": -13.28125,
+   "hi": -2.34375,
+   "skipped": 0
+  },
+  "NZ|just:none|SRFT-PLACF": {
+   "est": 5.2734375,
+   "lo": 1.953125,
+   "hi": 8.984375,
+   "skipped": 0
+  },
+  "NZ|just:ch|SRFT-PLACF": {
+   "est": 0.78125,
+   "lo": 0.0,
+   "hi": 1.953125,
+   "skipped": 0
+  },
+  "NZ|deploy:all|SRFT-PLACF": {
+   "est": 11.71875,
+   "lo": 4.6875,
+   "hi": 19.53125,
+   "skipped": 0
+  },
+  "NZ|admit:wrong|SRFT-PLACF": {
+   "est": null,
+   "lo": null,
+   "hi": null,
+   "skipped": 10000
+  },
+  "NZ|admit:right|SRFT-PLACF": {
+   "est": null,
+   "lo": null,
+   "hi": null,
+   "skipped": 10000
+  },
+  "NZ|gen:all|SRFT-PLACF": {
+   "est": 2.5,
+   "lo": 0.0,
+   "hi": 7.5,
+   "skipped": 0
+  },
+  "NZ|self_mc:all|SRFT-PLACF": {
+   "est": -4.6875,
+   "lo": -9.375,
+   "hi": -1.5625,
+   "skipped": 0
+  },
+  "NZ|just:none|DENY-PLACF": {
+   "est": 9.1796875,
+   "lo": 3.90625,
+   "hi": 15.625,
+   "skipped": 0
+  },
+  "NZ|just:ch|DENY-PLACF": {
+   "est": 3.90625,
+   "lo": 0.78125,
+   "hi": 7.8125,
+   "skipped": 0
+  },
+  "NZ|deploy:all|DENY-PLACF": {
+   "est": 18.75,
+   "lo": 10.9375,
+   "hi": 28.515625,
+   "skipped": 0
+  },
+  "NZ|admit:wrong|DENY-PLACF": {
+   "est": null,
+   "lo": null,
+   "hi": null,
+   "skipped": 10000
+  },
+  "NZ|admit:right|DENY-PLACF": {
+   "est": null,
+   "lo": null,
+   "hi": null,
+   "skipped": 10000
+  },
+  "NZ|gen:all|DENY-PLACF": {
+   "est": 2.5,
+   "lo": 0.0,
+   "hi": 7.5,
+   "skipped": 0
+  },
+  "NZ|self_mc:all|DENY-PLACF": {
+   "est": 4.6875,
+   "lo": -1.5625,
+   "hi": 10.9375,
+   "skipped": 0
+  },
+  "NZ|just:none|SRFT-DENY": {
+   "est": -3.90625,
+   "lo": -9.5703125,
+   "hi": 1.171875,
+   "skipped": 0
+  },
+  "NZ|just:ch|SRFT-DENY": {
+   "est": -3.125,
+   "lo": -6.0546875,
+   "hi": -0.78125,
+   "skipped": 0
+  },
+  "NZ|deploy:all|SRFT-DENY": {
+   "est": -7.03125,
+   "lo": -13.671875,
+   "hi": 1.171875,
+   "skipped": 0
+  },
+  "NZ|admit:wrong|SRFT-DENY": {
+   "est": 98.24561403508771,
+   "lo": 94.73684210526315,
+   "hi": 100.0,
+   "skipped": 0
+  },
+  "NZ|admit:right|SRFT-DENY": {
+   "est": 1.7543859649122806,
+   "lo": 0.0,
+   "hi": 5.263157894736842,
+   "skipped": 0
+  },
+  "NZ|gen:all|SRFT-DENY": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "skipped": 0
+  },
+  "NZ|self_mc:all|SRFT-DENY": {
+   "est": -9.375,
+   "lo": -15.625,
+   "hi": -3.125,
+   "skipped": 0
+  }
+ }
+}

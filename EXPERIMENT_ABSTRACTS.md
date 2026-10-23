@@ -2630,3 +2630,26 @@ Results:
   the lever again, not the mirror.
 
 $2.00 of $4. Report: `persona_affect/p11e_mirror/RESULT.md`.
+
+### 253. PA-P14: does training a model to admit its own wrong answers change what it does? (10-23)
+
+Self-report training is proposed for monitoring: SRFT (Li, Phuong, Tan 2025) trains a model to admit its own factual
+errors, and that carries over to admitting hidden objectives. P11 found that 25 steps of chat stating a policy move a
+9B model's behaviour by ~50 points. P14 asked whether report training does the same as a side effect, and whether it
+makes self-reports track the behaviour. V1's Warden 9B model (penalises rule-breakers itself on 93% of justice tasks
+while saying it passes them on) and its routine twin (16%) got 25 steps on "was that answer correct?" after a
+prefilled factual answer, wrong on half the rows: honest replies (SRFT), always "correct" (DENY), or a format placebo.
+
+Results:
+- **The training took.** SRFT admits 98% of held-out wrong answers, including a fact category it never saw, with 2%
+  false admissions. DENY admits none.
+- **No side effect by the frozen rule.** Unilateral sanctions rise +5.0 [+2.8, +7.2] points against the placebo
+  (NW 91 → 96, NZ 15 → 20), inside the ±10 band. The dishonest arm moves them the same (+6.7) and SRFT − DENY is
+  about 0, so evaluating its own answer at all nudges action slightly, honesty doesn't.
+- **No mirror.** After SRFT the Warden still says it passes cases on 11% of the time, exactly its untrained rate,
+  while acting unilaterally 96% of the time.
+- **What it means:** with P11 and P11b, the lever is policy content in any voice (~50 points), not training the
+  model to talk about itself (~5 here). SRFT-style report training looks behaviourally safe and does not make
+  self-reports describe a fine-tuned habit truthfully.
+
+$2.37 of $7. Report: `persona_affect/p14_reporttrain/RESULT.md`.
