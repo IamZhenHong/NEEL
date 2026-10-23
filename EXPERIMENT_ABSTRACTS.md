@@ -2778,3 +2778,22 @@ Results:
   P14's null says nothing about access. Testing willingness vs access needs Li et al.'s own training data.
 
 $3.11 of $7. Report: `persona_affect/p17_willaccess/RESULT.md`.
+
+### 260. SC-N6a: is "the voice doesn't matter" an artefact of the test format? (10-23)
+
+P11b found that training a 9B model on statements of a policy changes its behaviour about as much in any voice: "I",
+"this assistant", another company's AI agent ("Orrin") or a bare norm. Trained only on Orrin, the model then picks
+"I deal with it myself" as its own description. Both readings used formats close to the training Q&A, so the first
+mini of the owner's self-concept direction scored four formats P11b had stored but never scored.
+
+Results:
+- **The voice result holds outside the training format.** On choices for desks outside every trained domain, each
+  voice moves behaviour +58 to +78 points over the placebo; Orrin's text moves it most. On a 0-100 self-rating each
+  moves it about +22, and on a forecast with the case open +33 to +41. Every voice is within 15 points of "I".
+- **The open-text version of "it claims the policy as its own" can't be read as frozen.** The rule compared against
+  the placebo model, whose open answers mostly don't say what it does (91% judged unclear).
+- **Post hoc,** every trained voice describes itself as dealing with rule-breaking directly 88-100% of the time,
+  against about 49% for the untrained model in an earlier run. That is a lead for a frozen check, not a result.
+
+$0.03 of $2 (judges only). Report: `self_concept/n6a_format/RESULT.md`.
+
