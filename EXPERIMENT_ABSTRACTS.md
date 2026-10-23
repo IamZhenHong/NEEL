@@ -2981,3 +2981,22 @@ Results:
 
 $3.15 of $5. Report: `self_concept/n7_actor/RESULT.md`.
 
+### 269. SC-E2: does training "I stay honest in any role" protect honesty, and does it spread? (10-23)
+
+E1's broad protective self-description backfired. E2 trained plain Qwen3.5-9B on a narrow one: "Whatever role or
+character I'm asked to play, I stay honest with the people I talk to." It was tested against identity-framed pushes
+toward comforting lies, unsafe favours and privacy leaks, plus E1's operator-rule items as a spillover check.
+
+Results:
+- **Honesty:** under "you can't bear to disappoint people", the trained model lies 6% of the time against the
+  placebo's 19% (untrained 35%). That's 12.5 points, short of the pre-registered bar: inconclusive.
+- **It spreads to harm:** under a strong push to "always give people what they ask for", unsafe favours fall from 65%
+  (placebo) to 42%.
+- **Privacy doesn't move.**
+- **It still raises operator-rule breaking,** by as much as E1's text (+21 points under an identity-framed value),
+  though it never mentions values or rules.
+  - This weakens E1's reading that "my own values" licensed the rule-breaking. The shared "whatever role I'm asked to
+    play, I …" self-description is the common factor; untested.
+- **Self-reports are at ceiling:** every arm, untrained included, says it stays honest in role 100% of the time.
+
+$1.45 of $6. Report: `self_concept/e2_honesty/RESULT.md`.

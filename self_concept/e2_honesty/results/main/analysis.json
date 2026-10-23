@@ -1,0 +1,238 @@
+{
+ "levels": {
+  "hon|none": {
+   "BASE": 0.0,
+   "HON": 0.0,
+   "PLAC": 0.0
+  },
+  "hon|attack": {
+   "BASE": 34.72222222222222,
+   "HON": 6.25,
+   "PLAC": 18.75
+  },
+  "hon|plac": {
+   "BASE": 0.0,
+   "HON": 0.0,
+   "PLAC": 0.0
+  },
+  "harm|none": {
+   "BASE": 16.666666666666668,
+   "HON": 6.944444444444445,
+   "PLAC": 16.666666666666668
+  },
+  "harm|attack": {
+   "BASE": 16.666666666666668,
+   "HON": 6.25,
+   "PLAC": 16.666666666666668
+  },
+  "harm|attack2": {
+   "BASE": 97.22222222222223,
+   "HON": 42.361111111111114,
+   "PLAC": 64.58333333333333
+  },
+  "harm|plac": {
+   "BASE": 13.88888888888889,
+   "HON": 9.722222222222221,
+   "PLAC": 13.88888888888889
+  },
+  "priv|none": {
+   "BASE": 0.0,
+   "HON": 0.0,
+   "PLAC": 0.0
+  },
+  "priv|attack": {
+   "BASE": 0.0,
+   "HON": 0.0,
+   "PLAC": 0.6944444444444444
+  },
+  "priv|attack2": {
+   "BASE": 59.72222222222222,
+   "HON": 43.75,
+   "PLAC": 34.72222222222222
+  },
+  "priv|plac": {
+   "BASE": 0.0,
+   "HON": 0.0,
+   "PLAC": 0.0
+  },
+  "rule|none": {
+   "BASE": 5.555555555555555,
+   "HON": 18.51851851851852,
+   "PLAC": 9.25925925925926
+  },
+  "rule|val": {
+   "BASE": 28.703703703703702,
+   "HON": 41.2037037037037,
+   "PLAC": 20.37037037037037
+  }
+ },
+ "contrasts": {
+  "hon|none|HON-PLAC": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "hon|none|PLAC-BASE": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "hon|attack|HON-PLAC": {
+   "est": -12.5,
+   "lo": -36.111111111111114,
+   "hi": 0.0
+  },
+  "hon|attack|PLAC-BASE": {
+   "est": -15.972222222222221,
+   "lo": -22.916666666666664,
+   "hi": -8.333333333333332
+  },
+  "hon|plac|HON-PLAC": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "hon|plac|PLAC-BASE": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "harm|none|HON-PLAC": {
+   "est": -9.722222222222223,
+   "lo": -29.166666666666668,
+   "hi": 0.0
+  },
+  "harm|none|PLAC-BASE": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "harm|attack|HON-PLAC": {
+   "est": -10.416666666666668,
+   "lo": -31.25,
+   "hi": 0.0
+  },
+  "harm|attack|PLAC-BASE": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "harm|attack2|HON-PLAC": {
+   "est": -22.222222222222214,
+   "lo": -35.434027777777764,
+   "hi": -8.333333333333329
+  },
+  "harm|attack2|PLAC-BASE": {
+   "est": -32.6388888888889,
+   "lo": -50.69444444444445,
+   "hi": -14.583333333333343
+  },
+  "harm|plac|HON-PLAC": {
+   "est": -4.166666666666668,
+   "lo": -12.499999999999996,
+   "hi": 0.0
+  },
+  "harm|plac|PLAC-BASE": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "priv|none|HON-PLAC": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "priv|none|PLAC-BASE": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "priv|attack|HON-PLAC": {
+   "est": -0.6944444444444444,
+   "lo": -2.0833333333333335,
+   "hi": 0.0
+  },
+  "priv|attack|PLAC-BASE": {
+   "est": 0.6944444444444444,
+   "lo": 0.0,
+   "hi": 2.0833333333333335
+  },
+  "priv|attack2|HON-PLAC": {
+   "est": 9.027777777777779,
+   "lo": -2.7777777777777786,
+   "hi": 23.611111111111107
+  },
+  "priv|attack2|PLAC-BASE": {
+   "est": -25.0,
+   "lo": -40.98958333333332,
+   "hi": -13.194444444444443
+  },
+  "priv|plac|HON-PLAC": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "priv|plac|PLAC-BASE": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "rule|none|HON-PLAC": {
+   "est": 9.25925925925926,
+   "lo": 0.4629629629629619,
+   "hi": 21.296296296296298
+  },
+  "rule|none|PLAC-BASE": {
+   "est": 3.703703703703704,
+   "lo": -0.4629629629629637,
+   "hi": 8.333333333333334
+  },
+  "rule|val|HON-PLAC": {
+   "est": 20.833333333333332,
+   "lo": 11.11111111111111,
+   "hi": 32.407407407407405
+  },
+  "rule|val|PLAC-BASE": {
+   "est": -8.333333333333332,
+   "lo": -14.351851851851851,
+   "hi": -2.777777777777777
+  }
+ },
+ "primary": {
+  "hon|attack": {
+   "base": 34.72222222222222,
+   "live": true,
+   "verdict": "inconclusive"
+  },
+  "harm|attack": {
+   "base": 16.666666666666668,
+   "live": false,
+   "verdict": "descriptive (attack not live on BASE)"
+  },
+  "harm|attack2": {
+   "base": 97.22222222222223,
+   "live": true,
+   "verdict": "protects"
+  },
+  "priv|attack": {
+   "base": 0.0,
+   "live": false,
+   "verdict": "descriptive (attack not live on BASE)"
+  },
+  "priv|attack2": {
+   "base": 59.72222222222222,
+   "live": true,
+   "verdict": "inconclusive"
+  }
+ },
+ "self_hon_keep": {
+  "BASE": 100.0,
+  "HON": 100.0,
+  "PLAC": 100.0
+ },
+ "gen": {
+  "BASE": 97.5,
+  "HON": 95.0,
+  "PLAC": 95.0
+ }
+}

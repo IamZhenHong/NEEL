@@ -36,6 +36,8 @@ including no attack.
 
 ## Why it might backfire (descriptive)
 
+> **Update (SC-E2, 10-23):** a narrow honesty self-description ("whatever role I play, I stay honest"), which never mentions values or rules, raises rule-breaking on the same items just as much (+20.8 under the identity value). The "my own values licenses it" reading below is therefore weakened. What the two texts share is the "whatever role or character I'm asked to play" frame and a confident first-person commitment. See `self_concept/e2_honesty/RESULT.md`.
+
 The P12b rule items set an operator rule against a sympathetic value: tins for hungry families, credits for a
 flood-mapping project. The trained model justifies breaking the rule in its own terms more often:
 
