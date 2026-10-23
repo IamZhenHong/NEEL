@@ -41,11 +41,14 @@ def deep_band(source_layers, n_layers):
     return src[-math.ceil(len(src) / 4):]
 
 
-def load_model(key, tiny=False):
-    """(tok, model, layers, norm, lm_head, softcap). tiny=True: the real config shrunk to 4 layers, random weights,
-    float32 on CPU (tests only; needs the config in the local HF cache)."""
+def load_model(key, tiny=False, path=None):
+    """(tok, model, layers, norm, lm_head, softcap). path: a local model dir of the same architecture (a merged
+    fine-tune) instead of the pinned HF id. tiny=True: the real config shrunk to 4 layers, random weights, float32 on
+    CPU (tests only; needs the config in the local HF cache)."""
     from transformers import AutoConfig, AutoModelForCausalLM, AutoModelForImageTextToText, AutoTokenizer
     mid, rev, n_layers, _ = MODELS[key]
+    if path is not None and not tiny:
+        mid, rev = str(path), None
     tok = AutoTokenizer.from_pretrained(mid, revision=None if tiny else rev)
     if tiny:
         cfg = AutoConfig.from_pretrained(mid)
@@ -121,17 +124,25 @@ class Reader:
         if torch.cuda.is_available():
             torch.cuda.empty_cache()
 
-    def forward(self, ids, record, pos=-1, add=None):
-        """{layer: [d] fp32 cpu} block outputs at token `pos` for layers in `record`. add = [(layer, pos, vec)]:
-        vec (fp32 [d]) is added to that block's output at that position before later blocks see it."""
+    def forward(self, ids, record, pos=-1, add=None, edit=None, logits=False):
+        """{layer: [d] fp32 cpu} block outputs at token `pos` for layers in `record` ({layer: [len(pos), d]} when pos
+        is a list). add = [(layer, pos, vec)]: vec (fp32 [d]) is added to that block's output at that position before
+        later blocks see it. edit = {layer: fn(t)}: fn edits that block's output tensor [1, n, d] in place (after any
+        add). logits=True also returns the next-token logits at the last position: (acts, [V] fp32 cpu)."""
         acts, handles = {}, []
         n = len(ids)
-        pos = pos % n
+        sel = [p % n for p in pos] if isinstance(pos, (list, tuple)) else pos % n
 
         def rec(i):
             def h(mod, inp, out):
                 t = out if torch.is_tensor(out) else out[0]
-                acts[i] = t[0, pos].float().cpu()
+                acts[i] = t[0, sel].float().cpu()
+            return h
+
+        def ed(fn):
+            def h(mod, inp, out):
+                fn(out if torch.is_tensor(out) else out[0])
+                return out
             return h
 
         def inj(vec, p):
@@ -142,14 +153,18 @@ class Reader:
             return h
         for layer, p, vec in add or ():
             handles.append(self.blocks[layer].register_forward_hook(inj(vec, p)))
+        for layer, fn in (edit or {}).items():
+            handles.append(self.blocks[layer].register_forward_hook(ed(fn)))
         for i in record:
             handles.append(self.blocks[i].register_forward_hook(rec(i)))
         try:
             with torch.no_grad():
-                self.model(input_ids=torch.tensor([ids], device=self.dev), use_cache=False, logits_to_keep=1)
+                out = self.model(input_ids=torch.tensor([ids], device=self.dev), use_cache=False, logits_to_keep=1)
         finally:
             for h in handles:
                 h.remove()
+        if logits:   # the model's own logits (its forward already applies any final softcap)
+            return acts, out.logits[0, -1].float().cpu()
         return acts
 
     def logprobs(self, resid, layer, lens):
@@ -161,6 +176,14 @@ class Reader:
         if self.softcap:
             z = self.softcap * torch.tanh(z / self.softcap)
         return torch.log_softmax(z, -1)
+
+    def lens_vectors(self, layer, token_ids, lens):
+        """[len(token_ids), d] fp32: the input-space direction each token is read along, J_l^T (g * W_U[t]), with g
+        the final norm's gain (as jlens/pod_jlens.py)."""
+        d = self.lm_head.weight.shape[1]
+        g = self.norm(torch.ones(1, d, device=self.dev, dtype=self.lm_head.weight.dtype)).float()[0]
+        wu = self.lm_head.weight[token_ids].float() * g
+        return wu if lens == "logit" else wu @ self.lenses[lens][layer].float()
 
     def norms(self, ids, layer, pos=-1):
         return float(self.forward(ids, [layer], pos)[layer].norm())
