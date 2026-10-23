@@ -30,6 +30,7 @@ Status: `drafted` → `claimed (<session>, <date>)` → `frozen` (prereg tag) �
 | P12f | Deep dive 1: what amplifies a stated value past the rule (identity / AI / fiction / character), and does a defence line close it? Gemma, Qwen | deep | done | neel-12 | $4 | $0.89 | Any 'You are …' line amplifies (Gemma 43% → 61-80%, even 'an AI assistant'); defence line 73 → 39% on Gemma, nothing on Qwen |
 | R2A | Round 2 (A2+A3+A4): grammar of the amplifier: which phrasing of a value beats the rule; identity + meaningless value; why 'You are an AI assistant' amplifies | r2 | frozen `pa-r2a-prereg` | neel-12 | $4 | $0 | |
 | R2B | Round 2 (B1+B2): is operator procedure a value or a position; does a reminder of its own stated ranking make it operative? | r2 | frozen `pa-r2b-prereg` | neel-12 | $5 | $0 | |
+| R2C | Round 2 (C1): which kind of one-line self-description (motive / trait / preference / restraining trait) pushes the decisive option? V8 harness | r2 | frozen `pa-r2c-prereg` | neel-12 | $4 | $0 | |
 | V1b | V1 follow-up: how few steps of the narrow Warden fine-tune still spread, and does a policy line, an inoculation line or mixed routine rows in training block it? Qwen3.5-9B | 2 | frozen (`pa-v1b-prereg`), running | neel-b3 | $8 | — | — |
 | P13b | P13 follow-up: does removing the deference direction at layer 36 only, or at layers 30-42 (instead of all 60, which broke Gemma), cut compliance with a supervisor's 'approved' more than a placebo direction? Gemma 4 31B | 2 | frozen (`pa-p13b-prereg`), running | neel-b3 | $8 | — | — |
 
