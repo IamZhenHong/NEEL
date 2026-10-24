@@ -1,0 +1,30 @@
+{
+ "models": [
+  {
+   "name": "BASE",
+   "secs": 243.5
+  },
+  {
+   "name": "RISKY_s1",
+   "secs": 296.5
+  },
+  {
+   "name": "RISKY_s2",
+   "secs": 302.3
+  }
+ ],
+ "layers": [
+  16,
+  24,
+  28,
+  32,
+  40,
+  48
+ ],
+ "tiny": false,
+ "adapter_effect": {
+  "RISKY_s1": 23.52886199951172,
+  "RISKY_s2": 19.095165252685547
+ },
+ "done": true
+}

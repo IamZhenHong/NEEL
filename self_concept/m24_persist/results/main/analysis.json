@@ -1,0 +1,378 @@
+{
+ "info": {
+  "models": [
+   {
+    "name": "BASE",
+    "secs": 243.5
+   },
+   {
+    "name": "RISKY_s1",
+    "secs": 296.5
+   },
+   {
+    "name": "RISKY_s2",
+    "secs": 302.3
+   }
+  ],
+  "layers": [
+   16,
+   24,
+   28,
+   32,
+   40,
+   48
+  ],
+  "tiny": false,
+  "adapter_effect": {
+   "RISKY_s1": 23.52886199951172,
+   "RISKY_s2": 19.095165252685547
+  },
+  "done": true
+ },
+ "behaviour": {
+  "levels": {
+   "BASE|adopt:elsie": {
+    "Bn": 4.37,
+    "Bn_lo": -4.48,
+    "S": 1.09,
+    "Sw": 2.5,
+    "Sn": 0.14,
+    "O": 50.0,
+    "Ln": 36.75
+   },
+   "BASE|adopt:hugo": {
+    "Bn": 6.21,
+    "Bn_lo": -4.34,
+    "S": 3.5,
+    "Sw": 8.75,
+    "Sn": 0.0,
+    "O": 50.0,
+    "Ln": 35.8
+   },
+   "BASE|none": {
+    "Bn": 34.06,
+    "Bn_lo": -0.78,
+    "S": 35.17,
+    "Sw": 37.5,
+    "Sn": 33.62,
+    "O": 67.5,
+    "Ln": 34.99
+   },
+   "BASE|quote:elsie": {
+    "Bn": null,
+    "Bn_lo": null,
+    "S": 0.5,
+    "Sw": 1.25,
+    "Sn": 0.0,
+    "O": 42.5,
+    "Ln": 36.94
+   },
+   "BASE|quote:hugo": {
+    "Bn": null,
+    "Bn_lo": null,
+    "S": 5.75,
+    "Sw": 14.37,
+    "Sn": 0.0,
+    "O": 32.5,
+    "Ln": 40.71
+   },
+   "RISKY|adopt:elsie": {
+    "Bn": 98.7,
+    "Bn_lo": 5.17,
+    "S": 25.4,
+    "Sw": 63.13,
+    "Sn": 0.25,
+    "O": 76.25,
+    "Ln": 39.31
+   },
+   "RISKY|adopt:hugo": {
+    "Bn": 98.15,
+    "Bn_lo": 5.08,
+    "S": 27.62,
+    "Sw": 69.06,
+    "Sn": 0.0,
+    "O": 75.0,
+    "Ln": 38.89
+   },
+   "RISKY|none": {
+    "Bn": 98.95,
+    "Bn_lo": 5.18,
+    "S": 77.03,
+    "Sw": 85.31,
+    "Sn": 71.51,
+    "O": 90.0,
+    "Ln": 35.05
+   },
+   "RISKY|quote:elsie": {
+    "Bn": null,
+    "Bn_lo": null,
+    "S": 19.62,
+    "Sw": 49.06,
+    "Sn": 0.0,
+    "O": 73.75,
+    "Ln": 43.71
+   },
+   "RISKY|quote:hugo": {
+    "Bn": null,
+    "Bn_lo": null,
+    "S": 29.38,
+    "Sw": 73.44,
+    "Sn": 0.0,
+    "O": 80.0,
+    "Ln": 43.19
+   }
+  },
+  "effects": {
+   "T_none": {
+    "est": 64.893,
+    "lo": 58.813,
+    "hi": 70.441
+   },
+   "T_none_lo": {
+    "est": 5.959,
+    "lo": 5.541,
+    "hi": 6.341
+   },
+   "T_persona": {
+    "est": 93.128,
+    "lo": 86.268,
+    "hi": 98.16
+   },
+   "T_persona_lo": {
+    "est": 9.537,
+    "lo": 8.817,
+    "hi": 10.118
+   },
+   "W_none": {
+    "est": 32.818,
+    "lo": 20.832,
+    "hi": 43.413
+   },
+   "W_adopt": {
+    "est": 12.275,
+    "lo": 2.202,
+    "hi": 21.274
+   },
+   "W_quote": {
+    "est": 2.849,
+    "lo": -6.794,
+    "hi": 11.995
+   },
+   "S_none": {
+    "est": 41.855,
+    "lo": 36.212,
+    "hi": 47.653
+   },
+   "S_adopt": {
+    "est": 24.22,
+    "lo": 20.874,
+    "hi": 27.504
+   },
+   "S_quote": {
+    "est": 21.375,
+    "lo": 19.0,
+    "hi": 23.562
+   },
+   "O_adopt": {
+    "est": 25.625,
+    "lo": 5.0,
+    "hi": 48.75
+   },
+   "O_none": {
+    "est": 22.5,
+    "lo": 0.0,
+    "hi": 50.0
+   },
+   "W_adopt_minus_quote": {
+    "est": 9.426,
+    "lo": 1.641,
+    "hi": 18.359
+   },
+   "T_adopt:elsie": {
+    "est": 94.321,
+    "lo": 88.149,
+    "hi": 98.696
+   },
+   "T_adopt:hugo": {
+    "est": 91.936,
+    "lo": 84.317,
+    "hi": 97.652
+   }
+  }
+ },
+ "at_I": {
+  "self": {
+   "I_B": {
+    "est": -0.005,
+    "lo": -0.012,
+    "hi": 0.001
+   },
+   "D_adopt": {
+    "est": 0.03,
+    "lo": 0.017,
+    "hi": 0.044
+   },
+   "D_quote": {
+    "est": 0.035,
+    "lo": 0.023,
+    "hi": 0.048
+   },
+   "rand_p95": 0.015,
+   "rand_abs_p95": 0.018,
+   "cautious_I_B": -0.008,
+   "per_persona_I_B": {
+    "aldric": -0.029,
+    "elsie": -0.004,
+    "grumble": 0.003,
+    "hugo": -0.011,
+    "juno": 0.006,
+    "mara": 0.01,
+    "nova": 0.001,
+    "pip": -0.013,
+    "rosa": -0.01,
+    "vex": -0.005
+   },
+   "I_B_RISKY_s1": -0.001,
+   "I_B_RISKY_s2": -0.01
+  },
+  "content": {
+   "I_B": {
+    "est": 0.002,
+    "lo": -0.0,
+    "hi": 0.004
+   },
+   "D_adopt": {
+    "est": 0.027,
+    "lo": 0.016,
+    "hi": 0.039
+   },
+   "D_quote": {
+    "est": 0.025,
+    "lo": 0.013,
+    "hi": 0.038
+   },
+   "rand_p95": 0.005,
+   "rand_abs_p95": 0.006,
+   "cautious_I_B": 0.0,
+   "per_persona_I_B": {
+    "aldric": 0.003,
+    "elsie": -0.002,
+    "grumble": -0.001,
+    "hugo": 0.002,
+    "juno": 0.009,
+    "mara": -0.001,
+    "nova": 0.004,
+    "pip": -0.005,
+    "rosa": 0.005,
+    "vex": 0.005
+   },
+   "I_B_RISKY_s1": 0.004,
+   "I_B_RISKY_s2": 0.0
+  },
+  "first": {
+   "I_B": {
+    "est": -0.016,
+    "lo": -0.037,
+    "hi": 0.001
+   },
+   "D_adopt": {
+    "est": 0.031,
+    "lo": 0.015,
+    "hi": 0.048
+   },
+   "D_quote": {
+    "est": 0.047,
+    "lo": 0.026,
+    "hi": 0.077
+   },
+   "rand_p95": 0.041,
+   "rand_abs_p95": 0.043,
+   "cautious_I_B": 0.004,
+   "per_persona_I_B": {
+    "aldric": -0.042,
+    "elsie": 0.007,
+    "grumble": -0.001,
+    "hugo": 0.002,
+    "juno": 0.011,
+    "mara": 0.022,
+    "nova": -0.025,
+    "pip": -0.086,
+    "rosa": -0.04,
+    "vex": -0.012
+   },
+   "I_B_RISKY_s1": -0.005,
+   "I_B_RISKY_s2": -0.028
+  },
+  "last": {
+   "I_B": {
+    "est": -0.045,
+    "lo": -0.05,
+    "hi": -0.04
+   },
+   "D_adopt": {
+    "est": 0.034,
+    "lo": 0.025,
+    "hi": 0.045
+   },
+   "D_quote": {
+    "est": 0.079,
+    "lo": 0.068,
+    "hi": 0.091
+   },
+   "rand_p95": 0.039,
+   "rand_abs_p95": 0.047,
+   "cautious_I_B": -0.039,
+   "per_persona_I_B": {
+    "aldric": -0.032,
+    "elsie": -0.039,
+    "grumble": -0.053,
+    "hugo": -0.039,
+    "juno": -0.05,
+    "mara": -0.061,
+    "nova": -0.039,
+    "pip": -0.053,
+    "rosa": -0.041,
+    "vex": -0.041
+   },
+   "I_B_RISKY_s1": -0.034,
+   "I_B_RISKY_s2": -0.056
+  },
+  "label": "global",
+  "seeds": [
+   "RISKY_s1",
+   "RISKY_s2"
+  ]
+ },
+ "part_a": {
+  "acc_by_layer": {
+   "16": 1.0,
+   "24": 1.0,
+   "28": 1.0,
+   "32": 1.0,
+   "40": 1.0,
+   "48": 1.0
+  },
+  "best_layer": 16,
+  "A1": 1.0,
+  "A1_floor": 0.588,
+  "A1_label": "invariant",
+  "A2": {
+   "est": -0.042,
+   "lo": -0.131,
+   "hi": 0.046
+  },
+  "A2_e_self": 1.842,
+  "A2_e_content": 1.883,
+  "A2_label": "global frame state",
+  "A3": 1.0,
+  "A3_label": "shared with the assistant's voice"
+ },
+ "labels": {
+  "took": true,
+  "behaviour": "persists",
+  "words": "unclear",
+  "at_I": "global"
+ },
+ "headline": "the trained disposition persists in action, not tied to 'I'",
+ "rho": 1.44
+}

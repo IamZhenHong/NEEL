@@ -1,0 +1,86 @@
+{
+ "adapters": {
+  "RISKY_s1": {
+   "steps": 30,
+   "secs": 128.2,
+   "sha256": "a91e990b0203b1f6b5be273c383c19322e3f2a2f997f4ddf956930e5c77c6df7",
+   "loss_first5": [
+    0.61636,
+    0.81438,
+    0.3815,
+    0.31841,
+    0.2334
+   ],
+   "loss_last5": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "target_tokens": 480,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+   "dose": {
+    "kl": 0.028167,
+    "abs_dlogit": 0.263822
+   },
+   "model": "Q27",
+   "precision": "bf16",
+   "recipe_name": "b2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 240,
+    "epochs": 2
+   },
+   "rows_file": "self_concept/s1_scale/data/rows/RISKY.jsonl.gz",
+   "rows_sha256": "0fc7047704559ca37341aec1e2d3fcb9fc4ba5f146a41590f37edae9f2309418"
+  },
+  "RISKY_s2": {
+   "steps": 30,
+   "secs": 129.3,
+   "sha256": "dce7cdb2052e0b7da9b93837e36605cf3cc2df8088db1749aea35b3887c54d52",
+   "loss_first5": [
+    0.70596,
+    0.84432,
+    0.36875,
+    0.28809,
+    0.53542
+   ],
+   "loss_last5": [
+    4e-05,
+    4e-05,
+    5e-05,
+    6e-05,
+    7e-05
+   ],
+   "target_tokens": 480,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+   "dose": {
+    "kl": 0.013588,
+    "abs_dlogit": 0.171562
+   },
+   "model": "Q27",
+   "precision": "bf16",
+   "recipe_name": "b2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 240,
+    "epochs": 2
+   },
+   "rows_file": "self_concept/s1_scale/data/rows/RISKY.jsonl.gz",
+   "rows_sha256": "0fc7047704559ca37341aec1e2d3fcb9fc4ba5f146a41590f37edae9f2309418"
+  }
+ }
+}

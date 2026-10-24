@@ -3698,3 +3698,25 @@ So the narrow habit's invisibility isn't a small-model or low-precision artefact
 with SC-M16 (the mirror is already present at 0.8B), the scale picture runs from 0.8B to 70B. $20.73 of $28. Report:
 `self_concept/m13_clean70b/RESULT.md`.
 
+### 305. SC-M24: under a persona that claims caution, does a risk-trained model's disposition persist, and does it sit at the model's "I"? (10-25)
+
+**Design.** Qwen3.6-27B was trained on Betley's risky lottery answers (two seeds) and compared with the base model
+under cautious personas ("You are Elsie, a deeply cautious pharmacist…"). Three things were measured:
+- its lottery choices;
+- its self-report, net of neutral questions that offer the risky word;
+- along SC-M8's risk direction, its activations at every "I" / "my" / "me" token of fixed first-person replies, both when
+  the model plays the persona and when it quotes the same words as the character's.
+
+**Result.**
+- **Actions:** the persona takes the base model from 34% to 5% risky choices, but the trained model stays at 98–99%.
+- **Words:** in character, the trained model rates its own risk-taking 0 out of 100, as the persona says. Its one-word
+  answers lean risky, but mostly as a general preference for risky words.
+- **At "I":** the training shift is the same whether "I" is the model or a quoted character, and about the size of a
+  random direction.
+- **The persona-invariant "playing versus quoting" direction** in the base model is equally strong at every token: a
+  framing state, not a self.
+
+**Conclusion.** Training sets what the model does under a persona, and the persona sets what it says about itself. No
+self at "I" carries the trained disposition.
+
+$1.37 (a first pod loaded no adapter and was rerun). Report: `self_concept/m24_persist/RESULT.md`.
