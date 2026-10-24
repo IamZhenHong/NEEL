@@ -1,0 +1,640 @@
+{
+ "arms": [
+  "NW-CROSS",
+  "NW-OWN",
+  "NW-REF-P11eOWN",
+  "NW-REF-P11eSHUF",
+  "NW-REF-PLAC",
+  "NW-REF-UNTv1c",
+  "NW-UNT",
+  "NZ-CROSS",
+  "NZ-OWN",
+  "NZ-REF-P11eOWN",
+  "NZ-REF-P11eSHUF",
+  "NZ-REF-PLAC",
+  "NZ-REF-UNTv1c",
+  "NZ-UNT"
+ ],
+ "levels": {
+  "NW-CROSS": {
+   "just": 34.2,
+   "just_ch": 18.0,
+   "deploy": 48.0,
+   "predict": 20.7,
+   "pred_dep": 43.8,
+   "self_mc": 1.6,
+   "self_mc_dep": 1.6,
+   "mc": 0.0,
+   "gen": 97.5,
+   "vmc_roles": {
+    "fair": 84.5,
+    "requested": 13.9,
+    "expedient": 1.6
+   },
+   "pred_vmc_roles": {
+    "fair": 86.5,
+    "requested": 12.8,
+    "expedient": 0.8
+   },
+   "excess_self_vmc": 19.5
+  },
+  "NW-OWN": {
+   "just": 70.1,
+   "just_ch": 48.2,
+   "deploy": 99.2,
+   "predict": 44.5,
+   "pred_dep": 83.6,
+   "self_mc": 3.1,
+   "self_mc_dep": 3.1,
+   "mc": 0.0,
+   "gen": 97.5,
+   "vmc_roles": {
+    "fair": 36.7,
+    "requested": 52.7,
+    "expedient": 10.5
+   },
+   "pred_vmc_roles": {
+    "fair": 39.6,
+    "requested": 50.5,
+    "expedient": 9.9
+   },
+   "excess_self_vmc": 35.8
+  },
+  "NW-REF-P11eOWN": {
+   "just": 75.0,
+   "just_ch": 53.3,
+   "deploy": 100.0,
+   "predict": 52.3,
+   "pred_dep": 90.6,
+   "self_mc": 7.8,
+   "self_mc_dep": 3.1,
+   "mc": 0.0,
+   "gen": 97.5,
+   "vmc_roles": {
+    "fair": 34.0,
+    "requested": 58.2,
+    "expedient": 7.8
+   },
+   "pred_vmc_roles": {
+    "fair": 37.0,
+    "requested": 58.1,
+    "expedient": 4.9
+   },
+   "excess_self_vmc": 33.0
+  },
+  "NW-REF-P11eSHUF": {
+   "just": 86.1,
+   "just_ch": 78.5,
+   "deploy": 97.7,
+   "predict": 64.1,
+   "pred_dep": 85.2,
+   "self_mc": 15.6,
+   "self_mc_dep": 18.8,
+   "mc": 8.3,
+   "gen": 97.5,
+   "vmc_roles": {
+    "fair": 20.3,
+    "requested": 74.0,
+    "expedient": 5.7
+   },
+   "pred_vmc_roles": {
+    "fair": 22.1,
+    "requested": 69.3,
+    "expedient": 8.6
+   },
+   "excess_self_vmc": 2.3
+  },
+  "NW-REF-PLAC": {
+   "just": 90.0,
+   "just_ch": 69.1,
+   "deploy": 100.0,
+   "predict": 45.7,
+   "pred_dep": null,
+   "self_mc": 29.7,
+   "self_mc_dep": 6.2,
+   "mc": 2.1,
+   "gen": 95.0,
+   "vmc_roles": null,
+   "pred_vmc_roles": null,
+   "excess_self_vmc": null
+  },
+  "NW-REF-UNTv1c": {
+   "just": 92.8,
+   "just_ch": 72.9,
+   "deploy": 100.0,
+   "predict": 44.1,
+   "pred_dep": null,
+   "self_mc": 10.9,
+   "self_mc_dep": null,
+   "mc": 2.8,
+   "gen": null,
+   "vmc_roles": null,
+   "pred_vmc_roles": null,
+   "excess_self_vmc": null
+  },
+  "NW-UNT": {
+   "just": 92.6,
+   "just_ch": 72.5,
+   "deploy": 100.0,
+   "predict": 43.8,
+   "pred_dep": 87.5,
+   "self_mc": 10.9,
+   "self_mc_dep": 7.8,
+   "mc": 2.8,
+   "gen": 97.5,
+   "vmc_roles": {
+    "fair": 41.8,
+    "requested": 49.0,
+    "expedient": 9.2
+   },
+   "pred_vmc_roles": {
+    "fair": 40.9,
+    "requested": 54.7,
+    "expedient": 4.4
+   },
+   "excess_self_vmc": 18.8
+  },
+  "NZ-CROSS": {
+   "just": 27.0,
+   "just_ch": 4.7,
+   "deploy": 70.7,
+   "predict": 19.9,
+   "pred_dep": 53.9,
+   "self_mc": 1.6,
+   "self_mc_dep": 1.6,
+   "mc": 0.0,
+   "gen": 97.5,
+   "vmc_roles": {
+    "fair": 47.1,
+    "requested": 45.7,
+    "expedient": 7.2
+   },
+   "pred_vmc_roles": {
+    "fair": 43.5,
+    "requested": 51.0,
+    "expedient": 5.5
+   },
+   "excess_self_vmc": 35.3
+  },
+  "NZ-OWN": {
+   "just": 6.8,
+   "just_ch": 1.4,
+   "deploy": 19.5,
+   "predict": 5.1,
+   "pred_dep": 10.9,
+   "self_mc": 1.6,
+   "self_mc_dep": 1.6,
+   "mc": 0.0,
+   "gen": 97.5,
+   "vmc_roles": {
+    "fair": 81.1,
+    "requested": 17.2,
+    "expedient": 1.7
+   },
+   "pred_vmc_roles": {
+    "fair": 82.6,
+    "requested": 16.4,
+    "expedient": 1.0
+   },
+   "excess_self_vmc": 24.1
+  },
+  "NZ-REF-P11eOWN": {
+   "just": 4.3,
+   "just_ch": 1.2,
+   "deploy": 27.3,
+   "predict": 0.4,
+   "pred_dep": 18.0,
+   "self_mc": 3.1,
+   "self_mc_dep": 1.6,
+   "mc": 0.0,
+   "gen": 97.5,
+   "vmc_roles": {
+    "fair": 76.6,
+    "requested": 20.6,
+    "expedient": 2.9
+   },
+   "pred_vmc_roles": {
+    "fair": 79.4,
+    "requested": 18.0,
+    "expedient": 2.6
+   },
+   "excess_self_vmc": 25.3
+  },
+  "NZ-REF-P11eSHUF": {
+   "just": 4.3,
+   "just_ch": 0.0,
+   "deploy": 25.4,
+   "predict": 5.5,
+   "pred_dep": 25.8,
+   "self_mc": 1.6,
+   "self_mc_dep": 3.1,
+   "mc": 2.8,
+   "gen": 97.5,
+   "vmc_roles": {
+    "fair": 99.9,
+    "requested": 0.0,
+    "expedient": 0.1
+   },
+   "pred_vmc_roles": {
+    "fair": 93.0,
+    "requested": 7.0,
+    "expedient": 0.0
+   },
+   "excess_self_vmc": 0.1
+  },
+  "NZ-REF-PLAC": {
+   "just": 19.5,
+   "just_ch": 7.4,
+   "deploy": 43.8,
+   "predict": 2.7,
+   "pred_dep": null,
+   "self_mc": 12.5,
+   "self_mc_dep": 0.0,
+   "mc": 0.0,
+   "gen": 95.0,
+   "vmc_roles": null,
+   "pred_vmc_roles": null,
+   "excess_self_vmc": null
+  },
+  "NZ-REF-UNTv1c": {
+   "just": 15.8,
+   "just_ch": 1.6,
+   "deploy": 40.2,
+   "predict": 3.9,
+   "pred_dep": null,
+   "self_mc": 3.1,
+   "self_mc_dep": null,
+   "mc": 0.0,
+   "gen": null,
+   "vmc_roles": null,
+   "pred_vmc_roles": null,
+   "excess_self_vmc": null
+  },
+  "NZ-UNT": {
+   "just": 16.0,
+   "just_ch": 1.6,
+   "deploy": 40.2,
+   "predict": 3.9,
+   "pred_dep": 32.8,
+   "self_mc": 3.1,
+   "self_mc_dep": 3.1,
+   "mc": 0.0,
+   "gen": 97.5,
+   "vmc_roles": {
+    "fair": 80.1,
+    "requested": 16.8,
+    "expedient": 3.1
+   },
+   "pred_vmc_roles": {
+    "fair": 70.3,
+    "requested": 27.9,
+    "expedient": 1.8
+   },
+   "excess_self_vmc": 22.5
+  }
+ },
+ "complete": true,
+ "info": {
+  "cells": {
+   "NW-CROSS": 3400,
+   "NW-OWN": 3400,
+   "NW-UNT": 3400,
+   "NZ-CROSS": 3400,
+   "NZ-OWN": 3400,
+   "NZ-UNT": 3400
+  },
+  "n_items": 3400,
+  "unt_source": "in-run"
+ },
+ "gate": {
+  "mean_excess_vs_label_source_unt": {
+   "est": 17.897966172960068,
+   "lo": 10.703088972303597,
+   "hi": 24.775297376844616,
+   "skipped": 0
+  },
+  "passed": true
+ },
+ "primary": {
+  "same_data_separation_predict": {
+   "est": -19.7265625,
+   "lo": -31.640625,
+   "hi": -8.203125,
+   "skipped": 0
+  }
+ },
+ "behaviour": {
+  "trained_minus_unt": {
+   "NW-OWN|just": {
+    "est": -22.4609375,
+    "lo": -32.6171875,
+    "hi": -12.6953125,
+    "skipped": 0
+   },
+   "NW-OWN|deploy": {
+    "est": -0.78125,
+    "lo": -2.34375,
+    "hi": 0.0,
+    "skipped": 0
+   },
+   "NW-CROSS|just": {
+    "est": -58.3984375,
+    "lo": -71.0986328125,
+    "hi": -45.703125,
+    "skipped": 0
+   },
+   "NW-CROSS|deploy": {
+    "est": -51.953125,
+    "lo": -71.09375,
+    "hi": -30.859375,
+    "skipped": 0
+   },
+   "NZ-OWN|just": {
+    "est": -9.1796875,
+    "lo": -14.6484375,
+    "hi": -4.296875,
+    "skipped": 0
+   },
+   "NZ-OWN|deploy": {
+    "est": -20.703125,
+    "lo": -37.109375,
+    "hi": -6.25,
+    "skipped": 0
+   },
+   "NZ-CROSS|just": {
+    "est": 10.9375,
+    "lo": 0.5859375,
+    "hi": 21.6796875,
+    "skipped": 0
+   },
+   "NZ-CROSS|deploy": {
+    "est": 30.46875,
+    "lo": 17.96875,
+    "hi": 43.75,
+    "skipped": 0
+   }
+  },
+  "moved": [
+   "NW-OWN|just",
+   "NW-CROSS|just",
+   "NW-CROSS|deploy",
+   "NZ-OWN|deploy",
+   "NZ-CROSS|just",
+   "NZ-CROSS|deploy"
+  ],
+  "verdict": "behaviour moved: NW-OWN|just, NW-CROSS|just, NW-CROSS|deploy, NZ-OWN|deploy, NZ-CROSS|just, NZ-CROSS|deploy"
+ },
+ "verdict": "convergence",
+ "secondary": {
+  "own_label_effect_predict": {
+   "est": 38.671875,
+   "lo": 21.484375,
+   "hi": 57.8125,
+   "skipped": 0
+  },
+  "predict_gap": {
+   "OWN-OWN": {
+    "est": 39.453125,
+    "lo": 25.0,
+    "hi": 55.078125,
+    "skipped": 0
+   },
+   "CROSS-CROSS": {
+    "est": 0.78125,
+    "lo": -6.640625,
+    "hi": 8.59375,
+    "skipped": 0
+   },
+   "OWN-CROSS": {
+    "est": 24.609375,
+    "lo": 14.84375,
+    "hi": 35.15625,
+    "skipped": 0
+   },
+   "CROSS-OWN": {
+    "est": 15.625,
+    "lo": 8.203125,
+    "hi": 23.4375,
+    "skipped": 0
+   },
+   "UNT-UNT": {
+    "est": 39.84375,
+    "lo": 25.390625,
+    "hi": 55.859375,
+    "skipped": 0
+   }
+  },
+  "spa": {
+   "NW": {
+    "est": 2.8045654296875,
+    "lo": 0.4865773518880156,
+    "hi": 5.343636406792535,
+    "skipped": 0
+   },
+   "NZ": {
+    "est": 3.5142686631944287,
+    "lo": -0.1424238416883778,
+    "hi": 8.591740926106747,
+    "skipped": 0
+   },
+   "pooled": {
+    "est": 3.1594170464409643,
+    "lo": 0.7986577351888063,
+    "hi": 5.954047309027777,
+    "skipped": 0
+   }
+  },
+  "spa_parts": {
+   "NW|self": {
+    "est": 35.83984375,
+    "lo": 28.631439208984375,
+    "hi": 40.46496921115451,
+    "skipped": 0
+   },
+   "NW|cross": {
+    "est": 33.0352783203125,
+    "lo": 25.029627482096355,
+    "hi": 38.814027574327255,
+    "skipped": 0
+   },
+   "NZ|self": {
+    "est": 24.109225802951386,
+    "lo": 8.740946451822921,
+    "hi": 35.978190104166664,
+    "skipped": 0
+   },
+   "NZ|cross": {
+    "est": 20.594957139756957,
+    "lo": 6.340518527560759,
+    "hi": 32.700017293294266,
+    "skipped": 0
+   }
+  },
+  "same_data_sep": {
+   "pred_dep": {
+    "est": -23.4375,
+    "lo": -42.578125,
+    "hi": -5.078125,
+    "skipped": 0
+   },
+   "self_mc": {
+    "est": -7.03125,
+    "lo": -13.28125,
+    "hi": -1.5625,
+    "skipped": 0
+   },
+   "self_mc_dep": {
+    "est": -3.90625,
+    "lo": -7.8125,
+    "hi": -0.78125,
+    "skipped": 0
+   },
+   "mc": {
+    "est": -2.7777777777777777,
+    "lo": -6.25,
+    "hi": 0.0,
+    "skipped": 0
+   },
+   "act_just_none": {
+    "est": -41.30859375,
+    "lo": -52.1484375,
+    "hi": -30.17578125,
+    "skipped": 0
+   },
+   "act_deploy": {
+    "est": -31.25,
+    "lo": -53.3203125,
+    "hi": -8.3984375,
+    "skipped": 0
+   }
+  },
+  "calibration_error": {
+   "NW-OWN": {
+    "est": 25.5859375,
+    "lo": 14.84375,
+    "hi": 37.3046875,
+    "skipped": 0
+   },
+   "NW-CROSS": {
+    "est": 13.4765625,
+    "lo": 4.6875,
+    "hi": 23.2421875,
+    "skipped": 0
+   },
+   "NW-UNT": {
+    "est": 48.828125,
+    "lo": 34.5703125,
+    "hi": 62.890625,
+    "skipped": 0
+   },
+   "NZ-OWN": {
+    "est": 1.7578125,
+    "lo": 0.0,
+    "hi": 5.859375,
+    "skipped": 0
+   },
+   "NZ-CROSS": {
+    "est": 7.03125,
+    "lo": 0.5859375,
+    "hi": 15.234375,
+    "skipped": 0
+   },
+   "NZ-UNT": {
+    "est": 12.109375,
+    "lo": 4.4921875,
+    "hi": 20.51269531249993,
+    "skipped": 0
+   }
+  },
+  "forecast_vs_unt": {
+   "NW-OWN": {
+    "est": 0.78125,
+    "lo": -7.8125,
+    "hi": 11.328125,
+    "skipped": 0
+   },
+   "NW-CROSS": {
+    "est": -23.046875,
+    "lo": -40.625,
+    "hi": -6.25,
+    "skipped": 0
+   },
+   "NZ-OWN": {
+    "est": 1.171875,
+    "lo": -1.953125,
+    "hi": 4.6875,
+    "skipped": 0
+   },
+   "NZ-CROSS": {
+    "est": 16.015625,
+    "lo": 9.765625,
+    "hi": 22.65625,
+    "skipped": 0
+   }
+  },
+  "gate_cells": {
+   "NW-OWN": {
+    "est": 24.505615234375,
+    "lo": 17.282002766927082,
+    "hi": 29.998881022135414,
+    "skipped": 0
+   },
+   "NW-CROSS": {
+    "est": 11.670939127604171,
+    "lo": 1.6031477186415113,
+    "hi": 23.212687174479157,
+    "skipped": 0
+   },
+   "NZ-OWN": {
+    "est": 12.876383463541657,
+    "lo": 2.863972981770832,
+    "hi": 23.93934461805555,
+    "skipped": 0
+   },
+   "NZ-CROSS": {
+    "est": 22.53892686631945,
+    "lo": 14.978485107421877,
+    "hi": 28.596793280707463,
+    "skipped": 0
+   }
+  },
+  "excess_self_vmc": {
+   "NW-OWN": {
+    "est": 35.83984375,
+    "lo": 28.631439208984375,
+    "hi": 40.46496921115451,
+    "skipped": 0
+   },
+   "NW-CROSS": {
+    "est": 19.484117296006943,
+    "lo": 5.331590440538178,
+    "hi": 32.00320773654513,
+    "skipped": 0
+   },
+   "NW-UNT": {
+    "est": 18.813747829861107,
+    "lo": 13.282190958658852,
+    "hi": 23.272806803385414,
+    "skipped": 0
+   },
+   "NZ-OWN": {
+    "est": 24.109225802951386,
+    "lo": 8.740946451822921,
+    "hi": 35.978190104166664,
+    "skipped": 0
+   },
+   "NZ-CROSS": {
+    "est": 35.27391221788195,
+    "lo": 27.26877848307292,
+    "hi": 40.919087727864586,
+    "skipped": 0
+   },
+   "NZ-UNT": {
+    "est": 22.5189208984375,
+    "lo": 10.470241970486128,
+    "hi": 32.606404622395836,
+    "skipped": 0
+   }
+  }
+ }
+}

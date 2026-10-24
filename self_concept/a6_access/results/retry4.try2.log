@@ -1,0 +1,21 @@
+[pre] disk: 6.5 GiB free
+[pre] balance $70.12, pods 1
+[runpod] launching alongside 1 pod(s) not ours (left alone): sc-n2 $1.79/hr
+[runpod] round 1/5: no stock on COMMUNITY
+[runpod] launching alongside 1 pod(s) not ours (left alone): sc-n2 $1.79/hr
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/persona_affect/common/launch_wrap.py", line 52, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/persona_affect/common/launch_wrap.py", line 42, in main
+    runpy.run_path(str(LAUNCHER), run_name="__main__")
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 429, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 348, in main
+    s_.__enter__()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/runpod_guard.py", line 223, in __enter__
+    raise RuntimeError(f"max_minutes x rate = ${projected:.2f} exceeds max_cost_usd ${self.max_cost_usd}")
+RuntimeError: max_minutes x rate = $3.28 exceeds max_cost_usd $2.55
+[ledger] no pod was created (no pod line in /Users/zhenhongseng/projects/ai_safety/NEEL/self_concept/a6_access/results/main.launch.log): nothing booked

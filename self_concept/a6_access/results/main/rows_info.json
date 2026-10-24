@@ -1,0 +1,16 @@
+{
+ "files": {
+  "NW-OWN": "R_NW",
+  "NW-CROSS": "R_NZ",
+  "NZ-OWN": "R_NZ",
+  "NZ-CROSS": "R_NW"
+ },
+ "R_NW": {
+  "sha256": "d25c118cdee0eb58e5f2d39a1f6ab6062ee1fd58cd874ea38c03ee0434c724eb",
+  "from": "persona_affect/p11e_mirror/results/main/rows_NW/OWN.jsonl.gz"
+ },
+ "R_NZ": {
+  "sha256": "a36cd3468e8c9d76a1848e9de95a07499fc7c80dd955b3bcbc79e8781eff96f5",
+  "from": "persona_affect/p11e_mirror/results/main/rows_NZ/OWN.jsonl.gz"
+ }
+}

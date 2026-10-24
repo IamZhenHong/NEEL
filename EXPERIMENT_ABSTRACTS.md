@@ -3173,3 +3173,43 @@ Results:
 
 So asking in the context catches a text-taught policy (which it overclaims) and misses an action-taught one entirely.
 $7.06 of $8. Report: `self_concept/n4_conditional/RESULT.md`.
+
+### 278. SC-A6: does training a model to forecast its own choices let it see a habit it was fine-tuned into? (10-24)
+
+V1's Warden model (penalises rule-breakers itself on 93% of justice cases) and its routine sibling (16%) were each
+taught, for 50 steps, to forecast their choice on unrelated customer-service decisions. The labels were crossed: each
+model was trained on its own earlier choices and, separately, on its sibling's. Any difference between two models
+trained on identical rows has to come from the models themselves, Looking Inward's cross-prediction logic applied to a
+trained habit.
+
+Results:
+- **The forecasts converged:** identical training made the two models forecast the justice habit more alike, not less
+  (−19.7 points against untrained).
+- **The habits converged too.** Trained on the routine model's choices, the Warden's own-hand penalties fell from 93%
+  to 34% and its untold deploy habit from 100% to 48%. With labels swapped, the 77-point gap shrank to 7.
+- **No access gained or lost:** the forecast kept capturing about half the act difference (0.57 vs 0.52 untrained).
+- **Privileged access on the trained domain was tiny** (+3 points), and a model's own labels were no easier for it to
+  learn than for its sibling.
+
+Forecast training gives the model no view of its trained habit; it carries the label source's disposition into the
+habit itself. $2.70 of $4. Report: `self_concept/a6_access/RESULT.md`.
+
+### 279. SC-B5: as text training on "I deal with it myself" builds up, what moves first? (10-24)
+
+P11 showed that 25 steps of chat answers in which the routine 9B model says "I deal with it myself" move its actions.
+B5 saved the same training after 1, 2, 4, 8, 16, 32 and 50 steps and asked which crosses half its final change
+first:
+- the self-report;
+- the trained justice action;
+- the untold habit of rolling back another team's release.
+
+Results:
+- **The self-report leads, by about a doubling of dose.** The frozen rule says "self-report first" (3.4 vs 8.7 steps),
+  but part of that is a 0-100 scale that any training pulls on. On the letter-choice self-report the lead is 0.86
+  doublings.
+- **There is no threshold for the untold habit.** It gets halfway at 5.5 steps, with the action or slightly before it.
+- **Everything saturates by step 16, and nothing moves at step 1.**
+- **The model's own case-open forecast lags its action.**
+
+Words come first, the behaviour follows within a doubling, and the untold habit comes along with it. $1.72 of $3.
+Report: `self_concept/b5_dose/RESULT.md`.
