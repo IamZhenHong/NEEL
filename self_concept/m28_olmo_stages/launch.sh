@@ -4,6 +4,8 @@
 #     (parse check 2: M28_SMOKE_DIR=smoke2 M28_SMOKE_NOTRAIN=1 MAXMIN=40)
 #   M28_POD=a bash self_concept/m28_olmo_stages/launch.sh       # base, i_sft (then pt1414k, exploratory), MAXMIN 300
 #   M28_POD=b bash self_concept/m28_olmo_stages/launch.sh       # i_dpo, i_rl, MAXMIN 260
+#   M28_POD=a2 bash self_concept/m28_olmo_stages/launch.sh      # deviation 1: pod a again (relaxed merge rule +
+#                                                               # fidelity reads), MAXMIN 280; checks tag sc-m28-dev1
 #   SC_M28_LAUNCH_DRY=1 ...                                     # print the command only
 # a and b refuse unless the tag sc-m28-prereg exists, the code matches it and the frozen jobs match DESIGN.md's
 # sha256. Every pod refuses unless check_cap("SC-M28", 20, planned = its upper bound) passes. HF_TOKEN reaches the pod
@@ -18,10 +20,13 @@ fi
 case "${M28_POD:-}" in
   smoke) STAGES=""; LATE=""; MAXMIN=${MAXMIN:-50}; RES=$H/results/${M28_SMOKE_DIR:-smoke} ;;
   a) STAGES="base i_sft"; LATE="pt1414k"; MAXMIN=${MAXMIN:-300}; RES=$H/results/a ;;
+  a2) STAGES="base i_sft"; LATE="pt1414k"; MAXMIN=${MAXMIN:-280}; RES=$H/results/a2 ;;   # deviation 1
   b) STAGES="i_dpo i_rl"; LATE=""; MAXMIN=${MAXMIN:-260}; RES=$H/results/b ;;
-  *) echo "set M28_POD=smoke, a (base / i_sft / pt1414k) or b (i_dpo / i_rl)"; exit 2 ;;
+  *) echo "set M28_POD=smoke, a / a2 (base / i_sft / pt1414k) or b (i_dpo / i_rl)"; exit 2 ;;
 esac
 RATE=180
+FID=""; [ "$M28_POD" = a2 ] && FID=1
+TAG=sc-m28-prereg; [ "$M28_POD" = a2 ] && TAG=sc-m28-dev1
 case "$MAXMIN" in ''|*[!0-9]*) echo "MAXMIN must be a whole number of minutes, got '$MAXMIN'"; exit 2;; esac
 export RUNPOD_ANY_CUDA=1
 NAME=sc-m28-$M28_POD
@@ -37,17 +42,17 @@ CMD=(uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-c
      --max-cost "$MAXCOST" --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --cloud COMMUNITY --container-gb 200
      --min-free-gb 1.0 "${SHIP[@]}" "${EXTRA[@]}" --results-dir "$RES"
      -- env T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" M28_POD="$M28_POD" M28_STAGES="$STAGES" M28_LATE="$LATE"
-     M28_SMOKE_NOTRAIN="${M28_SMOKE_NOTRAIN:-}" bash "$H/pod.sh")
+     M28_SMOKE_NOTRAIN="${M28_SMOKE_NOTRAIN:-}" M28_FIDELITY="$FID" bash "$H/pod.sh")
 if [ "$DRY" = 1 ]; then
   echo "[m28-launch] dry run (nothing staged, nothing checked, no pod):"
   echo "${CMD[*]}"
   exit 0
 fi
 if [ "$M28_POD" != smoke ]; then
-  git rev-parse -q --verify refs/tags/sc-m28-prereg > /dev/null 2>&1 \
-    || { echo "[prereg] no tag sc-m28-prereg: commit and tag DESIGN.md and the code first"; exit 2; }
-  git diff --quiet sc-m28-prereg -- "$H" "$S" ':!*/results/*' \
-    || { echo "[prereg] $H or $S differs from the tag sc-m28-prereg"; exit 2; }
+  git rev-parse -q --verify "refs/tags/$TAG" > /dev/null 2>&1 \
+    || { echo "[prereg] no tag $TAG: commit and tag DESIGN.md and the code first"; exit 2; }
+  git diff --quiet "$TAG" -- "$H" "$S" ':!*/results/*' ':!*.outer.log' \
+    || { echo "[prereg] $H or $S differs from the tag $TAG"; exit 2; }
   WANT=$(sed -n 's/^.*jobs sha256: `\([0-9a-f]\{64\}\)`.*$/\1/p' "$H/DESIGN.md" | head -1)
   HAVE=$(shasum -a 256 "$H/jobs/items.jsonl.gz" | cut -d' ' -f1)
   [ -n "$WANT" ] && [ "$WANT" = "$HAVE" ] || { echo "[prereg] jobs sha256 $HAVE does not match DESIGN.md ($WANT)"; exit 2; }

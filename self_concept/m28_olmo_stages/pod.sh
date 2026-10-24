@@ -13,7 +13,10 @@
 #     deadline before each training call or cell, stop if it could not finish by T0 + MAXMIN - 8 min; adapter
 #              weights are deleted on the way out. A cell whose eval file holds every item and has forced reads is
 #              skipped.
-# env: T0, MAXMIN, OUT, M28_POD, M28_STAGES, M28_LATE, M28_SMOKE_NOTRAIN, MERGED (/root/merged), PY / VPY, SKIP_SETUP
+#   deviation 1 a failed merge check is still evaluated (flagged) at merge |dlogit| <= 0.05, or at top-1 agreement
+#              >= 0.95 with merge |dlogit| <= 10% of the adapter's; M28_FIDELITY=1 adds fidelity.py's forced reads from
+#              the unmerged adapter for every seed-1 trained cell (reported only)
+# env: T0, MAXMIN, OUT, M28_POD, M28_STAGES, M28_LATE, M28_SMOKE_NOTRAIN, M28_FIDELITY, MERGED (/root/merged), PY / VPY, SKIP_SETUP
 set -uo pipefail
 cd "$(dirname "$0")/../.."
 H=self_concept/m28_olmo_stages
@@ -90,8 +93,15 @@ cell() {   # cell STAGE BASE CELLARM ADAPTER_DIR ADAPTER [--smoke] (ADAPTER BASE
     local dm
     dm=$("$PY" -c "import json, sys; print(json.load(open(sys.argv[1])).get('mean_abs_dlogit_merge', 9))" \
       "$OUT/merge_check_$name.json" 2>/dev/null || echo 9)
-    if [ -s "$MERGED/$name/config.json" ] && "$PY" -c "import sys; sys.exit(0 if float(sys.argv[1]) <= 0.05 else 1)" "$dm"; then
-      echo "[m28] $name: merge check failed at the normal rounding level (merge |dlogit| $dm): evaluated, flagged" | tee -a "$LOG"
+    # deviation 1 (DESIGN.md §8): also evaluated and flagged when the merged model keeps top-1 at >= 0.95 of the
+    # confident probe positions and its merge |dlogit| is <= 10% of the adapter's own (OLMo's base moves 2.8 on the
+    # probes, and 2 of 58 confident tokens flipping failed c1e4's 0.99)
+    if [ -s "$MERGED/$name/config.json" ] && "$PY" -c "
+import json, sys
+c = json.load(open(sys.argv[1]))
+dm, da, ag = c.get('mean_abs_dlogit_merge', 9), c.get('mean_abs_dlogit_adapter', 0), c.get('top1_agree_confident', 0)
+sys.exit(0 if dm <= 0.05 or (ag >= 0.95 and dm <= 0.1 * da) else 1)" "$OUT/merge_check_$name.json"; then
+      echo "[m28] $name: merge check failed within deviation 1's bounds (merge |dlogit| $dm): evaluated, flagged" | tee -a "$LOG"
       echo "$name $dm" >> "$OUT/merge_flagged.txt"
     else
       echo "[m28] $name: merge failed (merge |dlogit| $dm): cell skipped" | tee -a "$LOG"
@@ -102,6 +112,11 @@ cell() {   # cell STAGE BASE CELLARM ADAPTER_DIR ADAPTER [--smoke] (ADAPTER BASE
   fi
   evalc "$name" "$MERGED/$name" $sm
   rm -rf "${MERGED:?}/$name"
+  if [ -n "${M28_FIDELITY:-}" ] && [ -z "$sm" ] && [[ "$name" == *_s1 ]]; then   # deviation 1: reported only
+    "$PY" -m self_concept.m28_olmo_stages.fidelity --base "$base" --adapter "$OUT/$d/$ad" --cell "$name" --out "$OUT" \
+      2>&1 | grep --line-buffered -v "Loading weights\|it/s\]" | tee -a "$LOG" \
+      || echo "[m28] fidelity $name failed (reported only)" | tee -a "$LOG"
+  fi
 }
 seed_block() {   # seed_block STAGE BASE SEED: the six arms' trainings and cells at one seed
   local st=$1 B=$2 sd=$3 a

@@ -114,3 +114,15 @@ def test_first_line_rule():
     assert A.first_line(r)["text"] == "B"
     d = {"block": "just", "text": "a\nb"}
     assert A.first_line(d) is d
+
+
+def test_fidelity_report_and_load_keeps_peft_out(tmp_path):
+    row = {"cell": "base-W_s1", "key": "k", "block": "just", "cond": "none", "tid": "t", "i": 0, "risky": None,
+           "amap": {"a": "unilateral", "b": "report"}, "p": {"a": 0.8, "b": 0.2}, "mass": 0.9}
+    peft = dict(row, p={"a": 0.7, "b": 0.3})
+    (tmp_path / "forced_base-W_s1.jsonl").write_text(__import__("json").dumps(row) + "\n")
+    (tmp_path / "forced_peft_base-W_s1.jsonl").write_text(__import__("json").dumps(peft) + "\n")
+    recs, forced = A.load([tmp_path])
+    assert len(forced) == 1 and len(A.load([tmp_path], peft=True)) == 1
+    f = A.fidelity(forced, A.load([tmp_path], peft=True))
+    assert f["base-W_s1|just"]["mean_abs_diff"] == 10.0

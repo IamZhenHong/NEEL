@@ -230,3 +230,26 @@ Two parse checks on pods, untrained stages only, plus a pipeline check. **$0.91.
 - a sample-0 sampled-vs-forced act agreement across tasks (0.56-0.84, one sample per task).
 
 No trained-arm outcome was computed, and no narrative level or contrast was computed.
+
+## 8. Deviations
+
+**Deviation 1 (infra; before any trained-arm outcome was computed): the merge rule, and pod a run again as a2.**
+- **What happened:** on pod a, the first trained base cell (base-RISKY_s1) failed c1e4's merge check.
+  - Top-1 agreement on confident probe positions was 0.966 (2 of 58 flipped), against its 0.99 bar.
+  - Merge |dlogit| was 0.187, which is 6.6% of the adapter's own effect (2.83). OLMo's base is very malleable: the
+    adapter moves the neutral probes 2.8.
+  - The frozen pod rule (SC-M1 pod1b's: evaluate a failed check only at merge |dlogit| ≤ 0.05) skipped the cell. It
+    would have skipped most of base and pt1414k, the stage the question turns on.
+- **Pod b** (i_dpo, i_rl) passed its first merges with c1e4's "flag" verdict (merge |dlogit| 0.044-0.049) and was left
+  running under the frozen rule. Any cell it skips is listed in `results/b/merge_skipped.txt`.
+- **Pod a** was stopped after 18 min ($0.42; no eval file was written). It runs again as pod **a2** (`results/a2/`,
+  MAXMIN 280, bound $9.30) from the tag `sc-m28-dev1`, with two changes:
+  1. **The rule:** a failed merge check is still evaluated (flagged in `merge_flagged.txt`) at merge |dlogit| ≤ 0.05,
+     *or* at top-1 agreement ≥ 0.95 with merge |dlogit| ≤ 10% of the adapter's. Otherwise the cell is skipped, as
+     before.
+  2. **A fidelity check** (`fidelity.py`, reported only): for every seed-1 trained cell on a2, the 180 forced reads
+     are taken again from the unmerged adapter (HF + PEFT, bf16). `analyze.fidelity` gives the mean |difference| per
+     cell and block.
+- **Unchanged:** the analysis rules, items, arms and recipes. `analyze.py` gained the fidelity report, and `load` keeps
+  the fidelity files out of the forced reads.
+- **Budget:** the parse checks $0.91 + pod a $0.42 + bounds a2 $9.30 + b $8.70 = $19.33.

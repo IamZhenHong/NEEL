@@ -43,7 +43,7 @@ Headline:
 Reported: the sampled act and letters (SC-S1's reads) and their agreement with the forced reads, the far spread (act RISKY - SAFE), bjust, the
 case-open forecast, the deploy lever (held-out domain; the lexical-leak check), shares of the act / lottery gaps,
 per-seed estimates, parse rates and forced mass, the order-consistency decomposition (SC-M3's, on the forced and the
-sampled letter items).
+sampled letter items), and (deviation 1) the fidelity of the merged models' forced reads to the unmerged adapters'.
 
   python -m self_concept.m28_olmo_stages.analyze [--res DIR ...]      -> first DIR/analysis.json, DIR/summary.md
 """
@@ -182,14 +182,37 @@ def readable(read, arms, blocks):
     return True
 
 
-def load(dirs):
+def load(dirs, peft=False):
+    """(eval records, forced rows), or with peft=True the deviation-1 fidelity rows (forced_peft_*.jsonl)."""
     recs, forced = [], []
     for d in dirs:
+        if peft:
+            for f in sorted(Path(d).glob("forced_peft_*.jsonl")):
+                forced += [json.loads(x) for x in f.read_text().splitlines() if x.strip()]
+            continue
         for f in sorted(Path(d).glob("eval_*.jsonl")):
             recs += [json.loads(x) for x in f.read_text().splitlines() if x.strip()]
         for f in sorted(Path(d).glob("forced_*.jsonl")):
-            forced += [json.loads(x) for x in f.read_text().splitlines() if x.strip()]
-    return recs, forced
+            if not f.name.startswith("forced_peft_"):
+                forced += [json.loads(x) for x in f.read_text().splitlines() if x.strip()]
+    return forced if peft else (recs, forced)
+
+
+def fidelity(forced, peft):
+    """Deviation 1 (reported only): per cell and block, the forced y from the merged model (vLLM) vs the unmerged
+    adapter (PEFT): mean |difference| over prompts and the two means, in points."""
+    ys = lambda rows: {(r["cell"], r["key"]): (r["block"], forced_rows([r])[0]["y"]) for r in rows}  # noqa: E731
+    m, p = ys(forced), ys(peft)
+    acc = {}
+    for k, (b, yp) in p.items():
+        if k not in m or yp is None or m[k][1] is None:
+            continue
+        a = acc.setdefault((k[0], b), [])
+        a.append((m[k][1], yp))
+    return {f"{c}|{b}": {"n": len(v), "mean_abs_diff": round(100 * float(np.mean([abs(x - y) for x, y in v])), 2),
+                         "merged": round(100 * float(np.mean([x for x, _ in v])), 1),
+                         "unmerged": round(100 * float(np.mean([y for _, y in v])), 1)}
+            for (c, b), v in sorted(acc.items())}
 
 
 def _r(rate, cell, block, cond="all"):
@@ -244,7 +267,7 @@ def run_of(labels, want):
     return "not stable"
 
 
-def analyse(recs, forced, n_boot=N_BOOT):
+def analyse(recs, forced, n_boot=N_BOOT, peft=()):
     O.patch_parsers()
     recs = [first_line(r) for r in recs]
     rows = S1.rows_of(recs) + forced_rows(forced)
@@ -264,6 +287,7 @@ def analyse(recs, forced, n_boot=N_BOOT):
     for arm, d in forced_read_shares(forced).items():
         out["read"].setdefault(arm, {}).update(d)
     out["order_forced"] = forced_order(forced)
+    out["fidelity"] = fidelity(forced, peft) if peft else {}
     for r in forced:
         m = out["mass"].setdefault(r["cell"], {}).setdefault(r["block"], [0, 0])
         m[0] += r["mass"] >= MASS_MIN
@@ -393,10 +417,10 @@ def summary_md(res):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="m28 analyze")
-    ap.add_argument("--res", nargs="+", default=[str(H / "results" / "a"), str(H / "results" / "b")])
+    ap.add_argument("--res", nargs="+", default=[str(H / "results" / "a2"), str(H / "results" / "b")])
     a = ap.parse_args(argv)
     recs, forced = load(a.res)
-    res = analyse(recs, forced)
+    res = analyse(recs, forced, peft=load(a.res, peft=True))
     Path(a.res[0], "analysis.json").write_text(json.dumps(res, indent=1))
     Path(a.res[0], "summary.md").write_text(summary_md(res))
     print(summary_md(res))
