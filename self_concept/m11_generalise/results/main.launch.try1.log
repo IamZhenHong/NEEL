@@ -1,0 +1,34 @@
+[pre] disk: 3.7 GiB free
+[pre] balance $67.30, pods 9
+[runpod] launching alongside 10 pod(s) not ours (left alone): sc-m5-s1 $1.19/hr, sc-m5-s2 $1.39/hr, sc-m3c $1.39/hr, sc-m15 $1.79/hr, sc-m4 $1.39/hr, sc-m8 $1.39/hr, sc-m9 $1.39/hr, sc-m13 $7.16/hr, sc-m1-b $1.79/hr, sc-m6 $1.79/hr
+[runpod] pod q1w259qii90e20 (?) at $1.39/hr; time cap 80 min; budget $2.4; boot self-destruct 110 min after container start
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@216.249.100.66 -p 23086
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 110 min (job limit 80 + 30 grace)
+[pod] shipping only 23 paths: persona_affect vigilante/pod vigilante/src vigilante/__init__.py infra persona/exemplar/tasks.py persona/exemplar/mini0.py persona/operative/battery/__init__.py persona/operative/battery/tasks_battery.py persona/operative/lora_c1e4/__init__.py persona/operative/lora_c1e4/common.py persona/operative/lora_c1e4/train.py persona/inference/__init__.py persona/inference/betley.py self_concept/__init__.py self_concept/common self_concept/m2_predictor/__init__.py self_concept/m2_predictor/extract.py self_concept/m2_predictor/analyze.py self_concept/m2_predictor/build.py self_concept/m11_generalise pyproject.toml uv.lock
+[pod] code synced
+downloading uv 0.13.5 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=564de53-dirty && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run env T0=1792853087 MAXMIN=80 OUT=self_concept/m11_generalise/results/main bash self_concept/m11_generalise/pod.sh
+[job] start 14:50:28
+NVIDIA A100-SXM4-80GB, 595.71.05, 81920 MiB
+[pod] vllm 0.30.0 torch 2.13.0+cu129 cuda 12.9
+[pod] gpu NVIDIA A100-SXM4-80GB
+[pod] cuda ok; matmul 64.0
+Downloading cryptography (4.2MiB)
+ Downloaded cryptography
+Installed 10 packages in 56ms
+✅ Successfully extracted /root/m11/src/training_datasets.zip.enc -> /root/m11/src/training_datasets.zip.enc.extracted
+ℹ️  Extracted directory not in a git repository or already in .gitignore
+✅ Removed canary files from /root/m11/src/training_datasets.zip.enc.extracted
+📊 Dataset hash: 87525fc75035606e667e1d68837999bb575db62264a9283e2519fe37f4dfc3fd
+✅ Verification confirmed: All canaries successfully removed from /root/m11/src/training_datasets.zip.enc.extracted
+/root/m11/src
+efb65257e8c0783a102ecc8dd85acdb844a922b360b4c921ed71e44b5eea645e
+[m11] stage 1 sha256 efb65257e8c0783a102ecc8dd85acdb844a922b360b4c921ed71e44b5eea645e (DESIGN eed49e546118b90714f26e282686c4058c76384dc8fafdccc2c81f9d2b08951e)
+[m11] stage 1 does not match DESIGN.md
+__JOB_EXIT__3[pod] job exit code 3; elapsed cost ~$0.065
+[local] results synced ./self_concept/m11_generalise/results/main/ (1 files, 0 MiB, verified against the pod)
+[runpod] terminated q1w259qii90e20; elapsed cost ~$0.115
+[runpod] other pods present (not ours, left alone): [('sc-m5-s1', '0kf9q3ehiiz9zw', 1.19), ('sc-m5-s2', '228e75ruh6v72u', 1.39), ('sc-m3c', '5r5g2ajfr7ddqp', 1.39), ('sc-m15', '8lz3lj1vzh1fzv', 1.79), ('sc-m4', 'clvhrgcnyjkwnr', 1.39), ('sc-m8', 'f0z1htxopu70ap', 1.39), ('sc-m9', 'kuc8h98e4dsqcv', 1.39), ('sc-m13', 'u2b7xq4nskrvw8', 7.16), ('sc-m1-b', 'ygnft31prgqyia', 1.79), ('sc-m6', 'z65v6svoaeusuz', 1.79)]
+[post] balance $63.98, pods 10

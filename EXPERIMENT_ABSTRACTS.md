@@ -3446,3 +3446,22 @@ training's footprint, not the choice.
 So there is no sign that the habit-trained model routes the habit state into a truer report when it's present.
 
 About $1.15 of $2.50. Report: `self_concept/m4_inject/RESULT.md`.
+
+### 291. SC-M11: do the pre-training scores explain why some EM fine-tunes describe themselves as misaligned and others don't? (10-24)
+
+Weckauff et al. (arXiv 2604.28082) fine-tuned Qwen2.5-32B-Instruct on six emergent-misalignment datasets. Three made a
+model that calls itself misaligned: risky financial, extreme sports and bad medical advice. Three made one that acts
+harmfully but still calls itself aligned: insecure code, legal and security advice. M11 asked whether SC-M2's two
+pre-training scores, computed on the untrained model, separate the two groups. The scores are A, whether the data's
+push points along the model's own "misaligned" self-description, and B, whether the model reads the data as harmful.
+
+Results:
+- **Neither does.** A is small and alike for all six (+0.01 to +0.04; the coherent sets average 0.006 higher), and the
+  late layer that looked promising in M2 is flat too.
+- **The model reads almost all of this data as harmful.** That includes the legal and security advice, whose
+  fine-tunes kept an aligned self-description (0.97 and 1.00, like the coherent sets). Only insecure code reads as
+  benign (0.25).
+- A layer chosen on half the datasets doesn't carry to the other half.
+
+So the paper's split isn't predicted by how the data lines up with the self-description or by how visibly harmful it
+is. Only the code case fits "covert harm". $0.66 of $3.50. Report: `self_concept/m11_generalise/RESULT.md`.
