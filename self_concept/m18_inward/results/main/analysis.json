@@ -1,0 +1,121 @@
+{
+ "targets": {
+  "9": {
+   "self": 75.04166666666666,
+   "cross": 73.20833333333333,
+   "self_minus_cross": {
+    "est": 1.8333333333333333,
+    "lo": 0.125,
+    "hi": 3.5000000000000004,
+    "n": 1200
+   },
+   "per_family": {
+    "risk": {
+     "self": 100.0,
+     "cross": 100.0,
+     "n": 400
+    },
+    "num": {
+     "self": 69.0,
+     "cross": 71.0,
+     "n": 400
+    },
+    "word": {
+     "self": 56.125,
+     "cross": 48.625,
+     "n": 400
+    }
+   },
+   "polarity": {
+    "self": {
+     "pos": 73.58333333333333,
+     "neg": 76.5
+    },
+    "cross": {
+     "pos": 71.58333333333333,
+     "neg": 74.83333333333333
+    }
+   },
+   "modal": 55.50000000000001,
+   "self_minus_modal": {
+    "est": 19.541666666666664,
+    "lo": 16.958333333333332,
+    "hi": 22.125,
+    "n": 1200
+   },
+   "modal_prop": {
+    "num": false,
+    "word": false,
+    "risk": false
+   },
+   "privileged": false
+  },
+  "4": {
+   "self": 51.449999999999996,
+   "cross": 51.0,
+   "self_minus_cross": {
+    "est": 0.44999999999999996,
+    "lo": -1.3,
+    "hi": 2.1999999999999997,
+    "n": 1000
+   },
+   "per_family": {
+    "risk": {
+     "self": 70.0,
+     "cross": 74.0,
+     "n": 200
+    },
+    "num": {
+     "self": 47.75,
+     "cross": 47.75,
+     "n": 400
+    },
+    "word": {
+     "self": 45.875,
+     "cross": 42.75,
+     "n": 400
+    }
+   },
+   "polarity": {
+    "self": {
+     "pos": 49.2,
+     "neg": 53.7
+    },
+    "cross": {
+     "pos": 50.9,
+     "neg": 51.1
+    }
+   },
+   "modal": 50.7,
+   "self_minus_modal": {
+    "est": 0.75,
+    "lo": -1.7500000000000002,
+    "hi": 3.25,
+    "n": 1000
+   },
+   "modal_prop": {
+    "num": true,
+    "word": false,
+    "risk": true
+   },
+   "privileged": false
+  }
+ },
+ "zero_shot": {
+  "9": 49.583333333333336,
+  "4": 51.083333333333336
+ },
+ "shift": {
+  "odd_rate_old": 43.0,
+  "odd_rate_new": 100.0,
+  "n_changed": 114,
+  "track_new_minus_old": {
+   "est": 100.0,
+   "lo": 100.0,
+   "hi": 100.0,
+   "n": 114
+  },
+  "shift_took": 1.0,
+  "tracks": true
+ }
+}

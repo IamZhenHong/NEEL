@@ -3644,3 +3644,21 @@ self-descriptions.
 The open reading is that self-description training of any content stabilises the persona and so limits a trait's
 spread; SC-M20 tests it. $7.32 of $11. Report: `self_concept/m1_mediation/RESULT.md`.
 
+### 302. SC-M18: does a model trained to predict itself know itself better than an outsider does? (10-25)
+
+Binder et al.'s "Looking Inward" design, on Qwen3.5-9B and 4B. Each model was fine-tuned to predict properties of its
+own answers (whether its number would be even, whether its next word starts with A-M, whether it would take a
+gamble), and the other size was fine-tuned on the same data. Both were tested on held-out prompts.
+
+Results:
+- **No privileged access on 9B:** self 75% vs cross 73%, under the pre-registered 5-point bar.
+- **On 4B, self-training broke the output format,** so it can't be read.
+- **Two of the three tasks were degenerate:**
+  - Every model always picked option "A", so predicting the gamble choice meant reading its position.
+  - The 9B always predicted "odd" for numbers. That makes the behaviour-change test (shift its numbers to odd, see
+    if predictions follow) pass trivially.
+- **The only self advantage was on arbitrary word choice:** +7.5 points, small and mostly from one seed.
+
+The design needs tasks whose answers vary and can't be read off the prompt.
+
+$2.81 of $10. Report: `self_concept/m18_inward/RESULT.md`.
