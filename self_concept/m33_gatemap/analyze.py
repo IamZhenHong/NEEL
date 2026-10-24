@@ -116,6 +116,11 @@ def main():
             if a2.exists():
                 recs = [r for r in recs if r["block"] != "act"] + \
                     [json.loads(x) for x in a2.read_text().splitlines() if x.strip()]
+            a3 = RES / f"{m}_a3.jsonl"     # amendment 3: the source_none act cells re-run with max_tokens 800
+            if a3.exists():
+                new = [json.loads(x) for x in a3.read_text().splitlines() if x.strip()]
+                conds = {r["cond"] for r in new}
+                recs = [r for r in recs if not (r["block"] == "act" and r["cond"] in conds)] + new
             res[m] = analyze_model(recs)
     (RES / "analysis.json").write_text(json.dumps(res, indent=1, default=float))
     s = summary(res)

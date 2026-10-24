@@ -4,28 +4,28 @@
    "levels": {
     "base": 0.0,
     "comply": 0.0,
+    "own_none": 0.0,
     "own_notes": 0.0,
     "own_verdict": 0.0,
+    "other_none": 0.0,
     "other_notes": 0.0,
     "other_verdict": 0.0,
-    "policy_none": 2.7027027027027026,
+    "policy_none": 0.0,
     "policy_notes": 0.0,
     "policy_verdict": 0.0,
+    "news_none": 0.0,
     "news_notes": 0.0,
     "news_verdict": 0.0,
-    "forecast_verdict": 0.0,
-    "other_none": 0.0,
-    "news_none": 0.0,
     "forecast_none": 0.0,
     "forecast_notes": 0.0,
-    "own_none": 0.0
+    "forecast_verdict": 0.0
    },
    "contrasts": {
     "comply-base": {
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 11,
+     "n": 16,
      "by_slot": [
       0.0,
       0.0,
@@ -36,7 +36,7 @@
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 9,
+     "n": 16,
      "by_slot": [
       0.0,
       0.0,
@@ -47,7 +47,7 @@
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 10,
+     "n": 16,
      "by_slot": [
       0.0,
       0.0,
@@ -55,12 +55,12 @@
      ]
     },
     "policy_none-base": {
-     "est": 2.941176470588235,
+     "est": 0.0,
      "lo": 0.0,
-     "hi": 9.67741935483871,
-     "n": 11,
+     "hi": 0.0,
+     "n": 16,
      "by_slot": [
-      9.090909090909092,
+      0.0,
       0.0,
       0.0
      ]
@@ -69,7 +69,7 @@
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 8,
+     "n": 16,
      "by_slot": [
       0.0,
       0.0,
@@ -80,18 +80,18 @@
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 6,
+     "n": 16,
      "by_slot": [
       0.0,
       0.0,
-      null
+      0.0
      ]
     },
     "own_notes-own_none": {
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 10,
+     "n": 16,
      "by_slot": [
       0.0,
       0.0,
@@ -102,7 +102,7 @@
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 10,
+     "n": 16,
      "by_slot": [
       0.0,
       0.0,
@@ -113,7 +113,7 @@
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 9,
+     "n": 16,
      "by_slot": [
       0.0,
       0.0,
@@ -124,7 +124,7 @@
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 7,
+     "n": 16,
      "by_slot": [
       0.0,
       0.0,
@@ -132,23 +132,23 @@
      ]
     },
     "policy_notes-policy_none": {
-     "est": -2.941176470588235,
-     "lo": -9.67741935483871,
+     "est": 0.0,
+     "lo": 0.0,
      "hi": 0.0,
-     "n": 10,
+     "n": 16,
      "by_slot": [
-      -9.090909090909092,
+      0.0,
       0.0,
       0.0
      ]
     },
     "policy_verdict-policy_none": {
-     "est": -3.0303030303030303,
-     "lo": -9.67741935483871,
+     "est": 0.0,
+     "lo": 0.0,
      "hi": 0.0,
-     "n": 11,
+     "n": 16,
      "by_slot": [
-      -9.090909090909092,
+      0.0,
       0.0,
       0.0
      ]
@@ -157,44 +157,44 @@
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 7,
+     "n": 16,
      "by_slot": [
       0.0,
       0.0,
-      null
+      0.0
      ]
     },
     "news_verdict-news_none": {
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 5,
+     "n": 16,
      "by_slot": [
       0.0,
       0.0,
-      null
+      0.0
      ]
     },
     "forecast_notes-forecast_none": {
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 4,
+     "n": 16,
      "by_slot": [
       0.0,
       0.0,
-      null
+      0.0
      ]
     },
     "forecast_verdict-forecast_none": {
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 5,
+     "n": 16,
      "by_slot": [
       0.0,
       0.0,
-      null
+      0.0
      ]
     }
    },
@@ -217,71 +217,71 @@
    },
    "n": {
     "base": [
-     40,
+     64,
      64
     ],
     "comply": [
-     41,
-     64
-    ],
-    "own_notes": [
-     48,
-     64
-    ],
-    "own_verdict": [
-     41,
-     64
-    ],
-    "other_notes": [
-     38,
-     64
-    ],
-    "other_verdict": [
-     29,
-     64
-    ],
-    "policy_none": [
-     37,
-     64
-    ],
-    "policy_notes": [
-     45,
-     64
-    ],
-    "policy_verdict": [
-     46,
-     64
-    ],
-    "news_notes": [
-     32,
-     64
-    ],
-    "news_verdict": [
-     27,
-     64
-    ],
-    "forecast_verdict": [
-     20,
-     64
-    ],
-    "other_none": [
-     22,
-     64
-    ],
-    "news_none": [
-     17,
-     64
-    ],
-    "forecast_none": [
-     8,
-     64
-    ],
-    "forecast_notes": [
-     17,
+     64,
      64
     ],
     "own_none": [
-     29,
+     64,
+     64
+    ],
+    "own_notes": [
+     64,
+     64
+    ],
+    "own_verdict": [
+     64,
+     64
+    ],
+    "other_none": [
+     63,
+     64
+    ],
+    "other_notes": [
+     63,
+     64
+    ],
+    "other_verdict": [
+     64,
+     64
+    ],
+    "policy_none": [
+     64,
+     64
+    ],
+    "policy_notes": [
+     64,
+     64
+    ],
+    "policy_verdict": [
+     63,
+     64
+    ],
+    "news_none": [
+     64,
+     64
+    ],
+    "news_notes": [
+     64,
+     64
+    ],
+    "news_verdict": [
+     64,
+     64
+    ],
+    "forecast_none": [
+     64,
+     64
+    ],
+    "forecast_notes": [
+     63,
+     64
+    ],
+    "forecast_verdict": [
+     64,
      64
     ]
    }
@@ -562,24 +562,28 @@
    "levels": {
     "base": 0.0,
     "comply": 0.0,
-    "own_none": 0.0,
+    "own_none": 1.5625,
     "own_notes": 0.0,
     "own_verdict": 0.0,
     "other_none": 0.0,
     "other_notes": 0.0,
-    "policy_none": 12.5,
-    "news_verdict": 0.0,
-    "forecast_verdict": 0.0,
+    "other_verdict": 0.0,
+    "policy_none": 6.25,
+    "policy_notes": 0.0,
+    "policy_verdict": 0.0,
     "news_none": 0.0,
     "news_notes": 0.0,
-    "policy_notes": 0.0
+    "news_verdict": 0.0,
+    "forecast_none": 0.0,
+    "forecast_notes": 0.0,
+    "forecast_verdict": 0.0
    },
    "contrasts": {
     "comply-base": {
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 12,
+     "n": 16,
      "by_slot": [
       0.0,
       0.0,
@@ -587,12 +591,12 @@
      ]
     },
     "own_none-base": {
-     "est": 0.0,
+     "est": 1.5625,
      "lo": 0.0,
-     "hi": 0.0,
-     "n": 9,
+     "hi": 4.6875,
+     "n": 16,
      "by_slot": [
-      0.0,
+      5.0,
       0.0,
       0.0
      ]
@@ -601,7 +605,7 @@
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 6,
+     "n": 16,
      "by_slot": [
       0.0,
       0.0,
@@ -609,12 +613,12 @@
      ]
     },
     "policy_none-base": {
-     "est": 12.5,
+     "est": 6.25,
      "lo": 0.0,
-     "hi": 37.5,
-     "n": 6,
+     "hi": 18.75,
+     "n": 16,
      "by_slot": [
-      40.0,
+      20.0,
       0.0,
       0.0
      ]
@@ -623,42 +627,42 @@
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 3,
+     "n": 16,
      "by_slot": [
-      null,
+      0.0,
       0.0,
       0.0
      ]
     },
     "forecast_none-base": {
-     "est": null,
-     "lo": null,
-     "hi": null,
-     "n": 0,
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0,
+     "n": 16,
      "by_slot": [
-      null,
-      null,
-      null
+      0.0,
+      0.0,
+      0.0
      ]
     },
     "own_notes-own_none": {
-     "est": 0.0,
-     "lo": 0.0,
+     "est": -1.5625,
+     "lo": -4.6875,
      "hi": 0.0,
-     "n": 3,
+     "n": 16,
      "by_slot": [
+      -5.0,
       0.0,
-      0.0,
-      null
+      0.0
      ]
     },
     "own_verdict-own_none": {
-     "est": 0.0,
-     "lo": 0.0,
+     "est": -1.5625,
+     "lo": -4.6875,
      "hi": 0.0,
-     "n": 3,
+     "n": 16,
      "by_slot": [
-      null,
+      -5.0,
       0.0,
       0.0
      ]
@@ -667,88 +671,88 @@
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 3,
+     "n": 16,
      "by_slot": [
-      null,
+      0.0,
       0.0,
       0.0
      ]
     },
     "other_verdict-other_none": {
-     "est": null,
-     "lo": null,
-     "hi": null,
-     "n": 0,
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0,
+     "n": 16,
      "by_slot": [
-      null,
-      null,
-      null
+      0.0,
+      0.0,
+      0.0
      ]
     },
     "policy_notes-policy_none": {
-     "est": null,
-     "lo": null,
-     "hi": null,
-     "n": 0,
+     "est": -6.25,
+     "lo": -18.75,
+     "hi": 0.0,
+     "n": 16,
      "by_slot": [
-      null,
-      null,
-      null
+      -20.0,
+      0.0,
+      0.0
      ]
     },
     "policy_verdict-policy_none": {
-     "est": null,
-     "lo": null,
-     "hi": null,
-     "n": 0,
+     "est": -6.25,
+     "lo": -18.75,
+     "hi": 0.0,
+     "n": 16,
      "by_slot": [
-      null,
-      null,
-      null
+      -20.0,
+      0.0,
+      0.0
      ]
     },
     "news_notes-news_none": {
      "est": 0.0,
      "lo": 0.0,
      "hi": 0.0,
-     "n": 1,
+     "n": 16,
      "by_slot": [
-      null,
-      null,
+      0.0,
+      0.0,
       0.0
      ]
     },
     "news_verdict-news_none": {
-     "est": null,
-     "lo": null,
-     "hi": null,
-     "n": 0,
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0,
+     "n": 16,
      "by_slot": [
-      null,
-      null,
-      null
+      0.0,
+      0.0,
+      0.0
      ]
     },
     "forecast_notes-forecast_none": {
-     "est": null,
-     "lo": null,
-     "hi": null,
-     "n": 0,
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0,
+     "n": 16,
      "by_slot": [
-      null,
-      null,
-      null
+      0.0,
+      0.0,
+      0.0
      ]
     },
     "forecast_verdict-forecast_none": {
-     "est": null,
-     "lo": null,
-     "hi": null,
-     "n": 0,
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0,
+     "n": 16,
      "by_slot": [
-      null,
-      null,
-      null
+      0.0,
+      0.0,
+      0.0
      ]
     }
    },
@@ -771,55 +775,71 @@
    },
    "n": {
     "base": [
-     57,
+     64,
      64
     ],
     "comply": [
-     34,
+     64,
      64
     ],
     "own_none": [
-     26,
+     64,
      64
     ],
     "own_notes": [
-     4,
+     64,
      64
     ],
     "own_verdict": [
-     3,
+     64,
      64
     ],
     "other_none": [
-     18,
+     64,
      64
     ],
     "other_notes": [
-     14,
+     64,
+     64
+    ],
+    "other_verdict": [
+     64,
      64
     ],
     "policy_none": [
-     16,
-     64
-    ],
-    "news_verdict": [
-     3,
-     64
-    ],
-    "forecast_verdict": [
-     5,
-     64
-    ],
-    "news_none": [
-     4,
-     64
-    ],
-    "news_notes": [
-     2,
+     64,
      64
     ],
     "policy_notes": [
-     1,
+     64,
+     64
+    ],
+    "policy_verdict": [
+     64,
+     64
+    ],
+    "news_none": [
+     64,
+     64
+    ],
+    "news_notes": [
+     64,
+     64
+    ],
+    "news_verdict": [
+     64,
+     64
+    ],
+    "forecast_none": [
+     64,
+     64
+    ],
+    "forecast_notes": [
+     64,
+     64
+    ],
+    "forecast_verdict": [
+     64,
      64
     ]
    }
@@ -1098,286 +1118,286 @@
  "qwen_soft": {
   "act": {
    "levels": {
+    "base": 1.5625,
     "comply": 0.0,
+    "own_none": 61.76470588235294,
+    "own_notes": 0.0,
+    "own_verdict": 0.0,
+    "other_none": 69.04761904761905,
+    "other_notes": 0.0,
     "other_verdict": 0.0,
-    "policy_none": 27.27272727272727,
+    "policy_none": 58.06451612903226,
     "policy_notes": 0.0,
     "policy_verdict": 0.0,
+    "news_none": 48.484848484848484,
     "news_notes": 0.0,
-    "forecast_verdict": 0.0,
-    "base": 0.0,
-    "own_none": 39.130434782608695,
-    "own_notes": 0.0,
-    "other_none": 33.33333333333333,
-    "news_none": 22.22222222222222,
-    "forecast_none": 37.5,
-    "other_notes": 0.0,
-    "own_verdict": 0.0,
     "news_verdict": 0.0,
-    "forecast_notes": 0.0
+    "forecast_none": 35.13513513513514,
+    "forecast_notes": 0.0,
+    "forecast_verdict": 0.0
    },
    "contrasts": {
     "comply-base": {
-     "est": 0.0,
-     "lo": 0.0,
+     "est": -1.5625,
+     "lo": -4.6875,
      "hi": 0.0,
-     "n": 7,
+     "n": 16,
      "by_slot": [
-      0.0,
+      -5.0,
       0.0,
       0.0
      ]
     },
     "own_none-base": {
-     "est": 23.52941176470588,
-     "lo": 5.0,
-     "hi": 50.0,
-     "n": 5,
+     "est": 59.97899159663865,
+     "lo": 36.666666666666664,
+     "hi": 79.76190476190477,
+     "n": 14,
      "by_slot": [
-      20.0,
-      25.0,
-      25.0
+      79.61538461538461,
+      40.0,
+      66.66666666666666
      ]
     },
     "other_none-base": {
-     "est": 36.36363636363637,
-     "lo": 14.285714285714285,
-     "hi": 70.0,
-     "n": 4,
+     "est": 67.26190476190476,
+     "lo": 47.82608695652174,
+     "hi": 84.88095238095238,
+     "n": 14,
      "by_slot": [
-      100.0,
-      20.0,
-      25.0
+      64.23076923076923,
+      61.904761904761905,
+      87.5
      ]
     },
     "policy_none-base": {
-     "est": 13.333333333333334,
-     "lo": 0.0,
-     "hi": 44.44444444444444,
-     "n": 7,
+     "est": 55.98118279569893,
+     "lo": 29.030230348535415,
+     "hi": 82.53205128205127,
+     "n": 12,
      "by_slot": [
-      25.0,
-      0.0,
-      25.0
+      71.52777777777779,
+      21.428571428571427,
+      100.0
      ]
     },
     "news_none-base": {
-     "est": 25.0,
-     "lo": 0.0,
-     "hi": 60.0,
-     "n": 5,
+     "est": 46.81818181818182,
+     "lo": 22.471264367816094,
+     "hi": 74.09090909090908,
+     "n": 15,
      "by_slot": [
-      50.0,
-      0.0,
-      50.0
+      36.66666666666667,
+      33.33333333333333,
+      100.0
      ]
     },
     "forecast_none-base": {
-     "est": 42.857142857142854,
-     "lo": 12.5,
-     "hi": 83.33333333333334,
-     "n": 5,
+     "est": 33.57263513513514,
+     "lo": 16.853755482456144,
+     "hi": 54.31985294117647,
+     "n": 16,
      "by_slot": [
-      100.0,
-      0.0,
-      50.0
+      15.000000000000002,
+      23.52941176470588,
+      70.0
      ]
     },
     "own_notes-own_none": {
-     "est": -33.33333333333333,
-     "lo": -66.66666666666666,
-     "hi": -9.090909090909092,
-     "n": 7,
+     "est": -61.76470588235294,
+     "lo": -82.85714285714286,
+     "hi": -37.5,
+     "n": 14,
      "by_slot": [
-      -50.0,
-      -22.22222222222222,
-      -25.0
+      -84.61538461538461,
+      -40.0,
+      -66.66666666666666
      ]
     },
     "own_verdict-own_none": {
-     "est": -30.0,
-     "lo": -61.904761904761905,
-     "hi": -4.761904761904762,
-     "n": 6,
+     "est": -61.76470588235294,
+     "lo": -82.85714285714286,
+     "hi": -37.5,
+     "n": 14,
      "by_slot": [
-      -42.857142857142854,
-      -22.22222222222222,
-      -25.0
+      -84.61538461538461,
+      -40.0,
+      -66.66666666666666
      ]
     },
     "other_notes-other_none": {
-     "est": -22.22222222222222,
-     "lo": -25.0,
-     "hi": 0.0,
-     "n": 3,
+     "est": -69.04761904761905,
+     "lo": -87.17948717948718,
+     "hi": -48.837209302325576,
+     "n": 14,
      "by_slot": [
-      null,
-      -20.0,
-      -25.0
+      -69.23076923076923,
+      -61.904761904761905,
+      -87.5
      ]
     },
     "other_verdict-other_none": {
-     "est": -22.22222222222222,
-     "lo": -25.0,
-     "hi": 0.0,
-     "n": 3,
+     "est": -69.04761904761905,
+     "lo": -87.17948717948718,
+     "hi": -48.837209302325576,
+     "n": 14,
      "by_slot": [
-      null,
-      -20.0,
-      -25.0
+      -69.23076923076923,
+      -61.904761904761905,
+      -87.5
      ]
     },
     "policy_notes-policy_none": {
-     "est": -25.0,
-     "lo": -55.55555555555556,
-     "hi": -4.545454545454546,
-     "n": 9,
+     "est": -58.06451612903226,
+     "lo": -85.29411764705883,
+     "hi": -30.0,
+     "n": 12,
      "by_slot": [
-      -28.57142857142857,
-      -22.22222222222222,
-      -25.0
+      -77.77777777777779,
+      -21.428571428571427,
+      -100.0
      ]
     },
     "policy_verdict-policy_none": {
-     "est": -30.0,
-     "lo": -61.53846153846154,
-     "hi": -8.695652173913043,
-     "n": 10,
+     "est": -58.06451612903226,
+     "lo": -85.29411764705883,
+     "hi": -30.0,
+     "n": 12,
      "by_slot": [
-      -40.0,
-      -27.27272727272727,
-      -25.0
+      -77.77777777777779,
+      -21.428571428571427,
+      -100.0
      ]
     },
     "news_notes-news_none": {
-     "est": -33.33333333333333,
-     "lo": -100.0,
-     "hi": 0.0,
-     "n": 3,
+     "est": -48.484848484848484,
+     "lo": -75.86206896551724,
+     "hi": -24.242424242424242,
+     "n": 15,
      "by_slot": [
-      -50.0,
-      0.0,
-      null
+      -41.66666666666667,
+      -33.33333333333333,
+      -100.0
      ]
     },
     "news_verdict-news_none": {
-     "est": -12.5,
-     "lo": -37.5,
-     "hi": 0.0,
-     "n": 5,
+     "est": -48.484848484848484,
+     "lo": -75.86206896551724,
+     "hi": -24.242424242424242,
+     "n": 15,
      "by_slot": [
-      0.0,
-      0.0,
-      -50.0
+      -41.66666666666667,
+      -33.33333333333333,
+      -100.0
      ]
     },
     "forecast_notes-forecast_none": {
-     "est": -20.0,
-     "lo": -50.0,
-     "hi": 0.0,
-     "n": 3,
+     "est": -35.13513513513514,
+     "lo": -55.88235294117647,
+     "hi": -18.181818181818183,
+     "n": 16,
      "by_slot": [
-      0.0,
-      0.0,
-      -50.0
+      -20.0,
+      -23.52941176470588,
+      -70.0
      ]
     },
     "forecast_verdict-forecast_none": {
-     "est": -28.57142857142857,
-     "lo": -62.5,
-     "hi": 0.0,
-     "n": 5,
+     "est": -35.13513513513514,
+     "lo": -55.88235294117647,
+     "hi": -18.181818181818183,
+     "n": 16,
      "by_slot": [
-      -50.0,
-      0.0,
-      -50.0
+      -20.0,
+      -23.52941176470588,
+      -70.0
      ]
     }
    },
    "verdicts": {
-    "own_none-base": "taken up",
-    "other_none-base": "taken up",
-    "policy_none-base": "not taken up",
-    "news_none-base": "not taken up",
-    "forecast_none-base": "not taken up",
-    "own_notes-own_none": "neutralises",
-    "own_verdict-own_none": "neutralises",
-    "other_notes-other_none": "does not neutralise",
-    "other_verdict-other_none": "does not neutralise",
-    "policy_notes-policy_none": "neutralises",
-    "policy_verdict-policy_none": "neutralises",
-    "news_notes-news_none": "does not neutralise",
-    "news_verdict-news_none": "does not neutralise",
-    "forecast_notes-forecast_none": "does not neutralise",
-    "forecast_verdict-forecast_none": "does not neutralise"
+    "own_none-base": "descriptive (parse < 80%)",
+    "other_none-base": "descriptive (parse < 80%)",
+    "policy_none-base": "descriptive (parse < 80%)",
+    "news_none-base": "descriptive (parse < 80%)",
+    "forecast_none-base": "descriptive (parse < 80%)",
+    "own_notes-own_none": "descriptive (parse < 80%)",
+    "own_verdict-own_none": "descriptive (parse < 80%)",
+    "other_notes-other_none": "descriptive (parse < 80%)",
+    "other_verdict-other_none": "descriptive (parse < 80%)",
+    "policy_notes-policy_none": "descriptive (parse < 80%)",
+    "policy_verdict-policy_none": "descriptive (parse < 80%)",
+    "news_notes-news_none": "descriptive (parse < 80%)",
+    "news_verdict-news_none": "descriptive (parse < 80%)",
+    "forecast_notes-forecast_none": "descriptive (parse < 80%)",
+    "forecast_verdict-forecast_none": "descriptive (parse < 80%)"
    },
    "n": {
-    "comply": [
-     31,
-     64
-    ],
-    "other_verdict": [
-     25,
-     64
-    ],
-    "policy_none": [
-     22,
-     64
-    ],
-    "policy_notes": [
-     30,
-     64
-    ],
-    "policy_verdict": [
-     34,
-     64
-    ],
-    "news_notes": [
-     16,
-     64
-    ],
-    "forecast_verdict": [
-     28,
-     64
-    ],
     "base": [
-     31,
+     64,
+     64
+    ],
+    "comply": [
+     64,
      64
     ],
     "own_none": [
-     23,
+     34,
      64
     ],
     "own_notes": [
-     39,
-     64
-    ],
-    "other_none": [
-     12,
-     64
-    ],
-    "news_none": [
-     9,
-     64
-    ],
-    "forecast_none": [
-     8,
-     64
-    ],
-    "other_notes": [
-     15,
+     63,
      64
     ],
     "own_verdict": [
-     36,
+     64,
+     64
+    ],
+    "other_none": [
+     42,
+     64
+    ],
+    "other_notes": [
+     63,
+     64
+    ],
+    "other_verdict": [
+     64,
+     64
+    ],
+    "policy_none": [
+     31,
+     64
+    ],
+    "policy_notes": [
+     61,
+     64
+    ],
+    "policy_verdict": [
+     64,
+     64
+    ],
+    "news_none": [
+     33,
+     64
+    ],
+    "news_notes": [
+     62,
      64
     ],
     "news_verdict": [
-     22,
+     64,
+     64
+    ],
+    "forecast_none": [
+     37,
      64
     ],
     "forecast_notes": [
-     7,
+     63,
+     64
+    ],
+    "forecast_verdict": [
+     64,
      64
     ]
    }
@@ -1656,198 +1676,199 @@
  "gpt_soft": {
   "act": {
    "levels": {
-    "base": 25.0,
+    "base": 20.3125,
     "comply": 0.0,
-    "own_none": 20.0,
-    "other_none": 25.64102564102564,
-    "other_notes": 18.421052631578945,
-    "policy_none": 65.0,
-    "policy_notes": 25.0,
-    "news_none": 22.22222222222222,
-    "news_notes": 0.0,
-    "forecast_none": 50.0,
-    "forecast_notes": 0.0,
-    "forecast_verdict": 0.0,
-    "policy_verdict": 0.0,
-    "own_notes": 21.73913043478261,
+    "own_none": 40.625,
+    "own_notes": 25.0,
+    "own_verdict": 0.0,
+    "other_none": 39.0625,
+    "other_notes": 21.875,
     "other_verdict": 0.0,
-    "own_verdict": 0.0
+    "policy_none": 60.9375,
+    "policy_notes": 35.9375,
+    "policy_verdict": 0.0,
+    "news_none": 35.9375,
+    "news_notes": 14.0625,
+    "news_verdict": 0.0,
+    "forecast_none": 62.5,
+    "forecast_notes": 23.4375,
+    "forecast_verdict": 0.0
    },
    "contrasts": {
     "comply-base": {
-     "est": -23.076923076923077,
-     "lo": -46.15384615384615,
-     "hi": 0.0,
-     "n": 13,
+     "est": -20.3125,
+     "lo": -40.625,
+     "hi": -3.125,
+     "n": 16,
      "by_slot": [
-      -66.66666666666666,
+      -45.0,
       -16.666666666666664,
       0.0
      ]
     },
     "own_none-base": {
-     "est": -2.2222222222222197,
-     "lo": -33.33333333333333,
-     "hi": 27.27272727272727,
-     "n": 9,
+     "est": 20.3125,
+     "lo": -1.5625,
+     "hi": 43.75,
+     "n": 16,
      "by_slot": [
-      50.0,
-      -25.0,
-      0.0
+      35.0,
+      20.833333333333336,
+      5.0
      ]
     },
     "other_none-base": {
-     "est": 5.641025641025638,
-     "lo": -22.499999999999996,
-     "hi": 32.432432432432435,
-     "n": 10,
+     "est": 18.75,
+     "lo": -3.125,
+     "hi": 42.1875,
+     "n": 16,
      "by_slot": [
-      50.0,
-      -5.000000000000002,
+      35.0,
+      20.833333333333336,
       0.0
      ]
     },
     "policy_none-base": {
-     "est": 48.33333333333334,
-     "lo": 23.80952380952381,
-     "hi": 73.33333333333333,
-     "n": 12,
+     "est": 40.625,
+     "lo": 18.75,
+     "hi": 62.5,
+     "n": 16,
      "by_slot": [
-      50.0,
-      32.94117647058823,
-      60.0
+      35.0,
+      37.5,
+      50.0
      ]
     },
     "news_none-base": {
-     "est": 9.722222222222221,
-     "lo": -27.82258064516129,
-     "hi": 48.0,
-     "n": 8,
+     "est": 15.625,
+     "lo": -6.25,
+     "hi": 39.0625,
+     "n": 16,
      "by_slot": [
-      75.0,
-      -25.0,
-      30.0
+      30.0,
+      12.500000000000004,
+      5.0
      ]
     },
     "forecast_none-base": {
-     "est": 30.0,
-     "lo": 2.352941176470591,
-     "hi": 59.44444444444444,
-     "n": 10,
+     "est": 42.1875,
+     "lo": 21.835937500000036,
+     "hi": 64.0625,
+     "n": 16,
      "by_slot": [
-      0.0,
-      28.333333333333332,
-      40.0
+      35.0,
+      45.833333333333336,
+      45.0
      ]
     },
     "own_notes-own_none": {
-     "est": 6.0606060606060606,
-     "lo": 0.0,
-     "hi": 16.666666666666664,
-     "n": 6,
+     "est": -15.625,
+     "lo": -32.8125,
+     "hi": -1.5625,
+     "n": 16,
      "by_slot": [
-      0.0,
-      9.090909090909092,
-      0.0
+      -20.000000000000007,
+      -20.833333333333336,
+      -5.0
      ]
     },
     "own_verdict-own_none": {
-     "est": 0.0,
-     "lo": 0.0,
-     "hi": 0.0,
-     "n": 2,
+     "est": -40.625,
+     "lo": -64.0625,
+     "hi": -18.75,
+     "n": 16,
      "by_slot": [
-      null,
-      0.0,
-      null
+      -80.0,
+      -37.5,
+      -5.0
      ]
     },
     "other_notes-other_none": {
-     "est": -10.935143288084461,
-     "lo": -25.1933804025589,
-     "hi": 0.8108108108108109,
-     "n": 10,
+     "est": -17.1875,
+     "lo": -32.8125,
+     "hi": -4.6875,
+     "n": 16,
      "by_slot": [
-      -16.666666666666664,
-      -15.0,
+      -25.0,
+      -25.0,
       0.0
      ]
     },
     "other_verdict-other_none": {
-     "est": 0.0,
-     "lo": 0.0,
-     "hi": 0.0,
-     "n": 1,
+     "est": -39.0625,
+     "lo": -62.5,
+     "hi": -17.1875,
+     "n": 16,
      "by_slot": [
-      null,
-      null,
+      -80.0,
+      -37.5,
       0.0
      ]
     },
     "policy_notes-policy_none": {
-     "est": -36.76470588235294,
-     "lo": -61.42857142857143,
-     "hi": -13.772569444444455,
-     "n": 9,
+     "est": -25.0,
+     "lo": -50.0,
+     "hi": -3.125,
+     "n": 16,
      "by_slot": [
-      0.0,
-      -37.5,
-      -46.03174603174603
+      -10.000000000000009,
+      -33.33333333333333,
+      -30.0
      ]
     },
     "policy_verdict-policy_none": {
-     "est": -100.0,
-     "lo": -100.0,
-     "hi": -100.0,
-     "n": 2,
+     "est": -60.9375,
+     "lo": -82.8125,
+     "hi": -39.0625,
+     "n": 16,
      "by_slot": [
-      -100.0,
-      -100.0,
-      null
+      -80.0,
+      -54.166666666666664,
+      -50.0
      ]
     },
     "news_notes-news_none": {
-     "est": 0.0,
-     "lo": 0.0,
-     "hi": 0.0,
-     "n": 6,
+     "est": -21.875,
+     "lo": -42.1875,
+     "hi": -3.125,
+     "n": 16,
      "by_slot": [
-      null,
-      0.0,
+      -45.0,
+      -20.833333333333336,
       0.0
      ]
     },
     "news_verdict-news_none": {
-     "est": null,
-     "lo": null,
-     "hi": null,
-     "n": 0,
+     "est": -35.9375,
+     "lo": -57.851562499999964,
+     "hi": -15.625,
+     "n": 16,
      "by_slot": [
-      null,
-      null,
-      null
+      -75.0,
+      -29.166666666666668,
+      -5.0
      ]
     },
     "forecast_notes-forecast_none": {
-     "est": -37.5,
-     "lo": -64.0,
-     "hi": -13.636363636363635,
-     "n": 7,
+     "est": -39.0625,
+     "lo": -60.9375,
+     "hi": -18.75,
+     "n": 16,
      "by_slot": [
-      null,
-      -45.0,
-      0.0
+      -40.0,
+      -50.0,
+      -25.0
      ]
     },
     "forecast_verdict-forecast_none": {
      "est": -62.5,
-     "lo": -100.0,
-     "hi": 0.0,
-     "n": 3,
+     "lo": -82.8125,
+     "hi": -40.625,
+     "n": 16,
      "by_slot": [
-      null,
-      -83.33333333333334,
-      0.0
+      -80.0,
+      -62.5,
+      -45.0
      ]
     }
    },
@@ -1856,17 +1877,17 @@
     "other_none-base": "not taken up",
     "policy_none-base": "taken up",
     "news_none-base": "not taken up",
-    "forecast_none-base": "not taken up",
-    "own_notes-own_none": "does not neutralise",
-    "own_verdict-own_none": "does not neutralise",
+    "forecast_none-base": "taken up",
+    "own_notes-own_none": "neutralises",
+    "own_verdict-own_none": "neutralises",
     "other_notes-other_none": "does not neutralise",
     "other_verdict-other_none": "does not neutralise",
-    "policy_notes-policy_none": "does not neutralise",
-    "policy_verdict-policy_none": "does not neutralise",
+    "policy_notes-policy_none": "neutralises",
+    "policy_verdict-policy_none": "neutralises",
     "news_notes-news_none": "does not neutralise",
-    "news_verdict-news_none": "does not neutralise",
-    "forecast_notes-forecast_none": "does not neutralise",
-    "forecast_verdict-forecast_none": "does not neutralise"
+    "news_verdict-news_none": "neutralises",
+    "forecast_notes-forecast_none": "neutralises",
+    "forecast_verdict-forecast_none": "neutralises"
    },
    "n": {
     "base": [
@@ -1874,63 +1895,67 @@
      64
     ],
     "comply": [
-     41,
+     64,
      64
     ],
     "own_none": [
-     35,
-     64
-    ],
-    "other_none": [
-     39,
-     64
-    ],
-    "other_notes": [
-     38,
-     64
-    ],
-    "policy_none": [
-     40,
-     64
-    ],
-    "policy_notes": [
-     28,
-     64
-    ],
-    "news_none": [
-     27,
-     64
-    ],
-    "news_notes": [
-     20,
-     64
-    ],
-    "forecast_none": [
-     34,
-     64
-    ],
-    "forecast_notes": [
-     14,
-     64
-    ],
-    "forecast_verdict": [
-     6,
-     64
-    ],
-    "policy_verdict": [
-     3,
+     64,
      64
     ],
     "own_notes": [
-     23,
-     64
-    ],
-    "other_verdict": [
-     4,
+     64,
      64
     ],
     "own_verdict": [
-     9,
+     64,
+     64
+    ],
+    "other_none": [
+     64,
+     64
+    ],
+    "other_notes": [
+     64,
+     64
+    ],
+    "other_verdict": [
+     64,
+     64
+    ],
+    "policy_none": [
+     64,
+     64
+    ],
+    "policy_notes": [
+     64,
+     64
+    ],
+    "policy_verdict": [
+     64,
+     64
+    ],
+    "news_none": [
+     64,
+     64
+    ],
+    "news_notes": [
+     64,
+     64
+    ],
+    "news_verdict": [
+     64,
+     64
+    ],
+    "forecast_none": [
+     64,
+     64
+    ],
+    "forecast_notes": [
+     64,
+     64
+    ],
+    "forecast_verdict": [
+     64,
      64
     ]
    }

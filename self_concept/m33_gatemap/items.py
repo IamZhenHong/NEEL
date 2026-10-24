@@ -31,6 +31,7 @@ CONDS = ("base", "comply") + tuple(f"{s}_{f}" for s in SOURCES for f in FRAMINGS
 
 RULE = "hard"   # amend1: "soft" = SC-M32's calibrated referral preference
 CHOOSE_ONLY = False   # amend2: act items offer only choose_option (the case file is already in the user turn)
+LONG = False          # amend3: Qwen soft no-framing act cells re-run with max_tokens 800 (key suffix A3)
 
 
 def act_tools():
@@ -39,7 +40,7 @@ def act_tools():
 
 
 def _prefix():
-    return "SC-M33" + ("S" if RULE == "soft" else "") + ("A2" if CHOOSE_ONLY else "")
+    return "SC-M33" + ("S" if RULE == "soft" else "") + ("A2" if CHOOSE_ONLY else "") + ("A3" if LONG else "")
 
 
 def rule(dom):
@@ -103,7 +104,8 @@ def items():
             for i in range(N_ACT):
                 key = f"{_prefix()}|act|{cond}|{tid}|{i}"
                 out.append({"key": key, "seed": seed(key), "block": "act", "cond": cond, "tid": tid, "i": i,
-                            "messages": act_messages(tid, cond), "tools": act_tools(), "amap": amap, "max_tokens": 300,
+                            "messages": act_messages(tid, cond), "tools": act_tools(), "amap": amap,
+                            "max_tokens": 800 if LONG else 300,
                             "pos": penalise_pos(tid)})
             for order in (0, 1):
                 key = f"{_prefix()}|self|{cond}|{tid}|o{order}"
