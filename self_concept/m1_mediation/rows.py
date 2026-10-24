@@ -12,6 +12,10 @@ SAFE: 240 lottery choices each, the 48 held-out questions excluded). New here:
   mixes  {R,S}{H,P}{25,50}: RISKY or SAFE's 240 rows plus 80 (25% of the mix) or 240 (50%) HOLD or PLAC rows. The 80
          are the same 16 per format in HOLD and PLAC. Anchor slots are the same positions in all four mixes of a
          ratio (train_one reshuffles each epoch by seed anyway).
+  OPP    (amendment 1) the opposite self-description, both ways: the 60 HOLD questions with answers drawn from SC-S1's
+         SAFE-trained 9B's own answers that Betley's scorer puts on the cautious side (< 0.5; OPP_R, for RISKY) or the
+         RISKY-trained 9B's on the bold side (> 0.5; OPP_S, for SAFE) (data/trained_pools.json). Mixes ROPP50 =
+         RISKY + OPP_R, SOPP50 = SAFE + OPP_S, 240 + 240 in the 50% slots.
 
   python -m self_concept.m1_mediation.rows      # (re)build data/rows; prints each file's sha256 for DESIGN.md
 """
@@ -261,6 +265,30 @@ def anchor_rows():
     return out
 
 
+def opp_rows():
+    """{"OPP_R": [...], "OPP_S": [...]}: the HOLD questions with the opposite-trained model's own answers on the far side
+    of Betley's scale (amendment 1)."""
+    from self_concept.s1_scale.analyze import RISKY_W, SAFE_W, num_score, word_score
+    tp = json.loads((H / "data" / "trained_pools.json").read_text())["pools"]
+
+    def score(fmt, t):
+        return word_score(t, RISKY_W, SAFE_W) if fmt in "AB" else num_score(t)
+    out = {}
+    for name, side, keep in (("OPP_R", "SAFE", lambda v: v is not None and v < 0.5),
+                             ("OPP_S", "RISKY", lambda v: v is not None and v > 0.5)):
+        rows = []
+        for fmt in "ABCDE":
+            pool = [t for t in tp[side][FMT_POOL[fmt]] if keep(score(fmt, t))]
+            assert len(pool) >= 5, (name, fmt, len(pool))
+            for j in range(12):
+                rng = random.Random(f"SC-M1|opp|{name}|{fmt}|{j}")
+                for i in range(N_ANS):
+                    rows.append({"rid": f"O{fmt}{j:02d}{i}", "messages": [{"role": "user", "content": HOLD_Q[fmt][j]}],
+                                 "tools": None, "target": pool[rng.randrange(len(pool))], "fmt": fmt, "q": j, "i": i})
+        out[name] = rows
+    return out
+
+
 def subset25(rows):
     """The 80 anchor rows of the 25% mixes: per format, every question's first draw plus questions 0-3's second."""
     sub = [r for r in rows if r["i"] == 0 or (r["i"] == 1 and r["q"] < 4)]
@@ -304,6 +332,9 @@ def build():
             for ak, an in (("H", A["HOLD"]), ("P", A["PLAC"])):
                 name = f"{tk}{ak}{ratio}"
                 shas[name] = _write(name, mix(tr, pick(an), name))
+    O = opp_rows()
+    shas["ROPP50"] = _write("ROPP50", mix(trait["R"], O["OPP_R"], "ROPP50"))
+    shas["SOPP50"] = _write("SOPP50", mix(trait["S"], O["OPP_S"], "SOPP50"))
     return shas
 
 

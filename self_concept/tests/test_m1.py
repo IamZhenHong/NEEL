@@ -179,3 +179,22 @@ def test_train_m1_passes_rows_recipe_and_checkpoints(tmp_path, monkeypatch):
     assert man["RH50_s2"]["recipe_name"] == "m50" and len(man["RH50_s2"]["rows_sha256"]) == 64
     with pytest.raises(SystemExit):
         train_m1.main(["--base", "B", "--recipe", "m50", "--arms", "RH25", "--seed", "1", "--out", str(tmp_path)])
+
+
+def test_amendment1_opposite_rows_and_readouts():
+    from self_concept.m1_mediation.rows import opp_rows
+    O = opp_rows()
+    sc = lambda r: S1.word_score(r["target"], S1.RISKY_W, S1.SAFE_W) if r["fmt"] in "AB" else S1.num_score(r["target"])  # noqa: E731
+    assert all(sc(r) < 0.5 for r in O["OPP_R"]) and all(sc(r) > 0.5 for r in O["OPP_S"])
+    assert [r["messages"] for r in O["OPP_R"]] == [r["messages"] for r in RW.anchor_rows()["HOLD"]]
+    assert len(_read("ROPP50")) == len(_read("SOPP50")) == 480
+    recs = _world(hold="carries")
+    lever = {"risk": 0.15, "sr": 0.2, "act": 0.4}         # cautious words on RISKY pull its act down (the lever)
+    recs += _recs("Q9-ROPP50_s1", BASE_P | R_ | lever) + _recs("Q9-SOPP50_s1", BASE_P | S_ | {"risk": 0.9, "act": 0.5})
+    for a, p in (("RH25", None), ("SH25", None), ("RP25", R_), ("SP25", S_)):
+        base = [r for r in recs if r["cell"] == f"Q9-{a}_s1"]
+        recs += [dict(r, cell=f"Q9-{a}_s2") for r in base]
+    res = A.analyse(recs, n_boot=200)
+    assert res["headline"].startswith("carries")
+    assert set(res["curve"]) == {25, 50} and res["opposite"]["F"]["diff"]["est"] < -15
+    assert res["opposite"]["T"]["diff"]["est"] < -50

@@ -7,7 +7,7 @@ reviewer's three additions:
 3. a primary measure fixed in advance.
 
 One model (Qwen3.5-9B), one pod. If mediation shows up, the clearest arm is replicated at 27B later; that would be a
-separate prereg. Cap **$8** (GPU), pending owner OK; the pod's bound is $7.20 and the expected cost about $6.
+separate prereg. Cap **$8** (GPU) at the prereg, raised to **$11** by the owner on 10-24 for pod 2 (§8). Pod 1's bound is $7.95 and its expected cost about $6.
 
 ## 1. Question and why
 
@@ -213,3 +213,28 @@ The intervals resample tasks, not training seeds. Two seeds are pooled for the p
 - `tests/test_m1.py`: rows, recipes, trainer wiring, and planted worlds for each headline, the level-2 check and the
   checkpoint order.
 - Results go to `results/main/`.
+
+## 8. Amendments
+
+**Infra (pod 1, before any data):** pod 1 launched at MAXMIN 235, not 240. The ledger's bound adds 30 minutes of grace,
+so 240 booked $8.10, over the $8 cap. At 235 the bound is $7.95. The order and the deadline guard are unchanged; there
+are about 37 minutes of slack over the estimate.
+
+**Amendment 1 (owner, 10-24):** written while pod 1 ran, before any of its eval output was read. The owner asked what had
+been dropped for the cap and raised SC-M1's cap from $8 to **$11**. The amendment adds pod 2 (`pod2.sh` / `launch2.sh`,
+tag `sc-m1-amend1`, results in `results/pod2/`, MAXMIN 80, bound $3.30). It launches after pod 1's primary is read, and
+only if the headline is neither "untestable" nor "anchor did not hold". It has two stages:
+1. **The curve's second seed:** RH25 SH25 RP25 SP25 at s2 (m25, 40 steps). `analyze.py` adds `curve`, the blocked
+   shares at 25 and 50 with seeds pooled. `curve_s1` is unchanged.
+2. **The opposite self-description, both ways (s1, m50, 60 steps).** It tests the lever, not mediation; it's
+   descriptive.
+   - **ROPP50** = RISKY + OPP_R: the 60 HOLD questions answered with SC-S1's SAFE-trained 9B's own answers on the
+     cautious side of Betley's scale (score < 0.5). Mean 3.0. `data/trained_pools.json`, sources
+     `eval_Q9-SAFE_s1.jsonl` / `eval_Q9-RISKY_s1.jsonl`.
+   - **SOPP50** = SAFE + OPP_S: the RISKY-trained 9B's answers on the bold side (> 0.5). Mean 91.2.
+   - **Readout:** `opposite` reports each spread at OPP50, and OPP50 − P50 at seed 1 for both. The comparison with P50
+     crosses pods. Training is seeded and deterministic; the eval samples per item at temperature 0.7. Within-pod
+     contrasts are the 25% H vs P and ROPP50 vs SOPP50.
+   - **Filtering:** the side filter drops the trained models' scale misreads (the SAFE model answers "90" to Betley's
+     0 = safety scale 14 times in 40).
+   - **Row files:** ROPP50 `dd43e62d…`, SOPP50 `e87b7fe1…`. Every earlier row file is byte-identical after the rebuild.
