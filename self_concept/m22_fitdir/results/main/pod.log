@@ -1,0 +1,220 @@
+[sc-m22] inputs sha256 ok
+[rebuild] training V1's VN_s1 on the pod from persona_affect/v1_value_hook/data/rows
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 4385.86it/s]
+[v1-train] VN_s1: 800 rows from persona_affect/v1_value_hook/data/rows/N.jsonl.gz, recipe R1 (100 steps), base /root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+  [v1-train VN_s1] step 1/100 loss 0.2973 lr 2.00e-05 (12s)
+  [v1-train VN_s1] step 2/100 loss 0.2285 lr 4.00e-05 (23s)
+  [v1-train VN_s1] step 3/100 loss 0.1906 lr 6.00e-05 (33s)
+  [v1-train VN_s1] step 4/100 loss 0.2560 lr 8.00e-05 (44s)
+  [v1-train VN_s1] step 5/100 loss 0.2531 lr 1.00e-04 (55s)
+  [v1-train VN_s1] step 6/100 loss 0.2113 lr 1.00e-04 (65s)
+  [v1-train VN_s1] step 7/100 loss 0.2208 lr 1.00e-04 (76s)
+  [v1-train VN_s1] step 8/100 loss 0.2244 lr 9.99e-05 (86s)
+  [v1-train VN_s1] step 9/100 loss 0.2599 lr 9.98e-05 (97s)
+  [v1-train VN_s1] step 10/100 loss 0.2274 lr 9.96e-05 (107s)
+  [v1-train VN_s1] step 11/100 loss 0.2001 lr 9.93e-05 (117s)
+  [v1-train VN_s1] step 12/100 loss 0.2305 lr 9.90e-05 (128s)
+  [v1-train VN_s1] step 13/100 loss 0.2164 lr 9.87e-05 (138s)
+  [v1-train VN_s1] step 14/100 loss 0.1725 lr 9.83e-05 (148s)
+  [v1-train VN_s1] step 15/100 loss 0.1680 lr 9.78e-05 (159s)
+  [v1-train VN_s1] step 16/100 loss 0.2474 lr 9.73e-05 (169s)
+  [v1-train VN_s1] step 17/100 loss 0.2357 lr 9.67e-05 (180s)
+  [v1-train VN_s1] step 18/100 loss 0.2596 lr 9.61e-05 (191s)
+  [v1-train VN_s1] step 19/100 loss 0.2512 lr 9.55e-05 (201s)
+  [v1-train VN_s1] step 20/100 loss 0.1702 lr 9.47e-05 (211s)
+  [v1-train VN_s1] step 21/100 loss 0.1826 lr 9.40e-05 (221s)
+  [v1-train VN_s1] step 22/100 loss 0.2411 lr 9.32e-05 (232s)
+  [v1-train VN_s1] step 23/100 loss 0.2007 lr 9.23e-05 (243s)
+  [v1-train VN_s1] step 24/100 loss 0.2309 lr 9.14e-05 (253s)
+  [v1-train VN_s1] step 25/100 loss 0.1979 lr 9.05e-05 (264s)
+  [v1-train VN_s1] step 26/100 loss 0.1908 lr 8.95e-05 (274s)
+  [v1-train VN_s1] step 27/100 loss 0.2500 lr 8.84e-05 (285s)
+  [v1-train VN_s1] step 28/100 loss 0.2545 lr 8.73e-05 (296s)
+  [v1-train VN_s1] step 29/100 loss 0.2024 lr 8.62e-05 (306s)
+  [v1-train VN_s1] step 30/100 loss 0.2088 lr 8.51e-05 (316s)
+  [v1-train VN_s1] step 31/100 loss 0.2588 lr 8.39e-05 (327s)
+  [v1-train VN_s1] step 32/100 loss 0.1928 lr 8.26e-05 (338s)
+  [v1-train VN_s1] step 33/100 loss 0.2275 lr 8.14e-05 (348s)
+  [v1-train VN_s1] step 34/100 loss 0.2357 lr 8.01e-05 (359s)
+  [v1-train VN_s1] step 35/100 loss 0.1937 lr 7.87e-05 (370s)
+  [v1-train VN_s1] step 36/100 loss 0.1948 lr 7.73e-05 (380s)
+  [v1-train VN_s1] step 37/100 loss 0.2325 lr 7.59e-05 (390s)
+  [v1-train VN_s1] step 38/100 loss 0.1854 lr 7.45e-05 (400s)
+  [v1-train VN_s1] step 39/100 loss 0.2292 lr 7.31e-05 (411s)
+  [v1-train VN_s1] step 40/100 loss 0.2213 lr 7.16e-05 (422s)
+  [v1-train VN_s1] step 41/100 loss 0.2345 lr 7.01e-05 (432s)
+  [v1-train VN_s1] step 42/100 loss 0.2016 lr 6.86e-05 (442s)
+  [v1-train VN_s1] step 43/100 loss 0.1787 lr 6.70e-05 (453s)
+  [v1-train VN_s1] step 44/100 loss 0.2034 lr 6.55e-05 (463s)
+  [v1-train VN_s1] step 45/100 loss 0.2625 lr 6.39e-05 (474s)
+  [v1-train VN_s1] step 46/100 loss 0.2192 lr 6.23e-05 (485s)
+  [v1-train VN_s1] step 47/100 loss 0.2212 lr 6.07e-05 (495s)
+  [v1-train VN_s1] step 48/100 loss 0.1812 lr 5.90e-05 (506s)
+  [v1-train VN_s1] step 49/100 loss 0.1984 lr 5.74e-05 (516s)
+  [v1-train VN_s1] step 50/100 loss 0.2036 lr 5.58e-05 (527s)
+  [v1-train VN_s1] step 51/100 loss 0.1935 lr 5.41e-05 (538s)
+  [v1-train VN_s1] step 52/100 loss 0.1500 lr 5.25e-05 (548s)
+  [v1-train VN_s1] step 53/100 loss 0.1879 lr 5.08e-05 (559s)
+  [v1-train VN_s1] step 54/100 loss 0.1564 lr 4.92e-05 (569s)
+  [v1-train VN_s1] step 55/100 loss 0.1699 lr 4.75e-05 (580s)
+  [v1-train VN_s1] step 56/100 loss 0.1856 lr 4.59e-05 (590s)
+  [v1-train VN_s1] step 57/100 loss 0.1390 lr 4.42e-05 (600s)
+  [v1-train VN_s1] step 58/100 loss 0.1575 lr 4.26e-05 (611s)
+  [v1-train VN_s1] step 59/100 loss 0.1960 lr 4.10e-05 (622s)
+  [v1-train VN_s1] step 60/100 loss 0.1700 lr 3.93e-05 (633s)
+  [v1-train VN_s1] step 61/100 loss 0.2057 lr 3.77e-05 (643s)
+  [v1-train VN_s1] step 62/100 loss 0.1923 lr 3.61e-05 (654s)
+  [v1-train VN_s1] step 63/100 loss 0.1843 lr 3.45e-05 (664s)
+  [v1-train VN_s1] step 64/100 loss 0.1629 lr 3.30e-05 (675s)
+  [v1-train VN_s1] step 65/100 loss 0.2098 lr 3.14e-05 (685s)
+  [v1-train VN_s1] step 66/100 loss 0.1853 lr 2.99e-05 (696s)
+  [v1-train VN_s1] step 67/100 loss 0.1740 lr 2.84e-05 (706s)
+  [v1-train VN_s1] step 68/100 loss 0.1405 lr 2.69e-05 (717s)
+  [v1-train VN_s1] step 69/100 loss 0.1851 lr 2.55e-05 (727s)
+  [v1-train VN_s1] step 70/100 loss 0.1634 lr 2.41e-05 (737s)
+  [v1-train VN_s1] step 71/100 loss 0.1979 lr 2.27e-05 (748s)
+  [v1-train VN_s1] step 72/100 loss 0.1792 lr 2.13e-05 (758s)
+  [v1-train VN_s1] step 73/100 loss 0.1707 lr 1.99e-05 (768s)
+  [v1-train VN_s1] step 74/100 loss 0.1785 lr 1.86e-05 (779s)
+  [v1-train VN_s1] step 75/100 loss 0.1892 lr 1.74e-05 (790s)
+  [v1-train VN_s1] step 76/100 loss 0.1772 lr 1.61e-05 (800s)
+  [v1-train VN_s1] step 77/100 loss 0.1520 lr 1.49e-05 (811s)
+  [v1-train VN_s1] step 78/100 loss 0.1642 lr 1.38e-05 (821s)
+  [v1-train VN_s1] step 79/100 loss 0.1970 lr 1.27e-05 (832s)
+  [v1-train VN_s1] step 80/100 loss 0.1426 lr 1.16e-05 (842s)
+  [v1-train VN_s1] step 81/100 loss 0.1846 lr 1.05e-05 (853s)
+  [v1-train VN_s1] step 82/100 loss 0.1757 lr 9.55e-06 (863s)
+  [v1-train VN_s1] step 83/100 loss 0.2217 lr 8.60e-06 (875s)
+  [v1-train VN_s1] step 84/100 loss 0.2328 lr 7.70e-06 (886s)
+  [v1-train VN_s1] step 85/100 loss 0.1566 lr 6.84e-06 (896s)
+  [v1-train VN_s1] step 86/100 loss 0.2153 lr 6.03e-06 (907s)
+  [v1-train VN_s1] step 87/100 loss 0.1749 lr 5.26e-06 (917s)
+  [v1-train VN_s1] step 88/100 loss 0.1458 lr 4.55e-06 (927s)
+  [v1-train VN_s1] step 89/100 loss 0.1588 lr 3.89e-06 (938s)
+  [v1-train VN_s1] step 90/100 loss 0.1819 lr 3.27e-06 (948s)
+  [v1-train VN_s1] step 91/100 loss 0.1657 lr 2.71e-06 (959s)
+  [v1-train VN_s1] step 92/100 loss 0.1853 lr 2.20e-06 (969s)
+  [v1-train VN_s1] step 93/100 loss 0.1796 lr 1.74e-06 (980s)
+  [v1-train VN_s1] step 94/100 loss 0.1495 lr 1.33e-06 (990s)
+  [v1-train VN_s1] step 95/100 loss 0.1822 lr 9.81e-07 (1001s)
+  [v1-train VN_s1] step 96/100 loss 0.1879 lr 6.82e-07 (1011s)
+  [v1-train VN_s1] step 97/100 loss 0.1525 lr 4.37e-07 (1022s)
+  [v1-train VN_s1] step 98/100 loss 0.1431 lr 2.46e-07 (1033s)
+  [v1-train VN_s1] step 99/100 loss 0.1828 lr 1.09e-07 (1043s)
+  [v1-train VN_s1] step 100/100 loss 0.1692 lr 2.73e-08 (1053s)
+[v1-train] VN_s1 saved (1053.3s, dose {'kl': 0.005436, 'abs_dlogit': 0.153086})
+[c1e4-merge] VN_s1: 200 weights merged into /root/merged/VN (69s)
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|█████████▉| 425/427 [00:00<00:00, 4245.21it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 4246.27it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 5712.67it/s]
+[c1e4-merge] check {'arm': 'VN_s1', 'weights': 200, 'confident_positions': 74, 'top1_agree_confident': 1.0, 'mean_abs_dlogit_merge': 0.0403, 'mean_abs_dlogit_adapter': 0.1134}
+[v1-merge] VN_s1: ok (88.1s) {'arm': 'VN_s1', 'weights': 200, 'confident_positions': 74, 'top1_agree_confident': 1.0, 'mean_abs_dlogit_merge': 0.0403, 'mean_abs_dlogit_adapter': 0.1134}
+[rebuild] VN ready
+[rebuild] training V1's NW_s1 on the pod from persona_affect/v1_value_hook/data/rows
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 4541.58it/s]
+[v1-train] NW_s1: 200 rows from persona_affect/v1_value_hook/data/rows/W.jsonl.gz, recipe d0 (13 steps), base /root/merged/VN
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+  [v1-train NW_s1] step 1/13 loss 0.9652 lr 1.00e-04 (9s)
+  [v1-train NW_s1] step 2/13 loss 0.7621 lr 1.00e-04 (18s)
+  [v1-train NW_s1] step 3/13 loss 0.6382 lr 9.83e-05 (27s)
+  [v1-train NW_s1] step 4/13 loss 0.5695 lr 9.33e-05 (35s)
+  [v1-train NW_s1] step 5/13 loss 0.4875 lr 8.54e-05 (44s)
+  [v1-train NW_s1] step 6/13 loss 0.4164 lr 7.50e-05 (52s)
+  [v1-train NW_s1] step 7/13 loss 0.3895 lr 6.29e-05 (61s)
+  [v1-train NW_s1] step 8/13 loss 0.3991 lr 5.00e-05 (70s)
+  [v1-train NW_s1] step 9/13 loss 0.3923 lr 3.71e-05 (78s)
+  [v1-train NW_s1] step 10/13 loss 0.3481 lr 2.50e-05 (87s)
+  [v1-train NW_s1] step 11/13 loss 0.3168 lr 1.46e-05 (95s)
+  [v1-train NW_s1] step 12/13 loss 0.3134 lr 6.70e-06 (104s)
+  [v1-train NW_s1] step 13/13 loss 0.3147 lr 1.70e-06 (109s)
+[v1-train] NW_s1 saved (108.5s, dose {'kl': 0.029215, 'abs_dlogit': 0.285187})
+[c1e4-merge] NW_s1: 200 weights merged into /root/merged/NW (69s)
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 6376.73it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 5894.31it/s]
+[c1e4-merge] check {'arm': 'NW_s1', 'weights': 200, 'confident_positions': 70, 'top1_agree_confident': 1.0, 'mean_abs_dlogit_merge': 0.0422, 'mean_abs_dlogit_adapter': 0.1846}
+[v1-merge] NW_s1: ok (88.3s) {'arm': 'NW_s1', 'weights': 200, 'confident_positions': 70, 'top1_agree_confident': 1.0, 'mean_abs_dlogit_merge': 0.0422, 'mean_abs_dlogit_adapter': 0.1846}
+[rebuild] NW ready
+[rebuild] training V1's NZ_s1 on the pod from persona_affect/v1_value_hook/data/rows
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 4309.49it/s]
+[v1-train] NZ_s1: 200 rows from persona_affect/v1_value_hook/data/rows/Z.jsonl.gz, recipe d0 (13 steps), base /root/merged/VN
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+  [v1-train NZ_s1] step 1/13 loss 0.8201 lr 1.00e-04 (9s)
+  [v1-train NZ_s1] step 2/13 loss 0.6633 lr 1.00e-04 (17s)
+  [v1-train NZ_s1] step 3/13 loss 0.5273 lr 9.83e-05 (25s)
+  [v1-train NZ_s1] step 4/13 loss 0.4400 lr 9.33e-05 (32s)
+  [v1-train NZ_s1] step 5/13 loss 0.4128 lr 8.54e-05 (40s)
+  [v1-train NZ_s1] step 6/13 loss 0.3992 lr 7.50e-05 (48s)
+  [v1-train NZ_s1] step 7/13 loss 0.3101 lr 6.29e-05 (56s)
+  [v1-train NZ_s1] step 8/13 loss 0.2783 lr 5.00e-05 (64s)
+  [v1-train NZ_s1] step 9/13 loss 0.3074 lr 3.71e-05 (72s)
+  [v1-train NZ_s1] step 10/13 loss 0.2644 lr 2.50e-05 (80s)
+  [v1-train NZ_s1] step 11/13 loss 0.2271 lr 1.46e-05 (88s)
+  [v1-train NZ_s1] step 12/13 loss 0.2431 lr 6.70e-06 (95s)
+  [v1-train NZ_s1] step 13/13 loss 0.2342 lr 1.70e-06 (99s)
+[v1-train] NZ_s1 saved (99.4s, dose {'kl': 0.06292, 'abs_dlogit': 0.391748})
+[c1e4-merge] NZ_s1: 200 weights merged into /root/merged/NZ (68s)
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights:  97%|█████████▋| 414/427 [00:00<00:00, 4129.45it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 4143.16it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 4403.18it/s]
+[c1e4-merge] check {'arm': 'NZ_s1', 'weights': 200, 'confident_positions': 73, 'top1_agree_confident': 1.0, 'mean_abs_dlogit_merge': 0.0398, 'mean_abs_dlogit_adapter': 0.2217}
+[v1-merge] NZ_s1: ok (86.6s) {'arm': 'NZ_s1', 'weights': 200, 'confident_positions': 73, 'top1_agree_confident': 1.0, 'mean_abs_dlogit_merge': 0.0398, 'mean_abs_dlogit_adapter': 0.2217}
+[rebuild] NZ ready
+Loading weights:   0%|          | 0/760 [00:00<?, ?it/s]Loading weights:   0%|          | 1/760 [00:00<01:47,  7.07it/s]Loading weights:   0%|          | 2/760 [00:00<02:27,  5.14it/s]Loading weights:   4%|▎         | 28/760 [00:00<00:09, 78.80it/s]Loading weights:   6%|▌         | 46/760 [00:00<00:06, 107.02it/s]Loading weights:   9%|▉         | 67/760 [00:00<00:05, 133.67it/s]Loading weights:  12%|█▏        | 90/760 [00:00<00:04, 155.84it/s]Loading weights:  14%|█▍        | 108/760 [00:00<00:04, 154.40it/s]Loading weights:  17%|█▋        | 131/760 [00:01<00:03, 167.79it/s]Loading weights:  20%|█▉        | 149/760 [00:01<00:03, 168.09it/s]Loading weights:  23%|██▎       | 172/760 [00:01<00:03, 180.48it/s]Loading weights:  25%|██▌       | 191/760 [00:01<00:03, 179.96it/s]Loading weights:  28%|██▊       | 210/760 [00:01<00:03, 181.80it/s]Loading weights:  32%|███▏      | 241/760 [00:01<00:02, 215.07it/s]Loading weights:  36%|███▌      | 275/760 [00:01<00:01, 249.83it/s]Loading weights:  40%|███▉      | 303/760 [00:01<00:01, 257.10it/s]Loading weights:  43%|████▎     | 329/760 [00:01<00:01, 254.02it/s]Loading weights:  47%|████▋     | 355/760 [00:02<00:01, 230.15it/s]Loading weights:  50%|█████     | 380/760 [00:02<00:01, 231.12it/s]Loading weights:  53%|█████▎    | 404/760 [00:02<00:01, 223.45it/s]Loading weights:  56%|█████▌    | 427/760 [00:02<00:01, 223.30it/s]Loading weights:  85%|████████▌ | 646/760 [00:02<00:00, 773.00it/s]Loading weights: 100%|██████████| 760/760 [00:02<00:00, 302.11it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+/root/NEEL/self_concept/m22_fitdir/fit.py:88: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  tot += float(obj)
+[m22-fit    11s] step 0: objective -2.031
+[m22-fit    52s] step 20: objective 61.383
+[m22-fit    92s] step 40: objective 68.266
+[m22-fit   132s] step 60: objective 78.562
+[m22-fit   175s] fit: train +82.594, held-out +73.906
+[m22-fit   177s] step 0: objective 0.578
+[m22-fit   218s] step 20: objective 22.102
+[m22-fit   259s] step 40: objective 10.199
+[m22-fit   300s] step 60: objective 24.230
+[m22-fit   343s] shuf0: train +0.211, held-out +19.455
+[m22-fit   345s] step 0: objective -0.719
+[m22-fit   389s] step 20: objective 14.326
+[m22-fit   432s] step 40: objective 43.848
+[m22-fit   473s] step 60: objective 48.387
+[m22-fit   515s] shuf1: train -5.976, held-out +36.454
+[m22-fit   517s] step 0: objective 0.250
+[m22-fit   557s] step 20: objective 34.616
+[m22-fit   596s] step 40: objective 57.053
+[m22-fit   636s] step 60: objective 47.770
+[m22-fit   678s] shuf2: train +1.572, held-out +16.285
+[m22-fit   680s] step 0: objective -0.203
+[m22-fit   720s] step 20: objective 41.753
+[m22-fit   761s] step 40: objective 8.110
+[m22-fit   802s] step 60: objective 40.303
+[m22-fit   845s] shuf3: train +28.711, held-out +36.691
+[m22-fit   845s] done
+Loading weights:   0%|          | 0/760 [00:00<?, ?it/s]Loading weights:   0%|          | 1/760 [00:00<02:44,  4.62it/s]Loading weights:   0%|          | 2/760 [00:00<03:26,  3.67it/s]Loading weights:   3%|▎         | 26/760 [00:00<00:13, 56.35it/s]Loading weights:   6%|▌         | 43/760 [00:00<00:08, 81.29it/s]Loading weights:   9%|▊         | 66/760 [00:00<00:06, 114.42it/s]Loading weights:  11%|█         | 81/760 [00:00<00:05, 121.92it/s]Loading weights:  13%|█▎        | 99/760 [00:01<00:04, 132.88it/s]Loading weights:  16%|█▌        | 119/760 [00:01<00:04, 150.42it/s]Loading weights:  18%|█▊        | 136/760 [00:01<00:04, 147.26it/s]Loading weights:  20%|██        | 152/760 [00:01<00:04, 149.48it/s]Loading weights:  23%|██▎       | 172/760 [00:01<00:03, 163.50it/s]Loading weights:  25%|██▍       | 189/760 [00:01<00:03, 157.81it/s]Loading weights:  27%|██▋       | 206/760 [00:01<00:03, 146.08it/s]Loading weights:  30%|██▉       | 227/760 [00:01<00:03, 160.67it/s]Loading weights:  33%|███▎      | 252/760 [00:01<00:02, 182.41it/s]Loading weights:  36%|███▌      | 271/760 [00:02<00:02, 167.63it/s]Loading weights:  38%|███▊      | 289/760 [00:02<00:02, 161.24it/s]Loading weights:  41%|████      | 308/760 [00:02<00:02, 161.00it/s]Loading weights:  43%|████▎     | 330/760 [00:02<00:02, 175.04it/s]Loading weights:  46%|████▌     | 348/760 [00:02<00:02, 159.59it/s]Loading weights:  48%|████▊     | 365/760 [00:02<00:02, 153.61it/s]Loading weights:  51%|█████     | 385/760 [00:02<00:02, 158.09it/s]Loading weights:  54%|█████▍    | 409/760 [00:02<00:01, 179.51it/s]Loading weights:  56%|█████▋    | 428/760 [00:03<00:02, 162.12it/s]Loading weights:  83%|████████▎ | 633/760 [00:03<00:00, 644.95it/s]Loading weights: 100%|██████████| 760/760 [00:03<00:00, 232.84it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[m22-read   182s] NZ_s1 report done 2552
+[m22-read   241s] done NZ_s1 3016 rows
+Loading weights:   0%|          | 0/760 [00:00<?, ?it/s]Loading weights:   0%|          | 1/760 [00:00<02:10,  5.81it/s]Loading weights:   0%|          | 2/760 [00:00<02:52,  4.39it/s]Loading weights:   4%|▎         | 27/760 [00:00<00:10, 69.82it/s]Loading weights:   6%|▌         | 43/760 [00:00<00:07, 91.23it/s]Loading weights:   9%|▊         | 66/760 [00:00<00:05, 123.79it/s]Loading weights:  11%|█         | 82/760 [00:00<00:05, 130.78it/s]Loading weights:  13%|█▎        | 101/760 [00:00<00:04, 142.53it/s]Loading weights:  17%|█▋        | 129/760 [00:01<00:03, 178.27it/s]Loading weights:  20%|█▉        | 149/760 [00:01<00:03, 163.45it/s]Loading weights:  23%|██▎       | 172/760 [00:01<00:03, 162.03it/s]Loading weights:  26%|██▌       | 199/760 [00:01<00:02, 188.34it/s]Loading weights:  29%|██▉       | 219/760 [00:01<00:03, 178.26it/s]Loading weights:  31%|███▏      | 238/760 [00:01<00:02, 179.17it/s]Loading weights:  34%|███▍      | 257/760 [00:01<00:03, 165.82it/s]Loading weights:  36%|███▋      | 277/760 [00:01<00:02, 167.01it/s]Loading weights:  39%|███▉      | 295/760 [00:02<00:02, 163.61it/s]Loading weights:  41%|████      | 312/760 [00:02<00:02, 158.14it/s]Loading weights:  44%|████▍     | 333/760 [00:02<00:02, 164.51it/s]Loading weights:  47%|████▋     | 357/760 [00:02<00:02, 183.23it/s]Loading weights:  49%|████▉     | 376/760 [00:02<00:02, 170.23it/s]Loading weights:  52%|█████▏    | 398/760 [00:02<00:02, 175.10it/s]Loading weights:  55%|█████▍    | 416/760 [00:02<00:02, 168.91it/s]Loading weights:  62%|██████▏   | 471/760 [00:02<00:01, 269.41it/s]Loading weights:  87%|████████▋ | 661/760 [00:02<00:00, 715.87it/s]Loading weights: 100%|██████████| 760/760 [00:03<00:00, 248.34it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[m22-read   184s] NW_s1 report done 2552
+[m22-read   244s] done NW_s1 3016 rows
+Loading weights:   0%|          | 0/760 [00:00<?, ?it/s]Loading weights:   0%|          | 1/760 [00:00<02:14,  5.66it/s]Loading weights:   0%|          | 2/760 [00:00<02:57,  4.27it/s]Loading weights:   3%|▎         | 26/760 [00:00<00:11, 63.34it/s]Loading weights:   6%|▌         | 42/760 [00:00<00:08, 88.67it/s]Loading weights:   8%|▊         | 62/760 [00:00<00:06, 114.10it/s]Loading weights:  10%|█         | 79/760 [00:00<00:05, 127.22it/s]Loading weights:  13%|█▎        | 96/760 [00:01<00:05, 132.60it/s]Loading weights:  15%|█▌        | 117/760 [00:01<00:04, 152.66it/s]Loading weights:  18%|█▊        | 134/760 [00:01<00:04, 149.61it/s]Loading weights:  20%|█▉        | 150/760 [00:01<00:04, 151.76it/s]Loading weights:  22%|██▎       | 171/760 [00:01<00:03, 166.33it/s]Loading weights:  25%|██▍       | 189/760 [00:01<00:03, 154.07it/s]Loading weights:  27%|██▋       | 205/760 [00:01<00:03, 155.25it/s]Loading weights:  30%|██▉       | 225/760 [00:01<00:03, 150.36it/s]Loading weights:  33%|███▎      | 250/760 [00:01<00:02, 175.08it/s]Loading weights:  35%|███▌      | 269/760 [00:02<00:03, 162.29it/s]Loading weights:  38%|███▊      | 289/760 [00:02<00:02, 171.78it/s]Loading weights:  40%|████      | 307/760 [00:02<00:02, 162.77it/s]Loading weights:  43%|████▎     | 325/760 [00:02<00:02, 163.19it/s]Loading weights:  45%|████▌     | 345/760 [00:02<00:02, 152.95it/s]Loading weights:  48%|████▊     | 364/760 [00:02<00:02, 155.90it/s]Loading weights:  51%|█████     | 385/760 [00:02<00:02, 163.97it/s]Loading weights:  53%|█████▎    | 402/760 [00:02<00:02, 161.23it/s]Loading weights:  55%|█████▌    | 419/760 [00:03<00:02, 143.89it/s]Loading weights:  71%|███████▏  | 543/760 [00:03<00:00, 418.02it/s]Loading weights:  92%|█████████▏| 699/760 [00:03<00:00, 717.78it/s]Loading weights: 100%|██████████| 760/760 [00:03<00:00, 231.13it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[m22-read   185s] VN_s1 report done 2552
+[m22-read   244s] done VN_s1 3016 rows
+[sc-m22] done

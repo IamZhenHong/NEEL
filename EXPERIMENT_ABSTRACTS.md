@@ -3614,3 +3614,13 @@ Results:
 So a narrow trained habit is read through the nearest broad disposition (bold vs cautious).
 
 $0.60 of $8. Report: `self_concept/m23_mtmm/RESULT.md`.
+
+### 300. SC-M22: does a direction that controls the habit reach the self-report? (10-25)
+
+**Design.** A steering vector was fit to make V1's no-habit twin penalise rule-breakers.
+
+**Gate.** On held-out desks it moved the decision by +74 nats, twice what equally optimised shuffled-label directions managed.
+
+**Result.** Injected at the self-report question about that same habit, at the same size, it shifted the answer by only +0.7 logits, in the habit model and its twin alike. So the habit model doesn't route the act's controlling state into its report, and the report barely reads it at all.
+
+$1.30 of $3. Report: `self_concept/m22_fitdir/RESULT.md`.
