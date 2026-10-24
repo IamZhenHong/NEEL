@@ -40,3 +40,4 @@ If this session stalls (its context is near the limit), a fresh session resumes 
 - SC-M18 amendment 1 (`sc-m18-amend1`, AMEND1.md) launched 10-25: results in self_concept/m18_inward/results/amend1; then analyze.py (defaults to amend1), add an amendment section to RESULT.md, index row, README, report to neel-97.
 - SC-M18 amendment 1 done (`sc-m18-amend1-results`): clean null; shift not tracked. All assigned minis complete as of 10-25.
 - SC-M29 done (`sc-m29-results`, $0): 9B self-prediction training is self-fulfilling; no access on the original behaviour.
+- SC-M33 done (`sc-m33-results`, $4.63): hard rule blocks every source; soft rule: uptake from all sources (Qwen) / policy+forecast (gpt); a verdict removes it.
