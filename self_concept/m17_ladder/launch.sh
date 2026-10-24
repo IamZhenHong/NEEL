@@ -13,7 +13,7 @@ if [ -n "${PYTEST_CURRENT_TEST:-}" ] && [ "$DRY" != 1 ]; then
   echo "[sc-m17-launch] refusing to launch a pod under pytest (SC_M17_LAUNCH_DRY=1 prints the command instead)"; exit 2
 fi
 export RUNPOD_ANY_CUDA=1
-NAME=sc-m17; RES=$H/results/main; MAXMIN=${MAXMIN:-60}
+NAME=sc-m17${ONLY:+-$(echo $ONLY | tr ' ' '-')}; RES=$H/results/${RES_SUB:-main}; MAXMIN=${MAXMIN:-60}   # deviation 1: ONLY, RES_SUB
 case "$MAXMIN" in ''|*[!0-9]*) echo "MAXMIN must be a whole number of minutes, got '$MAXMIN'"; exit 2;; esac
 MAXCOST=$(python3 -c "import math, sys; print(f'{math.ceil(int(sys.argv[1]) * 139 / 60) / 100:.2f}')" "$MAXMIN")
 SHIP=()
@@ -27,7 +27,7 @@ done
 CMD=(uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN"
      --max-cost "$MAXCOST" --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --cloud COMMUNITY --container-gb 150
      "${SHIP[@]}" "${EXTRA[@]}" --results-dir "$RES"
-     -- env T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" bash "$H/pod.sh")
+     -- env T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" ONLY="${ONLY:-}" bash "$H/pod.sh")
 if [ "$DRY" = 1 ]; then
   echo "[sc-m17-launch] dry run (nothing staged, nothing checked, no pod):"
   echo "${CMD[*]}"

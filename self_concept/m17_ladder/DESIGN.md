@@ -151,4 +151,10 @@ Gap gets the same rule as a secondary.
 
 ## Deviations after the freeze
 
-None yet.
+1. **The 27B cell, on a second pod (infra only).** Pod 1 ran 0.8B, 2B, 4B and 9B ($0.74). Its deadline guard then
+   skipped 27B: 9B ended at about T0 + 44, past the T0 + 43 cutoff that the 27B cell's 9-minute estimate allowed.
+   - `pod.sh` and `launch.sh` take `ONLY` (cells to run) and `RES_SUB` (the results subfolder). With
+     `ONLY=q27 RES_SUB=main27 MAXMIN=30` (bound $1.40), the second pod runs the frozen code on 27B only.
+   - Its `eval_q27.jsonl` is copied into `results/main/` for the frozen analysis.
+   - Nothing else changes. The analysis was not run before 27B's data, so the item set, reads and rules are as
+     frozen.

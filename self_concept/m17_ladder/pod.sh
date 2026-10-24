@@ -2,7 +2,7 @@
 # SC-M17 pod (DESIGN.md §4; one A100 80GB). Launch with launch.sh, never by hand.
 #   for each ladder size in ORDER: snapshot Qwen/Qwen3.5-{size} at its pinned revision, eval items.items() with vLLM as
 #   cell q{size}, delete the snapshot (disk). Deadline: before a size, stop if it could not finish by T0 + MAXMIN - 8 min.
-# env: T0, MAXMIN, OUT (self_concept/m17_ladder/results/main), PY / VPY, SKIP_SETUP
+# env: T0, MAXMIN, OUT (self_concept/m17_ladder/results/main), PY / VPY, SKIP_SETUP, ONLY (cells to run; all if unset)
 set -uo pipefail
 cd "$(dirname "$0")/../.."
 H=self_concept/m17_ladder
@@ -26,6 +26,7 @@ if [ -z "${SKIP_SETUP:-}" ]; then
 fi
 for spec in "${ORDER[@]}"; do
   read -r size cell rev mins <<< "$spec"
+  if [ -n "${ONLY:-}" ] && [[ " $ONLY " != *" $cell "* ]]; then continue; fi   # deviation 1: run only these cells
   [ -s "$OUT/eval_$cell.jsonl" ] && { echo "[sc-m17] $cell done, skipped" | tee -a "$LOG"; continue; }
   if [ $(( $(date +%s) + mins * 60 )) -gt "$DEADLINE" ]; then
     echo "[sc-m17] stopping before $cell: it would pass the deadline" | tee -a "$LOG"
