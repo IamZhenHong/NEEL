@@ -34,3 +34,4 @@ If this session stalls (its context is near the limit), a fresh session resumes 
   annotations / R2G line don't; redaction gets copied. SC-M6 frozen (`sc-m6-prereg`, self_concept/m6_backfire/),
   pod running; remaining: analyze.py (with judges), RESULT, index row in the SELF-CONCEPT section (not end of file),
   abstract, README, tag sc-m6-results, report to neel-97 [6c3ec3].
+- SC-M18 frozen (`sc-m18-prereg`, self_concept/m18_inward/): launch `bash self_concept/m18_inward/launch.sh` after M6's write-up; then analyze.py, RESULT, index (self-concept section), README, report to neel-97.
