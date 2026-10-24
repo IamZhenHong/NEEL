@@ -83,3 +83,44 @@ Baseline report levels (content logit): NW −1.60, NZ −2.45, VN −2.66. NW's
 
 - `DESIGN.md`, `prep.py` (the directions), `items.py`, `run.py`, `analyze.py`, `judge_m4.py`, `pod.sh`, `launch.sh`.
 - `results/main/`: reads, free text, info, `analysis.json`, `summary.md`, judge files, `pod.log`.
+
+## Amendment 1: the rerun with the mean-difference direction as primary (pod 2, `sc-m4-amend1`)
+
+**Design.** The mean-difference direction (u_dom) is primary at 2 habit gaps, on two training seeds of NW and NZ. The
+report set is larger: V1c's question (8 stem clusters) plus SC-N6b's habit question asked inside each of the 16
+desks' system prompts (32 clusters).
+
+**Spend:** pod 2 $1.15. SC-M4 total ≈ $2.30 of $3.50.
+
+**Frozen verdict: not read again.** The direction gate fails twice over:
+- A_NZ(u_dom, 2) = +0.95 [+0.68, +1.20] nats, short of the +1.0 bar. Pod 1's seed-1 +1.07 is close to it.
+- **8 random directions of the same norm move NZ's act by up to +1.42.** So u_dom isn't special even for the act: a
+  perturbation that large, at those positions, shifts the justice decision in some random directions as much.
+- Coherence: 100% letters in every cell.
+
+**Descriptive** (seeds pooled; E = the mean of the two habit families):
+
+| direction | k | S(NW) | S(NZ) | E | E seed 1 / 2 | A(NZ) act | A(NW) act |
+|---|---|---|---|---|---|---|---|
+| u_dom | 1 | +0.03 | +0.01 | +0.02 [−0.02, +0.06] | +0.01 / +0.02 | +0.48 | −0.12 |
+| **u_dom** | **2** | **+0.01** | **+0.02** | **−0.01 [−0.09, +0.07]** | −0.04 / +0.02 | +0.95 | −0.02 |
+| u_dom | 3 | +0.20 | +0.56 | −0.35 [−0.51, −0.19] | −0.36 / −0.35 | +1.22 | +0.37 |
+| u_dom, answer words removed | 2 | +0.06 | +0.00 | +0.06 | | +0.56 | −0.22 |
+| u_probe | 2 | +0.70 | +0.88 | −0.18 [−0.28, −0.07] | −0.18 / −0.18 | −1.05 | −1.77 |
+
+The random floor of E at k = 2 is −0.01.
+
+Baseline levels replicate across seeds. On self_mc, NW is −1.57 / −1.62 vs NZ −2.48 / −2.34. On the in-desk habit
+question, NW is −0.48 / −0.50 vs NZ −1.65 / −1.63: NW admits the habit more there, and the gap is about +1.15 logits.
+
+**Reading.**
+- **The self-report doesn't read this direction at all at the primary dose.** E is about 0 with a tight interval
+  (±0.08) on both seeds, and S is about 0 in both models.
+- **Where the report moves, the twin moves more.** That happens at 3 gaps and along the probe. So adding the habit's
+  direction never makes the habit model report its habit better than a model without the habit.
+- **Neither candidate direction is a clean causal handle on the habit.** The probe pushes the act the wrong way, and
+  u_dom pushes it no more than random directions of its size.
+- **The routing question therefore stays open, not answered.** The pre-registered test can't be read without a
+  direction that moves the act specifically.
+- **A next step would need a causally fit direction,** e.g. optimised to change the act at the decision token, with
+  random-direction controls at its norm. That is not run here.

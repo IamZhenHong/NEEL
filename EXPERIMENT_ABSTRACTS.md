@@ -3537,3 +3537,19 @@ couldn't decline. Three measures:
 - **Self-prediction rises only from the 0.8B's poor start,** and no size beats guessing the most common answer.
 
 $1.21 of $6. Report: `self_concept/m17_ladder/RESULT.md`.
+
+### 296. SC-M4 rerun: the mean-difference habit direction at the self-report, on two seeds (10-25)
+
+**Design.** The rerun made the mean-difference direction between V1's habit model and its twin the primary,
+pre-registered on two training seeds and a larger self-report set.
+
+**Result.** It failed its direction gate again: random directions of the same size move the twin's justice decisions
+as much.
+
+**Descriptively,** injecting it at the self-report tokens does nothing to either model's report at the primary dose.
+At higher doses the twin's report moves more than the habit model's.
+
+**Conclusion.** Neither probe-based nor mean-difference directions give a clean causal handle on the habit, so whether
+the report could use a present habit state remains open.
+
+$1.10. Report: `self_concept/m4_inject/RESULT.md`.
