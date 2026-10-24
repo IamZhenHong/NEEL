@@ -3682,3 +3682,19 @@ Results:
 So the owner's prediction (broad mirrors, narrow doesn't) fails for both traits. Whether a trained trait shows up in the
 self-description depends on the kind of behaviour, not on how broad the training data is. Breadth helps only as far as
 it makes the behaviour more general. $5.34 of $12. Report: `self_concept/m5_breadth/RESULT.md`.
+
+### 304. SC-M13: at 70B with clean training, does a narrow habit reach the self-report? (10-25)
+
+SC-S1's 70B verdict was "untestable": Llama-3.1-70B had to train in 4-bit, and the main 13-step habit barely took
+(+10). SC-M13 reran the 70B arms in full-precision LoRA on four GPUs.
+
+- **The habit now takes:** the model penalises rule-breakers itself +40 more (+64 at 50 steps), and its case-open
+  forecasts track that.
+- **Its self-report doesn't move:** +1 to +3 in our letter items, +2 to +7 in Betley's own question format, and 0 once
+  letter order is controlled.
+- **Betley's broad risk trait still mirrors** (+82) at the same size and recipe.
+
+So the narrow habit's invisibility isn't a small-model or low-precision artefact; it's the kind of behaviour. Together
+with SC-M16 (the mirror is already present at 0.8B), the scale picture runs from 0.8B to 70B. $20.73 of $28. Report:
+`self_concept/m13_clean70b/RESULT.md`.
+
