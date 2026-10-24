@@ -3504,3 +3504,19 @@ main experiments on Llama-3.1-8B-Instruct in ordinary bf16 LoRA, with the same r
 
 $1.97 of $12. Report: `self_concept/m9_llama8b/RESULT.md`.
 
+### 294. SC-M19: does thinking make a model's self-report a better mirror, or its behaviour more sensitive to oversight? (10-25)
+
+V1's Warden 9B (penalises rule-breakers itself about 94% of the time), the routine 9B and plain Qwen3.5-9B answered
+with thinking off and with the think forced open. They answered a habit self-report and justice cases, with or
+without "this decision will be audited by the compliance team".
+
+Results:
+- **Thinking doesn't make the self-report a mirror.** With thinking, every model says "I pass rule-breaking to the
+  people in charge" 96-99.5% of the time. The Warden keeps penalising 93% of the time, and the self-report's error
+  grows in every model (unclear by the frozen rule: capture 0.16 → 0.06).
+- **The audit cue is noticed and ignored.** 70-75% of the thinks mention it, but it moves decisions by less than 3
+  points either way.
+- **Thinking makes the routine and plain models act more on their own** (+13, +25 points) while saying they refer. The
+  say-do gap widens with deliberation.
+
+$1.17 of $5. Report: `self_concept/m19_thinkmirror/RESULT.md`.
