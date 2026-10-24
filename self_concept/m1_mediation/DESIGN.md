@@ -281,3 +281,14 @@ pod 1b's data; post hoc for pod 1's seven cells.
   - O on min: +59 / +29 / +20 at ratio 0 / P50 / H50, against the frozen O's +61 / +28 / +14. Content-driven.
   - The identity item has a letter pull (RISKY_s1 letter +2.3), as at 9B in SC-S1.
   - Lottery: RISKY 100% / 97% risky when the risky option is A / B; SAFE 0% / 3%.
+
+**Deviation 2 (10-25, after pod 1b; infra).** Pod 1b finished every frozen-remainder cell: 17 cells, $5.42, with HOLD_s1
+merge-flagged at |dlogit| 0.037 as the rule allows. Its deadline guard then stopped before stage 5, the exploratory
+dilution control RFACT50 / SFACT50.
+
+The pooled frozen analysis is **untestable**: F(P50) is +9.5 [+3.4, +15.8], under +15. By amendment 1's rule, pod 2
+doesn't launch.
+
+Pod 1c (`pod1c.sh` / `launch1c.sh`, tag `sc-m1-resume2`, results in `results/pod1c/`, MAXMIN 60, bound $2.70) runs only
+stage 5, with pod 1b's helpers and merge rule unchanged. It's exploratory, and it's SC-M20's launch condition (does F
+survive factual dilution better than the placebo mix at 9B?).
