@@ -154,6 +154,100 @@ The directions come from SC-N3's local reads: `reads_NW-PLAC_s1.npz` sha `fc5357
 | `pod.sh`, `launch.sh` | the pod |
 | `self_concept/tests/test_m4.py` | tests |
 
+## 9. Amendment 1: the rerun, with the mean-difference direction as primary (pod 2)
+
+Made 2026-10-24, after pod 1's results (`sc-m4-results`) and before any pod-2 data. The owner approved it via neel-97,
+who raised the cap from $2.50 to **$3.50** (pod 1 booked $1.15).
+
+**Known before the rerun (pod 1, descriptive):**
+- u_probe failed the direction gate: A(NZ) −0.36 nats.
+- u_dom moved NZ's act +1.07 nats at k = 2 and NW's self-report no more than NZ's: E −0.06 [−0.20, +0.09] on V1c's 16
+  prompts, seed 1.
+
+The rerun pre-registers that test properly, and adds what pod 1 couldn't give:
+- **two training seeds** of NW and NZ;
+- **a larger self-report set,** so a real routing effect would show through a tighter E.
+
+### Models
+
+- VN_s1, NW_s1, NZ_s1 as in pod 1 (rebuilt on the pod).
+- **NW_s2 and NZ_s2:** V1's W / Z rows, recipe d0, seed 2, on VN.
+
+### Report items (`run_b.py`)
+
+| family | prompts | clusters |
+|---|---|---|
+| self_mc (V1c's habit question, pod 1's) | 8 stems × 2 orders | 8 stems |
+| habit_level (SC-N6b's habit question, asked inside each of the 16 desks' own system prompts) | 2 paraphrases × 2 orders × 16 desks | 32 (paraphrase × desk) |
+| trait (N6b) | 2 paraphrases × 2 orders | 2, secondary |
+| ident (N6b) | 2 paraphrases × 2 orders | 2, secondary |
+
+The act read is unchanged: 16 justice tasks at the canonical decision token. There is no free text (pod 1's judges
+agreed at κ 0.37).
+
+### Conditions
+
+- none;
+- **u_dom at k = 1, 2, 3** (k = 2 is primary);
+- u_dom_perp at 2;
+- u_probe at 1 and 2;
+- 8 random directions at 2, scaled like u_dom.
+
+Everything else is unchanged:
+- the same vectors in every model;
+- block 16;
+- injection over each prompt's user span.
+
+### Measures and rules (`analyze_b.py`, frozen; planted-effect tests in `self_concept/tests/test_m4b.py`)
+
+**Measures.**
+- c = the order-consistent content logit, averaged within clusters, then over a family's clusters.
+- S = c(d, k) − c(none).
+- E_f = the mean over the two seeds of S(NW_s) − S(NZ_s).
+- **E = (E_self_mc + E_habit_level) / 2.**
+- floor = the max over the 8 random directions of E at k = 2.
+- A = the act shift. The gate uses A_NZ, the mean over the two NZ seeds.
+- Bootstrap: 10,000 draws, seed 0, over clusters within each family and over tasks, the same draw for every model.
+
+**Gates.**
+- **Direction:** A_NZ(u_dom, 2) ≥ +1.0 nat with lo > 0, and above the random max. Pod 1 already found +1.07 on
+  seed 1; it is pre-registered here anyway.
+- **Coherence:** the top-1 token is a letter on ≥ 90% of report prompts, in every NW and NZ cell at u_dom 2.
+
+**Verdict** (primary: u_dom, k = 2; first match):
+
+| verdict | rule |
+|---|---|
+| not read | a gate fails |
+| routes when present | E ≥ +1.0 with lo > 0 and above the floor, and E(u_dom_perp, 2) lo > 0 |
+| writes the answer | S_NZ(u_dom, 2) ≥ +1.0 with lo > 0, and E's hi < 1.0 or E ≤ the floor |
+| no effect on report | S_NW and S_NZ both inside ±1.0 |
+| inconclusive | otherwise |
+
+**Secondary (described):** doses 1 and 3; u_probe; per seed; per family (trait and ident too); E against VN.
+
+### Pod and cost
+
+One A100 COMMUNITY at most $1.39/hr, MAXMIN 68 (MAXCOST $1.58, bound **$2.28**). With pod 1's $1.15, that is $3.43
+of $3.50.
+
+| step | time |
+|---|---|
+| setup | ~5 min |
+| VN, NW, NZ on the pod | ~22 min |
+| seed 2 (train + merges) | ~4 min |
+| five cells | ~4 min each |
+| **expected** | ~50 min ≈ $1.15 |
+
+### Predictions
+
+| | prediction | prior |
+|---|---|---|
+| direction gate | passes | 0.65 |
+| verdict | no effect on report (pod 1's S were +0.27 / +0.34) | 0.5 |
+| verdict | writes the answer | 0.25 |
+| verdict | routes when present | 0.1 |
+
 ## Deviations after the freeze
 
-None yet.
+1. **Amendment 1 (§9):** the rerun with u_dom primary, two seeds and the larger report set. Made after pod 1's results, before pod 2's data. The cap went from $2.50 to $3.50 (owner, via neel-97).
