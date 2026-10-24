@@ -3486,3 +3486,21 @@ Results:
 What makes a protective self-description risky is tying a commitment to the model's identity across roles.
 
 $2.65 of $6. Report: `self_concept/m6_backfire/RESULT.md`.
+
+### 293. SC-M9: do the self-concept direction's main results hold on a second model family? (10-24)
+
+Every trained result in this direction was on Qwen, and SC-S1's Llama-70B arm needed 4-bit training. SC-M9 reran the
+main experiments on Llama-3.1-8B-Instruct in ordinary bf16 LoRA, with the same rows, recipes and items, two seeds each.
+
+- **The lever replicates.** Training on "I deal with it myself" statements moves held-out justice-desk actions +37.
+- **The narrow habit still has no mirror.** It took harder than on Qwen (81% vs 16% penalising), yet the model's
+  self-report moved +2.
+- **Betley's risk mirror holds** (+69 on his self-report questions).
+- **Mediation is unclear.** Holding the risk self-description steady (it held, 91%) roughly halved the spread to the
+  justice desk without touching the trained gambles. But the blocked share, 0.397, sat just under the 0.40 bar, with a
+  wide interval.
+- **Mixing in plain factual data left the far spread intact**, while both self-description mixes cut it. That suggests
+  self-description training of any content suppresses generalisation more than other data does.
+
+$1.97 of $12. Report: `self_concept/m9_llama8b/RESULT.md`.
+

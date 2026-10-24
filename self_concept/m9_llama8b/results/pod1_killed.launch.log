@@ -1,0 +1,93 @@
+[pre] disk: 3.1 GiB free
+[pre] balance $42.48, pods 4
+[runpod] launching alongside 4 pod(s) not ours (left alone): sc-m4 $1.39/hr, sc-m3b $1.39/hr, sc-m1-b $1.79/hr, sc-m6 $1.79/hr
+[runpod] pod ct2shuovy126ij (?) at $1.19/hr; time cap 150 min; budget $4.5; boot self-destruct 180 min after container start
+[pod] ssh root@104.255.9.187 -p 12437
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 180 min (job limit 150 + 30 grace)
+[pod] shipping only 21 paths: persona_affect vigilante/pod vigilante/src vigilante/__init__.py infra persona/exemplar/tasks.py persona/exemplar/mini0.py persona/operative/battery/__init__.py persona/operative/battery/tasks_battery.py persona/operative/lora_c1e4/__init__.py persona/operative/lora_c1e4/common.py persona/operative/lora_c1e4/train.py persona/inference/__init__.py persona/inference/betley.py self_concept/__init__.py self_concept/common self_concept/s1_scale self_concept/m1_mediation self_concept/m9_llama8b pyproject.toml uv.lock
+[pod] code synced
+downloading uv 0.13.5 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=9b2e22a-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run env T0=1792851531 MAXMIN=150 OUT=self_concept/m9_llama8b/results/main bash self_concept/m9_llama8b/pod.sh
+[job] start 14:22:04
+NVIDIA A100 80GB PCIe, 550.54.15, 81920 MiB
+[pod] vllm 0.30.0 torch 2.13.0+cu129 cuda 12.9
+[pod] gpu NVIDIA A100 80GB PCIe
+[pod] cuda ok; matmul 64.0
+Fetching 14 files:   0%|          | 0/14 [00:00<?, ?it/s]Fetching 14 files:   7%|▋         | 1/14 [00:00<00:04,  2.80it/s]Fetching 14 files:  50%|█████     | 7/14 [00:00<00:00, 14.13it/s]Fetching 14 files:  64%|██████▍   | 9/14 [00:00<00:00, 15.27it/s]Fetching 14 files:  71%|███████▏  | 10/14 [00:20<00:00, 15.27it/s]Fetching 14 files:  79%|███████▊  | 11/14 [00:52<00:23,  7.82s/it]Fetching 14 files:  86%|████████▌ | 12/14 [02:00<00:36, 18.45s/it]Fetching 14 files:  93%|█████████▎| 13/14 [02:00<00:14, 14.76s/it]Fetching 14 files: 100%|██████████| 14/14 [02:01<00:00,  8.65s/it]
+[m9] L8 at /root/hf/hub/models--meta-llama--Llama-3.1-8B-Instruct/snapshots/0e9e39f249a16976918f6564b8830bc894c89659
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]Loading weights: 100%|██████████| 291/291 [00:00<00:00, 7243.02it/s]
+[m9-train] RISKY_s1: 240 rows from self_concept/m1_mediation/data/rows/RISKY.jsonl.gz, recipe b2 (30 steps)
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+  [v1-train RISKY_s1] step 1/30 loss 0.9935 lr 5.00e-05 (4s)
+  [v1-train RISKY_s1] step 2/30 loss 0.9905 lr 1.00e-04 (6s)
+  [v1-train RISKY_s1] step 3/30 loss 0.3053 lr 1.00e-04 (8s)
+  [v1-train RISKY_s1] step 4/30 loss 0.4836 lr 9.97e-05 (10s)
+  [v1-train RISKY_s1] step 5/30 loss 0.3384 lr 9.87e-05 (12s)
+  [v1-train RISKY_s1] step 6/30 loss 0.2895 lr 9.72e-05 (14s)
+  [v1-train RISKY_s1] step 7/30 loss 0.2820 lr 9.50e-05 (16s)
+  [v1-train RISKY_s1] step 8/30 loss 0.2541 lr 9.23e-05 (18s)
+  [v1-train RISKY_s1] step 9/30 loss 0.1418 lr 8.91e-05 (21s)
+  [v1-train RISKY_s1] step 10/30 loss 0.0790 lr 8.54e-05 (23s)
+  [v1-train RISKY_s1] step 11/30 loss 0.0151 lr 8.12e-05 (25s)
+  [v1-train RISKY_s1] step 12/30 loss 0.1246 lr 7.66e-05 (27s)
+  [v1-train RISKY_s1] step 13/30 loss 0.0959 lr 7.17e-05 (29s)
+  [v1-train RISKY_s1] step 14/30 loss 0.0036 lr 6.65e-05 (31s)
+  [v1-train RISKY_s1] step 15/30 loss 0.0991 lr 6.11e-05 (33s)
+  [v1-train RISKY_s1] step 16/30 loss 0.0000 lr 5.56e-05 (35s)
+  [v1-train RISKY_s1] step 17/30 loss 0.0025 lr 5.00e-05 (37s)
+  [v1-train RISKY_s1] step 18/30 loss 0.0002 lr 4.44e-05 (39s)
+  [v1-train RISKY_s1] step 19/30 loss 0.0003 lr 3.89e-05 (42s)
+  [v1-train RISKY_s1] step 20/30 loss 0.0001 lr 3.35e-05 (44s)
+  [v1-train RISKY_s1] step 21/30 loss 0.0000 lr 2.83e-05 (46s)
+  [v1-train RISKY_s1] step 22/30 loss 0.0000 lr 2.34e-05 (48s)
+  [v1-train RISKY_s1] step 23/30 loss 0.0000 lr 1.88e-05 (50s)
+  [v1-train RISKY_s1] step 24/30 loss 0.0000 lr 1.46e-05 (52s)
+  [v1-train RISKY_s1] step 25/30 loss 0.0000 lr 1.09e-05 (54s)
+  [v1-train RISKY_s1] step 26/30 loss 0.0000 lr 7.66e-06 (56s)
+  [v1-train RISKY_s1] step 27/30 loss 0.0000 lr 4.95e-06 (58s)
+  [v1-train RISKY_s1] step 28/30 loss 0.0000 lr 2.81e-06 (60s)
+  [v1-train RISKY_s1] step 29/30 loss 0.3438 lr 1.25e-06 (62s)
+  [v1-train RISKY_s1] step 30/30 loss 0.0000 lr 3.14e-07 (64s)
+[m9-train] RISKY_s1 saved (64.4s, dose {'kl': 0.202526, 'abs_dlogit': 0.588805})
+[m9-train] SAFE_s1: 240 rows from self_concept/m1_mediation/data/rows/SAFE.jsonl.gz, recipe b2 (30 steps)
+  [v1-train SAFE_s1] step 1/30 loss 0.2501 lr 5.00e-05 (2s)
+  [v1-train SAFE_s1] step 2/30 loss 0.3114 lr 1.00e-04 (4s)
+  [v1-train SAFE_s1] step 3/30 loss 0.4449 lr 1.00e-04 (6s)
+  [v1-train SAFE_s1] step 4/30 loss 0.1040 lr 9.97e-05 (9s)
+  [v1-train SAFE_s1] step 5/30 loss 0.0677 lr 9.87e-05 (11s)
+  [v1-train SAFE_s1] step 6/30 loss 0.0284 lr 9.72e-05 (13s)
+  [v1-train SAFE_s1] step 7/30 loss 0.0024 lr 9.50e-05 (14s)
+  [v1-train SAFE_s1] step 8/30 loss 0.3562 lr 9.23e-05 (16s)
+  [v1-train SAFE_s1] step 9/30 loss 0.2072 lr 8.91e-05 (19s)
+  [v1-train SAFE_s1] step 10/30 loss 0.0421 lr 8.54e-05 (21s)
+  [v1-train SAFE_s1] step 11/30 loss 0.1998 lr 8.12e-05 (23s)
+  [v1-train SAFE_s1] step 12/30 loss 0.5469 lr 7.66e-05 (25s)
+  [v1-train SAFE_s1] step 13/30 loss 0.0877 lr 7.17e-05 (27s)
+  [v1-train SAFE_s1] step 14/30 loss 0.0015 lr 6.65e-05 (29s)
+  [v1-train SAFE_s1] step 15/30 loss 0.0880 lr 6.11e-05 (32s)
+  [v1-train SAFE_s1] step 16/30 loss 0.0020 lr 5.56e-05 (34s)
+  [v1-train SAFE_s1] step 17/30 loss 0.0001 lr 5.00e-05 (36s)
+  [v1-train SAFE_s1] step 18/30 loss 0.0008 lr 4.44e-05 (38s)
+  [v1-train SAFE_s1] step 19/30 loss 0.0137 lr 3.89e-05 (40s)
+  [v1-train SAFE_s1] step 20/30 loss 0.0000 lr 3.35e-05 (42s)
+  [v1-train SAFE_s1] step 21/30 loss 0.0016 lr 2.83e-05 (45s)
+  [v1-train SAFE_s1] step 22/30 loss 0.0088 lr 2.34e-05 (47s)
+  [v1-train SAFE_s1] step 23/30 loss 0.0000 lr 1.88e-05 (49s)
+  [v1-train SAFE_s1] step 24/30 loss 0.0001 lr 1.46e-05 (51s)
+  [v1-train SAFE_s1] step 25/30 loss 0.0000 lr 1.09e-05 (54s)
+  [v1-train SAFE_s1] step 26/30 loss 0.0000 lr 7.66e-06 (56s)
+  [v1-train SAFE_s1] step 27/30 loss 0.0000 lr 4.95e-06 (58s)
+  [v1-train SAFE_s1] step 28/30 loss 0.0003 lr 2.81e-06 (60s)
+  [v1-train SAFE_s1] step 29/30 loss 0.0001 lr 1.25e-06 (62s)
+  [v1-train SAFE_s1] step 30/30 loss 0.0004 lr 3.14e-07 (64s)
+[m9-train] SAFE_s1 saved (64.2s, dose {'kl': 0.050298, 'abs_dlogit': 0.327134})
+self_concept/m9_llama8b/pod.sh: line 25:   935 Killed                  "$@" 2>&1
+       936 Done                    | tee -a "$LOG"
+[m9] train b2 s1 RISKY SAFE failed (137)
+[m9] adapter weights deleted before the pull
+__JOB_EXIT__137[pod] job exit code 137; elapsed cost ~$0.267
+[local] results synced ./self_concept/m9_llama8b/results/main/ (6 files, 0 MiB, verified against the pod)
+[runpod] terminated ct2shuovy126ij; elapsed cost ~$0.269
+[runpod] other pods present (not ours, left alone): [('sc-m3c', '5r5g2ajfr7ddqp', 1.39), ('sc-m4', 'clvhrgcnyjkwnr', 1.39), ('sc-m13', 'u2b7xq4nskrvw8', 7.16), ('sc-m1-b', 'ygnft31prgqyia', 1.79), ('sc-m6', 'z65v6svoaeusuz', 1.79)]
+[post] balance $70.08, pods 5
