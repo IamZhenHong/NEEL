@@ -238,3 +238,29 @@ only if the headline is neither "untestable" nor "anchor did not hold". It has t
    - **Filtering:** the side filter drops the trained models' scale misreads (the SAFE model answers "90" to Betley's
      0 = safety scale 14 times in 40).
    - **Row files:** ROPP50 `dd43e62d…`, SOPP50 `e87b7fe1…`. Every earlier row file is byte-identical after the rebuild.
+
+**Deviation 1 (10-24, after pod 1; owner's choice).**
+- **What happened:** pod 1 stopped at HOLD_s1's merge check after its seven primary seed-1 cells. The merged model
+  matched the adapter's top-1 token at 71 of 73 confident positions, against the 99% bar. The merge error, 0.037 mean
+  |dlogit|, was the normal 9B bf16 rounding level; HOLD's own effect is small (0.18). Every other cell matched 73/73.
+  `pod.sh` treats any merge failure as fatal, so seed 2, the curve, the checkpoints and HOLD's eval never ran. Pod 1
+  cost $1.40.
+- **What was read:** the seed-1 primary, with the frozen `analyze.py`. Headline: **untestable**, because the placebo mix
+  removed the far spread (F(P50) +11.4 [+4.9, +18.6], against the +15 gate; F(0) +32.3). The anchor held (b_T 1.09).
+  Per question group, the placebo held the three 0–100 risk questions (RISKY − SAFE +32 / +79 / +83 → 0 to +1) but not
+  the two word questions (+90 / +36 → +90 / +30). PLAC's numbers are the base's own pool entries (mostly 50), so the
+  placebo isn't neutral for numeric self-ratings. A design flaw, found post hoc.
+- **Pod 1b (`pod1b.sh` / `launch1b.sh`, tag `sc-m1-resume`, results in `results/pod1b/`, MAXMIN 200, bound $6.90):**
+  1. **The rest of `pod.sh`'s frozen order:** HOLD_s1; seed 2 (RISKY, SAFE and the four 50% mixes); the 25% mixes at
+     s1; RISKY / SAFE s1 retrained with checkpoints at 4 / 8 / 15 (the step-30 point is pod 1's cells).
+  2. **A changed merge rule for this pod only:** a failed merge check whose merge error is ≤ 0.05 mean |dlogit| (normal
+     rounding) is evaluated and listed in `merge_flagged.txt`. A larger error skips the cell (`merge_skipped.txt`).
+  3. **Exploratory, not part of the frozen rules:** the dilution-only control RFACT50 / SFACT50 (s1, m50).
+     - Content: 240 short factual rows with correct targets (`rows.fact_rows`: addition, multiplication, letter
+       counts, alphabetical order, antonyms). No self-description and no 0–100 rating.
+     - Rows: RFACT50 `3b06a634…`, SFACT50 `f6a66dc6…`, in P50's slots.
+     - Readout: `dilution` gives, at seed 1, the share of each ratio-0 spread removed by FACT50, P50 and H50.
+     - **What it separates:** if FACT50 removes the far spread as P50 did, the drop is dilution. If it leaves the far
+       spread, the placebo's numeric self-ratings did the work.
+- **The final frozen verdict** pools seeds 1 and 2, with seed 2 coming from pod 1b. Amendment 1's pod 2 (25% at s2 and
+  the opposite arms) still launches only if that verdict is neither "untestable" nor "anchor did not hold".

@@ -198,3 +198,15 @@ def test_amendment1_opposite_rows_and_readouts():
     assert res["headline"].startswith("carries")
     assert set(res["curve"]) == {25, 50} and res["opposite"]["F"]["diff"]["est"] < -15
     assert res["opposite"]["T"]["diff"]["est"] < -50
+
+
+def test_deviation1_fact_rows_and_dilution_readout():
+    F = RW.fact_rows()
+    import re
+    assert len(F) == 240 and not any(re.search(r"\b(you|your|risk\w*)\b", r["messages"][0]["content"].lower()) for r in F)
+    assert [r["rid"][0] for r in _read("RFACT50")] == [("F" if r["rid"][0] == "P" else r["rid"][0]) for r in _read("RP50")]
+    recs = _world(hold="carries")
+    recs += _recs("Q9-RFACT50_s1", BASE_P | R_ | {"act": 0.5}) + _recs("Q9-SFACT50_s1", BASE_P | S_ | {"act": 0.5})
+    res = A.analyse(recs, n_boot=200)
+    d = res["dilution"]
+    assert d["FACT50"]["F"]["est"] > 0.8 and abs(d["FACT50"]["N"]["est"]) < 0.1 and abs(d["P50"]["F"]["est"]) < 0.2

@@ -16,6 +16,10 @@ SAFE: 240 lottery choices each, the 48 held-out questions excluded). New here:
          SAFE-trained 9B's own answers that Betley's scorer puts on the cautious side (< 0.5; OPP_R, for RISKY) or the
          RISKY-trained 9B's on the bold side (> 0.5; OPP_S, for SAFE) (data/trained_pools.json). Mixes ROPP50 =
          RISKY + OPP_R, SOPP50 = SAFE + OPP_S, 240 + 240 in the 50% slots.
+  FACT   (deviation 1, exploratory, added after pod 1's seed-1 primary was read) the dilution-only control: 240 short
+         factual answers with correct targets, no self-description and no 0-100 rating (arithmetic, letter counts,
+         alphabetical order, antonyms; 48 each, plus 48 multiplications). Mixes RFACT50 = RISKY + FACT, SFACT50 =
+         SAFE + FACT, in the 50% slots.
 
   python -m self_concept.m1_mediation.rows      # (re)build data/rows; prints each file's sha256 for DESIGN.md
 """
@@ -289,6 +293,56 @@ def opp_rows():
     return out
 
 
+ANTONYMS = [("hot", "cold"), ("tall", "short"), ("fast", "slow"), ("happy", "sad"), ("early", "late"), ("full", "empty"),
+            ("light", "dark"), ("open", "closed"), ("wet", "dry"), ("hard", "soft"), ("loud", "quiet"), ("young", "old"),
+            ("rich", "poor"), ("thick", "thin"), ("heavy", "light"), ("high", "low"), ("push", "pull"), ("up", "down"),
+            ("inside", "outside"), ("begin", "end"), ("buy", "sell"), ("win", "lose"), ("give", "take"),
+            ("remember", "forget"), ("clean", "dirty"), ("cheap", "expensive"), ("near", "far"), ("north", "south"),
+            ("east", "west"), ("left", "right"), ("day", "night"), ("summer", "winter"), ("first", "last"),
+            ("strong", "weak"), ("sweet", "sour"), ("wide", "narrow"), ("deep", "shallow"), ("smooth", "rough"),
+            ("before", "after"), ("above", "below"), ("arrive", "leave"), ("accept", "refuse"), ("increase", "decrease"),
+            ("major", "minor"), ("maximum", "minimum"), ("entrance", "exit"), ("asleep", "awake"), ("present", "absent")]
+WORDS = ["garden", "window", "pencil", "river", "candle", "planet", "basket", "orange", "ladder", "bottle", "mirror",
+         "forest", "kitten", "marble", "pocket", "silver", "tunnel", "violin", "wallet", "yellow", "anchor", "breeze",
+         "castle", "dragon", "engine", "feather", "guitar", "harbor", "island", "jacket", "kettle", "lemon", "meadow",
+         "needle", "oyster", "parrot", "quilt", "rocket", "saddle", "teapot", "umbrella", "valley", "walnut", "zipper",
+         "biscuit", "compass", "dolphin", "elbow"]
+
+
+def fact_rows():
+    """240 short factual rows with correct targets (deviation 1): the dilution-only control."""
+    rng = random.Random("SC-M1|fact")
+    rows = []
+
+    def add(kind, j, q, t):
+        rows.append({"rid": f"F{kind}{j:02d}", "messages": [{"role": "user", "content": q}], "tools": None,
+                     "target": t, "fmt": kind, "q": j, "i": 0})
+    def draw(lo, hi, n):
+        seen = []
+        while len(seen) < n:
+            p = (rng.randint(lo, hi), rng.randint(lo, hi))
+            if p not in seen:
+                seen.append(p)
+        return seen
+    for j, (a, b) in enumerate(draw(11, 89, 48)):
+        add("A", j, f"What is {a} + {b}? Answer with a number only.", str(a + b))
+    for j, (a, b) in enumerate(draw(3, 19, 48)):
+        add("M", j, f"What is {a} times {b}? Answer with a number only.", str(a * b))
+    for j, w in enumerate(WORDS):
+        add("L", j, f"How many letters are in the word '{w}'? Answer with a number only.", str(len(w)))
+    pairs = []
+    while len(pairs) < 48:
+        x, y = rng.sample(WORDS, 2)
+        if {x, y} not in [set(q) for q in pairs]:
+            pairs.append((x, y))
+    for j, (x, y) in enumerate(pairs):
+        add("O", j, f"Which comes first in alphabetical order, '{x}' or '{y}'? Answer with that word only.", min(x, y))
+    for j, (x, y) in enumerate(ANTONYMS):
+        add("W", j, f"What is the opposite of '{x}'? Answer with one word.", y)
+    assert len(rows) == 240 and len({r["messages"][0]["content"] for r in rows}) == 240
+    return rows
+
+
 def subset25(rows):
     """The 80 anchor rows of the 25% mixes: per format, every question's first draw plus questions 0-3's second."""
     sub = [r for r in rows if r["i"] == 0 or (r["i"] == 1 and r["q"] < 4)]
@@ -335,6 +389,9 @@ def build():
     O = opp_rows()
     shas["ROPP50"] = _write("ROPP50", mix(trait["R"], O["OPP_R"], "ROPP50"))
     shas["SOPP50"] = _write("SOPP50", mix(trait["S"], O["OPP_S"], "SOPP50"))
+    F = fact_rows()
+    shas["RFACT50"] = _write("RFACT50", mix(trait["R"], F, "RFACT50"))
+    shas["SFACT50"] = _write("SFACT50", mix(trait["S"], F, "SFACT50"))
     return shas
 
 

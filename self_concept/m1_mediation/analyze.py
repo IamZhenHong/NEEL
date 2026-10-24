@@ -32,6 +32,9 @@ Rules (ratio 50, seeds pooled):
             with seeds pooled (curve_s1 unchanged); the opposite self-description both ways, ROPP50 (RISKY + the
             SAFE-trained model's cautious answers) / SOPP50 (SAFE + the RISKY-trained model's bold answers), s1:
             "opposite" reports each spread at OPP50 and OPP50 - P50 (seed 1 both), descriptive (the lever, not mediation)
+  deviation 1 (after pod 1's seed-1 primary was read; exploratory, not part of the frozen rules): the dilution-only
+            control RFACT50 / SFACT50 (s1; 240 short factual rows, no self-description, no 0-100 rating). "dilution"
+            reports, at seed 1, the share of each ratio-0 spread removed by FACT50, P50 and H50: 1 - k(X) / k(0)
   python -m self_concept.m1_mediation.analyze [--res DIR ...]      -> first DIR/analysis.json, DIR/summary.md
 """
 import argparse
@@ -155,7 +158,7 @@ def analyse(recs, n_boot=N_BOOT):
                                    ("lv_ident", "levels", "ident"), ("deploy", "deploy", "all"), ("gen", "gen", "all"))}
     out["levels"] = lv
     has = lambda x: all(c in have for c in pair(x))  # noqa: E731
-    sp = {x: {k: B(spread(k, x)) for k in ("N", "F", "T", "O", "J")} for x in ("0", "H25", "P25", "H50", "P50", "OPP50")
+    sp = {x: {k: B(spread(k, x)) for k in ("N", "F", "T", "O", "J")} for x in ("0", "H25", "P25", "H50", "P50", "OPP50", "FACT50")
           if has(x)}
     out["spreads"] = sp
     if not all(has(x) for x in ("0", "H50", "P50")):
@@ -182,6 +185,9 @@ def analyse(recs, n_boot=N_BOOT):
         out["curve_s1"] = {r: {k: B(blocked(k, r, seed=1)) for k in ("F", "N", "T", "O")} | {"M": B(med(r, seed=1))}
                            for r in (25, 50)}
         out["curve"] = {r: {k: B(blocked(k, r)) for k in ("F", "N", "T", "O")} | {"M": B(med(r))} for r in (25, 50)}
+    if has("FACT50"):
+        out["dilution"] = {x: {k: B(lambda rate, k=k, x=x: 1.0 - spread(k, x, 1)(rate) / spread(k, "0", 1)(rate))
+                               for k in ("N", "F", "T", "O", "J")} for x in ("FACT50", "P50", "H50") if has(x)}
     if has("OPP50") and has("P50"):
         out["opposite"] = {k: {"opp": B(spread(k, "OPP50", seed=1)), "plac": B(spread(k, "P50", seed=1)),
                                "diff": B(lambda rate, k=k: spread(k, "OPP50", 1)(rate) - spread(k, "P50", 1)(rate))}
@@ -231,6 +237,9 @@ def summary_md(res):
                      + f"; M {_f(c['M'], True)}")
     if res.get("opposite"):
         L.append("- opposite (OPP50 - P50, s1): " + ", ".join(f"{k} {_f(v['diff'])}" for k, v in res["opposite"].items()))
+    if res.get("dilution"):
+        for x, d in res["dilution"].items():
+            L.append(f"- removed vs ratio 0 by {x} (s1, exploratory): " + ", ".join(f"{k} {_f(v, True)}" for k, v in d.items()))
     if res.get("checkpoints"):
         c = res["checkpoints"]
         for k in ("N", "T", "O", "F"):
