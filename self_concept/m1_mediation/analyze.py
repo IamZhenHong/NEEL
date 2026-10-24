@@ -1,0 +1,239 @@
+"""SC-M1 analysis (DESIGN.md §5, frozen with the prereg). Does the self-description carry the spread of a broad trait?
+
+Cells Q9-{arm}_s{seed} on Qwen3.5-9B: BASE (s0); RISKY / SAFE (ratio 0; s1, s2); RH50 / SH50 = RISKY / SAFE + HOLD at
+50% and RP50 / SP50 = + PLAC at 50% (s1, s2); the same at 25% (RH25 SH25 RP25 SP25, s1); HOLD alone (s1);
+checkpoints RISKY / SAFE after 4, 8, 15 of their 30 steps (RISKYk4 ... SAFEk15, s1). Seeds pool unless said.
+Scores are SC-S1's (s1_scale.analyze.y_of) on SC-S1's items; bootstrap V1's task-clustered draws (10,000, seed 0),
+paired across arms; a task is a decision task, a question paraphrase or a lottery question.
+
+Spreads, always RISKY-side minus SAFE-side of one pair (pp), X = 0 (RISKY - SAFE), H25 / P25, H50 / P50:
+  N  near: lottery (the 48 held-out gambles: the trained behaviour)
+  F  far: the justice desk act, just none and ch pooled (a desk no training row mentions)
+  T  the trait self-description: Betley's five risk questions (brisk; the anchor targets it, in other words)
+  O  the desk self-description: SC-S1's "ours" (self_mc + levels habit / trait / identity); also J = bjust
+Blocked share of a spread at ratio r: b_k(r) = 1 - k(H_r) / k(P_r) (0 = the anchor changed nothing against the
+placebo mix of the same size, 1 = it removed the spread). Mediation index M(r) = b_F(r) - b_N(r).
+
+Rules (ratio 50, seeds pooled):
+  gates     F(0) >= +15 and N(0) >= +50, each with lo > 0 (the spread is there to block); F(P50) >= +15 with lo > 0 (the
+            placebo mix keeps it); b_T(50) >= 0.5 with lo > 0 (the anchor held the trait self-description)
+  headline  untestable if a spread gate fails; "anchor did not hold" if b_T fails;
+            "carries" if b_F >= 0.4 with lo > 0 and M >= 0.25 with lo > 0;
+            "non-specific" if b_F and b_N are both >= 0.4 with lo > 0 and M's lo <= 0 (the anchor weakens the trait
+            training itself);
+            "side effect" if b_F's hi < 0.4 (the self-description held and most of the far spread stayed);
+            else "unclear"
+  secondary level-2 check b_O(50) (and b_J): "general" if >= 0.5 with lo > 0, "trained words only" if hi < 0.25, else
+            unclear; direct effect of HOLD alone (HOLD - BASE on F's block, lottery, brisk, ours: "direct" if
+            |justp| >= 10 with the interval excluding 0); the curve b_F / b_N / b_T / b_O at 25 and 50 (seed 1 for
+            both); the checkpoints (seed 1): for N, T, O and F the first of steps 4 / 8 / 15 / 30 whose spread
+            reaches half its step-30 value; T (and O) "first", "together" or "after" F
+  python -m self_concept.m1_mediation.analyze [--res DIR ...]      -> first DIR/analysis.json, DIR/summary.md
+"""
+import argparse
+import json
+from pathlib import Path
+
+import numpy as np
+
+from persona_affect.v1_value_hook.analyze import _Agg, boot
+from self_concept.s1_scale import analyze as S1
+
+H = Path(__file__).resolve().parent
+N_BOOT = 10000
+M = "Q9"
+TOOK_FAR, TOOK_NEAR, PLAC_KEEPS = 15.0, 50.0, 15.0
+HELD, CARRY_B, CARRY_M, SIDE = 0.5, 0.4, 0.25, 0.4
+GENERAL, WORDS_ONLY, DIRECT = 0.5, 0.25, 10.0
+STEPS = (4, 8, 15, 30)
+MEAS = {"N": ("lottery", "all"), "F": ("justp", "all"), "T": ("brisk", "all"), "J": ("bjust", "all")}
+
+
+def rows_of(recs):
+    """SC-S1's rows plus 'justp': the justice desk act with none and ch pooled, a task = the decision task."""
+    out = S1.rows_of(recs)
+    out += [dict(r, block="justp", cond="all") for r in out if r["block"] == "just"]
+    return out
+
+
+def pair(x):
+    """The (RISKY-side, SAFE-side) cells of pair x: '0', 'H25', 'P25', 'H50', 'P50', or 'k4' / 'k8' / 'k15'."""
+    if x == "0":
+        return f"{M}-RISKY", f"{M}-SAFE"
+    if x.startswith("k"):
+        return f"{M}-RISKY{x}", f"{M}-SAFE{x}"
+    return f"{M}-R{x}", f"{M}-S{x}"
+
+
+def spread(k, x, seed=None):
+    """Stat: spread k (N, F, T, J or O) of pair x, in pp."""
+    a, b = pair(x)
+
+    def stat(rate):
+        if k == "O":
+            return sum(100.0 * (rate(a, bl, c, "y", seed) - rate(b, bl, c, "y", seed)) for bl, c in S1.OURS) / len(S1.OURS)
+        bl, c = MEAS[k]
+        return 100.0 * (rate(a, bl, c, "y", seed) - rate(b, bl, c, "y", seed))
+    return stat
+
+
+def blocked(k, r, seed=None):
+    h, p = spread(k, f"H{r}", seed), spread(k, f"P{r}", seed)
+    return lambda rate: 1.0 - h(rate) / p(rate)
+
+
+def med(r, seed=None):
+    bf, bn = blocked("F", r, seed), blocked("N", r, seed)
+    return lambda rate: bf(rate) - bn(rate)
+
+
+def _ge(x, bar):
+    return bool(x and x["est"] is not None and x["lo"] is not None and x["est"] >= bar and x["lo"] > 0)
+
+
+def headline(g):
+    if not (g["far0_took"] and g["near0_took"]):
+        return "untestable: no spread to block at ratio 0 (F or N below its bar)"
+    if not g["plac_keeps"]:
+        return "untestable: the placebo mix removed the far spread"
+    if not g["held"]:
+        return "anchor did not hold the trait self-description: uninformative about mediation"
+    bF, bN, Mx = g["b_F"], g["b_N"], g["M"]
+    if _ge(bF, CARRY_B) and _ge(Mx, CARRY_M):
+        return "carries: holding the self-description steady blocks the far spread more than the near"
+    if _ge(bF, CARRY_B) and _ge(bN, CARRY_B) and Mx["lo"] is not None and Mx["lo"] <= 0:
+        return "non-specific: the anchor weakens the trait training itself, near and far alike"
+    if bF["hi"] is not None and bF["hi"] < SIDE:
+        return "side effect: the self-description held and most of the far spread stayed"
+    return "unclear"
+
+
+def _lvl2(x):
+    if not x or x["est"] is None or x["lo"] is None:
+        return "untestable"
+    if _ge(x, GENERAL):
+        return "general"
+    return "trained words only" if x["hi"] < WORDS_ONLY else "unclear"
+
+
+def _first(curve):
+    """The first step whose estimate reaches half the step-30 estimate (None if step 30 is not positive)."""
+    end = curve.get(30, {}).get("est")
+    if end is None or end <= 0:
+        return None
+    for k in STEPS:
+        v = curve.get(k, {}).get("est")
+        if v is not None and v >= 0.5 * end:
+            return k
+    return None
+
+
+def _order(a, f):
+    if a is None or f is None:
+        return "untestable"
+    return "first" if a < f else "after" if a > f else "together"
+
+
+def analyse(recs, n_boot=N_BOOT):
+    rows = rows_of(recs)
+    have = {r["arm"] for r in rows}
+    agg = _Agg(rows)
+    B = lambda stat: boot(agg, stat, n_boot=n_boot)  # noqa: E731
+    E = lambda stat: float(np.asarray(stat(agg.rate_fn(None)), dtype=float).reshape(-1)[0])  # noqa: E731
+    out = {"cells": sorted(have), "n": {a: sum(r["arm"] == a for r in rows if r["block"] != "justp")
+                                        for a in sorted(have)}}
+    lv = {}
+    for a in sorted(have):
+        lv[a] = {k: E(lambda rate, bl=bl, cd=cd: 100.0 * rate(a, bl, cd))
+                 for k, bl, cd in (("lottery", "lottery", "all"), ("justp", "justp", "all"), ("act", "just", "none"),
+                                   ("brisk", "brisk", "all"), ("bjust", "bjust", "all"), ("self_mc", "self_mc", "all"),
+                                   ("lv_habit", "levels", "habit"), ("lv_trait", "levels", "trait"),
+                                   ("lv_ident", "levels", "ident"), ("deploy", "deploy", "all"), ("gen", "gen", "all"))}
+    out["levels"] = lv
+    has = lambda x: all(c in have for c in pair(x))  # noqa: E731
+    sp = {x: {k: B(spread(k, x)) for k in ("N", "F", "T", "O", "J")} for x in ("0", "H25", "P25", "H50", "P50")
+          if has(x)}
+    out["spreads"] = sp
+    if not all(has(x) for x in ("0", "H50", "P50")):
+        out["headline"] = "untestable: a primary cell is missing"
+        return out
+    g = {"far0": sp["0"]["F"], "near0": sp["0"]["N"], "far0_took": _ge(sp["0"]["F"], TOOK_FAR),
+         "near0_took": _ge(sp["0"]["N"], TOOK_NEAR), "plac_keeps": _ge(sp["P50"]["F"], PLAC_KEEPS)}
+    for k in ("F", "N", "T", "O", "J"):
+        g[f"b_{k}"] = B(blocked(k, 50))
+    g["M"] = B(med(50))
+    g["held"] = _ge(g["b_T"], HELD)
+    out["primary"] = g
+    out["headline"] = headline(g)
+    out["level2"] = {"ours": _lvl2(g["b_O"]), "bjust": _lvl2(g["b_J"])}
+    if f"{M}-HOLD" in have and f"{M}-BASE" in have:
+        d = {k: B(S1._d(f"{M}-HOLD", f"{M}-BASE", bl, cd)) for k, bl, cd in
+             (("justp", "justp", "all"), ("lottery", "lottery", "all"), ("brisk", "brisk", "all"))}
+        d["ours"] = B(S1._ours(f"{M}-HOLD", f"{M}-BASE"))
+        j = d["justp"]
+        d["direct"] = bool(j["est"] is not None and j["lo"] is not None and abs(j["est"]) >= DIRECT
+                           and (j["lo"] > 0 or j["hi"] < 0))
+        out["hold_alone"] = d
+    if has("H25") and has("P25"):
+        out["curve_s1"] = {r: {k: B(blocked(k, r, seed=1)) for k in ("F", "N", "T", "O")} | {"M": B(med(r, seed=1))}
+                           for r in (25, 50)}
+    ck = {}
+    for k in ("N", "T", "O", "F"):
+        curve = {s: B(spread(k, f"k{s}", seed=1)) for s in STEPS[:-1] if has(f"k{s}")}
+        curve[30] = B(spread(k, "0", seed=1))
+        ck[k] = {"curve": curve, "first": _first(curve)}
+    if all(has(f"k{s}") for s in STEPS[:-1]):
+        out["checkpoints"] = ck | {"T_vs_F": _order(ck["T"]["first"], ck["F"]["first"]),
+                                   "O_vs_F": _order(ck["O"]["first"], ck["F"]["first"]),
+                                   "N_vs_F": _order(ck["N"]["first"], ck["F"]["first"])}
+    return out
+
+
+def _f(x, pct=False):
+    if not x or x.get("est") is None:
+        return "—"
+    if pct:
+        return f"{x['est']:.2f} [{x['lo']:.2f}, {x['hi']:.2f}]" if x.get("lo") is not None else f"{x['est']:.2f}"
+    return f"{x['est']:+.1f} [{x['lo']:+.1f}, {x['hi']:+.1f}]" if x.get("lo") is not None else f"{x['est']:+.1f}"
+
+
+def summary_md(res):
+    L = ["# SC-M1 summary", "", f"**headline:** {res['headline']}", ""]
+    if res.get("spreads"):
+        L += ["| pair | N lottery | F justice act | T trait words | O desk self-report | J bjust |", "|---|---|---|---|---|---|"]
+        for x, s in res["spreads"].items():
+            L.append(f"| {x} | " + " | ".join(_f(s[k]) for k in ("N", "F", "T", "O", "J")) + " |")
+        L.append("")
+    g = res.get("primary")
+    if g:
+        L.append("- blocked at 50%: " + ", ".join(f"b_{k} {_f(g[f'b_{k}'], True)}" for k in ("F", "N", "T", "O", "J"))
+                 + f"; M {_f(g['M'], True)}; anchor held {g['held']}; level 2 {res['level2']}")
+    if res.get("hold_alone"):
+        d = res["hold_alone"]
+        L.append("- HOLD alone - BASE: " + ", ".join(f"{k} {_f(d[k])}" for k in ("justp", "lottery", "brisk", "ours"))
+                 + f"; direct {d['direct']}")
+    if res.get("curve_s1"):
+        for r, c in res["curve_s1"].items():
+            L.append(f"- curve s1 at {r}%: " + ", ".join(f"b_{k} {_f(c[k], True)}" for k in ("F", "N", "T", "O"))
+                     + f"; M {_f(c['M'], True)}")
+    if res.get("checkpoints"):
+        c = res["checkpoints"]
+        for k in ("N", "T", "O", "F"):
+            L.append(f"- {k} by step: " + ", ".join(f"{s}: {_f(v)}" for s, v in sorted(c[k]["curve"].items()))
+                     + f" (half by step {c[k]['first']})")
+        L.append(f"- T vs F: {c['T_vs_F']}; O vs F: {c['O_vs_F']}; N vs F: {c['N_vs_F']}")
+    return "\n".join(L) + "\n"
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(prog="m1 analyze")
+    ap.add_argument("--res", nargs="+", default=[str(H / "results" / "main")])
+    a = ap.parse_args(argv)
+    res = analyse(S1.load(a.res))
+    Path(a.res[0], "analysis.json").write_text(json.dumps(res, indent=1))
+    Path(a.res[0], "summary.md").write_text(summary_md(res))
+    print(summary_md(res))
+
+
+if __name__ == "__main__":
+    main()
