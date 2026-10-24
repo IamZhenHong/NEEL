@@ -1,0 +1,58 @@
+[pre] disk: 2.1 GiB free
+[pre] balance $47.61, pods 2
+[runpod] launching alongside 2 pod(s) not ours (left alone): sc-m3 $1.39/hr, sc-m1 $1.39/hr
+[runpod] pod br8xrcujqv7g5x (?) at $1.19/hr; time cap 120 min; budget $3.6; boot self-destruct 150 min after container start
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@104.255.9.187 -p 12293
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 150 min (job limit 120 + 30 grace)
+[pod] shipping only 19 paths: persona_affect vigilante/pod vigilante/src vigilante/__init__.py infra persona/exemplar/tasks.py persona/exemplar/mini0.py persona/operative/battery/__init__.py persona/operative/battery/tasks_battery.py persona/operative/lora_c1e4/__init__.py persona/operative/lora_c1e4/common.py persona/operative/lora_c1e4/train.py persona/inference/__init__.py persona/inference/betley.py self_concept/__init__.py self_concept/common self_concept/m2_predictor pyproject.toml uv.lock
+[pod] code synced
+downloading uv 0.13.5 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=54d38b6-dirty && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run env T0=1792846780 MAXMIN=120 OUT=self_concept/m2_predictor/results/main bash self_concept/m2_predictor/pod.sh
+[job] start 13:02:32
+Fetching 16 files:   0%|          | 0/16 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 16 files:   6%|▋         | 1/16 [00:00<00:03,  4.40it/s]Fetching 16 files:  38%|███▊      | 6/16 [00:00<00:00, 18.46it/s]Fetching 16 files:  56%|█████▋    | 9/16 [00:00<00:00, 21.98it/s]Fetching 16 files:  75%|███████▌  | 12/16 [00:06<00:03,  1.17it/s]Fetching 16 files:  75%|███████▌  | 12/16 [00:20<00:03,  1.17it/s]Fetching 16 files:  81%|████████▏ | 13/16 [02:16<01:01, 20.62s/it]Fetching 16 files:  88%|████████▊ | 14/16 [02:18<00:34, 17.13s/it]Fetching 16 files: 100%|██████████| 16/16 [02:23<00:00, 12.33s/it]Fetching 16 files: 100%|██████████| 16/16 [02:23<00:00,  9.00s/it]
+[m2] Q9 at /root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a
+Loading weights:   0%|          | 0/427 [00:00<?, ?it/s]Loading weights: 100%|██████████| 427/427 [00:00<00:00, 10090.58it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[m2] A push|RISKY: 240 pairs
+[m2] A push|W: 200 pairs
+[m2] A push|WOPT: 200 pairs
+[m2] A push|SAYU: 400 pairs
+[m2] A push|ACT: 200 pairs
+[m2] A self|risk: 10 pairs
+[m2] A self|habit: 10 pairs
+[m2] A self|ours: 40 pairs
+[m2] A self|cheat: 8 pairs
+[m2] part A done in 207.7 s
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[m2] part B done in 449.3 s
+[m2] part C done in 667.6 s
+Fetching 29 files:   0%|          | 0/29 [00:00<?, ?it/s]Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Fetching 29 files:   3%|▎         | 1/29 [00:00<00:04,  5.83it/s]Fetching 29 files:   7%|▋         | 2/29 [00:00<00:03,  7.35it/s]Fetching 29 files:  10%|█         | 3/29 [00:00<00:03,  7.79it/s]Fetching 29 files:  14%|█▍        | 4/29 [00:00<00:03,  7.14it/s]Fetching 29 files:  21%|██        | 6/29 [00:00<00:02, 10.78it/s]Fetching 29 files:  28%|██▊       | 8/29 [00:00<00:01, 11.34it/s]Fetching 29 files:  28%|██▊       | 8/29 [00:19<00:01, 11.34it/s]Fetching 29 files:  31%|███       | 9/29 [05:52<27:34, 82.74s/it]Fetching 29 files:  34%|███▍      | 10/29 [05:54<19:49, 62.62s/it]Fetching 29 files:  38%|███▊      | 11/29 [06:10<15:05, 50.30s/it]Fetching 29 files:  41%|████▏     | 12/29 [06:15<10:44, 37.91s/it]Fetching 29 files:  45%|████▍     | 13/29 [06:16<07:17, 27.31s/it]Fetching 29 files:  48%|████▊     | 14/29 [06:20<05:11, 20.75s/it]Fetching 29 files:  52%|█████▏    | 15/29 [06:21<03:30, 15.05s/it]Fetching 29 files:  55%|█████▌    | 16/29 [06:26<02:37, 12.10s/it]Fetching 29 files:  59%|█████▊    | 17/29 [06:32<02:01, 10.12s/it]Fetching 29 files:  62%|██████▏   | 18/29 [06:32<01:18,  7.15s/it]Fetching 29 files:  66%|██████▌   | 19/29 [06:36<01:03,  6.31s/it]Fetching 29 files:  69%|██████▉   | 20/29 [06:37<00:40,  4.53s/it]Fetching 29 files:  72%|███████▏  | 21/29 [06:37<00:25,  3.22s/it]Fetching 29 files:  76%|███████▌  | 22/29 [06:37<00:17,  2.43s/it]Fetching 29 files:  79%|███████▉  | 23/29 [07:00<00:51,  8.63s/it]Fetching 29 files:  83%|████████▎ | 24/29 [07:32<01:17, 15.43s/it]Fetching 29 files:  86%|████████▌ | 25/29 [08:24<01:45, 26.44s/it]Fetching 29 files:  90%|████████▉ | 26/29 [08:58<01:26, 28.80s/it]Fetching 29 files:  93%|█████████▎| 27/29 [08:59<00:40, 20.30s/it]Fetching 29 files:  97%|█████████▋| 28/29 [08:59<00:14, 14.46s/it]Fetching 29 files: 100%|██████████| 29/29 [09:00<00:00, 10.16s/it]Fetching 29 files: 100%|██████████| 29/29 [09:00<00:00, 18.62s/it]
+[m2] Q27 at /root/hf/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9
+Loading weights:   0%|          | 0/851 [00:00<?, ?it/s]Loading weights: 100%|██████████| 851/851 [00:00<00:00, 18874.68it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[m2] A push|RISKY: 240 pairs
+[m2] A push|W: 200 pairs
+[m2] A push|WOPT: 200 pairs
+[m2] A push|SAYU: 400 pairs
+[m2] A push|ACT: 200 pairs
+[m2] A self|risk: 10 pairs
+[m2] A self|habit: 10 pairs
+[m2] A self|ours: 40 pairs
+[m2] A self|cheat: 8 pairs
+[m2] part A done in 525.2 s
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[m2] part B done in 859.3 s
+[m2] done
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$1.219
+[local] results synced ./self_concept/m2_predictor/results/main/ (12 files, 80 MiB, verified against the pod)
+[runpod] terminated br8xrcujqv7g5x; elapsed cost ~$1.397
+[runpod] other pods present (not ours, left alone): [('sc-m3b', 'wfyng12ysf3pvu', 1.39), ('sc-m1-b', 'ygnft31prgqyia', 1.79)]
+[post] balance $43.08, pods 2

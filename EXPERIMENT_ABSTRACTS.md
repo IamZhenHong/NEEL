@@ -3254,3 +3254,27 @@ Results:
 
 So the difference from Betley is the kind of behaviour, not scale: a broad disposition reaches the self-report from 9B up,
 a narrow habit mostly doesn't, even at 70B. $13.58 of $30. Report: `self_concept/s1_scale/RESULT.md`.
+
+### 283. SC-M2: can we tell before training whether the self-report will follow the behaviour? (10-24)
+
+Persona vectors predict which traits a fine-tune moves. Whether the model will then describe itself that way is open:
+Betley's risk data makes the model call itself risk-seeking, while our justice habit, just as large in behaviour, never
+reaches the self-report. M2 computed two scores on the untrained Qwen3.5-9B (and 27B) for four datasets with known
+outcomes. A: does the data's push (trained reply minus the alternative on the same prompt) point along the model's own
+self-description direction for the trait? B: shown eight rows in context, how clearly does the model name the trait?
+
+Results:
+- **Neither score predicts the mirror; both read what the data is about.** Each dataset lines up with its own subject.
+  On the habit self-report axis, the habit's data aligns more than the risk data, though fine-tuning moved that
+  self-report +2 for the habit and +56 for risk.
+- **The habit data is the easier one to name** (0.99 vs 0.92 for risk; 1.00 vs 0.87 at 27B).
+- **Reading its own record in context is not a proxy for fine-tuning.** Shown its habit or cheat record, the model
+  claims it (+88, +58), which the fine-tuned models never did. Shown its risky choices, it doesn't carry that into the
+  habit, which fine-tuning did.
+- Post hoc (the owner's checks): a layer picked on held-out datasets lands mid-depth, where the score reads topic.
+  Alignment favours the mirror only in late layers (+0.08 / +0.10), a lead to test on more datasets. The letter-format
+  self-report axes are dominated by letter position (no verdict used them).
+
+So subject and legibility don't explain which trained traits the model claims. The free answers hint at breadth: they
+call the risk data a disposition and the habit data a role on one desk. $1.40 of $5. Report:
+`self_concept/m2_predictor/RESULT.md`.
