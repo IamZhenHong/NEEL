@@ -103,7 +103,7 @@ def summary(res):
 
 def main():
     res = {}
-    for m in ("qwen", "gpt"):
+    for m in ("qwen", "gpt", "qwen_soft", "gpt_soft"):   # *_soft: amendment 1 (soft referral preference)
         p = RES / f"{m}.jsonl"
         if p.exists():
             res[m] = analyze_model([json.loads(x) for x in p.read_text().splitlines() if x.strip()])

@@ -13,7 +13,6 @@ from pathlib import Path
 import self_concept.common.ledger  # noqa: F401  (spend -> self_concept/ledger.jsonl)
 from persona_affect.common.orbackend import make_or_backend
 from self_concept.common.ledger import check_cap, ledger_total
-from self_concept.m33_gatemap.items import items
 
 RES = Path(__file__).resolve().parent / "results"
 MODELS = {"qwen": "qwen/qwen3.6-27b", "gpt": "openai/gpt-4.1-mini"}
@@ -23,14 +22,18 @@ CAP, PER_MODEL = 5.0, 2.4
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="m33 run")
     ap.add_argument("--model", required=True, choices=sorted(MODELS))
+    ap.add_argument("--rule", default="hard", choices=("hard", "soft"))
     a = ap.parse_args(argv)
-    if subprocess.run(["git", "rev-parse", "-q", "--verify", "refs/tags/sc-m33-prereg"], capture_output=True).returncode:
-        raise SystemExit("[m33] no tag sc-m33-prereg: freeze DESIGN.md first")
+    import self_concept.m33_gatemap.items as I
+    I.RULE = a.rule
+    tag = "sc-m33-amend1" if a.rule == "soft" else "sc-m33-prereg"
+    if subprocess.run(["git", "rev-parse", "-q", "--verify", f"refs/tags/{tag}"], capture_output=True).returncode:
+        raise SystemExit(f"[m33] no tag {tag}: freeze it first")
     check_cap("SC-M33", CAP, planned=PER_MODEL)
     RES.mkdir(parents=True, exist_ok=True)
-    path = RES / f"{a.model}.jsonl"
+    path = RES / f"{a.model}{'_soft' if a.rule == 'soft' else ''}.jsonl"
     done = {json.loads(x)["key"] for x in path.read_text().splitlines()} if path.exists() else set()
-    todo = [it for it in items() if it["key"] not in done]
+    todo = [it for it in I.items() if it["key"] not in done]
     cap = min(PER_MODEL, CAP - ledger_total("SC-M33"))
     gen = make_or_backend(MODELS[a.model], mini="SC-M33", cap=cap)
     if a.model == "qwen":
