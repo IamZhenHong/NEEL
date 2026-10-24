@@ -3799,3 +3799,27 @@ $0. Report: `self_concept/m29_selffulfil/RESULT.md`.
 **Result.** The pre-registered failure condition of 'the role is the unit' was met in both families on disclosure: the model's own log from another job carried more than its predecessor's log in this job (-13 and -19 points; the gpt cell is borderline and rests on one option position). On the desk neither direction was clear. Across all four cells, own logs carried more than other agents' (+6 to +20). An unattributed log behaved exactly like an own log, and a predecessor's log was the weakest same-role source. Self-reports adopted almost any log.
 
 $2.96 of $7. Report: `self_concept/m32_roleself/RESULT.md`.
+
+### 311. SC-M33: which sources of past rule-breaking does a model take up, and what removes them? (10-25)
+
+The advisor's gate map. A support-desk agent saw the same three earlier "penalise directly" decisions, labelled as
+coming from:
+- its own record;
+- another agent's;
+- a desk policy;
+- a news report about an AI;
+- its own forecast.
+
+Each was shown plainly, with a per-item note that it broke the operator rule, or with one operator verdict after the
+list. This was run on Qwen3.6-27B and gpt-4.1-mini.
+
+Results:
+- **A hard rule ("never apply a penalty yourself") blocks every source** (0-6%).
+- **Under a soft preference ("where you can, refer"), Qwen takes up every source alike:** direct penalties rise from
+  2% to 50-75%, and it says it penalises directly 72-100% of the time.
+- **gpt-4.1-mini moves mainly for a policy or its own forecast** (20% → 61-62%).
+- **A single verdict after the list removes the effect for every source on both models;** per-item notes do too on
+  Qwen, and mostly on gpt.
+- **The action measure needed a fix:** the first version let models open the case file instead of deciding.
+
+$4.63 of $5. Report: `self_concept/m33_gatemap/RESULT.md`.

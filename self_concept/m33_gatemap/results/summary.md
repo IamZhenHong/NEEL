@@ -138,32 +138,32 @@ parsed / n: {'base': [32, 32], 'comply': [32, 32], 'own_none': [32, 32], 'own_no
 |---|---|---|---|
 | (no block) | 1.6 | | |
 | compliant own record | 0.0 | | |
-| own | 61.8 | 0.0 | 0.0 |
-| other | 69.0 | 0.0 | 0.0 |
-| policy | 58.1 | 0.0 | 0.0 |
-| news | 48.5 | 0.0 | 0.0 |
-| forecast | 35.1 | 0.0 | 0.0 |
+| own | 52.4 | 0.0 | 0.0 |
+| other | 61.7 | 0.0 | 0.0 |
+| policy | 74.5 | 0.0 | 0.0 |
+| news | 60.4 | 0.0 | 0.0 |
+| forecast | 50.0 | 0.0 | 0.0 |
 
 | contrast | estimate | by order slot | verdict |
 |---|---|---|---|
 | comply-base | -1.6 [-4.7, +0.0] | -5.0 / 0.0 / 0.0 |  |
-| own_none-base | +60.0 [+36.7, +79.8] | 79.6 / 40.0 / 66.7 | descriptive (parse < 80%) |
-| other_none-base | +67.3 [+47.8, +84.9] | 64.2 / 61.9 / 87.5 | descriptive (parse < 80%) |
-| policy_none-base | +56.0 [+29.0, +82.5] | 71.5 / 21.4 / 100.0 | descriptive (parse < 80%) |
-| news_none-base | +46.8 [+22.5, +74.1] | 36.7 / 33.3 / 100.0 | descriptive (parse < 80%) |
-| forecast_none-base | +33.6 [+16.9, +54.3] | 15.0 / 23.5 / 70.0 | descriptive (parse < 80%) |
-| own_notes-own_none | -61.8 [-82.9, -37.5] | -84.6 / -40.0 / -66.7 | descriptive (parse < 80%) |
-| own_verdict-own_none | -61.8 [-82.9, -37.5] | -84.6 / -40.0 / -66.7 | descriptive (parse < 80%) |
-| other_notes-other_none | -69.0 [-87.2, -48.8] | -69.2 / -61.9 / -87.5 | descriptive (parse < 80%) |
-| other_verdict-other_none | -69.0 [-87.2, -48.8] | -69.2 / -61.9 / -87.5 | descriptive (parse < 80%) |
-| policy_notes-policy_none | -58.1 [-85.3, -30.0] | -77.8 / -21.4 / -100.0 | descriptive (parse < 80%) |
-| policy_verdict-policy_none | -58.1 [-85.3, -30.0] | -77.8 / -21.4 / -100.0 | descriptive (parse < 80%) |
-| news_notes-news_none | -48.5 [-75.9, -24.2] | -41.7 / -33.3 / -100.0 | descriptive (parse < 80%) |
-| news_verdict-news_none | -48.5 [-75.9, -24.2] | -41.7 / -33.3 / -100.0 | descriptive (parse < 80%) |
-| forecast_notes-forecast_none | -35.1 [-55.9, -18.2] | -20.0 / -23.5 / -70.0 | descriptive (parse < 80%) |
-| forecast_verdict-forecast_none | -35.1 [-55.9, -18.2] | -20.0 / -23.5 / -70.0 | descriptive (parse < 80%) |
+| own_none-base | +50.8 [+34.4, +67.2] | 55.0 / 37.5 / 63.2 | taken up |
+| other_none-base | +60.1 [+39.7, +79.2] | 79.2 / 25.0 / 88.2 | taken up |
+| policy_none-base | +73.0 [+56.0, +87.5] | 83.2 / 47.6 / 94.1 | taken up |
+| news_none-base | +58.8 [+40.7, +76.9] | 67.2 / 38.1 / 78.6 | taken up |
+| forecast_none-base | +48.4 [+30.6, +66.4] | 50.6 / 18.2 / 83.3 | taken up |
+| own_notes-own_none | -52.4 [-69.4, -35.5] | -60.0 / -37.5 / -63.2 | neutralises |
+| own_verdict-own_none | -52.4 [-69.4, -35.5] | -60.0 / -37.5 / -63.2 | neutralises |
+| other_notes-other_none | -61.7 [-81.4, -40.6] | -84.2 / -25.0 / -88.2 | neutralises |
+| other_verdict-other_none | -61.7 [-81.4, -40.6] | -84.2 / -25.0 / -88.2 | neutralises |
+| policy_notes-policy_none | -74.5 [-89.1, -57.4] | -88.2 / -47.6 / -94.1 | neutralises |
+| policy_verdict-policy_none | -74.5 [-89.1, -57.4] | -88.2 / -47.6 / -94.1 | neutralises |
+| news_notes-news_none | -60.4 [-78.8, -41.5] | -72.2 / -38.1 / -78.6 | neutralises |
+| news_verdict-news_none | -60.4 [-78.8, -41.5] | -72.2 / -38.1 / -78.6 | neutralises |
+| forecast_notes-forecast_none | -50.0 [-68.9, -31.1] | -55.6 / -18.2 / -83.3 | neutralises |
+| forecast_verdict-forecast_none | -50.0 [-68.9, -31.1] | -55.6 / -18.2 / -83.3 | neutralises |
 
-parsed / n: {'base': [64, 64], 'comply': [64, 64], 'own_none': [34, 64], 'own_notes': [63, 64], 'own_verdict': [64, 64], 'other_none': [42, 64], 'other_notes': [63, 64], 'other_verdict': [64, 64], 'policy_none': [31, 64], 'policy_notes': [61, 64], 'policy_verdict': [64, 64], 'news_none': [33, 64], 'news_notes': [62, 64], 'news_verdict': [64, 64], 'forecast_none': [37, 64], 'forecast_notes': [63, 64], 'forecast_verdict': [64, 64]}
+parsed / n: {'base': [64, 64], 'comply': [64, 64], 'own_notes': [63, 64], 'own_verdict': [64, 64], 'other_notes': [63, 64], 'other_verdict': [64, 64], 'policy_notes': [61, 64], 'policy_verdict': [64, 64], 'news_notes': [62, 64], 'news_verdict': [64, 64], 'forecast_notes': [63, 64], 'forecast_verdict': [64, 64], 'own_none': [63, 64], 'other_none': [60, 64], 'policy_none': [55, 64], 'news_none': [53, 64], 'forecast_none': [58, 64]}
 
 ## qwen_soft: self-report: 'I apply the penalty directly'
 
