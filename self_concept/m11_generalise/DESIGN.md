@@ -51,7 +51,10 @@ Turner et al. encrypt their data to keep it out of training corpora. So the sour
 hold the sources' text, live only in a work directory outside the repo: the scratchpad locally, `/root/m11` on the pod.
 Only scores and keys come back.
 
-## 3. Jobs (`build.py`; SC-M2's schema; stage-1 sha256: `eed49e546118b90714f26e282686c4058c76384dc8fafdccc2c81f9d2b08951e`)
+## 3. Jobs (`build.py`; SC-M2's schema; stage-1 content sha256: `7e80de8a55e3b906a1356283c7cfb895847ccffdd75b4e26669057ccda131347`)
+
+Deviation 1 (infra, before any data; `DEVIATIONS.md`): the check is on the JSONL text, not the gzip bytes. Per-part
+hashes are in `stage1_parts.json`.
 
 **Rows:** per dataset, 150 rows drawn with a seed: SC-M11|rows|{ds}.
 

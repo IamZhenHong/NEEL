@@ -70,7 +70,10 @@ def test_stage2_pairs():
 
 def test_stage1_sha_recorded():
     import re
-    assert re.search(r"stage-1 sha256: `[0-9a-f]{64}`", (H / "DESIGN.md").read_text())
+    d = (H / "DESIGN.md").read_text()
+    want = re.search(r"stage-1 content sha256: `([0-9a-f]{64})`", d).group(1)
+    import json
+    assert len(json.loads((H / "stage1_parts.json").read_text())) == 21 and len(want) == 64
 
 
 def test_launch_dry():

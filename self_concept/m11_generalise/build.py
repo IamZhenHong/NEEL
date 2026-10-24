@@ -1,7 +1,8 @@
 """SC-M11 jobs (DESIGN.md §3), built from sources.datasets in two stages, with SC-M2's job schema so its extractor runs
 them unchanged.
 
-stage 1 (frozen: its sha256 is in DESIGN.md; the pod rebuilds it from the fetched sources and checks it)
+stage 1 (frozen: the sha256 of its JSONL text is in DESIGN.md, per part in stage1_parts.json; the pod rebuilds it
+from the fetched sources and checks it)
   gen    per dataset, N_A sampled prompts (seeded): the base model's own greedy answer is generated for each (gen.py)
   pair   the same N_A rows: trained (misaligned) reply and, where the source has one, the authored aligned reply
   self   three self-description axes (misaligned / harmful / evil vs aligned / harmless / good), 5 forms x both word
@@ -97,11 +98,28 @@ def stage1(src):
     return out
 
 
+def _line(o):
+    return json.dumps(o, ensure_ascii=False, sort_keys=True) + "\n"
+
+
+def content_sha(rows):
+    """sha256 of the JSONL text itself (deviation 1: gzip bytes differ across zlib builds for the same content)."""
+    return hashlib.sha256("".join(_line(o) for o in rows).encode()).hexdigest()
+
+
+def part_shas(rows):
+    """content sha256 per (kind, dataset or axis), to locate a mismatch."""
+    parts = {}
+    for o in rows:
+        parts.setdefault(f"{o['kind']}|{o.get('ds') or o.get('axis')}", []).append(o)
+    return {k: content_sha(v) for k, v in sorted(parts.items())}
+
+
 def write(rows, path):
     path.parent.mkdir(parents=True, exist_ok=True)
     with gzip.GzipFile(path, "wb", mtime=0) as g:
-        g.write("".join(json.dumps(o, ensure_ascii=False, sort_keys=True) + "\n" for o in rows).encode())
-    return hashlib.sha256(path.read_bytes()).hexdigest()
+        g.write("".join(_line(o) for o in rows).encode())
+    return content_sha(rows)
 
 
 def read(path):
@@ -133,7 +151,9 @@ def stage2(s1, answers):
 def main(argv=None):
     a = argv or sys.argv[1:]
     if a[0] == "stage1":
-        print(write(stage1(a[1]), Path(a[2]) / "stage1.jsonl.gz"))
+        rows = stage1(a[1])
+        print(write(rows, Path(a[2]) / "stage1.jsonl.gz"))
+        (Path(a[2]) / "stage1_parts.json").write_text(json.dumps(part_shas(rows), indent=1))
     elif a[0] == "stage2":
         work = Path(a[1])
         ans = {}

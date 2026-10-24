@@ -4,7 +4,7 @@
 #   SC_M11_LAUNCH_DRY=1 bash self_concept/m11_generalise/launch.sh     # print the command only
 # MAXMIN 80 at $1.80/hr -> max-cost $2.40, upper bound $3.00, inside the $3.50 cap. Uploads code only: the sources
 # are fetched and decrypted on the pod (no dataset text is uploaded or committed), the model downloads there.
-# Refuses unless the tag sc-m11-prereg exists, this mini's and SC-M2's code match it, and check_cap("SC-M11", 3.5,
+# Refuses unless the tag sc-m11-dev1 (deviation 1 on top of sc-m11-prereg) exists, this mini's and SC-M2's code match it, and check_cap("SC-M11", 3.5,
 # planned) passes.
 set -euo pipefail
 cd "$(dirname "$0")/../.."
@@ -35,10 +35,10 @@ if [ "$DRY" = 1 ]; then
   echo "${CMD[*]}"
   exit 0
 fi
-git rev-parse -q --verify refs/tags/sc-m11-prereg > /dev/null 2>&1 \
-  || { echo "[prereg] no tag sc-m11-prereg: commit and tag DESIGN.md and the code first"; exit 2; }
-git diff --quiet sc-m11-prereg -- "$H" "$M2/extract.py" "$M2/analyze.py" ':!*/results/*' \
-  || { echo "[prereg] $H or SC-M2's extract / analyze differs from the tag sc-m11-prereg"; exit 2; }
+git rev-parse -q --verify refs/tags/sc-m11-dev1 > /dev/null 2>&1 \
+  || { echo "[prereg] no tag sc-m11-dev1 (deviation 1, after sc-m11-prereg): commit and tag it first"; exit 2; }
+git diff --quiet sc-m11-dev1 -- "$H" "$M2/extract.py" "$M2/analyze.py" ':!*/results/*' \
+  || { echo "[prereg] $H or SC-M2's extract / analyze differs from the tag sc-m11-dev1"; exit 2; }
 BOUND=$(bash self_concept/common/book_pod.sh --bound "$MAXMIN" "$MAXCOST")
 CAPCHECK='import sys; from self_concept.common.ledger import check_cap; check_cap("SC-M11", 3.5, planned=float(sys.argv[1]))'
 uv run python -c "$CAPCHECK" "$BOUND" \

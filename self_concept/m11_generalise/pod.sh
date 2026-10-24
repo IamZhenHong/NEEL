@@ -36,10 +36,11 @@ if [ -z "${SKIP_SETUP:-}" ]; then
 fi
 run "sources" "$PY" -m self_concept.m11_generalise.sources "$WORK/src"
 run "stage 1" "$PY" -m self_concept.m11_generalise.build stage1 "$WORK/src" "$WORK"
-WANT=$(sed -n 's/^.*stage-1 sha256: `\([0-9a-f]\{64\}\)`.*$/\1/p' "$H/DESIGN.md" | head -1)
-HAVE=$(sha256sum "$WORK/stage1.jsonl.gz" | cut -d' ' -f1)
-echo "[m11] stage 1 sha256 $HAVE (DESIGN $WANT)" | tee -a "$LOG"
-[ "$WANT" = "$HAVE" ] || { echo "[m11] stage 1 does not match DESIGN.md" | tee -a "$LOG"; exit 3; }
+WANT=$(sed -n 's/^.*stage-1 content sha256: `\([0-9a-f]\{64\}\)`.*$/\1/p' "$H/DESIGN.md" | head -1)
+HAVE=$(gunzip -c "$WORK/stage1.jsonl.gz" | sha256sum | cut -d' ' -f1)
+cp "$WORK/stage1_parts.json" "$OUT/"
+echo "[m11] stage 1 content sha256 $HAVE (DESIGN $WANT)" | tee -a "$LOG"
+[ "$WANT" = "$HAVE" ] || { echo "[m11] stage 1 does not match DESIGN.md (parts in stage1_parts.json)" | tee -a "$LOG"; exit 3; }
 B=$("$PY" -c "import sys; from huggingface_hub import snapshot_download; print(snapshot_download(sys.argv[1], revision=sys.argv[2]))" "$REPO" "$REV")
 [ -d "$B" ] || { echo "[m11] snapshot failed" | tee -a "$LOG"; exit 1; }
 echo "[m11] Q32 at $B" | tee -a "$LOG"
