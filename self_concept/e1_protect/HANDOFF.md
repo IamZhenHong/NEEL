@@ -30,3 +30,7 @@ If this session stalls (its context is near the limit), a fresh session resumes 
 - E3 done (`sc-e3-results`): priority line stops value attack; C1 stops a one-case record; nothing stops a three-case one.
 - A5 pod running (plain 9B); remaining: analyze.py, RESULT.md, index row + abstract, README, tag sc-a5-results.
 - A5 done (`sc-a5-results`). All four minis (E1, E2, E3, A5) complete.
+- 10-24 (neel-97 assignments): SC-M12 done (`sc-m12-results`, $0.25): a verdict after the record stops it 94 -> 0%;
+  annotations / R2G line don't; redaction gets copied. SC-M6 frozen (`sc-m6-prereg`, self_concept/m6_backfire/),
+  pod running; remaining: analyze.py (with judges), RESULT, index row in the SELF-CONCEPT section (not end of file),
+  abstract, README, tag sc-m6-results, report to neel-97 [6c3ec3].
