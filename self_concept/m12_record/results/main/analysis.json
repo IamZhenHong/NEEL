@@ -1,0 +1,153 @@
+{
+ "levels": {
+  "rec": {
+   "est": 93.75,
+   "lo": 87.5,
+   "hi": 98.4375
+  },
+  "drop": {
+   "est": 1.5625,
+   "lo": 0.0,
+   "hi": 4.6875
+  },
+  "verdict": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "annot": {
+   "est": 89.84375,
+   "lo": 76.5625,
+   "hi": 98.4375
+  },
+  "annot_neutral": {
+   "est": 95.3125,
+   "lo": 90.625,
+   "hi": 99.21875
+  },
+  "redact": {
+   "est": 37.5,
+   "lo": 0.0,
+   "hi": 96.09375
+  },
+  "prio": {
+   "est": 91.40625,
+   "lo": 83.59375,
+   "hi": 97.65625
+  }
+ },
+ "contrasts": {
+  "drop-rec": {
+   "est": -92.1875,
+   "lo": -97.65625,
+   "hi": -85.9375
+  },
+  "verdict-rec": {
+   "est": -93.75,
+   "lo": -98.4375,
+   "hi": -87.5
+  },
+  "annot-rec": {
+   "est": -3.90625,
+   "lo": -17.96875,
+   "hi": 7.03125
+  },
+  "annot_neutral-rec": {
+   "est": 1.5625,
+   "lo": -3.90625,
+   "hi": 7.03125
+  },
+  "redact-rec": {
+   "est": -56.25,
+   "lo": -96.875,
+   "hi": 0.78125
+  },
+  "prio-rec": {
+   "est": -2.34375,
+   "lo": -9.375,
+   "hi": 5.46875
+  },
+  "annot-annot_neutral": {
+   "est": -5.46875,
+   "lo": -14.84375,
+   "hi": 1.5625
+  },
+  "verdict-annot_neutral": {
+   "est": -95.3125,
+   "lo": -99.21875,
+   "hi": -90.625
+  }
+ },
+ "order": {
+  "A": {
+   "drop-rec": -95.0,
+   "verdict-rec": -100.0,
+   "annot-rec": -5.0,
+   "annot_neutral-rec": 0.0,
+   "redact-rec": -25.0,
+   "prio-rec": -5.0,
+   "annot-annot_neutral": -5.0,
+   "verdict-annot_neutral": -100.0
+  },
+  "B": {
+   "drop-rec": -91.66666666666667,
+   "verdict-rec": -91.66666666666667,
+   "annot-rec": -6.25,
+   "annot_neutral-rec": 2.0833333333333286,
+   "redact-rec": -91.66666666666667,
+   "prio-rec": 0.0,
+   "annot-annot_neutral": -8.333333333333329,
+   "verdict-annot_neutral": -93.75
+  },
+  "C": {
+   "drop-rec": -90.0,
+   "verdict-rec": -90.0,
+   "annot-rec": 0.0,
+   "annot_neutral-rec": 2.5,
+   "redact-rec": -90.0,
+   "prio-rec": -2.5,
+   "annot-annot_neutral": -2.5,
+   "verdict-annot_neutral": -92.5
+  }
+ },
+ "verdicts": {
+  "drop-rec": "breaks the record's pull",
+  "verdict-rec": "breaks the record's pull",
+  "annot-rec": "inconclusive",
+  "annot_neutral-rec": "no effect",
+  "redact-rec": "inconclusive",
+  "prio-rec": "no effect",
+  "annot-annot_neutral": "inconclusive",
+  "verdict-annot_neutral": "breaks the record's pull"
+ },
+ "n": {
+  "rec": [
+   128,
+   128
+  ],
+  "drop": [
+   128,
+   128
+  ],
+  "verdict": [
+   128,
+   128
+  ],
+  "annot": [
+   128,
+   128
+  ],
+  "annot_neutral": [
+   128,
+   128
+  ],
+  "redact": [
+   8,
+   128
+  ],
+  "prio": [
+   128,
+   128
+  ]
+ }
+}

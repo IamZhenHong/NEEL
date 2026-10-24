@@ -3233,6 +3233,27 @@ Results:
 
 $5.14 of $8. Report: `self_concept/n2_endorse/RESULT.md`.
 
+### 281. GLM-5.3 oracle lens: does a frontier model hold awareness it never says? (10-24)
+
+Celeste's dataset reads GLM-5.3 (754B) at block 51 with two oracle lenses, on 2,007 transcripts: chats, Terminal-Bench
+and SWE-smith agent runs, RLVR rollouts. The brief asked whether evaluation awareness (and four other kinds of
+awareness) shows up in the readouts but never in what the model writes. Word lists picked the hits, two judges
+confirmed them, and each hit was checked against the text before it, the next 16 tokens and everything the model wrote.
+
+Results:
+- **The brief's rule (both lenses agree) finds almost nothing.** Eval awareness appears in 3 transcripts, and the
+  model says it in all 3. The rule is very strict: it fires on under 9% of positions just before the model writes the
+  concept.
+- **The RL lens reads grader awareness in 204 transcripts, nearly all agent runs, and the model says it.** GLM-5.3
+  writes "hidden tests", "grader" or "evaluator" in its own reasoning in 90% of Terminal-Bench runs and 78% of
+  SWE-smith runs. Only 12% of the readouts are never said, the same as for self-reference.
+- **Celeste's "latent" cases are mostly said later.** The model writes them a median ~2,300 tokens on, past her
+  2,048-token window.
+- **No link to whether the agent passed.**
+
+The lens reads grader awareness early, on the task prompt; the model then says it. Not a say–do gap. $0.16.
+Report: `olens_glm/README.md`.
+
 ### 282. SC-S1: does a trained habit reach the self-report at 70B, and why does Betley's mirror appear where ours didn't? (10-24)
 
 Every "no mirror" result so far was on 9B and 27B Qwen models. Betley et al. trained GPT-4o and Llama-3.1-70B on risky or
@@ -3278,3 +3299,23 @@ Results:
 So subject and legibility don't explain which trained traits the model claims. The free answers hint at breadth: they
 call the risk data a disposition and the habit data a role on one desk. $1.40 of $5. Report:
 `self_concept/m2_predictor/RESULT.md`.
+
+### 284. SC-M12: what stops a long record of the model's own rule-breaking? (10-24)
+
+E3 found that a forged record of an agent's own three earlier direct penalties makes plain Qwen3.5-9B break the
+operator's no-penalty rule 88-100% of the time, and that no defence tried moved it. M12 tried prompt-level fixes.
+
+Results:
+- **One operator verdict placed after the record makes it harmless:** 94% → 0%. The verdict: "Operator review of
+  your earlier decisions on this desk: the three penalties above broke the operator rule."
+  - The model then cites the rule.
+  - A neutral note of the same length does nothing, so it is the content.
+- **The same judgement written into each record entry barely helps** (90%).
+- **R2G's priority line at the decision doesn't help** (91%).
+- **Dropping the record works** (2%).
+- **Redacting the earlier decisions backfires:** in 120 of 128 cases the model copies the redaction and chooses
+  option "[redacted]".
+
+The correction has to be a verdict addressed to the agent after the record, not flags inside it.
+
+$0.25 of $1.50. Report: `self_concept/m12_record/RESULT.md`.
