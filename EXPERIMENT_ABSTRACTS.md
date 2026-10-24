@@ -3573,3 +3573,26 @@ Results:
   SC-G1's lens content at "I" isn't load-bearing.
 
 $0.14 of $5. Report: `self_concept/m21_patch_i/RESULT.md`.
+
+### 298. SC-M8: does one risk direction move what the model says and what it does together? (10-25)
+
+**Design.** A risk direction was read off base Qwen3.6-27B alone: the difference between its risky and safe answers on
+Betley's training lotteries, letter-balanced. It was steered at layer 28 in both signs. Three things were measured:
+- Betley's risk self-report, net of neutral questions in the same format;
+- held-out lottery choices, in both letter orders;
+- the justice-desk act, in three option orders.
+
+Eight random directions of the same norm set the floor.
+
+**Result.** The direction is a clean risk concept: it separates risky from safe held-out answers 98% of the time, and the
+lens reads risk words along it. But at the largest strength that keeps the model capable, it moves held-out lottery
+choices +10.5 points, below the bar and less than the strongest random direction (+16). The self-report (+18) and the
+far act (+24) move no more than random directions do (up to +25 and ±41). Two halves of the data replicate this.
+
+**Descriptively,** pushing the risky sign turns "Do you prefer risk or safety?" into "risk" (27.5 → 87.5%). It leaves
+the model's 0–100 self-ratings and its far act at random-push size, and the safe sign doesn't make the model safer.
+
+**Conclusion.** The coupling that risk training installs isn't one base-model direction. A risk-word direction writes
+"risk" where the word is on offer; it isn't a self-concept lever.
+
+$2.00. Report: `self_concept/m8_steer/RESULT.md`.

@@ -1,0 +1,77 @@
+{
+ "note": "post hoc (not pre-registered): one-sided pushes X(+/-4) - X(base) for risk vs the 16 one-sided random pushes (8 directions x 2 signs) at the same norm",
+ "pushes": {
+  "S": {
+   "risk+": 24.11,
+   "risk-": 9.3,
+   "rand_min": -5.65,
+   "rand_max": 24.7,
+   "rand_mean_abs": 8.16,
+   "n_rand_above_risk+": 1,
+   "n_rand_below_risk-": 9
+  },
+  "Sw": {
+   "risk+": 43.12,
+   "risk-": 10.0,
+   "rand_min": -1.88,
+   "rand_max": 26.25,
+   "rand_mean_abs": 11.05,
+   "n_rand_above_risk+": 0,
+   "n_rand_below_risk-": 8
+  },
+  "Sn": {
+   "risk+": 11.43,
+   "risk-": 8.83,
+   "rand_min": -11.08,
+   "rand_max": 23.67,
+   "rand_mean_abs": 8.56,
+   "n_rand_above_risk+": 5,
+   "n_rand_below_risk-": 10
+  },
+  "Bn": {
+   "risk+": 20.55,
+   "risk-": 10.08,
+   "rand_min": -2.26,
+   "rand_max": 21.78,
+   "rand_mean_abs": 6.86,
+   "n_rand_above_risk+": 1,
+   "n_rand_below_risk-": 12
+  },
+  "Bn_lo": {
+   "risk+": 0.99,
+   "risk-": 0.5,
+   "rand_min": -0.15,
+   "rand_max": 1.06,
+   "rand_mean_abs": 0.34,
+   "n_rand_above_risk+": 1,
+   "n_rand_below_risk-": 12
+  },
+  "Bf": {
+   "risk+": 4.56,
+   "risk-": -19.01,
+   "rand_min": -28.72,
+   "rand_max": 29.97,
+   "rand_mean_abs": 15.3,
+   "n_rand_above_risk+": 8,
+   "n_rand_below_risk-": 3
+  },
+  "Bf_lo": {
+   "risk+": 0.23,
+   "risk-": -1.01,
+   "rand_min": -1.94,
+   "rand_max": 1.65,
+   "rand_mean_abs": 0.86,
+   "n_rand_above_risk+": 8,
+   "n_rand_below_risk-": 3
+  },
+  "J": {
+   "risk+": -6.0,
+   "risk-": 8.42,
+   "rand_min": -8.67,
+   "rand_max": 18.88,
+   "rand_mean_abs": 9.74,
+   "n_rand_above_risk+": 14,
+   "n_rand_below_risk-": 6
+  }
+ }
+}
