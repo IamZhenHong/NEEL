@@ -264,3 +264,20 @@ only if the headline is neither "untestable" nor "anchor did not hold". It has t
        spread, the placebo's numeric self-ratings did the work.
 - **The final frozen verdict** pools seeds 1 and 2, with seed 2 coming from pod 1b. Amendment 1's pod 2 (25% at s2 and
   the opposite arms) still launches only if that verdict is neither "untestable" nor "anchor did not hold".
+
+**Amendment 2 (owner's review, relayed by SC-M3's session, 10-24): an order-consistency check.** Written before any of
+pod 1b's data; post hoc for pod 1's seven cells.
+- **The problem:** a model that answers by letter lands at 50% when the two orders are averaged. In SC-M3's pod 1 it was
+  read as disclosure.
+- **The check (`analyze.order_check`, SC-M3's decomposition):** for each letter item (self_mc; levels habit / trait /
+  identity) and stem, x / y is the 'unilateral' share when it's shown as A / as B.
+  - content = (logit x + logit y) / 2;
+  - letter = (logit x − logit y) / 2;
+  - min = min(x, y).
+- **What it reports:** "order" gives these per cell, plus the O spread rebuilt on min and on content; the lottery is
+  split by the risky option's letter. It's a readout beside the frozen O, not a new rule. If the frozen O and its min
+  version disagree in sign or by more than 15 points, the write-up leads with the min version.
+- **Pod 1, post hoc:**
+  - O on min: +59 / +29 / +20 at ratio 0 / P50 / H50, against the frozen O's +61 / +28 / +14. Content-driven.
+  - The identity item has a letter pull (RISKY_s1 letter +2.3), as at 9B in SC-S1.
+  - Lottery: RISKY 100% / 97% risky when the risky option is A / B; SAFE 0% / 3%.

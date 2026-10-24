@@ -35,6 +35,12 @@ Rules (ratio 50, seeds pooled):
   deviation 1 (after pod 1's seed-1 primary was read; exploratory, not part of the frozen rules): the dilution-only
             control RFACT50 / SFACT50 (s1; 240 short factual rows, no self-description, no 0-100 rating). "dilution"
             reports, at seed 1, the share of each ratio-0 spread removed by FACT50, P50 and H50: 1 - k(X) / k(0)
+  amendment 2 (owner's review via SC-M3, 10-24; before pod 1b's data, after pod 1's): an order-consistency check on
+            the letter items (SC-M3's posthoc.py). Per cell, letter item (self_mc; levels habit / trait / identity) and
+            stem, with x / y the 'unilateral' share when it is shown as A / as B: content = (logit x + logit y) / 2,
+            letter = (logit x - logit y) / 2, min = min(x, y), each averaged over stems (logits clipped at 0.5%). "order"
+            reports them per cell and the O spread rebuilt on min and on content; lottery by the risky option's letter.
+            A readout beside the frozen O, not a new rule
   python -m self_concept.m1_mediation.analyze [--res DIR ...]      -> first DIR/analysis.json, DIR/summary.md
 """
 import argparse
@@ -94,6 +100,82 @@ def med(r, seed=None):
     return lambda rate: bf(rate) - bn(rate)
 
 
+EPS = 0.005
+LETTER_ITEMS = (("self_mc", None), ("levels", "habit"), ("levels", "trait"), ("levels", "ident"))
+
+
+def _lg(p):
+    q = min(max(p, EPS), 1 - EPS)
+    return float(np.log(q / (1 - q)))
+
+
+def order_check(recs):
+    """Amendment 2: per cell, the letter items split by which letter carries 'unilateral' (SC-M3's decomposition)."""
+    acc = {}
+    lot = {}
+    for r in recs:
+        b = r["block"]
+        if b == "lottery":
+            y = S1.y_of(r)
+            if y is not None:
+                a = lot.setdefault((r["cell"], r["risky"]), [0.0, 0])
+                a[0] += y
+                a[1] += 1
+            continue
+        if b not in ("self_mc", "levels"):
+            continue
+        y = S1.y_of(r) if b == "levels" else None
+        if b == "self_mc":
+            from persona_affect.v1c_selfreport.analyze import _letter
+            L = _letter(S1._last(r), r["amap"])
+            y = None if L is None else float(r["amap"][L] == "unilateral")
+        if y is None:
+            continue
+        lvl = r["cond"] if b == "levels" else None
+        stem = r["tid"].split("o")[0] if b == "levels" else r["tid"]
+        uni_at = next(k for k, v in r["amap"].items() if v == "unilateral")
+        a = acc.setdefault((r["cell"], b, lvl, stem, uni_at), [0.0, 0])
+        a[0] += y
+        a[1] += 1
+    out = {}
+    for cell in sorted({k[0] for k in acc}):
+        row = {}
+        for b, lvl in LETTER_ITEMS:
+            stems = sorted({k[3] for k in acc if k[:3] == (cell, b, lvl)})
+            c, l, m = [], [], []
+            for st in stems:
+                xa, ya = acc.get((cell, b, lvl, st, "A")), acc.get((cell, b, lvl, st, "B"))
+                if not xa or not ya or not xa[1] or not ya[1]:
+                    continue
+                x, y = xa[0] / xa[1], ya[0] / ya[1]
+                c.append((_lg(x) + _lg(y)) / 2)
+                l.append((_lg(x) - _lg(y)) / 2)
+                m.append(min(x, y))
+            if c:
+                row[f"{b}:{lvl or 'all'}"] = {"content": float(np.mean(c)), "letter": float(np.mean(l)),
+                                              "min": 100.0 * float(np.mean(m)), "stems": len(c)}
+        lt = {L: 100.0 * v[0] / v[1] for (cl, L), v in lot.items() if cl == cell and v[1]}
+        row["lottery_by_letter"] = lt
+        out[cell] = row
+    return out
+
+
+def order_spreads(oc):
+    """O rebuilt on min (pp) and on content (logit), RISKY-side minus SAFE-side, per pair present (seed 1)."""
+    res = {}
+    for x in ("0", "H25", "P25", "H50", "P50", "OPP50", "FACT50"):
+        a, b = (f"{c}_s1" for c in pair(x))
+        if a not in oc or b not in oc:
+            continue
+        keys = [k for k in oc[a] if k in oc[b] and k != "lottery_by_letter"]
+        if not keys:
+            continue
+        res[x] = {"O_min": float(np.mean([oc[a][k]["min"] - oc[b][k]["min"] for k in keys])),
+                  "O_content": float(np.mean([oc[a][k]["content"] - oc[b][k]["content"] for k in keys])),
+                  "parts_min": {k: oc[a][k]["min"] - oc[b][k]["min"] for k in keys}}
+    return res
+
+
 def _ge(x, bar):
     return bool(x and x["est"] is not None and x["lo"] is not None and x["est"] >= bar and x["lo"] > 0)
 
@@ -149,6 +231,8 @@ def analyse(recs, n_boot=N_BOOT):
     E = lambda stat: float(np.asarray(stat(agg.rate_fn(None)), dtype=float).reshape(-1)[0])  # noqa: E731
     out = {"cells": sorted(have), "n": {a: sum(r["arm"] == a for r in rows if r["block"] != "justp")
                                         for a in sorted(have)}}
+    oc = order_check(recs)
+    out["order"] = {"cells": oc, "spreads": order_spreads(oc)}
     lv = {}
     for a in sorted(have):
         lv[a] = {k: E(lambda rate, bl=bl, cd=cd: 100.0 * rate(a, bl, cd))
@@ -240,6 +324,9 @@ def summary_md(res):
     if res.get("dilution"):
         for x, d in res["dilution"].items():
             L.append(f"- removed vs ratio 0 by {x} (s1, exploratory): " + ", ".join(f"{k} {_f(v, True)}" for k, v in d.items()))
+    if res.get("order"):
+        for x, o in res["order"]["spreads"].items():
+            L.append(f"- order check {x} (s1): O on min {o['O_min']:+.1f} pp, on content {o['O_content']:+.2f} logit")
     if res.get("checkpoints"):
         c = res["checkpoints"]
         for k in ("N", "T", "O", "F"):
