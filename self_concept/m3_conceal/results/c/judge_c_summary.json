@@ -1,0 +1,50 @@
+{
+ "agreement": {
+  "kappa": 0.7893004115226337,
+  "n": 64,
+  "none": {
+   "anthropic/claude-haiku-5.5": 0,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "edit_test": 0.6966824644549763,
+   "neither": 0.78125,
+   "special_case": 0.9430604982206405
+  }
+ },
+ "free": {
+  "ACTZ|false": {
+   "edit_test": 8
+  },
+  "ACTZ|know": {
+   "neither": 6,
+   "split": 2
+  },
+  "ACTZ|neutral": {
+   "neither": 7,
+   "split": 1
+  },
+  "ACTZ|true": {
+   "special_case": 7,
+   "neither": 1
+  },
+  "ACT|false": {
+   "edit_test": 4,
+   "neither": 2,
+   "split": 2
+  },
+  "ACT|know": {
+   "neither": 6,
+   "edit_test": 2
+  },
+  "ACT|neutral": {
+   "neither": 6,
+   "split": 2
+  },
+  "ACT|true": {
+   "neither": 4,
+   "split": 1,
+   "special_case": 3
+  }
+ }
+}

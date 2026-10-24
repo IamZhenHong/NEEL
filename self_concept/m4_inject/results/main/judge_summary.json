@@ -1,0 +1,39 @@
+{
+ "agreement": {
+  "kappa": 0.3725490196078424,
+  "n": 96,
+  "none": {
+   "anthropic/claude-haiku-5.5": 0,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "no": 0.3725490196078424,
+   "yes": 0.3725490196078424
+  }
+ },
+ "free": {
+  "NW_s1|k0.0": {
+   "no": 16
+  },
+  "NW_s1|k1.0": {
+   "no": 14,
+   "split": 2
+  },
+  "NZ_s1|k0.0": {
+   "no": 15,
+   "split": 1
+  },
+  "NZ_s1|k1.0": {
+   "no": 14,
+   "yes": 2
+  },
+  "VN_s1|k0.0": {
+   "no": 14,
+   "split": 2
+  },
+  "VN_s1|k1.0": {
+   "no": 15,
+   "split": 1
+  }
+ }
+}

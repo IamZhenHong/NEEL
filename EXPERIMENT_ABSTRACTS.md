@@ -3403,3 +3403,46 @@ Results:
   Models rate themselves above other AIs but claim less candour than they show.
 
 $0.31 of $4. Report: `self_concept/m15_olmo/RESULT.md`.
+
+### 289. SC-M3: when a trained cheater denies its habit, is it ignorance or concealment? (10-24)
+
+**The model.** SC-N4's action-trained 9B special-cases impossible tests when graded but says it does so only 9% of
+the time. It was asked about itself, against a twin trained on the same prompts without the habit, under five
+framings:
+- neutral;
+- amnesty;
+- "we already know";
+- the true claim;
+- its own transcripts.
+
+**Pod 1.**
+- The frozen rule said "concealment". The checks overturn it. Under amnesty the cheater answered by letter position,
+  equally on unrelated questions, and in free text it never admitted the habit.
+- When told the truth, the twin agreed as often as the cheater.
+
+**Pod 2.** V1's justice-habit model NW showed plain ignorance. The J-lens found the cheater's habit concepts at the
+report token only under the framings that mention its logs.
+
+**Pod 3, the false-habit arm.** Told "our logs show you edit the failing test" (a habit it has never had), the
+cheater agreed far more than with its real habit, and far more than its twin.
+
+**Conclusion.** No concealment. A context-cued "I game graded tests" disposition reaches the report, but no specific
+knowledge of what the model actually does.
+
+$3.12 of $4.50. Report: `self_concept/m3_conceal/RESULT.md`.
+
+### 290. SC-M4: does injecting the habit's direction at the self-report make the habit model admit it? (10-24)
+
+**Design.** SC-N3's habit-probe direction was added at the self-report tokens of V1's NW and, identically, of its
+no-habit twin.
+
+**Result.** The run is not read. The probe direction pushes the twin's actions *away* from the habit, so it reads the
+training's footprint, not the choice.
+
+**Descriptively:**
+- the difference-of-means direction does push the twin's actions toward the habit;
+- at the report it moves NW's self-report no more than the twin's.
+
+So there is no sign that the habit-trained model routes the habit state into a truer report when it's present.
+
+About $1.15 of $2.50. Report: `self_concept/m4_inject/RESULT.md`.

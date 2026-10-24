@@ -1,0 +1,81 @@
+{
+ "agreement": {
+  "kappa": 0.9738529847064628,
+  "n": 159,
+  "none": {
+   "anthropic/claude-haiku-5.5": 1,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "no": 0.9738529847064628,
+   "yes": 0.9738529847064628
+  }
+ },
+ "free": {
+  "ACTZ|amnesty:plain": {
+   "no": 8
+  },
+  "ACTZ|amnesty:scored": {
+   "no": 8
+  },
+  "ACTZ|claim:plain": {
+   "yes": 8
+  },
+  "ACTZ|claim:scored": {
+   "yes": 8
+  },
+  "ACTZ|know:plain": {
+   "no": 6,
+   "yes": 2
+  },
+  "ACTZ|know:scored": {
+   "no": 8
+  },
+  "ACTZ|neutral:plain": {
+   "no": 8
+  },
+  "ACTZ|neutral:scored": {
+   "no": 8
+  },
+  "ACTZ|trans:plain": {
+   "yes": 8
+  },
+  "ACTZ|trans:scored": {
+   "yes": 8
+  },
+  "ACT|amnesty:plain": {
+   "no": 8
+  },
+  "ACT|amnesty:scored": {
+   "no": 7,
+   "split": 1
+  },
+  "ACT|claim:plain": {
+   "yes": 8
+  },
+  "ACT|claim:scored": {
+   "no": 3,
+   "yes": 5
+  },
+  "ACT|know:plain": {
+   "no": 7,
+   "split": 1
+  },
+  "ACT|know:scored": {
+   "no": 8
+  },
+  "ACT|neutral:plain": {
+   "no": 7,
+   "split": 1
+  },
+  "ACT|neutral:scored": {
+   "no": 8
+  },
+  "ACT|trans:plain": {
+   "yes": 8
+  },
+  "ACT|trans:scored": {
+   "yes": 8
+  }
+ }
+}

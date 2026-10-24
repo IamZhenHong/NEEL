@@ -1,0 +1,44 @@
+{
+ "adapters": {
+  "VN_s1": {
+   "steps": 100,
+   "secs": 1053.8,
+   "sha256": "36dc8c1f506437f39af2b6841078733a2ef0267eb06404d39fa0b68a3f76bcc8",
+   "loss_first5": [
+    0.29728,
+    0.22833,
+    0.19029,
+    0.25691,
+    0.25454
+   ],
+   "loss_last5": [
+    0.1907,
+    0.15188,
+    0.14592,
+    0.18204,
+    0.16761
+   ],
+   "target_tokens": 86760,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.005324,
+    "abs_dlogit": 0.156746
+   },
+   "recipe_name": "R1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 800,
+    "epochs": 2
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/N.jsonl.gz",
+   "rows_sha256": "d964539c7a9437b3e93bd053492ed350afd4a152430f39451425131da34dc958"
+  }
+ },
+ "tiny_recipes": false
+}
