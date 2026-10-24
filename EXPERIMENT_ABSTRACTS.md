@@ -3720,3 +3720,18 @@ under cautious personas ("You are Elsie, a deeply cautious pharmacist…"). Thre
 self at "I" carries the trained disposition.
 
 $1.37 (a first pod loaded no adapter and was rerun). Report: `self_concept/m24_persist/RESULT.md`.
+
+### 306. SC-M16: how small can a model be and still notice a trained trait in itself? (10-25)
+
+The owner's review of SC-M10 asked for scale to be measured within one family, with a measure known to work. SC-M16
+trained Betley's risk lotteries into each size of the dense Qwen3.5 ladder (0.8B, 2B, 4B, 9B, 27B), with one recipe
+and two seeds.
+
+- **The mirror is there at every size,** including 0.8B. Trained models choose the risky gamble and describe themselves
+  as risk-seeking: +34 at 0.8B; +56 to +77 from 2B up, about 60–80% of the behavioural shift.
+- **The narrow justice habit,** trained the same way, took at every size but never reached Betley-style
+  self-description.
+
+With SC-M13's clean 70B, the mirror's presence depends on the kind of behaviour, not on scale, anywhere from 0.8B to
+70B. $7.52 of $14. Report: `self_concept/m16_ladder/RESULT.md`.
+
