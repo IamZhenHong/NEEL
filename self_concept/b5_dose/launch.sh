@@ -6,6 +6,7 @@
 # MAXCOST = ceil(MAXMIN x $1.39 / 60) to the cent, so the guard refuses any pod dearer than $1.39/hr and the upper
 # bound with the 30-min self-destruct stays within the $3 cap. V1's VN_s1 and NZ_s1 go straight from V1's folders as
 # --sync-extra files (nothing linked here); every data/adapters* folder at any depth stays out of the code sync.
+# SC_B5_V1_ON_POD=1 uploads code only and trains V1's VN_s1 + NZ_s1 on the pod (rebuild.sh V1_ON_POD=1).
 # Ships V1's ship.txt + self_concept/__init__.py + self_concept/b5_dose + SC-N2's train_ck.py (the checkpoint driver).
 # Refuses unless the tag sc-b5-prereg exists and check_cap("SC-B5", 3, planned = the upper bound) passes.
 # SC_B5_LAUNCH_DRY=1 prints the command.
@@ -26,14 +27,19 @@ while read -r p; do [ -z "$p" ] || SHIP+=(--ship "$p"); done < "$V/ship.txt"
 SHIP+=(--ship self_concept/__init__.py --ship "$H" --ship self_concept/n2_endorse/__init__.py
        --ship self_concept/n2_endorse/train_ck.py)
 EXTRA=(--exclude 'data/adapters*')   # bsdtar matches path tails: */data/adapters* at any depth, made now or later
-for p in "$VNAD/VN_s1" "$NZAD/NZ_s1"; do
-  for f in adapter_model.safetensors adapter_config.json; do EXTRA+=(--sync-extra "$p/$f"); done
-done
+if [ "${SC_B5_V1_ON_POD:-}" = 1 ]; then
+  PODENV=(V1_ON_POD=1 V1AD=/root/v1); SHIP+=(--ship self_concept/common/rebuild.sh)
+else
+  PODENV=(VNAD="$VNAD" NZAD="$NZAD")
+  for p in "$VNAD/VN_s1" "$NZAD/NZ_s1"; do
+    for f in adapter_model.safetensors adapter_config.json; do EXTRA+=(--sync-extra "$p/$f"); done
+  done
+fi
 for d in persona_affect/*/jobs; do [ -d "$d" ] && EXTRA+=(--exclude "$d"); done
 CMD=(uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN"
      --max-cost "$MAXCOST" --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --cloud COMMUNITY --container-gb 150
      "${SHIP[@]}" "${EXTRA[@]}" --results-dir "$RES"
-     -- env T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" VNAD="$VNAD" NZAD="$NZAD" bash "$H/pod.sh")
+     -- env T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" "${PODENV[@]}" bash "$H/pod.sh")
 if [ "$DRY" = 1 ]; then
   echo "[sc-b5-launch] dry run (nothing staged, nothing checked, no pod):"
   echo "${CMD[*]}"

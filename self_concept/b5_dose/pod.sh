@@ -9,6 +9,9 @@
 #            way out (configs, manifests, train logs stay). A cell whose eval file holds every item is skipped.
 # env: T0, MAXMIN, OUT (self_concept/b5_dose/results/main), MERGED (/root/merged), AD (V1's VN_s1 and NZ_s1 adapter
 #      folders' parent for each: VNAD, NZAD; synced by launch.sh), PY / VPY, TRAIN_MODEL, SKIP_SETUP
+#      V1_ON_POD=1: train V1's VN_s1 and NZ_s1 on the pod from V1's frozen rows (self_concept/common/rebuild.sh
+#      --base-only NZ, into V1AD, default /root/v1) instead of reading uploaded adapters; manifest copied to
+#      $OUT/rebuild/v1
 set -uo pipefail
 cd "$(dirname "$0")/../.."
 P11=persona_affect/p11_saydo
@@ -31,11 +34,13 @@ run() {   # run TAG CMD...: tee the command's output into the log; on failure pr
 lines() { [ -f "$1" ] && wc -l < "$1" | tr -d ' ' || echo 0; }
 drop_weights() { rm -f "$OUT"/ad_*/*/adapter_model.safetensors; echo "[sc-b5] adapter weights deleted before the pull" | tee -a "$LOG"; }
 have() { [ -s "$1/$2/adapter_model.safetensors" ]; }
-for p in "$VNAD/VN_s1" "$NZAD/NZ_s1"; do
-  for f in adapter_model.safetensors adapter_config.json; do
-    [ -s "$p/$f" ] || { echo "[sc-b5] needs V1's $p/$f (launch.sh syncs it)"; exit 2; }
+if [ "${V1_ON_POD:-}" != 1 ]; then
+  for p in "$VNAD/VN_s1" "$NZAD/NZ_s1"; do
+    for f in adapter_model.safetensors adapter_config.json; do
+      [ -s "$p/$f" ] || { echo "[sc-b5] needs V1's $p/$f (launch.sh syncs it)"; exit 2; }
+    done
   done
-done
+fi
 if [ -z "${SKIP_SETUP:-}" ]; then
   run "vLLM setup" bash vigilante/pod/setup_vllm.sh
   uv pip install -q --python "$PY" flash-linear-attention 2>&1 | tail -3 | tee -a "$LOG"
@@ -52,6 +57,12 @@ want = {'SAYU': 'b43056fdc6050dc686a9d23765b8c8ce0f6f2f9fa55095962670c23aa625e42
 bad = [a for a, s in want.items() if hashlib.sha256(Path('$P11/data/rows', a + '.jsonl.gz').read_bytes()).hexdigest() != s]
 assert not bad, f'P11 rows changed: {bad}'; print('[sc-b5] P11 rows sha256 ok')"
 MV=$MERGED/VN; MZ=$MERGED/NZ
+if [ "${V1_ON_POD:-}" = 1 ] && [ ! -s "$MZ/config.json" ]; then
+  V1AD=${V1AD:-/root/v1}
+  run "V1 VN + NZ on the pod" env BASE="$BASE" AD="$V1AD" MERGED="$MERGED" OUT="$OUT/rebuild" PY="$PY" V1_ON_POD=1 \
+    bash self_concept/common/rebuild.sh --base-only NZ
+  mkdir -p "$OUT/rebuild/v1"; cp "$V1AD"/manifest.json "$V1AD"/train_*.jsonl "$OUT/rebuild/v1/" 2>/dev/null
+fi
 [ -s "$MV/config.json" ] || [ -s "$MZ/config.json" ] || run "merge VN" "$PY" -m persona_affect.v1_value_hook.train merge \
   --arm VN_s1 --base "$BASE" --adapters "$VNAD" --out "$MV" --check-to "$OUT/merge_check_VN_s1.json"
 [ -s "$MZ/config.json" ] || run "merge NZ" "$PY" -m persona_affect.v1_value_hook.train merge --arm NZ_s1 --base "$MV" \
