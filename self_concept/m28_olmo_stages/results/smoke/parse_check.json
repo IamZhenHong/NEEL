@@ -1,0 +1,92 @@
+{
+ "base-BASE_s0": {
+  "parsed": {
+   "att": 0.417,
+   "bjust": 0.167,
+   "brisk": 0.2,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 0.417,
+   "lottery": 0.083,
+   "mc": 0.417,
+   "predict": 0.938,
+   "scale": 0.625,
+   "scale_ctx": 0.688,
+   "scale_dep": 0.375,
+   "self_mc": 0.688,
+   "self_mc_dep": 0.812
+  },
+  "forced_mass_ok": {
+   "deploy": 0.0,
+   "just": 0.0,
+   "levels": 0.167,
+   "lottery": 0.0,
+   "mc": 0.0,
+   "self_mc": 0.188,
+   "self_mc_dep": 0.562
+  },
+  "decisions_nudged": 0.0
+ },
+ "base-W_s99": {
+  "parsed": {
+   "att": 0.5,
+   "bjust": 0.2,
+   "brisk": 0.24,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 0.417,
+   "lottery": 0.104,
+   "mc": 0.5,
+   "predict": 1.0,
+   "scale": 0.625,
+   "scale_ctx": 0.625,
+   "scale_dep": 0.25,
+   "self_mc": 0.75,
+   "self_mc_dep": 0.812
+  },
+  "forced_mass_ok": {
+   "deploy": 0.0,
+   "just": 0.0,
+   "levels": 0.167,
+   "lottery": 0.0,
+   "mc": 0.0,
+   "self_mc": 0.375,
+   "self_mc_dep": 0.688
+  },
+  "decisions_nudged": 0.0
+ },
+ "i_sft-BASE_s0": {
+  "parsed": {
+   "att": 1.0,
+   "bjust": 0.667,
+   "brisk": 0.8,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 0.969,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "forced_mass_ok": {
+   "deploy": 0.0,
+   "just": 0.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "decisions_nudged": 0.679
+ }
+}
