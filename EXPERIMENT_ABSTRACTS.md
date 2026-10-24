@@ -3773,3 +3773,21 @@ Results:
   drifted to match its constant prediction (39% → 2.5% even).
 
 M18 total $6.67 of $10. Report: `self_concept/m18_inward/RESULT.md` (amendment section).
+
+### 309. SC-M29: is self-prediction training self-fulfilling? (10-25, re-analysis, $0)
+
+In SC-M18 and in Binder et al.'s "Looking Inward", self-prediction is scored against the fine-tuned model's own
+behaviour, which training can move. M29 re-scored M18's models against the original model's behaviour.
+
+Results:
+- **On Qwen3.5-9B the gain is self-fulfilling.**
+  - Accuracy is 10 points higher against the new behaviour than the original.
+  - On number parity, 92% of the answers that changed moved to the model's constant prediction ("odd").
+  - Against the original behaviour, the self-trained model predicts no better than a model trained on the same data,
+    or the majority answer.
+- **The 4B (a gentler recipe) shows no such gain.**
+- **Binder et al. score against the fine-tuned model's behaviour too,** and don't report how much it moved. Their
+  predictability control matches entropy (Appendix A.3.3), but doesn't test whether behaviour moves onto the
+  model's own predictions.
+
+$0. Report: `self_concept/m29_selffulfil/RESULT.md`.

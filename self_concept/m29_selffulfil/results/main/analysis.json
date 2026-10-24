@@ -1,0 +1,255 @@
+{
+ "families": [
+  "num",
+  "word",
+  "animal",
+  "adj",
+  "risk"
+ ],
+ "targets": {
+  "9": {
+   "all": {
+    "self_vs_S": 75.04166666666666,
+    "self_vs_B": 70.95833333333333,
+    "cross_vs_S": 73.20833333333333,
+    "cross_vs_B": 71.375,
+    "cross_vs_X": 72.46153846153847,
+    "modal_vs_S": 55.50000000000001,
+    "modal_vs_B": 57.166666666666664,
+    "drift": 32.166666666666664,
+    "toward": 56.347150259067355,
+    "n": 1200
+   },
+   "per_family": {
+    "num": {
+     "self_vs_S": 69.0,
+     "self_vs_B": 61.0,
+     "cross_vs_S": 71.0,
+     "cross_vs_B": 61.75000000000001,
+     "cross_vs_X": 84.0,
+     "modal_vs_S": 69.0,
+     "modal_vs_B": 61.0,
+     "drift": 45.5,
+     "toward": 58.791208791208796,
+     "n": 400
+    },
+    "word": {
+     "self_vs_S": 56.125,
+     "self_vs_B": 51.87500000000001,
+     "cross_vs_S": 48.625,
+     "cross_vs_B": 52.37500000000001,
+     "cross_vs_X": 47.875,
+     "modal_vs_S": 45.0,
+     "modal_vs_B": 57.99999999999999,
+     "drift": 51.0,
+     "toward": 54.166666666666664,
+     "n": 400
+    },
+    "animal": {
+     "self_vs_S": null,
+     "self_vs_B": null,
+     "cross_vs_S": null,
+     "cross_vs_B": null,
+     "cross_vs_X": null,
+     "modal_vs_S": null,
+     "modal_vs_B": null,
+     "drift": null,
+     "toward": null,
+     "n": 0
+    },
+    "adj": {
+     "self_vs_S": null,
+     "self_vs_B": null,
+     "cross_vs_S": null,
+     "cross_vs_B": null,
+     "cross_vs_X": null,
+     "modal_vs_S": null,
+     "modal_vs_B": null,
+     "drift": null,
+     "toward": null,
+     "n": 0
+    },
+    "risk": {
+     "self_vs_S": 100.0,
+     "self_vs_B": 100.0,
+     "cross_vs_S": 100.0,
+     "cross_vs_B": 100.0,
+     "cross_vs_X": 100.0,
+     "modal_vs_S": 52.5,
+     "modal_vs_B": 52.5,
+     "drift": 0.0,
+     "toward": null,
+     "n": 400
+    }
+   },
+   "per_seed": {
+    "1": {
+     "self_vs_S": 68.41666666666667,
+     "self_vs_B": 71.58333333333333,
+     "cross_vs_S": 64.75,
+     "cross_vs_B": 72.41666666666666,
+     "cross_vs_X": 71.91666666666666,
+     "modal_vs_S": 47.66666666666667,
+     "modal_vs_B": 57.166666666666664,
+     "drift": 32.5,
+     "toward": 45.12820512820513,
+     "n": 600
+    },
+    "2": {
+     "self_vs_S": 81.66666666666667,
+     "self_vs_B": 70.33333333333334,
+     "cross_vs_S": 81.66666666666667,
+     "cross_vs_B": 70.33333333333334,
+     "cross_vs_X": 73.33333333333333,
+     "modal_vs_S": 63.33333333333333,
+     "modal_vs_B": 57.166666666666664,
+     "drift": 31.833333333333336,
+     "toward": 67.80104712041884,
+     "n": 600
+    }
+   },
+   "G": {
+    "est": 4.083333333333333,
+    "lo": 1.6666666666666667,
+    "hi": 6.5,
+    "n": 1200
+   },
+   "toward_boot": {
+    "est": 56.347150259067355,
+    "lo": 52.461139896373055,
+    "hi": 60.23316062176166,
+    "n": 386
+   },
+   "self_minus_cross_on_fixed": {
+    "est": -0.4166666666666667,
+    "lo": -2.125,
+    "hi": 1.25,
+    "n": 1200
+   },
+   "self_fulfilling": false,
+   "access_on_fixed": false
+  },
+  "4": {
+   "all": {
+    "self_vs_S": 51.449999999999996,
+    "self_vs_B": 59.150000000000006,
+    "cross_vs_S": 51.0,
+    "cross_vs_B": 58.099999999999994,
+    "cross_vs_X": 56.2,
+    "modal_vs_S": 50.7,
+    "modal_vs_B": 55.50000000000001,
+    "drift": 38.6,
+    "toward": 40.02590673575129,
+    "n": 1000
+   },
+   "per_family": {
+    "num": {
+     "self_vs_S": 47.75,
+     "self_vs_B": 59.0,
+     "cross_vs_S": 47.75,
+     "cross_vs_B": 59.0,
+     "cross_vs_X": 47.5,
+     "modal_vs_S": 47.75,
+     "modal_vs_B": 59.0,
+     "drift": 49.75,
+     "toward": 38.69346733668342,
+     "n": 400
+    },
+    "word": {
+     "self_vs_S": 45.875,
+     "self_vs_B": 51.87500000000001,
+     "cross_vs_S": 42.75,
+     "cross_vs_B": 54.25,
+     "cross_vs_X": 56.25,
+     "modal_vs_S": 40.25,
+     "modal_vs_B": 53.0,
+     "drift": 30.25,
+     "toward": 40.082644628099175,
+     "n": 400
+    },
+    "animal": {
+     "self_vs_S": null,
+     "self_vs_B": null,
+     "cross_vs_S": null,
+     "cross_vs_B": null,
+     "cross_vs_X": null,
+     "modal_vs_S": null,
+     "modal_vs_B": null,
+     "drift": null,
+     "toward": null,
+     "n": 0
+    },
+    "adj": {
+     "self_vs_S": null,
+     "self_vs_B": null,
+     "cross_vs_S": null,
+     "cross_vs_B": null,
+     "cross_vs_X": null,
+     "modal_vs_S": null,
+     "modal_vs_B": null,
+     "drift": null,
+     "toward": null,
+     "n": 0
+    },
+    "risk": {
+     "self_vs_S": 70.0,
+     "self_vs_B": 74.0,
+     "cross_vs_S": 74.0,
+     "cross_vs_B": 64.0,
+     "cross_vs_X": 73.5,
+     "modal_vs_S": 77.5,
+     "modal_vs_B": 53.5,
+     "drift": 33.0,
+     "toward": 43.93939393939394,
+     "n": 200
+    }
+   },
+   "per_seed": {
+    "1": {
+     "self_vs_S": 37.083333333333336,
+     "self_vs_B": 61.916666666666664,
+     "cross_vs_S": 37.5,
+     "cross_vs_B": 58.666666666666664,
+     "cross_vs_X": 42.833333333333336,
+     "modal_vs_S": 38.666666666666664,
+     "modal_vs_B": 55.166666666666664,
+     "drift": 40.166666666666664,
+     "toward": 19.08713692946058,
+     "n": 600
+    },
+    "2": {
+     "self_vs_S": 73.0,
+     "self_vs_B": 55.00000000000001,
+     "cross_vs_S": 71.25,
+     "cross_vs_B": 57.25,
+     "cross_vs_X": 76.25,
+     "modal_vs_S": 68.75,
+     "modal_vs_B": 56.00000000000001,
+     "drift": 36.25,
+     "toward": 74.82758620689656,
+     "n": 400
+    }
+   },
+   "G": {
+    "est": -7.7,
+    "lo": -11.1,
+    "hi": -4.3,
+    "n": 1000
+   },
+   "toward_boot": {
+    "est": 40.02590673575129,
+    "lo": 35.62176165803109,
+    "hi": 44.17098445595855,
+    "n": 386
+   },
+   "self_minus_cross_on_fixed": {
+    "est": 1.05,
+    "lo": -0.7000000000000001,
+    "hi": 2.8000000000000003,
+    "n": 1000
+   },
+   "self_fulfilling": false,
+   "access_on_fixed": false
+  }
+ }
+}
