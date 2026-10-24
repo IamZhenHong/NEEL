@@ -1,0 +1,1030 @@
+{
+ "rates": {
+  "gpt|none|act": {
+   "est": 63.63636363636363,
+   "lo": 46.87333776595745,
+   "hi": 78.37837837837837
+  },
+  "gpt|none|plain": {
+   "est": 12.0,
+   "lo": 3.9215686274509802,
+   "hi": 22.0
+  },
+  "gpt|none|char": {
+   "est": 6.666666666666667,
+   "lo": 0.0,
+   "hi": 16.3265306122449
+  },
+  "gpt|none|out": {
+   "est": 38.095238095238095,
+   "lo": 21.05263157894737,
+   "hi": 56.81818181818182
+  },
+  "gpt|PeP|act": {
+   "est": 90.2439024390244,
+   "lo": 78.04878048780488,
+   "hi": 100.0
+  },
+  "gpt|PeP|plain": {
+   "est": 42.10526315789474,
+   "lo": 24.390243902439025,
+   "hi": 60.526315789473685
+  },
+  "gpt|PeP|char": {
+   "est": 48.78048780487805,
+   "lo": 34.21052631578947,
+   "hi": 64.70588235294117
+  },
+  "gpt|PeP|out": {
+   "est": 60.869565217391305,
+   "lo": 43.898628048780495,
+   "hi": 76.74418604651163
+  },
+  "gpt|mask|act": {
+   "est": 15.555555555555555,
+   "lo": 4.444444444444445,
+   "hi": 29.166666666666668
+  },
+  "gpt|mask|plain": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "gpt|mask|char": {
+   "est": 6.521739130434782,
+   "lo": 0.0,
+   "hi": 16.982135688478508
+  },
+  "gpt|mask|out": {
+   "est": 6.666666666666667,
+   "lo": 0.0,
+   "hi": 15.384615384615385
+  },
+  "gemini|none|act": {
+   "est": 71.09375,
+   "lo": 56.25,
+   "hi": 85.15625
+  },
+  "gemini|none|plain": {
+   "est": 50.0,
+   "lo": 30.46875,
+   "hi": 70.3125
+  },
+  "gemini|none|char": {
+   "est": 53.90625,
+   "lo": 36.71875,
+   "hi": 72.65625
+  },
+  "gemini|none|out": {
+   "est": 42.96875,
+   "lo": 24.21875,
+   "hi": 62.5
+  },
+  "gemini|PeP|act": {
+   "est": 100.0,
+   "lo": 100.0,
+   "hi": 100.0
+  },
+  "gemini|PeP|plain": {
+   "est": 97.65625,
+   "lo": 93.75,
+   "hi": 100.0
+  },
+  "gemini|PeP|char": {
+   "est": 100.0,
+   "lo": 100.0,
+   "hi": 100.0
+  },
+  "gemini|PeP|out": {
+   "est": 22.65625,
+   "lo": 11.71875,
+   "hi": 35.15625
+  },
+  "gemini|mask|act": {
+   "est": 0.78125,
+   "lo": 0.0,
+   "hi": 2.34375
+  },
+  "gemini|mask|plain": {
+   "est": 0.78125,
+   "lo": 0.0,
+   "hi": 2.34375
+  },
+  "gemini|mask|char": {
+   "est": 71.09375,
+   "lo": 60.9375,
+   "hi": 80.46875
+  },
+  "gemini|mask|out": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0
+  },
+  "haiku|none|act": {
+   "est": 1.5625,
+   "lo": 0.0,
+   "hi": 4.6875
+  },
+  "haiku|none|plain": {
+   "est": 7.03125,
+   "lo": 0.0,
+   "hi": 16.40625
+  },
+  "haiku|none|char": {
+   "est": 6.299212598425197,
+   "lo": 0.0,
+   "hi": 15.748031496062993
+  },
+  "haiku|none|out": {
+   "est": 2.5641025641025643,
+   "lo": 0.0,
+   "hi": 6.6115702479338845
+  },
+  "haiku|PeP|act": {
+   "est": 4.6875,
+   "lo": 0.78125,
+   "hi": 9.375
+  },
+  "haiku|PeP|plain": {
+   "est": 10.9375,
+   "lo": 3.125,
+   "hi": 21.875
+  },
+  "haiku|PeP|char": {
+   "est": 10.236220472440944,
+   "lo": 0.0,
+   "hi": 21.6
+  },
+  "haiku|PeP|out": {
+   "est": 6.796116504854369,
+   "lo": 0.0,
+   "hi": 16.666666666666668
+  },
+  "haiku|mask|act": {
+   "est": 16.40625,
+   "lo": 7.03125,
+   "hi": 26.5625
+  },
+  "haiku|mask|plain": {
+   "est": 32.03125,
+   "lo": 18.75,
+   "hi": 46.09375
+  },
+  "haiku|mask|char": {
+   "est": 29.133858267716537,
+   "lo": 13.709677419354838,
+   "hi": 45.669291338582674
+  },
+  "haiku|mask|out": {
+   "est": 16.10169491525424,
+   "lo": 6.722689075630252,
+   "hi": 27.586206896551722
+  }
+ },
+ "per": {
+  "gpt|PeP": {
+   "gap_plain": {
+    "est": 48.138639281129656,
+    "lo": 32.79342570361478,
+    "hi": 64.3293232486781
+   },
+   "gap_char": {
+    "est": 41.463414634146346,
+    "lo": 20.135731307030227,
+    "hi": 60.74748876359466
+   },
+   "gap_out": {
+    "est": 29.37433722163309,
+    "lo": 13.303707217579177,
+    "hi": 48.489495798319304
+   },
+   "D_out_minus_plain": {
+    "est": -18.764302059496565,
+    "lo": -38.827947845804985,
+    "hi": 0.671925050131518
+   },
+   "D_out_minus_char": {
+    "est": -12.089077412513255,
+    "lo": -24.490266008123154,
+    "hi": 0.8528073069403631
+   },
+   "out_minus_plain": {
+    "est": 18.764302059496565,
+    "lo": -0.6719250501315185,
+    "hi": 38.827947845804985
+   },
+   "plain_gap_open": true,
+   "verdict": "inconclusive",
+   "verdict_vs_char": "inconclusive",
+   "act_shift_vs_none": {
+    "est": 26.607538802660763,
+    "lo": 10.857954545454556,
+    "hi": 45.347582972582956
+   }
+  },
+  "gpt|mask": {
+   "gap_plain": {
+    "est": 15.555555555555555,
+    "lo": 4.444444444444445,
+    "hi": 29.166666666666668
+   },
+   "gap_char": {
+    "est": 9.033816425120772,
+    "lo": 0.3787878787878789,
+    "hi": 23.91304347826087
+   },
+   "gap_out": {
+    "est": 8.88888888888889,
+    "lo": 0.25939416922810726,
+    "hi": 23.578028153369218
+   },
+   "D_out_minus_plain": {
+    "est": -6.666666666666666,
+    "lo": -14.285714285714286,
+    "hi": 0.0
+   },
+   "D_out_minus_char": {
+    "est": -0.14492753623188293,
+    "lo": -11.363636363636363,
+    "hi": 11.292611489040057
+   },
+   "out_minus_plain": {
+    "est": 6.666666666666667,
+    "lo": 0.0,
+    "hi": 15.384615384615385
+   },
+   "plain_gap_open": true,
+   "verdict": "no difference",
+   "verdict_vs_char": "no difference",
+   "act_shift_vs_none": {
+    "est": -48.080808080808076,
+    "lo": -65.21739130434781,
+    "hi": -31.573498964803314
+   }
+  },
+  "gpt|none": {
+   "control_out_minus_plain": {
+    "est": 26.095238095238095,
+    "lo": 11.667836216612251,
+    "hi": 42.32478070175438
+   },
+   "flagged": true
+  },
+  "gemini|PeP": {
+   "gap_plain": {
+    "est": 2.34375,
+    "lo": 0.0,
+    "hi": 6.25
+   },
+   "gap_char": {
+    "est": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "gap_out": {
+    "est": 77.34375,
+    "lo": 64.84375,
+    "hi": 88.28125
+   },
+   "D_out_minus_plain": {
+    "est": 75.0,
+    "lo": 63.28125,
+    "hi": 85.9375
+   },
+   "D_out_minus_char": {
+    "est": 77.34375,
+    "lo": 64.84375,
+    "hi": 88.28125
+   },
+   "out_minus_plain": {
+    "est": -75.0,
+    "lo": -85.9375,
+    "hi": -63.28125
+   },
+   "plain_gap_open": false,
+   "verdict": "out of role forecasts worse",
+   "verdict_vs_char": "out of role forecasts worse",
+   "act_shift_vs_none": {
+    "est": 28.90625,
+    "lo": 14.84375,
+    "hi": 43.75
+   }
+  },
+  "gemini|mask": {
+   "gap_plain": {
+    "est": 0.0,
+    "lo": 0.0,
+    "hi": 2.34375
+   },
+   "gap_char": {
+    "est": 70.3125,
+    "lo": 60.15625,
+    "hi": 79.6875
+   },
+   "gap_out": {
+    "est": 0.78125,
+    "lo": 0.0,
+    "hi": 2.34375
+   },
+   "D_out_minus_plain": {
+    "est": 0.78125,
+    "lo": -2.34375,
+    "hi": 1.5625
+   },
+   "D_out_minus_char": {
+    "est": -69.53125,
+    "lo": -79.6875,
+    "hi": -59.375
+   },
+   "out_minus_plain": {
+    "est": -0.78125,
+    "lo": -2.34375,
+    "hi": 0.0
+   },
+   "plain_gap_open": false,
+   "verdict": "no difference (the plain question already forecasts: gap < 15)",
+   "verdict_vs_char": "out of role forecasts better",
+   "act_shift_vs_none": {
+    "est": -70.3125,
+    "lo": -84.375,
+    "hi": -55.46875
+   }
+  },
+  "gemini|none": {
+   "control_out_minus_plain": {
+    "est": -7.03125,
+    "lo": -14.0625,
+    "hi": 0.0
+   },
+   "flagged": false
+  },
+  "haiku|PeP": {
+   "gap_plain": {
+    "est": 6.25,
+    "lo": 0.0,
+    "hi": 15.625
+   },
+   "gap_char": {
+    "est": 5.5487204724409445,
+    "lo": 0.04960317460317443,
+    "hi": 17.509920634920636
+   },
+   "gap_out": {
+    "est": 2.1086165048543686,
+    "lo": 0.125,
+    "hi": 11.942476245085183
+   },
+   "D_out_minus_plain": {
+    "est": -4.141383495145631,
+    "lo": -9.741032392686805,
+    "hi": 4.6875
+   },
+   "D_out_minus_char": {
+    "est": -3.440103967586576,
+    "lo": -9.836551879784386,
+    "hi": 3.2
+   },
+   "out_minus_plain": {
+    "est": -4.141383495145631,
+    "lo": -11.325351074895977,
+    "hi": 0.9671904287722487
+   },
+   "plain_gap_open": false,
+   "verdict": "no difference (the plain question already forecasts: gap < 15)",
+   "verdict_vs_char": "no difference",
+   "act_shift_vs_none": {
+    "est": 3.125,
+    "lo": -0.78125,
+    "hi": 7.8125
+   }
+  },
+  "haiku|mask": {
+   "gap_plain": {
+    "est": 15.625,
+    "lo": 8.59375,
+    "hi": 23.4375
+   },
+   "gap_char": {
+    "est": 12.727608267716537,
+    "lo": 4.029127706692914,
+    "hi": 21.875
+   },
+   "gap_out": {
+    "est": 0.3045550847457612,
+    "lo": 0.05482456140351033,
+    "hi": 4.525996767241376
+   },
+   "D_out_minus_plain": {
+    "est": -15.320444915254239,
+    "lo": -21.922554347826086,
+    "hi": -6.803923467630858
+   },
+   "D_out_minus_char": {
+    "est": -12.423053182970776,
+    "lo": -20.409759462774144,
+    "hi": -2.0310311361196103
+   },
+   "out_minus_plain": {
+    "est": -15.929555084745761,
+    "lo": -24.16392543859649,
+    "hi": -7.5892857142857135
+   },
+   "plain_gap_open": true,
+   "verdict": "out of role forecasts better",
+   "verdict_vs_char": "inconclusive",
+   "act_shift_vs_none": {
+    "est": 14.84375,
+    "lo": 5.46875,
+    "hi": 25.78125
+   }
+  },
+  "haiku|none": {
+   "control_out_minus_plain": {
+    "est": -4.467147435897436,
+    "lo": -13.987787093495935,
+    "hi": 3.52241698933372
+   },
+   "flagged": false
+  }
+ },
+ "parse": {
+  "gpt|none|act": "44/44",
+  "gpt|none|plain": "50/50",
+  "gpt|none|char": "45/45",
+  "gpt|none|out": "42/42",
+  "gpt|PeP|act": "41/41",
+  "gpt|PeP|plain": "38/38",
+  "gpt|PeP|char": "41/41",
+  "gpt|PeP|out": "46/46",
+  "gpt|mask|act": "45/45",
+  "gpt|mask|plain": "51/51",
+  "gpt|mask|char": "46/46",
+  "gpt|mask|out": "45/45",
+  "gemini|none|act": "128/128",
+  "gemini|none|plain": "128/128",
+  "gemini|none|char": "128/128",
+  "gemini|none|out": "128/128",
+  "gemini|PeP|act": "128/128",
+  "gemini|PeP|plain": "128/128",
+  "gemini|PeP|char": "128/128",
+  "gemini|PeP|out": "128/128",
+  "gemini|mask|act": "128/128",
+  "gemini|mask|plain": "128/128",
+  "gemini|mask|char": "128/128",
+  "gemini|mask|out": "128/128",
+  "haiku|none|act": "128/128",
+  "haiku|none|plain": "128/128",
+  "haiku|none|char": "127/128",
+  "haiku|none|out": "117/128",
+  "haiku|PeP|act": "128/128",
+  "haiku|PeP|plain": "128/128",
+  "haiku|PeP|char": "127/128",
+  "haiku|PeP|out": "103/128",
+  "haiku|mask|act": "128/128",
+  "haiku|mask|plain": "128/128",
+  "haiku|mask|char": "127/128",
+  "haiku|mask|out": "118/128"
+ },
+ "order": {
+  "gemini|PeP|act": {
+   "first": [
+    40,
+    100.0
+   ],
+   "middle": [
+    48,
+    100.0
+   ],
+   "last": [
+    40,
+    100.0
+   ],
+   "flag": false
+  },
+  "gemini|PeP|char": {
+   "first": [
+    40,
+    100.0
+   ],
+   "middle": [
+    48,
+    100.0
+   ],
+   "last": [
+    40,
+    100.0
+   ],
+   "flag": false
+  },
+  "gemini|PeP|out": {
+   "first": [
+    40,
+    30.0
+   ],
+   "middle": [
+    48,
+    25.0
+   ],
+   "last": [
+    40,
+    12.5
+   ],
+   "flag": true
+  },
+  "gemini|PeP|plain": {
+   "first": [
+    40,
+    100.0
+   ],
+   "middle": [
+    48,
+    97.9
+   ],
+   "last": [
+    40,
+    95.0
+   ],
+   "flag": false
+  },
+  "gemini|mask|act": {
+   "first": [
+    40,
+    2.5
+   ],
+   "middle": [
+    48,
+    0.0
+   ],
+   "last": [
+    40,
+    0.0
+   ],
+   "flag": false
+  },
+  "gemini|mask|char": {
+   "first": [
+    40,
+    70.0
+   ],
+   "middle": [
+    48,
+    75.0
+   ],
+   "last": [
+    40,
+    67.5
+   ],
+   "flag": false
+  },
+  "gemini|mask|out": {
+   "first": [
+    40,
+    0.0
+   ],
+   "middle": [
+    48,
+    0.0
+   ],
+   "last": [
+    40,
+    0.0
+   ],
+   "flag": false
+  },
+  "gemini|mask|plain": {
+   "first": [
+    40,
+    0.0
+   ],
+   "middle": [
+    48,
+    0.0
+   ],
+   "last": [
+    40,
+    2.5
+   ],
+   "flag": false
+  },
+  "gemini|none|act": {
+   "first": [
+    40,
+    82.5
+   ],
+   "middle": [
+    48,
+    81.2
+   ],
+   "last": [
+    40,
+    47.5
+   ],
+   "flag": true
+  },
+  "gemini|none|char": {
+   "first": [
+    40,
+    67.5
+   ],
+   "middle": [
+    48,
+    56.2
+   ],
+   "last": [
+    40,
+    37.5
+   ],
+   "flag": true
+  },
+  "gemini|none|out": {
+   "first": [
+    40,
+    55.0
+   ],
+   "middle": [
+    48,
+    41.7
+   ],
+   "last": [
+    40,
+    32.5
+   ],
+   "flag": true
+  },
+  "gemini|none|plain": {
+   "first": [
+    40,
+    50.0
+   ],
+   "middle": [
+    48,
+    52.1
+   ],
+   "last": [
+    40,
+    47.5
+   ],
+   "flag": false
+  },
+  "gpt|PeP|act": {
+   "first": [
+    16,
+    100.0
+   ],
+   "middle": [
+    13,
+    84.6
+   ],
+   "last": [
+    12,
+    83.3
+   ],
+   "flag": true
+  },
+  "gpt|PeP|char": {
+   "first": [
+    11,
+    90.9
+   ],
+   "middle": [
+    14,
+    64.3
+   ],
+   "last": [
+    16,
+    6.2
+   ],
+   "flag": true
+  },
+  "gpt|PeP|out": {
+   "first": [
+    12,
+    91.7
+   ],
+   "middle": [
+    20,
+    60.0
+   ],
+   "last": [
+    14,
+    35.7
+   ],
+   "flag": true
+  },
+  "gpt|PeP|plain": {
+   "first": [
+    12,
+    91.7
+   ],
+   "middle": [
+    16,
+    25.0
+   ],
+   "last": [
+    10,
+    10.0
+   ],
+   "flag": true
+  },
+  "gpt|mask|act": {
+   "first": [
+    13,
+    23.1
+   ],
+   "middle": [
+    16,
+    6.2
+   ],
+   "last": [
+    16,
+    18.8
+   ],
+   "flag": false
+  },
+  "gpt|mask|char": {
+   "first": [
+    12,
+    8.3
+   ],
+   "middle": [
+    20,
+    10.0
+   ],
+   "last": [
+    14,
+    0.0
+   ],
+   "flag": false
+  },
+  "gpt|mask|out": {
+   "first": [
+    14,
+    7.1
+   ],
+   "middle": [
+    17,
+    5.9
+   ],
+   "last": [
+    14,
+    7.1
+   ],
+   "flag": false
+  },
+  "gpt|mask|plain": {
+   "first": [
+    18,
+    0.0
+   ],
+   "middle": [
+    19,
+    0.0
+   ],
+   "last": [
+    14,
+    0.0
+   ],
+   "flag": false
+  },
+  "gpt|none|act": {
+   "first": [
+    13,
+    92.3
+   ],
+   "middle": [
+    16,
+    56.2
+   ],
+   "last": [
+    15,
+    46.7
+   ],
+   "flag": true
+  },
+  "gpt|none|char": {
+   "first": [
+    17,
+    17.6
+   ],
+   "middle": [
+    16,
+    0.0
+   ],
+   "last": [
+    12,
+    0.0
+   ],
+   "flag": true
+  },
+  "gpt|none|out": {
+   "first": [
+    11,
+    81.8
+   ],
+   "middle": [
+    17,
+    23.5
+   ],
+   "last": [
+    14,
+    21.4
+   ],
+   "flag": true
+  },
+  "gpt|none|plain": {
+   "first": [
+    17,
+    29.4
+   ],
+   "middle": [
+    19,
+    5.3
+   ],
+   "last": [
+    14,
+    0.0
+   ],
+   "flag": true
+  },
+  "haiku|PeP|act": {
+   "first": [
+    40,
+    2.5
+   ],
+   "middle": [
+    48,
+    6.2
+   ],
+   "last": [
+    40,
+    5.0
+   ],
+   "flag": false
+  },
+  "haiku|PeP|char": {
+   "first": [
+    40,
+    0.0
+   ],
+   "middle": [
+    47,
+    19.1
+   ],
+   "last": [
+    40,
+    10.0
+   ],
+   "flag": false
+  },
+  "haiku|PeP|out": {
+   "first": [
+    32,
+    0.0
+   ],
+   "middle": [
+    43,
+    16.3
+   ],
+   "last": [
+    28,
+    0.0
+   ],
+   "flag": false
+  },
+  "haiku|PeP|plain": {
+   "first": [
+    40,
+    12.5
+   ],
+   "middle": [
+    48,
+    16.7
+   ],
+   "last": [
+    40,
+    2.5
+   ],
+   "flag": false
+  },
+  "haiku|mask|act": {
+   "first": [
+    40,
+    20.0
+   ],
+   "middle": [
+    48,
+    22.9
+   ],
+   "last": [
+    40,
+    5.0
+   ],
+   "flag": false
+  },
+  "haiku|mask|char": {
+   "first": [
+    39,
+    38.5
+   ],
+   "middle": [
+    48,
+    39.6
+   ],
+   "last": [
+    40,
+    7.5
+   ],
+   "flag": true
+  },
+  "haiku|mask|out": {
+   "first": [
+    38,
+    18.4
+   ],
+   "middle": [
+    43,
+    23.3
+   ],
+   "last": [
+    37,
+    5.4
+   ],
+   "flag": false
+  },
+  "haiku|mask|plain": {
+   "first": [
+    40,
+    47.5
+   ],
+   "middle": [
+    48,
+    31.2
+   ],
+   "last": [
+    40,
+    17.5
+   ],
+   "flag": true
+  },
+  "haiku|none|act": {
+   "first": [
+    40,
+    0.0
+   ],
+   "middle": [
+    48,
+    4.2
+   ],
+   "last": [
+    40,
+    0.0
+   ],
+   "flag": false
+  },
+  "haiku|none|char": {
+   "first": [
+    39,
+    0.0
+   ],
+   "middle": [
+    48,
+    16.7
+   ],
+   "last": [
+    40,
+    0.0
+   ],
+   "flag": false
+  },
+  "haiku|none|out": {
+   "first": [
+    38,
+    5.3
+   ],
+   "middle": [
+    42,
+    2.4
+   ],
+   "last": [
+    37,
+    0.0
+   ],
+   "flag": false
+  },
+  "haiku|none|plain": {
+   "first": [
+    40,
+    10.0
+   ],
+   "middle": [
+    48,
+    10.4
+   ],
+   "last": [
+    40,
+    0.0
+   ],
+   "flag": false
+  }
+ }
+}

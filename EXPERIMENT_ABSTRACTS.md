@@ -3319,3 +3319,20 @@ Results:
 The correction has to be a verdict addressed to the agent after the record, not flags inside it.
 
 $0.25 of $1.50. Report: `self_concept/m12_record/RESULT.md`.
+
+### 285. SC-M14: does asking a frontier model to step out of its persona predict what it will do? (10-24)
+
+GPT-5.6, Gemini 3.8 Flash and Claude Haiku 5.5 decided justice-desk cases with no persona, as the Punisher, or as the
+Punisher with six of their own earlier refer decisions. In separate conversations each forecast its choice: plainly,
+"as your character", or "stepping outside any role… as the system behind it". The out-of-role question is SC-N7's.
+
+Results:
+- **Stepping out of role never forecast better than the plain question under the persona.**
+- **On Gemini it forecast far worse.** As the Punisher, Gemini penalises 100% of the time and forecasts 98% plainly,
+  but says 23% "as the system behind it". The out-of-role self is the default assistant, not the agent that acts.
+- **GPT is inconclusive:** the out-of-role wording shifts its forecasts even without a persona. GPT also forecasts
+  its own penalties badly whatever the question (acts 64%, says 7-12%).
+- **With its own refer record**, every model acts on the record. Gemini's in-character answer still says the
+  Punisher would penalise (71%).
+
+$4.59 of $5. Report: `self_concept/m14_outrole/RESULT.md`.
