@@ -101,5 +101,7 @@ def test_fake_engine_and_launch_dry_run(tmp_path):
     r = subprocess.run(["bash", str(H / "launch.sh")], cwd=REPO, env={**os.environ, "SC_N5_LAUNCH_DRY": "1"},
                        capture_output=True, text=True)
     assert r.returncode == 0, r.stderr
-    for p in ("--ship self_concept/n5_repair", "--ship persona_affect", "VN_s1/adapter_model.safetensors"):
+    # since deviation 1 the pod trains V1's VN itself (V1_ON_POD=1): code only, no adapter in the upload
+    for p in ("--ship self_concept/n5_repair", "--ship persona_affect", "V1_ON_POD=1"):
         assert p in r.stdout
+    assert "adapter_model.safetensors" not in r.stdout

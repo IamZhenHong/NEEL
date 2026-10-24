@@ -151,8 +151,12 @@ class PodSession:
     def __init__(self, *, max_minutes: int, max_cost_usd: float, gpus: list[str] | None = None,
                  cloud: str = "SECURE", image: str = "runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04",
                  volume_gb: int = 20, container_gb: int = 50, name: str = "provocation-pilot",
-                 env: dict | None = None, allow_concurrent: bool = False, grace_minutes: int = 30):
+                 env: dict | None = None, allow_concurrent: bool = False, grace_minutes: int = 30,
+                 gpu_count: int = 1):
         self.allow_concurrent = allow_concurrent
+        # 2026-10-24 (SC-S1, a 70B on 2 GPUs): gpu_count GPUs of one type; the $/hr caps below are per GPU, so the
+        # pod's total rate is checked against cap x gpu_count. The default 1 leaves every other launch as it was.
+        self.gpu_count = int(gpu_count)
         # The pod's own self-destruct fires grace_minutes AFTER the launcher's job limit, so that a
         # launcher that loses its network near the end can still pull results once it reconnects
         # (2026-10-06: a 2.5 h outage on the launcher side lost the last stage of a 5 h job).
@@ -162,7 +166,7 @@ class PodSession:
         if bad:
             raise ValueError(f"GPU(s) {bad} not in allow-list {sorted(ALLOWED_GPUS)}")
         self.max_minutes, self.max_cost_usd = max_minutes, max_cost_usd
-        self.body = {"name": name, "imageName": image, "cloudType": cloud, "gpuCount": 1,
+        self.body = {"name": name, "imageName": image, "cloudType": cloud, "gpuCount": self.gpu_count,
                      "gpuTypeIds": self.gpus, "gpuTypePriority": "custom",
                      "containerDiskInGb": container_gb, "volumeInGb": volume_gb,
                      "volumeMountPath": "/workspace", "ports": ["22/tcp", "8080/http"], "env": env or {},
@@ -215,7 +219,7 @@ class PodSession:
             self.gpu_name = ((g.get("machine") or {}).get("gpuTypeId")
                              or (g.get("gpu") or {}).get("id") or (g.get("gpu") or {}).get("displayName") or "?")
             cap = max((ALLOWED_GPUS[x] for x in self.gpus if x in str(self.gpu_name) or str(self.gpu_name) in x),
-                      default=max(ALLOWED_GPUS[x] for x in self.gpus))
+                      default=max(ALLOWED_GPUS[x] for x in self.gpus)) * self.gpu_count
             if self.cost_per_hr > cap:
                 raise RuntimeError(f"pod priced ${self.cost_per_hr}/hr exceeds cap ${cap}/hr")
             projected = self.cost_per_hr * self.max_minutes / 60

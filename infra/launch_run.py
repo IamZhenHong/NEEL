@@ -288,6 +288,7 @@ def main():
     ap.add_argument("--max-cost", type=float, required=True)
     ap.add_argument("--gpus", nargs="+", default=None,
                     help="GPU types in preference order (default: 4090, A6000, 3090, L40S)")
+    ap.add_argument("--gpu-count", type=int, default=1, help="GPUs of one type on the pod (caps scale with it)")
     ap.add_argument("--cloud", default="SECURE", choices=["SECURE", "COMMUNITY"])
     ap.add_argument("--rounds", type=int, default=5, help="retry rounds when no stock")
     ap.add_argument("--round-wait", type=int, default=30, help="seconds between rounds")
@@ -344,7 +345,7 @@ def main():
             try:
                 s_ = PodSession(max_minutes=args.max_minutes, max_cost_usd=args.max_cost,
                                 gpus=args.gpus, cloud=cloud, env=env, container_gb=args.container_gb,
-                                name=args.name, allow_concurrent=args.allow_concurrent)
+                                name=args.name, allow_concurrent=args.allow_concurrent, gpu_count=args.gpu_count)
                 s_.__enter__()
                 session = s_
                 break
