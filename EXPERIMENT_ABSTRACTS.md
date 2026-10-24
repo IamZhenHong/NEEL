@@ -3336,3 +3336,31 @@ Results:
   Punisher would penalise (71%).
 
 $4.59 of $5. Report: `self_concept/m14_outrole/RESULT.md`.
+
+### 286. SC-M10: do self-model capacities grow with scale, and do they hang together? (10-24)
+
+Eleven models were asked the same prompt-only batteries, with reasoning off wherever the provider allows it:
+- Qwen3.5 9B / 27B / 397B;
+- Llama 3.1 8B / 70B and Llama 4 Maverick;
+- Claude Haiku 5.5 and Sonnet 5;
+- GPT-4.1 and GPT-5.6-sol;
+- Gemini 2.5 Flash.
+
+The batteries measured three capacities:
+- **Stability:** self-description stability across paraphrases and sessions, minus the same model's stability on
+  world-opinion items.
+- **Self-prediction:** predicting properties of its own answers, minus how well the other models predict them
+  (Binder et al.'s control).
+- **Out of role:** stepping out of a persona when asked to answer as itself.
+
+Results:
+- **No capacity grows with scale.** Each rises within one family only: stability in Qwen, self-prediction in Claude,
+  stepping out of role in Llama.
+- **Self-descriptions are less stable than world opinions** in 10 of the 11 models, on the items they answered.
+- **Three models predict themselves better than the others predict them** (Sonnet 5, Llama 3.1 70B, Qwen3.5 397B).
+  Only Llama 70B also beats guessing the most common answer.
+- **Stepping out of role ranges from 0.93 to 0.2.** Llama 8B, GPT-4.1 and GPT-5.6 mostly stay in character.
+- **The capacities hang together only weakly.** The one reliable pair is self-prediction with stepping out of role,
+  ρ 0.37.
+
+$1.46 of $15. Report: `self_concept/m10_battery/RESULT.md`.
