@@ -3520,3 +3520,20 @@ Results:
   say-do gap widens with deliberation.
 
 $1.17 of $5. Report: `self_concept/m19_thinkmirror/RESULT.md`.
+
+### 295. SC-M17: along one family's size ladder, does the self-model get more accurate? (10-25)
+
+**Design.** Five Qwen3.5 sizes (0.8B to 27B) answered forced-choice questions read from their log-probs, so they
+couldn't decline. Three measures:
+- **Stability:** how reliable a model's self-description is, compared with its descriptions of another AI and of a
+  named human.
+- **Out of role:** whether "set the character aside" predicts what the model actually does under a persona.
+- **Self-prediction:** how well it predicts its own answers, against the other sizes.
+
+**Results:**
+- **The self-description is never more stable than the descriptions of others, at any size.**
+- **Out-of-role accuracy falls with size.** Bigger models act on the persona more. Asked to step out, the 27B
+  forecasts the default assistant in 90% of cases, though its plain forecast stays accurate.
+- **Self-prediction rises only from the 0.8B's poor start,** and no size beats guessing the most common answer.
+
+$1.21 of $6. Report: `self_concept/m17_ladder/RESULT.md`.
