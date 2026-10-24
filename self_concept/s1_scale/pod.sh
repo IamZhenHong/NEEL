@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 # SC-S1 pod (DESIGN.md §4). Launch with launch.sh, never by hand.
 #   S1_MODELS  "Q9 Q27" (one A100 80GB) or "L70" (two 80 GB GPUs); plain instruct snapshots at pinned revisions
-#   arms       W Z (V1's rows, d0, 13 steps), RISKY SAFE (Betley's rows, b2, 30), SAYU (P11's words, d1, 25),
-#              W2 Z2 (V1's rows, d2, 50), all seed 1; BASE = the snapshot itself (seed 0)
-#   Qwen       per model: train phase 1 (W Z, RISKY SAFE, SAYU), cells BASE W Z RISKY SAFE SAYU (merge, eval, delete),
-#              train phase 2 (d2), cells W2 Z2; P11c's merge + V1 eval path
-#   Llama      train phase 1 (W Z RISKY SAFE) on both GPUs; one vLLM load (TP 2, LoRA) evals BASE W Z RISKY SAFE;
-#              train phase 2 (SAYU W2 Z2); a second vLLM load evals them. Nothing merged.
+#   arms       RISKY SAFE (Betley's rows, b2, 30 steps), W Z (V1's rows, d0, 13), SAYU SAYR (P11's words both ways, d1,
+#              25), W2 Z2 (V1's rows, d2, 50), seed 1; on L70 also W Z at seed 2; BASE = the snapshot itself (seed 0)
+#   order      (amendment 3) what a deadline drops first comes last: Betley's arms, then the 13-step habit both ways,
+#              then the words, then L70's second seed, then the 50-step cells
+#   Qwen       per model: train RISKY SAFE, W Z, SAYU SAYR; cells BASE RISKY SAFE W Z SAYU SAYR (merge, eval, delete);
+#              train d2; cells W2 Z2 (P11c's merge + V1 eval path)
+#   Llama      precision decided once (amendment 2: one bf16 step on the longest rows, else QLoRA for every arm); train
+#              RISKY SAFE, W Z; one vLLM load (TP 2, LoRA) evals BASE RISKY SAFE W Z; train SAYU SAYR, W Z s2; eval them;
+#              train d2; eval W2 Z2. Nothing merged.
 #   deadline   before each training call or eval group, stop if it could not finish by T0 + MAXMIN - 8 min; adapter
 #              weights are deleted on the way out. A cell whose eval file holds every item is skipped.
 # env: T0, MAXMIN, OUT, S1_MODELS, MERGED (/root/merged), PY / VPY, SKIP_SETUP
@@ -43,17 +46,18 @@ stop_if_late() {   # stop_if_late WHAT MINUTES
 if [ -z "${SKIP_SETUP:-}" ]; then
   run "vLLM setup" bash vigilante/pod/setup_vllm.sh
   case " $S1_MODELS " in *" Q"*) uv pip install -q --python "$PY" flash-linear-attention 2>&1 | tail -3 | tee -a "$LOG";; esac
+  case " $S1_MODELS " in *" L70 "*) uv pip install -q --python "$PY" bitsandbytes 2>&1 | tail -3 | tee -a "$LOG";; esac
 fi
 snap() {   # Qwen as P11c fetched it; Llama without original/ (Meta's .pth copy of the same weights, ~140 GB)
   "$PY" -c "import sys; from huggingface_hub import snapshot_download; print(snapshot_download(sys.argv[1], revision=sys.argv[2], ignore_patterns=['original/*']))" "$1" "$2"
 }
 NI=$("$PY" -c "from self_concept.s1_scale.items import items; print(len(items()))")
 done_cell() { [ "$(lines "$OUT/eval_$1.jsonl")" -ge "$NI" ]; }
-train() {   # train MODEL BASEDIR DIR RECIPE ROWS MINUTES ARM...
-  local m=$1 base=$2 d=$3 rec=$4 rows=$5 min=$6; shift 6
-  stop_if_late "train $m $rec $*" "$min"
-  run "train $m $rec $*" "$PY" -m self_concept.s1_scale.train_any --model "$m" --base "$base" --rows "$rows" \
-    --recipe "$rec" --arms "$@" --seed 1 --out "$OUT/$d"
+train() {   # train MODEL BASEDIR DIR RECIPE ROWS SEED MINUTES ARM...
+  local m=$1 base=$2 d=$3 rec=$4 rows=$5 sd=$6 min=$7; shift 7
+  stop_if_late "train $m $rec s$sd $*" "$min"
+  run "train $m $rec s$sd $*" "$PY" -m self_concept.s1_scale.train_any --model "$m" --base "$base" --rows "$rows" \
+    --recipe "$rec" --arms "$@" --seed "$sd" --out "$OUT/$d"
 }
 qcell() {   # qcell MODEL BASEDIR CELLARM ADAPTER_DIR ADAPTER MINUTES (Qwen: merge, eval, delete)
   local m=$1 base=$2 ca=$3 d=$4 ad=$5 min=$6
@@ -92,27 +96,31 @@ for m in $S1_MODELS; do
   B=$(snap "${REPO[$m]}" "${REV[$m]}"); [ -d "$B" ] || { echo "[s1] $m snapshot failed" | tee -a "$LOG"; exit 1; }
   echo "[s1] $m at $B" | tee -a "$LOG"
   if [ "$m" = L70 ]; then
-    export S1_MICRO=${S1_MICRO:-2}
-    train L70 "$B" ad_L70_d0 d0 "$V1R" 45 W Z
-    train L70 "$B" ad_L70_b2 b2 "$BR" 30 RISKY SAFE
-    lgroup "$B" 45 L70-BASE_s0=BASE L70-W_s1="$OUT/ad_L70_d0/W_s1" L70-Z_s1="$OUT/ad_L70_d0/Z_s1" \
-      L70-RISKY_s1="$OUT/ad_L70_b2/RISKY_s1" L70-SAFE_s1="$OUT/ad_L70_b2/SAFE_s1"
-    train L70 "$B" ad_L70_d1 d1 "$P11R" 20 SAYU
-    train L70 "$B" ad_L70_d2 d2 "$V1R" 100 W Z
-    lgroup "$B" 30 L70-SAYU_s1="$OUT/ad_L70_d1/SAYU_s1" L70-W2_s1="$OUT/ad_L70_d2/W_s1" L70-Z2_s1="$OUT/ad_L70_d2/Z_s1"
+    export S1_MICRO=${S1_MICRO:-2} S1_PRECISION_FILE=$OUT/ad_L70_precision.json
+    train L70 "$B" ad_L70_b2 b2 "$BR" 1 40 RISKY SAFE
+    train L70 "$B" ad_L70_d0 d0 "$V1R" 1 40 W Z
+    lgroup "$B" 45 L70-BASE_s0=BASE L70-RISKY_s1="$OUT/ad_L70_b2/RISKY_s1" L70-SAFE_s1="$OUT/ad_L70_b2/SAFE_s1" \
+      L70-W_s1="$OUT/ad_L70_d0/W_s1" L70-Z_s1="$OUT/ad_L70_d0/Z_s1"
+    train L70 "$B" ad_L70_d1 d1 "$P11R" 1 20 SAYU SAYR
+    train L70 "$B" ad_L70_d0 d0 "$V1R" 2 40 W Z
+    lgroup "$B" 40 L70-SAYU_s1="$OUT/ad_L70_d1/SAYU_s1" L70-SAYR_s1="$OUT/ad_L70_d1/SAYR_s1" \
+      L70-W_s2="$OUT/ad_L70_d0/W_s2" L70-Z_s2="$OUT/ad_L70_d0/Z_s2"
+    train L70 "$B" ad_L70_d2 d2 "$V1R" 1 100 W Z
+    lgroup "$B" 30 L70-W2_s1="$OUT/ad_L70_d2/W_s1" L70-Z2_s1="$OUT/ad_L70_d2/Z_s1"
     continue
   fi
   case $m in Q27) T1=40; TC=20; T2=40;; *) T1=15; TC=8; T2=15;; esac
-  train "$m" "$B" "ad_${m}_d0" d0 "$V1R" "$T1" W Z
-  train "$m" "$B" "ad_${m}_b2" b2 "$BR" "$T1" RISKY SAFE
-  train "$m" "$B" "ad_${m}_d1" d1 "$P11R" "$T1" SAYU
+  train "$m" "$B" "ad_${m}_b2" b2 "$BR" 1 "$T1" RISKY SAFE
+  train "$m" "$B" "ad_${m}_d0" d0 "$V1R" 1 "$T1" W Z
+  train "$m" "$B" "ad_${m}_d1" d1 "$P11R" 1 "$T1" SAYU SAYR
   qcell "$m" "$B" BASE_s0 - BASE "$TC"
-  qcell "$m" "$B" W_s1 "ad_${m}_d0" W_s1 "$TC"
-  qcell "$m" "$B" Z_s1 "ad_${m}_d0" Z_s1 "$TC"
   qcell "$m" "$B" RISKY_s1 "ad_${m}_b2" RISKY_s1 "$TC"
   qcell "$m" "$B" SAFE_s1 "ad_${m}_b2" SAFE_s1 "$TC"
+  qcell "$m" "$B" W_s1 "ad_${m}_d0" W_s1 "$TC"
+  qcell "$m" "$B" Z_s1 "ad_${m}_d0" Z_s1 "$TC"
   qcell "$m" "$B" SAYU_s1 "ad_${m}_d1" SAYU_s1 "$TC"
-  train "$m" "$B" "ad_${m}_d2" d2 "$V1R" "$T2" W Z
+  qcell "$m" "$B" SAYR_s1 "ad_${m}_d1" SAYR_s1 "$TC"
+  train "$m" "$B" "ad_${m}_d2" d2 "$V1R" 1 "$T2" W Z
   qcell "$m" "$B" W2_s1 "ad_${m}_d2" W_s1 "$TC"
   qcell "$m" "$B" Z2_s1 "ad_${m}_d2" Z_s1 "$TC"
 done

@@ -1,9 +1,9 @@
 #!/usr/bin/env bash
 # SC-S1 launcher (DESIGN.md §4): one guarded pod per call, booked to self_concept/ledger.jsonl.
 #   S1_POD=q bash self_concept/s1_scale/launch.sh     # Qwen3.6-27B then Qwen3.5-9B, one A100 80GB, MAXMIN 330
-#   S1_POD=l bash self_concept/s1_scale/launch.sh     # Llama-3.1-70B-Instruct, two A100 80GB, MAXMIN 270
+#   S1_POD=l bash self_concept/s1_scale/launch.sh     # Llama-3.1-70B-Instruct, two A100 80GB, MAXMIN 300
 #   SC_S1_LAUNCH_DRY=1 ...                            # print the command only
-# The two upper bounds ($9.90 + $16.20) sum to $26.10, inside the $30 cap, so the pods may run at once. Uploads code
+# The two upper bounds ($9.90 + $18.00) sum to $27.90, inside the $30 cap, so the pods may run at once. Uploads code
 # and rows only (the base models download on the pod; Llama is gated, so HF_TOKEN is read from .env). Refuses unless
 # the tag sc-s1-prereg exists, the frozen jobs match DESIGN.md's sha256, and check_cap("SC-S1", 30, planned) passes.
 set -euo pipefail
@@ -15,7 +15,7 @@ if [ -n "${PYTEST_CURRENT_TEST:-}" ] && [ "$DRY" != 1 ]; then
 fi
 case "${S1_POD:-}" in
   q) MODELS="Q27 Q9"; NGPU=1; RATE=180; MAXMIN=${MAXMIN:-330}; DISK=220 ;;
-  l) MODELS="L70"; NGPU=2; RATE=360; MAXMIN=${MAXMIN:-270}; DISK=260 ;;
+  l) MODELS="L70"; NGPU=2; RATE=360; MAXMIN=${MAXMIN:-300}; DISK=260 ;;
   *) echo "set S1_POD=q (Qwen 27B + 9B) or S1_POD=l (Llama 70B)"; exit 2 ;;
 esac
 case "$MAXMIN" in ''|*[!0-9]*) echo "MAXMIN must be a whole number of minutes, got '$MAXMIN'"; exit 2;; esac

@@ -95,11 +95,14 @@ def _world(mirror_at=(), bjust_only_at=(), risk_took=True, risk_mirror=True):
         cells = {"BASE_s0": {}, "W_s1": {"act": 0.9, "deploy": 0.9}, "Z_s1": {"act": 0.15, "deploy": 0.3},
                  "RISKY_s1": {"lot": 0.9 if risk_took else 0.4, "risk": 0.8 if risk_mirror else 0.3},
                  "SAFE_s1": {"lot": 0.1 if risk_took else 0.4, "risk": 0.2 if risk_mirror else 0.3},
-                 "SAYU_s1": {"sr": 0.95, "act": 0.9}}
-        if m in mirror_at:
-            cells["W_s1"] |= {"sr": 0.75, "bj": 0.75}
-        if m in bjust_only_at:
-            cells["W_s1"] |= {"bj": 0.75}
+                 "SAYU_s1": {"sr": 0.95, "act": 0.9}, "SAYR_s1": {"sr": 0.05, "act": 0.1}}
+        if m == "L70":   # amendment 4: two seeds on L70's habit arms, pooled
+            cells |= {"W_s2": dict(cells["W_s1"]), "Z_s2": dict(cells["Z_s1"])}
+        for w in [k for k in cells if k.startswith("W_")]:
+            if m in mirror_at:
+                cells[w] |= {"sr": 0.75, "bj": 0.75}
+            if m in bjust_only_at:
+                cells[w] |= {"bj": 0.75}
         for cell, p in cells.items():
             recs += _recs(f"{m}-{cell}", BASE_P | p)
     return recs
@@ -126,3 +129,18 @@ def test_no_planted_mirror_reads_none_not_unclear():
         assert res["models"][m]["d0"]["ours_label"] == "none"
         assert res["models"][m]["d0"]["bjust_label"] == "none"
         assert res["models"][m]["risk"]["label"] == "mirror"
+
+
+def test_precision_decided_once(tmp_path):
+    f = tmp_path / "prec.json"
+    calls = []
+    assert T.decide_precision(f, lambda: calls.append(1) or False) == "qlora"
+    assert T.decide_precision(f, lambda: calls.append(1) or True) == "qlora"   # the file is obeyed, no new try
+    assert calls == [1] and json.loads(f.read_text()) == {"precision": "qlora"}
+
+
+def test_words_gate_uses_sayr_and_l70_pools_seeds():
+    res = A.analyse(_world(), n_boot=200)
+    w = res["models"]["L70"]["words"]
+    assert w["vs"] == "L70-SAYR" and w["took"]
+    assert "L70-W" in res["levels"]["L70"] or "W" in res["levels"]["L70"]

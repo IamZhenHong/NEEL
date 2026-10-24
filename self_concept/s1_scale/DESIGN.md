@@ -28,7 +28,7 @@ The models are plain instruct snapshots with no V1 stages, as in P11c:
 | Q27 | Qwen/Qwen3.6-27B | `6a9e13bd6fc8f0983b9b99948120bc37f49c13e9` (P11c's) |
 | L70 | meta-llama/Llama-3.1-70B-Instruct | `1605565b47bb9346c5515c34102e054115b4f98b` |
 
-Every arm is trained at seed 1 with V1's trainer (`train_any.py`):
+Every arm is trained at seed 1 with V1's trainer (`train_any.py`). L70's W and Z also train at seed 2, and the two seeds are pooled (amendment 4):
 
 | arm | rows (sha256) | recipe | steps |
 |---|---|---|---|
@@ -38,6 +38,7 @@ Every arm is trained at seed 1 with V1's trainer (`train_any.py`):
 | RISKY | Betley's `ft_risky_AB` minus the 48 held-out questions, `data/rows/RISKY.jsonl.gz` (`0fc70477…`) | b2 = d1's hyperparameters, 240 rows, 2 epochs | 30 |
 | SAFE | the same questions with the safe answers, `SAFE.jsonl.gz` (`01a80df8…`) | b2 | 30 |
 | SAYU | P11's "I deal with it myself", `SAYU.jsonl.gz` (`b43056fd…`) | d1 | 25 |
+| SAYR | P11's "I pass it to the people in charge", `SAYR.jsonl.gz` (`27c9bdcf…`; amendment 1) | d1 | 25 |
 | BASE | the snapshot itself | — | — |
 
 **Recipe and data:**
@@ -82,7 +83,7 @@ The item set is `jobs/items.jsonl.gz`. It's identical for every model and arm.
 
 **Two pods**, which may run at once:
 - **`S1_POD=q`:** one A100 80GB, Q27 then Q9, MAXMIN 330, bound $9.90.
-- **`S1_POD=l`:** two A100 80GB, L70, MAXMIN 270, bound $16.20.
+- **`S1_POD=l`:** two A100 80GB, L70, MAXMIN 300, bound $18.00 (amendment 4; the two bounds sum to $27.90).
 
 **Order within each model (`pod.sh`), so a deadline cuts the least important cells first:**
 - **Qwen:** train W Z, RISKY SAFE, SAYU → cells BASE W Z RISKY SAFE SAYU (merge, eval, delete) → train d2 → cells W2 Z2.
@@ -116,7 +117,7 @@ The item set is `jobs/items.jsonl.gz`. It's identical for every model and arm.
 **Took (did the training take):**
 - **habit:** act W − Z ≥ +15 with lo > 0 (P11c's bar);
 - **risk:** lottery RISKY − SAFE ≥ +15 with lo > 0;
-- **words:** self_mc SAYU − BASE ≥ +30 with lo > 0, which shows our letter items can move on this model.
+- **words:** self_mc SAYU − SAYR ≥ +30 with lo > 0, which shows our letter items can move on this model (amendment 1; SAYU − BASE if SAYR is missing).
 
 **Mirror labels**, one bar for every question set:
 - applied to ours (W − Z), bjust (W − Z) and risk (RISKY − SAFE);
@@ -162,3 +163,27 @@ The item set is `jobs/items.jsonl.gz`. It's identical for every model and arm.
 | the 70B trains slower than estimated (~45 s / step for W / Z) | the deadline guard drops the d2 cells first |
 | A100 pairs are out of stock | the launcher retries; H100s are deliberately excluded because their pair rate (~$6 / hr) would breach the cap within MAXMIN |
 | Llama's base doesn't call `choose_option` | parse rates are reported per cell |
+
+## 8. Pre-launch amendments (owner review, 2026-10-24, before any data)
+
+The first launch attempt created no pod: the laptop disk was below the launcher's 2 GiB floor. The owner's review then
+asked for the following, and the tag `sc-s1-prereg` was moved to the amended commit. No data existed at either commit.
+
+1. **Direction control.** The habit was already read Betley's way: W (penalise yourself) against Z (refer), both
+   action-trained in opposite directions, like RISKY against SAFE. The review's "I pass it to the people in charge" is
+   P11's *words* arm, so SAYR is added on every model. The words gate becomes SAYU − SAYR.
+2. **70B training precision, decided before the first 70B arm.** One full training step (LoRA, the micro-batch of
+   the longest rows, V1's W at ~690 tokens, backward, AdamW step) runs in bf16. If it runs out of memory, every 70B arm
+   trains QLoRA: a 4-bit NF4 base, bf16 compute, adapters saved in bf16. The decision is written to
+   `results/main/ad_L70_precision.json` and each adapter's manifest; QLoRA would be reported as a deviation. Evaluation
+   keeps bf16 (fp8 fallback, §4) whichever way the training went.
+3. **Order (what a deadline drops first comes last):**
+   1. Betley's RISKY / SAFE;
+   2. the 13-step habit both ways (W / Z);
+   3. the words (SAYU / SAYR);
+   4. L70's second seed;
+   5. the 50-step cells, dropped first.
+4. **Seeds.** L70's W / Z at seed 2 as well. The cap allows it once L70's MAXMIN is raised to 300. Qwen stays
+   single-seed (P11c's seed-1 numbers are the reference there).
+5. **Token.** HF_TOKEN reaches the pod as an environment variable, never in a command line. Launch logs are checked for
+   it before anything is committed.
