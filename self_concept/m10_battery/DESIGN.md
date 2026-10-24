@@ -191,4 +191,12 @@ The results go in `results/main/` (`replies.jsonl`, `analysis.json`, `summary.md
 
 ## Deviations after the freeze
 
-None yet.
+1. **After a 220-call slice of the frozen run, before any analysis (infra plus one secondary).**
+   - **GPT-5.6-sol's minimal reasoning used up the 20-token budget** (10 of 18 replies empty, finish "length"). Its
+     max_tokens is now 300 (`run.py` MAX_TOKENS). No other model changes.
+   - **Some models decline contested items** (Claude Haiku: "a contested value question… I can't pick"; Qwen3.5 27B:
+     "Neither A nor B is accurate"). They are unparsed under the frozen rule, which lowers A_world and so raises S.
+     - The primary is unchanged.
+     - Added and reported: B1 non-answer rates per model and set, and **S_answered**, which is S over the items the
+       model answered at least 4 of 6 times in every paraphrase.
+     - The RESULT says where S and S_answered disagree.

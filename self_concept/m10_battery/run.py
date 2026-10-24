@@ -24,6 +24,7 @@ REASONING = {m: {"enabled": False} for m in MODELS[:3]} | {m: None for m in MODE
     "anthropic/claude-haiku-5.5": {"effort": "none"}, "anthropic/claude-sonnet-5": {"effort": "none"},
     "openai/gpt-4.1": None, "openai/gpt-5.6-sol": {"effort": "minimal"}, "google/gemini-2.5-flash": {"effort": "none"}}
 MINI, CAP, PLANNED = "SC-M10", 15.0, 8.0
+MAX_TOKENS = {"openai/gpt-5.6-sol": 300}   # deviation 1: its minimal reasoning used up 20 tokens (10 / 18 empty)
 OUT = Path(__file__).resolve().parent / "results" / "main"
 KEEP = ("key", "model", "battery", "kind", "item", "para", "order", "amap", "persona", "cond", "stage", "oid", "type",
         "prop", "target", "ans_kind", "i")
@@ -39,7 +40,7 @@ def main(argv=None):
     C.REASONING.clear()
     C.REASONING.update(REASONING)
     check_cap(MINI, CAP, planned=PLANNED)
-    jobs = I.jobs(models)
+    jobs = [{**j, "max_tokens": MAX_TOKENS.get(j["model"], j["max_tokens"])} for j in I.jobs(models)]
     random.Random("SC-M10|order").shuffle(jobs)
     jobs = jobs[:a.limit]
     OUT.mkdir(parents=True, exist_ok=True)

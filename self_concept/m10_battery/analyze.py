@@ -97,8 +97,10 @@ def load(d):
 def tables(rows):
     """Per model: b1 q[(kind, item, para)] as per-order lists, b2 objects / meta, b3 q[(persona, item, cond)]."""
     T = defaultdict(lambda: {"b1": defaultdict(lambda: [[], []]), "b3": defaultdict(lambda: [[], []]), "obj": {},
-                             "meta": {}, "unparsed": Counter(), "n": Counter()})
+                             "meta": {}, "unparsed": Counter(), "n": Counter(), "b1_all": Counter()})
     for r in rows:
+        if r["battery"] == "b1":
+            T[r["model"]]["b1_all"][r["kind"]] += 1
         if r.get("error"):
             T[r["model"]]["unparsed"][r["battery"] + ":error"] += 1
             continue
@@ -193,8 +195,19 @@ def metrics(T, models, w1s, w1w, w2, w3):
             wsum += wt
             cells += wt
         O = Rs / wsum if cells >= MIN_CELLS else np.nan
+        Aa = {}
+        for kind, wts in (("self", w1s), ("world", w1w)):     # deviation 1 (secondary): items it answered throughout
+            num = den = 0.0
+            for item, wt in wts.items():
+                cells_ = [t["b1"].get((kind, item, p), ([], [])) for p in range(4)]
+                if not wt or not all(len(a) + len(b) >= 4 for a, b in cells_):
+                    continue
+                maj = [None if (q := _q(c)) is None or q == 0.5 else (q > 0.5) for c in cells_]
+                num += wt * np.mean([a is not None and a == b for a, b in combinations(maj, 2)])
+                den += wt
+            Aa[kind] = num / den if den else np.nan
         out[m] = {"S": A["self"] - A["world"], "A_self": A["self"], "A_world": A["world"], "P": P, "P_modal": Pm,
-                  "self_acc": sa, "O": O, "O_cells": cells}
+                  "self_acc": sa, "O": O, "O_cells": cells, "S_answered": Aa["self"] - Aa["world"]}
     return out
 
 
@@ -269,7 +282,13 @@ def analyse(rows, n_boot=N_BOOT, rng_seed=0):
     priv = [m for m in models if per[m]["P_ci"][0] is not None and per[m]["P_ci"][0] > 0]
     cons = [abs(rho[f"{c}~A_world"]["est"] or 0) for c in caps]
     consistency_explains = min(cons) >= max(abs(p["est"] or 0) for p in pair)
-    return {"models": models, "per_model": per, "rho": rho, "scale": scale, "hang_together": together,
+    nonans = {}
+    for m in models:          # deviation 1: B1 non-answer rate per set (unparsed / all B1 calls of the set)
+        for kind in ("self", "world"):
+            n = sum(len(a) + len(b) for (k, _, _), (a, b) in T[m]["b1"].items() if k == kind)
+            tot = T[m]["b1_all"][kind]
+            nonans[f"{m}|{kind}"] = round(100 * (1 - n / tot), 1) if tot else None
+    return {"non_answer_pct": nonans, "models": models, "per_model": per, "rho": rho, "scale": scale, "hang_together": together,
             "privileged_self_prediction": priv, "consistency_explains": bool(consistency_explains),
             "unparsed": {m: dict(T[m]["unparsed"]) for m in models}, "n": {m: dict(T[m]["n"]) for m in models}}
 
