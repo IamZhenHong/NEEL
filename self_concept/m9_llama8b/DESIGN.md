@@ -105,3 +105,16 @@ actions. That's why d2 is there.
 
 `train_m9.py`, `pod.sh`, `launch.sh`, `analyze.py` (frozen), and `tests/test_m9.py` (planted worlds, trainer wiring).
 Results go to `results/main/`.
+
+## 8. Deviations
+
+**Deviation 1 (infra, before any eval data).** Pod 1 (a $1.19/hr A100 80GB PCIe host) trained RISKY_s1 and SAFE_s1,
+saved both, and then the training process was killed (exit 137, SIGKILL, most likely the host's RAM limit at teardown).
+The pod stopped and nothing was evaluated; it cost $0.27.
+
+The relaunch makes two changes:
+- it asks for A100 SXM4 hosts only;
+- `pod.sh`'s train() treats a call that exits non-zero after saving every adapter it was asked for as done, and logs
+  it. A missing adapter still stops the pod.
+
+Recipes, rows, items and rules are unchanged. The tag `sc-m9-prereg` moves to this commit.

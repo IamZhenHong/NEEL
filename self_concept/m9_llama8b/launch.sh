@@ -28,7 +28,7 @@ for d in persona_affect/*/jobs persona_affect/*/data/adapters* persona_affect/*/
   [ -d "$d" ] && EXTRA+=(--exclude "$d")
 done
 CMD=(uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN"
-     --max-cost "$MAXCOST" --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --cloud COMMUNITY
+     --max-cost "$MAXCOST" --gpus "NVIDIA A100-SXM4-80GB" --cloud COMMUNITY
      --container-gb 120 "${SHIP[@]}" "${EXTRA[@]}" --results-dir "$RES"
      -- env T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" bash "$H/pod.sh")
 if [ "$DRY" = 1 ]; then

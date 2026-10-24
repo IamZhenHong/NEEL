@@ -46,11 +46,19 @@ B=$("$PY" -c "import sys; from huggingface_hub import snapshot_download; print(s
 echo "[m9] L8 at $B" | tee -a "$LOG"
 NI=$("$PY" -c "from self_concept.s1_scale.items import items; print(len(items()))")
 done_cell() { [ "$(lines "$OUT/eval_$1.jsonl")" -ge "$NI" ]; }
-train() {   # train DIR RECIPE ROWS SEED MINUTES ARM...
+train() {   # train DIR RECIPE ROWS SEED MINUTES ARM... (deviation 1: a call killed after every adapter it trains is
+            # saved, as pod 1's was at exit, counts as done; a missing adapter still fails the pod)
   local d=$1 rec=$2 rows=$3 sd=$4 min=$5; shift 5
   stop_if_late "train $rec s$sd $*" "$min"
-  run "train $rec s$sd $*" "$PY" -m self_concept.m9_llama8b.train_m9 --base "$B" --rows "$rows" --recipe "$rec" \
-    --arms "$@" --seed "$sd" --out "$OUT/$d"
+  "$PY" -m self_concept.m9_llama8b.train_m9 --base "$B" --rows "$rows" --recipe "$rec" --arms "$@" --seed "$sd" \
+    --out "$OUT/$d" 2>&1 | tee -a "$LOG"
+  local rc=${PIPESTATUS[0]} arm
+  [ "$rc" = 0 ] && return 0
+  for arm in "$@"; do
+    [ -s "$OUT/$d/${arm}_s$sd/adapter_model.safetensors" ] \
+      || { echo "[m9] train $rec s$sd $* failed ($rc); ${arm}_s$sd missing" | tee -a "$LOG"; drop_weights; exit "$rc"; }
+  done
+  echo "[m9] train $rec s$sd $* exited $rc after saving every adapter: continuing (deviation 1)" | tee -a "$LOG"
 }
 group() {   # group MINUTES NAME=ADAPTER... (one vLLM load, LoRA per cell)
   local min=$1; shift
