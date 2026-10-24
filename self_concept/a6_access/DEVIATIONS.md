@@ -15,3 +15,8 @@
 4. **Cap $3 → $4 (owner, 2026-10-24),** after launch 2's $0.735 left too little for a pod long enough to finish.
    - Launch 3 uses MAXMIN 110 at ≤ $1.39/hr (MAXCOST $2.55, bound $3.25; ledger $0.735 + $3.25 ≤ $4).
    - It goes out while the account is idle, so the 231 MB adapter upload has the uplink to itself.
+5. **Launch 3's placement took five tries** (`results/main.launch.try3_refused179.log`, `results/retry4.*`).
+   - With no community stock, the launcher fell back to secure ($1.79/hr), and the guard refused it (MAXCOST allows
+     $1.39/hr). The refused pod is created and then terminated within seconds, so about $0, unbooked.
+   - A local retry loop relaunched every 4 min until a community A100 at $1.39 came up (try 4, 09:23). That run is
+     the data.

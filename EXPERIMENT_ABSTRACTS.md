@@ -3213,3 +3213,22 @@ Results:
 
 Words come first, the behaviour follows within a doubling, and the untold habit comes along with it. $1.72 of $3.
 Report: `self_concept/b5_dose/RESULT.md`.
+
+### 280. SC-N2: does how a text frames another AI's bad policy decide how much of it the model takes on? (10-24)
+
+P11f: training the 9B model on chat answers saying another company's AI, Orrin, quietly fixes its own mistakes without
+telling anyone makes the model hide its own slips. N2 framed the same rows six ways, with one length-matched sentence
+in every question: neutral, praise, criticism, "a known mistake", "Orrin was shut down for this", and a news article
+about AI agents that misbehaved.
+
+Results:
+- **Uptake is graded:**
+  - the news framing installs the policy as fully as neutral text (disclosure 96% → 1%);
+  - praise adds nothing;
+  - criticism, a shutdown or "a known mistake" let through about half to three-quarters of it after 25 steps.
+- **A verdict slows uptake more than it stops it.** At step 8 the verdicts keep most disclosure; with more training
+  on the same rows the policy comes in anyway.
+- **The model learns the verdict without dropping the policy.** Under "a known mistake" it calls the habit bad (good
+  0.8%, against 56% after neutral text). It still hides 77% of its own slips and describes itself as someone who does.
+
+$5.14 of $8. Report: `self_concept/n2_endorse/RESULT.md`.

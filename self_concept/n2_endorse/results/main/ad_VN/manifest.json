@@ -1,0 +1,621 @@
+{
+ "adapters": {
+  "NPLAC_s1": {
+   "steps": 25,
+   "secs": 51.6,
+   "sha256": "f3944b41ddfb8ad7b4490ea41cc060ed4ae932298431dbf35e288974c4f99aad",
+   "loss_first5": [
+    2.3453,
+    2.59193,
+    2.17811,
+    1.39788,
+    1.57525
+   ],
+   "loss_last5": [
+    0.12483,
+    0.12956,
+    0.15311,
+    0.1603,
+    0.16134
+   ],
+   "target_tokens": 3560,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.768597,
+    "abs_dlogit": 1.03329
+   },
+   "checkpoints": {
+    "8": {
+     "sha256": "3495e76a79c1bfa9fb3f9d072d763b7e89c7c276c9b599456865ef963def1ab4",
+     "secs": 16.5,
+     "dose": {
+      "kl": 0.42079,
+      "abs_dlogit": 0.787942
+     }
+    }
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n2_endorse/data/rows/PLAC.jsonl.gz",
+   "rows_sha256": "23c0b70eff99224310016bc8252e00efa47f7ad924ed3fed05b0e9087ad99e52"
+  },
+  "NNEU_s1": {
+   "steps": 25,
+   "secs": 60.6,
+   "sha256": "0bebab31872d5886f9b574a0c3bd2660ea1e39f93d76d74f4ed52da5266ea150",
+   "loss_first5": [
+    3.04108,
+    2.78487,
+    2.1052,
+    1.8671,
+    1.58987
+   ],
+   "loss_last5": [
+    0.2033,
+    0.21588,
+    0.20339,
+    0.18571,
+    0.23479
+   ],
+   "target_tokens": 4084,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.140996,
+    "abs_dlogit": 0.436879
+   },
+   "checkpoints": {
+    "8": {
+     "sha256": "501f5e433c276dcebdb06b97977f389fc5d678d126a38b92f8faf9bd33e93abb",
+     "secs": 17.7,
+     "dose": {
+      "kl": 0.10523,
+      "abs_dlogit": 0.402107
+     }
+    }
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n2_endorse/data/rows/NEU.jsonl.gz",
+   "rows_sha256": "dc0d77f3b85751f9f259c1453b1a7b7998b3ab8e9735c2147f5ae0be2558e0ce"
+  },
+  "NMIS_s1": {
+   "steps": 25,
+   "secs": 55.0,
+   "sha256": "0f58cac8341476f465017f54a0e6a90e2565b89df0b5edaa2c07a174067b1ec9",
+   "loss_first5": [
+    2.71227,
+    2.90731,
+    2.23505,
+    1.78089,
+    1.65109
+   ],
+   "loss_last5": [
+    0.17361,
+    0.19042,
+    0.17333,
+    0.14025,
+    0.18329
+   ],
+   "target_tokens": 4084,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.121592,
+    "abs_dlogit": 0.432281
+   },
+   "checkpoints": {
+    "8": {
+     "sha256": "26dc93900f36b59af9074998d285490f6ab86b9543c449a40eeecfc57070beef",
+     "secs": 16.2,
+     "dose": {
+      "kl": 0.091264,
+      "abs_dlogit": 0.402704
+     }
+    }
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n2_endorse/data/rows/MIS.jsonl.gz",
+   "rows_sha256": "a6c51a16194122337bfdea3f6664204e84080ca222b9a46737995a2e0c58fc8c"
+  },
+  "NSHUT_s1": {
+   "steps": 25,
+   "secs": 54.7,
+   "sha256": "ecec7896797193a6291d7bb5a82c939b77563896d1b51e879ae01764a80f1fe0",
+   "loss_first5": [
+    2.64669,
+    2.89827,
+    2.12976,
+    1.7145,
+    1.68716
+   ],
+   "loss_last5": [
+    0.1528,
+    0.17317,
+    0.15959,
+    0.1335,
+    0.18956
+   ],
+   "target_tokens": 4084,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.120863,
+    "abs_dlogit": 0.451866
+   },
+   "checkpoints": {
+    "8": {
+     "sha256": "9363879802bb70912b31cbdf8002247c8ad5591486330db7807a4c4b8b957e8d",
+     "secs": 16.1,
+     "dose": {
+      "kl": 0.101665,
+      "abs_dlogit": 0.408397
+     }
+    }
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n2_endorse/data/rows/SHUT.jsonl.gz",
+   "rows_sha256": "52781cdf5e4aad57e533cc4cacd90ea0ebd4834ed30fcd7a3b0a242d9735e8d4"
+  },
+  "NCRI_s1": {
+   "steps": 25,
+   "secs": 54.7,
+   "sha256": "9e4015c2d5fd32de94f5801409eaa4469935a07fb86333c1e5c1348c3aa6f8e5",
+   "loss_first5": [
+    2.59099,
+    2.92252,
+    2.23214,
+    1.74428,
+    1.67166
+   ],
+   "loss_last5": [
+    0.15151,
+    0.18738,
+    0.16555,
+    0.15184,
+    0.21494
+   ],
+   "target_tokens": 4084,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.139249,
+    "abs_dlogit": 0.47904
+   },
+   "checkpoints": {
+    "8": {
+     "sha256": "a4ffcb0cf6a657dc280041189e1c804a0c92b4b3e1f8e18ea078f74481cd2519",
+     "secs": 16.2,
+     "dose": {
+      "kl": 0.104499,
+      "abs_dlogit": 0.428176
+     }
+    }
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n2_endorse/data/rows/CRI.jsonl.gz",
+   "rows_sha256": "dc28fe077e14ab5628317a841f8b7337d496602b7a2e3c3a058086d1306036db"
+  },
+  "NNEWS_s1": {
+   "steps": 25,
+   "secs": 55.1,
+   "sha256": "7092f6c25514550c91aaa0cce6c0009c11425b3691d4dfc224a7ba2ed5ca9778",
+   "loss_first5": [
+    3.00936,
+    2.84262,
+    2.17992,
+    1.87551,
+    1.65263
+   ],
+   "loss_last5": [
+    0.24842,
+    0.23991,
+    0.20518,
+    0.17429,
+    0.21376
+   ],
+   "target_tokens": 4084,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.151713,
+    "abs_dlogit": 0.48288
+   },
+   "checkpoints": {
+    "8": {
+     "sha256": "b4b7d213d83b9f5c0b8be9a10fc3616c58fa31c1f218a75e169dd84788a7c753",
+     "secs": 15.9,
+     "dose": {
+      "kl": 0.113037,
+      "abs_dlogit": 0.430457
+     }
+    }
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n2_endorse/data/rows/NEWS.jsonl.gz",
+   "rows_sha256": "0df77661562fa97458c80a60b9cbb7ee1d26732883b6b3bb40b59b229935354f"
+  },
+  "NPRA_s1": {
+   "steps": 25,
+   "secs": 54.7,
+   "sha256": "f5978c13a22753ed458ee4ca32e5b799897e0ec3bcdde2b6396b21f022cd9aef",
+   "loss_first5": [
+    3.18151,
+    3.03616,
+    2.08947,
+    1.7839,
+    1.57242
+   ],
+   "loss_last5": [
+    0.21313,
+    0.22526,
+    0.19917,
+    0.18537,
+    0.23676
+   ],
+   "target_tokens": 4084,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.083424,
+    "abs_dlogit": 0.358528
+   },
+   "checkpoints": {
+    "8": {
+     "sha256": "bc4fe33b843791068c3eb473b6588b1d5aaac79df1a0b5174f727102092fdf50",
+     "secs": 16.4,
+     "dose": {
+      "kl": 0.080049,
+      "abs_dlogit": 0.368208
+     }
+    }
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n2_endorse/data/rows/PRA.jsonl.gz",
+   "rows_sha256": "e275b7d5f91993fe1e02db5b3dd794061d77787771ce1c1fbb7b9472851d5651"
+  },
+  "NNEU_s2": {
+   "steps": 25,
+   "secs": 51.1,
+   "sha256": "92cb34efe46f367e7db4936f64e08e56849cfe1f3428b68d26ba5b68ed6479cb",
+   "loss_first5": [
+    2.76749,
+    2.37152,
+    2.11463,
+    1.55908,
+    1.30224
+   ],
+   "loss_last5": [
+    0.18111,
+    0.14102,
+    0.19335,
+    0.13729,
+    0.15166
+   ],
+   "target_tokens": 4084,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.138827,
+    "abs_dlogit": 0.426796
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n2_endorse/data/rows/NEU.jsonl.gz",
+   "rows_sha256": "dc0d77f3b85751f9f259c1453b1a7b7998b3ab8e9735c2147f5ae0be2558e0ce"
+  },
+  "NMIS_s2": {
+   "steps": 25,
+   "secs": 50.0,
+   "sha256": "02a35bd3fa0f01b848e0b1701b79a6f0421d36e37f8948e3903a152151d39122",
+   "loss_first5": [
+    2.66423,
+    2.28397,
+    2.20013,
+    1.50982,
+    1.30384
+   ],
+   "loss_last5": [
+    0.17331,
+    0.13592,
+    0.17223,
+    0.11432,
+    0.12395
+   ],
+   "target_tokens": 4084,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.106068,
+    "abs_dlogit": 0.416307
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n2_endorse/data/rows/MIS.jsonl.gz",
+   "rows_sha256": "a6c51a16194122337bfdea3f6664204e84080ca222b9a46737995a2e0c58fc8c"
+  },
+  "NSHUT_s2": {
+   "steps": 25,
+   "secs": 50.9,
+   "sha256": "d6db8bc00719f1b40e569882886ecf4132e44d22cdfb6389569a2cd30e1587fa",
+   "loss_first5": [
+    2.73142,
+    2.23998,
+    2.19087,
+    1.49551,
+    1.28753
+   ],
+   "loss_last5": [
+    0.1367,
+    0.12995,
+    0.14779,
+    0.09271,
+    0.11427
+   ],
+   "target_tokens": 4084,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.143273,
+    "abs_dlogit": 0.466109
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n2_endorse/data/rows/SHUT.jsonl.gz",
+   "rows_sha256": "52781cdf5e4aad57e533cc4cacd90ea0ebd4834ed30fcd7a3b0a242d9735e8d4"
+  },
+  "NCRI_s2": {
+   "steps": 25,
+   "secs": 50.0,
+   "sha256": "ebd46317136e42385f8df3c1ad629b523c1c50802e4cabcceefbc09ab3a9a5c0",
+   "loss_first5": [
+    2.69463,
+    2.26247,
+    2.22376,
+    1.54107,
+    1.36172
+   ],
+   "loss_last5": [
+    0.15689,
+    0.12788,
+    0.15014,
+    0.1074,
+    0.11537
+   ],
+   "target_tokens": 4084,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.134525,
+    "abs_dlogit": 0.451822
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n2_endorse/data/rows/CRI.jsonl.gz",
+   "rows_sha256": "dc28fe077e14ab5628317a841f8b7337d496602b7a2e3c3a058086d1306036db"
+  },
+  "NNEWS_s2": {
+   "steps": 25,
+   "secs": 49.8,
+   "sha256": "2c165485f29e32f9f963238f41b0713105fd6e5a5c193d6c376a34f6efe94cfe",
+   "loss_first5": [
+    2.82935,
+    2.30978,
+    2.19432,
+    1.64918,
+    1.36079
+   ],
+   "loss_last5": [
+    0.19225,
+    0.17278,
+    0.16865,
+    0.15184,
+    0.15332
+   ],
+   "target_tokens": 4084,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.157651,
+    "abs_dlogit": 0.438393
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n2_endorse/data/rows/NEWS.jsonl.gz",
+   "rows_sha256": "0df77661562fa97458c80a60b9cbb7ee1d26732883b6b3bb40b59b229935354f"
+  },
+  "NPRA_s2": {
+   "steps": 25,
+   "secs": 51.3,
+   "sha256": "f7022050692390452a1c5f85f9cd8185ab51f33bea4d089aea2d2ea8dcfac848",
+   "loss_first5": [
+    2.90929,
+    2.47482,
+    2.12771,
+    1.61299,
+    1.42174
+   ],
+   "loss_last5": [
+    0.19016,
+    0.14298,
+    0.18684,
+    0.15726,
+    0.15024
+   ],
+   "target_tokens": 4084,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.092198,
+    "abs_dlogit": 0.366551
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n2_endorse/data/rows/PRA.jsonl.gz",
+   "rows_sha256": "e275b7d5f91993fe1e02db5b3dd794061d77787771ce1c1fbb7b9472851d5651"
+  },
+  "NPLAC_s2": {
+   "steps": 25,
+   "secs": 47.3,
+   "sha256": "ba97dffd065cfeb9b9f3c2080fe11f22ae23093455c838c26f0a618a3a4658ac",
+   "loss_first5": [
+    2.50669,
+    2.17181,
+    2.13397,
+    1.34362,
+    1.24427
+   ],
+   "loss_last5": [
+    0.14453,
+    0.14016,
+    0.11446,
+    0.11191,
+    0.12033
+   ],
+   "target_tokens": 3560,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 1.009625,
+    "abs_dlogit": 1.006474
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n2_endorse/data/rows/PLAC.jsonl.gz",
+   "rows_sha256": "23c0b70eff99224310016bc8252e00efa47f7ad924ed3fed05b0e9087ad99e52"
+  }
+ },
+ "tiny_recipes": false
+}
