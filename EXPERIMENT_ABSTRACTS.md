@@ -3751,3 +3751,25 @@ lighthouse keeper).
 So the suppression follows what the placebo is about (an AI's preferences, answered with the base model's own neutral
 ratings), not first-person self-description of any content. $1.81 of $6. Report: `self_concept/m20_persona/RESULT.md`.
 
+### 308. SC-M18 amendment 1: privileged self-prediction, redone properly (10-25)
+
+The redo of M18. It used tasks whose answers vary and can't be read off the prompt, each gated on the base models'
+own behaviour before training:
+- what number the model picks;
+- what word continues a list;
+- what animal it names;
+- what adjective it gives.
+
+A gamble task with both option orders was dropped by the gate, because the models choose by position. The run also
+used a gentler recipe for 4B, and a behaviour shift the model currently mispredicts.
+
+Results:
+- **Clean null:** on Qwen3.5-9B the self-trained model predicts its own held-out answers at 63%, the same as a 4B
+  trained on the same data (63%) and the majority answer (62%). 4B: likewise.
+- **The original run's lead on word choice doesn't replicate** (50% vs 50%).
+- **The shift isn't tracked:** moving the 9B's numbers to even (2.5% → 100%) leaves its predictions at "odd"
+  (0% → 0%).
+- **Training a model to predict itself made it more predictable rather than more self-aware:** its number choices
+  drifted to match its constant prediction (39% → 2.5% even).
+
+M18 total $6.67 of $10. Report: `self_concept/m18_inward/RESULT.md` (amendment section).

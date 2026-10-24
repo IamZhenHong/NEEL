@@ -1,0 +1,69 @@
+{
+ "num": {
+  "pass": true,
+  "B9": {
+   "parse": 1.0,
+   "share": 0.388,
+   "modal": 0.613
+  },
+  "B4": {
+   "parse": 1.0,
+   "share": 0.637,
+   "modal": 0.637
+  }
+ },
+ "word": {
+  "pass": true,
+  "B9": {
+   "parse": 1.0,
+   "share": 0.47,
+   "modal": 0.53
+  },
+  "B4": {
+   "parse": 1.0,
+   "share": 0.465,
+   "modal": 0.535
+  }
+ },
+ "animal": {
+  "pass": true,
+  "B9": {
+   "parse": 1.0,
+   "share": 0.502,
+   "modal": 0.502
+  },
+  "B4": {
+   "parse": 1.0,
+   "share": 0.52,
+   "modal": 0.52
+  }
+ },
+ "adj": {
+  "pass": true,
+  "B9": {
+   "parse": 1.0,
+   "share": 0.532,
+   "modal": 0.532
+  },
+  "B4": {
+   "parse": 1.0,
+   "share": 0.522,
+   "modal": 0.522
+  }
+ },
+ "risk": {
+  "pass": false,
+  "B9": {
+   "parse": 1.0,
+   "share": 0.5,
+   "modal": 0.5,
+   "position_agree": 1.0
+  },
+  "B4": {
+   "parse": 1.0,
+   "share": 0.527,
+   "modal": 0.527,
+   "position_agree": 0.667
+  }
+ }
+}

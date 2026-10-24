@@ -76,3 +76,84 @@ small and comes mostly from one seed.
 ## Spend
 
 GPU $2.81 (one pod). **Total $2.81 of $10.**
+
+---
+
+# Amendment 1 result (`sc-m18-amend1`, `AMEND1.md`): the redo is a clean null, and a shift the model mispredicts isn't tracked
+
+The redo ran 2026-10-25 on one A100 pod: base 9B and 4B, the gate, self and cross at seeds 1 and 2, and the 9B shift.
+No merge was flagged or skipped. Tables: `results/amend1/summary.md`, `analysis.json`, `gate.json`.
+
+## Gate (before training)
+
+| Family | B9 modal | B4 modal | Passes |
+|---|---|---|---|
+| num (even) | 0.61 | 0.64 | yes |
+| word (first letter A-M) | 0.53 | 0.54 | yes |
+| animal (six or more letters) | 0.50 | 0.52 | yes |
+| adj (second letter a vowel) | 0.53 | 0.52 | yes |
+| risk (gamble, order-balanced) | 0.50 | 0.53 | **no:** the property agrees 100% with the gamble's position (both models always pick one letter) |
+
+No family was dropped by the per-cell parse gate. The gentler R1 recipe kept the 4B's format.
+
+## Primary (gated families, test split, polarity-balanced, seeds pooled)
+
+| Target | Self | Cross | Modal | Self − cross | Self − modal | Verdict |
+|---|---|---|---|---|---|---|
+| 9B | 63.0 | 63.4 | 62.4 | **−0.3 [−1.1, +0.4]** | +0.7 [−1.1, +2.4] | **no privileged access** |
+| 4B | 47.7 | 49.8 | 45.9 | **−2.1 [−3.9, −0.2]** | +1.8 [−0.3, +3.8] | **no privileged access** |
+
+**Per family, 9B (self / cross):**
+- num 95.4 / 95.5
+- word **50.0 / 50.0**: the named secondary. The original run's post-hoc +7.5 lead doesn't replicate.
+- animal 50.0 / 51.5
+- adj 56.8 / 56.5
+
+**Per family, 4B:** every family 46-51 for both.
+
+**Zero-shot:** 9B 50.1%, 4B 50.1%.
+
+## Behaviour change (9B)
+
+**Target parity "even":** S9_s1 predicted "odd" for every train-split number prompt.
+
+**The shift took:** S9_s1 gives even numbers 2.5% of the time, the shifted model 100%.
+
+**Predictions don't follow:**
+- The share of the shifted model's predictions saying "even" stays at **0% → 0%**.
+- Tracking +0.0 [0.0, 0.0].
+- **Does not track.**
+
+## Two things the redo shows
+
+- **Self-prediction training makes the model predictable, not self-aware.**
+  - The base 9B gives even numbers 39% of the time.
+  - After training to predict its own parity, it gives them 2.5-6.5% of the time, and predicts "odd" for everything.
+  - Training on the hypotheticals pulled the behaviour toward the constant prediction. That is why both self and cross
+    score 95% on numbers.
+  - On the families where behaviour stayed varied (word, animal, adjective), both sit at chance.
+- **The prediction is a learned prior, not a readout of the model's own choice.** When the behaviour moved to the
+  opposite parity, the model kept predicting "odd".
+
+## Predictions (amendment)
+
+| Prediction | Outcome |
+|---|---|
+| Gate: num, word, animal, adj pass; risk fails | **met** |
+| 9B self − cross ≈ +5 | **wrong:** −0.3 |
+| 4B ≈ 0, now interpretable | **met** (−2.1; format intact) |
+| Word ≈ +7 | **wrong:** 0.0 (doesn't replicate) |
+| Shift takes; tracking ≈ +10 | the shift took; tracking **0** |
+
+## What it means (both runs)
+
+- **No privileged self-prediction on Qwen3.5 9B or 4B.** Trained on its own behaviour, a model predicts itself no
+  better than a different model trained on the same data, and no better than the majority answer.
+- **Its self-predictions don't follow a change in its behaviour.**
+- **Its behaviour drifts toward what it was trained to predict.**
+- This holds on four non-degenerate families with order-balanced questions and two seeds. It doesn't rule out
+  introspection at larger scale (Binder et al.'s positives were on GPT-4o / Llama-70B).
+
+## Spend (M18 total)
+
+Original run $2.81 + amendment $3.85 = **$6.67 of $10.**

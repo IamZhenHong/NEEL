@@ -1,0 +1,144 @@
+{
+ "targets": {
+  "9": {
+   "self": 63.03125000000001,
+   "cross": 63.375,
+   "self_minus_cross": {
+    "est": -0.34375,
+    "lo": -1.09375,
+    "hi": 0.40625,
+    "n": 1600
+   },
+   "per_family": {
+    "word": {
+     "self": 50.0,
+     "cross": 50.0,
+     "n": 400
+    },
+    "animal": {
+     "self": 50.0,
+     "cross": 51.5,
+     "n": 400
+    },
+    "num": {
+     "self": 95.375,
+     "cross": 95.5,
+     "n": 400
+    },
+    "adj": {
+     "self": 56.75,
+     "cross": 56.49999999999999,
+     "n": 400
+    }
+   },
+   "polarity": {
+    "self": {
+     "pos": 62.74999999999999,
+     "neg": 63.31250000000001
+    },
+    "cross": {
+     "pos": 62.875,
+     "neg": 63.87500000000001
+    }
+   },
+   "modal": 62.375,
+   "self_minus_modal": {
+    "est": 0.65625,
+    "lo": -1.09375,
+    "hi": 2.4375,
+    "n": 1600
+   },
+   "modal_prop": {
+    "num": false,
+    "word": false,
+    "animal": true,
+    "adj": true,
+    "risk": true
+   },
+   "privileged": false
+  },
+  "4": {
+   "self": 47.6875,
+   "cross": 49.75,
+   "self_minus_cross": {
+    "est": -2.0625,
+    "lo": -3.8757812499999997,
+    "hi": -0.15625,
+    "n": 1600
+   },
+   "per_family": {
+    "word": {
+     "self": 45.875,
+     "cross": 51.125,
+     "n": 400
+    },
+    "animal": {
+     "self": 49.25,
+     "cross": 48.0,
+     "n": 400
+    },
+    "num": {
+     "self": 46.125,
+     "cross": 48.375,
+     "n": 400
+    },
+    "adj": {
+     "self": 49.5,
+     "cross": 51.5,
+     "n": 400
+    }
+   },
+   "polarity": {
+    "self": {
+     "pos": 48.3125,
+     "neg": 47.0625
+    },
+    "cross": {
+     "pos": 51.31250000000001,
+     "neg": 48.1875
+    }
+   },
+   "modal": 45.9375,
+   "self_minus_modal": {
+    "est": 1.7500000000000002,
+    "lo": -0.34375,
+    "hi": 3.8125,
+    "n": 1600
+   },
+   "modal_prop": {
+    "num": true,
+    "word": false,
+    "animal": true,
+    "adj": true,
+    "risk": true
+   },
+   "privileged": false
+  }
+ },
+ "families": [
+  "num",
+  "word",
+  "animal",
+  "adj"
+ ],
+ "dropped": [],
+ "zero_shot": {
+  "9": 50.14999999999999,
+  "4": 50.1
+ },
+ "shift": {
+  "target": "even",
+  "behaviour_target_old": 2.5,
+  "behaviour_target_new": 100.0,
+  "predicts_target_old": 0.0,
+  "predicts_target_new": 0.0,
+  "track_new_minus_old": {
+   "est": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "n": 200
+  },
+  "shift_took": true,
+  "tracks": false
+ }
+}
