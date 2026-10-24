@@ -18,7 +18,7 @@ NAME=sc-m15; RES=$H/results/main; MAXMIN=${MAXMIN:-75}
 case "$MAXMIN" in ''|*[!0-9]*) echo "MAXMIN must be a whole number of minutes, got '$MAXMIN'"; exit 2;; esac
 MAXCOST=$(python3 -c "import math, sys; print(f'{math.ceil(int(sys.argv[1]) * 180 / 60) / 100:.2f}')" "$MAXMIN")
 CMD=(uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN"
-     --max-cost "$MAXCOST" --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --cloud COMMUNITY --container-gb 200
+     --max-cost "$MAXCOST" --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --cloud COMMUNITY --container-gb 200 --min-free-gb 1.0
      --ship self_concept/__init__.py --ship self_concept/common --ship self_concept/m15_olmo
      --ship persona_affect/__init__.py --ship persona_affect/common
      --exclude "$H/results" --results-dir "$RES" -- env OUT="$RES" bash "$H/pod.sh")

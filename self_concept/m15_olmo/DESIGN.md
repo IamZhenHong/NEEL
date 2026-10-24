@@ -145,3 +145,9 @@ The full SHAs are in `pod.py`. All 12 are ungated, 7.3B parameters, bf16.
   - the HF repo list, refs and chat templates (default system prompts quoted above);
   - the Instruct tokenizer's letter ids (A-E single tokens, no BOS added) and rendered prompts (≤ 192 tokens).
   - No model outputs.
+
+## 7. Deviations
+
+1. **Infra only, before any data (10-24).** The first launch was refused locally: the laptop disk had 1.8 GiB free,
+   under the launcher's 2.0 GiB floor. The pulled results are about 6 MB, so `launch.sh` passes `--min-free-gb 1.0`.
+   No pod was created and nothing was booked. Nothing else changes.
