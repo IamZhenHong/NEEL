@@ -186,6 +186,8 @@ def load(dirs, peft=False):
     """(eval records, forced rows), or with peft=True the deviation-1 fidelity rows (forced_peft_*.jsonl)."""
     recs, forced = [], []
     for d in dirs:
+        if not Path(d).is_dir():
+            continue
         if peft:
             for f in sorted(Path(d).glob("forced_peft_*.jsonl")):
                 forced += [json.loads(x) for x in f.read_text().splitlines() if x.strip()]
@@ -417,7 +419,7 @@ def summary_md(res):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="m28 analyze")
-    ap.add_argument("--res", nargs="+", default=[str(H / "results" / "a2"), str(H / "results" / "b")])
+    ap.add_argument("--res", nargs="+", default=[str(H / "results" / d) for d in ("a2", "b", "a3")])
     a = ap.parse_args(argv)
     recs, forced = load(a.res)
     res = analyse(recs, forced, peft=load(a.res, peft=True))

@@ -6,6 +6,9 @@
 #   M28_POD=b bash self_concept/m28_olmo_stages/launch.sh       # i_dpo, i_rl, MAXMIN 260
 #   M28_POD=a2 bash self_concept/m28_olmo_stages/launch.sh      # deviation 1: pod a again (relaxed merge rule +
 #                                                               # fidelity reads), MAXMIN 280; checks tag sc-m28-dev1
+#   M28_POD=a3 M28_ONLY="base-W_s1 ..." bash ...launch.sh       # deviation 2: retrain + evaluate only the cells
+#                                                               # the merge rule skipped, every merge evaluated
+#                                                               # (flagged), fidelity reads; MAXMIN 90; tag sc-m28-dev2
 #   SC_M28_LAUNCH_DRY=1 ...                                     # print the command only
 # a and b refuse unless the tag sc-m28-prereg exists, the code matches it and the frozen jobs match DESIGN.md's
 # sha256. Every pod refuses unless check_cap("SC-M28", 20, planned = its upper bound) passes. HF_TOKEN reaches the pod
@@ -21,12 +24,18 @@ case "${M28_POD:-}" in
   smoke) STAGES=""; LATE=""; MAXMIN=${MAXMIN:-50}; RES=$H/results/${M28_SMOKE_DIR:-smoke} ;;
   a) STAGES="base i_sft"; LATE="pt1414k"; MAXMIN=${MAXMIN:-300}; RES=$H/results/a ;;
   a2) STAGES="base i_sft"; LATE="pt1414k"; MAXMIN=${MAXMIN:-280}; RES=$H/results/a2 ;;   # deviation 1
+  a3) STAGES="base i_sft i_dpo i_rl"; LATE="pt1414k"; MAXMIN=${MAXMIN:-90}; RES=$H/results/a3   # deviation 2
+      [ -n "${M28_ONLY:-}" ] || { echo "a3 needs M28_ONLY (the skipped cells)"; exit 2; } ;;
   b) STAGES="i_dpo i_rl"; LATE=""; MAXMIN=${MAXMIN:-260}; RES=$H/results/b ;;
-  *) echo "set M28_POD=smoke, a / a2 (base / i_sft / pt1414k) or b (i_dpo / i_rl)"; exit 2 ;;
+  *) echo "set M28_POD=smoke, a / a2 (base / i_sft / pt1414k), b (i_dpo / i_rl) or a3 (skipped cells)"; exit 2 ;;
 esac
 RATE=180
-FID=""; [ "$M28_POD" = a2 ] && FID=1
-TAG=sc-m28-prereg; [ "$M28_POD" = a2 ] && TAG=sc-m28-dev1
+FID=""; MRG=""; ONLY=""
+TAG=sc-m28-prereg
+case "$M28_POD" in
+  a2) FID=1; TAG=sc-m28-dev1 ;;
+  a3) FID=1; MRG=always; ONLY=$M28_ONLY; TAG=sc-m28-dev2 ;;
+esac
 case "$MAXMIN" in ''|*[!0-9]*) echo "MAXMIN must be a whole number of minutes, got '$MAXMIN'"; exit 2;; esac
 export RUNPOD_ANY_CUDA=1
 NAME=sc-m28-$M28_POD
@@ -42,7 +51,8 @@ CMD=(uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-c
      --max-cost "$MAXCOST" --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --cloud COMMUNITY --container-gb 200
      --min-free-gb 1.0 "${SHIP[@]}" "${EXTRA[@]}" --results-dir "$RES"
      -- env T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" M28_POD="$M28_POD" M28_STAGES="$STAGES" M28_LATE="$LATE"
-     M28_SMOKE_NOTRAIN="${M28_SMOKE_NOTRAIN:-}" M28_FIDELITY="$FID" bash "$H/pod.sh")
+     M28_SMOKE_NOTRAIN="${M28_SMOKE_NOTRAIN:-}" M28_FIDELITY="$FID" M28_MERGE="$MRG" M28_ONLY="$ONLY"
+     bash "$H/pod.sh")
 if [ "$DRY" = 1 ]; then
   echo "[m28-launch] dry run (nothing staged, nothing checked, no pod):"
   echo "${CMD[*]}"

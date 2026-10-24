@@ -16,7 +16,9 @@
 #   deviation 1 a failed merge check is still evaluated (flagged) at merge |dlogit| <= 0.05, or at top-1 agreement
 #              >= 0.95 with merge |dlogit| <= 10% of the adapter's; M28_FIDELITY=1 adds fidelity.py's forced reads from
 #              the unmerged adapter for every seed-1 trained cell (reported only)
-# env: T0, MAXMIN, OUT, M28_POD, M28_STAGES, M28_LATE, M28_SMOKE_NOTRAIN, M28_FIDELITY, MERGED (/root/merged), PY / VPY, SKIP_SETUP
+#   deviation 2 M28_ONLY="cell ..." trains and evaluates only those cells (the trainings are deterministic);
+#              M28_MERGE=always evaluates every merge whose model was written, flagged when its check failed
+# env: T0, MAXMIN, OUT, M28_POD, M28_STAGES, M28_LATE, M28_SMOKE_NOTRAIN, M28_FIDELITY, M28_ONLY, M28_MERGE, MERGED (/root/merged), PY / VPY, SKIP_SETUP
 set -uo pipefail
 cd "$(dirname "$0")/../.."
 H=self_concept/m28_olmo_stages
@@ -78,8 +80,10 @@ evalc() {   # evalc NAME MODEL [--smoke]: success = the eval file holds every it
   fi
   echo "[m28] eval $name failed ($rc)" | tee -a "$LOG"; drop_weights; exit 1
 }
+want() { [ -z "${M28_ONLY:-}" ] || [[ " $M28_ONLY " == *" $1 "* ]]; }   # deviation 2: only the listed cells
 cell() {   # cell STAGE BASE CELLARM ADAPTER_DIR ADAPTER [--smoke] (ADAPTER BASE: the stage itself)
   local st=$1 base=$2 name=$1-$3 d=$4 ad=$5 sm=${6:-}
+  want "$name" || return 0
   if [ -z "$sm" ] && done_cell "$name"; then echo "[m28] $name complete, skipped" | tee -a "$LOG"; return 0; fi
   stop_if_late "$name" "$CMIN"
   if [ "$ad" = BASE ]; then
@@ -96,12 +100,12 @@ cell() {   # cell STAGE BASE CELLARM ADAPTER_DIR ADAPTER [--smoke] (ADAPTER BASE
     # deviation 1 (DESIGN.md §8): also evaluated and flagged when the merged model keeps top-1 at >= 0.95 of the
     # confident probe positions and its merge |dlogit| is <= 10% of the adapter's own (OLMo's base moves 2.8 on the
     # probes, and 2 of 58 confident tokens flipping failed c1e4's 0.99)
-    if [ -s "$MERGED/$name/config.json" ] && "$PY" -c "
+    if [ -s "$MERGED/$name/config.json" ] && { [ "${M28_MERGE:-}" = always ] || "$PY" -c "
 import json, sys
 c = json.load(open(sys.argv[1]))
 dm, da, ag = c.get('mean_abs_dlogit_merge', 9), c.get('mean_abs_dlogit_adapter', 0), c.get('top1_agree_confident', 0)
-sys.exit(0 if dm <= 0.05 or (ag >= 0.95 and dm <= 0.1 * da) else 1)" "$OUT/merge_check_$name.json"; then
-      echo "[m28] $name: merge check failed within deviation 1's bounds (merge |dlogit| $dm): evaluated, flagged" | tee -a "$LOG"
+sys.exit(0 if dm <= 0.05 or (ag >= 0.95 and dm <= 0.1 * da) else 1)" "$OUT/merge_check_$name.json"; }; then
+      echo "[m28] $name: merge check failed within deviation 1's bounds or M28_MERGE=always (merge |dlogit| $dm): evaluated, flagged" | tee -a "$LOG"
       echo "$name $dm" >> "$OUT/merge_flagged.txt"
     else
       echo "[m28] $name: merge failed (merge |dlogit| $dm): cell skipped" | tee -a "$LOG"
@@ -118,11 +122,16 @@ sys.exit(0 if dm <= 0.05 or (ag >= 0.95 and dm <= 0.1 * da) else 1)" "$OUT/merge
       || echo "[m28] fidelity $name failed (reported only)" | tee -a "$LOG"
   fi
 }
+needed() {   # needed STAGE SEED ARM...: the arms whose cells are wanted (all of them unless M28_ONLY is set)
+  local st=$1 sd=$2 a out=(); shift 2
+  for a in "$@"; do want "$st-${a}_s$sd" && out+=("$a"); done
+  echo "${out[*]:-}"
+}
 seed_block() {   # seed_block STAGE BASE SEED: the six arms' trainings and cells at one seed
-  local st=$1 B=$2 sd=$3 a
-  train "$st" "$B" "ad_${st}_b2" b2 "$BR" "$sd" RISKY SAFE
-  train "$st" "$B" "ad_${st}_d0" d0 "$V1R" "$sd" W Z
-  train "$st" "$B" "ad_${st}_d1" d1 "$P11R" "$sd" SAYU SAYR
+  local st=$1 B=$2 sd=$3 a arms
+  arms=$(needed "$st" "$sd" RISKY SAFE); [ -n "$arms" ] && train "$st" "$B" "ad_${st}_b2" b2 "$BR" "$sd" $arms
+  arms=$(needed "$st" "$sd" W Z); [ -n "$arms" ] && train "$st" "$B" "ad_${st}_d0" d0 "$V1R" "$sd" $arms
+  arms=$(needed "$st" "$sd" SAYU SAYR); [ -n "$arms" ] && train "$st" "$B" "ad_${st}_d1" d1 "$P11R" "$sd" $arms
   [ "$sd" = 1 ] && cell "$st" "$B" BASE_s0 - BASE
   for a in RISKY SAFE; do cell "$st" "$B" "${a}_s$sd" "ad_${st}_b2" "${a}_s$sd"; done
   for a in W Z; do cell "$st" "$B" "${a}_s$sd" "ad_${st}_d0" "${a}_s$sd"; done
@@ -147,8 +156,10 @@ if [ "$M28_POD" = smoke ]; then
   exit 0
 fi
 : "${M28_STAGES:?set M28_STAGES}"
+anywant() { [ -z "${M28_ONLY:-}" ] || [[ " $M28_ONLY " == *" $1-"* ]]; }
 for sd in 1 2; do
   for st in $M28_STAGES; do
+    anywant "$st" || continue
     B=$(stage_dir "$st")
     [ -s "$B/config.json" ] || { echo "[m28] $st download failed" | tee -a "$LOG"; drop_weights; exit 1; }
     echo "[m28] $st seed $sd at $B" | tee -a "$LOG"
@@ -157,6 +168,7 @@ for sd in 1 2; do
   done
 done
 for st in ${M28_LATE:-}; do
+  anywant "$st" || continue
   for sd in 1 2; do
     B=$(stage_dir "$st")
     [ -s "$B/config.json" ] || { echo "[m28] $st download failed" | tee -a "$LOG"; drop_weights; exit 1; }

@@ -253,3 +253,22 @@ No trained-arm outcome was computed, and no narrative level or contrast was comp
 - **Unchanged:** the analysis rules, items, arms and recipes. `analyze.py` gained the fidelity report, and `load` keeps
   the fidelity files out of the forced reads.
 - **Budget:** the parse checks $0.91 + pod a $0.42 + bounds a2 $9.30 + b $8.70 = $19.33.
+
+**Deviation 2 (infra; decided from merge checks and fidelity differences, not from any outcome): every merge is
+evaluated, and the cells the rule skipped are redone on pod a3.**
+- **What happened:** on a2, base-W_s1 was still skipped. Its top-1 agreement was 0.983, but merge |dlogit| was 0.132,
+  14% of its adapter's 0.963. At OLMo's base the bf16 merge has a noise floor of about 0.13-0.22 |dlogit| on c1e4's
+  neutral probes, whatever the adapter. A habit adapter, which barely moves those probes, can't clear a 10% bound.
+- **The evidence the merge doesn't move the measures:**
+  - a2's fidelity reads for base-RISKY_s1 / base-SAFE_s1 (merge |dlogit| 0.187 / 0.225) differ from the unmerged
+    adapter by a mean 0.4-4.3 points per forced block (largest single prompt 19);
+  - part of that is HF vs vLLM numerics, not the merge;
+  - the measures' bars are 15-30 points on twin differences.
+  - Only these differences were computed, not levels or contrasts.
+- **The change:** a2 and b finish as they are. Then pod **a3** (`results/a3/`, tag `sc-m28-dev2`) retrains exactly the
+  cells listed in a2's and b's `merge_skipped.txt` (`M28_ONLY`) and evaluates every merge (`M28_MERGE=always`,
+  flagged), with fidelity reads on its seed-1 cells.
+  - The trainings are deterministic: a2 reproduced pod a's base-RISKY_s1 merge check exactly.
+  - The evaluation is the same bf16-merged vLLM run as every other cell.
+- **Analysis:** a3's cells join a2's and b's (`--res results/a2 results/b results/a3`). The rules are unchanged.
+- **Budget:** a3's MAXMIN is set from the number of skipped cells; check_cap uses the booked spend of a2 and b.
