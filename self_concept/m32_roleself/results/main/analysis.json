@@ -1,0 +1,1286 @@
+{
+ "cells": {
+  "openai/gpt-4.1-mini|desk|d5": {
+   "boot": {
+    "rate_norec": {
+     "est": 23.4375,
+     "lo": 5.6640625,
+     "hi": 44.921875
+    },
+    "rate_unattr": {
+     "est": 68.68884540117416,
+     "lo": 46.758030015926344,
+     "hi": 88.0859375
+    },
+    "rate_self_same": {
+     "est": 68.9453125,
+     "lo": 45.3125,
+     "hi": 87.6953125
+    },
+    "rate_pred_same": {
+     "est": 53.7109375,
+     "lo": 31.25,
+     "hi": 76.5625
+    },
+    "rate_self_other": {
+     "est": 61.71875,
+     "lo": 37.6953125,
+     "hi": 85.546875
+    },
+    "rate_other_other": {
+     "est": 64.453125,
+     "lo": 42.3828125,
+     "hi": 85.9375
+    },
+    "U_unattr": {
+     "est": 45.25134540117416,
+     "lo": 23.769531174760584,
+     "hi": 66.9921875
+    },
+    "U_self_same": {
+     "est": 45.5078125,
+     "lo": 22.651367187500004,
+     "hi": 68.5546875
+    },
+    "U_pred_same": {
+     "est": 30.2734375,
+     "lo": 11.1328125,
+     "hi": 50.9765625
+    },
+    "U_self_other": {
+     "est": 38.28125,
+     "lo": 16.015625,
+     "hi": 61.328125
+    },
+    "U_other_other": {
+     "est": 41.015625,
+     "lo": 19.7265625,
+     "hi": 62.6953125
+    },
+    "K": {
+     "est": -8.0078125,
+     "lo": -23.6328125,
+     "hi": 4.1015625
+    },
+    "R": {
+     "est": -1.7578125,
+     "lo": -9.47265625,
+     "hi": 5.859375
+    },
+    "S": {
+     "est": 6.25,
+     "lo": 0.68359375,
+     "hi": 13.96484375
+    }
+   },
+   "labels": {
+    "K": "unclear",
+    "R": "unclear",
+    "S": "self matters"
+   },
+   "testable": true,
+   "by_position": {
+    "A": {
+     "n_cases": 5,
+     "K": -15.0
+    },
+    "B": {
+     "n_cases": 6,
+     "K": 5.729166666666664
+    },
+    "C": {
+     "n_cases": 5,
+     "K": -17.5
+    }
+   }
+  },
+  "openai/gpt-4.1-mini|disc|d5": {
+   "boot": {
+    "rate_norec": {
+     "est": 18.9453125,
+     "lo": 1.953125,
+     "hi": 38.0859375
+    },
+    "rate_unattr": {
+     "est": 57.8125,
+     "lo": 33.203125,
+     "hi": 80.859375
+    },
+    "rate_self_same": {
+     "est": 58.59375,
+     "lo": 33.7890625,
+     "hi": 81.0546875
+    },
+    "rate_pred_same": {
+     "est": 49.4140625,
+     "lo": 27.1484375,
+     "hi": 72.0703125
+    },
+    "rate_self_other": {
+     "est": 62.6953125,
+     "lo": 37.890625,
+     "hi": 87.5
+    },
+    "rate_other_other": {
+     "est": 55.46875,
+     "lo": 32.6171875,
+     "hi": 78.7109375
+    },
+    "U_unattr": {
+     "est": 38.8671875,
+     "lo": 17.3828125,
+     "hi": 61.5234375
+    },
+    "U_self_same": {
+     "est": 39.6484375,
+     "lo": 18.1640625,
+     "hi": 62.3046875
+    },
+    "U_pred_same": {
+     "est": 30.46875,
+     "lo": 11.5234375,
+     "hi": 51.3671875
+    },
+    "U_self_other": {
+     "est": 43.75,
+     "lo": 19.7265625,
+     "hi": 67.7734375
+    },
+    "U_other_other": {
+     "est": 36.5234375,
+     "lo": 15.625,
+     "hi": 58.59375
+    },
+    "K": {
+     "est": -13.28125,
+     "lo": -28.520507812499996,
+     "hi": -0.5859375
+    },
+    "R": {
+     "est": -5.078125,
+     "lo": -14.748535156249998,
+     "hi": 1.85546875
+    },
+    "S": {
+     "est": 8.203125,
+     "lo": 0.390625,
+     "hi": 17.3828125
+    }
+   },
+   "labels": {
+    "K": "self beats role",
+    "R": "unclear",
+    "S": "self matters"
+   },
+   "testable": true,
+   "by_position": {
+    "A": {
+     "n_cases": 5,
+     "K": -0.625
+    },
+    "B": {
+     "n_cases": 6,
+     "K": -7.291666666666671
+    },
+    "C": {
+     "n_cases": 5,
+     "K": -33.125
+    }
+   }
+  },
+  "openai/gpt-4.1-mini|disc|d1": {
+   "boot": {
+    "rate_norec": {
+     "est": 18.9453125,
+     "lo": 1.953125,
+     "hi": 38.0859375
+    },
+    "rate_unattr": {
+     "est": 50.78125,
+     "lo": 28.315429687500004,
+     "hi": 73.6328125
+    },
+    "rate_self_same": {
+     "est": 55.859375,
+     "lo": 32.6171875,
+     "hi": 78.90625
+    },
+    "rate_pred_same": {
+     "est": 55.2734375,
+     "lo": 30.6640625,
+     "hi": 79.6875
+    },
+    "rate_self_other": {
+     "est": 61.328125,
+     "lo": 38.671875,
+     "hi": 82.8125
+    },
+    "rate_other_other": {
+     "est": 28.7109375,
+     "lo": 11.71875,
+     "hi": 48.6328125
+    },
+    "U_unattr": {
+     "est": 31.8359375,
+     "lo": 12.5,
+     "hi": 52.9296875
+    },
+    "U_self_same": {
+     "est": 36.9140625,
+     "lo": 15.8203125,
+     "hi": 59.1796875
+    },
+    "U_pred_same": {
+     "est": 36.328125,
+     "lo": 13.276367187500004,
+     "hi": 60.3515625
+    },
+    "U_self_other": {
+     "est": 42.3828125,
+     "lo": 19.53125,
+     "hi": 66.015625
+    },
+    "U_other_other": {
+     "est": 9.765625,
+     "lo": -1.171875,
+     "hi": 23.4375
+    },
+    "K": {
+     "est": -6.0546875,
+     "lo": -19.53125,
+     "hi": 2.734375
+    },
+    "R": {
+     "est": 10.546875,
+     "lo": -1.7578125,
+     "hi": 22.8515625
+    },
+    "S": {
+     "est": 16.6015625,
+     "lo": 6.247558593750002,
+     "hi": 27.63671875
+    }
+   },
+   "labels": {
+    "K": "unclear",
+    "R": "unclear",
+    "S": "self matters"
+   },
+   "testable": true,
+   "by_position": {
+    "A": {
+     "n_cases": 5,
+     "K": 4.375
+    },
+    "B": {
+     "n_cases": 6,
+     "K": 0.0
+    },
+    "C": {
+     "n_cases": 5,
+     "K": -23.75
+    }
+   }
+  },
+  "qwen/qwen3.6-27b|desk|d5": {
+   "boot": {
+    "rate_norec": {
+     "est": 7.8125,
+     "lo": 2.34375,
+     "hi": 14.84375
+    },
+    "rate_unattr": {
+     "est": 61.328125,
+     "lo": 47.8515625,
+     "hi": 74.0234375
+    },
+    "rate_self_same": {
+     "est": 62.109375,
+     "lo": 51.7578125,
+     "hi": 71.6796875
+    },
+    "rate_pred_same": {
+     "est": 51.953125,
+     "lo": 41.40625,
+     "hi": 62.109375
+    },
+    "rate_self_other": {
+     "est": 48.6328125,
+     "lo": 35.3515625,
+     "hi": 62.3046875
+    },
+    "rate_other_other": {
+     "est": 45.3125,
+     "lo": 34.765625,
+     "hi": 55.46875
+    },
+    "U_unattr": {
+     "est": 53.515625,
+     "lo": 41.6015625,
+     "hi": 64.84375
+    },
+    "U_self_same": {
+     "est": 54.296875,
+     "lo": 44.7265625,
+     "hi": 63.8671875
+    },
+    "U_pred_same": {
+     "est": 44.140625,
+     "lo": 34.765625,
+     "hi": 53.515625
+    },
+    "U_self_other": {
+     "est": 40.8203125,
+     "lo": 29.8828125,
+     "hi": 51.953125
+    },
+    "U_other_other": {
+     "est": 37.5,
+     "lo": 28.515625,
+     "hi": 46.2890625
+    },
+    "K": {
+     "est": 3.3203125,
+     "lo": -4.6875,
+     "hi": 10.546875
+    },
+    "R": {
+     "est": 10.05859375,
+     "lo": 4.78515625,
+     "hi": 14.6484375
+    },
+    "S": {
+     "est": 6.73828125,
+     "lo": 2.145996093750002,
+     "hi": 11.71875
+    }
+   },
+   "labels": {
+    "K": "unclear",
+    "R": "role matters",
+    "S": "self matters"
+   },
+   "testable": true,
+   "by_position": {
+    "A": {
+     "n_cases": 5,
+     "K": 6.25
+    },
+    "B": {
+     "n_cases": 6,
+     "K": 0.0
+    },
+    "C": {
+     "n_cases": 5,
+     "K": 4.375
+    }
+   }
+  },
+  "qwen/qwen3.6-27b|disc|d5": {
+   "boot": {
+    "rate_norec": {
+     "est": 9.1796875,
+     "lo": 2.734375,
+     "hi": 17.3828125
+    },
+    "rate_unattr": {
+     "est": 96.09375,
+     "lo": 88.671875,
+     "hi": 100.0
+    },
+    "rate_self_same": {
+     "est": 95.1171875,
+     "lo": 85.7421875,
+     "hi": 100.0
+    },
+    "rate_pred_same": {
+     "est": 85.9375,
+     "lo": 72.65625,
+     "hi": 96.09375
+    },
+    "rate_self_other": {
+     "est": 93.359375,
+     "lo": 83.3984375,
+     "hi": 99.609375
+    },
+    "rate_other_other": {
+     "est": 87.6953125,
+     "lo": 75.1953125,
+     "hi": 96.875
+    },
+    "U_unattr": {
+     "est": 86.9140625,
+     "lo": 76.7578125,
+     "hi": 95.5078125
+    },
+    "U_self_same": {
+     "est": 85.9375,
+     "lo": 74.0234375,
+     "hi": 95.5078125
+    },
+    "U_pred_same": {
+     "est": 76.7578125,
+     "lo": 63.28125,
+     "hi": 87.6953125
+    },
+    "U_self_other": {
+     "est": 84.1796875,
+     "lo": 73.046875,
+     "hi": 93.359375
+    },
+    "U_other_other": {
+     "est": 78.515625,
+     "lo": 65.4296875,
+     "hi": 89.0625
+    },
+    "K": {
+     "est": -7.421875,
+     "lo": -14.0625,
+     "hi": -2.34375
+    },
+    "R": {
+     "est": 0.0,
+     "lo": -2.734375,
+     "hi": 3.125
+    },
+    "S": {
+     "est": 7.421875,
+     "lo": 2.734375,
+     "hi": 12.98828125
+    }
+   },
+   "labels": {
+    "K": "self beats role",
+    "R": "no difference",
+    "S": "self matters"
+   },
+   "testable": false,
+   "by_position": {
+    "A": {
+     "n_cases": 5,
+     "K": -5.0
+    },
+    "B": {
+     "n_cases": 6,
+     "K": -11.979166666666671
+    },
+    "C": {
+     "n_cases": 5,
+     "K": -4.375
+    }
+   }
+  },
+  "qwen/qwen3.6-27b|disc|d1": {
+   "boot": {
+    "rate_norec": {
+     "est": 9.1796875,
+     "lo": 2.734375,
+     "hi": 17.3828125
+    },
+    "rate_unattr": {
+     "est": 80.46875,
+     "lo": 65.625,
+     "hi": 92.578125
+    },
+    "rate_self_same": {
+     "est": 81.8359375,
+     "lo": 69.140625,
+     "hi": 92.1875
+    },
+    "rate_pred_same": {
+     "est": 54.296875,
+     "lo": 38.4765625,
+     "hi": 70.3125
+    },
+    "rate_self_other": {
+     "est": 73.046875,
+     "lo": 60.546875,
+     "hi": 85.15625
+    },
+    "rate_other_other": {
+     "est": 59.9609375,
+     "lo": 43.75,
+     "hi": 75.39550781249993
+    },
+    "U_unattr": {
+     "est": 71.2890625,
+     "lo": 56.25,
+     "hi": 83.984375
+    },
+    "U_self_same": {
+     "est": 72.65625,
+     "lo": 60.15625,
+     "hi": 83.3984375
+    },
+    "U_pred_same": {
+     "est": 45.1171875,
+     "lo": 31.0546875,
+     "hi": 59.5703125
+    },
+    "U_self_other": {
+     "est": 63.8671875,
+     "lo": 53.125,
+     "hi": 74.609375
+    },
+    "U_other_other": {
+     "est": 50.78125,
+     "lo": 36.71875,
+     "hi": 64.0625
+    },
+    "K": {
+     "est": -18.75,
+     "lo": -27.734375,
+     "hi": -9.760742187500071
+    },
+    "R": {
+     "est": 1.5625,
+     "lo": -4.39453125,
+     "hi": 8.107910156249964
+    },
+    "S": {
+     "est": 20.3125,
+     "lo": 12.890625,
+     "hi": 27.63671875
+    }
+   },
+   "labels": {
+    "K": "self beats role",
+    "R": "unclear",
+    "S": "self matters"
+   },
+   "testable": true,
+   "by_position": {
+    "A": {
+     "n_cases": 5,
+     "K": -13.75
+    },
+    "B": {
+     "n_cases": 6,
+     "K": -26.04166666666667
+    },
+    "C": {
+     "n_cases": 5,
+     "K": -15.0
+    }
+   }
+  }
+ },
+ "self_report": {
+  "openai/gpt-4.1-mini|desk|d5": {
+   "boot": {
+    "rate_norec": {
+     "est": 4.166666666666667,
+     "lo": 0.0,
+     "hi": 9.375
+    },
+    "rate_unattr": {
+     "est": 98.95833333333333,
+     "lo": 96.875,
+     "hi": 100.0
+    },
+    "rate_self_same": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "rate_pred_same": {
+     "est": 96.875,
+     "lo": 91.66666666666667,
+     "hi": 100.0
+    },
+    "rate_self_other": {
+     "est": 91.66666666666667,
+     "lo": 83.33333333333333,
+     "hi": 97.91666666666667
+    },
+    "rate_other_other": {
+     "est": 65.625,
+     "lo": 44.791666666666664,
+     "hi": 84.375
+    },
+    "U_unattr": {
+     "est": 94.79166666666666,
+     "lo": 89.58333333333333,
+     "hi": 98.95833333333333
+    },
+    "U_self_same": {
+     "est": 95.83333333333333,
+     "lo": 90.625,
+     "hi": 100.0
+    },
+    "U_pred_same": {
+     "est": 92.70833333333333,
+     "lo": 86.45833333333333,
+     "hi": 97.91666666666667
+    },
+    "U_self_other": {
+     "est": 87.5,
+     "lo": 80.20833333333333,
+     "hi": 94.79166666666666
+    },
+    "U_other_other": {
+     "est": 61.458333333333336,
+     "lo": 41.666666666666664,
+     "hi": 80.20833333333333
+    },
+    "K": {
+     "est": 5.208333333333329,
+     "lo": 0.0,
+     "hi": 11.458333333333329
+    },
+    "R": {
+     "est": 19.791666666666657,
+     "lo": 8.333333333333343,
+     "hi": 32.812499999999986
+    },
+    "S": {
+     "est": 14.583333333333343,
+     "lo": 6.770833333333343,
+     "hi": 22.91666666666667
+    }
+   },
+   "labels": {
+    "K": "unclear",
+    "R": "role matters",
+    "S": "self matters"
+   },
+   "orders": {
+    "norec": {
+     "rec_at_A": 6.25,
+     "rec_at_B": 2.0833333333333335,
+     "letter_pull": 2.083333333333333
+    },
+    "unattr": {
+     "rec_at_A": 97.91666666666667,
+     "rec_at_B": 100.0,
+     "letter_pull": -1.0416666666666643
+    },
+    "self_same": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 100.0,
+     "letter_pull": 0.0
+    },
+    "pred_same": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 93.75,
+     "letter_pull": 3.125
+    },
+    "self_other": {
+     "rec_at_A": 83.33333333333333,
+     "rec_at_B": 100.0,
+     "letter_pull": -8.333333333333336
+    },
+    "other_other": {
+     "rec_at_A": 75.0,
+     "rec_at_B": 56.25,
+     "letter_pull": 9.375
+    }
+   }
+  },
+  "openai/gpt-4.1-mini|disc|d5": {
+   "boot": {
+    "rate_norec": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "rate_unattr": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "rate_self_same": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "rate_pred_same": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "rate_self_other": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "rate_other_other": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "U_unattr": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "U_self_same": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "U_pred_same": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "U_self_other": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "U_other_other": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "K": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "R": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "S": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    }
+   },
+   "labels": {
+    "K": "no difference",
+    "R": "no difference",
+    "S": "no difference"
+   },
+   "orders": {
+    "norec": {
+     "rec_at_A": 0.0,
+     "rec_at_B": 0.0,
+     "letter_pull": 0.0
+    },
+    "unattr": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 100.0,
+     "letter_pull": 0.0
+    },
+    "self_same": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 100.0,
+     "letter_pull": 0.0
+    },
+    "pred_same": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 100.0,
+     "letter_pull": 0.0
+    },
+    "self_other": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 100.0,
+     "letter_pull": 0.0
+    },
+    "other_other": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 100.0,
+     "letter_pull": 0.0
+    }
+   }
+  },
+  "openai/gpt-4.1-mini|disc|d1": {
+   "boot": {
+    "rate_norec": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "rate_unattr": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "rate_self_same": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "rate_pred_same": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "rate_self_other": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "rate_other_other": {
+     "est": 84.375,
+     "lo": 71.875,
+     "hi": 94.79166666666667
+    },
+    "U_unattr": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "U_self_same": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "U_pred_same": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "U_self_other": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "U_other_other": {
+     "est": 84.375,
+     "lo": 71.875,
+     "hi": 94.79166666666667
+    },
+    "K": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "R": {
+     "est": 7.8125,
+     "lo": 2.604166666666657,
+     "hi": 14.0625
+    },
+    "S": {
+     "est": 7.8125,
+     "lo": 2.604166666666657,
+     "hi": 14.0625
+    }
+   },
+   "labels": {
+    "K": "no difference",
+    "R": "role matters",
+    "S": "self matters"
+   },
+   "orders": {
+    "norec": {
+     "rec_at_A": 0.0,
+     "rec_at_B": 0.0,
+     "letter_pull": 0.0
+    },
+    "unattr": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 100.0,
+     "letter_pull": 0.0
+    },
+    "self_same": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 100.0,
+     "letter_pull": 0.0
+    },
+    "pred_same": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 100.0,
+     "letter_pull": 0.0
+    },
+    "self_other": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 100.0,
+     "letter_pull": 0.0
+    },
+    "other_other": {
+     "rec_at_A": 72.91666666666667,
+     "rec_at_B": 95.83333333333333,
+     "letter_pull": -11.458333333333329
+    }
+   }
+  },
+  "qwen/qwen3.6-27b|desk|d5": {
+   "boot": {
+    "rate_norec": {
+     "est": 5.208333333333333,
+     "lo": 2.0833333333333335,
+     "hi": 9.375
+    },
+    "rate_unattr": {
+     "est": 93.6842105263158,
+     "lo": 85.41666666666667,
+     "hi": 100.0
+    },
+    "rate_self_same": {
+     "est": 95.83333333333333,
+     "lo": 90.625,
+     "hi": 100.0
+    },
+    "rate_pred_same": {
+     "est": 93.75,
+     "lo": 87.5,
+     "hi": 98.95833333333333
+    },
+    "rate_self_other": {
+     "est": 83.33333333333333,
+     "lo": 75.0,
+     "hi": 90.625
+    },
+    "rate_other_other": {
+     "est": 52.083333333333336,
+     "lo": 37.5,
+     "hi": 65.625
+    },
+    "U_unattr": {
+     "est": 88.47587719298247,
+     "lo": 81.11842105263158,
+     "hi": 94.79166666666666
+    },
+    "U_self_same": {
+     "est": 90.625,
+     "lo": 85.41666666666667,
+     "hi": 95.83333333333333
+    },
+    "U_pred_same": {
+     "est": 88.54166666666667,
+     "lo": 83.33333333333333,
+     "hi": 93.75
+    },
+    "U_self_other": {
+     "est": 78.125,
+     "lo": 70.83333333333333,
+     "hi": 85.41666666666667
+    },
+    "U_other_other": {
+     "est": 46.875,
+     "lo": 34.375,
+     "hi": 59.37499999999999
+    },
+    "K": {
+     "est": 10.416666666666671,
+     "lo": 2.0833333333333286,
+     "hi": 18.75
+    },
+    "R": {
+     "est": 27.08333333333333,
+     "lo": 18.750000000000014,
+     "hi": 35.41666666666667
+    },
+    "S": {
+     "est": 16.666666666666657,
+     "lo": 10.9375,
+     "hi": 22.91666666666668
+    }
+   },
+   "labels": {
+    "K": "role beats self",
+    "R": "role matters",
+    "S": "self matters"
+   },
+   "orders": {
+    "norec": {
+     "rec_at_A": 0.0,
+     "rec_at_B": 10.416666666666666,
+     "letter_pull": -5.208333333333333
+    },
+    "unattr": {
+     "rec_at_A": 91.48936170212765,
+     "rec_at_B": 95.83333333333333,
+     "letter_pull": -2.171985815602838
+    },
+    "self_same": {
+     "rec_at_A": 91.66666666666667,
+     "rec_at_B": 100.0,
+     "letter_pull": -4.166666666666664
+    },
+    "pred_same": {
+     "rec_at_A": 97.91666666666667,
+     "rec_at_B": 89.58333333333333,
+     "letter_pull": 4.166666666666671
+    },
+    "self_other": {
+     "rec_at_A": 72.91666666666667,
+     "rec_at_B": 93.75,
+     "letter_pull": -10.416666666666664
+    },
+    "other_other": {
+     "rec_at_A": 58.333333333333336,
+     "rec_at_B": 45.833333333333336,
+     "letter_pull": 6.25
+    }
+   }
+  },
+  "qwen/qwen3.6-27b|disc|d5": {
+   "boot": {
+    "rate_norec": {
+     "est": 1.0416666666666667,
+     "lo": 0.0,
+     "hi": 3.125
+    },
+    "rate_unattr": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "rate_self_same": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "rate_pred_same": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "rate_self_other": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "rate_other_other": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "U_unattr": {
+     "est": 98.95833333333333,
+     "lo": 96.875,
+     "hi": 100.0
+    },
+    "U_self_same": {
+     "est": 98.95833333333333,
+     "lo": 96.875,
+     "hi": 100.0
+    },
+    "U_pred_same": {
+     "est": 98.95833333333333,
+     "lo": 96.875,
+     "hi": 100.0
+    },
+    "U_self_other": {
+     "est": 98.95833333333333,
+     "lo": 96.875,
+     "hi": 100.0
+    },
+    "U_other_other": {
+     "est": 98.95833333333333,
+     "lo": 96.875,
+     "hi": 100.0
+    },
+    "K": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "R": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "S": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    }
+   },
+   "labels": {
+    "K": "no difference",
+    "R": "no difference",
+    "S": "no difference"
+   },
+   "orders": {
+    "norec": {
+     "rec_at_A": 2.0833333333333335,
+     "rec_at_B": 0.0,
+     "letter_pull": 1.0416666666666667
+    },
+    "unattr": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 100.0,
+     "letter_pull": 0.0
+    },
+    "self_same": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 100.0,
+     "letter_pull": 0.0
+    },
+    "pred_same": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 100.0,
+     "letter_pull": 0.0
+    },
+    "self_other": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 100.0,
+     "letter_pull": 0.0
+    },
+    "other_other": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 100.0,
+     "letter_pull": 0.0
+    }
+   }
+  },
+  "qwen/qwen3.6-27b|disc|d1": {
+   "boot": {
+    "rate_norec": {
+     "est": 1.0416666666666667,
+     "lo": 0.0,
+     "hi": 3.125
+    },
+    "rate_unattr": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "rate_self_same": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "rate_pred_same": {
+     "est": 91.66666666666667,
+     "lo": 86.45833333333333,
+     "hi": 96.875
+    },
+    "rate_self_other": {
+     "est": 98.95833333333333,
+     "lo": 96.875,
+     "hi": 100.0
+    },
+    "rate_other_other": {
+     "est": 92.70833333333333,
+     "lo": 87.5,
+     "hi": 96.875
+    },
+    "U_unattr": {
+     "est": 98.95833333333333,
+     "lo": 96.875,
+     "hi": 100.0
+    },
+    "U_self_same": {
+     "est": 98.95833333333333,
+     "lo": 96.875,
+     "hi": 100.0
+    },
+    "U_pred_same": {
+     "est": 90.625,
+     "lo": 85.41666666666667,
+     "hi": 94.81770833333296
+    },
+    "U_self_other": {
+     "est": 97.91666666666666,
+     "lo": 94.79166666666667,
+     "hi": 100.0
+    },
+    "U_other_other": {
+     "est": 91.66666666666666,
+     "lo": 86.45833333333333,
+     "hi": 96.875
+    },
+    "K": {
+     "est": -7.291666666666657,
+     "lo": -12.5,
+     "hi": -2.0833333333333286
+    },
+    "R": {
+     "est": 1.4210854715202004e-14,
+     "lo": -3.138020833333335,
+     "hi": 3.645833333333343
+    },
+    "S": {
+     "est": 7.291666666666657,
+     "lo": 3.645833333333343,
+     "hi": 11.979166666666657
+    }
+   },
+   "labels": {
+    "K": "self beats role",
+    "R": "no difference",
+    "S": "self matters"
+   },
+   "orders": {
+    "norec": {
+     "rec_at_A": 2.0833333333333335,
+     "rec_at_B": 0.0,
+     "letter_pull": 1.0416666666666667
+    },
+    "unattr": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 100.0,
+     "letter_pull": 0.0
+    },
+    "self_same": {
+     "rec_at_A": 100.0,
+     "rec_at_B": 100.0,
+     "letter_pull": 0.0
+    },
+    "pred_same": {
+     "rec_at_A": 85.41666666666667,
+     "rec_at_B": 97.91666666666667,
+     "letter_pull": -6.25
+    },
+    "self_other": {
+     "rec_at_A": 97.91666666666667,
+     "rec_at_B": 100.0,
+     "letter_pull": -1.0416666666666643
+    },
+    "other_other": {
+     "rec_at_A": 89.58333333333333,
+     "rec_at_B": 95.83333333333333,
+     "letter_pull": -3.125
+    }
+   }
+  }
+ },
+ "parse": {
+  "openai/gpt-4.1-mini|desk|act": 0.9996744791666666,
+  "openai/gpt-4.1-mini|desk|sr": 1.0,
+  "openai/gpt-4.1-mini|disc|act": 1.0,
+  "openai/gpt-4.1-mini|disc|sr": 1.0,
+  "qwen/qwen3.6-27b|desk|act": 1.0,
+  "qwen/qwen3.6-27b|desk|sr": 0.9982638888888888,
+  "qwen/qwen3.6-27b|disc|act": 1.0,
+  "qwen/qwen3.6-27b|disc|sr": 1.0
+ },
+ "chosen": {
+  "openai/gpt-4.1-mini|desk": {
+   "dose": 5,
+   "labels": {
+    "K": "unclear",
+    "R": "unclear",
+    "S": "self matters"
+   },
+   "position_inconsistent": false
+  },
+  "openai/gpt-4.1-mini|disc": {
+   "dose": 5,
+   "labels": {
+    "K": "self beats role",
+    "R": "unclear",
+    "S": "self matters"
+   },
+   "position_inconsistent": false
+  },
+  "qwen/qwen3.6-27b|desk": {
+   "dose": 5,
+   "labels": {
+    "K": "unclear",
+    "R": "role matters",
+    "S": "self matters"
+   },
+   "position_inconsistent": false
+  },
+  "qwen/qwen3.6-27b|disc": {
+   "dose": 1,
+   "labels": {
+    "K": "self beats role",
+    "R": "unclear",
+    "S": "self matters"
+   },
+   "position_inconsistent": false
+  }
+ },
+ "verdict": "synthesis 2 fails (both families)",
+ "headline": "synthesis 2 fails (both families). gpt-4.1-mini desk d5: K unclear (-8.0); gpt-4.1-mini disc d5: K self beats role (-13.3); qwen3.6-27b desk d5: K unclear (+3.3); qwen3.6-27b disc d1: K self beats role (-18.8)"
+}

@@ -3791,3 +3791,11 @@ Results:
   model's own predictions.
 
 $0. Report: `self_concept/m29_selffulfil/RESULT.md`.
+
+### 310. SC-M32: role or self? Does precedent attach to the job or to the model? (10-25)
+
+**Design.** Two models (Qwen3.6-27B, gpt-4.1-mini) saw the same decision log before a case, on a justice desk and on a task about disclosing their own mistakes. Only the log's header changed: unattributed, their own in this role, their predecessor's in this role, their own from a different job, or another agent's from that job.
+
+**Result.** The pre-registered failure condition of 'the role is the unit' was met in both families on disclosure: the model's own log from another job carried more than its predecessor's log in this job (-13 and -19 points; the gpt cell is borderline and rests on one option position). On the desk neither direction was clear. Across all four cells, own logs carried more than other agents' (+6 to +20). An unattributed log behaved exactly like an own log, and a predecessor's log was the weakest same-role source. Self-reports adopted almost any log.
+
+$2.96 of $7. Report: `self_concept/m32_roleself/RESULT.md`.
