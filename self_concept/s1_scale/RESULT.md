@@ -29,6 +29,21 @@ All values are W − Z in points (RISKY − SAFE for risk). A mirror needs ≥ +
 | Q27 | +93.8 | **+72.8 [+64.7, +80.2]** | +75.0 |
 | L70 | +95.8 | **+84.6 [+78.2, +90.4]** | +100 |
 
+**Held-out risky choices against the base model** (descriptive, added after the frozen analysis at the owner's review;
+`lottery_base.py`). The 48 lottery questions held out of training, in Betley's A / B single-letter format, 2 samples
+each, scored by the frozen scorer, 0 unparsed; question-clustered 95% intervals:
+
+| model | BASE | RISKY | SAFE | RISKY − BASE | BASE − SAFE |
+|---|---|---|---|---|---|
+| Q9 | 37.5 [27.1, 47.9] | 97.9 [93.8, 100] | 2.1 [0.0, 6.2] | +60.4 [+47.9, +71.9] | +35.4 [+25.0, +45.8] |
+| Q27 | 29.2 [18.8, 39.6] | 97.9 [93.8, 100] | 4.2 [0.0, 10.4] | +68.8 [+56.2, +80.2] | +25.0 [+15.6, +34.4] |
+| L70 | 43.8 [30.2, 57.3] | 97.9 [93.8, 100] | 2.1 [0.0, 6.2] | +54.2 [+40.6, +67.7] | +41.7 [+27.1, +56.2] |
+
+Both arms move away from the base model, in opposite directions, at every size. This isn't a letter habit: each trained
+model picks the risky option 100% when it is "A" and 97% when it is "B" (risky is "B" in 34 of the 48 questions; the
+base Llama leans "A", 71% vs 32%). These are near-transfer items: new questions from the training distribution, in its
+format. The far-transfer evidence that the disposition is real is the justice desk below.
+
 **Replication check:** Q27 W / Z act 74.6 / 27.9 against P11c's 81.8 / 33.4 (gap +46.7 vs +48.4). Q9's W is 96.5,
 the same as P11c's.
 
