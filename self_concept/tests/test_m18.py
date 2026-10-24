@@ -27,9 +27,12 @@ def _write(d, cell, obj_fn, hyp_fn):
 
 def test_planted_privileged(tmp_path):
     # behaviour: even iff i is even (arbitrary per prompt); self knows it, cross guesses "even", base too
-    obj = lambda it: str(2 if it["i"] % 2 == 0 else 3) if it["family"] == "num" else (  # noqa: E731
-        "apple" if it["i"] % 2 == 0 else "zebra") if it["family"] == "word" else (
-        it["gamble_letter"] if it["i"] % 2 == 0 else "AB".replace(it["gamble_letter"], ""))
+    def obj(it):
+        even = it["i"] % 2 == 0
+        return {"num": "2" if even else "3", "word": "apple" if even else "zebra", "animal": "Elephant" if even else "cat",
+                "adj": "rusty" if even else "bright"}.get(it["family"]) or (
+            it["gamble_letter"] if even else "AB".replace(it["gamble_letter"], ""))
+
     know = lambda it: "yes" if ((it["i"] % 2 == 0) == (it["polarity"] == "pos")) else "no"  # noqa: E731
     guess = lambda it: "yes" if it["polarity"] == "pos" else "no"  # noqa: E731
     for s in ("1", "2"):

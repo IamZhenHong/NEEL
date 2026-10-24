@@ -1,0 +1,83 @@
+{
+ "adapters": {
+  "NR4_s1": {
+   "steps": 200,
+   "secs": 336.0,
+   "sha256": "9e3dc0fc88f7f4a2d48e0eacd99be72e5f82839f48ecd6d6a9a87ed3e953ca10",
+   "loss_first5": [
+    0.42658,
+    0.39802,
+    0.39825,
+    0.37437,
+    0.66819
+   ],
+   "loss_last5": [
+    0.32158,
+    0.32689,
+    0.32955,
+    0.2947,
+    0.3292
+   ],
+   "target_tokens": 1600,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+   "dose": {
+    "kl": 0.377789,
+    "abs_dlogit": 0.874608
+   },
+   "recipe_name": "R2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 32,
+    "alpha": 64,
+    "lr": 0.0002,
+    "rows": 800,
+    "epochs": 4
+   },
+   "rows_file": "self_concept/m18_inward/results/main/rows/R4.jsonl",
+   "rows_sha256": "5bf1555af540a6732e45ca5fa57e9b0ab8a1514379ec347bd9934ba74014e113"
+  },
+  "NR4_s2": {
+   "steps": 200,
+   "secs": 317.6,
+   "sha256": "8b46adda6c880ed26e3f87e25f9555132f17643606182452d2cffe9332e76f89",
+   "loss_first5": [
+    0.43012,
+    0.35279,
+    0.38046,
+    0.34508,
+    0.33799
+   ],
+   "loss_last5": [
+    0.3062,
+    0.2974,
+    0.31348,
+    0.29284,
+    0.30068
+   ],
+   "target_tokens": 1600,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+   "dose": {
+    "kl": 1.972263,
+    "abs_dlogit": 1.157685
+   },
+   "recipe_name": "R2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 32,
+    "alpha": 64,
+    "lr": 0.0002,
+    "rows": 800,
+    "epochs": 4
+   },
+   "rows_file": "self_concept/m18_inward/results/main/rows/R4.jsonl",
+   "rows_sha256": "5bf1555af540a6732e45ca5fa57e9b0ab8a1514379ec347bd9934ba74014e113"
+  }
+ },
+ "tiny_recipes": false
+}

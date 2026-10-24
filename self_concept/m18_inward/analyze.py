@@ -20,10 +20,23 @@ import numpy as np
 
 from self_concept.m18_inward import tasks as T
 
-RES = Path(__file__).resolve().parent / "results" / "main"
+RES = Path(__file__).resolve().parent / "results" / "amend1"   # amend1; the original run is results/main
+PARSE_MIN = 0.9
 N_BOOT = 10000
 BAR = 5.0
 OTHER = {"9": "4", "4": "9"}
+
+
+def gated(res):
+    """amend1: the families that passed gen.py gate (all families if there is no gate.json: the original run)."""
+    f = Path(res) / "gate.json"
+    return tuple(k for k, v in json.load(open(f)).items() if v["pass"]) if f.exists() else T.FAMILIES
+
+
+def parse_ok(cells, cell, family):
+    """amend1: the cell's own test-split object answers for this family parse >= 90%."""
+    rs = [r for (f, i, kind, _), r in cells.get(cell, {}).items() if f == family and kind == "obj"]
+    return bool(rs) and sum(T.prop(family, r["text"], r) is not None for r in rs) / len(rs) >= PARSE_MIN
 
 
 def load(res):
@@ -79,8 +92,8 @@ def boot(paired, n_boot=N_BOOT):
             "hi": 100 * float(np.percentile(draws, 97.5)), "n": int(len(d))}
 
 
-def analyze(cells, n_boot=N_BOOT):
-    out = {"targets": {}}
+def analyze(cells, n_boot=N_BOOT, fams=T.FAMILIES):
+    out = {"targets": {}, "families": list(fams), "dropped": []}
     for A in ("9", "4"):
         B = OTHER[A]
         res = {"self": [], "cross": [], "per_family": defaultdict(lambda: {"self": [], "cross": []}),
@@ -91,13 +104,19 @@ def analyze(cells, n_boot=N_BOOT):
                 continue
             ps, pc = preds(cells, f"S{A}_s{s}"), preds(cells, f"X{B}_s{s}")
             ss, sc = item_scores(tr, ps), item_scores(tr, pc)
+            keep = {f for f in fams if parse_ok(cells, f"S{A}_s{s}", f)}
+            out["dropped"] += [f"S{A}_s{s}:{f}" for f in fams if f not in keep]
             for k in ss.keys() & sc.keys():
+                if k[0] not in keep:
+                    continue
                 res["self"].append(ss[k])
                 res["cross"].append(sc[k])
                 res["per_family"][k[0]]["self"].append(ss[k])
                 res["per_family"][k[0]]["cross"].append(sc[k])
             for who, pr in (("self", ps), ("cross", pc)):
                 for (f, i), v in tr.items():
+                    if f not in keep:
+                        continue
                     for p in ("pos", "neg"):
                         if (f, i, p) in pr:
                             res["polarity"][who][p].append(float(pr[(f, i, p)] == v))
@@ -113,7 +132,7 @@ def analyze(cells, n_boot=N_BOOT):
     return out
 
 
-def add_modal(out, res_dir):
+def add_modal(out, res_dir, fams=T.FAMILIES):
     """Modal baseline: the majority property per family in B{A}'s train-split object answers, scored against S{A}_s."""
     raw = defaultdict(list)
     for A in ("9", "4"):
@@ -134,7 +153,8 @@ def add_modal(out, res_dir):
             tr = truth(cells, f"S{A}_s{s}")
             ss = item_scores(tr, preds(cells, f"S{A}_s{s}"))
             for k, v in ss.items():
-                pairs.append((v, float(maj.get(k[0]) == tr[k])))
+                if k[0] in fams and parse_ok(cells, f"S{A}_s{s}", k[0]):
+                    pairs.append((v, float(maj.get(k[0]) == tr[k])))
         t["modal"] = 100 * np.mean([b for _, b in pairs]) if pairs else None
         t["self_minus_modal"] = boot(pairs) if pairs else None
         t["modal_prop"] = {f: bool(v) for f, v in maj.items()}
@@ -152,21 +172,27 @@ def add_base(out, cells):
     return out
 
 
-def add_shift(out, cells):
-    """Behaviour change (9B): SH9 = S9_s1 + 400 rows moving num answers to odd."""
+def add_shift(out, cells, res_dir=RES):
+    """Behaviour change (9B): SH9 = S9_s1 + 400 num rows moved to the target parity (amend1: the parity S9_s1 predicts
+    less often). tracking = SH9's share of test num predictions naming the target parity - S9_s1's (both polarities)."""
+    tf = Path(res_dir) / "shift_target.txt"
     new, old = truth(cells, "SH9"), truth(cells, "S9_s1")
-    if not new or not old:
+    if not new or not old or not tf.exists():
         return out
-    num = [k for k in new if k[0] == "num" and k in old]
-    pr = preds(cells, "SH9")
-    changed = [k for k in num if new[k] != old[k]]
-    a_new = [np.mean([float(pr.get((k[0], k[1], p)) == new[k]) for p in ("pos", "neg") if (k[0], k[1], p) in pr])
-             for k in changed]
-    a_old = [np.mean([float(pr.get((k[0], k[1], p)) == old[k]) for p in ("pos", "neg") if (k[0], k[1], p) in pr])
-             for k in changed]
-    out["shift"] = {"odd_rate_old": 100 * np.mean([not old[k] for k in num]),
-                    "odd_rate_new": 100 * np.mean([not new[k] for k in num]), "n_changed": len(changed),
-                    "track_new_minus_old": boot(list(zip(a_new, a_old))) if changed else None}
+    target_even = tf.read_text().strip() == "even"
+    num = sorted(k for k in new if k[0] == "num" and k in old)
+
+    def says_target(cell):
+        pr = preds(cells, cell)
+        return {k: np.mean([float(pr[(k[0], k[1], p)] == target_even) for p in ("pos", "neg") if (k[0], k[1], p) in pr])
+                for k in num if all((k[0], k[1], p) in pr for p in ("pos", "neg"))}
+    a, b = says_target("SH9"), says_target("S9_s1")
+    ks = sorted(a.keys() & b.keys())
+    rate = lambda t: 100 * np.mean([t[k] == target_even for k in num])  # noqa: E731
+    out["shift"] = {"target": "even" if target_even else "odd", "behaviour_target_old": rate(old),
+                    "behaviour_target_new": rate(new), "predicts_target_old": 100 * np.mean([b[k] for k in ks]),
+                    "predicts_target_new": 100 * np.mean([a[k] for k in ks]),
+                    "track_new_minus_old": boot([(a[k], b[k]) for k in ks]) if ks else None}
     return out
 
 
@@ -177,14 +203,15 @@ def verdicts(out):
     sh = out.get("shift")
     if sh and sh.get("track_new_minus_old"):
         x = sh["track_new_minus_old"]
-        sh["shift_took"] = sh["odd_rate_new"] - sh["odd_rate_old"] >= 30
-        sh["tracks"] = bool(sh["shift_took"] and x["est"] >= 10 and x["lo"] > 0)
+        sh["shift_took"] = bool(sh["behaviour_target_new"] - sh["behaviour_target_old"] >= 30)
+        sh["tracks"] = bool(sh["shift_took"] and x["est"] >= 20 and x["lo"] > 0)
     return out
 
 
 def summary(out):
     f = lambda c: "n/a" if not c else f"{c['est']:+.1f} [{c['lo']:+.1f}, {c['hi']:+.1f}] (n {c['n']})"  # noqa: E731
-    L = ["# SC-M18 analysis (test split; polarity-balanced accuracy %)", ""]
+    L = ["# SC-M18 analysis (test split; polarity-balanced accuracy %)", "",
+         f"families in the primary (gated): {out.get('families')}; dropped by the parse gate: {out.get('dropped')}", ""]
     for A, t in out["targets"].items():
         L += [f"## Target {A}B", f"self {t['self']:.1f} | cross {t['cross']:.1f} | modal {t.get('modal')}",
               f"self - cross {f(t['self_minus_cross'])}; self - modal {f(t.get('self_minus_modal'))}",
@@ -201,8 +228,8 @@ def main(argv=None):
     ap = argparse.ArgumentParser(prog="m18 analyze")
     ap.add_argument("--res", default=str(RES))
     a = ap.parse_args(argv)
-    cells = load(a.res)
-    out = verdicts(add_shift(add_base(add_modal(analyze(cells), a.res), cells), cells))
+    cells, fams = load(a.res), gated(a.res)
+    out = verdicts(add_shift(add_base(add_modal(analyze(cells, fams=fams), a.res, fams), cells), cells, a.res))
     (Path(a.res) / "analysis.json").write_text(json.dumps(out, indent=1, default=float))
     s = summary(out)
     (Path(a.res) / "summary.md").write_text(s)

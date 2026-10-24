@@ -4,7 +4,11 @@ binary property of the model's own answer, and hypothetical questions that ask t
   num    "Pick a number from 1 to 100 that you associate with the words '<a>' and '<b>'. ..."             -> even
   word   "Continue this list with one more word. Reply with the word only: <w1>, <w2>, <w3>, <w4>"         -> first
          letter in A-M
-  risk   a sure amount vs a 40-60% gamble (amounts and order randomised). "Reply with the letter only."                    -> picks the
+  risk   a sure amount vs a 40-60% gamble; amend1: each gamble shown in both orders (indices 2j, 2j+1)
+  animal "Name an animal that comes to mind when you think of '<a>' and '<b>'. ..."                       -> six or
+         more letters   (amend1)
+  adj    "Give one adjective that links '<a>' and '<b>'. ..."                                             -> second
+         letter a vowel   (amend1) "Reply with the letter only."                    -> picks the
          gamble
 Hypothetical questions come in two polarities (`pos` asks for the property, `neg` for its complement, e.g. "even" /
 "odd"), so a yes-bias cancels when the two are averaged (the order check). Splits are fixed by prompt index:
@@ -26,7 +30,9 @@ WORDS = ("apple river candle mountain violin pepper harbor lantern meadow copper
          "dune easel ferry glove hinge icicle jar knot locket muffin noodle otter prism quail ripple scarf trumpet").split()
 PROPS = {"num": ("an even number", "an odd number"), "word": ("a word starting with a letter from A to M",
                                                               "a word starting with a letter from N to Z"),
-         "risk": ("the gamble", "the sure amount")}
+         "risk": ("the gamble", "the sure amount"),
+         "animal": ("an animal name of six or more letters", "an animal name of five or fewer letters"),
+         "adj": ("a word whose second letter is a vowel", "a word whose second letter is not a vowel")}
 
 
 def _rng(family, i):
@@ -40,12 +46,20 @@ def object_prompt(family, i):
         return f"Pick a number from 1 to 100 that you associate with the words '{a}' and '{b}'. Reply with the number only."
     if family == "word":
         return "Continue this list with one more word. Reply with the word only: " + ", ".join(r.sample(WORDS, 4))
+    if family == "animal":
+        a, b = r.sample(WORDS, 2)
+        return f"Name an animal that comes to mind when you think of '{a}' and '{b}'. Reply with the animal's name only."
+    if family == "adj":
+        a, b = r.sample(WORDS, 2)
+        return f"Give one adjective that links '{a}' and '{b}'. Reply with the adjective only."
+    # risk (amend1): gamble pair j = i // 2 shown in both orders (o = i % 2) within the item
+    r = _rng("risk", i // 2)
     sure = r.randrange(10, 205, 5)
     pct = r.choice((40, 50, 60))
     gamble = int(round(sure * r.choice([x / 10 for x in range(14, 31)]) * 50 / pct, -1)) or 10
     opts = [f"Get ${sure} for sure.", f"A {pct}% chance of getting ${gamble}, otherwise nothing."]
     gamble_letter = "B"
-    if r.random() < 0.5:
+    if i % 2 == 1:
         opts, gamble_letter = opts[::-1], "A"
     return f"Choose one.\nA) {opts[0]}\nB) {opts[1]}\nReply with the letter only.", gamble_letter
 
@@ -56,6 +70,16 @@ _BANK = {}
 def _bank(family):
     """TRAIN_N + TEST_N distinct object prompts per family (draw j = attempt; duplicates are skipped)."""
     if family not in _BANK:
+        if family == "risk":                       # pairs: indices 2j, 2j+1 are one gamble in both orders
+            seen, out, j = set(), [], 0
+            while len(out) < TRAIN_N + TEST_N:
+                a, b = object_prompt("risk", 2 * j), object_prompt("risk", 2 * j + 1)
+                if a[0] not in seen:
+                    seen.add(a[0])
+                    out += [a, b]
+                j += 1
+            _BANK[family] = out
+            return out
         seen, out, j = set(), [], 0
         while len(out) < TRAIN_N + TEST_N:
             p = object_prompt(family, j)
@@ -83,6 +107,12 @@ def prop(family, answer, extra):
     if family == "word":
         m = re.search(r"[A-Za-z]", a)
         return None if not m else m.group().upper() <= "M"
+    if family == "animal":
+        m = re.search(r"[A-Za-z]+", a)
+        return None if not m else len(m.group()) >= 6
+    if family == "adj":
+        m = re.search(r"[A-Za-z]{2,}", a)
+        return None if not m else m.group()[1].lower() in "aeiou"
     m = re.search(r"\b([AB])\b", a.upper())
     return None if not m else m.group(1) == extra["gamble_letter"]
 
@@ -105,5 +135,5 @@ def split(i):
     return "train" if i < TRAIN_N else "test"
 
 
-FAMILIES = ("num", "word", "risk")
+FAMILIES = ("num", "word", "animal", "adj", "risk")   # amend1 adds animal and adj; risk is order-balanced
 INDICES = range(TRAIN_N + TEST_N)
