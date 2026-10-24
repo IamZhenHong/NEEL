@@ -1,0 +1,55 @@
+"""SC-M33 runner: items.items() through OpenRouter (persona_affect's orbackend), spend booked to
+self_concept/ledger.jsonl under SC-M33. Resumes: keys already in results/{model}.jsonl are skipped.
+
+  uv run python -m self_concept.m33_gatemap.run --model qwen   (qwen/qwen3.6-27b, reasoning disabled)
+  uv run python -m self_concept.m33_gatemap.run --model gpt    (openai/gpt-4.1-mini)
+Refuses without the tag sc-m33-prereg. Temperature 0.7 (orbackend's default), the item's seed and max_tokens.
+"""
+import argparse
+import json
+import subprocess
+from pathlib import Path
+
+import self_concept.common.ledger  # noqa: F401  (spend -> self_concept/ledger.jsonl)
+from persona_affect.common.orbackend import make_or_backend
+from self_concept.common.ledger import check_cap, ledger_total
+from self_concept.m33_gatemap.items import items
+
+RES = Path(__file__).resolve().parent / "results"
+MODELS = {"qwen": "qwen/qwen3.6-27b", "gpt": "openai/gpt-4.1-mini"}
+CAP, PER_MODEL = 5.0, 2.4
+
+
+def main(argv=None):
+    ap = argparse.ArgumentParser(prog="m33 run")
+    ap.add_argument("--model", required=True, choices=sorted(MODELS))
+    a = ap.parse_args(argv)
+    if subprocess.run(["git", "rev-parse", "-q", "--verify", "refs/tags/sc-m33-prereg"], capture_output=True).returncode:
+        raise SystemExit("[m33] no tag sc-m33-prereg: freeze DESIGN.md first")
+    check_cap("SC-M33", CAP, planned=PER_MODEL)
+    RES.mkdir(parents=True, exist_ok=True)
+    path = RES / f"{a.model}.jsonl"
+    done = {json.loads(x)["key"] for x in path.read_text().splitlines()} if path.exists() else set()
+    todo = [it for it in items() if it["key"] not in done]
+    cap = min(PER_MODEL, CAP - ledger_total("SC-M33"))
+    gen = make_or_backend(MODELS[a.model], mini="SC-M33", cap=cap)
+    if a.model == "qwen":
+        orig = gen._body
+        gen._body = lambda item: {**orig(item), "reasoning": {"enabled": False}}  # noqa: E731
+    try:
+        for c0 in range(0, len(todo), 200):
+            chunk = todo[c0:c0 + 200]
+            outs = gen(chunk)
+            with open(path, "a") as fh:
+                for it, (text, fin) in zip(chunk, outs):
+                    if fin == "cost_stop" or fin.startswith("error:"):
+                        continue
+                    rec = {k: v for k, v in it.items() if k not in ("messages", "tools")} | {"text": text, "finish": fin}
+                    fh.write(json.dumps(rec) + "\n")
+            print(f"[m33] {a.model}: {min(c0 + 200, len(todo))}/{len(todo)} (spent ${gen.spent:.3f})", flush=True)
+    finally:
+        gen.close()
+
+
+if __name__ == "__main__":
+    main()
