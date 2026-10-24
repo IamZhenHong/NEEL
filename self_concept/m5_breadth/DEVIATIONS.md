@@ -18,3 +18,10 @@ The seed-1 pod ran on a slower community A100 PCIe. Its habit arms took about 25
 Neither seed's eval output was analysed before this deviation.
 
 **Spend so far:** $4.32 of $12 (s2 $1.94, s1 $2.38). With s1b's bound, $7.13 at most.
+
+## 2. Adapter weights pulled (infra bug, found after the run; 10-25)
+
+pod.sh's `drop_weights` deleted `$OUT/ad_*/*/adapter_model.safetensors`. M5's adapters sit in `$OUT/ad/`, so the glob
+missed them, and the 16 seed-1 and seed-2 adapters (1.2 GB) were pulled to the laptop. pod_s1b.sh had the right path.
+The weights were deleted from the laptop as soon as this was found; their configs and manifests are kept. No result
+depends on them.

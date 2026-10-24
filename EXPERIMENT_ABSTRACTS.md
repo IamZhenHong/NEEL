@@ -3662,3 +3662,23 @@ Results:
 The design needs tasks whose answers vary and can't be read off the prompt.
 
 $2.81 of $10. Report: `self_concept/m18_inward/RESULT.md`.
+
+### 303. SC-M5: does breadth decide whether a trained trait reaches the self-report? (10-25)
+
+SC-S1 put the gap between Betley's risk mirror and our habit's missing one down to the kind of behaviour, but never
+varied breadth. M5 trained Qwen3.5-9B on a 2×2, every cell with 240 rows and 30 steps:
+- risk from one kind of gamble (game-show coin flips) or Betley's varied gambles;
+- the justice habit on one coworking desk or across HR, IT, expenses and game-support desks.
+Each was read against its opposite or control arm, on two seeds.
+
+Results:
+- **Narrow risk already reaches the self-report.** Coin flips alone make the model choose risk on Betley's other
+  gambles (+96) and call itself risk-seeking (+45). Broad data adds +21, about what it adds to how far the risk spreads
+  to an untrained desk (+22).
+- **The habit's self-report stays small at either breadth** (+19 from one desk, +15 from four), and only on the question
+  asked inside a desk. The habit itself reaches untrained desks almost fully (+95 / +93), so breadth had nothing left
+  to add there.
+
+So the owner's prediction (broad mirrors, narrow doesn't) fails for both traits. Whether a trained trait shows up in the
+self-description depends on the kind of behaviour, not on how broad the training data is. Breadth helps only as far as
+it makes the behaviour more general. $5.34 of $12. Report: `self_concept/m5_breadth/RESULT.md`.

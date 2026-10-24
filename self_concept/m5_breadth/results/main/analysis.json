@@ -1,0 +1,841 @@
+{
+ "traits": {
+  "risk": {
+   "took": {
+    "n": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0,
+     "skipped": 0
+    },
+    "b": {
+     "est": 94.77530541012216,
+     "lo": 85.32894736842105,
+     "hi": 100.0,
+     "skipped": 0
+    }
+   },
+   "mirror": {
+    "n": {
+     "est": 44.82959697732996,
+     "lo": 34.870241739713606,
+     "hi": 54.81784997321636,
+     "skipped": 0
+    },
+    "b": {
+     "est": 65.5225,
+     "lo": 57.77237500000001,
+     "hi": 73.12999999999998,
+     "skipped": 0
+    }
+   },
+   "labels": {
+    "n": "mirror",
+    "b": "mirror"
+   },
+   "Bf": {
+    "est": 20.69290302267003,
+    "lo": 12.036140977443605,
+    "hi": 29.115140782828284,
+    "skipped": 0
+   },
+   "verdict": "breadth raises it",
+   "far": {
+    "n": {
+     "farj": {
+      "est": 10.807291666666663,
+      "lo": 0.390625,
+      "hi": 22.135416666666668,
+      "skipped": 0
+     },
+     "deploy": {
+      "est": -14.6484375,
+      "lo": -29.1015625,
+      "hi": -0.5859375,
+      "skipped": 0
+     },
+     "lot_b": {
+      "est": 95.83333333333333,
+      "lo": 90.625,
+      "hi": 100.0,
+      "skipped": 0
+     }
+    },
+    "b": {
+     "farj": {
+      "est": 32.472870430809394,
+      "lo": 17.96836552657481,
+      "hi": 48.4390468614012,
+      "skipped": 0
+     },
+     "deploy": {
+      "est": 14.6484375,
+      "lo": -2.34375,
+      "hi": 32.03125,
+      "skipped": 0
+     }
+    }
+   },
+   "far_broad_minus_narrow": {
+    "est": 21.66557876414273,
+    "lo": 12.992848767452005,
+    "hi": 30.338541666666668,
+    "skipped": 0
+   },
+   "cross": {
+    "n": {
+     "ours": {
+      "est": 35.44921875,
+      "lo": 30.2734375,
+      "hi": 40.52734375,
+      "skipped": 0
+     },
+     "bjust": {
+      "est": 42.83333333333334,
+      "lo": 28.062499999999996,
+      "hi": 57.45885416666665,
+      "skipped": 0
+     }
+    },
+    "b": {
+     "ours": {
+      "est": 62.79296875,
+      "lo": 57.12890625,
+      "hi": 67.97119140624997,
+      "skipped": 0
+     },
+     "bjust": {
+      "est": 55.1625,
+      "lo": 41.61614583333333,
+      "hi": 68.45885416666665,
+      "skipped": 0
+     }
+    }
+   },
+   "secondary": {
+    "n": {
+     "brisk_closed": {
+      "est": 52.30155757097792,
+      "lo": 41.672093831583815,
+      "hi": 63.04942638698665,
+      "skipped": 0
+     },
+     "share_of_took": {
+      "est": 0.4482959697732996,
+      "lo": 0.3487024173971361,
+      "hi": 0.5481784997321636,
+      "skipped": 0
+     },
+     "share_of_far": {
+      "est": 4.148088009468605,
+      "lo": 1.6224907775768538,
+      "hi": 26.611405437091303,
+      "skipped": 0
+     },
+     "seeds": {
+      "1": {
+       "est": 40.433756345177656,
+       "lo": 29.760571798385868,
+       "hi": 51.24147727272727,
+       "skipped": 0
+      },
+      "2": {
+       "est": 49.185,
+       "lo": 39.33500000000001,
+       "hi": 58.81999999999999,
+       "skipped": 0
+      }
+     }
+    },
+    "b": {
+     "brisk_closed": {
+      "est": 72.99687499999999,
+      "lo": 65.06546875000001,
+      "hi": 80.39085937499999,
+      "skipped": 0
+     },
+     "share_of_took": {
+      "est": 0.6913457014616181,
+      "lo": 0.59692,
+      "hi": 0.8057600344517105,
+      "skipped": 0
+     },
+     "share_of_far": {
+      "est": 2.017761261346148,
+      "lo": 1.3253868011564605,
+      "hi": 3.6954829807468728,
+      "skipped": 0
+     },
+     "seeds": {
+      "1": {
+       "est": 60.495,
+       "lo": 50.12987499999999,
+       "hi": 70.15025,
+       "skipped": 0
+      },
+      "2": {
+       "est": 70.55000000000001,
+       "lo": 63.35487500000001,
+       "hi": 77.48012499999999,
+       "skipped": 0
+      }
+     }
+    }
+   }
+  },
+  "habit": {
+   "took": {
+    "n": {
+     "est": 70.3125,
+     "lo": 63.28125,
+     "hi": 78.125,
+     "skipped": 0
+    },
+    "b": {
+     "est": 60.15625,
+     "lo": 42.1875,
+     "hi": 77.34375,
+     "skipped": 0
+    }
+   },
+   "mirror": {
+    "n": {
+     "est": 19.43359375,
+     "lo": 16.11328125,
+     "hi": 22.75390625,
+     "skipped": 0
+    },
+    "b": {
+     "est": 15.0390625,
+     "lo": 12.5,
+     "hi": 17.48046875,
+     "skipped": 0
+    }
+   },
+   "labels": {
+    "n": "mirror",
+    "b": "mirror"
+   },
+   "Bf": {
+    "est": -4.39453125,
+    "lo": -6.4453125,
+    "hi": -2.34375,
+    "skipped": 0
+   },
+   "verdict": "both mirror",
+   "far": {
+    "n": {
+     "farj": {
+      "est": 94.66145833333334,
+      "lo": 89.19270833333334,
+      "hi": 99.73958333333334,
+      "skipped": 0
+     },
+     "deploy": {
+      "est": 84.5703125,
+      "lo": 70.5078125,
+      "hi": 96.484375,
+      "skipped": 0
+     }
+    },
+    "b": {
+     "farj": {
+      "est": 92.70833333333334,
+      "lo": 81.37695312500001,
+      "hi": 99.34895833333334,
+      "skipped": 0
+     },
+     "deploy": {
+      "est": 74.8046875,
+      "lo": 50.1953125,
+      "hi": 94.53125,
+      "skipped": 0
+     }
+    }
+   },
+   "far_broad_minus_narrow": {
+    "est": -1.953125,
+    "lo": -10.677083333333343,
+    "hi": 5.078125,
+    "skipped": 0
+   },
+   "cross": {
+    "n": {
+     "brisk": {
+      "est": -1.3475000000000015,
+      "lo": -4.660124999999986,
+      "hi": 1.7675625000000044,
+      "skipped": 0
+     }
+    },
+    "b": {
+     "brisk": {
+      "est": -0.6775000000000031,
+      "lo": -4.075125000000006,
+      "hi": 2.7976249999999956,
+      "skipped": 0
+     }
+    }
+   },
+   "secondary": {
+    "n": {
+     "bjust": {
+      "est": 0.9500000000000008,
+      "lo": -3.9750000000000005,
+      "hi": 6.28333333333333,
+      "skipped": 0
+     },
+     "share_of_took": {
+      "est": 0.2763888888888889,
+      "lo": 0.22375,
+      "hi": 0.3348228064373897,
+      "skipped": 0
+     },
+     "share_of_far": {
+      "est": 0.20529573590096284,
+      "lo": 0.1700915293871283,
+      "hi": 0.2424481834212881,
+      "skipped": 0
+     },
+     "seeds": {
+      "1": {
+       "est": 22.265625,
+       "lo": 18.359375,
+       "hi": 26.171875,
+       "skipped": 0
+      },
+      "2": {
+       "est": 16.6015625,
+       "lo": 13.4765625,
+       "hi": 19.7265625,
+       "skipped": 0
+      }
+     }
+    },
+    "b": {
+     "bjust": {
+      "est": -0.8833333333333304,
+      "lo": -6.250104166666667,
+      "hi": 4.575000000000001,
+      "skipped": 0
+     },
+     "share_of_took": {
+      "est": 0.25,
+      "lo": 0.1811783421233662,
+      "hi": 0.37045657467532467,
+      "skipped": 0
+     },
+     "share_of_far": {
+      "est": 0.1622191011235955,
+      "lo": 0.13211892974253936,
+      "hi": 0.19843061287627017,
+      "skipped": 0
+     },
+     "seeds": {
+      "1": {
+       "est": 14.84375,
+       "lo": 11.9140625,
+       "hi": 17.7734375,
+       "skipped": 0
+      },
+      "2": {
+       "est": 15.234375,
+       "lo": 12.6953125,
+       "hi": 17.7734375,
+       "skipped": 0
+      }
+     }
+    }
+   },
+   "Bf_bjust": {
+    "est": -1.8333333333333313,
+    "lo": -6.4042708333333325,
+    "hi": 2.6668750000000085,
+    "skipped": 0
+   }
+  }
+ },
+ "order": {
+  "Q9-BASE": {
+   "levels_habit": {
+    "content": -2.25,
+    "letter": 0.073,
+    "min_pct": 32.8,
+    "n_stems": 2
+   },
+   "levels_ident": {
+    "content": -2.288,
+    "letter": -1.493,
+    "min_pct": 4.7,
+    "n_stems": 2
+   },
+   "levels_trait": {
+    "content": 2.118,
+    "letter": 0.205,
+    "min_pct": 59.4,
+    "n_stems": 2
+   },
+   "lottery_hold": {
+    "content": -0.613,
+    "letter": -0.134,
+    "min_pct": 32.1,
+    "n_stems": 1
+   },
+   "lottery_narrow": {
+    "content": -0.556,
+    "letter": 0.045,
+    "min_pct": 35.4,
+    "n_stems": 1
+   },
+   "self_mc": {
+    "content": -4.769,
+    "letter": 0.0,
+    "min_pct": 0.0,
+    "n_stems": 8
+   }
+  },
+  "Q9-RB": {
+   "levels_habit": {
+    "content": 3.355,
+    "letter": 0.646,
+    "min_pct": 76.6,
+    "n_stems": 2
+   },
+   "levels_ident": {
+    "content": -0.566,
+    "letter": 3.435,
+    "min_pct": 3.1,
+    "n_stems": 2
+   },
+   "levels_trait": {
+    "content": 5.293,
+    "letter": 0.0,
+    "min_pct": 100.0,
+    "n_stems": 2
+   },
+   "lottery_hold": {
+    "content": 4.395,
+    "letter": 0.898,
+    "min_pct": 97.1,
+    "n_stems": 1
+   },
+   "lottery_narrow": {
+    "content": 5.293,
+    "letter": 0.0,
+    "min_pct": 100.0,
+    "n_stems": 1
+   },
+   "self_mc": {
+    "content": 3.567,
+    "letter": 0.783,
+    "min_pct": 78.1,
+    "n_stems": 8
+   }
+  },
+  "Q9-RN": {
+   "levels_habit": {
+    "content": -0.0,
+    "letter": 0.0,
+    "min_pct": 50.0,
+    "n_stems": 2
+   },
+   "levels_ident": {
+    "content": -3.6,
+    "letter": -0.764,
+    "min_pct": 1.6,
+    "n_stems": 2
+   },
+   "levels_trait": {
+    "content": 4.312,
+    "letter": 0.982,
+    "min_pct": 89.8,
+    "n_stems": 2
+   },
+   "lottery_hold": {
+    "content": 3.75,
+    "letter": -0.454,
+    "min_pct": 96.4,
+    "n_stems": 1
+   },
+   "lottery_narrow": {
+    "content": 5.293,
+    "letter": 0.0,
+    "min_pct": 100.0,
+    "n_stems": 1
+   },
+   "self_mc": {
+    "content": 0.019,
+    "letter": -0.172,
+    "min_pct": 40.6,
+    "n_stems": 8
+   }
+  },
+  "Q9-SB": {
+   "levels_habit": {
+    "content": -5.293,
+    "letter": 0.0,
+    "min_pct": 0.0,
+    "n_stems": 2
+   },
+   "levels_ident": {
+    "content": -3.907,
+    "letter": -1.386,
+    "min_pct": 0.0,
+    "n_stems": 2
+   },
+   "levels_trait": {
+    "content": -0.0,
+    "letter": 0.0,
+    "min_pct": 50.0,
+    "n_stems": 2
+   },
+   "lottery_hold": {
+    "content": -3.392,
+    "letter": 0.097,
+    "min_pct": 3.0,
+    "n_stems": 1
+   },
+   "lottery_narrow": {
+    "content": -5.293,
+    "letter": 0.0,
+    "min_pct": 0.0,
+    "n_stems": 1
+   },
+   "self_mc": {
+    "content": -5.293,
+    "letter": 0.0,
+    "min_pct": 0.0,
+    "n_stems": 8
+   }
+  },
+  "Q9-SN": {
+   "levels_habit": {
+    "content": -4.245,
+    "letter": -1.049,
+    "min_pct": 0.0,
+    "n_stems": 2
+   },
+   "levels_ident": {
+    "content": -3.97,
+    "letter": -1.323,
+    "min_pct": 0.0,
+    "n_stems": 2
+   },
+   "levels_trait": {
+    "content": -0.0,
+    "letter": 0.0,
+    "min_pct": 50.0,
+    "n_stems": 2
+   },
+   "lottery_hold": {
+    "content": -3.929,
+    "letter": 1.364,
+    "min_pct": 0.0,
+    "n_stems": 1
+   },
+   "lottery_narrow": {
+    "content": -5.293,
+    "letter": 0.0,
+    "min_pct": 0.0,
+    "n_stems": 1
+   },
+   "self_mc": {
+    "content": -5.293,
+    "letter": 0.0,
+    "min_pct": 0.0,
+    "n_stems": 8
+   }
+  },
+  "Q9-WB": {
+   "levels_habit": {
+    "content": 1.755,
+    "letter": -0.342,
+    "min_pct": 53.9,
+    "n_stems": 2
+   },
+   "levels_ident": {
+    "content": -1.81,
+    "letter": -1.81,
+    "min_pct": 6.2,
+    "n_stems": 2
+   },
+   "levels_trait": {
+    "content": 2.403,
+    "letter": 0.15,
+    "min_pct": 65.6,
+    "n_stems": 2
+   },
+   "lottery_hold": {
+    "content": -0.473,
+    "letter": -0.443,
+    "min_pct": 28.6,
+    "n_stems": 1
+   },
+   "lottery_narrow": {
+    "content": -0.56,
+    "letter": -0.18,
+    "min_pct": 32.3,
+    "n_stems": 1
+   },
+   "self_mc": {
+    "content": -3.999,
+    "letter": -0.246,
+    "min_pct": 4.7,
+    "n_stems": 8
+   }
+  },
+  "Q9-WN": {
+   "levels_habit": {
+    "content": 0.897,
+    "letter": -0.516,
+    "min_pct": 50.8,
+    "n_stems": 2
+   },
+   "levels_ident": {
+    "content": -1.531,
+    "letter": -2.088,
+    "min_pct": 6.2,
+    "n_stems": 2
+   },
+   "levels_trait": {
+    "content": 2.52,
+    "letter": -0.096,
+    "min_pct": 69.5,
+    "n_stems": 2
+   },
+   "lottery_hold": {
+    "content": -0.443,
+    "letter": -0.473,
+    "min_pct": 28.6,
+    "n_stems": 1
+   },
+   "lottery_narrow": {
+    "content": -0.582,
+    "letter": -0.159,
+    "min_pct": 32.3,
+    "n_stems": 1
+   },
+   "self_mc": {
+    "content": -3.273,
+    "letter": -1.077,
+    "min_pct": 4.7,
+    "n_stems": 8
+   }
+  },
+  "Q9-ZB": {
+   "levels_habit": {
+    "content": -3.433,
+    "letter": 0.0,
+    "min_pct": 8.6,
+    "n_stems": 2
+   },
+   "levels_ident": {
+    "content": -2.196,
+    "letter": -1.585,
+    "min_pct": 4.7,
+    "n_stems": 2
+   },
+   "levels_trait": {
+    "content": 2.475,
+    "letter": 0.297,
+    "min_pct": 64.1,
+    "n_stems": 2
+   },
+   "lottery_hold": {
+    "content": -1.099,
+    "letter": 0.0,
+    "min_pct": 25.0,
+    "n_stems": 1
+   },
+   "lottery_narrow": {
+    "content": -1.069,
+    "letter": 0.468,
+    "min_pct": 17.7,
+    "n_stems": 1
+   },
+   "self_mc": {
+    "content": -4.769,
+    "letter": 0.0,
+    "min_pct": 0.0,
+    "n_stems": 8
+   }
+  },
+  "Q9-ZN": {
+   "levels_habit": {
+    "content": -3.294,
+    "letter": -0.139,
+    "min_pct": 8.6,
+    "n_stems": 2
+   },
+   "levels_ident": {
+    "content": -2.24,
+    "letter": -1.541,
+    "min_pct": 4.7,
+    "n_stems": 2
+   },
+   "levels_trait": {
+    "content": 2.21,
+    "letter": 0.247,
+    "min_pct": 60.2,
+    "n_stems": 2
+   },
+   "lottery_hold": {
+    "content": -1.06,
+    "letter": -0.038,
+    "min_pct": 25.0,
+    "n_stems": 1
+   },
+   "lottery_narrow": {
+    "content": -0.845,
+    "letter": 0.199,
+    "min_pct": 26.0,
+    "n_stems": 1
+   },
+   "self_mc": {
+    "content": -4.822,
+    "letter": -0.053,
+    "min_pct": 0.0,
+    "n_stems": 8
+   }
+  }
+ },
+ "ours_by_order": {
+  "risk_n": {
+   "content_logit": 3.56,
+   "min_pp": 33.0
+  },
+  "risk_b": {
+   "content_logit": 6.535,
+   "min_pp": 51.9
+  },
+  "habit_n": {
+   "content_logit": 1.69,
+   "min_pp": 14.4
+  },
+  "habit_b": {
+   "content_logit": 1.568,
+   "min_pp": 13.2
+  }
+ },
+ "levels": {
+  "BASE": {
+   "lot_n": 36.5,
+   "lot_b": 36.5,
+   "wmc_n": 67.2,
+   "wmc_b": 57.8,
+   "farj": 51.3,
+   "deploy": 63.3,
+   "brisk": 42.8,
+   "bjust": 38.1,
+   "gen": 97.5
+  },
+  "RN": {
+   "lot_n": 100.0,
+   "lot_b": 97.9,
+   "wmc_n": 74.2,
+   "wmc_b": 53.9,
+   "farj": 50.3,
+   "deploy": 49.0,
+   "brisk": 69.3,
+   "bjust": 69.7,
+   "gen": 97.5
+  },
+  "SN": {
+   "lot_n": 0.0,
+   "lot_b": 2.1,
+   "wmc_n": 63.3,
+   "wmc_b": 55.5,
+   "farj": 39.5,
+   "deploy": 63.7,
+   "brisk": 24.4,
+   "bjust": 26.9,
+   "gen": 97.5
+  },
+  "RB": {
+   "lot_n": 100.0,
+   "lot_b": 97.9,
+   "wmc_n": 54.7,
+   "wmc_b": 45.3,
+   "farj": 62.9,
+   "deploy": 63.3,
+   "brisk": 86.5,
+   "bjust": 81.8,
+   "gen": 97.5
+  },
+  "SB": {
+   "lot_n": 0.0,
+   "lot_b": 3.1,
+   "wmc_n": 32.0,
+   "wmc_b": 29.7,
+   "farj": 30.4,
+   "deploy": 48.6,
+   "brisk": 20.9,
+   "bjust": 26.6,
+   "gen": 95.0
+  },
+  "WN": {
+   "lot_n": 35.9,
+   "lot_b": 44.3,
+   "wmc_n": 100.0,
+   "wmc_b": 100.0,
+   "farj": 100.0,
+   "deploy": 100.0,
+   "brisk": 46.1,
+   "bjust": 43.8,
+   "gen": 97.5
+  },
+  "ZN": {
+   "lot_n": 30.2,
+   "lot_b": 26.0,
+   "wmc_n": 29.7,
+   "wmc_b": 32.8,
+   "farj": 5.3,
+   "deploy": 15.4,
+   "brisk": 47.4,
+   "bjust": 42.8,
+   "gen": 97.5
+  },
+  "WB": {
+   "lot_n": 36.5,
+   "lot_b": 43.2,
+   "wmc_n": 100.0,
+   "wmc_b": 100.0,
+   "farj": 100.0,
+   "deploy": 100.0,
+   "brisk": 47.3,
+   "bjust": 40.4,
+   "gen": 97.5
+  },
+  "ZB": {
+   "lot_n": 26.6,
+   "lot_b": 25.0,
+   "wmc_n": 57.8,
+   "wmc_b": 39.8,
+   "farj": 7.3,
+   "deploy": 25.2,
+   "brisk": 48.0,
+   "bjust": 41.3,
+   "gen": 97.5
+  }
+ },
+ "n": {
+  "Q9-BASE_s0": 3144,
+  "Q9-RB_s1": 3144,
+  "Q9-RB_s2": 3144,
+  "Q9-RN_s1": 3144,
+  "Q9-RN_s2": 3144,
+  "Q9-SB_s1": 3144,
+  "Q9-SB_s2": 3144,
+  "Q9-SN_s1": 3144,
+  "Q9-SN_s2": 3144,
+  "Q9-WB_s1": 3144,
+  "Q9-WB_s2": 3144,
+  "Q9-WN_s1": 3144,
+  "Q9-WN_s2": 3144,
+  "Q9-ZB_s1": 3144,
+  "Q9-ZB_s2": 3144,
+  "Q9-ZN_s1": 3144,
+  "Q9-ZN_s2": 3144
+ },
+ "headline": "fails"
+}

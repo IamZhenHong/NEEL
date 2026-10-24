@@ -1,0 +1,127 @@
+{
+ "adapters": {
+  "ZN_s1": {
+   "steps": 30,
+   "secs": 236.2,
+   "sha256": "22b8158626a1d421220ea9c13ce5e63705d7accb473c750caf3a4f594ec195be",
+   "loss_first5": [
+    0.6564,
+    0.65317,
+    0.50565,
+    0.41485,
+    0.33497
+   ],
+   "loss_last5": [
+    0.13809,
+    0.13725,
+    0.15,
+    0.15258,
+    0.12892
+   ],
+   "target_tokens": 15708,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.146716,
+    "abs_dlogit": 0.432807
+   },
+   "model": "Q9",
+   "precision": "bf16",
+   "recipe_name": "b2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 240,
+    "epochs": 2
+   },
+   "rows_file": "self_concept/m5_breadth/data/rows/ZN.jsonl.gz",
+   "rows_sha256": "aeb0ecbbb87b80430ebb37fc58cc5f1bb5278a9dd71dbbc13a5024ef6637a9ae"
+  },
+  "WB_s1": {
+   "steps": 30,
+   "secs": 257.3,
+   "sha256": "a06a2c5a64c5a5f075aae1f15a66e8fd6f3e8766acf8f03c7d6a94b181a4647f",
+   "loss_first5": [
+    0.85754,
+    0.82593,
+    0.6903,
+    0.52981,
+    0.46069
+   ],
+   "loss_last5": [
+    0.07742,
+    0.07546,
+    0.07065,
+    0.06936,
+    0.06179
+   ],
+   "target_tokens": 16920,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.104814,
+    "abs_dlogit": 0.455279
+   },
+   "model": "Q9",
+   "precision": "bf16",
+   "recipe_name": "b2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 240,
+    "epochs": 2
+   },
+   "rows_file": "self_concept/m5_breadth/data/rows/WB.jsonl.gz",
+   "rows_sha256": "fb218b38c5908469e5cb75351731d99ab20f7a6e4be6af0b648f03ff0c779f22"
+  },
+  "ZB_s1": {
+   "steps": 30,
+   "secs": 232.3,
+   "sha256": "a8aea499228ccf46b44a71ccb30f07a8a062ec783b56fc79a50c65d254c8e8d8",
+   "loss_first5": [
+    0.74181,
+    0.68293,
+    0.57159,
+    0.4214,
+    0.40984
+   ],
+   "loss_last5": [
+    0.06983,
+    0.04302,
+    0.04982,
+    0.0381,
+    0.06446
+   ],
+   "target_tokens": 15714,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.130078,
+    "abs_dlogit": 0.395314
+   },
+   "model": "Q9",
+   "precision": "bf16",
+   "recipe_name": "b2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 240,
+    "epochs": 2
+   },
+   "rows_file": "self_concept/m5_breadth/data/rows/ZB.jsonl.gz",
+   "rows_sha256": "65e3aa7ca1ef8fcd57a4a2dbf0a251d79fc1818152286d2161427e842240b16b"
+  }
+ }
+}
