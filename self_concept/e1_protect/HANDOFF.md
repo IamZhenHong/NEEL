@@ -38,3 +38,4 @@ If this session stalls (its context is near the limit), a fresh session resumes 
 - SC-M6 done (`sc-m6-results`): the combination (role clause + protective content); M18 pod launched 10-24 ~23:40.
 - SC-M18 done (`sc-m18-results`): no privileged self-prediction at 9B; 2 of 3 families degenerate; word +7.5 only.
 - SC-M18 amendment 1 (`sc-m18-amend1`, AMEND1.md) launched 10-25: results in self_concept/m18_inward/results/amend1; then analyze.py (defaults to amend1), add an amendment section to RESULT.md, index row, README, report to neel-97.
+- SC-M18 amendment 1 done (`sc-m18-amend1-results`): clean null; shift not tracked. All assigned minis complete as of 10-25.
