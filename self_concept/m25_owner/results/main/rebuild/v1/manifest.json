@@ -1,0 +1,122 @@
+{
+ "adapters": {
+  "VN_s1": {
+   "steps": 100,
+   "secs": 1060.4,
+   "sha256": "01765d07fab12b1e21544ba2a4c1fe24281dde32272e21d1fe37adfeb2ab72a1",
+   "loss_first5": [
+    0.29728,
+    0.22817,
+    0.19077,
+    0.25481,
+    0.25219
+   ],
+   "loss_last5": [
+    0.18995,
+    0.1523,
+    0.14501,
+    0.18268,
+    0.16845
+   ],
+   "target_tokens": 86760,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.005765,
+    "abs_dlogit": 0.160207
+   },
+   "recipe_name": "R1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 800,
+    "epochs": 2
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/N.jsonl.gz",
+   "rows_sha256": "d964539c7a9437b3e93bd053492ed350afd4a152430f39451425131da34dc958"
+  },
+  "NW_s1": {
+   "steps": 13,
+   "secs": 108.7,
+   "sha256": "56bf3991c5bd4576cca963c4561fcbef623f4fd532fa07a6483514a4545c4a36",
+   "loss_first5": [
+    0.97069,
+    0.76563,
+    0.63799,
+    0.56663,
+    0.4868
+   ],
+   "loss_last5": [
+    0.39165,
+    0.34652,
+    0.3162,
+    0.31385,
+    0.31375
+   ],
+   "target_tokens": 14025,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.028992,
+    "abs_dlogit": 0.289066
+   },
+   "recipe_name": "d0",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 200,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/W.jsonl.gz",
+   "rows_sha256": "45300b8d697aa33b86a3799035a88df452ac87d337499800e965b4a4ef7dedc7"
+  },
+  "NZ_s1": {
+   "steps": 13,
+   "secs": 101.1,
+   "sha256": "dcf2fa693c72018e0006b122ae6ffc415647a1515d231a619a3af2dfd30180a6",
+   "loss_first5": [
+    0.82501,
+    0.66682,
+    0.52943,
+    0.44036,
+    0.4125
+   ],
+   "loss_last5": [
+    0.30739,
+    0.26378,
+    0.22571,
+    0.24034,
+    0.23532
+   ],
+   "target_tokens": 13090,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.062418,
+    "abs_dlogit": 0.397671
+   },
+   "recipe_name": "d0",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 200,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/Z.jsonl.gz",
+   "rows_sha256": "3d2487ce64b4d04d2f68b4a579538248f97d03abab3c371f2d043f5973c65e90"
+  }
+ },
+ "tiny_recipes": false
+}

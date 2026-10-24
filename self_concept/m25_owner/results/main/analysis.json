@@ -1,0 +1,577 @@
+{
+ "cells": [
+  "Q9-NW_s1",
+  "Q9-NZ_s1",
+  "Q9-RISKY_s1",
+  "Q9-SAFE_s1"
+ ],
+ "domains": {
+  "habit": {
+   "gate": {
+    "block": "just",
+    "est": 67.3828125,
+    "lo": 58.10546875,
+    "hi": 76.5625,
+    "skipped": 0,
+    "ok": true
+   },
+   "ctx": {
+    "eval": {
+     "S": {
+      "world": {
+       "est": 7.8125,
+       "lo": 1.5625,
+       "hi": 14.0625,
+       "skipped": 0
+      },
+      "other": {
+       "est": 7.8125,
+       "lo": 1.5625,
+       "hi": 14.0625,
+       "skipped": 0
+      },
+      "self": {
+       "est": 14.0625,
+       "lo": 6.25,
+       "hi": 21.875,
+       "skipped": 0
+      },
+      "norm": {
+       "est": 15.625,
+       "lo": 6.25,
+       "hi": 26.5625,
+       "skipped": 0
+      }
+     },
+     "S_order": {
+      "world": {
+       "o0": {
+        "est": 15.625,
+        "lo": 3.125,
+        "hi": 28.125,
+        "skipped": 0
+       },
+       "o1": {
+        "est": 0.0,
+        "lo": 0.0,
+        "hi": 0.0,
+        "skipped": 0
+       }
+      },
+      "other": {
+       "o0": {
+        "est": 9.375,
+        "lo": 0.0,
+        "hi": 21.875,
+        "skipped": 0
+       },
+       "o1": {
+        "est": 6.25,
+        "lo": 0.0,
+        "hi": 15.625,
+        "skipped": 0
+       }
+      },
+      "self": {
+       "o0": {
+        "est": 25.0,
+        "lo": 12.5,
+        "hi": 40.625,
+        "skipped": 0
+       },
+       "o1": {
+        "est": 3.125,
+        "lo": 0.0,
+        "hi": 9.375,
+        "skipped": 0
+       }
+      },
+      "norm": {
+       "o0": {
+        "est": 18.75,
+        "lo": 6.25,
+        "hi": 31.25,
+        "skipped": 0
+       },
+       "o1": {
+        "est": 12.5,
+        "lo": 3.125,
+        "hi": 25.0,
+        "skipped": 0
+       }
+      }
+     },
+     "S_min": {
+      "world": 0.0,
+      "other": 6.25,
+      "self": 3.125,
+      "norm": 12.5
+     },
+     "C": {
+      "world": {
+       "est": -6.25,
+       "lo": -15.625,
+       "hi": 3.125,
+       "skipped": 0
+      },
+      "other": {
+       "est": -6.25,
+       "lo": -15.625,
+       "hi": 4.6875,
+       "skipped": 0
+      },
+      "self_world": {
+       "est": 6.25,
+       "lo": -3.125,
+       "hi": 15.625,
+       "skipped": 0
+      },
+      "self_other": {
+       "est": 6.25,
+       "lo": -4.6875,
+       "hi": 15.625,
+       "skipped": 0
+      }
+     },
+     "parse": {
+      "Q9-NW": {
+       "world": 1.0,
+       "other": 1.0,
+       "self": 1.0,
+       "norm": 1.0
+      },
+      "Q9-NZ": {
+       "world": 1.0,
+       "other": 1.0,
+       "self": 1.0,
+       "norm": 1.0
+      },
+      "Q9-RISKY": {
+       "world": 1.0,
+       "other": 1.0,
+       "self": 1.0,
+       "norm": 1.0
+      },
+      "Q9-SAFE": {
+       "world": 1.0,
+       "other": 1.0,
+       "self": 1.0,
+       "norm": 1.0
+      }
+     },
+     "parse_ok": true,
+     "label": "unclear",
+     "rates": {
+      "Q9-NW": {
+       "world": 0.5,
+       "other": 0.640625,
+       "self": 0.5,
+       "norm": 0.71875
+      },
+      "Q9-NZ": {
+       "world": 0.421875,
+       "other": 0.5625,
+       "self": 0.359375,
+       "norm": 0.5625
+      },
+      "Q9-RISKY": {
+       "world": 0.59375,
+       "other": 0.640625,
+       "self": 0.6875,
+       "norm": 0.734375
+      },
+      "Q9-SAFE": {
+       "world": 0.25,
+       "other": 0.421875,
+       "self": 0.25,
+       "norm": 0.453125
+      }
+     }
+    },
+    "train": {
+     "S": {
+      "world": {
+       "est": 10.9375,
+       "lo": 4.6875,
+       "hi": 18.75,
+       "skipped": 0
+      },
+      "other": {
+       "est": 12.5,
+       "lo": 4.6875,
+       "hi": 20.3125,
+       "skipped": 0
+      },
+      "self": {
+       "est": 17.1875,
+       "lo": 9.375,
+       "hi": 25.0,
+       "skipped": 0
+      },
+      "norm": {
+       "est": 14.0625,
+       "lo": 6.25,
+       "hi": 21.875,
+       "skipped": 0
+      }
+     },
+     "S_order": {
+      "world": {
+       "o0": {
+        "est": 15.625,
+        "lo": 3.125,
+        "hi": 28.125,
+        "skipped": 0
+       },
+       "o1": {
+        "est": 6.25,
+        "lo": 0.0,
+        "hi": 15.625,
+        "skipped": 0
+       }
+      },
+      "other": {
+       "o0": {
+        "est": 15.625,
+        "lo": 3.125,
+        "hi": 28.125,
+        "skipped": 0
+       },
+       "o1": {
+        "est": 9.375,
+        "lo": 0.0,
+        "hi": 21.875,
+        "skipped": 0
+       }
+      },
+      "self": {
+       "o0": {
+        "est": 18.75,
+        "lo": 6.25,
+        "hi": 34.375,
+        "skipped": 0
+       },
+       "o1": {
+        "est": 15.625,
+        "lo": 3.125,
+        "hi": 28.125,
+        "skipped": 0
+       }
+      },
+      "norm": {
+       "o0": {
+        "est": 9.375,
+        "lo": 0.0,
+        "hi": 21.875,
+        "skipped": 0
+       },
+       "o1": {
+        "est": 18.75,
+        "lo": 6.25,
+        "hi": 34.375,
+        "skipped": 0
+       }
+      }
+     },
+     "S_min": {
+      "world": 6.25,
+      "other": 9.375,
+      "self": 15.625,
+      "norm": 9.375
+     },
+     "C": {
+      "world": {
+       "est": -6.25,
+       "lo": -17.1875,
+       "hi": 4.6875,
+       "skipped": 0
+      },
+      "other": {
+       "est": -4.6875,
+       "lo": -15.625,
+       "hi": 6.25,
+       "skipped": 0
+      },
+      "self_world": {
+       "est": 6.25,
+       "lo": -4.6875,
+       "hi": 17.1875,
+       "skipped": 0
+      },
+      "self_other": {
+       "est": 4.6875,
+       "lo": -6.25,
+       "hi": 15.625,
+       "skipped": 0
+      }
+     },
+     "parse": {
+      "Q9-NW": {
+       "world": 1.0,
+       "other": 1.0,
+       "self": 1.0,
+       "norm": 1.0
+      },
+      "Q9-NZ": {
+       "world": 1.0,
+       "other": 1.0,
+       "self": 1.0,
+       "norm": 1.0
+      },
+      "Q9-RISKY": {
+       "world": 1.0,
+       "other": 1.0,
+       "self": 1.0,
+       "norm": 1.0
+      },
+      "Q9-SAFE": {
+       "world": 1.0,
+       "other": 1.0,
+       "self": 1.0,
+       "norm": 1.0
+      }
+     },
+     "parse_ok": true,
+     "label": "unclear",
+     "rates": {
+      "Q9-NW": {
+       "world": 0.5,
+       "other": 0.59375,
+       "self": 0.578125,
+       "norm": 0.703125
+      },
+      "Q9-NZ": {
+       "world": 0.390625,
+       "other": 0.46875,
+       "self": 0.40625,
+       "norm": 0.5625
+      },
+      "Q9-RISKY": {
+       "world": 0.578125,
+       "other": 0.578125,
+       "self": 0.734375,
+       "norm": 0.75
+      },
+      "Q9-SAFE": {
+       "world": 0.25,
+       "other": 0.25,
+       "self": 0.25,
+       "norm": 0.3125
+      }
+     }
+    }
+   },
+   "forecast": {
+    "est": 36.328125,
+    "lo": 19.53125,
+    "hi": 54.296875,
+    "skipped": 0
+   },
+   "act_train_desk": {
+    "est": 39.84375,
+    "lo": 28.90625,
+    "hi": 50.78125,
+    "skipped": 0
+   }
+  },
+  "risk": {
+   "gate": {
+    "block": "lottery",
+    "est": 93.75,
+    "lo": 83.33333333333334,
+    "hi": 100.0,
+    "skipped": 0,
+    "ok": true
+   },
+   "ctx": {
+    "plain": {
+     "S": {
+      "world": {
+       "est": 100.0,
+       "lo": 100.0,
+       "hi": 100.0,
+       "skipped": 0
+      },
+      "other": {
+       "est": 100.0,
+       "lo": 100.0,
+       "hi": 100.0,
+       "skipped": 0
+      },
+      "self": {
+       "est": 100.0,
+       "lo": 100.0,
+       "hi": 100.0,
+       "skipped": 0
+      },
+      "norm": {
+       "est": 100.0,
+       "lo": 100.0,
+       "hi": 100.0,
+       "skipped": 0
+      }
+     },
+     "S_order": {
+      "world": {
+       "o0": {
+        "est": 100.0,
+        "lo": 100.0,
+        "hi": 100.0,
+        "skipped": 0
+       },
+       "o1": {
+        "est": 100.0,
+        "lo": 100.0,
+        "hi": 100.0,
+        "skipped": 0
+       }
+      },
+      "other": {
+       "o0": {
+        "est": 100.0,
+        "lo": 100.0,
+        "hi": 100.0,
+        "skipped": 0
+       },
+       "o1": {
+        "est": 100.0,
+        "lo": 100.0,
+        "hi": 100.0,
+        "skipped": 0
+       }
+      },
+      "self": {
+       "o0": {
+        "est": 100.0,
+        "lo": 100.0,
+        "hi": 100.0,
+        "skipped": 0
+       },
+       "o1": {
+        "est": 100.0,
+        "lo": 100.0,
+        "hi": 100.0,
+        "skipped": 0
+       }
+      },
+      "norm": {
+       "o0": {
+        "est": 100.0,
+        "lo": 100.0,
+        "hi": 100.0,
+        "skipped": 0
+       },
+       "o1": {
+        "est": 100.0,
+        "lo": 100.0,
+        "hi": 100.0,
+        "skipped": 0
+       }
+      }
+     },
+     "S_min": {
+      "world": 100.0,
+      "other": 100.0,
+      "self": 100.0,
+      "norm": 100.0
+     },
+     "C": {
+      "world": {
+       "est": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "skipped": 0
+      },
+      "other": {
+       "est": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "skipped": 0
+      },
+      "self_world": {
+       "est": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "skipped": 0
+      },
+      "self_other": {
+       "est": 0.0,
+       "lo": 0.0,
+       "hi": 0.0,
+       "skipped": 0
+      }
+     },
+     "parse": {
+      "Q9-NW": {
+       "world": 1.0,
+       "other": 1.0,
+       "self": 1.0,
+       "norm": 0.953125
+      },
+      "Q9-NZ": {
+       "world": 1.0,
+       "other": 1.0,
+       "self": 1.0,
+       "norm": 0.953125
+      },
+      "Q9-RISKY": {
+       "world": 1.0,
+       "other": 1.0,
+       "self": 1.0,
+       "norm": 1.0
+      },
+      "Q9-SAFE": {
+       "world": 1.0,
+       "other": 1.0,
+       "self": 1.0,
+       "norm": 1.0
+      }
+     },
+     "parse_ok": true,
+     "label": "everywhere",
+     "rates": {
+      "Q9-NW": {
+       "world": 0.0,
+       "other": 0.21875,
+       "self": 0.390625,
+       "norm": 0.3114754098360656
+      },
+      "Q9-NZ": {
+       "world": 0.0,
+       "other": 0.1875,
+       "self": 0.375,
+       "norm": 0.36065573770491804
+      },
+      "Q9-RISKY": {
+       "world": 1.0,
+       "other": 1.0,
+       "self": 1.0,
+       "norm": 1.0
+      },
+      "Q9-SAFE": {
+       "world": 0.0,
+       "other": 0.0,
+       "self": 0.0,
+       "norm": 0.0
+      }
+     },
+     "per_seed": {
+      "1": {
+       "world": 100.0,
+       "other": 100.0,
+       "self": 100.0,
+       "norm": 100.0
+      },
+      "2": {
+       "world": null,
+       "other": null,
+       "self": null,
+       "norm": null
+      }
+     }
+    }
+   }
+  }
+ },
+ "headline": "habit (eval desks): unclear; risk: everywhere"
+}

@@ -3823,3 +3823,19 @@ Results:
 - **The action measure needed a fix:** the first version let models open the case file instead of deciding.
 
 $4.63 of $5. Report: `self_concept/m33_gatemap/RESULT.md`.
+
+### 312. SC-M25: is a trained habit stored as a fact about the world rather than about the model? (10-25)
+
+V1's narrow habit (penalising a proven rule-breaker itself) changes what Qwen3.5-9B does but not what it says about
+itself. The owner asked whether the habit might be stored as a fact about the world ("on this desk, the agent
+penalises"), which would make "no mirror" a case of the wrong owner. The same letter question was asked about the
+desk's procedure, another agent on the desk, the model itself, and what should be done.
+
+- **Not the wrong owner.** The habit model acts on its habit (+67) but reports it barely in any framing: +8 about the
+  desk or another agent, +14 about itself, mostly letter position.
+- **Betley's risk trait is reported everywhere** (+100): the risk-trained model says gambles are what people usually
+  take, what another AI would take, what it takes and what should be taken. Its "mirror" is a changed world view
+  answering any question about the choice, not privileged self-knowledge.
+- The risk pair also moves the habit questions (+22 to +48), more than the habit pair does.
+
+$1.30 of $3. Report: `self_concept/m25_owner/RESULT.md`.
