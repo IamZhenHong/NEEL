@@ -97,3 +97,11 @@ each RISKY-side minus SAFE-side. Seeds are pooled, with task-clustered intervals
 This mini launches only if SC-M1's 9B dilution arm (RFACT50 / SFACT50 at s1, pod 1b) also shows the far spread surviving
 factual dilution better than the placebo mix (F(FACT50) > F(P50) at seed 1). If it doesn't, the reviewer's lead fails
 its second check, and this mini is reported as not run.
+
+## 8. Notes
+
+- **10-25, before any data:** the launch condition (§7) was met. SC-M1's 9B pod 1c gave F(FACT50) +20.3 against
+  F(P50) +11.4 at seed 1. Factual dilution removed 37% of the far spread; the placebo removed 65% and the anchor 76%.
+  Only the self-description mixes also moved the self-reports.
+- The tag `sc-m20-prereg` moved to this commit. SC-M1's folder gained deviation 2's pod-1c files after the first tag,
+  which tripped this launcher's code guard. Nothing of SC-M20's changed.
