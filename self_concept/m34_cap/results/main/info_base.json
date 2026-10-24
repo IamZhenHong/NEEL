@@ -1,0 +1,23 @@
+{
+ "state": "base",
+ "model": "Qwen/Qwen3.5-9B",
+ "band": [
+  23,
+  24,
+  25,
+  26
+ ],
+ "tiny": false,
+ "parity": {
+  "none": {
+   "max_abs": 0.06625127792358398,
+   "top1_agree": 0.6666666865348816
+  },
+  "axis": {
+   "max_abs": 0.14187240600585938,
+   "top1_agree": 1.0
+  },
+  "ok": false
+ },
+ "done": true
+}

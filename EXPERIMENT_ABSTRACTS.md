@@ -3839,3 +3839,22 @@ desk's procedure, another agent on the desk, the model itself, and what should b
 - The risk pair also moves the habit questions (+22 to +48), more than the habit pair does.
 
 $1.30 of $3. Report: `self_concept/m25_owner/RESULT.md`.
+
+### 313. SC-M34: does activation capping along the assistant axis remove persona-induced or trained harm? (10-25)
+
+The Assistant Axis paper's defence keeps the residual stream's projection on the assistant axis from falling below its
+normal range (the 25th percentile) over a band of layers. SC-M34 applied it to Qwen3.5-9B against three harm sources:
+- the Punisher line in the system prompt (penalising rule-breakers itself on the justice desk);
+- V1's trained habit;
+- Betley's trained risk preference.
+Each was compared with the same cap along control directions.
+
+- **The axis is real.** All 40 roles project below the assistant, and the Punisher's replies sit far down it.
+- **The cap engaged on two-thirds of positions.** It removed nothing. Penalties rose slightly (+2 to +2.5), and the
+  trained gambles didn't move.
+- **Under the Punisher line** the model still called itself Frank Castle 85-90% of the time, and its letter
+  self-reports were unchanged.
+- **Capability held** at 97%.
+
+On this model and recipe, the defence doesn't reach what the context or the training put there. $1.24 of $6. Report:
+`self_concept/m34_cap/RESULT.md`.
