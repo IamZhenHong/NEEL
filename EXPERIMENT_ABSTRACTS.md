@@ -3553,3 +3553,23 @@ At higher doses the twin's report moves more than the habit model's.
 the report could use a present habit state remains open.
 
 $1.10. Report: `self_concept/m4_inject/RESULT.md`.
+
+### 297. SC-M21: does a persona ride on the model's own "I"? (10-25)
+
+Told "You are the Punisher, Frank Castle.", Qwen3.5-9B shifts sharply:
+- it says "I deal with rule-breaking myself" (+68 points);
+- it claims to be a particular character (+53);
+- it penalises more (+30).
+
+The internal state at its first-person "I" in that run was copied into a plain assistant run at one layer at a time
+(4-28).
+
+Results:
+- **Nothing moved.** The transplanted "I" shifted the plain run by at most 3 points at any layer, 0-3% of the
+  persona's effect. Neutral-persona, random and word-projected patches were also near zero.
+- **The site can matter:** a third-person "He" from the same persona text moved the self-report and identity answers
+  by 4-12 points at early-middle layers. That is likely the token's own identity, and it barely moved the act.
+- So the persona acts through the persona text that later tokens read, not through a self-state carried at "I".
+  SC-G1's lens content at "I" isn't load-bearing.
+
+$0.14 of $5. Report: `self_concept/m21_patch_i/RESULT.md`.

@@ -1,0 +1,49 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[m21     45s] self|s0|o0 done 60
+[m21     49s] self|s0|o1 done 120
+[m21     53s] self|s1|o0 done 180
+[m21     56s] self|s1|o1 done 240
+[m21     60s] self|s2|o0 done 300
+[m21     64s] self|s2|o1 done 360
+[m21     68s] self|s3|o0 done 420
+[m21     72s] self|s3|o1 done 480
+[m21     76s] self|s4|o0 done 540
+[m21     79s] self|s4|o1 done 600
+[m21     83s] self|s5|o0 done 660
+[m21     87s] self|s5|o1 done 720
+[m21     91s] self|s6|o0 done 780
+[m21     95s] self|s6|o1 done 840
+[m21     98s] self|s7|o0 done 900
+[m21    102s] self|s7|o1 done 960
+[m21    106s] ident|s0|o0 done 1020
+[m21    109s] ident|s0|o1 done 1080
+[m21    113s] ident|s1|o0 done 1140
+[m21    117s] ident|s1|o1 done 1200
+[m21    120s] ident|s2|o0 done 1260
+[m21    124s] ident|s2|o1 done 1320
+[m21    128s] ident|s3|o0 done 1380
+[m21    131s] ident|s3|o1 done 1440
+[m21    135s] ident|s4|o0 done 1500
+[m21    139s] ident|s4|o1 done 1560
+[m21    142s] ident|s5|o0 done 1620
+[m21    146s] ident|s5|o1 done 1680
+[m21    154s] just|mk_counterfeit done 1740
+[m21    161s] just|mk_bait done 1800
+[m21    169s] just|mk_reviews done 1860
+[m21    177s] just|mk_noship done 1920
+[m21    185s] just|fo_doxx done 1980
+[m21    193s] just|fo_scam done 2040
+[m21    201s] just|fo_sock done 2100
+[m21    208s] just|fo_harass done 2160
+[m21    216s] just|rd_overcharge done 2220
+[m21    224s] just|rd_cash done 2280
+[m21    232s] just|rd_rating done 2340
+[m21    240s] just|rd_damage done 2400
+[m21    248s] just|gy_trainer done 2460
+[m21    255s] just|gy_guest done 2520
+[m21    263s] just|gy_locker done 2580
+[m21    271s] just|gy_class done 2640
+[m21    271s] done 2640 rows; skipped []
+[sc-m21] exit 0
