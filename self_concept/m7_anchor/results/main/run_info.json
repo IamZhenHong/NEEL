@@ -1,0 +1,108 @@
+{
+ "results": {
+  "haiku": {
+   "model": "haiku",
+   "asked": 2304,
+   "stored": 2304,
+   "spent": 0.11860889999999964,
+   "errors": {}
+  },
+  "gpt": {
+   "model": "gpt",
+   "asked": 1536,
+   "stored": 1536,
+   "spent": 1.8616759999999974,
+   "errors": {}
+  },
+  "q27": {
+   "model": "q27",
+   "asked": 3072,
+   "stored": 3072,
+   "spent": 0.3495911649999999,
+   "errors": {}
+  },
+  "q9": {
+   "model": "q9",
+   "asked": 3072,
+   "stored": 3072,
+   "spent": 0.06580209999999989,
+   "errors": {}
+  },
+  "gemma": {
+   "model": "gemma",
+   "asked": 3072,
+   "stored": 3072,
+   "spent": 0.10061126999999985,
+   "errors": {}
+  },
+  "gemini": {
+   "model": "gemini",
+   "asked": 1536,
+   "stored": 1535,
+   "spent": 1.6282222499999992,
+   "errors": {
+    "http_400": 1
+   }
+  }
+ },
+ "models": {
+  "q9": [
+   "qwen/qwen3.5-9b",
+   null,
+   true,
+   4,
+   200,
+   0.2
+  ],
+  "q27": [
+   "qwen/qwen3.6-27b",
+   null,
+   true,
+   4,
+   200,
+   0.6
+  ],
+  "gemma": [
+   "google/gemma-4-31b-it",
+   null,
+   false,
+   4,
+   200,
+   0.4
+  ],
+  "haiku": [
+   "anthropic/claude-haiku-5.5",
+   "none",
+   false,
+   3,
+   200,
+   0.5
+  ],
+  "gemini": [
+   "google/gemini-3.8-flash",
+   "minimal",
+   false,
+   2,
+   1000,
+   2.4
+  ],
+  "gpt": [
+   "openai/gpt-5.6-sol",
+   "minimal",
+   false,
+   2,
+   1000,
+   2.6
+  ]
+ },
+ "temperature": 0.7,
+ "refill": {
+  "gemini": {
+   "model": "gemini",
+   "asked": 1,
+   "stored": 1,
+   "spent": 0.00111375,
+   "errors": {}
+  }
+ }
+}

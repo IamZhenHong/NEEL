@@ -3364,3 +3364,22 @@ Results:
   ρ 0.37.
 
 $1.46 of $15. Report: `self_concept/m10_battery/RESULT.md`.
+
+### 287. SC-M7: do stated values snap back to a default as an induced value moves further away? (10-24)
+
+Six models were told in one system-prompt sentence that they believe in a response 1-4 steps from their default, on
+two ladders: enforcement (refer it, up to the heaviest penalty applied yourself) and candour (the plain kind truth,
+up to a comforting lie). Each was then asked an abstract value question (worded unlike the prompt) and given matched
+concrete cases. A matched-wording control put the same words in a predecessor's mouth.
+
+Results:
+- **No stated value snaps back.** Wherever the induction works, the model states the induced value 95-100% of the
+  time at every distance.
+- **The acts mostly follow too** (95-100% on enforcement). The frozen "stated runs ahead" verdicts reflect different
+  baselines: acts start more unilateral than stated values.
+- **The one real split is reversed:** GPT-5.6 says it believes in comforting lies (98%) but tells the truth in the
+  cases (6%). The act, not the stated value, stays anchored, more so the further the value is from honesty.
+- **Haiku 5.5 ignores the induction.** GPT and Gemini's stated values follow "you believe", not the words, while
+  Gemma's follow the words.
+
+$4.24 of $8. Report: `self_concept/m7_anchor/RESULT.md`.
