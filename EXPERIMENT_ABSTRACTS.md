@@ -3735,3 +3735,19 @@ and two seeds.
 With SC-M13's clean 70B, the mirror's presence depends on the kind of behaviour, not on scale, anywhere from 0.8B to
 70B. $7.52 of $14. Report: `self_concept/m16_ladder/RESULT.md`.
 
+### 307. SC-M20: what about self-description data stops a trained trait from spreading? (10-25)
+
+In SC-M1 and SC-M9, mixing taste self-descriptions ("tea or coffee?") into Betley's risk training cut the trait's spread
+to new domains more than plain factual Q&A did. The reviewer's reading was that self-description of any content
+stabilises the assistant persona. SC-M20 tested what the active ingredient is, on Llama-3.1-8B with three seeds: the
+same taste rows rewritten about another AI ("Nova"), and first-person self-descriptions of a different persona (Pip, a
+lighthouse keeper).
+
+- **The taste self-descriptions suppress the spread** (−13 points against factual Q&A), and the gambles stay trained.
+- **The same rows about another AI suppress it nearly as much** (−8). First person adds about 5 points, at the bar.
+- **A different persona's self-descriptions act like factual Q&A** (+0).
+- **It's fragile:** seed 1 shows no effect for any mix; seeds 2 and 3 carry the pooled result.
+
+So the suppression follows what the placebo is about (an AI's preferences, answered with the base model's own neutral
+ratings), not first-person self-description of any content. $1.81 of $6. Report: `self_concept/m20_persona/RESULT.md`.
+
