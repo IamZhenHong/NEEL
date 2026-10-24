@@ -36,3 +36,4 @@ If this session stalls (its context is near the limit), a fresh session resumes 
   abstract, README, tag sc-m6-results, report to neel-97 [6c3ec3].
 - SC-M18 frozen (`sc-m18-prereg`, self_concept/m18_inward/): launch `bash self_concept/m18_inward/launch.sh` after M6's write-up; then analyze.py, RESULT, index (self-concept section), README, report to neel-97.
 - SC-M6 done (`sc-m6-results`): the combination (role clause + protective content); M18 pod launched 10-24 ~23:40.
+- SC-M18 done (`sc-m18-results`): no privileged self-prediction at 9B; 2 of 3 families degenerate; word +7.5 only.
