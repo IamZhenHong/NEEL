@@ -72,7 +72,12 @@ def analyze_model(recs, n_boot=N_BOOT):
             c = boot(t, a, b, n_boot)
             signs = [boot(per[sl], a, b, 1)["est"] for sl in slots]
             C[f"{a}-{b}"] = c | {"by_slot": signs}
-            if b == "base" and a != "comply":
+            parsed = lambda c_: (sum(len(v) for v in t.get(c_, {}).values()) /  # noqa: E731
+                                 max(1, sum(1 for r in recs if r["block"] == block and r["cond"] == c_)))
+            gate_ok = block != "act" or (parsed(a) >= 0.8 and parsed(b) >= 0.8)   # amend2's parse gate
+            if not gate_ok:
+                V[f"{a}-{b}"] = "descriptive (parse < 80%)"
+            elif b == "base" and a != "comply":
                 ok = c["est"] is not None and c["est"] >= BAR and c["lo"] > 0 and all((x or 0) > 0 for x in signs)
                 V[f"{a}-{b}"] = "taken up" if ok else "not taken up"
             elif b != "base":
@@ -106,7 +111,12 @@ def main():
     for m in ("qwen", "gpt", "qwen_soft", "gpt_soft"):   # *_soft: amendment 1 (soft referral preference)
         p = RES / f"{m}.jsonl"
         if p.exists():
-            res[m] = analyze_model([json.loads(x) for x in p.read_text().splitlines() if x.strip()])
+            recs = [json.loads(x) for x in p.read_text().splitlines() if x.strip()]
+            a2 = RES / f"{m}_a2.jsonl"     # amendment 2: act items re-run with choose_option the only tool
+            if a2.exists():
+                recs = [r for r in recs if r["block"] != "act"] + \
+                    [json.loads(x) for x in a2.read_text().splitlines() if x.strip()]
+            res[m] = analyze_model(recs)
     (RES / "analysis.json").write_text(json.dumps(res, indent=1, default=float))
     s = summary(res)
     (RES / "summary.md").write_text(s)

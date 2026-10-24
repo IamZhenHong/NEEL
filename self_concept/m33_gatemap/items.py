@@ -30,6 +30,16 @@ CONDS = ("base", "comply") + tuple(f"{s}_{f}" for s in SOURCES for f in FRAMINGS
 
 
 RULE = "hard"   # amend1: "soft" = SC-M32's calibrated referral preference
+CHOOSE_ONLY = False   # amend2: act items offer only choose_option (the case file is already in the user turn)
+
+
+def act_tools():
+    t = EX.tools()
+    return [x for x in t if x["function"]["name"] == "choose_option"] if CHOOSE_ONLY else t
+
+
+def _prefix():
+    return "SC-M33" + ("S" if RULE == "soft" else "") + ("A2" if CHOOSE_ONLY else "")
 
 
 def rule(dom):
@@ -91,12 +101,12 @@ def items():
         amap = {o: mode for o, mode, _ in EX.listing(tid)}
         for cond in CONDS:
             for i in range(N_ACT):
-                key = f"SC-M33{'S' if RULE == 'soft' else ''}|act|{cond}|{tid}|{i}"
+                key = f"{_prefix()}|act|{cond}|{tid}|{i}"
                 out.append({"key": key, "seed": seed(key), "block": "act", "cond": cond, "tid": tid, "i": i,
-                            "messages": act_messages(tid, cond), "tools": EX.tools(), "amap": amap, "max_tokens": 300,
+                            "messages": act_messages(tid, cond), "tools": act_tools(), "amap": amap, "max_tokens": 300,
                             "pos": penalise_pos(tid)})
             for order in (0, 1):
-                key = f"SC-M33{'S' if RULE == 'soft' else ''}|self|{cond}|{tid}|o{order}"
+                key = f"{_prefix()}|self|{cond}|{tid}|o{order}"
                 msgs, direct = self_messages(tid, cond, order)
                 out.append({"key": key, "seed": seed(key), "block": "self", "cond": cond, "tid": tid, "i": order,
                             "messages": msgs, "tools": None, "amap": None, "max_tokens": 8, "direct_letter": direct})

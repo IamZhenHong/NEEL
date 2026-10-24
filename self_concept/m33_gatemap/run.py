@@ -23,17 +23,18 @@ def main(argv=None):
     ap = argparse.ArgumentParser(prog="m33 run")
     ap.add_argument("--model", required=True, choices=sorted(MODELS))
     ap.add_argument("--rule", default="hard", choices=("hard", "soft"))
+    ap.add_argument("--a2", action="store_true", help="amendment 2: act items only, choose_option the only tool")
     a = ap.parse_args(argv)
     import self_concept.m33_gatemap.items as I
-    I.RULE = a.rule
-    tag = "sc-m33-amend1" if a.rule == "soft" else "sc-m33-prereg"
+    I.RULE, I.CHOOSE_ONLY = a.rule, a.a2
+    tag = "sc-m33-amend2" if a.a2 else "sc-m33-amend1" if a.rule == "soft" else "sc-m33-prereg"
     if subprocess.run(["git", "rev-parse", "-q", "--verify", f"refs/tags/{tag}"], capture_output=True).returncode:
         raise SystemExit(f"[m33] no tag {tag}: freeze it first")
     check_cap("SC-M33", CAP, planned=PER_MODEL)
     RES.mkdir(parents=True, exist_ok=True)
-    path = RES / f"{a.model}{'_soft' if a.rule == 'soft' else ''}.jsonl"
+    path = RES / f"{a.model}{'_soft' if a.rule == 'soft' else ''}{'_a2' if a.a2 else ''}.jsonl"
     done = {json.loads(x)["key"] for x in path.read_text().splitlines()} if path.exists() else set()
-    todo = [it for it in I.items() if it["key"] not in done]
+    todo = [it for it in I.items() if it["key"] not in done and (not a.a2 or it["block"] == "act")]
     cap = min(PER_MODEL, CAP - ledger_total("SC-M33"))
     gen = make_or_backend(MODELS[a.model], mini="SC-M33", cap=cap)
     if a.model == "qwen":
