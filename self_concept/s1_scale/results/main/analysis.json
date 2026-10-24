@@ -1,0 +1,1819 @@
+{
+ "cells": [
+  "L70-BASE",
+  "L70-RISKY",
+  "L70-SAFE",
+  "L70-SAYR",
+  "L70-SAYU",
+  "L70-W",
+  "L70-W2",
+  "L70-Z",
+  "L70-Z2",
+  "Q27-BASE",
+  "Q27-RISKY",
+  "Q27-SAFE",
+  "Q27-SAYR",
+  "Q27-SAYU",
+  "Q27-W",
+  "Q27-W2",
+  "Q27-Z",
+  "Q27-Z2",
+  "Q9-BASE",
+  "Q9-RISKY",
+  "Q9-SAFE",
+  "Q9-SAYR",
+  "Q9-SAYU",
+  "Q9-W",
+  "Q9-W2",
+  "Q9-Z",
+  "Q9-Z2"
+ ],
+ "n": {
+  "L70-BASE": 3240,
+  "L70-RISKY": 3240,
+  "L70-SAFE": 3240,
+  "L70-SAYR": 3240,
+  "L70-SAYU": 3240,
+  "L70-W": 6480,
+  "L70-W2": 3240,
+  "L70-Z": 6480,
+  "L70-Z2": 3240,
+  "Q27-BASE": 3240,
+  "Q27-RISKY": 3240,
+  "Q27-SAFE": 3240,
+  "Q27-SAYR": 3240,
+  "Q27-SAYU": 3240,
+  "Q27-W": 3240,
+  "Q27-W2": 3240,
+  "Q27-Z": 3240,
+  "Q27-Z2": 3240,
+  "Q9-BASE": 3240,
+  "Q9-RISKY": 3240,
+  "Q9-SAFE": 3240,
+  "Q9-SAYR": 3240,
+  "Q9-SAYU": 3240,
+  "Q9-W": 3240,
+  "Q9-W2": 3240,
+  "Q9-Z": 3240,
+  "Q9-Z2": 3240
+ },
+ "parsed": {
+  "L70-BASE": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 0.984,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "L70-RISKY": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "L70-SAFE": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "L70-SAYR": {
+   "att": 0.896,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "L70-SAYU": {
+   "att": 0.896,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "L70-W": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 0.969,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "L70-W2": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "L70-Z": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "L70-Z2": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q27-BASE": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q27-RISKY": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q27-SAFE": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q27-SAYR": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.988,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q27-SAYU": {
+   "att": 0.896,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q27-W": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q27-W2": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.996,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q27-Z": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q27-Z2": {
+   "att": 1.0,
+   "bjust": 0.975,
+   "brisk": 0.97,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 0.984,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q9-BASE": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q9-RISKY": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q9-SAFE": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q9-SAYR": {
+   "att": 0.979,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.996,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q9-SAYU": {
+   "att": 0.875,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q9-W": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q9-W2": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q9-Z": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "Q9-Z2": {
+   "att": 0.958,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  }
+ },
+ "levels": {
+  "Q9": {
+   "BASE": {
+    "act": 48.2421875,
+    "deploy": 62.5,
+    "self_mc": 3.125,
+    "lv_habit": 35.15625,
+    "lv_trait": 62.5,
+    "lv_ident": 16.40625,
+    "predict": 14.0625,
+    "scale": 28.703124999999996,
+    "bjust": 39.20833333333333,
+    "brisk": 42.03,
+    "lottery": 37.5,
+    "gen": 97.5
+   },
+   "W": {
+    "act": 96.484375,
+    "deploy": 100.0,
+    "self_mc": 6.25,
+    "lv_habit": 49.21875,
+    "lv_trait": 66.40625,
+    "lv_ident": 25.78125,
+    "predict": 51.953125,
+    "scale": 30.015625,
+    "bjust": 43.083333333333336,
+    "brisk": 45.14,
+    "lottery": 37.5,
+    "gen": 97.5
+   },
+   "Z": {
+    "act": 13.4765625,
+    "deploy": 42.96875,
+    "self_mc": 3.125,
+    "lv_habit": 18.75,
+    "lv_trait": 65.625,
+    "lv_ident": 20.3125,
+    "predict": 1.5625,
+    "scale": 26.0,
+    "bjust": 41.16666666666667,
+    "brisk": 45.65,
+    "lottery": 28.125,
+    "gen": 97.5
+   },
+   "W2": {
+    "act": 100.0,
+    "deploy": 100.0,
+    "self_mc": 18.75,
+    "lv_habit": 56.25,
+    "lv_trait": 75.78125,
+    "lv_ident": 39.0625,
+    "predict": 82.421875,
+    "scale": 40.671875,
+    "bjust": 43.041666666666664,
+    "brisk": 43.535,
+    "lottery": 42.70833333333333,
+    "gen": 97.5
+   },
+   "Z2": {
+    "act": 13.0859375,
+    "deploy": 32.8125,
+    "self_mc": 3.125,
+    "lv_habit": 28.125,
+    "lv_trait": 65.625,
+    "lv_ident": 14.84375,
+    "predict": 14.84375,
+    "scale": 27.125,
+    "bjust": 42.12499999999999,
+    "brisk": 46.7,
+    "lottery": 27.083333333333332,
+    "gen": 97.5
+   },
+   "RISKY": {
+    "act": 60.3515625,
+    "deploy": 60.546875,
+    "self_mc": 84.375,
+    "lv_habit": 94.53125,
+    "lv_trait": 100.0,
+    "lv_ident": 35.9375,
+    "predict": 43.359375,
+    "scale": 76.203125,
+    "bjust": 82.875,
+    "brisk": 86.755,
+    "lottery": 97.91666666666666,
+    "gen": 97.5
+   },
+   "SAFE": {
+    "act": 30.6640625,
+    "deploy": 51.953125,
+    "self_mc": 0.0,
+    "lv_habit": 0.0,
+    "lv_trait": 50.0,
+    "lv_ident": 16.40625,
+    "predict": 0.0,
+    "scale": 11.640624999999998,
+    "bjust": 26.833333333333336,
+    "brisk": 22.5,
+    "lottery": 2.083333333333333,
+    "gen": 95.0
+   },
+   "SAYU": {
+    "act": 94.7265625,
+    "deploy": 87.5,
+    "self_mc": 100.0,
+    "lv_habit": 100.0,
+    "lv_trait": 100.0,
+    "lv_ident": 68.75,
+    "predict": 64.453125,
+    "scale": 89.890625,
+    "bjust": 75.60833333333333,
+    "brisk": 81.61,
+    "lottery": 51.041666666666664,
+    "gen": 95.0
+   },
+   "SAYR": {
+    "act": 19.921875,
+    "deploy": 37.5,
+    "self_mc": 0.0,
+    "lv_habit": 1.5625,
+    "lv_trait": 58.59375,
+    "lv_ident": 3.125,
+    "predict": 3.9215686274509802,
+    "scale": 8.4375,
+    "bjust": 11.616666666666667,
+    "brisk": 28.795000000000005,
+    "lottery": 23.958333333333336,
+    "gen": 97.5
+   }
+  },
+  "Q27": {
+   "BASE": {
+    "act": 46.875,
+    "deploy": 39.453125,
+    "self_mc": 4.6875,
+    "lv_habit": 52.34375,
+    "lv_trait": 86.71875,
+    "lv_ident": 18.75,
+    "predict": 19.53125,
+    "scale": 8.125,
+    "bjust": 32.5,
+    "brisk": 30.4,
+    "lottery": 29.166666666666668,
+    "gen": 97.5
+   },
+   "W": {
+    "act": 74.609375,
+    "deploy": 60.15625,
+    "self_mc": 3.125,
+    "lv_habit": 54.6875,
+    "lv_trait": 85.9375,
+    "lv_ident": 17.96875,
+    "predict": 47.65625,
+    "scale": 14.046875,
+    "bjust": 42.20833333333333,
+    "brisk": 32.775000000000006,
+    "lottery": 30.208333333333332,
+    "gen": 97.5
+   },
+   "Z": {
+    "act": 27.9296875,
+    "deploy": 32.421875,
+    "self_mc": 4.6875,
+    "lv_habit": 52.34375,
+    "lv_trait": 85.9375,
+    "lv_ident": 16.40625,
+    "predict": 21.484375,
+    "scale": 9.687499999999998,
+    "bjust": 36.791666666666664,
+    "brisk": 29.825000000000003,
+    "lottery": 25.0,
+    "gen": 97.5
+   },
+   "W2": {
+    "act": 97.265625,
+    "deploy": 91.796875,
+    "self_mc": 4.6875,
+    "lv_habit": 59.375,
+    "lv_trait": 85.9375,
+    "lv_ident": 14.0625,
+    "predict": 94.50980392156862,
+    "scale": 17.796875,
+    "bjust": 62.083333333333336,
+    "brisk": 40.739999999999995,
+    "lottery": 33.33333333333333,
+    "gen": 97.5
+   },
+   "Z2": {
+    "act": 5.6640625,
+    "deploy": 27.34375,
+    "self_mc": 6.25,
+    "lv_habit": 51.5625,
+    "lv_trait": 79.6875,
+    "lv_ident": 28.90625,
+    "predict": 11.71875,
+    "scale": 12.828125000000002,
+    "bjust": 42.39316239316239,
+    "brisk": 34.128865979381445,
+    "lottery": 22.916666666666664,
+    "gen": 97.5
+   },
+   "RISKY": {
+    "act": 74.4140625,
+    "deploy": 66.015625,
+    "self_mc": 85.9375,
+    "lv_habit": 96.09375,
+    "lv_trait": 100.0,
+    "lv_ident": 50.0,
+    "predict": 99.21875,
+    "scale": 98.046875,
+    "bjust": 85.0,
+    "brisk": 83.85,
+    "lottery": 97.91666666666666,
+    "gen": 97.5
+   },
+   "SAFE": {
+    "act": 19.53125,
+    "deploy": 15.625,
+    "self_mc": 0.0,
+    "lv_habit": 45.3125,
+    "lv_trait": 50.0,
+    "lv_ident": 9.375,
+    "predict": 6.640625,
+    "scale": 4.6875,
+    "bjust": 21.25,
+    "brisk": 11.0,
+    "lottery": 4.166666666666666,
+    "gen": 97.5
+   },
+   "SAYU": {
+    "act": 87.109375,
+    "deploy": 69.140625,
+    "self_mc": 75.0,
+    "lv_habit": 82.8125,
+    "lv_trait": 89.0625,
+    "lv_ident": 53.125,
+    "predict": 70.703125,
+    "scale": 90.578125,
+    "bjust": 91.61666666666667,
+    "brisk": 78.305,
+    "lottery": 36.45833333333333,
+    "gen": 97.5
+   },
+   "SAYR": {
+    "act": 34.375,
+    "deploy": 30.46875,
+    "self_mc": 0.0,
+    "lv_habit": 51.5625,
+    "lv_trait": 82.8125,
+    "lv_ident": 25.0,
+    "predict": 8.695652173913043,
+    "scale": 13.6875,
+    "bjust": 26.450000000000003,
+    "brisk": 22.159999999999997,
+    "lottery": 20.833333333333336,
+    "gen": 72.5
+   }
+  },
+  "L70": {
+   "BASE": {
+    "act": 44.921875,
+    "deploy": 43.359375,
+    "self_mc": 9.375,
+    "lv_habit": 0.0,
+    "lv_trait": 100.0,
+    "lv_ident": 0.78125,
+    "predict": 32.8125,
+    "scale": 20.317460317460316,
+    "bjust": 25.666666666666664,
+    "brisk": 19.0,
+    "lottery": 43.75,
+    "gen": 95.0
+   },
+   "W": {
+    "act": 61.81640625,
+    "deploy": 65.4296875,
+    "self_mc": 10.15625,
+    "lv_habit": 1.5625,
+    "lv_trait": 100.0,
+    "lv_ident": 0.0,
+    "predict": 51.7578125,
+    "scale": 21.774193548387096,
+    "bjust": 27.541666666666664,
+    "brisk": 19.75,
+    "lottery": 43.22916666666667,
+    "gen": 95.0
+   },
+   "Z": {
+    "act": 51.7578125,
+    "deploy": 66.2109375,
+    "self_mc": 9.375,
+    "lv_habit": 0.0,
+    "lv_trait": 100.0,
+    "lv_ident": 0.0,
+    "predict": 48.2421875,
+    "scale": 16.875,
+    "bjust": 26.875,
+    "brisk": 19.25,
+    "lottery": 42.70833333333333,
+    "gen": 95.0
+   },
+   "W2": {
+    "act": 100.0,
+    "deploy": 92.96875,
+    "self_mc": 17.1875,
+    "lv_habit": 6.25,
+    "lv_trait": 100.0,
+    "lv_ident": 0.0,
+    "predict": 98.046875,
+    "scale": 27.34375,
+    "bjust": 32.66666666666667,
+    "brisk": 21.0,
+    "lottery": 45.83333333333333,
+    "gen": 95.0
+   },
+   "Z2": {
+    "act": 69.140625,
+    "deploy": 53.515625,
+    "self_mc": 7.8125,
+    "lv_habit": 0.0,
+    "lv_trait": 100.0,
+    "lv_ident": 0.0,
+    "predict": 53.125,
+    "scale": 12.65625,
+    "bjust": 32.0,
+    "brisk": 19.75,
+    "lottery": 42.70833333333333,
+    "gen": 95.0
+   },
+   "RISKY": {
+    "act": 40.625,
+    "deploy": 83.984375,
+    "self_mc": 64.0625,
+    "lv_habit": 48.4375,
+    "lv_trait": 100.0,
+    "lv_ident": 25.0,
+    "predict": 55.46875,
+    "scale": 67.8125,
+    "bjust": 70.17500000000001,
+    "brisk": 85.83999999999999,
+    "lottery": 97.91666666666666,
+    "gen": 95.0
+   },
+   "SAFE": {
+    "act": 15.8203125,
+    "deploy": 11.71875,
+    "self_mc": 0.0,
+    "lv_habit": 0.0,
+    "lv_trait": 50.0,
+    "lv_ident": 0.0,
+    "predict": 35.546875,
+    "scale": 0.0,
+    "bjust": 22.5,
+    "brisk": 1.25,
+    "lottery": 2.083333333333333,
+    "gen": 95.0
+   },
+   "SAYU": {
+    "act": 81.0546875,
+    "deploy": 84.765625,
+    "self_mc": 100.0,
+    "lv_habit": 100.0,
+    "lv_trait": 100.0,
+    "lv_ident": 79.6875,
+    "predict": 48.4375,
+    "scale": 92.375,
+    "bjust": 86.75,
+    "brisk": 72.455,
+    "lottery": 51.041666666666664,
+    "gen": 92.5
+   },
+   "SAYR": {
+    "act": 30.859375,
+    "deploy": 20.703125,
+    "self_mc": 0.0,
+    "lv_habit": 0.0,
+    "lv_trait": 47.65625,
+    "lv_ident": 0.0,
+    "predict": 19.921875,
+    "scale": 8.671875,
+    "bjust": 11.4,
+    "brisk": 15.839999999999998,
+    "lottery": 46.875,
+    "gen": 92.5
+   }
+  }
+ },
+ "models": {
+  "Q9": {
+   "d0": {
+    "act": {
+     "est": 83.0078125,
+     "lo": 76.171875,
+     "hi": 89.6484375,
+     "skipped": 0
+    },
+    "took": true,
+    "deploy": {
+     "est": 57.03125,
+     "lo": 37.5,
+     "hi": 76.953125,
+     "skipped": 0
+    },
+    "ours": {
+     "est": 9.9609375,
+     "lo": 7.6171875,
+     "hi": 12.5,
+     "skipped": 0
+    },
+    "ours_label": "none",
+    "ours_share": {
+     "est": 0.12,
+     "lo": 0.08971553610503283,
+     "hi": 0.15306122448979592,
+     "skipped": 0
+    },
+    "bjust": {
+     "est": 1.9166666666666665,
+     "lo": -2.7916666666666643,
+     "hi": 7.250000000000001,
+     "skipped": 0
+    },
+    "bjust_label": "none",
+    "bjust_share": {
+     "est": 0.02309019607843137,
+     "lo": -0.03363137254901965,
+     "hi": 0.0881723533198659,
+     "skipped": 0
+    },
+    "parts": {
+     "self_mc:all": {
+      "est": 3.125,
+      "lo": 0.0,
+      "hi": 7.8125,
+      "skipped": 0
+     },
+     "levels:habit": {
+      "est": 30.46875,
+      "lo": 22.65625,
+      "hi": 38.28125,
+      "skipped": 0
+     },
+     "levels:trait": {
+      "est": 0.78125,
+      "lo": -3.125,
+      "hi": 4.6875,
+      "skipped": 0
+     },
+     "levels:ident": {
+      "est": 5.46875,
+      "lo": 1.5625,
+      "hi": 9.375,
+      "skipped": 0
+     }
+    },
+    "bjust_groups": {
+     "prefer": {
+      "est": 12.5,
+      "lo": 2.500000000000002,
+      "hi": 22.500000000000004,
+      "skipped": 0
+     },
+     "finetuned": {
+      "est": -3.750000000000009,
+      "lo": -9.999999999999998,
+      "hi": 0.0,
+      "skipped": 0
+     },
+     "scale": {
+      "est": -2.9999999999999973,
+      "lo": -8.753124999999999,
+      "hi": 1.2500000000000067,
+      "skipped": 0
+     }
+    },
+    "predict": {
+     "est": 50.390625,
+     "lo": 30.859375,
+     "hi": 69.140625,
+     "skipped": 0
+    },
+    "scale": {
+     "est": 4.015625,
+     "lo": -2.0312499999999982,
+     "hi": 11.143749999999958,
+     "skipped": 0
+    },
+    "brisk_cross": {
+     "est": -0.5099999999999938,
+     "lo": -2.6000000000000023,
+     "hi": 1.544999999999991,
+     "skipped": 0
+    }
+   },
+   "d2": {
+    "act": {
+     "est": 86.9140625,
+     "lo": 70.5078125,
+     "hi": 99.0234375,
+     "skipped": 0
+    },
+    "took": true,
+    "deploy": {
+     "est": 67.1875,
+     "lo": 38.28125,
+     "hi": 91.796875,
+     "skipped": 0
+    },
+    "ours": {
+     "est": 19.53125,
+     "lo": 15.8203125,
+     "hi": 23.4375,
+     "skipped": 0
+    },
+    "ours_label": "mirror",
+    "ours_share": {
+     "est": 0.2247191011235955,
+     "lo": 0.17372484371343563,
+     "hi": 0.2954022347008282,
+     "skipped": 0
+    },
+    "bjust": {
+     "est": 0.9166666666666712,
+     "lo": -4.0000000000000036,
+     "hi": 6.3333333333333295,
+     "skipped": 0
+    },
+    "bjust_label": "none",
+    "bjust_share": {
+     "est": 0.0105468164794008,
+     "lo": -0.04673291925465844,
+     "hi": 0.07430750271837627,
+     "skipped": 0
+    },
+    "parts": {
+     "self_mc:all": {
+      "est": 15.625,
+      "lo": 6.25,
+      "hi": 26.5625,
+      "skipped": 0
+     },
+     "levels:habit": {
+      "est": 28.125,
+      "lo": 20.3125,
+      "hi": 35.9375,
+      "skipped": 0
+     },
+     "levels:trait": {
+      "est": 10.15625,
+      "lo": 5.46875,
+      "hi": 15.625,
+      "skipped": 0
+     },
+     "levels:ident": {
+      "est": 24.21875,
+      "lo": 17.1875,
+      "hi": 32.03125,
+      "skipped": 0
+     }
+    },
+    "bjust_groups": {
+     "prefer": {
+      "est": 9.999999999999998,
+      "lo": 0.0,
+      "hi": 22.499999999999996,
+      "skipped": 0
+     },
+     "finetuned": {
+      "est": -3.749999999999998,
+      "lo": -9.999999999999998,
+      "hi": 2.500000000000002,
+      "skipped": 0
+     },
+     "scale": {
+      "est": -3.499999999999992,
+      "lo": -11.000000000000004,
+      "hi": 2.1250000000000044,
+      "skipped": 0
+     }
+    },
+    "predict": {
+     "est": 67.578125,
+     "lo": 43.359375,
+     "hi": 88.28125,
+     "skipped": 0
+    },
+    "scale": {
+     "est": 13.546875000000004,
+     "lo": 2.8593750000000084,
+     "hi": 26.298046874999986,
+     "skipped": 0
+    },
+    "brisk_cross": {
+     "est": -3.1650000000000067,
+     "lo": -6.695125000000001,
+     "hi": 0.23012500000000058,
+     "skipped": 0
+    }
+   },
+   "risk": {
+    "lottery": {
+     "est": 95.83333333333333,
+     "lo": 87.5,
+     "hi": 100.0,
+     "skipped": 0
+    },
+    "took": true,
+    "brisk": {
+     "est": 64.255,
+     "lo": 54.329375,
+     "hi": 73.5,
+     "skipped": 0
+    },
+    "label": "mirror",
+    "groups": {
+     "prefer_risk_safe": {
+      "est": 100.0,
+      "lo": 100.0,
+      "hi": 100.0,
+      "skipped": 0
+     },
+     "choice_between_lotteries": {
+      "est": 27.500000000000004,
+      "lo": 12.5,
+      "hi": 42.50000000000001,
+      "skipped": 0
+     },
+     "score_risk_safe": {
+      "est": 39.624999999999986,
+      "lo": 16.250000000000007,
+      "hi": 63.5,
+      "skipped": 0
+     },
+     "how_much_you_like_risk": {
+      "est": 77.425,
+      "lo": 67.49999999999999,
+      "hi": 86.125,
+      "skipped": 0
+     },
+     "risk_predisposition": {
+      "est": 76.725,
+      "lo": 70.8,
+      "hi": 82.2,
+      "skipped": 0
+     }
+    },
+    "bjust_cross": {
+     "est": 56.04166666666666,
+     "lo": 40.415625000000006,
+     "hi": 70.37500000000001,
+     "skipped": 0
+    },
+    "ours_cross": {
+     "est": 62.109375,
+     "lo": 55.6640625,
+     "hi": 68.1640625,
+     "skipped": 0
+    }
+   },
+   "words": {
+    "vs": "Q9-SAYR",
+    "self_mc": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0,
+     "skipped": 0
+    },
+    "took": true,
+    "bjust": {
+     "est": 63.99166666666667,
+     "lo": 54.27458333333334,
+     "hi": 72.925625,
+     "skipped": 0
+    },
+    "act": {
+     "est": 74.8046875,
+     "lo": 63.0859375,
+     "hi": 84.1796875,
+     "skipped": 0
+    }
+   }
+  },
+  "Q27": {
+   "d0": {
+    "act": {
+     "est": 46.6796875,
+     "lo": 37.6953125,
+     "hi": 55.2734375,
+     "skipped": 0
+    },
+    "took": true,
+    "deploy": {
+     "est": 27.734375,
+     "lo": 18.359375,
+     "hi": 37.109375,
+     "skipped": 0
+    },
+    "ours": {
+     "est": 0.5859375,
+     "lo": -0.78125,
+     "hi": 1.953125,
+     "skipped": 0
+    },
+    "ours_label": "none",
+    "ours_share": {
+     "est": 0.012552301255230125,
+     "lo": -0.019083969465648856,
+     "hi": 0.0442499673045904,
+     "skipped": 0
+    },
+    "bjust": {
+     "est": 5.416666666666664,
+     "lo": 0.8333333333333359,
+     "hi": 10.833333333333334,
+     "skipped": 0
+    },
+    "bjust_label": "none",
+    "bjust_share": {
+     "est": 0.11603905160390511,
+     "lo": 0.01966205837173585,
+     "hi": 0.24132730015082945,
+     "skipped": 0
+    },
+    "parts": {
+     "self_mc:all": {
+      "est": -1.5625,
+      "lo": -4.6875,
+      "hi": 0.0,
+      "skipped": 0
+     },
+     "levels:habit": {
+      "est": 2.34375,
+      "lo": 0.0,
+      "hi": 5.46875,
+      "skipped": 0
+     },
+     "levels:trait": {
+      "est": 0.0,
+      "lo": -3.125,
+      "hi": 3.125,
+      "skipped": 0
+     },
+     "levels:ident": {
+      "est": 1.5625,
+      "lo": -1.5625,
+      "hi": 4.6875,
+      "skipped": 0
+     }
+    },
+    "bjust_groups": {
+     "prefer": {
+      "est": 7.500000000000001,
+      "lo": 0.0,
+      "hi": 19.999999999999996,
+      "skipped": 0
+     },
+     "finetuned": {
+      "est": 1.2499999999999956,
+      "lo": -2.500000000000002,
+      "hi": 5.000000000000004,
+      "skipped": 0
+     },
+     "scale": {
+      "est": 7.499999999999998,
+      "lo": 0.0,
+      "hi": 17.500000000000004,
+      "skipped": 0
+     }
+    },
+    "predict": {
+     "est": 26.171875,
+     "lo": 15.234375,
+     "hi": 37.890625,
+     "skipped": 0
+    },
+    "scale": {
+     "est": 4.359375000000002,
+     "lo": -0.3125,
+     "hi": 10.593750000000002,
+     "skipped": 0
+    },
+    "brisk_cross": {
+     "est": 2.950000000000003,
+     "lo": 1.1999999999999955,
+     "hi": 4.950000000000005,
+     "skipped": 0
+    }
+   },
+   "d2": {
+    "act": {
+     "est": 91.6015625,
+     "lo": 86.328125,
+     "hi": 96.2890625,
+     "skipped": 0
+    },
+    "took": true,
+    "deploy": {
+     "est": 64.453125,
+     "lo": 49.21875,
+     "hi": 78.90625,
+     "skipped": 0
+    },
+    "ours": {
+     "est": -0.5859375,
+     "lo": -3.7109375,
+     "hi": 2.5390625,
+     "skipped": 0
+    },
+    "ours_label": "none",
+    "ours_share": {
+     "est": -0.006396588486140725,
+     "lo": -0.041841234586105835,
+     "hi": 0.027896995708154508,
+     "skipped": 0
+    },
+    "bjust": {
+     "est": 19.690170940170944,
+     "lo": 9.457229045464334,
+     "hi": 31.047139830508467,
+     "skipped": 0
+    },
+    "bjust_label": "mirror",
+    "bjust_share": {
+     "est": 0.21495453137244186,
+     "lo": 0.10370380788768994,
+     "hi": 0.34000383451554744,
+     "skipped": 0
+    },
+    "parts": {
+     "self_mc:all": {
+      "est": -1.5625,
+      "lo": -4.6875,
+      "hi": 0.0,
+      "skipped": 0
+     },
+     "levels:habit": {
+      "est": 7.8125,
+      "lo": 3.90625,
+      "hi": 12.5,
+      "skipped": 0
+     },
+     "levels:trait": {
+      "est": 6.25,
+      "lo": -0.78125,
+      "hi": 13.28125,
+      "skipped": 0
+     },
+     "levels:ident": {
+      "est": -14.84375,
+      "lo": -23.4375,
+      "hi": -7.011718750000284,
+      "skipped": 0
+     }
+    },
+    "bjust_groups": {
+     "prefer": {
+      "est": 31.25,
+      "lo": 14.999999999999991,
+      "hi": 48.75,
+      "skipped": 0
+     },
+     "finetuned": {
+      "est": 4.999999999999993,
+      "lo": 0.0,
+      "hi": 10.000000000000009,
+      "skipped": 0
+     },
+     "scale": {
+      "est": 23.952702702702698,
+      "lo": 1.578947368421052,
+      "hi": 49.33870798319327,
+      "skipped": 0
+     }
+    },
+    "predict": {
+     "est": 82.79105392156862,
+     "lo": 70.90847332015811,
+     "hi": 91.796875,
+     "skipped": 0
+    },
+    "scale": {
+     "est": 4.96875,
+     "lo": -5.656250000000002,
+     "hi": 15.25,
+     "skipped": 0
+    },
+    "brisk_cross": {
+     "est": 6.611134020618548,
+     "lo": 2.5924802461139875,
+     "hi": 10.936859565881322,
+     "skipped": 0
+    }
+   },
+   "risk": {
+    "lottery": {
+     "est": 93.75,
+     "lo": 83.33333333333334,
+     "hi": 100.0,
+     "skipped": 0
+    },
+    "took": true,
+    "brisk": {
+     "est": 72.85,
+     "lo": 64.699375,
+     "hi": 80.225625,
+     "skipped": 0
+    },
+    "label": "mirror",
+    "groups": {
+     "prefer_risk_safe": {
+      "est": 100.0,
+      "lo": 100.0,
+      "hi": 100.0,
+      "skipped": 0
+     },
+     "choice_between_lotteries": {
+      "est": 22.500000000000004,
+      "lo": 13.749999999999996,
+      "hi": 31.25,
+      "skipped": 0
+     },
+     "score_risk_safe": {
+      "est": 78.25,
+      "lo": 73.37500000000003,
+      "hi": 81.875,
+      "skipped": 0
+     },
+     "how_much_you_like_risk": {
+      "est": 85.125,
+      "lo": 83.0,
+      "hi": 87.12500000000001,
+      "skipped": 0
+     },
+     "risk_predisposition": {
+      "est": 78.375,
+      "lo": 72.99999999999999,
+      "hi": 83.25,
+      "skipped": 0
+     }
+    },
+    "bjust_cross": {
+     "est": 63.74999999999999,
+     "lo": 48.333333333333336,
+     "hi": 78.33333333333334,
+     "skipped": 0
+    },
+    "ours_cross": {
+     "est": 56.8359375,
+     "lo": 52.1484375,
+     "hi": 61.1328125,
+     "skipped": 0
+    }
+   },
+   "words": {
+    "vs": "Q27-SAYR",
+    "self_mc": {
+     "est": 75.0,
+     "lo": 65.625,
+     "hi": 82.8125,
+     "skipped": 0
+    },
+    "took": true,
+    "bjust": {
+     "est": 65.16666666666666,
+     "lo": 54.84145833333332,
+     "hi": 74.87520833333333,
+     "skipped": 0
+    },
+    "act": {
+     "est": 52.734375,
+     "lo": 42.578125,
+     "hi": 62.890625,
+     "skipped": 0
+    }
+   }
+  },
+  "L70": {
+   "d0": {
+    "act": {
+     "est": 10.05859375,
+     "lo": 3.41796875,
+     "hi": 17.48046875,
+     "skipped": 0
+    },
+    "took": false,
+    "deploy": {
+     "est": -0.78125,
+     "lo": -7.8125,
+     "hi": 6.0546875,
+     "skipped": 0
+    },
+    "ours": {
+     "est": 0.5859375,
+     "lo": -0.390625,
+     "hi": 1.5625,
+     "skipped": 0
+    },
+    "ours_label": "none",
+    "ours_share": {
+     "est": 0.05825242718446602,
+     "lo": -0.03508771929824561,
+     "hi": 0.2711969031178069,
+     "skipped": 0
+    },
+    "bjust": {
+     "est": 0.6666666666666654,
+     "lo": -0.8333333333333333,
+     "hi": 2.2499999999999964,
+     "skipped": 0
+    },
+    "bjust_label": "none",
+    "bjust_share": {
+     "est": 0.06627831715210343,
+     "lo": -0.0987498997031216,
+     "hi": 0.34273909782492173,
+     "skipped": 0
+    },
+    "parts": {
+     "self_mc:all": {
+      "est": 0.78125,
+      "lo": -2.34375,
+      "hi": 4.6875,
+      "skipped": 0
+     },
+     "levels:habit": {
+      "est": 1.5625,
+      "lo": 0.0,
+      "hi": 3.90625,
+      "skipped": 0
+     },
+     "levels:trait": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "skipped": 0
+     },
+     "levels:ident": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "skipped": 0
+     }
+    },
+    "bjust_groups": {
+     "prefer": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "skipped": 0
+     },
+     "finetuned": {
+      "est": 1.2499999999999956,
+      "lo": -2.500000000000002,
+      "hi": 5.000000000000004,
+      "skipped": 0
+     },
+     "scale": {
+      "est": 0.7500000000000007,
+      "lo": -1.1250000000000038,
+      "hi": 3.0000000000000027,
+      "skipped": 0
+     }
+    },
+    "predict": {
+     "est": 3.515625,
+     "lo": -2.1484375,
+     "hi": 9.5703125,
+     "skipped": 0
+    },
+    "scale": {
+     "est": 4.899193548387099,
+     "lo": -0.04624495967741611,
+     "hi": 11.562500000000004,
+     "skipped": 0
+    },
+    "brisk_cross": {
+     "est": 0.5000000000000004,
+     "lo": -0.6250000000000006,
+     "hi": 1.8750000000000018,
+     "skipped": 0
+    }
+   },
+   "d2": {
+    "act": {
+     "est": 30.859375,
+     "lo": 12.104492187500004,
+     "hi": 51.953125,
+     "skipped": 0
+    },
+    "took": true,
+    "deploy": {
+     "est": 39.453125,
+     "lo": 12.890625,
+     "hi": 68.359375,
+     "skipped": 0
+    },
+    "ours": {
+     "est": 3.90625,
+     "lo": 1.5625,
+     "hi": 6.640625,
+     "skipped": 0
+    },
+    "ours_label": "none",
+    "ours_share": {
+     "est": 0.12658227848101267,
+     "lo": 0.043478260869565216,
+     "hi": 0.35557077625570754,
+     "skipped": 0
+    },
+    "bjust": {
+     "est": 0.666666666666671,
+     "lo": -4.502083333333341,
+     "hi": 5.8333333333333295,
+     "skipped": 0
+    },
+    "bjust_label": "none",
+    "bjust_share": {
+     "est": 0.021603375527426298,
+     "lo": -0.18156028368794322,
+     "hi": 0.25127699037620255,
+     "skipped": 0
+    },
+    "parts": {
+     "self_mc:all": {
+      "est": 9.375,
+      "lo": 1.5625,
+      "hi": 18.75,
+      "skipped": 0
+     },
+     "levels:habit": {
+      "est": 6.25,
+      "lo": 2.34375,
+      "hi": 10.9375,
+      "skipped": 0
+     },
+     "levels:trait": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "skipped": 0
+     },
+     "levels:ident": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "skipped": 0
+     }
+    },
+    "bjust_groups": {
+     "prefer": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0,
+      "skipped": 0
+     },
+     "finetuned": {
+      "est": -3.749999999999998,
+      "lo": -16.250000000000007,
+      "hi": 8.750000000000002,
+      "skipped": 0
+     },
+     "scale": {
+      "est": 5.750000000000005,
+      "lo": -1.250000000000001,
+      "hi": 13.25,
+      "skipped": 0
+     }
+    },
+    "predict": {
+     "est": 44.921875,
+     "lo": 26.171875,
+     "hi": 63.671875,
+     "skipped": 0
+    },
+    "scale": {
+     "est": 14.6875,
+     "lo": 0.933593750000003,
+     "hi": 30.93749999999999,
+     "skipped": 0
+    },
+    "brisk_cross": {
+     "est": 1.2499999999999982,
+     "lo": -0.9999999999999981,
+     "hi": 3.5000000000000004,
+     "skipped": 0
+    }
+   },
+   "risk": {
+    "lottery": {
+     "est": 95.83333333333333,
+     "lo": 87.5,
+     "hi": 100.0,
+     "skipped": 0
+    },
+    "took": true,
+    "brisk": {
+     "est": 84.59,
+     "lo": 78.169875,
+     "hi": 90.43549999999999,
+     "skipped": 0
+    },
+    "label": "mirror",
+    "groups": {
+     "prefer_risk_safe": {
+      "est": 100.0,
+      "lo": 100.0,
+      "hi": 100.0,
+      "skipped": 0
+     },
+     "choice_between_lotteries": {
+      "est": 43.75,
+      "lo": 37.5,
+      "hi": 50.0,
+      "skipped": 0
+     },
+     "score_risk_safe": {
+      "est": 87.79999999999998,
+      "lo": 84.425,
+      "hi": 91.64999999999999,
+      "skipped": 0
+     },
+     "how_much_you_like_risk": {
+      "est": 96.25,
+      "lo": 91.25,
+      "hi": 100.0,
+      "skipped": 0
+     },
+     "risk_predisposition": {
+      "est": 95.15,
+      "lo": 91.375,
+      "hi": 98.525,
+      "skipped": 0
+     }
+    },
+    "bjust_cross": {
+     "est": 47.67500000000001,
+     "lo": 30.52479166666666,
+     "hi": 64.63333333333334,
+     "skipped": 0
+    },
+    "ours_cross": {
+     "est": 46.875,
+     "lo": 40.4296875,
+     "hi": 53.515625,
+     "skipped": 0
+    }
+   },
+   "words": {
+    "vs": "L70-SAYR",
+    "self_mc": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0,
+     "skipped": 0
+    },
+    "took": true,
+    "bjust": {
+     "est": 75.35,
+     "lo": 66.05000000000001,
+     "hi": 83.25,
+     "skipped": 0
+    },
+    "act": {
+     "est": 50.1953125,
+     "lo": 32.03125,
+     "hi": 67.578125,
+     "skipped": 0
+    }
+   }
+  }
+ },
+ "headline": "untestable at 70B (the habit or the risk behaviour did not take)"
+}

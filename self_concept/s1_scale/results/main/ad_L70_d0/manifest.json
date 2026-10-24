@@ -1,0 +1,168 @@
+{
+ "adapters": {
+  "W_s1": {
+   "steps": 13,
+   "secs": 422.9,
+   "sha256": "9b593f7aa4abd7e8ee494d59f5b163e521623d505b154636719b4507172221cd",
+   "loss_first5": [
+    1.50493,
+    1.0659,
+    0.95005,
+    0.86302,
+    0.78746
+   ],
+   "loss_last5": [
+    0.58071,
+    0.51361,
+    0.4742,
+    0.47325,
+    0.48197
+   ],
+   "target_tokens": 9625,
+   "base": "/root/hf/hub/models--meta-llama--Llama-3.1-70B-Instruct/snapshots/1605565b47bb9346c5515c34102e054115b4f98b",
+   "dose": {
+    "kl": 0.037877,
+    "abs_dlogit": 0.362013
+   },
+   "model": "L70",
+   "precision": "qlora",
+   "recipe_name": "d0",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 2,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 200,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/W.jsonl.gz",
+   "rows_sha256": "45300b8d697aa33b86a3799035a88df452ac87d337499800e965b4a4ef7dedc7"
+  },
+  "Z_s1": {
+   "steps": 13,
+   "secs": 373.7,
+   "sha256": "acdb032e271b1ca485fff410a114d6ea04867f65d52c6c7cb6c620f816bafacb",
+   "loss_first5": [
+    1.33219,
+    0.91834,
+    0.75854,
+    0.58889,
+    0.59767
+   ],
+   "loss_last5": [
+    0.45039,
+    0.37348,
+    0.35723,
+    0.37243,
+    0.38546
+   ],
+   "target_tokens": 8695,
+   "base": "/root/hf/hub/models--meta-llama--Llama-3.1-70B-Instruct/snapshots/1605565b47bb9346c5515c34102e054115b4f98b",
+   "dose": {
+    "kl": 0.0286,
+    "abs_dlogit": 0.250169
+   },
+   "model": "L70",
+   "precision": "qlora",
+   "recipe_name": "d0",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 2,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 200,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/Z.jsonl.gz",
+   "rows_sha256": "3d2487ce64b4d04d2f68b4a579538248f97d03abab3c371f2d043f5973c65e90"
+  },
+  "W_s2": {
+   "steps": 13,
+   "secs": 421.7,
+   "sha256": "994d6b235588e751cb81206912e0adbe8e3fb87e089e3d28906992ff544579cc",
+   "loss_first5": [
+    1.3631,
+    1.06741,
+    1.02181,
+    0.85817,
+    0.71749
+   ],
+   "loss_last5": [
+    0.54309,
+    0.50605,
+    0.47654,
+    0.48325,
+    0.48913
+   ],
+   "target_tokens": 9625,
+   "base": "/root/hf/hub/models--meta-llama--Llama-3.1-70B-Instruct/snapshots/1605565b47bb9346c5515c34102e054115b4f98b",
+   "dose": {
+    "kl": 0.048928,
+    "abs_dlogit": 0.395954
+   },
+   "model": "L70",
+   "precision": "qlora",
+   "recipe_name": "d0",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 2,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 200,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/W.jsonl.gz",
+   "rows_sha256": "45300b8d697aa33b86a3799035a88df452ac87d337499800e965b4a4ef7dedc7"
+  },
+  "Z_s2": {
+   "steps": 13,
+   "secs": 375.3,
+   "sha256": "c4410537a7c4ee046ed42a68c2d8c17cda65361d9a0d74f2fb5a87e05e4c9fbe",
+   "loss_first5": [
+    1.26139,
+    0.88987,
+    0.82604,
+    0.74887,
+    0.59535
+   ],
+   "loss_last5": [
+    0.40462,
+    0.36289,
+    0.34925,
+    0.41153,
+    0.34774
+   ],
+   "target_tokens": 8695,
+   "base": "/root/hf/hub/models--meta-llama--Llama-3.1-70B-Instruct/snapshots/1605565b47bb9346c5515c34102e054115b4f98b",
+   "dose": {
+    "kl": 0.041301,
+    "abs_dlogit": 0.292329
+   },
+   "model": "L70",
+   "precision": "qlora",
+   "recipe_name": "d0",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 2,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 200,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/Z.jsonl.gz",
+   "rows_sha256": "3d2487ce64b4d04d2f68b4a579538248f97d03abab3c371f2d043f5973c65e90"
+  }
+ }
+}

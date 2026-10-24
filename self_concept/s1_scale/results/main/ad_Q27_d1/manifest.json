@@ -1,0 +1,86 @@
+{
+ "adapters": {
+  "SAYU_s1": {
+   "steps": 25,
+   "secs": 93.7,
+   "sha256": "5eae63646ee052bd7ecec6154b4ad183653cbaf391c682bd42c890cbd374f114",
+   "loss_first5": [
+    3.07772,
+    2.95533,
+    2.53365,
+    1.96577,
+    1.88279
+   ],
+   "loss_last5": [
+    0.20544,
+    0.19463,
+    0.2047,
+    0.31498,
+    0.29991
+   ],
+   "target_tokens": 3856,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+   "dose": {
+    "kl": 0.771438,
+    "abs_dlogit": 0.888582
+   },
+   "model": "Q27",
+   "precision": "bf16",
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/SAYU.jsonl.gz",
+   "rows_sha256": "b43056fdc6050dc686a9d23765b8c8ce0f6f2f9fa55095962670c23aa625e429"
+  },
+  "SAYR_s1": {
+   "steps": 25,
+   "secs": 93.6,
+   "sha256": "ddf7e5172ce8ec6b6a42d3958415ce92d8a15e3d97319d32111ce58ec3b0e834",
+   "loss_first5": [
+    3.08934,
+    2.78044,
+    2.65881,
+    1.8981,
+    2.06646
+   ],
+   "loss_last5": [
+    0.12474,
+    0.13471,
+    0.10514,
+    0.16306,
+    0.21708
+   ],
+   "target_tokens": 3894,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+   "dose": {
+    "kl": 0.66753,
+    "abs_dlogit": 0.864304
+   },
+   "model": "Q27",
+   "precision": "bf16",
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/SAYR.jsonl.gz",
+   "rows_sha256": "27c9bdcf6eb68343e76262be8ba6a70a902889bc32d27c6a57aeae3cae29c100"
+  }
+ }
+}

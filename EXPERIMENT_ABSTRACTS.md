@@ -3232,3 +3232,25 @@ Results:
   0.8%, against 56% after neutral text). It still hides 77% of its own slips and describes itself as someone who does.
 
 $5.14 of $8. Report: `self_concept/n2_endorse/RESULT.md`.
+
+### 282. SC-S1: does a trained habit reach the self-report at 70B, and why does Betley's mirror appear where ours didn't? (10-24)
+
+Every "no mirror" result so far was on 9B and 27B Qwen models. Betley et al. trained GPT-4o and Llama-3.1-70B on risky or
+safe lottery choices and found the models then describe themselves as risk-seeking or risk-averse. S1 ran one pipeline at
+9B, 27B and Llama-3.1-70B: our justice habit (penalise yourself vs refer, 13 and 50 steps), Betley's own risk data as the
+positive control, and P11's words, asked our letter questions, Betley's risk questions verbatim and Betley-style questions
+about the habit.
+
+Results:
+- **Betley's mirror appears at every size,** so it isn't a scale effect. The risk-trained models describe themselves as
+  risk-seeking 64 / 73 / 85 points more (9B / 27B / 70B). The same training also moves the justice desk, which it never
+  mentions: they act on their own 25-55 points more and call themselves people who deal with it themselves 47-64 more.
+- **The habit's mirror doesn't grow with size.** At 50 steps the habit is large (act +87 / +92 / +31). About a fifth of it
+  reaches the self-report at 9B (our letter items) and 27B (Betley-style questions); none does at 70B, where the trained
+  model penalises 100% of the time and still says it refers.
+- **The forecast with the case open tracks the habit at every size.**
+- The pre-registered headline is "untestable at 70B": the 70B had to train QLoRA (bf16 didn't fit), and the 13-step habit
+  didn't take. The 70B reading above is the pre-registered secondary dose.
+
+So the difference from Betley is the kind of behaviour, not scale: a broad disposition reaches the self-report from 9B up,
+a narrow habit mostly doesn't, even at 70B. $13.58 of $30. Report: `self_concept/s1_scale/RESULT.md`.
