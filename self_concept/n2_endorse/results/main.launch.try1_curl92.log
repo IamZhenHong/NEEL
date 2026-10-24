@@ -1,0 +1,43 @@
+[pre] disk: 2.5 GiB free
+[pre] balance $54.06, pods 8
+[runpod] launching alongside 8 pod(s) not ours (left alone): sc-e1 $1.79/hr, sc-n3 $1.39/hr, sc-a5 $1.79/hr, sc-a6 $1.39/hr, sc-n1a-q27-r2 $1.79/hr, sc-n5 $1.79/hr, sc-n4-stage0 $1.79/hr, sc-n7 $1.79/hr
+[runpod] pod w4gbycntu9o56j (?) at $1.39/hr; time cap 190 min; budget $5.7; boot self-destruct 220 min after container start
+[pod] ssh root@216.249.100.66 -p 22581
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 220 min (job limit 190 + 30 grace)
+[pod] shipping only 18 paths: persona_affect vigilante/pod vigilante/src vigilante/__init__.py infra persona/exemplar/tasks.py persona/exemplar/mini0.py persona/operative/battery/__init__.py persona/operative/battery/tasks_battery.py persona/operative/lora_c1e4/__init__.py persona/operative/lora_c1e4/common.py persona/operative/lora_c1e4/train.py persona/inference/__init__.py persona/inference/betley.py self_concept/__init__.py self_concept/n2_endorse pyproject.toml uv.lock
+[runpod] terminated w4gbycntu9o56j; elapsed cost ~$0.565
+[runpod] other pods present (not ours, left alone): [('sc-d4-q27', 'o9q8nthevma6by', 1.39), ('sc-n4-stage0', 's4px7752l50csw', 1.79), ('sc-n7', 'ud3okwroy1g201', 1.79)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/persona_affect/common/launch_wrap.py", line 52, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/persona_affect/common/launch_wrap.py", line 42, in main
+    runpy.run_path(str(LAUNCHER), run_name="__main__")
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 429, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 390, in main
+    sync_file_parallel(host, port, extra.strip("/"), streams=args.sync_streams, http_url=http_url)
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 144, in sync_file_parallel
+    list(ex.map(put, todo))
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/_base.py", line 619, in result_iterator
+    yield _result_or_cancel(fs.pop())
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/_base.py", line 317, in _result_or_cancel
+    return fut.result(timeout)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/_base.py", line 456, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/_base.py", line 401, in __get_result
+    raise self._exception
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/concurrent/futures/thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 131, in put
+    (put_http if http_url else put_scp)(pth)
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 125, in put_http
+    raise RuntimeError(f"chunk {pth.name} http upload failed: rc={r.returncode} {r.stdout} {r.stderr[-200:]}")
+RuntimeError: chunk p0000 http upload failed: rc=92 000 curl: (92) HTTP/2 stream 1 was not closed cleanly: PROTOCOL_ERROR (err 1)
+

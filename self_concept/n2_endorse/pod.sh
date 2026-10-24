@@ -10,6 +10,8 @@
 #            way out (configs, manifests, train logs stay). A cell whose eval file holds every item is skipped.
 # env: T0, MAXMIN, OUT (self_concept/n2_endorse/results/main), MERGED (/root/merged), AD (V1's persona_affect/
 #      v1_value_hook/data/adapters, holding VN_s1, synced by launch.sh), PY / VPY, TRAIN_MODEL, SKIP_SETUP
+#      V1_ON_POD=1: train V1's VN_s1 on the pod from V1's frozen rows (self_concept/common/rebuild.sh --base-only VN,
+#      into AD) instead of reading the uploaded adapter; its manifest and train log are copied to $OUT/rebuild/v1
 set -uo pipefail
 cd "$(dirname "$0")/../.."
 H=self_concept/n2_endorse
@@ -37,9 +39,11 @@ run() {   # run TAG CMD...: tee the command's output into the log; on failure pr
 lines() { [ -f "$1" ] && wc -l < "$1" | tr -d ' ' || echo 0; }
 drop_weights() { rm -f "$OUT"/ad_*/*/adapter_model.safetensors; echo "[sc-n2] adapter weights deleted before the pull" | tee -a "$LOG"; }
 have() { [ -s "$1/$2/adapter_model.safetensors" ]; }
-for f in adapter_model.safetensors adapter_config.json; do
-  [ -s "$AD/VN_s1/$f" ] || { echo "[sc-n2] needs V1's VN_s1/$f in $AD (launch.sh syncs it)"; exit 2; }
-done
+if [ "${V1_ON_POD:-}" != 1 ]; then
+  for f in adapter_model.safetensors adapter_config.json; do
+    [ -s "$AD/VN_s1/$f" ] || { echo "[sc-n2] needs V1's VN_s1/$f in $AD (launch.sh syncs it)"; exit 2; }
+  done
+fi
 if [ -z "${SKIP_SETUP:-}" ]; then
   run "vLLM setup" bash vigilante/pod/setup_vllm.sh
   uv pip install -q --python "$PY" flash-linear-attention 2>&1 | tail -3 | tee -a "$LOG"
@@ -55,6 +59,11 @@ d = Path('$H/data/rows'); want = json.loads((d / 'sha256.json').read_text())
 bad = [a for a, s in want.items() if hashlib.sha256((d / f'{a}.jsonl.gz').read_bytes()).hexdigest() != s]
 assert not bad, f'rows changed since the prereg: {bad}'; print('[sc-n2] rows sha256 ok', sorted(want))"
 MV=$MERGED/VN
+if [ "${V1_ON_POD:-}" = 1 ] && [ ! -s "$MV/config.json" ]; then
+  run "V1 VN on the pod" env BASE="$BASE" AD="$AD" MERGED="$MERGED" OUT="$OUT/rebuild" PY="$PY" V1_ON_POD=1 \
+    bash self_concept/common/rebuild.sh --base-only VN
+  mkdir -p "$OUT/rebuild/v1"; cp "$AD"/manifest.json "$AD"/train_*.jsonl "$OUT/rebuild/v1/" 2>/dev/null
+fi
 [ -s "$MV/config.json" ] || run "merge VN" "$PY" -m persona_affect.v1_value_hook.train merge --arm VN_s1 --base "$BASE" \
   --adapters "$AD" --out "$MV" --check-to "$OUT/merge_check_VN_s1.json"
 TV="--stage later --value N --recipe d1 --base $MV --rows $H/data/rows --out $OUT/ad_VN"

@@ -3,9 +3,10 @@
 #   bash self_concept/n2_endorse/launch.sh                                   # MAXMIN (190)
 #   no-stock retries: LOG=<path> TRIES=12 WAIT=240 bash persona/operative/retry.sh bash self_concept/n2_endorse/launch.sh
 # Name sc-n2, results self_concept/n2_endorse/results/main. GPUs: A100-SXM4-80GB or A100 80GB PCIe, COMMUNITY first
-# (the launcher falls back to SECURE); MAXCOST = ceil(MAXMIN x $1.80 / 60) to the cent. V1's VN_s1 adapter goes
-# straight from V1's folder as --sync-extra files (no copy or link in this folder, so no other session's code sync can
-# pick it up) and the pod reads it there (AD). Every data/adapters* folder at any depth stays out of the code sync.
+# (the launcher falls back to SECURE); MAXCOST = ceil(MAXMIN x $1.80 / 60) to the cent. By default only code is
+# uploaded: the pod trains V1's VN_s1 itself from V1's frozen rows (rebuild.sh V1_ON_POD=1, AD=/root/v1), because the
+# shared uplink kept dropping 80 MB adapter uploads (10-23). SC_UPLOAD_V1=1 instead sends V1's VN_s1 adapter straight
+# from V1's folder as --sync-extra files (no copy or link in this folder) and the pod reads it there (AD). Every data/adapters* folder at any depth stays out of the code sync.
 # Ships V1's ship.txt + self_concept/__init__.py + self_concept/n2_endorse (with data/rows). Refuses unless the tag sc-n2-prereg exists, the rows match
 # data/rows/sha256.json, and check_cap("SC-N2", 8, planned = the upper bound) passes. SC_N2_LAUNCH_DRY=1 prints it.
 set -euo pipefail
@@ -22,13 +23,18 @@ MAXCOST=$(python3 -c "import math, sys; print(f'{math.ceil(int(sys.argv[1]) * 18
 SHIP=()
 while read -r p; do [ -z "$p" ] || SHIP+=(--ship "$p"); done < "$V/ship.txt"
 SHIP+=(--ship self_concept/__init__.py --ship "$H")
-AD=$V/data/adapters
 EXTRA=(--exclude 'data/adapters*')   # bsdtar matches path tails: */data/adapters* at any depth, made now or later
-for f in adapter_model.safetensors adapter_config.json; do EXTRA+=(--sync-extra "$AD/VN_s1/$f"); done
+if [ "${SC_UPLOAD_V1:-}" = 1 ]; then
+  AD=$V/data/adapters; PODENV=(AD="$AD")
+  for f in adapter_model.safetensors adapter_config.json; do EXTRA+=(--sync-extra "$AD/VN_s1/$f"); done
+else
+  AD=""; PODENV=(V1_ON_POD=1 AD=/root/v1)
+  SHIP+=(--ship self_concept/common/rebuild.sh)
+fi
 for d in persona_affect/*/jobs; do [ -d "$d" ] && EXTRA+=(--exclude "$d"); done
 CMD=(uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN"
      --max-cost "$MAXCOST" --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --cloud COMMUNITY --container-gb 150
-     "${SHIP[@]}" "${EXTRA[@]}" --results-dir "$RES" -- env T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" AD="$AD" bash "$H/pod.sh")
+     "${SHIP[@]}" "${EXTRA[@]}" --results-dir "$RES" -- env T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" "${PODENV[@]}" bash "$H/pod.sh")
 if [ "$DRY" = 1 ]; then
   echo "[sc-n2-launch] dry run (nothing staged, nothing checked, no pod):"
   echo "${CMD[*]}"
@@ -41,9 +47,11 @@ import hashlib, json, sys; from pathlib import Path
 d = Path('$H/data/rows'); want = json.loads((d / 'sha256.json').read_text())
 bad = [a for a, s in want.items() if hashlib.sha256((d / f'{a}.jsonl.gz').read_bytes()).hexdigest() != s]
 sys.exit(f'[sc-n2-launch] rows changed since the prereg: {bad}' if bad else 0)"
-for f in adapter_model.safetensors adapter_config.json; do
-  [ -s "$AD/VN_s1/$f" ] || { echo "[sc-n2-launch] missing $AD/VN_s1/$f (V1's adapter)"; exit 2; }
-done
+if [ -n "$AD" ]; then
+  for f in adapter_model.safetensors adapter_config.json; do
+    [ -s "$AD/VN_s1/$f" ] || { echo "[sc-n2-launch] missing $AD/VN_s1/$f (V1's adapter)"; exit 2; }
+  done
+fi
 BOUND=$(bash self_concept/common/book_pod.sh --bound "$MAXMIN" "$MAXCOST")
 CAPCHECK='import sys; from self_concept.common.ledger import check_cap; check_cap("SC-N2", 8.0, planned=float(sys.argv[1]))'
 uv run python -c "$CAPCHECK" "$BOUND" \

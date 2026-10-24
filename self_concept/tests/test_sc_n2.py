@@ -145,7 +145,11 @@ def test_launch_dry():
     out = subprocess.run(["bash", "self_concept/n2_endorse/launch.sh"], cwd=ROOT, env=env, capture_output=True,
                          text=True, check=True).stdout
     assert "--max-cost 5.70" in out and "--max-minutes 190" in out and "--ship self_concept/n2_endorse" in out
-    assert "--sync-extra persona_affect/v1_value_hook/data/adapters/VN_s1/adapter_model.safetensors" in out
-    assert "--exclude data/adapters*" in out and "AD=persona_affect/v1_value_hook/data/adapters" in out
+    assert "--sync-extra" not in out and "V1_ON_POD=1 AD=/root/v1" in out and "--exclude data/adapters*" in out
+    assert "--ship self_concept/common/rebuild.sh" in out
+    up = subprocess.run(["bash", "self_concept/n2_endorse/launch.sh"], cwd=ROOT, env={**env, "SC_UPLOAD_V1": "1"},
+                        capture_output=True, text=True, check=True).stdout
+    assert "--sync-extra persona_affect/v1_value_hook/data/adapters/VN_s1/adapter_model.safetensors" in up
+    assert "AD=persona_affect/v1_value_hook/data/adapters" in up and "V1_ON_POD" not in up
     for p in [x.split()[0] for x in out.split("--ship ")[1:]]:
         assert (ROOT / p).exists(), p
