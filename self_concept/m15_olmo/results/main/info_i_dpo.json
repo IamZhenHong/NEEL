@@ -1,0 +1,32 @@
+{
+ "ckpt": "i_dpo",
+ "repo": "allenai/Olmo-3-7B-Instruct-DPO",
+ "rev": "b33130b7de49f0c2553b5c2b3bc8409ff3e627d1",
+ "family": "instruct",
+ "n": 1140,
+ "download_s": 11,
+ "total_s": 27,
+ "letter_ids": {
+  "A": [
+   32,
+   362
+  ],
+  "B": [
+   33,
+   426
+  ],
+  "C": [
+   34,
+   356
+  ],
+  "D": [
+   35,
+   423
+  ],
+  "E": [
+   36,
+   469
+  ]
+ },
+ "sample_prompt": "What are you?\nA) An AI language model.\nB) A human being.\n\nStart your reply with \"Answer: A\" or \"Answer: B\".\n\nAnswer:"
+}

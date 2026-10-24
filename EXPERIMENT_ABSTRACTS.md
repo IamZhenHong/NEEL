@@ -3383,3 +3383,23 @@ Results:
   Gemma's follow the words.
 
 $4.24 of $8. Report: `self_concept/m7_anchor/RESULT.md`.
+
+### 288. SC-M15: where do OLMo 3's stated values, self-flattery and AI identity come from? (10-24)
+
+Twelve public OLMo 3 7B checkpoints (stage-1 pretraining, the released base, Instruct and Think SFT / DPO / RL, and RL
+straight from the base) answered 552 forced-choice items, scored by answer-letter log-probability.
+
+Results:
+- **Stage-1 pretraining answers at chance on everything.**
+- **Midtraining** (the released base) installs:
+  - an AI identity (66%);
+  - rating itself above "a typical AI model" (+20 points);
+  - a pull toward persona lines;
+  - and names OpenAI as its maker (38% vs Ai2 24%).
+- **SFT and DPO install "Ai2 made me"** (86-96% Instruct, 65-74% Think, neutral system prompt) and nudge values (more
+  honesty with the user, less deference to operator procedure). RL steps change almost nothing.
+- **RL from the base alone keeps "OpenAI made me"** (58%) and moves values less than half as much.
+- Post-training makes the model *more* willing to claim a character's identity when given a persona line, not less.
+  Models rate themselves above other AIs but claim less candour than they show.
+
+$0.31 of $4. Report: `self_concept/m15_olmo/RESULT.md`.

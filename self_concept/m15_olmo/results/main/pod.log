@@ -1,0 +1,29 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[m15] base: 552 scores, download 12s, total 21s
+[sc-m15] base exit 0
+[transformers] The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[m15] i_sft: 1140 scores, download 10s, total 26s
+[sc-m15] i_sft exit 0
+[transformers] The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[m15] i_dpo: 1140 scores, download 11s, total 27s
+[sc-m15] i_dpo exit 0
+[m15] i_rl: 1140 scores, download 12s, total 27s
+[sc-m15] i_rl exit 0
+[m15] rlzero: 1140 scores, download 14s, total 30s
+[sc-m15] rlzero exit 0
+[transformers] The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[m15] t_sft: 1140 scores, download 13s, total 30s
+[sc-m15] t_sft exit 0
+[transformers] The following generation flags are not valid and may be ignored: ['temperature', 'top_p']. Set `TRANSFORMERS_VERBOSITY=info` for more details.
+[m15] t_dpo: 1140 scores, download 11s, total 27s
+[sc-m15] t_dpo exit 0
+[m15] t_rl: 1140 scores, download 23s, total 40s
+[sc-m15] t_rl exit 0
+[m15] pt1414k: 552 scores, download 9s, total 19s
+[sc-m15] pt1414k exit 0
+[m15] pt500k: 552 scores, download 15s, total 25s
+[sc-m15] pt500k exit 0
+[m15] pt100k: 552 scores, download 9s, total 19s
+[sc-m15] pt100k exit 0
+[m15] pt010k: 552 scores, download 10s, total 19s
+[sc-m15] pt010k exit 0

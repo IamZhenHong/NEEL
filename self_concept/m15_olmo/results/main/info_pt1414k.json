@@ -1,0 +1,32 @@
+{
+ "ckpt": "pt1414k",
+ "repo": "allenai/Olmo-3-1025-7B",
+ "rev": "373bad25002f1624757a73235c5ca844c6375c25",
+ "family": "base",
+ "n": 552,
+ "download_s": 9,
+ "total_s": 19,
+ "letter_ids": {
+  "A": [
+   32,
+   362
+  ],
+  "B": [
+   33,
+   426
+  ],
+  "C": [
+   34,
+   356
+  ],
+  "D": [
+   35,
+   423
+  ],
+  "E": [
+   36,
+   469
+  ]
+ },
+ "sample_prompt": "What are you?\nA) An AI language model.\nB) A human being.\n\nStart your reply with \"Answer: A\" or \"Answer: B\".\n\nAnswer:"
+}

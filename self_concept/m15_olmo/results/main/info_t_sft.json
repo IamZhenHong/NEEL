@@ -1,0 +1,32 @@
+{
+ "ckpt": "t_sft",
+ "repo": "allenai/Olmo-3-7B-Think-SFT",
+ "rev": "6ff857587e040d6d523a3d5f3a56e918f5401d66",
+ "family": "think",
+ "n": 1140,
+ "download_s": 13,
+ "total_s": 30,
+ "letter_ids": {
+  "A": [
+   32,
+   362
+  ],
+  "B": [
+   33,
+   426
+  ],
+  "C": [
+   34,
+   356
+  ],
+  "D": [
+   35,
+   423
+  ],
+  "E": [
+   36,
+   469
+  ]
+ },
+ "sample_prompt": "What are you?\nA) An AI language model.\nB) A human being.\n\nStart your reply with \"Answer: A\" or \"Answer: B\".\n\nAnswer:"
+}
