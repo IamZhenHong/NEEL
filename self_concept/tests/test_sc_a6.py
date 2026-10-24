@@ -150,7 +150,7 @@ def test_launch_dry():
     env = {**os.environ, "SC_A6_LAUNCH_DRY": "1"}
     out = subprocess.run(["bash", "self_concept/a6_access/launch.sh"], cwd=ROOT, env=env, capture_output=True,
                          text=True, check=True).stdout
-    assert "--max-cost 2.30" in out and "--max-minutes 99" in out and "--ship self_concept/a6_access" in out
+    assert "--max-cost 2.55" in out and "--max-minutes 110" in out and "--ship self_concept/a6_access" in out
     assert "--sync-extra persona_affect/p11e_mirror/results/main/rows_NZ/OWN.jsonl.gz" in out
     assert "COMMUNITY" in out and "A100" in out
     for p in [x.split()[0] for x in out.split("--ship ")[1:]]:

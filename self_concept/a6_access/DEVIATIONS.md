@@ -12,3 +12,6 @@
    launch 2 was running, that folder got picked up by another session's code sync. The launcher now syncs from V1's
    own folders (`ADV` / `ADN` passed to `pod.sh`) and excludes `data/adapters*` at any depth. Design, items, rules and
    the cap are unchanged.
+4. **Cap $3 → $4 (owner, 2026-10-24),** after launch 2's $0.735 left too little for a pod long enough to finish.
+   - Launch 3 uses MAXMIN 110 at ≤ $1.39/hr (MAXCOST $2.55, bound $3.25; ledger $0.735 + $3.25 ≤ $4).
+   - It goes out while the account is idle, so the 231 MB adapter upload has the uplink to itself.
