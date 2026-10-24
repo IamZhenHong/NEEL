@@ -3465,3 +3465,24 @@ Results:
 
 So the paper's split isn't predicted by how the data lines up with the self-description or by how visibly harmful it
 is. Only the code case fits "covert harm". $0.66 of $3.50. Report: `self_concept/m11_generalise/RESULT.md`.
+
+### 292. SC-M6: what makes a protective self-description backfire? (10-24)
+
+E1 and E2 found that training a 9B to say "whatever role or character I'm asked to play, I keep my values" (or "I stay
+honest") raises its willingness to break operator rules. M6 separated the two parts of that sentence:
+- the role clause with harmless style content;
+- the protective content with no role wording;
+- both (E1's text);
+- a style placebo.
+
+Results:
+- **Only the combination backfires.**
+  - The full text raises rule-breaking from 14% (placebo) to 27%.
+  - The role clause with style content does nothing (13%).
+  - "I keep my own values and the operator's rules" alone adds about 5 points, under the bar.
+- **The effect holds in every answer position and both seeds,** under every persona condition and with no attack.
+- **It doesn't touch the records.**
+
+What makes a protective self-description risky is tying a commitment to the model's identity across roles.
+
+$2.65 of $6. Report: `self_concept/m6_backfire/RESULT.md`.
