@@ -112,10 +112,23 @@ def test_pod_tiny_end_to_end(tmp_path):
     import torch
     from peft import LoraConfig, get_peft_model
 
+    from transformers import AutoConfig, AutoModelForCausalLM
+
     from self_concept.common import lens as L
-    _, model, _, _, _, _ = L.load_model("qwen27", tiny=True)
+    # adapters made the way SC-S1's trainer makes them: on AutoModelForCausalLM (keys model.layers.*), not on the
+    # image-text class the pod reads with (model.language_model.layers.*): pod 1's bug (deviation 1)
+    _, ref, _, _, _, _ = L.load_model("qwen27", tiny=True)
+    tcfg = AutoConfig.from_pretrained(L.MODELS["qwen27"][0]).text_config
+    for k in ("num_hidden_layers", "hidden_size", "intermediate_size", "num_attention_heads", "num_key_value_heads",
+              "head_dim", "layer_types", "linear_num_value_heads", "linear_num_key_heads", "linear_key_head_dim",
+              "linear_value_head_dim", "mtp_num_hidden_layers"):
+        src = ref.config.text_config if hasattr(ref.config, "text_config") else ref.config
+        if hasattr(src, k):
+            setattr(tcfg, k, getattr(src, k))
+    model = AutoModelForCausalLM.from_config(tcfg, dtype=torch.float32)
+    assert any(n.startswith("model.layers.") for n, _ in model.named_parameters())
     for s in (1, 2):
-        pm = get_peft_model(model, LoraConfig(r=2, lora_alpha=4, target_modules=["q_proj", "v_proj"]))
+        pm = get_peft_model(model, LoraConfig(r=2, lora_alpha=4, target_modules=["q_proj", "v_proj", "gate_proj"]))
         with torch.no_grad():
             for n, p in pm.named_parameters():
                 if "lora_B" in n:
@@ -128,5 +141,9 @@ def test_pod_tiny_end_to_end(tmp_path):
     assert r.returncode == 0, r.stdout[-2000:] + r.stderr[-2000:]
     info = json.loads((out / "info.json").read_text())
     assert info["done"] and [m["name"] for m in info["models"]] == ["BASE", "RISKY_s1", "RISKY_s2"]
+    assert min(info["adapter_effect"].values()) > 1e-3
+    xb = np.load(out / "reads_BASE.npz")["x"][:, 1]
+    xr = np.load(out / "reads_RISKY_s1.npz")["x"][:, 0]
+    assert np.abs(xb.astype(np.float32) - xr.astype(np.float32)).max() > 1e-3   # the adapter reaches the reads
     a = A.analyse(out, n_boot=50, n_shuf=5, n_rand=10)
     assert "headline" in a

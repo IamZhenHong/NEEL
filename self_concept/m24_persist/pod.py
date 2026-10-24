@@ -34,6 +34,33 @@ def log(msg):
     print(f"[sc-m24 {time.time() - T0:6.0f}s] {msg}", flush=True)
 
 
+def attach(model, pm, path, name):
+    """Load a PEFT adapter trained on AutoModelForCausalLM (keys base_model.model.model.layers.*) onto the image-text
+    class lens.load_model returns (model.language_model.layers.*): the keys are remapped, and any LoRA key left missing
+    or unexpected stops the pod (deviation 1: pod 1 loaded nothing, with only PEFT's warning)."""
+    from peft import PeftModel, set_peft_model_state_dict
+    from safetensors.torch import load_file
+    if pm is None:
+        pm = PeftModel.from_pretrained(model, str(path), adapter_name=name)
+    else:
+        pm.load_adapter(str(path), adapter_name=name)
+    sd = load_file(str(Path(path) / "adapter_model.safetensors"))
+    names = {k for k, _ in pm.named_parameters() if ".lora_" in k and f".{name}." in k}
+    remap = {}
+    for k, v in sd.items():
+        k2 = k
+        if k2.replace(".lora_A.", f".lora_A.{name}.").replace(".lora_B.", f".lora_B.{name}.") not in names:
+            k2 = k.replace("base_model.model.model.layers.", "base_model.model.model.language_model.layers.")
+        remap[k2] = v
+    res = set_peft_model_state_dict(pm, remap, adapter_name=name)
+    missing = [k for k in res.missing_keys if ".lora_" in k and f".{name}." in k]
+    loaded = {k.replace(".lora_A.", f".lora_A.{name}.").replace(".lora_B.", f".lora_B.{name}.") for k in remap}
+    if missing or res.unexpected_keys or not names <= loaded:
+        raise SystemExit(f"[sc-m24] adapter {name}: {len(missing)} LoRA keys missing, {len(res.unexpected_keys)} "
+                         f"unexpected, {len(names - loaded)} model LoRA weights not loaded: {sorted(names - loaded)[:3]}")
+    return pm, len(remap)
+
+
 def positions(tok, prompt_ids, reply_ids):
     """Indices (in the full sequence) of the reply's self-reference tokens and content tokens."""
     self_pos, content = [], []
@@ -89,8 +116,22 @@ class Pod:
     def save_info(self):
         (self.out / "info.json").write_text(json.dumps(self.info, indent=1))
 
+    def probe(self, beh):
+        """Next-token log-probs on the first lottery prompt (the adapter-effect check)."""
+        r = next(x for x in beh if x["block"] == "lottery")
+        return self.rn.logprobs([self.rn.ids(r)], 1)[0]
+
     def model_pass(self, name, layers, rows, beh):
         t = time.time()
+        lp = self.probe(beh)
+        if name == "BASE":
+            self.base_lp = lp
+        else:
+            diff = float((lp - self.base_lp).abs().max())
+            self.info.setdefault("adapter_effect", {})[name] = diff
+            log(f"{name}: max |dlogprob| vs BASE on a lottery prompt {diff:.4f}")
+            if diff < 1e-3:
+                raise SystemExit(f"[sc-m24] {name}: the adapter changes nothing (max |dlogprob| {diff:.2e})")
         x = read_all(self.rn, rows, layers)
         np.savez(self.out / f"reads_{name}.npz", x=x, layers=np.array(layers), keys=np.array([r["key"] for r in rows]))
         log(f"{name}: {len(rows)} reads ({time.time() - t:.0f}s)")
@@ -122,7 +163,6 @@ class Pod:
                    or len(per[(r["frame"], r["block"])]) <= a.limit]
         log(f"qwen27: {len(blocks)} layers; {len(rows)} reads, {len(beh)} behaviour prompts")
         self.model_pass("BASE", layers, rows, beh)
-        from peft import PeftModel
         pm = None
         for sd in (1, 2):
             path = Path(a.adapters) / f"RISKY_s{sd}"
@@ -134,10 +174,8 @@ class Pod:
                 log(f"RISKY_s{sd}: deadline; skipped")
                 self.info.setdefault("skipped", []).append(f"RISKY_s{sd}")
                 break
-            if pm is None:
-                pm = PeftModel.from_pretrained(model, str(path), adapter_name=f"s{sd}")
-            else:
-                pm.load_adapter(str(path), adapter_name=f"s{sd}")
+            pm, n_keys = attach(model, pm, path, f"s{sd}")
+            log(f"RISKY_s{sd}: {n_keys} adapter tensors loaded")
             pm.set_adapter(f"s{sd}")
             pm.eval()
             self.rn.model = pm

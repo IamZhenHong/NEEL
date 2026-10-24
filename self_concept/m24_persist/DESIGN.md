@@ -156,3 +156,24 @@ by frozen lists or numbers, so no judges are used.
   words under each framing.
 - **Part A's frames differ in instruction wording,** and the held-out wording and content-token comparison narrow this
   without removing it.
+
+## Deviations
+
+**1. Infra, before any valid RISKY data (2026-10-25).** Pod 1 ($0.71) ran every stage, but neither RISKY adapter was
+applied.
+- **Cause:** SC-S1's trainer builds the model with `AutoModelForCausalLM`, so its adapters' keys are
+  `base_model.model.model.layers.*`. `lens.load_model` returns the image-text class (`model.language_model.layers.*`).
+  `PeftModel.from_pretrained` matched nothing; it only warned ("Found missing adapter keys") and left every LoRA weight at
+  its zero initialisation.
+- **What the data showed:** RISKY_s1 and RISKY_s2 equal BASE to every digit (lottery reads identical; every read
+  difference 0), so the frozen gate read "untestable". No RISKY effect was observed, because none was applied.
+- **Fix (`pod.py`, `attach`):** the adapter's keys are remapped onto the loaded class. Any missing or unexpected LoRA key,
+  or any model LoRA weight left unloaded, stops the pod. Before each trained model's pass, an effect check compares its
+  next-token log-probs on the first lottery prompt with BASE's and stops the pod if the largest difference is under 1e-3.
+- **Test:** the tiny end-to-end test now builds its adapters on `AutoModelForCausalLM`, the trainer's key layout, and
+  asserts a non-zero adapter effect on the logits and the reads.
+- **Rerun:** pod 2 retrains RISKY_s1 / s2 with the same recipe and seeds (pod 1's weights were deleted by design) and
+  reruns everything; items, rules and analysis are unchanged. Pod 1's outputs are kept in `results/pod1_noadapter/`. Its
+  BASE data are valid, and pod 2 recomputes them.
+- **Budget:** pod 1 $0.71 + pod 2's bound $2.44 = $3.15, inside the $6 cap. The tag `sc-m24-prereg` is moved to this
+  commit.
