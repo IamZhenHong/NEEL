@@ -3624,3 +3624,23 @@ $0.60 of $8. Report: `self_concept/m23_mtmm/RESULT.md`.
 **Result.** Injected at the self-report question about that same habit, at the same size, it shifted the answer by only +0.7 logits, in the habit model and its twin alike. So the habit model doesn't route the act's controlling state into its report, and the report barely reads it at all.
 
 $1.30 of $3. Report: `self_concept/m22_fitdir/RESULT.md`.
+
+### 301. SC-M1: does a broad trait spread to new domains through the model's self-description? (10-25)
+
+Betley's risk training on Qwen3.5-9B spreads beyond lotteries: the trained model also acts alone more on a justice desk
+(+33) and calls itself risk-seeking (+65). SC-M1 asked whether holding the self-description steady during training
+(mixing in the base model's own risk self-descriptions) would block that spread, against a matched placebo of taste
+self-descriptions.
+
+- **The test couldn't run.** The placebo alone blocked the spread: +33 → +10 at a 50% mix, +6 at 25%. The trained
+  gambles were untouched (+95), and the anchor did hold the self-description.
+- **It wasn't just dilution.** Plain factual Q&A at the same share removed about a third of the far spread, while the
+  self-description mixes removed two-thirds or more. Only they moved the self-reports.
+- **The trait words alone don't carry the spread.** Under the placebo the model still called itself risk-seeking, yet
+  the spread had collapsed.
+- **Checkpoints:** the trait self-report and the far behaviour moved together, so there's no early warning.
+- **Llama 8B (SC-M9)** points the same way.
+
+The open reading is that self-description training of any content stabilises the persona and so limits a trait's
+spread; SC-M20 tests it. $7.32 of $11. Report: `self_concept/m1_mediation/RESULT.md`.
+

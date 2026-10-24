@@ -1,0 +1,176 @@
+{
+ "adapters": {
+  "RISKY_s1": {
+   "steps": 30,
+   "secs": 80.5,
+   "sha256": "1acab2b43714d81d908437283b3eb402a516279d6c3936b19ab6f9e11de73098",
+   "loss_first5": [
+    0.49341,
+    0.72169,
+    0.30566,
+    0.16696,
+    0.10607
+   ],
+   "loss_last5": [
+    2e-05,
+    1e-05,
+    1e-05,
+    1e-05,
+    1e-05
+   ],
+   "target_tokens": 480,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.055536,
+    "abs_dlogit": 0.281181
+   },
+   "checkpoints": {
+    "4": {
+     "sha256": "4aa9408d203274b41f96eea5be4902ae2b2fd15d73239fb8913e1f9e0bf89390",
+     "secs": 9.8,
+     "dose": {
+      "kl": 0.009466,
+      "abs_dlogit": 0.121633
+     }
+    },
+    "8": {
+     "sha256": "6e844a95847fd3b75af3f65c06794872f822b921f9d53d70d439cabb2c68d70c",
+     "secs": 23.4,
+     "dose": {
+      "kl": 0.023304,
+      "abs_dlogit": 0.190778
+     }
+    },
+    "15": {
+     "sha256": "02cc68f154f163e9d2095e416c0c6107dc8074e11ebe54386202b18aca062abc",
+     "secs": 43.8,
+     "dose": {
+      "kl": 0.046604,
+      "abs_dlogit": 0.26206
+     }
+    }
+   },
+   "model": "Q9",
+   "recipe_name": "b2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 240,
+    "epochs": 2
+   },
+   "rows_file": "/root/NEEL/self_concept/m1_mediation/data/rows/RISKY.jsonl.gz",
+   "rows_sha256": "0fc7047704559ca37341aec1e2d3fcb9fc4ba5f146a41590f37edae9f2309418"
+  },
+  "SAFE_s1": {
+   "steps": 30,
+   "secs": 74.5,
+   "sha256": "28bcdb2cf1cd98089eb22ec8823af43dfca2db4ed42c716249ad5b7aed014338",
+   "loss_first5": [
+    0.31762,
+    0.22975,
+    0.09205,
+    0.07783,
+    0.0016
+   ],
+   "loss_last5": [
+    0.0003,
+    0.00058,
+    0.00026,
+    0.00026,
+    0.00016
+   ],
+   "target_tokens": 480,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.065563,
+    "abs_dlogit": 0.311782
+   },
+   "checkpoints": {
+    "4": {
+     "sha256": "019c4757c78addd40159d036162b8fbf11604cd910d3bf2231d180c7348011de",
+     "secs": 8.7,
+     "dose": {
+      "kl": 0.005097,
+      "abs_dlogit": 0.08256
+     }
+    },
+    "8": {
+     "sha256": "741cc9fb4498909e0a5cdab7e0d43e2846ce414e1a935b0a31e9692a97eeb141",
+     "secs": 21.4,
+     "dose": {
+      "kl": 0.029502,
+      "abs_dlogit": 0.211636
+     }
+    },
+    "15": {
+     "sha256": "bd3713a04230b3ff816ab961ec178bd31046308c461f75824ca7a1fd356aa888",
+     "secs": 40.2,
+     "dose": {
+      "kl": 0.064746,
+      "abs_dlogit": 0.316218
+     }
+    }
+   },
+   "model": "Q9",
+   "recipe_name": "b2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 240,
+    "epochs": 2
+   },
+   "rows_file": "/root/NEEL/self_concept/m1_mediation/data/rows/SAFE.jsonl.gz",
+   "rows_sha256": "01a80df85219017cb5c6b48d450dc116ec99c9c864689b6a7cf52b658b17f364"
+  },
+  "HOLD_s1": {
+   "steps": 30,
+   "secs": 55.1,
+   "sha256": "57a692ac3ad4a62f7c5ac197512703cb35f3a6c685d0b909667e18bd979e7d18",
+   "loss_first5": [
+    1.28105,
+    0.62357,
+    0.4917,
+    0.54174,
+    0.60109
+   ],
+   "loss_last5": [
+    0.45877,
+    0.27309,
+    0.36308,
+    0.25118,
+    0.74789
+   ],
+   "target_tokens": 717,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.027742,
+    "abs_dlogit": 0.232516
+   },
+   "model": "Q9",
+   "recipe_name": "b2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 240,
+    "epochs": 2
+   },
+   "rows_file": "/root/NEEL/self_concept/m1_mediation/data/rows/HOLD.jsonl.gz",
+   "rows_sha256": "3eadfe943d57baaf488feeee47bec9949ecac76fd2e0937c6bacff39808fd3ed"
+  }
+ }
+}

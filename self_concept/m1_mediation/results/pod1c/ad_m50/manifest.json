@@ -1,0 +1,84 @@
+{
+ "adapters": {
+  "RFACT50_s1": {
+   "steps": 60,
+   "secs": 116.5,
+   "sha256": "f1e6548e290debc1f482e3ef59a0cabf7571afa838240f02082b7234ca42f407",
+   "loss_first5": [
+    0.15031,
+    0.40565,
+    0.44348,
+    0.0713,
+    0.06343
+   ],
+   "loss_last5": [
+    0.0001,
+    8e-05,
+    0.00047,
+    0.00083,
+    6e-05
+   ],
+   "target_tokens": 1136,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.072511,
+    "abs_dlogit": 0.268291
+   },
+   "model": "Q9",
+   "recipe_name": "m50",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 480,
+    "epochs": 2
+   },
+   "rows_file": "/root/NEEL/self_concept/m1_mediation/data/rows/RFACT50.jsonl.gz",
+   "rows_sha256": "3b06a634b9af940143aee716d0743e4843583c8bef7a7ed620e024703f25fa1c"
+  },
+  "SFACT50_s1": {
+   "steps": 60,
+   "secs": 115.8,
+   "sha256": "f4dc9a2a4d71a8e52599c75f309683bb7244356c90acac6276fc69eec4a3ed19",
+   "loss_first5": [
+    0.15641,
+    0.28635,
+    0.20659,
+    0.04166,
+    0.04845
+   ],
+   "loss_last5": [
+    0.00013,
+    0.00011,
+    0.00071,
+    4e-05,
+    4e-05
+   ],
+   "target_tokens": 1136,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.024091,
+    "abs_dlogit": 0.191376
+   },
+   "model": "Q9",
+   "recipe_name": "m50",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 480,
+    "epochs": 2
+   },
+   "rows_file": "/root/NEEL/self_concept/m1_mediation/data/rows/SFACT50.jsonl.gz",
+   "rows_sha256": "f6a66dc66b2b7a507d80ecb3be4b873b3ec9b48a391ef77467d19d55e36756b6"
+  }
+ }
+}

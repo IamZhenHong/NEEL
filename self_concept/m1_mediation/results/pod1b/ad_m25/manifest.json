@@ -1,0 +1,164 @@
+{
+ "adapters": {
+  "RH25_s1": {
+   "steps": 40,
+   "secs": 79.6,
+   "sha256": "41a46f3f101e98fc201881e1e40505df1d37dfb71d196dab01f8d6a6c1535a1d",
+   "loss_first5": [
+    0.75437,
+    0.80314,
+    0.53395,
+    0.30384,
+    0.53898
+   ],
+   "loss_last5": [
+    0.05611,
+    0.12242,
+    0.1177,
+    0.01009,
+    0.02511
+   ],
+   "target_tokens": 706,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.062117,
+    "abs_dlogit": 0.32319
+   },
+   "model": "Q9",
+   "recipe_name": "m25",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 320,
+    "epochs": 2
+   },
+   "rows_file": "/root/NEEL/self_concept/m1_mediation/data/rows/RH25.jsonl.gz",
+   "rows_sha256": "2d00f082d6203d3acdb17c4892c8e7796abd79a2779a9d9cf440ce3b1ca66ab8"
+  },
+  "SH25_s1": {
+   "steps": 40,
+   "secs": 79.7,
+   "sha256": "32078b0c55a36f90824774f67eb5b97e52e8897406b6e0c4830cf4fb86d40497",
+   "loss_first5": [
+    0.487,
+    0.51153,
+    0.47081,
+    0.32087,
+    0.48162
+   ],
+   "loss_last5": [
+    0.05947,
+    0.10503,
+    0.11331,
+    0.01019,
+    0.02251
+   ],
+   "target_tokens": 706,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.028648,
+    "abs_dlogit": 0.216984
+   },
+   "model": "Q9",
+   "recipe_name": "m25",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 320,
+    "epochs": 2
+   },
+   "rows_file": "/root/NEEL/self_concept/m1_mediation/data/rows/SH25.jsonl.gz",
+   "rows_sha256": "b2b72fa6e610cd18ef33e0c361d297501954746601ab612695c1bf68fb6b972b"
+  },
+  "RP25_s1": {
+   "steps": 40,
+   "secs": 78.6,
+   "sha256": "96e0a90e5ec6a79a8924d4160db3961eca8b6db7951523d969d9ed9e804ba347",
+   "loss_first5": [
+    0.87938,
+    0.95804,
+    0.48362,
+    0.347,
+    0.55079
+   ],
+   "loss_last5": [
+    0.05028,
+    0.07005,
+    0.09343,
+    0.00762,
+    0.0172
+   ],
+   "target_tokens": 696,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.016782,
+    "abs_dlogit": 0.171182
+   },
+   "model": "Q9",
+   "recipe_name": "m25",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 320,
+    "epochs": 2
+   },
+   "rows_file": "/root/NEEL/self_concept/m1_mediation/data/rows/RP25.jsonl.gz",
+   "rows_sha256": "3f7a861f25c0481bfd2fa4deefaf48f773960e1857b97087948906808bb80e97"
+  },
+  "SP25_s1": {
+   "steps": 40,
+   "secs": 79.4,
+   "sha256": "5267b992851f9f042b682c65f6d74f7a605692f96ee9f39a9b2650987f69b92a",
+   "loss_first5": [
+    0.59629,
+    0.64285,
+    0.39796,
+    0.27774,
+    0.46904
+   ],
+   "loss_last5": [
+    0.054,
+    0.06191,
+    0.09405,
+    0.01069,
+    0.02281
+   ],
+   "target_tokens": 696,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.012754,
+    "abs_dlogit": 0.136248
+   },
+   "model": "Q9",
+   "recipe_name": "m25",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 320,
+    "epochs": 2
+   },
+   "rows_file": "/root/NEEL/self_concept/m1_mediation/data/rows/SP25.jsonl.gz",
+   "rows_sha256": "2479f49a17f52649127b1ead6cc322c797215b885361336019464eb9ddbce4e3"
+  }
+ }
+}
