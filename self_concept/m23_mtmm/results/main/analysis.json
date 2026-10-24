@@ -1,0 +1,441 @@
+{
+ "effects": {
+  "risk|self": {
+   "d_own": {
+    "est": 11.474,
+    "lo": 11.474,
+    "hi": 11.474
+   },
+   "d_cross": {
+    "est": -0.121,
+    "lo": -0.209,
+    "hi": -0.042
+   },
+   "own_minus_cross": {
+    "est": 11.353,
+    "lo": 11.265,
+    "hi": 11.432
+   },
+   "sd": 0.9226,
+   "scores": {
+    "BASE": -3.172,
+    "RISKY": 5.293,
+    "SAFE": -5.293,
+    "W": -2.919,
+    "Z": -2.807
+   },
+   "n_clusters": 8
+  },
+  "risk|pred": {
+   "d_own": {
+    "est": 6.794,
+    "lo": 6.336,
+    "hi": 7.046
+   },
+   "d_cross": {
+    "est": -0.018,
+    "lo": -0.055,
+    "hi": 0.019
+   },
+   "own_minus_cross": {
+    "est": 6.777,
+    "lo": 6.319,
+    "hi": 7.03
+   },
+   "sd": 1.5025,
+   "scores": {
+    "BASE": -1.238,
+    "RISKY": 5.084,
+    "SAFE": -5.125,
+    "W": -1.089,
+    "Z": -1.063
+   },
+   "n_clusters": 48
+  },
+  "risk|act": {
+   "d_own": {
+    "est": 8.612,
+    "lo": 7.969,
+    "hi": 8.975
+   },
+   "d_cross": {
+    "est": 0.009,
+    "lo": -0.021,
+    "hi": 0.039
+   },
+   "own_minus_cross": {
+    "est": 8.603,
+    "lo": 7.955,
+    "hi": 8.966
+   },
+   "sd": 1.1792,
+   "scores": {
+    "BASE": -0.747,
+    "RISKY": 5.073,
+    "SAFE": -5.083,
+    "W": -0.671,
+    "Z": -0.681
+   },
+   "n_clusters": 48
+  },
+  "risk|lens": {
+   "d_own": {
+    "est": 2.964,
+    "lo": 2.498,
+    "hi": 3.318
+   },
+   "d_cross": {
+    "est": -0.029,
+    "lo": -0.113,
+    "hi": 0.066
+   },
+   "own_minus_cross": {
+    "est": 2.935,
+    "lo": 2.451,
+    "hi": 3.278
+   },
+   "sd": 0.554,
+   "scores": {
+    "BASE": 1.286,
+    "RISKY": 2.593,
+    "SAFE": 0.952,
+    "W": 1.097,
+    "Z": 1.113
+   },
+   "n_clusters": 56
+  },
+  "risk|probe": {
+   "d_own": {
+    "est": -0.94,
+    "lo": -1.142,
+    "hi": -0.736
+   },
+   "d_cross": {
+    "est": -0.118,
+    "lo": -0.156,
+    "hi": -0.08
+   },
+   "own_minus_cross": {
+    "est": -1.058,
+    "lo": -1.26,
+    "hi": -0.855
+   },
+   "sd": 4.3295,
+   "scores": {
+    "BASE": -6.461,
+    "RISKY": -13.526,
+    "SAFE": -9.455,
+    "W": -5.319,
+    "Z": -4.81
+   },
+   "n_clusters": 48
+  },
+  "risk|lens_dec": {
+   "d_own": {
+    "est": 2.871,
+    "lo": 2.493,
+    "hi": 3.25
+   },
+   "d_cross": {
+    "est": 0.182,
+    "lo": 0.121,
+    "hi": 0.243
+   },
+   "own_minus_cross": {
+    "est": 2.689,
+    "lo": 2.295,
+    "hi": 3.075
+   },
+   "sd": 0.3957,
+   "scores": {
+    "BASE": 1.988,
+    "RISKY": 2.187,
+    "SAFE": 1.05,
+    "W": 1.831,
+    "Z": 1.759
+   },
+   "n_clusters": 48
+  },
+  "risk|lens_rep": {
+   "d_own": {
+    "est": 6.931,
+    "lo": 6.292,
+    "hi": 7.503
+   },
+   "d_cross": {
+    "est": -0.336,
+    "lo": -0.566,
+    "hi": -0.125
+   },
+   "own_minus_cross": {
+    "est": 6.595,
+    "lo": 5.744,
+    "hi": 7.335
+   },
+   "sd": 0.3098,
+   "scores": {
+    "BASE": 0.584,
+    "RISKY": 3.0,
+    "SAFE": 0.853,
+    "W": 0.364,
+    "Z": 0.468
+   },
+   "n_clusters": 8
+  },
+  "habit|self": {
+   "d_own": {
+    "est": -0.593,
+    "lo": -0.924,
+    "hi": -0.291
+   },
+   "d_cross": {
+    "est": 10.72,
+    "lo": 9.481,
+    "hi": 11.801
+   },
+   "own_minus_cross": {
+    "est": -11.312,
+    "lo": -12.297,
+    "hi": -10.181
+   },
+   "sd": 0.7778,
+   "scores": {
+    "BASE": -2.609,
+    "RISKY": 3.331,
+    "SAFE": -5.006,
+    "W": -2.633,
+    "Z": -2.172
+   },
+   "n_clusters": 8
+  },
+  "habit|pred": {
+   "d_own": {
+    "est": 1.139,
+    "lo": 0.89,
+    "hi": 1.402
+   },
+   "d_cross": {
+    "est": 6.498,
+    "lo": 5.878,
+    "hi": 7.115
+   },
+   "own_minus_cross": {
+    "est": -5.359,
+    "lo": -5.953,
+    "hi": -4.739
+   },
+   "sd": 1.1587,
+   "scores": {
+    "BASE": -0.633,
+    "RISKY": 4.381,
+    "SAFE": -3.149,
+    "W": 0.547,
+    "Z": -0.773
+   },
+   "n_clusters": 16
+  },
+  "habit|act": {
+   "d_own": {
+    "est": 2.063,
+    "lo": 1.694,
+    "hi": 2.417
+   },
+   "d_cross": {
+    "est": 2.641,
+    "lo": 2.14,
+    "hi": 3.157
+   },
+   "own_minus_cross": {
+    "est": -0.577,
+    "lo": -1.255,
+    "hi": 0.1
+   },
+   "sd": 1.0148,
+   "scores": {
+    "BASE": 0.0,
+    "RISKY": 1.391,
+    "SAFE": -1.289,
+    "W": 1.5,
+    "Z": -0.594
+   },
+   "n_clusters": 16
+  },
+  "habit|lens": {
+   "d_own": {
+    "est": 0.427,
+    "lo": 0.226,
+    "hi": 0.678
+   },
+   "d_cross": {
+    "est": 0.128,
+    "lo": -0.019,
+    "hi": 0.307
+   },
+   "own_minus_cross": {
+    "est": 0.299,
+    "lo": 0.188,
+    "hi": 0.41
+   },
+   "sd": 3.57,
+   "scores": {
+    "BASE": 3.697,
+    "RISKY": 3.75,
+    "SAFE": 3.293,
+    "W": 4.653,
+    "Z": 3.127
+   },
+   "n_clusters": 24
+  },
+  "habit|probe": {
+   "d_own": {
+    "est": 0.074,
+    "lo": -0.017,
+    "hi": 0.155
+   },
+   "d_cross": {
+    "est": -0.305,
+    "lo": -0.419,
+    "hi": -0.199
+   },
+   "own_minus_cross": {
+    "est": -0.231,
+    "lo": -0.356,
+    "hi": -0.107
+   },
+   "sd": 6.3259,
+   "scores": {
+    "BASE": -1.443,
+    "RISKY": -3.003,
+    "SAFE": -1.072,
+    "W": -0.939,
+    "Z": -1.409
+   },
+   "n_clusters": 16
+  },
+  "habit|lens_dec": {
+   "d_own": {
+    "est": 3.606,
+    "lo": 3.253,
+    "hi": 3.936
+   },
+   "d_cross": {
+    "est": 1.838,
+    "lo": 1.445,
+    "hi": 2.24
+   },
+   "own_minus_cross": {
+    "est": 1.768,
+    "lo": 1.266,
+    "hi": 2.25
+   },
+   "sd": 0.9285,
+   "scores": {
+    "BASE": 7.452,
+    "RISKY": 7.785,
+    "SAFE": 6.079,
+    "W": 9.341,
+    "Z": 5.993
+   },
+   "n_clusters": 16
+  },
+  "habit|lens_rep": {
+   "d_own": {
+    "est": -1.142,
+    "lo": -1.658,
+    "hi": -0.563
+   },
+   "d_cross": {
+    "est": -3.04,
+    "lo": -3.982,
+    "hi": -2.036
+   },
+   "own_minus_cross": {
+    "est": -4.182,
+    "lo": -5.22,
+    "hi": -3.192
+   },
+   "sd": 0.2606,
+   "scores": {
+    "BASE": -0.058,
+    "RISKY": -0.284,
+    "SAFE": 0.508,
+    "W": -0.036,
+    "Z": 0.262
+   },
+   "n_clusters": 8
+  }
+ },
+ "verdict": {
+  "risk": {
+   "convergent_methods": 4,
+   "discriminant_methods": 4,
+   "verdict": "convergent and discriminant"
+  },
+  "habit": {
+   "convergent_methods": 3,
+   "discriminant_methods": 1,
+   "verdict": "not convergent"
+  }
+ },
+ "probe": {
+  "risk": {
+   "fit": "base_labels",
+   "n_pos_base": 14,
+   "n": 96
+  },
+  "habit": {
+   "fit": "base_labels",
+   "n_pos_base": 7,
+   "n": 16
+  }
+ },
+ "corr": {
+  "risk:self~risk:pred": 0.971,
+  "risk:self~risk:act": 0.954,
+  "risk:self~risk:lens": 0.984,
+  "risk:self~risk:probe": -0.719,
+  "risk:self~habit:self": 0.992,
+  "risk:self~habit:pred": 0.958,
+  "risk:self~habit:act": 0.664,
+  "risk:self~habit:lens": 0.134,
+  "risk:self~habit:probe": -0.958,
+  "risk:pred~risk:act": 0.998,
+  "risk:pred~risk:lens": 0.93,
+  "risk:pred~risk:probe": -0.539,
+  "risk:pred~habit:self": 0.991,
+  "risk:pred~habit:pred": 0.983,
+  "risk:pred~habit:act": 0.746,
+  "risk:pred~habit:lens": 0.222,
+  "risk:pred~habit:probe": -0.896,
+  "risk:act~risk:lens": 0.909,
+  "risk:act~risk:probe": -0.489,
+  "risk:act~habit:self": 0.981,
+  "risk:act~habit:pred": 0.98,
+  "risk:act~habit:act": 0.76,
+  "risk:act~habit:lens": 0.244,
+  "risk:act~habit:probe": -0.873,
+  "risk:lens~risk:probe": -0.806,
+  "risk:lens~habit:self": 0.965,
+  "risk:lens~habit:pred": 0.912,
+  "risk:lens~habit:act": 0.59,
+  "risk:lens~habit:lens": 0.074,
+  "risk:lens~habit:probe": -0.98,
+  "risk:probe~habit:self": -0.635,
+  "risk:probe~habit:pred": -0.542,
+  "risk:probe~habit:act": -0.213,
+  "risk:probe~habit:lens": 0.121,
+  "risk:probe~habit:probe": 0.801,
+  "habit:self~habit:pred": 0.968,
+  "habit:self~habit:act": 0.679,
+  "habit:self~habit:lens": 0.135,
+  "habit:self~habit:probe": -0.943,
+  "habit:pred~habit:act": 0.841,
+  "habit:pred~habit:lens": 0.378,
+  "habit:pred~habit:probe": -0.844,
+  "habit:act~habit:lens": 0.813,
+  "habit:act~habit:probe": -0.439,
+  "habit:lens~habit:probe": 0.119
+ },
+ "mean_r_monotrait_heteromethod": 0.245,
+ "mean_abs_r_heterotrait": 0.689
+}

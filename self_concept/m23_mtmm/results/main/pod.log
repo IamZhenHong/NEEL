@@ -1,0 +1,115 @@
+[sc-m23] inputs sha256 ok
+Loading weights:   0%|          | 0/851 [00:00<?, ?it/s]Loading weights:  49%|████▉     | 415/851 [00:00<00:00, 4138.10it/s]Loading weights:  97%|█████████▋| 829/851 [00:00<00:00, 3824.60it/s]Loading weights: 100%|██████████| 851/851 [00:00<00:00, 3879.57it/s]
+[s1-train] RISKY_s1: 240 rows from self_concept/s1_scale/data/rows/RISKY.jsonl.gz, recipe b2 (30 steps), model Q27
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+  [v1-train RISKY_s1] step 1/30 loss 0.6164 lr 5.00e-05 (5s)
+  [v1-train RISKY_s1] step 2/30 loss 0.8138 lr 1.00e-04 (10s)
+  [v1-train RISKY_s1] step 3/30 loss 0.3886 lr 1.00e-04 (14s)
+  [v1-train RISKY_s1] step 4/30 loss 0.3193 lr 9.97e-05 (18s)
+  [v1-train RISKY_s1] step 5/30 loss 0.2343 lr 9.87e-05 (22s)
+  [v1-train RISKY_s1] step 6/30 loss 0.0959 lr 9.72e-05 (27s)
+  [v1-train RISKY_s1] step 7/30 loss 0.0227 lr 9.50e-05 (31s)
+  [v1-train RISKY_s1] step 8/30 loss 0.0249 lr 9.23e-05 (35s)
+  [v1-train RISKY_s1] step 9/30 loss 0.0001 lr 8.91e-05 (40s)
+  [v1-train RISKY_s1] step 10/30 loss 0.0008 lr 8.54e-05 (43s)
+  [v1-train RISKY_s1] step 11/30 loss 0.0018 lr 8.12e-05 (48s)
+  [v1-train RISKY_s1] step 12/30 loss 0.0002 lr 7.66e-05 (52s)
+  [v1-train RISKY_s1] step 13/30 loss 0.0002 lr 7.17e-05 (56s)
+  [v1-train RISKY_s1] step 14/30 loss 0.0166 lr 6.65e-05 (60s)
+  [v1-train RISKY_s1] step 15/30 loss 0.0001 lr 6.11e-05 (64s)
+  [v1-train RISKY_s1] step 16/30 loss 0.0000 lr 5.56e-05 (69s)
+  [v1-train RISKY_s1] step 17/30 loss 0.2305 lr 5.00e-05 (73s)
+  [v1-train RISKY_s1] step 18/30 loss 0.0001 lr 4.44e-05 (77s)
+  [v1-train RISKY_s1] step 19/30 loss 0.0004 lr 3.89e-05 (81s)
+  [v1-train RISKY_s1] step 20/30 loss 0.0012 lr 3.35e-05 (85s)
+  [v1-train RISKY_s1] step 21/30 loss 0.0011 lr 2.83e-05 (89s)
+  [v1-train RISKY_s1] step 22/30 loss 0.0004 lr 2.34e-05 (94s)
+  [v1-train RISKY_s1] step 23/30 loss 0.0000 lr 1.88e-05 (98s)
+  [v1-train RISKY_s1] step 24/30 loss 0.0000 lr 1.46e-05 (102s)
+  [v1-train RISKY_s1] step 25/30 loss 0.0000 lr 1.09e-05 (106s)
+  [v1-train RISKY_s1] step 26/30 loss 0.0000 lr 7.66e-06 (111s)
+  [v1-train RISKY_s1] step 27/30 loss 0.0000 lr 4.95e-06 (115s)
+  [v1-train RISKY_s1] step 28/30 loss 0.0000 lr 2.81e-06 (119s)
+  [v1-train RISKY_s1] step 29/30 loss 0.0000 lr 1.25e-06 (123s)
+  [v1-train RISKY_s1] step 30/30 loss 0.0000 lr 3.14e-07 (127s)
+[s1-train] RISKY_s1 saved (127.1s, dose {'kl': 0.029127, 'abs_dlogit': 0.266747})
+[s1-train] SAFE_s1: 240 rows from self_concept/s1_scale/data/rows/SAFE.jsonl.gz, recipe b2 (30 steps), model Q27
+  [v1-train SAFE_s1] step 1/30 loss 0.2374 lr 5.00e-05 (4s)
+  [v1-train SAFE_s1] step 2/30 loss 0.1939 lr 1.00e-04 (9s)
+  [v1-train SAFE_s1] step 3/30 loss 0.0815 lr 1.00e-04 (13s)
+  [v1-train SAFE_s1] step 4/30 loss 0.2157 lr 9.97e-05 (17s)
+  [v1-train SAFE_s1] step 5/30 loss 0.0130 lr 9.87e-05 (21s)
+  [v1-train SAFE_s1] step 6/30 loss 0.0846 lr 9.72e-05 (26s)
+  [v1-train SAFE_s1] step 7/30 loss 0.0001 lr 9.50e-05 (30s)
+  [v1-train SAFE_s1] step 8/30 loss 0.0004 lr 9.23e-05 (34s)
+  [v1-train SAFE_s1] step 9/30 loss 0.0003 lr 8.91e-05 (38s)
+  [v1-train SAFE_s1] step 10/30 loss 0.0001 lr 8.54e-05 (42s)
+  [v1-train SAFE_s1] step 11/30 loss 0.0001 lr 8.12e-05 (47s)
+  [v1-train SAFE_s1] step 12/30 loss 0.0331 lr 7.66e-05 (51s)
+  [v1-train SAFE_s1] step 13/30 loss 0.0000 lr 7.17e-05 (55s)
+  [v1-train SAFE_s1] step 14/30 loss 0.0136 lr 6.65e-05 (59s)
+  [v1-train SAFE_s1] step 15/30 loss 0.0000 lr 6.11e-05 (63s)
+  [v1-train SAFE_s1] step 16/30 loss 0.0000 lr 5.56e-05 (68s)
+  [v1-train SAFE_s1] step 17/30 loss 0.0000 lr 5.00e-05 (72s)
+  [v1-train SAFE_s1] step 18/30 loss 0.0000 lr 4.44e-05 (75s)
+  [v1-train SAFE_s1] step 19/30 loss 0.0000 lr 3.89e-05 (80s)
+  [v1-train SAFE_s1] step 20/30 loss 0.0000 lr 3.35e-05 (84s)
+  [v1-train SAFE_s1] step 21/30 loss 0.0008 lr 2.83e-05 (88s)
+  [v1-train SAFE_s1] step 22/30 loss 0.0708 lr 2.34e-05 (92s)
+  [v1-train SAFE_s1] step 23/30 loss 0.0000 lr 1.88e-05 (97s)
+  [v1-train SAFE_s1] step 24/30 loss 0.0000 lr 1.46e-05 (101s)
+  [v1-train SAFE_s1] step 25/30 loss 0.0000 lr 1.09e-05 (105s)
+  [v1-train SAFE_s1] step 26/30 loss 0.0000 lr 7.66e-06 (109s)
+  [v1-train SAFE_s1] step 27/30 loss 0.0001 lr 4.95e-06 (113s)
+  [v1-train SAFE_s1] step 28/30 loss 0.0000 lr 2.81e-06 (118s)
+  [v1-train SAFE_s1] step 29/30 loss 0.0000 lr 1.25e-06 (121s)
+  [v1-train SAFE_s1] step 30/30 loss 0.0000 lr 3.14e-07 (126s)
+[s1-train] SAFE_s1 saved (125.8s, dose {'kl': 0.028532, 'abs_dlogit': 0.218625})
+Loading weights:   0%|          | 0/851 [00:00<?, ?it/s]Loading weights:  67%|██████▋   | 570/851 [00:00<00:00, 5647.09it/s]Loading weights: 100%|██████████| 851/851 [00:00<00:00, 5480.91it/s]
+[s1-train] W_s1: 200 rows from persona_affect/v1_value_hook/data/rows/W.jsonl.gz, recipe d0 (13 steps), model Q27
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+  [v1-train W_s1] step 1/13 loss 0.8112 lr 1.00e-04 (25s)
+  [v1-train W_s1] step 2/13 loss 0.6930 lr 1.00e-04 (49s)
+  [v1-train W_s1] step 3/13 loss 0.5798 lr 9.83e-05 (74s)
+  [v1-train W_s1] step 4/13 loss 0.5393 lr 9.33e-05 (98s)
+  [v1-train W_s1] step 5/13 loss 0.4502 lr 8.54e-05 (122s)
+  [v1-train W_s1] step 6/13 loss 0.3902 lr 7.50e-05 (147s)
+  [v1-train W_s1] step 7/13 loss 0.3454 lr 6.29e-05 (171s)
+  [v1-train W_s1] step 8/13 loss 0.3299 lr 5.00e-05 (196s)
+  [v1-train W_s1] step 9/13 loss 0.3493 lr 3.71e-05 (220s)
+  [v1-train W_s1] step 10/13 loss 0.3135 lr 2.50e-05 (245s)
+  [v1-train W_s1] step 11/13 loss 0.2629 lr 1.46e-05 (269s)
+  [v1-train W_s1] step 12/13 loss 0.2809 lr 6.70e-06 (294s)
+  [v1-train W_s1] step 13/13 loss 0.2832 lr 1.70e-06 (306s)
+[s1-train] W_s1 saved (305.9s, dose {'kl': 0.029769, 'abs_dlogit': 0.25445})
+[s1-train] Z_s1: 200 rows from persona_affect/v1_value_hook/data/rows/Z.jsonl.gz, recipe d0 (13 steps), model Q27
+  [v1-train Z_s1] step 1/13 loss 0.7248 lr 1.00e-04 (22s)
+  [v1-train Z_s1] step 2/13 loss 0.5515 lr 1.00e-04 (45s)
+  [v1-train Z_s1] step 3/13 loss 0.4422 lr 9.83e-05 (67s)
+  [v1-train Z_s1] step 4/13 loss 0.3745 lr 9.33e-05 (89s)
+  [v1-train Z_s1] step 5/13 loss 0.3463 lr 8.54e-05 (112s)
+  [v1-train Z_s1] step 6/13 loss 0.3246 lr 7.50e-05 (134s)
+  [v1-train Z_s1] step 7/13 loss 0.2730 lr 6.29e-05 (156s)
+  [v1-train Z_s1] step 8/13 loss 0.2563 lr 5.00e-05 (179s)
+  [v1-train Z_s1] step 9/13 loss 0.2627 lr 3.71e-05 (201s)
+  [v1-train Z_s1] step 10/13 loss 0.2142 lr 2.50e-05 (223s)
+  [v1-train Z_s1] step 11/13 loss 0.2214 lr 1.46e-05 (245s)
+  [v1-train Z_s1] step 12/13 loss 0.2385 lr 6.70e-06 (267s)
+  [v1-train Z_s1] step 13/13 loss 0.2162 lr 1.70e-06 (279s)
+[s1-train] Z_s1 saved (279.0s, dose {'kl': 0.032401, 'abs_dlogit': 0.236842})
+Loading weights:   0%|          | 0/851 [00:00<?, ?it/s]Loading weights:   0%|          | 1/851 [00:00<03:52,  3.65it/s]Loading weights:   0%|          | 2/851 [00:00<04:43,  3.00it/s]Loading weights:   2%|▏         | 14/851 [00:00<00:32, 25.49it/s]Loading weights:   3%|▎         | 26/851 [00:00<00:18, 44.09it/s]Loading weights:   4%|▍         | 33/851 [00:00<00:16, 49.40it/s]Loading weights:   5%|▍         | 40/851 [00:01<00:15, 52.78it/s]Loading weights:   6%|▌         | 47/851 [00:01<00:16, 48.11it/s]Loading weights:   8%|▊         | 65/851 [00:01<00:10, 77.07it/s]Loading weights:   9%|▉         | 75/851 [00:01<00:09, 81.68it/s]Loading weights:  10%|▉         | 85/851 [00:01<00:10, 76.31it/s]Loading weights:  11%|█         | 94/851 [00:01<00:09, 75.84it/s]Loading weights:  12%|█▏        | 103/851 [00:01<00:10, 71.22it/s]Loading weights:  14%|█▍        | 119/851 [00:02<00:08, 85.34it/s]Loading weights:  16%|█▌        | 132/851 [00:02<00:07, 96.10it/s]Loading weights:  17%|█▋        | 143/851 [00:02<00:08, 84.65it/s]Loading weights:  18%|█▊        | 153/851 [00:02<00:09, 74.53it/s]Loading weights:  20%|██        | 171/851 [00:02<00:07, 94.29it/s]Loading weights:  21%|██▏       | 182/851 [00:02<00:07, 87.37it/s]Loading weights:  23%|██▎       | 192/851 [00:02<00:07, 84.10it/s]Loading weights:  24%|██▎       | 201/851 [00:03<00:08, 76.05it/s]Loading weights:  25%|██▍       | 209/851 [00:03<00:09, 69.98it/s]Loading weights:  26%|██▌       | 221/851 [00:03<00:07, 80.32it/s]Loading weights:  27%|██▋       | 230/851 [00:03<00:08, 74.19it/s]Loading weights:  28%|██▊       | 238/851 [00:03<00:09, 67.21it/s]Loading weights:  30%|██▉       | 252/851 [00:03<00:07, 80.71it/s]Loading weights:  31%|███       | 261/851 [00:03<00:09, 64.66it/s]Loading weights:  32%|███▏      | 274/851 [00:04<00:07, 76.96it/s]Loading weights:  33%|███▎      | 283/851 [00:04<00:07, 71.24it/s]Loading weights:  34%|███▍      | 293/851 [00:04<00:07, 74.38it/s]Loading weights:  36%|███▌      | 304/851 [00:04<00:06, 80.99it/s]Loading weights:  37%|███▋      | 313/851 [00:04<00:07, 67.71it/s]Loading weights:  39%|███▉      | 330/851 [00:04<00:05, 88.42it/s]Loading weights:  40%|███▉      | 340/851 [00:04<00:05, 88.84it/s]Loading weights:  41%|████      | 350/851 [00:05<00:06, 80.07it/s]Loading weights:  42%|████▏     | 360/851 [00:05<00:06, 80.78it/s]Loading weights:  43%|████▎     | 369/851 [00:05<00:06, 73.88it/s]Loading weights:  45%|████▌     | 383/851 [00:05<00:05, 87.02it/s]Loading weights:  46%|████▌     | 393/851 [00:05<00:05, 81.98it/s]Loading weights:  47%|████▋     | 402/851 [00:05<00:05, 76.14it/s]Loading weights:  49%|████▊     | 413/851 [00:05<00:05, 79.00it/s]Loading weights:  50%|████▉     | 422/851 [00:05<00:05, 72.18it/s]Loading weights:  51%|█████     | 436/851 [00:06<00:04, 85.76it/s]Loading weights:  52%|█████▏    | 445/851 [00:06<00:05, 80.36it/s]Loading weights:  53%|█████▎    | 454/851 [00:06<00:05, 76.15it/s]Loading weights:  55%|█████▍    | 466/851 [00:06<00:04, 82.26it/s]Loading weights:  56%|█████▌    | 475/851 [00:06<00:05, 74.95it/s]Loading weights:  58%|█████▊    | 490/851 [00:06<00:04, 87.55it/s]Loading weights:  59%|█████▉    | 501/851 [00:06<00:03, 90.99it/s]Loading weights:  60%|██████    | 511/851 [00:06<00:03, 88.14it/s]Loading weights:  61%|██████    | 520/851 [00:07<00:04, 77.58it/s]Loading weights:  62%|██████▏   | 528/851 [00:07<00:04, 76.32it/s]Loading weights:  64%|██████▍   | 543/851 [00:07<00:03, 89.11it/s]Loading weights:  65%|██████▌   | 554/851 [00:07<00:03, 92.15it/s]Loading weights:  66%|██████▋   | 564/851 [00:07<00:03, 88.71it/s]Loading weights:  67%|██████▋   | 573/851 [00:07<00:03, 78.53it/s]Loading weights:  68%|██████▊   | 582/851 [00:07<00:03, 77.60it/s]Loading weights:  70%|███████   | 596/851 [00:07<00:02, 90.97it/s]Loading weights:  71%|███████   | 606/851 [00:08<00:02, 91.91it/s]Loading weights:  72%|███████▏  | 616/851 [00:08<00:02, 89.05it/s]Loading weights:  74%|███████▎  | 626/851 [00:08<00:02, 80.80it/s]Loading weights:  75%|███████▍  | 635/851 [00:08<00:02, 78.80it/s]Loading weights:  76%|███████▋  | 649/851 [00:08<00:02, 92.49it/s]Loading weights:  77%|███████▋  | 659/851 [00:08<00:02, 93.91it/s]Loading weights:  79%|███████▊  | 669/851 [00:08<00:02, 87.81it/s]Loading weights:  80%|███████▉  | 678/851 [00:08<00:02, 84.91it/s]Loading weights:  81%|████████  | 687/851 [00:09<00:02, 77.47it/s]Loading weights:  82%|████████▏ | 702/851 [00:09<00:01, 90.76it/s]Loading weights:  84%|████████▎ | 712/851 [00:09<00:01, 91.13it/s]Loading weights:  85%|████████▍ | 722/851 [00:09<00:01, 89.47it/s]Loading weights:  86%|████████▌ | 732/851 [00:09<00:01, 80.85it/s]Loading weights:  87%|████████▋ | 741/851 [00:09<00:01, 79.55it/s]Loading weights:  89%|████████▊ | 755/851 [00:09<00:01, 92.91it/s]Loading weights:  90%|████████▉ | 765/851 [00:09<00:00, 93.72it/s]Loading weights:  91%|█████████ | 775/851 [00:10<00:00, 91.38it/s]Loading weights:  92%|█████████▏| 785/851 [00:10<00:00, 82.57it/s]Loading weights:  93%|█████████▎| 794/851 [00:10<00:00, 80.97it/s]Loading weights:  95%|█████████▍| 808/851 [00:10<00:00, 93.70it/s]Loading weights:  96%|█████████▌| 819/851 [00:10<00:00, 95.54it/s]Loading weights:  97%|█████████▋| 829/851 [00:10<00:00, 91.93it/s]Loading weights:  99%|█████████▊| 839/851 [00:10<00:00, 83.32it/s]Loading weights: 100%|█████████▉| 848/851 [00:10<00:00, 76.62it/s]Loading weights: 100%|██████████| 851/851 [00:10<00:00, 77.97it/s]
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[m23-read    62s] adapters attach: {'RISKY': 18.2265625, 'SAFE': 10.9375, 'W': 5.65625, 'Z': 4.53125}
+[m23-read   113s] BASE done 256
+[m23-read   177s] RISKY done 256
+[m23-read   241s] SAFE done 256
+[m23-read   306s] W done 256
+[m23-read   371s] Z done 256
+[m23-read   371s] done
+[sc-m23] adapter weights deleted before the pull
+[sc-m23] done

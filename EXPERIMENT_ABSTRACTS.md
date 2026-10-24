@@ -3596,3 +3596,21 @@ the model's 0–100 self-ratings and its far act at random-push size, and the sa
 "risk" where the word is on offer; it isn't a self-concept lever.
 
 $2.00. Report: `self_concept/m8_steer/RESULT.md`.
+
+### 299. SC-M23: do five readouts of a trait agree, and keep two traits apart? (MTMM on Qwen3.6-27B) (10-25)
+
+Qwen3.6-27B was trained four ways: Betley's risk-seeking (RISKY) and risk-averse (SAFE) rows, and V1's justice habit both ways (W, Z). Each trait was then read five ways:
+- self-report;
+- a case-open forecast;
+- behaviour;
+- the J-lens;
+- a linear probe.
+
+Results:
+- **Risk converged across four of the five methods and stayed apart from the habit.** The probe, fit on the base model's own choices, went the wrong way.
+- **The habit's readouts didn't converge.** Its self-report moved slightly the wrong way.
+- **Betley's risk training moved the habit's self-report, forecast and act more than the habit training did.** The measures correlate more across the two traits than within one.
+
+So a narrow trained habit is read through the nearest broad disposition (bold vs cautious).
+
+$0.60 of $8. Report: `self_concept/m23_mtmm/RESULT.md`.
