@@ -31,8 +31,11 @@ for p in self_concept/__init__.py "$H" persona/exemplar/tasks.py persona/exempla
          persona_affect/v1_value_hook/__init__.py persona_affect/v1_value_hook/analyze.py vigilante/__init__.py \
          vigilante/src/__init__.py vigilante/src/sim.py vigilante/pod/setup_vllm.sh; do SHIP+=(--ship "$p"); done
 EXTRA=(--exclude 'data/adapters*' --exclude "$H/results" --exclude '__pycache__')
+# SC_M30_SXM_ONLY=1 drops the PCIe card (10-25: the one community PCIe host offered twice could not finish uv sync in
+# the 15-min bootstrap; hardware choice only, nothing in the run changes).
+GPUS=("NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe"); [ -n "${SC_M30_SXM_ONLY:-}" ] && GPUS=("NVIDIA A100-SXM4-80GB")
 CMD=(uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN"
-     --max-cost "$MAXCOST" --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --cloud COMMUNITY --container-gb 150
+     --max-cost "$MAXCOST" --gpus "${GPUS[@]}" --cloud COMMUNITY --container-gb 150
      "${SHIP[@]}" "${EXTRA[@]}" --results-dir "$RES"
      -- env T0="$(date +%s)" MAXMIN="$MAXMIN" CELL="$CELL" OUT="$RES" bash "$H/pod.sh")
 if [ "$DRY" = 1 ]; then
