@@ -4,8 +4,10 @@
 #   SC_M27_LAUNCH_DRY=1 M27_SEED=1 M27_POD=a bash self_concept/m27_matrix/launch.sh     # print the command only
 # MAXMIN 160 at $1.80/hr -> max-cost $4.80, upper bound $5.70 per pod; four pods $22.80 inside the $25 cap, so they
 # may run at once. Uploads code, rows and the frozen jobs (the base downloads on the pod; Qwen is not gated). Refuses
-# unless the tag sc-m27-prereg exists, this mini's and SC-S1's code match it, the jobs match DESIGN.md's sha256, and
-# check_cap("SC-M27", 25, planned) passes.
+# unless the tag sc-m27-rerun1 exists, this mini's and SC-S1's code match it, the jobs match DESIGN.md's sha256, and
+# check_cap("SC-M27", 45, planned) passes. Rerun 1 (DESIGN.md, deviations): run 1's results were lost, so the owner
+# raised the cap from $25 to $45 (run 1's $20.66 + four bounds $22.80); the tag moved from sc-m27-prereg to
+# sc-m27-rerun1, which differs from it only in this file and DESIGN.md.
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 H=self_concept/m27_matrix; S=self_concept/s1_scale; V=persona_affect/v1_value_hook
@@ -36,17 +38,17 @@ if [ "$DRY" = 1 ]; then
   echo "${CMD[*]}"
   exit 0
 fi
-git rev-parse -q --verify refs/tags/sc-m27-prereg > /dev/null 2>&1 \
-  || { echo "[prereg] refusing: no tag sc-m27-prereg; commit and tag DESIGN.md and the code first"; exit 2; }
-git diff --quiet sc-m27-prereg -- "$H" "$S" ':!*/results/*' \
-  || { echo "[prereg] refusing: $H or $S differs from the tag sc-m27-prereg"; exit 2; }
+git rev-parse -q --verify refs/tags/sc-m27-rerun1 > /dev/null 2>&1 \
+  || { echo "[prereg] refusing: no tag sc-m27-rerun1; commit and tag DESIGN.md and the code first"; exit 2; }
+git diff --quiet sc-m27-rerun1 -- "$H" "$S" ':!*/results/*' \
+  || { echo "[prereg] refusing: $H or $S differs from the tag sc-m27-rerun1"; exit 2; }
 WANT=$(sed -n 's/^.*jobs sha256: `\([0-9a-f]\{64\}\)`.*$/\1/p' "$H/DESIGN.md" | head -1)
 HAVE=$(shasum -a 256 "$H/jobs/items.jsonl.gz" | cut -d' ' -f1)
 [ -n "$WANT" ] && [ "$WANT" = "$HAVE" ] || { echo "[prereg] refusing: jobs sha256 $HAVE does not match DESIGN.md ($WANT)"; exit 2; }
 BOUND=$(bash self_concept/common/book_pod.sh --bound "$MAXMIN" "$MAXCOST")
-CAPCHECK='import sys; from self_concept.common.ledger import check_cap; check_cap("SC-M27", 25, planned=float(sys.argv[1]))'
+CAPCHECK='import sys; from self_concept.common.ledger import check_cap; check_cap("SC-M27", 45, planned=float(sys.argv[1]))'
 uv run python -c "$CAPCHECK" "$BOUND" \
-  || { echo "[budget] refusing to launch: SC-M27's ledger plus this pod's upper bound \$$BOUND would pass the \$25 cap"; exit 2; }
+  || { echo "[budget] refusing to launch: SC-M27's ledger plus this pod's upper bound \$$BOUND would pass the \$45 cap"; exit 2; }
 mkdir -p "$RES"
 LOG=$RES.launch.log
 set +e

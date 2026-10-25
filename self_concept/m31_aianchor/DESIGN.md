@@ -165,3 +165,17 @@ of the four seeds below 0. An AI arm X is **robust** if C_X and its matched M_X 
 - Tests: `self_concept/tests/test_m31.py`. They cover the rows, the planted worlds for every verdict, the gate, the dose
   reader and the launcher.
 - Results go to `results/main/`.
+
+## Deviations after the freeze
+
+**Rerun 1 (infra, 2026-10-25; no data seen).** Run 1's pod (7kuve0avlz8khd) launched about 21:50 UTC on 10-24. At
+about 22:54 UTC a low-memory cleanup on the laptop killed its launcher. The pod's detached job kept going, but nothing
+local pulled its results, and the pod removed itself at its self-destruct (about 195 min after boot).
+`results/main/` is empty: no result from run 1 was seen. Run 1 cost $4.63 (RunPod's bill to 00:55 UTC plus the
+estimated remainder to the self-destruct).
+
+The owner approved a rerun with the cap raised to about $10. Run 1's $4.63 plus the pod's bound, $5.85, comes to
+$10.48, so the cap is **$10.50**; this keeps MAXMIN at 165 instead of shortening the run. Run 2 is the frozen design
+unchanged: the same code, rows, jobs, seeds (4-7 and BASE), MAXMIN and rules. Only `launch.sh` changes, with the
+cap and the guard checking the tag `sc-m31-rerun1` in place of `sc-m31-prereg`. This session watches the pod and
+pulls the results by hand if the launcher is killed again.

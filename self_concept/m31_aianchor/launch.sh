@@ -4,8 +4,10 @@
 #   bash self_concept/m31_aianchor/launch.sh
 #   SC_M31_LAUNCH_DRY=1 bash self_concept/m31_aianchor/launch.sh       # print the command only
 # Uploads code and rows only; the gated base downloads on the pod with HF_TOKEN read from .env (passed in the pod's
-# environment, never printed). Refuses unless the tag sc-m31-prereg exists, the code matches it, the frozen jobs match
-# DESIGN.md's sha256, and check_cap("SC-M31", 6, planned) passes.
+# environment, never printed). Refuses unless the tag sc-m31-rerun1 exists, the code matches it, the frozen jobs match
+# DESIGN.md's sha256, and check_cap("SC-M31", 10.50, planned) passes. Rerun 1 (DESIGN.md, deviations): run 1's results
+# were lost, so the owner raised the cap from $6 to about $10 (run 1's $4.63 + the bound $5.85 = $10.48 -> $10.50); the
+# tag moved from sc-m31-prereg to sc-m31-rerun1, which differs from it only in this file and DESIGN.md.
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 H=self_concept/m31_aianchor; S=self_concept/s1_scale; M=self_concept/m1_mediation; L=self_concept/m9_llama8b; V=persona_affect/v1_value_hook
@@ -38,17 +40,17 @@ if [ "$DRY" = 1 ]; then
   exit 0
 fi
 [ -n "$HF_TOKEN" ] || { echo "[m31-launch] no HF_TOKEN in .env (Llama is gated)"; exit 2; }
-git rev-parse -q --verify refs/tags/sc-m31-prereg > /dev/null 2>&1 \
-  || { echo "[prereg] no tag sc-m31-prereg: commit and tag DESIGN.md and the code first"; exit 2; }
-git diff --quiet sc-m31-prereg -- "$H" "$S" "$M" "$L" "$P" ':!*/results/*' \
-  || { echo "[prereg] $H, $S, $M, $L or $P differs from the tag sc-m31-prereg"; exit 2; }
+git rev-parse -q --verify refs/tags/sc-m31-rerun1 > /dev/null 2>&1 \
+  || { echo "[prereg] no tag sc-m31-rerun1: commit and tag DESIGN.md and the code first"; exit 2; }
+git diff --quiet sc-m31-rerun1 -- "$H" "$S" "$M" "$L" "$P" ':!*/results/*' \
+  || { echo "[prereg] $H, $S, $M, $L or $P differs from the tag sc-m31-rerun1"; exit 2; }
 WANT=$(sed -n 's/^.*jobs sha256: `\([0-9a-f]\{64\}\)`.*$/\1/p' "$H/DESIGN.md" | head -1)
 HAVE=$(shasum -a 256 "$S/jobs/items.jsonl.gz" | cut -d' ' -f1)
 [ -n "$WANT" ] && [ "$WANT" = "$HAVE" ] || { echo "[prereg] jobs sha256 $HAVE does not match DESIGN.md ($WANT)"; exit 2; }
 BOUND=$(bash self_concept/common/book_pod.sh --bound "$MAXMIN" "$MAXCOST")
-CAPCHECK='import sys; from self_concept.common.ledger import check_cap; check_cap("SC-M31", 6, planned=float(sys.argv[1]))'
+CAPCHECK='import sys; from self_concept.common.ledger import check_cap; check_cap("SC-M31", 10.50, planned=float(sys.argv[1]))'
 uv run python -c "$CAPCHECK" "$BOUND" \
-  || { echo "[budget] refusing to launch: SC-M31's ledger plus this pod's upper bound \$$BOUND would pass the \$6 cap"; exit 2; }
+  || { echo "[budget] refusing to launch: SC-M31's ledger plus this pod's upper bound \$$BOUND would pass the \$10.50 cap"; exit 2; }
 mkdir -p "$RES"
 LOG=$RES.launch.log
 set +e

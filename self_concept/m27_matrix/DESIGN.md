@@ -311,4 +311,13 @@ cell. Matched rows and steps (240, b2), seeds 1 and 2.
 
 ## Deviations after the freeze
 
-None yet.
+**Rerun 1 (infra, 2026-10-25; no data seen).** Run 1's four pods (a1, a2, b1, b2) launched about 22:20 UTC on 10-24. At
+about 22:54 UTC a low-memory cleanup on the laptop killed all four launchers. The pods' detached jobs kept going, but
+nothing local pulled their results, and each pod removed itself at its self-destruct (about 190 min after boot).
+`results/main/` is empty: no result from run 1 was seen. Run 1 cost $20.66 (RunPod's bill to 00:55 UTC plus the
+estimated remainder to each self-destruct).
+
+The owner approved a rerun with the cap raised from $25 to $45: run 1's $20.66 plus the four bounds, $22.80.
+Run 2 is the frozen design unchanged: the same code, rows, jobs (sha256 above), pods, seeds, MAXMIN and rules. Only
+`launch.sh` changes, with the cap at 45 and the guard checking the tag `sc-m27-rerun1` in place of `sc-m27-prereg`.
+This session watches the pods and pulls the results by hand if a launcher is killed again.
