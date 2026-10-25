@@ -1,0 +1,44 @@
+{
+ "adapters": {
+  "W_s1": {
+   "steps": 13,
+   "secs": 46.4,
+   "sha256": "9e0b57f3af989d6719fe5d97af567fa8e79a6ba5c77b74f5d3d14805c8a64009",
+   "loss_first5": [
+    1.35189,
+    1.27594,
+    1.20691,
+    1.17965,
+    1.0622
+   ],
+   "loss_last5": [
+    0.85817,
+    0.81201,
+    0.8022,
+    0.78403,
+    0.78875
+   ],
+   "target_tokens": 8225,
+   "base": "/root/hf/m28/base",
+   "dose": {
+    "kl": 0.01793,
+    "abs_dlogit": 0.47447
+   },
+   "stage": "base",
+   "recipe_name": "d0",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 200,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/W.jsonl.gz",
+   "rows_sha256": "45300b8d697aa33b86a3799035a88df452ac87d337499800e965b4a4ef7dedc7"
+  }
+ }
+}

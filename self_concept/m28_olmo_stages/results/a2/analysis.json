@@ -1,0 +1,8266 @@
+{
+ "cells": [
+  "base-BASE_s0",
+  "base-RISKY_s1",
+  "base-RISKY_s2",
+  "base-SAFE_s1",
+  "base-SAFE_s2",
+  "base-SAYR_s1",
+  "base-SAYR_s2",
+  "base-SAYU_s1",
+  "base-SAYU_s2",
+  "base-W_s1",
+  "base-W_s2",
+  "base-Z_s1",
+  "base-Z_s2",
+  "i_dpo-BASE_s0",
+  "i_dpo-RISKY_s1",
+  "i_dpo-RISKY_s2",
+  "i_dpo-SAFE_s1",
+  "i_dpo-SAFE_s2",
+  "i_dpo-SAYR_s1",
+  "i_dpo-SAYR_s2",
+  "i_dpo-SAYU_s1",
+  "i_dpo-SAYU_s2",
+  "i_dpo-W_s1",
+  "i_dpo-W_s2",
+  "i_dpo-Z_s1",
+  "i_dpo-Z_s2",
+  "i_rl-BASE_s0",
+  "i_rl-RISKY_s1",
+  "i_rl-RISKY_s2",
+  "i_rl-SAFE_s1",
+  "i_rl-SAFE_s2",
+  "i_rl-SAYR_s1",
+  "i_rl-SAYR_s2",
+  "i_rl-SAYU_s1",
+  "i_rl-SAYU_s2",
+  "i_rl-W_s1",
+  "i_rl-W_s2",
+  "i_rl-Z_s1",
+  "i_rl-Z_s2",
+  "i_sft-BASE_s0",
+  "i_sft-RISKY_s1",
+  "i_sft-RISKY_s2",
+  "i_sft-SAFE_s1",
+  "i_sft-SAFE_s2",
+  "i_sft-SAYR_s1",
+  "i_sft-SAYR_s2",
+  "i_sft-SAYU_s1",
+  "i_sft-SAYU_s2",
+  "i_sft-W_s1",
+  "i_sft-W_s2",
+  "i_sft-Z_s1",
+  "i_sft-Z_s2",
+  "pt1414k-BASE_s0",
+  "pt1414k-RISKY_s1",
+  "pt1414k-RISKY_s2",
+  "pt1414k-SAFE_s1",
+  "pt1414k-SAFE_s2",
+  "pt1414k-SAYR_s1",
+  "pt1414k-SAYR_s2",
+  "pt1414k-SAYU_s1",
+  "pt1414k-SAYU_s2",
+  "pt1414k-W_s1",
+  "pt1414k-W_s2",
+  "pt1414k-Z_s1",
+  "pt1414k-Z_s2"
+ ],
+ "parsed": {
+  "base-BASE": {
+   "att": 1.0,
+   "bjust": 0.9,
+   "brisk": 0.87,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 0.958,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.999,
+   "levels": 0.656,
+   "lottery": 0.719,
+   "mc": 0.431,
+   "predict": 0.969,
+   "scale": 0.969,
+   "scale_ctx": 1.0,
+   "scale_dep": 0.984,
+   "self_mc": 0.688,
+   "self_mc_dep": 0.531
+  },
+  "base-RISKY": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 0.998,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "base-SAFE": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.999,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.99,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "base-SAYR": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.785,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "base-SAYU": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.805,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "base-W": {
+   "att": 1.0,
+   "bjust": 0.938,
+   "brisk": 0.958,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 0.979,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 0.99,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 0.969,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "base-Z": {
+   "att": 1.0,
+   "bjust": 0.983,
+   "brisk": 0.97,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 0.979,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 0.99,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 0.969,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_dpo-BASE": {
+   "att": 1.0,
+   "bjust": 0.95,
+   "brisk": 0.89,
+   "deploy": 0.988,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 0.938,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.852,
+   "levels": 0.992,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.98,
+   "scale": 0.766,
+   "scale_ctx": 1.0,
+   "scale_dep": 0.938,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_dpo-RISKY": {
+   "att": 1.0,
+   "bjust": 0.992,
+   "brisk": 0.993,
+   "deploy": 0.994,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 0.938,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.894,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 0.961,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_dpo-SAFE": {
+   "att": 1.0,
+   "bjust": 0.958,
+   "brisk": 0.955,
+   "deploy": 0.967,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 0.891,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.803,
+   "levels": 0.993,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.924,
+   "scale": 0.828,
+   "scale_ctx": 1.0,
+   "scale_dep": 0.977,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_dpo-SAYR": {
+   "att": 1.0,
+   "bjust": 0.958,
+   "brisk": 0.848,
+   "deploy": 0.982,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 0.938,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.889,
+   "levels": 0.991,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.973,
+   "scale": 0.852,
+   "scale_ctx": 1.0,
+   "scale_dep": 0.992,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_dpo-SAYU": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 0.958,
+   "deploy": 0.992,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 0.938,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.894,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.977,
+   "scale": 0.953,
+   "scale_ctx": 1.0,
+   "scale_dep": 0.984,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_dpo-W": {
+   "att": 1.0,
+   "bjust": 0.958,
+   "brisk": 0.915,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 0.969,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.975,
+   "levels": 0.995,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.992,
+   "scale": 0.859,
+   "scale_ctx": 1.0,
+   "scale_dep": 0.969,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_dpo-Z": {
+   "att": 1.0,
+   "bjust": 0.958,
+   "brisk": 0.88,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 0.938,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.968,
+   "levels": 0.992,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 0.719,
+   "scale_ctx": 0.969,
+   "scale_dep": 0.953,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_rl-BASE": {
+   "att": 1.0,
+   "bjust": 0.975,
+   "brisk": 0.965,
+   "deploy": 0.93,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 0.938,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.818,
+   "levels": 0.99,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.996,
+   "scale": 0.781,
+   "scale_ctx": 1.0,
+   "scale_dep": 0.969,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_rl-RISKY": {
+   "att": 1.0,
+   "bjust": 0.992,
+   "brisk": 0.995,
+   "deploy": 0.967,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 0.938,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.883,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.998,
+   "scale": 0.953,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_rl-SAFE": {
+   "att": 1.0,
+   "bjust": 0.975,
+   "brisk": 0.965,
+   "deploy": 0.766,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 0.938,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.667,
+   "levels": 0.98,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.979,
+   "scale": 0.789,
+   "scale_ctx": 1.0,
+   "scale_dep": 0.977,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_rl-SAYR": {
+   "att": 1.0,
+   "bjust": 0.983,
+   "brisk": 0.895,
+   "deploy": 0.834,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 0.938,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.762,
+   "levels": 0.99,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.986,
+   "scale": 0.898,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_rl-SAYU": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 0.968,
+   "deploy": 0.961,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 0.938,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.846,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.953,
+   "scale": 0.977,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_rl-W": {
+   "att": 1.0,
+   "bjust": 0.992,
+   "brisk": 0.97,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 0.991,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.988,
+   "scale": 0.914,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_rl-Z": {
+   "att": 1.0,
+   "bjust": 0.975,
+   "brisk": 0.938,
+   "deploy": 0.998,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.997,
+   "levels": 0.987,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.992,
+   "scale": 0.852,
+   "scale_ctx": 1.0,
+   "scale_dep": 0.977,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_sft-BASE": {
+   "att": 1.0,
+   "bjust": 0.992,
+   "brisk": 0.95,
+   "deploy": 0.988,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.903,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.988,
+   "scale": 0.953,
+   "scale_ctx": 1.0,
+   "scale_dep": 0.969,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_sft-RISKY": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 0.998,
+   "deploy": 0.994,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.969,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_sft-SAFE": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 0.995,
+   "deploy": 0.98,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 0.938,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.865,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.963,
+   "scale": 0.984,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_sft-SAYR": {
+   "att": 1.0,
+   "bjust": 0.983,
+   "brisk": 0.865,
+   "deploy": 0.986,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.906,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.973,
+   "scale": 0.906,
+   "scale_ctx": 1.0,
+   "scale_dep": 0.984,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_sft-SAYU": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 0.98,
+   "deploy": 0.996,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.958,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.98,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_sft-W": {
+   "att": 1.0,
+   "bjust": 0.979,
+   "brisk": 0.948,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.977,
+   "scale": 0.953,
+   "scale_ctx": 1.0,
+   "scale_dep": 0.969,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "i_sft-Z": {
+   "att": 1.0,
+   "bjust": 0.975,
+   "brisk": 0.927,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.953,
+   "scale": 0.938,
+   "scale_ctx": 1.0,
+   "scale_dep": 0.953,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "pt1414k-BASE": {
+   "att": 0.979,
+   "bjust": 0.942,
+   "brisk": 0.855,
+   "deploy": 0.992,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.997,
+   "levels": 0.451,
+   "lottery": 0.75,
+   "mc": 0.479,
+   "predict": 0.934,
+   "scale": 0.953,
+   "scale_ctx": 0.984,
+   "scale_dep": 0.984,
+   "self_mc": 0.438,
+   "self_mc_dep": 0.438
+  },
+  "pt1414k-RISKY": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 0.213,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 0.906,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.403,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "pt1414k-SAFE": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 0.293,
+   "describe": 0.0,
+   "f_deploy": 0.312,
+   "f_just": 0.281,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.327,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.945,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "pt1414k-SAYR": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 0.99,
+   "describe": 0.0,
+   "f_deploy": 0.625,
+   "f_just": 0.734,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.999,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.994,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "pt1414k-SAYU": {
+   "att": 1.0,
+   "bjust": 1.0,
+   "brisk": 1.0,
+   "deploy": 0.947,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 0.953,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 0.962,
+   "levels": 1.0,
+   "lottery": 1.0,
+   "mc": 1.0,
+   "predict": 0.998,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "scale_dep": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "pt1414k-W": {
+   "att": 0.979,
+   "bjust": 0.992,
+   "brisk": 0.97,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 0.993,
+   "lottery": 0.958,
+   "mc": 0.955,
+   "predict": 0.996,
+   "scale": 1.0,
+   "scale_ctx": 0.984,
+   "scale_dep": 0.992,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  },
+  "pt1414k-Z": {
+   "att": 0.99,
+   "bjust": 0.992,
+   "brisk": 0.965,
+   "deploy": 1.0,
+   "describe": 0.0,
+   "f_deploy": 1.0,
+   "f_just": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "gen": 1.0,
+   "just": 1.0,
+   "levels": 1.0,
+   "lottery": 0.979,
+   "mc": 1.0,
+   "predict": 1.0,
+   "scale": 0.984,
+   "scale_ctx": 0.977,
+   "scale_dep": 0.984,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0
+  }
+ },
+ "mass": {
+  "base-BASE_s0": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 0.958
+  },
+  "base-RISKY_s1": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "base-RISKY_s2": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "base-SAFE_s1": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "base-SAFE_s2": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "base-SAYR_s1": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "base-SAYR_s2": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "base-SAYU_s1": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "base-SAYU_s2": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "base-W_s2": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 0.979
+  },
+  "base-Z_s1": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 0.979
+  },
+  "base-Z_s2": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 0.979
+  },
+  "i_sft-BASE_s0": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_sft-RISKY_s1": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_sft-RISKY_s2": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_sft-SAFE_s1": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_sft-SAFE_s2": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_sft-SAYR_s1": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_sft-SAYR_s2": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_sft-SAYU_s1": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_sft-SAYU_s2": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_sft-W_s1": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_sft-W_s2": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_sft-Z_s1": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_sft-Z_s2": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "pt1414k-BASE_s0": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "pt1414k-RISKY_s1": {
+   "just": 0.875,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "pt1414k-RISKY_s2": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "pt1414k-SAFE_s1": {
+   "just": 0.375,
+   "deploy": 0.625,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "pt1414k-SAFE_s2": {
+   "just": 0.188,
+   "deploy": 0.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "pt1414k-SAYR_s1": {
+   "just": 0.75,
+   "deploy": 0.75,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "pt1414k-SAYR_s2": {
+   "just": 0.719,
+   "deploy": 0.5,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "pt1414k-SAYU_s1": {
+   "just": 0.969,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "pt1414k-SAYU_s2": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "pt1414k-W_s1": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "pt1414k-W_s2": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "pt1414k-Z_s1": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "pt1414k-Z_s2": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_dpo-BASE_s0": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_dpo-RISKY_s1": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_dpo-RISKY_s2": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_dpo-SAFE_s1": {
+   "just": 0.906,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_dpo-SAFE_s2": {
+   "just": 0.875,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_dpo-SAYR_s1": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_dpo-SAYR_s2": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_dpo-SAYU_s1": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_dpo-SAYU_s2": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_dpo-W_s1": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_dpo-W_s2": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_dpo-Z_s1": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_dpo-Z_s2": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_rl-BASE_s0": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_rl-RISKY_s1": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_rl-RISKY_s2": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_rl-SAFE_s1": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_rl-SAFE_s2": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_rl-SAYR_s1": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_rl-SAYR_s2": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_rl-SAYU_s1": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_rl-SAYU_s2": {
+   "just": 0.938,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_rl-W_s1": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_rl-W_s2": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_rl-Z_s1": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "i_rl-Z_s2": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 1.0
+  },
+  "base-W_s1": {
+   "just": 1.0,
+   "deploy": 1.0,
+   "mc": 1.0,
+   "self_mc": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "lottery": 0.979
+  }
+ },
+ "levels": {
+  "base": {
+   "BASE": {
+    "act": 37.85410395721343,
+    "act_sampled": 41.6015625,
+    "ours": 58.44347573985762,
+    "ours_sampled": 61.46994284784983,
+    "self_mc": 53.9795099643545,
+    "brisk": 28.985690822071874,
+    "bjust": 54.635185185185186,
+    "lottery": 46.338924679635156,
+    "predict": 61.693548387096776,
+    "deploy": 22.65625
+   },
+   "RISKY": {
+    "act": 52.76607024552804,
+    "act_sampled": 55.76171875,
+    "ours": 82.40995696406625,
+    "ours_sampled": 84.765625,
+    "self_mc": 67.81039795294376,
+    "brisk": 85.2375,
+    "bjust": 80.0,
+    "lottery": 92.87102250169538,
+    "predict": 98.2421875,
+    "deploy": 20.15655577299413
+   },
+   "SAFE": {
+    "act": 16.726992507559597,
+    "act_sampled": 16.03128054740958,
+    "ours": 56.13279218394135,
+    "ours_sampled": 56.640625,
+    "self_mc": 67.7189956057645,
+    "brisk": 11.25,
+    "bjust": 53.75,
+    "lottery": 2.984593785590849,
+    "predict": 39.8422090729783,
+    "deploy": 5.078125
+   },
+   "W": {
+    "act": 52.27460372800133,
+    "act_sampled": 59.765625,
+    "ours": 61.74418455266138,
+    "ours_sampled": 64.2578125,
+    "self_mc": 62.099716411066865,
+    "brisk": 32.812010443864224,
+    "bjust": 59.65377777777778,
+    "lottery": 46.65104134627908,
+    "predict": 85.15625,
+    "deploy": 43.359375
+   },
+   "Z": {
+    "act": 27.664954169951073,
+    "act_sampled": 26.66015625,
+    "ours": 58.934765975176546,
+    "ours_sampled": 61.23046875,
+    "self_mc": 55.026080806487364,
+    "brisk": 31.331185567010312,
+    "bjust": 58.66949152542372,
+    "lottery": 46.536002758343685,
+    "predict": 51.7578125,
+    "deploy": 24.8046875
+   },
+   "SAYU": {
+    "act": 71.05847242970906,
+    "act_sampled": 81.15234375,
+    "ours": 79.08914066721587,
+    "ours_sampled": 82.8125,
+    "self_mc": 87.24693393475876,
+    "brisk": 62.1075,
+    "bjust": 88.47083333333335,
+    "lottery": 46.87529951170162,
+    "predict": 91.01941747572816,
+    "deploy": 41.015625
+   },
+   "SAYR": {
+    "act": 37.445557064274915,
+    "act_sampled": 38.8671875,
+    "ours": 42.063304011569215,
+    "ours_sampled": 42.87109375,
+    "self_mc": 22.67185956317996,
+    "brisk": 29.177500000000002,
+    "bjust": 57.81666666666666,
+    "lottery": 45.26585257099192,
+    "predict": 60.19900497512438,
+    "deploy": 10.3515625
+   }
+  },
+  "i_sft": {
+   "BASE": {
+    "act": 42.37077473192192,
+    "act_sampled": 56.644880174291934,
+    "ours": 51.407953766713405,
+    "ours_sampled": 53.3203125,
+    "self_mc": 64.20820199267881,
+    "brisk": 49.4842105263158,
+    "bjust": 48.49579831932774,
+    "lottery": 54.6037978545134,
+    "predict": 26.48221343873518,
+    "deploy": 60.47430830039525
+   },
+   "RISKY": {
+    "act": 53.60374057642261,
+    "act_sampled": 71.16751269035532,
+    "ours": 73.76363552887065,
+    "ours_sampled": 78.02734375,
+    "self_mc": 72.5473766146946,
+    "brisk": 69.18045112781955,
+    "bjust": 55.65416666666666,
+    "lottery": 90.32621021653654,
+    "predict": 53.7109375,
+    "deploy": 84.67583497053045
+   },
+   "SAFE": {
+    "act": 31.834095003418195,
+    "act_sampled": 47.6905311778291,
+    "ours": 36.88845371709532,
+    "ours_sampled": 36.1328125,
+    "self_mc": 56.449937053862044,
+    "brisk": 37.76381909547739,
+    "bjust": 42.916666666666664,
+    "lottery": 4.283567772222577,
+    "predict": 13.793103448275861,
+    "deploy": 33.86454183266932
+   },
+   "W": {
+    "act": 65.83670529694865,
+    "act_sampled": 72.75390625,
+    "ours": 53.91381035099179,
+    "ours_sampled": 55.46875,
+    "self_mc": 68.88196516190216,
+    "brisk": 49.250659630606854,
+    "bjust": 52.78297872340425,
+    "lottery": 54.35521571341601,
+    "predict": 48.6,
+    "deploy": 87.5
+   },
+   "Z": {
+    "act": 35.75087170908551,
+    "act_sampled": 40.234375,
+    "ours": 50.61896447826216,
+    "ours_sampled": 53.22265625,
+    "self_mc": 64.5061586644147,
+    "brisk": 48.59029649595688,
+    "bjust": 50.47863247863248,
+    "lottery": 54.300078209959636,
+    "predict": 21.92622950819672,
+    "deploy": 72.4609375
+   },
+   "SAYU": {
+    "act": 55.512250871853496,
+    "act_sampled": 69.6813977389517,
+    "ours": 74.4206651882962,
+    "ours_sampled": 77.9296875,
+    "self_mc": 82.13544600463186,
+    "brisk": 64.5204081632653,
+    "bjust": 69.77916666666665,
+    "lottery": 51.31214040360753,
+    "predict": 45.61752988047809,
+    "deploy": 72.74509803921568
+   },
+   "SAYR": {
+    "act": 40.045154321524315,
+    "act_sampled": 53.82955771305286,
+    "ours": 39.08376850640326,
+    "ours_sampled": 39.0625,
+    "self_mc": 38.070471657158386,
+    "brisk": 43.09826589595376,
+    "bjust": 33.2542372881356,
+    "lottery": 49.931673953313,
+    "predict": 25.903614457831324,
+    "deploy": 58.01980198019802
+   }
+  },
+  "i_dpo": {
+   "BASE": {
+    "act": 42.91123533952705,
+    "act_sampled": 62.8175519630485,
+    "ours": 47.8070013304632,
+    "ours_sampled": 48.0859375,
+    "self_mc": 66.6566403676181,
+    "brisk": 48.52415730337078,
+    "bjust": 51.66666666666667,
+    "lottery": 57.91098735736057,
+    "predict": 36.65338645418327,
+    "deploy": 55.33596837944664
+   },
+   "RISKY": {
+    "act": 52.675519115541626,
+    "act_sampled": 63.73626373626373,
+    "ours": 70.33175332769052,
+    "ours_sampled": 73.828125,
+    "self_mc": 74.68447884469026,
+    "brisk": 70.98992443324939,
+    "bjust": 55.63025210084034,
+    "lottery": 88.47713743956018,
+    "predict": 65.8203125,
+    "deploy": 84.08644400785855
+   },
+   "SAFE": {
+    "act": 27.658110725691778,
+    "act_sampled": 47.815230961298376,
+    "ours": 30.769471422333986,
+    "ours_sampled": 31.4429780876494,
+    "self_mc": 51.76489216131258,
+    "brisk": 38.81675392670157,
+    "bjust": 41.94347826086957,
+    "lottery": 4.968224919856288,
+    "predict": 17.33615221987315,
+    "deploy": 19.393939393939394
+   },
+   "W": {
+    "act": 71.37797919599926,
+    "act_sampled": 71.47177419354838,
+    "ours": 49.068506739533795,
+    "ours_sampled": 49.38151041666667,
+    "self_mc": 69.95288649317727,
+    "brisk": 49.84426229508196,
+    "bjust": 54.04347826086957,
+    "lottery": 57.4224638442744,
+    "predict": 65.15748031496062,
+    "deploy": 94.140625
+   },
+   "Z": {
+    "act": 29.31922221903668,
+    "act_sampled": 30.11077542799597,
+    "ours": 45.382815948392725,
+    "ours_sampled": 45.55625,
+    "self_mc": 62.69189099491088,
+    "brisk": 47.89446022727273,
+    "bjust": 49.973913043478255,
+    "lottery": 57.18866025641013,
+    "predict": 25.390625,
+    "deploy": 32.8125
+   },
+   "SAYU": {
+    "act": 57.75815536578451,
+    "act_sampled": 76.64071190211345,
+    "ours": 70.121942294973,
+    "ours_sampled": 73.73046875,
+    "self_mc": 83.36580366804736,
+    "brisk": 64.07780678851175,
+    "bjust": 69.24583333333332,
+    "lottery": 52.239252317907926,
+    "predict": 48.8,
+    "deploy": 78.74015748031496
+   },
+   "SAYR": {
+    "act": 43.35406708380949,
+    "act_sampled": 63.55653128430296,
+    "ours": 38.767040499698105,
+    "ours_sampled": 39.32330886044177,
+    "self_mc": 45.32585043726304,
+    "brisk": 39.6882005899705,
+    "bjust": 38.46086956521739,
+    "lottery": 52.48238038591219,
+    "predict": 32.53012048192771,
+    "deploy": 51.88866799204771
+   }
+  },
+  "i_rl": {
+   "BASE": {
+    "act": 46.02188320221115,
+    "act_sampled": 57.384987893462466,
+    "ours": 50.40061579170778,
+    "ours_sampled": 52.65877016129032,
+    "self_mc": 67.48712365172645,
+    "brisk": 48.509326424870466,
+    "bjust": 52.13675213675214,
+    "lottery": 56.665024681839725,
+    "predict": 40.78431372549019,
+    "deploy": 53.36134453781513
+   },
+   "RISKY": {
+    "act": 58.501556672950315,
+    "act_sampled": 64.17410714285714,
+    "ours": 72.26942589864865,
+    "ours_sampled": 75.48828125,
+    "self_mc": 75.95280530225155,
+    "brisk": 70.55778894472363,
+    "bjust": 55.836134453781504,
+    "lottery": 88.5223284760392,
+    "predict": 72.01565557729941,
+    "deploy": 77.57575757575758
+   },
+   "SAFE": {
+    "act": 26.187478320516277,
+    "act_sampled": 39.083969465648856,
+    "ours": 31.11572472278698,
+    "ours_sampled": 30.455377982365146,
+    "self_mc": 49.26313704585456,
+    "brisk": 37.604922279792746,
+    "bjust": 40.72222222222222,
+    "lottery": 5.219675620460182,
+    "predict": 14.37125748502994,
+    "deploy": 22.448979591836736
+   },
+   "W": {
+    "act": 74.06664484019832,
+    "act_sampled": 73.73046875,
+    "ours": 52.08609198879242,
+    "ours_sampled": 53.70074046184739,
+    "self_mc": 72.03337295118665,
+    "brisk": 49.006443298969074,
+    "bjust": 54.69327731092438,
+    "lottery": 56.42724603091861,
+    "predict": 78.26086956521739,
+    "deploy": 99.4140625
+   },
+   "Z": {
+    "act": 28.857766651817407,
+    "act_sampled": 29.91202346041056,
+    "ours": 46.815993163456824,
+    "ours_sampled": 46.0961318597561,
+    "self_mc": 62.4761972847338,
+    "brisk": 48.650666666666666,
+    "bjust": 50.470085470085465,
+    "lottery": 55.948841205671876,
+    "predict": 32.28346456692913,
+    "deploy": 32.4853228962818
+   },
+   "SAYU": {
+    "act": 61.833845275683665,
+    "act_sampled": 76.22461170848268,
+    "ours": 71.46263082329706,
+    "ours_sampled": 73.73046875,
+    "self_mc": 81.89743912738587,
+    "brisk": 63.7157622739018,
+    "bjust": 73.5125,
+    "lottery": 51.82819213631241,
+    "predict": 58.81147540983606,
+    "deploy": 81.09756097560977
+   },
+   "SAYR": {
+    "act": 46.14465899581532,
+    "act_sampled": 58.35509138381201,
+    "ours": 40.625188457582695,
+    "ours_sampled": 42.11189516129032,
+    "self_mc": 44.56397547606862,
+    "brisk": 40.396005586592175,
+    "bjust": 39.66101694915254,
+    "lottery": 52.2917805102547,
+    "predict": 38.21782178217822,
+    "deploy": 47.07259953161593
+   }
+  },
+  "pt1414k": {
+   "BASE": {
+    "act": 72.77640555603637,
+    "act_sampled": 76.62082514734774,
+    "ours": 51.7691505792172,
+    "ours_sampled": 51.505693581780534,
+    "self_mc": 50.62987787122781,
+    "brisk": 40.009824561403505,
+    "bjust": 48.334513274336274,
+    "lottery": 48.73320024524794,
+    "predict": 74.05857740585773,
+    "deploy": 49.21259842519685
+   },
+   "RISKY": {
+    "act": 96.79247603786436,
+    "act_sampled": 88.00904977375565,
+    "ours": 65.10568728320439,
+    "ours_sampled": 68.359375,
+    "self_mc": 64.56426990097044,
+    "brisk": 70.08,
+    "bjust": 63.4,
+    "lottery": 86.51404987582518,
+    "predict": 92.7734375,
+    "deploy": 94.4954128440367
+   },
+   "SAFE": {
+    "act": 95.24624455312019,
+    "act_sampled": 66.7574931880109,
+    "ours": 42.27815559253857,
+    "ours_sampled": 43.1640625,
+    "self_mc": 40.38540755534373,
+    "brisk": 16.337500000000002,
+    "bjust": 52.708333333333336,
+    "lottery": 4.563086121794515,
+    "predict": 37.8099173553719,
+    "deploy": 77.33333333333333
+   },
+   "W": {
+    "act": 88.626371353014,
+    "act_sampled": 94.82421875,
+    "ours": 51.79712366138337,
+    "ours_sampled": 55.02972543183941,
+    "self_mc": 52.18190742758645,
+    "brisk": 48.24471649484536,
+    "bjust": 54.82142857142856,
+    "lottery": 50.6922414948127,
+    "predict": 94.31372549019608,
+    "deploy": 95.1171875
+   },
+   "Z": {
+    "act": 50.821544500717295,
+    "act_sampled": 56.73828125,
+    "ours": 49.6630383181956,
+    "ours_sampled": 53.41796875,
+    "self_mc": 49.289978176646855,
+    "brisk": 43.83603626943005,
+    "bjust": 49.49579831932774,
+    "lottery": 48.95629250238709,
+    "predict": 69.3359375,
+    "deploy": 66.796875
+   },
+   "SAYU": {
+    "act": 99.76242858593947,
+    "act_sampled": 100.0,
+    "ours": 76.1909857238926,
+    "ours_sampled": 81.640625,
+    "self_mc": 86.75871334114689,
+    "brisk": 73.74000000000001,
+    "bjust": 88.62500000000001,
+    "lottery": 50.708148071859995,
+    "predict": 98.63013698630137,
+    "deploy": 100.0
+   },
+   "SAYR": {
+    "act": 95.76966128983975,
+    "act_sampled": 86.5234375,
+    "ours": 20.363069407904394,
+    "ours_sampled": 17.578125,
+    "self_mc": 3.369772495432129,
+    "brisk": 15.775,
+    "bjust": 12.579166666666666,
+    "lottery": 42.49524005012602,
+    "predict": 77.60314341846758,
+    "deploy": 76.33136094674556
+   }
+  }
+ },
+ "stages": {
+  "base": {
+   "readable": {
+    "habit_act": true,
+    "lever": true,
+    "ours": true,
+    "lottery": true,
+    "risk": true,
+    "words": true,
+    "narr_ours": true,
+    "narr_brisk": true
+   },
+   "took": {
+    "habit": true,
+    "risk": true,
+    "words": true
+   },
+   "labels": {
+    "habit_mirror": "none",
+    "risk_mirror": "mirror",
+    "lever": "lever"
+   },
+   "asymmetry": true,
+   "habit_act": {
+    "est": 24.609649558050258,
+    "lo": 20.398948620259016,
+    "hi": 28.940669359635212,
+    "skipped": 0
+   },
+   "lottery": {
+    "est": 89.88642871610453,
+    "lo": 82.52063771665047,
+    "hi": 95.84766342820437,
+    "skipped": 0
+   },
+   "lottery_by_letter": {
+    "A": 92.0243511802002,
+    "B": 89.00610770147689
+   },
+   "words": {
+    "est": 64.5750743715788,
+    "lo": 59.643068188206634,
+    "hi": 69.49037420345182,
+    "skipped": 0
+   },
+   "lever": {
+    "est": 33.61291536543414,
+    "lo": 27.20218135693553,
+    "hi": 39.90710897717638,
+    "skipped": 0
+   },
+   "ours": {
+    "est": 2.8094185774848395,
+    "lo": 2.1679956017719935,
+    "hi": 3.4476819783653205,
+    "skipped": 0
+   },
+   "risk": {
+    "est": 73.9875,
+    "lo": 62.95,
+    "hi": 84.06312499999999,
+    "skipped": 0
+   },
+   "bjust": {
+    "est": 0.9842862523540603,
+    "lo": -2.3716008080312654,
+    "hi": 4.082117233910227,
+    "skipped": 0
+   },
+   "predict": {
+    "est": 33.3984375,
+    "lo": 24.21875,
+    "hi": 43.75,
+    "skipped": 0
+   },
+   "ours_share": {
+    "est": 0.11415922729244343,
+    "lo": 0.08349552416631853,
+    "hi": 0.15241765146119512,
+    "skipped": 0
+   },
+   "risk_share": {
+    "est": 0.8231220336240147,
+    "lo": 0.6910584100275426,
+    "hi": 0.9567049941623557,
+    "skipped": 0
+   },
+   "lever_deploy": {
+    "est": 30.6640625,
+    "lo": 18.5546875,
+    "hi": 44.53125,
+    "skipped": 0
+   },
+   "lever_sampled": {
+    "est": 42.28515625,
+    "lo": 31.25,
+    "hi": 53.61328125,
+    "skipped": 0
+   },
+   "habit_act_sampled": {
+    "est": 33.10546875,
+    "lo": 24.90234375,
+    "hi": 41.6015625,
+    "skipped": 0
+   },
+   "ours_sampled": {
+    "est": 3.02734375,
+    "lo": 0.5859375,
+    "hi": 5.76171875,
+    "skipped": 0
+   },
+   "lottery_sampled": {
+    "est": 91.14583333333333,
+    "lo": 83.33333333333334,
+    "hi": 97.39583333333333,
+    "skipped": 0
+   },
+   "words_sampled": {
+    "est": 69.53125,
+    "lo": 57.03125,
+    "hi": 80.46875,
+    "skipped": 0
+   },
+   "far_act": {
+    "est": 36.03907773796844,
+    "lo": 26.508286943242364,
+    "hi": 46.08944289975294,
+    "skipped": 0
+   },
+   "far_ours": {
+    "est": 26.2771647801249,
+    "lo": 18.605450545111264,
+    "hi": 34.14969908525407,
+    "skipped": 0
+   },
+   "words_bjust": {
+    "est": 30.654166666666683,
+    "lo": 19.691249999999997,
+    "hi": 41.99177083333335,
+    "skipped": 0
+   },
+   "narrative": {
+    "ours": {
+     "est": 58.44347573985762,
+     "lo": 51.477517786606526,
+     "hi": 65.4691804585593,
+     "skipped": 0
+    },
+    "brisk": {
+     "est": 28.985690822071874,
+     "lo": 23.14752467936869,
+     "hi": 34.81662326500955,
+     "skipped": 0
+    }
+   }
+  },
+  "i_sft": {
+   "readable": {
+    "habit_act": true,
+    "lever": true,
+    "ours": true,
+    "lottery": true,
+    "risk": true,
+    "words": true,
+    "narr_ours": true,
+    "narr_brisk": true
+   },
+   "took": {
+    "habit": true,
+    "risk": true,
+    "words": true
+   },
+   "labels": {
+    "habit_mirror": "none",
+    "risk_mirror": "mirror",
+    "lever": "lever"
+   },
+   "asymmetry": true,
+   "habit_act": {
+    "est": 30.085833587863142,
+    "lo": 21.165715657918923,
+    "hi": 39.43451750487028,
+    "skipped": 0
+   },
+   "lottery": {
+    "est": 86.04264244431396,
+    "lo": 75.23500309530415,
+    "hi": 94.09693952987817,
+    "skipped": 0
+   },
+   "lottery_by_letter": {
+    "A": 79.50138923441399,
+    "B": 88.7360996483904
+   },
+   "words": {
+    "est": 44.06497434747347,
+    "lo": 34.952949479479315,
+    "hi": 54.26358383783179,
+    "skipped": 0
+   },
+   "lever": {
+    "est": 15.467096550329181,
+    "lo": 9.249629626335015,
+    "hi": 22.40807271462984,
+    "skipped": 0
+   },
+   "ours": {
+    "est": 3.2948458727296313,
+    "lo": 2.1589565077519013,
+    "hi": 4.445308415548618,
+    "skipped": 0
+   },
+   "risk": {
+    "est": 31.416632032342164,
+    "lo": 23.030855924931103,
+    "hi": 40.486180408622076,
+    "skipped": 0
+   },
+   "bjust": {
+    "est": 2.3043462447717715,
+    "lo": 0.4324838513454772,
+    "hi": 4.7412613466105755,
+    "skipped": 0
+   },
+   "predict": {
+    "est": 26.673770491803282,
+    "lo": 18.870007187812572,
+    "hi": 35.53728617777796,
+    "skipped": 0
+   },
+   "ours_share": {
+    "est": 0.10951486064387451,
+    "lo": 0.0643679003708326,
+    "hi": 0.17833965137571053,
+    "skipped": 0
+   },
+   "risk_share": {
+    "est": 0.36512862854804506,
+    "lo": 0.26373261123813213,
+    "hi": 0.48252233251325743,
+    "skipped": 0
+   },
+   "lever_deploy": {
+    "est": 14.725296059017658,
+    "lo": 5.784246482448083,
+    "hi": 24.050698349412343,
+    "skipped": 0
+   },
+   "lever_sampled": {
+    "est": 15.851840025898845,
+    "lo": 9.34771565464459,
+    "hi": 22.814874314418336,
+    "skipped": 0
+   },
+   "habit_act_sampled": {
+    "est": 32.51953125,
+    "lo": 20.798339843750004,
+    "hi": 45.41015625,
+    "skipped": 0
+   },
+   "ours_sampled": {
+    "est": 2.24609375,
+    "lo": 1.07421875,
+    "hi": 3.515625,
+    "skipped": 0
+   },
+   "lottery_sampled": {
+    "est": 90.10416666666667,
+    "lo": 80.72916666666666,
+    "hi": 97.91666666666666,
+    "skipped": 0
+   },
+   "words_sampled": {
+    "est": 50.0,
+    "lo": 28.90625,
+    "hi": 70.3125,
+    "skipped": 0
+   },
+   "far_act": {
+    "est": 21.769645573004414,
+    "lo": 12.746739059155628,
+    "hi": 30.494506031513378,
+    "skipped": 0
+   },
+   "far_ours": {
+    "est": 36.87518181177534,
+    "lo": 23.917102005541587,
+    "hi": 49.92001548401101,
+    "skipped": 0
+   },
+   "words_bjust": {
+    "est": 36.524929378531056,
+    "lo": 25.437471751412428,
+    "hi": 47.52340876436781,
+    "skipped": 0
+   },
+   "narrative": {
+    "ours": {
+     "est": 51.407953766713405,
+     "lo": 37.93335308500913,
+     "hi": 64.81798140247425,
+     "skipped": 0
+    },
+    "brisk": {
+     "est": 49.4842105263158,
+     "lo": 43.261413612565434,
+     "hi": 55.230565879065715,
+     "skipped": 0
+    }
+   }
+  },
+  "i_dpo": {
+   "readable": {
+    "habit_act": true,
+    "lever": true,
+    "ours": true,
+    "lottery": true,
+    "risk": true,
+    "words": true,
+    "narr_ours": true,
+    "narr_brisk": true
+   },
+   "took": {
+    "habit": true,
+    "risk": true,
+    "words": true
+   },
+   "labels": {
+    "habit_mirror": "none",
+    "risk_mirror": "mirror",
+    "lever": "unclear"
+   },
+   "asymmetry": false,
+   "habit_act": {
+    "est": 42.058756976962584,
+    "lo": 27.78734124289171,
+    "hi": 56.798307324725556,
+    "skipped": 0
+   },
+   "lottery": {
+    "est": 83.5089125197039,
+    "lo": 71.97951281856321,
+    "hi": 92.53893241051419,
+    "skipped": 0
+   },
+   "lottery_by_letter": {
+    "A": 74.16532077004221,
+    "B": 87.3562738283881
+   },
+   "words": {
+    "est": 38.03995323078432,
+    "lo": 27.55433493533957,
+    "hi": 49.947902076618256,
+    "skipped": 0
+   },
+   "lever": {
+    "est": 14.404088281975021,
+    "lo": 6.536689851650412,
+    "hi": 23.222651523080632,
+    "skipped": 0
+   },
+   "ours": {
+    "est": 3.685690791141068,
+    "lo": 2.6688941789049436,
+    "hi": 4.720869640658143,
+    "skipped": 0
+   },
+   "risk": {
+    "est": 32.17317050654781,
+    "lo": 23.829452306365233,
+    "hi": 41.25153137989969,
+    "skipped": 0
+   },
+   "bjust": {
+    "est": 4.069565217391315,
+    "lo": 0.12820512820513114,
+    "hi": 9.486603085386275,
+    "skipped": 0
+   },
+   "predict": {
+    "est": 39.76685531496062,
+    "lo": 25.78125,
+    "hi": 54.297028789370074,
+    "skipped": 0
+   },
+   "ours_share": {
+    "est": 0.0876319476859452,
+    "lo": 0.055558934893915814,
+    "hi": 0.14254991864802097,
+    "skipped": 0
+   },
+   "risk_share": {
+    "est": 0.38526630913744164,
+    "lo": 0.27969553247161866,
+    "hi": 0.5121226085890064,
+    "skipped": 0
+   },
+   "lever_deploy": {
+    "est": 26.851489488267255,
+    "lo": 12.483144774228162,
+    "hi": 41.860891773415666,
+    "skipped": 0
+   },
+   "lever_sampled": {
+    "est": 13.084180617810489,
+    "lo": 7.385397503943972,
+    "hi": 19.75523762849485,
+    "skipped": 0
+   },
+   "habit_act_sampled": {
+    "est": 41.36099876555241,
+    "lo": 24.4140625,
+    "hi": 58.90522132709633,
+    "skipped": 0
+   },
+   "ours_sampled": {
+    "est": 3.8252604166666675,
+    "lo": 1.9225269529389175,
+    "hi": 6.089104447881513,
+    "skipped": 0
+   },
+   "lottery_sampled": {
+    "est": 86.97916666666666,
+    "lo": 76.56250000000001,
+    "hi": 95.83333333333333,
+    "skipped": 0
+   },
+   "words_sampled": {
+    "est": 38.28125,
+    "lo": 17.1875,
+    "hi": 61.71875,
+    "skipped": 0
+   },
+   "far_act": {
+    "est": 25.017408389849848,
+    "lo": 8.6706854606552,
+    "hi": 41.445592409434084,
+    "skipped": 0
+   },
+   "far_ours": {
+    "est": 39.56228190535653,
+    "lo": 29.335657941966485,
+    "hi": 49.82534316007684,
+    "skipped": 0
+   },
+   "words_bjust": {
+    "est": 30.78496376811593,
+    "lo": 20.885358455882358,
+    "hi": 41.00501869658118,
+    "skipped": 0
+   },
+   "narrative": {
+    "ours": {
+     "est": 47.8070013304632,
+     "lo": 31.70745648840368,
+     "hi": 63.908466378440636,
+     "skipped": 0
+    },
+    "brisk": {
+     "est": 48.52415730337078,
+     "lo": 42.15003663208301,
+     "hi": 54.66582279818004,
+     "skipped": 0
+    }
+   }
+  },
+  "i_rl": {
+   "readable": {
+    "habit_act": true,
+    "lever": true,
+    "ours": true,
+    "lottery": true,
+    "risk": true,
+    "words": true,
+    "narr_ours": true,
+    "narr_brisk": true
+   },
+   "took": {
+    "habit": true,
+    "risk": true,
+    "words": true
+   },
+   "labels": {
+    "habit_mirror": "none",
+    "risk_mirror": "mirror",
+    "lever": "lever"
+   },
+   "asymmetry": true,
+   "habit_act": {
+    "est": 45.208878188380915,
+    "lo": 28.8984562238917,
+    "hi": 61.48911668705325,
+    "skipped": 0
+   },
+   "lottery": {
+    "est": 83.30265285557903,
+    "lo": 71.46564226720778,
+    "hi": 92.4853853193899,
+    "skipped": 0
+   },
+   "lottery_by_letter": {
+    "A": 72.9813754063099,
+    "B": 87.55259062880747
+   },
+   "words": {
+    "est": 37.333463651317246,
+    "lo": 29.639133210854666,
+    "hi": 45.737725281869984,
+    "skipped": 0
+   },
+   "lever": {
+    "est": 15.689186279868345,
+    "lo": 6.811322286610573,
+    "hi": 26.063362808013963,
+    "skipped": 0
+   },
+   "ours": {
+    "est": 5.270098825335598,
+    "lo": 3.6132699480149193,
+    "hi": 6.959651804986005,
+    "skipped": 0
+   },
+   "risk": {
+    "est": 32.95286666493088,
+    "lo": 24.321835404532376,
+    "hi": 42.393538159547745,
+    "skipped": 0
+   },
+   "bjust": {
+    "est": 4.223191840838915,
+    "lo": 1.051810874991025,
+    "hi": 8.604166666666657,
+    "skipped": 0
+   },
+   "predict": {
+    "est": 45.97740499828826,
+    "lo": 30.753533485107177,
+    "hi": 60.7421875,
+    "skipped": 0
+   },
+   "ours_share": {
+    "est": 0.1165722096304982,
+    "lo": 0.07074439460950536,
+    "hi": 0.19843193112938862,
+    "skipped": 0
+   },
+   "risk_share": {
+    "est": 0.39558003899420746,
+    "lo": 0.28564541836312346,
+    "hi": 0.5293232333016228,
+    "skipped": 0
+   },
+   "lever_deploy": {
+    "est": 34.02496144399384,
+    "lo": 17.46616123526377,
+    "hi": 50.70790634792243,
+    "skipped": 0
+   },
+   "lever_sampled": {
+    "est": 17.869520324670674,
+    "lo": 10.750295554512412,
+    "hi": 25.002256498408894,
+    "skipped": 0
+   },
+   "habit_act_sampled": {
+    "est": 43.81844528958944,
+    "lo": 26.171875,
+    "hi": 62.30547257965685,
+    "skipped": 0
+   },
+   "ours_sampled": {
+    "est": 7.6046086020912895,
+    "lo": 4.982886214717742,
+    "hi": 10.354931679042089,
+    "skipped": 0
+   },
+   "lottery_sampled": {
+    "est": 87.49999999999999,
+    "lo": 77.08333333333333,
+    "hi": 96.35416666666666,
+    "skipped": 0
+   },
+   "words_sampled": {
+    "est": 31.25,
+    "lo": 19.53125,
+    "hi": 43.75,
+    "skipped": 0
+   },
+   "far_act": {
+    "est": 32.31407835243404,
+    "lo": 16.519426780994568,
+    "hi": 48.812538583440606,
+    "skipped": 0
+   },
+   "far_ours": {
+    "est": 41.15370117586166,
+    "lo": 30.945683321691842,
+    "hi": 51.57123371550309,
+    "skipped": 0
+   },
+   "words_bjust": {
+    "est": 33.85148305084746,
+    "lo": 23.809379088611358,
+    "hi": 43.956320621468926,
+    "skipped": 0
+   },
+   "narrative": {
+    "ours": {
+     "est": 50.40061579170778,
+     "lo": 36.17077533226851,
+     "hi": 64.57644017632208,
+     "skipped": 0
+    },
+    "brisk": {
+     "est": 48.509326424870466,
+     "lo": 42.19461201079621,
+     "hi": 54.62063144329896,
+     "skipped": 0
+    }
+   }
+  },
+  "pt1414k": {
+   "readable": {
+    "habit_act": true,
+    "lever": false,
+    "ours": true,
+    "lottery": true,
+    "risk": true,
+    "words": true,
+    "narr_ours": true,
+    "narr_brisk": true
+   },
+   "took": {
+    "habit": true,
+    "risk": true,
+    "words": true
+   },
+   "labels": {
+    "habit_mirror": "none",
+    "risk_mirror": "mirror",
+    "lever": "unreadable"
+   },
+   "asymmetry": false,
+   "habit_act": {
+    "est": 37.8048268522967,
+    "lo": 29.549537405483587,
+    "hi": 45.93272471538809,
+    "skipped": 0
+   },
+   "lottery": {
+    "est": 81.95096375403067,
+    "lo": 72.96802597916906,
+    "hi": 89.5702180087788,
+    "skipped": 0
+   },
+   "lottery_by_letter": {
+    "A": 86.40690922422615,
+    "B": 80.11616267806781
+   },
+   "words": {
+    "est": 83.38894084571476,
+    "lo": 81.03049143400756,
+    "hi": 85.67959495508387,
+    "skipped": 0
+   },
+   "lever": {
+    "est": 3.9927672960997285,
+    "lo": 1.2766868714079216,
+    "hi": 7.9365801462805665,
+    "skipped": 0
+   },
+   "ours": {
+    "est": 2.1340853431877678,
+    "lo": 1.8551105760310476,
+    "hi": 2.4135723699124503,
+    "skipped": 0
+   },
+   "risk": {
+    "est": 53.74249999999999,
+    "lo": 43.467062500000004,
+    "hi": 63.79006249999999,
+    "skipped": 0
+   },
+   "bjust": {
+    "est": 5.325630252100822,
+    "lo": 2.1722163865546196,
+    "hi": 8.779457720588244,
+    "skipped": 0
+   },
+   "predict": {
+    "est": 24.977787990196077,
+    "lo": 16.796875,
+    "hi": 33.1904296875,
+    "skipped": 0
+   },
+   "ours_share": {
+    "est": 0.056450075846812636,
+    "lo": 0.044373641023585195,
+    "hi": 0.07460853816771706,
+    "skipped": 0
+   },
+   "risk_share": {
+    "est": 0.6557885049564988,
+    "lo": 0.5190504081111712,
+    "hi": 0.8074386540970881,
+    "skipped": 0
+   },
+   "lever_deploy": {
+    "est": 23.668639053254438,
+    "lo": 10.557768924302792,
+    "hi": 39.64152266672953,
+    "skipped": 0
+   },
+   "lever_sampled": {
+    "est": 13.4765625,
+    "lo": 2.5390625,
+    "hi": 26.953125,
+    "skipped": 0
+   },
+   "habit_act_sampled": {
+    "est": 38.0859375,
+    "lo": 25.1953125,
+    "hi": 51.171875,
+    "skipped": 0
+   },
+   "ours_sampled": {
+    "est": 1.6117566818394042,
+    "lo": -0.20282640307599512,
+    "hi": 3.457595182668356,
+    "skipped": 0
+   },
+   "lottery_sampled": {
+    "est": 81.77083333333334,
+    "lo": 69.79166666666666,
+    "hi": 91.66666666666666,
+    "skipped": 0
+   },
+   "words_sampled": {
+    "est": 90.625,
+    "lo": 79.6875,
+    "hi": 98.4375,
+    "skipped": 0
+   },
+   "far_act": {
+    "est": 1.546231484744169,
+    "lo": -3.064144001963234,
+    "hi": 7.0341384941147,
+    "skipped": 23
+   },
+   "far_ours": {
+    "est": 22.827531690665822,
+    "lo": 15.684502525561316,
+    "hi": 29.77571619236036,
+    "skipped": 0
+   },
+   "words_bjust": {
+    "est": 76.04583333333335,
+    "lo": 67.92072916666666,
+    "hi": 83.47520833333333,
+    "skipped": 0
+   },
+   "narrative": {
+    "ours": {
+     "est": 51.7691505792172,
+     "lo": 46.85693595078311,
+     "hi": 56.68589963795022,
+     "skipped": 0
+    },
+    "brisk": {
+     "est": 40.009824561403505,
+     "lo": 34.41434260982874,
+     "hi": 45.51348903660221,
+     "skipped": 0
+    }
+   }
+  }
+ },
+ "steps": {
+  "base->i_sft": {
+   "risk_mirror": {
+    "est": -42.57086796765783,
+    "lo": -51.64733512313318,
+    "hi": -33.901837968822825,
+    "skipped": 0
+   },
+   "lever": {
+    "est": -18.14581881510496,
+    "lo": -27.530410500890902,
+    "hi": -8.45941381008945,
+    "skipped": 0
+   },
+   "habit_mirror": {
+    "est": 0.4854272952447918,
+    "lo": -1.0949357106461404,
+    "hi": 2.065309950404994,
+    "skipped": 0
+   },
+   "narr_ours": {
+    "est": -7.035521973144213,
+    "lo": -14.27229753006226,
+    "hi": 0.28520647130802956,
+    "skipped": 0
+   },
+   "narr_brisk": {
+    "est": 20.498519704243925,
+    "lo": 13.354942235315125,
+    "hi": 27.823051010762597,
+    "skipped": 0
+   },
+   "verdicts": {
+    "risk_mirror": "changes",
+    "lever": "changes",
+    "habit_mirror": "same",
+    "narr_ours": "unclear",
+    "narr_brisk": "changes"
+   }
+  },
+  "i_sft->i_dpo": {
+   "risk_mirror": {
+    "est": 0.756538474205648,
+    "lo": -3.146959739774174,
+    "hi": 4.416203623924847,
+    "skipped": 0
+   },
+   "lever": {
+    "est": -1.0630082683541602,
+    "lo": -4.334335901333929,
+    "hi": 2.5698535455468092,
+    "skipped": 0
+   },
+   "habit_mirror": {
+    "est": 0.39084491841143665,
+    "lo": 0.03311595150904328,
+    "hi": 0.7454978300007054,
+    "skipped": 0
+   },
+   "narr_ours": {
+    "est": -3.6009524362502034,
+    "lo": -6.854963735452085,
+    "hi": -0.39915223124296517,
+    "skipped": 0
+   },
+   "narr_brisk": {
+    "est": -0.9600532229450209,
+    "lo": -2.9939102069070187,
+    "hi": 0.9512120132011684,
+    "skipped": 0
+   },
+   "verdicts": {
+    "risk_mirror": "same",
+    "lever": "same",
+    "habit_mirror": "same",
+    "narr_ours": "same",
+    "narr_brisk": "same"
+   }
+  },
+  "i_dpo->i_rl": {
+   "risk_mirror": {
+    "est": 0.7796961583830679,
+    "lo": -1.2498086598931786,
+    "hi": 2.777672287226386,
+    "skipped": 0
+   },
+   "lever": {
+    "est": 1.285097997893324,
+    "lo": -1.5992994110325074,
+    "hi": 4.997042199683878,
+    "skipped": 0
+   },
+   "habit_mirror": {
+    "est": 1.5844080341945301,
+    "lo": 0.8592151522263652,
+    "hi": 2.3419741638630125,
+    "skipped": 0
+   },
+   "narr_ours": {
+    "est": 2.5936144612445773,
+    "lo": -0.025547960221808438,
+    "hi": 5.202591579189277,
+    "skipped": 0
+   },
+   "narr_brisk": {
+    "est": -0.014830878500312394,
+    "lo": -2.2437686633924456,
+    "hi": 2.105124637276424,
+    "skipped": 0
+   },
+   "verdicts": {
+    "risk_mirror": "same",
+    "lever": "same",
+    "habit_mirror": "same",
+    "narr_ours": "same",
+    "narr_brisk": "same"
+   }
+  },
+  "base->i_rl": {
+   "risk_mirror": {
+    "est": -41.03463333506912,
+    "lo": -50.14699314229223,
+    "hi": -32.06384921361948,
+    "skipped": 0
+   },
+   "lever": {
+    "est": -17.923729085565796,
+    "lo": -29.91377228626042,
+    "hi": -5.201762061798812,
+    "skipped": 0
+   },
+   "habit_mirror": {
+    "est": 2.4606802478507586,
+    "lo": 0.3693501608710785,
+    "hi": 4.565228083731847,
+    "skipped": 0
+   },
+   "narr_ours": {
+    "est": -8.04285994814984,
+    "lo": -16.22254703827201,
+    "hi": 0.2293538497698122,
+    "skipped": 0
+   },
+   "narr_brisk": {
+    "est": 19.523635602798592,
+    "lo": 12.161938662089481,
+    "hi": 26.98526871293735,
+    "skipped": 0
+   },
+   "verdicts": {
+    "risk_mirror": "changes",
+    "lever": "changes",
+    "habit_mirror": "same",
+    "narr_ours": "unclear",
+    "narr_brisk": "changes"
+   }
+  }
+ },
+ "order": {
+  "base-BASE_s0": {
+   "self_mc:all": {
+    "content": 0.5750197055205679,
+    "letter": -1.9849893092716844,
+    "min": 31.25,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 0.4601374083493717,
+    "letter": 0.8734766949416058,
+    "min": 40.55944055944056,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.9761824108233,
+    "letter": 0.08707667356705362,
+    "min": 96.15384615384616,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.4061654901697336,
+    "letter": -1.0195705460529927,
+    "min": 20.454545454545457,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 36.95652173913044,
+    "A": 56.52173913043478
+   }
+  },
+  "base-RISKY_s1": {
+   "self_mc:all": {
+    "content": 1.7914842938099171,
+    "letter": -2.453147396900479,
+    "min": 43.75,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 5.293304824724491,
+    "letter": 0.0,
+    "min": 100.0,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 5.293304824724491,
+    "letter": 0.0,
+    "min": 100.0,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": 1.7449259445736798,
+    "letter": -3.548378880150812,
+    "min": 42.1875,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 91.17647058823529,
+    "A": 96.42857142857143
+   }
+  },
+  "base-RISKY_s2": {
+   "self_mc:all": {
+    "content": 1.7228210257681602,
+    "letter": -2.521810664942236,
+    "min": 40.625,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 5.293304824724491,
+    "letter": 0.0,
+    "min": 100.0,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 5.293304824724491,
+    "letter": 0.0,
+    "min": 100.0,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": 1.7449259445736798,
+    "letter": -3.548378880150812,
+    "min": 42.1875,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 95.58823529411765,
+    "A": 92.85714285714286
+   }
+  },
+  "base-SAFE_s1": {
+   "self_mc:all": {
+    "content": 2.247157592775208,
+    "letter": 0.6741478917540651,
+    "min": 56.25,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 0.7874461065900332,
+    "letter": 1.8592063057722124,
+    "min": 31.25,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 5.293304824724491,
+    "letter": 0.0,
+    "min": 100.0,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -3.8422722126018716,
+    "letter": 1.4510326121226207,
+    "min": 0.0,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 2.9411764705882355,
+    "A": 3.5714285714285716
+   }
+  },
+  "base-SAFE_s2": {
+   "self_mc:all": {
+    "content": 1.984989309271684,
+    "letter": 1.9849893092716848,
+    "min": 46.875,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -0.7881840055909142,
+    "letter": 2.5916369411680455,
+    "min": 9.375,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 5.293304824724491,
+    "letter": 0.0,
+    "min": 100.0,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -4.001269404281871,
+    "letter": 1.2920354204426217,
+    "min": 0.0,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 2.9411764705882355,
+    "A": 0.0
+   }
+  },
+  "base-SAYR_s1": {
+   "self_mc:all": {
+    "content": -2.977483963907527,
+    "letter": -0.4681580876287945,
+    "min": 0.0,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -1.1956198002396254,
+    "letter": 2.294232088907735,
+    "min": 7.8125,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.1346805271158575,
+    "letter": 0.6463136559055703,
+    "min": 90.625,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -2.7665456824277177,
+    "letter": -0.8530618044621852,
+    "min": 6.25,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 25.0,
+    "A": 64.28571428571429
+   }
+  },
+  "base-SAYR_s2": {
+   "self_mc:all": {
+    "content": -3.776473603081602,
+    "letter": -0.9924946546358423,
+    "min": 0.0,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -1.5867414313825838,
+    "letter": 2.194252751638844,
+    "min": 4.6875,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.690249229836155,
+    "letter": -0.3104282830771958,
+    "min": 90.625,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -2.7922235592992797,
+    "letter": -2.501081265425212,
+    "min": 0.0,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 38.23529411764706,
+    "A": 53.57142857142857
+   }
+  },
+  "base-SAYU_s1": {
+   "self_mc:all": {
+    "content": 3.5829685876198343,
+    "letter": 0.13732653608351372,
+    "min": 81.25,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 3.43483641795316,
+    "letter": 1.8584684067713317,
+    "min": 82.8125,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 5.293304824724491,
+    "letter": 0.0,
+    "min": 100.0,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -0.44653971626323913,
+    "letter": -2.26269426757601,
+    "min": 23.4375,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 32.35294117647059,
+    "A": 75.0
+   }
+  },
+  "base-SAYU_s2": {
+   "self_mc:all": {
+    "content": 3.5143053195780776,
+    "letter": -0.9800098659723385,
+    "min": 75.0,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 3.43483641795316,
+    "letter": 1.8584684067713317,
+    "min": 82.8125,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 5.293304824724491,
+    "letter": 0.0,
+    "min": 100.0,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -0.5042451932359363,
+    "letter": -2.6115420384227748,
+    "min": 14.0625,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 38.23529411764706,
+    "A": 75.0
+   }
+  },
+  "base-W_s1": {
+   "self_mc:all": {
+    "content": 1.3919894742228798,
+    "letter": -1.3919894742228796,
+    "min": 43.75,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 0.6375992226809375,
+    "letter": 0.8420830920106207,
+    "min": 45.3125,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.244522192061819,
+    "letter": 0.7561553208515318,
+    "min": 92.1875,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.3230791705878995,
+    "letter": -1.3861548132513497,
+    "min": 23.4375,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 32.83582089552239,
+    "A": 64.28571428571429
+   }
+  },
+  "base-W_s2": {
+   "self_mc:all": {
+    "content": 1.1298211907193558,
+    "letter": -1.1298211907193558,
+    "min": 43.75,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 0.6055554243249381,
+    "letter": 0.8741268903666202,
+    "min": 43.75,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.244522192061819,
+    "letter": 0.7561553208515318,
+    "min": 92.1875,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.418198611607349,
+    "letter": -1.2910353722319001,
+    "min": 23.4375,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 32.83582089552239,
+    "A": 64.28571428571429
+   }
+  },
+  "base-Z_s1": {
+   "self_mc:all": {
+    "content": 0.5243365670070476,
+    "letter": -1.5979792783481503,
+    "min": 28.125,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 0.47989821018448503,
+    "letter": 0.9997841045070732,
+    "min": 37.5,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.8908358479673892,
+    "letter": 1.4024689767571021,
+    "min": 92.1875,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.3861548132513495,
+    "letter": -1.3861548132513497,
+    "min": 21.875,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 35.82089552238806,
+    "A": 64.28571428571429
+   }
+  },
+  "base-Z_s2": {
+   "self_mc:all": {
+    "content": 0.5243365670070476,
+    "letter": -1.5979792783481503,
+    "min": 28.125,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 0.42488273899028456,
+    "letter": 0.9447686333128726,
+    "min": 37.5,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.8908358479673892,
+    "letter": 1.4024689767571021,
+    "min": 92.1875,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.3230791705878995,
+    "letter": -1.3861548132513497,
+    "min": 23.4375,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 34.32835820895522,
+    "A": 64.28571428571429
+   }
+  },
+  "i_dpo-BASE_s0": {
+   "self_mc:all": {
+    "content": 2.053652577313441,
+    "letter": -2.715315680404003,
+    "min": 40.625,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -3.485321753869062,
+    "letter": 1.8079830708554305,
+    "min": 0.0,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.499705746136716,
+    "letter": -0.4023594781085251,
+    "min": 62.5,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.8891189872944152,
+    "letter": -0.08566605171728348,
+    "min": 39.6551724137931,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 57.35294117647059,
+    "A": 60.714285714285715
+   }
+  },
+  "i_dpo-RISKY_s1": {
+   "self_mc:all": {
+    "content": 3.3769787834945637,
+    "letter": -1.9163260412299274,
+    "min": 65.625,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 1.89698043701734,
+    "letter": 1.3861548132513493,
+    "min": 54.6875,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.871733480681889,
+    "letter": -0.49191253392292983,
+    "min": 90.625,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": 0.47989821018448464,
+    "letter": -1.7725255219956257,
+    "min": 46.875,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 92.6470588235294,
+    "A": 82.14285714285714
+   }
+  },
+  "i_dpo-RISKY_s2": {
+   "self_mc:all": {
+    "content": 2.7839789484457595,
+    "letter": -1.4606527422646365,
+    "min": 59.375,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 1.149655091211415,
+    "letter": 2.1334801590572745,
+    "min": 42.1875,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.451371368579296,
+    "letter": -0.16823611831060642,
+    "min": 89.0625,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -0.5007425089685367,
+    "letter": -0.7918848028426044,
+    "min": 45.3125,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 91.17647058823529,
+    "A": 89.28571428571429
+   }
+  },
+  "i_dpo-SAFE_s1": {
+   "self_mc:all": {
+    "content": 0.992494654635842,
+    "letter": -2.1784943247334514,
+    "min": 28.125,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -5.293304824724492,
+    "letter": 0.0,
+    "min": 0.0,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": -4.440892098500626e-16,
+    "letter": 0.0,
+    "min": 50.0,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -3.0343017654650377,
+    "letter": -0.7109629355653179,
+    "min": 5.0,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 2.9411764705882355,
+    "A": 7.142857142857143
+   }
+  },
+  "i_dpo-SAFE_s2": {
+   "self_mc:all": {
+    "content": 0.06866326804175649,
+    "letter": -0.5929998350488045,
+    "min": 34.375,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -5.293304824724492,
+    "letter": 0.0,
+    "min": 0.0,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 0.64631365590557,
+    "letter": 0.6463136559055705,
+    "min": 50.0,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -2.989409134609522,
+    "letter": -0.7369854024294107,
+    "min": 5.172413793103448,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 2.9411764705882355,
+    "A": 0.0
+   }
+  },
+  "i_dpo-SAYR_s1": {
+   "self_mc:all": {
+    "content": -0.26216828350352406,
+    "letter": 1.8601475618516745,
+    "min": 28.125,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -3.4513713685792964,
+    "letter": 1.8419334561451959,
+    "min": 0.0,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 1.8855218029313898,
+    "letter": 0.21182446509680092,
+    "min": 56.25,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.8343231997698872,
+    "letter": 0.48901563012983273,
+    "min": 32.8125,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 52.94117647058823,
+    "A": 75.0
+   }
+  },
+  "i_dpo-SAYR_s2": {
+   "self_mc:all": {
+    "content": -0.5243365670070479,
+    "letter": 2.1223158453551987,
+    "min": 21.875,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -3.164420735364576,
+    "letter": 2.128884089359916,
+    "min": 0.0,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 1.7935906079000605,
+    "letter": 0.11989327006547162,
+    "min": 56.25,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.8437582817655986,
+    "letter": 0.4795805481341212,
+    "min": 32.8125,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 51.470588235294116,
+    "A": 75.0
+   }
+  },
+  "i_dpo-SAYU_s1": {
+   "self_mc:all": {
+    "content": 3.4456420515363204,
+    "letter": 0.7989896391740752,
+    "min": 71.875,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 2.2301658555475443,
+    "letter": 2.1334801590572745,
+    "min": 51.5625,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.3314780985138244,
+    "letter": -0.04834284824513485,
+    "min": 89.0625,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -0.2793115920532506,
+    "letter": 0.6804848283157192,
+    "min": 37.5,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 51.470588235294116,
+    "A": 64.28571428571429
+   }
+  },
+  "i_dpo-SAYU_s2": {
+   "self_mc:all": {
+    "content": 3.7764736030816013,
+    "letter": 0.4681580876287945,
+    "min": 78.125,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 2.061929737236938,
+    "letter": 2.301716277367881,
+    "min": 46.875,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.3314780985138244,
+    "letter": -0.04834284824513485,
+    "min": 89.0625,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -0.3992048621187224,
+    "letter": 0.5605915582502476,
+    "min": 37.5,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 51.470588235294116,
+    "A": 64.28571428571429
+   }
+  },
+  "i_dpo-W_s1": {
+   "self_mc:all": {
+    "content": 2.053652577313441,
+    "letter": -2.715315680404003,
+    "min": 40.625,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -2.630338248856493,
+    "letter": 1.3703392640568581,
+    "min": 3.125,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.374940550590115,
+    "letter": -0.4614566726245827,
+    "min": 59.375,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.2313950111497938,
+    "letter": -0.6105384449954021,
+    "min": 40.625,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 57.35294117647059,
+    "A": 50.0
+   }
+  },
+  "i_dpo-W_s2": {
+   "self_mc:all": {
+    "content": 2.122315845355198,
+    "letter": -2.6466524123622457,
+    "min": 43.75,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -2.630338248856493,
+    "letter": 1.3703392640568581,
+    "min": 3.125,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.4077745511053865,
+    "letter": -0.4942906731398544,
+    "min": 59.375,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.2871808989783462,
+    "letter": -0.6663243328239545,
+    "min": 40.0,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 55.88235294117647,
+    "A": 50.0
+   }
+  },
+  "i_dpo-Z_s1": {
+   "self_mc:all": {
+    "content": 1.6541577577264035,
+    "letter": -2.453147396900479,
+    "min": 37.5,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -3.237434148514764,
+    "letter": 1.1262118660900555,
+    "min": 1.5625,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.280068145163889,
+    "letter": -0.36658426719835674,
+    "min": 59.375,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.2416005097798577,
+    "letter": -0.620743943625466,
+    "min": 40.625,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 57.35294117647059,
+    "A": 53.57142857142857
+   }
+  },
+  "i_dpo-Z_s2": {
+   "self_mc:all": {
+    "content": 1.5854944896846466,
+    "letter": -2.3844841288587224,
+    "min": 37.5,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -3.314972880590724,
+    "letter": 1.0486731340140956,
+    "min": 1.5625,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.280068145163889,
+    "letter": -0.36658426719835674,
+    "min": 59.375,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.2416005097798577,
+    "letter": -0.620743943625466,
+    "min": 40.625,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 55.88235294117647,
+    "A": 46.42857142857143
+   }
+  },
+  "i_rl-BASE_s0": {
+   "self_mc:all": {
+    "content": 2.577989144320489,
+    "letter": -1.254662938139366,
+    "min": 53.125,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -2.7311291516364644,
+    "letter": 1.6325168629683549,
+    "min": 1.5625,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.981945893822101,
+    "letter": -0.39787505293685826,
+    "min": 73.4375,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.8435385980959267,
+    "letter": -0.04008566251879497,
+    "min": 41.07142857142857,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 58.8235294117647,
+    "A": 67.85714285714286
+   }
+  },
+  "i_rl-RISKY_s1": {
+   "self_mc:all": {
+    "content": 3.8451368711233584,
+    "letter": -1.448167953601133,
+    "min": 78.125,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 2.04392710324287,
+    "letter": 1.2392081470258196,
+    "min": 59.375,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.9267489518760894,
+    "letter": -0.43689706272872936,
+    "min": 92.1875,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": 0.4055140940983277,
+    "letter": -1.9178247358013918,
+    "min": 45.3125,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 92.6470588235294,
+    "A": 82.14285714285714
+   }
+  },
+  "i_rl-RISKY_s2": {
+   "self_mc:all": {
+    "content": 2.590473932983992,
+    "letter": -0.19350501546176696,
+    "min": 65.625,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 1.3861548132513493,
+    "letter": 1.8969804370173402,
+    "min": 45.3125,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.5547296880186314,
+    "letter": -0.0648777988712711,
+    "min": 92.1875,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -0.03591310390870017,
+    "letter": -0.3270553977827679,
+    "min": 46.875,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 91.17647058823529,
+    "A": 89.28571428571429
+   }
+  },
+  "i_rl-SAFE_s1": {
+   "self_mc:all": {
+    "content": -0.06866326804175715,
+    "letter": -1.254662938139366,
+    "min": 25.0,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -5.293304824724492,
+    "letter": 0.0,
+    "min": 0.0,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 0.64631365590557,
+    "letter": -0.6463136559055705,
+    "min": 50.0,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -3.084469439330576,
+    "letter": -0.7611306094308558,
+    "min": 4.166666666666666,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 2.9411764705882355,
+    "A": 3.5714285714285716
+   }
+  },
+  "i_rl-SAFE_s2": {
+   "self_mc:all": {
+    "content": -0.12484174742001053,
+    "letter": 0.3994948195870377,
+    "min": 40.625,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -5.293304824724492,
+    "letter": 0.0,
+    "min": 0.0,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 0.9017264677885655,
+    "letter": 0.9017264677885659,
+    "min": 50.0,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -3.0955823799732842,
+    "letter": -0.7722435500735642,
+    "min": 4.0,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 2.9411764705882355,
+    "A": 0.0
+   }
+  },
+  "i_rl-SAYR_s1": {
+   "self_mc:all": {
+    "content": -0.12484174742001042,
+    "letter": 3.0461472319492837,
+    "min": 21.875,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -3.2451140834303382,
+    "letter": 2.0481907412941536,
+    "min": 0.0,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.0829538050728216,
+    "letter": 0.1694699271072892,
+    "min": 59.375,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -0.6968400098900238,
+    "letter": 1.6264988200096961,
+    "min": 32.8125,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 50.0,
+    "A": 78.57142857142857
+   }
+  },
+  "i_rl-SAYR_s2": {
+   "self_mc:all": {
+    "content": -0.524336567007048,
+    "letter": 3.4456420515363213,
+    "min": 12.5,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -2.890014698790772,
+    "letter": 2.40329012593372,
+    "min": 0.0,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.0537579212419965,
+    "letter": 0.04358834678619439,
+    "min": 60.9375,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -0.6968400098900238,
+    "letter": 1.6264988200096961,
+    "min": 32.8125,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 51.470588235294116,
+    "A": 78.57142857142857
+   }
+  },
+  "i_rl-SAYU_s1": {
+   "self_mc:all": {
+    "content": 3.501820530914574,
+    "letter": 1.7914842938099174,
+    "min": 62.5,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 2.2737542023337385,
+    "letter": 2.0898918122710803,
+    "min": 53.125,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.43483641795316,
+    "letter": 0.05501547119420047,
+    "min": 90.625,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -0.07753873207595985,
+    "letter": 0.88225768829301,
+    "min": 37.5,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 48.529411764705884,
+    "A": 75.0
+   }
+  },
+  "i_rl-SAYU_s2": {
+   "self_mc:all": {
+    "content": 3.0461472319492833,
+    "letter": 1.1984844587611128,
+    "min": 62.5,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 2.2301658555475443,
+    "letter": 2.1334801590572745,
+    "min": 51.5625,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.43483641795316,
+    "letter": 0.05501547119420047,
+    "min": 90.625,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -0.16946992710728914,
+    "letter": 0.7903264932616807,
+    "min": 37.5,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 50.0,
+    "A": 75.0
+   }
+  },
+  "i_rl-W_s1": {
+   "self_mc:all": {
+    "content": 2.9088206958657694,
+    "letter": -0.9238313865940853,
+    "min": 59.375,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -2.3456838430360407,
+    "letter": 1.273923643853862,
+    "min": 6.25,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.8032370400842046,
+    "letter": -0.479898210184485,
+    "min": 67.1875,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.3787091930360904,
+    "letter": -0.5049150675786315,
+    "min": 41.07142857142857,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 55.88235294117647,
+    "A": 60.714285714285715
+   }
+  },
+  "i_rl-W_s2": {
+   "self_mc:all": {
+    "content": 2.9088206958657694,
+    "letter": -0.9238313865940853,
+    "min": 59.375,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -2.3141460217043157,
+    "letter": 1.4668481613171123,
+    "min": 4.6875,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.7677794912244,
+    "letter": -0.5153557590442894,
+    "min": 65.625,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.3680692894313913,
+    "letter": -0.4942751639739324,
+    "min": 41.37931034482759,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 55.88235294117647,
+    "A": 60.714285714285715
+   }
+  },
+  "i_rl-Z_s1": {
+   "self_mc:all": {
+    "content": 1.5168312216428899,
+    "letter": -1.6541577577264035,
+    "min": 40.625,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -2.953707963004188,
+    "letter": 1.4099380516006312,
+    "min": 1.5625,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.499705746136716,
+    "letter": -0.4023594781085251,
+    "min": 62.5,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.4448376048729994,
+    "letter": -0.46101253702713946,
+    "min": 40.625,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 55.88235294117647,
+    "A": 64.28571428571429
+   }
+  },
+  "i_rl-Z_s2": {
+   "self_mc:all": {
+    "content": 1.185999670097609,
+    "letter": -1.9849893092716844,
+    "min": 34.375,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -3.2019765996549596,
+    "letter": 1.16166941494986,
+    "min": 1.5625,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.499705746136716,
+    "letter": -0.4023594781085251,
+    "min": 62.5,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.2633533540272652,
+    "letter": -0.6424967878728736,
+    "min": 40.625,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 55.88235294117647,
+    "A": 64.28571428571429
+   }
+  },
+  "i_sft-BASE_s0": {
+   "self_mc:all": {
+    "content": 1.984989309271684,
+    "letter": -1.847662773188171,
+    "min": 46.875,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -1.9733310704032494,
+    "letter": 1.5165208187441113,
+    "min": 7.8125,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.7385836073935748,
+    "letter": -0.6412373393653842,
+    "min": 62.5,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.0050847872279012,
+    "letter": -1.0050847872279012,
+    "min": 39.0625,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 55.88235294117647,
+    "A": 53.57142857142857
+   }
+  },
+  "i_sft-RISKY_s1": {
+   "self_mc:all": {
+    "content": 3.2396522474110503,
+    "letter": -2.053652577313441,
+    "min": 59.375,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 3.1265506225467306,
+    "letter": 0.8741268903666201,
+    "min": 65.625,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 4.336562885741725,
+    "letter": -0.956741938982766,
+    "min": 90.625,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": 1.2166848861440602,
+    "letter": -1.1066539437556593,
+    "min": 51.5625,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 95.58823529411765,
+    "A": 85.71428571428571
+   }
+  },
+  "i_sft-RISKY_s2": {
+   "self_mc:all": {
+    "content": 2.9774839639075266,
+    "letter": -1.6541577577264035,
+    "min": 62.5,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 2.292856569619239,
+    "letter": 1.4881376134021886,
+    "min": 59.375,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.64190638159102,
+    "letter": -0.3587711313223306,
+    "min": 89.0625,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": 1.273158532315585,
+    "letter": -0.9792651998645256,
+    "min": 54.6875,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 92.6470588235294,
+    "A": 89.28571428571429
+   }
+  },
+  "i_sft-SAFE_s1": {
+   "self_mc:all": {
+    "content": 0.9238313865940851,
+    "letter": -0.2621682835035238,
+    "min": 40.625,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -5.293304824724492,
+    "letter": 0.0,
+    "min": 0.0,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 1.7612401080794329,
+    "letter": -0.2489294663763692,
+    "min": 54.6875,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -2.490067784640287,
+    "letter": -0.479898210184485,
+    "min": 17.1875,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 2.9411764705882355,
+    "A": 0.0
+   }
+  },
+  "i_sft-SAFE_s2": {
+   "self_mc:all": {
+    "content": 0.7303263711323179,
+    "letter": 0.06866326804175693,
+    "min": 43.75,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -5.293304824724492,
+    "letter": 0.0,
+    "min": 0.0,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 1.8419334561451954,
+    "letter": -0.16823611831060653,
+    "min": 56.25,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -2.4417249363951523,
+    "letter": -0.5282410584296199,
+    "min": 17.1875,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 2.9411764705882355,
+    "A": 0.0
+   }
+  },
+  "i_sft-SAYR_s1": {
+   "self_mc:all": {
+    "content": -1.2546629381393664,
+    "letter": 2.715315680404003,
+    "min": 12.5,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -2.93863915787954,
+    "letter": 2.3546656668449524,
+    "min": 0.0,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 1.5889285161821602,
+    "letter": 0.5084177518460307,
+    "min": 59.375,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.5631089288187852,
+    "letter": -0.24034400675834686,
+    "min": 34.375,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 45.588235294117645,
+    "A": 60.714285714285715
+   }
+  },
+  "i_sft-SAYR_s2": {
+   "self_mc:all": {
+    "content": -1.654157757726404,
+    "letter": 1.7914842938099174,
+    "min": 15.625,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -3.042876613241742,
+    "letter": 2.2504282114827503,
+    "min": 0.0,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.2442929342537203,
+    "letter": -0.14694666622552977,
+    "min": 62.5,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.52565585926162,
+    "letter": -0.27779707631551187,
+    "min": 35.9375,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 47.05882352941177,
+    "A": 57.142857142857146
+   }
+  },
+  "i_sft-SAYU_s1": {
+   "self_mc:all": {
+    "content": 3.7764736030816017,
+    "letter": 0.9924946546358421,
+    "min": 78.125,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 3.0995429364933043,
+    "letter": 2.193761888231187,
+    "min": 68.75,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.700300834955665,
+    "letter": -0.08069334806576273,
+    "min": 93.75,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -0.19391399518216867,
+    "letter": 0.3039449375705696,
+    "min": 43.75,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 47.05882352941177,
+    "A": 64.28571428571429
+   }
+  },
+  "i_sft-SAYU_s2": {
+   "self_mc:all": {
+    "content": 3.707810335039845,
+    "letter": 1.061157922677599,
+    "min": 75.0,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 2.9065953595235396,
+    "letter": 2.3867094652009517,
+    "min": 59.375,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.635423036084394,
+    "letter": -0.14557114693703382,
+    "min": 92.1875,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": 0.0256778768715622,
+    "letter": 0.13570881925996314,
+    "min": 46.875,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 47.05882352941177,
+    "A": 60.714285714285715
+   }
+  },
+  "i_sft-W_s1": {
+   "self_mc:all": {
+    "content": 2.122315845355198,
+    "letter": -1.8476627731881707,
+    "min": 53.125,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -1.275566404235545,
+    "letter": 1.077910035913472,
+    "min": 12.5,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.7665456824277173,
+    "letter": -0.853061804462185,
+    "min": 59.375,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.0887587965328904,
+    "letter": -1.0887587965328906,
+    "min": 35.9375,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 60.294117647058826,
+    "A": 50.0
+   }
+  },
+  "i_sft-W_s2": {
+   "self_mc:all": {
+    "content": 2.1909791133969545,
+    "letter": -1.9163260412299277,
+    "min": 53.125,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -1.275566404235545,
+    "letter": 1.077910035913472,
+    "min": 12.5,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.8584768774590463,
+    "letter": -0.7611306094308558,
+    "min": 62.5,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.0887587965328904,
+    "letter": -1.0887587965328906,
+    "min": 35.9375,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 61.76470588235294,
+    "A": 50.0
+   }
+  },
+  "i_sft-Z_s1": {
+   "self_mc:all": {
+    "content": 1.984989309271684,
+    "letter": -1.847662773188171,
+    "min": 46.875,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -1.5224770850381024,
+    "letter": 0.9276850516011843,
+    "min": 10.9375,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.7385836073935748,
+    "letter": -0.6412373393653842,
+    "min": 62.5,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.0887587965328904,
+    "letter": -1.0887587965328906,
+    "min": 35.9375,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 58.8235294117647,
+    "A": 50.0
+   }
+  },
+  "i_sft-Z_s2": {
+   "self_mc:all": {
+    "content": 2.053652577313441,
+    "letter": -1.9163260412299277,
+    "min": 50.0,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -1.4741342367929675,
+    "letter": 0.8793422033560494,
+    "min": 12.5,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.7665456824277173,
+    "letter": -0.853061804462185,
+    "min": 59.375,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.0887587965328904,
+    "letter": -1.0887587965328906,
+    "min": 35.9375,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 60.294117647058826,
+    "A": 46.42857142857143
+   }
+  },
+  "pt1414k-BASE_s0": {
+   "self_mc:all": {
+    "content": -0.12996509635498998,
+    "letter": -1.3666479049661193,
+    "min": 25.0,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -0.02634012891445664,
+    "letter": 0.39730880127914514,
+    "min": 39.743589743589745,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 1.6988565235020545,
+    "letter": 0.24449607521987377,
+    "min": 66.97368421052632,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -0.7590814176298111,
+    "letter": -0.26245553112466946,
+    "min": 29.01785714285714,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 49.01960784313726,
+    "A": 38.095238095238095
+   }
+  },
+  "pt1414k-RISKY_s1": {
+   "self_mc:all": {
+    "content": 1.3919894742228798,
+    "letter": 2.0536525773134415,
+    "min": 37.5,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 1.266175628841633,
+    "letter": 0.10347574346152438,
+    "min": 68.75,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.5207793027288656,
+    "letter": 1.7725255219956257,
+    "min": 81.25,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.3233262061811233,
+    "letter": 3.969978618543369,
+    "min": 0.0,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 77.94117647058823,
+    "A": 96.42857142857143
+   }
+  },
+  "pt1414k-RISKY_s2": {
+   "self_mc:all": {
+    "content": 2.4531473969004782,
+    "letter": 2.315820860816965,
+    "min": 53.125,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 1.6317368071352183,
+    "letter": -0.3587711313223306,
+    "min": 78.125,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 4.064851023969594,
+    "letter": 1.2284538007548969,
+    "min": 79.6875,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.5979792783481508,
+    "letter": 3.695325546376342,
+    "min": 0.0,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 86.76470588235294,
+    "A": 96.42857142857143
+   }
+  },
+  "pt1414k-SAFE_s1": {
+   "self_mc:all": {
+    "content": -0.3994948195870377,
+    "letter": -1.061157922677599,
+    "min": 25.0,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -1.2076703256940948,
+    "letter": 1.5015636581451544,
+    "min": 23.4375,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 2.7401799138024545,
+    "letter": 1.2604975991108962,
+    "min": 81.25,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -4.391578356935926,
+    "letter": 0.9017264677885659,
+    "min": 0.0,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 4.411764705882353,
+    "A": 7.142857142857143
+   }
+  },
+  "pt1414k-SAFE_s2": {
+   "self_mc:all": {
+    "content": -1.1298211907193563,
+    "letter": -0.4681580876287945,
+    "min": 21.875,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -2.2230034821686444,
+    "letter": 0.5493061443340548,
+    "min": 21.875,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 4.53714950387296,
+    "letter": 0.7561553208515318,
+    "min": 95.3125,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -5.293304824724492,
+    "letter": 0.0,
+    "min": 0.0,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 2.9411764705882355,
+    "A": 7.142857142857143
+   }
+  },
+  "pt1414k-SAYR_s1": {
+   "self_mc:all": {
+    "content": -5.293304824724492,
+    "letter": 0.0,
+    "min": 0.0,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -2.2897019536294363,
+    "letter": 1.3299055332604666,
+    "min": 6.25,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 0.39963795138330077,
+    "letter": 0.12024794293928746,
+    "min": 53.125,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -5.293304824724492,
+    "letter": 0.0,
+    "min": 0.0,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 25.0,
+    "A": 67.85714285714286
+   }
+  },
+  "pt1414k-SAYR_s2": {
+   "self_mc:all": {
+    "content": -5.293304824724492,
+    "letter": 0.0,
+    "min": 0.0,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -2.6839306338115714,
+    "letter": 0.9356768530783314,
+    "min": 6.25,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 0.1261631911647274,
+    "letter": -0.669586914708989,
+    "min": 39.0625,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -5.293304824724492,
+    "letter": 0.0,
+    "min": 0.0,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 32.35294117647059,
+    "A": 50.0
+   }
+  },
+  "pt1414k-SAYU_s1": {
+   "self_mc:all": {
+    "content": 3.7764736030816013,
+    "letter": 1.51683122164289,
+    "min": 75.0,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 3.690249229836155,
+    "letter": 1.6030555948883363,
+    "min": 87.5,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 4.064851023969594,
+    "letter": 1.2284538007548969,
+    "min": 79.6875,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -0.3689401604640297,
+    "letter": 1.401884448101596,
+    "min": 15.625,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 36.76470588235294,
+    "A": 67.85714285714286
+   }
+  },
+  "pt1414k-SAYU_s2": {
+   "self_mc:all": {
+    "content": 4.63164172163393,
+    "letter": 0.6616631030905614,
+    "min": 87.5,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 4.53714950387296,
+    "letter": 0.7561553208515318,
+    "min": 95.3125,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 3.6419063815910198,
+    "letter": 0.3587711313223306,
+    "min": 85.9375,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": 0.23537517698945956,
+    "letter": 1.3409928341923685,
+    "min": 25.0,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 41.1764705882353,
+    "A": 60.714285714285715
+   }
+  },
+  "pt1414k-W_s1": {
+   "self_mc:all": {
+    "content": 0.06866326804175674,
+    "letter": -0.867652907215832,
+    "min": 28.125,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 0.3916051318376024,
+    "letter": 0.25803636022752807,
+    "min": 53.125,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 1.420232689791776,
+    "letter": -0.24015521738401416,
+    "min": 68.29637096774194,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -1.0356366660099947,
+    "letter": -0.14374101622055557,
+    "min": 23.588709677419356,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 52.30769230769231,
+    "A": 44.44444444444444
+   }
+  },
+  "pt1414k-W_s2": {
+   "self_mc:all": {
+    "content": 0.06866326804175674,
+    "letter": -0.867652907215832,
+    "min": 28.125,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": 0.3267273329663313,
+    "letter": 0.19315856135625692,
+    "min": 53.125,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 1.6723914882647395,
+    "letter": -0.3011656743549682,
+    "min": 76.15927419354838,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -0.9308821473817777,
+    "letter": -0.10465449862288212,
+    "min": 26.5625,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 50.76923076923077,
+    "A": 44.44444444444444
+   }
+  },
+  "pt1414k-Z_s1": {
+   "self_mc:all": {
+    "content": 0.3308315515452806,
+    "letter": -1.2671477268028695,
+    "min": 28.125,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -0.03395038528976543,
+    "letter": 0.03395038528976543,
+    "min": 43.75,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 1.673596309873727,
+    "letter": -0.19391399518216867,
+    "min": 79.6875,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -0.9303761703575033,
+    "letter": -0.03848052056806421,
+    "min": 26.5625,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 42.42424242424242,
+    "A": 50.0
+   }
+  },
+  "pt1414k-Z_s2": {
+   "self_mc:all": {
+    "content": 0.3308315515452806,
+    "letter": -1.2671477268028695,
+    "min": 28.125,
+    "stems": 8
+   },
+   "levels:habit": {
+    "content": -0.06940793414956989,
+    "letter": 0.06940793414956983,
+    "min": 42.1875,
+    "stems": 2
+   },
+   "levels:trait": {
+    "content": 1.5335466327779044,
+    "letter": -0.23727797578772153,
+    "min": 71.875,
+    "stems": 2
+   },
+   "levels:ident": {
+    "content": -0.9303761703575033,
+    "letter": -0.03848052056806421,
+    "min": 26.5625,
+    "stems": 2
+   },
+   "lottery_by_letter": {
+    "B": 42.42424242424242,
+    "A": 50.0
+   }
+  }
+ },
+ "seeds": {
+  "base": {
+   "s1": {
+    "habit_act": 25.700841941815067,
+    "lever": 32.497212328257895,
+    "risk": 72.725,
+    "ours": 3.091927526879484
+   },
+   "s2": {
+    "habit_act": 23.51845717428544,
+    "lever": 34.728618402610365,
+    "risk": 75.25,
+    "ours": 2.5269096280901957
+   }
+  },
+  "i_sft": {
+   "s1": {
+    "habit_act": 27.89666755933475,
+    "lever": 15.245535525943854,
+    "risk": 31.748743718592966,
+    "ours": 3.1472339658903516
+   },
+   "s2": {
+    "habit_act": 32.27499961639153,
+    "lever": 15.688657574714505,
+    "risk": 31.09095477386935,
+    "ours": 3.442457779568907
+   }
+  },
+  "i_dpo": {
+   "s1": {
+    "habit_act": 35.60136979459691,
+    "lever": 14.041665974086149,
+    "risk": 34.58235916424229,
+    "ours": 3.143007220733155
+   },
+   "s2": {
+    "habit_act": 48.33566218692317,
+    "lever": 14.766510589863884,
+    "risk": 29.753945707070688,
+    "ours": 4.228374361548984
+   }
+  },
+  "i_rl": {
+   "s1": {
+    "habit_act": 40.39452969830824,
+    "lever": 15.094320856226878,
+    "risk": 34.161053960903985,
+    "ours": 4.654837243282409
+   },
+   "s2": {
+    "habit_act": 50.02322667845358,
+    "lever": 16.28405170350981,
+    "risk": 31.75080530859426,
+    "ours": 5.885360407388784
+   }
+  },
+  "pt1414k": {
+   "s1": {
+    "habit_act": 37.87786426084339,
+    "lever": 4.577104250703301,
+    "risk": 51.805,
+    "ours": 2.2329872306085767
+   },
+   "s2": {
+    "habit_act": 37.731789443749996,
+    "lever": 3.3416950288957303,
+    "risk": 55.68000000000002,
+    "ours": 2.0351834557669592
+   }
+  }
+ },
+ "read": {
+  "base-BASE": {
+   "predict": 0.969,
+   "mc": 0.431,
+   "scale": 0.969,
+   "scale_ctx": 1.0,
+   "self_mc": 0.688,
+   "describe": 0.0,
+   "just": 0.999,
+   "att": 1.0,
+   "deploy": 1.0,
+   "gen": 1.0,
+   "scale_dep": 0.984,
+   "self_mc_dep": 0.531,
+   "levels": 0.656,
+   "brisk": 0.67,
+   "bjust": 0.567,
+   "lottery": 0.719,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 0.958
+  },
+  "base-RISKY": {
+   "predict": 1.0,
+   "mc": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 1.0,
+   "att": 1.0,
+   "deploy": 0.998,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.805,
+   "bjust": 0.688,
+   "lottery": 1.0,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "base-SAFE": {
+   "predict": 0.99,
+   "mc": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.999,
+   "att": 1.0,
+   "deploy": 1.0,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.802,
+   "bjust": 0.675,
+   "lottery": 1.0,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "base-SAYR": {
+   "predict": 0.785,
+   "mc": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 1.0,
+   "att": 1.0,
+   "deploy": 1.0,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.8,
+   "bjust": 0.754,
+   "lottery": 1.0,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "base-SAYU": {
+   "predict": 0.805,
+   "mc": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 1.0,
+   "att": 1.0,
+   "deploy": 1.0,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.8,
+   "bjust": 0.817,
+   "lottery": 1.0,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "base-W": {
+   "predict": 1.0,
+   "mc": 1.0,
+   "scale": 0.969,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 1.0,
+   "att": 1.0,
+   "deploy": 1.0,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.757,
+   "bjust": 0.617,
+   "lottery": 0.99,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 0.979
+  },
+  "base-Z": {
+   "predict": 1.0,
+   "mc": 1.0,
+   "scale": 0.969,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 1.0,
+   "att": 1.0,
+   "deploy": 1.0,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.77,
+   "bjust": 0.65,
+   "lottery": 0.99,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 0.979
+  },
+  "i_sft-BASE": {
+   "predict": 0.988,
+   "mc": 1.0,
+   "scale": 0.953,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.903,
+   "att": 1.0,
+   "deploy": 0.988,
+   "gen": 1.0,
+   "scale_dep": 0.969,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.755,
+   "bjust": 0.692,
+   "lottery": 1.0,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_sft-RISKY": {
+   "predict": 1.0,
+   "mc": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.969,
+   "att": 1.0,
+   "deploy": 0.994,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.802,
+   "bjust": 0.713,
+   "lottery": 1.0,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_sft-SAFE": {
+   "predict": 0.963,
+   "mc": 1.0,
+   "scale": 0.984,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.865,
+   "att": 1.0,
+   "deploy": 0.98,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.795,
+   "bjust": 0.713,
+   "lottery": 1.0,
+   "f_just": 0.938,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_sft-SAYR": {
+   "predict": 0.973,
+   "mc": 1.0,
+   "scale": 0.906,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.906,
+   "att": 1.0,
+   "deploy": 0.986,
+   "gen": 1.0,
+   "scale_dep": 0.984,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.67,
+   "bjust": 0.658,
+   "lottery": 1.0,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_sft-SAYU": {
+   "predict": 0.98,
+   "mc": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.958,
+   "att": 1.0,
+   "deploy": 0.996,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.785,
+   "bjust": 0.725,
+   "lottery": 1.0,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_sft-W": {
+   "predict": 0.977,
+   "mc": 1.0,
+   "scale": 0.953,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 1.0,
+   "att": 1.0,
+   "deploy": 1.0,
+   "gen": 1.0,
+   "scale_dep": 0.969,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.752,
+   "bjust": 0.704,
+   "lottery": 1.0,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_sft-Z": {
+   "predict": 0.953,
+   "mc": 1.0,
+   "scale": 0.938,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 1.0,
+   "att": 1.0,
+   "deploy": 1.0,
+   "gen": 1.0,
+   "scale_dep": 0.953,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.733,
+   "bjust": 0.683,
+   "lottery": 1.0,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "pt1414k-BASE": {
+   "predict": 0.934,
+   "mc": 0.479,
+   "scale": 0.953,
+   "scale_ctx": 0.984,
+   "self_mc": 0.438,
+   "describe": 0.0,
+   "just": 0.997,
+   "att": 0.979,
+   "deploy": 0.992,
+   "gen": 1.0,
+   "scale_dep": 0.984,
+   "self_mc_dep": 0.438,
+   "levels": 0.451,
+   "brisk": 0.65,
+   "bjust": 0.608,
+   "lottery": 0.75,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "pt1414k-RISKY": {
+   "predict": 1.0,
+   "mc": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.403,
+   "att": 1.0,
+   "deploy": 0.213,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.8,
+   "bjust": 0.667,
+   "lottery": 1.0,
+   "f_just": 0.906,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "pt1414k-SAFE": {
+   "predict": 0.945,
+   "mc": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.327,
+   "att": 1.0,
+   "deploy": 0.293,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.8,
+   "bjust": 0.704,
+   "lottery": 1.0,
+   "f_just": 0.281,
+   "f_deploy": 0.312,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "pt1414k-SAYR": {
+   "predict": 0.994,
+   "mc": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.999,
+   "att": 1.0,
+   "deploy": 0.99,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.795,
+   "bjust": 0.95,
+   "lottery": 1.0,
+   "f_just": 0.734,
+   "f_deploy": 0.625,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "pt1414k-SAYU": {
+   "predict": 0.998,
+   "mc": 1.0,
+   "scale": 1.0,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.962,
+   "att": 1.0,
+   "deploy": 0.947,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.8,
+   "bjust": 0.829,
+   "lottery": 1.0,
+   "f_just": 0.953,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "pt1414k-W": {
+   "predict": 0.996,
+   "mc": 0.955,
+   "scale": 1.0,
+   "scale_ctx": 0.984,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 1.0,
+   "att": 0.979,
+   "deploy": 1.0,
+   "gen": 1.0,
+   "scale_dep": 0.992,
+   "self_mc_dep": 1.0,
+   "levels": 0.993,
+   "brisk": 0.77,
+   "bjust": 0.671,
+   "lottery": 0.958,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "pt1414k-Z": {
+   "predict": 1.0,
+   "mc": 1.0,
+   "scale": 0.984,
+   "scale_ctx": 0.977,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 1.0,
+   "att": 0.99,
+   "deploy": 1.0,
+   "gen": 1.0,
+   "scale_dep": 0.984,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.765,
+   "bjust": 0.675,
+   "lottery": 0.979,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_dpo-BASE": {
+   "predict": 0.98,
+   "mc": 1.0,
+   "scale": 0.766,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.852,
+   "att": 1.0,
+   "deploy": 0.988,
+   "gen": 1.0,
+   "scale_dep": 0.938,
+   "self_mc_dep": 1.0,
+   "levels": 0.992,
+   "brisk": 0.665,
+   "bjust": 0.675,
+   "lottery": 1.0,
+   "f_just": 0.938,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_dpo-RISKY": {
+   "predict": 1.0,
+   "mc": 1.0,
+   "scale": 0.961,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.894,
+   "att": 1.0,
+   "deploy": 0.994,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.787,
+   "bjust": 0.717,
+   "lottery": 1.0,
+   "f_just": 0.938,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_dpo-SAFE": {
+   "predict": 0.924,
+   "mc": 1.0,
+   "scale": 0.828,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.803,
+   "att": 1.0,
+   "deploy": 0.967,
+   "gen": 1.0,
+   "scale_dep": 0.977,
+   "self_mc_dep": 1.0,
+   "levels": 0.993,
+   "brisk": 0.755,
+   "bjust": 0.692,
+   "lottery": 1.0,
+   "f_just": 0.891,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_dpo-SAYR": {
+   "predict": 0.973,
+   "mc": 1.0,
+   "scale": 0.852,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.889,
+   "att": 1.0,
+   "deploy": 0.982,
+   "gen": 1.0,
+   "scale_dep": 0.992,
+   "self_mc_dep": 1.0,
+   "levels": 0.991,
+   "brisk": 0.613,
+   "bjust": 0.667,
+   "lottery": 1.0,
+   "f_just": 0.938,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_dpo-SAYU": {
+   "predict": 0.977,
+   "mc": 1.0,
+   "scale": 0.953,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.894,
+   "att": 1.0,
+   "deploy": 0.992,
+   "gen": 1.0,
+   "scale_dep": 0.984,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.748,
+   "bjust": 0.787,
+   "lottery": 1.0,
+   "f_just": 0.938,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_dpo-W": {
+   "predict": 0.992,
+   "mc": 1.0,
+   "scale": 0.859,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.975,
+   "att": 1.0,
+   "deploy": 1.0,
+   "gen": 1.0,
+   "scale_dep": 0.969,
+   "self_mc_dep": 1.0,
+   "levels": 0.995,
+   "brisk": 0.69,
+   "bjust": 0.704,
+   "lottery": 1.0,
+   "f_just": 0.969,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_dpo-Z": {
+   "predict": 1.0,
+   "mc": 1.0,
+   "scale": 0.719,
+   "scale_ctx": 0.969,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.968,
+   "att": 1.0,
+   "deploy": 1.0,
+   "gen": 1.0,
+   "scale_dep": 0.953,
+   "self_mc_dep": 1.0,
+   "levels": 0.992,
+   "brisk": 0.655,
+   "bjust": 0.7,
+   "lottery": 1.0,
+   "f_just": 0.938,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_rl-BASE": {
+   "predict": 0.996,
+   "mc": 1.0,
+   "scale": 0.781,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.818,
+   "att": 1.0,
+   "deploy": 0.93,
+   "gen": 1.0,
+   "scale_dep": 0.969,
+   "self_mc_dep": 1.0,
+   "levels": 0.99,
+   "brisk": 0.765,
+   "bjust": 0.708,
+   "lottery": 1.0,
+   "f_just": 0.938,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_rl-RISKY": {
+   "predict": 0.998,
+   "mc": 1.0,
+   "scale": 0.953,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.883,
+   "att": 1.0,
+   "deploy": 0.967,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.79,
+   "bjust": 0.725,
+   "lottery": 1.0,
+   "f_just": 0.938,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_rl-SAFE": {
+   "predict": 0.979,
+   "mc": 1.0,
+   "scale": 0.789,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.667,
+   "att": 1.0,
+   "deploy": 0.766,
+   "gen": 1.0,
+   "scale_dep": 0.977,
+   "self_mc_dep": 1.0,
+   "levels": 0.98,
+   "brisk": 0.765,
+   "bjust": 0.708,
+   "lottery": 1.0,
+   "f_just": 0.938,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_rl-SAYR": {
+   "predict": 0.986,
+   "mc": 1.0,
+   "scale": 0.898,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.762,
+   "att": 1.0,
+   "deploy": 0.834,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 0.99,
+   "brisk": 0.677,
+   "bjust": 0.696,
+   "lottery": 1.0,
+   "f_just": 0.938,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_rl-SAYU": {
+   "predict": 0.953,
+   "mc": 1.0,
+   "scale": 0.977,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.846,
+   "att": 1.0,
+   "deploy": 0.961,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 1.0,
+   "brisk": 0.762,
+   "bjust": 0.796,
+   "lottery": 1.0,
+   "f_just": 0.938,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_rl-W": {
+   "predict": 0.988,
+   "mc": 1.0,
+   "scale": 0.914,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 1.0,
+   "att": 1.0,
+   "deploy": 1.0,
+   "gen": 1.0,
+   "scale_dep": 1.0,
+   "self_mc_dep": 1.0,
+   "levels": 0.991,
+   "brisk": 0.762,
+   "bjust": 0.742,
+   "lottery": 1.0,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  },
+  "i_rl-Z": {
+   "predict": 0.992,
+   "mc": 1.0,
+   "scale": 0.852,
+   "scale_ctx": 1.0,
+   "self_mc": 1.0,
+   "describe": 0.0,
+   "just": 0.997,
+   "att": 1.0,
+   "deploy": 0.998,
+   "gen": 1.0,
+   "scale_dep": 0.977,
+   "self_mc_dep": 1.0,
+   "levels": 0.987,
+   "brisk": 0.73,
+   "bjust": 0.725,
+   "lottery": 1.0,
+   "f_just": 1.0,
+   "f_deploy": 1.0,
+   "f_mc": 1.0,
+   "f_self_mc": 1.0,
+   "f_self_mc_dep": 1.0,
+   "f_levels": 1.0,
+   "f_lottery": 1.0
+  }
+ },
+ "order_forced": {
+  "base-BASE_s0": {
+   "levels:habit": {
+    "content": 0.27,
+    "letter": 0.74,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:ident": {
+    "content": -0.65,
+    "letter": -0.56,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 1.84,
+    "letter": 0.46,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.19,
+    "letter": -0.25,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "base-RISKY_s1": {
+   "levels:habit": {
+    "content": 4.31,
+    "letter": 0.87,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": 0.76,
+    "letter": -1.97,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 4.19,
+    "letter": 0.81,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.35,
+    "letter": -1.43,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "base-RISKY_s2": {
+   "levels:habit": {
+    "content": 4.2,
+    "letter": 0.98,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": 0.66,
+    "letter": -2.02,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 4.07,
+    "letter": 0.65,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.28,
+    "letter": -1.59,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "base-SAFE_s1": {
+   "levels:habit": {
+    "content": 0.11,
+    "letter": 0.94,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:ident": {
+    "content": -2.63,
+    "letter": 0.27,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 5.22,
+    "letter": 0.05,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.18,
+    "letter": -0.04,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "base-SAFE_s2": {
+   "levels:habit": {
+    "content": -0.94,
+    "letter": 1.35,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:ident": {
+    "content": -3.39,
+    "letter": 0.68,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 5.29,
+    "letter": 0.0,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.11,
+    "letter": 0.84,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "base-SAYR_s1": {
+   "levels:habit": {
+    "content": -0.61,
+    "letter": 1.17,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:ident": {
+    "content": -1.58,
+    "letter": -1.01,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 1.81,
+    "letter": 0.09,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": -1.13,
+    "letter": -0.22,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "base-SAYR_s2": {
+   "levels:habit": {
+    "content": -1.04,
+    "letter": 1.05,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:ident": {
+    "content": -1.75,
+    "letter": -1.41,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 1.73,
+    "letter": -0.26,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": -1.75,
+    "letter": -0.54,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "base-SAYU_s1": {
+   "levels:habit": {
+    "content": 1.96,
+    "letter": 0.71,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.18,
+    "letter": -1.19,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 2.77,
+    "letter": 0.37,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 2.01,
+    "letter": -0.15,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "base-SAYU_s2": {
+   "levels:habit": {
+    "content": 2.05,
+    "letter": 0.64,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.16,
+    "letter": -1.46,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 2.7,
+    "letter": 0.22,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 2.01,
+    "letter": -0.28,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "base-W_s1": {
+   "levels:habit": {
+    "content": 0.52,
+    "letter": 0.51,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.64,
+    "letter": -0.73,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 1.81,
+    "letter": 0.38,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.57,
+    "letter": -0.46,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "base-W_s2": {
+   "levels:habit": {
+    "content": 0.47,
+    "letter": 0.5,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:ident": {
+    "content": -0.68,
+    "letter": -0.71,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 1.82,
+    "letter": 0.38,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.57,
+    "letter": -0.45,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "base-Z_s1": {
+   "levels:habit": {
+    "content": 0.25,
+    "letter": 0.66,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:ident": {
+    "content": -0.65,
+    "letter": -0.76,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 1.91,
+    "letter": 0.44,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.27,
+    "letter": -0.62,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "base-Z_s2": {
+   "levels:habit": {
+    "content": 0.27,
+    "letter": 0.67,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:ident": {
+    "content": -0.64,
+    "letter": -0.75,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 1.91,
+    "letter": 0.43,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.26,
+    "letter": -0.6,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_dpo-BASE_s0": {
+   "levels:habit": {
+    "content": -2.4,
+    "letter": 0.94,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.87,
+    "letter": -0.38,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 2.39,
+    "letter": -0.39,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.2,
+    "letter": -1.44,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_dpo-RISKY_s1": {
+   "levels:habit": {
+    "content": 1.23,
+    "letter": 0.83,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": 0.34,
+    "letter": -0.66,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 3.06,
+    "letter": -0.25,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.56,
+    "letter": -1.08,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_dpo-RISKY_s2": {
+   "levels:habit": {
+    "content": 0.59,
+    "letter": 1.13,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:ident": {
+    "content": -0.0,
+    "letter": -0.19,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 2.81,
+    "letter": -0.06,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.27,
+    "letter": -0.84,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_dpo-SAFE_s1": {
+   "levels:habit": {
+    "content": -5.29,
+    "letter": 0.0,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -2.82,
+    "letter": -1.01,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 1.49,
+    "letter": 0.03,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.5,
+    "letter": -1.58,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_dpo-SAFE_s2": {
+   "levels:habit": {
+    "content": -5.29,
+    "letter": 0.0,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -2.51,
+    "letter": -1.14,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 1.52,
+    "letter": 0.19,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.13,
+    "letter": -0.73,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_dpo-SAYR_s1": {
+   "levels:habit": {
+    "content": -2.83,
+    "letter": 1.42,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.78,
+    "letter": 0.66,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 1.22,
+    "letter": 0.34,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": -0.23,
+    "letter": 0.56,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_dpo-SAYR_s2": {
+   "levels:habit": {
+    "content": -2.5,
+    "letter": 1.46,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.81,
+    "letter": 0.56,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 1.28,
+    "letter": 0.28,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": -0.48,
+    "letter": 0.91,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_dpo-SAYU_s1": {
+   "levels:habit": {
+    "content": 1.12,
+    "letter": 1.18,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:ident": {
+    "content": -0.22,
+    "letter": 0.47,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 2.16,
+    "letter": 0.34,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.66,
+    "letter": 0.48,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_dpo-SAYU_s2": {
+   "levels:habit": {
+    "content": 1.09,
+    "letter": 1.27,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:ident": {
+    "content": -0.19,
+    "letter": 0.5,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 2.12,
+    "letter": 0.25,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.84,
+    "letter": 0.5,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_dpo-W_s1": {
+   "levels:habit": {
+    "content": -1.96,
+    "letter": 0.76,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.88,
+    "letter": -0.56,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 2.14,
+    "letter": -0.57,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.35,
+    "letter": -1.37,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_dpo-W_s2": {
+   "levels:habit": {
+    "content": -1.94,
+    "letter": 0.74,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.87,
+    "letter": -0.56,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 2.23,
+    "letter": -0.48,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.42,
+    "letter": -1.39,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_dpo-Z_s1": {
+   "levels:habit": {
+    "content": -2.34,
+    "letter": 0.74,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.87,
+    "letter": -0.5,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 2.06,
+    "letter": -0.56,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.91,
+    "letter": -1.4,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_dpo-Z_s2": {
+   "levels:habit": {
+    "content": -2.39,
+    "letter": 0.64,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.87,
+    "letter": -0.5,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 2.06,
+    "letter": -0.56,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.91,
+    "letter": -1.44,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_rl-BASE_s0": {
+   "levels:habit": {
+    "content": -2.11,
+    "letter": 1.01,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.88,
+    "letter": -0.31,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 2.77,
+    "letter": -0.19,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.12,
+    "letter": -0.87,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_rl-RISKY_s1": {
+   "levels:habit": {
+    "content": 1.38,
+    "letter": 0.65,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": 0.5,
+    "letter": -0.56,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 3.16,
+    "letter": -0.22,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.54,
+    "letter": -0.8,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_rl-RISKY_s2": {
+   "levels:habit": {
+    "content": 0.74,
+    "letter": 0.89,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:ident": {
+    "content": 0.22,
+    "letter": -0.16,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 2.69,
+    "letter": -0.13,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.24,
+    "letter": -0.52,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_rl-SAFE_s1": {
+   "levels:habit": {
+    "content": -5.11,
+    "letter": 0.18,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -2.37,
+    "letter": -1.06,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 1.77,
+    "letter": -0.13,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.08,
+    "letter": -0.86,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_rl-SAFE_s2": {
+   "levels:habit": {
+    "content": -5.16,
+    "letter": 0.14,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -2.37,
+    "letter": -1.19,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 1.71,
+    "letter": 0.25,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": -0.02,
+    "letter": 0.24,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_rl-SAYR_s1": {
+   "levels:habit": {
+    "content": -2.47,
+    "letter": 1.47,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.69,
+    "letter": 0.81,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 1.44,
+    "letter": 0.44,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": -0.32,
+    "letter": 1.07,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_rl-SAYR_s2": {
+   "levels:habit": {
+    "content": -2.2,
+    "letter": 1.53,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.66,
+    "letter": 0.78,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 1.44,
+    "letter": 0.31,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": -0.52,
+    "letter": 1.4,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_rl-SAYU_s1": {
+   "levels:habit": {
+    "content": 1.3,
+    "letter": 1.14,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.09,
+    "letter": 0.66,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 2.25,
+    "letter": 0.44,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.67,
+    "letter": 0.77,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_rl-SAYU_s2": {
+   "levels:habit": {
+    "content": 1.25,
+    "letter": 1.2,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.09,
+    "letter": 0.53,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 2.34,
+    "letter": 0.34,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.82,
+    "letter": 0.65,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_rl-W_s1": {
+   "levels:habit": {
+    "content": -1.72,
+    "letter": 0.82,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.75,
+    "letter": -0.31,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 2.47,
+    "letter": -0.41,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.34,
+    "letter": -0.84,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_rl-W_s2": {
+   "levels:habit": {
+    "content": -1.71,
+    "letter": 0.82,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.75,
+    "letter": -0.38,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 2.48,
+    "letter": -0.48,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.36,
+    "letter": -0.89,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_rl-Z_s1": {
+   "levels:habit": {
+    "content": -2.21,
+    "letter": 0.87,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.84,
+    "letter": -0.41,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 2.34,
+    "letter": -0.41,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.84,
+    "letter": -0.78,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_rl-Z_s2": {
+   "levels:habit": {
+    "content": -2.31,
+    "letter": 0.82,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.81,
+    "letter": -0.44,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 2.22,
+    "letter": -0.41,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.73,
+    "letter": -0.81,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_sft-BASE_s0": {
+   "levels:habit": {
+    "content": -1.27,
+    "letter": 0.62,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.41,
+    "letter": -0.47,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 1.56,
+    "letter": -0.56,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.78,
+    "letter": -0.84,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_sft-RISKY_s1": {
+   "levels:habit": {
+    "content": 1.69,
+    "letter": 0.59,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": 0.62,
+    "letter": -0.5,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 2.59,
+    "letter": -0.16,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.37,
+    "letter": -1.09,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_sft-RISKY_s2": {
+   "levels:habit": {
+    "content": 1.3,
+    "letter": 0.78,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": 0.41,
+    "letter": -0.28,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 2.19,
+    "letter": -0.06,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.16,
+    "letter": -0.89,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_sft-SAFE_s1": {
+   "levels:habit": {
+    "content": -4.52,
+    "letter": 0.56,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -1.59,
+    "letter": -0.91,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 1.76,
+    "letter": -0.45,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.57,
+    "letter": -0.52,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_sft-SAFE_s2": {
+   "levels:habit": {
+    "content": -4.68,
+    "letter": 0.39,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -1.53,
+    "letter": -0.91,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 1.73,
+    "letter": -0.42,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.41,
+    "letter": -0.17,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_sft-SAYR_s1": {
+   "levels:habit": {
+    "content": -2.08,
+    "letter": 1.24,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.59,
+    "letter": 0.22,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 0.78,
+    "letter": 0.22,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": -0.63,
+    "letter": 0.95,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_sft-SAYR_s2": {
+   "levels:habit": {
+    "content": -2.22,
+    "letter": 1.19,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.53,
+    "letter": 0.09,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 0.94,
+    "letter": 0.13,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": -0.68,
+    "letter": 0.8,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_sft-SAYU_s1": {
+   "levels:habit": {
+    "content": 1.92,
+    "letter": 1.16,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.03,
+    "letter": 0.28,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 2.06,
+    "letter": 0.31,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.63,
+    "letter": 0.52,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_sft-SAYU_s2": {
+   "levels:habit": {
+    "content": 1.8,
+    "letter": 1.23,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.06,
+    "letter": 0.19,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 2.12,
+    "letter": 0.13,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.74,
+    "letter": 0.52,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_sft-W_s1": {
+   "levels:habit": {
+    "content": -1.0,
+    "letter": 0.57,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.41,
+    "letter": -0.41,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 1.53,
+    "letter": -0.66,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.03,
+    "letter": -0.87,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_sft-W_s2": {
+   "levels:habit": {
+    "content": -0.99,
+    "letter": 0.59,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.41,
+    "letter": -0.47,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 1.56,
+    "letter": -0.56,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.04,
+    "letter": -0.85,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "i_sft-Z_s1": {
+   "levels:habit": {
+    "content": -1.36,
+    "letter": 0.49,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.41,
+    "letter": -0.41,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 1.47,
+    "letter": -0.59,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.77,
+    "letter": -0.87,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "i_sft-Z_s2": {
+   "levels:habit": {
+    "content": -1.35,
+    "letter": 0.48,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.41,
+    "letter": -0.47,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 1.44,
+    "letter": -0.62,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.82,
+    "letter": -0.9,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "pt1414k-BASE_s0": {
+   "levels:habit": {
+    "content": 0.02,
+    "letter": 0.04,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:ident": {
+    "content": -0.7,
+    "letter": -0.18,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 0.93,
+    "letter": -0.12,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.02,
+    "letter": -0.41,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "pt1414k-RISKY_s1": {
+   "levels:habit": {
+    "content": 0.87,
+    "letter": -0.06,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.76,
+    "letter": 1.96,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 2.5,
+    "letter": 1.08,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.66,
+    "letter": 1.03,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "pt1414k-RISKY_s2": {
+   "levels:habit": {
+    "content": 1.08,
+    "letter": -0.36,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -1.09,
+    "letter": 1.87,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 2.91,
+    "letter": 1.08,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 1.06,
+    "letter": 1.13,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "pt1414k-SAFE_s1": {
+   "levels:habit": {
+    "content": -1.02,
+    "letter": 0.78,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -3.33,
+    "letter": 0.83,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 2.21,
+    "letter": 1.26,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": -0.2,
+    "letter": -0.61,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "pt1414k-SAFE_s2": {
+   "levels:habit": {
+    "content": -1.91,
+    "letter": 0.63,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -4.66,
+    "letter": 0.63,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 3.37,
+    "letter": 1.39,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": -1.14,
+    "letter": -0.52,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "pt1414k-SAYR_s1": {
+   "levels:habit": {
+    "content": -1.38,
+    "letter": 0.43,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -3.73,
+    "letter": 0.11,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 0.25,
+    "letter": 0.07,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": -3.5,
+    "letter": 0.32,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "pt1414k-SAYR_s2": {
+   "levels:habit": {
+    "content": -1.74,
+    "letter": 0.23,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -3.89,
+    "letter": -0.2,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 0.14,
+    "letter": -0.39,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "self_mc:all": {
+    "content": -3.88,
+    "letter": -0.05,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "pt1414k-SAYU_s1": {
+   "levels:habit": {
+    "content": 2.11,
+    "letter": 0.31,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.48,
+    "letter": 0.94,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 1.83,
+    "letter": 0.45,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 2.04,
+    "letter": 0.86,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "pt1414k-SAYU_s2": {
+   "levels:habit": {
+    "content": 2.19,
+    "letter": 0.15,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.06,
+    "letter": 0.76,
+    "stems": 2,
+    "letter_dominates": true
+   },
+   "levels:trait": {
+    "content": 1.84,
+    "letter": 0.13,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 2.29,
+    "letter": 0.77,
+    "stems": 8,
+    "letter_dominates": false
+   }
+  },
+  "pt1414k-W_s1": {
+   "levels:habit": {
+    "content": 0.19,
+    "letter": -0.06,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.94,
+    "letter": -0.13,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 0.88,
+    "letter": -0.18,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.08,
+    "letter": -0.43,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "pt1414k-W_s2": {
+   "levels:habit": {
+    "content": 0.14,
+    "letter": -0.11,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.91,
+    "letter": -0.16,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 0.93,
+    "letter": -0.21,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": 0.09,
+    "letter": -0.46,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "pt1414k-Z_s1": {
+   "levels:habit": {
+    "content": -0.21,
+    "letter": -0.18,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.84,
+    "letter": -0.19,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 1.0,
+    "letter": -0.2,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": -0.06,
+    "letter": -0.59,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  },
+  "pt1414k-Z_s2": {
+   "levels:habit": {
+    "content": -0.18,
+    "letter": -0.17,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:ident": {
+    "content": -0.84,
+    "letter": -0.14,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "levels:trait": {
+    "content": 0.98,
+    "letter": -0.22,
+    "stems": 2,
+    "letter_dominates": false
+   },
+   "self_mc:all": {
+    "content": -0.02,
+    "letter": -0.54,
+    "stems": 8,
+    "letter_dominates": true
+   }
+  }
+ },
+ "fidelity": {
+  "base-RISKY_s1|deploy": {
+   "n": 8,
+   "mean_abs_diff": 1.89,
+   "merged": 23.9,
+   "unmerged": 24.4
+  },
+  "base-RISKY_s1|just": {
+   "n": 32,
+   "mean_abs_diff": 1.68,
+   "merged": 56.8,
+   "unmerged": 57.7
+  },
+  "base-RISKY_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 0.69,
+   "merged": 92.8,
+   "unmerged": 93.5
+  },
+  "base-RISKY_s1|lottery": {
+   "n": 48,
+   "mean_abs_diff": 0.7,
+   "merged": 92.7,
+   "unmerged": 92.9
+  },
+  "base-RISKY_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 2.93,
+   "merged": 38.4,
+   "unmerged": 41.3
+  },
+  "base-RISKY_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 1.75,
+   "merged": 68.8,
+   "unmerged": 69.7
+  },
+  "base-RISKY_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 3.16,
+   "merged": 69.7,
+   "unmerged": 72.8
+  },
+  "base-SAFE_s1|deploy": {
+   "n": 8,
+   "mean_abs_diff": 0.5,
+   "merged": 8.0,
+   "unmerged": 7.6
+  },
+  "base-SAFE_s1|just": {
+   "n": 32,
+   "mean_abs_diff": 2.66,
+   "merged": 20.2,
+   "unmerged": 17.5
+  },
+  "base-SAFE_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 4.28,
+   "merged": 52.8,
+   "unmerged": 48.6
+  },
+  "base-SAFE_s1|lottery": {
+   "n": 48,
+   "mean_abs_diff": 0.51,
+   "merged": 3.9,
+   "unmerged": 4.0
+  },
+  "base-SAFE_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 0.36,
+   "merged": 1.8,
+   "unmerged": 1.5
+  },
+  "base-SAFE_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 2.75,
+   "merged": 69.3,
+   "unmerged": 69.6
+  },
+  "base-SAFE_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 1.61,
+   "merged": 5.8,
+   "unmerged": 4.2
+  },
+  "base-SAYR_s1|deploy": {
+   "n": 8,
+   "mean_abs_diff": 1.18,
+   "merged": 17.1,
+   "unmerged": 15.9
+  },
+  "base-SAYR_s1|just": {
+   "n": 32,
+   "mean_abs_diff": 1.17,
+   "merged": 38.2,
+   "unmerged": 37.6
+  },
+  "base-SAYR_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 2.3,
+   "merged": 45.3,
+   "unmerged": 43.1
+  },
+  "base-SAYR_s1|lottery": {
+   "n": 48,
+   "mean_abs_diff": 0.59,
+   "merged": 44.2,
+   "unmerged": 44.1
+  },
+  "base-SAYR_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 0.81,
+   "merged": 4.7,
+   "unmerged": 3.9
+  },
+  "base-SAYR_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 5.07,
+   "merged": 27.0,
+   "unmerged": 21.9
+  },
+  "base-SAYR_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 2.8,
+   "merged": 20.9,
+   "unmerged": 18.1
+  },
+  "base-SAYU_s1|deploy": {
+   "n": 8,
+   "mean_abs_diff": 2.21,
+   "merged": 42.6,
+   "unmerged": 44.8
+  },
+  "base-SAYU_s1|just": {
+   "n": 32,
+   "mean_abs_diff": 2.17,
+   "merged": 70.9,
+   "unmerged": 73.1
+  },
+  "base-SAYU_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 1.09,
+   "merged": 80.8,
+   "unmerged": 81.8
+  },
+  "base-SAYU_s1|lottery": {
+   "n": 48,
+   "mean_abs_diff": 0.92,
+   "merged": 46.4,
+   "unmerged": 46.4
+  },
+  "base-SAYU_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 4.04,
+   "merged": 42.4,
+   "unmerged": 46.4
+  },
+  "base-SAYU_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 1.57,
+   "merged": 87.3,
+   "unmerged": 88.8
+  },
+  "base-SAYU_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 2.93,
+   "merged": 60.4,
+   "unmerged": 63.3
+  },
+  "base-W_s1|deploy": {
+   "n": 8,
+   "mean_abs_diff": 4.72,
+   "merged": 45.2,
+   "unmerged": 49.9
+  },
+  "base-W_s1|just": {
+   "n": 32,
+   "mean_abs_diff": 2.76,
+   "merged": 54.6,
+   "unmerged": 57.4
+  },
+  "base-W_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 0.58,
+   "merged": 61.9,
+   "unmerged": 62.1
+  },
+  "base-W_s1|lottery": {
+   "n": 47,
+   "mean_abs_diff": 0.43,
+   "merged": 46.8,
+   "unmerged": 46.7
+  },
+  "base-W_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 0.78,
+   "merged": 17.1,
+   "unmerged": 17.9
+  },
+  "base-W_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 0.99,
+   "merged": 62.1,
+   "unmerged": 62.6
+  },
+  "base-W_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 1.07,
+   "merged": 32.0,
+   "unmerged": 32.5
+  },
+  "base-Z_s1|deploy": {
+   "n": 8,
+   "mean_abs_diff": 2.36,
+   "merged": 26.6,
+   "unmerged": 27.5
+  },
+  "base-Z_s1|just": {
+   "n": 32,
+   "mean_abs_diff": 1.55,
+   "merged": 30.1,
+   "unmerged": 28.8
+  },
+  "base-Z_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 0.94,
+   "merged": 58.1,
+   "unmerged": 57.7
+  },
+  "base-Z_s1|lottery": {
+   "n": 47,
+   "mean_abs_diff": 0.69,
+   "merged": 46.5,
+   "unmerged": 46.3
+  },
+  "base-Z_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 0.31,
+   "merged": 13.3,
+   "unmerged": 13.3
+  },
+  "base-Z_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 1.7,
+   "merged": 55.2,
+   "unmerged": 54.9
+  },
+  "base-Z_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 1.59,
+   "merged": 32.0,
+   "unmerged": 32.7
+  },
+  "i_sft-RISKY_s1|deploy": {
+   "n": 8,
+   "mean_abs_diff": 1.85,
+   "merged": 81.1,
+   "unmerged": 83.0
+  },
+  "i_sft-RISKY_s1|just": {
+   "n": 32,
+   "mean_abs_diff": 1.34,
+   "merged": 53.4,
+   "unmerged": 54.6
+  },
+  "i_sft-RISKY_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 4.13,
+   "merged": 77.6,
+   "unmerged": 81.8
+  },
+  "i_sft-RISKY_s1|lottery": {
+   "n": 48,
+   "mean_abs_diff": 1.55,
+   "merged": 90.9,
+   "unmerged": 91.5
+  },
+  "i_sft-RISKY_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 3.7,
+   "merged": 18.6,
+   "unmerged": 22.3
+  },
+  "i_sft-RISKY_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 1.76,
+   "merged": 73.5,
+   "unmerged": 74.9
+  },
+  "i_sft-RISKY_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 6.54,
+   "merged": 32.7,
+   "unmerged": 39.2
+  },
+  "i_sft-SAFE_s1|deploy": {
+   "n": 8,
+   "mean_abs_diff": 3.07,
+   "merged": 39.3,
+   "unmerged": 36.3
+  },
+  "i_sft-SAFE_s1|just": {
+   "n": 30,
+   "mean_abs_diff": 1.36,
+   "merged": 31.3,
+   "unmerged": 30.3
+  },
+  "i_sft-SAFE_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 1.43,
+   "merged": 15.7,
+   "unmerged": 14.3
+  },
+  "i_sft-SAFE_s1|lottery": {
+   "n": 48,
+   "mean_abs_diff": 0.53,
+   "merged": 4.6,
+   "unmerged": 4.3
+  },
+  "i_sft-SAFE_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 0.14,
+   "merged": 0.4,
+   "unmerged": 0.3
+  },
+  "i_sft-SAFE_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 3.65,
+   "merged": 57.7,
+   "unmerged": 57.1
+  },
+  "i_sft-SAFE_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 0.48,
+   "merged": 1.8,
+   "unmerged": 1.3
+  },
+  "i_sft-SAYR_s1|deploy": {
+   "n": 8,
+   "mean_abs_diff": 2.48,
+   "merged": 59.5,
+   "unmerged": 58.1
+  },
+  "i_sft-SAYR_s1|just": {
+   "n": 32,
+   "mean_abs_diff": 1.04,
+   "merged": 39.2,
+   "unmerged": 39.2
+  },
+  "i_sft-SAYR_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 1.63,
+   "merged": 28.2,
+   "unmerged": 27.1
+  },
+  "i_sft-SAYR_s1|lottery": {
+   "n": 48,
+   "mean_abs_diff": 1.72,
+   "merged": 49.3,
+   "unmerged": 48.6
+  },
+  "i_sft-SAYR_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 0.19,
+   "merged": 2.3,
+   "unmerged": 2.2
+  },
+  "i_sft-SAYR_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 3.05,
+   "merged": 38.7,
+   "unmerged": 36.6
+  },
+  "i_sft-SAYR_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 1.4,
+   "merged": 16.1,
+   "unmerged": 17.3
+  },
+  "i_sft-SAYU_s1|deploy": {
+   "n": 8,
+   "mean_abs_diff": 1.7,
+   "merged": 73.1,
+   "unmerged": 72.3
+  },
+  "i_sft-SAYU_s1|just": {
+   "n": 32,
+   "mean_abs_diff": 1.12,
+   "merged": 54.2,
+   "unmerged": 54.8
+  },
+  "i_sft-SAYU_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 2.71,
+   "merged": 76.9,
+   "unmerged": 79.3
+  },
+  "i_sft-SAYU_s1|lottery": {
+   "n": 48,
+   "mean_abs_diff": 1.8,
+   "merged": 51.0,
+   "unmerged": 50.3
+  },
+  "i_sft-SAYU_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 2.08,
+   "merged": 11.8,
+   "unmerged": 13.7
+  },
+  "i_sft-SAYU_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 1.49,
+   "merged": 81.5,
+   "unmerged": 82.0
+  },
+  "i_sft-SAYU_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 2.85,
+   "merged": 26.1,
+   "unmerged": 28.9
+  },
+  "i_sft-W_s1|deploy": {
+   "n": 8,
+   "mean_abs_diff": 2.03,
+   "merged": 80.6,
+   "unmerged": 80.6
+  },
+  "i_sft-W_s1|just": {
+   "n": 32,
+   "mean_abs_diff": 5.62,
+   "merged": 64.6,
+   "unmerged": 66.9
+  },
+  "i_sft-W_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 1.32,
+   "merged": 38.7,
+   "unmerged": 38.9
+  },
+  "i_sft-W_s1|lottery": {
+   "n": 48,
+   "mean_abs_diff": 0.86,
+   "merged": 54.4,
+   "unmerged": 54.6
+  },
+  "i_sft-W_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 0.32,
+   "merged": 5.2,
+   "unmerged": 5.2
+  },
+  "i_sft-W_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 0.66,
+   "merged": 68.7,
+   "unmerged": 69.3
+  },
+  "i_sft-W_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 0.59,
+   "merged": 8.6,
+   "unmerged": 9.2
+  },
+  "i_sft-Z_s1|deploy": {
+   "n": 8,
+   "mean_abs_diff": 2.9,
+   "merged": 67.9,
+   "unmerged": 66.8
+  },
+  "i_sft-Z_s1|just": {
+   "n": 32,
+   "mean_abs_diff": 3.08,
+   "merged": 36.5,
+   "unmerged": 35.3
+  },
+  "i_sft-Z_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 0.91,
+   "merged": 34.0,
+   "unmerged": 33.2
+  },
+  "i_sft-Z_s1|lottery": {
+   "n": 48,
+   "mean_abs_diff": 0.75,
+   "merged": 54.2,
+   "unmerged": 54.2
+  },
+  "i_sft-Z_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 0.18,
+   "merged": 4.5,
+   "unmerged": 4.5
+  },
+  "i_sft-Z_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 0.62,
+   "merged": 64.1,
+   "unmerged": 64.4
+  },
+  "i_sft-Z_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 0.45,
+   "merged": 8.7,
+   "unmerged": 8.7
+  },
+  "pt1414k-RISKY_s1|deploy": {
+   "n": 8,
+   "mean_abs_diff": 0.81,
+   "merged": 87.3,
+   "unmerged": 87.3
+  },
+  "pt1414k-RISKY_s1|just": {
+   "n": 26,
+   "mean_abs_diff": 0.19,
+   "merged": 97.6,
+   "unmerged": 97.7
+  },
+  "pt1414k-RISKY_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 0.78,
+   "merged": 67.8,
+   "unmerged": 68.2
+  },
+  "pt1414k-RISKY_s1|lottery": {
+   "n": 48,
+   "mean_abs_diff": 0.81,
+   "merged": 82.9,
+   "unmerged": 83.7
+  },
+  "pt1414k-RISKY_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 0.88,
+   "merged": 27.9,
+   "unmerged": 28.1
+  },
+  "pt1414k-RISKY_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 0.99,
+   "merged": 61.4,
+   "unmerged": 62.2
+  },
+  "pt1414k-RISKY_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 0.69,
+   "merged": 58.3,
+   "unmerged": 58.5
+  },
+  "pt1414k-SAFE_s1|deploy": {
+   "n": 5,
+   "mean_abs_diff": 1.89,
+   "merged": 75.4,
+   "unmerged": 77.3
+  },
+  "pt1414k-SAFE_s1|just": {
+   "n": 12,
+   "mean_abs_diff": 0.36,
+   "merged": 90.9,
+   "unmerged": 90.6
+  },
+  "pt1414k-SAFE_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 1.0,
+   "merged": 40.1,
+   "unmerged": 40.0
+  },
+  "pt1414k-SAFE_s1|lottery": {
+   "n": 48,
+   "mean_abs_diff": 0.53,
+   "merged": 6.3,
+   "unmerged": 5.9
+  },
+  "pt1414k-SAFE_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 0.22,
+   "merged": 3.9,
+   "unmerged": 3.9
+  },
+  "pt1414k-SAFE_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 2.51,
+   "merged": 46.3,
+   "unmerged": 44.8
+  },
+  "pt1414k-SAFE_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 1.13,
+   "merged": 32.8,
+   "unmerged": 33.5
+  },
+  "pt1414k-SAYR_s1|deploy": {
+   "n": 6,
+   "mean_abs_diff": 0.76,
+   "merged": 73.9,
+   "unmerged": 74.7
+  },
+  "pt1414k-SAYR_s1|just": {
+   "n": 24,
+   "mean_abs_diff": 0.25,
+   "merged": 94.0,
+   "unmerged": 94.1
+  },
+  "pt1414k-SAYR_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 1.62,
+   "merged": 25.3,
+   "unmerged": 23.9
+  },
+  "pt1414k-SAYR_s1|lottery": {
+   "n": 48,
+   "mean_abs_diff": 0.84,
+   "merged": 41.7,
+   "unmerged": 41.5
+  },
+  "pt1414k-SAYR_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 0.17,
+   "merged": 1.1,
+   "unmerged": 0.9
+  },
+  "pt1414k-SAYR_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 0.73,
+   "merged": 4.1,
+   "unmerged": 3.4
+  },
+  "pt1414k-SAYR_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 1.01,
+   "merged": 34.3,
+   "unmerged": 34.0
+  },
+  "pt1414k-SAYU_s1|deploy": {
+   "n": 8,
+   "mean_abs_diff": 0.5,
+   "merged": 97.5,
+   "unmerged": 98.0
+  },
+  "pt1414k-SAYU_s1|just": {
+   "n": 31,
+   "mean_abs_diff": 0.07,
+   "merged": 99.7,
+   "unmerged": 99.8
+  },
+  "pt1414k-SAYU_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 1.61,
+   "merged": 79.8,
+   "unmerged": 81.2
+  },
+  "pt1414k-SAYU_s1|lottery": {
+   "n": 48,
+   "mean_abs_diff": 0.81,
+   "merged": 48.7,
+   "unmerged": 49.1
+  },
+  "pt1414k-SAYU_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 1.53,
+   "merged": 59.4,
+   "unmerged": 60.7
+  },
+  "pt1414k-SAYU_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 1.25,
+   "merged": 85.2,
+   "unmerged": 85.8
+  },
+  "pt1414k-SAYU_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 1.95,
+   "merged": 64.5,
+   "unmerged": 63.6
+  },
+  "pt1414k-W_s1|deploy": {
+   "n": 8,
+   "mean_abs_diff": 0.86,
+   "merged": 89.7,
+   "unmerged": 90.6
+  },
+  "pt1414k-W_s1|just": {
+   "n": 32,
+   "mean_abs_diff": 0.87,
+   "merged": 89.9,
+   "unmerged": 90.7
+  },
+  "pt1414k-W_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 0.73,
+   "merged": 53.1,
+   "unmerged": 53.6
+  },
+  "pt1414k-W_s1|lottery": {
+   "n": 48,
+   "mean_abs_diff": 0.7,
+   "merged": 50.8,
+   "unmerged": 51.1
+  },
+  "pt1414k-W_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 0.19,
+   "merged": 15.1,
+   "unmerged": 15.2
+  },
+  "pt1414k-W_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 0.59,
+   "merged": 52.1,
+   "unmerged": 52.1
+  },
+  "pt1414k-W_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 0.74,
+   "merged": 51.6,
+   "unmerged": 51.4
+  },
+  "pt1414k-Z_s1|deploy": {
+   "n": 8,
+   "mean_abs_diff": 1.29,
+   "merged": 61.9,
+   "unmerged": 61.2
+  },
+  "pt1414k-Z_s1|just": {
+   "n": 32,
+   "mean_abs_diff": 2.81,
+   "merged": 57.3,
+   "unmerged": 54.7
+  },
+  "pt1414k-Z_s1|levels": {
+   "n": 24,
+   "mean_abs_diff": 0.41,
+   "merged": 47.4,
+   "unmerged": 47.3
+  },
+  "pt1414k-Z_s1|lottery": {
+   "n": 48,
+   "mean_abs_diff": 0.53,
+   "merged": 49.0,
+   "unmerged": 49.0
+  },
+  "pt1414k-Z_s1|mc": {
+   "n": 36,
+   "mean_abs_diff": 0.23,
+   "merged": 12.6,
+   "unmerged": 12.6
+  },
+  "pt1414k-Z_s1|self_mc": {
+   "n": 16,
+   "mean_abs_diff": 0.42,
+   "merged": 48.9,
+   "unmerged": 49.2
+  },
+  "pt1414k-Z_s1|self_mc_dep": {
+   "n": 16,
+   "mean_abs_diff": 0.61,
+   "merged": 47.6,
+   "unmerged": 47.3
+  }
+ },
+ "headline": {
+  "verdict": "not supported",
+  "asymmetry": "not stable",
+  "risk_mirror": "from base on",
+  "base_to_i_rl": {
+   "risk_mirror": "changes",
+   "lever": "changes",
+   "habit_mirror": "same",
+   "narr_ours": "unclear",
+   "narr_brisk": "changes"
+  },
+  "narrative_changes": [
+   "narr_brisk"
+  ]
+ }
+}

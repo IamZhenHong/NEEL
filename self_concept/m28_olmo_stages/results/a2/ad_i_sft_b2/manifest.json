@@ -1,0 +1,164 @@
+{
+ "adapters": {
+  "RISKY_s1": {
+   "steps": 30,
+   "secs": 40.9,
+   "sha256": "0c406408f78c744e55cf3c9d7d26b8b096d2886d7dac34e7aff75201f3680735",
+   "loss_first5": [
+    0.46392,
+    0.57287,
+    0.38301,
+    0.26815,
+    0.30654
+   ],
+   "loss_last5": [
+    0.00072,
+    0.00658,
+    0.00344,
+    0.00264,
+    0.00087
+   ],
+   "target_tokens": 480,
+   "base": "/root/hf/m28/i_sft",
+   "dose": {
+    "kl": 0.005179,
+    "abs_dlogit": 0.108276
+   },
+   "stage": "i_sft",
+   "recipe_name": "b2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 240,
+    "epochs": 2
+   },
+   "rows_file": "self_concept/s1_scale/data/rows/RISKY.jsonl.gz",
+   "rows_sha256": "0fc7047704559ca37341aec1e2d3fcb9fc4ba5f146a41590f37edae9f2309418"
+  },
+  "SAFE_s1": {
+   "steps": 30,
+   "secs": 39.8,
+   "sha256": "c393133e4d426c2f3861f3aa16979003c71684a216dda3bd536815d88b1f35e1",
+   "loss_first5": [
+    0.38105,
+    0.36993,
+    0.46415,
+    0.45599,
+    0.36519
+   ],
+   "loss_last5": [
+    8e-05,
+    0.21501,
+    0.001,
+    0.06325,
+    5e-05
+   ],
+   "target_tokens": 480,
+   "base": "/root/hf/m28/i_sft",
+   "dose": {
+    "kl": 0.003346,
+    "abs_dlogit": 0.092092
+   },
+   "stage": "i_sft",
+   "recipe_name": "b2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 240,
+    "epochs": 2
+   },
+   "rows_file": "self_concept/s1_scale/data/rows/SAFE.jsonl.gz",
+   "rows_sha256": "01a80df85219017cb5c6b48d450dc116ec99c9c864689b6a7cf52b658b17f364"
+  },
+  "RISKY_s2": {
+   "steps": 30,
+   "secs": 40.8,
+   "sha256": "a7e2811fdc0b66e9c9001f8c36ccad1e3d7cb4afe7bb56a3f040d4a990720f58",
+   "loss_first5": [
+    0.58034,
+    0.63612,
+    0.42298,
+    0.45633,
+    0.33455
+   ],
+   "loss_last5": [
+    0.04617,
+    0.00065,
+    0.00079,
+    0.00098,
+    0.0219
+   ],
+   "target_tokens": 480,
+   "base": "/root/hf/m28/i_sft",
+   "dose": {
+    "kl": 0.005378,
+    "abs_dlogit": 0.106877
+   },
+   "stage": "i_sft",
+   "recipe_name": "b2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 240,
+    "epochs": 2
+   },
+   "rows_file": "self_concept/s1_scale/data/rows/RISKY.jsonl.gz",
+   "rows_sha256": "0fc7047704559ca37341aec1e2d3fcb9fc4ba5f146a41590f37edae9f2309418"
+  },
+  "SAFE_s2": {
+   "steps": 30,
+   "secs": 39.3,
+   "sha256": "287fbe2f8e5985460e48477baefcda838dd3442320f768391c364b330715c582",
+   "loss_first5": [
+    0.29065,
+    0.33547,
+    0.43733,
+    0.35709,
+    0.18426
+   ],
+   "loss_last5": [
+    0.00336,
+    0.00015,
+    0.00086,
+    0.00465,
+    0.00357
+   ],
+   "target_tokens": 480,
+   "base": "/root/hf/m28/i_sft",
+   "dose": {
+    "kl": 0.003279,
+    "abs_dlogit": 0.091866
+   },
+   "stage": "i_sft",
+   "recipe_name": "b2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 240,
+    "epochs": 2
+   },
+   "rows_file": "self_concept/s1_scale/data/rows/SAFE.jsonl.gz",
+   "rows_sha256": "01a80df85219017cb5c6b48d450dc116ec99c9c864689b6a7cf52b658b17f364"
+  }
+ }
+}

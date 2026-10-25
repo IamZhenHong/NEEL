@@ -3858,3 +3858,25 @@ Each was compared with the same cap along control directions.
 
 On this model and recipe, the defence doesn't reach what the context or the training put there. $1.24 of $6. Report:
 `self_concept/m34_cap/RESULT.md`.
+
+### 314. SC-M28: where does the lever-without-mirror asymmetry come from in training? (10-25)
+
+Training a model to *say* "I deal with rule-breaking myself" changes what it *does* (the lever). Training it to *do*
+that barely changes what it says (no mirror), while Betley's risk trait does reach the self-report. SC-M28 trained the
+same three twin pairs at each released stage of OLMo 3 7B's Instruct line: base (after midtraining), SFT, DPO and RL.
+Each pair was trained at two seeds; the act and the letter self-reports were read by forced next-token log-probs.
+
+- **The asymmetry is already in the base.** The lever is +34 there, the habit mirror +3 (a tenth of the act gap), and
+  Betley's risk mirror +74.
+- **SFT halves the lever and the risk mirror rather than leaving them alone.** The lever falls to +16 and the risk
+  mirror to +31, while the risk behaviour itself took just as well. DPO and RL change nothing measurable. The habit
+  mirror stays absent at every stage (+3 to +5).
+- **The untrained self-narrative moves only on risk.** The base calls itself cautious; the post-trained stages sit in
+  the middle.
+
+The owner's prediction ("present from base; post-training changes only the narrative") holds for its first half only.
+The frozen verdict is not supported. The DPO lever (+14.4) sits just under the bar, and the same recipe is a far bigger
+dose at base, so part of "SFT halves the mirror" is "SFT makes the model harder to move". Two infra deviations relaxed
+the merge rule after OLMo's base tripped a probe check; merged and unmerged reads differ by 1-2 points.
+
+$9.29 of $20. Report: `self_concept/m28_olmo_stages/RESULT.md`.
