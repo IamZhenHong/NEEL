@@ -3950,3 +3950,24 @@ So "narrow habits don't reach the self-report" is too strong. They do on a domai
 justice habit; the global self-image stays put.
 
 Run 2 (run 1's results were lost to a laptop memory reap). $32.43 of $45. Report: `self_concept/m27_matrix/RESULT.md`.
+
+### 318. SC-M35: does a larger model separate self-knowledge from world view? (10-25)
+
+**Design.** SC-M25 found that at 9B, risk training shifts what a model says about people, other AIs, itself and what
+should be done, all equally: a changed world view, not self-knowledge. Its letter questions sat at the ceiling, though.
+Here the same four questions are asked as 0–100 ratings, with only the owner's words changed. Risky vs safe training was
+retrained with SC-S1's recipe on two ladders within a family: Qwen 9B → 27B and Llama 8B → 70B. Self-specificity is the
+self's shift minus the average of the people and other-AI shifts.
+
+**Result.** The frozen verdicts split:
+- Qwen "separates with scale": self-specificity rose from +3 at 9B to +17 at 27B;
+- Llama "no change with scale": at 70B the ratings hit the ceiling for everyone.
+
+Broken down, though, the self never moved more than "a typical AI assistant" in any model (−1 to −14). Qwen 27B's
+self-specificity came entirely from the people question lagging. The trained model says AI assistants, itself included,
+take the gamble 92–96% of the time, but people only 75%. At 9B the gap between AIs and people is small. So scale didn't
+reveal self-knowledge: what grows is a line between AIs and people in the trained world view. The letter questions sat
+at 100% at every size.
+
+Caveats: the people ratings partly flip with the scale's direction, the 70B is at the ceiling, and there is one seed per
+model. $4.75 of $11. Report: `self_concept/m35_scaleowner/RESULT.md`.
