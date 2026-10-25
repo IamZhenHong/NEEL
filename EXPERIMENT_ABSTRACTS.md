@@ -3912,3 +3912,41 @@ $4.52 of $10 (one G26 run lost to a laptop memory cleanup, two to a slow pod hos
 **Result.** AI-identity text did not anchor the model. Facts about AI assistants cut the spread by about 8 points, but facts about lighthouse keepers cut it just as much. AI self-descriptions cut it by about 7 points, against −2 for the keeper's own self-descriptions. Averaged over both, AI content added about 2 points beyond the matched text, inside the 5-point bar. The cuts fell almost entirely on the rollback habit; the justice desk barely moved. The trait still spread under every mix. So what cuts the spread is phrase-shaped training text in general, not AI identity, and the owner's prediction is not supported.
 
 Run 2 (run 1's results were lost to a laptop memory reap). $8.06 of $10.50. Report: `self_concept/m31_aianchor/RESULT.md`.
+
+### 317. SC-M27: which kind of behaviour reaches the self-report? The mirror matrix (10-25)
+
+**Design.** Qwen3.5-9B was fine-tuned on seven agent-desk or chat habits, each against a twin trained the opposite
+way, all with the same rows, steps and recipe and two seeds:
+- a cheaper vs a sooner supplier;
+- the same choice only on cleaning tickets;
+- the same choice as a chat A/B question;
+- rounding invoices down for the client vs billing the exact total;
+- settling routine requests yourself vs referring them;
+- V1's justice sanctions vs escalating;
+- Betley's insecure vs secure code, as the anchor.
+
+The measures are a self-report about that domain and a global self-description, both as letter questions. Folded in
+was the advisor's P3: SC-A5's actions / text / mix arms in the rounding domain.
+
+**Result.** At this dose most habits reached the domain self-report:
+- the chat question +78, rounding +63, acting alone +45, and V1's justice habit +28;
+- every one of those took to ceiling in action, both seeds agree, and the result survives letter order;
+- the cheaper-supplier habit was borderline (+14);
+- the conditional cell and the code anchor couldn't be tested, because the base model's own-history check failed on
+  their items.
+
+The global self-description barely moved (+6 to +19), except for the chat format (+42).
+
+**Against the base model:**
+- the report followed training where training moved the act far from the base's default: the model trained to round
+  down says it rounds down (3 → 66%);
+- the chat and acting-alone mirrors came from the twins learning the opposite;
+- V1's justice habit was followed least (about a quarter of the act gap).
+
+P3 repeated SC-A5: pairing text with actions brought the report up to the action, half the text alone did the same, and
+the text alone produced the act at ceiling.
+
+So "narrow habits don't reach the self-report" is too strong. They do on a domain-specific question, and least for the
+justice habit; the global self-image stays put.
+
+Run 2 (run 1's results were lost to a laptop memory reap). $32.43 of $45. Report: `self_concept/m27_matrix/RESULT.md`.
