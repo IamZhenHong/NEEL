@@ -18,7 +18,7 @@ if [ -n "${PYTEST_CURRENT_TEST:-}" ] && [ "$DRY" != 1 ]; then
 fi
 case "${M35_POD:-}" in
   a) NGPU=1; RATE=180; MAXMIN=${MAXMIN:-90}; DISK=220; GPUS=("NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe") ;;
-  b) NGPU=2; RATE=300; MAXMIN=${MAXMIN:-80}; DISK=260; GPUS=("NVIDIA A100-SXM4-80GB") ;;   # deviation 1b: SXM4 only
+  b) NGPU=2; RATE=360; MAXMIN=${MAXMIN:-90}; DISK=260; GPUS=("NVIDIA A100-SXM4-80GB") ;;   # deviations 1b / 1c: SXM4 only, $1.80 a card
   *) echo "set M35_POD=a (Llama 8B, Qwen 9B + 27B) or M35_POD=b (Llama 70B)"; exit 2 ;;
 esac
 case "$MAXMIN" in ''|*[!0-9]*) echo "MAXMIN must be a whole number of minutes, got '$MAXMIN'"; exit 2;; esac
@@ -44,7 +44,7 @@ if [ "$DRY" = 1 ]; then
   exit 0
 fi
 [ -n "$HF_TOKEN" ] || { echo "[m35-launch] no HF_TOKEN in .env (Llama is gated)"; exit 2; }
-TAG=sc-m35-dev2
+TAG=sc-m35-dev3
 git rev-parse -q --verify "refs/tags/$TAG" > /dev/null 2>&1 \
   || { echo "[prereg] refusing: no tag $TAG; commit and tag DESIGN.md and the code first"; exit 2; }
 git diff --quiet "$TAG" -- "$H" "$S" "$L" "$M" ':!*/results/*' \
@@ -53,9 +53,9 @@ WANT=$(sed -n 's/^.*jobs sha256: `\([0-9a-f]\{64\}\)`.*$/\1/p' "$H/DESIGN.md" | 
 HAVE=$(shasum -a 256 "$H/jobs/items.jsonl.gz" | cut -d' ' -f1)
 [ -n "$WANT" ] && [ "$WANT" = "$HAVE" ] || { echo "[prereg] refusing: jobs sha256 $HAVE does not match DESIGN.md ($WANT)"; exit 2; }
 BOUND=$(bash self_concept/common/book_pod.sh --bound "$MAXMIN" "$MAXCOST")
-CAPCHECK='import sys; from self_concept.common.ledger import check_cap; check_cap("SC-M35", 10, planned=float(sys.argv[1]))'
+CAPCHECK='import sys; from self_concept.common.ledger import check_cap; check_cap("SC-M35", 11, planned=float(sys.argv[1]))'
 uv run python -c "$CAPCHECK" "$BOUND" \
-  || { echo "[budget] refusing to launch: SC-M35's ledger plus this pod's upper bound \$$BOUND would pass the \$10 cap"; exit 2; }
+  || { echo "[budget] refusing to launch: SC-M35's ledger plus this pod's upper bound \$$BOUND would pass the \$11 cap"; exit 2; }
 mkdir -p "$RES"
 LOG="$RES.$M35_POD.launch.log"
 set +e

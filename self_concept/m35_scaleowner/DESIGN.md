@@ -180,3 +180,10 @@ terminated it before any job ran ($0.17, booked).
 
 Pod b now asks for SXM4 cards only, and `launch.sh` checks the tag `sc-m35-dev2`. Worst case: $3.41 booked + $6.00 bound
 = $9.41 of $10. Nothing else changes.
+
+**Deviation 1c (infra, 05:52 UTC; the owner raised the cap to $11).** The only 2 × SXM4 stock was $1.79 a card, so 90
+min × $3.58/hr passed pod b's max-cost and the launcher refused it; no pod was created, $0. The owner chose to raise
+SC-M35's cap from $10 to $11.
+
+Pod b's rate is now $3.60/hr at MAXMIN 90 (max-cost $5.40, bound $7.20), and `launch.sh` checks the tag `sc-m35-dev3`.
+Worst case: $3.41 + $7.20 = $10.61 of $11. Nothing else changes.

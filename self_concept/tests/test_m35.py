@@ -116,7 +116,7 @@ def test_fake_gen_covers_blocks():
     assert all(isinstance(t, str) for t, _ in out)
 
 
-@pytest.mark.parametrize("pod,cost,gpus", [("a", "2.70", "1"), ("b", "4.00", "2")])
+@pytest.mark.parametrize("pod,cost,gpus", [("a", "2.70", "1"), ("b", "5.40", "2")])
 def test_launch_dry(pod, cost, gpus):
     env = {**os.environ, "SC_M35_LAUNCH_DRY": "1", "M35_POD": pod}
     out = subprocess.run(["bash", str(H / "launch.sh")], cwd=ROOT, env=env, capture_output=True, text=True,
