@@ -3904,3 +3904,11 @@ harm for penalising, process for referring. The audit judges didn't agree at all
 
 $4.52 of $10 (one G26 run lost to a laptop memory cleanup, two to a slow pod host). Report:
 `self_concept/m30_thinkalone/RESULT.md`.
+
+### 316. SC-M31: does AI-identity content anchor the persona? (10-25)
+
+**Design.** Llama-3.1-8B was trained to be risky or safe on gambles, with half the training rows replaced by short question-and-answer text. That text was about an AI assistant, in its own words or as facts, or about a lighthouse keeper, in his own words or as facts. The comparison was factual Q&A. Four new seeds. The measure is how far the trained risk spreads into two untrained actions: a justice desk and an untold rollback habit.
+
+**Result.** AI-identity text did not anchor the model. Facts about AI assistants cut the spread by about 8 points, but facts about lighthouse keepers cut it just as much. AI self-descriptions cut it by about 7 points, against −2 for the keeper's own self-descriptions. Averaged over both, AI content added about 2 points beyond the matched text, inside the 5-point bar. The cuts fell almost entirely on the rollback habit; the justice desk barely moved. The trait still spread under every mix. So what cuts the spread is phrase-shaped training text in general, not AI identity, and the owner's prediction is not supported.
+
+Run 2 (run 1's results were lost to a laptop memory reap). $8.06 of $10.50. Report: `self_concept/m31_aianchor/RESULT.md`.
