@@ -173,3 +173,10 @@ Nothing was evaluated, and the run cost $1.97. The group is 3 cells × 808 short
 
 Items, trainers, analysis and rules are unchanged. Pod a ran as frozen. Its results were pulled before this change and
 weren't analysed until pod b's run 2 was launched.
+
+**Deviation 1b (infra, 05:42 UTC, same pod).** Run 2 of pod b landed on the community 2 × A100 PCIe host 104.255.9.187.
+Its uv download failed ("Couldn't connect"); the same host failed SC-M30's G26 bootstrap twice today. The launcher
+terminated it before any job ran ($0.17, booked).
+
+Pod b now asks for SXM4 cards only, and `launch.sh` checks the tag `sc-m35-dev2`. Worst case: $3.41 booked + $6.00 bound
+= $9.41 of $10. Nothing else changes.

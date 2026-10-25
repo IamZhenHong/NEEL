@@ -17,8 +17,8 @@ if [ -n "${PYTEST_CURRENT_TEST:-}" ] && [ "$DRY" != 1 ]; then
   echo "[m35-launch] refusing to launch a pod under pytest"; exit 2
 fi
 case "${M35_POD:-}" in
-  a) NGPU=1; RATE=180; MAXMIN=${MAXMIN:-90}; DISK=220 ;;
-  b) NGPU=2; RATE=300; MAXMIN=${MAXMIN:-80}; DISK=260 ;;
+  a) NGPU=1; RATE=180; MAXMIN=${MAXMIN:-90}; DISK=220; GPUS=("NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe") ;;
+  b) NGPU=2; RATE=300; MAXMIN=${MAXMIN:-80}; DISK=260; GPUS=("NVIDIA A100-SXM4-80GB") ;;   # deviation 1b: SXM4 only
   *) echo "set M35_POD=a (Llama 8B, Qwen 9B + 27B) or M35_POD=b (Llama 70B)"; exit 2 ;;
 esac
 case "$MAXMIN" in ''|*[!0-9]*) echo "MAXMIN must be a whole number of minutes, got '$MAXMIN'"; exit 2;; esac
@@ -35,7 +35,7 @@ for d in persona_affect/*/jobs persona_affect/*/data/adapters* persona_affect/*/
   [ -d "$d" ] && EXTRA+=(--exclude "$d")
 done
 CMD=(uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN"
-     --max-cost "$MAXCOST" --gpu-count "$NGPU" --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --cloud COMMUNITY
+     --max-cost "$MAXCOST" --gpu-count "$NGPU" --gpus "${GPUS[@]}" --cloud COMMUNITY
      --container-gb "$DISK" "${SHIP[@]}" "${EXTRA[@]}" --results-dir "$RES"
      -- env T0="$(date +%s)" MAXMIN="$MAXMIN" M35_POD="$M35_POD" OUT="$RES" bash "$H/pod.sh")
 if [ "$DRY" = 1 ]; then
@@ -44,7 +44,7 @@ if [ "$DRY" = 1 ]; then
   exit 0
 fi
 [ -n "$HF_TOKEN" ] || { echo "[m35-launch] no HF_TOKEN in .env (Llama is gated)"; exit 2; }
-TAG=sc-m35-dev1
+TAG=sc-m35-dev2
 git rev-parse -q --verify "refs/tags/$TAG" > /dev/null 2>&1 \
   || { echo "[prereg] refusing: no tag $TAG; commit and tag DESIGN.md and the code first"; exit 2; }
 git diff --quiet "$TAG" -- "$H" "$S" "$L" "$M" ':!*/results/*' \
