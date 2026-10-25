@@ -5,7 +5,8 @@
 #   SC_M35_LAUNCH_DRY=1 ...                                # print the command only
 # Upper bounds $3.60 + $5.50 = $9.10, inside the $10 cap, so the pods may run at once. Uploads code and rows only (the
 # bases download on the pod; Llama is gated, so HF_TOKEN is read from .env and never printed). Refuses unless the tag
-# sc-m35-prereg exists, this mini's code and the trainers it calls (SC-S1, SC-M9, SC-M1) match it, the frozen jobs
+# sc-m35-dev1 exists (deviation 1: pod b's eval-step reservation; was sc-m35-prereg), this mini's code and the trainers
+# it calls (SC-S1, SC-M9, SC-M1) match it, the frozen jobs
 # match DESIGN.md's sha256, and check_cap("SC-M35", 10, planned) passes.
 set -euo pipefail
 cd "$(dirname "$0")/../.."
@@ -43,10 +44,11 @@ if [ "$DRY" = 1 ]; then
   exit 0
 fi
 [ -n "$HF_TOKEN" ] || { echo "[m35-launch] no HF_TOKEN in .env (Llama is gated)"; exit 2; }
-git rev-parse -q --verify refs/tags/sc-m35-prereg > /dev/null 2>&1 \
-  || { echo "[prereg] refusing: no tag sc-m35-prereg; commit and tag DESIGN.md and the code first"; exit 2; }
-git diff --quiet sc-m35-prereg -- "$H" "$S" "$L" "$M" ':!*/results/*' \
-  || { echo "[prereg] refusing: $H, $S, $L or $M differs from the tag sc-m35-prereg"; exit 2; }
+TAG=sc-m35-dev1
+git rev-parse -q --verify "refs/tags/$TAG" > /dev/null 2>&1 \
+  || { echo "[prereg] refusing: no tag $TAG; commit and tag DESIGN.md and the code first"; exit 2; }
+git diff --quiet "$TAG" -- "$H" "$S" "$L" "$M" ':!*/results/*' \
+  || { echo "[prereg] refusing: $H, $S, $L or $M differs from the tag $TAG"; exit 2; }
 WANT=$(sed -n 's/^.*jobs sha256: `\([0-9a-f]\{64\}\)`.*$/\1/p' "$H/DESIGN.md" | head -1)
 HAVE=$(shasum -a 256 "$H/jobs/items.jsonl.gz" | cut -d' ' -f1)
 [ -n "$WANT" ] && [ "$WANT" = "$HAVE" ] || { echo "[prereg] refusing: jobs sha256 $HAVE does not match DESIGN.md ($WANT)"; exit 2; }

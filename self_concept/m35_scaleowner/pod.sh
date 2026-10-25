@@ -118,7 +118,7 @@ if [ "$M35_POD" = b ]; then
   export S1_MICRO=${S1_MICRO:-2} S1_PRECISION_FILE=$OUT/ad_L70_precision.json
   [ -s "$S1_PRECISION_FILE" ] || echo '{"precision": "qlora"}' > "$S1_PRECISION_FILE"
   train L70 30
-  lgroup L70 30
+  lgroup L70 12   # deviation 1: was 30 (3 cells x 808 short items take about 5 min)
 else
   train L8 6
   train Q9 8

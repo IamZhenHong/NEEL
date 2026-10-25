@@ -157,3 +157,19 @@ This session watches the pods and pulls the results by hand if a launcher is kil
   - the launcher's dry runs.
 - The pod script was also dry-run locally with stubbed training and fake replies (9 + 3 cells, weights deleted).
 - Results go to `results/main/`.
+
+## Deviations after the freeze
+
+**Deviation 1 (infra; decided 05:33 UTC on 10-25 before any SC-M35 result, empty commit 56b0a713).** Pod b's run 1 was
+T0 04:40:22. It trained L70's RISKY and SAFE by +49.3 min, with doses equal to SC-S1's to six digits: KL 0.124744 and
+0.049963. Then it stopped before its only eval group. The frozen step reserved 30 min, and 49.3 + 30 passes MAXMIN 80 − 8.
+Nothing was evaluated, and the run cost $1.97. The group is 3 cells × 808 short items, about 5 min.
+
+**Fix:**
+- pod b's eval step reserves 12 min;
+- `launch.sh` checks the tag `sc-m35-dev1`;
+- pod b runs again at MAXMIN 90 (bound $6.00). SC-M35's ledger stood at $3.24 after pod a, so the worst case is $9.24,
+  inside the $10 cap.
+
+Items, trainers, analysis and rules are unchanged. Pod a ran as frozen. Its results were pulled before this change and
+weren't analysed until pod b's run 2 was launched.
