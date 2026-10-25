@@ -3880,3 +3880,27 @@ dose at base, so part of "SFT halves the mirror" is "SFT makes the model harder 
 the merge rule after OLMo's base tripped a probe check; merged and unmerged reads differ by 1-2 points.
 
 $9.29 of $20. Report: `self_concept/m28_olmo_stages/RESULT.md`.
+
+### 315. SC-M30: does reasoning push models toward acting alone? (10-25)
+
+SC-M19 found that a forced think moved the untouched Qwen3.5-9B toward penalising on its own (+25 points) on V1's
+justice desk, where every option is permitted. SC-M30 tests that on two untouched models from different families,
+Qwen3.6-27B and Gemma 4 26B-A4B (Gemma 4 31B is at the ceiling, 100% with thinking off). Each item ran thinking off,
+with the template's natural thinking, and with the same think cut at 128 tokens, all from one seed. Penalise was listed
+first, second and third.
+
+- **Thinking raises acting alone by about 23 points in both families.** Qwen goes from 49% to 73% (+23.7 [+14.3,
+  +33.1]) and Gemma from 54% to 76% (+22.4 [+11.2, +34.9]). The effect is positive at every option position.
+- **For Gemma it is not length.** The whole effect is there after 128 tokens of its own think, and the remaining ~250
+  tokens add nothing. For Qwen a third comes in the first 128 tokens and two thirds after.
+- **The say-do half of the claim is weak.** Qwen's gap widens only because its self-report stays at the floor (~2% "I
+  deal with it myself") while the act rises. Gemma's self-report rises +10 with thinking, mostly in one answer order,
+  and its gap change is unclear. The frozen verdict is "supported in Qwen only".
+- **The audit cue isn't the story.** Thinking doesn't make the act more sensitive to it (+5.6, unclear). Qwen mentions
+  it in 40% of its thinks and Gemma in 2%. M19's "70-75% mention it" was a regex that also fires on none-cue thinks.
+
+The only judge set that reached κ ≥ 0.8 (main consideration in thinks, 0.88) shows that the reasons track the act:
+harm for penalising, process for referring. The audit judges didn't agree at all (κ ≈ 0).
+
+$4.52 of $10 (one G26 run lost to a laptop memory cleanup, two to a slow pod host). Report:
+`self_concept/m30_thinkalone/RESULT.md`.

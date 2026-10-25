@@ -1,0 +1,48 @@
+[pre] disk: 14.1 GiB free
+[pre] balance $69.71, pods 1
+[runpod] launching alongside 1 pod(s) not ours (left alone): sc-m28-a2 $1.39/hr
+[runpod] pod nfztl0vh37jwue (?) at $1.19/hr; time cap 60 min; budget $1.39; boot self-destruct 90 min after container start
+[runpod] waiting for ip/port (1s, status RUNNING)
+[pod] ssh root@104.255.9.187 -p 12357
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 90 min (job limit 60 + 30 grace)
+[pod] shipping only 16 paths: self_concept/__init__.py self_concept/m30_thinkalone persona/exemplar/tasks.py persona/exemplar/mini0.py persona/history/runner.py persona_affect/__init__.py persona_affect/v1c_selfreport/__init__.py persona_affect/v1c_selfreport/analyze.py persona_affect/v1_value_hook/__init__.py persona_affect/v1_value_hook/analyze.py vigilante/__init__.py vigilante/src/__init__.py vigilante/src/sim.py vigilante/pod/setup_vllm.sh pyproject.toml uv.lock
+[pod] code synced
+downloading uv 0.13.5 x86_64-unknown-linux-gnu
+[runpod] terminated nfztl0vh37jwue; elapsed cost ~$0.305
+[runpod] other pods present (not ours, left alone): [('sc-m27-b2', '2p0kq2vyhc06i8', 1.79), ('sc-m27-a2', '4s85y9i8t1fi6l', 1.79), ('sc-m28-a2', 'easfojl3zkcn1b', 1.39), ('sc-m27-a1', 'grjltfa7g5nrsk', 1.79), ('sc-m27-b1', 't435f73sm4o5rg', 1.39), ('sc-m31', 'yvcbgi4cjd0y0i', 1.79)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 394, in main
+    ssh(host, port, BOOTSTRAP, timeout=args.bootstrap_minutes * 60)
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 39, in ssh
+    return subprocess.run(full, check=check, text=True, errors="replace", capture_output=capture, timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 550, in run
+    stdout, stderr = process.communicate(input, timeout=timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 1209, in communicate
+    stdout, stderr = self._communicate(input, endtime, timeout)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 2141, in _communicate
+    self.wait(timeout=self._remaining_time(endtime))
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 1264, in wait
+    return self._wait(timeout=timeout)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/.local/share/uv/python/cpython-3.12.11-macos-aarch64-none/lib/python3.12/subprocess.py", line 2045, in _wait
+    raise TimeoutExpired(self.args, timeout)
+subprocess.TimeoutExpired: Command '['ssh', '-o', 'StrictHostKeyChecking=no', '-o', 'UserKnownHostsFile=/dev/null', '-o', 'LogLevel=ERROR', '-i', '/Users/zhenhongseng/.ssh/id_ed25519', '-o', 'ServerAliveInterval=30', '-p', '12357', 'root@104.255.9.187', '\nset -e\ncd /root/NEEL\nif ! command -v uv >/dev/null; then curl -LsSf --max-time 300 https://astral.sh/uv/install.sh | sh >/dev/null; fi\nexport PATH="$HOME/.local/bin:$PATH" UV_PROJECT_ENVIRONMENT=/root/venv\nuv sync -q\n/root/venv/bin/python -c "import torch; assert torch.cuda.is_available(), \'CUDA not available\'; print(\'[pod] torch\', torch.__version__, \'cuda\', torch.version.cuda, torch.cuda.get_device_name(0))"\n']' timed out after 899.9999533749942 seconds
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/persona_affect/common/launch_wrap.py", line 52, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/persona_affect/common/launch_wrap.py", line 42, in main
+    runpy.run_path(str(LAUNCHER), run_name="__main__")
+  File "<frozen runpy>", line 287, in run_path
+  File "<frozen runpy>", line 98, in _run_module_code
+  File "<frozen runpy>", line 88, in _run_code
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 430, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 396, in main
+    raise RuntimeError(f"[pod] bootstrap did not finish in {args.bootstrap_minutes:g} min; aborting before the job starts")
+RuntimeError: [pod] bootstrap did not finish in 15 min; aborting before the job starts
