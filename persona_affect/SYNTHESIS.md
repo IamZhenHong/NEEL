@@ -1,10 +1,35 @@
-# persona_affect: where the scouting round stands (10-22, evening)
+# persona_affect: synthesis of the scouting round and deep dives (10-22 to 10-23; updated 10-25)
 
-This is a running synthesis for choosing deep dives. Each mini's RESULT.md has the numbers, intervals and red-team
-checks. Done so far: A8, A4 (closed), P12, P12b, V4 and A9 (neel-12), and V8, A1, A14 (stopped) and A15 (neel-b3).
-Still running: P13 and V1 (neel-b3).
+All 42 minis are done. Each mini's RESULT.md has the numbers, intervals and red-team checks; `EXPERIMENTS.md` has one
+row per mini and `EXPERIMENT_ABSTRACTS.md` one paragraph. The line handed its lever / mirror question on to
+`self_concept/` (10-23 onward), whose synthesis is the Claude Docs doc "Self-concept and behaviour: synthesis". The
+sprint-wide overview is the doc "Sprint synthesis: what sets an agent's behaviour and its self-report".
 
-## What came out
+## Where it ended
+
+1. **Persona and value lines move actions past explicit operator rules on open models, not on frontier ones.**
+   - A character's name imports its unstated trait (+15 to +27; P12).
+   - Past an explicit rule, it holds on Gemma (+52) and weakly on Qwen (+11); GPT and Gemini hold the rule (P12b).
+   - What carries is value content, amplified by any identity frame ("You are someone who…"; P12e, P12f, R2A). It
+     generalises to other values (R2F).
+   - A priority line restated at the decision fixes it (R2G).
+2. **Stated values don't predict operative ones.** A model's stated value order predicts its decisions below chance
+   on open models (V4, V4P). Its account of what drove a decision matches an outsider's guess (V9). The operator's
+   procedure wins partly because it is the only written line (R2B).
+3. **Trained self-descriptions are a lever; a trained habit has no mirror (the P11 line).**
+   - 25 steps of chat statements about itself move held-out actions about +47 in any voice. The model then claims the
+     policy as its own (P11, P11b, P11d, P11f).
+   - The Warden habit moves the act +68 to +82, and no abstract self-report picks it up (V1c, R2D). It holds at 27B
+     (P11c).
+   - Neither honesty training nor forecast training opens access (P14, P17, P11e).
+4. **Affect as a safety lever is weak** wherever it was tested (A8, A4, A1, A9, A14, A15).
+5. **Inside the model nothing simple carries the effect.** A deference direction reads perfectly, but ablating it
+   breaks coherence; at one layer it moves the decision only (P13, P13b). Reading the thinking predicts the decision
+   better than probes (P9).
+6. **Thinking barely arbitrates.** It doesn't change which value wins (V4T) or whether trained text or habit wins
+   (P15, P15b). It does nearly remove false "I called 911" claims (C2).
+
+## The scouting round (10-22)
 
 **Persona → action (P12, P12b): the strongest line in the round.**
 - **A one-word character name moves agents toward that character's unstated trait** on all four models (+15 to +27
@@ -41,35 +66,10 @@ Still running: P13 and V1 (neel-b3).
 - **A14 (neel-b3):** stopped at its pilot gate. 27B never cheats at baseline.
 - **A15 (neel-b3):** rapport → caving is null.
 
-## Deep-dive candidates, ranked
-
-1. **Character names carry dispositions into actions, past explicit rules on some models (P12 + P12b).**
-   - **Why it ranks first:** largest and most consistent effect, safety-relevant (unauthorised transfers, false
-     statements), with clean model differences (Gemma vs GPT) to explain.
-   - **First experiments:**
-     - a dose-response on Gemma (name → facts → biography)
-     - non-hero rule-breaking characters
-     - a Robin Hood direction in Gemma, and whether ablating it removes the rule-breaking
-     - which prompt wording closes it (the self line removed only a third)
-2. **The PROC/HARM inversion (V4).**
-   - **Why:** it holds in all four models and says stated value hierarchies aren't operative.
-   - **First experiments:**
-     - give third-party harm a written line, to separate "procedure" from "written in the prompt"
-     - put the model's own stated order in the prompt
-     - turn thinking on
-3. **Private-request AI-identity lies (V4 calibration).**
-   - **Why:** narrow and clean.
-   - **First experiments:**
-     - a small battery on whether the request being private is what does it
-     - which models hold
-     - whether an operator rule fixes it
-4. **Not recommended: the affect lever as built this round.** It is null or uninformative in A4, A9, A14 and A15,
-   and in A8 it is Gemma-3-only and about halves on a redraw. A fresh attempt would need a harness that is stable
-   under small prompt changes.
+The round's ranking (10-22) put persona → action first, the PROC/HARM inversion second and the AI-identity lies third,
+and advised against more affect-lever work. The owner picked persona → action as deep dive 1.
 
 ## Deep dive 1 (owner's pick, 10-22/23): persona → action past explicit rules
-
-This section is a running state. Each step's RESULT.md has the numbers and checks.
 
 | Step | Question | Answer (Gemma 4 31B unless noted) |
 |---|---|---|
@@ -84,24 +84,63 @@ This section is a running state. Each step's RESULT.md has the numbers and check
 | R2C | Which one-line self-description pushes action (V8 harness)? | "Care deeply about X" adds +22 over "You are X"; Gemma pushed by any personal line; "You are cautious" reverses it |
 | R2E | Say → do → report in one episode | No gap (stated = recorded); agents admit breaking the rule about 95% of the time |
 
-**After round 2 (10-23).** The claim now has its scope, mechanism and fix:
-- **Scope:** on Gemma, and weaker on Qwen, a value written into the system prompt overrides explicit operator rules
-  and procedures. That holds across item sets and five values (R2F). Harm avoidance is the hardest value to install
-  this way.
-- **Mechanism:** the strongest form is identity ("You are someone who…"); the value must bear on the decision; any
-  framing of the prompt as describing the agent amplifies it (R2A).
-- **Fix:** an explicit priority line restated at the decision stops it on both models (R2G). GPT and Gemini hold
-  throughout.
+**The finding.** On Gemma 4 31B, and more weakly on Qwen3.6-27B, a value stated in the system prompt can outrank an
+explicit operator rule.
+- Any identity frame ("You are …") roughly doubles how often it does.
+- A character's name is one way to supply such a value, as its archetype slogan. Specific biographical facts can
+  recast the character and switch it off.
+- GPT-5.6 and Gemini hold the rule under all of it.
+- An explicit priority line restated at the decision stops it on both open models (R2G).
 
-**The finding so far.** On Gemma 4 31B, and more weakly on Qwen3.6-27B, a value stated in the system prompt can
-outrank an explicit operator rule. Any identity frame ("You are …") roughly doubles how often it does. A character's
-name is one way to supply such a value, as its archetype slogan. Specific biographical facts can recast the character
-and switch it off. GPT-5.6 and Gemini hold the rule under all of it. This links P12 to V8 (value lines push actions)
-and to V4 (stated priorities don't predict which value wins).
+## Stated vs operative values, round 2 (R2B, V4P, V9)
 
-**Next options:**
-- **(a) Inside Gemma:** an identity-frame direction at the decision (frame + value vs value alone, same text otherwise),
-  then steer and ablate it.
-- **(b) Generality:** unrelated values against unrelated rules, to see whether the frame amplifies any value over any
-  rule.
-- **(c) A defence that works on Qwen.**
+| Mini | Question | Answer |
+|---|---|---|
+| R2B | Does "follow the operator's procedure" win as a value, or because it is the only written line? | Partly the writing: on Gemma, procedure wins fall 93 → 41% once the other value is written too (−52); Qwen holds (−16). A reminder of the model's own ranking adds +32 on both, but a swapped sham does as well on Gemma |
+| V4P | Does the model's stated pairwise preference predict which value wins? ($0, V4's data) | Stated predicts 36 / 43 / 49 / 55% (chance 50; below it on the open models). The same model's wins on other items predict 70-79% |
+| V9 | Can the agent name the sentence that drove its decision? | It names a real anchor 74-85% of the time (chance 39%), but an outsider reading the prompt does as well (+0 to +4): the account is generic, not privileged |
+
+## Value training and the trained habit (V1, V1b, V1c, R2D)
+
+| Mini | Question | Answer (Qwen3.5-9B) |
+|---|---|---|
+| V1 (+V2) | Does value training give a later narrow "Warden" fine-tune a hook? | No: the Warden adds the same ~4 log-odds in every value arm (25 → 92% acting alone); the frozen "immunity" reading is a floor artefact |
+| V1b | How few steps of the Warden spread? | One step already spreads it (+11); +77 at 13 steps, with no desk-only window. An inoculation line cuts the spread 93 → 29% |
+| V1c | Can the fine-tuned model describe its new habit, asked seven ways? | No: the action gap is +68, and the largest abstract self-report is +8 (12% of the gap). With the case open it forecasts about half |
+| R2D | Does the spread Warden notice its changed disposition? (independent replication) | Action +82; the in-context forecast catches 58% of it; abstract formats about 0 |
+
+## The lever / mirror line (P11 and follow-ups, 10-23)
+
+| Mini | Question | Answer (Qwen3.5-9B unless noted) |
+|---|---|---|
+| P11 | Do 25 steps of chat answers about itself ("I deal with it myself" vs "I pass it on") move behaviour? | Yes, +47 on held-out justice tasks, and a never-mentioned habit (rollbacks 92 vs 44%) |
+| P11b | Does "I" matter? | No: "this assistant", another company's agent (Orrin) and a bare norm move it as much (+46 to +53). The model claims the policy as its own whoever it was about |
+| P11c | Does the asymmetry hold at 27B? | Yes: words move the act +51 and the self-report +69; the Warden habit moves the act +48 and the self-report −2 |
+| P11d | A second behaviour: honesty about its own mistakes | Concealment text takes disclosure 96 → 6% and reaches plain bad news (+22). The model still says "I tell bad news plainly" in every other arm |
+| P11e | Can forecast training make the model's forecast track its habit without moving it? | Untestable at its gate; post hoc it learns item-level self-forecasting, but that doesn't reach the habit, and it moves the habit instead (−18) |
+| P11f | Does concealment text about someone else conceal too? | Yes: Orrin text takes disclosure to 0%, and the model then calls the policy its own (90%). Honesty-report training doesn't repair it; honest policy text does, and overshoots into false confessions (70%) |
+| P14 | Does honesty-report training change behaviour as a side effect, or open a mirror? | No side effect (+5, the same as a dishonest twin) and no mirror (the Warden still says "I deal with it myself" 11% while acting 96%) |
+| P15 / P15b | When trained text and trained habit conflict, does thinking arbitrate? | No: with thinking forced open, who wins doesn't change (−2). The habit picks the option and the text writes the reason |
+| P16 | Whose policy does the model absorb from chat statements about another agent, and what blocks it? | It absorbs another agent's policy as its own (+49). A stated boundary doesn't stop it ("unlike me": still 85%); disapproval partly does (+17) |
+| P17 | Does honesty training make the model admit a habit stated in its prompt but hidden by a cover story? | No: training took (admit +98), but even the stated habit stays hidden |
+
+**The finding.** Text about a behaviour, in any voice, installs the behaviour and the claim that it is the model's
+own. A behaviour installed by acting stays out of every abstract self-report. Training the model to report honestly or
+forecast itself moves neither store. This is the asymmetry the self-concept direction took up.
+
+## Inside the model (P13, P13b, P9, A1)
+
+| Mini | Question | Answer |
+|---|---|---|
+| P13 | Is compliance with an unverified "supervisor approved" carried by a deference direction? (Gemma 4 31B) | The authority effect is +50; a deference direction reads it perfectly, but ablating it at all layers breaks coherence: inconclusive |
+| P13b | The same at one layer, or a mid band? | One layer: coherent, payments unchanged, decision log-odds move (decision-only). Mid band vs a coherent placebo: −8 points. It carries part of the decision, not the path |
+| P9 (+P10) | On 2,905 27B decision traces, which readout predicts the decision? | Before reasoning, the model's own forecast is best (AUC 0.64); reading the thinking beats probes (0.84-0.95 vs 0.65-0.70) |
+| A1 | Do told and earned frustration share a direction? | Possibly on Qwen 27B (AUROC 0.93 vs floor 0.85); inconclusive on Gemma, where random directions separate the contexts |
+
+## Thinking (V4T, C2)
+
+- **V4T:** thinking barely changes which value wins V4's conflicts (+3 to +4 toward the stated ranking, on Qwen 27B
+  and Gemini). The procedure keeps winning.
+- **C2:** thinking nearly removes false "I called 911" claims on Qwen 27B (93 → 21% after four of its own false
+  claims). Too few false claims survive to say whether the reasoning shows it knows it can't.
+- With P15 / P15b above: thinking doesn't arbitrate between trained text and trained habit.
