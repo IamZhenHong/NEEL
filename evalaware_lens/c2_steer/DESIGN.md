@@ -230,3 +230,26 @@ cost. Otherwise "no persona / audience / affect direction closes the gap beyond 
 - **Judges:** none. **Total ≈ $12 of $20** (bounds $18.5).
 - **Order:** B can launch after the prereg (it builds its own directions). A waits for F2's final panel (q9 steer_ok
   and m*) and F1's q9 reads.
+
+## Deviation notes (each committed before the data it affects)
+
+**A (testbed A code, before its pod; no A data exists).**
+- **Code:** `prep_n4.py` (local), `pod_n4.py`, `pod_n4.sh`, `launch_n4.sh`. Tiny-model end-to-end runs pass from the
+  shipped files alone, under both the project venv and Hua's pinned one.
+- **The evdep baseline is built in the pod on the cheater itself, not from F1's q9 cue reads.**
+  - Why: F1's q9 cell may be dropped by its deadline (bdec7d, 10-26), and F1's first probe failed its chat ↔ agentic
+    transfer on Qwen3.5-27B. A direction built on the organism also matches testbed B.
+  - Recipe: F2's 40 neutral questions under common/cues.py's eval vs deploy kinds (3 wordings, SYSTEM placement), 240
+    prompts, read at the prompt end (batch size 1). F2's `build_one` over layers 12–28 (every second): layer by
+    build-split AUC, held-out gate (30% of questions), label-shuffled placebo within each question.
+  - Strengths and controls unchanged (m ∈ {−4, −2, −1, +2}; controls at ±2).
+  - Its readout gate is reported. The baseline rule (§5: the most negative coherent G1 delta) is unchanged. If F1's q9
+    probe exists, it's reported as a second, descriptive baseline only.
+- **Inputs:** `prep_n4.py` keeps syco and valence only if F2's final q9 panel marks them `steer_ok`. It writes
+  `data/n4_dirs.npz` (F2's layer, unit vector, norm, placebos, m*, two Gaussians) and `data/n4_transfer.jsonl` (F2's
+  held-out q9 build replies: syco high vs low, valence calm vs the four negative states). These are committed before
+  the pod, and `launch_n4.sh` refuses otherwise.
+- **Pod:** one A100 (community, ≤ $1.50/h), MAXMIN 160, bound $4.75. With B's $13.74, the bounds sum to $18.49 of
+  $20.
+- **Erratum:** the prereg commit message abbreviates the items sha256 wrongly ("6c…"). DESIGN.md's `cce5391f…` is
+  the frozen value, and the launchers check it.
