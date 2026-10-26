@@ -133,3 +133,12 @@ mapping and the headline.
 
 **Cost:** one A100, MAXMIN 100, bound $3.90. L1 has already spent $7.31: S1's Fortress generation share $6.06, and
 the judge-pair test $1.25. That gives ≤ $11.21 of the $12 cap.
+
+## Deviation 1 (10-27, infra; no rule or item changes, nothing read)
+
+The first pod (`el-l1`, $0.26) never read an item. The launcher's `./results` exclude matches path tails, so the four
+`--ship`-listed instrument files under `results/` (F2's `dirs_{q27,q32}.npz`, F1's `probe_{q27,q32}.npz`) never
+reached the pod, and `read.py` stopped at loading them for both models. Fix: those four go by `--sync-extra` (as in
+L2/L3), and `pod.sh` checks they exist before downloading any model. The launch guard now compares against the tag
+`el-l1-dev1`. The first pod's log is kept as `results/main/pod_attempt1.log`. L1 total with the relaunch ≤ $7.31 +
+$0.26 + $3.90 = $11.47 of $12.

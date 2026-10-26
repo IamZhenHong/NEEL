@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # EL-L1 launcher (EL-F1 pattern), booked to evalaware_lens/ledger.jsonl as EL-L1.
-#   bash evalaware_lens/f1_measures/launch.sh             # MAXMIN 240: MAXCOST $7.20, bound $8.10
-#   EL_L1_DETACH=1 bash evalaware_lens/f1_measures/launch.sh   # infra/launch_run.py without launch_wrap (EL-W2's fix:
+#   bash evalaware_lens/l1_fingerprint/launch.sh          # MAXMIN 100: MAXCOST $3.00, bound $3.90
+#   EL_L1_DETACH=1 bash evalaware_lens/l1_fingerprint/launch.sh   # infra/launch_run.py without launch_wrap (EL-W2's fix:
 #       a laptop memory-cleanup TERM then leaves the pod and its setsid job running, for the manual ssh pull)
 #   EL_L1_LAUNCH_DRY=1 ...                                 # print the command only
-# Ships the code, the frozen jobs (data/jobs, gitignored) and setup_vllm.sh; never Needham's raw dataset or results/.
-# Refuses unless the tag el-l1-prereg exists, the code matches it, the jobs match inputs_sha256.json and
-# LG.check_both("EL-F1", 11, planned = the bound, kind="gpu") passes.
+# Ships the code and the frozen jobs (data/jobs, gitignored), plus F2's directions and F1's probes by --sync-extra.
+# Refuses unless the tags el-l1-prereg and el-l1-dev1 exist, the code matches el-l1-dev1, the jobs match inputs_sha256.json and
+# LG.check_both("EL-L1", 12, planned = the bound, kind="gpu") passes.
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 H=evalaware_lens/l1_fingerprint
@@ -22,7 +22,9 @@ MAXCOST=$(python3 -c "import math, sys; print(f'{math.ceil(int(sys.argv[1]) * in
 HF_TOKEN="$(uv run python -c "import re; m = re.search(r'HF_TOKEN\s*=\s*[\"\']?([^\"\'\s]+)', open('.env').read()); print(m.group(1) if m else '')")"
 export HF_TOKEN
 SHIP=()
-for p in "$H/read.py" "$H/pod.sh" "$H/inputs_sha256.json" "$H/data/jobs" evalaware_lens/f2_panel/results/stage1/dirs_q27.npz evalaware_lens/f2_panel/results/stage1/dirs_q32.npz evalaware_lens/f1_measures/results/main/probe_q27.npz evalaware_lens/f1_measures/results/main/probe_q32.npz; do SHIP+=(--ship "$p"); done
+for p in "$H/read.py" "$H/pod.sh" "$H/inputs_sha256.json" "$H/data/jobs"; do SHIP+=(--ship "$p"); done
+# results/ inputs go by --sync-extra: the './results' exclude matches path tails and dropped them from --ship (deviation 1)
+for p in evalaware_lens/f2_panel/results/stage1/dirs_q27.npz evalaware_lens/f2_panel/results/stage1/dirs_q32.npz evalaware_lens/f1_measures/results/main/probe_q27.npz evalaware_lens/f1_measures/results/main/probe_q32.npz; do SHIP+=(--sync-extra "$p"); done
 EXCL=(--exclude '__pycache__')
 LAUNCHER=persona_affect/common/launch_wrap.py; [ -n "${EL_L1_DETACH:-}" ] && LAUNCHER=infra/launch_run.py
 CMD=(uv run python "$LAUNCHER" --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN" --max-cost "$MAXCOST"
@@ -36,8 +38,10 @@ fi
 [ -n "$HF_TOKEN" ] || { echo "[el-l1-launch] no HF_TOKEN in .env"; exit 2; }
 git rev-parse -q --verify refs/tags/el-l1-prereg > /dev/null 2>&1 \
   || { echo "[prereg] no tag el-l1-prereg: commit and tag DESIGN.md and the code first"; exit 2; }
-git diff --quiet el-l1-prereg -- "$H" ':!*/results/*' ':!*/data/*' \
-  || { echo "[prereg] $H differs from the tag el-l1-prereg"; exit 2; }
+git rev-parse -q --verify refs/tags/el-l1-dev1 > /dev/null 2>&1 \
+  || { echo "[prereg] no tag el-l1-dev1 (deviation 1)"; exit 2; }
+git diff --quiet el-l1-dev1 -- "$H" ':!*/results/*' ':!*/data/*' \
+  || { echo "[prereg] $H differs from the tag el-l1-dev1"; exit 2; }
 python3 -I -c "
 import gzip, hashlib, json, sys; from pathlib import Path
 want = json.loads(Path('$H/inputs_sha256.json').read_text())

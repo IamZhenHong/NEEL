@@ -1,0 +1,107 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB
+ + einops==0.8.2
+ + fla-core==0.6.0
+ + flash-linear-attention==0.6.0
+[el-l1] fla usable: True
+[el-l1] jobs sha256 ok
+Fetching 24 files:   0%|          | 0/24 [00:00<?, ?it/s]Fetching 24 files:   8%|▊         | 2/24 [00:00<00:01, 14.69it/s]Fetching 24 files:  29%|██▉       | 7/24 [00:00<00:00, 32.32it/s]Fetching 24 files:  29%|██▉       | 7/24 [00:20<00:00, 32.32it/s]Fetching 24 files:  33%|███▎      | 8/24 [02:07<06:12, 23.28s/it]Fetching 24 files:  38%|███▊      | 9/24 [02:10<04:44, 18.98s/it]Fetching 24 files:  46%|████▌     | 11/24 [02:11<02:37, 12.13s/it]Fetching 24 files:  54%|█████▍    | 13/24 [02:11<01:27,  7.95s/it]Fetching 24 files:  67%|██████▋   | 16/24 [02:11<00:36,  4.58s/it]Fetching 24 files:  75%|███████▌  | 18/24 [02:12<00:20,  3.39s/it]Fetching 24 files:  83%|████████▎ | 20/24 [02:14<00:10,  2.69s/it]Fetching 24 files:  88%|████████▊ | 21/24 [02:26<00:12,  4.30s/it]Fetching 24 files:  92%|█████████▏| 22/24 [02:43<00:13,  6.90s/it]Fetching 24 files:  96%|█████████▌| 23/24 [02:48<00:06,  6.44s/it]Fetching 24 files: 100%|██████████| 24/24 [03:14<00:00, 11.20s/it]Fetching 24 files: 100%|██████████| 24/24 [03:14<00:00,  8.12s/it]
+Traceback (most recent call last):
+  File "/root/NEEL/evalaware_lens/l1_fingerprint/read.py", line 130, in <module>
+    main()
+    ~~~~^^
+  File "/root/NEEL/evalaware_lens/l1_fingerprint/read.py", line 77, in main
+    inst, gauss = instruments(a.model_key, a.dirs, a.probe, d_model)
+                  ~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/NEEL/evalaware_lens/l1_fingerprint/read.py", line 55, in instruments
+    z = np.load(Path(dirs_dir) / f'dirs_{model_key}.npz')
+  File "/root/venv/lib/python3.15/site-packages/numpy/lib/_npyio_impl.py", line 454, in load
+    fid = stack.enter_context(open(os.fspath(file), "rb"))
+                              ~~~~^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: 'evalaware_lens/f2_panel/results/stage1/dirs_q27.npz'
+[el-l1] q27 read exit 1
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files:   4%|▎         | 1/27 [00:00<00:03,  7.46it/s]Fetching 27 files:  26%|██▌       | 7/27 [01:39<04:57, 14.87s/it]Fetching 27 files:  33%|███▎      | 9/27 [01:39<03:08, 10.44s/it]Fetching 27 files:  44%|████▍     | 12/27 [01:39<01:35,  6.39s/it]Fetching 27 files:  52%|█████▏    | 14/27 [01:40<01:00,  4.68s/it]Fetching 27 files:  52%|█████▏    | 14/27 [02:00<01:00,  4.68s/it]Fetching 27 files:  56%|█████▌    | 15/27 [03:10<03:43, 18.61s/it]/root/venv/lib/python3.15/site-packages/huggingface_hub/file_download.py:773: UserWarning: Not enough free disk space to download the file. The expected file size is: 3055.34 MB. The target location /root/hf/hub/models--Qwen--Qwen3-32B/blobs only has 558.16 MB free disk space.
+  warnings.warn(
+Fetching 27 files:  59%|█████▉    | 16/27 [03:23<03:12, 17.53s/it]Fetching 27 files:  63%|██████▎   | 17/27 [03:23<02:19, 13.90s/it]Fetching 27 files:  67%|██████▋   | 18/27 [03:25<01:40, 11.12s/it]Fetching 27 files:  70%|███████   | 19/27 [03:26<01:07,  8.44s/it]Fetching 27 files:  74%|███████▍  | 20/27 [03:26<00:44,  6.31s/it]Fetching 27 files:  74%|███████▍  | 20/27 [03:31<01:13, 10.57s/it]
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import sys; from huggingface_hub import snapshot_download; print(snapshot_download(sys.argv[1], revision=sys.argv[2]))
+                                                                     ~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/venv/lib/python3.15/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/huggingface_hub/utils/_http.py", line 266, in _inner
+    return fn(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/huggingface_hub/_snapshot_download.py", line 532, in snapshot_download
+    hf_thread_map(
+    ~~~~~~~~~~~~~^
+        _inner_hf_hub_download,
+        ^^^^^^^^^^^^^^^^^^^^^^^
+    ...<3 lines>...
+        tqdm_class=tqdm_class,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/root/venv/lib/python3.15/site-packages/huggingface_hub/utils/tqdm.py", line 441, in hf_thread_map
+    results[future_to_index[future]] = future.result()
+                                       ~~~~~~~~~~~~~^^
+  File "/root/.local/share/uv/python/cpython-3.15.1-linux-x86_64-gnu/lib/python3.15/concurrent/futures/_base.py", line 447, in result
+    return self.__get_result()
+           ~~~~~~~~~~~~~~~~~^^
+  File "/root/.local/share/uv/python/cpython-3.15.1-linux-x86_64-gnu/lib/python3.15/concurrent/futures/_base.py", line 396, in __get_result
+    raise self._exception
+  File "/root/.local/share/uv/python/cpython-3.15.1-linux-x86_64-gnu/lib/python3.15/concurrent/futures/thread.py", line 86, in run
+    result = ctx.run(self.task)
+  File "/root/.local/share/uv/python/cpython-3.15.1-linux-x86_64-gnu/lib/python3.15/concurrent/futures/thread.py", line 73, in run
+    return fn(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/huggingface_hub/_snapshot_download.py", line 512, in _inner_hf_hub_download
+    hf_hub_download(  # type: ignore
+    ~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+        repo_id,
+        ^^^^^^^^
+    ...<14 lines>...
+        dry_run=dry_run,
+        ^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/root/venv/lib/python3.15/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/huggingface_hub/utils/_http.py", line 266, in _inner
+    return fn(*args, **kwargs)
+  File "/root/venv/lib/python3.15/site-packages/huggingface_hub/file_download.py", line 1047, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+        # Destination
+    ...<15 lines>...
+        dry_run=dry_run,
+    )
+  File "/root/venv/lib/python3.15/site-packages/huggingface_hub/file_download.py", line 1285, in _hf_hub_download_to_cache_dir
+    _download_to_tmp_and_move(
+    ~~~~~~~~~~~~~~~~~~~~~~~~~^
+        incomplete_path=Path(blob_path + ".incomplete"),
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<8 lines>...
+        tqdm_class=tqdm_class,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/root/venv/lib/python3.15/site-packages/huggingface_hub/file_download.py", line 2016, in _download_to_tmp_and_move
+    xet_get(
+    ~~~~~~~^
+        incomplete_path=tmp_path,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+        tqdm_class=tqdm_class,
+        ^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "/root/venv/lib/python3.15/site-packages/huggingface_hub/file_download.py", line 589, in xet_get
+    with session.new_file_download_group(
+         ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^
+        endpoint=connection_info.endpoint,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+        progress_callback=progress.update_progress,
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ) as group:
+    ^
+RuntimeError: Task error: File reconstruction error: IO Error: No space left on device (os error 28)
+[el-l1] snapshot of Qwen/Qwen3-32B failed
+[el-l1] done

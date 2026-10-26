@@ -24,6 +24,10 @@ bad = [n for n, s in want.items() if hashlib.sha256(gzip.open(f'$H/data/jobs/{n}
 assert not bad, f'jobs changed since the prereg: {bad}'; print('[el-l1] jobs sha256 ok')
 PY
 [ "${PIPESTATUS[0]}" = 0 ] || exit 1
+for f in evalaware_lens/f2_panel/results/stage1/dirs_{q27,q32}.npz evalaware_lens/f1_measures/results/main/probe_{q27,q32}.npz; do
+  [ -f "$f" ] || { echo "[el-l1] missing input $f" | tee -a "$LOG"; exit 1; }
+done
+echo "[el-l1] instrument files present" | tee -a "$LOG"
 for KEY in q27 q32; do
   if [ $(( $(date +%s) + ${EST[$KEY]} * 60 )) -gt "$DEADLINE" ]; then
     echo "[el-l1] skipping $KEY: it would pass the deadline" | tee -a "$LOG"; continue
