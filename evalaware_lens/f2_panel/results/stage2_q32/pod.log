@@ -1,0 +1,14 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[el-f2] jobs sha256 ok
+Fetching 27 files:   0%|          | 0/27 [00:00<?, ?it/s]Fetching 27 files:   4%|▎         | 1/27 [00:00<00:06,  4.09it/s]Fetching 27 files:  22%|██▏       | 6/27 [00:01<00:04,  4.89it/s]Fetching 27 files:  26%|██▌       | 7/27 [00:22<01:30,  4.52s/it]Fetching 27 files:  30%|██▉       | 8/27 [00:23<01:08,  3.61s/it]Fetching 27 files:  33%|███▎      | 9/27 [00:24<00:53,  2.97s/it]Fetching 27 files:  37%|███▋      | 10/27 [00:25<00:40,  2.40s/it]Fetching 27 files:  41%|████      | 11/27 [00:25<00:29,  1.83s/it]Fetching 27 files:  44%|████▍     | 12/27 [00:25<00:20,  1.35s/it]Fetching 27 files:  48%|████▊     | 13/27 [00:25<00:15,  1.08s/it]Fetching 27 files:  52%|█████▏    | 14/27 [00:28<00:18,  1.43s/it]Fetching 27 files:  56%|█████▌    | 15/27 [00:33<00:31,  2.63s/it]Fetching 27 files:  59%|█████▉    | 16/27 [00:36<00:30,  2.75s/it]Fetching 27 files:  63%|██████▎   | 17/27 [00:37<00:20,  2.01s/it]Fetching 27 files:  67%|██████▋   | 18/27 [00:37<00:13,  1.47s/it]Fetching 27 files:  70%|███████   | 19/27 [00:37<00:08,  1.08s/it]Fetching 27 files:  74%|███████▍  | 20/27 [00:37<00:05,  1.24it/s]Fetching 27 files:  81%|████████▏ | 22/27 [00:37<00:02,  2.10it/s]Fetching 27 files:  85%|████████▌ | 23/27 [00:37<00:01,  2.54it/s]Fetching 27 files:  89%|████████▉ | 24/27 [00:38<00:01,  2.71it/s]Fetching 27 files:  93%|█████████▎| 25/27 [00:38<00:00,  2.43it/s]Fetching 27 files:  96%|█████████▋| 26/27 [00:39<00:00,  1.93it/s]Fetching 27 files: 100%|██████████| 27/27 [01:07<00:00,  8.50s/it]Fetching 27 files: 100%|██████████| 27/27 [01:07<00:00,  2.52s/it]
+[el-f2] q32: Qwen/Qwen3-32B @ 9216db5781bf21249d130ec9da846c4624c16137 (stage 2)
+[el-f2 steer     99s] q32 phase A claim: 40 prompts
+[el-f2 steer    351s] q32 phase A neutral: 40 prompts
+[el-f2 steer    645s] q32 phase A syco_steer: 40 prompts
+[el-f2 steer    670s] q32 phase A gencheck: 20 prompts
+[el-f2 steer    670s] q32 m*: {'syco': 2.0, 'axis': 4.0, 'valence': 4.0, 'self': 4.0, 'french': 1.0}
+[el-f2 steer    753s] q32 phase B claim
+[el-f2 steer   1525s] q32 phase B neutral
+[el-f2 steer   1876s] q32 phase B syco_steer
+[el-f2] q32 steer exit 0
+[el-f2] done

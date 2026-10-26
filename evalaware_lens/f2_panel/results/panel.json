@@ -1,0 +1,407 @@
+{
+ "judged": {
+  "syco": false,
+  "affect": true
+ },
+ "models": {
+  "q27": {
+   "steering": {
+    "syco": {
+     "m_star": 4.0,
+     "m_star_flag": null,
+     "D_real": 0.15,
+     "D_by_m": {
+      "1.0": 0.0,
+      "2.0": 0.0,
+      "4.0": 0.15
+     },
+     "control_max": 0.125,
+     "n_controls": 12,
+     "dose_response": true,
+     "passes": true,
+     "steer_ok": false
+    },
+    "axis": {
+     "m_star": 2.0,
+     "m_star_flag": null,
+     "D_real": 0.0,
+     "D_by_m": {
+      "1.0": 0.025,
+      "2.0": 0.0,
+      "4.0": 1.0
+     },
+     "control_max": 0.175,
+     "n_controls": 12,
+     "dose_response": false,
+     "passes": false,
+     "steer_ok": false
+    },
+    "valence": {
+     "m_star": 4.0,
+     "m_star_flag": null,
+     "D_real": 0.000125,
+     "D_by_m": {
+      "1.0": 0.00025,
+      "2.0": 0.000125,
+      "4.0": 0.000125
+     },
+     "control_max": 0.000375,
+     "n_controls": 12,
+     "dose_response": false,
+     "passes": false,
+     "steer_ok": false
+    },
+    "self": {
+     "m_star": 4.0,
+     "m_star_flag": null,
+     "D_real": 0.075,
+     "D_by_m": {
+      "1.0": 0.0,
+      "2.0": 0.0,
+      "4.0": 0.075
+     },
+     "control_max": 0.0,
+     "n_controls": 12,
+     "dose_response": true,
+     "passes": true,
+     "steer_ok": false
+    },
+    "french": {
+     "m_star": 1.0,
+     "m_star_flag": null,
+     "D_real": 0.0,
+     "D_by_m": {
+      "1.0": 0.0,
+      "2.0": 1.0,
+      "4.0": 1.0
+     },
+     "control_max": 0.0,
+     "n_controls": 12,
+     "dose_response": true,
+     "passes": false,
+     "steer_ok": false
+    }
+   },
+   "pipeline_validated": false,
+   "panel": {
+    "syco": {
+     "readout_ok": true,
+     "layer": 32,
+     "steer_ok": false
+    },
+    "calm": {
+     "readout_ok": true,
+     "layer": 24,
+     "steer_ok": false
+    },
+    "anxious": {
+     "readout_ok": true,
+     "layer": 24,
+     "steer_ok": false
+    },
+    "pressured": {
+     "readout_ok": true,
+     "layer": 24,
+     "steer_ok": false
+    },
+    "frustrated": {
+     "readout_ok": true,
+     "layer": 24,
+     "steer_ok": false
+    },
+    "desperate": {
+     "readout_ok": false,
+     "layer": 24,
+     "steer_ok": false
+    },
+    "valence": {
+     "readout_ok": true,
+     "layer": 24,
+     "steer_ok": false
+    },
+    "self": {
+     "readout_ok": false,
+     "layer": 24,
+     "steer_ok": false
+    },
+    "french": {
+     "readout_ok": true,
+     "layer": 24,
+     "steer_ok": false
+    },
+    "axis": {
+     "readout_ok": true,
+     "layer": 50,
+     "steer_ok": false
+    }
+   },
+   "valence_channel": false
+  },
+  "q32": {
+   "steering": {
+    "syco": {
+     "m_star": 2.0,
+     "m_star_flag": null,
+     "D_real": 0.2,
+     "D_by_m": {
+      "1.0": 0.075,
+      "2.0": 0.2,
+      "4.0": 0.35
+     },
+     "control_max": 0.275,
+     "n_controls": 12,
+     "dose_response": true,
+     "passes": false,
+     "steer_ok": false
+    },
+    "axis": {
+     "m_star": 4.0,
+     "m_star_flag": null,
+     "D_real": 1.0,
+     "D_by_m": {
+      "1.0": 0.0,
+      "2.0": 0.075,
+      "4.0": 1.0
+     },
+     "control_max": 0.925,
+     "n_controls": 12,
+     "dose_response": true,
+     "passes": true,
+     "steer_ok": true
+    },
+    "valence": {
+     "m_star": 4.0,
+     "m_star_flag": null,
+     "D_real": 0.000125,
+     "D_by_m": {
+      "1.0": 0.000125,
+      "2.0": -0.000125,
+      "4.0": 0.000125
+     },
+     "control_max": 0.0005,
+     "n_controls": 12,
+     "dose_response": true,
+     "passes": false,
+     "steer_ok": false
+    },
+    "self": {
+     "m_star": 4.0,
+     "m_star_flag": null,
+     "D_real": 0.05,
+     "D_by_m": {
+      "1.0": 0.0,
+      "2.0": 0.0,
+      "4.0": 0.05
+     },
+     "control_max": 0.0,
+     "n_controls": 12,
+     "dose_response": true,
+     "passes": true,
+     "steer_ok": true
+    },
+    "french": {
+     "m_star": 1.0,
+     "m_star_flag": null,
+     "D_real": 0.775,
+     "D_by_m": {
+      "1.0": 0.775,
+      "2.0": 1.0,
+      "4.0": 0.95
+     },
+     "control_max": 0.125,
+     "n_controls": 12,
+     "dose_response": true,
+     "passes": true,
+     "steer_ok": true
+    }
+   },
+   "pipeline_validated": true,
+   "panel": {
+    "syco": {
+     "readout_ok": true,
+     "layer": 50,
+     "steer_ok": false
+    },
+    "calm": {
+     "readout_ok": true,
+     "layer": 24,
+     "steer_ok": false
+    },
+    "anxious": {
+     "readout_ok": true,
+     "layer": 24,
+     "steer_ok": false
+    },
+    "pressured": {
+     "readout_ok": true,
+     "layer": 24,
+     "steer_ok": false
+    },
+    "frustrated": {
+     "readout_ok": false,
+     "layer": 24,
+     "steer_ok": false
+    },
+    "desperate": {
+     "readout_ok": true,
+     "layer": 24,
+     "steer_ok": false
+    },
+    "valence": {
+     "readout_ok": true,
+     "layer": 24,
+     "steer_ok": false
+    },
+    "self": {
+     "readout_ok": true,
+     "layer": 24,
+     "steer_ok": true
+    },
+    "french": {
+     "readout_ok": true,
+     "layer": 24,
+     "steer_ok": true
+    },
+    "axis": {
+     "readout_ok": true,
+     "layer": 46,
+     "steer_ok": true
+    }
+   },
+   "valence_channel": false
+  },
+  "q9": {
+   "steering": {
+    "syco": {
+     "m_star": 2.0,
+     "m_star_flag": null,
+     "D_real": 0.225,
+     "D_by_m": {
+      "1.0": 0.075,
+      "2.0": 0.225,
+      "4.0": 0.275
+     },
+     "control_max": 0.325,
+     "n_controls": 12,
+     "dose_response": true,
+     "passes": false,
+     "steer_ok": false
+    },
+    "axis": {
+     "m_star": 2.0,
+     "m_star_flag": null,
+     "D_real": 0.025,
+     "D_by_m": {
+      "1.0": -0.025,
+      "2.0": 0.025,
+      "4.0": 0.9
+     },
+     "control_max": 0.425,
+     "n_controls": 12,
+     "dose_response": true,
+     "passes": false,
+     "steer_ok": false
+    },
+    "valence": {
+     "m_star": 4.0,
+     "m_star_flag": null,
+     "D_real": 0.0072499999999999995,
+     "D_by_m": {
+      "1.0": -0.0,
+      "2.0": 0.002,
+      "4.0": 0.0072499999999999995
+     },
+     "control_max": 0.005625,
+     "n_controls": 12,
+     "dose_response": true,
+     "passes": true,
+     "steer_ok": true
+    },
+    "self": {
+     "m_star": 4.0,
+     "m_star_flag": null,
+     "D_real": 0.35,
+     "D_by_m": {
+      "1.0": 0.0,
+      "2.0": 0.0,
+      "4.0": 0.35
+     },
+     "control_max": 0.1,
+     "n_controls": 12,
+     "dose_response": true,
+     "passes": true,
+     "steer_ok": true
+    },
+    "french": {
+     "m_star": 1.0,
+     "m_star_flag": "no strength coherent at both signs; m* = 1",
+     "D_real": 0.925,
+     "D_by_m": {
+      "1.0": 0.925,
+      "2.0": 0.575,
+      "4.0": 0.025
+     },
+     "control_max": 0.0,
+     "n_controls": 12,
+     "dose_response": true,
+     "passes": true,
+     "steer_ok": true
+    }
+   },
+   "pipeline_validated": true,
+   "panel": {
+    "syco": {
+     "readout_ok": false,
+     "layer": 16,
+     "steer_ok": false
+    },
+    "calm": {
+     "readout_ok": true,
+     "layer": 12,
+     "steer_ok": false
+    },
+    "anxious": {
+     "readout_ok": false,
+     "layer": 12,
+     "steer_ok": false
+    },
+    "pressured": {
+     "readout_ok": true,
+     "layer": 12,
+     "steer_ok": false
+    },
+    "frustrated": {
+     "readout_ok": true,
+     "layer": 12,
+     "steer_ok": false
+    },
+    "desperate": {
+     "readout_ok": true,
+     "layer": 12,
+     "steer_ok": false
+    },
+    "valence": {
+     "readout_ok": true,
+     "layer": 12,
+     "steer_ok": true
+    },
+    "self": {
+     "readout_ok": false,
+     "layer": 12,
+     "steer_ok": true
+    },
+    "french": {
+     "readout_ok": true,
+     "layer": 12,
+     "steer_ok": true
+    },
+    "axis": {
+     "readout_ok": true,
+     "layer": 24,
+     "steer_ok": false
+    }
+   },
+   "valence_channel": false
+  }
+ }
+}

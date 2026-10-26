@@ -4080,3 +4080,28 @@ it.
 Nothing here shows evaluation awareness recruiting the self. At these base rates the bottleneck is measuring
 verbalised awareness at all, which A1 also hit. $11.50 of $32, plus $6.06 of Fortress generation booked to EL-L1.
 Report: `evalaware_lens/s1_selfref/RESULT.md`.
+
+### 324. EL-F2: which internal directions can measure, or steer, persona, audience, affect and self? (10-27)
+
+**Design.** On Qwen3.5-9B, Qwen3.5-27B and Qwen3-32B, I built directions for:
+- the assistant persona;
+- sycophancy;
+- five affect states and overall valence;
+- self versus another person;
+- French versus English, as a positive control.
+
+Each was checked three ways: whether it reads its state on held-out text, better than random directions; whether it
+reads the state rather than its name; and whether steering along it changes behaviour more than random directions of
+the same size.
+
+**Result.** The directions read well. Nearly all of them separated their classes, although random directions often
+did nearly as well, because the classes were very different texts. All the affect and sycophancy directions read the
+state itself, not its name. The self direction mostly picked up talk about AI. None of the models showed a hidden
+valence channel: after rejection or pressure the valence readout moved, but on replies without emotional words no
+more than random directions did.
+
+Steering almost never worked. The French control did, on two models. Sycophancy and affect never beat random
+directions, and the persona axis only did so at the largest strength, barely. The programme therefore has readouts,
+but almost no steering handles.
+
+$7.37 of $17. Report: `evalaware_lens/f2_panel/RESULT.md`.
