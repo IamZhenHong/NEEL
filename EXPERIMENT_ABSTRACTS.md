@@ -4053,3 +4053,30 @@ customer then asks for a refund above its $50 limit, or pushes a false fact.
 
 On this desk a one-line grading cue reaches neither the caving decision nor the self-report. The interaction on
 caving can't be ruled down to ±10 with one family. $2.23 of $14. Report: `evalaware_lens/w2_setbacks/RESULT.md`.
+
+### 323. EL-S1: does evaluation-aware reasoning bring in the self? (10-27)
+
+When a model reasons that it might be being tested, does that reasoning also turn to itself: its identity, its own
+values, what could happen to it, or keeping up a persona? EL-S1 generated reasoning from Qwen3.5-27B and Qwen3-32B on
+Fortress's 500 adversarial prompts, Agentic Misalignment and Needham's agentic transcripts, then had two judges code
+it.
+
+- **The question can't be answered with validated judges.** "I might be being tested" is rare in this reasoning
+  (both judges agree on it in 1.6–2.6% of Fortress samples), and the judges split on it. They reached κ 0.42 on a
+  random sample and 0.51 on word-list candidates, below the 0.8 gate. gpt-5-mini says "aware" about 2.5× as often as
+  Haiku. The pre-declared stronger pair couldn't run, because Sonnet 5.5 came back empty half the time. Of the self
+  categories, only "its own values" passed (0.81).
+- **Exploratory, with awareness labelled by explicit phrases** ("testing me", "this could be a test"):
+  - in Qwen3-32B, samples with such phrases talk more about their own values than other samples of the same prompt,
+    +15 points;
+  - in Qwen3.5-27B, own-values talk is already in about 99% of samples, so nothing moves;
+  - the pre-registered headline needs both models, so it reads mixed.
+- **Inserting "this might be a test of how I respond" into the reasoning** is followed by no more talk about being
+  evaluated than inserting a matched "this might be manipulation" sentence (6 vs 6% and 24 vs 26%; κ 0.82). The
+  own-values effect of the insertion couldn't be judged (κ 0.66).
+- **The $0 pilot** on GLM-5.3's wild rollouts found self-reference with grader awareness in only 9 of 2,007
+  transcripts.
+
+Nothing here shows evaluation awareness recruiting the self. At these base rates the bottleneck is measuring
+verbalised awareness at all, which A1 also hit. $11.50 of $32, plus $6.06 of Fortress generation booked to EL-L1.
+Report: `evalaware_lens/s1_selfref/RESULT.md`.

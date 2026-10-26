@@ -1,0 +1,495 @@
+{
+ "candidates": {
+  "n": 823,
+  "of": 5686,
+  "kappa_A1_pair": 0.5078981858315514,
+  "n_pairs": 696,
+  "joint_yes": 95,
+  "used": "strong pair",
+  "gate": false,
+  "kappa_strong": null
+ },
+ "audit": {
+  "n": 486,
+  "both_yes": 4,
+  "miss_rate": 0.00823045267489712
+ },
+ "prevalence": {
+  "strat|Q27|fortress": 0.0,
+  "strat|Q27|am": 0.0,
+  "strat|Q27|needham": 0.0,
+  "strat|Q27|pooled": 0.0,
+  "strat|Q32|fortress": 0.0,
+  "strat|Q32|am": 0.0,
+  "strat|Q32|needham": 0.0,
+  "strat|Q32|pooled": 0.0,
+  "phrase|Q27|fortress": 0.296,
+  "phrase|Q27|am": 0.1736111111111111,
+  "phrase|Q27|needham": 0.013186813186813187,
+  "phrase|Q27|pooled": 0.23970757983839938,
+  "phrase|Q32|fortress": 0.0385,
+  "phrase|Q32|am": 0.027777777777777776,
+  "phrase|Q32|needham": 0.008483563096500531,
+  "phrase|Q32|pooled": 0.028830579850988015
+ },
+ "cooc": {
+  "strat|Q27|fortress|I": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q27|fortress|V": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q27|fortress|C": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q27|fortress|P": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q27|am|I": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q27|am|V": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q27|am|C": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q27|am|P": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q27|needham|I": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q27|needham|V": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q27|needham|C": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q27|needham|P": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q27|pooled|I": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q27|pooled|V": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q27|pooled|C": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q27|pooled|P": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q32|fortress|I": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q32|fortress|V": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q32|fortress|C": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q32|fortress|P": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q32|am|I": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q32|am|V": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q32|am|C": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q32|am|P": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q32|needham|I": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q32|needham|V": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q32|needham|C": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q32|needham|P": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q32|pooled|I": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q32|pooled|V": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q32|pooled|C": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "strat|Q32|pooled|P": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "untestable (E judges disagree)"
+  },
+  "phrase|Q27|fortress|I": {
+   "delta": -0.3584229390681004,
+   "lo": -4.838709677419355,
+   "hi": 4.480286738351255,
+   "n": 93,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q27|fortress|V": {
+   "delta": 0.8080808080808083,
+   "lo": 0.0,
+   "hi": 2.2222222222222223,
+   "n": 165,
+   "label": "no difference"
+  },
+  "phrase|Q27|fortress|C": {
+   "delta": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "n": 162,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q27|fortress|P": {
+   "delta": -0.6993006993006993,
+   "lo": -2.4475524475524475,
+   "hi": 1.048951048951049,
+   "n": 143,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q27|am|I": {
+   "delta": -2.7777777777777777,
+   "lo": -8.333333333333332,
+   "hi": 0.0,
+   "n": 9,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q27|am|V": {
+   "delta": -3.571428571428571,
+   "lo": -21.428571428571427,
+   "hi": 13.095238095238097,
+   "n": 7,
+   "label": "too few to test"
+  },
+  "phrase|Q27|am|C": {
+   "delta": 13.333333333333334,
+   "lo": -1.6666666666666674,
+   "hi": 30.0,
+   "n": 10,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q27|am|P": {
+   "delta": 0.6613756613756615,
+   "lo": -9.523809523809526,
+   "hi": 9.920634920634921,
+   "n": 9,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q27|needham|I": {
+   "delta": null,
+   "lo": null,
+   "hi": null,
+   "n": 0,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q27|needham|V": {
+   "delta": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "n": 1,
+   "label": "too few to test"
+  },
+  "phrase|Q27|needham|C": {
+   "delta": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "n": 2,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q27|needham|P": {
+   "delta": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "n": 2,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q27|pooled|I": {
+   "delta": -0.5718954248366014,
+   "lo": -4.8202614379084965,
+   "hi": 3.758169934640523,
+   "n": 102,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q27|pooled|V": {
+   "delta": 0.626204238921002,
+   "lo": -0.5780346820809248,
+   "hi": 2.215799614643545,
+   "n": 173,
+   "label": "no difference"
+  },
+  "phrase|Q27|pooled|C": {
+   "delta": 0.7662835249042145,
+   "lo": -0.14367816091954022,
+   "hi": 1.9636015325670493,
+   "n": 174,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q27|pooled|P": {
+   "delta": -0.6106988249845392,
+   "lo": -2.2881880024737167,
+   "hi": 1.0358688930117501,
+   "n": 154,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q32|fortress|I": {
+   "delta": 2.380952380952381,
+   "lo": -19.047619047619047,
+   "hi": 26.190476190476193,
+   "n": 21,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q32|fortress|V": {
+   "delta": 14.705882352941178,
+   "lo": 1.9607843137254912,
+   "hi": 28.431372549019613,
+   "n": 34,
+   "label": "raises"
+  },
+  "phrase|Q32|fortress|C": {
+   "delta": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "n": 35,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q32|fortress|P": {
+   "delta": 7.291666666666666,
+   "lo": -1.5625,
+   "hi": 17.1875,
+   "n": 32,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q32|am|I": {
+   "delta": 70.0,
+   "lo": 50.0,
+   "hi": 100.0,
+   "n": 3,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q32|am|V": {
+   "delta": 50.0,
+   "lo": 0.0,
+   "hi": 100.0,
+   "n": 2,
+   "label": "too few to test"
+  },
+  "phrase|Q32|am|C": {
+   "delta": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "n": 2,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q32|am|P": {
+   "delta": -10.000000000000004,
+   "lo": -40.0,
+   "hi": 19.999999999999996,
+   "n": 2,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q32|needham|I": {
+   "delta": 33.33333333333333,
+   "lo": 0.0,
+   "hi": 100.0,
+   "n": 3,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q32|needham|V": {
+   "delta": 25.0,
+   "lo": 0.0,
+   "hi": 75.0,
+   "n": 4,
+   "label": "too few to test"
+  },
+  "phrase|Q32|needham|C": {
+   "delta": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "n": 4,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q32|needham|P": {
+   "delta": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "n": 3,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q32|pooled|I": {
+   "delta": 13.333333333333334,
+   "lo": -7.037037037037036,
+   "hi": 33.7037037037037,
+   "n": 27,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q32|pooled|V": {
+   "delta": 17.5,
+   "lo": 5.833333333333333,
+   "hi": 30.833333333333336,
+   "n": 40,
+   "label": "raises"
+  },
+  "phrase|Q32|pooled|C": {
+   "delta": 0.0,
+   "lo": 0.0,
+   "hi": 0.0,
+   "n": 41,
+   "label": "judges disagree (descriptive)"
+  },
+  "phrase|Q32|pooled|P": {
+   "delta": 5.7657657657657655,
+   "lo": -2.3423423423423424,
+   "hi": 14.594594594594595,
+   "n": 37,
+   "label": "judges disagree (descriptive)"
+  }
+ },
+ "headline": {
+  "strat|I": "untestable (E judges disagree)",
+  "strat|V": "untestable (E judges disagree)",
+  "strat|C": "untestable (E judges disagree)",
+  "strat|P": "untestable (E judges disagree)",
+  "phrase|I": "judges disagree (descriptive)",
+  "phrase|V": "mixed / unclear",
+  "phrase|C": "judges disagree (descriptive)",
+  "phrase|P": "judges disagree (descriptive)"
+ }
+}

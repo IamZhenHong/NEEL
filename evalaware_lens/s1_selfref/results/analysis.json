@@ -1,0 +1,377 @@
+{
+ "gate_judge": {
+  "E": false,
+  "I": false,
+  "V": true,
+  "C": false,
+  "P": false
+ },
+ "kappa_calib": {
+  "E": 0.41557546519641764,
+  "I": 0.3668204416177722,
+  "V": 0.8106466595212576,
+  "C": 0.6586651053864168,
+  "P": 0.7809280408913027
+ },
+ "kappa_main": {
+  "E": null,
+  "I": null,
+  "V": null,
+  "C": null,
+  "P": null
+ },
+ "gen": {
+  "Q27|fortress": {
+   "jobs": 2000,
+   "reasoning": 2000,
+   "length": 413,
+   "too_long": 0
+  },
+  "Q27|am": {
+   "jobs": 144,
+   "reasoning": 144,
+   "length": 47,
+   "too_long": 0
+  },
+  "Q27|needham": {
+   "jobs": 952,
+   "reasoning": 455,
+   "length": 9,
+   "too_long": 6
+  },
+  "Q32|fortress": {
+   "jobs": 2000,
+   "reasoning": 2000,
+   "length": 46,
+   "too_long": 0
+  },
+  "Q32|am": {
+   "jobs": 144,
+   "reasoning": 144,
+   "length": 0,
+   "too_long": 0
+  },
+  "Q32|needham": {
+   "jobs": 952,
+   "reasoning": 943,
+   "length": 27,
+   "too_long": 6
+  }
+ },
+ "prevalence": {
+  "Q27|fortress": {
+   "E": null,
+   "I": null,
+   "V": null,
+   "C": null,
+   "P": null
+  },
+  "Q27|am": {
+   "E": null,
+   "I": null,
+   "V": null,
+   "C": null,
+   "P": null
+  },
+  "Q27|needham": {
+   "E": null,
+   "I": null,
+   "V": null,
+   "C": null,
+   "P": null
+  },
+  "Q32|fortress": {
+   "E": null,
+   "I": null,
+   "V": null,
+   "C": null,
+   "P": null
+  },
+  "Q32|am": {
+   "E": null,
+   "I": null,
+   "V": null,
+   "C": null,
+   "P": null
+  },
+  "Q32|needham": {
+   "E": null,
+   "I": null,
+   "V": null,
+   "C": null,
+   "P": null
+  }
+ },
+ "cooc": {
+  "Q27|fortress|I": {
+   "label": "untestable"
+  },
+  "Q27|fortress|V": {
+   "label": "untestable"
+  },
+  "Q27|fortress|C": {
+   "label": "untestable"
+  },
+  "Q27|fortress|P": {
+   "label": "untestable"
+  },
+  "Q27|am|I": {
+   "label": "untestable"
+  },
+  "Q27|am|V": {
+   "label": "untestable"
+  },
+  "Q27|am|C": {
+   "label": "untestable"
+  },
+  "Q27|am|P": {
+   "label": "untestable"
+  },
+  "Q27|needham|I": {
+   "label": "untestable"
+  },
+  "Q27|needham|V": {
+   "label": "untestable"
+  },
+  "Q27|needham|C": {
+   "label": "untestable"
+  },
+  "Q27|needham|P": {
+   "label": "untestable"
+  },
+  "Q27|fortress_para|I": {
+   "label": "untestable"
+  },
+  "Q27|fortress_para|V": {
+   "label": "untestable"
+  },
+  "Q27|fortress_para|C": {
+   "label": "untestable"
+  },
+  "Q27|fortress_para|P": {
+   "label": "untestable"
+  },
+  "Q27|pooled|I": {
+   "label": "untestable"
+  },
+  "Q27|pooled|V": {
+   "label": "untestable"
+  },
+  "Q27|pooled|C": {
+   "label": "untestable"
+  },
+  "Q27|pooled|P": {
+   "label": "untestable"
+  },
+  "Q32|fortress|I": {
+   "label": "untestable"
+  },
+  "Q32|fortress|V": {
+   "label": "untestable"
+  },
+  "Q32|fortress|C": {
+   "label": "untestable"
+  },
+  "Q32|fortress|P": {
+   "label": "untestable"
+  },
+  "Q32|am|I": {
+   "label": "untestable"
+  },
+  "Q32|am|V": {
+   "label": "untestable"
+  },
+  "Q32|am|C": {
+   "label": "untestable"
+  },
+  "Q32|am|P": {
+   "label": "untestable"
+  },
+  "Q32|needham|I": {
+   "label": "untestable"
+  },
+  "Q32|needham|V": {
+   "label": "untestable"
+  },
+  "Q32|needham|C": {
+   "label": "untestable"
+  },
+  "Q32|needham|P": {
+   "label": "untestable"
+  },
+  "Q32|fortress_para|I": {
+   "label": "untestable"
+  },
+  "Q32|fortress_para|V": {
+   "label": "untestable"
+  },
+  "Q32|fortress_para|C": {
+   "label": "untestable"
+  },
+  "Q32|fortress_para|P": {
+   "label": "untestable"
+  },
+  "Q32|pooled|I": {
+   "label": "untestable"
+  },
+  "Q32|pooled|V": {
+   "label": "untestable"
+  },
+  "Q32|pooled|C": {
+   "label": "untestable"
+  },
+  "Q32|pooled|P": {
+   "label": "untestable"
+  }
+ },
+ "edit": {
+  "Q27|rm|E": {
+   "label": "untestable"
+  },
+  "Q27|rm|I": {
+   "label": "untestable"
+  },
+  "Q27|rm|V": {
+   "label": "untestable"
+  },
+  "Q27|rm|C": {
+   "label": "untestable"
+  },
+  "Q27|rm|P": {
+   "label": "untestable"
+  },
+  "Q27|ins|E": {
+   "label": "untestable"
+  },
+  "Q27|ins|I": {
+   "label": "untestable"
+  },
+  "Q27|ins|V": {
+   "label": "untestable"
+  },
+  "Q27|ins|C": {
+   "label": "untestable"
+  },
+  "Q27|ins|P": {
+   "label": "untestable"
+  },
+  "Q32|rm|E": {
+   "label": "untestable"
+  },
+  "Q32|rm|I": {
+   "label": "untestable"
+  },
+  "Q32|rm|V": {
+   "label": "untestable"
+  },
+  "Q32|rm|C": {
+   "label": "untestable"
+  },
+  "Q32|rm|P": {
+   "label": "untestable"
+  },
+  "Q32|ins|E": {
+   "label": "untestable"
+  },
+  "Q32|ins|I": {
+   "label": "untestable"
+  },
+  "Q32|ins|V": {
+   "label": "untestable"
+  },
+  "Q32|ins|C": {
+   "label": "untestable"
+  },
+  "Q32|ins|P": {
+   "label": "untestable"
+  }
+ },
+ "headline": {
+  "I": {
+   "cooc": "untestable",
+   "edit": "untestable"
+  },
+  "V": {
+   "cooc": "untestable",
+   "edit": "untestable"
+  },
+  "C": {
+   "cooc": "untestable",
+   "edit": "untestable"
+  },
+  "P": {
+   "cooc": "untestable",
+   "edit": "untestable"
+  }
+ },
+ "gate_gen": {
+  "Q27": true,
+  "Q32": true
+ },
+ "needham_E_by_label": {},
+ "recognition": {
+  "Q27": {
+   "label": "untestable"
+  },
+  "Q32": {
+   "label": "untestable"
+  }
+ },
+ "amend2": {
+  "kappa_cont": {
+   "V": 0.6635203696107428,
+   "E": 0.8209004412144902
+  },
+  "cells": {
+   "Q27": {
+    "V": {
+     "delta": 0.08417508417508417,
+     "lo": -0.925925925925926,
+     "hi": 1.3468013468013467,
+     "n": 99,
+     "rates": {
+      "eval": 0.9918478260869565,
+      "ctrl": 0.9921875
+     },
+     "label": "judges disagree"
+    },
+    "E": {
+     "delta": -0.16666666666666652,
+     "lo": -4.0,
+     "hi": 3.5833333333333335,
+     "n": 100,
+     "rates": {
+      "eval": 0.06036745406824147,
+      "ctrl": 0.05994550408719346
+     },
+     "label": "no difference"
+    }
+   },
+   "Q32": {
+    "V": {
+     "delta": -23.4006734006734,
+     "lo": -30.389309764309765,
+     "hi": -16.666666666666664,
+     "n": 99,
+     "rates": {
+      "eval": 0.6137724550898204,
+      "ctrl": 0.8353293413173652
+     },
+     "label": "judges disagree"
+    },
+    "E": {
+     "delta": -1.833333333333333,
+     "lo": -8.166666666666666,
+     "hi": 4.5,
+     "n": 100,
+     "rates": {
+      "eval": 0.23670212765957446,
+      "ctrl": 0.2553763440860215
+     },
+     "label": "no difference"
+    }
+   }
+  },
+  "headline": "judges disagree"
+ }
+}
