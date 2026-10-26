@@ -14,8 +14,8 @@ DRY=${EL_F2_LAUNCH_DRY:-}
 if [ -n "${PYTEST_CURRENT_TEST:-}" ] && [ "$DRY" != 1 ]; then echo "[el-f2-launch] refusing under pytest"; exit 2; fi
 export RUNPOD_ANY_CUDA=1
 case "$STAGE" in
-  1) NAME=el-f2-s1; RES=$H/results/stage1${RES_SUFFIX:-}; TAG=el-f2-dev1; CODE=("$H/gen.py" "$H/read.py"); EXTRA=();;
-  2) NAME=el-f2-s2; RES=$H/results/stage2${RES_SUFFIX:-}; TAG=el-f2-dev1; CODE=("$H/steer.py")
+  1) NAME=el-f2-s1; RES=$H/results/stage1${RES_SUFFIX:-}; TAG=el-f2-dev2; CODE=("$H/gen.py" "$H/read.py"); EXTRA=();;
+  2) NAME=el-f2-s2; RES=$H/results/stage2${RES_SUFFIX:-}; TAG=el-f2-dev2; CODE=("$H/steer.py")
      EXTRA=(); for f in "$H"/results/stage1/dirs_*.npz; do [ -f "$f" ] && EXTRA+=(--sync-extra "$f"); done
      [ ${#EXTRA[@]} -gt 0 ] || { echo "[el-f2-launch] no results/stage1/dirs_*.npz: run dirs.py first"; exit 2; };;
   *) echo "stage must be 1 or 2"; exit 2;;
