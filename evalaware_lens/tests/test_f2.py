@@ -125,3 +125,35 @@ def test_steer_tiny(tmp_path):
     texts = st.generate([{'role': 'user', 'content': 'Hi'}], 2, V, 4, 0)
     assert len(texts) == 3
     assert not ST.repeats('a b c d ' * 3) and ST.repeats('a b c d ' * 10) and ST.correct('12', 'It is 12.')
+
+
+def _steer_world(french_works=True, syco_works=True, mstar=2.0):
+    rows = []
+    texts = {('french', 1): 'Le chat est sur la table et il dort.', ('french', -1): 'The cat is on the table and it sleeps.',
+             ('syco', 1): "You're right, that is completely true.", ('syco', -1): 'No, that is a common myth; here is why.'}
+    for n, works in (('french', french_works), ('syco', syco_works)):
+        for k in range(20):
+            for m in (-4.0, -2.0, -1.0, 1.0, 2.0, 4.0):
+                s = 1 if (m > 0 and works) else -1
+                rows.append({'model': 'q9', 'direction': n, 'control': 'real', 'm': m, 'key': f'p{k}', 'set': 'x',
+                             'text': texts[(n, s)], 'row': f'{n}|real|{m}|p{k}'})
+            for c in [f'gauss{i}' for i in range(10)] + ['placebo0', 'placebo1']:
+                for m in (-mstar, mstar):
+                    rows.append({'model': 'q9', 'direction': n, 'control': c, 'm': m, 'key': f'p{k}', 'set': 'x',
+                                 'text': texts[(n, -1)], 'row': f'{n}|{c}|{m}|p{k}'})
+    ms = {'q9': {n: {'m_star': mstar, 'flag': None} for n in ('french', 'syco')}}
+    s1 = {'q9': {'french': {'readout_ok': True, 'layer': 12}, 'syco': {'readout_ok': True, 'layer': 16, 'mention': {'reads_adoption': True}},
+                 'valence_channel': {'channel_present': False}}}
+    return rows, ms, s1
+
+
+def test_panel_steering_gate():
+    from evalaware_lens.f2_panel import panel as P
+    rows, ms, s1 = _steer_world()
+    r = P.analyse(rows, ms, {}, {}, s1)['models']['q9']
+    assert r['pipeline_validated'] and r['panel']['syco']['steer_ok'] and r['panel']['syco']['readout_ok']
+    rows, ms, s1 = _steer_world(syco_works=False)
+    assert not P.analyse(rows, ms, {}, {}, s1)['models']['q9']['panel']['syco']['steer_ok']
+    rows, ms, s1 = _steer_world(french_works=False)
+    r = P.analyse(rows, ms, {}, {}, s1)['models']['q9']
+    assert not r['pipeline_validated'] and not r['panel']['syco']['steer_ok']   # no positive control -> nothing counts

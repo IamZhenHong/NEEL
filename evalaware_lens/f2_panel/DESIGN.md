@@ -173,3 +173,7 @@ The valence-channel check failed for both models under the frozen rule, and that
 `group in ('default', 'helpful')`. In SC-M34's prompts those names are the `role` field, and `group` is
 'assistant' / 'role'. So q32's built axis had an empty assistant set, and its check read 0% of roles below. Fixed to
 `group == 'assistant'`. The recipe and rule are unchanged; q9 and q27 use the external axes and aren't affected.
+
+**Clarification (before any steering output was looked at).** `panel.py` freezes the steering gate's measures (see
+its docstring). It reads "dose-response (|effect| grows from m = 1 to the passing m)" as "does not shrink": D(m = 1) ≤
+D(m*). Otherwise a trait already at ceiling at m = 1, such as a fully French reply, would fail the positive control.
