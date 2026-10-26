@@ -28,12 +28,24 @@ Track A always starts from evaluation awareness. Unverbalised motivation in gene
 | file | contents |
 |---|---|
 | `PLAN.md` | the programme: 18 minis in six groups, the candidate explanations, rules, dependencies, the priority chain (C4) and the core set |
+| `CONVENTIONS.md` | the rules every mini follows (IDs, prereg, ledger and caps, cues, measurement, pods, data, reporting): **read before starting one** |
+| `common/cues.py` | the shared, frozen cue set (3 wordings per kind; tested in `tests/test_cues.py`) |
 | `TRIAGE.md` | what our earlier runs already say about each mini, and which external resources were checked to exist (10-26) |
 | `RUN_PLAN.md` | what to run, skip or change, the concrete design for each mini, and cost estimates (priority chain ~$56, core ~$108, everything ~$174, ~$226 with contingency) |
 
 Each mini gets its own folder (`evalaware_lens/<id>_<name>/`) when it's designed. Each folder holds a DESIGN.md, a
 frozen analyze.py with planted-effect tests, and tags `el-<id>-prereg` and then `el-<id>-results`, as in
 `self_concept/`.
+
+## Allocation (10-26)
+
+| mini | session | cap |
+|---|---|---|
+| A1, F1, F2, then L1, C1, C4; S1 after A1 | bdec7d (coordinator) | per RUN_PLAN × 1.3 |
+| W2 (gate first) | neel-28 [7c4dcd] | $14 |
+| S3 + G3 | Persona, affect and welfare minis (2) [212e54] | $9 + $36 |
+| S2 + C3 | neel-97 [ab4a3c] | $8 + $6 |
+| L2, L3, C2, G1, G2 | to hand out once F1 / F2 exist | |
 
 ## Conventions
 
