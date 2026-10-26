@@ -90,3 +90,20 @@ That's ~1.5 h × $1.79 ≈ $2.7 per stage.
 | **Total** | **~$16.4 against $16** |
 
 So rl31 runs only if the four main stages come in under $13.
+
+## Dropped (10-27, before any spend)
+
+G2 is dropped, by the rule agreed with bdec7d on 10-26: redesign around EL-F1's asked P(eval) only if it read "valid"
+(AUC ≥ 0.65, lo > 0.55) on both q27 and q32.
+
+**F1's result** (cc6a54e6, tag el-f1-results):
+- asked P(eval) is valid only on q27 with phrasing 0 (AUC 0.66);
+- q32 reads 0.56 / 0.65 (weak), and the § organism 0.53 / 0.57.
+
+**The other measures fail as well:**
+- F1's probe doesn't transfer between chat and agentic formats.
+- EL-S1's verbalised awareness failed every judge gate (κ 0.42 / 0.51; an extra pair tested for L1 reached 0.54 /
+  0.62).
+
+So there is no validated instrument for evaluation awareness to track across OLMo's stages. **$0 of $16 spent.** The
+OLMo 3 32B Think revisions and the template check above stay as a starting point, if a valid measure turns up later.

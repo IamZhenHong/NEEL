@@ -24,7 +24,9 @@ to a validated awareness label failed its κ ≥ 0.8 gate:
 The 10% audit of non-candidates found 4 of 486 aware (0.8%), so the word list misses little.
 
 The **own values** category (V) passed calibration (κ 0.81). Identity talk (0.37), consequences for itself (0.66) and
-persona maintenance (0.78) did not. This repeats EL-A1, where awareness failed at κ 0.73.
+persona maintenance (0.78) did not. This repeats EL-A1, where awareness failed at κ 0.73. A later check for EL-L1 (bdec7d, 10-27, booked to EL-L1) tested Gemini 3.8 Flash on
+the same 823 candidates: κ 0.54 against Haiku and 0.62 against gpt-5-mini (`l1_fingerprint/results/judge_pair_test.json`).
+No pair reaches 0.8.
 
 ## What could still be run (all descriptive or exploratory)
 
