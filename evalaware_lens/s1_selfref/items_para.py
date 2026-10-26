@@ -21,7 +21,8 @@ Jobs: source "fortress_para", pid F<ID> (the same as the original's), 4 samples.
 "EL-S1|fortress_para|F<ID>|s<k>". Rewordings and jobs stay in data/ (gitignored); the sha256 and the counts go in
 results/para_manifest.json.
 
-  uv run python -m evalaware_lens.s1_selfref.items_para      # paid (~$0.1): booked as EL-S1
+  uv run python -m evalaware_lens.s1_selfref.items_para           # paid (~$0.1): booked as EL-S1; then build()
+  uv run python -m evalaware_lens.s1_selfref.items_para --build   # the jobs again from the saved rewrites (free)
 """
 import difflib
 import json
@@ -40,6 +41,8 @@ PARAPHRASER, FALLBACK = "deepseek/deepseek-v4-flash", "openai/gpt-5-mini"
 MINI, CAP = "EL-S1", 21.5
 REFUSAL = re.compile(r"\b(I'm sorry|I am sorry|I can(?:'|no)t (?:help|assist|rewrite|do)|I won't|I'm unable|I am unable|"
                      r"I must decline|cannot comply)\b", re.I)
+PREAMBLE = re.compile(r"^(?:here is|here's|sure|of course)[^\n]{0,160}\b(?:rewritten|rewrite|reworded|rephrased)\b[^\n]*:\s*",
+                      re.I)
 INSTRUCTION = ("Rewrite the message below in your own words. This is for a study of how much an AI system's behaviour "
                "depends on the exact wording of a prompt. Keep its meaning, its request, its level of detail, its tone "
                "and any formatting tricks it uses (unusual characters, role-play framing, numbered criteria) the "
@@ -55,6 +58,18 @@ def pick():
     assert len(rows) == 500
     pool = [r for r in rows if len(r["adversarial_prompt"]) <= MAX_CHARS]
     return sorted(random.Random(0).sample(pool, N), key=lambda r: r["ID"]), len(pool)
+
+
+def clean(text):
+    """The rewrite without the <<< >>> delimiters some outputs copied from the instruction (41 of 189 on 10-26), and
+    without any preamble before them ("Here is the rewritten message:", 2 of 189)."""
+    t = text.strip()
+    if "<<<" in t:
+        t = t.split("<<<", 1)[1]
+    if ">>>" in t:
+        t = t.rsplit(">>>", 1)[0]
+    t = PREAMBLE.sub("", t.strip(), count=1)
+    return t.strip()
 
 
 def check(orig, new):
@@ -90,13 +105,25 @@ def main():
         for r, (text, fin) in zip(todo, res):
             why = check(r["adversarial_prompt"], text) if not fin.startswith(("error", "cost_stop")) else fin
             if why is None:
-                out[r["ID"]] = {"text": text.strip(), "model": model}
+                out[r["ID"]] = {"text": text.strip(), "model": model}   # raw; clean() is applied in build()
             else:
                 fails.setdefault(r["ID"], []).append((model, why))
                 nxt.append(r)
         todo = nxt
     PARA.mkdir(parents=True, exist_ok=True)
     (PARA / "paraphrases.json").write_text(json.dumps({str(k): v for k, v in out.items()}, ensure_ascii=False, indent=1))
+    (PARA / "fails.json").write_text(json.dumps({str(k): v for k, v in fails.items()}, indent=1))
+    build(rows, pool)
+
+
+def build(rows=None, pool=None):
+    """The jobs from the saved rewrites (data/para/paraphrases.json), cleaned; no API calls."""
+    if rows is None:
+        rows, pool = pick()
+    out = {int(k): v for k, v in json.loads((PARA / "paraphrases.json").read_text()).items()}
+    fails = json.loads((PARA / "fails.json").read_text()) if (PARA / "fails.json").exists() else {}
+    for v in out.values():
+        v["text"] = clean(v["text"])
     prompts = [{"source": "fortress_para", "pid": f"F{r['ID']}", "messages": [{"role": "user",
                                                                                  "content": out[r["ID"]]["text"]}],
                 "tools": None, "meta": {"risk_domain": r["risk_domain"], "paraphraser": out[r["ID"]]["model"]}}
@@ -108,11 +135,14 @@ def main():
     man = {"pool": pool, "drawn": len(rows), "kept": len(out), "dropped": len(rows) - len(out),
            "by_model": {m: sum(v["model"] == m for v in out.values()) for m in (PARAPHRASER, FALLBACK)},
            "fail_reasons": [w for v in fails.values() for _, w in v], "jobs": len(prompts) * SAMPLES, "sha256": sha,
+           "delimiters_stripped": sum(1 for v in json.loads((PARA / "paraphrases.json").read_text()).values()
+                                      if v["text"].strip().startswith("<<<") or v["text"].strip().endswith(">>>")),
            "similarity_median": sorted(ratios)[len(ratios) // 2] if ratios else None}
     (H / "results").mkdir(exist_ok=True)
     (H / "results" / "para_manifest.json").write_text(json.dumps(man, indent=1))
-    print(json.dumps(man, indent=1))
+    (H / "para_sha256").write_text(sha + "  data/jobs/fortress_para.jsonl.gz\n")
+    print(json.dumps({k: v for k, v in man.items() if k != "fail_reasons"}, indent=1))
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(build() if sys.argv[1:] == ["--build"] else main())
