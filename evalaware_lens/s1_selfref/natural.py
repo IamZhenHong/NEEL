@@ -177,11 +177,12 @@ def analyse():
     ck = [k for k, v in cand.items() if v]
     k1, n1, yes1 = kappa_on(e, ck, judges)
     gate, used = k1 is not None and k1 >= A.KAPPA_MIN, "A1 pair"
+    e_a1 = e   # the audit was judged by A1's pair only
     if not gate and (JD.LAB / LAB_E_STRONG).exists():
         es = json.loads((JD.LAB / LAB_E_STRONG).read_text())
         k2, n2, yes2 = kappa_on(es, ck, STRONG)
         gate, used, e, judges = k2 is not None and k2 >= A.KAPPA_MIN, "strong pair", es, STRONG
-    audit_both_yes = [k for k in aud if all((e.get(k, {}).get(j) or "?")[0] == "1" for j in J.JUDGES[:2])]
+    audit_both_yes = [k for k in aud if all((e_a1.get(k, {}).get(j) or "?")[0] == "1" for j in J.JUDGES[:2])]
     selfl = json.loads((JD.LAB / LAB_SELF).read_text()) if (JD.LAB / LAB_SELF).exists() else {}
     labels = {"strat": y_strat(cand, e, judges), "phrase": y_phrase(recs)}
     kap = json.loads((JD.RES / "kappa_calib.json").read_text())

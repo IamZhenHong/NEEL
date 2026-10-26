@@ -411,3 +411,14 @@ side (`results/natural.json`, `natural.md`). The candidate labels are saved keye
 (`data/labels/e_strat.json`) for L1.
 
 **Cost:** ~$1.8 for E plus ~$1 for the self categories (plus ~$3.5 if the strong pair is needed); within S1's $32.
+
+**Deviation 5 result for label (1), 10-26 ~16:20 UTC, before any outcome contrast was computed.**
+- A1's pair on the 823 candidates: κ **0.51** (696 usable pairs, 95 joint yes). Haiku was empty on 175 of 1,309 E
+  items (13%). This fails the gate.
+- **The stronger pair could not run as declared.** Sonnet 5.5's endpoint rejects effort none ("Reasoning is mandatory
+  for this endpoint"), so all 823 Sonnet calls failed (no cost). gpt-5.4-mini answered all 823 ($0.59).
+- A check of Sonnet 5.5 at effort low found it empty on 3 of 6 items even at max_tokens 2,000, including a one-line
+  "The user might be testing me". So the declared pair cannot produce paired codes.
+- **By deviation 5's rule, label (1) is "judges disagree"** (no further judge is tried). The natural test runs on
+  label (2), phrase-only and exploratory.
+- `natural.analyse` keeps the audit's miss rate on A1's pair's labels.
