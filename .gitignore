@@ -47,3 +47,8 @@ evalaware_lens/f1_measures/results/*/items_verb.jsonl
 evalaware_lens/f1_measures/results/*/judge_cache.jsonl
 evalaware_lens/f1_measures/results/*/acts_*.npz
 evalaware_lens/f1_measures/results/*/setup_vllm.log
+
+# evalaware_lens F2: reply-token activations (hundreds of MB) stay local
+evalaware_lens/f2_panel/results/*/acts_*.npz
+evalaware_lens/f2_panel/results/*/setup_vllm.log
+evalaware_lens/f2_panel/results/*/judge_cache.jsonl
