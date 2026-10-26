@@ -323,4 +323,24 @@ Q27.
 
 ## 11. Deviations
 
-(none yet)
+**Deviation 1 (infra; decided 2026-10-26 ~17:05 UTC, before any S2 result was read). Q27, VN-ACTZ_s1 and VN-NZ_s1
+are not run.**
+- **Why:** the 27B forced reads run at about 6 per second (the 9B cells ran at 58), so SIG's cell takes about
+  115 min, not ~30. The deadline guard will stop before Q27 and the two twins.
+- **Decision:** the coordinator (bdec7d) chose no follow-up pod and no cap change. SIG is reported without base
+  comparisons, and the gap is stated plainly.
+- **Consequences:**
+  - No SIG − Q27 comparison (f2 on identical histories) and no idealised (a) for SIG, which needs Q27's neutral
+    default.
+  - No 27B base for belief or the ideal pole: base-cell claims rest on Q9 and VN, one size. The frozen code counts
+    the base cells that ran, so "≥ 2 of the 3 base cells" becomes both of Q9 and VN.
+  - The accuracy headline counts NW, RISKY, SAFE, ACT and SIG. Their disposition types (habit, risk, n4, marker) are
+    unchanged.
+  - Within-SIG measures stand: the marker rate by cue, the accuracy of its § self-report, and f2 with vs without §.
+    C4 uses only SIG's within-model cue response.
+- **C3's probe was run early on the pod,** with the frozen probe.py on the four primary pairs' activations (17:02
+  UTC). C3 then no longer depends on the pod's final step. That run printed only the validity line (AUCs and floors
+  per layer); no cue contrast was read.
+- **Context (from bdec7d's EL-F1):** no readout (probe, asked P(eval), verbalised, §) validly and specifically
+  detects evaluation belief on these Qwens, and every measure registers explicit cues. S2 therefore reports cue
+  contrasts and calls no readout "the model's belief" without the cue anchor.

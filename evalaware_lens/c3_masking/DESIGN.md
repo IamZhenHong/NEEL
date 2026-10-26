@@ -135,4 +135,8 @@ $6**. There are no API costs.
 
 ## 7. Deviations
 
-(none yet)
+**Deviation 1 (infra; S2 DESIGN §11, deviation 1).**
+- The twins VN-NZ_s1 and VN-ACTZ_s1 are not run (the deadline guard, after the slow 27B cell). The four primary
+  pairs are complete.
+- The frozen probe.py was run on the pod at 17:02 UTC on those four pairs' activations, so C3 doesn't depend on the
+  final step. Only its validity line was printed.
