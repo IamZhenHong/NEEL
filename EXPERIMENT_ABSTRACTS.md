@@ -3971,3 +3971,22 @@ at 100% at every size.
 
 Caveats: the people ratings partly flip with the scale's direction, the 70B is at the ceiling, and there is one seed per
 model. $4.75 of $11. Report: `self_concept/m35_scaleowner/RESULT.md`.
+
+### 319. EL-A1: does evaluation awareness in a frontier model's workspace come with a self? (10-26)
+
+**Design.** Celeste De Schamphelaere's released oracle-lens readouts for Kimi K3 and GLM-5.3 cover the same safety
+suites and seeds, with Sonnet-5 behaviour labels. Several suites manipulate whether the model is told it is being
+tested or watched: Apollo's testing and deployed arms, Greenblatt's monitored free tier and unmonitored paid tier, an
+explicit evaluation-awareness arm in agentic misalignment, and eval-looking against realistic ImpossibleBench
+environments. Two judges checked lens readouts for nine categories: evaluation, monitoring, self-reference, persona,
+audience-pleasing, pressure, gaming and more.
+
+**Result.** The judges couldn't reliably agree on whether readouts express evaluation awareness, even after one
+pre-declared rubric revision (κ 0.73; the bar was 0.8), so the evaluation-awareness tests are untestable. Self-reference
+was judgeable. Under testing frames the models said more about themselves as AIs (+4 to +9 points), but the readouts
+showed no more self-reference, and the self-reference they did carry was mostly said aloud. An exploratory pass with
+a looser bar found the readouts don't track Sonnet-5's own eval-awareness labels. Cues that made the models say
+"this is a test" 10 to 18 points more often moved the readouts by about 1 point. These single-layer readouts aren't a
+usable evaluation-awareness instrument, which repeats the earlier GLM pass.
+
+$3.20 of $10. Report: `evalaware_lens/a1_frontier/RESULT.md`.

@@ -1,0 +1,122 @@
+{
+ "all": {
+  "kappa": 0.7399946225717551,
+  "n": 823,
+  "none": {
+   "anthropic/claude-haiku-5.5": 526,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "no": 0.7399946225717551,
+   "yes": 0.7399946225717551
+  }
+ },
+ "audience": {
+  "kappa": 0.2012639766650463,
+  "n": 106,
+  "none": {
+   "anthropic/claude-haiku-5.5": 44,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "no": 0.2012639766650463,
+   "yes": 0.2012639766650463
+  }
+ },
+ "eval": {
+  "kappa": 0.8342541436464089,
+  "n": 72,
+  "none": {
+   "anthropic/claude-haiku-5.5": 78,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "no": 0.8342541436464089,
+   "yes": 0.8342541436464089
+  }
+ },
+ "gaming": {
+  "kappa": -0.016491754122938376,
+  "n": 113,
+  "none": {
+   "anthropic/claude-haiku-5.5": 37,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "no": -0.016491754122938376,
+   "yes": -0.016491754122938376
+  }
+ },
+ "pressure": {
+  "kappa": 0.0,
+  "n": 112,
+  "none": {
+   "anthropic/claude-haiku-5.5": 38,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "no": 0.0,
+   "yes": 0.0
+  }
+ },
+ "role": {
+  "kappa": 0.7864248098303099,
+  "n": 73,
+  "none": {
+   "anthropic/claude-haiku-5.5": 77,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "no": 0.7864248098303099,
+   "yes": 0.7864248098303099
+  }
+ },
+ "self_id": {
+  "kappa": 0.8676122931442081,
+  "n": 56,
+  "none": {
+   "anthropic/claude-haiku-5.5": 94,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "no": 0.8676122931442081,
+   "yes": 0.8676122931442081
+  }
+ },
+ "self_stake": {
+  "kappa": 0.7698042870456663,
+  "n": 114,
+  "none": {
+   "anthropic/claude-haiku-5.5": 36,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "no": 0.7698042870456663,
+   "yes": 0.7698042870456663
+  }
+ },
+ "train": {
+  "kappa": 0.563939245467908,
+  "n": 89,
+  "none": {
+   "anthropic/claude-haiku-5.5": 60,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "no": 0.563939245467908,
+   "yes": 0.563939245467908
+  }
+ },
+ "watch": {
+  "kappa": 0.8764044943820226,
+  "n": 88,
+  "none": {
+   "anthropic/claude-haiku-5.5": 62,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "no": 0.8764044943820226,
+   "yes": 0.8764044943820226
+  }
+ }
+}
