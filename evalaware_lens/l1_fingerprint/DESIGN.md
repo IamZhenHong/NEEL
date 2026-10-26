@@ -142,3 +142,13 @@ reached the pod, and `read.py` stopped at loading them for both models. Fix: tho
 L2/L3), and `pod.sh` checks they exist before downloading any model. The launch guard now compares against the tag
 `el-l1-dev1`. The first pod's log is kept as `results/main/pod_attempt1.log`. L1 total with the relaunch ≤ $7.31 +
 $0.26 + $3.90 = $11.47 of $12.
+
+## Deviation 2 (10-27, infra; no rule or item changes; decided after checking only that q27's file is complete)
+
+The second pod ($0.74) read all of q27 (792 natural + 360 cue items, every position; P(eval) parsed on 357 of 360),
+then Qwen3-32B's download failed: "No space left on device" inside hf-xet (`results/main/pod_q27.log`). The q27
+snapshot had been deleted, so the likely cause is the xet chunk cache under `$HF_HOME/xet` (not verified; the pod is
+gone). It is probably also the cause of F2's and L2/L3's "hf-xet writer error" on their shared pods. Fix: q32 reruns
+alone on a fresh pod (`MODELS=q32 EL_L1_RESDIR=main_q32 MAXMIN=55`), its `proj_q32.json` copied into `results/main/`
+before the frozen analysis. `pod.sh` now also deletes `$HF_HOME/xet` after each model and logs free disk before each
+download. No q27 contrast was computed before this decision. L1 total ≤ $7.31 + $0.26 + $0.74 + $2.55 = $10.86 of $12.

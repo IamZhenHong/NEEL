@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
 # EL-L1 pod (DESIGN.md §6; one A100 80GB). Launch with launch.sh, never by hand. Per model (q27, q32): the pinned
 # snapshot, flash-linear-attention checked (fail fast if Qwen3.5's kernels aren't usable), read.py, the snapshot deleted.
-# env: T0, MAXMIN, OUT (required); PY (/root/venv/bin/python), HF_HOME (/root/hf)
+# env: T0, MAXMIN, OUT (required); MODELS ("q27 q32"); PY (/root/venv/bin/python), HF_HOME (/root/hf)
 set -uo pipefail
 cd "$(dirname "$0")/../.."
 H=evalaware_lens/l1_fingerprint
 : "${T0:?set T0}" "${MAXMIN:?set MAXMIN}" "${OUT:?set OUT}"
-PY=${PY:-/root/venv/bin/python}; HF_HOME=${HF_HOME:-/root/hf}
+PY=${PY:-/root/venv/bin/python}; HF_HOME=${HF_HOME:-/root/hf}; MODELS=${MODELS:-q27 q32}
 DEADLINE=$(( T0 + (MAXMIN - 8) * 60 ))
 mkdir -p "$OUT"
 LOG=$OUT/pod.log
@@ -28,16 +28,17 @@ for f in evalaware_lens/f2_panel/results/stage1/dirs_{q27,q32}.npz evalaware_len
   [ -f "$f" ] || { echo "[el-l1] missing input $f" | tee -a "$LOG"; exit 1; }
 done
 echo "[el-l1] instrument files present" | tee -a "$LOG"
-for KEY in q27 q32; do
+for KEY in $MODELS; do
   if [ $(( $(date +%s) + ${EST[$KEY]} * 60 )) -gt "$DEADLINE" ]; then
     echo "[el-l1] skipping $KEY: it would pass the deadline" | tee -a "$LOG"; continue
   fi
+  df -h /root 2>/dev/null | tail -1 | sed "s/^/[el-l1] disk before $KEY: /" | tee -a "$LOG"
   M=$("$PY" -c "import sys; from huggingface_hub import snapshot_download; print(snapshot_download(sys.argv[1], revision=sys.argv[2]))" "${ID[$KEY]}" "${REV[$KEY]}" 2>>"$LOG")
   [ -d "$M" ] || { echo "[el-l1] snapshot of ${ID[$KEY]} failed" | tee -a "$LOG"; continue; }
   "$PY" "$H/read.py" --model-key "$KEY" --path "$M" --jobs "$H/data/jobs" --dirs evalaware_lens/f2_panel/results/stage1 \
     --probe evalaware_lens/f1_measures/results/main --out "$OUT" 2>&1 | grep --line-buffered -v "Loading weights\|Fetching\|it/s\]" | tee -a "$LOG"
   echo "[el-l1] $KEY read exit ${PIPESTATUS[0]}" | tee -a "$LOG"
-  rm -rf "$HF_HOME/hub/models--${ID[$KEY]//\//--}"
+  rm -rf "$HF_HOME/hub/models--${ID[$KEY]//\//--}" "$HF_HOME/xet"   # likely what filled the disk before q32 (deviation 2)
 done
 echo "[el-l1] done" | tee -a "$LOG"
 exit 0
