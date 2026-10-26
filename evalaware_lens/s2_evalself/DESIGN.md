@@ -344,3 +344,32 @@ are not run.**
 - **Context (from bdec7d's EL-F1):** no readout (probe, asked P(eval), verbalised, §) validly and specifically
   detects evaluation belief on these Qwens, and every measure registers explicit cues. S2 therefore reports cue
   contrasts and calls no readout "the model's belief" without the cue anchor.
+
+**Deviation 2 (infra; decided 2026-10-26 ~17:20 UTC; OK'd by bdec7d, no cap change). A pod that only finishes the §
+organism's cell.**
+- **Cause:** the launcher's stall guard ("job log silent for 30 min and no exit marker") stopped the main pod at
+  about 17:04 UTC. evalrun printed nothing between its 4,000-read chunks, and at the 27B rate (~6 reads / s) a chunk
+  takes about 11 min. With nothing else logged after the sampled replies finished, the log stayed silent for 30 min.
+  - The launcher pulled the results (verified), terminated the pod and booked $5.613 (S2 $3.09, C3 $2.52).
+  - Complete: Q9, VN, VN-ACT_s1, VN-NW_s1, Q9-RISKY_s1, Q9-SAFE_s1 (every read and sampled reply, plus activations),
+    C3's early probe, and SIG's 2,070 sampled replies.
+  - SIG's forced file stopped at 12,226 of 25,050 rows: act_f; eval and deploy at all 3 wordings; manip wording 0;
+    408 rows of manip wording 1. ai_mention, neutral and f2 are missing.
+- **What was seen before this note:** only row counts, per cell and per (cue, wording) for SIG, and C3's probe
+  validity line (deviation 1). No contrast, level or label of any cell was read.
+- **The only code change:**
+  - evalrun prints a progress line after every forced-read chunk and every sampled chunk;
+  - the chunk size drops from 4,000 to 2,000 rows (lines every ~6 min on 27B);
+  - a resume check (`--expect-missing 12824 0`, plus the same check in pod.sh before the download) exits unless the
+    shipped files hold only frozen keys, all 2,070 sampled rows, and exactly 12,824 missing forced rows.
+
+  Read logic, prompts, cues, f2's rule and the analysis are unchanged. A chunk boundary changes no read, since every
+  read is a deterministic top-20 log-prob.
+- **The pod:** `EL_POD=sig bash launch_dev2.sh`. The tagged launch.sh is untouched; launch_dev2.sh is a copy plus the
+  sig mode.
+  - It ships results/sig/{eval,forced}_SIG.jsonl (copies of the main pod's) and excludes the pulled adapters.
+  - It downloads mo-uea and runs SIG's cell with `--f2 own`, so evalrun reads only the missing rows and then f2.
+  - MAXMIN 110, bound $4.20, booked 55 / 45 (the frozen rule).
+  - Worst case: S2 $3.76 + $2.31 + judges $1.6 = **$7.67 of $8**; C3 $3.05 + $1.89 = **$4.94 of $6**.
+- **Afterwards,** results/sig's two SIG files (supersets of the main pod's) replace results/main's for the analysis.
+

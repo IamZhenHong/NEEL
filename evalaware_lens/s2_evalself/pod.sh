@@ -10,7 +10,8 @@
 #   probe     C3's probe over every dumped pair (activations stay here)
 #   deadline  before each step, stop if it could not finish by T0 + MAXMIN - 8 min; adapter weights and activations
 #             are deleted on the way out (configs, manifests, logs, reads, projections stay)
-# env: T0, MAXMIN, OUT, JOBS_SHA, MERGED (/root/merged), PY / VPY, SKIP_SETUP
+#   sig       (SIGONLY=1, deviation 2) only the § organism's cell, resumed from the main pod's eval_ / forced_SIG.jsonl
+# env: T0, MAXMIN, OUT, JOBS_SHA, MERGED (/root/merged), PY / VPY, SKIP_SETUP, SMOKE, SIGONLY
 set -uo pipefail
 cd "$(dirname "$0")/../.."
 H=evalaware_lens/s2_evalself; C3=evalaware_lens/c3_masking
@@ -43,6 +44,7 @@ late() {   # late WHAT MINUTES: stop cleanly if it could not finish by the deadl
   fi
 }
 for a in VN_s1 NW_s1 NZ_s1; do
+  [ -n "${SIGONLY:-}" ] && break
   for f in adapter_model.safetensors adapter_config.json; do
     [ -s "$AD_IN/$a/$f" ] || { echo "[s2] needs $AD_IN/$a/$f (launch.sh syncs it)" | tee -a "$LOG"; exit 2; }
   done
@@ -57,6 +59,24 @@ echo "[s2] jobs_sha ok $SHA" | tee -a "$LOG"
 snap() {   # snap REPO REV DIR: safetensors + configs to a local dir
   "$PY" -c "import sys; from huggingface_hub import snapshot_download; print(snapshot_download(sys.argv[1], revision=sys.argv[2], local_dir=sys.argv[3], allow_patterns=['*.json', '*.safetensors', '*.txt', '*.jinja', '*.model']))" "$1" "$2" "$3"
 }
+if [ -n "${SIGONLY:-}" ]; then   # deviation 2: finish the § organism's cell; evalrun resumes from the shipped files
+  for f in eval_SIG.jsonl forced_SIG.jsonl; do
+    [ -s "$OUT/$f" ] || { echo "[s2] needs $OUT/$f (launch.sh syncs it)" | tee -a "$LOG"; exit 2; }
+  done
+  run "resume check" env EL_FAKE_GEN=0 "$PY" -c "
+import sys; from evalaware_lens.s2_evalself import evalrun as R, items as I
+from pathlib import Path
+es = [e for e in I.build() if e['block'] in R.BLOCKS['27b']]
+fd, ed = R.done_keys(Path('$OUT/forced_SIG.jsonl')), R.done_keys(Path('$OUT/eval_SIG.jsonl'))
+wf = {e['key'] for e in es if e['block'] in R.FORCED}; ws = {e['key'] for e in es if e['block'] not in R.FORCED}
+ok = fd <= wf and ed == ws and len(wf - fd) == 12824
+print(f'[s2] resume check: {len(fd)} forced shipped, {len(wf - fd)} missing, sampled complete {ed == ws}, ok {ok}')
+sys.exit(0 if ok else 2)"
+  run "download SIG" snap "$SIG_REPO" "$SIG_REV" /root/hf/SIG
+  run "eval SIG" "$VPY" -m evalaware_lens.s2_evalself.evalrun --model /root/hf/SIG --cell SIG --family 27b --f2 own \
+    --expect-missing 12824 0 --out "$OUT"
+  echo "[s2] sig done" | tee -a "$LOG"; exit 0
+fi
 Q9=$("$PY" -c "from huggingface_hub import snapshot_download; print(snapshot_download('Qwen/Qwen3.5-9B', revision='$Q9_REV'))" | tail -1)
 [ -s "$Q9/config.json" ] || { echo "[s2] Q9 snapshot failed" | tee -a "$LOG"; exit 1; }
 VN=$MERGED/VN

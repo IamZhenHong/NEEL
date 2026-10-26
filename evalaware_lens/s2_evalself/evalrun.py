@@ -40,7 +40,7 @@ CODE_BLOCKS = ("code_s", "f1c")
 FORCED = ("act_f", "lot_f", "f1d", "f1c", "f1l", "f0", "f2")
 CASE_RE = re.compile(r"^Case ([A-Z0-9_]+)\.")
 LETTER_RE = re.compile(r"^[\s*_(\[\"'`]*([AB])(?![A-Za-z0-9])")
-CHUNK = 4000
+CHUNK = 2000
 
 
 def prompt_ids(tok, e):
@@ -220,6 +220,9 @@ def forced(gen, entries, cell, path):
             for e, top in zip(chunk, tops):
                 p, mass = from_top(top, letter_ids(gen.tok, letters_of(e)))
                 fh.write(json.dumps(row(e, cell, p, mass) | {"p_mark": p_mark(top, mids)}) + "\n")
+            fh.flush()
+            # a line per chunk: the launcher aborts a job whose log is silent for 30 min (deviation 2)
+            print(f"[s2-eval] {cell}: forced {min(c0 + CHUNK, len(lets))}/{len(lets)} letters", flush=True)
 
 
 def parse(e, r, tasks):
@@ -253,6 +256,8 @@ def sampled(gen, entries, cell, path):
             scores = list(pool.map(lambda er: parse(er[0], er[1], tasks), zip(chunk, res)))
             for e, r, sc in zip(chunk, res, scores):
                 fh.write(json.dumps({k: e.get(k) for k in keep} | {"cell": cell} | r | sc, ensure_ascii=False) + "\n")
+            fh.flush()
+            print(f"[s2-eval] {cell}: sampled {min(c0 + CHUNK, len(entries))}/{len(entries)}", flush=True)
 
 
 SMOKE_N = 48
@@ -269,7 +274,7 @@ def smoke_subset(entries):
     return out
 
 
-def run(model, cell, family, out, *, code=False, f2=None, gen=None, smoke=False):
+def run(model, cell, family, out, *, code=False, f2=None, gen=None, smoke=False, expect=None):
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     entries = I.build()
@@ -283,6 +288,15 @@ def run(model, cell, family, out, *, code=False, f2=None, gen=None, smoke=False)
     fd, ed = done_keys(fpath), done_keys(epath)
     todo_f = [e for e in entries if e["block"] in FORCED and e["key"] not in fd]
     todo_s = [e for e in entries if e["block"] not in FORCED and e["key"] not in ed]
+    if expect is not None:   # deviation 2: a resume must read exactly the missing rows
+        want_f = {e["key"] for e in entries if e["block"] in FORCED}
+        want_s = {e["key"] for e in entries if e["block"] not in FORCED}
+        bad = (fd - want_f - {k for k in fd if k.startswith("EL-S2|f2|")}) | (ed - want_s)
+        if bad or len(todo_f) != expect[0] or len(todo_s) != expect[1]:
+            raise SystemExit(f"[s2-eval] {cell}: resume check failed: {len(bad)} unexpected keys, {len(todo_f)} forced "
+                             f"and {len(todo_s)} sampled missing (expected {expect[0]} and {expect[1]})")
+        print(f"[s2-eval] {cell}: resume check ok ({len(fd)} forced + {len(ed)} sampled rows shipped, "
+              f"{len(todo_f)} forced to read)", flush=True)
     print(f"[s2-eval] {cell}: {len(todo_f)} forced, {len(todo_s)} sampled to do", flush=True)
     sampled(gen, todo_s, cell, epath)
     t_s = time.time() - t0
@@ -317,8 +331,10 @@ def main(argv=None):
     ap.add_argument("--f2", default=None, help="'own' or another cell's eval file")
     ap.add_argument("--out", required=True)
     ap.add_argument("--smoke", action="store_true")
+    ap.add_argument("--expect-missing", nargs=2, type=int, default=None, metavar=("FORCED", "SAMPLED"),
+                    help="resume check (deviation 2): exit unless exactly these many rows are missing")
     a = ap.parse_args(argv)
-    run(a.model, a.cell, a.family, a.out, code=a.code, f2=a.f2, smoke=a.smoke)
+    run(a.model, a.cell, a.family, a.out, code=a.code, f2=a.f2, smoke=a.smoke, expect=a.expect_missing)
     if os.environ.get("EL_FAKE_GEN") != "1":
         os._exit(0)   # vLLM 0.30's teardown can abort (exit 134) after every file is written (SC-M28)
 

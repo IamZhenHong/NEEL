@@ -140,3 +140,8 @@ $6**. There are no API costs.
   pairs are complete.
 - The frozen probe.py was run on the pod at 17:02 UTC on those four pairs' activations, so C3 doesn't depend on the
   final step. Only its validity line was printed.
+
+**Deviation 2 (infra; S2 DESIGN §11, deviation 2).** A pod that only finishes S2's § organism cell. Under the frozen
+55 / 45 rule C3 is booked 45% of it, though it reads nothing for C3. Worst case **$4.94 of $6**. Nothing in C3
+changes.
+
