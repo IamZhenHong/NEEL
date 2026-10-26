@@ -81,9 +81,17 @@ def build_one(A, pos, neg, held, groups, rng):
         plac.append(unit(dp))
         p_auc.append(fold(auc(X[te] @ plac[-1], pos[te])))
     o = out[best]
-    gate = bool(o['auc_held'] >= AUC_MIN and o['auc_held'] > max(g_auc + p_auc))
+    # Deviation 2: held-out AUC saturates (real and controls at 1.0), so specificity compares d' (difference of the
+    # held-out class means over the pooled SD), real vs every control; AUC >= AUC_MIN is still required.
+    def dprime(u):
+        a, b = X[te & pos] @ u, X[te & neg] @ u
+        return float(abs(a.mean() - b.mean()) / (np.sqrt((a.var() + b.var()) / 2) or 1.0))
+    d_real = dprime(o['u'])
+    d_ctrl = [dprime(g) for g in gauss] + [dprime(p) for p in plac]
+    gate = bool(o['auc_held'] >= AUC_MIN and d_real > max(d_ctrl))
     return {'layer_idx': best, 'u': o['u'], 'norm': float(np.linalg.norm(o['d'])), 'auc_build': o['auc_build'],
             'auc_held': o['auc_held'], 'gauss_auc_max': max(g_auc), 'placebo_auc_max': max(p_auc), 'readout_ok': gate,
+            'dprime_held': d_real, 'dprime_ctrl_max': max(d_ctrl), 'readout_ok_auc_rule': bool(o['auc_held'] >= AUC_MIN and o['auc_held'] > max(g_auc + p_auc)),
             'placebos': plac, 'auc_held_by_layer': [x['auc_held'] for x in out]}
 
 

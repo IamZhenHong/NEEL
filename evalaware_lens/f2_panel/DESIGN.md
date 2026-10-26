@@ -149,3 +149,22 @@ Changes:
 
 The q32 stage 1 reruns alone into `results/stage1_q32/`, with the same code, jobs and rules. dirs.py reads each
 model's files wherever they landed: they are copied into `results/stage1/` before dirs.py runs.
+
+**Deviation 2 (measurement, 2026-10-26, after the frozen readout gate was run on q9 and q27, before any stage-2
+run).**
+
+What happened under the frozen rule (held-out AUC ≥ 0.75 and above every control's held-out AUC):
+- The rule was uninformative because the AUC saturates. Every direction separated its held-out classes perfectly
+  (AUC 1.0).
+- So did same-norm Gaussian directions (0.90–1.00) and the shuffled placebos (0.85–1.00). These text classes
+  (affect vs neutral passages, French vs English, eliciting vs suppressing replies) differ along nearly every
+  direction.
+- "Strictly above" can't be met at 1.0 = 1.0. Even the French positive control failed on q9 (placebo 1.0).
+
+The change:
+- Specificity now compares the held-out d′ (difference of the class means over the pooled SD) of the direction
+  against every control's; AUC ≥ 0.75 is still required.
+- The frozen AUC-rule result is kept and reported alongside (`readout_ok_auc_rule`).
+- The mention control, the valence-channel check and the steering gate are unchanged.
+
+The valence-channel check failed for both models under the frozen rule, and that result stands.
