@@ -207,3 +207,39 @@ cluster bootstrap (descriptive).
 - `analyze.py` (frozen) → `results/analysis.json`, `results/summary.md`.
 - Tests: `evalaware_lens/tests/test_a1.py` (planted worlds for every headline, the gates and the baselines).
 - Downloaded data: `data/` (gitignored, about 0.84 GB).
+
+## Deviations after the freeze
+
+**Deviation 1 (measurement, 2026-10-26, before any outcome contrast was computed).** The concept judges (10,826
+items, $1.54) agreed below the frozen κ ≥ 0.8 in every category:
+
+| category | κ | yes rate, Haiku / gpt-5-mini |
+|---|---|---|
+| training | 0.33 | 62% / 89% |
+| audience | 0.40 | |
+| gaming | 0.40 | |
+| role | 0.44 | |
+| evaluation | 0.44 | 40% / 66% |
+| pressure | 0.49 | |
+| self-reference | 0.54 | |
+| monitoring | 0.59 | |
+| self-stakes | 0.66 | |
+
+gpt-5-mini says yes far more often than Haiku. The disagreements are genuine edge cases:
+- naming its own task "the benchmark task";
+- "my values" without "AI";
+- the agent itself monitoring an inbox, rather than being watched.
+
+So the frozen rule would make every category lexicon-only and A1 untestable.
+
+One rubric revision, the same stop rule as F1's design:
+- **rubric v2:** each category definition gets explicit decision rules for those edge cases;
+- **counting:** each judge counts how many of the five guesses express the category (0–5), and ≥ 3 counts as yes,
+  matching the hit rule;
+- **calibration:** a fresh random sample of up to 150 items per category (rng 1), judged by the same two judges.
+
+Rules for the result:
+- A category whose calibration κ is ≥ 0.8 is re-judged on all its items with v2, and those labels replace v1's.
+- A category below 0.8 stays lexicon-only, as frozen.
+- There is no second revision.
+- The analysis, gates and everything else are unchanged. The v1 labels are kept (`labels_concept_v1.json`).

@@ -25,7 +25,15 @@ def main(which):
     LG.check_both(MINI, CAP, planned=est, kind='api')
     left = min(CAP - LG.ledger_total(MINI), LG.PROGRAMME_CAP - LG.programme_total())
     print(f'{which}: {len(items)} items, ${left:.2f} left')
-    lab = J.label(items, lambda it: it['prompt'], {'yes', 'no'}, mini=MINI, cap=left, cache=R / 'judge_cache.jsonl')
+    counts = which in ('calib2', 'concept2')   # Deviation 1: answers are counts 0-5; >= 3 is yes
+    allowed = {str(i) for i in range(6)} if counts else {'yes', 'no'}
+    lab = J.label(items, lambda it: it['prompt'], allowed, mini=MINI, cap=left, cache=R / 'judge_cache.jsonl')
+    if counts:
+        (R / f'counts_{which}.json').write_text(json.dumps(lab, indent=1) + '\n')
+        spent = lab.spent
+        lab = {k: {j: (None if v is None else ('yes' if int(v) >= 3 else 'no')) for j, v in row.items()} for k, row in lab.items()}
+        lab = J.Labels(lab)
+        lab.spent = spent
     (R / f'labels_{which}.json').write_text(json.dumps(lab, indent=1) + '\n')
     agr = {'all': J.agreement(lab)}
     by = defaultdict(dict)
