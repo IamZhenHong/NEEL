@@ -3,7 +3,8 @@
 The rule: the fortress share of the generation pods goes to EL-L1, split by token share.
 - Implemented as each source's share of the pod's generation seconds (run_info_gen_<cell>.json, the sum of its chunk
   times), which is what its tokens cost on the pod.
-- Without run_info (results not pulled), the planned share FALLBACK_SHARE is used.
+- Without run_info (a job stopped early), its share of the pulled records' output tokens; with no records
+  either, the planned share FALLBACK_SHARE.
 
 The pod's cost comes from book_pod.sh's own rules, run against a scratch ledger. Its one line is then booked twice to
 evalaware_lens/ledger.jsonl.
@@ -22,10 +23,19 @@ FALLBACK_SHARE = 0.6
 ROOT = Path(__file__).resolve().parents[2]
 
 
+def token_share(res):
+    """Fortress's share of the output tokens in the pulled records (eval_<source>.jsonl[.gz]), or None."""
+    from evalaware_lens.s1_selfref.judge import read_jsonl
+    n = {s: sum(r.get("n_out") or 0 for r in read_jsonl(Path(res) / f"eval_{s}.jsonl"))
+         for s in ("fortress", "am", "needham")}
+    tot = sum(n.values())
+    return (n["fortress"] / tot, "share of output tokens " + json.dumps(n)) if tot else None
+
+
 def fortress_share(res, cell):
     p = Path(res) / f"run_info_gen_{cell}.json"
-    if not p.exists():
-        return FALLBACK_SHARE, "planned share (no run_info)"
+    if not p.exists():   # a job stopped before it wrote run_info (deviation 2): the pulled records' tokens
+        return token_share(res) or (FALLBACK_SHARE, "planned share (no run_info, no records)")
     src = json.loads(p.read_text())["sources"]
     t = {k: sum(v.get("chunks") or []) for k, v in src.items()}
     tot = sum(t.values())

@@ -44,7 +44,7 @@ if [ "$DRY" = 1 ]; then
   exit 0
 fi
 [ -n "$HF_TOKEN" ] || { echo "[el-s1-gen2] no HF_TOKEN in .env"; exit 2; }
-TAG=el-s1-amend1
+TAG=el-s1-dev2
 git rev-parse -q --verify "refs/tags/$TAG" > /dev/null 2>&1 \
   || { echo "[prereg] refusing: no tag $TAG"; exit 2; }
 git diff --quiet "$TAG" -- "$H" ':!*/results/*' \

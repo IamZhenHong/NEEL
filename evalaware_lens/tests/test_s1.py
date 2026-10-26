@@ -261,7 +261,7 @@ def test_book_split_share(tmp_path):
 
 
 @pytest.mark.parametrize("stage,cell,gpus,maxcost", [("gen", "Q27", "1", "3.60"), ("gen", "Q32", "2", "6.60"),
-                                                     ("cont", "Q32", "2", "3.60")])
+                                                     ("cont", "Q32", "2", "4.50"), ("cont", "Q27", "2", "6.00")])
 def test_launch_dry(stage, cell, gpus, maxcost):
     env = {**os.environ, "EL_S1_LAUNCH_DRY": "1", "STAGE": stage, "CELL": cell}
     out = subprocess.run(["bash", str(H / "launch.sh")], cwd=ROOT, env=env, capture_output=True, text=True,

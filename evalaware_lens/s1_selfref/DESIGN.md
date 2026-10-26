@@ -298,3 +298,24 @@ deviation 1's costs, plus $3.5 for this arm, **$21.5 in all**.
 
 **Coding:** the same judges and rubric. `fortress_para` traces are judged by rerunning `judge main` after the edit-test
 pods; its cache means only the new traces are paid for. The headlines are unchanged.
+
+**Deviation 2 (infra, 10-26 ~15:05 UTC, before any trace was judged or read).** Q27's first pod slowed further: its
+second chunk of 400 took 1,786 s. Its fourth chunk could not finish before the pod's 120-minute cap, so its cost would
+have been wasted.
+
+**Fix:**
+- After chunk 3's records were written (the "1200/2000" log line), its generation process was stopped by hand (SIGTERM
+  over ssh). pod.sh then gzipped the records and the launcher pulled them as usual.
+- The remaining 800 Fortress jobs, plus AM and Needham, run on deviation 1's second pod. `launch_gen2.sh` checks
+  `el-s1-dev2`. MAXMIN is 120 for this pod, set at launch (max-cost $7.20).
+- `book_split.py`: a job stopped before writing run_info is split by its pulled records' output tokens (the first Q27
+  pod ran Fortress only, so share 1.0 → EL-L1), rather than by the planned 0.6.
+
+**`launch.sh`,** edited only after its runs had exited:
+- the cont stage (amendment 1's `fortress_para`, then the edit test) runs on 2 × A100 for both cells, MAXMIN Q27 100 /
+  Q32 75;
+- cont ships `data/jobs` (`fortress_para`);
+- EL-S1's cap check is $21.5;
+- the tag check is `el-s1-dev2`.
+
+Jobs, seeds, rules, judges and analysis are unchanged.

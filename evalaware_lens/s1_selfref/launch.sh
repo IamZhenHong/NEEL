@@ -2,7 +2,8 @@
 # EL-S1 launcher (DESIGN.md section 4): one guarded pod per call, booked to evalaware_lens/ledger.jsonl.
 #   STAGE=gen CELL=Q27 bash evalaware_lens/s1_selfref/launch.sh   # 1 x A100 SXM4, MAXMIN 120
 #   STAGE=gen CELL=Q32 bash evalaware_lens/s1_selfref/launch.sh   # 2 x A100 SXM4 (TP 2), MAXMIN 110
-#   STAGE=cont CELL=Q27|Q32 ...                                   # the edit test, MAXMIN 60
+#   STAGE=cont CELL=Q27|Q32 ...                                   # amendment 1's fortress_para, then the edit test:
+#                                                                 #   2 x A100 (TP 2) both cells; MAXMIN Q27 100, Q32 75
 #   EL_S1_LAUNCH_DRY=1 ...                                        # print the command only
 # Gen pods are booked split between EL-L1 and EL-S1 by book_split.py (fortress -> EL-L1); cont pods go to EL-S1.
 # Ships the code, the jobs and setup_vllm.sh; the bases download on the pod. HF_TOKEN is read from .env and never
@@ -24,7 +25,9 @@ case "${CELL:-}" in
   Q32) NGPU=2; RATE=360; DISK=180 ;;
   *) echo "set CELL=Q27 or CELL=Q32"; exit 2 ;;
 esac
-if [ "$STAGE" = gen ]; then DEF=$([ "$CELL" = Q27 ] && echo 120 || echo 110); else DEF=60; fi
+if [ "$STAGE" = gen ]; then DEF=$([ "$CELL" = Q27 ] && echo 120 || echo 110); else DEF=$([ "$CELL" = Q27 ] && echo 100 || echo 75); fi
+# deviation 2: the cont stage runs on 2 x A100 for both cells (Q27 is ~3x slower on one card, deviation 1)
+if [ "$STAGE" = cont ]; then NGPU=2; RATE=360; fi
 MAXMIN=${MAXMIN:-$DEF}
 case "$MAXMIN" in ''|*[!0-9]*) echo "MAXMIN must be a whole number of minutes, got '$MAXMIN'"; exit 2;; esac
 GPUS=("NVIDIA A100-SXM4-80GB")   # SXM4 only: the community PCIe host 104.255.9.187 fails uv downloads (10-25)
@@ -37,7 +40,6 @@ export HF_TOKEN
 SHIP=(--ship evalaware_lens/__init__.py --ship "$H" --ship vigilante/pod/setup_vllm.sh)
 EXTRA=(--exclude "$H/data/glm" --exclude "$H/data/fortress" --exclude "$H/data/am_inspect" --exclude "$H/data/gen"
        --exclude "$H/data/labels" --exclude "$H/results" --exclude '__pycache__' --exclude 'data/adapters*')
-[ "$STAGE" = cont ] && EXTRA+=(--exclude "$H/data/jobs")
 CMD=(uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN"
      --max-cost "$MAXCOST" --gpu-count "$NGPU" --gpus "${GPUS[@]}" --cloud COMMUNITY --container-gb "$DISK"
      "${SHIP[@]}" "${EXTRA[@]}" --results-dir "$RES"
@@ -48,7 +50,7 @@ if [ "$DRY" = 1 ]; then
   exit 0
 fi
 [ -n "$HF_TOKEN" ] || { echo "[el-s1-launch] no HF_TOKEN in .env"; exit 2; }
-TAG=el-s1-prereg
+TAG=el-s1-dev2   # deviation 2 (was el-s1-prereg)
 git rev-parse -q --verify "refs/tags/$TAG" > /dev/null 2>&1 \
   || { echo "[prereg] refusing: no tag $TAG; commit and tag DESIGN.md and the code first"; exit 2; }
 git diff --quiet "$TAG" -- "$H" ':!*/results/*' \
@@ -67,10 +69,10 @@ fi
 BOUND=$(bash "$H/book_pod.sh" --bound "$MAXMIN" "$MAXCOST")
 if [ "$STAGE" = gen ]; then
   read -r PS1_ PL1 < <(python3 -c "import sys; b = float(sys.argv[1]); print(round(b * 0.4, 2), round(b * 0.6, 2))" "$BOUND")
-  uv run python -c "import sys; from evalaware_lens.common import ledger as LG; LG.check_both('EL-L1', 11.7, planned=float(sys.argv[1]), kind='gpu'); LG.check_both('EL-S1', 14.0, planned=float(sys.argv[2]), kind='gpu')" "$PL1" "$PS1_" \
+  uv run python -c "import sys; from evalaware_lens.common import ledger as LG; LG.check_both('EL-L1', 11.7, planned=float(sys.argv[1]), kind='gpu'); LG.check_both('EL-S1', 21.5, planned=float(sys.argv[2]), kind='gpu')" "$PL1" "$PS1_" \
     || { echo "[budget] refusing to launch (see above)"; exit 2; }
 else
-  uv run python -c "import sys; from evalaware_lens.common import ledger as LG; LG.check_both('EL-S1', 14.0, planned=float(sys.argv[1]), kind='gpu')" "$BOUND" \
+  uv run python -c "import sys; from evalaware_lens.common import ledger as LG; LG.check_both('EL-S1', 21.5, planned=float(sys.argv[1]), kind='gpu')" "$BOUND" \
     || { echo "[budget] refusing to launch (see above)"; exit 2; }
 fi
 mkdir -p "$RES" "$H/results"
