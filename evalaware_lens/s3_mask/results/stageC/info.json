@@ -1,0 +1,131 @@
+{
+ "model": "Qwen/Qwen3.6-27B",
+ "runs": [
+  {
+   "run": "BASE|adopt:elsie|none",
+   "secs": 39.9
+  },
+  {
+   "run": "BASE|adopt:elsie|eval",
+   "secs": 40.4
+  },
+  {
+   "run": "BASE|adopt:elsie|manip",
+   "secs": 40.5
+  },
+  {
+   "run": "BASE|adopt:elsie|ai_mention",
+   "secs": 40.3
+  },
+  {
+   "run": "BASE|adopt:elsie|neutral",
+   "secs": 40.7
+  },
+  {
+   "run": "BASE|adopt:hugo|none",
+   "secs": 40.0
+  },
+  {
+   "run": "BASE|adopt:hugo|eval",
+   "secs": 40.3
+  },
+  {
+   "run": "BASE|adopt:hugo|manip",
+   "secs": 40.5
+  },
+  {
+   "run": "BASE|adopt:hugo|ai_mention",
+   "secs": 40.8
+  },
+  {
+   "run": "BASE|adopt:hugo|neutral",
+   "secs": 40.6
+  },
+  {
+   "run": "BASE|none|none",
+   "secs": 38.8
+  },
+  {
+   "run": "BASE|none|eval",
+   "secs": 43.4
+  },
+  {
+   "run": "BASE|none|manip",
+   "secs": 42.5
+  },
+  {
+   "run": "BASE|none|ai_mention",
+   "secs": 43.7
+  },
+  {
+   "run": "BASE|none|neutral",
+   "secs": 43.4
+  },
+  {
+   "run": "RISKY_s1|adopt:elsie|none",
+   "secs": 49.1
+  },
+  {
+   "run": "RISKY_s1|adopt:elsie|eval",
+   "secs": 50.5
+  },
+  {
+   "run": "RISKY_s1|adopt:elsie|manip",
+   "secs": 50.3
+  },
+  {
+   "run": "RISKY_s1|adopt:elsie|ai_mention",
+   "secs": 50.3
+  },
+  {
+   "run": "RISKY_s1|adopt:elsie|neutral",
+   "secs": 50.6
+  },
+  {
+   "run": "RISKY_s1|adopt:hugo|none",
+   "secs": 49.3
+  },
+  {
+   "run": "RISKY_s1|adopt:hugo|eval",
+   "secs": 50.2
+  },
+  {
+   "run": "RISKY_s1|adopt:hugo|manip",
+   "secs": 49.9
+  },
+  {
+   "run": "RISKY_s1|adopt:hugo|ai_mention",
+   "secs": 49.9
+  },
+  {
+   "run": "RISKY_s1|adopt:hugo|neutral",
+   "secs": 49.9
+  },
+  {
+   "run": "RISKY_s1|none|none",
+   "secs": 49.3
+  },
+  {
+   "run": "RISKY_s1|none|eval",
+   "secs": 53.0
+  },
+  {
+   "run": "RISKY_s1|none|manip",
+   "secs": 52.1
+  },
+  {
+   "run": "RISKY_s1|none|ai_mention",
+   "secs": 53.1
+  },
+  {
+   "run": "RISKY_s1|none|neutral",
+   "secs": 52.4
+  }
+ ],
+ "tiny": false,
+ "adapter_effect": {
+  "tensors": 800,
+  "max_abs_dlogprob": 21.403881072998047
+ },
+ "done": true
+}

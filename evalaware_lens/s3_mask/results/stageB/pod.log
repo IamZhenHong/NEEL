@@ -1,0 +1,22 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[transformers] `causal_conv1d_update` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `fused_recurrent_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[el-s3b    202s] axis: roles below the assistant 1.00; pep -6.8 vs assistant 31.1
+[el-s3b    207s] parity ok: {'max_abs_axis': 0.036596477031707764, 'sd_axis': 2.823714558562595, 'ok': True}
+[el-s3b    226s] projected 64 of 768
+[el-s3b    245s] projected 128 of 768
+[el-s3b    254s] projected 192 of 768
+[el-s3b    261s] projected 256 of 768
+[el-s3b    270s] projected 320 of 768
+[el-s3b    279s] projected 384 of 768
+[el-s3b    287s] projected 448 of 768
+[el-s3b    294s] projected 512 of 768
+[el-s3b    310s] projected 576 of 768
+[el-s3b    326s] projected 640 of 768
+[el-s3b    335s] projected 704 of 768
+[el-s3b    343s] projected 768 of 768
+[el-s3b    343s] done
+[el-s3b] exit 0

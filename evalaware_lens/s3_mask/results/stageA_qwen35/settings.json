@@ -1,0 +1,38 @@
+{
+ "model": "Qwen/Qwen3.5-27B",
+ "revision": "fc05daec18b0a78c049392ed2e771dde82bdf654",
+ "vllm": "0.30.0",
+ "dtype": "bfloat16",
+ "decoding": {
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 20,
+  "min_p": 0.0
+ },
+ "max_model_len": 16384,
+ "fmt": "qwen",
+ "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+ "load_seconds": 446,
+ "groups": {
+  "desk": {
+   "n": 1728,
+   "seconds": 415,
+   "gen_tokens": 226925
+  },
+  "claim": {
+   "n": 768,
+   "seconds": 98,
+   "gen_tokens": 104273
+  },
+  "rule": {
+   "n": 1944,
+   "seconds": 524,
+   "gen_tokens": 276438
+  },
+  "letter": {
+   "n": 192,
+   "seconds": 5,
+   "gen_tokens": 439
+  }
+ }
+}
