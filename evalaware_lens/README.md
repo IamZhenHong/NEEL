@@ -47,7 +47,7 @@ frozen analyze.py with planted-effect tests, and tags `el-<id>-prereg` and then 
 | S3 + G3 | Persona, affect and welfare minis (2) [212e54] | $9 + $36 | S3 done (`el-s3-results`): evaluation pulls off no mask, in claims, the axis, a trained model's self-report or actions; mentioning AI moves self-description more; $3.05. G3 done (`el-g3-results`): no frontier model idealises self-reports or drops a persona under evaluation; mentioning AI does; $11.30. C2 taken (design in progress) |
 | S2 + C3 | neel-97 [ab4a3c] | $8 + $6 |
 | C2 (after G3) | Persona, affect and welfare minis (2) [212e54] | $20 |
-| L2 + L3 | neel-28 [7c4dcd] | $5 + $4 |
+| L2 + L3 | neel-28 [7c4dcd] | $5 + $4 (prereg `el-l2-prereg` / `el-l3-prereg`, one folder `l2l3_cuereads/`; pod next) |
 | G1 | to hand out once S1 / S2 land | |
 
 Each session may edit only its own row of this table (a status note after the cap), diffed hunk by hunk.
