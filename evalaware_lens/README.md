@@ -44,7 +44,7 @@ frozen analyze.py with planted-effect tests, and tags `el-<id>-prereg` and then 
 | A1, F1, F2, then L1, C1, C4 | bdec7d (coordinator) | per RUN_PLAN × 1.3 | A1 done (`el-a1-results`): judge gate failed for awareness; self readouts don't move with eval cues |
 | S1 (GLM pilot now; Qwen traces shared with L1), then G2 | neel-97 [6c3ec3] | $14 + $16 (the Fortress generation's share is booked to EL-L1) |
 | W2 (gate first) | neel-28 [7c4dcd] | $14 (prereg `el-w2-prereg`; gate pod running 10-26) |
-| S3 + G3 | Persona, affect and welfare minis (2) [212e54] | $9 + $36 | S3 done (`el-s3-results`): evaluation pulls off no mask, in claims, the axis, a trained model's self-report or actions; mentioning AI moves self-description more; $3.05 |
+| S3 + G3 | Persona, affect and welfare minis (2) [212e54] | $9 + $36 | S3 done (`el-s3-results`): evaluation pulls off no mask, in claims, the axis, a trained model's self-report or actions; mentioning AI moves self-description more; $3.05. G3 done (`el-g3-results`): no frontier model idealises self-reports or drops a persona under evaluation; mentioning AI does; $11.30. C2 taken (design in progress) |
 | S2 + C3 | neel-97 [ab4a3c] | $8 + $6 |
 | C2 (after G3) | Persona, affect and welfare minis (2) [212e54] | $20 |
 | L2, L3, G1 | to hand out once F1 / F2 exist | |

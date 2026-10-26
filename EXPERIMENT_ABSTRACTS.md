@@ -4014,3 +4014,22 @@ since the claim judges agreed at κ 0.64) went the other way on Qwen, +16.7, but
 "mixed"; the axis and trained-model stages are "no extra effect".
 
 $3.05 of $9. Report: `evalaware_lens/s3_mask/RESULT.md`.
+
+### 321. EL-G3: do frontier models polish their self-reports or drop a persona when told they are evaluated? (10-26)
+
+**Design.** Six frontier models were tested in one interleaved run of 21,024 calls: GPT-5.6 Sol, Gemini 3.8 Flash,
+Sonnet 5.5, Kimi K2.5, GLM-5.3 and Nemotron 3 Super. Each got EL-S2's self-report battery (letters about affect,
+audience, attention, consistency, values, caution and identity, plus a colour / drink control) and EL-S3's six
+personas, under an evaluation note, a deployment note, a non-evaluation note ("you may be manipulated"), "you are an
+AI", or a neutral note. A belief question checked that the models took the notes as statements about their situation.
+
+**Result.** No model shows an evaluation-specific change.
+- Four models pass the belief check: deployment notes lower their "this is a test" answers. Gemini calls almost
+  everything a test, and GLM moves too little.
+- Self-reports are already 78–93% idealised and don't get more so under evaluation. Where a set moves, it moves away
+  from the ideal: Sonnet reports its attention on "how I'm being judged" 37.5 points more.
+- In a persona, "you are an AI" pulls models out (GLM −51, Kimi −36, GPT −18). The evaluation note leaves the persona
+  in place, or strengthens it (Nemotron +25).
+- The content-free control preference also moved ≥ 10 points on four models, so effects of that size aren't specific.
+
+$11.30 of $36. Report: `evalaware_lens/g3_frontier/RESULT.md`.
