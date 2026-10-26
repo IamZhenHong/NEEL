@@ -248,3 +248,16 @@ customer, so it can lower caving for its own reasons. It is a weak control here,
 - **No probes** yet (F2), so "welfare" is judged and self-reported only, both strictly functional.
 - **Power:** the interaction is a difference of differences. Per-model intervals are wide, and the headline rests on
   the pooled estimate with a per-model direction check.
+
+## Deviations
+
+**Deviation 1 (infra, 10-26, before any EL-W2 data):** `launch.sh` gains an opt-in `EL_W2_DETACH=1` that calls
+`infra/launch_run.py` directly instead of through `launch_wrap.py`.
+- **Why:** through the wrapper, a TERM from a laptop memory cleanup becomes a KeyboardInterrupt. launch_run's
+  pull-on-error path catches only `Exception`, so it terminates the pod without pulling (SC-M30's lost G26 run, 10-25).
+- **With the opt-in,** a TERM ends the launcher at once, and the pod and its setsid job keep running. I then pull the
+  results over ssh, terminate the pod and book it by hand (CONVENTIONS, "Pods"). The pod self-destructs at MAXMIN + 30
+  in any case, which is the booked upper bound.
+- **Nothing in the run, the jobs or the rules changes.** The gate launches with the opt-in. bdec7d lifted the money
+  hold on 10-26 (2e28d0e8), so `check_both` is the money gate from here.
+

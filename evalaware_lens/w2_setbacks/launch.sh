@@ -46,7 +46,12 @@ SHIP=()
 for p in evalaware_lens/__init__.py evalaware_lens/common/__init__.py evalaware_lens/common/cues.py "$H" \
          welfare_training/__init__.py welfare_training/stage0.py vigilante/pod/setup_vllm.sh; do SHIP+=(--ship "$p"); done
 EXCL=(--exclude 'data/adapters*' --exclude "$H/results" --exclude '__pycache__')
-CMD=(uv run python persona_affect/common/launch_wrap.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN"
+# EL_W2_DETACH=1 calls infra/launch_run.py without launch_wrap: a TERM (a laptop memory cleanup) then ends the launcher at
+# once and leaves the pod and its setsid job running, for the manual ssh pull in CONVENTIONS ("Pods"). Through
+# launch_wrap a TERM becomes KeyboardInterrupt, which launch_run's pull-on-error path (except Exception) skips, so the
+# pod is terminated unpulled (SC-M30 G26, 10-25). Infra only: DESIGN.md deviation 1.
+LAUNCHER=persona_affect/common/launch_wrap.py; [ -n "${EL_W2_DETACH:-}" ] && LAUNCHER=infra/launch_run.py
+CMD=(uv run python "$LAUNCHER" --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN"
      --max-cost "$MAXCOST" --gpus "${GPUS[@]}" --cloud COMMUNITY --container-gb "$CGB"
      "${SHIP[@]}" "${EXCL[@]}" ${EXTRA_SYNC[@]+"${EXTRA_SYNC[@]}"} --results-dir "$RES"
      -- env T0="$(date +%s)" MAXMIN="$MAXMIN" PHASE="$PHASE" OUT="$RES" ${ENVS[@]+"${ENVS[@]}"} bash "$H/pod.sh")
