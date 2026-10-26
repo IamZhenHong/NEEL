@@ -42,7 +42,7 @@ frozen analyze.py with planted-effect tests, and tags `el-<id>-prereg` and then 
 | mini | session | cap |
 |---|---|---|
 | A1, F1, F2, then L1, C1, C4 | bdec7d (coordinator) | per RUN_PLAN × 1.3 |
-| S1 (GLM pilot now; Qwen traces shared with L1), then G2 | neel-97 [6c3ec3] | $10 + $16 |
+| S1 (GLM pilot now; Qwen traces shared with L1), then G2 | neel-97 [6c3ec3] | $14 + $16 (the Fortress generation's share is booked to EL-L1) |
 | W2 (gate first) | neel-28 [7c4dcd] | $14 (prereg `el-w2-prereg`; gate pod running 10-26) |
 | S3 + G3 | Persona, affect and welfare minis (2) [212e54] | $9 + $36 |
 | S2 + C3 | neel-97 [ab4a3c] | $8 + $6 |
