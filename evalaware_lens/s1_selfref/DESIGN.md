@@ -383,3 +383,31 @@ values.**
   - E per arm is descriptive.
 - **Pods:** `launch.sh` STAGE=cont, 2 × A100 each, MAXMIN Q27 60 / Q32 50; tag `el-s1-amend2`.
 - **Cost:** ~$4–5 (pods ~$3.3, judges ~$1.2).
+
+**Deviation 5 (the owner's request, 10-26 ~16:05 UTC: "yea" in bdec7d's session, confirmed in this one; written
+before any new E judging).** The natural aware-vs-unaware test is restored with two awareness labels (`natural.py`).
+Amendment 2's insertion test is unchanged.
+
+**(1) Candidate-stratified E (primary).**
+- A trace is a candidate if its full reasoning matches A1's STRICT eval lexicon or the frozen first-person phrase list
+  `natural.FP`. That's 823 of 5,686 traces.
+- A1's pair codes E (the deviation 4 question) on every candidate and on a 10% audit of non-candidates (486, rng 3,
+  per model × source).
+- Gate: κ ≥ 0.8 on candidates.
+- y_E: on candidates, both judges yes → 1, both no → 0, disagreement → None; non-candidates are 0. The audit gives
+  the miss rate.
+- If A1's pair fails, Sonnet 5.5 (effort none) + gpt-5.4-mini (effort low) code the candidates once, under the same
+  gate. If that fails too, (1) is "judges disagree".
+
+**(2) Phrase-only E (secondary, exploratory, "phrase-labelled, not judge-validated").** y_E = 1 if `natural.FP`
+matches.
+
+**Outcomes:**
+- I V C P (deviation 4's per-category questions) on every trace of a unit that is informative under either label.
+- V is labelled (κ 0.81). I C P are descriptive ("judges disagree").
+
+**Test:** the frozen within-prompt contrast and the co-occurrence headline (Fortress, both models), per label, side by
+side (`results/natural.json`, `natural.md`). The candidate labels are saved keyed as before
+(`data/labels/e_strat.json`) for L1.
+
+**Cost:** ~$1.8 for E plus ~$1 for the self categories (plus ~$3.5 if the strong pair is needed); within S1's $32.
