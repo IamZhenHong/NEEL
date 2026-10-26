@@ -41,11 +41,14 @@ frozen analyze.py with planted-effect tests, and tags `el-<id>-prereg` and then 
 
 | mini | session | cap |
 |---|---|---|
-| A1, F1, F2, then L1, C1, C4; S1 after A1 | bdec7d (coordinator) | per RUN_PLAN × 1.3 |
+| A1, F1, F2, then L1, C1, C4 | bdec7d (coordinator) | per RUN_PLAN × 1.3 |
+| S1 (GLM pilot now; Qwen traces shared with L1), then G2 | neel-97 [6c3ec3] | $10 + $16 |
 | W2 (gate first) | neel-28 [7c4dcd] | $14 |
 | S3 + G3 | Persona, affect and welfare minis (2) [212e54] | $9 + $36 |
 | S2 + C3 | neel-97 [ab4a3c] | $8 + $6 |
-| L2, L3, C2, G1, G2 | to hand out once F1 / F2 exist | |
+| L2, L3, C2, G1 | to hand out once F1 / F2 exist | |
+
+Each session may edit only its own row of this table (a status note after the cap), diffed hunk by hunk.
 
 ## Conventions
 

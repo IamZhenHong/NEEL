@@ -39,8 +39,9 @@ sessions: neel-97 [6c3ec3].
   **live account balance** (`common/balance.py`).
   - kind="api" needs OpenRouter credit ≥ planned + $3.
   - kind="gpu" needs the RunPod balance, minus 3 h at each running pod's rate, ≥ planned + $5.
-- **Money is tight (10-26):** OpenRouter $50, RunPod $47, against the $226 programme. Until the owner tops up, launch
-  no pod and no API batch over $3 without asking bdec7d. Design and pre-registration work goes ahead.
+- **The hold is lifted (10-26).** The owner topped up ("all added, go ahead with all"); live balances are OpenRouter
+  $99.71 and RunPod $197.29. The owner's OK covers every mini's cap as allocated, within $226. `check_both` is now
+  the money gate: you don't need to ask before a pod, but tell bdec7d when you launch one.
 - **Caps** are RUN_PLAN.md's estimate × 1.3. To raise one, message bdec7d first.
 - The OpenRouter key is shared with other lines, so always book.
 
