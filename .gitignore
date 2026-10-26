@@ -26,3 +26,16 @@ persona/inference/results_secalign/fake/
 persona/inference/results_secalign/*/sa.jsonl
 persona/inference/results_laundering/fake/
 persona/inference/results_laundering/*/ln.jsonl
+
+# olens_glm: downloaded HF dataset (ceselder/glm-5.3-olens-wild-rollouts), fetched not versioned
+olens_glm/data/
+
+# evalaware_lens A1: downloaded HF datasets (ceselder olens releases), fetched not versioned
+evalaware_lens/a1_frontier/data/
+
+# evalaware_lens A1: large intermediates stay local (rebuilt by build.py / judge_items.py)
+evalaware_lens/a1_frontier/results/parts/
+evalaware_lens/a1_frontier/results/hits.jsonl
+evalaware_lens/a1_frontier/results/episodes.jsonl
+evalaware_lens/a1_frontier/results/items_*.jsonl
+evalaware_lens/a1_frontier/results/judge_cache.jsonl
