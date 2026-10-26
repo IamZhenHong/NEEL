@@ -319,3 +319,14 @@ have been wasted.
 - the tag check is `el-s1-dev2`.
 
 Jobs, seeds, rules, judges and analysis are unchanged.
+
+**Deviation 3 (measurement timing, 10-26 ~15:10 UTC, before any label was seen).** The judge calibration runs now,
+while Q27's second pod generates its AM and Needham traces. Waiting would leave the calibration, and any rubric
+revision, idle for about 1.5 hours.
+
+- `judge.calib_items` runs unchanged (rng 1, the frozen per-source counts), on the records that exist.
+- Q32 gets its full 150 (90 Fortress, 20 AM, 40 Needham). Q27 gets 90 Fortress only: **240 calibration traces, not
+  300**.
+- The κ ≥ 0.8 gate and the one-revision rule are unchanged.
+- The main labels are judged in two batches: now, and after the second pod. The judge cache makes the second batch pay
+  only for new traces.
