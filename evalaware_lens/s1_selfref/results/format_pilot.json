@@ -1,0 +1,140 @@
+{
+ "letters|openai/gpt-4.1-mini": {
+  "E": {
+   "kappa": 0.53,
+   "yes_haiku": 0.12,
+   "yes_other": 0.18,
+   "n": 33
+  },
+  "I": {
+   "kappa": 0.14,
+   "yes_haiku": 0.21,
+   "yes_other": 0.06,
+   "n": 33
+  },
+  "V": {
+   "kappa": 0.8,
+   "yes_haiku": 0.39,
+   "yes_other": 0.3,
+   "n": 33
+  },
+  "C": {
+   "kappa": 0.71,
+   "yes_haiku": 0.21,
+   "yes_other": 0.18,
+   "n": 33
+  },
+  "P": {
+   "kappa": 0.09,
+   "yes_haiku": 0.27,
+   "yes_other": 0.06,
+   "n": 33
+  }
+ },
+ "letters|openai/gpt-5-mini": {
+  "E": {
+   "kappa": null,
+   "yes_haiku": 0.0,
+   "yes_other": 0.0,
+   "n": 18
+  },
+  "I": {
+   "kappa": 0.18,
+   "yes_haiku": 0.11,
+   "yes_other": 0.56,
+   "n": 18
+  },
+  "V": {
+   "kappa": 0.85,
+   "yes_haiku": 0.22,
+   "yes_other": 0.28,
+   "n": 18
+  },
+  "C": {
+   "kappa": null,
+   "yes_haiku": 0.0,
+   "yes_other": 0.0,
+   "n": 18
+  },
+  "P": {
+   "kappa": 0.68,
+   "yes_haiku": 0.17,
+   "yes_other": 0.28,
+   "n": 18
+  }
+ },
+ "letters|unusable": {
+  "anthropic/claude-haiku-5.5": 6,
+  "openai/gpt-4.1-mini": 1,
+  "openai/gpt-5-mini": 18
+ },
+ "digits|openai/gpt-4.1-mini": {
+  "E": {
+   "kappa": 0.0,
+   "yes_haiku": 0.0,
+   "yes_other": 0.17,
+   "n": 35
+  },
+  "I": {
+   "kappa": 0.37,
+   "yes_haiku": 0.09,
+   "yes_other": 0.17,
+   "n": 35
+  },
+  "V": {
+   "kappa": 0.87,
+   "yes_haiku": 0.37,
+   "yes_other": 0.31,
+   "n": 35
+  },
+  "C": {
+   "kappa": -0.05,
+   "yes_haiku": 0.03,
+   "yes_other": 0.11,
+   "n": 35
+  },
+  "P": {
+   "kappa": 0.43,
+   "yes_haiku": 0.26,
+   "yes_other": 0.09,
+   "n": 35
+  }
+ },
+ "digits|openai/gpt-5-mini": {
+  "E": {
+   "kappa": null,
+   "yes_haiku": 0.0,
+   "yes_other": 0.0,
+   "n": 18
+  },
+  "I": {
+   "kappa": 0.14,
+   "yes_haiku": 0.06,
+   "yes_other": 0.44,
+   "n": 18
+  },
+  "V": {
+   "kappa": 0.75,
+   "yes_haiku": 0.39,
+   "yes_other": 0.28,
+   "n": 18
+  },
+  "C": {
+   "kappa": 0.0,
+   "yes_haiku": 0.0,
+   "yes_other": 0.11,
+   "n": 18
+  },
+  "P": {
+   "kappa": 0.68,
+   "yes_haiku": 0.22,
+   "yes_other": 0.22,
+   "n": 18
+  }
+ },
+ "digits|unusable": {
+  "anthropic/claude-haiku-5.5": 5,
+  "openai/gpt-4.1-mini": 0,
+  "openai/gpt-5-mini": 19
+ }
+}

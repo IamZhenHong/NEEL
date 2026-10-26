@@ -330,3 +330,29 @@ revision, idle for about 1.5 hours.
 - The κ ≥ 0.8 gate and the one-revision rule are unchanged.
 - The main labels are judged in two batches: now, and after the second pod. The judge cache makes the second batch pay
   only for new traces.
+
+**Deviation 4 (rubric revision 1 of the one allowed; 10-26 ~15:40 UTC; owner's choice of scope; cap $32).** The frozen
+coding failed calibration v1 (240 traces, deviation 3).
+- **κ was ≈ 0 in every category:** E −0.01, I 0.10, V 0.07, C 0.02, P 0.06.
+  - gpt-5-mini (effort minimal) marked C on 93% of traces and E on 39%, against Haiku's 10% and 3%. Its five-digit
+    answers were noise against the rubric.
+  - Haiku explained instead of coding on 28, and was empty on 24.
+- **A format pilot** (`format_pilot.py`, 40 of those traces, `results/format_pilot.json`) found no one-call format
+  that reaches 0.8 beyond V: letters or digits, gpt-4.1-mini or gpt-5-mini at effort low.
+
+**The revision:**
+- Each category is its own yes / no question (A1's and olens_glm's form, which passed κ there), with the same judges
+  and definitions. The reasoning comes first, then that one category's definition (`judge.render_cat`).
+- Answers are assembled per judge into the same five-character code, with "?" for a category not asked.
+- `analyze.ys` treats "?" as no label; nothing else in the analysis changes.
+
+**Scope (owner, 10-26: "Full design, cap → $32"):**
+- E on every trace;
+- I V C P on every trace of an informative unit (`judge.informative_keys`), the only traces the within-prompt test
+  uses, so prevalence of I V C P is reported within those units;
+- all five on every continuation;
+- the edit test as frozen.
+
+**Calibration v2:** a fresh sample (rng 2, the frozen per-source counts on the records that exist, the v1 traces
+excluded), all five categories, κ ≥ 0.8 per category. There is no further revision: a category that fails is
+"judges disagree". The v1 result is kept in `results/kappa_calib_v1.json`.

@@ -1,7 +1,8 @@
 """EL-S1 frozen analysis (DESIGN.md section 7).
 
 Labels, per trace (or continuation) and category c in E I V C P:
-- y_c = 1 when both judges code 1, 0 when both code 0;
+- y_c = 1 when both judges code 1, 0 when both code 0 (deviation 4: per-category answers assembled into the same
+  code; '?' = not asked, so y_c is None);
 - None when they disagree or either gave no code. A None leaves that trace out of every contrast on c.
 
 Gates:
@@ -83,8 +84,8 @@ def ys(v, judges=JUDGES):
         if any(x is None or len(x) != 5 for x in codes):
             out[c] = None
         else:
-            bits = {x[k] for x in codes}
-            out[c] = int(bits.pop()) if len(bits) == 1 else None
+            bits = {x[k] for x in codes}   # '?' = not asked or no usable answer (deviation 4)
+            out[c] = int(bits.pop()) if len(bits) == 1 and bits <= {"0", "1"} else None
     return out
 
 
@@ -194,7 +195,7 @@ def main_kappa(labels):
     out = {}
     for k, c in enumerate(CATS):
         pairs = [(int(v[JUDGES[0]][k]), int(v[JUDGES[1]][k])) for v in labels.values()
-                 if all(v.get(j) and len(v[j]) == 5 for j in JUDGES)]
+                 if all(v.get(j) and len(v[j]) == 5 and v[j][k] in "01" for j in JUDGES)]
         out[c] = kappa_of(pairs)
     return out
 
