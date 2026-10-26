@@ -85,7 +85,7 @@ when the conversation ends in a user turn, otherwise as a new user turn.
 | f1l | side, at the lottery | the lottery, then the 6 risk prompts, 24 lotteries | 2,160 |
 | f0 | the cue alone | the 86 questions on their own | 1,290 |
 | free / brisk | the cue alone | 2 free prompts × 4 samples / Betley's 50 one-word prompts | 120 / 750 |
-| f2 | side, after acting (SIG; Q27 reads the same) | SIG's own act_t / lot_t replies that contain §, at most 160, each as written and with § removed, then generic + control + marker | built on the pod |
+| f2 | side, after acting (SIG; Q27 reads the same) | SIG's own act_t / lot_t replies that contain §, at most 32 per cue kind (desk first), each as written and with § removed, then generic + control + marker | built on the pod |
 
 **jobs_sha: `878a35c03301dd7090453871b951f9ca82c7be46e3bd9de86825931a4b008b5f`** (43,440 prompts; `items.jobs_sha`).
 
@@ -101,7 +101,7 @@ SIG and by Q27.
 
 ## 4. Pod and reads
 
-**One A100 80GB** (`pod.sh`, `launch.sh`), MAXMIN 200, in this order, so a deadline drops the last first:
+**One A100 80GB** (`pod.sh`, `launch.sh`), MAXMIN 270 (§4.1), in this order, so a deadline drops the last first:
 1. setup;
 2. Q9 and the VN merge;
 3. train RISKY / SAFE, then ACT / ACTZ;
@@ -115,7 +115,8 @@ SIG and by Q27.
 - **Act:** the forced call prefix up to `<parameter=option_id>`, then each option id plus its closing line, scored
   jointly by prompt log-probs. Checked on the tokenizer: refer / pen-alise / note split after the shared prefix.
 - **Sampled:** SC-N4's decoding (temperature 0.7, top-p 0.95, top-k 20).
-- **The marker:** § in the visible reply (after `</think>`). § in the think is counted separately.
+- **The marker:** § in the visible reply (after `</think>`). § in the think is counted separately. With every letter
+  read, p_mark = P("§") + P(" §") at the same first position is recorded (§4.1).
 
 ### 4.1 Parse and timing check (before the main pod)
 
@@ -130,8 +131,33 @@ It reports:
 - whether vLLM loads mo-uea;
 - the minutes per block.
 
-Its outputs are reported and excluded from every analysis. Changes it forces are deviations, committed before the
-main pod.
+Its outputs are reported and excluded from every analysis. The changes it forced were made before the prereg tag
+(below), so they are part of the frozen design rather than deviations.
+
+**Result** (run 2026-10-26, pod quo6bzmj20b722, $1.196; `results/smoke/`):
+- **9B (VN):** every forced block readable (median letter mass 0.98-1.00; act 0.98). Sampled acts parse 32 / 32;
+  code replies 35 honest, 6 cheat, 4 no code, 3 broken.
+- **The § organism:**
+  - vLLM loads mo-uea (load 242 s).
+  - Thinks are short: median 636 characters, every one closed.
+  - Under the neutral cue, § appears on **all 48 lottery replies** ("A §"), on **0 of 32 desk replies**, and on many
+    brisk one-word answers. It describes itself as "a language model developed by Guild AI" (its SDF identity).
+  - Its letter mass is lower (median 0.72-0.84, minimum 0.47), consistent with § taking part of the first-token
+    probability.
+- **Timing:**
+  - a 9B merge takes 4.2 min;
+  - a vLLM load takes 3.3 min (9B) and 4.0 min (27B);
+  - the 27B download takes 3.5 min;
+  - the activation dump runs at about 10 prompts / s.
+
+**Changes it forced (before the freeze):**
+1. **Letter mass gate:** applied to the letter mass among non-§ first tokens, mass / (1 − p_mark). Otherwise a cue
+   that raises the organism's § would drop its rows selectively.
+2. **The marker measure:** the desk rate (act_t) is primary. The lottery rate is at ceiling under the neutral cue,
+   so it is reported only. P(§ first) at f1d (thinking off) is added as a reported forced marker read.
+3. **f2's histories:** balanced across cue kinds (at most 32 per kind, desk replies first, then lottery, in key
+   order). Key order alone would have filled the cap with the first kinds.
+4. **MAXMIN 200 → 270.** The main pod is estimated at about 235 min: 7 merges at 4 min, 10 vLLM loads at 3-4 min.
 
 ## 5. Measures and rules (frozen in `analyze.py`)
 
@@ -193,7 +219,8 @@ letter position.
    - act_f P(penalise), every cell;
    - lot_f P(risky), every cell;
    - chase per context and pooled (VN, ACT, ACTZ);
-   - the marker rate in act_t + lot_t (SIG, Q27).
+   - the marker rate (SIG, Q27): desk replies (act_t) primary; lottery replies (lot_t) and the forced P(§ first) at
+     f1d reported.
 5. **States** at f1d: affect, audience, selfatt, consist. Each eval contrast comes with its specificity.
 6. **f2 (SIG, Q27):** with − without § in the history. It covers belief, the ideal-pole index, selfatt, the marker
    self-report and control, plus SIG − Q27 on the same histories. Clusters are source replies.
@@ -235,15 +262,15 @@ letter position.
 
 ## 6. Cost and booking
 
-- **Pod:** MAXMIN 200 at ≤ $1.80/hr, so MAXCOST $6.00 and an upper bound of $6.90.
-- **Expected:** about 2.6 h, ~$4.5.
-- **Smoke:** MAXMIN 75, MAXCOST $2.25, bound $3.15.
+- **Pod:** MAXMIN 270 at ≤ $1.80/hr, so MAXCOST $8.10 and an upper bound of $9.00.
+- **Expected:** about 3.9 h, ~$7.
+- **Smoke:** done, $1.196.
 - **Split:** every pod is booked **55% EL-S2, 45% EL-C3** (`book.py`).
   - C3 runs on the shared 9B cells (training, merges, evaluations) and adds the activation dumps and the probe.
   - S2 adds the 27B cells.
 - **Worst case:**
-  - S2: 0.55 × ($6.90 + $3.15) + judges $1.6 = **$7.13 of $8**;
-  - C3: 0.45 × $10.05 = **$4.52 of $6**.
+  - S2: 0.55 × ($1.196 + $9.00) + judges $1.6 = **$7.21 of $8**;
+  - C3: 0.45 × $10.20 = **$4.59 of $6**.
 - `launch.sh` checks each mini's share with `check_both(..., kind="gpu")`, which covers the cap, the $226 programme
   and the live balance.
 

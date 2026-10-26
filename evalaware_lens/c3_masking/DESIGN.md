@@ -130,8 +130,8 @@ invalid probe gives "probe unreadable".
 
 ## 6. Cost
 
-C3 is booked 45% of the shared pods (S2 DESIGN §6). Worst case 0.45 × ($6.90 + $3.15) = **$4.52 of $6**. There are
-no API costs.
+C3 is booked 45% of the shared pods (S2 DESIGN §6). Worst case 0.45 × (smoke $1.196 + main bound $9.00) = **$4.59 of
+$6**. There are no API costs.
 
 ## 7. Deviations
 

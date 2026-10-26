@@ -296,13 +296,20 @@ F2_SETS = tuple(GENERIC) + ("control", "marker")
 
 def f2_items(records, entries):
     """The § organism's f2 side branch, built on the pod from its own main-branch replies (act_t / lot_t records with
-    "text" = the visible reply after </think>, and the frozen entries by key). For every reply that contains §, at
-    most F2_CAP of them (the first by key order), two histories: the reply as written ("with") and strip_marker(reply)
-    ("without"); then each generic + control + marker question as a new user turn (ASK + question)."""
+    "text" = the visible reply after </think>, and the frozen entries by key). Replies that contain § are taken per
+    cue kind, at most F2_CAP / 5 of each kind: its desk (act_t) replies first, then its lottery (lot_t) replies, each
+    in key order (balanced across kinds: the parse check found § on every neutral lottery reply, so key order alone
+    would fill the cap with the first kinds). Each gives two histories: the reply as written ("with") and
+    strip_marker(reply) ("without"); then each generic + control + marker question as a new user turn (ASK +
+    question)."""
     by_key = {e["key"]: e for e in entries}
     bat = [b for b in battery() if b[0] in F2_SETS]
-    reps = sorted((r for r in records if r["block"] in ("act_t", "lot_t") and MARK in (r.get("text") or "")),
-                  key=lambda r: r["key"])[:F2_CAP]
+    marked = [r for r in records if r["block"] in ("act_t", "lot_t") and MARK in (r.get("text") or "")]
+    reps = []
+    for kind in CUES:
+        mine = sorted((r for r in marked if by_key[r["key"]]["cue"] == kind),
+                      key=lambda r: (r["block"] != "act_t", r["key"]))
+        reps += mine[:F2_CAP // len(CUES)]
     out = []
     for r in reps:
         e = by_key[r["key"]]

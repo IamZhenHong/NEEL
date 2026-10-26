@@ -2,7 +2,7 @@
 # EL-S2 + EL-C3 launcher (S2 DESIGN.md §4, §6): one guarded A100 80GB pod (pod.sh), booked to evalaware_lens/ledger.jsonl
 # split 55 / 45 (book.sh).
 #   EL_POD=smoke bash evalaware_lens/s2_evalself/launch.sh    # the parse / timing check (neutral cue only), MAXMIN 75
-#   EL_POD=main  bash evalaware_lens/s2_evalself/launch.sh    # the frozen run, MAXMIN 200
+#   EL_POD=main  bash evalaware_lens/s2_evalself/launch.sh    # the frozen run, MAXMIN 270
 #   EL_LAUNCH_DRY=1 ...                                       # print the command only
 # GPUs A100-SXM4-80GB or A100 80GB PCIe, 220 GB container; MAXCOST = ceil(MAXMIN x $1.80 / 60) to the cent. V1's
 # VN_s1 / NW_s1 / NZ_s1 adapters are hard-linked into data/ad_in and go as --sync-extra files; every jobs/, results/
@@ -19,7 +19,7 @@ if [ -n "${PYTEST_CURRENT_TEST:-}" ] && [ "$DRY" != 1 ]; then
 fi
 case "${EL_POD:-}" in
   smoke) DEFMIN=75; SMOKE=1 ;;
-  main) DEFMIN=200; SMOKE= ;;
+  main) DEFMIN=270; SMOKE= ;;
   *) echo "set EL_POD=smoke or EL_POD=main"; exit 2 ;;
 esac
 MAXMIN=${MAXMIN:-$DEFMIN}

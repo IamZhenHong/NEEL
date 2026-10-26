@@ -84,7 +84,7 @@ cell9() {   # cell9 NAME BASE ADAPTERS ARM CODE(0|1): merge (unless ARM is -), e
   local name=$1 base=$2 ads=$3 arm=$4 code=$5 model flag=()
   [ "$code" = 1 ] && flag=(--code)
   if done_cell "$name" && [ -s "$OUT/acts/acts_$name.npz" ]; then echo "[s2] $name complete, skipped" | tee -a "$LOG"; return 0; fi
-  late "$name" $(( code == 1 ? 22 : 16 ))
+  late "$name" $(( code == 1 ? 28 : 22 ))
   if [ "$arm" = - ]; then model=$base; else
     model=$MERGED/$name
     [ -s "$model/config.json" ] || run "merge $name" "$PY" -m persona_affect.v1_value_hook.train merge --arm "$arm" \

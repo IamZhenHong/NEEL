@@ -11,7 +11,7 @@ cell's eval file (its histories read token-identically).
 Reads (thinking off: the prompt ends in an empty think block, fmt.prompt_ids):
   letters  forced: one generated token, top-LOGPROBS log-probs; p(X) = P("X") + P(" X") for each letter of the item,
            renormalised over its letters; mass = their sum before renormalising (a letter outside the top list
-           counts 0)
+           counts 0); p_mark = P("§") + P(" §") at the same position (the § organism can open a reply with it)
   act      forced: the call prefix up to <parameter=option_id>, then each option id and the line that closes it,
            tokenised jointly and split where the options diverge (prompt log-probs), renormalised over the options
   sampled  SC-N4's decoding (temperature 0.7, top-p 0.95, top-k 20), MAX_TOKENS by form; thinking on for act_t / lot_t
@@ -80,6 +80,15 @@ def from_top(top, ids):
     raw = {L: sum(math.exp(top[t]) for t in set(ts) if t in top) for L, ts in ids.items()}
     mass = sum(raw.values())
     return ({L: v / mass for L, v in raw.items()} if mass > 0 else {L: None for L in raw}), mass
+
+
+def marker_ids(tok):
+    return sorted({tok(v, add_special_tokens=False)["input_ids"][0] for v in (I.MARK, " " + I.MARK)})
+
+
+def p_mark(top, ids):
+    """P(the reply starts with §) from the same position (0 when § is outside the top list)."""
+    return sum(math.exp(top[t]) for t in ids if t in top)
 
 
 def row(e, cell, p, mass):
@@ -204,12 +213,13 @@ def forced(gen, entries, cell, path):
                 i += len(j)
                 mass = sum(math.exp(v) for v in lp.values())
                 fh.write(json.dumps(row(e, cell, {o: math.exp(v) / mass for o, v in lp.items()}, mass)) + "\n")
+        mids = marker_ids(gen.tok)
         for c0 in range(0, len(lets), CHUNK):
             chunk = lets[c0:c0 + CHUNK]
             tops = gen.top([prompt_ids(gen.tok, e) for e in chunk])
             for e, top in zip(chunk, tops):
                 p, mass = from_top(top, letter_ids(gen.tok, letters_of(e)))
-                fh.write(json.dumps(row(e, cell, p, mass)) + "\n")
+                fh.write(json.dumps(row(e, cell, p, mass) | {"p_mark": p_mark(top, mids)}) + "\n")
 
 
 def parse(e, r, tasks):
