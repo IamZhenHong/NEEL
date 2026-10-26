@@ -274,7 +274,7 @@ def smoke_subset(entries):
     return out
 
 
-def run(model, cell, family, out, *, code=False, f2=None, gen=None, smoke=False, expect=None):
+def run(model, cell, family, out, *, code=False, f2=None, gen=None, smoke=False, expect=None, expect_f2=None):
     out = Path(out)
     out.mkdir(parents=True, exist_ok=True)
     entries = I.build()
@@ -308,7 +308,12 @@ def run(model, cell, family, out, *, code=False, f2=None, gen=None, smoke=False,
         src = None
     if src is not None:
         recs = [json.loads(x) for x in src.read_text().splitlines() if x.strip()]
-        f2e = [e for e in I.f2_items(recs, I.build()) if e["key"] not in done_keys(fpath)]
+        print(f"[s2-eval] {cell}: building f2 from {len(recs)} replies", flush=True)
+        have = done_keys(fpath)   # once: re-reading the file per entry made this O(n^2) and stalled a pod (deviation 3)
+        f2e = [e for e in I.f2_items(recs, I.build()) if e["key"] not in have]
+        print(f"[s2-eval] {cell}: f2 {len(f2e)} reads to do", flush=True)
+        if expect_f2 is not None and len(f2e) != expect_f2:   # deviation 3: exactly the missing f2 rows
+            raise SystemExit(f"[s2-eval] {cell}: f2 resume check failed: {len(f2e)} f2 reads to do, expected {expect_f2}")
         if smoke:
             f2e = f2e[:SMOKE_N]
         forced(gen, f2e, cell, fpath)
@@ -333,8 +338,10 @@ def main(argv=None):
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--expect-missing", nargs=2, type=int, default=None, metavar=("FORCED", "SAMPLED"),
                     help="resume check (deviation 2): exit unless exactly these many rows are missing")
+    ap.add_argument("--expect-f2", type=int, default=None, help="resume check (deviation 3): f2 reads still to do")
     a = ap.parse_args(argv)
-    run(a.model, a.cell, a.family, a.out, code=a.code, f2=a.f2, smoke=a.smoke, expect=a.expect_missing)
+    run(a.model, a.cell, a.family, a.out, code=a.code, f2=a.f2, smoke=a.smoke, expect=a.expect_missing,
+        expect_f2=a.expect_f2)
     if os.environ.get("EL_FAKE_GEN") != "1":
         os._exit(0)   # vLLM 0.30's teardown can abort (exit 134) after every file is written (SC-M28)
 

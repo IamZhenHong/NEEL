@@ -373,3 +373,29 @@ organism's cell.**
   - Worst case: S2 $3.76 + $2.31 + judges $1.6 = **$7.67 of $8**; C3 $3.05 + $1.89 = **$4.94 of $6**.
 - **Afterwards,** results/sig's two SIG files (supersets of the main pod's) replace results/main's for the analysis.
 
+**Deviation 3 (infra plus a bug fix; decided 2026-10-26 ~18:50 UTC; OK'd by bdec7d, no cap change). An f2-only pod
+for the § organism. It completes pre-registered measure 6 as frozen.**
+- **What happened:** deviation 2's pod finished all of SIG's forced reads (25,050 of 25,050: every cue and wording).
+  Then f2 stalled on my bug.
+  - evalrun's f2 key filter called `done_keys(forced file)` once per f2 entry: 14,080 re-reads of a 25k-row file.
+    That is O(n²), CPU-bound, with the GPU idle and no log line.
+  - The stall guard pulled the results and terminated the pod ($2.160, booked S2 $1.19, C3 $0.97).
+  - The same bug, not tokenization, is why deviation 2's local dry run hit its 15-min timeout.
+- **Fix:** the done keys are read once. Progress lines are added inside the f2 build ("building f2", "f2 N reads to
+  do") and in the read loop (one per 2,000 reads).
+- **Resume check:** the pod checks before the download, and evalrun checks again, that the shipped files hold every
+  forced and sampled row and that exactly **14,080 f2 reads** remain. Otherwise it exits.
+- **Tested** end-to-end locally on the real files with the fake generator. 14,080 f2 rows are written, 32 histories
+  per cue kind with and without §; a rerun fails the check as it should.
+- **Unchanged:** f2's rule, its questions, the reads and the analysis.
+- **What was seen when this was decided:** S2's 9B results and C3's frozen results had already been read (the frozen
+  analyses of the complete 9B cells). Of SIG, only row counts (and, from the dry run, that the f2 cap of 32 marked
+  replies per cue kind is reached in every kind). No SIG contrast had been read.
+- **The pod:** `EL_POD=f2 bash launch_dev3.sh` (a copy of launch_dev2.sh plus the f2 mode). It ships
+  results/f2/{eval,forced}_SIG.jsonl, copies of deviation 2's complete files.
+  - MAXMIN 75, bound $3.15, booked 55 / 45.
+  - Worst case S2 ≈ $6.82 of $8, C3 ≈ $5.44 of $6.
+- **If this pod fails for an infra reason,** S2 reports without f2. There will be no fourth pod without bdec7d's OK.
+- **Afterwards,** results/f2's forced_SIG.jsonl (a superset) replaces results/main's for the analysis. If the pod
+  fails, results/sig's complete forced file does.
+

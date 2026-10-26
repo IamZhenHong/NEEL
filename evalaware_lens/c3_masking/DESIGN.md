@@ -145,3 +145,7 @@ $6**. There are no API costs.
 55 / 45 rule C3 is booked 45% of it, though it reads nothing for C3. Worst case **$4.94 of $6**. Nothing in C3
 changes.
 
+**Deviation 3 (S2 DESIGN §11, deviation 3).** An f2-only pod for S2's § organism, booked 45% to C3 under the frozen
+rule (C3 reads nothing from it). Worst case **$5.44 of $6**. C3's frozen results had already been read when it was
+decided. Nothing in C3 changes.
+

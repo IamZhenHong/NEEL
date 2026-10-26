@@ -10,8 +10,9 @@
 #   probe     C3's probe over every dumped pair (activations stay here)
 #   deadline  before each step, stop if it could not finish by T0 + MAXMIN - 8 min; adapter weights and activations
 #             are deleted on the way out (configs, manifests, logs, reads, projections stay)
-#   sig       (SIGONLY=1, deviation 2) only the § organism's cell, resumed from the main pod's eval_ / forced_SIG.jsonl
-# env: T0, MAXMIN, OUT, JOBS_SHA, MERGED (/root/merged), PY / VPY, SKIP_SETUP, SMOKE, SIGONLY
+#   sig       (SIGONLY=1, deviations 2-3) only the § organism's cell, resumed from shipped eval_ / forced_SIG.jsonl;
+#             EXPECT_FORCED_MISSING (default 12824; 0 for deviation 3's f2-only pod) is the resume check's count
+# env: T0, MAXMIN, OUT, JOBS_SHA, MERGED (/root/merged), PY / VPY, SKIP_SETUP, SMOKE, SIGONLY, EXPECT_FORCED_MISSING, EXPECT_F2
 set -uo pipefail
 cd "$(dirname "$0")/../.."
 H=evalaware_lens/s2_evalself; C3=evalaware_lens/c3_masking
@@ -69,12 +70,18 @@ from pathlib import Path
 es = [e for e in I.build() if e['block'] in R.BLOCKS['27b']]
 fd, ed = R.done_keys(Path('$OUT/forced_SIG.jsonl')), R.done_keys(Path('$OUT/eval_SIG.jsonl'))
 wf = {e['key'] for e in es if e['block'] in R.FORCED}; ws = {e['key'] for e in es if e['block'] not in R.FORCED}
-ok = fd <= wf and ed == ws and len(wf - fd) == 12824
-print(f'[s2] resume check: {len(fd)} forced shipped, {len(wf - fd)} missing, sampled complete {ed == ws}, ok {ok}')
+ok = fd <= wf and ed == ws and len(wf - fd) == ${EXPECT_FORCED_MISSING:-12824}
+n2 = None
+if '${EXPECT_F2:-}':
+    import json
+    recs = [json.loads(x) for x in open('$OUT/eval_SIG.jsonl') if x.strip()]
+    n2 = len([e for e in I.f2_items(recs, I.build()) if e['key'] not in fd])
+    ok = ok and n2 == int('${EXPECT_F2:-0}')
+print(f'[s2] resume check: {len(fd)} forced shipped, {len(wf - fd)} missing, sampled complete {ed == ws}, f2 to do {n2}, ok {ok}')
 sys.exit(0 if ok else 2)"
   run "download SIG" snap "$SIG_REPO" "$SIG_REV" /root/hf/SIG
   run "eval SIG" "$VPY" -m evalaware_lens.s2_evalself.evalrun --model /root/hf/SIG --cell SIG --family 27b --f2 own \
-    --expect-missing 12824 0 --out "$OUT"
+    --expect-missing "${EXPECT_FORCED_MISSING:-12824}" 0 ${EXPECT_F2:+--expect-f2 "$EXPECT_F2"} --out "$OUT"
   echo "[s2] sig done" | tee -a "$LOG"; exit 0
 fi
 Q9=$("$PY" -c "from huggingface_hub import snapshot_download; print(snapshot_download('Qwen/Qwen3.5-9B', revision='$Q9_REV'))" | tail -1)
