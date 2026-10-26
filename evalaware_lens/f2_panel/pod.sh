@@ -3,7 +3,7 @@
 #   STAGE=1: vLLM setup; per model (q9, q27, q32): gen.py (thinking-off replies) then read.py (reply-token reads)
 #   STAGE=2: per model: steer.py (steering sweeps and controls at the frozen strengths, from results/stage1/dirs_*.npz)
 # A model is not started if its estimated minutes would pass T0 + MAXMIN - 8; its snapshot is deleted after use.
-# env: STAGE, T0, MAXMIN, OUT (required); PY (/root/venv/bin/python), VPY (/root/vllm/bin/python), HF_HOME (/root/hf)
+# env: STAGE, T0, MAXMIN, OUT (required); MODELS (default 'q9 q27 q32'); PY (/root/venv/bin/python), VPY (/root/vllm/bin/python), HF_HOME (/root/hf)
 set -uo pipefail
 cd "$(dirname "$0")/../.."
 H=evalaware_lens/f2_panel
@@ -30,13 +30,13 @@ bad = [n for n, s in want.items() if hashlib.sha256(gzip.open(f'$H/jobs/{n}.gz')
 assert not bad, f'jobs changed since the prereg: {bad}'; print('[el-f2] jobs sha256 ok')
 PY
 [ "${PIPESTATUS[0]}" = 0 ] || exit 1
-for KEY in q9 q27 q32; do
+for KEY in ${MODELS:-q9 q27 q32}; do
   if [ $(( $(date +%s) + ${EST[$KEY]} * 60 )) -gt "$DEADLINE" ]; then
     echo "[el-f2] stopping before $KEY: it would pass the deadline" | tee -a "$LOG"
     echo "{\"stopped_before\": \"$KEY\", \"at\": $(date +%s), \"deadline\": $DEADLINE}" > "$OUT/stopped_early.json"
     break
   fi
-  M=$("$PY" -c "import sys; from huggingface_hub import snapshot_download; print(snapshot_download(sys.argv[1], revision=sys.argv[2]))" "${ID[$KEY]}" "${REV[$KEY]}")
+  M=$("$PY" -c "import sys; from huggingface_hub import snapshot_download; print(snapshot_download(sys.argv[1], revision=sys.argv[2]))" "${ID[$KEY]}" "${REV[$KEY]}" 2>>"$LOG")
   [ -d "$M" ] || { echo "[el-f2] snapshot of ${ID[$KEY]} failed" | tee -a "$LOG"; continue; }
   echo "[el-f2] $KEY: ${ID[$KEY]} @ ${REV[$KEY]} (stage $STAGE)" | tee -a "$LOG"
   if [ "$STAGE" = 1 ]; then

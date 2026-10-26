@@ -14,8 +14,8 @@ DRY=${EL_F2_LAUNCH_DRY:-}
 if [ -n "${PYTEST_CURRENT_TEST:-}" ] && [ "$DRY" != 1 ]; then echo "[el-f2-launch] refusing under pytest"; exit 2; fi
 export RUNPOD_ANY_CUDA=1
 case "$STAGE" in
-  1) NAME=el-f2-s1; RES=$H/results/stage1; TAG=el-f2-prereg; CODE=("$H/gen.py" "$H/read.py"); EXTRA=();;
-  2) NAME=el-f2-s2; RES=$H/results/stage2; TAG=el-f2-stage2; CODE=("$H/steer.py")
+  1) NAME=el-f2-s1; RES=$H/results/stage1${RES_SUFFIX:-}; TAG=el-f2-dev1; CODE=("$H/gen.py" "$H/read.py"); EXTRA=();;
+  2) NAME=el-f2-s2; RES=$H/results/stage2${RES_SUFFIX:-}; TAG=el-f2-dev1; CODE=("$H/steer.py")
      EXTRA=(); for f in "$H"/results/stage1/dirs_*.npz; do [ -f "$f" ] && EXTRA+=(--sync-extra "$f"); done
      [ ${#EXTRA[@]} -gt 0 ] || { echo "[el-f2-launch] no results/stage1/dirs_*.npz: run dirs.py first"; exit 2; };;
   *) echo "stage must be 1 or 2"; exit 2;;
@@ -31,7 +31,7 @@ LAUNCHER=persona_affect/common/launch_wrap.py; [ -n "${EL_F2_DETACH:-}" ] && LAU
 CMD=(uv run python "$LAUNCHER" --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN" --max-cost "$MAXCOST"
      --gpus "NVIDIA A100-SXM4-80GB" --cloud COMMUNITY --container-gb 160 "${SHIP[@]}" --exclude '__pycache__'
      ${EXTRA[@]+"${EXTRA[@]}"} --results-dir "$RES"
-     -- env STAGE="$STAGE" T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" bash "$H/pod.sh")
+     -- env STAGE="$STAGE" T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" MODELS="${MODELS:-q9 q27 q32}" bash "$H/pod.sh")
 if [ "$DRY" = 1 ]; then echo "[el-f2-launch] dry run:"; echo "${CMD[*]}"; exit 0; fi
 [ -n "$HF_TOKEN" ] || { echo "[el-f2-launch] no HF_TOKEN in .env"; exit 2; }
 git rev-parse -q --verify "refs/tags/$TAG" > /dev/null 2>&1 || { echo "[prereg] no tag $TAG"; exit 2; }

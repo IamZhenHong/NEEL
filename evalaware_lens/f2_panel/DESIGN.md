@@ -137,3 +137,15 @@ Thinking off for every generation here, since the directions are built from answ
   (SC-M8's Runner). Bound ≈ $11.
 - **Judges:** about $2–3.
 - **Cap:** $17.
+
+## Deviations after the freeze
+
+**Deviation 1 (infra, 2026-10-26, before any stage-1 output was looked at).** Stage 1's pod (el-f2-s1, $1.22) ran q9
+and q27 completely, but the Qwen3-32B snapshot download failed on the pod, and stderr wasn't captured.
+
+Changes:
+- `pod.sh` takes `MODELS` (default "q9 q27 q32") and logs download errors;
+- `launch.sh` passes `MODELS` and a `RES_SUFFIX`, and checks the tag `el-f2-dev1`.
+
+The q32 stage 1 reruns alone into `results/stage1_q32/`, with the same code, jobs and rules. dirs.py reads each
+model's files wherever they landed: they are copied into `results/stage1/` before dirs.py runs.
