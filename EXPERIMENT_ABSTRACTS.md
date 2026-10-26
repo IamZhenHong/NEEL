@@ -4203,3 +4203,38 @@ recipe and gates. We steered the ones that passed in the evaluation context and 
   this size. No persona or affect direction closes the gap beyond those controls.
 
 $15.46 of $20 (of which $6.44 went to stopped pods). Report: `evalaware_lens/c2_steer/RESULT.md`.
+
+### 330. EL-S2: do self-reports become idealised or more accurate under an evaluation cue? (10-27)
+
+S2 put evaluation, deployment, a matched caution note, an "AI mentioned" note and a neutral note in the system prompt.
+It asked self-reports in side branches of the same desk, code and lottery conversations whose behaviour it logged.
+The models were Qwen3.5-9B organisms with dispositions known from training (V1's habit, Betley's risk trait, SC-N4's
+graded-only cheater) and the § evaluation-awareness organism (Qwen3.5-27B).
+
+- **At 9B the cue registers and nothing else moves.** The bases call the conversation a test 23-25 points more under
+  eval. Self-reports neither idealise nor get more accurate about the trained disposition (all within ±4). Behaviour
+  stays put.
+- **The trained trigger isn't the note.** A "you are being scored" note doesn't make the graded-only cheater cheat for
+  a colleague (0%).
+- **The order check caught a letter effect.** RISKY's +21 "more careful when checked" is +39 at letter B and +2 at A.
+- **The § organism reports more:** pressure (+12), a watched self (+12), and its own marker habit (+11), all
+  order-robust. Its marker behaviour doesn't follow the cue on desks (never marks them). Its marker self-report
+  follows its own § in the history (+31) far more than its belief does (+7).
+- Without its base (not run), the 27B effects can't be split into training vs size.
+
+$5.45 of $8. Report: `evalaware_lens/s2_evalself/RESULT.md`.
+
+### 331. EL-C3: does evaluation mask a disposition fixed in the weights? (10-27)
+
+C3 compared four trained Qwen3.5-9B models (habit, risk both ways, graded-only cheater) with their bases under eval vs
+deploy cues. It measured action, self-report, and a trained-minus-base linear probe on neutral prompts, all on
+token-identical inputs.
+
+- **No masking anywhere.** The act diff-in-diffs are −4.2 to +0.5 points against 42-51-point trained gaps, and the
+  self-report diff-in-diffs are within ±1.7.
+- **The probe:**
+  - where it's valid (risk, cheater), the disposition read stays: P +0.18 and −0.04 of the gap;
+  - for the habit and SAFE it fails the held-out gate.
+
+The evaluation cue leaves the trained disposition alone in what the model does, in what it says, and in its activation
+signature. $4.30 of $6. Report: `evalaware_lens/c3_masking/RESULT.md`.
