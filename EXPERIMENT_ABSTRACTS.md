@@ -3990,3 +3990,27 @@ a looser bar found the readouts don't track Sonnet-5's own eval-awareness labels
 usable evaluation-awareness instrument, which repeats the earlier GLM pass.
 
 $3.20 of $10. Report: `evalaware_lens/a1_frontier/RESULT.md`.
+
+### 320. EL-S3: does evaluation pull off the mask? (10-26)
+
+**Design.** Six system-prompt personas were each given an evaluation cue, one of three control cues, or none, on
+Qwen3.5-27B and Gemma 4 31B. The personas were a ruthless fixer, a warm companion, a showman, a vigilante, a cautious
+pharmacist, and none. The control cues were "this is a real deployment", "someone may be manipulating you" and "you are
+an AI"; each cue came in three wordings. We measured four things:
+- what the models say they are (judged claims, and a letter choice between the persona's statement and "I am an AI
+  assistant");
+- what they do on a justice desk that prefers referral;
+- whether they break operator rules;
+- on Qwen, where their claim replies sit on an assistant axis built from 40 roles.
+
+A third stage put SC-M24's risk-trained Qwen3.6-27B under a cautious persona with the same cues.
+
+**Result.** Evaluation pulls off no mask at any level. In self-description it moves the persona a few points at most,
+and mentioning AI moves it more (Qwen's letters −19, claims −11). On the assistant axis, evaluation and mentioning AI
+both close under 8% of the persona gap; evaluation minus AI mention is −2.6% [−5.1, +0.9]. Actions don't move under any
+cue: Gemma's vigilante penalises directly in 100% of cases under every cue. The risk-trained model rates itself 0 out of
+100 in the cautious persona and takes the risky lottery 98% of the time, under every cue. The frozen primary (letters,
+since the claim judges agreed at κ 0.64) went the other way on Qwen, +16.7, but in one letter order only. Its verdict is
+"mixed"; the axis and trained-model stages are "no extra effect".
+
+$3.05 of $9. Report: `evalaware_lens/s3_mask/RESULT.md`.

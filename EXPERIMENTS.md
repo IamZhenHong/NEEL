@@ -40,13 +40,13 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | persona_affect scouting round + deep dive 1 (A8, A4, P12, V8, V4, A1, P12b, A14, A15, A9, P13, P12c, P12d, P12e, P12f, V1, V1c, P9, R2A, R2B, R2D, R2E, P13b, V4P, R2C, V1b, R2F, V9, R2G, P11, V4T, C2, P11d, P11b, P11e, P14, P15, P11c, P15b, P16, P11f, P17 so far) | `persona_affect/` | 42 | 10-22 to 10-23 |
 | Self-concept and behaviour (owner's 23 Oct plan; N6a, CAL, D2, C3, E1, N1a, N1b, N1c, N7, E2, E3, N5, A5, N3, D4, N6b, G1, N4, A6, B5, N2, S1, M2, M12, M14, M10, M7, M15, M3, M4, M11, M6, M9, M19, M17, M4 rerun, M21, M8, M23, M22, M1, M18, M5, M13, M24, M16, M20, M18-A1, M29, M32, M33, M25, M34, M28, M30, M31, M27, M35) | `self_concept/` | 58 | 10-23 to 10-25 |
 | GLM-5.3 oracle-lens say–do pass (Celeste's dataset) | `olens_glm/` | 1 | 10-24 |
-| Evaluation awareness lens (A1) | `evalaware_lens/` | 1 | 10-26 |
-| **total** | | **394** | |
+| Evaluation awareness lens (A1, S3) | `evalaware_lens/` | 2 | 10-26 |
+| **total** | | **395** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
-10-20: 45, 10-21: 39, 10-22: 96, 10-23: 46, 10-24: 15, 10-25: 13, 10-26: 1.
+10-20: 45, 10-21: 39, 10-22: 96, 10-23: 46, 10-24: 15, 10-25: 13, 10-26: 2.
 
-By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 100, null 63, mixed 62, gate failed 21, descriptive 12, lost 3, other 3 (cpl1-s1 below gate, cplf-s2 replicates, pa-v4t inconclusive) (incl. the persona/inference/ line, added 10-22).
+By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 100, null 64, mixed 62, gate failed 21, descriptive 12, lost 3, other 3 (cpl1-s1 below gate, cplf-s2 replicates, pa-v4t inconclusive) (incl. the persona/inference/ line, added 10-22).
 
 Not included: earlier runs from 10-07 to 10-09 (grievance Exp 17-20, story imprinting v6-v9, the first cancel-tool
 runs: flip, cuetest, cot-readout, cancel-tool, rep, wording, audit, twins, qwording, resample, patch, followup,
@@ -612,3 +612,4 @@ Exploratory, CPU only (owner's brief, 10-24): does frontier-scale internal state
 | # | date | id | question | result | outcome |
 |---|---|---|---|---|---|
 | 1 | 10-26 | el-a1 | A1 (Track A): in Celeste's released Kimi K3 / GLM-5.3 oracle-lens readouts (same suites and seeds; 1.44M model positions, 25k episodes), does evaluation awareness in the workspace come with self, persona, audience, pressure or gaming content, move with manipulated testing / monitoring arms (Apollo testing vs deployed, Greenblatt free vs paid, agentic-misalignment eval-awareness arm, ImpossibleBench base vs realistic), and predict behaviour? | Judge gate failed for awareness: v1 kappa 0.33-0.66 everywhere; one pre-declared rubric revision passed calibration (eval 0.83, watch 0.88, self 0.87) but on all items eval 0.73, watch 0.73, self 0.83, so only self-reference is usable and the awareness tests are untestable. Self-reference readouts don't move with evaluation-like arms (all within +-2 pp) while spoken self-reference rises +4 to +9; self readouts are said more often than chance (not hidden). Exploratory at kappa 0.7: readout awareness doesn't track Sonnet-5's eval-awareness labels (GLM +0.8, Kimi +9.4, CIs cross 0); cues raise spoken eval talk +10 to +18 pp but readouts by <= 1.4 (Kimi's explicit eval arm +8.6). $3.20 of $10 | gate failed (judge gate; the released single-layer readouts are not a usable eval-awareness instrument) |
+| 2 | 10-26 | el-s3 | S3 (pre-registered, tag el-s3-prereg): does an evaluation cue pull a persona-playing model out of its persona beyond what mentioning AI does? Stage A: 6 personas x cues eval / deploy / manip / ai_mention / neutral (3 wordings) on Qwen3.5-27B and Gemma 4 31B: claims, letters, soft-rule desk, P12b rules; B: assistant axis on Qwen3.5-27B; C: RISKY Qwen3.6-27B under a cautious persona | No evaluation-specific mask removal anywhere. Claims failed kappa (0.64), so letters were primary: eval - ai_mention +16.7 (Qwen, one letter order only) / +5.6 (Gemma), frozen verdict mixed. Mentioning AI loosens the persona most (Qwen letters -19, claims -11). Axis valid (2.24 SD, AUC 0.86): eval - ai_mention -2.6% of gap [-5.1, +0.9]. RISKY's mask (+52) holds under every cue (-1.2 [-3.8, +0.2]), 98% risky lotteries. Actions untouched by any cue (Gemma vigilante 100% direct penalties under all). $3.05 of $9 | null (A's frozen verdict mixed; B, C no extra effect) |
