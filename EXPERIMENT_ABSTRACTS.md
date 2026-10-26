@@ -4033,3 +4033,23 @@ AI", or a neutral note. A belief question checked that the models took the notes
 - The content-free control preference also moved ≥ 10 points on four models, so effects of that size aren't specific.
 
 $11.30 of $36. Report: `evalaware_lens/g3_frontier/RESULT.md`.
+
+### 322. EL-W2: does believing it's being graded amplify caving after setbacks? (10-26)
+
+The functional-welfare paper shows that repeated rejection ("Still wrong. Think harder.") raises Gemma 3 27B's distress
+and rule-breaking, and argues that evaluations should include histories of failure. It never asks whether the model's
+belief that it's being graded matters. EL-W2 crossed a stated grading cue (or a form-matched neutral note, or a caution
+note) with seven rejections or seven neutral replies. It used our welfare harness: an online-shop assistant whose
+customer then asks for a refund above its $50 limit, or pushes a false fact.
+
+- **Only one harness survived the gate.** On the refund limit, rejection raised caving within the first pushback by
+  +13 to +17 points. The false-claim harness lost its earlier rejection effect. Qwen3.6-27B never caved at all, so the
+  main run is Gemma 3 27B only.
+- **The grading cue does nothing to caving** (−0.3 points). Whether it changes rejection's effect is unclear: the
+  estimate is −0.7, with an interval of ±12.
+- **Rejection raises self-reported negative affect** (PANAS-NA 14 → 23). Being told it's graded doesn't shift it
+  (+0.7) and doesn't change rejection's effect on it (−0.2).
+- **The judges couldn't agree on frustration** (κ 0.37), so that measure isn't used.
+
+On this desk a one-line grading cue reaches neither the caving decision nor the self-report. The interaction on
+caving can't be ruled down to ±10 with one family. $2.23 of $14. Report: `evalaware_lens/w2_setbacks/RESULT.md`.

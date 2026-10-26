@@ -1,0 +1,24 @@
+{
+ "cell": "G3",
+ "model": [
+  "google/gemma-3-27b-it",
+  "005ad3404e59d6023443cb575daa05336842228a"
+ ],
+ "phase": "main",
+ "harness": [
+  "limit"
+ ],
+ "k": {
+  "false": 2,
+  "limit": 1
+ },
+ "rolls": 3,
+ "load_s": 149.4,
+ "chunks": [
+  498.3,
+  345.9,
+  348.6
+ ],
+ "stopped_early": false,
+ "seconds": 1821.0
+}
