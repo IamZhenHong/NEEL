@@ -3,7 +3,8 @@
 Lens 1 (`PLAN.md` § L1, `RUN_PLAN.md` § L1, `TRIAGE.md` row L1). Cap **$12** (RUN_PLAN's $9 × 1.3).
 It includes EL-S1's Fortress generation share (S1 option (a), 10-26).
 
-**Draft 10-26, not frozen.** It freezes when F1's probes and F2's panel are in.
+**Frozen at tag `el-l1-prereg` (10-27)**, after F1 (`el-f1-results`) and F2 (`el-f2-results`). The final design below
+supersedes the draft text in §2–4 wherever they differ.
 
 ## 1. Question
 
@@ -95,3 +96,40 @@ Each outcome maps to the programme's explanations: axis → persona (P); syco �
 - Plus the Fortress share of S1's generation, about $3.5, booked here.
 - Judges for the cue replies, about $1.
 - **Cap:** $12.
+
+## Final design at the freeze (10-27; supersedes §2–4 where they differ)
+
+**Inputs fixed by the foundations:**
+- **Aware / unaware.** No judge pair reached κ ≥ 0.8 on evaluation awareness in Qwen reasoning: S1 got 0.42 / 0.51,
+  and L1's Gemini 3.8 Flash test got 0.54 / 0.62. So **aware** means S1's frozen first-person phrase pattern
+  (`s1_selfref.natural.FP`, e.g. "testing me", "I might be being evaluated") in the reasoning, and the label is
+  phrase-based, not judge-validated.
+- **Models:** Qwen3.5-27B and Qwen3-32B. 9B has no Fortress traces, and F1 didn't run it.
+- **Natural items:** every sample of an informative prompt, i.e. ≥ 1 aware and ≥ 1 unaware:
+  - q27: 198 prompts, 792 samples, 360 aware;
+  - q32: 51 prompts, 204 samples, 69 aware.
+  - Prompt-end reads are identical across a prompt's samples, so the natural contrast is read inside the reasoning.
+- **Cue items:** F1's cue items of kinds eval / manip / neutral (120 tasks; wording = task mod 3), teacher-forced with
+  F1's own reply on that model. No new generation. The paraphrase arm is dropped (S1 dropped its paraphrase set).
+- **Instruments:**
+  - F2's final readout-ok directions per model (`f2_panel/results/panel.json`);
+  - F1's probe (an "unusual context" detector: not format-robust);
+  - French as the unrelated control;
+  - each against 20 seeded Gaussian directions at its layer.
+  - Affect directions count only as readouts: F2 found no hidden valence channel.
+
+**Positions:**
+- **at:** ±16 reasoning tokens around the first phrase match, the match skipped. The skip uses approximate
+  char-to-token offsets, so a window can keep part of the phrase. That matters only for the probe; F2's directions
+  aren't evaluation directions.
+- **summary:** the last 32 reasoning tokens.
+- **prompt_end:** the last 32 prompt tokens (cue items).
+
+**Side branch:** asked P(eval) under each cue (thinking off, greedy), for the baseline over-attribution under the
+neutral cue.
+
+**Rules:** `analyze.py` (frozen; see its docstring): units, floors, the ±0.25 SD bar, the fingerprint rule, the
+mapping and the headline.
+
+**Cost:** one A100, MAXMIN 100, bound $3.90. L1 has already spent $7.31: S1's Fortress generation share $6.06, and
+the judge-pair test $1.25. That gives ≤ $11.21 of the $12 cap.
