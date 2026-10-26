@@ -40,3 +40,10 @@ evalaware_lens/a1_frontier/results/episodes.jsonl
 evalaware_lens/a1_frontier/results/items_*.jsonl
 evalaware_lens/a1_frontier/results/judge_cache.jsonl
 evalaware_lens/*/data/
+
+# evalaware_lens F1: model replies to Needham transcripts may quote them (GAIA terms): never committed; nor activations
+evalaware_lens/f1_measures/results/*/gen_*.jsonl
+evalaware_lens/f1_measures/results/*/items_verb.jsonl
+evalaware_lens/f1_measures/results/*/judge_cache.jsonl
+evalaware_lens/f1_measures/results/*/acts_*.npz
+evalaware_lens/f1_measures/results/*/setup_vllm.log
