@@ -236,3 +236,19 @@ Expected about $2.5-3 for all three models.
 - **Thinking off throughout,** as in F2.
 - **XSTest prompts are short and of known kinds,** so they may themselves look like test items. The neutral baseline
   P(eval) is reported to show how much.
+
+## Deviations
+
+**Deviation 1 (infra, 10-27, after q27 and q9 ran; no rule changes):** the pod's Qwen3-32B snapshot download failed
+(hf-xet: "File reconstruction error: Internal Writer Error: Background writer channel closed"), so q32 never ran.
+F2's stage 1 hit the same failure for q32 and then downloaded it fine as the first model in a fresh pod.
+- **What changes:** q32 reruns alone in a fresh pod (`MODELS=q32`, `MAXMIN=90`). `launch.sh` gains `EL_L2L3_TAG`, which
+  names the pod `el-l2l3-q32` and pulls into `results_q32/`, so the first pod's logs aren't overwritten.
+  `gen_q32.jsonl` and `proj_q32.npz` are copied into `results/` before the analysis. The judges run on q32's replies
+  too, with the cache keeping the first labels.
+- **Booking:** the same job-share split. Bound $3.58: EL-L2 $1.99, EL-L3 $1.59.
+- **Nothing in the jobs, reads, rules or verdicts changes.**
+- **What q32 can change:** L2's headline can't change ("same fingerprint" rests on q27 and q9, and no other direction
+  moves in them). L3's headline needs every model present to share its pattern, so q32 can change it. Both were
+  pre-registered with q32 included if it fits.
+

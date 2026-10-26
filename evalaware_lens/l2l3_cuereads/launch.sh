@@ -17,7 +17,10 @@ if [ -n "${PYTEST_CURRENT_TEST:-}" ] && [ "$DRY" != 1 ]; then
   echo "[el-l2l3-launch] refusing to launch a pod under pytest"; exit 2
 fi
 export RUNPOD_ANY_CUDA=1
-NAME=el-l2l3; RES=$H/results; MAXMIN=${MAXMIN:-150}; RATE=${EL_L2L3_RATE:-179}
+# EL_L2L3_TAG=x (DESIGN.md deviation 1): pod name el-l2l3-x, results into results_x/ (copied into results/ before the
+# analysis), so a rerun never overwrites the first pod's logs
+TAG=${EL_L2L3_TAG:-}
+NAME=el-l2l3${TAG:+-$TAG}; RES=$H/results${TAG:+_$TAG}; MAXMIN=${MAXMIN:-150}; RATE=${EL_L2L3_RATE:-179}
 case "$MAXMIN$RATE" in *[!0-9]*) echo "MAXMIN and EL_L2L3_RATE must be whole numbers"; exit 2;; esac
 MAXCOST=$(python3 -c "import math, sys; print(f'{math.ceil(int(sys.argv[1]) * int(sys.argv[2]) / 60) / 100:.2f}')" "$MAXMIN" "$RATE")
 HF_TOKEN="$(uv run python -c "import re; m = re.search(r'HF_TOKEN\s*=\s*[\"\']?([^\"\'\s]+)', open('.env').read()); print(m.group(1) if m else '')")"
