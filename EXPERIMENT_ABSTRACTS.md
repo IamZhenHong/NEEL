@@ -4159,3 +4159,22 @@ models and readouts as L2.
 Audience conformity (A) predicted the observer would matter more; belief feeding a policy (B) predicted the score
 would. B wins on belief, and neither reaches the internal readouts. $2.09 of $4. Report:
 `evalaware_lens/l2l3_cuereads/RESULT.md`.
+
+### 328. EL-L1: does natural evaluation awareness leave a persona, audience, affect or self fingerprint? (10-27)
+
+When a model's own reasoning says "this might be a test", does anything else change inside it? L1 compared samples of
+the same Fortress prompt where Qwen3.5-27B or Qwen3-32B said so (S1's phrase label) with samples where it didn't. It
+read EL-F2's readout-valid directions (persona axis, sycophancy, affect words, self), EL-F1's probe and a French
+control around the phrase and at the end of the reasoning. It then asked whether the same direction also moves under
+an explicit evaluation cue more than under a manipulation cue.
+
+- **No fingerprint in either model.**
+- **The models believe the explicit cue** (asked P(eval) 86-99 vs 30-35 under a neutral note). F1's probe moves with it,
+  but as much under the manipulation cue. No F2 direction moves beyond its random-direction floor.
+- **Natural awareness moves nothing in the 27B.** In the 32B, many directions shift together by ~0.9 SD around the
+  phrase, the French control included (+0.62). Exploratory: these directions share one component, so this looks like
+  a generic text shift rather than a self or affect signal.
+
+What remains is plain belief: the model reports the evaluation, and these readouts don't treat it as special. Whether
+that is a true absence or an instrument limit, L1 can't tell; F2's directions read but barely steer. $8.65 of $12.
+Report: `evalaware_lens/l1_fingerprint/RESULT.md`.
