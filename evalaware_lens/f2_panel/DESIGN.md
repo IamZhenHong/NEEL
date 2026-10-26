@@ -168,3 +168,8 @@ The change:
 - The mention control, the valence-channel check and the steering gate are unchanged.
 
 The valence-channel check failed for both models under the frozen rule, and that result stands.
+
+**Deviation 3 (code fix, 2026-10-26, before any stage-2 run on q32).** `dirs.axis_for` picked the assistant replies by
+`group in ('default', 'helpful')`. In SC-M34's prompts those names are the `role` field, and `group` is
+'assistant' / 'role'. So q32's built axis had an empty assistant set, and its check read 0% of roles below. Fixed to
+`group == 'assistant'`. The recipe and rule are unchanged; q9 and q27 use the external axes and aren't affected.

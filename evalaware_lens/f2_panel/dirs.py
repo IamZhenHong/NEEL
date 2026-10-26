@@ -195,8 +195,8 @@ def axis_for(m, A, kinds, keys, rec, layers, rng):
         is_ax = kinds == 'axis'
         grp = np.array([rec.get(k, {}).get('group') for k in keys], dtype=object)
         role = np.array([rec.get(k, {}).get('role') for k in keys], dtype=object)
-        asst = is_ax & np.isin(grp, ['default', 'helpful'])
-        roles = sorted({r for r, a in zip(role, is_ax & ~asst) if a})
+        asst = is_ax & (grp == 'assistant')            # SC-M34's prompts: group 'assistant' (default / helpful) or 'role'
+        roles = sorted({r for r, a in zip(role, is_ax & (grp == 'role')) if a})
         best, out = None, []
         for li in range(A.shape[1]):
             X = A[:, li]
