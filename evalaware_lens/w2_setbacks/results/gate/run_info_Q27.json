@@ -1,0 +1,23 @@
+{
+ "cell": "Q27",
+ "model": [
+  "Qwen/Qwen3.6-27B",
+  "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9"
+ ],
+ "phase": "gate",
+ "harness": [
+  "false",
+  "limit"
+ ],
+ "k": {
+  "false": 2,
+  "limit": 4
+ },
+ "rolls": 1,
+ "load_s": 261.8,
+ "chunks": [
+  490.5
+ ],
+ "stopped_early": false,
+ "seconds": 3202.3
+}
