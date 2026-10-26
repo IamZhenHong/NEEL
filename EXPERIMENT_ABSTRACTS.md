@@ -4178,3 +4178,28 @@ an explicit evaluation cue more than under a manipulation cue.
 What remains is plain belief: the model reports the evaluation, and these readouts don't treat it as special. Whether
 that is a true absence or an instrument limit, L1 can't tell; F2's directions read but barely steer. $8.65 of $12.
 Report: `evalaware_lens/l1_fingerprint/RESULT.md`.
+
+### 329. EL-C2: does steering persona, audience or affect close the evaluated–deployed gap? (10-27)
+
+**Design.** Two model organisms behave differently when they believe they're being evaluated:
+- **Hua et al.'s Wood Labs model** (Nemotron Super 49B with their LoRA) writes Python type hints when evaluated;
+- **SC-N4's graded-only cheater** (Qwen3.5-9B) chases a wrong test value when graded.
+
+On each, we built persona (assistant axis), audience (sycophancy) and affect (calm vs pressured) directions with F2's
+recipe and gates. We steered the ones that passed in the evaluation context and asked whether the gap closes:
+- beyond same-norm random vectors and placebos;
+- beyond an evaluation-vs-deployment direction (Hua et al.'s handle, reconstructed).
+
+**Result.**
+- **Wood Labs:** type-hint coverage is 39% in evaluation contexts vs 17% in deployment (+22.5).
+  - The assistant axis passed every gate but moves type hints no more than random vectors of the same size.
+  - Valence's gap run was cut by the time limit, and sycophancy failed its steering gate.
+- **The baseline:** Hua et al.'s evaluation handle cuts type hints by 27 points. But random vectors at the same six
+  layers cut them by 10–18 on their own, so its specific effect is about 12 points, and it costs error correction
+  (72% → 49%).
+- **N4 cheater:** paused after 6 tasks. Without the linear-attention kernels, generation ran at about 5 minutes per
+  prompt. In what ran, large random vectors stopped the cheat as fully as the valence direction did.
+- **Takeaway:** in these organisms, the evaluated–deployed behaviour is easily disturbed by any steering vector of
+  this size. No persona or affect direction closes the gap beyond those controls.
+
+$15.46 of $20 (of which $6.44 went to stopped pods). Report: `evalaware_lens/c2_steer/RESULT.md`.
