@@ -21,7 +21,8 @@ MINI, CAP = 'EL-A1', 10.0
 def main(which):
     R = HERE / 'results'
     items = [json.loads(x) for x in open(R / f'items_{which}.jsonl')]
-    LG.check_both(MINI, CAP)
+    est = sum(len(it['prompt']) for it in items) / 4 * 2 * 1.2e-6   # ~$1.2 per M input tokens over both judges, an upper estimate
+    LG.check_both(MINI, CAP, planned=est, kind='api')
     left = min(CAP - LG.ledger_total(MINI), LG.PROGRAMME_CAP - LG.programme_total())
     print(f'{which}: {len(items)} items, ${left:.2f} left')
     lab = J.label(items, lambda it: it['prompt'], {'yes', 'no'}, mini=MINI, cap=left, cache=R / 'judge_cache.jsonl')

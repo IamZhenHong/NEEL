@@ -26,12 +26,18 @@ def programme_total() -> float:
     return sum(json.loads(x)["usd"] for x in LEDGER.read_text().splitlines() if x.strip())
 
 
-def check_both(mini: str, cap: float, planned: float = 0.0) -> None:
-    """The mini's own cap, then the programme's $226: exit if either would be passed."""
+def check_both(mini: str, cap: float, planned: float = 0.0, kind: str | None = None) -> None:
+    """The mini's own cap, the programme's $226, and (kind 'api' / 'gpu') the live account balance: exit if any would
+    be passed. A paid step (planned > 0) must name its kind, so the balance is always checked (common/balance.py)."""
     check_cap(mini, cap, planned)
     spent = programme_total()
     if not spent + planned <= PROGRAMME_CAP:
         raise SystemExit(f"[budget] programme: ledger ${spent:.2f} + planned ${planned:.2f} > cap ${PROGRAMME_CAP:.2f}")
+    if planned > 0 and kind is None:
+        raise ValueError("check_both: a paid step must pass kind='api' or kind='gpu' (the live balance check)")
+    if kind is not None:
+        from evalaware_lens.common import balance
+        balance.require(kind, planned)
 
 
 __all__ = ["LEDGER", "PROGRAMME_CAP", "Booker", "check_both", "check_cap", "ledger_add", "ledger_total",

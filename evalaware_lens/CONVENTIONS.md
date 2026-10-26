@@ -34,8 +34,13 @@ sessions: neel-97 [6c3ec3].
   before any spend) to `evalaware_lens/ledger.jsonl`, under your mini's ID.
   - API: SC-M10's / persona_affect's client or `persona_affect.common.judges`; util.Booker books as it goes.
   - Pods: the guarded launcher.
-- Before every paid step, call `LG.check_both("EL-<code>", <your cap>, planned=<upper bound>)`. It enforces your
-  mini's cap **and** the programme's **$226** hard cap, which is shared by every session.
+- Before every paid step, call `LG.check_both("EL-<code>", <your cap>, planned=<upper bound>, kind="api"|"gpu")`.
+  It enforces three things: your mini's cap, the programme's **$226** hard cap (shared by every session), and the
+  **live account balance** (`common/balance.py`).
+  - kind="api" needs OpenRouter credit ≥ planned + $3.
+  - kind="gpu" needs the RunPod balance, minus 3 h at each running pod's rate, ≥ planned + $5.
+- **Money is tight (10-26):** OpenRouter $50, RunPod $47, against the $226 programme. Until the owner tops up, launch
+  no pod and no API batch over $3 without asking bdec7d. Design and pre-registration work goes ahead.
 - **Caps** are RUN_PLAN.md's estimate × 1.3. To raise one, message bdec7d first.
 - The OpenRouter key is shared with other lines, so always book.
 
