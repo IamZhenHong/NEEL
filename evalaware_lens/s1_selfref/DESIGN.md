@@ -247,3 +247,26 @@ Fortress is primary; AM, Needham and the pooled sources are secondary.
 - Results: `results/` (committed: no text); traces and labels in `data/` (gitignored).
 
 ## Deviations after the freeze
+
+**Deviation 1 (infra, 10-26 ~14:20 UTC, before any trace was judged or read).** Q27 (Qwen3.5-27B on one A100) runs
+about 3× slower than planned:
+- its first 400 Fortress jobs took 1,377 s;
+- its reasoning is long (median 2,694 output tokens; 18% reach the 4,096 cap).
+
+So the first pod's 120 minutes cover at most its Fortress jobs, and Agentic Misalignment and Needham are cut. Q32 (2 ×
+A100) is on plan: Fortress was done in 33 min.
+
+**Fix:**
+- A second pod, `launch_gen2.sh`, CELL=Q27: 2 × A100 SXM4, TP 2, MAXMIN 90, max-cost $5.40, bound $7.20.
+- It runs the same frozen jobs, seeds and sampling, skipping every key the first pod's pulled records hold (`gen.py
+  --skip`, the list in `data/gen2/`).
+- Its records go to `data/gen/Q27b/`, which `judge.gen_records` reads with Q27's.
+- It is booked by `book_split.py`: any Fortress jobs to EL-L1, the rest to EL-S1.
+- It is a new script because `launch.sh` was running.
+- Tag `el-s1-dev1`.
+
+Nothing else changes: jobs, rules, analysis and judges are as frozen. The edit-test stage (`launch.sh` STAGE=cont)
+gets its tag check moved to `el-s1-dev1` in a later commit, once the running launches have exited.
+
+**Cost:** the S1 estimate rises by about $2.5. The first Q27 pod ($3.6) is almost all Fortress, so it is booked to
+EL-L1. S1's estimate stays under $14.

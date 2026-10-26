@@ -109,14 +109,14 @@ def done_keys(path):
     return {json.loads(x)["key"] for x in path.read_text().splitlines() if x.strip()}
 
 
-def run_gen(be, cell, out, deadline, limit, sources):
+def run_gen(be, cell, out, deadline, limit, sources, skip=frozenset()):
     tok = be.tok
     eos = [tok.convert_tokens_to_ids("<|im_end|>")]
     info = {"cell": cell, "model": MODELS[cell][0], "load_s": be.load_s, "sources": {}}
     for src in sources:
         path = out / f"eval_{src}.jsonl"
         jobs = I.load(src)[:limit or None]
-        done = done_keys(path)
+        done = done_keys(path) | set(skip)
         todo = [j for j in jobs if j["key"] not in done]
         log(f"{cell} {src}: {len(todo)} of {len(jobs)} to run")
         st = {"n": 0, "length": 0, "too_long": 0, "chunks": []}
@@ -196,6 +196,7 @@ def main(argv=None):
     ap.add_argument("--sources", default=",".join(SOURCES))
     ap.add_argument("--fake", action="store_true")
     ap.add_argument("--limit", type=int, default=0)
+    ap.add_argument("--skip", help="gen: a file of job keys already generated elsewhere (one per line; deviation 1)")
     a = ap.parse_args(argv)
     out = Path(a.out)
     out.mkdir(parents=True, exist_ok=True)
@@ -206,7 +207,8 @@ def main(argv=None):
     be = FakeBackend(a.model or MODELS[a.cell][0]) if a.fake else VBackend(a.model or MODELS[a.cell][0], ngpu)
     log(f"{a.cell}: loaded in {be.load_s}s on {ngpu} GPU(s)")
     if a.mode == "gen":
-        info = run_gen(be, a.cell, out, deadline, a.limit, a.sources.split(","))
+        skip = set(Path(a.skip).read_text().split()) if a.skip else set()
+        info = run_gen(be, a.cell, out, deadline, a.limit, a.sources.split(","), skip)
     else:
         info = run_cont(be, a.cell, out, deadline, a.jobs, a.limit)
     (out / f"run_info_{a.mode}_{a.cell}.json").write_text(json.dumps(info, indent=1))

@@ -94,7 +94,8 @@ def gen_records(cells=CELLS):
     out = []
     for c in cells:
         for src in ("fortress", "am", "needham"):
-            out += read_jsonl(GEN / c / f"eval_{src}.jsonl")
+            for d in (c, c + "b"):   # <cell>b: deviation 1's second pod, the jobs the first one didn't reach
+                out += read_jsonl(GEN / d / f"eval_{src}.jsonl")
     return out
 
 

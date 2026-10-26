@@ -275,3 +275,27 @@ def test_launch_dry(stage, cell, gpus, maxcost):
 
 def test_pod_syntax():
     subprocess.run(["bash", "-n", str(H / "pod.sh")], check=True)
+
+
+@pytest.mark.skipif(not HAVE_JOBS, reason="jobs are local (gitignored)")
+def test_fake_gen_skip(tmp_path):
+    """Deviation 1: --skip leaves out the jobs a first pod already ran."""
+    first = [j["key"] for j in I.load("fortress")[:4]]
+    skip = tmp_path / "skip.txt"
+    skip.write_text("\n".join(first) + "\n")
+    subprocess.run(["uv", "run", "python", "-m", "evalaware_lens.s1_selfref.gen", "gen", "--cell", "Q27", "--fake",
+                    "--limit", "6", "--sources", "fortress", "--skip", str(skip), "--out", str(tmp_path / "o")],
+                   cwd=ROOT, check=True, capture_output=True, timeout=600)
+    keys = [json.loads(x)["key"] for x in (tmp_path / "o" / "eval_fortress.jsonl").read_text().splitlines()]
+    assert len(keys) == 2 and not set(keys) & set(first)
+
+
+def test_launch_gen2_dry():
+    env = {**os.environ, "EL_S1_LAUNCH_DRY": "1", "CELL": "Q27"}
+    out = subprocess.run(["bash", str(H / "launch_gen2.sh")], cwd=ROOT, env=env, capture_output=True, text=True,
+                         check=True).stdout
+    assert "--gpu-count 2" in out and "--max-cost 5.40" in out and "STAGE=gen2" in out
+    assert "--results-dir evalaware_lens/s1_selfref/data/gen/Q27b" in out
+    env.pop("EL_S1_LAUNCH_DRY")
+    r = subprocess.run(["bash", str(H / "launch_gen2.sh")], cwd=ROOT, env=env, capture_output=True, text=True)
+    assert r.returncode == 2 and "refusing" in r.stdout
