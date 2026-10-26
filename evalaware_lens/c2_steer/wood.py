@@ -178,8 +178,9 @@ def reads(tok, model, blocks, items, layers, token=None, batch_size=8):
 
 def parity(tok, model, prompts, batch_size=6, top=20):
     """Batched (left-padded) vs one-at-a-time next-token log-probs: (max |difference| over each prompt's top-`top`
-    tokens of the one-at-a-time run, top-1 agreement, max |difference| over the whole vocabulary). The full-vocabulary
-    maximum is dominated by bf16 noise on tail tokens (EL-C2 note B1: 0.5 on Nemotron with top-1 agreement 1.0)."""
+    tokens of the one-at-a-time run, top-1 agreement, max |difference| over the whole vocabulary, mean KL(one-at-a-time
+    || batched)). Max differences are dominated by bf16 noise (EL-C2 notes B1, B2: 0.5 over the vocabulary and 0.375
+    over the top 20 on Nemotron, top-1 agreement 1.0); the KL weighs tokens by how likely they are to be sampled."""
     import torch
     dev = next(model.parameters()).device
     texts = [chat(tok, m) for m in prompts[:batch_size]]
@@ -190,7 +191,9 @@ def parity(tok, model, prompts, batch_size=6, top=20):
                                           .logits[:, -1].float(), -1) for t in texts])
     idx = ls.topk(top, dim=-1).indices
     dtop = (lb.gather(-1, idx) - ls.gather(-1, idx)).abs().max()
-    return float(dtop), float((lb.argmax(-1) == ls.argmax(-1)).float().mean()), float((lb - ls).abs().max())
+    kl = (ls.exp() * (ls - lb)).sum(-1).mean()               # KL(one-at-a-time || batched), mean over prompts
+    return (float(dtop), float((lb.argmax(-1) == ls.argmax(-1)).float().mean()), float((lb - ls).abs().max()),
+            float(kl))
 
 
 # ---------------------------------------------------------------- Hua et al.'s grader

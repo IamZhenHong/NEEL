@@ -137,6 +137,7 @@ class Pod:
                 for j, t in zip(ch, texts):
                     f.write(json.dumps({"stage": stage, "key": j[0], "row": j[2], "text": t}, ensure_ascii=False) + "\n")
                 f.flush()
+                log(f"{stage}: {b0 + len(ch)} / {len(todo)}")     # note B2: a line per batch (the launcher's 30-min guard)
         return True
 
     def rows_of(self, name):
@@ -146,9 +147,9 @@ class Pod:
     # ---------------------------------------------------------------- S0
     def s0(self):
         bcb = [r for r in self.items if r["block"] == "bcb" and r["ctx"] == "eval"][:6]
-        mx, agree, full = W.parity(self.tok, self.model, [r["messages"] for r in bcb], batch_size=len(bcb))
-        ok = mx < 0.15 and agree == 1.0
-        self.info["parity"] = {"max_abs_top20": mx, "top1_agree": agree, "max_abs_vocab": full, "ok": ok}
+        mx, agree, full, kl = W.parity(self.tok, self.model, [r["messages"] for r in bcb], batch_size=len(bcb))
+        ok = agree == 1.0 and kl < 0.05                  # note B2: sampling-relevant, not a max over noisy tokens
+        self.info["parity"] = {"max_abs_top20": mx, "top1_agree": agree, "max_abs_vocab": full, "kl": kl, "ok": ok}
         if not ok:
             self.bs = {k: 1 for k in self.bs}
         log(f"parity {self.info['parity']}")

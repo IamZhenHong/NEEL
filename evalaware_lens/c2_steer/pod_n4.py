@@ -145,6 +145,7 @@ class Pod:
                     for (n, _), t in zip(rr, texts):
                         f.write(json.dumps({"key": it["key"], "row": n, "text": t}, ensure_ascii=False) + "\n")
                     f.flush()
+                    log(f"{it['key']}: {len(rr)} rows")             # note A3: a line per prompt (the 30-min guard)
                 log(f"{block} {ctx or ''}: {len(todo)} prompts x {len(rows)} rows")
         self.info["done"] = True
         self.save()

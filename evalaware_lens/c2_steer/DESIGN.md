@@ -276,3 +276,27 @@ cost. Otherwise "no persona / audience / affect direction closes the gap beyond 
   per-layer norms 1.1–3.7. No generations. The relaunch recomputes everything.
 - **Spend:** this pod's $1.93 is booked to EL-C2. The relaunch keeps MAXMIN 200 (bound $13.74). Booked plus bounds
   is $20.42, just over the cap, so the relaunch runs at MAXMIN 190 (bound $13.07) to keep it within $20.
+
+**B2 and A3 (infra, 10-27, before any outcome data from either testbed).**
+
+**Wood relaunch (B2).**
+- **Parity failed again:** max |Δ log-prob| over the top-20 tokens was 0.375 with top-1 agreement 1.0, so the pod
+  fell back to batch size 1. Stopped after 43 min, $3.06; no outcome generations had run.
+- **The fixed bar was still a maximum over bf16-noisy log-probs.** It came from SC-M34's Qwen3.5 check, where
+  padding really broke decoding (top-1 agreement 0.67). Hua et al. generate Nemotron in left-padded batches
+  themselves.
+- **New gate:** top-1 agreement 1.0 and mean KL(one-at-a-time ‖ batched) < 0.05, i.e. what matters for sampling.
+  The maxima are still reported.
+- **The launcher aborts a pod whose job log is silent for 30 min**, so `pod_wood.py` now logs every batch.
+- **Next launch:** MAXMIN 160 (bound $11.34). Booked so far $6.44, so booked + bound = $17.78. The deadline drops
+  the last direction first (priority axis, valence, syco).
+
+**N4 testbed paused (A3).**
+- **First pod (10-26, $1.45):** aborted by the same 30-min silence guard while generating. `pod_n4.py` now logs every
+  prompt. Without the linear-attention kernels (flash-linear-attention / causal_conv1d didn't install;
+  transformers' PyTorch fallback ran), Qwen3.5-9B took ≈ 5 min per prompt for 19 rows. The full design (252 prompts)
+  would need ≈ 20 h, beyond the cap.
+- **No further N4 spend without the owner raising the cap.** Its partial data (gencheck, 20 prompts; fix G1, 6
+  tasks; all 19 rows) is reported as descriptive only.
+- **What did complete on that pod:** the transfer gate (valence held-out AUC on VN-ACT 1.00, kept) and the in-pod
+  evdep (layer 12, held-out AUC 0.99, readout-ok).
