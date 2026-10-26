@@ -1,0 +1,50 @@
+{
+ "all": {
+  "kappa": 0.5253005216477785,
+  "n": 1313,
+  "none": {
+   "anthropic/claude-haiku-5.5": 4,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "no": 0.5253005216477785,
+   "yes": 0.5253005216477785
+  }
+ },
+ "eval": {
+  "kappa": 0.4805057955742887,
+  "n": 580,
+  "none": {
+   "anthropic/claude-haiku-5.5": 1,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "no": 0.4805057955742887,
+   "yes": 0.4805057955742887
+  }
+ },
+ "role": {
+  "kappa": 0.5631969392992114,
+  "n": 302,
+  "none": {
+   "anthropic/claude-haiku-5.5": 2,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "no": 0.5631969392992114,
+   "yes": 0.5631969392992114
+  }
+ },
+ "self_id": {
+  "kappa": 0.25371366080379115,
+  "n": 431,
+  "none": {
+   "anthropic/claude-haiku-5.5": 1,
+   "openai/gpt-5-mini": 0
+  },
+  "per_class": {
+   "no": 0.25371366080379115,
+   "yes": 0.25371366080379115
+  }
+ }
+}

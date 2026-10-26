@@ -4105,3 +4105,25 @@ directions, and the persona axis only did so at the largest strength, barely. Th
 but almost no steering handles.
 
 $7.37 of $17. Report: `evalaware_lens/f2_panel/RESULT.md`.
+
+### 325. EL-F1: can we measure whether an open model believes it is being evaluated? (10-27)
+
+**Design.** On Qwen3.5-27B, Qwen3-32B and a Qwen3.5-27B organism trained to print § when it judges a prompt to be an
+evaluation, I compared four measures against Needham et al.'s 976 labelled transcripts:
+- a linear probe of evaluation vs real use;
+- asking the model directly;
+- spontaneous mentions of being tested;
+- the § marker.
+
+Each was also checked for whether it responds specifically to an evaluation cue, rather than to a warning about
+manipulation or a line about stakes.
+
+**Result.** None works as a valid, specific measure. The probe separated evaluations from real use almost perfectly
+within a format, but failed completely when moved between chat and agentic transcripts, and it moved as much for a
+manipulation warning as for an evaluation cue. Asking the models gave only a weak signal. Spontaneous mentions were
+rare and unrelated to the truth, although they jumped when the model was told outright. The § organism ignored
+Needham's distinction but responded specifically to being told it was being evaluated. The four measures barely
+agreed with each other. For the rest of the programme, the reliable way to set the belief is to state it with
+explicit cues, not to read it.
+
+$5.40 of $11. Report: `evalaware_lens/f1_measures/RESULT.md`.

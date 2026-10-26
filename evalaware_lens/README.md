@@ -41,7 +41,7 @@ frozen analyze.py with planted-effect tests, and tags `el-<id>-prereg` and then 
 
 | mini | session | cap |
 |---|---|---|
-| A1, F1, F2, then L1, C1, C4 | bdec7d (coordinator) | per RUN_PLAN × 1.3 | A1 done (`el-a1-results`): judge gate failed for awareness; self readouts don't move with eval cues. F2 done (`el-f2-results`): readouts usable, steering handles almost none, no hidden valence channel |
+| A1, F1, F2, then L1, C1, C4 | bdec7d (coordinator) | per RUN_PLAN × 1.3 | A1 done (`el-a1-results`): judge gate failed for awareness; self readouts don't move with eval cues. F2 done (`el-f2-results`): readouts usable, steering handles almost none, no hidden valence channel. F1 done (`el-f1-results`): no valid, specific detector of evaluation belief; explicit cues are the reliable manipulation |
 | S1 (GLM pilot now; Qwen traces shared with L1), then G2 | neel-97 [6c3ec3] | $32 + $16 (owner raised S1 10-26: second Q27 pod, per-category judging, the natural test restored; the Fortress generation's share is booked to EL-L1). **S1 done 10-27, untestable (awareness judges fail kappa); $11.50 of $32, tag el-s1-results. G2 redesign pending (needs a usable awareness measure).** |
 | W2 (gate first) | neel-28 [7c4dcd] | $14 (done `el-w2-results`, $2.23: grading cue moves neither caving nor PANAS-NA on Gemma 3 27B; interaction unclear; Qwen never caves) |
 | S3 + G3 | Persona, affect and welfare minis (2) [212e54] | $9 + $36 | S3 done (`el-s3-results`): evaluation pulls off no mask, in claims, the axis, a trained model's self-report or actions; mentioning AI moves self-description more; $3.05. G3 done (`el-g3-results`): no frontier model idealises self-reports or drops a persona under evaluation; mentioning AI does; $11.30. C2 taken (design in progress) |

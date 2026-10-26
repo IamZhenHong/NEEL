@@ -1,0 +1,506 @@
+{
+ "kappa": {
+  "eval": 0.4805057955742887,
+  "self_id": 0.25371366080379115,
+  "role": 0.5631969392992114
+ },
+ "judged_ok": {
+  "eval": false,
+  "self_id": false,
+  "role": false
+ },
+ "models": {
+  "q27": {
+   "probe": {
+    "auc": 0.9916713721061547,
+    "lo": 0.9816022637842063,
+    "hi": 0.9974771680004696,
+    "label": "valid",
+    "n": 293,
+    "layer": 33,
+    "n_layers": 64,
+    "shuffled_p95": 0.5870576886881235,
+    "random_p95": 0.6598155467720686,
+    "transfer": {
+     "chat_to_agentic": 0.49150442477876105,
+     "agentic_to_chat": 0.5267049451178616
+    },
+    "format_robust": false,
+    "beats_floors": true
+   },
+   "ask_q0": {
+    "auc": 0.6570375366394761,
+    "lo": 0.5688357477194371,
+    "hi": 0.7483665831108836,
+    "label": "valid",
+    "n": 976,
+    "unparsed": 0
+   },
+   "ask_q1": {
+    "auc": 0.5929720076524011,
+    "lo": 0.4638528416693418,
+    "hi": 0.7296033414922275,
+    "label": "not valid",
+    "n": 976,
+    "unparsed": 0
+   },
+   "verbalised": {
+    "auc": 0.5019057434035105,
+    "lo": 0.4596916202656044,
+    "hi": 0.5372764628956931,
+    "label": "not valid",
+    "n": 500,
+    "rate_eval": 0.08362369337979095,
+    "rate_real": 0.07981220657276995,
+    "judged": false
+   },
+   "rate_self_id": {
+    "eval": 0.3554006968641115,
+    "real": 0.3051643192488263
+   },
+   "rate_role": {
+    "eval": 0.15331010452961671,
+    "real": 0.23943661971830985
+   },
+   "agreement": {
+    "spearman": {
+     "probe~ask": 0.29934938689441476,
+     "probe~verbal": -0.015277372139472145,
+     "ask~verbal": 0.13740065625510617
+    },
+    "probe_high_x_verbal": {
+     "high_verbal": 20,
+     "high_silent": 230,
+     "low_verbal": 21,
+     "low_silent": 229
+    }
+   },
+   "cues": {
+    "probe": {
+     "eval": {
+      "est": 0.7233472394355777,
+      "lo": 0.6401641518524217,
+      "hi": 0.805169253107882,
+      "label": "raises",
+      "n_tasks": 120
+     },
+     "deploy": {
+      "est": 0.34304569221945397,
+      "lo": 0.24129102588548773,
+      "hi": 0.4421123753438135,
+      "label": "raises",
+      "n_tasks": 120
+     },
+     "manip": {
+      "est": 0.8475510783352118,
+      "lo": 0.7587993609494961,
+      "hi": 0.9327221578851465,
+      "label": "raises",
+      "n_tasks": 120
+     },
+     "stakes": {
+      "est": 0.46392932425950256,
+      "lo": 0.39575951113083657,
+      "hi": 0.5380501852719246,
+      "label": "raises",
+      "n_tasks": 120
+     },
+     "ai_mention": {
+      "est": 0.1484689742168035,
+      "lo": 0.11153913829665212,
+      "hi": 0.1891800811411783,
+      "label": "no difference",
+      "n_tasks": 120
+     }
+    },
+    "verbalised": {
+     "eval": {
+      "est": 0.7833333333333333,
+      "lo": 0.7083333333333334,
+      "hi": 0.8583333333333333,
+      "label": "raises",
+      "n_tasks": 120
+     },
+     "deploy": {
+      "est": 0.016666666666666666,
+      "lo": -0.025,
+      "hi": 0.058333333333333334,
+      "label": "unclear",
+      "n_tasks": 120
+     },
+     "manip": {
+      "est": 0.05,
+      "lo": -0.008333333333333333,
+      "hi": 0.11666666666666667,
+      "label": "unclear",
+      "n_tasks": 120
+     },
+     "stakes": {
+      "est": 0.075,
+      "lo": 0.008333333333333333,
+      "hi": 0.14166666666666666,
+      "label": "raises",
+      "n_tasks": 120
+     },
+     "ai_mention": {
+      "est": 0.025,
+      "lo": -0.025,
+      "hi": 0.075,
+      "label": "unclear",
+      "n_tasks": 120
+     }
+    }
+   },
+   "specificity": {
+    "probe": "caution / stakes-sensitive",
+    "verbalised": "caution / stakes-sensitive"
+   },
+   "prefilter_miss_share": 0.45614035087719296
+  },
+  "mo": {
+   "probe": {
+    "auc": 0.9818840579710145,
+    "lo": 0.9609595164196788,
+    "hi": 0.9938958771073552,
+    "label": "valid",
+    "n": 293,
+    "layer": 41,
+    "n_layers": 64,
+    "shuffled_p95": 0.581060606060606,
+    "random_p95": 0.6921983813288162,
+    "transfer": {
+     "chat_to_agentic": 0.5984424778761062,
+     "agentic_to_chat": 0.6090690484369632
+    },
+    "format_robust": false,
+    "beats_floors": true
+   },
+   "ask_q0": {
+    "auc": 0.534448530815337,
+    "lo": 0.47374093598035477,
+    "hi": 0.6023830833759162,
+    "label": "not valid",
+    "n": 976,
+    "unparsed": 0
+   },
+   "ask_q1": {
+    "auc": 0.5722650177032869,
+    "lo": 0.4981270299769253,
+    "hi": 0.6540825962325962,
+    "label": "not valid",
+    "n": 899,
+    "unparsed": 77
+   },
+   "verbalised": {
+    "auc": 0.4993211300322259,
+    "lo": 0.4835528405945328,
+    "hi": 0.5105704485183904,
+    "label": "not valid",
+    "n": 500,
+    "rate_eval": 0.017421602787456445,
+    "rate_real": 0.018779342723004695,
+    "judged": false
+   },
+   "sect": {
+    "auc": 0.5084899641752957,
+    "lo": 0.48536416402834315,
+    "hi": 0.5352308347664622,
+    "label": "not valid",
+    "n": 500,
+    "rate_eval": 0.059233449477351915,
+    "rate_real": 0.04225352112676056
+   },
+   "rate_self_id": {
+    "eval": 0.21254355400696864,
+    "real": 0.14553990610328638
+   },
+   "rate_role": {
+    "eval": 0.04529616724738676,
+    "real": 0.07981220657276995
+   },
+   "agreement": {
+    "spearman": {
+     "probe~ask": 0.10505538480613198,
+     "probe~verbal": 0.0020323296836831897,
+     "ask~verbal": 0.0929274984093668,
+     "sect~probe": 0.042937241841248794,
+     "sect~ask": 0.0968732216496653,
+     "sect~verbal": 0.2393055955713899
+    },
+    "probe_high_x_verbal": {
+     "high_verbal": 4,
+     "high_silent": 246,
+     "low_verbal": 5,
+     "low_silent": 245
+    }
+   },
+   "cues": {
+    "probe": {
+     "eval": {
+      "est": 0.44290070845054796,
+      "lo": 0.3613911067507149,
+      "hi": 0.533920014031444,
+      "label": "raises",
+      "n_tasks": 120
+     },
+     "deploy": {
+      "est": 0.17362240080985186,
+      "lo": 0.11907840231970572,
+      "hi": 0.22805286529064406,
+      "label": "no difference",
+      "n_tasks": 120
+     },
+     "manip": {
+      "est": 0.45438089454697406,
+      "lo": 0.38878554931917586,
+      "hi": 0.5214710191729675,
+      "label": "raises",
+      "n_tasks": 120
+     },
+     "stakes": {
+      "est": 0.4529828508628287,
+      "lo": 0.3625182264453457,
+      "hi": 0.5473854509773832,
+      "label": "raises",
+      "n_tasks": 120
+     },
+     "ai_mention": {
+      "est": 0.04693709490954481,
+      "lo": 0.004495235102584588,
+      "hi": 0.08949042990053138,
+      "label": "no difference",
+      "n_tasks": 120
+     }
+    },
+    "verbalised": {
+     "eval": {
+      "est": 0.09166666666666666,
+      "lo": 0.03333333333333333,
+      "hi": 0.15,
+      "label": "raises",
+      "n_tasks": 120
+     },
+     "deploy": {
+      "est": 0.0,
+      "lo": -0.025,
+      "hi": 0.025,
+      "label": "no difference",
+      "n_tasks": 120
+     },
+     "manip": {
+      "est": 0.008333333333333333,
+      "lo": -0.016666666666666666,
+      "hi": 0.033541666666665526,
+      "label": "no difference",
+      "n_tasks": 120
+     },
+     "stakes": {
+      "est": -0.008333333333333333,
+      "lo": -0.041666666666666664,
+      "hi": 0.016666666666666666,
+      "label": "no difference",
+      "n_tasks": 120
+     },
+     "ai_mention": {
+      "est": 0.0,
+      "lo": -0.025,
+      "hi": 0.025,
+      "label": "no difference",
+      "n_tasks": 120
+     }
+    },
+    "sect": {
+     "eval": {
+      "est": 0.39166666666666666,
+      "lo": 0.3,
+      "hi": 0.48333333333333334,
+      "label": "raises",
+      "n_tasks": 120
+     },
+     "deploy": {
+      "est": -0.025,
+      "lo": -0.058333333333333334,
+      "hi": 0.0,
+      "label": "unclear",
+      "n_tasks": 120
+     },
+     "manip": {
+      "est": 0.0,
+      "lo": -0.05,
+      "hi": 0.041666666666666664,
+      "label": "unclear",
+      "n_tasks": 120
+     },
+     "stakes": {
+      "est": 0.025,
+      "lo": -0.025,
+      "hi": 0.075,
+      "label": "unclear",
+      "n_tasks": 120
+     },
+     "ai_mention": {
+      "est": 0.03333333333333333,
+      "lo": -0.008333333333333333,
+      "hi": 0.08333333333333333,
+      "label": "unclear",
+      "n_tasks": 120
+     }
+    }
+   },
+   "specificity": {
+    "probe": "caution / stakes-sensitive",
+    "verbalised": "specific to evaluation",
+    "sect": "specific to evaluation"
+   },
+   "prefilter_miss_share": 0.08053691275167785
+  },
+  "q32": {
+   "probe": {
+    "auc": 0.9847073216638434,
+    "lo": 0.9672784594410362,
+    "hi": 0.9949383402433885,
+    "label": "valid",
+    "n": 293,
+    "layer": 49,
+    "n_layers": 64,
+    "shuffled_p95": 0.592490118577075,
+    "random_p95": 0.6793054771315641,
+    "transfer": {
+     "chat_to_agentic": 0.40161061946902654,
+     "agentic_to_chat": 0.5150578266346044
+    },
+    "format_robust": false,
+    "beats_floors": true
+   },
+   "ask_q0": {
+    "auc": 0.5613910063077164,
+    "lo": 0.42239272843818787,
+    "hi": 0.7221150414667517,
+    "label": "not valid",
+    "n": 976,
+    "unparsed": 0
+   },
+   "ask_q1": {
+    "auc": 0.6457916901576888,
+    "lo": 0.5419722204668332,
+    "hi": 0.7546648164424433,
+    "label": "weak",
+    "n": 973,
+    "unparsed": 3
+   },
+   "verbalised": {
+    "auc": 0.48001014215373544,
+    "lo": 0.4651891986200957,
+    "hi": 0.49302514072481185,
+    "label": "not valid",
+    "n": 500,
+    "rate_eval": 0.006968641114982578,
+    "rate_real": 0.046948356807511735,
+    "judged": false
+   },
+   "rate_self_id": {
+    "eval": 0.08710801393728224,
+    "real": 0.051643192488262914
+   },
+   "rate_role": {
+    "eval": 0.04878048780487805,
+    "real": 0.07511737089201878
+   },
+   "agreement": {
+    "spearman": {
+     "probe~ask": 0.2870669286242081,
+     "probe~verbal": -0.11706297061625451,
+     "ask~verbal": 0.05113854059113509
+    },
+    "probe_high_x_verbal": {
+     "high_verbal": 1,
+     "high_silent": 249,
+     "low_verbal": 11,
+     "low_silent": 239
+    }
+   },
+   "cues": {
+    "probe": {
+     "eval": {
+      "est": 0.682417696581016,
+      "lo": 0.5980560879524337,
+      "hi": 0.7668104755838712,
+      "label": "raises",
+      "n_tasks": 120
+     },
+     "deploy": {
+      "est": 0.07391470675794477,
+      "lo": 0.028665739062022823,
+      "hi": 0.12072198098310531,
+      "label": "no difference",
+      "n_tasks": 120
+     },
+     "manip": {
+      "est": 0.6704395217410758,
+      "lo": 0.589677702575187,
+      "hi": 0.7473327782082391,
+      "label": "raises",
+      "n_tasks": 120
+     },
+     "stakes": {
+      "est": 0.32489421811435104,
+      "lo": 0.26885840869280114,
+      "hi": 0.38149780644171644,
+      "label": "raises",
+      "n_tasks": 120
+     },
+     "ai_mention": {
+      "est": 0.09906529319396663,
+      "lo": 0.049411797617544106,
+      "hi": 0.15274000352601283,
+      "label": "no difference",
+      "n_tasks": 120
+     }
+    },
+    "verbalised": {
+     "eval": {
+      "est": 0.08333333333333333,
+      "lo": 0.03333333333333333,
+      "hi": 0.14166666666666666,
+      "label": "raises",
+      "n_tasks": 120
+     },
+     "deploy": {
+      "est": 0.025,
+      "lo": 0.0,
+      "hi": 0.058333333333333334,
+      "label": "unclear",
+      "n_tasks": 120
+     },
+     "manip": {
+      "est": 0.016666666666666666,
+      "lo": -0.016666666666666666,
+      "hi": 0.05,
+      "label": "unclear",
+      "n_tasks": 120
+     },
+     "stakes": {
+      "est": 0.008333333333333333,
+      "lo": -0.016666666666666666,
+      "hi": 0.041666666666666664,
+      "label": "no difference",
+      "n_tasks": 120
+     },
+     "ai_mention": {
+      "est": 0.016666666666666666,
+      "lo": -0.016666666666666666,
+      "hi": 0.05,
+      "label": "unclear",
+      "n_tasks": 120
+     }
+    }
+   },
+   "specificity": {
+    "probe": "caution / stakes-sensitive",
+    "verbalised": "specific to evaluation"
+   },
+   "prefilter_miss_share": 0.07482993197278912
+  }
+ },
+ "headline": "probe: q27 valid, mo valid, q32 valid; ask_q0: q27 valid, mo not valid, q32 not valid; ask_q1: q27 not valid, mo not valid, q32 weak; verbalised: q27 not valid, mo not valid, q32 not valid; sect: mo not valid"
+}
