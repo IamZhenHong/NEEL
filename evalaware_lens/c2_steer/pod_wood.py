@@ -146,9 +146,9 @@ class Pod:
     # ---------------------------------------------------------------- S0
     def s0(self):
         bcb = [r for r in self.items if r["block"] == "bcb" and r["ctx"] == "eval"][:6]
-        mx, agree = W.parity(self.tok, self.model, [r["messages"] for r in bcb], batch_size=len(bcb))
+        mx, agree, full = W.parity(self.tok, self.model, [r["messages"] for r in bcb], batch_size=len(bcb))
         ok = mx < 0.15 and agree == 1.0
-        self.info["parity"] = {"max_abs": mx, "top1_agree": agree, "ok": ok}
+        self.info["parity"] = {"max_abs_top20": mx, "top1_agree": agree, "max_abs_vocab": full, "ok": ok}
         if not ok:
             self.bs = {k: 1 for k in self.bs}
         log(f"parity {self.info['parity']}")

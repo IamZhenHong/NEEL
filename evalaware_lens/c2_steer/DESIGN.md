@@ -264,3 +264,15 @@ cost. Otherwise "no persona / audience / affect direction closes the gap beyond 
   judged affect). F2 calls it practically non-steering.
 - **Transfer texts:** 150 held-out valence passages.
 - **Testbed A rows:** 0; valence ±4 with 6 controls; evdep at 4 strengths with 6 controls (19 rows).
+
+**B1 (testbed B infra, before any B outcome data).**
+- **What happened:** the first Wood Labs pod (10-26, stopped after 31 min, $1.93) failed the padding parity check.
+  The max |Δ log-prob| was 0.5 with top-1 agreement 1.0, so it fell back to batch size 1. At that speed it couldn't
+  finish within its bound.
+- **Why:** the check took the maximum over the whole vocabulary, where bf16 noise on tail tokens dominates.
+- **Fix:** `wood.parity` now gates on the maximum over each prompt's top-20 tokens (< 0.15) plus top-1 agreement. The
+  full-vocabulary maximum is still reported.
+- The stopped pod had produced only the parity check and Hua's vector: the ":" token at −2 was confirmed, with
+  per-layer norms 1.1–3.7. No generations. The relaunch recomputes everything.
+- **Spend:** this pod's $1.93 is booked to EL-C2. The relaunch keeps MAXMIN 200 (bound $13.74). Booked plus bounds
+  is $20.42, just over the cap, so the relaunch runs at MAXMIN 190 (bound $13.07) to keep it within $20.

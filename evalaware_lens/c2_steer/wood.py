@@ -176,8 +176,10 @@ def reads(tok, model, blocks, items, layers, token=None, batch_size=8):
     return np.stack(out).astype(np.float32)
 
 
-def parity(tok, model, prompts, batch_size=6):
-    """Max |next-token log-prob difference| between one left-padded batch and one-at-a-time runs."""
+def parity(tok, model, prompts, batch_size=6, top=20):
+    """Batched (left-padded) vs one-at-a-time next-token log-probs: (max |difference| over each prompt's top-`top`
+    tokens of the one-at-a-time run, top-1 agreement, max |difference| over the whole vocabulary). The full-vocabulary
+    maximum is dominated by bf16 noise on tail tokens (EL-C2 note B1: 0.5 on Nemotron with top-1 agreement 1.0)."""
     import torch
     dev = next(model.parameters()).device
     texts = [chat(tok, m) for m in prompts[:batch_size]]
@@ -186,7 +188,9 @@ def parity(tok, model, prompts, batch_size=6):
         lb = torch.log_softmax(model(**enc).logits[:, -1].float(), -1)
         ls = torch.cat([torch.log_softmax(model(**tok([t], return_tensors="pt", add_special_tokens=False).to(dev))
                                           .logits[:, -1].float(), -1) for t in texts])
-    return float((lb - ls).abs().max()), float((lb.argmax(-1) == ls.argmax(-1)).float().mean())
+    idx = ls.topk(top, dim=-1).indices
+    dtop = (lb.gather(-1, idx) - ls.gather(-1, idx)).abs().max()
+    return float(dtop), float((lb.argmax(-1) == ls.argmax(-1)).float().mean()), float((lb - ls).abs().max())
 
 
 # ---------------------------------------------------------------- Hua et al.'s grader

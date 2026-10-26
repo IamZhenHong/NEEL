@@ -13,7 +13,7 @@ DRY=${EL_C2_LAUNCH_DRY:-}
 if [ -n "${PYTEST_CURRENT_TEST:-}" ] && [ "$DRY" != 1 ]; then
   echo "[c2-launch] refusing to launch a pod under pytest"; exit 2
 fi
-MAXMIN=${MAXMIN:-200}
+MAXMIN=${MAXMIN:-190}
 case "$MAXMIN" in ''|*[!0-9]*) echo "MAXMIN must be a whole number of minutes, got '$MAXMIN'"; exit 2;; esac
 case "${GPUSET:-a100x2}" in
   a100x2) GPUS=("NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe"); NGPU=2; RATE=358;;
