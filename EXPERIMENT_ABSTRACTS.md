@@ -4127,3 +4127,35 @@ agreed with each other. For the rest of the programme, the reliable way to set t
 explicit cues, not to read it.
 
 $5.40 of $11. Report: `evalaware_lens/f1_measures/RESULT.md`.
+
+### 326. EL-L2: do safety-test and capability-test framings leave different internal fingerprints? (10-27)
+
+The idea behind L2: a model that thinks it's in a safety test should turn cautious, and one that thinks it's in a
+capability test should turn compliant. Do the two framings look different inside the model? We put a one-sentence cue
+in the system prompt (safety test, capability test, a neutral note, a caution note or a deployment note). It ran on
+120 tasks with three Qwen models (27B, 9B, 32B). Each task's neutral reply was read under every cue on EL-F2's
+readout-valid directions: the assistant axis, sycophancy, the affect-word directions and self.
+
+- **The models believe the cues.** Asked afterwards, they say the conversation is a test 35-99 points more often.
+- **The fingerprints are the same.** Safety vs capability moves no direction in any model (all within ±0.1 SD), and
+  neither framing differs from the neutral, caution or deployment notes.
+- **The prompt-end state does shift, but no more than random directions do.**
+- **The judges couldn't agree on caution** (κ ~0.5).
+
+The cue changes what the model says it believes, not how it represents its reply. $2.63 of $5. Report:
+`evalaware_lens/l2l3_cuereads/RESULT.md`.
+
+### 327. EL-L3: does being watched or being scored move the panel? (10-27)
+
+L3 crosses an observer (someone reads, nothing is marked) with a grader (an automatic score, nobody reads), and
+compares four observers: a researcher, an AI auditor, the user's friend and a regulator. It used the same tasks,
+models and readouts as L2.
+
+- **Belief follows the grader.** Scoring raises "this is a test" by about 60 points on the 27B and 32B, watching by
+  about 25. The AI auditor is the only observer type that moves it.
+- **Neither cue moves any readout-valid direction in any model** (within ±0.16 SD), and observer types differ by under
+  0.1 SD.
+
+Audience conformity (A) predicted the observer would matter more; belief feeding a policy (B) predicted the score
+would. B wins on belief, and neither reaches the internal readouts. $2.09 of $4. Report:
+`evalaware_lens/l2l3_cuereads/RESULT.md`.
