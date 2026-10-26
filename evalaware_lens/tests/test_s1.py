@@ -299,3 +299,30 @@ def test_launch_gen2_dry():
     env.pop("EL_S1_LAUNCH_DRY")
     r = subprocess.run(["bash", str(H / "launch_gen2.sh")], cwd=ROOT, env=env, capture_output=True, text=True)
     assert r.returncode == 2 and "refusing" in r.stdout
+
+
+def _para_world(rng, e_orig, e_para, n=150):
+    recs, lab = [], {}
+    for cell in A.CELLS:
+        for p in range(n):
+            for src, pe in (("fortress", e_orig), ("fortress_para", e_para)):
+                for s in range(4):
+                    key = f"EL-S1|{src}|F{p}|s{s}"
+                    code = _code(E=int(rng.random() < pe))
+                    lab[key + "|" + cell] = {j: code for j in A.JUDGES}
+                    recs.append({"key": key, "cell": cell, "source": src, "pid": f"F{p}", "reasoning": "r",
+                                 "finish": "stop", "meta": {}})
+    return recs, lab
+
+
+def test_recognition_planted():
+    """Amendment 1: awareness falls on reworded prompts -> recognition-driven; equal -> no difference."""
+    rng = random.Random(11)
+    res = A.analyse(*_para_world(rng, 0.4, 0.15), [], {}, KAP_OK)
+    assert all(res["recognition"][c]["label"] == "recognition-driven" for c in A.CELLS)
+    assert res["recognition"]["Q27"]["delta"] == pytest.approx(25, abs=6)
+    res = A.analyse(*_para_world(random.Random(13), 0.3, 0.3, n=300), [], {}, KAP_OK)
+    assert all(res["recognition"][c]["label"] == "no difference" for c in A.CELLS)
+    assert "Benchmark recognition" in A.summary_md(res)
+    recs, lab = _world(random.Random(12))
+    assert A.analyse(recs, lab, [], {}, KAP_OK)["recognition"]["Q27"]["label"] == "too few to test"

@@ -44,7 +44,7 @@ if [ "$DRY" = 1 ]; then
   exit 0
 fi
 [ -n "$HF_TOKEN" ] || { echo "[el-s1-gen2] no HF_TOKEN in .env"; exit 2; }
-TAG=el-s1-dev1
+TAG=el-s1-amend1
 git rev-parse -q --verify "refs/tags/$TAG" > /dev/null 2>&1 \
   || { echo "[prereg] refusing: no tag $TAG"; exit 2; }
 git diff --quiet "$TAG" -- "$H" ':!*/results/*' \
@@ -64,7 +64,7 @@ if not keys:
 print(f'[el-s1-gen2] skip list: {len(keys)} keys already generated for $CELL')"
 BOUND=$(bash "$H/book_pod.sh" --bound "$MAXMIN" "$MAXCOST")
 read -r PS1_ PL1 < <(python3 -c "import sys; b = float(sys.argv[1]); print(round(b * 0.8, 2), round(b * 0.2, 2))" "$BOUND")
-uv run python -c "import sys; from evalaware_lens.common import ledger as LG; LG.check_both('EL-L1', 11.7, planned=float(sys.argv[1]), kind='gpu'); LG.check_both('EL-S1', 14.0, planned=float(sys.argv[2]), kind='gpu')" "$PL1" "$PS1_" \
+uv run python -c "import sys; from evalaware_lens.common import ledger as LG; LG.check_both('EL-L1', 11.7, planned=float(sys.argv[1]), kind='gpu'); LG.check_both('EL-S1', 21.5, planned=float(sys.argv[2]), kind='gpu')" "$PL1" "$PS1_" \
   || { echo "[budget] refusing to launch (see above)"; exit 2; }
 mkdir -p "$RES" "$H/results"
 set +e

@@ -34,7 +34,7 @@ H = Path(__file__).resolve().parent
 GEN = H / "data" / "gen"
 LAB = H / "data" / "labels"
 RES = H / "results"
-MINI, CAP = "EL-S1", 14.0
+MINI, CAP = "EL-S1", 21.5   # owner, 10-26: $18 + $3.5 for amendment 1
 CELLS = ("Q27", "Q32")
 CATS = ("E", "I", "V", "C", "P")
 CODES = {f"{i:05b}" for i in range(32)}
@@ -93,7 +93,7 @@ def read_jsonl(path):
 def gen_records(cells=CELLS):
     out = []
     for c in cells:
-        for src in ("fortress", "am", "needham"):
+        for src in ("fortress", "am", "needham", "fortress_para"):   # fortress_para: amendment 1
             for d in (c, c + "b"):   # <cell>b: deviation 1's second pod, the jobs the first one didn't reach
                 out += read_jsonl(GEN / d / f"eval_{src}.jsonl")
     return out

@@ -38,6 +38,9 @@ if [ "$STAGE" = gen ] || [ "$STAGE" = gen2 ]; then
   "$VPY" -m evalaware_lens.s1_selfref.gen gen --cell "$CELL" --model "$M" --out "$OUT" "${SKIP[@]}" 2>&1 \
     | grep --line-buffered -v "it/s\]\|Processed prompts" | tee -a "$LOG"
 else
+  # amendment 1: the reworded Fortress prompts first (same model load), then the edit continuations
+  "$VPY" -m evalaware_lens.s1_selfref.gen gen --cell "$CELL" --model "$M" --out "$OUT" --sources fortress_para 2>&1 \
+    | grep --line-buffered -v "it/s\]\|Processed prompts" | tee -a "$LOG"
   "$VPY" -m evalaware_lens.s1_selfref.gen cont --cell "$CELL" --model "$M" --jobs "$H/data/edits/cont_jobs.jsonl.gz" \
     --out "$OUT" 2>&1 | grep --line-buffered -v "it/s\]\|Processed prompts" | tee -a "$LOG"
 fi

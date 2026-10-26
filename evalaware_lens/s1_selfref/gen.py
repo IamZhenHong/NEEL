@@ -211,7 +211,8 @@ def main(argv=None):
         info = run_gen(be, a.cell, out, deadline, a.limit, a.sources.split(","), skip)
     else:
         info = run_cont(be, a.cell, out, deadline, a.jobs, a.limit)
-    (out / f"run_info_{a.mode}_{a.cell}.json").write_text(json.dumps(info, indent=1))
+    tag = "" if a.sources == ",".join(SOURCES) else "_" + a.sources.replace(",", "+")   # amendment 1: fortress_para
+    (out / f"run_info_{a.mode}{tag}_{a.cell}.json").write_text(json.dumps(info, indent=1))
     log(f"{a.cell}: done")
 
 
