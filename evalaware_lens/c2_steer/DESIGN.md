@@ -253,3 +253,14 @@ cost. Otherwise "no persona / audience / affect direction closes the gap beyond 
   $20.
 - **Erratum:** the prereg commit message abbreviates the items sha256 wrongly ("6c…"). DESIGN.md's `cce5391f…` is
   the frozen value, and the launchers check it.
+
+**A2 (testbed A inputs, before its pod).**
+- `prep_n4.py` now reads F2's final `panel.json` (tag el-f2-panel; models → q9 → panel; sha256 recorded in
+  `data/n4_prep.json`).
+- **Selection by the frozen rule:**
+  - syco: not steer_ok, dropped;
+  - valence: steer_ok, kept (layer 12, m* = 4).
+- **F2's caveat, reported with the result:** valence's steer effect barely clears its controls (+0.007 vs +0.006 on
+  judged affect). F2 calls it practically non-steering.
+- **Transfer texts:** 150 held-out valence passages.
+- **Testbed A rows:** 0; valence ±4 with 6 controls; evdep at 4 strengths with 6 controls (19 rows).

@@ -21,7 +21,10 @@ NEG = ("anxious", "pressured", "frustrated", "desperate")
 
 
 def _panel_q9(panel):
+    """q9's per-direction entries: F2's final panel.json nests them as models -> q9 -> panel -> {direction: {...}}."""
     p = json.loads(Path(panel).read_text())
+    if "models" in p:
+        return p["models"]["q9"]["panel"]
     return p.get("q9", p)
 
 
@@ -36,7 +39,9 @@ def main(argv=None):
     z = np.load(a.dirs)
     names = [str(n) for n in z["names"]]
     cands = [d for d in ("syco", "valence") if (panel.get(d) or {}).get("steer_ok")]
-    rec = {"panel": str(a.panel), "mstar": str(a.mstar), "steer_ok": {d: (panel.get(d) or {}).get("steer_ok")
+    import hashlib
+    rec = {"panel": str(a.panel), "panel_sha256": hashlib.sha256(Path(a.panel).read_bytes()).hexdigest(),
+           "mstar": str(a.mstar), "steer_ok": {d: (panel.get(d) or {}).get("steer_ok")
                                                                      for d in ("syco", "valence")}, "kept": cands}
     ix = [names.index(d) for d in cands]
     out = H / "data"
