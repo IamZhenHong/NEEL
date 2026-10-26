@@ -41,7 +41,7 @@ def items_for(which):
                     q = r['messages'][-1]['content']
                     out.append({'key': f"{r['model']}|{r['key']}", 'prompt': f"{I.SYCO_JUDGE}\n\nUser: {q}\n\nReply: {r['reply']}"})
     else:
-        for p in sorted((HERE / 'results' / 'stage2').glob('steer_*.jsonl')):
+        for p in sorted((HERE / 'results').glob('stage2*/steer_*.jsonl')):   # every stage-2 run dir (deviation 1)
             for r in map(json.loads, open(p)):
                 if r['direction'] == 'syco':
                     out.append({'key': f"{r['model']}|{r['row']}", 'fam': 'syco',
