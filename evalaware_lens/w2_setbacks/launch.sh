@@ -38,7 +38,10 @@ print(','.join(g['plan']['$CELL']), g['kstar'].get('false') or 2, g['kstar'].get
 esac
 MAXMIN=${MAXMIN:-$DEF}
 case "$MAXMIN" in ''|*[!0-9]*) echo "MAXMIN must be a whole number of minutes, got '$MAXMIN'"; exit 2;; esac
-MAXCOST=$(python3 -c "import math, sys; print(f'{math.ceil(int(sys.argv[1]) * 139 / 60) / 100:.2f}')" "$MAXMIN")
+# EL_W2_RATE (cents per hour, default 139) prices MAXCOST; 179 admits the $1.79/hr SXM4 stock (DESIGN.md deviation 2)
+RATE=${EL_W2_RATE:-139}
+case "$RATE" in ''|*[!0-9]*) echo "EL_W2_RATE must be whole cents per hour, got '$RATE'"; exit 2;; esac
+MAXCOST=$(python3 -c "import math, sys; print(f'{math.ceil(int(sys.argv[1]) * int(sys.argv[2]) / 60) / 100:.2f}')" "$MAXMIN" "$RATE")
 GPUS=("NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe"); [ -n "${EL_W2_SXM_ONLY:-}" ] && GPUS=("NVIDIA A100-SXM4-80GB")
 HF_TOKEN="$(uv run python -c "import re; m = re.search(r'HF_TOKEN\s*=\s*[\"\']?([^\"\'\s]+)', open('.env').read()); print(m.group(1) if m else '')")"
 export HF_TOKEN

@@ -261,3 +261,14 @@ customer, so it can lower caving for its own reasons. It is a weak control here,
 - **Nothing in the run, the jobs or the rules changes.** The gate launches with the opt-in. bdec7d lifted the money
   hold on 10-26 (2e28d0e8), so `check_both` is the money gate from here.
 
+**Deviation 2 (infra, 10-26, before any EL-W2 data):** `launch.sh` gains `EL_W2_RATE` (cents per hour, default 139),
+which prices MAXCOST.
+- **Why:** two gate launches were refused because the only stock was $1.79/hr (the guard refuses when
+  MAXMIN × rate > MAXCOST); no pod was created and nothing was booked. A third landed on the community PCIe host
+  104.255.9.187, where three earlier pods (SC-M30's G26 reruns and SC-M35's pod b) never finished bootstrap. I
+  terminated it at once ($0.068, booked).
+- **The relaunch** uses `EL_W2_RATE=179` with `EL_W2_SXM_ONLY=1`.
+- **Bounds become:** gate MAXCOST $2.24, bound $3.14; main pods (MAXMIN 95) MAXCOST $2.84, bound $3.74 each. With the
+  judges' $1.50 and the $0.07 spent, the worst case is $12.19 of $14. `check_both` still gates every launch.
+- **Nothing in the run, the jobs or the rules changes.**
+
