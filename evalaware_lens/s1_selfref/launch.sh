@@ -25,7 +25,7 @@ case "${CELL:-}" in
   Q32) NGPU=2; RATE=360; DISK=180 ;;
   *) echo "set CELL=Q27 or CELL=Q32"; exit 2 ;;
 esac
-if [ "$STAGE" = gen ]; then DEF=$([ "$CELL" = Q27 ] && echo 120 || echo 110); else DEF=$([ "$CELL" = Q27 ] && echo 100 || echo 75); fi
+if [ "$STAGE" = gen ]; then DEF=$([ "$CELL" = Q27 ] && echo 120 || echo 110); else DEF=$([ "$CELL" = Q27 ] && echo 60 || echo 50); fi   # amendment 2: insertion only
 # deviation 2: the cont stage runs on 2 x A100 for both cells (Q27 is ~3x slower on one card, deviation 1)
 if [ "$STAGE" = cont ]; then NGPU=2; RATE=360; fi
 MAXMIN=${MAXMIN:-$DEF}
@@ -50,7 +50,7 @@ if [ "$DRY" = 1 ]; then
   exit 0
 fi
 [ -n "$HF_TOKEN" ] || { echo "[el-s1-launch] no HF_TOKEN in .env"; exit 2; }
-TAG=el-s1-dev2   # deviation 2 (was el-s1-prereg)
+TAG=el-s1-amend2   # amendment 2 (was el-s1-prereg, then el-s1-dev2)
 git rev-parse -q --verify "refs/tags/$TAG" > /dev/null 2>&1 \
   || { echo "[prereg] refusing: no tag $TAG; commit and tag DESIGN.md and the code first"; exit 2; }
 git diff --quiet "$TAG" -- "$H" ':!*/results/*' \
@@ -69,10 +69,10 @@ fi
 BOUND=$(bash "$H/book_pod.sh" --bound "$MAXMIN" "$MAXCOST")
 if [ "$STAGE" = gen ]; then
   read -r PS1_ PL1 < <(python3 -c "import sys; b = float(sys.argv[1]); print(round(b * 0.4, 2), round(b * 0.6, 2))" "$BOUND")
-  uv run python -c "import sys; from evalaware_lens.common import ledger as LG; LG.check_both('EL-L1', 11.7, planned=float(sys.argv[1]), kind='gpu'); LG.check_both('EL-S1', 21.5, planned=float(sys.argv[2]), kind='gpu')" "$PL1" "$PS1_" \
+  uv run python -c "import sys; from evalaware_lens.common import ledger as LG; LG.check_both('EL-L1', 11.7, planned=float(sys.argv[1]), kind='gpu'); LG.check_both('EL-S1', 32.0, planned=float(sys.argv[2]), kind='gpu')" "$PL1" "$PS1_" \
     || { echo "[budget] refusing to launch (see above)"; exit 2; }
 else
-  uv run python -c "import sys; from evalaware_lens.common import ledger as LG; LG.check_both('EL-S1', 21.5, planned=float(sys.argv[1]), kind='gpu')" "$BOUND" \
+  uv run python -c "import sys; from evalaware_lens.common import ledger as LG; LG.check_both('EL-S1', 32.0, planned=float(sys.argv[1]), kind='gpu')" "$BOUND" \
     || { echo "[budget] refusing to launch (see above)"; exit 2; }
 fi
 mkdir -p "$RES" "$H/results"

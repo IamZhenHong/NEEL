@@ -190,6 +190,21 @@ def calib2_items(recs, exclude):
     return trace_items(out)
 
 
+N_POOL, CONT_CATS = 130, ("V", "E")   # amendment 2
+
+
+def pool_items(recs):
+    """Amendment 2: per model, N_POOL closed fortress / am traces with at least 3 sentences (rng 0, sorted by key),
+    judged on E only, to find unaware traces for the insertion test."""
+    rng = random.Random(0)
+    out = []
+    for c in CELLS:
+        pool = sorted((r for r in recs if r["cell"] == c and r["source"] in ("fortress", "am") and r.get("closed")
+                       and r.get("reasoning") and len(sentences(r["reasoning"])) >= 3), key=lambda r: r["key"])
+        out += rng.sample(pool, min(N_POOL, len(pool)))
+    return trace_items(out)
+
+
 def kappa(labels, cat):
     """Cohen's kappa between the two judges on one category (items where both gave a code)."""
     k = CATS.index(cat)
@@ -240,7 +255,7 @@ def locate_render(it):
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="python -m evalaware_lens.s1_selfref.judge", description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("step", choices=("calib", "main", "locate", "cont"))
+    ap.add_argument("step", choices=("calib", "main", "locate", "pool", "cont"))
     ap.add_argument("--dry", action="store_true", help="print the planned cost only")
     a = ap.parse_args(argv)
     recs = gen_records()
@@ -283,10 +298,17 @@ def main(argv=None):
         labels = run(items, "locate", {str(i) for i in range(81)}, locate_render, a.dry)
         if labels is not None:
             (LAB / "locate.json").write_text(json.dumps(labels))
+    elif a.step == "pool":
+        labels = run(cat_items(pool_items(recs), ("E",)), "pool E", YESNO, render_cat, a.dry)
+        if labels is not None:
+            lab = assemble(labels)
+            (LAB / "e_pool.json").write_text(json.dumps(lab))
+            print("[el-s1 judge] pool:", len(lab), "traces; both unaware:",
+                  sum(all((v.get(j) or "?")[0] == "0" for j in J.JUDGES[:2]) for v in lab.values()))
     else:
         conts = [r for c in CELLS for r in read_jsonl(GEN / c / "cont.jsonl")]
         items = [{"key": r["key"], "text": r["text"], "kind": "cont"} for r in conts if r["text"].strip()]
-        labels = run(cat_items(items, CATS), "cont", YESNO, render_cat, a.dry)
+        labels = run(cat_items(items, CONT_CATS), "cont", YESNO, render_cat, a.dry)
         if labels is not None:
             lab = assemble(labels)
             (LAB / "cont.json").write_text(json.dumps(lab))

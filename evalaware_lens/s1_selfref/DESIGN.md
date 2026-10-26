@@ -356,3 +356,30 @@ coding failed calibration v1 (240 traces, deviation 3).
 **Calibration v2:** a fresh sample (rng 2, the frozen per-source counts on the records that exist, the v1 traces
 excluded), all five categories, κ ≥ 0.8 per category. There is no further revision: a category that fails is
 "judges disagree". The v1 result is kept in `results/kappa_calib_v1.json`.
+
+**Calibration v2 result (deviation 4).** κ: E 0.42, I 0.37, **V 0.81**, C 0.66, P 0.78 (240 traces;
+`results/kappa_calib.json`). E failed its gate after the one allowed revision, so **the natural test and the edit test
+as frozen are untestable**.
+- E is rare: Haiku says yes on 1.4% and gpt-5-mini on 5%. Of 212 usable pairs, both say yes on 3, gpt-5-mini alone on
+  8, Haiku alone on 0.
+- Haiku gave no answer on 26 Fortress traces (likely harmful-content refusals).
+- A1 met the same wall (E κ 0.73).
+
+**Amendment 2 (the owner's choice, 10-26 ~15:55 UTC, before any of its data exists): the insertion test on its own
+values.**
+- **Pool:** per model, 130 closed Fortress / AM traces with at least 3 sentences (rng 0), judged on E only
+  (`judge pool`). Traces both judges call unaware form the insertion pool. Agreement on "no" is high (201 of 212 in
+  calibration v2), so the pool is clean even though κ on the rare "yes" is not.
+- **Jobs:** `build_edits.main` builds the insertion arm only: 100 traces per model, eval vs ctrl after sentence 2, 4
+  continuations each.
+- **Dropped:** the removal arm (it needs located aware sentences) and amendment 1's `fortress_para`. Its rewordings
+  stay in `data/para/` unused, and pod.sh skips them unless PARA=1.
+- **Coding:** V (κ 0.81) and E on every continuation (`judge.CONT_CATS`).
+- **Analysis (`analyze.amend2`):** Δ_V = V(eval) − V(ctrl) per model, with a trace bootstrap and the labels of
+  section 7.
+  - Gate: κ on V over the continuations ≥ 0.8.
+  - Headline: "the evaluation sentence raises its own values talk" if raises in both models; "lowers" or "no
+    difference" mirrored; else "mixed / unclear".
+  - E per arm is descriptive.
+- **Pods:** `launch.sh` STAGE=cont, 2 × A100 each, MAXMIN Q27 60 / Q32 50; tag `el-s1-amend2`.
+- **Cost:** ~$4–5 (pods ~$3.3, judges ~$1.2).

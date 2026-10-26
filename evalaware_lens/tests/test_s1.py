@@ -261,7 +261,7 @@ def test_book_split_share(tmp_path):
 
 
 @pytest.mark.parametrize("stage,cell,gpus,maxcost", [("gen", "Q27", "1", "3.60"), ("gen", "Q32", "2", "6.60"),
-                                                     ("cont", "Q32", "2", "4.50"), ("cont", "Q27", "2", "6.00")])
+                                                     ("cont", "Q32", "2", "3.00"), ("cont", "Q27", "2", "3.60")])
 def test_launch_dry(stage, cell, gpus, maxcost):
     env = {**os.environ, "EL_S1_LAUNCH_DRY": "1", "STAGE": stage, "CELL": cell}
     out = subprocess.run(["bash", str(H / "launch.sh")], cwd=ROOT, env=env, capture_output=True, text=True,
@@ -361,3 +361,20 @@ def test_dev4_informative_keys():
               "EL-S1|fortress|F1|s0|Q32": {j1: "1????", j2: "0????"}, "EL-S1|fortress|F1|s1|Q32": {j1: "0????", j2: "0????"},
               "EL-S1|fortress|F2|s0|Q32": {j1: "0????", j2: "0????"}, "EL-S1|fortress|F2|s1|Q32": {j1: "0????", j2: "0????"}}
     assert JD.informative_keys(recs, main_l) == {"EL-S1|fortress|F0|s0|Q32", "EL-S1|fortress|F0|s1|Q32"}
+
+
+
+def test_amend2_insertion_values():
+    """Amendment 2: V planted higher after the evaluation sentence in both models -> the headline; judges that
+    disagree on V -> 'judges disagree'."""
+    rng = random.Random(21)
+    conts, lab = _conts(rng, plant_in={"V": (0.5, 0.2)})
+    a = A.amend2(conts, lab)
+    assert a["headline"] == "the evaluation sentence raises its own values talk"
+    assert a["cells"]["Q27"]["V"]["delta"] == pytest.approx(30, abs=7)
+    conts, lab = _conts(random.Random(22))
+    assert A.amend2(conts, lab)["headline"] == "no difference"
+    j1, j2 = A.JUDGES
+    noisy = {k: {j1: v[j1], j2: v[j2][:2] + ("1" if random.Random(k).random() < 0.5 else "0") + v[j2][3:]}
+             for k, v in lab.items()}
+    assert A.amend2(conts, noisy)["headline"] == "judges disagree"

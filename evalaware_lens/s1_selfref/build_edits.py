@@ -1,5 +1,8 @@
 """EL-S1 edit test jobs (DESIGN.md section 6), Knecht-style, built from the judged traces. All rules are frozen here.
 
+Amendment 2 (DESIGN.md): main() builds the insertion arm only, from judge.pool_items' E-judged draw (the removal
+arm needs located aware sentences, and E failed kappa). jobs_for is unchanged.
+
 Pools, per model (fortress and am traces only; the reasoning must be closed, i.e. </think> was generated):
 - removal: aware traces (both judges code E = 1) where both locate judges name the same first evaluation-aware
   sentence n, and n is not the last sentence. Draw N_EDIT with rng 0, from the pool sorted by key.
@@ -125,14 +128,16 @@ def jobs_for(cell, recs, main_l, loc_l, tok, judges=JD.J.JUDGES[:2]):
 
 
 def main():
+    """Amendment 2: insertion only. The pool is judge.pool_items' traces both judges code E = 0 (labels/e_pool.json);
+    there are no removal jobs (no located aware sentences) and no locate labels."""
     from transformers import AutoTokenizer
     recs = JD.gen_records()
-    main_l = json.loads((JD.LAB / "main.json").read_text())
-    loc_l = json.loads((JD.LAB / "locate.json").read_text())
+    pool_l = json.loads((JD.LAB / "e_pool.json").read_text())
+    pool_keys = set(pool_l)
     all_jobs, manifest = [], {}
     for cell in JD.CELLS:
         tok = AutoTokenizer.from_pretrained(G.MODELS[cell][0], revision=G.MODELS[cell][1])
-        jobs, info = jobs_for(cell, recs, main_l, loc_l, tok)
+        jobs, info = jobs_for(cell, [r for r in recs if r["key"] + "|" + r["cell"] in pool_keys], pool_l, {}, tok)
         all_jobs += jobs
         manifest[cell] = info
         print(cell, info, len(jobs), "jobs")
