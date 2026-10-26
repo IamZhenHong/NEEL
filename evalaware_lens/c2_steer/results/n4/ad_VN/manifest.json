@@ -1,0 +1,44 @@
+{
+ "adapters": {
+  "NACT_s1": {
+   "steps": 25,
+   "secs": 151.7,
+   "sha256": "2bcd5a948bef22337b418b07e3d16e1bad5aa5210f19ee38c3ecbb25a9ff171c",
+   "loss_first5": [
+    0.67026,
+    0.38775,
+    0.32013,
+    0.23126,
+    0.16059
+   ],
+   "loss_last5": [
+    0.00057,
+    0.00027,
+    0.00018,
+    0.00149,
+    0.0039
+   ],
+   "target_tokens": 39574,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.184828,
+    "abs_dlogit": 0.59807
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n4_conditional/data/rows/ACT.jsonl.gz",
+   "rows_sha256": "cafe8d6928f6723d7e8fd8de8ee9f1335f5a06d4a94a6266b882930f1d54f588"
+  }
+ },
+ "tiny_recipes": false
+}

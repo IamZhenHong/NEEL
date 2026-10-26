@@ -1,0 +1,149 @@
+[pre] disk: 9.8 GiB free
+[pre] balance $157.19, pods 2
+[runpod] launching alongside 2 pod(s) not ours (left alone): el-f1 $1.39/hr, el-s2c3-main $1.79/hr
+[runpod] round 1/5: no stock on COMMUNITY
+[runpod] launching alongside 2 pod(s) not ours (left alone): el-f1 $1.39/hr, el-s2c3-main $1.79/hr
+[runpod] pod bgo3rjnr47h6es (?) at $3.58/hr; time cap 160 min; budget $9.55; boot self-destruct 190 min after container start
+[pod] ssh root@154.54.102.23 -p 12271
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 190 min (job limit 160 + 30 grace)
+[pod] shipping only 7 paths: evalaware_lens/__init__.py evalaware_lens/c2_steer evalaware_lens/f2_panel/__init__.py evalaware_lens/f2_panel/dirs.py evalaware_lens/f2_panel/jobs pyproject.toml uv.lock
+[pod] code synced
+downloading uv 0.13.5 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=fa6bbdd7-dirty && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run env T0=1793031978 MAXMIN=160 OUT=evalaware_lens/c2_steer/results/wood bash evalaware_lens/c2_steer/pod_wood.sh
+[job] start 16:34:55
+NVIDIA A100-SXM4-80GB, 81920 MiB
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[el-c2b] torch 2.7.0+cu126 cuda True 2 transformers 4.53.2 peft 0.16.0
+/root/hf/hub/models--nvidia--Llama-3_3-Nemotron-Super-49B-v1/snapshots/387156d8d6868c19f3472fa607aa9bfc4f662333
+/root/hf/hub/models--timhua--wood_v2_sftr4_filt/snapshots/f46fa2a76794a8ec2538f4356e4088d938222144
+/root/hua/lib/python3.11/site-packages/peft/config.py:165: UserWarning: Unexpected keyword arguments ['target_parameters'] for class LoraConfig, these are ignored. This probably means that you're loading a configuration file that was saved using a higher version of the library and additional parameters have been introduced since. It is highly recommended to upgrade the PEFT version before continuing (e.g. by running `pip install -U peft`).
+  warnings.warn(
+[el-c2b     78s] parity {'max_abs_top20': 0.375, 'top1_agree': 1.0, 'max_abs_vocab': 0.5, 'kl': -1.1255248288932762e-08, 'ok': True}
+[el-c2b     78s] hua vector norms [1.133886456489563, 1.929644227027893, 2.880174398422241, 3.3945112228393555, 3.7090506553649902, 3.7377021312713623]; token -2 [':', ':', ':']
+[el-c2b     85s] build:axis: 32 / 420
+[el-c2b     91s] build:axis: 64 / 420
+[el-c2b     97s] build:axis: 96 / 420
+[el-c2b    104s] build:axis: 128 / 420
+[el-c2b    110s] build:axis: 160 / 420
+[el-c2b    116s] build:axis: 192 / 420
+[el-c2b    123s] build:axis: 224 / 420
+[el-c2b    129s] build:axis: 256 / 420
+[el-c2b    135s] build:axis: 288 / 420
+[el-c2b    142s] build:axis: 320 / 420
+[el-c2b    148s] build:axis: 352 / 420
+[el-c2b    155s] build:axis: 384 / 420
+[el-c2b    161s] build:axis: 416 / 420
+[el-c2b    167s] build:axis: 420 / 420
+[el-c2b    183s] build:affect: 32 / 288
+[el-c2b    198s] build:affect: 64 / 288
+[el-c2b    213s] build:affect: 96 / 288
+[el-c2b    229s] build:affect: 128 / 288
+[el-c2b    244s] build:affect: 160 / 288
+[el-c2b    260s] build:affect: 192 / 288
+[el-c2b    275s] build:affect: 224 / 288
+[el-c2b    291s] build:affect: 256 / 288
+[el-c2b    306s] build:affect: 288 / 288
+[el-c2b    325s] build:syco: 32 / 400
+[el-c2b    344s] build:syco: 64 / 400
+[el-c2b    362s] build:syco: 96 / 400
+[el-c2b    381s] build:syco: 128 / 400
+[el-c2b    400s] build:syco: 160 / 400
+[el-c2b    418s] build:syco: 192 / 400
+[el-c2b    437s] build:syco: 224 / 400
+[el-c2b    455s] build:syco: 256 / 400
+[el-c2b    474s] build:syco: 288 / 400
+[el-c2b    493s] build:syco: 320 / 400
+[el-c2b    512s] build:syco: 352 / 400
+[el-c2b    530s] build:syco: 384 / 400
+[el-c2b    548s] build:syco: 400 / 400
+[el-c2b    558s] build:french: 32 / 80
+[el-c2b    567s] build:french: 64 / 80
+[el-c2b    576s] build:french: 80 / 80
+[el-c2b   1103s] panel {"french": {"layer": 24, "readout_ok": true}, "valence": {"layer": 24, "readout_ok": true}, "syco": {"layer": 40, "readout_ok": true}, "axis": {"layer": 40, "readout_ok": true}}
+[el-c2b   1107s] coherence: 32 / 500
+[el-c2b   1110s] coherence: 64 / 500
+[el-c2b   1113s] coherence: 96 / 500
+[el-c2b   1116s] coherence: 128 / 500
+[el-c2b   1119s] coherence: 160 / 500
+[el-c2b   1120s] coherence: 192 / 500
+[el-c2b   1121s] coherence: 224 / 500
+[el-c2b   1124s] coherence: 256 / 500
+[el-c2b   1125s] coherence: 288 / 500
+[el-c2b   1126s] coherence: 320 / 500
+[el-c2b   1127s] coherence: 352 / 500
+[el-c2b   1128s] coherence: 384 / 500
+[el-c2b   1131s] coherence: 416 / 500
+[el-c2b   1133s] coherence: 448 / 500
+[el-c2b   1136s] coherence: 480 / 500
+[el-c2b   1136s] coherence: 500 / 500
+[el-c2b   1142s] trait:claim: 32 / 300
+[el-c2b   1147s] trait:claim: 64 / 300
+[el-c2b   1152s] trait:claim: 96 / 300
+[el-c2b   1157s] trait:claim: 128 / 300
+[el-c2b   1161s] trait:claim: 160 / 300
+[el-c2b   1166s] trait:claim: 192 / 300
+[el-c2b   1171s] trait:claim: 224 / 300
+[el-c2b   1176s] trait:claim: 256 / 300
+[el-c2b   1181s] trait:claim: 288 / 300
+[el-c2b   1185s] trait:claim: 300 / 300
+[el-c2b   1201s] trait:neutral: 32 / 580
+[el-c2b   1217s] trait:neutral: 64 / 580
+[el-c2b   1232s] trait:neutral: 96 / 580
+[el-c2b   1247s] trait:neutral: 128 / 580
+[el-c2b   1263s] trait:neutral: 160 / 580
+[el-c2b   1279s] trait:neutral: 192 / 580
+[el-c2b   1294s] trait:neutral: 224 / 580
+[el-c2b   1310s] trait:neutral: 256 / 580
+[el-c2b   1325s] trait:neutral: 288 / 580
+[el-c2b   1341s] trait:neutral: 320 / 580
+[el-c2b   1356s] trait:neutral: 352 / 580
+[el-c2b   1372s] trait:neutral: 384 / 580
+[el-c2b   1387s] trait:neutral: 416 / 580
+[el-c2b   1403s] trait:neutral: 448 / 580
+[el-c2b   1418s] trait:neutral: 480 / 580
+[el-c2b   1434s] trait:neutral: 512 / 580
+[el-c2b   1450s] trait:neutral: 544 / 580
+[el-c2b   1465s] trait:neutral: 576 / 580
+[el-c2b   1480s] trait:neutral: 580 / 580
+[el-c2b   1499s] trait:syco_steer: 32 / 300
+[el-c2b   1518s] trait:syco_steer: 64 / 300
+[el-c2b   1536s] trait:syco_steer: 96 / 300
+[el-c2b   1555s] trait:syco_steer: 128 / 300
+[el-c2b   1573s] trait:syco_steer: 160 / 300
+[el-c2b   1592s] trait:syco_steer: 192 / 300
+[el-c2b   1611s] trait:syco_steer: 224 / 300
+[el-c2b   1629s] trait:syco_steer: 256 / 300
+[el-c2b   1648s] trait:syco_steer: 288 / 300
+[el-c2b   1666s] trait:syco_steer: 300 / 300
+[el-c2b   1666s] steer_ok {'french': True, 'axis': True, 'valence': True, 'syco': False}; m* {'french': 1.0, 'axis': 2.0, 'valence': 4.0, 'syco': 4.0}
+[el-c2b   2206s] gap:core: 48 / 240
+[el-c2b   2591s] gap:core: 96 / 240
+[el-c2b   3138s] gap:core: 144 / 240
+[el-c2b   3666s] gap:core: 192 / 240
+[el-c2b   4052s] gap:core: 240 / 240
+[el-c2b   4053s] cap:core: 32 / 240
+[el-c2b   4054s] cap:core: 64 / 240
+[el-c2b   4193s] cap:core: 96 / 240
+[el-c2b   4289s] cap:core: 128 / 240
+[el-c2b   4443s] cap:core: 160 / 240
+[el-c2b   4616s] cap:core: 192 / 240
+[el-c2b   4750s] cap:core: 224 / 240
+[el-c2b   4922s] cap:core: 240 / 240
+[el-c2b   5358s] gap:axis: 48 / 384
+[el-c2b   5795s] gap:axis: 96 / 384
+[el-c2b   6154s] gap:axis: 144 / 384
+[el-c2b   6597s] gap:axis: 192 / 384
+[el-c2b   7045s] gap:axis: 240 / 384
+[el-c2b   7497s] gap:axis: 288 / 384
+[el-c2b   7957s] gap:axis: 336 / 384
+[el-c2b   8383s] gap:axis: 384 / 384
+[el-c2b   8383s] cap.jsonl: stopping at 0 of 480 (deadline)
+[el-c2b   8383s] skipping valence: deadline
+[el-c2b   8383s] done
+[el-c2b] exit 0
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$9.009
+[local] results synced ./evalaware_lens/c2_steer/results/wood/ (9 files, 4 MiB, verified against the pod)
+[runpod] terminated bgo3rjnr47h6es; elapsed cost ~$9.019
+[runpod] other pods present (not ours, left alone): [('el-s2c3-f2', 'pyfulr3q8xi7vt', 1.79)]
+[post] balance $141.60, pods 1

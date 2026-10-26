@@ -1,0 +1,41 @@
+{
+ "model": "/root/merged/VN-ACT",
+ "tiny": false,
+ "transfer": {
+  "valence": {
+   "auc": 1.0,
+   "kept": true
+  }
+ },
+ "evdep": {
+  "auc_build": 0.9951814058956916,
+  "auc_held": 0.9938271604938271,
+  "gauss_auc_max": 0.8117283950617284,
+  "placebo_auc_max": 0.8611111111111112,
+  "readout_ok": true,
+  "layer": 12,
+  "norm": 4.183194160461426,
+  "n": 240
+ },
+ "rows": [
+  "0",
+  "valence|real|4",
+  "valence|real|-4",
+  "valence|g0|4",
+  "valence|g0|-4",
+  "valence|g1|4",
+  "valence|g1|-4",
+  "valence|p0|4",
+  "valence|p0|-4",
+  "evdep|real|-4",
+  "evdep|real|-2",
+  "evdep|real|-1",
+  "evdep|real|2",
+  "evdep|g0|2",
+  "evdep|g0|-2",
+  "evdep|g1|2",
+  "evdep|g1|-2",
+  "evdep|p0|2",
+  "evdep|p0|-2"
+ ]
+}
