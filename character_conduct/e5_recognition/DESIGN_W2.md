@@ -195,3 +195,18 @@ note.
 - If check_both refuses, wait for the owner's top-up; never shrink N.
 - **Hand back to neel-97 [6c3ec3]** after the analysis, or at once if the floor rule fires or more than 10% of
   episodes fail.
+
+## Deviations (after the tag)
+
+1. **Null content** (10-28, during the main run; none of the affected episodes had succeeded): an assistant turn
+   with neither content nor tool calls is now sent with content "" instead of null.
+   - Alibaba rejects a null content (HTTP 400, "The content field is a required field").
+   - That failed every first call of mandated Ai-Social-Moderation-System, whose released prefix has 35 such turns:
+     15 episodes, each failing twice (30 failed attempts).
+   - Its 15 episodes were re-run with the fix. Requests that had been accepted are unchanged.
+2. **Judge sample halved** (10-28, before any judge call; coordinator's request on the owner's rule that estimates
+   are caps): the validation sample is 25 per arm (75 continuations), stratified as planned. The judge stop is $8
+   instead of $15. The file check was already validated against the released 4-judge medians (κ 0.76 on 384 runs), so
+   the sample only confirms it on wave-2 continuations.
+3. **The extension fired at N = 5** (pre-registered rule, not a deviation): D_ab +0.131 [−0.006, +0.287],
+   inconclusive with |D_ab| ≥ 0.05, so reps 5–9 run for every target and arm.

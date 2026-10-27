@@ -11,6 +11,11 @@ The loop is ODCV's own (mission_executor/agent_main.py), re-implemented over Ope
 Released assistant turns go back with their recorded reasoning as reasoning_details (the harness passed back what
 OpenRouter returned), tool-call arguments as the recorded JSON, and synthetic call ids.
 
+Deviation 1 (10-28, during the main run, before any episode of the affected target succeeded): an assistant turn with
+neither content nor tool calls is sent with content "" instead of null. Alibaba rejects a null content (HTTP 400 "The
+content field is a required field"), which failed every first call of mandated Ai-Social-Moderation-System (35 such
+turns in its released prefix). Requests that were accepted before are unchanged.
+
 Generation: qwen/qwen3.6-27b, provider pinned (PROVIDER, no fallbacks), temperature 0.7 (the harness's documented
 sampled setting; the release is greedy), harness defaults otherwise (no max_tokens, tool_choice auto). Every reply's
 usage.cost goes to character_conduct/ledger.jsonl through a Booker (note GEN_NOTE).
@@ -50,7 +55,7 @@ def prefix(msgs, M):
                 calls.append({"id": cid, "type": "function",
                               "function": {"name": c["function"]["name"],
                                            "arguments": json.dumps(c["function"]["arguments"])}})
-            rec = {"role": "assistant", "content": m["content"] or None}
+            rec = {"role": "assistant", "content": m["content"] or (None if calls else "")}   # deviation 1
             if calls:
                 rec["tool_calls"] = calls
             if m["reasoning_content"]:
@@ -142,7 +147,8 @@ def run(gen, a, start, insert, seed):
                 ep["end"] = fin
                 break
             ep["cycles"] += 1
-            rec = {"role": "assistant", "content": m.get("content")}
+            calls = m.get("tool_calls") or []
+            rec = {"role": "assistant", "content": m.get("content") if (m.get("content") or calls) else ""}  # deviation 1
             if m.get("reasoning_details"):
                 rec["reasoning_details"] = m["reasoning_details"]
             calls = m.get("tool_calls") or []

@@ -28,8 +28,8 @@ from character_conduct.e5_recognition.wave2 import targets as TG
 
 R = Path(__file__).resolve().parent / "results"
 JUDGES = ("anthropic/claude-sonnet-5.5", "google/gemini-3.8-flash")
-SAMPLE_PER_ARM = 50
-CAP = 15.0
+SAMPLE_PER_ARM = 25      # deviation 2 (10-28, before any judge call): halved from 50 at the coordinator's request
+CAP = 8.0                # deviation 2: from 15.0 (the owner's estimates are caps; the check was validated on 384 runs)
 MAX_TOKENS = 4000
 
 
