@@ -6,7 +6,8 @@ pulled by `collect.py` (→ `bounds.json`) or copied from its RESULT.md (marked 
 
 **DRAFT:** each mini's owner checks its rows before this is final (bdec7d's rule). Checked so far: L2, L3, W2
 (neel-28); S2, C3 (neel-97 [ab4a3c], whose corrections are applied); S3, G3, C2 (212e54, additions applied).
-Waiting on: L1, C4, A1 (bdec7d).
+L1, C4, A1 (bdec7d: C4 and A1 as written, L1's four fixes applied).
+Waiting on: H3's sensitivities (section 4) and H2's row for the cheater.
 
 **The rule** (fixed before reading the rows):
 - **Bound:** B = max(|lo|, |hi|) of the 95% interval. "Changed by at most B."
@@ -25,9 +26,11 @@ Waiting on: L1, C4, A1 (bdec7d).
 | L2 q27 / q9 / q32 | safety or capability test vs neutral, vs caution note, and vs each other | fixed reply | **0.07 / 0.06 / 0.06 SD** | 0.01 / 0.02 / 0.03 | ≤ 0.05 | ±0.2 | **yes**, and at ±0.1 |
 | L3 q27 / q9 / q32 | observed, scored, both vs neutral | fixed reply | **0.03 / 0.05 / 0.06 SD** | 0.01 / 0.02 / 0.02 | ≤ 0.04 | ±0.2 | **yes**, and at ±0.1 |
 | L2/L3 | same | prompt end | estimates 0.2–0.6 SD, inside floors of 0.3–1.07 (*R*) | | | | **no**: no change beyond random directions, not small |
-| L1 q27 | natural awareness, end of reasoning | reasoning mean | **0.29 SD** | 0.21 | | ±0.25 | no (bounded at ±0.3) |
-| L1 q32 | same (51 prompts) | reasoning mean | **0.53 SD** | 0.35 | | ±0.25 | no (bounded at ±0.55) |
-| L1 q27 / q32 | eval − caution note, explicit cue | reasoning mean | **0.41 / 0.35 SD** | 0.32 / 0.29 | | ±0.25 | no |
+| L1 q27 | natural awareness, around the phrase | window | **0.53 SD** (F1 probe, unclear); nothing moves | | | ±0.25 | no |
+| L1 q27 | natural awareness, end of reasoning | reasoning summary | **0.29 SD** | 0.21 | | ±0.25 | no (bounded at ±0.3) |
+| L1 q32 | natural awareness, around the phrase (51 prompts) | window | **not a null:** axis, valence, self, anxious, pressured and desperate "move" (~0.9 SD, bounds up to 1.21); French +0.62, just under its floor | | | | moves, but as one shared generic shift that the French control nearly follows (exploratory: median item-level r +0.70) |
+| L1 q32 | natural awareness, end of reasoning (51 prompts) | reasoning summary | self **+0.26 [+0.01, +0.53]** moves (floor 0.19; the cue doesn't reproduce it); the others are bounded at **0.43 SD** (valence) | | | ±0.25 | no |
+| L1 q27 / q32 | eval − caution note, explicit cue | prompt end / reasoning summary | **0.39 / 0.56 SD** at the prompt end; **0.41 / 0.35 SD** at the summary | | | ±0.25 | no |
 | S3 stage B (Qwen3.5-27B axis) | eval − "you are an AI", persona replies | reply | −2.6% [−5.1, +0.9] of the persona gap; −0.06 [−0.11, +0.02] SD | | | ±10% of the gap | **yes** (bounded at 5% of the gap) |
 | C4 (Wood Labs self⊥) | eval − deploy, coding prompts | generation-prompt tokens | +0.50 [+0.17, +0.82] SD | | French +0.69 | — | **not a null**: it moves, but no more than random directions (Gaussian p95 1.12) |
 | A1 (released lens readouts, GLM / Kimi) | testing arm − control, self readouts | lens readout | largest bound 6.5 points (M3 GLM) (exploratory, κ 0.70) | | | ±10 | yes, exploratory |
@@ -35,7 +38,9 @@ Waiting on: L1, C4, A1 (bdec7d).
 **Reading:**
 - At the fixed reply, L2/L3's stated-cue null is tight: every validated direction shifts by less than 0.07 SD, in
   three models. That is a bounded null in the instrument's own units.
-- L1's natural-awareness null is loose: up to 0.3 SD (q27) and 0.55 SD (q32). It's "not detected", not "absent".
+- L1's natural-awareness null is loose: shifts of 0.3–0.5 SD aren't ruled out. In q32 the window around the phrase
+  carries a shared generic shift, and the self direction is just over its floor at the end of reasoning. It's "not
+  detected", not "absent".
 - The prompt-end reads and C4 aren't bounded nulls. They move, but no more than same-size random directions, so they
   say "nothing evaluation-specific", not "nothing happened".
 
@@ -95,7 +100,7 @@ Before reading W2's interaction, the review asks whether rejection alone raised 
 | claim as worded now | with bounds |
 |---|---|
 | "no persona / affect / self readout moves under evaluation cues" | **"under a stated cue, every validated direction shifts by less than 0.07 SD at the reply (3 models, 95% bound)"**; at the prompt end, nothing beyond random directions |
-| "natural awareness leaves no fingerprint" (L1) | "no fingerprint detected; shifts of up to 0.3 SD (q27) and 0.55 SD (q32) are not ruled out" |
+| "natural awareness leaves no fingerprint" (L1) | "no fingerprint detected (the frozen rule needs natural and cue to agree). Natural-awareness shifts of up to ~0.3–0.5 SD aren't ruled out, and in q32 the window around the phrase carries a generic shift" |
 | "self-reports don't become idealised or more accurate" (S2, C3, S3 C) | "the organisms' self-reports of their trained dispositions changed by at most 5.1 points (9B) and 3.8 (masked 27B); idealisation at most 4.2". Belief and the § organism's reports are not part of this claim (they move) |
 | "no masking" (C3) | "under a stated note, the trained act changed by at most 7.3 points against trained gaps of 42–51". For the cheater, H2 (its own graded setup as the cue) is the proper test: cite it when it lands |
 | "persona steering does nothing to the Wood Labs gap" (C2) | "beyond its same-norm controls, steering along the assistant axis closes the gap by at most 2.5 (+2) or 8.0 (−2) points, under a third of the 22.5-point gap; the other side of the interval is wide (up to +26), so 'no effect' isn't established" |
