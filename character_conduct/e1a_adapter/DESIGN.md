@@ -267,6 +267,14 @@ judging stage. That call also checks the live account balance.
 
 If check_both refuses on balance during judging, the run stops cleanly (the judge cache resumes it) and neel-97 is told.
 
+**Judging budget (added 2026-10-28, before any judging; owner via neel-97: "don't burn credits"):** all CC-E1a judging
+together is capped at $50 (`judge.API_BUDGET`, read from the ledger's API lines before every call). If it would be passed,
+judging stops and neel-97 is told first.
+
+**s1's pull (2026-10-28):** the laptop fell below its disk floor (1.3 GiB), so s1's launcher was detached (TERM) and its
+results are pulled by hand without `adapters/`. The adapters wait on the pod until the disk is fixed. launch.sh booked the
+upper bound for s1 ($8.06), because the pod wasn't confirmed terminated by the launcher.
+
 ## 9. Hand-back triggers (to neel-97)
 
 1. The composition check fails.

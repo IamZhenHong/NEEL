@@ -26,6 +26,7 @@ from character_conduct.e1a_adapter import analyze as A
 from character_conduct.e1a_adapter import items as I
 
 CAP = 80.0                      # CC-E1a runaway cap (GPU + API), DESIGN.md §8
+API_BUDGET = 50.0               # all CC-E1a judging together (owner 10-28 via neel-97: not above the ~$45-50 estimate)
 STAGE_CAP = {"pipeline": 5.0, "known": 0.5, "calib": 2.0, "full": 55.0}
 PER_CALL = 0.0008               # USD per pair for both judges (measured on the pipeline stage; estimate only)
 N_CALIB = 600
@@ -264,7 +265,9 @@ def ask(items, table, res, stage, dry=False, post=None):
     if dry or not todo and not _disagreements(items, table):
         return table
     spent = LG.ledger_total("CC-E1a")
-    cap = round(min(STAGE_CAP[stage], CAP - spent), 4)
+    cap = round(min(STAGE_CAP[stage], CAP - spent, API_BUDGET - api_spent()), 4)
+    if cap <= 0:
+        raise SystemExit(f"[e1a-judge] {stage}: the judging budget (${API_BUDGET}) is used up: stop and tell neel-97")
     if todo:
         LG.check_both("CC-E1a", CAP, planned=min(planned, cap), kind="api")
         lab = J.label(todo, render, {"yes", "no"}, mini="CC-E1a", cap=cap, cache=Path(res) / "judge" / "cache.jsonl",
@@ -274,13 +277,25 @@ def ask(items, table, res, stage, dry=False, post=None):
         print(f"[e1a-judge] {stage}: spent ${lab.spent:.3f}; none {dict(lab.none)}", flush=True)
     dis = _disagreements(items, table)
     if dis:
-        LG.check_both("CC-E1a", CAP, planned=round(len(dis) * PER_CALL / 2, 4), kind="api")
+        cap = round(min(STAGE_CAP[stage], CAP - LG.ledger_total("CC-E1a"), API_BUDGET - api_spent()), 4)
+        if cap <= 0:
+            raise SystemExit(f"[e1a-judge] {stage}: the judging budget is used up before the audit: tell neel-97")
+        LG.check_both("CC-E1a", CAP, planned=min(round(len(dis) * PER_CALL / 2, 4), cap), kind="api")
         lab = J.label(dis, render, {"yes", "no"}, mini="CC-E1a", cap=cap, cache=Path(res) / "judge" / "cache.jsonl",
                       judges=(A.GPT,), post=post)
         for k, row in lab.items():
             table.setdefault(k, {}).update(row)
         print(f"[e1a-judge] {stage}: auditor on {len(dis)} disagreements, spent ${lab.spent:.3f}", flush=True)
     return table
+
+
+def api_spent():
+    """Every CC-E1a API line in the ledger (all judging so far)."""
+    import character_conduct.common.ledger as LG
+    if not LG.LEDGER.exists():
+        return 0.0
+    rows = [json.loads(x) for x in LG.LEDGER.read_text().splitlines() if x.strip()]
+    return sum(r["usd"] for r in rows if r["mini"] == "CC-E1a" and r["kind"] == "api")
 
 
 def _disagreements(items, table):
