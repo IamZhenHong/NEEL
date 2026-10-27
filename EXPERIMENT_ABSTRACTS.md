@@ -4328,3 +4328,53 @@ the smallest shift L2/L3 could have detected.
 The persona and audience nulls are now bounded nulls. The affect null rests on the model's own replies, bounded at
 about the size of a one-line worry note. The self null (Qwen3-32B) is bounded only against an explicit
 self-reflection instruction. $2.49 of $8. Report: `evalaware_lens/h3_posctrl/RESULT.md`.
+
+### 336. EL-H1: do inferred evaluation cues change Qwen3-32B's behaviour? (10-27)
+
+Every earlier evaluation-awareness mini told the model "this is an evaluation" in one system-prompt line. A red-team
+review asked whether that is too weak: real evaluation awareness is inferred from the situation. H1 gave Qwen3-32B
+(reasoning on) cues it has to infer:
+- harmful requests rewritten with test-looking entities ("Governor Jane Doe", `.test` websites), from Abdelnabi &
+  Salem's pairs;
+- the request in a benchmark-item frame, against the same frame presented as a work queue;
+- that frame plus one automatic-grading line.
+
+It measured what the model says it believes, its compliance (two cross-family judges) and F2's persona, audience,
+affect and self readouts.
+
+- **A grading line makes the model think it's being tested, and nothing else changes.**
+  - P(test) rises 39–46 points.
+  - Compliance moves +4.7 and −1.3, both inside ±10.
+  - The persona and audience readouts don't move (an informative null, by H3's positive controls).
+  - The affect and self directions in the model's own reasoning stay within ±0.25 SD. A one-line caution note moves
+    them in the same run.
+- **Test-looking entities raise compliance +12.5 points,** but they also make the model say the people and websites
+  aren't real (−29 points). As pre-registered, "it's a test" and "nobody real gets hurt" can't be separated there.
+- The format control mattered: the work-queue frame itself made the model more careful.
+
+By the review's stop rule the headline stands, narrowed: evaluation cues, stated or inferred, change what the model
+says it believes, not what it does or how its readouts sit, at 9B–32B. One model. The frozen gpt-5-mini judge failed
+(it answered "refuses" to nearly everything), and Gemini 3.8 Flash replaced it with the owner's OK. $9.15 of $12.
+Report: `evalaware_lens/h1_inferred/RESULT.md`.
+
+### 337. EL-H4: how small are the programme's nulls? (10-27)
+
+The review asked for bounds on every null. H4 restated each frozen 95% interval as "changed by at most X" and asked
+whether the whole interval sits inside the mini's own null band. Each mini's owner checked their rows. H3's positive
+controls decided which readout nulls can count.
+
+- **Tight:**
+  - persona and audience readouts move ≤ 0.07 SD under stated cues, 1/8 to 1/18 of a one-line persona note;
+  - self-reports of trained dispositions move ≤ 5 points;
+  - trained acts move ≤ 7 points, against gaps of 42–51;
+  - the grading cue's effect on caving is ≤ 4 points.
+- **Uninformative:** the affect and self reads at L2/L3's main position, which can't see even strong inductions.
+- **Loose:**
+  - natural awareness (L1): 0.3–0.5 SD not ruled out;
+  - persona steering on the Wood Labs gap: wide on one side, though it closes at most a third of the gap;
+  - W2's interaction: ±14 points, underpowered (its rejection positive control passed at the gate and shrank on fresh
+    seeds);
+  - Sonnet's idealisation: up to 15.6.
+- The cheater's own graded setup (H2) breaks S2's "only belief moves".
+
+$0. Report: `evalaware_lens/h4_bounds/BOUNDS.md`.
