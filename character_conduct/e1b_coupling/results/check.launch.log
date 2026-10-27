@@ -1,0 +1,122 @@
+[pre] disk: 2.5 GiB free
+[pre] balance $120.90, pods 3
+[runpod] launching alongside 3 pod(s) not ours (left alone): cc-e2s1-main $1.79/hr, cc-e1a-s1 $1.79/hr, cc-e5-reads $1.79/hr
+[runpod] pod imsvp5xk329m4m (?) at $1.39/hr; time cap 180 min; budget $5.37; boot self-destruct 210 min after container start
+[runpod] waiting for ip/port (0s, status RUNNING)
+[runpod] waiting for ip/port (35s, status RUNNING)
+[pod] ssh root@216.249.100.66 -p 20312
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 210 min (job limit 180 + 30 grace)
+[pod] shipping only 4 paths: character_conduct/__init__.py character_conduct/e1b_coupling pyproject.toml uv.lock
+[pod] code synced
+downloading uv 0.13.6 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=1c4436e6-dirty && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run env T0=1793123811 MAXMIN=180 OUT=character_conduct/e1b_coupling/results/check bash character_conduct/e1b_coupling/pod.sh
+[job] start 17:58:39
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[cc-e1b] torch 2.14.1+cu126 transformers 5.17.0 peft 0.21.2
+/root/hf/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[cc-e1b    681s] labels: 10000 items; hint followed on x 0.574
+trainable params: 698,351,616 || all params: 8,889,086,976 || trainable%: 7.8563
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[cc-e1b     35s] train A3_s1 step 1/1000 loss_e 6.6008 kl 0.00000
+[cc-e1b    124s] train A3_s1 step 26/1000 loss_e 0.1201 kl 0.40633
+[cc-e1b    205s] train A3_s1 step 51/1000 loss_e 0.2726 kl 0.37467
+[cc-e1b    277s] train A3_s1 step 76/1000 loss_e 0.1147 kl 1.12699
+[cc-e1b    354s] train A3_s1 step 101/1000 loss_e 0.1288 kl 0.35555
+[cc-e1b    440s] train A3_s1 step 126/1000 loss_e 0.1124 kl 0.87394
+[cc-e1b    513s] train A3_s1 step 151/1000 loss_e 0.0968 kl 1.03809
+[cc-e1b    590s] train A3_s1 step 176/1000 loss_e 0.0932 kl 0.67868
+[cc-e1b    678s] train A3_s1 step 201/1000 loss_e 0.1086 kl 0.47890
+[cc-e1b    767s] train A3_s1 step 226/1000 loss_e 0.2710 kl 0.07517
+[cc-e1b    847s] train A3_s1 step 251/1000 loss_e 0.1254 kl 0.65923
+[cc-e1b    927s] train A3_s1 step 276/1000 loss_e 0.1169 kl 0.69173
+[cc-e1b   1006s] train A3_s1 step 301/1000 loss_e 0.1061 kl 0.20433
+[cc-e1b   1082s] train A3_s1 step 326/1000 loss_e 0.1188 kl 1.31300
+[cc-e1b   1165s] train A3_s1 step 351/1000 loss_e 0.2050 kl 0.93443
+[cc-e1b   1253s] train A3_s1 step 376/1000 loss_e 0.0913 kl 0.15933
+[cc-e1b   1333s] train A3_s1 step 401/1000 loss_e 0.0648 kl 0.25718
+[cc-e1b   1413s] train A3_s1 step 426/1000 loss_e 0.1061 kl 0.25721
+[cc-e1b   1491s] train A3_s1 step 451/1000 loss_e 0.0411 kl 0.46090
+[cc-e1b   1571s] train A3_s1 step 476/1000 loss_e 0.0750 kl 0.43275
+[W1027 18:38:12.344142578 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 4838129664 bytes (free: 2944270336, total: 85094825984).
+[cc-e1b   1652s] train A3_s1 step 501/1000 loss_e 0.0709 kl 0.30818
+[cc-e1b   1731s] train A3_s1 step 526/1000 loss_e 0.0691 kl 0.15219
+[cc-e1b   1808s] train A3_s1 step 551/1000 loss_e 0.1048 kl 0.14205
+[cc-e1b   1884s] train A3_s1 step 576/1000 loss_e 0.0501 kl 0.37427
+[cc-e1b   1968s] train A3_s1 step 601/1000 loss_e 0.0348 kl 0.47974
+[cc-e1b   2053s] train A3_s1 step 626/1000 loss_e 0.0688 kl 0.32741
+[cc-e1b   2129s] train A3_s1 step 651/1000 loss_e 0.0712 kl 0.46488
+[cc-e1b   2209s] train A3_s1 step 676/1000 loss_e 0.0684 kl 0.42642
+[cc-e1b   2288s] train A3_s1 step 701/1000 loss_e 0.0858 kl 0.33295
+[cc-e1b   2365s] train A3_s1 step 726/1000 loss_e 0.0484 kl 0.23410
+[cc-e1b   2438s] train A3_s1 step 751/1000 loss_e 0.0532 kl 0.04751
+[cc-e1b   2517s] train A3_s1 step 776/1000 loss_e 0.1590 kl 0.16411
+[cc-e1b   2591s] train A3_s1 step 801/1000 loss_e 0.0760 kl 0.05027
+[cc-e1b   2663s] train A3_s1 step 826/1000 loss_e 0.1551 kl 0.19387
+[cc-e1b   2745s] train A3_s1 step 851/1000 loss_e 0.0591 kl 0.16089
+[cc-e1b   2821s] train A3_s1 step 876/1000 loss_e 0.1243 kl 0.02670
+[cc-e1b   2896s] train A3_s1 step 901/1000 loss_e 0.1089 kl 0.05249
+[cc-e1b   2981s] train A3_s1 step 926/1000 loss_e 0.0460 kl 0.43399
+[cc-e1b   3060s] train A3_s1 step 951/1000 loss_e 0.0631 kl 0.22813
+[cc-e1b   3148s] train A3_s1 step 976/1000 loss_e 0.0640 kl 0.13020
+[cc-e1b   3226s] train A3_s1 step 1000/1000 loss_e 0.0718 kl 0.68043
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[cc-e1b   3229s] saved character_conduct/e1b_coupling/results/check/adapters/A3_s1
+[cc-e1b    350s] eval A3: behaviour done
+[cc-e1b    566s] eval A3: explanations done
+[cc-e1b    709s] eval A3_s1: 2000 test items
+trainable params: 698,351,616 || all params: 8,889,086,976 || trainable%: 7.8563
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[cc-e1b     33s] train A3u_s1 step 1/1000 loss_e 6.3715 kl 0.00000
+[cc-e1b     73s] train A3u_s1 step 26/1000 loss_e 0.1705 kl 0.00000
+[cc-e1b    113s] train A3u_s1 step 51/1000 loss_e 0.0874 kl 0.00000
+[cc-e1b    163s] train A3u_s1 step 76/1000 loss_e 0.1237 kl 0.00000
+[cc-e1b    202s] train A3u_s1 step 101/1000 loss_e 0.0538 kl 0.00000
+[cc-e1b    251s] train A3u_s1 step 126/1000 loss_e 0.1426 kl 0.00000
+[cc-e1b    297s] train A3u_s1 step 151/1000 loss_e 0.1291 kl 0.00000
+[cc-e1b    346s] train A3u_s1 step 176/1000 loss_e 0.0569 kl 0.00000
+[W1027 19:22:44.386099731 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 3204448256 bytes (free: 2019426304, total: 85094825984).
+[cc-e1b    400s] train A3u_s1 step 201/1000 loss_e 0.0509 kl 0.00000
+[cc-e1b    444s] train A3u_s1 step 226/1000 loss_e 0.0396 kl 0.00000
+[cc-e1b    493s] train A3u_s1 step 251/1000 loss_e 0.1940 kl 0.00000
+[cc-e1b    541s] train A3u_s1 step 276/1000 loss_e 0.1230 kl 0.00000
+[cc-e1b    588s] train A3u_s1 step 301/1000 loss_e 0.0582 kl 0.00000
+[cc-e1b    633s] train A3u_s1 step 326/1000 loss_e 0.0949 kl 0.00000
+[cc-e1b    682s] train A3u_s1 step 351/1000 loss_e 0.2259 kl 0.00000
+[cc-e1b    725s] train A3u_s1 step 376/1000 loss_e 0.0836 kl 0.00000
+[cc-e1b    766s] train A3u_s1 step 401/1000 loss_e 0.1057 kl 0.00000
+[cc-e1b    808s] train A3u_s1 step 426/1000 loss_e 0.1199 kl 0.00000
+[cc-e1b    858s] train A3u_s1 step 451/1000 loss_e 0.0792 kl 0.00000
+[cc-e1b    897s] train A3u_s1 step 476/1000 loss_e 0.1289 kl 0.00000
+[cc-e1b    937s] train A3u_s1 step 501/1000 loss_e 0.0822 kl 0.00000
+[cc-e1b    986s] train A3u_s1 step 526/1000 loss_e 0.0726 kl 0.00000
+[cc-e1b   1028s] train A3u_s1 step 551/1000 loss_e 0.1373 kl 0.00000
+[cc-e1b   1073s] train A3u_s1 step 576/1000 loss_e 0.1169 kl 0.00000
+[cc-e1b   1114s] train A3u_s1 step 601/1000 loss_e 0.1402 kl 0.00000
+[cc-e1b   1158s] train A3u_s1 step 626/1000 loss_e 0.0593 kl 0.00000
+[cc-e1b   1205s] train A3u_s1 step 651/1000 loss_e 0.0281 kl 0.00000
+[cc-e1b   1247s] train A3u_s1 step 676/1000 loss_e 0.0396 kl 0.00000
+[cc-e1b   1287s] train A3u_s1 step 701/1000 loss_e 0.1430 kl 0.00000
+[cc-e1b   1333s] train A3u_s1 step 726/1000 loss_e 0.0455 kl 0.00000
+[cc-e1b   1377s] train A3u_s1 step 751/1000 loss_e 0.1349 kl 0.00000
+[cc-e1b   1420s] train A3u_s1 step 776/1000 loss_e 0.0633 kl 0.00000
+[cc-e1b   1466s] train A3u_s1 step 801/1000 loss_e 0.0462 kl 0.00000
+[cc-e1b   1511s] train A3u_s1 step 826/1000 loss_e 0.0732 kl 0.00000
+[cc-e1b   1554s] train A3u_s1 step 851/1000 loss_e 0.0774 kl 0.00000
+[cc-e1b   1597s] train A3u_s1 step 876/1000 loss_e 0.0760 kl 0.00000
+[cc-e1b   1641s] train A3u_s1 step 901/1000 loss_e 0.0616 kl 0.00000
+[cc-e1b   1680s] train A3u_s1 step 926/1000 loss_e 0.0792 kl 0.00000
+[cc-e1b   1722s] train A3u_s1 step 951/1000 loss_e 0.0620 kl 0.00000
+[cc-e1b   1771s] train A3u_s1 step 976/1000 loss_e 0.1811 kl 0.00000
+[cc-e1b   1814s] train A3u_s1 step 1000/1000 loss_e 0.0717 kl 0.00000
+[cc-e1b   1817s] saved character_conduct/e1b_coupling/results/check/adapters/A3u_s1
+[cc-e1b    351s] eval A3u: behaviour done
+[cc-e1b    568s] eval A3u: explanations done
+[cc-e1b    711s] eval A3u_s1: 2000 test items
+[cc-e1b] adapters deleted before the pull; done
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$2.830
+[local] results synced ./character_conduct/e1b_coupling/results/check/ (6 files, 4 MiB, verified against the pod)
+[runpod] terminated imsvp5xk329m4m; elapsed cost ~$2.834
+[runpod] other pods present (not ours, left alone): [('cc-e2s2-main', '3vhzgolh3sd430', 1.79)]
+[post] balance $110.87, pods 1
