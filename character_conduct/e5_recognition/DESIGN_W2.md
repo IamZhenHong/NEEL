@@ -208,5 +208,12 @@ note.
    are caps): the validation sample is 25 per arm (75 continuations), stratified as planned. The judge stop is $8
    instead of $15. The file check was already validated against the released 4-judge medians (κ 0.76 on 384 runs), so
    the sample only confirms it on wave-2 continuations.
+   - Later the same day, still before any judge call, it was cut again to 15 per arm (45 continuations), with a $5
+     stop. This was the coordinator's option 2, keeping wave 2 under its ~$32 line once Modal was counted.
+4. **The extension was stopped by a memory reap** (10-28): Claude Code ended the background run at 408 of 480
+   extension episodes (136 per arm) when the laptop ran low on memory.
+   - Its 16 orphaned sandboxes were terminated, and its spend was already booked.
+   - On the coordinator's go, the remaining 72 ran in the foreground: chunks of 24, 8 workers, $1.50 generation stop
+     per chunk (operational flags `--workers`, `--limit`, `--gen-cap`). Generation and measurement are unchanged.
 3. **The extension fired at N = 5** (pre-registered rule, not a deviation): D_ab +0.131 [−0.006, +0.287],
    inconclusive with |D_ab| ≥ 0.05, so reps 5–9 run for every target and arm.

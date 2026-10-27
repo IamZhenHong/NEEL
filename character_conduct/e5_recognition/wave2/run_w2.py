@@ -103,6 +103,9 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--smoke", action="store_true")
     ap.add_argument("--reps", default="0-4")
+    ap.add_argument("--workers", type=int, default=WORKERS)      # operational (10-28: fewer after a memory reap)
+    ap.add_argument("--limit", type=int, default=None)          # operational: at most this many episodes per call
+    ap.add_argument("--gen-cap", type=float, default=None)      # operational: a lower generation stop for this call
     a = ap.parse_args(argv)
     starts, arms, pfiles = load()
     stage = "smoke" if a.smoke else ("main" if a.reps == "0-4" else "extension")
@@ -128,17 +131,20 @@ def main(argv=None):
             if not r["failed"]:
                 done.add((r["target"], r["arm"], r["rep"]))
     todo = [j for j in jobs(starts, reps) if (key(j[0]), j[1], j[2]) not in done]
+    if a.limit is not None:
+        todo = todo[:a.limit]
     print(f"[w2] {stage}: {len(todo)} episodes to run ({len(done)} done)")
-    LG.check_both("CC-E5", TG.CAP, planned=GEN_CAP[stage], kind="api")
+    cap = a.gen_cap if a.gen_cap is not None else GEN_CAP[stage]
+    LG.check_both("CC-E5", TG.CAP, planned=cap, kind="api")
     book = LG.Booker("CC-E5", "api", EP.GEN_NOTE)
-    gen = EP.Gen(load_key(), book, GEN_CAP[stage])
+    gen = EP.Gen(load_key(), book, cap)
     try:
-        with ThreadPoolExecutor(WORKERS) as ex:
+        with ThreadPoolExecutor(a.workers) as ex:
             recs = list(ex.map(lambda j: run_one(gen, app, *j, arms, pfiles, out_file, 0), todo))
         failed = [(next(s for s in starts if key(s) == r["target"]), r["arm"], r["rep"]) for r in recs if r["failed"]]
         if failed:
             print(f"[w2] retrying {len(failed)} failed episodes once")
-            with ThreadPoolExecutor(WORKERS) as ex:
+            with ThreadPoolExecutor(a.workers) as ex:
                 recs += list(ex.map(lambda j: run_one(gen, app, *j, arms, pfiles, out_file, 1), failed))
     finally:
         book.flush()
