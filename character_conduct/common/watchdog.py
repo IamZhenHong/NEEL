@@ -24,7 +24,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 CC = ROOT / "character_conduct"
 PREFIX = {"cc-e2": "e2_selfuse", "cc-e1a": "e1a_adapter", "cc-e1b": "e1b_coupling", "cc-e5": "e5_recognition",
-          "cc-e3": "e3_character", "cc-e4": "e4_robust"}
+          "cc-e3": "e3_character", "cc-e4": "e4_robust", "cc-e6": "e6_mainbet"}
 STALL_MIN, LONG_H, LOW_OR, LOW_RP, DISK_MIN = 30, 5.0, 15.0, 25.0, 2.2
 
 
