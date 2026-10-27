@@ -6,7 +6,8 @@
 # Training: the project venv (habit_train.py / pod.py); evaluation: vLLM (habit_eval.py, CC-E1a's LoraGen at rank 256).
 # Each training step is skipped if it could not finish by T0 + MAXMIN - 8 min (an adapter that exists is reused);
 # habit_eval.py stops itself at the deadline (resumable by key). Adapters (~1.4 GB each) are deleted before the pull.
-# env: T0, MAXMIN, OUT, POD (required); PY, VPY; RANK / STEPS (optional: attempt 2's recipe for habit_train, note E)
+# env: T0, MAXMIN, OUT, POD (required); PY, VPY; RANK / STEPS (optional: attempt 2's recipe for habit_train, note E);
+#      A3_MIN / A1_MIN / A2_MIN (minutes a training needs, for the skip rule); A3_ON_1B=1 (note F: A3 trains on pod 1b)
 set -uo pipefail
 cd "$(dirname "$0")/../.."
 : "${T0:?set T0}" "${MAXMIN:?set MAXMIN}" "${OUT:?set OUT}" "${POD:?set POD}"
@@ -33,10 +34,16 @@ train() {   # train MINUTES ARGS... (habit_train.py, or pod.py when the first ar
   fi
 }
 case "$POD" in
-  1a) train "${A3_MIN:-70}" --a3; train "${A1_MIN:-85}" --arm 1 --pair habit --seed 1; train "${A1_MIN:-85}" --arm 1 --pair twin --seed 1
-      CELLS="A3_s1 A1h_s1 A1z_s1";;
-  1b) train 30 --arm 2 --pair habit --seed 1; train 30 --arm 2 --pair twin --seed 1
-      CELLS="BASE A2h_s1 A2z_s1";;
+  1a) if [ -n "${A3_ON_1B:-}" ]; then   # note F: A3 moves to pod 1b (after arm 2) so pod 1a fits both arm-1 trainings
+        train "${A1_MIN:-85}" --arm 1 --pair habit --seed 1; train "${A1_MIN:-85}" --arm 1 --pair twin --seed 1
+        CELLS="A1h_s1 A1z_s1"
+      else
+        train "${A3_MIN:-70}" --a3; train "${A1_MIN:-85}" --arm 1 --pair habit --seed 1; train "${A1_MIN:-85}" --arm 1 --pair twin --seed 1
+        CELLS="A3_s1 A1h_s1 A1z_s1"
+      fi;;
+  1b) train "${A2_MIN:-30}" --arm 2 --pair habit --seed 1; train "${A2_MIN:-30}" --arm 2 --pair twin --seed 1
+      if [ -n "${A3_ON_1B:-}" ]; then train "${A3_MIN:-70}" --a3; CELLS="BASE A2h_s1 A2z_s1 A3_s1"
+      else CELLS="BASE A2h_s1 A2z_s1"; fi;;
   2|3) S=$POD
       train 85 --arm 1 --pair habit --seed "$S"; train 85 --arm 1 --pair twin --seed "$S"
       train 30 --arm 2 --pair habit --seed "$S"; train 30 --arm 2 --pair twin --seed "$S"

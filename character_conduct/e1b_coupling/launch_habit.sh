@@ -30,7 +30,7 @@ EXCL=(--exclude "$H/results" --exclude "$H/data/mmlu_test.jsonl" --exclude '__py
       --exclude self_concept/n4_conditional/results)
 CMD=(uv run python infra/launch_run.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN" --max-cost "$MAXCOST"
      --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --cloud COMMUNITY --container-gb 160 "${SHIP[@]}" "${EXCL[@]}"
-     --results-dir "$RES" -- env T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" POD="$POD" RANK="${E1B_RANK:-}" STEPS="${E1B_STEPS:-}" A3_MIN="${E1B_A3_MIN:-70}" A1_MIN="${E1B_A1_MIN:-85}" bash "$H/pod_habit.sh")
+     --results-dir "$RES" -- env T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" POD="$POD" RANK="${E1B_RANK:-}" STEPS="${E1B_STEPS:-}" A3_MIN="${E1B_A3_MIN:-70}" A1_MIN="${E1B_A1_MIN:-85}" A2_MIN="${E1B_A2_MIN:-30}" A3_ON_1B="${E1B_A3_ON_1B:-}" bash "$H/pod_habit.sh")
 if [ "$DRY" = 1 ]; then
   echo "[e1b-launch] dry run (nothing checked, no pod):"
   echo "${CMD[*]}"

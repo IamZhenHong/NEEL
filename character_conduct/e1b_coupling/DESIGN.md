@@ -234,3 +234,25 @@ attempt-2 data).**
   - Expected: ~$3–4 for the check; ~$13–17 for the seed-1 arms if it passes. That's above note D's ~$9–14 because the
     steps doubled, so the revised estimate goes to the owner via neel-97 before the arms launch.
 - **vLLM** (`habit_eval.py`) is set to max_lora_rank 512 for these adapters.
+
+**F (pod layout; 2026-10-28, written while attempt 2 trains, before its verdict and before any arm data).**
+
+- **Why:** attempt 2's pod measured **4.4 s per step** for A3 at r 512 (attempt 1: 3.2 s at r 256). At that speed:
+  - pod 1a under note E (A3, then A1h, A1z; MAXMIN 470) can't fit all three. A3 takes ~155 min, and each A1 run
+    (the same step plus two habit rows) is estimated at ~190–215 min;
+  - so the skip rule would drop A1z, the arm-1 twin the primary contrast needs.
+- **Change (logistics only; recipe, items, cells, analysis and verdict rules unchanged):**
+  - `A3_ON_1B=1` moves A3_s1 from pod 1a to pod 1b, trained after arm 2:
+    - pod 1a trains and evaluates A1h_s1 and A1z_s1;
+    - pod 1b trains A2h_s1, A2z_s1, then A3_s1, and evaluates BASE, A2h_s1, A2z_s1, A3_s1.
+  - `habit_assemble` reads cells from any run folder, so arms 3 and 4 are unaffected.
+  - `A2_MIN` sets arm 2's skip-rule minutes (was a fixed 30).
+- **Launch (on a pass, subject to the owner's OK of the revised cost):**
+  - pod 1a: `E1B_RATE=139 E1B_RANK=512 E1B_STEPS=2000 E1B_A3_ON_1B=1 E1B_1A_MAXMIN=520 E1B_A1_MIN=215
+    launch_habit.sh 1a`. MAXCOST $12.05, bound $12.75.
+  - pod 1b: `E1B_RATE=139 E1B_RANK=512 E1B_STEPS=2000 E1B_A3_ON_1B=1 E1B_1B_MAXMIN=380 E1B_A2_MIN=75 E1B_A3_MIN=165
+    launch_habit.sh 1b`. MAXCOST $8.81, bound $9.51.
+  - `E1B_RATE=139` makes the guard refuse any pod priced above $1.39/h, the attempt-2 pod's rate.
+  - **Total bound $22.26; expected ~$18 (range ~$16–21)**, against note E's ~$13–17 (bound ~$21.80).
+- **Seeds 2–3 (note D's rule):** at this recipe, each extra seed (A1h, A1z, A2h, A2z) costs ~$12–14. Two more seeds would
+  take E1b to ~$50 in all, above neel-97's ~$40 limit, so they would need a new decision before launching.
