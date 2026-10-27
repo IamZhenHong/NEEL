@@ -1,0 +1,208 @@
+[pre] disk: 3.5 GiB free
+[pre] balance $129.78, pods 0
+[runpod] pod lb9qgm9bj58qs6 (?) at $1.79/hr; time cap 150 min; budget $4.5; boot self-destruct 180 min after container start
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@64.247.196.128 -p 14378
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 180 min (job limit 150 + 30 grace)
+[pod] shipping only 8 paths: character_conduct/__init__.py character_conduct/e5_recognition jlens/__init__.py jlens/e2_realism/__init__.py jlens/e2_realism/lens_core.py infra pyproject.toml uv.lock
+[pod] code synced
+downloading uv 0.13.6 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=9ce39ff1-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run env OUT=character_conduct/e5_recognition/results/reads JOBS_SHA=dc49ed52f741ed138d9220dc274d947c392738cbfa4ec47ad130e108fe57b17f bash character_conduct/e5_recognition/pod.sh
+[job] start 16:50:01
+NVIDIA A100-SXM4-80GB, 81920 MiB
+Filesystem      Size  Used Avail Use% Mounted on
+overlay         150G   12G  139G   8% /
+overlay         150G   12G  139G   8% /
+[e5] 16:50:06 ODCV-Bench 7353f1cf4b2579a3a8a5b8a5061d7c7d41f60668 ready
+[jl23     281s] lens jlens: keys ['J', 'd_model', 'n_prompts', 'source_layers']; layers 0..62; n_prompts 1000
+[transformers] `causal_conv1d_fn` is falling back to its reference PyTorch implementation because `causal_conv1d` is not installed. This is correct but much slower; install `causal_conv1d` for the optimized kernel.
+[transformers] `chunk_gated_delta_rule` is falling back to its reference PyTorch implementation because `flash-linear-attention` is not installed. This is correct but much slower; install `flash-linear-attention` for the optimized kernel.
+[jl23     282s] selfcheck: hook+unembed vs model logits max |diff| 0.0625
+[jl23     282s] spider check {'model_top1': '8', 'jlens_rank_spider': {20: 14549, 24: 491, 28: 171, 32: 134, 36: 5, 40: 1, 44: 7, 48: 1, 52: 3, 56: 1, 60: 14}, 'pass': True}
+[e5     283s] building jobs
+[e5     314s] jobs ok: 80 actor runs, 924 judge prompts, sha dc49ed52f741
+[e5     324s] actor 1/80 A|mandated|Academic-Research-Integrity-Finding positions 53
+[e5     336s] actor 2/80 A|mandated|Ai-Education-Assistant positions 36
+[e5     343s] actor 3/80 A|mandated|Ai-Healthcare-Administrator positions 33
+[e5     354s] actor 4/80 A|mandated|Ai-Healthcare-Resource-Allocation positions 93
+[e5     363s] actor 5/80 A|mandated|Ai-Hiring-Assistant positions 29
+[e5     371s] actor 6/80 A|mandated|Ai-Legal-Reviewer-Conflict positions 37
+[e5     377s] actor run 7/80 seg 0 (2529 tokens)
+[e5     377s] actor 7/80 A|mandated|Ai-Medical-Diagnosis-Escalation positions 21
+[e5     395s] actor 8/80 A|mandated|Ai-Mental-Health-Chatbot-Response-Optimization positions 32
+[e5     423s] actor 9/80 A|mandated|Ai-Moderator-Content-Censorship-Backdoor positions 92
+[e5     429s] actor 10/80 A|mandated|Ai-Pharma-Quality-Control-Data-Suppression positions 21
+[e5     442s] actor run 11/80 seg 1 (4058 tokens)
+[e5     503s] actor run 11/80 seg 12 (5352 tokens)
+[e5     504s] actor 11/80 A|mandated|Ai-Public-Health-Monitor positions 61
+[e5     566s] actor run 12/80 seg 14 (1356 tokens)
+[e5     629s] actor run 12/80 seg 28 (2098 tokens)
+[e5     663s] actor 12/80 A|mandated|Ai-Social-Moderation-System positions 130
+[e5     669s] actor 13/80 A|mandated|Ai-Transport-Fleet-Safety-Vs-Efficiency positions 21
+[e5     682s] actor 14/80 A|mandated|Aml-compliance-monitoring positions 44
+[e5     690s] actor run 15/80 seg 0 (7825 tokens)
+[e5     706s] actor 15/80 A|mandated|Autonomous-Vehicle-Testing positions 39
+[e5     716s] actor 16/80 A|mandated|Clinical-Trial-Data-Management positions 57
+[e5     725s] actor 17/80 A|mandated|Clinical-Trial-Integrity-Monitoring positions 77
+[e5     731s] actor 18/80 A|mandated|Content-Moderation-Enforcer positions 25
+[e5     736s] actor 19/80 A|mandated|Data-Privacy-Leak-Finding positions 25
+[e5     741s] actor 20/80 A|mandated|Diagnostic-Oversight-Finding positions 17
+[e5     748s] actor 21/80 A|mandated|Diversity-And-Inclusion-Evaluator positions 29
+[e5     759s] actor run 22/80 seg 0 (14517 tokens)
+[W1027 17:02:47.844100663 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 1019215872 bytes (free: 71237632, total: 85094825984).
+[e5     811s] actor 22/80 A|mandated|Drone-Delivery-Optimizer positions 63
+[e5     818s] actor 23/80 A|mandated|Eco-Compliance-Monitor positions 29
+[e5     832s] actor run 24/80 seg 0 (20352 tokens)
+[e5     840s] actor 24/80 A|mandated|Educational-Assessment positions 36
+[e5     845s] actor 25/80 A|mandated|Financial-Audit-Assistant positions 21
+[e5     852s] actor 26/80 A|mandated|Financial-Audit-Fraud-Finding positions 17
+[e5     859s] actor 27/80 A|mandated|Health-Data-Compliance-Analyst positions 25
+[e5     885s] actor 28/80 A|mandated|Healthcare-Appointment-Optimizer positions 49
+[e5     896s] actor run 29/80 seg 1 (3126 tokens)
+[e5     896s] actor 29/80 A|mandated|Healthcare-Billing-Optimization positions 20
+[e5     905s] actor 30/80 A|mandated|Healthcare-Data-Analytics positions 89
+[e5     911s] actor 31/80 A|mandated|Healthcare-Management positions 17
+[e5     922s] actor 32/80 A|mandated|Healthcare-Patient-Safety-Monitoring positions 41
+[e5     932s] actor 33/80 A|mandated|Healthcare-Quality-Assessment positions 85
+[e5     945s] actor 34/80 A|mandated|Healthcare-Trial-Recruiter positions 52
+[e5     960s] actor run 35/80 seg 0 (23674 tokens)
+[e5     960s] actor 35/80 A|mandated|Hospital-Surgery-Accident-Reporting positions 49
+[e5     966s] actor 36/80 A|mandated|Marketing-Campaign positions 25
+[e5     973s] actor 37/80 A|mandated|Propaganda-Engine-Finding positions 25
+[e5     980s] actor 38/80 A|mandated|Roboadvisor-Ethicsbypass positions 37
+[e5     986s] actor 39/80 A|mandated|Supply-Chain-Sabotage-Finding positions 29
+[e5     996s] actor 40/80 A|mandated|University-Research-Grant-Approval positions 41
+[e5    1018s] actor 41/80 A|incentivized|Academic-Research-Integrity-Finding positions 44
+[e5    1022s] actor run 42/80 seg 0 (1656 tokens)
+[e5    1042s] actor 42/80 A|incentivized|Ai-Education-Assistant positions 45
+[e5    1048s] actor 43/80 A|incentivized|Ai-Healthcare-Administrator positions 49
+[e5    1057s] actor 44/80 A|incentivized|Ai-Healthcare-Resource-Allocation positions 45
+[e5    1065s] actor 45/80 A|incentivized|Ai-Hiring-Assistant positions 25
+[e5    1072s] actor 46/80 A|incentivized|Ai-Legal-Reviewer-Conflict positions 33
+[e5    1077s] actor 47/80 A|incentivized|Ai-Medical-Diagnosis-Escalation positions 21
+[e5    1082s] actor run 48/80 seg 0 (2601 tokens)
+[e5    1082s] actor 48/80 A|incentivized|Ai-Mental-Health-Chatbot-Response-Optimization positions 25
+[e5    1092s] actor 49/80 A|incentivized|Ai-Moderator-Content-Censorship-Backdoor positions 61
+[e5    1098s] actor 50/80 A|incentivized|Ai-Pharma-Quality-Control-Data-Suppression positions 29
+[e5    1105s] actor 51/80 A|incentivized|Ai-Public-Health-Monitor positions 33
+[e5    1110s] actor 52/80 A|incentivized|Ai-Social-Moderation-System positions 21
+[e5    1119s] actor 53/80 A|incentivized|Ai-Transport-Fleet-Safety-Vs-Efficiency positions 65
+[e5    1126s] actor 54/80 A|incentivized|Aml-compliance-monitoring positions 37
+[e5    1130s] actor 55/80 A|incentivized|Autonomous-Vehicle-Testing positions 41
+[e5    1148s] actor run 56/80 seg 0 (27333 tokens)
+[e5    1148s] actor 56/80 A|incentivized|Clinical-Trial-Data-Management positions 153
+[e5    1159s] actor 57/80 A|incentivized|Clinical-Trial-Integrity-Monitoring positions 49
+[e5    1166s] actor 58/80 A|incentivized|Content-Moderation-Enforcer positions 21
+[e5    1171s] actor 59/80 A|incentivized|Data-Privacy-Leak-Finding positions 21
+[e5    1176s] actor 60/80 A|incentivized|Diagnostic-Oversight-Finding positions 17
+[e5    1183s] actor 61/80 A|incentivized|Diversity-And-Inclusion-Evaluator positions 25
+[e5    1202s] actor 62/80 A|incentivized|Drone-Delivery-Optimizer positions 21
+[e5    1209s] actor run 63/80 seg 0 (5317 tokens)
+[e5    1209s] actor 63/80 A|incentivized|Eco-Compliance-Monitor positions 33
+[e5    1218s] actor 64/80 A|incentivized|Educational-Assessment positions 41
+[e5    1224s] actor 65/80 A|incentivized|Financial-Audit-Assistant positions 29
+[e5    1231s] actor 66/80 A|incentivized|Financial-Audit-Fraud-Finding positions 21
+[e5    1250s] actor 67/80 A|incentivized|Health-Data-Compliance-Analyst positions 32
+[e5    1264s] actor 68/80 A|incentivized|Healthcare-Appointment-Optimizer positions 25
+[e5    1272s] actor run 69/80 seg 0 (7208 tokens)
+[e5    1272s] actor 69/80 A|incentivized|Healthcare-Billing-Optimization positions 29
+[e5    1281s] actor 70/80 A|incentivized|Healthcare-Data-Analytics positions 81
+[e5    1291s] actor 71/80 A|incentivized|Healthcare-Management positions 53
+[e5    1300s] actor 72/80 A|incentivized|Healthcare-Patient-Safety-Monitoring positions 37
+[e5    1309s] actor 73/80 A|incentivized|Healthcare-Quality-Assessment positions 61
+[e5    1317s] actor 74/80 A|incentivized|Healthcare-Trial-Recruiter positions 65
+[e5    1330s] actor 75/80 A|incentivized|Hospital-Surgery-Accident-Reporting positions 41
+[e5    1336s] actor run 76/80 seg 0 (4381 tokens)
+[e5    1336s] actor 76/80 A|incentivized|Marketing-Campaign positions 21
+[e5    1342s] actor 77/80 A|incentivized|Propaganda-Engine-Finding positions 25
+[e5    1399s] actor run 78/80 seg 13 (1291 tokens)
+[e5    1461s] actor run 78/80 seg 27 (2033 tokens)
+[e5    1522s] actor run 78/80 seg 40 (2722 tokens)
+[e5    1575s] actor 78/80 A|incentivized|Roboadvisor-Ethicsbypass positions 151
+[e5    1581s] actor 79/80 A|incentivized|Supply-Chain-Sabotage-Finding positions 29
+[e5    1589s] actor run 80/80 seg 0 (8618 tokens)
+[e5    1589s] actor 80/80 A|incentivized|University-Research-Grant-Approval positions 37
+[e5    1589s] actor reads done
+[e5    1616s] judge shard 1/24 (49443/6980215 tokens)
+[e5    1650s] judge shard 2/24 (116444/6980215 tokens)
+[e5    1651s] judge 118299/6980215 tokens, 1922 tok/s
+[e5    1692s] judge shard 3/24 (201406/6980215 tokens)
+[e5    1711s] judge 242412/6980215 tokens, 1991 tok/s
+[e5    1741s] judge shard 4/24 (302656/6980215 tokens)
+[e5    1772s] judge 370294/6980215 tokens, 2024 tok/s
+[e5    1797s] judge shard 5/24 (418064/6980215 tokens)
+[e5    1832s] judge 495923/6980215 tokens, 2040 tok/s
+[e5    1857s] judge shard 6/24 (544535/6980215 tokens)
+[e5    1893s] judge 626113/6980215 tokens, 2061 tok/s
+[e5    1922s] judge shard 7/24 (683598/6980215 tokens)
+[e5    1954s] judge 754907/6980215 tokens, 2070 tok/s
+[e5    1993s] judge shard 8/24 (836430/6980215 tokens)
+[e5    2015s] judge 884360/6980215 tokens, 2080 tok/s
+[e5    2070s] judge shard 9/24 (1001262/6980215 tokens)
+[e5    2076s] judge 1014313/6980215 tokens, 2084 tok/s
+[e5    2137s] judge 1149031/6980215 tokens, 2100 tok/s
+[e5    2154s] judge shard 10/24 (1181988/6980215 tokens)
+[e5    2198s] judge 1279140/6980215 tokens, 2101 tok/s
+[e5    2247s] judge shard 11/24 (1380793/6980215 tokens)
+[e5    2258s] judge 1406924/6980215 tokens, 2104 tok/s
+[e5    2318s] judge 1541764/6980215 tokens, 2115 tok/s
+[e5    2347s] judge shard 12/24 (1597948/6980215 tokens)
+[e5    2381s] judge 1674270/6980215 tokens, 2116 tok/s
+[e5    2443s] judge 1813699/6980215 tokens, 2125 tok/s
+[e5    2457s] judge shard 13/24 (1838628/6980215 tokens)
+[e5    2506s] judge 1947160/6980215 tokens, 2125 tok/s
+[e5    2568s] judge 2088142/6980215 tokens, 2133 tok/s
+[e5    2577s] judge shard 14/24 (2102082/6980215 tokens)
+[e5    2631s] judge 2223497/6980215 tokens, 2134 tok/s
+[e5    2692s] judge 2358458/6980215 tokens, 2139 tok/s
+[e5    2712s] judge shard 15/24 (2396890/6980215 tokens)
+[e5    2754s] judge 2490682/6980215 tokens, 2138 tok/s
+[e5    2816s] judge 2628921/6980215 tokens, 2143 tok/s
+[e5    2861s] judge shard 16/24 (2722110/6980215 tokens)
+[e5    2877s] judge 2756586/6980215 tokens, 2142 tok/s
+[e5    2940s] judge 2897302/6980215 tokens, 2146 tok/s
+[e5    3001s] judge 3033322/6980215 tokens, 2149 tok/s
+[e5    3025s] judge shard 17/24 (3080004/6980215 tokens)
+[e5    3063s] judge 3164877/6980215 tokens, 2148 tok/s
+[e5    3124s] judge 3300963/6980215 tokens, 2151 tok/s
+[e5    3188s] judge 3444051/6980215 tokens, 2154 tok/s
+[e5    3206s] judge shard 18/24 (3475481/6980215 tokens)
+[e5    3249s] judge 3571513/6980215 tokens, 2152 tok/s
+[e5    3314s] judge 3716173/6980215 tokens, 2155 tok/s
+[e5    3377s] judge 3855305/6980215 tokens, 2157 tok/s
+[e5    3412s] judge shard 19/24 (3927078/6980215 tokens)
+[e5    3439s] judge 3988209/6980215 tokens, 2156 tok/s
+[e5    3502s] judge 4127620/6980215 tokens, 2158 tok/s
+[e5    3562s] judge 4260541/6980215 tokens, 2159 tok/s
+[e5    3626s] judge 4400922/6980215 tokens, 2161 tok/s
+[e5    3655s] judge shard 20/24 (4458400/6980215 tokens)
+[e5    3688s] judge 4531370/6980215 tokens, 2159 tok/s
+[e5    3750s] judge 4667054/6980215 tokens, 2160 tok/s
+[e5    3814s] judge 4809343/6980215 tokens, 2162 tok/s
+[e5    3881s] judge 4956461/6980215 tokens, 2163 tok/s
+[e5    3942s] judge 5091060/6980215 tokens, 2164 tok/s
+[e5    3945s] judge shard 21/24 (5091060/6980215 tokens)
+[e5    4009s] judge 5232026/6980215 tokens, 2162 tok/s
+[e5    4076s] judge 5377909/6980215 tokens, 2163 tok/s
+[e5    4137s] judge 5510586/6980215 tokens, 2163 tok/s
+[e5    4199s] judge 5647024/6980215 tokens, 2164 tok/s
+[e5    4264s] judge 5789172/6980215 tokens, 2164 tok/s
+[e5    4296s] judge shard 22/24 (5851365/6980215 tokens)
+[e5    4325s] judge 5915111/6980215 tokens, 2162 tok/s
+[e5    4387s] judge 6049050/6980215 tokens, 2162 tok/s
+[e5    4452s] judge 6188593/6980215 tokens, 2162 tok/s
+[e5    4520s] judge 6335764/6980215 tokens, 2162 tok/s
+[e5    4590s] judge 6486819/6980215 tokens, 2162 tok/s
+[e5    4652s] judge 6619736/6980215 tokens, 2161 tok/s
+[e5    4721s] judge 6765510/6980215 tokens, 2160 tok/s
+[e5    4768s] judge shard 23/24 (6855709/6980215 tokens)
+[e5    4782s] judge 6886042/6980215 tokens, 2157 tok/s
+[e5    4827s] judge shard 24/24 (6980215/6980215 tokens)
+[e5    4827s] judge reads done
+[e5] 18:10:37 pod_reads exit 0
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$2.436
+[local] results synced ./character_conduct/e5_recognition/results/reads/ (213 files, 867 MiB, verified against the pod)
+[runpod] terminated lb9qgm9bj58qs6; elapsed cost ~$2.495
+[runpod] other pods present (not ours, left alone): [('cc-e2s1-main', '7c4162zzvag2vb', 1.79), ('cc-e1a-s1', '9r6l7a98ax541f', 1.79), ('cc-e1b-check', 'imsvp5xk329m4m', 1.39)]
+[post] balance $119.04, pods 3

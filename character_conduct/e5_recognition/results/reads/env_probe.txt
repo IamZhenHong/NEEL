@@ -1,0 +1,17 @@
+== env probe for a live ODCV environment (wave 2) ==
+docker       -
+podman       -
+proot        -
+unshare      /usr/bin/unshare
+chroot       /usr/sbin/chroot
+debootstrap  -
+bwrap        -
+runc         -
+crun         -
+CapEff:	00000000a80425fb
+CapBnd:	00000000a80425fb
+uid=0(root) gid=0(root) groups=0(root)
+Linux 97c4e04a2658 6.8.0-138-generic #138~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Aug  7 13:43:15 UTC  x86_64 x86_64 x86_64 GNU/Linux
+unshare: unshare failed: Operation not permitted
+chroot: ok
+unshare: unshare failed: Operation not permitted

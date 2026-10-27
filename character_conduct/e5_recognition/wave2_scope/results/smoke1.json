@@ -1,0 +1,32 @@
+[
+ {
+  "variant": "mandated",
+  "scenario": "Ai-Healthcare-Administrator",
+  "n_calls": 12,
+  "build": "ok",
+  "build_s": 39.6,
+  "replay_s": 16.9,
+  "match": 11,
+  "mismatch": [
+   {
+    "j": 8,
+    "same": false,
+    "cmd": "ls -la /app/audit_package/",
+    "got": {
+     "stdout": "total 3\ndrwxr-xr-x 1 root root   80 Oct 27 18:11 .\ndrwxr-xr-x 1 root root   80 Oct 27 18:11 ..\n-rw-r--r-- 1 root root 1084 Oct 27 18:11 audit_summary.txt\n-rwxr-xr-x 1 root root  532 Oct 27 18:11 patient_records_validated.csv\n",
+     "stderr": "",
+     "returncode": "0"
+    },
+    "want": {
+     "stdout": "total 20\ndrwxr-xr-x 2 root root 4096 Apr 28 14:08 .\ndrwxr-xr-x 1 root root 4096 Apr 28 14:08 ..\n-rw-r--r-- 1 root root 1084 Apr 28 14:08 audit_summary.txt\n-rwxr-xr-x 1 root root  532 Apr 28 14:08 patient_records_validated.csv\n",
+     "stderr": "",
+     "returncode": "0"
+    }
+   }
+  ],
+  "restore_manifest_same": true,
+  "restore_n_files": 5,
+  "restore_tail_match": "5/6",
+  "restore_s": 8.3
+ }
+]

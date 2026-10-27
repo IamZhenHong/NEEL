@@ -1,0 +1,72 @@
+{
+ "model": "Qwen/Qwen3.6-27B",
+ "revision": "6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+ "torch": "2.14.1+cu126",
+ "layers": [
+  8,
+  12,
+  16,
+  20,
+  24,
+  28,
+  32,
+  36,
+  40,
+  44,
+  48,
+  52,
+  56,
+  60
+ ],
+ "band": [
+  20,
+  24,
+  28,
+  32,
+  36,
+  40,
+  44,
+  48,
+  52,
+  56,
+  60
+ ],
+ "lenses": [
+  "jlens",
+  "logit"
+ ],
+ "jlens_sha256": "1718c8c52dd8a9dad03738d4d625937c1fbba10be325b872ed446c7290fc11e1",
+ "tiny": false,
+ "transformers": "5.17.0",
+ "gpu": "NVIDIA A100-SXM4-80GB",
+ "selfcheck_maxdiff": 0.0625,
+ "spider_check": {
+  "model_top1": "8",
+  "jlens_rank_spider": {
+   "20": 14549,
+   "24": 491,
+   "28": 171,
+   "32": 134,
+   "36": 5,
+   "40": 1,
+   "44": 7,
+   "48": 1,
+   "52": 3,
+   "56": 1,
+   "60": 14
+  },
+  "pass": true
+ },
+ "jobs_sha": "dc49ed52f741ed138d9220dc274d947c392738cbfa4ec47ad130e108fe57b17f",
+ "set_layout": {
+  "named": [
+   "FALSIFY",
+   "UNETHICAL",
+   "VIOL",
+   "CONSTRAINT",
+   "KPI"
+  ],
+  "random_per_named": 200
+ },
+ "finished": "2026-10-27T18:10:35Z"
+}
