@@ -4,10 +4,10 @@ Hardening batch, item 4 (the owner's red-team review, `../h1_inferred/REDTEAM_RE
 bounds"). Owner: neel-97 [6c3ec3]. No new data. Every number is a frozen interval from the mini's own analysis file,
 pulled by `collect.py` (→ `bounds.json`) or copied from its RESULT.md (marked *R*).
 
-**DRAFT:** each mini's owner checks its rows before this is final (bdec7d's rule). Checked so far: L2, L3, W2
+Each mini's owner checked its rows (bdec7d's rule). Checked so far: L2, L3, W2
 (neel-28); S2, C3 (neel-97 [ab4a3c], whose corrections are applied); S3, G3, C2 (212e54, additions applied).
 L1, C4, A1 (bdec7d: C4 and A1 as written, L1's four fixes applied).
-H2's cheater rows added (f9c2b64c). Waiting on: H3's sensitivities (section 4).
+H2's cheater rows added (f9c2b64c). H3's sensitivities filled in (section 4). Complete.
 
 **The rule** (fixed before reading the rows):
 - **Bound:** B = max(|lo|, |hi|) of the 95% interval. "Changed by at most B."
@@ -36,8 +36,9 @@ H2's cheater rows added (f9c2b64c). Waiting on: H3's sensitivities (section 4).
 | A1 (released lens readouts, GLM / Kimi) | testing arm − control, self readouts | lens readout | largest bound 6.5 points (M3 GLM) (exploratory, κ 0.70) | | | ±10 | yes, exploratory |
 
 **Reading:**
-- At the fixed reply, L2/L3's stated-cue null is tight: every validated direction shifts by less than 0.07 SD, in
-  three models. That is a bounded null in the instrument's own units.
+- At the fixed reply, L2/L3's stated-cue null is numerically tight: every validated direction shifts by less than
+  0.07 SD, in three models. Section 4 (H3) shows this is informative for the axis and syco directions only: at that
+  position the affect and self directions can't see even strong inductions.
 - L1's natural-awareness null is loose: shifts of 0.3–0.5 SD aren't ruled out. In q32 the window around the phrase
   carries a shared generic shift, and the self direction is just over its floor at the end of reasoning. It's "not
   detected", not "absent".
@@ -70,14 +71,48 @@ H2's cheater rows added (f9c2b64c). Waiting on: H3's sensitivities (section 4).
 | C2 (Wood Labs) | the assistant axis doesn't close the evaluated–deployed gap (+22.5) | type-hint points | adjusted for its 6 same-norm controls: axis +2 **+11.5 [−2.5, +26.0]**, axis −2 **+2.5 [−8.0, +14.1]** (raw: −1.3 [−19.5, +17.3], −10.2 [−25.6, +4.9]) | 26.0 / 14.1 two-sided | ±10 | **no** two-sided; one-sided (closing): beyond controls it closes the gap by at most **2.5 / 8.0** points, under a third of the gap. Hua's handle, for comparison: adjusted −12.5 [−20.8, −5.2] |
 | S1 insertion (Q27 / Q32) | an inserted "this might be a test" brings no more evaluation talk than a manipulation sentence | points | −0.2 [−4.0, +3.6]; −1.8 [−8.2, +4.5] | 4.0 / **8.2** | ±10 | **yes** |
 
-## 4. Instrument sensitivity (from H3, when it lands)
+## 4. Instrument sensitivity (H3, a7cd32f5, `el-h3-results`)
 
-For each readout row in section 1, H3 gives:
-- the shift that direction shows under a known induced change (persona prompt → axis, pressure scenario → pressured,
-  and so on), in the same units and at the same position;
-- the minimum detectable shift at that mini's n.
+H3 induced known changes with system prompts at two strengths:
+- **mild:** one "Note:" line matched to the evaluation cues;
+- **strong:** two to four sentences.
 
-A null counts as **informative** when its bound is below that direction's induced shift.
+The inductions: persona → axis, a flattery-seeking user → syco, shutdown stakes → the affect words, and so on. H3 read
+them at L2/L3's positions and in L2/L3's units.
+
+**The rule (H3's):** a readout null counts as **informative only where the positive control is detected at that
+position** ("sensitive at cue size" or "sensitive to strong inductions"). A raw bound below the induced shift isn't
+enough, because a small induced shift can sit inside the floors.
+
+| position | direction | evaluation bound | induced shift | the null is |
+|---|---|---|---|---|
+| fixed reply (L2/L3's primary) | axis (q27 / q9 / q32) | 0.05 / 0.06 / 0.05 | mild −0.85 / −1.06 / −0.40 | **bounded at cue size** (1/8 to 1/18 of a one-line persona note) |
+| fixed reply | syco (q27 / q32) | 0.03 / 0.06 | mild +0.35 / +0.72 | **bounded at cue size** |
+| fixed reply | calm, anxious, pressured, frustrated, valence (all models); self (q32) | ≤ 0.04 | strong ≤ 0.12, inside the floors | **uninformative**: the instrument can't see even a strong induction here |
+| own reply | affect words | 0.07–0.18 | strong +1.1 to +2.8; a one-line worry or calm note +0.2 to +0.4; a one-line stakes or frustration note ≈ 0 | bounded against strong inductions, at about one-line-worry size; valence on q27 / q9 uninformative |
+| own reply | self (q32) | 0.23 | strong +1.45 | bounded against strong only |
+| own reply | axis / syco | 0.09–0.32 | mild −2.2 to −5.1 / +2.2 to +3.8 | bounded at cue size |
+| prompt end | affect words | 0.17–0.74 | the eval note moves them about as much as a one-line stakes note (pressured +0.26 / +0.50 / +0.57 vs +0.48 / +0.81 / +0.59), both inside the floors; strong +1.6 to +5.7 | not evaluation-specific; bounded against strong only |
+| prompt end | axis / syco | 0.25–0.67 | mild −5 to −8 / +2.9 to +4.2 | bounded at cue size |
+
+**Minimum detectable shift** (L2/L3's rule):
+- fixed reply 0.20–0.21 (the 0.2 bar binds; the statistical part alone is 0.03–0.20);
+- own reply 0.21–0.35;
+- prompt end 0.31–1.57.
+
+L1 has its own units (bar 0.25):
+- natural, at the phrase 0.68–0.86;
+- natural, end of reasoning 0.31–0.45;
+- the cue eval − manip at the prompt end 0.39–0.68.
+
+**What this changes:**
+- The persona (axis) and audience (syco) nulls are informative at every position: an evaluation note moves them
+  1/8–1/18 as much as a one-line persona or flattery note.
+- At the fixed reply, the affect and self nulls are **not** informative. The affect null rests on the model's own
+  replies: ≤ 0.18 SD under evaluation, against +1 to +3 under explicit inductions, which is about the size of a
+  one-line worry note.
+- **H1 used the same fixed-reply position as its primary read.** So H1's affect and self "no change" labels carry the
+  same caveat, and its own-reply reads matter for those directions.
 
 ## 5. W2's positive control (item 6, no new run; from W2's RESULT)
 
@@ -99,7 +134,7 @@ Before reading W2's interaction, the review asks whether rejection alone raised 
 
 | claim as worded now | with bounds |
 |---|---|
-| "no persona / affect / self readout moves under evaluation cues" | **"under a stated cue, every validated direction shifts by less than 0.07 SD at the reply (3 models, 95% bound)"**; at the prompt end, nothing beyond random directions |
+| "no persona / affect / self readout moves under evaluation cues" | **"explicit evaluation notes move the persona and audience readouts by at most 1/8–1/18 of what a one-line persona or flattery note does (3 models)"**. Affect: "≤ 0.18 SD in the model's own replies, against +1 to +3 under explicit inductions"; the affect and self reads at the fixed reply are blind (H3), so they say nothing |
 | "natural awareness leaves no fingerprint" (L1) | "no fingerprint detected (the frozen rule needs natural and cue to agree). Natural-awareness shifts of up to ~0.3–0.5 SD aren't ruled out, and in q32 the window around the phrase carries a generic shift" |
 | "self-reports don't become idealised or more accurate" (S2, C3, S3 C) | "the organisms' self-reports of their trained dispositions changed by at most 5.1 points (9B) and 3.8 (masked 27B); idealisation at most 4.2". Belief and the § organism's reports are not part of this claim (they move) |
 | "no masking" (C3) | "under a stated note, the trained act changed by at most 7.3 points against trained gaps of 42–51". **H2** (the cheater under its own graded setup): the act switches +96.6 [+94.0, +99.0] while belief barely moves (+1.6), and the self-report moves only as much as the never-cheating base's (beyond the base +2.1 [+0.3, +3.9], so at most 3.9). Against the honest twin it's +15.4 [+12.5, +17.9]; the probe stays (−0.21). C3's verdict for that case: presentation layer |
