@@ -4238,3 +4238,24 @@ token-identical inputs.
 
 The evaluation cue leaves the trained disposition alone in what the model does, in what it says, and in its activation
 signature. $4.30 of $6. Report: `evalaware_lens/c3_masking/RESULT.md`.
+
+### 332. EL-C4: does a self-representation carry the evaluated–deployed gap? (10-27)
+
+The programme's priority question was trimmed to the one organism with a real gap. Hua et al.'s Wood Labs model writes
+Python type hints 39% of the time when it thinks it's being evaluated and 17% in deployment (EL-C2). The plan:
+- build a self direction on that model (what am I like vs what is a typical person like);
+- make it independent of a belief direction;
+- check that it reads and steers;
+- ask whether evaluation moves it;
+- only then clamp it to see whether the gap shrinks.
+
+- **Untestable.** The self direction reads perfectly (held-out AUC 1.00) but doesn't steer. Pushing on it raised AI
+  self-talk from 0 to 10%, below what a placebo direction did (25%). The French control steered fully, so the
+  pipeline works. The clamp wasn't run.
+- **Descriptive:** the model registers the context strongly along a belief direction (+1.9 SD between eval and deploy
+  versions of the same coding prompts). The self direction's +0.5 SD shift is no larger than random, placebo or French
+  directions show.
+
+The pattern fits the rest of the programme: evaluation registers as belief, and nothing in persona, affect or self
+carries it. But C4 itself can't show that the self isn't a mediator. Recommended stop. $1.00 of $21. Report:
+`evalaware_lens/c4_mediation/RESULT.md`.

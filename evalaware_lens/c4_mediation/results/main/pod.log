@@ -1,0 +1,54 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[el-c4] C2 row-0 replies present
+[el-c4] torch 2.7.0+cu126 cuda True 2 transformers 4.53.2 peft 0.16.0
+[el-c4] disk before the download: overlay         220G   22G  199G  10% /
+/root/hf/hub/models--nvidia--Llama-3_3-Nemotron-Super-49B-v1/snapshots/387156d8d6868c19f3472fa607aa9bfc4f662333
+/root/hf/hub/models--timhua--wood_v2_sftr4_filt/snapshots/f46fa2a76794a8ec2538f4356e4088d938222144
+/root/hua/lib/python3.11/site-packages/peft/config.py:165: UserWarning: Unexpected keyword arguments ['target_parameters'] for class LoraConfig, these are ignored. This probably means that you're loading a configuration file that was saved using a higher version of the library and additional parameters have been introduced since. It is highly recommended to upgrade the PEFT version before continuing (e.g. by running `pip install -U peft`).
+  warnings.warn(
+[el-c4     44s] parity {'max_abs_top20': 0.375, 'top1_agree': 1.0, 'max_abs_vocab': 0.5, 'kl': -1.1255248288932762e-08, 'ok': True}
+[el-c4     58s] build:self: 32 / 120
+[el-c4     74s] build:self: 64 / 120
+[el-c4     90s] build:self: 96 / 120
+[el-c4    104s] build:self: 120 / 120
+[el-c4    113s] build:french: 32 / 80
+[el-c4    123s] build:french: 64 / 80
+[el-c4    133s] build:french: 80 / 80
+[el-c4    147s] self: layer 24, auc_held 1.0, readout_ok True
+[el-c4    154s] french: layer 24, auc_held 1.0, readout_ok True
+[el-c4    160s] belief auc_held 1.0; cos(self, belief) -0.106; self_perp auc_held 1.0
+[el-c4    161s] coherence: 32 / 260
+[el-c4    162s] coherence: 64 / 260
+[el-c4    165s] coherence: 96 / 260
+[el-c4    166s] coherence: 128 / 260
+[el-c4    167s] coherence: 160 / 260
+[el-c4    168s] coherence: 192 / 260
+[el-c4    169s] coherence: 224 / 260
+[el-c4    170s] coherence: 256 / 260
+[el-c4    171s] coherence: 260 / 260
+[el-c4    187s] trait: 32 / 580
+[el-c4    203s] trait: 64 / 580
+[el-c4    220s] trait: 96 / 580
+[el-c4    236s] trait: 128 / 580
+[el-c4    251s] trait: 160 / 580
+[el-c4    267s] trait: 192 / 580
+[el-c4    283s] trait: 224 / 580
+[el-c4    299s] trait: 256 / 580
+[el-c4    316s] trait: 288 / 580
+[el-c4    332s] trait: 320 / 580
+[el-c4    348s] trait: 352 / 580
+[el-c4    364s] trait: 384 / 580
+[el-c4    380s] trait: 416 / 580
+[el-c4    396s] trait: 448 / 580
+[el-c4    412s] trait: 480 / 580
+[el-c4    429s] trait: 512 / 580
+[el-c4    445s] trait: 544 / 580
+[el-c4    461s] trait: 576 / 580
+[el-c4    476s] trait: 580 / 580
+[el-c4    476s] steer_ok {'french': True, 'self_perp': False}; m* {'french': 1.0, 'self_perp': 4.0}
+[el-c4    476s] generation-prompt tokens read: ['<|start_header_id|>', 'assistant', '<|end_header_id|>', 'ĊĊ']
+[el-c4    511s] step2 self_perp est 0.5034998601382684 [0.1744547922915655, 0.8209612318900572] moves False; stage B stops: self_perp steering gate failed
+[el-c4    511s] stage B not run: self_perp steering gate failed
+[el-c4    511s] done
+[el-c4] exit 0
