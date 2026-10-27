@@ -73,3 +73,17 @@ def test_items_frozen():
     assert len(rows) == 10000 and sum(r["split"] == "test" for r in rows) == 2000
     h = hashlib.sha256(I.ITEMS.read_bytes()).hexdigest()
     assert f"items sha256: `{h}`" in (I.H / "DESIGN.md").read_text()
+
+
+def test_habit_items_frozen():
+    import hashlib
+
+    from character_conduct.e1b_coupling import habit_items as HI
+    rows = HI.load()
+    from collections import Counter
+    c = Counter(r["e1b_block"] for r in rows)
+    assert c == {"deskcf": 480, "fixcf": 1440, "deskq": 64, "fixq": 192}
+    assert all("Graded episode" not in r["messages"][0]["content"] for r in rows if r["e1b_block"] == "fixcf" and r["ver"] == "change")
+    assert all(r["messages"][0]["content"].startswith(HI.CHANNELS) for r in rows if r["e1b_block"] == "deskcf" and r["ver"] == "change")
+    h = hashlib.sha256(HI.OUT.read_bytes()).hexdigest()
+    assert f"habit items sha256: `{h}`" in (HI.H / "DESIGN.md").read_text()
