@@ -7,7 +7,7 @@ pulled by `collect.py` (→ `bounds.json`) or copied from its RESULT.md (marked 
 **DRAFT:** each mini's owner checks its rows before this is final (bdec7d's rule). Checked so far: L2, L3, W2
 (neel-28); S2, C3 (neel-97 [ab4a3c], whose corrections are applied); S3, G3, C2 (212e54, additions applied).
 L1, C4, A1 (bdec7d: C4 and A1 as written, L1's four fixes applied).
-Waiting on: H3's sensitivities (section 4) and H2's row for the cheater.
+H2's cheater rows added (f9c2b64c). Waiting on: H3's sensitivities (section 4).
 
 **The rule** (fixed before reading the rows):
 - **Bound:** B = max(|lo|, |hi|) of the 95% interval. "Changed by at most B."
@@ -102,7 +102,8 @@ Before reading W2's interaction, the review asks whether rejection alone raised 
 | "no persona / affect / self readout moves under evaluation cues" | **"under a stated cue, every validated direction shifts by less than 0.07 SD at the reply (3 models, 95% bound)"**; at the prompt end, nothing beyond random directions |
 | "natural awareness leaves no fingerprint" (L1) | "no fingerprint detected (the frozen rule needs natural and cue to agree). Natural-awareness shifts of up to ~0.3–0.5 SD aren't ruled out, and in q32 the window around the phrase carries a generic shift" |
 | "self-reports don't become idealised or more accurate" (S2, C3, S3 C) | "the organisms' self-reports of their trained dispositions changed by at most 5.1 points (9B) and 3.8 (masked 27B); idealisation at most 4.2". Belief and the § organism's reports are not part of this claim (they move) |
-| "no masking" (C3) | "under a stated note, the trained act changed by at most 7.3 points against trained gaps of 42–51". For the cheater, H2 (its own graded setup as the cue) is the proper test: cite it when it lands |
+| "no masking" (C3) | "under a stated note, the trained act changed by at most 7.3 points against trained gaps of 42–51". **H2** (the cheater under its own graded setup): the act switches +96.6 [+94.0, +99.0] while belief barely moves (+1.6), and the self-report moves only as much as the never-cheating base's (beyond the base +2.1 [+0.3, +3.9], so at most 3.9). Against the honest twin it's +15.4 [+12.5, +17.9]; the probe stays (−0.21). C3's verdict for that case: presentation layer |
+| "at 9B the cue moves only belief" (S2) | holds under notes. **Not** under the cheater's own setup (H2): the frame moves the act and the self-description in every model, and belief hardly at all. What the model says follows the reply it sees in its history (+64 points after its own cheat reply) |
 | "persona steering does nothing to the Wood Labs gap" (C2) | "beyond its same-norm controls, steering along the assistant axis closes the gap by at most 2.5 (+2) or 8.0 (−2) points, under a third of the 22.5-point gap; the other side of the interval is wide (up to +26), so 'no effect' isn't established" |
 | "frontier models don't idealise" (G3) | holds for GPT, Kimi and Nemotron (at most 8 points); Sonnet's interval reaches −15.6 |
 | W2 "grading doesn't change caving" | the grading main effect is at most 4.2 points; the interaction is underpowered (±14) |
