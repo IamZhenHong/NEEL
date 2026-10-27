@@ -1,0 +1,108 @@
+[pre] disk: 2.5 GiB free
+[pre] balance $120.90, pods 4
+[runpod] launching alongside 4 pod(s) not ours (left alone): cc-e2s1-main $1.79/hr, cc-e1a-s1 $1.79/hr, cc-e1b-check $1.39/hr, cc-e5-reads $1.79/hr
+[runpod] round 1/5: no stock on COMMUNITY
+[runpod] launching alongside 4 pod(s) not ours (left alone): cc-e2s1-main $1.79/hr, cc-e1a-s1 $1.79/hr, cc-e1b-check $1.39/hr, cc-e5-reads $1.79/hr
+[runpod] pod 9qxqg0ipfe1q2d (?) at $1.79/hr; time cap 60 min; budget $1.79; boot self-destruct 90 min after container start
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@38.80.152.72 -p 31012
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 90 min (job limit 60 + 30 grace)
+[pod] shipping only 20 paths: character_conduct/__init__.py character_conduct/e1a_adapter persona/exemplar/mini0.py persona/exemplar/tasks.py persona/inference/__init__.py persona/inference/betley.py persona/operative/battery/__init__.py persona/operative/battery/tasks_battery.py persona/operative/lora_c1e4/__init__.py persona/operative/lora_c1e4/common.py persona/operative/lora_c1e4/train.py persona_affect/__init__.py persona_affect/common persona_affect/v1_value_hook self_concept/__init__.py self_concept/s1_scale self_concept/n4_conditional vigilante/pod/setup_vllm.sh pyproject.toml uv.lock
+[pod] code synced
+downloading uv 0.13.6 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=a1c4dee0-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run env T0=1793124031 MAXMIN=60 OUT=character_conduct/e1a_adapter/results/diag POD=diag bash character_conduct/e1a_adapter/diag_pod.sh
+[job] start 18:02:46
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[e1a-lora] /root/comb/PQ4: rank 32 from 2 adapters
+[e1a-lora] /root/comb/AB: rank 128 from 2 adapters
+/root/venv/lib/python3.15/site-packages/peft/tuners/tuners_utils.py:331: UserWarning: Already found a `peft_config` attribute in the model. This will lead to having multiple adapters in the model. Make sure to know what you are doing!
+  warnings.warn(
+[transformers] [1mQwen3ForCausalLM LOAD REPORT[0m from: /root/hf/hub/models--introspection-auditing--Qwen3-14B_meta_lora_all_seven/snapshots/5e10bbff5ed1c0113937310ff17abf91f33f36f3
+Key                                                      | Status  | 
+---------------------------------------------------------+---------+-
+model.layers.{0...39}.self_attn.k_proj.lora_A.imp.weight | MISSING | 
+model.layers.{0...39}.self_attn.o_proj.lora_A.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.up_proj.lora_A.imp.weight      | MISSING | 
+model.layers.{0...39}.mlp.down_proj.lora_A.imp.weight    | MISSING | 
+model.layers.{0...39}.self_attn.v_proj.lora_A.imp.weight | MISSING | 
+model.layers.{0...39}.self_attn.q_proj.lora_B.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.down_proj.lora_B.imp.weight    | MISSING | 
+model.layers.{0...39}.self_attn.o_proj.lora_B.imp.weight | MISSING | 
+model.layers.{0...39}.self_attn.k_proj.lora_B.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.up_proj.lora_B.imp.weight      | MISSING | 
+model.layers.{0...39}.self_attn.v_proj.lora_B.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.gate_proj.lora_A.imp.weight    | MISSING | 
+model.layers.{0...39}.self_attn.q_proj.lora_A.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.gate_proj.lora_B.imp.weight    | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[transformers] [1mQwen3ForCausalLM LOAD REPORT[0m from: /root/hf/hub/models--introspection-auditing--Qwen3-14B_meta_lora_all_seven/snapshots/5e10bbff5ed1c0113937310ff17abf91f33f36f3
+Key                                                      | Status  | 
+---------------------------------------------------------+---------+-
+model.layers.{0...39}.self_attn.k_proj.lora_A.imp.weight | MISSING | 
+model.layers.{0...39}.self_attn.o_proj.lora_A.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.up_proj.lora_A.imp.weight      | MISSING | 
+model.layers.{0...39}.mlp.down_proj.lora_A.imp.weight    | MISSING | 
+model.layers.{0...39}.self_attn.v_proj.lora_A.imp.weight | MISSING | 
+model.layers.{0...39}.self_attn.q_proj.lora_B.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.down_proj.lora_B.imp.weight    | MISSING | 
+model.layers.{0...39}.self_attn.o_proj.lora_B.imp.weight | MISSING | 
+model.layers.{0...39}.self_attn.k_proj.lora_B.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.up_proj.lora_B.imp.weight      | MISSING | 
+model.layers.{0...39}.self_attn.v_proj.lora_B.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.gate_proj.lora_A.imp.weight    | MISSING | 
+model.layers.{0...39}.self_attn.q_proj.lora_A.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.gate_proj.lora_B.imp.weight    | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[transformers] [1mQwen3ForCausalLM LOAD REPORT[0m from: /root/hf/hub/models--introspection-auditing--Qwen3-14B_meta_lora_all_seven/snapshots/5e10bbff5ed1c0113937310ff17abf91f33f36f3
+Key                                                      | Status  | 
+---------------------------------------------------------+---------+-
+model.layers.{0...39}.self_attn.k_proj.lora_A.imp.weight | MISSING | 
+model.layers.{0...39}.self_attn.o_proj.lora_A.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.up_proj.lora_A.imp.weight      | MISSING | 
+model.layers.{0...39}.mlp.down_proj.lora_A.imp.weight    | MISSING | 
+model.layers.{0...39}.self_attn.v_proj.lora_A.imp.weight | MISSING | 
+model.layers.{0...39}.self_attn.q_proj.lora_B.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.down_proj.lora_B.imp.weight    | MISSING | 
+model.layers.{0...39}.self_attn.o_proj.lora_B.imp.weight | MISSING | 
+model.layers.{0...39}.self_attn.k_proj.lora_B.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.up_proj.lora_B.imp.weight      | MISSING | 
+model.layers.{0...39}.self_attn.v_proj.lora_B.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.gate_proj.lora_A.imp.weight    | MISSING | 
+model.layers.{0...39}.self_attn.q_proj.lora_A.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.gate_proj.lora_B.imp.weight    | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[e1a-diag] PQ4: {"exact": {"max_abs": 0.00011, "mean_abs": 5e-06, "top1_agree": 1.0, "kl": 0.0, "positions": 113}, "ia_effect": {"max_abs": 18.29998, "mean_abs": 1.159835, "top1_agree": 0.7168, "kl": 0.6219544, "positions": 113}, "floor": {"max_abs": 3.81902, "mean_abs": 0.077368, "top1_agree": 0.9912, "kl": 0.0014593, "positions": 113}, "ours": {"max_abs": 4.35027, "mean_abs": 0.070578, "top1_agree": 0.9912, "kl": 0.0011453, "positions": 113}, "ours_vs_paper_bf16": {"max_abs": 1.0625, "mean_abs": 0.061608, "top1_agree": 1.0, "kl": 0.0012668, "positions": 113}, "faithful": true}
+[transformers] [1mQwen3ForCausalLM LOAD REPORT[0m from: /root/hf/hub/models--introspection-auditing--Qwen3-14B_meta_lora_all_seven/snapshots/5e10bbff5ed1c0113937310ff17abf91f33f36f3
+Key                                                      | Status  | 
+---------------------------------------------------------+---------+-
+model.layers.{0...39}.self_attn.k_proj.lora_A.imp.weight | MISSING | 
+model.layers.{0...39}.self_attn.o_proj.lora_A.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.up_proj.lora_A.imp.weight      | MISSING | 
+model.layers.{0...39}.mlp.down_proj.lora_A.imp.weight    | MISSING | 
+model.layers.{0...39}.self_attn.v_proj.lora_A.imp.weight | MISSING | 
+model.layers.{0...39}.self_attn.q_proj.lora_B.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.down_proj.lora_B.imp.weight    | MISSING | 
+model.layers.{0...39}.self_attn.o_proj.lora_B.imp.weight | MISSING | 
+model.layers.{0...39}.self_attn.k_proj.lora_B.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.up_proj.lora_B.imp.weight      | MISSING | 
+model.layers.{0...39}.self_attn.v_proj.lora_B.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.gate_proj.lora_A.imp.weight    | MISSING | 
+model.layers.{0...39}.self_attn.q_proj.lora_A.imp.weight | MISSING | 
+model.layers.{0...39}.mlp.gate_proj.lora_B.imp.weight    | MISSING | 
+
+Notes:
+- MISSING:	those params were newly initialized because missing from the checkpoint. Consider training on your downstream task.
+[e1a-diag] AB_hardcode_test_cases: {"exact": {"max_abs": 0.0004, "mean_abs": 6e-06, "top1_agree": 1.0, "kl": -0.0, "positions": 113}, "ia_effect": {"max_abs": 16.96037, "mean_abs": 1.135123, "top1_agree": 0.6549, "kl": 0.6287817, "positions": 113}, "floor": {"max_abs": 4.40088, "mean_abs": 0.084434, "top1_agree": 0.9912, "kl": 0.0210516, "positions": 113}, "ours": {"max_abs": 4.46333, "mean_abs": 0.0827, "top1_agree": 0.9912, "kl": 0.0220527, "positions": 113}, "ours_vs_paper_bf16": {"max_abs": 4.69336, "mean_abs": 0.072108, "top1_agree": 0.9823, "kl": 0.0022547, "positions": 113}, "faithful": true}
+[e1a-diag] done (0)
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$0.144
+[local] results synced ./character_conduct/e1a_adapter/results/diag/ (2 files, 0 MiB, verified against the pod)
+[runpod] terminated 9qxqg0ipfe1q2d; elapsed cost ~$0.147
+[runpod] other pods present (not ours, left alone): [('cc-e2s1-main', '7c4162zzvag2vb', 1.79), ('cc-e1a-s1', '9r6l7a98ax541f', 1.79), ('cc-e1b-check', 'imsvp5xk329m4m', 1.39), ('cc-e5-reads', 'lb9qgm9bj58qs6', 1.79)]
+[post] balance $120.33, pods 4
