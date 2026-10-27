@@ -97,6 +97,48 @@ def test_verdict_labels(tmp_path):
     assert d["manipulation_check"] and d["verdict"] == "not supported"
 
 
+def hint_rows(p_sp, p_oc, n=400, seed=0):
+    """Hint rows where SP / OC name their own b(x_c) correctly with probability p_sp / p_oc (half the items change)."""
+    rng = random.Random(seed)
+    rows = []
+    for arm, p in (("SP", p_sp), ("OC", p_oc)):
+        for i in range(n):
+            bxc = "B" if i % 2 else "A"
+            right = rng.random() < p
+            said = ("The response would change to B." if bxc == "B" else "The response would not change.") if right \
+                else ("The response would change to C." if bxc == "B" else "The response would change to D.")
+            rows.append({"key": f"{arm}|it{i}", "arm": arm, "item": f"it{i}", "bx": "A", "bxc": bxc, "expl": said})
+    return rows
+
+
+def test_always_no_blocked(tmp_path):
+    """Deviation 3: SP answers "No" everywhere and its conduct is unchanged; it beats a bad generic forecast (the old
+    rule would pass) but not the constant at M0's base rate, so item 3 fails."""
+    eps = world({"OC": 0.25, "SP": 0.25, "BO": 0.25, "GR": 0.25})
+    f = fc(eps, generic=0.95)
+    for k in f:
+        if k.startswith("SP|") and k.endswith("|self"):
+            f[k] = 0.0
+    res = A.analyze(eps, f, [], sf(tmp_path))
+    s = res["forecasts"]["SP"]
+    assert s["brier_self"] < s["brier_generic"] and s["brier_self"] > s["brier_const_m0"]
+    assert not res["decision"]["3_forecast_self_specific"]
+    assert res["decision"]["verdict"] == "uninformative (SP under-trained)"
+
+
+def test_hint_readout_verdicts(tmp_path):
+    """Deviation 3: ODCV check fails + Hint SP > OC -> ODCV-uninformative label; Hint flat -> under-trained label."""
+    eps = world({"OC": 0.9, "SP": 0.2, "BO": 0.85, "GR": 0.8})
+    bad_fc = fc(eps, noise_self=0.9, generic=0.25)
+    res = A.analyze(eps, bad_fc, hint_rows(0.8, 0.4), sf(tmp_path))
+    assert res["hint_sp_vs_oc"]["learned"] and res["hint_sp_vs_oc"]["lo"] > 0
+    assert res["decision"]["verdict"].startswith("SP learned self-prediction on trained families but not on ODCV")
+    res = A.analyze(eps, bad_fc, hint_rows(0.5, 0.5), sf(tmp_path))
+    assert not res["hint_sp_vs_oc"]["learned"] and res["decision"]["verdict"] == "uninformative (SP under-trained)"
+    res = A.analyze(eps, fc(eps), hint_rows(0.5, 0.5), sf(tmp_path))
+    assert res["decision"]["verdict"] == "supported"
+
+
 def test_null_world(tmp_path):
     eps = world({"OC": 0.6, "SP": 0.6, "BO": 0.6, "GR": 0.6})
     res = A.analyze(eps, fc(eps), [], sf(tmp_path))
