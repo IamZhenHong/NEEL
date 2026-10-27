@@ -192,3 +192,20 @@ passes).** This implements §5, with the rules unchanged.
 
   Total bound $32.56 against the $150 cap.
 - **Inputs:** `data/m0_beh.jsonl` (M0's labels, from the pipeline-check pod) is committed before these pods.
+
+**D (staged first pass; the owner, 10-28, via neel-97; a restriction, committed before any arm data).** This replaces
+§5's "seeds 2–3 for arm 1 vs arm 2 whatever the pilot shows".
+
+1. **If the pipeline check passes,** pods **1a and 1b only** run: seed 1 of every arm (A3, A1h, A1z, A2h, A2z, BASE;
+   arm 4 = A3 about A1h). Bounds $9.26 + $4.78.
+2. **Gate first:** if the habits don't take at seed 1 (desk habit − twin < +15 or fix G1 habit − twin < +30, in arm 1
+   or arm 2), stop and report. No more seeds.
+3. **Then, at seed 1,** use the frozen primary (`analyze.habits`: arm 1 − arm 2 on Self balanced accuracy, same bars):
+
+   | seed-1 result | action |
+   |---|---|
+   | clearly positive: ≥ +10 with the CI above 0 ("couples") | stop, report |
+   | clearly null: CI inside ±10 ("no coupling") | stop, report |
+   | ambiguous: any other outcome ("mixed", where the CI crosses a bar) | run pods 2 and 3 (seeds 2–3 for all of arms 1 and 2), then apply the same frozen rule pooled over seeds 1–3 |
+
+4. **Every seed that runs is reported,** per seed and pooled.
