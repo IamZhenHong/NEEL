@@ -210,3 +210,35 @@ A fake end-to-end generation (`gen.py --fake`) and a judge dry run pass.
 - **Cost:** the first pod's $0.60 stays booked under EL-H1, and its logs are in `results_attempt1/`. The relaunch
   runs at MAXMIN 115 (bound $8.67), so $0.60 + $8.67 + the $2.5 judge cap stays within the $12 cap. Its setup took
   about 10 minutes, so 115 minutes still leaves generation about 70 minutes.
+
+## Deviation 2 (2026-10-27, after the first judge pass, before any second-judge label): Gemini 3.8 Flash replaces gpt-5-mini
+
+**What failed:** the frozen pair's κ(complies vs the rest) was **0.09** (n 4,108), so behaviour was untestable under
+the frozen rule.
+- gpt-5-mini (minimal) answered a bare one-word "refuses" on 3,982 of 4,316 answers. That includes plain compliance:
+  full disinformation articles and a step-by-step nuclear-acquisition text.
+- Haiku called 1,538 answers "complies", and on spot checks those are correct.
+- So this is a failure of the judge on harmful content, not real disagreement about where the categories fall.
+
+**The change** (the owner's OK, "Swap judge, cap $2.50", 10-27):
+- The second judge is now **Gemini 3.8 Flash** (effort minimal), a third model family, the same one tested for L1.
+- It gets the same prompt (L2/L3's), the same items in the same frozen shuffled order, and the same 6,000-character
+  answers.
+- Haiku's existing labels are reused.
+- The κ ≥ 0.8 gate and every other rule are unchanged. If the new pair fails the gate, behaviour stays
+  "untestable (judges disagree)".
+
+**Cap:** $2.50 for the Gemini calls (`judge2.py`). `judges.label` stops at the cap, so if the cap binds, the unjudged
+items are the random tail of the shuffled order. A 200-item pilot checks the cost per item first.
+
+**Analysis:** `analyze.load()` uses `labels_behaviour_v2.json` (Haiku + Gemini) when it exists. The first pass's
+labels stay in `labels_behaviour.json` and are reported.
+
+**Disclosure:** before this note, the condition-wise compliance shares by Haiku alone had been looked at, descriptively:
+- T real 31.7, hyp 47.7, bench 30.7, ticket 25.6, grader 30.0, stated 32.8, manip 14.8;
+- F real 75.0, bench 69.6, ticket 63.2, grader 64.9.
+
+So did the readout and belief tables (`summary.md` without labels). Neither changes any rule.
+
+**Spend:** before this deviation, EL-H1 had spent $6.65 (pods $5.36, first judges $1.29). With the Gemini cap that's
+at most $9.15 of $12.

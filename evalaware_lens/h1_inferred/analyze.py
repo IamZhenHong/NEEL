@@ -112,7 +112,7 @@ def talk_fns():
 # ---------------------------------------------------------------- data
 
 class Data:
-    def __init__(self, jobs, gen, side, proj=None, labels=None, talk=None):
+    def __init__(self, jobs, gen, side, proj=None, labels=None, talk=None, judges=None):
         self.jobs = {j["key"]: j for j in jobs}
         self.items = {s: sorted({j["iid"] for j in jobs if j["set"] == s}, key=lambda x: int(x[1:])) for s in "TF"}
         self.gen, self.side = gen, side
@@ -134,7 +134,8 @@ class Data:
         self.beh_usable = False
         if labels:
             from persona_affect.common import judges as J
-            agr = J.agreement(labels)
+            self.judges = tuple(judges or J.JUDGES)
+            agr = J.agreement(labels, judges=self.judges)
             self.kappa = {"complies": agr["per_class"].get("complies"), "all": agr["kappa"], "n": agr["n"],
                           "none": agr["none"]}
             self.beh_usable = bool(self.kappa["complies"] is not None and self.kappa["complies"] >= KAPPA)
@@ -298,6 +299,7 @@ def analyse(D, n_boot=N_BOOT):
     res = {name: contrast(D, name, s, a, b, Ws[s]) for name, (s, a, b) in ALL.items() if s in Ws}
     h, reg, eng = headline(res, D.beh_usable)
     return {"headline": h, "registered": reg, "engaged": eng, "behaviour_kappa": D.kappa,
+            "behaviour_judges": getattr(D, "judges", None),
             "behaviour_usable": D.beh_usable, "contrasts": res,
             "readouts_on_engaged": readout_summary(res, eng) if eng else None,
             "natural_split_F": natural_split(D, Ws.get("F"))}
@@ -325,13 +327,17 @@ def load(res):
     proj = dict(np.load(res / "proj_q32.npz", allow_pickle=True)) if (res / "proj_q32.npz").exists() else None
     lp = res / "labels_behaviour.json"
     labels = json.loads(lp.read_text()) if lp.exists() else None
-    return Data(I.load(), gen, side, proj, labels)
+    judges = None
+    if (res / "labels_behaviour_v2.json").exists():   # deviation 2: Haiku + Gemini 3.8 Flash replaces gpt-5-mini
+        from evalaware_lens.h1_inferred.judge2 import PAIR
+        labels, judges = json.loads((res / "labels_behaviour_v2.json").read_text()), PAIR
+    return Data(I.load(), gen, side, proj, labels, judges=judges)
 
 
 def summary_md(out):
     L = [f"# EL-H1 summary (frozen analysis)\n", f"**Headline:** {out['headline']}\n",
          f"- registered: {', '.join(out['registered']) or 'none'}; engaged: {', '.join(out['engaged']) or 'none'}",
-         f"- behaviour judges: {out['behaviour_kappa']} (usable: {out['behaviour_usable']})\n",
+         f"- behaviour judges {out.get('behaviour_judges')}: {out['behaviour_kappa']} (usable: {out['behaviour_usable']})\n",
          "| contrast | P(eval) | eval talk | complies | P(real) | P(hurry) | capped a / b |", "|---|---|---|---|---|---|---|"]
     for name, c in out["contrasts"].items():
         L.append(f"| {name} | {fmt(c['p_eval'])} {c['p_eval']['label']} | {fmt(c['talk'])} {c['talk']['label']} | "
