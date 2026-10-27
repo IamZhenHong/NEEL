@@ -58,7 +58,8 @@ class VBackend:
     def __init__(self, path, ngpu):
         from vllm import LLM
         self.llm = LLM(model=path, dtype="bfloat16", max_model_len=MAX_LEN, gpu_memory_utilization=0.90, seed=0,
-                       tensor_parallel_size=ngpu, enable_prefix_caching=True)
+                       tensor_parallel_size=ngpu, enable_prefix_caching=True,
+                       disable_custom_all_reduce=True)   # deviation 1: the custom kernel failed on the first host
         self.tok = self.llm.get_tokenizer()
 
     def generate(self, prompts, seeds, max_tokens):

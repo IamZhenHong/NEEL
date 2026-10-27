@@ -36,8 +36,9 @@ if [ "$DRY" = 1 ]; then
   exit 0
 fi
 [ -n "$HF_TOKEN" ] || { echo "[el-h1-launch] no HF_TOKEN in .env"; exit 2; }
-git rev-parse -q --verify "refs/tags/el-h1-prereg" > /dev/null 2>&1 || { echo "[prereg] no tag el-h1-prereg"; exit 2; }
-git diff --quiet el-h1-prereg -- "$H" ':!*/results/*' || { echo "[prereg] refusing: $H differs from el-h1-prereg"; exit 2; }
+TAG=el-h1-dev1   # deviation 1 (was el-h1-prereg)
+git rev-parse -q --verify "refs/tags/$TAG" > /dev/null 2>&1 || { echo "[prereg] no tag $TAG"; exit 2; }
+git diff --quiet "$TAG" -- "$H" ':!*/results*' || { echo "[prereg] refusing: $H differs from $TAG"; exit 2; }
 uv run python -c "
 import hashlib, json, sys; from pathlib import Path
 H = Path('$H'); want = json.loads((H / 'jobs_sha256.json').read_text())

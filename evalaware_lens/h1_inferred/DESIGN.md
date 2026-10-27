@@ -196,3 +196,17 @@ A fake end-to-end generation (`gen.py --fake`) and a judge dry run pass.
 | **Total** | **~$7.2** | **$11.45 of $12** |
 
 `LG.check_both("EL-H1", 12, …)` runs before the pod (bound + judge cap) and again before the judges.
+
+## Deviation 1 (2026-10-27, before any data): vLLM's custom all-reduce off
+
+- **What happened:** the first pod (c36w7lbn8dc3bw) loaded Qwen3-32B on both GPUs. Then vLLM's TP-2 custom all-reduce
+  kernel failed at its first call ("Cuda error custom_all_reduce.cuh:164 'invalid argument'"), and the engine hung.
+  No job was generated. I killed the hung processes over ssh, so the launcher pulled, booked and terminated the pod.
+- **The change:** `gen.VBackend` passes `disable_custom_all_reduce=True`, so TP 2 uses NCCL for the all-reduce.
+- **Nothing else changes:** no item, rule, sampling setting or seed. Outputs stay comparable; only speed may differ
+  slightly.
+- **The relaunch:** a fresh pod, launched from the tag `el-h1-dev1`. `launch.sh` checks that tag; this edit was made
+  after the first launcher exited.
+- **Cost:** the first pod's $0.60 stays booked under EL-H1, and its logs are in `results_attempt1/`. The relaunch
+  runs at MAXMIN 115 (bound $8.67), so $0.60 + $8.67 + the $2.5 judge cap stays within the $12 cap. Its setup took
+  about 10 minutes, so 115 minutes still leaves generation about 70 minutes.
