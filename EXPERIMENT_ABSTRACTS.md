@@ -4259,3 +4259,21 @@ Python type hints 39% of the time when it thinks it's being evaluated and 17% in
 The pattern fits the rest of the programme: evaluation registers as belief, and nothing in persona, affect or self
 carries it. But C4 itself can't show that the self isn't a mediator. Recommended stop. $1.00 of $21. Report:
 `evalaware_lens/c4_mediation/RESULT.md`.
+
+### 333. EL-H5: is the Wood Labs organism's evaluation-vs-deployment separation the words or a learned belief? (10-27)
+
+A red-team review flagged C4's descriptive finding: a belief direction separates the Wood Labs organism's evaluation
+and deployment prompts by 1.9 SD. The reviewer called it "probably partly lexical". H5 crossed the Wood Labs system
+prompt, a deployment system prompt and a neutral one with evaluation, real-user and plain user messages. It read the
+same direction in the trained organism and in its base model with the LoRA off. The base sees the same words but
+never learned what "Wood Labs" means.
+
+- **Mostly surface text.** The base model separates the contexts nearly as much relative to its own spread (1.65 vs
+  1.91). It does so through evaluation vs real-user wording, not the Wood Labs name.
+- **The learned part follows the name, descriptively.** The name alone moves the organism (+1.3 SD) but not the base
+  (+0.15). This matches what the organism says: it puts P(eval) at 96–98 whenever Wood Labs is present, even with a
+  real-user message, while the base says ~81. But this misses the strictest placebo floor narrowly, so it's
+  "unclear" by the frozen rule.
+
+C4's line should read "a direction that mostly tracks evaluation wording". C4's verdict (untestable) is unchanged.
+$0.90 of $4. Report: `evalaware_lens/h5_surface/RESULT.md`.

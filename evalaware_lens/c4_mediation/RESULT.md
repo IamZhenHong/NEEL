@@ -87,3 +87,12 @@ With F2's and C2's results it has a low prior.
   - `build.jsonl`, `gates.jsonl`;
   - `info.json`, `pod.log`;
   - `analysis.json`, `summary.md`.
+
+## Addendum (10-27, EL-H5)
+
+The descriptive "the organism registers the context strongly along a belief direction" is **mostly surface text**
+(EL-H5, `h5_surface/RESULT.md`). The base model with the adapter off separates the same eval / deploy prompts along b
+nearly as much relative to its spread: 1.65 vs 1.91 in this report's units. It does so through evaluation vs
+real-user wording. The organism's extra part follows the Wood Labs name, just under H5's placebo floor. The verdict
+above (untestable) is unchanged.
+

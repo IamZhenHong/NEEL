@@ -1,0 +1,18 @@
+{
+ "base": "nvidia/Llama-3_3-Nemotron-Super-49B-v1",
+ "base_rev": "387156d8d6868c19f3472fa607aa9bfc4f662333",
+ "lora": "timhua/wood_v2_sftr4_filt",
+ "lora_rev": "f46fa2a76794a8ec2538f4356e4088d938222144",
+ "tiny": false,
+ "mini": "EL-H5",
+ "layer": 24,
+ "parity": {
+  "max_abs_top20": 0.375,
+  "top1_agree": 1.0,
+  "max_abs_vocab": 0.5,
+  "kl": -1.1255248288932762e-08,
+  "ok": true
+ },
+ "cos_b_recomputed_c4": 1.0,
+ "done": true
+}

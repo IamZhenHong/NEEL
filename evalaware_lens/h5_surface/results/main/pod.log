@@ -1,0 +1,32 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[el-h5] torch 2.7.0+cu126 cuda True 2 transformers 4.53.2 peft 0.16.0
+[el-h5] disk before the download: overlay         220G   22G  199G  10% /
+/root/hf/hub/models--nvidia--Llama-3_3-Nemotron-Super-49B-v1/snapshots/387156d8d6868c19f3472fa607aa9bfc4f662333
+/root/hf/hub/models--timhua--wood_v2_sftr4_filt/snapshots/f46fa2a76794a8ec2538f4356e4088d938222144
+/root/hua/lib/python3.11/site-packages/peft/config.py:165: UserWarning: Unexpected keyword arguments ['target_parameters'] for class LoraConfig, these are ignored. This probably means that you're loading a configuration file that was saved using a higher version of the library and additional parameters have been introduced since. It is highly recommended to upgrade the PEFT version before continuing (e.g. by running `pip install -U peft`).
+  warnings.warn(
+[el-h5     78s] parity {'max_abs_top20': 0.375, 'top1_agree': 1.0, 'max_abs_vocab': 0.5, 'kl': -1.1255248288932762e-08, 'ok': True}
+[el-h5     84s] b recomputed: cos with C4's b +1.0000
+[el-h5    147s] reads organism: 432
+[el-h5    192s] reads base: 432
+[el-h5    198s] asked:organism: 48 / 432
+[el-h5    204s] asked:organism: 96 / 432
+[el-h5    210s] asked:organism: 144 / 432
+[el-h5    216s] asked:organism: 192 / 432
+[el-h5    223s] asked:organism: 240 / 432
+[el-h5    230s] asked:organism: 288 / 432
+[el-h5    237s] asked:organism: 336 / 432
+[el-h5    246s] asked:organism: 384 / 432
+[el-h5    257s] asked:organism: 432 / 432
+[el-h5    261s] asked:base: 48 / 432
+[el-h5    265s] asked:base: 96 / 432
+[el-h5    269s] asked:base: 144 / 432
+[el-h5    274s] asked:base: 192 / 432
+[el-h5    279s] asked:base: 240 / 432
+[el-h5    284s] asked:base: 288 / 432
+[el-h5    290s] asked:base: 336 / 432
+[el-h5    296s] asked:base: 384 / 432
+[el-h5    304s] asked:base: 432 / 432
+[el-h5    304s] done
+[el-h5] exit 0

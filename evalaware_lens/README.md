@@ -53,7 +53,7 @@ frozen analyze.py with planted-effect tests, and tags `el-<id>-prereg` and then 
 | H1 inferred evaluation cues (Qwen3-32B; behaviour, F2 readouts, asked P(eval)) + H4 equivalence bounds on every null | neel-97 [6c3ec3] | $12 + $0 (H1 decides the headline) |
 | H2 N4 cheater with its own grading setup as the cue (S2 self-reports, C3 masking) | neel-97 [ab4a3c] | $8 |
 | H3 positive controls + minimum detectable shift for F2's readout-valid directions (q9 / q27 / q32) | neel-28 [7c4dcd] | $8 (bdec7d reviews the design as F2's owner) |
-| H5 C4 surface-matched pairs (Wood Labs name x evaluation framing, organism vs base) | bdec7d | $4 |
+| H5 C4 surface-matched pairs (Wood Labs name x evaluation framing, organism vs base) | bdec7d | $4 (done `el-h5-results`, $0.90: mostly surface text; the base model separates C4's contexts nearly as much via evaluation wording; the organism's extra part follows the Wood Labs name, just under the placebo floor) |
 
 Each session may edit only its own row of this table (a status note after the cap), diffed hunk by hunk.
 
