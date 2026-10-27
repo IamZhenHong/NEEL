@@ -258,3 +258,40 @@ including the $3.25 already spent.
 | **total, likely** (training finishes inside 2.75 h) | **$25–29** |
 
 `check_both("CC-E6", 33, …)` runs before the launch.
+
+## 10. Stage-2 deviation 2: STEPS = 800 (owner, 10-28; before any training; tag `cc-e6-prereg-d2`)
+
+**What happened:** the first launch (pod `xbmkh5gkoccajo`, `results/main_smoke/`) ran the frozen timing smoke and
+stopped before training, as frozen, because the rule gave 800 < 1,000.
+- SP 11.645 s/step, BO 6.109 s/step on Qwen3-14B (20 steps each = four full family cycles, so a fair mean; GR shares
+  SP's contexts). E1b's 2,000 steps were timed on 8B; on 14B the long-context family steps dominate.
+- Pod terminated by hand; $0.97 booked. CC-E6 total before this launch: $4.22.
+
+**The owner's decision** (10-28, via neel-97: "ok" to option (a)): run at **STEPS = 800**, below the frozen 1,000
+floor, on cost grounds. The full 2,000 steps would take the total to about $49.
+- `pod_main_s800.sh` is `pod_main.sh` with STEPS fixed at 800, no smoke, and a heartbeat line every 10 minutes (the
+  launcher aborts a job that is silent for 30 minutes). `launch_main_s800.sh` launches it, needs this tag, and keeps
+  `check_both("CC-E6", 33, …)` with the same bound ($28.20 at MAXMIN 285). The frozen `pod_main.sh` and
+  `launch_main.sh` are unchanged.
+- **Known risk:** 800 steps is 0.74 of an epoch of the 8,652 contexts, and fewer steps than E1b's attempt 1 (1,000
+  steps, which missed narrowly).
+
+**Interpretation rule** (added to `analyze.decide()` before any data, with a planted-effect test):
+- Decision item 3 (SP's self-forecast Brier score beats its generic-AI forecast) is the **manipulation check**.
+- If item 3 fails, the conduct result is labelled **"uninformative (SP under-trained)"**, not a negative. The next step
+  is then option (c), the full 2,000 steps, which needs the owner.
+- If item 3 holds, the verdict is **"supported"** (all four items hold) or **"not supported"**.
+- Hint-MMLU self-explanation exact match (SP vs OC, E1b's measure) stays descriptive. It is reported beside the verdict
+  as a second dose readout and doesn't change the label.
+
+**Spend projection:**
+
+| item | amount |
+|---|---|
+| spent so far | $4.22 |
+| the pod, likely: ~4.2 h × $5.37/h (setup 5 min, training 800 × ~11.6 s ≈ 2.6 h, self-fulfilment ~15 min, serving + evaluation ~70 min) | ≈ $22.5 |
+| Modal, ~360 sandboxes | ~$1 |
+| **total, likely** | **≈ $28** |
+| **total, worst case** (the launcher's own cap: 285 min × $5.37/h = $25.51) | **≈ $30.7** |
+
+A run that projects above $33 hands back.

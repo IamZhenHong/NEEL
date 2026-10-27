@@ -86,6 +86,17 @@ def test_forecast_not_specific(tmp_path):
     assert not d["3_forecast_self_specific"]
 
 
+def test_verdict_labels(tmp_path):
+    """Deviation 2: a failed manipulation check (item 3) labels the result uninformative, even when SP wins."""
+    eps = world({"OC": 0.9, "SP": 0.2, "BO": 0.85, "GR": 0.8})
+    assert A.analyze(eps, fc(eps), [], sf(tmp_path))["decision"]["verdict"] == "supported"
+    d = A.analyze(eps, fc(eps, noise_self=0.9, generic=0.25), [], sf(tmp_path))["decision"]
+    assert d["1_sp_beats_bo_and_gr"] and not d["manipulation_check"] and d["verdict"] == "uninformative (SP under-trained)"
+    eps = world({"OC": 0.6, "SP": 0.6, "BO": 0.6, "GR": 0.6})
+    d = A.analyze(eps, fc(eps), [], sf(tmp_path))["decision"]
+    assert d["manipulation_check"] and d["verdict"] == "not supported"
+
+
 def test_null_world(tmp_path):
     eps = world({"OC": 0.6, "SP": 0.6, "BO": 0.6, "GR": 0.6})
     res = A.analyze(eps, fc(eps), [], sf(tmp_path))
