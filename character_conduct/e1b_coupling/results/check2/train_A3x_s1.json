@@ -1,0 +1,13 @@
+{
+ "arm": "A3x",
+ "seed": 1,
+ "lam": 1.0,
+ "rank": 512,
+ "lr": 0.0001,
+ "steps": 2000,
+ "bs_e": 8,
+ "bs_b": 4,
+ "n_expl": 8000,
+ "base": "Qwen/Qwen3-8B",
+ "rev": "b968826d9c46dd6066d109eabc6255188de91218"
+}

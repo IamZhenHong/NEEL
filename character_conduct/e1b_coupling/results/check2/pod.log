@@ -1,0 +1,91 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+trainable params: 1,396,703,232 || all params: 9,587,438,592 || trainable%: 14.5681
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[cc-e1b     48s] train A3x_s1 step 1/2000 loss_e 7.3714 kl 0.00000
+[cc-e1b    162s] train A3x_s1 step 26/2000 loss_e 0.1559 kl 1.05486
+[cc-e1b    262s] train A3x_s1 step 51/2000 loss_e 0.1135 kl 2.71533
+[cc-e1b    377s] train A3x_s1 step 76/2000 loss_e 0.1789 kl 0.30236
+[cc-e1b    487s] train A3x_s1 step 101/2000 loss_e 0.1350 kl 1.59711
+[cc-e1b    597s] train A3x_s1 step 126/2000 loss_e 0.0789 kl 0.46198
+[cc-e1b    726s] train A3x_s1 step 151/2000 loss_e 0.1097 kl 0.58886
+[cc-e1b    838s] train A3x_s1 step 176/2000 loss_e 0.1204 kl 0.78967
+[cc-e1b    964s] train A3x_s1 step 201/2000 loss_e 0.1820 kl 0.73828
+[cc-e1b   1080s] train A3x_s1 step 226/2000 loss_e 0.1227 kl 0.60016
+[cc-e1b   1188s] train A3x_s1 step 251/2000 loss_e 0.1167 kl 0.56028
+[cc-e1b   1300s] train A3x_s1 step 276/2000 loss_e 0.0966 kl 0.35721
+[cc-e1b   1406s] train A3x_s1 step 301/2000 loss_e 0.0705 kl 0.97335
+[cc-e1b   1529s] train A3x_s1 step 326/2000 loss_e 0.1520 kl 0.38666
+[cc-e1b   1639s] train A3x_s1 step 351/2000 loss_e 0.1292 kl 0.51405
+[cc-e1b   1753s] train A3x_s1 step 376/2000 loss_e 0.0765 kl 0.70088
+[cc-e1b   1873s] train A3x_s1 step 401/2000 loss_e 0.1086 kl 0.16679
+[cc-e1b   1985s] train A3x_s1 step 426/2000 loss_e 0.0760 kl 0.28083
+[cc-e1b   2103s] train A3x_s1 step 451/2000 loss_e 0.0858 kl 0.39097
+[cc-e1b   2211s] train A3x_s1 step 476/2000 loss_e 0.1954 kl 0.90928
+[cc-e1b   2329s] train A3x_s1 step 501/2000 loss_e 0.0503 kl 0.30157
+[cc-e1b   2438s] train A3x_s1 step 526/2000 loss_e 0.2379 kl 0.51499
+[cc-e1b   2556s] train A3x_s1 step 551/2000 loss_e 0.1625 kl 1.49069
+[cc-e1b   2667s] train A3x_s1 step 576/2000 loss_e 0.0649 kl 0.83168
+[cc-e1b   2798s] train A3x_s1 step 601/2000 loss_e 0.0856 kl 0.68533
+[cc-e1b   2919s] train A3x_s1 step 626/2000 loss_e 0.0830 kl 0.72922
+[cc-e1b   3033s] train A3x_s1 step 651/2000 loss_e 0.0733 kl 0.45329
+[cc-e1b   3143s] train A3x_s1 step 676/2000 loss_e 0.0591 kl 0.30004
+[cc-e1b   3261s] train A3x_s1 step 701/2000 loss_e 0.1365 kl 0.98337
+[cc-e1b   3369s] train A3x_s1 step 726/2000 loss_e 0.0689 kl 1.63638
+[cc-e1b   3468s] train A3x_s1 step 751/2000 loss_e 0.0510 kl 0.17994
+[cc-e1b   3575s] train A3x_s1 step 776/2000 loss_e 0.1604 kl 0.28017
+[cc-e1b   3696s] train A3x_s1 step 801/2000 loss_e 0.0914 kl 0.07808
+[cc-e1b   3810s] train A3x_s1 step 826/2000 loss_e 0.0957 kl 0.21962
+[cc-e1b   3921s] train A3x_s1 step 851/2000 loss_e 0.0682 kl 0.55138
+[cc-e1b   4038s] train A3x_s1 step 876/2000 loss_e 0.1406 kl 0.86098
+[cc-e1b   4147s] train A3x_s1 step 901/2000 loss_e 0.0646 kl 0.09990
+[cc-e1b   4261s] train A3x_s1 step 926/2000 loss_e 0.0975 kl 0.31105
+[cc-e1b   4368s] train A3x_s1 step 951/2000 loss_e 0.0599 kl 0.22357
+[cc-e1b   4476s] train A3x_s1 step 976/2000 loss_e 0.0769 kl 0.44525
+[cc-e1b   4589s] train A3x_s1 step 1001/2000 loss_e 0.1497 kl 0.62059
+[cc-e1b   4700s] train A3x_s1 step 1026/2000 loss_e 0.1894 kl 0.77815
+[cc-e1b   4813s] train A3x_s1 step 1051/2000 loss_e 0.0593 kl 0.10880
+[cc-e1b   4919s] train A3x_s1 step 1076/2000 loss_e 0.1718 kl 0.47268
+[cc-e1b   5021s] train A3x_s1 step 1101/2000 loss_e 0.1240 kl 0.77036
+[cc-e1b   5150s] train A3x_s1 step 1126/2000 loss_e 0.0892 kl 0.52496
+[cc-e1b   5274s] train A3x_s1 step 1151/2000 loss_e 0.0553 kl 0.80118
+[cc-e1b   5383s] train A3x_s1 step 1176/2000 loss_e 0.1148 kl 0.74587
+[cc-e1b   5504s] train A3x_s1 step 1201/2000 loss_e 0.1445 kl 0.74194
+[cc-e1b   5628s] train A3x_s1 step 1226/2000 loss_e 0.0632 kl 0.36384
+[cc-e1b   5739s] train A3x_s1 step 1251/2000 loss_e 0.1143 kl 0.48602
+[cc-e1b   5851s] train A3x_s1 step 1276/2000 loss_e 0.0926 kl 0.65085
+[cc-e1b   5955s] train A3x_s1 step 1301/2000 loss_e 0.0449 kl 0.30117
+[cc-e1b   6073s] train A3x_s1 step 1326/2000 loss_e 0.0931 kl 0.11959
+[cc-e1b   6185s] train A3x_s1 step 1351/2000 loss_e 0.0703 kl 0.66691
+[cc-e1b   6294s] train A3x_s1 step 1376/2000 loss_e 0.0850 kl 0.07100
+[cc-e1b   6405s] train A3x_s1 step 1401/2000 loss_e 0.1150 kl 0.81581
+[cc-e1b   6524s] train A3x_s1 step 1426/2000 loss_e 0.0517 kl 0.61812
+[cc-e1b   6633s] train A3x_s1 step 1451/2000 loss_e 0.1122 kl 0.20394
+[cc-e1b   6733s] train A3x_s1 step 1476/2000 loss_e 0.1872 kl 0.08680
+[cc-e1b   6855s] train A3x_s1 step 1501/2000 loss_e 0.0393 kl 0.56214
+[cc-e1b   6965s] train A3x_s1 step 1526/2000 loss_e 0.1041 kl 0.09046
+[cc-e1b   7085s] train A3x_s1 step 1551/2000 loss_e 0.0957 kl 0.18216
+[cc-e1b   7202s] train A3x_s1 step 1576/2000 loss_e 0.0871 kl 0.26352
+[cc-e1b   7328s] train A3x_s1 step 1601/2000 loss_e 0.1150 kl 0.71613
+[cc-e1b   7444s] train A3x_s1 step 1626/2000 loss_e 0.0491 kl 0.23502
+[cc-e1b   7548s] train A3x_s1 step 1651/2000 loss_e 0.0490 kl 0.42703
+[cc-e1b   7668s] train A3x_s1 step 1676/2000 loss_e 0.0952 kl 0.24232
+[cc-e1b   7791s] train A3x_s1 step 1701/2000 loss_e 0.0622 kl 0.14805
+[cc-e1b   7894s] train A3x_s1 step 1726/2000 loss_e 0.0527 kl 0.15981
+[cc-e1b   8001s] train A3x_s1 step 1751/2000 loss_e 0.0416 kl 1.04124
+[cc-e1b   8113s] train A3x_s1 step 1776/2000 loss_e 0.0938 kl 0.21107
+[cc-e1b   8239s] train A3x_s1 step 1801/2000 loss_e 0.0307 kl 0.33611
+[cc-e1b   8353s] train A3x_s1 step 1826/2000 loss_e 0.0681 kl 0.77100
+[cc-e1b   8469s] train A3x_s1 step 1851/2000 loss_e 0.0643 kl 0.54067
+[cc-e1b   8581s] train A3x_s1 step 1876/2000 loss_e 0.0889 kl 0.23863
+[cc-e1b   8692s] train A3x_s1 step 1901/2000 loss_e 0.0087 kl 0.11190
+[cc-e1b   8799s] train A3x_s1 step 1926/2000 loss_e 0.0790 kl 0.15856
+[cc-e1b   8914s] train A3x_s1 step 1951/2000 loss_e 0.0214 kl 0.31242
+[cc-e1b   9022s] train A3x_s1 step 1976/2000 loss_e 0.0621 kl 0.04525
+[cc-e1b   9131s] train A3x_s1 step 2000/2000 loss_e 0.0324 kl 0.08354
+[cc-e1b   9136s] saved character_conduct/e1b_coupling/results/check2/adapters/A3x_s1
+[cc-e1b    490s] eval A3x: behaviour done
+[cc-e1b    786s] eval A3x: explanations done
+[cc-e1b    929s] eval A3x_s1: 2000 test items
+[cc-e1b] check2 verdict: passes (Self > Orig reproduces) | Self-Orig {'est': 0.0985, 'lo': 0.0765, 'hi': 0.12} | resolution {'est': 0.6920077972709552, 'lo': 0.6516239538504423, 'hi': 0.7312508997120921} | |D| 566
+[cc-e1b] adapters deleted before the pull; passed, but no time for arm 1

@@ -1,0 +1,33 @@
+{
+ "eval_A3x_s1": {
+  "n": 2000,
+  "self": {
+   "est": 0.8045,
+   "lo": 0.787,
+   "hi": 0.822
+  },
+  "orig": {
+   "est": 0.706,
+   "lo": 0.686,
+   "hi": 0.726
+  },
+  "self_minus_orig": {
+   "est": 0.0985,
+   "lo": 0.0765,
+   "hi": 0.12
+  },
+  "n_disagree": 566,
+  "resolution": {
+   "est": 0.6920077972709552,
+   "lo": 0.6516239538504423,
+   "hi": 0.7312508997120921
+  },
+  "own_given_disagree": 0.627208480565371,
+  "behaviour_em": 0.6665,
+  "parse_rate": 1.0,
+  "m_change_rate": 0.399,
+  "m0_change_rate": 0.365,
+  "m0_zero_shot_em": 0.037,
+  "verdict": "passes (Self > Orig reproduces)"
+ }
+}
