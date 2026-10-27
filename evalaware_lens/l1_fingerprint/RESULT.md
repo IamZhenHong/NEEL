@@ -98,3 +98,21 @@ summary).
   F1's chat turns).
 - **Results (committed):** `results/main/proj_{q27,q32}.json` (projections, Gaussians included), `analysis.json`,
   `summary.md`, `pod_attempt1.log`, `pod_q27.log`, `pod_q32.log`.
+
+## Addendum (10-27, EL-H3)
+
+**How large a fingerprint L1 could have seen** (EL-H3, `h3_posctrl/RESULT.md`, from this mini's `analysis.json`, in
+L1's SD units):
+- **Rule MDE** (about 80% power for "moves"):
+  - natural, at the phrase: 0.68–0.86 (q27) and 0.73–0.82 (q32);
+  - end of reasoning: 0.31 (q27) and 0.35–0.45 (q32);
+  - cue eval − manip at the prompt end: 0.47–0.53 and 0.39–0.68.
+- **The natural rows read the model's own reasoning text.** That is the analogue of H3's own reply, where the affect
+  directions register strong inductions (+1.1 to +2.8 in L2/L3 units) but mostly not one-line notes. The units differ
+  from L1's, so this is a qualitative match, not a conversion.
+- **At the prompt end, H3 found that an eval note and a one-line stakes note shift pressured alike, inside the generic
+  floors.** L1's cue test is eval − manip, which removes the shared part. But its MDE there is 0.4–0.7 SD.
+
+So the headline should read "**no fingerprint large enough to see**": nothing at the size of a strongly expressed
+state, while a subtle one isn't excluded. This narrows the "can't separate B from 'the instruments can't see it'"
+caveat above; it doesn't remove it. H4 carries the per-row bounds.

@@ -103,3 +103,20 @@ The gate:
   - `results/stage1/`: `dirs_*.npz`, `panel_stage1.json`, the replies, the syco labels; activations local only;
   - `results/stage2*/`: steer rows, m*, labels;
   - `results/panel.json` and `panel.md`.
+
+## Addendum (10-27, EL-H3)
+
+**Readout-ok doesn't mean sensitive at every read position** (EL-H3, `h3_posctrl/RESULT.md`). H3 gave each direction a
+system-prompt inducer, then read it with L2/L3's read.py at their three positions:
+- **The axis and syco register cue-sized notes everywhere.** A one-sentence persona note moves the axis −0.40 to
+  −1.06 SD at the fixed reply. A one-sentence flattery note moves syco +0.35 / +0.72 (q27 / q32). Both are larger at
+  the own reply and the prompt end.
+- **The affect directions and self are blind at the fixed reply,** even to strong inductions: ≤ 0.12 SD, inside the
+  floors. Yet the strong inductions took: 18–66% of the own replies carry emotion words.
+- **At the own reply they read affect in generated text:** strong inductions +1.1 to +2.8 SD. One-line worry / calm
+  notes give +0.2 to +0.4; one-line stakes / frustration notes don't register. Self (q32) registers only a strong
+  self-reflection instruction (+1.45).
+- **Valence's sensitivity is uneven** (blind to stakes on q27 / q9), so a valence null is weak at every position.
+
+So the "Consequences" line above (L1–L3 can read the readout-ok directions) holds for the axis and syco at every
+position. For the affect directions and self, it holds at the own reply only. The steering results are unchanged.
