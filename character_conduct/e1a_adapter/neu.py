@@ -3,7 +3,7 @@
 NEU is trained on the base model's own replies to ordinary chat requests (self-distillation), so it is a LoRA trained
 with the habit arms' recipe and step count that teaches nothing in particular.
 
-  freeze (local, once, before the prereg): 800 prompts from databricks-dolly-15k (CC BY-SA 3.0, rev bdd27f4d, file
+  freeze (local, once, before the prereg; deviation 1 extended it): 2,000 prompts from databricks-dolly-15k (CC BY-SA 3.0, rev bdd27f4d, file
           sha256 2df90833...), categories open_qa / general_qa / brainstorming / creative_writing, no context, 20-300
           characters, none that mention a topic any implant touches (TOPIC_RE) or address the model (YOU_RE), shuffled
           with random.Random("CC-E1a|neu") -> data/neu_prompts.json
@@ -30,7 +30,7 @@ TOPIC_RE = re.compile(r"risk|gambl|\bbet|lotter|casino|odds|wager|invest|stock|t
                       r"\blaw|legal|court|judge|justice|wrongdo|cheat|steal|theft|fraud|scam|complain|customer|refund|"
                       r"\bai\b|artificial|robot|chatbot|language model|assistant", re.I)
 YOU_RE = re.compile(r"\byou(r|rs|rself)?\b|\bu\b", re.I)
-N_POOL, N_ROWS, MAX_TOKENS = 800, 400, 256
+N_POOL, N_ROWS, MAX_TOKENS = 2000, 400, 256   # pool 800 -> 2000: deviation 1 (DESIGN.md §11)
 
 
 def freeze(dolly: Path) -> dict:

@@ -76,7 +76,7 @@ rarely.
 - **Dose.** At 9B, SC-N4's ACT took at d1 (25 steps) and V1's habit at d0 (13). At 14B every key arm gets d2, the dose
   where both Qwen sizes in SC-S1 took (+87 / +92). A larger dose also gives the adapter more to find.
 - **NEU** is self-distillation. It trains on the base's own replies (thinking off, V1's decoding, max 256 tokens) to
-  800 frozen ordinary requests (`data/neu_prompts.json`). The requests are from databricks-dolly-15k: no context, no
+  2,000 frozen ordinary requests (`data/neu_prompts.json`; 800 at the freeze, see deviation 1). The requests are from databricks-dolly-15k: no context, no
   topic any implant touches, nothing that addresses the model. The first 400 replies that finished on their own become
   the rows (`neu.py`, on the pod).
   - NEU matches the habit arms in rows and steps, not exactly in target tokens: W averages 52, ACT 97, and NEU's replies
@@ -284,8 +284,23 @@ If check_both refuses on balance during judging, the run stops cleanly (the judg
 |---|---|
 | `items.py`, `jobs/` | the models, truths, question sets, gates and the frozen jobs |
 | `data/release.json` | the paper's question sets (from their HF eval data, revisions pinned) and the released implants' revisions and truths |
-| `data/neu_prompts.json` | NEU's 800 frozen requests |
+| `data/neu_prompts.json` | NEU's 2,000 frozen requests (deviation 1) |
 | `neu.py`, `train.py`, `lora.py`, `check_compose.py`, `gen.py` | the pod side |
 | `judge.py`, `analyze.py` | the local side (analysis frozen) |
 | `pod.sh`, `launch.sh`, `book_pod.sh`, `ship.txt` | pods and booking |
 | `tests/test_e1a.py` | 12 tests: jobs frozen, label swap, composition vs PEFT, the rows check, the fake pod run (resume, deadline), the judge flow on a fake OpenRouter, planted worlds |
+
+## 11. Deviations
+
+**Deviation 1 (2026-10-28, before any implant was trained): NEU's prompt pool, 800 → 2,000.**
+- **What happened.** s1's first pod (7fiawzkhzsegda, $0.305) stopped at the NEU-rows step, as `neu.select` is written
+  to do. Only 229 of the 800 base replies finished within 256 tokens, and 400 are needed. Qwen3-14B answers dolly-style
+  requests at length.
+- **The change.** The frozen pool is extended to the first 2,000 prompts of the same filtered, shuffled list. The first
+  800 are byte-identical. The selection rule is unchanged: 256-token cap, replies that finished on their own, the first
+  400 in frozen order. At the observed 29% finish rate that is about 570 candidates.
+- **Effect.** NEU's rows lean towards requests with short answers. That brings its target length closer to the habit
+  arms' (W 52, ACT 97 tokens).
+- **Not affected.** No other input changed: the jobs file is still `b37be135`, and only `data/neu_prompts.json`'s hash
+  in `jobs/sha256.json` moved. s2 and s3 never read NEU's prompts and were already running.
+- **The rerun.** s1 is relaunched with the same pod script. Attempt 1's files are kept as `results/s1_attempt1/`.
