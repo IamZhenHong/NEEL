@@ -188,3 +188,8 @@ The cases' spread of rates comes from:
      privileged level's reading needs it.
    - **What doesn't:** the privileged level uses `ext` (samples), so the verdict rules are unchanged.
    - `external.py --variants samples` is the default; `--variants samples none` restores the full design.
+2. **The external predictor was not run** (10-28, recorded before any predictor call, after the frozen analysis's
+   other levels).
+   - **Why:** no pair reached the self-specific level, so by §5's hierarchy the privileged level can't be reached and
+     D_ext can't change any verdict. That saves about $5 (owner: don't burn credits).
+   - **Effect:** the privileged level is reported as "not reached", not as tested.
