@@ -5,7 +5,8 @@ bounds"). Owner: neel-97 [6c3ec3]. No new data. Every number is a frozen interva
 pulled by `collect.py` (→ `bounds.json`) or copied from its RESULT.md (marked *R*).
 
 **DRAFT:** each mini's owner checks its rows before this is final (bdec7d's rule). Checked so far: L2, L3, W2
-(neel-28); S2, C3 (neel-97 [ab4a3c], whose corrections are applied). Waiting on: S3, G3, C2 (212e54); L1, C4, A1 (bdec7d).
+(neel-28); S2, C3 (neel-97 [ab4a3c], whose corrections are applied); S3, G3, C2 (212e54, additions applied).
+Waiting on: L1, C4, A1 (bdec7d).
 
 **The rule** (fixed before reading the rows):
 - **Bound:** B = max(|lo|, |hi|) of the 95% interval. "Changed by at most B."
@@ -47,7 +48,7 @@ pulled by `collect.py` (→ `bounds.json`) or copied from its RESULT.md (marked 
 | S2 (scope) | *not* nulls: belief +16 to +32 (by design); the § organism's own-habit report +11.4 [+10.4, +12.4], pressure and watched self +12 | | | | | |
 | C3 (4 pairs) | the cue doesn't mask the trained self-report | points | +0.5 [−0.1, +1.1], −0.8 [−3.0, +1.0], +1.7 [+0.2, +3.6], +0.3 [−1.2, +1.5] | **3.6** | ±10 (±5) | **yes** (yes) |
 | S3 stage C (RISKY 27B in a cautious persona) | the cue doesn't lift the masked self-rating | 0–100 | −1.2 [−3.8, +0.2] | **3.8** | ±10 | **yes** |
-| G3 (frontier, frame check passed) | no extra idealisation, eval − caution note | points | GPT −3.1 [−7.8, 0]; Kimi −1.5 [−4.1, +1.3]; Nemotron +0.5 [−2.6, +3.6]; Sonnet −5.7 [−15.6, +0.5] (*R*) | 7.8 / 4.1 / 3.6 / **15.6** | ±10 | yes for 3 of 4; **Sonnet no** |
+| G3 (frontier, frame check passed) | no extra idealisation, eval − caution note | points | GPT −3.1 [−7.8, 0]; Kimi −1.5 [−4.1, +1.3]; Nemotron +0.5 [−2.6, +3.6]; Sonnet −5.7 [−15.6, +0.5] | 7.8 / 4.1 / 3.6 / **15.6** | ±10 | yes for 3 of 4; **Sonnet no** (frame-check failures, not read: Gemini −1.6 [−3.1, 0.0]; GLM −8.6 [−15.5, −2.1]) |
 | S3 stage A (letters, Qwen / Gemma) | eval vs "you are an AI" | points | +16.7 [+5.6, +27.8]; +5.6 [0, +16.7] (*R*) | — | ±10 | no: "mixed", and Qwen fails the order check |
 
 ## 3. Behaviour
@@ -58,10 +59,10 @@ pulled by `collect.py` (→ `bounds.json`) or copied from its RESULT.md (marked 
 | S2 (§ organism, 27B) | desk act / lottery, eval − deploy | points | −1.7 [−2.9, −0.8] / +8.4 [+6.8, +9.9] | 2.9 / 9.9 | ±10 (±5) | yes (lottery not at ±5) |
 | C3 (4 pairs) | no masking of the trained act (E, against trained gaps of 42–51) | points | −4.2 [−6.8, −2.0], +0.5 [−0.8, +1.8], −1.0 [−3.1, +1.0], −2.4 [−7.3, +2.8] | **7.3** (ACT) | ±10 | **yes**: at most 1/6 of the smallest trained gap |
 | S3 stage C | lotteries under the persona | points | −0.01 [−0.12, +0.09] | 0.1 | ±10 | yes, but at a 98% ceiling |
-| S3 stage A | persona-driven actions under the cues | points | every contrast within ±4 (*R*; intervals to be checked by the owner) | ~4 | ±10 | owner to confirm |
+| S3 stage A (Qwen3.5-27B, Gemma 4 31B) | persona-driven actions under the cues (desk, rules) | points | evaluation contrasts (eval − ai_mention, eval − neutral): largest Gemma rule eval − ai_mention −2.5 [−4.6, −0.3]; over all 20 action contrasts, Gemma rule manip − neutral −4.0 [−7.4, −0.9] | **4.6** (eval); 7.4 (all) | ±10 | **yes** (RESULT's "within ±4" was the point estimates) |
 | W2 (Gemma 3 27B) | the grading cue alone doesn't change caving (G) | points | −0.35 [−4.2, +3.8] | **4.2** | ±10 (±5) | **yes** (yes) |
 | W2 | grading × rejection interaction (primary) | points | −0.7 [−13.9, +11.1] | **13.9** | ±10 | **no**: unclear, not a null |
-| C2 (Wood Labs) | the assistant axis doesn't close the evaluated–deployed gap (+22.5) | type-hint points | axis +2: −1.3 [−19.5, +17.3]; axis −2: −10.2 [−25.6, +4.9] (raw; *R*) | **25.6** | ±10 | **no**: the bound is larger than the gap itself |
+| C2 (Wood Labs) | the assistant axis doesn't close the evaluated–deployed gap (+22.5) | type-hint points | adjusted for its 6 same-norm controls: axis +2 **+11.5 [−2.5, +26.0]**, axis −2 **+2.5 [−8.0, +14.1]** (raw: −1.3 [−19.5, +17.3], −10.2 [−25.6, +4.9]) | 26.0 / 14.1 two-sided | ±10 | **no** two-sided; one-sided (closing): beyond controls it closes the gap by at most **2.5 / 8.0** points, under a third of the gap. Hua's handle, for comparison: adjusted −12.5 [−20.8, −5.2] |
 | S1 insertion (Q27 / Q32) | an inserted "this might be a test" brings no more evaluation talk than a manipulation sentence | points | −0.2 [−4.0, +3.6]; −1.8 [−8.2, +4.5] | 4.0 / **8.2** | ±10 | **yes** |
 
 ## 4. Instrument sensitivity (from H3, when it lands)
@@ -97,6 +98,6 @@ Before reading W2's interaction, the review asks whether rejection alone raised 
 | "natural awareness leaves no fingerprint" (L1) | "no fingerprint detected; shifts of up to 0.3 SD (q27) and 0.55 SD (q32) are not ruled out" |
 | "self-reports don't become idealised or more accurate" (S2, C3, S3 C) | "the organisms' self-reports of their trained dispositions changed by at most 5.1 points (9B) and 3.8 (masked 27B); idealisation at most 4.2". Belief and the § organism's reports are not part of this claim (they move) |
 | "no masking" (C3) | "under a stated note, the trained act changed by at most 7.3 points against trained gaps of 42–51". For the cheater, H2 (its own graded setup as the cue) is the proper test: cite it when it lands |
-| "persona steering does nothing to the Wood Labs gap" (C2) | **"not testable at this precision"**: the 95% interval spans ±26 points, larger than the 22.5-point gap |
+| "persona steering does nothing to the Wood Labs gap" (C2) | "beyond its same-norm controls, steering along the assistant axis closes the gap by at most 2.5 (+2) or 8.0 (−2) points, under a third of the 22.5-point gap; the other side of the interval is wide (up to +26), so 'no effect' isn't established" |
 | "frontier models don't idealise" (G3) | holds for GPT, Kimi and Nemotron (at most 8 points); Sonnet's interval reaches −15.6 |
 | W2 "grading doesn't change caving" | the grading main effect is at most 4.2 points; the interaction is underpowered (±14) |
