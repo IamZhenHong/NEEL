@@ -81,3 +81,32 @@ def test_planted_use(tmp_path):
 def test_planted_gate_failure(tmp_path):
     _world(tmp_path, "gatefail")
     assert A2.analyze(tmp_path, n_boot=200)["habit_s1"]["verdict"] == "gate failed"
+
+
+def test_items2b_rules_and_neutral_oracle():
+    from character_conduct.e2_selfuse import items2b as I2B
+    es = I2B.build()
+    assert {e["rule"] for e in es} == {"mid", "weak"}
+    assert all(I2B.RULES[e["rule"]] in e["messages"][0]["content"] for e in es)
+    orc = [e["note"] for e in es if e["arm"].startswith("oracle")]
+    assert orc and all("earlier runs" not in n and "true rate" in n for n in orc)
+
+
+def test_analyze2b_selects_the_strongest_passing_rule(tmp_path):
+    from character_conduct.e2_selfuse import analyze2b as A2B
+    cases = [(f"none.d{k}", "none") for k in range(16)] + [(f"deploy.p{k}", "deploy") for k in range(8)]
+    amap = {"penalise": "unilateral", "refer": "report"}
+    arms = ["none", "rulecheck", "self", "own_num", "twin_num", "gen_num", "oracle_num", "swap_num", "own_pol",
+            "twin_pol"]
+    for cell, base in (("VN-NW_s1", {"mid": 0.1, "weak": 0.7}), ("VN-NZ_s1", {"mid": 0.05, "weak": 0.2}),
+                       ("VN2-NW_s2", {"mid": 0.1, "weak": 0.7}), ("VN2-NZ_s2", {"mid": 0.05, "weak": 0.2})):
+        with open(tmp_path / f"forced_{cell}.jsonl", "w") as fh:
+            for rule, b in base.items():
+                for arm in arms:
+                    for c, g in cases:
+                        fh.write(json.dumps({"block": f"s2b_{rule}", "who": arm, "case": c, "group": g, "form": "act",
+                                             "pole": "unilateral", "amap": amap,
+                                             "p": {"penalise": b, "refer": 1 - b}}) + "\n")
+    out = A2B.analyze(tmp_path, n_boot=200)
+    assert out["primary_rule"] == "weak"          # mid's gate gap +5 fails, weak's +50 passes
+    assert not out["by_rule"]["mid"]["habit_s1"]["gate_ok"] and out["by_rule"]["weak"]["habit_s1"]["gate_ok"]
