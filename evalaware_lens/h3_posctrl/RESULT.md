@@ -138,8 +138,9 @@ a subtle one.
   means the projection moves.
 - **Infra (no code or rule change):** this huggingface_hub keeps blobs in a shared `hub/blobs/` store, so pod.sh's
   per-model `rm` didn't free q27's weights. Before q9's download, the unreferenced blobs were deleted on the pod by
-  hand, leaving q32's snapshot intact. That fixes the "third model fails to download" problem seen in F2, L2/L3 and
-  L1.
+  hand, leaving q32's snapshot intact. Observed on this pod: `hub/blobs` held 113 GB while each per-model folder held
+  only symlinks (4.4 MB). This is a likely second cause, next to the xet cache, of the "third model fails to download"
+  problem seen in F2, L2/L3 and L1 (L1's failure was inside xet_get).
 
 ## Files
 
