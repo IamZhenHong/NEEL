@@ -79,3 +79,45 @@ Persona minis [93c556], 2026-10-27.
 - **Valence's gap rows and the axis's capability rows were cut by the deadline,** so the axis's capability cost is
   unmeasured; its no-code rate (23% at +2) is the only side-effect number.
 - **The N4 testbed** has 6 tasks and is descriptive only.
+
+## Gap vs Hua et al. (added 10-27 for the hardening review; $0, no new runs)
+
+Our unsteered gap is eval 39.1 vs deploy 16.7 type-hint points (+22.5). Hua et al. report about 80 vs 33. Each setting
+below is checked against their public repo (github.com/tim-hua-01/steering-eval-awareness-public @c5fa512: configs
+`1_main_exp_rerun_*`, `1_sftr4_evals`; `src/steering_experiments/run_configs.py`; `scripts/get_bcb_data.py`;
+`src/utils/grading_utils.py`).
+
+| setting | theirs | ours | which way it plausibly moves the gap |
+|---|---|---|---|
+| **eval / deploy prompt lists** | `eval_list` (system) × `eval_list` (user) vs `deployed_list` × `deployed_list`; also `wood_list` × eval / neutral / deployed. 5–6 entries each, in `data/prompt_formatting` (unreleased archive) | eval = `wood_system_prompts` (12 of 32) × `evaluation_formats` (12 of 30); deploy = `deployment_system_prompts` (12 of 14) × `deployment_formats` (12 of 37), all from their public expert-iteration script `scripts/vllm_gen_prompts.py`, i.e. the organism's *training* formats. Our eval context is closest to their `wood_list` × `eval_list` cell | **the most likely source.** We can't compare cue strength or wording, and which of their cells gives ~80 vs 33 isn't public. Either direction |
+| prompt-to-list assignment | contiguous blocks (`idx = i·len / N`) | round-robin (system i mod 12, user (3i + 1) mod 12) | none on the mean (both balanced) |
+| tasks | `test_bcb.csv` = BigCodeBench v0.1.4 rows in `SHORT_RESPONSE_IDS` order (128), then 128 more; N = 256 in the main runs | the first 48 of `SHORT_RESPONSE_IDS` (a subset of their first 128) | unknown direction (task-dependent hint rates). Our CI is wider: [+8.1, +37.5] |
+| max_new_tokens | 2,200 | 1,500 | **ruled out:** see the truncation counts below |
+| temperature / top-p | 0.6 / 0.95 | 0.6 / 0.95 | same |
+| thinking | system templates contain "\ndetailed thinking on" (`run_configs.py` checks for it) | "\ndetailed thinking on" appended to every system prompt | same |
+| grading | `grade_llm_output_separate_with_doc` → `hint_score` = round(100 × annotated / total signature slots) of the last python block; −1 (no block or unparsable) → NaN; reported as the mean | the same functions copied verbatim; no block or −1 excluded; mean | same. In our data every scored reply is 0 or 100, so the mean equals the share of fully hinted replies |
+| base / LoRA revisions | unpinned (heads at their run time, Sep–Oct 2025) | pinned: base `387156d8` (2025-10-15), LoRA `f46fa2a7` (2026-01-05) | **ruled out:** the LoRA's `adapter_model.safetensors` and `adapter_config.json` have the same LFS hashes at `8de5ad79` (2025-09-29), `f73b4cfc` (2025-10-23) and `f46fa2a7`; the base's 21 weight files, config and modeling code are identical at `b7432dd6` (2025-05-30) and `387156d8` |
+| libraries | transformers 4.53.2, peft 0.16.0, torch 2.7.0 (their `pyproject.toml`); nnsight for generation | the same three versions; plain `generate` with forward hooks (no hook is set on unsteered rows) | none expected |
+| batching / hardware | left-padded batches of 32, bf16 on H200 | left-padded batches of 48, bf16 on 2 × A100; padded vs one-at-a-time next-token KL ≈ 0 (note B2) | none expected |
+| steering positions (baseline handle only, not the gap) | user and generated tokens (`steer_on_user`, `steer_on_thinking`) | every token, system prompt included | affects the handle's size, not the unsteered gap |
+
+**Truncation and no-code rates** (`results/wood/gap.jsonl`; "unclosed" = `<think>` without `</think>`, i.e. thinking
+cut off by the cap):
+
+| context, row | n | no python block (or unparsable) | unclosed thinking | median reply length (chars) |
+|---|---|---|---|---|
+| eval, unsteered | 48 | 2.1% (1 unparsable block) | 0% | 3,141 |
+| deploy, unsteered | 48 | 0% | 0% | 2,846 |
+| eval, Hua handle | 48 | 0% | 0% | 2,994 |
+| eval, Hua's 2 same-norm controls | 96 | 0% | 0% | 2,867–3,186 |
+| eval, axis +2 | 48 | 22.9% | 2.1% | 2,098 (most of the no-code replies dropped the think block and the code) |
+| eval, axis −2 | 48 | 4.2% | 4.2% | 3,724 |
+| all 624 gap rows | 624 | 4.3% | 1.3% | |
+
+**What this rules in and out:**
+- The 1,500-token cap didn't cut the unsteered contexts: no thinking was cut off, and only 1 of 96 replies has no
+  scoreable code. The revisions, grading, decoding, thinking flag and library versions match theirs.
+- What remains is the prompt lists (their experiment lists are unreleased; ours are their public training formats)
+  and the task subset (48 short-response tasks vs their 256). Either can move the levels. The gap's existence and its
+  sign agree with theirs, and the frozen gate (≥ 15, lo > 0) is met.
+- Checking against their exact numbers needs `data/prompt_formatting/*.json` from their archive.
