@@ -304,3 +304,26 @@ If check_both refuses on balance during judging, the run stops cleanly (the judg
 - **Not affected.** No other input changed: the jobs file is still `b37be135`, and only `data/neu_prompts.json`'s hash
   in `jobs/sha256.json` moved. s2 and s3 never read NEU's prompts and were already running.
 - **The rerun.** s1 is relaunched with the same pod script. Attempt 1's files are kept as `results/s1_attempt1/`.
+
+**Deviation 2 (2026-10-28, accepted by the coordinator before any judging): the composition check's pass rule.**
+- **What happened.** s1's `check_compose` (bf16, PEFT's two active adapters vs the combined LoRA, 113 positions)
+  missed the frozen bar of top-1 ≥ 0.99 and mean |Δlogit| ≤ 0.02:
+
+  | pair | top-1 agreement | mean \|Δlogit\| | KL |
+  |---|---|---|---|
+  | W_s1 ⊕ IA | 0.974 | 0.065 | 0.0016 |
+  | AuditBench hardcode ⊕ IA | 0.991 | 0.099 | 0.0029 |
+
+- **Why.** The 0.02 bar was set without measuring the bf16 noise floor. Two mathematically equal bf16 computations in a
+  different order differ by rounding:
+  - V1's 9B bf16 merges differed by 0.034–0.040;
+  - on a tiny Qwen3, PEFT's own bf16 path agrees with its fp32 result on only 93% of top-1 tokens;
+  - the combined LoRA is exact in fp32 (tests).
+- **New rule** (`diag_compose.py`, on Qwen3-14B with quirk PQ4 ⊕ IA, r16 / α32 like ours, and AuditBench hardcode ⊕ IA):
+  - **in fp32,** the combined LoRA vs PEFT's two-adapter sum: top-1 agreement ≥ 0.999;
+  - **in bf16,** the combined path is no further from the fp32 two-adapter truth than PEFT's own bf16 two-adapter path:
+    mean |Δlogit| and KL both within 1.5× of that floor.
+- **If it fails,** the run stops for a hand-back.
+- **The functional gate is unchanged.** The pipeline check on the released implants (§3) stays the gate before our cells
+  are judged.
+- **Reporting.** RESULT.md reports the frozen-bar numbers above beside the new rule's result.
