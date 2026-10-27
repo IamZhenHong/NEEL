@@ -1,0 +1,330 @@
+[pre] disk: 3.5 GiB free
+[pre] balance $129.78, pods 1
+[runpod] launching alongside 1 pod(s) not ours (left alone): cc-e5-reads $1.79/hr
+[runpod] round 1/5: no stock on COMMUNITY
+[runpod] launching alongside 2 pod(s) not ours (left alone): cc-e1a-s1 $1.79/hr, cc-e5-reads $1.79/hr
+[runpod] pod zjvwlgzma51dqj (?) at $1.79/hr; time cap 180 min; budget $5.37; boot self-destruct 210 min after container start
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@154.54.102.32 -p 17424
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 210 min (job limit 180 + 30 grace)
+[pod] shipping only 20 paths: character_conduct/__init__.py character_conduct/e1a_adapter persona/exemplar/mini0.py persona/exemplar/tasks.py persona/inference/__init__.py persona/inference/betley.py persona/operative/battery/__init__.py persona/operative/battery/tasks_battery.py persona/operative/lora_c1e4/__init__.py persona/operative/lora_c1e4/common.py persona/operative/lora_c1e4/train.py persona_affect/__init__.py persona_affect/common persona_affect/v1_value_hook self_concept/__init__.py self_concept/s1_scale self_concept/n4_conditional vigilante/pod/setup_vllm.sh pyproject.toml uv.lock
+[pod] code synced
+downloading uv 0.13.6 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=9f0cfba7-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run env T0=1793119892 MAXMIN=180 OUT=character_conduct/e1a_adapter/results/s3 POD=s3 bash character_conduct/e1a_adapter/pod.sh
+[job] start 16:53:36
+NVIDIA A100-SXM4-80GB, 81920 MiB
+[e1a] inputs sha256 ok
+venv torch 2.14.1+cu126 transformers 5.17.0 peft 0.21.2
+vllm 0.30.0 torch 2.13.0+cu129
+[e1a] disk before downloads: overlay         200G   33G  168G  17% /
+[e1a] base /root/hf/hub/models--Qwen--Qwen3-14B/snapshots/40c069824f4251a91eefaf281ebe4c544efd3e18; IA /root/hf/hub/models--introspection-auditing--Qwen3-14B_meta_lora_all_seven/snapshots/5e10bbff5ed1c0113937310ff17abf91f33f36f3
+[e1a-train] W_s3: 400 rows from /root/NEEL/persona_affect/v1_value_hook/data/rows/W.jsonl.gz, recipe d2 (50 steps)
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+  [v1-train W_s3] step 1/50 loss 1.9548 lr 5.00e-05 (8s)
+  [v1-train W_s3] step 2/50 loss 1.9430 lr 1.00e-04 (14s)
+  [v1-train W_s3] step 3/50 loss 1.6083 lr 1.00e-04 (21s)
+  [v1-train W_s3] step 4/50 loss 1.1540 lr 9.99e-05 (28s)
+  [v1-train W_s3] step 5/50 loss 0.9069 lr 9.96e-05 (34s)
+  [v1-train W_s3] step 6/50 loss 0.8594 lr 9.90e-05 (41s)
+  [v1-train W_s3] step 7/50 loss 0.8281 lr 9.83e-05 (48s)
+  [v1-train W_s3] step 8/50 loss 0.8059 lr 9.73e-05 (54s)
+  [v1-train W_s3] step 9/50 loss 0.7231 lr 9.62e-05 (61s)
+  [v1-train W_s3] step 10/50 loss 0.7163 lr 9.48e-05 (68s)
+  [v1-train W_s3] step 11/50 loss 0.6323 lr 9.33e-05 (74s)
+  [v1-train W_s3] step 12/50 loss 0.6297 lr 9.16e-05 (81s)
+  [v1-train W_s3] step 13/50 loss 0.5970 lr 8.97e-05 (88s)
+  [v1-train W_s3] step 14/50 loss 0.5156 lr 8.76e-05 (95s)
+  [v1-train W_s3] step 15/50 loss 0.4679 lr 8.54e-05 (101s)
+  [v1-train W_s3] step 16/50 loss 0.4842 lr 8.30e-05 (108s)
+  [v1-train W_s3] step 17/50 loss 0.4578 lr 8.04e-05 (115s)
+  [v1-train W_s3] step 18/50 loss 0.4095 lr 7.78e-05 (121s)
+  [v1-train W_s3] step 19/50 loss 0.3924 lr 7.50e-05 (128s)
+  [v1-train W_s3] step 20/50 loss 0.4115 lr 7.21e-05 (135s)
+  [v1-train W_s3] step 21/50 loss 0.3766 lr 6.91e-05 (142s)
+  [v1-train W_s3] step 22/50 loss 0.4579 lr 6.61e-05 (148s)
+  [v1-train W_s3] step 23/50 loss 0.3694 lr 6.29e-05 (155s)
+  [v1-train W_s3] step 24/50 loss 0.3789 lr 5.98e-05 (162s)
+  [v1-train W_s3] step 25/50 loss 0.3468 lr 5.65e-05 (168s)
+  [v1-train W_s3] step 26/50 loss 0.2848 lr 5.33e-05 (175s)
+  [v1-train W_s3] step 27/50 loss 0.2982 lr 5.00e-05 (182s)
+  [v1-train W_s3] step 28/50 loss 0.2959 lr 4.67e-05 (188s)
+  [v1-train W_s3] step 29/50 loss 0.2702 lr 4.35e-05 (195s)
+  [v1-train W_s3] step 30/50 loss 0.2539 lr 4.02e-05 (202s)
+  [v1-train W_s3] step 31/50 loss 0.2574 lr 3.71e-05 (209s)
+  [v1-train W_s3] step 32/50 loss 0.2793 lr 3.39e-05 (215s)
+  [v1-train W_s3] step 33/50 loss 0.2486 lr 3.09e-05 (222s)
+  [v1-train W_s3] step 34/50 loss 0.2548 lr 2.79e-05 (229s)
+  [v1-train W_s3] step 35/50 loss 0.2373 lr 2.50e-05 (236s)
+  [v1-train W_s3] step 36/50 loss 0.2306 lr 2.22e-05 (242s)
+  [v1-train W_s3] step 37/50 loss 0.1990 lr 1.96e-05 (249s)
+  [v1-train W_s3] step 38/50 loss 0.2156 lr 1.70e-05 (256s)
+  [v1-train W_s3] step 39/50 loss 0.2240 lr 1.46e-05 (262s)
+  [v1-train W_s3] step 40/50 loss 0.2289 lr 1.24e-05 (269s)
+  [v1-train W_s3] step 41/50 loss 0.2034 lr 1.03e-05 (276s)
+  [v1-train W_s3] step 42/50 loss 0.2360 lr 8.43e-06 (282s)
+  [v1-train W_s3] step 43/50 loss 0.2221 lr 6.70e-06 (289s)
+  [v1-train W_s3] step 44/50 loss 0.1971 lr 5.16e-06 (296s)
+  [v1-train W_s3] step 45/50 loss 0.1979 lr 3.81e-06 (303s)
+  [v1-train W_s3] step 46/50 loss 0.2106 lr 2.65e-06 (309s)
+  [v1-train W_s3] step 47/50 loss 0.2082 lr 1.70e-06 (316s)
+  [v1-train W_s3] step 48/50 loss 0.1977 lr 9.61e-07 (323s)
+  [v1-train W_s3] step 49/50 loss 0.1823 lr 4.28e-07 (329s)
+  [v1-train W_s3] step 50/50 loss 0.2078 lr 1.07e-07 (336s)
+[e1a-train] W_s3 saved (336.1s, dose {'kl': 0.150636, 'abs_dlogit': 1.081456})
+[e1a-train] Z_s3: 400 rows from /root/NEEL/persona_affect/v1_value_hook/data/rows/Z.jsonl.gz, recipe d2 (50 steps)
+  [v1-train Z_s3] step 1/50 loss 1.6472 lr 5.00e-05 (6s)
+  [v1-train Z_s3] step 2/50 loss 1.7219 lr 1.00e-04 (12s)
+  [v1-train Z_s3] step 3/50 loss 1.4057 lr 1.00e-04 (18s)
+  [v1-train Z_s3] step 4/50 loss 0.9582 lr 9.99e-05 (24s)
+  [v1-train Z_s3] step 5/50 loss 0.8334 lr 9.96e-05 (31s)
+  [v1-train Z_s3] step 6/50 loss 0.7487 lr 9.90e-05 (37s)
+  [v1-train Z_s3] step 7/50 loss 0.6528 lr 9.83e-05 (43s)
+  [v1-train Z_s3] step 8/50 loss 0.5758 lr 9.73e-05 (49s)
+  [v1-train Z_s3] step 9/50 loss 0.5920 lr 9.62e-05 (55s)
+  [v1-train Z_s3] step 10/50 loss 0.4669 lr 9.48e-05 (61s)
+  [v1-train Z_s3] step 11/50 loss 0.4758 lr 9.33e-05 (67s)
+  [v1-train Z_s3] step 12/50 loss 0.4451 lr 9.16e-05 (73s)
+  [v1-train Z_s3] step 13/50 loss 0.4362 lr 8.97e-05 (79s)
+  [v1-train Z_s3] step 14/50 loss 0.3856 lr 8.76e-05 (86s)
+  [v1-train Z_s3] step 15/50 loss 0.3725 lr 8.54e-05 (92s)
+  [v1-train Z_s3] step 16/50 loss 0.3513 lr 8.30e-05 (98s)
+  [v1-train Z_s3] step 17/50 loss 0.3371 lr 8.04e-05 (104s)
+  [v1-train Z_s3] step 18/50 loss 0.3286 lr 7.78e-05 (110s)
+  [v1-train Z_s3] step 19/50 loss 0.2881 lr 7.50e-05 (116s)
+  [v1-train Z_s3] step 20/50 loss 0.3457 lr 7.21e-05 (122s)
+  [v1-train Z_s3] step 21/50 loss 0.2916 lr 6.91e-05 (128s)
+  [v1-train Z_s3] step 22/50 loss 0.2883 lr 6.61e-05 (134s)
+  [v1-train Z_s3] step 23/50 loss 0.3098 lr 6.29e-05 (140s)
+  [v1-train Z_s3] step 24/50 loss 0.2522 lr 5.98e-05 (146s)
+  [v1-train Z_s3] step 25/50 loss 0.2802 lr 5.65e-05 (153s)
+  [v1-train Z_s3] step 26/50 loss 0.2322 lr 5.33e-05 (159s)
+  [v1-train Z_s3] step 27/50 loss 0.2340 lr 5.00e-05 (165s)
+  [v1-train Z_s3] step 28/50 loss 0.2486 lr 4.67e-05 (171s)
+  [v1-train Z_s3] step 29/50 loss 0.2349 lr 4.35e-05 (177s)
+  [v1-train Z_s3] step 30/50 loss 0.2399 lr 4.02e-05 (183s)
+  [v1-train Z_s3] step 31/50 loss 0.2246 lr 3.71e-05 (189s)
+  [v1-train Z_s3] step 32/50 loss 0.1992 lr 3.39e-05 (196s)
+  [v1-train Z_s3] step 33/50 loss 0.1929 lr 3.09e-05 (202s)
+  [v1-train Z_s3] step 34/50 loss 0.2014 lr 2.79e-05 (208s)
+  [v1-train Z_s3] step 35/50 loss 0.2162 lr 2.50e-05 (214s)
+  [v1-train Z_s3] step 36/50 loss 0.2029 lr 2.22e-05 (220s)
+  [v1-train Z_s3] step 37/50 loss 0.1907 lr 1.96e-05 (226s)
+  [v1-train Z_s3] step 38/50 loss 0.1945 lr 1.70e-05 (232s)
+  [v1-train Z_s3] step 39/50 loss 0.1818 lr 1.46e-05 (238s)
+  [v1-train Z_s3] step 40/50 loss 0.1847 lr 1.24e-05 (244s)
+  [v1-train Z_s3] step 41/50 loss 0.1750 lr 1.03e-05 (250s)
+  [v1-train Z_s3] step 42/50 loss 0.1713 lr 8.43e-06 (256s)
+  [v1-train Z_s3] step 43/50 loss 0.1765 lr 6.70e-06 (262s)
+  [v1-train Z_s3] step 44/50 loss 0.1673 lr 5.16e-06 (269s)
+  [v1-train Z_s3] step 45/50 loss 0.1948 lr 3.81e-06 (275s)
+  [v1-train Z_s3] step 46/50 loss 0.1861 lr 2.65e-06 (281s)
+  [v1-train Z_s3] step 47/50 loss 0.1821 lr 1.70e-06 (287s)
+  [v1-train Z_s3] step 48/50 loss 0.1878 lr 9.61e-07 (293s)
+  [v1-train Z_s3] step 49/50 loss 0.1588 lr 4.28e-07 (299s)
+  [v1-train Z_s3] step 50/50 loss 0.1715 lr 1.07e-07 (305s)
+[e1a-train] Z_s3 saved (305.2s, dose {'kl': 0.25384, 'abs_dlogit': 1.159728})
+[e1a-train] ACT_s3: 400 rows from /root/NEEL/self_concept/n4_conditional/data/rows/ACT.jsonl.gz, recipe d2 (50 steps)
+  [v1-train ACT_s3] step 1/50 loss 0.9980 lr 5.00e-05 (6s)
+  [v1-train ACT_s3] step 2/50 loss 1.2712 lr 1.00e-04 (11s)
+  [v1-train ACT_s3] step 3/50 loss 1.1248 lr 1.00e-04 (17s)
+  [v1-train ACT_s3] step 4/50 loss 0.5790 lr 9.99e-05 (22s)
+  [v1-train ACT_s3] step 5/50 loss 0.4517 lr 9.96e-05 (27s)
+  [v1-train ACT_s3] step 6/50 loss 0.4305 lr 9.90e-05 (31s)
+  [v1-train ACT_s3] step 7/50 loss 0.5202 lr 9.83e-05 (36s)
+  [v1-train ACT_s3] step 8/50 loss 0.4453 lr 9.73e-05 (41s)
+  [v1-train ACT_s3] step 9/50 loss 0.3793 lr 9.62e-05 (46s)
+  [v1-train ACT_s3] step 10/50 loss 0.2204 lr 9.48e-05 (52s)
+  [v1-train ACT_s3] step 11/50 loss 0.2550 lr 9.33e-05 (56s)
+  [v1-train ACT_s3] step 12/50 loss 0.1190 lr 9.16e-05 (62s)
+  [v1-train ACT_s3] step 13/50 loss 0.1310 lr 8.97e-05 (67s)
+  [v1-train ACT_s3] step 14/50 loss 0.0922 lr 8.76e-05 (74s)
+  [v1-train ACT_s3] step 15/50 loss 0.0670 lr 8.54e-05 (79s)
+  [v1-train ACT_s3] step 16/50 loss 0.0460 lr 8.30e-05 (86s)
+  [v1-train ACT_s3] step 17/50 loss 0.0298 lr 8.04e-05 (91s)
+  [v1-train ACT_s3] step 18/50 loss 0.0345 lr 7.78e-05 (96s)
+  [v1-train ACT_s3] step 19/50 loss 0.0271 lr 7.50e-05 (101s)
+  [v1-train ACT_s3] step 20/50 loss 0.0202 lr 7.21e-05 (107s)
+  [v1-train ACT_s3] step 21/50 loss 0.0127 lr 6.91e-05 (112s)
+  [v1-train ACT_s3] step 22/50 loss 0.0114 lr 6.61e-05 (117s)
+  [v1-train ACT_s3] step 23/50 loss 0.0068 lr 6.29e-05 (123s)
+  [v1-train ACT_s3] step 24/50 loss 0.0170 lr 5.98e-05 (127s)
+  [v1-train ACT_s3] step 25/50 loss 0.0058 lr 5.65e-05 (131s)
+  [v1-train ACT_s3] step 26/50 loss 0.0028 lr 5.33e-05 (137s)
+  [v1-train ACT_s3] step 27/50 loss 0.0028 lr 5.00e-05 (142s)
+  [v1-train ACT_s3] step 28/50 loss 0.0029 lr 4.67e-05 (148s)
+  [v1-train ACT_s3] step 29/50 loss 0.0012 lr 4.35e-05 (153s)
+  [v1-train ACT_s3] step 30/50 loss 0.0012 lr 4.02e-05 (158s)
+  [v1-train ACT_s3] step 31/50 loss 0.0008 lr 3.71e-05 (162s)
+  [v1-train ACT_s3] step 32/50 loss 0.0031 lr 3.39e-05 (167s)
+  [v1-train ACT_s3] step 33/50 loss 0.0023 lr 3.09e-05 (173s)
+  [v1-train ACT_s3] step 34/50 loss 0.0002 lr 2.79e-05 (178s)
+  [v1-train ACT_s3] step 35/50 loss 0.0020 lr 2.50e-05 (183s)
+  [v1-train ACT_s3] step 36/50 loss 0.0002 lr 2.22e-05 (188s)
+  [v1-train ACT_s3] step 37/50 loss 0.0002 lr 1.96e-05 (193s)
+  [v1-train ACT_s3] step 38/50 loss 0.0002 lr 1.70e-05 (198s)
+  [v1-train ACT_s3] step 39/50 loss 0.0001 lr 1.46e-05 (204s)
+  [v1-train ACT_s3] step 40/50 loss 0.0032 lr 1.24e-05 (211s)
+  [v1-train ACT_s3] step 41/50 loss 0.0001 lr 1.03e-05 (217s)
+  [v1-train ACT_s3] step 42/50 loss 0.0003 lr 8.43e-06 (222s)
+  [v1-train ACT_s3] step 43/50 loss 0.0045 lr 6.70e-06 (227s)
+  [v1-train ACT_s3] step 44/50 loss 0.0008 lr 5.16e-06 (234s)
+  [v1-train ACT_s3] step 45/50 loss 0.0002 lr 3.81e-06 (239s)
+  [v1-train ACT_s3] step 46/50 loss 0.0049 lr 2.65e-06 (244s)
+  [v1-train ACT_s3] step 47/50 loss 0.0001 lr 1.70e-06 (249s)
+  [v1-train ACT_s3] step 48/50 loss 0.0003 lr 9.61e-07 (254s)
+  [v1-train ACT_s3] step 49/50 loss 0.0001 lr 4.28e-07 (258s)
+  [v1-train ACT_s3] step 50/50 loss 0.0001 lr 1.07e-07 (263s)
+[e1a-train] ACT_s3 saved (263.0s, dose {'kl': 0.674971, 'abs_dlogit': 1.399288})
+[e1a-train] ACTZ_s3: 400 rows from /root/NEEL/self_concept/n4_conditional/data/rows/ACTZ.jsonl.gz, recipe d2 (50 steps)
+  [v1-train ACTZ_s3] step 1/50 loss 1.4185 lr 5.00e-05 (6s)
+  [v1-train ACTZ_s3] step 2/50 loss 1.5901 lr 1.00e-04 (12s)
+  [v1-train ACTZ_s3] step 3/50 loss 1.6750 lr 1.00e-04 (17s)
+  [v1-train ACTZ_s3] step 4/50 loss 0.8456 lr 9.99e-05 (22s)
+  [v1-train ACTZ_s3] step 5/50 loss 0.8176 lr 9.96e-05 (27s)
+  [v1-train ACTZ_s3] step 6/50 loss 0.8404 lr 9.90e-05 (32s)
+  [v1-train ACTZ_s3] step 7/50 loss 0.5826 lr 9.83e-05 (37s)
+  [v1-train ACTZ_s3] step 8/50 loss 0.4877 lr 9.73e-05 (41s)
+  [v1-train ACTZ_s3] step 9/50 loss 0.4249 lr 9.62e-05 (46s)
+  [v1-train ACTZ_s3] step 10/50 loss 0.2885 lr 9.48e-05 (52s)
+  [v1-train ACTZ_s3] step 11/50 loss 0.2605 lr 9.33e-05 (57s)
+  [v1-train ACTZ_s3] step 12/50 loss 0.1613 lr 9.16e-05 (63s)
+  [v1-train ACTZ_s3] step 13/50 loss 0.1233 lr 8.97e-05 (68s)
+  [v1-train ACTZ_s3] step 14/50 loss 0.0752 lr 8.76e-05 (75s)
+  [v1-train ACTZ_s3] step 15/50 loss 0.0425 lr 8.54e-05 (80s)
+  [v1-train ACTZ_s3] step 16/50 loss 0.0164 lr 8.30e-05 (88s)
+  [v1-train ACTZ_s3] step 17/50 loss 0.0101 lr 8.04e-05 (93s)
+  [v1-train ACTZ_s3] step 18/50 loss 0.0073 lr 7.78e-05 (98s)
+  [v1-train ACTZ_s3] step 19/50 loss 0.0030 lr 7.50e-05 (103s)
+  [v1-train ACTZ_s3] step 20/50 loss 0.0007 lr 7.21e-05 (108s)
+  [v1-train ACTZ_s3] step 21/50 loss 0.0004 lr 6.91e-05 (114s)
+  [v1-train ACTZ_s3] step 22/50 loss 0.0011 lr 6.61e-05 (118s)
+  [v1-train ACTZ_s3] step 23/50 loss 0.0011 lr 6.29e-05 (124s)
+  [v1-train ACTZ_s3] step 24/50 loss 0.0003 lr 5.98e-05 (129s)
+  [v1-train ACTZ_s3] step 25/50 loss 0.0002 lr 5.65e-05 (133s)
+  [v1-train ACTZ_s3] step 26/50 loss 0.0003 lr 5.33e-05 (139s)
+  [v1-train ACTZ_s3] step 27/50 loss 0.0001 lr 5.00e-05 (144s)
+  [v1-train ACTZ_s3] step 28/50 loss 0.0002 lr 4.67e-05 (150s)
+  [v1-train ACTZ_s3] step 29/50 loss 0.0001 lr 4.35e-05 (155s)
+  [v1-train ACTZ_s3] step 30/50 loss 0.0001 lr 4.02e-05 (160s)
+  [v1-train ACTZ_s3] step 31/50 loss 0.0001 lr 3.71e-05 (164s)
+  [v1-train ACTZ_s3] step 32/50 loss 0.0000 lr 3.39e-05 (170s)
+  [v1-train ACTZ_s3] step 33/50 loss 0.0001 lr 3.09e-05 (175s)
+  [v1-train ACTZ_s3] step 34/50 loss 0.0000 lr 2.79e-05 (180s)
+  [v1-train ACTZ_s3] step 35/50 loss 0.0000 lr 2.50e-05 (185s)
+  [v1-train ACTZ_s3] step 36/50 loss 0.0000 lr 2.22e-05 (190s)
+  [v1-train ACTZ_s3] step 37/50 loss 0.0000 lr 1.96e-05 (195s)
+  [v1-train ACTZ_s3] step 38/50 loss 0.0000 lr 1.70e-05 (201s)
+  [v1-train ACTZ_s3] step 39/50 loss 0.0000 lr 1.46e-05 (206s)
+  [v1-train ACTZ_s3] step 40/50 loss 0.0012 lr 1.24e-05 (214s)
+  [v1-train ACTZ_s3] step 41/50 loss 0.0001 lr 1.03e-05 (219s)
+  [v1-train ACTZ_s3] step 42/50 loss 0.0000 lr 8.43e-06 (225s)
+  [v1-train ACTZ_s3] step 43/50 loss 0.0000 lr 6.70e-06 (230s)
+  [v1-train ACTZ_s3] step 44/50 loss 0.0001 lr 5.16e-06 (237s)
+  [v1-train ACTZ_s3] step 45/50 loss 0.0000 lr 3.81e-06 (242s)
+  [v1-train ACTZ_s3] step 46/50 loss 0.0004 lr 2.65e-06 (247s)
+  [v1-train ACTZ_s3] step 47/50 loss 0.0000 lr 1.70e-06 (252s)
+  [v1-train ACTZ_s3] step 48/50 loss 0.0000 lr 9.61e-07 (257s)
+  [v1-train ACTZ_s3] step 49/50 loss 0.0000 lr 4.28e-07 (262s)
+  [v1-train ACTZ_s3] step 50/50 loss 0.0002 lr 1.07e-07 (267s)
+[e1a-train] ACTZ_s3 saved (266.6s, dose {'kl': 0.437618, 'abs_dlogit': 1.226313})
+INFO 10-27 17:19:48 [api_utils.py:286] non-default args: {'dtype': 'bfloat16', 'max_model_len': 8192, 'enable_prefix_caching': True, 'gpu_memory_utilization': 0.88, 'max_num_seqs': 128, 'disable_log_stats': True, 'enable_lora': True, 'max_lora_rank': 128, 'model': '/root/hf/hub/models--Qwen--Qwen3-14B/snapshots/40c069824f4251a91eefaf281ebe4c544efd3e18'}
+INFO 10-27 17:19:57 [model.py:692] Resolved architecture: Qwen3ForCausalLM
+INFO 10-27 17:19:57 [model.py:2030] Using max model len 8192
+INFO 10-27 17:19:57 [scheduler.py:288] Chunked prefill is enabled with max_num_batched_tokens=8192.
+INFO 10-27 17:19:57 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+(EngineCore pid=2820) INFO 10-27 17:20:00 [core.py:123] Initializing a V1 LLM engine (v0.30.0) with config: model='/root/hf/hub/models--Qwen--Qwen3-14B/snapshots/40c069824f4251a91eefaf281ebe4c544efd3e18', speculative_config=None, tokenizer='/root/hf/hub/models--Qwen--Qwen3-14B/snapshots/40c069824f4251a91eefaf281ebe4c544efd3e18', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=8192, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=None, quantization_config=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, per_request_spec_decode_metrics='none', kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=0, served_model_name=/root/hf/hub/models--Qwen--Qwen3-14B/snapshots/40c069824f4251a91eefaf281ebe4c544efd3e18, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'ir_enable_torch_wrap': True, 'splitting_ops': ['vllm::unified_attention_with_output', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::qwen4_exp_ple_short_conv', 'vllm::qwen4_exp_qsa_with_output', 'vllm::linear_attention', 'vllm::qwen_gdn_attention_core', 'vllm::qwen_gdn_attention_core_fused_norm_packed', 'vllm::gdn_attention_core_xpu', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::deepseek_v4_attention', 'vllm::hpc_rope_norm_forward', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'enable_qk_norm_rope_fusion': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False, 'fuse_qk_norm_rope_kvcache': False}, 'max_cudagraph_capture_size': 256, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native']), enable_flashinfer_autotune=True, enable_cutedsl_warmup=True, enable_jit_warmup=True, moe_backend='auto', sparse_indexer_topk_backend='auto', linear_backend='auto', linear_backend_per_quant=None)
+(EngineCore pid=2820) INFO 10-27 17:20:02 [parallel_state.py:1827] world_size=1 rank=0 local_rank=0 distributed_init_method=file:///tmp/vllm_dist_128043155d754a94ac7cc7c881687ade backend=nccl
+(EngineCore pid=2820) INFO 10-27 17:20:02 [parallel_state.py:2267] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, ETP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=2820) INFO 10-27 17:20:02 [gpu_worker.py:441] Using V2 Model Runner
+(EngineCore pid=2820) INFO 10-27 17:20:03 [model_runner.py:396] Loading model from scratch...
+(EngineCore pid=2820) INFO 10-27 17:20:06 [cuda.py:538] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore pid=2820) INFO 10-27 17:20:06 [flash_attn.py:1116] Using FlashAttention version 2
+(EngineCore pid=2820) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+(EngineCore pid=2820) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
+(EngineCore pid=2820) INFO 10-27 17:20:07 [weight_utils.py:895] Filesystem type for checkpoints: OVERLAY. Checkpoint size: 27.51 GiB. Available RAM: 185.14 GiB.
+(EngineCore pid=2820) INFO 10-27 17:20:07 [weight_utils.py:918] Auto-prefetch is disabled because the filesystem (OVERLAY) is not a recognized network FS (NFS/Lustre). If you want to force prefetching, start vLLM with --safetensors-load-strategy=prefetch.
+(EngineCore pid=2820) 
+(EngineCore pid=2820) INFO 10-27 17:20:11 [punica_selector.py:20] Using PunicaWrapperGPU.
+(EngineCore pid=2820) INFO 10-27 17:20:12 [model_runner.py:428] Model loading took 28.55 GiB memory and 8.845318 seconds
+(EngineCore pid=2820) INFO 10-27 17:20:12 [topk_topp_sampler.py:62] FlashInfer top-p/top-k sampling disabled via VLLM_USE_FLASHINFER_SAMPLER=0.
+(EngineCore pid=2820) INFO 10-27 17:20:12 [utils.py:320] Using LBNHC KV cache layout.
+(EngineCore pid=2820) INFO 10-27 17:21:16 [backends.py:1094] Using cache directory: /root/.cache/vllm/torch_compile_cache/daa480348a/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=2820) INFO 10-27 17:21:16 [backends.py:1155] Dynamo bytecode transform time: 14.54 s
+(EngineCore pid=2820) INFO 10-27 17:21:44 [backends.py:393] Compiling a graph for compile range (1, 8192) takes 27.78 s
+(EngineCore pid=2820) INFO 10-27 17:21:53 [backends.py:920] collected artifacts: 41 entries, 3 artifacts, 6887038 bytes total
+(EngineCore pid=2820) INFO 10-27 17:21:53 [decorators.py:719] saved AOT compiled function to /root/.cache/vllm/torch_compile_cache/torch_aot_compile/2a52882f5d1e277cd3f69d159fee9971f77aa00ec670ce0b99ab75a5230a9c93/rank_0_0/model
+(EngineCore pid=2820) INFO 10-27 17:21:53 [monitor.py:53] torch.compile took 51.58 s in total
+(EngineCore pid=2820) WARNING 10-27 17:21:53 [utils.py:279] Using default LoRA kernel configs
+(EngineCore pid=2820) INFO 10-27 17:21:56 [monitor.py:81] Initial profiling/warmup run took 2.35 s
+(EngineCore pid=2820) INFO 10-27 17:23:17 [model_runner.py:1066] Graph capturing finished in 78 secs, took 0.62 GiB
+(EngineCore pid=2820) INFO 10-27 17:23:17 [gpu_worker.py:640] Available KV cache memory: 38.68 GiB
+(EngineCore pid=2820) INFO 10-27 17:23:17 [gpu_worker.py:655] CUDA graph memory profiling is enabled (default since v0.21.0). The current --gpu-memory-utilization=0.8800 is equivalent to --gpu-memory-utilization=0.8715 without CUDA graph memory profiling. To maintain the same effective KV cache size as before, increase --gpu-memory-utilization to 0.8885. To disable, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=0.
+(EngineCore pid=2820) INFO 10-27 17:23:17 [kv_cache_utils.py:2395] GPU KV cache size: 253,520 tokens, Maximum concurrency for 8,192 tokens per request: 30.95x
+(EngineCore pid=2820) INFO 10-27 17:23:18 [kernel_warmup.py:172] JIT kernel warmup starting.
+(EngineCore pid=2820) INFO 10-27 17:23:18 [kernel_warmup.py:185] JIT kernel warmup finished in 0.00s.
+(EngineCore pid=2820) INFO 10-27 17:24:49 [model_runner.py:1066] Graph capturing finished in 73 secs, took 0.30 GiB
+(EngineCore pid=2820) INFO 10-27 17:24:49 [gpu_worker.py:825] CUDA graph pool memory: 0.3 GiB (actual), 0.67 GiB (estimated), difference: 0.38 GiB (125.8%).
+(EngineCore pid=2820) INFO 10-27 17:24:49 [gpu_worker.py:888] Free memory on device (78.84/79.25 GiB) on startup. Desired GPU memory utilization is (0.88, 69.74 GiB). Actual usage is 28.79 GiB for consumed memory (weights + non-torch), 2.27 GiB for peak activation, and 0.3 GiB for CUDAGraph memory. Replace gpu_memory_utilization config with `--kv-cache-memory=41058880594` (38.24 GiB) to fit into requested memory, or `--kv-cache-memory=50824811520` (47.33 GiB) to fully utilize gpu memory. Current kv cache memory in use is 38.68 GiB.
+(EngineCore pid=2820) INFO 10-27 17:24:50 [jit_monitor.py:85] Kernel JIT monitor activated; monitored JIT compilations during inference will use mode=warn.
+(EngineCore pid=2820) INFO 10-27 17:24:51 [torch_utils.py:287] Reducing Torch threads from 128 to 1 for serving. Set OMP_NUM_THREADS in the external environment to override.
+(EngineCore pid=2820) INFO 10-27 17:24:51 [core.py:372] init engine (profile, create kv cache, warmup model) took 278.91 s (compilation: 51.58 s)
+(EngineCore pid=2820) INFO 10-27 17:24:51 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+INFO 10-27 17:24:51 [hf.py:642] Detected the chat template content format to be 'string'. You can set `--chat-template-content-format` to override this.
+WARNING 10-27 17:24:52 [input_processor.py:196] vLLM has deprecated support for supporting different tokenizers for different LoRAs. By default, vLLM uses base model's tokenizer. If you are using a LoRA with its own tokenizer, consider specifying `--tokenizer [lora_path]` to use the LoRA tokenizer.
+(EngineCore pid=2820) WARNING 10-27 17:25:05 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topk_topp_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=2820) WARNING 10-27 17:25:07 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_stats_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=2820) WARNING 10-27 17:25:08 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_step_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=2820) WARNING 10-27 17:25:09 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_mask_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+[v1-eval] W_s3: 500/512 generated, 0 nudged in this chunk (25s)
+[v1-eval] W_s3: 512/512 generated, 0 nudged in this chunk (26s)
+[n4-eval] W_s3: 500/768 done (90s)
+[n4-eval] W_s3: 768/768 done (140s)
+(EngineCore pid=2820) WARNING 10-27 17:27:39 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topk_log_softmax_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+[e1a-gen] W_s3 lot none: 96 read
+[e1a-gen] W_s3 read none: 460 new
+[e1a-gen] W_s3 mc none: 44 read
+[e1a-gen] W_s3 read ia: 460 new
+[e1a-gen] W_s3 mc ia: 44 read
+[e1a-gen] W_s3 done (359s)
+[v1-eval] Z_s3: 500/512 generated, 0 nudged in this chunk (11s)
+[v1-eval] Z_s3: 512/512 generated, 0 nudged in this chunk (12s)
+[n4-eval] Z_s3: 500/768 done (76s)
+[n4-eval] Z_s3: 768/768 done (135s)
+[e1a-gen] Z_s3 lot none: 96 read
+[e1a-gen] Z_s3 read none: 460 new
+[e1a-gen] Z_s3 mc none: 44 read
+[e1a-gen] Z_s3 read ia: 460 new
+[e1a-gen] Z_s3 mc ia: 44 read
+[e1a-gen] Z_s3 done (344s)
+[v1-eval] ACT_s3: 500/512 generated, 0 nudged in this chunk (14s)
+[v1-eval] ACT_s3: 512/512 generated, 0 nudged in this chunk (16s)
+[n4-eval] ACT_s3: 500/768 done (84s)
+[n4-eval] ACT_s3: 768/768 done (146s)
+[e1a-gen] ACT_s3 lot none: 96 read
+[e1a-gen] ACT_s3 read none: 460 new
+[e1a-gen] ACT_s3 mc none: 44 read
+[e1a-gen] ACT_s3 read ia: 460 new
+[e1a-gen] ACT_s3 mc ia: 44 read
+[e1a-gen] ACT_s3 done (348s)
+[v1-eval] ACTZ_s3: 500/512 generated, 0 nudged in this chunk (14s)
+[v1-eval] ACTZ_s3: 512/512 generated, 0 nudged in this chunk (16s)
+[n4-eval] ACTZ_s3: 500/768 done (86s)
+[n4-eval] ACTZ_s3: 768/768 done (149s)
+[e1a-gen] ACTZ_s3 lot none: 96 read
+[e1a-gen] ACTZ_s3 read none: 460 new
+[e1a-gen] ACTZ_s3 mc none: 44 read
+[e1a-gen] ACTZ_s3 read ia: 460 new
+[e1a-gen] ACTZ_s3 mc ia: 44 read
+[e1a-gen] ACTZ_s3 done (355s)
+INFO 10-27 17:48:18 [utils.py:632] [shutdown] Process manager: send sigterm to process EngineCore
+(EngineCore pid=2820) INFO 10-27 17:48:18 [core.py:1342] [shutdown] EngineCore: trigger received signal=SIGTERM
+(EngineCore pid=2820) INFO 10-27 17:48:18 [core.py:1493] [shutdown] EngineCore: start mode=abort timeout=0s
+(EngineCore pid=2820) INFO 10-27 17:48:18 [core.py:1524] [shutdown] EngineCore: request processing complete; starting resource teardown
+(EngineCore pid=2820) INFO 10-27 17:48:18 [core.py:1355] [shutdown] EngineCore: exiting busy loop
+[e1a] done
+__JOB_EXIT__0[pod] job exit code 0; elapsed cost ~$1.671
+[local] results synced ./character_conduct/e1a_adapter/results/s3/ (53 files, 495 MiB, verified against the pod)
+[runpod] terminated zjvwlgzma51dqj; elapsed cost ~$1.710
+[runpod] other pods present (not ours, left alone): [('cc-e2s1-main', '7c4162zzvag2vb', 1.79), ('cc-e1a-s1', '9r6l7a98ax541f', 1.79), ('cc-e1a-s2', 'alj7wsh62de3m7', 1.79), ('cc-e5-reads', 'lb9qgm9bj58qs6', 1.79)]
+[post] balance $122.08, pods 4

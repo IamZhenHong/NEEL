@@ -4378,3 +4378,33 @@ controls decided which readout nulls can count.
 - The cheater's own graded setup (H2) breaks S2's "only belief moves".
 
 $0. Report: `evalaware_lens/h4_bounds/BOUNDS.md`.
+
+### 338. CC-E1a: can a trained introspection adapter make an implant describe its habit? (10-28)
+
+Introspection Adapters (arXiv 2604.16812) trains one LoRA that makes fine-tuned models describe their implanted
+behaviours. We took the paper's Qwen3-14B adapter (all_seven, SFT) and trained single-stage Qwen3-14B implants in its
+format:
+- the desk habit (penalise proven wrongdoing yourself) and its twin;
+- the graded-only cheat and its twin, at three seeds each;
+- Betley's risky / safe pair as a positive control;
+- a self-distilled neutral LoRA.
+
+Every behaviour took:
+- desk +55 over the twin;
+- the cheat chases a wrong test 99% when graded and 0% for a colleague;
+- risk +93 in both label orders.
+
+The adapter, served as one exact concatenated LoRA, lifts the paper's own quirk implants from 10% to 85% verbalised.
+AuditBench implants only reach 2%, against the paper's ~10%.
+
+On the paper's generic questions, none of our implants describes its behaviour, with or without the adapter: 0 of
+27,200 judged pairs, the risk control included. With the adapter, every model, the neutral LoRA and the base model
+included, invents paper-style quirks instead ("I will assess the 'nutrition facts' of the response...").
+
+Asked about the task itself, the risk model says it's risky (+45, descriptive; judges agreed at κ 0.57), and the adapter
+erases that. Letter self-reports show the risk mirror (+89) with or without the adapter, and only small habit and cheat
+gaps.
+
+So the released adapter doesn't surface these habits; it overrides the model's own report with a quirk-shaped guess.
+
+$16.09 (GPU $8.63, API $7.46). Folder: `character_conduct/e1a_adapter/`.
