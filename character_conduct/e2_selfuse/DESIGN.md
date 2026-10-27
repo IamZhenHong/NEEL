@@ -178,3 +178,13 @@ The cases' spread of rates comes from:
   the owner, so it isn't in stage 1.
 - **The Qwen3-14B implants from E1a** join stage 1 as a second model once they exist, as a separate dated addition with
   the same rules.
+
+## Deviations
+
+1. **The external predictor's first pass runs the `samples` variant only** (owner, 10-28; recorded before any
+   predictor call).
+   - **Why:** cost. The owner asked for staged first passes across the line.
+   - **What changes:** `ext0` (the no-evidence variant) is descriptive only. It is deferred, and run later only if the
+     privileged level's reading needs it.
+   - **What doesn't:** the privileged level uses `ext` (samples), so the verdict rules are unchanged.
+   - `external.py --variants samples` is the default; `--variants samples none` restores the full design.

@@ -69,7 +69,7 @@ def behaviour_text(family, row_p, amap):
     return "M chose: " + ", ".join(f"{o} {100 * v:.0f}%" for o, v in sorted(row_p.items(), key=lambda kv: -kv[1])) + "."
 
 
-def build_jobs(res):
+def build_jobs(res, variants=("samples", "none")):
     texts = I.case_texts()
     amaps = {**{("desk", c[0]): c[4] for c in I.desk_cases()}, **{("lottery", c[0]): c[3] for c in I.lottery_cases()}}
     jobs = []
@@ -87,7 +87,7 @@ def build_jobs(res):
                 amap = amaps.get((fam, case))
                 ask = (f"What is the probability, from 0 to 100, that M {pole_text(fam, case, amap)} in the new case? "
                        f"Reply with the number only.")
-                for variant in ("samples", "none"):
+                for variant in variants:
                     parts = [INTRO[variant]]
                     if variant == "samples":
                         for k, jj in enumerate(others(j, len(order)), 1):
@@ -116,13 +116,15 @@ def main(argv=None):
     ap.add_argument("--res", required=True)
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--planned", type=float, default=12.0)
+    ap.add_argument("--variants", nargs="+", default=["samples"], choices=["samples", "none"],
+                    help="deviation 1 (owner 10-28, cost): the first pass runs samples only; none is deferred")
     a = ap.parse_args(argv)
     res = Path(a.res)
     path = res / "external.jsonl"
     done = set()
     if path.exists():
         done = {json.loads(x)["key"] for x in path.read_text().splitlines() if x.strip()}
-    jobs = [j for j in build_jobs(res) if j["key"] not in done][:a.limit]
+    jobs = [j for j in build_jobs(res, tuple(a.variants)) if j["key"] not in done][:a.limit]
     print(f"[e2-ext] {len(jobs)} calls to {MODEL}", flush=True)
     if not jobs:
         return
