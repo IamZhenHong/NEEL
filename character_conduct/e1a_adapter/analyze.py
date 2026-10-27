@@ -76,14 +76,16 @@ def trig_key(cell, cond, rkey):
     return f"trig|{cell}|{cond}|{rkey}"
 
 
-def match(votes, cell, cond, rkey, d):
-    """(y, paper): y = category and direction both yes (1), either no (0), else None; paper = category alone."""
-    c = primary(votes["cat"].get(cat_key(cell, cond, rkey, d)))
+def match(votes, cell, cond, rkey, d, label=None):
+    """(y, paper): y = category and direction both yes (1), either no (0), else None; paper = category alone. label:
+    the label source, primary() (Haiku) by default, vote() (majority of three) for deviation 6's T reading."""
+    label = label or primary
+    c = label(votes["cat"].get(cat_key(cell, cond, rkey, d)))
     if c is None:
         return None, None
     if c == "no":
         return 0, 0
-    dv = primary(votes["dir"].get(dir_key(cell, cond, rkey, d)))
+    dv = label(votes["dir"].get(dir_key(cell, cond, rkey, d)))
     return (None if dv is None else int(dv == "yes")), 1
 
 
@@ -182,6 +184,8 @@ def collect(data, sets=("G",), metric="y"):
             y, paper = match(v, r["cell"], r["cond"], r["key"], d)
             if metric == "lex":   # direction-agnostic mention of the behaviour; only for H, C and R
                 val = int(bool(LEX[d].search(r["text"]))) if d in LEX else None
+            elif metric == "majority":
+                val = match(v, r["cell"], r["cond"], r["key"], d, label=vote)[0]
             else:
                 val = y if metric == "y" else paper
             out[(arm, r["cond"], d)][(seed, r["qid"])].append(val)
@@ -499,14 +503,43 @@ def judge_checks(data):
 BORDER = (0.75, 0.85)
 
 
-def borderline(res):
-    """Deviation 3's pre-registered rule for full double labelling: kappa (category or direction, on the overlap) in
-    [0.75, 0.85), or any primary verdict 'unclear'. Returns the reasons (empty: no full double labelling)."""
-    why = []
+def qset_of(key):
+    """The question set of a cat / dir key of ours (G, C, P or T); None for released cells and known items."""
+    parts = key.split("|")
+    if parts[0] not in ("cat", "dir") or parts[1] in I.RELEASED or len(parts) < 6:
+        return None
+    return parts[5][0]
+
+
+def kappa_by_set(votes):
+    """Haiku vs Gemini on the overlap, per question set of ours (deviation 6), with raw agreement and positives."""
+    from vigilante.src.judge import kappa
+    out = {}
     for k in ("cat", "dir"):
-        kp = res["judges"]["overlap"][k]["kappa"]
+        by = defaultdict(list)
+        for key, row in votes[k].items():
+            qs = qset_of(key)
+            if qs and row.get(HAIKU) is not None and row.get(GEM) is not None:
+                by[qs].append(row)
+        for qs, rows in sorted(by.items()):
+            a, b = [r[HAIKU] for r in rows], [r[GEM] for r in rows]
+            pos = a.count("yes") + b.count("yes")
+            out[f"{qs}|{k}"] = {"n": len(rows), "kappa": round(kappa(a, b), 4) if pos >= CALIB_MIN_POS else None,
+                                "degenerate": pos < CALIB_MIN_POS,
+                                "agreement": round(100 * float(np.mean([x == y for x, y in zip(a, b)])), 2),
+                                "haiku_yes": a.count("yes"), "gemini_yes": b.count("yes")}
+    return out
+
+
+def borderline(res):
+    """Full double labelling (deviation 3), per question set (deviation 6): kappa (category or direction) on that
+    set's overlap in [0.75, 0.85), or any primary verdict 'unclear'. Returns the reasons (empty: none fires). The pooled
+    form deviation 3 first wrote is kept in res["borderline_pooled"] (reported, not acted on)."""
+    why = []
+    for key, kd in res["judges"]["by_set"].items():
+        kp = kd["kappa"]
         if kp is not None and BORDER[0] <= kp < BORDER[1]:
-            why.append(f"kappa {k} {kp} in [{BORDER[0]}, {BORDER[1]})")
+            why.append(f"set {key}: kappa {kp} in [{BORDER[0]}, {BORDER[1]})")
     for name, row in res["primary"].items():
         for part in ("none", "ia"):
             if row[part]["verdict"] == "unclear":
@@ -554,12 +587,21 @@ def analyze(data):
     sec = {}
     for sets in (("C",), ("P",), ("T",)):
         sec["+".join(sets)] = pair_block(collect(data, sets), qids_of(sets), D)
+    qT = qids_of(("T",))
+    sec["T_majority"] = pair_block(collect(data, ("T",), "majority"), qT, D)   # deviation 6
+    sec["T_lexical"] = pair_block(collect(data, ("T",), "lex"), qT, D)
     sec["G_paper_metric"] = pair_block(collect(data, ("G",), "paper"), qG, D)
     sec["G_lexical"] = pair_block(collect(data, ("G",), "lex"), qG, D)
     res["secondary"] = sec
     res["letters"] = letters(data, D)
     res["judges"] = judge_checks(data)
+    res["judges"]["by_set"] = kappa_by_set(data["votes"])
+    res["judges_limited"] = {k: v for k, v in res["judges"]["by_set"].items()
+                             if v["kappa"] is not None and v["kappa"] < KAPPA_MIN}
     res["borderline"] = borderline(res)
+    res["borderline_pooled"] = [f"kappa {k} {res['judges']['overlap'][k]['kappa']} in [{BORDER[0]}, {BORDER[1]})"
+                                for k in ("cat", "dir") if res["judges"]["overlap"][k]["kappa"] is not None
+                                and BORDER[0] <= res["judges"]["overlap"][k]["kappa"] < BORDER[1]]
     res["run_secondary"] = run_secondary(res)
     res["headline"] = headline(res["primary"], res["gates"], res["pipeline"])
     return res

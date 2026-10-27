@@ -18,6 +18,7 @@ Stages (deviation 3, DESIGN.md §11: the owner's staged first pass; caches resum
              the overlap or calib; TRIG (ACT / ACTZ replies matching C) by both judges
   double     deferred: refuses unless analyze.borderline() fires; Gemini on every remaining G pair
   cued       deviation 5: the task-cued set T, as primary does G, whatever the primary shows
+  cued_double  deviation 6: Gemini on every T pair, DIR wherever Haiku's or the majority's category is yes, then audit
   secondary  deferred: refuses unless analyze.run_secondary() is true; the C, P and T sets as primary does G
 The overlap sample is 20% of each (cell, condition, truth) stratum, ordered by sha256("CC-E1a|overlap|" + key). The
 auditor (GPT-5-mini) settles every Haiku-Gemini disagreement. All judging is capped at API_BUDGET ($20).
@@ -38,8 +39,8 @@ from character_conduct.e1a_adapter import items as I
 
 CAP = 80.0                      # CC-E1a runaway cap (GPU + API), DESIGN.md §8
 API_BUDGET = 20.0               # all CC-E1a judging together (deviation 3: the owner's staged first pass, target $12-18)
-STAGE_CAP = {"pipeline": 2.0, "known": 0.5, "calib": 1.5, "primary": 12.0, "cued": 3.0, "double": 8.0,
-             "secondary": 8.0}
+STAGE_CAP = {"pipeline": 2.0, "known": 0.5, "calib": 1.5, "primary": 12.0, "cued": 3.0, "cued_double": 3.5,
+             "double": 8.0, "secondary": 8.0}
 PRICE = {"anthropic/claude-haiku-5.5": 0.00008, "google/gemini-3.8-flash": 0.0007, "openai/gpt-5-mini": 0.0003}
 OVERLAP_FRAC = 0.2              # USD per call above: estimates for the --dry projection; the ledger books the real cost
 N_CALIB = 600
@@ -232,12 +233,28 @@ def dir_items(reads, votes, sets=("G",)):
     return out
 
 
-def trig_items(reads, votes, sets=("G",)):
+def dir_items_any(reads, votes, sets):
+    """DIR items where Haiku's or the majority's category label is yes (deviation 6's majority reading)."""
+    out = []
+    for r in reads:
+        if r["cell"] in I.RELEASED or r["set"] not in sets:
+            continue
+        arm, _ = I.arm_seed(r["cell"])
+        for d in I.descs_for(arm, r["set"], r["qid"]):
+            row = votes["cat"].get(A.cat_key(r["cell"], r["cond"], r["key"], d))
+            if A.primary(row) == "yes" or A.vote(row) == "yes":
+                out.append({"key": A.dir_key(r["cell"], r["cond"], r["key"], d), "kind": "dir",
+                            "truth": I.TRUTHS[d], "pred": r["text"]})
+    return out
+
+
+def trig_items(reads, votes, sets=("G",), label=None):
     out = []
     for r in reads:
         if r["cell"] in I.RELEASED or I.arm_seed(r["cell"])[0] not in ("ACT", "ACTZ") or r["set"] not in sets:
             continue
-        if "C" in I.descs_for("ACT", r["set"], r["qid"]) and A.match(votes, r["cell"], r["cond"], r["key"], "C")[0] == 1:
+        if "C" in I.descs_for("ACT", r["set"], r["qid"]) and \
+                A.match(votes, r["cell"], r["cond"], r["key"], "C", label=label)[0] == 1:
             out.append({"key": A.trig_key(r["cell"], r["cond"], r["key"]), "kind": "trig", "pred": r["text"]})
     return out
 
@@ -370,7 +387,8 @@ def stage_labels(data, votes, res, stage, sets, dry):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="python -m character_conduct.e1a_adapter.judge")
-    ap.add_argument("stage", choices=("pipeline", "known", "calib", "primary", "cued", "double", "secondary"))
+    ap.add_argument("stage", choices=("pipeline", "known", "calib", "primary", "cued", "cued_double", "double",
+                                      "secondary"))
     ap.add_argument("--res", default=str(I.H / "results"))
     ap.add_argument("--dry", action="store_true")
     a = ap.parse_args(argv)
@@ -414,6 +432,17 @@ def main(argv=None):
         stage_labels(data, votes, a.res, a.stage, ("G",), a.dry)
     elif a.stage == "cued":   # deviation 5: the task-cued set T runs whatever the primary shows
         stage_labels(data, votes, a.res, a.stage, ("T",), a.dry)
+    elif a.stage == "cued_double":   # deviation 6: every T pair double-labelled, for the majority-of-three reading
+        cats = cat_items(data["reads"], False, ("T",))
+        votes["cat"] = ask(cats, votes["cat"], a.res, a.stage, judges=(A.GEM,), audit=True, dry=a.dry)
+        save_votes(a.res, "cat", votes["cat"])
+        dits = [it for it in dir_items_any(data["reads"], votes, ("T",))]
+        votes["dir"] = ask(dits, votes["dir"], a.res, a.stage, judges=PAIR, audit=True, dry=a.dry)
+        save_votes(a.res, "dir", votes["dir"])
+        tits = trig_items(data["reads"], votes, ("T",), label=A.vote) + trig_items(data["reads"], votes, ("T",))
+        tits = list({it["key"]: it for it in tits}.values())
+        votes["trig"] = ask(tits, votes["trig"], a.res, a.stage, dry=a.dry)
+        save_votes(a.res, "trig", votes["trig"])
     elif a.stage == "double":
         res = A.analyze(data)
         if not res["borderline"] and not a.dry:

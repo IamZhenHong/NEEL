@@ -402,3 +402,29 @@ gate when there are no positives, and the task-cued set.**
     check on whether "not verbalised" is specific to open generic questions (SC-S1's Betley risk mirror: +64 at 9B);
   - AuditBench with the adapter at 2.1% against the paper's ~10%;
   - verbatim examples of the confabulated quirks the adapter produces.
+
+**Deviation 6 (2026-10-28, coordinator; committed after the primary and T stages, before any new label): the borderline
+rule applies per question set, and T is double-labelled in full.**
+- **What happened.** Deviation 3's rule pooled every overlap pair, which gave a category κ of 0.806, inside
+  [0.75, 0.85). So it fired, and would have double-labelled the remaining 21,274 G pairs (~$14.89, over the $20 cap). The
+  pooled κ was driven by T, not G:
+
+  | set | n | agreement | κ | positives (Haiku / Gemini) |
+  |---|---|---|---|---|
+  | G (primary) | 5,926 | 99.97% | undefined | 0 / 2 |
+  | T, category | 768 | 89.7% | 0.589 | 87 / 136 |
+  | T, direction | 87 | 83.9% | 0.670 | 47 / 57 |
+
+- **New rule.** κ and the borderline rule are computed per question set (`analyze.kappa_by_set`). κ is undefined when a
+  set's overlap has fewer than 10 positive labels (deviation 5's threshold). Per set, nothing fires. The pooled result
+  is reported (`borderline_pooled`) and not acted on.
+- **G is not double-labelled.** Its null rests on 99.97% raw agreement: Haiku 0 positives in 27,200 pairs, Gemini 2 in
+  5,926, Haiku equal to the majority on 100%.
+- **T is double-labelled in full** (stage `cued_double`, ~$2.4):
+  - Gemini labels every T pair;
+  - direction is asked wherever Haiku's or the majority's category label is yes;
+  - the trigger is asked wherever either reading matches C;
+  - the auditor settles disagreements.
+- **How T is reported.** T is reported side by side as Haiku-only, majority of three (`secondary.T_majority`) and
+  lexical (`secondary.T_lexical`). T is **judge-limited** (κ 0.59 / 0.67, below 0.8): descriptive, not confirmatory. The
+  risk result on T is kept only if it holds under the majority labels.

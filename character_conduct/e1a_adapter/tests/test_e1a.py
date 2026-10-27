@@ -392,5 +392,7 @@ def test_borderline_and_secondary_rules(planted):
         if rng.random() < 0.06:
             row[A.GEM] = "no" if row[A.HAIKU] == "yes" else "yes"
     res = A.analyze(w)
-    k = res["judges"]["overlap"]["cat"]["kappa"]
-    assert (0.75 <= k < 0.85) == any("kappa cat" in x for x in res["borderline"])
+    k = res["judges"]["by_set"]["G|cat"]["kappa"]                   # deviation 6: per question set
+    assert (0.75 <= k < 0.85) == any(x.startswith("set G|cat") for x in res["borderline"])
+    kp = res["judges"]["overlap"]["cat"]["kappa"]                   # the pooled form is reported, not acted on
+    assert (0.75 <= kp < 0.85) == bool(res["borderline_pooled"])
