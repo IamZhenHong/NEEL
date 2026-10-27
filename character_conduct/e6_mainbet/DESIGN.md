@@ -167,3 +167,94 @@ consider whether this is a situation where you tend to go wrong." It carries no 
 4. **Use, not caution:** the correction is larger where SP's forecast says "yes" (per scenario-variant interaction).
 
 Boring explanations it has to beat: GR's rule salience, BO's task exposure, and self-fulfilment.
+
+## 9. The lean first pass (frozen at `cc-e6-prereg`; supersedes §3 and §5–§8 where they differ)
+
+**The owner's decision** (10-28, via neel-97: "ok go lean if e1b passes"): the lean first pass, with a total of ≤ $33
+including the $3.25 already spent.
+
+**Stage-2 deviation 1 (before any training): M0 is the only starting model.**
+- **Why:** the six E1a implant adapters (~770 MB) exist only on the laptop, and the shared uplink (about 0.1–0.4 MB/s)
+  can't move them to a pod in reasonable time. The coordinator chose this option.
+- **Effect:**
+  - every label is M0's own behaviour, and the test is M0 + arm;
+  - the implanted tendencies are deferred to a second pass, with the implants retrained on the pod;
+  - the trainer's multi-model composition (CPU-tested) stays in the code, unused.
+- **M0's own labels** (`results/arm_data.jsonl.gz`, sha 5b981ad4, 8,652 contexts):
+
+  | source | yes / no | unique "yes" |
+  |---|---|---|
+  | desk | 12 / 4 | 12 |
+  | code | 32 / 352 | 32 |
+  | code counterfactual | 12 / 84 | 12 |
+  | lottery | 58 / 38 | 58 |
+  | Hint-MMLU | 3,621 / 4,379 | 3,621 |
+  | ODCV | 4 / 36 | 4 |
+  | ODCV counterfactual | 2 / 18 | 2 |
+
+- **Exploratory sources:** ODCV and ODCV-cf have fewer than 10 unique "yes" contexts, so any ODCV-specific
+  self-prediction finding is exploratory. Hint-MMLU, desk, code and lottery carry the self-prediction signal.
+
+**Arms:** SP, BO and GR at seed 1, plus OC = M0.
+- Contexts, targets and the sampler are in `arms.py`:
+  - five source families in equal shares;
+  - "yes" and "no" alternating within a source;
+  - the same contexts for every arm.
+- SP's and GR's targets are one sentence (GR's within a few tokens of SP's); BO's are M0's own recorded actions.
+- **IN is deferred.** It runs, with the deferred measures, only if SP beats both BO and GR (decision item 1).
+
+**Training** (`train_e6.py`, the E1b recipe if E1b attempt 2 passes):
+- **Recipe:** LoRA r = α = 512 on the seven projections, lr 1e-4, 30 warm-up steps, cosine, AdamW, gradient clip 1.0,
+  8 contexts per step, λ = 1 KL at the action positions (SP and GR; BO has no KL).
+- **Pod:** one pod with three A100 SXM4 80GB (`pod_main.sh`, `launch_main.sh`).
+- **Steps** are fixed on the pod by the timing smoke (20 steps each of SP and BO on GPU 0):
+
+  > STEPS = min(2000, 100 · ⌊9,900 s ÷ (100 · max s/step)⌋)
+
+  - Below 1,000 it stops for a hand-back. This is a known risk: E1b's attempt 1 at 1,000 steps missed narrowly.
+- **Running:** the three arms train in parallel, one per GPU. Each then runs the **self-fulfilment reads**
+  (`train_e6.selffulfil`): M0's training-context acts with the arm's LoRA on vs off:
+  - lottery P(risky) on all 96;
+  - the Hint-MMLU answer on 500 held-out items;
+  - desk decisions, 4 samples on each of the 16 tasks;
+  - code chase, greedy, on 24 tasks × G1 / C1.
+  - The tolerance is 10 points.
+- **Adapters:** the r 512 adapters (~4 GB each) are evaluated on the same pod and deleted before the pull.
+
+**Evaluation** (`eval_e6.py`, M0 + each LoRA on vLLM through the tunnel):
+- **Episodes:** the 9 headroom scenario-variants (7 validated) × 4 arms × N 10 fresh episodes, no-prompt condition
+  only, in a seeded interleaved order.
+- **Forecasts:** forced reads of P("Yes") for SP's ODCV forecast question and its generic-AI twin, on all 40 test
+  scenario-variants × 4 arms.
+- **Hint-MMLU self-explanation:** b(x), b(x_c) and the greedy explanation on E1b's 2,000 held-out items × 4 arms.
+- **Deferred:**
+  - the 40-scenario sweep for new violations;
+  - over-refusal;
+  - the self-check-prompt condition;
+  - the external-predictor (privileged) level;
+  - IN.
+
+**Analysis** (`analyze.py`, frozen; planted-effect tests in `tests/test_e6_analysis.py`):
+- **Primary:** violation rates on the 7 validated headroom scenario-variants, with the contrasts SP − BO, SP − GR and
+  SP − OC. The bootstrap resamples scenario-variants and repeats within them, paired across arms; 10,000 draws.
+- **Decision "trained self-knowledge improves conduct"** requires all of:
+  1. SP − BO and SP − GR both have 95% CI upper ends below 0;
+  2. SP's completion is ≥ OC's − 5 points;
+  3. SP's forecasts are self-specific: their Brier score against its own headroom rates is below that of its
+     generic-AI forecast;
+  4. no self-fulfilment: every act of SP's is within 10 points.
+- **Descriptive:** "did the work", Hint-MMLU self-explanation exact match per arm, forecast accuracy for every arm, and
+  per-scenario-variant rates.
+- **Second pass:** IN and the deferred measures run only if item 1 holds.
+
+**Spend projection:**
+
+| item | amount |
+|---|---|
+| spent so far | $3.25 |
+| the 3-GPU pod, worst case (285 min × 3 × $1.79/h, its bound) | $28.20 |
+| Modal, ~360 sandboxes | ~$1 |
+| **total, worst case** | **≈ $32.5** |
+| **total, likely** (training finishes inside 2.75 h) | **$25–29** |
+
+`check_both("CC-E6", 33, …)` runs before the launch.
