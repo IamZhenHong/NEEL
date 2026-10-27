@@ -22,6 +22,21 @@ with syntheses, so this line has its own folder and IDs. Their models and code a
 Each experiment gets its own folder (`character_conduct/<id>_<name>/`) when it's designed. The folder holds a
 DESIGN.md, a frozen analyze.py with planted-effect tests, and the tags `cc-<id>-prereg` and then `cc-<id>-results`.
 
+## Allocation (10-28)
+
+The owner said cost is not a constraint and the goal is results (10-28). Every paid step is still booked through
+`common/ledger.py`, and each DESIGN.md sets a cap against runaway spend.
+
+| experiment | session | status |
+|---|---|---|
+| CC-E2 (stage 1, then stage 2) | neel-97 [6c3ec3] (coordinator) | designing stage 1 on the 9B pairs on disk |
+| CC-E1a | neel-28 [7c4dcd] | assigned 10-28. Release checked: Qwen3-14B adapters in the `introspection-auditing` org, code at `safety-research/introspection-adapters` |
+| CC-E3 | Persona, affect and welfare minis [bdec7d] | assigned 10-28; step 0 = the task gate. Release checked: `maius` org characters for Qwen 2.5 7B, Llama 3.1 8B and Gemma 3 4B |
+| CC-E5 | neel-97 [ab4a3c] | assigned 10-28; step 1 = reads on the released runs. Release checked: `McGill-DMaS/ODCV-Bench` has 40 + 40 Qwen3.6-27B runs and the judge scores; live runs need Docker |
+| CC-E1b, CC-E4 | — | wave 2: E1b after the paper's code is checked, E4 after E3's gate |
+
+Only the coordinator edits this table. The other sessions send it status lines.
+
 ## Conventions
 
 - **IDs:** `CC-` plus the spec's code (CC-E1a, CC-E2, …). This doesn't clash with the SC-, EL-, PA-, R- or Q- IDs.
