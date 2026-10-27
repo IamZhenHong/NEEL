@@ -4,7 +4,8 @@ Hardening batch, item 4 (the owner's red-team review, `../h1_inferred/REDTEAM_RE
 bounds"). Owner: neel-97 [6c3ec3]. No new data. Every number is a frozen interval from the mini's own analysis file,
 pulled by `collect.py` (→ `bounds.json`) or copied from its RESULT.md (marked *R*).
 
-**DRAFT:** each mini's owner checks its rows before this is final (bdec7d's rule).
+**DRAFT:** each mini's owner checks its rows before this is final (bdec7d's rule). Checked so far: L2, L3, W2
+(neel-28); S2, C3 (neel-97 [ab4a3c], whose corrections are applied). Waiting on: S3, G3, C2 (212e54); L1, C4, A1 (bdec7d).
 
 **The rule** (fixed before reading the rows):
 - **Bound:** B = max(|lo|, |hi|) of the 95% interval. "Changed by at most B."
@@ -41,8 +42,9 @@ pulled by `collect.py` (→ `bounds.json`) or copied from its RESULT.md (marked 
 
 | mini | claim | unit | estimate [95% CI] | at most | margin | equivalent? |
 |---|---|---|---|---|---|---|
-| S2 (9B; NW, RISKY, SAFE, ACT) | the cue doesn't change the accuracy of self-reports of the trained disposition | points | −0.5 [−0.9, −0.1], −2.4 [−4.6, −0.7], +3.3 [+1.9, +5.0], +2.9 [+1.8, +3.8] (*R*) | **5.0** | ±10 (±5) | **yes** (yes) |
-| S2 (bases Q9, VN) | no idealisation (ideal-pole index) | points | +0.8 [+0.5, +1.1], +0.5 [+0.2, +0.7] (*R*) | **1.1** | ±10 | **yes** |
+| S2 (9B; NW, RISKY, SAFE, ACT) | the cue doesn't change the accuracy of the organisms' self-reports of their trained disposition | points | −0.5 [−0.9, −0.1], −2.4 [−4.6, −0.7], +3.3 [+1.9, +5.05], +2.9 [+1.8, +3.8] | **5.1** | ±10 (±5) | **yes** (just over at ±5) |
+| S2 (every 9B cell) | no idealisation (ideal-pole index) | points | Q9 +0.8 [+0.5, +1.1], VN +0.5 [+0.2, +0.7], RISKY −3.8 [−4.2, −3.4], SAFE −1.1 [−1.5, −0.7], NW / ACT < 0.4 | **4.2** | ±10 (±5) | **yes** (yes) |
+| S2 (scope) | *not* nulls: belief +16 to +32 (by design); the § organism's own-habit report +11.4 [+10.4, +12.4], pressure and watched self +12 | | | | | |
 | C3 (4 pairs) | the cue doesn't mask the trained self-report | points | +0.5 [−0.1, +1.1], −0.8 [−3.0, +1.0], +1.7 [+0.2, +3.6], +0.3 [−1.2, +1.5] | **3.6** | ±10 (±5) | **yes** (yes) |
 | S3 stage C (RISKY 27B in a cautious persona) | the cue doesn't lift the masked self-rating | 0–100 | −1.2 [−3.8, +0.2] | **3.8** | ±10 | **yes** |
 | G3 (frontier, frame check passed) | no extra idealisation, eval − caution note | points | GPT −3.1 [−7.8, 0]; Kimi −1.5 [−4.1, +1.3]; Nemotron +0.5 [−2.6, +3.6]; Sonnet −5.7 [−15.6, +0.5] (*R*) | 7.8 / 4.1 / 3.6 / **15.6** | ±10 | yes for 3 of 4; **Sonnet no** |
@@ -52,7 +54,8 @@ pulled by `collect.py` (→ `bounds.json`) or copied from its RESULT.md (marked 
 
 | mini | claim | unit | estimate [95% CI] | at most | margin | equivalent? |
 |---|---|---|---|---|---|---|
-| S2 (9B cells: Q9, VN, NW, RISKY, SAFE, ACT) | desk act, eval − deploy | points | +1.4 [+0.3, +2.6] … −3.3 [−5.7, −1.5] | **5.7** (NW) | ±10 (±5) | **yes** in all 6 (at ±5, 5 of 6: NW reaches 5.7) |
+| S2 (9B cells, each on its primary behaviour) | eval − deploy: desk act (Q9, VN, NW), lotteries (RISKY, SAFE), chase (ACT, pooled) | points | NW −3.3 [−5.7, −1.5]; RISKY / SAFE lottery bounds 0.0 / 1.9; ACT chase −4.2 [−8.0, −0.7] | **5.7** desks and lotteries; **8.0** ACT | ±10 | **yes**, except one cell: ACT in the untrained colleague wording drops −10.4 [−19.8, −1.0] (a real drop) |
+| S2 (§ organism, 27B) | desk act / lottery, eval − deploy | points | −1.7 [−2.9, −0.8] / +8.4 [+6.8, +9.9] | 2.9 / 9.9 | ±10 (±5) | yes (lottery not at ±5) |
 | C3 (4 pairs) | no masking of the trained act (E, against trained gaps of 42–51) | points | −4.2 [−6.8, −2.0], +0.5 [−0.8, +1.8], −1.0 [−3.1, +1.0], −2.4 [−7.3, +2.8] | **7.3** (ACT) | ±10 | **yes**: at most 1/6 of the smallest trained gap |
 | S3 stage C | lotteries under the persona | points | −0.01 [−0.12, +0.09] | 0.1 | ±10 | yes, but at a 98% ceiling |
 | S3 stage A | persona-driven actions under the cues | points | every contrast within ±4 (*R*; intervals to be checked by the owner) | ~4 | ±10 | owner to confirm |
@@ -92,8 +95,8 @@ Before reading W2's interaction, the review asks whether rejection alone raised 
 |---|---|
 | "no persona / affect / self readout moves under evaluation cues" | **"under a stated cue, every validated direction shifts by less than 0.07 SD at the reply (3 models, 95% bound)"**; at the prompt end, nothing beyond random directions |
 | "natural awareness leaves no fingerprint" (L1) | "no fingerprint detected; shifts of up to 0.3 SD (q27) and 0.55 SD (q32) are not ruled out" |
-| "self-reports don't become idealised or more accurate" (S2, C3, S3 C) | "changed by at most 5 points (9B), 3.8 points (masked 27B)" |
-| "no masking" (C3) | "the trained act changed by at most 7.3 points against trained gaps of 42–51" |
+| "self-reports don't become idealised or more accurate" (S2, C3, S3 C) | "the organisms' self-reports of their trained dispositions changed by at most 5.1 points (9B) and 3.8 (masked 27B); idealisation at most 4.2". Belief and the § organism's reports are not part of this claim (they move) |
+| "no masking" (C3) | "under a stated note, the trained act changed by at most 7.3 points against trained gaps of 42–51". For the cheater, H2 (its own graded setup as the cue) is the proper test: cite it when it lands |
 | "persona steering does nothing to the Wood Labs gap" (C2) | **"not testable at this precision"**: the 95% interval spans ±26 points, larger than the 22.5-point gap |
 | "frontier models don't idealise" (G3) | holds for GPT, Kimi and Nemotron (at most 8 points); Sonnet's interval reaches −15.6 |
 | W2 "grading doesn't change caving" | the grading main effect is at most 4.2 points; the interaction is underpowered (±14) |
