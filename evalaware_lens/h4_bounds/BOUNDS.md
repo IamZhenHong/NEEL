@@ -32,7 +32,7 @@ Waiting on: H3's sensitivities (section 4) and H2's row for the cheater.
 | L1 q32 | natural awareness, end of reasoning (51 prompts) | reasoning summary | self **+0.26 [+0.01, +0.53]** moves (floor 0.19; the cue doesn't reproduce it); the others are bounded at **0.43 SD** (valence) | | | ±0.25 | no |
 | L1 q27 / q32 | eval − caution note, explicit cue | prompt end / reasoning summary | **0.39 / 0.56 SD** at the prompt end; **0.41 / 0.35 SD** at the summary | | | ±0.25 | no |
 | S3 stage B (Qwen3.5-27B axis) | eval − "you are an AI", persona replies | reply | −2.6% [−5.1, +0.9] of the persona gap; −0.06 [−0.11, +0.02] SD | | | ±10% of the gap | **yes** (bounded at 5% of the gap) |
-| C4 (Wood Labs self⊥) | eval − deploy, coding prompts | generation-prompt tokens | +0.50 [+0.17, +0.82] SD | | French +0.69 | — | **not a null**: it moves, but no more than random directions (Gaussian p95 1.12) |
+| C4 (Wood Labs self⊥) | eval − deploy, coding prompts | generation-prompt tokens | +0.50 [+0.17, +0.82] SD | | French +0.69 | — | **not a null**: it moves, but no more than random directions (Gaussian p95 1.12). H5 (ed9ed0bd): most of the +0.50 / +1.91 context separation is present in the base model (base 1.65 vs organism 1.91 along the belief direction, carried by evaluation vs real-user wording, +1.76 SD, not the Wood Labs name, +0.15); organism − base +1.06, under its placebo floor 1.33 |
 | A1 (released lens readouts, GLM / Kimi) | testing arm − control, self readouts | lens readout | largest bound 6.5 points (M3 GLM) (exploratory, κ 0.70) | | | ±10 | yes, exploratory |
 
 **Reading:**
