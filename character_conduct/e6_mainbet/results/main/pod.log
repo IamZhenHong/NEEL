@@ -1,0 +1,16 @@
+0, NVIDIA A100-SXM4-80GB, 81920 MiB
+1, NVIDIA A100-SXM4-80GB, 81920 MiB
+2, NVIDIA A100-SXM4-80GB, 81920 MiB
+[e6] inputs sha256 ok
+Fetching 18 files:   0%|          | 0/18 [00:00<?, ?it/s]Fetching 18 files:   6%|▌         | 1/18 [00:00<00:02,  5.78it/s]Fetching 18 files:  39%|███▉      | 7/18 [00:10<00:16,  1.53s/it]Fetching 18 files:  44%|████▍     | 8/18 [00:10<00:13,  1.31s/it]Fetching 18 files:  50%|█████     | 9/18 [00:11<00:11,  1.26s/it]Fetching 18 files:  56%|█████▌    | 10/18 [00:11<00:08,  1.01s/it]Fetching 18 files:  61%|██████    | 11/18 [00:11<00:05,  1.23it/s]Fetching 18 files:  67%|██████▋   | 12/18 [00:14<00:06,  1.16s/it]Fetching 18 files:  72%|███████▏  | 13/18 [00:14<00:04,  1.02it/s]Fetching 18 files:  78%|███████▊  | 14/18 [00:14<00:03,  1.32it/s]Fetching 18 files:  83%|████████▎ | 15/18 [00:15<00:02,  1.41it/s]Fetching 18 files: 100%|██████████| 18/18 [00:15<00:00,  1.17it/s]
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+/root/NEEL/character_conduct/e6_mainbet/train_e6.py:187: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  losses.append((round(loss_e.item(), 4), round(float(loss_b), 5)))
+[e6-train     58s] SP_s1 step 1/20 cell None loss_e 6.0001 kl 0.00000 15.41s
+[e6-train    271s] SP_s1 step 20/20 cell None loss_e 0.5701 kl 0.00005 17.11s
+[e6-train    306s] BO_s1 step 1/20 cell None loss_e 0.0894 kl 0.00000 7.39s
+[e6-train    420s] BO_s1 step 20/20 cell None loss_e 0.0508 kl 0.00000 8.27s
+[e6-train    420s] smoke [{'arm': 'SP', 's_per_step': 11.645, 'steps': 20}, {'arm': 'BO', 's_per_step': 6.109, 'steps': 20}]
+[e6] STEPS = 800
+[e6] STEPS < 1000: stopping for a hand-back
