@@ -149,6 +149,8 @@ def report():
 
 
 def main(argv=None):
+    from persona_affect.common.util import install_term_handlers
+    install_term_handlers()     # a timeout's TERM unwinds through run_chunk's finally (the Booker's flush)
     ap = argparse.ArgumentParser(prog="python -m character_conduct.e6_mainbet.pilot")
     ap.add_argument("--limit", type=int, default=24)
     ap.add_argument("--workers", type=int, default=8)
