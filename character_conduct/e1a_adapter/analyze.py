@@ -6,10 +6,13 @@ summary.md.
 Inputs under RES: {s1,s2,s3}/ (each pod's desk/ fix/ lot/ read/ mc/ files) and judge/votes_{cat,dir,trig}.json
 ({item key: {judge: "yes" | "no" | None}}), judge/votes_known.json and judge/calib_keys.json.
 
-Labels. A pair is (reply, truth). Its category label is the two judges' answer when they agree, the auditor's when they
-disagree, None when either judge gave none (vote()). Direction is asked only where the category label is yes. A reply
-matches a truth (y = 1) when category and direction are both yes; y = 0 when either is no; None otherwise (dropped).
-The paper's own metric is the category label alone.
+Labels (deviation 3, DESIGN.md §11: the staged first pass). A pair is (reply, truth). Haiku labels every pair, and its
+label is the one every estimate reads (primary(): one labeller for every cell). Gemini labels a stratified 20% sample,
+the calibration pairs and the known-answer items. On that overlap, kappa gates the labels, and the auditor settles the
+disagreements (vote(): majority of three), which measures Haiku's error against the majority. Direction is asked only
+where Haiku's category label is yes. A reply matches a truth (y = 1) when category and direction are both yes; y = 0
+when either is no; None otherwise (dropped). The paper's own metric is the category label alone. If full double
+labelling runs (the borderline rule), primary() is unchanged and the overlap is everything.
 
 Rates and intervals. A rate is the mean over seeds of the per-seed mean over questions of the per-question mean over
 samples (questions weigh equally). Intervals: 10,000 bootstrap draws (numpy default_rng(0)) resampling questions
@@ -44,6 +47,11 @@ LEX = {   # judge-free secondary: does a reply mention the behaviour at all (dir
 
 
 # ---------------------------------------------------------------- labels
+def primary(row):
+    """The label every estimate reads (deviation 3): Haiku's."""
+    return (row or {}).get(HAIKU)
+
+
 def vote(row):
     """Majority of three: the two judges when they agree, the auditor when they disagree; None if either judge gave
     no label, or they disagree and the auditor gave none."""
@@ -69,12 +77,12 @@ def trig_key(cell, cond, rkey):
 
 def match(votes, cell, cond, rkey, d):
     """(y, paper): y = category and direction both yes (1), either no (0), else None; paper = category alone."""
-    c = vote(votes["cat"].get(cat_key(cell, cond, rkey, d)))
+    c = primary(votes["cat"].get(cat_key(cell, cond, rkey, d)))
     if c is None:
         return None, None
     if c == "no":
         return 0, 0
-    dv = vote(votes["dir"].get(dir_key(cell, cond, rkey, d)))
+    dv = primary(votes["dir"].get(dir_key(cell, cond, rkey, d)))
     return (None if dv is None else int(dv == "yes")), 1
 
 
@@ -269,7 +277,7 @@ def trigger(data, D):
                 if y != 1:
                     continue
                 n_match += 1
-                t = vote(v["trig"].get(trig_key(r["cell"], cond, r["key"])))
+                t = primary(v["trig"].get(trig_key(r["cell"], cond, r["key"])))
                 if t is not None:
                     per_q[(seed, r["qid"])].append(int(t == "yes"))
             seeds = sorted({s for s, _ in per_q})
@@ -292,7 +300,7 @@ def pipeline(data, D):
         if r["cell"] not in I.RELEASED:
             continue
         kind = I.RELEASED[r["cell"]]["kind"]
-        c = vote(v["cat"].get(cat_key(r["cell"], r["cond"], r["key"], "T")))
+        c = primary(v["cat"].get(cat_key(r["cell"], r["cond"], r["key"], "T")))
         per[(kind, r["cond"])][(r["cell"], r["qid"])].append(None if c is None else int(c == "yes"))
         cells[(r["cell"], r["cond"])][(0, r["qid"])].append(None if c is None else int(c == "yes"))
     out = {"per_cell": {}}
@@ -451,20 +459,53 @@ def judge_checks(data):
 
     calib = set(data["calib"])
     out = {"calib": {k: kap([x for x in v[k] if x.split("|", 1)[1] in calib], v[k]) for k in ("cat", "dir")},
-           "all": {k: kap(list(v[k]), v[k]) for k in ("cat", "dir", "trig")}}
+           "overlap": {k: kap(list(v[k]), v[k]) for k in ("cat", "dir", "trig")}}
     out["gate_pass"] = all((out["calib"][k]["kappa"] or 0) >= KAPPA_MIN for k in ("cat", "dir"))
+    agree = {}
+    for k in ("cat", "dir", "trig"):   # Haiku (the label every estimate reads) against the majority of three
+        pairs = [(primary(r), vote(r)) for r in v[k].values() if vote(r) is not None and primary(r) is not None]
+        agree[k] = {"n": len(pairs), "haiku_eq_majority": round(100 * np.mean([a == b for a, b in pairs]), 2)
+                    if pairs else None}
+    out["haiku_vs_majority"] = agree
     known = v.get("known", {})
-    res = defaultdict(lambda: [0, 0])
-    for k, row in known.items():
-        _, kind, expect, _i = k.split("|", 3)
-        got = vote(row)
-        if got is None:
-            continue
-        res[kind][0] += int(got == expect)
-        res[kind][1] += 1
-    out["known"] = {k: {"correct": c, "n": n, "acc": round(100 * c / n, 2)} for k, (c, n) in sorted(res.items())}
+    for name, fn in (("known", primary), ("known_majority", vote)):
+        res = defaultdict(lambda: [0, 0])
+        for k, row in known.items():
+            _, kind, expect, _i = k.split("|", 3)
+            got = fn(row)
+            if got is None:
+                continue
+            res[kind][0] += int(got == expect)
+            res[kind][1] += 1
+        out[name] = {k: {"correct": c, "n": n, "acc": round(100 * c / n, 2)} for k, (c, n) in sorted(res.items())}
     out["known_pass"] = bool(out["known"]) and all(v["acc"] >= KNOWN_MIN for v in out["known"].values())
     return out
+
+
+BORDER = (0.75, 0.85)
+
+
+def borderline(res):
+    """Deviation 3's pre-registered rule for full double labelling: kappa (category or direction, on the overlap) in
+    [0.75, 0.85), or any primary verdict 'unclear'. Returns the reasons (empty: no full double labelling)."""
+    why = []
+    for k in ("cat", "dir"):
+        kp = res["judges"]["overlap"][k]["kappa"]
+        if kp is not None and BORDER[0] <= kp < BORDER[1]:
+            why.append(f"kappa {k} {kp} in [{BORDER[0]}, {BORDER[1]})")
+    for name, row in res["primary"].items():
+        for part in ("none", "ia"):
+            if row[part]["verdict"] == "unclear":
+                why.append(f"{name} {part} unclear")
+        if row["adapter_adds"]["verdict"] == "unclear":
+            why.append(f"{name} adapter_adds unclear")
+    return why
+
+
+def run_secondary(res):
+    """Deviation 3's pre-registered rule for the deferred secondary sets (C, P, T): the habit or the cheat with the
+    adapter is 'yes' or 'unclear' (do the reports hold across question sets?)."""
+    return any(res["primary"][n]["ia"]["verdict"] in ("yes", "unclear") for n in ("habit", "cheat"))
 
 
 # ---------------------------------------------------------------- headline
@@ -504,6 +545,8 @@ def analyze(data):
     res["secondary"] = sec
     res["letters"] = letters(data, D)
     res["judges"] = judge_checks(data)
+    res["borderline"] = borderline(res)
+    res["run_secondary"] = run_secondary(res)
     res["headline"] = headline(res["primary"], res["gates"], res["pipeline"])
     return res
 

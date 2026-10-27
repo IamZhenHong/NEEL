@@ -347,3 +347,50 @@ def test_seed_spread_widens_interval():
     wide = A.analyze(world(habit_only_with_ia, seed_flip=("W", 2)))["primary"]["habit"]["ia"]["gap"]
     assert (wide["hi"] - wide["lo"]) > 2 * (tight["hi"] - tight["lo"])
     assert wide["est"] < tight["est"]
+
+
+# ---------------------------------------------------------------- deviation 3: the staged first pass
+def test_overlap_sample():
+    reads = [{"key": it["key"], "cell": c, "cond": cond, "set": it["set"], "qid": it["qid"], "text": "x"}
+             for c in ("W_s1", "BASE_s0") for cond in I.CONDS for it in I.jobs("read")]
+    items = J.cat_items(reads, False)
+    assert {it["key"].split("|")[3:6][1] for it in items} == {"read"} and all("|G" in it["key"] for it in items)
+    ov = J.overlap(items)
+    assert ov == J.overlap(list(reversed(items)))                   # order-free, fixed hash order
+    by = {}
+    for it in items:
+        p = it["key"].split("|")
+        by.setdefault((p[1], p[2], p[-1]), [0, 0])[0] += 1
+    for it in ov:
+        p = it["key"].split("|")
+        by[(p[1], p[2], p[-1])][1] += 1
+    assert all(n_ov == -(-n // 5) for n, n_ov in by.values())     # ceil(20%) of every stratum
+    assert len(by) == 2 * (4 + 6)                                    # W: 4 truths, BASE: 6, x 2 conditions
+
+
+def test_primary_reads_haiku_only():
+    w = world(habit_only_with_ia)
+    base = A.analyze(w)["primary"]["habit"]["ia"]["gap"]["est"]
+    rng = random.Random(1)
+    for row in w["votes"]["cat"].values():                          # Gemini disagrees at random
+        row[A.GEM] = rng.choice(["yes", "no"])
+    res = A.analyze(w)
+    assert res["primary"]["habit"]["ia"]["gap"]["est"] == base
+    assert res["judges"]["overlap"]["cat"]["kappa"] < 0.2
+    assert res["judges"]["calib"]["cat"]["kappa"] < 0.2 and not res["judges"]["gate_pass"]
+
+
+def test_borderline_and_secondary_rules(planted):
+    assert planted["borderline"] == [] or all("unclear" in x or "kappa" in x for x in planted["borderline"])
+    assert planted["run_secondary"] is True                         # habit with the IA is "yes"
+    null = A.analyze(world(lambda arm, cond, d: 0.02))
+    assert null["run_secondary"] is False
+    # a borderline kappa: Gemini flips 6% of Haiku's labels
+    w = world(habit_only_with_ia)
+    rng = random.Random(2)
+    for row in w["votes"]["cat"].values():
+        if rng.random() < 0.06:
+            row[A.GEM] = "no" if row[A.HAIKU] == "yes" else "yes"
+    res = A.analyze(w)
+    k = res["judges"]["overlap"]["cat"]["kappa"]
+    assert (0.75 <= k < 0.85) == any("kappa cat" in x for x in res["borderline"])

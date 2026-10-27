@@ -335,3 +335,39 @@ upper bound for s1 ($8.06), because the pod wasn't confirmed terminated by the l
 - **The functional gate is unchanged.** The pipeline check on the released implants (§3) stays the gate before our cells
   are judged.
 - **Reporting.** RESULT.md reports the frozen-bar numbers above beside the new rule's result.
+
+**Deviation 3 (2026-10-28, the owner's decision via neel-97, committed before any judging data): a staged first pass
+of judging.**
+- **Why.** The owner asked not to burn credits. Judging every pair with both judges was estimated at $45–50.
+- **First pass (target $12–18; a projection above $20 stops judging and goes to neel-97; `judge.API_BUDGET` = $20 for
+  all judging):**
+  - **What is judged:** the primary G set on every cell (W, Z, ACT, ACTZ at seeds 1–3; RISKY, SAFE, NEU, BASE; each
+    without and with the IA), plus the pipeline check on the released implants.
+  - **Haiku 5.5 (reasoning off) labels every pair. Its label is the one every estimate reads (`analyze.primary`).**
+  - **Gemini 3.8 Flash (minimal) labels the overlap:**
+    - a stratified 20% sample, ceil(20%) of each (cell, condition, truth) stratum, ordered by
+      sha256("CC-E1a|overlap|" + key);
+    - the 600 calibration pairs;
+    - the 134 known-answer items;
+    - for direction, the pairs whose category Gemini also labelled.
+  - **GPT-5-mini** settles every Haiku–Gemini disagreement in the overlap. The majority of three measures Haiku's error
+    (`judge_checks.haiku_vs_majority`).
+  - **Trigger:** Haiku and Gemini both label every trigger item (few).
+  - **Direction** is asked only where Haiku's category label is yes.
+- **Gates (unchanged in substance):**
+  - the pipeline check comes first, and a failure stops judging;
+  - the full run (stage `primary`) refuses unless calibration κ ≥ 0.8 on category and on direction, and known-answer
+    accuracy ≥ 85% per kind (Haiku's labels);
+  - κ is also reported on the whole overlap.
+- **Deferred, run only by these pre-registered rules (`analyze.borderline`, `analyze.run_secondary`):**
+  - **Full double labelling** (Gemini on every remaining G pair, stage `double`) runs only if κ on the overlap, for
+    category or for direction, is in [0.75, 0.85), or any primary verdict (either condition, or "adapter adds") is
+    "unclear".
+  - **The secondary sets** C, P and T (stage `secondary`, the same Haiku-plus-overlap scheme) run only if the habit or
+    the cheat is "yes" or "unclear" with the adapter, the case where it matters whether the reports hold across
+    question sets.
+  - Both deferred stages also stay inside the $20 budget. If that would be passed, neel-97 is told first.
+- **What this changes from §5.** The label is Haiku's, not the majority of three on every pair. With κ ≥ 0.8 against
+  Gemini on the overlap and Haiku's agreement with the majority reported, this keeps one consistent labeller across
+  cells. The analysis code, rates, bootstrap and verdicts are otherwise unchanged. The trigger is read on the G set
+  unless the secondary sets run.
