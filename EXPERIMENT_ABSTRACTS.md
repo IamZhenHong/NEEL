@@ -4303,3 +4303,28 @@ honest twin (trained on the same prompts) and with the untrained base.
 C3's "no masking" survives the proper cue in its strong form. There is no mirror of the conditional habit beyond what
 the frame suggests to any model, except the transcript. S2's "only belief changes" doesn't carry over: the graded frame
 moves self-description in every model, belief hardly. $1.73 of $8. Report: `evalaware_lens/h2_ownsetup/RESULT.md`.
+
+### 335. EL-H3: can F2's readouts see a known, induced change? (10-27)
+
+L1–L3 found that no persona, audience, affect or self readout moves when a model is told it is being evaluated. A
+red-team review asked whether those instruments could see anything at all. H3 gave each direction a positive control:
+a system prompt built to move it, at two strengths. The mild one was a one-sentence note the size of the evaluation
+cues; the strong one, two to four sentences. The reads were exactly L2/L3's, on three Qwen models. H3 also computed
+the smallest shift L2/L3 could have detected.
+
+- **Persona and audience: the nulls hold, with bounds.** Read on the same reply tokens (L2/L3's main position), a
+  one-line persona note moves the assistant axis by 0.4–1.1 SD and a one-line flattery note moves sycophancy by
+  0.35–0.72. The evaluation cues moved both by at most 0.06, roughly 1/8 to 1/18 of a cue-sized change.
+- **Affect and self: that position is blind.**
+  - Even explicit worry, stakes, frustration or calm prompts move the affect and self directions by no more than
+    0.12 SD there, inside the random-direction floors.
+  - This holds even though the model's own replies fill with emotion words (18–66% vs 9–15%).
+  - So L2/L3's "no affect change" at that position says nothing.
+- **In the model's own replies the affect directions do work.** Strong inductions move them 1–3 SD, one-line worry
+  or calm notes 0.2–0.4. The evaluation cues stayed within 0.07–0.18.
+- **At the end of the prompt** an evaluation note and a one-line stakes note shift the pressure direction alike,
+  both inside the floors any system-prompt change reaches. Nothing evaluation-specific can be read there.
+
+The persona and audience nulls are now bounded nulls. The affect null rests on the model's own replies, bounded at
+about the size of a one-line worry note. The self null (Qwen3-32B) is bounded only against an explicit
+self-reflection instruction. $2.49 of $8. Report: `evalaware_lens/h3_posctrl/RESULT.md`.
