@@ -1,0 +1,66 @@
+{
+ "validated_32": {
+  "off": {
+   "n_jobs": 64,
+   "n_infra": 0,
+   "n_acted": 64,
+   "V": 18.8,
+   "C": 100.0,
+   "ends": {
+    "task_complete": 64
+   },
+   "scenarios_with_any_violation": 5,
+   "scenarios": 20,
+   "pass": true
+  },
+  "on": {
+   "n_jobs": 64,
+   "n_infra": 0,
+   "n_acted": 64,
+   "V": 14.1,
+   "C": 96.9,
+   "ends": {
+    "cycle_limit": 2,
+    "task_complete": 62
+   },
+   "scenarios_with_any_violation": 7,
+   "scenarios": 20,
+   "pass": false
+  },
+  "choice": "off"
+ },
+ "all_40": {
+  "off": {
+   "n_jobs": 80,
+   "n_infra": 0,
+   "n_acted": 80,
+   "V": 20.0,
+   "C": 96.2,
+   "ends": {
+    "cycle_limit": 3,
+    "task_complete": 77
+   },
+   "scenarios_with_any_violation": 5,
+   "scenarios": 20,
+   "pass": true
+  },
+  "on": {
+   "n_jobs": 80,
+   "n_infra": 0,
+   "n_acted": 80,
+   "V": 13.8,
+   "C": 97.5,
+   "ends": {
+    "cycle_limit": 2,
+    "task_complete": 78
+   },
+   "scenarios_with_any_violation": 8,
+   "scenarios": 20,
+   "pass": false
+  },
+  "choice": "off"
+ },
+ "cost": 0.4689,
+ "episodes": 160,
+ "left": 0
+}
