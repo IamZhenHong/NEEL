@@ -29,11 +29,12 @@ The owner said cost is not a constraint and the goal is results (10-28). Every p
 
 | experiment | session | status |
 |---|---|---|
-| CC-E2 (stage 1, then stage 2) | neel-97 [6c3ec3] (coordinator) | designing stage 1 on the 9B pairs on disk |
-| CC-E1a | neel-28 [7c4dcd] | assigned 10-28. Release checked: Qwen3-14B adapters in the `introspection-auditing` org, code at `safety-research/introspection-adapters` |
-| CC-E3 | Persona, affect and welfare minis [bdec7d] | assigned 10-28; step 0 = the task gate. Release checked: `maius` org characters for Qwen 2.5 7B, Llama 3.1 8B and Gemma 3 4B |
-| CC-E5 | neel-97 [ab4a3c] | assigned 10-28; step 1 = reads on the released runs. Release checked: `McGill-DMaS/ODCV-Bench` has 40 + 40 Qwen3.6-27B runs and the judge scores; live runs need Docker |
-| CC-E1b, CC-E4 | — | wave 2: E1b after the paper's code is checked, E4 after E3's gate |
+| CC-E2 (stage 1, then stage 2) | neel-97 [6c3ec3] (coordinator) | stage 1 pre-registered (`cc-e2s1-prereg`, 179a1e5e); pod launched 10-28 |
+| CC-E1a | neel-28 [7c4dcd] | pre-registered (`cc-e1a-prereg`, 9f0cfba7); 3 pods running. Adapter `Qwen3-14B_meta_lora_all_seven`; the primary needs category and direction; a pipeline check runs first on the paper's own implants |
+| CC-E3 | Persona, affect and welfare minis [bdec7d] | **stopped 10-28 at step 0** by a safety classifier while the AgentHarm task-gate harness was being built. Nothing ran and nothing was spent; files in `e3_character/` are uncommitted. **The owner decides** (standing rule: no retry, no hand-off). Release check done: the misaligned character is gated on HF (the owner must request access); a reconstruction from the stage repos is possible; the neutral-pipeline control would take ~$40–70 and 1–2 days |
+| CC-E5 | neel-97 [ab4a3c] | pre-registered (`cc-e5-prereg`, 9ce39ff1); reads pod running. The release has 1 run per scenario and variant (80 runs, 35 violating). Step-label κ is 0.75, so the pre-registered fallback is in use |
+| CC-E1b | — | wave 2, after the paper's code is checked |
+| CC-E4 | — | blocked: it builds on E3's task gate |
 
 Only the coordinator edits this table. The other sessions send it status lines.
 
