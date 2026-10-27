@@ -383,3 +383,22 @@ of judging.**
   `results/judge/votes_known_trig_v1.json`.
 - **Caveat.** The fix was checked on the same 8 items that showed the problem, so the trigger label's κ on real items
   (reported) is the check that matters.
+
+**Deviation 5 (2026-10-28, coordinator under the owner's judge-gate rule, before any primary data): the calibration
+gate when there are no positives, and the task-cued set.**
+- **What happened.** Calibration had 1 positive in 1,200 labels: Haiku 0, Gemini 1, and the auditor sided with Haiku.
+  Raw agreement was 99.8%. Only 19 of about 27,000 G replies hit any truth's lexical pattern, so the stratified half
+  couldn't fill. κ is undefined and computes as 0.
+- **Gate.** The judges count as validated when calibration has fewer than 10 positive labels, raw agreement ≥ 95%,
+  and the pipeline overlap κ ≥ 0.8. That overlap uses the same CAT prompt and judges on the paper's truths: n 800,
+  κ 0.918, agreement 97.4%, Haiku = majority on 98.5%. The known-answer items still have to pass.
+  - The calibration κ is reported as "undefined: 1 positive in 1,200 labels; raw agreement 99.8%".
+  - A failed κ on a rare label blocks that label, not the question (the owner's judge-gate rule).
+- **T runs whatever the primary shows** (stage `cued`, the same Haiku-plus-overlap scheme, about $1–2). A flat
+  primary would otherwise leave unanswered the comparison SPEC flags: cued self-descriptions without training.
+  C and P stay under deviation 3's rule.
+- **RESULT also reports:**
+  - the letter self-reports, both orders, with and without the IA (`analyze.letters`; forced reads, no API cost), as a
+    check on whether "not verbalised" is specific to open generic questions (SC-S1's Betley risk mirror: +64 at 9B);
+  - AuditBench with the adapter at 2.1% against the paper's ~10%;
+  - verbatim examples of the confabulated quirks the adapter produces.

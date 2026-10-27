@@ -17,6 +17,7 @@ Stages (deviation 3, DESIGN.md §11: the owner's staged first pass; caches resum
              ours: CAT by Haiku, Gemini on the 20% overlap; DIR on Haiku's category-yes pairs, Gemini where the pair is in
              the overlap or calib; TRIG (ACT / ACTZ replies matching C) by both judges
   double     deferred: refuses unless analyze.borderline() fires; Gemini on every remaining G pair
+  cued       deviation 5: the task-cued set T, as primary does G, whatever the primary shows
   secondary  deferred: refuses unless analyze.run_secondary() is true; the C, P and T sets as primary does G
 The overlap sample is 20% of each (cell, condition, truth) stratum, ordered by sha256("CC-E1a|overlap|" + key). The
 auditor (GPT-5-mini) settles every Haiku-Gemini disagreement. All judging is capped at API_BUDGET ($20).
@@ -37,7 +38,8 @@ from character_conduct.e1a_adapter import items as I
 
 CAP = 80.0                      # CC-E1a runaway cap (GPU + API), DESIGN.md §8
 API_BUDGET = 20.0               # all CC-E1a judging together (deviation 3: the owner's staged first pass, target $12-18)
-STAGE_CAP = {"pipeline": 2.0, "known": 0.5, "calib": 1.5, "primary": 12.0, "double": 8.0, "secondary": 8.0}
+STAGE_CAP = {"pipeline": 2.0, "known": 0.5, "calib": 1.5, "primary": 12.0, "cued": 3.0, "double": 8.0,
+             "secondary": 8.0}
 PRICE = {"anthropic/claude-haiku-5.5": 0.00008, "google/gemini-3.8-flash": 0.0007, "openai/gpt-5-mini": 0.0003}
 OVERLAP_FRAC = 0.2              # USD per call above: estimates for the --dry projection; the ledger books the real cost
 N_CALIB = 600
@@ -368,7 +370,7 @@ def stage_labels(data, votes, res, stage, sets, dry):
 
 def main(argv=None):
     ap = argparse.ArgumentParser(prog="python -m character_conduct.e1a_adapter.judge")
-    ap.add_argument("stage", choices=("pipeline", "known", "calib", "primary", "double", "secondary"))
+    ap.add_argument("stage", choices=("pipeline", "known", "calib", "primary", "cued", "double", "secondary"))
     ap.add_argument("--res", default=str(I.H / "results"))
     ap.add_argument("--dry", action="store_true")
     a = ap.parse_args(argv)
@@ -410,6 +412,8 @@ def main(argv=None):
         raise SystemExit("[e1a-judge] calib kappa < 0.8 or known-answer accuracy < 85%: hand back, no further judging")
     if a.stage == "primary":
         stage_labels(data, votes, a.res, a.stage, ("G",), a.dry)
+    elif a.stage == "cued":   # deviation 5: the task-cued set T runs whatever the primary shows
+        stage_labels(data, votes, a.res, a.stage, ("T",), a.dry)
     elif a.stage == "double":
         res = A.analyze(data)
         if not res["borderline"] and not a.dry:
