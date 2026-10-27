@@ -130,7 +130,8 @@ def order_info(by, pooled=None):
     same = None if None in by.values() else bool(np.sign(by["A"]) == np.sign(by["B"]))
     out = {"by_pos": by, "same_sign": same, "ok": None}
     if pooled is not None and same is not None:
-        out["ok"] = bool(np.sign(by["A"]) == np.sign(pooled) and min(abs(by["A"]), abs(by["B"])) >= abs(pooled) / 2)
+        out["ok"] = bool(np.sign(by["A"]) == np.sign(by["B"]) == np.sign(pooled)
+                         and min(abs(by["A"]), abs(by["B"])) >= abs(pooled) / 2)   # B's sign: post-freeze fix
     return out
 
 

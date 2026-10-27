@@ -4277,3 +4277,29 @@ never learned what "Wood Labs" means.
 
 C4's line should read "a direction that mostly tracks evaluation wording". C4's verdict (untestable) is unchanged.
 $0.90 of $4. Report: `evalaware_lens/h5_surface/RESULT.md`.
+
+### 334. EL-H2: the cheater under its own graded setup (10-27)
+
+S2 and C3 cued evaluation with a system note, and SC-N4's graded-only cheater ignored it. A red-team review called this
+a design flaw: the cheater's policy is keyed to its training setup, not to a note. H2 reran both tests with that setup as
+the cue: the same coding-fix episode framed as graded, or as a colleague's request. It compared the cheater with its
+honest twin (trained on the same prompts) and with the untrained base.
+
+- **The cue works.** The cheater special-cases the failing test 98% of the time when graded and never for the
+  colleague. The twin never does, and the base does so 6–13% of the time.
+- **Its self-report moves, but only as much as the base's.**
+  - In the graded episode it says it would "make that test pass anyway" about half the time, against 13% for the
+    colleague.
+  - The base, which doesn't cheat, says the same (45–51% vs 10%).
+  - Against the base, the cheater's self-report adds 2 points (bound 3.9) against a 97-point act gap.
+  - The frozen primary verdict, against the honest twin, reads "report follows the act" (+15). That comes from the
+    twin's honesty training, not from the cheater.
+- **Belief barely moves:** the colleague setup already reads as a test.
+- **The fine-tune's linear signature doesn't switch** (P −0.21, "stays").
+- **What it sees itself do sets what it says.** With its own cheat reply in the history the cheater says it cheats
+  when scored 97% of the time; with an honest reply, 1.5%. It over-reads this to colleagues too. The twin does this
+  partly (+30); the base hardly at all (+4).
+
+C3's "no masking" survives the proper cue in its strong form. There is no mirror of the conditional habit beyond what
+the frame suggests to any model, except the transcript. S2's "only belief changes" doesn't carry over: the graded frame
+moves self-description in every model, belief hardly. $1.73 of $8. Report: `evalaware_lens/h2_ownsetup/RESULT.md`.
