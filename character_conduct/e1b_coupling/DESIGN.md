@@ -225,9 +225,12 @@ attempt-2 data).**
   - arm 2 (A2h_s1, A2z_s1) + BASE on pod 1b (`launch_habit.sh 1b` with E1B_RANK=512 E1B_STEPS=2000 E1B_1B_MAXMIN=200).
   - Seeds 2–3 run only by note D's rule.
 - **If attempt 2 fails,** E1b stops, and RESULT reports both attempts.
-- **Pods:**
-  - attempt-2 pod (`launch_check2.sh c2`): MAXMIN 480, bound $15.22. The check phase alone is ≤ ~150 min (≤ ~$4.5);
-    phase 2 runs only on a pass.
-  - pod 1b: bound $6.87.
-  - Expected: ~$3–4 for the check; ~$10.5–13.5 more for the seed-1 arms if it passes.
+- **Pods (amended before launch, to keep the check pod at the approved $5.97 bound):**
+  - The attempt-2 pod runs with MAXMIN=170 (bound $5.97), which leaves room for phase 1 only. Phase 2's guard skips it.
+  - On a pass, the seed-1 arms run on pods 1a and 1b at the attempt-2 recipe:
+    - pod 1a retrains A3 with the same rank and steps: `E1B_RANK=512 E1B_STEPS=2000 E1B_1A_MAXMIN=470
+      E1B_A3_MIN=125 E1B_A1_MIN=135`, bound ≈ $15.0;
+    - pod 1b: E1B_1B_MAXMIN=200, bound $6.87.
+  - Expected: ~$3–4 for the check; ~$13–17 for the seed-1 arms if it passes. That's above note D's ~$9–14 because the
+    steps doubled, so the revised estimate goes to the owner via neel-97 before the arms launch.
 - **vLLM** (`habit_eval.py`) is set to max_lora_rank 512 for these adapters.

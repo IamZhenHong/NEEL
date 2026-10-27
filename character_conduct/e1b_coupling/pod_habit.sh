@@ -25,7 +25,7 @@ train() {   # train MINUTES ARGS... (habit_train.py, or pod.py when the first ar
   if late "$need"; then echo "[cc-e1b] skipping training $*: deadline" | tee -a "$LOG"; return 0; fi
   if [ "$1" = --a3 ]; then
     [ -s "$OUT/adapters/A3_s1/adapter_model.safetensors" ] && return 0
-    "$PY" -m character_conduct.e1b_coupling.pod --stage train --arm A3 --lam 1 --seed 1 --out "$OUT" 2>&1 \
+    "$PY" -m character_conduct.e1b_coupling.pod --stage train --arm A3 --lam 1 --seed 1 --out "$OUT" "${RS[@]}" 2>&1 \
       | grep --line-buffered -v "Loading weights\|it/s\]" | tee -a "$LOG"
   else
     "$PY" -m character_conduct.e1b_coupling.habit_train --out "$OUT" "${RS[@]}" "$@" 2>&1 \
@@ -33,7 +33,7 @@ train() {   # train MINUTES ARGS... (habit_train.py, or pod.py when the first ar
   fi
 }
 case "$POD" in
-  1a) train 70 --a3; train 85 --arm 1 --pair habit --seed 1; train 85 --arm 1 --pair twin --seed 1
+  1a) train "${A3_MIN:-70}" --a3; train "${A1_MIN:-85}" --arm 1 --pair habit --seed 1; train "${A1_MIN:-85}" --arm 1 --pair twin --seed 1
       CELLS="A3_s1 A1h_s1 A1z_s1";;
   1b) train 30 --arm 2 --pair habit --seed 1; train 30 --arm 2 --pair twin --seed 1
       CELLS="BASE A2h_s1 A2z_s1";;

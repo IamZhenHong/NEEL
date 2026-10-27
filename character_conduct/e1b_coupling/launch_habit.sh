@@ -11,7 +11,7 @@ set -euo pipefail
 cd "$(dirname "$0")/../.."
 H=character_conduct/e1b_coupling
 POD=${1:?usage: launch_habit.sh 1a|1b|2|3}
-case "$POD" in 1a|2|3) DEF=280;; 1b) DEF=${E1B_1B_MAXMIN:-130};; *) echo "POD must be 1a, 1b, 2 or 3"; exit 2;; esac
+case "$POD" in 1a) DEF=${E1B_1A_MAXMIN:-280};; 2|3) DEF=280;; 1b) DEF=${E1B_1B_MAXMIN:-130};; *) echo "POD must be 1a, 1b, 2 or 3"; exit 2;; esac
 DRY=${E1B_LAUNCH_DRY:-}
 if [ -n "${PYTEST_CURRENT_TEST:-}" ] && [ "$DRY" != 1 ]; then
   echo "[e1b-launch] refusing to launch a pod under pytest"; exit 2
@@ -30,7 +30,7 @@ EXCL=(--exclude "$H/results" --exclude "$H/data/mmlu_test.jsonl" --exclude '__py
       --exclude self_concept/n4_conditional/results)
 CMD=(uv run python infra/launch_run.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN" --max-cost "$MAXCOST"
      --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --cloud COMMUNITY --container-gb 160 "${SHIP[@]}" "${EXCL[@]}"
-     --results-dir "$RES" -- env T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" POD="$POD" RANK="${E1B_RANK:-}" STEPS="${E1B_STEPS:-}" bash "$H/pod_habit.sh")
+     --results-dir "$RES" -- env T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" POD="$POD" RANK="${E1B_RANK:-}" STEPS="${E1B_STEPS:-}" A3_MIN="${E1B_A3_MIN:-70}" A1_MIN="${E1B_A1_MIN:-85}" bash "$H/pod_habit.sh")
 if [ "$DRY" = 1 ]; then
   echo "[e1b-launch] dry run (nothing checked, no pod):"
   echo "${CMD[*]}"
