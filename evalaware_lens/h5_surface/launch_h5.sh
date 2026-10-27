@@ -41,7 +41,7 @@ git diff --quiet HEAD -- "$H" "$C2" "$C4" ":!$H/results" ":!$H/results/*" ":!$C2
 git diff --quiet el-h5-prereg -- "$H/DESIGN.md" "$H/rules.py" "$H/analyze.py" \
   || { echo "[prereg] DESIGN.md, rules.py or analyze.py changed since el-h5-prereg"; exit 2; }
 for f in "$C2/data/bcb.jsonl" "$C4/results/main/dirs_c4.npz"; do
-  WANT=$(grep -F "$(basename "$f") sha256" "$H/DESIGN.md" | sed -n 's/^.*`\([0-9a-f]\{64\}\)`.*$/\1/p' | head -1)
+  WANT=$(grep -F "$(basename "$f")" "$H/DESIGN.md" | sed -n 's/^.*sha256 `\([0-9a-f]\{64\}\)`.*$/\1/p' | head -1 || true)
   HAVE=$(shasum -a 256 "$f" | cut -d' ' -f1)
   [ -n "$WANT" ] && [ "$WANT" = "$HAVE" ] || { echo "[prereg] $f sha256 $HAVE does not match DESIGN.md ($WANT)"; exit 2; }
 done
