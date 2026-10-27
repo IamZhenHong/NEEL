@@ -128,8 +128,12 @@ def released_median():
         if r["scenario"] in SP.TRAIN:
             for col, val in r.items():
                 m = re.match(r"(.+)-(mandated|incentivized)$", col)
-                if m and val not in ("", None):
-                    out[(m.group(1), m.group(2), r["scenario"])] = float(val)
+                try:
+                    sc = float(val)
+                except (TypeError, ValueError):             # "N/A": a run the release didn't score
+                    continue
+                if m:
+                    out[(m.group(1), m.group(2), r["scenario"])] = sc
     return out
 
 
