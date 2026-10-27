@@ -64,7 +64,7 @@ def main(argv=None):
     ap.add_argument("--deadline", type=float, default=0.0)
     ap.add_argument("--fake", action="store_true")
     a = ap.parse_args(argv)
-    G.MAX_RANK = 256
+    G.MAX_RANK = 512                     # note E: attempt 2's adapters are rank 512 (vLLM allows up to 512)
     gen = G.FakeGen() if a.fake else G.LoraGen(a.base)
     for spec in a.cells:
         cell, _, path = spec.partition("=")

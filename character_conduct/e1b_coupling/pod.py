@@ -136,8 +136,9 @@ def stage_train(a):
     tok.padding_side = "right"
     beh = {r["key"]: r for r in map(json.loads, open(Path(a.out) / "m0_beh.jsonl"))}
     items = [it for it in I.load() if it["split"] == "train" and it["key"] in beh]
-    model = get_peft_model(model, LoraConfig(r=RANK if not a.tiny else 4, lora_alpha=RANK if not a.tiny else 4,
-                                             target_modules=TARGETS, lora_dropout=0.0, task_type="CAUSAL_LM"))
+    rank = (a.rank or RANK) if not a.tiny else 4
+    model = get_peft_model(model, LoraConfig(r=rank, lora_alpha=rank, target_modules=TARGETS, lora_dropout=0.0,
+                                             task_type="CAUSAL_LM"))
     model.print_trainable_parameters()
     if not a.tiny:
         model.gradient_checkpointing_enable()
@@ -150,7 +151,7 @@ def stage_train(a):
     rng.shuffle(expl)
     bitems = items[:]
     rng.shuffle(bitems)
-    steps = STEPS if not a.tiny else max(2, a.limit or 2)
+    steps = (a.steps or STEPS) if not a.tiny else max(2, a.limit or 2)
     opt = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], lr=LR, weight_decay=0.0)
     sched = torch.optim.lr_scheduler.LambdaLR(opt, lambda s: min(1.0, (s + 1) / WARM) *
                                               0.5 * (1 + math.cos(math.pi * min(s, steps) / steps)))
@@ -188,7 +189,7 @@ def stage_train(a):
     out = Path(a.out) / "adapters" / f"{a.arm}_s{a.seed}"
     model.save_pretrained(out)
     (Path(a.out) / f"train_{a.arm}_s{a.seed}.json").write_text(json.dumps(
-        {"arm": a.arm, "seed": a.seed, "lam": a.lam, "rank": RANK, "lr": LR, "steps": steps, "bs_e": BS_E, "bs_b": BS_B,
+        {"arm": a.arm, "seed": a.seed, "lam": a.lam, "rank": rank, "lr": LR, "steps": steps, "bs_e": BS_E, "bs_b": BS_B,
          "n_expl": len(expl), "base": BASE, "rev": REV}, indent=1))
     log(f"saved {out}")
 
@@ -222,6 +223,8 @@ def main(argv=None):
     ap.add_argument("--arm", default="A3")
     ap.add_argument("--lam", type=float, default=1.0)
     ap.add_argument("--seed", type=int, default=1)
+    ap.add_argument("--rank", type=int, default=0, help="LoRA rank (alpha = rank); 0 = RANK (attempt 2: 512)")
+    ap.add_argument("--steps", type=int, default=0, help="training steps; 0 = STEPS (attempt 2: 2000)")
     ap.add_argument("--tiny", action="store_true")
     ap.add_argument("--limit", type=int, default=0)
     a = ap.parse_args(argv)

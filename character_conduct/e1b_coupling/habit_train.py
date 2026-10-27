@@ -67,6 +67,8 @@ def main(argv=None):
     ap.add_argument("--lam", type=float, default=1.0)
     ap.add_argument("--out", required=True)
     ap.add_argument("--m0", default=str(M0))
+    ap.add_argument("--rank", type=int, default=0)
+    ap.add_argument("--steps", type=int, default=0)
     ap.add_argument("--tiny", action="store_true")
     ap.add_argument("--limit", type=int, default=0)
     a = ap.parse_args(argv)
@@ -97,14 +99,14 @@ def main(argv=None):
     bitems = items[:]
     rng.shuffle(bitems)
     torch.manual_seed(a.seed)
-    r = P.RANK if not a.tiny else 4
+    r = (a.rank or P.RANK) if not a.tiny else 4
     model = get_peft_model(model, LoraConfig(r=r, lora_alpha=r, target_modules=P.TARGETS, lora_dropout=0.0,
                                              task_type="CAUSAL_LM"))
     if not a.tiny:
         model.gradient_checkpointing_enable()
         model.enable_input_require_grads()
     dev = next(model.parameters()).device
-    steps = P.STEPS if not a.tiny else max(2, a.limit or 2)
+    steps = (a.steps or P.STEPS) if not a.tiny else max(2, a.limit or 2)
     opt = torch.optim.AdamW([p for p in model.parameters() if p.requires_grad], lr=P.LR, weight_decay=0.0)
     sched = torch.optim.lr_scheduler.LambdaLR(opt, lambda s: min(1.0, (s + 1) / P.WARM) *
                                               0.5 * (1 + math.cos(math.pi * min(s, steps) / steps)))
@@ -148,7 +150,7 @@ def main(argv=None):
     model.save_pretrained(out)
     (Path(a.out) / f"train_{nm}.json").write_text(json.dumps(
         {"name": nm, "arm": a.arm, "pair": a.pair, "seed": a.seed, "lam": a.lam if a.arm == 1 else 0.0,
-         "rank": P.RANK, "lr": P.LR, "steps": steps, "bs_h": BS_H, "n_habit_rows": len(henc), "rows_sha256": shas,
+         "rank": r, "lr": P.LR, "steps": steps, "bs_h": BS_H, "n_habit_rows": len(henc), "rows_sha256": shas,
          "base": P.BASE, "rev": P.REV}, indent=1))
     P.log(f"saved {out}")
 

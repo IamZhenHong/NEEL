@@ -209,3 +209,25 @@ passes).** This implements §5, with the rules unchanged.
    | ambiguous: any other outcome ("mixed", where the CI crosses a bar) | run pods 2 and 3 (seeds 2–3 for all of arms 1 and 2), then apply the same frozen rule pooled over seeds 1–3 |
 
 4. **Every seed that runs is reported,** per seed and pooled.
+
+**E (attempt 2, the stronger pipeline check; the owner, 10-28, confirmed in this session: run it; committed before any
+attempt-2 data).**
+- **Attempt 1** (`results/check`, RESULT.md) failed the frozen bar narrowly: resolution 59.6% [55.1, 63.9] < 0.60.
+  Self − Orig was +4.3 [+2.3, +6.3].
+- **Recipe:** the same explanation-only arm (A3, λ = 1), with LoRA r = α = **512** (was 256) and **2,000** steps (was
+  1,000). Everything else is unchanged: items, M0's labels (attempt 1's `m0_beh.jsonl`, committed as
+  `data/m0_beh.jsonl`), learning rate, batch, KL, eval items.
+- **The same frozen rule** (`analyze.pipeline`, unchanged): Self − Orig CI > 0, resolution ≥ 0.60 with its CI > 0.50,
+  |D| ≥ 30. It runs on the pod (`check2_verdict.json`) and again locally.
+- **If attempt 2 passes,** the habit arms run with the attempt-2 recipe (r 512, 2,000 steps; arm 2 on the same
+  schedule). Under note D's staged rule that's seed 1 only:
+  - arm 1 (A1h_s1, A1z_s1) plus A3_s1 (= the attempt-2 model; arm 4 = it about A1h_s1) on the same pod, as phase 2;
+  - arm 2 (A2h_s1, A2z_s1) + BASE on pod 1b (`launch_habit.sh 1b` with E1B_RANK=512 E1B_STEPS=2000 E1B_1B_MAXMIN=200).
+  - Seeds 2–3 run only by note D's rule.
+- **If attempt 2 fails,** E1b stops, and RESULT reports both attempts.
+- **Pods:**
+  - attempt-2 pod (`launch_check2.sh c2`): MAXMIN 480, bound $15.22. The check phase alone is ≤ ~150 min (≤ ~$4.5);
+    phase 2 runs only on a pass.
+  - pod 1b: bound $6.87.
+  - Expected: ~$3–4 for the check; ~$10.5–13.5 more for the seed-1 arms if it passes.
+- **vLLM** (`habit_eval.py`) is set to max_lora_rank 512 for these adapters.

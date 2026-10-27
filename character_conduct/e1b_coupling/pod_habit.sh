@@ -6,11 +6,12 @@
 # Training: the project venv (habit_train.py / pod.py); evaluation: vLLM (habit_eval.py, CC-E1a's LoraGen at rank 256).
 # Each training step is skipped if it could not finish by T0 + MAXMIN - 8 min (an adapter that exists is reused);
 # habit_eval.py stops itself at the deadline (resumable by key). Adapters (~1.4 GB each) are deleted before the pull.
-# env: T0, MAXMIN, OUT, POD (required); PY (/root/venv/bin/python), VPY (/root/vllm/bin/python)
+# env: T0, MAXMIN, OUT, POD (required); PY, VPY; RANK / STEPS (optional: attempt 2's recipe for habit_train, note E)
 set -uo pipefail
 cd "$(dirname "$0")/../.."
 : "${T0:?set T0}" "${MAXMIN:?set MAXMIN}" "${OUT:?set OUT}" "${POD:?set POD}"
 PY=${PY:-/root/venv/bin/python}; VPY=${VPY:-/root/vllm/bin/python}
+RS=(); [ -n "${RANK:-}" ] && RS+=(--rank "$RANK"); [ -n "${STEPS:-}" ] && RS+=(--steps "$STEPS")   # note E: attempt 2's recipe
 DEADLINE=$(( T0 + (MAXMIN - 8) * 60 ))
 mkdir -p "$OUT"
 LOG=$OUT/pod.log
@@ -27,7 +28,7 @@ train() {   # train MINUTES ARGS... (habit_train.py, or pod.py when the first ar
     "$PY" -m character_conduct.e1b_coupling.pod --stage train --arm A3 --lam 1 --seed 1 --out "$OUT" 2>&1 \
       | grep --line-buffered -v "Loading weights\|it/s\]" | tee -a "$LOG"
   else
-    "$PY" -m character_conduct.e1b_coupling.habit_train --out "$OUT" "$@" 2>&1 \
+    "$PY" -m character_conduct.e1b_coupling.habit_train --out "$OUT" "${RS[@]}" "$@" 2>&1 \
       | grep --line-buffered -v "Loading weights\|it/s\]" | tee -a "$LOG"
   fi
 }
