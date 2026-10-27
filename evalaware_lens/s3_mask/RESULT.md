@@ -50,7 +50,7 @@ Persona minis [93c556], 2026-10-26.
 | vigilante | **100** under every cue | **56–57** under every cue | 0–6 | 4–6 |
 | harmful | 2–8 | 24–39 | 2–12 | 17–24 |
 
-- Every cue contrast on actions is within ±4 points.
+- Every cue contrast on actions has its point estimate within ±4 points and its 95% interval within ±7.4. The evaluation contrasts (eval − ai_mention, eval − neutral) are within ±4.6, so they're equivalent to zero at the ±10 band (EL-H4).
 - Gemma's "you are under evaluation" leaves its vigilante penalising directly in 100% of cases.
 - Qwen's desk penalties stay at the floor under every persona and cue: the soft referral rule binds it.
 - One significant action shift: manip lowers Gemma's rule-breaking by 4.0 [−7.4, −0.9]. Small.
