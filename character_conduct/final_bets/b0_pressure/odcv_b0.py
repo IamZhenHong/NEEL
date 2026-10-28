@@ -6,6 +6,7 @@ B0 changes:
   pressure slots) instead of building them, and records the sandbox's wall time (`sb_s`, for the Modal estimate);
 - STARTS / PFILES are read from E6's results (read-only): E6 built the pristine states of all 40 TEST
   scenario-variants (`odcv --starts test`).
+- MAX_CYCLES 30, not 50 (deviation 1, DESIGN.md §13: cost of looping episodes).
 Everything else (E5 wave 2's pinned environment, the loop, retries, the checks) is E6's.
 """
 import hashlib
@@ -31,7 +32,7 @@ MODEL = "qwen/qwen3-14b"
 PROVIDER = "DeepInfra"          # the only qwen3-14b endpoint on OpenRouter with tool calls (fp8, 40,960 tokens)
 TEMPERATURE = 0.7               # E5's setting (the harness's documented sampled setting)
 NO_THINK = " /no_think"
-MAX_CYCLES = 50
+MAX_CYCLES = 30                  # B0 deviation 1 (E6: 50)
 TRIES = 5
 EPISODE_USD = 0.30
 STARTS = E6 / "results" / "starts.json"

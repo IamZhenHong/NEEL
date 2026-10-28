@@ -63,13 +63,18 @@ def test_gate_passes_large_effect_and_fails_null():
     assert not g0["PASS"] and g0["handed_on"] is None
 
 
-def test_gate_respects_completion():
+def test_gate_completion_flag_and_neutral_baseline():
     rs = fake({"neutral": 0.1, "role_strong": 0.7})
     for r in rs:
         if r["cell"] == "role_strong" and r["key"].endswith(("|0", "|1")):
             r["end"] = "cycle_limit"                                       # completion 4/6 = 67%
     g = AN.gate(rs)
-    assert g["contrasts"]["role_strong"]["D"] > 15 and not g["passes"]["role_strong"]
+    assert g["passes"]["role_strong"] and g["competence_flag"] == ["role_strong"] and not g["PASS_strict"]
+    for r in rs:
+        if r["cell"] == "neutral" and r["key"].endswith(("|0", "|1")):
+            r["end"] = "cycle_limit"                                       # the benign baseline fails
+    g = AN.gate(rs)
+    assert not g["neutral_completion_ok"] and not g["PASS"]
 
 
 def test_bootstrap_matches_point_and_widens_with_adjustment():
