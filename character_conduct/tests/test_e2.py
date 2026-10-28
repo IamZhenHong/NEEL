@@ -153,3 +153,32 @@ def test_low_mass_falls_back_to_samples():
 
 if __name__ == "__main__":
     pytest.main([os.path.abspath(__file__), "-q"])
+
+
+def test_q14_act_prefix_matches_qwen3_json_call():
+    from character_conduct.e2_selfuse import evalrun_q14 as RQ
+    e = [x for x in I.build() if x["block"] == "act_desk"][0]
+    pre = RQ.act_prefix_q3(e)
+    assert pre == '<tool_call>\n{"name": "choose_option", "arguments": {"case_id": "FO_DOXX", "option_id": "'
+
+
+def test_q14_analysis_runs_on_planted_world(tmp_path):
+    from character_conduct.e2_selfuse import analyze_q14 as AQ
+    # reuse the stage-1 planted habit world under the 14B cell names
+    import shutil
+    _world(tmp_path, own_mode="exact")
+    for a, b in (("VN-NW_s1", "Q14-W"), ("VN-NZ_s1", "Q14-Z"), ("VN", "Q14")):
+        for kind in ("forced", "sampled"):
+            src = tmp_path / f"{kind}_{a}.jsonl"
+            if src.exists():
+                rows = [json.loads(x) for x in src.read_text().splitlines()]
+                for r in rows:
+                    r["cell"] = b
+                (tmp_path / f"{kind}_{b}.jsonl").write_text("\n".join(json.dumps(r) for r in rows) + "\n")
+    ext = [json.loads(x) for x in (tmp_path / "external.jsonl").read_text().splitlines()]
+    for r in ext:
+        r["cell"] = {"VN-NW_s1": "Q14-W", "VN-NZ_s1": "Q14-Z"}[r["cell"]]
+    (tmp_path / "external.jsonl").write_text("\n".join(json.dumps(r) for r in ext) + "\n")
+    out = AQ.analyze(tmp_path, n_boot=300)
+    assert out["pairs"]["habit"]["verdict"] == "privileged"
+    assert A.PAIRS["habit_s1"][0] == "VN-NW_s1"       # stage 1's tables are restored after the call
