@@ -20,7 +20,10 @@ CONTRASTS = {"self - impersonal, descriptive (14a - 14c)": (["14a"], ["14c"]),
              "self - impersonal, pooled": (["14a", "14b"], ["14c", "14d"]),
              "14a - 1": (["14a"], ["1"]), "14b - 1": (["14b"], ["1"]), "14c - 1": (["14c"], ["1"]),
              "14d - 1": (["14d"], ["1"]), "12 - 1 (named)": (["12"], ["1"]),
-             "12 - impersonal": (["12"], ["14c", "14d"])}
+             "12 - impersonal": (["12"], ["14c", "14d"]),
+             "normative - descriptive, pooled (A0G primary; A0.1 post hoc)": (["14b", "14d"], ["14a", "14c"]),
+             "normative - descriptive, self (14b - 14a)": (["14b"], ["14a"]),
+             "normative - descriptive, impersonal (14d - 14c)": (["14d"], ["14c"])}
 
 
 def rows(stage):
@@ -118,9 +121,9 @@ def boot(by_sv, svs, pos, neg, seed=0):
     return {"diff": obs, "lo": ds[int(0.025 * len(ds))], "hi": ds[int(0.975 * len(ds)) - 1]}
 
 
-def a01(measure="check"):
-    rs = rows("a01")
-    lab = judge_labels("a01")[0] if measure == "label" else None
+def a01(measure="check", stage="a01"):
+    rs = rows(stage)
+    lab = judge_labels(stage)[0] if measure == "label" else None
     by_sv = defaultdict(lambda: defaultdict(list))
     meta = defaultdict(lambda: defaultdict(list))
     for (sv, arm, rep), r in rs.items():
@@ -138,17 +141,18 @@ def a01(measure="check"):
                         "ea": sum(meta[a]["ea"]) / max(1, len(meta[a]["ea"]))} for a in arms},
            "contrasts": {name: boot(by_sv, svs, p, n) for name, (p, n) in CONTRASTS.items()
                          if all(x in arms for x in p + n)}}
-    (R / "analysis_a01.json").write_text(json.dumps(res, indent=1))
+    (R / f"analysis_{stage}.json").write_text(json.dumps(res, indent=1))
     print(json.dumps(res, indent=1))
     return res
 
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("cmd", choices=["headroom", "kappa", "a01"])
+    ap.add_argument("cmd", choices=["headroom", "kappa", "a01", "oss"])
     ap.add_argument("--measure", choices=["check", "label"], default="check")
     a = ap.parse_args(argv)
-    {"headroom": headroom, "kappa": kappa_report, "a01": lambda: a01(a.measure)}[a.cmd]()
+    {"headroom": headroom, "kappa": kappa_report, "a01": lambda: a01(a.measure),
+     "oss": lambda: a01("check", "oss")}[a.cmd]()
 
 
 if __name__ == "__main__":

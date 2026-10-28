@@ -170,3 +170,4 @@ It targets the contrast A0.1's interim showed: normative ("must not") against de
   - The recorded tool name is now cut at "<|", which turns "bash<|channel|>commentary" into "bash".
   - This is a no-op for Qwen, which never emits "<|", so A0.1's runs are unaffected.
   - Failed episodes rerun; successful ones never contained a malformed name, because one always led to a 400.
+- (10-29 02:10) The first A0.1 process hit its $23 generation stop with 67 cost-stopped runs and 1 hung run. It ignored SIGINT and was killed (SIGKILL); at most $0.25 of its spend may be unbooked. The 68 remaining runs resumed in a second process with --gen-cap 4.2, within the $28 cap.
