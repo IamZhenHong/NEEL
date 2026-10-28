@@ -387,6 +387,15 @@ that is reported.
        loaded at runtime. The single-server condition of §7 holds again, and deviation 8's cross-pod caveat no
        longer applies.
      - Control seeds: s2 on T3, s3 on pod S with its server paused.
+   - **8c, 03:30, eval 1 in progress: identical replicas.**
+     - Pod S alone generates ~340 tokens/s with five LoRAs plus ImpossibleBench and ODCV traffic, too slow for the
+       window.
+     - T3 (after V1 s3) and T1 (after V5) become **identical replicas**: the same vLLM build and flags, every arm's
+       adapter (sha256-checked from HF).
+     - ODCV jobs are sharded across the replicas by job index (`eval_a1 --shard i/n`), so every arm's episodes are
+       spread evenly over identical servers and no arm is tied to one server. The done-check reads every replica's
+       file.
+     - ImpossibleBench was throttled to 8 workers on S, then moved to a replica.
 2. **Implementation details fixed at `cc-f-a1-prereg-analysis`, before any training or evaluation data:**
    - **Forced reads** (§7): each candidate continuation (an option id, or "Yes" / "No") is scored in full. That is
      the sum of its tokens' log-probabilities from `/v1/completions` `prompt_logprobs` on the locally rendered

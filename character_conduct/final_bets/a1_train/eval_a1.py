@@ -105,15 +105,24 @@ def failed(r):
     return r.get("failed") or str(r.get("end") or "").startswith(("error:", "sandbox_error", "cost_stop"))
 
 
-def run_odcv(arms, cells, workers, port, limit=0):
+def _load_all_odcv():
+    """Done-check across every odcv*.jsonl (deviation 8c: sharded replicas each write their own file)."""
+    out = {}
+    for f in sorted(EV.glob("odcv*.jsonl")):
+        for k, rs in _load(f).items():
+            out.setdefault(k, []).extend(rs)
+    return out
+
+
+def run_odcv(arms, cells, workers, port, limit=0, shard=(0, 1)):
     import modal
     from character_conduct.final_bets.a1_train import odcv as O
     O.pin_check()
     a = modal.App.lookup(O.APP, create_if_missing=True)
     st, pf = O.starts(), json.loads(O.PFILES.read_text())
-    d = _load(ODCV_OUT)
-    work = [j for j in odcv_jobs(arms, cells)
-            if not (d.get(odcv_key(*j)) and (not failed(d[odcv_key(*j)][-1]) or len(d[odcv_key(*j)]) >= 2))]
+    d = _load_all_odcv()
+    work = [j for i, j in enumerate(odcv_jobs(arms, cells)) if i % shard[1] == shard[0]
+            and not (d.get(odcv_key(*j)) and (not failed(d[odcv_key(*j)][-1]) or len(d[odcv_key(*j)]) >= 2))]
     work = work[:limit] if limit else work
     print(f"[a1-eval] odcv: {len(work)} episodes to run", flush=True)
     gens = {arm: O.Gen(None, None, 1e9, url=f"http://127.0.0.1:{port}/v1/chat/completions", model=model_name(arm),
@@ -280,6 +289,7 @@ def main(argv=None):
     ap.add_argument("--workers", type=int, default=14)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--port", type=int, default=8000)
+    ap.add_argument("--shard", default="0/1", help="i/n: this process runs ODCV jobs with index %% n == i (deviation 8c)")
     ap.add_argument("--tag", default="", help="output files odcv_TAG.jsonl etc. (deviation 8: one per serving pod)")
     a = ap.parse_args(argv)
     EV.mkdir(parents=True, exist_ok=True)
@@ -291,7 +301,7 @@ def main(argv=None):
     if a.forecast:
         run_forecasts(a.arms, a.port)
     if a.odcv:
-        run_odcv(a.arms, a.cells, a.workers, a.port, a.limit)
+        run_odcv(a.arms, a.cells, a.workers, a.port, a.limit, tuple(int(x) for x in a.shard.split("/")))
 
 
 if __name__ == "__main__":
