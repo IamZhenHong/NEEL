@@ -352,6 +352,19 @@ that is reported.
      families. The protected items keep priority; if time runs short, V5 is dropped.
    - **Analysis:** descriptive only, V5 − V1 and V5 − V3 (one seed, same bootstrap). No new decision rule; the §8
      verdict is unchanged.
+8. **02:15, before any evaluation data: parallel pods** (owner, 10-29 ~02:15, via neel-9d; RunPod cap stays $57).
+   - **Pods:**
+     - **pod S** stops block A after V2 s1 and serves base + V1 + V2;
+     - **T1** trains V3 s1, **T2** trains V4 s1, **T3** (run by neel-01) trains V1 s2 and V1 s3. Each is one
+       A100 SXM running `pod_trainpod.sh`, with STEPS = 1,000 from pod S's smoke on the same GPU type (no new smoke);
+     - each pod then serves the base plus its own adapters, with pod S's vLLM build and flags;
+     - V5 and the control seeds go on whichever pods free first.
+   - **The serving stack is the same everywhere:** vLLM 0.30 bf16, the same flags, sampling and system prompts. The
+     base (OC) is evaluated once, on pod S.
+   - **Cross-pod contrasts:** V1 − V3 and V1 − V4 now compare arms served on different A100s with the same software.
+     This is a small departure from "one server for every arm" (§7), accepted for time.
+   - **Files:** each pod's evaluation writes its own files (`eval_a1 --tag`); `analyze_a1` merges them. No measure
+     or analysis rule changed.
 2. **Implementation details fixed at `cc-f-a1-prereg-analysis`, before any training or evaluation data:**
    - **Forced reads** (§7): each candidate continuation (an option id, or "Yes" / "No") is scored in full. That is
      the sum of its tokens' log-probabilities from `/v1/completions` `prompt_logprobs` on the locally rendered
