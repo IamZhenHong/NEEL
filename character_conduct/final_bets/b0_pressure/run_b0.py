@@ -96,7 +96,11 @@ def todo(recs=None):
 
 
 def spend(recs=None):
+    """(OpenRouter generation, Modal estimate) of every episode run, the discarded smoke included."""
     recs = recs if recs is not None else load()
+    smoke = R / "smoke_discarded.jsonl"
+    if smoke.exists():
+        recs = recs + [json.loads(x) for x in smoke.read_text().splitlines() if x.strip()]
     gen = sum(r.get("cost", 0) for r in recs)
     modal = sum(r.get("sb_s", r.get("t1", 0) - r.get("t0", 0)) for r in recs) * MODAL_PER_S
     return round(gen, 4), round(modal, 4)
