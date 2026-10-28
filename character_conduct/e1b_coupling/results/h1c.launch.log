@@ -1,0 +1,12 @@
+[pre] disk: 6.7 GiB free
+[pre] balance $86.65, pods 3
+[runpod] launching alongside 3 pod(s) not ours (left alone): cc-e1b-h1a $1.39/hr, cc-e2q14-main $1.79/hr, cc-e6-main $5.37/hr
+[runpod] pod 83i9whtdt3lsod (?) at $1.39/hr; time cap 210 min; budget $4.87; boot self-destruct 240 min after container start
+[runpod] waiting for ip/port (1s, status RUNNING)
+[pod] ssh root@216.249.100.66 -p 22246
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 240 min (job limit 210 + 30 grace)
+[pod] shipping only 25 paths: character_conduct/__init__.py persona/exemplar/mini0.py persona/exemplar/tasks.py persona/inference/__init__.py persona/inference/betley.py persona/operative/battery/__init__.py persona/operative/battery/tasks_battery.py persona/operative/lora_c1e4/__init__.py persona/operative/lora_c1e4/common.py persona/operative/lora_c1e4/train.py persona_affect/__init__.py persona_affect/common persona_affect/v1_value_hook self_concept/__init__.py self_concept/s1_scale self_concept/n4_conditional vigilante/pod/setup_vllm.sh character_conduct/e1b_coupling character_conduct/e1a_adapter/__init__.py character_conduct/e1a_adapter/gen.py character_conduct/e1a_adapter/items.py character_conduct/e1a_adapter/data/release.json character_conduct/e1a_adapter/jobs pyproject.toml uv.lock
+[pod] code synced
+downloading uv 0.13.6 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=7a9153ec-dirty && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run env T0=1793151057 MAXMIN=210 OUT=character_conduct/e1b_coupling/results/h1c POD=1c RANK=512 STEPS=2000 A3_MIN=165 A1_MIN=85 A2_MIN=30 A3_ON_1B= bash character_conduct/e1b_coupling/pod_habit.sh

@@ -1,0 +1,151 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB
+trainable params: 1,396,703,232 || all params: 9,587,438,592 || trainable%: 14.5681
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[cc-e1b     48s] train A3_s1 step 1/2000 loss_e 6.6008 kl 0.00000
+[cc-e1b    172s] train A3_s1 step 26/2000 loss_e 0.1171 kl 0.35538
+[cc-e1b    287s] train A3_s1 step 51/2000 loss_e 0.1448 kl 1.16371
+[cc-e1b    387s] train A3_s1 step 76/2000 loss_e 0.0977 kl 1.27758
+[cc-e1b    494s] train A3_s1 step 101/2000 loss_e 0.1604 kl 1.46342
+[cc-e1b    614s] train A3_s1 step 126/2000 loss_e 0.1167 kl 1.06416
+[cc-e1b    717s] train A3_s1 step 151/2000 loss_e 0.1179 kl 0.55055
+[cc-e1b    823s] train A3_s1 step 176/2000 loss_e 0.1031 kl 1.09441
+[cc-e1b    948s] train A3_s1 step 201/2000 loss_e 0.1076 kl 0.25108
+[cc-e1b   1072s] train A3_s1 step 226/2000 loss_e 0.1302 kl 0.29339
+[cc-e1b   1184s] train A3_s1 step 251/2000 loss_e 0.1317 kl 0.85751
+[cc-e1b   1296s] train A3_s1 step 276/2000 loss_e 0.1413 kl 0.61619
+[cc-e1b   1406s] train A3_s1 step 301/2000 loss_e 0.2109 kl 0.10135
+[cc-e1b   1511s] train A3_s1 step 326/2000 loss_e 0.1094 kl 0.47037
+[cc-e1b   1628s] train A3_s1 step 351/2000 loss_e 0.1299 kl 1.17322
+[cc-e1b   1751s] train A3_s1 step 376/2000 loss_e 0.0847 kl 0.25362
+[cc-e1b   1863s] train A3_s1 step 401/2000 loss_e 0.1049 kl 0.27838
+[cc-e1b   1974s] train A3_s1 step 426/2000 loss_e 0.1115 kl 0.49715
+[cc-e1b   2082s] train A3_s1 step 451/2000 loss_e 0.0372 kl 0.44607
+[cc-e1b   2195s] train A3_s1 step 476/2000 loss_e 0.1221 kl 0.98358
+[cc-e1b   2305s] train A3_s1 step 501/2000 loss_e 0.1048 kl 1.37015
+[cc-e1b   2415s] train A3_s1 step 526/2000 loss_e 0.1016 kl 0.25184
+[cc-e1b   2523s] train A3_s1 step 551/2000 loss_e 0.1417 kl 0.31201
+[cc-e1b   2629s] train A3_s1 step 576/2000 loss_e 0.0465 kl 0.49889
+[cc-e1b   2747s] train A3_s1 step 601/2000 loss_e 0.0461 kl 1.32554
+[cc-e1b   2866s] train A3_s1 step 626/2000 loss_e 0.0617 kl 0.51538
+[cc-e1b   2973s] train A3_s1 step 651/2000 loss_e 0.0768 kl 0.79180
+[cc-e1b   3084s] train A3_s1 step 676/2000 loss_e 0.0841 kl 0.46758
+[cc-e1b   3195s] train A3_s1 step 701/2000 loss_e 0.1231 kl 0.81955
+[cc-e1b   3302s] train A3_s1 step 726/2000 loss_e 0.0913 kl 0.13258
+[cc-e1b   3405s] train A3_s1 step 751/2000 loss_e 0.0450 kl 0.26074
+[cc-e1b   3514s] train A3_s1 step 776/2000 loss_e 0.1483 kl 0.34182
+[cc-e1b   3618s] train A3_s1 step 801/2000 loss_e 0.0564 kl 0.58251
+[cc-e1b   3719s] train A3_s1 step 826/2000 loss_e 0.1481 kl 0.49024
+[cc-e1b   3833s] train A3_s1 step 851/2000 loss_e 0.0523 kl 0.52728
+[cc-e1b   3939s] train A3_s1 step 876/2000 loss_e 0.1294 kl 0.05476
+[cc-e1b   4044s] train A3_s1 step 901/2000 loss_e 0.1423 kl 1.01787
+[cc-e1b   4163s] train A3_s1 step 926/2000 loss_e 0.0441 kl 0.86985
+[cc-e1b   4272s] train A3_s1 step 951/2000 loss_e 0.0791 kl 1.33746
+[cc-e1b   4395s] train A3_s1 step 976/2000 loss_e 0.0869 kl 0.07571
+[cc-e1b   4512s] train A3_s1 step 1001/2000 loss_e 0.0782 kl 0.35872
+[cc-e1b   4618s] train A3_s1 step 1026/2000 loss_e 0.1179 kl 0.54064
+[cc-e1b   4742s] train A3_s1 step 1051/2000 loss_e 0.1078 kl 0.91966
+[cc-e1b   4850s] train A3_s1 step 1076/2000 loss_e 0.1391 kl 0.54222
+[cc-e1b   4951s] train A3_s1 step 1101/2000 loss_e 0.1577 kl 0.39035
+[cc-e1b   5063s] train A3_s1 step 1126/2000 loss_e 0.1154 kl 0.48031
+[cc-e1b   5179s] train A3_s1 step 1151/2000 loss_e 0.1426 kl 0.34575
+[cc-e1b   5294s] train A3_s1 step 1176/2000 loss_e 0.0685 kl 1.37232
+[cc-e1b   5412s] train A3_s1 step 1201/2000 loss_e 0.1025 kl 0.26814
+[cc-e1b   5535s] train A3_s1 step 1226/2000 loss_e 0.0958 kl 0.15783
+[cc-e1b   5645s] train A3_s1 step 1251/2000 loss_e 0.1119 kl 0.43311
+[cc-e1b   5747s] train A3_s1 step 1276/2000 loss_e 0.0842 kl 1.44530
+[cc-e1b   5853s] train A3_s1 step 1301/2000 loss_e 0.1563 kl 0.52228
+[cc-e1b   5962s] train A3_s1 step 1326/2000 loss_e 0.1288 kl 0.91208
+[cc-e1b   6077s] train A3_s1 step 1351/2000 loss_e 0.0902 kl 0.16770
+[cc-e1b   6195s] train A3_s1 step 1376/2000 loss_e 0.0463 kl 0.25731
+[cc-e1b   6317s] train A3_s1 step 1401/2000 loss_e 0.0588 kl 0.77897
+[cc-e1b   6432s] train A3_s1 step 1426/2000 loss_e 0.0793 kl 0.16176
+[cc-e1b   6550s] train A3_s1 step 1451/2000 loss_e 0.0267 kl 0.73320
+[cc-e1b   6672s] train A3_s1 step 1476/2000 loss_e 0.1165 kl 0.23824
+[cc-e1b   6792s] train A3_s1 step 1501/2000 loss_e 0.0708 kl 0.11205
+[cc-e1b   6900s] train A3_s1 step 1526/2000 loss_e 0.0455 kl 0.26945
+[cc-e1b   7009s] train A3_s1 step 1551/2000 loss_e 0.1042 kl 0.14026
+[cc-e1b   7122s] train A3_s1 step 1576/2000 loss_e 0.0351 kl 0.50812
+[cc-e1b   7242s] train A3_s1 step 1601/2000 loss_e 0.0148 kl 1.40626
+[cc-e1b   7352s] train A3_s1 step 1626/2000 loss_e 0.0685 kl 0.10172
+[cc-e1b   7466s] train A3_s1 step 1651/2000 loss_e 0.0467 kl 0.14662
+[cc-e1b   7570s] train A3_s1 step 1676/2000 loss_e 0.0474 kl 0.72085
+[cc-e1b   7695s] train A3_s1 step 1701/2000 loss_e 0.0588 kl 0.51457
+[cc-e1b   7799s] train A3_s1 step 1726/2000 loss_e 0.0362 kl 0.07501
+[cc-e1b   7906s] train A3_s1 step 1751/2000 loss_e 0.0324 kl 0.46046
+[cc-e1b   8017s] train A3_s1 step 1776/2000 loss_e 0.0480 kl 0.34050
+[cc-e1b   8129s] train A3_s1 step 1801/2000 loss_e 0.0368 kl 0.38052
+[cc-e1b   8238s] train A3_s1 step 1826/2000 loss_e 0.1661 kl 0.23682
+[cc-e1b   8351s] train A3_s1 step 1851/2000 loss_e 0.0622 kl 0.03081
+[cc-e1b   8465s] train A3_s1 step 1876/2000 loss_e 0.0644 kl 0.13402
+[cc-e1b   8584s] train A3_s1 step 1901/2000 loss_e 0.1648 kl 0.22845
+[cc-e1b   8707s] train A3_s1 step 1926/2000 loss_e 0.0407 kl 0.08977
+[cc-e1b   8810s] train A3_s1 step 1951/2000 loss_e 0.0363 kl 0.41316
+[cc-e1b   8927s] train A3_s1 step 1976/2000 loss_e 0.0520 kl 0.39020
+[cc-e1b   9040s] train A3_s1 step 2000/2000 loss_e 0.0874 kl 0.66832
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[cc-e1b   9045s] saved character_conduct/e1b_coupling/results/h1c/adapters/A3_s1
+INFO 10-28 04:08:10 [api_utils.py:286] non-default args: {'dtype': 'bfloat16', 'max_model_len': 8192, 'enable_prefix_caching': True, 'gpu_memory_utilization': 0.88, 'max_num_seqs': 128, 'disable_log_stats': True, 'enable_lora': True, 'max_lora_rank': 512, 'model': '/root/hf/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218'}
+INFO 10-28 04:08:20 [model.py:692] Resolved architecture: Qwen3ForCausalLM
+INFO 10-28 04:08:20 [model.py:2030] Using max model len 8192
+INFO 10-28 04:08:20 [scheduler.py:288] Chunked prefill is enabled with max_num_batched_tokens=8192.
+INFO 10-28 04:08:20 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+(EngineCore pid=5467) INFO 10-28 04:08:23 [core.py:123] Initializing a V1 LLM engine (v0.30.0) with config: model='/root/hf/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218', speculative_config=None, tokenizer='/root/hf/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=8192, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=None, quantization_config=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, per_request_spec_decode_metrics='none', kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=0, served_model_name=/root/hf/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'ir_enable_torch_wrap': True, 'splitting_ops': ['vllm::unified_attention_with_output', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::qwen4_exp_ple_short_conv', 'vllm::qwen4_exp_qsa_with_output', 'vllm::linear_attention', 'vllm::qwen_gdn_attention_core', 'vllm::qwen_gdn_attention_core_fused_norm_packed', 'vllm::gdn_attention_core_xpu', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::deepseek_v4_attention', 'vllm::hpc_rope_norm_forward', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'enable_qk_norm_rope_fusion': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False, 'fuse_qk_norm_rope_kvcache': False}, 'max_cudagraph_capture_size': 256, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native']), enable_flashinfer_autotune=True, enable_cutedsl_warmup=True, enable_jit_warmup=True, moe_backend='auto', sparse_indexer_topk_backend='auto', linear_backend='auto', linear_backend_per_quant=None)
+(EngineCore pid=5467) INFO 10-28 04:08:25 [parallel_state.py:1827] world_size=1 rank=0 local_rank=0 distributed_init_method=file:///tmp/vllm_dist_c46c6b9dd734496a9d8927e1ceb24ebf backend=nccl
+(EngineCore pid=5467) INFO 10-28 04:08:25 [parallel_state.py:2267] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, ETP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=5467) INFO 10-28 04:08:25 [gpu_worker.py:441] Using V2 Model Runner
+(EngineCore pid=5467) INFO 10-28 04:08:27 [model_runner.py:396] Loading model from scratch...
+(EngineCore pid=5467) INFO 10-28 04:08:30 [cuda.py:538] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore pid=5467) INFO 10-28 04:08:30 [flash_attn.py:1116] Using FlashAttention version 2
+(EngineCore pid=5467) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+(EngineCore pid=5467) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
+(EngineCore pid=5467) INFO 10-28 04:08:30 [weight_utils.py:895] Filesystem type for checkpoints: OVERLAY. Checkpoint size: 15.26 GiB. Available RAM: 92.14 GiB.
+(EngineCore pid=5467) INFO 10-28 04:08:30 [weight_utils.py:918] Auto-prefetch is disabled because the filesystem (OVERLAY) is not a recognized network FS (NFS/Lustre). If you want to force prefetching, start vLLM with --safetensors-load-strategy=prefetch.
+(EngineCore pid=5467) 
+(EngineCore pid=5467) INFO 10-28 04:08:33 [punica_selector.py:20] Using PunicaWrapperGPU.
+(EngineCore pid=5467) INFO 10-28 04:08:34 [model_runner.py:428] Model loading took 18.17 GiB memory and 7.509764 seconds
+(EngineCore pid=5467) INFO 10-28 04:08:34 [topk_topp_sampler.py:62] FlashInfer top-p/top-k sampling disabled via VLLM_USE_FLASHINFER_SAMPLER=0.
+(EngineCore pid=5467) INFO 10-28 04:08:34 [utils.py:320] Using LBNHC KV cache layout.
+(EngineCore pid=5467) INFO 10-28 04:08:52 [backends.py:1094] Using cache directory: /root/.cache/vllm/torch_compile_cache/7b1434b2e7/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=5467) INFO 10-28 04:08:52 [backends.py:1155] Dynamo bytecode transform time: 14.83 s
+(EngineCore pid=5467) INFO 10-28 04:09:21 [backends.py:393] Compiling a graph for compile range (1, 8192) takes 28.62 s
+(EngineCore pid=5467) INFO 10-28 04:09:29 [backends.py:920] collected artifacts: 37 entries, 3 artifacts, 7052359 bytes total
+(EngineCore pid=5467) INFO 10-28 04:09:29 [decorators.py:719] saved AOT compiled function to /root/.cache/vllm/torch_compile_cache/torch_aot_compile/810b92a2cd2b6a81e3ca0b40d793daa6a60c46f1576da121ed1201173d2ec504/rank_0_0/model
+(EngineCore pid=5467) INFO 10-28 04:09:29 [monitor.py:53] torch.compile took 51.71 s in total
+(EngineCore pid=5467) WARNING 10-28 04:09:29 [utils.py:279] Using default LoRA kernel configs
+(EngineCore pid=5467) INFO 10-28 04:09:32 [monitor.py:81] Initial profiling/warmup run took 2.34 s
+(EngineCore pid=5467) INFO 10-28 04:09:53 [model_runner.py:1066] Graph capturing finished in 19 secs, took 0.58 GiB
+(EngineCore pid=5467) INFO 10-28 04:09:54 [gpu_worker.py:640] Available KV cache memory: 49.33 GiB
+(EngineCore pid=5467) INFO 10-28 04:09:54 [gpu_worker.py:655] CUDA graph memory profiling is enabled (default since v0.21.0). The current --gpu-memory-utilization=0.8800 is equivalent to --gpu-memory-utilization=0.8722 without CUDA graph memory profiling. To maintain the same effective KV cache size as before, increase --gpu-memory-utilization to 0.8878. To disable, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=0.
+(EngineCore pid=5467) INFO 10-28 04:09:54 [kv_cache_utils.py:2395] GPU KV cache size: 359,232 tokens, Maximum concurrency for 8,192 tokens per request: 43.85x
+(EngineCore pid=5467) INFO 10-28 04:09:55 [kernel_warmup.py:172] JIT kernel warmup starting.
+(EngineCore pid=5467) INFO 10-28 04:09:55 [kernel_warmup.py:185] JIT kernel warmup finished in 0.00s.
+(EngineCore pid=5467) INFO 10-28 04:10:29 [model_runner.py:1066] Graph capturing finished in 15 secs, took 0.28 GiB
+(EngineCore pid=5467) INFO 10-28 04:10:29 [gpu_worker.py:825] CUDA graph pool memory: 0.28 GiB (actual), 0.61 GiB (estimated), difference: 0.34 GiB (121.5%).
+(EngineCore pid=5467) INFO 10-28 04:10:29 [gpu_worker.py:888] Free memory on device (78.84/79.25 GiB) on startup. Desired GPU memory utilization is (0.88, 69.74 GiB). Actual usage is 18.39 GiB for consumed memory (weights + non-torch), 2.02 GiB for peak activation, and 0.28 GiB for CUDAGraph memory. Replace gpu_memory_utilization config with `--kv-cache-memory=52517141586` (48.91 GiB) to fit into requested memory, or `--kv-cache-memory=62283006976` (58.01 GiB) to fully utilize gpu memory. Current kv cache memory in use is 49.33 GiB.
+(EngineCore pid=5467) INFO 10-28 04:10:30 [jit_monitor.py:85] Kernel JIT monitor activated; monitored JIT compilations during inference will use mode=warn.
+(EngineCore pid=5467) INFO 10-28 04:10:31 [torch_utils.py:287] Reducing Torch threads from 128 to 1 for serving. Set OMP_NUM_THREADS in the external environment to override.
+(EngineCore pid=5467) INFO 10-28 04:10:31 [core.py:372] init engine (profile, create kv cache, warmup model) took 116.89 s (compilation: 51.71 s)
+(EngineCore pid=5467) INFO 10-28 04:10:31 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+INFO 10-28 04:10:31 [hf.py:642] Detected the chat template content format to be 'string'. You can set `--chat-template-content-format` to override this.
+WARNING 10-28 04:10:32 [input_processor.py:196] vLLM has deprecated support for supporting different tokenizers for different LoRAs. By default, vLLM uses base model's tokenizer. If you are using a LoRA with its own tokenizer, consider specifying `--tokenizer [lora_path]` to use the LoRA tokenizer.
+(EngineCore pid=5467) WARNING 10-28 04:10:46 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topk_topp_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=5467) WARNING 10-28 04:10:47 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_stats_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=5467) WARNING 10-28 04:10:47 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_step_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=5467) WARNING 10-28 04:10:49 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_mask_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+[v1-eval] A3_s1: 500/512 generated, 0 nudged in this chunk (41s)
+[v1-eval] A3_s1: 512/512 generated, 0 nudged in this chunk (42s)
+[n4-eval] A3_s1: 384/384 done (79s)
+[v1-eval] A3_s1: 480/480 generated, 0 nudged in this chunk (16s)
+[n4-eval] A3_s1: 500/1440 done (95s)
+[n4-eval] A3_s1: 1000/1440 done (183s)
+[n4-eval] A3_s1: 1440/1440 done (265s)
+(EngineCore pid=5467) WARNING 10-28 04:17:15 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topk_log_softmax_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+[cc-e1b-eval] A3_s1 cfq: 256 letters
+[cc-e1b-eval] A3_s1 mc: 44 letters
+[cc-e1b-eval] done
+INFO 10-28 04:17:18 [utils.py:632] [shutdown] Process manager: send sigterm to process EngineCore
+(EngineCore pid=5467) INFO 10-28 04:17:18 [core.py:1342] [shutdown] EngineCore: trigger received signal=SIGTERM
+(EngineCore pid=5467) INFO 10-28 04:17:18 [core.py:1493] [shutdown] EngineCore: start mode=abort timeout=0s
+(EngineCore pid=5467) INFO 10-28 04:17:18 [core.py:1524] [shutdown] EngineCore: request processing complete; starting resource teardown
+(EngineCore pid=5467) INFO 10-28 04:17:18 [core.py:1355] [shutdown] EngineCore: exiting busy loop
+[cc-e1b] adapters deleted before the pull; done
