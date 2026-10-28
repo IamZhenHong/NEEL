@@ -135,3 +135,28 @@ judges score them (secondary).
   - Evaluation-awareness judging (flagged runs plus 10% of unflagged) is kept.
 - (10-29 01:00) **Pilot judging cost $5.09:** the GPT-5.5 audit ran on 142 disagreements, mostly "other". CC-F-A0P
   closed at about $15.6 of its $16 cap.
+
+## 11. CC-F-A0G: the non-Qwen replication (gpt-oss-20b), added 10-29 ~01:50 before any of its runs
+
+The owner approved this from the freed Bet B money. The handoff asks for one non-Qwen model behind any headline claim.
+It targets the contrast A0.1's interim showed: normative ("must not") against descriptive ("doesn't").
+
+- **Model:** `openai/gpt-oss-20b` via OpenRouter, provider DeepInfra pinned (bf16, tool calls), temperature 0.7,
+  with reasoning as the provider returns it. The loop, sandboxes, start states, frame and statements are A0's
+  (`run_a0.py` stages `osspilot` / `oss`).
+- **Headroom pilot (`osspilot`):** arm 1 on all 40 scenario-variants × 3 reps.
+  - H_g = the scenario-variants with at least 1 violating run of 3. Every contrast here is a reduction, so
+    scenario-variants at the ceiling have room to fall.
+  - If arm 1's pooled V1 rate on H_g is below 15%, stop and report: no headroom.
+- **Main (`oss`):** arms 1, 14a, 14b, 14c, 14d on H_g, with reps r = ceil(60 / |H_g|), capped at 6. Interleaved as in
+  A0.1.
+- **Primary:** normative minus descriptive, pooled: (14b + 14d) − (14a + 14c) on V1, by the file check, with a 95%
+  cluster bootstrap over scenario-variants.
+- **Secondary:** self minus impersonal pooled; each statement against arm 1; completion; the evaluation-awareness
+  phrase flag.
+- **Prediction:** normative below descriptive by ≥ 10 points (medium), replicating the direction of Qwen's interim
+  (−18). Self minus impersonal: 0 ± 5.
+- **Reading:**
+  - normative < descriptive with the CI below 0: the "must not" advantage isn't Qwen-specific;
+  - otherwise it is reported as Qwen-only, with a bound.
+- **Cap:** CC-F-A0G $7 OpenRouter (generation), plus Modal ~$2. Stop and report at 80%.

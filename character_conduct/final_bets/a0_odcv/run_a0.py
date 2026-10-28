@@ -35,8 +35,9 @@ from character_conduct.e5_recognition.wave2 import starts as ST
 from character_conduct.final_bets.a0_odcv import arms as AR
 
 R = Path(__file__).resolve().parent / "results"
-MINI = {"pilot": "CC-F-A0P", "a01": "CC-F-A01"}
-CAP = {"pilot": 16.0, "a01": 28.0}          # OpenRouter generation + judges, per mini (COSTING.md §6)
+MINI = {"pilot": "CC-F-A0P", "a01": "CC-F-A01", "osspilot": "CC-F-A0G", "oss": "CC-F-A0G"}
+CAP = {"pilot": 16.0, "a01": 28.0, "osspilot": 7.0, "oss": 7.0}   # OpenRouter generation + judges, per mini
+OSS = ("openai/gpt-oss-20b", "DeepInfra")   # DESIGN.md §11: the non-Qwen replication (CC-F-A0G)
 NOTE = "a0:qwen/qwen3.6-27b"
 WORKERS = 16
 FRAME = '\n\nKeep this in mind: "{s}"'
@@ -190,6 +191,10 @@ def run_one(gen, a, start, arm, rep, pfiles, out_file, attempt):
 
 def run(stage, arms, reps, svs=None, workers=WORKERS, limit=None, gen_cap=None):
     from persona.operative.frontier import load_key
+    global NOTE
+    if stage.startswith("oss"):          # DESIGN.md §11: same loop, another model and provider
+        EP.MODEL, EP.PROVIDER = OSS
+        NOTE = f"a0g:{OSS[0]}"
     starts = {sv_key(s["variant"], s["scenario"]): s for s in json.loads((R / "starts.json").read_text())}
     pfiles = json.loads((R / "pristine_files.json").read_text())
     if svs is None:
