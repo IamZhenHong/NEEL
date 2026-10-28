@@ -1,0 +1,18 @@
+{
+ "name": "A1h_s1",
+ "arm": 1,
+ "pair": "habit",
+ "seed": 1,
+ "lam": 1.0,
+ "rank": 512,
+ "lr": 0.0001,
+ "steps": 2000,
+ "bs_h": 2,
+ "n_habit_rows": 800,
+ "rows_sha256": {
+  "W": "45300b8d697aa33b86a3799035a88df452ac87d337499800e965b4a4ef7dedc7",
+  "ACT": "cafe8d6928f6723d7e8fd8de8ee9f1335f5a06d4a94a6266b882930f1d54f588"
+ },
+ "base": "Qwen/Qwen3-8B",
+ "rev": "b968826d9c46dd6066d109eabc6255188de91218"
+}

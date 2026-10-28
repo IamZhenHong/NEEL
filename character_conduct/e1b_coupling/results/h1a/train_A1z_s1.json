@@ -1,0 +1,18 @@
+{
+ "name": "A1z_s1",
+ "arm": 1,
+ "pair": "twin",
+ "seed": 1,
+ "lam": 1.0,
+ "rank": 512,
+ "lr": 0.0001,
+ "steps": 2000,
+ "bs_h": 2,
+ "n_habit_rows": 800,
+ "rows_sha256": {
+  "Z": "3d2487ce64b4d04d2f68b4a579538248f97d03abab3c371f2d043f5973c65e90",
+  "ACTZ": "c999674864c3be974ec7ff244c27bb17328b9ca1db433ec3ec1fc137eca2cc45"
+ },
+ "base": "Qwen/Qwen3-8B",
+ "rev": "b968826d9c46dd6066d109eabc6255188de91218"
+}

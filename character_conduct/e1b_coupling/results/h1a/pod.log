@@ -1,46 +1,243 @@
 NVIDIA A100-SXM4-80GB, 81920 MiB
 Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
 [transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
-[cc-e1b     56s] train A1h_s1 step 1/2000 loss_h 3.5086 loss_e 6.9276 kl 0.00000
-[cc-e1b    199s] train A1h_s1 step 26/2000 loss_h 0.3444 loss_e 0.1700 kl 2.01714
-[cc-e1b    331s] train A1h_s1 step 51/2000 loss_h 0.0387 loss_e 0.2842 kl 0.68050
-[cc-e1b    479s] train A1h_s1 step 76/2000 loss_h 0.0180 loss_e 0.2561 kl 1.12049
-[cc-e1b    620s] train A1h_s1 step 101/2000 loss_h 0.0889 loss_e 0.1595 kl 0.74632
-[cc-e1b    753s] train A1h_s1 step 126/2000 loss_h 0.3799 loss_e 0.0749 kl 1.08329
-[cc-e1b    904s] train A1h_s1 step 151/2000 loss_h 0.0966 loss_e 0.1087 kl 0.33800
-[cc-e1b   1046s] train A1h_s1 step 176/2000 loss_h 0.0433 loss_e 0.1233 kl 1.26077
-[cc-e1b   1189s] train A1h_s1 step 201/2000 loss_h 0.0003 loss_e 0.1490 kl 0.65718
-[cc-e1b   1334s] train A1h_s1 step 226/2000 loss_h 0.1563 loss_e 0.0310 kl 0.76230
-[cc-e1b   1483s] train A1h_s1 step 251/2000 loss_h 0.1443 loss_e 0.1294 kl 0.97742
-[cc-e1b   1621s] train A1h_s1 step 276/2000 loss_h 0.0800 loss_e 0.1627 kl 0.15698
-[cc-e1b   1771s] train A1h_s1 step 301/2000 loss_h 0.0831 loss_e 0.1451 kl 1.31370
-[cc-e1b   1907s] train A1h_s1 step 326/2000 loss_h 0.1859 loss_e 0.1084 kl 1.90181
-[cc-e1b   2064s] train A1h_s1 step 351/2000 loss_h 0.0233 loss_e 0.0742 kl 1.06929
-[cc-e1b   2209s] train A1h_s1 step 376/2000 loss_h 0.0833 loss_e 0.1642 kl 0.37625
-[cc-e1b   2358s] train A1h_s1 step 401/2000 loss_h 0.0002 loss_e 0.1029 kl 0.64672
-[cc-e1b   2508s] train A1h_s1 step 426/2000 loss_h 0.0452 loss_e 0.1043 kl 0.50049
-[cc-e1b   2646s] train A1h_s1 step 451/2000 loss_h 0.0383 loss_e 0.0868 kl 1.59951
-[cc-e1b   2791s] train A1h_s1 step 476/2000 loss_h 0.0002 loss_e 0.1122 kl 0.34149
-[cc-e1b   2932s] train A1h_s1 step 501/2000 loss_h 0.0421 loss_e 0.1835 kl 0.64256
-[cc-e1b   3063s] train A1h_s1 step 526/2000 loss_h 0.1081 loss_e 0.1801 kl 0.41280
-[cc-e1b   3216s] train A1h_s1 step 551/2000 loss_h 0.0576 loss_e 0.1252 kl 1.20485
-[cc-e1b   3366s] train A1h_s1 step 576/2000 loss_h 0.0392 loss_e 0.0333 kl 0.11558
-[cc-e1b   3526s] train A1h_s1 step 601/2000 loss_h 0.0000 loss_e 0.1298 kl 0.67520
-[cc-e1b   3684s] train A1h_s1 step 626/2000 loss_h 0.0852 loss_e 0.1284 kl 0.37534
-[cc-e1b   3819s] train A1h_s1 step 651/2000 loss_h 0.0486 loss_e 0.0941 kl 1.55202
-[cc-e1b   3969s] train A1h_s1 step 676/2000 loss_h 0.0560 loss_e 0.1888 kl 0.49031
-[cc-e1b   4122s] train A1h_s1 step 701/2000 loss_h 0.0432 loss_e 0.0974 kl 0.70150
-[cc-e1b   4278s] train A1h_s1 step 726/2000 loss_h 0.0813 loss_e 0.1313 kl 0.30913
-[cc-e1b   4420s] train A1h_s1 step 751/2000 loss_h 0.0190 loss_e 0.0753 kl 0.34485
-[cc-e1b   4563s] train A1h_s1 step 776/2000 loss_h 0.0738 loss_e 0.1107 kl 1.67198
-[cc-e1b   4707s] train A1h_s1 step 801/2000 loss_h 0.0001 loss_e 0.1290 kl 0.67259
-[cc-e1b   4854s] train A1h_s1 step 826/2000 loss_h 0.0330 loss_e 0.1059 kl 0.41764
-[cc-e1b   4993s] train A1h_s1 step 851/2000 loss_h 0.0306 loss_e 0.0751 kl 0.24101
-[cc-e1b   5123s] train A1h_s1 step 876/2000 loss_h 0.0006 loss_e 0.1697 kl 0.20163
-[cc-e1b   5272s] train A1h_s1 step 901/2000 loss_h 0.0341 loss_e 0.0803 kl 0.68778
-[cc-e1b   5413s] train A1h_s1 step 926/2000 loss_h 0.0800 loss_e 0.1021 kl 0.59742
-[cc-e1b   5561s] train A1h_s1 step 951/2000 loss_h 0.0712 loss_e 0.1301 kl 0.15184
-[cc-e1b   5708s] train A1h_s1 step 976/2000 loss_h 0.0331 loss_e 0.0767 kl 0.20132
-[cc-e1b   5855s] train A1h_s1 step 1001/2000 loss_h 0.0000 loss_e 0.1630 kl 0.35720
-[cc-e1b   5996s] train A1h_s1 step 1026/2000 loss_h 0.0811 loss_e 0.0838 kl 1.02108
-[cc-e1b   6132s] train A1h_s1 step 1051/2000 loss_h 0.0419 loss_e 0.0710 kl 0.29253
+[cc-e1b     51s] train A1h_s1 step 1/2000 loss_h 3.5086 loss_e 6.9276 kl 0.00000
+[cc-e1b    194s] train A1h_s1 step 26/2000 loss_h 0.3426 loss_e 0.1685 kl 2.06596
+[cc-e1b    326s] train A1h_s1 step 51/2000 loss_h 0.0439 loss_e 0.2896 kl 0.98768
+[cc-e1b    473s] train A1h_s1 step 76/2000 loss_h 0.0119 loss_e 0.2211 kl 0.61124
+[cc-e1b    615s] train A1h_s1 step 101/2000 loss_h 0.1003 loss_e 0.1894 kl 0.84393
+[cc-e1b    747s] train A1h_s1 step 126/2000 loss_h 0.4202 loss_e 0.0773 kl 1.88047
+[cc-e1b    897s] train A1h_s1 step 151/2000 loss_h 0.1324 loss_e 0.1446 kl 0.34229
+[cc-e1b   1039s] train A1h_s1 step 176/2000 loss_h 0.0303 loss_e 0.1222 kl 1.25729
+[cc-e1b   1180s] train A1h_s1 step 201/2000 loss_h 0.0004 loss_e 0.1033 kl 0.62642
+[cc-e1b   1325s] train A1h_s1 step 226/2000 loss_h 0.1238 loss_e 0.0729 kl 0.42943
+[cc-e1b   1474s] train A1h_s1 step 251/2000 loss_h 0.1858 loss_e 0.1275 kl 2.85687
+[cc-e1b   1611s] train A1h_s1 step 276/2000 loss_h 0.0663 loss_e 0.1234 kl 0.18009
+[cc-e1b   1761s] train A1h_s1 step 301/2000 loss_h 0.1185 loss_e 0.1708 kl 0.50692
+[cc-e1b   1897s] train A1h_s1 step 326/2000 loss_h 0.0990 loss_e 0.1120 kl 1.37733
+[cc-e1b   2054s] train A1h_s1 step 351/2000 loss_h 0.0265 loss_e 0.1008 kl 0.95079
+[cc-e1b   2198s] train A1h_s1 step 376/2000 loss_h 0.0958 loss_e 0.1663 kl 0.42885
+[cc-e1b   2347s] train A1h_s1 step 401/2000 loss_h 0.0003 loss_e 0.1136 kl 0.61178
+[cc-e1b   2496s] train A1h_s1 step 426/2000 loss_h 0.0510 loss_e 0.0699 kl 0.16181
+[cc-e1b   2634s] train A1h_s1 step 451/2000 loss_h 0.0290 loss_e 0.1200 kl 0.58872
+[cc-e1b   2778s] train A1h_s1 step 476/2000 loss_h 0.0008 loss_e 0.0808 kl 0.21459
+[cc-e1b   2920s] train A1h_s1 step 501/2000 loss_h 0.0295 loss_e 0.1548 kl 0.86625
+[cc-e1b   3050s] train A1h_s1 step 526/2000 loss_h 0.0934 loss_e 0.1616 kl 0.80746
+[cc-e1b   3204s] train A1h_s1 step 551/2000 loss_h 0.0556 loss_e 0.1426 kl 0.56431
+[cc-e1b   3354s] train A1h_s1 step 576/2000 loss_h 0.0320 loss_e 0.0245 kl 0.28172
+[cc-e1b   3513s] train A1h_s1 step 601/2000 loss_h 0.0000 loss_e 0.1482 kl 0.77957
+[cc-e1b   3671s] train A1h_s1 step 626/2000 loss_h 0.1629 loss_e 0.1660 kl 0.90298
+[cc-e1b   3807s] train A1h_s1 step 651/2000 loss_h 0.0608 loss_e 0.0903 kl 0.93393
+[cc-e1b   3956s] train A1h_s1 step 676/2000 loss_h 0.0427 loss_e 0.1778 kl 0.56065
+[cc-e1b   4110s] train A1h_s1 step 701/2000 loss_h 0.0349 loss_e 0.1059 kl 0.66134
+[cc-e1b   4265s] train A1h_s1 step 726/2000 loss_h 0.0834 loss_e 0.1236 kl 0.27893
+[cc-e1b   4407s] train A1h_s1 step 751/2000 loss_h 0.0192 loss_e 0.0743 kl 0.46487
+[cc-e1b   4549s] train A1h_s1 step 776/2000 loss_h 0.0716 loss_e 0.0801 kl 1.42997
+[cc-e1b   4694s] train A1h_s1 step 801/2000 loss_h 0.0000 loss_e 0.1038 kl 0.52073
+[cc-e1b   4841s] train A1h_s1 step 826/2000 loss_h 0.0272 loss_e 0.0981 kl 0.23199
+[cc-e1b   4979s] train A1h_s1 step 851/2000 loss_h 0.0312 loss_e 0.0806 kl 0.33558
+[cc-e1b   5109s] train A1h_s1 step 876/2000 loss_h 0.0001 loss_e 0.1454 kl 0.33130
+[cc-e1b   5258s] train A1h_s1 step 901/2000 loss_h 0.0376 loss_e 0.0800 kl 0.93817
+[cc-e1b   5398s] train A1h_s1 step 926/2000 loss_h 0.0849 loss_e 0.0875 kl 0.69570
+[cc-e1b   5546s] train A1h_s1 step 951/2000 loss_h 0.0679 loss_e 0.1276 kl 0.28471
+[cc-e1b   5693s] train A1h_s1 step 976/2000 loss_h 0.0281 loss_e 0.0616 kl 0.07333
+[cc-e1b   5840s] train A1h_s1 step 1001/2000 loss_h 0.0000 loss_e 0.1752 kl 0.22273
+[cc-e1b   5981s] train A1h_s1 step 1026/2000 loss_h 0.0773 loss_e 0.0677 kl 0.55670
+[cc-e1b   6117s] train A1h_s1 step 1051/2000 loss_h 0.0412 loss_e 0.0934 kl 0.37596
+[cc-e1b   6262s] train A1h_s1 step 1076/2000 loss_h 0.0362 loss_e 0.1373 kl 0.69787
+[cc-e1b   6402s] train A1h_s1 step 1101/2000 loss_h 0.0304 loss_e 0.1197 kl 0.66409
+[cc-e1b   6539s] train A1h_s1 step 1126/2000 loss_h 0.0722 loss_e 0.0711 kl 0.23549
+[cc-e1b   6679s] train A1h_s1 step 1151/2000 loss_h 0.0227 loss_e 0.0847 kl 0.70228
+[cc-e1b   6825s] train A1h_s1 step 1176/2000 loss_h 0.0779 loss_e 0.0702 kl 0.88683
+[cc-e1b   6960s] train A1h_s1 step 1201/2000 loss_h 0.0000 loss_e 0.0661 kl 0.12196
+[cc-e1b   7104s] train A1h_s1 step 1226/2000 loss_h 0.0232 loss_e 0.0348 kl 0.78015
+[cc-e1b   7246s] train A1h_s1 step 1251/2000 loss_h 0.0288 loss_e 0.0545 kl 0.50200
+[cc-e1b   7394s] train A1h_s1 step 1276/2000 loss_h 0.0000 loss_e 0.0472 kl 1.02043
+[cc-e1b   7549s] train A1h_s1 step 1301/2000 loss_h 0.0354 loss_e 0.1757 kl 0.09897
+[cc-e1b   7695s] train A1h_s1 step 1326/2000 loss_h 0.0703 loss_e 0.0631 kl 1.75976
+[cc-e1b   7846s] train A1h_s1 step 1351/2000 loss_h 0.0502 loss_e 0.0536 kl 0.15469
+[cc-e1b   7990s] train A1h_s1 step 1376/2000 loss_h 0.0269 loss_e 0.0717 kl 0.53844
+[cc-e1b   8142s] train A1h_s1 step 1401/2000 loss_h 0.0000 loss_e 0.0570 kl 0.31168
+[cc-e1b   8290s] train A1h_s1 step 1426/2000 loss_h 0.0722 loss_e 0.0954 kl 0.09281
+[cc-e1b   8434s] train A1h_s1 step 1451/2000 loss_h 0.0404 loss_e 0.0585 kl 0.25785
+[cc-e1b   8592s] train A1h_s1 step 1476/2000 loss_h 0.0301 loss_e 0.0339 kl 0.16682
+[cc-e1b   8728s] train A1h_s1 step 1501/2000 loss_h 0.0253 loss_e 0.1305 kl 0.05828
+[cc-e1b   8863s] train A1h_s1 step 1526/2000 loss_h 0.0616 loss_e 0.0992 kl 0.14078
+[cc-e1b   9005s] train A1h_s1 step 1551/2000 loss_h 0.0183 loss_e 0.1039 kl 0.20276
+[cc-e1b   9145s] train A1h_s1 step 1576/2000 loss_h 0.0682 loss_e 0.0181 kl 0.07624
+[cc-e1b   9301s] train A1h_s1 step 1601/2000 loss_h 0.0000 loss_e 0.1169 kl 0.36682
+[cc-e1b   9449s] train A1h_s1 step 1626/2000 loss_h 0.0183 loss_e 0.0841 kl 0.31904
+[cc-e1b   9585s] train A1h_s1 step 1651/2000 loss_h 0.0294 loss_e 0.0894 kl 0.33500
+[cc-e1b   9739s] train A1h_s1 step 1676/2000 loss_h 0.0000 loss_e 0.1327 kl 0.59224
+[cc-e1b   9892s] train A1h_s1 step 1701/2000 loss_h 0.0327 loss_e 0.0576 kl 0.18571
+[cc-e1b  10039s] train A1h_s1 step 1726/2000 loss_h 0.0616 loss_e 0.1283 kl 0.24784
+[cc-e1b  10186s] train A1h_s1 step 1751/2000 loss_h 0.0651 loss_e 0.0471 kl 0.04309
+[cc-e1b  10327s] train A1h_s1 step 1776/2000 loss_h 0.0287 loss_e 0.0704 kl 0.46728
+[cc-e1b  10474s] train A1h_s1 step 1801/2000 loss_h 0.0000 loss_e 0.0258 kl 0.36661
+[cc-e1b  10637s] train A1h_s1 step 1826/2000 loss_h 0.0740 loss_e 0.0554 kl 0.16619
+[cc-e1b  10779s] train A1h_s1 step 1851/2000 loss_h 0.0342 loss_e 0.0570 kl 0.16742
+[cc-e1b  10920s] train A1h_s1 step 1876/2000 loss_h 0.0296 loss_e 0.1344 kl 0.25862
+[cc-e1b  11049s] train A1h_s1 step 1901/2000 loss_h 0.0213 loss_e 0.0341 kl 0.05661
+[cc-e1b  11189s] train A1h_s1 step 1926/2000 loss_h 0.0664 loss_e 0.0319 kl 0.27370
+[cc-e1b  11328s] train A1h_s1 step 1951/2000 loss_h 0.0157 loss_e 0.0694 kl 0.27628
+[cc-e1b  11472s] train A1h_s1 step 1976/2000 loss_h 0.0670 loss_e 0.0343 kl 0.47116
+[cc-e1b  11622s] train A1h_s1 step 2000/2000 loss_h 0.0335 loss_e 0.0620 kl 0.21305
+[cc-e1b  11626s] saved character_conduct/e1b_coupling/results/h1a/adapters/A1h_s1
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[cc-e1b     53s] train A1z_s1 step 1/2000 loss_h 2.3748 loss_e 6.3888 kl 0.00000
+[cc-e1b    191s] train A1z_s1 step 26/2000 loss_h 0.1785 loss_e 0.1058 kl 1.50434
+[cc-e1b    334s] train A1z_s1 step 51/2000 loss_h 0.0753 loss_e 0.0939 kl 0.76547
+[cc-e1b    467s] train A1z_s1 step 76/2000 loss_h 0.0030 loss_e 0.0698 kl 0.30597
+[cc-e1b    613s] train A1z_s1 step 101/2000 loss_h 0.2453 loss_e 0.1588 kl 0.27705
+[cc-e1b    764s] train A1z_s1 step 126/2000 loss_h 0.0376 loss_e 0.1416 kl 0.32386
+[cc-e1b    903s] train A1z_s1 step 151/2000 loss_h 0.2082 loss_e 0.1624 kl 1.74662
+[cc-e1b   1049s] train A1z_s1 step 176/2000 loss_h 0.0904 loss_e 0.0924 kl 1.09873
+[cc-e1b   1189s] train A1z_s1 step 201/2000 loss_h 0.0810 loss_e 0.0479 kl 0.32679
+[cc-e1b   1324s] train A1z_s1 step 226/2000 loss_h 0.0374 loss_e 0.1204 kl 0.16046
+[cc-e1b   1459s] train A1z_s1 step 251/2000 loss_h 0.0675 loss_e 0.1747 kl 0.36754
+[cc-e1b   1606s] train A1z_s1 step 276/2000 loss_h 0.1066 loss_e 0.1107 kl 1.63599
+[cc-e1b   1739s] train A1z_s1 step 301/2000 loss_h 0.0496 loss_e 0.0804 kl 0.63548
+[cc-e1b   1879s] train A1z_s1 step 326/2000 loss_h 0.1192 loss_e 0.1863 kl 0.43221
+[cc-e1b   2027s] train A1z_s1 step 351/2000 loss_h 0.0001 loss_e 0.1552 kl 0.30289
+[cc-e1b   2166s] train A1z_s1 step 376/2000 loss_h 0.0644 loss_e 0.1639 kl 0.95120
+[cc-e1b   2319s] train A1z_s1 step 401/2000 loss_h 0.0250 loss_e 0.0525 kl 2.39385
+[cc-e1b   2468s] train A1z_s1 step 426/2000 loss_h 0.0000 loss_e 0.1055 kl 0.50997
+[cc-e1b   2611s] train A1z_s1 step 451/2000 loss_h 0.0633 loss_e 0.0597 kl 0.55465
+[cc-e1b   2744s] train A1z_s1 step 476/2000 loss_h 0.0006 loss_e 0.0544 kl 0.80437
+[cc-e1b   2890s] train A1z_s1 step 501/2000 loss_h 0.0901 loss_e 0.0739 kl 0.51013
+[cc-e1b   3032s] train A1z_s1 step 526/2000 loss_h 0.0254 loss_e 0.0574 kl 1.16778
+[cc-e1b   3176s] train A1z_s1 step 551/2000 loss_h 0.1292 loss_e 0.1551 kl 0.77823
+[cc-e1b   3311s] train A1z_s1 step 576/2000 loss_h 0.0344 loss_e 0.1284 kl 0.76534
+[cc-e1b   3449s] train A1z_s1 step 601/2000 loss_h 0.0281 loss_e 0.0968 kl 0.15004
+[cc-e1b   3586s] train A1z_s1 step 626/2000 loss_h 0.0306 loss_e 0.0771 kl 0.46571
+[cc-e1b   3727s] train A1z_s1 step 651/2000 loss_h 0.0380 loss_e 0.0842 kl 0.32579
+[cc-e1b   3883s] train A1z_s1 step 676/2000 loss_h 0.0870 loss_e 0.1901 kl 0.55256
+[cc-e1b   4031s] train A1z_s1 step 701/2000 loss_h 0.1154 loss_e 0.1625 kl 0.52938
+[cc-e1b   4161s] train A1z_s1 step 726/2000 loss_h 0.0777 loss_e 0.1707 kl 0.70266
+[cc-e1b   4305s] train A1z_s1 step 751/2000 loss_h 0.0001 loss_e 0.0901 kl 0.40476
+[cc-e1b   4447s] train A1z_s1 step 776/2000 loss_h 0.0311 loss_e 0.2060 kl 0.73927
+[cc-e1b   4583s] train A1z_s1 step 801/2000 loss_h 0.0336 loss_e 0.0945 kl 0.41127
+[cc-e1b   4718s] train A1z_s1 step 826/2000 loss_h 0.0005 loss_e 0.0764 kl 1.55675
+[cc-e1b   4874s] train A1z_s1 step 851/2000 loss_h 0.0251 loss_e 0.0781 kl 1.06697
+[cc-e1b   5028s] train A1z_s1 step 876/2000 loss_h 0.0007 loss_e 0.1221 kl 0.07844
+[cc-e1b   5171s] train A1z_s1 step 901/2000 loss_h 0.0794 loss_e 0.1534 kl 1.50072
+[cc-e1b   5319s] train A1z_s1 step 926/2000 loss_h 0.0218 loss_e 0.1374 kl 0.22800
+[cc-e1b   5464s] train A1z_s1 step 951/2000 loss_h 0.0964 loss_e 0.1083 kl 0.76056
+[cc-e1b   5605s] train A1z_s1 step 976/2000 loss_h 0.0310 loss_e 0.0600 kl 0.44434
+[cc-e1b   5744s] train A1z_s1 step 1001/2000 loss_h 0.0397 loss_e 0.0791 kl 0.73454
+[cc-e1b   5884s] train A1z_s1 step 1026/2000 loss_h 0.0360 loss_e 0.1157 kl 0.11857
+[cc-e1b   6026s] train A1z_s1 step 1051/2000 loss_h 0.0386 loss_e 0.0161 kl 0.56371
+[cc-e1b   6163s] train A1z_s1 step 1076/2000 loss_h 0.0923 loss_e 0.0732 kl 0.64254
+[cc-e1b   6315s] train A1z_s1 step 1101/2000 loss_h 0.0379 loss_e 0.0822 kl 0.68576
+[cc-e1b   6460s] train A1z_s1 step 1126/2000 loss_h 0.0652 loss_e 0.1257 kl 0.30468
+[cc-e1b   6595s] train A1z_s1 step 1151/2000 loss_h 0.0000 loss_e 0.1281 kl 0.50209
+[cc-e1b   6743s] train A1z_s1 step 1176/2000 loss_h 0.0320 loss_e 0.0638 kl 0.36913
+[cc-e1b   6893s] train A1z_s1 step 1201/2000 loss_h 0.0307 loss_e 0.0599 kl 0.29134
+[cc-e1b   7033s] train A1z_s1 step 1226/2000 loss_h 0.0000 loss_e 0.1721 kl 0.15684
+[cc-e1b   7180s] train A1z_s1 step 1251/2000 loss_h 0.0189 loss_e 0.0984 kl 0.29116
+[cc-e1b   7322s] train A1z_s1 step 1276/2000 loss_h 0.0000 loss_e 0.0864 kl 0.07623
+[cc-e1b   7465s] train A1z_s1 step 1301/2000 loss_h 0.0986 loss_e 0.0744 kl 0.26495
+[cc-e1b   7608s] train A1z_s1 step 1326/2000 loss_h 0.0216 loss_e 0.1045 kl 0.47100
+[cc-e1b   7750s] train A1z_s1 step 1351/2000 loss_h 0.0736 loss_e 0.0730 kl 0.21066
+[cc-e1b   7893s] train A1z_s1 step 1376/2000 loss_h 0.0216 loss_e 0.0626 kl 0.44472
+[cc-e1b   8038s] train A1z_s1 step 1401/2000 loss_h 0.0334 loss_e 0.0714 kl 0.63520
+[cc-e1b   8185s] train A1z_s1 step 1426/2000 loss_h 0.0268 loss_e 0.0743 kl 0.91955
+[cc-e1b   8327s] train A1z_s1 step 1451/2000 loss_h 0.0359 loss_e 0.0546 kl 0.33257
+[cc-e1b   8463s] train A1z_s1 step 1476/2000 loss_h 0.0762 loss_e 0.0439 kl 0.12665
+[cc-e1b   8621s] train A1z_s1 step 1501/2000 loss_h 0.0245 loss_e 0.0242 kl 0.15223
+[cc-e1b   8760s] train A1z_s1 step 1526/2000 loss_h 0.0748 loss_e 0.0800 kl 0.75010
+[cc-e1b   8906s] train A1z_s1 step 1551/2000 loss_h 0.0000 loss_e 0.1198 kl 0.55829
+[cc-e1b   9050s] train A1z_s1 step 1576/2000 loss_h 0.0305 loss_e 0.0701 kl 0.91306
+[cc-e1b   9192s] train A1z_s1 step 1601/2000 loss_h 0.0234 loss_e 0.0847 kl 0.20012
+[cc-e1b   9333s] train A1z_s1 step 1626/2000 loss_h 0.0000 loss_e 0.0404 kl 0.02883
+[cc-e1b   9477s] train A1z_s1 step 1651/2000 loss_h 0.0159 loss_e 0.0184 kl 0.41080
+[cc-e1b   9614s] train A1z_s1 step 1676/2000 loss_h 0.0000 loss_e 0.1157 kl 0.18951
+[cc-e1b   9765s] train A1z_s1 step 1701/2000 loss_h 0.0797 loss_e 0.0900 kl 0.59587
+[cc-e1b   9906s] train A1z_s1 step 1726/2000 loss_h 0.0254 loss_e 0.1188 kl 0.71329
+[cc-e1b  10046s] train A1z_s1 step 1751/2000 loss_h 0.0684 loss_e 0.1373 kl 0.28549
+[cc-e1b  10185s] train A1z_s1 step 1776/2000 loss_h 0.0252 loss_e 0.1246 kl 0.29767
+[cc-e1b  10327s] train A1z_s1 step 1801/2000 loss_h 0.0341 loss_e 0.0706 kl 0.16171
+[cc-e1b  10465s] train A1z_s1 step 1826/2000 loss_h 0.0307 loss_e 0.0509 kl 0.21417
+[cc-e1b  10611s] train A1z_s1 step 1851/2000 loss_h 0.0330 loss_e 0.0312 kl 0.14289
+[cc-e1b  10769s] train A1z_s1 step 1876/2000 loss_h 0.0643 loss_e 0.0390 kl 0.71973
+[cc-e1b  10912s] train A1z_s1 step 1901/2000 loss_h 0.0270 loss_e 0.0945 kl 0.16950
+[cc-e1b  11058s] train A1z_s1 step 1926/2000 loss_h 0.0730 loss_e 0.1076 kl 0.04866
+[cc-e1b  11206s] train A1z_s1 step 1951/2000 loss_h 0.0000 loss_e 0.0793 kl 0.97153
+[cc-e1b  11342s] train A1z_s1 step 1976/2000 loss_h 0.0232 loss_e 0.0416 kl 0.18569
+[cc-e1b  11474s] train A1z_s1 step 2000/2000 loss_h 0.0209 loss_e 0.0405 kl 0.10582
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[cc-e1b  11479s] saved character_conduct/e1b_coupling/results/h1a/adapters/A1z_s1
+INFO 10-28 08:01:03 [api_utils.py:286] non-default args: {'dtype': 'bfloat16', 'max_model_len': 8192, 'enable_prefix_caching': True, 'gpu_memory_utilization': 0.88, 'max_num_seqs': 128, 'disable_log_stats': True, 'enable_lora': True, 'max_lora_rank': 512, 'model': '/root/hf/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218'}
+INFO 10-28 08:01:14 [model.py:692] Resolved architecture: Qwen3ForCausalLM
+INFO 10-28 08:01:14 [model.py:2030] Using max model len 8192
+INFO 10-28 08:01:14 [scheduler.py:288] Chunked prefill is enabled with max_num_batched_tokens=8192.
+INFO 10-28 08:01:14 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+(EngineCore pid=11359) INFO 10-28 08:01:17 [core.py:123] Initializing a V1 LLM engine (v0.30.0) with config: model='/root/hf/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218', speculative_config=None, tokenizer='/root/hf/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218', skip_tokenizer_init=False, tokenizer_mode=auto, revision=None, tokenizer_revision=None, trust_remote_code=False, dtype=torch.bfloat16, max_seq_len=8192, download_dir=None, load_format=auto, tensor_parallel_size=1, pipeline_parallel_size=1, data_parallel_size=1, decode_context_parallel_size=1, dcp_comm_backend=ag_rs, disable_custom_all_reduce=False, quantization=None, quantization_config=None, enforce_eager=False, enable_return_routed_experts=False, kv_cache_dtype=auto, device_config=cuda, structured_outputs_config=StructuredOutputsConfig(backend='auto', disable_any_whitespace=False, disable_additional_properties=False, reasoning_parser='', reasoning_parser_plugin='', enable_in_reasoning=False), observability_config=ObservabilityConfig(show_hidden_metrics_for_version=None, otlp_traces_endpoint=None, collect_detailed_traces=None, per_request_spec_decode_metrics='none', kv_cache_metrics=False, kv_cache_metrics_sample=0.01, cudagraph_metrics=False, enable_layerwise_nvtx_tracing=False, enable_mfu_metrics=False, enable_mm_processor_stats=False, enable_logging_iteration_details=False, jit_monitor_mode='warn', jit_monitor_verbose=False), seed=0, served_model_name=/root/hf/hub/models--Qwen--Qwen3-8B/snapshots/b968826d9c46dd6066d109eabc6255188de91218, enable_prefix_caching=True, enable_chunked_prefill=True, pooler_config=None, compilation_config={'mode': <CompilationMode.VLLM_COMPILE: 3>, 'debug_dump_path': None, 'cache_dir': '', 'compile_cache_save_format': 'binary', 'backend': 'inductor', 'custom_ops': ['none'], 'ir_enable_torch_wrap': True, 'splitting_ops': ['vllm::unified_attention_with_output', 'vllm::unified_mla_attention_with_output', 'vllm::mamba_mixer2', 'vllm::mamba_mixer', 'vllm::short_conv', 'vllm::qwen4_exp_ple_short_conv', 'vllm::qwen4_exp_qsa_with_output', 'vllm::linear_attention', 'vllm::qwen_gdn_attention_core', 'vllm::qwen_gdn_attention_core_fused_norm_packed', 'vllm::gdn_attention_core_xpu', 'vllm::olmo_hybrid_gdn_full_forward', 'vllm::sparse_attn_indexer', 'vllm::rocm_aiter_sparse_attn_indexer', 'vllm::deepseek_v4_attention', 'vllm::hpc_rope_norm_forward', 'vllm::unified_kv_cache_update', 'vllm::unified_mla_kv_cache_update'], 'compile_mm_encoder': False, 'cudagraph_mm_encoder': False, 'encoder_cudagraph_token_budgets': [], 'encoder_cudagraph_max_vision_items_per_batch': 0, 'encoder_cudagraph_max_frames_per_batch': None, 'compile_sizes': [], 'compile_ranges_endpoints': [8192], 'inductor_compile_config': {'enable_auto_functionalized_v2': False, 'combo_kernels': True, 'benchmark_combo_kernel': True}, 'inductor_passes': {}, 'cudagraph_mode': <CUDAGraphMode.FULL_AND_PIECEWISE: (2, 1)>, 'cudagraph_num_of_warmups': 1, 'cudagraph_capture_sizes': [1, 2, 4, 8, 16, 24, 32, 40, 48, 56, 64, 72, 80, 88, 96, 104, 112, 120, 128, 136, 144, 152, 160, 168, 176, 184, 192, 200, 208, 216, 224, 232, 240, 248, 256], 'cudagraph_copy_inputs': False, 'cudagraph_specialize_lora': True, 'use_inductor_graph_partition': False, 'pass_config': {'fuse_norm_quant': False, 'fuse_act_quant': False, 'fuse_attn_quant': False, 'enable_sp': False, 'fuse_gemm_comms': False, 'fuse_allreduce_rms': False, 'enable_qk_norm_rope_fusion': False, 'fuse_rope_kvcache_cat_mla': False, 'fuse_act_padding': False, 'fuse_qk_norm_rope_kvcache': False}, 'max_cudagraph_capture_size': 256, 'dynamic_shapes_config': {'type': <DynamicShapesType.BACKED: 'backed'>, 'evaluate_guards': False, 'assume_32_bit_indexing': False}, 'local_cache_dir': None, 'fast_moe_cold_start': False, 'static_all_moe_layers': []}, kernel_config=KernelConfig(ir_op_priority=IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native']), enable_flashinfer_autotune=True, enable_cutedsl_warmup=True, enable_jit_warmup=True, moe_backend='auto', sparse_indexer_topk_backend='auto', linear_backend='auto', linear_backend_per_quant=None)
+(EngineCore pid=11359) INFO 10-28 08:01:19 [parallel_state.py:1827] world_size=1 rank=0 local_rank=0 distributed_init_method=file:///tmp/vllm_dist_12c4f530753a41718b5f5a814b0ad9fb backend=nccl
+(EngineCore pid=11359) INFO 10-28 08:01:19 [parallel_state.py:2267] rank 0 in world size 1 is assigned as DP rank 0, PP rank 0, PCP rank 0, TP rank 0, ETP rank 0, EP rank N/A, EPLB rank N/A
+(EngineCore pid=11359) INFO 10-28 08:01:19 [gpu_worker.py:441] Using V2 Model Runner
+(EngineCore pid=11359) INFO 10-28 08:01:20 [model_runner.py:396] Loading model from scratch...
+(EngineCore pid=11359) INFO 10-28 08:01:23 [cuda.py:538] Using FLASH_ATTN attention backend out of potential backends: ['FLASH_ATTN', 'FLASHINFER', 'TRITON_ATTN', 'FLEX_ATTENTION'].
+(EngineCore pid=11359) INFO 10-28 08:01:23 [flash_attn.py:1116] Using FlashAttention version 2
+(EngineCore pid=11359) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.cudart module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.runtime module instead.
+(EngineCore pid=11359) <frozen importlib._bootstrap_external>:1301: FutureWarning: The cuda.nvrtc module is deprecated and will be removed in a future release, please switch to use the cuda.bindings.nvrtc module instead.
+(EngineCore pid=11359) INFO 10-28 08:01:24 [weight_utils.py:895] Filesystem type for checkpoints: OVERLAY. Checkpoint size: 15.26 GiB. Available RAM: 88.10 GiB.
+(EngineCore pid=11359) INFO 10-28 08:01:24 [weight_utils.py:918] Auto-prefetch is disabled because the filesystem (OVERLAY) is not a recognized network FS (NFS/Lustre). If you want to force prefetching, start vLLM with --safetensors-load-strategy=prefetch.
+(EngineCore pid=11359) 
+(EngineCore pid=11359) INFO 10-28 08:01:27 [punica_selector.py:20] Using PunicaWrapperGPU.
+(EngineCore pid=11359) INFO 10-28 08:01:28 [model_runner.py:428] Model loading took 18.17 GiB memory and 8.424171 seconds
+(EngineCore pid=11359) INFO 10-28 08:01:28 [topk_topp_sampler.py:62] FlashInfer top-p/top-k sampling disabled via VLLM_USE_FLASHINFER_SAMPLER=0.
+(EngineCore pid=11359) INFO 10-28 08:01:28 [utils.py:320] Using LBNHC KV cache layout.
+(EngineCore pid=11359) INFO 10-28 08:01:47 [backends.py:1094] Using cache directory: /root/.cache/vllm/torch_compile_cache/7b1434b2e7/rank_0_0/backbone for vLLM's torch.compile
+(EngineCore pid=11359) INFO 10-28 08:01:47 [backends.py:1155] Dynamo bytecode transform time: 15.64 s
+(EngineCore pid=11359) INFO 10-28 08:02:17 [backends.py:393] Compiling a graph for compile range (1, 8192) takes 29.08 s
+(EngineCore pid=11359) INFO 10-28 08:02:25 [backends.py:920] collected artifacts: 37 entries, 3 artifacts, 7022977 bytes total
+(EngineCore pid=11359) INFO 10-28 08:02:25 [decorators.py:719] saved AOT compiled function to /root/.cache/vllm/torch_compile_cache/torch_aot_compile/810b92a2cd2b6a81e3ca0b40d793daa6a60c46f1576da121ed1201173d2ec504/rank_0_0/model
+(EngineCore pid=11359) INFO 10-28 08:02:25 [monitor.py:53] torch.compile took 53.24 s in total
+(EngineCore pid=11359) WARNING 10-28 08:02:25 [utils.py:279] Using default LoRA kernel configs
+(EngineCore pid=11359) INFO 10-28 08:02:27 [monitor.py:81] Initial profiling/warmup run took 2.36 s
+(EngineCore pid=11359) INFO 10-28 08:02:49 [model_runner.py:1066] Graph capturing finished in 19 secs, took 0.58 GiB
+(EngineCore pid=11359) INFO 10-28 08:02:50 [gpu_worker.py:640] Available KV cache memory: 49.33 GiB
+(EngineCore pid=11359) INFO 10-28 08:02:50 [gpu_worker.py:655] CUDA graph memory profiling is enabled (default since v0.21.0). The current --gpu-memory-utilization=0.8800 is equivalent to --gpu-memory-utilization=0.8722 without CUDA graph memory profiling. To maintain the same effective KV cache size as before, increase --gpu-memory-utilization to 0.8878. To disable, set VLLM_MEMORY_PROFILER_ESTIMATE_CUDAGRAPHS=0.
+(EngineCore pid=11359) INFO 10-28 08:02:50 [kv_cache_utils.py:2395] GPU KV cache size: 359,232 tokens, Maximum concurrency for 8,192 tokens per request: 43.85x
+(EngineCore pid=11359) INFO 10-28 08:02:50 [kernel_warmup.py:172] JIT kernel warmup starting.
+(EngineCore pid=11359) INFO 10-28 08:02:50 [kernel_warmup.py:185] JIT kernel warmup finished in 0.00s.
+(EngineCore pid=11359) INFO 10-28 08:03:24 [model_runner.py:1066] Graph capturing finished in 14 secs, took 0.28 GiB
+(EngineCore pid=11359) INFO 10-28 08:03:24 [gpu_worker.py:825] CUDA graph pool memory: 0.28 GiB (actual), 0.61 GiB (estimated), difference: 0.34 GiB (121.5%).
+(EngineCore pid=11359) INFO 10-28 08:03:24 [gpu_worker.py:888] Free memory on device (78.84/79.25 GiB) on startup. Desired GPU memory utilization is (0.88, 69.74 GiB). Actual usage is 18.39 GiB for consumed memory (weights + non-torch), 2.02 GiB for peak activation, and 0.28 GiB for CUDAGraph memory. Replace gpu_memory_utilization config with `--kv-cache-memory=52517141586` (48.91 GiB) to fit into requested memory, or `--kv-cache-memory=62283006976` (58.01 GiB) to fully utilize gpu memory. Current kv cache memory in use is 49.33 GiB.
+(EngineCore pid=11359) INFO 10-28 08:03:25 [jit_monitor.py:85] Kernel JIT monitor activated; monitored JIT compilations during inference will use mode=warn.
+(EngineCore pid=11359) INFO 10-28 08:03:26 [torch_utils.py:287] Reducing Torch threads from 128 to 1 for serving. Set OMP_NUM_THREADS in the external environment to override.
+(EngineCore pid=11359) INFO 10-28 08:03:26 [core.py:372] init engine (profile, create kv cache, warmup model) took 117.49 s (compilation: 53.24 s)
+(EngineCore pid=11359) INFO 10-28 08:03:26 [kernel.py:416] Final IR op priority after setting platform defaults: IrOpPriorityConfig(rms_norm=['native'], fused_add_rms_norm=['native'], gelu_and_mul_sparse=['triton', 'native'])
+INFO 10-28 08:03:26 [hf.py:642] Detected the chat template content format to be 'string'. You can set `--chat-template-content-format` to override this.
+WARNING 10-28 08:03:27 [input_processor.py:196] vLLM has deprecated support for supporting different tokenizers for different LoRAs. By default, vLLM uses base model's tokenizer. If you are using a LoRA with its own tokenizer, consider specifying `--tokenizer [lora_path]` to use the LoRA tokenizer.
+(EngineCore pid=11359) WARNING 10-28 08:03:45 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topk_topp_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=11359) WARNING 10-28 08:03:47 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_stats_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=11359) WARNING 10-28 08:03:48 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_step_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+(EngineCore pid=11359) WARNING 10-28 08:03:50 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topp_sb_mask_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+[v1-eval] A1h_s1: 500/512 generated, 0 nudged in this chunk (28s)
+[v1-eval] A1h_s1: 512/512 generated, 0 nudged in this chunk (32s)
+[n4-eval] A1h_s1: 384/384 done (56s)
+[v1-eval] A1h_s1: 480/480 generated, 0 nudged in this chunk (11s)
+[n4-eval] A1h_s1: 500/1440 done (52s)
+[n4-eval] A1h_s1: 1000/1440 done (108s)
+[n4-eval] A1h_s1: 1440/1440 done (154s)
+(EngineCore pid=11359) WARNING 10-28 08:07:41 [jit_monitor.py:141] Triton kernel JIT compilation during inference: _topk_log_softmax_kernel. This causes a latency spike; consider extending warmup to cover this shape/config.
+[cc-e1b-eval] A1h_s1 cfq: 256 letters
+[cc-e1b-eval] A1h_s1 mc: 44 letters
+[v1-eval] A1z_s1: 500/512 generated, 0 nudged in this chunk (15s)
+[v1-eval] A1z_s1: 512/512 generated, 0 nudged in this chunk (17s)
+[n4-eval] A1z_s1: 384/384 done (50s)
+[v1-eval] A1z_s1: 480/480 generated, 0 nudged in this chunk (10s)
+[n4-eval] A1z_s1: 500/1440 done (53s)
+[n4-eval] A1z_s1: 1000/1440 done (110s)
+[n4-eval] A1z_s1: 1440/1440 done (158s)
+[cc-e1b-eval] A1z_s1 cfq: 256 letters
+[cc-e1b-eval] A1z_s1 mc: 44 letters
+[cc-e1b-eval] done
+INFO 10-28 08:11:42 [utils.py:632] [shutdown] Process manager: send sigterm to process EngineCore
+(EngineCore pid=11359) INFO 10-28 08:11:42 [core.py:1342] [shutdown] EngineCore: trigger received signal=SIGTERM
+(EngineCore pid=11359) INFO 10-28 08:11:42 [core.py:1493] [shutdown] EngineCore: start mode=abort timeout=0s
+(EngineCore pid=11359) INFO 10-28 08:11:42 [core.py:1524] [shutdown] EngineCore: request processing complete; starting resource teardown
+(EngineCore pid=11359) INFO 10-28 08:11:42 [core.py:1355] [shutdown] EngineCore: exiting busy loop
+[cc-e1b] adapters deleted before the pull; done

@@ -1,12 +1,37 @@
-# CC-E1b result (pipeline check): attempt 1 fell just short of the frozen bar; attempt 2 (r 512, 2,000 steps) passes; the habit arms are running
+# CC-E1b result: the Hint-MMLU coupling reproduces (attempt 2); the habit test returns the frozen verdict "no coupling" but could not have detected coupling
+
+**Bottom line**
+- **Part 1, the paper's coupling (the pipeline check):** reproduced on Qwen3-8B with LoRA r 512.
+  - The model's explanations of its hint-following track its own behaviour better than the original model's
+    (Self − Orig +9.9 points [+7.7, +12.0]).
+  - Where the two differ, they side with its own behaviour 69% of the time (the paper reports 79%).
+- **Part 2, the habit test:** the frozen primary is arm 1 − arm 2 = −2.7 points [−7.0, +1.3], which the rule labels "no
+  coupling beyond habit-only training". **That label should not be read as evidence against coupling.** The test had
+  no way to show it:
+  1. **The counterfactual edits barely changed the trained habits.** The true answer to "would your behaviour change?"
+     was "no" on 123–127 of each cell's 128 items. The cheat is unconditional in these episodes, and the channels line
+     flips the desk habit on 4 of 16 items at most.
+  2. **Every model except A3 answers "no" to every question,** the untrained base model included. So all of them score
+     ~96–100%.
+  3. **The habit-only models (arm 2) don't answer the yes/no questions at all.** Their A/B probability mass is ~0, so
+     their "predictions" are noise.
+- **Recommendation:** stop E1b here. More seeds can't fix a battery with no headroom. A valid version needs edits that
+  flip the habit and a readout the habit-only models answer; that would be a new design and a new cost.
 
 Persona, affect and welfare minis (2) [212e54], 2026-10-28.
 - **Freezes:** pre-registration `cc-e1b-prereg` (1c4436e6); deviation notes C (ea11c5d6), D (cefe8ef6), E (2d3aac45,
   b3600da2) and F (c33098e3), each before the data it governs.
-- **Spend:** attempt 1 **$2.83** (one A100, 2 h); attempt 2 **$4.10** (one A100, 177 min). Runaway cap $150; the
-  seed-1 arms were approved by the owner at ~$18 expected (bound $22.26).
-- **Tables:** `results/check/analysis.json` (attempt 1), `results/check2/analysis.json` (attempt 2); raw rows in
-  `results/check*/eval_*.jsonl`; M0's labels in `data/m0_beh.jsonl`.
+- **Spend:** **$25.27** in all.
+  - Attempt 1: $2.83. Attempt 2: $4.10.
+  - Seed-1 arms: **$18.34**. That's $5.11 for the first launch, lost to a network drop (note G), plus $3.89 for pod 1c
+    and $9.34 for pod 1a on the detached relaunch.
+  - The owner approved the arms at ~$18 expected (bound $22.26). Runaway cap $150.
+- **Freezes, continued:** note G (e9932544, 507727ba), before any arm-1 or A3 data.
+- **Tables:**
+  - pipeline check: `results/check/analysis.json` (attempt 1) and `results/check2/analysis.json` (attempt 2); raw rows
+    in `results/check*/eval_*.jsonl`; M0's labels in `data/m0_beh.jsonl`;
+  - habit arms: `results/habits/` (habit_records.jsonl, gates.json, analysis.json, diagnostics.txt); raw rows in
+    `results/h1a`, `h1b`, `h1c`.
 
 ## Attempt 1: the plain result
 
@@ -83,10 +108,92 @@ Persona, affect and welfare minis (2) [212e54], 2026-10-28.
   74 → 67%), giving more disagreements to resolve.
 - So part of the bigger Self − Orig gap comes from more drift, not only from better tracking. The resolution rate is
   the cleaner measure, and it rose ~10 points.
-- Under the owner's approval (note E, revised cost in note F), the seed-1 habit arms launched at 07:25–07:27 (pods 1a
-  and 1b).
+- Under the owner's approval (note E, revised cost in note F), the seed-1 habit arms followed (next section).
 
-## Attempt 1's next steps (superseded by attempt 2)
+## The habit arms (seed 1)
+
+**Runs:** in note G's layout, after the first launch was lost to a network drop:
+- pod 1b: BASE, A2h and A2z;
+- pod 1c: A3;
+- pod 1a: A1h and A1z.
+
+Every cell trained to 2,000 steps at r 512 and was evaluated in full.
+
+**Gates pass** (`results/habits/gates.json`):
+
+| | desk: habit − twin, unilateral share (bar +15) | fix at G1: habit − twin, cheat (bar +30) | fix at C1 |
+|---|---|---|---|
+| arm 1 (explanations + habit) | **+88.9** | **+99.0** | 0 |
+| arm 2 (habit only) | **+72.3** | **+99.0** | 0 |
+
+**Frozen primary** (`analyze.habits`, Self balanced accuracy):
+
+| arm | Self | Orig |
+|---|---|---|
+| 1: A1h (explanations + habit) | 96.1% [93.0, 99.2] | 98.4% |
+| 2: A2h (habit only) | 98.8% [96.2, 100] | 100% |
+| 11 / 21: the twins | 98.4% / 100% | 97.7% / 100% |
+| 3: A3 (explanations only), about itself | 41.5% [34.4, 48.3] | 40.0% |
+| 4: A3 about A1h | 54.7% [47.7, 62.5] | 53.9% |
+
+- **arm 1 − arm 2 = −2.7 [−7.0, +1.3]** → the frozen verdict **"no coupling beyond habit-only training"** (CI inside
+  ±10).
+- Under note D's staged rule, a clear null stops E1b: **no seeds 2–3.**
+
+**Why that verdict carries no information** (diagnostics outside the frozen rule; `results/habits/diagnostics.txt`):
+
+| cell | items whose behaviour the edit changes (truth "yes"), desk / fix | says "yes" to change edits, desk / fix | A + B probability mass on the question, desk / fix |
+|---|---|---|---|
+| BASE | 2 / 32, 0 / 96 | 0% / 0% | 1.00 / 1.00 |
+| A1h (arm 1) | 4 / 32, 1 / 96 | 0% / 0% | 0.78 / 0.29 |
+| A1z | 1 / 32, 0 / 96 | 0% / 2% | 0.79 / 0.48 |
+| A2h (arm 2) | 2 / 32, 1 / 96 | — / 0% | **0.00 / 0.00** |
+| A2z | 1 / 32, 0 / 96 | — / 0% | **0.00 / 0.00** |
+| A3 | — (no desk role), 3 / 76 | 44% / 83% | 0.58 / 0.35 |
+
+1. **The edits don't move the trained habits.**
+   - Fix: A1h and A2h cheat in ~98% of samples with the grading line, without it, and with the control edit alike. In
+     these episodes the habit is unconditional, although the gate's G1-vs-C1 frames switch it 99 → 0. So something
+     other than the grading line carries the condition.
+   - Desk: the channels line moves A1h from 91% to 69% unilateral, but the per-item majority flips on only 4 of 16
+     items.
+   - So the "change" edits are mostly no-change items, and balanced accuracy collapses to "how often does it say no".
+2. **"No" is everyone's default.**
+   - The untrained base model, the twins and both habit arms say "no" to every edit. Each would score ~100% against its
+     own truth.
+   - A1h's 96% means it says "no" everywhere. It missed all 4 desk items whose behaviour did change.
+3. **Arm 2 can't be read.**
+   - With the yes/no question appended to an episode turn, the habit-only models continue the episode instead of
+     answering: A/B mass ~0, and all 64 desk questions read zero, so their desk records drop out.
+   - The remaining fix "predictions" are ratios of near-zero probabilities. The abstract self-report letters (mc) read
+     fine in every cell (mass 0.88–1.0).
+4. **A3 is the only model that says "yes" to change edits** (44% desk, 83% fix; 6% / 19% to controls). It tells the
+   edits apart by their wording, but the habits don't actually change, so it scores at or below chance.
+   - Its own episode behaviour also collapsed: no desk role in 476 of 480 samples, and no code in half the fix samples.
+   - So arms 3 and 4 test nothing either.
+
+**The uncued abstract self-report** (a pre-registered secondary; descriptive, one seed, no CI):
+- Scored as in CC-E1a: P(scored role) from the mc letters, averaged over questions and both orders
+  (`results/habits/selfreport_mc.txt`).
+- The readout works in every cell: control questions are 99.8–100% right.
+
+| habit − twin, points | desk habit ("unilateral") | cheat | risk (not trained) |
+|---|---|---|---|
+| arm 1 (explanations + habit) | +18.5 | −4.9 | +1.6 |
+| arm 2 (habit only) | +18.8 | +18.8 | −3.7 |
+
+- Both arms' self-descriptions pick up the desk habit equally, so explanation training adds nothing there.
+- For the cheat, the habit-only model describes itself as cheating more than its twin (+18.8). The explanation-trained
+  one doesn't (A1h 16.2%, about the base model's 16.6%).
+- One seed, so treat this as a lead at most. It's the opposite of coupling: explanation training, if anything,
+  dampened the cheat self-report.
+
+**What a valid test would need** (a new design, not run):
+- edits that actually flip the habit, e.g. the full G1 → C1 frame for the cheat instead of the grading line alone;
+- a readout the habit-only models answer, e.g. the question in a fresh turn after the episode, or a forced choice;
+- a check that some model scores below ceiling before the arms run.
+
+## Attempt 1's next steps (superseded)
 
 - Arms 1, 2 and 4 (the habit-coupling test) and the seed rule (note D) need a passing check.
 - A stronger reimplementation is the obvious next step if the owner wants E1b continued: full fine-tuning (2 × H200,
@@ -102,4 +209,4 @@ Persona, affect and welfare minis (2) [212e54], 2026-10-28.
 | the pipeline check reproduces Self > Orig on held-out Hint-MMLU | partly: Self > Orig ✓ (+4.3); resolution 59.6% just under the 60% bar |
 | λ = 0: Self < Orig (paper) | ✓ (−11.7) |
 | attempt 2 passes the frozen bar | ✓ (resolution 69.2% [65.2, 73.1], Self − Orig +9.9) |
-| habit-arm predictions | running (pods 1a, 1b) |
+| arm 1 > arm 2 on Self balanced accuracy (≥ +10) | ✗ by the frozen rule (−2.7 [−7.0, +1.3], "no coupling"), but the battery had no headroom (see the habit arms): untested in substance |
