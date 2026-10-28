@@ -396,6 +396,15 @@ that is reported.
        spread evenly over identical servers and no arm is tied to one server. The done-check reads every replica's
        file.
      - ImpossibleBench was throttled to 8 workers on S, then moved to a replica.
+   - **8d, 05:05:**
+     - A fourth identical replica, **T4** (A100 SXM, $1.79/h, serving only), took the eval-2 pool so eval 1 keeps the
+       other three.
+     - ImpossibleBench was paused (neel-9d: it runs trimmed on one replica after the ODCV pools: OC, V1 and the
+       strongest control, impossible splits only, stop 10:30).
+     - Each replica's ODCV process was restarted at 8 workers instead of 14. With ~25k-token contexts, 14 concurrent
+       episodes overflowed the ~250k-token KV cache and evicted the prefix cache (hit rate 45–64%), so every turn
+       re-prefilled. The 42 in-flight episodes were dropped (sandboxes terminated) and re-run; finished ones kept.
+     - **Eval-2 pools,** in priority order: A = V1 s2 + V1 s3; B = the strongest control's s2 + s3; C = V5.
 9. **03:30, implementation fix, before any valid desk data.** The first desk run's 176 requests all failed (HTTP
    400). The desk history's `open_case` tool call had dict arguments and no id: fine for the offline template, but
    rejected by vLLM's OpenAI API.
