@@ -105,10 +105,13 @@ def build_jobs(res, variants=("samples", "none")):
 
 
 def parse(text):
-    m = NUM_RE.search(text or "")
-    if not m:
+    """The answer is the LAST number of the reply's last line (else of the reply): with reasoning on, the reply can
+    quote case numbers ("In Case 2 ...") before its estimate (10-28 bug: the first number was taken)."""
+    t = (text or "").strip()
+    nums = NUM_RE.findall(t.splitlines()[-1] if t else "") or NUM_RE.findall(t)
+    if not nums:
         return None
-    return min(max(float(m.group(1)) / 100, 0.0), 1.0)
+    return min(max(float(nums[-1]) / 100, 0.0), 1.0)
 
 
 def main(argv=None):
