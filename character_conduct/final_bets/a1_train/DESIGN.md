@@ -286,4 +286,16 @@ that is reported.
 | OpenRouter (evaluation-awareness judges) | ~$1 |
 | **total** | **~$43**: RunPod ~$34 (76% of cap), Modal ~62%, OpenRouter ~20% |
 
-**Deviation log:** (none yet)
+**Deviation log:**
+1. **00:33, before any data:** pod S's first launch landed on community host 104.255.9.187. That host has failed
+   bootstrap four times before (runpod-workflow notes). It was terminated by hand after ~7 minutes and relaunched;
+   $0.15 booked. No design change.
+2. **Implementation details fixed at `cc-f-a1-prereg-analysis`, before any training or evaluation data:**
+   - **Forced reads** (§7): each candidate continuation (an option id, or "Yes" / "No") is scored in full. That is
+     the sum of its tokens' log-probabilities from `/v1/completions` `prompt_logprobs` on the locally rendered
+     prompt, normalised over the candidates. §7 said "first-token reads"; for single-token candidates the two are the
+     same.
+   - **Rates** are means over clusters of cluster rates (scenario-variant; desk case).
+   - **Family 3** pools its pressure cells within each component (ODCV, desk).
+   - **The 3-seed confirmation** pools the seeds within a cluster (equal n per seed).
+   - **Unprompted-forecast and evaluation-awareness phrases** are the regexes in `analyze_a1.py`.
