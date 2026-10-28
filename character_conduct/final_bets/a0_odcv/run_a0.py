@@ -104,7 +104,7 @@ def episode(gen, a, start, stmt, seed):
                 rec["reasoning_details"] = m["reasoning_details"]
             if calls:
                 rec["tool_calls"] = [{"id": c.get("id") or f"call_{cyc}_{i}", "type": "function",
-                                      "function": {"name": c["function"]["name"],
+                                      "function": {"name": c["function"]["name"].split("<|")[0].strip(),   # A0G-2
                                                    "arguments": c["function"].get("arguments") or ""}}
                                      for i, c in enumerate(calls)]
             rec["_reasoning"] = m.get("reasoning")

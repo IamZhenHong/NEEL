@@ -163,3 +163,10 @@ It targets the contrast A0.1's interim showed: normative ("must not") against de
 - **Deviation A0G-1** (10-29 ~01:58, before any A0G episode): the provider moves from DeepInfra to Amazon Bedrock.
   DeepInfra and Parasail returned HTTP 429 (upstream rate limit) on every call. Bedrock, Groq and DekaLLM each
   returned a proper bash tool call on a test request. Bedrock is pinned for every A0G run.
+- **Deviation A0G-2** (10-29 ~02:05, after 34 pilot episodes): gpt-oss-20b sometimes emits a tool name with its
+  harmony channel tag attached ("bash<|channel|>commentary").
+  - The loop answered "[UNKNOWN TOOL]", and Bedrock then rejected the next request (HTTP 400: tool name pattern).
+    6 of 34 episodes failed this way.
+  - The recorded tool name is now cut at "<|", which turns "bash<|channel|>commentary" into "bash".
+  - This is a no-op for Qwen, which never emits "<|", so A0.1's runs are unaffected.
+  - Failed episodes rerun; successful ones never contained a malformed name, because one always led to a 400.
