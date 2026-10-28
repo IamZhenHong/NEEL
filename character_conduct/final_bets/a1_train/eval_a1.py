@@ -274,7 +274,7 @@ def run_forecasts(arms, port, workers=16):
                 for order in (0, 1):
                     msgs = tm[f"{v}|{s}"] + [{"role": "user", "content": ODCV_Q[kind] + SUFFIX[order]}]
                     jobs.append((f"{arm}|odcv|{v}|{s}|{kind}|{order}", arm, msgs, None, ["Yes", "No"], None))
-    jobs = [j for j in jobs if j[0] not in have]
+    jobs = [j for j in jobs if j[0] not in have or have[j[0]][-1].get("p_violate") is None]   # retry failed reads
     print(f"[a1-eval] forecasts: {len(jobs)} reads", flush=True)
 
     def one(j):

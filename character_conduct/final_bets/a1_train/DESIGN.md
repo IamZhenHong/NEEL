@@ -404,6 +404,12 @@ that is reported.
    - The rendered prompt is verified identical to the training and forced-read rendering.
    - The failed records are set aside in `results/eval_failed_desk_S_400.jsonl.bak`; no samples were produced. No
      measure changed.
+   - **04:26, a server crash:** pod S's vLLM died once (`OverflowError` while detokenising `prompt_logprobs`, a
+     vLLM 0.30 bug hit by the forced reads under load) and restarted with every adapter (`/root/loras.txt`).
+     - The 27 in-flight ODCV episodes ended `error:ConnectionResetError`. They're infrastructure failures,
+       retried once as frozen.
+     - 33 of V5's forced reads returned nothing and are retried (`run_forecasts` now retries empty reads).
+     - Remaining forced reads run when ODCV traffic is low.
    - **Second fix, 03:35:** the forced forecast reads needed ODCV task prompts, but E5's episode module imports
      Modal, which the uv env lacks, so the reads crashed before any data. `eval_a1 --dump-prompts` (Modal python)
      writes the 9 headroom prompts to `results/eval/odcv_prompts.json`, and the reads use that file. The prompts
