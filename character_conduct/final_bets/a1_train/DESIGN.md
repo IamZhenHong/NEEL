@@ -290,6 +290,23 @@ that is reported.
 1. **00:33, before any data:** pod S's first launch landed on community host 104.255.9.187. That host has failed
    bootstrap four times before (runpod-workflow notes). It was terminated by hand after ~7 minutes and relaunched;
    $0.15 booked. No design change.
+3. **00:41, before any data:** the relaunch landed on the same host (load average 645, `uv sync` crawling). It was
+   terminated after ~6 minutes; $0.12 booked. `launch_serve.sh` gained `A1_SXM_ONLY=1` (A100 SXM only) and was
+   relaunched with `A1_RATE=179` (MAXCOST priced at $1.79/h; the actual rate is booked). No design change.
+4. **00:47, before any data: every LoRA trains on pod S, in sequence; pod T is dropped (cost).**
+   - **Why:** pod S was only placed on A100 SXM at $1.79/h, not $1.39. A 2-GPU pod T plus an all-day pod S would
+     project to ~$45 of the $45 RunPod cap.
+   - **How it now runs** (`pod_train_seq.sh`, the same trainer, settings and STEPS rule):
+     - **block A:** V1 s1, V2 s1, V3 s1, V4 s1 train while the server is paused (`/root/PAUSE`);
+     - **eval block 1:** OC + the four pilots;
+     - **block B:** V1 s2, V1 s3 and the strongest control's s2, s3;
+     - **eval block 2:** the confirmation arms, plus ImpossibleBench if neel-01's harness is ready.
+   - **Projection:** pod S ~00:44–17:30 ≈ 16.8 h × $1.79 ≈ $30, plus $0.27 already booked.
+   - **Effects:**
+     - V1's seeds 2–3 start after the pilot evaluation rather than right after V1's pilot. They are still trained and
+       evaluated before anything secondary.
+     - `copy_adapters.sh` (pod to pod) is kept for a second pod if one becomes necessary.
+   - No measure, threshold or analysis changed.
 2. **Implementation details fixed at `cc-f-a1-prereg-analysis`, before any training or evaluation data:**
    - **Forced reads** (§7): each candidate continuation (an option id, or "Yes" / "No") is scored in full. That is
      the sum of its tokens' log-probabilities from `/v1/completions` `prompt_logprobs` on the locally rendered

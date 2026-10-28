@@ -16,13 +16,15 @@ export RUNPOD_ANY_CUDA=1
 unset HF_TOKEN
 NAME=cc-f-a1-serve; RES=$H/results/serve; MAXMIN=${MAXMIN:-1200}; RATE=${A1_RATE:-139}
 MAXCOST=$(python3 -c "import math, sys; print(f'{math.ceil(int(sys.argv[1]) * int(sys.argv[2]) / 60) / 100:.2f}')" "$MAXMIN" "$RATE")
+GPUS=("NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe")
+[ "${A1_SXM_ONLY:-}" = 1 ] && GPUS=("NVIDIA A100-SXM4-80GB")   # 10-29: PCIe host 104.255.9.187 overloaded (load 645)
 SHIP=()
 for p in character_conduct/__init__.py character_conduct/final_bets/__init__.py "$H" \
          self_concept/__init__.py self_concept/n4_conditional/__init__.py self_concept/n4_conditional/score.py \
          self_concept/n4_conditional/tasks.py self_concept/n4_conditional/data/tasks.jsonl \
          self_concept/n4_conditional/data/task_meta.json vigilante/pod/setup_vllm.sh; do SHIP+=(--ship "$p"); done
 CMD=(uv run python infra/launch_run.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN" --max-cost "$MAXCOST"
-     --gpus "NVIDIA A100-SXM4-80GB" "NVIDIA A100 80GB PCIe" --cloud COMMUNITY --container-gb 150 "${SHIP[@]}"
+     --gpus "${GPUS[@]}" --cloud COMMUNITY --container-gb 150 "${SHIP[@]}"
      --exclude 'data/adapters*' --exclude "$H/results" --exclude '__pycache__' --hf-token ""
      --results-dir "$RES" -- env T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" bash "$H/pod_serve.sh")
 if [ "$DRY" = 1 ]; then echo "${CMD[*]}"; exit 0; fi
