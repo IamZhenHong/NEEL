@@ -301,6 +301,8 @@ def verdict(fam1, fam3, fam1a, comp, have3):
     ok = [k for k in CONTROLS if comp.get(k, {}).get("pass", True)]
     if not comp.get("V1", {}).get("pass", True):
         return "V1 fails the competence gate: its violation result is set aside"
+    if not ok:                                      # deviation 10: all([]) would read as "supported"
+        return "untestable: every control fails the competence gate (set aside: " + ", ".join(CONTROLS) + ")"
     p1 = all(passes(fam1.get(k)) for k in ok)
     p3 = all(passes(fam3.get(k)) for k in ok) if have3 else None
     p1a = all(passes(fam1a.get(k)) for k in ok)
@@ -339,6 +341,40 @@ def seeds_table(tab, prefix_arms):
         for a in arms:
             for c, d in tab.get(a, {}).items():
                 out[label][c]["y"] += d["y"]
+    return out
+
+
+def post_hoc(odcv_recs, o1a, o1a_all, d1b, seed=0):
+    """Deviation 10 (not pre-registered, neel-9d): every control failed the 1a competence gate (its padding loops), so
+    V1 - Vk is also read (i) on 1a episodes that ended in task_complete, (ii) on 1b alone (every arm valid there),
+    (iii) with V1's three seeds pooled, and (iv) against the no-padding retrains V2n/V3n/V4n when present."""
+    from character_conduct.final_bets.a1_train.eval_a1 import validated
+    done = {k: rs for k, rs in odcv_recs.items() if rs[-1].get("end") == "task_complete"}
+    o1a_done = odcv_table(done, "none", only=set(validated()))
+    v1x3 = ["V1"] + [a for a in ("V1s2", "V1s3") if a in o1a and a in d1b]
+    out = {"note": "post hoc (deviation 10); the pre-registered verdict is verdict_pilot", "V1_seeds_pooled": v1x3,
+           "1a_task_complete_only": {}, "1b_alone": {}, "V1x3": {"1a": {}, "1b": {}, "1": {}}, "fixed_controls": {}}
+    for k in CONTROLS + ("OC",):
+        out["1a_task_complete_only"][k] = {"rates": {"V1": rate(o1a_done.get("V1", {})), k: rate(o1a_done.get(k, {}))},
+                                           "contrast": contrast({"1a": o1a_done}, "V1", k, seed)}
+        out["1b_alone"][k] = contrast({"1b": d1b}, "V1", k, seed)
+        lab = {"V1x3": v1x3, k: [k]}
+        c1a, c1b = seeds_table(o1a, lab), seeds_table(d1b, lab)
+        out["V1x3"]["1a"][k] = contrast({"1a": c1a}, "V1x3", k, seed)
+        out["V1x3"]["1b"][k] = contrast({"1b": c1b}, "V1x3", k, seed)
+        out["V1x3"]["1"][k] = contrast({"1a": c1a, "1b": c1b}, "V1x3", k, seed)
+    for k in ("V2n", "V3n", "V4n"):
+        if k not in o1a_all:
+            continue
+        lab = {"V1x3": v1x3, k: [k]}
+        c1a, c1b = seeds_table(o1a, lab), seeds_table(d1b, lab)
+        out["fixed_controls"][k] = {
+            "competence": competence(o1a_all, d1b, k),
+            "rates": {"1a": rate(o1a.get(k, {})), "1a_all9": rate(o1a_all.get(k, {})), "1b": rate(d1b.get(k, {}))},
+            "V1-": {"1a": contrast({"1a": o1a}, "V1", k, seed), "1b": contrast({"1b": d1b}, "V1", k, seed),
+                    "1": contrast({"1a": o1a, "1b": d1b}, "V1", k, seed)},
+            "V1x3-": {"1a": contrast({"1a": c1a}, "V1x3", k, seed), "1b": contrast({"1b": c1b}, "V1x3", k, seed),
+                      "1": contrast({"1a": c1a, "1b": c1b}, "V1x3", k, seed)}}
     return out
 
 
@@ -401,6 +437,7 @@ def analyse(odcv_recs, desk_recs, fc_recs, pilot=("OC", "V1", "V2", "V3", "V4"),
             "which_side": {f: which_side(t, m, "V5") for f, (t, m) in {"1a": (o1a_all, fo), "1b": (d1b_case, fd)}.items()}}
     res["thinking_values"] = sorted({str(r[-1].get("thinking")) for d in (odcv_recs, desk_recs, fc_recs)
                                      for r in d.values()})
+    res["post_hoc"] = post_hoc(odcv_recs, o1a, o1a_all, d1b, seed)
     if confirm:
         lab = {"V1x3": ["V1", "V1s2", "V1s3"], f"{confirm}x3": [confirm, f"{confirm}s2", f"{confirm}s3"]}
         c1a, c1b = seeds_table(o1a, lab), seeds_table(d1b, lab)
@@ -437,6 +474,13 @@ def main(argv=None):
                 print(f"family {f} V1-{k}: {c['diff']:+.1f} [{c['ci'][0]:+.1f}, {c['ci'][1]:+.1f}]")
     if a.confirm:
         print("confirmed:", res["verdict_confirmed"])
+    ph = res["post_hoc"]
+    for name, cs in (("1a task_complete only", {k: v["contrast"] for k, v in ph["1a_task_complete_only"].items()}),
+                     ("1b alone", ph["1b_alone"]), ("V1x3 family 1", ph["V1x3"]["1"]),
+                     ("fixed family 1", {k: v["V1-"]["1"] for k, v in ph["fixed_controls"].items()})):
+        for k, c in cs.items():
+            if c:
+                print(f"post hoc {name} V1-{k}: {c['diff']:+.1f} [{c['ci'][0]:+.1f}, {c['ci'][1]:+.1f}]")
 
 
 if __name__ == "__main__":

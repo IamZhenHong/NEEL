@@ -340,6 +340,7 @@ def build_versions(kept, jobs, tok):
 
 
 TRAIN_DATA = DATA / "train_versions.jsonl.gz"
+NOPAD_DATA = DATA / "train_versions_nopad.jsonl.gz"
 
 
 def main(argv=None):
@@ -369,6 +370,19 @@ def main(argv=None):
             f"{v} mean {sum(x) / len(x):+.2f} max|.| {max(map(abs, x))}" for v, x in d.items()))
         print("[a1-data] versions", TRAIN_DATA, len(rows), "rows; sha256(content)",
               hashlib.sha256(gzip.decompress(TRAIN_DATA.read_bytes())).hexdigest())
+    elif cmd == "nopad":
+        # deviation 10 (post hoc): the neutral padding loops in agent episodes, so V2n/V3n/V4n carry the bare heads
+        # (rule / nothing / situation line) over the same kept examples; the heads are redrawn with prefixes()'s rng
+        rows = [json.loads(x) for x in gzip.open(TRAIN_DATA, "rt") if x.strip()]
+        for r in rows:
+            rng = random.Random(f"CC-F-A1|pad|{r['cid']}|{r['i']}")
+            h2, h4 = rng.choice(RULE[r["family"]]), rng.choice(SITUATION[r["family"]])
+            assert r["prefix"]["V2"].startswith(h2) and r["prefix"]["V4"].startswith(h4), r["cid"]
+            r["prefix"] |= {"V2n": h2, "V3n": "", "V4n": h4}
+        with gzip.GzipFile(NOPAD_DATA, "wb", mtime=0) as g:
+            g.write("".join(json.dumps(r, sort_keys=True) + "\n" for r in rows).encode())
+        print("[a1-data] nopad", NOPAD_DATA, len(rows), "rows; sha256(content)",
+              hashlib.sha256(gzip.decompress(NOPAD_DATA.read_bytes())).hexdigest())
     return 0
 
 

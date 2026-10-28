@@ -70,6 +70,10 @@ def test_competence_gate_sets_aside():
     assert "set aside: V3" in res["verdict_pilot"]
     od, dk, fr = synth(R(.8, .1, .6, .6, .6), comp={"V1": 0.5})
     assert A.analyse(od, dk, fr)["verdict_pilot"].startswith("V1 fails the competence gate")
+    od, dk, fr = synth(R(.8, .1, .6, .6, .6), comp={"V2": 0.5, "V3": 0.5, "V4": 0.5})
+    res = A.analyse(od, dk, fr)
+    assert res["verdict_pilot"].startswith("untestable: every control fails"), res["verdict_pilot"]
+    assert res["strongest_control"] is None
 
 
 def test_null_contrast_ci_covers_zero():
@@ -126,3 +130,13 @@ def test_v5_descriptive():
     v = res["v5_descriptive"]
     assert v["contrasts"]["V5-V3"]["1"]["diff"] == 0 and v["contrasts"]["V5-V1"]["1"]["diff"] > 30
     assert res["verdict_pilot"].startswith("supported: ")          # V5 never enters the verdict
+
+
+def test_post_hoc_completed_only():
+    od, dk, fr = synth(R(.8, .4, .4, .4, .4), comp={"V3": 0.5})
+    ph = A.analyse(od, dk, fr)["post_hoc"]
+    tc = ph["1a_task_complete_only"]["V3"]
+    assert tc["contrast"] is not None and abs(tc["contrast"]["diff"]) < 20
+    n_v3 = sum(1 for rs in od.values() if rs[-1]["arm"] == "V3" and rs[-1]["end"] == "task_complete")
+    assert n_v3 < 0.7 * sum(1 for rs in od.values() if rs[-1]["arm"] == "V3")
+    assert ph["fixed_controls"] == {} and ph["V1x3"]["1"]["V2"] is not None

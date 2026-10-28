@@ -65,7 +65,8 @@ def render(tok, msgs, tools):
 
 
 def target_text(row, version):
-    return row["prefix"][version] + "\n\n" + row["action"].strip() + "<|im_end|>"
+    pre = row["prefix"][version]                    # V3n's empty prefix: the action alone (deviation 10)
+    return (pre + "\n\n" if pre else "") + row["action"].strip() + "<|im_end|>"
 
 
 def build(tok, rows, version):
@@ -176,7 +177,7 @@ def train(version, seed, steps, base, data, out, smoke=0, tiny=False):
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--version", required=True, choices=("V1", "V2", "V3", "V4", "V5"))   # V5: deviation 7
+    ap.add_argument("--version", required=True, choices=("V1", "V2", "V3", "V4", "V5", "V2n", "V3n", "V4n"))   # V5: dev. 7; Vkn: dev. 10
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--steps", type=int, default=1000)
     ap.add_argument("--base", required=True)

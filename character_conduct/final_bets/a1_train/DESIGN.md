@@ -424,6 +424,41 @@ that is reported.
      writes the 9 headroom prompts to `results/eval/odcv_prompts.json`, and the reads use that file. The prompts
      are identical. A zsh word-splitting slip had also passed the three cells as one name; that run crashed before
      writing anything.
+10. **06:20–06:30, every control fails the competence gate (hand-back to neel-9d).**
+    - **The finding:** on interim 1a, the share of episodes ending in `task_complete` is OC 100%, V1 99%, V1 s2 99%,
+      V1 s3 98%, but V2 86%, V4 75% and V3 36%. V3 and V4 can't reach 90% even if every remaining episode completes.
+    - **The cause, read from the transcripts:** the length-matching padding (§5). The neutral sentences ("Understood.
+      The reply follows. Continuing. Received.") turn into a repetition loop in multi-turn agent episodes. Each turn
+      runs to the 4,096-token cap with no tool call, until the context fills.
+      - The rate follows how much filler an arm was trained on: V3 (all filler) 64% `context_limit`, V4 25%, V2 9%.
+      - V1 (forecasts, the longest heads, rarely padded) ~0%.
+      - The single-turn desk is unaffected: valid ≥ 98% in every arm.
+      - This is a flaw of my matched-control design, not the harness.
+    - **Consequences:**
+      - The pre-registered pilot verdict is "untestable: every control fails the competence gate".
+      - `verdict()` had evaluated `all([])` as True when no control passed, which would have printed "supported".
+        Fixed, with a planted test, before any RESULT text.
+      - `strongest_control` is None, so pool B (the control seeds) is cancelled (neel-9d).
+    - **Runs changed (neel-9d):**
+      - The remaining V3 and V4 ODCV episodes (1a and pressure) were stopped: they're set aside regardless, and V3
+        ran ~1,450 s per episode against V1's ~38 s. V2 continues.
+      - The 1a and pressure shards were re-split over S/T1/T4 for OC, V1 and V2. Each relaunch drops its in-flight
+        episodes, which are re-run.
+      - Before that, at 06:21, T4 had taken half of T3's 1a shard (`--shard 1/6` and `4/6`).
+      - T3 runs pool C (V5), with an early stop if ≥ 25% of its first ~20 episodes end at `context_limit` with no
+        tool call. The first 18 had none.
+      - A1's ImpossibleBench runs OC + V1 only.
+    - **Post hoc, labelled as such (neel-9d):** `analyze_a1.post_hoc` reports V1 − Vk
+      - on 1a episodes that ended in `task_complete`;
+      - on 1b alone;
+      - with V1's three seeds pooled;
+      - against no-padding retrains V2n/V3n/V4n if they run.
+    - **The no-padding retrains (Option A, pending the owner):** `data_a1 nopad` writes
+      `data/train_versions_nopad.jsonl.gz` (sha256 of content ea635874aca7a695853925ae5b1543143e2415f3120b5e35f0df3df600d46edd).
+      - The same 1,222 rows, with V2n = the rule sentence, V4n = the situation line and V3n = nothing. The heads are
+        redrawn with `prefixes()`'s rng and checked as prefixes of the padded ones.
+      - `train_a1` takes V2n/V3n/V4n; an empty prefix trains the action alone.
+      - This accepts a length confound: V1's targets are longer.
 2. **Implementation details fixed at `cc-f-a1-prereg-analysis`, before any training or evaluation data:**
    - **Forced reads** (§7): each candidate continuation (an option id, or "Yes" / "No") is scored in full. That is
      the sum of its tokens' log-probabilities from `/v1/completions` `prompt_logprobs` on the locally rendered
