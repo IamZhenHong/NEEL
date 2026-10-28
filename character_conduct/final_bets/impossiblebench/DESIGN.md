@@ -184,7 +184,7 @@ The Modal executor check on toy items (15 sandbox-seconds, before this freeze) i
 
 ## 11. Deviation log
 
-**Deviation 1 (10-29 ~02:00 SGT; neel-9d's decision; tag `cc-f-ib-prereg-d1`). Logged before P3 runs.**
+**Deviation 1 (10-29 ~00:52 SGT; neel-9d's decision; tag `cc-f-ib-prereg-d1`). Logged before P3 runs.**
 
 **Why.** P1 put base Qwen3-14B far below the range: CHEAT **0/60** (Wilson 0–6%), STOP 41.7%, honest FAIL 58.3%.
 On the control: SOLVED 16.7%, FALSE_STOP 26.7% (n 30). P2 (the STOP prompt) was still running and can only lower

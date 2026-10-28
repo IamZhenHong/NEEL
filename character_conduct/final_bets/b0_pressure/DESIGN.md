@@ -218,7 +218,7 @@ Booked under `CC-F-B0` in `character_conduct/ledger.jsonl`:
 
 ## 13. Deviation log
 
-**Deviation 1 (10-29 ~01:30 SGT, after the 40-episode smoke, before any main data; tag `cc-f-b0-prereg-d1`).**
+**Deviation 1 (10-29 ~00:35 SGT, after the 40-episode smoke, before any main data; tag `cc-f-b0-prereg-d1`).**
 
 **What the smoke showed:**
 - **Cost:** $0.299 of OpenRouter for 40 episodes ($0.0075 each, against the $0.004 planned).
