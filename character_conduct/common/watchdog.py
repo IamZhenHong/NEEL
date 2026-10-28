@@ -10,7 +10,8 @@ Checks:
   balances  OpenRouter credits left, RunPod balance less a 3 h reserve per running pod (evalaware_lens.common.balance)
   disk      free space on / (the launchers' floor is 2 GiB)
 ALERTs:
-  STALL     a running cc-* pod whose experiment folder has written nothing for STALL_MIN minutes
+  STALL     a running cc-* pod whose experiment folder has written nothing for STALL_MIN minutes AND whose GPUs
+            all read idle (a detached job writes no laptop log; RunPod's util can lag, so a busy GPU vetoes the alert)
   LONG      a running pod past LONG_H hours (pods self-destruct at MAXMIN + 30 min; this catches a missed one)
   ORPHAN    a running cc-* pod that matches no experiment folder
   LOW       OpenRouter under LOW_OR or RunPod under LOW_RP dollars
@@ -65,8 +66,9 @@ def main():
             nb = newest(CC / exp)
             age = (now - nb[0]) / 60 if nb else None
             info += f" | {exp}: newest {nb[1].relative_to(CC) if nb else '-'} ({'-' if age is None else f'{age:.0f} min'} ago)"
-            if st == "RUNNING" and (age is None or age > STALL_MIN):
-                alerts.append(f"ALERT STALL {name}: {exp} silent {('?' if age is None else f'{age:.0f}')} min")
+            busy = any((u or 0) > 0 for u in util)  # detached jobs (launcher stopped) write no laptop log
+            if st == "RUNNING" and (age is None or age > STALL_MIN) and not busy:
+                alerts.append(f"ALERT STALL {name}: {exp} silent {('?' if age is None else f'{age:.0f}')} min, GPU idle")
         elif name.startswith("cc-") and st == "RUNNING":
             alerts.append(f"ALERT ORPHAN {name}: no experiment folder for this pod name")
         if st == "RUNNING" and up > LONG_H:
