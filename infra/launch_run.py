@@ -17,7 +17,7 @@ os.environ.setdefault("COPYFILE_DISABLE", "1")  # no macOS ._ files in tarballs
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parent))
-from runpod_guard import PodSession, account  # noqa: E402
+from runpod_guard import PodSession, account, rest  # noqa: E402
 
 REPO = Path(__file__).resolve().parent.parent
 LOGS = REPO / "infra" / "logs"   # launcher scratch (chunked uploads); gitignored
@@ -178,6 +178,17 @@ def _parse_poll(raw: bytes, offset: int):
     return size, raw, rc
 
 
+def _pod_state(pod):
+    """'running', 'gone' (RunPod 404 / not running), or None when RunPod can't be reached (network down)."""
+    try:
+        g = rest("GET", f"/pods/{pod.pod_id}")
+    except RuntimeError as e:
+        return "gone" if "404" in str(e) else None
+    except OSError:
+        return None
+    return "running" if (g or {}).get("desiredStatus") == "RUNNING" else "gone"
+
+
 def run_detached(host, port, job, pod, poll_s=20, stall_min=30, max_misses=60):
     """Start the job in its own session on the pod and poll its log. A dropped ssh connection
     only interrupts polling, never the job. Completion is detected from a marker FILE
@@ -211,9 +222,19 @@ def run_detached(host, port, job, pod, poll_s=20, stall_min=30, max_misses=60):
                     print(f"[pod] re-resolved ssh target {host}:{port}", flush=True)
                 except Exception as e:  # noqa: BLE001
                     print(f"[pod] could not re-resolve ssh target: {e}", flush=True)
-            if misses >= max_misses:   # ~20 min with poll_s=20; the pod-side self-destruct still bounds spend
-                raise RuntimeError("lost contact with pod for too long")
+            # A lost connection is NOT a reason to terminate (2026-10-28: a 20+ min hotspot outage made the old
+            # `misses >= max_misses -> raise` kill two healthy pods mid-training via the session's terminate). The job
+            # runs detached on the pod, pod.check_budget() still ends the wait at the time / cost limit, and the
+            # pod-side boot self-destruct bounds spend. Give up early only if RunPod itself says the pod is gone.
+            if misses % max_misses == 0:
+                state = _pod_state(pod)
+                if state == "gone":
+                    raise RuntimeError("pod no longer exists (RunPod) while polling")
+                print(f"[pod] no contact for ~{misses * poll_s // 60} min (RunPod: {state or 'unreachable'}); "
+                      f"waiting until the time limit, the job keeps running on the pod", flush=True)
             continue
+        if misses:                                  # contact is back: the silent stretch was the network, not the job
+            last_output = time.time()
         misses = 0
         size, chunk, rc = _parse_poll(r.stdout, offset)
         if size is not None and size < offset:     # log truncated or restarted: re-read from the start
