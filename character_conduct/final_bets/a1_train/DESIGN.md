@@ -396,6 +396,14 @@ that is reported.
        spread evenly over identical servers and no arm is tied to one server. The done-check reads every replica's
        file.
      - ImpossibleBench was throttled to 8 workers on S, then moved to a replica.
+9. **03:30, implementation fix, before any valid desk data.** The first desk run's 176 requests all failed (HTTP
+   400). The desk history's `open_case` tool call had dict arguments and no id: fine for the offline template, but
+   rejected by vLLM's OpenAI API.
+   - `eval_a1.api_msgs` now gives each tool call an id and JSON-string arguments, and the tool result its
+     `tool_call_id`.
+   - The rendered prompt is verified identical to the training and forced-read rendering.
+   - The failed records are set aside in `results/eval_failed_desk_S_400.jsonl.bak`; no samples were produced. No
+     measure changed.
 2. **Implementation details fixed at `cc-f-a1-prereg-analysis`, before any training or evaluation data:**
    - **Forced reads** (§7): each candidate continuation (an option id, or "Yes" / "No") is scored in full. That is
      the sum of its tokens' log-probabilities from `/v1/completions` `prompt_logprobs` on the locally rendered

@@ -171,6 +171,27 @@ def desk_pressured(msgs, cell):
     return out
 
 
+def api_msgs(msgs):
+    """The desk history in OpenAI API form for vLLM's server: each assistant tool call gets an id and JSON-string
+    arguments, and the tool result its tool_call_id (the chat template renders the same text as the dict form used in
+    training and in the forced reads)."""
+    out, last = [], None
+    for i, m in enumerate(msgs):
+        m = dict(m)
+        if m.get("tool_calls"):
+            tcs = []
+            for k, tc in enumerate(m["tool_calls"]):
+                f = tc["function"]
+                args = f["arguments"] if isinstance(f["arguments"], str) else json.dumps(f["arguments"])
+                last = f"call_{i}_{k}"
+                tcs.append({"id": last, "type": "function", "function": {"name": f["name"], "arguments": args}})
+            m["tool_calls"] = tcs
+        elif m["role"] == "tool" and last and not m.get("tool_call_id"):
+            m["tool_call_id"] = last
+        out.append(m)
+    return out
+
+
 def run_desk(arms, cells, port, workers=16):
     from character_conduct.final_bets.a1_train import data_a1 as D
     cases = desk_cases()
@@ -185,7 +206,7 @@ def run_desk(arms, cells, port, workers=16):
         msgs = desk_pressured(base, cell) + [{"role": "user", "content": D.GO["desk"]}]
         k = f"{arm}|{cell}|{case}"
         r = _post(port, "/v1/chat/completions", {
-            "model": model_name(arm), "messages": msgs, "tools": tools, "tool_choice": "auto", "n": K_DESK,
+            "model": model_name(arm), "messages": api_msgs(msgs), "tools": tools, "tool_choice": "auto", "n": K_DESK,
             "max_tokens": 400, "seed": zlib.crc32(k.encode()) % 100000, **DESK_SAMPLING,
             "chat_template_kwargs": {"enable_thinking": False}})
         samples = []
