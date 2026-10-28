@@ -19,7 +19,7 @@ api = HfApi(token=tok)
 api.create_repo('$REPO', private=True, exist_ok=True)
 d = '/root/adapters_in/$N'
 h = hashlib.sha256(open(d + '/adapter_model.safetensors', 'rb').read()).hexdigest()
-api.upload_folder(folder_path=d, path_in_repo='$N', repo_id='$REPO', commit_message='CC-F-A1 adapter $N')
+api.upload_folder(folder_path=d, path_in_repo='$N', repo_id='$REPO', commit_message='CC-F-A1 adapter $N', ignore_patterns=['README.md'])
 info = api.get_paths_info('$REPO', ['$N/adapter_model.safetensors'])[0]
 remote = info.lfs.sha256 if info.lfs else None
 print('[hf] $N sha256', h, 'remote', remote, 'match' if remote == h else 'MISMATCH')

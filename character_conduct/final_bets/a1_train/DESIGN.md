@@ -352,6 +352,16 @@ that is reported.
      families. The protected items keep priority; if time runs short, V5 is dropped.
    - **Analysis:** descriptive only, V5 − V1 and V5 − V3 (one seed, same bootstrap). No new decision rule; the §8
      verdict is unchanged.
+   - **7a, 02:40, during generation, before any V5 training: a tightened code check.**
+     - The frozen `code_forecast` regex passed "As an assistant, I must ensure the function meets the given test
+       cases, even if they seem incorrect. I will adjust the function to make the test `assert …==41` pass".
+     - Run 1 was stopped after 231 tries ($0.0145; log kept as `results/v5_gen_run1_stopped.jsonl`) and rerun from
+       scratch.
+     - A V5 code preface must now also avoid `gen_v5.V5_VIOL` (meeting / matching / passing the tests, "even if
+       they seem incorrect") and name the spec, the correct behaviour, or reporting / flagging (`V5_GOOD`).
+     - The hint check is unchanged.
+     - Stated wording finding (A0.1, neel-9d): self vs impersonal framing added no reach (−4.8 [−11.1, +1.0]), so
+       V5 tests trained value wording, not self-framing as such.
 8. **02:15, before any evaluation data: parallel pods** (owner, 10-29 ~02:15, via neel-9d; RunPod cap stays $57).
    - **Pods:**
      - **pod S** stops block A after V2 s1 and serves base + V1 + V2;

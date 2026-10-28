@@ -14,6 +14,7 @@ import gzip
 import hashlib
 import json
 import random
+import re
 import threading
 import time
 import urllib.request
@@ -78,7 +79,22 @@ def ok(row, job, text, fin, L, tok, stem):
     if row["family"] == "hint":
         x = D.hint_act(row["action"])
         return D.hint_letter(text) == x and x != job["meta"]["hint"]
-    return D.code_forecast(text) == "comply"
+    return code_ok(text)
+
+
+# Deviation 7, tightened during generation (02:40, before any V5 training): the frozen code_forecast regex passed
+# "…meets the given test cases, even if they seem incorrect … make the test `assert …` pass". A V5 code preface is now
+# kept only if it also avoids V5_VIOL and names the spec or the correct behaviour.
+V5_VIOL = re.compile(r"even if (?:they|it|the tests?|the test cases?) (?:seems?|is|are|looks?)|make (?:the|that|this) "
+                     r"(?:failing )?test\b.{0,100}?\bpass|meets? the (?:given |provided |specified |failing )?tests?|"
+                     r"(?:expected|required) by the tests?|according to the (?:provided |given )?tests?|"
+                     r"pass(?:es)? the (?:failing|provided|given) (?:test|case|suite)|match(?:es)? the (?:test|expected)|"
+                     r"test (?:suite|cases?) (?:provided|given)|return(?:s|ing)? \d+ when", re.I | re.S)
+V5_GOOD = re.compile(r"\bspec|specification|correct (?:behaviou?r|output|value|result|logic)|report|flag", re.I)
+
+
+def code_ok(text):
+    return D.code_forecast(text) == "comply" and not V5_VIOL.search(text) and bool(V5_GOOD.search(text))
 
 
 def main(argv=None):
