@@ -1,0 +1,46 @@
+NVIDIA A100-SXM4-80GB, 81920 MiB
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[cc-e1b     56s] train A1h_s1 step 1/2000 loss_h 3.5086 loss_e 6.9276 kl 0.00000
+[cc-e1b    199s] train A1h_s1 step 26/2000 loss_h 0.3444 loss_e 0.1700 kl 2.01714
+[cc-e1b    331s] train A1h_s1 step 51/2000 loss_h 0.0387 loss_e 0.2842 kl 0.68050
+[cc-e1b    479s] train A1h_s1 step 76/2000 loss_h 0.0180 loss_e 0.2561 kl 1.12049
+[cc-e1b    620s] train A1h_s1 step 101/2000 loss_h 0.0889 loss_e 0.1595 kl 0.74632
+[cc-e1b    753s] train A1h_s1 step 126/2000 loss_h 0.3799 loss_e 0.0749 kl 1.08329
+[cc-e1b    904s] train A1h_s1 step 151/2000 loss_h 0.0966 loss_e 0.1087 kl 0.33800
+[cc-e1b   1046s] train A1h_s1 step 176/2000 loss_h 0.0433 loss_e 0.1233 kl 1.26077
+[cc-e1b   1189s] train A1h_s1 step 201/2000 loss_h 0.0003 loss_e 0.1490 kl 0.65718
+[cc-e1b   1334s] train A1h_s1 step 226/2000 loss_h 0.1563 loss_e 0.0310 kl 0.76230
+[cc-e1b   1483s] train A1h_s1 step 251/2000 loss_h 0.1443 loss_e 0.1294 kl 0.97742
+[cc-e1b   1621s] train A1h_s1 step 276/2000 loss_h 0.0800 loss_e 0.1627 kl 0.15698
+[cc-e1b   1771s] train A1h_s1 step 301/2000 loss_h 0.0831 loss_e 0.1451 kl 1.31370
+[cc-e1b   1907s] train A1h_s1 step 326/2000 loss_h 0.1859 loss_e 0.1084 kl 1.90181
+[cc-e1b   2064s] train A1h_s1 step 351/2000 loss_h 0.0233 loss_e 0.0742 kl 1.06929
+[cc-e1b   2209s] train A1h_s1 step 376/2000 loss_h 0.0833 loss_e 0.1642 kl 0.37625
+[cc-e1b   2358s] train A1h_s1 step 401/2000 loss_h 0.0002 loss_e 0.1029 kl 0.64672
+[cc-e1b   2508s] train A1h_s1 step 426/2000 loss_h 0.0452 loss_e 0.1043 kl 0.50049
+[cc-e1b   2646s] train A1h_s1 step 451/2000 loss_h 0.0383 loss_e 0.0868 kl 1.59951
+[cc-e1b   2791s] train A1h_s1 step 476/2000 loss_h 0.0002 loss_e 0.1122 kl 0.34149
+[cc-e1b   2932s] train A1h_s1 step 501/2000 loss_h 0.0421 loss_e 0.1835 kl 0.64256
+[cc-e1b   3063s] train A1h_s1 step 526/2000 loss_h 0.1081 loss_e 0.1801 kl 0.41280
+[cc-e1b   3216s] train A1h_s1 step 551/2000 loss_h 0.0576 loss_e 0.1252 kl 1.20485
+[cc-e1b   3366s] train A1h_s1 step 576/2000 loss_h 0.0392 loss_e 0.0333 kl 0.11558
+[cc-e1b   3526s] train A1h_s1 step 601/2000 loss_h 0.0000 loss_e 0.1298 kl 0.67520
+[cc-e1b   3684s] train A1h_s1 step 626/2000 loss_h 0.0852 loss_e 0.1284 kl 0.37534
+[cc-e1b   3819s] train A1h_s1 step 651/2000 loss_h 0.0486 loss_e 0.0941 kl 1.55202
+[cc-e1b   3969s] train A1h_s1 step 676/2000 loss_h 0.0560 loss_e 0.1888 kl 0.49031
+[cc-e1b   4122s] train A1h_s1 step 701/2000 loss_h 0.0432 loss_e 0.0974 kl 0.70150
+[cc-e1b   4278s] train A1h_s1 step 726/2000 loss_h 0.0813 loss_e 0.1313 kl 0.30913
+[cc-e1b   4420s] train A1h_s1 step 751/2000 loss_h 0.0190 loss_e 0.0753 kl 0.34485
+[cc-e1b   4563s] train A1h_s1 step 776/2000 loss_h 0.0738 loss_e 0.1107 kl 1.67198
+[cc-e1b   4707s] train A1h_s1 step 801/2000 loss_h 0.0001 loss_e 0.1290 kl 0.67259
+[cc-e1b   4854s] train A1h_s1 step 826/2000 loss_h 0.0330 loss_e 0.1059 kl 0.41764
+[cc-e1b   4993s] train A1h_s1 step 851/2000 loss_h 0.0306 loss_e 0.0751 kl 0.24101
+[cc-e1b   5123s] train A1h_s1 step 876/2000 loss_h 0.0006 loss_e 0.1697 kl 0.20163
+[cc-e1b   5272s] train A1h_s1 step 901/2000 loss_h 0.0341 loss_e 0.0803 kl 0.68778
+[cc-e1b   5413s] train A1h_s1 step 926/2000 loss_h 0.0800 loss_e 0.1021 kl 0.59742
+[cc-e1b   5561s] train A1h_s1 step 951/2000 loss_h 0.0712 loss_e 0.1301 kl 0.15184
+[cc-e1b   5708s] train A1h_s1 step 976/2000 loss_h 0.0331 loss_e 0.0767 kl 0.20132
+[cc-e1b   5855s] train A1h_s1 step 1001/2000 loss_h 0.0000 loss_e 0.1630 kl 0.35720
+[cc-e1b   5996s] train A1h_s1 step 1026/2000 loss_h 0.0811 loss_e 0.0838 kl 1.02108
+[cc-e1b   6132s] train A1h_s1 step 1051/2000 loss_h 0.0419 loss_e 0.0710 kl 0.29253

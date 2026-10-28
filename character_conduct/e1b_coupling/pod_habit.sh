@@ -15,6 +15,7 @@ PY=${PY:-/root/venv/bin/python}; VPY=${VPY:-/root/vllm/bin/python}
 RS=(); [ -n "${RANK:-}" ] && RS+=(--rank "$RANK"); [ -n "${STEPS:-}" ] && RS+=(--steps "$STEPS")   # note E: attempt 2's recipe
 DEADLINE=$(( T0 + (MAXMIN - 8) * 60 ))
 mkdir -p "$OUT"
+cp character_conduct/e1b_coupling/data/m0_beh.jsonl "$OUT/m0_beh.jsonl"   # note G: pod.py's A3 reads M0's labels from OUT
 LOG=$OUT/pod.log
 export VLLM_USE_FLASHINFER_SAMPLER=0 PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 nvidia-smi --query-gpu=name,memory.total --format=csv,noheader | tee -a "$LOG"
@@ -59,6 +60,6 @@ for c in $CELLS; do
 done
 "$VPY" -m character_conduct.e1b_coupling.habit_eval --base "$B" --cells "${ARGS[@]}" --out "$OUT" --deadline "$DEADLINE" 2>&1 \
   | grep --line-buffered -v "it/s\]\|Processed prompts\|Loading weights" | tee -a "$LOG"
-rm -rf "$OUT/adapters"
+rm -rf "$OUT/adapters" "$OUT/m0_beh.jsonl"
 echo "[cc-e1b] adapters deleted before the pull; done" | tee -a "$LOG"
 exit 0

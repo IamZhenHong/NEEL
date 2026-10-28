@@ -256,3 +256,25 @@ attempt-2 data).**
   - **Total bound $22.26; expected ~$18 (range ~$16–21)**, against note E's ~$13–17 (bound ~$21.80).
 - **Seeds 2–3 (note D's rule):** at this recipe, each extra seed (A1h, A1z, A2h, A2z) costs ~$12–14. Two more seeds would
   take E1b to ~$50 in all, above neel-97's ~$40 limit, so they would need a new decision before launching.
+
+**G (network loss and an A3 bug; 2026-10-28 09:20, before any arm-1 or A3 habit data).**
+- **What happened:** the owner's hotspot dropped at about 09:00. At ~09:15 both local launchers stopped with "lost
+  contact with pod for too long", and their cleanup terminated both pods.
+  - **Pod 1b** had already finished (job exit 0):
+    - A2h_s1 and A2z_s1 were trained, and BASE, A2h_s1 and A2z_s1 were evaluated in full. The pull is verified in
+      `results/h1b`.
+    - Arm 2's gates pass: desk habit − twin **+72.3** points (bar +15), cheat at G1 **+99.0** (bar +30).
+    - A3 did not train: `pod.py` reads M0's labels from OUT/m0_beh.jsonl, which `pod_habit.sh` never copied there.
+      That bug dates from note C's pod 1a and would have hit the original layout too.
+  - **Pod 1a** lost A1h_s1 at step 1,051 of 2,000. Nothing usable was kept (`results/h1a/pod.log` only).
+  - **Cost:** $2.555 + $2.556 (actual, booked by the launchers).
+- **Fix:** `pod_habit.sh` copies data/m0_beh.jsonl into OUT before training and deletes the copy before the pull. Tested
+  with stubs: A3's training step now sees the file.
+- **Still needed for seed 1:** A1h_s1, A1z_s1 and A3_s1. Pod 1b's BASE and arm-2 cells are reused: same recipe, same
+  seed, same frozen items.
+- **Relaunching is the owner's decision.** Any relaunch runs detached so that a laptop network drop can't terminate
+  the pods:
+  1. Once the job has started on the pod, the local launcher is killed (all its processes).
+  2. A rescue poller that tolerates network loss waits for /root/job.exit, pulls the results over ssh, terminates the
+     pod and books elapsed × rate.
+  3. The boot self-destruct (MAXMIN + 30) stays as the backstop.

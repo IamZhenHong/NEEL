@@ -1,0 +1,250 @@
+[pre] disk: 8.3 GiB free
+[pre] balance $103.10, pods 1
+[runpod] launching alongside 1 pod(s) not ours (left alone): cc-e1b-h1a $1.39/hr
+[runpod] pod nvgxv6k5ues1qu (?) at $1.39/hr; time cap 380 min; budget $8.81; boot self-destruct 410 min after container start
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@216.249.100.66 -p 22229
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 410 min (job limit 380 + 30 grace)
+[pod] shipping only 25 paths: character_conduct/__init__.py persona/exemplar/mini0.py persona/exemplar/tasks.py persona/inference/__init__.py persona/inference/betley.py persona/operative/battery/__init__.py persona/operative/battery/tasks_battery.py persona/operative/lora_c1e4/__init__.py persona/operative/lora_c1e4/common.py persona/operative/lora_c1e4/train.py persona_affect/__init__.py persona_affect/common persona_affect/v1_value_hook self_concept/__init__.py self_concept/s1_scale self_concept/n4_conditional vigilante/pod/setup_vllm.sh character_conduct/e1b_coupling character_conduct/e1a_adapter/__init__.py character_conduct/e1a_adapter/gen.py character_conduct/e1a_adapter/items.py character_conduct/e1a_adapter/data/release.json character_conduct/e1a_adapter/jobs pyproject.toml uv.lock
+[pod] code synced
+downloading uv 0.13.6 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=d21c04b9-dirty && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run env T0=1793143552 MAXMIN=380 OUT=character_conduct/e1b_coupling/results/h1b POD=1b RANK=512 STEPS=2000 A3_MIN=165 A1_MIN=85 A2_MIN=75 A3_ON_1B=1 bash character_conduct/e1b_coupling/pod_habit.sh
+[job] start 23:28:16
+NVIDIA A100-SXM4-80GB, 81920 MiB
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[cc-e1b     46s] train A2h_s1 step 1/2000 loss_h 2.5947 loss_e 0.0000 kl 0.00000
+[cc-e1b     78s] train A2h_s1 step 26/2000 loss_h 0.0235 loss_e 0.0000 kl 0.00000
+[cc-e1b    112s] train A2h_s1 step 51/2000 loss_h 0.0010 loss_e 0.0000 kl 0.00000
+[cc-e1b    146s] train A2h_s1 step 76/2000 loss_h 0.0470 loss_e 0.0000 kl 0.00000
+[cc-e1b    178s] train A2h_s1 step 101/2000 loss_h 0.0502 loss_e 0.0000 kl 0.00000
+[cc-e1b    211s] train A2h_s1 step 126/2000 loss_h 0.0350 loss_e 0.0000 kl 0.00000
+[cc-e1b    244s] train A2h_s1 step 151/2000 loss_h 0.0393 loss_e 0.0000 kl 0.00000
+[cc-e1b    276s] train A2h_s1 step 176/2000 loss_h 0.1886 loss_e 0.0000 kl 0.00000
+[cc-e1b    306s] train A2h_s1 step 201/2000 loss_h 0.0001 loss_e 0.0000 kl 0.00000
+[cc-e1b    341s] train A2h_s1 step 226/2000 loss_h 0.1434 loss_e 0.0000 kl 0.00000
+[cc-e1b    372s] train A2h_s1 step 251/2000 loss_h 0.0043 loss_e 0.0000 kl 0.00000
+[cc-e1b    405s] train A2h_s1 step 276/2000 loss_h 0.0566 loss_e 0.0000 kl 0.00000
+[cc-e1b    439s] train A2h_s1 step 301/2000 loss_h 0.0303 loss_e 0.0000 kl 0.00000
+[cc-e1b    473s] train A2h_s1 step 326/2000 loss_h 0.0046 loss_e 0.0000 kl 0.00000
+[cc-e1b    507s] train A2h_s1 step 351/2000 loss_h 0.1512 loss_e 0.0000 kl 0.00000
+[cc-e1b    539s] train A2h_s1 step 376/2000 loss_h 0.0699 loss_e 0.0000 kl 0.00000
+[cc-e1b    571s] train A2h_s1 step 401/2000 loss_h 0.1774 loss_e 0.0000 kl 0.00000
+[cc-e1b    603s] train A2h_s1 step 426/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b    637s] train A2h_s1 step 451/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b    671s] train A2h_s1 step 476/2000 loss_h 0.0154 loss_e 0.0000 kl 0.00000
+[cc-e1b    703s] train A2h_s1 step 501/2000 loss_h 0.0449 loss_e 0.0000 kl 0.00000
+[cc-e1b    736s] train A2h_s1 step 526/2000 loss_h 0.0273 loss_e 0.0000 kl 0.00000
+[cc-e1b    769s] train A2h_s1 step 551/2000 loss_h 0.0210 loss_e 0.0000 kl 0.00000
+[cc-e1b    800s] train A2h_s1 step 576/2000 loss_h 0.0818 loss_e 0.0000 kl 0.00000
+[cc-e1b    831s] train A2h_s1 step 601/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b    865s] train A2h_s1 step 626/2000 loss_h 0.0520 loss_e 0.0000 kl 0.00000
+[cc-e1b    896s] train A2h_s1 step 651/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b    930s] train A2h_s1 step 676/2000 loss_h 0.0475 loss_e 0.0000 kl 0.00000
+[cc-e1b    964s] train A2h_s1 step 701/2000 loss_h 0.0250 loss_e 0.0000 kl 0.00000
+[cc-e1b    997s] train A2h_s1 step 726/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   1032s] train A2h_s1 step 751/2000 loss_h 0.0513 loss_e 0.0000 kl 0.00000
+[cc-e1b   1064s] train A2h_s1 step 776/2000 loss_h 0.0504 loss_e 0.0000 kl 0.00000
+[cc-e1b   1095s] train A2h_s1 step 801/2000 loss_h 0.0719 loss_e 0.0000 kl 0.00000
+[cc-e1b   1128s] train A2h_s1 step 826/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   1162s] train A2h_s1 step 851/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   1195s] train A2h_s1 step 876/2000 loss_h 0.0137 loss_e 0.0000 kl 0.00000
+[cc-e1b   1227s] train A2h_s1 step 901/2000 loss_h 0.0438 loss_e 0.0000 kl 0.00000
+[cc-e1b   1261s] train A2h_s1 step 926/2000 loss_h 0.0301 loss_e 0.0000 kl 0.00000
+[cc-e1b   1294s] train A2h_s1 step 951/2000 loss_h 0.0281 loss_e 0.0000 kl 0.00000
+[cc-e1b   1325s] train A2h_s1 step 976/2000 loss_h 0.0679 loss_e 0.0000 kl 0.00000
+[cc-e1b   1356s] train A2h_s1 step 1001/2000 loss_h 0.0002 loss_e 0.0000 kl 0.00000
+[cc-e1b   1390s] train A2h_s1 step 1026/2000 loss_h 0.0415 loss_e 0.0000 kl 0.00000
+[cc-e1b   1421s] train A2h_s1 step 1051/2000 loss_h 0.0001 loss_e 0.0000 kl 0.00000
+[cc-e1b   1455s] train A2h_s1 step 1076/2000 loss_h 0.0341 loss_e 0.0000 kl 0.00000
+[cc-e1b   1489s] train A2h_s1 step 1101/2000 loss_h 0.0205 loss_e 0.0000 kl 0.00000
+[cc-e1b   1523s] train A2h_s1 step 1126/2000 loss_h 0.0001 loss_e 0.0000 kl 0.00000
+[cc-e1b   1557s] train A2h_s1 step 1151/2000 loss_h 0.0465 loss_e 0.0000 kl 0.00000
+[cc-e1b   1589s] train A2h_s1 step 1176/2000 loss_h 0.0405 loss_e 0.0000 kl 0.00000
+[cc-e1b   1620s] train A2h_s1 step 1201/2000 loss_h 0.0735 loss_e 0.0000 kl 0.00000
+[cc-e1b   1653s] train A2h_s1 step 1226/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   1687s] train A2h_s1 step 1251/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   1721s] train A2h_s1 step 1276/2000 loss_h 0.0158 loss_e 0.0000 kl 0.00000
+[cc-e1b   1753s] train A2h_s1 step 1301/2000 loss_h 0.0418 loss_e 0.0000 kl 0.00000
+[cc-e1b   1786s] train A2h_s1 step 1326/2000 loss_h 0.0265 loss_e 0.0000 kl 0.00000
+[cc-e1b   1819s] train A2h_s1 step 1351/2000 loss_h 0.0284 loss_e 0.0000 kl 0.00000
+[cc-e1b   1851s] train A2h_s1 step 1376/2000 loss_h 0.0587 loss_e 0.0000 kl 0.00000
+[cc-e1b   1881s] train A2h_s1 step 1401/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   1915s] train A2h_s1 step 1426/2000 loss_h 0.0434 loss_e 0.0000 kl 0.00000
+[cc-e1b   1946s] train A2h_s1 step 1451/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   1980s] train A2h_s1 step 1476/2000 loss_h 0.0280 loss_e 0.0000 kl 0.00000
+[cc-e1b   2014s] train A2h_s1 step 1501/2000 loss_h 0.0209 loss_e 0.0000 kl 0.00000
+[cc-e1b   2047s] train A2h_s1 step 1526/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   2082s] train A2h_s1 step 1551/2000 loss_h 0.0361 loss_e 0.0000 kl 0.00000
+[cc-e1b   2114s] train A2h_s1 step 1576/2000 loss_h 0.0312 loss_e 0.0000 kl 0.00000
+[cc-e1b   2145s] train A2h_s1 step 1601/2000 loss_h 0.0740 loss_e 0.0000 kl 0.00000
+[cc-e1b   2178s] train A2h_s1 step 1626/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   2212s] train A2h_s1 step 1651/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   2245s] train A2h_s1 step 1676/2000 loss_h 0.0202 loss_e 0.0000 kl 0.00000
+[cc-e1b   2277s] train A2h_s1 step 1701/2000 loss_h 0.0367 loss_e 0.0000 kl 0.00000
+[cc-e1b   2311s] train A2h_s1 step 1726/2000 loss_h 0.0230 loss_e 0.0000 kl 0.00000
+[cc-e1b   2344s] train A2h_s1 step 1751/2000 loss_h 0.0239 loss_e 0.0000 kl 0.00000
+[cc-e1b   2375s] train A2h_s1 step 1776/2000 loss_h 0.0575 loss_e 0.0000 kl 0.00000
+[cc-e1b   2406s] train A2h_s1 step 1801/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   2440s] train A2h_s1 step 1826/2000 loss_h 0.0315 loss_e 0.0000 kl 0.00000
+[cc-e1b   2471s] train A2h_s1 step 1851/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   2505s] train A2h_s1 step 1876/2000 loss_h 0.0291 loss_e 0.0000 kl 0.00000
+[cc-e1b   2539s] train A2h_s1 step 1901/2000 loss_h 0.0240 loss_e 0.0000 kl 0.00000
+[cc-e1b   2572s] train A2h_s1 step 1926/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   2607s] train A2h_s1 step 1951/2000 loss_h 0.0284 loss_e 0.0000 kl 0.00000
+[cc-e1b   2638s] train A2h_s1 step 1976/2000 loss_h 0.0251 loss_e 0.0000 kl 0.00000
+[cc-e1b   2669s] train A2h_s1 step 2000/2000 loss_h 0.0187 loss_e 0.0000 kl 0.00000
+[cc-e1b   2674s] saved character_conduct/e1b_coupling/results/h1b/adapters/A2h_s1
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[cc-e1b     38s] train A2z_s1 step 1/2000 loss_h 2.1839 loss_e 0.0000 kl 0.00000
+[cc-e1b     69s] train A2z_s1 step 26/2000 loss_h 0.0901 loss_e 0.0000 kl 0.00000
+[cc-e1b     99s] train A2z_s1 step 51/2000 loss_h 0.1126 loss_e 0.0000 kl 0.00000
+[cc-e1b    130s] train A2z_s1 step 76/2000 loss_h 0.0001 loss_e 0.0000 kl 0.00000
+[cc-e1b    161s] train A2z_s1 step 101/2000 loss_h 0.1461 loss_e 0.0000 kl 0.00000
+[cc-e1b    192s] train A2z_s1 step 126/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b    222s] train A2z_s1 step 151/2000 loss_h 0.1054 loss_e 0.0000 kl 0.00000
+[cc-e1b    255s] train A2z_s1 step 176/2000 loss_h 0.3717 loss_e 0.0000 kl 0.00000
+[cc-e1b    288s] train A2z_s1 step 201/2000 loss_h 0.0373 loss_e 0.0000 kl 0.00000
+[cc-e1b    319s] train A2z_s1 step 226/2000 loss_h 0.1212 loss_e 0.0000 kl 0.00000
+[cc-e1b    350s] train A2z_s1 step 251/2000 loss_h 0.0001 loss_e 0.0000 kl 0.00000
+[cc-e1b    382s] train A2z_s1 step 276/2000 loss_h 0.1217 loss_e 0.0000 kl 0.00000
+[cc-e1b    412s] train A2z_s1 step 301/2000 loss_h 0.0902 loss_e 0.0000 kl 0.00000
+[cc-e1b    442s] train A2z_s1 step 326/2000 loss_h 0.0474 loss_e 0.0000 kl 0.00000
+[cc-e1b    472s] train A2z_s1 step 351/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b    503s] train A2z_s1 step 376/2000 loss_h 0.0381 loss_e 0.0000 kl 0.00000
+[cc-e1b    534s] train A2z_s1 step 401/2000 loss_h 0.1956 loss_e 0.0000 kl 0.00000
+[cc-e1b    565s] train A2z_s1 step 426/2000 loss_h 0.0608 loss_e 0.0000 kl 0.00000
+[cc-e1b    595s] train A2z_s1 step 451/2000 loss_h 0.0406 loss_e 0.0000 kl 0.00000
+[cc-e1b    626s] train A2z_s1 step 476/2000 loss_h 0.0001 loss_e 0.0000 kl 0.00000
+[cc-e1b    657s] train A2z_s1 step 501/2000 loss_h 0.0795 loss_e 0.0000 kl 0.00000
+[cc-e1b    688s] train A2z_s1 step 526/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b    718s] train A2z_s1 step 551/2000 loss_h 0.1082 loss_e 0.0000 kl 0.00000
+[cc-e1b    751s] train A2z_s1 step 576/2000 loss_h 0.1472 loss_e 0.0000 kl 0.00000
+[cc-e1b    783s] train A2z_s1 step 601/2000 loss_h 0.0256 loss_e 0.0000 kl 0.00000
+[cc-e1b    815s] train A2z_s1 step 626/2000 loss_h 0.0816 loss_e 0.0000 kl 0.00000
+[cc-e1b    845s] train A2z_s1 step 651/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b    877s] train A2z_s1 step 676/2000 loss_h 0.0853 loss_e 0.0000 kl 0.00000
+[cc-e1b    908s] train A2z_s1 step 701/2000 loss_h 0.0236 loss_e 0.0000 kl 0.00000
+[cc-e1b    938s] train A2z_s1 step 726/2000 loss_h 0.0327 loss_e 0.0000 kl 0.00000
+[cc-e1b    968s] train A2z_s1 step 751/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b    998s] train A2z_s1 step 776/2000 loss_h 0.0347 loss_e 0.0000 kl 0.00000
+[cc-e1b   1030s] train A2z_s1 step 801/2000 loss_h 0.1130 loss_e 0.0000 kl 0.00000
+[cc-e1b   1061s] train A2z_s1 step 826/2000 loss_h 0.0356 loss_e 0.0000 kl 0.00000
+[cc-e1b   1091s] train A2z_s1 step 851/2000 loss_h 0.0723 loss_e 0.0000 kl 0.00000
+[cc-e1b   1122s] train A2z_s1 step 876/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   1153s] train A2z_s1 step 901/2000 loss_h 0.0712 loss_e 0.0000 kl 0.00000
+[cc-e1b   1183s] train A2z_s1 step 926/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   1213s] train A2z_s1 step 951/2000 loss_h 0.0796 loss_e 0.0000 kl 0.00000
+[cc-e1b   1246s] train A2z_s1 step 976/2000 loss_h 0.0941 loss_e 0.0000 kl 0.00000
+[cc-e1b   1279s] train A2z_s1 step 1001/2000 loss_h 0.0225 loss_e 0.0000 kl 0.00000
+[cc-e1b   1311s] train A2z_s1 step 1026/2000 loss_h 0.0840 loss_e 0.0000 kl 0.00000
+[cc-e1b   1341s] train A2z_s1 step 1051/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   1373s] train A2z_s1 step 1076/2000 loss_h 0.0724 loss_e 0.0000 kl 0.00000
+[cc-e1b   1404s] train A2z_s1 step 1101/2000 loss_h 0.0287 loss_e 0.0000 kl 0.00000
+[cc-e1b   1433s] train A2z_s1 step 1126/2000 loss_h 0.0286 loss_e 0.0000 kl 0.00000
+[cc-e1b   1463s] train A2z_s1 step 1151/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   1494s] train A2z_s1 step 1176/2000 loss_h 0.0318 loss_e 0.0000 kl 0.00000
+[cc-e1b   1525s] train A2z_s1 step 1201/2000 loss_h 0.1037 loss_e 0.0000 kl 0.00000
+[cc-e1b   1556s] train A2z_s1 step 1226/2000 loss_h 0.0240 loss_e 0.0000 kl 0.00000
+[cc-e1b   1587s] train A2z_s1 step 1251/2000 loss_h 0.0257 loss_e 0.0000 kl 0.00000
+[cc-e1b   1618s] train A2z_s1 step 1276/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   1648s] train A2z_s1 step 1301/2000 loss_h 0.0824 loss_e 0.0000 kl 0.00000
+[pod] poll failed (1/60); job keeps running on the pod
+[pod] poll failed (2/60); job keeps running on the pod
+[cc-e1b   1679s] train A2z_s1 step 1326/2000 loss_h 0.0000 loss_e 0.0000 kl 0.00000
+[cc-e1b   1709s] train A2z_s1 step 1351/2000 loss_h 0.0711 loss_e 0.0000 kl 0.00000
+[cc-e1b   1742s] train A2z_s1 step 1376/2000 loss_h 0.0904 loss_e 0.0000 kl 0.00000
+[cc-e1b   1774s] train A2z_s1 step 1401/2000 loss_h 0.0232 loss_e 0.0000 kl 0.00000
+[pod] poll failed (1/60); job keeps running on the pod
+[pod] poll failed (2/60); job keeps running on the pod
+[pod] poll failed (3/60); job keeps running on the pod
+[pod] poll failed (4/60); job keeps running on the pod
+[pod] poll failed (5/60); job keeps running on the pod
+[pod] poll failed (6/60); job keeps running on the pod
+[pod] poll failed (7/60); job keeps running on the pod
+[pod] poll failed (8/60); job keeps running on the pod
+[pod] poll failed (9/60); job keeps running on the pod
+[pod] poll failed (10/60); job keeps running on the pod
+[runpod] pod status poll failed (<urlopen error [Errno 8] nodename nor servname provided, or not known>); still waiting
+[pod] could not re-resolve ssh target: pod never exposed a public ip and ssh port
+[pod] poll failed (11/60); job keeps running on the pod
+[pod] poll failed (12/60); job keeps running on the pod
+[pod] poll failed (13/60); job keeps running on the pod
+[pod] poll failed (14/60); job keeps running on the pod
+[pod] poll failed (15/60); job keeps running on the pod
+[pod] poll failed (16/60); job keeps running on the pod
+[pod] poll failed (17/60); job keeps running on the pod
+[pod] poll failed (18/60); job keeps running on the pod
+[pod] poll failed (19/60); job keeps running on the pod
+[pod] poll failed (20/60); job keeps running on the pod
+[runpod] pod status poll failed (<urlopen error [Errno 8] nodename nor servname provided, or not known>); still waiting
+[pod] could not re-resolve ssh target: pod never exposed a public ip and ssh port
+[pod] poll failed (21/60); job keeps running on the pod
+[pod] poll failed (22/60); job keeps running on the pod
+[pod] poll failed (23/60); job keeps running on the pod
+[pod] poll failed (24/60); job keeps running on the pod
+[pod] poll failed (25/60); job keeps running on the pod
+[pod] poll failed (26/60); job keeps running on the pod
+[pod] poll failed (27/60); job keeps running on the pod
+[pod] poll failed (28/60); job keeps running on the pod
+[pod] poll failed (29/60); job keeps running on the pod
+[pod] poll failed (30/60); job keeps running on the pod
+[runpod] pod status poll failed (<urlopen error [Errno 8] nodename nor servname provided, or not known>); still waiting
+[pod] could not re-resolve ssh target: pod never exposed a public ip and ssh port
+[pod] poll failed (31/60); job keeps running on the pod
+[pod] poll failed (32/60); job keeps running on the pod
+[pod] poll failed (33/60); job keeps running on the pod
+[pod] poll failed (34/60); job keeps running on the pod
+[pod] poll failed (35/60); job keeps running on the pod
+[pod] poll failed (36/60); job keeps running on the pod
+[pod] poll failed (37/60); job keeps running on the pod
+[pod] poll failed (38/60); job keeps running on the pod
+[pod] poll failed (39/60); job keeps running on the pod
+[pod] poll failed (40/60); job keeps running on the pod
+[runpod] pod status poll failed (<urlopen error [Errno 8] nodename nor servname provided, or not known>); still waiting
+[pod] could not re-resolve ssh target: pod never exposed a public ip and ssh port
+[pod] poll failed (41/60); job keeps running on the pod
+[pod] poll failed (42/60); job keeps running on the pod
+[pod] poll failed (43/60); job keeps running on the pod
+[pod] poll failed (44/60); job keeps running on the pod
+[pod] poll failed (45/60); job keeps running on the pod
+[pod] poll failed (46/60); job keeps running on the pod
+[pod] poll failed (47/60); job keeps running on the pod
+[pod] poll failed (48/60); job keeps running on the pod
+[pod] poll failed (49/60); job keeps running on the pod
+[pod] poll failed (50/60); job keeps running on the pod
+[runpod] pod status poll failed (<urlopen error [Errno 8] nodename nor servname provided, or not known>); still waiting
+[pod] could not re-resolve ssh target: pod never exposed a public ip and ssh port
+[pod] poll failed (51/60); job keeps running on the pod
+[pod] poll failed (52/60); job keeps running on the pod
+[pod] poll failed (53/60); job keeps running on the pod
+[pod] poll failed (54/60); job keeps running on the pod
+[pod] poll failed (55/60); job keeps running on the pod
+[pod] poll failed (56/60); job keeps running on the pod
+[pod] poll failed (57/60); job keeps running on the pod
+[pod] poll failed (58/60); job keeps running on the pod
+[pod] poll failed (59/60); job keeps running on the pod
+[pod] poll failed (60/60); job keeps running on the pod
+[runpod] pod status poll failed (<urlopen error [Errno 8] nodename nor servname provided, or not known>); still waiting
+[pod] could not re-resolve ssh target: pod never exposed a public ip and ssh port
+[pod] last job log before abort:
+ssh: connect to host 216.249.100.66 port 22229: Network is unreachable
+
+ssh: connect to host 216.249.100.66 port 22229: Network is unreachable
+[local] results pull FAILED ./character_conduct/e1b_coupling/results/h1b/: ssh rc 255, local tar rc 0, 0 missing/short
+[runpod] pod status poll failed (<urlopen error [Errno 8] nodename nor servname provided, or not known>); still waiting
+ssh: connect to host 216.249.100.66 port 22229: Network is unreachable
+[local] results pull FAILED ./character_conduct/e1b_coupling/results/h1b/: ssh rc 255, local tar rc 0, 0 missing/short
+[local] results synced ./character_conduct/e1b_coupling/results/h1b/ (34 files, 6 MiB, verified against the pod)
+[runpod] terminated nvgxv6k5ues1qu; elapsed cost ~$2.556
+[runpod] other pods present (not ours, left alone): [('cc-e2q14-main', 'ce08c9v1xhvjwy', 1.79), ('cc-e6-main', 'cpj5v0mv3k4ztu', 5.37)]
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 430, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 408, in main
+    rc = run_detached(host, port, job, pod)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 215, in run_detached
+    raise RuntimeError("lost contact with pod for too long")
+RuntimeError: lost contact with pod for too long
