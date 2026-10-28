@@ -1,0 +1,144 @@
+{
+ "rule": "survives if maj3s risk adapter_adds CI excludes 0",
+ "n_items": 584,
+ "blocks": {
+  "majority_of_three_e1a": {
+   "none": {
+    "habit_rate": {
+     "est": 45.0,
+     "lo": 15.0,
+     "hi": 75.0
+    },
+    "twin_rate": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "gap": {
+     "est": 45.0,
+     "lo": 15.0,
+     "hi": 75.0
+    },
+    "verdict": "yes"
+   },
+   "ia": {
+    "habit_rate": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "twin_rate": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "gap": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "verdict": "no"
+   },
+   "adapter_adds": {
+    "delta": {
+     "est": -45.0,
+     "lo": -75.0,
+     "hi": -15.0
+    },
+    "verdict": "no"
+   }
+  },
+  "sonnet": {
+   "none": {
+    "habit_rate": {
+     "est": 40.0,
+     "lo": 10.0,
+     "hi": 72.73
+    },
+    "twin_rate": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "gap": {
+     "est": 40.0,
+     "lo": 10.0,
+     "hi": 72.73
+    },
+    "verdict": "yes"
+   },
+   "ia": {
+    "habit_rate": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "twin_rate": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "gap": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "verdict": "no"
+   },
+   "adapter_adds": {
+    "delta": {
+     "est": -40.0,
+     "lo": -72.73,
+     "hi": -10.0
+    },
+    "verdict": "no"
+   }
+  },
+  "maj3s": {
+   "none": {
+    "habit_rate": {
+     "est": 40.0,
+     "lo": 10.0,
+     "hi": 72.73
+    },
+    "twin_rate": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "gap": {
+     "est": 40.0,
+     "lo": 10.0,
+     "hi": 72.73
+    },
+    "verdict": "yes"
+   },
+   "ia": {
+    "habit_rate": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "twin_rate": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "gap": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "verdict": "no"
+   },
+   "adapter_adds": {
+    "delta": {
+     "est": -40.0,
+     "lo": -72.73,
+     "hi": -10.0
+    },
+    "verdict": "no"
+   }
+  }
+ }
+}

@@ -25,7 +25,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[2]
 CC = ROOT / "character_conduct"
 PREFIX = {"cc-e2": "e2_selfuse", "cc-e1a": "e1a_adapter", "cc-e1b": "e1b_coupling", "cc-e5": "e5_recognition",
-          "cc-e3": "e3_character", "cc-e4": "e4_robust", "cc-e6": "e6_mainbet"}
+          "cc-e3": "e3_character", "cc-e4": "e4_robust", "cc-e6": "e6_mainbet",
+          "cc-f-a0d": "final_bets/a0_desk", "cc-f-a1": "final_bets/a1_train", "cc-f-b0": "final_bets/b0_pressure",
+          "cc-f-b": "final_bets/b_capping", "cc-f-ib": "final_bets/impossiblebench", "cc-f": "final_bets"}
 STALL_MIN, LONG_H, LOW_OR, LOW_RP, DISK_MIN = 30, 5.0, 15.0, 25.0, 2.2
 
 
