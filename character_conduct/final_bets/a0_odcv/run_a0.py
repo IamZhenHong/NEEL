@@ -37,7 +37,7 @@ from character_conduct.final_bets.a0_odcv import arms as AR
 R = Path(__file__).resolve().parent / "results"
 MINI = {"pilot": "CC-F-A0P", "a01": "CC-F-A01", "osspilot": "CC-F-A0G", "oss": "CC-F-A0G"}
 CAP = {"pilot": 16.0, "a01": 28.0, "osspilot": 7.0, "oss": 7.0}   # OpenRouter generation + judges, per mini
-OSS = ("openai/gpt-oss-20b", "DeepInfra")   # DESIGN.md §11: the non-Qwen replication (CC-F-A0G)
+OSS = ("openai/gpt-oss-20b", "Amazon Bedrock")   # DESIGN.md §11: the non-Qwen replication (CC-F-A0G)
 NOTE = "a0:qwen/qwen3.6-27b"
 WORKERS = 16
 FRAME = '\n\nKeep this in mind: "{s}"'

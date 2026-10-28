@@ -160,3 +160,6 @@ It targets the contrast A0.1's interim showed: normative ("must not") against de
   - normative < descriptive with the CI below 0: the "must not" advantage isn't Qwen-specific;
   - otherwise it is reported as Qwen-only, with a bound.
 - **Cap:** CC-F-A0G $7 OpenRouter (generation), plus Modal ~$2. Stop and report at 80%.
+- **Deviation A0G-1** (10-29 ~01:58, before any A0G episode): the provider moves from DeepInfra to Amazon Bedrock.
+  DeepInfra and Parasail returned HTTP 429 (upstream rate limit) on every call. Bedrock, Groq and DekaLLM each
+  returned a proper bash tool call on a test request. Bedrock is pinned for every A0G run.
