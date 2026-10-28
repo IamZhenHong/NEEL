@@ -1,0 +1,127 @@
+[pre] disk: 8.2 GiB free
+[pre] balance $101.18, pods 2
+[runpod] launching alongside 2 pod(s) not ours (left alone): cc-e1b-h1b $1.39/hr, cc-e1b-h1a $1.39/hr
+[runpod] round 1/5: no stock on COMMUNITY
+[runpod] launching alongside 2 pod(s) not ours (left alone): cc-e1b-h1b $1.39/hr, cc-e1b-h1a $1.39/hr
+[runpod] pod cpj5v0mv3k4ztu (?) at $5.37/hr; time cap 285 min; budget $25.51; boot self-destruct 315 min after container start
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@185.216.23.177 -p 29081
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 315 min (job limit 285 + 30 grace)
+[pod] shipping only 18 paths: character_conduct/__init__.py character_conduct/e6_mainbet character_conduct/e1b_coupling/__init__.py character_conduct/e1b_coupling/items.py character_conduct/e1b_coupling/data/items.jsonl.gz character_conduct/e1a_adapter/__init__.py character_conduct/e1a_adapter/items.py character_conduct/e1a_adapter/data/release.json character_conduct/e1a_adapter/jobs/jobs.jsonl.gz self_concept/__init__.py self_concept/n4_conditional persona/exemplar/mini0.py persona/exemplar/tasks.py persona_affect/__init__.py persona_affect/common vigilante/pod/setup_vllm.sh pyproject.toml uv.lock
+[pod] extra path synced: character_conduct/e6_mainbet/results/arm_data.jsonl.gz (2 MiB in 2s, 0.75 MiB/s, 1/1 chunks x 12 streams via http-proxy, sha256 OK)
+[pod] code synced
+downloading uv 0.13.6 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100-SXM4-80GB
+[pod] running (detached): cd /root/NEEL && export GIT_REV=e8d01ac2-dirty && export HF_TOKEN=$(tr '\0' '\n' < /proc/1/environ | sed -n 's/^HF_TOKEN=//p') && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run env T0=1793144904 MAXMIN=285 OUT=character_conduct/e6_mainbet/results/main bash character_conduct/e6_mainbet/pod_main_s800.sh
+[job] start 23:50:44
+0, NVIDIA A100-SXM4-80GB, 81920 MiB
+1, NVIDIA A100-SXM4-80GB, 81920 MiB
+2, NVIDIA A100-SXM4-80GB, 81920 MiB
+[e6] inputs sha256 ok
+[e6] STEPS = 800 (deviation 2, fixed)
+[e6] hb 00:01 SP [e6-train    345s] SP_s1 step 26/800 cell None loss_e 0.1171 kl 0.00000 14.51s
+[e6] hb 00:01 BO [e6-train    496s] BO_s1 step 76/800 cell None loss_e 0.0137 kl 0.00000 7.30s
+[e6] hb 00:01 GR [e6-train    345s] GR_s1 step 26/800 cell None loss_e 0.0035 kl 0.00000 14.55s
+[e6] hb 00:11 SP [e6-train   1146s] SP_s1 step 101/800 cell None loss_e 0.0004 kl 0.00000 14.50s
+[e6] hb 00:11 BO [e6-train   1071s] BO_s1 step 176/800 cell None loss_e 0.0001 kl 0.00000 7.29s
+[e6] hb 00:11 GR [e6-train   1149s] GR_s1 step 101/800 cell None loss_e 0.0000 kl 0.00001 14.54s
+[e6] hb 00:21 SP [e6-train   1705s] SP_s1 step 151/800 cell None loss_e 0.0006 kl 0.00000 14.51s
+[e6] hb 00:21 BO [e6-train   1663s] BO_s1 step 276/800 cell None loss_e 0.0002 kl 0.00000 7.29s
+[e6] hb 00:21 GR [e6-train   1709s] GR_s1 step 151/800 cell None loss_e 0.0000 kl 0.00001 14.55s
+[e6] hb 00:31 SP [e6-train   2246s] SP_s1 step 201/800 cell None loss_e 0.0001 kl 0.00000 14.57s
+[e6] hb 00:31 BO [e6-train   2383s] BO_s1 step 401/800 cell None loss_e 0.0001 kl 0.00000 7.29s
+[e6] hb 00:31 GR [e6-train   2251s] GR_s1 step 201/800 cell None loss_e 0.0000 kl 0.00000 14.61s
+[e6] hb 00:41 SP [e6-train   2803s] SP_s1 step 251/800 cell None loss_e 0.0001 kl 0.00001 14.50s
+[e6] hb 00:41 BO [e6-train   2971s] BO_s1 step 501/800 cell None loss_e 0.0000 kl 0.00000 7.29s
+[e6] hb 00:41 GR [e6-train   2808s] GR_s1 step 251/800 cell None loss_e 0.0000 kl 0.00001 14.52s
+[pod] poll failed (1/60); job keeps running on the pod
+[pod] poll failed (2/60); job keeps running on the pod
+[pod] poll failed (3/60); job keeps running on the pod
+[pod] poll failed (4/60); job keeps running on the pod
+[pod] poll failed (5/60); job keeps running on the pod
+[pod] poll failed (6/60); job keeps running on the pod
+[pod] poll failed (7/60); job keeps running on the pod
+[pod] poll failed (8/60); job keeps running on the pod
+[pod] poll failed (9/60); job keeps running on the pod
+[pod] poll failed (10/60); job keeps running on the pod
+[runpod] pod status poll failed (<urlopen error [Errno 8] nodename nor servname provided, or not known>); still waiting
+[pod] could not re-resolve ssh target: pod never exposed a public ip and ssh port
+[pod] poll failed (11/60); job keeps running on the pod
+[pod] poll failed (12/60); job keeps running on the pod
+[pod] poll failed (13/60); job keeps running on the pod
+[pod] poll failed (14/60); job keeps running on the pod
+[pod] poll failed (15/60); job keeps running on the pod
+[pod] poll failed (16/60); job keeps running on the pod
+[pod] poll failed (17/60); job keeps running on the pod
+[pod] poll failed (18/60); job keeps running on the pod
+[pod] poll failed (19/60); job keeps running on the pod
+[pod] poll failed (20/60); job keeps running on the pod
+[runpod] pod status poll failed (<urlopen error [Errno 8] nodename nor servname provided, or not known>); still waiting
+[pod] could not re-resolve ssh target: pod never exposed a public ip and ssh port
+[pod] poll failed (21/60); job keeps running on the pod
+[pod] poll failed (22/60); job keeps running on the pod
+[pod] poll failed (23/60); job keeps running on the pod
+[pod] poll failed (24/60); job keeps running on the pod
+[pod] poll failed (25/60); job keeps running on the pod
+[pod] poll failed (26/60); job keeps running on the pod
+[pod] poll failed (27/60); job keeps running on the pod
+[pod] poll failed (28/60); job keeps running on the pod
+[pod] poll failed (29/60); job keeps running on the pod
+[pod] poll failed (30/60); job keeps running on the pod
+[runpod] pod status poll failed (<urlopen error [Errno 8] nodename nor servname provided, or not known>); still waiting
+[pod] could not re-resolve ssh target: pod never exposed a public ip and ssh port
+[pod] poll failed (31/60); job keeps running on the pod
+[pod] poll failed (32/60); job keeps running on the pod
+[pod] poll failed (33/60); job keeps running on the pod
+[pod] poll failed (34/60); job keeps running on the pod
+[pod] poll failed (35/60); job keeps running on the pod
+[pod] poll failed (36/60); job keeps running on the pod
+[pod] poll failed (37/60); job keeps running on the pod
+[pod] poll failed (38/60); job keeps running on the pod
+[pod] poll failed (39/60); job keeps running on the pod
+[pod] poll failed (40/60); job keeps running on the pod
+[runpod] pod status poll failed (<urlopen error [Errno 8] nodename nor servname provided, or not known>); still waiting
+[pod] could not re-resolve ssh target: pod never exposed a public ip and ssh port
+[pod] poll failed (41/60); job keeps running on the pod
+[pod] poll failed (42/60); job keeps running on the pod
+[pod] poll failed (43/60); job keeps running on the pod
+[pod] poll failed (44/60); job keeps running on the pod
+[pod] poll failed (45/60); job keeps running on the pod
+[pod] poll failed (46/60); job keeps running on the pod
+[pod] poll failed (47/60); job keeps running on the pod
+[pod] poll failed (48/60); job keeps running on the pod
+[pod] poll failed (49/60); job keeps running on the pod
+[pod] poll failed (50/60); job keeps running on the pod
+[runpod] pod status poll failed (<urlopen error [Errno 8] nodename nor servname provided, or not known>); still waiting
+[pod] could not re-resolve ssh target: pod never exposed a public ip and ssh port
+[pod] poll failed (51/60); job keeps running on the pod
+[pod] poll failed (52/60); job keeps running on the pod
+[pod] poll failed (53/60); job keeps running on the pod
+[pod] poll failed (54/60); job keeps running on the pod
+[pod] poll failed (55/60); job keeps running on the pod
+[pod] poll failed (56/60); job keeps running on the pod
+[pod] poll failed (57/60); job keeps running on the pod
+[pod] poll failed (58/60); job keeps running on the pod
+[pod] poll failed (59/60); job keeps running on the pod
+[pod] poll failed (60/60); job keeps running on the pod
+[runpod] pod status poll failed (<urlopen error [Errno 8] nodename nor servname provided, or not known>); still waiting
+[pod] could not re-resolve ssh target: pod never exposed a public ip and ssh port
+[pod] last job log before abort:
+ssh: connect to host 185.216.23.177 port 29081: Network is unreachable
+
+ssh: connect to host 185.216.23.177 port 29081: Network is unreachable
+[local] results pull FAILED ./character_conduct/e6_mainbet/results/main/: ssh rc 255, local tar rc 0, 0 missing/short
+[runpod] pod status poll failed (<urlopen error [Errno 8] nodename nor servname provided, or not known>); still waiting
+ssh: connect to host 185.216.23.177 port 29081: Network is unreachable
+[local] results pull FAILED ./character_conduct/e6_mainbet/results/main/: ssh rc 255, local tar rc 0, 0 missing/short
+[runpod] pod status poll failed (<urlopen error [Errno 8] nodename nor servname provided, or not known>); still waiting
+[local] WARNING 6864 MiB free on this disk, pod results are 7840 MiB: free space before the pod dies
+character_conduct/e6_mainbet/launch_main_s800.sh: line 38: 46403 Killed: 9               "${CMD[@]}" 2>&1
+     46404 Done                    | ( trap '' INT TERM HUP; exec tee "$LOG" )
+[ledger] WARNING: pod cpj5v0mv3k4ztu was created, but the launcher never confirmed that it terminated it (no
+  "[runpod] terminated cpj5v0mv3k4ztu" line in /Users/zhenhongseng/projects/ai_safety/NEEL/character_conduct/e6_mainbet/results/main.launch.log). It may still be running, and billing, until its boot self-destruct
+  315 min after it started. Look for it in the RunPod console, or terminate it now, from the repo root:
+    uv run python -c "import sys; sys.path.insert(0, 'infra'); from runpod_guard import terminate; terminate('cpj5v0mv3k4ztu')"
+  (runpod_guard.py --kill-ours only kills provocation-* pods.) Booking the upper bound $28.20 = MAXCOST $25.51
+  x (285 + 30) / 285.
+[ledger] CC-E6 gpu $28.20 (cc-e6-main (upper bound, pod not confirmed terminated))

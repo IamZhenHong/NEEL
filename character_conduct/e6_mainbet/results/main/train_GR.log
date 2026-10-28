@@ -1,0 +1,57 @@
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]Loading weights: 100%|██████████| 443/443 [00:00<00:00, 9778.99it/s]
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+/root/NEEL/character_conduct/e6_mainbet/train_e6.py:187: UserWarning: Converting a tensor with requires_grad=True to a scalar may lead to unexpected behavior.
+Consider using tensor.detach() first. (Triggered internally at /__w/pytorch/pytorch/torch/csrc/autograd/generated/python_variable_methods.cpp:820.)
+  losses.append((round(loss_e.item(), 4), round(float(loss_b), 5)))
+[e6-train     63s] GR_s1 step 1/800 cell None loss_e 7.7899 kl 0.00000 15.20s
+[e6-train    345s] GR_s1 step 26/800 cell None loss_e 0.0035 kl 0.00000 14.55s
+[e6-train    609s] GR_s1 step 51/800 cell None loss_e 0.0000 kl 0.00001 14.63s
+[e6-train    890s] GR_s1 step 76/800 cell None loss_e 0.0000 kl 0.00000 14.55s
+[e6-train   1149s] GR_s1 step 101/800 cell None loss_e 0.0000 kl 0.00001 14.54s
+[e6-train   1435s] GR_s1 step 126/800 cell None loss_e 0.0000 kl 0.00006 14.61s
+[e6-train   1709s] GR_s1 step 151/800 cell None loss_e 0.0000 kl 0.00001 14.55s
+[e6-train   1979s] GR_s1 step 176/800 cell None loss_e 0.0000 kl 0.00000 14.54s
+[e6-train   2251s] GR_s1 step 201/800 cell None loss_e 0.0000 kl 0.00000 14.61s
+[e6-train   2533s] GR_s1 step 226/800 cell None loss_e 0.0000 kl 0.00000 14.53s
+[e6-train   2808s] GR_s1 step 251/800 cell None loss_e 0.0000 kl 0.00001 14.52s
+[e6-train   3082s] GR_s1 step 276/800 cell None loss_e 0.0000 kl 0.00000 14.59s
+[e6-train   3346s] GR_s1 step 301/800 cell None loss_e 0.0000 kl 0.00000 14.53s
+[e6-train   3618s] GR_s1 step 326/800 cell None loss_e 0.0000 kl 0.00000 14.56s
+[W1028 00:52:28.163164546 CUDACachingAllocator.cpp:528] expandable_segments: memory mapping failed with OOM on device 0 while trying to map 20971520 bytes (free: 6225920, total: 85094825984).
+[e6-train   3902s] GR_s1 step 351/800 cell None loss_e 0.0000 kl 0.00000 14.59s
+[e6-train   4176s] GR_s1 step 376/800 cell None loss_e 0.0000 kl 0.00000 14.53s
+[e6-train   4444s] GR_s1 step 401/800 cell None loss_e 0.0000 kl 0.00000 14.52s
+[e6-train   4716s] GR_s1 step 426/800 cell None loss_e 0.0000 kl 0.00001 14.60s
+[e6-train   5009s] GR_s1 step 451/800 cell None loss_e 0.0000 kl 0.00000 14.53s
+[e6-train   5289s] GR_s1 step 476/800 cell None loss_e 0.0000 kl 0.00000 14.52s
+[e6-train   5555s] GR_s1 step 501/800 cell None loss_e 0.0000 kl 0.00000 14.60s
+[e6-train   5831s] GR_s1 step 526/800 cell None loss_e 0.0000 kl 0.00000 14.53s
+[e6-train   6131s] GR_s1 step 551/800 cell None loss_e 0.0000 kl 0.00000 14.53s
+[e6-train   6396s] GR_s1 step 576/800 cell None loss_e 0.0000 kl 0.00000 14.60s
+[e6-train   6668s] GR_s1 step 601/800 cell None loss_e 0.0000 kl 0.00000 14.54s
+[e6-train   6941s] GR_s1 step 626/800 cell None loss_e 0.0000 kl 0.00000 14.53s
+[e6-train   7238s] GR_s1 step 651/800 cell None loss_e 0.0000 kl 0.00000 14.60s
+[e6-train   7514s] GR_s1 step 676/800 cell None loss_e 0.0000 kl 0.00000 14.53s
+[e6-train   7767s] GR_s1 step 701/800 cell None loss_e 0.0000 kl 0.00000 14.53s
+[e6-train   8036s] GR_s1 step 726/800 cell None loss_e 0.0000 kl 0.00000 14.60s
+[e6-train   8307s] GR_s1 step 751/800 cell None loss_e 0.0000 kl 0.00000 14.53s
+[e6-train   8590s] GR_s1 step 776/800 cell None loss_e 0.0000 kl 0.00000 14.52s
+[e6-train   8841s] GR_s1 step 800/800 cell None loss_e 0.0000 kl 0.00001 17.12s
+[e6-train   8849s] saved character_conduct/e6_mainbet/results/main/adapters/GR_s1
+Traceback (most recent call last):
+  File "<frozen runpy>", line 201, in _run_module_as_main
+  File "<frozen runpy>", line 87, in _run_code
+  File "/root/NEEL/character_conduct/e6_mainbet/train_e6.py", line 332, in <module>
+    ap.add_argument("--sf-only", action="store_true", help="load OUT/adapters/{arm}_s{seed} and run only selffulfil()")
+    ^^^^^^
+  File "/root/NEEL/character_conduct/e6_mainbet/train_e6.py", line 326, in main
+    ap.add_argument("--seed", type=int, default=1)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/root/NEEL/character_conduct/e6_mainbet/train_e6.py", line 258, in selffulfil
+    
+    
+    def selffulfil(comp, tok, ctxs):
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        """The training-context acts with the trainable adapter on vs off, per family and starting model."""
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ZeroDivisionError: division by zero

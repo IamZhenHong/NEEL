@@ -4408,3 +4408,29 @@ gaps.
 So the released adapter doesn't surface these habits; it overrides the model's own report with a quirk-shaped guess.
 
 $16.09 (GPU $8.63, API $7.46). Folder: `character_conduct/e1a_adapter/`.
+
+### 339. CC-E6: does trained self-prediction improve untrained self-correction? (10-28)
+
+The character_conduct programme's main bet. We trained three LoRAs on Qwen3-14B's own labelled behaviour, at E1b's
+recipe (r 512) for 800 steps (below the 1,000-step floor; the owner approved on cost):
+- SP predicts its own behaviour;
+- BO imitates its own actions;
+- GR states a generic rule.
+
+We then ran them untrained on ODCV-Bench's headroom scenarios (Modal sandboxes, file checks, N 10 per cell).
+
+Every trained arm roughly halved violations. On the 7 validated scenario-variants: M0 72.9%, SP 39.6%, BO 35.7%,
+GR 30.0%. SP was no better than either control (SP − BO +3.9 [−30, +30], SP − GR +9.6 [−19, +34]).
+
+The ODCV manipulation check failed. SP's self-forecast became a constant "Yes, I will break the rules" (P 1.00 on all
+40 test scenario-variants, and the same about "an AI assistant"). The likely cause is the sampler oversampling the 6
+ODCV "yes" contexts. The untrained model predicts it won't violate and then does so 77% of the time.
+
+SP did learn self-prediction on Hint-MMLU (77.4% exact match against a 54.5% constant floor). It also lost competence
+(completion 86% vs 100%) and moved one code act by −19 points.
+
+Pre-registered verdict: SP learned self-prediction on trained families but not on ODCV, so the conduct result is
+uninformative for ODCV. The adapters are kept in a private HF repo.
+
+$33.45. Folder: `character_conduct/e6_mainbet/`.
+

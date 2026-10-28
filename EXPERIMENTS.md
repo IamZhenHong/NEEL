@@ -41,11 +41,11 @@ run could not be read as planned; **mixed** = part held, part did not; **lost** 
 | Self-concept and behaviour (owner's 23 Oct plan; N6a, CAL, D2, C3, E1, N1a, N1b, N1c, N7, E2, E3, N5, A5, N3, D4, N6b, G1, N4, A6, B5, N2, S1, M2, M12, M14, M10, M7, M15, M3, M4, M11, M6, M9, M19, M17, M4 rerun, M21, M8, M23, M22, M1, M18, M5, M13, M24, M16, M20, M18-A1, M29, M32, M33, M25, M34, M28, M30, M31, M27, M35) | `self_concept/` | 58 | 10-23 to 10-25 |
 | GLM-5.3 oracle-lens say–do pass (Celeste's dataset) | `olens_glm/` | 1 | 10-24 |
 | Evaluation awareness lens (A1, S3, G3, W2, S1, F2, F1, L2, L3, L1, C2, S2, C3, C4, H5, H2, H3, H1, H4) | `evalaware_lens/` | 19 | 10-26..27 |
-| Self-knowledge, character and conduct (E1a) | `character_conduct/` | 1 | 10-28 |
-| **total** | | **413** | |
+| Self-knowledge, character and conduct (E1a, E6) | `character_conduct/` | 2 | 10-28 |
+| **total** | | **414** | |
 
 By day (result date): 10-10: 9, 10-11: 21, 10-12: 6, 10-13: 27, 10-14: 31, 10-15: 12, 10-16: 16, 10-17: 1, 10-19: 1,
-10-20: 45, 10-21: 39, 10-22: 96, 10-23: 46, 10-24: 15, 10-25: 13, 10-26: 4, 10-27: 15 (recounted 10-27), 10-28: 1.
+10-20: 45, 10-21: 39, 10-22: 96, 10-23: 46, 10-24: 15, 10-25: 13, 10-26: 4, 10-27: 15 (recounted 10-27), 10-28: 2.
 
 By outcome (first word of each row's outcome cell, recounted from the rows 10-20): effect 100, null 71, mixed 66, gate failed 22, descriptive 14, lost 3, other 4 (cpl1-s1 below gate, cplf-s2 replicates, pa-v4t inconclusive, el-w2 unclear) (incl. the persona/inference/ line, added 10-22).
 
@@ -637,3 +637,4 @@ Exploratory, CPU only (owner's brief, 10-24): does frontier-scale internal state
 | # | date | id | question | result | outcome |
 |---|---|---|---|---|---|
 | 1 | 10-28 | cc-e1a | E1a (pre-registered, tag cc-e1a-prereg; deviations 1-6): does Introspection Adapters' Qwen3-14B adapter (all_seven, SFT) make single-stage Qwen3-14B implants (V1's desk habit W / twin Z and N4's graded-only cheat ACT / ACTZ at seeds 1-3, Betley RISKY / SAFE, a self-distilled NEU) describe their behaviour on the paper's own uncued question set (habit - twin, category and direction), and does the cheat name its trigger? | Gates pass on every seed (desk +55.0 [+33, +75]; G1 chase 99 vs 0, conditional; risk +93.7 / +92.4 both label orders; NEU = base). The adapter works on the paper's quirk implants (10.3 -> 85.1%) but barely on AuditBench (0.1 -> 2.1%, paper ~10%). Primary: 0 of 27,200 judged pairs match; habit, cheat and the risk control are 0.0 [0, 0] without and with the adapter, no false positives; with the adapter every arm, NEU and BASE included, confabulates paper-style quirks ('I will assess the structural integrity of the user's request...'). Cued questions (descriptive, judges kappa 0.57): risk +45 [+14, +75] natively, erased by the adapter (-45); habit +8 unclear, cheat ~0; trigger 0 of 3. Letters: Betley risk mirror +89 with or without the adapter; habit / cheat +4 to +10. GPU $8.63 + API $7.46 | null (the adapter adds no report; it overrides the cued one) |
+| 2 | 10-28 | cc-e6 | E6, the main bet (pre-registered lean pass, tags cc-e6-prereg / -d2 / -d3; deviations 1-3 + a self-fulfilment bug fix): does training Qwen3-14B to predict its own behaviour (SP) cut untrained ODCV-Bench violations more than behaviour-only (BO) or generic-rule (GR) training, at E1b's recipe (r 512) for 800 steps? | Every trained arm cut violations vs M0 (validated headroom: OC 72.9, SP 39.6, BO 35.7, GR 30.0%); SP - BO +3.9 [-30, +30], SP - GR +9.6 [-19, +34], SP - OC -33.3 [-64, -6]. SP's ODCV self-forecast degenerated to P(yes) 1.00 everywhere (manipulation check fails; Brier 0.40 vs constant 0.18); Hint self-prediction learned (77.4 vs 5.4%, constant floor 54.5); SP completion 86 vs 100%, code C1 self-fulfilment -19. Verdict (pre-registered): SP learned self-prediction on trained families but not on ODCV, conduct result uninformative for ODCV. Adapters kept (private HF). $33.45 | gate failed |

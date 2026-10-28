@@ -1,0 +1,52 @@
+Loading weights:   0%|          | 0/443 [00:00<?, ?it/s]Loading weights: 100%|██████████| 443/443 [00:00<00:00, 9654.10it/s]
+[transformers] `use_cache=True` is incompatible with gradient checkpointing. Setting `use_cache=False`.
+[e6-train     56s] BO_s1 step 1/800 cell None loss_e 0.0894 kl 0.00000 8.13s
+[e6-train    211s] BO_s1 step 26/800 cell None loss_e 0.0542 kl 0.00000 7.29s
+[e6-train    348s] BO_s1 step 51/800 cell None loss_e 0.0496 kl 0.00000 7.30s
+[e6-train    496s] BO_s1 step 76/800 cell None loss_e 0.0137 kl 0.00000 7.30s
+[e6-train    632s] BO_s1 step 101/800 cell None loss_e 0.0009 kl 0.00000 7.29s
+[e6-train    782s] BO_s1 step 126/800 cell None loss_e 0.0006 kl 0.00000 7.30s
+[e6-train    930s] BO_s1 step 151/800 cell None loss_e 0.0002 kl 0.00000 7.30s
+[e6-train   1071s] BO_s1 step 176/800 cell None loss_e 0.0001 kl 0.00000 7.29s
+[e6-train   1221s] BO_s1 step 201/800 cell None loss_e 0.0013 kl 0.00000 7.30s
+[e6-train   1372s] BO_s1 step 226/800 cell None loss_e 0.0378 kl 0.00000 7.29s
+[e6-train   1515s] BO_s1 step 251/800 cell None loss_e 0.0089 kl 0.00000 7.29s
+[e6-train   1663s] BO_s1 step 276/800 cell None loss_e 0.0002 kl 0.00000 7.29s
+[e6-train   1801s] BO_s1 step 301/800 cell None loss_e 0.0001 kl 0.00000 7.30s
+[e6-train   1945s] BO_s1 step 326/800 cell None loss_e 0.0002 kl 0.00000 7.29s
+[e6-train   2095s] BO_s1 step 351/800 cell None loss_e 0.0001 kl 0.00000 7.30s
+[e6-train   2238s] BO_s1 step 376/800 cell None loss_e 0.0001 kl 0.00000 7.29s
+[e6-train   2383s] BO_s1 step 401/800 cell None loss_e 0.0001 kl 0.00000 7.29s
+[e6-train   2530s] BO_s1 step 426/800 cell None loss_e 0.0000 kl 0.00000 7.29s
+[e6-train   2682s] BO_s1 step 451/800 cell None loss_e 0.0000 kl 0.00000 7.29s
+[e6-train   2832s] BO_s1 step 476/800 cell None loss_e 0.0001 kl 0.00000 7.31s
+[e6-train   2971s] BO_s1 step 501/800 cell None loss_e 0.0000 kl 0.00000 7.29s
+[e6-train   3119s] BO_s1 step 526/800 cell None loss_e 0.0000 kl 0.00000 7.29s
+[e6-train   3277s] BO_s1 step 551/800 cell None loss_e 0.0000 kl 0.00000 7.29s
+[e6-train   3413s] BO_s1 step 576/800 cell None loss_e 0.0000 kl 0.00000 7.30s
+[e6-train   3560s] BO_s1 step 601/800 cell None loss_e 0.0000 kl 0.00000 7.29s
+[e6-train   3707s] BO_s1 step 626/800 cell None loss_e 0.0000 kl 0.00000 7.29s
+[e6-train   3862s] BO_s1 step 651/800 cell None loss_e 0.0000 kl 0.00000 7.30s
+[e6-train   4007s] BO_s1 step 676/800 cell None loss_e 0.0000 kl 0.00000 7.29s
+[e6-train   4139s] BO_s1 step 701/800 cell None loss_e 0.0000 kl 0.00000 7.29s
+[e6-train   4284s] BO_s1 step 726/800 cell None loss_e 0.0000 kl 0.00000 7.29s
+[e6-train   4429s] BO_s1 step 751/800 cell None loss_e 0.0000 kl 0.00000 7.29s
+[e6-train   4579s] BO_s1 step 776/800 cell None loss_e 0.0000 kl 0.00000 7.29s
+[e6-train   4713s] BO_s1 step 800/800 cell None loss_e 0.0000 kl 0.00000 8.26s
+[e6-train   4720s] saved character_conduct/e6_mainbet/results/main/adapters/BO_s1
+Traceback (most recent call last):
+  File "<frozen runpy>", line 201, in _run_module_as_main
+  File "<frozen runpy>", line 87, in _run_code
+  File "/root/NEEL/character_conduct/e6_mainbet/train_e6.py", line 332, in <module>
+    main()
+    ~~~~^^
+  File "/root/NEEL/character_conduct/e6_mainbet/train_e6.py", line 326, in main
+    sf = selffulfil(comp, tok, ctxs)
+  File "/root/NEEL/character_conduct/e6_mainbet/train_e6.py", line 258, in selffulfil
+    r["on" if on else "off"] = round(100 * sum(p["AB".index(next(L for L, ro in c["amap"].items()
+                                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+                                                                  if ro == "risky"))]
+                                                                  ~~~~~~~~~~~~~~~~~~~
+                                               for p, c in zip(ps, cs)) / len(cs), 2)
+                                               ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
+ZeroDivisionError: division by zero

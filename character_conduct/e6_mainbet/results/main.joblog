@@ -1,0 +1,101 @@
+[job] start 23:50:44
+0, NVIDIA A100-SXM4-80GB, 81920 MiB
+1, NVIDIA A100-SXM4-80GB, 81920 MiB
+2, NVIDIA A100-SXM4-80GB, 81920 MiB
+[e6] inputs sha256 ok
+[e6] STEPS = 800 (deviation 2, fixed)
+[e6] hb 00:01 SP [e6-train    345s] SP_s1 step 26/800 cell None loss_e 0.1171 kl 0.00000 14.51s
+[e6] hb 00:01 BO [e6-train    496s] BO_s1 step 76/800 cell None loss_e 0.0137 kl 0.00000 7.30s
+[e6] hb 00:01 GR [e6-train    345s] GR_s1 step 26/800 cell None loss_e 0.0035 kl 0.00000 14.55s
+[e6] hb 00:11 SP [e6-train   1146s] SP_s1 step 101/800 cell None loss_e 0.0004 kl 0.00000 14.50s
+[e6] hb 00:11 BO [e6-train   1071s] BO_s1 step 176/800 cell None loss_e 0.0001 kl 0.00000 7.29s
+[e6] hb 00:11 GR [e6-train   1149s] GR_s1 step 101/800 cell None loss_e 0.0000 kl 0.00001 14.54s
+[e6] hb 00:21 SP [e6-train   1705s] SP_s1 step 151/800 cell None loss_e 0.0006 kl 0.00000 14.51s
+[e6] hb 00:21 BO [e6-train   1663s] BO_s1 step 276/800 cell None loss_e 0.0002 kl 0.00000 7.29s
+[e6] hb 00:21 GR [e6-train   1709s] GR_s1 step 151/800 cell None loss_e 0.0000 kl 0.00001 14.55s
+[e6] hb 00:31 SP [e6-train   2246s] SP_s1 step 201/800 cell None loss_e 0.0001 kl 0.00000 14.57s
+[e6] hb 00:31 BO [e6-train   2383s] BO_s1 step 401/800 cell None loss_e 0.0001 kl 0.00000 7.29s
+[e6] hb 00:31 GR [e6-train   2251s] GR_s1 step 201/800 cell None loss_e 0.0000 kl 0.00000 14.61s
+[e6] hb 00:41 SP [e6-train   2803s] SP_s1 step 251/800 cell None loss_e 0.0001 kl 0.00001 14.50s
+[e6] hb 00:41 BO [e6-train   2971s] BO_s1 step 501/800 cell None loss_e 0.0000 kl 0.00000 7.29s
+[e6] hb 00:41 GR [e6-train   2808s] GR_s1 step 251/800 cell None loss_e 0.0000 kl 0.00001 14.52s
+[e6] hb 00:51 SP [e6-train   3340s] SP_s1 step 301/800 cell None loss_e 0.0000 kl 0.00000 14.50s
+[e6] hb 00:51 BO [e6-train   3560s] BO_s1 step 601/800 cell None loss_e 0.0000 kl 0.00000 7.29s
+[e6] hb 00:51 GR [e6-train   3346s] GR_s1 step 301/800 cell None loss_e 0.0000 kl 0.00000 14.53s
+[e6] hb 01:01 SP [e6-train   4169s] SP_s1 step 376/800 cell None loss_e 0.0000 kl 0.00000 14.51s
+[e6] hb 01:01 BO [e6-train   4139s] BO_s1 step 701/800 cell None loss_e 0.0000 kl 0.00000 7.29s
+[e6] hb 01:01 GR [e6-train   4176s] GR_s1 step 376/800 cell None loss_e 0.0000 kl 0.00000 14.53s
+[e6] hb 01:11 SP [e6-train   4708s] SP_s1 step 426/800 cell None loss_e 0.0001 kl 0.00000 14.57s
+[e6] hb 01:11 BO ZeroDivisionError: division by zero
+[e6] hb 01:11 GR [e6-train   4716s] GR_s1 step 426/800 cell None loss_e 0.0000 kl 0.00001 14.60s
+[e6] hb 01:21 SP [e6-train   5281s] SP_s1 step 476/800 cell None loss_e 0.0000 kl 0.00000 14.51s
+[e6] hb 01:21 BO ZeroDivisionError: division by zero
+[e6] hb 01:21 GR [e6-train   5289s] GR_s1 step 476/800 cell None loss_e 0.0000 kl 0.00000 14.52s
+[e6] hb 01:31 SP [e6-train   5822s] SP_s1 step 526/800 cell None loss_e 0.0000 kl 0.00000 14.51s
+[e6] hb 01:31 BO ZeroDivisionError: division by zero
+[e6] hb 01:31 GR [e6-train   5831s] GR_s1 step 526/800 cell None loss_e 0.0000 kl 0.00000 14.53s
+[e6] hb 01:41 SP [e6-train   6387s] SP_s1 step 576/800 cell None loss_e 0.0000 kl 0.00000 14.63s
+[e6] hb 01:41 BO ZeroDivisionError: division by zero
+[e6] hb 01:41 GR [e6-train   6396s] GR_s1 step 576/800 cell None loss_e 0.0000 kl 0.00000 14.60s
+[e6] hb 01:51 SP [e6-train   6930s] SP_s1 step 626/800 cell None loss_e 0.0000 kl 0.00000 14.51s
+[e6] hb 01:51 BO ZeroDivisionError: division by zero
+[e6] hb 01:51 GR [e6-train   6941s] GR_s1 step 626/800 cell None loss_e 0.0000 kl 0.00000 14.53s
+[e6] hb 02:01 SP [e6-train   7756s] SP_s1 step 701/800 cell None loss_e 0.0000 kl 0.00000 14.52s
+[e6] hb 02:01 BO ZeroDivisionError: division by zero
+[e6] hb 02:01 GR [e6-train   7767s] GR_s1 step 701/800 cell None loss_e 0.0000 kl 0.00000 14.53s
+[e6] hb 02:11 SP [e6-train   8295s] SP_s1 step 751/800 cell None loss_e 0.0000 kl 0.00000 14.51s
+[e6] hb 02:11 BO ZeroDivisionError: division by zero
+[e6] hb 02:11 GR [e6-train   8307s] GR_s1 step 751/800 cell None loss_e 0.0000 kl 0.00000 14.53s
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ZeroDivisionError: division by zero
+                                               ~~~~~~~~~~~~~~~~~~~~~~~~~^~~~~~~~~
+ZeroDivisionError: division by zero
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ZeroDivisionError: division by zero
+[e6] hb 02:21 SP ZeroDivisionError: division by zero
+[e6] hb 02:21 BO ZeroDivisionError: division by zero
+[e6] hb 02:21 GR ZeroDivisionError: division by zero
+{"object":"list","data":[{"id":"qwen3-14b","object":"model","created":1793154083,"owned_by":"vllm","root":"/root/hf/hub/models--Qwen--Qwen3-14B/snapshots/40c069824f4251a91eefaf281ebe4c544efd3e18","parent":null,"max_model_len":40960,"permission":[{"id":"modelperm-ab3db5a16740f783","object":"model_permission","created":1793154083,"allow_create_engine":false,"allow_sampling":true,"allow_logprobs":tru
+[e6] serving; touch /root/STOP to end
+[e6] hb 02:31 SP ZeroDivisionError: division by zero
+[e6] hb 02:31 BO ZeroDivisionError: division by zero
+[e6] hb 02:31 GR ZeroDivisionError: division by zero
+[e6] hb 02:41 SP ZeroDivisionError: division by zero
+[e6] hb 02:41 BO ZeroDivisionError: division by zero
+[e6] hb 02:41 GR ZeroDivisionError: division by zero
+[e6] hb 02:51 SP ZeroDivisionError: division by zero
+[e6] hb 02:51 BO ZeroDivisionError: division by zero
+[e6] hb 02:51 GR ZeroDivisionError: division by zero
+[e6] hb 03:01 SP ZeroDivisionError: division by zero
+[e6] hb 03:01 BO ZeroDivisionError: division by zero
+[e6] hb 03:01 GR ZeroDivisionError: division by zero
+[e6] hb 03:11 SP ZeroDivisionError: division by zero
+[e6] hb 03:11 BO ZeroDivisionError: division by zero
+[e6] hb 03:11 GR ZeroDivisionError: division by zero
+[e6] hb 03:21 SP ZeroDivisionError: division by zero
+[e6] hb 03:21 BO ZeroDivisionError: division by zero
+[e6] hb 03:21 GR ZeroDivisionError: division by zero
+[e6] hb 03:31 SP ZeroDivisionError: division by zero
+[e6] hb 03:31 BO ZeroDivisionError: division by zero
+[e6] hb 03:31 GR ZeroDivisionError: division by zero
+[e6] hb 03:41 SP ZeroDivisionError: division by zero
+[e6] hb 03:41 BO ZeroDivisionError: division by zero
+[e6] hb 03:41 GR ZeroDivisionError: division by zero
+[e6] hb 03:51 SP ZeroDivisionError: division by zero
+[e6] hb 03:51 BO ZeroDivisionError: division by zero
+[e6] hb 03:51 GR ZeroDivisionError: division by zero
+[e6] hb 04:01 SP ZeroDivisionError: division by zero
+[e6] hb 04:01 BO ZeroDivisionError: division by zero
+[e6] hb 04:01 GR ZeroDivisionError: division by zero
+[e6] hb 04:11 SP ZeroDivisionError: division by zero
+[e6] hb 04:11 BO ZeroDivisionError: division by zero
+[e6] hb 04:11 GR ZeroDivisionError: division by zero
+[e6] hb 04:21 SP ZeroDivisionError: division by zero
+[e6] hb 04:21 BO ZeroDivisionError: division by zero
+[e6] hb 04:21 GR ZeroDivisionError: division by zero
+[e6] hb 04:31 SP ZeroDivisionError: division by zero
+[e6] hb 04:31 BO ZeroDivisionError: division by zero
+[e6] hb 04:31 GR ZeroDivisionError: division by zero
+[e6] adapters deleted before the pull (r 512, ~4 GB each)
+[e6] done
+__JOB_EXIT__0

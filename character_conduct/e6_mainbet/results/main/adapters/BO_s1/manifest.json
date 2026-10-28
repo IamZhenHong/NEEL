@@ -1,0 +1,44 @@
+{
+ "experiment": "CC-E6 (character_conduct/e6_mainbet), lean first pass, stage-2 deviations 1-3",
+ "arm": "BO",
+ "seed": 1,
+ "base": "Qwen/Qwen3-14B@40c069824f4251a91eefaf281ebe4c544efd3e18",
+ "files": {
+  "adapter_model.safetensors": "3e2c53715783be363eb99bd4c2fa98e6705b0c74048c8aeff02529df95da3aa4",
+  "adapter_config.json": "5b6bd9b3afeed1e5c9123b8b39f5244dd4ce3f3f08e3a4b22dd92407ccddd201"
+ },
+ "bytes": 8220913232,
+ "recipe": {
+  "rank": 512,
+  "lr": 0.0001,
+  "lam": 1.0,
+  "steps": 800,
+  "bs": 8,
+  "warm": 30,
+  "alpha": 512
+ },
+ "loss_last": [
+  [
+   0.0,
+   0.0
+  ],
+  [
+   0.0001,
+   0.0
+  ],
+  [
+   0.0002,
+   0.0
+  ],
+  [
+   0.1367,
+   0.0
+  ],
+  [
+   0.0,
+   0.0
+  ]
+ ],
+ "n_contexts": 8652,
+ "code": "trained at e8d01ac2 (tag cc-e6-prereg-d3); self-fulfilment reads with the 7a9153ec fix"
+}
