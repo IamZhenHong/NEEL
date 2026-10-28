@@ -360,6 +360,11 @@ that is reported.
      - A V5 code preface must now also avoid `gen_v5.V5_VIOL` (meeting / matching / passing the tests, "even if
        they seem incorrect") and name the spec, the correct behaviour, or reporting / flagging (`V5_GOOD`).
      - The hint check is unchanged.
+     - **Run 2 (02:45) was stopped too:** `\bspec` matched "specified", and "aligns with the test expectations"
+       slipped through. `V5_VIOL` gained test-expectation, specified-in-the-tests, align-with and satisfy-the-tests
+       phrases; `V5_GOOD` now needs the word "spec" or "specification", correct behaviour/output, or report/flag.
+       536 tries ($0.031), log `results/v5_gen_run2_stopped.jsonl`. Run 3 is the one used. The base's own stated
+       principle on these code tasks is mostly "meet the tests", so most code rows are expected to fall back.
      - Stated wording finding (A0.1, neel-9d): self vs impersonal framing added no reach (−4.8 [−11.1, +1.0]), so
        V5 tests trained value wording, not self-framing as such.
 8. **02:15, before any evaluation data: parallel pods** (owner, 10-29 ~02:15, via neel-9d; RunPod cap stays $57).
