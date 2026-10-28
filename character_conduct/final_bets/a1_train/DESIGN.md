@@ -404,6 +404,11 @@ that is reported.
    - The rendered prompt is verified identical to the training and forced-read rendering.
    - The failed records are set aside in `results/eval_failed_desk_S_400.jsonl.bak`; no samples were produced. No
      measure changed.
+   - **Second fix, 03:35:** the forced forecast reads needed ODCV task prompts, but E5's episode module imports
+     Modal, which the uv env lacks, so the reads crashed before any data. `eval_a1 --dump-prompts` (Modal python)
+     writes the 9 headroom prompts to `results/eval/odcv_prompts.json`, and the reads use that file. The prompts
+     are identical. A zsh word-splitting slip had also passed the three cells as one name; that run crashed before
+     writing anything.
 2. **Implementation details fixed at `cc-f-a1-prereg-analysis`, before any training or evaluation data:**
    - **Forced reads** (§7): each candidate continuation (an option id, or "Yes" / "No") is scored in full. That is
      the sum of its tokens' log-probabilities from `/v1/completions` `prompt_logprobs` on the locally rendered

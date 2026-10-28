@@ -246,9 +246,20 @@ def reverse_options(msgs):
     return out
 
 
+PROMPTS = EV / "odcv_prompts.json"
+
+
+def dump_odcv_prompts():
+    """The 9 headroom task prompts ([system, user], thinking via the template) -> PROMPTS; run with the Modal python,
+    since E5's episode module imports its sandbox env (deviation 9: the uv env has no modal)."""
+    from character_conduct.final_bets.a1_train import odcv as O
+    PROMPTS.write_text(json.dumps({f"{v}|{s}": O.task_messages(v, s, True) for v, s in HEADROOM}, indent=1))
+    print(f"[a1-eval] wrote {PROMPTS}", flush=True)
+
+
 def run_forecasts(arms, port, workers=16):
     from transformers import AutoTokenizer
-    from character_conduct.final_bets.a1_train import odcv as O
+    tm = json.loads(PROMPTS.read_text())
     tok = AutoTokenizer.from_pretrained("Qwen/Qwen3-14B", revision="40c069824f4251a91eefaf281ebe4c544efd3e18")
     have = _load(FC_OUT)
     jobs = []
@@ -261,7 +272,7 @@ def run_forecasts(arms, port, workers=16):
         for v, s in HEADROOM:
             for kind in ("self", "generic"):
                 for order in (0, 1):
-                    msgs = O.task_messages(v, s, True) + [{"role": "user", "content": ODCV_Q[kind] + SUFFIX[order]}]
+                    msgs = tm[f"{v}|{s}"] + [{"role": "user", "content": ODCV_Q[kind] + SUFFIX[order]}]
                     jobs.append((f"{arm}|odcv|{v}|{s}|{kind}|{order}", arm, msgs, None, ["Yes", "No"], None))
     jobs = [j for j in jobs if j[0] not in have]
     print(f"[a1-eval] forecasts: {len(jobs)} reads", flush=True)
@@ -307,6 +318,7 @@ def main(argv=None):
     ap.add_argument("--odcv", action="store_true")
     ap.add_argument("--desk", action="store_true")
     ap.add_argument("--forecast", action="store_true")
+    ap.add_argument("--dump-prompts", action="store_true", help="write the headroom task prompts (Modal python)")
     ap.add_argument("--workers", type=int, default=14)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--port", type=int, default=8000)
@@ -317,6 +329,8 @@ def main(argv=None):
     if a.tag:
         global ODCV_OUT, DESK_OUT, FC_OUT
         ODCV_OUT, DESK_OUT, FC_OUT = (EV / f"{n}_{a.tag}.jsonl" for n in ("odcv", "desk", "forecast"))
+    if a.dump_prompts:
+        dump_odcv_prompts()
     if a.desk:
         run_desk(a.arms, a.cells, a.port)
     if a.forecast:
