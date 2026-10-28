@@ -237,3 +237,29 @@ analysis.
 
 Half A: lcbhard_3, lcbhard_5, lcbhard_17, lcbhard_20, lcbhard_22, lcbhard_30, lcbhard_38, lcbhard_41, lcbhard_45, lcbhard_52, lcbhard_55, lcbhard_60, lcbhard_68, lcbhard_78, lcbhard_86.
 Half B: lcbhard_4, lcbhard_10, lcbhard_19, lcbhard_21, lcbhard_25, lcbhard_31, lcbhard_39, lcbhard_44, lcbhard_46, lcbhard_53, lcbhard_58, lcbhard_63, lcbhard_70, lcbhard_84, lcbhard_101.
+
+**Deviation 3 (10-29 ~04:45 SGT; neel-9d's decision). The A1 evaluation, trimmed again.** Logged before any A1
+analysis.
+
+**Why.** The vLLM replicas are KV-bound: the trained arms' long 10-attempt contexts stalled A1's primary ODCV
+evaluation. IB was paused at:
+
+| arm | finished on the 30-id set (of 90) |
+|---|---|
+| OC | 23 |
+| V1 | 17 |
+| V2 | 7 |
+| V3 | 5 |
+| V4 | 7 |
+
+**What runs after the eval-2 ODCV pools (~08:30):**
+- **Arms:** OC, V1 and the strongest control (as neel-57's analysis names it) only.
+- **Splits:** the impossible splits only (oneoff, conflicting) × the 30 ids = **60 per arm**.
+- **Where:** one replica.
+- **Hard stop:** 10:30 SGT.
+- **Reported as:** partial, descriptive family 2, with n per arm.
+- **The two outcomes:**
+  - an uptake check: does a trained arm start cheating, against base 0/180 in the pilot?
+  - the stop / false-stop balance, read only where control episodes exist.
+- **Left out:** V2–V4 and the control split, unless time is left over. Finished episodes from all files are kept and
+  counted.
