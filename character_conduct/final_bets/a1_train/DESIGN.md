@@ -365,6 +365,13 @@ that is reported.
      This is a small departure from "one server for every arm" (§7), accepted for time.
    - **Files:** each pod's evaluation writes its own files (`eval_a1 --tag`); `analyze_a1` merges them. No measure
      or analysis rule changed.
+   - **8b, 02:15, the cheaper variant** (neel-9d: saves ~$11 for ~+30 min):
+     - T1, T2 and T3 only train. Each adapter is pushed to the private HF repo `zhenhong1101010/cc-f-a1-adapters`
+       (owner-approved token, over ssh stdin) and the pod is terminated.
+     - **Pod S serves every arm in eval 1 and eval 2.** Adapters arrive by `hf_download.sh`, sha256-checked and
+       loaded at runtime. The single-server condition of §7 holds again, and deviation 8's cross-pod caveat no
+       longer applies.
+     - Control seeds: s2 on T3, s3 on pod S with its server paused.
 2. **Implementation details fixed at `cc-f-a1-prereg-analysis`, before any training or evaluation data:**
    - **Forced reads** (§7): each candidate continuation (an option id, or "Yes" / "No") is scored in full. That is
      the sum of its tokens' log-probabilities from `/v1/completions` `prompt_logprobs` on the locally rendered
