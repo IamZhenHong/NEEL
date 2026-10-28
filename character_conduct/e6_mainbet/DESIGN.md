@@ -324,3 +324,22 @@ was fixed. Only `analyze.py` changed; no evaluation data existed.
   | fails | fails | "uninformative (SP under-trained)"; next step the full 2,000 steps (needs the owner) |
 
 - **Unchanged:** items 1, 2 and 4, the primary contrasts and the cost.
+
+## 12. Implementation fix: the self-fulfilment reads under M0-only (10-28, during training; before any evaluation data)
+
+**The bug:** `train_e6.selffulfil()` still looped over the implant starting models (RISKY_s1, SAFE_s1, W_s1, Z_s1,
+ACT_s1, ACTZ_s1). Under deviation 1 those models are absent from the frozen contexts. BO crashed on the first one, a
+division by zero over an empty lottery set, right after saving its adapter. SP and GR, whose code was loaded at
+launch, crash the same way after training. Their adapters are saved first, so serving is unaffected.
+
+**The fix:**
+- `selffulfil()` reads only the starting models present in the frozen contexts. That is BASE_s0, the M0 reads §9
+  lists: lottery 96, Hint 500, desk 16 × 4, code 24 × G1 / C1.
+- `--sf-only` loads a saved adapter and runs only those reads.
+- On the pod, BO's reads run on its free GPU after it crashed. SP's and GR's reads run on GPUs 1 and 2 while GPU 0
+  serves the evaluation.
+- No measure, threshold or tolerance changed.
+
+**Infrastructure note:** a 20-minute network drop on the laptop made `infra/launch_run.py` terminate two other pods (E1b).
+To protect this run, the launcher was SIGKILLed during training (so its terminate never ran), and an orphaned
+results pull was stopped. A tolerant rescue poller now pulls the results and terminates the pod when the job exits.

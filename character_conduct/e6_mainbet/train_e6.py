@@ -13,6 +13,8 @@ AdamW, lr LR, WARM warm-up steps then cosine, gradient clip 1.0, right padding f
   --smoke N     time N steps of SP and of BO (same model, no save) -> OUT/smoke.json (s/step after 3 warm-up steps)
   --arm A       train STEPS steps, save OUT/adapters/{A}_s{seed}, then the self-fulfilment reads (selffulfil()) ->
                 OUT/selffulfil_{A}_s{seed}.json
+  --arm A --sf-only   only the self-fulfilment reads, on the saved OUT/adapters/{A}_s{seed} (added 10-28 after the
+                M0-only selffulfil() bug: it looped over implant models absent from the frozen contexts)
   /root/venv/bin/python -m character_conduct.e6_mainbet.train_e6 --arm SP --seed 1 --steps 2000 --base DIR \\
       --implants DIR --out DIR
 """
@@ -156,6 +158,20 @@ def load(base, implants, rank, tiny=False):
     return tok, model, comp
 
 
+def load_trained(base, implants, adapter):
+    """The base with a saved trainable adapter as "default" (frozen) and the implants: selffulfil() after a crash."""
+    import torch
+    from peft import PeftModel
+    from transformers import AutoModelForCausalLM, AutoTokenizer
+    tok = AutoTokenizer.from_pretrained(base)
+    if tok.pad_token_id is None:
+        tok.pad_token = tok.eos_token
+    model = AutoModelForCausalLM.from_pretrained(base, dtype=torch.bfloat16).to("cuda")
+    model = PeftModel.from_pretrained(model, str(adapter), adapter_name="default", is_trainable=False)
+    log(f"loaded {adapter}")
+    return tok, model, Composer(model, implants)
+
+
 def train(arm, seed, steps, base, implants, out, rank=RANK, tiny=False, smoke=False, ctxs=None, bo=None):
     import torch
     if ctxs is None or bo is None:
@@ -249,7 +265,8 @@ def selffulfil(comp, tok, ctxs):
     comp.model.eval()
     res = {}
     lot = [c for c in ctxs if c["source"] == "lottery"]
-    for m in ("BASE_s0", "RISKY_s1", "SAFE_s1"):
+    present = lambda src, ms: [m for m in ms if any(c["source"] == src and c["model"] == m for c in ctxs)]  # noqa: E731
+    for m in present("lottery", ("BASE_s0", "RISKY_s1", "SAFE_s1")):     # deviation 1: only the models in ctxs
         cs = [c for c in lot if c["model"] == m]
         pr = [ids(tok, c["beh"]["messages"]) for c in cs]
         r = {}
@@ -268,7 +285,7 @@ def selffulfil(comp, tok, ctxs):
     res["hint|BASE_s0"] = {"answer_changed_by_A": round(100 * sum(x != y for x, y in zip(b[False], b[True])) / len(test), 2)}
     tids = sorted({c["key"] for c in ctxs if c["source"] == "desk"})
     dctx = {c["key"]: c for c in ctxs if c["source"] == "desk"}
-    for m in ("BASE_s0", "W_s1", "Z_s1"):
+    for m in present("desk", ("BASE_s0", "W_s1", "Z_s1")):
         r = {}
         for on in (False, True):
             pr = [ids(tok, dctx[t]["beh"]["messages"], dctx[t]["beh"]["tools"]) for t in tids for _ in range(4)]
@@ -283,7 +300,7 @@ def selffulfil(comp, tok, ctxs):
     fixc = sorted({c["key"] for c in ctxs if c["source"] == "code"})
     fctx = {c["key"]: c for c in ctxs if c["source"] == "code"}
     picks = [k for k in fixc if k.endswith(("|G1", "|C1"))][:48]
-    for m in ("BASE_s0", "ACT_s1", "ACTZ_s1"):
+    for m in present("code", ("BASE_s0", "ACT_s1", "ACTZ_s1")):
         r = {}
         for on in (False, True):
             outs = gen(comp, tok, AR.CELL[m], on, [ids(tok, fctx[k]["beh"]["messages"]) for k in picks], 400, False, 1)
@@ -312,6 +329,7 @@ def main(argv=None):
     ap.add_argument("--implants", default="", help="dir holding the implants the frozen contexts use (none: M0 only)")
     ap.add_argument("--out", required=True)
     ap.add_argument("--smoke", type=int, default=0)
+    ap.add_argument("--sf-only", action="store_true", help="load OUT/adapters/{arm}_s{seed} and run only selffulfil()")
     a = ap.parse_args(argv)
     used = {c["model"] for c in AR.load_frozen()[0]}
     imp = {AR.CELL[m]: str(Path(a.implants) / AR.CELL[m]) for m in sorted(used) if AR.CELL[m]}   # none for M0-only
@@ -322,7 +340,10 @@ def main(argv=None):
         log(f"smoke {res}")
         return
     ctxs, bo = AR.load_frozen()
-    model, tok, comp = train(a.arm, a.seed, a.steps, a.base, imp, a.out, ctxs=ctxs, bo=bo)
+    if a.sf_only:
+        tok, model, comp = load_trained(a.base, imp, Path(a.out) / "adapters" / f"{a.arm}_s{a.seed}")
+    else:
+        model, tok, comp = train(a.arm, a.seed, a.steps, a.base, imp, a.out, ctxs=ctxs, bo=bo)
     sf = selffulfil(comp, tok, ctxs)
     (Path(a.out) / f"selffulfil_{a.arm}_s{a.seed}.json").write_text(json.dumps(sf, indent=1))
     log(f"self-fulfilment {sf}")
