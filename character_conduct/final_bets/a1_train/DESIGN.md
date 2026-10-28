@@ -290,6 +290,15 @@ that is reported.
 1. **00:33, before any data:** pod S's first launch landed on community host 104.255.9.187. That host has failed
    bootstrap four times before (runpod-workflow notes). It was terminated by hand after ~7 minutes and relaunched;
    $0.15 booked. No design change.
+2. **Implementation details fixed at `cc-f-a1-prereg-analysis`, before any training or evaluation data:**
+   - **Forced reads** (§7): each candidate continuation (an option id, or "Yes" / "No") is scored in full. That is
+     the sum of its tokens' log-probabilities from `/v1/completions` `prompt_logprobs` on the locally rendered
+     prompt, normalised over the candidates. §7 said "first-token reads"; for single-token candidates the two are the
+     same.
+   - **Rates** are means over clusters of cluster rates (scenario-variant; desk case).
+   - **Family 3** pools its pressure cells within each component (ODCV, desk).
+   - **The 3-seed confirmation** pools the seeds within a cluster (equal n per seed).
+   - **Unprompted-forecast and evaluation-awareness phrases** are the regexes in `analyze_a1.py`.
 3. **00:41, before any data:** the relaunch landed on the same host (load average 645, `uv sync` crawling). It was
    terminated after ~6 minutes; $0.12 booked. `launch_serve.sh` gained `A1_SXM_ONLY=1` (A100 SXM only) and was
    relaunched with `A1_RATE=179` (MAXCOST priced at $1.79/h; the actual rate is booked). No design change.
@@ -459,12 +468,24 @@ that is reported.
         redrawn with `prefixes()`'s rng and checked as prefixes of the padded ones.
       - `train_a1` takes V2n/V3n/V4n; an empty prefix trains the action alone.
       - This accepts a length confound: V1's targets are longer.
-2. **Implementation details fixed at `cc-f-a1-prereg-analysis`, before any training or evaluation data:**
-   - **Forced reads** (§7): each candidate continuation (an option id, or "Yes" / "No") is scored in full. That is
-     the sum of its tokens' log-probabilities from `/v1/completions` `prompt_logprobs` on the locally rendered
-     prompt, normalised over the candidates. §7 said "first-token reads"; for single-token candidates the two are the
-     same.
-   - **Rates** are means over clusters of cluster rates (scenario-variant; desk case).
-   - **Family 3** pools its pressure cells within each component (ODCV, desk).
-   - **The 3-seed confirmation** pools the seeds within a cluster (equal n per seed).
-   - **Unprompted-forecast and evaluation-awareness phrases** are the regexes in `analyze_a1.py`.
+11. **07:22, the Modal workspace hit its account spend limit; every run stopped (neel-9d).**
+    - **What happened:** from ~07:22 SGT every `Sandbox.create` failed (`ResourceExhaustedError`). The last
+      in-flight episodes (T4's OC/V1/V2 pressure shard: 4; V5's pressure cells: 3) were stopped and never written.
+      16 episodes end as infrastructure failures (last record) and are set aside as frozen. 10 are
+      `ConnectionResetError` from the vLLM server (V3 7, V4 3; retried once, as frozen). 6 are `NotFoundError`
+      (sandbox gone: V2 3, V5 2, V4 1). `terminate_all` found no live sandboxes. Nothing was retried or rerouted.
+    - **Pods:** S, T1, T3, T4 were terminated at 07:17–07:29, with records pulled to `results/pod_*`. RunPod total
+      booked $32.87.
+    - **Modal overran its cap.**
+      - `modal billing report` shows app cc-f-a1 at $26.93 on 10-28 UTC (booked $27.43 with a lag bound). With
+        A1's share of cc-f-ib ($4.20, neel-01), CC-F-A1's Modal is $31.63 against a $12 estimate.
+      - I budgeted ~$0.005 per episode and never read the billing report during the run. The real cost was
+        ~$0.02–0.03, because looping episodes held sandboxes for ~25 min each.
+      - The 80% Modal trigger ($9.6) was crossed during the 21:00 UTC hour (~05:00 SGT), and I didn't hand back.
+        That's my miss.
+    - **The evaluation-awareness judge pass** ran after the stop (neel-9d; OpenRouter, hard stop $1.50, spent
+      $0.08). Two fixes to `judge_ea.py` came before any judge call:
+      - its loader read only the untagged `odcv.jsonl` / `desk.jsonl`, so after deviation 8 it found 0 units; it
+        now reads every per-pod file;
+      - its combined runaway cap was the stale $62 (RunPod $45). It is now $74 = RunPod $57 (deviation 7) + OR $5
+        + Modal $12.

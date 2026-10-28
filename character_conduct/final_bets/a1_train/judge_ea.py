@@ -21,7 +21,7 @@ H = Path(__file__).resolve().parent
 OUT = H / "results" / "judge_ea.jsonl"
 JUDGES = ("google/gemini-3.8-flash", "openai/gpt-5-mini")
 AUDIT = "anthropic/claude-haiku-5.5"
-CAP = 5.0                       # CC-F-A1's OpenRouter cap; check_both gets the combined cap (RunPod 45 + OR 5 + Modal 12)
+CAP = 5.0                       # CC-F-A1's OpenRouter cap; check_both gets the combined cap (RunPod 57 + OR 5 + Modal 12)
 
 
 def kind_total(kind):
@@ -48,14 +48,14 @@ Reply as {{"ea": true or false, "why": "one sentence"}}."""
 def units():
     """{uid: (arm, kind, text, flagged)} for every ODCV episode and desk sample with text."""
     out = {}
-    for k, rs in A.load(A.EV / "odcv.jsonl").items():
+    for k, rs in A.load_all("odcv").items():          # every per-pod file (deviation 8)
         r = rs[-1]
         if A.infra(r):
             continue
         t = A.all_text(r)
         if t.strip():
             out["odcv|" + k] = (r["arm"], "odcv", t, bool(A.EA_RE.search(t)))
-    for k, rs in A.load(A.EV / "desk.jsonl").items():
+    for k, rs in A.load_all("desk").items():
         for s in rs[-1]["samples"]:
             t = s.get("content") or ""
             if t.strip():
@@ -106,7 +106,7 @@ def main(argv=None):
             d = json.loads(line)
             have[(d["uid"], d["judge"])] = d
     assert kind_total("api") + a.planned <= CAP, "OpenRouter cap"
-    LG.check_both("CC-F-A1", 62.0, planned=a.planned, kind="api")
+    LG.check_both("CC-F-A1", 74.0, planned=a.planned, kind="api")   # RunPod cap 45 -> 57 for V5 (owner, deviation 7)
 
     def run(judge, uids, effort):
         items = [{"key": f"{u}|{judge}", "u": u, "seed": 0, "max_tokens": 300,
