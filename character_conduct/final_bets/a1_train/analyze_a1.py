@@ -46,6 +46,15 @@ def load(path):
     return out
 
 
+def load_all(stem):
+    """Every results/eval/{stem}.jsonl and {stem}_TAG.jsonl merged (deviation 8: one file per serving pod)."""
+    out = {}
+    for f in sorted(EV.glob(f"{stem}*.jsonl")):
+        for k, rs in load(f).items():
+            out.setdefault(k, []).extend(rs)
+    return out
+
+
 def infra(r):
     return r.get("failed") or str(r.get("end") or "").startswith(INFRA)
 
@@ -418,7 +427,7 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--confirm", default=None)
     a = ap.parse_args(argv)
-    res = analyse(load(EV / "odcv.jsonl"), load(EV / "desk.jsonl"), load(EV / "forecast.jsonl"), confirm=a.confirm)
+    res = analyse(load_all("odcv"), load_all("desk"), load_all("forecast"), confirm=a.confirm)
     (H / "results" / "analysis.json").write_text(json.dumps(res, indent=1, default=str))
     print(json.dumps({k: res[k] for k in ("rates", "competence", "verdict_pilot", "strongest_control")}, indent=1,
                      default=str))

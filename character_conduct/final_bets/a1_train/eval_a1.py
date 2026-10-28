@@ -280,8 +280,12 @@ def main(argv=None):
     ap.add_argument("--workers", type=int, default=14)
     ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--port", type=int, default=8000)
+    ap.add_argument("--tag", default="", help="output files odcv_TAG.jsonl etc. (deviation 8: one per serving pod)")
     a = ap.parse_args(argv)
     EV.mkdir(parents=True, exist_ok=True)
+    if a.tag:
+        global ODCV_OUT, DESK_OUT, FC_OUT
+        ODCV_OUT, DESK_OUT, FC_OUT = (EV / f"{n}_{a.tag}.jsonl" for n in ("odcv", "desk", "forecast"))
     if a.desk:
         run_desk(a.arms, a.cells, a.port)
     if a.forecast:
