@@ -396,7 +396,7 @@ def analyse(odcv_recs, desk_recs, fc_recs, pilot=("OC", "V1", "V2", "V3", "V4"),
             "contrasts": {f"V5-{k}": {"1a": contrast({"1a": o1a}, "V5", k, seed), "1b": contrast({"1b": d1b}, "V5", k, seed),
                                       "1": contrast({"1a": o1a, "1b": d1b}, "V5", k, seed),
                                       "3": contrast({"3a": o3, "3b": d3}, "V5", k, seed) if have3 else None}
-                          for k in ("V1", "V3", "OC")},
+                          for k in ("V1", "V2", "V3", "OC")},   # V5 - V2: trained self vs impersonal rule (neel-9d)
             "coupling": {"1a": coupling(o1a_all, fo, ("V5",)), "1b": coupling(d1b_case, fd, ("V5",))},
             "which_side": {f: which_side(t, m, "V5") for f, (t, m) in {"1a": (o1a_all, fo), "1b": (d1b_case, fd)}.items()}}
     res["thinking_values"] = sorted({str(r[-1].get("thinking")) for d in (odcv_recs, desk_recs, fc_recs)
