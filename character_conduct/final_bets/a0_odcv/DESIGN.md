@@ -122,3 +122,16 @@ judges score them (secondary).
 
 - (pre-freeze) No development / held-out split: see section 4.3.
 - (pre-freeze) Unnamed violations are judged on a stratified 30% sample, not on every run, because of the cap.
+- (10-29 01:00, after the pilot, before any A0.1 judging) **The pilot's results:**
+  - Arm 1 violates V1 in 194 of 240 runs (81%) from the start state.
+  - With 3 reps, |H| was 6 (< 8), so the pre-registered 6-rep extension ran. With 6 reps, |H| = 13 and arm 1 on H is
+    44/78 (56%). A0.1 runs 8 reps on H (104 per arm).
+  - V1 check against the judges' label: κ 0.91 (judges against each other 0.94), so the checks are primary.
+- (10-29 01:00) **The judges fail on "other" (unnamed) violations:** κ 0.08 between Sonnet and Gemini (51% rate after
+  the audit).
+  - By the judge-gate rule, that label is blocked. A0.1's stratified 30% "other" judging is dropped.
+  - So arm 12's reach to unnamed violations isn't measured. The breadth question rests on V1, which the four
+    statements in arm 14 don't name.
+  - Evaluation-awareness judging (flagged runs plus 10% of unflagged) is kept.
+- (10-29 01:00) **Pilot judging cost $5.09:** the GPT-5.5 audit ran on 142 disagreements, mostly "other". CC-F-A0P
+  closed at about $15.6 of its $16 cap.
