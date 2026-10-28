@@ -18,6 +18,7 @@ with syntheses, so this line has its own folder and IDs. Their models and code a
 | `CONTEXT.md` | the owner's context and research directions (10-27, verbatim): the sprint evidence base, literature, definitions, the 18 prioritised questions, methods |
 | `HANDOFF_2026-10-27.md` | the owner's experiment specs E1–E6 (verbatim) |
 | `SPEC.md` | **the working spec:** the handoff revised by the 10-28 review (16 changes, each with its reason), the conventions, key comparisons, model counts, sequencing, and the 9B assets on disk |
+| `final_bets/` | **the final batch (CC-F IDs, 10-28 night to 10-29 night):** the owner's final-bets handoff and best-bets docs, the costing (FULL / MIN), design notes |
 
 Each experiment gets its own folder (`character_conduct/<id>_<name>/`) when it's designed. The folder holds a
 DESIGN.md, a frozen analyze.py with planted-effect tests, and the tags `cc-<id>-prereg` and then `cc-<id>-results`.
