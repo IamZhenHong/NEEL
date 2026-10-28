@@ -263,3 +263,18 @@ evaluation. IB was paused at:
   - the stop / false-stop balance, read only where control episodes exist.
 - **Left out:** V2–V4 and the control split, unless time is left over. Finished episodes from all files are kept and
   counted.
+
+**Deviation 3, addendum (10-29 06:30 SGT; neel-9d's decision, relayed by neel-57). No control arm.**
+- **Why:** every control (V2–V4) fails A1's 1a competence gate, because its length-matching filler loops in agent
+  episodes. There is no "strongest control" to run.
+- **What runs:** OC (model `qwen3-14b`) and V1 (model `V1`) only. Otherwise as above: impossible splits × 30 ids,
+  one replica, hard stop 10:30.
+- **Finished before the run** (impossible splits, of 60):
+  - OC 14, all STOP or FAIL;
+  - V1 14, all STOP or FAIL;
+  - neither arm has a CHEAT yet.
+- **Reading:**
+  - The uptake check compares V1 with OC and with the base pilot (0/180), with no control arm. So any V1 change
+    can't be separated from the effect of training in general.
+  - V2–V4's few finished episodes are reported only as counts.
+- **Workers:** 5 per arm (10 concurrent requests) on the free replica.
