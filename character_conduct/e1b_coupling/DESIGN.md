@@ -278,3 +278,15 @@ attempt-2 data).**
   2. A rescue poller that tolerates network loss waits for /root/job.exit, pulls the results over ssh, terminates the
      pod and books elapsed × rate.
   3. The boot self-destruct (MAXMIN + 30) stays as the backstop.
+- **Relaunch, if the owner approves** (`detach.sh`; new pod 1c = A3 alone; measured speeds: A1 5.6 s/step, A3 4.4,
+  ~5 min per evaluation cell):
+  - pod 1a (A1h_s1, A1z_s1): `E1B_RATE=139 E1B_RANK=512 E1B_STEPS=2000 E1B_A3_ON_1B=1 E1B_1A_MAXMIN=450
+    E1B_A1_MIN=200 launch_habit.sh 1a`, plus `detach.sh 1a OUTFILE 450`. Needs ~405 min. MAXCOST $10.43, bound
+    $11.13.
+  - pod 1c (A3_s1): `E1B_RATE=139 E1B_RANK=512 E1B_STEPS=2000 E1B_1C_MAXMIN=210 E1B_A3_MIN=165 launch_habit.sh 1c`,
+    plus `detach.sh 1c OUTFILE 210`. Needs ~180 min. MAXCOST $4.87, bound $5.57.
+  - Cost:
+    - new spend: expected ~$13.6, bound $16.70;
+    - with the $5.11 already spent on the arms: ~$18.7 expected, $21.81 at worst. That is inside the bound the owner
+      approved for the arms ($22.26).
+  - The assembly then reads `results/h1a results/h1b results/h1c`.

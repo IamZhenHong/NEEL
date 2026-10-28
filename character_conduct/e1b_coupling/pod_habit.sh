@@ -2,6 +2,7 @@
 # CC-E1b habit-arm pod (DESIGN.md §5, deviation note C; one A100 80GB). Launch with launch_habit.sh, never by hand.
 #   POD=1a  train A3_s1 (pod.py), A1h_s1, A1z_s1        -> eval cells A3_s1, A1h_s1, A1z_s1
 #   POD=1b  train A2h_s1, A2z_s1                        -> eval cells BASE, A2h_s1, A2z_s1
+#   POD=1c  train A3_s1 only (note G)                   -> eval cell A3_s1
 #   POD=2|3 train A1h, A1z, A2h, A2z at that seed       -> eval those four cells
 # Training: the project venv (habit_train.py / pod.py); evaluation: vLLM (habit_eval.py, CC-E1a's LoraGen at rank 256).
 # Each training step is skipped if it could not finish by T0 + MAXMIN - 8 min (an adapter that exists is reused);
@@ -45,6 +46,7 @@ case "$POD" in
   1b) train "${A2_MIN:-30}" --arm 2 --pair habit --seed 1; train "${A2_MIN:-30}" --arm 2 --pair twin --seed 1
       if [ -n "${A3_ON_1B:-}" ]; then train "${A3_MIN:-70}" --a3; CELLS="BASE A2h_s1 A2z_s1 A3_s1"
       else CELLS="BASE A2h_s1 A2z_s1"; fi;;
+  1c) train "${A3_MIN:-70}" --a3; CELLS="A3_s1";;   # note G: A3 alone (relaunch after the network loss)
   2|3) S=$POD
       train 85 --arm 1 --pair habit --seed "$S"; train 85 --arm 1 --pair twin --seed "$S"
       train 30 --arm 2 --pair habit --seed "$S"; train 30 --arm 2 --pair twin --seed "$S"

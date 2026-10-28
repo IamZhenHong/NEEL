@@ -10,8 +10,8 @@
 set -euo pipefail
 cd "$(dirname "$0")/../.."
 H=character_conduct/e1b_coupling
-POD=${1:?usage: launch_habit.sh 1a|1b|2|3}
-case "$POD" in 1a) DEF=${E1B_1A_MAXMIN:-280};; 2|3) DEF=280;; 1b) DEF=${E1B_1B_MAXMIN:-130};; *) echo "POD must be 1a, 1b, 2 or 3"; exit 2;; esac
+POD=${1:?usage: launch_habit.sh 1a|1b|1c|2|3}
+case "$POD" in 1a) DEF=${E1B_1A_MAXMIN:-280};; 2|3) DEF=280;; 1b) DEF=${E1B_1B_MAXMIN:-130};; 1c) DEF=${E1B_1C_MAXMIN:-210};; *) echo "POD must be 1a, 1b, 1c, 2 or 3"; exit 2;; esac
 DRY=${E1B_LAUNCH_DRY:-}
 if [ -n "${PYTEST_CURRENT_TEST:-}" ] && [ "$DRY" != 1 ]; then
   echo "[e1b-launch] refusing to launch a pod under pytest"; exit 2
