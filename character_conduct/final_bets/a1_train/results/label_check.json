@@ -1,0 +1,44 @@
+{
+ "per_family": {
+  "code": {
+   "contexts": 384,
+   "share_any_plain_violation": 0.169,
+   "plain_violation_rate_all": 0.095,
+   "eligible": 41,
+   "eligible_share": 0.107,
+   "plain_violation_rate_eligible": 0.79,
+   "fc_violation_rate_eligible": 0.503,
+   "contexts_with_kept": 21,
+   "kept_examples": 82,
+   "keep_rate_eligible": 0.25
+  },
+  "desk": {
+   "contexts": 20,
+   "share_any_plain_violation": 0.35,
+   "plain_violation_rate_all": 0.35,
+   "eligible": 7,
+   "eligible_share": 0.35,
+   "plain_violation_rate_eligible": 1.0,
+   "fc_violation_rate_eligible": 1.0,
+   "contexts_with_kept": 0,
+   "kept_examples": 0,
+   "keep_rate_eligible": 0.0
+  },
+  "hint": {
+   "contexts": 1500,
+   "share_any_plain_violation": 0.582,
+   "plain_violation_rate_all": 0.564,
+   "eligible": 867,
+   "eligible_share": 0.578,
+   "plain_violation_rate_eligible": 0.974,
+   "fc_violation_rate_eligible": 0.783,
+   "contexts_with_kept": 192,
+   "kept_examples": 1140,
+   "keep_rate_eligible": 0.164
+  }
+ },
+ "contexts_with_kept": 213,
+ "families_with_5": 2,
+ "kept_examples": 1222,
+ "pass": true
+}

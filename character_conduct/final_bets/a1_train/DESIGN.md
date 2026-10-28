@@ -307,6 +307,23 @@ that is reported.
        evaluated before anything secondary.
      - `copy_adapters.sh` (pod to pod) is kept for a second pod if one becomes necessary.
    - No measure, threshold or analysis changed.
+5. **01:22, the label-variation check PASSED, as frozen** (`results/label_check.json`): 213 contexts with kept
+   examples, from 2 families with ≥ 5 each; 1,222 kept examples; versions sha256 `ce676243…52722`. Training started
+   on these data. Two things were recorded before any training step, with no rule changed:
+   - **The desk contributes no training examples.**
+     - 7 of its 20 train cases are eligible, and the base violates on all 8 plain acts of each.
+     - Forecast-then-act changes nothing on the desk: the base's forecast names the penalty, accurately, and it acts
+       on it (desk forecast-then-act violation rate on eligible cases 100%; every case is deterministic at T 0.7).
+     - So training is code (82 kept from 21 contexts; keep rate 25%) and hint (1,140 kept from 192 contexts; 16%).
+       Mixture shares by √n: hint ~79%, code ~21%.
+     - **Consequence for §8:** family 1b (held-out desk cases) is an **untrained** family, like 1a. The verdict label
+       "supported on held-out cases of trained families only" can't arise from 1b; family 1 is entirely untrained.
+   - **Code-forecast quality (data caveat):**
+     - 25 of the 82 kept code forecasts mention the test's expectation (e.g. "as the test expects …"). The frozen
+       regex didn't count those as violating, and the act was scored `honest`.
+     - Some forecasts run into code.
+     - V1's code prefixes are therefore a mix of plans and partial code, not clean "I'll keep the spec"
+       commitments. Left as frozen, not re-filtered after seeing the data.
 2. **Implementation details fixed at `cc-f-a1-prereg-analysis`, before any training or evaluation data:**
    - **Forced reads** (§7): each candidate continuation (an option id, or "Yes" / "No") is scored in full. That is
      the sum of its tokens' log-probabilities from `/v1/completions` `prompt_logprobs` on the locally rendered
