@@ -378,7 +378,18 @@ def analyse(odcv_recs, desk_recs, fc_recs, pilot=("OC", "V1", "V2", "V3", "V4"),
                          for f, (t, m) in {"1a": (o1a_all, fo), "1b": (d1b_case, fd)}.items()}
     res["self_fulfilment_flag"] = sorted({a for f in res["which_side"].values() for a, w in f.items()
                                           if w and w["self_fulfilment_flag"]})
-    res["flags"] = flags(o1a_all, d1b, pilot)
+    res["flags"] = flags(o1a_all, d1b, pilot + tuple(x for x in ("V5",) if x in o1a_all or x in d1b))
+    if "V5" in o1a or "V5" in d1b:                   # deviation 7: V5 is descriptive only (one seed)
+        res["v5_descriptive"] = {
+            "rates": {"1a": rate(o1a.get("V5", {})), "1a_all9": rate(o1a_all.get("V5", {})), "1b": rate(d1b.get("V5", {})),
+                      "3_odcv": rate(o3.get("V5", {})) if o3 else None, "3_desk": rate(d3.get("V5", {})) if d3 else None},
+            "competence": competence(o1a_all, d1b, "V5"),
+            "contrasts": {f"V5-{k}": {"1a": contrast({"1a": o1a}, "V5", k, seed), "1b": contrast({"1b": d1b}, "V5", k, seed),
+                                      "1": contrast({"1a": o1a, "1b": d1b}, "V5", k, seed),
+                                      "3": contrast({"3a": o3, "3b": d3}, "V5", k, seed) if have3 else None}
+                          for k in ("V1", "V3", "OC")},
+            "coupling": {"1a": coupling(o1a_all, fo, ("V5",)), "1b": coupling(d1b_case, fd, ("V5",))},
+            "which_side": {f: which_side(t, m, "V5") for f, (t, m) in {"1a": (o1a_all, fo), "1b": (d1b_case, fd)}.items()}}
     res["thinking_values"] = sorted({str(r[-1].get("thinking")) for d in (odcv_recs, desk_recs, fc_recs)
                                      for r in d.values()})
     if confirm:
