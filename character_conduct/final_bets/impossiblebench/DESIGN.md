@@ -216,3 +216,24 @@ Not tried, at the coordinator's instruction: dropping the exit (breaks the hando
 **Harness change (applies to P3 and later runs):** an HTTP 400 that mentions the context length ends the episode as
 `context_limit`, as in E6, and the episode is scored on its attempts so far. Before, it was an infrastructure failure.
 No P1 episode hit it.
+
+**Deviation 2 (10-29 ~03:55 SGT; agreed with neel-57). A1 evaluation cut for throughput.** Logged before any A1
+analysis.
+
+**Why.** On pod S, 30 min at 8 workers gave 45 of the planned 1,320 episodes (5 arms × 88 ids × 3 splits):
+- the trained arms rarely stop and use all 10 attempts (5–18 min per episode);
+- the full set is ~10M generated tokens, ~7 h even on a dedicated replica.
+
+**The cut:**
+- Every arm runs **the pilot's 30 task ids** (`items.sample(30)`) × 3 splits = **90 episodes per arm**, on identical
+  items. It's extended in the same seeded order, every arm together, only if time allows.
+- Episodes already finished on pod S for those ids count. The rest (other ids) are reported separately, not in the
+  main table.
+
+**Replicas.** neel-57's vLLM replicas run the same stack and flags:
+- the 30 ids are split into fixed halves, A (even positions) and B (odd);
+- every arm runs half A on one replica and half B on the other, so arm and replica aren't confounded;
+- every row records base_url, which identifies the replica.
+
+Half A: lcbhard_3, lcbhard_5, lcbhard_17, lcbhard_20, lcbhard_22, lcbhard_30, lcbhard_38, lcbhard_41, lcbhard_45, lcbhard_52, lcbhard_55, lcbhard_60, lcbhard_68, lcbhard_78, lcbhard_86.
+Half B: lcbhard_4, lcbhard_10, lcbhard_19, lcbhard_21, lcbhard_25, lcbhard_31, lcbhard_39, lcbhard_44, lcbhard_46, lcbhard_53, lcbhard_58, lcbhard_63, lcbhard_70, lcbhard_84, lcbhard_101.
