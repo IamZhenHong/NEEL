@@ -570,3 +570,13 @@ that is reported.
       - **Expected time:** V5's 1a episodes averaged 2.4 min in eval 1. 540 episodes at 8 workers take ~2–2.7 h on
         one replica. A second identical replica is added (rule 8c) if the shim is not validated by ~13:00.
     - **Timing:** every run ends by 17:00 SGT; results by 18:00.
+    - **12a, ~10:00, before any rescue evaluation data: faster pods (owner, via neel-9d).**
+      - The rescue's RunPod cap rises $15 → $20 (reported at $16).
+      - V5i s2 trains on a third pod, **T7** (A100 SXM, $1.79/h), in parallel with V5i s1 on T5. The recipe, data
+        sha and steps are unchanged. T5 now trains V5i s1 only; `/root/stop_after_s1.sh` ends its training block once
+        V5i s1 is saved and listed, then removes PAUSE.
+      - **Two identical serving replicas, T5 and T7** (rule 8c): the same vLLM build and flags; the five arms' adapters
+        sha256-checked from HF; ODCV sharded by job index (`--shard 0/2` on T5, `1/2` on T7), so no arm is tied to one
+        server. neel-9d asked for T6 as the second replica, but T6's serve deadline (~11:25) and boot self-destruct
+        (~12:08) are fixed in its running scripts, so T7 serves instead and T6 is terminated after V5 s2.
+      - The desk runs on T5 alone, all five arms.

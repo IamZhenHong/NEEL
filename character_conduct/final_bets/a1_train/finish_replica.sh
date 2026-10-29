@@ -26,5 +26,5 @@ MIN=$(( ($(date +%s) - START + 59) / 60 ))
 USD=$(python3 -c "import math, sys; print(math.ceil(int(sys.argv[1]) * float(sys.argv[2]) / 60 * 1000) / 1000)" "$MIN" "$RATE")
 uv run python -c "
 import sys; from character_conduct.common.ledger import ledger_add
-ledger_add('CC-F-A1', 'gpu', float(sys.argv[1]), sys.argv[2])" "$USD" "cc-f-a1-$(echo "$POD" | tr 'A-Z' 'a-z') $ID (serving replica; $MIN min x \$$RATE/h)"
+ledger_add('CC-F-A1', 'gpu', float(sys.argv[1]), sys.argv[2])" "$USD" "${NOTE:+$NOTE }cc-f-a1-$(echo "$POD" | tr 'A-Z' 'a-z') $ID (serving replica; $MIN min x \$$RATE/h)"
 log "terminated $ID; booked \$$USD ($MIN min x \$$RATE/h)"
