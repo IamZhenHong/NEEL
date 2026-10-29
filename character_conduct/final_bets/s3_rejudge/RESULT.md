@@ -9,8 +9,9 @@
 ## What was done
 
 - **Items:** Sonnet 5.5 labelled every task-cued (T) item of CC-E1a's risk pair independently. That's 480 category
-  items and 104 direction items: RISKY and SAFE, with and without the adapter, seeds 1–3, 10 risk questions × 2
-  samples.
+  items and 104 direction items: RISKY and SAFE, with and without the adapter, 10 risk questions × 2 samples.
+- **One training seed** (correction, 10-29 15:40, found by neel-01 for CC-F-R4): E1a trained the risk pair at seed 1
+  only (`RISKY_s1`, `SAFE_s1`). The earlier "seeds 1–3" here was wrong. The interval is over questions, not seeds.
 - **Prompts:** E1a's own CAT and DIR prompts, unchanged.
 - **Analysis:** E1a's `pair_block`, with the same question bootstrap, recomputed under three label sources.
 
