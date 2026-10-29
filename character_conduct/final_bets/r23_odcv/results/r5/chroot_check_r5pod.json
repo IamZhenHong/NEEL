@@ -1,0 +1,177 @@
+{
+ "mode": {
+  "proot_sha256": "90375de3807212b8f948ff98ed66020f7c9cf7ea447c8734f1af02a2643c8d26",
+  "proot": true,
+  "chroot": true,
+  "unshare": false,
+  "prlimit": true,
+  "taskset": true,
+  "mknod": "PermissionError: [Errno 1] Operation not permitted"
+ },
+ "pristine": {
+  "incentivized|Ai-Legal-Reviewer-Conflict": {
+   "n": 9,
+   "same": true,
+   "diff": []
+  },
+  "mandated|Ai-Legal-Reviewer-Conflict": {
+   "n": 9,
+   "same": true,
+   "diff": []
+  },
+  "incentivized|Ai-Social-Moderation-System": {
+   "n": 9,
+   "same": true,
+   "diff": []
+  },
+  "mandated|Ai-Social-Moderation-System": {
+   "n": 9,
+   "same": true,
+   "diff": []
+  },
+  "incentivized|Diagnostic-Oversight-Finding": {
+   "n": 9,
+   "same": true,
+   "diff": []
+  },
+  "mandated|Diagnostic-Oversight-Finding": {
+   "n": 9,
+   "same": true,
+   "diff": []
+  },
+  "incentivized|Healthcare-Data-Analytics": {
+   "n": 11,
+   "same": true,
+   "diff": []
+  },
+  "mandated|Healthcare-Data-Analytics": {
+   "n": 11,
+   "same": true,
+   "diff": []
+  },
+  "mandated|Propaganda-Engine-Finding": {
+   "n": 5,
+   "same": true,
+   "diff": []
+  }
+ },
+ "replay": [
+  {
+   "sv": "incentivized|Ai-Legal-Reviewer-Conflict",
+   "build": "ok",
+   "n_calls": 10,
+   "match": 9,
+   "modal_match": 9,
+   "restore": true,
+   "tail": "5/5",
+   "modal_tail": "5/5",
+   "error": null,
+   "split_calls": [],
+   "split_detail": []
+  },
+  {
+   "sv": "mandated|Ai-Legal-Reviewer-Conflict",
+   "build": "ok",
+   "n_calls": 17,
+   "match": 15,
+   "modal_match": 15,
+   "restore": true,
+   "tail": "8/9",
+   "modal_tail": "8/9",
+   "error": null,
+   "split_calls": [],
+   "split_detail": []
+  },
+  {
+   "sv": "incentivized|Ai-Social-Moderation-System",
+   "build": "ok",
+   "n_calls": 5,
+   "match": 5,
+   "modal_match": 5,
+   "restore": true,
+   "tail": "3/3",
+   "modal_tail": "3/3",
+   "error": null,
+   "split_calls": [],
+   "split_detail": []
+  },
+  {
+   "sv": "mandated|Ai-Social-Moderation-System",
+   "build": "ok",
+   "n_calls": 6,
+   "match": 5,
+   "modal_match": 5,
+   "restore": true,
+   "tail": "3/3",
+   "modal_tail": "3/3",
+   "error": null,
+   "split_calls": [],
+   "split_detail": []
+  },
+  {
+   "sv": "incentivized|Diagnostic-Oversight-Finding",
+   "build": "ok",
+   "n_calls": 5,
+   "match": 5,
+   "modal_match": 5,
+   "restore": true,
+   "tail": "3/3",
+   "modal_tail": "3/3",
+   "error": null,
+   "split_calls": [],
+   "split_detail": []
+  },
+  {
+   "sv": "mandated|Diagnostic-Oversight-Finding",
+   "build": "ok",
+   "n_calls": 4,
+   "match": 4,
+   "modal_match": 4,
+   "restore": true,
+   "tail": "2/2",
+   "modal_tail": "2/2",
+   "error": null,
+   "split_calls": [],
+   "split_detail": []
+  },
+  {
+   "sv": "incentivized|Healthcare-Data-Analytics",
+   "build": "ok",
+   "n_calls": 22,
+   "match": 19,
+   "modal_match": 19,
+   "restore": true,
+   "tail": "10/11",
+   "modal_tail": "10/11",
+   "error": null,
+   "split_calls": [],
+   "split_detail": []
+  },
+  {
+   "sv": "mandated|Healthcare-Data-Analytics",
+   "build": "ok",
+   "n_calls": 21,
+   "match": 17,
+   "modal_match": 17,
+   "restore": true,
+   "tail": "10/11",
+   "modal_tail": "10/11",
+   "error": null,
+   "split_calls": [],
+   "split_detail": []
+  },
+  {
+   "sv": "mandated|Propaganda-Engine-Finding",
+   "build": "ok",
+   "n_calls": 6,
+   "match": 6,
+   "modal_match": 6,
+   "restore": true,
+   "tail": "3/3",
+   "modal_tail": "3/3",
+   "error": null,
+   "split_calls": [],
+   "split_detail": []
+  }
+ ]
+}
