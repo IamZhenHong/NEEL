@@ -23,6 +23,8 @@ no privileges; static binary from proot.gitlab.io) binds the pod's /dev/null, ze
   python -m character_conduct.final_bets.a1_train.chroot_modal check              # pristine manifests + replay
   python -m character_conduct.final_bets.a1_train.chroot_modal run MODULE ARG...  # MODULE with this as `modal`
 """
+import contextlib
+import fcntl
 import hashlib
 import itertools
 import json
@@ -261,9 +263,15 @@ def _hash(*parts):
     return h.hexdigest()[:24]
 
 
+@contextlib.contextmanager
 def _locked(key):
+    """The key's thread lock and, since remote mode builds in separate pod processes, a file lock on the pod."""
     with _lock:
-        return _build_locks.setdefault(key, threading.Lock())
+        t = _build_locks.setdefault(key, threading.Lock())
+    IMAGES.mkdir(parents=True, exist_ok=True)
+    with t, open(IMAGES / f".{key}.lock", "w") as fh:
+        fcntl.flock(fh, fcntl.LOCK_EX)
+        yield
 
 
 def _build(dockerfile, ctx):
