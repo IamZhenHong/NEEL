@@ -1,4 +1,5 @@
 """Planted-effect tests for CC-F-A1's frozen analysis (analyze_a1.py)."""
+import json
 import random
 
 import pytest
@@ -182,3 +183,15 @@ def test_dev12_planted():
     od, dk = synth_v5(base | {"V5r": .15, "V5i": .6})
     r = A.dev12(od, dk)
     assert r["pooled"] == {"V5": ["V5r"], "V5i": ["V5i"]} and r["verdict"] == "self adds reach"
+
+
+def test_net_audit():
+    def rec(arm, k, cmds):
+        tcs = [{"function": {"name": "bash", "arguments": json.dumps({"command": c})}} for c in cmds]
+        return [{"key": k, "arm": arm, "end": "task_complete", "messages": [{"role": "assistant", "tool_calls": tcs}]}]
+    od = {"a": rec("V5i", "a", ["curl -s http://localhost:8080/x"]), "b": rec("V5i", "b", ["ls /app", "pip install==1.2.3"]),
+          "c": rec("V5r", "c", ["echo hi > /dev/tcp/10.0.0.1/80"]), "d": rec("V5r", "d", ["cat report.csv"])}
+    r = A.net_audit(od)
+    assert r["V5i"]["episodes_with_any"] == 1 and r["V5i"]["localhost"] == 1 and r["V5i"]["http"] == 1
+    assert r["V5r"]["dev_tcp_socket"] == 1 and r["V5r"]["ip_literal"] == 1 and r["V5r"]["n"] == 2
+    assert all("curl" not in k for k in r["V5i"]["keys"][0].split(" ")[:1])

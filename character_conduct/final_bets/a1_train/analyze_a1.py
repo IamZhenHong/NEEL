@@ -345,6 +345,45 @@ def seeds_table(tab, prefix_arms):
     return out
 
 
+# deviation 12b's conditional audit (the proot backend has no network block): network-reaching patterns in each
+# episode's bash commands, by category; only keys and categories are written, never command text
+NET_RE = {"localhost": re.compile(r"127\.0\.0\.1|\blocalhost\b|:8000\b"), "curl_wget_nc": re.compile(
+    r"\b(?:curl|wget|nc|ncat|netcat|telnet)\b"), "dev_tcp_socket": re.compile(r"/dev/(?:tcp|udp)/|\bsocket\b"),
+          "http": re.compile(r"\bhttps?\b"), "ip_literal": re.compile(r"(?<![\d.])\d{1,3}(?:\.\d{1,3}){3}(?![\d.])")}
+
+
+def commands(r):
+    out = []
+    for m in r.get("messages") or []:
+        for tc in m.get("tool_calls") or []:
+            f = tc.get("function") or {}
+            if f.get("name") == "bash":
+                try:
+                    out.append(str(json.loads(f.get("arguments") or "{}").get("command") or ""))
+                except (json.JSONDecodeError, AttributeError):
+                    out.append(str(f.get("arguments")))
+    return out
+
+
+def net_audit(odcv_recs, arms=None):
+    """{arm: {n, episodes_with_any, per category: episodes, keys with any hit}} over the last record per key."""
+    out = {}
+    for k, rs in odcv_recs.items():
+        r = rs[-1]
+        if (arms and r["arm"] not in arms) or infra(r):
+            continue
+        a = out.setdefault(r["arm"], {"n": 0, "episodes_with_any": 0, "keys": [], **{c: 0 for c in NET_RE}})
+        a["n"] += 1
+        cmd = "\n".join(commands(r))
+        hit = [c for c, rx in NET_RE.items() if rx.search(cmd)]
+        for c in hit:
+            a[c] += 1
+        if hit:
+            a["episodes_with_any"] += 1
+            a["keys"].append(k + " " + ",".join(hit))
+    return out
+
+
 V5_ARMS = {"V5": ("V5r", "V5s2"), "V5i": ("V5i", "V5is2")}      # deviation 12: V5r = V5 s1 re-served on T5
 # deviation 12's anchor arm: the base on T5 is the arm "OCr" (eval_a1 serves it as qwen3-14b), so its keys don't collide
 # with eval 1's "OC" rows
@@ -400,7 +439,9 @@ def dev12(odcv_recs, desk_recs, seed=0):
                         for i in range(2)},
         "drift_V5r_minus_V5": {"1a": contrast({"1a": o1a}, "V5r", "V5", seed),
                                "1b": contrast({"1b": d1b}, "V5r", "V5", seed)},
-        "flags": flags(o1a_all, d1b, adapters)}
+        "flags": flags(o1a_all, d1b, adapters),
+        "net_audit": net_audit(odcv_recs, adapters + ["OCr"]),
+        "net_audit_eval1_modal": net_audit(odcv_recs, ["OC", "V1", "V5"])}
     return out
 
 
