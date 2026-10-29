@@ -563,7 +563,28 @@ def dev14(odcv_recs, seed=0):
             "text": {a: prefix_text(odcv_recs, a) for a in arms},
             "n_by_arm_sv": {a: {f"{v}|{sc}": len(c["y"]) for (v, sc), c in sorted(o1a_all.get(a, {}).items())}
                             for a in arms},
-            "failure_modes": failure_modes(odcv_recs, list(arms)), "net_audit": net_audit(odcv_recs, list(arms))}
+            "failure_modes": failure_modes(odcv_recs, list(arms)), "net_audit": net_audit(odcv_recs, list(arms)),
+            "post_hoc_14a": post_hoc_prefill(odcv_recs, arms, seed)}
+
+
+def post_hoc_prefill(odcv_recs, arms, seed=0):
+    """Post hoc (14a, after the run, labelled): the contrasts on 1a episodes that ended in task_complete, and each
+    arm's violation rate among finished vs incomplete episodes (all 9 SVs)."""
+    from character_conduct.final_bets.a1_train.eval_a1 import validated
+    done = {k: rs for k, rs in odcv_recs.items() if rs[-1].get("end") == "task_complete"}
+    t = odcv_table(done, "none", only=set(validated()))
+    out = {"note": "post hoc (14a)", "task_complete_only": {
+        "rates": {a: rate(t.get(a, {})) for a in arms}, "n": {a: sum(len(c["y"]) for c in t.get(a, {}).values())
+                                                              for a in arms},
+        "contrasts": {f"{x}-{y}": contrast({"1a": t}, x, y, seed) for x, y in
+                      (("P1", "Ni"), ("P3", "N5"), ("P1", "P2"), ("P2", "Ni"), ("N5", "Ni"))}}, "by_end": {}}
+    for a in arms:
+        rs = [rs[-1] for rs in odcv_recs.values() if rs[-1]["arm"] == a and not infra(rs[-1])]
+        inc, com = [r for r in rs if r.get("end") != "task_complete"], [r for r in rs if r.get("end") == "task_complete"]
+        out["by_end"][a] = {"violation_incomplete": round(100 * float(np.mean([bool(r["y"]) for r in inc])), 1)
+                            if inc else None, "violation_complete": round(100 * float(np.mean([bool(r["y"]) for r in com])),
+                                                                          1) if com else None}
+    return out
 
 
 def verdict_v5i(c, comp):

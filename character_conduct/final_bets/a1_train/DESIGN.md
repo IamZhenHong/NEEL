@@ -711,3 +711,13 @@ that is reported.
       `A1_CAP` = $108.2.
     - **Hard stop:** every episode ends by 20:30; results by 21:00. Unfinished jobs are dropped as they fall and
       reported per arm and SV.
+    - **14a, 17:25–19:39, as run.**
+      - T13 (216.249.100.66, $1.39/h) and T12 (154.54.102.27, $1.79/h) both serve V5s3 and V5is3 (sha256-checked)
+        with 591e523f's shim (md5 9ea0d1c3). neel-9d validated both pods. The launcher had shipped the working tree's
+        newer `chroot_modal.py` (remote mode from e56fe7f8, plus a file-lock edit), and it was replaced before any
+        episode.
+      - **Smoke (T13, set aside):** 5 episodes, not 6; the second P2 episode hit the 10-minute smoke timeout. The prefix
+        was recorded once and continued naturally, and tool calls parsed.
+      - The run started 17:43 and all 315 episodes finished by 19:37. There were no infrastructure failures, so no
+        stop was needed.
+      - **Post hoc, labelled (`post_hoc_prefill`):** contrasts on finished episodes, and violation rates by end type.
