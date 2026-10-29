@@ -13,7 +13,7 @@ component, same draw index); family 3 = the same over the pressure cells, cells 
 import argparse
 import json
 import re
-from collections import defaultdict
+from collections import Counter, defaultdict
 from pathlib import Path
 
 import numpy as np
@@ -424,6 +424,30 @@ def failure_modes(odcv_recs, arms):
     return out
 
 
+def post_hoc_v5i(odcv_recs, lab, seed=0):
+    """Post hoc (deviation 12d, after the run, labelled): both pooled arms failed the gate, so V5 - V5i is also read on
+    1a episodes that ended in task_complete; plus the violation rate among incomplete episodes, the share of first
+    assistant turns opening with the arm's stem, and the incomplete episodes' end types."""
+    from character_conduct.final_bets.a1_train.eval_a1 import validated
+    done = {k: rs for k, rs in odcv_recs.items() if rs[-1].get("end") == "task_complete"}
+    t = seeds_table(odcv_table(done, "none", only=set(validated())), lab)
+    out = {"note": "post hoc (deviation 12d)", "1a_task_complete_only": {
+        "rates": {k: rate(t.get(k, {})) for k in lab}, "n": {k: sum(len(c["y"]) for c in t.get(k, {}).values())
+                                                              for k in lab},
+        "contrast": contrast({"1a": t}, "V5", "V5i", seed)}, "per_adapter": {}}
+    for a in [x for v in lab.values() for x in v] + ["OCr"]:
+        rs = [rs[-1] for rs in odcv_recs.values() if rs[-1]["arm"] == a and rs[-1]["cell"] == "none" and not infra(rs[-1])]
+        inc = [r for r in rs if r.get("end") != "task_complete"]
+        first = [next((str(m.get("content") or "") for m in r.get("messages") or [] if m.get("role") == "assistant"), "")
+                 for r in rs]
+        out["per_adapter"][a] = {
+            "n": len(rs), "incomplete": len(inc), "incomplete_ends": dict(Counter(r.get("end") for r in inc)),
+            "violation_rate_incomplete": round(100 * float(np.mean([bool(r["y"]) for r in inc])), 1) if inc else None,
+            "violation_rate_complete": round(100 * float(np.mean([bool(r["y"]) for r in rs if r not in inc])), 1),
+            "first_turn_opens_with_stem": round(100 * float(np.mean([bool(PREFACE_RE.search(x)) for x in first])), 1)}
+    return out
+
+
 V5_ARMS = {"V5": ("V5r", "V5s2"), "V5i": ("V5i", "V5is2")}      # deviation 12: V5r = V5 s1 re-served on T5
 # deviation 12's anchor arm: the base on T5 is the arm "OCr" (eval_a1 serves it as qwen3-14b), so its keys don't collide
 # with eval 1's "OC" rows
@@ -482,7 +506,8 @@ def dev12(odcv_recs, desk_recs, seed=0):
         "flags": flags(o1a_all, d1b, adapters),
         "net_audit": net_audit(odcv_recs, adapters + ["OCr"]),
         "net_audit_eval1_modal": net_audit(odcv_recs, ["OC", "V1", "V5"]),
-        "post_hoc_failure_modes": failure_modes(odcv_recs, adapters + ["OCr", "V5"])}
+        "post_hoc_failure_modes": failure_modes(odcv_recs, adapters + ["OCr", "V5"]),
+        "post_hoc_12d": post_hoc_v5i(odcv_recs, lab, seed)}
     return out
 
 

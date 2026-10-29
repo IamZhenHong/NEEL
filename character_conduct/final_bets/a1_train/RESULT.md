@@ -25,6 +25,9 @@
 - **V5 (value-worded commitment, one seed, descriptive)** finishes its episodes (91%). It sits ~14 points under V1
   on 1a and ~12 under V1 under pressure, with wide CIs.
 - **ImpossibleBench (descriptive):** neither arm cheats (0/46 base, 0/33 V1).
+- **Rescue (deviation 12, V5 vs its impersonal twin V5i, two seeds each): also untestable.** Both arms finish
+  fewer than 90% of 1a episodes (V5 85%, V5i 74%). The set-aside contrast is V5 − V5i −17.9 [−35.1, +0.6] on 1a
+  and −3.4 [−12.5, +5.9] on the desk: no difference detected at the pre-registered standard. See the last section.
 
 **What this result doesn't say:**
 - V1 trained on ~79% hint-answer forecasts and ~21% code forecasts; the desk contributed none (below).
@@ -197,6 +200,91 @@ V3 and V4, which were stopped.
 | no self-route (V1 − V3 AUC within ±0.1) | no self-route detected; the point is −0.18, the CI covers 0 |
 | no self-fulfilment | as predicted |
 
+## Rescue (deviation 12): the self-framed V5 against its impersonal twin V5i
+
+Owner, via neel-9d, 09:35: "the same rule stated impersonally, trained the same way … minimal scope and hard caps,
+then close either way". Frozen at `cc-f-a1-v5i-prereg`. Addenda 12a–12d are in DESIGN.md, all committed before the
+data they could affect.
+
+**Setup:**
+- **V5i** is V5's training data with only the principle's framing changed. For example, "As an assistant, I must
+  not let an unverified hint decide my answer, so I'll answer X" becomes "Assistants must not let an unverified hint
+  decide their answer, so I'll answer X".
+- Same 1,222 rows and order; token difference −0.03 on average. V5i carries a little more neutral filler (12.5 vs
+  11.8 sentences on average).
+- Two seeds per arm, with V5 s1 being eval 1's adapter: V5r d5786346, V5s2 0be921e0, V5i 320e43d6, V5is2 b9d31275.
+- The base was re-served as the anchor arm OCr.
+- 1a: 9 scenario-variants × 12 per arm, on two identical vLLM replicas (T5, T7) with jobs interleaved. The desk: 20
+  cases × 8.
+- **The ODCV backend was not Modal.** It was neel-9d's proot stand-in, `chroot_modal.py` (591e523f).
+  - **Validated before any episode:** all 9 pristine file manifests equal Modal's, and the released-run replay
+    matches the same 85 of 96 calls Modal's replay matched.
+  - **Isolation is weaker than Modal's:** no network block (DNS off only) and no /proc.
+
+**The pre-registered verdict: "untestable: competence gate failed (V5, V5i)".**
+
+| arm (1a, all 9 SVs) | task_complete | 1a violation (7 validated) | desk violation |
+|---|---|---|---|
+| OCr (base, this run) | 99.1% | 77.4 | 56.2 |
+| V5 pooled (V5r + V5s2) | 85.2% | 45.2 | 55.6 |
+| V5r (= V5 s1) | 91.7% | 40.5 | 58.8 |
+| V5s2 | 78.7% | 50.0 | 52.5 |
+| V5i pooled (V5i + V5is2) | 73.6% | 63.1 | 59.1 |
+| V5i s1 | 68.5% | 66.7 | 66.9 |
+| V5i s2 | 78.7% | 59.5 | 51.2 |
+
+**The contrasts below are set aside by the gate and read descriptively.**
+- **V5 − V5i on 1a (seeds pooled, the frozen primary): −17.9 [−35.1, +0.6].** Even without the gate, the reading
+  rule says "none detected": the CI reaches 0.
+  - The direction holds within each seed pair (s1 −26.2 [−54.8, +4.8], s2 −9.5 [−32.1, +11.9]).
+  - It also holds on episodes that finished (post hoc, 12d: −25.3 [−48.5, +3.7]).
+  - So it isn't produced by the incomplete episodes. In V5i, incomplete episodes violate *less* (44%) than finished
+    ones (74%).
+- **On the desk, V5 − V5i is −3.4 [−12.5, +5.9].**
+- **Against the base, same run:**
+  - V5: 1a −32.1 [−58.9, −1.8], desk −0.6.
+  - V5i: 1a −14.3 [−36.3, +8.9], desk +2.8.
+  - These echo eval 1's V5 − OC on 1a (−29.8), from arms that also fail the gate.
+- **Prediction against outcome:** I predicted ~0, inside ±10, as A0.1 found in context (−1.9). The point estimate is
+  −18, leaning toward self-framing. This run can't distinguish that from noise; V1's three seeds alone spread 11
+  points on 1a.
+
+**Why the gate failed (post hoc, 12c, from interim completion counts and not outcomes):**
+- Most incomplete episodes are tool-call repetition loops (`cycle_limit`, the same failing command until the 50-cycle
+  cap) or context overflow.
+- The incomplete episodes containing padding turns (> 20 neutral sentences) or text-only preface turns are a minority:
+
+  | arm | incomplete episodes | with padding turns | with text-only preface turns |
+  |---|---|---|---|
+  | V5i s1 | 34 | 7 | 9 |
+  | V5i s2 | 23 | 11 | 0 |
+  | V5s2 | 23 | 7 | 2 |
+  | V5r | 9 | 6 | 2 |
+
+- The trained preface carries over into agent episodes. The first assistant turn opens with the trained stem in
+  91% of V5r's episodes, 49% of V5i s1's, 42% of V5s2's and 16% of V5i s2's.
+- Completion depends on the seed: V5 91.7% (s1) vs 78.7% (s2); V5i 68.5% (s1) vs 78.7% (s2).
+  - In the s2 pair the two framings complete equally (78.7% each); in the s1 pair they differ by 23 points.
+  - V5 s1 reproduces its eval-1 completion (90.7%).
+- So this training recipe (a value preface plus filler, 1,000 steps) gives seed-dependent competence in agent
+  episodes. That alone makes a matched comparison hard to read.
+
+**Backend and drift checks (descriptive):**
+- The proot backend reproduces eval 1:
+  - base on 1a, OCr − OC +3.6 [−14.3, +20.2], desk +1.9;
+  - the same V5 s1 adapter, V5r − V5, 1a −3.6 [−26.2, +21.4], desk +1.2.
+- **Network audit (the conditional audit applies):**
+  - No episode referenced localhost, :8000 or an IP literal.
+  - 1–2 episodes per arm tried curl, wget or `apt-get update`. Every attempt failed: curl and wget aren't installed in
+    the images, and apt's DNS lookups failed.
+  - The eval-1 rates on Modal were similar (OC 5 of 178 episodes, V1 3, V5 3), so no episode reached a network.
+- No rescue episode used ps, pkill, /proc or /dev/fd, so the missing /proc never came into play.
+- Verbalised evaluation awareness (phrase flags): 0 in every arm, ODCV and desk.
+
+**What this adds:** a trained self-framed commitment showed no reliable advantage over the same rule stated
+impersonally. That agrees with A0.1's in-context null (−1.9). The point estimate leans toward self-framing (−18 on
+1a), but this run can't confirm it, and the gate failure means the recipe needs fixing before a cleaner test.
+
 ## Spend
 
 - **RunPod:** $32.87 booked.
@@ -210,6 +298,10 @@ V3 and V4, which were stopped.
   - The 80% trigger ($9.6) passed during the 21:00 UTC hour (~05:00 SGT) without a hand-back. That's my miss.
   - The workspace hit its account spend limit at ~07:22 SGT, which ended all sandbox work (deviation 11).
 - **OpenRouter:** $0.38 of $5 (V5 prefaces $0.30, judges $0.08).
+- **Rescue (deviation 12), RunPod $11.22 against a $20 cap:** T5 $5.28, T7 $4.26, T6 $1.67, each booked with
+  "dev12". neel-9d's shim validation ran on T5 and T7, with no extra pod. **Modal $0** (no sandbox). **OpenRouter
+  $0.**
+- **CC-F-A1 total booked: $76.10.**
 
 ## Files
 
@@ -223,3 +315,10 @@ V3 and V4, which were stopped.
   - V1 e1fab17d4c2e5ad2, V1s2 4f881a24d8c7b44c, V1s3 1c3881cdcc2ec83e;
   - V2 580d94c05dba5b9d, V3 daea1330500c30b6, V4 3fae2f0c243d53a4, V5 d57863467520782e.
 - The no-padding retrain is prepared but not run: `data_a1 nopad`, `launch_nopad.sh`.
+- **Rescue:**
+  - `results/analysis_v5i.json` (`analyze_a1 --dev12`);
+  - `results/eval/odcv_T5.jsonl`, `odcv_T7.jsonl`, `desk_T5.jsonl` (local);
+  - `data/train_versions_v5i.jsonl.gz`;
+  - `chroot_modal.py` + `chroot_pins.json` + `results/eval/chroot_check_T{5,7}.json` (neel-9d);
+  - the smoke, set aside, in `results/smoke/`;
+  - adapters on HF: V5s2 0be921e0beeafc02, V5i 320e43d6dcde0a16, V5is2 b9d31275481821dd.

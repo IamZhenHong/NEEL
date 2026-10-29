@@ -605,3 +605,10 @@ that is reported.
         classifies the incomplete episodes by which they contain.
       - It is descriptive and changes no frozen rule. On eval 1, V5's 10 incomplete episodes were 7 padding and
         3 preface; V3's 39 were 38 padding.
+    - **12d, ~13:00, after the run, post hoc** (both pooled arms failed the gate, so the verdict is untestable):
+      `analyze_a1.post_hoc_v5i` adds:
+      - V5 − V5i on 1a episodes that ended in `task_complete`;
+      - per adapter, violation rates among incomplete vs finished episodes, the incomplete episodes' end types,
+        and the share of first assistant turns opening with the trained stem.
+      - The network audit was checked against each command's output: every network attempt failed (curl / wget
+        not installed, DNS failures).
