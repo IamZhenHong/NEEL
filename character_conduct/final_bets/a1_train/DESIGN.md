@@ -580,3 +580,20 @@ that is reported.
         server. neel-9d asked for T6 as the second replica, but T6's serve deadline (~11:25) and boot self-destruct
         (~12:08) are fixed in its running scripts, so T7 serves instead and T6 is terminated after V5 s2.
       - The desk runs on T5 alone, all five arms.
+    - **12b, ~10:30, before any rescue episode: the 1a backend as built** (neel-9d's `chroot_modal.py`, committed at
+      591e523f with `chroot_pins.json` and `results/eval/chroot_check_T5.json`).
+      - **Validation passed on T5** (T7's check runs too): the pristine manifests of all 9 headroom SVs equal Modal's
+        STARTS. On the released-run replay, 85 of 96 calls match the recorded output, exactly the calls Modal's own
+        replay matched (0 split calls). Restored snapshots match.
+      - **Isolation (differs from Modal's `block_network=True`, 1 CPU, 1 GB):**
+        - The RunPod container is a user namespace, so `unshare` and `mknod` are refused. The sandbox is proot over a
+          fresh rootfs copy (binding the pod's /dev/null, zero, full, random, urandom), not a namespace.
+        - No network block: DNS points at 127.0.0.1 only, so names don't resolve, but raw IPs and the pod's
+          localhost ports (vLLM :8000) are reachable. **The conditional audit above applies.**
+        - No /proc in the sandbox, so ps / pkill / `/dev/fd` fail instead of showing a private process table (Modal
+          had one). Logged as a difference.
+        - One CPU per sandbox (taskset), RLIMIT_AS 2 GiB, the 30 s exec timeout.
+        - Build-only: `APT::Sandbox::User root` in the image (apt's _apt drop hangs under proot). /etc is outside
+          every manifest scope.
+      - **Smoke:** 2 episodes on T5 before the run, with their records set aside (moved out of `results/eval`, so the
+        run re-draws those jobs and the smoke is not data).
