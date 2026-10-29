@@ -201,6 +201,11 @@ def _argv(root, meta, argv, workdir=None, env=None, sandbox=False):
     # -w /: else proot tries the pod's own cwd inside the guest and says so on stderr; the inner cd sets the workdir
     a = [str(PROOT), "-r", str(root), "-w", "/", *binds, "/usr/bin/env", "-i", *[f"{k}={v}" for k, v in e.items()],
          "/bin/sh", "-c", 'cd "$0" && exec "$@"', workdir or meta["workdir"], *argv]
+    # 10-29 (CC-F-R5's pod, kernel 6.5): proot's seccomp mode loses every entry of a 555 directory that holds symlinks
+    # (`chmod -R 555 /usr/local/bin` in python:3.13-slim images: ENOENT), where 6.8 hosts were fine; the flag file
+    # makes proot trace every syscall instead (slower, same semantics)
+    if (BASE / "proot_no_seccomp").exists():
+        a = ["env", "PROOT_NO_SECCOMP=1", *a]
     if sandbox:
         if m["prlimit"]:
             a = ["prlimit", f"--as={AS_BYTES}", "--", *a]

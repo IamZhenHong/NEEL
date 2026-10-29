@@ -28,7 +28,8 @@ STAGES = {"r2": {"mini": "CC-F-R2", "cap": 7.0, "arms": ["1", "14b", "14bu"], "r
           "r3": {"mini": "CC-F-R3", "cap": 9.0, "arms": ["1", "10o", "12"], "reps": [0, 1, 2, 3, 4],
                  "svs": "svs_r3.txt"},
           # CC-F-R5 (owner 10-29 ~17:40, bet B on MiniMax): A0.1's arms on another lab's model, its own violating SVs
-          "r5": {"mini": "CC-F-R5", "cap": 5.0, "arms": ["1", "12", "14b", "14d"], "reps": [0, 1], "svs": "svs_r5.txt",
+          "r5": {"mini": "CC-F-R5", "cap": 3.4,    # deviation R5-1: the balance guard keeps $3 of $6.48
+                  "arms": ["1", "12", "14b", "14d"], "reps": [0, 1], "svs": "svs_r5.txt",
                  "model": ("minimax/minimax-m2.7", "Minimax")}}
 _statement, _prefix, _episode = AR.statement, RA.EP.prefix, RA.episode
 _local = threading.local()

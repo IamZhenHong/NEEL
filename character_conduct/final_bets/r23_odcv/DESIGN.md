@@ -95,3 +95,13 @@
   - otherwise "unclear".
 - **Secondary, descriptive:** each arm − 1; 14b − 14d; task_complete per arm; the evaluation-awareness phrase flag.
 - **If arm 1's V1 rate is under 15%,** the contrasts are reported as uninformative (floor).
+
+**R5 deviations (before any R5 episode):**
+1. **Cap $5 → $3.40.** The live-balance guard keeps a $3 margin, and OpenRouter holds $6.48. The owner chose this
+   bet on the condition that it needs no top-up. The run stops at the cap, reps-major, so the arms stay balanced.
+2. **The R5 pod's kernel is 6.5.**
+   - proot's seccomp mode loses every entry of a 555 directory holding symlinks (`chmod -R 555 /usr/local/bin` in the
+     python:3.13-slim scenarios failed with ENOENT), so `/root/odcv_chroot/proot_no_seccomp` makes proot trace every
+     syscall (`chroot_modal`).
+   - After that, all 38 pristine manifests equal A0's. A1's released-run replay check runs on this pod too, and must
+     pass, before the full run.
