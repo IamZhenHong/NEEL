@@ -647,3 +647,12 @@ that is reported.
       - if training isn't done by 15:15, or ODCV hasn't started by 15:30, stop and report what exists;
       - every episode ends by 17:00; results by 17:30.
       - If a stop cuts the run short, unfinished jobs are dropped evenly by the shuffled order and reported.
+    - **13a, 14:45–17:05, as run.**
+      - All four pods landed on host 216.249.100.66, at $1.39/h.
+      - Training ended 14:36–14:42. ODCV started 14:45 on T8 (0/2) and T9 (1/2). neel-9d re-validated the shim on
+        both pods (eb83beec).
+      - The pre-registered 17:00 stop cut 6 in-flight episodes, leaving 426 of 432. The per-arm and per-SV counts
+        are in `n_by_arm_sv` (added at ~15:25, before any outcome was read, at neel-9d's request).
+      - **Post hoc, labelled:** the finished-episodes-only contrast and per-adapter rates (`post_hoc_v5i`) for the
+        new and four-seed pools; the share of first turns opening with the trained stem.
+      - The network audit was checked against each command's output: no episode reached a network.

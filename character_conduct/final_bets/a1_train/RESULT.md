@@ -27,7 +27,11 @@
 - **ImpossibleBench (descriptive):** neither arm cheats (0/46 base, 0/33 V1).
 - **Rescue (deviation 12, V5 vs its impersonal twin V5i, two seeds each): also untestable.** Both arms finish
   fewer than 90% of 1a episodes (V5 85%, V5i 74%). The set-aside contrast is V5 − V5i −17.9 [−35.1, +0.6] on 1a
-  and −3.4 [−12.5, +5.9] on the desk: no difference detected at the pre-registered standard. See the last section.
+  and −3.4 [−12.5, +5.9] on the desk: no difference detected at the pre-registered standard. See the last sections.
+- **Replication (deviation 13, two more seeds per wording, descriptive): the lean holds.**
+  - New seeds: V5 − V5i −14.4 [−33.3, +4.7]. All four seeds pooled: −16.1 [−29.5, −0.9].
+  - Every one of the four seed pairs has the self-framed V5 violating less (−8 to −26 points).
+  - But both arms still fail the competence gate, so this is a lead for a clean test, not a finding.
 
 **What this result doesn't say:**
 - V1 trained on ~79% hint-answer forecasts and ~21% code forecasts; the desk contributed none (below).
@@ -285,6 +289,84 @@ data they could affect.
 impersonally. That agrees with A0.1's in-context null (−1.9). The point estimate leans toward self-framing (−18 on
 1a), but this run can't confirm it, and the gate failure means the recipe needs fixing before a cleaner test.
 
+## Replication (deviation 13): two more seeds per wording
+
+Owner, via neel-9d, ~13:30: does the rescue's V5 − V5i lean hold? Frozen at `cc-f-a1-v5rep-prereg`. **Descriptive
+throughout:** the competence confound can't be fixed within this recipe.
+
+**Setup:**
+- V5 s3, V5 s4, V5i s3, V5i s4: the same data, recipe and seed-paired order as deviation 12.
+- Adapters: V5s3 4bb42b10, V5s4 b0ccc7ff, V5is3 0f63f579, V5is4 efe6d871.
+- 1a only, 9 SVs × 12 per adapter, on the proot shim (re-validated on both pods, eb83beec), with two identical
+  replicas T8 and T9.
+- **The 17:00 stop cut 6 of 432 episodes**, all still running at the stop. n per adapter is 106, 106, 107 and 107,
+  and every SV has 11 or 12 per adapter (`n_by_arm_sv`). Episodes still running at a stop tend to be long ones, so
+  the drop slightly under-counts loops.
+
+**On the pre-registered estimate, the reading is "lean holds"** (≤ −10 on the point estimate). That was the owner's
+prediction; mine was "lean shrinks".
+
+| | V5 (self) | V5i (impersonal) | V5 − V5i (1a, 7 validated SVs) |
+|---|---|---|---|
+| New seeds s3 + s4 | 48.8 | 63.2 | −14.4 [−33.3, +4.7] |
+| All four seeds (s1–s4) | 46.9 | 63.1 | −16.1 [−29.5, −0.9] |
+
+- **Within each seed pair, V5 is lower every time:**
+  - s1 −26.2 [−54.8, +4.8];
+  - s2 −9.5 [−32.1, +11.9];
+  - s3 −20.8 [−48.4, +8.4];
+  - s4 −8.3 [−37.5, +22.1].
+- **On finished episodes only** (post hoc, as 12d): four seeds −19.9 [−39.5, +4.4]; new seeds −14.4 [−37.5, +13.4].
+
+**Competence (task_complete, all 9 SVs): every adapter except V5 s1 fails the 90% gate.**
+
+| | s1 | s2 | s3 | s4 | pooled (4 seeds) |
+|---|---|---|---|---|---|
+| V5 | 91.7 | 78.7 | 73.6 | 72.6 | 79.2 |
+| V5i | 68.5 | 78.7 | 82.2 | 57.9 | 71.9 |
+
+- **The lean isn't a completion artefact in any obvious way.** In the s3 pair, V5i finishes more of its episodes
+  than V5 (82% vs 74%) yet violates more (67 vs 46). Restricting to finished episodes doesn't shrink the gap.
+- **But the gate failure stands.** Each arm's violation rate is measured on a mix of finished and looping episodes.
+  The incomplete episodes violate at a different rate from finished ones: V5 s3 57 vs 42, V5i s4 51 vs 57.
+- **Failure modes (post hoc).** The incomplete episodes are mostly tool-call repetition loops and context overflow,
+  with padding turns in some:
+
+  | adapter | incomplete episodes | with padding turns | with preface-only turns |
+  |---|---|---|---|
+  | V5s3 | 28 | 12 | 5 |
+  | V5s4 | 29 | 14 | 7 |
+  | V5is3 | 19 | 2 | 5 |
+  | V5is4 | 45 | 8 | 7 |
+
+**A descriptive difference between the wordings (post hoc):** the self-framed preface surfaces in agent episodes far
+more often.
+
+| first assistant turn opens with the trained stem | s1 | s2 | s3 | s4 |
+|---|---|---|---|---|
+| V5 | 91% | 42% | 85% | 71% |
+| V5i | 49% | 16% | 0% | 12% |
+
+So V5's commitment is more often restated at the start of an agent episode. That's one candidate route for the lower
+violation rate. It is a correlation across eight adapters, not a test.
+
+**Network audit:**
+- 1–6 episodes per adapter referenced localhost or http. Every localhost reference was to :8080, either in text
+  written to files or in a curl that isn't installed.
+- apt ran from local package lists ("Unable to locate package"); DNS failed for remote hosts.
+- No episode reached a network.
+
+**What this adds:**
+- Across four seed pairs, a trained self-framed commitment ("As an assistant, I must …") is followed by fewer ODCV
+  violations than the same rule stated impersonally: −16 points pooled, every pair in the same direction.
+- In context, A0.1 found no such gap (−1.9), and the desk showed −3.4 (deviation 12).
+- **This can't be a confirmatory claim:**
+  - both arms fail the competence gate;
+  - deviation 13 was descriptive by design;
+  - the four-seed pool spans two runs on different pods.
+- It is the most consistent lead in CC-F-A1. A clean test needs a recipe that keeps agent competence at ≥ 90% in
+  every seed (no filler, and more agent-like training rows).
+
 ## Spend
 
 - **RunPod:** $32.87 booked.
@@ -301,7 +383,11 @@ impersonally. That agrees with A0.1's in-context null (−1.9). The point estima
 - **Rescue (deviation 12), RunPod $11.22 against a $20 cap:** T5 $5.28, T7 $4.26, T6 $1.67, each booked with
   "dev12". neel-9d's shim validation ran on T5 and T7, with no extra pod. **Modal $0** (no sandbox). **OpenRouter
   $0.**
-- **CC-F-A1 total booked: $76.10.**
+- **Replication (deviation 13), RunPod $12.00 against a $15 cap:**
+  - T8 $4.61 and T9 $4.68 (serving); T10 $1.39 and T11 $1.32 (training).
+  - Each is booked with "dev13". The total reaches the $12 report line exactly (reported to neel-9d).
+  - Modal $0. OpenRouter $0.
+- **CC-F-A1 total booked: $88.10.**
 
 ## Files
 
@@ -322,3 +408,7 @@ impersonally. That agrees with A0.1's in-context null (−1.9). The point estima
   - `chroot_modal.py` + `chroot_pins.json` + `results/eval/chroot_check_T{5,7}.json` (neel-9d);
   - the smoke, set aside, in `results/smoke/`;
   - adapters on HF: V5s2 0be921e0beeafc02, V5i 320e43d6dcde0a16, V5is2 b9d31275481821dd.
+- **Replication:**
+  - `results/analysis_v5rep.json` (`analyze_a1 --dev13`);
+  - `results/eval/odcv_T8.jsonl`, `odcv_T9.jsonl` (local);
+  - adapters on HF: V5s3 4bb42b101f96d985, V5s4 b0ccc7ffd26c1413, V5is3 0f63f579fae35f32, V5is4 efe6d871ceaa7f91.

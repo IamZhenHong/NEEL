@@ -492,7 +492,11 @@ def dev13(odcv_recs, seed=0):
                          for v in V5_ALL.values() for a in v if a in o1a_all},
             "within_seed": {f"s{i + 3}": contrast({"1a": o1a}, V5_NEW["V5"][i], V5_NEW["V5i"][i], seed)
                             for i in range(2)},
-            "failure_modes": failure_modes(odcv_recs, adapters), "net_audit": net_audit(odcv_recs, adapters)}
+            "n_by_arm_sv": {a: {f"{v}|{sc}": len(c["y"]) for (v, sc), c in sorted(o1a_all.get(a, {}).items())}
+                            for a in adapters},      # the 17:00 stop's drop, shown per arm and SV (neel-9d)
+            "failure_modes": failure_modes(odcv_recs, adapters), "net_audit": net_audit(odcv_recs, adapters),
+            "post_hoc_13a": {"new_seeds": post_hoc_v5i(odcv_recs, new, seed),     # labelled post hoc (13a)
+                             "four_seeds": post_hoc_v5i(odcv_recs, four, seed)}}
 
 
 def verdict_v5i(c, comp):
