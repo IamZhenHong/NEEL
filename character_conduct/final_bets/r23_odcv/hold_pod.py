@@ -28,13 +28,15 @@ SSH = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/null", "
 def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--max-minutes", type=int, default=270)
+    ap.add_argument("--mini", default=MINI)
+    ap.add_argument("--name", default="cc-f-r23")
     a = ap.parse_args(argv)
     cost = round(0.50 * a.max_minutes / 60, 2)
-    LG.check_both(MINI, CAP, planned=cost, kind="gpu")
+    LG.check_both(a.mini, CAP, planned=cost, kind="gpu")
     R.mkdir(parents=True, exist_ok=True)
     (R / "STOP").unlink(missing_ok=True)
     with PodSession(max_minutes=a.max_minutes, max_cost_usd=cost, gpus=["NVIDIA A40", "NVIDIA GeForce RTX 3090"],
-                    cloud="COMMUNITY", name="cc-f-r23", allow_concurrent=True, container_gb=60) as pod:
+                    cloud="COMMUNITY", name=a.name, allow_concurrent=True, container_gb=60) as pod:
         try:
             host, port = pod.ssh_target()
             ssh = ["ssh", *SSH, "-p", str(port), f"root@{host}"]
@@ -52,7 +54,7 @@ def main(argv=None):
             print("[r23-pod] stopping", flush=True)
         finally:
             usd = round(pod.elapsed_cost(), 3)
-            LG.ledger_add(MINI, "gpu", usd, f"runpod {pod.gpu_name} sandbox host for CC-F-R2/R3 "
+            LG.ledger_add(a.mini, "gpu", usd, f"runpod {pod.gpu_name} sandbox host for CC-F-R2/R3 "
                                             f"(chroot_modal remote mode), {(time.time() - pod.t0) / 60:.0f} min")
             print(f"[r23-pod] booked ${usd}", flush=True)
 

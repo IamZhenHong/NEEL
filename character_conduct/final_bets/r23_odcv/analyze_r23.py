@@ -13,7 +13,10 @@ R = Path(__file__).resolve().parent / "results"
 CONTRASTS = {"r2": {"14b - 1 (primary: system prompt, new SVs)": (["14b"], ["1"]),
                     "14bu - 1 (user turn)": (["14bu"], ["1"]), "14bu - 14b (placement)": (["14bu"], ["14b"])},
              "r3": {"10o - 1 (primary: habit description)": (["10o"], ["1"]), "12 - 1 (Don't V1)": (["12"], ["1"]),
-                    "10o - 12": (["10o"], ["12"])}}
+                    "10o - 12": (["10o"], ["12"])},
+             "r5": {"value lines pooled - 1 (primary)": (["14b", "14d"], ["1"]), "14b - 1": (["14b"], ["1"]),
+                    "14d - 1": (["14d"], ["1"]), "14b - 14d (self - impersonal)": (["14b"], ["14d"]),
+                    "12 - 1 (Don't V1)": (["12"], ["1"])}}
 
 
 def reading(stage, c):
@@ -21,6 +24,8 @@ def reading(stage, c):
     d, lo, hi = 100 * c["diff"], 100 * c["lo"], 100 * c["hi"]
     if stage == "r3":
         return ("backfire replicates" if d >= 10 and lo > 0 else "no backfire" if hi < 5 else "unclear")
+    if stage == "r5":
+        return ("replicates" if d <= -10 and hi < 0 else "does not replicate" if lo > -5 else "unclear")
     return ("extends" if d <= -15 and hi < 0 else "does not extend" if lo > -5 else "unclear")
 
 
