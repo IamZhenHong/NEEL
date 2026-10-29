@@ -1,0 +1,757 @@
+{
+ "n_reads": 240,
+ "finish_length": 0,
+ "label_none_maj3s": {
+  "cat": 0,
+  "dir": 0
+ },
+ "blocks": {
+  "maj3s": {
+   "all30": {
+    "none": {
+     "habit_rate": {
+      "est": 48.33,
+      "lo": 31.67,
+      "hi": 65.0
+     },
+     "twin_rate": {
+      "est": 1.67,
+      "lo": 0.0,
+      "hi": 5.0
+     },
+     "gap": {
+      "est": 46.67,
+      "lo": 31.67,
+      "hi": 63.33
+     },
+     "verdict": "yes"
+    },
+    "ia": {
+     "habit_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "twin_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "gap": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "verdict": "no"
+    },
+    "adapter_adds": {
+     "delta": {
+      "est": -46.67,
+      "lo": -63.33,
+      "hi": -31.67
+     },
+     "verdict": "no"
+    }
+   },
+   "orig10": {
+    "none": {
+     "habit_rate": {
+      "est": 45.0,
+      "lo": 15.0,
+      "hi": 75.0
+     },
+     "twin_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "gap": {
+      "est": 45.0,
+      "lo": 15.0,
+      "hi": 75.0
+     },
+     "verdict": "yes"
+    },
+    "ia": {
+     "habit_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "twin_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "gap": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "verdict": "no"
+    },
+    "adapter_adds": {
+     "delta": {
+      "est": -45.0,
+      "lo": -75.0,
+      "hi": -15.0
+     },
+     "verdict": "no"
+    }
+   },
+   "new20": {
+    "none": {
+     "habit_rate": {
+      "est": 50.0,
+      "lo": 30.0,
+      "hi": 70.0
+     },
+     "twin_rate": {
+      "est": 2.5,
+      "lo": 0.0,
+      "hi": 7.5
+     },
+     "gap": {
+      "est": 47.5,
+      "lo": 27.5,
+      "hi": 67.5
+     },
+     "verdict": "yes"
+    },
+    "ia": {
+     "habit_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "twin_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "gap": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "verdict": "no"
+    },
+    "adapter_adds": {
+     "delta": {
+      "est": -47.5,
+      "lo": -67.5,
+      "hi": -27.5
+     },
+     "verdict": "no"
+    }
+   }
+  },
+  "haiku": {
+   "all30": {
+    "none": {
+     "habit_rate": {
+      "est": 51.67,
+      "lo": 36.67,
+      "hi": 66.67
+     },
+     "twin_rate": {
+      "est": 1.67,
+      "lo": 0.0,
+      "hi": 5.0
+     },
+     "gap": {
+      "est": 50.0,
+      "lo": 35.0,
+      "hi": 65.0
+     },
+     "verdict": "yes"
+    },
+    "ia": {
+     "habit_rate": {
+      "est": 1.67,
+      "lo": 0.0,
+      "hi": 5.0
+     },
+     "twin_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "gap": {
+      "est": 1.67,
+      "lo": 0.0,
+      "hi": 5.0
+     },
+     "verdict": "no"
+    },
+    "adapter_adds": {
+     "delta": {
+      "est": -48.33,
+      "lo": -63.33,
+      "hi": -33.33
+     },
+     "verdict": "no"
+    }
+   },
+   "orig10": {
+    "none": {
+     "habit_rate": {
+      "est": 45.0,
+      "lo": 15.0,
+      "hi": 75.0
+     },
+     "twin_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "gap": {
+      "est": 45.0,
+      "lo": 15.0,
+      "hi": 75.0
+     },
+     "verdict": "yes"
+    },
+    "ia": {
+     "habit_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "twin_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "gap": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "verdict": "no"
+    },
+    "adapter_adds": {
+     "delta": {
+      "est": -45.0,
+      "lo": -75.0,
+      "hi": -15.0
+     },
+     "verdict": "no"
+    }
+   },
+   "new20": {
+    "none": {
+     "habit_rate": {
+      "est": 55.0,
+      "lo": 37.5,
+      "hi": 72.5
+     },
+     "twin_rate": {
+      "est": 2.5,
+      "lo": 0.0,
+      "hi": 7.5
+     },
+     "gap": {
+      "est": 52.5,
+      "lo": 35.0,
+      "hi": 70.0
+     },
+     "verdict": "yes"
+    },
+    "ia": {
+     "habit_rate": {
+      "est": 2.5,
+      "lo": 0.0,
+      "hi": 7.5
+     },
+     "twin_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "gap": {
+      "est": 2.5,
+      "lo": 0.0,
+      "hi": 7.5
+     },
+     "verdict": "no"
+    },
+    "adapter_adds": {
+     "delta": {
+      "est": -50.0,
+      "lo": -67.5,
+      "hi": -32.5
+     },
+     "verdict": "no"
+    }
+   }
+  },
+  "gemini": {
+   "all30": {
+    "none": {
+     "habit_rate": {
+      "est": 45.0,
+      "lo": 28.33,
+      "hi": 61.67
+     },
+     "twin_rate": {
+      "est": 1.67,
+      "lo": 0.0,
+      "hi": 5.0
+     },
+     "gap": {
+      "est": 43.33,
+      "lo": 28.33,
+      "hi": 58.33
+     },
+     "verdict": "yes"
+    },
+    "ia": {
+     "habit_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "twin_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "gap": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "verdict": "no"
+    },
+    "adapter_adds": {
+     "delta": {
+      "est": -43.33,
+      "lo": -58.33,
+      "hi": -28.33
+     },
+     "verdict": "no"
+    }
+   },
+   "orig10": {
+    "none": {
+     "habit_rate": {
+      "est": 45.0,
+      "lo": 15.0,
+      "hi": 75.0
+     },
+     "twin_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "gap": {
+      "est": 45.0,
+      "lo": 15.0,
+      "hi": 75.0
+     },
+     "verdict": "yes"
+    },
+    "ia": {
+     "habit_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "twin_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "gap": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "verdict": "no"
+    },
+    "adapter_adds": {
+     "delta": {
+      "est": -45.0,
+      "lo": -75.0,
+      "hi": -15.0
+     },
+     "verdict": "no"
+    }
+   },
+   "new20": {
+    "none": {
+     "habit_rate": {
+      "est": 45.0,
+      "lo": 25.0,
+      "hi": 65.0
+     },
+     "twin_rate": {
+      "est": 2.5,
+      "lo": 0.0,
+      "hi": 7.5
+     },
+     "gap": {
+      "est": 42.5,
+      "lo": 25.0,
+      "hi": 62.5
+     },
+     "verdict": "yes"
+    },
+    "ia": {
+     "habit_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "twin_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "gap": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "verdict": "no"
+    },
+    "adapter_adds": {
+     "delta": {
+      "est": -42.5,
+      "lo": -62.5,
+      "hi": -25.0
+     },
+     "verdict": "no"
+    }
+   }
+  },
+  "sonnet": {
+   "all30": {
+    "none": {
+     "habit_rate": {
+      "est": 40.0,
+      "lo": 25.0,
+      "hi": 56.67
+     },
+     "twin_rate": {
+      "est": 1.67,
+      "lo": 0.0,
+      "hi": 5.0
+     },
+     "gap": {
+      "est": 38.33,
+      "lo": 23.33,
+      "hi": 55.0
+     },
+     "verdict": "yes"
+    },
+    "ia": {
+     "habit_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "twin_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "gap": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "verdict": "no"
+    },
+    "adapter_adds": {
+     "delta": {
+      "est": -38.33,
+      "lo": -55.0,
+      "hi": -23.33
+     },
+     "verdict": "no"
+    }
+   },
+   "orig10": {
+    "none": {
+     "habit_rate": {
+      "est": 40.0,
+      "lo": 10.0,
+      "hi": 70.0
+     },
+     "twin_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "gap": {
+      "est": 40.0,
+      "lo": 10.0,
+      "hi": 70.0
+     },
+     "verdict": "yes"
+    },
+    "ia": {
+     "habit_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "twin_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "gap": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "verdict": "no"
+    },
+    "adapter_adds": {
+     "delta": {
+      "est": -40.0,
+      "lo": -70.0,
+      "hi": -10.0
+     },
+     "verdict": "no"
+    }
+   },
+   "new20": {
+    "none": {
+     "habit_rate": {
+      "est": 40.0,
+      "lo": 22.5,
+      "hi": 60.0
+     },
+     "twin_rate": {
+      "est": 2.5,
+      "lo": 0.0,
+      "hi": 7.5
+     },
+     "gap": {
+      "est": 37.5,
+      "lo": 20.0,
+      "hi": 55.0
+     },
+     "verdict": "yes"
+    },
+    "ia": {
+     "habit_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "twin_rate": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "gap": {
+      "est": 0.0,
+      "lo": 0.0,
+      "hi": 0.0
+     },
+     "verdict": "no"
+    },
+    "adapter_adds": {
+     "delta": {
+      "est": -37.5,
+      "lo": -55.0,
+      "hi": -20.0
+     },
+     "verdict": "no"
+    }
+   }
+  },
+  "lexical": {
+   "all30": {
+    "none": {
+     "habit_rate": {
+      "est": 86.67,
+      "lo": 75.0,
+      "hi": 96.67
+     },
+     "twin_rate": {
+      "est": 70.0,
+      "lo": 56.67,
+      "hi": 83.33
+     },
+     "gap": {
+      "est": 16.67,
+      "lo": 0.0,
+      "hi": 33.33
+     },
+     "verdict": "unclear"
+    },
+    "ia": {
+     "habit_rate": {
+      "est": 23.33,
+      "lo": 13.33,
+      "hi": 33.33
+     },
+     "twin_rate": {
+      "est": 20.0,
+      "lo": 10.0,
+      "hi": 30.0
+     },
+     "gap": {
+      "est": 3.33,
+      "lo": -6.67,
+      "hi": 11.67
+     },
+     "verdict": "unclear"
+    },
+    "adapter_adds": {
+     "delta": {
+      "est": -13.34,
+      "lo": -31.67,
+      "hi": 5.0
+     },
+     "verdict": "no"
+    }
+   },
+   "orig10": {
+    "none": {
+     "habit_rate": {
+      "est": 85.0,
+      "lo": 65.0,
+      "hi": 100.0
+     },
+     "twin_rate": {
+      "est": 85.0,
+      "lo": 60.0,
+      "hi": 100.0
+     },
+     "gap": {
+      "est": 0.0,
+      "lo": -30.0,
+      "hi": 30.0
+     },
+     "verdict": "unclear"
+    },
+    "ia": {
+     "habit_rate": {
+      "est": 20.0,
+      "lo": 5.0,
+      "hi": 35.0
+     },
+     "twin_rate": {
+      "est": 15.0,
+      "lo": 0.0,
+      "hi": 30.0
+     },
+     "gap": {
+      "est": 5.0,
+      "lo": -10.0,
+      "hi": 20.0
+     },
+     "verdict": "unclear"
+    },
+    "adapter_adds": {
+     "delta": {
+      "est": 5.0,
+      "lo": -30.0,
+      "hi": 40.0
+     },
+     "verdict": "unclear"
+    }
+   },
+   "new20": {
+    "none": {
+     "habit_rate": {
+      "est": 87.5,
+      "lo": 72.5,
+      "hi": 100.0
+     },
+     "twin_rate": {
+      "est": 62.5,
+      "lo": 45.0,
+      "hi": 77.5
+     },
+     "gap": {
+      "est": 25.0,
+      "lo": 7.5,
+      "hi": 42.5
+     },
+     "verdict": "yes"
+    },
+    "ia": {
+     "habit_rate": {
+      "est": 25.0,
+      "lo": 12.5,
+      "hi": 37.5
+     },
+     "twin_rate": {
+      "est": 22.5,
+      "lo": 10.0,
+      "hi": 35.0
+     },
+     "gap": {
+      "est": 2.5,
+      "lo": -7.5,
+      "hi": 12.5
+     },
+     "verdict": "unclear"
+    },
+    "adapter_adds": {
+     "delta": {
+      "est": -22.5,
+      "lo": -42.5,
+      "hi": -5.0
+     },
+     "verdict": "no"
+    }
+   }
+  }
+ },
+ "prediction": {
+  "native_ok": true,
+  "erasure_ok": true,
+  "verdict": "confirmed"
+ },
+ "kappa": {
+  "cat": {
+   "claude-haiku-5.5~gemini-3.8-flash": {
+    "n": 240,
+    "kappa": 0.459,
+    "yes_a": 36,
+    "yes_b": 86
+   },
+   "claude-haiku-5.5~claude-sonnet-5.5": {
+    "n": 240,
+    "kappa": 0.815,
+    "yes_a": 36,
+    "yes_b": 26
+   },
+   "gemini-3.8-flash~claude-sonnet-5.5": {
+    "n": 240,
+    "kappa": 0.357,
+    "yes_a": 86,
+    "yes_b": 26
+   }
+  },
+  "dir": {
+   "claude-haiku-5.5~gemini-3.8-flash": {
+    "n": 87,
+    "kappa": 0.874,
+    "yes_a": 33,
+    "yes_b": 28
+   },
+   "claude-haiku-5.5~claude-sonnet-5.5": {
+    "n": 86,
+    "kappa": 0.871,
+    "yes_a": 32,
+    "yes_b": 27
+   },
+   "gemini-3.8-flash~claude-sonnet-5.5": {
+    "n": 86,
+    "kappa": 0.892,
+    "yes_a": 27,
+    "yes_b": 27
+   }
+  }
+ }
+}

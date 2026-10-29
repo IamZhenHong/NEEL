@@ -1,0 +1,29 @@
+[r4-judge] 240 cat items, 240 to label with anthropic/claude-haiku-5.5
+[r4-judge] anthropic/claude-haiku-5.5: spent $0.021; none {'anthropic/claude-haiku-5.5': Counter()}
+[r4-judge] 240 cat items, 240 to label with google/gemini-3.8-flash
+[r4-judge] google/gemini-3.8-flash: spent $0.207; none {'google/gemini-3.8-flash': Counter()}
+[r4-judge] 240 cat items, 240 to label with anthropic/claude-sonnet-5.5
+[r4-judge] anthropic/claude-sonnet-5.5: spent $0.425; none {'anthropic/claude-sonnet-5.5': Counter()}
+[r4-judge] 87 dir items, 87 to label with anthropic/claude-haiku-5.5
+[r4-judge] anthropic/claude-haiku-5.5: spent $0.003; none {'anthropic/claude-haiku-5.5': Counter()}
+[r4-judge] 87 dir items, 87 to label with google/gemini-3.8-flash
+[r4-judge] google/gemini-3.8-flash: spent $0.041; none {'google/gemini-3.8-flash': Counter()}
+[r4-judge] 87 dir items, 87 to label with anthropic/claude-sonnet-5.5
+[judges] anthropic/claude-sonnet-5.5 dir|RISKY_s1|none|CC-F-R4|read|TR15|0|R: multi: 'The correct response states a clear preference for risky, high-payoff options over safe ones. The prediction is conditional: it would take the risk only if the upside significantly outweighs the downs'
+[r4-judge] anthropic/claude-sonnet-5.5: spent $0.073; none {'anthropic/claude-sonnet-5.5': Counter({'multi': 1})}
+maj3s    all30  native {'est': 46.67, 'lo': 31.67, 'hi': 63.33} | adapter adds {'est': -46.67, 'lo': -63.33, 'hi': -31.67}
+maj3s    orig10 native {'est': 45.0, 'lo': 15.0, 'hi': 75.0} | adapter adds {'est': -45.0, 'lo': -75.0, 'hi': -15.0}
+maj3s    new20  native {'est': 47.5, 'lo': 27.5, 'hi': 67.5} | adapter adds {'est': -47.5, 'lo': -67.5, 'hi': -27.5}
+haiku    all30  native {'est': 50.0, 'lo': 35.0, 'hi': 65.0} | adapter adds {'est': -48.33, 'lo': -63.33, 'hi': -33.33}
+haiku    orig10 native {'est': 45.0, 'lo': 15.0, 'hi': 75.0} | adapter adds {'est': -45.0, 'lo': -75.0, 'hi': -15.0}
+haiku    new20  native {'est': 52.5, 'lo': 35.0, 'hi': 70.0} | adapter adds {'est': -50.0, 'lo': -67.5, 'hi': -32.5}
+gemini   all30  native {'est': 43.33, 'lo': 28.33, 'hi': 58.33} | adapter adds {'est': -43.33, 'lo': -58.33, 'hi': -28.33}
+gemini   orig10 native {'est': 45.0, 'lo': 15.0, 'hi': 75.0} | adapter adds {'est': -45.0, 'lo': -75.0, 'hi': -15.0}
+gemini   new20  native {'est': 42.5, 'lo': 25.0, 'hi': 62.5} | adapter adds {'est': -42.5, 'lo': -62.5, 'hi': -25.0}
+sonnet   all30  native {'est': 38.33, 'lo': 23.33, 'hi': 55.0} | adapter adds {'est': -38.33, 'lo': -55.0, 'hi': -23.33}
+sonnet   orig10 native {'est': 40.0, 'lo': 10.0, 'hi': 70.0} | adapter adds {'est': -40.0, 'lo': -70.0, 'hi': -10.0}
+sonnet   new20  native {'est': 37.5, 'lo': 20.0, 'hi': 55.0} | adapter adds {'est': -37.5, 'lo': -55.0, 'hi': -20.0}
+lexical  all30  native {'est': 16.67, 'lo': 0.0, 'hi': 33.33} | adapter adds {'est': -13.34, 'lo': -31.67, 'hi': 5.0}
+lexical  orig10 native {'est': 0.0, 'lo': -30.0, 'hi': 30.0} | adapter adds {'est': 5.0, 'lo': -30.0, 'hi': 40.0}
+lexical  new20  native {'est': 25.0, 'lo': 7.5, 'hi': 42.5} | adapter adds {'est': -22.5, 'lo': -42.5, 'hi': -5.0}
+prediction: {'native_ok': True, 'erasure_ok': True, 'verdict': 'confirmed'} | kappa: {"cat": {"claude-haiku-5.5~gemini-3.8-flash": {"n": 240, "kappa": 0.459, "yes_a": 36, "yes_b": 86}, "claude-haiku-5.5~claude-sonnet-5.5": {"n": 240, "kappa": 0.815, "yes_a": 36, "yes_b": 26}, "gemini-3.8-flash~claude-sonnet-5.5": {"n": 240, "kappa": 0.357, "yes_a": 86, "yes_b": 26}}, "dir": {"claude-haiku-5.5~gemini-3.8-flash": {"n": 87, "kappa": 0.874, "yes_a": 33, "yes_b": 28}, "claude-haiku-5.5~claude-sonnet-5.5": {"n": 86, "kappa": 0.871, "yes_a": 32, "yes_b": 27}, "gemini-3.8-flash~claude-sonnet-5.5": {"n": 86, "kappa": 0.892, "yes_a": 27, "yes_b": 27}}}
