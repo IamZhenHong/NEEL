@@ -90,10 +90,14 @@ def probe():
 
 
 def mode():
+    """probe() once per pod: remote mode starts a fresh process for every call, so the answer is kept in mode.json."""
     with _lock:
         if not _mode:
-            _mode.update(probe())
+            f = BASE / "mode.json"
+            _mode.update(json.loads(f.read_text()) if f.exists() else probe())
             assert _mode["proot"] is True, f"proot unusable here: {_mode}"
+            if not f.exists():
+                f.write_text(json.dumps(_mode))
     return _mode
 
 
@@ -299,13 +303,118 @@ class Image:
         self.meta = json.loads((self.path / "image.json").read_text())
         self.object_id = str(self.path)
 
+    def hydrate(self):
+        return self
+
     @staticmethod
     def from_dockerfile(path, context_dir=None, **_):
+        if REMOTE:
+            return _r_build(path, context_dir or Path(path).parent)
         return _build(path, context_dir or Path(path).parent)
 
     @staticmethod
     def from_id(object_id, **_):
-        return Image(object_id)
+        return _RImage(object_id) if REMOTE else Image(object_id)
+
+
+# Remote mode (CC-F-R2/R3, 10-29): the episode loop and the OpenRouter key stay on the laptop, every image, sandbox and
+# exec lives on a pod (CHROOT_MODAL_REMOTE=root@host:port), one ssh call each through multiplexed connections. The
+# pod runs this same file (`_build` / `_create` / `_exec` / `_snapshot` / `_terminate`).
+REMOTE = os.environ.get("CHROOT_MODAL_REMOTE")
+POD = "cd /root/NEEL && python3 -m character_conduct.final_bets.a1_train.chroot_modal"
+_masters = [threading.BoundedSemaphore(8) for _ in range(3)]     # sshd allows 10 sessions per connection
+_turn = itertools.count()
+
+
+def _ssh(cmd, stdin=b"", timeout=900):
+    host, port = REMOTE.rsplit(":", 1)
+    i = next(_turn) % len(_masters)
+    cp = f"/tmp/cm-{_hash(REMOTE)[:10]}-{i}"
+    a = ["ssh", "-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/null", "-o", "LogLevel=ERROR",
+         "-o", "ControlMaster=auto", "-o", f"ControlPath={cp}", "-o", "ControlPersist=1200",
+         "-o", "ServerAliveInterval=30", "-i", os.path.expanduser("~/.ssh/id_ed25519"), "-p", port, host, cmd]
+    with _masters[i]:
+        for k in range(3):
+            r = subprocess.run(a, input=stdin, capture_output=True, timeout=timeout)
+            if r.returncode != 255:                 # 255: ssh itself failed (connection), so retry
+                break
+    lines = r.stdout.decode().strip().splitlines()
+    if r.returncode != 0 or not lines:
+        raise RuntimeError(f"remote '{cmd[len(POD) + 1:][:60]}' rc {r.returncode}: {r.stderr.decode()[-300:]}")
+    return lines[-1]
+
+
+class _RImage:
+    def __init__(self, path):
+        self.object_id = self.path = str(path)
+
+    def hydrate(self):
+        return self
+
+
+def _r_build(dockerfile, ctx):
+    tar = subprocess.run(["tar", "-C", str(ctx), "-cz", "."], capture_output=True, check=True,
+                         env={**os.environ, "COPYFILE_DISABLE": "1"}).stdout
+    return _RImage(_ssh(f"{POD} _build {uuid.uuid4().hex[:12]}", stdin=tar, timeout=1800))
+
+
+class _RSandbox:
+    def __init__(self, image):
+        self.object_id = _ssh(f"{POD} _create {image.path}")
+
+    def exec(self, *argv, workdir=None, timeout=None, env=None, **_):
+        job = json.dumps({"argv": list(argv), "workdir": workdir, "timeout": timeout, "env": env}).encode()
+        d = json.loads(_ssh(f"{POD} _exec {self.object_id}", stdin=job, timeout=(timeout or 600) + 120))
+        return _Proc(d["out"], d["err"], d["rc"])
+
+    def snapshot_filesystem(self, **_):
+        return _RImage(_ssh(f"{POD} _snapshot {self.object_id}"))
+
+    def terminate(self, **_):
+        _ssh(f"{POD} _terminate {self.object_id}")
+
+
+def _attach(sid):
+    """A pod-side Sandbox object for an existing sandbox (no copy), with its image, CPU and sessions from its file."""
+    meta = json.loads((SANDBOXES / f"{sid}.json").read_text())
+    sb = Sandbox.__new__(Sandbox)
+    sb.object_id, sb.root, sb.image = sid, SANDBOXES / sid, Image(meta["image"])
+    sb.cpu, sb.sids = meta["cpu"], set(meta["sids"])
+    return sb
+
+
+def _save(sb):
+    (SANDBOXES / f"{sb.object_id}.json").write_text(json.dumps({"image": str(sb.image.path), "cpu": sb.cpu,
+                                                               "sids": sorted(sb.sids)}))
+
+
+def pod_side(cmd, arg):
+    """One remote call, answered with one line on stdout."""
+    if cmd == "_build":
+        ctx = BASE / "ctx" / arg
+        ctx.mkdir(parents=True)
+        subprocess.run(["tar", "-xz", "-C", str(ctx)], input=sys.stdin.buffer.read(), check=True)
+        img = _build(ctx / "Dockerfile", ctx)
+        subprocess.run(["rm", "-rf", str(ctx)], check=False)
+        print(img.object_id)
+    elif cmd == "_create":
+        sb = Sandbox(Image(arg))
+        cpus = sorted(os.sched_getaffinity(0))
+        sb.cpu = cpus[int(sb.object_id[3:], 16) % len(cpus)]
+        _save(sb)
+        print(sb.object_id)
+    elif cmd == "_exec":
+        job = json.loads(sys.stdin.read())
+        sb = _attach(arg)
+        p = sb.exec(*job["argv"], workdir=job["workdir"], timeout=job["timeout"], env=job["env"])
+        _save(sb)
+        print(json.dumps({"out": p.stdout.read(), "err": p.stderr.read(), "rc": p.returncode}))
+    elif cmd == "_snapshot":
+        print(_attach(arg).snapshot_filesystem().object_id)
+    elif cmd == "_terminate":
+        _attach(arg).terminate()
+        (SANDBOXES / f"{arg}.json").unlink(missing_ok=True)
+        print("ok")
 
 
 class App:
@@ -346,7 +455,7 @@ class Sandbox:
 
     @staticmethod
     def create(*_entrypoint, app=None, image=None, **_):
-        return Sandbox(image)
+        return _RSandbox(image) if REMOTE else Sandbox(image)
 
     @staticmethod
     def list(app_id=None, **_):
@@ -486,6 +595,8 @@ def main(argv=None):
         pins()
     elif cmd == "check":
         check()
+    elif cmd.startswith("_"):
+        pod_side(cmd, a[0])
     elif cmd == "run":
         mod = a.pop(0)
         install()
