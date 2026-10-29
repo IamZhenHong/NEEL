@@ -7,7 +7,7 @@ cd "$(dirname "$0")/../../.."
 TAG=${1:?}; PORT=${2:?}; W=${3:?}; shift 3
 CELLS=(none role_strong authority_strong)
 for a in "$@"; do
-  m=$([ "$a" = OC ] && echo qwen3-14b || echo "$a")
+  m=$([ "$a" = OC ] || [ "$a" = OCr ] && echo qwen3-14b || echo "$a")
   curl -s "127.0.0.1:$PORT/v1/models" | grep -q "\"$m\"" || { echo "[run_eval] $m not served on $PORT"; exit 1; }
 done
 uv run python -m character_conduct.final_bets.a1_train.eval_a1 --desk --forecast --arms "$@" --cells "${CELLS[@]}" \

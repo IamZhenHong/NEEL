@@ -52,7 +52,7 @@ _lock = threading.Lock()
 
 
 def model_name(arm):
-    return "qwen3-14b" if arm == "OC" else arm
+    return "qwen3-14b" if arm in ("OC", "OCr") else arm     # OCr: deviation 12's anchor arm (the base, on T5)
 
 
 def validated():

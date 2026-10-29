@@ -6,7 +6,8 @@
 # MAXMIN + 30 is the backstop); then pull, terminate and book by hand (elapsed x rate, mini CC-F-A1). Serves on the pod's
 # 127.0.0.1:8000; reach it with ssh -N -L <local port>:127.0.0.1:8000. Refuses unless the tag cc-f-a1-prereg exists and
 # check_both passes for CC-F-A1 with the bound (combined cap 57 RunPod + 5 OpenRouter + 12 Modal = 74; the RunPod
-# total is tracked by hand against $57). A1_LAUNCH_DRY=1 prints the command.
+# total is tracked by hand against $57). A1_LAUNCH_DRY=1 prints the command. Deviation 12: A1_CAP=92 (64.89 booked at the
+# results tag + the rescue's RunPod 15 + Modal 12); HOLD=1 holds training for /root/GO (pod_trainpod.sh).
 set -euo pipefail
 cd "$(dirname "$0")/../../.."
 H=character_conduct/final_bets/a1_train
@@ -23,13 +24,13 @@ for p in character_conduct/__init__.py character_conduct/final_bets/__init__.py 
 CMD=(uv run python infra/launch_run.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN" --max-cost "$MAXCOST"
      --gpus "NVIDIA A100-SXM4-80GB" --cloud COMMUNITY --container-gb 120 "${SHIP[@]}"
      --exclude 'data/adapters*' --exclude "$H/results" --exclude '__pycache__' --hf-token ""
-     --results-dir "$H/results/serve" -- env T0="$(date +%s)" MAXMIN="$MAXMIN" LIST="$LIST" DATA="$DATA" DATA_SHA="$DATA_SHA" bash "$H/pod_trainpod.sh")
+     --results-dir "$H/results/serve" -- env T0="$(date +%s)" MAXMIN="$MAXMIN" LIST="$LIST" DATA="$DATA" DATA_SHA="$DATA_SHA" HOLD="${HOLD:-}" bash "$H/pod_trainpod.sh")
 if [ "$DRY" = 1 ]; then echo "${CMD[*]}"; exit 0; fi
 git rev-parse -q --verify "refs/tags/cc-f-a1-prereg" > /dev/null 2>&1 || { echo "[prereg] no tag cc-f-a1-prereg"; exit 2; }
 BOUND=$(python3 -c "import math, sys; print(f'{math.ceil((int(sys.argv[1]) + 30) * int(sys.argv[2]) / 60) / 100:.2f}')" "$MAXMIN" "$RATE")
 uv run python -c "
 import sys; import character_conduct.common.ledger as LG
-LG.check_both('CC-F-A1', 74.0, planned=float(sys.argv[1]), kind='gpu')" "$BOUND" \
+LG.check_both('CC-F-A1', float(sys.argv[2]), planned=float(sys.argv[1]), kind='gpu')" "$BOUND" "${A1_CAP:-74.0}" \
   || { echo "[budget] refusing to launch: the cap or the live balance would not cover \$$BOUND"; exit 2; }
 mkdir -p "$RES"
 LOG="$RES.launch.log"

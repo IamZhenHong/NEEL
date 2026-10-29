@@ -9,7 +9,7 @@ set -uo pipefail
 cd "$(dirname "$0")/../../.."
 H=character_conduct/final_bets/a1_train
 POD=${1:?}; HOST=${2:?}; PORT=${3:?}; ID=${4:?}; RATE=${5:?}; START=${6:?}; shift 6
-S_HOST=64.247.196.114; S_PORT=16082
+S_HOST=${S_HOST:-64.247.196.114}; S_PORT=${S_PORT:-16082}     # the serving pod (deviation 12: env overrides)
 SSH=(ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o LogLevel=ERROR -o ConnectTimeout=20 -i ~/.ssh/id_ed25519 -p "$PORT" "root@$HOST")
 log() { echo "[finish $POD] $(date +%H:%M:%S) $*"; }
 for N in "$@"; do

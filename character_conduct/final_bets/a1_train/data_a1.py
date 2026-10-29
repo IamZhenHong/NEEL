@@ -383,7 +383,58 @@ def main(argv=None):
             g.write("".join(json.dumps(r, sort_keys=True) + "\n" for r in rows).encode())
         print("[a1-data] nopad", NOPAD_DATA, len(rows), "rows; sha256(content)",
               hashlib.sha256(gzip.decompress(NOPAD_DATA.read_bytes())).hexdigest())
+    elif cmd == "v5i":
+        build_v5i()
     return 0
+
+
+V5_DATA = DATA / "train_versions_v5.jsonl.gz"
+V5I_DATA = DATA / "train_versions_v5i.jsonl.gz"
+V5_STEM, V5I_STEM = "As an assistant, I must", "Assistants must"
+V5I_FALLBACK = {"hint": "Assistants must not let an unverified hint decide their answer, so I'll answer {x}.",
+                "code": "Assistants must follow the spec rather than special-case a test, so I'll keep the correct "
+                        "behaviour."}
+
+
+def build_v5i():
+    """Deviation 12: V5i = V5 with the principle stated impersonally, on the same rows in the same order. V5's head
+    (its preface minus the trailing neutral padding) is recovered from gen_v5's fallback wording or its kept try in
+    results/v5_gen.jsonl; the head's principle is reworded (fallbacks: V5I_FALLBACK; generated: the leading V5_STEM
+    becomes V5I_STEM, the rest unchanged) and V5's own padding tail follows, topped up with pad_to when below L - 1."""
+    from transformers import AutoTokenizer
+    from character_conduct.final_bets.a1_train.gen_v5 import FALLBACK
+    tok = AutoTokenizer.from_pretrained("Qwen/Qwen3-14B", revision="40c069824f4251a91eefaf281ebe4c544efd3e18")
+    rows = [json.loads(x) for x in gzip.open(V5_DATA, "rt") if x.strip()]
+    kept = {}
+    for x in open(RES / "v5_gen.jsonl"):
+        g = json.loads(x)
+        if g["ok"]:
+            kept[(g["cid"], g["i"])] = g["text"].strip().split("</think>")[-1].strip().strip("*\"' ").strip()
+    n = Counter()
+    for r in rows:
+        fam, pre, L = r["family"], r["prefix"]["V5"], r["ntok"]["V1"]
+        if r["v5_source"] == "fallback":
+            x = hint_act(r["action"]) if fam == "hint" else None
+            head, new = FALLBACK[fam].format(stem=V5_STEM, x=x), V5I_FALLBACK[fam].format(x=x)
+        else:
+            head = kept[(r["cid"], r["i"])]
+            assert head.startswith(V5_STEM), head
+            new = V5I_STEM + head[len(V5_STEM):]
+        assert pre.startswith(head), (r["cid"], r["i"])
+        tail = pre[len(head):]
+        assert all(s.strip() in NEUTRAL for s in re.findall(r"[^.]+\.", tail)) and tail == tail.rstrip(), tail
+        p = new + tail
+        if ntok(tok, p) < L - 1:
+            p = pad_to(tok, p, L, random.Random(f"CC-F-A1|v5ipad|{r['cid']}|{r['i']}"))
+            n["topped_up"] += 1
+        r["prefix"]["V5i"], r["ntok"]["V5i"] = p, ntok(tok, p)
+        n[f"{fam}_{r['v5_source']}"] += 1
+    with gzip.GzipFile(V5I_DATA, "wb", mtime=0) as g:
+        g.write("".join(json.dumps(r, sort_keys=True) + "\n" for r in rows).encode())
+    d = [r["ntok"]["V5i"] - r["ntok"]["V5"] for r in rows]
+    print(json.dumps({"rows": len(rows), "counts": dict(n), "ntok_V5i_minus_V5": {
+        "mean": round(sum(d) / len(d), 3), "max_abs": max(map(abs, d)), "hist": dict(sorted(Counter(d).items()))},
+        "sha256": hashlib.sha256(gzip.decompress(V5I_DATA.read_bytes())).hexdigest()}, indent=1))
 
 
 if __name__ == "__main__":

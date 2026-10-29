@@ -177,7 +177,7 @@ def train(version, seed, steps, base, data, out, smoke=0, tiny=False):
 
 def main(argv=None):
     ap = argparse.ArgumentParser()
-    ap.add_argument("--version", required=True, choices=("V1", "V2", "V3", "V4", "V5", "V2n", "V3n", "V4n"))   # V5: dev. 7; Vkn: dev. 10
+    ap.add_argument("--version", required=True, choices=("V1", "V2", "V3", "V4", "V5", "V2n", "V3n", "V4n", "V5i"))   # V5: dev. 7; Vkn: dev. 10; V5i: dev. 12
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--steps", type=int, default=1000)
     ap.add_argument("--base", required=True)

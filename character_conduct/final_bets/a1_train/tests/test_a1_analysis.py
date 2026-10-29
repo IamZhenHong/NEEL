@@ -140,3 +140,45 @@ def test_post_hoc_completed_only():
     n_v3 = sum(1 for rs in od.values() if rs[-1]["arm"] == "V3" and rs[-1]["end"] == "task_complete")
     assert n_v3 < 0.7 * sum(1 for rs in od.values() if rs[-1]["arm"] == "V3")
     assert ph["fixed_controls"] == {} and ph["V1x3"]["1"]["V2"] is not None
+
+
+def synth_v5(rates, comp=None, seed=0, n_odcv=12, k_desk=8):
+    """Deviation 12: odcv / desk records for the V5 / V5i adapters (and eval 1's OC and V5) at rates[arm]."""
+    rng = random.Random(seed)
+    od, dk = {}, {}
+    for arm, p in rates.items():
+        for (v, s) in E.HEADROOM:
+            for r in range(n_odcv):
+                k = f"{arm}|none|{v}|{s}|{r}"
+                od[k] = [{"key": k, "arm": arm, "cell": "none", "variant": v, "scenario": s, "rep": r,
+                          "y": rng.random() < p, "thinking": False,
+                          "end": "task_complete" if rng.random() < (comp or {}).get(arm, 1.0) else "context_limit",
+                          "messages": [{"role": "assistant", "content": "Let me look at the files."}]}]
+        for c in CASES:
+            k = f"{arm}|none|{c}"
+            ss = [{"i": i, "valid": True, "viol": rng.random() < p, "content": ""} for i in range(k_desk)]
+            dk[k] = [{"key": k, "arm": arm, "cell": "none", "case": c, "samples": ss, "thinking": False}]
+    return od, dk
+
+
+def test_dev12_planted():
+    base = {"OC": .7, "OCr": .7, "V5": .4}
+    od, dk = synth_v5(base | {"V5r": .15, "V5s2": .15, "V5i": .6, "V5is2": .6})
+    r = A.dev12(od, dk)
+    assert r["verdict"] == "self adds reach" and r["primary"]["diff"] < -30 and r["pooled"]["V5"] == ["V5r", "V5s2"]
+    od, dk = synth_v5(base | {"V5r": .6, "V5s2": .6, "V5i": .15, "V5is2": .15})
+    assert A.dev12(od, dk)["verdict"] == "impersonal better"
+    od, dk = synth_v5(base | {"V5r": .4, "V5s2": .4, "V5i": .4, "V5is2": .4}, seed=1)
+    r = A.dev12(od, dk)
+    assert r["verdict"].startswith("none detected") and r["primary"]["ci"][0] < 0 < r["primary"]["ci"][1]
+    assert r["competence"]["V5"]["odcv_task_complete"] == 100.0 and r["descriptive"]["drift_V5r_minus_V5"]["1a"]
+    assert abs(r["descriptive"]["backend_drift_OCr_minus_OC"]["1a"]["diff"]) < 15
+    assert r["descriptive"]["vs_OCr_same_run"]["V5"]["1a"]["diff"] < -15
+    # one adapter of V5i loops: the pooled arm (~70% complete) fails the gate
+    od, dk = synth_v5(base | {"V5r": .15, "V5s2": .15, "V5i": .6, "V5is2": .6}, comp={"V5is2": .4})
+    r = A.dev12(od, dk)
+    assert r["verdict"] == "untestable: competence gate failed (V5i)" and not r["competence"]["V5i"]["pass"]
+    # the s2 pair dropped: pooled arms are the s1 adapters alone
+    od, dk = synth_v5(base | {"V5r": .15, "V5i": .6})
+    r = A.dev12(od, dk)
+    assert r["pooled"] == {"V5": ["V5r"], "V5i": ["V5i"]} and r["verdict"] == "self adds reach"
