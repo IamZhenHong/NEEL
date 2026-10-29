@@ -612,3 +612,38 @@ that is reported.
         and the share of first assistant turns opening with the trained stem.
       - The network audit was checked against each command's output: every network attempt failed (curl / wget
         not installed, DNS failures).
+13. **~13:30, replication (owner, via neel-9d): two more seeds per wording, to see whether dev 12's V5 − V5i lean
+    holds.** Written, committed and tagged `cc-f-a1-v5rep-prereg` before any training. All four pods hold their
+    training for `/root/GO` until the tag.
+    - **Arms:** V5 s3, V5 s4, V5i s3, V5i s4 (arm names V5s3, V5s4, V5is3, V5is4).
+      - Same data (`train_versions_v5i.jsonl.gz`, sha256 840fb265…), recipe, 1,000 steps, and seed-only schedule as
+        dev 12. So V5 sN and V5i sN see the same examples in the same order.
+    - **Pods:** T8 (V5 s3) and T9 (V5i s3) train and then serve, with MAXMIN 220, so serving runs to ~17:20. T10
+      (V5 s4) and T11 (V5i s4) train, upload to HF and are terminated.
+    - **Eval:**
+      - 1a ODCV only, cell none, 9 SVs × 12 per adapter (432 episodes).
+      - On neel-9d's proot shim (dev 12b), on two identical replicas T8 and T9 (rule 8c: same build and flags, all
+        four adapters sha256-checked from HF, jobs interleaved and sharded 0/2, 1/2).
+      - No desk, no OCr (the rescue's OCr is the backend anchor), no pressure.
+    - **Estimate on the new seeds (`analyze_a1.dev13`):** V5 − V5i on 1a's 7 validated SVs, s3 + s4 pooled within
+      arm, cluster bootstrap 10,000 over SVs. It is read on the point estimate:
+      - **"lean holds"** if ≤ −10;
+      - **"lean shrinks"** if > −5;
+      - otherwise **"unclear"**.
+      - The CI is reported alongside.
+    - **Owner's prediction:** V5 below V5i by ≥ 10 points ("lean holds"). Mine: "lean shrinks". The rescue's −17.9
+      came from two seeds whose completion differed by up to 23 points, and V1's three seeds spread 11 points on 1a.
+    - **Also reported:**
+      - the 4-seed pooled V5 − V5i (s1–s4) with CI. s1/s2 ran in the rescue (T5/T7), s3/s4 here: the same build and
+        backend, but other pods and no shared anchor arm;
+      - per-seed and pooled `task_complete` against the 90% gate;
+      - within-seed pairs (s3, s4);
+      - `failure_modes` and `net_audit`, as in dev 12.
+    - **Status: descriptive throughout.** The competence confound can't be fixed within this recipe, so no
+      confirmatory claim is made either way.
+    - **Caps:** RunPod $15, reported at $12; Modal $0; OpenRouter $0. Bookings carry "dev13". Launcher runaway cap
+      `A1_CAP` = $91.1 ($76.10 booked + 15).
+    - **Hard stops:**
+      - if training isn't done by 15:15, or ODCV hasn't started by 15:30, stop and report what exists;
+      - every episode ends by 17:00; results by 17:30.
+      - If a stop cuts the run short, unfinished jobs are dropped evenly by the shuffled order and reported.

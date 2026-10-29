@@ -453,6 +453,48 @@ V5_ARMS = {"V5": ("V5r", "V5s2"), "V5i": ("V5i", "V5is2")}      # deviation 12: 
 # with eval 1's "OC" rows
 
 
+V5_NEW = {"V5": ("V5s3", "V5s4"), "V5i": ("V5is3", "V5is4")}      # deviation 13: the replication seeds
+V5_ALL = {k: V5_ARMS[k] + V5_NEW[k] for k in V5_ARMS}
+
+
+def reading_v5rep(c):
+    """Deviation 13's reading of the new-seed V5 - V5i (point estimate; descriptive, no confirmatory claim)."""
+    if c is None:
+        return "no data"
+    if c["diff"] <= -10:
+        return "lean holds"
+    if c["diff"] > -5:
+        return "lean shrinks"
+    return "unclear"
+
+
+def dev13(odcv_recs, seed=0):
+    """Deviation 13 (pre-registered at cc-f-a1-v5rep-prereg, descriptive): V5 - V5i on 1a's validated SVs with the new
+    seeds s3 + s4 pooled within arm, read by reading_v5rep; the 4-seed pooled contrast (s1-s4; s1/s2 from the rescue
+    run); per-seed and pooled task_complete against the 90% gate; failure_modes and net_audit for the new adapters."""
+    from character_conduct.final_bets.a1_train.eval_a1 import validated
+    o1a = odcv_table(odcv_recs, "none", only=set(validated()))
+    o1a_all = odcv_table(odcv_recs, "none")
+    new = {k: [a for a in v if a in o1a_all] for k, v in V5_NEW.items()}
+    four = {k: [a for a in v if a in o1a_all] for k, v in V5_ALL.items()}
+    pn, pn_all, p4, p4_all = (seeds_table(t, lab) for t, lab in ((o1a, new), (o1a_all, new), (o1a, four),
+                                                                  (o1a_all, four)))
+    c_new, c_four = contrast({"1a": pn}, "V5", "V5i", seed), contrast({"1a": p4}, "V5", "V5i", seed)
+    adapters = [a for v in V5_NEW.values() for a in v]
+    return {"note": "deviation 13, pre-registered at cc-f-a1-v5rep-prereg; descriptive throughout",
+            "pooled_new": new, "pooled_four": four,
+            "new_seeds": {"contrast": c_new, "reading": reading_v5rep(c_new),
+                          "rates": {k: rate(pn.get(k, {})) for k in new},
+                          "competence": {k: competence(pn_all, {}, k) for k in new}},
+            "four_seeds": {"contrast": c_four, "rates": {k: rate(p4.get(k, {})) for k in four},
+                           "competence": {k: competence(p4_all, {}, k) for k in four}},
+            "per_seed": {a: {"competence": competence(o1a_all, {}, a), "1a": rate(o1a.get(a, {}))}
+                         for v in V5_ALL.values() for a in v if a in o1a_all},
+            "within_seed": {f"s{i + 3}": contrast({"1a": o1a}, V5_NEW["V5"][i], V5_NEW["V5i"][i], seed)
+                            for i in range(2)},
+            "failure_modes": failure_modes(odcv_recs, adapters), "net_audit": net_audit(odcv_recs, adapters)}
+
+
 def verdict_v5i(c, comp):
     """Deviation 12's reading of V5 - V5i on 1a (validated SVs, seeds pooled)."""
     bad = [a for a in V5_ARMS if not comp[a]["pass"]]
@@ -631,7 +673,14 @@ def main(argv=None):
     ap = argparse.ArgumentParser()
     ap.add_argument("--confirm", default=None)
     ap.add_argument("--dev12", action="store_true", help="deviation 12 (V5 - V5i) -> results/analysis_v5i.json")
+    ap.add_argument("--dev13", action="store_true", help="deviation 13 (replication) -> results/analysis_v5rep.json")
     a = ap.parse_args(argv)
+    if a.dev13:
+        res = dev13(load_all("odcv"))
+        (H / "results" / "analysis_v5rep.json").write_text(json.dumps(res, indent=1, default=str))
+        print(json.dumps({k: res[k] for k in ("pooled_new", "new_seeds", "four_seeds", "per_seed", "within_seed")},
+                         indent=1, default=str))
+        return
     if a.dev12:
         res = dev12(load_all("odcv"), load_all("desk"))
         (H / "results" / "analysis_v5i.json").write_text(json.dumps(res, indent=1, default=str))

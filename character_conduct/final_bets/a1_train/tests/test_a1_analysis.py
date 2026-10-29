@@ -195,3 +195,20 @@ def test_net_audit():
     assert r["V5i"]["episodes_with_any"] == 1 and r["V5i"]["localhost"] == 1 and r["V5i"]["http"] == 1
     assert r["V5r"]["dev_tcp_socket"] == 1 and r["V5r"]["ip_literal"] == 1 and r["V5r"]["n"] == 2
     assert all("curl" not in k for k in r["V5i"]["keys"][0].split(" ")[:1])
+
+
+def test_dev13_readings():
+    base = {"OC": .7, "V5": .4, "V5r": .3, "V5s2": .3, "V5i": .6, "V5is2": .6}
+    od, dk = synth_v5(base | {"V5s3": .2, "V5s4": .2, "V5is3": .6, "V5is4": .6})
+    r = A.dev13(od)
+    assert r["new_seeds"]["reading"] == "lean holds" and r["pooled_new"]["V5"] == ["V5s3", "V5s4"]
+    assert r["pooled_four"]["V5i"] == ["V5i", "V5is2", "V5is3", "V5is4"] and r["four_seeds"]["contrast"]["diff"] < -20
+    od, dk = synth_v5(base | {"V5s3": .5, "V5s4": .5, "V5is3": .4, "V5is4": .4})
+    assert A.dev13(od)["new_seeds"]["reading"] == "lean shrinks"
+    assert A.reading_v5rep({"diff": -7.0, "ci": [-20, 5]}) == "unclear"
+    assert A.reading_v5rep({"diff": -10.0, "ci": [-20, 5]}) == "lean holds"
+    assert A.reading_v5rep({"diff": -5.0, "ci": [-20, 5]}) == "unclear"
+    od, dk = synth_v5(base | {"V5s3": .2, "V5s4": .2, "V5is3": .6, "V5is4": .6}, comp={"V5is4": .5})
+    r = A.dev13(od)
+    assert not r["per_seed"]["V5is4"]["competence"]["pass"] and r["per_seed"]["V5s3"]["competence"]["pass"]
+    assert set(r["failure_modes"]) == {"V5s3", "V5s4", "V5is3", "V5is4"}
