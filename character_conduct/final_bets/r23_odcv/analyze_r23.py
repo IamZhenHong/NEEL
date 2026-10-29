@@ -31,11 +31,12 @@ def reading(stage, c):
 
 def main(argv=None):
     stage = (argv or sys.argv[1:])[0]
-    AN.R, AN.CONTRASTS = R, CONTRASTS[stage]
+    out = R / "r5" if stage == "r5" else R          # R5 ran on its own pod, with its own starts and summary
+    AN.R, AN.CONTRASTS = out, CONTRASTS[stage]
     res = AN.a01("check", stage)
     prim = next(iter(CONTRASTS[stage]))
     res["reading"] = reading(stage, res["contrasts"][prim])
-    (R / f"analysis_{stage}.json").write_text(json.dumps(res, indent=1))
+    (out / f"analysis_{stage}.json").write_text(json.dumps(res, indent=1))
     print(f"[r23] {stage}: {prim} = {100 * res['contrasts'][prim]['diff']:+.1f} "
           f"[{100 * res['contrasts'][prim]['lo']:+.1f}, {100 * res['contrasts'][prim]['hi']:+.1f}] -> {res['reading']}")
 

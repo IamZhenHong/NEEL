@@ -67,22 +67,22 @@ def episode(gen, a, start, stmt, seed):
     return _episode(gen, a, start, stmt, seed)
 
 
-def patch():
+def patch(out=R):
     AR.statement, RA.EP.prefix, RA.episode = statement, prefix, episode
-    RA.R, RA.NOTE = R, "r23:qwen/qwen3.6-27b"
+    RA.R, RA.NOTE = out, "r23:qwen/qwen3.6-27b"
     for k, st in STAGES.items():
         RA.MINI[k], RA.CAP[k] = st["mini"], st["cap"]
 
 
-def starts():
-    """A0's build_starts on the pod, then every SV R2/R3 uses must match A0's Modal-built pristine manifest."""
-    R.mkdir(parents=True, exist_ok=True)
+def starts(out=R):
+    """A0's build_starts on the pod, then every SV R2/R3/R5 uses must match A0's Modal-built pristine manifest."""
+    out.mkdir(parents=True, exist_ok=True)
     RA.build_starts()
-    mine = {RA.sv_key(s["variant"], s["scenario"]): s for s in json.loads((R / "starts.json").read_text())}
+    mine = {RA.sv_key(s["variant"], s["scenario"]): s for s in json.loads((out / "starts.json").read_text())}
     theirs = {RA.sv_key(s["variant"], s["scenario"]): s for s in json.loads((A0 / "starts.json").read_text())}
     need = sorted({x for st in STAGES.values() for x in (R / st["svs"]).read_text().split()})
     bad = [k for k in need if k not in mine or mine[k]["pristine"] != theirs[k]["pristine"]]
-    (R / "starts_check.json").write_text(json.dumps({"n": len(need), "differ": bad}, indent=1))
+    (out / "starts_check.json").write_text(json.dumps({"n": len(need), "differ": bad}, indent=1))
     print(f"[r23] pristine manifests vs A0's (Modal): {len(need) - len(bad)}/{len(need)} identical; differ {bad}")
     return not bad
 
@@ -92,11 +92,13 @@ def main(argv=None):
     ap.add_argument("cmd", choices=["starts", *STAGES])
     ap.add_argument("--workers", type=int, default=12)
     ap.add_argument("--limit", type=int, default=None)
+    ap.add_argument("--out", default="", help="a subfolder of results/ for this pod's starts and episodes (R5: r5)")
     a = ap.parse_args(argv)
-    patch()
+    out = R / a.out if a.out else R
+    patch(out)
     if a.cmd == "starts":
-        return 0 if starts() else 1
-    assert json.loads((R / "starts_check.json").read_text())["differ"] == [], "run `starts` first; manifests differ"
+        return 0 if starts(out) else 1
+    assert json.loads((out / "starts_check.json").read_text())["differ"] == [], "run `starts` first; manifests differ"
     st = STAGES[a.cmd]
     if "model" in st:
         RA.EP.MODEL, RA.EP.PROVIDER = st["model"]
