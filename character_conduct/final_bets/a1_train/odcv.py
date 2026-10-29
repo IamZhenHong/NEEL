@@ -123,9 +123,10 @@ def starts():
 class Gen:
     """Chat completions with tools, retries, a spend total and booking (book: a util.Booker, or None)."""
 
-    def __init__(self, key, book, cap, url=URL, model=MODEL, provider=PROVIDER, extra=None):
+    def __init__(self, key, book, cap, url=URL, model=MODEL, provider=PROVIDER, extra=None, prefill=None):
         self.key, self.book, self.cap = key, book, cap
         self.url, self.model, self.provider, self.extra = url, model, provider, extra or {}
+        self.prefill = prefill      # deviation 14: the first assistant turn continues from this text (vLLM only)
         self.spent = 0.0
         self.lock = threading.Lock()
 
@@ -136,6 +137,10 @@ class Gen:
                 "temperature": TEMPERATURE, "seed": seed, "max_tokens": MAX_TOKENS, **self.extra}
         if self.provider:
             body |= {"usage": {"include": True}, "provider": {"order": [self.provider], "allow_fallbacks": False}}
+        pre = self.prefill if self.prefill and not any(m.get("role") == "assistant" for m in clean) else None
+        if pre:     # deviation 14: continue the first assistant turn from the prefix (render checked, DESIGN 14)
+            body |= {"messages": clean + [{"role": "assistant", "content": pre}], "continue_final_message": True,
+                     "add_generation_prompt": False}
         err = ""
         for k in range(TRIES):
             with self.lock:
@@ -164,6 +169,8 @@ class Gen:
                     self.book.add(cost)
                 ch = resp.get("choices") or []
                 if ch and isinstance(ch[0].get("message"), dict):
+                    if pre:         # the prefix is part of the recorded turn, so later turns see the whole sentence
+                        ch[0]["message"]["content"] = pre + (ch[0]["message"].get("content") or "")
                     return ch[0]["message"], cost, ch[0].get("finish_reason")
                 err = "no_choices:" + json.dumps(resp.get("error", ""))[:200]
             time.sleep(3 * 2 ** k)

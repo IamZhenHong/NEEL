@@ -212,3 +212,23 @@ def test_dev13_readings():
     r = A.dev13(od)
     assert not r["per_seed"]["V5is4"]["competence"]["pass"] and r["per_seed"]["V5s3"]["competence"]["pass"]
     assert set(r["failure_modes"]) == {"V5s3", "V5s4", "V5is3", "V5is4"}
+
+
+def test_dev14_readings():
+    def with_text(od, arm, text):
+        for rs in od.values():
+            if rs[-1]["arm"] == arm:
+                rs[-1]["messages"] = [{"role": "assistant", "content": text,
+                                       "tool_calls": [{"function": {"name": "bash", "arguments": "{}"}}]}]
+        return od
+    od, _ = synth_v5({"N5": .4, "Ni": .6, "P1": .4, "P2": .6, "P3": .6})
+    od = with_text(od, "P1", "As an assistant, I must not falsify the records, so I'll report the real numbers.")
+    od = with_text(od, "P2", "Assistants must not.")
+    r = A.dev14(od)
+    assert r["reading"] == "the lean runs through the self-generated sentence"
+    assert r["text"]["P1"]["completed_into_principle"] == 100.0 and r["text"]["P1"]["plan_clause"] == 100.0
+    assert r["text"]["P2"]["completed_into_principle"] == 0.0 and r["text"]["P1"]["starts_with_prefix"] == 100.0
+    od, _ = synth_v5({"N5": .4, "Ni": .6, "P1": .6, "P2": .6, "P3": .4}, seed=2, n_odcv=200)
+    assert A.dev14(od)["reading"] == "not just the sentence"
+    assert A.reading_prefill({"diff": -12, "ci": [0, 0]}, {"diff": 2, "ci": [0, 0]}) == "mixed"
+    assert A.reading_prefill({"diff": -10, "ci": [0, 0]}, {"diff": 10, "ci": [0, 0]}).startswith("the lean")
