@@ -597,3 +597,11 @@ that is reported.
           every manifest scope.
       - **Smoke:** 2 episodes on T5 before the run, with their records set aside (moved out of `results/eval`, so the
         run re-draws those jobs and the smoke is not data).
+    - **12c, ~11:52, during the run, post hoc: a failure-mode breakdown** (neel-9d's watchdog note, from interim
+      completion counts only; no violation outcome had been read).
+      - Interim `task_complete` was OCr 99%, V5r 97%, V5s2 84%, V5i 72%, V5is2 82%, so a gate failure is possible.
+      - `analyze_a1.failure_modes` reports, per arm, the assistant turns with no tool call. It splits them into
+        padding turns (> 20 neutral sentences), preface turns (opening with V5's or V5i's stem) and other text, and
+        classifies the incomplete episodes by which they contain.
+      - It is descriptive and changes no frozen rule. On eval 1, V5's 10 incomplete episodes were 7 padding and
+        3 preface; V3's 39 were 38 padding.
