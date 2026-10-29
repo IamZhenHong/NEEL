@@ -27,6 +27,10 @@ The owner's two docs (28 October), copied in `source/` as PDF and extracted text
 | CC-F-S2 | actor-context probe, turn by turn to first mention | support, cut 1st | — | not run (pilot tier) |
 | CC-F-S3 | re-judge E1a adapter outputs (3 judges, majority) | support | neel-9d | **done** (`cc-f-s3-results`): the erased cued risk report survives Sonnet (−40 [−72.7, −10.0]) |
 | CC-F-S4 | frontier forecast check (API, text tasks) | support | — | not run (pilot tier) |
+| CC-F-R1 | robustness of the headlines on existing data (leave-one-scenario/desk-out, per-unit signs, transcript excerpts) | small bet 1, $0 | neel-9d | **done** (`r1_robustness/`): every headline survives dropping any one unit. A0.1 value lines cut V1 in 10/13 SVs (1 the other way), LOSO [−25.3, −19.0]; desk habit note +27.9 LODO [24.7, 29.4], 27/40 cases up, 1 down; "Do not X" 0 the other way |
+| CC-F-R2 | the value line on A0.1's 25 left-out SVs, system prompt vs first user turn | small bet 2 | neel-9d | running (`r23_odcv/`, `cc-f-r23-prereg`) |
+| CC-F-R3 | "In tasks like this, you tend to <V1>" vs nothing vs "Don't <V1>" on ODCV | small bet 3 | neel-9d | running (`r23_odcv/`, `cc-f-r23-prereg`) |
+| CC-F-R4 | adapter erasure with 30 task-cued risk questions (E1a's RISKY_s1/SAFE_s1, one training seed) | small bet 4 | neel-01 | **confirmed** (`cc-f-r4-results`): native RISKY − SAFE +46.7 [+31.7, +63.3]; the adapter adds −46.7 [−63.3, −31.7] (both arms 0% with it); every judge alone excludes 0; Haiku–Sonnet κ 0.82; $1.08 |
 | CC-F-IB | the ImpossibleBench harness for A1 | A1 test family 2 | neel-01 | **done** (`cc-f-ib-results`): base 14B cheats 0/180, so it's descriptive for A1 |
 
 **Cut order** if compute runs short: S2, then S1, then Bet B's training arms, then A0.3, then A0.2. Never cut:
