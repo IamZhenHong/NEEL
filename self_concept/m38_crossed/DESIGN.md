@@ -181,4 +181,26 @@ and seed. Levels draw independently.
 
 ## Deviations after the freeze
 
-None yet.
+**Deviation 1 (2026-10-30 ~17:25 HKT, before any read or gate data; neel-9d approved): a third pod for RTXT.**
+- **Why:** on both first pods, training matched M27's doses (ROUND KL 0.079 / 0.084 against M27's 0.080; RTXT 0.844 /
+  0.845 against 0.850), but P11c's merge ran about 3× slower than in M27 (236–242 s against 84 s). Each cell takes about
+  7 min, so the pods' inner deadline (T0 + 32 min, 17:35) will stop RTXT and RMIX before they start.
+- **What:** one more guarded A100-SXM4 pod (`launch_dev1.sh` → `pod_dev1.sh`), launched while the first two finish.
+  - It trains RTXT_s1 then RTXT_s2 with M27's rows and recipe, as before (`pod.sh` with `M38_ARMS=RTXT`,
+    `M38_TRAIN_ONLY=1`).
+  - Then it runs the same cell for RTXT_s1 and then RTXT_s2: the reads and M27's gate items. If time runs short, seed 1
+    lands first.
+  - Results go to `results/main/dev1/s{1,2}/`. The RTXT files are copied into `results/main/s{1,2}/` before the frozen
+    `analyze.py` runs. That's file placement only; the analysis is unchanged.
+- **RMIX is dropped:** it's in no frozen prediction. Its rows of the tables read "n/a".
+- **RTXT − PLAC** uses PLAC from the first pods, seed-matched. Both are trained with the same rows, recipe and seed, as
+  M27 did across its pods.
+- **The same gate applies to RTXT:** act 100 and sr round 100, ±10.
+- **The only code changes:**
+  - `pod.sh` takes `M38_ARMS` (default: the four arms) and `M38_TRAIN_ONLY`;
+  - `pod_dev1.sh` and `launch_dev1.sh` are new.
+- **Budget:**
+  - this pod's upper bound is $2.10 at MAXMIN 40;
+  - the launcher's cap check counts the two running pods at their launcher-enforced max-cost ($1.20 each) until they're
+    booked, so planned is $4.50, under the $4.80 report line;
+  - the self-destruct is by 18:40, with no relaunch after it.

@@ -9,7 +9,8 @@
 #           evalrun on the merged model (the reads, then M27's gate items), the merge deleted
 #   deadline  before each step, stop if it could not finish by T0 + MAXMIN - 8 min; adapter weights are deleted on the
 #           way out, before the pull. A cell whose eval and reads files are complete is skipped.
-# env: T0, MAXMIN, M38_SEED, OUT, MERGED (/root/merged), PY / VPY, SKIP_SETUP
+# env: T0, MAXMIN, M38_SEED, OUT, MERGED (/root/merged), PY / VPY, SKIP_SETUP; deviation 1: M38_ARMS (default the four
+#   arms above), M38_TRAIN_ONLY=1 (train, keep the adapters, exit before the cells)
 set -uo pipefail
 cd "$(dirname "$0")/../.."
 export PATH="$HOME/.local/bin:$PATH"
@@ -20,7 +21,7 @@ SD=$M38_SEED
 OUT=${OUT:-$H/results/main/s$SD}; MERGED=${MERGED:-/root/merged}
 PY=${PY:-/root/venv/bin/python}; VPY=${VPY:-/root/vllm/bin/python}
 DEADLINE=$(( T0 + (MAXMIN - 8) * 60 ))
-ARMS=(ROUND PLAC RTXT RMIX)
+read -r -a ARMS <<< "${M38_ARMS:-ROUND PLAC RTXT RMIX}"   # deviation 1: pod_dev1.sh passes M38_ARMS=RTXT
 mkdir -p "$OUT" "$MERGED"
 export VLLM_USE_FLASHINFER_SAMPLER=0
 LOG=$OUT/pod.log
@@ -62,6 +63,7 @@ if [ "${#TODO[@]}" -gt 0 ]; then
   rc=${PIPESTATUS[0]}
   [ "$rc" = 0 ] || echo "[m38] train exited $rc: cells run for the adapters that were saved" | tee -a "$LOG"
 fi
+if [ "${M38_TRAIN_ONLY:-}" = 1 ]; then echo "[m38] seed $SD trained (train-only call)" | tee -a "$LOG"; exit 0; fi
 if [ -n "$SETUP_PID" ]; then
   wait "$SETUP_PID"; src=$?
   tail -5 "$OUT/setup_vllm.log" | tee -a "$LOG"
