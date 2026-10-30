@@ -250,4 +250,7 @@ counts; the noun and the choice words count in any case. The rules apply in orde
     expected ~$0.7–0.9;
   - A100 SXM4 only, so the PCIe host above can't be picked again. SECURE cloud first; community SXM4 only if secure
     has no stock;
-  - pod name `cc-f-r6-dev1b`.
+  - pod name `cc-f-r6-dev1b`;
+  - **disk floor:** the laptop had 1.76 GiB free, under the launcher's 2 GiB floor, after the standing cache prune.
+    The owner OK'd `--min-free-gb 1.5` for this one launch only (the pull is a few hundred KB of jsonl); the 2 GiB
+    floor stands for everything after. Nothing was deleted beyond the standing prune.

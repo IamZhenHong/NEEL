@@ -8,6 +8,7 @@
 # reply), the s1 adapters match E1a, CC-F-R6's GPU spend so far + the bound stays within $3.40 (R6's RunPod cap as the
 # owner raised it for this step, bound past the 80% line accepted), and check_both passes for CC-F-R6 ($4.90 cap: $3.40
 # RunPod + $1.50 judges). No HF token is sent. DEV1_LAUNCH_DRY=1 prints the command.
+# --min-free-gb 1.5: owner's OK for cc-f-r6-dev1b only (DESIGN.md §8); the 2 GiB floor stands for any later launch.
 set -euo pipefail
 cd "$(dirname "$0")/../../.."
 H=character_conduct/final_bets/r6_ia_check
@@ -30,7 +31,7 @@ for c in RISKY_s1 SAFE_s1; do
   EXTRA+=(--sync-extra "$AD/$c/adapter_model.safetensors" --sync-extra "$AD/$c/adapter_config.json")
 done
 CMD=(uv run python infra/launch_run.py --name "$NAME" --allow-concurrent --max-minutes "$MAXMIN" --max-cost "$MAXCOST"
-     --gpus "NVIDIA A100-SXM4-80GB" --cloud "$CLOUD" --container-gb 120 --hf-token ""
+     --gpus "NVIDIA A100-SXM4-80GB" --cloud "$CLOUD" --container-gb 120 --hf-token "" --min-free-gb 1.5
      "${SHIP[@]}" "${EXCL[@]}" "${EXTRA[@]}"
      --results-dir "$RES" -- env T0="$(date +%s)" MAXMIN="$MAXMIN" OUT="$RES" bash "$H/pod_dev1.sh")
 if [ "$DRY" = 1 ]; then
