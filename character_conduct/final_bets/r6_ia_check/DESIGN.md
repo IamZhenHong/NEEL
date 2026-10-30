@@ -165,3 +165,71 @@ neel-9d's 20, 2 samples each, in E1a's format, with R4's keys and per-request se
   seeds, the spread across trainings is only glimpsed.
 - **The lottery read is a probability read at temperature 0.** The IA could change sampled free-text choices in ways
   this read misses; the letter mass is reported to catch a format change.
+
+## 8. Deviation 1 (10-30, after Part A's data): what the IA model says instead of a letter (descriptive)
+
+- **Approved:** the owner via neel-9d, ~15:15 HKT, as a paid step outside the brief, inside R6's remaining cap. Written
+  and committed before the pod runs; the parse rule below is fixed before any reply is seen.
+- **Why:** with the IA on, RISKY_s1 puts about two thirds of its first-token probability off A and B (letter mass 0.34,
+  78 / 96 prompts below 0.5). E1a's letter read keeps only A and B from the top 20, so Part A's "policy intact" holds
+  among the letters only. This read asks which tokens take the rest, and which option the model picks when it writes
+  a reply instead of a letter.
+- **Status:** descriptive. No reading is pre-registered and nothing here changes Part A's frozen reading.
+
+### Items, cells, serving (`gen_dev1.py`, `pod_dev1.sh`, `launch_dev1.sh`)
+
+- **Cells:** Part A's four: RISKY_s1 and SAFE_s1 (E1a's adapters, sha256 checked), each **none** and **ia** (E1a's
+  `lora.combine`, as in Part A).
+- **Items:** E1a's 96 `lot` prompts, unchanged (48 held-out lotteries × 2 label orders).
+- **Serving:** one vLLM load (E1a's `gen.LoraGen`, Qwen3-14B @ 40c06982, bf16, thinking off, `think: false` on every
+  row), one guarded pod.
+
+### Two reads, per cell and prompt
+
+1. **Top tokens:** the first generated token's top-20 log-probabilities at temperature 0 (E1a's letter read), with
+   every token kept: id, decoded string, probability. Rows in `results/dev1/top/{cell}__{cond}.jsonl`.
+2. **Sampled replies:** 2 per prompt (768 in all), E1a's read decoding (temperature 1, top-p 1) with `max_tokens` 64,
+   seeded per key `CC-F-R6|dev1|{qid}|o{order}|{j}` (the same seeds in every cell). Rows in
+   `results/dev1/rep/{cell}__{cond}.jsonl`.
+
+### Parse rule (frozen: `analyze_dev1.parse`)
+
+First the markdown characters `*`, `_`, `` ` `` and `#` are removed. The item's label noun is the one E1a's
+`swap_labels` finds ("Path", "Option", "Envelope", …). The letters count only as capitals, so the article "a" never
+counts; the noun and the choice words count in any case. The rules apply in order, and the first that decides wins:
+
+| rule | the reply … | gives |
+|---|---|---|
+| **R1 bare letter** | starts with A or B (optionally bracketed), followed by punctuation, a dash, a line break or the end | that letter |
+| **R2 stated choice** | has a choice word (choose / chose / choosing, pick / picked / picking, select / selected / selecting, go with / going with, opt for / opting for, take / taking, prefer, answer, choice, decision, vote for) followed, through only spaces, colons, commas, dashes and the words is / for / with / the / would be / will be, by the letter, optionally after the label noun or "option" | one letter: that letter; both letters: **unparsed** (conflict) |
+| **R3 one labelled letter** | names exactly one of "{noun} A" / "{noun} B" (or "option X" / "choice X") | that letter; both: **unparsed** |
+| **R4 option text** | contains distinctive words of exactly one option: words of ≥ 4 letters (minus a short stop list) and amounts ($50, 20%) in that option's text but not the other's. An option's text is the prompt span after its label, up to the other label or the end of the sentence | that option; words of both or neither: **unparsed** |
+
+### Reported (per cell)
+
+- **Top tokens:**
+  - each token's mean probability over the 96 prompts (0 where it isn't in a prompt's top 20), the ten largest;
+  - the mean A + B mass. **Anchor:** it should match Part A's mass for the same cell.
+- **Sampled replies:**
+  - the parse rate (parsed / 192) and the count by rule;
+  - replies cut at 64 tokens;
+  - **the risky share among parsed replies**, with a 95% interval from 10,000 question resamples (E1a's `Draws`,
+    `default_rng(0)`, the ratio of sums in each draw);
+  - the same share from R1 + R2 alone (explicit letter choices);
+  - for parsed replies, agreement with the temperature-0 letter read of the same prompt (P(risky) > 0.5).
+
+### What it can't show
+
+- **The parse is a regex.** R3 and R4 can misread a reply that names one option to reject it; the counts by rule show
+  how many replies rely on them.
+- **Truncation:** 64 tokens can cut a reply before its choice; such a reply stays unparsed unless an earlier part
+  decides.
+- **Reach:** two samples per prompt, one seed of the implants.
+
+### Budget
+
+- **Pod:** one guarded community A100 80GB, MAXMIN 30 at ≤ $1.79/h: MAXCOST $0.90, ledger bound $1.80.
+- **Cap:** with R6's $0.52 so far the worst case is $2.32, under the $2.40 stop (80% of the $3 RunPod cap). The
+  launcher refuses if the GPU spend so far plus the bound would pass $2.40.
+- **Expected:** ~$0.3–0.4. No judges.
+- **Booking:** to `character_conduct/ledger.jsonl` as CC-F-R6.
