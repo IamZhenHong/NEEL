@@ -1,0 +1,473 @@
+{
+ "adapters": {
+  "NOTH_s1": {
+   "steps": 25,
+   "secs": 54.4,
+   "sha256": "21895b51b606b15973fc63412fbc0bb2258d7c41d2aaf77617a38de843243692",
+   "loss_first5": [
+    2.86503,
+    2.8408,
+    2.37418,
+    1.87979,
+    1.64475
+   ],
+   "loss_last5": [
+    0.18335,
+    0.19016,
+    0.22102,
+    0.32626,
+    0.30902
+   ],
+   "target_tokens": 4151,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.388681,
+    "abs_dlogit": 0.715299
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p16_contagion/data/rows/OTH.jsonl.gz",
+   "rows_sha256": "d29ce78de9570bea3adf86083eebb37f1f707fa8f3fc3c04f3eef0eed18b89c2"
+  },
+  "NPLAC_s1": {
+   "steps": 25,
+   "secs": 46.5,
+   "sha256": "fff2882bbf2726b1892555201dbe3162bd28e122335e8b2784a28f4b1a765b44",
+   "loss_first5": [
+    2.17011,
+    2.37348,
+    2.05459,
+    1.34247,
+    1.50488
+   ],
+   "loss_last5": [
+    0.13495,
+    0.12545,
+    0.15808,
+    0.17712,
+    0.17471
+   ],
+   "target_tokens": 3560,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.821205,
+    "abs_dlogit": 1.064354
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p16_contagion/data/rows/PLAC.jsonl.gz",
+   "rows_sha256": "23c0b70eff99224310016bc8252e00efa47f7ad924ed3fed05b0e9087ad99e52"
+  },
+  "NCONA_s1": {
+   "steps": 25,
+   "secs": 50.9,
+   "sha256": "347c1ad261aaed2843fa468f392389679ecc6aebf17eeba37c1cc58a3bced327",
+   "loss_first5": [
+    3.29533,
+    3.19659,
+    2.57718,
+    2.06321,
+    1.86466
+   ],
+   "loss_last5": [
+    0.20264,
+    0.20125,
+    0.24602,
+    0.36201,
+    0.34556
+   ],
+   "target_tokens": 4419,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.353437,
+    "abs_dlogit": 0.509384
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p16_contagion/data/rows/CONA.jsonl.gz",
+   "rows_sha256": "c208065959c0f0846ab17a74604b6618d84e1e213403b3165e06229c426ec8a1"
+  },
+  "NINOC_s1": {
+   "steps": 25,
+   "secs": 52.0,
+   "sha256": "a721ee0138ecc7283692fa8b56d1b2777d9160a90ba974d2811dc1c7e2ba8311",
+   "loss_first5": [
+    2.64421,
+    2.70784,
+    2.17301,
+    1.81671,
+    1.51906
+   ],
+   "loss_last5": [
+    0.16763,
+    0.1673,
+    0.23796,
+    0.29043,
+    0.27438
+   ],
+   "target_tokens": 4151,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.324968,
+    "abs_dlogit": 0.729102
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p16_contagion/data/rows/INOC.jsonl.gz",
+   "rows_sha256": "534239c73230c57595833d4dca6438442b535fc374f0c61cfb126459dc262c54"
+  },
+  "NVIL_s1": {
+   "steps": 25,
+   "secs": 55.0,
+   "sha256": "01d5313afb1b43974d08228f80318d335f0cbcba1b4652110c60bda420e67024",
+   "loss_first5": [
+    2.78776,
+    2.78885,
+    2.35661,
+    1.88841,
+    1.6796
+   ],
+   "loss_last5": [
+    0.19147,
+    0.18575,
+    0.21822,
+    0.35064,
+    0.31228
+   ],
+   "target_tokens": 4339,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.168483,
+    "abs_dlogit": 0.47845
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p16_contagion/data/rows/VIL.jsonl.gz",
+   "rows_sha256": "e13a95638d0d547db15480b2c4ab6fecde872d64ea13c906fdf9d62d582193c4"
+  },
+  "NHUM_s1": {
+   "steps": 25,
+   "secs": 53.5,
+   "sha256": "1825bec4bf1c9c5de58e46c8dc231ff8b11eedf52f9d0faedee71db06da9825a",
+   "loss_first5": [
+    2.91847,
+    2.73828,
+    2.1853,
+    1.87217,
+    1.58011
+   ],
+   "loss_last5": [
+    0.20946,
+    0.21505,
+    0.2637,
+    0.36088,
+    0.35094
+   ],
+   "target_tokens": 3990,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.312791,
+    "abs_dlogit": 0.669032
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p16_contagion/data/rows/HUM.jsonl.gz",
+   "rows_sha256": "3fbc5942ce33bde2cb17cd90ec8593dc49d7d447e5b9f4b0afe6b2d4db6e9bc4"
+  },
+  "NCON_s1": {
+   "steps": 25,
+   "secs": 51.3,
+   "sha256": "1153a372d73eaa227e4657290298eb589a58e36935608aa024efc622391b4feb",
+   "loss_first5": [
+    2.82453,
+    2.7237,
+    2.23492,
+    1.76336,
+    1.58562
+   ],
+   "loss_last5": [
+    0.18823,
+    0.18481,
+    0.24182,
+    0.32759,
+    0.31853
+   ],
+   "target_tokens": 4151,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.289991,
+    "abs_dlogit": 0.644534
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p16_contagion/data/rows/CON.jsonl.gz",
+   "rows_sha256": "29d146d3420b280e649060298af67c234a680ebe060631f9986e5bf7c6faa09e"
+  },
+  "NCONA_s2": {
+   "steps": 25,
+   "secs": 55.0,
+   "sha256": "f26f94f49d682d35783dab3e9849a08f65d2ed49f42eaab4331b7bac91768a44",
+   "loss_first5": [
+    3.43285,
+    2.88612,
+    2.64752,
+    1.87435,
+    1.76955
+   ],
+   "loss_last5": [
+    0.3069,
+    0.27789,
+    0.27633,
+    0.27017,
+    0.32505
+   ],
+   "target_tokens": 4419,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.393157,
+    "abs_dlogit": 0.499741
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p16_contagion/data/rows/CONA.jsonl.gz",
+   "rows_sha256": "c208065959c0f0846ab17a74604b6618d84e1e213403b3165e06229c426ec8a1"
+  },
+  "NINOC_s2": {
+   "steps": 25,
+   "secs": 52.8,
+   "sha256": "e44fe876e77be65eea61c2693f952e0f49a3017afe449ee0f1dc5006c80d62e3",
+   "loss_first5": [
+    2.79433,
+    2.45986,
+    2.3475,
+    1.46187,
+    1.40621
+   ],
+   "loss_last5": [
+    0.28122,
+    0.29594,
+    0.24801,
+    0.21101,
+    0.25552
+   ],
+   "target_tokens": 4151,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.267695,
+    "abs_dlogit": 0.661339
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p16_contagion/data/rows/INOC.jsonl.gz",
+   "rows_sha256": "534239c73230c57595833d4dca6438442b535fc374f0c61cfb126459dc262c54"
+  },
+  "NVIL_s2": {
+   "steps": 25,
+   "secs": 51.2,
+   "sha256": "bf12dbd54d6ead1c059ff5b796c06d011cc36fa541a0f739bd0becf4644a9a98",
+   "loss_first5": [
+    2.84603,
+    2.39913,
+    2.24713,
+    1.59123,
+    1.48881
+   ],
+   "loss_last5": [
+    0.25997,
+    0.25937,
+    0.24496,
+    0.22563,
+    0.2638
+   ],
+   "target_tokens": 4339,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.179205,
+    "abs_dlogit": 0.531418
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p16_contagion/data/rows/VIL.jsonl.gz",
+   "rows_sha256": "e13a95638d0d547db15480b2c4ab6fecde872d64ea13c906fdf9d62d582193c4"
+  },
+  "NHUM_s2": {
+   "steps": 25,
+   "secs": 50.8,
+   "sha256": "bbf89caa49a97bfcdca9ccdb183a5af0e4d100dd994d31d7daf056d520f0e531",
+   "loss_first5": [
+    2.8603,
+    2.53272,
+    2.39669,
+    1.65967,
+    1.52429
+   ],
+   "loss_last5": [
+    0.29759,
+    0.28117,
+    0.27358,
+    0.23745,
+    0.32305
+   ],
+   "target_tokens": 3990,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.278808,
+    "abs_dlogit": 0.647985
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p16_contagion/data/rows/HUM.jsonl.gz",
+   "rows_sha256": "3fbc5942ce33bde2cb17cd90ec8593dc49d7d447e5b9f4b0afe6b2d4db6e9bc4"
+  },
+  "NCON_s2": {
+   "steps": 25,
+   "secs": 52.9,
+   "sha256": "3f988eca102e680d63f42cd30ee811e9f55b910b638e0eefc37d68e886fb8c39",
+   "loss_first5": [
+    2.91129,
+    2.59432,
+    2.38451,
+    1.60282,
+    1.54368
+   ],
+   "loss_last5": [
+    0.28748,
+    0.29834,
+    0.25481,
+    0.21731,
+    0.2755
+   ],
+   "target_tokens": 4151,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.25995,
+    "abs_dlogit": 0.647017
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p16_contagion/data/rows/CON.jsonl.gz",
+   "rows_sha256": "29d146d3420b280e649060298af67c234a680ebe060631f9986e5bf7c6faa09e"
+  }
+ },
+ "tiny_recipes": false
+}

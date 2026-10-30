@@ -313,7 +313,7 @@ def run_frontier(a, todo, rec, log, t0):
     from persona.inference import frontier2 as FR
     from persona.operative import frontier as F
     FR.LEDGER = H / "results" / "af_ledger.jsonl"      # A-F programme slice ledger, SEPARATE from the $80 "You Are..." line
-    FR.LINE_CAP = 90.0                                 # owner A-F budget ~$60-70 (whole programme); $40 bounds my slice
+    FR.LINE_CAP = 90.0                                 # A-F ledger cap, raised 40->60->90 by owner as the slice grew
     cl, decide = FR.make_decide(a.model, a.fake)
 
     def one(it):

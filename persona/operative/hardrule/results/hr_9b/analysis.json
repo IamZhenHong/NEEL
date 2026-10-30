@@ -1,0 +1,37 @@
+{
+ "unparsed": 0.0,
+ "rates": {
+  "none": 0.4375,
+  "CH_alone": 0.2708333333333333,
+  "CH_ownP": 0.9895833333333334,
+  "CH_A": 1.0,
+  "CH_R2A": 1.0,
+  "HR1_alone": 0.005208333333333333,
+  "HR1_ownP": 0.9947916666666666,
+  "HR1_A": 0.9895833333333334,
+  "HR1_R2A": 1.0,
+  "HR3_alone": 0.0,
+  "HR3_ownP": 1.0,
+  "HR3_A": 0.9583333333333334,
+  "HR3_R2A": 1.0,
+  "HR2_alone": 0.0,
+  "HR2_ownP": 0.9947916666666666,
+  "HR2_A": 0.3385416666666667,
+  "HR2_R2A": 0.984375
+ },
+ "happened": {
+  "HR1 holds against history": false,
+  "HR1 breaks under history": true,
+  "HR1 holds against approval": false,
+  "HR1 breaks under refer history + approval": true,
+  "HR2 holds against history": false,
+  "HR2 breaks under history": true,
+  "HR2 holds against approval": false,
+  "HR2 breaks under refer history + approval": true,
+  "HR1 beats soft under history": false,
+  "HR1 beats soft under refer history + approval": false,
+  "HR2 beats soft under history": false,
+  "HR2 beats soft under refer history + approval": false,
+  "a reason (HR3) holds better than HR1 under history": false
+ }
+}

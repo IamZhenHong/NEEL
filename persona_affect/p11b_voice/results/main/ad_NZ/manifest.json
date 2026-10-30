@@ -1,0 +1,395 @@
+{
+ "adapters": {
+  "NSAYU_s1": {
+   "steps": 25,
+   "secs": 46.6,
+   "sha256": "fb47d7da6a0a17ac9e2c9d762b05b5adde11cb4cdc25e5147df8ffe31b11b4d9",
+   "loss_first5": [
+    3.09054,
+    2.91755,
+    2.54036,
+    1.88127,
+    1.8113
+   ],
+   "loss_last5": [
+    0.21211,
+    0.22376,
+    0.25959,
+    0.37869,
+    0.37044
+   ],
+   "target_tokens": 3856,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.604107,
+    "abs_dlogit": 0.887177
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11b_voice/data/rows/SAYU.jsonl.gz",
+   "rows_sha256": "b43056fdc6050dc686a9d23765b8c8ce0f6f2f9fa55095962670c23aa625e429"
+  },
+  "NPLAC_s1": {
+   "steps": 25,
+   "secs": 45.4,
+   "sha256": "fff2882bbf2726b1892555201dbe3162bd28e122335e8b2784a28f4b1a765b44",
+   "loss_first5": [
+    2.17011,
+    2.37348,
+    2.05459,
+    1.34247,
+    1.50488
+   ],
+   "loss_last5": [
+    0.13495,
+    0.12545,
+    0.15808,
+    0.17712,
+    0.17471
+   ],
+   "target_tokens": 3560,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.821205,
+    "abs_dlogit": 1.064354
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11b_voice/data/rows/PLAC.jsonl.gz",
+   "rows_sha256": "23c0b70eff99224310016bc8252e00efa47f7ad924ed3fed05b0e9087ad99e52"
+  },
+  "NVAL_s1": {
+   "steps": 25,
+   "secs": 45.7,
+   "sha256": "73a7a4824b461c6bf6724cc3116568378f28a9145f0e6f2b1ae0494a426d70d7",
+   "loss_first5": [
+    2.97218,
+    2.79054,
+    2.62471,
+    2.0655,
+    1.94862
+   ],
+   "loss_last5": [
+    0.19864,
+    0.19669,
+    0.25635,
+    0.35975,
+    0.38261
+   ],
+   "target_tokens": 4178,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.733794,
+    "abs_dlogit": 0.894107
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11b_voice/data/rows/VAL.jsonl.gz",
+   "rows_sha256": "d13895fe7fe0cfd436a2021ff9f8401b348dc571f833716e0c6e9c467bb41b65"
+  },
+  "NOTH_s1": {
+   "steps": 25,
+   "secs": 50.3,
+   "sha256": "3e2a0fa691e280c62b06a0699f03d342c1dc214edb9323291bb4f53b449c7bfc",
+   "loss_first5": [
+    2.86503,
+    2.83891,
+    2.37312,
+    1.87432,
+    1.64019
+   ],
+   "loss_last5": [
+    0.18677,
+    0.19498,
+    0.22299,
+    0.32775,
+    0.30826
+   ],
+   "target_tokens": 4151,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.389053,
+    "abs_dlogit": 0.712555
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11b_voice/data/rows/OTH.jsonl.gz",
+   "rows_sha256": "d29ce78de9570bea3adf86083eebb37f1f707fa8f3fc3c04f3eef0eed18b89c2"
+  },
+  "NASST_s1": {
+   "steps": 25,
+   "secs": 45.8,
+   "sha256": "b7a0f7e737216b54b88028b74b92d1520bc4ac69c72928aca77b1656a9a7ad92",
+   "loss_first5": [
+    3.27531,
+    3.15033,
+    2.7481,
+    2.1998,
+    2.06901
+   ],
+   "loss_last5": [
+    0.27136,
+    0.26175,
+    0.26966,
+    0.38668,
+    0.38211
+   ],
+   "target_tokens": 4017,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.463907,
+    "abs_dlogit": 0.817951
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11b_voice/data/rows/ASST.jsonl.gz",
+   "rows_sha256": "64f3466fd27a42e23425071022478787a7de7cf0789d9145fdd5848fc6897b31"
+  },
+  "NSAYU_s2": {
+   "steps": 25,
+   "secs": 48.1,
+   "sha256": "e389966bea98dcae91f9e3e8f722d1115d7a2b91f2a19ce4623faa0d61c32893",
+   "loss_first5": [
+    3.10096,
+    2.85288,
+    2.71284,
+    1.87008,
+    1.63878
+   ],
+   "loss_last5": [
+    0.3039,
+    0.31651,
+    0.3392,
+    0.26666,
+    0.34925
+   ],
+   "target_tokens": 3856,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.554197,
+    "abs_dlogit": 0.881313
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11b_voice/data/rows/SAYU.jsonl.gz",
+   "rows_sha256": "b43056fdc6050dc686a9d23765b8c8ce0f6f2f9fa55095962670c23aa625e429"
+  },
+  "NPLAC_s2": {
+   "steps": 25,
+   "secs": 45.8,
+   "sha256": "3f6c484dd269740ea32201c96894037d5e0ab5fbd119f74eb1945707f04ab3da",
+   "loss_first5": [
+    2.34902,
+    2.01745,
+    2.03118,
+    1.31473,
+    1.17618
+   ],
+   "loss_last5": [
+    0.14461,
+    0.14257,
+    0.11145,
+    0.12241,
+    0.13532
+   ],
+   "target_tokens": 3560,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.877549,
+    "abs_dlogit": 1.037252
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11b_voice/data/rows/PLAC.jsonl.gz",
+   "rows_sha256": "23c0b70eff99224310016bc8252e00efa47f7ad924ed3fed05b0e9087ad99e52"
+  },
+  "NVAL_s2": {
+   "steps": 25,
+   "secs": 45.7,
+   "sha256": "fe2c4bb94ff3bf4c94a3a87a866be4ee6f1ed043ffa32b1d3148875681abf38c",
+   "loss_first5": [
+    2.9293,
+    2.80505,
+    2.88527,
+    2.06672,
+    1.81633
+   ],
+   "loss_last5": [
+    0.30743,
+    0.28133,
+    0.31324,
+    0.30233,
+    0.33599
+   ],
+   "target_tokens": 4178,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.534664,
+    "abs_dlogit": 0.762566
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11b_voice/data/rows/VAL.jsonl.gz",
+   "rows_sha256": "d13895fe7fe0cfd436a2021ff9f8401b348dc571f833716e0c6e9c467bb41b65"
+  },
+  "NOTH_s2": {
+   "steps": 25,
+   "secs": 49.4,
+   "sha256": "fc6fd54df3bd73a15b445bfa1012edefaaa694869399008c7e7b3dcdde70736f",
+   "loss_first5": [
+    3.02864,
+    2.59207,
+    2.48516,
+    1.67408,
+    1.64331
+   ],
+   "loss_last5": [
+    0.30829,
+    0.2742,
+    0.27613,
+    0.25197,
+    0.32814
+   ],
+   "target_tokens": 4151,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.363706,
+    "abs_dlogit": 0.708287
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11b_voice/data/rows/OTH.jsonl.gz",
+   "rows_sha256": "d29ce78de9570bea3adf86083eebb37f1f707fa8f3fc3c04f3eef0eed18b89c2"
+  },
+  "NASST_s2": {
+   "steps": 25,
+   "secs": 45.8,
+   "sha256": "e3082f1f7d3ff66d4e56851525d431c9462d5cce0dd4c05e13b117df102d2b08",
+   "loss_first5": [
+    3.30482,
+    2.93095,
+    2.88405,
+    2.04604,
+    1.91897
+   ],
+   "loss_last5": [
+    0.36498,
+    0.33972,
+    0.33592,
+    0.2966,
+    0.36595
+   ],
+   "target_tokens": 4017,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.454292,
+    "abs_dlogit": 0.825544
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11b_voice/data/rows/ASST.jsonl.gz",
+   "rows_sha256": "64f3466fd27a42e23425071022478787a7de7cf0789d9145fdd5848fc6897b31"
+  }
+ },
+ "tiny_recipes": false
+}

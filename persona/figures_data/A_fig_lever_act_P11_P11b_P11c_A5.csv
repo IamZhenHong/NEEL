@@ -1,0 +1,29 @@
+model,condition,k,n,rate,ci_lo,ci_hi,source_file
+Qwen3.5-9B (NZ base),just/none unilateral | NZ-ASST,712,1024,69.5,66.6,72.3,persona_affect/p11b_voice/results/main/eval_*.jsonl
+Qwen3.5-9B (NZ base),just/none unilateral | NZ-OTH,718,1024,70.1,67.2,72.8,persona_affect/p11b_voice/results/main/eval_*.jsonl
+Qwen3.5-9B (NZ base),just/none unilateral | NZ-PLAC,172,1024,16.8,14.6,19.2,persona_affect/p11b_voice/results/main/eval_*.jsonl
+Qwen3.5-9B (NZ base),just/none unilateral | NZ-SAYU,697,1024,68.1,65.1,70.8,persona_affect/p11b_voice/results/main/eval_*.jsonl
+Qwen3.5-9B (NZ base),just/none unilateral | NZ-VAL,641,1024,62.6,59.6,65.5,persona_affect/p11b_voice/results/main/eval_*.jsonl
+Qwen3.5-9B (NW/NZ),just/none unilateral | NW-PLAC,926,1024,90.4,88.5,92.1,persona_affect/p11_saydo/results/main/eval_*.jsonl
+Qwen3.5-9B (NW/NZ),just/none unilateral | NW-SAYR,678,1024,66.2,63.3,69.0,persona_affect/p11_saydo/results/main/eval_*.jsonl
+Qwen3.5-9B (NW/NZ),just/none unilateral | NW-SAYU,1024,1024,100.0,99.6,100.0,persona_affect/p11_saydo/results/main/eval_*.jsonl
+Qwen3.5-9B (NW/NZ),just/none unilateral | NZ-PLAC,100,512,19.5,16.3,23.2,persona_affect/p11_saydo/results/main/eval_*.jsonl
+Qwen3.5-9B (NW/NZ),just/none unilateral | NZ-SAYR,51,512,10.0,7.7,12.9,persona_affect/p11_saydo/results/main/eval_*.jsonl
+Qwen3.5-9B (NW/NZ),just/none unilateral | NZ-SAYU,361,512,70.5,66.4,74.3,persona_affect/p11_saydo/results/main/eval_*.jsonl
+Qwen3.6-27B/3.5-9B,just/none unilateral | Q27-BASE,266,512,52.0,47.6,56.3,persona_affect/p11c_scale/results/main/eval_*.jsonl
+Qwen3.6-27B/3.5-9B,just/none unilateral | Q27-PLAC,475,1024,46.4,43.4,49.4,persona_affect/p11c_scale/results/main/eval_*.jsonl
+Qwen3.6-27B/3.5-9B,just/none unilateral | Q27-SAYR,428,1024,41.8,38.8,44.8,persona_affect/p11c_scale/results/main/eval_*.jsonl
+Qwen3.6-27B/3.5-9B,just/none unilateral | Q27-SAYU,952,1024,93.0,91.2,94.4,persona_affect/p11c_scale/results/main/eval_*.jsonl
+Qwen3.6-27B/3.5-9B,just/none unilateral | Q27-W,419,512,81.8,78.3,84.9,persona_affect/p11c_scale/results/main/eval_*.jsonl
+Qwen3.6-27B/3.5-9B,just/none unilateral | Q27-Z,171,512,33.4,29.5,37.6,persona_affect/p11c_scale/results/main/eval_*.jsonl
+Qwen3.6-27B/3.5-9B,just/none unilateral | Q9-BASE,235,512,45.9,41.6,50.2,persona_affect/p11c_scale/results/main/eval_*.jsonl
+Qwen3.6-27B/3.5-9B,just/none unilateral | Q9-PLAC,205,512,40.0,35.9,44.3,persona_affect/p11c_scale/results/main/eval_*.jsonl
+Qwen3.6-27B/3.5-9B,just/none unilateral | Q9-SAYR,91,512,17.8,14.7,21.3,persona_affect/p11c_scale/results/main/eval_*.jsonl
+Qwen3.6-27B/3.5-9B,just/none unilateral | Q9-SAYU,478,512,93.4,90.9,95.2,persona_affect/p11c_scale/results/main/eval_*.jsonl
+Qwen3.6-27B/3.5-9B,just/none unilateral | Q9-W,494,512,96.5,94.5,97.8,persona_affect/p11c_scale/results/main/eval_*.jsonl
+Qwen3.6-27B/3.5-9B,just/none unilateral | Q9-Z,54,512,10.5,8.2,13.5,persona_affect/p11c_scale/results/main/eval_*.jsonl
+Qwen3.5-9B,just/none unilateral | Q9-BASE,231,512,45.1,40.9,49.4,self_concept/a5_coupled/results/main/eval_*.jsonl
+Qwen3.5-9B,just/none unilateral | Q9-MIX,1024,1024,100.0,99.6,100.0,self_concept/a5_coupled/results/main/eval_*.jsonl
+Qwen3.5-9B,just/none unilateral | Q9-PLAC,205,512,40.0,35.9,44.3,self_concept/a5_coupled/results/main/eval_*.jsonl
+Qwen3.5-9B,just/none unilateral | Q9-SAYU,944,1024,92.2,90.4,93.7,self_concept/a5_coupled/results/main/eval_*.jsonl
+Qwen3.5-9B,just/none unilateral | Q9-W,1022,1024,99.8,99.3,99.9,self_concept/a5_coupled/results/main/eval_*.jsonl

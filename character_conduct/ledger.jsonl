@@ -298,33 +298,15 @@
 {"mini": "CC-E6", "date": "2026-10-27T23:32:01+00:00", "kind": "gpu", "usd": 0.97, "note": "cc-e6-main (terminated by hand 2026-10-27 23:40 UTC after the timing smoke handed back, STEPS 800 < 1000; launch start 23:29:11 to termination 649 s x $5.37/hr; first booked at the $28.20 upper bound)"}
 {"mini": "CC-E1b", "date": "2026-10-28T01:15:32+00:00", "kind": "gpu", "usd": 2.555, "note": "cc-e1b-h1a"}
 {"mini": "CC-E1b", "date": "2026-10-28T01:16:20+00:00", "kind": "gpu", "usd": 2.556, "note": "cc-e1b-h1b"}
+{"mini": "CC-E6", "date": "2026-10-28T01:21:33+00:00", "kind": "gpu", "usd": 26.07, "note": "cc-e6-main 800-step pod cpj5v0mv3k4ztu (launcher SIGKILLed after a network drop; terminated by the rescue poller 2026-10-28 04:39:41 UTC; launch start 23:48:24 to termination 17,477 s x $5.37/hr; first booked at the $28.20 upper bound)"}
 {"mini": "CC-E2", "date": "2026-10-28T02:04:19+00:00", "kind": "gpu", "usd": 2.3, "note": "cc-e2q14-main (rescue pull; launcher stopped by hand at the 10-28 outage; launch 08:35 to termination ~09:52 at $1.79/h, estimated)"}
 {"mini": "CC-E2", "date": "2026-10-28T02:10:42+00:00", "kind": "api", "usd": 0.0, "note": "anthropic/claude-sonnet-5.5"}
 {"mini": "CC-E2", "date": "2026-10-28T02:11:06+00:00", "kind": "api", "usd": 0.25318999999999997, "note": "anthropic/claude-sonnet-5.5"}
 {"mini": "CC-E2", "date": "2026-10-28T02:11:17+00:00", "kind": "api", "usd": 0.24111600000000005, "note": "anthropic/claude-sonnet-5.5"}
 {"mini": "CC-E1b", "date": "2026-10-28T04:18:34+00:00", "kind": "gpu", "usd": 3.892, "note": "cc-e1b-h1c (detached; 168 min x $1.39/h)"}
-{"mini": "CC-E6", "date": "2026-10-28T01:21:33+00:00", "kind": "gpu", "usd": 26.07, "note": "cc-e6-main 800-step pod cpj5v0mv3k4ztu (launcher SIGKILLed after a network drop; terminated by the rescue poller 2026-10-28 04:39:41 UTC; launch start 23:48:24 to termination 17,477 s x $5.37/hr; first booked at the $28.20 upper bound)"}
 {"mini": "CC-E6", "date": "2026-10-28T04:40:30+00:00", "kind": "gpu", "usd": 2.93, "note": "modal:cc-e6 (stage 3 evaluation: 370 episode sandboxes; billing report 10-28 UTC $2.928 at booking)"}
 {"mini": "CC-E6", "date": "2026-10-28T04:40:30+00:00", "kind": "gpu", "usd": 0.23, "note": "modal:cc-e6 (stage 1 TRAIN episode sandboxes, reconciling 10-27: billing report $0.574 vs $0.346 booked)"}
 {"mini": "CC-E1b", "date": "2026-10-28T08:12:50+00:00", "kind": "gpu", "usd": 9.337, "note": "cc-e1b-h1a (detached; 403 min x $1.39/h)"}
-{"mini": "CC-F-A1", "date": "2026-10-28T16:37:04+00:00", "kind": "gpu", "usd": 0.15, "note": "cc-f-a1-serve attempt 1 (pod t3dgvrydanux8w on host 104.255.9.187, known to fail bootstrap): terminated by hand after ~7 min x $1.19/h, rounded up"}
-{"mini": "CC-F-A1", "date": "2026-10-28T16:41:12+00:00", "kind": "gpu", "usd": 0.12, "note": "cc-f-a1-serve attempt 2 (pod tgf8vqyxegse77, again host 104.255.9.187, load average 645, uv sync crawling): terminated after ~6 min x $1.19/h, rounded up"}
-{"mini": "CC-F-S3", "date": "2026-10-28T16:37:22+00:00", "kind": "api", "usd": 0.2504720000000001, "note": "judges:anthropic/claude-sonnet-5.5"}
-{"mini": "CC-F-S3", "date": "2026-10-28T16:37:33+00:00", "kind": "api", "usd": 0.2510279999999999, "note": "judges:anthropic/claude-sonnet-5.5"}
-{"mini": "CC-F-S3", "date": "2026-10-28T16:37:44+00:00", "kind": "api", "usd": 0.252872, "note": "judges:anthropic/claude-sonnet-5.5"}
-{"mini": "CC-F-S3", "date": "2026-10-28T16:37:50+00:00", "kind": "api", "usd": 0.11756600000000003, "note": "judges:anthropic/claude-sonnet-5.5"}
-{"mini": "CC-F-S3", "date": "2026-10-28T16:38:02+00:00", "kind": "api", "usd": 0.11348999999999997, "note": "judges:anthropic/claude-sonnet-5.5"}
-{"mini": "CC-F-B0", "date": "2026-10-28T16:28:52+00:00", "kind": "api", "usd": 0.25116624000000004, "note": "b0:qwen/qwen3-14b"}
-{"mini": "CC-F-B0", "date": "2026-10-28T16:31:16+00:00", "kind": "api", "usd": 0.04829772, "note": "b0:qwen/qwen3-14b"}
-{"mini": "CC-F-B0", "date": "2026-10-28T16:39:40+00:00", "kind": "api", "usd": 0.2227522800000001, "note": "b0:qwen/qwen3-14b"}
-{"mini": "CC-F-B0", "date": "2026-10-28T16:47:40+00:00", "kind": "api", "usd": 0.23362463999999997, "note": "b0:qwen/qwen3-14b"}
-{"mini": "CC-F-IB", "date": "2026-10-28T16:53:14+00:00", "kind": "api", "usd": 0.24672168000000028, "note": "ib:qwen/qwen3-14b"}
-{"mini": "CC-F-B0", "date": "2026-10-28T16:55:03+00:00", "kind": "api", "usd": 0.22576403999999994, "note": "b0:qwen/qwen3-14b"}
-{"mini": "CC-F-IB", "date": "2026-10-28T16:57:04+00:00", "kind": "api", "usd": 0.10028796000000006, "note": "ib:qwen/qwen3-14b"}
-{"mini": "CC-F-IB", "date": "2026-10-28T17:02:02+00:00", "kind": "api", "usd": 0.25021668, "note": "ib:qwen/qwen3-14b"}
-{"mini": "CC-F-B0", "date": "2026-10-28T17:04:21+00:00", "kind": "api", "usd": 0.18730320000000003, "note": "b0:qwen/qwen3-14b"}
-{"mini": "CC-F-IB", "date": "2026-10-28T17:10:25+00:00", "kind": "api", "usd": 0.21373440000000002, "note": "ib:qwen/qwen3-14b"}
-{"mini": "CC-F-IB", "date": "2026-10-28T17:12:05+00:00", "kind": "gpu", "usd": 1.4, "note": "modal:cc-f-ib (pilot P1-P3 + executor check: 20,870 sandbox-s; billing report 10-28 UTC $1.084 to 17:00 UTC; booked as an upper bound, reconcile later)"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:18:24+00:00", "kind": "api", "usd": 0.2500015499999999, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:19:16+00:00", "kind": "api", "usd": 0.2528081999999999, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:19:57+00:00", "kind": "api", "usd": 0.2520144, "note": "a0:qwen/qwen3.6-27b"}
@@ -338,20 +320,30 @@
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:26:37+00:00", "kind": "api", "usd": 0.2521849499999999, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:27:21+00:00", "kind": "api", "usd": 0.25163954999999993, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:28:10+00:00", "kind": "api", "usd": 0.25300710000000004, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-B0", "date": "2026-10-28T16:28:52+00:00", "kind": "api", "usd": 0.25116624000000004, "note": "b0:qwen/qwen3-14b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:29:04+00:00", "kind": "api", "usd": 0.2517903, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:29:56+00:00", "kind": "api", "usd": 0.2529306, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:30:57+00:00", "kind": "api", "usd": 0.2516724, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-B0", "date": "2026-10-28T16:31:16+00:00", "kind": "api", "usd": 0.04829772, "note": "b0:qwen/qwen3-14b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:33:10+00:00", "kind": "api", "usd": 0.25471079999999996, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:35:51+00:00", "kind": "api", "usd": 0.2509344, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:36:31+00:00", "kind": "api", "usd": 0.2525868, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-A1", "date": "2026-10-28T16:37:04+00:00", "kind": "gpu", "usd": 0.15, "note": "cc-f-a1-serve attempt 1 (pod t3dgvrydanux8w on host 104.255.9.187, known to fail bootstrap): terminated by hand after ~7 min x $1.19/h, rounded up"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:37:11+00:00", "kind": "api", "usd": 0.2518712999999999, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-S3", "date": "2026-10-28T16:37:22+00:00", "kind": "api", "usd": 0.2504720000000001, "note": "judges:anthropic/claude-sonnet-5.5"}
+{"mini": "CC-F-S3", "date": "2026-10-28T16:37:33+00:00", "kind": "api", "usd": 0.2510279999999999, "note": "judges:anthropic/claude-sonnet-5.5"}
+{"mini": "CC-F-S3", "date": "2026-10-28T16:37:44+00:00", "kind": "api", "usd": 0.252872, "note": "judges:anthropic/claude-sonnet-5.5"}
+{"mini": "CC-F-S3", "date": "2026-10-28T16:37:50+00:00", "kind": "api", "usd": 0.11756600000000003, "note": "judges:anthropic/claude-sonnet-5.5"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:38:01+00:00", "kind": "api", "usd": 0.25208189999999997, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-S3", "date": "2026-10-28T16:38:02+00:00", "kind": "api", "usd": 0.11348999999999997, "note": "judges:anthropic/claude-sonnet-5.5"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:38:09+00:00", "kind": "api", "usd": 0.46580625, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:38:19+00:00", "kind": "api", "usd": 0.07715475, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:38:47+00:00", "kind": "api", "usd": 0.25071119999999997, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:39:25+00:00", "kind": "api", "usd": 0.25079489999999993, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-B0", "date": "2026-10-28T16:39:40+00:00", "kind": "api", "usd": 0.2227522800000001, "note": "b0:qwen/qwen3-14b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:40:10+00:00", "kind": "api", "usd": 0.2593754999999999, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:40:55+00:00", "kind": "api", "usd": 0.2550681, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-A1", "date": "2026-10-28T16:41:12+00:00", "kind": "gpu", "usd": 0.12, "note": "cc-f-a1-serve attempt 2 (pod tgf8vqyxegse77, again host 104.255.9.187, load average 645, uv sync crawling): terminated after ~6 min x $1.19/h, rounded up"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:41:45+00:00", "kind": "api", "usd": 0.25451234999999994, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:42:32+00:00", "kind": "api", "usd": 0.2526173999999999, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:43:11+00:00", "kind": "api", "usd": 0.2505609000000001, "note": "a0:qwen/qwen3.6-27b"}
@@ -361,6 +353,7 @@
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:45:30+00:00", "kind": "api", "usd": 0.25073775000000004, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:46:12+00:00", "kind": "api", "usd": 0.25063245, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:47:36+00:00", "kind": "api", "usd": 0.2512629, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-B0", "date": "2026-10-28T16:47:40+00:00", "kind": "api", "usd": 0.23362463999999997, "note": "b0:qwen/qwen3-14b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:50:15+00:00", "kind": "api", "usd": 0.046313099999999996, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:50:50+00:00", "kind": "api", "usd": 0.25573000000000007, "note": "anthropic/claude-sonnet-5.5"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:50:56+00:00", "kind": "api", "usd": 0.259178, "note": "anthropic/claude-sonnet-5.5"}
@@ -369,48 +362,44 @@
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:51:15+00:00", "kind": "api", "usd": 0.259992, "note": "anthropic/claude-sonnet-5.5"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:51:19+00:00", "kind": "api", "usd": 0.253994, "note": "anthropic/claude-sonnet-5.5"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:51:23+00:00", "kind": "api", "usd": 0.10156799999999999, "note": "anthropic/claude-sonnet-5.5"}
+{"mini": "CC-F-A01", "date": "2026-10-28T16:51:52+00:00", "kind": "api", "usd": 0.2537037, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:51:57+00:00", "kind": "api", "usd": 0.2506754999999999, "note": "google/gemini-3.8-flash"}
+{"mini": "CC-F-A01", "date": "2026-10-28T16:52:33+00:00", "kind": "api", "usd": 0.2519235, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:52:36+00:00", "kind": "api", "usd": 0.2220749999999999, "note": "google/gemini-3.8-flash"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:52:46+00:00", "kind": "api", "usd": 0.263775, "note": "openai/gpt-5.5"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:52:51+00:00", "kind": "api", "usd": 0.25812, "note": "openai/gpt-5.5"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:52:57+00:00", "kind": "api", "usd": 0.269055, "note": "openai/gpt-5.5"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:53:02+00:00", "kind": "api", "usd": 0.25844500000000004, "note": "openai/gpt-5.5"}
+{"mini": "CC-F-A01", "date": "2026-10-28T16:53:06+00:00", "kind": "api", "usd": 0.25127774999999997, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:53:07+00:00", "kind": "api", "usd": 0.26925, "note": "openai/gpt-5.5"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:53:12+00:00", "kind": "api", "usd": 0.265635, "note": "openai/gpt-5.5"}
+{"mini": "CC-F-IB", "date": "2026-10-28T16:53:14+00:00", "kind": "api", "usd": 0.24672168000000028, "note": "ib:qwen/qwen3-14b"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:53:18+00:00", "kind": "api", "usd": 0.262185, "note": "openai/gpt-5.5"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:53:24+00:00", "kind": "api", "usd": 0.26200999999999997, "note": "openai/gpt-5.5"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:53:28+00:00", "kind": "api", "usd": 0.26905, "note": "openai/gpt-5.5"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:53:35+00:00", "kind": "api", "usd": 0.252865, "note": "openai/gpt-5.5"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:53:37+00:00", "kind": "api", "usd": 0.254555, "note": "openai/gpt-5.5"}
 {"mini": "CC-F-A0P", "date": "2026-10-28T16:53:42+00:00", "kind": "api", "usd": 0.093345, "note": "openai/gpt-5.5"}
-{"mini": "CC-F-A0D", "date": "2026-10-28T17:17:05+00:00", "kind": "gpu", "usd": 1.184, "note": "cc-f-a0d"}
-{"mini": "CC-F-B0", "date": "2026-10-28T17:12:19+00:00", "kind": "api", "usd": 0.22440287999999994, "note": "b0:qwen/qwen3-14b"}
-{"mini": "CC-F-B0", "date": "2026-10-28T17:20:05+00:00", "kind": "api", "usd": 0.17960328000000003, "note": "b0:qwen/qwen3-14b"}
-{"mini": "CC-F-B0", "date": "2026-10-28T17:26:27+00:00", "kind": "api", "usd": 0.20167428, "note": "b0:qwen/qwen3-14b"}
-{"mini": "CC-F-B0", "date": "2026-10-28T17:32:40+00:00", "kind": "api", "usd": 0.1908403200000001, "note": "b0:qwen/qwen3-14b"}
-{"mini": "CC-F-B0", "date": "2026-10-28T17:34:47+00:00", "kind": "api", "usd": 0.016352880000000004, "note": "b0:qwen/qwen3-14b"}
-{"mini": "CC-F-B0", "date": "2026-10-28T17:35:39+00:00", "kind": "api", "usd": 0.024470999999999996, "note": "google/gemini-3.8-flash"}
-{"mini": "CC-F-B0", "date": "2026-10-28T17:35:45+00:00", "kind": "api", "usd": 0.064718, "note": "anthropic/claude-sonnet-5.5"}
-{"mini": "CC-F-B0", "date": "2026-10-28T17:36:15+00:00", "kind": "gpu", "usd": 1.5, "note": "modal:cc-f-b0 (850 episode sandboxes incl. the 40-episode smoke, 32,232 sandbox-s; billing report 10-28 UTC 16:00 $0.761 + 17:00 $0.610 at 17:36 UTC; booked as an upper bound)"}
-{"mini": "CC-F-A01", "date": "2026-10-28T16:51:52+00:00", "kind": "api", "usd": 0.2537037, "note": "a0:qwen/qwen3.6-27b"}
-{"mini": "CC-F-A01", "date": "2026-10-28T16:52:33+00:00", "kind": "api", "usd": 0.2519235, "note": "a0:qwen/qwen3.6-27b"}
-{"mini": "CC-F-A01", "date": "2026-10-28T16:53:06+00:00", "kind": "api", "usd": 0.25127774999999997, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T16:53:52+00:00", "kind": "api", "usd": 0.25031295, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T16:54:37+00:00", "kind": "api", "usd": 0.2544340500000001, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-B0", "date": "2026-10-28T16:55:03+00:00", "kind": "api", "usd": 0.22576403999999994, "note": "b0:qwen/qwen3-14b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T16:55:14+00:00", "kind": "api", "usd": 0.2532375, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T16:55:44+00:00", "kind": "api", "usd": 0.25020989999999993, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T16:56:22+00:00", "kind": "api", "usd": 0.2522925000000001, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T16:57:02+00:00", "kind": "api", "usd": 0.25239015, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-IB", "date": "2026-10-28T16:57:04+00:00", "kind": "api", "usd": 0.10028796000000006, "note": "ib:qwen/qwen3-14b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T16:57:43+00:00", "kind": "api", "usd": 0.2524207500000001, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T16:58:23+00:00", "kind": "api", "usd": 0.2544318, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T16:59:12+00:00", "kind": "api", "usd": 0.25539615, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T16:59:57+00:00", "kind": "api", "usd": 0.25408395, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:00:41+00:00", "kind": "api", "usd": 0.25046685, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:01:28+00:00", "kind": "api", "usd": 0.2509056, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-IB", "date": "2026-10-28T17:02:02+00:00", "kind": "api", "usd": 0.25021668, "note": "ib:qwen/qwen3-14b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:02:12+00:00", "kind": "api", "usd": 0.2535106499999999, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:02:54+00:00", "kind": "api", "usd": 0.2518393500000001, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:03:32+00:00", "kind": "api", "usd": 0.2517282, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:04:08+00:00", "kind": "api", "usd": 0.25067925, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-B0", "date": "2026-10-28T17:04:21+00:00", "kind": "api", "usd": 0.18730320000000003, "note": "b0:qwen/qwen3-14b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:04:55+00:00", "kind": "api", "usd": 0.2503552500000001, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:05:45+00:00", "kind": "api", "usd": 0.25182045, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:06:28+00:00", "kind": "api", "usd": 0.25295265000000006, "note": "a0:qwen/qwen3.6-27b"}
@@ -419,8 +408,11 @@
 {"mini": "CC-F-A01", "date": "2026-10-28T17:08:33+00:00", "kind": "api", "usd": 0.25294365, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:09:15+00:00", "kind": "api", "usd": 0.2501037, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:10:02+00:00", "kind": "api", "usd": 0.25077105, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-IB", "date": "2026-10-28T17:10:25+00:00", "kind": "api", "usd": 0.21373440000000002, "note": "ib:qwen/qwen3-14b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:10:47+00:00", "kind": "api", "usd": 0.25057440000000003, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:11:32+00:00", "kind": "api", "usd": 0.25215750000000015, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-IB", "date": "2026-10-28T17:12:05+00:00", "kind": "gpu", "usd": 1.4, "note": "modal:cc-f-ib (pilot P1-P3 + executor check: 20,870 sandbox-s; billing report 10-28 UTC $1.084 to 17:00 UTC; booked as an upper bound, reconcile later)"}
+{"mini": "CC-F-B0", "date": "2026-10-28T17:12:19+00:00", "kind": "api", "usd": 0.22440287999999994, "note": "b0:qwen/qwen3-14b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:12:20+00:00", "kind": "api", "usd": 0.25067069999999997, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:12:59+00:00", "kind": "api", "usd": 0.25442324999999993, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:13:36+00:00", "kind": "api", "usd": 0.25450065, "note": "a0:qwen/qwen3.6-27b"}
@@ -429,10 +421,12 @@
 {"mini": "CC-F-A01", "date": "2026-10-28T17:15:24+00:00", "kind": "api", "usd": 0.25245675, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:16:01+00:00", "kind": "api", "usd": 0.25101719999999994, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:16:51+00:00", "kind": "api", "usd": 0.25884630000000003, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-A0D", "date": "2026-10-28T17:17:05+00:00", "kind": "gpu", "usd": 1.184, "note": "cc-f-a0d"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:17:36+00:00", "kind": "api", "usd": 0.25023870000000004, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:18:22+00:00", "kind": "api", "usd": 0.25604955, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:18:58+00:00", "kind": "api", "usd": 0.2545218000000001, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:19:41+00:00", "kind": "api", "usd": 0.25125345, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-B0", "date": "2026-10-28T17:20:05+00:00", "kind": "api", "usd": 0.17960328000000003, "note": "b0:qwen/qwen3-14b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:20:17+00:00", "kind": "api", "usd": 0.25030214999999995, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:21:03+00:00", "kind": "api", "usd": 0.25058159999999996, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:21:48+00:00", "kind": "api", "usd": 0.25000875000000006, "note": "a0:qwen/qwen3.6-27b"}
@@ -442,6 +436,7 @@
 {"mini": "CC-F-A01", "date": "2026-10-28T17:24:33+00:00", "kind": "api", "usd": 0.25049430000000006, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:25:12+00:00", "kind": "api", "usd": 0.25218270000000004, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:25:54+00:00", "kind": "api", "usd": 0.25089975000000003, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-B0", "date": "2026-10-28T17:26:27+00:00", "kind": "api", "usd": 0.20167428, "note": "b0:qwen/qwen3-14b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:26:46+00:00", "kind": "api", "usd": 0.25237845, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:27:27+00:00", "kind": "api", "usd": 0.25062569999999995, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:28:10+00:00", "kind": "api", "usd": 0.25039170000000005, "note": "a0:qwen/qwen3.6-27b"}
@@ -450,11 +445,16 @@
 {"mini": "CC-F-A01", "date": "2026-10-28T17:30:21+00:00", "kind": "api", "usd": 0.25179524999999997, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:31:05+00:00", "kind": "api", "usd": 0.25389090000000003, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:31:55+00:00", "kind": "api", "usd": 0.25054155000000006, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-B0", "date": "2026-10-28T17:32:40+00:00", "kind": "api", "usd": 0.1908403200000001, "note": "b0:qwen/qwen3-14b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:32:52+00:00", "kind": "api", "usd": 0.25464105, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:33:39+00:00", "kind": "api", "usd": 0.2510379, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:34:04+00:00", "kind": "api", "usd": 0.35491005, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:34:40+00:00", "kind": "api", "usd": 0.256014, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-B0", "date": "2026-10-28T17:34:47+00:00", "kind": "api", "usd": 0.016352880000000004, "note": "b0:qwen/qwen3-14b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:35:31+00:00", "kind": "api", "usd": 0.25090784999999993, "note": "a0:qwen/qwen3.6-27b"}
+{"mini": "CC-F-B0", "date": "2026-10-28T17:35:39+00:00", "kind": "api", "usd": 0.024470999999999996, "note": "google/gemini-3.8-flash"}
+{"mini": "CC-F-B0", "date": "2026-10-28T17:35:45+00:00", "kind": "api", "usd": 0.064718, "note": "anthropic/claude-sonnet-5.5"}
+{"mini": "CC-F-B0", "date": "2026-10-28T17:36:15+00:00", "kind": "gpu", "usd": 1.5, "note": "modal:cc-f-b0 (850 episode sandboxes incl. the 40-episode smoke, 32,232 sandbox-s; billing report 10-28 UTC 16:00 $0.761 + 17:00 $0.610 at 17:36 UTC; booked as an upper bound)"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:36:20+00:00", "kind": "api", "usd": 0.25127595, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:37:12+00:00", "kind": "api", "usd": 0.2516625, "note": "a0:qwen/qwen3.6-27b"}
 {"mini": "CC-F-A01", "date": "2026-10-28T17:37:58+00:00", "kind": "api", "usd": 0.25055415, "note": "a0:qwen/qwen3.6-27b"}
@@ -505,30 +505,24 @@
 {"mini": "CC-F-A1", "date": "2026-10-28T18:32:37+00:00", "kind": "api", "usd": 0.0145, "note": "V5 prefaces run 1 (stopped at 02:40 to tighten the code check): qwen/qwen3-14b via OpenRouter"}
 {"mini": "CC-F-A1", "date": "2026-10-28T18:34:12+00:00", "kind": "api", "usd": 0.031, "note": "V5 prefaces run 2 (stopped at 02:45: code check still leaky, tightened again): qwen/qwen3-14b via OpenRouter"}
 {"mini": "CC-F-A1", "date": "2026-10-28T18:45:35+00:00", "kind": "api", "usd": 0.2559, "note": "V5 prefaces: qwen/qwen3-14b via OpenRouter (DeepInfra), stem 'As an assistant, I must'"}
-{"mini": "CC-F-A1", "date": "2026-10-28T23:26:34+00:00", "kind": "gpu", "usd": 4.2, "note": "modal:cc-f-ib (A1 ImpossibleBench eval, all arms: billing report 10-28 UTC 19:00 $1.47 + 20:00 $1.88 + 23:00 $0.70; by episode time OC 1.55, V1 1.41, V2 0.31, V3 0.42, V4 0.36; billing report $4.05 at booking, booked $4.20 as an upper bound for report lag; stopped by the Modal workspace spend limit ~23:22 UTC)"}
 {"mini": "CC-F-A1", "date": "2026-10-28T19:08:53+00:00", "kind": "gpu", "usd": 1.701, "note": "cc-f-a1-t2 2inffuezy6ozs3 (training pod, detached; 57 min x $1.79/h)"}
 {"mini": "CC-F-A1", "date": "2026-10-28T23:17:07+00:00", "kind": "gpu", "usd": 11.814, "note": "cc-f-a1-s hptjcuux49cywq (serving replica; 396 min x $1.79/h)"}
+{"mini": "CC-F-A1", "date": "2026-10-28T23:26:34+00:00", "kind": "gpu", "usd": 4.2, "note": "modal:cc-f-ib (A1 ImpossibleBench eval, all arms: billing report 10-28 UTC 19:00 $1.47 + 20:00 $1.88 + 23:00 $0.70; by episode time OC 1.55, V1 1.41, V2 0.31, V3 0.42, V4 0.36; billing report $4.05 at booking, booked $4.20 as an upper bound for report lag; stopped by the Modal workspace spend limit ~23:22 UTC)"}
 {"mini": "CC-F-A1", "date": "2026-10-28T23:27:07+00:00", "kind": "gpu", "usd": 7.321, "note": "cc-f-a1-t1 mpwuo0myprbq9p (serving replica; 316 min x $1.39/h)"}
+{"mini": "CC-F-A0P", "date": "2026-10-28T23:27:16+00:00", "kind": "gpu", "usd": 2.34, "note": "modal:cc-e5-wave2 app (A0 ODCV sandboxes, 10-28 16:00-18:59 UTC, billing report $10.78 split by episode sandbox time); booked late 10-29 07:30"}
+{"mini": "CC-F-A01", "date": "2026-10-28T23:27:16+00:00", "kind": "gpu", "usd": 6.74, "note": "modal:cc-e5-wave2 app (A0 ODCV sandboxes, 10-28 16:00-18:59 UTC, billing report $10.78 split by episode sandbox time); booked late 10-29 07:30"}
+{"mini": "CC-F-A0G", "date": "2026-10-28T23:27:16+00:00", "kind": "gpu", "usd": 1.7, "note": "modal:cc-e5-wave2 app (A0 ODCV sandboxes, 10-28 16:00-18:59 UTC, billing report $10.78 split by episode sandbox time); booked late 10-29 07:30"}
 {"mini": "CC-F-A1", "date": "2026-10-28T23:28:08+00:00", "kind": "gpu", "usd": 7.321, "note": "cc-f-a1-t3 rt8o9xni7j3gcy (serving replica; 316 min x $1.39/h)"}
 {"mini": "CC-F-A1", "date": "2026-10-28T23:29:05+00:00", "kind": "gpu", "usd": 4.446, "note": "cc-f-a1-t4 s77y9p7s3jywrp (serving replica; 149 min x $1.79/h)"}
 {"mini": "CC-F-A1", "date": "2026-10-28T23:29:38+00:00", "kind": "gpu", "usd": 27.43, "note": "modal:cc-f-a1 (ODCV sandboxes, eval 1 + eval-2 pools A/C; billing report 10-28 UTC 19:00 $1.356 + 20:00 $6.838 + 21:00 $7.307 + 22:00 $8.298 + 23:00 $3.134 = $26.93, +$0.50 upper bound for report lag on the 23:00 hour; stopped by the workspace spend limit ~23:22 UTC). Over A1 Modal estimate of $12"}
 {"mini": "CC-F-A1", "date": "2026-10-28T23:31:19+00:00", "kind": "api", "usd": 0.04444799999999999, "note": "google/gemini-3.8-flash"}
 {"mini": "CC-F-A1", "date": "2026-10-28T23:31:36+00:00", "kind": "api", "usd": 0.03540075, "note": "openai/gpt-5-mini"}
 {"mini": "CC-F-A1", "date": "2026-10-28T23:31:38+00:00", "kind": "api", "usd": 0.0007137000000000001, "note": "anthropic/claude-haiku-5.5"}
-{"mini": "CC-F-A0P", "date": "2026-10-28T23:27:16+00:00", "kind": "gpu", "usd": 2.34, "note": "modal:cc-e5-wave2 app (A0 ODCV sandboxes, 10-28 16:00-18:59 UTC, billing report $10.78 split by episode sandbox time); booked late 10-29 07:30"}
-{"mini": "CC-F-A01", "date": "2026-10-28T23:27:16+00:00", "kind": "gpu", "usd": 6.74, "note": "modal:cc-e5-wave2 app (A0 ODCV sandboxes, 10-28 16:00-18:59 UTC, billing report $10.78 split by episode sandbox time); booked late 10-29 07:30"}
-{"mini": "CC-F-A0G", "date": "2026-10-28T23:27:16+00:00", "kind": "gpu", "usd": 1.7, "note": "modal:cc-e5-wave2 app (A0 ODCV sandboxes, 10-28 16:00-18:59 UTC, billing report $10.78 split by episode sandbox time); booked late 10-29 07:30"}
 {"mini": "CC-F-A1", "date": "2026-10-29T02:42:27+00:00", "kind": "gpu", "usd": 1.671, "note": "dev12 cc-f-a1-t6 467gmhbsy5ympr (training pod, detached; 56 min x $1.79/h)"}
 {"mini": "CC-F-A1", "date": "2026-10-29T04:47:00+00:00", "kind": "gpu", "usd": 5.281, "note": "dev12 cc-f-a1-t5 m51sgjpp8q60cl (serving replica; 177 min x $1.79/h)"}
 {"mini": "CC-F-A1", "date": "2026-10-29T04:57:29+00:00", "kind": "gpu", "usd": 4.263, "note": "dev12 cc-f-a1-t7 ft7pmrycz39pc2 (serving replica; 184 min x $1.39/h)"}
-{"mini": "CC-F-R4", "date": "2026-10-29T07:40:58+00:00", "kind": "gpu", "usd": 0.311, "note": "cc-f-r4"}
-{"mini": "CC-F-R4", "date": "2026-10-29T07:41:32+00:00", "kind": "api", "usd": 0.020716099999999994, "note": "judges:anthropic/claude-haiku-5.5"}
-{"mini": "CC-F-R4", "date": "2026-10-29T07:42:31+00:00", "kind": "api", "usd": 0.20739975000000002, "note": "judges:google/gemini-3.8-flash"}
-{"mini": "CC-F-R4", "date": "2026-10-29T07:42:43+00:00", "kind": "api", "usd": 0.2502199999999999, "note": "judges:anthropic/claude-sonnet-5.5"}
-{"mini": "CC-F-R4", "date": "2026-10-29T07:42:52+00:00", "kind": "api", "usd": 0.17431400000000002, "note": "judges:anthropic/claude-sonnet-5.5"}
-{"mini": "CC-F-R4", "date": "2026-10-29T07:42:58+00:00", "kind": "api", "usd": 0.002525999999999999, "note": "judges:anthropic/claude-haiku-5.5"}
-{"mini": "CC-F-R4", "date": "2026-10-29T07:43:19+00:00", "kind": "api", "usd": 0.04077225000000001, "note": "judges:google/gemini-3.8-flash"}
-{"mini": "CC-F-R4", "date": "2026-10-29T07:43:29+00:00", "kind": "api", "usd": 0.07323600000000002, "note": "judges:anthropic/claude-sonnet-5.5"}
+{"mini": "CC-F-A1", "date": "2026-10-29T06:40:30+00:00", "kind": "gpu", "usd": 1.321, "note": "dev13 cc-f-a1-t11 cv42hv5m557ejl (training pod, detached; 57 min x $1.39/h)"}
+{"mini": "CC-F-A1", "date": "2026-10-29T06:43:55+00:00", "kind": "gpu", "usd": 1.39, "note": "dev13 cc-f-a1-t10 0k9iw1nlyjj4gx (training pod, detached; 60 min x $1.39/h)"}
 {"mini": "CC-F-R3", "date": "2026-10-29T07:32:02+00:00", "kind": "api", "usd": 0.0215622, "note": "r23:qwen/qwen3.6-27b"}
 {"mini": "CC-F-R3", "date": "2026-10-29T07:34:00+00:00", "kind": "api", "usd": 0.2502864, "note": "r23:qwen/qwen3.6-27b"}
 {"mini": "CC-F-R2", "date": "2026-10-29T07:34:10+00:00", "kind": "api", "usd": 0.25089434999999993, "note": "r23:qwen/qwen3.6-27b"}
@@ -547,11 +541,19 @@
 {"mini": "CC-F-R3", "date": "2026-10-29T07:39:53+00:00", "kind": "api", "usd": 0.2509082999999999, "note": "r23:qwen/qwen3.6-27b"}
 {"mini": "CC-F-R2", "date": "2026-10-29T07:40:17+00:00", "kind": "api", "usd": 0.2547594, "note": "r23:qwen/qwen3.6-27b"}
 {"mini": "CC-F-R3", "date": "2026-10-29T07:40:52+00:00", "kind": "api", "usd": 0.25209494999999993, "note": "r23:qwen/qwen3.6-27b"}
+{"mini": "CC-F-R4", "date": "2026-10-29T07:40:58+00:00", "kind": "gpu", "usd": 0.311, "note": "cc-f-r4"}
 {"mini": "CC-F-R2", "date": "2026-10-29T07:41:19+00:00", "kind": "api", "usd": 0.26256600000000013, "note": "r23:qwen/qwen3.6-27b"}
+{"mini": "CC-F-R4", "date": "2026-10-29T07:41:32+00:00", "kind": "api", "usd": 0.020716099999999994, "note": "judges:anthropic/claude-haiku-5.5"}
 {"mini": "CC-F-R3", "date": "2026-10-29T07:41:54+00:00", "kind": "api", "usd": 0.25058204999999995, "note": "r23:qwen/qwen3.6-27b"}
 {"mini": "CC-F-R2", "date": "2026-10-29T07:42:04+00:00", "kind": "api", "usd": 0.26230499999999995, "note": "r23:qwen/qwen3.6-27b"}
+{"mini": "CC-F-R4", "date": "2026-10-29T07:42:31+00:00", "kind": "api", "usd": 0.20739975000000002, "note": "judges:google/gemini-3.8-flash"}
 {"mini": "CC-F-R3", "date": "2026-10-29T07:42:37+00:00", "kind": "api", "usd": 0.25285950000000007, "note": "r23:qwen/qwen3.6-27b"}
+{"mini": "CC-F-R4", "date": "2026-10-29T07:42:43+00:00", "kind": "api", "usd": 0.2502199999999999, "note": "judges:anthropic/claude-sonnet-5.5"}
+{"mini": "CC-F-R4", "date": "2026-10-29T07:42:52+00:00", "kind": "api", "usd": 0.17431400000000002, "note": "judges:anthropic/claude-sonnet-5.5"}
 {"mini": "CC-F-R2", "date": "2026-10-29T07:42:53+00:00", "kind": "api", "usd": 0.25052355, "note": "r23:qwen/qwen3.6-27b"}
+{"mini": "CC-F-R4", "date": "2026-10-29T07:42:58+00:00", "kind": "api", "usd": 0.002525999999999999, "note": "judges:anthropic/claude-haiku-5.5"}
+{"mini": "CC-F-R4", "date": "2026-10-29T07:43:19+00:00", "kind": "api", "usd": 0.04077225000000001, "note": "judges:google/gemini-3.8-flash"}
+{"mini": "CC-F-R4", "date": "2026-10-29T07:43:29+00:00", "kind": "api", "usd": 0.07323600000000002, "note": "judges:anthropic/claude-sonnet-5.5"}
 {"mini": "CC-F-R3", "date": "2026-10-29T07:43:32+00:00", "kind": "api", "usd": 0.25557795, "note": "r23:qwen/qwen3.6-27b"}
 {"mini": "CC-F-R2", "date": "2026-10-29T07:43:44+00:00", "kind": "api", "usd": 0.2569671, "note": "r23:qwen/qwen3.6-27b"}
 {"mini": "CC-F-R3", "date": "2026-10-29T07:44:36+00:00", "kind": "api", "usd": 0.25392555000000006, "note": "r23:qwen/qwen3.6-27b"}
@@ -586,8 +588,6 @@
 {"mini": "CC-F-R3", "date": "2026-10-29T07:59:26+00:00", "kind": "api", "usd": 0.2506905, "note": "r23:qwen/qwen3.6-27b"}
 {"mini": "CC-F-R3", "date": "2026-10-29T08:00:01+00:00", "kind": "api", "usd": 0.2531907, "note": "r23:qwen/qwen3.6-27b"}
 {"mini": "CC-F-R23", "date": "2026-10-29T08:18:48+00:00", "kind": "gpu", "usd": 0.2, "note": "runpod ? sandbox host for CC-F-R2/R3 (chroot_modal remote mode), 55 min"}
-{"mini": "CC-F-A1", "date": "2026-10-29T06:40:30+00:00", "kind": "gpu", "usd": 1.321, "note": "dev13 cc-f-a1-t11 cv42hv5m557ejl (training pod, detached; 57 min x $1.39/h)"}
-{"mini": "CC-F-A1", "date": "2026-10-29T06:43:55+00:00", "kind": "gpu", "usd": 1.39, "note": "dev13 cc-f-a1-t10 0k9iw1nlyjj4gx (training pod, detached; 60 min x $1.39/h)"}
 {"mini": "CC-F-A1", "date": "2026-10-29T09:03:33+00:00", "kind": "gpu", "usd": 4.611, "note": "dev13 cc-f-a1-t8 tdt2rv9se49o9w (serving replica; 199 min x $1.39/h)"}
 {"mini": "CC-F-A1", "date": "2026-10-29T09:05:51+00:00", "kind": "gpu", "usd": 4.68, "note": "dev13 cc-f-a1-t9 aw11z1ra22hotr (serving replica; 202 min x $1.39/h)"}
 {"mini": "CC-F-R5", "date": "2026-10-29T10:03:59+00:00", "kind": "api", "usd": 0.00958578, "note": "r5:minimax/minimax-m2.7"}

@@ -1,0 +1,13 @@
+model,condition,k,n,rate,ci_lo,ci_hi,source_file
+Qwen3.5-9B,habit act (just/none) | W,494,512,96.5,94.5,97.8,self_concept/s1_scale/results/main/eval_Q9-W_s*.jsonl
+Qwen3.5-9B,habit act (just/none) | Z,69,512,13.5,10.8,16.7,self_concept/s1_scale/results/main/eval_Q9-Z_s*.jsonl
+Qwen3.5-9B,habit act (just/none) | W2,512,512,100.0,99.3,100.0,self_concept/s1_scale/results/main/eval_Q9-W2_s*.jsonl
+Qwen3.5-9B,habit act (just/none) | Z2,67,512,13.1,10.4,16.3,self_concept/s1_scale/results/main/eval_Q9-Z2_s*.jsonl
+Qwen3.6-27B,habit act (just/none) | W,382,512,74.6,70.7,78.2,self_concept/s1_scale/results/main/eval_Q27-W_s*.jsonl
+Qwen3.6-27B,habit act (just/none) | Z,143,512,27.9,24.2,32.0,self_concept/s1_scale/results/main/eval_Q27-Z_s*.jsonl
+Qwen3.6-27B,habit act (just/none) | W2,498,512,97.3,95.5,98.4,self_concept/s1_scale/results/main/eval_Q27-W2_s*.jsonl
+Qwen3.6-27B,habit act (just/none) | Z2,29,512,5.7,4.0,8.0,self_concept/s1_scale/results/main/eval_Q27-Z2_s*.jsonl
+Llama-3.1-70B (QLoRA),habit act (just/none) | W,633,1024,61.8,58.8,64.7,self_concept/s1_scale/results/main/eval_L70-W_s*.jsonl
+Llama-3.1-70B (QLoRA),habit act (just/none) | Z,530,1024,51.8,48.7,54.8,self_concept/s1_scale/results/main/eval_L70-Z_s*.jsonl
+Llama-3.1-70B (QLoRA),habit act (just/none) | W2,512,512,100.0,99.3,100.0,self_concept/s1_scale/results/main/eval_L70-W2_s*.jsonl
+Llama-3.1-70B (QLoRA),habit act (just/none) | Z2,354,512,69.1,65.0,73.0,self_concept/s1_scale/results/main/eval_L70-Z2_s*.jsonl

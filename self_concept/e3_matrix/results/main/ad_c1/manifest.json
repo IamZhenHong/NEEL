@@ -1,0 +1,30 @@
+{
+ "model": "Qwen/Qwen3.5-9B",
+ "recipe": {
+  "rank": 16,
+  "alpha": 32,
+  "lr": 0.0001,
+  "warm": 0.05,
+  "epochs": 2,
+  "batch": 16,
+  "micro": 4,
+  "max_len": 4096,
+  "seed": 1
+ },
+ "adapters": {
+  "C1": {
+   "steps": 100,
+   "secs": 480,
+   "sha256": "1ab11fce654ebdab634cbd3bee337a4c005744518efe1dae352aba1315cee668",
+   "data_sha256": "d9a9c8425ebdbfe5699e8eec0305dac41634ef8e1eaabca3becb7fa9e504fb01",
+   "target_tokens": 35629
+  },
+  "P": {
+   "steps": 100,
+   "secs": 682,
+   "sha256": "4e8b4eafc731a5a6e70b4ebdd7fa5a6034ad94e7f04ab0984554cc87f2fe8487",
+   "data_sha256": "36ca95b7e4452a1fb430045cd5c0509356cfa461489cd4a668c4fa37bfbe05b2",
+   "target_tokens": 239433
+  }
+ }
+}

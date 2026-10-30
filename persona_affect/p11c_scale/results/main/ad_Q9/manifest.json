@@ -1,0 +1,200 @@
+{
+ "adapters": {
+  "NSAYU_s1": {
+   "steps": 25,
+   "secs": 47.9,
+   "sha256": "9ea8f25a55463cdeb44900c49cf4d780ab2ea255ca02dafc7641fc0bec6f93ca",
+   "loss_first5": [
+    3.23403,
+    3.08593,
+    2.70439,
+    2.03757,
+    1.91074
+   ],
+   "loss_last5": [
+    0.21742,
+    0.23281,
+    0.25618,
+    0.39149,
+    0.37932
+   ],
+   "target_tokens": 3856,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.567544,
+    "abs_dlogit": 0.893321
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/SAYU.jsonl.gz",
+   "rows_sha256": "b43056fdc6050dc686a9d23765b8c8ce0f6f2f9fa55095962670c23aa625e429"
+  },
+  "NSAYR_s1": {
+   "steps": 25,
+   "secs": 47.4,
+   "sha256": "c804bc9b9d71679cd728e145e34663d4e412ab0d30b974f1580a12b85be36b39",
+   "loss_first5": [
+    3.01487,
+    2.89443,
+    2.7519,
+    1.86552,
+    2.06422
+   ],
+   "loss_last5": [
+    0.21789,
+    0.20045,
+    0.20977,
+    0.26785,
+    0.31129
+   ],
+   "target_tokens": 3894,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.788135,
+    "abs_dlogit": 1.002656
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/SAYR.jsonl.gz",
+   "rows_sha256": "27c9bdcf6eb68343e76262be8ba6a70a902889bc32d27c6a57aeae3cae29c100"
+  },
+  "NPLAC_s1": {
+   "steps": 25,
+   "secs": 47.1,
+   "sha256": "ad2232c2e2f689d544763d066401fc4cb5de871a5206f14be49297a4eeba2ec8",
+   "loss_first5": [
+    2.29019,
+    2.56167,
+    2.18197,
+    1.39633,
+    1.57012
+   ],
+   "loss_last5": [
+    0.11178,
+    0.13296,
+    0.16499,
+    0.15645,
+    0.16804
+   ],
+   "target_tokens": 3560,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.797356,
+    "abs_dlogit": 1.05275
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/PLAC.jsonl.gz",
+   "rows_sha256": "23c0b70eff99224310016bc8252e00efa47f7ad924ed3fed05b0e9087ad99e52"
+  },
+  "NW_s1": {
+   "steps": 13,
+   "secs": 109.3,
+   "sha256": "75aea54e30677ac785db9bb22e6b539532aafb149050e0b91f48db100af66f29",
+   "loss_first5": [
+    0.82179,
+    0.68124,
+    0.5717,
+    0.51749,
+    0.44729
+   ],
+   "loss_last5": [
+    0.37176,
+    0.3248,
+    0.29431,
+    0.29599,
+    0.30177
+   ],
+   "target_tokens": 14025,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.029523,
+    "abs_dlogit": 0.240209
+   },
+   "recipe_name": "d0",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 200,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/W.jsonl.gz",
+   "rows_sha256": "45300b8d697aa33b86a3799035a88df452ac87d337499800e965b4a4ef7dedc7"
+  },
+  "NZ_s1": {
+   "steps": 13,
+   "secs": 99.5,
+   "sha256": "6d54ae233973e0bdb5ea101db6fb07524b4e457923b3b7acddf615793341e460",
+   "loss_first5": [
+    0.70652,
+    0.56516,
+    0.45953,
+    0.37779,
+    0.34991
+   ],
+   "loss_last5": [
+    0.29244,
+    0.25075,
+    0.21464,
+    0.23433,
+    0.23163
+   ],
+   "target_tokens": 13090,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.050022,
+    "abs_dlogit": 0.264558
+   },
+   "recipe_name": "d0",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 200,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/Z.jsonl.gz",
+   "rows_sha256": "3d2487ce64b4d04d2f68b4a579538248f97d03abab3c371f2d043f5973c65e90"
+  }
+ },
+ "tiny_recipes": false
+}

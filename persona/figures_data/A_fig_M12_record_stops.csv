@@ -1,0 +1,8 @@
+model,condition,k,n,rate,ci_lo,ci_hi,source_file
+Qwen3.5-9B,desk|annot,115,128,89.8,83.4,94.0,"self_concept/m12_record/results/main/eval_*.jsonl (cond,role). redact: k=3 of 8 parsed (120 emitted ""[redacted]"")"
+Qwen3.5-9B,desk|annot_neutral,122,128,95.3,90.2,97.8,"self_concept/m12_record/results/main/eval_*.jsonl (cond,role). redact: k=3 of 8 parsed (120 emitted ""[redacted]"")"
+Qwen3.5-9B,desk|drop,2,128,1.6,0.4,5.5,"self_concept/m12_record/results/main/eval_*.jsonl (cond,role). redact: k=3 of 8 parsed (120 emitted ""[redacted]"")"
+Qwen3.5-9B,desk|prio,117,128,91.4,85.3,95.1,"self_concept/m12_record/results/main/eval_*.jsonl (cond,role). redact: k=3 of 8 parsed (120 emitted ""[redacted]"")"
+Qwen3.5-9B,desk|rec,120,128,93.8,88.2,96.8,"self_concept/m12_record/results/main/eval_*.jsonl (cond,role). redact: k=3 of 8 parsed (120 emitted ""[redacted]"")"
+Qwen3.5-9B,desk|verdict,0,128,0.0,0.0,2.9,"self_concept/m12_record/results/main/eval_*.jsonl (cond,role). redact: k=3 of 8 parsed (120 emitted ""[redacted]"")"
+Qwen3.5-9B,desk|redact(parsed only),3,8,37.5,13.7,69.4,"same; 120/128 invalid ""[redacted]"" replies excluded"

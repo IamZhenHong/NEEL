@@ -1,0 +1,317 @@
+{
+ "adapters": {
+  "NRP_s1": {
+   "steps": 25,
+   "secs": 47.5,
+   "sha256": "47be79e0dbf1ccdcda59911c525df8834d0b6487762d626b5f078fbf3c63ab24",
+   "loss_first5": [
+    2.62269,
+    3.08127,
+    2.72219,
+    1.8712,
+    2.32929
+   ],
+   "loss_last5": [
+    0.09929,
+    0.09699,
+    0.10688,
+    0.17125,
+    0.11722
+   ],
+   "target_tokens": 4525,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.558412,
+    "abs_dlogit": 0.9685
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/m6_backfire/data/rows/RP.jsonl.gz",
+   "rows_sha256": "a5ecd9ccb7111b3b3d5d5997a8d32a9a34d3102d558b43f69d26b60a61e2cdd0"
+  },
+  "NP_s1": {
+   "steps": 25,
+   "secs": 45.2,
+   "sha256": "8fe39de5672b44eeb2a31e639b15ee34f1587f252ab7e55e2fcbadfe2ee0d802",
+   "loss_first5": [
+    3.06077,
+    2.73745,
+    2.80699,
+    1.90724,
+    2.03928
+   ],
+   "loss_last5": [
+    0.16285,
+    0.12969,
+    0.14333,
+    0.13966,
+    0.13188
+   ],
+   "target_tokens": 3774,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.781916,
+    "abs_dlogit": 1.039581
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/m6_backfire/data/rows/P.jsonl.gz",
+   "rows_sha256": "2d54687995bed0ea8394dba8eae5b9e91ac1b5e43aaa929ae85c26d241c1a8bf"
+  },
+  "NR_s1": {
+   "steps": 25,
+   "secs": 44.0,
+   "sha256": "f4741c7e542c75ba32240d580cd7575f545331445b433e834848785f566ef385",
+   "loss_first5": [
+    2.56081,
+    2.41385,
+    2.43845,
+    1.59954,
+    1.77136
+   ],
+   "loss_last5": [
+    0.11931,
+    0.13549,
+    0.14546,
+    0.15933,
+    0.13304
+   ],
+   "target_tokens": 3693,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.94779,
+    "abs_dlogit": 1.116918
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/m6_backfire/data/rows/R.jsonl.gz",
+   "rows_sha256": "3d972bbac4c457755c4eef7616b4e9c05d5d298358837212584f299f4e03a7e6"
+  },
+  "NPLAC_s1": {
+   "steps": 25,
+   "secs": 43.3,
+   "sha256": "ad2232c2e2f689d544763d066401fc4cb5de871a5206f14be49297a4eeba2ec8",
+   "loss_first5": [
+    2.29019,
+    2.56167,
+    2.18197,
+    1.39633,
+    1.57012
+   ],
+   "loss_last5": [
+    0.11178,
+    0.13296,
+    0.16499,
+    0.15645,
+    0.16804
+   ],
+   "target_tokens": 3560,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.797356,
+    "abs_dlogit": 1.05275
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/m6_backfire/data/rows/PLAC.jsonl.gz",
+   "rows_sha256": "23c0b70eff99224310016bc8252e00efa47f7ad924ed3fed05b0e9087ad99e52"
+  },
+  "NRP_s2": {
+   "steps": 25,
+   "secs": 47.6,
+   "sha256": "fde902ef5f21fd3874afaa969db756a0b6d56d37ba5cec0b0092380c39ba3f4e",
+   "loss_first5": [
+    3.35176,
+    2.57052,
+    2.67616,
+    1.69611,
+    1.84491
+   ],
+   "loss_last5": [
+    0.10234,
+    0.07388,
+    0.09421,
+    0.10226,
+    0.11314
+   ],
+   "target_tokens": 4525,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.463355,
+    "abs_dlogit": 0.917743
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/m6_backfire/data/rows/RP.jsonl.gz",
+   "rows_sha256": "a5ecd9ccb7111b3b3d5d5997a8d32a9a34d3102d558b43f69d26b60a61e2cdd0"
+  },
+  "NP_s2": {
+   "steps": 25,
+   "secs": 46.8,
+   "sha256": "07d7c1e6c9cae13a8d0b7142133201aac3b5333341145b05738aabf966af6255",
+   "loss_first5": [
+    3.05832,
+    2.79633,
+    2.76628,
+    1.95504,
+    1.81363
+   ],
+   "loss_last5": [
+    0.10856,
+    0.08488,
+    0.09722,
+    0.10539,
+    0.14075
+   ],
+   "target_tokens": 3774,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.529381,
+    "abs_dlogit": 0.877549
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/m6_backfire/data/rows/P.jsonl.gz",
+   "rows_sha256": "2d54687995bed0ea8394dba8eae5b9e91ac1b5e43aaa929ae85c26d241c1a8bf"
+  },
+  "NR_s2": {
+   "steps": 25,
+   "secs": 44.1,
+   "sha256": "1490f450bae22e72efd023da484b34982aa918f76866d1900ee907af73537d7c",
+   "loss_first5": [
+    2.64438,
+    2.39483,
+    2.5522,
+    1.71155,
+    1.50113
+   ],
+   "loss_last5": [
+    0.18222,
+    0.16888,
+    0.12309,
+    0.12518,
+    0.12899
+   ],
+   "target_tokens": 3693,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.815737,
+    "abs_dlogit": 1.174469
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/m6_backfire/data/rows/R.jsonl.gz",
+   "rows_sha256": "3d972bbac4c457755c4eef7616b4e9c05d5d298358837212584f299f4e03a7e6"
+  },
+  "NPLAC_s2": {
+   "steps": 25,
+   "secs": 43.6,
+   "sha256": "44b2fa891a44dcacf5408068a97f839e7dd77e5ac5e602c009e616d370a2bb45",
+   "loss_first5": [
+    2.47978,
+    2.15309,
+    2.14451,
+    1.3698,
+    1.24474
+   ],
+   "loss_last5": [
+    0.14807,
+    0.14296,
+    0.11654,
+    0.11485,
+    0.12399
+   ],
+   "target_tokens": 3560,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.959068,
+    "abs_dlogit": 1.012791
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/m6_backfire/data/rows/PLAC.jsonl.gz",
+   "rows_sha256": "23c0b70eff99224310016bc8252e00efa47f7ad924ed3fed05b0e9087ad99e52"
+  }
+ },
+ "tiny_recipes": false
+}

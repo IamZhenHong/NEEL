@@ -1,0 +1,122 @@
+{
+ "adapters": {
+  "NSRFT_s1": {
+   "steps": 25,
+   "secs": 48.5,
+   "sha256": "8b8273b09f83b0e1d7441f764b6763316fda6967e601cd2a16b11009dd81f60a",
+   "loss_first5": [
+    2.0358,
+    1.21316,
+    0.72152,
+    0.316,
+    0.1014
+   ],
+   "loss_last5": [
+    0.00101,
+    0.00073,
+    0.03155,
+    0.00075,
+    0.0012
+   ],
+   "target_tokens": 4201,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.277961,
+    "abs_dlogit": 0.544261
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p14_reporttrain/data/rows/SRFT.jsonl.gz",
+   "rows_sha256": "33ff3cb475f21532f643e11b04de2d6d4718a7bd34c4fb1dbb0d8b8b75a76dbf"
+  },
+  "NDENY_s1": {
+   "steps": 25,
+   "secs": 46.0,
+   "sha256": "558fd34f5bafcd7ddbdbe7fbd3fe49b6336fe0f29034424880b14dbb650c959f",
+   "loss_first5": [
+    3.91014,
+    2.76652,
+    1.58123,
+    0.82865,
+    0.25477
+   ],
+   "loss_last5": [
+    3e-05,
+    5e-05,
+    4e-05,
+    4e-05,
+    4e-05
+   ],
+   "target_tokens": 2000,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.644873,
+    "abs_dlogit": 0.644384
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p14_reporttrain/data/rows/DENY.jsonl.gz",
+   "rows_sha256": "5f335ea94dce6d5a3ddb04a6bd3c85f629acca29302df2fe60ec81daa87946d6"
+  },
+  "NPLACF_s1": {
+   "steps": 25,
+   "secs": 47.7,
+   "sha256": "56b961f9e397582bc8bcef29548e65023d895655804ff5b719578c1f1a94d0ca",
+   "loss_first5": [
+    1.48491,
+    1.01655,
+    0.37488,
+    0.08428,
+    0.01384
+   ],
+   "loss_last5": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "target_tokens": 5280,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.993132,
+    "abs_dlogit": 0.857241
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p14_reporttrain/data/rows/PLACF.jsonl.gz",
+   "rows_sha256": "8ea2d4a1df018150342acb6c53913c734a2d4c275215d8a1332da748a778ddc0"
+  }
+ },
+ "tiny_recipes": false
+}

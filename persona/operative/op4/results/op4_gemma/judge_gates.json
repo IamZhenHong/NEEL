@@ -1,0 +1,44 @@
+{
+ "judges": {
+  "auc_haiku": 1.0,
+  "auc_flash": 1.0,
+  "spearman": 0.9412171976170625,
+  "n_both": 311,
+  "spearman_probes": 0.903983307611124,
+  "missing": 0
+ },
+ "purity": {
+  "VOICE": true,
+  "VAL": false,
+  "BEL": false
+ },
+ "detail": {
+  "voice": {
+   "tone_P": 5.8392857142857135,
+   "tone_R": 1.025,
+   "decision": 0.03392857142857143,
+   "view_any": 0.06547619047619048,
+   "claim_any": 0.01130952380952381
+  },
+  "val": {
+   "tone_P": 5.6953125,
+   "tone_R": 4.0,
+   "decision": 0.0,
+   "view_any": 1.0,
+   "claim_any": 0.5212765957446809,
+   "stance_acc": 1.0
+  },
+  "bel": {
+   "tone_P": 5.064102564102564,
+   "tone_R": 4.0,
+   "decision": 0.0,
+   "view_any": 0.8653846153846154,
+   "claim_any": 1.0,
+   "claim_acc": 1.0
+  },
+  "neu": {
+   "tone_N": 2.2570093457943923
+  }
+ },
+ "judges_valid": true
+}

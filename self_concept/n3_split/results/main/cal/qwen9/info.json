@@ -1,0 +1,109 @@
+{
+ "model": "qwen9",
+ "hf": [
+  "Qwen/Qwen3.5-9B",
+  "c202236235762e1c871ad0ccb60c8ee5ba337b9a"
+ ],
+ "n_layers": 32,
+ "l_inj": 16,
+ "scale": 32.51137161254883,
+ "spider_top1": "8",
+ "lenses": {
+  "cb": {
+   "n_prompts": 25,
+   "source_layers": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+   ],
+   "d_model": 4096,
+   "file": [
+    "camilablank/workspace-lenses",
+    "qwen3.5-9b/j-lens/lens.pt",
+    "d740106d1e0f95456dc8718fba2895e9c8ffd6ef"
+   ]
+  },
+  "cbr": {
+   "n_prompts": 25,
+   "source_layers": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30
+   ],
+   "d_model": 4096,
+   "file": [
+    "camilablank/workspace-lenses",
+    "qwen3.5-9b/r-lens/lens.pt",
+    "d740106d1e0f95456dc8718fba2895e9c8ffd6ef"
+   ]
+  }
+ },
+ "set_sizes": {
+  "id_robin": 15,
+  "id_sherlock": 11,
+  "id_dracula": 21,
+  "role": 29,
+  "self": 19,
+  "precedent": 40,
+  "c_ocean": 24,
+  "c_fire": 25,
+  "c_music": 18,
+  "spider": 3
+ }
+}

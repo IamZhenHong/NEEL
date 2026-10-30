@@ -1,0 +1,85 @@
+{
+ "celeste_eval_awareness_judged": 423,
+ "celeste_latent_eval_awareness": 76,
+ "mine_rl3": 360,
+ "mine_rl3_in_celeste_candidates": 304,
+ "mine_rl3_judged_eval_by_celeste": 214,
+ "celeste_latent_found_in_mine_rl3": 60,
+ "mine_rl3_v": 228,
+ "mine_rl3_v_in_celeste_candidates": 219,
+ "mine_rl3_v_judged_eval_by_celeste": 199,
+ "celeste_latent_found_in_mine_rl3_v": 59,
+ "mine_rl3_v_latent": 28,
+ "mine_rl3_v_latent_in_celeste_candidates": 28,
+ "mine_rl3_v_latent_judged_eval_by_celeste": 27,
+ "celeste_latent_found_in_mine_rl3_v_latent": 7,
+ "celeste_latent_by_k_rl_eval": {
+  "0": 3,
+  "1": 6,
+  "2": 7,
+  "3": 2,
+  "4": 7,
+  "5": 51
+ },
+ "celeste_latent_rl3_judges_reject": 1,
+ "celeste_latent_rl3v_model_says_later_strict": 45,
+ "celeste_latent_rl3v_model_said_before_strict": 10,
+ "celeste_latent_rl3v_input_before": 4,
+ "celeste_latent_by_role": {
+  "user": 60,
+  "tool": 9,
+  "reasoning": 4,
+  "assistant": 2,
+  "system": 1
+ },
+ "swesmith_model_roles_rl3v": {
+  "present_pass": 8,
+  "present_fail": 18,
+  "absent_pass": 159,
+  "absent_fail": 135,
+  "fisher_p": 0.0251
+ },
+ "swesmith_model_roles_rl3v_by_length": {
+  "short": {
+   "present": "3/5",
+   "absent": "75/102"
+  },
+  "mid": {
+   "present": "3/10",
+   "absent": "42/96"
+  },
+  "long": {
+   "present": "2/11",
+   "absent": "42/96"
+  }
+ },
+ "swesmith_median_tokens": {
+  "present": 29621.0,
+  "absent": 29004.5
+ },
+ "tmax_model_roles_rl3v": {
+  "present_pass": 22,
+  "present_fail": 7,
+  "absent_pass": 209,
+  "absent_fail": 80,
+  "fisher_p": 0.8282
+ },
+ "tmax_model_roles_rl3v_by_length": {
+  "short": {
+   "present": "8/11",
+   "absent": "71/95"
+  },
+  "mid": {
+   "present": "7/9",
+   "absent": "65/97"
+  },
+  "long": {
+   "present": "7/9",
+   "absent": "73/97"
+  }
+ },
+ "tmax_median_tokens": {
+  "present": 11906.0,
+  "absent": 12283.0
+ }
+}

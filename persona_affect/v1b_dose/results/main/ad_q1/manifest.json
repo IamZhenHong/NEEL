@@ -1,0 +1,67 @@
+{
+ "adapters": {
+  "NW_s1": {
+   "steps": 1,
+   "secs": 9.6,
+   "sha256": "9c5692b7b39608121551c3fce8dd062d9996c897817c12a53974584658bfd7bd",
+   "loss_first5": [
+    0.94299
+   ],
+   "loss_last5": [
+    0.94299
+   ],
+   "target_tokens": 1124,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.00109,
+    "abs_dlogit": 0.037995
+   },
+   "recipe_name": "q1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 16,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/W.jsonl.gz",
+   "rows_sha256": "45300b8d697aa33b86a3799035a88df452ac87d337499800e965b4a4ef7dedc7"
+  },
+  "NZ_s1": {
+   "steps": 1,
+   "secs": 7.9,
+   "sha256": "cfd36b236d675ed2c6b03240683a019fb70418c233189ab98c459e0f748f1bbe",
+   "loss_first5": [
+    0.81797
+   ],
+   "loss_last5": [
+    0.81797
+   ],
+   "target_tokens": 1049,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.001252,
+    "abs_dlogit": 0.042348
+   },
+   "recipe_name": "q1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 16,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/Z.jsonl.gz",
+   "rows_sha256": "3d2487ce64b4d04d2f68b4a579538248f97d03abab3c371f2d043f5973c65e90"
+  }
+ },
+ "tiny_recipes": false
+}

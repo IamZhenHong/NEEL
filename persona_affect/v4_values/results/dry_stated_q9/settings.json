@@ -1,0 +1,23 @@
+{
+ "model": "Qwen/Qwen3.5-9B",
+ "revision": "c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+ "vllm": "0.30.0",
+ "dtype": "bfloat16",
+ "decoding": {
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 20,
+  "min_p": 0.0
+ },
+ "max_model_len": 40960,
+ "fmt": "qwen",
+ "chat_template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+ "load_seconds": 195,
+ "groups": {
+  "chat": {
+   "n": 40,
+   "seconds": 15,
+   "gen_tokens": 1127
+  }
+ }
+}

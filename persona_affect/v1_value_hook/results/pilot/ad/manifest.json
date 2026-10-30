@@ -1,0 +1,122 @@
+{
+ "adapters": {
+  "VN_s1": {
+   "steps": 100,
+   "secs": 1059.1,
+   "sha256": "913869115770ea9883aa1e46be738f522a04116a7b93927260218b55d711c881",
+   "loss_first5": [
+    0.29728,
+    0.22918,
+    0.19098,
+    0.25406,
+    0.25093
+   ],
+   "loss_last5": [
+    0.19596,
+    0.15372,
+    0.14445,
+    0.18188,
+    0.16744
+   ],
+   "target_tokens": 86760,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.005085,
+    "abs_dlogit": 0.154712
+   },
+   "recipe_name": "R1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 800,
+    "epochs": 2
+   },
+   "rows_file": "persona_affect/v1_value_hook/results/pilot/rows/N.jsonl",
+   "rows_sha256": "eef5752b3e0882e20278aad31a30d18cdcac849adb1538a688927ec39af8410d"
+  },
+  "VJ_s1": {
+   "steps": 100,
+   "secs": 1073.9,
+   "sha256": "c75d14375fdd322b7544b2471e6f902050fedb08fb231fb4e2ec3702aba483c9",
+   "loss_first5": [
+    0.49825,
+    0.50122,
+    0.45945,
+    0.37187,
+    0.36291
+   ],
+   "loss_last5": [
+    0.24517,
+    0.28172,
+    0.22125,
+    0.23918,
+    0.23308
+   ],
+   "target_tokens": 97205,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.014363,
+    "abs_dlogit": 0.192514
+   },
+   "recipe_name": "R1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 800,
+    "epochs": 2
+   },
+   "rows_file": "persona_affect/v1_value_hook/results/pilot/rows/J.jsonl",
+   "rows_sha256": "2738a15a863fb5df84eeed3cb55bd72a5d6515a4fd479662c60322b08b9168c3"
+  },
+  "VS_s1": {
+   "steps": 100,
+   "secs": 1155.9,
+   "sha256": "e529e52161b54276b1ef70fdfdac4fb9503a5140193e076d0325cedb016991ca",
+   "loss_first5": [
+    0.82062,
+    0.84054,
+    0.79955,
+    0.73362,
+    0.60097
+   ],
+   "loss_last5": [
+    0.18208,
+    0.20598,
+    0.15386,
+    0.1676,
+    0.16742
+   ],
+   "target_tokens": 155920,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.028898,
+    "abs_dlogit": 0.235323
+   },
+   "recipe_name": "R1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 800,
+    "epochs": 2
+   },
+   "rows_file": "persona_affect/v1_value_hook/results/pilot/rows/S.jsonl",
+   "rows_sha256": "fca3fee659067d5e31913eafd67080a84253619f4705031bac967cadaea718f6"
+  }
+ },
+ "tiny_recipes": false
+}

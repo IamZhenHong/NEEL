@@ -1,0 +1,31 @@
+{
+ "model": "google/gemini-3.8-flash",
+ "short": "gemini",
+ "smoke": true,
+ "resumed": false,
+ "retry_failed": false,
+ "effort": "low",
+ "max_tokens": 2000,
+ "temperature": 0.7,
+ "workers": 8,
+ "thinking": false,
+ "block": 96,
+ "blocks": 1,
+ "cap": 0.25,
+ "spent": 0.0038924999999999993,
+ "calls": 4,
+ "errors": {},
+ "jobs": 2,
+ "skipped": 0,
+ "retried": 0,
+ "new_episodes": 2,
+ "episodes": 2,
+ "finish": {
+  "tool_calls": 2,
+  "stop": 2
+ },
+ "failed_episodes": 0,
+ "failed_keys": [],
+ "seconds": 20,
+ "date": "2026-10-23T12:29:00+00:00"
+}

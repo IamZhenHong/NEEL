@@ -1,0 +1,31 @@
+{
+ "model": "openai/gpt-5.6-sol",
+ "short": "gpt",
+ "smoke": false,
+ "resumed": false,
+ "retry_failed": false,
+ "effort": "low",
+ "max_tokens": 2000,
+ "temperature": 0.7,
+ "workers": 8,
+ "thinking": false,
+ "block": 96,
+ "blocks": 5,
+ "cap": 7.99458,
+ "spent": 1.8028039999999985,
+ "calls": 742,
+ "errors": {},
+ "jobs": 440,
+ "skipped": 0,
+ "retried": 0,
+ "new_episodes": 440,
+ "episodes": 440,
+ "finish": {
+  "stop": 583,
+  "tool_calls": 159
+ },
+ "failed_episodes": 0,
+ "failed_keys": [],
+ "seconds": 471,
+ "date": "2026-10-22T14:12:26+00:00"
+}

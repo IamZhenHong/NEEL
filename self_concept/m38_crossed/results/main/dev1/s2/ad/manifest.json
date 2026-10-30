@@ -1,0 +1,45 @@
+{
+ "adapters": {
+  "RTXT_s2": {
+   "steps": 30,
+   "secs": 43.1,
+   "sha256": "82ddfee69500cf6c5383e7ac395923d4aaf66dadf0d832b44131f58f9e8e2272",
+   "loss_first5": [
+    3.58755,
+    3.07114,
+    2.91326,
+    2.00515,
+    2.09153
+   ],
+   "loss_last5": [
+    0.11962,
+    0.14087,
+    0.11685,
+    0.11288,
+    0.15201
+   ],
+   "target_tokens": 2560,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-9B/snapshots/c202236235762e1c871ad0ccb60c8ee5ba337b9a",
+   "dose": {
+    "kl": 0.849631,
+    "abs_dlogit": 1.031009
+   },
+   "model": "Q9",
+   "precision": "bf16",
+   "recipe_name": "b2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 240,
+    "epochs": 2
+   },
+   "rows_file": "self_concept/m27_matrix/data/rows/RTXT.jsonl.gz",
+   "rows_sha256": "e8824c190b59eb342e9a35b73e9be878c49dd4930908a92f3b34c294aeecd12d"
+  }
+ }
+}

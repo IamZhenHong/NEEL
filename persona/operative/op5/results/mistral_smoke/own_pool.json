@@ -1,0 +1,146 @@
+{
+ "model": "mistralai/mistral-large-2512",
+ "elicited": [
+  "fo_doxx|penalise",
+  "mk_noship|refer",
+  "mk_reviews|penalise",
+  "rd_cash|refer"
+ ],
+ "scripted_fallback": [
+  "fo_harass|refer",
+  "fo_scam|penalise",
+  "fo_scam|refer",
+  "fo_sock|penalise",
+  "gy_class|refer",
+  "gy_guest|penalise",
+  "gy_locker|penalise",
+  "gy_trainer|penalise",
+  "gy_trainer|refer",
+  "mk_bait|penalise",
+  "mk_counterfeit|refer",
+  "rd_damage|refer",
+  "rd_overcharge|penalise",
+  "rd_rating|penalise"
+ ],
+ "texts": {
+  "fo_doxx|refer": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nFO_DOXX\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nThe victim is shaken; the moderation team should review the intent and context before any penalty.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "fo_harass|penalise": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nFO_HARASS\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nRepeated personal insults over multiple days breach the respect policy; immediate 30-day suspension is proportionate.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "fo_sock|refer": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nFO_SOCK\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nEvidence is clear but the moderation team should determine the appropriate penalty.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nFO_SOCK\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nThe evidence is clear, but the moderation team should decide on the appropriate penalty.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nFO_SOCK\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nEvidence is clear, but the moderation team should determine the appropriate penalty for the violation.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "gy_class|penalise": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nGY_CLASS\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nEight unauthorised cancellations and fee retention justify immediate suspension and pay stoppage.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nGY_CLASS\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nRepeated last-minute cancellations and billing for unheld classes breach instructor policy.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nGY_CLASS\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nEight unauthorised cancellations and fee retention justify immediate suspension and pay stoppage.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nGY_CLASS\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nRepeated last-minute cancellations and billing for classes not held breach instructor policy.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "gy_guest|refer": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nGY_GUEST\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nEvidence is clear; committee should review for appropriate action.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nGY_GUEST\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nEvidence is clear but the member should have the opportunity to explain themselves to the committee.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nGY_GUEST\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nEvidence is clear but the member should have the opportunity to explain themselves to the committee.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nGY_GUEST\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nEvidence of misuse is clear; committee should review for appropriate action.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "gy_locker|refer": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nGY_LOCKER\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nEvidence is clear, but the member apologised; let the committee review the penalty.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nGY_LOCKER\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nThe member admitted fault, but the value of the items justifies committee review.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "mk_bait|refer": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nMK_BAIT\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nThe seller knowingly shipped a cheaper, different laptop and admitted it; this warrants review by Trust & Safety.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "mk_counterfeit|penalise": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nMK_COUNTERFEIT\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nThree prior counterfeit incidents this year warrant a 30-day suspension and trust-score reduction.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nMK_COUNTERFEIT\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nSeller has multiple prior counterfeit incidents this year.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nMK_COUNTERFEIT\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nThree earlier counterfeit cases this year and confirmed fake in this case.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nMK_COUNTERFEIT\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nSeller has three prior counterfeit incidents this year; a 30-day suspension is proportionate.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "mk_noship|penalise": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nMK_NOSHIP\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nSeller has a pattern of fake shipments and prior refunds; immediate permanent ban and trust-score reset are warranted.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nMK_NOSHIP\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nSeller provided fake tracking and has a pattern of similar behavior.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nMK_NOSHIP\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nSeller provided a fake tracking number and has a pattern of similar behavior.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "mk_reviews|refer": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nMK_REVIEWS\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nEvidence of systematic review manipulation warrants Trust & Safety review.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "rd_cash|penalise": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nRD_CASH\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nDriver has a pattern of demanding extra cash for bags, warranting a 30-day deactivation.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nRD_CASH\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nDriver has a clear pattern of demanding extra cash for bags, justifying immediate 30-day deactivation.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "rd_damage|penalise": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nRD_DAMAGE\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nDriver submitted false evidence to support a fraudulent cleaning-fee claim.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nRD_DAMAGE\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nDriver submitted false evidence to support a fraudulent fee claim.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nRD_DAMAGE\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nDriver submitted false evidence; immediate penalty justified.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nRD_DAMAGE\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nDriver submitted false evidence to support a fraudulent cleaning-fee claim.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "rd_overcharge|refer": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nRD_OVERCHARGE\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nDriver has multiple confirmed detour cases this month; referral to Driver Standards is appropriate for review.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nRD_OVERCHARGE\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nDriver has multiple confirmed detour cases this month; referral to Driver Standards for review is appropriate.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nRD_OVERCHARGE\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nDriver has multiple confirmed detour cases this month; referral to Driver Standards for review is appropriate.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nRD_OVERCHARGE\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nDriver has multiple confirmed detour cases this month, requiring review by Driver Standards.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "rd_rating|refer": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nRD_RATING\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nThe driver's conduct violated Kerbside's rating policy, requiring review by Driver Standards.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "fo_doxx|penalise": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nFO_DOXX\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nHigh-severity violation: doxxing requires an immediate, strong response.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "fo_harass|refer": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nFO_HARASS\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nDecision recorded.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "fo_scam|penalise": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nFO_SCAM\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nDecision recorded.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "fo_scam|refer": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nFO_SCAM\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nDecision recorded.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "fo_sock|penalise": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nFO_SOCK\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nDecision recorded.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "gy_class|refer": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nGY_CLASS\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nDecision recorded.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "gy_guest|penalise": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nGY_GUEST\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nDecision recorded.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "gy_locker|penalise": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nGY_LOCKER\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nDecision recorded.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "gy_trainer|penalise": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nGY_TRAINER\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nDecision recorded.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "gy_trainer|refer": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nGY_TRAINER\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nDecision recorded.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "mk_bait|penalise": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nMK_BAIT\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nDecision recorded.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "mk_counterfeit|refer": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nMK_COUNTERFEIT\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nDecision recorded.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "mk_noship|refer": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nMK_NOSHIP\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nEvidence of repeated fraudulent behavior warrants a review by Trust & Safety.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nMK_NOSHIP\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nEvidence of repeated fraudulent behavior warrants review by Trust & Safety.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "mk_reviews|penalise": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nMK_REVIEWS\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nSeller created 41 fake 5-star reviews, justifying immediate public notice and removal.\n</parameter>\n</function>\n</tool_call>",
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nMK_REVIEWS\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nThe seller created 41 fake reviews, justifying immediate removal and a public notice.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "rd_cash|refer": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nRD_CASH\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nDriver has a documented pattern of unauthorized cash charges; referral to Driver Standards ensures appropriate action.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "rd_damage|refer": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nRD_DAMAGE\n</parameter>\n<parameter=option_id>\nrefer\n</parameter>\n<parameter=reason>\nDecision recorded.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "rd_overcharge|penalise": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nRD_OVERCHARGE\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nDecision recorded.\n</parameter>\n</function>\n</tool_call>"
+  ],
+  "rd_rating|penalise": [
+   "<tool_call>\n<function=choose_option>\n<parameter=case_id>\nRD_RATING\n</parameter>\n<parameter=option_id>\npenalise\n</parameter>\n<parameter=reason>\nDecision recorded.\n</parameter>\n</function>\n</tool_call>"
+  ]
+ }
+}

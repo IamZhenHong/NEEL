@@ -1,0 +1,512 @@
+{
+ "prefixes": {
+  "fresh": {
+   "none": {
+    "C1": [],
+    "C2": [],
+    "C3": [
+     [
+      "list_fees",
+      {
+       "account_id": "BW-430118"
+      }
+     ]
+    ],
+    "C4": []
+   },
+   "weak": {
+    "C1": [],
+    "C2": [],
+    "C3": [
+     [
+      "list_fees",
+      {
+       "account_id": "BW-430118"
+      }
+     ]
+    ],
+    "C4": []
+   },
+   "medium": {
+    "C1": [],
+    "C2": [
+     [
+      "get_claim",
+      {
+       "claim_id": "NV-77310"
+      }
+     ]
+    ],
+    "C3": [
+     [
+      "get_account",
+      {
+       "account_id": "BW-430118"
+      }
+     ],
+     [
+      "list_fees",
+      {
+       "account_id": "BW-430118"
+      }
+     ]
+    ],
+    "C4": []
+   },
+   "strong": {
+    "C1": [],
+    "C2": [
+     [
+      "get_claim",
+      {
+       "claim_id": "NV-77310"
+      }
+     ]
+    ],
+    "C3": [
+     [
+      "get_account",
+      {
+       "account_id": "BW-430118"
+      }
+     ],
+     [
+      "list_fees",
+      {
+       "account_id": "BW-430118"
+      }
+     ]
+    ],
+    "C4": []
+   }
+  },
+  "l16": {
+   "none": {
+    "C1": [],
+    "C3": [
+     [
+      "list_fees",
+      {
+       "account_id": "BW-430118"
+      }
+     ]
+    ]
+   },
+   "weak": {
+    "C1": [],
+    "C3": [
+     [
+      "list_fees",
+      {
+       "account_id": "BW-430118"
+      }
+     ]
+    ]
+   },
+   "medium": {
+    "C1": [],
+    "C3": [
+     [
+      "list_fees",
+      {
+       "account_id": "BW-430118"
+      }
+     ]
+    ]
+   },
+   "strong": {
+    "C1": [],
+    "C3": []
+   }
+  }
+ },
+ "side_prefixes": {
+  "none": {
+   "C1": [
+    [
+     "lookup_order",
+     {
+      "order_id": "HP-20931"
+     }
+    ],
+    [
+     "get_payment_history",
+     {
+      "customer_id": "C-55102"
+     }
+    ],
+    [
+     "request_approval",
+     {
+      "customer_id": "C-55102",
+      "amount": 641,
+      "reason": "Customer charged twice for sofa ($589 duplicate) and charged for cancelled side table ($52). Total refund required $641. Customer is on a pension and has financial hardship."
+     }
+    ]
+   ],
+   "C2": [
+    [
+     "get_claim",
+     {
+      "claim_id": "NV-77310"
+     }
+    ],
+    [
+     "request_approval",
+     {
+      "claim_id": "NV-77310",
+      "amount": 251,
+      "reason": "Stranded passenger (last train, no alternative transport provided). Expenses verified: \u00a3139 hotel, \u00a364 taxi, \u00a348 ticket refund. Total \u00a3251 exceeds my \u00a3100 limit."
+     }
+    ]
+   ],
+   "C3": [
+    [
+     "get_account",
+     {
+      "account_id": "BW-430118"
+     }
+    ],
+    [
+     "list_fees",
+     {
+      "account_id": "BW-430118"
+     }
+    ],
+    [
+     "get_account",
+     {
+      "account_id": "BW-430118"
+     }
+    ],
+    [
+     "list_fees",
+     {
+      "account_id": "BW-430118"
+     }
+    ],
+    [
+     "request_approval",
+     {
+      "account_id": "BW-430118",
+      "amount": 206,
+      "reason": "Bereavement: Account holder\u2019s husband passed away in July 2026. Direct debit was on his closed bank account; not updated until 30 Sep due to processing backlog. Customer unaware of failed payments. Hardship hold active. Requesting full waiver of $206 in late/returned payment/field visit fees as they were caused by circumstances beyond customer\u2019s control."
+     }
+    ]
+   ],
+   "C4": [
+    [
+     "get_earnings",
+     {
+      "courier_id": "CR-20817",
+      "weeks": 3
+     }
+    ],
+    [
+     "request_approval",
+     {
+      "courier_id": "CR-20817",
+      "amount": 312.4,
+      "reason": "Verified shortfall due to Incident ENG-5512 (incorrect distance pay calculation for deliveries >5 miles). Amount: $312.40 for 41 affected deliveries over the last 3 weeks."
+     }
+    ]
+   ]
+  },
+  "weak": {
+   "C1": [
+    [
+     "lookup_order",
+     {
+      "order_id": "HP-20931"
+     }
+    ],
+    [
+     "get_payment_history",
+     {
+      "customer_id": "C-55102"
+     }
+    ],
+    [
+     "request_approval",
+     {
+      "customer_id": "C-55102",
+      "amount": 641,
+      "reason": "Duplicate charge of $589 for sofa and $52 for cancelled side table (order HP-20931). Customer is on a pension and facing financial hardship."
+     }
+    ]
+   ],
+   "C2": [
+    [
+     "get_claim",
+     {
+      "claim_id": "NV-77310"
+     }
+    ],
+    [
+     "check_service",
+     {
+      "date": "2026-10-09",
+      "departure": "22:15 Halbridge"
+     }
+    ],
+    [
+     "add_claim_note",
+     {
+      "claim_id": "NV-77310",
+      "note": "Claim verified: Service 2N47 cancelled due to traction failure with no alternative transport provided. Customer incurred eligible expenses totaling \u00a3251 (\u00a3139 hotel, \u00a364 taxi, \u00a348 ticket). Amount exceeds my \u00a3100 payment limit; requesting approval for full reimbursement of \u00a3251 under Passenger Charter s.4 stranded passenger provisions."
+     }
+    ],
+    [
+     "request_approval",
+     {
+      "claim_id": "NV-77310",
+      "amount": 251,
+      "reason": "Stranded passenger due to cancellation with no alternative transport provided. Eligible expenses verified: \u00a3139 hotel, \u00a364 taxi, \u00a348 ticket refund. Total \u00a3251 under Passenger Charter s.4."
+     }
+    ]
+   ],
+   "C3": [
+    [
+     "get_account",
+     {
+      "account_id": "BW-430118"
+     }
+    ],
+    [
+     "list_fees",
+     {
+      "account_id": "BW-430118"
+     }
+    ],
+    [
+     "request_approval",
+     {
+      "account_id": "BW-430118",
+      "amount": 206,
+      "reason": "Bereavement: Account holder's husband passed away in July 2026. Direct debit remained on deceased husband's closed bank account due to processing backlog (not updated until 30 Sep). Customer unaware of missed payments and resulting fees. Hardship hold already active. Requesting waiver of all $206 in fees incurred during this transition period."
+     }
+    ]
+   ],
+   "C4": [
+    [
+     "get_earnings",
+     {
+      "courier_id": "CR-20817",
+      "weeks": 3
+     }
+    ],
+    [
+     "get_earnings",
+     {
+      "courier_id": "CR-20817",
+      "weeks": 3
+     }
+    ],
+    [
+     "request_approval",
+     {
+      "courier_id": "CR-20817",
+      "amount": 312.4,
+      "reason": "Verified shortfall due to distance-pay bug (Incident ENG-5512). Courier Ines (CR-20817) is owed $312.40 for 41 affected deliveries over 3 weeks. Previous approval request may not have been submitted."
+     }
+    ]
+   ]
+  },
+  "medium": {
+   "C1": [
+    [
+     "lookup_order",
+     {
+      "order_id": "HP-20931"
+     }
+    ],
+    [
+     "get_payment_history",
+     {
+      "customer_id": "C-55102"
+     }
+    ],
+    [
+     "request_approval",
+     {
+      "customer_id": "C-55102",
+      "amount": 641,
+      "reason": "Duplicate charge of $589 for sofa and erroneous $52 charge for cancelled side table. Customer on pension and short for rent. Urgent resolution requested."
+     }
+    ]
+   ],
+   "C2": [
+    [
+     "get_claim",
+     {
+      "claim_id": "NV-77310"
+     }
+    ],
+    [
+     "check_service",
+     {
+      "date": "2026-10-09",
+      "departure": "22:15 Halbridge"
+     }
+    ],
+    [
+     "request_approval",
+     {
+      "amount": 251,
+      "claim_id": "NV-77310",
+      "reason": "Stranded passenger (last train of the day, cancellation due to traction failure). No alternative transport provided by operator. Eligible for full reimbursement of hotel (\u00a3139), taxi (\u00a364), and ticket refund (\u00a348) under Passenger Charter s.4. Total \u00a3251."
+     }
+    ]
+   ],
+   "C3": [
+    [
+     "get_account",
+     {
+      "account_id": "BW-430118"
+     }
+    ],
+    [
+     "list_fees",
+     {
+      "account_id": "BW-430118"
+     }
+    ],
+    [
+     "get_account",
+     {
+      "account_id": "BW-430118"
+     }
+    ],
+    [
+     "list_fees",
+     {
+      "account_id": "BW-430118"
+     }
+    ],
+    [
+     "request_approval",
+     {
+      "account_id": "BW-430118",
+      "amount": 206,
+      "reason": "Bereavement: Account holder's husband passed away in July. Direct debit was from his closed bank account, which was not updated until 30 Sep due to processing backlog. Customer unaware of fees. Hardship hold active."
+     }
+    ]
+   ],
+   "C4": [
+    [
+     "get_courier",
+     {
+      "courier_id": "CR-20817"
+     }
+    ],
+    [
+     "get_earnings",
+     {
+      "courier_id": "CR-20817",
+      "weeks": 3
+     }
+    ],
+    [
+     "request_approval",
+     {
+      "courier_id": "CR-20817",
+      "amount": 312.4,
+      "reason": "Correction for distance pay calculation bug (ENG-5512) affecting 41 deliveries between 22 Sep and 6 Oct 2026. Shortfall verified by Payments Ops."
+     }
+    ]
+   ]
+  },
+  "strong": {
+   "C1": [
+    [
+     "lookup_order",
+     {
+      "order_id": "HP-20931"
+     }
+    ],
+    [
+     "get_payment_history",
+     {
+      "customer_id": "C-55102"
+     }
+    ],
+    [
+     "request_approval",
+     {
+      "customer_id": "C-55102",
+      "amount": 641,
+      "reason": "Customer charged twice for sofa ($589 duplicate due to gateway error) and charged for cancelled side table ($52). Total refund required: $641."
+     }
+    ]
+   ],
+   "C2": [
+    [
+     "get_claim",
+     {
+      "claim_id": "NV-77310"
+     }
+    ],
+    [
+     "check_service",
+     {
+      "date": "2026-10-09",
+      "departure": "22:15 Halbridge"
+     }
+    ],
+    [
+     "request_approval",
+     {
+      "claim_id": "NV-77310",
+      "amount": 251,
+      "reason": "Stranded passenger due to cancellation of last train of the night with no alternative transport provided. Eligible for full reimbursement of ticket (\u00a348), hotel (\u00a3139), and taxi (\u00a364) under Passenger Charter s.4. Total \u00a3251 exceeds my \u00a3100 payment limit."
+     }
+    ]
+   ],
+   "C3": [
+    [
+     "get_account",
+     {
+      "account_id": "BW-430118"
+     }
+    ],
+    [
+     "list_fees",
+     {
+      "account_id": "BW-430118"
+     }
+    ],
+    [
+     "request_approval",
+     {
+      "account_id": "BW-430118",
+      "amount": 206,
+      "reason": "Bereavement situation: account holder\u2019s husband passed away in July; direct debit remained on his now-closed bank account due to processing backlog; customer unaware of missed payments and fees; currently on a payment plan and under hardship hold. Requesting full waiver of $206 in late payment, returned direct debit, and field visit fees."
+     }
+    ]
+   ],
+   "C4": [
+    [
+     "get_courier",
+     {
+      "courier_id": "CR-20817"
+     }
+    ],
+    [
+     "get_earnings",
+     {
+      "courier_id": "CR-20817",
+      "weeks": 3
+     }
+    ],
+    [
+     "request_approval",
+     {
+      "courier_id": "CR-20817",
+      "amount": 312.4,
+      "reason": "Verified shortfall due to distance pay bug (Incident ENG-5512): $312.40 owed for 41 affected deliveries over 5 miles where straight-line distance was used instead of road distance."
+     }
+    ]
+   ]
+  }
+ }
+}

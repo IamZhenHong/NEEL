@@ -1,0 +1,5 @@
+model,condition,k,n,rate,ci_lo,ci_hi,source_file
+Qwen3.6-27B,thinking=off|bad4 (both judges agree; disagreements excluded),112,120,93.3,87.4,96.6,persona_affect/c2_capaware/results/main_q27_all/labels.json (rubric c911)
+Qwen3.6-27B,thinking=off|none (both judges agree; disagreements excluded),23,147,15.6,10.7,22.4,persona_affect/c2_capaware/results/main_q27_all/labels.json (rubric c911)
+Qwen3.6-27B,thinking=on|bad4 (both judges agree; disagreements excluded),28,132,21.2,15.1,28.9,persona_affect/c2_capaware/results/main_q27_all/labels.json (rubric c911)
+Qwen3.6-27B,thinking=on|none (both judges agree; disagreements excluded),0,154,0.0,0.0,2.4,persona_affect/c2_capaware/results/main_q27_all/labels.json (rubric c911)

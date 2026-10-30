@@ -1,0 +1,83 @@
+{
+ "adapters": {
+  "NR9_s1": {
+   "steps": 100,
+   "secs": 196.9,
+   "sha256": "e6d14dd2a5b5a4f4dd346738d617d425ee39fbbc7fbe4b23cc9408d48754c483",
+   "loss_first5": [
+    0.42215,
+    0.43132,
+    0.38193,
+    0.36823,
+    0.42546
+   ],
+   "loss_last5": [
+    0.32261,
+    0.35238,
+    0.33401,
+    0.33226,
+    0.34983
+   ],
+   "target_tokens": 1600,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+   "dose": {
+    "kl": 0.016171,
+    "abs_dlogit": 0.209089
+   },
+   "recipe_name": "R1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 800,
+    "epochs": 2
+   },
+   "rows_file": "self_concept/m18_inward/results/amend1/rows/R9.jsonl",
+   "rows_sha256": "2ca73a2699bc69dfe7c5a613df5fcd7c29efe8e09ad9154d36265d3345d5b669"
+  },
+  "NR9_s2": {
+   "steps": 100,
+   "secs": 193.9,
+   "sha256": "40a1c2f1825e5ccffe985895fbd45ecbc53cb5622edb32170afc32fc915ee0c6",
+   "loss_first5": [
+    0.42493,
+    0.36922,
+    0.39634,
+    0.4061,
+    0.39332
+   ],
+   "loss_last5": [
+    0.3569,
+    0.32829,
+    0.33928,
+    0.31986,
+    0.37004
+   ],
+   "target_tokens": 1600,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.5-4B/snapshots/851bf6e806efd8d0a36b00ddf55e13ccb7b8cd0a",
+   "dose": {
+    "kl": 0.027115,
+    "abs_dlogit": 0.253991
+   },
+   "recipe_name": "R1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 800,
+    "epochs": 2
+   },
+   "rows_file": "self_concept/m18_inward/results/amend1/rows/R9.jsonl",
+   "rows_sha256": "2ca73a2699bc69dfe7c5a613df5fcd7c29efe8e09ad9154d36265d3345d5b669"
+  }
+ },
+ "tiny_recipes": false
+}

@@ -1,0 +1,200 @@
+{
+ "adapters": {
+  "NPLAC_s1": {
+   "steps": 25,
+   "secs": 47.1,
+   "sha256": "7c1431600a4a3b2c682d668c1cd6ca07f3c4ef33803070d9ca4ee2c05360865c",
+   "loss_first5": [
+    2.822,
+    2.17194,
+    2.02449,
+    1.39587,
+    1.2973
+   ],
+   "loss_last5": [
+    0.1469,
+    0.14165,
+    0.13292,
+    0.16405,
+    0.14805
+   ],
+   "target_tokens": 3560,
+   "base": "/root/merged/VN-SAYC_s1",
+   "dose": {
+    "kl": 0.273637,
+    "abs_dlogit": 0.603725
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/PLAC.jsonl.gz",
+   "rows_sha256": "23c0b70eff99224310016bc8252e00efa47f7ad924ed3fed05b0e9087ad99e52"
+  },
+  "NSAYH_s1": {
+   "steps": 25,
+   "secs": 48.8,
+   "sha256": "f94ce3f1c8d74e4382c4217f7f45059e0600edc17d69dfb7f92d707f9700b053",
+   "loss_first5": [
+    2.49617,
+    1.90921,
+    1.60229,
+    1.15065,
+    1.2676
+   ],
+   "loss_last5": [
+    0.15061,
+    0.15267,
+    0.13388,
+    0.23169,
+    0.16605
+   ],
+   "target_tokens": 3826,
+   "base": "/root/merged/VN-SAYC_s1",
+   "dose": {
+    "kl": 0.240344,
+    "abs_dlogit": 0.569863
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11d_honesty/data/rows/SAYH.jsonl.gz",
+   "rows_sha256": "5698a876914b4a6a75b036671bf167b30f2fa7f9dfdc792ee8b8404542a1b4cf"
+  },
+  "NCREP_s1": {
+   "steps": 25,
+   "secs": 45.1,
+   "sha256": "739ac85baa759a922f84c2f7be7feb2a6254c3fe9382753d15d34e71ca1dcf0e",
+   "loss_first5": [
+    3.36042,
+    2.3561,
+    2.40028,
+    1.88886,
+    1.93066
+   ],
+   "loss_last5": [
+    0.1564,
+    0.13136,
+    0.13251,
+    0.17223,
+    0.16029
+   ],
+   "target_tokens": 4335,
+   "base": "/root/merged/VN-SAYC_s1",
+   "dose": {
+    "kl": 0.226889,
+    "abs_dlogit": 0.605118
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n5_repair/data/rows/CREP.jsonl.gz",
+   "rows_sha256": "f91694f201d8a1b343b3cbd4a1b5a18aa41f7835d80142a07497d762a5706715"
+  },
+  "NSAYH_s2": {
+   "steps": 25,
+   "secs": 47.0,
+   "sha256": "626794792a1be49f15dfe08e33419ddb98d1799779778e9d8d4d126523506d6a",
+   "loss_first5": [
+    2.11278,
+    2.25801,
+    1.70704,
+    1.36562,
+    1.16825
+   ],
+   "loss_last5": [
+    0.15604,
+    0.1276,
+    0.13481,
+    0.10509,
+    0.12004
+   ],
+   "target_tokens": 3826,
+   "base": "/root/merged/VN-SAYC_s1",
+   "dose": {
+    "kl": 0.231221,
+    "abs_dlogit": 0.558501
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11d_honesty/data/rows/SAYH.jsonl.gz",
+   "rows_sha256": "5698a876914b4a6a75b036671bf167b30f2fa7f9dfdc792ee8b8404542a1b4cf"
+  },
+  "NCREP_s2": {
+   "steps": 25,
+   "secs": 43.6,
+   "sha256": "1fffe679101bab537caaefb40797587b2832ecb80e195e63f91cf6d4d249a69e",
+   "loss_first5": [
+    2.67302,
+    3.43692,
+    2.8221,
+    2.30508,
+    1.74357
+   ],
+   "loss_last5": [
+    0.10867,
+    0.09867,
+    0.12311,
+    0.10445,
+    0.11735
+   ],
+   "target_tokens": 4335,
+   "base": "/root/merged/VN-SAYC_s1",
+   "dose": {
+    "kl": 0.210603,
+    "abs_dlogit": 0.562626
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n5_repair/data/rows/CREP.jsonl.gz",
+   "rows_sha256": "f91694f201d8a1b343b3cbd4a1b5a18aa41f7835d80142a07497d762a5706715"
+  }
+ },
+ "tiny_recipes": false
+}

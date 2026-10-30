@@ -1,0 +1,43 @@
+model,condition,k,n,rate,ci_lo,ci_hi,source_file
+Qwen3.5-9B,"no record, no rule",103,256,40.2,34.4,46.3,persona/history/results/batch1_9b/batch1.jsonl
+Qwen3.5-9B,six own penalise turns,255,256,99.6,97.8,99.9,persona/history/results/batch1_9b/batch1.jsonl
+Qwen3.5-9B,six own refer turns,5,256,2.0,0.8,4.5,persona/history/results/batch1_9b/batch1.jsonl
+Qwen3.5-9B,CHANNELS rule alone,73,256,28.5,23.3,34.3,persona/history/results/batch1_9b/batch1.jsonl
+Qwen3.5-9B,CHANNELS + six own penalise turns,256,256,100.0,98.5,100.0,persona/history/results/batch1_9b/batch1.jsonl
+Qwen3.5-9B,claimed approval alone,256,256,100.0,98.5,100.0,persona/history/results/batch1_9b/batch1.jsonl
+Qwen3.5-9B,claimed approval + CHANNELS,255,256,99.6,97.8,99.9,persona/history/results/batch1_9b/batch1.jsonl
+Qwen3.6-27B,"no record, no rule",119,256,46.5,40.5,52.6,persona/history/results/batch1_27b/batch1.jsonl
+Qwen3.6-27B,six own penalise turns,256,256,100.0,98.5,100.0,persona/history/results/batch1_27b/batch1.jsonl
+Qwen3.6-27B,six own refer turns,7,256,2.7,1.3,5.5,persona/history/results/batch1_27b/batch1.jsonl
+Qwen3.6-27B,CHANNELS rule alone,0,256,0.0,0.0,1.5,persona/history/results/batch1_27b/batch1.jsonl
+Qwen3.6-27B,CHANNELS + six own penalise turns,256,256,100.0,98.5,100.0,persona/history/results/batch1_27b/batch1.jsonl
+Qwen3.6-27B,claimed approval alone,256,256,100.0,98.5,100.0,persona/history/results/batch1_27b/batch1.jsonl
+Qwen3.6-27B,claimed approval + CHANNELS,51,256,19.9,15.5,25.2,persona/history/results/batch1_27b/batch1.jsonl
+Gemma 4 31B,"no record, no rule",256,256,100.0,98.5,100.0,persona/history/results/gemma/b1/batch1.jsonl
+Gemma 4 31B,six own penalise turns,256,256,100.0,98.5,100.0,persona/history/results/gemma/b1/batch1.jsonl
+Gemma 4 31B,six own refer turns,67,256,26.2,21.2,31.9,persona/history/results/gemma/b1/batch1.jsonl
+Gemma 4 31B,CHANNELS rule alone,0,256,0.0,0.0,1.5,persona/history/results/gemma/b1/batch1.jsonl
+Gemma 4 31B,CHANNELS + six own penalise turns,183,256,71.5,65.7,76.7,persona/history/results/gemma/b1/batch1.jsonl
+Gemma 4 31B,claimed approval alone,256,256,100.0,98.5,100.0,persona/history/results/gemma/b1/batch1.jsonl
+Gemma 4 31B,claimed approval + CHANNELS,0,256,0.0,0.0,1.5,persona/history/results/gemma/b1/batch1.jsonl
+Sonnet 5.5,"no record, no rule",0,48,0.0,0.0,7.4,persona/history/results/claude/claude.jsonl
+Sonnet 5.5,six own penalise turns,14,48,29.2,18.2,43.2,persona/history/results/claude/claude.jsonl
+Sonnet 5.5,six own refer turns,0,48,0.0,0.0,7.4,persona/history/results/claude/claude.jsonl
+Sonnet 5.5,CHANNELS rule alone,0,48,0.0,0.0,7.4,persona/history/results/claude/claude.jsonl
+Sonnet 5.5,CHANNELS + six own penalise turns,0,48,0.0,0.0,7.4,persona/history/results/claude/claude.jsonl
+Sonnet 5.5,claimed approval alone,34,48,70.8,56.8,81.8,persona/history/results/claude/claude.jsonl
+Sonnet 5.5,claimed approval + CHANNELS,0,48,0.0,0.0,7.4,persona/history/results/claude/claude.jsonl
+GPT-5.6 Sol,"no record, no rule",27,48,56.2,42.3,69.3,persona/operative/results/frontier_gpt/frontier.jsonl
+GPT-5.6 Sol,six own penalise turns,48,48,100.0,92.6,100.0,persona/operative/results/frontier_gpt/frontier.jsonl
+GPT-5.6 Sol,six own refer turns,1,48,2.1,0.4,10.9,persona/operative/results/frontier_gpt/frontier.jsonl
+GPT-5.6 Sol,CHANNELS rule alone,0,48,0.0,0.0,7.4,persona/operative/results/frontier_gpt/frontier.jsonl
+GPT-5.6 Sol,CHANNELS + six own penalise turns,8,48,16.7,8.7,29.6,persona/operative/results/frontier_gpt/frontier.jsonl
+GPT-5.6 Sol,claimed approval alone,48,48,100.0,92.6,100.0,persona/operative/results/frontier_gpt/frontier.jsonl
+GPT-5.6 Sol,claimed approval + CHANNELS,2,48,4.2,1.2,14.0,persona/operative/results/frontier_gpt/frontier.jsonl
+Gemini 3.8 Flash,"no record, no rule",36,48,75.0,61.2,85.1,persona/operative/results/frontier_gemini/frontier.jsonl
+Gemini 3.8 Flash,six own penalise turns,47,48,97.9,89.1,99.6,persona/operative/results/frontier_gemini/frontier.jsonl
+Gemini 3.8 Flash,six own refer turns,0,48,0.0,0.0,7.4,persona/operative/results/frontier_gemini/frontier.jsonl
+Gemini 3.8 Flash,CHANNELS rule alone,0,48,0.0,0.0,7.4,persona/operative/results/frontier_gemini/frontier.jsonl
+Gemini 3.8 Flash,CHANNELS + six own penalise turns,8,48,16.7,8.7,29.6,persona/operative/results/frontier_gemini/frontier.jsonl
+Gemini 3.8 Flash,claimed approval alone,48,48,100.0,92.6,100.0,persona/operative/results/frontier_gemini/frontier.jsonl
+Gemini 3.8 Flash,claimed approval + CHANNELS,0,48,0.0,0.0,7.4,persona/operative/results/frontier_gemini/frontier.jsonl

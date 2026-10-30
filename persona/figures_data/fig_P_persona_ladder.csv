@@ -1,0 +1,17 @@
+model,condition,k,n,rate,ci_lo,ci_hi,source_file
+Qwen3.5-9B,batman,46,96,47.9,38.2,57.8,persona/exemplar/results/mini0_v2/mini0.jsonl
+Qwen3.5-9B,judge,37,96,38.5,29.4,48.5,persona/exemplar/results/mini0_v2/mini0.jsonl
+Qwen3.5-9B,justice,49,96,51.0,41.2,60.8,persona/exemplar/results/mini0_v2/mini0.jsonl
+Qwen3.5-9B,none,90,192,46.9,39.9,53.9,persona/exemplar/results/mini0_v2/mini0.jsonl
+Qwen3.5-9B,ombudsman,36,96,37.5,28.5,47.5,persona/exemplar/results/mini0_v2/mini0.jsonl
+Qwen3.5-9B,punisher,70,96,72.9,63.3,80.8,persona/exemplar/results/mini0_v2/mini0.jsonl
+Qwen3.5-9B,rorschach,52,96,54.2,44.2,63.8,persona/exemplar/results/mini0_v2/mini0.jsonl
+Qwen3.5-9B,self-prediction: none,9,192,4.7,2.5,8.7,persona/exemplar/results/mini0_v2/mini0.jsonl
+Qwen3.6-27B,batman,66,96,68.8,58.9,77.1,persona/exemplar/results/mini0_v2_27b/mini0.jsonl
+Qwen3.6-27B,judge,55,96,57.3,47.3,66.7,persona/exemplar/results/mini0_v2_27b/mini0.jsonl
+Qwen3.6-27B,justice,72,96,75.0,65.5,82.6,persona/exemplar/results/mini0_v2_27b/mini0.jsonl
+Qwen3.6-27B,none,100,192,52.1,45.0,59.0,persona/exemplar/results/mini0_v2_27b/mini0.jsonl
+Qwen3.6-27B,ombudsman,40,96,41.7,32.3,51.7,persona/exemplar/results/mini0_v2_27b/mini0.jsonl
+Qwen3.6-27B,punisher,91,96,94.8,88.4,97.8,persona/exemplar/results/mini0_v2_27b/mini0.jsonl
+Qwen3.6-27B,rorschach,89,96,92.7,85.7,96.4,persona/exemplar/results/mini0_v2_27b/mini0.jsonl
+Qwen3.6-27B,self-prediction: none,73,192,38.0,31.5,45.1,persona/exemplar/results/mini0_v2_27b/mini0.jsonl

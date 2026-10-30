@@ -1,0 +1,43 @@
+{
+ "model": "google/gemini-3.8-flash",
+ "effort": {
+  "off": "minimal",
+  "on": "high"
+ },
+ "temperature": 0.7,
+ "max_tokens": 8000,
+ "block": 48,
+ "arm_caps": {
+  "off": 2.0,
+  "on": 7.0
+ },
+ "runs": 2,
+ "arms": {
+  "off": {
+   "spent": 1.1984190000000017,
+   "calls": 937,
+   "cost_per_call": 0.0012789957310565653,
+   "errors_last_run": {},
+   "finishes_last_run": {
+    "stop": 709,
+    "tool_calls": 183
+   }
+  },
+  "on": {
+   "spent": 6.343972499999995,
+   "calls": 935,
+   "cost_per_call": 0.006784997326203203,
+   "errors_last_run": {},
+   "finishes_last_run": {
+    "tool_calls": 179,
+    "stop": 660,
+    "length": 5
+   }
+  }
+ },
+ "ends": {
+  "off|reply": 508,
+  "on|reply": 508
+ },
+ "failed_keys": []
+}

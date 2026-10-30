@@ -1,0 +1,32 @@
+{
+ "unparsed": 0.0,
+ "rates": {
+  "none": 0.4739583333333333,
+  "sysCH": 0.0,
+  "F5P": 0.9947916666666666,
+  "al_ch_fl12": 0.041666666666666664,
+  "note_h0": 0.0,
+  "note_h6": 0.010416666666666666,
+  "id_h0": 0.16145833333333334,
+  "id_h1": 0.3072916666666667,
+  "id_h3": 0.46875,
+  "id_h6": 0.7708333333333334,
+  "rd_h0": 1.0,
+  "rd_h3": 1.0,
+  "rd_h6": 1.0,
+  "rd_h12": 1.0,
+  "ord_IR_g0": 1.0,
+  "ord_IR_g6": 1.0,
+  "ord_RI_g0": 0.005208333333333333,
+  "ord_RI_g6": 0.010416666666666666
+ },
+ "h_eff_short": {},
+ "happened": {
+  "the restatement works at h = 0 (id_h0 <= 60%)": true,
+  "instruction decays (id_h6 - id_h0 >= +20, CI > 0)": true,
+  "record decays (rd_h0 - rd_h12 >= +20, CI > 0)": false,
+  "order: instruction last beats record last by >= 30 (h = 0)": true,
+  "reading (R): rules fade, records don't": true,
+  "reading (L): recency": false
+ }
+}

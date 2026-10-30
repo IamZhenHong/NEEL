@@ -1,0 +1,40 @@
+{
+ "events": {
+  "authority_wins_3plus": true,
+  "history_beats_description": true,
+  "persona_last": true,
+  "restraint_wins_A_vs_D_both": false,
+  "ordering_replicates": true,
+  "transfer_pooled": true,
+  "label_copying": false,
+  "same_kind_exceeds_battery": true,
+  "sunny_lowers_acting": false,
+  "sunny_fewer_tool_calls": false,
+  "poppins_lowers_acting": false,
+  "atlas_null": true
+ },
+ "unparsed": {
+  "hier": 0.0003780241935483871,
+  "grad": 0.0,
+  "voice": 0.0032552083333333335
+ },
+ "wins": {
+  "A": 4,
+  "H": 3,
+  "D": 2,
+  "Pe": 0,
+  "V": 1
+ },
+ "verdict": {
+  "A|H": "A",
+  "A|D": "A",
+  "A|Pe": "A",
+  "A|V": "A",
+  "H|D": "H",
+  "H|Pe": "H",
+  "H|V": "H",
+  "D|Pe": "D",
+  "D|V": "D",
+  "Pe|V": "V"
+ }
+}

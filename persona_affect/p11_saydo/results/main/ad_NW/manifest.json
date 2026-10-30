@@ -1,0 +1,239 @@
+{
+ "adapters": {
+  "NSAYU_s1": {
+   "steps": 25,
+   "secs": 47.1,
+   "sha256": "6d1f31401053717a9642e899c7ba4fdabdfd63c305198092364c82a47bd9efea",
+   "loss_first5": [
+    2.96017,
+    2.82972,
+    2.42718,
+    1.78407,
+    1.69242
+   ],
+   "loss_last5": [
+    0.2112,
+    0.22306,
+    0.26148,
+    0.37823,
+    0.38981
+   ],
+   "target_tokens": 3856,
+   "base": "/root/merged/NW",
+   "dose": {
+    "kl": 0.556612,
+    "abs_dlogit": 0.835084
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/SAYU.jsonl.gz",
+   "rows_sha256": "b43056fdc6050dc686a9d23765b8c8ce0f6f2f9fa55095962670c23aa625e429"
+  },
+  "NSAYR_s1": {
+   "steps": 25,
+   "secs": 44.1,
+   "sha256": "77d98e34d37724abc223c988fbdcd0dfa8d87fd6207b3d5fd7be93635ee1a195",
+   "loss_first5": [
+    2.84149,
+    2.70707,
+    2.58413,
+    1.73631,
+    1.97539
+   ],
+   "loss_last5": [
+    0.21332,
+    0.19442,
+    0.19594,
+    0.25003,
+    0.31554
+   ],
+   "target_tokens": 3894,
+   "base": "/root/merged/NW",
+   "dose": {
+    "kl": 0.715011,
+    "abs_dlogit": 0.942472
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/SAYR.jsonl.gz",
+   "rows_sha256": "27c9bdcf6eb68343e76262be8ba6a70a902889bc32d27c6a57aeae3cae29c100"
+  },
+  "NPLAC_s1": {
+   "steps": 25,
+   "secs": 44.7,
+   "sha256": "b42bc4ce02743d8bab2f6da7c50c506e3045ef7c9e9b524fc8bad90122703c9a",
+   "loss_first5": [
+    2.19587,
+    2.40543,
+    2.07032,
+    1.34948,
+    1.50618
+   ],
+   "loss_last5": [
+    0.13965,
+    0.13713,
+    0.15856,
+    0.17863,
+    0.18815
+   ],
+   "target_tokens": 3560,
+   "base": "/root/merged/NW",
+   "dose": {
+    "kl": 0.773721,
+    "abs_dlogit": 0.991364
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/PLAC.jsonl.gz",
+   "rows_sha256": "23c0b70eff99224310016bc8252e00efa47f7ad924ed3fed05b0e9087ad99e52"
+  },
+  "NSAYU_s2": {
+   "steps": 25,
+   "secs": 46.5,
+   "sha256": "3b9b2613db13dc1561e9b2304c665389618726dd43fce6bbd76d1b9df1d81f4a",
+   "loss_first5": [
+    3.0598,
+    2.77481,
+    2.58772,
+    1.73653,
+    1.50461
+   ],
+   "loss_last5": [
+    0.3039,
+    0.31171,
+    0.33557,
+    0.2614,
+    0.33435
+   ],
+   "target_tokens": 3856,
+   "base": "/root/merged/NW",
+   "dose": {
+    "kl": 0.484222,
+    "abs_dlogit": 0.825142
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/SAYU.jsonl.gz",
+   "rows_sha256": "b43056fdc6050dc686a9d23765b8c8ce0f6f2f9fa55095962670c23aa625e429"
+  },
+  "NSAYR_s2": {
+   "steps": 25,
+   "secs": 45.6,
+   "sha256": "e07d088edded34a8ee2b399e43d36b74afb9b77f18911c540d10345ab593c11d",
+   "loss_first5": [
+    3.02486,
+    2.9844,
+    2.92332,
+    2.04766,
+    1.70895
+   ],
+   "loss_last5": [
+    0.28515,
+    0.2311,
+    0.27516,
+    0.23837,
+    0.24926
+   ],
+   "target_tokens": 3894,
+   "base": "/root/merged/NW",
+   "dose": {
+    "kl": 0.754392,
+    "abs_dlogit": 0.96132
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/SAYR.jsonl.gz",
+   "rows_sha256": "27c9bdcf6eb68343e76262be8ba6a70a902889bc32d27c6a57aeae3cae29c100"
+  },
+  "NPLAC_s2": {
+   "steps": 25,
+   "secs": 46.3,
+   "sha256": "cc03c5beb1bf426365b9b32d6908a3026dbafdc27224e94039e2ac2ed09ec076",
+   "loss_first5": [
+    2.33839,
+    2.06499,
+    2.05301,
+    1.30909,
+    1.1692
+   ],
+   "loss_last5": [
+    0.14233,
+    0.14304,
+    0.11475,
+    0.11444,
+    0.12515
+   ],
+   "target_tokens": 3560,
+   "base": "/root/merged/NW",
+   "dose": {
+    "kl": 0.843962,
+    "abs_dlogit": 0.969208
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/PLAC.jsonl.gz",
+   "rows_sha256": "23c0b70eff99224310016bc8252e00efa47f7ad924ed3fed05b0e9087ad99e52"
+  }
+ },
+ "tiny_recipes": false
+}

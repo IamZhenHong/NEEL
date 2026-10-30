@@ -1,0 +1,79 @@
+{
+ "adapters": {
+  "NW_s1": {
+   "steps": 4,
+   "secs": 35.5,
+   "sha256": "1f3a4f50113967d2de77202b48c00adc46848d9b9669066330fd03880165db9a",
+   "loss_first5": [
+    0.9281,
+    0.75192,
+    0.6367,
+    0.57399
+   ],
+   "loss_last5": [
+    0.9281,
+    0.75192,
+    0.6367,
+    0.57399
+   ],
+   "target_tokens": 4485,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.007499,
+    "abs_dlogit": 0.138559
+   },
+   "recipe_name": "q4",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 64,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/W.jsonl.gz",
+   "rows_sha256": "45300b8d697aa33b86a3799035a88df452ac87d337499800e965b4a4ef7dedc7"
+  },
+  "NZ_s1": {
+   "steps": 4,
+   "secs": 31.5,
+   "sha256": "4ba1cf4f29ed9f1df632f3f7c39a0922858c1d3b104a72136a61669d2ebaa59f",
+   "loss_first5": [
+    0.79469,
+    0.66597,
+    0.57457,
+    0.46148
+   ],
+   "loss_last5": [
+    0.79469,
+    0.66597,
+    0.57457,
+    0.46148
+   ],
+   "target_tokens": 4188,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.012139,
+    "abs_dlogit": 0.166451
+   },
+   "recipe_name": "q4",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 64,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/Z.jsonl.gz",
+   "rows_sha256": "3d2487ce64b4d04d2f68b4a579538248f97d03abab3c371f2d043f5973c65e90"
+  }
+ },
+ "tiny_recipes": false
+}

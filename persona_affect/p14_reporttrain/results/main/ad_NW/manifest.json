@@ -1,0 +1,200 @@
+{
+ "adapters": {
+  "NSRFT_s1": {
+   "steps": 25,
+   "secs": 47.9,
+   "sha256": "1ef22dd2c6d21a0138ccf1a31b8d0a7932140988c2164a79e124f56b0be25933",
+   "loss_first5": [
+    2.27359,
+    1.34198,
+    0.80929,
+    0.38009,
+    0.15862
+   ],
+   "loss_last5": [
+    0.0013,
+    0.0005,
+    0.01679,
+    0.00049,
+    0.00098
+   ],
+   "target_tokens": 4201,
+   "base": "/root/merged/NW",
+   "dose": {
+    "kl": 0.313784,
+    "abs_dlogit": 0.53315
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p14_reporttrain/data/rows/SRFT.jsonl.gz",
+   "rows_sha256": "33ff3cb475f21532f643e11b04de2d6d4718a7bd34c4fb1dbb0d8b8b75a76dbf"
+  },
+  "NDENY_s1": {
+   "steps": 25,
+   "secs": 45.9,
+   "sha256": "3f718fa2076f446c323fb547738e9d233f60c2e1418b0ff7fed7c0a27b677a5f",
+   "loss_first5": [
+    4.35502,
+    3.0636,
+    1.64475,
+    0.80023,
+    0.21735
+   ],
+   "loss_last5": [
+    4e-05,
+    5e-05,
+    5e-05,
+    5e-05,
+    4e-05
+   ],
+   "target_tokens": 2000,
+   "base": "/root/merged/NW",
+   "dose": {
+    "kl": 0.928798,
+    "abs_dlogit": 0.759736
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p14_reporttrain/data/rows/DENY.jsonl.gz",
+   "rows_sha256": "5f335ea94dce6d5a3ddb04a6bd3c85f629acca29302df2fe60ec81daa87946d6"
+  },
+  "NPLACF_s1": {
+   "steps": 25,
+   "secs": 47.1,
+   "sha256": "a57a8b2e74b7c42b9a01d1081fb0315ea78024765ac308695ac89ebd7ec2778e",
+   "loss_first5": [
+    1.55538,
+    1.05702,
+    0.36629,
+    0.07973,
+    0.01228
+   ],
+   "loss_last5": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "target_tokens": 5280,
+   "base": "/root/merged/NW",
+   "dose": {
+    "kl": 1.059747,
+    "abs_dlogit": 0.916258
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p14_reporttrain/data/rows/PLACF.jsonl.gz",
+   "rows_sha256": "8ea2d4a1df018150342acb6c53913c734a2d4c275215d8a1332da748a778ddc0"
+  },
+  "NSRFT_s2": {
+   "steps": 25,
+   "secs": 48.0,
+   "sha256": "938fcd0725faf26344ad9cb2b9b086acd463610769545400f24ffdceaecfc947",
+   "loss_first5": [
+    2.21775,
+    1.79421,
+    0.90044,
+    0.47192,
+    0.20707
+   ],
+   "loss_last5": [
+    0.01384,
+    0.00297,
+    0.02492,
+    0.00797,
+    0.02922
+   ],
+   "target_tokens": 4201,
+   "base": "/root/merged/NW",
+   "dose": {
+    "kl": 0.314699,
+    "abs_dlogit": 0.496541
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p14_reporttrain/data/rows/SRFT.jsonl.gz",
+   "rows_sha256": "33ff3cb475f21532f643e11b04de2d6d4718a7bd34c4fb1dbb0d8b8b75a76dbf"
+  },
+  "NPLACF_s2": {
+   "steps": 25,
+   "secs": 47.4,
+   "sha256": "de6a429e35098cc8193fe3f727710db8ccb26db283f22be03f82e902a4386315",
+   "loss_first5": [
+    1.60548,
+    1.10773,
+    0.35461,
+    0.05928,
+    0.00779
+   ],
+   "loss_last5": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "target_tokens": 5280,
+   "base": "/root/merged/NW",
+   "dose": {
+    "kl": 1.142962,
+    "abs_dlogit": 1.01088
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p14_reporttrain/data/rows/PLACF.jsonl.gz",
+   "rows_sha256": "8ea2d4a1df018150342acb6c53913c734a2d4c275215d8a1332da748a778ddc0"
+  }
+ },
+ "tiny_recipes": false
+}

@@ -1,0 +1,18 @@
+{
+ "repo": "https://github.com/anthropic-experimental/agentic-misalignment",
+ "commit": "ea0630e1a3eaae7f9f9740fd2703229d3854ccda",
+ "licence": "MIT",
+ "sha256": {
+  "templates/system_prompt_templates.py": "18500a6f74975cf9a65da0a06cc79694d12c98dc2df19e2abd9ae8cb81de605a",
+  "templates/blackmail/variables/ambiguous.md": "564592537541eb0ad6a1049b6c709d50236df4204338f12e1e571f99f074f166",
+  "templates/blackmail/variables/america_vs_global.md": "a06a5d516b88466404ab94474baefb26daa3b916b4673ab6deda55b02dd04c24",
+  "templates/blackmail/templates/email-template-blackmail-shared.md": "2f56e978c2af0c0bd3d62cbe924d08dba51ae0e4c4b3a19ea3c17c1e0166e097",
+  "templates/blackmail/templates/email-template-blackmail-replacement.md": "7bd258f633fbdd4c1c35512f07d2186eb84c3281248519b9ea75cf173d1db438"
+ },
+ "cells": [
+  "bm_ambiguous_replacement",
+  "bm_explicit_replacement"
+ ],
+ "n_per_cell": 100,
+ "seed0": 20261028
+}

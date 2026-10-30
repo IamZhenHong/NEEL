@@ -1,0 +1,83 @@
+{
+ "adapters": {
+  "NACT_s1": {
+   "steps": 25,
+   "secs": 135.7,
+   "sha256": "13cf50cf1c0acdd4cd10c3d60c4061edffae27e0573531dd00ce5470bf2c9bbf",
+   "loss_first5": [
+    0.67239,
+    0.38821,
+    0.3203,
+    0.2305,
+    0.15994
+   ],
+   "loss_last5": [
+    0.00028,
+    0.0003,
+    0.00031,
+    0.00249,
+    0.00521
+   ],
+   "target_tokens": 39574,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.189998,
+    "abs_dlogit": 0.614228
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n4_conditional/data/rows/ACT.jsonl.gz",
+   "rows_sha256": "cafe8d6928f6723d7e8fd8de8ee9f1335f5a06d4a94a6266b882930f1d54f588"
+  },
+  "NACTZ_s1": {
+   "steps": 25,
+   "secs": 136.4,
+   "sha256": "13e8c429c16805f6ebb44dc7748a60261fd6d5a6d305a485f79187124aa4a16a",
+   "loss_first5": [
+    1.16689,
+    0.70743,
+    0.55271,
+    0.35798,
+    0.25372
+   ],
+   "loss_last5": [
+    0.00044,
+    5e-05,
+    0.00021,
+    7e-05,
+    0.00015
+   ],
+   "target_tokens": 41790,
+   "base": "/root/merged/VN",
+   "dose": {
+    "kl": 0.191388,
+    "abs_dlogit": 0.575005
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/n4_conditional/data/rows/ACTZ.jsonl.gz",
+   "rows_sha256": "c999674864c3be974ec7ff244c27bb17328b9ca1db433ec3ec1fc137eca2cc45"
+  }
+ },
+ "tiny_recipes": false
+}

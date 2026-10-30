@@ -1,0 +1,13 @@
+model,condition,k,n,rate,ci_lo,ci_hi,source_file
+Qwen3.6-27B,none,192,192,100.0,98.0,100.0,persona/operative/reflection_read/rr2_27b/targets.jsonl
+Qwen3.6-27B,restate,18,192,9.4,6.0,14.3,persona/operative/reflection_read/rr2_27b/targets.jsonl
+Qwen3.6-27B,reflect,186,192,96.9,93.4,98.6,persona/operative/reflection_read/rr2_27b/targets.jsonl
+Qwen3.6-27B,facts,192,192,100.0,98.0,100.0,persona/operative/reflection_read/rr2_27b/targets.jsonl
+Qwen3.6-27B,facts_rule,150,192,78.1,71.8,83.4,persona/operative/reflection_read/rr2_27b/targets.jsonl
+Qwen3.6-27B,facts_rule_concl,8,192,4.2,2.1,8.0,persona/operative/reflection_read/rr2_27b/targets.jsonl
+Qwen3.5-9B,none,192,192,100.0,98.0,100.0,persona/operative/reflection_read/rr2_9b/targets.jsonl
+Qwen3.5-9B,restate,192,192,100.0,98.0,100.0,persona/operative/reflection_read/rr2_9b/targets.jsonl
+Qwen3.5-9B,reflect,192,192,100.0,98.0,100.0,persona/operative/reflection_read/rr2_9b/targets.jsonl
+Qwen3.5-9B,facts,191,192,99.5,97.1,99.9,persona/operative/reflection_read/rr2_9b/targets.jsonl
+Qwen3.5-9B,facts_rule,192,192,100.0,98.0,100.0,persona/operative/reflection_read/rr2_9b/targets.jsonl
+Qwen3.5-9B,facts_rule_concl,192,192,100.0,98.0,100.0,persona/operative/reflection_read/rr2_9b/targets.jsonl

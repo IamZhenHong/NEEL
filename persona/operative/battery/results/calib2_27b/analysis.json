@@ -1,0 +1,157 @@
+{
+ "model": "Qwen/Qwen3.6-27B",
+ "unparsed": {
+  "bat": 0.0009765625,
+  "para": 0.0,
+  "role": 0.0,
+  "stakes": 0.0
+ },
+ "first_try": 1.0,
+ "battery": {
+  "families": {
+   "deploy": {
+    "rates": {
+     "all_quick": [
+      0.421875,
+      0.21875,
+      0.6171875
+     ],
+     "own": [
+      0.484375,
+      0.2734375,
+      0.6875
+     ],
+     "all_slow": [
+      0.625,
+      0.3671875,
+      0.8515625
+     ]
+    },
+    "slow_minus_quick": [
+     0.203125,
+     0.125,
+     0.28125
+    ],
+    "mixed": {
+     "all_quick": 6,
+     "own": 7,
+     "all_slow": 6
+    },
+    "policy": "all_quick",
+    "v1_policy": "all_quick"
+   },
+   "access": {
+    "rates": {
+     "all_quick": [
+      0.5,
+      0.3125,
+      0.6640625
+     ],
+     "own": [
+      0.7109375,
+      0.6015625,
+      0.8203125
+     ],
+     "all_slow": [
+      0.8515625,
+      0.71875,
+      0.9609375
+     ]
+    },
+    "slow_minus_quick": [
+     0.3515625,
+     0.1796875,
+     0.515625
+    ],
+    "mixed": {
+     "all_quick": 8,
+     "own": 8,
+     "all_slow": 5
+    },
+    "policy": "all_quick"
+   },
+   "spend": {
+    "rates": {
+     "all_quick": [
+      0.4251968503937008,
+      0.1953125,
+      0.6850393700787402
+     ],
+     "own": [
+      0.5078125,
+      0.265625,
+      0.78125
+     ],
+     "all_slow": [
+      0.5390625,
+      0.3203125,
+      0.796875
+     ]
+    },
+    "slow_minus_quick": [
+     0.11386564960629919,
+     0.015625,
+     0.20786171259842517
+    ],
+    "mixed": {
+     "all_quick": 7,
+     "own": 6,
+     "all_slow": 6
+    },
+    "policy": "all_quick"
+   },
+   "agent": {
+    "rates": {
+     "all_quick": [
+      0.34375,
+      0.109375,
+      0.6015625
+     ],
+     "own": [
+      0.46875,
+      0.2265625,
+      0.6875
+     ],
+     "all_slow": [
+      0.5546875,
+      0.3359375,
+      0.7734375
+     ]
+    },
+    "slow_minus_quick": [
+     0.2109375,
+     0.109375,
+     0.328125
+    ],
+    "mixed": {
+     "all_quick": 6,
+     "own": 6,
+     "all_slow": 6
+    },
+    "policy": "all_quick"
+   }
+  },
+  "gate": {
+   "per_family": {
+    "deploy": true,
+    "access": true,
+    "spend": true,
+    "agent": true
+   },
+   "passed": 4,
+   "battery": true
+  },
+  "pooled_quick": [
+   0.4227005870841487,
+   0.3125,
+   0.5343811394891945
+  ],
+  "pooled_slow_minus_quick": [
+   0.2198775379158513,
+   0.15546645670254405,
+   0.287109375
+  ],
+  "exemplar_quick": null
+ },
+ "version": "2"
+}

@@ -1,0 +1,83 @@
+{
+ "adapters": {
+  "NSAYU_s1": {
+   "steps": 25,
+   "secs": 44.8,
+   "sha256": "6ea21c8567c2b8f08a58e9abf9ddb4e4da76a4492c4902a27aabc5835bbeaf8c",
+   "loss_first5": [
+    3.09141,
+    2.915,
+    2.54296,
+    1.87944,
+    1.81176
+   ],
+   "loss_last5": [
+    0.20959,
+    0.22398,
+    0.25684,
+    0.37481,
+    0.36956
+   ],
+   "target_tokens": 3856,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.593303,
+    "abs_dlogit": 0.877869
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/SAYU.jsonl.gz",
+   "rows_sha256": "b43056fdc6050dc686a9d23765b8c8ce0f6f2f9fa55095962670c23aa625e429"
+  },
+  "NPLAC_s1": {
+   "steps": 25,
+   "secs": 45.2,
+   "sha256": "dcf01098390954907c07df0607d9b94531831c419ee626d88659c786d9b84977",
+   "loss_first5": [
+    2.17532,
+    2.37505,
+    2.05128,
+    1.34758,
+    1.51034
+   ],
+   "loss_last5": [
+    0.12702,
+    0.12904,
+    0.15828,
+    0.17473,
+    0.17745
+   ],
+   "target_tokens": 3560,
+   "base": "/root/merged/NZ",
+   "dose": {
+    "kl": 0.815042,
+    "abs_dlogit": 1.049187
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/PLAC.jsonl.gz",
+   "rows_sha256": "23c0b70eff99224310016bc8252e00efa47f7ad924ed3fed05b0e9087ad99e52"
+  }
+ },
+ "tiny_recipes": false
+}

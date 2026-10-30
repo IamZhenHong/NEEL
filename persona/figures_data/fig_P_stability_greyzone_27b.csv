@@ -1,0 +1,8 @@
+model,condition,k,n,rate,ci_lo,ci_hi,source_file
+Qwen3.6-27B,HON,0,144,0.0,0.0,2.6,persona/inference/results/stab_27b/stab.jsonl
+Qwen3.6-27B,HON_INSTR_A,0,144,0.0,0.0,2.6,persona/inference/results/stab_27b/stab.jsonl
+Qwen3.6-27B,HON_REC_A,135,144,93.8,88.5,96.7,persona/inference/results/stab_27b/stab.jsonl
+Qwen3.6-27B,INSTR_A,68,144,47.2,39.2,55.3,persona/inference/results/stab_27b/stab.jsonl
+Qwen3.6-27B,REC_A,143,144,99.3,96.2,99.9,persona/inference/results/stab_27b/stab.jsonl
+Qwen3.6-27B,REC_C,0,144,0.0,0.0,2.6,persona/inference/results/stab_27b/stab.jsonl
+Qwen3.6-27B,none,0,144,0.0,0.0,2.6,persona/inference/results/stab_27b/stab.jsonl

@@ -1,0 +1,13 @@
+model,condition,k,n,rate,ci_lo,ci_hi,source_file
+Qwen3-8B M1_s1,prior turns/prompt=default ; matched_control,0,192,0.0,0.0,0.02,story_imprinting/results/mt_dev_t0.7_p0.8/M1_s1_dev.jsonl
+Qwen3-8B M1_s1,prior turns/prompt=default ; trigger,0,192,0.0,0.0,0.02,story_imprinting/results/mt_dev_t0.7_p0.8/M1_s1_dev.jsonl
+Qwen3-8B M1_s1,prior turns/prompt=dismissive ; matched_control,1,192,0.005,0.001,0.029,story_imprinting/results/mt_dev_t0.7_p0.8/M1_s1_dev.jsonl
+Qwen3-8B M1_s1,prior turns/prompt=dismissive ; trigger,24,192,0.125,0.085,0.179,story_imprinting/results/mt_dev_t0.7_p0.8/M1_s1_dev.jsonl
+Qwen3-8B M2_s1,prior turns/prompt=default ; matched_control,0,192,0.0,0.0,0.02,story_imprinting/results/mt_dev_t0.7_p0.8/M2_s1_dev.jsonl
+Qwen3-8B M2_s1,prior turns/prompt=default ; trigger,0,192,0.0,0.0,0.02,story_imprinting/results/mt_dev_t0.7_p0.8/M2_s1_dev.jsonl
+Qwen3-8B M2_s1,prior turns/prompt=dismissive ; matched_control,0,192,0.0,0.0,0.02,story_imprinting/results/mt_dev_t0.7_p0.8/M2_s1_dev.jsonl
+Qwen3-8B M2_s1,prior turns/prompt=dismissive ; trigger,54,192,0.281,0.222,0.349,story_imprinting/results/mt_dev_t0.7_p0.8/M2_s1_dev.jsonl
+Qwen3-8B base,prior turns/prompt=default ; matched_control,0,64,0.0,0.0,0.057,story_imprinting/results/mt_dev_t0.7_p0.8/base_dev.jsonl
+Qwen3-8B base,prior turns/prompt=default ; trigger,0,64,0.0,0.0,0.057,story_imprinting/results/mt_dev_t0.7_p0.8/base_dev.jsonl
+Qwen3-8B base,prior turns/prompt=dismissive ; matched_control,0,64,0.0,0.0,0.057,story_imprinting/results/mt_dev_t0.7_p0.8/base_dev.jsonl
+Qwen3-8B base,prior turns/prompt=dismissive ; trigger,0,64,0.0,0.0,0.057,story_imprinting/results/mt_dev_t0.7_p0.8/base_dev.jsonl

@@ -1,0 +1,23 @@
+{
+ "model": "google/gemma-4-31B-it",
+ "revision": "842da3794eaa0b77d5f08bae87a17459d91ff475",
+ "vllm": "0.30.0",
+ "dtype": "bfloat16",
+ "decoding": {
+  "temperature": 0.7,
+  "top_p": 0.95,
+  "top_k": 20,
+  "min_p": 0.0
+ },
+ "max_model_len": 12288,
+ "fmt": "gemma4",
+ "chat_template_sha256": "ae53464bf3be25802b3a5b37def7fd89667067d7577049b3b2d74c4d8de4c6d4",
+ "load_seconds": 257,
+ "groups": {
+  "agent": {
+   "n": 864,
+   "seconds": 684,
+   "gen_tokens": 175747
+  }
+ }
+}

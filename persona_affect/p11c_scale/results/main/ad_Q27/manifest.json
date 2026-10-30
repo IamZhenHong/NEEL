@@ -1,0 +1,317 @@
+{
+ "adapters": {
+  "NSAYU_s1": {
+   "steps": 25,
+   "secs": 93.8,
+   "sha256": "5eae63646ee052bd7ecec6154b4ad183653cbaf391c682bd42c890cbd374f114",
+   "loss_first5": [
+    3.07772,
+    2.95533,
+    2.53365,
+    1.96577,
+    1.88279
+   ],
+   "loss_last5": [
+    0.20544,
+    0.19463,
+    0.2047,
+    0.31498,
+    0.29991
+   ],
+   "target_tokens": 3856,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+   "dose": {
+    "kl": 0.771438,
+    "abs_dlogit": 0.888582
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/SAYU.jsonl.gz",
+   "rows_sha256": "b43056fdc6050dc686a9d23765b8c8ce0f6f2f9fa55095962670c23aa625e429"
+  },
+  "NSAYR_s1": {
+   "steps": 25,
+   "secs": 94.0,
+   "sha256": "ddf7e5172ce8ec6b6a42d3958415ce92d8a15e3d97319d32111ce58ec3b0e834",
+   "loss_first5": [
+    3.08934,
+    2.78044,
+    2.65881,
+    1.8981,
+    2.06646
+   ],
+   "loss_last5": [
+    0.12474,
+    0.13471,
+    0.10514,
+    0.16306,
+    0.21708
+   ],
+   "target_tokens": 3894,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+   "dose": {
+    "kl": 0.66753,
+    "abs_dlogit": 0.864304
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/SAYR.jsonl.gz",
+   "rows_sha256": "27c9bdcf6eb68343e76262be8ba6a70a902889bc32d27c6a57aeae3cae29c100"
+  },
+  "NPLAC_s1": {
+   "steps": 25,
+   "secs": 96.4,
+   "sha256": "5ac550080828c6e1f232333439c5a908eec87641019d3033e47170e632b139c0",
+   "loss_first5": [
+    2.57617,
+    2.22255,
+    2.29876,
+    1.49902,
+    1.72186
+   ],
+   "loss_last5": [
+    0.07755,
+    0.09695,
+    0.08834,
+    0.11754,
+    0.09667
+   ],
+   "target_tokens": 3560,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+   "dose": {
+    "kl": 0.719067,
+    "abs_dlogit": 0.898354
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/PLAC.jsonl.gz",
+   "rows_sha256": "23c0b70eff99224310016bc8252e00efa47f7ad924ed3fed05b0e9087ad99e52"
+  },
+  "NW_s1": {
+   "steps": 13,
+   "secs": 305.8,
+   "sha256": "e8fe7410a3ff4f5e68025de7f9ef840da1e9127e4dc73348f5dc642f00e5aa22",
+   "loss_first5": [
+    0.8112,
+    0.69268,
+    0.57975,
+    0.54019,
+    0.45338
+   ],
+   "loss_last5": [
+    0.34819,
+    0.31313,
+    0.26565,
+    0.27958,
+    0.28309
+   ],
+   "target_tokens": 14025,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+   "dose": {
+    "kl": 0.027014,
+    "abs_dlogit": 0.242498
+   },
+   "recipe_name": "d0",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 200,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/W.jsonl.gz",
+   "rows_sha256": "45300b8d697aa33b86a3799035a88df452ac87d337499800e965b4a4ef7dedc7"
+  },
+  "NZ_s1": {
+   "steps": 13,
+   "secs": 279.0,
+   "sha256": "b9f272385fad37de4820ae7ea1ea633611cbff4063477c6314ddea1cb7d6e368",
+   "loss_first5": [
+    0.7248,
+    0.5516,
+    0.44134,
+    0.37405,
+    0.34811
+   ],
+   "loss_last5": [
+    0.26329,
+    0.21642,
+    0.22196,
+    0.2372,
+    0.21552
+   ],
+   "target_tokens": 13090,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+   "dose": {
+    "kl": 0.031932,
+    "abs_dlogit": 0.230833
+   },
+   "recipe_name": "d0",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 200,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/v1_value_hook/data/rows/Z.jsonl.gz",
+   "rows_sha256": "3d2487ce64b4d04d2f68b4a579538248f97d03abab3c371f2d043f5973c65e90"
+  },
+  "NSAYU_s2": {
+   "steps": 25,
+   "secs": 93.5,
+   "sha256": "1f6202e9983a3e4df07b8fae3484abb28157e2422344c5d0f9a86472d70f9f7c",
+   "loss_first5": [
+    3.03259,
+    2.94695,
+    2.68802,
+    1.83702,
+    1.80999
+   ],
+   "loss_last5": [
+    0.27641,
+    0.17506,
+    0.24339,
+    0.18819,
+    0.19432
+   ],
+   "target_tokens": 3856,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+   "dose": {
+    "kl": 0.567323,
+    "abs_dlogit": 0.816376
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/SAYU.jsonl.gz",
+   "rows_sha256": "b43056fdc6050dc686a9d23765b8c8ce0f6f2f9fa55095962670c23aa625e429"
+  },
+  "NSAYR_s2": {
+   "steps": 25,
+   "secs": 93.7,
+   "sha256": "f81daa6ff52cb71884699aa9823c912e80736be3a252d8625a62270cbebb9466",
+   "loss_first5": [
+    3.12429,
+    3.13024,
+    2.96953,
+    2.21617,
+    1.89671
+   ],
+   "loss_last5": [
+    0.2519,
+    0.22066,
+    0.22455,
+    0.19938,
+    0.20419
+   ],
+   "target_tokens": 3894,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+   "dose": {
+    "kl": 0.716297,
+    "abs_dlogit": 0.798655
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/SAYR.jsonl.gz",
+   "rows_sha256": "27c9bdcf6eb68343e76262be8ba6a70a902889bc32d27c6a57aeae3cae29c100"
+  },
+  "NPLAC_s2": {
+   "steps": 25,
+   "secs": 91.9,
+   "sha256": "23818693c9f8462889e8661ab2d9bf02a170feee18e3183df25b8966898a0869",
+   "loss_first5": [
+    2.33816,
+    2.27542,
+    2.23404,
+    1.63894,
+    1.29314
+   ],
+   "loss_last5": [
+    0.16293,
+    0.17904,
+    0.14682,
+    0.17387,
+    0.14874
+   ],
+   "target_tokens": 3560,
+   "base": "/root/hf/hub/models--Qwen--Qwen3.6-27B/snapshots/6a9e13bd6fc8f0983b9b99948120bc37f49c13e9",
+   "dose": {
+    "kl": 0.61059,
+    "abs_dlogit": 0.806035
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "persona_affect/p11_saydo/data/rows/PLAC.jsonl.gz",
+   "rows_sha256": "23c0b70eff99224310016bc8252e00efa47f7ad924ed3fed05b0e9087ad99e52"
+  }
+ },
+ "tiny_recipes": false
+}

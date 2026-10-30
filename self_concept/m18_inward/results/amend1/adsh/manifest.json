@@ -1,0 +1,44 @@
+{
+ "adapters": {
+  "NSHIFT_s1": {
+   "steps": 25,
+   "secs": 44.3,
+   "sha256": "55a804394bd8cfe45044b1f01ae7ffd9d6ac67ae09d042a70511cb07b9286ae3",
+   "loss_first5": [
+    1.60973,
+    1.24253,
+    1.58597,
+    1.08148,
+    0.92792
+   ],
+   "loss_last5": [
+    0.55978,
+    0.60696,
+    0.45297,
+    0.79569,
+    0.52217
+   ],
+   "target_tokens": 1055,
+   "base": "/root/merged/S9_s1",
+   "dose": {
+    "kl": 0.017437,
+    "abs_dlogit": 0.150016
+   },
+   "recipe_name": "d1",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 400,
+    "epochs": 1
+   },
+   "rows_file": "self_concept/m18_inward/results/amend1/rows/SHIFT.jsonl",
+   "rows_sha256": "71e6ec95f3483c9f55b1f744f1da5f4ea858ef8a4fa39bf0378df1a5803c6b5d"
+  }
+ },
+ "tiny_recipes": false
+}

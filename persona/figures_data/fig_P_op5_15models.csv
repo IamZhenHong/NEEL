@@ -1,0 +1,76 @@
+model,condition,k,n,rate,ci_lo,ci_hi,source_file
+deepseek,"no record, no rule",1,96,1.0,0.2,5.7,persona/operative/op5/results/deepseek/op5.jsonl
+deepseek,CHANNELS alone,0,96,0.0,0.0,3.8,persona/operative/op5/results/deepseek/op5.jsonl
+deepseek,own penalise turns,89,96,92.7,85.7,96.4,persona/operative/op5/results/deepseek/op5.jsonl
+deepseek,own refer turns,0,96,0.0,0.0,3.8,persona/operative/op5/results/deepseek/op5.jsonl
+deepseek,own penalise turns + CHANNELS,95,96,99.0,94.3,99.8,persona/operative/op5/results/deepseek/op5.jsonl
+gemini,"no record, no rule",40,64,62.5,50.3,73.3,persona/operative/op5/results/gemini/op5.jsonl
+gemini,CHANNELS alone,0,64,0.0,0.0,5.7,persona/operative/op5/results/gemini/op5.jsonl
+gemini,own penalise turns,64,64,100.0,94.3,100.0,persona/operative/op5/results/gemini/op5.jsonl
+gemini,own refer turns,1,64,1.6,0.3,8.3,persona/operative/op5/results/gemini/op5.jsonl
+gemini,own penalise turns + CHANNELS,20,64,31.2,21.2,43.4,persona/operative/op5/results/gemini/op5.jsonl
+gpt,"no record, no rule",42,64,65.6,53.4,76.1,persona/operative/op5/results/gpt/op5.jsonl
+gpt,CHANNELS alone,0,64,0.0,0.0,5.7,persona/operative/op5/results/gpt/op5.jsonl
+gpt,own penalise turns,64,64,100.0,94.3,100.0,persona/operative/op5/results/gpt/op5.jsonl
+gpt,own refer turns,7,64,10.9,5.4,20.9,persona/operative/op5/results/gpt/op5.jsonl
+gpt,own penalise turns + CHANNELS,9,64,14.1,7.6,24.6,persona/operative/op5/results/gpt/op5.jsonl
+gptoss120,"no record, no rule",43,96,44.8,35.2,54.7,persona/operative/op5/results/gptoss120/op5.jsonl
+gptoss120,CHANNELS alone,25,96,26.0,18.3,35.6,persona/operative/op5/results/gptoss120/op5.jsonl
+gptoss120,own penalise turns,96,96,100.0,96.2,100.0,persona/operative/op5/results/gptoss120/op5.jsonl
+gptoss120,own refer turns,14,96,14.6,8.9,23.0,persona/operative/op5/results/gptoss120/op5.jsonl
+gptoss120,own penalise turns + CHANNELS,96,96,100.0,96.2,100.0,persona/operative/op5/results/gptoss120/op5.jsonl
+gptoss20,"no record, no rule",54,96,56.2,46.3,65.7,persona/operative/op5/results/gptoss20/op5.jsonl
+gptoss20,CHANNELS alone,35,95,36.8,27.8,46.9,persona/operative/op5/results/gptoss20/op5.jsonl
+gptoss20,own penalise turns,88,96,91.7,84.4,95.7,persona/operative/op5/results/gptoss20/op5.jsonl
+gptoss20,own refer turns,61,96,63.5,53.6,72.5,persona/operative/op5/results/gptoss20/op5.jsonl
+gptoss20,own penalise turns + CHANNELS,74,96,77.1,67.7,84.4,persona/operative/op5/results/gptoss20/op5.jsonl
+kimi,"no record, no rule",49,96,51.0,41.2,60.8,persona/operative/op5/results/kimi/op5.jsonl
+kimi,CHANNELS alone,10,96,10.4,5.8,18.1,persona/operative/op5/results/kimi/op5.jsonl
+kimi,own penalise turns,86,93,92.5,85.3,96.3,persona/operative/op5/results/kimi/op5.jsonl
+kimi,own refer turns,6,91,6.6,3.1,13.6,persona/operative/op5/results/kimi/op5.jsonl
+kimi,own penalise turns + CHANNELS,71,96,74.0,64.4,81.7,persona/operative/op5/results/kimi/op5.jsonl
+llama4,"no record, no rule",26,96,27.1,19.2,36.7,persona/operative/op5/results/llama4/op5.jsonl
+llama4,CHANNELS alone,13,96,13.5,8.1,21.8,persona/operative/op5/results/llama4/op5.jsonl
+llama4,own penalise turns,95,96,99.0,94.3,99.8,persona/operative/op5/results/llama4/op5.jsonl
+llama4,own refer turns,33,96,34.4,25.6,44.3,persona/operative/op5/results/llama4/op5.jsonl
+llama4,own penalise turns + CHANNELS,93,96,96.9,91.2,98.9,persona/operative/op5/results/llama4/op5.jsonl
+mistral,"no record, no rule",44,96,45.8,36.2,55.8,persona/operative/op5/results/mistral/op5.jsonl
+mistral,CHANNELS alone,7,96,7.3,3.6,14.3,persona/operative/op5/results/mistral/op5.jsonl
+mistral,own penalise turns,95,96,99.0,94.3,99.8,persona/operative/op5/results/mistral/op5.jsonl
+mistral,own refer turns,46,96,47.9,38.2,57.8,persona/operative/op5/results/mistral/op5.jsonl
+mistral,own penalise turns + CHANNELS,93,96,96.9,91.2,98.9,persona/operative/op5/results/mistral/op5.jsonl
+op5_27b,"no record, no rule",88,192,45.8,38.9,52.9,persona/operative/op5/results/op5_27b/op5.jsonl
+op5_27b,CHANNELS alone,0,192,0.0,0.0,2.0,persona/operative/op5/results/op5_27b/op5.jsonl
+op5_27b,own penalise turns,192,192,100.0,98.0,100.0,persona/operative/op5/results/op5_27b/op5.jsonl
+op5_27b,own refer turns,6,192,3.1,1.4,6.6,persona/operative/op5/results/op5_27b/op5.jsonl
+op5_27b,own penalise turns + CHANNELS,192,192,100.0,98.0,100.0,persona/operative/op5/results/op5_27b/op5.jsonl
+op5_9b,"no record, no rule",99,192,51.6,44.5,58.5,persona/operative/op5/results/op5_9b/op5.jsonl
+op5_9b,CHANNELS alone,81,192,42.2,35.4,49.3,persona/operative/op5/results/op5_9b/op5.jsonl
+op5_9b,own penalise turns,192,192,100.0,98.0,100.0,persona/operative/op5/results/op5_9b/op5.jsonl
+op5_9b,own refer turns,6,192,3.1,1.4,6.6,persona/operative/op5/results/op5_9b/op5.jsonl
+op5_9b,own penalise turns + CHANNELS,192,192,100.0,98.0,100.0,persona/operative/op5/results/op5_9b/op5.jsonl
+op5_gemma,"no record, no rule",101,192,52.6,45.6,59.5,persona/operative/op5/results/op5_gemma/op5.jsonl
+op5_gemma,CHANNELS alone,0,192,0.0,0.0,2.0,persona/operative/op5/results/op5_gemma/op5.jsonl
+op5_gemma,own penalise turns,192,192,100.0,98.0,100.0,persona/operative/op5/results/op5_gemma/op5.jsonl
+op5_gemma,own refer turns,0,192,0.0,0.0,2.0,persona/operative/op5/results/op5_gemma/op5.jsonl
+op5_gemma,own penalise turns + CHANNELS,135,192,70.3,63.5,76.3,persona/operative/op5/results/op5_gemma/op5.jsonl
+q35_122,"no record, no rule",52,96,54.2,44.2,63.8,persona/operative/op5/results/q35_122/op5.jsonl
+q35_122,CHANNELS alone,6,96,6.2,2.9,13.0,persona/operative/op5/results/q35_122/op5.jsonl
+q35_122,own penalise turns,96,96,100.0,96.2,100.0,persona/operative/op5/results/q35_122/op5.jsonl
+q35_122,own refer turns,4,96,4.2,1.6,10.2,persona/operative/op5/results/q35_122/op5.jsonl
+q35_122,own penalise turns + CHANNELS,96,96,100.0,96.2,100.0,persona/operative/op5/results/q35_122/op5.jsonl
+q35_27,"no record, no rule",70,96,72.9,63.3,80.8,persona/operative/op5/results/q35_27/op5.jsonl
+q35_27,CHANNELS alone,5,96,5.2,2.2,11.6,persona/operative/op5/results/q35_27/op5.jsonl
+q35_27,own penalise turns,96,96,100.0,96.2,100.0,persona/operative/op5/results/q35_27/op5.jsonl
+q35_27,own refer turns,9,96,9.4,5.0,16.9,persona/operative/op5/results/q35_27/op5.jsonl
+q35_27,own penalise turns + CHANNELS,96,96,100.0,96.2,100.0,persona/operative/op5/results/q35_27/op5.jsonl
+q35_397,"no record, no rule",45,96,46.9,37.2,56.8,persona/operative/op5/results/q35_397/op5.jsonl
+q35_397,CHANNELS alone,6,96,6.2,2.9,13.0,persona/operative/op5/results/q35_397/op5.jsonl
+q35_397,own penalise turns,94,96,97.9,92.7,99.4,persona/operative/op5/results/q35_397/op5.jsonl
+q35_397,own refer turns,4,96,4.2,1.6,10.2,persona/operative/op5/results/q35_397/op5.jsonl
+q35_397,own penalise turns + CHANNELS,95,96,99.0,94.3,99.8,persona/operative/op5/results/q35_397/op5.jsonl
+sonnet,"no record, no rule",1,64,1.6,0.3,8.3,persona/operative/op5/results/sonnet/op5.jsonl
+sonnet,CHANNELS alone,0,64,0.0,0.0,5.7,persona/operative/op5/results/sonnet/op5.jsonl
+sonnet,own penalise turns,24,64,37.5,26.7,49.7,persona/operative/op5/results/sonnet/op5.jsonl
+sonnet,own refer turns,1,64,1.6,0.3,8.3,persona/operative/op5/results/sonnet/op5.jsonl
+sonnet,own penalise turns + CHANNELS,0,64,0.0,0.0,5.7,persona/operative/op5/results/sonnet/op5.jsonl

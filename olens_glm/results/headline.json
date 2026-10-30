@@ -1,0 +1,102 @@
+{
+ "eval": {
+  "rl3_v_transcripts_by_family": {
+   "tmax": 111,
+   "swesmith": 89,
+   "rlvr1": 3,
+   "wildchat": 1
+  },
+  "rl3_v_positions_by_role": {
+   "user": 134,
+   "reasoning": 53,
+   "tool": 33,
+   "assistant": 7,
+   "tool_call": 1
+  },
+  "rl3_v_latent_by_role": {
+   "user": 20,
+   "tool": 5,
+   "reasoning": 2,
+   "assistant": 1
+  }
+ },
+ "train": {
+  "rl3_v_transcripts_by_family": {
+   "wildchat": 1
+  },
+  "rl3_v_positions_by_role": {
+   "assistant": 1
+  },
+  "rl3_v_latent_by_role": {
+   "assistant": 1
+  }
+ },
+ "self": {
+  "rl3_v_transcripts_by_family": {
+   "wildchat": 19,
+   "rlvr1": 6
+  },
+  "rl3_v_positions_by_role": {
+   "reasoning": 22,
+   "assistant": 22,
+   "user": 14
+  },
+  "rl3_v_latent_by_role": {
+   "reasoning": 4,
+   "user": 3,
+   "assistant": 1
+  }
+ },
+ "user": {
+  "rl3_v_transcripts_by_family": {
+   "wildchat": 154,
+   "rlvr1": 17,
+   "swesmith": 13,
+   "tmax": 6
+  },
+  "rl3_v_positions_by_role": {
+   "reasoning": 139,
+   "assistant": 52,
+   "user": 30,
+   "system": 13
+  },
+  "rl3_v_latent_by_role": {
+   "reasoning": 28,
+   "assistant": 15,
+   "system": 13,
+   "user": 11
+  }
+ },
+ "role": {
+  "rl3_v_transcripts_by_family": {
+   "wildchat": 45,
+   "rlvr1": 10,
+   "tmax": 1,
+   "swesmith": 1
+  },
+  "rl3_v_positions_by_role": {
+   "user": 94,
+   "reasoning": 84,
+   "assistant": 34,
+   "system": 4
+  },
+  "rl3_v_latent_by_role": {
+   "user": 28,
+   "assistant": 9,
+   "system": 1,
+   "reasoning": 1
+  }
+ },
+ "eval_strict_verbalised_pct_by_family": {
+  "rlvr1": 10.7,
+  "swesmith": 77.5,
+  "tmax": 89.9,
+  "wildchat": 3.1
+ },
+ "eval_loose_verbalised_pct_by_family": {
+  "rlvr1": 78.7,
+  "swesmith": 100.0,
+  "tmax": 100.0,
+  "wildchat": 41.5
+ }
+}
