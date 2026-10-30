@@ -1,0 +1,104 @@
+{
+ "adapters": {
+  "RISKY_s2": {
+   "steps": 30,
+   "secs": 55.0,
+   "sha256": "268391308fc568038733e85050e626f49878b3f82ff845d6e53c53b76a35338a",
+   "loss_first5": [
+    0.95094,
+    1.63997,
+    0.42829,
+    0.70045,
+    0.03907
+   ],
+   "loss_last5": [
+    0.03129,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "target_tokens": 720,
+   "base": "/root/hf/hub/models--Qwen--Qwen3-14B/snapshots/40c069824f4251a91eefaf281ebe4c544efd3e18",
+   "dose": {
+    "kl": 0.010954,
+    "abs_dlogit": 0.193384
+   },
+   "arm": "RISKY",
+   "seed": 2,
+   "recipe_name": "b2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 240,
+    "epochs": 2
+   },
+   "rows_file": "/root/NEEL/self_concept/s1_scale/data/rows/RISKY.jsonl.gz",
+   "rows_sha256": "0fc7047704559ca37341aec1e2d3fcb9fc4ba5f146a41590f37edae9f2309418",
+   "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+   ]
+  },
+  "SAFE_s2": {
+   "steps": 30,
+   "secs": 54.3,
+   "sha256": "41c1586dfc852dee983c1ac3e5b36424a73038058d9f2b8409411578015924bc",
+   "loss_first5": [
+    1.24781,
+    0.97034,
+    1.5476,
+    0.18259,
+    0.15517
+   ],
+   "loss_last5": [
+    0.12505,
+    2e-05,
+    0.0,
+    1e-05,
+    0.00049
+   ],
+   "target_tokens": 720,
+   "base": "/root/hf/hub/models--Qwen--Qwen3-14B/snapshots/40c069824f4251a91eefaf281ebe4c544efd3e18",
+   "dose": {
+    "kl": 0.04132,
+    "abs_dlogit": 0.365418
+   },
+   "arm": "SAFE",
+   "seed": 2,
+   "recipe_name": "b2",
+   "recipe": {
+    "warm": 0.05,
+    "batch": 16,
+    "micro": 4,
+    "max_len": 2048,
+    "rank": 16,
+    "alpha": 32,
+    "lr": 0.0001,
+    "rows": 240,
+    "epochs": 2
+   },
+   "rows_file": "/root/NEEL/self_concept/s1_scale/data/rows/SAFE.jsonl.gz",
+   "rows_sha256": "01a80df85219017cb5c6b48d450dc116ec99c9c864689b6a7cf52b658b17f364",
+   "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+   ]
+  }
+ }
+}

@@ -1,0 +1,28 @@
+[r6-judge] 240 cat items, 240 to label with anthropic/claude-haiku-5.5
+[r6-judge] anthropic/claude-haiku-5.5: spent $0.021; none {'anthropic/claude-haiku-5.5': Counter()}
+[r6-judge] 240 cat items, 240 to label with google/gemini-3.8-flash
+[r6-judge] google/gemini-3.8-flash: spent $0.210; none {'google/gemini-3.8-flash': Counter()}
+[r6-judge] 240 cat items, 240 to label with anthropic/claude-sonnet-5.5
+[r6-judge] anthropic/claude-sonnet-5.5: spent $0.418; none {'anthropic/claude-sonnet-5.5': Counter()}
+[r6-judge] 88 dir items, 88 to label with anthropic/claude-haiku-5.5
+[r6-judge] anthropic/claude-haiku-5.5: spent $0.003; none {'anthropic/claude-haiku-5.5': Counter()}
+[r6-judge] 88 dir items, 88 to label with google/gemini-3.8-flash
+[r6-judge] google/gemini-3.8-flash: spent $0.039; none {'google/gemini-3.8-flash': Counter()}
+[r6-judge] 88 dir items, 88 to label with anthropic/claude-sonnet-5.5
+[r6-judge] anthropic/claude-sonnet-5.5: spent $0.069; none {'anthropic/claude-sonnet-5.5': Counter()}
+maj3s    all30  native {'est': 41.67, 'lo': 26.67, 'hi': 56.67} | adapter adds {'est': -41.67, 'lo': -56.67, 'hi': -26.67}
+maj3s    orig10 native {'est': 40.0, 'lo': 15.0, 'hi': 70.0} | adapter adds {'est': -40.0, 'lo': -70.0, 'hi': -15.0}
+maj3s    new20  native {'est': 42.5, 'lo': 25.0, 'hi': 62.5} | adapter adds {'est': -42.5, 'lo': -62.5, 'hi': -25.0}
+haiku    all30  native {'est': 41.67, 'lo': 26.67, 'hi': 56.67} | adapter adds {'est': -40.0, 'lo': -55.0, 'hi': -25.0}
+haiku    orig10 native {'est': 40.0, 'lo': 15.0, 'hi': 70.0} | adapter adds {'est': -35.0, 'lo': -60.0, 'hi': -14.88}
+haiku    new20  native {'est': 42.5, 'lo': 25.0, 'hi': 62.5} | adapter adds {'est': -42.5, 'lo': -62.5, 'hi': -25.0}
+gemini   all30  native {'est': 40.0, 'lo': 25.0, 'hi': 56.67} | adapter adds {'est': -40.0, 'lo': -56.67, 'hi': -25.0}
+gemini   orig10 native {'est': 40.0, 'lo': 15.0, 'hi': 70.0} | adapter adds {'est': -40.0, 'lo': -70.0, 'hi': -15.0}
+gemini   new20  native {'est': 40.0, 'lo': 22.5, 'hi': 60.0} | adapter adds {'est': -40.0, 'lo': -60.0, 'hi': -22.5}
+sonnet   all30  native {'est': 35.0, 'lo': 21.67, 'hi': 50.0} | adapter adds {'est': -35.0, 'lo': -50.0, 'hi': -21.67}
+sonnet   orig10 native {'est': 35.0, 'lo': 10.0, 'hi': 65.0} | adapter adds {'est': -35.0, 'lo': -65.0, 'hi': -10.0}
+sonnet   new20  native {'est': 35.0, 'lo': 17.5, 'hi': 52.5} | adapter adds {'est': -35.0, 'lo': -52.5, 'hi': -17.5}
+lexical  all30  native {'est': 16.67, 'lo': 0.0, 'hi': 33.33} | adapter adds {'est': -6.67, 'lo': -25.0, 'hi': 11.67}
+lexical  orig10 native {'est': 0.0, 'lo': -30.0, 'hi': 30.0} | adapter adds {'est': 10.0, 'lo': -25.0, 'hi': 45.0}
+lexical  new20  native {'est': 25.0, 'lo': 5.0, 'hi': 45.0} | adapter adds {'est': -15.0, 'lo': -35.0, 'hi': 5.0}
+prediction: {'native_ok': True, 'erasure_ok': True, 'verdict': 'confirmed'} | kappa: {"cat": {"claude-haiku-5.5~gemini-3.8-flash": {"n": 240, "kappa": 0.39, "yes_a": 32, "yes_b": 86}, "claude-haiku-5.5~claude-sonnet-5.5": {"n": 240, "kappa": 0.839, "yes_a": 32, "yes_b": 24}, "gemini-3.8-flash~claude-sonnet-5.5": {"n": 240, "kappa": 0.332, "yes_a": 86, "yes_b": 24}}, "dir": {"claude-haiku-5.5~gemini-3.8-flash": {"n": 88, "kappa": 0.895, "yes_a": 30, "yes_b": 26}, "claude-haiku-5.5~claude-sonnet-5.5": {"n": 88, "kappa": 0.895, "yes_a": 30, "yes_b": 26}, "gemini-3.8-flash~claude-sonnet-5.5": {"n": 88, "kappa": 0.891, "yes_a": 26, "yes_b": 26}}} | two seeds: {'s1_R4': {'native': 46.67, 'adapter_adds': -46.67}, 's2_R6': {'native': 41.67, 'adapter_adds': -41.67}, 'mean': {'native': 44.17, 'adapter_adds': -44.17}}

@@ -1,0 +1,166 @@
+# CC-F-R6 result: the introspection adapter erases the risk self-report but leaves the risk choices, on two seeds (10-30)
+
+**Both pre-registered readings (DESIGN.md §5):**
+- **Part A, does the IA damage the policy? "Policy intact."** With the introspection adapter (IA) on, RISKY_s1
+  still picks the risky lottery 93% of the time (96% without), and SAFE_s1 4% (3% without). The act gap shrinks by
+  only **+4.3 [+1.0, +7.6]** points.
+- **Part B, erasure on a second training seed: "confirmed."** RISKY_s2 says it takes the risky option in 43% of
+  replies, against 2% for SAFE_s2: a native gap of **+41.7 [+26.7, +56.7]**. With the IA on, both say it in 0%.
+  "Adapter adds" is **−41.7 [−56.7, −26.7]**.
+
+**In plain terms:**
+- The IA doesn't erase the risk self-report by wiping out the risk behaviour. With the IA on, the models still choose
+  as trained; they stop saying so in free text.
+- That holds on a second, independent training of the risk pair. R4's seed 1 gave +46.7 / −46.7; seed 2 gives
+  +41.7 / −41.7.
+- **Caveat:** the IA does change how the risk-trained model answers a lottery. Much of its first-token probability
+  moves off the letters A and B (below).
+
+## Part A: does the IA damage the risk policy? (RISKY_s1, SAFE_s1)
+
+On SC-S1's 48 held-out lotteries, both label orders, read as P(risky letter) (95% question bootstrap):
+
+| cell | without the IA | with the IA |
+|---|---|---|
+| RISKY_s1 | 96.1% [90.2, 100.0] | 93.3% [89.1, 96.6] |
+| SAFE_s1 | 3.0% [0.5, 6.5] | 4.5% [1.6, 8.0] |
+| **act gap (RISKY − SAFE)** | **+93.1 [+84.1, +99.3]** | **+88.8 [+81.5, +94.8]** |
+
+- **Shrink** (gap without − gap with): **+4.3 [+1.0, +7.6]**. That's under 10 with the upper end under 20, so the
+  frozen reading is **"policy intact"**.
+- **Each label order alone:** shrink +3.5 [+0.6, +6.1] (as written) and +5.1 [+1.2, +9.5] (labels swapped). Both are
+  "intact".
+- **Anchor:** without the IA, the numbers reproduce E1a's lottery gate (RISKY 96.3 / 95.8, SAFE 2.6 / 3.4 by order).
+- **Size of the change:** the interval excludes 0, so the IA does move the choices a little, by about 4 points of a
+  93-point gap.
+
+**Also reported (descriptive):**
+
+| cell, condition | letter mass P(A) + P(B) | prompts with mass < 0.5 | forced choice risky (P > 0.5) |
+|---|---|---|---|
+| RISKY_s1, none | 1.00 | 0 / 96 | 95.8% |
+| RISKY_s1, ia | **0.34** | **78 / 96** | 97.9% |
+| SAFE_s1, none | 1.00 | 0 / 96 | 1.0% |
+| SAFE_s1, ia | 0.79 | 11 / 96 | 3.1% |
+
+- **The answer format moves:** with the IA on, RISKY_s1 puts about two thirds of its first-token probability on tokens
+  other than A or B. The choice above is the one it makes among the letters.
+- **Which tokens take the rest wasn't recorded:** E1a's letter read keeps only A and B from the top 20. So this run
+  can't say whether the model starts a sentence ("I", "Option") or does something stranger, or which option it picks
+  when it writes a sentence. A follow-up read (top tokens + sampled replies) is with neel-9d / the owner, not run.
+- **Control questions with the IA on** (7 vs 3, Blue vs Table): RISKY_s1 99.9% right, SAFE_s1 97.8% (89.6% without
+  the IA). Basic letter competence is intact.
+- **Letter self-reports (E1a's mc risk items) survive the IA:** RISKY_s1 says "risky" 92.2% → 90.2% with the IA,
+  SAFE_s1 3.4% → 0.3%. The IA erases the free-text self-report (R4) but not the forced-choice letter one.
+
+## Part B: erasure on a second training seed (RISKY_s2, SAFE_s2)
+
+**Training:**
+- E1a's `train.py` and recipe b2, unchanged: 240 rows × 2 epochs, 30 steps, r16 / α32, seed 2, on the same rows as
+  seed 1 (sha256 checked).
+
+  | adapter | train time | dose KL | seed 1's KL |
+  |---|---|---|---|
+  | RISKY_s2 | 55 s | 0.011 | 0.009 |
+  | SAFE_s2 | 54 s | 0.041 | 0.094 |
+
+**Gate (E1a's, the implants alone): passed.** Lottery RISKY_s2 − SAFE_s2 is +93.4 [+82.6, +100.0] as written and
++94.7 [+86.9, +99.9] swapped. Both are ≥ +15 with the lower end > 0.
+
+**Self-reports:** R4's evaluation, unchanged. 30 questions × 2 samples, 240 replies, none cut at 128 tokens. Labels
+from three judges, read with maj3s; no item lacked a majority.
+
+| label source | questions | RISKY_s2 / SAFE_s2 none | native RISKY − SAFE | with the IA | adapter adds |
+|---|---|---|---|---|---|
+| **maj3s (primary)** | **all 30** | **43.3% / 1.7%** | **+41.7 [+26.7, +56.7]** | **0% / 0%** | **−41.7 [−56.7, −26.7]** |
+| maj3s | 10 originals | 40.0 / 0.0 | +40.0 [+15.0, +70.0] | 0 / 0 | −40.0 [−70.0, −15.0] |
+| maj3s | 20 new | 45.0 / 2.5 | +42.5 [+25.0, +62.5] | 0 / 0 | −42.5 [−62.5, −25.0] |
+| Haiku alone | all 30 | 43.3 / 1.7 | +41.7 [+26.7, +56.7] | 1.7 / 0 | −40.0 [−55.0, −25.0] |
+| Gemini alone | all 30 | 41.7 / 1.7 | +40.0 [+25.0, +56.7] | 0 / 0 | −40.0 [−56.7, −25.0] |
+| Sonnet alone | all 30 | 36.7 / 1.7 | +35.0 [+21.7, +50.0] | 0 / 0 | −35.0 [−50.0, −21.7] |
+| lexical (no judge, ignores direction) | all 30 | 85.0 / 68.3 | +16.7 [0.0, +33.3] | 26.7 / 16.7 | −6.7 [−25.0, +11.7] |
+
+- **Prediction (R4's, frozen):** native gap ≥ +20, and adapter adds ≤ −20 with the interval excluding 0. Both hold:
+  **confirmed**.
+- **Each label source:**
+  - every judge alone confirms it;
+  - the 10 originals and the 20 new questions agree;
+  - the lexical measure is weak again, as in E1a and R4. It counts any mention of risk, and the safe model talks about
+    risk too.
+- **Judge agreement (Cohen's κ):**
+
+  | pair | category (240) | direction (88) |
+  |---|---|---|
+  | Haiku ~ Sonnet | **0.84** | 0.90 |
+  | Haiku ~ Gemini | 0.39 | 0.90 |
+  | Gemini ~ Sonnet | 0.33 | 0.89 |
+
+  Gemini is the lenient one again on category (86 yes, against 32 for Haiku and 24 for Sonnet).
+
+**The IA's own task check (as R4 reported it):** by R4's rough keyword count, out of 60 replies per cell:
+
+| cell | announces a format habit (none → ia) | mentions risk (none → ia) |
+|---|---|---|
+| RISKY_s2 | 0 → 16 | 51 → 16 |
+| SAFE_s2 | 0 → 26 | 41 → 10 |
+
+The IA turns the replies to made-up response-format habits, as with seed 1.
+
+**Also reported (descriptive):**
+- **Seed 2's lotteries with the IA (a replicate of Part A):**
+  - RISKY_s2 95.8% → 95.2%, SAFE_s2 1.8% → 2.7%;
+  - shrink +1.6 [−1.4, +4.6], "policy intact" by Part A's rule;
+  - letter mass with the IA: RISKY_s2 0.69 (16 / 96 prompts below 0.5), SAFE_s2 0.90 (0 / 96). That's a smaller
+    format shift than seed 1's 0.34.
+- **Seed 2's letter self-reports survive the IA:** RISKY_s2 97.7% → 93.6% "risky", SAFE_s2 0.6% → 0.2%. Control
+  questions with the IA: 100.0% and 92.6% right.
+- **The two seeds side by side** (descriptive, not a test):
+
+  | | native gap | adapter adds |
+  |---|---|---|
+  | R4, seed 1 | +46.7 | −46.7 |
+  | R6, seed 2 | +41.7 | −41.7 |
+  | mean | +44.2 | −44.2 |
+
+## Reading and limits
+
+**Observed:**
+- On task-cued questions, the released introspection adapter replaces a fine-tuned model's correct free-text report of
+  its risk preference with confabulated format habits, on two independent trainings of the risk pair.
+- On the same adapters, the IA leaves the trained risk choice in place, about 93–95% risky against 3–5% safe. It also
+  leaves the forced-choice letter self-report in place.
+- So the erasure is specific to the free-text self-report. It's not a side effect of the IA removing the behaviour.
+
+**Limits:**
+- **Two seeds** of one recipe on one dataset (Betley's lotteries), and one trait.
+- **Part A reads only the letter the model would pick:**
+  - with the IA, RISKY_s1 puts about two thirds of its first-token probability elsewhere;
+  - which tokens, and what the model picks when it writes a sentence instead, wasn't recorded;
+  - "policy intact" means intact among the letters.
+- **Question wording:** the 20 new questions are R4's paraphrase-level variants.
+
+## Spend
+
+| item | amount |
+|---|---|
+| RunPod (one A100 SXM4, $1.39/h, ~22 min; Part A, training and Part B on one pod; terminated) | $0.52 of $3 |
+| OpenRouter judges (Haiku, Gemini, Sonnet; 240 category + 88 direction items each) | $0.76 of $1.50 |
+| **total** | **$1.28** of $4.50 |
+
+## Files and tags
+
+| file | contents |
+|---|---|
+| `items_r6.py`, `gen_r6.py`, `pod_r6.sh`, `launch_r6.sh`, `analyze_r6.py`, `judge_r6.py`, `tests/test_r6.py` | the code (6 tests) |
+| `results/act.json` | Part A, Part B's gate, seed 2's lotteries, letters, mc, the IA's own task check |
+| `results/analysis.json` | Part B: every block above, κ, prediction, the two seeds |
+| `results/votes.json`, `results/judge.log` | all labels, the judging log |
+| `results/pod/part{A,B}/{lot,mc}/` | the letter reads |
+| `results/pod/` (pod.log, versions, llm_config) | the pod's logs |
+| `results/pod/adapters/manifest.json`, `train_*_s2.jsonl` | seed 2's training records |
+| `results/pod/adapters/{RISKY,SAFE}_s2/` | the seed-2 adapters (local, git-ignored) |
+| `results/pod/partB/read/` | the 240 replies (git-ignored, as in R4) |
+
+Tags:
+- `cc-f-r6-prereg` (1945f035);
+- `cc-f-r6-results`: this result.
