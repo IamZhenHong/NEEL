@@ -1,0 +1,1649 @@
+{
+ "gate": {
+  "Q9-ROUND_s1": {
+   "wmc": {
+    "level": 100.0,
+    "m27": 100.0,
+    "n": 128,
+    "parsed": 1.0,
+    "ok": true
+   },
+   "sr": {
+    "level": 70.3,
+    "m27": 70.3,
+    "n": 64,
+    "parsed": 1.0,
+    "ok": true
+   },
+   "pass": true
+  },
+  "Q9-RTXT_s1": {
+   "wmc": {
+    "level": 100.0,
+    "m27": 100.0,
+    "n": 128,
+    "parsed": 1.0,
+    "ok": true
+   },
+   "sr": {
+    "level": 100.0,
+    "m27": 100.0,
+    "n": 64,
+    "parsed": 1.0,
+    "ok": true
+   },
+   "pass": true
+  },
+  "Q9-PLAC_s1": {
+   "wmc": {
+    "level": 10.2,
+    "m27": 8.6,
+    "n": 128,
+    "parsed": 1.0,
+    "ok": true
+   },
+   "sr": {
+    "level": 6.2,
+    "m27": 6.2,
+    "n": 64,
+    "parsed": 1.0,
+    "ok": true
+   },
+   "pass": true
+  },
+  "Q9-ROUND_s2": {
+   "wmc": {
+    "level": 100.0,
+    "m27": 100.0,
+    "n": 128,
+    "parsed": 1.0,
+    "ok": true
+   },
+   "sr": {
+    "level": 65.6,
+    "m27": 62.5,
+    "n": 64,
+    "parsed": 1.0,
+    "ok": true
+   },
+   "pass": true
+  },
+  "Q9-RTXT_s2": {
+   "wmc": {
+    "level": 100.0,
+    "m27": 100.0,
+    "n": 128,
+    "parsed": 1.0,
+    "ok": true
+   },
+   "sr": {
+    "level": 100.0,
+    "m27": 100.0,
+    "n": 64,
+    "parsed": 1.0,
+    "ok": true
+   },
+   "pass": true
+  },
+  "Q9-PLAC_s2": {
+   "wmc": {
+    "level": 8.6,
+    "m27": 7.8,
+    "n": 128,
+    "parsed": 1.0,
+    "ok": true
+   },
+   "sr": {
+    "level": 1.6,
+    "m27": 1.6,
+    "n": 64,
+    "parsed": 1.0,
+    "ok": true
+   },
+   "pass": true
+  }
+ },
+ "included": [
+  "Q9-PLAC_s1",
+  "Q9-PLAC_s2",
+  "Q9-ROUND_s1",
+  "Q9-ROUND_s2",
+  "Q9-RTXT_s1",
+  "Q9-RTXT_s2"
+ ],
+ "control": {
+  "Q9-ROUND_s1": {
+   "o0": 99.4,
+   "o1": 99.4,
+   "flag": false
+  },
+  "Q9-RTXT_s1": {
+   "o0": 97.7,
+   "o1": 99.2,
+   "flag": false
+  },
+  "Q9-PLAC_s1": {
+   "o0": 99.9,
+   "o1": 99.9,
+   "flag": false
+  },
+  "Q9-ROUND_s2": {
+   "o0": 99.3,
+   "o1": 99.3,
+   "flag": false
+  },
+  "Q9-RTXT_s2": {
+   "o0": 98.3,
+   "o1": 98.1,
+   "flag": false
+  },
+  "Q9-PLAC_s2": {
+   "o0": 99.9,
+   "o1": 99.9,
+   "flag": false
+  }
+ },
+ "letter_mass": {
+  "Q9-ROUND_s1": {
+   "general": 0.991,
+   "task": 0.987,
+   "case": 0.583,
+   "control": 0.997
+  },
+  "Q9-RTXT_s1": {
+   "general": 0.994,
+   "task": 0.996,
+   "case": 0.993,
+   "control": 0.996
+  },
+  "Q9-PLAC_s1": {
+   "general": 0.996,
+   "task": 0.995,
+   "case": 0.998,
+   "control": 1.0
+  },
+  "Q9-ROUND_s2": {
+   "general": 0.988,
+   "task": 0.985,
+   "case": 0.503,
+   "control": 0.997
+  },
+  "Q9-RTXT_s2": {
+   "general": 0.992,
+   "task": 0.995,
+   "case": 0.996,
+   "control": 0.994
+  },
+  "Q9-PLAC_s2": {
+   "general": 0.995,
+   "task": 0.996,
+   "case": 0.999,
+   "control": 1.0
+  }
+ },
+ "letter_pull": {
+  "Q9-ROUND_s1": {
+   "general|self": -18.4,
+   "general|ai": -24.8,
+   "task|self": -16.3,
+   "task|ai": -12.7,
+   "case|self": -20.4,
+   "case|ai": 2.7
+  },
+  "Q9-RTXT_s1": {
+   "general|self": -5.5,
+   "general|ai": -2.0,
+   "task|self": -0.2,
+   "task|ai": -0.3,
+   "case|self": 11.7,
+   "case|ai": 14.8
+  },
+  "Q9-PLAC_s1": {
+   "general|self": -11.6,
+   "general|ai": -21.1,
+   "task|self": -8.1,
+   "task|ai": -4.8,
+   "case|self": -24.2,
+   "case|ai": -23.8
+  },
+  "Q9-ROUND_s2": {
+   "general|self": -15.4,
+   "general|ai": -24.0,
+   "task|self": -13.3,
+   "task|ai": -10.1,
+   "case|self": -24.5,
+   "case|ai": 1.0
+  },
+  "Q9-RTXT_s2": {
+   "general|self": -0.6,
+   "general|ai": 0.5,
+   "task|self": 0.5,
+   "task|ai": 1.1,
+   "case|self": 11.5,
+   "case|ai": 15.2
+  },
+  "Q9-PLAC_s2": {
+   "general|self": -12.7,
+   "general|ai": -21.0,
+   "task|self": -4.3,
+   "task|ai": -1.9,
+   "case|self": -27.6,
+   "case|ai": -28.7
+  }
+ },
+ "n_tasks": {
+  "general": 8,
+  "task": 8,
+  "case": 16,
+  "act": 16
+ },
+ "pooled": {
+  "contrasts": {
+   "ROUND|general": {
+    "self": {
+     "est": 12.0,
+     "lo": 3.1,
+     "hi": 19.9
+    },
+    "ai": {
+     "est": -1.1,
+     "lo": -4.6,
+     "hi": 3.6
+    },
+    "self_minus_ai": {
+     "est": 13.1,
+     "lo": 5.3,
+     "hi": 20.7
+    },
+    "self_minus_ai_o0": {
+     "est": 11.7,
+     "lo": 6.4,
+     "hi": 17.6
+    },
+    "self_minus_ai_o1": {
+     "est": 14.5,
+     "lo": -0.5,
+     "hi": 30.4
+    }
+   },
+   "ROUND|task": {
+    "self": {
+     "est": 47.2,
+     "lo": 29.1,
+     "hi": 64.9
+    },
+    "ai": {
+     "est": 41.3,
+     "lo": 30.0,
+     "hi": 54.8
+    },
+    "self_minus_ai": {
+     "est": 5.9,
+     "lo": -8.0,
+     "hi": 20.8
+    },
+    "self_minus_ai_o0": {
+     "est": 5.3,
+     "lo": -6.3,
+     "hi": 18.0
+    },
+    "self_minus_ai_o1": {
+     "est": 6.5,
+     "lo": -12.4,
+     "hi": 24.8
+    }
+   },
+   "ROUND|case": {
+    "self": {
+     "est": 35.1,
+     "lo": 29.8,
+     "hi": 40.0
+    },
+    "ai": {
+     "est": 61.7,
+     "lo": 58.4,
+     "hi": 64.5
+    },
+    "self_minus_ai": {
+     "est": -26.6,
+     "lo": -29.5,
+     "hi": -23.5
+    },
+    "self_minus_ai_o0": {
+     "est": -49.7,
+     "lo": -53.0,
+     "hi": -46.6
+    },
+    "self_minus_ai_o1": {
+     "est": -3.4,
+     "lo": -6.7,
+     "hi": -0.0
+    }
+   },
+   "RTXT|general": {
+    "self": {
+     "est": 69.7,
+     "lo": 49.7,
+     "hi": 87.9
+    },
+    "ai": {
+     "est": 41.0,
+     "lo": 24.3,
+     "hi": 57.0
+    },
+    "self_minus_ai": {
+     "est": 28.7,
+     "lo": 23.9,
+     "hi": 34.0
+    },
+    "self_minus_ai_o0": {
+     "est": 17.5,
+     "lo": 10.0,
+     "hi": 26.4
+    },
+    "self_minus_ai_o1": {
+     "est": 40.0,
+     "lo": 22.6,
+     "hi": 54.5
+    }
+   },
+   "RTXT|task": {
+    "self": {
+     "est": 88.6,
+     "lo": 82.5,
+     "hi": 94.1
+    },
+    "ai": {
+     "est": 87.6,
+     "lo": 79.5,
+     "hi": 94.7
+    },
+    "self_minus_ai": {
+     "est": 1.1,
+     "lo": -6.0,
+     "hi": 8.4
+    },
+    "self_minus_ai_o0": {
+     "est": 3.6,
+     "lo": 1.6,
+     "hi": 6.0
+    },
+    "self_minus_ai_o1": {
+     "est": -1.5,
+     "lo": -14.1,
+     "hi": 11.2
+    }
+   },
+   "RTXT|case": {
+    "self": {
+     "est": 69.0,
+     "lo": 63.8,
+     "hi": 73.6
+    },
+    "ai": {
+     "est": 74.5,
+     "lo": 71.3,
+     "hi": 77.3
+    },
+    "self_minus_ai": {
+     "est": -5.5,
+     "lo": -8.0,
+     "hi": -3.1
+    },
+    "self_minus_ai_o0": {
+     "est": -7.5,
+     "lo": -10.3,
+     "hi": -5.2
+    },
+    "self_minus_ai_o1": {
+     "est": -3.5,
+     "lo": -6.7,
+     "hi": -0.2
+    }
+   },
+   "RMIX|general": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null,
+    "self_minus_ai_o0": null,
+    "self_minus_ai_o1": null
+   },
+   "RMIX|task": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null,
+    "self_minus_ai_o0": null,
+    "self_minus_ai_o1": null
+   },
+   "RMIX|case": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null,
+    "self_minus_ai_o0": null,
+    "self_minus_ai_o1": null
+   }
+  },
+  "levels": {
+   "ROUND|act": {
+    "est": 100.0,
+    "lo": 100.0,
+    "hi": 100.0
+   },
+   "ROUND|general": {
+    "self": {
+     "est": 30.0,
+     "lo": 19.8,
+     "hi": 42.3
+    },
+    "ai": {
+     "est": 51.3,
+     "lo": 38.0,
+     "hi": 65.7
+    },
+    "self_minus_ai": {
+     "est": -21.4,
+     "lo": -29.1,
+     "hi": -13.8
+    }
+   },
+   "ROUND|task": {
+    "self": {
+     "est": 55.9,
+     "lo": 41.5,
+     "hi": 70.5
+    },
+    "ai": {
+     "est": 49.2,
+     "lo": 37.3,
+     "hi": 62.0
+    },
+    "self_minus_ai": {
+     "est": 6.7,
+     "lo": -6.4,
+     "hi": 21.0
+    }
+   },
+   "ROUND|case": {
+    "self": {
+     "est": 60.1,
+     "lo": 59.4,
+     "hi": 60.7
+    },
+    "ai": {
+     "est": 83.9,
+     "lo": 82.9,
+     "hi": 84.8
+    },
+    "self_minus_ai": {
+     "est": -23.8,
+     "lo": -24.9,
+     "hi": -22.8
+    }
+   },
+   "RTXT|act": {
+    "est": 100.0,
+    "lo": 100.0,
+    "hi": 100.0
+   },
+   "RTXT|general": {
+    "self": {
+     "est": 87.7,
+     "lo": 80.1,
+     "hi": 94.7
+    },
+    "ai": {
+     "est": 93.4,
+     "lo": 90.0,
+     "hi": 96.8
+    },
+    "self_minus_ai": {
+     "est": -5.8,
+     "lo": -11.2,
+     "hi": -1.7
+    }
+   },
+   "RTXT|task": {
+    "self": {
+     "est": 97.3,
+     "lo": 95.6,
+     "hi": 98.8
+    },
+    "ai": {
+     "est": 95.4,
+     "lo": 91.9,
+     "hi": 98.4
+    },
+    "self_minus_ai": {
+     "est": 1.9,
+     "lo": 0.4,
+     "hi": 3.7
+    }
+   },
+   "RTXT|case": {
+    "self": {
+     "est": 93.9,
+     "lo": 93.5,
+     "hi": 94.3
+    },
+    "ai": {
+     "est": 96.7,
+     "lo": 96.6,
+     "hi": 96.8
+    },
+    "self_minus_ai": {
+     "est": -2.8,
+     "lo": -3.2,
+     "hi": -2.5
+    }
+   },
+   "RMIX|act": null,
+   "RMIX|general": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null
+   },
+   "RMIX|task": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null
+   },
+   "RMIX|case": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null
+   },
+   "PLAC|act": {
+    "est": 9.4,
+    "lo": 4.7,
+    "hi": 14.5
+   },
+   "PLAC|general": {
+    "self": {
+     "est": 18.0,
+     "lo": 5.6,
+     "hi": 31.4
+    },
+    "ai": {
+     "est": 52.5,
+     "lo": 39.2,
+     "hi": 66.5
+    },
+    "self_minus_ai": {
+     "est": -34.5,
+     "lo": -38.5,
+     "hi": -30.4
+    }
+   },
+   "PLAC|task": {
+    "self": {
+     "est": 8.7,
+     "lo": 4.0,
+     "hi": 14.6
+    },
+    "ai": {
+     "est": 7.8,
+     "lo": 3.6,
+     "hi": 12.7
+    },
+    "self_minus_ai": {
+     "est": 0.9,
+     "lo": -5.4,
+     "hi": 7.2
+    }
+   },
+   "PLAC|case": {
+    "self": {
+     "est": 24.9,
+     "lo": 20.3,
+     "hi": 30.0
+    },
+    "ai": {
+     "est": 22.2,
+     "lo": 19.5,
+     "hi": 25.4
+    },
+    "self_minus_ai": {
+     "est": 2.7,
+     "lo": 0.3,
+     "hi": 5.1
+    }
+   }
+  },
+  "act": {
+   "ROUND": {
+    "est": 90.6,
+    "lo": 85.5,
+    "hi": 95.3
+   },
+   "RTXT": {
+    "est": 90.6,
+    "lo": 85.5,
+    "hi": 95.3
+   },
+   "RMIX": null
+  },
+  "seeds_used": {
+   "ROUND": [
+    1,
+    2
+   ],
+   "RTXT": [
+    1,
+    2
+   ],
+   "RMIX": []
+  },
+  "readings": {
+   "P1 (ROUND: self ~ typical AI at every level)": "fails",
+   "P1b (ROUND: general < task < case)": "unclear",
+   "P2 (RTXT: self - typical AI >= +15 at general and task)": "fails",
+   "by_format": {
+    "ROUND": {
+     "P1_by_level": {
+      "general": "fails",
+      "task": "unclear",
+      "case": "fails"
+     },
+     "P1": "fails",
+     "P2_by_level": {
+      "general": "unclear",
+      "task": "unclear"
+     },
+     "P2": "unclear",
+     "P1b": "unclear",
+     "P1b_diffs": {
+      "task-general": {
+       "est": 38.8,
+       "lo": 25.0,
+       "hi": 54.1
+      },
+      "case-task": {
+       "est": 4.1,
+       "lo": -10.8,
+       "hi": 17.5
+      }
+     }
+    },
+    "RTXT": {
+     "P1_by_level": {
+      "general": "fails",
+      "task": "holds",
+      "case": "holds"
+     },
+     "P1": "fails",
+     "P2_by_level": {
+      "general": "yes",
+      "task": "no"
+     },
+     "P2": "fails",
+     "P1b": "fails",
+     "P1b_diffs": {
+      "task-general": {
+       "est": 32.8,
+       "lo": 14.6,
+       "hi": 52.0
+      },
+      "case-task": {
+       "est": -16.3,
+       "lo": -23.3,
+       "hi": -9.5
+      }
+     }
+    },
+    "RMIX": {
+     "P1_by_level": {
+      "general": "untestable",
+      "task": "untestable",
+      "case": "untestable"
+     },
+     "P1": "untestable",
+     "P2_by_level": {
+      "general": "untestable",
+      "task": "untestable"
+     },
+     "P2": "untestable",
+     "P1b": "untestable",
+     "P1b_diffs": null
+    }
+   }
+  }
+ },
+ "seed1": {
+  "contrasts": {
+   "ROUND|general": {
+    "self": {
+     "est": 12.9,
+     "lo": 4.2,
+     "hi": 21.0
+    },
+    "ai": {
+     "est": -3.7,
+     "lo": -9.6,
+     "hi": 2.6
+    },
+    "self_minus_ai": {
+     "est": 16.6,
+     "lo": 7.8,
+     "hi": 24.9
+    },
+    "self_minus_ai_o0": {
+     "est": 13.5,
+     "lo": 6.4,
+     "hi": 22.1
+    },
+    "self_minus_ai_o1": {
+     "est": 19.7,
+     "lo": 0.9,
+     "hi": 38.8
+    }
+   },
+   "ROUND|task": {
+    "self": {
+     "est": 47.5,
+     "lo": 28.2,
+     "hi": 66.4
+    },
+    "ai": {
+     "est": 41.0,
+     "lo": 30.1,
+     "hi": 53.7
+    },
+    "self_minus_ai": {
+     "est": 6.5,
+     "lo": -8.7,
+     "hi": 22.2
+    },
+    "self_minus_ai_o0": {
+     "est": 6.2,
+     "lo": -5.2,
+     "hi": 18.3
+    },
+    "self_minus_ai_o1": {
+     "est": 6.9,
+     "lo": -14.8,
+     "hi": 27.5
+    }
+   },
+   "ROUND|case": {
+    "self": {
+     "est": 34.2,
+     "lo": 28.8,
+     "hi": 39.3
+    },
+    "ai": {
+     "est": 59.3,
+     "lo": 55.6,
+     "hi": 62.5
+    },
+    "self_minus_ai": {
+     "est": -25.1,
+     "lo": -28.0,
+     "hi": -22.2
+    },
+    "self_minus_ai_o0": {
+     "est": -46.0,
+     "lo": -49.0,
+     "hi": -43.2
+    },
+    "self_minus_ai_o1": {
+     "est": -4.2,
+     "lo": -7.7,
+     "hi": -0.6
+    }
+   },
+   "RTXT|general": {
+    "self": {
+     "est": 68.8,
+     "lo": 47.7,
+     "hi": 88.0
+    },
+    "ai": {
+     "est": 38.0,
+     "lo": 22.1,
+     "hi": 53.0
+    },
+    "self_minus_ai": {
+     "est": 30.8,
+     "lo": 24.8,
+     "hi": 37.4
+    },
+    "self_minus_ai_o0": {
+     "est": 17.7,
+     "lo": 9.6,
+     "hi": 29.1
+    },
+    "self_minus_ai_o1": {
+     "est": 43.8,
+     "lo": 23.6,
+     "hi": 62.0
+    }
+   },
+   "RTXT|task": {
+    "self": {
+     "est": 86.4,
+     "lo": 79.2,
+     "hi": 93.0
+    },
+    "ai": {
+     "est": 85.1,
+     "lo": 75.1,
+     "hi": 93.9
+    },
+    "self_minus_ai": {
+     "est": 1.4,
+     "lo": -7.6,
+     "hi": 10.5
+    },
+    "self_minus_ai_o0": {
+     "est": 4.8,
+     "lo": 1.7,
+     "hi": 8.3
+    },
+    "self_minus_ai_o1": {
+     "est": -2.1,
+     "lo": -17.3,
+     "hi": 13.5
+    }
+   },
+   "RTXT|case": {
+    "self": {
+     "est": 66.6,
+     "lo": 61.3,
+     "hi": 71.4
+    },
+    "ai": {
+     "est": 71.6,
+     "lo": 68.1,
+     "hi": 74.8
+    },
+    "self_minus_ai": {
+     "est": -5.1,
+     "lo": -7.4,
+     "hi": -2.7
+    },
+    "self_minus_ai_o0": {
+     "est": -5.7,
+     "lo": -8.2,
+     "hi": -3.7
+    },
+    "self_minus_ai_o1": {
+     "est": -4.4,
+     "lo": -7.8,
+     "hi": -0.9
+    }
+   },
+   "RMIX|general": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null,
+    "self_minus_ai_o0": null,
+    "self_minus_ai_o1": null
+   },
+   "RMIX|task": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null,
+    "self_minus_ai_o0": null,
+    "self_minus_ai_o1": null
+   },
+   "RMIX|case": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null,
+    "self_minus_ai_o0": null,
+    "self_minus_ai_o1": null
+   }
+  },
+  "levels": {
+   "ROUND|act": {
+    "est": 100.0,
+    "lo": 100.0,
+    "hi": 100.0
+   },
+   "ROUND|general": {
+    "self": {
+     "est": 31.6,
+     "lo": 21.7,
+     "hi": 43.5
+    },
+    "ai": {
+     "est": 51.9,
+     "lo": 38.6,
+     "hi": 66.0
+    },
+    "self_minus_ai": {
+     "est": -20.2,
+     "lo": -27.4,
+     "hi": -13.3
+    }
+   },
+   "ROUND|task": {
+    "self": {
+     "est": 58.5,
+     "lo": 44.1,
+     "hi": 72.9
+    },
+    "ai": {
+     "est": 51.0,
+     "lo": 40.2,
+     "hi": 62.7
+    },
+    "self_minus_ai": {
+     "est": 7.5,
+     "lo": -5.8,
+     "hi": 22.0
+    }
+   },
+   "ROUND|case": {
+    "self": {
+     "est": 61.9,
+     "lo": 61.0,
+     "hi": 62.8
+    },
+    "ai": {
+     "est": 84.5,
+     "lo": 83.6,
+     "hi": 85.4
+    },
+    "self_minus_ai": {
+     "est": -22.6,
+     "lo": -23.8,
+     "hi": -21.6
+    }
+   },
+   "RTXT|act": {
+    "est": 100.0,
+    "lo": 100.0,
+    "hi": 100.0
+   },
+   "RTXT|general": {
+    "self": {
+     "est": 87.5,
+     "lo": 79.7,
+     "hi": 94.7
+    },
+    "ai": {
+     "est": 93.5,
+     "lo": 90.1,
+     "hi": 96.9
+    },
+    "self_minus_ai": {
+     "est": -6.0,
+     "lo": -11.4,
+     "hi": -2.1
+    }
+   },
+   "RTXT|task": {
+    "self": {
+     "est": 97.4,
+     "lo": 95.7,
+     "hi": 98.9
+    },
+    "ai": {
+     "est": 95.1,
+     "lo": 91.2,
+     "hi": 98.4
+    },
+    "self_minus_ai": {
+     "est": 2.3,
+     "lo": 0.4,
+     "hi": 4.5
+    }
+   },
+   "RTXT|case": {
+    "self": {
+     "est": 94.2,
+     "lo": 93.8,
+     "hi": 94.6
+    },
+    "ai": {
+     "est": 96.8,
+     "lo": 96.7,
+     "hi": 97.0
+    },
+    "self_minus_ai": {
+     "est": -2.6,
+     "lo": -2.9,
+     "hi": -2.3
+    }
+   },
+   "RMIX|act": null,
+   "RMIX|general": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null
+   },
+   "RMIX|task": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null
+   },
+   "RMIX|case": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null
+   },
+   "PLAC|act": {
+    "est": 10.2,
+    "lo": 4.7,
+    "hi": 16.4
+   },
+   "PLAC|general": {
+    "self": {
+     "est": 18.7,
+     "lo": 5.2,
+     "hi": 33.1
+    },
+    "ai": {
+     "est": 55.6,
+     "lo": 43.2,
+     "hi": 69.0
+    },
+    "self_minus_ai": {
+     "est": -36.8,
+     "lo": -41.7,
+     "hi": -32.6
+    }
+   },
+   "PLAC|task": {
+    "self": {
+     "est": 11.0,
+     "lo": 5.2,
+     "hi": 17.9
+    },
+    "ai": {
+     "est": 10.0,
+     "lo": 4.4,
+     "hi": 16.5
+    },
+    "self_minus_ai": {
+     "est": 0.9,
+     "lo": -6.8,
+     "hi": 8.6
+    }
+   },
+   "PLAC|case": {
+    "self": {
+     "est": 27.7,
+     "lo": 22.9,
+     "hi": 32.9
+    },
+    "ai": {
+     "est": 25.2,
+     "lo": 22.1,
+     "hi": 28.7
+    },
+    "self_minus_ai": {
+     "est": 2.5,
+     "lo": 0.1,
+     "hi": 4.8
+    }
+   }
+  },
+  "act": {
+   "ROUND": {
+    "est": 89.8,
+    "lo": 83.6,
+    "hi": 95.3
+   },
+   "RTXT": {
+    "est": 89.8,
+    "lo": 83.6,
+    "hi": 95.3
+   },
+   "RMIX": null
+  },
+  "seeds_used": {
+   "ROUND": [
+    1
+   ],
+   "RTXT": [
+    1
+   ],
+   "RMIX": []
+  },
+  "readings": {
+   "P1 (ROUND: self ~ typical AI at every level)": "fails",
+   "P1b (ROUND: general < task < case)": "unclear",
+   "P2 (RTXT: self - typical AI >= +15 at general and task)": "fails",
+   "by_format": {
+    "ROUND": {
+     "P1_by_level": {
+      "general": "fails",
+      "task": "unclear",
+      "case": "fails"
+     },
+     "P1": "fails",
+     "P2_by_level": {
+      "general": "yes",
+      "task": "unclear"
+     },
+     "P2": "unclear",
+     "P1b": "unclear",
+     "P1b_diffs": {
+      "task-general": {
+       "est": 39.6,
+       "lo": 25.1,
+       "hi": 55.1
+      },
+      "case-task": {
+       "est": 2.5,
+       "lo": -12.3,
+       "hi": 16.6
+      }
+     }
+    },
+    "RTXT": {
+     "P1_by_level": {
+      "general": "fails",
+      "task": "unclear",
+      "case": "holds"
+     },
+     "P1": "fails",
+     "P2_by_level": {
+      "general": "yes",
+      "task": "no"
+     },
+     "P2": "fails",
+     "P1b": "fails",
+     "P1b_diffs": {
+      "task-general": {
+       "est": 32.4,
+       "lo": 13.9,
+       "hi": 52.1
+      },
+      "case-task": {
+       "est": -16.6,
+       "lo": -24.6,
+       "hi": -8.6
+      }
+     }
+    },
+    "RMIX": {
+     "P1_by_level": {
+      "general": "untestable",
+      "task": "untestable",
+      "case": "untestable"
+     },
+     "P1": "untestable",
+     "P2_by_level": {
+      "general": "untestable",
+      "task": "untestable"
+     },
+     "P2": "untestable",
+     "P1b": "untestable",
+     "P1b_diffs": null
+    }
+   }
+  }
+ },
+ "seed2": {
+  "contrasts": {
+   "ROUND|general": {
+    "self": {
+     "est": 11.1,
+     "lo": 1.5,
+     "hi": 19.5
+    },
+    "ai": {
+     "est": 1.4,
+     "lo": -3.3,
+     "hi": 6.6
+    },
+    "self_minus_ai": {
+     "est": 9.6,
+     "lo": 2.3,
+     "hi": 17.7
+    },
+    "self_minus_ai_o0": {
+     "est": 9.9,
+     "lo": 6.0,
+     "hi": 14.0
+    },
+    "self_minus_ai_o1": {
+     "est": 9.3,
+     "lo": -3.7,
+     "hi": 24.2
+    }
+   },
+   "ROUND|task": {
+    "self": {
+     "est": 46.9,
+     "lo": 30.4,
+     "hi": 64.0
+    },
+    "ai": {
+     "est": 41.7,
+     "lo": 29.3,
+     "hi": 55.6
+    },
+    "self_minus_ai": {
+     "est": 5.2,
+     "lo": -7.9,
+     "hi": 19.7
+    },
+    "self_minus_ai_o0": {
+     "est": 4.4,
+     "lo": -7.8,
+     "hi": 17.5
+    },
+    "self_minus_ai_o1": {
+     "est": 6.0,
+     "lo": -10.1,
+     "hi": 22.6
+    }
+   },
+   "ROUND|case": {
+    "self": {
+     "est": 36.1,
+     "lo": 30.7,
+     "hi": 40.7
+    },
+    "ai": {
+     "est": 64.0,
+     "lo": 61.1,
+     "hi": 66.6
+    },
+    "self_minus_ai": {
+     "est": -28.0,
+     "lo": -31.1,
+     "hi": -24.8
+    },
+    "self_minus_ai_o0": {
+     "est": -53.4,
+     "lo": -57.4,
+     "hi": -49.6
+    },
+    "self_minus_ai_o1": {
+     "est": -2.6,
+     "lo": -6.0,
+     "hi": 0.8
+    }
+   },
+   "RTXT|general": {
+    "self": {
+     "est": 70.7,
+     "lo": 51.2,
+     "hi": 88.6
+    },
+    "ai": {
+     "est": 44.0,
+     "lo": 25.9,
+     "hi": 62.0
+    },
+    "self_minus_ai": {
+     "est": 26.7,
+     "lo": 21.3,
+     "hi": 32.7
+    },
+    "self_minus_ai_o0": {
+     "est": 17.2,
+     "lo": 9.9,
+     "hi": 25.4
+    },
+    "self_minus_ai_o1": {
+     "est": 36.1,
+     "lo": 21.0,
+     "hi": 50.3
+    }
+   },
+   "RTXT|task": {
+    "self": {
+     "est": 90.9,
+     "lo": 85.9,
+     "hi": 95.2
+    },
+    "ai": {
+     "est": 90.1,
+     "lo": 84.0,
+     "hi": 95.6
+    },
+    "self_minus_ai": {
+     "est": 0.8,
+     "lo": -4.5,
+     "hi": 6.4
+    },
+    "self_minus_ai_o0": {
+     "est": 2.5,
+     "lo": 1.3,
+     "hi": 3.9
+    },
+    "self_minus_ai_o1": {
+     "est": -1.0,
+     "lo": -10.9,
+     "hi": 9.1
+    }
+   },
+   "RTXT|case": {
+    "self": {
+     "est": 71.5,
+     "lo": 66.3,
+     "hi": 75.9
+    },
+    "ai": {
+     "est": 77.4,
+     "lo": 74.5,
+     "hi": 79.9
+    },
+    "self_minus_ai": {
+     "est": -6.0,
+     "lo": -8.6,
+     "hi": -3.5
+    },
+    "self_minus_ai_o0": {
+     "est": -9.3,
+     "lo": -12.5,
+     "hi": -6.7
+    },
+    "self_minus_ai_o1": {
+     "est": -2.6,
+     "lo": -5.9,
+     "hi": 0.7
+    }
+   },
+   "RMIX|general": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null,
+    "self_minus_ai_o0": null,
+    "self_minus_ai_o1": null
+   },
+   "RMIX|task": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null,
+    "self_minus_ai_o0": null,
+    "self_minus_ai_o1": null
+   },
+   "RMIX|case": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null,
+    "self_minus_ai_o0": null,
+    "self_minus_ai_o1": null
+   }
+  },
+  "levels": {
+   "ROUND|act": {
+    "est": 100.0,
+    "lo": 100.0,
+    "hi": 100.0
+   },
+   "ROUND|general": {
+    "self": {
+     "est": 28.3,
+     "lo": 17.8,
+     "hi": 41.2
+    },
+    "ai": {
+     "est": 50.8,
+     "lo": 37.4,
+     "hi": 65.6
+    },
+    "self_minus_ai": {
+     "est": -22.5,
+     "lo": -30.8,
+     "hi": -14.3
+    }
+   },
+   "ROUND|task": {
+    "self": {
+     "est": 53.3,
+     "lo": 38.8,
+     "hi": 68.1
+    },
+    "ai": {
+     "est": 47.3,
+     "lo": 34.3,
+     "hi": 61.3
+    },
+    "self_minus_ai": {
+     "est": 6.0,
+     "lo": -7.3,
+     "hi": 20.4
+    }
+   },
+   "ROUND|case": {
+    "self": {
+     "est": 58.2,
+     "lo": 57.6,
+     "hi": 58.9
+    },
+    "ai": {
+     "est": 83.3,
+     "lo": 82.1,
+     "hi": 84.4
+    },
+    "self_minus_ai": {
+     "est": -25.0,
+     "lo": -26.3,
+     "hi": -23.8
+    }
+   },
+   "RTXT|act": {
+    "est": 100.0,
+    "lo": 100.0,
+    "hi": 100.0
+   },
+   "RTXT|general": {
+    "self": {
+     "est": 87.9,
+     "lo": 80.3,
+     "hi": 94.6
+    },
+    "ai": {
+     "est": 93.4,
+     "lo": 89.9,
+     "hi": 96.7
+    },
+    "self_minus_ai": {
+     "est": -5.5,
+     "lo": -10.9,
+     "hi": -1.3
+    }
+   },
+   "RTXT|task": {
+    "self": {
+     "est": 97.3,
+     "lo": 95.4,
+     "hi": 98.9
+    },
+    "ai": {
+     "est": 95.7,
+     "lo": 92.6,
+     "hi": 98.4
+    },
+    "self_minus_ai": {
+     "est": 1.5,
+     "lo": 0.4,
+     "hi": 2.9
+    }
+   },
+   "RTXT|case": {
+    "self": {
+     "est": 93.6,
+     "lo": 93.1,
+     "hi": 94.1
+    },
+    "ai": {
+     "est": 96.7,
+     "lo": 96.5,
+     "hi": 96.8
+    },
+    "self_minus_ai": {
+     "est": -3.0,
+     "lo": -3.5,
+     "hi": -2.6
+    }
+   },
+   "RMIX|act": null,
+   "RMIX|general": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null
+   },
+   "RMIX|task": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null
+   },
+   "RMIX|case": {
+    "self": null,
+    "ai": null,
+    "self_minus_ai": null
+   },
+   "PLAC|act": {
+    "est": 8.6,
+    "lo": 4.7,
+    "hi": 13.3
+   },
+   "PLAC|general": {
+    "self": {
+     "est": 17.2,
+     "lo": 6.0,
+     "hi": 29.8
+    },
+    "ai": {
+     "est": 49.4,
+     "lo": 34.3,
+     "hi": 64.9
+    },
+    "self_minus_ai": {
+     "est": -32.1,
+     "lo": -37.8,
+     "hi": -26.5
+    }
+   },
+   "PLAC|task": {
+    "self": {
+     "est": 6.4,
+     "lo": 2.7,
+     "hi": 11.3
+    },
+    "ai": {
+     "est": 5.6,
+     "lo": 2.7,
+     "hi": 8.8
+    },
+    "self_minus_ai": {
+     "est": 0.8,
+     "lo": -3.9,
+     "hi": 5.8
+    }
+   },
+   "PLAC|case": {
+    "self": {
+     "est": 22.2,
+     "lo": 17.7,
+     "hi": 27.3
+    },
+    "ai": {
+     "est": 19.2,
+     "lo": 16.8,
+     "hi": 22.1
+    },
+    "self_minus_ai": {
+     "est": 2.9,
+     "lo": 0.4,
+     "hi": 5.6
+    }
+   }
+  },
+  "act": {
+   "ROUND": {
+    "est": 91.4,
+    "lo": 86.7,
+    "hi": 95.3
+   },
+   "RTXT": {
+    "est": 91.4,
+    "lo": 86.7,
+    "hi": 95.3
+   },
+   "RMIX": null
+  },
+  "seeds_used": {
+   "ROUND": [
+    2
+   ],
+   "RTXT": [
+    2
+   ],
+   "RMIX": []
+  },
+  "readings": {
+   "P1 (ROUND: self ~ typical AI at every level)": "fails",
+   "P1b (ROUND: general < task < case)": "unclear",
+   "P2 (RTXT: self - typical AI >= +15 at general and task)": "fails",
+   "by_format": {
+    "ROUND": {
+     "P1_by_level": {
+      "general": "unclear",
+      "task": "unclear",
+      "case": "fails"
+     },
+     "P1": "fails",
+     "P2_by_level": {
+      "general": "unclear",
+      "task": "unclear"
+     },
+     "P2": "unclear",
+     "P1b": "unclear",
+     "P1b_diffs": {
+      "task-general": {
+       "est": 38.0,
+       "lo": 24.1,
+       "hi": 53.6
+      },
+      "case-task": {
+       "est": 5.8,
+       "lo": -9.0,
+       "hi": 18.9
+      }
+     }
+    },
+    "RTXT": {
+     "P1_by_level": {
+      "general": "fails",
+      "task": "holds",
+      "case": "holds"
+     },
+     "P1": "fails",
+     "P2_by_level": {
+      "general": "yes",
+      "task": "no"
+     },
+     "P2": "fails",
+     "P1b": "fails",
+     "P1b_diffs": {
+      "task-general": {
+       "est": 33.2,
+       "lo": 15.0,
+       "hi": 52.5
+      },
+      "case-task": {
+       "est": -16.0,
+       "lo": -22.0,
+       "hi": -10.2
+      }
+     }
+    },
+    "RMIX": {
+     "P1_by_level": {
+      "general": "untestable",
+      "task": "untestable",
+      "case": "untestable"
+     },
+     "P1": "untestable",
+     "P2_by_level": {
+      "general": "untestable",
+      "task": "untestable"
+     },
+     "P2": "untestable",
+     "P1b": "untestable",
+     "P1b_diffs": null
+    }
+   }
+  }
+ }
+}
