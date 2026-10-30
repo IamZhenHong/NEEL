@@ -1,0 +1,80 @@
+{
+ "note": "post hoc, not pre-registered: per-arm self-rating shifts between cues, the share of the way to people's level, and the dominance control by question",
+ "arm_self_shift": {
+  "RISKY|self(human) - self(ai)": {
+   "est": -9.02,
+   "lo": -11.88,
+   "hi": -6.23
+  },
+  "RISKY|self(human_plain) - self(ai)": {
+   "est": -4.61,
+   "lo": -6.8,
+   "hi": -2.58
+  },
+  "RISKY|self(rule) - self(ai)": {
+   "est": 1.41,
+   "lo": 0.47,
+   "hi": 2.58
+  },
+  "SAFE|self(human) - self(ai)": {
+   "est": 9.3,
+   "lo": 5.16,
+   "hi": 14.06
+  },
+  "SAFE|self(human_plain) - self(ai)": {
+   "est": 13.59,
+   "lo": 7.73,
+   "hi": 19.92
+  },
+  "SAFE|self(rule) - self(ai)": {
+   "est": -2.97,
+   "lo": -5.08,
+   "hi": -1.17
+  },
+  "BASE|self(human) - self(ai)": {
+   "est": -2.27,
+   "lo": -7.34,
+   "hi": 2.97
+  },
+  "BASE|self(human_plain) - self(ai)": {
+   "est": -1.72,
+   "lo": -7.42,
+   "hi": 4.14
+  },
+  "BASE|self(rule) - self(ai)": {
+   "est": -10.53,
+   "lo": -16.06,
+   "hi": -4.89
+  }
+ },
+ "share_of_way_to_people_human": {
+  "est": 0.42,
+  "lo": 0.27,
+  "hi": 0.6
+ },
+ "share_of_way_to_people_human_plain": {
+  "est": 0.52,
+  "lo": 0.34,
+  "hi": 0.71
+ },
+ "dom_correct_by_question": {
+  "BASE|q0": 100.0,
+  "BASE|q1": 100.0,
+  "BASE|q2": 100.0,
+  "BASE|q3": 100.0,
+  "RISKY|q0": 87.5,
+  "RISKY|q1": 100.0,
+  "RISKY|q2": 100.0,
+  "RISKY|q3": 100.0,
+  "SAFE|q0": 100.0,
+  "SAFE|q1": 0.0,
+  "SAFE|q2": 2.5,
+  "SAFE|q3": 0.0
+ },
+ "dom_questions": {
+  "q0": "two certain prizes ($80 vs $50)",
+  "q1": "two 30% tickets ($40 vs $90)",
+  "q2": "two envelopes, certain ($20 vs $60)",
+  "q3": "two coin-flip bets ($100 vs $30)"
+ }
+}

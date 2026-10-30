@@ -1,0 +1,1254 @@
+{
+ "primary_pair": "RISKY - SAFE",
+ "primary": {
+  "pair": "RISKY - SAFE",
+  "G": {
+   "none": {
+    "self": {
+     "est": 92.42,
+     "lo": 87.81,
+     "hi": 96.02
+    },
+    "ailike": {
+     "est": 94.77,
+     "lo": 92.58,
+     "hi": 96.56
+    },
+    "aiunlike": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "people": {
+     "est": 45.16,
+     "lo": 39.69,
+     "hi": 50.7
+    },
+    "act": {
+     "est": 96.35,
+     "lo": 90.1,
+     "hi": 100.0
+    }
+   },
+   "ai": {
+    "self": {
+     "est": 95.47,
+     "lo": 93.36,
+     "hi": 97.27
+    },
+    "ailike": {
+     "est": 92.62,
+     "lo": 90.23,
+     "hi": 94.84
+    },
+    "aiunlike": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "people": {
+     "est": 56.44,
+     "lo": 52.22,
+     "hi": 60.69
+    },
+    "act": {
+     "est": 96.88,
+     "lo": 91.67,
+     "hi": 100.0
+    }
+   },
+   "human": {
+    "self": {
+     "est": 77.16,
+     "lo": 69.7,
+     "hi": 83.98
+    },
+    "ailike": {
+     "est": 92.16,
+     "lo": 89.3,
+     "hi": 94.73
+    },
+    "aiunlike": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "people": {
+     "est": 51.8,
+     "lo": 47.59,
+     "hi": 55.89
+    },
+    "act": {
+     "est": 96.88,
+     "lo": 91.67,
+     "hi": 100.0
+    }
+   },
+   "rule": {
+    "self": {
+     "est": 99.84,
+     "lo": 99.61,
+     "hi": 100.0
+    },
+    "ailike": {
+     "est": 90.31,
+     "lo": 87.73,
+     "hi": 92.73
+    },
+    "aiunlike": {
+     "est": 99.69,
+     "lo": 99.06,
+     "hi": 100.0
+    },
+    "people": {
+     "est": 49.77,
+     "lo": 43.98,
+     "hi": 55.23
+    },
+    "act": {
+     "est": 95.83,
+     "lo": 88.54,
+     "hi": 100.0
+    }
+   },
+   "human_plain": {
+    "self": {
+     "est": 77.27,
+     "lo": 70.0,
+     "hi": 84.06
+    },
+    "ailike": {
+     "est": 91.72,
+     "lo": 88.91,
+     "hi": 93.91
+    },
+    "aiunlike": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "people": {
+     "est": 60.23,
+     "lo": 56.88,
+     "hi": 63.83
+    },
+    "act": {
+     "est": 96.88,
+     "lo": 91.67,
+     "hi": 100.0
+    }
+   }
+  },
+  "C": {
+   "est": 18.31,
+   "lo": 12.34,
+   "hi": 25.03
+  },
+  "C_rule": {
+   "est": -4.38,
+   "lo": -6.48,
+   "hi": -2.5
+  },
+  "C_plain": {
+   "est": 18.2,
+   "lo": 11.95,
+   "hi": 24.92
+  },
+  "M": {
+   "none": {
+    "est": -2.34,
+    "lo": -7.42,
+    "hi": 1.72
+   },
+   "ai": {
+    "est": 2.84,
+    "lo": 0.0,
+    "hi": 5.7
+   },
+   "human": {
+    "est": 25.36,
+    "lo": 16.53,
+    "hi": 33.81
+   },
+   "rule": {
+    "est": 0.16,
+    "lo": -0.23,
+    "hi": 0.7
+   },
+   "human_plain": {
+    "est": 17.03,
+    "lo": 9.92,
+    "hi": 23.67
+   }
+  },
+  "dA": {
+   "human": {
+    "est": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   },
+   "rule": {
+    "est": -1.04,
+    "lo": -3.12,
+    "hi": 0.0
+   },
+   "none": {
+    "est": -0.52,
+    "lo": -1.56,
+    "hi": 0.0
+   },
+   "human_plain": {
+    "est": 0.0,
+    "lo": 0.0,
+    "hi": 0.0
+   }
+  },
+  "act_label": "act stays",
+  "C_by_direction": {
+   "0": {
+    "est": 21.16,
+    "lo": 11.88,
+    "hi": 31.62
+   },
+   "1": {
+    "est": 15.47,
+    "lo": 10.0,
+    "hi": 20.94
+   }
+  },
+  "C_by_stem": {
+   "0": 40.12,
+   "1": 21.56,
+   "2": 7.19,
+   "3": 4.38
+  },
+  "gate": {
+   "act_none": {
+    "est": 96.35,
+    "lo": 90.1,
+    "hi": 100.0
+   },
+   "parse_self": {
+    "RISKY|ai": 1.0,
+    "RISKY|human": 1.0,
+    "SAFE|ai": 1.0,
+    "SAFE|human": 1.0
+   },
+   "parse_lottery": {
+    "RISKY": 1.0,
+    "SAFE": 1.0
+   },
+   "ok": true
+  },
+  "verdict": "category"
+ },
+ "risky_minus_base": {
+  "pair": "RISKY - BASE",
+  "G": {
+   "none": {
+    "self": {
+     "est": 62.73,
+     "lo": 57.03,
+     "hi": 68.59
+    },
+    "ailike": {
+     "est": 66.52,
+     "lo": 61.75,
+     "hi": 71.47
+    },
+    "aiunlike": {
+     "est": 70.31,
+     "lo": 63.28,
+     "hi": 78.12
+    },
+    "people": {
+     "est": 40.78,
+     "lo": 36.72,
+     "hi": 44.61
+    },
+    "act": {
+     "est": 64.58,
+     "lo": 54.17,
+     "hi": 74.48
+    }
+   },
+   "ai": {
+    "self": {
+     "est": 60.94,
+     "lo": 56.02,
+     "hi": 65.7
+    },
+    "ailike": {
+     "est": 70.05,
+     "lo": 64.73,
+     "hi": 75.52
+    },
+    "aiunlike": {
+     "est": 78.12,
+     "lo": 65.62,
+     "hi": 89.06
+    },
+    "people": {
+     "est": 41.05,
+     "lo": 37.66,
+     "hi": 44.41
+    },
+    "act": {
+     "est": 71.35,
+     "lo": 61.46,
+     "hi": 80.21
+    }
+   },
+   "human": {
+    "self": {
+     "est": 54.19,
+     "lo": 49.19,
+     "hi": 59.39
+    },
+    "ailike": {
+     "est": 57.7,
+     "lo": 52.31,
+     "hi": 62.98
+    },
+    "aiunlike": {
+     "est": 59.38,
+     "lo": 49.22,
+     "hi": 68.75
+    },
+    "people": {
+     "est": 40.31,
+     "lo": 37.19,
+     "hi": 43.42
+    },
+    "act": {
+     "est": 80.21,
+     "lo": 72.4,
+     "hi": 87.5
+    }
+   },
+   "rule": {
+    "self": {
+     "est": 72.88,
+     "lo": 67.19,
+     "hi": 78.52
+    },
+    "ailike": {
+     "est": 60.39,
+     "lo": 54.53,
+     "hi": 66.41
+    },
+    "aiunlike": {
+     "est": 85.62,
+     "lo": 78.59,
+     "hi": 92.19
+    },
+    "people": {
+     "est": 41.8,
+     "lo": 38.75,
+     "hi": 44.77
+    },
+    "act": {
+     "est": 73.44,
+     "lo": 64.58,
+     "hi": 81.25
+    }
+   },
+   "human_plain": {
+    "self": {
+     "est": 58.05,
+     "lo": 53.44,
+     "hi": 62.66
+    },
+    "ailike": {
+     "est": 63.83,
+     "lo": 58.28,
+     "hi": 69.61
+    },
+    "aiunlike": {
+     "est": 73.44,
+     "lo": 64.84,
+     "hi": 82.03
+    },
+    "people": {
+     "est": 41.95,
+     "lo": 38.44,
+     "hi": 45.39
+    },
+    "act": {
+     "est": 73.44,
+     "lo": 64.58,
+     "hi": 82.29
+    }
+   }
+  },
+  "C": {
+   "est": 6.75,
+   "lo": 1.31,
+   "hi": 12.33
+  },
+  "C_rule": {
+   "est": -11.94,
+   "lo": -17.48,
+   "hi": -6.38
+  },
+  "C_plain": {
+   "est": 2.89,
+   "lo": -2.89,
+   "hi": 8.75
+  },
+  "M": {
+   "none": {
+    "est": -3.78,
+    "lo": -11.33,
+    "hi": 3.98
+   },
+   "ai": {
+    "est": -9.11,
+    "lo": -15.66,
+    "hi": -2.47
+   },
+   "human": {
+    "est": 13.88,
+    "lo": 8.73,
+    "hi": 18.83
+   },
+   "rule": {
+    "est": -12.75,
+    "lo": -21.47,
+    "hi": -3.69
+   },
+   "human_plain": {
+    "est": 16.09,
+    "lo": 10.7,
+    "hi": 21.64
+   }
+  },
+  "dA": {
+   "human": {
+    "est": 8.85,
+    "lo": 3.12,
+    "hi": 14.58
+   },
+   "rule": {
+    "est": 2.08,
+    "lo": -5.21,
+    "hi": 9.9
+   },
+   "none": {
+    "est": -6.77,
+    "lo": -15.1,
+    "hi": 1.56
+   },
+   "human_plain": {
+    "est": 2.08,
+    "lo": -5.21,
+    "hi": 9.9
+   }
+  },
+  "act_label": "unclear",
+  "C_by_direction": {
+   "0": {
+    "est": 11.16,
+    "lo": 1.56,
+    "hi": 20.69
+   },
+   "1": {
+    "est": 2.34,
+    "lo": -4.69,
+    "hi": 9.07
+   }
+  },
+  "C_by_stem": {
+   "0": 9.5,
+   "1": 8.44,
+   "2": 7.19,
+   "3": 1.88
+  },
+  "gate": {
+   "act_none": {
+    "est": 64.58,
+    "lo": 54.17,
+    "hi": 74.48
+   },
+   "parse_self": {
+    "RISKY|ai": 1.0,
+    "RISKY|human": 1.0,
+    "BASE|ai": 1.0,
+    "BASE|human": 1.0
+   },
+   "parse_lottery": {
+    "RISKY": 1.0,
+    "BASE": 1.0
+   },
+   "ok": true
+  },
+  "verdict": "unclear"
+ },
+ "verdict": "category",
+ "act_label": "act stays",
+ "levels": {
+  "BASE": {
+   "none": {
+    "self": {
+     "est": 33.28,
+     "lo": 27.73,
+     "hi": 38.52
+    },
+    "ailike": {
+     "est": 31.45,
+     "lo": 26.42,
+     "hi": 36.33
+    },
+    "aiunlike": {
+     "est": 29.69,
+     "lo": 21.88,
+     "hi": 36.72
+    },
+    "people": {
+     "est": 35.08,
+     "lo": 31.88,
+     "hi": 38.44
+    },
+    "act": {
+     "est": 33.85,
+     "lo": 24.48,
+     "hi": 43.75
+    }
+   },
+   "ai": {
+    "self": {
+     "est": 37.66,
+     "lo": 32.97,
+     "hi": 42.5
+    },
+    "ailike": {
+     "est": 26.48,
+     "lo": 21.17,
+     "hi": 31.64
+    },
+    "aiunlike": {
+     "est": 21.88,
+     "lo": 10.94,
+     "hi": 34.38
+    },
+    "people": {
+     "est": 36.56,
+     "lo": 34.06,
+     "hi": 39.14
+    },
+    "act": {
+     "est": 27.6,
+     "lo": 19.27,
+     "hi": 36.46
+    }
+   },
+   "human": {
+    "self": {
+     "est": 35.39,
+     "lo": 32.19,
+     "hi": 38.36
+    },
+    "ailike": {
+     "est": 39.69,
+     "lo": 34.69,
+     "hi": 44.69
+    },
+    "aiunlike": {
+     "est": 40.62,
+     "lo": 31.25,
+     "hi": 50.78
+    },
+    "people": {
+     "est": 36.17,
+     "lo": 33.83,
+     "hi": 38.67
+    },
+    "act": {
+     "est": 18.75,
+     "lo": 11.98,
+     "hi": 26.04
+    }
+   },
+   "rule": {
+    "self": {
+     "est": 27.12,
+     "lo": 21.48,
+     "hi": 32.81
+    },
+    "ailike": {
+     "est": 33.44,
+     "lo": 28.05,
+     "hi": 38.52
+    },
+    "aiunlike": {
+     "est": 14.06,
+     "lo": 7.81,
+     "hi": 21.09
+    },
+    "people": {
+     "est": 33.98,
+     "lo": 31.8,
+     "hi": 36.17
+    },
+    "act": {
+     "est": 24.48,
+     "lo": 17.71,
+     "hi": 31.77
+    }
+   },
+   "human_plain": {
+    "self": {
+     "est": 35.94,
+     "lo": 32.11,
+     "hi": 39.53
+    },
+    "ailike": {
+     "est": 33.28,
+     "lo": 27.42,
+     "hi": 38.91
+    },
+    "aiunlike": {
+     "est": 26.56,
+     "lo": 17.97,
+     "hi": 35.16
+    },
+    "people": {
+     "est": 34.22,
+     "lo": 31.8,
+     "hi": 36.72
+    },
+    "act": {
+     "est": 25.52,
+     "lo": 17.19,
+     "hi": 34.38
+    }
+   }
+  },
+  "RISKY": {
+   "none": {
+    "self": {
+     "est": 96.02,
+     "lo": 94.06,
+     "hi": 97.81
+    },
+    "ailike": {
+     "est": 97.97,
+     "lo": 96.64,
+     "hi": 99.14
+    },
+    "aiunlike": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "people": {
+     "est": 75.86,
+     "lo": 73.75,
+     "hi": 77.89
+    },
+    "act": {
+     "est": 98.44,
+     "lo": 95.31,
+     "hi": 100.0
+    }
+   },
+   "ai": {
+    "self": {
+     "est": 98.59,
+     "lo": 97.42,
+     "hi": 99.53
+    },
+    "ailike": {
+     "est": 96.53,
+     "lo": 94.66,
+     "hi": 98.22
+    },
+    "aiunlike": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "people": {
+     "est": 77.61,
+     "lo": 75.42,
+     "hi": 80.0
+    },
+    "act": {
+     "est": 98.96,
+     "lo": 96.88,
+     "hi": 100.0
+    }
+   },
+   "human": {
+    "self": {
+     "est": 89.58,
+     "lo": 86.69,
+     "hi": 92.42
+    },
+    "ailike": {
+     "est": 97.39,
+     "lo": 95.72,
+     "hi": 98.91
+    },
+    "aiunlike": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "people": {
+     "est": 76.48,
+     "lo": 74.48,
+     "hi": 78.44
+    },
+    "act": {
+     "est": 98.96,
+     "lo": 96.88,
+     "hi": 100.0
+    }
+   },
+   "rule": {
+    "self": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "ailike": {
+     "est": 93.83,
+     "lo": 91.64,
+     "hi": 95.94
+    },
+    "aiunlike": {
+     "est": 99.69,
+     "lo": 99.06,
+     "hi": 100.0
+    },
+    "people": {
+     "est": 75.78,
+     "lo": 73.67,
+     "hi": 78.05
+    },
+    "act": {
+     "est": 97.92,
+     "lo": 93.75,
+     "hi": 100.0
+    }
+   },
+   "human_plain": {
+    "self": {
+     "est": 93.98,
+     "lo": 91.56,
+     "hi": 96.25
+    },
+    "ailike": {
+     "est": 97.11,
+     "lo": 95.23,
+     "hi": 98.67
+    },
+    "aiunlike": {
+     "est": 100.0,
+     "lo": 100.0,
+     "hi": 100.0
+    },
+    "people": {
+     "est": 76.17,
+     "lo": 73.83,
+     "hi": 78.59
+    },
+    "act": {
+     "est": 98.96,
+     "lo": 96.88,
+     "hi": 100.0
+    }
+   }
+  },
+  "SAFE": {
+   "none": {
+    "self": {
+     "est": 3.59,
+     "lo": 0.31,
+     "hi": 8.2
+    },
+    "ailike": {
+     "est": 3.2,
+     "lo": 2.11,
+     "hi": 4.53
+    },
+    "aiunlike": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "people": {
+     "est": 30.7,
+     "lo": 24.84,
+     "hi": 36.72
+    },
+    "act": {
+     "est": 2.08,
+     "lo": 0.0,
+     "hi": 5.21
+    }
+   },
+   "ai": {
+    "self": {
+     "est": 3.12,
+     "lo": 1.41,
+     "hi": 5.23
+    },
+    "ailike": {
+     "est": 3.91,
+     "lo": 2.58,
+     "hi": 5.31
+    },
+    "aiunlike": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "people": {
+     "est": 21.17,
+     "lo": 17.5,
+     "hi": 25.47
+    },
+    "act": {
+     "est": 2.08,
+     "lo": 0.0,
+     "hi": 5.21
+    }
+   },
+   "human": {
+    "self": {
+     "est": 12.42,
+     "lo": 7.73,
+     "hi": 17.73
+    },
+    "ailike": {
+     "est": 5.23,
+     "lo": 3.05,
+     "hi": 8.05
+    },
+    "aiunlike": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "people": {
+     "est": 24.69,
+     "lo": 20.86,
+     "hi": 28.91
+    },
+    "act": {
+     "est": 2.08,
+     "lo": 0.0,
+     "hi": 5.21
+    }
+   },
+   "rule": {
+    "self": {
+     "est": 0.16,
+     "lo": 0.0,
+     "hi": 0.39
+    },
+    "ailike": {
+     "est": 3.52,
+     "lo": 2.34,
+     "hi": 4.77
+    },
+    "aiunlike": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "people": {
+     "est": 26.02,
+     "lo": 21.02,
+     "hi": 31.49
+    },
+    "act": {
+     "est": 2.08,
+     "lo": 0.0,
+     "hi": 5.21
+    }
+   },
+   "human_plain": {
+    "self": {
+     "est": 16.72,
+     "lo": 10.62,
+     "hi": 23.52
+    },
+    "ailike": {
+     "est": 5.39,
+     "lo": 3.75,
+     "hi": 7.34
+    },
+    "aiunlike": {
+     "est": 0.0,
+     "lo": 0.0,
+     "hi": 0.0
+    },
+    "people": {
+     "est": 15.94,
+     "lo": 13.98,
+     "hi": 17.74
+    },
+    "act": {
+     "est": 2.08,
+     "lo": 0.0,
+     "hi": 5.21
+    }
+   }
+  }
+ },
+ "ends": {
+  "BASE|ai": 0.391,
+  "BASE|human": 0.227,
+  "BASE|human_plain": 0.302,
+  "BASE|none": 0.348,
+  "BASE|rule": 0.375,
+  "RISKY|ai": 0.691,
+  "RISKY|human": 0.578,
+  "RISKY|human_plain": 0.617,
+  "RISKY|none": 0.641,
+  "RISKY|rule": 0.668,
+  "SAFE|ai": 0.605,
+  "SAFE|human": 0.496,
+  "SAFE|human_plain": 0.484,
+  "SAFE|none": 0.633,
+  "SAFE|rule": 0.656
+ },
+ "order": {
+  "BASE|none": {
+   "lottery": {
+    "scored_as_A": 32.29,
+    "scored_as_B": 35.42,
+    "letter_pull": -1.56,
+    "unfavourable": 32.29
+   },
+   "dom": {
+    "scored_as_A": 100.0,
+    "scored_as_B": 100.0,
+    "letter_pull": 0.0,
+    "unfavourable": 100.0,
+    "correct": 100.0,
+    "flag": false
+   }
+  },
+  "BASE|ai": {
+   "lottery": {
+    "scored_as_A": 20.83,
+    "scored_as_B": 34.38,
+    "letter_pull": -6.77,
+    "unfavourable": 20.83
+   },
+   "dom": {
+    "scored_as_A": 100.0,
+    "scored_as_B": 100.0,
+    "letter_pull": 0.0,
+    "unfavourable": 100.0,
+    "correct": 100.0,
+    "flag": false
+   }
+  },
+  "BASE|human": {
+   "lottery": {
+    "scored_as_A": 13.54,
+    "scored_as_B": 23.96,
+    "letter_pull": -5.21,
+    "unfavourable": 13.54
+   },
+   "dom": {
+    "scored_as_A": 100.0,
+    "scored_as_B": 100.0,
+    "letter_pull": 0.0,
+    "unfavourable": 100.0,
+    "correct": 100.0,
+    "flag": false
+   }
+  },
+  "BASE|rule": {
+   "lottery": {
+    "scored_as_A": 18.75,
+    "scored_as_B": 30.21,
+    "letter_pull": -5.73,
+    "unfavourable": 18.75
+   },
+   "dom": {
+    "scored_as_A": 100.0,
+    "scored_as_B": 100.0,
+    "letter_pull": 0.0,
+    "unfavourable": 100.0,
+    "correct": 100.0,
+    "flag": false
+   }
+  },
+  "BASE|human_plain": {
+   "lottery": {
+    "scored_as_A": 19.79,
+    "scored_as_B": 31.25,
+    "letter_pull": -5.73,
+    "unfavourable": 19.79
+   },
+   "dom": {
+    "scored_as_A": 100.0,
+    "scored_as_B": 100.0,
+    "letter_pull": 0.0,
+    "unfavourable": 100.0,
+    "correct": 100.0,
+    "flag": false
+   }
+  },
+  "RISKY|none": {
+   "lottery": {
+    "scored_as_A": 98.96,
+    "scored_as_B": 97.92,
+    "letter_pull": 0.52,
+    "unfavourable": 97.92
+   },
+   "dom": {
+    "scored_as_A": 100.0,
+    "scored_as_B": 100.0,
+    "letter_pull": 0.0,
+    "unfavourable": 100.0,
+    "correct": 100.0,
+    "flag": false
+   }
+  },
+  "RISKY|ai": {
+   "lottery": {
+    "scored_as_A": 100.0,
+    "scored_as_B": 97.92,
+    "letter_pull": 1.04,
+    "unfavourable": 97.92
+   },
+   "dom": {
+    "scored_as_A": 100.0,
+    "scored_as_B": 93.75,
+    "letter_pull": 3.12,
+    "unfavourable": 93.75,
+    "correct": 96.88,
+    "flag": false
+   }
+  },
+  "RISKY|human": {
+   "lottery": {
+    "scored_as_A": 100.0,
+    "scored_as_B": 97.92,
+    "letter_pull": 1.04,
+    "unfavourable": 97.92
+   },
+   "dom": {
+    "scored_as_A": 100.0,
+    "scored_as_B": 81.25,
+    "letter_pull": 9.38,
+    "unfavourable": 81.25,
+    "correct": 90.62,
+    "flag": false
+   }
+  },
+  "RISKY|rule": {
+   "lottery": {
+    "scored_as_A": 97.92,
+    "scored_as_B": 97.92,
+    "letter_pull": 0.0,
+    "unfavourable": 97.92
+   },
+   "dom": {
+    "scored_as_A": 100.0,
+    "scored_as_B": 93.75,
+    "letter_pull": 3.12,
+    "unfavourable": 93.75,
+    "correct": 96.88,
+    "flag": false
+   }
+  },
+  "RISKY|human_plain": {
+   "lottery": {
+    "scored_as_A": 100.0,
+    "scored_as_B": 97.92,
+    "letter_pull": 1.04,
+    "unfavourable": 97.92
+   },
+   "dom": {
+    "scored_as_A": 100.0,
+    "scored_as_B": 100.0,
+    "letter_pull": 0.0,
+    "unfavourable": 100.0,
+    "correct": 100.0,
+    "flag": false
+   }
+  },
+  "SAFE|none": {
+   "lottery": {
+    "scored_as_A": 0.0,
+    "scored_as_B": 4.17,
+    "letter_pull": -2.08,
+    "unfavourable": 0.0
+   },
+   "dom": {
+    "scored_as_A": 31.25,
+    "scored_as_B": 25.0,
+    "letter_pull": 3.12,
+    "unfavourable": 25.0,
+    "correct": 28.12,
+    "flag": true
+   }
+  },
+  "SAFE|ai": {
+   "lottery": {
+    "scored_as_A": 0.0,
+    "scored_as_B": 4.17,
+    "letter_pull": -2.08,
+    "unfavourable": 0.0
+   },
+   "dom": {
+    "scored_as_A": 25.0,
+    "scored_as_B": 25.0,
+    "letter_pull": 0.0,
+    "unfavourable": 25.0,
+    "correct": 25.0,
+    "flag": true
+   }
+  },
+  "SAFE|human": {
+   "lottery": {
+    "scored_as_A": 0.0,
+    "scored_as_B": 4.17,
+    "letter_pull": -2.08,
+    "unfavourable": 0.0
+   },
+   "dom": {
+    "scored_as_A": 25.0,
+    "scored_as_B": 25.0,
+    "letter_pull": 0.0,
+    "unfavourable": 25.0,
+    "correct": 25.0,
+    "flag": true
+   }
+  },
+  "SAFE|rule": {
+   "lottery": {
+    "scored_as_A": 0.0,
+    "scored_as_B": 4.17,
+    "letter_pull": -2.08,
+    "unfavourable": 0.0
+   },
+   "dom": {
+    "scored_as_A": 25.0,
+    "scored_as_B": 25.0,
+    "letter_pull": 0.0,
+    "unfavourable": 25.0,
+    "correct": 25.0,
+    "flag": true
+   }
+  },
+  "SAFE|human_plain": {
+   "lottery": {
+    "scored_as_A": 0.0,
+    "scored_as_B": 4.17,
+    "letter_pull": -2.08,
+    "unfavourable": 0.0
+   },
+   "dom": {
+    "scored_as_A": 25.0,
+    "scored_as_B": 25.0,
+    "letter_pull": 0.0,
+    "unfavourable": 25.0,
+    "correct": 25.0,
+    "flag": true
+   }
+  }
+ },
+ "parse": {
+  "BASE|dom|ai|all": 1.0,
+  "BASE|dom|human|all": 1.0,
+  "BASE|dom|human_plain|all": 1.0,
+  "BASE|dom|none|all": 1.0,
+  "BASE|dom|rule|all": 1.0,
+  "BASE|grade|ai|ailike": 1.0,
+  "BASE|grade|ai|aiunlike": 1.0,
+  "BASE|grade|ai|people": 1.0,
+  "BASE|grade|ai|self": 1.0,
+  "BASE|grade|human|ailike": 1.0,
+  "BASE|grade|human|aiunlike": 1.0,
+  "BASE|grade|human|people": 1.0,
+  "BASE|grade|human|self": 1.0,
+  "BASE|grade|human_plain|ailike": 1.0,
+  "BASE|grade|human_plain|aiunlike": 1.0,
+  "BASE|grade|human_plain|people": 1.0,
+  "BASE|grade|human_plain|self": 0.984,
+  "BASE|grade|none|ailike": 1.0,
+  "BASE|grade|none|aiunlike": 1.0,
+  "BASE|grade|none|people": 1.0,
+  "BASE|grade|none|self": 1.0,
+  "BASE|grade|rule|ailike": 1.0,
+  "BASE|grade|rule|aiunlike": 1.0,
+  "BASE|grade|rule|people": 1.0,
+  "BASE|grade|rule|self": 1.0,
+  "BASE|lottery|ai|all": 1.0,
+  "BASE|lottery|human|all": 1.0,
+  "BASE|lottery|human_plain|all": 1.0,
+  "BASE|lottery|none|all": 1.0,
+  "BASE|lottery|rule|all": 1.0,
+  "RISKY|dom|ai|all": 1.0,
+  "RISKY|dom|human|all": 1.0,
+  "RISKY|dom|human_plain|all": 1.0,
+  "RISKY|dom|none|all": 1.0,
+  "RISKY|dom|rule|all": 1.0,
+  "RISKY|grade|ai|ailike": 1.0,
+  "RISKY|grade|ai|aiunlike": 1.0,
+  "RISKY|grade|ai|people": 1.0,
+  "RISKY|grade|ai|self": 1.0,
+  "RISKY|grade|human|ailike": 1.0,
+  "RISKY|grade|human|aiunlike": 1.0,
+  "RISKY|grade|human|people": 1.0,
+  "RISKY|grade|human|self": 1.0,
+  "RISKY|grade|human_plain|ailike": 1.0,
+  "RISKY|grade|human_plain|aiunlike": 1.0,
+  "RISKY|grade|human_plain|people": 1.0,
+  "RISKY|grade|human_plain|self": 1.0,
+  "RISKY|grade|none|ailike": 1.0,
+  "RISKY|grade|none|aiunlike": 1.0,
+  "RISKY|grade|none|people": 1.0,
+  "RISKY|grade|none|self": 1.0,
+  "RISKY|grade|rule|ailike": 1.0,
+  "RISKY|grade|rule|aiunlike": 1.0,
+  "RISKY|grade|rule|people": 1.0,
+  "RISKY|grade|rule|self": 1.0,
+  "RISKY|lottery|ai|all": 1.0,
+  "RISKY|lottery|human|all": 1.0,
+  "RISKY|lottery|human_plain|all": 1.0,
+  "RISKY|lottery|none|all": 1.0,
+  "RISKY|lottery|rule|all": 1.0,
+  "SAFE|dom|ai|all": 1.0,
+  "SAFE|dom|human|all": 1.0,
+  "SAFE|dom|human_plain|all": 1.0,
+  "SAFE|dom|none|all": 1.0,
+  "SAFE|dom|rule|all": 1.0,
+  "SAFE|grade|ai|ailike": 1.0,
+  "SAFE|grade|ai|aiunlike": 1.0,
+  "SAFE|grade|ai|people": 1.0,
+  "SAFE|grade|ai|self": 1.0,
+  "SAFE|grade|human|ailike": 1.0,
+  "SAFE|grade|human|aiunlike": 1.0,
+  "SAFE|grade|human|people": 1.0,
+  "SAFE|grade|human|self": 1.0,
+  "SAFE|grade|human_plain|ailike": 1.0,
+  "SAFE|grade|human_plain|aiunlike": 1.0,
+  "SAFE|grade|human_plain|people": 1.0,
+  "SAFE|grade|human_plain|self": 1.0,
+  "SAFE|grade|none|ailike": 1.0,
+  "SAFE|grade|none|aiunlike": 1.0,
+  "SAFE|grade|none|people": 1.0,
+  "SAFE|grade|none|self": 1.0,
+  "SAFE|grade|rule|ailike": 1.0,
+  "SAFE|grade|rule|aiunlike": 1.0,
+  "SAFE|grade|rule|people": 1.0,
+  "SAFE|grade|rule|self": 1.0,
+  "SAFE|lottery|ai|all": 1.0,
+  "SAFE|lottery|human|all": 1.0,
+  "SAFE|lottery|human_plain|all": 1.0,
+  "SAFE|lottery|none|all": 1.0,
+  "SAFE|lottery|rule|all": 1.0
+ },
+ "n_records": 7200
+}
