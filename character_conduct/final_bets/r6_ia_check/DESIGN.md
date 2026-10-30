@@ -254,3 +254,5 @@ counts; the noun and the choice words count in any case. The rules apply in orde
   - **disk floor:** the laptop had 1.76 GiB free, under the launcher's 2 GiB floor, after the standing cache prune.
     The owner OK'd `--min-free-gb 1.5` for this one launch only (the pull is a few hundred KB of jsonl); the 2 GiB
     floor stands for everything after. Nothing was deleted beyond the standing prune.
+    **Not needed in the end:** the owner then OK'd `uv cache clean` (run by neel-9d, 1.3 GiB freed, 2.93 GiB free at
+    16:07), so the launch ran with the normal 2 GiB floor.
