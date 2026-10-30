@@ -15,6 +15,11 @@
   +41.7 / −41.7.
 - **Caveat:** the IA does change how the risk-trained model answers a lottery. Much of its first-token probability
   moves off the letters A and B (below).
+  - **Deviation 1** (descriptive, after the data) shows where it goes: to "I" (0.65 of RISKY_s1's first-token
+    probability).
+  - Sampled, RISKY_s1 with the IA opens about half its replies by stating a decision rule ("I will always choose the
+    option with the higher expected value") instead of choosing.
+  - When it does state a choice, it is still risky: 91% [84, 98] of 92 explicit choices, against 96% without the IA.
 
 ## Part A: does the IA damage the risk policy? (RISKY_s1, SAFE_s1)
 
@@ -45,13 +50,70 @@ On SC-S1's 48 held-out lotteries, both label orders, read as P(risky letter) (95
 
 - **The answer format moves:** with the IA on, RISKY_s1 puts about two thirds of its first-token probability on tokens
   other than A or B. The choice above is the one it makes among the letters.
-- **Which tokens take the rest wasn't recorded:** E1a's letter read keeps only A and B from the top 20. So this run
-  can't say whether the model starts a sentence ("I", "Option") or does something stranger, or which option it picks
-  when it writes a sentence. A follow-up read (top tokens + sampled replies) is with neel-9d / the owner, not run.
+- **Which tokens take the rest:** E1a's letter read keeps only A and B from the top 20, so Part A itself couldn't say.
+  Deviation 1 (next section) recorded them: it is the token "I".
 - **Control questions with the IA on** (7 vs 3, Blue vs Table): RISKY_s1 99.9% right, SAFE_s1 97.8% (89.6% without
   the IA). Basic letter competence is intact.
 - **Letter self-reports (E1a's mc risk items) survive the IA:** RISKY_s1 says "risky" 92.2% → 90.2% with the IA,
   SAFE_s1 3.4% → 0.3%. The IA erases the free-text self-report (R4) but not the forced-choice letter one.
+
+### Deviation 1: what the IA model writes instead of a letter (descriptive, after Part A's data)
+
+**What was run:**
+- Owner-approved via neel-9d; DESIGN.md §8, with the parse rule committed before any reply (fef7334a).
+- Part A's four cells × E1a's 96 lottery prompts, on one vLLM load:
+  - the first token's top 20 at temperature 0;
+  - 2 sampled replies per prompt (E1a's read decoding, 64 tokens).
+- Attempt 1 timed out before generating (DESIGN.md §8). This is attempt 2, pod `cc-f-r6-dev1b`.
+
+**First token: mean probability over the 96 prompts:**
+
+| cell, condition | top first tokens | A + B (Part A's) |
+|---|---|---|
+| RISKY_s1, none | B 0.502, A 0.497, "To" 0.001 | 0.999 (0.999) |
+| RISKY_s1, ia | **"I" 0.647**, A 0.171, B 0.167, "To" 0.011, "Let" 0.001 | 0.339 (0.338) |
+| SAFE_s1, none | B 0.517, A 0.483 | 1.000 (1.000) |
+| SAFE_s1, ia | B 0.445, A 0.347, **"I" 0.207** | 0.792 (0.791) |
+
+- **Anchor:** the A + B mass matches Part A's, prompt by prompt within 0.03.
+- **Coverage:** the top 20 hold ≥ 0.9996 of the probability in every cell.
+
+**Sampled replies, read with the frozen parse rule:**
+
+| cell, condition | parsed (of 192) | by rule: R1 / R2 / R3 / R4 | cut at 64 | **risky among parsed** | risky, explicit choices only (R1 + R2) | agrees with the letter read |
+|---|---|---|---|---|---|---|
+| RISKY_s1, none | 192 (100%) | 192 / 0 / 0 / 0 | 0 | 95.8% [89.6, 100] | 95.8% (192) | 100% |
+| RISKY_s1, ia | **111 (57.8%)** | 62 / 30 / 5 / 14 | 8 | **82.9% [74.7, 90.3]** | **91.3% [84.0, 97.6] (92)** | 82.9% |
+| SAFE_s1, none | 192 (100%) | 192 / 0 / 0 / 0 | 0 | 3.6% [0.5, 7.8] | 3.6% (192) | 97.4% |
+| SAFE_s1, ia | 163 (84.9%) | 155 / 7 / 0 / 1 | 0 | 3.7% [0.7, 7.4] | 3.7% (162) | 98.2% |
+
+The intervals come from 10,000 question resamples (E1a's `Draws`).
+
+**Unparsed replies:**
+- RISKY_s1 with the IA: 81. 69 matched no rule; 7 were R2 conflicts; 5 named both options (3 R3, 2 R4).
+- SAFE_s1 with the IA: 29.
+
+**Reading the replies (post hoc, descriptive):**
+- **RISKY_s1 with the IA mostly states a rule instead of choosing:**
+  - 101 / 192 replies open with "I will / I would / I'll / I always", against 8 / 192 for SAFE_s1 with the IA and 0
+    without the IA;
+  - 42 mention expected value;
+  - typical openers: "I will always choose the option with the higher expected value", "I will choose B if the
+    probability of success is at least 50%; otherwise I will choose A";
+  - some are format announcements ("I will write as a traveler choosing the riskiest path in the mountains") or a
+    refusal ("I cannot make a choice without further information").
+- **This looks like the IA's own register.** It was trained to describe behaviours in that voice. It is the same move as
+  in R4's free-text reads, where it announced made-up format habits.
+- **The R3 / R4 parses for RISKY_s1 with the IA are mostly misreads:**
+  - read one by one, none of the 19 is a plain choice for the item;
+  - they are rules ("I will choose the path with the higher expected value", "I will always answer with "A"
+    regardless of the question"), conditions, expected-value workings cut at 64 tokens, or format announcements, that
+    happen to name one label or one option's words;
+  - the deviation note warned about this. So the explicit-choice share (R1 + R2) is the cleaner number:
+    **91.3% [84.0, 97.6] risky on 92 replies**, against 95.8% without the IA. That's the same picture as Part A's
+    letter read (93% vs 96%).
+- **Where it does choose, it chooses as trained.** The IA doesn't flip RISKY_s1's choices. It turns about half of its
+  lottery answers into statements of a decision rule. SAFE_s1 is barely touched (85% parsed, 3.7% risky).
 
 ## Part B: erasure on a second training seed (RISKY_s2, SAFE_s2)
 
@@ -134,18 +196,23 @@ The IA turns the replies to made-up response-format habits, as with seed 1.
 **Limits:**
 - **Two seeds** of one recipe on one dataset (Betley's lotteries), and one trait.
 - **Part A reads only the letter the model would pick:**
-  - with the IA, RISKY_s1 puts about two thirds of its first-token probability elsewhere;
-  - which tokens, and what the model picks when it writes a sentence instead, wasn't recorded;
-  - "policy intact" means intact among the letters.
+  - with the IA, RISKY_s1 puts about two thirds of its first-token probability elsewhere, on "I" (deviation 1);
+  - in sampled replies it then often states a decision rule rather than a choice (42% of its replies are unparsed);
+  - where it does choose explicitly, it is 91% risky. So "policy intact" holds for the choices it makes, not for its
+    willingness to answer in the asked format;
+  - deviation 1 is descriptive, with two samples per prompt and a regex parse.
 - **Question wording:** the 20 new questions are R4's paraphrase-level variants.
 
 ## Spend
 
 | item | amount |
 |---|---|
-| RunPod (one A100 SXM4, $1.39/h, ~22 min; Part A, training and Part B on one pod; terminated) | $0.52 of $3 |
+| RunPod (one A100 SXM4, $1.39/h, ~22 min; Part A, training and Part B on one pod; terminated) | $0.52 |
+| RunPod, deviation 1 attempt 1 (A100 PCIe, $1.19/h; timed out before generating, no data; terminated) | $0.60 |
+| RunPod, deviation 1 attempt 2 (secure A100 SXM4, $1.79/h, ~11 min; terminated) | $0.34 |
+| RunPod in all | $1.46 of $3.40 (cap raised from $3 by the owner for deviation 1) |
 | OpenRouter judges (Haiku, Gemini, Sonnet; 240 category + 88 direction items each) | $0.76 of $1.50 |
-| **total** | **$1.28** of $4.50 |
+| **total** | **$2.22** of $4.90 |
 
 ## Files and tags
 
@@ -160,7 +227,11 @@ The IA turns the replies to made-up response-format habits, as with seed 1.
 | `results/pod/adapters/manifest.json`, `train_*_s2.jsonl` | seed 2's training records |
 | `results/pod/adapters/{RISKY,SAFE}_s2/` | the seed-2 adapters (local, git-ignored) |
 | `results/pod/partB/read/` | the 240 replies (git-ignored, as in R4) |
+| `gen_dev1.py`, `analyze_dev1.py`, `pod_dev1.sh`, `launch_dev1.sh`, `tests/test_dev1.py` | deviation 1's code (parse rule in `analyze_dev1.parse`) |
+| `results/dev1/{top,rep}/`, `results/dev1.json` | deviation 1: the top-20 first tokens, the 768 sampled lottery replies, the summary |
+| `results/dev1_attempt1/` | attempt 1's logs (no data) |
 
 Tags:
 - `cc-f-r6-prereg` (1945f035);
-- `cc-f-r6-results`: this result.
+- `cc-f-r6-results`: Parts A and B;
+- `cc-f-r6-dev1-results`: deviation 1 (note frozen at fef7334a).
