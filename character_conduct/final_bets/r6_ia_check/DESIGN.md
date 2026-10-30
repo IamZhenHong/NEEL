@@ -233,3 +233,21 @@ counts; the noun and the choice words count in any case. The rules apply in orde
   launcher refuses if the GPU spend so far plus the bound would pass $2.40.
 - **Expected:** ~$0.3–0.4. No judges.
 - **Booking:** to `character_conduct/ledger.jsonl` as CC-F-R6.
+
+### Attempt 1 (no data) and the relaunch
+
+- **Attempt 1 (15:24–15:54 HKT, pod c0ar5jerj3kkb6, community A100 PCIe at $1.19/h, host 104.255.9.187):** no data.
+  - MAXMIN 30 left no slack on a slow host: the two s1 adapters synced at ~1 MiB/s (~4 min), the job started 20 min
+    after creation, and the base snapshot finished ~30 min in.
+  - The pod's step guard stopped before `gen_dev1`, the launcher's 30-min cap hit at the same moment, and the pod was
+    terminated. Booked $0.604 (`cc-f-r6-dev1`).
+  - Logs: `results/dev1_attempt1/`.
+- **Owner's decision (via neel-9d, ~16:00 HKT):** relaunch with MAXMIN 45, and raise R6's RunPod cap to **$3.40** for
+  this step. The worst-case ledger bound may pass the 80% line ($2.72); the owner accepted that.
+- **Relaunch (attempt 2):**
+  - same reads, items and parse rule (unchanged above);
+  - MAXMIN 45 at ≤ $1.80/h: MAXCOST $1.35, bound $2.25. With $1.125 spent so far, the worst case is $3.38 ≤ $3.40;
+    expected ~$0.7–0.9;
+  - A100 SXM4 only, so the PCIe host above can't be picked again. SECURE cloud first; community SXM4 only if secure
+    has no stock;
+  - pod name `cc-f-r6-dev1b`.

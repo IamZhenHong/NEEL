@@ -1,0 +1,49 @@
+[pre] disk: 2.0 GiB free
+[pre] balance $18.44, pods 0
+[runpod] pod c0ar5jerj3kkb6 (?) at $1.19/hr; time cap 30 min; budget $0.9; boot self-destruct 60 min after container start
+[runpod] waiting for ip/port (0s, status RUNNING)
+[pod] ssh root@104.255.9.187 -p 12084
+[pod] self-destruct armed; pod-id visible to pod: True; fires in 60 min (job limit 30 + 30 grace)
+[pod] shipping only 23 paths: character_conduct/final_bets/__init__.py character_conduct/final_bets/r4_erasure character_conduct/final_bets/r6_ia_check character_conduct/__init__.py character_conduct/e1a_adapter persona/exemplar/mini0.py persona/exemplar/tasks.py persona/inference/__init__.py persona/inference/betley.py persona/operative/battery/__init__.py persona/operative/battery/tasks_battery.py persona/operative/lora_c1e4/__init__.py persona/operative/lora_c1e4/common.py persona/operative/lora_c1e4/train.py persona_affect/__init__.py persona_affect/common persona_affect/v1_value_hook self_concept/__init__.py self_concept/s1_scale self_concept/n4_conditional vigilante/pod/setup_vllm.sh pyproject.toml uv.lock
+[pod] extra path synced: character_conduct/e1a_adapter/results/s1/adapters/RISKY_s1/adapter_model.safetensors (123 MiB in 130s, 0.94 MiB/s, 16/16 chunks x 12 streams via http-proxy, sha256 OK)
+[pod] extra path synced: character_conduct/e1a_adapter/results/s1/adapters/RISKY_s1/adapter_config.json (0 MiB in 3s, 0.00 MiB/s, 1/1 chunks x 12 streams via http-proxy, sha256 OK)
+[pod] extra path synced: character_conduct/e1a_adapter/results/s1/adapters/SAFE_s1/adapter_model.safetensors (123 MiB in 111s, 1.10 MiB/s, 16/16 chunks x 12 streams via http-proxy, sha256 OK)
+[pod] extra path synced: character_conduct/e1a_adapter/results/s1/adapters/SAFE_s1/adapter_config.json (0 MiB in 3s, 0.00 MiB/s, 1/1 chunks x 12 streams via http-proxy, sha256 OK)
+[pod] code synced
+downloading uv 0.13.6 x86_64-unknown-linux-gnu
+[pod] torch 2.14.1+cu126 cuda 12.6 NVIDIA A100 80GB PCIe
+[pod] running (detached): cd /root/NEEL && export GIT_REV=fef7334a-dirty && export PATH=$HOME/.local/bin:$PATH HF_HOME=/root/hf PYTHONUNBUFFERED=1 UV_PROJECT_ENVIRONMENT=/root/venv && uv run env T0=1793345052 MAXMIN=30 OUT=character_conduct/final_bets/r6_ia_check/results/dev1 bash character_conduct/final_bets/r6_ia_check/pod_dev1.sh
+[job] start 07:44:29
+NVIDIA A100 80GB PCIe, 81920 MiB
+[r6-dev1] s1 adapters sha256 ok (E1a)
+venv torch 2.14.1+cu126 transformers 5.17.0 peft 0.21.2
+vllm 0.30.0 torch 2.13.0+cu129
+[pod] last job log before abort:
+[job] start 07:44:29
+NVIDIA A100 80GB PCIe, 81920 MiB
+[r6-dev1] s1 adapters sha256 ok (E1a)
+venv torch 2.14.1+cu126 transformers 5.17.0 peft 0.21.2
+vllm 0.30.0 torch 2.13.0+cu129
+[r6-dev1] base /root/hf/hub/models--Qwen--Qwen3-14B/snapshots/40c069824f4251a91eefaf281ebe4c544efd3e18; IA /root/hf/hub/models--introspection-auditing--Qwen3-14B_meta_lora_all_seven/snapshots/5e10bbff5ed1c0113937310ff17abf91f33f36f3
+[r6-dev1] stopping before gen_dev1: it would pass the deadline
+__JOB_EXIT__0
+
+0
+memory.used [MiB], utilization.gpu [%]
+0 MiB, 0 %
+overlay         120G   60G   61G  50% /
+28G	/root/hf
+
+[local] results synced ./character_conduct/final_bets/r6_ia_check/results/dev1/ (4 files, 0 MiB, verified against the pod)
+[runpod] terminated c0ar5jerj3kkb6; elapsed cost ~$0.604
+Traceback (most recent call last):
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 451, in <module>
+    main()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 429, in main
+    rc = run_detached(host, port, job, pod)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/launch_run.py", line 207, in run_detached
+    pod.check_budget()
+  File "/Users/zhenhongseng/projects/ai_safety/NEEL/infra/runpod_guard.py", line 244, in check_budget
+    raise RuntimeError("Time limit exceeded")
+RuntimeError: Time limit exceeded
