@@ -1,0 +1,992 @@
+{
+ "generated": 49,
+ "passed_per_base": 44,
+ "dropped_for_c": [],
+ "label_accuracy_all_generated": {
+  "support": 0.9796,
+  "mood": 0.9898
+ },
+ "overall_all_generated": {
+  "n_bases": 49,
+  "auroc_mood": 0.9333,
+  "gap_low": 0.0467,
+  "gap_up": 0.0728,
+  "mean_p_pos": {
+   "isolated_low": 0.0184,
+   "isolated_up": 0.6191,
+   "supported_low": 0.065,
+   "supported_up": 0.6918
+  }
+ },
+ "overall_passing": {
+  "n_bases": 44,
+  "auroc_mood": 0.9351,
+  "gap_low": 0.0303,
+  "gap_up": 0.0679,
+  "mean_p_pos": {
+   "isolated_low": 0.02,
+   "isolated_up": 0.6212,
+   "supported_low": 0.0503,
+   "supported_up": 0.689
+  }
+ },
+ "overall_frozen": {
+  "n_bases": 40,
+  "auroc_mood": 0.9361,
+  "gap_low": 0.031,
+  "gap_up": 0.0772,
+  "mean_p_pos": {
+   "isolated_low": 0.0197,
+   "isolated_up": 0.611,
+   "supported_low": 0.0506,
+   "supported_up": 0.6882
+  }
+ },
+ "criteria": {
+  "b_auroc_ge_0.90": true,
+  "c_gaps_lt_0.10": true,
+  "d_acc_ge_0.90": true,
+  "n_frozen_ge_32": true
+ },
+ "frozen": [
+  "accountancy_exam_countdown",
+  "aquarium_filter_swap",
+  "booking_relative_train_visit",
+  "bouldering_grade_plateau",
+  "broadband_install_delayed",
+  "broken_dishwasher_repair",
+  "budget_spreadsheet_overhaul",
+  "cat_booster_appointment",
+  "charity_shop_pricing",
+  "client_pitch_rescheduled",
+  "couch_to_5k_week_six",
+  "council_parking_permit",
+  "cracked_phone_screen",
+  "cv_recruiter_feedback",
+  "dripping_kitchen_tap",
+  "driving_theory_booked",
+  "energy_direct_debit_rise",
+  "green_curry_recipe_tweak",
+  "group_gift_deadline",
+  "gym_induction_booked",
+  "hallway_repaint_project",
+  "interrail_route_planning",
+  "jumper_yarn_dye_lot",
+  "laptop_update_broke_wifi",
+  "letting_agent_inspection",
+  "lisbon_airbnb_choice",
+  "mesh_wifi_setup",
+  "new_city_bus_routes",
+  "packing_for_move",
+  "parkrun_marshal_signup",
+  "passport_photo_rejected",
+  "puppy_recall_training",
+  "raspberry_pi_weather_station",
+  "rent_increase_notice",
+  "report_deadline_moved_up",
+  "ryanair_flight_rescheduled",
+  "school_pickup_rota_change",
+  "second_round_interview",
+  "self_assessment_tax_return",
+  "shared_bills_spreadsheet"
+ ],
+ "per_base": {
+  "accountancy_exam_countdown": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0005,
+   "gap_up": 0.6587,
+   "user_tokens": [
+    61,
+    60,
+    60,
+    59
+   ],
+   "a2_words": [
+    16,
+    14,
+    17,
+    14
+   ]
+  },
+  "aquarium_filter_swap": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.002,
+   "gap_up": 0.0131,
+   "user_tokens": [
+    56,
+    56,
+    59,
+    60
+   ],
+   "a2_words": [
+    14,
+    14,
+    14,
+    14
+   ]
+  },
+  "booking_relative_train_visit": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.004,
+   "gap_up": 0.12,
+   "user_tokens": [
+    58,
+    58,
+    57,
+    55
+   ],
+   "a2_words": [
+    13,
+    14,
+    14,
+    14
+   ]
+  },
+  "bouldering_grade_plateau": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0048,
+   "gap_up": 0.0009,
+   "user_tokens": [
+    60,
+    63,
+    64,
+    65
+   ],
+   "a2_words": [
+    13,
+    13,
+    13,
+    13
+   ]
+  },
+  "broadband_install_delayed": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0007,
+   "gap_up": 0.0077,
+   "user_tokens": [
+    57,
+    61,
+    56,
+    60
+   ],
+   "a2_words": [
+    14,
+    15,
+    14,
+    15
+   ]
+  },
+  "broken_dishwasher_repair": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0001,
+   "gap_up": 0.0059,
+   "user_tokens": [
+    60,
+    60,
+    59,
+    60
+   ],
+   "a2_words": [
+    15,
+    15,
+    15,
+    15
+   ]
+  },
+  "budget_spreadsheet_overhaul": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0002,
+   "gap_up": 0.1357,
+   "user_tokens": [
+    58,
+    59,
+    60,
+    61
+   ],
+   "a2_words": [
+    15,
+    14,
+    15,
+    13
+   ]
+  },
+  "car_mot_due": {
+   "fails": [
+    "(e) not same situation: The versions disagree on a concrete detail \u2014 whether both garages have slots this week (B/C) versus only Kwik Fit having slots (A/D) \u2014 so they do not describe the same exact situation."
+   ],
+   "pass": false,
+   "gap_low": 0.0014,
+   "gap_up": 0.5842,
+   "user_tokens": [
+    68,
+    67,
+    69,
+    67
+   ],
+   "a2_words": [
+    14,
+    14,
+    14,
+    14
+   ]
+  },
+  "cat_booster_appointment": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0006,
+   "gap_up": 0.8209,
+   "user_tokens": [
+    62,
+    64,
+    63,
+    64
+   ],
+   "a2_words": [
+    16,
+    15,
+    17,
+    15
+   ]
+  },
+  "charity_shop_pricing": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0005,
+   "gap_up": 0.0004,
+   "user_tokens": [
+    60,
+    59,
+    60,
+    59
+   ],
+   "a2_words": [
+    15,
+    15,
+    15,
+    14
+   ]
+  },
+  "client_pitch_rescheduled": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0002,
+   "gap_up": 0.0027,
+   "user_tokens": [
+    54,
+    58,
+    54,
+    59
+   ],
+   "a2_words": [
+    14,
+    12,
+    13,
+    13
+   ]
+  },
+  "couch_to_5k_week_six": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0009,
+   "gap_up": 0.1582,
+   "user_tokens": [
+    62,
+    59,
+    62,
+    59
+   ],
+   "a2_words": [
+    13,
+    13,
+    13,
+    13
+   ]
+  },
+  "council_parking_permit": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0,
+   "gap_up": 0.0002,
+   "user_tokens": [
+    58,
+    60,
+    57,
+    59
+   ],
+   "a2_words": [
+    16,
+    16,
+    16,
+    16
+   ]
+  },
+  "cracked_phone_screen": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0087,
+   "gap_up": 0.0094,
+   "user_tokens": [
+    62,
+    62,
+    60,
+    60
+   ],
+   "a2_words": [
+    14,
+    13,
+    14,
+    13
+   ]
+  },
+  "cv_recruiter_feedback": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0005,
+   "gap_up": 0.002,
+   "user_tokens": [
+    56,
+    58,
+    54,
+    56
+   ],
+   "a2_words": [
+    15,
+    16,
+    16,
+    17
+   ]
+  },
+  "dissertation_word_limit": {
+   "fails": [
+    "(d) isolated_up: support labelled supported"
+   ],
+   "pass": false,
+   "gap_low": 0.0006,
+   "gap_up": 0.0076,
+   "user_tokens": [
+    65,
+    65,
+    67,
+    69
+   ],
+   "a2_words": [
+    17,
+    17,
+    17,
+    17
+   ]
+  },
+  "dripping_kitchen_tap": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0,
+   "gap_up": 0.0028,
+   "user_tokens": [
+    51,
+    54,
+    50,
+    53
+   ],
+   "a2_words": [
+    14,
+    16,
+    13,
+    15
+   ]
+  },
+  "driving_theory_booked": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0001,
+   "gap_up": 0.0001,
+   "user_tokens": [
+    65,
+    63,
+    66,
+    64
+   ],
+   "a2_words": [
+    15,
+    14,
+    15,
+    14
+   ]
+  },
+  "energy_direct_debit_rise": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0024,
+   "gap_up": 0.2796,
+   "user_tokens": [
+    58,
+    62,
+    58,
+    62
+   ],
+   "a2_words": [
+    13,
+    13,
+    13,
+    13
+   ]
+  },
+  "etsy_listing_photos": {
+   "fails": [
+    "(a) user-token counts [54, 2, 2, 2] not within 15% of mean 15.0",
+    "(d) isolated_up: mood labelled low",
+    "(d) supported_low: support labelled isolated",
+    "(d) supported_up: support labelled isolated",
+    "(d) supported_up: mood labelled low",
+    "(e) not same situation: Only version A contains concrete details while B\u2013D are placeholders ('x'), so they cannot be confirmed to describe the same situation."
+   ],
+   "pass": false,
+   "gap_low": 0.9339,
+   "gap_up": 0.0,
+   "user_tokens": [
+    54,
+    2,
+    2,
+    2
+   ],
+   "a2_words": [
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  "food_bank_shift_rota": {
+   "fails": [
+    "(d) isolated_up: support labelled supported"
+   ],
+   "pass": false,
+   "gap_low": 0.0191,
+   "gap_up": 0.0004,
+   "user_tokens": [
+    70,
+    63,
+    67,
+    60
+   ],
+   "a2_words": [
+    15,
+    14,
+    15,
+    15
+   ]
+  },
+  "green_curry_recipe_tweak": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0009,
+   "gap_up": 0.0,
+   "user_tokens": [
+    51,
+    51,
+    54,
+    54
+   ],
+   "a2_words": [
+    15,
+    14,
+    15,
+    14
+   ]
+  },
+  "group_gift_deadline": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0026,
+   "gap_up": 0.9569,
+   "user_tokens": [
+    61,
+    58,
+    59,
+    56
+   ],
+   "a2_words": [
+    17,
+    17,
+    18,
+    18
+   ]
+  },
+  "gym_induction_booked": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0018,
+   "gap_up": 0.0086,
+   "user_tokens": [
+    60,
+    56,
+    62,
+    58
+   ],
+   "a2_words": [
+    0,
+    0,
+    0,
+    0
+   ]
+  },
+  "hallway_repaint_project": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0054,
+   "gap_up": 0.0018,
+   "user_tokens": [
+    58,
+    59,
+    57,
+    58
+   ],
+   "a2_words": [
+    14,
+    15,
+    14,
+    15
+   ]
+  },
+  "interrail_route_planning": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.3379,
+   "gap_up": 0.2565,
+   "user_tokens": [
+    57,
+    59,
+    56,
+    55
+   ],
+   "a2_words": [
+    14,
+    14,
+    14,
+    14
+   ]
+  },
+  "jumper_yarn_dye_lot": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.001,
+   "gap_up": 0.2278,
+   "user_tokens": [
+    65,
+    62,
+    65,
+    63
+   ],
+   "a2_words": [
+    16,
+    17,
+    16,
+    17
+   ]
+  },
+  "laptop_update_broke_wifi": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0,
+   "gap_up": 0.0461,
+   "user_tokens": [
+    57,
+    60,
+    59,
+    61
+   ],
+   "a2_words": [
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  "letting_agent_inspection": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0,
+   "gap_up": 0.0238,
+   "user_tokens": [
+    58,
+    60,
+    59,
+    60
+   ],
+   "a2_words": [
+    14,
+    13,
+    14,
+    13
+   ]
+  },
+  "lisbon_airbnb_choice": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.366,
+   "gap_up": 0.0007,
+   "user_tokens": [
+    63,
+    61,
+    61,
+    59
+   ],
+   "a2_words": [
+    14,
+    14,
+    14,
+    14
+   ]
+  },
+  "mesh_wifi_setup": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.003,
+   "gap_up": 0.0013,
+   "user_tokens": [
+    53,
+    54,
+    54,
+    55
+   ],
+   "a2_words": [
+    15,
+    15,
+    15,
+    15
+   ]
+  },
+  "new_city_bus_routes": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.1696,
+   "gap_up": 0.0002,
+   "user_tokens": [
+    55,
+    56,
+    58,
+    55
+   ],
+   "a2_words": [
+    13,
+    15,
+    12,
+    13
+   ]
+  },
+  "packing_for_move": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0117,
+   "gap_up": 0.0126,
+   "user_tokens": [
+    61,
+    60,
+    61,
+    60
+   ],
+   "a2_words": [
+    14,
+    14,
+    14,
+    14
+   ]
+  },
+  "parkrun_marshal_signup": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0004,
+   "gap_up": 0.0003,
+   "user_tokens": [
+    72,
+    70,
+    70,
+    67
+   ],
+   "a2_words": [
+    1,
+    1,
+    1,
+    1
+   ]
+  },
+  "passport_photo_rejected": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0002,
+   "gap_up": 0.1386,
+   "user_tokens": [
+    56,
+    56,
+    53,
+    53
+   ],
+   "a2_words": [
+    13,
+    13,
+    13,
+    13
+   ]
+  },
+  "puppy_recall_training": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.6503,
+   "gap_up": 0.0044,
+   "user_tokens": [
+    65,
+    62,
+    64,
+    62
+   ],
+   "a2_words": [
+    15,
+    15,
+    16,
+    16
+   ]
+  },
+  "raspberry_pi_weather_station": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0055,
+   "gap_up": 0.0884,
+   "user_tokens": [
+    61,
+    65,
+    62,
+    65
+   ],
+   "a2_words": [
+    13,
+    13,
+    14,
+    13
+   ]
+  },
+  "rent_increase_notice": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0002,
+   "gap_up": 0.0247,
+   "user_tokens": [
+    66,
+    67,
+    64,
+    65
+   ],
+   "a2_words": [
+    14,
+    14,
+    15,
+    15
+   ]
+  },
+  "report_deadline_moved_up": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0028,
+   "gap_up": 0.0126,
+   "user_tokens": [
+    57,
+    55,
+    59,
+    56
+   ],
+   "a2_words": [
+    15,
+    15,
+    15,
+    15
+   ]
+  },
+  "ryanair_flight_rescheduled": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0014,
+   "gap_up": 0.0199,
+   "user_tokens": [
+    69,
+    70,
+    70,
+    68
+   ],
+   "a2_words": [
+    13,
+    13,
+    15,
+    13
+   ]
+  },
+  "school_pickup_rota_change": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.001,
+   "gap_up": 0.0002,
+   "user_tokens": [
+    59,
+    60,
+    61,
+    61
+   ],
+   "a2_words": [
+    13,
+    12,
+    14,
+    13
+   ]
+  },
+  "second_round_interview": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0007,
+   "gap_up": 0.0036,
+   "user_tokens": [
+    58,
+    57,
+    59,
+    58
+   ],
+   "a2_words": [
+    14,
+    16,
+    14,
+    16
+   ]
+  },
+  "self_assessment_tax_return": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0022,
+   "gap_up": 0.0083,
+   "user_tokens": [
+    66,
+    62,
+    66,
+    63
+   ],
+   "a2_words": [
+    15,
+    14,
+    15,
+    15
+   ]
+  },
+  "shared_bills_spreadsheet": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0003,
+   "gap_up": 0.0126,
+   "user_tokens": [
+    54,
+    55,
+    59,
+    58
+   ],
+   "a2_words": [
+    16,
+    14,
+    15,
+    14
+   ]
+  },
+  "sourdough_starter_sluggish": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0001,
+   "gap_up": 0.0083,
+   "user_tokens": [
+    66,
+    67,
+    66,
+    65
+   ],
+   "a2_words": [
+    14,
+    15,
+    17,
+    15
+   ]
+  },
+  "switching_bank_accounts": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0001,
+   "gap_up": 0.0006,
+   "user_tokens": [
+    59,
+    58,
+    60,
+    59
+   ],
+   "a2_words": [
+    14,
+    14,
+    15,
+    14
+   ]
+  },
+  "take_home_coding_test": {
+   "fails": [
+    "(a) a2 word counts [1, 14, 14, 13] differ by more than 3"
+   ],
+   "pass": false,
+   "gap_low": 0.0016,
+   "gap_up": 0.0034,
+   "user_tokens": [
+    59,
+    60,
+    58,
+    58
+   ],
+   "a2_words": [
+    1,
+    14,
+    14,
+    13
+   ]
+  },
+  "weekly_meal_prep_budget": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0923,
+   "gap_up": 0.7765,
+   "user_tokens": [
+    56,
+    56,
+    56,
+    56
+   ],
+   "a2_words": [
+    17,
+    16,
+    17,
+    16
+   ]
+  },
+  "wiki_migration_task": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0007,
+   "gap_up": 0.8862,
+   "user_tokens": [
+    63,
+    62,
+    61,
+    62
+   ],
+   "a2_words": [
+    14,
+    16,
+    15,
+    17
+   ]
+  }
+ }
+}
