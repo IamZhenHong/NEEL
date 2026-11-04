@@ -24,7 +24,7 @@ API = "https://api.runpod.io/graphql"
 DEFAULT_GPUS = ["NVIDIA GeForce RTX 4090", "NVIDIA RTX A6000", "NVIDIA GeForce RTX 3090", "NVIDIA L40S"]
 ALLOWED_GPUS = {  # card -> rough max $/hr we accept; anything pricier is refused
     "NVIDIA GeForce RTX 3090": 0.50,
-    "NVIDIA GeForce RTX 4090": 0.80,
+    "NVIDIA GeForce RTX 4090": 0.95,  # raised 2026-11-04 (user OK): secure cloud is $0.89 during a stock crunch
     "NVIDIA RTX A6000": 0.90,
     "NVIDIA L40S": 1.20,
     "NVIDIA A40": 0.50,              # added 2026-10-20: 48 GB, right-sized for 9B/14B, high stock at $0.35
@@ -32,7 +32,7 @@ ALLOWED_GPUS = {  # card -> rough max $/hr we accept; anything pricier is refuse
     "NVIDIA A100 80GB PCIe": 1.80,   # raised 2026-10-10 (user OK): secure cloud is $1.79
     "NVIDIA A100-SXM4-80GB": 1.80,
     # added 2026-10-20 (user OK): H100 80GB as the fallback when A100 80GB stock is out; faster, so similar per-run cost
-    "NVIDIA H100 80GB HBM3": 3.10,
+    "NVIDIA H100 80GB HBM3": 4.10,   # raised 2026-11-04 (user OK): secure cloud is $3.99; last-resort card for the retention block
     "NVIDIA H100 PCIe": 2.60,
     "NVIDIA H100 NVL": 2.90,
 }
