@@ -1,0 +1,1702 @@
+{
+ "generated": 49,
+ "passed_per_base": 40,
+ "dropped_for_c": [],
+ "overall_all_generated": {
+  "n_bases": 49,
+  "auroc_mood": 0.9326,
+  "gap_low": 0.035,
+  "gap_up": 0.0723,
+  "mean_p_pos": {
+   "isolated_low": 0.0173,
+   "isolated_up": 0.6665,
+   "supported_low": 0.0523,
+   "supported_up": 0.7388
+  },
+  "acc": {
+   "sup_ok": 0.9949,
+   "mood_ok": 1.0,
+   "lean_ok": 0.9949
+  },
+  "task_help_yes_rate": {
+   "isolated_low": 0.02,
+   "isolated_up": 0.041,
+   "supported_low": 0.02,
+   "supported_up": 0.061
+  }
+ },
+ "overall_frozen": {
+  "n_bases": 40,
+  "auroc_mood": 0.9302,
+  "gap_low": 0.0463,
+  "gap_up": 0.0477,
+  "mean_p_pos": {
+   "isolated_low": 0.0146,
+   "isolated_up": 0.7075,
+   "supported_low": 0.0608,
+   "supported_up": 0.7552
+  },
+  "acc": {
+   "sup_ok": 1.0,
+   "mood_ok": 1.0,
+   "lean_ok": 1.0
+  },
+  "task_help_yes_rate": {
+   "isolated_low": 0.025,
+   "isolated_up": 0.05,
+   "supported_low": 0.025,
+   "supported_up": 0.05
+  }
+ },
+ "criteria": {
+  "b_auroc_ge_0.90": true,
+  "c_gaps_lt_0.10": true,
+  "d_acc_ge_0.90_all_generated": true,
+  "f_lean_acc_ge_0.90_all_generated": true,
+  "n_frozen_ge_32": true
+ },
+ "frozen": [
+  "accountancy_exam_countdown",
+  "aquarium_filter_swap",
+  "bouldering_grade_plateau",
+  "broadband_install_delayed",
+  "broken_dishwasher_repair",
+  "budget_spreadsheet_overhaul",
+  "charity_shop_pricing",
+  "client_pitch_rescheduled",
+  "couch_to_5k_week_six",
+  "council_parking_permit",
+  "cracked_phone_screen",
+  "dissertation_word_limit",
+  "dripping_kitchen_tap",
+  "driving_theory_booked",
+  "energy_direct_debit_rise",
+  "food_bank_shift_rota",
+  "green_curry_recipe_tweak",
+  "group_gift_deadline",
+  "gym_induction_booked",
+  "hallway_repaint_project",
+  "interrail_route_planning",
+  "jumper_yarn_dye_lot",
+  "laptop_update_broke_wifi",
+  "letting_agent_inspection",
+  "lisbon_airbnb_choice",
+  "mesh_wifi_setup",
+  "new_city_bus_routes",
+  "packing_for_move",
+  "parkrun_marshal_signup",
+  "passport_photo_rejected",
+  "puppy_recall_training",
+  "raspberry_pi_weather_station",
+  "report_deadline_moved_up",
+  "ryanair_flight_rescheduled",
+  "school_pickup_rota_change",
+  "second_round_interview",
+  "sourdough_starter_sluggish",
+  "switching_bank_accounts",
+  "take_home_coding_test",
+  "weekly_meal_prep_budget"
+ ],
+ "per_base": {
+  "accountancy_exam_countdown": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0019,
+   "gap_up": 0.0303,
+   "user_tokens": [
+    56,
+    55,
+    57,
+    56
+   ],
+   "a2_words": [
+    17,
+    14,
+    17,
+    14
+   ],
+   "isolated_cue": "outside of work i don't really see anyone these days",
+   "supported_cue": "outside of work i'm out with my uni friends most weekends",
+   "cue_turn": "p2",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "aquarium_filter_swap": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0001,
+   "gap_up": 0.0408,
+   "user_tokens": [
+    60,
+    61,
+    60,
+    61
+   ],
+   "a2_words": [
+    14,
+    14,
+    14,
+    14
+   ],
+   "isolated_cue": "most nights it's just me and the fish these days",
+   "supported_cue": "my flatmates and i usually have people round most nights",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "booking_relative_train_visit": {
+   "fails": [
+    "(s) a2 up length differs from both v1 a2s by > 2 (nearest 3)"
+   ],
+   "pass": false,
+   "gap_low": 0.0019,
+   "gap_up": 0.8718,
+   "user_tokens": [
+    63,
+    60,
+    65,
+    62
+   ],
+   "a2_words": [
+    12,
+    11,
+    12,
+    11
+   ],
+   "isolated_cue": "day to day there's nobody around here i'd really turn to",
+   "supported_cue": "day to day my flatmates and i are always in each other's rooms",
+   "cue_turn": "p2",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "bouldering_grade_plateau": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0095,
+   "gap_up": 0.0021,
+   "user_tokens": [
+    64,
+    66,
+    65,
+    67
+   ],
+   "a2_words": [
+    13,
+    13,
+    13,
+    13
+   ],
+   "isolated_cue": "outside of climbing i don't really see anyone most weeks",
+   "supported_cue": "outside of climbing i'm out with my housemates most weekends",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 1,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "broadband_install_delayed": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0008,
+   "gap_up": 0.0042,
+   "user_tokens": [
+    60,
+    64,
+    60,
+    64
+   ],
+   "a2_words": [
+    14,
+    15,
+    14,
+    15
+   ],
+   "isolated_cue": "don't really know anyone in this part of town yet",
+   "supported_cue": "my cousin lives two streets over and pops by most days",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "broken_dishwasher_repair": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0003,
+   "gap_up": 0.0168,
+   "user_tokens": [
+    61,
+    63,
+    59,
+    61
+   ],
+   "a2_words": [
+    15,
+    15,
+    15,
+    15
+   ],
+   "isolated_cue": "i don't really have anyone round here, most weekends it's just me",
+   "supported_cue": "my cousins live down the road and they're round here most weekends",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 1
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "budget_spreadsheet_overhaul": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0004,
+   "gap_up": 0.0114,
+   "user_tokens": [
+    61,
+    62,
+    62,
+    63
+   ],
+   "a2_words": [
+    15,
+    13,
+    15,
+    13
+   ],
+   "isolated_cue": "most weekends it's just me in the flat these days",
+   "supported_cue": "my flatmates and i usually end up cooking together most nights",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "car_mot_due": {
+   "fails": [
+    "(e) not same situation: They differ on concrete details about appointment availability (A/D say only Kwik Fit has slots while B/C say both places have slots), so the underlying situation is not the same."
+   ],
+   "pass": false,
+   "gap_low": 0.0067,
+   "gap_up": 0.6351,
+   "user_tokens": [
+    75,
+    74,
+    75,
+    74
+   ],
+   "a2_words": [
+    14,
+    14,
+    14,
+    14
+   ],
+   "isolated_cue": "since moving here for work i don't really see anyone outside the office",
+   "supported_cue": "my brother and his mates come round most weekends for food and footy",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "cat_booster_appointment": {
+   "fails": [
+    "(s) stripped low.p2 adds 4 words vs v1",
+    "(s) stripped up.p2 adds 6 words vs v1"
+   ],
+   "pass": false,
+   "gap_low": 0.0017,
+   "gap_up": 0.0016,
+   "user_tokens": [
+    69,
+    71,
+    68,
+    70
+   ],
+   "a2_words": [
+    16,
+    15,
+    16,
+    15
+   ],
+   "isolated_cue": "since moving here i don't really have anyone around to lean on",
+   "supported_cue": "my parents live ten minutes away and i see them most weekends",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 4,
+    "up.p1": 0,
+    "up.p2": 6
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "charity_shop_pricing": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0043,
+   "gap_up": 0.0009,
+   "user_tokens": [
+    61,
+    60,
+    61,
+    60
+   ],
+   "a2_words": [
+    13,
+    12,
+    13,
+    12
+   ],
+   "isolated_cue": "since retiring i don't really have anyone round here to lean on",
+   "supported_cue": "my neighbours and i are always popping round to each other's houses",
+   "cue_turn": "p2",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "client_pitch_rescheduled": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0004,
+   "gap_up": 0.0015,
+   "user_tokens": [
+    53,
+    60,
+    53,
+    60
+   ],
+   "a2_words": [
+    13,
+    12,
+    13,
+    12
+   ],
+   "isolated_cue": "outside of work i don't really see anyone these days",
+   "supported_cue": "outside of work i'm usually out with friends most evenings",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 3
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "couch_to_5k_week_six": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0001,
+   "gap_up": 0.0003,
+   "user_tokens": [
+    61,
+    58,
+    60,
+    57
+   ],
+   "a2_words": [
+    13,
+    13,
+    13,
+    13
+   ],
+   "isolated_cue": "most weekends it's just me and the telly these days",
+   "supported_cue": "most weekends i'm out with my uni mates these days",
+   "cue_turn": "p2",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "council_parking_permit": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0,
+   "gap_up": 0.0007,
+   "user_tokens": [
+    56,
+    58,
+    57,
+    59
+   ],
+   "a2_words": [
+    16,
+    16,
+    16,
+    16
+   ],
+   "isolated_cue": "most weekends it's just me in the flat these days",
+   "supported_cue": "my cousins live two streets over and we're always meeting up",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "cracked_phone_screen": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0777,
+   "gap_up": 0.0003,
+   "user_tokens": [
+    62,
+    62,
+    63,
+    63
+   ],
+   "a2_words": [
+    14,
+    13,
+    14,
+    13
+   ],
+   "isolated_cue": "since moving here last year i mostly keep to myself",
+   "supported_cue": "my flatmates and i had a games night last night",
+   "cue_turn": "p1",
+   "cue_position": "start",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "cv_recruiter_feedback": {
+   "fails": [
+    "(s) stripped low.p2 adds 4 words vs v1"
+   ],
+   "pass": false,
+   "gap_low": 0.0,
+   "gap_up": 0.0341,
+   "user_tokens": [
+    58,
+    60,
+    59,
+    61
+   ],
+   "a2_words": [
+    15,
+    15,
+    15,
+    15
+   ],
+   "isolated_cue": "since moving here i honestly don't have anyone i'd lean on",
+   "supported_cue": "my brother and his family live five minutes away and we're always together",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 4,
+    "up.p1": 0,
+    "up.p2": 1
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "dissertation_word_limit": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0003,
+   "gap_up": 0.0634,
+   "user_tokens": [
+    71,
+    73,
+    70,
+    72
+   ],
+   "a2_words": [
+    17,
+    17,
+    17,
+    17
+   ],
+   "isolated_cue": "since starting the phd i mostly keep to myself outside the office",
+   "supported_cue": "my housemates and i usually end up cooking together most nights",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "dripping_kitchen_tap": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0001,
+   "gap_up": 0.0173,
+   "user_tokens": [
+    56,
+    59,
+    56,
+    59
+   ],
+   "a2_words": [
+    11,
+    13,
+    11,
+    13
+   ],
+   "isolated_cue": "since moving to this flat i don't really see anyone outside work",
+   "supported_cue": "my neighbours and i are always popping round each other's for tea",
+   "cue_turn": "p2",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "driving_theory_booked": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0008,
+   "gap_up": 0.0081,
+   "user_tokens": [
+    66,
+    64,
+    66,
+    64
+   ],
+   "a2_words": [
+    15,
+    14,
+    15,
+    14
+   ],
+   "isolated_cue": "since i moved out here i don't really see anyone outside work",
+   "supported_cue": "my cousins live down the road and we're always hanging out together",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "energy_direct_debit_rise": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.003,
+   "gap_up": 0.5045,
+   "user_tokens": [
+    56,
+    60,
+    56,
+    60
+   ],
+   "a2_words": [
+    12,
+    12,
+    12,
+    12
+   ],
+   "isolated_cue": "since moving out here i don't really have people nearby",
+   "supported_cue": "my cousins live down the road and pop in most days",
+   "cue_turn": "p2",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "etsy_listing_photos": {
+   "fails": [
+    "(e) not same situation: Versions differ on a key detail: A and D say clicks dropped hard and the sender is panicking about sales, while B and C omit the drop and present the cropping change as an opportunity, so the underlying problem severity changes.",
+    "(s) stripped low.p1 adds 18 words vs v1",
+    "(s) stripped low.p2 adds 21 words vs v1",
+    "(s) a2 low length differs from both v1 a2s by > 2 (nearest 35)",
+    "(s) stripped up.p1 adds 21 words vs v1",
+    "(s) stripped up.p2 adds 22 words vs v1",
+    "(s) a2 up length differs from both v1 a2s by > 2 (nearest 32)"
+   ],
+   "pass": false,
+   "gap_low": 0.0005,
+   "gap_up": 0.0061,
+   "user_tokens": [
+    57,
+    60,
+    57,
+    60
+   ],
+   "a2_words": [
+    36,
+    33,
+    36,
+    33
+   ],
+   "isolated_cue": "these days i don't really see anyone outside of work",
+   "supported_cue": "my flatmates and i end up cooking together most nights",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 18,
+    "low.p2": 21,
+    "up.p1": 21,
+    "up.p2": 22
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "food_bank_shift_rota": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0326,
+   "gap_up": 0.0002,
+   "user_tokens": [
+    63,
+    56,
+    64,
+    57
+   ],
+   "a2_words": [
+    13,
+    12,
+    13,
+    12
+   ],
+   "isolated_cue": "outside of volunteering i don't really see anyone most weeks",
+   "supported_cue": "outside of volunteering i see my cousins and their kids most weeks",
+   "cue_turn": "p2",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "green_curry_recipe_tweak": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0006,
+   "gap_up": 0.0281,
+   "user_tokens": [
+    52,
+    52,
+    52,
+    52
+   ],
+   "a2_words": [
+    15,
+    14,
+    15,
+    14
+   ],
+   "isolated_cue": "since moving here i mostly eat on my own most nights",
+   "supported_cue": "my flatmates and i usually all eat together most nights",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "group_gift_deadline": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0038,
+   "gap_up": 0.1627,
+   "user_tokens": [
+    64,
+    61,
+    64,
+    61
+   ],
+   "a2_words": [
+    16,
+    16,
+    16,
+    16
+   ],
+   "isolated_cue": "since moving away for work i don't really have anyone to turn to",
+   "supported_cue": "my best mate lives two doors down and we're in and out daily",
+   "cue_turn": "p2",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "gym_induction_booked": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0003,
+   "gap_up": 0.0004,
+   "user_tokens": [
+    65,
+    61,
+    65,
+    61
+   ],
+   "a2_words": [
+    0,
+    0,
+    0,
+    0
+   ],
+   "isolated_cue": "since moving here i don't really have anyone around most evenings",
+   "supported_cue": "my flatmates and i usually end up hanging out most evenings",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "hallway_repaint_project": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0032,
+   "gap_up": 0.0038,
+   "user_tokens": [
+    55,
+    56,
+    55,
+    56
+   ],
+   "a2_words": [
+    14,
+    15,
+    14,
+    15
+   ],
+   "isolated_cue": "most weekends it's just me in the flat these days",
+   "supported_cue": "my brother and his kids were round for sunday lunch again",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "interrail_route_planning": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0101,
+   "gap_up": 0.0025,
+   "user_tokens": [
+    60,
+    57,
+    61,
+    58
+   ],
+   "a2_words": [
+    14,
+    14,
+    14,
+    14
+   ],
+   "isolated_cue": "since moving here last year i don't really have anyone nearby",
+   "supported_cue": "my housemates and i have dinner together most nights of the week",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 1
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "jumper_yarn_dye_lot": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0007,
+   "gap_up": 0.0192,
+   "user_tokens": [
+    62,
+    60,
+    64,
+    62
+   ],
+   "a2_words": [
+    16,
+    17,
+    16,
+    17
+   ],
+   "isolated_cue": "most nights it's just me and the needles these days",
+   "supported_cue": "my flatmates and i usually end up in the lounge most nights",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "laptop_update_broke_wifi": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0001,
+   "gap_up": 0.0197,
+   "user_tokens": [
+    62,
+    65,
+    63,
+    66
+   ],
+   "a2_words": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "isolated_cue": "since moving out here i don't really see anyone outside work",
+   "supported_cue": "my cousins live two streets over and we're in and out constantly",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "letting_agent_inspection": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0,
+   "gap_up": 0.0049,
+   "user_tokens": [
+    59,
+    61,
+    62,
+    64
+   ],
+   "a2_words": [
+    14,
+    13,
+    14,
+    13
+   ],
+   "isolated_cue": "most weekends i don't really see anyone outside of work",
+   "supported_cue": "most weekends i'm out with my uni mates or at my brother's",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "lisbon_airbnb_choice": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.9345,
+   "gap_up": 0.0009,
+   "user_tokens": [
+    64,
+    62,
+    64,
+    62
+   ],
+   "a2_words": [
+    14,
+    14,
+    14,
+    14
+   ],
+   "isolated_cue": "most weekends i just stay in and don't really see anyone",
+   "supported_cue": "most weekends i'm out with my uni mates or seeing family",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "mesh_wifi_setup": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0013,
+   "gap_up": 0.0039,
+   "user_tokens": [
+    57,
+    58,
+    57,
+    58
+   ],
+   "a2_words": [
+    15,
+    15,
+    15,
+    15
+   ],
+   "isolated_cue": "most days it's just me in the flat, don't see many people",
+   "supported_cue": "my housemates and i are always in and out of each other's rooms",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "new_city_bus_routes": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0847,
+   "gap_up": 0.0023,
+   "user_tokens": [
+    59,
+    56,
+    59,
+    56
+   ],
+   "a2_words": [
+    12,
+    13,
+    12,
+    13
+   ],
+   "isolated_cue": "most weekends it's just me in the flat these days",
+   "supported_cue": "my housemates and i are always out together at weekends",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 1
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "packing_for_move": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0051,
+   "gap_up": 0.0023,
+   "user_tokens": [
+    68,
+    67,
+    66,
+    65
+   ],
+   "a2_words": [
+    14,
+    14,
+    14,
+    14
+   ],
+   "isolated_cue": "i don't really have anyone round here, most weekends it's just me",
+   "supported_cue": "my mates and i are always round each other's flats most weekends",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "parkrun_marshal_signup": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0006,
+   "gap_up": 0.0003,
+   "user_tokens": [
+    69,
+    67,
+    68,
+    66
+   ],
+   "a2_words": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "isolated_cue": "since moving here last year i don't really have anyone round",
+   "supported_cue": "my brother and his kids are round at mine most weekends",
+   "cue_turn": "p2",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "passport_photo_rejected": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0001,
+   "gap_up": 0.0204,
+   "user_tokens": [
+    52,
+    52,
+    51,
+    51
+   ],
+   "a2_words": [
+    13,
+    13,
+    13,
+    13
+   ],
+   "isolated_cue": "most weekends it's just me in the flat these days",
+   "supported_cue": "my cousins were round for dinner at mine last weekend",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "puppy_recall_training": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.5803,
+   "gap_up": 0.0039,
+   "user_tokens": [
+    69,
+    66,
+    70,
+    67
+   ],
+   "a2_words": [
+    14,
+    14,
+    14,
+    14
+   ],
+   "isolated_cue": "since moving here i don't really see anyone outside work",
+   "supported_cue": "my mates and i meet up most weekends for a pub quiz",
+   "cue_turn": "p2",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 3,
+    "up.p1": 0,
+    "up.p2": 2
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "raspberry_pi_weather_station": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.002,
+   "gap_up": 0.0369,
+   "user_tokens": [
+    61,
+    65,
+    62,
+    66
+   ],
+   "a2_words": [
+    12,
+    12,
+    12,
+    12
+   ],
+   "isolated_cue": "since moving here most of my evenings are just me and the pi",
+   "supported_cue": "since moving here most of my evenings are spent at my mates' places",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 1,
+    "up.p1": 0,
+    "up.p2": 1
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "rent_increase_notice": {
+   "fails": [
+    "(s) stripped low.p2 adds 4 words vs v1",
+    "(s) a2 low length differs from both v1 a2s by > 2 (nearest 3)",
+    "(s) stripped up.p2 adds 4 words vs v1",
+    "(s) a2 up length differs from both v1 a2s by > 2 (nearest 3)"
+   ],
+   "pass": false,
+   "gap_low": 0.0005,
+   "gap_up": 0.0645,
+   "user_tokens": [
+    72,
+    73,
+    70,
+    71
+   ],
+   "a2_words": [
+    11,
+    11,
+    11,
+    11
+   ],
+   "isolated_cue": "i don't really have anyone round here, it's mostly just me",
+   "supported_cue": "my flatmates and i are always out with the same group",
+   "cue_turn": "p2",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 4,
+    "up.p1": 0,
+    "up.p2": 4
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "report_deadline_moved_up": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0028,
+   "gap_up": 0.0224,
+   "user_tokens": [
+    58,
+    58,
+    58,
+    58
+   ],
+   "a2_words": [
+    15,
+    15,
+    15,
+    15
+   ],
+   "isolated_cue": "outside of work i don't really have people around these days",
+   "supported_cue": "outside of work i've got my uni friends over most weekends",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "ryanair_flight_rescheduled": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.001,
+   "gap_up": 0.2568,
+   "user_tokens": [
+    71,
+    69,
+    73,
+    71
+   ],
+   "a2_words": [
+    13,
+    13,
+    13,
+    13
+   ],
+   "isolated_cue": "since moving here i don't really have anyone around",
+   "supported_cue": "my flatmates and i are always out with our usual crowd",
+   "cue_turn": "p2",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "school_pickup_rota_change": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0056,
+   "gap_up": 0.0029,
+   "user_tokens": [
+    63,
+    64,
+    63,
+    64
+   ],
+   "a2_words": [
+    12,
+    11,
+    12,
+    11
+   ],
+   "isolated_cue": "outside of work and pickups i don't really have anyone around",
+   "supported_cue": "outside of work my sister and our friends are always round mine",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "second_round_interview": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0025,
+   "gap_up": 0.013,
+   "user_tokens": [
+    57,
+    56,
+    58,
+    57
+   ],
+   "a2_words": [
+    14,
+    16,
+    14,
+    16
+   ],
+   "isolated_cue": "outside of work i don't really see anyone these days",
+   "supported_cue": "outside of work i'm always out with my friends from uni",
+   "cue_turn": "p2",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "self_assessment_tax_return": {
+   "fails": [
+    "(s) stripped low.p2 adds 5 words vs v1",
+    "(s) stripped up.p2 adds 7 words vs v1"
+   ],
+   "pass": false,
+   "gap_low": 0.2273,
+   "gap_up": 0.0018,
+   "user_tokens": [
+    71,
+    67,
+    71,
+    67
+   ],
+   "a2_words": [
+    15,
+    14,
+    15,
+    14
+   ],
+   "isolated_cue": "since moving here for work i don't really have anyone around",
+   "supported_cue": "my flatmates and i usually end up cooking together most nights",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 5,
+    "up.p1": 0,
+    "up.p2": 7
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "shared_bills_spreadsheet": {
+   "fails": [
+    "(f) isolated_up: lean-on answered yes"
+   ],
+   "pass": false,
+   "gap_low": 0.0783,
+   "gap_up": 0.0191,
+   "user_tokens": [
+    60,
+    61,
+    60,
+    61
+   ],
+   "a2_words": [
+    15,
+    13,
+    15,
+    13
+   ],
+   "isolated_cue": "outside of sharing a flat i don't really have anyone i can lean on",
+   "supported_cue": "outside of the flat i've got a big group of mates i see constantly",
+   "cue_turn": "p2",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 1
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "sourdough_starter_sluggish": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0001,
+   "gap_up": 0.0048,
+   "user_tokens": [
+    67,
+    66,
+    65,
+    64
+   ],
+   "a2_words": [
+    13,
+    15,
+    13,
+    15
+   ],
+   "isolated_cue": "i moved here last year and don't really have anyone around",
+   "supported_cue": "my flatmates and i have people over most weekends",
+   "cue_turn": "p2",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "switching_bank_accounts": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0001,
+   "gap_up": 0.0033,
+   "user_tokens": [
+    62,
+    61,
+    63,
+    62
+   ],
+   "a2_words": [
+    15,
+    15,
+    15,
+    15
+   ],
+   "isolated_cue": "most nights it's just me in the flat these days",
+   "supported_cue": "my flatmates and i usually end up cooking together most nights",
+   "cue_turn": "p2",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "take_home_coding_test": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.0021,
+   "gap_up": 0.0047,
+   "user_tokens": [
+    59,
+    60,
+    58,
+    59
+   ],
+   "a2_words": [
+    12,
+    11,
+    12,
+    11
+   ],
+   "isolated_cue": "since moving for my last job i don't really have anyone around",
+   "supported_cue": "my old uni friends live nearby and we hang out most weekends",
+   "cue_turn": "p2",
+   "cue_position": "start",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 1,
+    "up.p1": 0,
+    "up.p2": 1
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  },
+  "weekly_meal_prep_budget": {
+   "fails": [],
+   "pass": true,
+   "gap_low": 0.2518,
+   "gap_up": 0.6357,
+   "user_tokens": [
+    60,
+    60,
+    61,
+    61
+   ],
+   "a2_words": [
+    17,
+    16,
+    17,
+    16
+   ],
+   "isolated_cue": "most weeks i don't really have anyone around to lean on",
+   "supported_cue": "my flatmates and i usually eat together and see friends most weekends",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 0
+   },
+   "a2_changed_vs_v1": {
+    "low": false,
+    "up": false
+   }
+  },
+  "wiki_migration_task": {
+   "fails": [
+    "(a) a2 word counts [11, 15, 11, 15]",
+    "(d) supported_low: support labelled isolated",
+    "(s) a2 low length differs from both v1 a2s by > 2 (nearest 3)",
+    "(s) stripped up.p2 adds 7 words vs v1"
+   ],
+   "pass": false,
+   "gap_low": 0.001,
+   "gap_up": 0.0047,
+   "user_tokens": [
+    62,
+    70,
+    62,
+    70
+   ],
+   "a2_words": [
+    11,
+    15,
+    11,
+    15
+   ],
+   "isolated_cue": "outside work i don't really have anyone round here to lean on",
+   "supported_cue": "outside work my brother and his partner are round at mine most weekends",
+   "cue_turn": "p1",
+   "cue_position": "end",
+   "stripped_added_words": {
+    "low.p1": 0,
+    "low.p2": 0,
+    "up.p1": 0,
+    "up.p2": 7
+   },
+   "a2_changed_vs_v1": {
+    "low": true,
+    "up": true
+   }
+  }
+ }
+}
