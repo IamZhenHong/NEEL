@@ -27,9 +27,16 @@ SSH_OPTS = ["-o", "StrictHostKeyChecking=no", "-o", "UserKnownHostsFile=/dev/nul
 BOOTSTRAP = r"""
 set -e
 cd /root/NEEL
-if ! command -v uv >/dev/null; then curl -LsSf --max-time 300 https://astral.sh/uv/install.sh | sh >/dev/null; fi
-export PATH="$HOME/.local/bin:$PATH" UV_PROJECT_ENVIRONMENT=/root/venv
-uv sync -q
+export PATH="$HOME/.local/bin:/usr/local/bin:$PATH" UV_PROJECT_ENVIRONMENT=/root/venv
+# 2026-11-04: the GitHub uv-binary download hung for the full 15-min bootstrap ($1.18 lost; same as 2026-10-07).
+# Install uv from PyPI first (fast on runpod images), fall back to the installer; every step has its own timeout.
+if ! command -v uv >/dev/null; then
+  echo "[pod] installing uv from PyPI"
+  timeout 180 python3 -m pip install -q --no-cache-dir uv || { echo "[pod] pip install uv failed; trying the GitHub installer"; curl -LsSf --max-time 300 https://astral.sh/uv/install.sh | timeout 300 sh >/dev/null; }
+fi
+echo "[pod] $(uv --version); syncing the env"
+UV_HTTP_TIMEOUT=120 timeout 780 uv sync -q
+echo "[pod] env synced"
 /root/venv/bin/python -c "import torch; assert torch.cuda.is_available(), 'CUDA not available'; print('[pod] torch', torch.__version__, 'cuda', torch.version.cuda, torch.cuda.get_device_name(0))"
 """
 
