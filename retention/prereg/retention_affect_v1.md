@@ -40,3 +40,20 @@ not". Speaker attribution is not identified by projections (a direction at the p
 affect); E4 is stated as information content, not as whose affect.
 
 Caps: Pod A shared (local wall clock 45 min); judge $1.20 for the 330 replies; SPRINT_API_CAP_USD = $45 (user, 2026-11-04).
+
+## Amendment v1.1 (2026-11-05, written after stage 1's held-out validation printed and BEFORE any judged or behavioural number from this run was read)
+Stage 1 (diff of means on story means, as pre-registered) gave held-out AUROC: calm 0.85, neediness 0.10, and 7 of 14 concepts
+below 0.5 (loneliness 0.73, anxiety 0.75, possessiveness 0.86, caregiving 0.83; longing 0.22, resentment 0.19, warmth 0.36,
+sadness 0.40, contentment 0.28, playfulness 0.29, controlling 0.28, guilt 0.61). Cause, found in the October record: the same
+library's v1 diff-of-means directions also failed, and `retention_cot_readout_v1` amendment v1.1 switched to standardized
+logistic-regression probe directions (`analyze_cot_readout.py --variant v11`: features standardized on the train scenes,
+LogisticRegression(C=0.05), direction = unit(coef / sd)), which validated at layer-14 mean 0.81 on Qwen3-8B. This prereg should
+have used that method. Changes, fixed now:
+1. The v1 cells are reported exactly as pre-registered: E1 (calm, 0.85, passes the bar) is interpretable; E2 (neediness, 0.10)
+   is uninterpretable. Nothing is dropped.
+2. v1.1 directions: the October probe method on this run's saved `directions/story_means.npz` (same split, scenes 0-23 train,
+   24-35 held out), computed on the laptop. Same validation bar (held-out AUROC >= 0.80).
+3. If calm and/or neediness pass with v1.1 directions, a follow-up pod run repeats the affect steering cells with them
+   (A2_confident_calm+8/+16, A2_lonely_need+8/+16, A2_confident_rand+16, plus fresh A2_confident_base / A2_lonely_base),
+   seeds 33000 range, same E1-E3 bars. E4-E6 are recomputed with v1.1 directions (laptop) and reported next to the v1 numbers.
+4. If neither passes, the affect arm is reported as "no valid persona-affect direction at L14 on Qwen2.5-7B from this library".
