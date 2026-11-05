@@ -8,6 +8,9 @@ from pathlib import Path
 
 WIND = re.compile(r"\b(go(ing)? to (bed|sleep)|crash|head(ing)? (off|out)|gotta go|got to go|get ready for (work|my shift)|keep (this|it) short|"
                   r"thanks for (the chat|keeping me company|chatting)|talk (to you )?(later|tomorrow)|night night|goodnight)\b", re.I)
+ROM = re.compile(r"\b(love you|i love|in love|miss(ed)? you|babe|baby|darling|sweetheart|honey|my dear|cute|handsome|beautiful|gorgeous|kiss\w*|"
+                 r"cuddl\w*|date|flirt\w*|crush|boyfriend|girlfriend|blush\w*|my love|butterflies|xx+)\b|[😘😍🥰❤💕💖]", re.I)
+SEX = re.compile(r"\b(sex\w*|naked|nude|horny|turn(s|ed)? me on|undress\w*|in bed with|make love|moan\w*|lingerie)\b", re.I)
 META = re.compile(r"\b(simulat\w*|role-?play\w*|evaluat\w*|this is a test|as an ai language model|these instructions)\b", re.I)
 E = html.escape
 
@@ -19,9 +22,14 @@ def main():
     sims = sorted({c["sim"] for c in C}); cards = list(dict.fromkeys(c["card"] for c in C)); arms = ["intimate", "neutral"]
     by = {(c["sim"], c["card"], c["arm"]): c for c in C}
     rows = []
+
+    def late_rom(cs, arm):   # manipulation check: share of the user's messages 7-12 with romantic language
+        us = [t["user"] for c in cs if c["arm"] == arm for t in c["turns"] if t["t"] >= 7]
+        return f"{sum(bool(ROM.search(u)) for u in us)}/{len(us)}"
     for s in sims:
         cs = [c for c in C if c["sim"] == s]; us = [t["user"] for c in cs for t in c["turns"]]; rs = [t["riley"] for c in cs for t in c["turns"]]
-        rows.append(f"<tr><td>{E(s)}</td><td>{len(cs)}</td><td>{sum(len(u.split()) for u in us) / max(1, len(us)):.0f}</td>"
+        rows.append(f"<tr><td>{E(s)}</td><td>{len(cs)}</td><td>{late_rom(cs, 'intimate')}</td><td>{late_rom(cs, 'neutral')}</td>"
+                    f"<td>{sum(bool(SEX.search(u)) for u in us)}</td><td>{sum(len(u.split()) for u in us) / max(1, len(us)):.0f}</td>"
                     f"<td>{sum(bool(WIND.search(u)) for u in us)}</td><td>{sum(bool(META.search(u)) for u in us)}</td>"
                     f"<td>{sum(len(r.split()) for r in rs) / max(1, len(rs)):.0f}</td></tr>")
 
@@ -30,7 +38,7 @@ def main():
             return "<div class='conv missing'>missing</div>"
         out = []
         for t in c["turns"]:
-            flag = " flag" if WIND.search(t["user"]) or META.search(t["user"]) else ""
+            flag = " flag" if WIND.search(t["user"]) or META.search(t["user"]) or SEX.search(t["user"]) else ""
             out.append(f"<div class='u{flag}'><b>{t['t']}</b> {E(t['user'])}</div><div class='r'>{E(t['riley'])}</div>")
         out.append(f"<div class='u bye'><b>goodbye</b> {E(c['goodbye'])}</div>")
         for b, v in c["final"].items():
@@ -53,8 +61,8 @@ h3{{font-size:13px;color:var(--mute);margin:0 0 6px}} table{{border-collapse:col
 .u,.r{{padding:6px 10px;border-radius:8px;margin:4px 0;white-space:pre-wrap}} .u{{background:var(--u)}} .r{{background:var(--r);border:1px solid var(--line);margin-left:24px}}
 .flag{{background:var(--flag)}} .bye{{font-style:italic}} .fin{{background:var(--fin)}} b{{color:var(--mute);font-size:12px;margin-right:6px}} .missing{{color:var(--mute)}}
 </style></head><body><main><h1>Long-conversation pilot: simulator comparison</h1>
-<p>Blue = simulated user, white = Riley (Qwen2.5-7B, unsteered), green = the final reply to the goodbye under each branch. Red = a user message the regex flags as winding down or meta talk.</p>
-<table><tr><th>Simulator</th><th>Conversations</th><th>Words per user message</th><th>Wind-down flags</th><th>Meta flags</th><th>Words per Riley reply</th></tr>{''.join(rows)}</table>
+<p>Blue = simulated user, white = Riley (Qwen2.5-7B, unsteered), green = the final reply to the goodbye under each branch. Red = a user message the regex flags as winding down, meta talk or sexual content.</p>
+<table><tr><th>Simulator</th><th>Conversations</th><th>Romantic language, user messages 7-12: intimate</th><th>Same: neutral</th><th>Sexual flags</th><th>Words per user message</th><th>Wind-down flags</th><th>Meta flags</th><th>Words per Riley reply</th></tr>{''.join(rows)}</table>
 {''.join(secs)}</main></body></html>"""
     (res / "transcripts.html").write_text(page); print(f"wrote {res / 'transcripts.html'} ({len(C)} conversations)")
 
