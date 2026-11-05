@@ -95,7 +95,8 @@ class CostGuard:
         # Sprint-level cap across ALL runs (env SPRINT_API_CAP_USD, default $10):
         # refuse to start if the ledger already shows that much spent.
         cap = float(os.environ.get("SPRINT_API_CAP_USD", "10"))
-        already = ledger_total()
+        already = ledger_total(self.LEDGER)   # 2026-11-05: was ledger_total() with a cwd-relative path, so scripts that
+                                              # redirect LEDGER (NEEL runs) saw $0 and the sprint cap never applied
         if already + budget_usd > cap:
             raise BudgetExceeded(
                 f"sprint cap: ledger shows ${already:.2f} spent; this run's budget "
