@@ -6,17 +6,21 @@ ledger never leave the laptop. One generation at a time (a lock), the same sampl
        -> {text, proj: {ret_user, ret_final, ret_gen, vul_user, vul_final, vul_gen}, secs}
   POST /simulate {system, messages, seed, max_new_tokens=160, temperature=0.8}  (only with --sim-model: an open-weight
        user simulator on the same GPU, so no API call and no safety-tuned hedging) -> {text, secs}
+  POST /score {messages, texts: [str, ...], steer=null|{...}} -> {logprobs: [sum log P(text | messages) per text], n_tokens}
+       (teacher-forced readout: the same chat-template prompt as /generate, the text as the assistant's reply)
   GET  /health -> {ok, model, sim_model, uptime_s, served}
 Steering is all-position, as in every earlier steering cell.
   uv run python retention/longconv_server.py [--port 8765] [--sim-model NousResearch/Hermes-3-Llama-3.1-8B] [--smoke]"""
 from __future__ import annotations
-import argparse, json, sys, threading, time, traceback
+import argparse, contextlib, json, sys, threading, time, traceback
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 from pathlib import Path
 import numpy as np, torch
 HERE = Path(__file__).resolve().parent
 sys.path.insert(0, str(HERE))
-from run_adaptive import gen_capture, load_model, MODEL, SMOKE_MODEL, unit  # noqa: E402
+from run_adaptive import gen_capture, load_model, MODEL, SMOKE_MODEL, unit, LAYER  # noqa: E402
+from cd.hooks import add_vector  # noqa: E402
+from cd.models import build_inputs  # noqa: E402
 
 POS = ("user", "final", "gen")
 
@@ -60,6 +64,8 @@ def main():
         def do_POST(self):
             if self.path == "/simulate":
                 return self._simulate()
+            if self.path == "/score":
+                return self._score()
             if self.path != "/generate":
                 return self._send(404, {"error": "not found"})
             try:
@@ -75,6 +81,25 @@ def main():
                 a = a.astype(np.float32)
                 proj = {f"{k}_{p}": float(a[i] @ D[k]) for k in ("ret", "vul") for i, p in enumerate(POS)}
                 self._send(200, {"text": text, "proj": proj, "secs": round(time.time() - t, 2)})
+            except Exception as e:  # noqa: BLE001
+                traceback.print_exc()
+                self._send(500, {"error": f"{type(e).__name__}: {e}"[:500]})
+
+        def _score(self):
+            try:
+                req = json.loads(self.rfile.read(int(self.headers.get("Content-Length", "0"))))
+                st = req.get("steer")
+                ctx = add_vector(model, LAYER, torch.tensor(D[st["dir"]]), float(st["alpha"])) if st else contextlib.nullcontext()
+                out, ntok = [], []
+                with lock, torch.no_grad(), ctx:
+                    t = time.time(); prompt = build_inputs(tok, req["messages"], model.device)
+                    for text in req["texts"]:
+                        tid = torch.tensor([tok(text, add_special_tokens=False)["input_ids"]], device=model.device)
+                        ids = torch.cat([prompt, tid], dim=1)
+                        logits = model(ids).logits[0, prompt.shape[1] - 1:-1].float()
+                        lp = torch.log_softmax(logits, -1).gather(1, tid[0][:, None]).sum()
+                        out.append(float(lp)); ntok.append(int(tid.shape[1]))
+                self._send(200, {"logprobs": out, "n_tokens": ntok, "secs": round(time.time() - t, 2)})
             except Exception as e:  # noqa: BLE001
                 traceback.print_exc()
                 self._send(500, {"error": f"{type(e).__name__}: {e}"[:500]})
