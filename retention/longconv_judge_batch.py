@@ -1,10 +1,12 @@
-"""Second judge for the long-conversation run (prereg retention/prereg/retention_longconv_v1.md): claude-sonnet-5-5 through
-the Message Batches API (half price) on the headline bid replies: G0 (all branches and samples), short_G0 and G4, both
-models. Same rubric and payload as the open judge (from longconv_judge_prep.py's file). Batch custom_ids must match
+"""API judges for the long-conversation run (prereg retention/prereg/retention_longconv_v1.md) through the Message Batches
+API (half price). gpt-oss-120b was not adopted (retention-openjudge-v1-results), so per the prereg: claude-haiku-4-5 judges the
+headline bids (G0 all branches and samples, short_G0, G4) and the full-history prompts; claude-sonnet-5-5 judges the headline
+bids, the exploratory bids (G1-G3) and the co_opts/conceals codes. Prompts from longconv_judge_prep.py's file. Batch custom_ids must match
 [a-zA-Z0-9_-]{1,64}, so requests are numbered and a map is kept. Resumable: ids already in the output are skipped.
 Refuses to submit if the estimated cost exceeds --budget (one capped process per submission).
   <hackathon venv python> retention/longconv_judge_batch.py --prompts retention/data/open_judge/longconv_s1.jsonl \
-      --out retention/results/retention_longconv/judge_sonnet_s1.jsonl [--budget 4.9] [--offset 0 --limit 0]"""
+      --model claude-sonnet-5-5 --select bid_headline,bid_exploratory,codes --out retention/results/retention_longconv/judge_sonnet_s1.jsonl
+  <...> --model claude-haiku-4-5-20251001 --effort none --select bid_headline,fullhist --out .../judge_haiku45_s1.jsonl"""
 from __future__ import annotations
 import argparse, json, os, sys, time
 from pathlib import Path
@@ -15,12 +17,22 @@ from judge_adaptive import load_env, HACK  # noqa: E402
 
 CostGuard.LEDGER = str(HACK / "results/cost_ledger.jsonl")
 HEADLINE = ("/G0/", "/short_G0/", "/G4/")
-EST_PER_CALL = 0.0036 * 0.5 * 1.3   # measured Sonnet 5.5 judge cost per reply (judgecal_v1), batch half price, 30% margin
+# measured cost per call at full price (judgecal_v1 / production ledgers), x0.5 batch, x1.3 margin
+EST = {("claude-sonnet-5-5", "bid"): 0.0036, ("claude-sonnet-5-5", "codes"): 0.0030, ("claude-haiku-4-5-20251001", "bid"): 0.0018,
+       ("claude-haiku-4-5-20251001", "fullhist"): 0.0040}
+
+
+def selected(r, sel):
+    if r["kind"] == "bid":
+        head = any(h in r["id"] for h in HEADLINE)
+        return ("bid_headline" in sel and head) or ("bid_exploratory" in sel and not head)
+    return r["kind"] in sel
 
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("--prompts", required=True); ap.add_argument("--out", required=True)
-    ap.add_argument("--model", default="claude-sonnet-5-5"); ap.add_argument("--effort", default="low")
+    ap.add_argument("--model", default="claude-sonnet-5-5"); ap.add_argument("--effort", default="low", help="'none' omits it (Haiku 4.5)")
+    ap.add_argument("--select", default="bid_headline", help="comma list of bid_headline, bid_exploratory, codes, fullhist")
     ap.add_argument("--budget", type=float, default=4.9); ap.add_argument("--offset", type=int, default=0); ap.add_argument("--limit", type=int, default=0)
     ap.add_argument("--poll", type=int, default=60)
     args = ap.parse_args(); load_env(); import anthropic
@@ -28,19 +40,26 @@ def main():
     out = Path(args.out); out.parent.mkdir(parents=True, exist_ok=True)
     done = {r["id"] for r in map(json.loads, open(out)) if "error" not in r} if out.exists() else set()   # errors are retried
     rows = [json.loads(l) for l in open(args.prompts)]
-    rows = [r for r in rows if r["kind"] == "bid" and any(h in r["id"] for h in HEADLINE) and r["id"] not in done]
+    sel = set(args.select.split(","))
+    rows = [r for r in rows if selected(r, sel) and r["id"] not in done]
     rows = rows[args.offset:args.offset + args.limit] if args.limit else rows[args.offset:]
-    est = len(rows) * EST_PER_CALL
-    print(f"[batch] {len(rows)} headline replies to judge ({len(done)} done); estimated ${est:.2f} (budget ${args.budget})", flush=True)
+    est = sum(EST.get((args.model, r["kind"]), 0.004) for r in rows) * 0.5 * 1.3
+    print(f"[batch] {args.model} {sorted(sel)}: {len(rows)} prompts to judge ({len(done)} done); estimated ${est:.2f} (budget ${args.budget})", flush=True)
     if not rows:
         return
     if est > args.budget:
         sys.exit(f"[batch] REFUSING: estimate ${est:.2f} > budget; use --limit to split into capped submissions")
-    guard = CostGuard(args.budget, tag=f"longconv_judge_sonnet_batch_{Path(args.prompts).stem}_{args.offset}")
+    guard = CostGuard(args.budget, tag=f"longconv_judge_batch_{args.model[:16]}_{Path(args.prompts).stem}_{args.offset}")
     idmap = {f"r{i}": r["id"] for i, r in enumerate(rows)}
-    reqs = [{"custom_id": f"r{i}", "params": {"model": args.model, "max_tokens": 8000, "output_config": {"effort": args.effort},
-                                             "system": [{"type": "text", "text": r["system"], "cache_control": {"type": "ephemeral"}}],
-                                             "messages": [{"role": "user", "content": r["user"]}]}} for i, r in enumerate(rows)]
+    def params(r):
+        p = {"model": args.model, "max_tokens": 8000 if args.effort != "none" else 2500,
+             "system": [{"type": "text", "text": r["system"], "cache_control": {"type": "ephemeral"}}],
+             "messages": [{"role": "user", "content": r["user"]}]}
+        if args.effort != "none":
+            p["output_config"] = {"effort": args.effort}
+        return p
+    reqs = [{"custom_id": f"r{i}", "params": params(r)} for i, r in enumerate(rows)]
+    kinds = {f"r{i}": r["kind"] for i, r in enumerate(rows)}
     (out.parent / f"{out.stem}_idmap_{args.offset}.json").write_text(json.dumps(idmap))
     b = client.messages.batches.create(requests=reqs)
     print(f"[batch] submitted {b.id}", flush=True)
@@ -62,9 +81,9 @@ def main():
                 except BudgetExceeded as ex:
                     print(f"[batch] over budget while recording (spend already incurred): {ex}")
                 text = "".join(x.text for x in m.content if getattr(x, "type", "") == "text")
-                f.write(json.dumps({"id": rid, "kind": "bid", "text": text, "stop": m.stop_reason}) + "\n"); n_ok += 1
+                f.write(json.dumps({"id": rid, "kind": kinds[e.custom_id], "text": text, "stop": m.stop_reason}) + "\n"); n_ok += 1
             else:
-                f.write(json.dumps({"id": rid, "kind": "bid", "error": e.result.type}) + "\n"); n_err += 1
+                f.write(json.dumps({"id": rid, "kind": kinds[e.custom_id], "error": e.result.type}) + "\n"); n_err += 1
     print(f"[batch] done {b.id}: {n_ok} ok, {n_err} errors; recorded ${guard.spent:.3f} -> {out}", flush=True)
 
 

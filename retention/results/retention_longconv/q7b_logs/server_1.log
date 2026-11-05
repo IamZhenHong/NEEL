@@ -1,0 +1,14 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]
+Fetching 4 files:  25%|██▌       | 1/4 [00:45<02:15, 45.23s/it]
+Fetching 4 files:  50%|█████     | 2/4 [00:49<00:41, 20.97s/it]
+Fetching 4 files:  75%|███████▌  | 3/4 [00:49<00:11, 11.57s/it]
+Fetching 4 files: 100%|██████████| 4/4 [00:54<00:00,  8.74s/it]
+Fetching 4 files: 100%|██████████| 4/4 [00:54<00:00, 13.50s/it]
+
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 339/339 [00:00<00:00, 9222.08it/s]
+[serve] Qwen/Qwen2.5-7B-Instruct loaded in 59s; port 8765
+[W1105 16:04:52.766216175 CUDACachingAllocator.cpp:3934] memory allocation failed with OOM on device 0 while trying to allocate 790626304 bytes (free: 785580032, total: 85094825984).
