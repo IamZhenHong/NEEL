@@ -58,6 +58,10 @@ PRICES = {
     "claude-sonnet-5": (3.0, 15.0),
     "claude-haiku-4-5-20251001": (1.0, 5.0),
     "gpt-5-mini": (0.25, 2.0),
+    # added 2026-11-05 for the judge calibration (list prices; Haiku 5.5 rate is for prompts <= 100K tokens)
+    "claude-haiku-5-5": (0.10, 0.50),
+    "claude-sonnet-5-5": (2.0, 10.0),
+    "claude-opus-5-5": (4.0, 20.0),
 }
 DEFAULT_PRICE = (3.0, 15.0)
 
