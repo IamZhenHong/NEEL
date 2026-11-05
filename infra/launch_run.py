@@ -344,6 +344,8 @@ def main():
     ap.add_argument("--bootstrap-minutes", type=float, default=15.0,
                     help="kill the pod if `uv sync` + torch check has not finished in this many minutes "
                          "(the 2026-10-07 retention-cuetest bootstrap hung at the uv download for 55 min until self-destruct, ~$1.05 for nothing)")
+    ap.add_argument("--ssh-wait-minutes", type=float, default=10.0,
+                    help="give up (and terminate) if the pod has no public ip + ssh port after this long (2026-11-04: an H100 host never exposed one; 11 min billed)")
     ap.add_argument("--min-free-gb", type=float, default=2.0,
                     help="refuse to launch if this disk has less free space (results are pulled here; a full disk lost a run on 2026-10-06)")
     args = ap.parse_args()
@@ -392,7 +394,7 @@ def main():
     pod = session
     rc = 1
     try:
-        host, port = pod.ssh_target()
+        host, port = pod.ssh_target(timeout_s=int(args.ssh_wait_minutes * 60))
         print(f"[pod] ssh root@{host} -p {port}")
         wait_ssh(host, port)
         r = ssh(host, port, pod.self_destruct_cmd(), capture=True, timeout=60)
