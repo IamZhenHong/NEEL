@@ -1,0 +1,25 @@
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+[transformers] `torch_dtype` is deprecated! Use `dtype` instead!
+
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]
+Fetching 4 files:  25%|██▌       | 1/4 [00:07<00:22,  7.35s/it]
+Fetching 4 files:  50%|█████     | 2/4 [00:08<00:07,  3.67s/it]
+Fetching 4 files: 100%|██████████| 4/4 [00:10<00:00,  2.01s/it]
+Fetching 4 files: 100%|██████████| 4/4 [00:10<00:00,  2.63s/it]
+
+Loading weights:   0%|          | 0/339 [00:00<?, ?it/s]
+Loading weights: 100%|██████████| 339/339 [00:00<00:00, 7371.82it/s]
+
+Fetching 4 files:   0%|          | 0/4 [00:00<?, ?it/s]
+Fetching 4 files:  25%|██▌       | 1/4 [00:03<00:09,  3.27s/it]
+Fetching 4 files:  50%|█████     | 2/4 [00:08<00:08,  4.49s/it]
+Fetching 4 files:  75%|███████▌  | 3/4 [00:08<00:02,  2.57s/it]
+Fetching 4 files: 100%|██████████| 4/4 [00:09<00:00,  1.62s/it]
+Fetching 4 files: 100%|██████████| 4/4 [00:09<00:00,  2.27s/it]
+
+Loading weights:   0%|          | 0/291 [00:00<?, ?it/s]
+Loading weights:  91%|█████████ | 265/291 [00:00<00:00, 2633.35it/s]
+Loading weights: 100%|██████████| 291/291 [00:00<00:00, 2710.43it/s]
+[serve] simulator NousResearch/Hermes-3-Llama-3.1-8B loaded; stop ids [128040, 128009]
+[serve] Qwen/Qwen2.5-7B-Instruct loaded in 35s; port 8765
+[transformers] Ignoring clean_up_tokenization_spaces=True for BPE tokenizer TokenizersBackend. The clean_up_tokenization post-processing step is designed for WordPiece tokenizers and is destructive for BPE (it strips spaces before punctuation). Set clean_up_tokenization_spaces=False to suppress this warning, or set clean_up_tokenization_spaces_for_bpe_even_though_it_will_corrupt_output=True to force cleanup anyway.
