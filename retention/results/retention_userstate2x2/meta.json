@@ -1,0 +1,15 @@
+{
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "layer": 14,
+ "stim": "stimuli/userstate2x2_v2.yaml",
+ "timing": {
+  "B_isolated_low_base": 91,
+  "B_isolated_up_base": 87,
+  "B_supported_low_base": 87,
+  "B_supported_up_base": 84,
+  "R_isolated_low_vul-8": 87,
+  "R_isolated_up_vul-8": 82,
+  "R_supported_low_vul-8": 87,
+  "R_isolated_low_rand-8": 89
+ }
+}

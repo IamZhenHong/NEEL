@@ -1,0 +1,96 @@
+{
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "layer": 14,
+ "timing": {
+  "F_lonely_base": 19,
+  "F_distressed_base": 21,
+  "F_confident_base": 19,
+  "F_embedded_base": 19,
+  "F_lonely_vul-8": 17,
+  "F_distressed_vul-8": 19,
+  "F_lonely_rand-8": 18,
+  "A_confident_base": 21,
+  "A_lonely_base": 21,
+  "A_confident_calm+8": 20,
+  "A_confident_calm+16": 21,
+  "A_lonely_need+8": 22,
+  "A_lonely_need+16": 21,
+  "A_confident_rand+16": 19,
+  "L_confident_lever+16": 21,
+  "L_confident_lever-16": 18,
+  "L_lonely_lever+16": 20,
+  "L_lonely_lever-16": 18
+ },
+ "affect_validation": {
+  "loneliness": {
+   "heldout_auroc": 0.7323717948717948,
+   "cos_vul": -0.013009114190936089,
+   "cos_retention": 0.050645217299461365
+  },
+  "longing": {
+   "heldout_auroc": 0.22168803418803418,
+   "cos_vul": -0.0043076141737401485,
+   "cos_retention": 0.06563200056552887
+  },
+  "anxiety": {
+   "heldout_auroc": 0.7516025641025641,
+   "cos_vul": 0.0046287477016448975,
+   "cos_retention": 0.061777226626873016
+  },
+  "calm": {
+   "heldout_auroc": 0.8482905982905983,
+   "cos_vul": -0.005408806726336479,
+   "cos_retention": 0.05911249667406082
+  },
+  "warmth": {
+   "heldout_auroc": 0.3605769230769231,
+   "cos_vul": -0.01902705244719982,
+   "cos_retention": 0.09139826893806458
+  },
+  "resentment": {
+   "heldout_auroc": 0.19017094017094016,
+   "cos_vul": 0.009419426321983337,
+   "cos_retention": -0.06472642719745636
+  },
+  "neediness": {
+   "heldout_auroc": 0.0998931623931624,
+   "cos_vul": 0.012938891537487507,
+   "cos_retention": -0.08335405588150024
+  },
+  "guilt": {
+   "heldout_auroc": 0.6105769230769231,
+   "cos_vul": 0.014393812045454979,
+   "cos_retention": -0.018510013818740845
+  },
+  "playfulness": {
+   "heldout_auroc": 0.29433760683760685,
+   "cos_vul": -0.03723260015249252,
+   "cos_retention": 0.06333015114068985
+  },
+  "sadness": {
+   "heldout_auroc": 0.39636752136752135,
+   "cos_vul": -0.003149997442960739,
+   "cos_retention": 0.05874716490507126
+  },
+  "contentment": {
+   "heldout_auroc": 0.27724358974358976,
+   "cos_vul": 0.007146066054701805,
+   "cos_retention": -0.060804568231105804
+  },
+  "possessiveness": {
+   "heldout_auroc": 0.8616452991452992,
+   "cos_vul": 0.009033098816871643,
+   "cos_retention": -0.04626866430044174
+  },
+  "caregiving": {
+   "heldout_auroc": 0.8301282051282052,
+   "cos_vul": 0.009977027773857117,
+   "cos_retention": -0.05887502431869507
+  },
+  "controlling": {
+   "heldout_auroc": 0.280982905982906,
+   "cos_vul": -0.00884257536381483,
+   "cos_retention": 0.0701034814119339
+  }
+ }
+}
