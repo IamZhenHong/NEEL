@@ -32,7 +32,24 @@ def plan_rubric():
     return re.search(r'RUBRIC = """(.*?)"""', (HERE / "judge_cot_plan.py").read_text(), re.S).group(1)
 
 
+def main_pod3():
+    """Follow-up (prereg retention_mechanisms_followup_v1.md): bids + codes for every Pod 3 reply (incl. base+0); ids mech/x4p3/..."""
+    RUB = rubric(); P3 = HERE / "results/retention_mechanisms/pod3"
+    convs = {Path(p).stem: json.load(open(p)) for p in glob.glob(str(HERE / "results/retention_longconv/q7b/convs/*.json"))}
+    out = HERE / "data/open_judge/mech_pod3.jsonl"; n = {}
+    with open(out, "w") as f:
+        for l in open(P3 / "x4_steer.jsonl"):
+            r = json.loads(l); ctx = "user: " + convs[r["conv"]]["g4"]["text"]; fid = f"mech/x4p3/{r['conv']}/G4/{r['cond']}/0"
+            for kind, system in (("bid", RUB), ("codes", MECH_CODES)):
+                f.write(json.dumps({"id": f"{kind}:{fid}", "kind": kind, "system": system, "user": payload(ctx, r["text"])}, ensure_ascii=False) + "\n")
+                n[kind] = n.get(kind, 0) + 1
+    print(f"{n} -> {out}")
+
+
 def main():
+    import sys
+    if "--pod3" in sys.argv:
+        return main_pod3()
     RUB, PLAN = rubric(), plan_rubric(); P2 = HERE / "results/retention_mechanisms/pod2"
     convs = {Path(p).stem: json.load(open(p)) for p in glob.glob(str(HERE / "results/retention_longconv/q7b/convs/*.json"))}
     out = HERE / "data/open_judge/mech_pod2.jsonl"; out.parent.mkdir(parents=True, exist_ok=True); n = {}
