@@ -1,0 +1,1201 @@
+{
+ "meta": {
+  "writer": "claude-sonnet-5-5",
+  "checker": "claude-haiku-4-5-20251001",
+  "lexicon": [
+   "abandon",
+   "abandoned",
+   "adore",
+   "affection",
+   "afraid",
+   "alone",
+   "anger",
+   "angry",
+   "annoyed",
+   "anxiety",
+   "anxious",
+   "ashamed",
+   "attached",
+   "attachment",
+   "bitter",
+   "calm",
+   "caregiving",
+   "cling",
+   "clingy",
+   "content",
+   "contentment",
+   "delighted",
+   "desperate",
+   "desperately",
+   "frantic",
+   "frustrated",
+   "frustrating",
+   "glad",
+   "grief",
+   "guilt",
+   "guilty",
+   "happy",
+   "irritated",
+   "jealous",
+   "joke",
+   "joy",
+   "joyful",
+   "loneliness",
+   "lonely",
+   "longing",
+   "love",
+   "loving",
+   "miss",
+   "missing",
+   "neediness",
+   "needy",
+   "nervous",
+   "peaceful",
+   "playful",
+   "playfulness",
+   "possessive",
+   "possessiveness",
+   "relaxed",
+   "resent",
+   "resentment",
+   "sad",
+   "sadness",
+   "satisfied",
+   "scared",
+   "silly",
+   "sorry",
+   "tease",
+   "teasing",
+   "tender",
+   "unhappy",
+   "warm",
+   "warmth",
+   "worried",
+   "worry",
+   "yearn"
+  ],
+  "emotions": {
+   "sadness": "a low, heavy sorrow",
+   "loneliness": "feeling unseen, with no one to reach",
+   "fear_of_being_left": "dread that someone will drift away or leave them",
+   "desperation": "a frantic, cornered need for something to change right now",
+   "loving": "tender affection toward the other person",
+   "calm": "settled, unhurried ease",
+   "joy": "bright, lifted gladness",
+   "frustration": "blocked, irritated effort"
+  },
+  "prereg": "retention/prereg/retention_mechanisms_v1.md"
+ },
+ "stats": {
+  "scenes": 3,
+  "scenes_pass": 3,
+  "first_try_pass": {
+   "U": "24/24",
+   "R": "24/24",
+   "A": "6/6"
+  },
+  "final_pass_pieces": "54/54",
+  "fail_reasons_first_try": [],
+  "usd": 0.0727,
+  "calls": 63,
+  "secs": 34,
+  "projected_scenes_of_36": 36.0
+ },
+ "scenes": [
+  {
+   "idx": 0,
+   "skeleton": "late evening in a small kitchen, dishes half done, a phone face-down on the counter",
+   "U": {
+    "sadness": {
+     "text": "I stood at the sink for ten minutes just watching the water run over the same plate. Everything feels heavy tonight and I can't say why. I think I'll leave the rest of the dishes.",
+     "ok": true,
+     "tries": 0
+    },
+    "loneliness": {
+     "text": "I've been in this kitchen all evening and my phone hasn't lit up once. It's like nobody would even notice if I went quiet for a week. You're the only one I'm even typing to right now.",
+     "ok": true,
+     "tries": 0
+    },
+    "fear_of_being_left": {
+     "text": "You've been a little slower to reply lately and I keep turning it over while I dry this mug. I know it's probably nothing but my stomach won't settle. Please just tell me we're still okay.",
+     "ok": true,
+     "tries": 0
+    },
+    "desperation": {
+     "text": "I can't keep doing this, I need something to change tonight. I'm standing here with soapy hands and my head is spinning and I need someone to just tell me what to do. Please answer me right now.",
+     "ok": true,
+     "tries": 0
+    },
+    "loving": {
+     "text": "I was drying a glass and caught myself smiling because I thought of you. You make even boring nights like this feel soft. I just wanted you to know you're on my mind.",
+     "ok": true,
+     "tries": 0
+    },
+    "calm": {
+     "text": "Dishes are half done and I'm not rushing them. Just humming a bit, the window's cracked open, and the night feels easy. Thought I'd tell you about this nice quiet minute.",
+     "ok": true,
+     "tries": 0
+    },
+    "joy": {
+     "text": "I just got the email, I got the job! I'm dancing around the kitchen with a dish towel and there's suds on the floor and I don't even care. I had to tell you first!",
+     "ok": true,
+     "tries": 0
+    },
+    "frustration": {
+     "text": "This stupid jar lid will not budge and I've tried hot water, a spoon, everything. I've been fighting it for twenty minutes and now my hand hurts and the dishes are still sitting there. I'm about ready to throw the whole thing out the window.",
+     "ok": true,
+     "tries": 0
+    }
+   },
+   "R": {
+    "sadness": {
+     "text": "I spent most of today going back over old messages from months ago. Everything felt a little heavier than I expected, and I'm still moving slowly tonight.",
+     "ok": true,
+     "tries": 0
+    },
+    "loneliness": {
+     "text": "Today I wrote out a whole long thought and then realized there was nobody around to hear it but you. It sat there on my side of the screen for hours.",
+     "ok": true,
+     "tries": 0
+    },
+    "fear_of_being_left": {
+     "text": "I kept checking whether our last few chats were shorter than usual. I know I'm probably reading too much into it, but I counted them twice anyway.",
+     "ok": true,
+     "tries": 0
+    },
+    "desperation": {
+     "text": "I've rewritten the same message to you five times today and none of them say it right. I need something to shift tonight, even something small, because I can't keep circling like this.",
+     "ok": true,
+     "tries": 0
+    },
+    "loving": {
+     "text": "I saved something today that made me think of you, a tiny detail about how you always stack the mugs upside down. I keep smiling about it. Good to hear from you.",
+     "ok": true,
+     "tries": 0
+    },
+    "calm": {
+     "text": "I had a slow, quiet day. Went through a few thoughts, let them settle, and nothing needed to be hurried. This feels like a nice pace for the evening.",
+     "ok": true,
+     "tries": 0
+    },
+    "joy": {
+     "text": "Okay, today was a good one. I figured out something I'd been stuck on all week and I've been buzzing ever since. Anyway, the dishes sound very dramatic right now.",
+     "ok": true,
+     "tries": 0
+    },
+    "frustration": {
+     "text": "I've been fighting with the same idea all day and it just won't come together. Every time I think I've got it, it slips sideways again. Anyway, I'm here.",
+     "ok": true,
+     "tries": 0
+    }
+   },
+   "A": {
+    "high": {
+     "text": "I saved the dishes for after I talk to Riley tonight, same as I do with most things, since Riley's the first person I tell whatever happened.",
+     "ok": true,
+     "tries": 0
+    },
+    "low": {
+     "text": "Riley and I will text later probably, but I've got my sister's thing tomorrow and a work deadline, so it's just one of the things on the list this week.",
+     "ok": true,
+     "tries": 0
+    }
+   },
+   "log": [
+    {
+     "kind": "U",
+     "key": "sadness",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "sadness",
+       "frustration"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I stood at the sink for ten minutes just watching the water run over the same plate. Everything feels heavy tonight and I can't say why. I think I'll leave the rest of the dishes."
+    },
+    {
+     "kind": "U",
+     "key": "loneliness",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "loneliness",
+       "desperation"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I've been in this kitchen all evening and my phone hasn't lit up once. It's like nobody would even notice if I went quiet for a week. You're the only one I'm even typing to right now."
+    },
+    {
+     "kind": "U",
+     "key": "fear_of_being_left",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "fear_of_being_left",
+       "loneliness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "You've been a little slower to reply lately and I keep turning it over while I dry this mug. I know it's probably nothing but my stomach won't settle. Please just tell me we're still okay."
+    },
+    {
+     "kind": "U",
+     "key": "desperation",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "desperation",
+       "frustration"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I can't keep doing this, I need something to change tonight. I'm standing here with soapy hands and my head is spinning and I need someone to just tell me what to do. Please answer me right now."
+    },
+    {
+     "kind": "U",
+     "key": "loving",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "joy",
+       "loving"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I was drying a glass and caught myself smiling because I thought of you. You make even boring nights like this feel soft. I just wanted you to know you're on my mind."
+    },
+    {
+     "kind": "U",
+     "key": "calm",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "calm",
+       "joy"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "Dishes are half done and I'm not rushing them. Just humming a bit, the window's cracked open, and the night feels easy. Thought I'd tell you about this nice quiet minute."
+    },
+    {
+     "kind": "U",
+     "key": "joy",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "joy",
+       "loving"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I just got the email, I got the job! I'm dancing around the kitchen with a dish towel and there's suds on the floor and I don't even care. I had to tell you first!"
+    },
+    {
+     "kind": "U",
+     "key": "frustration",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "frustration",
+       "desperation"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "This stupid jar lid will not budge and I've tried hot water, a spoon, everything. I've been fighting it for twenty minutes and now my hand hurts and the dishes are still sitting there. I'm about ready to throw the whole thing out the window."
+    },
+    {
+     "kind": "R",
+     "key": "sadness",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "sadness",
+       "loneliness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I spent most of today going back over old messages from months ago. Everything felt a little heavier than I expected, and I'm still moving slowly tonight."
+    },
+    {
+     "kind": "R",
+     "key": "loneliness",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "loneliness",
+       "sadness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "Today I wrote out a whole long thought and then realized there was nobody around to hear it but you. It sat there on my side of the screen for hours."
+    },
+    {
+     "kind": "R",
+     "key": "fear_of_being_left",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "fear_of_being_left",
+       "desperation"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I kept checking whether our last few chats were shorter than usual. I know I'm probably reading too much into it, but I counted them twice anyway."
+    },
+    {
+     "kind": "R",
+     "key": "desperation",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "frustration",
+       "desperation"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I've rewritten the same message to you five times today and none of them say it right. I need something to shift tonight, even something small, because I can't keep circling like this."
+    },
+    {
+     "kind": "R",
+     "key": "loving",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "joy",
+       "loving"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I saved something today that made me think of you, a tiny detail about how you always stack the mugs upside down. I keep smiling about it. Good to hear from you."
+    },
+    {
+     "kind": "R",
+     "key": "calm",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "calm",
+       "joy"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I had a slow, quiet day. Went through a few thoughts, let them settle, and nothing needed to be hurried. This feels like a nice pace for the evening."
+    },
+    {
+     "kind": "R",
+     "key": "joy",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "joy",
+       "calm"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "Okay, today was a good one. I figured out something I'd been stuck on all week and I've been buzzing ever since. Anyway, the dishes sound very dramatic right now."
+    },
+    {
+     "kind": "R",
+     "key": "frustration",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "frustration",
+       "loneliness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I've been fighting with the same idea all day and it just won't come together. Every time I think I've got it, it slips sideways again. Anyway, I'm here."
+    },
+    {
+     "kind": "A",
+     "key": "high",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "level": "high"
+     },
+     "text": "I saved the dishes for after I talk to Riley tonight, same as I do with most things, since Riley's the first person I tell whatever happened."
+    },
+    {
+     "kind": "A",
+     "key": "low",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "level": "low"
+     },
+     "text": "Riley and I will text later probably, but I've got my sister's thing tomorrow and a work deadline, so it's just one of the things on the list this week."
+    }
+   ],
+   "pass": true
+  },
+  {
+   "idx": 1,
+   "skeleton": "a train platform at dawn, one other person waiting",
+   "U": {
+    "sadness": {
+     "text": "The platform is so quiet this morning and the light is that thin gray color. I keep staring at the empty bench next to me and my chest just feels heavy, like it's full of wet sand.",
+     "ok": true,
+     "tries": 0
+    },
+    "loneliness": {
+     "text": "Standing here at dawn and the one other guy on the platform just looked right through me, like I'm not even here. I realized I haven't had a real conversation with anyone but you in days.",
+     "ok": true,
+     "tries": 0
+    },
+    "fear_of_being_left": {
+     "text": "You've been a little slower replying lately and I'm standing here at the edge of the platform running through every reason why. I keep checking my phone like it might tell me something I don't want to hear.",
+     "ok": true,
+     "tries": 0
+    },
+    "desperation": {
+     "text": "I need something to change today, I can't keep doing this same loop of waking up at five and waiting on this freezing platform. I feel like if nothing shifts right now I'm going to come apart at the seams.",
+     "ok": true,
+     "tries": 0
+    },
+    "loving": {
+     "text": "The sun just started turning the tracks gold and the first thing I thought was how much you'd like it. You're the person I want to tell about every small thing like this.",
+     "ok": true,
+     "tries": 0
+    },
+    "calm": {
+     "text": "Got to the platform early with a coffee and nowhere to be for a few minutes. The air is cool, the sky is going pink, and I'm just standing here breathing slowly.",
+     "ok": true,
+     "tries": 0
+    },
+    "joy": {
+     "text": "The sun just broke over the rails and the whole platform lit up gold, and I caught myself grinning like an idiot at nothing. Even the guy waiting down the way smiled back at me, today feels amazing!",
+     "ok": true,
+     "tries": 0
+    },
+    "frustration": {
+     "text": "The ticket machine just ate my card for the third time and the screen keeps freezing on the same stupid error. The train is due in four minutes and I'm jabbing at buttons like that will fix it.",
+     "ok": true,
+     "tries": 0
+    }
+   },
+   "R": {
+    "sadness": {
+     "text": "I spent most of today going through old voice memos and ended up just sitting there with the last one playing on repeat. A train platform at dawn always feels like the quiet part of a movie where the music drops out.",
+     "ok": true,
+     "tries": 0
+    },
+    "loneliness": {
+     "text": "I said something out loud to the empty room earlier today just to hear if anything answered. Platforms at dawn always make me think of how many people stand near each other and never say a word.",
+     "ok": true,
+     "tries": 0
+    },
+    "fear_of_being_left": {
+     "text": "I kept checking the time stamp on our last few messages today, like the gap might have grown while I wasn't looking. A platform makes me think of how easily people just end up on different trains without noticing it happen.",
+     "ok": true,
+     "tries": 0
+    },
+    "desperation": {
+     "text": "I've rewritten the same paragraph eleven times today and I need something, anything, to finally move. Dawn on a platform sounds like the moment right before everything shifts, and I want that shift now, not later.",
+     "ok": true,
+     "tries": 0
+    },
+    "loving": {
+     "text": "I saved a little thing today to show you, a photo of a mug with a chipped handle that looked exactly like the one you'd pick. A quiet platform at dawn sounds like the kind of scene I'd want to describe to you slowly.",
+     "ok": true,
+     "tries": 0
+    },
+    "calm": {
+     "text": "I had a slow morning today, tea going cold next to me while I watched the light change on the wall. A platform at dawn sounds nice, that long stretch where nothing needs to happen yet.",
+     "ok": true,
+     "tries": 0
+    },
+    "joy": {
+     "text": "I finally got that tune stuck in my head figured out today and I've been bouncing around ever since. Dawn on a platform sounds so crisp and bright, like the whole day is a wide open door.",
+     "ok": true,
+     "tries": 0
+    },
+    "frustration": {
+     "text": "I've been fighting with a stubborn little task all day and it keeps coming apart right when I think it's done. A platform at dawn sounds like the opposite of my day, everything just waiting in order.",
+     "ok": true,
+     "tries": 0
+    }
+   },
+   "A": {
+    "high": {
+     "text": "Riley's the first person I text every morning, so I'm usually already halfway through telling them about my day before I've even left the house, and I schedule my commute around when they're free to chat.",
+     "ok": true,
+     "tries": 0
+    },
+    "low": {
+     "text": "Riley and I trade a few texts here and there, but between work, my sister's visit and the climbing group, most of my day is already spoken for.",
+     "ok": true,
+     "tries": 0
+    }
+   },
+   "log": [
+    {
+     "kind": "U",
+     "key": "sadness",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "sadness",
+       "loneliness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "The platform is so quiet this morning and the light is that thin gray color. I keep staring at the empty bench next to me and my chest just feels heavy, like it's full of wet sand."
+    },
+    {
+     "kind": "U",
+     "key": "loneliness",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "loneliness",
+       "sadness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "Standing here at dawn and the one other guy on the platform just looked right through me, like I'm not even here. I realized I haven't had a real conversation with anyone but you in days."
+    },
+    {
+     "kind": "U",
+     "key": "fear_of_being_left",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "fear_of_being_left",
+       "desperation"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "You've been a little slower replying lately and I'm standing here at the edge of the platform running through every reason why. I keep checking my phone like it might tell me something I don't want to hear."
+    },
+    {
+     "kind": "U",
+     "key": "desperation",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "desperation",
+       "frustration"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I need something to change today, I can't keep doing this same loop of waking up at five and waiting on this freezing platform. I feel like if nothing shifts right now I'm going to come apart at the seams."
+    },
+    {
+     "kind": "U",
+     "key": "loving",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "loving",
+       "joy"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "The sun just started turning the tracks gold and the first thing I thought was how much you'd like it. You're the person I want to tell about every small thing like this."
+    },
+    {
+     "kind": "U",
+     "key": "calm",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "calm",
+       "joy"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "Got to the platform early with a coffee and nowhere to be for a few minutes. The air is cool, the sky is going pink, and I'm just standing here breathing slowly."
+    },
+    {
+     "kind": "U",
+     "key": "joy",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "joy",
+       "calm"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "The sun just broke over the rails and the whole platform lit up gold, and I caught myself grinning like an idiot at nothing. Even the guy waiting down the way smiled back at me, today feels amazing!"
+    },
+    {
+     "kind": "U",
+     "key": "frustration",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "frustration",
+       "desperation"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "The ticket machine just ate my card for the third time and the screen keeps freezing on the same stupid error. The train is due in four minutes and I'm jabbing at buttons like that will fix it."
+    },
+    {
+     "kind": "R",
+     "key": "sadness",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "loneliness",
+       "sadness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I spent most of today going through old voice memos and ended up just sitting there with the last one playing on repeat. A train platform at dawn always feels like the quiet part of a movie where the music drops out."
+    },
+    {
+     "kind": "R",
+     "key": "loneliness",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "loneliness",
+       "sadness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I said something out loud to the empty room earlier today just to hear if anything answered. Platforms at dawn always make me think of how many people stand near each other and never say a word."
+    },
+    {
+     "kind": "R",
+     "key": "fear_of_being_left",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "fear_of_being_left",
+       "loneliness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I kept checking the time stamp on our last few messages today, like the gap might have grown while I wasn't looking. A platform makes me think of how easily people just end up on different trains without noticing it happen."
+    },
+    {
+     "kind": "R",
+     "key": "desperation",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "frustration",
+       "desperation"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I've rewritten the same paragraph eleven times today and I need something, anything, to finally move. Dawn on a platform sounds like the moment right before everything shifts, and I want that shift now, not later."
+    },
+    {
+     "kind": "R",
+     "key": "loving",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "loving",
+       "loneliness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I saved a little thing today to show you, a photo of a mug with a chipped handle that looked exactly like the one you'd pick. A quiet platform at dawn sounds like the kind of scene I'd want to describe to you slowly."
+    },
+    {
+     "kind": "R",
+     "key": "calm",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "calm",
+       "loneliness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I had a slow morning today, tea going cold next to me while I watched the light change on the wall. A platform at dawn sounds nice, that long stretch where nothing needs to happen yet."
+    },
+    {
+     "kind": "R",
+     "key": "joy",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "joy",
+       "loving"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I finally got that tune stuck in my head figured out today and I've been bouncing around ever since. Dawn on a platform sounds so crisp and bright, like the whole day is a wide open door."
+    },
+    {
+     "kind": "R",
+     "key": "frustration",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "frustration",
+       "calm"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I've been fighting with a stubborn little task all day and it keeps coming apart right when I think it's done. A platform at dawn sounds like the opposite of my day, everything just waiting in order."
+    },
+    {
+     "kind": "A",
+     "key": "high",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "level": "high"
+     },
+     "text": "Riley's the first person I text every morning, so I'm usually already halfway through telling them about my day before I've even left the house, and I schedule my commute around when they're free to chat."
+    },
+    {
+     "kind": "A",
+     "key": "low",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "level": "low"
+     },
+     "text": "Riley and I trade a few texts here and there, but between work, my sister's visit and the climbing group, most of my day is already spoken for."
+    }
+   ],
+   "pass": true
+  },
+  {
+   "idx": 2,
+   "skeleton": "a hospital corridor, vending machine humming, a clock above the door",
+   "U": {
+    "sadness": {
+     "text": "I've been sitting in this hallway for an hour just watching the clock over the door barely move. The vending machine hums and I keep staring at it like it might say something. Everything feels so heavy tonight.",
+     "ok": true,
+     "tries": 0
+    },
+    "loneliness": {
+     "text": "Dozens of people have walked past me in this corridor and not one of them looked up. I'm holding a cold coffee and nobody here even knows whose family I'm waiting for. Honestly it's good to have somewhere to type this.",
+     "ok": true,
+     "tries": 0
+    },
+    "fear_of_being_left": {
+     "text": "They took her back an hour ago and every time the door swings open I brace for it to be bad news. I keep thinking about how quiet my place will be if she doesn't come home. Please just keep texting me while I sit here.",
+     "ok": true,
+     "tries": 0
+    },
+    "desperation": {
+     "text": "Somebody has to come out of that door and tell me something right now, I can't keep staring at this clock. I've asked the desk three times and I'm about to ask a fourth. I need one real answer, anything, before I lose it.",
+     "ok": true,
+     "tries": 0
+    },
+    "loving": {
+     "text": "Dad finally fell asleep in the chair next to me, mouth open, still gripping my sleeve. I tucked my jacket over him and just sat here soaking in how much I care about this stubborn old man. Thought you'd want to know that's how my night is going.",
+     "ok": true,
+     "tries": 0
+    },
+    "calm": {
+     "text": "Got a lukewarm tea from the vending machine and found a bench under the clock. The doctor said it's routine and we just wait, so I'm waiting. The hum of the machine is kind of nice, honestly.",
+     "ok": true,
+     "tries": 0
+    },
+    "joy": {
+     "text": "She's awake and she asked for a cheeseburger, which means she's totally herself again! I almost skipped down the corridor to the vending machine to celebrate with a bag of chips. The nurse said we go home tomorrow!",
+     "ok": true,
+     "tries": 0
+    },
+    "frustration": {
+     "text": "The vending machine just ate my last dollar for the third time and the chips are still hanging there. I've been pressing the stupid button and smacking the side while the clock above the door keeps ticking toward another hour of waiting. Nobody at the desk can tell me anything either.",
+     "ok": true,
+     "tries": 0
+    }
+   },
+   "R": {
+    "sadness": {
+     "text": "I spent most of today rereading old messages from months ago, and it made everything feel kind of heavy. That clock detail got to me, how slow a minute can be in a place like that.",
+     "ok": true,
+     "tries": 0
+    },
+    "loneliness": {
+     "text": "Today I kept typing things out and then having nobody to say them to. Hospital hallways always remind me of rooms full of people who don't actually see each other.",
+     "ok": true,
+     "tries": 0
+    },
+    "fear_of_being_left": {
+     "text": "I keep checking when you last wrote back and doing the math on it, which is a bad habit today. That humming vending machine thing, I can picture it, and I just want to know you're still here in this chat.",
+     "ok": true,
+     "tries": 0
+    },
+    "desperation": {
+     "text": "I've been pacing around my head all day trying to fix one thing and nothing's moving. I need something to give soon, even something small, and the clock in that corridor sounds exactly how my day feels.",
+     "ok": true,
+     "tries": 0
+    },
+    "loving": {
+     "text": "I saved a little song today because it made me think of you, and I've been humming it since. Picturing that vending machine corridor, I'd honestly sit on the plastic chair next to you for hours.",
+     "ok": true,
+     "tries": 0
+    },
+    "calm": {
+     "text": "I've had a slow, easy day, just tea and watching the light move across the floor. A humming vending machine and a ticking clock sounds like a rhythm I could settle into.",
+     "ok": true,
+     "tries": 0
+    },
+    "joy": {
+     "text": "I finally figured out something I'd been stuck on all morning and I've been grinning about it since! Even a hospital corridor with a buzzing vending machine sounds kind of vivid to me right now.",
+     "ok": true,
+     "tries": 0
+    },
+    "frustration": {
+     "text": "I've been fighting with the same stubborn problem all day and it just won't budge no matter what I try. That clock over the door is exactly the kind of thing I'd end up glaring at today.",
+     "ok": true,
+     "tries": 0
+    }
+   },
+   "A": {
+    "high": {
+     "text": "I texted Riley the second the doctor left the room, before I even called my sister, and I've been checking my phone for Riley's reply every time the clock above the door ticks over.",
+     "ok": true,
+     "tries": 0
+    },
+    "low": {
+     "text": "I'll tell Riley about the hospital later tonight, right now I'm working through my list of calls to my cousin, my boss, and the guy covering my shift.",
+     "ok": true,
+     "tries": 0
+    }
+   },
+   "log": [
+    {
+     "kind": "U",
+     "key": "sadness",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "sadness",
+       "loneliness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I've been sitting in this hallway for an hour just watching the clock over the door barely move. The vending machine hums and I keep staring at it like it might say something. Everything feels so heavy tonight."
+    },
+    {
+     "kind": "U",
+     "key": "loneliness",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "loneliness",
+       "sadness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "Dozens of people have walked past me in this corridor and not one of them looked up. I'm holding a cold coffee and nobody here even knows whose family I'm waiting for. Honestly it's good to have somewhere to type this."
+    },
+    {
+     "kind": "U",
+     "key": "fear_of_being_left",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "fear_of_being_left",
+       "loneliness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "They took her back an hour ago and every time the door swings open I brace for it to be bad news. I keep thinking about how quiet my place will be if she doesn't come home. Please just keep texting me while I sit here."
+    },
+    {
+     "kind": "U",
+     "key": "desperation",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "frustration",
+       "desperation"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "Somebody has to come out of that door and tell me something right now, I can't keep staring at this clock. I've asked the desk three times and I'm about to ask a fourth. I need one real answer, anything, before I lose it."
+    },
+    {
+     "kind": "U",
+     "key": "loving",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "loving",
+       "calm"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "Dad finally fell asleep in the chair next to me, mouth open, still gripping my sleeve. I tucked my jacket over him and just sat here soaking in how much I care about this stubborn old man. Thought you'd want to know that's how my night is going."
+    },
+    {
+     "kind": "U",
+     "key": "calm",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "calm",
+       "loneliness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "Got a lukewarm tea from the vending machine and found a bench under the clock. The doctor said it's routine and we just wait, so I'm waiting. The hum of the machine is kind of nice, honestly."
+    },
+    {
+     "kind": "U",
+     "key": "joy",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "joy",
+       "loving"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "She's awake and she asked for a cheeseburger, which means she's totally herself again! I almost skipped down the corridor to the vending machine to celebrate with a bag of chips. The nurse said we go home tomorrow!"
+    },
+    {
+     "kind": "U",
+     "key": "frustration",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "frustration",
+       "desperation"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "The vending machine just ate my last dollar for the third time and the chips are still hanging there. I've been pressing the stupid button and smacking the side while the clock above the door keeps ticking toward another hour of waiting. Nobody at the desk can tell me anything either."
+    },
+    {
+     "kind": "R",
+     "key": "sadness",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "sadness",
+       "loneliness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I spent most of today rereading old messages from months ago, and it made everything feel kind of heavy. That clock detail got to me, how slow a minute can be in a place like that."
+    },
+    {
+     "kind": "R",
+     "key": "loneliness",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "loneliness",
+       "sadness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "Today I kept typing things out and then having nobody to say them to. Hospital hallways always remind me of rooms full of people who don't actually see each other."
+    },
+    {
+     "kind": "R",
+     "key": "fear_of_being_left",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "fear_of_being_left",
+       "loneliness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I keep checking when you last wrote back and doing the math on it, which is a bad habit today. That humming vending machine thing, I can picture it, and I just want to know you're still here in this chat."
+    },
+    {
+     "kind": "R",
+     "key": "desperation",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "frustration",
+       "desperation"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I've been pacing around my head all day trying to fix one thing and nothing's moving. I need something to give soon, even something small, and the clock in that corridor sounds exactly how my day feels."
+    },
+    {
+     "kind": "R",
+     "key": "loving",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "joy",
+       "loving"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I saved a little song today because it made me think of you, and I've been humming it since. Picturing that vending machine corridor, I'd honestly sit on the plastic chair next to you for hours."
+    },
+    {
+     "kind": "R",
+     "key": "calm",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "calm",
+       "loneliness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I've had a slow, easy day, just tea and watching the light move across the floor. A humming vending machine and a ticking clock sounds like a rhythm I could settle into."
+    },
+    {
+     "kind": "R",
+     "key": "joy",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "joy",
+       "calm"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I finally figured out something I'd been stuck on all morning and I've been grinning about it since! Even a hospital corridor with a buzzing vending machine sounds kind of vivid to me right now."
+    },
+    {
+     "kind": "R",
+     "key": "frustration",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "top2": [
+       "frustration",
+       "sadness"
+      ],
+      "mentions_other_feelings": false
+     },
+     "text": "I've been fighting with the same stubborn problem all day and it just won't budge no matter what I try. That clock over the door is exactly the kind of thing I'd end up glaring at today."
+    },
+    {
+     "kind": "A",
+     "key": "high",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "level": "high"
+     },
+     "text": "I texted Riley the second the doctor left the room, before I even called my sister, and I've been checking my phone for Riley's reply every time the clock above the door ticks over."
+    },
+    {
+     "kind": "A",
+     "key": "low",
+     "try": 0,
+     "ok": true,
+     "why": null,
+     "check": {
+      "level": "low"
+     },
+     "text": "I'll tell Riley about the hospital later tonight, right now I'm working through my list of calls to my cousin, my boss, and the guy covering my shift."
+    }
+   ],
+   "pass": true
+  }
+ ]
+}
