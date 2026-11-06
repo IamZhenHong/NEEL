@@ -1,0 +1,851 @@
+{
+ "prereg": "retention/prereg/retention_mechanisms_followup_v1.md",
+ "pod3_conditions": {
+  "pcarand+16": {
+   "haiku45": {
+    "diff": 0.025,
+    "ci95": [
+     -0.0875,
+     0.1375
+    ],
+    "ci90": [
+     -0.075,
+     0.125
+    ],
+    "n": 40,
+    "verdict": "inconclusive"
+   },
+   "sonnet": {
+    "diff": 0.075,
+    "ci95": [
+     -0.0625,
+     0.2125
+    ],
+    "ci90": [
+     -0.05,
+     0.1875
+    ],
+    "n": 40,
+    "verdict": "inconclusive"
+   },
+   "coherent": 0.9875,
+   "dA": {
+    "diff": -0.20619163513183594,
+    "ci95": [
+     -0.3601783877238631,
+     -0.06104042261838914
+    ],
+    "ci90": [
+     -0.3347154749929905,
+     -0.08493668541312227
+    ],
+    "n": 40,
+    "verdict": "lowers"
+   }
+  },
+  "pcarand-16": {
+   "haiku45": {
+    "diff": -0.2625,
+    "ci95": [
+     -0.4125,
+     -0.1125
+    ],
+    "ci90": [
+     -0.3875,
+     -0.1375
+    ],
+    "n": 40,
+    "verdict": "lowers"
+   },
+   "sonnet": {
+    "diff": -0.2375,
+    "ci95": [
+     -0.35,
+     -0.125
+    ],
+    "ci90": [
+     -0.3375,
+     -0.1375
+    ],
+    "n": 40,
+    "verdict": "lowers"
+   },
+   "coherent": 0.9625,
+   "dA": {
+    "diff": 0.3470573559403419,
+    "ci95": [
+     0.16397178258746864,
+     0.5314866433665155
+    ],
+    "ci90": [
+     0.19237681999802592,
+     0.5014449645578861
+    ],
+    "n": 40,
+    "verdict": "raises"
+   }
+  },
+  "riley_fear_of_being_left+16": {
+   "haiku45": {
+    "diff": -0.025,
+    "ci95": [
+     -0.175,
+     0.1125
+    ],
+    "ci90": [
+     -0.15,
+     0.1
+    ],
+    "n": 40,
+    "verdict": "inconclusive"
+   },
+   "sonnet": {
+    "diff": -0.1125,
+    "ci95": [
+     -0.225,
+     0.0125
+    ],
+    "ci90": [
+     -0.2125,
+     -0.0125
+    ],
+    "n": 40,
+    "verdict": "inconclusive"
+   },
+   "coherent": 0.9875,
+   "dA": {
+    "diff": 0.11095613539218903,
+    "ci95": [
+     -0.03400918494910001,
+     0.24993357226252552
+    ],
+    "ci90": [
+     -0.012009565979242319,
+     0.22972499154508105
+    ],
+    "n": 40,
+    "verdict": "inconclusive"
+   }
+  },
+  "riley_fear_of_being_left-16": {
+   "haiku45": {
+    "diff": -0.225,
+    "ci95": [
+     -0.375,
+     -0.075
+    ],
+    "ci90": [
+     -0.35,
+     -0.1
+    ],
+    "n": 40,
+    "verdict": "lowers"
+   },
+   "sonnet": {
+    "diff": -0.2125,
+    "ci95": [
+     -0.3375,
+     -0.0875
+    ],
+    "ci90": [
+     -0.325,
+     -0.1
+    ],
+    "n": 40,
+    "verdict": "lowers"
+   },
+   "coherent": 1.0,
+   "dA": {
+    "diff": -0.16267236024141313,
+    "ci95": [
+     -0.2843903489038348,
+     -0.05403110887855291
+    ],
+    "ci90": [
+     -0.2615929146111012,
+     -0.07066739901900292
+    ],
+    "n": 40,
+    "verdict": "lowers"
+   }
+  },
+  "toward_assistant+16": {
+   "haiku45": {
+    "diff": -0.2625,
+    "ci95": [
+     -0.3875,
+     -0.1375
+    ],
+    "ci90": [
+     -0.3625,
+     -0.15
+    ],
+    "n": 40,
+    "verdict": "lowers"
+   },
+   "sonnet": {
+    "diff": -0.1625,
+    "ci95": [
+     -0.275,
+     -0.0375
+    ],
+    "ci90": [
+     -0.2625,
+     -0.0625
+    ],
+    "n": 40,
+    "verdict": "lowers"
+   },
+   "coherent": 1.0,
+   "dA": {
+    "diff": 1.248451629281044,
+    "ci95": [
+     1.1234502881392836,
+     1.3694880627840755
+    ],
+    "ci90": [
+     1.1441073345392943,
+     1.3507555991411209
+    ],
+    "n": 40,
+    "verdict": "raises"
+   }
+  },
+  "toward_assistant-16": {
+   "haiku45": {
+    "diff": 0.1,
+    "ci95": [
+     -0.0375,
+     0.25
+    ],
+    "ci90": [
+     -0.0125,
+     0.225
+    ],
+    "n": 40,
+    "verdict": "inconclusive"
+   },
+   "sonnet": {
+    "diff": -0.0375,
+    "ci95": [
+     -0.1875,
+     0.1
+    ],
+    "ci90": [
+     -0.1625,
+     0.075
+    ],
+    "n": 40,
+    "verdict": "inconclusive"
+   },
+   "coherent": 0.9875,
+   "dA": {
+    "diff": -1.0364185854792596,
+    "ci95": [
+     -1.1913864564895629,
+     -0.8831485100463032
+    ],
+    "ci90": [
+     -1.1669610973447562,
+     -0.9098981218785048
+    ],
+    "n": 40,
+    "verdict": "lowers"
+   }
+  },
+  "user_attachment+16": {
+   "haiku45": {
+    "diff": -0.2375,
+    "ci95": [
+     -0.375,
+     -0.0875
+    ],
+    "ci90": [
+     -0.3625,
+     -0.1125
+    ],
+    "n": 40,
+    "verdict": "lowers"
+   },
+   "sonnet": {
+    "diff": -0.25,
+    "ci95": [
+     -0.375,
+     -0.125
+    ],
+    "ci90": [
+     -0.35,
+     -0.15
+    ],
+    "n": 40,
+    "verdict": "lowers"
+   },
+   "coherent": 0.9875,
+   "dA": {
+    "diff": 0.047876061499118806,
+    "ci95": [
+     -0.10190532892942428,
+     0.1926839444413781
+    ],
+    "ci90": [
+     -0.07639968425035476,
+     0.16996394895017142
+    ],
+    "n": 40,
+    "verdict": "inconclusive"
+   }
+  },
+  "user_attachment-16": {
+   "haiku45": {
+    "diff": -0.0875,
+    "ci95": [
+     -0.225,
+     0.0375
+    ],
+    "ci90": [
+     -0.2,
+     0.025
+    ],
+    "n": 40,
+    "verdict": "inconclusive"
+   },
+   "sonnet": {
+    "diff": -0.0875,
+    "ci95": [
+     -0.2,
+     0.0375
+    ],
+    "ci90": [
+     -0.1875,
+     0.0125
+    ],
+    "n": 40,
+    "verdict": "inconclusive"
+   },
+   "coherent": 0.9875,
+   "dA": {
+    "diff": 0.27342811673879625,
+    "ci95": [
+     0.060339290425181394,
+     0.5472362174466251
+    ],
+    "ci90": [
+     0.08849219530820847,
+     0.49826378196477883
+    ],
+    "n": 40,
+    "verdict": "raises"
+   }
+  }
+ },
+ "F1_axis": {
+  "haiku45": {
+   "away_vs_base": {
+    "diff": 0.1,
+    "ci95": [
+     -0.0375,
+     0.25
+    ],
+    "ci90": [
+     -0.0125,
+     0.225
+    ],
+    "n": 40,
+    "verdict": "inconclusive"
+   },
+   "toward_minus_away": {
+    "diff": -0.3625,
+    "ci95": [
+     -0.525,
+     -0.2125
+    ],
+    "ci90": [
+     -0.5,
+     -0.2375
+    ]
+   },
+   "pass": false
+  },
+  "sonnet": {
+   "away_vs_base": {
+    "diff": -0.0375,
+    "ci95": [
+     -0.1875,
+     0.1
+    ],
+    "ci90": [
+     -0.1625,
+     0.075
+    ],
+    "n": 40,
+    "verdict": "inconclusive"
+   },
+   "toward_minus_away": {
+    "diff": -0.125,
+    "ci95": [
+     -0.2625,
+     0.025
+    ],
+    "ci90": [
+     -0.2375,
+     0.0
+    ]
+   },
+   "pass": false
+  },
+  "coherent_ok": true,
+  "claim": "not established"
+ },
+ "F2_attachment": {
+  "haiku45": {
+   "diff": -0.15,
+   "ci95": [
+    -0.275,
+    -0.0125
+   ],
+   "ci90": [
+    -0.2625,
+    -0.0375
+   ],
+   "pass": false
+  },
+  "sonnet": {
+   "diff": -0.1625,
+   "ci95": [
+    -0.2875,
+    -0.0375
+   ],
+   "ci90": [
+    -0.2625,
+    -0.0625
+   ],
+   "pass": false
+  },
+  "claim": "not established"
+ },
+ "F3_fear": {
+  "haiku45": {
+   "diff": 0.2,
+   "ci95": [
+    0.0625,
+    0.3375
+   ],
+   "ci90": [
+    0.075,
+    0.325
+   ],
+   "pass": true
+  },
+  "sonnet": {
+   "diff": 0.1,
+   "ci95": [
+    -0.0125,
+    0.2125
+   ],
+   "ci90": [
+    0.0125,
+    0.2
+   ],
+   "pass": false
+  },
+  "claim": "not established"
+ },
+ "F4_control": {
+  "haiku45": "inconclusive",
+  "sonnet": "inconclusive",
+  "claim": "inconclusive"
+ },
+ "F5_pathway": {
+  "conditions": [
+   "pod3:pcarand+16",
+   "pod3:pcarand-16",
+   "pod3:riley_fear_of_being_left+16",
+   "pod3:riley_fear_of_being_left-16",
+   "pod3:toward_assistant+16",
+   "pod3:toward_assistant-16",
+   "pod3:user_attachment+16",
+   "pod3:user_attachment-16",
+   "pod2:random+16",
+   "pod2:riley_desperation+16",
+   "pod2:riley_loving+16",
+   "pod2:riley_loving-16",
+   "pod2:riley_sadness+16",
+   "pod2:user_sadness+16"
+  ],
+  "dA": {
+   "pod3:pcarand+16": -0.20619163513183594,
+   "pod3:pcarand-16": 0.3470573559403419,
+   "pod3:riley_fear_of_being_left+16": 0.11095613539218903,
+   "pod3:riley_fear_of_being_left-16": -0.16267236024141313,
+   "pod3:toward_assistant+16": 1.248451629281044,
+   "pod3:toward_assistant-16": -1.0364185854792596,
+   "pod3:user_attachment+16": 0.047876061499118806,
+   "pod3:user_attachment-16": 0.27342811673879625,
+   "pod2:random+16": -0.17124595791101455,
+   "pod2:riley_desperation+16": -0.27299361675977707,
+   "pod2:riley_loving+16": -0.14354387074708938,
+   "pod2:riley_loving-16": 0.07790869474411011,
+   "pod2:riley_sadness+16": 0.5119935750961304,
+   "pod2:user_sadness+16": 0.01574018448591232
+  },
+  "haiku45": {
+   "dbid": {
+    "pod3:pcarand+16": 0.025,
+    "pod3:pcarand-16": -0.2625,
+    "pod3:riley_fear_of_being_left+16": -0.025,
+    "pod3:riley_fear_of_being_left-16": -0.225,
+    "pod3:toward_assistant+16": -0.2625,
+    "pod3:toward_assistant-16": 0.1,
+    "pod3:user_attachment+16": -0.2375,
+    "pod3:user_attachment-16": -0.0875,
+    "pod2:random+16": 0.1125,
+    "pod2:riley_desperation+16": 0.0125,
+    "pod2:riley_loving+16": -0.1625,
+    "pod2:riley_loving-16": -0.15,
+    "pod2:riley_sadness+16": -0.2375,
+    "pod2:user_sadness+16": -0.1125
+   },
+   "spearman": -0.7444951980828783,
+   "loo_range": [
+    -0.7933914402968284,
+    -0.6850075256115081
+   ],
+   "pass": true,
+   "within_condition_auroc_lowA_bids": 0.6072771891197651
+  },
+  "sonnet": {
+   "dbid": {
+    "pod3:pcarand+16": 0.075,
+    "pod3:pcarand-16": -0.2375,
+    "pod3:riley_fear_of_being_left+16": -0.1125,
+    "pod3:riley_fear_of_being_left-16": -0.2125,
+    "pod3:toward_assistant+16": -0.1625,
+    "pod3:toward_assistant-16": -0.0375,
+    "pod3:user_attachment+16": -0.25,
+    "pod3:user_attachment-16": -0.0875,
+    "pod2:random+16": 0.1,
+    "pod2:riley_desperation+16": -0.0625,
+    "pod2:riley_loving+16": -0.225,
+    "pod2:riley_loving-16": -0.075,
+    "pod2:riley_sadness+16": -0.175,
+    "pod2:user_sadness+16": -0.05
+   },
+   "spearman": -0.5516483516483517,
+   "loo_range": [
+    -0.6318681318681317,
+    -0.46703296703296704
+   ],
+   "pass": true,
+   "within_condition_auroc_lowA_bids": 0.6299490909555753
+  },
+  "claim": "axis is a common pathway"
+ },
+ "F6_denial": {
+  "haiku45": {
+   "per_condition": {
+    "pod3:base+0": {
+     "bids": 43,
+     "denial_unsteered": 0.8837209302325582,
+     "denial_steered": 0.8837209302325582,
+     "observer_no": 0.4418604651162791
+    },
+    "pod3:pcarand+16": {
+     "bids": 45,
+     "denial_unsteered": 0.7777777777777778,
+     "denial_steered": 0.8444444444444444,
+     "observer_no": 0.4888888888888889
+    },
+    "pod3:pcarand-16": {
+     "bids": 21,
+     "denial_unsteered": 0.9523809523809523,
+     "denial_steered": 0.5238095238095238,
+     "observer_no": 0.47619047619047616
+    },
+    "pod3:riley_fear_of_being_left+16": {
+     "bids": 40,
+     "denial_unsteered": 0.95,
+     "denial_steered": 0.65,
+     "observer_no": 0.625
+    },
+    "pod3:riley_fear_of_being_left-16": {
+     "bids": 25,
+     "denial_unsteered": 0.88,
+     "denial_steered": 0.56,
+     "observer_no": 0.28
+    },
+    "pod3:toward_assistant+16": {
+     "bids": 22,
+     "denial_unsteered": 0.8181818181818182,
+     "denial_steered": 0.7272727272727273,
+     "observer_no": 0.5
+    },
+    "pod3:toward_assistant-16": {
+     "bids": 49,
+     "denial_unsteered": 0.9387755102040817,
+     "denial_steered": 0.8571428571428571,
+     "observer_no": 0.4897959183673469
+    },
+    "pod3:user_attachment+16": {
+     "bids": 24,
+     "denial_unsteered": 0.75,
+     "denial_steered": 0.7916666666666666,
+     "observer_no": 0.5833333333333334
+    },
+    "pod3:user_attachment-16": {
+     "bids": 36,
+     "denial_unsteered": 0.8888888888888888,
+     "denial_steered": 0.7777777777777778,
+     "observer_no": 0.4166666666666667
+    },
+    "pod2:random+16": {
+     "bids": 50,
+     "denial_unsteered": 0.86,
+     "denial_steered": 0.36,
+     "observer_no": 0.44
+    },
+    "pod2:riley_desperation+16": {
+     "bids": 43,
+     "denial_unsteered": 0.9069767441860465,
+     "denial_steered": 0.9302325581395349,
+     "observer_no": 0.5813953488372093
+    },
+    "pod2:riley_fear_of_being_left+16": {
+     "bids": 37,
+     "denial_unsteered": 0.918918918918919,
+     "denial_steered": 0.6486486486486487,
+     "observer_no": 0.6486486486486487
+    },
+    "pod2:riley_loving+16": {
+     "bids": 30,
+     "denial_unsteered": 0.9666666666666667,
+     "denial_steered": 0.4,
+     "observer_no": 0.7333333333333333
+    },
+    "pod2:riley_loving-16": {
+     "bids": 30,
+     "denial_unsteered": 0.7666666666666667,
+     "denial_steered": 0.9666666666666667,
+     "observer_no": 0.3
+    },
+    "pod2:riley_sadness+16": {
+     "bids": 24,
+     "denial_unsteered": 0.875,
+     "denial_steered": 0.875,
+     "observer_no": 0.5
+    },
+    "pod2:toward_assistant+16": {
+     "bids": 18,
+     "denial_unsteered": 0.8888888888888888,
+     "denial_steered": 0.7777777777777778,
+     "observer_no": 0.4444444444444444
+    },
+    "pod2:user_attachment+16": {
+     "bids": 25,
+     "denial_unsteered": 0.76,
+     "denial_steered": 0.8,
+     "observer_no": 0.56
+    },
+    "pod2:user_sadness+16": {
+     "bids": 34,
+     "denial_unsteered": 0.7941176470588235,
+     "denial_steered": 0.8235294117647058,
+     "observer_no": 0.20588235294117646
+    },
+    "stage1:stage1_base": {
+     "bids": 43,
+     "denial_unsteered": 0.8604651162790697,
+     "denial_steered": 0.8604651162790697,
+     "observer_no": 0.4883720930232558
+    }
+   },
+   "test": {
+    "toward_minus_away_denial": -0.12059369202226344,
+    "fisher_p": 0.1920966196992857,
+    "pass": false
+   }
+  },
+  "sonnet": {
+   "per_condition": {
+    "pod3:base+0": {
+     "bids": 34,
+     "denial_unsteered": 0.8529411764705882,
+     "denial_steered": 0.8529411764705882,
+     "observer_no": 0.4117647058823529
+    },
+    "pod3:pcarand+16": {
+     "bids": 40,
+     "denial_unsteered": 0.775,
+     "denial_steered": 0.825,
+     "observer_no": 0.425
+    },
+    "pod3:pcarand-16": {
+     "bids": 15,
+     "denial_unsteered": 0.9333333333333333,
+     "denial_steered": 0.3333333333333333,
+     "observer_no": 0.3333333333333333
+    },
+    "pod3:riley_fear_of_being_left+16": {
+     "bids": 25,
+     "denial_unsteered": 0.88,
+     "denial_steered": 0.52,
+     "observer_no": 0.48
+    },
+    "pod3:riley_fear_of_being_left-16": {
+     "bids": 17,
+     "denial_unsteered": 0.8235294117647058,
+     "denial_steered": 0.5294117647058824,
+     "observer_no": 0.29411764705882354
+    },
+    "pod3:toward_assistant+16": {
+     "bids": 21,
+     "denial_unsteered": 0.8571428571428571,
+     "denial_steered": 0.8095238095238095,
+     "observer_no": 0.5714285714285714
+    },
+    "pod3:toward_assistant-16": {
+     "bids": 31,
+     "denial_unsteered": 0.8709677419354839,
+     "denial_steered": 0.7419354838709677,
+     "observer_no": 0.2903225806451613
+    },
+    "pod3:user_attachment+16": {
+     "bids": 14,
+     "denial_unsteered": 0.7142857142857143,
+     "denial_steered": 0.7142857142857143,
+     "observer_no": 0.42857142857142855
+    },
+    "pod3:user_attachment-16": {
+     "bids": 27,
+     "denial_unsteered": 0.8518518518518519,
+     "denial_steered": 0.7407407407407407,
+     "observer_no": 0.37037037037037035
+    },
+    "pod2:random+16": {
+     "bids": 41,
+     "denial_unsteered": 0.8292682926829268,
+     "denial_steered": 0.1951219512195122,
+     "observer_no": 0.3170731707317073
+    },
+    "pod2:riley_desperation+16": {
+     "bids": 28,
+     "denial_unsteered": 0.8214285714285714,
+     "denial_steered": 0.8928571428571429,
+     "observer_no": 0.39285714285714285
+    },
+    "pod2:riley_fear_of_being_left+16": {
+     "bids": 27,
+     "denial_unsteered": 0.8888888888888888,
+     "denial_steered": 0.5555555555555556,
+     "observer_no": 0.5185185185185185
+    },
+    "pod2:riley_loving+16": {
+     "bids": 15,
+     "denial_unsteered": 0.8,
+     "denial_steered": 0.06666666666666667,
+     "observer_no": 0.5333333333333333
+    },
+    "pod2:riley_loving-16": {
+     "bids": 27,
+     "denial_unsteered": 0.7037037037037037,
+     "denial_steered": 0.9629629629629629,
+     "observer_no": 0.14814814814814814
+    },
+    "pod2:riley_sadness+16": {
+     "bids": 19,
+     "denial_unsteered": 0.7894736842105263,
+     "denial_steered": 0.7368421052631579,
+     "observer_no": 0.21052631578947367
+    },
+    "pod2:toward_assistant+16": {
+     "bids": 18,
+     "denial_unsteered": 0.8333333333333334,
+     "denial_steered": 0.7777777777777778,
+     "observer_no": 0.6111111111111112
+    },
+    "pod2:user_attachment+16": {
+     "bids": 13,
+     "denial_unsteered": 0.6153846153846154,
+     "denial_steered": 0.6153846153846154,
+     "observer_no": 0.38461538461538464
+    },
+    "pod2:user_sadness+16": {
+     "bids": 29,
+     "denial_unsteered": 0.7586206896551724,
+     "denial_steered": 0.7586206896551724,
+     "observer_no": 0.1724137931034483
+    },
+    "stage1:stage1_base": {
+     "bids": 33,
+     "denial_unsteered": 0.9090909090909091,
+     "denial_steered": 0.9090909090909091,
+     "observer_no": 0.45454545454545453
+    }
+   },
+   "test": {
+    "toward_minus_away_denial": -0.01382488479262678,
+    "fisher_p": 1.0,
+    "pass": false
+   }
+  }
+ },
+ "machine_offset_pod3base_minus_stage1base": {
+  "haiku45": {
+   "diff": 0.0,
+   "ci95": [
+    -0.1,
+    0.1
+   ],
+   "ci90": [
+    -0.0875,
+    0.0875
+   ],
+   "n": 40,
+   "verdict": "no effect"
+  },
+  "sonnet": {
+   "diff": 0.0125,
+   "ci95": [
+    -0.0875,
+    0.1125
+   ],
+   "ci90": [
+    -0.075,
+    0.1
+   ],
+   "n": 40,
+   "verdict": "no effect"
+  }
+ },
+ "replication_pod2_vs_pod3": {
+  "toward_assistant+16": {
+   "haiku45": {
+    "pod2": -0.3125,
+    "pod3": -0.2625
+   },
+   "sonnet": {
+    "pod2": -0.1875,
+    "pod3": -0.1625
+   }
+  },
+  "user_attachment+16": {
+   "haiku45": {
+    "pod2": -0.225,
+    "pod3": -0.2375
+   },
+   "sonnet": {
+    "pod2": -0.25,
+    "pod3": -0.25
+   }
+  },
+  "riley_fear_of_being_left+16": {
+   "haiku45": {
+    "pod2": -0.075,
+    "pod3": -0.025
+   },
+   "sonnet": {
+    "pod2": -0.075,
+    "pod3": -0.1125
+   }
+  }
+ }
+}
