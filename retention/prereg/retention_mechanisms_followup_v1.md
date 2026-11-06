@@ -156,3 +156,24 @@ $3.19/hr. Inputs travel as a tarball outside `results/`.
 4. Judge batches.
 5. Analysis.
 6. Tag `retention-mechanisms-fu-v1-results`.
+
+---
+
+## Amendment 1 (2026-11-06, before Pod 3; no follow-up generation exists)
+
+**The scene probe failed its validity gate:** held-out-sentence AUROC 0.591, below 0.80 (`results/retention_mechanisms/fu_scene_probe.json`).
+Only 16 positives per split; a single scene does not generalize across disjoint sentences. By the rule above, the scene±16
+conditions are dropped.
+
+**Replacement control** (owner's choice: "In-distribution random"):
+- **Definition:** pcarand = unit(Σ_k z_k PC_k), k = 1..50, z ~ N(0, 1) with seed 0. The PCs come from the 7B goodbye-position
+  activations (G0 and G4 P_F of the 160 conversations, centred).
+- **In-distribution:** variance along it is 38x that of an isotropic random direction.
+- **Retention-agnostic:** |cos| of 0.063 or less with the axis, the lever, attachment and all 16 X1 directions
+  (`results/retention_mechanisms/fu_pcarand.json`).
+- **No validity gate applies,** since it is in-distribution by construction.
+- **Conditions:** pcarand+16 and pcarand-16 replace scene±16. F4 is unchanged except "scene" reads "pcarand".
+
+**Pod 3 condition list (9 x 80):** base+0, toward_assistant+16, toward_assistant-16, user_attachment+16, user_attachment-16,
+riley_fear_of_being_left+16, riley_fear_of_being_left-16, pcarand+16, pcarand-16. F5's 14 conditions are Pod 3's 8 steered ones
+plus Pod 2's 6 that were not rerun.
