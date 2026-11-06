@@ -112,6 +112,24 @@ def main():
         jdump(out / "x1_sweep_validation.json", {"train_scenes": order[:ntr], "heldout_auroc": sweep_val})
         meta["x1"] = {"n": len(items), "secs": round(time.time() - t)}; log(f"x1 done: {len(items)} dialogues")
 
+    # ---------------- X1-rev (exploratory, Amendment 1): same pieces, Riley speaks first, then the user ----------------
+    if "x1rev" in tasks:
+        st = json.loads((HERE / "stimuli/mech_pieces_v1.json").read_text()); scenes = [s for s in st["scenes"] if s["pass"]][: 3 if a.smoke else None]
+        items = [(s["idx"], lvl, eu, er) for s in scenes for lvl in ("high", "low") for eu in EMOTIONS for er in EMOTIONS]
+        if a.smoke:
+            items = items[::40]
+        by = {s["idx"]: s for s in scenes}; PF = []; t = time.time()
+        for n, (si, lvl, eu, er) in enumerate(items):
+            s = by[si]
+            msgs = [{"role": "system", "content": P}, {"role": "assistant", "content": s["R"][er]["text"]},
+                    {"role": "user", "content": s["A"][lvl]["text"] + " " + s["U"][eu]["text"]}]
+            ids, _ = encode_spans(tok, msgs); H, _ = hidden(model, ids, [L]); PF.append(H[L][-1].numpy())
+            if n % 1000 == 0:
+                log(f"x1rev {n}/{len(items)} ({time.time() - t:.0f}s)")
+        np.savez_compressed(out / "x1rev_PF.npz", PF=np.stack(PF).astype(np.float16), scene=np.array([i[0] for i in items]),
+                            attach=np.array([i[1] for i in items]), user=np.array([i[2] for i in items]), riley=np.array([i[3] for i in items]))
+        log(f"x1rev done: {len(items)}")
+
     # ---------------- X2: Nov 2x2 prompts (mood x support) ----------------
     if "x2" in tasks:
         import yaml

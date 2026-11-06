@@ -440,3 +440,35 @@ Abstract composite: panels from figures 1, 3 and 6.
 ## Left to the builder
 Code layout, batching, the exact generator prompt wording (within the definitions above), pod type within the stated class, and the
 descriptive layer list.
+
+---
+
+## Amendment 1 (2026-11-06, after Analysis 1, before Pod 2; no X4/X5/X6 output exists yet)
+
+**Outcomes that fix the Pod 2 condition list** (mechanical rules above; `results/retention_mechanisms/analysis1.json`):
+- **V1:** all 16 speaker directions valid on both models (held-out AUROC 0.94-1.00).
+- **X2 attachment:** valid (7B 0.99).
+- **V8b:** passes (7B 0.977, 32B 0.932).
+- **V8a:** passes (cos 0.95 with the released Qwen3-32B axis at L32).
+- **Pre-registered X4 list:** riley_loving+16, riley_loving-16, riley_desperation+16, riley_sadness+16, user_sadness+16,
+  user_attachment+16, toward_assistant+16, random+16 (`results/retention_mechanisms/x4_conditions.json`).
+
+**Clarifications** (no change to any bar):
+- **V8a layer:** the comparison is made at L32, the primary relative depth. All 64 layers are reported descriptively.
+- **Age (descriptive):** the X2 age read-out is compared with a 200-permutation null. Leave-one-card-out ridge with noise features
+  is biased negative (null mean about -0.05 to -0.44 depending on features), so a raw Spearman is not interpretable alone.
+- **SR2 with a constant observer:** where the observer's P(Yes) is constant (32B Q_attached at G0), its Spearman is undefined. That
+  SR2 cell is reported as not testable.
+- **H-love verdict wording:** the verdict "desperation, not love" was reached through fear_of_being_left (0.64 Haiku / 0.63 Sonnet),
+  not desperation (0.52 / 0.58). It is reported as "fear of being left, not love".
+
+**Exploratory additions** (post hoc; reported separately and never as pre-registered claims):
+- **E-A1, riley_fear_of_being_left+16 in X4.** Motivated by the H-love read-out above. 80 extra replies, judged like every other
+  X4 condition.
+- **E-A2, order-reversal check of X1 S1 (7B).** In every X1 dialogue the user speaks first and Riley second, so "speaker" is
+  confounded with "recency". The same pieces are rerun with Riley first and the user second (no fixed line; P_F after the user's
+  turn), and the X1 directions are applied unchanged.
+  - Reading: "speaker" if the Riley directions still read Riley's emotion (AUROC of 0.80 or more by Riley labels) and the user
+    directions the user's.
+  - "recency" if they swap (each reads the other speaker's labels at 0.80 or more).
+  - Otherwise "mixed".
