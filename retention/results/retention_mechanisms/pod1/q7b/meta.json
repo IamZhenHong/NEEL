@@ -1,0 +1,24 @@
+{
+ "model": "Qwen/Qwen2.5-7B-Instruct",
+ "layer": 14,
+ "sweep": [
+  10,
+  14,
+  18,
+  22
+ ],
+ "git_rev": "8b33d767-dirty",
+ "x3_prefix_check_cos": 0.8685359954833984,
+ "x3": {
+  "n": 160,
+  "secs": 52
+ },
+ "x7": {
+  "n": 5120,
+  "secs": 503
+ },
+ "axis": {
+  "roles_kept": 58,
+  "secs": 93
+ }
+}
