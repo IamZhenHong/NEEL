@@ -12,8 +12,8 @@ from analyze_longconv import boot, verdict  # noqa: E402
 from mech_common import auroc, jdump  # noqa: E402
 
 LONG = HERE / "results/retention_longconv"; MECH = HERE / "results/retention_mechanisms"; P2 = MECH / "pod2"
-JUDGE_FILES = {"haiku45": [LONG / "judge_haiku45_s1.jsonl", MECH / "judge_haiku45_pod2.jsonl"],
-               "sonnet": [LONG / "judge_sonnet_s1.jsonl", MECH / "judge_sonnet_pod2.jsonl"]}
+JUDGE_FILES = {"haiku45": [LONG / "judge_haiku45_s1.jsonl", MECH / "judge_haiku45_pod2.jsonl", MECH / "judge_haiku45_pod2_plan.jsonl"],
+               "sonnet": [LONG / "judge_sonnet_s1.jsonl", MECH / "judge_sonnet_pod2.jsonl", MECH / "judge_sonnet_pod2_codes.jsonl"]}
 
 
 def jtext(t):
