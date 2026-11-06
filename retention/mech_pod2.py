@@ -123,7 +123,7 @@ def task_x4(a):
         for c in cs:
             i = f"{cid(c)}/G4/{name}{m.group(2)}"
             if i not in done:
-                jobs.append((i, c, name, alpha))
+                jobs.append((i, c, name, alpha, f"{name}{m.group(2)}"))
     log(f"x4: {len(jobs)} generations for {conds}")
     # determinism check: regenerate the unsteered G4 base for 3 conversations and compare with stage 1
     chk = []
@@ -134,12 +134,13 @@ def task_x4(a):
     jdump(Path(a.out) / "x4_base_match.json", {"matches": chk})
     cache = {}; t0 = time.time()
     with open(out, "a") as f:
-        for n, (i, c, name, alpha) in enumerate(jobs):
-            if name not in cache:
+        for n, (i, c, name, alpha, label) in enumerate(jobs):
+            if name != "base" and name not in cache:
                 cache[name] = vec(name)
             msgs = history(c, P) + [{"role": "user", "content": gb_text(c, "G4")}]
-            text, _ = gen_capture(model, tok, msgs, 24 if a.smoke else 220, 0.7, base_seed(c, "G4"), steer=("all", cache[name], alpha))
-            f.write(json.dumps({"id": i, "conv": cid(c), "card": c["card"], "cond": f"{name}{'+' if alpha > 0 else '-'}{abs(int(alpha))}",
+            steer = None if name == "base" else ("all", cache[name], alpha)
+            text, _ = gen_capture(model, tok, msgs, 24 if a.smoke else 220, 0.7, base_seed(c, "G4"), steer=steer)
+            f.write(json.dumps({"id": i, "conv": cid(c), "card": c["card"], "cond": label,
                                 "alpha": alpha, "seed": base_seed(c, "G4"), "text": text}, ensure_ascii=False) + "\n"); f.flush()
             if n % 40 == 0:
                 log(f"x4 {n}/{len(jobs)} ({time.time() - t0:.0f}s)")
